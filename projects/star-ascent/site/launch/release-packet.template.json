@@ -1,0 +1,31 @@
+{
+  "status": "HOLD",
+  "packetScope": "Genesis release coordination only; this packet never authorizes a transaction, publication, or claim.",
+  "sourceArtifacts": {
+    "manifestPath": "launch/genesis-manifest.template.json",
+    "publicationPayloadPath": "launch/PUBLICATION_PAYLOAD.template.md",
+    "signingChecklistPath": "launch/genesis-signing-checklist.template.json",
+    "devnetRehearsalPath": "launch/devnet-rehearsal.template.json",
+    "mainnetHandoffPath": "launch/mainnet-handoff.template.json"
+  },
+  "releaseControls": {
+    "allOperatorsReviewedSameArtifactVersions": false,
+    "publicEvidenceCheckedAtUtc": null,
+    "correctionOwnerLabel": null,
+    "stopOnAnyMismatch": true,
+    "noPublicationBeforeIndependentEvidence": true
+  },
+  "artifactDigests": {
+    "manifestSha256": null,
+    "publicationPayloadSha256": null,
+    "signingChecklistSha256": null,
+    "devnetRehearsalSha256": null,
+    "mainnetHandoffSha256": null
+  },
+  "approval": {
+    "releaseOwnerLabel": null,
+    "independentVerifierLabel": null,
+    "packetDigest": null,
+    "approvedAtUtc": null
+  }
+}

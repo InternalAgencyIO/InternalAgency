@@ -1,0 +1,27 @@
+{
+  "status": "HOLD",
+  "scope": "Post-Genesis public evidence reconciliation only; this file never authorizes a transaction, distribution, or claim.",
+  "sourceArtifacts": {
+    "manifestPath": "launch/genesis-manifest.template.json",
+    "publicationPayloadPath": "launch/PUBLICATION_PAYLOAD.template.md",
+    "releasePacketPath": "launch/release-packet.template.json"
+  },
+  "controls": {
+    "haltOnChannelMismatch": true,
+    "haltOnExpiredEvidence": true,
+    "haltOnUnresolvedCorrections": true,
+    "maxChannelEvidenceAgeMinutes": 60,
+    "preserveCorrectionHistory": true,
+    "noDistributionClaimsWithoutEvidence": true
+  },
+  "reconciliation": {
+    "checkedAtUtc": null,
+    "archiveOwnerLabel": null,
+    "independentReviewerLabel": null,
+    "evidenceArchiveUrl": null,
+    "publicChangelogUrl": null,
+    "correctionStatus": "NONE",
+    "correctionRecords": [],
+    "channelRecords": []
+  }
+}

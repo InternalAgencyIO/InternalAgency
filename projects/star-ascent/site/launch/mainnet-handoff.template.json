@@ -1,0 +1,30 @@
+{
+  "handoffVersion": 1,
+  "status": "HOLD",
+  "network": "mainnet-beta",
+  "handoffScope": "Genesis approval handoff only; this file never authorizes a transaction or publication.",
+  "sourceArtifacts": {
+    "manifestPath": "launch/genesis-manifest.template.json",
+    "signingChecklistPath": "launch/genesis-signing-checklist.template.json",
+    "devnetRehearsalPath": "launch/devnet-rehearsal.template.json"
+  },
+  "approval": {
+    "releaseOwnerLabel": null,
+    "independentVerifierLabel": null,
+    "manifestDigest": null,
+    "destinationDigest": null,
+    "releaseSnapshotPath": "launch/release-snapshot.generated.json",
+    "releaseSnapshotDigest": null,
+    "manifestSha256": null,
+    "signingChecklistSha256": null,
+    "devnetRehearsalSha256": null,
+    "approvedAtUtc": null
+  },
+  "holdControls": {
+    "noSecretsInHandoff": true,
+    "noTransactionAuthorityGranted": true,
+    "noPublicationBeforeEvidence": true,
+    "returnToHoldOnAnyMismatch": true,
+    "correctionOwnerLabel": null
+  }
+}

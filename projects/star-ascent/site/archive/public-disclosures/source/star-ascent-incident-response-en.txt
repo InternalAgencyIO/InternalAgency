@@ -1,0 +1,68 @@
+STAR ASCENT — LAUNCH-DAY INCIDENT-RESPONSE RUNBOOK
+PUBLIC PRE-LAUNCH CONTROL DOCUMENT — NOT LAUNCH APPROVAL
+
+DEFAULT DECISION: HOLD
+
+Use this runbook when any launch-critical signal conflicts, disappears, or
+cannot be independently checked. A report is a trigger to investigate, not
+proof that a token, account, link, or wallet request is authentic.
+
+IMMEDIATE HOLD TRIGGERS
+
+- Mint address, supply, decimals, token program, or authority value differs
+  between the website, pinned official announcement, livestream, or direct
+  public evidence.
+- A launch-critical evidence link is unavailable, changed, or lacks a current
+  UTC checked-at timestamp.
+- An unexpected wallet request asks for a transaction, transfer, token approval, spending
+  permission, or unreadable signature during registration.
+- An account claims to be support and requests a private message, wallet
+  recovery, secret, personal data, payment, or token transfer.
+- A copied project page, fraudulent domain, paid registration, presale, or
+  secret early-access link is reported.
+
+RESPONSE SEQUENCE
+
+1. PAUSE
+- Stop address publication, registration opening, distribution, livestream
+  transaction prompts, and scheduled social posts.
+- Keep the public readiness decision at HOLD.
+- Do not improvise, abbreviate, or replace an address or evidence link.
+
+2. CONTAIN
+- Remove unsafe links from project-controlled surfaces without destroying the
+  review record.
+- Preserve URLs, UTC times, screenshots, and exact observed values for review.
+- Publish a short safety notice without repeating a suspicious wallet request,
+  payment destination, or secret-requesting workflow.
+
+3. CORRECT
+- Publish one timestamped correction on the official website first.
+- Mirror the exact bilingual wording to the pinned announcement and livestream.
+- State what changed, what remains unknown, which actions stay paused, and when
+  the next public update is expected. Do not invent an answer or deadline.
+
+4. REVIEW BEFORE RESUMING
+- Two separated review roles compare the full value character for character.
+- Each reviewer records the direct public link, observed value, and UTC time.
+- Recheck the website, pinned announcement, and livestream for an exact match.
+- Resume only when every affected readiness gate has current linked evidence.
+  Any remaining HOLD or FAIL keeps all affected actions paused.
+
+PUBLIC UPDATE TEMPLATE
+
+Status: HOLD
+Observed at (UTC): PENDING
+Affected surface or value: PENDING
+Confirmed public facts: PENDING
+Unresolved facts: PENDING
+Actions paused: PENDING
+Next public update: PENDING
+Reviewer roles: PENDING / PENDING
+
+SAFETY BOUNDARY
+
+Support will not resolve an incident through a private message and will never
+ask for a seed phrase, private key, password, personal data, payment, wallet
+recovery, or token transfer. This runbook does not inspect Solana, authenticate
+an account, reverse a transfer, or approve a launch.

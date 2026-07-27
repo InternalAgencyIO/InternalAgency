@@ -1,0 +1,42 @@
+{
+  "status": "HOLD",
+  "network": "mainnet-beta",
+  "token": {
+    "symbol": "IAT",
+    "name": "Internal Agency Token",
+    "program": "Original SPL Token Program",
+    "decimals": 9,
+    "fixedSupplyTarget": "1000000000",
+    "fixedSupplyBaseUnits": "1000000000000000000",
+    "mint": null,
+    "mintAuthorityRevocationTransaction": null,
+    "freezeAuthorityRevocationTransaction": null
+  },
+  "allocations": {
+    "community": { "share": "50%", "baseUnitAmount": "500000000000000000", "destination": null, "evidence": null },
+    "treasury": { "share": "20%", "baseUnitAmount": "200000000000000000", "destination": null, "evidence": null },
+    "ecosystem": { "share": "15%", "baseUnitAmount": "150000000000000000", "destination": null, "evidence": null },
+    "coreTeam": { "share": "10%", "baseUnitAmount": "100000000000000000", "destination": null, "evidence": null },
+    "liquidity": { "share": "5%", "baseUnitAmount": "50000000000000000", "destination": null, "evidence": null }
+  },
+  "claimOrDistribution": {
+    "status": "NOT_PUBLISHED",
+    "canonicalRoute": null
+  },
+  "releaseEvidence": {
+    "transactionOrder": [
+      "CREATE_MINT",
+      "MINT_ALLOCATION_DESTINATIONS",
+      "REVOKE_MINT_AUTHORITY",
+      "REVOKE_FREEZE_AUTHORITY",
+      "PUBLISH_EVIDENCE"
+    ],
+    "records": {
+      "mintCreation": null,
+      "allocationMints": null,
+      "mintAuthorityRevocation": null,
+      "freezeAuthorityRevocation": null,
+      "publicationRecord": null
+    }
+  }
+}

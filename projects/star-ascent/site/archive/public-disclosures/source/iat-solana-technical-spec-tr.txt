@@ -1,0 +1,91 @@
+STAR ASCENT / $IAT SOLANA TEKNİK ŞARTNAMESİ
+Sürüm 0.1 — 27 Temmuz 2026
+
+DURUM: YALNIZCA TASARIM VE TEST İSKELETİ — CANLI MINT VEYA DAĞITIM YOKTUR
+
+Bu belge mint adresi, canlı program seçimi, yetki durumu, cüzdan envanteri veya
+dağıtım işlemi bulunduğunu iddia etmez. Mainnet işlemi için yetki vermez.
+
+1. Tasarım sınırları
+
+- Ağ hedefi: Nihai kamu doğrulamasına tabi olmak üzere Solana.
+- Token programı: Standart Token Programı ile Token-2022 arasında açık seçim
+  BEKLİYOR. Varsayılan seçim kabul edilemez.
+- Arz ve ondalık basamak: Zincir üstünde doğrulanana kadar yalnızca tasarım
+  hedefidir.
+- Dağıtım: Tahsis manifestosu ve yetki kanıtı aşağıdaki her eşiği geçene kadar
+  engellenir.
+- İmzalama: İşlem oluşturma ve inceleme; imzalama ve yayınlamadan ayrılmalıdır.
+
+Özel anahtarlar, seed phrase'ler ve şifreler kaynak koda, yapılandırma
+dosyalarına, günlüklere, test verilerine, destek kanallarına, derleme
+sistemlerine veya otomasyona asla girmemelidir. Tasarım yalnızca herkese açık
+adresleri ve imzasız test çıktıları kabul etmelidir.
+
+2. Önerilen modüller
+
+- configuration-schema: Ağ, program seçimi, ondalık basamak, arz ve herkese
+  açık yetki adreslerini gizli bilgi olmadan doğrular.
+- allocation-manifest: Alıcı kategorisi, herkese açık cüzdan, tam sayı token
+  miktarı, serbest bırakma kuralı ve deterministik manifesto özetini doğrular.
+- allocation-audit: Yinelenen alıcıları, negatif değerleri, kesirli taban
+  birimleri, taşmayı, eksik kategorileri ve arza eşit olmayan toplamları reddeder.
+- authority-audit: Mevcut mint ve dondurma yetkisi için doğrudan RPC ve explorer
+  kanıtını kaydeder.
+- transaction-plan: Yalnızca yerel testler için okunabilir, imzasız işlem planı
+  üretir. İmzalama veya yayınlama yapamaz.
+- evidence-bundle: Yapılandırma, manifesto özeti, test raporu, UTC zamanı ve
+  kamu kanıt bağlantılarını tek inceleme paketinde birleştirir.
+
+3. Tehdit modeli
+
+- Sahte mint değişimi: Web sitesi, canlı yayın, RPC yanıtı ve doğrudan explorer
+  bağlantısında tam adres karşılaştırması gerekir.
+- Yanlış ağ veya program: Ağ kimliği ve token programı kimliği her yapılandırma
+  ve rapora bağlanır.
+- Yetkinin tutulması veya değiştirilmesi: Yetki durumu bağımsız sorgulanır;
+  planlar, ekran görüntüleri veya işlem açıklamaları kanıt sayılmaz.
+- Tahsis manipülasyonu: Standartlaştırılmış manifesto özetlenir, bağımsız
+  inceleme gerekir ve onay sonrası özet değişikliği reddedilir.
+- Yinelenen, yuvarlanmış veya fazla dağıtım: Tam sayı taban birimleri kullanılır;
+  kategori ve alıcı toplamlarının doğrulanmış arza eşitliği kanıtlanır.
+- Tekrar oynatma veya istenmeyen imza: Okunabilir kayıt mesajı ağ, amaç, son
+  kullanma, benzersiz nonce içerir; kayıt asla işlem istemez.
+- Güvenliği bozulmuş yayın süreci: Hazırlama, inceleme, imzalama ve raporlama
+  rolleri ayrılır; tamamlanan her dağıtım zincir üstü veriden yayımlanır.
+
+4. Yerel doğrulayıcı test planı
+
+Tüm otomatik entegrasyon testleri yalnızca geçici yerel doğrulayıcı veya
+deterministik taklitler üzerinde çalışmalıdır. Hiçbir test varsayılan olarak
+devnet veya mainnet'i hedefleyemez.
+
+Gerekli testler:
+
+- eksik veya desteklenmeyen program seçimini reddetme;
+- yapılandırılmış arzdan bir taban birimi farklı toplamı reddetme;
+- yinelenen cüzdan ve kategori kimliklerini reddetme;
+- kesirli, negatif, güvenli olmayan tam sayı ve taşan miktarları reddetme;
+- onaydan sonra özeti değişen manifestoyu reddetme;
+- beklenen mint ve dondurma yetkisi geçişlerini yerelde doğrulama;
+- kayıt mesajının işlem veya token onayı oluşturmadığını kanıtlama;
+- transaction-plan modülünün imzalayıp yayınlayamadığını kanıtlama; ve
+- aynı girdilerden yeniden üretilebilir kanıt paketi oluşturma.
+
+5. Dağıtım kontrol listesi — yalnızca inceleme eşiği
+
+Ayrı olarak yetkilendirilmiş insan incelemesi aşağıdakileri onaylamadan hiçbir
+canlı dağıtım başlayamaz:
+
+- nihai hukuk ve risk açıklaması;
+- nihai token programı, ondalık basamak ve arz;
+- toplamı %100 olan eksiksiz tahsis manifestosu;
+- etiketli herkese açık tahsis ve hazine cüzdanları;
+- test edilmiş yetki geçiş süreci ve geri dönüş/durdurma koşulları;
+- yerel test raporu ve bağımsız yeniden üretilmiş manifesto özeti;
+- olay sorumlusu, iletişim planı ve durdurma yetkisi;
+- herhangi bir dağıtımdan önce hazır kamu kanıt şablonu; ve
+- projede veya otomasyonda gizli bilgi bulunmadığının açık doğrulaması.
+
+Bu kontrol listesi gelecekteki bir onay eşiğini açıklar. Onay vermez, mint
+işlemi yapmaz, işlem imzalamaz veya hiçbir şeyi dağıtmaz.

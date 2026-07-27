@@ -1,0 +1,40 @@
+{
+  "status": "HOLD",
+  "network": "mainnet-beta",
+  "manifestPath": "launch/genesis-manifest.template.json",
+  "participants": {
+    "mintAuthoritySigner": {
+      "role": "SIGNER",
+      "publicAddress": null,
+      "physicalConfirmationRequired": true,
+      "devicePathReviewed": false
+    },
+    "feePayerSigner": {
+      "role": "SIGNER",
+      "publicAddress": null,
+      "physicalConfirmationRequired": true,
+      "devicePathReviewed": false
+    },
+    "independentVerifier": {
+      "role": "VERIFIER",
+      "publicAddress": null,
+      "reviewedManifest": false,
+      "reviewedDestinations": false
+    },
+    "publicationOperator": {
+      "role": "PUBLISHER",
+      "publicAddress": null,
+      "hasNoSigningAuthority": true,
+      "reviewedHoldControls": false
+    }
+  },
+  "ceremonyControls": {
+    "noSecretsInChecklist": true,
+    "noBlindApproval": true,
+    "recipientAddressesCheckedAgainstManifest": false,
+    "signerAddressesCheckedAgainstManifest": false,
+    "holdOwnerConfirmed": false,
+    "manifestSha256": null,
+    "readyAtUtc": null
+  }
+}

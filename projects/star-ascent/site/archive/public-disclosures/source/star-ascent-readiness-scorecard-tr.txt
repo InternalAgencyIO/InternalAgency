@@ -1,0 +1,73 @@
+STAR ASCENT — LANSMAN HAZIRLIK PUAN KARTI
+LANSMAN ÖNCESİ KONTROL BELGESİ — LANSMAN ONAYI DEĞİLDİR
+
+MEVCUT KARAR: BEKLET
+
+YAYIN DURDURMA NOKTASI
+
+Herhangi bir token adresini paylaşmadan, sabitlemeden, sesli okumadan veya
+bağlantılamadan önce operatör mevcut kararı ve kanıt güncellik eşiğini
+okumalıdır. Bunlardan biri BEKLET durumundaysa, eksikse, süresi geçmişse veya
+tutarsızsa yayını durdurun ve inceleme için sorunu kaydedin. Taslak, prova
+çıktısı veya doğrulanmamış ekran görüntüsü kamu kanıtı yerine kullanılmaz.
+
+Bu puan kartı, lansman açısından kritik kamu kanıtlarının eksiksiz, güncel ve
+tutarlı olup olmadığını kaydeder. Provanın tamamlanması, başarılı yerel test
+veya bitmiş taslak bir BEKLET maddesini HAZIR durumuna getirmez.
+
+HAZIRLIK EŞİKLERİ
+
+1. TOKEN KİMLİĞİ — BEKLET
+Gerekenler:
+- Resmî mint adresi
+- Token programı
+- Ondalık basamak
+- Nihai zincir üstü arz
+- Doğrudan explorer bağlantısı
+- UTC kontrol zaman damgası
+- Adı belirtilmiş inceleme rolü
+
+2. YETKİ DURUMU — BEKLET
+Gerekenler:
+- Mevcut mint yetkisine ilişkin doğrudan explorer kanıtı
+- Mevcut dondurma yetkisine ilişkin doğrudan explorer kanıtı
+- Hedeflenen nihai durum
+- Bağımsız inceleme kaydı
+
+3. TAHSİS VE SERBEST BIRAKMA KONTROLLERİ — BEKLET
+Gerekenler:
+- Alıcı kategorileri ve kesin token miktarları
+- Etiketli kamu cüzdanları
+- Matematiksel olarak %100 toplam
+- Hak ediş, kilit, saklama ve serbest bırakma şartları
+- Her dağıtım için kamuya açık raporlama yöntemi
+
+4. KANAL TUTARLILIĞI — BEKLET
+Gerekenler:
+- Web sitesi, sabitlenmiş resmî duyuru ve canlı yayın değerleri eşleşir
+- Tam adres karakter karakter karşılaştırılır
+- Nihai iki dilli metin incelenir
+- Kamu bağlantıları cüzdan bağlantısı olmadan çalışır
+
+KANIT GÜNCELLİK EŞİĞİ
+
+Her kayıt şunları içermelidir:
+- Doğrudan kamu bağlantısı
+- UTC kontrol zaman damgası
+- Kontrolü yapan rolün adı
+- Gözlemlenen değer
+
+Lansman açısından kritik tüm kanıtları T−60 dakikada ve herhangi bir adres
+yayımlanmadan veya kayıt açılmadan hemen önce yeniden kontrol edin. Eksik zaman
+damgası, erişilemeyen bağlantı, değişmiş değer veya kanallar arası uyumsuzluk
+lansmanı BEKLET durumuna döndürür.
+
+KARAR KURALI
+
+HAZIR yalnızca her eşik güncel bağlantılı kanıta sahip olduğunda ve birbirinden
+ayrı iki inceleme rolü aynı sonuca vardığında kaydedilebilir. Herhangi bir
+BEKLET veya BAŞARISIZ durumu adres yayınını, kayıt açılışını ve dağıtımı engeller.
+
+Kritik kanıtlar eksikken sayısal hazırlık yüzdesi kullanılmaz. Bu belge seed
+phrase, özel anahtar, şifre, kişisel veri, ödeme veya topluluk fonu istemez ya
+da içermez.
