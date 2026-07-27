@@ -4,6 +4,8 @@ This is the public STAR ASCENT project surface inside Internal Agency.
 The reproducible bilingual website source lives in [site](./site), while
 Radiance remains independently maintained elsewhere in this repository.
 
+Start with the [Public Release Index](./RELEASE_INDEX.md).
+
 See [the repository architecture](../../docs/REPOSITORY_ARCHITECTURE.md) for
 the public repository map and publishing rules.
 
