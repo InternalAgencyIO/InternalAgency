@@ -84,6 +84,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Place Vendôme Midnight**<br><img src="48-place-vendome-midnight.png" width="420" alt="Radiance crossing a rain-polished Paris square in scarlet couture"> | **Le Marais Ribbon Morning**<br><img src="49-le-marais-ribbon-morning.png" width="420" alt="Radiance carrying espresso through a flowered Paris courtyard"> |
 | **Tuileries Cocktail Rain**<br><img src="50-tuileries-cocktail-rain.png" width="420" alt="Radiance walking through the Tuileries after a summer shower"> | **Saint-Germain Last Song**<br><img src="51-saint-germain-last-song.png" width="420" alt="Radiance selecting the final record in a Left Bank jazz salon"> |
 
+## Overnight Atlas — Batch 8: Direct Flash
+
+| | |
+|---|---|
+| **Direct-Flash Studio Morning**<br><img src="52-direct-flash-studio-morning.png" width="420" alt="Radiance getting ready in a bright downtown studio"> | **Red Laundromat Evening**<br><img src="53-red-laundromat-evening.png" width="420" alt="Radiance matching scarlet socks in a chrome laundromat"> |
+| **Desert Motel Pool Break**<br><img src="54-desert-motel-pool-break.png" width="420" alt="Radiance crossing a desert motel pool deck in cobalt and scarlet basics"> | **Neon Diner Last Call**<br><img src="55-neon-diner-last-call.png" width="420" alt="Radiance choosing the last song in a neon roadside diner"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
