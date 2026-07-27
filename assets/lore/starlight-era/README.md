@@ -77,6 +77,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Palais Galliera After Dark**<br><img src="44-palais-galliera-after-dark.png" width="420" alt="Radiance walking through a Paris fashion museum after dark"> | **Seine Couture Dawn**<br><img src="45-seine-couture-dawn.png" width="420" alt="Radiance overlooking the Seine in liquid-gold couture at dawn"> |
 | **Palais Garnier Final Fitting**<br><img src="46-palais-garnier-final-fitting.png" width="420" alt="Radiance completing a midnight-blue couture fitting at the Paris opera"> | **Rue Saint-Honoré Afterparty**<br><img src="47-rue-saint-honore-afterparty.png" width="420" alt="Radiance crossing a rain-lit Paris courtyard after fashion week"> |
 
+## Forty Fresh Worlds — Batch 7: Paris Cocktail
+
+| | |
+|---|---|
+| **Place Vendôme Midnight**<br><img src="48-place-vendome-midnight.png" width="420" alt="Radiance crossing a rain-polished Paris square in scarlet couture"> | **Le Marais Ribbon Morning**<br><img src="49-le-marais-ribbon-morning.png" width="420" alt="Radiance carrying espresso through a flowered Paris courtyard"> |
+| **Tuileries Cocktail Rain**<br><img src="50-tuileries-cocktail-rain.png" width="420" alt="Radiance walking through the Tuileries after a summer shower"> | **Saint-Germain Last Song**<br><img src="51-saint-germain-last-song.png" width="420" alt="Radiance selecting the final record in a Left Bank jazz salon"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
