@@ -1,4 +1,37 @@
-<h1 align="center">Radiance</h1>
+<h1 align="center">Internal Agency</h1>
+
+<p align="center"><strong>A public build archive for independent creative systems.</strong></p>
+
+> **Build in public. Prove in public. Keep the record readable.**
+
+## Public project index
+
+| Project | What it is | Public record | Status |
+| --- | --- | --- | --- |
+| **Radiance** | A living high-fashion AI desktop companion. | Source, scene manifest, local production flow, tests, and releases live in this repository. | Active |
+| **STAR ASCENT** | A bilingual public culture, launch, and evidence project. | [Repository architecture](docs/REPOSITORY_ARCHITECTURE.md) and [migration marker](projects/star-ascent/README.md). Dedicated public repositories are being seeded. | Live build |
+
+## Start here
+
+1. Read the [repository architecture](docs/REPOSITORY_ARCHITECTURE.md) for
+   the separation between public site, contracts, audits, and archive.
+2. Read each project README before running code. Every reproducible command,
+   dependency, generated asset, and public claim should have an intelligible
+   home in the record.
+3. Treat on-chain claims as unverified unless their public transaction or
+   address evidence is linked alongside the claim.
+
+## Openness commitment
+
+This repository is MIT licensed. New STAR ASCENT public writing, reference
+material, and non-code archive artifacts will be released as clearly marked
+CC0 material where their dedicated repositories say so. Code keeps its own
+explicit license; no private credentials, seed phrases, personal data, or
+unverified security claims belong in public history.
+
+---
+
+## Radiance
 
 <p align="center">
   <strong>A living high-fashion AI companion for your desktop.</strong>
