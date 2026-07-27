@@ -11,11 +11,11 @@ reproduce it.
 | 03 | `9626ff3` | Original-frame image-to-video pipeline and 30 fps runtime playback | scene contract tests |
 | 04 | `8a806ed` | Generated Python cache removed from source history | clean worktree |
 | 05 | `d225269` | Git LFS video masters, integrity manifest, and portable Windows packaging | `npm run dist` release gate |
+| 06 | `d2f0129` | First true-motion proof plus reproducible low-RAM authoring mode | 145 frames, 30 fps, SHA-256 manifest |
 
-The next archived iteration is created only after a generated scene passes
-frame-rate, duration, identity, and visible-motion review. Failed experiments
-remain reproducible through their prompt/seed change commits but are never
-promoted as production masters.
+See [`006-true-motion-proof.md`](006-true-motion-proof.md) for the visual and
+machine-verifiable evidence. Failed experiments remain reproducible through
+their prompt/seed change commits but are never promoted as production masters.
 
 ## Replay the current source state
 
