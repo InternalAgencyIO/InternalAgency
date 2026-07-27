@@ -3,22 +3,49 @@
   "version": "0.1.0",
   "description": "A cinematic, audio-reactive desktop runtime for Radiance.",
   "private": true,
+  "productName": "Radiance",
   "type": "module",
   "main": "src/main.cjs",
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
+    "pack": "node scripts/validate-video-assets.mjs && electron-builder --dir --win --x64",
+    "dist": "node scripts/validate-video-assets.mjs && electron-builder --win portable --x64",
     "install:pet": "node scripts/install-pet.cjs",
     "video:server": "powershell -ExecutionPolicy Bypass -File scripts/video/start-framepack.ps1",
     "video:scene": "powershell -ExecutionPolicy Bypass -File scripts/video/render-scene.ps1",
+    "video:all": "powershell -ExecutionPolicy Bypass -File scripts/video/render-all.ps1",
     "test": "node --test test/scene-engine.test.js",
     "smoke": "electron . --screenshot=artifacts/radiance-overlay.png"
   },
   "devDependencies": {
-    "electron": "39.8.10"
+    "electron": "39.8.10",
+    "electron-builder": "^26.0.12"
   },
   "engines": {
     "node": ">=18"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "build": {
+    "appId": "ai.internalagency.radiance",
+    "productName": "Radiance",
+    "asar": true,
+    "asarUnpack": [
+      "assets/videos/**/*"
+    ],
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "artifactName": "Radiance-${version}-portable.${ext}"
+    }
+  }
 }

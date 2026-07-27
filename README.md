@@ -24,6 +24,21 @@ enable **Listen** so music energy and estimated BPM influence scene selection.
 On Electron-supported systems, Listen requests loopback system audio. If that
 is unavailable, it falls back to the default audio input.
 
+### Press-and-play standalone app
+
+Release builds include the finished 30 fps MP4 scene masters. Playback does not
+run FramePack, download model weights, or regenerate frames:
+
+```powershell
+npm install
+npm run dist
+```
+
+The portable Windows executable is written to `release/`. The build refuses to
+run unless all ten full videos are present and verified. Videos are stored
+outside the Electron ASAR inside the package so Chromium can stream them
+directly.
+
 ### Install the matching Codex pet
 
 ```powershell

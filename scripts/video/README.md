@@ -21,6 +21,8 @@ tools/framepack-runtime/FramePack-current/
 
 The runtime and downloaded model cache are intentionally gitignored. The final
 MP4 files under `assets/videos/` are project assets and may be committed.
+The generated masters are tracked with Git LFS; end users never need this
+runtime or its model weights.
 
 ## Generate
 
@@ -43,5 +45,13 @@ Render the full configured scene:
 npm run video:scene -- -Scene neon-listening-lounge
 ```
 
+Render every full scene in sequence:
+
+```powershell
+npm run video:all
+```
+
 Scene prompts, deterministic seeds, source frames, and target durations are in
 `scenes.json`. Final clips are written to `assets/videos/*-full-30fps.mp4`.
+Each output is decoded and verified at 30 fps, then recorded with its frame
+count, duration, byte size, and SHA-256 digest in `assets/videos/manifest.json`.
