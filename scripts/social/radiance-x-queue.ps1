@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('Status', 'Stage', 'Record', 'ClearPending')]
+    [ValidateSet('Status', 'Stage', 'Record', 'ClearPending', 'BaselineExisting')]
     [string]$Mode = 'Status',
 
     [string]$PostUrl
@@ -59,6 +59,11 @@ function Get-QueueState {
         }
     }
 
+    $excludedHashes = @{}
+    foreach ($asset in @($Ledger.excludedAssets)) {
+        $excludedHashes[$asset.sha256] = $true
+    }
+
     $assets = Get-ChildItem -LiteralPath $loreRoot -File -Filter '*.png' |
         Sort-Object Name |
         ForEach-Object { Get-AssetRecord -File $_ }
@@ -66,7 +71,8 @@ function Get-QueueState {
     $unposted = @(
         $assets | Where-Object {
             -not $postedHashes.ContainsKey($_.sha256) -and
-            -not $pendingHashes.ContainsKey($_.sha256)
+            -not $pendingHashes.ContainsKey($_.sha256) -and
+            -not $excludedHashes.ContainsKey($_.sha256)
         }
     )
 
@@ -75,6 +81,7 @@ function Get-QueueState {
         batchSize = [int]$Ledger.batchSize
         totalAssets = $assets.Count
         postedAssets = $postedHashes.Count
+        excludedAssets = $excludedHashes.Count
         pendingBatch = $Ledger.pendingBatch
         readyBatch = @($unposted | Select-Object -First ([int]$Ledger.batchSize))
         waitingAssets = $unposted.Count
@@ -136,6 +143,40 @@ switch ($Mode) {
     }
 
     'ClearPending' {
+        $ledger.pendingBatch = $null
+        Write-Ledger -Ledger $ledger
+        (Get-QueueState -Ledger (Read-Ledger)) | ConvertTo-Json -Depth 8
+        break
+    }
+
+    'BaselineExisting' {
+        $knownHashes = @{}
+        foreach ($post in @($ledger.posts)) {
+            foreach ($asset in @($post.assets)) {
+                $knownHashes[$asset.sha256] = $true
+            }
+        }
+        foreach ($asset in @($ledger.excludedAssets)) {
+            $knownHashes[$asset.sha256] = $true
+        }
+
+        $baseline = @(
+            Get-ChildItem -LiteralPath $loreRoot -File -Filter '*.png' |
+                Sort-Object Name |
+                ForEach-Object { Get-AssetRecord -File $_ } |
+                Where-Object { -not $knownHashes.ContainsKey($_.sha256) } |
+                ForEach-Object {
+                    [pscustomobject]@{
+                        file = $_.file
+                        sha256 = $_.sha256
+                        bytes = $_.bytes
+                        reason = 'historical_archive_reconciled_against_x_media'
+                        excludedAt = (Get-Date).ToUniversalTime().ToString('o')
+                    }
+                }
+        )
+
+        $ledger.excludedAssets = @($ledger.excludedAssets) + $baseline
         $ledger.pendingBatch = $null
         Write-Ledger -Ledger $ledger
         (Get-QueueState -Ledger (Read-Ledger)) | ConvertTo-Json -Depth 8

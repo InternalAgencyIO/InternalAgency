@@ -35,6 +35,20 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Midnight Botanical Conservatory**<br><img src="21-midnight-botanical-conservatory.png" width="420" alt="Radiance in a botanical conservatory at midnight"> | **Deep Ocean Observatory**<br><img src="22-deep-ocean-observatory.png" width="420" alt="Radiance exploring a deep-ocean observatory"> |
 | **Vinyl Record Shop**<br><img src="23-vinyl-record-shop.png" width="420" alt="Radiance selecting records in an intimate vinyl shop"> | *Chapter III continues…* |
 
+## Forty Fresh Worlds — Batch 1
+
+| | |
+|---|---|
+| **Lunar Sleeper Platform**<br><img src="24-lunar-sleeper-platform.png" width="420" alt="Radiance preparing to board a lunar sleeper train"> | **Volcanic Glass Atelier**<br><img src="25-volcanic-glass-atelier.png" width="420" alt="Radiance shaping luminous glass in an obsidian atelier"> |
+| **Sapphire Rooftop Orchestra**<br><img src="26-sapphire-rooftop-orchestra.png" width="420" alt="Radiance conducting a rooftop symphony"> | **Crimson Monsoon Cinema**<br><img src="27-crimson-monsoon-cinema.png" width="420" alt="Radiance dancing through rain outside an art-deco cinema"> |
+
+## Forty Fresh Worlds — Batch 2
+
+| | |
+|---|---|
+| **Desert Solar Airship**<br><img src="28-desert-solar-airship.png" width="420" alt="Radiance aboard a solar airship above the desert"> | **Bioluminescent Lagoon**<br><img src="29-bioluminescent-lagoon.png" width="420" alt="Radiance beside a glowing tropical lagoon"> |
+| **Three A.M. Chess Salon**<br><img src="30-three-am-chess-salon.png" width="420" alt="Radiance in a private midnight chess salon"> | **Cosmic Couture Workroom**<br><img src="31-cosmic-couture-workroom.png" width="420" alt="Radiance creating a starlight gown"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.

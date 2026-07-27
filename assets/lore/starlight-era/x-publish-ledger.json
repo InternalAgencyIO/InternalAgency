@@ -3,32 +3,204 @@
     "account":  "@RaymondRR777",
     "batchSize":  4,
     "pendingBatch":  {
-                         "stagedAt":  "2026-07-27T20:54:46.4339488Z",
+                         "stagedAt":  "2026-07-27T21:14:41.7174580Z",
                          "status":  "awaiting_confirmation",
                          "assets":  [
                                         {
-                                            "file":  "01-golden-hour-penthouse.png",
-                                            "sha256":  "2086b53e7d627b4f899940cd983f0918aa5a07cfba8930d7c096d8fa148b07d9",
-                                            "bytes":  2158960
+                                            "file":  "24-lunar-sleeper-platform.png",
+                                            "sha256":  "4e7ddc75080b1bcdc5ab614e882317e1467bad0811c59bd89ed597be1c0ca789",
+                                            "bytes":  2086044
                                         },
                                         {
-                                            "file":  "02-midnight-dj.png",
-                                            "sha256":  "bd1d6ddf0faf7ce3e8be931f97703309c22ed8c73bc98a7f6d95999554e786a6",
-                                            "bytes":  2205213
+                                            "file":  "25-volcanic-glass-atelier.png",
+                                            "sha256":  "f9bcdc122bbe191623155ef80de4f3db01cc3ee52f68bb03a5f2e29d8320eb80",
+                                            "bytes":  2164294
                                         },
                                         {
-                                            "file":  "03-riviera-afterparty.png",
-                                            "sha256":  "46528178591f603bf9cda8ee991f948669756ddf5688177ba5ee592a48248f53",
-                                            "bytes":  2167638
+                                            "file":  "26-sapphire-rooftop-orchestra.png",
+                                            "sha256":  "01fae70eaf514d9c4acd67bb1797a8ff378b546042f3308b71d87abf5fe9e984",
+                                            "bytes":  2052438
                                         },
                                         {
-                                            "file":  "04-scarlet-backstage.png",
-                                            "sha256":  "2f9419d5ceac3bc25183567a21cfd1dda7afb2dad8f05ac5540f91d7e0ae93df",
-                                            "bytes":  1946524
+                                            "file":  "27-crimson-monsoon-cinema.png",
+                                            "sha256":  "72598d1a052787103e0140672c1c97fdc50a59b77f958ed6624133da8c808002",
+                                            "bytes":  2703155
                                         }
                                     ]
                      },
     "posts":  [
 
-              ]
+              ],
+    "excludedAssets":  [
+                           {
+                               "file":  "01-golden-hour-penthouse.png",
+                               "sha256":  "2086b53e7d627b4f899940cd983f0918aa5a07cfba8930d7c096d8fa148b07d9",
+                               "bytes":  2158960,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.2872868Z"
+                           },
+                           {
+                               "file":  "02-midnight-dj.png",
+                               "sha256":  "bd1d6ddf0faf7ce3e8be931f97703309c22ed8c73bc98a7f6d95999554e786a6",
+                               "bytes":  2205213,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3011419Z"
+                           },
+                           {
+                               "file":  "03-riviera-afterparty.png",
+                               "sha256":  "46528178591f603bf9cda8ee991f948669756ddf5688177ba5ee592a48248f53",
+                               "bytes":  2167638,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3092069Z"
+                           },
+                           {
+                               "file":  "04-scarlet-backstage.png",
+                               "sha256":  "2f9419d5ceac3bc25183567a21cfd1dda7afb2dad8f05ac5540f91d7e0ae93df",
+                               "bytes":  1946524,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3182938Z"
+                           },
+                           {
+                               "file":  "05-matte-black-night-drive.png",
+                               "sha256":  "9755f8b82e1cb64c37d14fd98a534428ee21fb02a3dec2fe52e3fbc6dbb3fd05",
+                               "bytes":  1996929,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3243639Z"
+                           },
+                           {
+                               "file":  "06-gold-desert-festival.png",
+                               "sha256":  "9fa3260711aee9b3772b973245a9ecacf13aba174e9a03d8be6bea3a3dfafb92",
+                               "bytes":  2482167,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3289107Z"
+                           },
+                           {
+                               "file":  "07-night-blue-opera.png",
+                               "sha256":  "662e517f2607a592e3a54943c72a5ab7770dd0f3a9431da0170c95ab946711c9",
+                               "bytes":  2180181,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3354646Z"
+                           },
+                           {
+                               "file":  "08-white-fashion-atelier.png",
+                               "sha256":  "2a171d67fdcea65fd249d5b06baf9e2a9b8eb65696076f8b4502db843cb64c34",
+                               "bytes":  2165940,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3419893Z"
+                           },
+                           {
+                               "file":  "09-red-2am-kitchen.png",
+                               "sha256":  "f2fdf31c7020ed6abac91562ee2f9ad2e934c4073d15164a32311777c41d38ea",
+                               "bytes":  2119032,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3475607Z"
+                           },
+                           {
+                               "file":  "10-matte-black-rooftop-sunrise.png",
+                               "sha256":  "4ad0940aa1be2355ae3ef7fd121ea1f80c1ec80522682cbc32961d13423f884d",
+                               "bytes":  2091296,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3537790Z"
+                           },
+                           {
+                               "file":  "11-polar-observatory.png",
+                               "sha256":  "e87335293f366130dcce16e62a868d82b9650fd727c22fa91610a85681a32798",
+                               "bytes":  2341048,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3604026Z"
+                           },
+                           {
+                               "file":  "12-neon-karaoke.png",
+                               "sha256":  "a861fce6278fabe3831ace8ee989d3f88e07d688d2b119d9ea6103612279d869",
+                               "bytes":  2116300,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3680412Z"
+                           },
+                           {
+                               "file":  "13-paris-rain-library.png",
+                               "sha256":  "b3a9b88674be825b22f84b78d5b5c88c90ada43ac8a905c2b935d132e251620d",
+                               "bytes":  2303314,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3737100Z"
+                           },
+                           {
+                               "file":  "14-white-yacht-sunrise.png",
+                               "sha256":  "298c548c999eecf52f54894a6e1920566f8e583364545efaf89649c9710593d8",
+                               "bytes":  2166816,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3788069Z"
+                           },
+                           {
+                               "file":  "15-gold-meteor-gala.png",
+                               "sha256":  "2f090e89d9c56ef725e8f9ebb3492d18708a16d8f7d31b1e188fd7307316a7bb",
+                               "bytes":  2342725,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3843517Z"
+                           },
+                           {
+                               "file":  "16-red-marrakech-night-market.png",
+                               "sha256":  "845463cd5c56a480e19f92e5da7fc6d33564f075496e250f4f040120b538339e",
+                               "bytes":  2438252,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3898858Z"
+                           },
+                           {
+                               "file":  "17-night-blue-recording-studio.png",
+                               "sha256":  "f0c60fe26ea13299dfcb5cdcdf47d3b50cdc026f5eb07556658ca99df13ee349",
+                               "bytes":  1993388,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.3950597Z"
+                           },
+                           {
+                               "file":  "18-matte-black-electric-rider.png",
+                               "sha256":  "32aa647d207a8aae359b5d641f7a9ca7440168fd8a2f5f6e89a5cf56ffbf49bf",
+                               "bytes":  2508419,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.4012195Z"
+                           },
+                           {
+                               "file":  "19-white-alpine-snowfall.png",
+                               "sha256":  "bf2ff89f7b505690268e30a9c7d55645a9d6561da5a3f025144d1965f544ea30",
+                               "bytes":  2400453,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.4072786Z"
+                           },
+                           {
+                               "file":  "20-starlight-roller-disco.png",
+                               "sha256":  "ef51b45bc420f8b1eb5a6a3a4a3dedefbb17e2ec4940fadf2bba319b63b87dc5",
+                               "bytes":  2308916,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.4133455Z"
+                           },
+                           {
+                               "file":  "21-midnight-botanical-conservatory.png",
+                               "sha256":  "8d5db658f14956def97bf94ba4df85b99ad5cc06efb093ec432094482b16fb41",
+                               "bytes":  2415260,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.4184280Z"
+                           },
+                           {
+                               "file":  "22-deep-ocean-observatory.png",
+                               "sha256":  "f8c96decb092ca81b20700cb48971ae6a12f821b049a71d72323544342c736ba",
+                               "bytes":  2205986,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.4249742Z"
+                           },
+                           {
+                               "file":  "23-vinyl-record-shop.png",
+                               "sha256":  "25aaaea4d21a149fce97731f794a83d3e70096715bed7748a94d7cf199768d86",
+                               "bytes":  2265420,
+                               "reason":  "historical_archive_reconciled_against_x_media",
+                               "excludedAt":  "2026-07-27T21:03:08.4315631Z"
+                           }
+                       ],
+    "feedAudits":  [
+                       {
+                           "auditedAt":  "2026-07-28T00:00:00+03:00",
+                           "account":  "@RaymondRR777",
+                           "source":  "https://x.com/RaymondRR777/media",
+                           "confirmedPost":  "https://x.com/RaymondRR777/status/2081843459267150071",
+                           "note":  "The latest post visibly contains Deep Ocean Observatory and Midnight Botanical Conservatory; many earlier Radiance scenes are also present. The complete 01-23 archive is conservatively excluded from future publishing."
+                       }
+                   ]
 }
