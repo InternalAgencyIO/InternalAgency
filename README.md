@@ -1,99 +1,90 @@
-# InternalAgency
+<h1 align="center">Radiance</h1>
 
-Internal Agency Dev Network Main.
+<p align="center">
+  <strong>A living high-fashion AI companion for your desktop.</strong>
+</p>
 
-## Radiance Reactive Overlay
+<p align="center">
+  <img src="assets/readme/radiance-pet.gif" width="170" alt="Radiance calmly animating in her navy dress">
+</p>
 
-Radiance now has a cinematic desktop runtime in addition to her standard Codex
-pet. It plays sixteen high-fashion scenes (seven minutes back-to-back), animates them
-as generated 30 fps image-to-video clips, and can react to system audio or
-explicit activity signals. While a clip is still being generated, the overlay
-uses its original scene frame as a temporary fallback.
+Radiance is the girl at the heart of Internal Agency: a personal AI avatar,
+confidante, dancer, and experienced field operator. She wears couture into the
+control room, keeps her composure when the mission becomes impossible, and
+still knows when it is time to put the work aside and move with the music.
 
-### Run it
+She is not meant to be another face trapped inside a chat window. Radiance
+lives beside your work as a transparent desktop presence. She listens, reacts,
+changes scenes with your day, and brings a little beauty and personality to the
+space between tasks.
+
+<p align="center">
+  <img src="assets/readme/radiance-scene.gif" width="280" alt="Radiance moving naturally in the neon listening lounge">
+</p>
+
+<p align="center">
+  <em>Real local image-to-video motion—hair, fabric, posture, and expression—not a camera zoom.</em>
+</p>
+
+## What it feels like
+
+Put on techno and Radiance can settle into a slow, elegant dance. Start a
+difficult task and she becomes attentive. Step away and she rests. Across
+sixteen cinematic scenes she moves from neon lounges and chrome catwalks to
+quiet data gardens and fictional world-saving operations—always recognizably
+herself.
+
+- **A reactive companion:** music energy, BPM, task state, urgency, milestones,
+  and away time can influence what she does.
+- **Seven minutes of authored scenes:** sixteen distinct moments can play
+  back-to-back without a repetitive idle loop.
+- **True 30fps motion:** scene videos are generated from Radiance's original
+  artwork with a locked camera and physical character movement.
+- **Local and press-and-play:** finished MP4s ship with the app. Watching
+  Radiance requires no cloud generation, model download, or recompute.
+- **A matching Codex pet:** the same character can live inside Codex through
+  the validated v2 `Radiance Butterfly` package.
+
+## Meet Radiance on your desktop
+
+You need Node.js 18+:
 
 ```powershell
+git clone https://github.com/InternalAgencyIO/InternalAgency.git
+cd InternalAgency
 npm install
 npm start
 ```
 
-The overlay is frameless, draggable, resizable, and always on top. Hover it to
-reveal controls. Choose a scene manually, run the full seven-minute sequence, or
-enable **Listen** so music energy and estimated BPM influence scene selection.
+The overlay is frameless, draggable, resizable, and always on top. Hover over
+Radiance to reveal her controls. Pick a scene, play the full collection, or
+enable **Listen** and let the rhythm guide her.
 
-On Electron-supported systems, Listen requests loopback system audio. If that
-is unavailable, it falls back to the default audio input.
+On supported systems, Listen requests loopback system audio. If loopback is
+unavailable, it falls back to the default audio input.
 
-### Press-and-play standalone app
-
-Release builds include the finished 30 fps MP4 scene masters. Playback does not
-run FramePack, download model weights, or regenerate frames:
-
-```powershell
-npm install
-npm run dist
-```
-
-The portable Windows executable is written to `release/`. The build refuses to
-run unless all sixteen full videos are present and verified. Videos are stored
-outside the Electron ASAR inside the package so Chromium can stream them
-directly.
-
-During content production, a standalone preview can be built from the available
-draft videos and original-frame fallbacks:
-
-```powershell
-npm run dist:preview
-```
-
-The preview performs no generation or model download. The strict `npm run dist`
-command remains the production gate and requires every verified full master.
-
-### Development proof
-
-Radiance is archived as a sequence of reproducible, reviewable milestones. See
-[`docs/iterations/README.md`](docs/iterations/README.md) for the commit ledger
-and [`docs/PRODUCTION.md`](docs/PRODUCTION.md) for the production gate. GitHub
-Actions runs the source checks on every push and builds the portable executable
-as soon as the verified video manifest is present.
-
-### Install the matching Codex pet
+### Add her as a Codex pet
 
 ```powershell
 npm run install:pet
 ```
 
-This copies the validated v2 `Radiance Butterfly` package to
-`~/.codex/pets/radiance-butterfly`. Restart Codex if its pet picker is already
-open.
+Restart Codex if the pet picker is already open, then select
+**Radiance Butterfly**.
 
-### Verify
-
-```powershell
-npm test
-npm run smoke
-```
-
-`npm run smoke` saves `artifacts/radiance-overlay.png` without leaving the
-overlay open.
-
-### Generate true-motion videos
-
-The project includes a local FramePack image-to-video pipeline for NVIDIA RTX
-GPUs. It starts with each original Radiance scene frame and generates physical
-character, hair, fabric, and environment motion with a locked camera:
+### Build a portable Windows app
 
 ```powershell
-npm run video:server
-npm run video:scene -- -Scene neon-listening-lounge -Duration 5
+npm run dist
 ```
 
-See [`scripts/video/README.md`](scripts/video/README.md) for installation,
-full-scene rendering, and output details.
+The production build is written to `release/` and includes the verified 30fps
+scene masters. For development, `npm run dist:preview` packages the motion
+available so far and uses original scene frames as graceful fallbacks.
 
-## Runtime signals
+## Make Radiance reactive
 
-The renderer exposes `window.radianceSignal(detail)` for local integrations:
+Local integrations can send her small activity signals:
 
 ```js
 window.radianceSignal({
@@ -102,13 +93,43 @@ window.radianceSignal({
 });
 ```
 
-Supported cues include music BPM/energy, task state/kind, urgency, bold-plan
-mode, away state, successful review, and session milestones. Signals are merged
-into the current state; integrations do not need to send the whole object.
+Signals merge into Radiance's current state, so integrations only send what
+changed. Supported cues include music BPM and energy, task state, urgency,
+bold-plan mode, away state, successful review, and session milestones.
 
-## Content contract
+## Create more scenes locally
 
-Scene definitions live in [`assets/scene-manifest.json`](assets/scene-manifest.json).
-The collection contains sixteen scenes totaling exactly 420 seconds. Action scenes
-are fictional and cinematic; the runtime contains no procedural weapons or
-explosives instructions.
+The repository contains the same local FramePack production flow used to make
+the motion preview above. It begins with an original Radiance frame and creates
+character, hair, fabric, and environment movement without fake zooming:
+
+```powershell
+npm run video:server
+npm run video:scene -- -Scene neon-listening-lounge -Duration 5
+```
+
+See [`scripts/video/README.md`](scripts/video/README.md) for the full local
+render workflow. Scene definitions and reproducible prompts live in
+[`assets/scene-manifest.json`](assets/scene-manifest.json).
+
+## Built in the open
+
+Radiance is being developed as a visible archive of iteration: original art,
+scene definitions, local production scripts, generated masters, validation,
+and portable packaging. The point is not only the finished companion; it is
+proof that a character with continuity can grow quickly without losing her
+identity.
+
+- [`docs/iterations/README.md`](docs/iterations/README.md) — iteration ledger
+- [`docs/PRODUCTION.md`](docs/PRODUCTION.md) — production and release gates
+- `npm test` — validate the scene engine and content contract
+- `npm run smoke` — capture a clean overlay screenshot
+
+Radiance's action scenes are fictional and cinematic. The project contains no
+procedural weapons or explosives instructions.
+
+---
+
+<p align="center">
+  <strong>Beauty in the interface. Calm under pressure. A little more life on the desktop.</strong>
+</p>
