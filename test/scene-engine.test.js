@@ -16,16 +16,16 @@ const videoConfig = JSON.parse(
   fs.readFileSync(new URL("../scripts/video/scenes.json", import.meta.url), "utf8")
 );
 
-test("pilot is exactly ten scenes and five minutes", () => {
+test("collection is sixteen scenes and seven minutes", () => {
   const scheduler = new SceneScheduler(manifest.scenes);
-  assert.equal(manifest.scenes.length, 10);
-  assert.equal(scheduler.totalDurationSeconds, 300);
-  assert.equal(manifest.totalDurationSeconds, 300);
+  assert.equal(manifest.scenes.length, 16);
+  assert.equal(scheduler.totalDurationSeconds, 420);
+  assert.equal(manifest.totalDurationSeconds, 420);
 });
 
 test("scene scheduler wraps in both directions", () => {
   const scheduler = new SceneScheduler(manifest.scenes);
-  assert.equal(scheduler.move(-1).id, "red-heel-finale");
+  assert.equal(scheduler.move(-1).id, "butterfly-code-couture");
   assert.equal(scheduler.move(1).id, "neon-listening-lounge");
 });
 
@@ -74,11 +74,21 @@ test("every scene has a locked-camera 30 fps video specification", () => {
   assert.equal(videoConfig.scenes.length, manifest.scenes.length);
   assert.equal(
     videoConfig.scenes.reduce((sum, scene) => sum + scene.durationSeconds, 0),
-    300
+    420
   );
   for (const scene of videoConfig.scenes) {
     assert.match(scene.prompt, /locked camera|locked tracking position/i);
     assert.match(scene.prompt, /no zoom/i);
     assert.ok(fs.existsSync(new URL(`../${scene.source}`, import.meta.url)));
+  }
+});
+
+test("six enrichment scenes are twenty-second HQ renders", () => {
+  const enrichment = videoConfig.scenes.filter((scene) => scene.collection === "enrichment");
+  assert.equal(enrichment.length, 6);
+  for (const scene of enrichment) {
+    assert.equal(scene.durationSeconds, 20);
+    assert.ok(scene.steps >= 30);
+    assert.ok(scene.mp4Crf <= 14);
   }
 });

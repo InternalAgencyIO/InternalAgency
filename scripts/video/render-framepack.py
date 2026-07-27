@@ -82,13 +82,13 @@ def main() -> None:
         scene["seed"],
         duration,
         9,
-        25,
+        scene.get("steps", 25),
         1.0,
         10.0,
         0.0,
         6.0,
         args.teacache,
-        16,
+        scene.get("mp4Crf", 16),
         api_name="/process",
     )
 

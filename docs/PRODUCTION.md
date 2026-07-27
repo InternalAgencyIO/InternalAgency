@@ -13,8 +13,8 @@ A Radiance release is production-ready only when every item below passes.
 
 ## Video masters
 
-- Ten full MP4 files exist under `assets/videos/`.
-- The combined configured runtime is exactly 300 seconds.
+- Sixteen full MP4 files exist under `assets/videos/`.
+- The combined configured runtime is exactly 420 seconds.
 - Every file decodes at 30 fps.
 - `assets/videos/manifest.json` records duration, frame count, size, source,
   rendition, and SHA-256 for every master.

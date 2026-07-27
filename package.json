@@ -17,6 +17,7 @@
     "video:server": "powershell -ExecutionPolicy Bypass -File scripts/video/start-framepack.ps1",
     "video:scene": "powershell -ExecutionPolicy Bypass -File scripts/video/render-scene.ps1",
     "video:all": "powershell -ExecutionPolicy Bypass -File scripts/video/render-all.ps1",
+    "video:enrich": "powershell -ExecutionPolicy Bypass -File scripts/video/render-enrichment.ps1",
     "test": "node --test test/scene-engine.test.js",
     "smoke": "electron . --screenshot=artifacts/radiance-overlay.png"
   },

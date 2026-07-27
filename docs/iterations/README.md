@@ -28,7 +28,7 @@ npm test
 npm start
 ```
 
-Once all ten masters are present:
+Once all sixteen masters are present:
 
 ```powershell
 npm run dist

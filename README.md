@@ -5,7 +5,7 @@ Internal Agency Dev Network Main.
 ## Radiance Reactive Overlay
 
 Radiance now has a cinematic desktop runtime in addition to her standard Codex
-pet. It plays ten high-fashion scenes (five minutes back-to-back), animates them
+pet. It plays sixteen high-fashion scenes (seven minutes back-to-back), animates them
 as generated 30 fps image-to-video clips, and can react to system audio or
 explicit activity signals. While a clip is still being generated, the overlay
 uses its original scene frame as a temporary fallback.
@@ -18,7 +18,7 @@ npm start
 ```
 
 The overlay is frameless, draggable, resizable, and always on top. Hover it to
-reveal controls. Choose a scene manually, run the full five-minute sequence, or
+reveal controls. Choose a scene manually, run the full seven-minute sequence, or
 enable **Listen** so music energy and estimated BPM influence scene selection.
 
 On Electron-supported systems, Listen requests loopback system audio. If that
@@ -35,7 +35,7 @@ npm run dist
 ```
 
 The portable Windows executable is written to `release/`. The build refuses to
-run unless all ten full videos are present and verified. Videos are stored
+run unless all sixteen full videos are present and verified. Videos are stored
 outside the Electron ASAR inside the package so Chromium can stream them
 directly.
 
@@ -109,6 +109,6 @@ into the current state; integrations do not need to send the whole object.
 ## Content contract
 
 Scene definitions live in [`assets/scene-manifest.json`](assets/scene-manifest.json).
-The first pilot contains ten scenes totaling exactly 300 seconds. Action scenes
+The collection contains sixteen scenes totaling exactly 420 seconds. Action scenes
 are fictional and cinematic; the runtime contains no procedural weapons or
 explosives instructions.

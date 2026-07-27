@@ -57,4 +57,4 @@ was launched with its screenshot argument and exited with code 0 after
 capturing a frame labeled `GENERATED MOTION · 30 FPS`.
 
 GitHub Actions builds and uploads this preview executable on every iteration.
-The strict production artifact remains gated on all ten verified full masters.
+The strict production artifact remains gated on all sixteen verified full masters.

@@ -42,6 +42,9 @@ let audioState = null;
 let nextReactiveCheck = 0;
 
 function sceneAsset(index, scene) {
+  if (scene.source) {
+    return new URL(`../../${scene.source}`, import.meta.url).href;
+  }
   return new URL(
     `../../assets/scenes/${String(index + 1).padStart(2, "0")}-${scene.id}.png`,
     import.meta.url

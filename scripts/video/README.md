@@ -1,6 +1,6 @@
 # Radiance video pipeline
 
-This pipeline turns the ten original Radiance scene frames into genuine
+This pipeline turns the Radiance scene anchors into genuine
 image-to-video diffusion clips at 30 fps. It uses the official open-source
 FramePack runtime locally; the camera is explicitly locked and prompts require
 physical character, hair, garment, and environment motion.
@@ -58,6 +58,12 @@ Render every full scene in sequence:
 
 ```powershell
 npm run video:all
+```
+
+Render only the six 20-second HQ enrichment scenes:
+
+```powershell
+npm run video:enrich
 ```
 
 Scene prompts, deterministic seeds, source frames, and target durations are in
