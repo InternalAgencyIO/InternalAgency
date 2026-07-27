@@ -4,6 +4,11 @@ const path = require("node:path");
 
 const ROOT = path.resolve(__dirname, "..");
 const screenshotArg = process.argv.find((arg) => arg.startsWith("--screenshot="));
+const screenshotDelayArg = process.argv.find((arg) => arg.startsWith("--screenshot-delay="));
+const screenshotDelay = Math.max(
+  250,
+  Number(screenshotDelayArg?.slice("--screenshot-delay=".length)) || 1800
+);
 let overlay;
 
 function createOverlay() {
@@ -35,7 +40,7 @@ function createOverlay() {
 
   if (screenshotArg) {
     overlay.webContents.once("did-finish-load", async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1800));
+      await new Promise((resolve) => setTimeout(resolve, screenshotDelay));
       const output = path.resolve(ROOT, screenshotArg.slice("--screenshot=".length));
       await fs.mkdir(path.dirname(output), { recursive: true });
       const image = await overlay.capturePage();

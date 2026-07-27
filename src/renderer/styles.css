@@ -4,7 +4,7 @@
   --gold: #e7c47a;
   --ice: #d9efff;
   --ink: #050711;
-  --scene-duration: 28s;
+  --motion-duration: 9s;
   --drift-x: 2.2%;
   --drift-y: -1.2%;
   --zoom: 1.08;
@@ -61,7 +61,7 @@ select {
   height: 106%;
   object-fit: cover;
   filter: saturate(1.06) contrast(1.03);
-  animation: cinematic-drift var(--scene-duration) cubic-bezier(0.42, 0, 0.2, 1) infinite alternate;
+  animation: cinematic-drift var(--motion-duration) cubic-bezier(0.45, 0, 0.18, 1) infinite alternate;
   transform-origin: 50% 54%;
   opacity: 1;
   transition: opacity 420ms ease, filter 420ms ease;
@@ -75,13 +75,20 @@ select {
 
 @keyframes cinematic-drift {
   0% {
-    transform: translate3d(calc(var(--drift-x) * -0.35), calc(var(--drift-y) * -0.35), 0) scale(1.025);
+    transform: translate3d(calc(var(--drift-x) * -0.7), calc(var(--drift-y) * -0.7), 0) scale(1.025);
+    filter: saturate(1.02) contrast(1.03) brightness(0.96);
   }
-  48% {
-    transform: translate3d(0, 0, 0) scale(var(--zoom));
+  35% {
+    transform: translate3d(calc(var(--drift-x) * 0.25), calc(var(--drift-y) * -0.25), 0) scale(var(--zoom));
+    filter: saturate(1.08) contrast(1.035) brightness(1.02);
+  }
+  68% {
+    transform: translate3d(var(--drift-x), var(--drift-y), 0) scale(calc(var(--zoom) + 0.025));
+    filter: saturate(1.11) contrast(1.04) brightness(1.045);
   }
   100% {
-    transform: translate3d(var(--drift-x), var(--drift-y), 0) scale(calc(var(--zoom) + 0.025));
+    transform: translate3d(calc(var(--drift-x) * -0.18), calc(var(--drift-y) * 0.5), 0) scale(calc(var(--zoom) - 0.005));
+    filter: saturate(1.05) contrast(1.03) brightness(0.985);
   }
 }
 
@@ -104,7 +111,7 @@ select {
   background:
     radial-gradient(circle at 82% 17%, rgba(93, 177, 255, 0.2), transparent 32%),
     linear-gradient(115deg, transparent 35%, rgba(231, 196, 122, 0.1) 49%, transparent 62%);
-  animation: light-sweep 11s ease-in-out infinite alternate;
+  animation: light-sweep 6.5s cubic-bezier(0.45, 0, 0.2, 1) infinite alternate;
 }
 
 @keyframes light-sweep {
@@ -425,9 +432,14 @@ select {
   transform: scaleY(1.8);
 }
 
+.stage.paused .scene-image,
+.stage.paused .light-leak,
+.stage.paused .listen-dot {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .scene-image,
-  .light-leak {
-    animation: none;
+  :root {
+    --motion-duration: 12s;
   }
 }

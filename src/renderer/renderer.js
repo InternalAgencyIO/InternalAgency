@@ -95,7 +95,7 @@ async function showScene(index, immediate = false) {
   $("#scene-title").textContent = titleCase(scene.id);
   $("#scene-action").textContent = scene.action;
   $("#scene-outfit").textContent = scene.outfit;
-  stage.style.setProperty("--scene-duration", `${Math.max(scene.durationSeconds, 18)}s`);
+  stage.style.setProperty("--motion-duration", `${8 + (scheduler.index % 4) * 0.9}s`);
   stage.style.setProperty("--drift-x", motion.x);
   stage.style.setProperty("--drift-y", motion.y);
   stage.style.setProperty("--zoom", motion.zoom);
@@ -302,6 +302,7 @@ $("#previous").addEventListener("click", () => showScene(scheduler.index - 1));
 $("#next").addEventListener("click", () => showScene(scheduler.index + 1));
 playButton.addEventListener("click", () => {
   playing = !playing;
+  stage.classList.toggle("paused", !playing);
   playButton.textContent = playing ? "Ⅱ" : "▶";
   playButton.title = playing ? "Pause" : "Play";
 });
@@ -328,6 +329,7 @@ async function initialize() {
   renderDots();
   resizeCanvas();
   await showScene(0, true);
+  $("#status").textContent = "MOTION ENGINE · ACTIVE";
   requestAnimationFrame(tick);
 }
 
