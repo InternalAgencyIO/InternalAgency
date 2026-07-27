@@ -39,6 +39,16 @@ run unless all ten full videos are present and verified. Videos are stored
 outside the Electron ASAR inside the package so Chromium can stream them
 directly.
 
+During content production, a standalone preview can be built from the available
+draft videos and original-frame fallbacks:
+
+```powershell
+npm run dist:preview
+```
+
+The preview performs no generation or model download. The strict `npm run dist`
+command remains the production gate and requires every verified full master.
+
 ### Development proof
 
 Radiance is archived as a sequence of reproducible, reviewable milestones. See

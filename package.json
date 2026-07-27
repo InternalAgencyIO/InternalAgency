@@ -11,6 +11,7 @@
     "dev": "electron . --dev",
     "pack": "node scripts/validate-video-assets.mjs && electron-builder --dir --win --x64",
     "dist": "node scripts/validate-video-assets.mjs && electron-builder --win portable --x64",
+    "dist:preview": "electron-builder --win portable --x64 --config.artifactName=Radiance-preview-${version}-portable.${ext}",
     "install:pet": "node scripts/install-pet.cjs",
     "video:server": "powershell -ExecutionPolicy Bypass -File scripts/video/start-framepack.ps1",
     "video:scene": "powershell -ExecutionPolicy Bypass -File scripts/video/render-scene.ps1",
