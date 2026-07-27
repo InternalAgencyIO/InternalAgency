@@ -12,6 +12,9 @@ import {
 const manifest = JSON.parse(
   fs.readFileSync(new URL("../assets/scene-manifest.json", import.meta.url), "utf8")
 );
+const videoConfig = JSON.parse(
+  fs.readFileSync(new URL("../scripts/video/scenes.json", import.meta.url), "utf8")
+);
 
 test("pilot is exactly ten scenes and five minutes", () => {
   const scheduler = new SceneScheduler(manifest.scenes);
@@ -64,4 +67,18 @@ test("milestones override other matching cues with the finale", () => {
     session: { milestone: true }
   });
   assert.equal(selectReactiveScene(manifest.scenes, signal)?.id, "red-heel-finale");
+});
+
+test("every scene has a locked-camera 30 fps video specification", () => {
+  assert.equal(videoConfig.fps, 30);
+  assert.equal(videoConfig.scenes.length, manifest.scenes.length);
+  assert.equal(
+    videoConfig.scenes.reduce((sum, scene) => sum + scene.durationSeconds, 0),
+    300
+  );
+  for (const scene of videoConfig.scenes) {
+    assert.match(scene.prompt, /locked camera|locked tracking position/i);
+    assert.match(scene.prompt, /no zoom/i);
+    assert.ok(fs.existsSync(new URL(`../${scene.source}`, import.meta.url)));
+  }
 });

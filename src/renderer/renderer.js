@@ -7,6 +7,7 @@ import {
 
 const $ = (selector) => document.querySelector(selector);
 const image = $("#scene-image");
+const sceneVideo = $("#scene-video");
 const sceneCopy = $(".scene-copy");
 const stage = $("#stage");
 const progress = $("#progress");
@@ -45,6 +46,53 @@ function sceneAsset(index, scene) {
     `../../assets/scenes/${String(index + 1).padStart(2, "0")}-${scene.id}.png`,
     import.meta.url
   ).href;
+}
+
+function videoAsset(scene, suffix) {
+  return new URL(
+    `../../assets/videos/${scene.id}-${suffix}-30fps.mp4`,
+    import.meta.url
+  ).href;
+}
+
+function tryVideo(url) {
+  return new Promise((resolve) => {
+    const cleanup = () => {
+      sceneVideo.removeEventListener("loadedmetadata", loaded);
+      sceneVideo.removeEventListener("error", failed);
+    };
+    const loaded = () => {
+      cleanup();
+      resolve(true);
+    };
+    const failed = () => {
+      cleanup();
+      resolve(false);
+    };
+    sceneVideo.addEventListener("loadedmetadata", loaded, { once: true });
+    sceneVideo.addEventListener("error", failed, { once: true });
+    sceneVideo.src = url;
+    sceneVideo.load();
+  });
+}
+
+async function loadSceneMedia(index, scene) {
+  sceneVideo.pause();
+  stage.classList.remove("video-active");
+  image.src = sceneAsset(index, scene);
+  image.alt = `${titleCase(scene.id)} — ${scene.setting}`;
+
+  for (const suffix of ["full", "draft"]) {
+    if (await tryVideo(videoAsset(scene, suffix))) {
+      stage.classList.add("video-active");
+      sceneVideo.currentTime = 0;
+      if (playing) await sceneVideo.play();
+      $("#status").textContent = "GENERATED MOTION · 30 FPS";
+      return;
+    }
+  }
+  sceneVideo.removeAttribute("src");
+  $("#status").textContent = "MOTION GENERATION PENDING";
 }
 
 function titleCase(value) {
@@ -88,8 +136,7 @@ async function showScene(index, immediate = false) {
     await new Promise((resolve) => setTimeout(resolve, 360));
   }
 
-  image.src = sceneAsset(scheduler.index, scene);
-  image.alt = `${titleCase(scene.id)} — ${scene.setting}`;
+  await loadSceneMedia(scheduler.index, scene);
   $("#scene-number").textContent =
     `SCENE ${String(scheduler.index + 1).padStart(2, "0")} · 00:${String(scene.durationSeconds).padStart(2, "0")}`;
   $("#scene-title").textContent = titleCase(scene.id);
@@ -303,6 +350,10 @@ $("#next").addEventListener("click", () => showScene(scheduler.index + 1));
 playButton.addEventListener("click", () => {
   playing = !playing;
   stage.classList.toggle("paused", !playing);
+  if (stage.classList.contains("video-active")) {
+    if (playing) sceneVideo.play();
+    else sceneVideo.pause();
+  }
   playButton.textContent = playing ? "Ⅱ" : "▶";
   playButton.title = playing ? "Pause" : "Play";
 });
@@ -329,7 +380,6 @@ async function initialize() {
   renderDots();
   resizeCanvas();
   await showScene(0, true);
-  $("#status").textContent = "MOTION ENGINE · ACTIVE";
   requestAnimationFrame(tick);
 }
 

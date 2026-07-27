@@ -6,8 +6,9 @@ Internal Agency Dev Network Main.
 
 Radiance now has a cinematic desktop runtime in addition to her standard Codex
 pet. It plays ten high-fashion scenes (five minutes back-to-back), animates them
-with continuous GPU-friendly motion, and can react to system audio or explicit
-activity signals.
+as generated 30 fps image-to-video clips, and can react to system audio or
+explicit activity signals. While a clip is still being generated, the overlay
+uses its original scene frame as a temporary fallback.
 
 ### Run it
 
@@ -42,6 +43,20 @@ npm run smoke
 
 `npm run smoke` saves `artifacts/radiance-overlay.png` without leaving the
 overlay open.
+
+### Generate true-motion videos
+
+The project includes a local FramePack image-to-video pipeline for NVIDIA RTX
+GPUs. It starts with each original Radiance scene frame and generates physical
+character, hair, fabric, and environment motion with a locked camera:
+
+```powershell
+npm run video:server
+npm run video:scene -- -Scene neon-listening-lounge -Duration 5
+```
+
+See [`scripts/video/README.md`](scripts/video/README.md) for installation,
+full-scene rendering, and output details.
 
 ## Runtime signals
 

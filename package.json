@@ -9,7 +9,9 @@
     "start": "electron .",
     "dev": "electron . --dev",
     "install:pet": "node scripts/install-pet.cjs",
-    "test": "node --test",
+    "video:server": "powershell -ExecutionPolicy Bypass -File scripts/video/start-framepack.ps1",
+    "video:scene": "powershell -ExecutionPolicy Bypass -File scripts/video/render-scene.ps1",
+    "test": "node --test test/scene-engine.test.js",
     "smoke": "electron . --screenshot=artifacts/radiance-overlay.png"
   },
   "devDependencies": {

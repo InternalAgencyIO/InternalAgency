@@ -13,7 +13,16 @@
   <body>
     <main class="shell" id="shell">
       <section class="stage" id="stage" aria-live="polite">
-        <img id="scene-image" class="scene-image" alt="" />
+        <img id="scene-image" class="scene-image scene-media" alt="" />
+        <video
+          id="scene-video"
+          class="scene-video scene-media"
+          muted
+          loop
+          playsinline
+          preload="auto"
+          aria-label="Generated Radiance scene animation"
+        ></video>
         <canvas id="atmosphere" class="atmosphere"></canvas>
         <div class="light-leak" aria-hidden="true"></div>
         <div class="vignette" aria-hidden="true"></div>
