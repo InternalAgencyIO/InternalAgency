@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'"
+    />
+    <title>Radiance</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell" id="shell">
+      <section class="stage" id="stage" aria-live="polite">
+        <img id="scene-image" class="scene-image" alt="" />
+        <canvas id="atmosphere" class="atmosphere"></canvas>
+        <div class="light-leak" aria-hidden="true"></div>
+        <div class="vignette" aria-hidden="true"></div>
+
+        <header class="topbar">
+          <div class="identity">
+            <span class="sigil" aria-hidden="true">R</span>
+            <div>
+              <strong>RADIANCE</strong>
+              <span id="status">CINEMATIC PILOT</span>
+            </div>
+          </div>
+          <div class="window-actions">
+            <button id="pin" class="icon-button active" title="Always on top" aria-label="Always on top">◆</button>
+            <button id="minimize" class="icon-button" title="Minimize" aria-label="Minimize">—</button>
+            <button id="close" class="icon-button" title="Close" aria-label="Close">×</button>
+          </div>
+        </header>
+
+        <div class="scene-copy">
+          <p id="scene-number" class="eyebrow">SCENE 01 · 00:28</p>
+          <h1 id="scene-title">Neon Listening Lounge</h1>
+          <p id="scene-action"></p>
+          <p id="scene-outfit" class="outfit"></p>
+        </div>
+
+        <aside class="telemetry">
+          <span id="mode-label">SEQUENCE</span>
+          <span class="rule"></span>
+          <span id="bpm">— BPM</span>
+          <i id="audio-pulse"></i>
+        </aside>
+
+        <footer class="controls">
+          <div class="progress-track"><i id="progress"></i></div>
+          <div class="control-row">
+            <button id="previous" class="round-button" title="Previous scene" aria-label="Previous scene">‹</button>
+            <button id="play" class="play-button" title="Pause" aria-label="Pause">Ⅱ</button>
+            <button id="next" class="round-button" title="Next scene" aria-label="Next scene">›</button>
+
+            <label class="mode-select">
+              <span>MODE</span>
+              <select id="mode">
+                <option value="sequence">Sequence</option>
+                <option value="reactive">Reactive</option>
+                <option value="techno">Techno</option>
+                <option value="operator">Operator</option>
+                <option value="away">Away</option>
+                <option value="finale">Finale</option>
+              </select>
+            </label>
+
+            <button id="listen" class="listen-button" title="Listen to system audio">
+              <span class="listen-dot"></span>
+              LISTEN
+            </button>
+          </div>
+          <nav id="scene-dots" class="scene-dots" aria-label="Scenes"></nav>
+        </footer>
+      </section>
+    </main>
+    <script type="module" src="./renderer.js"></script>
+  </body>
+</html>

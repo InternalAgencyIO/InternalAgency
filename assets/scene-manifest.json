@@ -1,0 +1,93 @@
+{
+  "title": "Radiance: Reactive Pilot One",
+  "version": 1,
+  "totalDurationSeconds": 300,
+  "identityAnchor": "Radiance: blonde curls, bright blue eyes, elegant proportions, navy-and-gold signature palette, red heels, poised warmth, brilliant AI-operator presence.",
+  "direction": {
+    "tone": "beauty, high fashion, intelligence, warmth, courage, and cinematic competence",
+    "motion": "slow continuous arcs, restrained body sway, fabric and hair follow-through, graceful anticipation and settle; never jittery or pixel-like",
+    "safety": "all action is fictional and cinematic; no procedural depiction of weapons or explosives"
+  },
+  "scenes": [
+    {
+      "id": "neon-listening-lounge",
+      "durationSeconds": 28,
+      "trigger": "music.techno && bpm >= 90 && bpm < 126",
+      "outfit": "navy liquid-satin evening dress, gold ear cuff, red heels",
+      "action": "A slow, self-assured techno sway with butterfly-light turns, hair and dress following one beat behind.",
+      "setting": "midnight listening lounge with soft cobalt light and abstract equalizer reflections"
+    },
+    {
+      "id": "chrome-catwalk",
+      "durationSeconds": 28,
+      "trigger": "music.techno && bpm >= 126",
+      "outfit": "architectural chrome-and-midnight couture coat over a sleek navy mini dress",
+      "action": "A measured runway walk, pivot, coat reveal, and knowing over-the-shoulder glance.",
+      "setting": "mirrored black catwalk with narrow white light bars"
+    },
+    {
+      "id": "orbit-pole-ballet",
+      "durationSeconds": 32,
+      "trigger": "music.techno && energy == 'hypnotic'",
+      "outfit": "tasteful midnight performance bodysuit with asymmetric chiffon panels and red heels",
+      "action": "Elegant slow pole choreography inspired by contemporary dance: controlled orbit, extended line, gentle descent, poised finish.",
+      "setting": "minimal circular stage with a polished chrome pole and deep blue theatrical light"
+    },
+    {
+      "id": "world-operator",
+      "durationSeconds": 30,
+      "trigger": "task.state == 'running' && task.kind == 'analysis'",
+      "outfit": "navy couture command suit with gold piping and red heels",
+      "action": "Radiance studies a floating globe of abstract signals, makes one decisive gesture, and calmly resolves the crisis.",
+      "setting": "elegant near-future operations room with translucent data light, no readable UI text"
+    },
+    {
+      "id": "rooftop-signal-hunt",
+      "durationSeconds": 30,
+      "trigger": "task.state == 'running' && task.kind == 'search'",
+      "outfit": "long midnight trench coat, silk blouse, tailored trousers, red heels",
+      "action": "Wind catches her coat and hair as she tracks a distant signal, turns, and strides toward the answer.",
+      "setting": "rain-polished rooftop above a luminous city before dawn"
+    },
+    {
+      "id": "containment-run",
+      "durationSeconds": 32,
+      "trigger": "task.state == 'running' && urgency == 'high'",
+      "outfit": "high-fashion navy tactical tailoring with gold hardware, protective gloves, red-soled boots",
+      "action": "She carries a sealed fictional containment case through a dramatic corridor, alert but composed.",
+      "setting": "cinematic secure facility with amber warning light and no technical labels"
+    },
+    {
+      "id": "controlled-breach",
+      "durationSeconds": 32,
+      "trigger": "task.state == 'running' && plan == 'bold'",
+      "outfit": "structured midnight cape dress, protective eyewear lifted above her eyes, red boots",
+      "action": "Radiance walks away from a distant stylized controlled breach, cape and curls moving in the pressure wave; no device detail.",
+      "setting": "fictional industrial test range at night, explosion safely far behind her"
+    },
+    {
+      "id": "velvet-reset",
+      "durationSeconds": 28,
+      "trigger": "task.state == 'waiting' || user.away == true",
+      "outfit": "three rapid couture looks: sapphire column gown, white sculptural suit, black velvet cocktail dress",
+      "action": "A mirror-room wardrobe transformation with graceful turns and a playful final choice.",
+      "setting": "warm mirrored dressing salon with velvet curtains and soft gold light"
+    },
+    {
+      "id": "dawn-data-garden",
+      "durationSeconds": 30,
+      "trigger": "task.state == 'review' && outcome == 'success'",
+      "outfit": "soft ivory-and-navy silk dress with delicate gold details and red heels",
+      "action": "Abstract data lights become living flowers as she walks through them, smiles, and releases a luminous butterfly.",
+      "setting": "rooftop garden at sunrise overlooking a peaceful city"
+    },
+    {
+      "id": "red-heel-finale",
+      "durationSeconds": 30,
+      "trigger": "session.milestone == true || music.outro == true",
+      "outfit": "signature navy gown with gold waist detail and iconic red heels",
+      "action": "A confident slow dance reprise, elegant turn, direct warm glance, and small theatrical bow.",
+      "setting": "dark stage opening into a star-like field of blue and gold light"
+    }
+  ]
+}
