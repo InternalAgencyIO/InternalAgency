@@ -10,6 +10,7 @@ $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
 $python = Join-Path $repoRoot "tools\framepack-runtime\framepack_cu126_torch26\system\python\python.exe"
 $script = Join-Path $PSScriptRoot "render-framepack.py"
+$env:PYTHONUTF8 = "1"
 
 if (-not (Test-Path -LiteralPath $python)) {
   throw "FramePack runtime is missing. Follow scripts/video/README.md."

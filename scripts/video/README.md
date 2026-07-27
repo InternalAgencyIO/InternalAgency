@@ -35,6 +35,15 @@ npm run video:server
 The first start downloads more than 30 GB of official model weights. Once the
 server reaches `http://127.0.0.1:7861`, render a short proof:
 
+The launcher defaults to low-RAM model storage: the two large models remain FP8
+on CPU and each active layer is cast to bf16/fp16 on the GPU. This is useful on
+authoring machines that also run VMs. To use the official full-precision
+in-memory path instead:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/video/start-framepack.ps1 -FullPrecision
+```
+
 ```powershell
 npm run video:scene -- -Scene neon-listening-lounge -Duration 5
 ```

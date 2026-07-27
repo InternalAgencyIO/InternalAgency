@@ -1,5 +1,6 @@
 param(
-  [int]$Port = 7861
+  [int]$Port = 7861,
+  [switch]$FullPrecision
 )
 
 $ErrorActionPreference = "Stop"
@@ -28,10 +29,16 @@ $env:PATH = (Join-Path $bundle "system\git\bin") + ";" +
 # downloader is slower but provides resumable on-disk progress reliably.
 $env:HF_HUB_DISABLE_XET = "1"
 
+$entrypoint = "demo_gradio.py"
+if (-not $FullPrecision) {
+  & (Join-Path $PSScriptRoot "prepare-lowram-framepack.ps1") -ServerRoot $server
+  $entrypoint = "demo_gradio_lowram.py"
+}
+
 $outLog = Join-Path $runtimeRoot "framepack-server.out.log"
 $errLog = Join-Path $runtimeRoot "framepack-server.err.log"
 $process = Start-Process -FilePath $python `
-  -ArgumentList @("demo_gradio.py", "--server", "127.0.0.1", "--port", "$Port") `
+  -ArgumentList @($entrypoint, "--server", "127.0.0.1", "--port", "$Port") `
   -WorkingDirectory $server `
   -WindowStyle Hidden `
   -RedirectStandardOutput $outLog `
@@ -39,4 +46,5 @@ $process = Start-Process -FilePath $python `
   -PassThru
 
 Write-Output "FramePack starting on http://127.0.0.1:$Port (PID $($process.Id))."
+Write-Output "Model storage: $(if ($FullPrecision) { 'full precision' } else { 'FP8 low-RAM; bf16/fp16 compute' })."
 Write-Output "First start downloads the official models. Logs: $errLog"

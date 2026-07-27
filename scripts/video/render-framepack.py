@@ -92,7 +92,12 @@ def main() -> None:
         api_name="/process",
     )
 
-    generated = Path(result[0] if isinstance(result, (tuple, list)) else result)
+    generated_result = result[0] if isinstance(result, (tuple, list)) else result
+    if isinstance(generated_result, dict):
+        generated_result = generated_result.get("video") or generated_result.get("path")
+    if not generated_result:
+        raise RuntimeError(f"FramePack did not return a video path: {result!r}")
+    generated = Path(generated_result)
     output_dir = repo / "assets" / "videos"
     output_dir.mkdir(parents=True, exist_ok=True)
     suffix = "draft" if args.duration else "full"
