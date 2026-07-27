@@ -9,7 +9,14 @@
 | Project | What it is | Public record | Status |
 | --- | --- | --- | --- |
 | **Radiance** | A living high-fashion AI desktop companion. | Source, scene manifest, local production flow, tests, and releases live in this repository. | Active |
-| **STAR ASCENT** | A bilingual public culture, launch, and evidence project. | [Repository architecture](docs/REPOSITORY_ARCHITECTURE.md) and [migration marker](projects/star-ascent/README.md). Dedicated public repositories are being seeded. | Live build |
+| **STAR ASCENT** | A bilingual public culture, launch, and evidence project. | [Live source](projects/star-ascent/site), [project guide](projects/star-ascent/README.md), [English site](https://internalagency.io), [Turkish site](https://ileriakil.com). | Live build |
+
+## STAR ASCENT — live public build
+
+The complete, reproducible English and Turkish website source now lives in
+[`projects/star-ascent/site`](projects/star-ascent/site). It includes the public
+site, Dossier, launch flow, source archive, and validation scripts used by the
+live build. Radiance remains a separate active project.
 
 ## Start here
 
