@@ -48,3 +48,13 @@ reproducible low-RAM mode:
 
 The shipped app contains none of these model weights. It contains only the
 pre-rendered MP4 masters, so playback is immediate and offline.
+
+## Standalone proof
+
+`npm run dist:preview` builds a portable Windows executable containing the
+available generated clips and original-frame fallbacks. The packaged iteration
+was launched with its screenshot argument and exited with code 0 after
+capturing a frame labeled `GENERATED MOTION · 30 FPS`.
+
+GitHub Actions builds and uploads this preview executable on every iteration.
+The strict production artifact remains gated on all ten verified full masters.

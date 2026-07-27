@@ -19,6 +19,25 @@ jobs:
       - run: npm ci
       - run: npm test
 
+  preview:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run dist:preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: radiance-windows-preview
+          path: release/Radiance-preview-*-portable.exe
+          if-no-files-found: error
+          retention-days: 30
+
   standalone:
     if: ${{ hashFiles('assets/videos/manifest.json') != '' }}
     runs-on: windows-latest
