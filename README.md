@@ -80,7 +80,7 @@ parties, and quiet encounters with the wider world.
   <img src="assets/lore/starlight-era/20-starlight-roller-disco.png" width="23%" alt="Radiance roller skating">
 </p>
 
-Explore all twenty high-resolution memories in
+Explore the growing high-resolution collection in
 **[Radiance: The Starlight Era](assets/lore/starlight-era/README.md)**. Every
 image is preserved as a future animation anchor, avatar memory, and wardrobe
 reference.

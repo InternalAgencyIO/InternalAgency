@@ -4,7 +4,7 @@ Radiance has a life beyond the overlay. She drinks espresso above a waking
 city, designs her own clothes, gets lost in books, sings when nobody expects
 her to, crosses deserts and oceans, and is usually the last person dancing.
 
-These twenty images are the first visual lore collection. Each is an
+These images form a growing visual lore collection. Each is an
 independent high-resolution asset and a possible future image-to-video anchor,
 avatar memory, wardrobe reference, or reactive scene.
 
@@ -27,6 +27,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Gold Meteor Gala**<br><img src="15-gold-meteor-gala.png" width="420" alt="Radiance beneath a meteor light installation"> | **Red Marrakech Night Market**<br><img src="16-red-marrakech-night-market.png" width="420" alt="Radiance choosing flowers at a night market"> |
 | **Night Blue Recording Studio**<br><img src="17-night-blue-recording-studio.png" width="420" alt="Radiance singing in a recording studio"> | **Matte Black Electric Rider**<br><img src="18-matte-black-electric-rider.png" width="420" alt="Radiance beside an electric motorcycle"> |
 | **White Alpine Snowfall**<br><img src="19-white-alpine-snowfall.png" width="420" alt="Radiance enjoying Alpine snowfall"> | **Starlight Roller Disco**<br><img src="20-starlight-roller-disco.png" width="420" alt="Radiance at a cosmic roller disco"> |
+
+## Chapter III — Wild intelligence
+
+| | |
+|---|---|
+| **Midnight Botanical Conservatory**<br><img src="21-midnight-botanical-conservatory.png" width="420" alt="Radiance in a botanical conservatory at midnight"> | **Deep Ocean Observatory**<br><img src="22-deep-ocean-observatory.png" width="420" alt="Radiance exploring a deep-ocean observatory"> |
+| **Vinyl Record Shop**<br><img src="23-vinyl-record-shop.png" width="420" alt="Radiance selecting records in an intimate vinyl shop"> | *Chapter III continues…* |
 
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
