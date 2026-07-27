@@ -56,6 +56,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Tokyo Rain Arcade**<br><img src="32-tokyo-rain-arcade.png" width="420" alt="Radiance playing in a neon arcade after rain"> | **Marble Tea Ritual**<br><img src="33-marble-tea-ritual.png" width="420" alt="Radiance pouring tea in a marble garden pavilion"> |
 | **Orbital Greenhouse**<br><img src="34-orbital-greenhouse.png" width="420" alt="Radiance inspecting plants in an orbital greenhouse"> | **Observatory Piano**<br><img src="35-observatory-piano.png" width="420" alt="Radiance beside a piano in a mountaintop observatory"> |
 
+## Forty Fresh Worlds — Batch 4
+
+| | |
+|---|---|
+| **Monaco Regatta**<br><img src="36-monaco-regatta.png" width="420" alt="Radiance sailing into a Mediterranean harbor"> | **The Impossible Library**<br><img src="37-impossible-library.png" width="420" alt="Radiance ascending through a gravity-defying library"> |
+| **Midnight Pit Lane**<br><img src="38-midnight-pit-lane.png" width="420" alt="Radiance working as a race engineer at midnight"> | **Winter Palace Masquerade**<br><img src="39-winter-palace-masquerade.png" width="420" alt="Radiance in an ice-blue winter palace ballroom"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
