@@ -1,0 +1,40 @@
+name: Radiance proof
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  standalone:
+    if: ${{ hashFiles('assets/videos/manifest.json') != '' }}
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: radiance-windows-portable
+          path: release/Radiance-*-portable.exe
+          if-no-files-found: error
+          retention-days: 30

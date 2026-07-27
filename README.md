@@ -39,6 +39,14 @@ run unless all ten full videos are present and verified. Videos are stored
 outside the Electron ASAR inside the package so Chromium can stream them
 directly.
 
+### Development proof
+
+Radiance is archived as a sequence of reproducible, reviewable milestones. See
+[`docs/iterations/README.md`](docs/iterations/README.md) for the commit ledger
+and [`docs/PRODUCTION.md`](docs/PRODUCTION.md) for the production gate. GitHub
+Actions runs the source checks on every push and builds the portable executable
+as soon as the verified video manifest is present.
+
 ### Install the matching Codex pet
 
 ```powershell
