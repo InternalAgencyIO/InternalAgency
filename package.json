@@ -2,6 +2,7 @@
   "name": "@internalagency/radiance-overlay",
   "version": "0.1.0",
   "description": "A cinematic, audio-reactive desktop runtime for Radiance.",
+  "author": "InternalAgencyIO",
   "private": true,
   "productName": "Radiance",
   "type": "module",
@@ -11,7 +12,7 @@
     "dev": "electron . --dev",
     "pack": "node scripts/validate-video-assets.mjs && electron-builder --dir --win --x64",
     "dist": "node scripts/validate-video-assets.mjs && electron-builder --win portable --x64",
-    "dist:preview": "electron-builder --win portable --x64 --config.artifactName=Radiance-preview-${version}-portable.${ext}",
+    "dist:preview": "electron-builder --win portable --x64 --config.win.artifactName=Radiance-preview-${version}-portable.${ext}",
     "install:pet": "node scripts/install-pet.cjs",
     "video:server": "powershell -ExecutionPolicy Bypass -File scripts/video/start-framepack.ps1",
     "video:scene": "powershell -ExecutionPolicy Bypass -File scripts/video/render-scene.ps1",
@@ -40,9 +41,11 @@
       "package.json"
     ],
     "directories": {
+      "buildResources": "build",
       "output": "release"
     },
     "win": {
+      "icon": "build/icon.ico",
       "target": [
         "portable"
       ],
