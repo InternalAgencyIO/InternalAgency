@@ -49,6 +49,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Desert Solar Airship**<br><img src="28-desert-solar-airship.png" width="420" alt="Radiance aboard a solar airship above the desert"> | **Bioluminescent Lagoon**<br><img src="29-bioluminescent-lagoon.png" width="420" alt="Radiance beside a glowing tropical lagoon"> |
 | **Three A.M. Chess Salon**<br><img src="30-three-am-chess-salon.png" width="420" alt="Radiance in a private midnight chess salon"> | **Cosmic Couture Workroom**<br><img src="31-cosmic-couture-workroom.png" width="420" alt="Radiance creating a starlight gown"> |
 
+## Forty Fresh Worlds — Batch 3
+
+| | |
+|---|---|
+| **Tokyo Rain Arcade**<br><img src="32-tokyo-rain-arcade.png" width="420" alt="Radiance playing in a neon arcade after rain"> | **Marble Tea Ritual**<br><img src="33-marble-tea-ritual.png" width="420" alt="Radiance pouring tea in a marble garden pavilion"> |
+| **Orbital Greenhouse**<br><img src="34-orbital-greenhouse.png" width="420" alt="Radiance inspecting plants in an orbital greenhouse"> | **Observatory Piano**<br><img src="35-observatory-piano.png" width="420" alt="Radiance beside a piano in a mountaintop observatory"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
