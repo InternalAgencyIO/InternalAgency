@@ -63,6 +63,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Monaco Regatta**<br><img src="36-monaco-regatta.png" width="420" alt="Radiance sailing into a Mediterranean harbor"> | **The Impossible Library**<br><img src="37-impossible-library.png" width="420" alt="Radiance ascending through a gravity-defying library"> |
 | **Midnight Pit Lane**<br><img src="38-midnight-pit-lane.png" width="420" alt="Radiance working as a race engineer at midnight"> | **Winter Palace Masquerade**<br><img src="39-winter-palace-masquerade.png" width="420" alt="Radiance in an ice-blue winter palace ballroom"> |
 
+## Forty Fresh Worlds — Batch 5
+
+| | |
+|---|---|
+| **Sunken Ballroom**<br><img src="40-sunken-ballroom.png" width="420" alt="Radiance relighting a restored underwater palace ballroom"> | **Rooftop Flight Departure**<br><img src="41-rooftop-flight-departure.png" width="420" alt="Radiance preparing to depart from a rooftop flight pad at dawn"> |
+| **Vinyl Mastering Suite**<br><img src="42-vinyl-mastering-suite.png" width="420" alt="Radiance mastering a record in an analog studio"> | **Fire Lookout**<br><img src="43-fire-lookout.png" width="420" alt="Radiance reading the weather from a mountain fire lookout"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
