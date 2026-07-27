@@ -70,6 +70,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Sunken Ballroom**<br><img src="40-sunken-ballroom.png" width="420" alt="Radiance relighting a restored underwater palace ballroom"> | **Rooftop Flight Departure**<br><img src="41-rooftop-flight-departure.png" width="420" alt="Radiance preparing to depart from a rooftop flight pad at dawn"> |
 | **Vinyl Mastering Suite**<br><img src="42-vinyl-mastering-suite.png" width="420" alt="Radiance mastering a record in an analog studio"> | **Fire Lookout**<br><img src="43-fire-lookout.png" width="420" alt="Radiance reading the weather from a mountain fire lookout"> |
 
+## Forty Fresh Worlds — Batch 6: Paris Couture
+
+| | |
+|---|---|
+| **Palais Galliera After Dark**<br><img src="44-palais-galliera-after-dark.png" width="420" alt="Radiance walking through a Paris fashion museum after dark"> | **Seine Couture Dawn**<br><img src="45-seine-couture-dawn.png" width="420" alt="Radiance overlooking the Seine in liquid-gold couture at dawn"> |
+| **Palais Garnier Final Fitting**<br><img src="46-palais-garnier-final-fitting.png" width="420" alt="Radiance completing a midnight-blue couture fitting at the Paris opera"> | **Rue Saint-Honoré Afterparty**<br><img src="47-rue-saint-honore-afterparty.png" width="420" alt="Radiance crossing a rain-lit Paris courtyard after fashion week"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
