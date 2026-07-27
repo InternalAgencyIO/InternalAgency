@@ -33,7 +33,7 @@ export default function SignalPage() {
       <a href="/"><small>01 // ROOT</small><strong>{t.site}</strong><span>↗</span></a>
       <a href="/dossier"><small>02 // RECORD</small><strong>{t.dossier}</strong><span>↗</span></a>
       <a href="/#genesis-console-title"><small>03 // PREPARE</small><strong>{t.terminal}</strong><span>↗</span></a>
-      <a href="/#schedule"><small>04 // WITNESS</small><strong>{t.broadcast}</strong><span>↓</span></a>
+      <a href="/launch"><small>04 // WITNESS</small><strong>{t.broadcast}</strong><span>↗</span></a>
     </section>
     <section className="signal-social"><p>{t.status}</p><div><i>◉</i><i>○</i><i>◉</i><i>○</i><i>◉</i></div><strong>{t.note}</strong></section>
     <footer>{t.safety}</footer>
