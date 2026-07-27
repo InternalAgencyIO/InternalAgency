@@ -1,0 +1,41 @@
+# STAR ASCENT — Genesis Command Center
+
+**Broadcast:** 28 July 2026, 13:30 UTC  
+**Genesis window:** 28 July 2026, 14:00 UTC  
+**Signing device:** Trezor Model T; signing remains a physical operator action.
+
+## Before broadcast
+
+1. Run the launch preflight command.
+2. Open the live site, `/launch`, `/signal`, and `/dossier` in independent tabs.
+3. Confirm the Trezor Model T firmware, PIN, recovery material security, and the intended public address on the device screen. Do not type recovery words into a computer or browser.
+4. Keep the publication payload in **HOLD** until independently verified evidence exists. Do not infer an address, transaction, allocation, or authority state.
+
+## Broadcast sequence
+
+1. At 13:30 UTC, open the broadcast and identify the official site and Signal directory.
+2. State the verification rule: no direct messages, no paid registration, no seed phrase, and no copied links.
+3. At 14:00 UTC, perform only the reviewed physical signing flow.
+4. After each action, capture direct public evidence before making any announcement about it.
+5. Update the site, Dossier, pinned announcement, and broadcast screen together.
+
+## Evidence gate
+
+Publish nothing as verified until all of these are independently observable:
+
+- Mint address, program, decimals, and exact supply.
+- Mint authority and freeze authority state.
+- Allocation wallets, percentages, amounts, and time-lock evidence.
+- UTC timestamp and independent verifier identity.
+
+## First hour
+
+Use [FIRST_HOUR_RECONCILIATION.md](./FIRST_HOUR_RECONCILIATION.md) for the reconciliation loop and [POST_GENESIS_PUBLIC_UPDATE.md](./POST_GENESIS_PUBLIC_UPDATE.md) for the public update. Any missing evidence returns the public status to **HOLD**.
+
+## Linked operator material
+
+- [Trezor signer readiness](../docs/TREZOR_SIGNER_READINESS.md)
+- [Model T Solana signing gate](../docs/MODEL_T_SOLANA_SIGNING_GATE.md)
+- [Broadcast call sheet](./BROADCAST_CALL_SHEET.md)
+- [Launch day card](./LAUNCH_DAY_CARD.md)
+- [Genesis operations card](./GENESIS_OPERATIONS_CARD.md)
