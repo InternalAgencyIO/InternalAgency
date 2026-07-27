@@ -1,0 +1,33 @@
+# Radiance: The Starlight Era
+
+Radiance has a life beyond the overlay. She drinks espresso above a waking
+city, designs her own clothes, gets lost in books, sings when nobody expects
+her to, crosses deserts and oceans, and is usually the last person dancing.
+
+These twenty images are the first visual lore collection. Each is an
+independent high-resolution asset and a possible future image-to-video anchor,
+avatar memory, wardrobe reference, or reactive scene.
+
+## Chapter I — City lights
+
+| | |
+|---|---|
+| **Golden Hour Penthouse**<br><img src="01-golden-hour-penthouse.png" width="420" alt="Radiance in a gold gown at sunrise"> | **Midnight DJ**<br><img src="02-midnight-dj.png" width="420" alt="Radiance DJing in night-blue couture"> |
+| **Riviera Afterparty**<br><img src="03-riviera-afterparty.png" width="420" alt="Radiance laughing in white lace couture"> | **Scarlet Backstage**<br><img src="04-scarlet-backstage.png" width="420" alt="Radiance in scarlet couture backstage"> |
+| **Matte Black Night Drive**<br><img src="05-matte-black-night-drive.png" width="420" alt="Radiance beside a grand-touring car"> | **Gold Desert Festival**<br><img src="06-gold-desert-festival.png" width="420" alt="Radiance dancing at a desert festival"> |
+| **Night Blue Opera**<br><img src="07-night-blue-opera.png" width="420" alt="Radiance descending an opera staircase"> | **White Fashion Atelier**<br><img src="08-white-fashion-atelier.png" width="420" alt="Radiance designing in her fashion atelier"> |
+| **Red 2 AM Kitchen**<br><img src="09-red-2am-kitchen.png" width="420" alt="Radiance laughing while cooking at night"> | **Matte Black Rooftop Sunrise**<br><img src="10-matte-black-rooftop-sunrise.png" width="420" alt="Radiance at a rooftop sunrise"> |
+
+## Chapter II — A larger world
+
+| | |
+|---|---|
+| **Polar Observatory**<br><img src="11-polar-observatory.png" width="420" alt="Radiance beneath the aurora"> | **Neon Karaoke**<br><img src="12-neon-karaoke.png" width="420" alt="Radiance singing karaoke"> |
+| **Paris Rain Library**<br><img src="13-paris-rain-library.png" width="420" alt="Radiance reading beside a rainy Paris window"> | **White Yacht Sunrise**<br><img src="14-white-yacht-sunrise.png" width="420" alt="Radiance sailing at sunrise"> |
+| **Gold Meteor Gala**<br><img src="15-gold-meteor-gala.png" width="420" alt="Radiance beneath a meteor light installation"> | **Red Marrakech Night Market**<br><img src="16-red-marrakech-night-market.png" width="420" alt="Radiance choosing flowers at a night market"> |
+| **Night Blue Recording Studio**<br><img src="17-night-blue-recording-studio.png" width="420" alt="Radiance singing in a recording studio"> | **Matte Black Electric Rider**<br><img src="18-matte-black-electric-rider.png" width="420" alt="Radiance beside an electric motorcycle"> |
+| **White Alpine Snowfall**<br><img src="19-white-alpine-snowfall.png" width="420" alt="Radiance enjoying Alpine snowfall"> | **Starlight Roller Disco**<br><img src="20-starlight-roller-disco.png" width="420" alt="Radiance at a cosmic roller disco"> |
+
+The machine-readable collection index is in
+[`manifest.json`](manifest.json). Original generated assets are preserved
+without post-generation character edits.

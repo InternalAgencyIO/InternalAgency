@@ -67,6 +67,24 @@ sixteen cinematic scenes she moves from neon lounges and chrome catwalks to
 quiet data gardens and fictional world-saving operations—always recognizably
 herself.
 
+### The Starlight Era
+
+Radiance also has a life beyond her active animations: mornings at home,
+fashion ateliers, recording studios, night markets, observatories, road trips,
+parties, and quiet encounters with the wider world.
+
+<p align="center">
+  <img src="assets/lore/starlight-era/02-midnight-dj.png" width="23%" alt="Radiance DJing">
+  <img src="assets/lore/starlight-era/08-white-fashion-atelier.png" width="23%" alt="Radiance designing couture">
+  <img src="assets/lore/starlight-era/11-polar-observatory.png" width="23%" alt="Radiance beneath an aurora">
+  <img src="assets/lore/starlight-era/20-starlight-roller-disco.png" width="23%" alt="Radiance roller skating">
+</p>
+
+Explore all twenty high-resolution memories in
+**[Radiance: The Starlight Era](assets/lore/starlight-era/README.md)**. Every
+image is preserved as a future animation anchor, avatar memory, and wardrobe
+reference.
+
 - **A reactive companion:** music energy, BPM, task state, urgency, milestones,
   and away time can influence what she does.
 - **Seven minutes of authored scenes:** sixteen distinct moments can play
