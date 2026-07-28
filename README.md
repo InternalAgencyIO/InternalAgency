@@ -632,6 +632,19 @@ reconnection, a rooftop winch swing, and an empty-raft jetboard tow.
 | --- | --- |
 | ![Radiance swinging a flotation pack toward a flooded rooftop cache](assets/lore/starlight-era/190-cyclone-rooftop-winch.png) | ![Radiance towing an empty evacuation raft along a flooded boulevard](assets/lore/starlight-era/191-storm-surge-jetboard-tow.png) |
 
+## Hero Atlas — Batch 43: Beach Couture
+
+The atlas returns to full-color coastal heat: a Riviera surf launch, a lagoon
+parasail turn, a midnight beacon dive, and a volcanic-tidepool kit swim.
+
+| Riviera Surfboard Rescue Launch | Lagoon Parasail Sensor Turn |
+| --- | --- |
+| ![Radiance carving a Riviera wave with a floating safety pack](assets/lore/starlight-era/192-riviera-surfboard-rescue-launch.png) | ![Radiance catching a weather sensor beneath a cobalt parasail](assets/lore/starlight-era/193-lagoon-parasail-sensor-turn.png) |
+
+| Midnight Volleyball Beacon Dive | Volcanic Tidepool Kit Swim |
+| --- | --- |
+| ![Radiance diving across a midnight beach court for a coastal beacon](assets/lore/starlight-era/194-midnight-volleyball-beacon-dive.png) | ![Radiance swimming a monitoring kit through a volcanic tidepool](assets/lore/starlight-era/195-volcanic-tidepool-kit-swim.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
