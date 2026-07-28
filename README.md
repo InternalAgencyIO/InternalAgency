@@ -431,6 +431,20 @@ bridge, and a shipwreck response off Amalfi.
 | --- | --- |
 | ![Radiance captaining a Mediterranean rescue vessel off Sardinia](assets/lore/starlight-era/134-sardinia-coast-guard-captain.png) | ![Radiance coordinating a shipwreck rescue off the Amalfi coast](assets/lore/starlight-era/135-amalfi-shipwreck-rescue-command.png) |
 
+## Overnight Atlas — Batch 29: Command Couture
+
+Radiance keeps command and sharpens the silhouette: wildfire aviation in
+scarlet and lace, Monaco harbor operations in pearl white, Tokyo disaster
+response in cobalt and gold, and a North Sea winch team in storm-ready couture.
+
+| Mediterranean Wildfire Air Command | Monaco Harbor Rescue Command |
+| --- | --- |
+| ![Radiance directing a wildfire aerial-rescue team at sunset](assets/lore/starlight-era/136-mediterranean-wildfire-air-command.png) | ![Radiance commanding harbor rescue operations above Monaco marina](assets/lore/starlight-era/137-monaco-harbor-rescue-command.png) |
+
+| Tokyo Disaster Aviation Command | North Sea Rescue-Winch Supervisor |
+| --- | --- |
+| ![Radiance directing a disaster-response flight team on a Tokyo rooftop](assets/lore/starlight-era/138-tokyo-disaster-aviation-command.png) | ![Radiance supervising a rescue-winch team in a North Sea hangar](assets/lore/starlight-era/139-north-sea-rescue-winch-supervisor.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
