@@ -1,0 +1,37 @@
+{
+  "status": "PLANNED",
+  "network": "devnet",
+  "purpose": "Model T Genesis transaction-path rehearsal only. No value, public allocation, or launch assertion.",
+  "signingRules": {
+    "physicalConfirmationRequired": true,
+    "noSecretsInManifest": true,
+    "noBlindApproval": true
+  },
+  "token": {
+    "program": "Original SPL Token Program",
+    "decimals": 9,
+    "testSupply": "1000",
+    "testSupplyBaseUnits": "1000000000000",
+    "mint": null,
+    "mintEvidence": null,
+    "mintCreationTransaction": null,
+    "mintInitializationTransaction": null,
+    "mintTransaction": null,
+    "mintAuthorityRevocationTransaction": null,
+    "freezeAuthorityRevocationTransaction": null
+  },
+  "destinations": {
+    "testRecipient": { "address": null, "evidence": null, "creationTransaction": null }
+  },
+  "device": {
+    "model": "Trezor Model T",
+    "firmwareVersion": null,
+    "suiteOrWalletInterface": null,
+    "sameMainnetPathConfirmed": false
+  },
+  "verifier": {
+    "explorerBaseUrl": "https://explorer.solana.com/?cluster=devnet",
+    "reviewedBy": null,
+    "completedAtUtc": null
+  }
+}
