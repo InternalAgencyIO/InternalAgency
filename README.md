@@ -684,6 +684,19 @@ lagoon hydrofoil carve, a cliff-canopy swing, and a carnival skate handoff.
 | --- | --- |
 | ![Radiance swinging above a tropical cliff pavilion to secure a canopy](assets/lore/starlight-era/206-bali-cliff-canopy-swing.png) | ![Radiance completing a colorful roller-skate instrument handoff](assets/lore/starlight-era/207-cartagena-carnival-skate-relay.png) |
 
+## Hero Atlas — Batch 47: Tokyo Rain Swim Circuit
+
+Four experimental swim-couture materials meet four city mechanics: a drone
+hurdle, a living-wall climb, a maglev handoff, and a neon canal bike leap.
+
+| Tokyo Rain Drone Hurdle | Vertical-Garden Speed Climb |
+| --- | --- |
+| ![Radiance clearing a rain-black hurdle while catching a delivery drone](assets/lore/starlight-era/208-tokyo-rain-drone-hurdle.png) | ![Radiance climbing a living skyscraper facade to reset an irrigation valve](assets/lore/starlight-era/209-vertical-garden-speed-climb.png) |
+
+| Maglev Platform Sprint | Neon-Canal Bike Leap |
+| --- | --- |
+| ![Radiance sprinting beside a maglev train to complete a medical handoff](assets/lore/starlight-era/210-maglev-platform-sprint.png) | ![Radiance jumping an electric bicycle across a neon canal service gap](assets/lore/starlight-era/211-neon-canal-bike-leap.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
