@@ -126,6 +126,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Sky-Terrace Three Weddings**<br><img src="252-sky-terrace-three-weddings.png" width="420" alt="Radiance, Ellie, and Alia celebrating with their husbands on a sunlit sky terrace"> | **Glasshouse Rose Vow Dance**<br><img src="253-glasshouse-rose-vow-dance.png" width="420" alt="The three newlywed couples dancing inside a moonlit glasshouse"> |
 | **Black-Sand Celestial Wedding Run**<br><img src="254-black-sand-celestial-wedding-run.png" width="420" alt="The three couples running together across a black-sand coast after their vows"> | **Eclipse Observatory Wedding Finale**<br><img src="255-eclipse-observatory-wedding-finale.png" width="420" alt="The three couples releasing gold light orbs beneath an eclipse observatory"> |
 
+## Hero Atlas - Batch 59: Celestial Suite Styling
+
+| | |
+|---|---|
+| **Moonlit Suite Styling Session**<br><img src="256-moonlit-suite-styling-session.png" width="420" alt="Radiance, Ellie, and Alia preparing couture around a moonlit penthouse display bed"> | **Canopy Bed Lace Light**<br><img src="257-canopy-bed-lace-light.png" width="420" alt="The trio arranging a starlight installation around an optical-white canopy bed"> |
+| **Mirror Suite Pillow Laugh**<br><img src="258-mirror-suite-pillow-laugh.png" width="420" alt="The trio sharing a kinetic pillow toss between mirror-suite styling takes"> | **Sunrise Coastal Lookbook**<br><img src="259-sunrise-coastal-lookbook.png" width="420" alt="The trio striding from a coastal penthouse bedroom toward a sunrise fashion set"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
