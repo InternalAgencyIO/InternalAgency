@@ -65,3 +65,7 @@ Do not reward likes or reposts alone in the launch version. They are difficult t
 `epochStartUtc`, `epochEndUtc`, `policyHash`, `mint`, `eligibleWalletCount`, `totalClaimableBaseUnits`, `merkleRoot`, `manifestDigest`, `publishedAtUtc`, `distributionStatus`.
 
 No user’s OAuth token, email, private key, recovery phrase, PIN, or passphrase belongs in an epoch artifact.
+
+## Runnable deterministic engine
+
+`engagement/generate-epoch-manifest.mjs` turns approved eligible-node rows into a sorted Merkle manifest and proofs. `engagement/verify-epoch-manifest.mjs` independently verifies every proof and claim total. These scripts deliberately do **not** collect X data, store credentials, submit a Solana transaction, or hold a private key. Those remain separate production gates.
