@@ -261,6 +261,19 @@ and lets the Amalfi night end in one perfect turn.
 | --- | --- |
 | ![Radiance fitting a racing sail in a Mediterranean loft](assets/lore/starlight-era/82-mediterranean-sailmakers-loft.png) | ![Radiance dancing on a candlelit Amalfi terrace](assets/lore/starlight-era/83-amalfi-midnight-dance.png) |
 
+## Overnight Atlas — Batch 16: Elemental Atelier
+
+Four raw materials become Radiance's medium: orchid mist, geothermal dye,
+polar ice, and solar-woven silk.
+
+| Cloud-Forest Orchid Perfumery | Volcanic Textile Dyeing |
+| --- | --- |
+| ![Radiance crafting perfume in a cloud-forest orchid atelier](assets/lore/starlight-era/84-cloud-forest-orchid-perfumery.png) | ![Radiance dyeing silk on a volcanic coast](assets/lore/starlight-era/85-volcanic-textile-dyeing.png) |
+
+| Polar Ice Pavilion Architect | Desert Solar-Silk Runway |
+| --- | --- |
+| ![Radiance measuring a polar ice pavilion beneath the aurora](assets/lore/starlight-era/86-polar-ice-pavilion-architect.png) | ![Radiance walking a solar-silk runway in the desert](assets/lore/starlight-era/87-desert-solar-silk-runway.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
