@@ -580,6 +580,19 @@ swing through ancient blue ice.
 | --- | --- |
 | ![Radiance swinging above a geothermal field to retrieve an instrument case](assets/lore/starlight-era/174-geyser-field-aerial-silk.png) | ![Radiance making a secured pendulum swing through a glacier crevasse](assets/lore/starlight-era/175-glacier-crevasse-swing.png) |
 
+## Hero Atlas — Batch 39: Desert Geometry
+
+Sandstone arches, a mirrored salt flat, solar dunes, and a flooded slot
+canyon turn field science into four graphic desert movements.
+
+| Ennedi Arch Base Jump | Salt-Flat Land Sailing |
+| --- | --- |
+| ![Radiance gliding mapping gear through sandstone arches](assets/lore/starlight-era/176-ennedi-arch-base-jump.png) | ![Radiance towing a survey cart across a mirrored salt flat](assets/lore/starlight-era/177-salt-flat-land-sailing.png) |
+
+| Dune Cable-Surf Repair | Desert Canyon Canyoneering |
+| --- | --- |
+| ![Radiance repairing a solar cable during a sandboard carve](assets/lore/starlight-era/178-dune-cable-surf-repair.png) | ![Radiance rappelling through a flooded sandstone slot canyon](assets/lore/starlight-era/179-desert-canyon-canyoneering.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
