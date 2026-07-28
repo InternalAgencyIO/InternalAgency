@@ -175,6 +175,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Arctic Data-Sled Sprint**<br><img src="280-arctic-data-sled-sprint.png" width="420" alt="Radiance catching and tethering a data case beside an autonomous sled beneath the aurora"> | **Undersea Fiber-Cable Glide**<br><img src="281-undersea-fiber-cable-glide.png" width="420" alt="Radiance locking a gold repeater around a glowing deep-sea fiber cable"> |
 | **Mountain Relay Paraglide**<br><img src="282-mountain-relay-paraglide.png" width="420" alt="Radiance activating a summit relay as her scarlet paraglider arcs overhead"> | **Orbital Archive Tether Catch**<br><img src="283-orbital-archive-tether-catch.png" width="420" alt="Radiance catching and tethering a faceted memory vault above Earth"> |
 
+## Hero Atlas - Batch 66: Rewilding Run
+
+| | |
+|---|---|
+| **Savanna Tracking-Bike Leap**<br><img src="284-savanna-tracking-bike-leap.png" width="420" alt="Radiance mounting a wildlife camera during a bicycle leap over a savanna wash"> | **Wetland Seed-Drone Launch**<br><img src="285-wetland-seed-drone-launch.png" width="420" alt="Radiance releasing a gold-petal seed drone above restored sunrise wetlands"> |
+| **Forest-Corridor Rope Glide**<br><img src="286-forest-corridor-rope-glide.png" width="420" alt="Radiance repairing a green-cobalt sensor line during a rainforest rope glide"> | **Grassland Firebreak Skate**<br><img src="287-grassland-firebreak-skate.png" width="420" alt="Radiance placing the final cobalt marker along a prepared grassland firebreak"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
