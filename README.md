@@ -645,6 +645,19 @@ parasail turn, a midnight beacon dive, and a volcanic-tidepool kit swim.
 | --- | --- |
 | ![Radiance diving across a midnight beach court for a coastal beacon](assets/lore/starlight-era/194-midnight-volleyball-beacon-dive.png) | ![Radiance swimming a monitoring kit through a volcanic tidepool](assets/lore/starlight-era/195-volcanic-tidepool-kit-swim.png) |
 
+## Hero Atlas — Batch 44: Sea Legend
+
+Sea spray becomes runway light across an Aegean mast climb, a Venice skiff
+transfer, an Atlantic free-dive, and a storm-lashed lighthouse zipline.
+
+| Aegean Mast-Climb Rescue | Venice Canal Skiff Intercept |
+| --- | --- |
+| ![Radiance climbing an Aegean mast to free a distress sail](assets/lore/starlight-era/196-aegean-mast-climb-rescue.png) | ![Radiance transferring between Venice skiffs with a medical cooler](assets/lore/starlight-era/197-venice-canal-skiff-intercept.png) |
+
+| Atlantic Buoy Free Dive | Lighthouse Cliff Zipline |
+| --- | --- |
+| ![Radiance free-diving to release an entangled Atlantic research buoy](assets/lore/starlight-era/198-atlantic-buoy-free-dive.png) | ![Radiance zip-lining from a lighthouse with a replacement lamp module](assets/lore/starlight-era/199-lighthouse-cliff-zipline.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
