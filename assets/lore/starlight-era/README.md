@@ -112,6 +112,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Floating Runway Material Parkour**<br><img src="244-floating-runway-material-parkour.png" width="420" alt="Radiance, Ellie, and Alia racing across floating material runways"> | **Wind-Harp Lace Light Trio**<br><img src="245-wind-harp-lace-light-trio.png" width="420" alt="The trio repairing a luminous wind harp in opaque patterned couture"> |
 | **Sky Aqueduct Holographic Sprint**<br><img src="246-sky-aqueduct-holographic-sprint.png" width="420" alt="The trio relay-passing a valve core across a sky aqueduct"> | **Cloud Pavilion Material Finale**<br><img src="247-cloud-pavilion-material-finale.png" width="420" alt="The trio delivering seed lights above floating cloud pavilions"> |
 
+## Hero Atlas - Batch 57: Future Renaissance Material Minis
+
+| | |
+|---|---|
+| **Marble Studio Robot Light Dance**<br><img src="248-marble-studio-robot-light-dance.png" width="420" alt="Radiance, Ellie, and Alia catching falling light tools in a marble studio"> | **Future Canal Light Swing Trio**<br><img src="249-future-canal-light-swing-trio.png" width="420" alt="The trio swinging across a future canal with a restored light panel"> |
+| **Observatory Dome Prism Fencing**<br><img src="250-observatory-dome-prism-fencing.png" width="420" alt="The trio aligning a prism inside a futuristic observatory"> | **Kinetic Light-Wall Trio Run**<br><img src="251-kinetic-light-wall-trio-run.png" width="420" alt="The trio wall-running across a kinetic light installation"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
