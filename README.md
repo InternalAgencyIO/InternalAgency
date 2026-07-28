@@ -502,6 +502,28 @@ zero-gravity lunar velodrome, and a boxing-inspired rescue beneath an eclipse.
 | --- | --- |
 | ![Radiance floating beside a track bicycle inside a lunar orbital pavilion](assets/lore/starlight-era/154-zero-gravity-velodrome-editorial.png) | ![Radiance guiding civilians from a fictional broadcast-stage rescue under an eclipse](assets/lore/starlight-era/155-eclipse-hostage-rescue-intercept.png) |
 
+## Hero Atlas 40x4
+
+Radiance is beginning a new 160-image hero campaign: forty batches, four
+carefully directed scenes at a time. The production map gives every image its
+own action, location, wardrobe idea, camera language, and objective so the
+archive grows without turning into repeated standing poses. The full roadmap
+is in [`hero-40x4-campaign.json`](assets/lore/starlight-era/hero-40x4-campaign.json).
+
+## Hero Atlas — Batch 34: Celestial Hero Couture
+
+The opening quartet moves like sport and works like rescue: a nebula climbing
+dyno, a solar-sail beacon serve, a Saturn-ring capsule tow, and a lunar
+pole-vault carrying power back to stranded rovers.
+
+| Nebula Sport-Climbing Couture | Solar-Sail Tennis Rescue |
+| --- | --- |
+| ![Radiance leaping through a climbing dyno inside a luminous nebula pavilion](assets/lore/starlight-era/156-nebula-sport-climbing-couture.png) | ![Radiance launching a navigation beacon across a solar sail](assets/lore/starlight-era/157-solar-sail-tennis-rescue.png) |
+
+| Saturn-Ring Capsule Recovery | Lunar Fissure Pole-Vault Rescue |
+| --- | --- |
+| ![Radiance carving across Saturn's rings while towing a science capsule](assets/lore/starlight-era/158-saturn-ring-capsule-recovery.png) | ![Radiance pole-vaulting a lunar fissure with a rover power cell](assets/lore/starlight-era/159-lunar-fissure-pole-vault-rescue.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,

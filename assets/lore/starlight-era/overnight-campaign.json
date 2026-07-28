@@ -1,13 +1,13 @@
 {
-  "campaign": "Radiance Overnight Atlas",
-  "status": "complete",
+  "campaign": "Radiance Hero Atlas 40x4",
+  "status": "active",
   "batchSize": 4,
-  "targetBatches": 26,
-  "targetImages": 104,
+  "targetBatches": 66,
+  "targetImages": 264,
   "startNumber": 52,
-  "nextNumber": 156,
-  "completedBatches": 26,
-  "completedImages": 104,
+  "nextNumber": 160,
+  "completedBatches": 27,
+  "completedImages": 108,
   "themes": [
     "life",
     "nature",
@@ -16,7 +16,15 @@
     "fashion",
     "provocative non-explicit intimacy"
   ],
-  "style": "Radiance remains an unmistakably adult fictional woman in her late twenties. Alternate cinematic world-building with direct-flash fashion editorials. Sensual scenes must remain non-explicit, fully clothed, tasteful, and suitable for a public project archive.",
+  "style": "Radiance remains an unmistakably adult fictional woman in her late twenties. Hero Atlas is fashion first, purposeful movement second, and an impossible or extraordinary world third. Every scene must have a distinct silhouette, camera language, and visible heroic objective. Keep every image non-explicit, fully clothed, and suitable for a public project archive.",
+  "activePlan": "hero-40x4-campaign.json",
+  "extension": {
+    "name": "Hero Atlas 40x4",
+    "startBatch": 34,
+    "endBatch": 73,
+    "addedBatches": 40,
+    "addedImages": 160
+  },
   "batches": [
     {
       "batch": 8,
@@ -613,6 +621,29 @@
         {
           "file": "155-eclipse-hostage-rescue-intercept.png",
           "sha256": "1acb10464c222805fd3c94726cb7e1fb4a60e44464dfda53d52e3aa2916ebc42"
+        }
+      ]
+    },
+    {
+      "batch": 34,
+      "completedAt": "2026-07-28T14:15:28+03:00",
+      "theme": "celestial hero couture: nebula, solar sail, Saturn rings, lunar fissure",
+      "files": [
+        {
+          "file": "156-nebula-sport-climbing-couture.png",
+          "sha256": "cec5fbc1d93735502ef1884a5aea3eb700cc71d4175064b650a51df8a92b43e0"
+        },
+        {
+          "file": "157-solar-sail-tennis-rescue.png",
+          "sha256": "0bd3b4bdf6302e6a933885e50ed3e5c6238648b5a3f5d9f8ca10dbbe98508bc8"
+        },
+        {
+          "file": "158-saturn-ring-capsule-recovery.png",
+          "sha256": "5c978713aba6fb5049ec7a826c84140643b10ef8ab977b0f2dde9c005e864ee9"
+        },
+        {
+          "file": "159-lunar-fissure-pole-vault-rescue.png",
+          "sha256": "475c1b33a4c3fb3a251b9b20050dca2a045f7275bc25843571824c2e966ba02c"
         }
       ]
     }
