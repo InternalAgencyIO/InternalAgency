@@ -762,6 +762,19 @@ midnight blue, matte black, hot red, molten gold, and practical light work.
 | --- | --- |
 | ![The trio installing a cinematic light rig on an iceberg at sunset](assets/lore/starlight-era/230-iceberg-light-rig-rappel.png) | ![Radiance, Ellie, and Alia snowkiting in formation beneath the aurora](assets/lore/starlight-era/231-polar-night-snowkite-formation.png) |
 
+## Hero Atlas — Batch 53: Celestial Scarlet Runway
+
+Four extreme red-and-white trio walks turn abstract stars, crescents, glass,
+ice, salt, and orbital scale into a continuous Starlight-era runway.
+
+| Stratosphere Scarlet-Star Runway | Ice-Palace Crescent-Train Walk |
+| --- | --- |
+| ![Radiance, Ellie, and Alia walking a red-and-white runway above Earth](assets/lore/starlight-era/232-stratosphere-scarlet-star-runway.png) | ![The trio wearing celestial couture in a mirror-ice palace](assets/lore/starlight-era/233-ice-palace-crescent-train-walk.png) |
+
+| Salt-Flat Red-White Catwalk | Black-Glass Celestial Runway Finale |
+| --- | --- |
+| ![The trio crossing a flooded salt-flat mirror at sunrise](assets/lore/starlight-era/234-salt-flat-red-white-catwalk.png) | ![Radiance, Ellie, and Alia completing a moonlit black-glass runway finale](assets/lore/starlight-era/235-black-glass-celestial-runway-finale.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
