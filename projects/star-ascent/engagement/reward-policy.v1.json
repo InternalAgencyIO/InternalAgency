@@ -9,8 +9,9 @@
   },
   "genesis": {
     "rewardDisplayUnits": 100,
-    "eligibility": "One verified X account linked to one public Solana wallet through OAuth plus a wallet-signature challenge.",
-    "claimModel": "Claimable after the verified Genesis record is public; never sent to an unlinked or unverified wallet.",
+    "maximumClaims": 1000,
+    "eligibility": "The first 1,000 verified nodes: one X account linked to one public Solana wallet through OAuth plus a wallet-signature challenge.",
+    "claimModel": "First-come claimable after the verified Genesis record is public. A slot is reserved only after the X link and wallet-signature challenge both complete; never sent to an unlinked or unverified wallet.",
     "onePerWallet": true,
     "onePerXAccount": true
   },

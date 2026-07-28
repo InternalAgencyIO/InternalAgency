@@ -11,8 +11,8 @@ if (policy.status !== "HOLD_UNTIL_X_AND_DISTRIBUTOR_GATES_PASS") fail("policy mu
 ok("HOLD gate is explicit");
 if (policy.asset.symbol !== "IAT" || policy.asset.decimals !== 9 || policy.asset.network !== "mainnet-beta") fail("asset configuration must match the Genesis target");
 ok("asset configuration matches Genesis target");
-if (policy.genesis.rewardDisplayUnits !== 100 || !policy.genesis.onePerWallet || !policy.genesis.onePerXAccount) fail("Genesis reward must be exactly 100 IAT with one-to-one binding");
-ok("Genesis reward is 100 IAT with one-to-one binding");
+if (policy.genesis.rewardDisplayUnits !== 100 || policy.genesis.maximumClaims !== 1000 || !policy.genesis.onePerWallet || !policy.genesis.onePerXAccount) fail("Genesis reward must be exactly 100 IAT, limited to 1,000 nodes, with one-to-one binding");
+ok("Genesis reward is 100 IAT, capped at 1,000 verified nodes with one-to-one binding");
 if (policy.daily.snapshotAtUtc !== "00:00" || policy.daily.claimOpenAtUtc !== "00:05") fail("daily UTC schedule must be 00:00 snapshot and 00:05 claims");
 ok("daily UTC schedule");
 if (!Number.isInteger(policy.daily.rewardDisplayUnits) || policy.daily.rewardDisplayUnits <= 0 || policy.daily.maximumQualifyingActionsPerEpoch !== 1) fail("daily reward must be positive and capped at one action per epoch");

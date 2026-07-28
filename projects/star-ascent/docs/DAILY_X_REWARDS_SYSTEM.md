@@ -4,14 +4,14 @@
 
 Use a **daily Merkle-proof claim system**, not automatic blind transfers.
 
-At Genesis, every participant with one verified X account bound to one public Solana wallet may claim **100 IAT**. From then on, a deterministic daily process runs on the UTC clock:
+At Genesis, the **first 1,000 verified nodes** may claim a **100 IAT Genesis Gift**. A node is one verified X account bound to one public Solana wallet through OAuth plus a wallet-signature challenge. From then on, a deterministic daily process runs on the UTC clock:
 
 1. **00:00 UTC** — close the prior UTC epoch and collect qualifying X activity.
 2. **00:05 UTC** — publish an epoch manifest and Merkle root; claims open.
 3. **Claim window** — the participant connects only their already-bound wallet and claims the proof assigned to that wallet.
 4. **30 days after the epoch** — the claim expires under the public policy; it is never silently reallocated.
 
-The initial 100 IAT and each daily reward are participation rewards, not yield, APY, interest, a price promise, or an investment return.
+The Genesis Gift is first-come only after both binding checks succeed. A wallet address alone does not reserve a place. The initial 100 IAT and each daily reward are participation rewards, not yield, APY, interest, a price promise, or an investment return.
 
 ## Why claim instead of automatic wallet pushes
 
@@ -49,6 +49,7 @@ Do not reward likes or reposts alone in the launch version. They are difficult t
 3. The hostname for the binding callback, e.g. `internalagency.io/api/x/callback`.
 4. A dedicated distributor wallet public address and an operating cap. It must not be the Trezor-held treasury.
 5. Final approval of the 12 IAT daily cap and 30-day claim expiry.
+6. Final public approval of the Genesis Gift wording: **100 IAT, first 1,000 verified nodes**.
 
 ## Launch sequence
 

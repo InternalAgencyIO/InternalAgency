@@ -1,8 +1,9 @@
 # Daily rewards launch gate
 
-The 100 IAT Genesis claim and 00:00 UTC daily X participation claims remain **HOLD** until all checks below pass.
+The **100 IAT Genesis Gift for the first 1,000 verified nodes** and 00:00 UTC daily X participation claims remain **HOLD** until all checks below pass.
 
 - [ ] Official X handle and campaign tag entered in the policy.
+- [ ] The claim service enforces an atomic capacity of exactly 1,000 completed node bindings; it never reserves a slot for a wallet alone.
 - [ ] X developer app approved; OAuth callback and production secrets configured outside the repository.
 - [ ] One-to-one X account / Solana wallet binding passes on devnet.
 - [ ] Daily snapshot scheduler, scorer, Merkle generator, and manifest publisher pass a full devnet epoch rehearsal.
