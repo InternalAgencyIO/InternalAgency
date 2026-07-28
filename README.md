@@ -775,6 +775,19 @@ ice, salt, and orbital scale into a continuous Starlight-era runway.
 | --- | --- |
 | ![The trio crossing a flooded salt-flat mirror at sunrise](assets/lore/starlight-era/234-salt-flat-red-white-catwalk.png) | ![Radiance, Ellie, and Alia completing a moonlit black-glass runway finale](assets/lore/starlight-era/235-black-glass-celestial-runway-finale.png) |
 
+## Hero Atlas — Batch 54: Fire and Mercy Bluebreak
+
+Radiance and Ellie become lacquered red-and-black firefighters while Alia takes
+the white-lace Mercy role, protecting adult lives, nature, and love in cobalt spray.
+
+| Cobalt Tower Fire Rescue | Redwood Bluebreak Wildlife Corridor |
+| --- | --- |
+| ![Radiance and Ellie driving a blue hose while Alia escorts an adult survivor](assets/lore/starlight-era/236-cobalt-tower-fire-rescue.png) | ![The trio protecting a redwood wildlife corridor and carrying a rescued fox](assets/lore/starlight-era/237-redwood-bluebreak-wildlife-corridor.png) |
+
+| Glass Conservatory Seed-Vault Rescue | Moonlit Wedding Fire Escape |
+| --- | --- |
+| ![The trio defending a conservatory seed vault and guiding a botanist](assets/lore/starlight-era/238-glass-conservatory-seed-vault-rescue.png) | ![Radiance, Ellie, and Alia moving an adult couple through a moonlit fire escape](assets/lore/starlight-era/239-moonlit-wedding-fire-escape.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
