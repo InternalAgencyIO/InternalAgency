@@ -154,6 +154,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Particle-Ring Magnetic Run**<br><img src="268-particle-ring-magnetic-run.png" width="420" alt="Radiance sprinting a sealed coupler through an emerald-lit accelerator ring"> | **Desert-Array Dish Climb**<br><img src="269-desert-array-dish-climb.png" width="420" alt="Radiance locking a gold receiver into a giant radio dish at astronomical twilight"> |
 | **Quantum-Lab Levitation Catch**<br><img src="270-quantum-lab-levitation-catch.png" width="420" alt="Radiance catching and securing a drifting capsule inside a zero-gravity laboratory"> | **Gravity-Wave Laser Alignment**<br><img src="271-gravity-wave-laser-alignment.png" width="420" alt="Radiance completing a kilometer-scale gold laser alignment through a scarlet lunge"> |
 
+## Hero Atlas - Batch 63: Living Laboratory
+
+| | |
+|---|---|
+| **Giant Greenhouse Canopy Glide**<br><img src="272-giant-greenhouse-canopy-glide.png" width="420" alt="Radiance activating a pollination lattice beneath a continent-scale greenhouse canopy"> | **Seed-Vault Ice Run**<br><img src="273-seed-vault-ice-run.png" width="420" alt="Radiance restoring climate control during a high-speed skate through a sapphire seed vault"> |
+| **Coral-Lab Current Dance**<br><img src="274-coral-lab-current-dance.png" width="420" alt="Radiance locking a gold nursery frame into a luminous coral laboratory reef"> | **Desert Botany Sand Sprint**<br><img src="275-desert-botany-sand-sprint.png" width="420" alt="Radiance igniting desert irrigation arcs ahead of an immense dust front"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
