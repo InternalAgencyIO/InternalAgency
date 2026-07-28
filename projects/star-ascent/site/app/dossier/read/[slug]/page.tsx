@@ -5,6 +5,16 @@ import { useParams } from "next/navigation";
 
 type Copy = { label: string; title: string; deck: string; state: string; blocks: [string, string][]; next: string };
 
+function repairLegacyEncoding<T>(value: T): T {
+  if (typeof value === "string") {
+    if (!/[ÃÄÅÂâ]/.test(value)) return value;
+    try { return new TextDecoder("utf-8", { fatal: true }).decode(Uint8Array.from(value, (char) => char.charCodeAt(0))) as T; } catch { return value; }
+  }
+  if (Array.isArray(value)) return value.map(repairLegacyEncoding) as T;
+  if (value && typeof value === "object") return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, repairLegacyEncoding(item)])) as T;
+  return value;
+}
+
 const EN: Record<string, Copy> = {
   "white-dossier": { label: "CANONICAL RECORD / 01", title: "WHITE DOSSIER", deck: "The public transmission of STAR ASCENT: a mythic system made legible before Genesis.", state: "LIVE DRAFT / READING EDITION", blocks: [["THE SIGNAL", "STAR ASCENT is a public build across culture, technology, and collective imagination. The work stays visible so the record can be inspected in real time."], ["THE BOUNDARY", "No presale, paid registration, price promise, yield promise, APY, or return claim is part of this signal."], ["THE STANDARD", "Every material Genesis claim belongs beside a public address, transaction, program reference, or a clear HOLD status."]], next: "OPEN TOKENOMICS →" },
   tokenomics: { label: "CANONICAL RECORD / 02", title: "TOKENOMICS", deck: "A fixed-supply design target with the evidence standard set before execution.", state: "DESIGN TARGET / NOT YET GENESIS", blocks: [["MAXIMUM SUPPLY", "1,000,000,000 IAT with 9 decimals is the stated technical target. It becomes a fact only after the mint and evidence record are public."], ["ALLOCATION MAP", "Community 50%; Treasury 20%; Ecosystem 15%; Core Team 10%; Liquidity 5%. Non-circulating allocations remain proposed until public time-locks are verified."], ["AUTHORITY", "After the documented initial mint, mint and freeze authority are intended to be permanently revoked. If the evidence is absent, status stays HOLD."]], next: "OPEN GENESIS PROOF →" },
@@ -63,8 +73,8 @@ export default function DossierReaderPage() {
   const params = useParams<{ slug: string }>();
   const [language, setLanguage] = useState<"en" | "tr">("en");
   useEffect(() => { if (window.location.hostname.includes("ileriakil")) setLanguage("tr"); }, []);
-  const record = useMemo(() => (language === "tr" ? TR : EN)[params.slug] ?? fallback(language, params.slug), [language, params.slug]);
-  const fragments = archiveFragments(language, params.slug);
+  const record = useMemo(() => repairLegacyEncoding((language === "tr" ? TR : EN)[params.slug] ?? fallback(language, params.slug)), [language, params.slug]);
+  const fragments = repairLegacyEncoding(archiveFragments(language, params.slug));
   const radianceArt = params.slug === "broadcast-pack" || params.slug === "social-kit" ? "/images/radiance-studio-signal.png" : params.slug === "genesis-run" || params.slug === "readiness" ? "/images/radiance-bike-operator.png" : params.slug === "white-dossier" ? "/images/radiance-roller-rave.png" : "/images/radiance-snow-train.png";
   return <main className="reader-page">
     <div className="reader-noise" aria-hidden="true" />
