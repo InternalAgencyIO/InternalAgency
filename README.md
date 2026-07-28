@@ -552,6 +552,20 @@ maintenance inside a lunar water sphere, and a space-elevator trapeze catch.
 | --- | --- |
 | ![Radiance guiding repair drones inside a lunar low-gravity water sphere](assets/lore/starlight-era/166-moon-pool-synchronized-repair.png) | ![Radiance swinging from a space-elevator trapeze to recover a toolkit](assets/lore/starlight-era/167-space-elevator-trapeze-rescue.png) |
 
+## Hero Atlas — Batch 37: Constellation Relay
+
+The Celestial Athletics arc closes with four live transfers: an aurora-grid
+relay sprint, greenhouse canopy deployment, a Phobos sensor drop, and a
+magnetic rowing tow beneath Jupiter.
+
+| Aurora Relay Sprint | Meteor-Shower Archery Shield |
+| --- | --- |
+| ![Radiance sprinting a glass skybridge beneath the aurora](assets/lore/starlight-era/168-aurora-relay-sprint.png) | ![Radiance deploying an orbital greenhouse canopy before a meteor shower](assets/lore/starlight-era/169-meteor-shower-archery-shield.png) |
+
+| Phobos BMX Sensor Drop | Jupiter-Moon Rowing Tow |
+| --- | --- |
+| ![Radiance dropping a sensor from an airborne Phobos research rover](assets/lore/starlight-era/170-phobos-bmx-sensor-drop.png) | ![Radiance rowing a magnetic skiff while towing a science probe near Jupiter](assets/lore/starlight-era/171-jupiter-moon-rowing-tow.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
