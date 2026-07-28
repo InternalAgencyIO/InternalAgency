@@ -248,6 +248,19 @@ desert kites, and a winter lantern regatta.
 | --- | --- |
 | ![Radiance flying a geometric kite across the desert](assets/lore/starlight-era/78-desert-kite-festival.png) | ![Radiance launching a sculptural lantern on a frozen lake](assets/lore/starlight-era/79-winter-lantern-regatta.png) |
 
+## Overnight Atlas — Batch 15: Tide & Signal
+
+Radiance restores a reef, holds the lighthouse watch, shapes a racing sail,
+and lets the Amalfi night end in one perfect turn.
+
+| Mediterranean Coral Restoration | Atlantic Lighthouse Storm Watch |
+| --- | --- |
+| ![Radiance restoring coral at a Mediterranean marine station](assets/lore/starlight-era/80-mediterranean-coral-restoration.png) | ![Radiance operating an Atlantic lighthouse during a storm](assets/lore/starlight-era/81-atlantic-lighthouse-storm-watch.png) |
+
+| Mediterranean Sailmaker's Loft | Amalfi Midnight Dance |
+| --- | --- |
+| ![Radiance fitting a racing sail in a Mediterranean loft](assets/lore/starlight-era/82-mediterranean-sailmakers-loft.png) | ![Radiance dancing on a candlelit Amalfi terrace](assets/lore/starlight-era/83-amalfi-midnight-dance.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
