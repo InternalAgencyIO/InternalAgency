@@ -168,6 +168,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Mars Greenhouse Pressure Seal**<br><img src="276-mars-greenhouse-pressure-seal.png" width="420" alt="Radiance sealing a greenhouse pressure leak above emerald crops during a Martian dust storm"> | **Lunar Solar-Farm Board Run**<br><img src="277-lunar-solar-farm-snowboard.png" width="420" alt="Radiance locking an inverter into a lunar solar lane beneath a huge blue Earth"> |
 | **Venus Aerostat Ballast Swing**<br><img src="278-venus-aerostat-ballast-swing.png" width="420" alt="Radiance securing ballast beneath a colossal research aerostat in amber clouds"> | **Titan Lake Hovercraft Turn**<br><img src="279-titan-lake-hovercraft-turn.png" width="420" alt="Radiance recovering a teal weather probe during a banked Titan lake run"> |
 
+## Hero Atlas - Batch 65: Data in Motion
+
+| | |
+|---|---|
+| **Arctic Data-Sled Sprint**<br><img src="280-arctic-data-sled-sprint.png" width="420" alt="Radiance catching and tethering a data case beside an autonomous sled beneath the aurora"> | **Undersea Fiber-Cable Glide**<br><img src="281-undersea-fiber-cable-glide.png" width="420" alt="Radiance locking a gold repeater around a glowing deep-sea fiber cable"> |
+| **Mountain Relay Paraglide**<br><img src="282-mountain-relay-paraglide.png" width="420" alt="Radiance activating a summit relay as her scarlet paraglider arcs overhead"> | **Orbital Archive Tether Catch**<br><img src="283-orbital-archive-tether-catch.png" width="420" alt="Radiance catching and tethering a faceted memory vault above Earth"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
