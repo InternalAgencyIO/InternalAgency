@@ -147,6 +147,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Eclipse Tango Light Trio**<br><img src="264-eclipse-tango-light-trio.png" width="420" alt="Radiance, Ellie, and Alia igniting a solar stage through a synchronized eclipse tango"> | **Aurora Aerial-Hoop Light Trio**<br><img src="265-aurora-aerial-hoop-light-trio.png" width="420" alt="The trio repairing a suspended gold light constellation above an aurora amphitheater"> |
 | **Desert Mirror Light-Dance Trio**<br><img src="266-desert-mirror-light-dance-trio.png" width="420" alt="The trio aligning a colossal sunrise beam through a desert mirror field"> | **Moonlit Pier Salsa Light Rescue**<br><img src="267-moonlit-pier-salsa-light-rescue.png" width="420" alt="The trio stopping a rolling gold equipment case during an electrical pier storm"> |
 
+## Hero Atlas - Batch 62: Field Physics
+
+| | |
+|---|---|
+| **Particle-Ring Magnetic Run**<br><img src="268-particle-ring-magnetic-run.png" width="420" alt="Radiance sprinting a sealed coupler through an emerald-lit accelerator ring"> | **Desert-Array Dish Climb**<br><img src="269-desert-array-dish-climb.png" width="420" alt="Radiance locking a gold receiver into a giant radio dish at astronomical twilight"> |
+| **Quantum-Lab Levitation Catch**<br><img src="270-quantum-lab-levitation-catch.png" width="420" alt="Radiance catching and securing a drifting capsule inside a zero-gravity laboratory"> | **Gravity-Wave Laser Alignment**<br><img src="271-gravity-wave-laser-alignment.png" width="420" alt="Radiance completing a kilometer-scale gold laser alignment through a scarlet lunge"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
