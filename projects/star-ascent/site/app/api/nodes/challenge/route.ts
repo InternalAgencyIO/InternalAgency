@@ -14,5 +14,5 @@ export async function POST(request: Request) {
   const id = crypto.randomUUID(), nonce = randomNonce(), issued = new Date(), expires = new Date(issued.valueOf() + 5 * 60_000);
   const message = nodeChallenge({ wallet, nonce, issuedAtUtc: issued.toISOString(), expiresAtUtc: expires.toISOString(), origin });
   await env.DB.batch([env.DB.prepare("DELETE FROM node_challenges WHERE expires_at_utc < ?").bind(issued.toISOString()), env.DB.prepare("INSERT INTO node_challenges (id, wallet_address, nonce_hash, origin, issued_at_utc, expires_at_utc) VALUES (?, ?, ?, ?, ?, ?)").bind(id, wallet, await sha256(nonce), origin, issued.toISOString(), expires.toISOString())]);
-  return json({ challengeId: id, wallet, message, expiresAtUtc: expires.toISOString() });
+  return json({ challengeId: id, wallet, nonce, message, expiresAtUtc: expires.toISOString() });
 }
