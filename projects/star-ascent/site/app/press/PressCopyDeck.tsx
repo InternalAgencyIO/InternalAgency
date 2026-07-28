@@ -11,9 +11,21 @@ const posts = [
 export function PressCopyDeck() {
   const [copied, setCopied] = useState<string | null>(null);
   const copy = async (label: string, body: string) => {
-    await navigator.clipboard.writeText(body);
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(body);
+    } else {
+      const field = document.createElement("textarea");
+      field.value = body;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
+      document.execCommand("copy");
+      field.remove();
+    }
     setCopied(label);
     window.setTimeout(() => setCopied(null), 1800);
   };
-  return <section className="press-copy-deck"><p>SHARE-READY COPY</p><h2>THE SIGNAL, IN THREE MOVES.</h2><div>{posts.map(([label, body]) => <article key={label}><span>{label}</span><pre>{body}</pre><button type="button" onClick={() => copy(label, body)}>{copied === label ? "COPIED" : "COPY POST"}</button></article>)}</div></section>;
+  return <section className="press-copy-deck"><p>SHARE-READY COPY</p><h2>THE SIGNAL, IN THREE MOVES.</h2><span className="press-copy-status" role="status" aria-live="polite">{copied ? `${copied} post copied.` : ""}</span><div>{posts.map(([label, body]) => <article key={label}><span>{label}</span><pre>{body}</pre><button type="button" onClick={() => copy(label, body)}>{copied === label ? "COPIED" : "COPY POST"}</button></article>)}</div></section>;
 }
