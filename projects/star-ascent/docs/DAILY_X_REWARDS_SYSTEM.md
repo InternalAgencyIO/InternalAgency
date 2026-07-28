@@ -69,3 +69,7 @@ No user’s OAuth token, email, private key, recovery phrase, PIN, or passphrase
 ## Runnable deterministic engine
 
 `engagement/generate-epoch-manifest.mjs` turns approved eligible-node rows into a sorted Merkle manifest and proofs. `engagement/verify-epoch-manifest.mjs` independently verifies every proof and claim total. These scripts deliberately do **not** collect X data, store credentials, submit a Solana transaction, or hold a private key. Those remain separate production gates.
+
+## Durable binding ledger
+
+`engagement/binding-ledger.schema.sql` and `engagement/BINDING_AND_CLAIM_API_CONTRACT.md` define the durable records and atomic operation required for the first-1,000 Genesis cap. The schema is intentionally not connected to the public site until an X app, OAuth callback, production secret manager, and D1 migration review are ready.

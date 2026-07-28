@@ -15,6 +15,7 @@ const checks = [
   ["validate-release-snapshot.mjs", "launch/release-snapshot.generated.json"],
   ["validate-daily-rewards-policy.mjs", "engagement/reward-policy.v1.json"],
   ["validate-rewards-epoch-engine.mjs"],
+  ["validate-binding-ledger-schema.mjs"],
 ];
 
 for (const [script, ...args] of checks) {
