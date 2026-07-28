@@ -736,6 +736,19 @@ fashion language with one complete pitch-black heavy sidearm and non-graphic ten
 | --- | --- |
 | ![Radiance carrying a recovered archive case from a mirrored Dubai elevator](assets/lore/starlight-era/222-dubai-elevator-night-guard.png) | ![Radiance watching an empty Sicilian rail line beside a repaired signal relay](assets/lore/starlight-era/223-sicily-night-train-watch.png) |
 
+## Hero Atlas — Batch 51: Gold Spear UAV Defense
+
+Four earthly UAV-watch scenes combine a complete pitch-black shoulder-launcher
+silhouette with Radiance’s black, white, mirror-gold, rose, and scorpion language.
+
+| Aegean Cliff UAV Watch | Andes Solar-Farm UAV Shield |
+| --- | --- |
+| ![Radiance tracking an unmanned UAV above an Aegean sea cliff](assets/lore/starlight-era/224-aegean-cliff-uav-watch.png) | ![Radiance watching an unmanned UAV from an Andean solar reflector field](assets/lore/starlight-era/225-andes-solar-farm-uav-shield.png) |
+
+| Sahara Mirror-Field UAV Intercept | North-Sea Platform UAV Guard |
+| --- | --- |
+| ![Radiance carrying a shoulder launcher through a Sahara mirror field](assets/lore/starlight-era/226-sahara-mirror-field-uav-intercept.png) | ![Radiance guarding an empty North Sea research platform in a storm](assets/lore/starlight-era/227-north-sea-platform-uav-guard.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
