@@ -474,6 +474,20 @@ heroine energy.
 | --- | --- |
 | ![Radiance leading an Arctic observatory evacuation under the aurora](assets/lore/starlight-era/146-arctic-observatory-evacuation-lead.png) | ![Radiance captaining a deep-sea submersible rescue mission](assets/lore/starlight-era/147-abyssal-submersible-rescue-captain.png) |
 
+## Overnight Atlas — Batch 32: Kinetic Radiance
+
+Radiance leaves the command console and enters the decisive instant: airborne
+over a volleyball net, accelerating through a velodrome bank, committing to a
+climbing dyno, and cutting across a waterfront 3x3 court.
+
+| Mediterranean Beach-Volleyball Spike | Midnight Velodrome Sprint |
+| --- | --- |
+| ![Radiance airborne for a beach-volleyball spike under stadium lights](assets/lore/starlight-era/148-mediterranean-beach-volleyball-spike.png) | ![Radiance sprinting through the final bank of a midnight velodrome](assets/lore/starlight-era/149-midnight-velodrome-sprint.png) |
+
+| Sunset Sport-Climbing Dyno | Waterfront 3x3 Crossover |
+| --- | --- |
+| ![Radiance reaching through a sunset sport-climbing dyno](assets/lore/starlight-era/150-sunset-sport-climbing-dyno.png) | ![Radiance driving past a defender on a waterfront 3x3 court](assets/lore/starlight-era/151-waterfront-3x3-crossover.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
