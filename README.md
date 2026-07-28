@@ -566,6 +566,20 @@ magnetic rowing tow beneath Jupiter.
 | --- | --- |
 | ![Radiance dropping a sensor from an airborne Phobos research rover](assets/lore/starlight-era/170-phobos-bmx-sensor-drop.png) | ![Radiance rowing a magnetic skiff while towing a science probe near Jupiter](assets/lore/starlight-era/171-jupiter-moon-rowing-tow.png) |
 
+## Hero Atlas — Batch 38: Ice and Fire
+
+Extreme Earth Couture begins across four elemental systems: an icefjord kite
+line, a lava-tube wall run, an aerial geothermal recovery, and a pendulum
+swing through ancient blue ice.
+
+| Ilulissat Icefjord Kite Rescue | Lava-Tube Parkour Beacon |
+| --- | --- |
+| ![Radiance kite-skiing a flotation line through a monumental icefjord](assets/lore/starlight-era/172-ilulissat-icefjord-kite-rescue.png) | ![Radiance wall-running through a lava tube to install a beacon](assets/lore/starlight-era/173-lava-tube-parkour-beacon.png) |
+
+| Geyser-Field Aerial Silk | Glacier Crevasse Swing |
+| --- | --- |
+| ![Radiance swinging above a geothermal field to retrieve an instrument case](assets/lore/starlight-era/174-geyser-field-aerial-silk.png) | ![Radiance making a secured pendulum swing through a glacier crevasse](assets/lore/starlight-era/175-glacier-crevasse-swing.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
