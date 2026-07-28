@@ -196,6 +196,19 @@ Riviera turquoise, Miami primaries, lagoon green, and a violet-gold sunset.
 | --- | --- |
 | ![Radiance paddleboarding on a tropical lagoon](assets/lore/starlight-era/62-lagoon-paddle-morning.png) | ![Radiance at a colourful rooftop pool celebration](assets/lore/starlight-era/63-sunset-pool-dance.png) |
 
+## Overnight Atlas — Batch 11: Creative Operator
+
+Radiance directs the image, engineers the sound, builds the fashion, and sends
+the final record into sunrise.
+
+| Rain-Stage Film Director | Solar Sound Stage |
+| --- | --- |
+| ![Radiance directing a miniature rain stage](assets/lore/starlight-era/64-rain-stage-film-director.png) | ![Radiance engineering a solar-powered sound stage](assets/lore/starlight-era/65-solar-sound-stage.png) |
+
+| Paris Metal Couture Atelier | Rooftop Radio Sunrise |
+| --- | --- |
+| ![Radiance crafting a gold couture structure in Paris](assets/lore/starlight-era/66-paris-metal-couture-atelier.png) | ![Radiance completing a rooftop radio broadcast at sunrise](assets/lore/starlight-era/67-rooftop-radio-sunrise.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
