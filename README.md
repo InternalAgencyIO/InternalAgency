@@ -378,6 +378,19 @@ espresso, London footwork, a Seoul soundcheck, and midnight above the Aegean.
 | --- | --- |
 | ![Radiance soundchecking a private Seoul karaoke studio](assets/lore/starlight-era/118-seoul-karaoke-soundcheck.png) | ![Radiance lighting a midnight table in Santorini](assets/lore/starlight-era/119-santorini-midnight-table.png) |
 
+## Overnight Atlas — Batch 25: City Pulse
+
+Radiance follows four different rhythms: a rooftop waking in Mexico City, rain
+moving through Singapore, a New Orleans snare, and the precision of Monaco steel.
+
+| Mexico City Rooftop Breakfast | Singapore Rain-Garden Architect |
+| --- | --- |
+| ![Radiance preparing breakfast on a Mexico City rooftop](assets/lore/starlight-era/120-mexico-city-rooftop-breakfast.png) | ![Radiance inspecting a Singapore rain garden](assets/lore/starlight-era/121-singapore-rain-garden-architect.png) |
+
+| New Orleans Snare Rehearsal | Monaco Night Fencing Salon |
+| --- | --- |
+| ![Radiance rehearsing snare drum in New Orleans](assets/lore/starlight-era/122-new-orleans-snare-rehearsal.png) | ![Radiance completing a fencing drill in Monaco](assets/lore/starlight-era/123-monaco-night-fencing-salon.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
