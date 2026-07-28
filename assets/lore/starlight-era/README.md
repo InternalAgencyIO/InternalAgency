@@ -140,6 +140,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Mirror Salon Matching Trio**<br><img src="260-mirror-salon-matching-trio.png" width="420" alt="Radiance, Ellie, and Alia turning together in coordinated mirror-salon couture"> | **Scarlet Couch Threefold Pose**<br><img src="261-scarlet-couch-threefold-pose.png" width="420" alt="The trio forming a confident triangular portrait around a scarlet couch"> |
 | **Glass Elevator Linked Runway**<br><img src="262-glass-elevator-linked-runway.png" width="420" alt="The trio striding in linked formation through a gold-lit glass elevator"> | **Moonlit Rooftop Threefold Finale**<br><img src="263-moonlit-rooftop-threefold-finale.png" width="420" alt="The trio completing a synchronized pivot beneath rooftop constellations"> |
 
+## Hero Atlas - Batch 61: Starlight Finale
+
+| | |
+|---|---|
+| **Eclipse Tango Light Trio**<br><img src="264-eclipse-tango-light-trio.png" width="420" alt="Radiance, Ellie, and Alia igniting a solar stage through a synchronized eclipse tango"> | **Aurora Aerial-Hoop Light Trio**<br><img src="265-aurora-aerial-hoop-light-trio.png" width="420" alt="The trio repairing a suspended gold light constellation above an aurora amphitheater"> |
+| **Desert Mirror Light-Dance Trio**<br><img src="266-desert-mirror-light-dance-trio.png" width="420" alt="The trio aligning a colossal sunrise beam through a desert mirror field"> | **Moonlit Pier Salsa Light Rescue**<br><img src="267-moonlit-pier-salsa-light-rescue.png" width="420" alt="The trio stopping a rolling gold equipment case during an electrical pier storm"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
