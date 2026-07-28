@@ -593,6 +593,19 @@ canyon turn field science into four graphic desert movements.
 | --- | --- |
 | ![Radiance repairing a solar cable during a sandboard carve](assets/lore/starlight-era/178-dune-cable-surf-repair.png) | ![Radiance rappelling through a flooded sandstone slot canyon](assets/lore/starlight-era/179-desert-canyon-canyoneering.png) |
 
+## Hero Atlas — Batch 40: Rainforest Vertical
+
+Four layers of tropical fieldwork become living couture: a cloud-forest line,
+a waterfall descent, a mangrove vault, and a bromeliad drone catch.
+
+| Cloud-Forest Canopy Line | Waterfall Rope Descent |
+| --- | --- |
+| ![Radiance repairing a camera bridge from a cloud-forest zip line](assets/lore/starlight-era/180-cloud-forest-canopy-line.png) | ![Radiance rappelling beside a tropical waterfall toward a field pack](assets/lore/starlight-era/181-waterfall-rope-descent.png) |
+
+| Mangrove Paddle Vault | Bromeliad Drone Catch |
+| --- | --- |
+| ![Radiance vaulting from a canoe to recover a mangrove sensor](assets/lore/starlight-era/182-mangrove-paddle-vault.png) | ![Radiance leaping across giant bromeliads to catch a research drone](assets/lore/starlight-era/183-bromeliad-drone-catch.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
