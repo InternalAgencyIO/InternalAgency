@@ -300,6 +300,19 @@ rainforest mist, and a lakeside studio made for thinking.
 | --- | --- |
 | ![Radiance surveying a rainforest suspension bridge](assets/lore/starlight-era/94-rainforest-bridge-survey.png) | ![Radiance sketching fashion beside a mountain lake](assets/lore/starlight-era/95-lakeside-fashion-sketchbook.png) |
 
+## Overnight Atlas — Batch 19: Play Mode
+
+Radiance makes room for play: sunrise tennis above the Riviera, a midnight
+bowling lane, a Ferris wheel brought back to light, and one last Paris dance.
+
+| Riviera Tennis Sunrise | Midnight Bowling Club |
+| --- | --- |
+| ![Radiance playing sunrise tennis above the Riviera](assets/lore/starlight-era/96-riviera-tennis-sunrise.png) | ![Radiance bowling after midnight](assets/lore/starlight-era/97-midnight-bowling-club.png) |
+
+| Coastal Ferris-Wheel Light Test | Paris Cocktail Dance |
+| --- | --- |
+| ![Radiance testing the lights on a coastal Ferris wheel](assets/lore/starlight-era/98-coastal-ferris-wheel-light-test.png) | ![Radiance dancing in a Paris cocktail dress](assets/lore/starlight-era/99-paris-cocktail-dance.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
