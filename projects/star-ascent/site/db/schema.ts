@@ -3,6 +3,9 @@ import { integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core
 export const nodeChallenges = sqliteTable("node_challenges", {
   id: text("id").primaryKey(), walletAddress: text("wallet_address").notNull(), nonceHash: text("nonce_hash").notNull(), origin: text("origin").notNull(), issuedAtUtc: text("issued_at_utc").notNull(), expiresAtUtc: text("expires_at_utc").notNull(), consumedAtUtc: text("consumed_at_utc"),
 });
+export const nodeChallengeRateLimits = sqliteTable("node_challenge_rate_limits", {
+  subjectHash: text("subject_hash").primaryKey(), nextAllowedAtUtc: text("next_allowed_at_utc").notNull(), updatedAtUtc: text("updated_at_utc").notNull(),
+});
 export const nodeBindings = sqliteTable("node_bindings", {
   id: text("id").primaryKey(), walletAddress: text("wallet_address").notNull(), xUserId: text("x_user_id"), state: text("state", { enum: ["pending", "active", "held"] }).notNull().default("pending"), genesisSlot: integer("genesis_slot"), createdAtUtc: text("created_at_utc").notNull(), activatedAtUtc: text("activated_at_utc"),
 }, (table) => [uniqueIndex("node_bindings_wallet_unique").on(table.walletAddress), uniqueIndex("node_bindings_x_user_unique").on(table.xUserId), uniqueIndex("node_bindings_genesis_slot_unique").on(table.genesisSlot)]);
