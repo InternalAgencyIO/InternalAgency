@@ -91,6 +91,20 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Direct-Flash Studio Morning**<br><img src="52-direct-flash-studio-morning.png" width="420" alt="Radiance getting ready in a bright downtown studio"> | **Red Laundromat Evening**<br><img src="53-red-laundromat-evening.png" width="420" alt="Radiance matching scarlet socks in a chrome laundromat"> |
 | **Desert Motel Pool Break**<br><img src="54-desert-motel-pool-break.png" width="420" alt="Radiance crossing a desert motel pool deck in cobalt and scarlet basics"> | **Neon Diner Last Call**<br><img src="55-neon-diner-last-call.png" width="420" alt="Radiance choosing the last song in a neon roadside diner"> |
 
+## Hero Atlas - Batch 55: Paris Swim Holiday
+
+| | |
+|---|---|
+| **Paris Rooftop Cobalt Swim**<br><img src="240-paris-rooftop-cobalt-swim.png" width="420" alt="Radiance, Ellie, and Alia sharing a sunny rooftop-pool holiday"> | **Seine Barge-Pool Trio**<br><img src="241-seine-barge-pool-trio.png" width="420" alt="The trio diving, lounging, and playing beside a fictional Paris river pool"> |
+| **Art-Deco Red-White Pool**<br><img src="242-art-deco-red-white-pool.png" width="420" alt="The trio walking together through a fictional art-deco pool arcade"> | **Moonlit Paris Pool Plunge**<br><img src="243-moonlit-paris-pool-plunge.png" width="420" alt="The trio sharing a joyful synchronized moonlit pool jump"> |
+
+## Hero Atlas - Batch 55: Paris Swim Holiday
+
+| | |
+|---|---|
+| **Paris Rooftop Cobalt Swim**<br><img src="240-paris-rooftop-cobalt-swim.png" width="420" alt="Radiance, Ellie, and Alia sharing a sunny rooftop-pool holiday"> | **Seine Barge-Pool Trio**<br><img src="241-seine-barge-pool-trio.png" width="420" alt="The trio diving, lounging, and playing beside a fictional Paris river pool"> |
+| **Art-Deco Red-White Pool**<br><img src="242-art-deco-red-white-pool.png" width="420" alt="The trio walking together through a fictional art-deco pool arcade"> | **Moonlit Paris Pool Plunge**<br><img src="243-moonlit-paris-pool-plunge.png" width="420" alt="The trio sharing a joyful synchronized moonlit pool jump"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
