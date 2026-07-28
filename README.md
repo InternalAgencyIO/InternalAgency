@@ -524,6 +524,20 @@ pole-vault carrying power back to stranded rovers.
 | --- | --- |
 | ![Radiance carving across Saturn's rings while towing a science capsule](assets/lore/starlight-era/158-saturn-ring-capsule-recovery.png) | ![Radiance pole-vaulting a lunar fissure with a rover power cell](assets/lore/starlight-era/159-lunar-fissure-pole-vault-rescue.png) |
 
+## Hero Atlas — Batch 35: Comet Games
+
+Four peaceful science recoveries become celestial sport: slalom turns through
+a comet tail, a Europa hockey stop, a Venus cloud-bank delivery, and a secured
+asteroid transfer that reconnects an observatory tether.
+
+| Comet-Tail Slalom Rescue | Europa Ice-Hockey Recovery |
+| --- | --- |
+| ![Radiance carving between sensor buoys across an ionized comet](assets/lore/starlight-era/160-comet-tail-slalom-rescue.png) | ![Radiance redirecting a runaway drill core on Europa](assets/lore/starlight-era/161-europa-ice-hockey-recovery.png) |
+
+| Venus Cloud Paraglider | Asteroid Bouldering Transfer |
+| --- | --- |
+| ![Radiance delivering a weather probe beneath a gold paraglider above Venus](assets/lore/starlight-era/162-venus-cloud-paraglider.png) | ![Radiance crossing between asteroids to reconnect an observatory tether](assets/lore/starlight-era/163-asteroid-bouldering-transfer.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
