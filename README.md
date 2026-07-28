@@ -488,6 +488,20 @@ climbing dyno, and cutting across a waterfront 3x3 court.
 | --- | --- |
 | ![Radiance reaching through a sunset sport-climbing dyno](assets/lore/starlight-era/150-sunset-sport-climbing-dyno.png) | ![Radiance driving past a defender on a waterfront 3x3 court](assets/lore/starlight-era/151-waterfront-3x3-crossover.png) |
 
+## Overnight Atlas — Batch 33: Impossible Games
+
+Sport becomes the visual grammar for four impossible fashion worlds: a
+volleyball court above Everest, fencing-coded EVA couture in orbit, a
+zero-gravity lunar velodrome, and a boxing-inspired rescue beneath an eclipse.
+
+| Stratosphere Volleyball Couture | Orbital Fencing EVA Couture |
+| --- | --- |
+| ![Radiance serving on a transparent volleyball court above the Himalayas](assets/lore/starlight-era/152-stratosphere-volleyball-couture.png) | ![Radiance performing a fencing-inspired orbital maintenance reach](assets/lore/starlight-era/153-orbital-fencing-eva-couture.png) |
+
+| Zero-Gravity Velodrome Editorial | Eclipse Hostage-Rescue Intercept |
+| --- | --- |
+| ![Radiance floating beside a track bicycle inside a lunar orbital pavilion](assets/lore/starlight-era/154-zero-gravity-velodrome-editorial.png) | ![Radiance guiding civilians from a fictional broadcast-stage rescue under an eclipse](assets/lore/starlight-era/155-eclipse-hostage-rescue-intercept.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
