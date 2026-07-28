@@ -119,6 +119,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Marble Studio Robot Light Dance**<br><img src="248-marble-studio-robot-light-dance.png" width="420" alt="Radiance, Ellie, and Alia catching falling light tools in a marble studio"> | **Future Canal Light Swing Trio**<br><img src="249-future-canal-light-swing-trio.png" width="420" alt="The trio swinging across a future canal with a restored light panel"> |
 | **Observatory Dome Prism Fencing**<br><img src="250-observatory-dome-prism-fencing.png" width="420" alt="The trio aligning a prism inside a futuristic observatory"> | **Kinetic Light-Wall Trio Run**<br><img src="251-kinetic-light-wall-trio-run.png" width="420" alt="The trio wall-running across a kinetic light installation"> |
 
+## Hero Atlas - Batch 58: Three Celestial Weddings
+
+| | |
+|---|---|
+| **Sky-Terrace Three Weddings**<br><img src="252-sky-terrace-three-weddings.png" width="420" alt="Radiance, Ellie, and Alia celebrating with their husbands on a sunlit sky terrace"> | **Glasshouse Rose Vow Dance**<br><img src="253-glasshouse-rose-vow-dance.png" width="420" alt="The three newlywed couples dancing inside a moonlit glasshouse"> |
+| **Black-Sand Celestial Wedding Run**<br><img src="254-black-sand-celestial-wedding-run.png" width="420" alt="The three couples running together across a black-sand coast after their vows"> | **Eclipse Observatory Wedding Finale**<br><img src="255-eclipse-observatory-wedding-finale.png" width="420" alt="The three couples releasing gold light orbs beneath an eclipse observatory"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
