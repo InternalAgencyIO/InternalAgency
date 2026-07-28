@@ -235,6 +235,19 @@ record in the rain, one final planet before dawn, and dancing among moving boxes
 | --- | --- |
 | ![Radiance stargazing from a flower-filled balcony](assets/lore/starlight-era/74-balcony-stargazing-dawn.png) | ![Radiance dancing in a sunlit living room](assets/lore/starlight-era/75-living-room-gold-dance.png) |
 
+## Overnight Atlas — Batch 14: Celebration Atlas
+
+Radiance joins four celebrations in motion: Lisbon flowers, rooftop jazz,
+desert kites, and a winter lantern regatta.
+
+| Lisbon Flower Tram Festival | Rooftop Jazz Brunch |
+| --- | --- |
+| ![Radiance arranging flowers beside a Lisbon tram](assets/lore/starlight-era/76-lisbon-flower-tram-festival.png) | ![Radiance playing piano at a rooftop jazz brunch](assets/lore/starlight-era/77-rooftop-jazz-brunch.png) |
+
+| Desert Kite Festival | Winter Lantern Regatta |
+| --- | --- |
+| ![Radiance flying a geometric kite across the desert](assets/lore/starlight-era/78-desert-kite-festival.png) | ![Radiance launching a sculptural lantern on a frozen lake](assets/lore/starlight-era/79-winter-lantern-regatta.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
