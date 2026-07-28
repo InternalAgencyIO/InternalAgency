@@ -274,6 +274,19 @@ polar ice, and solar-woven silk.
 | --- | --- |
 | ![Radiance measuring a polar ice pavilion beneath the aurora](assets/lore/starlight-era/86-polar-ice-pavilion-architect.png) | ![Radiance walking a solar-silk runway in the desert](assets/lore/starlight-era/87-desert-solar-silk-runway.png) |
 
+## Overnight Atlas — Batch 17: The Night Shift
+
+Radiance keeps the city moving, its rooftops alive, its couture intact, and
+still finds one quiet moment before morning.
+
+| Midnight Metro Signal Room | Rooftop Apiary Sunrise |
+| --- | --- |
+| ![Radiance operating a midnight metro signal room](assets/lore/starlight-era/88-midnight-metro-signal-room.png) | ![Radiance inspecting a rooftop apiary at sunrise](assets/lore/starlight-era/89-rooftop-apiary-sunrise.png) |
+
+| Backstage Couture Rescue | Art Deco Hotel Nightcap |
+| --- | --- |
+| ![Radiance repairing couture backstage at the opera](assets/lore/starlight-era/90-backstage-couture-rescue.png) | ![Radiance making a late-night toast in an Art Deco hotel bar](assets/lore/starlight-era/91-art-deco-hotel-nightcap.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
