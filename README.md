@@ -459,6 +459,21 @@ rescue. Shorter silhouettes, stronger color, and the same unshakable heroine.
 | --- | --- |
 | ![Radiance directing launch-rescue crews at a coastal spaceport](assets/lore/starlight-era/142-orbital-launch-rescue-director.png) | ![Radiance leading a rescue team inside a crystal cavern](assets/lore/starlight-era/143-underground-cave-response-leader.png) |
 
+## Overnight Atlas — Batch 31: Open-Air Command
+
+The 96-image run closes with Radiance in four elemental command posts: Sahara
+medevac, tropical river rescue, an Arctic observatory evacuation, and an
+abyssal submersible mission. Lighter uniforms, more open silhouettes, full
+heroine energy.
+
+| Sahara Medevac Flight Director | Cyclone River-Rescue Commander |
+| --- | --- |
+| ![Radiance directing a Sahara medevac operation at sunset](assets/lore/starlight-era/144-sahara-medevac-flight-director.png) | ![Radiance commanding a tropical cyclone river rescue](assets/lore/starlight-era/145-cyclone-river-rescue-commander.png) |
+
+| Arctic Observatory Evacuation Lead | Abyssal Submersible Rescue Captain |
+| --- | --- |
+| ![Radiance leading an Arctic observatory evacuation under the aurora](assets/lore/starlight-era/146-arctic-observatory-evacuation-lead.png) | ![Radiance captaining a deep-sea submersible rescue mission](assets/lore/starlight-era/147-abyssal-submersible-rescue-captain.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
