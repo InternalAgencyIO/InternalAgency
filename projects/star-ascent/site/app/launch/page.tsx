@@ -18,7 +18,7 @@ export default function LaunchPage() {
       <h1>THE ROOM<br />IS OPEN.</h1>
       <span>One signal. One public record. No shadow links.</span>
       <LaunchClock language="en" />
-      <div className="launch-page-actions"><a href="/signal">OPEN OFFICIAL SIGNAL DIRECTORY ↗</a><a href="/proof">OPEN PROOF BOARD ↗</a><a href="/dossier">READ THE DOSSIER ↗</a></div>
+      <div className="launch-page-actions"><a href="/signal">OPEN OFFICIAL SIGNAL DIRECTORY ↗</a><a href="/proof">OPEN PROOF BOARD ↗</a><a href="/press">OPEN PRESS ROOM ↗</a><a href="/dossier">READ THE DOSSIER ↗</a></div>
     </section>
     <section className="launch-run"><p>RUN OF SHOW // UTC</p><div>{moments.map(([time,title,body],i)=><article key={time}><span>0{i+1}</span><time>{time}</time><h2>{title}</h2><p>{body}</p></article>)}</div></section>
     <section className="launch-evidence"><p>WHAT MAKES IT REAL</p><h2>Five proofs. One public record.</h2><div>{["Mint address on the site and broadcast screen.","Exact supply and token program.","Mint and freeze authority evidence.","Allocation wallets and time-lock records.","A matching record across every official surface."].map((item,index)=><article key={item}><span>0{index + 1}</span><p>{item}</p></article>)}</div></section>

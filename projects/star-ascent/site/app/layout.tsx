@@ -27,8 +27,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title, description,
     alternates: { languages: { en: "https://internalagency.io", tr: "https://ileriakil.com" } },
     icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
-    openGraph: { type: "website", title, description, images: [{ url: "/images/scorpion-launch-control-v1.png", width: 1728, height: 909, alt: tr ? "STAR ASCENT Akrep Nesli fırlatma kontrol ekibi" : "STAR ASCENT Scorpion Generation launch control crew" }] },
-    twitter: { card: "summary_large_image", title, description, images: ["/images/scorpion-launch-control-v1.png"] },
+    openGraph: { type: "website", title, description, images: [{ url: "/og-star-ascent-v1.png", width: 1792, height: 1024, alt: tr ? "STAR ASCENT fırlatma kontrolü" : "STAR ASCENT launch control" }] },
+    twitter: { card: "summary_large_image", title, description, images: ["/og-star-ascent-v1.png"] },
   };
 }
 

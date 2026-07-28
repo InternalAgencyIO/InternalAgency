@@ -7,5 +7,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return roots.flatMap((root) => [
     { url: root, lastModified: modified, changeFrequency: "daily", priority: 1 },
     { url: `${root}/dossier`, lastModified: modified, changeFrequency: "daily", priority: 0.9 },
+    { url: `${root}/launch`, lastModified: modified, changeFrequency: "hourly", priority: 0.95 },
+    { url: `${root}/signal`, lastModified: modified, changeFrequency: "hourly", priority: 0.9 },
+    { url: `${root}/proof`, lastModified: modified, changeFrequency: "hourly", priority: 0.9 },
+    { url: `${root}/press`, lastModified: modified, changeFrequency: "daily", priority: 0.8 },
+    { url: `${root}/world`, lastModified: modified, changeFrequency: "weekly", priority: 0.75 },
   ]);
 }
