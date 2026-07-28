@@ -222,6 +222,19 @@ texture, and quietly commanding fashion.
 | --- | --- |
 | ![Radiance crossing the desert aboard a night train](assets/lore/starlight-era/70-desert-night-train.png) | ![Radiance exploring a moonlit sculpture garden](assets/lore/starlight-era/71-moonlit-sculpture-garden.png) |
 
+## Overnight Atlas — Batch 13: Off-Duty Radiance
+
+Her world feels richer when nothing is at stake: imperfect pastries, a last
+record in the rain, one final planet before dawn, and dancing among moving boxes.
+
+| Midnight Cardamom Kitchen | Rainy Record Shop Closing |
+| --- | --- |
+| ![Radiance baking cardamom rolls after midnight](assets/lore/starlight-era/72-midnight-cardamom-kitchen.png) | ![Radiance browsing a record shop at closing time](assets/lore/starlight-era/73-rainy-record-shop-closing.png) |
+
+| Balcony Stargazing Dawn | Living Room Gold Dance |
+| --- | --- |
+| ![Radiance stargazing from a flower-filled balcony](assets/lore/starlight-era/74-balcony-stargazing-dawn.png) | ![Radiance dancing in a sunlit living room](assets/lore/starlight-era/75-living-room-gold-dance.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
