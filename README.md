@@ -352,6 +352,19 @@ the volume up at sunrise and lets Rome have the last word after midnight.
 | --- | --- |
 | ![Radiance DJing on a Lagos rooftop at sunrise](assets/lore/starlight-era/110-lagos-rooftop-dj-sunrise.png) | ![Radiance crossing a Roman fountain courtyard at midnight](assets/lore/starlight-era/111-rome-fountain-midnight.png) |
 
+## Overnight Atlas — Batch 23: Four Climates
+
+Radiance listens to the savanna, follows tango across an old stage, fills
+Marrakech with color, and keeps one warm light burning through Montreal snow.
+
+| Kenya Savanna Acoustic Station | Buenos Aires Tango Rehearsal |
+| --- | --- |
+| ![Radiance installing an acoustic monitor on the Kenyan savanna](assets/lore/starlight-era/112-kenya-savanna-acoustic-station.png) | ![Radiance rehearsing tango in a Buenos Aires theater](assets/lore/starlight-era/113-buenos-aires-tango-rehearsal.png) |
+
+| Marrakech Riad Rooftop | Montreal Midnight Cocoa |
+| --- | --- |
+| ![Radiance arranging a colorful Marrakech rooftop terrace](assets/lore/starlight-era/114-marrakech-riad-rooftop.png) | ![Radiance pouring cocoa on a snowy Montreal street](assets/lore/starlight-era/115-montreal-midnight-cocoa.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
