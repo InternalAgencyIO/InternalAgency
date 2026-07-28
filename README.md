@@ -287,6 +287,19 @@ still finds one quiet moment before morning.
 | --- | --- |
 | ![Radiance repairing couture backstage at the opera](assets/lore/starlight-era/90-backstage-couture-rescue.png) | ![Radiance making a late-night toast in an Art Deco hotel bar](assets/lore/starlight-era/91-art-deco-hotel-nightcap.png) |
 
+## Overnight Atlas — Batch 18: Field Notes
+
+Radiance works where the map runs out: canyon airspace, Sahara starlight,
+rainforest mist, and a lakeside studio made for thinking.
+
+| Canyon Rescue Drone Pilot | Sahara Meteorite Lab |
+| --- | --- |
+| ![Radiance piloting a rescue drone above a canyon](assets/lore/starlight-era/92-canyon-rescue-drone-pilot.png) | ![Radiance inspecting a meteorite in a Sahara field lab](assets/lore/starlight-era/93-sahara-meteorite-lab.png) |
+
+| Rainforest Bridge Survey | Lakeside Fashion Sketchbook |
+| --- | --- |
+| ![Radiance surveying a rainforest suspension bridge](assets/lore/starlight-era/94-rainforest-bridge-survey.png) | ![Radiance sketching fashion beside a mountain lake](assets/lore/starlight-era/95-lakeside-fashion-sketchbook.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
