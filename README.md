@@ -391,6 +391,19 @@ moving through Singapore, a New Orleans snare, and the precision of Monaco steel
 | --- | --- |
 | ![Radiance rehearsing snare drum in New Orleans](assets/lore/starlight-era/122-new-orleans-snare-rehearsal.png) | ![Radiance completing a fencing drill in Monaco](assets/lore/starlight-era/123-monaco-night-fencing-salon.png) |
 
+## Overnight Atlas — Batch 26: Summer Voltage
+
+Radiance carries the long light from a Stockholm wreath into a Berlin record,
+then follows the stars through Baja before Paris turns the final mirror toward her.
+
+| Stockholm Midsummer Wreath | Berlin Vinyl Dance |
+| --- | --- |
+| ![Radiance weaving a midsummer wreath in Stockholm](assets/lore/starlight-era/124-stockholm-midsummer-wreath.png) | ![Radiance dancing beside a Berlin record player](assets/lore/starlight-era/125-berlin-vinyl-dance.png) |
+
+| Baja Roadster Star Map | Paris Cocktail Final Look |
+| --- | --- |
+| ![Radiance mapping the stars beside a Baja roadster](assets/lore/starlight-era/126-baja-roadster-star-map.png) | ![Radiance completing a Paris cocktail look](assets/lore/starlight-era/127-paris-cocktail-final-look.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
