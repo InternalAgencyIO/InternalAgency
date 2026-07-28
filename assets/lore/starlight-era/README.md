@@ -105,6 +105,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Paris Rooftop Cobalt Swim**<br><img src="240-paris-rooftop-cobalt-swim.png" width="420" alt="Radiance, Ellie, and Alia sharing a sunny rooftop-pool holiday"> | **Seine Barge-Pool Trio**<br><img src="241-seine-barge-pool-trio.png" width="420" alt="The trio diving, lounging, and playing beside a fictional Paris river pool"> |
 | **Art-Deco Red-White Pool**<br><img src="242-art-deco-red-white-pool.png" width="420" alt="The trio walking together through a fictional art-deco pool arcade"> | **Moonlit Paris Pool Plunge**<br><img src="243-moonlit-paris-pool-plunge.png" width="420" alt="The trio sharing a joyful synchronized moonlit pool jump"> |
 
+## Hero Atlas - Batch 56: Cloudline Material Shock
+
+| | |
+|---|---|
+| **Floating Runway Material Parkour**<br><img src="244-floating-runway-material-parkour.png" width="420" alt="Radiance, Ellie, and Alia racing across floating material runways"> | **Wind-Harp Lace Light Trio**<br><img src="245-wind-harp-lace-light-trio.png" width="420" alt="The trio repairing a luminous wind harp in opaque patterned couture"> |
+| **Sky Aqueduct Holographic Sprint**<br><img src="246-sky-aqueduct-holographic-sprint.png" width="420" alt="The trio relay-passing a valve core across a sky aqueduct"> | **Cloud Pavilion Material Finale**<br><img src="247-cloud-pavilion-material-finale.png" width="420" alt="The trio delivering seed lights above floating cloud pavilions"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
