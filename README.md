@@ -723,6 +723,19 @@ rescues: mirror gold, sculptural black, optical white, stilettos, roses, and sco
 | --- | --- |
 | ![Radiance completing a recovered archive handoff beside a Milan night tram](assets/lore/starlight-era/218-milan-tram-gold-handoff.png) | ![Radiance securing a ceremonial navigation light beside the Bosphorus](assets/lore/starlight-era/219-istanbul-bosphorus-rose-line.png) |
 
+## Hero Atlas — Batch 50: Black Eagle Night Watch
+
+Four earthly night-watch scenes pair Radiance’s black, white, and mirror-gold
+fashion language with one complete pitch-black heavy sidearm and non-graphic tension.
+
+| Monaco Rooftop Black-Eagle Cover | Berlin Gallery Drone Intercept |
+| --- | --- |
+| ![Radiance guarding a Monaco rooftop access route in rain](assets/lore/starlight-era/220-monaco-rooftop-black-eagle-cover.png) | ![Radiance tracking a malfunctioning gallery drone in Berlin](assets/lore/starlight-era/221-berlin-gallery-drone-intercept.png) |
+
+| Dubai Elevator Night Guard | Sicily Night-Train Watch |
+| --- | --- |
+| ![Radiance carrying a recovered archive case from a mirrored Dubai elevator](assets/lore/starlight-era/222-dubai-elevator-night-guard.png) | ![Radiance watching an empty Sicilian rail line beside a repaired signal relay](assets/lore/starlight-era/223-sicily-night-train-watch.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
