@@ -404,6 +404,19 @@ then follows the stars through Baja before Paris turns the final mirror toward h
 | --- | --- |
 | ![Radiance mapping the stars beside a Baja roadster](assets/lore/starlight-era/126-baja-roadster-star-map.png) | ![Radiance completing a Paris cocktail look](assets/lore/starlight-era/127-paris-cocktail-final-look.png) |
 
+## Overnight Atlas — Batch 27: Skin & Structure
+
+Radiance sharpens her after-dark language with exposed shoulders, sculptural
+crop tops, pencil skirts, black lace, platforms, and a rose-and-thorn signature.
+
+| Midnight Chrome Rose Lace | Paris Rose Lace Elevator |
+| --- | --- |
+| ![Radiance in metallic gold and black lace with a rose-and-thorn motif](assets/lore/starlight-era/128-midnight-chrome-rose-lace.png) | ![Radiance in scarlet rose lace inside a mirrored Paris elevator](assets/lore/starlight-era/129-paris-rose-lace-elevator.png) |
+
+| Ibiza Crop-Pencil Blue Hour | New York Crop-Pencil Afterparty |
+| --- | --- |
+| ![Radiance in ivory and cobalt on an Ibiza terrace at blue hour](assets/lore/starlight-era/130-ibiza-crop-pencil-blue-hour.png) | ![Radiance in cobalt and scarlet in a New York listening room](assets/lore/starlight-era/131-new-york-crop-pencil-afterparty.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
