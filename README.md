@@ -658,6 +658,19 @@ transfer, an Atlantic free-dive, and a storm-lashed lighthouse zipline.
 | --- | --- |
 | ![Radiance free-diving to release an entangled Atlantic research buoy](assets/lore/starlight-era/198-atlantic-buoy-free-dive.png) | ![Radiance zip-lining from a lighthouse with a replacement lamp module](assets/lore/starlight-era/199-lighthouse-cliff-zipline.png) |
 
+## Hero Atlas — Batch 45: City Guardian After Dark
+
+The lighthouse silhouette evolves into an urban rescue language: black-gold
+armor, scarlet motion, hard rain, and four completely different mechanics.
+
+| Subway Flood Kayak Run | Tower-Crane Pendulum Rescue |
+| --- | --- |
+| ![Radiance powering a kayak through a flooded transit tunnel](assets/lore/starlight-era/200-subway-flood-kayak-run.png) | ![Radiance swinging from a crane line to recover an inspection drone](assets/lore/starlight-era/201-tower-crane-pendulum-rescue.png) |
+
+| Glass-Atrium Parkour Evacuation | Rooftop Solar-Wing Deployment |
+| --- | --- |
+| ![Radiance vaulting a beam while guiding people through a glass atrium](assets/lore/starlight-era/202-glass-atrium-parkour-evacuation.png) | ![Radiance sprinting across a storm rooftop with an unfolding solar wing](assets/lore/starlight-era/203-rooftop-solar-wing-deployment.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
