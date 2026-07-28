@@ -161,6 +161,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Giant Greenhouse Canopy Glide**<br><img src="272-giant-greenhouse-canopy-glide.png" width="420" alt="Radiance activating a pollination lattice beneath a continent-scale greenhouse canopy"> | **Seed-Vault Ice Run**<br><img src="273-seed-vault-ice-run.png" width="420" alt="Radiance restoring climate control during a high-speed skate through a sapphire seed vault"> |
 | **Coral-Lab Current Dance**<br><img src="274-coral-lab-current-dance.png" width="420" alt="Radiance locking a gold nursery frame into a luminous coral laboratory reef"> | **Desert Botany Sand Sprint**<br><img src="275-desert-botany-sand-sprint.png" width="420" alt="Radiance igniting desert irrigation arcs ahead of an immense dust front"> |
 
+## Hero Atlas - Batch 64: Planetary Engineering
+
+| | |
+|---|---|
+| **Mars Greenhouse Pressure Seal**<br><img src="276-mars-greenhouse-pressure-seal.png" width="420" alt="Radiance sealing a greenhouse pressure leak above emerald crops during a Martian dust storm"> | **Lunar Solar-Farm Board Run**<br><img src="277-lunar-solar-farm-snowboard.png" width="420" alt="Radiance locking an inverter into a lunar solar lane beneath a huge blue Earth"> |
+| **Venus Aerostat Ballast Swing**<br><img src="278-venus-aerostat-ballast-swing.png" width="420" alt="Radiance securing ballast beneath a colossal research aerostat in amber clouds"> | **Titan Lake Hovercraft Turn**<br><img src="279-titan-lake-hovercraft-turn.png" width="420" alt="Radiance recovering a teal weather probe during a banked Titan lake run"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
