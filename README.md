@@ -339,6 +339,19 @@ the beat in Havana, composing scent by moonlight, and carrying dawn into New Yor
 | --- | --- |
 | ![Radiance composing perfume on a moonlit Riviera terrace](assets/lore/starlight-era/106-riviera-moon-perfumery.png) | ![Radiance carrying flowers through New York before dawn](assets/lore/starlight-era/107-new-york-flower-market-dawn.png) |
 
+## Overnight Atlas — Batch 22: Signal & Celebration
+
+Radiance follows the signal from glacial silence to a warm kiln, then turns
+the volume up at sunrise and lets Rome have the last word after midnight.
+
+| Patagonia Glacier Relay | Kyoto Raku Kiln Morning |
+| --- | --- |
+| ![Radiance calibrating a radio relay beside a Patagonian glacier](assets/lore/starlight-era/108-patagonia-glacier-relay.png) | ![Radiance lifting a raku bowl in a Kyoto kiln studio](assets/lore/starlight-era/109-kyoto-raku-kiln-morning.png) |
+
+| Lagos Rooftop DJ Sunrise | Rome Fountain Midnight |
+| --- | --- |
+| ![Radiance DJing on a Lagos rooftop at sunrise](assets/lore/starlight-era/110-lagos-rooftop-dj-sunrise.png) | ![Radiance crossing a Roman fountain courtyard at midnight](assets/lore/starlight-era/111-rome-fountain-midnight.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
