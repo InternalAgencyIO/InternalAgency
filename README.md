@@ -606,6 +606,19 @@ a waterfall descent, a mangrove vault, and a bromeliad drone catch.
 | --- | --- |
 | ![Radiance vaulting from a canoe to recover a mangrove sensor](assets/lore/starlight-era/182-mangrove-paddle-vault.png) | ![Radiance leaping across giant bromeliads to catch a research drone](assets/lore/starlight-era/183-bromeliad-drone-catch.png) |
 
+## Hero Atlas — Batch 41: Mountain Weather
+
+Radiance carries couture into unstable air: a Dolomite cable traverse, a
+Himalayan supply flight, a Patagonian ice anchor, and an Alpine marker run.
+
+| Dolomite Via Ferrata Medevac | Himalayan Wingsuit Supply |
+| --- | --- |
+| ![Radiance carrying a medevac kit across a Dolomite cable route](assets/lore/starlight-era/184-dolomite-via-ferrata-medevac.png) | ![Radiance releasing a rescue pack during a Himalayan wingsuit flight](assets/lore/starlight-era/185-himalayan-wingsuit-supply.png) |
+
+| Patagonia Ice-Climb Anchor | Alpine Avalanche Airbag Run |
+| --- | --- |
+| ![Radiance installing a gold safety anchor on Patagonian blue ice](assets/lore/starlight-era/186-patagonia-ice-climb-anchor.png) | ![Radiance deploying marker buoys during a controlled Alpine ski run](assets/lore/starlight-era/187-alpine-avalanche-airbag-run.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
