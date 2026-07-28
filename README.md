@@ -710,6 +710,19 @@ mirror-tower sandboard, skybridge intercept, turbine cable reset, and canopy vau
 | --- | --- |
 | ![Radiance balancing on a turbine cable to reset a blade sensor](assets/lore/starlight-era/214-wind-turbine-cable-dance.png) | ![Radiance vaulting across colorful solar canopies to catch a loose power module](assets/lore/starlight-era/215-solar-market-canopy-vault.png) |
 
+## Hero Atlas — Batch 49: Black White Gold World Tour
+
+Radiance’s core palette becomes a global fashion language across four earthly
+rescues: mirror gold, sculptural black, optical white, stilettos, roses, and scorpions.
+
+| Manhattan Mirror Rooftop Catch | Paris Marble Fountain Rescue |
+| --- | --- |
+| ![Radiance catching a falling architectural model on a mirrored Manhattan rooftop](assets/lore/starlight-era/216-manhattan-mirror-rooftop-catch.png) | ![Radiance closing a ruptured fountain valve in a rain-wet Paris courtyard](assets/lore/starlight-era/217-paris-marble-fountain-rescue.png) |
+
+| Milan Tram Gold Handoff | Istanbul Bosphorus Gold-Line Recovery |
+| --- | --- |
+| ![Radiance completing a recovered archive handoff beside a Milan night tram](assets/lore/starlight-era/218-milan-tram-gold-handoff.png) | ![Radiance securing a ceremonial navigation light beside the Bosphorus](assets/lore/starlight-era/219-istanbul-bosphorus-rose-line.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
