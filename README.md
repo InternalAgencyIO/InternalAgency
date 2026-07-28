@@ -170,6 +170,19 @@ See [`scripts/video/README.md`](scripts/video/README.md) for the full local
 render workflow. Scene definitions and reproducible prompts live in
 [`assets/scene-manifest.json`](assets/scene-manifest.json).
 
+## Overnight Atlas — Batch 9: Nature Adventure
+
+Radiance leaves the city without losing her sense of style: four capable,
+cinematic moments across mountain, rainforest, volcanic coast, and arctic sky.
+
+| Alpine Wildflower Ridge | Rainforest Canopy Station |
+| --- | --- |
+| ![Radiance at sunrise on an alpine wildflower ridge](assets/lore/starlight-era/56-alpine-wildflower-ridge.png) | ![Radiance working at a rainforest canopy station](assets/lore/starlight-era/57-rainforest-canopy-station.png) |
+
+| Black-Sand Horseback Dawn | Northern Lights Field Camp |
+| --- | --- |
+| ![Radiance riding along a black-sand beach at dawn](assets/lore/starlight-era/58-black-sand-horseback-dawn.png) | ![Radiance at an arctic field camp under the aurora](assets/lore/starlight-era/59-northern-lights-field-camp.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
