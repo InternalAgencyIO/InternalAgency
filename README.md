@@ -326,6 +326,19 @@ friends to a Tuscan table, tuning the stars, and launching into a new dawn.
 | --- | --- |
 | ![Radiance rehearsing a planetarium star projection](assets/lore/starlight-era/102-planetarium-light-rehearsal.png) | ![Radiance preparing a hot-air balloon in Cappadocia](assets/lore/starlight-era/103-cappadocia-balloon-dawn.png) |
 
+## Overnight Atlas — Batch 21: After-Hours Atelier
+
+When the doors close, Radiance keeps creating: fitting gold in Milan, finding
+the beat in Havana, composing scent by moonlight, and carrying dawn into New York.
+
+| Milan Gold Fitting | Havana Rooftop Salsa |
+| --- | --- |
+| ![Radiance fitting a metallic-gold dress in Milan](assets/lore/starlight-era/104-milan-gold-fitting.png) | ![Radiance rehearsing salsa on a Havana rooftop](assets/lore/starlight-era/105-havana-rooftop-salsa.png) |
+
+| Riviera Moon Perfumery | New York Flower Market Dawn |
+| --- | --- |
+| ![Radiance composing perfume on a moonlit Riviera terrace](assets/lore/starlight-era/106-riviera-moon-perfumery.png) | ![Radiance carrying flowers through New York before dawn](assets/lore/starlight-era/107-new-york-flower-market-dawn.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
