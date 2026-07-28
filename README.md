@@ -313,6 +313,19 @@ bowling lane, a Ferris wheel brought back to light, and one last Paris dance.
 | --- | --- |
 | ![Radiance testing the lights on a coastal Ferris wheel](assets/lore/starlight-era/98-coastal-ferris-wheel-light-test.png) | ![Radiance dancing in a Paris cocktail dress](assets/lore/starlight-era/99-paris-cocktail-dance.png) |
 
+## Overnight Atlas — Batch 20: Motion & Wonder
+
+Radiance moves between city rain and open sky: navigating Tokyo, welcoming
+friends to a Tuscan table, tuning the stars, and launching into a new dawn.
+
+| Tokyo Rain Cycle Map | Tuscan Harvest Supper |
+| --- | --- |
+| ![Radiance navigating Tokyo by bicycle after rain](assets/lore/starlight-era/100-tokyo-rain-cycle-map.png) | ![Radiance preparing a Tuscan harvest supper](assets/lore/starlight-era/101-tuscan-harvest-supper.png) |
+
+| Planetarium Light Rehearsal | Cappadocia Balloon Dawn |
+| --- | --- |
+| ![Radiance rehearsing a planetarium star projection](assets/lore/starlight-era/102-planetarium-light-rehearsal.png) | ![Radiance preparing a hot-air balloon in Cappadocia](assets/lore/starlight-era/103-cappadocia-balloon-dawn.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
