@@ -17,6 +17,7 @@ const checks = [
   ["validate-rewards-epoch-engine.mjs"],
   ["validate-binding-ledger-schema.mjs"],
   ["validate-solana-wallet-proof.mjs"],
+  ["validate-x-oauth-state.mjs"],
 ];
 
 for (const [script, ...args] of checks) {
