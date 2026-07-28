@@ -697,6 +697,19 @@ hurdle, a living-wall climb, a maglev handoff, and a neon canal bike leap.
 | --- | --- |
 | ![Radiance sprinting beside a maglev train to complete a medical handoff](assets/lore/starlight-era/210-maglev-platform-sprint.png) | ![Radiance jumping an electric bicycle across a neon canal service gap](assets/lore/starlight-era/211-neon-canal-bike-leap.png) |
 
+## Hero Atlas — Batch 48: Desert Megacity Swim Couture
+
+Bold color and swim-couture race through four desert-city mechanics: a
+mirror-tower sandboard, skybridge intercept, turbine cable reset, and canopy vault.
+
+| Mirror-Tower Sandboard | Sky-Bridge Polo Rescue |
+| --- | --- |
+| ![Radiance carving between mirrored desert towers to retrieve a solar mapping puck](assets/lore/starlight-era/212-mirror-tower-sandboard.png) | ![Radiance intercepting a runaway service unit from an electric mount](assets/lore/starlight-era/213-sky-bridge-polo-rescue.png) |
+
+| Wind-Turbine Cable Dance | Solar-Market Canopy Vault |
+| --- | --- |
+| ![Radiance balancing on a turbine cable to reset a blade sensor](assets/lore/starlight-era/214-wind-turbine-cable-dance.png) | ![Radiance vaulting across colorful solar canopies to catch a loose power module](assets/lore/starlight-era/215-solar-market-canopy-vault.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
