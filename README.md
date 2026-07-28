@@ -619,6 +619,19 @@ Himalayan supply flight, a Patagonian ice anchor, and an Alpine marker run.
 | --- | --- |
 | ![Radiance installing a gold safety anchor on Patagonian blue ice](assets/lore/starlight-era/186-patagonia-ice-climb-anchor.png) | ![Radiance deploying marker buoys during a controlled Alpine ski run](assets/lore/starlight-era/187-alpine-avalanche-airbag-run.png) |
 
+## Hero Atlas — Batch 42: Storm Odyssey
+
+Four storm systems become controlled motion: a lifeboat leap, a bridge-light
+reconnection, a rooftop winch swing, and an empty-raft jetboard tow.
+
+| Maelstrom Lifeboat Leap | Lightning-Bridge Cable Run |
+| --- | --- |
+| ![Radiance leaping from a research vessel into an empty rescue boat](assets/lore/starlight-era/188-maelstrom-lifeboat-leap.png) | ![Radiance reconnecting emergency lights on a storm-lashed bridge cable](assets/lore/starlight-era/189-lightning-bridge-cable-run.png) |
+
+| Cyclone Rooftop Winch | Storm-Surge Jetboard Tow |
+| --- | --- |
+| ![Radiance swinging a flotation pack toward a flooded rooftop cache](assets/lore/starlight-era/190-cyclone-rooftop-winch.png) | ![Radiance towing an empty evacuation raft along a flooded boulevard](assets/lore/starlight-era/191-storm-surge-jetboard-tow.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
