@@ -527,6 +527,14 @@ export default function Home() {
     }
   }, []);
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("activate") !== "1") return;
+    queueMicrotask(() => setActivationOpen(true));
+    params.delete("activate");
+    const suffix = params.toString();
+    window.history.replaceState({}, "", `${window.location.pathname}${suffix ? `?${suffix}` : ""}${window.location.hash}`);
+  }, []);
+  useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
   const t = language === "tr" ? { ...repairLegacyEncoding(copy.tr), ...trPublicVoice } : repairLegacyEncoding(copy.en);
