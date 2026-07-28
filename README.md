@@ -671,6 +671,19 @@ armor, scarlet motion, hard rain, and four completely different mechanics.
 | --- | --- |
 | ![Radiance vaulting a beam while guiding people through a glass atrium](assets/lore/starlight-era/202-glass-atrium-parkour-evacuation.png) | ![Radiance sprinting across a storm rooftop with an unfolding solar wing](assets/lore/starlight-era/203-rooftop-solar-wing-deployment.png) |
 
+## Hero Atlas — Batch 46: Sunlit Worlds
+
+Radiance trades the storm armor for wind-cut color: a dhow sail catch, a
+lagoon hydrofoil carve, a cliff-canopy swing, and a carnival skate handoff.
+
+| Zanzibar Dhow Sail Catch | Palawan Lagoon Hydrofoil Courier |
+| --- | --- |
+| ![Radiance leaping from a colorful dhow to catch a loose sail line](assets/lore/starlight-era/204-zanzibar-dhow-sail-catch.png) | ![Radiance banking a hydrofoil through a turquoise limestone lagoon](assets/lore/starlight-era/205-palawan-lagoon-hydrofoil-courier.png) |
+
+| Bali Cliff Canopy Swing | Cartagena Carnival Skate Relay |
+| --- | --- |
+| ![Radiance swinging above a tropical cliff pavilion to secure a canopy](assets/lore/starlight-era/206-bali-cliff-canopy-swing.png) | ![Radiance completing a colorful roller-skate instrument handoff](assets/lore/starlight-era/207-cartagena-carnival-skate-relay.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
