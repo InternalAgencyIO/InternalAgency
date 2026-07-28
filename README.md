@@ -365,6 +365,19 @@ Marrakech with color, and keeps one warm light burning through Montreal snow.
 | --- | --- |
 | ![Radiance arranging a colorful Marrakech rooftop terrace](assets/lore/starlight-era/114-marrakech-riad-rooftop.png) | ![Radiance pouring cocoa on a snowy Montreal street](assets/lore/starlight-era/115-montreal-midnight-cocoa.png) |
 
+## Overnight Atlas — Batch 24: Private Hours
+
+Radiance protects the small rituals that keep a large life in balance: Milan
+espresso, London footwork, a Seoul soundcheck, and midnight above the Aegean.
+
+| Milan Balcony Espresso | London Boxing Footwork |
+| --- | --- |
+| ![Radiance having espresso on a Milan balcony](assets/lore/starlight-era/116-milan-balcony-espresso.png) | ![Radiance practicing boxing footwork in a London gym](assets/lore/starlight-era/117-london-boxing-footwork.png) |
+
+| Seoul Karaoke Soundcheck | Santorini Midnight Table |
+| --- | --- |
+| ![Radiance soundchecking a private Seoul karaoke studio](assets/lore/starlight-era/118-seoul-karaoke-soundcheck.png) | ![Radiance lighting a midnight table in Santorini](assets/lore/starlight-era/119-santorini-midnight-table.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
