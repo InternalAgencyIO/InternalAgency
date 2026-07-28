@@ -417,6 +417,20 @@ crop tops, pencil skirts, black lace, platforms, and a rose-and-thorn signature.
 | --- | --- |
 | ![Radiance in ivory and cobalt on an Ibiza terrace at blue hour](assets/lore/starlight-era/130-ibiza-crop-pencil-blue-hour.png) | ![Radiance in cobalt and scarlet in a New York listening room](assets/lore/starlight-era/131-new-york-crop-pencil-afterparty.png) |
 
+## Overnight Atlas — Batch 28: Hero Duty — Sea & Sky
+
+Radiance keeps the sharper silhouette and steps into command: rescue aviation
+over the Dolomites, a rain-soaked metropolitan helipad, a Sardinian vessel
+bridge, and a shipwreck response off Amalfi.
+
+| Dolomites Rescue Helicopter Pilot | Metropolitan Aviation Commander |
+| --- | --- |
+| ![Radiance piloting a mountain rescue helicopter over the Dolomites](assets/lore/starlight-era/132-dolomites-rescue-helicopter-pilot.png) | ![Radiance commanding an aviation rescue unit on a rain-soaked city helipad](assets/lore/starlight-era/133-metropolitan-aviation-commander.png) |
+
+| Sardinia Coast-Guard Captain | Amalfi Shipwreck Rescue Command |
+| --- | --- |
+| ![Radiance captaining a Mediterranean rescue vessel off Sardinia](assets/lore/starlight-era/134-sardinia-coast-guard-captain.png) | ![Radiance coordinating a shipwreck rescue off the Amalfi coast](assets/lore/starlight-era/135-amalfi-shipwreck-rescue-command.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
