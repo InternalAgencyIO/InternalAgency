@@ -14,6 +14,7 @@ export default function ProofPage() {
     <section className="proof-hero"><p>STAR ASCENT // PUBLIC PROOF BOARD</p><h1>NO CLAIM<br />WITHOUT PROOF.</h1><p>This record changes only when public evidence can be checked directly. Until then, every field remains on hold.</p></section>
     <section className="proof-grid">{fields.map(([label,status,detail], index)=><article key={label}><span>0{index + 1}</span><div><p>{label}</p><strong>{status}</strong><small>{detail}</small></div></article>)}</section>
     <section className="proof-rule"><p>PUBLICATION ORDER</p><h2>Sign physically. Verify independently. Publish everywhere together.</h2><div><a href="/launch">RUN OF SHOW ↗</a><a href="/dossier/read/genesis-proof">GENESIS RECORD ↗</a><a href="/signal">OFFICIAL SIGNAL ↗</a></div></section>
+    <section className="proof-rule"><p>FIELD GUIDE</p><h2>Know the public verification order before Genesis begins.</h2><div><a href="/verify">OPEN FIELD GUIDE ↗</a></div></section>
     <footer>STAR ASCENT // EVIDENCE BEFORE AMPLIFICATION</footer>
   </main>;
 }
