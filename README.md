@@ -749,6 +749,19 @@ silhouette with Radiance’s black, white, mirror-gold, rose, and scorpion langu
 | --- | --- |
 | ![Radiance carrying a shoulder launcher through a Sahara mirror field](assets/lore/starlight-era/226-sahara-mirror-field-uav-intercept.png) | ![Radiance guarding an empty North Sea research platform in a storm](assets/lore/starlight-era/227-north-sea-platform-uav-guard.png) |
 
+## Hero Atlas — Batch 52: Midnight Operator Trio — Polar Light
+
+Radiance meets Ellie and Alia for four kinetic polar group editorials built around
+midnight blue, matte black, hot red, molten gold, and practical light work.
+
+| Aurora Midnight Light Relay | Sea-Ice Neon Portage Trio |
+| --- | --- |
+| ![Radiance, Ellie, and Alia carving an illuminated sled turn beneath an aurora](assets/lore/starlight-era/228-aurora-midnight-light-relay.png) | ![The trio vaulting from a kayak onto fractured turquoise sea ice](assets/lore/starlight-era/229-sea-ice-neon-portage-trio.png) |
+
+| Iceberg Light-Rig Rappel | Polar-Night Snowkite Formation |
+| --- | --- |
+| ![The trio installing a cinematic light rig on an iceberg at sunset](assets/lore/starlight-era/230-iceberg-light-rig-rappel.png) | ![Radiance, Ellie, and Alia snowkiting in formation beneath the aurora](assets/lore/starlight-era/231-polar-night-snowkite-formation.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
