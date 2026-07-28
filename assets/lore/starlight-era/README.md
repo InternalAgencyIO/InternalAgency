@@ -133,6 +133,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Moonlit Suite Styling Session**<br><img src="256-moonlit-suite-styling-session.png" width="420" alt="Radiance, Ellie, and Alia preparing couture around a moonlit penthouse display bed"> | **Canopy Bed Lace Light**<br><img src="257-canopy-bed-lace-light.png" width="420" alt="The trio arranging a starlight installation around an optical-white canopy bed"> |
 | **Mirror Suite Pillow Laugh**<br><img src="258-mirror-suite-pillow-laugh.png" width="420" alt="The trio sharing a kinetic pillow toss between mirror-suite styling takes"> | **Sunrise Coastal Lookbook**<br><img src="259-sunrise-coastal-lookbook.png" width="420" alt="The trio striding from a coastal penthouse bedroom toward a sunrise fashion set"> |
 
+## Hero Atlas - Batch 60: Threefold Chemistry
+
+| | |
+|---|---|
+| **Mirror Salon Matching Trio**<br><img src="260-mirror-salon-matching-trio.png" width="420" alt="Radiance, Ellie, and Alia turning together in coordinated mirror-salon couture"> | **Scarlet Couch Threefold Pose**<br><img src="261-scarlet-couch-threefold-pose.png" width="420" alt="The trio forming a confident triangular portrait around a scarlet couch"> |
+| **Glass Elevator Linked Runway**<br><img src="262-glass-elevator-linked-runway.png" width="420" alt="The trio striding in linked formation through a gold-lit glass elevator"> | **Moonlit Rooftop Threefold Finale**<br><img src="263-moonlit-rooftop-threefold-finale.png" width="420" alt="The trio completing a synchronized pivot beneath rooftop constellations"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
