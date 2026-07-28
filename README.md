@@ -445,6 +445,20 @@ response in cobalt and gold, and a North Sea winch team in storm-ready couture.
 | --- | --- |
 | ![Radiance directing a disaster-response flight team on a Tokyo rooftop](assets/lore/starlight-era/138-tokyo-disaster-aviation-command.png) | ![Radiance supervising a rescue-winch team in a North Sea hangar](assets/lore/starlight-era/139-north-sea-rescue-winch-supervisor.png) |
 
+## Overnight Atlas — Batch 30: Four Frontiers
+
+Radiance crosses four new frontiers in compact command couture: a volcanic
+evacuation, a flooded Venice, an orbital launch rehearsal, and a crystal-cave
+rescue. Shorter silhouettes, stronger color, and the same unshakable heroine.
+
+| Volcanic Evacuation Command | Venice Flood-Rescue Captain |
+| --- | --- |
+| ![Radiance directing an evacuation above a volcanic island](assets/lore/starlight-era/140-volcanic-evacuation-command.png) | ![Radiance captaining a flood-rescue operation in Venice](assets/lore/starlight-era/141-venice-flood-rescue-captain.png) |
+
+| Orbital Launch Rescue Director | Underground Cave-Response Leader |
+| --- | --- |
+| ![Radiance directing launch-rescue crews at a coastal spaceport](assets/lore/starlight-era/142-orbital-launch-rescue-director.png) | ![Radiance leading a rescue team inside a crystal cavern](assets/lore/starlight-era/143-underground-cave-response-leader.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
