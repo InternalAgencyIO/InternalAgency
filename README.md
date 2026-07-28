@@ -538,6 +538,20 @@ asteroid transfer that reconnects an observatory tether.
 | --- | --- |
 | ![Radiance delivering a weather probe beneath a gold paraglider above Venus](assets/lore/starlight-era/162-venus-cloud-paraglider.png) | ![Radiance crossing between asteroids to reconnect an observatory tether](assets/lore/starlight-era/163-asteroid-bouldering-transfer.png) |
 
+## Hero Atlas — Batch 36: Orbital Stadium
+
+Radiance turns four impossible sporting gestures into practical orbital work:
+a high-jump antenna repair, a medicine run through a Mars canyon, synchronized
+maintenance inside a lunar water sphere, and a space-elevator trapeze catch.
+
+| Orbital High-Jump Signal | Mars Canyon Speed Skate |
+| --- | --- |
+| ![Radiance clearing an orbital antenna bar while locking its final segment](assets/lore/starlight-era/164-orbital-high-jump-signal.png) | ![Radiance speed-skating magnetic rails through a Mars canyon](assets/lore/starlight-era/165-mars-canyon-speed-skate.png) |
+
+| Moon-Pool Synchronized Repair | Space-Elevator Trapeze Rescue |
+| --- | --- |
+| ![Radiance guiding repair drones inside a lunar low-gravity water sphere](assets/lore/starlight-era/166-moon-pool-synchronized-repair.png) | ![Radiance swinging from a space-elevator trapeze to recover a toolkit](assets/lore/starlight-era/167-space-elevator-trapeze-rescue.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
