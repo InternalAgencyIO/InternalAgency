@@ -209,6 +209,19 @@ the final record into sunrise.
 | --- | --- |
 | ![Radiance crafting a gold couture structure in Paris](assets/lore/starlight-era/66-paris-metal-couture-atelier.png) | ![Radiance completing a rooftop radio broadcast at sunrise](assets/lore/starlight-era/67-rooftop-radio-sunrise.png) |
 
+## Overnight Atlas — Batch 12: Midnight Grand Tour
+
+Four cities and landscapes become one continuous night of arrival, motion,
+texture, and quietly commanding fashion.
+
+| Venice Water Taxi Midnight | Art Deco Elevator Arrival |
+| --- | --- |
+| ![Radiance arriving in Venice by water taxi](assets/lore/starlight-era/68-venice-water-taxi-midnight.png) | ![Radiance arriving through an Art Deco elevator](assets/lore/starlight-era/69-art-deco-elevator-arrival.png) |
+
+| Desert Night Train | Moonlit Sculpture Garden |
+| --- | --- |
+| ![Radiance crossing the desert aboard a night train](assets/lore/starlight-era/70-desert-night-train.png) | ![Radiance exploring a moonlit sculpture garden](assets/lore/starlight-era/71-moonlit-sculpture-garden.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
