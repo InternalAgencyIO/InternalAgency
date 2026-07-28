@@ -183,6 +183,19 @@ cinematic moments across mountain, rainforest, volcanic coast, and arctic sky.
 | --- | --- |
 | ![Radiance riding along a black-sand beach at dawn](assets/lore/starlight-era/58-black-sand-horseback-dawn.png) | ![Radiance at an arctic field camp under the aurora](assets/lore/starlight-era/59-northern-lights-field-camp.png) |
 
+## Overnight Atlas — Batch 10: Full-Colour Swim
+
+Four saturated resort moments bring a brighter pulse to Radiance's world:
+Riviera turquoise, Miami primaries, lagoon green, and a violet-gold sunset.
+
+| Riviera Colour Dive | Miami Cabana Flash |
+| --- | --- |
+| ![Radiance in a colourful Riviera swim editorial](assets/lore/starlight-era/60-riviera-colour-dive.png) | ![Radiance at a bright Miami pool cabana](assets/lore/starlight-era/61-miami-cabana-flash.png) |
+
+| Lagoon Paddle Morning | Sunset Pool Dance |
+| --- | --- |
+| ![Radiance paddleboarding on a tropical lagoon](assets/lore/starlight-era/62-lagoon-paddle-morning.png) | ![Radiance at a colourful rooftop pool celebration](assets/lore/starlight-era/63-sunset-pool-dance.png) |
+
 ## Built in the open
 
 Radiance is being developed as a visible archive of iteration: original art,
