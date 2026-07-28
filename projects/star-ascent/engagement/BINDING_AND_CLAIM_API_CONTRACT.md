@@ -10,7 +10,7 @@ This contract is a production blueprint. It does not authorize a hosted endpoint
    - Store only a hash of the nonce/message; expire it in five minutes.
 2. `POST /api/nodes/verify-wallet`
    - Input: wallet address, signed message, nonce id.
-   - Verify the Ed25519 signature server-side. Create or update a `pending` node binding only after signature validation.
+   - Verify the Ed25519 signature server-side with `engagement/solana-wallet-proof.mjs`. Create or update a `pending` node binding only after signature validation.
 3. `GET /api/x/authorize`
    - Start X OAuth 2.0 PKCE, bound to the pending node id in a signed, short-lived state value.
 4. `GET /api/x/callback`
