@@ -36,13 +36,13 @@ const requiredSingles = [
 let failed = false;
 for (const name of requiredPairs) {
   for (const language of ["en", "tr"]) {
-    const path = resolve(root, "public", "disclosures", `${name}-${language}.txt`);
+    const path = resolve(root, "archive", "public-disclosures", "source", `${name}-${language}.txt`);
     if (existsSync(path)) console.log(`OK: ${name}-${language}.txt`);
     else { console.error(`FAIL: missing ${name}-${language}.txt`); failed = true; }
   }
 }
 for (const name of requiredSingles) {
-  const path = resolve(root, "public", "disclosures", name);
+  const path = resolve(root, "archive", "public-disclosures", "source", name);
   if (existsSync(path)) console.log(`OK: ${name}`);
   else { console.error(`FAIL: missing ${name}`); failed = true; }
 }
@@ -51,5 +51,5 @@ if (failed) {
   console.error("\nDo not publish a document-index update until all required assets exist.");
   process.exitCode = 1;
 } else {
-  console.log("\nAll required public disclosure assets are present locally.");
+  console.log("\nAll required canonical disclosure sources are present locally.");
 }

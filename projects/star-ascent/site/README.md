@@ -16,7 +16,7 @@ The work is intentionally visible: source, public documents, visual iterations, 
 | --- | --- |
 | `app/` | Public web experience, including the Genesis Activation Terminal. |
 | `public/images/` | Versioned campaign and lore artwork used by the live site. |
-| `public/disclosures/` | Publicly served source documents, evidence templates, and validators. |
+| `archive/public-disclosures/source/` | Canonical disclosure sources retained behind designed Dossier redirects. |
 | `docs/` | Plain-language build, release, and operating notes. |
 | `archive/` | Index of preserved iteration and release evidence. |
 | `CHANGELOG.md` | Human-readable public build log. |

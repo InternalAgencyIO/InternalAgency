@@ -8,11 +8,11 @@ const EXPECTED_UTC = "2026-07-29T14:15:18Z";
 const EXPECTED_UTC_DISPLAY = "14:15:18 UTC";
 const EXPECTED_ISTANBUL_DISPLAY = "17:15:18";
 
-const disclosureFiles = readdirSync(resolve("public/disclosures"), {
+const disclosureFiles = readdirSync(resolve("archive/public-disclosures/source"), {
   withFileTypes: true,
 })
   .filter((entry) => entry.isFile())
-  .map((entry) => join("public/disclosures", entry.name));
+  .map((entry) => join("archive/public-disclosures/source", entry.name));
 
 const activeFiles = [
   "app/LaunchClock.tsx",

@@ -3,31 +3,31 @@ import { readFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { validateAllocationManifest } from "../public/disclosures/iat-allocation-validator.mjs";
-import { validateAuthorityTransitionPlan } from "../public/disclosures/iat-authority-plan-validator.mjs";
+import { validateAllocationManifest } from "../archive/public-disclosures/source/iat-allocation-validator.mjs";
+import { validateAuthorityTransitionPlan } from "../archive/public-disclosures/source/iat-authority-plan-validator.mjs";
 import {
   auditPublicationBundle,
   PUBLICATION_MANIFEST,
-} from "../public/disclosures/star-ascent-publication-audit.mjs";
+} from "../archive/public-disclosures/source/star-ascent-publication-audit.mjs";
 import {
   validateCrossChannelReleasePacket,
-} from "../public/disclosures/star-ascent-release-packet-validator.mjs";
+} from "../archive/public-disclosures/source/star-ascent-release-packet-validator.mjs";
 import {
   validateEvidenceFreshnessLedger,
-} from "../public/disclosures/star-ascent-evidence-ledger-validator.mjs";
+} from "../archive/public-disclosures/source/star-ascent-evidence-ledger-validator.mjs";
 import {
   composeReadinessSnapshot,
-} from "../public/disclosures/star-ascent-readiness-snapshot-validator.mjs";
+} from "../archive/public-disclosures/source/star-ascent-readiness-snapshot-validator.mjs";
 import {
   validateRehearsalTrace,
-} from "../public/disclosures/star-ascent-rehearsal-trace-validator.mjs";
+} from "../archive/public-disclosures/source/star-ascent-rehearsal-trace-validator.mjs";
 import {
   createChangeFreezeManifest,
   validateChangeFreezeManifest,
-} from "../public/disclosures/star-ascent-change-freeze-validator.mjs";
+} from "../archive/public-disclosures/source/star-ascent-change-freeze-validator.mjs";
 import {
   validateLaunchHandoffPacket,
-} from "../public/disclosures/star-ascent-launch-handoff-validator.mjs";
+} from "../archive/public-disclosures/source/star-ascent-launch-handoff-validator.mjs";
 
 // The production target supplies these CommonJS globals through workerd's
 // nodejs_compat layer. Define them only for this direct Node bundle renderer.
@@ -194,8 +194,8 @@ test("keeps bilingual and accessibility safeguards in source", async () => {
 
 test("ships bilingual readiness scorecards with freshness and hold gates", async () => {
   const [english, turkish] = await Promise.all([
-    readFile(new URL("../public/disclosures/star-ascent-readiness-scorecard-en.txt", import.meta.url), "utf8"),
-    readFile(new URL("../public/disclosures/star-ascent-readiness-scorecard-tr.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/star-ascent-readiness-scorecard-en.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/star-ascent-readiness-scorecard-tr.txt", import.meta.url), "utf8"),
   ]);
 
   assert.match(english, /CURRENT DECISION: HOLD/);
@@ -219,7 +219,7 @@ test("audits every public document link and bilingual critical marker", async ()
   ]);
 
   for (const path of linkedFiles) {
-    const file = await readFile(new URL(`../public/disclosures/${path}`, import.meta.url), "utf8");
+    const file = await readFile(new URL(`../archive/public-disclosures/source/${path}`, import.meta.url), "utf8");
     assert.ok(file.trim(), `${path} must be a non-empty public file`);
   }
   assert.deepEqual(
@@ -231,7 +231,7 @@ test("audits every public document link and bilingual critical marker", async ()
     await Promise.all(
       [...auditedFiles].map(async (path) => [
         path,
-        await readFile(new URL(`../public/disclosures/${path}`, import.meta.url), "utf8"),
+        await readFile(new URL(`../archive/public-disclosures/source/${path}`, import.meta.url), "utf8"),
       ]),
     ),
   );
@@ -595,8 +595,8 @@ test("cross-channel release packet keeps exact public fields on HOLD", () => {
 
 test("ships bilingual incident-response runbooks with automatic hold triggers", async () => {
   const [english, turkish] = await Promise.all([
-    readFile(new URL("../public/disclosures/star-ascent-incident-response-en.txt", import.meta.url), "utf8"),
-    readFile(new URL("../public/disclosures/star-ascent-incident-response-tr.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/star-ascent-incident-response-en.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/star-ascent-incident-response-tr.txt", import.meta.url), "utf8"),
   ]);
 
   assert.match(english, /DEFAULT DECISION: HOLD/);
@@ -611,8 +611,8 @@ test("ships bilingual incident-response runbooks with automatic hold triggers", 
 
 test("ships bilingual allocation and authority checklists as pending templates", async () => {
   const [english, turkish] = await Promise.all([
-    readFile(new URL("../public/disclosures/iat-allocation-authority-checklist-en.txt", import.meta.url), "utf8"),
-    readFile(new URL("../public/disclosures/iat-allocation-authority-checklist-tr.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/iat-allocation-authority-checklist-en.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/iat-allocation-authority-checklist-tr.txt", import.meta.url), "utf8"),
   ]);
 
   assert.match(english, /PRE-LAUNCH TEMPLATE — NOT LIVE TOKEN EVIDENCE/);
@@ -625,8 +625,8 @@ test("ships bilingual allocation and authority checklists as pending templates",
 
 test("ships bilingual litepapers as unverified pre-launch design drafts", async () => {
   const [english, turkish] = await Promise.all([
-    readFile(new URL("../public/disclosures/iat-litepaper-en.txt", import.meta.url), "utf8"),
-    readFile(new URL("../public/disclosures/iat-litepaper-tr.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/iat-litepaper-en.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/iat-litepaper-tr.txt", import.meta.url), "utf8"),
   ]);
 
   assert.match(english, /PRE-LAUNCH DESIGN DRAFT — NOT LIVE TOKEN EVIDENCE/);
@@ -639,8 +639,8 @@ test("ships bilingual litepapers as unverified pre-launch design drafts", async 
 
 test("ships bilingual design-only Solana specification with safety gates", async () => {
   const [english, turkish] = await Promise.all([
-    readFile(new URL("../public/disclosures/iat-solana-technical-spec-en.txt", import.meta.url), "utf8"),
-    readFile(new URL("../public/disclosures/iat-solana-technical-spec-tr.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/iat-solana-technical-spec-en.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/iat-solana-technical-spec-tr.txt", import.meta.url), "utf8"),
   ]);
 
   assert.match(english, /DESIGN AND TEST SCAFFOLD ONLY — NO LIVE MINT OR DEPLOYMENT/);
@@ -762,8 +762,8 @@ test("authority validator keeps proposed transitions behind a public evidence ga
 
 test("ships bilingual launch communications kits with anti-scam publishing gates", async () => {
   const [english, turkish] = await Promise.all([
-    readFile(new URL("../public/disclosures/star-ascent-communications-kit-en.txt", import.meta.url), "utf8"),
-    readFile(new URL("../public/disclosures/star-ascent-communications-kit-tr.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/star-ascent-communications-kit-en.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/star-ascent-communications-kit-tr.txt", import.meta.url), "utf8"),
   ]);
 
   assert.match(english, /PRE-LAUNCH DRAFT — VERIFY EVERY PENDING FACT BEFORE PUBLICATION/);
@@ -780,8 +780,8 @@ test("ships bilingual launch communications kits with anti-scam publishing gates
 
 test("ships bilingual rehearsal playbooks with preflight and escalation gates", async () => {
   const [english, turkish] = await Promise.all([
-    readFile(new URL("../public/disclosures/star-ascent-launch-rehearsal-en.txt", import.meta.url), "utf8"),
-    readFile(new URL("../public/disclosures/star-ascent-launch-rehearsal-tr.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/star-ascent-launch-rehearsal-en.txt", import.meta.url), "utf8"),
+    readFile(new URL("../archive/public-disclosures/source/star-ascent-launch-rehearsal-tr.txt", import.meta.url), "utf8"),
   ]);
 
   assert.match(english, /A REHEARSAL IS NOT LAUNCH APPROVAL/);
