@@ -233,11 +233,18 @@ avatar memory, wardrobe reference, or reactive scene.
 
 ## Next Campaign - Trio Unbound 40x4
 
-The next 160-image expansion is queued as 40 four-image batches starring
+The 160-image expansion is active as 40 four-image batches starring
 Radiance, Ellie, and Alia together in every frame. Its six arcs cover
 swimworlds, intimate-fashion ateliers, kinetic runways, daily life and nature,
 closed-set after-dark cabaret, and a colorful three-woman finale. The binding
 scene plan is in [`trio-40x4-campaign.json`](trio-40x4-campaign.json).
+
+## Trio Unbound - Batch 74: Côte d'Azur Swim Kickoff
+
+| | |
+|---|---|
+| **Riviera Diving-Board Laugh**<br><img src="316-riviera-diving-board-laugh.png" width="420" alt="Radiance, Ellie, and Alia launching joyfully from a cobalt Riviera diving board"> | **Cap-Ferrat Paddle Race**<br><img src="317-cap-ferrat-paddle-race.png" width="420" alt="The trio racing linked paddleboards through clear turquoise water"> |
+| **Monaco Rooftop Pool Spin**<br><img src="318-monaco-rooftop-pool-spin.png" width="420" alt="The trio joining hands in a direct-flash circular rooftop-pool splash"> | **Red-Sail Splash Finale**<br><img src="319-red-sail-splash-finale.png" width="420" alt="Radiance, Ellie, and Alia leaping together beneath a monumental scarlet sail"> |
 
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
