@@ -1,34 +1,128 @@
 {
+  "version": 2,
   "status": "PLANNED",
   "network": "devnet",
-  "purpose": "Model T Genesis transaction-path rehearsal only. No value, public allocation, or launch assertion.",
+  "purpose": "Exact-shape Model T rehearsal for the four-transaction Genesis ceremony. No value, public allocation, or launch assertion.",
   "signingRules": {
     "physicalConfirmationRequired": true,
     "noSecretsInManifest": true,
-    "noBlindApproval": true
+    "noBlindApproval": true,
+    "localOperatorHostOnly": true
+  },
+  "mainnetPlan": {
+    "manifestPath": "launch/genesis-manifest.template.json",
+    "metadataPath": "launch/token-metadata.template.json",
+    "lockPlanPath": "launch/allocation-lock-plan.template.json",
+    "implementationPaths": [
+      "app/mint/ceremony.mjs",
+      "app/mint/page.tsx",
+      "pnpm-lock.yaml"
+    ],
+    "sourceDigests": {
+      "manifestSha256": null,
+      "metadataSha256": null,
+      "lockPlanSha256": null,
+      "implementationSha256": null
+    },
+    "planSha256": null,
+    "network": "mainnet-beta",
+    "program": "Original SPL Token Program",
+    "programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "decimals": 9,
+    "fixedSupplyBaseUnits": "1000000000000000000",
+    "allocationBaseUnitAmounts": {
+      "community": "500000000000000000",
+      "treasury": "200000000000000000",
+      "ecosystem": "150000000000000000",
+      "coreTeam": "100000000000000000",
+      "liquidity": "50000000000000000"
+    },
+    "transactionOrder": [
+      "CREATE_INITIALIZE_IMMUTABLE_METADATA",
+      "MINT_FIVE_ALLOCATION_DESTINATIONS",
+      "REVOKE_MINT_AUTHORITY",
+      "REVOKE_FREEZE_AUTHORITY"
+    ]
   },
   "token": {
     "program": "Original SPL Token Program",
+    "programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
     "decimals": 9,
     "testSupply": "1000",
+    "testSupplyBaseUnits": "1000000000000",
     "mint": null,
-    "mintCreationTransaction": null,
-    "mintTransaction": null,
-    "mintAuthorityRevocationTransaction": null,
-    "freezeAuthorityRevocationTransaction": null
+    "metadataAddress": null,
+    "metadataUri": "https://internalagency.io/metadata/iat.json",
+    "mintEvidence": null,
+    "metadataEvidence": null
   },
-  "destinations": {
-    "testRecipient": { "address": null, "evidence": null }
+  "allocations": {
+    "community": {
+      "share": "50%",
+      "baseUnitAmount": "500000000000",
+      "ownerAddress": null,
+      "tokenAccount": null,
+      "evidence": null
+    },
+    "treasury": {
+      "share": "20%",
+      "baseUnitAmount": "200000000000",
+      "ownerAddress": null,
+      "tokenAccount": null,
+      "evidence": null
+    },
+    "ecosystem": {
+      "share": "15%",
+      "baseUnitAmount": "150000000000",
+      "ownerAddress": null,
+      "tokenAccount": null,
+      "evidence": null
+    },
+    "coreTeam": {
+      "share": "10%",
+      "baseUnitAmount": "100000000000",
+      "ownerAddress": null,
+      "tokenAccount": null,
+      "evidence": null
+    },
+    "liquidity": {
+      "share": "5%",
+      "baseUnitAmount": "50000000000",
+      "ownerAddress": null,
+      "tokenAccount": null,
+      "evidence": null
+    }
+  },
+  "transactions": {
+    "createInitializeMetadata": null,
+    "mintAllocations": null,
+    "revokeMintAuthority": null,
+    "revokeFreezeAuthority": null
   },
   "device": {
     "model": "Trezor Model T",
+    "operatorLabel": null,
     "firmwareVersion": null,
     "suiteOrWalletInterface": null,
-    "sameMainnetPathConfirmed": false
+    "confirmedActions": [],
+    "confirmedTransactionEvidence": [],
+    "confirmedPlanSha256": null,
+    "completedAtUtc": null
   },
   "verifier": {
-    "explorerBaseUrl": "https://explorer.solana.com/?cluster=devnet",
     "reviewedBy": null,
+    "independentOfDeviceOperator": false,
+    "reviewedDevice": {
+      "model": "Trezor Model T",
+      "firmwareVersion": null,
+      "suiteOrWalletInterface": null
+    },
+    "reviewedMint": null,
+    "reviewedMetadataAddress": null,
+    "reviewedAllocations": {},
+    "reviewedActions": [],
+    "reviewedTransactionEvidence": [],
+    "reviewedPlanSha256": null,
     "completedAtUtc": null
   }
 }

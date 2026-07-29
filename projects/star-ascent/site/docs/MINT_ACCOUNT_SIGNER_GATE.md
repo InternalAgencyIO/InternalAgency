@@ -16,9 +16,10 @@ The exact mainnet transaction-builder must demonstrate all of the following on d
 2. Present the resulting mint public address to the verifier before the transaction is signed.
 3. Add the one-time mint-account signature locally without exporting its private material.
 4. Request the fee-payer/authority signature through the Trezor Model T, with clear physical confirmation.
-5. Broadcast the create-and-initialize-mint transaction.
-6. Verify the mint account's program, decimals, temporary authority fields, and public address in Explorer.
-7. Continue with test destination creation, test minting, and both authority revocations.
+5. In the same atomic transaction, create immutable Metaplex metadata at the canonical PDA with the reviewed IAT name, symbol, and URI.
+6. Broadcast the create-initialize-metadata transaction.
+7. Verify the mint program, decimals, temporary authority fields, public address, metadata program owner, and metadata PDA in Explorer.
+8. Continue with the five-destination allocation mint and both authority revocations.
 
 ## Mainnet rules
 
@@ -30,7 +31,7 @@ The exact mainnet transaction-builder must demonstrate all of the following on d
 
 ## Evidence to retain
 
-Public: mint address, transaction signature, Explorer link, program, decimals, supply, authority states, and allocation/lock links.
+Public: mint and metadata addresses, transaction signature, Explorer links, program, decimals, supply, authority states, and allocation/lock links.
 
 Never retain or publish: mint account private material, seed phrases, PINs, passphrases, or any device secret.
 

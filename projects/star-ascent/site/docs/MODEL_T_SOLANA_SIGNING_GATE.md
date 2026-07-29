@@ -1,50 +1,41 @@
 # Model T Solana Signing Gate
 
-Status: required before Genesis. This is a capability gate, not a claim that a mint has been created.
+Status: required before Genesis. This is a capability gate, not a claim that a mint exists.
 
-## What is confirmed
+## Fixed ceremony
 
-- Trezor Model T is supported for Solana and SPL-token custody in Trezor's supported-assets documentation.
-- The signer must physically review and approve each transaction on the Model T touchscreen.
-- Genesis uses the original SPL Token Program, nine decimals, and no Token-2022 extensions.
+The same Trezor Model T, cable, computer, Backpack path, transaction builder, metadata, allocation ratios, and instruction order planned for mainnet must complete this exact devnet rehearsal:
 
-## What must be proven on this exact setup
-
-Solana/SPL support alone does not prove that the chosen wallet interface can build and send the full fixed-supply mint sequence. The same Model T, cable, computer, wallet interface, and transaction-building path planned for mainnet must complete a devnet rehearsal of all of these actions:
-
-| Action | Required proof |
+| Transaction | Required proof |
 | --- | --- |
-| Create mint account | Devnet Explorer transaction and clear device confirmation |
-| Initialize mint | Decimals, mint authority, and freeze authority match the rehearsal manifest |
-| Create allocation destinations | Every destination is independently checked before signing |
-| Mint test supply | Explorer shows exact test supply and destination balances |
-| Revoke mint authority | Mint record shows `None` |
-| Revoke freeze authority | Mint record shows `None` |
+| 1. Create + initialize + immutable metadata | One atomic transaction; Original SPL, 9 decimals, temporary Model T mint/freeze authorities, canonical Metaplex PDA and URI |
+| 2. Mint five allocations | Five distinct owners and canonical ATAs with the exact 50/20/15/10/5 test-supply balances |
+| 3. Revoke mint authority | Mint record shows `None`; exact supply is unchanged |
+| 4. Revoke freeze authority | Freeze record shows `None`; exact supply is unchanged |
+
+Every transaction must be simulated, reviewed on the device, submitted separately, confirmed without error, and recorded with a distinct canonical Solana Explorer devnet URL. The device operator and independent verifier must bind the same four actions, four transaction proofs, mint, metadata PDA, five owners, five ATAs, exact amounts, and reviewed mainnet-plan digest.
 
 ## Decision rule
 
-**GO** only when all six actions are completed on devnet and their public signatures are recorded in the evidence packet.
+**GO** only when `launch/devnet-rehearsal.template.json` is `COMPLETED`, its validator passes against the current metadata and allocation-lock plans, the evidence is less than 24 hours old, and the independent review follows the device ceremony within 30 minutes.
 
-**HOLD** if the wallet cannot construct one of the required instructions, if the device prompt is unclear, or if the interface asks for a seed phrase, private key, PIN, passphrase, or unexplained blind approval. Do not substitute an unfamiliar signing route on mainnet under time pressure.
+**HOLD** if any prompt is unclear or blind; the wallet cannot construct the exact instructions; an address, amount, program, metadata record, or authority differs; evidence is stale or reused; or any surface requests a seed phrase, private key, PIN, passphrase, wallet export, or recovery material.
 
-## Safe division of work
-
-- Builder: prepares the transaction and shows the human-readable manifest.
-- Signer: reviews recipient addresses and physically approves only on the Model T.
-- Verifier: checks Explorer after each transaction and blocks publication on any mismatch.
-- Broadcaster: changes public status from HOLD only after the evidence packet is complete.
+No substitute wallet path is allowed on mainnet under time pressure.
 
 ## Mainnet dependency order
 
-1. Complete the exact devnet rehearsal.
-2. Freeze the public allocation and time-lock addresses.
-3. Produce the final manifest and independently compare every address.
-4. Sign the mainnet sequence in the documented order.
-5. Verify supply, program, decimals, allocations, and both revoked authorities in Explorer.
-6. Publish the evidence packet, then enable any public claim or distribution route.
+1. Independently approve immutable metadata and the external lock/vault plan.
+2. Complete the exact four-transaction devnet rehearsal.
+3. Freeze and validate signer, allocation, handoff, snapshot, and release-packet digests.
+4. Open the localhost-only mint console using the reviewed configuration digest.
+5. Physically confirm each mainnet transaction on the Model T.
+6. Independently verify metadata, supply, five balances, and both revoked authorities.
+7. Publish the evidence packet, then enable any distribution route.
 
 ## References
 
 - Trezor, [Solana and Trezor](https://trezor.io/learn/supported-assets/solana/solana-what-it-is-and-how-it-works-with-trezor)
-- Trezor, [Model T guide](https://trezor.io/guides/trezor-devices/trezor-model-t/get-started-with-the-model-t)
-- Trezor, [transaction-signing tool reference](https://docs.trezor.io/trezor-suite/packages/suite-desktop/skills/trezor-mcp/references/tools-reference.html)
+- Backpack, [Connect a hardware wallet](https://support.backpack.exchange/wallet/actions/connect-hardware-wallet)
+- Solana, [Token basics](https://solana.com/docs/tokens/basics)
+- Solana, [Metaplex token metadata](https://solana.com/docs/tokens/metaplex)

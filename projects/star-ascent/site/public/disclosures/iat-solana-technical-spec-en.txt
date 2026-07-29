@@ -1,0 +1,93 @@
+STAR ASCENT / $IAT SOLANA TECHNICAL SPECIFICATION
+Version 0.1 — 27 July 2026
+
+STATUS: DESIGN AND TEST SCAFFOLD ONLY — NO LIVE MINT OR DEPLOYMENT
+
+No mint address, live program choice, authority state, wallet inventory, or
+distribution transaction is asserted by this document. It authorizes no
+mainnet action.
+
+1. Design boundaries
+
+- Network target: Solana, subject to final public confirmation.
+- Token program: PENDING explicit choice between the standard Token Program
+  and Token-2022. No default may be inferred.
+- Supply and decimals: design targets only until verified on-chain.
+- Distribution: blocked until the allocation manifest and authority evidence
+  pass every gate below.
+- Signing: transaction construction and review must be separated from signing
+  and broadcasting.
+
+Private keys, seed phrases, and passwords must never enter source code,
+configuration files, logs, test fixtures, support channels, build systems, or
+automation. The design must accept only public addresses and unsigned test
+artifacts.
+
+2. Proposed modules
+
+- configuration-schema: validates cluster, program choice, decimals, supply,
+  and public authority addresses without secret material.
+- allocation-manifest: validates recipient category, public wallet, integer
+  token amount, release rule, and a deterministic manifest digest.
+- allocation-audit: rejects duplicate recipients, negative values, fractional
+  base units, overflow, incomplete categories, and totals unequal to supply.
+- authority-audit: records direct RPC and explorer evidence for current mint
+  and freeze authority state.
+- transaction-plan: produces a human-readable, unsigned action plan for local
+  tests only. It must not sign or broadcast.
+- evidence-bundle: binds configuration, manifest digest, test report, UTC
+  timestamp, and public evidence links into one review packet.
+
+3. Threat model
+
+- Fake mint substitution: require exact full-address comparison across the
+  website, livestream, RPC response, and direct explorer link.
+- Wrong cluster or program: bind cluster genesis identity and token-program ID
+  into configuration and every report.
+- Retained or replaced authority: query authority state independently; never
+  treat plans, screenshots, or transaction descriptions as proof.
+- Allocation manipulation: hash the canonical manifest, require independent
+  review, and reject any post-approval digest change.
+- Duplicate, rounded, or excess distribution: use integer base units and prove
+  that every category and recipient total equals verified supply.
+- Replay or unintended signing: include cluster, purpose, expiry, and unique
+  nonce in every human-readable registration message; registration must never
+  request a transaction.
+- Compromised release process: separate preparation, review, signing, and
+  reporting roles; publish every completed distribution from on-chain data.
+
+4. Local-validator test plan
+
+All automated integration tests must run only against a disposable local
+validator or deterministic mocks. No test may target devnet or mainnet by
+default.
+
+Required tests:
+
+- reject missing or unsupported program selection;
+- reject totals that differ from the configured supply by one base unit;
+- reject duplicate wallets and duplicate category identifiers;
+- reject fractional, negative, unsafe-integer, and overflow amounts;
+- reject a manifest whose digest changes after approval;
+- verify expected mint and freeze authority transitions locally;
+- prove that registration messages create no transaction or token approval;
+- prove transaction-plan cannot sign or broadcast;
+- generate a reproducible evidence bundle from the same inputs.
+
+5. Deployment checklist — review gate only
+
+No live deployment may begin until a separately authorized human review
+confirms:
+
+- final legal and risk disclosure;
+- final token program, decimals, and supply;
+- complete allocation manifest totaling 100%;
+- labeled public allocation and treasury wallets;
+- tested authority-transition procedure and rollback/abort conditions;
+- local test report and independently reproduced manifest digest;
+- incident owner, communication plan, and stop authority;
+- public evidence template ready before any distribution; and
+- explicit confirmation that no secrets exist in the project or automation.
+
+This checklist describes a future approval gate. It does not grant approval,
+perform a mint, sign a transaction, or deploy anything.

@@ -1,35 +1,97 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import genesisManifest from "../launch/genesis-manifest.template.json";
+import {
+  GENESIS_SCHEDULED_AT_UTC,
+  resolveLaunchClockState,
+} from "./launch-clock-state.mjs";
 
-const GENESIS = Date.parse("2026-07-28T14:00:00Z");
+const TARGET_MS = Date.parse(GENESIS_SCHEDULED_AT_UTC);
 
-function format(ms: number) {
-  const total = Math.max(0, Math.floor(ms / 1000));
+function countdownParts(remainingMs: number) {
+  const totalSeconds = Math.max(0, Math.floor(remainingMs / 1000));
   return {
-    days: Math.floor(total / 86400),
-    hours: Math.floor((total % 86400) / 3600),
-    minutes: Math.floor((total % 3600) / 60),
-    seconds: total % 60,
+    days: Math.floor(totalSeconds / 86_400),
+    hours: Math.floor((totalSeconds % 86_400) / 3_600),
+    minutes: Math.floor((totalSeconds % 3_600) / 60),
+    seconds: totalSeconds % 60,
   };
 }
 
 export function LaunchClock({ language }: { language: "en" | "tr" }) {
-  const [now, setNow] = useState(() => Date.now());
+  const [nowMs, setNowMs] = useState<number | null>(null);
+
   useEffect(() => {
-    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    const tick = () => setNowMs(Date.now());
+    tick();
+    const timer = window.setInterval(tick, 1000);
     return () => window.clearInterval(timer);
   }, []);
-  const remaining = GENESIS - now;
-  const live = remaining <= 0;
-  const time = format(remaining);
-  const units = language === "en" ? ["D", "H", "M", "S"] : ["G", "S", "D", "S"];
-  const label = language === "en" ? (live ? "GENESIS WINDOW // LIVE" : "MAIN COUNTDOWN") : (live ? "GENESIS PENCERESİ // CANLI" : "ANA GERİ SAYIM");
-  const date = language === "en" ? "28 JULY · 14:00 UTC" : "28 TEMMUZ · 14:00 UTC";
-  const liveSignal = language === "en" ? "THE SIGNAL IS UP." : "SİNYAL AÇIK.";
-  return <div className={`launch-clock${live ? " launch-clock--live" : ""}`} aria-label={label}>
-    <p><b>●</b> {label}</p>
-    <time dateTime="2026-07-28T14:00:00Z">{date}</time>
-    {live ? <strong>{liveSignal}</strong> : <div>{[time.days, time.hours, time.minutes, time.seconds].map((value, index) => <span key={units[index]}><b>{String(value).padStart(2, "0")}</b><em>{units[index]}</em></span>)}</div>}
-  </div>;
+
+  const state = resolveLaunchClockState(
+    genesisManifest.status,
+    GENESIS_SCHEDULED_AT_UTC,
+    nowMs ?? TARGET_MS - 1,
+  );
+  const live = state === "LIVE";
+  const windowOpen = state === "WINDOW_OPEN_HOLD";
+  const parts = useMemo(
+    () => countdownParts(TARGET_MS - (nowMs ?? TARGET_MS)),
+    [nowMs],
+  );
+  const label = language === "en"
+    ? live
+      ? "GENESIS // VERIFIED LIVE"
+      : windowOpen
+        ? "CEREMONY WINDOW // OPEN · EVIDENCE HOLD"
+        : "OPEN-SOURCE CEREMONY // COUNTDOWN"
+    : live
+      ? "BAŞLANGIÇ // DOĞRULANMIŞ CANLI"
+      : windowOpen
+        ? "TÖREN PENCERESİ // AÇIK · KANIT BEKLET"
+        : "AÇIK KAYNAK TÖREN // GERİ SAYIM";
+  const signal = language === "en"
+    ? live
+      ? "THE VERIFIED SIGNAL IS UP."
+      : windowOpen
+        ? "HUMAN-APPROVED EXECUTION MAY BEGIN · NO AUTOMATIC TRANSACTIONS."
+        : "CODE IS PUBLIC · EXECUTION REMAINS PHYSICAL AND EVIDENCE-GATED."
+    : live
+      ? "DOĞRULANMIŞ SİNYAL AÇIK."
+      : windowOpen
+        ? "İNSAN ONAYLI YÜRÜTME BAŞLAYABİLİR · OTOMATİK İŞLEM YOK."
+        : "KOD KAMUYA AÇIK · YÜRÜTME FİZİKSEL VE KANIT EŞİKLİ.";
+  const exactTime = language === "en"
+    ? "29 JUL 2026 · 14:15:18 UTC"
+    : "29 TEM 2026 · 17:15:18 İSTANBUL";
+
+  return (
+    <div
+      className={`launch-clock${live ? " launch-clock--live" : ""}${windowOpen ? " launch-clock--open" : ""}`}
+      aria-label={`${label}. ${exactTime}. ${signal}`}
+      aria-live="polite"
+      data-launch-state={state}
+      data-scheduled-at={GENESIS_SCHEDULED_AT_UTC}
+    >
+      <p><b>●</b> {label}</p>
+      {!live && !windowOpen && (
+        <div aria-label={language === "en" ? "Time until ceremony window" : "Tören penceresine kalan süre"}>
+          {[
+            [parts.days, language === "en" ? "DAYS" : "GÜN"],
+            [parts.hours, language === "en" ? "HRS" : "SA"],
+            [parts.minutes, language === "en" ? "MIN" : "DK"],
+            [parts.seconds, language === "en" ? "SEC" : "SN"],
+          ].map(([value, unit]) => (
+            <span key={String(unit)}>
+              <b>{String(value).padStart(2, "0")}</b>
+              <em>{unit}</em>
+            </span>
+          ))}
+        </div>
+      )}
+      <strong>{exactTime}</strong>
+      <small>{signal}</small>
+    </div>
+  );
 }

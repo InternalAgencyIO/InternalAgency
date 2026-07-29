@@ -1,0 +1,74 @@
+STAR ASCENT — LANSMAN GÜNÜ OLAY MÜDAHALE REHBERİ
+KAMUYA AÇIK LANSMAN ÖNCESİ KONTROL BELGESİ — LANSMAN ONAYI DEĞİLDİR
+
+VARSAYILAN KARAR: BEKLET
+
+Lansman açısından kritik herhangi bir sinyal çeliştiğinde, kaybolduğunda veya
+bağımsız olarak kontrol edilemediğinde bu rehberi kullanın. Bir bildirim,
+tokenin, hesabın, bağlantının veya cüzdan isteğinin gerçek olduğunun kanıtı
+değil; inceleme tetikleyicisidir.
+
+DERHÂL BEKLET TETİKLEYİCİLERİ
+
+- Mint adresi, arz, ondalık basamak, token programı veya yetki değeri web sitesi,
+  sabitlenmiş resmî duyuru, canlı yayın ya da doğrudan kamu kanıtı arasında
+  farklıdır.
+- Lansman açısından kritik kanıt bağlantısı erişilemez, değişmiştir veya güncel
+  UTC kontrol zamanından yoksundur.
+- Kayıt sırasında cüzdan işlem, transfer, token onayı, harcama izni veya
+  okunamayan imza ister.
+- Bir hesap destek olduğunu iddia ederek özel mesaj, cüzdan kurtarma, sır,
+  kişisel veri, ödeme veya token transferi ister.
+- Kopyalanmış proje sayfası, sahte alan adı, ücretli kayıt, ön satış veya gizli
+  erken erişim bağlantısı bildirilir.
+
+MÜDAHALE AKIŞI
+
+1. DURAKLAT
+- Adres yayınını, kayıt açılışını, dağıtımı, canlı yayındaki işlem istemlerini
+  ve planlı sosyal paylaşımları durdurun.
+- Kamuya açık hazırlık kararını BEKLET durumunda tutun.
+- Adres veya kanıt bağlantısı uydurmayın, kısaltmayın ya da değiştirmeyin.
+
+2. SINIRLA
+- İnceleme kaydını yok etmeden güvenli olmayan bağlantıları proje kontrolündeki
+  yüzeylerden kaldırın.
+- URL'leri, UTC zamanlarını, ekran görüntülerini ve gözlenen tam değerleri
+  inceleme için koruyun.
+- Şüpheli cüzdan isteğini, ödeme hedefini veya sır isteyen iş akışını yinelemeden
+  kısa bir güvenlik duyurusu yayımlayın.
+
+3. DÜZELT
+- Zaman damgalı tek düzeltmeyi önce resmî web sitesinde yayımlayın.
+- Aynı iki dilli metni sabitlenmiş duyuruya ve canlı yayına taşıyın.
+- Neyin değiştiğini, neyin bilinmediğini, hangi işlemlerin durduğunu ve sonraki
+  kamu güncellemesinin ne zaman beklendiğini belirtin. Yanıt veya son tarih
+  uydurmayın.
+
+4. YENİDEN BAŞLATMADAN ÖNCE İNCELE
+- İki ayrı inceleme rolü tam değeri karakter karakter karşılaştırır.
+- Her incelemeci doğrudan kamu bağlantısını, gözlenen değeri ve UTC zamanını
+  kaydeder.
+- Web sitesi, sabitlenmiş duyuru ve canlı yayında tam eşleşmeyi yeniden kontrol
+  edin.
+- Yalnızca etkilenen her hazırlık eşiği güncel bağlantılı kanıta sahip olduğunda
+  yeniden başlayın. Kalan herhangi bir BEKLET veya BAŞARISIZ durumu, etkilenen
+  tüm işlemleri durdurmaya devam eder.
+
+KAMU GÜNCELLEMESİ ŞABLONU
+
+Durum: BEKLET
+Gözlem zamanı (UTC): BEKLİYOR
+Etkilenen yüzey veya değer: BEKLİYOR
+Doğrulanan kamu bilgileri: BEKLİYOR
+Çözülmemiş bilgiler: BEKLİYOR
+Durdurulan işlemler: BEKLİYOR
+Sonraki kamu güncellemesi: BEKLİYOR
+İnceleme rolleri: BEKLİYOR / BEKLİYOR
+
+GÜVENLİK SINIRI
+
+Destek bir olayı özel mesajla çözmez ve asla seed phrase, özel anahtar, şifre,
+kişisel veri, ödeme, cüzdan kurtarma veya token transferi istemez. Bu rehber
+Solana'yı incelemez, bir hesabın gerçekliğini doğrulamaz, transferi geri almaz
+ve lansmanı onaylamaz.

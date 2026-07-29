@@ -18,8 +18,8 @@ The first chapter is now on-chain.
 - Allocation and lock record: `[PUBLIC_RECORD_URL]`
 - Checked at: `[UTC_TIME]`
 
-The Dossier is updated as the public record expands:
-`internalagency.io/dossier/read/genesis-proof`
+The Proof Board is updated as the public record expands:
+`internalagency.io/proof`
 
 ## Turkish
 
@@ -36,8 +36,8 @@ The Dossier is updated as the public record expands:
 - Tahsis ve kilit kaydı: `[PUBLIC_RECORD_URL]`
 - Kontrol zamanı: `[UTC_TIME]`
 
-Dosya, kamusal kayıt büyüdükçe güncellenir:
-`ileriakil.com/dossier/read/genesis-proof`
+Kanıt Panosu, kamusal kayıt büyüdükçe güncellenir:
+`ileriakil.com/proof`
 
 ## Publication order
 

@@ -3,9 +3,21 @@
 Run this immediately before the final handoff meeting:
 
 ```bash
+npm run check:launch-gates
 node scripts/create-release-snapshot.mjs
 node scripts/validate-release-snapshot.mjs
 ```
+
+`check:launch-gates` runs the isolated regression gates for the Model T devnet
+rehearsal, signer checklist, mainnet handoff, release packet, and release
+snapshot. It is a local HOLD-control check: a passing result neither signs nor
+submits anything, and it does not replace the live artifact validation that
+follows snapshot generation.
+
+Snapshot generation also runs the canonical manifest, signer-checklist, and
+Model T devnet-rehearsal validators before reading any digest. If one fails,
+the generator leaves an existing snapshot untouched and creates no new record;
+correct the source artifact while remaining on HOLD, then rerun the generator.
 
 The generated snapshot lists the SHA-256 digest of every launch artifact and a
 single packet digest. It also records a separate pre-approval digest for the
@@ -14,6 +26,23 @@ independent verifier compare that pre-approval digest before the physical
 signing sequence and copy it to `approval.releaseSnapshotDigest` in an approved
 handoff. If any source file changes, generate a new snapshot and repeat the
 comparison.
+
+The snapshot is a closed, machine-generated record: it contains only its
+version, HOLD status, canonical generation time, both digest inventories, and
+their two packet digests. Do not append notes, sign-off claims, or other
+free-form fields; the snapshot, approved-handoff, and READY-packet gates reject
+them. Keep operational commentary in the handoff meeting record instead.
+
+Snapshot generation takes a double-read of every canonical artifact before it
+publishes the file. If any artifact changes during that read, generation stops
+without replacing the prior snapshot. Pause edits, return to HOLD, and rerun
+the generator; do not rely on a mixed read set. A complete new snapshot is
+published atomically, so validators never consume a partially written record.
+
+Keep each digest inventory in the generated canonical file order. Both packet
+digests are calculated over that ordered list, so reordered JSON keys are a
+different record even when the same file/digest pairs are present. Never repair
+an ordering failure by hand: regenerate the HOLD snapshot and repeat review.
 
 Those three pre-approval entries must also exactly match their counterparts in
 the snapshot's full artifact inventory. A snapshot with two different views of

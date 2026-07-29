@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "status": "HOLD",
+  "network": "mainnet-beta",
+  "allocations": {
+    "community": {
+      "share": "50%",
+      "baseUnitAmount": "500000000000000000",
+      "ownerAddress": null,
+      "custodyModel": "PUBLIC_DISTRIBUTION_CUSTODY",
+      "lockRequired": false,
+      "cliffMonths": 0,
+      "releaseMonths": 0,
+      "releaseRule": "PUBLIC_CAMPAIGNS_ONLY",
+      "lockProgramId": null,
+      "vaultEvidence": null,
+      "programEvidence": null,
+      "scheduleEvidence": null
+    },
+    "treasury": {
+      "share": "20%",
+      "baseUnitAmount": "200000000000000000",
+      "ownerAddress": null,
+      "custodyModel": "EXTERNAL_VESTING_VAULT",
+      "lockRequired": true,
+      "cliffMonths": 12,
+      "releaseMonths": 36,
+      "releaseRule": "CLIFF_THEN_LINEAR",
+      "lockProgramId": null,
+      "vaultEvidence": null,
+      "programEvidence": null,
+      "scheduleEvidence": null
+    },
+    "ecosystem": {
+      "share": "15%",
+      "baseUnitAmount": "150000000000000000",
+      "ownerAddress": null,
+      "custodyModel": "EXTERNAL_VESTING_VAULT",
+      "lockRequired": true,
+      "cliffMonths": 6,
+      "releaseMonths": 24,
+      "releaseRule": "CLIFF_THEN_LINEAR",
+      "lockProgramId": null,
+      "vaultEvidence": null,
+      "programEvidence": null,
+      "scheduleEvidence": null
+    },
+    "coreTeam": {
+      "share": "10%",
+      "baseUnitAmount": "100000000000000000",
+      "ownerAddress": null,
+      "custodyModel": "EXTERNAL_VESTING_VAULT",
+      "lockRequired": true,
+      "cliffMonths": 12,
+      "releaseMonths": 36,
+      "releaseRule": "CLIFF_THEN_LINEAR",
+      "lockProgramId": null,
+      "vaultEvidence": null,
+      "programEvidence": null,
+      "scheduleEvidence": null
+    },
+    "liquidity": {
+      "share": "5%",
+      "baseUnitAmount": "50000000000000000",
+      "ownerAddress": null,
+      "custodyModel": "LIQUIDITY_RESERVE_VAULT",
+      "lockRequired": true,
+      "cliffMonths": 0,
+      "releaseMonths": 0,
+      "releaseRule": "LOCKED_UNTIL_PUBLIC_LIQUIDITY_PROPOSAL",
+      "lockProgramId": null,
+      "vaultEvidence": null,
+      "programEvidence": null,
+      "scheduleEvidence": null
+    }
+  },
+  "independentReview": {
+    "reviewedBy": null,
+    "reviewedAtUtc": null,
+    "planSha256": null
+  }
+}

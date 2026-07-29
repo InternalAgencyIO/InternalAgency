@@ -1,27 +1,43 @@
-# STAR ASCENT / Launch day
+# STAR ASCENT / Launch window
 
-**Broadcast:** 28 July, 13:30 UTC  
-**Genesis window:** 14:00 UTC
+**Status:** HOLD
+
+**Ceremony window:** 29 July 2026 at 14:15:18 UTC / 17:15:18 Istanbul
+
+Announce this exact ceremony window together with the public source record.
+State clearly that the timer never signs or submits a transaction and mainnet
+remains blocked until the complete frozen release packet passes independent
+review.
 
 ## The room
 
-STAR ASCENT goes live as a public signal: the World Archive, the White Dossier,
-the crew, the broadcast, and the first visible on-chain chapter.
+STAR ASCENT opens as a public signal: the World Archive, the White Dossier, the
+crew, the broadcast, and the first visible on-chain chapter.
 
 ## The sequence
 
-1. Open the broadcast and introduce the project in one sentence: *a public
-   cultural build on Solana, made in the open.*
-2. Show the Dossier and the fixed supply design.
-3. Confirm the transaction details on the physical device.
-4. Sign only the transaction shown on the device.
-5. Publish the transaction reference, then the public record.
+1. Open the broadcast and describe the project as *a public cultural build on
+   Solana, made in the open.* State that the token status remains `HOLD`.
+2. Confirm `launch/release-snapshot.generated.json` is current and `HOLD`,
+   `launch/mainnet-handoff.template.json` is `APPROVED`, and
+   `launch/release-packet.template.json` is `READY`. Confirm the sealed
+   pre-publication proof. These artifacts do not authorize signing.
+3. Follow the exact four-transaction ceremony documented in
+   `launch/GENESIS_OPERATIONS_CARD.md`.
+4. The signer confirms only the reviewed transaction shown on the physical
+   device; the verifier captures direct evidence before the next transaction.
+5. After complete independent verification, publish only fields that match the
+   validated manifest and publication payload across every public channel.
+
+Any mismatch stops the sequence and invalidates stale approvals. The correction
+owner coordinates the canonical fix, snapshot regeneration, and repeated
+independent review.
 
 ## The public link order
 
 1. `internalagency.io` / `ileriakil.com`
 2. `/dossier`
-3. `/dossier/read/genesis-proof`
+3. `/proof`
 4. Official broadcast channel
 
 ## The tone

@@ -5,10 +5,48 @@ import { useParams } from "next/navigation";
 
 type Copy = { label: string; title: string; deck: string; state: string; blocks: [string, string][]; next: string };
 
+const NEXT_RECORD_ROUTES: Record<string, string> = {
+  "white-dossier": "/dossier/read/tokenomics",
+  tokenomics: "/dossier/read/genesis-proof",
+  "mint-manifest": "/dossier/read/genesis-run",
+  "genesis-proof": "/dossier/read/mint-manifest",
+  "broadcast-pack": "/dossier/read/social-kit",
+  "social-kit": "/dossier/read/white-dossier",
+  "genesis-run": "/dossier/read/genesis-proof",
+  "authority-map": "/dossier/read/genesis-proof",
+  "technical-spec": "/dossier/read/mint-manifest",
+  readiness: "/dossier/read/genesis-run",
+  "incident-response": "/dossier",
+};
+
 function repairLegacyEncoding<T>(value: T): T {
   if (typeof value === "string") {
-    if (!/[ÃÄÅÂâ]/.test(value)) return value;
-    try { return new TextDecoder("utf-8", { fatal: true }).decode(Uint8Array.from(value, (char) => char.charCodeAt(0))) as T; } catch { return value; }
+    // Legacy records passed through Windows-1252. Its punctuation bytes (such
+    // as the sequences that render as â€™ or â†’) are not direct byte values.
+    const windows1252 = new Map<number, number>([
+      [0x20AC, 0x80], [0x201A, 0x82], [0x0192, 0x83], [0x201E, 0x84], [0x2026, 0x85], [0x2020, 0x86], [0x2021, 0x87], [0x02C6, 0x88], [0x2030, 0x89], [0x0160, 0x8A], [0x2039, 0x8B], [0x0152, 0x8C], [0x017D, 0x8E], [0x2018, 0x91], [0x2019, 0x92], [0x201C, 0x93], [0x201D, 0x94], [0x2022, 0x95], [0x2013, 0x96], [0x2014, 0x97], [0x02DC, 0x98], [0x2122, 0x99], [0x0161, 0x9A], [0x203A, 0x9B], [0x0153, 0x9C], [0x017E, 0x9E], [0x0178, 0x9F],
+    ]);
+    // Turkish dotted-I and s-cedilla artifacts can start with Ä or Å rather
+    // than the Ã sequence covered by the older generic detection below.
+    if (/[\u00c4\u00c5]/.test(value)) {
+      const bytes: number[] = [];
+      for (const character of value) {
+        const codePoint = character.codePointAt(0)!;
+        const byte = codePoint <= 0xFF ? codePoint : windows1252.get(codePoint);
+        if (byte === undefined) return value;
+        bytes.push(byte);
+      }
+      try { return new TextDecoder("utf-8", { fatal: true }).decode(Uint8Array.from(bytes)) as T; } catch { return value; }
+    }
+    if (!/[ÃÅâ]/.test(value)) return value;
+    const bytes: number[] = [];
+    for (const character of value) {
+      const codePoint = character.codePointAt(0)!;
+      const byte = codePoint <= 0xFF ? codePoint : windows1252.get(codePoint);
+      if (byte === undefined) return value;
+      bytes.push(byte);
+    }
+    try { return new TextDecoder("utf-8", { fatal: true }).decode(Uint8Array.from(bytes)) as T; } catch { return value; }
   }
   if (Array.isArray(value)) return value.map(repairLegacyEncoding) as T;
   if (value && typeof value === "object") return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, repairLegacyEncoding(item)])) as T;
@@ -52,7 +90,7 @@ const tailoredTR: Record<string, Copy> = {
 function fallback(language: "en" | "tr", slug: string): Copy {
   if (language === "en" && tailoredEN[slug]) return tailoredEN[slug];
   if (language === "tr" && tailoredTR[slug]) return tailoredTR[slug];
-  return language === "tr" ? { label: "ARŞİV KAYDI", title: "DOSYA KAYDI", deck: "Bu kayıt, tasarlanmış Dosya deneyimine taşınıyor.", state: "CANLI YAPI", blocks: [["KAYIT", "Dosya artık ham bir metin değil; gezinilebilir bir kamusal kayıttır."], ["KANIT", "Kaynak adresleri korunur; yeni okuyucu yüzeyi bağlantıları düzenler."], ["SONRAKİ", "Dossier ana sayfası tüm kanonik kayıtlara yönlendirir."]], next: "DOSYAYA DÖN →" } : { label: "ARCHIVE RECORD", title: "DOSSIER RECORD", deck: "This record is being moved into the designed Dossier experience.", state: "LIVE BUILD", blocks: [["RECORD", "The archive is no longer a raw file; it is a navigable public record."], ["EVIDENCE", "Source addresses remain preserved while the new reading surface organizes the route."], ["NEXT", "The Dossier index leads to every canonical record."]], next: "RETURN TO DOSSIER →" };
+  return language === "tr" ? { label: "KAYIT BULUNAMADI", title: "KANONİK OLMAYAN ADRES", deck: "Bu adres kanonik bir STAR ASCENT Dosya kaydına karşılık gelmiyor.", state: "KAYIT YAYINLANMADI", blocks: [["DOĞRULAMA", "Kanonik kayıtları Dosya ana sayfasından açın."], ["GÜVENLİK", "Bu sayfadaki herhangi bir iddiayı kamusal kanıt olarak kullanmayın."], ["SONRAKİ", "Doğru kayıt bağlantısı için Dosya dizinine dönün."]], next: "DOSYAYA DÖN →" } : { label: "RECORD NOT FOUND", title: "NON-CANONICAL ADDRESS", deck: "This address does not resolve to a canonical STAR ASCENT Dossier record.", state: "RECORD NOT PUBLISHED", blocks: [["VERIFY", "Open canonical records from the Dossier index."], ["SAFETY", "Do not treat any claim on this page as public evidence."], ["NEXT", "Return to the Dossier index for the correct record link."]], next: "RETURN TO DOSSIER →" };
 }
 
 function archiveFragments(language: "en" | "tr", slug: string) {
@@ -76,12 +114,13 @@ export default function DossierReaderPage() {
   const record = useMemo(() => repairLegacyEncoding((language === "tr" ? TR : EN)[params.slug] ?? fallback(language, params.slug)), [language, params.slug]);
   const fragments = repairLegacyEncoding(archiveFragments(language, params.slug));
   const radianceArt = params.slug === "broadcast-pack" || params.slug === "social-kit" ? "/images/radiance-studio-signal.png" : params.slug === "genesis-run" || params.slug === "readiness" ? "/images/radiance-bike-operator.png" : params.slug === "white-dossier" ? "/images/radiance-roller-rave.png" : "/images/radiance-snow-train.png";
+  const nextRecordHref = NEXT_RECORD_ROUTES[params.slug] ?? "/dossier";
   return <main className="reader-page">
     <div className="reader-noise" aria-hidden="true" />
     <nav className="reader-nav"><a href="/">IA<span>///</span></a><div><a href="/dossier">{language === "tr" ? "DOSYA" : "DOSSIER"}</a><button onClick={() => setLanguage(language === "en" ? "tr" : "en")}>{language === "en" ? "TR" : "EN"}</button></div></nav>
     <section className="reader-hero"><div><p>{record.label}</p><h1>{record.title}</h1><strong>{record.state}</strong><p className="reader-deck">{record.deck}</p>{params.slug === "genesis-proof" && <p className="reader-live-note">{language === "tr" ? "CANLI KAYIT: Başlangıç sonrası kanonik bağlantılar burada görünür." : "LIVE RECORD: canonical Genesis links appear here after publication."}</p>}</div><figure><img src={radianceArt} alt="Radiance, Internal Agency field operator" /><figcaption>RADIANCE // LIVE ARCHIVE OPERATOR</figcaption></figure></section>
     <section className="reader-sheet"><div className="reader-spine"><span>STAR ASCENT</span><b>0{Math.max(1, Object.keys(EN).indexOf(params.slug) + 1)}</b><span>2026</span></div><div className="reader-content">{record.blocks.map(([heading, text], index) => <article key={heading}><span>0{index + 1}</span><h2>{heading}</h2><p>{text}</p></article>)}</div></section>
     <section className="reader-lore"><figure><img src="/images/scorpion-crew-arrival-v1.png" alt={language === "tr" ? "STAR ASCENT ekibi kırmızı ışık altında geliyor" : "STAR ASCENT crew arriving under red light"} /></figure><div>{fragments.map(([heading, text], index) => <article key={heading}><span>0{index + 4}</span><h2>{heading}</h2><p>{text}</p></article>)}</div></section>
-    <section className="reader-next"><p>{language === "tr" ? "BİR SONRAKİ KAYIT" : "NEXT RECORD"}</p><a href={params.slug === "white-dossier" ? "/dossier#tokenomics" : "/dossier/read/white-dossier"}>{record.next}<span>↗</span></a><a className="reader-world-link" href="/world">{language === "tr" ? "DÜNYA ARŞİVİNE GİR" : "ENTER THE WORLD ARCHIVE"}<span>◌</span></a></section>
+    <section className="reader-next"><p>{language === "tr" ? "BİR SONRAKİ KAYIT" : "NEXT RECORD"}</p><a href={nextRecordHref}>{record.next}<span>↗</span></a><a className="reader-world-link" href="/world">{language === "tr" ? "DÜNYA ARŞİVİNE GİR" : "ENTER THE WORLD ARCHIVE"}<span>◌</span></a></section>
   </main>;
 }

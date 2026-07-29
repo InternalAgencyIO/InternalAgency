@@ -1,0 +1,26 @@
+IAT TOKEN IMPLEMENTATION MANIFEST // PRE-LAUNCH
+
+Intent: use the standard Solana SPL Token program for the widest straightforward wallet and tooling compatibility. This project does not require a custom token smart contract for the initial mint.
+
+MINT CONFIGURATION
+Program: original SPL Token Program (not Token-2022 extensions for genesis)
+Decimals: 9
+Maximum initial and final supply: 1,000,000,000 IAT
+Raw base units to mint: 1,000,000,000 × 10^9
+Transfer fee: none
+Interest-bearing balance: none
+Transfer hooks / permanent delegate / confidential transfers / default-frozen accounts: none
+
+AUTHORITY SEQUENCE
+1. Create the mint with temporary mint and freeze authority only for the documented initial mint.
+2. Mint exactly the fixed supply to the documented allocation and lock-wallet destinations.
+3. Verify all destination amounts and the total supply.
+4. Revoke mint authority.
+5. Revoke freeze authority.
+6. Publish transaction signatures, explorer links, final mint fields, allocation map, and circulation calculation together.
+
+STOP CONDITIONS
+Do not proceed if the total differs from 1,000,000,000 IAT, a required public lock wallet is absent, an authority revocation is unverified, or published records conflict.
+
+SECURITY BOUNDARY
+No private key, seed phrase, password, or signing device information belongs in this manifest, the website, public chat, or a support request. Use a separate offline launch checklist for signing.

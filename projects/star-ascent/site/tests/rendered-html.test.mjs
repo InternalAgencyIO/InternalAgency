@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { dirname } from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import { validateAllocationManifest } from "../public/disclosures/iat-allocation-validator.mjs";
 import { validateAuthorityTransitionPlan } from "../public/disclosures/iat-authority-plan-validator.mjs";
 import {
@@ -26,6 +28,11 @@ import {
 import {
   validateLaunchHandoffPacket,
 } from "../public/disclosures/star-ascent-launch-handoff-validator.mjs";
+
+// The production target supplies these CommonJS globals through workerd's
+// nodejs_compat layer. Define them only for this direct Node bundle renderer.
+globalThis.__filename = fileURLToPath(import.meta.url);
+globalThis.__dirname = dirname(globalThis.__filename);
 
 async function render() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -53,7 +60,7 @@ test("renders the STAR ASCENT launch page and transparent disclosure", async () 
   assert.match(html, /<main id="main-content" tabindex="-1">/i);
   assert.match(html, /id="registration-safety">Registration is free\. No seed phrase, private key, password, or payment is ever required\./i);
   assert.equal((html.match(/aria-describedby="registration-safety"/gi) ?? []).length, 3);
-  assert.match(html, /property="og:image" content="(?:http:\/\/localhost)?\/og-safe\.png"/i);
+  assert.match(html, /property="og:image" content="(?:http:\/\/localhost)?\/og-star-ascent-v1\.png"/i);
   assert.match(html, /name="twitter:card" content="summary_large_image"/i);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/i);
 });
@@ -75,8 +82,8 @@ test("keeps bilingual and accessibility safeguards in source", async () => {
   assert.match(page, /document\.documentElement\.lang = language/);
   assert.match(page, /ANTI-SCAM PROTOCOL/);
   assert.match(page, /DOLANDIRICILIKTAN KORUNMA/);
-  assert.match(page, /No exact minute is promised/);
-  assert.match(page, /Kesin dakika vaat edilmez/);
+  assert.match(page, /No transaction is automatic/);
+  assert.match(page, /Hiçbir işlem otomatik değildir/);
   assert.match(page, /There is no private sale, paid registration/);
   assert.match(page, /transaction, token access, spending permission/);
   assert.match(page, /işlem, token erişimi, harcama izni/);

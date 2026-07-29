@@ -1,7 +1,9 @@
 # STAR ASCENT — Genesis Command Center
 
-**Broadcast:** 28 July 2026, 13:30 UTC  
-**Genesis window:** 28 July 2026, 14:00 UTC  
+**Broadcast:** 29 July 2026, 14:15:18 UTC / 17:15:18 Istanbul
+
+**Genesis ceremony window:** exact time scheduled; evidence HOLD
+
 **Signing device:** Trezor Model T; signing remains a physical operator action.
 
 ## Before broadcast
@@ -11,13 +13,18 @@
 3. Confirm the Trezor Model T firmware, PIN, recovery material security, and the intended public address on the device screen. Do not type recovery words into a computer or browser.
 4. Keep the publication payload in **HOLD** until independently verified evidence exists. Do not infer an address, transaction, allocation, or authority state.
 
-## Broadcast sequence
+## Window-opening sequence
 
-1. At 13:30 UTC, open the broadcast and identify the official site and Signal directory.
-2. State the verification rule: no direct messages, no paid registration, no seed phrase, and no copied links.
-3. At 14:00 UTC, perform only the reviewed physical signing flow.
-4. After each action, capture direct public evidence before making any announcement about it.
-5. Update the site, Dossier, pinned announcement, and broadcast screen together.
+1. At 14:15:18 UTC, open the broadcast and public source record. The countdown
+   does not connect, sign, or submit anything.
+2. Identify the official site and Signal directory.
+3. State the verification rule: no direct messages, no paid registration, no
+   seed phrase, and no copied links.
+4. Complete the exact devnet scenario in
+   [DEVNET_REHEARSAL_SCENARIO.md](./DEVNET_REHEARSAL_SCENARIO.md).
+5. Perform the reviewed mainnet flow only if every separate evidence gate passes.
+6. After each action, capture direct public evidence before announcing it.
+7. Update the site, Dossier, pinned announcement, and broadcast screen together.
 
 ## Evidence gate
 

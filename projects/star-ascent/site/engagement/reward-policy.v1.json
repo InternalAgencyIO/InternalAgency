@@ -1,0 +1,40 @@
+{
+  "schema": "star-ascent-daily-rewards-policy/v1",
+  "status": "HOLD_UNTIL_X_AND_DISTRIBUTOR_GATES_PASS",
+  "asset": {
+    "symbol": "IAT",
+    "decimals": 9,
+    "network": "mainnet-beta",
+    "mint": "PUBLISH_ONLY_AFTER_INDEPENDENT_VERIFICATION"
+  },
+  "genesis": {
+    "rewardDisplayUnits": 100,
+    "maximumClaims": 1000,
+    "eligibility": "The first 1,000 verified nodes: one X account linked to one public Solana wallet through OAuth plus a wallet-signature challenge.",
+    "claimModel": "First-come claimable after the verified Genesis record is public. A slot is reserved only after the X link and wallet-signature challenge both complete; never sent to an unlinked or unverified wallet.",
+    "onePerWallet": true,
+    "onePerXAccount": true
+  },
+  "daily": {
+    "snapshotAtUtc": "00:00",
+    "claimOpenAtUtc": "00:05",
+    "rewardDisplayUnits": 12,
+    "maximumQualifyingActionsPerEpoch": 1,
+    "epoch": "Previous closed UTC day. No retroactive edits after the manifest is published.",
+    "qualifyingAction": "One original X post or reply that matches the public daily prompt, includes the canonical campaign tag, and is returned by the official X API collection job.",
+    "excludedActions": ["likes alone", "reposts alone", "duplicate posts", "copied text", "automated posting", "deleted posts", "activity outside the closed UTC window"],
+    "claimExpiryDays": 30
+  },
+  "fairness": {
+    "walletBinding": "A wallet may bind to only one X account; an X account may bind to only one wallet until a documented cooldown and re-verification complete.",
+    "auditability": "Each epoch publishes its UTC window, policy hash, eligible-wallet count, total claimable amount, manifest digest, and Merkle root before claims open.",
+    "manualHold": "Suspicious or duplicate activity is held from that epoch and documented; it is never silently reassigned."
+  },
+  "distribution": {
+    "model": "Merkle-proof claim served from a small dedicated distributor wallet. The treasury wallet is never exposed to the web application.",
+    "payer": "Dedicated distributor only, funded to a capped operational balance after Genesis verification.",
+    "proofPayload": ["epoch", "wallet", "amountBaseUnits", "merkleProof", "policyHash", "manifestDigest"],
+    "publicEvidence": ["epoch manifest", "Merkle root", "claim total", "distribution transaction links", "unclaimed-expiry policy"]
+  },
+  "disclosure": "Participation rewards are campaign rewards, not yield, not interest, not APY, and not a promise of value. Eligibility and claims remain subject to the published epoch evidence."
+}

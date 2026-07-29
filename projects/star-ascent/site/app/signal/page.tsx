@@ -2,11 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-function repairLegacyEncoding(value: string) {
-  if (!/[ÃÄÅÂâ]/.test(value)) return value;
-  try { return new TextDecoder("utf-8", { fatal: true }).decode(Uint8Array.from(value, (char) => char.charCodeAt(0))); } catch { return value; }
-}
-
 const copy = {
   en: { label: "INTERNAL AGENCY // OFFICIAL SIGNAL DIRECTORY", title: <>ONE SIGNAL.<br />NO SHADOW LINKS.</>, intro: "Every verified public route begins here. Read the record, enter the activation terminal, and follow only channels published from this directory.", site: "MAIN SIGNAL", dossier: "WHITE DOSSIER", terminal: "ACTIVATION TERMINAL", broadcast: "BROADCAST WINDOW", status: "CHANNELS ACTIVATING", note: "New official social profiles will appear here as they are created and verified. Until then, the site and Dossier are the only canonical public surfaces.", safety: "NO SEED PHRASE. NO PRIVATE KEY. NO PAYMENT. NO IMPERSONATORS.", lang: "TÜRKÇE" },
   tr: { label: "İLERİ AKIL // RESMÎ SİNYAL DİZİNİ", title: <>TEK SİNYAL.<br />GÖLGE BAĞLANTI YOK.</>, intro: "Doğrulanmış her kamusal rota buradan başlar. Kaydı oku, aktivasyon terminaline gir ve yalnızca bu dizinde yayımlanan kanalları takip et.", site: "ANA SİNYAL", dossier: "BEYAZ DOSYA", terminal: "AKTİVASYON TERMİNALİ", broadcast: "YAYIN PENCERESİ", status: "KANALLAR AKTİFLEŞİYOR", note: "Yeni resmî sosyal profiller oluşturulup doğrulandıkça burada görünür. O zamana kadar site ve Dosya tek kanonik kamusal alandır.", safety: "SEED PHRASE YOK. ÖZEL ANAHTAR YOK. ÖDEME YOK. TAKLİTÇİ YOK.", lang: "ENGLISH" },

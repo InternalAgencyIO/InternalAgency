@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "status": "LOCKED",
+  "blockers": [
+    "token metadata is HOLD; READY is required.",
+    "allocation lock plan is HOLD; READY is required.",
+    "signing checklist is HOLD; READY is required.",
+    "Model T devnet rehearsal is PLANNED; COMPLETED is required.",
+    "mainnet handoff is HOLD; APPROVED is required.",
+    "release packet is HOLD; READY is required.",
+    "Mint authority signer and fee payer must both be the reviewed Model T address.",
+    "Devnet rehearsal manifestSha256 does not bind the current source.",
+    "Devnet rehearsal metadataSha256 does not bind the current source.",
+    "Devnet rehearsal lockPlanSha256 does not bind the current source.",
+    "Devnet rehearsal implementationSha256 does not bind the current source.",
+    "Release packet manifestSha256 does not bind the current source.",
+    "Release packet signingChecklistSha256 does not bind the current source.",
+    "Release packet devnetRehearsalSha256 does not bind the current source.",
+    "Release packet mainnetHandoffSha256 does not bind the current source.",
+    "Release packet approval digest is absent."
+  ],
+  "safety": {
+    "localOperatorHostOnly": true,
+    "expectedSigner": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+    "walletProvider": "Backpack",
+    "hardwareDevice": "Trezor Model T",
+    "noAutomaticTransactions": true,
+    "noSecretPersistence": true
+  },
+  "token": {
+    "name": "Internal Agency Token",
+    "symbol": "IAT",
+    "program": "Original SPL Token Program",
+    "programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "decimals": 9,
+    "metadataProgramId": "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
+    "metadataUri": "https://internalagency.io/metadata/iat.json",
+    "metadataJsonSha256": "ba0d4763aa46bc6777668dc0068266c7fd7fb76c299b4e640cb389fa682e8ddd",
+    "sellerFeeBasisPoints": 0,
+    "isMutable": false
+  },
+  "transactionOrder": [
+    "CREATE_INITIALIZE_IMMUTABLE_METADATA",
+    "MINT_FIVE_ALLOCATION_DESTINATIONS",
+    "REVOKE_MINT_AUTHORITY",
+    "REVOKE_FREEZE_AUTHORITY"
+  ],
+  "networks": {
+    "devnet": {
+      "rpcUrl": "https://api.devnet.solana.com",
+      "expectedSupplyBaseUnits": "1000000000000",
+      "allocations": [
+        {
+          "name": "community",
+          "amount": "500000000000",
+          "owner": null
+        },
+        {
+          "name": "treasury",
+          "amount": "200000000000",
+          "owner": null
+        },
+        {
+          "name": "ecosystem",
+          "amount": "150000000000",
+          "owner": null
+        },
+        {
+          "name": "coreTeam",
+          "amount": "100000000000",
+          "owner": null
+        },
+        {
+          "name": "liquidity",
+          "amount": "50000000000",
+          "owner": null
+        }
+      ]
+    },
+    "mainnetBeta": {
+      "rpcUrl": "https://api.mainnet-beta.solana.com",
+      "expectedSupplyBaseUnits": "1000000000000000000",
+      "allocations": [
+        {
+          "name": "community",
+          "amount": "500000000000000000",
+          "owner": null,
+          "custodyModel": "PUBLIC_DISTRIBUTION_CUSTODY",
+          "releaseRule": "PUBLIC_CAMPAIGNS_ONLY"
+        },
+        {
+          "name": "treasury",
+          "amount": "200000000000000000",
+          "owner": null,
+          "custodyModel": "EXTERNAL_VESTING_VAULT",
+          "releaseRule": "CLIFF_THEN_LINEAR"
+        },
+        {
+          "name": "ecosystem",
+          "amount": "150000000000000000",
+          "owner": null,
+          "custodyModel": "EXTERNAL_VESTING_VAULT",
+          "releaseRule": "CLIFF_THEN_LINEAR"
+        },
+        {
+          "name": "coreTeam",
+          "amount": "100000000000000000",
+          "owner": null,
+          "custodyModel": "EXTERNAL_VESTING_VAULT",
+          "releaseRule": "CLIFF_THEN_LINEAR"
+        },
+        {
+          "name": "liquidity",
+          "amount": "50000000000000000",
+          "owner": null,
+          "custodyModel": "LIQUIDITY_RESERVE_VAULT",
+          "releaseRule": "LOCKED_UNTIL_PUBLIC_LIQUIDITY_PROPOSAL"
+        }
+      ]
+    }
+  },
+  "sourcePaths": {
+    "manifest": "launch/genesis-manifest.template.json",
+    "metadata": "launch/token-metadata.template.json",
+    "metadataJson": "public/metadata/iat.json",
+    "lockPlan": "launch/allocation-lock-plan.template.json",
+    "checklist": "launch/genesis-signing-checklist.template.json",
+    "rehearsal": "launch/devnet-rehearsal.template.json",
+    "handoff": "launch/mainnet-handoff.template.json",
+    "packet": "launch/release-packet.template.json"
+  },
+  "sourceDigests": {
+    "manifest": "f07c7340ca0647e293935faaf3159d2d045ee09b9ff919effec788bd6ca2a250",
+    "metadata": "46ae0ef7215331e29b7fcc11c160e68893e9382a6057d031be7bca00f4d91cc1",
+    "metadataJson": "ba0d4763aa46bc6777668dc0068266c7fd7fb76c299b4e640cb389fa682e8ddd",
+    "lockPlan": "58cc82876f098be5d569684b1e5bab63bffff4b5becd5693b26fbb8ce3d50136",
+    "checklist": "a6fd1d91a531bc197d11d52eec3edefb7a68df6b7a454df1862bd974ce7073a2",
+    "rehearsal": "f011b2d6170b529bdd3ad688c29070bcb5eb0f90af940fd278db5a2606a28d21",
+    "handoff": "1abd0166113ad32ae3f17a29193796fba2b4aa2bf5dc891e4e919576aa03133b",
+    "packet": "fa4faae6659018c5e3e4065a2e5d88defd0b221a6ca05f768c6ffada911ef037"
+  },
+  "implementationPaths": [
+    "app/mint/ceremony.mjs",
+    "app/mint/page.tsx",
+    "pnpm-lock.yaml"
+  ],
+  "implementationDigests": {
+    "app/mint/ceremony.mjs": "eebb95fde788853f38c24d5a198392aa2fef645da2a3f6a9cfee04623299511e",
+    "app/mint/page.tsx": "094faf5d61f5745a2480e440649defaf7ec6cf851d394b88e88952e52c299f2c",
+    "pnpm-lock.yaml": "0de962701ce4ba787bbc6527b7ccbf1bb3c86e19be1d0816178c8a3ebc83a93f"
+  },
+  "implementationSha256": "992ba138db2e5f5c46c0d44bc864945293635cacd6ee66d1165237b225b6470b",
+  "configurationSha256": "89ad896b1f05ebe5cd717efc8fff41d5581ba0f81ca124fad6095e4ce148c5fb"
+}

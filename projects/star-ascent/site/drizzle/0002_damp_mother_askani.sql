@@ -1,0 +1,1 @@
+ALTER TABLE `node_bindings` ADD `country_code` text;

@@ -34,6 +34,13 @@
     "recipientAddressesCheckedAgainstManifest": false,
     "signerAddressesCheckedAgainstManifest": false,
     "holdOwnerConfirmed": false,
+    "reviewedRecipientDestinations": {
+      "community": { "publicAddress": null, "expectedBaseUnitAmount": "500000000000000000" },
+      "treasury": { "publicAddress": null, "expectedBaseUnitAmount": "200000000000000000" },
+      "ecosystem": { "publicAddress": null, "expectedBaseUnitAmount": "150000000000000000" },
+      "coreTeam": { "publicAddress": null, "expectedBaseUnitAmount": "100000000000000000" },
+      "liquidity": { "publicAddress": null, "expectedBaseUnitAmount": "50000000000000000" }
+    },
     "manifestSha256": null,
     "readyAtUtc": null
   }

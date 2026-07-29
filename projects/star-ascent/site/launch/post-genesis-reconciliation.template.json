@@ -4,7 +4,8 @@
   "sourceArtifacts": {
     "manifestPath": "launch/genesis-manifest.template.json",
     "publicationPayloadPath": "launch/PUBLICATION_PAYLOAD.template.md",
-    "releasePacketPath": "launch/release-packet.template.json"
+    "releasePacketPath": "launch/release-packet.template.json",
+    "prePublicationPacketProofPath": "launch/pre-publication-packet-proof.generated.json"
   },
   "controls": {
     "haltOnChannelMismatch": true,

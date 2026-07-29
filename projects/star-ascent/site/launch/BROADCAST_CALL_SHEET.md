@@ -1,21 +1,29 @@
 # STAR ASCENT / broadcast call sheet
 
-## 13:30 UTC — Open
+Status: **29 JULY 2026 · 14:15:18 UTC / 17:15:18 ISTANBUL**
+
+Announce the exact open-source ceremony window. Also state that every
+transaction remains human-approved and evidence-gated.
+
+## Open
 
 Visual: World Archive / Radiance / moving signal field.  
 Line: **“Welcome to STAR ASCENT. We are building the signal in public.”**
 
-## 13:40 UTC — The world
+## The world
 
 Visual: Dossier and crew imagery.  
 Line: **“This is a cultural system: the ship, the archive, the people, the next chapter.”**
 
-## 13:50 UTC — The record
+## The record
 
 Visual: White Dossier and token design page.  
 Line: **“The public record is open. Read it, question it, keep it honest.”**
 
-## 14:00 UTC — Genesis window
+## Genesis window
+
+Open this segment only after the verifier confirms the complete on-chain
+evidence bundle. Until then, show `HOLD` and publish no mint address.
 
 Visual: Genesis Proof route.  
 Line: **“The next record appears here as it is written.”**

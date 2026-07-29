@@ -1,29 +1,118 @@
 #!/usr/bin/env node
 
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { readdirSync, readFileSync } from "node:fs";
+import { extname, join, resolve } from "node:path";
+import { GENESIS_SCHEDULED_AT_UTC } from "../app/launch-clock-state.mjs";
 
-const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
-const checks = [
-  ["app/LaunchClock.tsx", "2026-07-28T14:00:00Z", "canonical UTC launch instant"],
-  ["app/page.tsx", "dateTime=\"2026-07-28T14:00:00Z\"", "English launch time element"],
-  ["app/page.tsx", "dateTime=\"2026-07-28T13:30:00Z\"", "English broadcast time element"],
-  ["app/ActivationTerminal.tsx", "28 JULY 2026 · 13:30 UTC", "English broadcast copy"],
-  ["app/ActivationTerminal.tsx", "28 TEMMUZ 2026 · 13:30 UTC", "Turkish broadcast copy"],
-  ["archive/public-disclosures/source/star-ascent-broadcast-pack-en.txt", "Genesis opens at 14:00 UTC.", "English broadcast pack"],
-  ["archive/public-disclosures/source/star-ascent-broadcast-pack-tr.txt", "Başlangıç 14:00 UTC'de açılır.", "Turkish broadcast pack"],
-  ["archive/public-disclosures/source/star-ascent-genesis-run-sheet-en.txt", "14:00 UTC — GENESIS", "English run sheet"],
-  ["archive/public-disclosures/source/star-ascent-genesis-run-sheet-tr.txt", "14:00 UTC — BAŞLANGIÇ", "Turkish run sheet"],
+const EXPECTED_UTC = "2026-07-29T14:15:18Z";
+const EXPECTED_UTC_DISPLAY = "14:15:18 UTC";
+const EXPECTED_ISTANBUL_DISPLAY = "17:15:18";
+
+const disclosureFiles = readdirSync(resolve("public/disclosures"), {
+  withFileTypes: true,
+})
+  .filter((entry) => entry.isFile())
+  .map((entry) => join("public/disclosures", entry.name));
+
+const activeFiles = [
+  "app/LaunchClock.tsx",
+  "app/page.tsx",
+  "app/launch/page.tsx",
+  "app/mint/page.tsx",
+  "app/ActivationTerminal.tsx",
+  "app/press/PressCopyDeck.tsx",
+  "launch/BROADCAST_CALL_SHEET.md",
+  "launch/DEVNET_REHEARSAL_SCENARIO.md",
+  "launch/FIRST_HOUR_SOCIAL_PACK.md",
+  "launch/GENESIS_COMMAND_CENTER.md",
+  "launch/GENESIS_OPERATIONS_CARD.md",
+  "launch/GENESIS_SOCIAL_SEQUENCE.md",
+  "launch/LAUNCH_DAY_CARD.md",
+  "launch/LIVE_BROADCAST_OPERATOR_CARD.md",
+  "launch/OPERATOR_ACTIONS_ISTANBUL.txt",
+  ...disclosureFiles,
 ];
 
-let failed = false;
-for (const [file, requiredText, label] of checks) {
-  const source = readFileSync(resolve(root, file), "utf8");
-  if (source.includes(requiredText)) console.log(`OK: ${label}`);
-  else { console.error(`FAIL: ${label} does not match the confirmed schedule`); failed = true; }
+const textExtensions = new Set([".json", ".md", ".mjs", ".ts", ".tsx", ".txt"]);
+const staleClaims = [
+  {
+    pattern:
+      /2026-07-28|28 JULY(?: 2026)?|28 July(?: 2026)?|28 TEMMUZ(?: 2026)?|28 Temmuz(?: 2026)?/u,
+    description: "the elapsed 28 July launch window",
+  },
+  {
+    pattern:
+      /\b13:30 UTC\b|\b14:00 UTC\b|\b16:30\b|\b17:00\b|\b14:07:16\b|\b17:07:16\b/u,
+    description: "an expired fixed launch time",
+  },
+  {
+    pattern:
+      /NEXT WINDOW(?: \/\/)? NOT SCHEDULED|SONRAKİ PENCERE(?: \/\/)? PLANLANMADI|next (?:STAR ASCENT |broadcast and Genesis )?window (?:is|are) not scheduled|sonraki (?:STAR ASCENT |yayın ve Başlangıç )?penceresi planlanmadı/iu,
+    description: "an unscheduled-window claim",
+  },
+];
+
+const failures = [];
+
+if (GENESIS_SCHEDULED_AT_UTC !== EXPECTED_UTC) {
+  failures.push(
+    `launch clock target is ${GENESIS_SCHEDULED_AT_UTC}; expected ${EXPECTED_UTC}`,
+  );
 }
-if (failed) {
-  console.error("\nSchedule is not safe to publish. Fix the conflicting surface before launch.");
-  process.exitCode = 1;
-} else console.log("\nLaunch schedule matches 28 July 2026, broadcast 13:30 UTC, Genesis 14:00 UTC.");
+
+for (const file of activeFiles) {
+  if (!textExtensions.has(extname(file))) continue;
+  const source = readFileSync(resolve(file), "utf8");
+  for (const claim of staleClaims) {
+    if (claim.pattern.test(source)) {
+      failures.push(`${file} still presents ${claim.description}`);
+    }
+  }
+}
+
+const requiredMarkers = new Map([
+  [
+    "app/LaunchClock.tsx",
+    [
+      EXPECTED_UTC_DISPLAY,
+      `${EXPECTED_ISTANBUL_DISPLAY} İSTANBUL`,
+      "OPEN-SOURCE CEREMONY // COUNTDOWN",
+      "AÇIK KAYNAK TÖREN // GERİ SAYIM",
+      "HUMAN-APPROVED EXECUTION MAY BEGIN",
+    ],
+  ],
+  [
+    "app/page.tsx",
+    [EXPECTED_UTC_DISPLAY, `${EXPECTED_ISTANBUL_DISPLAY} İSTANBUL`],
+  ],
+  [
+    "app/launch/page.tsx",
+    [EXPECTED_UTC_DISPLAY, `${EXPECTED_ISTANBUL_DISPLAY} İSTANBUL`],
+  ],
+  [
+    "app/mint/page.tsx",
+    [EXPECTED_UTC_DISPLAY, `${EXPECTED_ISTANBUL_DISPLAY} ISTANBUL`],
+  ],
+  [
+    "launch/GENESIS_COMMAND_CENTER.md",
+    [EXPECTED_UTC_DISPLAY, `${EXPECTED_ISTANBUL_DISPLAY} Istanbul`],
+  ],
+]);
+
+for (const [file, markers] of requiredMarkers) {
+  const source = readFileSync(resolve(file), "utf8");
+  for (const marker of markers) {
+    if (!source.includes(marker)) {
+      failures.push(`${file} is missing ${marker}`);
+    }
+  }
+}
+
+if (failures.length) {
+  failures.forEach((failure) => console.error(`FAIL: ${failure}`));
+  process.exit(1);
+}
+
+console.log(
+  `Launch schedule is fixed at ${EXPECTED_UTC} across ${activeFiles.length} active operator and public files.`,
+);
