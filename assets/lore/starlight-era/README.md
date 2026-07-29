@@ -237,7 +237,9 @@ The 160-image expansion is active as 40 four-image batches starring
 Radiance, Ellie, and Alia together in every frame. Its six arcs cover
 swimworlds, intimate-fashion ateliers, kinetic runways, daily life and nature,
 closed-set after-dark cabaret, and a colorful three-woman finale. The binding
-scene plan is in [`trio-40x4-campaign.json`](trio-40x4-campaign.json).
+scene plan is in [`trio-40x4-campaign.json`](trio-40x4-campaign.json). Its
+wardrobe contract favors distinct two-piece architecture, bare shoulders,
+backs, midriffs, and legs over repetitive full-coverage styling.
 
 ## Trio Unbound - Batch 74: Côte d'Azur Swim Kickoff
 
