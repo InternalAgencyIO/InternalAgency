@@ -315,6 +315,13 @@ rejected and regenerated.
 | **White-Lace Cutting Table**<br><img src="352-white-lace-cutting-table.png" width="420" alt="The trio arranging white lace-pattern panels while catching a springing gold measuring ribbon"> | **Black-Lace Fitting Circle**<br><img src="353-black-lace-fitting-circle.png" width="420" alt="Radiance, Ellie, and Alia completing a three-way clasp fitting in a circular black-and-gold salon"> |
 | **Red-Lace Ribbon Run**<br><img src="354-red-lace-ribbon-run.png" width="420" alt="The trio racing through an atelier corridor while passing one flowing hot-red ribbon"> | **Gold-Lace Pattern Dance**<br><img src="355-gold-lace-mannequin-dance.png" width="420" alt="The trio dancing among abstract gold frames and suspended lace-pattern panels"> |
 
+## Trio Unbound - Batch 84: Iconic Cinema Fashion Reframed
+
+| | |
+|---|---|
+| **Subway-Wind White Dress**<br><img src="356-subway-wind-white-dress.png" width="420" alt="Radiance, Ellie, and Alia laughing through a linked wind dance above a subway grille on a moonlit 1950s-inspired street"> | **Dawn Jewelry-Window Coffee**<br><img src="357-dawn-jewelry-window-coffee.png" width="420" alt="The trio sharing coffee and pastries in black cocktail dresses outside a jewel-box boutique at dawn"> |
+| **Ocean-Liner Bow Sunset**<br><img src="358-ocean-liner-bow-sunset.png" width="420" alt="The trio completing a linked barefoot wind turn at a fictional ocean-liner bow beneath a blazing sunset"> | **Cyber Rooftop Coat Run**<br><img src="359-cyber-rooftop-coat-run.png" width="420" alt="Radiance, Ellie, and Alia racing across a rain-black rooftop as Ellie retrieves a green-lit access disc"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
