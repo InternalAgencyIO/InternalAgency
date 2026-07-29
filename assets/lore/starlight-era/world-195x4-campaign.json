@@ -10,12 +10,14 @@
   "endBatch": 284,
   "firstNumber": 380,
   "lastNumber": 1159,
-  "nextBatch": 90,
-  "nextNumber": 380,
-  "completedCountries": 0,
-  "completedBatches": 0,
-  "completedImages": 0,
-  "completedCountrySlugs": [],
+  "nextBatch": 91,
+  "nextNumber": 384,
+  "completedCountries": 1,
+  "completedBatches": 1,
+  "completedImages": 4,
+  "completedCountrySlugs": [
+    "turkiye"
+  ],
   "countryOrderPolicy": {
     "rule": "Batch 90 is Türkiye. Batches 91 through 284 follow descending national population across the remaining 194 countries, largest first, while continentSubpacks remain the authoritative continent membership and milestone grouping.",
     "populationBasis": "World Bank Population, total (SP.POP.TOTL), 2024 values, consulted 2026-07-29; Vatican City and Nauru use small-state fallback estimates only for tail ordering.",
@@ -509,7 +511,8 @@
       "country": "Türkiye",
       "countrySlug": "turkiye",
       "theme": "Türkiye — Crossroads Light Operation",
-      "status": "queued",
+      "status": "complete",
+      "completedAt": "2026-07-29T22:34:33+03:00",
       "scenes": [
         {
           "number": 380,

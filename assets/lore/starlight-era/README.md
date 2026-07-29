@@ -357,6 +357,13 @@ rejected and regenerated.
 | **Scarlet Honeymoon Seat Dance**<br><img src="376-scarlet-honeymoon-seat-dance.png" width="420" alt="Radiance, Ellie, and Alia completing a coordinated gala entrance beside their seated husbands on the scarlet mirror set"> | **Mirror Champagne Ribbon Toast**<br><img src="377-mirror-champagne-ribbon-toast.png" width="420" alt="The three newlywed couples sharing a joyful champagne toast beneath scarlet arcs and molten-gold ribbons"> |
 | **Three-Chair Couple Spiral**<br><img src="378-three-chair-couple-spiral.png" width="420" alt="An elevated view of the three couples rising into a synchronized dance spiral around three gold chairs"> | **Molten Honeymoon Confetti Finale**<br><img src="379-molten-honeymoon-confetti-finale.png" width="420" alt="All three couples completing a linked fashion-dance finale beneath a white-gold halo and scarlet confetti"> |
 
+## World Series - Asia - Batch 90: Türkiye
+
+| | |
+|---|---|
+| **Bosphorus Cipher Ferry**<br><img src="380-turkiye-istanbul-bosphorus-cipher-ferry.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous cipher handoff on a rain-swept Bosphorus ferry deck"> | **Cappadocia Dawn Balloon Intercept**<br><img src="381-turkiye-cappadocia-dawn-balloon-intercept.png" width="420" alt="The trio redirecting a harmless light capsule from a mirror bridge above Cappadocia at dawn"> |
+| **Ephesus Marble Shadow Swap**<br><img src="382-turkiye-ephesus-marble-shadow-swap.png" width="420" alt="The trio completing a non-contact star-map projection swap before the illuminated Library of Celsus"> | **Pamukkale Moonwater Extraction**<br><img src="383-turkiye-pamukkale-moonwater-extraction.png" width="420" alt="Radiance, Ellie, and Alia restoring an environmental beacon across moonlit Pamukkale terraces"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
