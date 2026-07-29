@@ -259,6 +259,13 @@ rejected and regenerated.
 | **Black-Sand Shoreline Sprint**<br><img src="320-black-sand-wave-run.png" width="420" alt="The trio racing along a black volcanic shoreline in gold, white, and red sport couture"> | **Lava-Tube Tide Pool**<br><img src="321-lava-tube-tide-pool.png" width="420" alt="Radiance, Ellie, and Alia helping one another from an emerald volcanic tide pool"> |
 | **Basalt-Cliff Waterfall Dash**<br><img src="322-basalt-cliff-waterfall.png" width="420" alt="The trio running shoulder-to-shoulder through silver mist beside a basalt waterfall"> | **Sunset Outrigger Sprint**<br><img src="323-sunset-outrigger-sprint.png" width="420" alt="The trio hauling a black outrigger into coral sunset water"> |
 
+## Trio Unbound - Batch 76: Paris Pool Holiday
+
+| | |
+|---|---|
+| **Paris Glass-Rooftop Plunge**<br><img src="324-paris-glass-rooftop-plunge.png" width="420" alt="Radiance, Ellie, and Alia taking a synchronized plunge in a glass rooftop pool above an invented Paris skyline"> | **Seine Barge Ribbon Race**<br><img src="325-seine-barge-swim-race.png" width="420" alt="The trio sprinting across a rain-bright river barge and completing a molten-gold ribbon finish"> |
+| **Art-Deco Color-Block Skate**<br><img src="326-art-deco-poolside-dance.png" width="420" alt="The trio completing a synchronized roller-skating turn on a red, white, midnight-blue, and gold Art-Deco promenade"> | **Rain-Pool Umbrella Splash**<br><img src="327-rain-pool-umbrella-splash.png" width="420" alt="Radiance, Ellie, and Alia sharing a clear umbrella while completing a synchronized splash kick in warm summer rain"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
