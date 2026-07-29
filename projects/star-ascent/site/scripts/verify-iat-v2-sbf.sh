@@ -17,7 +17,8 @@ if [[ "$actual_anchor" != "$expected_anchor" ]]; then
   echo "FAIL: expected $expected_anchor; found $actual_anchor" >&2
   exit 1
 fi
-if [[ "$actual_solana" != "$expected_solana" ]]; then
+if [[ "$actual_solana" != "$expected_solana" \
+  && "$actual_solana" != "$expected_solana "* ]]; then
   echo "FAIL: expected $expected_solana; found $actual_solana" >&2
   exit 1
 fi
