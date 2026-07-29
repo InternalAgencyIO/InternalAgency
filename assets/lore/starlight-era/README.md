@@ -329,6 +329,13 @@ rejected and regenerated.
 | **Mirror-Corset Gallery Walk**<br><img src="360-mirror-corset-gallery-walk.png" width="420" alt="Radiance, Ellie, and Alia completing a linked runway stride through a faceted black-and-gold mirror gallery"> | **Velvet Bodysuit Stair Race**<br><img src="361-velvet-bodysuit-stair-race.png" width="420" alt="The trio racing around a midnight-blue spiral staircase as a hot-red ribbon loops through gold rails"> |
 | **Rose-Hardware Assembly**<br><img src="362-rose-hardware-fitting.png" width="420" alt="The trio assembling an oversized abstract gold thorned-rose sculpture inside an optical-white cyclorama"> | **Scorpion-Clasp Finale**<br><img src="363-scorpion-clasp-finale.png" width="420" alt="The trio completing a linked dance pivot beneath moving molten-gold rings in a black sculpture gallery"> |
 
+## Trio Unbound - Batch 86: Secret Garden Intimates
+
+| | |
+|---|---|
+| **Conservatory Lace Tea**<br><img src="364-conservatory-lace-tea.png" width="420" alt="Radiance, Ellie, and Alia rescuing a wobbling tea tray while hurrying through a rain-wet sunset conservatory"> | **Moonflower Silk Swing**<br><img src="365-moonflower-silk-swing.png" width="420" alt="The trio sharing a sweeping gold swing above a violet mirror pond beneath enormous white moonflowers"> |
+| **Greenhouse Rain Dance**<br><img src="366-greenhouse-rain-dance.png" width="420" alt="The trio dancing barefoot through irrigation rain and reflecting channels inside a futuristic greenhouse"> | **Rose-Maze Satin Run**<br><img src="367-rose-maze-satin-run.png" width="420" alt="Radiance, Ellie, and Alia racing through a blue-hour geometric rose maze toward one gold marker"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
