@@ -308,6 +308,13 @@ rejected and regenerated.
 | **Sunlit Suite Pillow Laugh**<br><img src="348-sunlit-suite-pillow-laugh.png" width="420" alt="Radiance, Ellie, and Alia laughing together through a cloud of white pillows in a sunlit suite"> | **Mirror-Vanity Styling Relay**<br><img src="349-mirror-vanity-styling-race.png" width="420" alt="The trio completing a playful three-way jewelry styling relay at an Art-Deco vanity"> |
 | **Balcony Coffee Catch**<br><img src="350-balcony-coffee-silk-sets.png" width="420" alt="The trio carrying coffee and fruit while catching an orange on a sunrise coastal balcony"> | **Curtain-Breeze Lookbook**<br><img src="351-curtain-breeze-lookbook.png" width="420" alt="Radiance, Ellie, and Alia crossing a bright suite in linked steps between billowing white curtains"> |
 
+## Trio Unbound - Batch 83: Lace Atelier in Motion
+
+| | |
+|---|---|
+| **White-Lace Cutting Table**<br><img src="352-white-lace-cutting-table.png" width="420" alt="The trio arranging white lace-pattern panels while catching a springing gold measuring ribbon"> | **Black-Lace Fitting Circle**<br><img src="353-black-lace-fitting-circle.png" width="420" alt="Radiance, Ellie, and Alia completing a three-way clasp fitting in a circular black-and-gold salon"> |
+| **Red-Lace Ribbon Run**<br><img src="354-red-lace-ribbon-run.png" width="420" alt="The trio racing through an atelier corridor while passing one flowing hot-red ribbon"> | **Gold-Lace Pattern Dance**<br><img src="355-gold-lace-mannequin-dance.png" width="420" alt="The trio dancing among abstract gold frames and suspended lace-pattern panels"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
