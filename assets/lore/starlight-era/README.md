@@ -343,6 +343,13 @@ rejected and regenerated.
 | **Riviera Shoreline Sprint**<br><img src="368-riviera-shoreline-sprint.png" width="420" alt="Radiance, Ellie, and Alia sprinting through a sunlit Riviera shallows with a gold relay ring"> | **Scarlet Surfboard Balance**<br><img src="369-scarlet-surfboard-balance.png" width="420" alt="The trio laughing while balancing together on a scarlet paddleboard above turquoise water"> |
 | **White-Gold Tide-Pool Dance**<br><img src="370-white-gold-tide-pool-dance.png" width="420" alt="Radiance, Ellie, and Alia completing a linked circular water dance inside a crystal tide pool"> | **Black-Sand Sunset Splash**<br><img src="371-black-sand-sunset-splash.png" width="420" alt="The trio leaping through a shallow shore break on a volcanic black-sand beach at sunset"> |
 
+## Trio Unbound - Batch 88: Scarlet Mirror Triple-Column Atelier
+
+| | |
+|---|---|
+| **Scarlet Mirror Gala Entrance**<br><img src="372-scarlet-mirror-pole-entrance.png" width="420" alt="Radiance, Ellie, and Alia entering a black-and-gold mirror gala in silver, red, and black reflective cocktail fashion"> | **Triple-Column Scarlet Spiral**<br><img src="373-triple-pole-scarlet-spiral.png" width="420" alt="The trio completing a circular dance around three gold-lit chrome sculptures on a midnight-blue mirror floor"> |
+| **Crimson Platform Light Relay**<br><img src="374-crimson-platform-light-relay.png" width="420" alt="Radiance passing a glowing red light orb to Ellie while Alia sweeps into the next relay step"> | **Molten Mirror Gala Finale**<br><img src="375-molten-mirror-pole-finale.png" width="420" alt="The trio completing a triumphant reflective-fashion finale beneath a molten-gold halo"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
