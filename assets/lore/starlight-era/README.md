@@ -399,6 +399,13 @@ rejected and regenerated.
 | **Karachi Frere Hall Light Intercept**<br><img src="400-pakistan-karachi-frere-hall-light-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three chrome light keys into a gold compass beside rain-lit Frere Hall"> | **Lahore Fort Mirror Cipher**<br><img src="401-pakistan-lahore-fort-mirror-cipher.png" width="420" alt="The trio braiding three harmless light strands into a sealed cobalt archive cube in Lahore Fort"> |
 | **Hunza Valley Glacier-Prism Extraction**<br><img src="402-pakistan-hunza-valley-glacier-prism-extraction.png" width="420" alt="The trio restoring a cobalt glacier-data beacon above the turquoise river and high peaks of Hunza Valley"> | **Karachi Sea View Night Relay**<br><img src="403-pakistan-karachi-sea-view-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay beside Karachi's illuminated surf"> |
 
+## World Series - Africa - Batch 96: Nigeria
+
+| | |
+|---|---|
+| **Lagos Lekki-Ikoyi Light Intercept**<br><img src="404-nigeria-lagos-lekki-ikoyi-light-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking chrome light keys into a gold compass beside Lagos's rain-lit Lekki-Ikoyi Link Bridge"> | **Kano City Wall Mirror Cipher**<br><img src="405-nigeria-kano-city-wall-mirror-cipher.png" width="420" alt="The trio braiding three harmless light strands into a sealed cobalt archive cube beside the Ancient Kano City Walls"> |
+| **Yankari Wikki Springs Prism Extraction**<br><img src="406-nigeria-yankari-wikki-springs-prism-extraction.png" width="420" alt="The trio restoring a cobalt aquifer beacon above the turquoise water of Wikki Warm Spring"> | **Lagos Tarkwa Bay Night Relay**<br><img src="407-nigeria-lagos-tarkwa-bay-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay beside the illuminated Atlantic surf at Tarkwa Bay"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
