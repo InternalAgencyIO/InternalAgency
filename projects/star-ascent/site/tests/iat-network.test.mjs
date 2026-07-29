@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import {
   classifyLookup,
@@ -7,12 +8,25 @@ import {
   PUBLIC_NETWORK_STATE,
 } from "../app/network/network-state.mjs";
 
+const apiSource = readFileSync(
+  new URL("../app/api/network/route.ts", import.meta.url),
+  "utf8",
+);
+
 test("network launch state is fail-closed until verified addresses are published", () => {
   assert.equal(PUBLIC_NETWORK_STATE.status, "HOLD");
   assert.equal(PUBLIC_NETWORK_STATE.cluster, "mainnet-beta");
   assert.equal(PUBLIC_NETWORK_STATE.mint, null);
   assert.equal(PUBLIC_NETWORK_STATE.programId, null);
   assert.equal(PUBLIC_NETWORK_STATE.genesisAtUtc, null);
+});
+
+test("network API is read-only, bounded, and has two official RPC reads", () => {
+  assert.match(apiSource, /https:\/\/api\.mainnet\.solana\.com/);
+  assert.match(apiSource, /https:\/\/api\.mainnet-beta\.solana\.com/);
+  assert.match(apiSource, /AbortSignal\.timeout\(5_000\)/);
+  assert.match(apiSource, /RPC_ENDPOINTS_EXHAUSTED/);
+  assert.doesNotMatch(apiSource, /sendTransaction|sendRawTransaction|signTransaction/);
 });
 
 test("read-only explorer classifies public addresses and signatures", () => {

@@ -17,9 +17,11 @@ type NetworkPayload = {
     blockHeight: number;
     epoch: { epoch: number; slotIndex: number; slotsInEpoch: number };
     observedAtUtc: string;
+    rpcSource: string;
   };
   result?: {
     kind: "address" | "signature";
+    rpcSource?: string;
     address?: string;
     signature?: string;
     explorerUrl: string;
@@ -68,6 +70,7 @@ const copy = {
     player: "PLAYER VIEW",
     noLookup: "Paste a public Solana address or transaction signature. This is read-only and never asks for a signature.",
     noIat: "IAT mint and program addresses are not published yet. Balances and positions switch on only after verified Genesis evidence.",
+    rpcUnavailable: "LIVE RPC UNAVAILABLE // RETRYING PUBLIC SOLANA READS",
     notFound: "No matching on-chain record was found.",
     explorer: "OPEN IN SOLANA EXPLORER",
     recent: "RECENT ACTIVITY",
@@ -85,6 +88,7 @@ const copy = {
     player: "OYUNCU GÖRÜNÜMÜ",
     noLookup: "Kamuya açık bir Solana adresi veya işlem imzası yapıştır. Bu ekran salt okunurdur ve asla imza istemez.",
     noIat: "IAT mint ve program adresleri henüz yayımlanmadı. Bakiye ve pozisyonlar yalnızca doğrulanmış Başlangıç kanıtından sonra açılır.",
+    rpcUnavailable: "CANLI RPC ERİŞİLEMİYOR // SOLANA OKUMASI YENİDEN DENENECEK",
     notFound: "Eşleşen zincir üstü kayıt bulunamadı.",
     explorer: "SOLANA EXPLORER'DA AÇ",
     recent: "SON HAREKETLER",
@@ -158,7 +162,11 @@ export default function NetworkPage() {
         <article><span>03</span><b>{chain?.blockHeight?.toLocaleString() ?? "—"}</b><small>FINALIZED HEIGHT</small></article>
         <article><span>04</span><b>{chain?.epoch?.epoch?.toLocaleString() ?? "—"}</b><small>CURRENT EPOCH</small></article>
       </div>
-      <small>{chain?.observedAtUtc ? `OBSERVED ${chain.observedAtUtc}` : "READING SOLANA MAINNET…"}</small>
+      <small>{chain?.observedAtUtc
+        ? `OBSERVED ${chain.observedAtUtc} // ${chain.rpcSource}`
+        : status?.error
+          ? t.rpcUnavailable
+          : "READING SOLANA MAINNET…"}</small>
     </section>
 
     <section className="network-console">

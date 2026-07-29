@@ -5,7 +5,10 @@ import {
   PUBLIC_NETWORK_STATE,
 } from "../../network/network-state.mjs";
 
-const RPC_ENDPOINT = "https://api.mainnet-beta.solana.com";
+const RPC_ENDPOINTS = [
+  "https://api.mainnet.solana.com",
+  "https://api.mainnet-beta.solana.com",
+] as const;
 const POSITION_ACCOUNT_SIZE = 168;
 const POSITION_OWNER_OFFSET = 40;
 
@@ -33,30 +36,41 @@ function json(body: unknown, status = 200, maxAge = 0) {
 }
 
 async function rpcBatch(requests: RpcRequest[]) {
-  const response = await fetch(RPC_ENDPOINT, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(
-      requests.map((request) => ({ jsonrpc: "2.0", ...request })),
-    ),
-    signal: AbortSignal.timeout(8_000),
-  });
-  if (!response.ok) throw new Error(`RPC_HTTP_${response.status}`);
-  const payload = await response.json() as RpcReply[];
-  const replies = new Map(payload.map((reply) => [reply.id, reply]));
-  return Object.fromEntries(
-    requests.map(({ id }) => {
-      const reply = replies.get(id);
-      if (!reply || reply.error) {
-        throw new Error(reply?.error?.message ?? `RPC_REPLY_MISSING_${id}`);
-      }
-      return [id, reply.result];
-    }),
-  );
+  let lastError = "RPC_ENDPOINTS_EXHAUSTED";
+  for (const endpoint of RPC_ENDPOINTS) {
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(
+          requests.map((request) => ({ jsonrpc: "2.0", ...request })),
+        ),
+        signal: AbortSignal.timeout(5_000),
+      });
+      if (!response.ok) throw new Error(`RPC_HTTP_${response.status}`);
+      const payload = await response.json() as RpcReply[];
+      const replies = new Map(payload.map((reply) => [reply.id, reply]));
+      return {
+        values: Object.fromEntries(
+          requests.map(({ id }) => {
+            const reply = replies.get(id);
+            if (!reply || reply.error) {
+              throw new Error(reply?.error?.message ?? `RPC_REPLY_MISSING_${id}`);
+            }
+            return [id, reply.result];
+          }),
+        ),
+        source: new URL(endpoint).hostname,
+      };
+    } catch (error) {
+      lastError = error instanceof Error ? error.message : "RPC_UNKNOWN_FAILURE";
+    }
+  }
+  throw new Error(lastError);
 }
 
 async function networkSnapshot() {
-  const result = await rpcBatch([
+  const { values: result, source } = await rpcBatch([
     { id: "health", method: "getHealth" },
     { id: "slot", method: "getSlot", params: [{ commitment: "confirmed" }] },
     { id: "height", method: "getBlockHeight", params: [{ commitment: "finalized" }] },
@@ -68,11 +82,12 @@ async function networkSnapshot() {
     blockHeight: result.height,
     epoch: result.epoch,
     observedAtUtc: new Date().toISOString(),
+    rpcSource: source,
   };
 }
 
 async function signatureSnapshot(signature: string) {
-  const result = await rpcBatch([
+  const { values: result, source } = await rpcBatch([
     {
       id: "status",
       method: "getSignatureStatuses",
@@ -100,6 +115,7 @@ async function signatureSnapshot(signature: string) {
   return {
     kind: "signature",
     signature,
+    rpcSource: source,
     explorerUrl: explorerUrl("signature", signature),
     found: Boolean(status || transaction),
     status,
@@ -162,7 +178,7 @@ async function addressSnapshot(address: string) {
       ],
     });
   }
-  const result = await rpcBatch(requests);
+  const { values: result, source } = await rpcBatch(requests);
   const lamports = Number((result.balance as { value?: number })?.value ?? 0);
   const tokenAccounts = (result.iat as {
     value?: Array<{ account?: { data?: { parsed?: { info?: { tokenAmount?: { amount?: string; uiAmountString?: string } } } } } }>;
@@ -179,6 +195,7 @@ async function addressSnapshot(address: string) {
   return {
     kind: "address",
     address,
+    rpcSource: source,
     explorerUrl: explorerUrl("address", address),
     exists: Boolean((result.account as { value?: unknown })?.value),
     sol: { lamports, amount: (lamports / 1_000_000_000).toFixed(9) },
