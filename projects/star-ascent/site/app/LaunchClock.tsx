@@ -63,8 +63,8 @@ export function LaunchClock({ language }: { language: "en" | "tr" }) {
         ? "İNSAN ONAYLI YÜRÜTME BAŞLAYABİLİR · OTOMATİK İŞLEM YOK."
         : "KOD KAMUYA AÇIK · YÜRÜTME FİZİKSEL VE KANIT EŞİKLİ.";
   const exactTime = language === "en"
-    ? "29 JUL 2026 · 15:00:00 UTC"
-    : "29 TEM 2026 · 18:00:00 İSTANBUL";
+    ? "30 JUL 2026 · 03:45:00 UTC"
+    : "30 TEM 2026 · 06:45:00 İSTANBUL";
 
   return (
     <div

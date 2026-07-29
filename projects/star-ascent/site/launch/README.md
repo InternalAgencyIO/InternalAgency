@@ -1,5 +1,20 @@
 # Genesis Manifest Workflow
 
+> **MAINNET HOLD — TOKENOMICS V2 SUPERSEDES THE FOUR-TRANSACTION CEREMONY**
+>
+> The public policy at `/tokenomics` and
+> `archive/public-disclosures/source/iat-tokenomics-v2-{en,tr}.txt` introduces
+> vested reward lanes, full-obligation collateralization, fixed annual reward
+> rates, and a weekly CCC reassignment. The existing allocation-lock plan,
+> four-transaction rehearsal, generated mint configuration, and ceremony
+> validators do not implement those mechanics. The `/mint` controls are
+> deliberately disabled. These V1 artifacts remain regression-only historical
+> scaffolding and must not be used for devnet execution or mainnet approval.
+> The canonical implementation is now `programs/iat_v2`, with
+> `engagement/iat-economic-policy.v2.json`,
+> `launch/iat-v2-allocation-plan.template.json`, and
+> `launch/iat-v2-devnet-rehearsal.template.json`.
+
 ## One-command preflight
 
 Before the launch room opens, run the complete local consistency pass:
@@ -26,17 +41,23 @@ node scripts/validate-genesis-manifest.mjs launch/genesis-manifest.template.json
 
 The validator checks intended network, program, decimals, supply target, and the declared exact base-unit supply/allocation amounts using integer arithmetic. It also checks whether a PUBLISHED manifest has all mandatory evidence fields. Published evidence must be non-placeholder HTTPS URLs, while mint and allocation destinations must use Solana base58 address form. Each allocation must have its own destination and public evidence URL, preventing a single wallet or record from silently satisfying multiple allocation buckets. It does not sign a transaction, inspect a wallet, or replace independent Explorer verification.
 
-## Model T rehearsal
+## Superseded V1 rehearsal record
 
-Use `devnet-rehearsal.template.json` as the non-secret record for the exact four-transaction path intended for Genesis. It must stay on devnet and must not contain a seed phrase, PIN, private key, passphrase, wallet export, derivation/account path, or any other credential. The validator rejects credential-bearing fields anywhere in the record. A completed rehearsal binds the current manifest, immutable metadata plan, allocation-lock plan, reviewed mainnet-plan digest, devnet mint and metadata PDA, five allocation owners and canonical ATAs, exact test balances, four transaction proofs, Model T environment, and independent review.
+`devnet-rehearsal.template.json` and its validator are retained only to test
+that the former V1 fail-closed evidence system does not accept malformed or
+secret-bearing records. A completed V1 record cannot authorize V2.
 
-Validate it before declaring the rehearsal complete:
+The active rehearsal runbook and evidence schema are:
 
 ```bash
-node scripts/validate-devnet-rehearsal.mjs launch/devnet-rehearsal.template.json
+cat launch/DEVNET_REHEARSAL_SCENARIO.md
+node scripts/validate-iat-v2-policy.mjs
 ```
 
-Only four distinct canonical devnet transaction identities clear the gate: atomic create/initialize/immutable-metadata, five-destination allocation mint, mint-authority revocation, and freeze-authority revocation. The first transaction prevents an uninitialized or unlabelled mint from existing between confirmations; the second preserves the exact 50/20/15/10/5 shape. A `PLANNED` record must clear every completed-state field. The Model T operator and independent verifier must repeat the same four actions, four proofs, plan digest, device environment, mint, metadata PDA, five owners, five ATAs, and five amounts. Review must follow device completion within 30 minutes, and evidence expires after 24 hours.
+Complete `launch/iat-v2-devnet-rehearsal.template.json` only after a bound,
+verifiable SBF build, unfunded deployment, hardware-control transfer, V2
+initialization, scaled funding, authority revocation, activation, full positive
+and adversarial scenario matrix, and independent verification.
 
 The mainnet handoff uses the same non-secret boundary: its validator rejects credential-bearing fields anywhere in the record, including nested or unused `walletSeedPhrase`, `privateKey`, recovery-material, PIN, and derivation/account-path aliases. An `APPROVED` handoff also reruns the canonical devnet rehearsal validator against its fixed source path; `COMPLETED` status alone cannot bypass missing, stale, malformed, or inconsistent rehearsal proof. Remove a secret-bearing field entirely; never replace a real secret with a redacted value in a launch artifact.
 

@@ -1,0 +1,24 @@
+[package]
+name = "iat-v2"
+version = "0.1.0"
+description = "IAT V2 vesting, reward-reservation, and weekly CCC program"
+edition = "2021"
+license = "AGPL-3.0-or-later"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "iat_v2"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+
+[dependencies]
+anchor-lang = { version = "=1.0.2", features = ["init-if-needed"] }
+anchor-spl = "=1.0.2"
+solana-instructions-sysvar = "=3.0.1"
+solana-sha256-hasher = { version = "=3.1.0", features = ["sha2"] }

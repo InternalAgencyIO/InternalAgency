@@ -1,47 +1,57 @@
-# $IAT return checklist — final 30 minutes
+# IAT V2 return checklist
 
-**Ceremony window:** 29 July 2026 at 15:00:00 UTC / 18:00:00 Istanbul
+**Current state:** host-tested; mainnet `HOLD`
 
-The countdown opens the public ceremony window. It does not automatically
-connect a wallet, sign, submit, or authorize mainnet.
+The old `/mint` route is intentionally disabled. Do not connect Backpack or
+sign from it. The next human session starts with the V2 build/deployment
+evidence, not a mint transaction.
 
 ## Bring back
 
-- Trezor Model T, cable, and the computer that will be used for the rehearsal.
-- Backpack open on the Solana devnet account whose public address is
+- Trezor Model T, cable, and the computer used for the reviewed public
+  administrator address:
   `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`.
-- At least `0.03` devnet SOL on that public address. The local operator page
-  will check this live; use `https://faucet.solana.com/` only if it is short.
-- The public Trezor firmware version and public Backpack version.
-- A short operator label and a different independent-verifier label.
-- Final public mainnet recipient addresses for all five allocations, plus the
-  final lock method and public lock schedule for every locked allocation.
-- The livestream or announcement URL, if one will be used.
+- Backpack and Trezor firmware version numbers.
+- Sufficient **devnet** SOL for rehearsal fees. Do not send mainnet SOL for a
+  devnet step.
+- FDF Guard available to verify independently.
+- Access to a Linux or WSL2 environment with the pinned Rust, Solana, Anchor,
+  and Docker toolchain.
+- The public announcement/broadcast URL if it will be used.
 
 Never provide a seed phrase, PIN, passphrase, private key, recovery material,
-wallet export, or derivation path.
+wallet export, derivation path, or program keypair.
 
 ## Do together
 
-1. Open `http://localhost:3000/mint` and confirm `DEVNET REHEARSAL`,
-   `MAINNET LOCKED`, the exact signer address, and at least `0.03` devnet SOL.
-2. Connect Backpack and physically verify the public address on the Model T.
-3. Execute exactly four devnet transactions, with a separate physical device
-   confirmation for each:
-   - create mint + initialize 9 decimals + immutable metadata;
-   - mint the exact five allocations;
-   - revoke mint authority;
-   - revoke freeze authority.
-4. Download `iat-devnet-ceremony-evidence.json`.
-5. Independently verify all four signatures, the metadata PDA and fields, five
-   owners and canonical token accounts, exact supply, and both revoked
-   authorities.
-6. Re-run the complete release gate. Mainnet remains `HOLD` if any recipient,
-   lock, signer, rehearsal, handoff, publication, or independent-review field
-   is unresolved.
+1. Confirm the exact source commit and that the automated checks remain green.
+2. Generate a program keypair outside the repository; share only its public
+   program ID.
+3. Bind that ID into the source and commit the exact bound tree.
+4. Run the locked verifiable SBF build and compare its hash.
+5. Deploy the program **unfunded** to devnet.
+6. Transfer upgrade authority to the reviewed Model T administrator and verify
+   the ProgramData authority on-chain before funding.
+7. Create the scaled devnet mint, initialize every V2 PDA, fund the five
+   destinations, revoke mint/freeze authorities, and activate.
+8. Run the complete positive and adversarial scenario matrix in
+   `launch/DEVNET_REHEARSAL_SCENARIO.md`.
+9. Export the non-secret rehearsal evidence and have FDF Guard independently
+   compare it.
+10. Re-run the full source, build, deployment, evidence, and publication gates.
 
 ## Mainnet boundary
 
-No countdown state, site deployment, source publication, devnet success, or
-verbal approval alone authorizes mainnet. The operator reviews every physical
-device prompt; stop on any mismatch or unclear instruction.
+Mainnet is not a continuation button. After devnet passes, perform a separate
+mainnet review session with:
+
+- exact final program and mint IDs;
+- exact verifiable binary and source commit;
+- reviewed deployment/upgrade-authority procedure;
+- final vault addresses and amounts;
+- program security and economic review;
+- complete independent devnet evidence;
+- transaction-by-transaction hardware prompts and stop conditions.
+
+No countdown, site deployment, source publication, test result, verbal
+approval, or unattended automation may sign, submit, or authorize mainnet.

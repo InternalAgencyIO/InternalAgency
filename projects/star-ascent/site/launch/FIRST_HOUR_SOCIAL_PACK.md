@@ -1,6 +1,6 @@
 # STAR ASCENT — First-Hour Social Pack
 
-Status: **CEREMONY WINDOW · 29 JULY 2026 · 15:00:00 UTC**
+Status: **CEREMONY WINDOW · 30 JULY 2026 · 03:45:00 UTC**
 
 Use only after the linked site surface is live. Replace nothing with invented
 transaction, mint, allocation, date, or time claims.

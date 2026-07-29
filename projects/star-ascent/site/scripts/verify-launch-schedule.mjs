@@ -4,9 +4,9 @@ import { readdirSync, readFileSync } from "node:fs";
 import { extname, join, resolve } from "node:path";
 import { GENESIS_SCHEDULED_AT_UTC } from "../app/launch-clock-state.mjs";
 
-const EXPECTED_UTC = "2026-07-29T15:00:00Z";
-const EXPECTED_UTC_DISPLAY = "15:00:00 UTC";
-const EXPECTED_ISTANBUL_DISPLAY = "18:00:00";
+const EXPECTED_UTC = "2026-07-30T03:45:00Z";
+const EXPECTED_UTC_DISPLAY = "03:45:00 UTC";
+const EXPECTED_ISTANBUL_DISPLAY = "06:45:00";
 
 const disclosureFiles = readdirSync(resolve("archive/public-disclosures/source"), {
   withFileTypes: true,
@@ -39,6 +39,11 @@ const staleClaims = [
     pattern:
       /2026-07-28|28 JULY(?: 2026)?|28 July(?: 2026)?|28 TEMMUZ(?: 2026)?|28 Temmuz(?: 2026)?/u,
     description: "the elapsed 28 July launch window",
+  },
+  {
+    pattern:
+      /2026-07-29T15:00:00Z|29 JULY 2026|29 July 2026|29 TEMMUZ 2026|29 Temmuz 2026|\b15:00:00 UTC\b|\b18:00:00 (?:Istanbul|İstanbul|ISTANBUL|İSTANBUL)\b/u,
+    description: "the elapsed 29 July launch window",
   },
   {
     pattern:

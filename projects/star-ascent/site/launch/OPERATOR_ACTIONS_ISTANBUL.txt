@@ -1,7 +1,7 @@
 STAR ASCENT — OPERATOR ACTIONS REQUIRED
 TIME ZONE: ISTANBUL (UTC+3)
 
-Broadcast opens: 29 JULY 2026 — 18:00:00 ISTANBUL / 15:00:00 UTC
+Broadcast opens: 30 JULY 2026 — 06:45:00 ISTANBUL / 03:45:00 UTC
 Genesis target:  EXACT WINDOW SCHEDULED — EVIDENCE HOLD
 
 THIS IS THE HUMAN-ONLY HANDOFF
@@ -25,10 +25,14 @@ NEVER SEND OR PASTE:
 [ ] Avoid firmware changes, beta software, new wallet extensions, and new cables on
     launch day. Use the exact computer, cable, device, and wallet path rehearsed on devnet.
 
-2. DEVNET REHEARSAL — REQUIRED BEFORE MAINNET
+2. IAT V2 DEVNET REHEARSAL — REQUIRED BEFORE MAINNET
 [ ] Follow launch/DEVNET_REHEARSAL_SCENARIO.md exactly.
-[ ] Fund the reviewed public address with at least 0.03 faucet-only devnet SOL.
-[ ] Perform the rehearsal using the exact signing path planned for mainnet.
+[ ] Do not use /mint. It is a disabled archive of the superseded mint-only path.
+[ ] Bind and verifiably build the V2 program in the pinned Linux/WSL2 toolchain.
+[ ] Deploy the V2 program unfunded, then transfer upgrade authority to the
+    reviewed Model T administrator before funding any program vault.
+[ ] Perform the full positive and adversarial V2 rehearsal using the signing
+    path planned for mainnet.
 [ ] Check that the Model T screen presents a transaction you can understand before
     approving anything.
 [ ] Independently inspect the resulting devnet transaction(s) in a Solana Explorer.
@@ -68,6 +72,6 @@ OFFICIAL REFERENCE LINKS
 
 CURRENT LOCAL PREFLIGHT
 The local implementation and HOLD validators can be checked with `npm run
-check:launch-gates`. A passing local check does NOT replace the exact four-transaction
-Model T devnet rehearsal, physical mainnet signing, or independent on-chain
-verification.
+check:launch-gates` and `npm run check:iat-v2`. Passing local checks do NOT
+replace the verifiable SBF build, full V2 devnet rehearsal, security/economic
+review, physical mainnet signing, or independent on-chain verification.

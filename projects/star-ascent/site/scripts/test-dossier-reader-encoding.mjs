@@ -3,11 +3,11 @@
 import { readFileSync } from "node:fs";
 
 const source = readFileSync("app/dossier/read/[slug]/page.tsx", "utf8");
-const match = source.match(/function repairLegacyEncoding<T>[\s\S]*?\n}\n\nconst EN/);
+const match = source.match(/function repairLegacyEncoding<T>[\s\S]*?\r?\n}\r?\n\r?\nconst EN/);
 if (!match) throw new Error("Could not locate the Dossier legacy-encoding repair helper");
 
 const helperSource = match[0]
-  .replace(/\n\nconst EN$/, "")
+  .replace(/\r?\n\r?\nconst EN$/, "")
   .replace("function repairLegacyEncoding<T>(value: T): T", "function repairLegacyEncoding(value)")
   .replace("new Map<number, number>", "new Map")
   .replaceAll("const bytes: number[]", "const bytes")

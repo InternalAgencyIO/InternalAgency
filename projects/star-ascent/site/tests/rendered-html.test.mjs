@@ -34,17 +34,29 @@ import {
 globalThis.__filename = fileURLToPath(import.meta.url);
 globalThis.__dirname = dirname(globalThis.__filename);
 
-async function render() {
+async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("http://localhost/", { headers: { accept: "text/html" } }),
+    new Request(`http://localhost${pathname}`, { headers: { accept: "text/html" } }),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
     { waitUntil() {}, passThroughOnException() {} },
   );
 }
+
+test("renders the read-only IAT Network explorer in fail-closed launch state", async () => {
+  const response = await render("/network");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /IAT NETWORK \/\/ LIVE SOLANA READOUT/);
+  assert.match(html, /READ ONLY \/\/ NO WALLET CONNECTION/);
+  assert.match(html, /IAT PROGRAM \/\/ MAINNET HOLD/);
+  assert.match(html, /Wallet, transaction, program, or mint/);
+  assert.match(html, /Balances and positions switch on only after verified Genesis evidence/);
+  assert.doesNotMatch(html, /\b(?:phantom|solflare|backpack|walletconnect)\b/i);
+});
 
 test("renders the STAR ASCENT launch page and transparent disclosure", async () => {
   const response = await render();
@@ -54,7 +66,9 @@ test("renders the STAR ASCENT launch page and transparent disclosure", async () 
   const html = await response.text();
   assert.match(html, /<title>Internal Agency — STAR ASCENT<\/title>/i);
   assert.match(html, /STAR ASCENT/);
-  assert.match(html, /No financial return is promised/);
+  assert.match(html, /No token price, profit, or guaranteed market value is promised/);
+  assert.match(html, /REWARD CONTRACT/);
+  assert.match(html, /PROPOSED \/ HOLD/);
   assert.match(html, /No wallet connection required/);
   assert.match(html, /href="#main-content"[^>]*>Skip to main content<\/a>/i);
   assert.match(html, /<main id="main-content" tabindex="-1">/i);
@@ -95,8 +109,10 @@ test("keeps bilingual and accessibility safeguards in source", async () => {
   assert.match(page, /ARZ TASARIM HEDEFİ/);
   assert.match(page, /current status is not yet verified/);
   assert.match(page, /mevcut durum henüz doğrulanmadı/);
-  assert.match(page, /Distribution must not begin/);
-  assert.match(page, /dağıtım başlamamalıdır/);
+  assert.match(page, /Distribution and reward activation must not begin/);
+  assert.match(page, /dağıtım ve ödül aktivasyonu başlamamalıdır/);
+  assert.match(page, /Read the complete proposed terms/);
+  assert.match(page, /Önerilen şartların tamamını oku/);
   assert.match(page, /Evidence required before distribution/);
   assert.match(page, /Dağıtımdan önce gereken kanıtlar/);
   assert.match(page, /Direct explorer links/);

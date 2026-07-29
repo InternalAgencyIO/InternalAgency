@@ -37,9 +37,9 @@ availability. Artwork must remain safe if viewed without surrounding copy.
 | Intended use | Existing reference | Crop rule |
 | --- | --- | --- |
 | Main campaign/hero art | `star-ascent-keyart-v2.png` | Preserve the center and right third; site copy may occupy the left third. |
-| Narrative arrival scene | `scorpion-crew-arrival-v1.png` | Keep the crew clear at 62% horizontal crop on mobile. |
-| Dossier feature art | `scorpion-commander-portrait-v1.png` | Keep the face and shoulders in the upper-middle crop. |
-| Small fixed shortcut | `stage-manager-story.png` | It is hidden below 480 px; it must read without any small text. |
+| Narrative arrival scene | `scorpion-crew-arrival-v1.webp` | Keep the crew clear at 62% horizontal crop on mobile. |
+| Dossier feature art | `scorpion-commander-portrait-v1.webp` | Keep the face and shoulders in the upper-middle crop. |
+| Small fixed shortcut | `stage-manager-story.webp` | It is hidden below 480 px; it must read without any small text. |
 
 ## Manifest fields and performance decisions
 

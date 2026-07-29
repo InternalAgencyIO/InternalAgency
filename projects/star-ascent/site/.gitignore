@@ -41,3 +41,10 @@ next-env.d.ts
 /outputs/
 /work/
 /site-package.tgz
+
+# Rust / Anchor / local Solana validator artifacts and signing material
+/target/
+/.anchor/
+/test-ledger/
+*.so
+target/deploy/*-keypair.json

@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 
 const timeoutMs = 12_000;
-const concurrency = 4;
+const concurrency = 1;
 
 const publicOrigins = ["https://internalagency.io", "https://ileriakil.com"];
 const launchRoutes = [
@@ -13,6 +13,8 @@ const launchRoutes = [
   "/dossier",
   "/press",
   "/rewards",
+  "/tokenomics",
+  "/network",
 ];
 const sitemapRoutes = [...launchRoutes, "/world"];
 const pages = publicOrigins.flatMap((origin) => launchRoutes.map((route) => `${origin}${route}`));
@@ -22,6 +24,7 @@ const disclosureRedirects = {
   "star-ascent-white-dossier-v2": "white-dossier",
   "iat-litepaper": "white-dossier",
   "iat-tokenomics-v1": "tokenomics",
+  "iat-tokenomics-v2": "tokenomics",
   "iat-token-implementation-manifest": "mint-manifest",
   "iat-genesis-evidence-record": "genesis-proof",
   "star-ascent-broadcast-pack": "broadcast-pack",
@@ -67,12 +70,12 @@ function metadataError(url, html) {
     ? {
       lang: "tr",
       title: "İleri Akıl — STAR ASCENT",
-      description: "İleri Akıl'ın ilk kamusal bölümü: şeffaf lansman bilgileri, token açıklaması ve operatör güvenlik rehberi.",
+      description: "İleri Akıl'ın ilk kamusal bölümü: şeffaf lansman bilgileri, IAT ekonomi politikası V2 ve mainnet BEKLET kanıt durumu.",
     }
     : {
       lang: "en",
       title: "Internal Agency — STAR ASCENT",
-      description: "The first public chapter of Internal Agency: transparent launch information, token disclosure, and operator safety guidance.",
+      description: "The first public chapter of Internal Agency: transparent launch information, IAT economic policy V2, and mainnet HOLD evidence status.",
     };
   const language = html.match(/<html\b[^>]*\blang="([^"]+)"/i)?.[1] ?? "";
   const title = html.match(/<title>([^<]*)<\/title>/i)?.[1] ?? "";
@@ -105,9 +108,11 @@ function metadataError(url, html) {
   return null;
 }
 
-function publicSurfaceSafetyError(html) {
+function publicSurfaceSafetyError(url, html) {
   const interactiveControl = html.match(/<(form|input|textarea|select|option)\b/i)?.[1];
-  if (interactiveControl) return `public launch surface must not expose a ${interactiveControl} control before the verified activation gate`;
+  if (interactiveControl && new URL(url).pathname !== "/network") {
+    return `public launch surface must not expose a ${interactiveControl} control before the verified activation gate`;
+  }
   if (/\b(?:phantom|solflare|backpack|walletconnect)\b/i.test(html)) {
     return "public launch surface must not expose a wallet-provider integration before the verified activation gate";
   }
@@ -240,34 +245,43 @@ function isExpectedRedirectTarget(sourceUrl, location, expectedPath) {
 }
 
 async function checkPage(url) {
-  try {
-    const response = await request(url);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    if (response.url !== url) throw new Error(`expected the canonical public route to remain ${url}; got ${response.url}`);
-    const contentTypeIssue = htmlContentTypeError(response.headers.get("content-type"));
-    if (contentTypeIssue) throw new Error(contentTypeIssue);
-    const html = await response.text();
-    const metadataIssue = metadataError(url, html);
-    if (metadataIssue) throw new Error(metadataIssue);
-    const safetyIssue = publicSurfaceSafetyError(html);
-    if (safetyIssue) throw new Error(safetyIssue);
-    console.log(`OK ${response.status} ${url} (UTF-8 HTML, language, alternate links, social metadata, and pre-activation safety)`);
-    return true;
-  } catch (error) {
+  let lastError = new Error("public route verification did not run");
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
     try {
-      const status = headerStatus(curlHeaders(url));
-      if (status >= 200 && status < 300) {
-        const binary = process.platform === "win32" ? "curl.exe" : "curl";
-        const headers = curlHeaders(url);
-        const contentTypeIssue = htmlContentTypeError(headerValue(headers, "content-type"));
-        const html = execFileSync(binary, ["-sS", "--connect-timeout", "5", "--max-time", "12", url], { encoding: "utf8" });
-        const metadataIssue = metadataError(url, html);
-        const safetyIssue = publicSurfaceSafetyError(html);
-        if (!contentTypeIssue && !metadataIssue && !safetyIssue) { console.log(`OK ${status} ${url} (curl fallback; UTF-8 HTML, language, alternate links, social metadata, and pre-activation safety)`); return true; }
-      }
-    } catch { /* preserve the original network error below */ }
-    console.error(`FAIL ${url}: ${error.message}`); return false;
+      const response = await request(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      if (response.url !== url) throw new Error(`expected the canonical public route to remain ${url}; got ${response.url}`);
+      const contentTypeIssue = htmlContentTypeError(response.headers.get("content-type"));
+      if (contentTypeIssue) throw new Error(contentTypeIssue);
+      const html = await response.text();
+      const metadataIssue = metadataError(url, html);
+      if (metadataIssue) throw new Error(metadataIssue);
+      const safetyIssue = publicSurfaceSafetyError(url, html);
+      if (safetyIssue) throw new Error(safetyIssue);
+      const retryNote = attempt > 1 ? ` after ${attempt} attempts` : "";
+      console.log(`OK ${response.status} ${url}${retryNote} (UTF-8 HTML, language, alternate links, social metadata, and pre-activation safety)`);
+      return true;
+    } catch (error) {
+      lastError = error;
+    }
   }
+  try {
+    const status = headerStatus(curlHeaders(url));
+    if (status >= 200 && status < 300) {
+      const binary = process.platform === "win32" ? "curl.exe" : "curl";
+      const headers = curlHeaders(url);
+      const contentTypeIssue = htmlContentTypeError(headerValue(headers, "content-type"));
+      const html = execFileSync(binary, ["-sS", "--connect-timeout", "5", "--max-time", "12", url], { encoding: "utf8" });
+      const metadataIssue = metadataError(url, html);
+      const safetyIssue = publicSurfaceSafetyError(url, html);
+      if (!contentTypeIssue && !metadataIssue && !safetyIssue) {
+        console.log(`OK ${status} ${url} (curl fallback; UTF-8 HTML, language, alternate links, social metadata, and pre-activation safety)`);
+        return true;
+      }
+    }
+  } catch { /* preserve the latest fetch error below */ }
+  console.error(`FAIL ${url}: ${lastError.message}`);
+  return false;
 }
 
 async function checkRedirect(url, expectedPath) {

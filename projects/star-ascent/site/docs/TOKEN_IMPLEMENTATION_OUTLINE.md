@@ -1,44 +1,53 @@
-# $IAT Genesis Token Implementation
+# IAT V2 token implementation
 
-Status: implemented locally and evidence-locked. No mint, authority change, token account, lock vault, or distribution has been created by this repository.
+Status: **host-tested / not deployed / mainnet HOLD**
+
+No live mint, V2 program, vault, authority change, or distribution is asserted
+by this repository.
 
 ## Fixed architecture
 
-| Layer | Genesis decision |
+| Layer | V2 decision |
 | --- | --- |
-| Token standard | Original SPL Token Program |
-| Decimals | 9 |
-| Supply | 1,000,000,000 IAT / 1,000,000,000,000,000,000 base units |
-| Metadata | Canonical Metaplex metadata PDA; `Internal Agency Token` / `IAT`; zero seller fee; immutable at Genesis |
+| Token | Original SPL Token Program, 9 decimals, fixed 1,000,000,000 IAT supply |
+| Metadata | Canonical immutable Metaplex metadata |
 | Allocations | 50% community, 20% treasury, 15% ecosystem, 10% core team, 5% liquidity |
-| Locks | External, independently reviewed program-derived vault owners are mandatory for treasury, ecosystem, core team, and liquidity |
-| Authorities | Model T is temporary mint/freeze authority; both are permanently revoked |
-| Operator surface | Localhost-only; public deployments are read-only |
+| Custody | Community hardware wallet plus four IAT V2 program-vault PDAs |
+| Rewards | Fully reserved; treasury → ecosystem → liquidity; no reward debt or automatic compounding |
+| Rates | 17% core, 10% standard, 28% CCC Agent, 20% CCC Associate |
+| Vesting | Policy-defined 25% reward-lane genesis capacity and weekly cliff/linear schedules |
+| Weekly draw | One committed Switchboard reveal, exact-uniform mapping, no reroll |
+| Program control | Hardware-wallet upgrade authority before any IAT funding |
+| Operator surface | Superseded `/mint` page is read-only |
 
-## Exact transaction sequence
+The exact machine-readable policy is
+`engagement/iat-economic-policy.v2.json`. The allocation and devnet evidence
+schemas are `launch/iat-v2-allocation-plan.template.json` and
+`launch/iat-v2-devnet-rehearsal.template.json`.
 
-1. Atomically create the mint, initialize it with 9 decimals, and create immutable metadata.
-2. Atomically create five canonical associated token accounts and mint all five exact allocations.
-3. Revoke mint authority.
-4. Revoke freeze authority.
+## Deployment order
 
-Devnet uses the same four transactions and 50/20/15/10/5 ratio with 1,000 test IAT. Each transaction receives a separate Model T physical confirmation.
+1. Bind a real public program ID into the committed source.
+2. Produce and hash a locked verifiable SBF build.
+3. Deploy the exact binary unfunded.
+4. Transfer upgrade authority to the published Model T administrator.
+5. Create the immutable mint and metadata.
+6. Initialize config, lane vaults, and stake vault.
+7. Mint the five exact allocations.
+8. Revoke mint and freeze authorities.
+9. Activate only after randomness, build, authority, and review gates pass.
+10. Complete positive and adversarial devnet scenarios and independent review.
 
-## Enforced lock prerequisite
-
-`launch/allocation-lock-plan.template.json` is the only allocation-owner source for the generated ceremony configuration. `READY` requires five distinct owners; locked allocations must use off-curve program-derived vault authorities, a reviewed external program ID, direct Explorer evidence for the vault and program, separate public schedule evidence, and an independent plan digest. A team wallet or ordinary multisig must not be labelled time-locked.
-
-## Metadata prerequisite
-
-`launch/token-metadata.template.json` binds the public JSON at `public/metadata/iat.json` by SHA-256. Its `READY` state requires independent review. Transaction 1 uses the same fixed values and creates an immutable on-chain record.
-
-## Build-time interlock
-
-`scripts/generate-mint-ceremony-config.mjs` validates all canonical artifacts, recomputes their digests, and emits `app/mint/ceremony-config.generated.json`. Mainnet becomes `READY` only when metadata, lock plan, signer checklist, exact devnet rehearsal, approved handoff, and release packet all pass and bind the current files. Any drift regenerates a `LOCKED` configuration.
+The former four-transaction mint-only implementation is historical test
+scaffolding. It cannot activate V2 and must not be used for devnet or mainnet.
 
 ## Hard stops
 
-- No unverified wallet interface, public-host signing, or unclear device prompt.
-- No seed phrase, private key, PIN, passphrase, recovery material, or wallet export in any artifact.
-- No mainnet action before the exact devnet and independent-review chain passes.
-- No claim, distribution, or publication before direct on-chain evidence exists.
+- No secret or keypair material in source or evidence.
+- No wallet automation, blind prompt, or public-host signing.
+- No IAT in program vaults before the verified program is hardware-controlled.
+- No wrong-cluster Switchboard program, stale reveal, reroll, or mutable
+  candidate snapshot.
+- No uncollateralized position, reward debt, or rate substitution.
+- No mainnet action before SBF, local-validator, devnet, security/economic
+  review, and independent-evidence gates pass.

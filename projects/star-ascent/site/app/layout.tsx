@@ -20,8 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const tr = isTurkishHost(host);
   const title = tr ? "İleri Akıl — STAR ASCENT" : "Internal Agency — STAR ASCENT";
   const description = tr
-    ? "İleri Akıl'ın ilk kamusal bölümü: şeffaf lansman bilgileri, token açıklaması ve operatör güvenlik rehberi."
-    : "The first public chapter of Internal Agency: transparent launch information, token disclosure, and operator safety guidance.";
+    ? "İleri Akıl'ın ilk kamusal bölümü: şeffaf lansman bilgileri, IAT ekonomi politikası V2 ve mainnet BEKLET kanıt durumu."
+    : "The first public chapter of Internal Agency: transparent launch information, IAT economic policy V2, and mainnet HOLD evidence status.";
   return {
     metadataBase: host ? new URL(`${protocol}://${host}`) : undefined,
     title, description,

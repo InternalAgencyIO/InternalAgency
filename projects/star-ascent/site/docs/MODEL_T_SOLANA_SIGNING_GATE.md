@@ -1,41 +1,64 @@
-# Model T Solana Signing Gate
+# Model T Solana signing gate
 
-Status: required before Genesis. This is a capability gate, not a claim that a mint exists.
+Status: **required / not yet completed / mainnet HOLD**
 
-## Fixed ceremony
+The same Model T, cable, computer, wallet interface, public administrator
+address, and review procedure intended for mainnet must be used for the V2
+devnet rehearsal. The disabled `/mint` route is not the V2 rehearsal.
 
-The same Trezor Model T, cable, computer, Backpack path, transaction builder, metadata, allocation ratios, and instruction order planned for mainnet must complete this exact devnet rehearsal:
+## Device boundary
 
-| Transaction | Required proof |
+- Confirm the full public administrator address on the physical device.
+- Never enter or transmit a seed phrase, PIN, passphrase, private key, recovery
+  material, wallet export, derivation path, or program keypair.
+- Reject blind, unclear, unexpected, or differently ordered prompts.
+- Automation may prepare and simulate, but it may not approve or broadcast.
+- Capture one direct Explorer/RPC result for each authority or value boundary.
+
+## Required V2 evidence
+
+| Boundary | Required proof |
 | --- | --- |
-| 1. Create + initialize + immutable metadata | One atomic transaction; Original SPL, 9 decimals, temporary Model T mint/freeze authorities, canonical Metaplex PDA and URI |
-| 2. Mint five allocations | Five distinct owners and canonical ATAs with the exact 50/20/15/10/5 test-supply balances |
-| 3. Revoke mint authority | Mint record shows `None`; exact supply is unchanged |
-| 4. Revoke freeze authority | Freeze record shows `None`; exact supply is unchanged |
-
-Every transaction must be simulated, reviewed on the device, submitted separately, confirmed without error, and recorded with a distinct canonical Solana Explorer devnet URL. The device operator and independent verifier must bind the same four actions, four transaction proofs, mint, metadata PDA, five owners, five ATAs, exact amounts, and reviewed mainnet-plan digest.
+| Program deployment | Public program and ProgramData accounts match the verifiable SBF hash |
+| Authority transfer | Upgrade authority becomes the reviewed Model T address before IAT funding |
+| Mint and metadata | Original SPL, 9 decimals, canonical immutable metadata |
+| Program initialization | Config, four lane vaults, stake vault, policy and randomness program match |
+| Allocation funding | Exact 50/20/15/10/5 scaled devnet balances reach the reviewed destinations |
+| Authority revocation | Mint and freeze authorities are both `None` |
+| Activation | All build, randomness, vault, and authority preconditions are satisfied |
+| Policy matrix | Every required positive case succeeds and every required negative case rejects |
 
 ## Decision rule
 
-**GO** only when `launch/devnet-rehearsal.template.json` is `COMPLETED`, its validator passes against the current metadata and allocation-lock plans, the evidence is less than 24 hours old, and the independent review follows the device ceremony within 30 minutes.
+**PASS** only when the completed V2 rehearsal evidence:
 
-**HOLD** if any prompt is unclear or blind; the wallet cannot construct the exact instructions; an address, amount, program, metadata record, or authority differs; evidence is stale or reused; or any surface requests a seed phrase, private key, PIN, passphrase, wallet export, or recovery material.
+- binds the exact committed source, policy digests, program ID, SBF hash, mint,
+  ProgramData, vaults, and token accounts;
+- proves hardware control before token funding;
+- proves the official devnet Switchboard commit/reveal path without reroll;
+- contains complete positive and negative scenario evidence; and
+- is independently checked by FDF Guard in the same review window.
 
-No substitute wallet path is allowed on mainnet under time pressure.
+**HOLD** on any mismatch, stale evidence, unexplained retry, successful negative
+case, missing transaction, credential request, or unavailable direct evidence.
 
 ## Mainnet dependency order
 
-1. Independently approve immutable metadata and the external lock/vault plan.
-2. Complete the exact four-transaction devnet rehearsal.
-3. Freeze and validate signer, allocation, handoff, snapshot, and release-packet digests.
-4. Open the localhost-only mint console using the reviewed configuration digest.
-5. Physically confirm each mainnet transaction on the Model T.
-6. Independently verify metadata, supply, five balances, and both revoked authorities.
-7. Publish the evidence packet, then enable any distribution route.
+1. Complete source binding, locked SBF build, security/economic review, and
+   local-validator tests.
+2. Complete the full V2 devnet rehearsal.
+3. Independently compare program, authority, mint, destinations, vaults,
+   policies, randomness, and failure paths.
+4. Freeze source, binary, configuration, evidence, and public payload digests.
+5. Start a separate mainnet review session.
+6. Physically confirm every mainnet authority and value boundary.
+7. Publish only independently verified on-chain facts.
+
+No substitute wallet path is allowed under time pressure.
 
 ## References
 
 - Trezor, [Solana and Trezor](https://trezor.io/learn/supported-assets/solana/solana-what-it-is-and-how-it-works-with-trezor)
-- Backpack, [Connect a hardware wallet](https://support.backpack.exchange/wallet/actions/connect-hardware-wallet)
-- Solana, [Token basics](https://solana.com/docs/tokens/basics)
-- Solana, [Metaplex token metadata](https://solana.com/docs/tokens/metaplex)
+- Anchor, [verifiable builds](https://www.anchor-lang.com/docs/references/verifiable-builds)
+- Solana, [deploying programs](https://solana.com/docs/programs/deploying)
+- Switchboard, [Solana randomness](https://docs.switchboard.xyz/docs-by-chain/solana-svm/randomness)

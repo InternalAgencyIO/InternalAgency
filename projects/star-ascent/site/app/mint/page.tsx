@@ -73,6 +73,8 @@ const STEPS = [
 const expectedSigner = new PublicKey(EXPECTED_MODEL_T_ADDRESS);
 const storageKey = `iat-ceremony:${config.configurationSha256}`;
 const DEVNET_MINIMUM_BALANCE_LAMPORTS = 30_000_000;
+const V2_MINT_ONLY_PATH_SUPERSEDED = true;
+const V2_HOLD_STATUS = "HOLD // MINT-ONLY CEREMONY SUPERSEDED BY IAT V2 PROGRAM REHEARSAL";
 
 function short(value: string) {
   return `${value.slice(0, 6)}…${value.slice(-6)}`;
@@ -180,7 +182,7 @@ export default function MintPage() {
   const [allocations, setAllocations] = useState<PublicAllocation[]>([]);
   const [activeStep, setActiveStep] = useState(0);
   const [evidence, setEvidence] = useState<EvidenceRecord[]>([]);
-  const [status, setStatus] = useState("HOLD // LOCAL OPERATOR CHECK");
+  const [status, setStatus] = useState(V2_HOLD_STATUS);
   const [busy, setBusy] = useState(false);
   const mainnetReady = config.status === "READY";
 
@@ -197,15 +199,15 @@ export default function MintPage() {
           setAllocations(parsed.allocations);
           setActiveStep(parsed.activeStep);
           setEvidence(parsed.evidence);
-          setStatus("RESTORED // VERIFY ON-CHAIN STATE BEFORE CONTINUING");
+          setStatus(V2_HOLD_STATUS);
         } else {
-          setStatus("DEVNET // EXACT FOUR-TRANSACTION REHEARSAL");
+          setStatus(V2_HOLD_STATUS);
         }
       } catch {
-        setStatus("DEVNET // LOCAL STATE WAS IGNORED; START OR RESUME FROM CHAIN");
+        setStatus(V2_HOLD_STATUS);
       }
     } else {
-      setStatus("DISABLED // CEREMONY SIGNING IS LOCALHOST-ONLY");
+      setStatus("DISABLED // PUBLIC HOST IS READ-ONLY; MINT-ONLY PATH IS SUPERSEDED");
     }
     setHydrated(true);
   }, []);
@@ -248,9 +250,7 @@ export default function MintPage() {
     setEvidence([]);
     setDevnetBalanceLamports(null);
     window.localStorage.removeItem(storageKey);
-    setStatus(nextMode === "devnet"
-      ? "DEVNET // EXACT FOUR-TRANSACTION REHEARSAL"
-      : "MAINNET // ALL CANONICAL EVIDENCE GATES READY");
+    setStatus(V2_HOLD_STATUS);
   }
 
   async function connect() {
@@ -369,6 +369,10 @@ export default function MintPage() {
   }
 
   async function runStep() {
+    if (V2_MINT_ONLY_PATH_SUPERSEDED) {
+      setStatus("STOP // THIS BUILDER CANNOT INITIALIZE OR FUND THE IAT V2 PROGRAM");
+      return;
+    }
     if (!localHost) return;
     if (mode === "mainnet-beta" && !mainnetReady) {
       setStatus("STOP // MAINNET EVIDENCE GATES ARE NOT READY");
@@ -528,6 +532,7 @@ export default function MintPage() {
     && devnetBalanceLamports >= DEVNET_MINIMUM_BALANCE_LAMPORTS;
   const canAct = hydrated
     && localHost
+    && !V2_MINT_ONLY_PATH_SUPERSEDED
     && connectedAddress
     && !busy
     && (mode === "mainnet-beta" ? mainnetReady : devnetFunded);
@@ -536,31 +541,31 @@ export default function MintPage() {
     <main className="mint-ceremony">
       <header className="mint-hero">
         <p>STAR ASCENT // MODEL T CEREMONY</p>
-        <h1>ONE<br />MINT.</h1>
+        <h1>V2<br />HOLD.</h1>
         <div className="mint-hero-copy">
-          <strong>{mode === "devnet" ? "DEVNET REHEARSAL" : "MAINNET CEREMONY"}</strong>
-          <span>Original SPL · immutable metadata · 9 decimals · fixed supply · four confirmations</span>
+          <strong>SUPERSEDED MINT-ONLY PATH</strong>
+          <span>Read-only archive. The V2 rehearsal must deploy, initialize, fund, activate, and exercise the reviewed program.</span>
         </div>
       </header>
 
-      {!localHost && hydrated && (
+      {hydrated && (
         <section className="mint-local-lock" role="alert">
-          <strong>PUBLIC HOST // READ-ONLY</strong>
-          <p>The signing controls only activate on localhost. This deployed route can never request a wallet connection or transaction signature.</p>
+          <strong>SUPERSEDED // DO NOT SIGN</strong>
+          <p>This four-transaction page does not initialize the IAT V2 vaults, rewards, weekly assignment, or verifiable-randomness controls. It is locked read-only until a reviewed V2 SBF build and rehearsal builder are available.</p>
         </section>
       )}
 
       <section className="mint-rehearsal" aria-labelledby="rehearsal-ready-title">
         <div>
-          <p>DEVNET // OPERATOR SCENARIO</p>
-          <h2 id="rehearsal-ready-title">COMPLETE THIS<br />BEFORE THE WINDOW.</h2>
-          <span>29 JUL 2026 · 15:00:00 UTC / 18:00:00 ISTANBUL</span>
+          <p>IAT V2 // REQUIRED REHEARSAL</p>
+          <h2 id="rehearsal-ready-title">DEPLOY. TEST.<br />VERIFY.</h2>
+          <span>30 JUL 2026 · 03:45:00 UTC / 06:45:00 ISTANBUL</span>
         </div>
         <ol>
-          <li><b>01</b><span>Confirm the reviewed public address has at least 0.03 devnet SOL. Use the official faucet only if the live balance check is short.</span></li>
-          <li><b>02</b><span>Open this page on localhost, connect Backpack, and confirm the exact address on the Model T.</span></li>
-          <li><b>03</b><span>Generate public rehearsal addresses, then simulate, review, sign, and verify each of the four devnet transactions separately.</span></li>
-          <li><b>04</b><span>Download the public evidence JSON and give it to an independent verifier. Do not switch to mainnet in the same review session.</span></li>
+          <li><b>01</b><span>Bind a new public V2 program ID into the reviewed source and produce a locked, verifiable SBF build.</span></li>
+          <li><b>02</b><span>Deploy unfunded on devnet, transfer upgrade authority to the reviewed hardware-wallet admin, and verify the program hash and authority.</span></li>
+          <li><b>03</b><span>Initialize and fund the V2 configuration, lanes, vaults, staking, weekly assignment, and Switchboard commit-reveal path.</span></li>
+          <li><b>04</b><span>Pass the positive and adversarial rehearsal matrix, then give the full on-chain evidence record to the independent verifier.</span></li>
         </ol>
         <div className="mint-rehearsal-links">
           <a href="https://faucet.solana.com/" target="_blank" rel="noreferrer">OPEN OFFICIAL DEVNET FAUCET ↗</a>
@@ -576,7 +581,7 @@ export default function MintPage() {
         <ul>
           <li>Never enter a seed phrase, PIN, passphrase, private key, or wallet export here.</li>
           <li>Stop if the Model T prompt is unclear, blind, or differs from the reviewed intent.</li>
-          <li>Every transaction is simulated and locally signature-checked before submission.</li>
+          <li>The archived mint-only builder is disabled; the reviewed V2 rehearsal path must replace it before signing.</li>
           <li>Mainnet stays locked until every generated source digest and human evidence gate passes.</li>
         </ul>
       </section>
@@ -584,18 +589,18 @@ export default function MintPage() {
       <section className="mint-control" aria-labelledby="mint-control-title">
         <div className="mint-control-heading">
           <p>NETWORK // SELECTED PATH</p>
-          <h2 id="mint-control-title">REHEARSE FIRST.<br />MAINNET LAST.</h2>
+          <h2 id="mint-control-title">ARCHIVE ONLY.<br />NO SIGNING.</h2>
         </div>
         <div className="mint-mode-switch" role="group" aria-label="Ceremony network">
-          <button className={mode === "devnet" ? "active" : ""} disabled={busy || !localHost} onClick={() => reset("devnet")}>
-            DEVNET REHEARSAL
+          <button className={mode === "devnet" ? "active" : ""} disabled={V2_MINT_ONLY_PATH_SUPERSEDED || busy || !localHost} onClick={() => reset("devnet")}>
+            DEVNET LOCKED
           </button>
           <button
             className={mode === "mainnet-beta" ? "active" : ""}
-            disabled={busy || !localHost || !mainnetReady}
+            disabled={V2_MINT_ONLY_PATH_SUPERSEDED || busy || !localHost || !mainnetReady}
             onClick={() => reset("mainnet-beta")}
           >
-            MAINNET {mainnetReady ? "READY" : "LOCKED"}
+            MAINNET LOCKED
           </button>
         </div>
 
@@ -616,7 +621,7 @@ export default function MintPage() {
                 : `${(devnetBalanceLamports / 1_000_000_000).toFixed(4)} SOL`}
             </small>
           </div>
-          <button disabled={busy || !localHost} onClick={connect}>
+          <button disabled={V2_MINT_ONLY_PATH_SUPERSEDED || busy || !localHost} onClick={connect}>
             {connectedAddress ? `CONNECTED ${short(connectedAddress)}` : "CONNECT BACKPACK"}
           </button>
         </div>
@@ -627,20 +632,20 @@ export default function MintPage() {
             <input
               id="resume-mint"
               value={resumeAddress}
-              disabled={busy || !localHost}
+              disabled={V2_MINT_ONLY_PATH_SUPERSEDED || busy || !localHost}
               onChange={(event) => setResumeAddress(event.target.value)}
               placeholder="Solana mint public address"
               spellCheck={false}
             />
-            <button disabled={busy || !localHost || !resumeAddress.trim()} onClick={recoverOnChain}>VERIFY + RESUME</button>
+            <button disabled={V2_MINT_ONLY_PATH_SUPERSEDED || busy || !localHost || !resumeAddress.trim()} onClick={recoverOnChain}>VERIFY + RESUME</button>
           </div>
         </div>
       </section>
 
       <section className="mint-sequence" aria-labelledby="mint-sequence-title">
         <div className="mint-sequence-heading">
-          <p>FOUR {mode === "devnet" ? "DEVNET" : "MAINNET"} TRANSACTIONS</p>
-          <h2 id="mint-sequence-title">REVIEW.<br />SIGN.<br />VERIFY.</h2>
+          <p>ARCHIVED FOUR-TRANSACTION BUILDER</p>
+          <h2 id="mint-sequence-title">READ-ONLY.<br />SUPERSEDED.</h2>
           <span>{status}</span>
         </div>
 
@@ -677,16 +682,10 @@ export default function MintPage() {
         {!complete && (
           <div className="mint-action">
             <button disabled={!canAct} onClick={runStep}>
-              {busy
-                ? "WORKING — DO NOT RELOAD"
-                : activeStep === 0 && !preparedMint
-                  ? "GENERATE PUBLIC CEREMONY ADDRESSES"
-                  : "SIMULATE + REQUEST MODEL T SIGNATURE"}
+              DISABLED // V2 REHEARSAL REQUIRED
             </button>
             <p>
-              {activeStep === 0 && !preparedMint
-                ? "One-time local signers are held only in memory. Only public mint, owner, token-account, and transaction evidence is persisted."
-                : "The next click simulates exactly one transaction, then asks Backpack and the Model T for a physical signature."}
+              The archived builder cannot initialize the V2 program or its vault controls. It will not request a wallet connection or signature.
             </p>
           </div>
         )}

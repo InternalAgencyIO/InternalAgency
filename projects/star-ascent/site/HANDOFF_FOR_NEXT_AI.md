@@ -29,8 +29,8 @@
 - The local `/mint` operator console implements the exact four-transaction devnet/mainnet shape, immutable Metaplex metadata, five allocations, on-chain recovery, public-evidence export, and a generated digest interlock.
 - Signing controls are localhost-only. A deployed `/mint` route is read-only and cannot connect Backpack or request a signature.
 - Mainnet remains `LOCKED`: metadata, allocation-lock, signer, devnet, handoff, and release-packet human evidence is incomplete.
-- The open-source ceremony window is scheduled for 29 July 2026 at
-  `15:00:00 UTC` / `18:00:00 Istanbul`. The countdown opens a public window
+- The open-source ceremony window is scheduled for 30 July 2026 at
+  `03:45:00 UTC` / `06:45:00 Istanbul`. The countdown opens a public window
   only; it never signs, submits, or authorizes mainnet.
 
 ## Immediate risks / instructions

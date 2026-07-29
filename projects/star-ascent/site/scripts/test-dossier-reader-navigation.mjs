@@ -13,19 +13,19 @@ const extractRecordKeys = (start, end) => {
 
 const englishKeys = extractRecordKeys(
   "const EN: Record<string, Copy> = \\{",
-  "\\n\\};\\n\\nconst TR:",
+  "\\r?\\n\\};\\r?\\n\\r?\\nconst TR:",
 );
 const turkishKeys = extractRecordKeys(
   "const TR: Record<string, Copy> = \\{",
-  "\\n\\};\\n\\nconst tailoredEN:",
+  "\\r?\\n\\};\\r?\\n\\r?\\nconst tailoredEN:",
 );
 const tailoredEnglishKeys = extractRecordKeys(
   "const tailoredEN: Record<string, Copy> = \\{",
-  "\\n\\};\\n\\nconst tailoredTR:",
+  "\\r?\\n\\};\\r?\\n\\r?\\nconst tailoredTR:",
 );
 const tailoredTurkishKeys = extractRecordKeys(
   "const tailoredTR: Record<string, Copy> = \\{",
-  "\\n\\};\\n\\nfunction fallback",
+  "\\r?\\n\\};\\r?\\n\\r?\\nfunction fallback",
 );
 
 if (JSON.stringify(englishKeys) !== JSON.stringify(turkishKeys)) {
@@ -36,7 +36,7 @@ if (JSON.stringify(tailoredEnglishKeys) !== JSON.stringify(tailoredTurkishKeys))
 }
 
 const routeMatch = source.match(
-  /const NEXT_RECORD_ROUTES: Record<string, string> = (\{[\s\S]*?\n\});/,
+  /const NEXT_RECORD_ROUTES: Record<string, string> = (\{[\s\S]*?\r?\n\});/,
 );
 if (!routeMatch) throw new Error("Could not locate the Dossier next-record route map");
 const nextRecordRoutes = Function(`"use strict"; return (${routeMatch[1]});`)();

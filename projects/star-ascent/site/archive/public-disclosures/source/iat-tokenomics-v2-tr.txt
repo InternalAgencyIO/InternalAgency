@@ -1,0 +1,68 @@
+IAT TOKENOMICS // KAMUSAL EKONOMİ POLİTİKASI V2
+Sürüm 2.0 — 30 Temmuz 2026
+Durum: ÖNERİ — AKTİF DEĞİL — MAINNET BEKLET
+Kanonik kamu rotası: https://ileriakil.com/tokenomics
+
+Bu politika yürütme öncesinde yayımlanır. IAT mintinin, dört program kasasının, ödül yönlendiricisinin, rastgelelik yönteminin veya staking sözleşmelerinin var olduğuna dair kanıt değildir. Canlı bir ödül programı yoktur ve hiçbir staking pozisyonu şu anda aşağıdaki oranları kazanamaz. Birebir uygulama, adresler, bağımsız inceleme ve eşleşen devnet provası kamusal olana kadar mainnet BEKLET durumundadır.
+
+01 // SABİT ARZ
+Azami arz: 1.000.000.000 IAT
+Ondalık: 9
+Ek ihraç: planlanmıyor
+
+Topluluk — %50 — 500.000.000 IAT
+Hazine — %20 — 200.000.000 IAT
+Ekosistem — %15 — 150.000.000 IAT
+Çekirdek ekip — %10 — 100.000.000 IAT
+Likidite — %5 — 50.000.000 IAT
+
+02 // SIRALI ÖDÜL REZERVİ
+Hazine, ekosistem ve likidite tasarım gereği tükenebilir 400.000.000 IAT ödül rezervini oluşturur. Ödemeler önce hazineden, sonra ekosistemden, ardından likiditeden çekilir. Tasarım üç hattın da sıfıra ulaşmasına izin verir. Bu öneride ayrıca korunan bir piyasa likiditesi rezervi yoktur.
+
+Başlangıç kullanılabilirlik hedefi:
+- Hazine: 50.000.000 IAT kullanılabilir; 150.000.000 IAT hak edişli
+- Ekosistem: 37.500.000 IAT kullanılabilir; 112.500.000 IAT hak edişli
+- Likidite: 12.500.000 IAT kullanılabilir; 37.500.000 IAT hak edişli
+- Başlangıç hedefinde toplam kullanılabilir: 100.000.000 IAT
+
+100.000.000 IAT değeri bir tasarım hedefidir; mevcut zincir üstü kullanılabilirlik değildir.
+
+03 // HAK EDİŞ
+Hazine kalanı: 12 ay cliff, ardından sonraki 36 ay boyunca doğrusal serbest bırakma.
+Ekosistem kalanı: 6 ay cliff, ardından sonraki 24 ay boyunca doğrusal serbest bırakma.
+Likidite kalanı: 6 ay cliff, ardından 24. aya kadar doğrusal serbest bırakma.
+Çekirdek ekip anaparası: 100.000.000 IAT; 6 ay cliff, ardından 24. aya kadar doğrusal serbest bırakma. İsteğe bağlı erken kilit açma yoktur.
+
+04 // YILLIK ÖDÜL ORANLARI
+Aşağıdaki yüzdeler haftalık ödenen ve otomatik bileşik getirisi olmayan basit yıllık ödül oranlarıdır. Program arayüzü bunlara APY diyebilir; bileşik getiri otomatik değildir.
+
+Çekirdek ekip: hak ediş sürerken 100.000.000 IAT çekirdek ekip anaparasının tamamına sabit %17. CCC durumu bu oranı değiştirmez.
+Standart uygun kullanıcı: %10.
+Aktif CCC Agent: %28.
+Uygun alt CCC associate: %20.
+
+Çekirdek ekip ve kullanıcı ödülleri aynı sıralı 400.000.000 IAT rezervinden çekilir. Çekirdek ekip anaparası bir ödül kaynak hattı değildir.
+
+05 // TEMİNATLANDIRMA
+Program yeni bir pozisyonu kabul etmeden önce azami ödül yükümlülüğünün tamamını o anda kilidi açık hat kapasitesinden ayırmalıdır. Yeterli kapasite yoksa pozisyon reddedilir. Mevcut ayrılmış yükümlülükler fonlu kalır. Program ödül borcu yaratmaz ve kabul edilmiş, tam teminatlandırılmış pozisyonlar dışında ödeme vaadinde bulunmaz.
+
+06 // CCC WILDCARD
+Kamuya açık biçimde doğrulanabilir ilk CCC çekilişi Başlangıçtan 24 saat sonra açılır. Sonrasında her yedi günde yeni bir çekiliş açılır. Çekirdek ekip rolü bir tur boyunca uygun bir Agency konumunu geçici olarak işgal eder.
+
+- Seçilen Agency ile anlık görüntüdeki alt associate veya staker hesapları o haftanın yeni erişim, puan ve IAT ödüllerini kaybeder.
+- Daha önce tahakkuk etmiş ödüller, cüzdan varlıkları ve hak edilmiş anapara kaldırılmaz.
+- Duraklatılan ödüller tahakkuk etmez ve mevcut kaynak hattında kalır.
+- Operatör yeniden çekiliş yapamaz.
+- Uygun küme, anlık görüntü, rastgelelik girdisi, sonuç ve ödeme kaydı kamusal olmalıdır.
+- Çekirdek ekibin sabit %17 oranı çekilişten etkilenmez.
+
+07 // AKTİVASYON EŞİKLERİ
+Program şu koşullar sağlanmadan etkinleştirilemez:
+- Açık kaynak staking, hak ediş, rezerv yönlendirme ve CCC sözleşmeleri bu politikayla eşleşir.
+- Program kasaları ve lehtar adresleri yayımlanır ve bağımsız olarak karşılaştırılır.
+- Haftalık rastgelelik yeniden üretilebilir, yanlılığa dayanıklı ve operatörün yeniden çekilişine kapalıdır.
+- Yeni devnet provası hak edişi, rezerv tükenmesini, rol atamasını ve hata yollarını kapsar.
+- Bağımsız güvenlik ve ekonomik inceleme bulguları, çözülmemiş risklerle birlikte kamusaldır.
+
+08 // RİSK SINIRI
+IAT yüksek riskli ve spekülatiftir. Bu oranlar program kurallarıdır; token fiyatı, piyasa değeri, kâr veya kesintisiz kullanılabilirlik vaadi değildir. Uygunluk, kabul edilen pozisyonlar ve ödemeler yayımlanmış sözleşmeye ve kalan kilidi açık rezerve bağlıdır. Ön satış veya ücretli kayıt bu politikanın parçası değildir. Seed phrase veya özel anahtarınızı asla paylaşmayın.

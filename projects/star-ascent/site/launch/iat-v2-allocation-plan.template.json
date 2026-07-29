@@ -1,0 +1,93 @@
+{
+  "schema": "iat-v2-allocation-plan/v1",
+  "status": "HOLD",
+  "network": "mainnet-beta",
+  "policyPath": "engagement/iat-economic-policy.v2.json",
+  "mint": null,
+  "program": {
+    "programId": null,
+    "verifiedBuildEvidence": null,
+    "securityReviewEvidence": null,
+    "upgradeAuthority": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+    "upgradeAuthorityEvidence": null,
+    "randomnessProgramId": null,
+    "randomnessReviewEvidence": null
+  },
+  "allocations": {
+    "community": {
+      "baseUnitAmount": "500000000000000000",
+      "destinationOwner": "5Kg9jnaL4DuuT5Fr5surbexX8NeCiNpp4wKmi3Wp3C4H",
+      "destinationTokenAccount": null,
+      "vaultState": null,
+      "vaultAuthority": null,
+      "beneficiary": "5Kg9jnaL4DuuT5Fr5surbexX8NeCiNpp4wKmi3Wp3C4H",
+      "genesisUnlockedBaseUnits": "500000000000000000",
+      "cliffWeek": 0,
+      "linearEndWeek": 0,
+      "rewardSource": false,
+      "evidence": null
+    },
+    "treasury": {
+      "baseUnitAmount": "200000000000000000",
+      "destinationOwner": null,
+      "destinationTokenAccount": null,
+      "vaultState": null,
+      "vaultAuthority": null,
+      "beneficiary": "CucS4oym18YjEMUmXYVx45q6HUGhW35wE3qpwkcnSCFQ",
+      "genesisUnlockedBaseUnits": "50000000000000000",
+      "cliffWeek": 52,
+      "linearEndWeek": 208,
+      "rewardSource": true,
+      "evidence": null
+    },
+    "ecosystem": {
+      "baseUnitAmount": "150000000000000000",
+      "destinationOwner": null,
+      "destinationTokenAccount": null,
+      "vaultState": null,
+      "vaultAuthority": null,
+      "beneficiary": "HypAfe9RwaBRnZeLpqvYU1rBbAwHTSBnm24enRL6Qx18",
+      "genesisUnlockedBaseUnits": "37500000000000000",
+      "cliffWeek": 26,
+      "linearEndWeek": 104,
+      "rewardSource": true,
+      "evidence": null
+    },
+    "coreTeam": {
+      "baseUnitAmount": "100000000000000000",
+      "destinationOwner": null,
+      "destinationTokenAccount": null,
+      "vaultState": null,
+      "vaultAuthority": null,
+      "beneficiary": "2yBK1NkeUoTToE4cfz33WRckho4Qr2BV1ZtCTrw3AHyB",
+      "genesisUnlockedBaseUnits": "0",
+      "cliffWeek": 26,
+      "linearEndWeek": 104,
+      "rewardSource": false,
+      "evidence": null
+    },
+    "liquidity": {
+      "baseUnitAmount": "50000000000000000",
+      "destinationOwner": null,
+      "destinationTokenAccount": null,
+      "vaultState": null,
+      "vaultAuthority": null,
+      "beneficiary": "2d41i3afUpWuo2LqpuKao5D1ToEU88aBokiQ3z8HQtPC",
+      "genesisUnlockedBaseUnits": "12500000000000000",
+      "cliffWeek": 26,
+      "linearEndWeek": 104,
+      "rewardSource": true,
+      "evidence": null
+    }
+  },
+  "activationEvidence": {
+    "policySha256": null,
+    "programBinarySha256": null,
+    "vaultFundingTransactions": [],
+    "authorityRevocationTransactions": [],
+    "devnetRehearsalEvidence": null,
+    "independentReviewerLabel": null,
+    "independentReviewerAddress": "Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja",
+    "reviewedAtUtc": null
+  }
+}
