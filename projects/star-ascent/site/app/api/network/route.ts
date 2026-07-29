@@ -6,9 +6,11 @@ import {
 } from "../../network/network-state.mjs";
 
 const RPC_ENDPOINTS = [
+  process.env.SOLANA_RPC_URL?.trim(),
   "https://api.mainnet.solana.com",
   "https://api.mainnet-beta.solana.com",
-] as const;
+  "https://solana-rpc.publicnode.com",
+].filter((endpoint): endpoint is string => Boolean(endpoint));
 const POSITION_ACCOUNT_SIZE = 168;
 const POSITION_OWNER_OFFSET = 40;
 

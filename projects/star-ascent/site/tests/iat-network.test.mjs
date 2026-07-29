@@ -21,9 +21,11 @@ test("network launch state is fail-closed until verified addresses are published
   assert.equal(PUBLIC_NETWORK_STATE.genesisAtUtc, null);
 });
 
-test("network API is read-only, bounded, and has two official RPC reads", () => {
+test("network API is read-only, bounded, and has official RPC reads plus a public fallback", () => {
   assert.match(apiSource, /https:\/\/api\.mainnet\.solana\.com/);
   assert.match(apiSource, /https:\/\/api\.mainnet-beta\.solana\.com/);
+  assert.match(apiSource, /https:\/\/solana-rpc\.publicnode\.com/);
+  assert.match(apiSource, /process\.env\.SOLANA_RPC_URL/);
   assert.match(apiSource, /AbortSignal\.timeout\(5_000\)/);
   assert.match(apiSource, /RPC_ENDPOINTS_EXHAUSTED/);
   assert.doesNotMatch(apiSource, /sendTransaction|sendRawTransaction|signTransaction/);
