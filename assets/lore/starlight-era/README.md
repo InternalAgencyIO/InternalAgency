@@ -266,6 +266,14 @@ rejected and regenerated.
 | **Paris Glass-Rooftop Plunge**<br><img src="324-paris-glass-rooftop-plunge.png" width="420" alt="Radiance, Ellie, and Alia taking a synchronized plunge in a glass rooftop pool above an invented Paris skyline"> | **Seine Barge Ribbon Race**<br><img src="325-seine-barge-swim-race.png" width="420" alt="The trio sprinting across a rain-bright river barge and completing a molten-gold ribbon finish"> |
 | **Art-Deco Color-Block Skate**<br><img src="326-art-deco-poolside-dance.png" width="420" alt="The trio completing a synchronized roller-skating turn on a red, white, midnight-blue, and gold Art-Deco promenade"> | **Rain-Pool Umbrella Splash**<br><img src="327-rain-pool-umbrella-splash.png" width="420" alt="Radiance, Ellie, and Alia sharing a clear umbrella while completing a synchronized splash kick in warm summer rain"> |
 
+## Trio Unbound - Batch 77: Tropical Color Riot
+
+| | |
+|---|---|
+| **Lagoon Float Chaos**<br><img src="328-lagoon-float-chaos.png" width="420" alt="Radiance, Ellie, and Alia tumbling laughing across bright geometric floats in a turquoise lagoon"> | **Jungle Waterfall Rope Swing**<br><img src="329-jungle-waterfall-rope-swing.png" width="420" alt="The trio sharing a wide rope swing through emerald waterfall spray"> |
+| **Coral-Cay Paddle Chase**<br><img src="330-coral-cay-paddle-chase.png" width="420" alt="The trio racing clear kayaks around a coral cay with vivid paddle trails"> | **Mango Sunset Kite Relay**<br><img src="331-mango-sunset-beach-dance.png" width="420" alt="Radiance, Ellie, and Alia completing a running handoff beneath a red-and-gold ribbon kite at mango sunset"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
-without post-generation character edits.
+alongside any restrained face-only corrections accepted by the campaign
+contract.
