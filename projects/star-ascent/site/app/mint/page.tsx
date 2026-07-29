@@ -554,7 +554,7 @@ export default function MintPage() {
         <div>
           <p>DEVNET // OPERATOR SCENARIO</p>
           <h2 id="rehearsal-ready-title">COMPLETE THIS<br />BEFORE THE WINDOW.</h2>
-          <span>29 JUL 2026 · 14:15:18 UTC / 17:15:18 ISTANBUL</span>
+          <span>29 JUL 2026 · 15:00:00 UTC / 18:00:00 ISTANBUL</span>
         </div>
         <ol>
           <li><b>01</b><span>Confirm the reviewed public address has at least 0.03 devnet SOL. Use the official faucet only if the live balance check is short.</span></li>

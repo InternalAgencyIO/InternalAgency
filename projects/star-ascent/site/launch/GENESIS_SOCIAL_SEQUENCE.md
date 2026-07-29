@@ -1,6 +1,6 @@
 # STAR ASCENT / Genesis social sequence
 
-Status: **29 JULY 2026 · 14:15:18 UTC / 17:15:18 ISTANBUL**
+Status: **29 JULY 2026 · 15:00:00 UTC / 18:00:00 ISTANBUL**
 
 The open-source ceremony window is scheduled. Every transaction still requires
 physical approval and passing evidence gates.

@@ -1,6 +1,6 @@
 # STAR ASCENT — Genesis Command Center
 
-**Broadcast:** 29 July 2026, 14:15:18 UTC / 17:15:18 Istanbul
+**Broadcast:** 29 July 2026, 15:00:00 UTC / 18:00:00 Istanbul
 
 **Genesis ceremony window:** exact time scheduled; evidence HOLD
 
@@ -15,7 +15,7 @@
 
 ## Window-opening sequence
 
-1. At 14:15:18 UTC, open the broadcast and public source record. The countdown
+1. At 15:00:00 UTC, open the broadcast and public source record. The countdown
    does not connect, sign, or submit anything.
 2. Identify the official site and Signal directory.
 3. State the verification rule: no direct messages, no paid registration, no

@@ -4,9 +4,9 @@ import { readdirSync, readFileSync } from "node:fs";
 import { extname, join, resolve } from "node:path";
 import { GENESIS_SCHEDULED_AT_UTC } from "../app/launch-clock-state.mjs";
 
-const EXPECTED_UTC = "2026-07-29T14:15:18Z";
-const EXPECTED_UTC_DISPLAY = "14:15:18 UTC";
-const EXPECTED_ISTANBUL_DISPLAY = "17:15:18";
+const EXPECTED_UTC = "2026-07-29T15:00:00Z";
+const EXPECTED_UTC_DISPLAY = "15:00:00 UTC";
+const EXPECTED_ISTANBUL_DISPLAY = "18:00:00";
 
 const disclosureFiles = readdirSync(resolve("archive/public-disclosures/source"), {
   withFileTypes: true,

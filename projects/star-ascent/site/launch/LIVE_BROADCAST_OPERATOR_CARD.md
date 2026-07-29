@@ -1,6 +1,6 @@
 # STAR ASCENT live broadcast operator card
 
-Status: **HOLD — WINDOW OPENS 29 JULY 2026 AT 14:15:18 UTC**
+Status: **HOLD — WINDOW OPENS 29 JULY 2026 AT 15:00:00 UTC**
 
 ## Before the window
 

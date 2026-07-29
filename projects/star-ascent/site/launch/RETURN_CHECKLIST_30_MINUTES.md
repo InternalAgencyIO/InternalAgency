@@ -1,6 +1,6 @@
 # $IAT return checklist — final 30 minutes
 
-**Ceremony window:** 29 July 2026 at 14:15:18 UTC / 17:15:18 Istanbul
+**Ceremony window:** 29 July 2026 at 15:00:00 UTC / 18:00:00 Istanbul
 
 The countdown opens the public ceremony window. It does not automatically
 connect a wallet, sign, submit, or authorize mainnet.

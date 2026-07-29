@@ -30,7 +30,7 @@
 - Signing controls are localhost-only. A deployed `/mint` route is read-only and cannot connect Backpack or request a signature.
 - Mainnet remains `LOCKED`: metadata, allocation-lock, signer, devnet, handoff, and release-packet human evidence is incomplete.
 - The open-source ceremony window is scheduled for 29 July 2026 at
-  `14:15:18 UTC` / `17:15:18 Istanbul`. The countdown opens a public window
+  `15:00:00 UTC` / `18:00:00 Istanbul`. The countdown opens a public window
   only; it never signs, submits, or authorizes mainnet.
 
 ## Immediate risks / instructions
