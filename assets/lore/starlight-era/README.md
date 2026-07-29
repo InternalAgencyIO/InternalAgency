@@ -217,6 +217,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Polar-to-Desert Relay**<br><img src="304-polar-to-desert-relay.png" width="420" alt="Radiance completing a data-baton transfer across a surreal polar-desert climate seam"> | **Ocean-to-Orbit Climb**<br><img src="305-ocean-to-orbit-climb.png" width="420" alt="Radiance locking a seed-vault capsule into an ascent cradle on a gold orbital tether"> |
 | **Forest-to-City Glide**<br><img src="306-forest-to-city-glide.png" width="420" alt="Radiance docking biodiversity data between a rainforest canopy and green metropolis"> | **Night-to-Dawn Skate**<br><img src="307-night-to-dawn-skate.png" width="420" alt="Radiance replacing the final guide light while speed-skating from neon night toward sunrise"> |
 
+## Hero Atlas - Batch 72: Impossible Rescue Gala
+
+| | |
+|---|---|
+| **Orbital Gala Chandelier Swing**<br><img src="308-orbital-gala-chandelier-swing.png" width="420" alt="Radiance catching a violet power crystal while swinging beneath an orbital gala chandelier"> | **Underwater Ballroom Current Turn**<br><img src="309-underwater-ballroom-current-turn.png" width="420" alt="Radiance locking a loose observation panel inside a transparent underwater ballroom"> |
+| **Desert Opera Wind Run**<br><img src="310-desert-opera-wind-run.png" width="420" alt="Radiance securing a monumental sail canopy above a desert opera stage"> | **Ice Pavilion Skate Repair**<br><img src="311-ice-palace-skate-repair.png" width="420" alt="Radiance recovering a light module during a figure-skate turn across cobalt ice"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
