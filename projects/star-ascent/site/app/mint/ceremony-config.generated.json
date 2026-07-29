@@ -2,10 +2,6 @@
   "version": 1,
   "status": "LOCKED",
   "blockers": [
-    "allocation lock plan validator failed.",
-    "devnet rehearsal validator failed.",
-    "mainnet handoff validator failed: handoff requires the canonical devnet rehearsal validator to pass before any handoff state is accepted",
-    "release packet validator failed: release packet requires the canonical devnet rehearsal validator to pass before any packet state is accepted",
     "token metadata is HOLD; READY is required.",
     "allocation lock plan is HOLD; READY is required.",
     "signing checklist is HOLD; READY is required.",
@@ -154,5 +150,5 @@
     "pnpm-lock.yaml": "3fdbdbbb0858318c6c1b1d11486c4762b4e63266e1326ef9c5ec18c7e38e16da"
   },
   "implementationSha256": "78e942a1edb6a805ee94dd48d3670a5961cc4b14653b9b53f412428955ae5222",
-  "configurationSha256": "ce55bfbaf37281d91b520ebef594b9ace11a5388c527e4345dcb95c0d9c28b79"
+  "configurationSha256": "963c2afee739781fd2191abee51a7593ae2a89e8824ccd64e3310962550d1762"
 }
