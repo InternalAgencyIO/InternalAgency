@@ -5,7 +5,8 @@
   "renderBatchSize": 4,
   "postSize": 3,
   "maxPostsPerRun": 2,
-  "ordering": "Strict ascending image number beginning at 380. Slice the continuous validated World Series image stream into consecutive three-image posts without preserving country boundaries.",
+  "ordering": "Starting after the already published images 380 through 385, every new post must mix exactly two images from one country with one image from a different country. Choose the primary country deterministically as the earliest country in countryPriorityOrder with at least two eligible unposted images. Choose the secondary as the earliest different country with at least one eligible unposted image, preferring any older one-image leftover. Preserve ascending numeric order within each country selection and never duplicate or permanently strand an eligible asset.",
+  "postComposition": "2+1 country mix",
   "caption": "",
   "startBatch": 90,
   "endBatch": 284,
@@ -33,33 +34,7 @@
       }
     ]
   },
-  "pendingPost": {
-    "stagedAt": "2026-07-29T20:18:02.4920100Z",
-    "status": "awaiting_post",
-    "imageNumbers": [
-      383,
-      384,
-      385
-    ],
-    "countries": [
-      "Türkiye",
-      "India"
-    ],
-    "assets": [
-      {
-        "file": "383-turkiye-pamukkale-moonwater-extraction.png",
-        "sha256": "3367494b2a60d8fd1ac39a8e274fa663646ba57d0e2c65cc97b916785a07b737"
-      },
-      {
-        "file": "384-india-mumbai-marine-drive-light-intercept.png",
-        "sha256": "323d513c766649f502585993f01a103d5728fd9a63bba9fb44d964737d50cb93"
-      },
-      {
-        "file": "385-india-jaipur-hawa-mahal-cipher-weave.png",
-        "sha256": "864954eb8e1e8b692bab18916c811d5559ef97cc97af8d3dd150f80c7d7372ea"
-      }
-    ]
-  },
+  "pendingPost": null,
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
@@ -84,6 +59,33 @@
         {
           "file": "382-turkiye-ephesus-marble-shadow-swap.png",
           "sha256": "6a0751684f1b9321c98869e9d9824f0e8824349ad237fe567b06467a402b6d84"
+        }
+      ]
+    },
+    {
+      "postedAt": "2026-07-29T20:23:00.2086812Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2082562421747495229",
+      "imageNumbers": [
+        383,
+        384,
+        385
+      ],
+      "countries": [
+        "Türkiye",
+        "India"
+      ],
+      "assets": [
+        {
+          "file": "383-turkiye-pamukkale-moonwater-extraction.png",
+          "sha256": "3367494b2a60d8fd1ac39a8e274fa663646ba57d0e2c65cc97b916785a07b737"
+        },
+        {
+          "file": "384-india-mumbai-marine-drive-light-intercept.png",
+          "sha256": "323d513c766649f502585993f01a103d5728fd9a63bba9fb44d964737d50cb93"
+        },
+        {
+          "file": "385-india-jaipur-hawa-mahal-cipher-weave.png",
+          "sha256": "864954eb8e1e8b692bab18916c811d5559ef97cc97af8d3dd150f80c7d7372ea"
         }
       ]
     }
