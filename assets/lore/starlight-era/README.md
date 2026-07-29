@@ -322,6 +322,13 @@ rejected and regenerated.
 | **Subway-Wind White Dress**<br><img src="356-subway-wind-white-dress.png" width="420" alt="Radiance, Ellie, and Alia laughing through a linked wind dance above a subway grille on a moonlit 1950s-inspired street"> | **Dawn Jewelry-Window Coffee**<br><img src="357-dawn-jewelry-window-coffee.png" width="420" alt="The trio sharing coffee and pastries in black cocktail dresses outside a jewel-box boutique at dawn"> |
 | **Ocean-Liner Bow Sunset**<br><img src="358-ocean-liner-bow-sunset.png" width="420" alt="The trio completing a linked barefoot wind turn at a fictional ocean-liner bow beneath a blazing sunset"> | **Cyber Rooftop Coat Run**<br><img src="359-cyber-rooftop-coat-run.png" width="420" alt="Radiance, Ellie, and Alia racing across a rain-black rooftop as Ellie retrieves a green-lit access disc"> |
 
+## Trio Unbound - Batch 85: Sculptural Intimates Gallery
+
+| | |
+|---|---|
+| **Mirror-Corset Gallery Walk**<br><img src="360-mirror-corset-gallery-walk.png" width="420" alt="Radiance, Ellie, and Alia completing a linked runway stride through a faceted black-and-gold mirror gallery"> | **Velvet Bodysuit Stair Race**<br><img src="361-velvet-bodysuit-stair-race.png" width="420" alt="The trio racing around a midnight-blue spiral staircase as a hot-red ribbon loops through gold rails"> |
+| **Rose-Hardware Assembly**<br><img src="362-rose-hardware-fitting.png" width="420" alt="The trio assembling an oversized abstract gold thorned-rose sculpture inside an optical-white cyclorama"> | **Scorpion-Clasp Finale**<br><img src="363-scorpion-clasp-finale.png" width="420" alt="The trio completing a linked dance pivot beneath moving molten-gold rings in a black sculpture gallery"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
