@@ -1,0 +1,74 @@
+name: IAT V2 release proof
+
+on:
+  push:
+    branches:
+      - agent/iat-launch-window
+    paths:
+      - ".github/workflows/iat-v2-proof.yml"
+      - "projects/star-ascent/site/**"
+  pull_request:
+    paths:
+      - ".github/workflows/iat-v2-proof.yml"
+      - "projects/star-ascent/site/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: iat-v2-proof-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: projects/star-ascent/site
+
+jobs:
+  web-and-policy:
+    name: Web, policy, and launch gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: projects/star-ascent/site/package-lock.json
+      - run: npm ci
+      - run: npm run check:iat-v2
+      - run: npm run check:launch-gates
+      - run: npm test
+      - run: npm run lint
+
+  rust-host:
+    name: Rust host tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: cargo test --workspace --all-targets --locked
+
+  verifiable-sbf:
+    name: Verifiable Solana SBF build
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the pinned official Solana and Anchor toolchain
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash
+          echo "$HOME/.local/share/solana/install/active_release/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.avm/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+      - name: Produce deterministic build evidence
+        run: bash scripts/verify-iat-v2-sbf.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: iat-v2-verifiable-sbf
+          path: |
+            projects/star-ascent/site/target/verifiable/iat_v2.so
+            projects/star-ascent/site/target/idl/iat_v2.json
+          if-no-files-found: error
+          retention-days: 30
