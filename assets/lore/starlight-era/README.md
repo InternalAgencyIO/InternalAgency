@@ -336,6 +336,13 @@ rejected and regenerated.
 | **Conservatory Lace Tea**<br><img src="364-conservatory-lace-tea.png" width="420" alt="Radiance, Ellie, and Alia rescuing a wobbling tea tray while hurrying through a rain-wet sunset conservatory"> | **Moonflower Silk Swing**<br><img src="365-moonflower-silk-swing.png" width="420" alt="The trio sharing a sweeping gold swing above a violet mirror pond beneath enormous white moonflowers"> |
 | **Greenhouse Rain Dance**<br><img src="366-greenhouse-rain-dance.png" width="420" alt="The trio dancing barefoot through irrigation rain and reflecting channels inside a futuristic greenhouse"> | **Rose-Maze Satin Run**<br><img src="367-rose-maze-satin-run.png" width="420" alt="Radiance, Ellie, and Alia racing through a blue-hour geometric rose maze toward one gold marker"> |
 
+## Trio Unbound - Batch 87: Bare-Sun Beach Season
+
+| | |
+|---|---|
+| **Riviera Shoreline Sprint**<br><img src="368-riviera-shoreline-sprint.png" width="420" alt="Radiance, Ellie, and Alia sprinting through a sunlit Riviera shallows with a gold relay ring"> | **Scarlet Surfboard Balance**<br><img src="369-scarlet-surfboard-balance.png" width="420" alt="The trio laughing while balancing together on a scarlet paddleboard above turquoise water"> |
+| **White-Gold Tide-Pool Dance**<br><img src="370-white-gold-tide-pool-dance.png" width="420" alt="Radiance, Ellie, and Alia completing a linked circular water dance inside a crystal tide pool"> | **Black-Sand Sunset Splash**<br><img src="371-black-sand-sunset-splash.png" width="420" alt="The trio leaping through a shallow shore break on a volcanic black-sand beach at sunset"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
