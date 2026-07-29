@@ -385,6 +385,13 @@ rejected and regenerated.
 | **Chicago Riverwalk Chrome Intercept**<br><img src="392-united-states-chicago-riverwalk-chrome-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking chrome signal discs into a gold compass on Chicago's rain-polished Riverwalk"> | **Grand Central Constellation Cipher**<br><img src="393-united-states-grand-central-constellation-cipher.png" width="420" alt="The trio sealing a constellation cipher into a cobalt sphere inside an empty Grand Central Terminal"> |
 | **Grand Canyon Solar-Prism Extraction**<br><img src="394-united-states-grand-canyon-solar-prism-extraction.png" width="420" alt="The trio restoring a turquoise atmospheric beacon above a sunrise Grand Canyon overlook"> | **Golden Gate Fogline Signal Finale**<br><img src="395-united-states-golden-gate-fogline-signal-finale.png" width="420" alt="Radiance, Ellie, and Alia threading a red signal ribbon into a completed pulse beside the foggy Golden Gate Bridge"> |
 
+## World Series - Asia - Batch 94: Indonesia
+
+| | |
+|---|---|
+| **Jakarta Bundaran HI Mirror Intercept**<br><img src="396-indonesia-jakarta-bundaran-hi-mirror-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking mirror tesserae into a gold compass above Jakarta's rain-lit Bundaran HI"> | **Kota Tua Shadow Cipher**<br><img src="397-indonesia-jakarta-kota-tua-shadow-cipher.png" width="420" alt="The trio braiding three harmless light strands into a sealed cobalt archive cube in Jakarta's Kota Tua"> |
+| **Raja Ampat Lagoon Prism Extraction**<br><img src="398-indonesia-raja-ampat-lagoon-prism-extraction.png" width="420" alt="The trio restoring a reef-data beacon above Raja Ampat's emerald karst islands and turquoise lagoon"> | **Suramadu Bridge Night Signal Finale**<br><img src="399-indonesia-suramadu-bridge-night-signal-finale.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal relay beside the illuminated Suramadu Bridge"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
