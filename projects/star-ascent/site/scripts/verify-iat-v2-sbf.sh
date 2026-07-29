@@ -40,7 +40,12 @@ fi
 
 cargo fmt --all -- --check
 cargo test --workspace --all-targets --locked
-anchor build --verifiable
+anchor build --verifiable --ignore-keys
+
+if [[ -e target/deploy/iat_v2-keypair.json ]]; then
+  echo "FAIL: build-only proof produced forbidden program-keypair material" >&2
+  exit 1
+fi
 
 binary="target/verifiable/iat_v2.so"
 if [[ ! -s "$binary" ]]; then
