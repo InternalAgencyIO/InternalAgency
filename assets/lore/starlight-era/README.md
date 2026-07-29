@@ -371,6 +371,13 @@ rejected and regenerated.
 | **Marine Drive Light Intercept**<br><img src="384-india-mumbai-marine-drive-light-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three signal keys into a gold prism while racing beside rain-swept Marine Drive"> | **Hawa Mahal Cipher Weave**<br><img src="385-india-jaipur-hawa-mahal-cipher-weave.png" width="420" alt="The trio weaving ultraviolet cipher beams into a closed archive cube before Jaipur's Hawa Mahal"> |
 | **Rann of Kutch Prism Extraction**<br><img src="386-india-rann-of-kutch-prism-extraction.png" width="420" alt="The trio restoring a cobalt environmental aurora while leaping across mirror plates on the Rann of Kutch"> | **Kerala Backwater Moon Skiff Finale**<br><img src="387-india-kerala-backwater-moon-skiff-finale.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay aboard a moonlit Kerala backwater skiff"> |
 
+## World Series - Asia - Batch 92: China
+
+| | |
+|---|---|
+| **Shanghai Bund Prism Intercept**<br><img src="388-china-shanghai-bund-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three cobalt light keys into a gold prism on Shanghai's rain-swept Bund"> | **Xi’an City Wall Cipher Run**<br><img src="389-china-xian-city-wall-cipher-run.png" width="420" alt="The trio sealing a harmless light archive through abstract lattice frames above the preserved Xi’an City Wall"> |
+| **Zhangjiajie Cloud-Bridge Extraction**<br><img src="390-china-zhangjiajie-cloud-bridge-extraction.png" width="420" alt="The trio restoring a turquoise environmental beacon among Zhangjiajie's sandstone pillars and cloud"> | **Chongqing Monorail Night Relay**<br><img src="391-china-chongqing-monorail-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal relay beside Chongqing's layered night monorail"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
