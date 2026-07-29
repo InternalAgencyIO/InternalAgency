@@ -2,7 +2,10 @@
   "version": 1,
   "account": "@RaymondRR777",
   "series": "Radiance, Ellie & Alia: World Series 195x4",
-  "batchSize": 4,
+  "renderBatchSize": 4,
+  "postSize": 3,
+  "maxPostsPerRun": 2,
+  "ordering": "Strict ascending image number beginning at 380. Slice the continuous validated World Series image stream into consecutive three-image posts without preserving country boundaries.",
   "caption": "",
   "startBatch": 90,
   "endBatch": 284,
@@ -30,6 +33,6 @@
       }
     ]
   },
-  "pendingBatch": null,
+  "pendingPost": null,
   "posts": []
 }
