@@ -189,6 +189,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Coral-Garden Frame Carry**<br><img src="288-coral-garden-frame-carry.png" width="420" alt="Radiance locking a nursery frame into a gold coral-restoration cradle"> | **Manta Research Glide**<br><img src="289-manta-tag-glider-follow.png" width="420" alt="Radiance restoring a loose sensor tag on a manta-shaped research drone"> |
 | **Mangrove Nursery Paddle Run**<br><img src="290-mangrove-nursery-paddle-run.png" width="420" alt="Radiance delivering the final seedling tray through turquoise mangrove channels"> | **Seagrass Camera Free Dive**<br><img src="291-seagrass-camera-free-dive.png" width="420" alt="Radiance resetting a gold monitoring camera above a healthy seagrass meadow"> |
 
+## Hero Atlas - Batch 68: Pollinator Sky
+
+| | |
+|---|---|
+| **Orchard Pollination Zipline**<br><img src="292-orchard-pollination-zipline.png" width="420" alt="Radiance releasing harmless petal sensors above a flowering orchard zipline"> | **Alpine Meadow Camera Vault**<br><img src="293-alpine-meadow-camera-vault.png" width="420" alt="Radiance vaulting a glacial stream to retrieve a weather camera before rain"> |
+| **Desert Bloom Kite Survey**<br><img src="294-desert-bloom-kite-survey.png" width="420" alt="Radiance completing a safe non-contact kite survey around a rare desert bloom"> | **Night Garden Light Dance**<br><img src="295-night-garden-light-dance.png" width="420" alt="Radiance placing the final low-impact pollinator light in a moonflower garden"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
