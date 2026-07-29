@@ -203,6 +203,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Monsoon Rain-Garden Sprint**<br><img src="296-monsoon-rain-garden-sprint.png" width="420" alt="Radiance opening a gold flood gate to divert monsoon water through a terraced rain garden"> | **Drought Cloud-Sensor Glide**<br><img src="297-drought-cloud-seeder-glide.png" width="420" alt="Radiance deploying a weather sensor from a silent glider above a drought landscape"> |
 | **Hail-Net Trapeze Repair**<br><img src="298-hail-net-trapeze-repair.png" width="420" alt="Radiance closing the final gold clasp across a protective orchard hail net"> | **River-Gauge Kayak Turn**<br><img src="299-river-gauge-kayak-turn.png" width="420" alt="Radiance locking a cobalt transmitter into a river gauge during a hard kayak turn"> |
 
+## Hero Atlas - Batch 70: Four Elements
+
+| | |
+|---|---|
+| **Air: Skybridge Wing Run**<br><img src="300-air-skybridge-wing-run.png" width="420" alt="Radiance seating an emergency wing into a gold launch cradle on a cloud-top skybridge"> | **Water: Cenote Rope Dive**<br><img src="301-water-cenote-rope-dive.png" width="420" alt="Radiance recovering a glowing sensor along a secured line inside a turquoise cenote"> |
+| **Earth: Crystal Cavern Climb**<br><img src="302-earth-crystal-cavern-climb.png" width="420" alt="Radiance activating a stability beacon between immense crystal columns"> | **Fire: Solar Furnace Shield**<br><img src="303-fire-solar-furnace-shield.png" width="420" alt="Radiance aligning a faceted shield to redirect controlled solar light into a test chamber"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
