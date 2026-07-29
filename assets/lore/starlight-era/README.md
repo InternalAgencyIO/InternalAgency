@@ -241,7 +241,9 @@ scene plan is in [`trio-40x4-campaign.json`](trio-40x4-campaign.json). Its
 wardrobe contract favors distinct two-piece architecture, bare shoulders,
 backs, midriffs, and legs over repetitive full-coverage styling. The
 Scorpion Generation face lock keeps the clearly adult trio at an average age
-of 21 with fresh early-twenties beauty-editorial features.
+of 21 with fresh early-twenties beauty-editorial features. Each master permits
+up to two restrained face-only corrections; a frame that still reads older is
+rejected and regenerated.
 
 ## Trio Unbound - Batch 74: Côte d'Azur Swim Kickoff
 
