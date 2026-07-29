@@ -392,6 +392,13 @@ rejected and regenerated.
 | **Jakarta Bundaran HI Mirror Intercept**<br><img src="396-indonesia-jakarta-bundaran-hi-mirror-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking mirror tesserae into a gold compass above Jakarta's rain-lit Bundaran HI"> | **Kota Tua Shadow Cipher**<br><img src="397-indonesia-jakarta-kota-tua-shadow-cipher.png" width="420" alt="The trio braiding three harmless light strands into a sealed cobalt archive cube in Jakarta's Kota Tua"> |
 | **Raja Ampat Lagoon Prism Extraction**<br><img src="398-indonesia-raja-ampat-lagoon-prism-extraction.png" width="420" alt="The trio restoring a reef-data beacon above Raja Ampat's emerald karst islands and turquoise lagoon"> | **Suramadu Bridge Night Signal Finale**<br><img src="399-indonesia-suramadu-bridge-night-signal-finale.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal relay beside the illuminated Suramadu Bridge"> |
 
+## World Series - Asia - Batch 95: Pakistan
+
+| | |
+|---|---|
+| **Karachi Frere Hall Light Intercept**<br><img src="400-pakistan-karachi-frere-hall-light-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three chrome light keys into a gold compass beside rain-lit Frere Hall"> | **Lahore Fort Mirror Cipher**<br><img src="401-pakistan-lahore-fort-mirror-cipher.png" width="420" alt="The trio braiding three harmless light strands into a sealed cobalt archive cube in Lahore Fort"> |
+| **Hunza Valley Glacier-Prism Extraction**<br><img src="402-pakistan-hunza-valley-glacier-prism-extraction.png" width="420" alt="The trio restoring a cobalt glacier-data beacon above the turquoise river and high peaks of Hunza Valley"> | **Karachi Sea View Night Relay**<br><img src="403-pakistan-karachi-sea-view-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay beside Karachi's illuminated surf"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
