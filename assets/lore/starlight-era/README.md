@@ -239,7 +239,9 @@ swimworlds, intimate-fashion ateliers, kinetic runways, daily life and nature,
 closed-set after-dark cabaret, and a colorful three-woman finale. The binding
 scene plan is in [`trio-40x4-campaign.json`](trio-40x4-campaign.json). Its
 wardrobe contract favors distinct two-piece architecture, bare shoulders,
-backs, midriffs, and legs over repetitive full-coverage styling.
+backs, midriffs, and legs over repetitive full-coverage styling. The
+Scorpion Generation face lock keeps the clearly adult trio at an average age
+of 21 with fresh early-twenties beauty-editorial features.
 
 ## Trio Unbound - Batch 74: Côte d'Azur Swim Kickoff
 
@@ -247,6 +249,13 @@ backs, midriffs, and legs over repetitive full-coverage styling.
 |---|---|
 | **Riviera Diving-Board Laugh**<br><img src="316-riviera-diving-board-laugh.png" width="420" alt="Radiance, Ellie, and Alia launching joyfully from a cobalt Riviera diving board"> | **Cap-Ferrat Paddle Race**<br><img src="317-cap-ferrat-paddle-race.png" width="420" alt="The trio racing linked paddleboards through clear turquoise water"> |
 | **Monaco Rooftop Pool Spin**<br><img src="318-monaco-rooftop-pool-spin.png" width="420" alt="The trio joining hands in a direct-flash circular rooftop-pool splash"> | **Red-Sail Splash Finale**<br><img src="319-red-sail-splash-finale.png" width="420" alt="Radiance, Ellie, and Alia leaping together beneath a monumental scarlet sail"> |
+
+## Trio Unbound - Batch 75: Volcanic Coast
+
+| | |
+|---|---|
+| **Black-Sand Shoreline Sprint**<br><img src="320-black-sand-wave-run.png" width="420" alt="The trio racing along a black volcanic shoreline in gold, white, and red sport couture"> | **Lava-Tube Tide Pool**<br><img src="321-lava-tube-tide-pool.png" width="420" alt="Radiance, Ellie, and Alia helping one another from an emerald volcanic tide pool"> |
+| **Basalt-Cliff Waterfall Dash**<br><img src="322-basalt-cliff-waterfall.png" width="420" alt="The trio running shoulder-to-shoulder through silver mist beside a basalt waterfall"> | **Sunset Outrigger Sprint**<br><img src="323-sunset-outrigger-sprint.png" width="420" alt="The trio hauling a black outrigger into coral sunset water"> |
 
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved

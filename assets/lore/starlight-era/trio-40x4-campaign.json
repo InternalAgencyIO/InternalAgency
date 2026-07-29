@@ -15,20 +15,21 @@
   ],
   "ensembleCast": {
     "rule": "Every image contains exactly these three fictional adult women together and no other visible people.",
-    "radiance": "Radiance is clearly adult, age 21, with long golden-blonde hair, luminous blue eyes, refined youthful beauty-editorial features, athletic confidence, warm intelligence, and unmistakable lead presence.",
-    "ellie": "Ellie is clearly adult, age 24, with a glossy deep-brunette blunt bob, hazel eyes, a precise chic silhouette, quick humor, and cool self-possession.",
-    "alia": "Alia is clearly adult, age 23, with long dark-auburn curls, amber-brown eyes, expressive warmth, kinetic elegance, and playful confidence.",
+    "radiance": "Radiance is clearly adult, age 21, with long golden-blonde hair, luminous blue eyes, fresh early-twenties beauty-editorial features, athletic confidence, warm intelligence, and unmistakable lead presence.",
+    "ellie": "Ellie is clearly adult, age 22, with a glossy deep-brunette blunt bob, hazel eyes, fresh early-twenties beauty-editorial features, a precise chic silhouette, quick humor, and cool self-possession.",
+    "alia": "Alia is clearly adult, age 20, with long dark-auburn curls, amber-brown eyes, fresh adult beauty-editorial features, expressive warmth, kinetic elegance, and playful confidence.",
     "continuity": "Keep all three faces crisp, distinct, recognizable, and consistent. Radiance remains the blonde visual anchor; Ellie and Alia are equal active co-stars, never duplicates, background extras, or missing."
   },
   "renderContract": {
     "image": "Create one new vertical HQ hyper-photorealistic 4K-cinematic fashion photograph per scene. Preserve the trio's identity rather than copying a reference composition. Show convincing anatomy, readable faces and hands, luxurious materials, full color, natural skin detail, spatial depth, and a complete interaction or action.",
+    "faceLock": "Scorpion Generation average age is 21. Keep all three unmistakably adult and authentically early-twenties: luminous eyes, fresh facial volume, smooth natural skin, soft youthful proportions, energetic expressions, and contemporary beauty styling. Preserve individual bone structure and identity without aging them up. Reject and regenerate any result that reads middle-aged, weathered, heavily contoured, hollow-cheeked, harshly lined, or generically mature.",
     "tone": "The trio looks hot, joyful, mischievous, stylish, and genuinely delighted to be together. Favor laughter, candid eye contact, coordinated movement, playful competition, friendship chemistry, and visible fun over aloof static posing.",
     "artDirection": "Fashion is the first read, trio chemistry and purposeful movement are second, and the location is third. Every frame needs a different silhouette set, action mechanic, camera language, lighting thesis, and location geometry. Rotate low, aerial, chase, underwater, macro-wide, Dutch, reflection, telephoto, direct-flash, and long-lens compositions.",
     "wardrobe": "Lead with imaginative low-coverage fashion rather than default modesty: secure fully opaque two-piece swim couture, separate sculptural tops and bottoms, fashion-forward opaque lingerie-inspired separates, lined lace, satin sleep couture, asymmetric cutouts, deep but secure necklines, bare shoulders and backs, visible midriff, high-cut hips, bare legs, very short tailored skirts over integrated opaque shorts, crop architecture, stilettos, platform heels, latex-look boots, knee socks, and bold runway constructions. Use matte black, optical white, molten gold, hot red, cobalt, midnight blue, and surprising saturated accents. Garments must remain professionally fitted for each movement.",
     "coverageDirection": "Do not solve styling uncertainty by adding fabric. Avoid routine high-neck one-pieces, long skirts, utility uniforms, jackets, robes, redundant straps, or multiple cover-up layers. Swimworld scenes should normally use three clearly different two-piece silhouettes; intimate-fashion scenes should read as refined opaque separates rather than dresses; runway scenes should favor dramatic skin-framing construction and short silhouettes. Add coverage only where the specific action requires protection, and preserve the boldest safe version of the design.",
     "symbols": "Carry tasteful Scorpion Generation continuity through scorpion and thorned-rose tattoos, gold clasps, rose hardware, abstract starbursts, and invented crescent geometry. Keep motifs decorative, nonreligious, nonnational, elegant, and legible.",
     "nightlife": "Cabaret and strip-club-inspired batches take place on a fictional closed set with no audience, patrons, staff, cash, alcohol service, or sexual contact. Treat poles, chairs, curtains, mirrors, and spotlights as mainstream dance and fashion-stage props.",
-    "avoid": "No minors, nudity, exposed breasts or genitals, visible underwear beneath clothing, transparent fabric against bare intimate areas, sexual activity, explicit posing, fetish framing, cloned faces, missing cast members, extra people, broken anatomy, static lineups, repetitive full-coverage styling, generic one-piece uniforms, readable text, real logos, real flags, real religious emblems, or watermarks."
+    "avoid": "No minors, aged-up or middle-aged faces, harsh age lines, weathered skin, heavy mature contouring, nudity, exposed breasts or genitals, visible underwear beneath clothing, transparent fabric against bare intimate areas, sexual activity, explicit posing, fetish framing, cloned faces, missing cast members, extra people, broken anatomy, static lineups, repetitive full-coverage styling, generic one-piece uniforms, readable text, real logos, real flags, real religious emblems, or watermarks."
   },
   "arcs": [
     {"name": "Swimworld", "startBatch": 74, "endBatch": 81, "batches": 8, "images": 32},
@@ -55,12 +56,12 @@
       "batch": 75,
       "arc": "Swimworld",
       "theme": "Volcanic Coast Swim",
-      "status": "queued",
+      "status": "complete",
       "scenes": [
-        {"number": 320, "slug": "black-sand-wave-run", "title": "Black-Sand Wave Run", "brief": "The trio sprints barefoot through a retreating wave on black volcanic sand in molten-gold, white, and hot-red swim sets, hair and water moving hard across a long-lens frame."},
-        {"number": 321, "slug": "lava-tube-tide-pool", "title": "Lava-Tube Tide Pool", "brief": "Inside a safe sea cave, the three climb from an emerald tide pool onto basalt ledges, helping one another while iridescent swim materials catch reflected green light."},
-        {"number": 322, "slug": "basalt-cliff-waterfall", "title": "Basalt-Cliff Waterfall", "brief": "Radiance, Ellie, and Alia cross beneath a narrow coastal waterfall in secure sculptural two-pieces, sharing a laughing shoulder-to-shoulder dash through silver spray."},
-        {"number": 323, "slug": "sunset-outrigger-sprint", "title": "Sunset Outrigger Sprint", "brief": "A chase view follows the trio hauling a sleek unbranded outrigger into coral sunset water, their matte-black and gold swim couture reading before the glowing volcanic coast."}
+        {"number": 320, "slug": "black-sand-wave-run", "title": "Black-Sand Shoreline Sprint", "brief": "The trio sprints barefoot along a retreating wave on black volcanic sand in molten-gold, white, and hot-red crop-and-short sport couture, geometric scarves and water moving hard across a long-lens frame.", "file": "320-black-sand-wave-run.png"},
+        {"number": 321, "slug": "lava-tube-tide-pool", "title": "Lava-Tube Tide Pool", "brief": "Inside a safe sea cave, the three climb from an emerald tide pool onto basalt ledges, helping one another while iridescent crop-and-short fashion catches reflected green light.", "file": "321-lava-tube-tide-pool.png"},
+        {"number": 322, "slug": "basalt-cliff-waterfall", "title": "Basalt-Cliff Waterfall Dash", "brief": "Radiance, Ellie, and Alia dash shoulder-to-shoulder beside a narrow basalt waterfall in short sculptural sport couture, sharing a laughing leap through silver mist.", "file": "322-basalt-cliff-waterfall.png"},
+        {"number": 323, "slug": "sunset-outrigger-sprint", "title": "Sunset Outrigger Sprint", "brief": "A chase view follows the trio hauling a sleek unbranded outrigger into coral sunset water, their matte-black, white, cobalt and coral crop-and-short couture reading before the glowing volcanic coast.", "file": "323-sunset-outrigger-sprint.png"}
       ]
     },
     {
