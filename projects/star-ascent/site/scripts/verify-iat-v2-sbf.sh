@@ -32,6 +32,11 @@ if ! grep -Fq 'anchor_version = "1.0.2"' Anchor.toml \
   echo "FAIL: Anchor.toml toolchain pins drifted" >&2
   exit 1
 fi
+if ! grep -Fq 'wallet = "launch/HOLD-no-signing-wallet.json"' Anchor.toml \
+  || [[ -e launch/HOLD-no-signing-wallet.json ]]; then
+  echo "FAIL: build-only Anchor wallet boundary drifted" >&2
+  exit 1
+fi
 
 cargo fmt --all -- --check
 cargo test --workspace --all-targets --locked

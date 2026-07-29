@@ -18,6 +18,7 @@ iat_v2 = "6T8qyz4ZSEK8x72hTK1c8rqvEfUX6zGbUsHDUUjpw6tY"
 
 [provider]
 cluster = "Localnet"
+wallet = "launch/HOLD-no-signing-wallet.json"
 
 [scripts]
 test = "node --test tests/iat-v2-reference-engine.test.mjs"
