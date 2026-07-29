@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { spawnSync } from "node:child_process";
+import { sha256CanonicalTextFile } from "./canonical-text-digest.mjs";
 
 const outputPath = "app/mint/ceremony-config.generated.json";
 const paths = {
@@ -48,7 +49,7 @@ const devnetAmounts = {
 
 const readJson = (path) => JSON.parse(readFileSync(resolve(path), "utf8"));
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
-const sha256File = (path) => sha256(readFileSync(resolve(path)));
+const sha256File = (path) => sha256CanonicalTextFile(resolve(path));
 const canonicalDigest = (value) => typeof value === "string" && /^[0-9a-f]{64}$/.test(value);
 const sameOrder = (value) =>
   Array.isArray(value)

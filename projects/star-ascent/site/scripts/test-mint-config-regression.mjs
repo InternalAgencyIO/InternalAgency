@@ -5,6 +5,11 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { spawnSync } from "node:child_process";
+import {
+  normalizeTextForDigest,
+  sha256CanonicalText,
+  sha256CanonicalTextFile,
+} from "./canonical-text-digest.mjs";
 
 const generator = resolve("scripts/generate-mint-ceremony-config.mjs");
 const output = resolve("app/mint/ceremony-config.generated.json");
@@ -32,14 +37,25 @@ assert.equal(config.networks.devnet.allocations.length, 5);
 assert.equal(config.networks.mainnetBeta.allocations.length, 5);
 
 for (const [name, path] of Object.entries(config.sourcePaths)) {
-  const expected = createHash("sha256").update(readFileSync(resolve(path))).digest("hex");
+  const expected = sha256CanonicalTextFile(resolve(path));
   assert.equal(config.sourceDigests[name], expected, `${name} source digest must match`);
 }
 assert.equal(config.implementationPaths.length, 3);
 for (const path of config.implementationPaths) {
-  const expected = createHash("sha256").update(readFileSync(resolve(path))).digest("hex");
+  const expected = sha256CanonicalTextFile(resolve(path));
   assert.equal(config.implementationDigests[path], expected, `${path} implementation digest must match`);
 }
+
+const lineEndingFixture = "first line\nsecond line\n";
+assert.equal(
+  sha256CanonicalText(lineEndingFixture),
+  sha256CanonicalText(lineEndingFixture.replace(/\n/g, "\r\n")),
+  "ceremony digests must be identical across LF and CRLF checkouts",
+);
+assert.equal(
+  normalizeTextForDigest("first\rsecond\r\nthird\n"),
+  "first\nsecond\nthird\n",
+);
 assert.equal(
   config.implementationSha256,
   createHash("sha256").update(
