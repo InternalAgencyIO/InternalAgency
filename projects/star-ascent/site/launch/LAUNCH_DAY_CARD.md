@@ -2,7 +2,7 @@
 
 **Status:** HOLD
 
-**Ceremony window:** 29 July 2026 at 14:15:18 UTC / 17:15:18 Istanbul
+**Ceremony window:** 29 July 2026 at 15:00:00 UTC / 18:00:00 Istanbul
 
 Announce this exact ceremony window together with the public source record.
 State clearly that the timer never signs or submits a transaction and mainnet

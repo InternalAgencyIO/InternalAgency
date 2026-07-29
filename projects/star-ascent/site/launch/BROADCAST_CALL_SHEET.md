@@ -1,6 +1,6 @@
 # STAR ASCENT / broadcast call sheet
 
-Status: **29 JULY 2026 · 14:15:18 UTC / 17:15:18 ISTANBUL**
+Status: **29 JULY 2026 · 15:00:00 UTC / 18:00:00 ISTANBUL**
 
 Announce the exact open-source ceremony window. Also state that every
 transaction remains human-approved and evidence-gated.

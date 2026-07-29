@@ -1,6 +1,6 @@
 # $IAT Model T devnet rehearsal scenario
 
-**Public ceremony window:** 29 July 2026 at 14:15:18 UTC / 17:15:18 Istanbul
+**Public ceremony window:** 29 July 2026 at 15:00:00 UTC / 18:00:00 Istanbul
 
 **Rehearsal status:** required before any mainnet decision
 

@@ -1,6 +1,6 @@
 # $IAT Genesis Operations Card
 
-Status: **HOLD — CEREMONY WINDOW 29 JULY 2026, 14:15:18 UTC**
+Status: **HOLD — CEREMONY WINDOW 29 JULY 2026, 15:00:00 UTC**
 
 Use this as a one-page run-of-show. No secret, recovery phrase, PIN, private
 key, passphrase, or wallet export belongs on this card.
@@ -33,7 +33,7 @@ transaction or publication.
    `launch/release-packet.template.json` as `READY`, and
    `launch/pre-publication-packet-proof.generated.json` against the exact frozen
    files. Keep `launch/PUBLICATION_PAYLOAD.template.md` on `HOLD`.
-6. The public ceremony window opens at 14:15:18 UTC. This is not mainnet
+6. The public ceremony window opens at 15:00:00 UTC. This is not mainnet
    authorization; mainnet remains locked unless all previous gates are current.
 
 The snapshot, handoff, packet, and proof bind reviewed files; they never sign,
