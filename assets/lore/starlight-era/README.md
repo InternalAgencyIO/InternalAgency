@@ -364,6 +364,13 @@ rejected and regenerated.
 | **Bosphorus Cipher Ferry**<br><img src="380-turkiye-istanbul-bosphorus-cipher-ferry.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous cipher handoff on a rain-swept Bosphorus ferry deck"> | **Cappadocia Dawn Balloon Intercept**<br><img src="381-turkiye-cappadocia-dawn-balloon-intercept.png" width="420" alt="The trio redirecting a harmless light capsule from a mirror bridge above Cappadocia at dawn"> |
 | **Ephesus Marble Shadow Swap**<br><img src="382-turkiye-ephesus-marble-shadow-swap.png" width="420" alt="The trio completing a non-contact star-map projection swap before the illuminated Library of Celsus"> | **Pamukkale Moonwater Extraction**<br><img src="383-turkiye-pamukkale-moonwater-extraction.png" width="420" alt="Radiance, Ellie, and Alia restoring an environmental beacon across moonlit Pamukkale terraces"> |
 
+## World Series - Asia - Batch 91: India
+
+| | |
+|---|---|
+| **Marine Drive Light Intercept**<br><img src="384-india-mumbai-marine-drive-light-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three signal keys into a gold prism while racing beside rain-swept Marine Drive"> | **Hawa Mahal Cipher Weave**<br><img src="385-india-jaipur-hawa-mahal-cipher-weave.png" width="420" alt="The trio weaving ultraviolet cipher beams into a closed archive cube before Jaipur's Hawa Mahal"> |
+| **Rann of Kutch Prism Extraction**<br><img src="386-india-rann-of-kutch-prism-extraction.png" width="420" alt="The trio restoring a cobalt environmental aurora while leaping across mirror plates on the Rann of Kutch"> | **Kerala Backwater Moon Skiff Finale**<br><img src="387-india-kerala-backwater-moon-skiff-finale.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay aboard a moonlit Kerala backwater skiff"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
