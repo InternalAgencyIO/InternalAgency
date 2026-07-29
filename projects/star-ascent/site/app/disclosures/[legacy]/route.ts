@@ -16,10 +16,9 @@ const routes: Record<string, string> = {
   "star-ascent-incident-response": "incident-response",
 };
 
-export function GET(request: Request, { params }: { params: Promise<{ legacy: string[] }> }) {
+export function GET(request: Request, { params }: { params: Promise<{ legacy: string }> }) {
   return params.then(({ legacy }) => {
-    const filename = legacy.at(-1) ?? "";
-    const key = filename.replace(/\.(txt|mjs)$/i, "").replace(/-(en|tr)$/i, "");
+    const key = legacy.replace(/\.(txt|mjs)$/i, "").replace(/-(en|tr)$/i, "");
     return Response.redirect(new URL(`/dossier/read/${routes[key] ?? "archive-record"}`, request.url), 308);
   });
 }

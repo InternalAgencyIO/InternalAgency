@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 
-const timeoutMs = 5_000;
+const timeoutMs = 12_000;
+const concurrency = 4;
 
 const publicOrigins = ["https://internalagency.io", "https://ileriakil.com"];
 const launchRoutes = [
@@ -287,11 +288,27 @@ async function checkRedirect(url, expectedPath) {
   }
 }
 
-const results = await Promise.all([
-  ...pages.map(checkPage),
-  ...directDocumentPages.map(checkPage),
-  ...redirects.map(([url, expectedPath]) => checkRedirect(url, expectedPath)),
+async function runLimited(tasks) {
+  const results = new Array(tasks.length);
+  let next = 0;
+  async function worker() {
+    while (next < tasks.length) {
+      const index = next++;
+      results[index] = await tasks[index]();
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, tasks.length) }, () => worker()));
+  return results;
+}
+
+const results = await runLimited([
+  ...pages.map((url) => () => checkPage(url)),
+  ...directDocumentPages.map((url) => () => checkPage(url)),
+  ...redirects.map(([url, expectedPath]) => () => checkRedirect(url, expectedPath)),
+  ...publicOrigins.flatMap((origin) => [
+    () => checkSitemap(origin),
+    () => checkRobots(origin),
+  ]),
 ]);
-results.push(...await Promise.all(publicOrigins.flatMap((origin) => [checkSitemap(origin), checkRobots(origin)])));
 if (results.some((result) => !result)) process.exit(1);
 console.log("PUBLIC ROUTE CHECK COMPLETE: English and Turkish launch and direct-document routes have exact language alternates, approved metadata, pre-activation safety, and canonical sitemap/robots coverage; every documented legacy redirect is reachable.");
