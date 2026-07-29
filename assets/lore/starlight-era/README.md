@@ -196,6 +196,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Orchard Pollination Zipline**<br><img src="292-orchard-pollination-zipline.png" width="420" alt="Radiance releasing harmless petal sensors above a flowering orchard zipline"> | **Alpine Meadow Camera Vault**<br><img src="293-alpine-meadow-camera-vault.png" width="420" alt="Radiance vaulting a glacial stream to retrieve a weather camera before rain"> |
 | **Desert Bloom Kite Survey**<br><img src="294-desert-bloom-kite-survey.png" width="420" alt="Radiance completing a safe non-contact kite survey around a rare desert bloom"> | **Night Garden Light Dance**<br><img src="295-night-garden-light-dance.png" width="420" alt="Radiance placing the final low-impact pollinator light in a moonflower garden"> |
 
+## Hero Atlas - Batch 69: Weather Shepherd
+
+| | |
+|---|---|
+| **Monsoon Rain-Garden Sprint**<br><img src="296-monsoon-rain-garden-sprint.png" width="420" alt="Radiance opening a gold flood gate to divert monsoon water through a terraced rain garden"> | **Drought Cloud-Sensor Glide**<br><img src="297-drought-cloud-seeder-glide.png" width="420" alt="Radiance deploying a weather sensor from a silent glider above a drought landscape"> |
+| **Hail-Net Trapeze Repair**<br><img src="298-hail-net-trapeze-repair.png" width="420" alt="Radiance closing the final gold clasp across a protective orchard hail net"> | **River-Gauge Kayak Turn**<br><img src="299-river-gauge-kayak-turn.png" width="420" alt="Radiance locking a cobalt transmitter into a river gauge during a hard kayak turn"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
