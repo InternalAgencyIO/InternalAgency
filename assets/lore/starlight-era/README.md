@@ -413,6 +413,13 @@ rejected and regenerated.
 | **São Paulo Paulista Prism Intercept**<br><img src="408-brazil-sao-paulo-paulista-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking chrome prism keys into a gold compass above rain-lit Avenida Paulista"> | **Salvador Pelourinho Color Cipher**<br><img src="409-brazil-salvador-pelourinho-color-cipher.png" width="420" alt="The trio braiding three harmless colored beams into a sealed cobalt archive cube among Pelourinho's preserved façades"> |
 | **Iguaçu Falls Aurora Extraction**<br><img src="410-brazil-iguacu-falls-aurora-extraction.png" width="420" alt="The trio restoring a cobalt watershed beacon above the vast cascades and rainforest mist of Iguaçu Falls"> | **Rio Sugarloaf Bay Night Relay**<br><img src="411-brazil-rio-sugarloaf-bay-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay above Guanabara Bay and Sugarloaf Mountain"> |
 
+## World Series - Asia - Batch 98: Bangladesh
+
+| | |
+|---|---|
+| **Dhaka Hatirjheel Light Intercept**<br><img src="412-bangladesh-dhaka-hatirjheel-light-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three light keys into a molten-gold delta compass above rain-lit Hatirjheel"> | **Sonargaon Panam City Mirror Cipher**<br><img src="413-bangladesh-sonargaon-panam-city-mirror-cipher.png" width="420" alt="The trio weaving three light strands into a sealed cobalt archive cube along Panam City's preserved merchant street"> |
+| **Sundarbans Mangrove Prism Extraction**<br><img src="414-bangladesh-sundarbans-mangrove-prism-extraction.png" width="420" alt="The trio restoring a cobalt mangrove-data beacon above the tidal creeks and canopy of the Sundarbans"> | **Cox's Bazar Night Relay**<br><img src="415-bangladesh-coxs-bazar-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay beside the moonlit Bay of Bengal surf"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
