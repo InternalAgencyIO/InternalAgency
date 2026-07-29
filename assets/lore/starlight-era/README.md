@@ -280,6 +280,13 @@ rejected and regenerated.
 | **Bioluminescent Bay Run**<br><img src="332-bioluminescent-bay-run.png" width="420" alt="Radiance, Ellie, and Alia racing through cyan bioluminescent shallows beneath a full moon"> | **Moonlit Infinity Pool**<br><img src="333-moonlit-infinity-pool.png" width="420" alt="The trio creating linked white and violet water arcs beneath an enormous fictional moon"> |
 | **Neon Poolside Volleyball Save**<br><img src="334-neon-hotel-pool-volleyball.png" width="420" alt="The trio converging on one glowing volleyball beside a magenta neon hotel pool"> | **Meteor-Shower Pier Jump**<br><img src="335-meteor-shower-pier-jump.png" width="420" alt="Radiance, Ellie, and Alia jumping hand-in-hand from a low pier beneath a fictional meteor shower"> |
 
+## Trio Unbound - Batch 79: Winter Spa Swim
+
+| | |
+|---|---|
+| **Alpine Hot-Spring Snow**<br><img src="336-alpine-hot-spring-snow.png" width="420" alt="Radiance, Ellie, and Alia crossing hot-spring stepping stones with colorful towels in falling snow"> | **Ice-Hotel Heated Pool**<br><img src="337-ice-hotel-heated-pool.png" width="420" alt="The trio completing a synchronized split-level water turn inside a blue ice pavilion"> |
+| **Aurora Sauna Plunge**<br><img src="338-aurora-sauna-plunge.png" width="420" alt="The trio leaping hand-in-hand from a timber sauna toward a warm pool beneath green aurora"> | **Glacier-Lagoon Steam Walk**<br><img src="339-glacier-lagoon-steam-walk.png" width="420" alt="Radiance, Ellie, and Alia striding through a steaming geothermal lagoon before silver-blue ice shapes"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
