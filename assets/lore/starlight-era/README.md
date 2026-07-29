@@ -378,6 +378,13 @@ rejected and regenerated.
 | **Shanghai Bund Prism Intercept**<br><img src="388-china-shanghai-bund-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three cobalt light keys into a gold prism on Shanghai's rain-swept Bund"> | **Xi’an City Wall Cipher Run**<br><img src="389-china-xian-city-wall-cipher-run.png" width="420" alt="The trio sealing a harmless light archive through abstract lattice frames above the preserved Xi’an City Wall"> |
 | **Zhangjiajie Cloud-Bridge Extraction**<br><img src="390-china-zhangjiajie-cloud-bridge-extraction.png" width="420" alt="The trio restoring a turquoise environmental beacon among Zhangjiajie's sandstone pillars and cloud"> | **Chongqing Monorail Night Relay**<br><img src="391-china-chongqing-monorail-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal relay beside Chongqing's layered night monorail"> |
 
+## World Series - North America - Batch 93: United States
+
+| | |
+|---|---|
+| **Chicago Riverwalk Chrome Intercept**<br><img src="392-united-states-chicago-riverwalk-chrome-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking chrome signal discs into a gold compass on Chicago's rain-polished Riverwalk"> | **Grand Central Constellation Cipher**<br><img src="393-united-states-grand-central-constellation-cipher.png" width="420" alt="The trio sealing a constellation cipher into a cobalt sphere inside an empty Grand Central Terminal"> |
+| **Grand Canyon Solar-Prism Extraction**<br><img src="394-united-states-grand-canyon-solar-prism-extraction.png" width="420" alt="The trio restoring a turquoise atmospheric beacon above a sunrise Grand Canyon overlook"> | **Golden Gate Fogline Signal Finale**<br><img src="395-united-states-golden-gate-fogline-signal-finale.png" width="420" alt="Radiance, Ellie, and Alia threading a red signal ribbon into a completed pulse beside the foggy Golden Gate Bridge"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
