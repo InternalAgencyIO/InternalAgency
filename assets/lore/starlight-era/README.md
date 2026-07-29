@@ -210,6 +210,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Air: Skybridge Wing Run**<br><img src="300-air-skybridge-wing-run.png" width="420" alt="Radiance seating an emergency wing into a gold launch cradle on a cloud-top skybridge"> | **Water: Cenote Rope Dive**<br><img src="301-water-cenote-rope-dive.png" width="420" alt="Radiance recovering a glowing sensor along a secured line inside a turquoise cenote"> |
 | **Earth: Crystal Cavern Climb**<br><img src="302-earth-crystal-cavern-climb.png" width="420" alt="Radiance activating a stability beacon between immense crystal columns"> | **Fire: Solar Furnace Shield**<br><img src="303-fire-solar-furnace-shield.png" width="420" alt="Radiance aligning a faceted shield to redirect controlled solar light into a test chamber"> |
 
+## Hero Atlas - Batch 71: World Relay
+
+| | |
+|---|---|
+| **Polar-to-Desert Relay**<br><img src="304-polar-to-desert-relay.png" width="420" alt="Radiance completing a data-baton transfer across a surreal polar-desert climate seam"> | **Ocean-to-Orbit Climb**<br><img src="305-ocean-to-orbit-climb.png" width="420" alt="Radiance locking a seed-vault capsule into an ascent cradle on a gold orbital tether"> |
+| **Forest-to-City Glide**<br><img src="306-forest-to-city-glide.png" width="420" alt="Radiance docking biodiversity data between a rainforest canopy and green metropolis"> | **Night-to-Dawn Skate**<br><img src="307-night-to-dawn-skate.png" width="420" alt="Radiance replacing the final guide light while speed-skating from neon night toward sunrise"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
