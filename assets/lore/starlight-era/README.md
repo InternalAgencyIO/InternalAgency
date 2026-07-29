@@ -287,6 +287,13 @@ rejected and regenerated.
 | **Alpine Hot-Spring Snow**<br><img src="336-alpine-hot-spring-snow.png" width="420" alt="Radiance, Ellie, and Alia crossing hot-spring stepping stones with colorful towels in falling snow"> | **Ice-Hotel Heated Pool**<br><img src="337-ice-hotel-heated-pool.png" width="420" alt="The trio completing a synchronized split-level water turn inside a blue ice pavilion"> |
 | **Aurora Sauna Plunge**<br><img src="338-aurora-sauna-plunge.png" width="420" alt="The trio leaping hand-in-hand from a timber sauna toward a warm pool beneath green aurora"> | **Glacier-Lagoon Steam Walk**<br><img src="339-glacier-lagoon-steam-walk.png" width="420" alt="Radiance, Ellie, and Alia striding through a steaming geothermal lagoon before silver-blue ice shapes"> |
 
+## Trio Unbound - Batch 80: Midnight Cabaret Fashion Club
+
+| | |
+|---|---|
+| **Scarlet Curtain Light Relay**<br><img src="340-midnight-curtain-cabaret-run.png" width="420" alt="Radiance, Ellie, and Alia racing through a scarlet Art-Deco curtain with glowing light batons"> | **Neon Marquee Light Relay**<br><img src="341-neon-chair-catwalk-spin.png" width="420" alt="The trio racing down a cobalt and fuchsia theater runway carrying glowing light orbs"> |
+| **Mirror Staircase Fan Dance**<br><img src="342-mirror-staircase-fan-dance.png" width="420" alt="The trio climbing a mirrored gold staircase with red, white, and blue feather fans"> | **Gold Confetti Theater Finale**<br><img src="343-gold-confetti-club-finale.png" width="420" alt="Radiance, Ellie, and Alia completing a linked theater finale beneath molten-gold confetti"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
