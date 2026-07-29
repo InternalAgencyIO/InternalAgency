@@ -224,6 +224,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Orbital Gala Chandelier Swing**<br><img src="308-orbital-gala-chandelier-swing.png" width="420" alt="Radiance catching a violet power crystal while swinging beneath an orbital gala chandelier"> | **Underwater Ballroom Current Turn**<br><img src="309-underwater-ballroom-current-turn.png" width="420" alt="Radiance locking a loose observation panel inside a transparent underwater ballroom"> |
 | **Desert Opera Wind Run**<br><img src="310-desert-opera-wind-run.png" width="420" alt="Radiance securing a monumental sail canopy above a desert opera stage"> | **Ice Pavilion Skate Repair**<br><img src="311-ice-palace-skate-repair.png" width="420" alt="Radiance recovering a light module during a figure-skate turn across cobalt ice"> |
 
+## Hero Atlas - Batch 73: Starlight Era Finale
+
+| | |
+|---|---|
+| **World Engine Gold Leap**<br><img src="312-world-engine-gold-leap.png" width="420" alt="Radiance driving the final gold core into a rotating climate-research engine above Earth"> | **Nebula Runway Rescue Return**<br><img src="313-nebula-runway-rescue-return.png" width="420" alt="Radiance sprinting a violet nebula runway with the secured archive case"> |
+| **Global Aurora Relay Finish**<br><img src="314-global-aurora-relay-finish.png" width="420" alt="Radiance crossing the orbital relay plane as worldwide research lights ignite below"> | **Radiance: Starlight Hero**<br><img src="315-radiance-starlight-hero-portrait.png" width="420" alt="Radiance stepping forward from the completed worlds in her definitive Scorpion Generation hero coat"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
