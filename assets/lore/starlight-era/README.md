@@ -182,6 +182,13 @@ avatar memory, wardrobe reference, or reactive scene.
 | **Savanna Tracking-Bike Leap**<br><img src="284-savanna-tracking-bike-leap.png" width="420" alt="Radiance mounting a wildlife camera during a bicycle leap over a savanna wash"> | **Wetland Seed-Drone Launch**<br><img src="285-wetland-seed-drone-launch.png" width="420" alt="Radiance releasing a gold-petal seed drone above restored sunrise wetlands"> |
 | **Forest-Corridor Rope Glide**<br><img src="286-forest-corridor-rope-glide.png" width="420" alt="Radiance repairing a green-cobalt sensor line during a rainforest rope glide"> | **Grassland Firebreak Skate**<br><img src="287-grassland-firebreak-skate.png" width="420" alt="Radiance placing the final cobalt marker along a prepared grassland firebreak"> |
 
+## Hero Atlas - Batch 67: Ocean Nursery
+
+| | |
+|---|---|
+| **Coral-Garden Frame Carry**<br><img src="288-coral-garden-frame-carry.png" width="420" alt="Radiance locking a nursery frame into a gold coral-restoration cradle"> | **Manta Research Glide**<br><img src="289-manta-tag-glider-follow.png" width="420" alt="Radiance restoring a loose sensor tag on a manta-shaped research drone"> |
+| **Mangrove Nursery Paddle Run**<br><img src="290-mangrove-nursery-paddle-run.png" width="420" alt="Radiance delivering the final seedling tray through turquoise mangrove channels"> | **Seagrass Camera Free Dive**<br><img src="291-seagrass-camera-free-dive.png" width="420" alt="Radiance resetting a gold monitoring camera above a healthy seagrass meadow"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 without post-generation character edits.
