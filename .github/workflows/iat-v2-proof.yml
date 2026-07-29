@@ -58,10 +58,21 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install the pinned official Solana and Anchor toolchain
         run: |
-          curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash
-          echo "$HOME/.local/share/solana/install/active_release/bin" >> "$GITHUB_PATH"
-          echo "$HOME/.avm/bin" >> "$GITHUB_PATH"
-          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          rustup toolchain install 1.97.1 --profile minimal
+          sh -c "$(curl --proto '=https' --tlsv1.2 -sSfL https://release.anza.xyz/v3.1.10/install)"
+          cargo +1.97.1 install \
+            --git https://github.com/solana-foundation/anchor \
+            --tag v1.0.2 \
+            --locked \
+            --force \
+            avm
+          avm install 1.0.2
+          avm use 1.0.2
+          {
+            echo "$HOME/.avm/bin"
+            echo "$HOME/.local/share/solana/install/active_release/bin"
+            echo "$HOME/.cargo/bin"
+          } >> "$GITHUB_PATH"
       - name: Produce deterministic build evidence
         run: bash scripts/verify-iat-v2-sbf.sh
       - uses: actions/upload-artifact@v4
