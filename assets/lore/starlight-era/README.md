@@ -301,6 +301,13 @@ rejected and regenerated.
 | **Yacht-Deck Towel Relay**<br><img src="344-yacht-deck-sun-chase.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet-towel relay on a sunlit private yacht"> | **Sea-Cave Team Swim**<br><img src="345-sea-cave-swim-through.png" width="420" alt="The trio climbing together from turquoise water inside a sunlit sea cave"> |
 | **Floating Breakfast Dance**<br><img src="346-floating-breakfast-dance.png" width="420" alt="The trio laughing through a colorful breakfast dance in crystal-clear shallow water"> | **Golden-Hour Rope Swing**<br><img src="347-golden-hour-rope-swing.png" width="420" alt="Radiance, Ellie, and Alia swinging together above a turquoise island cove at sunset"> |
 
+## Trio Unbound - Batch 82: Sunlit Suite Editorial
+
+| | |
+|---|---|
+| **Sunlit Suite Pillow Laugh**<br><img src="348-sunlit-suite-pillow-laugh.png" width="420" alt="Radiance, Ellie, and Alia laughing together through a cloud of white pillows in a sunlit suite"> | **Mirror-Vanity Styling Relay**<br><img src="349-mirror-vanity-styling-race.png" width="420" alt="The trio completing a playful three-way jewelry styling relay at an Art-Deco vanity"> |
+| **Balcony Coffee Catch**<br><img src="350-balcony-coffee-silk-sets.png" width="420" alt="The trio carrying coffee and fruit while catching an orange on a sunrise coastal balcony"> | **Curtain-Breeze Lookbook**<br><img src="351-curtain-breeze-lookbook.png" width="420" alt="Radiance, Ellie, and Alia crossing a bright suite in linked steps between billowing white curtains"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
