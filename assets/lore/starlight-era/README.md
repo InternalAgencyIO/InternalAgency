@@ -273,6 +273,13 @@ rejected and regenerated.
 | **Lagoon Float Chaos**<br><img src="328-lagoon-float-chaos.png" width="420" alt="Radiance, Ellie, and Alia tumbling laughing across bright geometric floats in a turquoise lagoon"> | **Jungle Waterfall Rope Swing**<br><img src="329-jungle-waterfall-rope-swing.png" width="420" alt="The trio sharing a wide rope swing through emerald waterfall spray"> |
 | **Coral-Cay Paddle Chase**<br><img src="330-coral-cay-paddle-chase.png" width="420" alt="The trio racing clear kayaks around a coral cay with vivid paddle trails"> | **Mango Sunset Kite Relay**<br><img src="331-mango-sunset-beach-dance.png" width="420" alt="Radiance, Ellie, and Alia completing a running handoff beneath a red-and-gold ribbon kite at mango sunset"> |
 
+## Trio Unbound - Batch 78: Midnight Water
+
+| | |
+|---|---|
+| **Bioluminescent Bay Run**<br><img src="332-bioluminescent-bay-run.png" width="420" alt="Radiance, Ellie, and Alia racing through cyan bioluminescent shallows beneath a full moon"> | **Moonlit Infinity Pool**<br><img src="333-moonlit-infinity-pool.png" width="420" alt="The trio creating linked white and violet water arcs beneath an enormous fictional moon"> |
+| **Neon Poolside Volleyball Save**<br><img src="334-neon-hotel-pool-volleyball.png" width="420" alt="The trio converging on one glowing volleyball beside a magenta neon hotel pool"> | **Meteor-Shower Pier Jump**<br><img src="335-meteor-shower-pier-jump.png" width="420" alt="Radiance, Ellie, and Alia jumping hand-in-hand from a low pier beneath a fictional meteor shower"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
