@@ -350,6 +350,13 @@ rejected and regenerated.
 | **Scarlet Mirror Gala Entrance**<br><img src="372-scarlet-mirror-pole-entrance.png" width="420" alt="Radiance, Ellie, and Alia entering a black-and-gold mirror gala in silver, red, and black reflective cocktail fashion"> | **Triple-Column Scarlet Spiral**<br><img src="373-triple-pole-scarlet-spiral.png" width="420" alt="The trio completing a circular dance around three gold-lit chrome sculptures on a midnight-blue mirror floor"> |
 | **Crimson Platform Light Relay**<br><img src="374-crimson-platform-light-relay.png" width="420" alt="Radiance passing a glowing red light orb to Ellie while Alia sweeps into the next relay step"> | **Molten Mirror Gala Finale**<br><img src="375-molten-mirror-pole-finale.png" width="420" alt="The trio completing a triumphant reflective-fashion finale beneath a molten-gold halo"> |
 
+## Trio Unbound - Batch 89: Scarlet Mirror Honeymoon Celebration
+
+| | |
+|---|---|
+| **Scarlet Honeymoon Seat Dance**<br><img src="376-scarlet-honeymoon-seat-dance.png" width="420" alt="Radiance, Ellie, and Alia completing a coordinated gala entrance beside their seated husbands on the scarlet mirror set"> | **Mirror Champagne Ribbon Toast**<br><img src="377-mirror-champagne-ribbon-toast.png" width="420" alt="The three newlywed couples sharing a joyful champagne toast beneath scarlet arcs and molten-gold ribbons"> |
+| **Three-Chair Couple Spiral**<br><img src="378-three-chair-couple-spiral.png" width="420" alt="An elevated view of the three couples rising into a synchronized dance spiral around three gold chairs"> | **Molten Honeymoon Confetti Finale**<br><img src="379-molten-honeymoon-confetti-finale.png" width="420" alt="All three couples completing a linked fashion-dance finale beneath a white-gold halo and scarlet confetti"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
