@@ -2,6 +2,10 @@
   "version": 1,
   "status": "LOCKED",
   "blockers": [
+    "allocation lock plan validator failed.",
+    "devnet rehearsal validator failed.",
+    "mainnet handoff validator failed: handoff requires the canonical devnet rehearsal validator to pass before any handoff state is accepted",
+    "release packet validator failed: release packet requires the canonical devnet rehearsal validator to pass before any packet state is accepted",
     "token metadata is HOLD; READY is required.",
     "allocation lock plan is HOLD; READY is required.",
     "signing checklist is HOLD; READY is required.",
@@ -146,9 +150,9 @@
   ],
   "implementationDigests": {
     "app/mint/ceremony.mjs": "eebb95fde788853f38c24d5a198392aa2fef645da2a3f6a9cfee04623299511e",
-    "app/mint/page.tsx": "094faf5d61f5745a2480e440649defaf7ec6cf851d394b88e88952e52c299f2c",
-    "pnpm-lock.yaml": "0de962701ce4ba787bbc6527b7ccbf1bb3c86e19be1d0816178c8a3ebc83a93f"
+    "app/mint/page.tsx": "6a6d8b5ff61b0f368a93f5ca5e1667ba24352c6c208f7af52ebbfebe504fc82a",
+    "pnpm-lock.yaml": "3fdbdbbb0858318c6c1b1d11486c4762b4e63266e1326ef9c5ec18c7e38e16da"
   },
-  "implementationSha256": "992ba138db2e5f5c46c0d44bc864945293635cacd6ee66d1165237b225b6470b",
-  "configurationSha256": "89ad896b1f05ebe5cd717efc8fff41d5581ba0f81ca124fad6095e4ce148c5fb"
+  "implementationSha256": "78e942a1edb6a805ee94dd48d3670a5961cc4b14653b9b53f412428955ae5222",
+  "configurationSha256": "ce55bfbaf37281d91b520ebef594b9ace11a5388c527e4345dcb95c0d9c28b79"
 }

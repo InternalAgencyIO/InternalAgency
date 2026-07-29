@@ -1,5 +1,6 @@
 "use client";
 
+import "./buffer-polyfill";
 import { useEffect, useMemo, useState } from "react";
 import {
   Connection,
