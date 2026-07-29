@@ -293,13 +293,23 @@ for (const [crate, version] of [
 for (const fragment of [
   "const V2_MINT_ONLY_PATH_SUPERSEDED = true;",
   "SUPERSEDED // DO NOT SIGN",
-  "if (V2_MINT_ONLY_PATH_SUPERSEDED)",
-  "&& !V2_MINT_ONLY_PATH_SUPERSEDED",
-  "disabled={V2_MINT_ONLY_PATH_SUPERSEDED || busy || !localHost}",
-  "THIS BUILDER CANNOT INITIALIZE OR FUND THE IAT V2 PROGRAM",
+  "disabled={V2_MINT_ONLY_PATH_SUPERSEDED}",
+  "The old four-transaction builder cannot initialize or fund the IAT V2",
+  "It has no wallet provider, signer, transaction builder, or",
 ]) {
   if (!mintPageSource.includes(fragment)) {
     fail(`mint route is missing V2 fail-closed control ${JSON.stringify(fragment)}`);
+  }
+}
+for (const forbidden of [
+  "@solana/web3.js",
+  "@solana/spl-token",
+  "window.backpack",
+  "signTransaction",
+  "sendRawTransaction",
+]) {
+  if (mintPageSource.includes(forbidden)) {
+    fail(`mint route still contains disabled signing dependency ${JSON.stringify(forbidden)}`);
   }
 }
 if (

@@ -79,7 +79,9 @@ if (config.status === "LOCKED") {
 }
 
 const pageSource = readFileSync(resolve("app/mint/page.tsx"), "utf8");
-assert.match(pageSource, /isLocalOperatorHost\(window\.location\.hostname\)/);
+assert.match(pageSource, /const V2_MINT_ONLY_PATH_SUPERSEDED = true;/);
+assert.match(pageSource, /disabled=\{V2_MINT_ONLY_PATH_SUPERSEDED\}/);
+assert.doesNotMatch(pageSource, /@solana\/|window\.backpack|signTransaction|sendRawTransaction/);
 assert.doesNotMatch(pageSource, /signAndSendTransaction/);
 assert.doesNotMatch(pageSource, /seedPhrase|privateKey|secretKey|mnemonic/i);
 console.log("Mint configuration regression checks passed.");

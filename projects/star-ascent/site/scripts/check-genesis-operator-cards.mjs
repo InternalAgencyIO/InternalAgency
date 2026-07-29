@@ -22,8 +22,8 @@ if (rehearsal.requiredScenarios.length < 20) {
 for (const marker of [
   "const V2_MINT_ONLY_PATH_SUPERSEDED = true;",
   "SUPERSEDED // DO NOT SIGN",
-  "if (V2_MINT_ONLY_PATH_SUPERSEDED)",
-  "&& !V2_MINT_ONLY_PATH_SUPERSEDED",
+  "disabled={V2_MINT_ONLY_PATH_SUPERSEDED}",
+  "It has no wallet provider, signer, transaction builder, or",
 ]) {
   if (!mintPage.includes(marker)) {
     throw new Error(`app/mint/page.tsx is missing fail-closed marker ${marker}`);
