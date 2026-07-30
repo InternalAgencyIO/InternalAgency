@@ -434,6 +434,13 @@ rejected and regenerated.
 | **Addis Ababa Entoto Skyline Intercept**<br><img src="420-ethiopia-addis-ababa-entoto-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three prism keys into a molten-gold highland compass above Addis Ababa"> | **Gondar Fasil Ghebbi Mirror Cipher**<br><img src="421-ethiopia-gondar-fasil-ghebbi-mirror-cipher.png" width="420" alt="The trio braiding three harmless light beams into a sealed cobalt archive cube beside Fasil Ghebbi's stone castles"> |
 | **Simien Mountains Prism Extraction**<br><img src="422-ethiopia-simien-mountains-prism-extraction.png" width="420" alt="The trio restoring a cobalt watershed beacon above the layered escarpments of the Simien Mountains"> | **Bahir Dar Lake Tana Night Relay**<br><img src="423-ethiopia-bahir-dar-lake-tana-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay beside Lake Tana at night"> |
 
+## World Series - North America - Batch 101: Mexico
+
+| | |
+|---|---|
+| **Mexico City Soumaya Solar Intercept**<br><img src="424-mexico-mexico-city-soumaya-solar-intercept.png" width="420" alt="Radiance, Ellie, and Alia completing a solar-key handoff before Mexico City's silver Museo Soumaya"> | **Guanajuato Color Alley Mirror Cipher**<br><img src="425-mexico-guanajuato-color-alley-mirror-cipher.png" width="420" alt="The trio braiding three colored beams into a sealed cobalt archive cube in Guanajuato's hillside alleys"> |
+| **Copper Canyon Prism Extraction**<br><img src="426-mexico-copper-canyon-prism-extraction.png" width="420" alt="The trio restoring a cobalt watershed beacon above the layered ravines of Copper Canyon"> | **Cabo San Lucas Arch Night Relay**<br><img src="427-mexico-cabo-san-lucas-arch-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay before El Arco at night"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
