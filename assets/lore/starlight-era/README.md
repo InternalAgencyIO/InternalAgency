@@ -483,6 +483,13 @@ rejected and regenerated.
 | **Tehran Tabiat Bridge Prism Intercept**<br><img src="448-iran-tehran-tabiat-bridge-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three city-light prisms into a molten-gold compass beside Tehran's Tabiat Bridge"> | **Isfahan Si-o-se-pol Mirror Cipher**<br><img src="449-iran-isfahan-si-o-se-pol-mirror-cipher.png" width="420" alt="The trio braiding three harmless beams into a sealed archive prism beside Isfahan's Si-o-se-pol bridge"> |
 | **Lut Desert Kalut Prism Extraction**<br><img src="450-iran-lut-desert-kalut-prism-extraction.png" width="420" alt="The trio restoring a cobalt desert-climate beacon among the Lut Desert's kalut formations"> | **Ahvaz White Bridge Karun Night Relay**<br><img src="451-iran-ahvaz-white-bridge-karun-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous relay beside Ahvaz's White Bridge and the Karun River"> |
 
+## World Series - Europe - Batch 108: Germany
+
+| | |
+|---|---|
+| **Berlin Potsdamer Platz Prism Intercept**<br><img src="452-germany-berlin-potsdamer-platz-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three spectral keys into a molten-gold compass beside Potsdamer Platz"> | **Hamburg Speicherstadt Brick-Light Cipher**<br><img src="453-germany-hamburg-speicherstadt-brick-light-cipher.png" width="420" alt="The trio braiding three colored beams into a sealed cobalt archive prism beside Hamburg's Speicherstadt canals"> |
+| **Saxon Switzerland Bastei Prism Extraction**<br><img src="454-germany-saxon-switzerland-bastei-prism-extraction.png" width="420" alt="The trio restoring a cobalt terrain beacon above Saxon Switzerland's sandstone spires"> | **Cologne Hohenzollern Bridge Rhine Night Relay**<br><img src="455-germany-cologne-hohenzollern-bridge-rhine-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous relay beside Cologne's Hohenzollern Bridge and the Rhine"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
