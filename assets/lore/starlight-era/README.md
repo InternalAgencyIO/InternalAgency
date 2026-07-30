@@ -511,6 +511,13 @@ rejected and regenerated.
 | **Dar es Salaam Tanzanite Bridge Intercept**<br><img src="464-tanzania-dar-es-salaam-tanzanite-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three city-signal prisms into a molten-gold compass beside Dar es Salaam's Tanzanite Bridge"> | **Zanzibar Stone Town Carved-Door Cipher**<br><img src="465-tanzania-zanzibar-stone-town-carved-door-cipher.png" width="420" alt="The trio braiding colored beams into a sealed cobalt archive prism among Stone Town's carved doors and coral-stone lanes"> |
 | **Serengeti Kopje Prism Extraction**<br><img src="466-tanzania-serengeti-kopje-prism-extraction.png" width="420" alt="The trio restoring a cobalt terrain beacon above the Serengeti's granite kopjes and acacia horizon"> | **Zanzibar Nungwi Dhow Night Relay**<br><img src="467-tanzania-zanzibar-nungwi-dhow-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous signal relay beside Nungwi's turquoise coast and a traditional dhow"> |
 
+## World Series - Europe - Batch 112: France
+
+| | |
+|---|---|
+| **Paris La Defense Prism Intercept**<br><img src="468-france-paris-la-defense-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a cobalt key into a molten-gold compass beneath La Defense's Grande Arche"> | **Chambord Roofline Light Cipher**<br><img src="469-france-chambord-roofline-light-cipher.png" width="420" alt="The trio braiding colored beams into a sealed archive prism beside Chateau de Chambord"> |
+| **Etretat Chalk Arch Prism Extraction**<br><img src="470-france-etretat-chalk-arch-prism-extraction.png" width="420" alt="The trio restoring a coastal beacon above Etretat's white chalk cliffs and sea arches"> | **Nice Promenade Night Relay**<br><img src="471-france-nice-promenade-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous relay above Nice's Baie des Anges"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
