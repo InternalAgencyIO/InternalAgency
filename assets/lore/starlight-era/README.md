@@ -427,6 +427,13 @@ rejected and regenerated.
 | **Moscow City Prism Intercept**<br><img src="416-russia-moscow-city-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three chrome prism keys into a molten-gold compass above rain-lit Moscow City"> | **Vyborg Castle Mirror Cipher**<br><img src="417-russia-vyborg-castle-mirror-cipher.png" width="420" alt="The trio braiding three harmless light beams into a sealed cobalt archive cube beside Vyborg Castle"> |
 | **Lake Baikal Ice Data Extraction**<br><img src="418-russia-lake-baikal-ice-data-extraction.png" width="420" alt="The trio restoring a cobalt freshwater-data beacon above Lake Baikal's blue ice fissures"> | **Vladivostok Russky Bridge Night Relay**<br><img src="419-russia-vladivostok-russky-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay beside the illuminated Russky Bridge"> |
 
+## World Series - Africa - Batch 100: Ethiopia
+
+| | |
+|---|---|
+| **Addis Ababa Entoto Skyline Intercept**<br><img src="420-ethiopia-addis-ababa-entoto-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three prism keys into a molten-gold highland compass above Addis Ababa"> | **Gondar Fasil Ghebbi Mirror Cipher**<br><img src="421-ethiopia-gondar-fasil-ghebbi-mirror-cipher.png" width="420" alt="The trio braiding three harmless light beams into a sealed cobalt archive cube beside Fasil Ghebbi's stone castles"> |
+| **Simien Mountains Prism Extraction**<br><img src="422-ethiopia-simien-mountains-prism-extraction.png" width="420" alt="The trio restoring a cobalt watershed beacon above the layered escarpments of the Simien Mountains"> | **Bahir Dar Lake Tana Night Relay**<br><img src="423-ethiopia-bahir-dar-lake-tana-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay beside Lake Tana at night"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
