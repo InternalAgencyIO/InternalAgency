@@ -567,6 +567,13 @@ rejected and regenerated.
 | **Khartoum Nile Confluence Amber Intercept**<br><img src="496-sudan-khartoum-nile-confluence-amber-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber signal prism above Khartoum's Blue and White Nile confluence"> | **Suakin Coral-Stone Light Cipher**<br><img src="497-sudan-suakin-coral-stone-light-cipher.png" width="420" alt="The trio sealing a cobalt archive prism beside Suakin Island's coral-stone merchant-house ruins"> |
 | **Bayuda Desert Basalt Extraction**<br><img src="498-sudan-bayuda-desert-basalt-extraction.png" width="420" alt="The trio restoring an atmospheric beacon among the Bayuda Desert's volcanic cones and basalt fields"> | **Port Sudan Red Sea Night Relay**<br><img src="499-sudan-port-sudan-red-sea-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a maritime light relay on Port Sudan's Red Sea waterfront"> |
 
+## World Series - Africa - Batch 120: Uganda
+
+| | |
+|---|---|
+| **Kampala National Theatre Pearl Intercept**<br><img src="500-uganda-kampala-national-theatre-pearl-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before Kampala's Uganda National Theatre"> | **Nyero Granite Light Cipher**<br><img src="501-uganda-nyero-granite-light-cipher.png" width="420" alt="The trio sealing an archive prism outside eastern Uganda's Nyero granite rock shelters"> |
+| **Murchison Falls Mist Extraction**<br><img src="502-uganda-murchison-falls-mist-extraction.png" width="420" alt="The trio restoring an environmental beacon above Uganda's Murchison Falls gorge and Victoria Nile"> | **Jinja Nile Bridge Night Relay**<br><img src="503-uganda-jinja-nile-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a river-signal relay beside Jinja's Source of the Nile Bridge"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
