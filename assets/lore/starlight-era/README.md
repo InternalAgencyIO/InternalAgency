@@ -630,6 +630,13 @@ rejected and regenerated.
 | **Casablanca Zellige Boulevard Intercept**<br><img src="532-morocco-casablanca-zellige-boulevard-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald signal prism among Casablanca Art Deco facades and turquoise zellige light arches"> | **Ait Benhaddou Kasbah Light Cipher**<br><img src="533-morocco-ait-benhaddou-kasbah-light-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism beside Ait Benhaddou and the Ounila Valley"> |
 | **Erg Chebbi Dune Prism Extraction**<br><img src="534-morocco-erg-chebbi-dune-prism-extraction.png" width="420" alt="The trio restoring a desert-climate beacon among Erg Chebbi dunes near Merzouga and the High Atlas horizon"> | **Essaouira Atlantic Rampart Night Relay**<br><img src="535-morocco-essaouira-rampart-atlantic-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three glowing keys after their Essaouira rampart and Atlantic coast night relay"> |
 
+## World Series - Africa - Batch 129: Angola
+
+| | |
+|---|---|
+| **Luanda Bay Marginal Intercept**<br><img src="536-angola-luanda-bay-marginal-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism above Luanda Bay Marginal and the Ilha do Cabo curve"> | **Luanda Iron Palace Filigree Cipher**<br><img src="537-angola-luanda-iron-palace-filigree-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism beside Luanda's Iron Palace filigree"> |
+| **Kalandula Falls Mist Prism Extraction**<br><img src="538-angola-kalandula-falls-mist-prism-extraction.png" width="420" alt="The trio restoring a watershed-data beacon above Kalandula Falls and the Lucala River gorge"> | **Lobito Restinga Atlantic Night Relay**<br><img src="539-angola-lobito-restinga-atlantic-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three glowing keys above Lobito's curved Restinga peninsula and Atlantic port"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
