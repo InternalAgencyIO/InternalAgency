@@ -504,6 +504,13 @@ rejected and regenerated.
 | **London Canary Wharf Rain Intercept**<br><img src="460-united-kingdom-london-canary-wharf-rain-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking spectral city-light keys into a molten-gold compass above Canary Wharf"> | **Bath Royal Crescent Arch Cipher**<br><img src="461-united-kingdom-bath-royal-crescent-arch-cipher.png" width="420" alt="The trio braiding colored beams into a sealed cobalt archive prism beside Bath's Royal Crescent"> |
 | **Glencoe Heather Prism Extraction**<br><img src="462-united-kingdom-glencoe-heather-prism-extraction.png" width="420" alt="The trio restoring a cobalt terrain beacon above Glencoe's highland ridges"> | **London Tower Bridge Night Relay**<br><img src="463-united-kingdom-london-tower-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous relay beside London's Tower Bridge and the River Thames"> |
 
+## World Series - Africa - Batch 111: Tanzania
+
+| | |
+|---|---|
+| **Dar es Salaam Tanzanite Bridge Intercept**<br><img src="464-tanzania-dar-es-salaam-tanzanite-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three city-signal prisms into a molten-gold compass beside Dar es Salaam's Tanzanite Bridge"> | **Zanzibar Stone Town Carved-Door Cipher**<br><img src="465-tanzania-zanzibar-stone-town-carved-door-cipher.png" width="420" alt="The trio braiding colored beams into a sealed cobalt archive prism among Stone Town's carved doors and coral-stone lanes"> |
+| **Serengeti Kopje Prism Extraction**<br><img src="466-tanzania-serengeti-kopje-prism-extraction.png" width="420" alt="The trio restoring a cobalt terrain beacon above the Serengeti's granite kopjes and acacia horizon"> | **Zanzibar Nungwi Dhow Night Relay**<br><img src="467-tanzania-zanzibar-nungwi-dhow-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous signal relay beside Nungwi's turquoise coast and a traditional dhow"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
