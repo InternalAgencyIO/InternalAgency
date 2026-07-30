@@ -17,7 +17,7 @@ use switchboard_randomness::{
     ON_DEMAND_MAINNET_PID,
 };
 
-declare_id!("6T8qyz4ZSEK8x72hTK1c8rqvEfUX6zGbUsHDUUjpw6tY");
+declare_id!("62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj");
 
 pub const PROGRAM_ADMIN: Pubkey = pubkey!("7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH");
 pub const COMMUNITY_CUSTODY: Pubkey = pubkey!("5Kg9jnaL4DuuT5Fr5surbexX8NeCiNpp4wKmi3Wp3C4H");
