@@ -581,6 +581,13 @@ rejected and regenerated.
 | **Valencia Arts and Sciences Pearl Intercept**<br><img src="504-spain-valencia-arts-sciences-pearl-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism among Valencia's City of Arts and Sciences and reflecting pools"> | **Segovia Aqueduct Light Cipher**<br><img src="505-spain-segovia-aqueduct-light-cipher.png" width="420" alt="The trio sealing a cobalt archive prism before Segovia's monumental Roman Aqueduct"> |
 | **Teide Volcanic Prism Extraction**<br><img src="506-spain-teide-volcanic-prism-extraction.png" width="420" alt="The trio restoring an environmental beacon among Tenerife's Teide volcanic caldera and lava fields"> | **Barcelona Montjuic Cable Night Relay**<br><img src="507-spain-barcelona-montjuic-cable-night-relay.png" width="420" alt="Radiance kissing Ellie on the cheek as Alia embraces them after their Montjuic cable-car and Barcelona harbor light relay"> |
 
+## World Series - Africa - Batch 122: Algeria
+
+| | |
+|---|---|
+| **Algiers Grande Poste Sapphire Intercept**<br><img src="508-algeria-algiers-grande-poste-sapphire-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before Algiers' white Grande Poste facade"> | **Timgad Trajan Arch Light Cipher**<br><img src="509-algeria-timgad-trajan-arch-light-cipher.png" width="420" alt="The trio sealing a cobalt archive prism beside Timgad's Roman ruins and Arch of Trajan"> |
+| **Tassili n'Ajjer Sandstone Prism Extraction**<br><img src="510-algeria-tassili-najjer-sandstone-prism-extraction.png" width="420" alt="The trio restoring an atmospheric beacon among Tassili n'Ajjer's Sahara sandstone arches and dunes"> | **Oran Mediterranean Waterfront Night Relay**<br><img src="511-algeria-oran-mediterranean-waterfront-night-relay.png" width="420" alt="Ellie kissing Alia on the cheek as Radiance embraces them after their Oran waterfront light relay"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
