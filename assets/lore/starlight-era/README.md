@@ -637,6 +637,13 @@ rejected and regenerated.
 | **Luanda Bay Marginal Intercept**<br><img src="536-angola-luanda-bay-marginal-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism above Luanda Bay Marginal and the Ilha do Cabo curve"> | **Luanda Iron Palace Filigree Cipher**<br><img src="537-angola-luanda-iron-palace-filigree-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism beside Luanda's Iron Palace filigree"> |
 | **Kalandula Falls Mist Prism Extraction**<br><img src="538-angola-kalandula-falls-mist-prism-extraction.png" width="420" alt="The trio restoring a watershed-data beacon above Kalandula Falls and the Lucala River gorge"> | **Lobito Restinga Atlantic Night Relay**<br><img src="539-angola-lobito-restinga-atlantic-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three glowing keys above Lobito's curved Restinga peninsula and Atlantic port"> |
 
+## World Series - Europe - Batch 130: Ukraine
+
+| | |
+|---|---|
+| **Kyiv Dnipro Glass Bridge Intercept**<br><img src="540-ukraine-kyiv-dnipro-glass-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism on Kyiv's glass pedestrian bridge above the Dnipro"> | **Lviv Rynok Square Renaissance Cipher**<br><img src="541-ukraine-lviv-rynok-square-renaissance-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism among Lviv Rynok Square's Renaissance facades"> |
+| **Carpathian Synevyr Lake Prism Extraction**<br><img src="542-ukraine-carpathian-synevyr-lake-prism-extraction.png" width="420" alt="The trio restoring a watershed-data beacon above Synevyr Lake and the Ukrainian Carpathians"> | **Odesa Sea Terminal Black Sea Night Relay**<br><img src="543-ukraine-odesa-sea-terminal-black-sea-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three glowing keys beside Odesa Sea Terminal and the Black Sea waterfront"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
