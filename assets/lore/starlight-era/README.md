@@ -595,6 +595,13 @@ rejected and regenerated.
 | **Baghdad Tower Copper Intercept**<br><img src="512-iraq-baghdad-tower-copper-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before Baghdad Tower and the Tigris riverfront"> | **Erbil Citadel Gate Light Cipher**<br><img src="513-iraq-erbil-citadel-gate-light-cipher.png" width="420" alt="The trio sealing a cobalt archive prism beside Erbil Citadel's main gate and ochre ramparts"> |
 | **Mesopotamian Marshes Reed Prism Extraction**<br><img src="514-iraq-mesopotamian-marshes-reed-prism-extraction.png" width="420" alt="The trio restoring a wetland beacon above the Mesopotamian Marshes near Chibayish"> | **Basra Shatt al-Arab Night Relay**<br><img src="515-iraq-basra-shatt-al-arab-night-relay.png" width="420" alt="Alia kissing Radiance on the cheek as Ellie embraces both after their Basra Shatt al-Arab riverfront relay"> |
 
+## World Series - South America - Batch 124: Argentina
+
+| | |
+|---|---|
+| **Buenos Aires Obelisk Fileteado Intercept**<br><img src="516-argentina-buenos-aires-obelisk-fileteado-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before the Buenos Aires Obelisk and Avenida 9 de Julio"> | **Palacio Barolo Glass Cipher**<br><img src="517-argentina-palacio-barolo-glass-cipher.png" width="420" alt="The trio braiding violet, jade, and gold beams into a sealed archive prism beside Palacio Barolo"> |
+| **Perito Moreno Ice Prism Extraction**<br><img src="518-argentina-perito-moreno-ice-prism-extraction.png" width="420" alt="The trio restoring a glacial data beacon above Perito Moreno Glacier and Lago Argentino"> | **Puerto Madero Tango Night Relay**<br><img src="519-argentina-puerto-madero-tango-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising linked hands after completing a scarlet-and-gold relay beside Puente de la Mujer"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
