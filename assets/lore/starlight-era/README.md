@@ -476,6 +476,13 @@ rejected and regenerated.
 | **Ho Chi Minh City Nguyen Hue Neon Intercept**<br><img src="444-vietnam-ho-chi-minh-city-nguyen-hue-neon-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three city-light keys into a molten-gold compass above Nguyen Hue boulevard"> | **Hoi An Riverside Lacquer Cipher**<br><img src="445-vietnam-hoi-an-riverside-lacquer-cipher.png" width="420" alt="The trio braiding three harmless beams into a sealed cobalt archive prism beside Hoi An's ochre merchant houses"> |
 | **Ha Long Bay Limestone Prism Extraction**<br><img src="446-vietnam-ha-long-bay-limestone-prism-extraction.png" width="420" alt="The trio restoring a turquoise bay-monitoring beacon above Ha Long Bay's limestone karsts"> | **Da Nang Dragon Bridge Night Relay**<br><img src="447-vietnam-da-nang-dragon-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous signal-ribbon relay beside Da Nang's Dragon Bridge at night"> |
 
+## World Series - Asia - Batch 107: Iran
+
+| | |
+|---|---|
+| **Tehran Tabiat Bridge Prism Intercept**<br><img src="448-iran-tehran-tabiat-bridge-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three city-light prisms into a molten-gold compass beside Tehran's Tabiat Bridge"> | **Isfahan Si-o-se-pol Mirror Cipher**<br><img src="449-iran-isfahan-si-o-se-pol-mirror-cipher.png" width="420" alt="The trio braiding three harmless beams into a sealed archive prism beside Isfahan's Si-o-se-pol bridge"> |
+| **Lut Desert Kalut Prism Extraction**<br><img src="450-iran-lut-desert-kalut-prism-extraction.png" width="420" alt="The trio restoring a cobalt desert-climate beacon among the Lut Desert's kalut formations"> | **Ahvaz White Bridge Karun Night Relay**<br><img src="451-iran-ahvaz-white-bridge-karun-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous relay beside Ahvaz's White Bridge and the Karun River"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
