@@ -532,6 +532,13 @@ rejected and regenerated.
 | **Milan Porta Nuova Prism Intercept**<br><img src="476-italy-milan-porta-nuova-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a cobalt city key beneath Milan's Porta Nuova skyline and Bosco Verticale"> | **Florence Palazzo Vecchio Light Cipher**<br><img src="477-italy-florence-palazzo-vecchio-light-cipher.png" width="420" alt="The trio sealing a luminous archive prism beside Florence's Palazzo Vecchio civic tower"> |
 | **Tre Cime Dolomites Prism Extraction**<br><img src="478-italy-tre-cime-dolomites-prism-extraction.png" width="420" alt="The trio restoring a terrain beacon beneath Italy's Tre Cime di Lavaredo"> | **Venice Grand Canal Glass Night Relay**<br><img src="479-italy-venice-grand-canal-glass-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a Murano-glass light relay beneath Venice's Rialto Bridge"> |
 
+## World Series - Africa - Batch 115: Kenya
+
+| | |
+|---|---|
+| **Nairobi KICC Nightlight Intercept**<br><img src="480-kenya-nairobi-kicc-nightlight-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking Nairobi city-light keys beneath the cylindrical KICC tower"> | **Lamu Old Town Coral-Door Cipher**<br><img src="481-kenya-lamu-old-town-coral-door-cipher.png" width="420" alt="The trio braiding a luminous archive cipher among Lamu's coral-stone lanes and carved wooden doors"> |
+| **Hell's Gate Gorge Prism Extraction**<br><img src="482-kenya-hells-gate-gorge-prism-extraction.png" width="420" alt="The trio restoring an atmospheric terrain beacon between Hell's Gate volcanic cliffs"> | **Mombasa Old Port Glass Night Relay**<br><img src="483-kenya-mombasa-old-port-glass-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a dhow-sail light relay above Mombasa Old Port"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
