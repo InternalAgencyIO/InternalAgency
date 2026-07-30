@@ -16,6 +16,7 @@ The work is intentionally visible: source, public documents, visual iterations, 
 | --- | --- |
 | `app/` | Public web experience, including the Genesis Activation Terminal. |
 | `public/images/` | Versioned campaign and lore artwork used by the live site. |
+| `public/evidence/iat-v2/` | CC0 devnet evidence exports, SHA-256 index, and read-only chain-status receipt. |
 | `archive/public-disclosures/source/` | Canonical disclosure sources retained behind designed Dossier redirects. |
 | `docs/` | Plain-language build, release, and operating notes. |
 | `archive/` | Index of preserved iteration and release evidence. |
@@ -26,6 +27,18 @@ The work is intentionally visible: source, public documents, visual iterations, 
 Before public verification materials are published, this project does not request a seed phrase, private key, password, payment, token approval, transfer, or wallet transaction.
 
 The on-site Activation Terminal is intentionally a preparation interface. It does not connect wallets or initiate claims. Any future launch route must be independently checkable against the published mint, authority-revocation evidence, allocation wallets, time-locks, and official channels.
+
+## Public devnet evidence
+
+Every non-secret IAT devnet evidence export held by the launch team as of
+2026-07-30 is published under CC0 in
+[`public/evidence/iat-v2`](public/evidence/iat-v2). The directory includes the
+exact operator-export bytes, a SHA-256 ledger, and a read-only devnet status
+receipt for every recorded transaction signature.
+
+The latest feature snapshot is explicitly partial. It does not mark player
+staking, APY settlement, live randomness, CCC selection, time-gated behavior,
+or independent review complete. Mainnet remains **HOLD**.
 
 ## Local development
 

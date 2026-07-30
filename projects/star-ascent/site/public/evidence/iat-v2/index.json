@@ -1,0 +1,65 @@
+{
+  "schema": "iat-public-evidence-index/v1",
+  "publishedAtUtc": "2026-07-30T12:34:53.112Z",
+  "license": "CC0-1.0",
+  "network": "devnet",
+  "mainnetStatus": "HOLD",
+  "independentReviewRequired": true,
+  "secretMaterialIncluded": false,
+  "repository": "https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/projects/star-ascent/site/public/evidence/iat-v2",
+  "canonicalAtPublication": [
+    "v2-initialization-20260730T074603Z.json",
+    "v2-features-20260730T122300Z.json",
+    "chain-status-20260730T123453Z.json"
+  ],
+  "records": [
+    {
+      "file": "legacy-v1-devnet-ceremony-20260729.json",
+      "bytes": 2535,
+      "sha256": "670951401e68a611a7287365d99ab4206b7e493d54f57b29c4c23445157489d9",
+      "scope": "Historical V1 devnet ceremony",
+      "status": "SUPERSEDED_BY_V2",
+      "transactions": 4
+    },
+    {
+      "file": "v2-initialization-20260730T074603Z.json",
+      "bytes": 6980,
+      "sha256": "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
+      "scope": "V2 devnet deployment and initialization rehearsal",
+      "status": "RECORDED_MAINNET_HOLD",
+      "transactions": 7
+    },
+    {
+      "file": "v2-features-20260730T120809Z.json",
+      "bytes": 2383,
+      "sha256": "09ec499c92c0bb8ab03b227b38502e5fc95bc937864051a384367a849987608c",
+      "scope": "V2 feature rehearsal progress snapshot",
+      "status": "PARTIAL_SUPERSEDED_BY_LATER_SNAPSHOT",
+      "transactions": 1
+    },
+    {
+      "file": "v2-features-20260730T122222Z.json",
+      "bytes": 3936,
+      "sha256": "c503e1f0afdeaa956d5dcf5af77730e6802c442f63e05900d4c570aa81ff0273",
+      "scope": "V2 feature rehearsal progress snapshot",
+      "status": "PARTIAL_SUPERSEDED_BY_LATER_SNAPSHOT",
+      "transactions": 4
+    },
+    {
+      "file": "v2-features-20260730T122300Z.json",
+      "bytes": 3936,
+      "sha256": "b57bf2171d06a72dbd6b171efd0bcfaa6ccf7d2729e323e51f6c9e98cbe95678",
+      "scope": "Latest V2 feature rehearsal progress snapshot",
+      "status": "PARTIAL_PENDING_STAKING_SETTLEMENT_RANDOMNESS_CCC_AND_REVIEW",
+      "transactions": 4
+    },
+    {
+      "file": "chain-status-20260730T123453Z.json",
+      "bytes": 3129,
+      "sha256": "db4b88364337fb3f0db06d38e5bb68b3ca849196549416db6d5b9ea821696839",
+      "scope": "Read-only devnet status receipt for every published transaction signature",
+      "status": "15_OF_15_FINALIZED_NO_REPORTED_ERROR",
+      "transactions": 15
+    }
+  ]
+}

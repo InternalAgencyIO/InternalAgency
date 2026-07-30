@@ -1,0 +1,170 @@
+{
+  "schema": "iat-v2-devnet-rehearsal-evidence/v1",
+  "status": "DEVNET_ACTIVE_PENDING_INDEPENDENT_REVIEW",
+  "network": "devnet",
+  "rpc": "https://api.devnet.solana.com",
+  "sourceCommit": "ba88535036da3f3871b65100fc18b655ccfa1d57",
+  "programId": "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj",
+  "programDataAddress": "6DaESYUqB7th7kkfYAhsqiYfzmdnCFeFeoxDi5WkejTP",
+  "artifactSha256": "8239e164b4ba93d19448f9c7e102eb20170c627de95e53352e3f5b1cd4e6b756",
+  "programBytes": 597336,
+  "deploymentSlot": "479920599",
+  "upgradeAuthority": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+  "expectedHardwareSigner": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+  "deterministicMintSeed": "iat-v2-devnet-ba885350-v1",
+  "mint": "BTuhzdrH2vnMELbHZWPJ1FoFRoBhkMDAyCSCRRLew4GR",
+  "metadata": "BoUAeF7bqzq9K3Rf6JRV8AFgvtjDV21iaf2txu4E7ZJW",
+  "config": "3W8SW8HueL627PrL2AacKeGmpfbaXjHs3Ar6jXLNP4Eq",
+  "vaultAuthority": "7UzavMw6xd9keTvdHqTX5YT4VCnwQe9vmA3t94mskWVJ",
+  "stakeVault": "EmrHuQJ4Dz4F3cp6vH7zibfw4jfniqDixRY75ntfZStM",
+  "coreReward": "AVAW7FiLRqPQetktWLMemF5zpL6m8Tki4U37uR1ctT11",
+  "allocations": {
+    "community": {
+      "owner": "5Kg9jnaL4DuuT5Fr5surbexX8NeCiNpp4wKmi3Wp3C4H",
+      "tokenAccount": "4syuknFcqLS94Bpr3fAv9yScnYNP5QNSicjZ42LQqaCA",
+      "amount": "500000000000",
+      "custody": "HARDWARE_WALLET_ATA"
+    },
+    "treasury": {
+      "owner": "7UzavMw6xd9keTvdHqTX5YT4VCnwQe9vmA3t94mskWVJ",
+      "tokenAccount": "HMEbyJFKkTG4tsGgg5HSFFmPoVcj6Fx2DYEm1UBpMbEz",
+      "amount": "200000000000",
+      "custody": "PROGRAM_VAULT_PDA"
+    },
+    "ecosystem": {
+      "owner": "7UzavMw6xd9keTvdHqTX5YT4VCnwQe9vmA3t94mskWVJ",
+      "tokenAccount": "FbaZGDirSMur2jba8kuvyc7VABQfbDPhb5Tma8Ksw4gY",
+      "amount": "150000000000",
+      "custody": "PROGRAM_VAULT_PDA"
+    },
+    "coreTeam": {
+      "owner": "7UzavMw6xd9keTvdHqTX5YT4VCnwQe9vmA3t94mskWVJ",
+      "tokenAccount": "HoioaeDoYcqQmJT7G1d1zoZStuP77vQSHjwMHXhdaCUv",
+      "amount": "100000000000",
+      "custody": "PROGRAM_VAULT_PDA"
+    },
+    "liquidity": {
+      "owner": "7UzavMw6xd9keTvdHqTX5YT4VCnwQe9vmA3t94mskWVJ",
+      "tokenAccount": "7USVQ5GKZQ9GKrHBuqHdHony3CJWs2ZUdPsVoYB1Rybm",
+      "amount": "50000000000",
+      "custody": "PROGRAM_VAULT_PDA"
+    }
+  },
+  "onChainSupply": "1000000000000",
+  "onChainConfig": {
+    "admin": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+    "mint": "BTuhzdrH2vnMELbHZWPJ1FoFRoBhkMDAyCSCRRLew4GR",
+    "tokenProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "randomnessProgram": "Aio4gaXjXzJNVLtzwtNVmSqGKpANtXhybbkhtAC94ji2",
+    "stakeTokenAccount": "EmrHuQJ4Dz4F3cp6vH7zibfw4jfniqDixRY75ntfZStM",
+    "agencyRegistryHash": {
+      "type": "Buffer",
+      "data": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "genesisTimestamp": "1785397425",
+    "expectedSupply": "1000000000000",
+    "stakedPrincipal": "0",
+    "agencyCount": 0,
+    "rehearsalMode": true,
+    "active": true,
+    "laneMask": 30,
+    "stakeVaultInitialized": true,
+    "bump": 255,
+    "vaultAuthorityBump": 255
+  },
+  "transactions": [
+    {
+      "stage": "CREATE_MINT_AND_IMMUTABLE_METADATA",
+      "stageIndex": 0,
+      "signature": "5RtHWcQRVeY3VtuXRrEWoDHc7LSzPKXmcEnhjYiXk8NswsdMZmcy8h14eZQJzXSKcThWpgLw5kZhzKKjFoHzV1MN",
+      "messageSha256": "3d74a478e1b1f388631b3c517cea4bf4d1165463f278a785851b2823d01c1847",
+      "explorerUrl": "https://explorer.solana.com/tx/5RtHWcQRVeY3VtuXRrEWoDHc7LSzPKXmcEnhjYiXk8NswsdMZmcy8h14eZQJzXSKcThWpgLw5kZhzKKjFoHzV1MN?cluster=devnet",
+      "confirmedAtUtc": "2026-07-30T07:43:42.872Z"
+    },
+    {
+      "stage": "INITIALIZE_V2_CONFIG",
+      "stageIndex": 1,
+      "signature": "3HRUA8zhMaP82Phy3QbFW1p9tiUk7GBrLVQVBJnwMGVHDgrfoADe4SJdvAm7AE9i1RTdB2Kf2n7czjgWeG4cxmqP",
+      "messageSha256": "360d397deee0e9811124a369f336344c11c372e8ec6ab1c10078daf77af4cea9",
+      "explorerUrl": "https://explorer.solana.com/tx/3HRUA8zhMaP82Phy3QbFW1p9tiUk7GBrLVQVBJnwMGVHDgrfoADe4SJdvAm7AE9i1RTdB2Kf2n7czjgWeG4cxmqP?cluster=devnet",
+      "confirmedAtUtc": "2026-07-30T07:44:12.113Z"
+    },
+    {
+      "stage": "INITIALIZE_FOUR_LANES_AND_STAKE_VAULT",
+      "stageIndex": 2,
+      "signature": "2fVt6MmLodUosbe5A4JNd9hHXweWR2os59Fn8ScSvwArDr9KWv7NvzTucgSUaANKbP3qtaTGRVCoSwJaXBZ2wkXv",
+      "messageSha256": "f14ada664dd4c579e217306ee60ccb3ae737868a83b086feeb7c713b7baef42d",
+      "explorerUrl": "https://explorer.solana.com/tx/2fVt6MmLodUosbe5A4JNd9hHXweWR2os59Fn8ScSvwArDr9KWv7NvzTucgSUaANKbP3qtaTGRVCoSwJaXBZ2wkXv?cluster=devnet",
+      "confirmedAtUtc": "2026-07-30T07:44:44.859Z"
+    },
+    {
+      "stage": "MINT_EXACT_REHEARSAL_ALLOCATIONS",
+      "stageIndex": 3,
+      "signature": "3Bhj49y9eswbMkkyY9GwayrK1hg8xzH4xSP9CBa4z3SRHKoAH2sHGWoguBV7741zfkq8ou45t1iJkud3fG5R5rfo",
+      "messageSha256": "64c77328ff816888030f6f8b4c62a2e88250bd5327fe25ccfaaeb047c0aa3413",
+      "explorerUrl": "https://explorer.solana.com/tx/3Bhj49y9eswbMkkyY9GwayrK1hg8xzH4xSP9CBa4z3SRHKoAH2sHGWoguBV7741zfkq8ou45t1iJkud3fG5R5rfo?cluster=devnet",
+      "confirmedAtUtc": "2026-07-30T07:45:08.792Z"
+    },
+    {
+      "stage": "REVOKE_MINT_AUTHORITY",
+      "stageIndex": 4,
+      "signature": "TPHebN3rZVDVGjemwNKRHW28YB1nTSAt6bjkLMwA7seTze3MiMU8tu4YZtM1qgs185sib64nqpeDjTidyAwpCPc",
+      "messageSha256": "1938bb9f84f2d2bbe14a519baa4e9080a3a9196aaf2e8c8fe37fc89d46594b68",
+      "explorerUrl": "https://explorer.solana.com/tx/TPHebN3rZVDVGjemwNKRHW28YB1nTSAt6bjkLMwA7seTze3MiMU8tu4YZtM1qgs185sib64nqpeDjTidyAwpCPc?cluster=devnet",
+      "confirmedAtUtc": "2026-07-30T07:45:21.910Z"
+    },
+    {
+      "stage": "REVOKE_FREEZE_AUTHORITY",
+      "stageIndex": 5,
+      "signature": "3cEAgrZwcYewmhh4KAQSn9sigS46fp6HozTT2nnxEvRTmQgubRHHxrHJ5oV8GqDvr37k1KXhPKNMb7CcKiBTdZpW",
+      "messageSha256": "53fbf1d71150e41bf078c2ef8ea27d093d4915acd8928bf478c02176874167c9",
+      "explorerUrl": "https://explorer.solana.com/tx/3cEAgrZwcYewmhh4KAQSn9sigS46fp6HozTT2nnxEvRTmQgubRHHxrHJ5oV8GqDvr37k1KXhPKNMb7CcKiBTdZpW?cluster=devnet",
+      "confirmedAtUtc": "2026-07-30T07:45:42.841Z"
+    },
+    {
+      "stage": "ACTIVATE_V2",
+      "stageIndex": 6,
+      "signature": "5JHbQTyBmZjrw8svXwBHSpM5YULkvK5hsijPwgBEQuSksLZQ2KCJ9bG8pKgm8H7FdBENoVDCPDfhCRJKgBSh5Lf5",
+      "messageSha256": "28f013745685bed99e583eb590fb779ee8999a346ec064659f40b33e6fa65f5f",
+      "explorerUrl": "https://explorer.solana.com/tx/5JHbQTyBmZjrw8svXwBHSpM5YULkvK5hsijPwgBEQuSksLZQ2KCJ9bG8pKgm8H7FdBENoVDCPDfhCRJKgBSh5Lf5?cluster=devnet",
+      "confirmedAtUtc": "2026-07-30T07:46:00.968Z"
+    }
+  ],
+  "exportedAtUtc": "2026-07-30T07:46:03.794Z",
+  "mainnetStatus": "HOLD",
+  "independentReviewRequired": true,
+  "secretMaterialIncluded": false
+}
