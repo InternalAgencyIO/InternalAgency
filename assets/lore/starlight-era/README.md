@@ -525,6 +525,13 @@ rejected and regenerated.
 | **Johannesburg Ponte City Prism Intercept**<br><img src="472-south-africa-johannesburg-ponte-city-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a cobalt city key beneath Johannesburg's Ponte City tower"> | **Cape Town Zeitz MOCAA Silo Cipher**<br><img src="473-south-africa-cape-town-zeitz-mocaa-silo-cipher.png" width="420" alt="The trio sealing a luminous archive prism inside Cape Town's transformed grain-silo architecture"> |
 | **Blyde River Canyon Prism Extraction**<br><img src="474-south-africa-blyde-river-canyon-prism-extraction.png" width="420" alt="The trio extracting a terrain beacon above Blyde River Canyon and the Three Rondavels"> | **Durban Golden Mile Night Relay**<br><img src="475-south-africa-durban-golden-mile-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a radiant relay along Durban's Golden Mile beneath the stadium arch"> |
 
+## World Series - Europe - Batch 114: Italy
+
+| | |
+|---|---|
+| **Milan Porta Nuova Prism Intercept**<br><img src="476-italy-milan-porta-nuova-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a cobalt city key beneath Milan's Porta Nuova skyline and Bosco Verticale"> | **Florence Palazzo Vecchio Light Cipher**<br><img src="477-italy-florence-palazzo-vecchio-light-cipher.png" width="420" alt="The trio sealing a luminous archive prism beside Florence's Palazzo Vecchio civic tower"> |
+| **Tre Cime Dolomites Prism Extraction**<br><img src="478-italy-tre-cime-dolomites-prism-extraction.png" width="420" alt="The trio restoring a terrain beacon beneath Italy's Tre Cime di Lavaredo"> | **Venice Grand Canal Glass Night Relay**<br><img src="479-italy-venice-grand-canal-glass-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a Murano-glass light relay beneath Venice's Rialto Bridge"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
