@@ -275,8 +275,18 @@ if (!cargoSource.includes('anchor-lang = { version = "=1.0.2", features = ["init
   fail("Anchor and Solana program dependencies must remain exactly pinned");
 }
 for (const [crate, version] of [
+  ["anchor-attribute-access-control", "1.0.2"],
+  ["anchor-attribute-account", "1.0.2"],
+  ["anchor-attribute-constant", "1.0.2"],
+  ["anchor-attribute-error", "1.0.2"],
+  ["anchor-attribute-event", "1.0.2"],
+  ["anchor-attribute-program", "1.0.2"],
+  ["anchor-derive-accounts", "1.0.2"],
+  ["anchor-derive-serde", "1.0.2"],
+  ["anchor-derive-space", "1.0.2"],
   ["anchor-lang", "1.0.2"],
   ["anchor-spl", "1.0.2"],
+  ["anchor-syn", "1.0.2"],
   ["solana-instructions-sysvar", "3.0.1"],
   ["solana-sha256-hasher", "3.1.0"],
 ]) {

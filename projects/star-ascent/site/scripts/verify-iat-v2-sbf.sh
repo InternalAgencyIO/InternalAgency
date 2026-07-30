@@ -40,7 +40,15 @@ fi
 
 cargo fmt --all -- --check
 cargo test --workspace --all-targets --locked
-anchor build --verifiable --ignore-keys
+sbf_log="target/iat-v2-sbf-build.log"
+anchor build --verifiable --ignore-keys 2>&1 | tee "$sbf_log"
+
+if grep -Eqi \
+  'Stack offset of|stack frame of [0-9]+ bytes exceeds|max offset exceeded|overwrites values|undefined behavior' \
+  "$sbf_log"; then
+  echo "FAIL: SBF compiler reported an unsafe stack diagnostic." >&2
+  exit 1
+fi
 
 if [[ -e target/deploy/iat_v2-keypair.json ]]; then
   echo "FAIL: build-only proof produced forbidden program-keypair material" >&2

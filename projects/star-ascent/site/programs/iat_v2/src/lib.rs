@@ -1224,33 +1224,33 @@ pub struct Activate<'info> {
     #[account(mut, address = config.admin)]
     pub admin: Signer<'info>,
     #[account(mut, has_one = mint)]
-    pub config: Account<'info, Config>,
-    pub mint: Account<'info, Mint>,
+    pub config: Box<Account<'info, Config>>,
+    pub mint: Box<Account<'info, Mint>>,
     /// CHECK: validated by PDA seeds and used only as the expected token authority.
     #[account(
         seeds = [b"vault-authority", config.key().as_ref()],
         bump = config.vault_authority_bump
     )]
     pub vault_authority: UncheckedAccount<'info>,
-    pub community_tokens: Account<'info, TokenAccount>,
+    pub community_tokens: Box<Account<'info, TokenAccount>>,
     #[account(address = config.stake_token_account)]
-    pub stake_tokens: Account<'info, TokenAccount>,
+    pub stake_tokens: Box<Account<'info, TokenAccount>>,
     #[account(mut, seeds = [b"lane", config.key().as_ref(), &[TREASURY]], bump = treasury.bump)]
-    pub treasury: Account<'info, LaneVault>,
+    pub treasury: Box<Account<'info, LaneVault>>,
     #[account(address = treasury.token_account)]
-    pub treasury_tokens: Account<'info, TokenAccount>,
+    pub treasury_tokens: Box<Account<'info, TokenAccount>>,
     #[account(mut, seeds = [b"lane", config.key().as_ref(), &[ECOSYSTEM]], bump = ecosystem.bump)]
-    pub ecosystem: Account<'info, LaneVault>,
+    pub ecosystem: Box<Account<'info, LaneVault>>,
     #[account(address = ecosystem.token_account)]
-    pub ecosystem_tokens: Account<'info, TokenAccount>,
+    pub ecosystem_tokens: Box<Account<'info, TokenAccount>>,
     #[account(seeds = [b"lane", config.key().as_ref(), &[CORE_TEAM]], bump = core_team.bump)]
-    pub core_team: Account<'info, LaneVault>,
+    pub core_team: Box<Account<'info, LaneVault>>,
     #[account(address = core_team.token_account)]
-    pub core_team_tokens: Account<'info, TokenAccount>,
+    pub core_team_tokens: Box<Account<'info, TokenAccount>>,
     #[account(mut, seeds = [b"lane", config.key().as_ref(), &[LIQUIDITY]], bump = liquidity.bump)]
-    pub liquidity: Account<'info, LaneVault>,
+    pub liquidity: Box<Account<'info, LaneVault>>,
     #[account(address = liquidity.token_account)]
-    pub liquidity_tokens: Account<'info, TokenAccount>,
+    pub liquidity_tokens: Box<Account<'info, TokenAccount>>,
     #[account(
         init,
         payer = admin,
@@ -1258,7 +1258,7 @@ pub struct Activate<'info> {
         seeds = [b"core-reward", config.key().as_ref()],
         bump
     )]
-    pub core_reward: Account<'info, CoreReward>,
+    pub core_reward: Box<Account<'info, CoreReward>>,
     pub system_program: Program<'info, System>,
 }
 
@@ -1313,36 +1313,36 @@ pub struct OpenPosition<'info> {
     #[account(mut)]
     pub owner: Signer<'info>,
     #[account(mut, has_one = mint, has_one = token_program)]
-    pub config: Account<'info, Config>,
+    pub config: Box<Account<'info, Config>>,
     #[account(
         has_one = config,
         seeds = [b"eligibility", config.key().as_ref(), owner.key().as_ref()],
         bump = eligibility.bump
     )]
-    pub eligibility: Account<'info, Eligibility>,
-    pub mint: Account<'info, Mint>,
+    pub eligibility: Box<Account<'info, Eligibility>>,
+    pub mint: Box<Account<'info, Mint>>,
     #[account(mut)]
-    pub owner_tokens: Account<'info, TokenAccount>,
+    pub owner_tokens: Box<Account<'info, TokenAccount>>,
     #[account(mut, address = config.stake_token_account)]
-    pub stake_tokens: Account<'info, TokenAccount>,
+    pub stake_tokens: Box<Account<'info, TokenAccount>>,
     #[account(
         mut,
         seeds = [b"lane", config.key().as_ref(), &[TREASURY]],
         bump = treasury.bump
     )]
-    pub treasury: Account<'info, LaneVault>,
+    pub treasury: Box<Account<'info, LaneVault>>,
     #[account(
         mut,
         seeds = [b"lane", config.key().as_ref(), &[ECOSYSTEM]],
         bump = ecosystem.bump
     )]
-    pub ecosystem: Account<'info, LaneVault>,
+    pub ecosystem: Box<Account<'info, LaneVault>>,
     #[account(
         mut,
         seeds = [b"lane", config.key().as_ref(), &[LIQUIDITY]],
         bump = liquidity.bump
     )]
-    pub liquidity: Account<'info, LaneVault>,
+    pub liquidity: Box<Account<'info, LaneVault>>,
     #[account(
         init,
         payer = owner,
@@ -1355,7 +1355,7 @@ pub struct OpenPosition<'info> {
         ],
         bump
     )]
-    pub position: Account<'info, Position>,
+    pub position: Box<Account<'info, Position>>,
     pub token_program: Program<'info, Token>,
     pub system_program: Program<'info, System>,
 }
@@ -1364,11 +1364,11 @@ pub struct OpenPosition<'info> {
 pub struct SettlePositionWeek<'info> {
     pub caller: Signer<'info>,
     #[account(has_one = mint, has_one = token_program)]
-    pub config: Account<'info, Config>,
+    pub config: Box<Account<'info, Config>>,
     #[account(mut, has_one = config)]
-    pub position: Account<'info, Position>,
+    pub position: Box<Account<'info, Position>>,
     pub round: Option<Account<'info, Round>>,
-    pub mint: Account<'info, Mint>,
+    pub mint: Box<Account<'info, Mint>>,
     /// CHECK: canonical signer PDA for all program token vaults.
     #[account(
         seeds = [b"vault-authority", config.key().as_ref()],
@@ -1380,27 +1380,27 @@ pub struct SettlePositionWeek<'info> {
         seeds = [b"lane", config.key().as_ref(), &[TREASURY]],
         bump = treasury.bump
     )]
-    pub treasury: Account<'info, LaneVault>,
+    pub treasury: Box<Account<'info, LaneVault>>,
     #[account(mut, address = treasury.token_account)]
-    pub treasury_tokens: Account<'info, TokenAccount>,
+    pub treasury_tokens: Box<Account<'info, TokenAccount>>,
     #[account(
         mut,
         seeds = [b"lane", config.key().as_ref(), &[ECOSYSTEM]],
         bump = ecosystem.bump
     )]
-    pub ecosystem: Account<'info, LaneVault>,
+    pub ecosystem: Box<Account<'info, LaneVault>>,
     #[account(mut, address = ecosystem.token_account)]
-    pub ecosystem_tokens: Account<'info, TokenAccount>,
+    pub ecosystem_tokens: Box<Account<'info, TokenAccount>>,
     #[account(
         mut,
         seeds = [b"lane", config.key().as_ref(), &[LIQUIDITY]],
         bump = liquidity.bump
     )]
-    pub liquidity: Account<'info, LaneVault>,
+    pub liquidity: Box<Account<'info, LaneVault>>,
     #[account(mut, address = liquidity.token_account)]
-    pub liquidity_tokens: Account<'info, TokenAccount>,
+    pub liquidity_tokens: Box<Account<'info, TokenAccount>>,
     #[account(mut)]
-    pub destination_tokens: Account<'info, TokenAccount>,
+    pub destination_tokens: Box<Account<'info, TokenAccount>>,
     pub token_program: Program<'info, Token>,
 }
 
@@ -1408,8 +1408,8 @@ pub struct SettlePositionWeek<'info> {
 pub struct SettleCoreWeek<'info> {
     pub caller: Signer<'info>,
     #[account(has_one = mint, has_one = token_program)]
-    pub config: Account<'info, Config>,
-    pub mint: Account<'info, Mint>,
+    pub config: Box<Account<'info, Config>>,
+    pub mint: Box<Account<'info, Mint>>,
     /// CHECK: canonical signer PDA for all program token vaults.
     #[account(
         seeds = [b"vault-authority", config.key().as_ref()],
@@ -1421,33 +1421,33 @@ pub struct SettleCoreWeek<'info> {
         seeds = [b"core-reward", config.key().as_ref()],
         bump = core_reward.bump
     )]
-    pub core_reward: Account<'info, CoreReward>,
+    pub core_reward: Box<Account<'info, CoreReward>>,
     #[account(
         mut,
         seeds = [b"lane", config.key().as_ref(), &[TREASURY]],
         bump = treasury.bump
     )]
-    pub treasury: Account<'info, LaneVault>,
+    pub treasury: Box<Account<'info, LaneVault>>,
     #[account(mut, address = treasury.token_account)]
-    pub treasury_tokens: Account<'info, TokenAccount>,
+    pub treasury_tokens: Box<Account<'info, TokenAccount>>,
     #[account(
         mut,
         seeds = [b"lane", config.key().as_ref(), &[ECOSYSTEM]],
         bump = ecosystem.bump
     )]
-    pub ecosystem: Account<'info, LaneVault>,
+    pub ecosystem: Box<Account<'info, LaneVault>>,
     #[account(mut, address = ecosystem.token_account)]
-    pub ecosystem_tokens: Account<'info, TokenAccount>,
+    pub ecosystem_tokens: Box<Account<'info, TokenAccount>>,
     #[account(
         mut,
         seeds = [b"lane", config.key().as_ref(), &[LIQUIDITY]],
         bump = liquidity.bump
     )]
-    pub liquidity: Account<'info, LaneVault>,
+    pub liquidity: Box<Account<'info, LaneVault>>,
     #[account(mut, address = liquidity.token_account)]
-    pub liquidity_tokens: Account<'info, TokenAccount>,
+    pub liquidity_tokens: Box<Account<'info, TokenAccount>>,
     #[account(mut)]
-    pub destination_tokens: Account<'info, TokenAccount>,
+    pub destination_tokens: Box<Account<'info, TokenAccount>>,
     pub token_program: Program<'info, Token>,
 }
 
