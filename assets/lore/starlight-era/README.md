@@ -490,6 +490,13 @@ rejected and regenerated.
 | **Berlin Potsdamer Platz Prism Intercept**<br><img src="452-germany-berlin-potsdamer-platz-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three spectral keys into a molten-gold compass beside Potsdamer Platz"> | **Hamburg Speicherstadt Brick-Light Cipher**<br><img src="453-germany-hamburg-speicherstadt-brick-light-cipher.png" width="420" alt="The trio braiding three colored beams into a sealed cobalt archive prism beside Hamburg's Speicherstadt canals"> |
 | **Saxon Switzerland Bastei Prism Extraction**<br><img src="454-germany-saxon-switzerland-bastei-prism-extraction.png" width="420" alt="The trio restoring a cobalt terrain beacon above Saxon Switzerland's sandstone spires"> | **Cologne Hohenzollern Bridge Rhine Night Relay**<br><img src="455-germany-cologne-hohenzollern-bridge-rhine-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous relay beside Cologne's Hohenzollern Bridge and the Rhine"> |
 
+## World Series - Asia - Batch 109: Thailand
+
+| | |
+|---|---|
+| **Bangkok Mahanakhon Prism Intercept**<br><img src="456-thailand-bangkok-mahanakhon-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three city-light keys into a molten-gold compass above Bangkok's Mahanakhon skyline"> | **Ayutthaya Brick-Light Cipher**<br><img src="457-thailand-ayutthaya-brick-light-cipher.png" width="420" alt="The trio braiding colored beams into a sealed cobalt archive prism beside Ayutthaya's red-brick towers"> |
+| **Phang Nga Bay Prism Extraction**<br><img src="458-thailand-phang-nga-bay-prism-extraction.png" width="420" alt="The trio restoring a cobalt marine beacon among Phang Nga Bay's limestone karsts"> | **Bangkok Rama VIII Bridge Night Relay**<br><img src="459-thailand-bangkok-rama-viii-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous relay beside Bangkok's Rama VIII Bridge and the Chao Phraya River"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
