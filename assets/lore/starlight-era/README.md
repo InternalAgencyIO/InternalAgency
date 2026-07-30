@@ -539,6 +539,13 @@ rejected and regenerated.
 | **Nairobi KICC Nightlight Intercept**<br><img src="480-kenya-nairobi-kicc-nightlight-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking Nairobi city-light keys beneath the cylindrical KICC tower"> | **Lamu Old Town Coral-Door Cipher**<br><img src="481-kenya-lamu-old-town-coral-door-cipher.png" width="420" alt="The trio braiding a luminous archive cipher among Lamu's coral-stone lanes and carved wooden doors"> |
 | **Hell's Gate Gorge Prism Extraction**<br><img src="482-kenya-hells-gate-gorge-prism-extraction.png" width="420" alt="The trio restoring an atmospheric terrain beacon between Hell's Gate volcanic cliffs"> | **Mombasa Old Port Glass Night Relay**<br><img src="483-kenya-mombasa-old-port-glass-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a dhow-sail light relay above Mombasa Old Port"> |
 
+## World Series - Asia - Batch 116: Myanmar
+
+| | |
+|---|---|
+| **Yangon Strand Road Lacquer Intercept**<br><img src="484-myanmar-yangon-strand-road-lacquer-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking lacquer-red Yangon city-light keys into a molten-gold compass beside Strand Road"> | **Yangon Secretariat Acheik Cipher**<br><img src="485-myanmar-yangon-secretariat-acheik-cipher.png" width="420" alt="The trio braiding violet, jade, and gold beams into a sealed archive prism inside the Yangon Secretariat's red-brick civic arcades"> |
+| **Inle Lake Reed Prism Extraction**<br><img src="486-myanmar-inle-lake-reed-prism-extraction.png" width="420" alt="The trio restoring a water-quality beacon above Inle Lake reed channels and the Shan hills"> | **Goteik Viaduct Rail Night Relay**<br><img src="487-myanmar-goteik-viaduct-rail-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous trestle relay beside Myanmar's Goteik Viaduct"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
