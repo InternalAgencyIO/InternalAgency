@@ -546,6 +546,13 @@ rejected and regenerated.
 | **Yangon Strand Road Lacquer Intercept**<br><img src="484-myanmar-yangon-strand-road-lacquer-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking lacquer-red Yangon city-light keys into a molten-gold compass beside Strand Road"> | **Yangon Secretariat Acheik Cipher**<br><img src="485-myanmar-yangon-secretariat-acheik-cipher.png" width="420" alt="The trio braiding violet, jade, and gold beams into a sealed archive prism inside the Yangon Secretariat's red-brick civic arcades"> |
 | **Inle Lake Reed Prism Extraction**<br><img src="486-myanmar-inle-lake-reed-prism-extraction.png" width="420" alt="The trio restoring a water-quality beacon above Inle Lake reed channels and the Shan hills"> | **Goteik Viaduct Rail Night Relay**<br><img src="487-myanmar-goteik-viaduct-rail-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous trestle relay beside Myanmar's Goteik Viaduct"> |
 
+## World Series - South America - Batch 117: Colombia
+
+| | |
+|---|---|
+| **Bogotá Virgilio Barco Prism Intercept**<br><img src="488-colombia-bogota-virgilio-barco-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism beside Bogotá's circular Virgilio Barco Library architecture"> | **Cartagena Clock Gate Color Cipher**<br><img src="489-colombia-cartagena-clock-gate-color-cipher.png" width="420" alt="The trio sealing a cobalt archive prism beneath Cartagena's Clock Gate and colorful secular balcony streets"> |
+| **Caño Cristales Prism Extraction**<br><img src="490-colombia-cano-cristales-prism-extraction.png" width="420" alt="The trio restoring a river beacon above the rainbow waters and rock channels of Caño Cristales"> | **Medellín Metrocable Night Relay**<br><img src="491-colombia-medellin-metrocable-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a turquoise-and-gold relay beside Medellín's Metrocable and the illuminated Aburrá Valley"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
