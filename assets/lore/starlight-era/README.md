@@ -448,6 +448,13 @@ rejected and regenerated.
 | **Tokyo Shibuya Neon-Key Intercept**<br><img src="428-japan-tokyo-shibuya-neon-key-intercept.png" width="420" alt="Radiance, Ellie, and Alia completing a three-way neon-key handoff above rain-lit Shibuya Crossing"> | **Himeji Castle Folded-Light Cipher**<br><img src="429-japan-himeji-castle-folded-light-cipher.png" width="420" alt="The trio braiding three folded-light beams into a sealed cobalt archive prism before Himeji Castle"> |
 | **Mount Aso Caldera Prism Extraction**<br><img src="430-japan-mount-aso-caldera-prism-extraction.png" width="420" alt="The trio restoring a cobalt geothermal beacon above Mount Aso's green caldera"> | **Yokohama Harbor Prism Night Relay**<br><img src="431-japan-yokohama-harbor-prism-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay beside Yokohama's Minato Mirai skyline"> |
 
+## World Series - Africa - Batch 103: Egypt
+
+| | |
+|---|---|
+| **Cairo Tower Nile Light Intercept**<br><img src="432-egypt-cairo-tower-nile-light-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three lapis light keys into a molten-gold compass above the Nile and Cairo Tower"> | **Alexandria Qaitbay Citadel Mirror Cipher**<br><img src="433-egypt-alexandria-qaitbay-citadel-mirror-cipher.png" width="420" alt="The trio braiding three harmless beams into a sealed cobalt archive prism beside the Citadel of Qaitbay"> |
+| **White Desert Chalk Prism Extraction**<br><img src="434-egypt-white-desert-chalk-prism-extraction.png" width="420" alt="The trio restoring a cobalt desert climate beacon among the White Desert's chalk formations"> | **Sharm El Sheikh Red Sea Night Relay**<br><img src="435-egypt-sharm-el-sheikh-red-sea-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay beside the Red Sea and Sinai mountains"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
