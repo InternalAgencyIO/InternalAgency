@@ -497,6 +497,13 @@ rejected and regenerated.
 | **Bangkok Mahanakhon Prism Intercept**<br><img src="456-thailand-bangkok-mahanakhon-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three city-light keys into a molten-gold compass above Bangkok's Mahanakhon skyline"> | **Ayutthaya Brick-Light Cipher**<br><img src="457-thailand-ayutthaya-brick-light-cipher.png" width="420" alt="The trio braiding colored beams into a sealed cobalt archive prism beside Ayutthaya's red-brick towers"> |
 | **Phang Nga Bay Prism Extraction**<br><img src="458-thailand-phang-nga-bay-prism-extraction.png" width="420" alt="The trio restoring a cobalt marine beacon among Phang Nga Bay's limestone karsts"> | **Bangkok Rama VIII Bridge Night Relay**<br><img src="459-thailand-bangkok-rama-viii-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous relay beside Bangkok's Rama VIII Bridge and the Chao Phraya River"> |
 
+## World Series - Europe - Batch 110: United Kingdom
+
+| | |
+|---|---|
+| **London Canary Wharf Rain Intercept**<br><img src="460-united-kingdom-london-canary-wharf-rain-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking spectral city-light keys into a molten-gold compass above Canary Wharf"> | **Bath Royal Crescent Arch Cipher**<br><img src="461-united-kingdom-bath-royal-crescent-arch-cipher.png" width="420" alt="The trio braiding colored beams into a sealed cobalt archive prism beside Bath's Royal Crescent"> |
+| **Glencoe Heather Prism Extraction**<br><img src="462-united-kingdom-glencoe-heather-prism-extraction.png" width="420" alt="The trio restoring a cobalt terrain beacon above Glencoe's highland ridges"> | **London Tower Bridge Night Relay**<br><img src="463-united-kingdom-london-tower-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous relay beside London's Tower Bridge and the River Thames"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
