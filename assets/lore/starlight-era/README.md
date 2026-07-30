@@ -441,6 +441,13 @@ rejected and regenerated.
 | **Mexico City Soumaya Solar Intercept**<br><img src="424-mexico-mexico-city-soumaya-solar-intercept.png" width="420" alt="Radiance, Ellie, and Alia completing a solar-key handoff before Mexico City's silver Museo Soumaya"> | **Guanajuato Color Alley Mirror Cipher**<br><img src="425-mexico-guanajuato-color-alley-mirror-cipher.png" width="420" alt="The trio braiding three colored beams into a sealed cobalt archive cube in Guanajuato's hillside alleys"> |
 | **Copper Canyon Prism Extraction**<br><img src="426-mexico-copper-canyon-prism-extraction.png" width="420" alt="The trio restoring a cobalt watershed beacon above the layered ravines of Copper Canyon"> | **Cabo San Lucas Arch Night Relay**<br><img src="427-mexico-cabo-san-lucas-arch-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay before El Arco at night"> |
 
+## World Series - Asia - Batch 102: Japan
+
+| | |
+|---|---|
+| **Tokyo Shibuya Neon-Key Intercept**<br><img src="428-japan-tokyo-shibuya-neon-key-intercept.png" width="420" alt="Radiance, Ellie, and Alia completing a three-way neon-key handoff above rain-lit Shibuya Crossing"> | **Himeji Castle Folded-Light Cipher**<br><img src="429-japan-himeji-castle-folded-light-cipher.png" width="420" alt="The trio braiding three folded-light beams into a sealed cobalt archive prism before Himeji Castle"> |
+| **Mount Aso Caldera Prism Extraction**<br><img src="430-japan-mount-aso-caldera-prism-extraction.png" width="420" alt="The trio restoring a cobalt geothermal beacon above Mount Aso's green caldera"> | **Yokohama Harbor Prism Night Relay**<br><img src="431-japan-yokohama-harbor-prism-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay beside Yokohama's Minato Mirai skyline"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
