@@ -553,6 +553,13 @@ rejected and regenerated.
 | **Bogotá Virgilio Barco Prism Intercept**<br><img src="488-colombia-bogota-virgilio-barco-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism beside Bogotá's circular Virgilio Barco Library architecture"> | **Cartagena Clock Gate Color Cipher**<br><img src="489-colombia-cartagena-clock-gate-color-cipher.png" width="420" alt="The trio sealing a cobalt archive prism beneath Cartagena's Clock Gate and colorful secular balcony streets"> |
 | **Caño Cristales Prism Extraction**<br><img src="490-colombia-cano-cristales-prism-extraction.png" width="420" alt="The trio restoring a river beacon above the rainbow waters and rock channels of Caño Cristales"> | **Medellín Metrocable Night Relay**<br><img src="491-colombia-medellin-metrocable-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a turquoise-and-gold relay beside Medellín's Metrocable and the illuminated Aburrá Valley"> |
 
+## World Series - Asia - Batch 118: South Korea
+
+| | |
+|---|---|
+| **Seoul DDP Moonshell Intercept**<br><img src="492-south-korea-seoul-ddp-moonshell-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a celadon city-light prism beneath Seoul's sweeping Dongdaemun Design Plaza"> | **Gyeongju Cheomseongdae Celadon Cipher**<br><img src="493-south-korea-gyeongju-cheomseongdae-celadon-cipher.png" width="420" alt="The trio sealing a cobalt archive prism beside Gyeongju's Cheomseongdae astronomical observatory"> |
+| **Jeju Seongsan Basalt Extraction**<br><img src="494-south-korea-jeju-seongsan-basalt-extraction.png" width="420" alt="The trio restoring an atmospheric beacon above Jeju's Seongsan Ilchulbong, basalt coast, and cobalt sea"> | **Busan Gwangan Bridge Night Relay**<br><img src="495-south-korea-busan-gwangan-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a maritime light relay before Busan's illuminated Gwangan Bridge"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
