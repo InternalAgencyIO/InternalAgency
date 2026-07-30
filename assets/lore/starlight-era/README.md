@@ -616,6 +616,13 @@ rejected and regenerated.
 | **Toronto City Hall Twin-Arc Intercept**<br><img src="524-canada-toronto-city-hall-twin-arc-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before Toronto City Hall's curved twin towers"> | **Quebec Chateau Frontenac Copper Cipher**<br><img src="525-canada-quebec-chateau-frontenac-copper-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism beside Chateau Frontenac and Dufferin Terrace"> |
 | **Lake Louise Glacier Prism Extraction**<br><img src="526-canada-lake-louise-glacier-prism-extraction.png" width="420" alt="The trio restoring a glacier-data beacon above Lake Louise, Victoria Glacier, and the Canadian Rockies"> | **Vancouver Lions Gate Night Relay**<br><img src="527-canada-vancouver-lions-gate-night-relay.png" width="420" alt="Alia kissing Ellie on the cheek as Radiance embraces both after their Lions Gate Bridge and Burrard Inlet night relay"> |
 
+## World Series - Asia - Batch 127: Yemen
+
+| | |
+|---|---|
+| **Sanaa Bab al-Yemen Towerhouse Intercept**<br><img src="528-yemen-sanaa-bab-al-yemen-towerhouse-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before Bab al-Yemen and Sana'a's qamariya-window tower houses"> | **Shibam Mudbrick Skyline Cipher**<br><img src="529-yemen-shibam-mudbrick-skyline-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism beside Shibam's mud-brick tower skyline"> |
+| **Socotra Dragon's Blood Canopy Extraction**<br><img src="530-yemen-socotra-dragons-blood-canopy-extraction.png" width="420" alt="The trio restoring a biodiversity-data beacon among Socotra's Dragon's Blood trees and Haghier Mountains"> | **Aden Harbor Sira Night Relay**<br><img src="531-yemen-aden-harbor-sira-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three distinct glowing keys after completing their Aden Harbor and Sira Island night relay"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
