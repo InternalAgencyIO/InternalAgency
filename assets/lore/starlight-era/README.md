@@ -560,6 +560,13 @@ rejected and regenerated.
 | **Seoul DDP Moonshell Intercept**<br><img src="492-south-korea-seoul-ddp-moonshell-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a celadon city-light prism beneath Seoul's sweeping Dongdaemun Design Plaza"> | **Gyeongju Cheomseongdae Celadon Cipher**<br><img src="493-south-korea-gyeongju-cheomseongdae-celadon-cipher.png" width="420" alt="The trio sealing a cobalt archive prism beside Gyeongju's Cheomseongdae astronomical observatory"> |
 | **Jeju Seongsan Basalt Extraction**<br><img src="494-south-korea-jeju-seongsan-basalt-extraction.png" width="420" alt="The trio restoring an atmospheric beacon above Jeju's Seongsan Ilchulbong, basalt coast, and cobalt sea"> | **Busan Gwangan Bridge Night Relay**<br><img src="495-south-korea-busan-gwangan-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a maritime light relay before Busan's illuminated Gwangan Bridge"> |
 
+## World Series - Africa - Batch 119: Sudan
+
+| | |
+|---|---|
+| **Khartoum Nile Confluence Amber Intercept**<br><img src="496-sudan-khartoum-nile-confluence-amber-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber signal prism above Khartoum's Blue and White Nile confluence"> | **Suakin Coral-Stone Light Cipher**<br><img src="497-sudan-suakin-coral-stone-light-cipher.png" width="420" alt="The trio sealing a cobalt archive prism beside Suakin Island's coral-stone merchant-house ruins"> |
+| **Bayuda Desert Basalt Extraction**<br><img src="498-sudan-bayuda-desert-basalt-extraction.png" width="420" alt="The trio restoring an atmospheric beacon among the Bayuda Desert's volcanic cones and basalt fields"> | **Port Sudan Red Sea Night Relay**<br><img src="499-sudan-port-sudan-red-sea-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a maritime light relay on Port Sudan's Red Sea waterfront"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
