@@ -609,6 +609,13 @@ rejected and regenerated.
 | **Kabul Darul Aman Lapis Intercept**<br><img src="520-afghanistan-kabul-darul-aman-lapis-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before Kabul's restored Darul Aman Palace"> | **Herat Citadel Bricklight Cipher**<br><img src="521-afghanistan-herat-citadel-bricklight-cipher.png" width="420" alt="The trio braiding violet, jade, and gold beams into a sealed archive prism beside Herat Citadel"> |
 | **Band-e Amir Sapphire Prism Extraction**<br><img src="522-afghanistan-band-e-amir-sapphire-prism-extraction.png" width="420" alt="The trio restoring a freshwater data beacon above Band-e Amir's sapphire lakes and travertine cliffs"> | **Salang Pass Tunnel Night Relay**<br><img src="523-afghanistan-salang-pass-tunnel-night-relay.png" width="420" alt="Ellie kissing Radiance on the cheek as Alia embraces both after their Salang Pass tunnel relay"> |
 
+## World Series - North America - Batch 126: Canada
+
+| | |
+|---|---|
+| **Toronto City Hall Twin-Arc Intercept**<br><img src="524-canada-toronto-city-hall-twin-arc-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before Toronto City Hall's curved twin towers"> | **Quebec Chateau Frontenac Copper Cipher**<br><img src="525-canada-quebec-chateau-frontenac-copper-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism beside Chateau Frontenac and Dufferin Terrace"> |
+| **Lake Louise Glacier Prism Extraction**<br><img src="526-canada-lake-louise-glacier-prism-extraction.png" width="420" alt="The trio restoring a glacier-data beacon above Lake Louise, Victoria Glacier, and the Canadian Rockies"> | **Vancouver Lions Gate Night Relay**<br><img src="527-canada-vancouver-lions-gate-night-relay.png" width="420" alt="Alia kissing Ellie on the cheek as Radiance embraces both after their Lions Gate Bridge and Burrard Inlet night relay"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
