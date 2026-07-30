@@ -469,6 +469,13 @@ rejected and regenerated.
 | **Kinshasa Boulevard River-Light Intercept**<br><img src="440-drc-kinshasa-boulevard-river-light-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three emerald river-light keys into a molten-gold compass above Kinshasa and the Congo River"> | **Lubumbashi Railway Station Mirror Cipher**<br><img src="441-drc-lubumbashi-railway-station-mirror-cipher.png" width="420" alt="The trio braiding three harmless beams into a sealed cobalt archive prism beside Lubumbashi Railway Station"> |
 | **Virunga Lake Kivu Prism Extraction**<br><img src="442-drc-virunga-lake-kivu-prism-extraction.png" width="420" alt="The trio restoring a turquoise watershed beacon above the Virunga highlands and Lake Kivu"> | **Matadi Bridge Congo River Night Relay**<br><img src="443-drc-matadi-bridge-congo-river-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous signal-ribbon relay beside Matadi Bridge at night"> |
 
+## World Series - Asia - Batch 106: Vietnam
+
+| | |
+|---|---|
+| **Ho Chi Minh City Nguyen Hue Neon Intercept**<br><img src="444-vietnam-ho-chi-minh-city-nguyen-hue-neon-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three city-light keys into a molten-gold compass above Nguyen Hue boulevard"> | **Hoi An Riverside Lacquer Cipher**<br><img src="445-vietnam-hoi-an-riverside-lacquer-cipher.png" width="420" alt="The trio braiding three harmless beams into a sealed cobalt archive prism beside Hoi An's ochre merchant houses"> |
+| **Ha Long Bay Limestone Prism Extraction**<br><img src="446-vietnam-ha-long-bay-limestone-prism-extraction.png" width="420" alt="The trio restoring a turquoise bay-monitoring beacon above Ha Long Bay's limestone karsts"> | **Da Nang Dragon Bridge Night Relay**<br><img src="447-vietnam-da-nang-dragon-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous signal-ribbon relay beside Da Nang's Dragon Bridge at night"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
