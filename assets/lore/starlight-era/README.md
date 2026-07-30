@@ -518,6 +518,13 @@ rejected and regenerated.
 | **Paris La Defense Prism Intercept**<br><img src="468-france-paris-la-defense-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a cobalt key into a molten-gold compass beneath La Defense's Grande Arche"> | **Chambord Roofline Light Cipher**<br><img src="469-france-chambord-roofline-light-cipher.png" width="420" alt="The trio braiding colored beams into a sealed archive prism beside Chateau de Chambord"> |
 | **Etretat Chalk Arch Prism Extraction**<br><img src="470-france-etretat-chalk-arch-prism-extraction.png" width="420" alt="The trio restoring a coastal beacon above Etretat's white chalk cliffs and sea arches"> | **Nice Promenade Night Relay**<br><img src="471-france-nice-promenade-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous relay above Nice's Baie des Anges"> |
 
+## World Series - Africa - Batch 113: South Africa
+
+| | |
+|---|---|
+| **Johannesburg Ponte City Prism Intercept**<br><img src="472-south-africa-johannesburg-ponte-city-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a cobalt city key beneath Johannesburg's Ponte City tower"> | **Cape Town Zeitz MOCAA Silo Cipher**<br><img src="473-south-africa-cape-town-zeitz-mocaa-silo-cipher.png" width="420" alt="The trio sealing a luminous archive prism inside Cape Town's transformed grain-silo architecture"> |
+| **Blyde River Canyon Prism Extraction**<br><img src="474-south-africa-blyde-river-canyon-prism-extraction.png" width="420" alt="The trio extracting a terrain beacon above Blyde River Canyon and the Three Rondavels"> | **Durban Golden Mile Night Relay**<br><img src="475-south-africa-durban-golden-mile-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a radiant relay along Durban's Golden Mile beneath the stadium arch"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
