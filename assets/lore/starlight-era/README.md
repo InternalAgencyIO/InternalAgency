@@ -602,6 +602,13 @@ rejected and regenerated.
 | **Buenos Aires Obelisk Fileteado Intercept**<br><img src="516-argentina-buenos-aires-obelisk-fileteado-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before the Buenos Aires Obelisk and Avenida 9 de Julio"> | **Palacio Barolo Glass Cipher**<br><img src="517-argentina-palacio-barolo-glass-cipher.png" width="420" alt="The trio braiding violet, jade, and gold beams into a sealed archive prism beside Palacio Barolo"> |
 | **Perito Moreno Ice Prism Extraction**<br><img src="518-argentina-perito-moreno-ice-prism-extraction.png" width="420" alt="The trio restoring a glacial data beacon above Perito Moreno Glacier and Lago Argentino"> | **Puerto Madero Tango Night Relay**<br><img src="519-argentina-puerto-madero-tango-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising linked hands after completing a scarlet-and-gold relay beside Puente de la Mujer"> |
 
+## World Series - Asia - Batch 125: Afghanistan
+
+| | |
+|---|---|
+| **Kabul Darul Aman Lapis Intercept**<br><img src="520-afghanistan-kabul-darul-aman-lapis-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before Kabul's restored Darul Aman Palace"> | **Herat Citadel Bricklight Cipher**<br><img src="521-afghanistan-herat-citadel-bricklight-cipher.png" width="420" alt="The trio braiding violet, jade, and gold beams into a sealed archive prism beside Herat Citadel"> |
+| **Band-e Amir Sapphire Prism Extraction**<br><img src="522-afghanistan-band-e-amir-sapphire-prism-extraction.png" width="420" alt="The trio restoring a freshwater data beacon above Band-e Amir's sapphire lakes and travertine cliffs"> | **Salang Pass Tunnel Night Relay**<br><img src="523-afghanistan-salang-pass-tunnel-night-relay.png" width="420" alt="Ellie kissing Radiance on the cheek as Alia embraces both after their Salang Pass tunnel relay"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
