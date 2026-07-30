@@ -623,6 +623,13 @@ rejected and regenerated.
 | **Sanaa Bab al-Yemen Towerhouse Intercept**<br><img src="528-yemen-sanaa-bab-al-yemen-towerhouse-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before Bab al-Yemen and Sana'a's qamariya-window tower houses"> | **Shibam Mudbrick Skyline Cipher**<br><img src="529-yemen-shibam-mudbrick-skyline-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism beside Shibam's mud-brick tower skyline"> |
 | **Socotra Dragon's Blood Canopy Extraction**<br><img src="530-yemen-socotra-dragons-blood-canopy-extraction.png" width="420" alt="The trio restoring a biodiversity-data beacon among Socotra's Dragon's Blood trees and Haghier Mountains"> | **Aden Harbor Sira Night Relay**<br><img src="531-yemen-aden-harbor-sira-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three distinct glowing keys after completing their Aden Harbor and Sira Island night relay"> |
 
+## World Series - Africa - Batch 128: Morocco
+
+| | |
+|---|---|
+| **Casablanca Zellige Boulevard Intercept**<br><img src="532-morocco-casablanca-zellige-boulevard-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald signal prism among Casablanca Art Deco facades and turquoise zellige light arches"> | **Ait Benhaddou Kasbah Light Cipher**<br><img src="533-morocco-ait-benhaddou-kasbah-light-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism beside Ait Benhaddou and the Ounila Valley"> |
+| **Erg Chebbi Dune Prism Extraction**<br><img src="534-morocco-erg-chebbi-dune-prism-extraction.png" width="420" alt="The trio restoring a desert-climate beacon among Erg Chebbi dunes near Merzouga and the High Atlas horizon"> | **Essaouira Atlantic Rampart Night Relay**<br><img src="535-morocco-essaouira-rampart-atlantic-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three glowing keys after their Essaouira rampart and Atlantic coast night relay"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
