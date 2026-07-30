@@ -574,6 +574,13 @@ rejected and regenerated.
 | **Kampala National Theatre Pearl Intercept**<br><img src="500-uganda-kampala-national-theatre-pearl-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism before Kampala's Uganda National Theatre"> | **Nyero Granite Light Cipher**<br><img src="501-uganda-nyero-granite-light-cipher.png" width="420" alt="The trio sealing an archive prism outside eastern Uganda's Nyero granite rock shelters"> |
 | **Murchison Falls Mist Extraction**<br><img src="502-uganda-murchison-falls-mist-extraction.png" width="420" alt="The trio restoring an environmental beacon above Uganda's Murchison Falls gorge and Victoria Nile"> | **Jinja Nile Bridge Night Relay**<br><img src="503-uganda-jinja-nile-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a river-signal relay beside Jinja's Source of the Nile Bridge"> |
 
+## World Series - Europe - Batch 121: Spain
+
+| | |
+|---|---|
+| **Valencia Arts and Sciences Pearl Intercept**<br><img src="504-spain-valencia-arts-sciences-pearl-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism among Valencia's City of Arts and Sciences and reflecting pools"> | **Segovia Aqueduct Light Cipher**<br><img src="505-spain-segovia-aqueduct-light-cipher.png" width="420" alt="The trio sealing a cobalt archive prism before Segovia's monumental Roman Aqueduct"> |
+| **Teide Volcanic Prism Extraction**<br><img src="506-spain-teide-volcanic-prism-extraction.png" width="420" alt="The trio restoring an environmental beacon among Tenerife's Teide volcanic caldera and lava fields"> | **Barcelona Montjuic Cable Night Relay**<br><img src="507-spain-barcelona-montjuic-cable-night-relay.png" width="420" alt="Radiance kissing Ellie on the cheek as Alia embraces them after their Montjuic cable-car and Barcelona harbor light relay"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
