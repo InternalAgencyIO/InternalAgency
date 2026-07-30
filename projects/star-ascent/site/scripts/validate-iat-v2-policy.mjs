@@ -36,7 +36,7 @@ const expectedAmounts = {
   liquidity: "50000000000000000",
 };
 const expectedBeneficiaries = {
-  community: "5Kg9jnaL4DuuT5Fr5surbexX8NeCiNpp4wKmi3Wp3C4H",
+  community: "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
   treasury: "CucS4oym18YjEMUmXYVx45q6HUGhW35wE3qpwkcnSCFQ",
   ecosystem: "HypAfe9RwaBRnZeLpqvYU1rBbAwHTSBnm24enRL6Qx18",
   coreTeam: "2yBK1NkeUoTToE4cfz33WRckho4Qr2BV1ZtCTrw3AHyB",

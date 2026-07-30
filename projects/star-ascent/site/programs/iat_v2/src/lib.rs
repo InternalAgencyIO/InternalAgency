@@ -20,7 +20,7 @@ use switchboard_randomness::{
 declare_id!("62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj");
 
 pub const PROGRAM_ADMIN: Pubkey = pubkey!("7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH");
-pub const COMMUNITY_CUSTODY: Pubkey = pubkey!("5Kg9jnaL4DuuT5Fr5surbexX8NeCiNpp4wKmi3Wp3C4H");
+pub const COMMUNITY_CUSTODY: Pubkey = pubkey!("7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH");
 pub const TREASURY_BENEFICIARY: Pubkey = pubkey!("CucS4oym18YjEMUmXYVx45q6HUGhW35wE3qpwkcnSCFQ");
 pub const ECOSYSTEM_BENEFICIARY: Pubkey = pubkey!("HypAfe9RwaBRnZeLpqvYU1rBbAwHTSBnm24enRL6Qx18");
 pub const CORE_BENEFICIARY: Pubkey = pubkey!("2yBK1NkeUoTToE4cfz33WRckho4Qr2BV1ZtCTrw3AHyB");

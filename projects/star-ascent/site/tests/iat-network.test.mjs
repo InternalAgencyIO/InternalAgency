@@ -32,7 +32,7 @@ test("network API is read-only, bounded, and has official RPC reads plus a publi
 });
 
 test("read-only explorer classifies public addresses and signatures", () => {
-  const address = "5Kg9jnaL4DuuT5Fr5surbexX8NeCiNpp4wKmi3Wp3C4H";
+  const address = "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH";
   const signature = "2ACnRs25wriFYYP7XBSaXWkCZUDAAxvg7SUf3SouQ5DgPctfn7wGTXwa81YYjo1JLUtsE7o3YbUMo16mmCTKAP75";
   assert.deepEqual(classifyLookup(address), { kind: "address", value: address });
   assert.deepEqual(classifyLookup(signature), { kind: "signature", value: signature });

@@ -26,7 +26,15 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: host ? new URL(`${protocol}://${host}`) : undefined,
     title, description,
     alternates: { languages: { en: "https://internalagency.io", tr: "https://ileriakil.com" } },
-    icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/favicon-radiance-v1-32.png", type: "image/png", sizes: "32x32" },
+        { url: "/favicon-radiance-v1-192.png", type: "image/png", sizes: "192x192" },
+      ],
+      shortcut: "/favicon-radiance-v1-32.png",
+      apple: { url: "/favicon-radiance-v1-192.png", type: "image/png", sizes: "192x192" },
+    },
     openGraph: { type: "website", title, description, images: [{ url: "/og-star-ascent-v1.png", width: 1792, height: 1024, alt: tr ? "STAR ASCENT fırlatma kontrolü" : "STAR ASCENT launch control" }] },
     twitter: { card: "summary_large_image", title, description, images: ["/og-star-ascent-v1.png"] },
   };

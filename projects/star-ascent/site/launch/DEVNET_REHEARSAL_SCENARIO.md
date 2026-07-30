@@ -1,6 +1,6 @@
 # IAT V2 devnet rehearsal
 
-**State:** `HOST TESTS PASS / SBF BUILD, DEPLOYMENT, AND DEVNET EVIDENCE PENDING`
+**State:** `PROGRAM + PRIMARY INITIALIZATION VERIFIED / ON-CHAIN FEATURE REHEARSAL PENDING`
 
 **Mainnet:** `HOLD`
 
@@ -76,6 +76,28 @@ Use the scaled `1,000 IATDEV2` plan in
    randomness program, and hardware-controlled upgrade authority all match.
 
 ## Phase 4 — exercise the policy
+
+Use the localhost-only feature console at
+`http://127.0.0.1:4175/?mode=features`. It derives a second scaled rehearsal
+mint, `8Lx1fQDbWNArCo2kWQCYbvx8JgahrkvNgadUPaGhudPM`, under the exact deployed
+program and reviewed Model T administrator. Its rehearsal-only Genesis override
+places the instance two hours before the next policy-week boundary. Mainnet
+configuration forbids this override.
+
+The feature sequence is fail-closed and requires a separate operator click to
+simulate/sign and then broadcast every transaction. It registers two public
+agency addresses, funds the participant with only enough devnet SOL for
+position rent, opens standard/CCC Agent/CCC Associate positions, settles core
+APY, claims unlocked liquidity principal, and executes a real Switchboard
+commit/reveal.
+
+The first standard position settlement opens at the next policy-week boundary.
+Because a position accrues only from `accepted_week + 1` and CCC round `N`
+opens 24 hours after policy week `N`, the linked CCC positions require the
+matching real round approximately 24 hours later. Do not alter Genesis, replace
+Switchboard evidence, or label these settlements complete early. Local warp
+tests cover 52-week maturity and failure boundaries; live Switchboard
+commit/reveal and linked settlement remain devnet evidence requirements.
 
 Complete every scenario listed in the V2 rehearsal template, including:
 
