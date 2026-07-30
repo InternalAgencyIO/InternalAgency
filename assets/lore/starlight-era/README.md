@@ -462,6 +462,13 @@ rejected and regenerated.
 | **Makati Ayala Triangle Neon Intercept**<br><img src="436-philippines-makati-ayala-triangle-neon-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three pearl light keys into a molten-gold compass above Ayala Triangle in Makati"> | **Intramuros Fort Santiago Mirror Cipher**<br><img src="437-philippines-intramuros-fort-santiago-mirror-cipher.png" width="420" alt="The trio braiding three harmless beams into a sealed cobalt archive prism beside Fort Santiago in Intramuros"> |
 | **Bohol Chocolate Hills Prism Extraction**<br><img src="438-philippines-bohol-chocolate-hills-prism-extraction.png" width="420" alt="The trio restoring a cobalt watershed beacon above Bohol's Chocolate Hills"> | **El Nido Bacuit Bay Night Relay**<br><img src="439-philippines-el-nido-bacuit-bay-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal-ribbon relay among El Nido's limestone islands at night"> |
 
+## World Series - Africa - Batch 105: Democratic Republic of the Congo
+
+| | |
+|---|---|
+| **Kinshasa Boulevard River-Light Intercept**<br><img src="440-drc-kinshasa-boulevard-river-light-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three emerald river-light keys into a molten-gold compass above Kinshasa and the Congo River"> | **Lubumbashi Railway Station Mirror Cipher**<br><img src="441-drc-lubumbashi-railway-station-mirror-cipher.png" width="420" alt="The trio braiding three harmless beams into a sealed cobalt archive prism beside Lubumbashi Railway Station"> |
+| **Virunga Lake Kivu Prism Extraction**<br><img src="442-drc-virunga-lake-kivu-prism-extraction.png" width="420" alt="The trio restoring a turquoise watershed beacon above the Virunga highlands and Lake Kivu"> | **Matadi Bridge Congo River Night Relay**<br><img src="443-drc-matadi-bridge-congo-river-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a luminous signal-ribbon relay beside Matadi Bridge at night"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
