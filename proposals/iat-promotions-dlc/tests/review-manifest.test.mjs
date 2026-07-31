@@ -11,6 +11,7 @@ import test from "node:test";
 import {
   generateReviewManifest,
   reviewLeafSha256,
+  reviewTreeLevelsSha256,
   reviewTreeRootSha256,
 } from "../generate-review-manifest.mjs";
 import { loadReviewManifest, validateReviewManifest } from "../validate-review-manifest.mjs";
@@ -38,6 +39,20 @@ test("all validator, generator, test, artifact, and supporting-source roles are 
       String(manifest.entries.filter((entry) => entry.role === role).length),
     );
   }
+});
+
+test("every fixed intermediate Merkle level reproduces through the published root", () => {
+  const levels = reviewTreeLevelsSha256(manifest.entries);
+  assert.deepEqual(
+    manifest.merkleVectors.intermediateLevels,
+    levels.slice(1).map((nodeSha256, index) => ({
+      level: String(index + 1),
+      nodeCount: String(nodeSha256.length),
+      nodeSha256,
+    })),
+  );
+  assert.equal(levels.at(-1)[0], manifest.treeRootSha256);
+  assert.equal(manifest.merkleVectors.intermediateLevels.at(-1).nodeSha256[0], manifest.treeRootSha256);
 });
 
 test("CRLF and LF checkouts produce the same normalized content address", () => {
@@ -79,6 +94,10 @@ test("path order, content changes, lengths, and role changes alter or invalidate
   const roleChanged = clone(manifest);
   roleChanged.entries[0].role = "VALIDATOR";
   assert.ok(validateReviewManifest(roleChanged).some((error) => error.includes("role drift")));
+
+  const intermediateChanged = clone(manifest);
+  intermediateChanged.merkleVectors.intermediateLevels[0].nodeSha256[0] = "0".repeat(64);
+  assert.ok(validateReviewManifest(intermediateChanged).some((error) => error.includes("intermediate Merkle")));
 });
 
 test("absolute, traversing, duplicate, malformed, and recursive-self entries fail closed", () => {

@@ -31,13 +31,13 @@
     "reason": "A manifest cannot contain its own content digest without a recursive fixed-point claim."
   },
   "summary": {
-    "coveredFileCount": "72",
-    "totalNormalizedByteLength": "682340",
+    "coveredFileCount": "74",
+    "totalNormalizedByteLength": "697864",
     "countsByRole": {
       "ARTIFACT": "30",
       "GENERATOR": "7",
-      "VALIDATOR": "10",
-      "TEST": "17",
+      "VALIDATOR": "11",
+      "TEST": "18",
       "SUPPORTING_SOURCE": "8"
     }
   },
@@ -52,9 +52,9 @@
     {
       "path": "ADVERSARIAL_TEST_MATRIX.md",
       "role": "ARTIFACT",
-      "normalizedByteLength": "19378",
-      "contentSha256": "784d4fc8649b3d0eba864c596da6f9aec73c0c0e6895379938780f0210d88591",
-      "leafSha256": "d586a35a99aacae07e6c86e7183b210d364dd1c2aa4759f1d7e9a05c7c29e112"
+      "normalizedByteLength": "20142",
+      "contentSha256": "ab1dd2035a37f7978e9133e2228e150487b0a65544489d0e6b99dd5b739ecc36",
+      "leafSha256": "9877bb040a880c591618372cd3560f1de3bfb291200f7dfda928c73f541c671f"
     },
     {
       "path": "ATTESTATION_AND_TRANSPARENCY.md",
@@ -108,23 +108,23 @@
     {
       "path": "README.md",
       "role": "ARTIFACT",
-      "normalizedByteLength": "8522",
-      "contentSha256": "d5774d777e8d8723364f4d914e3eb6c899f9cec42438be1acd26e7df1d0a9969",
-      "leafSha256": "2f4b939363bd8d2d29e145343dd3539326d6a49e152387339e25f83edaea974f"
+      "normalizedByteLength": "8740",
+      "contentSha256": "4766dcdb1b2f2875aed42b086c115be1e703746e1fd02d8baa9dc00d0ff0a1af",
+      "leafSha256": "e41b6ae21d83c3d4b846b1c7bf1e438682aa377047e179ab742991c04a28ddfe"
     },
     {
       "path": "REVIEW_MANIFEST.md",
       "role": "ARTIFACT",
-      "normalizedByteLength": "2367",
-      "contentSha256": "1d99eaaa0d4f0fcec5b8cbacc3b6b5b086f98c153a50d480c3d0eddc2032a3eb",
-      "leafSha256": "d374ef15ac047642a62f0e04f6278dc82b48690246027802d0d8f86d413dcd69"
+      "normalizedByteLength": "3293",
+      "contentSha256": "1af536b8c070846044b7a8c86b725733ca8cebf78a42d4ef1045635550857215",
+      "leafSha256": "540f2d76c070a3ce410a58d41cf8a3070558df650582fb121b9d0becbf20816d"
     },
     {
       "path": "STATUS.md",
       "role": "ARTIFACT",
-      "normalizedByteLength": "12179",
-      "contentSha256": "8a175c46209d7890178c07e9d13d9005ac4d7250c570fed04d5afdbe74d3fbe7",
-      "leafSha256": "badcf61afc94a090f85be6ae398ed5ace698b3d67ff8e36d6590384e1e61445d"
+      "normalizedByteLength": "12850",
+      "contentSha256": "db0de20d3a1e699803695549e06b96a53d5d78c620f63b69c605339731a74067",
+      "leafSha256": "ede66cb5cf8887e6475b861955ecb46237c6a80e6bcb0789af1d0f05c9cadc9d"
     },
     {
       "path": "THREAT_MODEL.md",
@@ -241,9 +241,9 @@
     {
       "path": "generate-review-manifest.mjs",
       "role": "GENERATOR",
-      "normalizedByteLength": "6602",
-      "contentSha256": "be970656eb83c4b453fc3173aa25591353aceccf6428fc99fbfbc2e3e4601598",
-      "leafSha256": "4f7a8376d1092e3d80af763480b14cc1bf9ac4f5979f3a15847763aa40d365a0"
+      "normalizedByteLength": "7187",
+      "contentSha256": "c378fbcdd0c911d2fa02f57f568e97181e0efabb457e604e73b5af5b217a077e",
+      "leafSha256": "13b3fac6573135ffbacb2b2ddc3d2f1f07bb0cde74794a8a05a3444f97085e52"
     },
     {
       "path": "instruction-transition-adapter.mjs",
@@ -456,11 +456,18 @@
       "leafSha256": "8f7684255a61dc0ca2ac554128ec5f069f2a19558718bb084fa0a340ad696719"
     },
     {
+      "path": "tests/review-manifest-python.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "2796",
+      "contentSha256": "80b03b898379fdf73d3ffcd477a758bd85db81bbc825e32203bbb299dfa86b07",
+      "leafSha256": "7f7a5b7234ad1e91b2a1dacad75117e65cbef724a955c70bd66b045efc6111f4"
+    },
+    {
       "path": "tests/review-manifest.test.mjs",
       "role": "TEST",
-      "normalizedByteLength": "5846",
-      "contentSha256": "5d06b48bdaeed2da77b64fe6be93e0f7f62a07977acdc1938216b2b28fcacfd0",
-      "leafSha256": "7c7e64316e24bbca8f505ea6de56774291deec65f892a203f20c46e937277a7d"
+      "normalizedByteLength": "6668",
+      "contentSha256": "eccbf4d665529a8bb66955557fa8e32da4ff303f417a051f66fc2069ac00d810",
+      "leafSha256": "1d7aa31d0fac067d33db37a37386d0093a19ae7e7b70305c5b80212549204299"
     },
     {
       "path": "tests/verifier-key-lifecycle.test.mjs",
@@ -535,9 +542,9 @@
     {
       "path": "validate-review-manifest.mjs",
       "role": "VALIDATOR",
-      "normalizedByteLength": "5668",
-      "contentSha256": "c5f9289623af0c4f7870fb2e6c3462ee9af4c2661317d9d85f791f3ca85211fb",
-      "leafSha256": "cc1d11ce65ee2bfc274efc18fb2f709e0e00135e240ed9e3c80141162f1303fa"
+      "normalizedByteLength": "6385",
+      "contentSha256": "7b3c92b8d1b1d504c700292441e21c24bcdeb7b88c4abfe8789668ba92a993b1",
+      "leafSha256": "5081eb980c3f3dc0573effa5d4e5617e1aa059637c2ddab537453df415bf07f7"
     },
     {
       "path": "verifier-key-lifecycle.mjs",
@@ -545,7 +552,138 @@
       "normalizedByteLength": "15079",
       "contentSha256": "0cc845f659a32966185b18f00c2244e126463385a8d878e0aa8110d463d7079f",
       "leafSha256": "d839a0f72cf8288e82b32516a61aef25ef8bab3398eb3874287a82b8c4599f74"
+    },
+    {
+      "path": "verify-review-manifest.py",
+      "role": "VALIDATOR",
+      "normalizedByteLength": "8025",
+      "contentSha256": "f09ab0da035d57c96ba663f81ccff01f7cc202364ef7ce152677ac1d797d717e",
+      "leafSha256": "ad8bf2ad3073e32930ac235cfcae84e6cc91e59c38bbffead5138ab144c86346"
     }
   ],
-  "treeRootSha256": "96497829e488f1d1eafb187cf6a8bb20bae3d0033bdd8f90873cf22019eec57f"
+  "merkleVectors": {
+    "leafCount": "74",
+    "intermediateLevels": [
+      {
+        "level": "1",
+        "nodeCount": "37",
+        "nodeSha256": [
+          "2fae7f5feb269b910caecb77c08a2e2247a728a518841edfc61a8ad4596e5007",
+          "f30756b77ed2aa74f3647f5800a81f6bc50aceff808b07d7952537c3de553755",
+          "fc7fc46e3e7bcc2916e03a6d06b64503e300ae73bd70e42582c059e6ba01c704",
+          "a7b82a2c65b472a618cd6e233075f135910c29e5576abe7f278b601b162531fa",
+          "df6d3d7e89acfc73f70a710f4f1c53c421e0eaa866302940be0e0c05759addcc",
+          "9e6703e51b9c1ad9213f0ce1625ed422a1a8a98d66fbd4764ddeb233506bd44e",
+          "9da4ecc213efaabc94b3267e5bac2546a755ffc471ea19cea45c57df0c66b314",
+          "071ee6197b1a203ce774cd56708083d8a7b18c9db831ed4b63cd67b4b413eb1e",
+          "564bae5d5095e7c9453ee8ee549bcd96f993ffd3e7f324e6ca2ff62e2427fe3b",
+          "e490aecc5697673c6415ff6b142cc926f2a7da3d8ca4cfa3ba384724478cf0f5",
+          "ccaa3fabae5168d9fbbe023e57d7dd5def42cd27ded019b7c99be7020cdbb7ed",
+          "92a374c7a753f3af0da1d403c349e3cd6f0c87d1ff3b09a42cc174ff350461d7",
+          "526595c8ce9ec24b3148b9b3dcdd30946e799b53487e50858fff76ea8d595230",
+          "5ac677c654ae371ac922b60e275c4e4ed6264ef8ebd6689bce72291069a8f815",
+          "186d3bea217e22c2031c539cec6ebbd439484d5f52d0cc83c20e7b0622d50ada",
+          "1d5554efdac7d8b56fa73713edc10e0168551f95450330f9a1259be9101defa3",
+          "fc692f7847c39963a77c7fa56d92c82231bd17eae5c4b1d2f7d090b5b080ab6f",
+          "86116bec3873224e5448b2fa9e0ddfea003156648160f4166962f86af74a40c4",
+          "c100dd2e5787eea771cf8b3286c7d97db71a77b1da1bb7f341da2546cc6028cf",
+          "0393ce89d8817a6df067565a37926638914e2fadb248fa262da5f523c3ae5f04",
+          "befd70f746713c4cba7bc874bda66b439cbaf4e9009035684347a1b4d83aca31",
+          "3ef57b998d02d2d35e4205cca13ed37a4c8109f91fae238a388029671f5b78be",
+          "299bdad2932285b3dbf469d8e3a7dc26668b459fbf7e5d9bf48af34678e9150a",
+          "970fb847a78dd31aa558ca07a902c9760b0d2a942650ab5cfd4e14dfc3c554e9",
+          "16d57de08ec8d9b1da89076f09cd2fdd6d622cec7c46943a9981b1672d0792e5",
+          "8e3dbdcd6d0cee28121ef9ad236fa9b6a15d23d9aa3f637969e125258a13367f",
+          "7670237b9cdc6bd93821e93ea3ccf55019f771b0a1c8e33f38b70acbf8c8fde6",
+          "8edd153ecf246e5833bfd80c74a0963aa28ee8cceb01dfa6bf3a83d9213c8aad",
+          "2325ab944cab06849707aa6fb59dbd0fe2d416e0678c27774757276f9aa814cc",
+          "c78dd2ad3835ca94fb525b66802b282d5499965a02dad3a5e69f1cf499ce559d",
+          "04c6764999a79674ebd7154995d6f1baab30a11b6ab42ce1eee8989eed633f56",
+          "896ec9ca7af8c0f9d67abfb2cac778190c9e924aa41eee70872df15bdd633cb9",
+          "4ed8248fb92ae4da7f23e59c8145f352456090d6c22e44c064dbbb2320f2a83e",
+          "af3490117de77d2f63f4d6ac0744a475e900ffbce4c5a464682e76131f382a53",
+          "048e87f8f8908a61ea474413e1feed9ce1543ac5e3ce6e167265f5e682f33ec7",
+          "767d67bfb37909a48cd55239d8b2f991ec4ac128321ba3e04d5ee80df78ed6f4",
+          "2c80e2225f5746af6015dfebb4ff5a10b797857ca604e777742cc335fb93cc65"
+        ]
+      },
+      {
+        "level": "2",
+        "nodeCount": "19",
+        "nodeSha256": [
+          "9b365e67df1cb3cc6c9855202abfee92e13a8fc350f5d4c325ce09b6ab3d048e",
+          "eb8df71d70c22dfa5f4217bb4ace5377eee3b62e721a249282e6d3027b9150e3",
+          "07ac324c8564720466434692d781cd3abef91df1d15f39cc9415fddd9a261377",
+          "ec85f5c30d9094664f46136632ef1c23dc6f2e47f88347415e9c27604c71a13b",
+          "57d7215c51b4cecdb7bce322dc9363261c9afe9680887531496f876961618360",
+          "fbaee160e03b50d847864119ef06cfdddf8b3ddc96072354c74afee5ae5d9143",
+          "04006ba69930a629085eb4705618f273988c618c9dd64f45e7d1c58f4ea5cad2",
+          "0a1031230a9376d235f91f33dd5bbe6e0f96dd445f5ebd11ae34dd1a9c88ea4c",
+          "889d3a129b7ac309513d1fd28c40fd6562bc9afe59ee6144febd2e035f3f9e50",
+          "122321b1b7c2f45e588ebffbbe31171f63e26a17f08adc66365f69c851084200",
+          "d5945de22892038f5b2e92c0a041d2c69c99b51cb7d126546097aef2b15ff0ff",
+          "a7cfe03db03f8d0bcd8985fc12712714204bd9e4b0168a5d1408c70bc8fd1c09",
+          "baeafb2bdd0e8bc1164f53c496e49cd602d573c8d9d40f1658bcd6fe4a78821d",
+          "888da4a4caad16e0b44ec56c0811b12d59d8ff22936b708451b3a5b457d49f4c",
+          "b0de061486492630e2aa5c1920d44fb4b62c155e40434aeeb9316e2b7ade044e",
+          "4bc1e9500f61fee88a3d21c6716f5d982901d58a35adc9d5a699a9d08f5f6d62",
+          "e31bcd027625008a0827de4cb327fc26d5d02025a9bd5c443ed358a4281d3438",
+          "8291a24b85a17ce8fe7c4c7a14cce2e894c449d329220efabea8e9eed057b813",
+          "fc34047190391cf118a651c888b2526ebba7e9e1f927dd310fbf11b0a986dd46"
+        ]
+      },
+      {
+        "level": "3",
+        "nodeCount": "10",
+        "nodeSha256": [
+          "2ba5ff7ee9c048f647d5a9f2bf2aa75cef8935b077f1ea21b92c89f6090108f2",
+          "d6e11ab1934cd335b7012de80ab60b589a8c84830f2859f561ba895b30d8ba58",
+          "be8de23e01a51e08d5827745ee89900bc58f73502adee04896da355216e4a26a",
+          "bf18a725b867212749e293d0074c3f45c1e8ed087df27d60f4f9364c08eabb12",
+          "5ba05f37095593a4a060e0ecbe8f66bf3e69764eea59169fff90c843ef9e04df",
+          "f14aad594e61401baf6d04b8616083a19baab5a6b932384139209dac49a33f87",
+          "f10dd78438080edc378de2a1fc3531a8166231b7f355f8a6c517a5b27797980f",
+          "a64fc108ccb17d499d976a96185781ef3aad0bc8a9479477bddbb4325b443a92",
+          "96cbe114a2a3ef88243b2801c475a1f1b0540b9d1f8f24d8ca25e4393a26e2be",
+          "86c009765c57ce5e3954fb3e204d6da2ef358f40edbf6dbfa370c2532fa4050f"
+        ]
+      },
+      {
+        "level": "4",
+        "nodeCount": "5",
+        "nodeSha256": [
+          "6a236079877c203246b23722fc495c084b8cb237caf4c68a79b343e21fabb97f",
+          "e67535275312085726e49fd7f30b87bbb194656ce24fe1cf153b2e3789ddde6a",
+          "516a9f1bdbdf97a71b086b411a6de132d27e32f018673d2df071914f90abad3e",
+          "d776cd71d9c2b65e2c9b115847ca6c74fa6f275ad2dfc1826e8c3b169ded701d",
+          "c72a8edcb38f62ae321ca57828df664b3b112e769e9b59fd73dc5d63e95d8faf"
+        ]
+      },
+      {
+        "level": "5",
+        "nodeCount": "3",
+        "nodeSha256": [
+          "40cd32d1e777614c63306061786f66f8f834c59a925c823751ce2acb1deaab5d",
+          "89d4131de2403511d6f3854b4904417151e4e406933e95b87756d918edc86964",
+          "014be87887b4329d7212a1fd7d9fba65c34608b57fbed45886c2b082be8b111b"
+        ]
+      },
+      {
+        "level": "6",
+        "nodeCount": "2",
+        "nodeSha256": [
+          "b6b859eb6a987e159e274af1802cfd8bdb0c6eb498b930cc5ca129b4ae6664d0",
+          "d29c92f7563be39543c03ab863ad6880b0cd1184429bf1fc5c56278d43907384"
+        ]
+      },
+      {
+        "level": "7",
+        "nodeCount": "1",
+        "nodeSha256": [
+          "ecaeb062660ce76d1be5f8b246e62fc45cb835ccc8409ac9dbb726cf3da80aa8"
+        ]
+      }
+    ]
+  },
+  "treeRootSha256": "ecaeb062660ce76d1be5f8b246e62fc45cb835ccc8409ac9dbb726cf3da80aa8"
 }

@@ -45,7 +45,10 @@ export function classifyReviewPath(path) {
   if ((name.startsWith("generate-") || name.startsWith("compose-")) && name.endsWith(".mjs")) {
     return "GENERATOR";
   }
-  if (name.startsWith("validate-") && name.endsWith(".mjs")) return "VALIDATOR";
+  if (
+    (name.startsWith("validate-") && name.endsWith(".mjs")) ||
+    (name.startsWith("verify-") && name.endsWith(".py"))
+  ) return "VALIDATOR";
   if (name.endsWith(".md") || name.endsWith(".json")) return "ARTIFACT";
   if (name.endsWith(".mjs")) return "SUPPORTING_SOURCE";
   throw new Error(`unclassified proposal path: ${path}`);
@@ -92,9 +95,10 @@ export function reviewLeafSha256(entry) {
   ).toString("hex");
 }
 
-export function reviewTreeRootSha256(entries) {
+export function reviewTreeLevelsSha256(entries) {
   if (entries.length === 0) throw new Error("review manifest cannot have an empty tree");
-  let level = entries.map((entry) => Buffer.from(entry.leafSha256, "hex"));
+  const levels = [entries.map((entry) => entry.leafSha256)];
+  let level = levels[0].map((digest) => Buffer.from(digest, "hex"));
   while (level.length > 1) {
     const next = [];
     for (let index = 0; index < level.length; index += 2) {
@@ -112,8 +116,13 @@ export function reviewTreeRootSha256(entries) {
       );
     }
     level = next;
+    levels.push(level.map((digest) => digest.toString("hex")));
   }
-  return level[0].toString("hex");
+  return levels;
+}
+
+export function reviewTreeRootSha256(entries) {
+  return reviewTreeLevelsSha256(entries).at(-1)[0];
 }
 
 export function generateReviewManifest(rootPath = ROOT_PATH) {
@@ -138,6 +147,7 @@ export function generateReviewManifest(rootPath = ROOT_PATH) {
     (total, entry) => total + BigInt(entry.normalizedByteLength),
     0n,
   );
+  const merkleLevels = reviewTreeLevelsSha256(entries);
   return {
     manifestVersion: 1,
     manifestId: "iat-promotions-dlc-review-manifest-v1",
@@ -170,7 +180,15 @@ export function generateReviewManifest(rootPath = ROOT_PATH) {
       countsByRole,
     },
     entries,
-    treeRootSha256: reviewTreeRootSha256(entries),
+    merkleVectors: {
+      leafCount: String(entries.length),
+      intermediateLevels: merkleLevels.slice(1).map((digests, index) => ({
+        level: String(index + 1),
+        nodeCount: String(digests.length),
+        nodeSha256: digests,
+      })),
+    },
+    treeRootSha256: merkleLevels.at(-1)[0],
   };
 }
 

@@ -156,11 +156,15 @@ security audit or deployment approval.
 | Validator, generator, test, artifact, or supporting source disappears | `all validator, generator...` | Filesystem regeneration or required-role coverage rejects the stale manifest |
 | Review manifest claims mainnet, a program ID, deployment, or application | `manifest status cannot claim...` | Fixed HOLD status gates reject the manifest |
 | Review manifest publishes private evidence instead of paths and hashes | `manifest publishes only paths...` | Entry-shape and private-field scans reject the artifact |
+| Intermediate Merkle node changes while the final manifest is stale | `every fixed intermediate Merkle level...` | Full published level-by-level comparison fails before root acceptance |
+| JavaScript and Python normalize, classify, or hash differently | `independent zero-dependency Python verifier...` | Complete independently generated manifests must be equal |
+| Stale digest or intermediate node is submitted to the Python verifier | `independent Python verifier rejects...` | Independent regeneration exits nonzero and reports invalid evidence |
+| Independent verifier is omitted from the review inventory | `the independent verifier is itself covered...` | Required validator entry and deterministic filesystem coverage fail |
 
 ## Next matrix expansion
 
-- independent zero-dependency Python verification of the published review
-  manifest and fixed intermediate Merkle vectors;
+- machine-readable independent-review receipt template binding the Git commit,
+  review root, review scope, decision, and explicit non-activation status;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

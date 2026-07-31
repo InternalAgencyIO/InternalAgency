@@ -90,6 +90,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Deterministic review manifest](./review-manifest.v1.json)
 - [Review-manifest generator](./generate-review-manifest.mjs)
 - [Review-manifest validator](./validate-review-manifest.mjs)
+- [Independent zero-dependency Python verifier](./verify-review-manifest.py)
 - [Proposal-only tests](./tests/)
 
 Run the proposal-only checks with:
@@ -112,6 +113,7 @@ node proposals/iat-promotions-dlc/validate-program-event-interface.mjs
 node proposals/iat-promotions-dlc/validate-event-reconciliation-vectors.mjs
 node proposals/iat-promotions-dlc/validate-event-reconciliation-schemas.mjs
 node proposals/iat-promotions-dlc/validate-review-manifest.mjs
+python proposals/iat-promotions-dlc/verify-review-manifest.py
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
 node --test proposals/iat-promotions-dlc/tests/attestation-transparency.test.mjs
@@ -129,6 +131,7 @@ node --test proposals/iat-promotions-dlc/tests/event-reconciler.test.mjs
 node --test proposals/iat-promotions-dlc/tests/event-reconciliation-vectors.test.mjs
 node --test proposals/iat-promotions-dlc/tests/event-reconciliation-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/review-manifest.test.mjs
+node --test proposals/iat-promotions-dlc/tests/review-manifest-python.test.mjs
 ```
 
 ## Deliberate isolation

@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 14:24 UTC
+Updated: 2026-07-31 14:43 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `a9b66f1`
+Previously published public increment: `672a9d9`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -161,8 +161,18 @@ This status file deliberately does not claim a self-referential commit hash.
 - no private evidence, identity, OAuth, signature, secret, or signing material
   in the published review inventory; and
 - fixed network-free, undeployable, and unapplied manifest status gates.
+- every intermediate Merkle level published for precise cross-review
+  comparison, not only the final tree root;
+- independent zero-dependency Python implementation of filesystem discovery,
+  normalization, classification, content hashing, leaf hashing, tree building,
+  summary accounting, and HOLD metadata;
+- complete Node/Python manifest equality, including the intermediate vectors;
+- nonzero independent-verifier failure on stale content or intermediate-node
+  mutation; and
+- the independent Python verifier itself classified and content-addressed as a
+  validator in the review tree.
 
-Current proposal-only result: **146 tests passed**. This consists of 28 protected
+Current proposal-only result: **150 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -172,8 +182,8 @@ composition and drift tests, eleven ABI offset/conformance tests, plus twelve
 program-event interface tests and ten event/account reconciliation tests.
 Five compact reconciliation-vector and Merkle-commitment tests complete the
 compact-vector suite, and six Draft-07 schema/example tests complete the current
-suite. Seven content-addressed review-manifest tests complete the review-surface
-suite.
+suite. Eight content-addressed review-manifest tests and three independent
+Python integration tests complete the review-surface suite.
 
 ## Current guarantees of the reference model
 
@@ -205,7 +215,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add an independent zero-dependency Python verifier and fixed intermediate
-Merkle vectors for the published review manifest. Preserve the privacy boundary
-and every unapplied and undeployable gate. No production import, chain
-connection, wallet operation, or site deployment is needed for that work.
+Add a machine-readable independent-review receipt template binding the Git
+commit, review root, review scope, decision, and explicit non-activation status.
+Preserve the privacy boundary and every unapplied and undeployable gate. No
+production import, chain connection, wallet operation, or site deployment is
+needed for that work.

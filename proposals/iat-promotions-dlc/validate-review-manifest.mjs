@@ -10,6 +10,7 @@ import {
   classifyReviewPath,
   generateReviewManifest,
   reviewLeafSha256,
+  reviewTreeLevelsSha256,
   reviewTreeRootSha256,
 } from "./generate-review-manifest.mjs";
 
@@ -84,7 +85,24 @@ export function validateReviewManifest(manifest = loadReviewManifest()) {
   expect(manifest?.summary?.totalNormalizedByteLength === String(totalBytes), "review total-byte count drift");
   if (entries.length > 0) {
     try {
+      const levels = reviewTreeLevelsSha256(entries);
+      const expectedVectors = {
+        leafCount: String(entries.length),
+        intermediateLevels: levels.slice(1).map((digests, index) => ({
+          level: String(index + 1),
+          nodeCount: String(digests.length),
+          nodeSha256: digests,
+        })),
+      };
+      expect(
+        JSON.stringify(manifest?.merkleVectors) === JSON.stringify(expectedVectors),
+        "review intermediate Merkle vectors drift",
+      );
       expect(manifest?.treeRootSha256 === reviewTreeRootSha256(entries), "review tree root drift");
+      expect(
+        manifest?.merkleVectors?.intermediateLevels?.at(-1)?.nodeSha256?.[0] === manifest?.treeRootSha256,
+        "review final Merkle vector does not equal the tree root",
+      );
     } catch (error) {
       errors.push(error.message);
     }
