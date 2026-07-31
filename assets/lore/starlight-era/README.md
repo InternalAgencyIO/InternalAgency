@@ -672,6 +672,13 @@ rejected and regenerated.
 | **Riyadh KAFD Prism Intercept**<br><img src="556-saudi-arabia-riyadh-kafd-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber prism among Riyadh KAFD's faceted towers and elevated skybridges"> | **AlUla Old Town Cipher**<br><img src="557-saudi-arabia-alula-old-town-cipher.png" width="420" alt="The trio sealing a cobalt archive prism beside AlUla Old Town's mudbrick houses, date palms, and sandstone escarpment"> |
 | **Rub al Khali Data Extraction**<br><img src="558-saudi-arabia-rub-al-khali-data-extraction.png" width="420" alt="The trio restoring a climate-data beacon above the immense red-orange dunes of the Rub al Khali"> | **Jeddah Corniche Night Relay**<br><img src="559-saudi-arabia-jeddah-corniche-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising completed light keys above Jeddah Corniche, the Red Sea waterfront, and offshore fountain"> |
 
+## World Series - Africa - Batch 135: Mozambique
+
+| | |
+|---|---|
+| **Maputo Railway Station Prism Intercept**<br><img src="560-mozambique-maputo-railway-station-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber civic-light prism beside Maputo Central Railway Station"> | **Island of Mozambique Fort Cipher**<br><img src="561-mozambique-island-fort-sao-sebastiao-cipher.png" width="420" alt="The trio sealing a cobalt archive prism outside Fort Sao Sebastiao above the Indian Ocean"> |
+| **Gorongosa Mountain Data Extraction**<br><img src="562-mozambique-gorongosa-mountain-data-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Mount Gorongosa and the Great Rift valley"> | **Maputo-Katembe Bridge Night Relay**<br><img src="563-mozambique-maputo-katembe-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald signal relay above Maputo-Katembe Bridge and Maputo Bay"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
