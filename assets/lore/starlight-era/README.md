@@ -791,6 +791,13 @@ rejected and regenerated.
 | **Lusaka Cairo Road Copper Intercept**<br><img src="624-zambia-lusaka-cairo-road-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise skyline prism above Lusaka's Cairo Road and cylindrical FINDECO House tower"> | **Shiwa Ng'andu Manor Veranda Cipher**<br><img src="625-zambia-shiwa-ngandu-manor-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Shiwa Ng'andu's stone manor, columned veranda and highland gardens"> |
 | **South Luangwa Oxbow Climate Extraction**<br><img src="626-zambia-south-luangwa-oxbow-extraction.png" width="420" alt="The trio restoring a climate-data beacon above South Luangwa's oxbow lagoon, tawny floodplain and distant escarpment"> | **Victoria Falls Moon-Spray Relay**<br><img src="627-zambia-victoria-falls-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet night relay before Victoria Falls, its basalt gorge and moonlit spray"> |
 
+## World Series - Asia - Batch 152: Kazakhstan
+
+| | |
+|---|---|
+| **Astana Bayterek Skyline Prism Intercept**<br><img src="628-kazakhstan-astana-bayterek-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise skyline prism above Astana's Ishim River city centre with Bayterek Tower beyond"> | **Otrar Earthen Ruins Amber Cipher**<br><img src="629-kazakhstan-otrar-archaeological-ruins-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Otrar's earthen archaeological walls and open steppe horizon"> |
+| **Charyn Canyon Red-Rock Climate Extraction**<br><img src="630-kazakhstan-charyn-canyon-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Charyn Canyon's Castle Valley and towering red-rock walls"> | **Aktau Caspian Moonline Relay**<br><img src="631-kazakhstan-aktau-caspian-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet night relay above Aktau's Caspian promenade and pale limestone coast"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
