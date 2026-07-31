@@ -749,6 +749,13 @@ rejected and regenerated.
 | **Pyongyang Taedong River Aurora Intercept**<br><img src="600-north-korea-pyongyang-taedong-river-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise aurora prism above Pyongyang's Taedong River and geometric skyline"> | **Kaesong Old City Roofline Cipher**<br><img src="601-north-korea-kaesong-old-city-cipher.png" width="420" alt="The trio sealing an amber archive prism among Kaesong's tiled roofs, timber eaves, and stone lanes"> |
 | **Mount Kumgang Granite Light Extraction**<br><img src="602-north-korea-mount-kumgang-granite-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Mount Kumgang's granite peaks and clear mountain water"> | **Wonsan Coast Starlight Relay**<br><img src="603-north-korea-wonsan-coast-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet starlight relay beside Wonsan's calm cobalt bay"> |
 
+## World Series - Asia - Batch 146: Syria
+
+| | |
+|---|---|
+| **Damascus Barada Qasioun Opal Intercept**<br><img src="604-syria-damascus-barada-qasioun-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise opal prism above Damascus's Barada corridor with Mount Qasioun beyond"> | **Bosra Roman Theatre Basalt Cipher**<br><img src="605-syria-bosra-roman-theatre-basalt-cipher.png" width="420" alt="The trio sealing an amber archive prism before Bosra's monumental black-basalt Roman theatre"> |
+| **Kassab Coastal Mountains Cedar-Light Extraction**<br><img src="606-syria-kassab-coastal-mountains-cedar-extraction.png" width="420" alt="The trio restoring a climate-data beacon above the forested limestone ridges near Kassab and the Mediterranean haze"> | **Latakia Mediterranean Corniche Starlight Relay**<br><img src="607-syria-latakia-mediterranean-corniche-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet night relay beside Latakia's cobalt Mediterranean corniche"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
