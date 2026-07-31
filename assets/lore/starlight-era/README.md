@@ -812,6 +812,13 @@ rejected and regenerated.
 | **Santiago Mapocho Skyline Copper Intercept**<br><img src="636-chile-santiago-mapocho-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a turquoise skyline prism above Santiago's Mapocho corridor with the Costanera Center and Andes beyond"> | **Humberstone Industrial Amber Cipher**<br><img src="637-chile-humberstone-industrial-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Humberstone's preserved industrial halls and Atacama rail geometry"> |
 | **Torres del Paine Pehoe Climate Extraction**<br><img src="638-chile-torres-del-paine-pehoe-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise climate beacon above Lake Pehoe and the Cuernos peaks in Torres del Paine"> | **Valparaiso Pacific Moonline Relay**<br><img src="639-chile-valparaiso-pacific-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald moonline relay above Valparaiso's colorful Pacific harbor at blue hour"> |
 
+## World Series - Europe - Batch 155: Romania
+
+| | |
+|---|---|
+| **Bucharest Athenaeum Silver Intercept**<br><img src="640-romania-bucharest-athenaeum-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a turquoise concert compass beside Bucharest's Romanian Athenaeum at apricot dawn"> | **Corvin Castle Amber Cipher**<br><img src="641-romania-corvin-castle-cipher.png" width="420" alt="The trio sealing an amber archive prism on a glass path beside Corvin Castle's stone towers and timber bridge"> |
+| **Danube Delta Reedlight Extraction**<br><img src="642-romania-danube-delta-extraction.png" width="420" alt="The trio recombining protected wetland data aboard a sleek skiff in a reed-lined Danube Delta channel at blue hour"> | **Constanta Black Sea Moonline Relay**<br><img src="643-romania-constanta-black-sea-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay beside the historic Constanta Casino on the Black Sea waterfront"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
