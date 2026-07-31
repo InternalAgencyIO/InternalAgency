@@ -10,7 +10,7 @@ set -euo pipefail
 
 EXISTING_BUFFER="Aarejf4n2vwDya7AuVVw2C21PPeoYHb1e8Rw3ukpi3L6"
 echo "HOLD: a paid Devnet buffer already exists: $EXISTING_BUFFER" >&2
-echo "Use scripts/repair-iat-v2-devnet-buffer.sh to repair it in place." >&2
+echo "Use scripts/rebuild-iat-v2-devnet-buffer-fresh.sh for a clean Devnet rebuild." >&2
 echo "Nothing was signed or broadcast." >&2
 exit 1
 

@@ -45,7 +45,7 @@
     "check:label-normalization": "node scripts/test-accountability-label-normalization.mjs",
     "check:canonical-digest": "node scripts/test-canonical-digest-regression.mjs",
     "check:launch-gates": "npm run check:tokenomics && npm run check:label-normalization && npm run check:canonical-digest && npm run check:manifest-gate && npm run check:publication-payload && npm run check:release-evidence-chain && npm run check:token-metadata && npm run check:allocation-lock-plan && npm run check:devnet-rehearsal && npm run check:signer-checklist && npm run check:mainnet-handoff && npm run check:release-packet && npm run check:pre-publication-packet && npm run check:release-snapshot && npm run check:post-genesis-reconciliation && npm run check:incoming-artwork && npm run check:operator-cards && npm run check:launch-clock && npm run check:mint-config && npm run check:mint-ceremony",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern \"**/dist/**\" --ignore-pattern .next --ignore-pattern work",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

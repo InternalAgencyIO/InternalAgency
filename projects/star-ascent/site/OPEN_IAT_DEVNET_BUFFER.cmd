@@ -7,6 +7,6 @@ echo The existing paid buffer is:
 echo Aarejf4n2vwDya7AuVVw2C21PPeoYHb1e8Rw3ukpi3L6
 echo.
 echo Creating a second buffer would waste Devnet SOL and split the ceremony.
-echo Use OPEN_IAT_BUFFER_REPAIR.cmd for the existing buffer.
+echo Use OPEN_IAT_DEVNET_FRESH_REBUILD.cmd for a clean Devnet rebuild.
 echo Nothing was signed or broadcast.
 pause
