@@ -290,10 +290,12 @@ security audit or deployment approval.
 | Cross-runtime rejection drifts for the same compact candidate | `independent Python reproduces the compact common replay commitment` | Node and Python derive the same sixteen candidate commitments and all-rejected replay commitment |
 | A mutation artifact publishes expanded candidates or schedules | `published mutation evidence contains descriptors...` | Only descriptors and commitments are stored; every candidate and schedule remains runtime-only |
 | Compact mutation evidence or source binding is changed | `independent Python rejects changed compact mutation evidence...`; mutation validator | Python exits 2 and Node rejects deterministic regeneration/source drift |
+| One contention failure masks another when both are present | `every combined candidate exposes exactly both failures...`; `every combined candidate and each isolated constituent reject` | All 28 unordered pairs expose exactly two gates in fixed precedence; both isolated constituents and the combined candidate reject in Node and Python |
+| Pairwise contention evidence publishes a combined candidate or claims operational authority | `published evidence stores descriptors and commitments, never candidates`; composition HOLD contract | Artifact stores descriptors, results, and commitments only; network stays `NONE` and every wallet, transaction, receipt, review, deployment, and activation capability remains false |
+| Pairwise evidence or its gate order changes under stale cross-runtime output | `independent Python rejects changed composition evidence with exit 2`; composition validator | Python independently reconstructs all 28 candidates and exits `2` when compact evidence or the shared commitment drifts |
 
 ## Next matrix expansion
 
-- deterministic two-gate composition matrix proving rejection precedence and
-  absence of masking across compact contention mutations. Keep combined
-  candidates runtime-only and preserve all network, wallet, review, deployment,
-  and activation HOLDs.
+- add a closed compact schema and independent rejection-minimization proof for
+  the 28-case composition artifact. Preserve runtime-only candidates and every
+  network, wallet, review, deployment, and activation HOLD.

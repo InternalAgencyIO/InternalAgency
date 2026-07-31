@@ -46,3 +46,7 @@ These commands are proposal-only and offline. They do not start a validator,
 contact Devnet or Mainnet, access a wallet, prepare, sign, or broadcast a
 transaction, move tokens, issue a receipt, complete review, deploy, or activate
 anything.
+
+The companion [two-gate composition matrix](./SETTLEMENT_CONTENTION_COMPOSITIONS.md)
+combines every unordered pair of these eight gates and proves fixed rejection
+precedence plus absence of masking without publishing any combined candidate.

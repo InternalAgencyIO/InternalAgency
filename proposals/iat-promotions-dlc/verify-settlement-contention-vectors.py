@@ -20,6 +20,7 @@ from typing import Any
 
 ARTIFACT_NAME = "settlement-contention-vectors.v1.json"
 MUTATION_ARTIFACT_NAME = "settlement-contention-mutation-vectors.v1.json"
+COMPOSITION_ARTIFACT_NAME = "settlement-contention-composition-vectors.v1.json"
 HOLD_LABELS = [
     "DRAFT",
     "INACTIVE",
@@ -57,6 +58,29 @@ MUTATION_DEFINITIONS = [
     ("SCENARIO_COMMITMENT_DRIFT", "COMMITMENT", True, {"operation": "replace", "path": "/scenarios/0/scenarioCommitmentSha256", "value": ZERO_HASH}, False, False),
     ("SCENARIO_SET_COMMITMENT_DRIFT", "COMMITMENT", True, {"operation": "replace", "path": "/summary/scenarioSetCommitmentSha256", "value": ZERO_HASH}, False, False),
     ("CONTENTION_MODEL_SOURCE_DRIFT", "SOURCE_BINDING", True, {"operation": "replace", "path": "/sources/contentionModel/normalizedTextSha256", "value": ZERO_HASH}, False, False),
+]
+COMPOSITION_GATE_PRECEDENCE = [
+    "STRUCTURE", "STATUS", "CAPABILITY", "AUTHORITY", "ECONOMICS",
+    "SEMANTIC_REPLAY", "COMMITMENT", "SOURCE_BINDING",
+]
+COMPOSITION_REPRESENTATIVES = {
+    "STRUCTURE": "ROOT_UNKNOWN_PROPERTY",
+    "STATUS": "STATUS_NETWORK_MAINNET",
+    "CAPABILITY": "CONTRACT_RPC_ENABLED",
+    "AUTHORITY": "SUMMARY_REVIEW_COMPLETED",
+    "ECONOMICS": "HERO_REWARD_DRIFT_REBOUND",
+    "SEMANTIC_REPLAY": "WINNER_ID_DRIFT_REBOUND",
+    "COMMITMENT": "SCENARIO_SET_COMMITMENT_DRIFT",
+    "SOURCE_BINDING": "CONTENTION_MODEL_SOURCE_DRIFT",
+}
+COMPOSITION_DEFINITIONS = [
+    (
+        f"{first_gate}__{second_gate}",
+        [first_gate, second_gate],
+        [COMPOSITION_REPRESENTATIVES[first_gate], COMPOSITION_REPRESENTATIVES[second_gate]],
+    )
+    for first_index, first_gate in enumerate(COMPOSITION_GATE_PRECEDENCE)
+    for second_gate in COMPOSITION_GATE_PRECEDENCE[first_index + 1:]
 ]
 ROOT_KEYS = {"vectorVersion", "vectorId", "status", "sources", "contract", "summary", "scenarios"}
 STATUS_KEYS = {"labels", "network", "programId", "deployable", "vectorsApplied"}
@@ -503,6 +527,191 @@ def verify_mutation_vectors(root: Path, vectors_path: Path) -> tuple[list[str], 
     return errors, report
 
 
+def apply_contention_composition(base: dict[str, Any], mutation_ids: list[str]) -> dict[str, Any]:
+    catalog = {definition[0]: definition for definition in MUTATION_DEFINITIONS}
+    definitions = [catalog[mutation_id] for mutation_id in mutation_ids]
+    candidate = json.loads(json.dumps(base, separators=(",", ":")))
+    for definition in definitions:
+        candidate = apply_pointer_mutation(candidate, definition[3])
+    for definition in definitions:
+        if definition[4]:
+            index = int(definition[3]["path"].split("/")[2])
+            scenario = candidate["scenarios"][index]
+            core = {key: value for key, value in scenario.items() if key != "scenarioCommitmentSha256"}
+            scenario["scenarioCommitmentSha256"] = canonical_sha256(core)
+    if any(definition[5] for definition in definitions):
+        candidate["summary"]["scenarioSetCommitmentSha256"] = canonical_sha256(
+            [scenario["scenarioCommitmentSha256"] for scenario in candidate["scenarios"]]
+        )
+    commitment = next((definition for definition in definitions if definition[1] == "COMMITMENT"), None)
+    if commitment:
+        candidate = apply_pointer_mutation(candidate, commitment[3])
+    return candidate
+
+
+def detect_composition_gates(base: dict[str, Any], candidate: dict[str, Any]) -> list[str]:
+    gates: set[str] = set()
+    if "expandedState" in candidate or any("expandedTimeline" in scenario for scenario in candidate.get("scenarios", [])):
+        gates.add("STRUCTURE")
+    if candidate.get("status") != base.get("status"):
+        gates.add("STATUS")
+    contract = candidate.get("contract", {})
+    if any(contract.get(field) is True for field in ["usesRpc", "usesLocalValidator", "usesWallet", "preparesTransactions"]):
+        gates.add("CAPABILITY")
+    summary = candidate.get("summary", {})
+    if (summary.get("reviewCompleted") != base["summary"].get("reviewCompleted") or
+            summary.get("activationAuthorized") != base["summary"].get("activationAuthorized") or
+            any(scenario.get("activationAuthorized") != base["scenarios"][index].get("activationAuthorized")
+                for index, scenario in enumerate(candidate.get("scenarios", [])))):
+        gates.add("AUTHORITY")
+    if any(
+        scenario.get(field) != base["scenarios"][index].get(field)
+        for index, scenario in enumerate(candidate.get("scenarios", []))
+        for field in ["winnerHeroBalanceBaseUnits", "winnerProposerBalanceBaseUnits", "vaultBalanceBaseUnits"]
+    ):
+        gates.add("ECONOMICS")
+    if any(
+        scenario.get(field) != base["scenarios"][index].get(field)
+        for index, scenario in enumerate(candidate.get("scenarios", []))
+        for field in ["winnerAttemptId", "timelineCommitmentSha256"]
+    ):
+        gates.add("SEMANTIC_REPLAY")
+    commitments_valid = True
+    for scenario in candidate.get("scenarios", []):
+        core = {key: value for key, value in scenario.items() if key != "scenarioCommitmentSha256"}
+        commitments_valid = commitments_valid and scenario.get("scenarioCommitmentSha256") == canonical_sha256(core)
+    set_commitment = canonical_sha256([
+        scenario.get("scenarioCommitmentSha256") for scenario in candidate.get("scenarios", [])
+    ])
+    if not commitments_valid or summary.get("scenarioSetCommitmentSha256") != set_commitment:
+        gates.add("COMMITMENT")
+    if candidate.get("sources") != base.get("sources"):
+        gates.add("SOURCE_BINDING")
+    return [gate for gate in COMPOSITION_GATE_PRECEDENCE if gate in gates]
+
+
+def verify_composition_vectors(root: Path, vectors_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        vectors = load_json(vectors_path)
+        base = load_json(root / ARTIFACT_NAME)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read contention composition vectors: {error}"], {}
+
+    expected_root_keys = {"vectorVersion", "vectorId", "status", "sources", "contract", "summary", "cases"}
+    exact_keys(vectors, expected_root_keys, "composition vectors", errors)
+    expect(vectors.get("vectorVersion") == 1, "composition version drift", errors)
+    expect(vectors.get("vectorId") == "iat-promotions-dlc-settlement-contention-compositions-v1", "composition ID drift", errors)
+    status = vectors.get("status")
+    if exact_keys(status, STATUS_KEYS, "composition status", errors):
+        expect(status == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "composition HOLD status drift", errors)
+
+    expected_sources = {
+        "baseArtifact": ("settlement-contention-vectors.v1.json", "canonicalSha256", canonical_sha256(base)),
+        "mutationCatalog": ("settlement-contention-mutations.mjs", "normalizedTextSha256", normalized_text_sha256(root / "settlement-contention-mutations.mjs")),
+        "nodeEvaluator": ("settlement-contention-compositions.mjs", "normalizedTextSha256", normalized_text_sha256(root / "settlement-contention-compositions.mjs")),
+        "pythonVerifier": ("verify-settlement-contention-vectors.py", "normalizedTextSha256", normalized_text_sha256(Path(__file__).resolve())),
+        "generator": ("generate-settlement-contention-composition-vectors.mjs", "normalizedTextSha256", normalized_text_sha256(root / "generate-settlement-contention-composition-vectors.mjs")),
+    }
+    sources = vectors.get("sources")
+    if exact_keys(sources, set(expected_sources), "composition sources", errors):
+        for name, (path, digest_key, digest) in expected_sources.items():
+            entry = sources.get(name)
+            if exact_keys(entry, {"path", digest_key}, f"composition sources.{name}", errors):
+                expect(entry.get("path") == path, f"composition sources.{name} path drift", errors)
+                expect(entry.get(digest_key) == digest, f"composition sources.{name} digest drift", errors)
+
+    contract = vectors.get("contract") if isinstance(vectors.get("contract"), dict) else {}
+    expect(contract.get("mode") == "DETERMINISTIC_RUNTIME_ONLY_TWO_GATE_COMPOSITIONS", "composition mode drift", errors)
+    expect(contract.get("caseCount") == 28, "composition case-count drift", errors)
+    expect(contract.get("gatePrecedence") == COMPOSITION_GATE_PRECEDENCE, "composition precedence drift", errors)
+    expect(contract.get("unorderedPairsComplete") is True, "composition pair coverage drift", errors)
+    for field in ["storesExpandedState", "storesExpandedSchedules", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"composition contract {field} drift", errors)
+    expect(contract.get("mutatedCandidatesRuntimeOnly") is True, "composition stores candidates", errors)
+    expect(contract.get("activationEffect") == "NONE", "composition activation effect drift", errors)
+
+    cases = vectors.get("cases")
+    if not isinstance(cases, list) or len(cases) != len(COMPOSITION_DEFINITIONS):
+        errors.append("composition cases must contain exactly twenty-eight entries")
+        cases = []
+    common_records: list[dict[str, Any]] = []
+    case_commitments: list[str] = []
+    catalog = {definition[0]: definition for definition in MUTATION_DEFINITIONS}
+    for index, (case_id, expected_gates, mutation_ids) in enumerate(COMPOSITION_DEFINITIONS):
+        if index >= len(cases):
+            break
+        case = cases[index]
+        expected_case_keys = {
+            "caseId", "expectedGates", "mutationCaseIds", "observedGates", "rejectionPrecedence",
+            "bothIsolationsRejected", "expectedAccepted", "candidateCommitmentSha256",
+            "nodeSemanticErrorCount", "runtimeCandidateStored", "expandedStateStored",
+            "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized",
+            "activationEffect", "caseCommitmentSha256",
+        }
+        if not exact_keys(case, expected_case_keys, f"composition cases[{index}]", errors):
+            continue
+        candidate = apply_contention_composition(base, mutation_ids)
+        observed_gates = detect_composition_gates(base, candidate)
+        candidate_errors, _ = verify_artifact(root, candidate)
+        isolation_rejected = all(bool(verify_artifact(root, apply_contention_mutation(base, catalog[item]))[0]) for item in mutation_ids)
+        expect(case.get("caseId") == case_id, f"{case_id} case ID drift", errors)
+        expect(case.get("expectedGates") == expected_gates, f"{case_id} expected gates drift", errors)
+        expect(case.get("mutationCaseIds") == mutation_ids, f"{case_id} mutation IDs drift", errors)
+        expect(observed_gates == expected_gates, f"{case_id} independently observed gates drift", errors)
+        expect(case.get("observedGates") == observed_gates, f"{case_id} published observed gates drift", errors)
+        expect(case.get("rejectionPrecedence") == observed_gates, f"{case_id} precedence drift", errors)
+        expect(bool(candidate_errors), f"{case_id} unexpectedly accepted by Python", errors)
+        expect(isolation_rejected, f"{case_id} masks an isolated failure", errors)
+        expect(case.get("bothIsolationsRejected") is True, f"{case_id} masking claim drift", errors)
+        expect(case.get("expectedAccepted") is False, f"{case_id} acceptance drift", errors)
+        candidate_commitment = canonical_sha256(candidate)
+        expect(case.get("candidateCommitmentSha256") == candidate_commitment, f"{case_id} candidate commitment drift", errors)
+        for field in ["runtimeCandidateStored", "expandedStateStored", "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+            expect(case.get(field) is False, f"{case_id} {field} drift", errors)
+        expect(case.get("activationEffect") == "NONE", f"{case_id} activation effect drift", errors)
+        core = {key: value for key, value in case.items() if key != "caseCommitmentSha256"}
+        case_commitment = canonical_sha256(core)
+        expect(case.get("caseCommitmentSha256") == case_commitment, f"{case_id} case commitment drift", errors)
+        case_commitments.append(case_commitment)
+        common_records.append({
+            "caseId": case_id,
+            "expectedGates": expected_gates,
+            "observedGates": observed_gates,
+            "candidateCommitmentSha256": candidate_commitment,
+            "bothIsolationsRejected": True,
+            "accepted": False,
+        })
+
+    summary = vectors.get("summary") if isinstance(vectors.get("summary"), dict) else {}
+    common_commitment = canonical_sha256(common_records)
+    expect(summary.get("caseCount") == "28", "composition summary count drift", errors)
+    expect(summary.get("allPairsObservedExactly") is True, "composition observation summary drift", errors)
+    expect(summary.get("noFailureMasked") is True, "composition masking summary drift", errors)
+    expect(summary.get("allRejected") is True, "composition rejection summary drift", errors)
+    expect(summary.get("commonReplayCommitmentSha256") == common_commitment, "composition common replay commitment drift", errors)
+    expect(summary.get("caseSetCommitmentSha256") == canonical_sha256(case_commitments), "composition case-set commitment drift", errors)
+    for field in ["runtimeCandidateStored", "expandedStateStored", "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"composition summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "composition summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "compositionCaseCount": len(common_records),
+        "commonReplayCommitmentSha256": common_commitment,
+        "allPairsObservedExactly": len(common_records) == len(COMPOSITION_DEFINITIONS),
+        "noFailureMasked": len(common_records) == len(COMPOSITION_DEFINITIONS),
+        "allRejected": len(common_records) == len(COMPOSITION_DEFINITIONS),
+        "expandedStateStored": False,
+        "expandedSchedulesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Replay held compact IAT settlement-contention evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -510,10 +719,15 @@ def main() -> int:
     parser.add_argument("--artifact", type=Path)
     parser.add_argument("--verify-mutation-vectors", action="store_true")
     parser.add_argument("--mutation-vectors", type=Path)
+    parser.add_argument("--verify-composition-vectors", action="store_true")
+    parser.add_argument("--composition-vectors", type=Path)
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
-    if arguments.verify_mutation_vectors:
+    if arguments.verify_composition_vectors:
+        vectors = arguments.composition_vectors.resolve() if arguments.composition_vectors else root / COMPOSITION_ARTIFACT_NAME
+        errors, report = verify_composition_vectors(root, vectors)
+    elif arguments.verify_mutation_vectors:
         vectors = arguments.mutation_vectors.resolve() if arguments.mutation_vectors else root / MUTATION_ARTIFACT_NAME
         errors, report = verify_mutation_vectors(root, vectors)
     else:
@@ -526,7 +740,7 @@ def main() -> int:
     else:
         commitment = report.get("commonReplayCommitmentSha256", report.get("replayCommitmentSha256"))
         print(f"Independent compact replay passed: {commitment}")
-    return 2 if errors and arguments.verify_mutation_vectors else (1 if errors else 0)
+    return 2 if errors and (arguments.verify_mutation_vectors or arguments.verify_composition_vectors) else (1 if errors else 0)
 
 
 if __name__ == "__main__":

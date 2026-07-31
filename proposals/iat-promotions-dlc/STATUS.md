@@ -429,8 +429,17 @@ This status file deliberately does not claim a self-referential commit hash.
   and
 - Python exit-2 rejection for changed compact mutation evidence without storing
   expanded candidates, states, schedules, traces, or attempt inputs.
+- all 28 unordered pairs of the eight contention failure gates, with exact
+  fixed-order observation and no duplicate pairs;
+- independent rejection of both isolated constituents and every combined
+  runtime-only candidate, proving no failure is masked;
+- shared Node/Python composition replay commitment
+  `4584f45b37ca33a07b5c85e68643d11ce41d4e44e3f4174d36052788f55a2faa`;
+  and
+- Python exit-2 rejection for changed compact composition evidence, with no
+  combined candidate, expanded state, schedule, trace, or attempt stored.
 
-Current proposal-only result: **311 tests passed**. This consists of 28 protected
+Current proposal-only result: **320 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -500,6 +509,10 @@ Nine deterministic mutation regeneration, gate-family coverage, all-rejected,
 schema/semantic separation, rebound-commitment, compact-publication, Python
 parity, changed-evidence exit, source-safety, and manifest-coverage tests
 complete the cross-runtime contention mutation suite.
+Nine complete-pair regeneration, unique coverage, exact precedence,
+independent no-masking rejection, compact-publication, Python parity,
+changed-evidence exit, source-safety, and manifest-coverage tests complete the
+cross-runtime two-gate composition suite.
 
 ## Current guarantees of the reference model
 
@@ -531,7 +544,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a deterministic two-gate composition matrix proving rejection precedence
-and absence of masking across compact contention mutations. Keep combined
-candidates runtime-only; do not contact a local validator, Devnet, or Mainnet;
-preserve every network, wallet, review, deployment, and activation HOLD.
+Add a closed compact schema and independent rejection-minimization proof for
+the 28-case composition artifact. Keep candidates runtime-only; do not contact
+a local validator, Devnet, or Mainnet; preserve every network, wallet, review,
+deployment, and activation HOLD.

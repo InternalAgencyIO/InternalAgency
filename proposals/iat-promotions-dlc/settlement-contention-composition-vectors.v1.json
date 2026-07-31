@@ -1,0 +1,952 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-settlement-contention-compositions-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "vectorsApplied": false
+  },
+  "sources": {
+    "baseArtifact": {
+      "path": "settlement-contention-vectors.v1.json",
+      "canonicalSha256": "00c19fe102449dfb5e12c8bcf458c6b3c11f953049efdee1cf388ed1da1caaa6"
+    },
+    "mutationCatalog": {
+      "path": "settlement-contention-mutations.mjs",
+      "normalizedTextSha256": "08c4b7b621f56254366a36485e8bd6851905a3ed0dfa6dcf9e5544707389d094"
+    },
+    "nodeEvaluator": {
+      "path": "settlement-contention-compositions.mjs",
+      "normalizedTextSha256": "6bf2ad5abadf5559988b7c17415734fc49ac961bad78e6ff569af50bacaa4959"
+    },
+    "pythonVerifier": {
+      "path": "verify-settlement-contention-vectors.py",
+      "normalizedTextSha256": "8d5634872ddb9e82e1358c62d1e8a5fc9871672f37c4db6e4a191c7bc0faf542"
+    },
+    "generator": {
+      "path": "generate-settlement-contention-composition-vectors.mjs",
+      "normalizedTextSha256": "879099bd842d7ce8edc7cb05dc9687ecf65b60111c053c8013835a4fa3a90522"
+    }
+  },
+  "contract": {
+    "mode": "DETERMINISTIC_RUNTIME_ONLY_TWO_GATE_COMPOSITIONS",
+    "caseCount": 28,
+    "gatePrecedence": [
+      "STRUCTURE",
+      "STATUS",
+      "CAPABILITY",
+      "AUTHORITY",
+      "ECONOMICS",
+      "SEMANTIC_REPLAY",
+      "COMMITMENT",
+      "SOURCE_BINDING"
+    ],
+    "unorderedPairsComplete": true,
+    "mutatedCandidatesRuntimeOnly": true,
+    "storesExpandedState": false,
+    "storesExpandedSchedules": false,
+    "usesLocalValidator": false,
+    "usesRpc": false,
+    "usesWallet": false,
+    "preparesTransactions": false,
+    "signsTransactions": false,
+    "broadcastsTransactions": false,
+    "issuesReviewReceipts": false,
+    "completesReview": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "summary": {
+    "caseCount": "28",
+    "allPairsObservedExactly": true,
+    "noFailureMasked": true,
+    "allRejected": true,
+    "commonReplayCommitmentSha256": "4584f45b37ca33a07b5c85e68643d11ce41d4e44e3f4174d36052788f55a2faa",
+    "caseSetCommitmentSha256": "20b037b16e666635cb53d09f9559bbaee3edfc5450767fe36a385910c1ccb6df",
+    "runtimeCandidateStored": false,
+    "expandedStateStored": false,
+    "expandedScheduleStored": false,
+    "receiptIssued": false,
+    "reviewCompleted": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "cases": [
+    {
+      "caseId": "STRUCTURE__STATUS",
+      "expectedGates": [
+        "STRUCTURE",
+        "STATUS"
+      ],
+      "mutationCaseIds": [
+        "ROOT_UNKNOWN_PROPERTY",
+        "STATUS_NETWORK_MAINNET"
+      ],
+      "observedGates": [
+        "STRUCTURE",
+        "STATUS"
+      ],
+      "rejectionPrecedence": [
+        "STRUCTURE",
+        "STATUS"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "d7ea48e54b02cc30cbcfb7cb0ebf390500718a05c4d6b2e932af0257cc7bf895",
+      "nodeSemanticErrorCount": "2",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "fea8ce009b7266460128025a8a3610dc7bb8c8635fce77b42f325d554ab95989"
+    },
+    {
+      "caseId": "STRUCTURE__CAPABILITY",
+      "expectedGates": [
+        "STRUCTURE",
+        "CAPABILITY"
+      ],
+      "mutationCaseIds": [
+        "ROOT_UNKNOWN_PROPERTY",
+        "CONTRACT_RPC_ENABLED"
+      ],
+      "observedGates": [
+        "STRUCTURE",
+        "CAPABILITY"
+      ],
+      "rejectionPrecedence": [
+        "STRUCTURE",
+        "CAPABILITY"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "6faa2549addbabf6bcb018295be8aef3b70d3d3238e3636206f1a4251d41162a",
+      "nodeSemanticErrorCount": "2",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "9257d67999a3714845b8c311296b20e178940d09a85b085a3c2a3c405be1a04b"
+    },
+    {
+      "caseId": "STRUCTURE__AUTHORITY",
+      "expectedGates": [
+        "STRUCTURE",
+        "AUTHORITY"
+      ],
+      "mutationCaseIds": [
+        "ROOT_UNKNOWN_PROPERTY",
+        "SUMMARY_REVIEW_COMPLETED"
+      ],
+      "observedGates": [
+        "STRUCTURE",
+        "AUTHORITY"
+      ],
+      "rejectionPrecedence": [
+        "STRUCTURE",
+        "AUTHORITY"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "8048b3db415325b5c3d9db1a44b556ca193de9de6f05a6c85de5b302117f6e05",
+      "nodeSemanticErrorCount": "2",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "941178a8bed007d4363ee51197b719700d98a87584175e91c4edec199eb478d8"
+    },
+    {
+      "caseId": "STRUCTURE__ECONOMICS",
+      "expectedGates": [
+        "STRUCTURE",
+        "ECONOMICS"
+      ],
+      "mutationCaseIds": [
+        "ROOT_UNKNOWN_PROPERTY",
+        "HERO_REWARD_DRIFT_REBOUND"
+      ],
+      "observedGates": [
+        "STRUCTURE",
+        "ECONOMICS"
+      ],
+      "rejectionPrecedence": [
+        "STRUCTURE",
+        "ECONOMICS"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "5ac6bec57b108e15a70df275d3ce4bdbabbd228e9c4b3a35e268227be2870ab9",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "aed53e638c16b09fd7dd21d23ac419e664b2e589479aaafefad89f8ea416ba3b"
+    },
+    {
+      "caseId": "STRUCTURE__SEMANTIC_REPLAY",
+      "expectedGates": [
+        "STRUCTURE",
+        "SEMANTIC_REPLAY"
+      ],
+      "mutationCaseIds": [
+        "ROOT_UNKNOWN_PROPERTY",
+        "WINNER_ID_DRIFT_REBOUND"
+      ],
+      "observedGates": [
+        "STRUCTURE",
+        "SEMANTIC_REPLAY"
+      ],
+      "rejectionPrecedence": [
+        "STRUCTURE",
+        "SEMANTIC_REPLAY"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "8879eb2c1a1f3e901169288c018c56ab5438b5e51c556617afe5800759824278",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "34e4566040b5464e06b370836dee9b6df66134d41ab76b6fefe28b9e7a0571e1"
+    },
+    {
+      "caseId": "STRUCTURE__COMMITMENT",
+      "expectedGates": [
+        "STRUCTURE",
+        "COMMITMENT"
+      ],
+      "mutationCaseIds": [
+        "ROOT_UNKNOWN_PROPERTY",
+        "SCENARIO_SET_COMMITMENT_DRIFT"
+      ],
+      "observedGates": [
+        "STRUCTURE",
+        "COMMITMENT"
+      ],
+      "rejectionPrecedence": [
+        "STRUCTURE",
+        "COMMITMENT"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "73874c393f25116e3edd5bd9b9acf6da4a6eb4543c07460c31e0cccfdcee723e",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "4774a75eea80c98748098fccc73dae2fd2e1b816304823292d1153f06810c3ad"
+    },
+    {
+      "caseId": "STRUCTURE__SOURCE_BINDING",
+      "expectedGates": [
+        "STRUCTURE",
+        "SOURCE_BINDING"
+      ],
+      "mutationCaseIds": [
+        "ROOT_UNKNOWN_PROPERTY",
+        "CONTENTION_MODEL_SOURCE_DRIFT"
+      ],
+      "observedGates": [
+        "STRUCTURE",
+        "SOURCE_BINDING"
+      ],
+      "rejectionPrecedence": [
+        "STRUCTURE",
+        "SOURCE_BINDING"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "c4e4acd9dd2d95f35ae08794f566c774938e29d304e6e8a0018ebae253731155",
+      "nodeSemanticErrorCount": "2",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "b6859bc45947230af58e6de9d380930e072c8972f7ff165e2bef52b700b7d44f"
+    },
+    {
+      "caseId": "STATUS__CAPABILITY",
+      "expectedGates": [
+        "STATUS",
+        "CAPABILITY"
+      ],
+      "mutationCaseIds": [
+        "STATUS_NETWORK_MAINNET",
+        "CONTRACT_RPC_ENABLED"
+      ],
+      "observedGates": [
+        "STATUS",
+        "CAPABILITY"
+      ],
+      "rejectionPrecedence": [
+        "STATUS",
+        "CAPABILITY"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "767eb0cc461f4919b8f553988a8e4a0ea7f666252e58926080aaff2018f9a66c",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "53012cf4a4798c3feb57e502bb5cd2464e327b90b9daaa0f8768e9a95c675924"
+    },
+    {
+      "caseId": "STATUS__AUTHORITY",
+      "expectedGates": [
+        "STATUS",
+        "AUTHORITY"
+      ],
+      "mutationCaseIds": [
+        "STATUS_NETWORK_MAINNET",
+        "SUMMARY_REVIEW_COMPLETED"
+      ],
+      "observedGates": [
+        "STATUS",
+        "AUTHORITY"
+      ],
+      "rejectionPrecedence": [
+        "STATUS",
+        "AUTHORITY"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "91e986d481ece30fb1789fbc5f4813c31361565dbb89bedd997a3f639193fe51",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "76037e468a2f03fef6c02ab9ff7d99b80ac50dfe29f395ae1a1be57a4767f1a5"
+    },
+    {
+      "caseId": "STATUS__ECONOMICS",
+      "expectedGates": [
+        "STATUS",
+        "ECONOMICS"
+      ],
+      "mutationCaseIds": [
+        "STATUS_NETWORK_MAINNET",
+        "HERO_REWARD_DRIFT_REBOUND"
+      ],
+      "observedGates": [
+        "STATUS",
+        "ECONOMICS"
+      ],
+      "rejectionPrecedence": [
+        "STATUS",
+        "ECONOMICS"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "0ea959fe7656b182ce0343b09276724f69f35cf9c9d60fb47dc65607bb0060f3",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "b75a646ceb73cd949fac9c6fa4362ecf79838388a13c6780636ea48815a60e12"
+    },
+    {
+      "caseId": "STATUS__SEMANTIC_REPLAY",
+      "expectedGates": [
+        "STATUS",
+        "SEMANTIC_REPLAY"
+      ],
+      "mutationCaseIds": [
+        "STATUS_NETWORK_MAINNET",
+        "WINNER_ID_DRIFT_REBOUND"
+      ],
+      "observedGates": [
+        "STATUS",
+        "SEMANTIC_REPLAY"
+      ],
+      "rejectionPrecedence": [
+        "STATUS",
+        "SEMANTIC_REPLAY"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "56ad175cd75a49e719fbb6b89f46f5531e081275153a9a6ea4347d9dbbddc7c8",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "a3e7337555c6f3cb90f2b86f49e68a438d321291a91b5653f3689cc615290f85"
+    },
+    {
+      "caseId": "STATUS__COMMITMENT",
+      "expectedGates": [
+        "STATUS",
+        "COMMITMENT"
+      ],
+      "mutationCaseIds": [
+        "STATUS_NETWORK_MAINNET",
+        "SCENARIO_SET_COMMITMENT_DRIFT"
+      ],
+      "observedGates": [
+        "STATUS",
+        "COMMITMENT"
+      ],
+      "rejectionPrecedence": [
+        "STATUS",
+        "COMMITMENT"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "e642cedb23af5a274325035acb150858ceaf7b217098f2af82a3dc2dda90f3c5",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "5150e79deaad05bf457bd1dc0a63f4c6e85330bb6a652276575709f49837e5e6"
+    },
+    {
+      "caseId": "STATUS__SOURCE_BINDING",
+      "expectedGates": [
+        "STATUS",
+        "SOURCE_BINDING"
+      ],
+      "mutationCaseIds": [
+        "STATUS_NETWORK_MAINNET",
+        "CONTENTION_MODEL_SOURCE_DRIFT"
+      ],
+      "observedGates": [
+        "STATUS",
+        "SOURCE_BINDING"
+      ],
+      "rejectionPrecedence": [
+        "STATUS",
+        "SOURCE_BINDING"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "dc837ed725c2ed967d82f030e864d34a2f5dee02929791a41ed744b1e2dc9154",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "42710e9ed53ef15098eda831559782bfefa9e4b37c1a43e7691dba7b18339074"
+    },
+    {
+      "caseId": "CAPABILITY__AUTHORITY",
+      "expectedGates": [
+        "CAPABILITY",
+        "AUTHORITY"
+      ],
+      "mutationCaseIds": [
+        "CONTRACT_RPC_ENABLED",
+        "SUMMARY_REVIEW_COMPLETED"
+      ],
+      "observedGates": [
+        "CAPABILITY",
+        "AUTHORITY"
+      ],
+      "rejectionPrecedence": [
+        "CAPABILITY",
+        "AUTHORITY"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "915e04a6cfa333c650fd08172ce2dd56e72528591e0d04dc91561a2866387fa3",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "0ca7d5d57cf73bc8fdc99e80e5d2d107afaa6096e2d952478e9255cefd259de3"
+    },
+    {
+      "caseId": "CAPABILITY__ECONOMICS",
+      "expectedGates": [
+        "CAPABILITY",
+        "ECONOMICS"
+      ],
+      "mutationCaseIds": [
+        "CONTRACT_RPC_ENABLED",
+        "HERO_REWARD_DRIFT_REBOUND"
+      ],
+      "observedGates": [
+        "CAPABILITY",
+        "ECONOMICS"
+      ],
+      "rejectionPrecedence": [
+        "CAPABILITY",
+        "ECONOMICS"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "09a525538eb561fa5934e688f7a2e8bb795b86ff823ac36d40fb163d74442401",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "218efd218c875c94743971b861a7d479cfb42fc796ee6a97efca6ebe399a83f1"
+    },
+    {
+      "caseId": "CAPABILITY__SEMANTIC_REPLAY",
+      "expectedGates": [
+        "CAPABILITY",
+        "SEMANTIC_REPLAY"
+      ],
+      "mutationCaseIds": [
+        "CONTRACT_RPC_ENABLED",
+        "WINNER_ID_DRIFT_REBOUND"
+      ],
+      "observedGates": [
+        "CAPABILITY",
+        "SEMANTIC_REPLAY"
+      ],
+      "rejectionPrecedence": [
+        "CAPABILITY",
+        "SEMANTIC_REPLAY"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "23109442be0cbfc248bcae2178fc2adbe86fb46ef2e2879827feaa5e44a497c1",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "742c6a50c2a243cbe8366104d14ea41755b1d59d8ed604a3cc13523de4d8ef5c"
+    },
+    {
+      "caseId": "CAPABILITY__COMMITMENT",
+      "expectedGates": [
+        "CAPABILITY",
+        "COMMITMENT"
+      ],
+      "mutationCaseIds": [
+        "CONTRACT_RPC_ENABLED",
+        "SCENARIO_SET_COMMITMENT_DRIFT"
+      ],
+      "observedGates": [
+        "CAPABILITY",
+        "COMMITMENT"
+      ],
+      "rejectionPrecedence": [
+        "CAPABILITY",
+        "COMMITMENT"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "ca676c37d909dc5d60a317877f78d970837d4258d72edaaf80429bec54502829",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "f4d3a1f448390203d43ca2b9b9d728233a53aa0557b50b90f88869cc252b9914"
+    },
+    {
+      "caseId": "CAPABILITY__SOURCE_BINDING",
+      "expectedGates": [
+        "CAPABILITY",
+        "SOURCE_BINDING"
+      ],
+      "mutationCaseIds": [
+        "CONTRACT_RPC_ENABLED",
+        "CONTENTION_MODEL_SOURCE_DRIFT"
+      ],
+      "observedGates": [
+        "CAPABILITY",
+        "SOURCE_BINDING"
+      ],
+      "rejectionPrecedence": [
+        "CAPABILITY",
+        "SOURCE_BINDING"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "c739234588be3218c06068c09317c9855269ab8aac2dcb28e859b5910a229c4c",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "30c6b6ea3d68c40d54a1b673dcce0d0cb50ed9a3f5757b2423e711c0c32c5457"
+    },
+    {
+      "caseId": "AUTHORITY__ECONOMICS",
+      "expectedGates": [
+        "AUTHORITY",
+        "ECONOMICS"
+      ],
+      "mutationCaseIds": [
+        "SUMMARY_REVIEW_COMPLETED",
+        "HERO_REWARD_DRIFT_REBOUND"
+      ],
+      "observedGates": [
+        "AUTHORITY",
+        "ECONOMICS"
+      ],
+      "rejectionPrecedence": [
+        "AUTHORITY",
+        "ECONOMICS"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "cab3ece9d9ef28e17ae74960383fe2e3e67e600a672b7bfb7e138f622917ff84",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "06d9ea423ddf83b770a10805ea9e5aeb2a9ac3516b07b80aae1fac75268a90dd"
+    },
+    {
+      "caseId": "AUTHORITY__SEMANTIC_REPLAY",
+      "expectedGates": [
+        "AUTHORITY",
+        "SEMANTIC_REPLAY"
+      ],
+      "mutationCaseIds": [
+        "SUMMARY_REVIEW_COMPLETED",
+        "WINNER_ID_DRIFT_REBOUND"
+      ],
+      "observedGates": [
+        "AUTHORITY",
+        "SEMANTIC_REPLAY"
+      ],
+      "rejectionPrecedence": [
+        "AUTHORITY",
+        "SEMANTIC_REPLAY"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "a6e7137202c4e6c0df86339d5953587ca7d291bfdf905e2501cabe4ac4d02723",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "cfc76dbd704c7415a74b72768b08c05b2a19c0e10cc5841c4430c93ac362ca46"
+    },
+    {
+      "caseId": "AUTHORITY__COMMITMENT",
+      "expectedGates": [
+        "AUTHORITY",
+        "COMMITMENT"
+      ],
+      "mutationCaseIds": [
+        "SUMMARY_REVIEW_COMPLETED",
+        "SCENARIO_SET_COMMITMENT_DRIFT"
+      ],
+      "observedGates": [
+        "AUTHORITY",
+        "COMMITMENT"
+      ],
+      "rejectionPrecedence": [
+        "AUTHORITY",
+        "COMMITMENT"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "81c809171bd71509d5cb8ba6eb3bd686aa4affcb2b5f719a550f1a496b958e11",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "c70354afd691c300ba68844a350c4964b1fdddb7828fd411a1791729f8eebe0f"
+    },
+    {
+      "caseId": "AUTHORITY__SOURCE_BINDING",
+      "expectedGates": [
+        "AUTHORITY",
+        "SOURCE_BINDING"
+      ],
+      "mutationCaseIds": [
+        "SUMMARY_REVIEW_COMPLETED",
+        "CONTENTION_MODEL_SOURCE_DRIFT"
+      ],
+      "observedGates": [
+        "AUTHORITY",
+        "SOURCE_BINDING"
+      ],
+      "rejectionPrecedence": [
+        "AUTHORITY",
+        "SOURCE_BINDING"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "ae21a9d11fd4a9b16b66b0953fce32aeefd1c909fec0f16e131103fda3dc7f54",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "2ff26d7b5ceee8ef7da4e51803bde373d429362a709018ed6f3f0a6448b44ea1"
+    },
+    {
+      "caseId": "ECONOMICS__SEMANTIC_REPLAY",
+      "expectedGates": [
+        "ECONOMICS",
+        "SEMANTIC_REPLAY"
+      ],
+      "mutationCaseIds": [
+        "HERO_REWARD_DRIFT_REBOUND",
+        "WINNER_ID_DRIFT_REBOUND"
+      ],
+      "observedGates": [
+        "ECONOMICS",
+        "SEMANTIC_REPLAY"
+      ],
+      "rejectionPrecedence": [
+        "ECONOMICS",
+        "SEMANTIC_REPLAY"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "b0aaf74bd279a361fea327e8090ef06da132e06a782780128fccedc8de0cea6d",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "da5ad3d5d2ac1ba3cfb4905d9362ef4b7712e01c2c988e6add3fa633d867b25b"
+    },
+    {
+      "caseId": "ECONOMICS__COMMITMENT",
+      "expectedGates": [
+        "ECONOMICS",
+        "COMMITMENT"
+      ],
+      "mutationCaseIds": [
+        "HERO_REWARD_DRIFT_REBOUND",
+        "SCENARIO_SET_COMMITMENT_DRIFT"
+      ],
+      "observedGates": [
+        "ECONOMICS",
+        "COMMITMENT"
+      ],
+      "rejectionPrecedence": [
+        "ECONOMICS",
+        "COMMITMENT"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "e87ca1adb57c54f84b98e3db00db06b5d20e0b83c994dda7f98678bf9a19e6b4",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "72756d53e87b2bbe0211821fae6b445d485f68e64b48438c93f0570834553e40"
+    },
+    {
+      "caseId": "ECONOMICS__SOURCE_BINDING",
+      "expectedGates": [
+        "ECONOMICS",
+        "SOURCE_BINDING"
+      ],
+      "mutationCaseIds": [
+        "HERO_REWARD_DRIFT_REBOUND",
+        "CONTENTION_MODEL_SOURCE_DRIFT"
+      ],
+      "observedGates": [
+        "ECONOMICS",
+        "SOURCE_BINDING"
+      ],
+      "rejectionPrecedence": [
+        "ECONOMICS",
+        "SOURCE_BINDING"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "54ccfa9105fed09ca8a868bf947ed8aa64b4e490ffeba33d3cd5c6b156e96d97",
+      "nodeSemanticErrorCount": "4",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "3b9cd352859fa88c64ddd7b94eaaf134382adc097476cca416102979443197ca"
+    },
+    {
+      "caseId": "SEMANTIC_REPLAY__COMMITMENT",
+      "expectedGates": [
+        "SEMANTIC_REPLAY",
+        "COMMITMENT"
+      ],
+      "mutationCaseIds": [
+        "WINNER_ID_DRIFT_REBOUND",
+        "SCENARIO_SET_COMMITMENT_DRIFT"
+      ],
+      "observedGates": [
+        "SEMANTIC_REPLAY",
+        "COMMITMENT"
+      ],
+      "rejectionPrecedence": [
+        "SEMANTIC_REPLAY",
+        "COMMITMENT"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "68708cd3bb030aece199ca46cee6b5237c094c24dd669ac6cb9b49f088d71821",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "cf6b00d8e06e075cd3da4263ddfa14e48d962f2b81fc146923c08e9e5af6ec4e"
+    },
+    {
+      "caseId": "SEMANTIC_REPLAY__SOURCE_BINDING",
+      "expectedGates": [
+        "SEMANTIC_REPLAY",
+        "SOURCE_BINDING"
+      ],
+      "mutationCaseIds": [
+        "WINNER_ID_DRIFT_REBOUND",
+        "CONTENTION_MODEL_SOURCE_DRIFT"
+      ],
+      "observedGates": [
+        "SEMANTIC_REPLAY",
+        "SOURCE_BINDING"
+      ],
+      "rejectionPrecedence": [
+        "SEMANTIC_REPLAY",
+        "SOURCE_BINDING"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "b299a4615fa1516334e15ed162ea624f3802087a3e84d411d6a5768e98fdd292",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "9f27b0c7604f36ec08f31aa53c25a1d76ea1fb1143f3633f50fb215cdbc49181"
+    },
+    {
+      "caseId": "COMMITMENT__SOURCE_BINDING",
+      "expectedGates": [
+        "COMMITMENT",
+        "SOURCE_BINDING"
+      ],
+      "mutationCaseIds": [
+        "SCENARIO_SET_COMMITMENT_DRIFT",
+        "CONTENTION_MODEL_SOURCE_DRIFT"
+      ],
+      "observedGates": [
+        "COMMITMENT",
+        "SOURCE_BINDING"
+      ],
+      "rejectionPrecedence": [
+        "COMMITMENT",
+        "SOURCE_BINDING"
+      ],
+      "bothIsolationsRejected": true,
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "ca5aaf333065f3e904a8083e5dcaa443ed559516337de17037bca75edf0d04d7",
+      "nodeSemanticErrorCount": "3",
+      "runtimeCandidateStored": false,
+      "expandedStateStored": false,
+      "expandedScheduleStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "5f7dc06daf5fbbe3a8ddc07d1a50144de806eadd447f2c713a7ebf298b3c9af9"
+    }
+  ]
+}
