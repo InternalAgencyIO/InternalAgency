@@ -770,6 +770,13 @@ rejected and regenerated.
 | **Ouagadougou Place des Cineastes Copper Intercept**<br><img src="612-burkina-faso-ouagadougou-place-des-cineastes-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise lens prism at Ouagadougou's Place des Cineastes and monumental camera sculpture"> | **Tiebele Painted Courtyard Cipher**<br><img src="613-burkina-faso-tiebele-painted-courtyard-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Tiebele's graphic black, white, and ochre painted-earth courtyard architecture"> |
 | **Sindou Peaks Sandstone Light Extraction**<br><img src="614-burkina-faso-sindou-peaks-sandstone-extraction.png" width="420" alt="The trio restoring a climate-data beacon before the Sindou Peaks' narrow sandstone spires and ochre ravines"> | **Bobo-Dioulasso Railway Station Starlight Relay**<br><img src="615-burkina-faso-bobo-dioulasso-railway-station-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet night relay beside Bobo-Dioulasso's historic railway platform"> |
 
+## World Series - Asia - Batch 149: Sri Lanka
+
+| | |
+|---|---|
+| **Colombo Lotus Tower Sapphire Intercept**<br><img src="616-sri-lanka-colombo-lotus-tower-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise prism above Colombo's Beira Lake waterfront with the Lotus Tower beyond"> | **Galle Fort Rampart Amber Cipher**<br><img src="617-sri-lanka-galle-fort-rampart-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Galle Fort's ocean-facing stone ramparts and tiled rooflines"> |
+| **Horton Plains World's End Cloud Extraction**<br><img src="618-sri-lanka-horton-plains-worlds-end-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Horton Plains at World's End with cloud forest and escarpment beyond"> | **Ella Nine Arch Bridge Starlight Relay**<br><img src="619-sri-lanka-ella-nine-arch-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald night relay beside Ella's Nine Arch Bridge and tea-green hillsides"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
