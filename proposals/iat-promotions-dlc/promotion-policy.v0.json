@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 0,
+  "proposalId": "iat-promotions-dlc-v0",
+  "status": {
+    "draft": true,
+    "active": false,
+    "partOfGenesis": false,
+    "deployed": false,
+    "claimRoute": null,
+    "network": "NONE"
+  },
+  "activation": {
+    "genesisOffsetSeconds": 28800,
+    "automatic": false,
+    "requiresVerifiedMainnetGenesis": true,
+    "requiresSeparateReview": true,
+    "requiresSeparateFunding": true,
+    "requiresExplicitActivationTransaction": true
+  },
+  "economics": {
+    "mintDecimals": 9,
+    "heroRewardIat": 120,
+    "proposerRewardIat": 60,
+    "pairRewardIat": 180,
+    "maximumCompletedPairs": 1000,
+    "maximumHeroRewards": 1000,
+    "maximumProposerRewards": 1000,
+    "maximumBudgetIat": 180000,
+    "heroRewardBaseUnits": "120000000000",
+    "proposerRewardBaseUnits": "60000000000",
+    "pairRewardBaseUnits": "180000000000",
+    "maximumBudgetBaseUnits": "180000000000000",
+    "fundingSource": "COMMUNITY_ALLOCATION_SEPARATE_PROMOTION_VAULT",
+    "touchesV2RewardLanes": false,
+    "atomicPairedSettlement": true
+  },
+  "eligibility": {
+    "optionalForNodeActivation": true,
+    "heroMustConnectIndependently": true,
+    "xVerificationRequired": true,
+    "stableXUserIdControlsIdentity": true,
+    "displayHandleControlsIdentity": false,
+    "rejectSelfProposalByNode": true,
+    "rejectSelfProposalByWallet": true,
+    "rejectSelfProposalByXIdentity": true
+  },
+  "uniqueness": {
+    "roles": [
+      "HERO",
+      "PROPOSER"
+    ],
+    "dimensionsPerRole": [
+      "NODE",
+      "WALLET",
+      "X_IDENTITY_COMMITMENT"
+    ],
+    "maximumRewardsPerIdentityPerRole": 1,
+    "heroAndProposerRolesIndependent": true,
+    "oneActiveNominationPerProposer": true,
+    "oneActiveReservationPerHeroIdentity": true
+  },
+  "capacity": {
+    "consumedOnlyByCompletedAtomicPair": true,
+    "pendingConsumesCapacity": false,
+    "invalidConsumesCapacity": false,
+    "cancelledConsumesCapacity": false,
+    "duplicateConsumesCapacity": false,
+    "exhaustedIsPermanent": true
+  },
+  "publicEvidence": {
+    "publishAggregateState": true,
+    "publishVaultAccounting": true,
+    "publishSettlementTransactions": true,
+    "publishSourceAndArtifactHashesBeforeActivation": true,
+    "publishPrivateIdentityData": false
+  },
+  "meaningOfInstant": "PREPARE_AND_SUBMIT_WHEN_VERIFIED_SUBJECT_TO_NORMAL_SOLANA_CONFIRMATION"
+}
