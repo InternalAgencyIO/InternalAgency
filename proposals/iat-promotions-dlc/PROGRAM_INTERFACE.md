@@ -12,8 +12,9 @@ or emergency-disable instruction. It must not be treated as deployment-ready.
 `VERIFIER_KEY_LIFECYCLE.md` defines the reference behavior that a separately
 reviewed machine-interface amendment still needs to encode.
 `program-interface-key-lifecycle-amendment.v1.json` now encodes that proposed
-delta, but it remains `amendmentApplied: false`; no full composed interface or
-reviewed binary exists.
+delta, and `program-interface-composition-preview.v1.json` deterministically
+shows the complete result. Both remain unapplied and undeployable; no reviewed
+binary exists.
 
 ## Encoding contract
 
@@ -120,3 +121,10 @@ This draft contains no secret, signer, private key, deployed address, live RPC
 route, or chain-specific transaction. Any implementation would require a new
 security review, deterministic build, public artifact hash, Devnet rehearsal,
 and separate mainnet decision.
+
+The composed preview is derived evidence, not an upgrade. Its generator removes
+the obsolete initializer key argument, replaces the same-size Campaign field,
+adds read-only registry/key accounts and issuance-time guards to all three
+attestation consumers, and appends the five lifecycle instructions. The drift
+validator recomputes that result from the two interface sources and both vector
+artifacts so a stale hand-edited preview cannot pass.

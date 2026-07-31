@@ -58,6 +58,10 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Machine-readable lifecycle amendment](./program-interface-key-lifecycle-amendment.v1.json)
 - [Lifecycle amendment byte vectors](./program-interface-key-lifecycle-vectors.v1.json)
 - [Lifecycle amendment validator](./validate-key-lifecycle-amendment.mjs)
+- [Held full-interface composition preview](./COMPOSITION_PREVIEW.md)
+- [Machine-readable composed preview](./program-interface-composition-preview.v1.json)
+- [Deterministic preview composer](./compose-program-interface-preview.mjs)
+- [Cross-interface drift validator](./validate-program-interface-composition.mjs)
 - [Proposal-only tests](./tests/)
 
 Run the proposal-only checks with:
@@ -67,6 +71,7 @@ node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
 node proposals/iat-promotions-dlc/validate-ed25519-public-vectors.mjs
 node proposals/iat-promotions-dlc/validate-key-lifecycle-amendment.mjs
+node proposals/iat-promotions-dlc/validate-program-interface-composition.mjs
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
 node --test proposals/iat-promotions-dlc/tests/attestation-transparency.test.mjs
@@ -77,6 +82,7 @@ node --test proposals/iat-promotions-dlc/tests/deterministic-byte-fuzz.test.mjs
 node --test proposals/iat-promotions-dlc/tests/ed25519-public-vectors.test.mjs
 node --test proposals/iat-promotions-dlc/tests/verifier-key-lifecycle.test.mjs
 node --test proposals/iat-promotions-dlc/tests/key-lifecycle-amendment.test.mjs
+node --test proposals/iat-promotions-dlc/tests/program-interface-composition.test.mjs
 ```
 
 ## Deliberate isolation

@@ -86,9 +86,19 @@ export function validateKeyLifecycleAmendment(definition) {
   expect(changes?.campaignFieldRemoval?.name === "verifier_ed25519_key", "v0 key field removal missing");
   expect(changes?.campaignFieldAddition?.name === "verifier_registry", "registry field addition missing");
   expect(
+    changes?.initializerDataRemoval?.instruction === "initialize_campaign" &&
+      changes?.initializerDataRemoval?.field?.name === "verifier_ed25519_key" &&
+      changes?.initializerDataRemoval?.field?.type === "bytes32",
+    "v0 initializer key argument removal missing",
+  );
+  expect(
     JSON.stringify(changes.attestationInstructions) ===
       JSON.stringify(["nominate_hero", "cancel_nomination", "settle_pair"]),
     "attestation instruction amendment mismatch",
+  );
+  expect(
+    changes.attestationAccountInsertionBefore === "instructions_sysvar",
+    "attestation account insertion point mismatch",
   );
   expect(
     JSON.stringify(changes.requiredReadOnlyAccounts) ===

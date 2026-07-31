@@ -91,10 +91,19 @@ security audit or deployment approval.
 | Emergency terminal or clock guard removed | same | Amendment validator rejects the weakened disable path |
 | Re-enable instruction added | `base attestation binding...` | Instruction set and forbidden-capability validation fail |
 | Read-only registry/key binding removed from settlement | same | Base-interface amendment validation fails |
+| Base or amendment source changes under a stale composed preview | `a base-interface mutation...`; `an amendment mutation...` | Canonical source digest and full deterministic composition mismatch |
+| Base or amendment vector removed or reordered | `vector removal and discriminator changes...` | Composition stops before a preview can be accepted |
+| Vector discriminator differs from its composed instruction | same | Drift validator rejects the mismatched vector |
+| Base/amendment discriminator collision | `cross-domain account and instruction...` | Composer rejects ambiguous account or instruction identity |
+| Inline verifier field or initializer argument survives composition | `composition replaces inline verifier state...` | Preview validation fails |
+| Registry/key accounts become writable on an attestation path | `every attestation consumer...` | Drift validator rejects the capability escalation |
+| Preview claims mainnet, a program ID, deployment, or application | `deployment claims and writable external accounts...` | Preview status gate and exact recomposition both fail |
+| Treasury or another external lane becomes writable | same | Cross-interface capability scan rejects the instruction |
+| Applied amendment or released v0 HOLD used as preview input | `composition refuses an applied amendment...` | Composer stops; no derived artifact is accepted |
 
 ## Next matrix expansion
 
-- deterministic full-interface composition preview and cross-interface drift checks;
+- deterministic account/data offset manifest and cross-language ABI drift checks;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

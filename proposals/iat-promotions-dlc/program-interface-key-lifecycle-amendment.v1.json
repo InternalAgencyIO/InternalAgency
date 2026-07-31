@@ -51,11 +51,19 @@
       "type": "pubkey",
       "sizeBytes": 32
     },
+    "initializerDataRemoval": {
+      "instruction": "initialize_campaign",
+      "field": {
+        "name": "verifier_ed25519_key",
+        "type": "bytes32"
+      }
+    },
     "attestationInstructions": [
       "nominate_hero",
       "cancel_nomination",
       "settle_pair"
     ],
+    "attestationAccountInsertionBefore": "instructions_sysvar",
     "requiredReadOnlyAccounts": [
       "verifier_registry",
       "verifier_key_record"

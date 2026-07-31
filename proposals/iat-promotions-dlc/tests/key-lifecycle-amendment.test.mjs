@@ -158,6 +158,8 @@ test("weakened schedule, emergency, and optional-account guards invalidate the a
 
 test("base attestation binding and forbidden-capability mutations invalidate the amendment", () => {
   const mutated = clone(amendment);
+  mutated.baseInterfaceChanges.initializerDataRemoval.field.name = "wrong_key";
+  mutated.baseInterfaceChanges.attestationAccountInsertionBefore = "clock_sysvar";
   mutated.baseInterfaceChanges.requiredReadOnlyAccounts = ["verifier_registry"];
   mutated.baseInterfaceChanges.requiredAttestationGuards =
     mutated.baseInterfaceChanges.requiredAttestationGuards.filter(
@@ -176,6 +178,8 @@ test("base attestation binding and forbidden-capability mutations invalidate the
   });
   const errors = validateKeyLifecycleAmendment(mutated);
 
+  assert.ok(errors.includes("v0 initializer key argument removal missing"));
+  assert.ok(errors.includes("attestation account insertion point mismatch"));
   assert.ok(errors.includes("attestation read-only account amendment mismatch"));
   assert.ok(errors.includes("attestation guard missing: KEY_NOT_RETIRED_AT_ISSUED_AT"));
   assert.ok(errors.includes("re-enable path must not exist"));

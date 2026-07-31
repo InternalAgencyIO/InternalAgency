@@ -13,6 +13,9 @@ The amendment replaces the campaign's inline `verifier_ed25519_key` field with
 a read-only `verifier_registry` public key. The nomination, cancellation, and
 settlement instructions must then receive both the registry and selected key
 record as read-only accounts and enforce issuance-time validity against them.
+The composed preview also removes the now-obsolete inline verifier-key argument
+from `initialize_campaign`; the separate registry initializer supplies the
+initial public verification key after campaign initialization.
 
 This is a same-size field replacement, but that does not make it a safe binary
 patch. A full composed interface, deterministic build, new artifact hash,
@@ -77,9 +80,21 @@ independent approval, deterministic build, new public artifact hash, and Devnet
 rehearsal. `program-interface-key-lifecycle-vectors.v1.json` fixes the proposed
 bytes for all five new instructions, but those vectors are design evidence only.
 
-## Open composition questions
+## Deterministic composition evidence
 
-- whether registry initialization must be atomic with campaign initialization;
+`program-interface-composition-preview.v1.json` is generated solely from the
+base interface, this amendment, and their two byte-vector artifacts. It binds
+all four inputs by canonical SHA-256, preserves both discriminator domains,
+rejects cross-domain discriminator collisions, and carries every original and
+amended forbidden-capability declaration.
+
+The preview deliberately says `deployable: false`, `amendmentApplied: false`,
+and `compositionApplied: false`. `validate-program-interface-composition.mjs`
+recomputes it byte-for-byte and rejects source, vector, account, guard,
+capability, status, or deployment-claim drift.
+
+## Open review questions
+
 - the exact independent-reviewer threshold and emergency governance;
 - how the optional pending-key account is represented in a fixed client API;
 - event-byte definitions and whether the on-chain event head is necessary;
