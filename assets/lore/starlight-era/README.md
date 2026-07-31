@@ -763,6 +763,13 @@ rejected and regenerated.
 | **Bamako Niger River Third Bridge Amber Intercept**<br><img src="608-mali-bamako-niger-river-third-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise prism above Bamako's Niger River waterfront with the Third Bridge beyond"> | **Segou Riverfront Earthen Courtyard Cipher**<br><img src="609-mali-segou-riverfront-earthen-courtyard-cipher.png" width="420" alt="The trio sealing an amber archive prism among Segou's ochre earthen facades and carved wooden doors"> |
 | **Hombori Mountains Sandstone Light Extraction**<br><img src="610-mali-hombori-mountains-sandstone-extraction.png" width="420" alt="The trio restoring a climate-data beacon above the Hombori Mountains' sheer sandstone massifs and open Sahel plain"> | **Mopti Niger Bani Confluence Starlight Relay**<br><img src="611-mali-mopti-niger-bani-confluence-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal relay above Mopti's cobalt Niger-Bani river confluence"> |
 
+## World Series - Africa - Batch 148: Burkina Faso
+
+| | |
+|---|---|
+| **Ouagadougou Place des Cineastes Copper Intercept**<br><img src="612-burkina-faso-ouagadougou-place-des-cineastes-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise lens prism at Ouagadougou's Place des Cineastes and monumental camera sculpture"> | **Tiebele Painted Courtyard Cipher**<br><img src="613-burkina-faso-tiebele-painted-courtyard-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Tiebele's graphic black, white, and ochre painted-earth courtyard architecture"> |
+| **Sindou Peaks Sandstone Light Extraction**<br><img src="614-burkina-faso-sindou-peaks-sandstone-extraction.png" width="420" alt="The trio restoring a climate-data beacon before the Sindou Peaks' narrow sandstone spires and ochre ravines"> | **Bobo-Dioulasso Railway Station Starlight Relay**<br><img src="615-burkina-faso-bobo-dioulasso-railway-station-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet night relay beside Bobo-Dioulasso's historic railway platform"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
