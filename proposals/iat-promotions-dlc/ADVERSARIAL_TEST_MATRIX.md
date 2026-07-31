@@ -51,9 +51,18 @@ security audit or deployment approval.
 | Deterministic instruction serialization | `published vectors encode...` | Every instruction matches its fixed public byte vector and round-trips |
 | Missing, extra, malformed, negative, unsafe, or overflowing field | `the encoder rejects...` | Encoding fails before bytes are produced |
 | Unknown discriminator, truncation, or trailing bytes | `the decoder rejects...` | Decoding fails without accepting an ambiguous instruction |
+| Encoded bytes drift from the pure transition model | `encoded initialization, funding...` | Full lifecycle decodes and preserves exact accounting |
+| Pre-activation refund through encoded adapter | `pre-activation cancellation...` | Only the isolated promotion balance returns to the fixed refund lane |
+| Encoded cancellation path | `encoded nomination cancellation...` | Reservation releases with zero spend and zero completed capacity |
+| Verifier reports a non-exact signed message | `verification, policy...` | Rejected before any state transition |
+| Attestation ID differs from encoded bytes | same | Rejected before any state transition |
+| Policy hash differs during activation | same | Rejected without mutating the funded campaign |
+| Failure after decoded hero transfer | same | Caller state retains zero partial effects |
+| 1,000 encoded nomination/settlement pairs | `pair 1,000 exhausts through encoded transitions...` | Exact cap and zero remaining vault balance |
+| Repeated terminal surplus finalization | same | First finalization is auditable; repeat is permanently rejected |
 
 ## Next matrix expansion
 
 - verifier envelope byte-level fuzzing and real Ed25519 public test vectors;
-- instruction/account transition adapter and property-based codec fuzzing;
+- property-based codec and decoded-transition fuzzing;
 - local-validator transaction rollback and account-lock contention.

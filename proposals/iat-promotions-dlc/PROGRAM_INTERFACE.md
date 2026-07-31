@@ -22,6 +22,12 @@ wallet request, or authorization to fund or activate anything.
 instruction. `program-interface-codec.mjs` can encode and decode those vectors
 without a wallet, RPC endpoint, chain connection, or private key.
 
+`instruction-transition-adapter.mjs` is a second network-free proof layer. It
+accepts encoded bytes, decodes them through the fixed codec, binds the decoded
+fields to an already-verified attestation context, and applies the matching
+pure reference-engine transition. It cannot construct a transaction, call an
+RPC endpoint, request a signature, or access a wallet.
+
 ## Proposed account graph
 
 - `Campaign` contains immutable economics, identity domain, verifier key,
@@ -75,6 +81,12 @@ on-chain uniqueness key.
 The verifier is trusted only to attest the identity facts it observed. It
 cannot mint, move campaign funds by itself, redirect either reward, alter the
 cap, reopen exhaustion, or write any IAT V2 account.
+
+The transition adapter rejects a verifier result unless its approved public
+key, exact-message flag, purpose, campaign, attestation ID, nonce hash,
+timestamps, node commitment, and X identity commitment match the decoded
+instruction and current campaign. This models the input boundary; it does not
+pretend to implement or replace Ed25519 signature verification.
 
 ## Race and rollback rules
 

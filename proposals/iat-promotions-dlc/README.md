@@ -48,6 +48,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Machine-readable account/instruction interface](./program-interface.v0.json)
 - [Deterministic instruction vectors](./program-interface-vectors.v0.json)
 - [Network-free instruction codec](./program-interface-codec.mjs)
+- [Network-free instruction transition adapter](./instruction-transition-adapter.mjs)
 - [Interface validator](./validate-program-interface.mjs)
 - [Proposal-only tests](./tests/)
 
@@ -61,6 +62,7 @@ node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
 node --test proposals/iat-promotions-dlc/tests/attestation-transparency.test.mjs
 node --test proposals/iat-promotions-dlc/tests/randomized-state-machine.test.mjs
 node --test proposals/iat-promotions-dlc/tests/program-interface.test.mjs
+node --test proposals/iat-promotions-dlc/tests/instruction-transition-adapter.test.mjs
 ```
 
 ## Deliberate isolation

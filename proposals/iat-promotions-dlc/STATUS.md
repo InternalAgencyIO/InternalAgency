@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 11:35 UTC
+Updated: 2026-07-31 11:50 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `b5e18e6`
+Previously published public increment: `90be7f9`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -41,12 +41,20 @@ This status file deliberately does not claim a self-referential commit hash.
 - one public byte vector for every proposed instruction;
 - a network-free codec and structural interface validator; and
 - mutation tests for deployment claims, layout drift, forbidden V2 accounts,
-  integer boundaries, ambiguous bytes, weakened atomicity, and terminal guards.
+  integer boundaries, ambiguous bytes, weakened atomicity, and terminal guards;
+- network-free adapter from encoded instructions to pure state transitions;
+- exact verifier-result binding across public key, message, campaign, purpose,
+  attestation ID, nonce, timestamps, node, wallet, and X commitment;
+- encoded lifecycle coverage for initialization, funding, activation,
+  nomination, cancellation, settlement, exhaustion, and surplus finalization;
+- adapter rollback proof for policy, attestation, and injected transfer failures;
+  and
+- a complete 1,000-pair exhaustion run using encoded transitions.
 
-Current proposal-only result: **59 tests passed**. This consists of 28 protected
+Current proposal-only result: **64 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
-and codec tests.
+and codec tests, plus five encoded transition-adapter tests.
 
 ## Current guarantees of the reference model
 
@@ -78,7 +86,6 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a pure account-transition adapter that binds decoded instruction data to the
-reference engine, then add property-based codec fuzzing and public Ed25519 test
+Add property-based codec and transition fuzzing plus public Ed25519 verification
 vectors. No production import, chain connection, wallet operation, or site
 deployment is needed for that work.
