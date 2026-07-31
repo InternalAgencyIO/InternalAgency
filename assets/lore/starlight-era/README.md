@@ -728,6 +728,13 @@ rejected and regenerated.
 | **Caracas Parque Central Prism Intercept**<br><img src="588-venezuela-caracas-parque-central-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia securing an amber mountain prism above Caracas's Parque Central towers with the Ávila skyline beyond"> | **Caracas Ciudad Universitaria Lattice Cipher**<br><img src="589-venezuela-caracas-ciudad-universitaria-lattice-cipher.png" width="420" alt="The trio sealing a turquoise archive prism among the modernist roof forms and colored planes of Ciudad Universitaria de Caracas"> |
 | **Angel Falls Tepui Mist Extraction**<br><img src="590-venezuela-angel-falls-tepui-mist-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Angel Falls and the sheer Auyán-tepui landscape"> | **Maracaibo Lake Bridge Night Relay**<br><img src="591-venezuela-maracaibo-lake-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald lake relay beside the General Rafael Urdaneta Bridge at blue hour"> |
 
+## World Series - Oceania - Batch 143: Australia
+
+| | |
+|---|---|
+| **Sydney Opera House Harbour Intercept**<br><img src="592-australia-sydney-opera-house-harbour-intercept.png" width="420" alt="Radiance, Ellie, and Alia securing an amber harbour prism above Sydney's Opera House sails and Harbour Bridge"> | **Melbourne Royal Exhibition Lattice Cipher**<br><img src="593-australia-melbourne-royal-exhibition-lattice-cipher.png" width="420" alt="The trio sealing a turquoise archive prism outside Melbourne's Royal Exhibition Building and Carlton Gardens"> |
+| **Great Barrier Reef Data Extraction**<br><img src="594-australia-great-barrier-reef-data-extraction.png" width="420" alt="The trio restoring an ocean-data beacon above the turquoise coral shelves and deep-blue channels of the Great Barrier Reef"> | **Melbourne Flinders Street Night Relay**<br><img src="595-australia-melbourne-flinders-street-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet city relay opposite Melbourne's Flinders Street Station at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
