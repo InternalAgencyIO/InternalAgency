@@ -686,6 +686,13 @@ rejected and regenerated.
 | **Accra National Theatre Prism Intercept**<br><img src="564-ghana-accra-national-theatre-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber prism beside Accra National Theatre and its sculptural civic plaza"> | **Cape Coast Castle Light Cipher**<br><img src="565-ghana-cape-coast-castle-cipher.png" width="420" alt="The trio sealing a cobalt archive prism outside Cape Coast Castle above the Atlantic"> |
 | **Kakum Canopy Data Extraction**<br><img src="566-ghana-kakum-canopy-data-extraction.png" width="420" alt="The trio restoring an environmental-data beacon beside Kakum National Park canopy walkway"> | **Tema Harbour Night Relay**<br><img src="567-ghana-tema-harbour-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald signal relay above Tema Harbour and the Gulf of Guinea"> |
 
+## World Series - South America - Batch 137: Peru
+
+| | |
+|---|---|
+| **Lima Miraflores Cliff Prism Intercept**<br><img src="568-peru-lima-miraflores-cliff-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber prism above Miraflores, the Costa Verde cliffs, and Lima's Pacific shoreline"> | **Machu Picchu Terrace Light Cipher**<br><img src="569-peru-machu-picchu-terrace-light-cipher.png" width="420" alt="The trio sealing a cobalt archive prism before Machu Picchu's stone terraces and Huayna Picchu"> |
+| **Colca Canyon Data Extraction**<br><img src="570-peru-colca-canyon-data-extraction.png" width="420" alt="The trio restoring a terrain-data beacon above Colca Canyon's immense terraced Andean walls"> | **Urubamba Rail Night Relay**<br><img src="571-peru-urubamba-rail-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald signal relay above the Urubamba Valley railway corridor near Ollantaytambo"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
