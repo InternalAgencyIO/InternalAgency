@@ -756,6 +756,13 @@ rejected and regenerated.
 | **Damascus Barada Qasioun Opal Intercept**<br><img src="604-syria-damascus-barada-qasioun-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise opal prism above Damascus's Barada corridor with Mount Qasioun beyond"> | **Bosra Roman Theatre Basalt Cipher**<br><img src="605-syria-bosra-roman-theatre-basalt-cipher.png" width="420" alt="The trio sealing an amber archive prism before Bosra's monumental black-basalt Roman theatre"> |
 | **Kassab Coastal Mountains Cedar-Light Extraction**<br><img src="606-syria-kassab-coastal-mountains-cedar-extraction.png" width="420" alt="The trio restoring a climate-data beacon above the forested limestone ridges near Kassab and the Mediterranean haze"> | **Latakia Mediterranean Corniche Starlight Relay**<br><img src="607-syria-latakia-mediterranean-corniche-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet night relay beside Latakia's cobalt Mediterranean corniche"> |
 
+## World Series - Africa - Batch 147: Mali
+
+| | |
+|---|---|
+| **Bamako Niger River Third Bridge Amber Intercept**<br><img src="608-mali-bamako-niger-river-third-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise prism above Bamako's Niger River waterfront with the Third Bridge beyond"> | **Segou Riverfront Earthen Courtyard Cipher**<br><img src="609-mali-segou-riverfront-earthen-courtyard-cipher.png" width="420" alt="The trio sealing an amber archive prism among Segou's ochre earthen facades and carved wooden doors"> |
+| **Hombori Mountains Sandstone Light Extraction**<br><img src="610-mali-hombori-mountains-sandstone-extraction.png" width="420" alt="The trio restoring a climate-data beacon above the Hombori Mountains' sheer sandstone massifs and open Sahel plain"> | **Mopti Niger Bani Confluence Starlight Relay**<br><img src="611-mali-mopti-niger-bani-confluence-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet signal relay above Mopti's cobalt Niger-Bani river confluence"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
