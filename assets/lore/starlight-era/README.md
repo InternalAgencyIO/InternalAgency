@@ -805,6 +805,13 @@ rejected and regenerated.
 | **N'Djamena Chari Waterfront Intercept**<br><img src="632-chad-ndjamena-chari-waterfront-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a turquoise skyline prism above N'Djamena's broad Chari River waterfront"> | **Gaoui Painted Courtyard Amber Cipher**<br><img src="633-chad-gaoui-painted-courtyard-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Gaoui's rounded painted mud-brick courtyard architecture"> |
 | **Ennedi Aloba Arch Climate Extraction**<br><img src="634-chad-ennedi-aloba-arch-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise climate beacon before the monumental Aloba Arch in the Ennedi Plateau"> | **Lake Chad Baga Sola Moonline Relay**<br><img src="635-chad-lake-chad-baga-sola-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald moonline relay above Lake Chad near Baga Sola at cobalt blue hour"> |
 
+## World Series - South America - Batch 154: Chile
+
+| | |
+|---|---|
+| **Santiago Mapocho Skyline Copper Intercept**<br><img src="636-chile-santiago-mapocho-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a turquoise skyline prism above Santiago's Mapocho corridor with the Costanera Center and Andes beyond"> | **Humberstone Industrial Amber Cipher**<br><img src="637-chile-humberstone-industrial-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Humberstone's preserved industrial halls and Atacama rail geometry"> |
+| **Torres del Paine Pehoe Climate Extraction**<br><img src="638-chile-torres-del-paine-pehoe-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise climate beacon above Lake Pehoe and the Cuernos peaks in Torres del Paine"> | **Valparaiso Pacific Moonline Relay**<br><img src="639-chile-valparaiso-pacific-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald moonline relay above Valparaiso's colorful Pacific harbor at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
