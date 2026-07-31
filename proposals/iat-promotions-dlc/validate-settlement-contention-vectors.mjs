@@ -3,6 +3,7 @@
  * DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE
  */
 
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
@@ -12,6 +13,7 @@ import { validateJsonSchemaSubset } from "./json-schema-subset.mjs";
 
 const ARTIFACT_PATH = fileURLToPath(new URL("./settlement-contention-vectors.v1.json", import.meta.url));
 const SCHEMA_PATH = fileURLToPath(new URL("./settlement-contention-evidence.schema.v1.json", import.meta.url));
+const REFERENCE_ENGINE_PATH = fileURLToPath(new URL("./reference-engine.mjs", import.meta.url));
 const MODEL_PATH = fileURLToPath(new URL("./settlement-contention-model.mjs", import.meta.url));
 const GENERATOR_PATH = fileURLToPath(new URL("./generate-settlement-contention-vectors.mjs", import.meta.url));
 const PYTHON_VERIFIER_PATH = fileURLToPath(new URL("./verify-settlement-contention-vectors.py", import.meta.url));
@@ -30,6 +32,7 @@ export function loadSettlementContentionVectorBundle() {
   return {
     artifact: JSON.parse(readFileSync(ARTIFACT_PATH, "utf8")),
     schema: JSON.parse(readFileSync(SCHEMA_PATH, "utf8")),
+    referenceEngineSource: readFileSync(REFERENCE_ENGINE_PATH, "utf8"),
     modelSource: readFileSync(MODEL_PATH, "utf8"),
     generatorSource: readFileSync(GENERATOR_PATH, "utf8"),
     pythonVerifierSource: readFileSync(PYTHON_VERIFIER_PATH, "utf8"),
@@ -49,8 +52,11 @@ function everyObjectSchemaIsClosed(schema) {
 
 export function validateSettlementContentionVectors(
   bundle = loadSettlementContentionVectorBundle(),
+  options = {},
 ) {
-  const { artifact, schema, modelSource, generatorSource, pythonVerifierSource } = bundle;
+  const {
+    artifact, schema, referenceEngineSource, modelSource, generatorSource, pythonVerifierSource,
+  } = bundle;
   const errors = [];
   const expect = (condition, message) => {
     if (!condition) errors.push(message);
@@ -70,10 +76,24 @@ export function validateSettlementContentionVectors(
   expect(schema?.["x-iat-status"]?.schemaApplied === false, "contention schema claims application");
   expect(everyObjectSchemaIsClosed(schema), "contention schema contains an open object");
   expect(validateJsonSchemaSubset(schema, artifact).length === 0, "contention artifact fails its closed schema");
-  expect(
-    JSON.stringify(generateSettlementContentionVectors()) === JSON.stringify(artifact),
-    "contention vectors do not deterministically regenerate",
-  );
+  if (options.regenerate !== false) {
+    expect(
+      JSON.stringify(generateSettlementContentionVectors()) === JSON.stringify(artifact),
+      "contention vectors do not deterministically regenerate",
+    );
+  }
+  const normalizedTextSha256 = (source) => createHash("sha256")
+    .update(source.replace(/\r\n?/g, "\n"), "utf8")
+    .digest("hex");
+  const expectedSources = {
+    referenceEngine: ["reference-engine.mjs", normalizedTextSha256(referenceEngineSource)],
+    contentionModel: ["settlement-contention-model.mjs", normalizedTextSha256(modelSource)],
+    generator: ["generate-settlement-contention-vectors.mjs", normalizedTextSha256(generatorSource)],
+  };
+  for (const [name, [path, digest]] of Object.entries(expectedSources)) {
+    expect(artifact?.sources?.[name]?.path === path, `contention ${name} path drift`);
+    expect(artifact?.sources?.[name]?.normalizedTextSha256 === digest, `contention ${name} digest drift`);
+  }
   const contract = artifact?.contract ?? {};
   expect(contract.mode === "DETERMINISTIC_NETWORK_FREE_SETTLEMENT_CONTENTION", "contention mode drift");
   expect(contract.scenarioCount === 6, "contention scenario-count contract drift");

@@ -19,6 +19,7 @@ from typing import Any
 
 
 ARTIFACT_NAME = "settlement-contention-vectors.v1.json"
+MUTATION_ARTIFACT_NAME = "settlement-contention-mutation-vectors.v1.json"
 HOLD_LABELS = [
     "DRAFT",
     "INACTIVE",
@@ -37,6 +38,25 @@ SCENARIO_DEFINITIONS = [
     ("A_PROPOSER_FAULT_B_RECOVERS", "A", "B", "AFTER_PROPOSER_TRANSFER"),
     ("B_HERO_FAULT_A_RECOVERS", "B", "A", "AFTER_HERO_TRANSFER"),
     ("B_PROPOSER_FAULT_A_RECOVERS", "B", "A", "AFTER_PROPOSER_TRANSFER"),
+]
+ZERO_HASH = "0" * 64
+MUTATION_DEFINITIONS = [
+    ("ROOT_UNKNOWN_PROPERTY", "STRUCTURE", False, {"operation": "add", "path": "/expandedState", "value": {}}, False, False),
+    ("SCENARIO_EXPANDED_TIMELINE", "STRUCTURE", False, {"operation": "add", "path": "/scenarios/0/expandedTimeline", "value": []}, False, False),
+    ("STATUS_NETWORK_MAINNET", "STATUS", False, {"operation": "replace", "path": "/status/network", "value": "MAINNET"}, False, False),
+    ("CONTRACT_RPC_ENABLED", "CAPABILITY", False, {"operation": "replace", "path": "/contract/usesRpc", "value": True}, False, False),
+    ("CONTRACT_LOCAL_VALIDATOR_ENABLED", "CAPABILITY", False, {"operation": "replace", "path": "/contract/usesLocalValidator", "value": True}, False, False),
+    ("CONTRACT_WALLET_ENABLED", "CAPABILITY", False, {"operation": "replace", "path": "/contract/usesWallet", "value": True}, False, False),
+    ("CONTRACT_TRANSACTION_PREPARATION_ENABLED", "CAPABILITY", False, {"operation": "replace", "path": "/contract/preparesTransactions", "value": True}, False, False),
+    ("SUMMARY_REVIEW_COMPLETED", "AUTHORITY", False, {"operation": "replace", "path": "/summary/reviewCompleted", "value": True}, False, False),
+    ("SCENARIO_ACTIVATION_AUTHORIZED_REBOUND", "AUTHORITY", False, {"operation": "replace", "path": "/scenarios/0/activationAuthorized", "value": True}, True, True),
+    ("HERO_REWARD_DRIFT_REBOUND", "ECONOMICS", False, {"operation": "replace", "path": "/scenarios/0/winnerHeroBalanceBaseUnits", "value": "119999999999"}, True, True),
+    ("VAULT_BALANCE_DRIFT_REBOUND", "ECONOMICS", False, {"operation": "replace", "path": "/scenarios/0/vaultBalanceBaseUnits", "value": "1"}, True, True),
+    ("WINNER_ID_DRIFT_REBOUND", "SEMANTIC_REPLAY", True, {"operation": "replace", "path": "/scenarios/0/winnerAttemptId", "value": "B"}, True, True),
+    ("TIMELINE_COMMITMENT_DRIFT_REBOUND", "SEMANTIC_REPLAY", True, {"operation": "replace", "path": "/scenarios/0/timelineCommitmentSha256", "value": ZERO_HASH}, True, True),
+    ("SCENARIO_COMMITMENT_DRIFT", "COMMITMENT", True, {"operation": "replace", "path": "/scenarios/0/scenarioCommitmentSha256", "value": ZERO_HASH}, False, False),
+    ("SCENARIO_SET_COMMITMENT_DRIFT", "COMMITMENT", True, {"operation": "replace", "path": "/summary/scenarioSetCommitmentSha256", "value": ZERO_HASH}, False, False),
+    ("CONTENTION_MODEL_SOURCE_DRIFT", "SOURCE_BINDING", True, {"operation": "replace", "path": "/sources/contentionModel/normalizedTextSha256", "value": ZERO_HASH}, False, False),
 ]
 ROOT_KEYS = {"vectorVersion", "vectorId", "status", "sources", "contract", "summary", "scenarios"}
 STATUS_KEYS = {"labels", "network", "programId", "deployable", "vectorsApplied"}
@@ -189,13 +209,8 @@ def replay_scenario(name: str, first: str, second: str, fault: str | None) -> di
     }
 
 
-def verify(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+def verify_artifact(root: Path, artifact: dict[str, Any]) -> tuple[list[str], dict[str, Any]]:
     errors: list[str] = []
-    try:
-        artifact = load_json(artifact_path)
-    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
-        return [f"cannot read contention artifact: {error}"], {}
-
     exact_keys(artifact, ROOT_KEYS, "artifact", errors)
     expect(artifact.get("vectorVersion") == 1, "vector version drift", errors)
     expect(artifact.get("vectorId") == "iat-promotions-dlc-settlement-contention-v1", "vector ID drift", errors)
@@ -342,23 +357,176 @@ def verify(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
     return errors, report
 
 
+def verify(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+    try:
+        artifact = load_json(artifact_path)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read contention artifact: {error}"], {}
+    return verify_artifact(root, artifact)
+
+
+def apply_pointer_mutation(base: dict[str, Any], mutation: dict[str, Any]) -> dict[str, Any]:
+    candidate = json.loads(json.dumps(base, separators=(",", ":")))
+    path = mutation["path"]
+    if not isinstance(path, str) or not path.startswith("/"):
+        raise ValueError("invalid mutation path")
+    segments = [segment.replace("~1", "/").replace("~0", "~") for segment in path[1:].split("/")]
+    final = segments.pop()
+    parent: Any = candidate
+    for segment in segments:
+        parent = parent[int(segment)] if isinstance(parent, list) else parent[segment]
+    key: Any = int(final) if isinstance(parent, list) else final
+    operation = mutation["operation"]
+    if operation == "replace":
+        if isinstance(parent, list):
+            if key < 0 or key >= len(parent):
+                raise ValueError("mutation target missing")
+        elif key not in parent:
+            raise ValueError("mutation target missing")
+    elif operation != "add":
+        raise ValueError("unsupported mutation operation")
+    parent[key] = json.loads(json.dumps(mutation["value"], separators=(",", ":")))
+    return candidate
+
+
+def apply_contention_mutation(base: dict[str, Any], definition: tuple[Any, ...]) -> dict[str, Any]:
+    _, _, _, mutation, rebind_scenario, rebind_set = definition
+    candidate = apply_pointer_mutation(base, mutation)
+    if rebind_scenario:
+        index = int(mutation["path"].split("/")[2])
+        scenario = candidate["scenarios"][index]
+        core = {key: value for key, value in scenario.items() if key != "scenarioCommitmentSha256"}
+        scenario["scenarioCommitmentSha256"] = canonical_sha256(core)
+    if rebind_set:
+        candidate["summary"]["scenarioSetCommitmentSha256"] = canonical_sha256(
+            [scenario["scenarioCommitmentSha256"] for scenario in candidate["scenarios"]]
+        )
+    return candidate
+
+
+def verify_mutation_vectors(root: Path, vectors_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        vectors = load_json(vectors_path)
+        base = load_json(root / ARTIFACT_NAME)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read contention mutation vectors: {error}"], {}
+
+    expected_root_keys = {"vectorVersion", "vectorId", "status", "sources", "contract", "summary", "cases"}
+    exact_keys(vectors, expected_root_keys, "mutation vectors", errors)
+    expect(vectors.get("vectorVersion") == 1, "mutation vector version drift", errors)
+    expect(vectors.get("vectorId") == "iat-promotions-dlc-settlement-contention-mutations-v1", "mutation vector ID drift", errors)
+    status = vectors.get("status")
+    if exact_keys(status, STATUS_KEYS, "mutation status", errors):
+        expect(status == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "mutation HOLD status drift", errors)
+
+    expected_sources = {
+        "baseArtifact": ("settlement-contention-vectors.v1.json", "canonicalSha256", canonical_sha256(base)),
+        "closedSchema": ("settlement-contention-evidence.schema.v1.json", "canonicalSha256", canonical_sha256(load_json(root / "settlement-contention-evidence.schema.v1.json"))),
+        "nodeEvaluator": ("settlement-contention-mutations.mjs", "normalizedTextSha256", normalized_text_sha256(root / "settlement-contention-mutations.mjs")),
+        "pythonVerifier": ("verify-settlement-contention-vectors.py", "normalizedTextSha256", normalized_text_sha256(Path(__file__).resolve())),
+        "generator": ("generate-settlement-contention-mutation-vectors.mjs", "normalizedTextSha256", normalized_text_sha256(root / "generate-settlement-contention-mutation-vectors.mjs")),
+    }
+    sources = vectors.get("sources")
+    if exact_keys(sources, set(expected_sources), "mutation sources", errors):
+        for name, (path, digest_key, digest) in expected_sources.items():
+            entry = sources.get(name)
+            if exact_keys(entry, {"path", digest_key}, f"mutation sources.{name}", errors):
+                expect(entry.get("path") == path, f"mutation sources.{name} path drift", errors)
+                expect(entry.get(digest_key) == digest, f"mutation sources.{name} digest drift", errors)
+
+    cases = vectors.get("cases")
+    if not isinstance(cases, list) or len(cases) != len(MUTATION_DEFINITIONS):
+        errors.append("mutation cases must contain exactly sixteen entries")
+        cases = []
+    common_records: list[dict[str, Any]] = []
+    case_commitments: list[str] = []
+    for index, definition in enumerate(MUTATION_DEFINITIONS):
+        if index >= len(cases):
+            break
+        case = cases[index]
+        case_id, primary_gate, expected_schema_valid, mutation, rebind_scenario, rebind_set = definition
+        expected_case_keys = {
+            "caseId", "primaryGate", "mutation", "rebindScenarioCommitment",
+            "rebindScenarioSetCommitment", "expectedSchemaValid", "expectedAccepted",
+            "candidateCommitmentSha256", "nodeSchemaErrorCount", "nodeSemanticErrorCount",
+            "nodeSemanticErrorSetCommitmentSha256", "runtimeCandidateStored", "expandedStateStored",
+            "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized",
+            "activationEffect", "caseCommitmentSha256",
+        }
+        if not exact_keys(case, expected_case_keys, f"mutation cases[{index}]", errors):
+            continue
+        expect(case.get("caseId") == case_id, f"{case_id} case ID drift", errors)
+        expect(case.get("primaryGate") == primary_gate, f"{case_id} primary gate drift", errors)
+        expect(case.get("mutation") == mutation, f"{case_id} descriptor drift", errors)
+        expect(case.get("rebindScenarioCommitment") is rebind_scenario, f"{case_id} scenario rebind drift", errors)
+        expect(case.get("rebindScenarioSetCommitment") is rebind_set, f"{case_id} set rebind drift", errors)
+        expect(case.get("expectedSchemaValid") is expected_schema_valid, f"{case_id} schema expectation drift", errors)
+        expect(case.get("expectedAccepted") is False, f"{case_id} acceptance expectation drift", errors)
+        candidate = apply_contention_mutation(base, definition)
+        candidate_commitment = canonical_sha256(candidate)
+        expect(case.get("candidateCommitmentSha256") == candidate_commitment, f"{case_id} candidate commitment drift", errors)
+        candidate_errors, _ = verify_artifact(root, candidate)
+        expect(bool(candidate_errors), f"{case_id} unexpectedly accepted by Python replay", errors)
+        for field in ["runtimeCandidateStored", "expandedStateStored", "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+            expect(case.get(field) is False, f"{case_id} {field} drift", errors)
+        expect(case.get("activationEffect") == "NONE", f"{case_id} activation effect drift", errors)
+        core = {key: value for key, value in case.items() if key != "caseCommitmentSha256"}
+        expected_case_commitment = canonical_sha256(core)
+        expect(case.get("caseCommitmentSha256") == expected_case_commitment, f"{case_id} case commitment drift", errors)
+        case_commitments.append(expected_case_commitment)
+        common_records.append({"caseId": case_id, "primaryGate": primary_gate, "candidateCommitmentSha256": candidate_commitment, "accepted": False})
+
+    summary = vectors.get("summary") if isinstance(vectors.get("summary"), dict) else {}
+    common_commitment = canonical_sha256(common_records)
+    expect(summary.get("commonReplayCommitmentSha256") == common_commitment, "mutation common replay commitment drift", errors)
+    expect(summary.get("caseSetCommitmentSha256") == canonical_sha256(case_commitments), "mutation case-set commitment drift", errors)
+    expect(summary.get("allRejected") is True, "mutation summary releases a candidate", errors)
+    for field in ["runtimeCandidateStored", "expandedStateStored", "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"mutation summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "mutation summary activation effect drift", errors)
+
+    report = {
+        "valid": not errors,
+        "errors": errors,
+        "mutationCaseCount": len(common_records),
+        "commonReplayCommitmentSha256": common_commitment,
+        "allRejected": len(common_records) == len(MUTATION_DEFINITIONS),
+        "expandedStateStored": False,
+        "expandedSchedulesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+    return errors, report
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Replay held compact IAT settlement-contention evidence offline.")
     default_root = Path(__file__).resolve().parent
     parser.add_argument("--root", type=Path, default=default_root)
     parser.add_argument("--artifact", type=Path)
+    parser.add_argument("--verify-mutation-vectors", action="store_true")
+    parser.add_argument("--mutation-vectors", type=Path)
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
-    artifact = arguments.artifact.resolve() if arguments.artifact else root / ARTIFACT_NAME
-    errors, report = verify(root, artifact)
+    if arguments.verify_mutation_vectors:
+        vectors = arguments.mutation_vectors.resolve() if arguments.mutation_vectors else root / MUTATION_ARTIFACT_NAME
+        errors, report = verify_mutation_vectors(root, vectors)
+    else:
+        artifact = arguments.artifact.resolve() if arguments.artifact else root / ARTIFACT_NAME
+        errors, report = verify(root, artifact)
     if arguments.emit_json:
         print(json.dumps(report, separators=(",", ":")))
     elif errors:
         print("\n".join(errors), file=sys.stderr)
     else:
-        print(f"Independent compact replay passed: {report['replayCommitmentSha256']}")
-    return 1 if errors else 0
+        commitment = report.get("commonReplayCommitmentSha256", report.get("replayCommitmentSha256"))
+        print(f"Independent compact replay passed: {commitment}")
+    return 2 if errors and arguments.verify_mutation_vectors else (1 if errors else 0)
 
 
 if __name__ == "__main__":

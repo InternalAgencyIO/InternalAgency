@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 21:31 UTC
+Updated: 2026-07-31 22:02 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `05b9c97`
+Previously published public increment: `54cbefb`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -417,8 +417,20 @@ This status file deliberately does not claim a self-referential commit hash.
   and
 - rejection of extra/expanded properties, changed economics with recomputed
   commitments, stale sources, and network/review/activation authority claims.
+- sixteen deterministic compact contention mutations across eight primary
+  structure, status, capability, authority, economics, semantic replay,
+  commitment, and source-binding gates;
+- eleven schema-invalid and five schema-valid-but-semantically-invalid
+  candidates, all created in memory and rejected in both Node and Python;
+- five authority/economic/winner/timeline mutations that remain rejected after
+  scenario and ordered scenario-set commitments are recomputed;
+- shared cross-runtime candidate/rejection replay commitment
+  `949fe48b3ae1d63bf31ead5a7e4ff251100de6fed0749654e9baef112db08032`;
+  and
+- Python exit-2 rejection for changed compact mutation evidence without storing
+  expanded candidates, states, schedules, traces, or attempt inputs.
 
-Current proposal-only result: **302 tests passed**. This consists of 28 protected
+Current proposal-only result: **311 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -484,6 +496,10 @@ Five closed-schema, unexpected-property, malformed/accounting, authority-gate,
 and manifest-coverage tests plus five independent Python replay, recomputed-
 commitment mutation, expanded-schedule, source-drift, source-safety, and
 manifest-coverage tests complete the portable contention-verification suite.
+Nine deterministic mutation regeneration, gate-family coverage, all-rejected,
+schema/semantic separation, rebound-commitment, compact-publication, Python
+parity, changed-evidence exit, source-safety, and manifest-coverage tests
+complete the cross-runtime contention mutation suite.
 
 ## Current guarantees of the reference model
 
@@ -515,8 +531,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a deterministic cross-runtime mutation corpus for compact contention
-evidence. Cover schema, semantic, commitment, source-binding, and authority-
-gate failures while keeping expanded state and schedules runtime-only; do not
-contact a local validator, Devnet, or Mainnet; preserve every HOLD and
-non-authority gate.
+Add a deterministic two-gate composition matrix proving rejection precedence
+and absence of masking across compact contention mutations. Keep combined
+candidates runtime-only; do not contact a local validator, Devnet, or Mainnet;
+preserve every network, wallet, review, deployment, and activation HOLD.

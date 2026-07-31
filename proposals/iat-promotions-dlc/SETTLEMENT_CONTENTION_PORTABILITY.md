@@ -31,13 +31,19 @@ The independent replay commitment over its six compact semantic results is
 The existing ordered public scenario-set commitment remains
 `87dad1a11f005cbb3ea25a857026a6a009522a1a6f735e428e7bba45e510f7d8`.
 
+The companion compact mutation corpus exercises sixteen structure, status,
+capability, authority, economics, semantic replay, commitment, and source-
+binding failures in both runtimes. See `SETTLEMENT_CONTENTION_MUTATIONS.md`.
+
 ## Reproduce locally
 
 ```text
 node proposals/iat-promotions-dlc/validate-settlement-contention-vectors.mjs
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-mutation-vectors --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

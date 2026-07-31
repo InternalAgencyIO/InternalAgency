@@ -286,9 +286,14 @@ security audit or deployment approval.
 | A producer changes reward accounting and recomputes public commitments | `Python replay rejects changed economics...` | Independent semantic replay rejects the 119.999999999-IAT hero result despite internally consistent recomputed commitments |
 | A contention source binding is stale | `Python replay rejects source-binding drift...` | Python independently hashes the three fixed local sources and rejects digest drift without executing proposal code |
 | A portable surface claims network, wallet, transaction, review, or activation authority | `schema permanently rejects network...`; `Python verifier stays offline...` | Closed constants, source scans, and the report's fixed `NONE`/false gates fail closed |
+| A mutation is hidden behind a recomputed scenario and set commitment | `rebound economic, authority, winner, and timeline mutations still reject` | Five independently rebound candidates still fail exact authority, economics, or semantic replay |
+| Cross-runtime rejection drifts for the same compact candidate | `independent Python reproduces the compact common replay commitment` | Node and Python derive the same sixteen candidate commitments and all-rejected replay commitment |
+| A mutation artifact publishes expanded candidates or schedules | `published mutation evidence contains descriptors...` | Only descriptors and commitments are stored; every candidate and schedule remains runtime-only |
+| Compact mutation evidence or source binding is changed | `independent Python rejects changed compact mutation evidence...`; mutation validator | Python exits 2 and Node rejects deterministic regeneration/source drift |
 
 ## Next matrix expansion
 
-- deterministic cross-runtime mutation corpus for compact contention evidence,
-  covering schema, semantic, commitment, source-binding, and authority-gate
-  failures without publishing expanded schedules or contacting any chain.
+- deterministic two-gate composition matrix proving rejection precedence and
+  absence of masking across compact contention mutations. Keep combined
+  candidates runtime-only and preserve all network, wallet, review, deployment,
+  and activation HOLDs.
