@@ -26,10 +26,16 @@ DEFAULT_DIFFERENTIAL_VECTORS = (
     ROOT / "positive-campaign-vector-intake-differential-vectors.v1.json"
 )
 DEFAULT_FUZZ_VECTORS = ROOT / "positive-campaign-vector-intake-fuzz-vectors.v1.json"
+DEFAULT_MINIMAL_COUNTEREXAMPLES = (
+    ROOT / "positive-campaign-vector-intake-minimal-counterexamples.v1.json"
+)
 SCHEMA_PATH = ROOT / "positive-campaign-vector-intake.schema.v1.json"
 CAMPAIGN_VECTORS_PATH = ROOT / "campaign-envelope-verification-vectors.v1.json"
 EVALUATOR_PATH = ROOT / "positive-campaign-vector-intake.mjs"
 FUZZ_GENERATOR_PATH = ROOT / "generate-positive-campaign-vector-intake-fuzz-vectors.mjs"
+MINIMAL_GENERATOR_PATH = (
+    ROOT / "generate-positive-campaign-vector-intake-minimal-counterexamples.mjs"
+)
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
 TARGET_KEYS = [
     "targetVersion",
@@ -68,6 +74,18 @@ FUZZ_FAMILIES = [
 FUZZ_DERIVATION_DOMAIN = "iat-promotions-dlc-intake-fuzz-v1"
 FUZZ_LEAF_DOMAIN = "iat-promotions-dlc-intake-fuzz-leaf-v1"
 FUZZ_NODE_DOMAIN = "iat-promotions-dlc-intake-fuzz-node-v1"
+MINIMAL_PRIMARY_GATES = {
+    "CLOSED_SCHEMA": "CLOSED_SCHEMA",
+    "EXPECTED_TARGET": "EXPECTED_TARGET",
+    "PRIVATE_MATERIAL_EXCLUSION": "PRIVATE_MATERIAL_EXCLUSION",
+    "EXTERNAL_PROVENANCE": "EXTERNAL_PROVENANCE",
+    "CANONICAL_MESSAGE_BINDING": "CANONICAL_MESSAGE_BINDING",
+    "PUBLIC_KEY_BINDING": "CANONICAL_MESSAGE_BINDING",
+    "INDEPENDENT_VECTOR_REVIEW": "INDEPENDENT_VECTOR_REVIEW",
+    "NON_AUTHORITY": "NON_AUTHORITY",
+    "CRYPTOGRAPHIC_SIGNATURE": "CRYPTOGRAPHIC_SIGNATURE",
+    "CRYPTOGRAPHIC_GUARD": "CRYPTOGRAPHIC_SIGNATURE",
+}
 PAYLOAD_KEYS = [
     "campaignId",
     "domain",
@@ -1236,6 +1254,296 @@ def validate_fuzz_bundle(vectors: Any) -> list[str]:
     return errors
 
 
+def ordered_input_sha256(candidate: Any, expected_target: Any) -> str:
+    ordered_json = json.dumps(
+        {"candidate": candidate, "expectedTarget": expected_target},
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+    return hashlib.sha256(ordered_json.encode("utf-8")).hexdigest()
+
+
+def result_gate(result: dict[str, Any], gate_id: str) -> dict[str, str]:
+    for entry in result["gates"]:
+        if entry["id"] == gate_id:
+            return entry
+    raise ValueError(f"MISSING_GATE:{gate_id}")
+
+
+def differing_gate_ids(
+    before: dict[str, Any], after: dict[str, Any]
+) -> list[str]:
+    return [
+        entry["id"]
+        for index, entry in enumerate(before["gates"])
+        if entry["result"] != after["gates"][index]["result"]
+        or entry["detail"] != after["gates"][index]["detail"]
+    ]
+
+
+def replay_minimal_counterexample(
+    index: int, base_vectors: dict[str, Any], schema: dict[str, Any]
+) -> dict[str, Any]:
+    if index < 0 or index >= len(FUZZ_FAMILIES):
+        raise ValueError(f"MINIMAL_COUNTEREXAMPLE_INDEX_OUT_OF_RANGE:{index}")
+    family = FUZZ_FAMILIES[index]
+    base = base_vectors["scenarios"][0]
+    fuzz_replay = replay_fuzz_case(index, base_vectors, schema)
+    control_candidate = deepcopy(base["candidate"])
+    control_target = deepcopy(base["expectedTarget"])
+    mutated_candidate = deepcopy(fuzz_replay["candidate"])
+    mutated_target = deepcopy(fuzz_replay["expectedTarget"])
+    delta = deepcopy(fuzz_replay["record"]["mutation"])
+    storage_delta_count = 2 if family == "CRYPTOGRAPHIC_SIGNATURE" else 1
+    proof_mode = "PASS_TO_FAIL_GATE"
+
+    if family == "EXTERNAL_PROVENANCE":
+        control_candidate["provenance"]["campaignMessageWasSignedBySource"] = True
+        mutated_candidate["provenance"]["campaignMessageWasSignedBySource"] = True
+    if family == "INDEPENDENT_VECTOR_REVIEW":
+        control_candidate = deepcopy(fuzz_replay["candidate"])
+        control_target = deepcopy(fuzz_replay["expectedTarget"])
+        mutated_candidate = deepcopy(control_candidate)
+        mutated_target = deepcopy(control_target)
+        mutated_target["positiveVectorReviewCompleted"] = False
+        delta = {
+            "document": "expectedTarget",
+            "operation": "replace",
+            "path": "/positiveVectorReviewCompleted",
+            "from": True,
+            "to": False,
+            "variant": fuzz_replay["record"]["mutation"]["variant"],
+        }
+    if family == "CRYPTOGRAPHIC_SIGNATURE":
+        proof_mode = "REJECTION_PRESERVING_BYTE_DELTA"
+    if family == "CRYPTOGRAPHIC_GUARD":
+        proof_mode = "REJECTION_REASON_DELTA"
+
+    control_result = evaluate_intake(
+        control_candidate,
+        control_target,
+        now=base_vectors["evaluationTime"],
+        schema=schema,
+    )
+    mutated_result = evaluate_intake(
+        mutated_candidate,
+        mutated_target,
+        now=base_vectors["evaluationTime"],
+        schema=schema,
+    )
+    primary_gate_id = MINIMAL_PRIMARY_GATES[family]
+    control_gate = result_gate(control_result, primary_gate_id)
+    mutated_gate = result_gate(mutated_result, primary_gate_id)
+    core = {
+        "index": str(index),
+        "family": family,
+        "sourceFuzzCaseIndex": str(index),
+        "sourceFuzzCaseName": fuzz_replay["record"]["name"],
+        "primaryGateId": primary_gate_id,
+        "proofMode": proof_mode,
+        "delta": delta,
+        "semanticDeltaCount": "1",
+        "storageDeltaCount": str(storage_delta_count),
+        "controlInputCanonicalSha256": canonical_sha256(
+            {"candidate": control_candidate, "expectedTarget": control_target}
+        ),
+        "mutatedInputCanonicalSha256": canonical_sha256(
+            {"candidate": mutated_candidate, "expectedTarget": mutated_target}
+        ),
+        "controlInputOrderedSha256": ordered_input_sha256(
+            control_candidate, control_target
+        ),
+        "mutatedInputOrderedSha256": ordered_input_sha256(
+            mutated_candidate, mutated_target
+        ),
+        "controlResultCommitmentSha256": canonical_sha256(control_result),
+        "mutatedResultCommitmentSha256": canonical_sha256(mutated_result),
+        "controlPrimaryGateResult": control_gate["result"],
+        "mutatedPrimaryGateResult": mutated_gate["result"],
+        "controlVerificationReason": control_result["verificationReason"],
+        "mutatedVerificationReason": mutated_result["verificationReason"],
+        "changedGateIds": differing_gate_ids(control_result, mutated_result),
+        "controlAccepted": False,
+        "mutatedAccepted": False,
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+    return {
+        "controlCandidate": control_candidate,
+        "controlTarget": control_target,
+        "mutatedCandidate": mutated_candidate,
+        "mutatedTarget": mutated_target,
+        "controlResult": control_result,
+        "mutatedResult": mutated_result,
+        "fixture": {**core, "fixtureCommitmentSha256": canonical_sha256(core)},
+    }
+
+
+def validate_minimal_counterexamples(artifact: Any) -> list[str]:
+    errors: list[str] = []
+
+    def expect(condition: bool, message: str) -> None:
+        if not condition:
+            errors.append(message)
+
+    schema = read_json(SCHEMA_PATH)
+    base_vectors = read_json(DEFAULT_VECTORS)
+    fuzz_vectors = read_json(DEFAULT_FUZZ_VECTORS)
+    errors.extend(f"base intake: {error}" for error in validate_bundle(base_vectors))
+    expect(artifact.get("counterexampleVersion") == 1, "minimal counterexample version drift")
+    expect(
+        artifact.get("counterexampleId")
+        == "iat-promotions-dlc-positive-campaign-vector-minimal-counterexamples-v1",
+        "minimal counterexample ID drift",
+    )
+    status = artifact.get("status", {})
+    expect(status.get("labels") == HOLD_LABELS, "minimal HOLD labels drift")
+    expect(status.get("network") == "NONE", "minimal counterexamples must remain network-free")
+    expect(status.get("programId") is None, "minimal counterexamples claim a program ID")
+    expect(status.get("deployable") is False, "minimal counterexamples claim deployability")
+    expect(status.get("counterexamplesApplied") is False, "minimal counterexamples claim application")
+    expect(status.get("positiveVectorAvailable") is False, "minimal counterexamples claim a positive vector")
+    expect(
+        status.get("positiveVectorReviewCompleted") is False,
+        "minimal counterexamples claim review completion",
+    )
+    expect(
+        status.get("positiveVectorIntegrationBlocked") is True,
+        "minimal counterexamples released integration HOLD",
+    )
+    contract = artifact.get("contract", {})
+    expect(contract.get("mode") == "CROSS_RUNTIME_MINIMAL_REJECTION_ONLY", "minimal mode drift")
+    expect(contract.get("familyOrder") == FUZZ_FAMILIES, "minimal family order drift")
+    expect(contract.get("fixtureCount") == len(FUZZ_FAMILIES), "minimal fixture count drift")
+    expect(contract.get("oneSemanticDeltaPerFixture") is True, "minimal single-delta contract drift")
+    expect(contract.get("orderedCommitmentRequired") is True, "ordered commitment disabled")
+    expect(contract.get("storesInputsOrFullResults") is False, "minimal artifact stores full evidence")
+    expect(contract.get("everyControlRejected") is True, "minimal controls claim acceptance")
+    expect(contract.get("everyMutationRejected") is True, "minimal mutations claim acceptance")
+    for field in [
+        "validPositiveCampaignVectorPublished",
+        "signingMaterialIncluded",
+        "createsKeys",
+        "createsSignatures",
+        "issuesReviewReceipts",
+        "completesReview",
+        "activationAuthorized",
+    ]:
+        expect(contract.get(field) is False, f"minimal contract {field} drift")
+    expect(contract.get("activationEffect") == "NONE", "minimal activation effect drift")
+    sources = artifact.get("sources", {})
+    expect(
+        sources.get("baseVectors", {}).get("canonicalSha256")
+        == canonical_sha256(base_vectors),
+        "minimal base-vector source digest drift",
+    )
+    expect(
+        sources.get("fuzzVectors", {}).get("canonicalSha256")
+        == canonical_sha256(fuzz_vectors),
+        "minimal fuzz-vector source digest drift",
+    )
+    expect(
+        sources.get("intakeSchema", {}).get("canonicalSha256")
+        == canonical_sha256(schema),
+        "minimal schema source digest drift",
+    )
+    expect(
+        sources.get("nodeEvaluator", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(EVALUATOR_PATH),
+        "minimal Node evaluator source digest drift",
+    )
+    expect(
+        sources.get("fuzzGenerator", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(FUZZ_GENERATOR_PATH),
+        "minimal fuzz generator source digest drift",
+    )
+    expect(
+        sources.get("pythonVerifier", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(Path(__file__).resolve()),
+        "minimal Python verifier source digest drift",
+    )
+    expect(
+        sources.get("generator", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(MINIMAL_GENERATOR_PATH),
+        "minimal generator source digest drift",
+    )
+    fixtures = artifact.get("fixtures", [])
+    expect(
+        isinstance(fixtures, list) and len(fixtures) == len(FUZZ_FAMILIES),
+        "minimal fixture array drift",
+    )
+    for index, fixture in enumerate(fixtures if isinstance(fixtures, list) else []):
+        family = FUZZ_FAMILIES[index]
+        expect(fixture.get("index") == str(index), f"minimal index drift at {index}")
+        expect(fixture.get("family") == family, f"minimal family drift at {index}")
+        expect(fixture.get("semanticDeltaCount") == "1", f"{family}: semantic delta count drift")
+        try:
+            replay = replay_minimal_counterexample(index, base_vectors, schema)
+        except (KeyError, TypeError, ValueError, VerificationFailure) as error:
+            errors.append(f"{family}: independent minimal replay failed closed: {error}")
+            continue
+        expect(replay["fixture"] == fixture, f"{family}: minimal fixture does not reproduce")
+        expect(
+            replay["controlResult"]["candidateSatisfiesIntakePolicy"] is False,
+            f"{family}: control satisfies intake policy",
+        )
+        expect(
+            replay["mutatedResult"]["candidateSatisfiesIntakePolicy"] is False,
+            f"{family}: mutation satisfies intake policy",
+        )
+        expect(fixture.get("receiptIssued") is False, f"{family}: issues receipt")
+        expect(fixture.get("reviewCompleted") is False, f"{family}: completes review")
+        expect(fixture.get("activationAuthorized") is False, f"{family}: authorizes activation")
+        expect(fixture.get("activationEffect") == "NONE", f"{family}: creates activation effect")
+        if family not in ["CRYPTOGRAPHIC_SIGNATURE", "CRYPTOGRAPHIC_GUARD"]:
+            expect(fixture.get("proofMode") == "PASS_TO_FAIL_GATE", f"{family}: proof mode drift")
+            expect(fixture.get("controlPrimaryGateResult") == "PASS", f"{family}: control gate drift")
+            expect(fixture.get("mutatedPrimaryGateResult") == "FAIL", f"{family}: mutated gate drift")
+            expect(fixture.get("primaryGateId") in fixture.get("changedGateIds", []), f"{family}: primary gate unchanged")
+        if family == "CRYPTOGRAPHIC_SIGNATURE":
+            expect(
+                fixture.get("proofMode") == "REJECTION_PRESERVING_BYTE_DELTA",
+                "signature proof mode drift",
+            )
+            expect(fixture.get("storageDeltaCount") == "2", "signature mirrored storage delta drift")
+        if family == "CRYPTOGRAPHIC_GUARD":
+            expect(fixture.get("proofMode") == "REJECTION_REASON_DELTA", "guard proof mode drift")
+            expect(
+                fixture.get("controlVerificationReason")
+                != fixture.get("mutatedVerificationReason"),
+                "guard verification reason unchanged",
+            )
+        if family == "EXPECTED_TARGET":
+            expect(
+                fixture.get("controlInputCanonicalSha256")
+                == fixture.get("mutatedInputCanonicalSha256"),
+                "target reorder unexpectedly changes canonical commitment",
+            )
+            expect(
+                fixture.get("controlInputOrderedSha256")
+                != fixture.get("mutatedInputOrderedSha256"),
+                "target reorder is not bound by ordered commitment",
+            )
+        else:
+            expect(
+                fixture.get("controlInputCanonicalSha256")
+                != fixture.get("mutatedInputCanonicalSha256"),
+                f"{family}: canonical input commitment unchanged",
+            )
+    summary = artifact.get("summary", {})
+    expect(summary.get("fixtureCount") == str(len(FUZZ_FAMILIES)), "minimal summary count drift")
+    expect(summary.get("allControlsRejected") is True, "minimal summary control rejection drift")
+    expect(summary.get("allMutationsRejected") is True, "minimal summary mutation rejection drift")
+    expect(
+        summary.get("fixtureSetCommitmentSha256")
+        == canonical_sha256([fixture["fixtureCommitmentSha256"] for fixture in fixtures]),
+        "minimal fixture-set commitment drift",
+    )
+    return errors
+
+
 def render_result(valid: bool, errors: list[str], scenario_count: int, output_format: str) -> str:
     result = {
         "valid": valid,
@@ -1314,6 +1622,35 @@ def render_fuzz_result(
     )
 
 
+def render_minimal_result(
+    valid: bool, errors: list[str], fixture_count: int,
+    fixture_set_commitment: str | None, output_format: str
+) -> str:
+    result = {
+        "valid": valid,
+        "errors": errors,
+        "fixtureCount": fixture_count,
+        "familyCount": len(FUZZ_FAMILIES),
+        "nodeAndPythonMatchExactly": valid,
+        "oneSemanticDeltaPerFixture": valid,
+        "fixtureSetCommitmentSha256": fixture_set_commitment,
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+    if output_format == "json":
+        return json.dumps(result, ensure_ascii=False, indent=2)
+    if valid:
+        return (
+            f"Independent minimal-counterexample verification passed: {fixture_count} "
+            "families reproduce one semantic delta each and remain rejected."
+        )
+    return "Independent minimal-counterexample verification failed:\n" + "\n".join(
+        f"- {error}" for error in errors
+    )
+
+
 def main(argv: list[str] | None = None) -> int:
     try:
         parser = OfflineArgumentParser(description=__doc__)
@@ -1322,20 +1659,27 @@ def main(argv: list[str] | None = None) -> int:
             "--differential-vectors", type=Path, default=DEFAULT_DIFFERENTIAL_VECTORS
         )
         parser.add_argument("--fuzz-vectors", type=Path, default=DEFAULT_FUZZ_VECTORS)
+        parser.add_argument(
+            "--minimal-counterexamples",
+            type=Path,
+            default=DEFAULT_MINIMAL_COUNTEREXAMPLES,
+        )
         parser.add_argument("--verify-vectors", action="store_true")
         parser.add_argument("--verify-differential-vectors", action="store_true")
         parser.add_argument("--verify-fuzz-vectors", action="store_true")
+        parser.add_argument("--verify-minimal-counterexamples", action="store_true")
         parser.add_argument("--format", choices=["text", "json"], default="text")
         args = parser.parse_args(argv)
         selected_modes = sum([
             args.verify_vectors,
             args.verify_differential_vectors,
             args.verify_fuzz_vectors,
+            args.verify_minimal_counterexamples,
         ])
         if selected_modes != 1:
             raise CliUsageError(
                 "exactly one of --verify-vectors, --verify-differential-vectors, "
-                "or --verify-fuzz-vectors is required"
+                "--verify-fuzz-vectors, or --verify-minimal-counterexamples is required"
             )
         if args.verify_vectors:
             vectors = read_json(args.vectors)
@@ -1343,9 +1687,12 @@ def main(argv: list[str] | None = None) -> int:
         elif args.verify_differential_vectors:
             vectors = read_json(args.differential_vectors)
             errors = validate_differential_bundle(vectors)
-        else:
+        elif args.verify_fuzz_vectors:
             vectors = read_json(args.fuzz_vectors)
             errors = validate_fuzz_bundle(vectors)
+        else:
+            vectors = read_json(args.minimal_counterexamples)
+            errors = validate_minimal_counterexamples(vectors)
     except (CliUsageError, OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
         print(f"Unable to read public intake vectors: {error}", file=sys.stderr)
         return 1
@@ -1354,11 +1701,22 @@ def main(argv: list[str] | None = None) -> int:
         print(render_result(not errors, errors, case_count, args.format))
     elif args.verify_differential_vectors:
         print(render_differential_result(not errors, errors, case_count, args.format))
-    else:
+    elif args.verify_fuzz_vectors:
         fuzz_cases = vectors.get("cases", []) if isinstance(vectors, dict) else []
         fuzz_count = len(fuzz_cases) if isinstance(fuzz_cases, list) else 0
         merkle_root = vectors.get("summary", {}).get("caseCommitmentMerkleRootSha256")
         print(render_fuzz_result(not errors, errors, fuzz_count, merkle_root, args.format))
+    else:
+        fixtures = vectors.get("fixtures", []) if isinstance(vectors, dict) else []
+        fixture_count = len(fixtures) if isinstance(fixtures, list) else 0
+        set_commitment = vectors.get("summary", {}).get("fixtureSetCommitmentSha256")
+        print(render_minimal_result(
+            not errors,
+            errors,
+            fixture_count,
+            set_commitment,
+            args.format,
+        ))
     return 0 if not errors else 2
 
 

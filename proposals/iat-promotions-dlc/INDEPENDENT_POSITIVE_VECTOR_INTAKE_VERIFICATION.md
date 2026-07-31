@@ -97,3 +97,13 @@ checks their compact commitments and domain-separated Merkle root, and requires
 exact Node/Python parity. It returns exit `2` for any changed case, source
 binding, family count, authority constant, or root. It creates no positive
 signature or review material.
+
+The ten reduced one-family counterexamples have a separate mode:
+
+```sh
+python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-minimal-counterexamples --format json
+```
+
+It independently rebuilds each control and one-semantic-delta mutation,
+including the insertion-order-sensitive target commitment. Any fixture or set
+commitment drift exits `2`; no control or mutation is accepted.

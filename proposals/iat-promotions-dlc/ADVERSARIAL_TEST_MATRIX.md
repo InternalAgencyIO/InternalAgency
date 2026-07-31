@@ -246,8 +246,14 @@ security audit or deployment approval.
 | Fuzz corpus root is replaced or cases are reordered | same / `case commitments and... Merkle root are mutation-sensitive` | Domain-separated ordered Merkle reconstruction fails closed |
 | Complete review metadata is used to bypass invalid cryptography | `review-complete fuzz cases still fail...` | All review-family cases pass only the review gate and still fail the signature gate |
 | Fuzz tooling stores full candidate/result objects or gains operational capability | `fuzz tooling is offline verification-only...` | Compact-artifact contract and capability scans reject storage or key, signing, wallet, and network paths |
+| A fuzz failure cannot be reduced to one deterministic semantic delta | `every fuzz family has exactly one...` | One compact source-bound fixture is mandatory for each of ten families |
+| A reduced fixture does not actually flip its isolated gate | `eight fixtures isolate a primary gate...` | Eight non-cryptographic controls must PASS the named gate before the mutation and FAIL it after |
+| Missing positive cryptographic material is silently invented for minimization | `signature and guard fixtures stay negative...` | Signature and guard proofs remain rejection-preserving or reason-changing without a positive signature |
+| Canonical hashing hides the expected-target key-order mutation | `ordered commitment binds...` | The canonical collision is explicit and a separate order-sensitive SHA-256 commitment must change |
+| A compact fixture or fixture-set commitment is changed | `Python rejects a changed fixture...` | Independent replay exits `2` and names the family or stale set commitment |
 
 ## Next matrix expansion
 
-- deterministic minimal-counterexample fixtures for every intake fuzz family;
+- representation-sensitivity audit across every seeded fuzz input, including
+  explicit canonical-collision and ordered-commitment expectations;
 - local-validator transaction rollback and account-lock contention.

@@ -65,3 +65,6 @@ node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake-f
 
 These commands read public local proposal files only. They create no key or
 signature, make no network call, and have no deployment or claim path.
+
+One deterministic semantic counterexample per family is reduced and replayed
+in [`POSITIVE_CAMPAIGN_VECTOR_MINIMAL_COUNTEREXAMPLES.md`](./POSITIVE_CAMPAIGN_VECTOR_MINIMAL_COUNTEREXAMPLES.md).

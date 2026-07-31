@@ -96,3 +96,5 @@ The fixed Node/Python mutation-parity corpus is documented in
 [`POSITIVE_CAMPAIGN_VECTOR_DIFFERENTIAL.md`](./POSITIVE_CAMPAIGN_VECTOR_DIFFERENTIAL.md).
 The compact seeded 256-case continuation is documented in
 [`POSITIVE_CAMPAIGN_VECTOR_FUZZING.md`](./POSITIVE_CAMPAIGN_VECTOR_FUZZING.md).
+Its ten one-family minimal counterexamples are documented in
+[`POSITIVE_CAMPAIGN_VECTOR_MINIMAL_COUNTEREXAMPLES.md`](./POSITIVE_CAMPAIGN_VECTOR_MINIMAL_COUNTEREXAMPLES.md).

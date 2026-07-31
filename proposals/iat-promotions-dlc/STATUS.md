@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 18:08 UTC
+Updated: 2026-07-31 18:30 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `1932c04`
+Previously published public increment: `380e4c5`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -334,8 +334,15 @@ This status file deliberately does not claim a self-referential commit hash.
   ordered SHA-256 Merkle root; and
 - changed-case, changed-root, review/cryptography isolation, family-coverage,
   source-safety, and permanent non-authority checks.
+- ten compact one-family minimal counterexamples with one semantic delta each;
+- eight isolated primary-gate PASS-to-FAIL proofs plus rejection-preserving
+  signature and guard proofs that create no positive cryptographic material;
+- canonical and insertion-order-sensitive input commitments that explicitly
+  bind the expected-target key-order case; and
+- exact Node/Python fixture replay, fixture-set commitment, tamper rejection,
+  source-safety, and permanent non-authority checks.
 
-Current proposal-only result: **258 tests passed**. This consists of 28 protected
+Current proposal-only result: **267 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -382,6 +389,10 @@ tests complete the fixed mutation suite.
 Eight seeded fuzz generation, family-coverage, rejection, review isolation,
 commitment/Merkle, Python parity, changed-evidence, source-safety, and
 manifest-coverage tests complete the compact high-volume mutation suite.
+Nine minimal-counterexample generation, family coverage, primary-gate
+transition, negative-cryptography, ordered-commitment, non-authority, Python
+parity, changed-evidence, source-safety, and manifest-coverage tests complete
+the reduced-fixture suite.
 
 ## Current guarantees of the reference model
 
@@ -413,7 +424,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add deterministic cross-runtime minimal-counterexample fixtures for every fuzz
-family. Each fixture must reduce to one gate-triggering delta, carry a compact
-commitment, and remain local, rejection-only, and non-authoritative without
-creating positive signature or review material.
+Add a deterministic representation-sensitivity audit over all 256 seeded fuzz
+inputs. It must enumerate only the expected canonical collisions, require
+unique ordered commitments, and remain compact, local, rejection-only, and
+non-authoritative without storing full input or result expansions.
