@@ -38,6 +38,9 @@ Its composition companion covers all 28 unordered pairs of those gates, with
 fixed precedence, a closed Draft-07 shape, and 56 independent one-removal
 minimality checks. See
 `SETTLEMENT_CONTENTION_COMPOSITIONS.md`.
+Twelve compact schema mutations additionally bind exact Node/Python instance
+and schema pointers, keywords, and messages; see
+`SETTLEMENT_CONTENTION_COMPOSITION_SCHEMA_MUTATIONS.md`.
 
 ## Reproduce locally
 
@@ -46,11 +49,13 @@ node proposals/iat-promotions-dlc/validate-settlement-contention-vectors.mjs
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-mutation-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-vectors --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-schema-vectors --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-compositions.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema-vectors.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

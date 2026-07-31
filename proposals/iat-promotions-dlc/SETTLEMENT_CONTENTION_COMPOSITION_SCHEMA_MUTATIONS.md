@@ -1,0 +1,40 @@
+# Composition schema mutation diagnostics
+
+> **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
+
+This compact corpus proves exact Node/Python diagnostic parity for twelve
+deterministic mutations of the closed two-gate composition artifact. Each
+mutated candidate exists in memory only. The published vector stores the
+mutation descriptor, exact JSON Pointer diagnostic, and cryptographic
+commitments; it stores no candidate, state, schedule, trace, or attempt.
+
+## Fixed coverage
+
+The cases cover:
+
+- unknown root, composition-case, and removal-check fields;
+- released network status;
+- RPC, wallet, and transaction-preparation capability claims;
+- review and activation authority claims;
+- removal-gate cardinality drift;
+- noncanonical uppercase commitment hex; and
+- an unknown failure-gate label.
+
+Both runtimes independently apply each mutation and require exact equality for
+the diagnostic `instancePath`, `schemaPath`, `keyword`, and `message`. All
+twelve candidates reject. Their common candidate/diagnostic replay commitment
+is `f7698b7d87a0d5bdfe0aa5a009662cd837fd015d890c87ad1c45dead3866b7fe`.
+
+## Reproduce locally
+
+```text
+node proposals/iat-promotions-dlc/generate-settlement-contention-composition-schema-vectors.mjs --write
+node proposals/iat-promotions-dlc/validate-settlement-contention-composition-schema-vectors.mjs
+python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-schema-vectors --json
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema-vectors.test.mjs
+```
+
+These commands are proposal-only and offline. They do not start a validator,
+contact Devnet or Mainnet, access a wallet, prepare, sign, or broadcast a
+transaction, move tokens, issue a receipt, complete review, deploy, or activate
+anything.

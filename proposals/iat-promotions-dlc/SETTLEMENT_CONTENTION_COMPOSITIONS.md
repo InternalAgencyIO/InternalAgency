@@ -70,3 +70,8 @@ These commands are proposal-only and offline. They do not start a validator,
 contact Devnet or Mainnet, access a wallet, prepare, sign, or broadcast a
 transaction, move tokens, issue a receipt, complete review, deploy, or activate
 anything.
+
+The companion
+[`SETTLEMENT_CONTENTION_COMPOSITION_SCHEMA_MUTATIONS.md`](./SETTLEMENT_CONTENTION_COMPOSITION_SCHEMA_MUTATIONS.md)
+publishes twelve rejection-only closed-schema mutations with exact Node/Python
+JSON Pointer diagnostic parity.

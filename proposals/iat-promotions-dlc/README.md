@@ -85,17 +85,21 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Portable settlement-contention verification contract](./SETTLEMENT_CONTENTION_PORTABILITY.md)
 - [Compact cross-runtime contention mutation contract](./SETTLEMENT_CONTENTION_MUTATIONS.md)
 - [Complete two-gate contention composition contract](./SETTLEMENT_CONTENTION_COMPOSITIONS.md)
+- [Composition schema mutation diagnostic contract](./SETTLEMENT_CONTENTION_COMPOSITION_SCHEMA_MUTATIONS.md)
 - [Compact settlement contention vectors](./settlement-contention-vectors.v1.json)
 - [Compact settlement contention mutation vectors](./settlement-contention-mutation-vectors.v1.json)
 - [Compact settlement contention composition vectors](./settlement-contention-composition-vectors.v1.json)
 - [Closed contention composition schema](./settlement-contention-composition-vectors.schema.v1.json)
+- [Compact composition schema diagnostic vectors](./settlement-contention-composition-schema-vectors.v1.json)
 - [Closed settlement-contention evidence schema](./settlement-contention-evidence.schema.v1.json)
 - [Settlement contention vector generator](./generate-settlement-contention-vectors.mjs)
 - [Settlement contention mutation generator](./generate-settlement-contention-mutation-vectors.mjs)
 - [Settlement contention composition generator](./generate-settlement-contention-composition-vectors.mjs)
+- [Composition schema diagnostic generator](./generate-settlement-contention-composition-schema-vectors.mjs)
 - [Settlement contention vector validator](./validate-settlement-contention-vectors.mjs)
 - [Settlement contention mutation validator](./validate-settlement-contention-mutation-vectors.mjs)
 - [Settlement contention composition validator](./validate-settlement-contention-composition-vectors.mjs)
+- [Composition schema diagnostic validator](./validate-settlement-contention-composition-schema-vectors.mjs)
 - [Independent zero-dependency Python contention replay](./verify-settlement-contention-vectors.py)
 - [Verifier-key lifecycle reference policy](./VERIFIER_KEY_LIFECYCLE.md)
 - [Network-free verifier-key lifecycle model](./verifier-key-lifecycle.mjs)
@@ -201,6 +205,7 @@ node proposals/iat-promotions-dlc/generate-positive-campaign-vector-representati
 node proposals/iat-promotions-dlc/generate-settlement-contention-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-settlement-contention-mutation-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-settlement-contention-composition-vectors.mjs --write
+node proposals/iat-promotions-dlc/generate-settlement-contention-composition-schema-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-review-manifest.mjs --write
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
@@ -228,9 +233,11 @@ node proposals/iat-promotions-dlc/validate-positive-campaign-vector-representati
 node proposals/iat-promotions-dlc/validate-settlement-contention-vectors.mjs
 node proposals/iat-promotions-dlc/validate-settlement-contention-mutation-vectors.mjs
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-vectors.mjs
+node proposals/iat-promotions-dlc/validate-settlement-contention-composition-schema-vectors.mjs
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-mutation-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-vectors --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-schema-vectors --json
 python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-differential-vectors --format json
@@ -277,6 +284,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-compositions.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema-vectors.test.mjs
 ```
 
 ## Deliberate isolation

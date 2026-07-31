@@ -445,8 +445,15 @@ This status file deliberately does not claim a self-referential commit hash.
   remaining named gate and remains rejected in Node and Python; and
 - shared cross-runtime removal replay commitment
   `951bd99fd43aa9f519f6cf1b817debba1e3b1b22430c96c0c683f21f1831be1d`.
+- twelve compact closed-schema mutations covering unknown fields, HOLD status,
+  forbidden capabilities, authority claims, cardinality, canonical hex, and
+  gate-enum drift;
+- exact Node/Python equality for instance pointer, schema pointer, keyword,
+  message, candidate commitment, and diagnostic commitment; and
+- shared cross-runtime schema-diagnostic replay commitment
+  `f7698b7d87a0d5bdfe0aa5a009662cd837fd015d890c87ad1c45dead3866b7fe`.
 
-Current proposal-only result: **326 tests passed**. This consists of 28 protected
+Current proposal-only result: **334 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -524,6 +531,10 @@ Six closed-schema acceptance, unknown-field rejection, HOLD-authority
 rejection, 56-case removal minimality, independent Python tamper rejection,
 source-safety, and manifest-coverage tests complete the composition schema and
 minimization suite.
+Eight deterministic diagnostic regeneration, family coverage, JSON Pointer
+provenance, all-rejected, independent Python exact parity, tamper exit,
+compact-publication, source-safety, and manifest-coverage tests complete the
+composition schema mutation suite.
 
 ## Current guarantees of the reference model
 
@@ -555,7 +566,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a deterministic closed-schema mutation corpus for the composition artifact
-with exact Node/Python pointer diagnostics. Keep candidates runtime-only; do
-not contact a local validator, Devnet, or Mainnet; preserve every network,
+Add a deterministic diagnostic representation audit proving pointer stability
+across JSON key-order and LF/CRLF transformations. Keep candidates runtime-only;
+do not contact a local validator, Devnet, or Mainnet; preserve every network,
 wallet, review, deployment, and activation HOLD.

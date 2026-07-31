@@ -295,10 +295,12 @@ security audit or deployment approval.
 | Pairwise evidence or its gate order changes under stale cross-runtime output | `independent Python rejects changed composition evidence with exit 2`; composition validator | Python independently reconstructs all 28 candidates and exits `2` when compact evidence or the shared commitment drifts |
 | A purported two-gate case is not minimal because one removed mutation leaves both gates or releases the candidate | `all 56 removal candidates expose only the remaining gate and reject` | Each mutation is removed in turn; Node and Python require exactly one named remaining gate, continued rejection, and the committed reduced-candidate digest |
 | Composition evidence adds an unknown candidate, state, trace, or authority field | `closed schema rejects unknown root, case, and removal properties`; `closed schema rejects released status and operational authority` | Closed Draft-07 objects and constant HOLD fields reject the extra or released claim before semantic replay |
+| Node and Python disagree about the exact location or reason for a composition-schema failure | `independent Python reproduces every exact diagnostic...` | Both runtimes must reproduce the same instance pointer, schema pointer, keyword, message, candidate commitment, and diagnostic commitment for all twelve mutations |
+| A compact schema diagnostic is edited without changing the mutation | `independent Python rejects a changed exact diagnostic with exit 2` | Independent replay recomputes the candidate and exact diagnostic, then exits `2` on any stale pointer or reason |
 
 ## Next matrix expansion
 
-- add a deterministic closed-schema mutation corpus for the composition
-  artifact with exact Node/Python pointer diagnostics. Preserve runtime-only
+- add a deterministic diagnostic representation audit proving pointer stability
+  across JSON key-order and LF/CRLF transformations. Preserve runtime-only
   candidates and every network, wallet, review, deployment, and activation
   HOLD.

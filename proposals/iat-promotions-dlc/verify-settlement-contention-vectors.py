@@ -21,6 +21,7 @@ from typing import Any
 ARTIFACT_NAME = "settlement-contention-vectors.v1.json"
 MUTATION_ARTIFACT_NAME = "settlement-contention-mutation-vectors.v1.json"
 COMPOSITION_ARTIFACT_NAME = "settlement-contention-composition-vectors.v1.json"
+COMPOSITION_SCHEMA_ARTIFACT_NAME = "settlement-contention-composition-schema-vectors.v1.json"
 HOLD_LABELS = [
     "DRAFT",
     "INACTIVE",
@@ -82,6 +83,20 @@ COMPOSITION_DEFINITIONS = [
     for first_index, first_gate in enumerate(COMPOSITION_GATE_PRECEDENCE)
     for second_gate in COMPOSITION_GATE_PRECEDENCE[first_index + 1:]
 ]
+COMPOSITION_SCHEMA_MUTATIONS = [
+    ("ROOT_CANDIDATE_FIELD", "CLOSED_ROOT", {"operation": "add", "path": "/candidate", "value": {}}),
+    ("CASE_EXPANDED_STATE", "CLOSED_CASE", {"operation": "add", "path": "/cases/0/expandedState", "value": {}}),
+    ("REMOVAL_TRACE_FIELD", "CLOSED_REMOVAL", {"operation": "add", "path": "/cases/0/removalChecks/0/trace", "value": []}),
+    ("STATUS_NETWORK_MAINNET", "HOLD_STATUS", {"operation": "replace", "path": "/status/network", "value": "MAINNET"}),
+    ("CONTRACT_RPC_ENABLED", "CAPABILITY", {"operation": "replace", "path": "/contract/usesRpc", "value": True}),
+    ("CONTRACT_WALLET_ENABLED", "CAPABILITY", {"operation": "replace", "path": "/contract/usesWallet", "value": True}),
+    ("CONTRACT_PREPARATION_ENABLED", "CAPABILITY", {"operation": "replace", "path": "/contract/preparesTransactions", "value": True}),
+    ("CONTRACT_ACTIVATION_AUTHORIZED", "AUTHORITY", {"operation": "replace", "path": "/contract/activationAuthorized", "value": True}),
+    ("SUMMARY_REVIEW_COMPLETED", "AUTHORITY", {"operation": "replace", "path": "/summary/reviewCompleted", "value": True}),
+    ("REMOVAL_OBSERVED_TWO_GATES", "CARDINALITY", {"operation": "replace", "path": "/cases/0/removalChecks/0/observedGates", "value": ["STATUS", "CAPABILITY"]}),
+    ("REMOVAL_HASH_UPPERCASE", "CANONICAL_HEX", {"operation": "replace", "path": "/cases/0/removalChecks/0/candidateCommitmentSha256", "value": "A" * 64}),
+    ("REMOVAL_UNKNOWN_GATE", "GATE_ENUM", {"operation": "replace", "path": "/cases/0/removalChecks/0/remainingGate", "value": "UNKNOWN"}),
+]
 ROOT_KEYS = {"vectorVersion", "vectorId", "status", "sources", "contract", "summary", "scenarios"}
 STATUS_KEYS = {"labels", "network", "programId", "deployable", "vectorsApplied"}
 SOURCE_KEYS = {"referenceEngine", "contentionModel", "generator"}
@@ -141,6 +156,96 @@ def normalized_text_sha256(path: Path) -> str:
     text = path.read_bytes().decode("utf-8", errors="strict")
     normalized = text.replace("\r\n", "\n").replace("\r", "\n")
     return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+
+def schema_instance_type(value: Any) -> str:
+    if value is None:
+        return "null"
+    if isinstance(value, bool):
+        return "boolean"
+    if isinstance(value, list):
+        return "array"
+    if isinstance(value, int):
+        return "integer"
+    if isinstance(value, float):
+        return "number"
+    if isinstance(value, str):
+        return "string"
+    if isinstance(value, dict):
+        return "object"
+    return type(value).__name__
+
+
+def resolve_schema_ref(schema: dict[str, Any], reference: str) -> dict[str, Any]:
+    if not isinstance(reference, str) or not reference.startswith("#/"):
+        raise ValueError("only local schema refs supported")
+    current: Any = schema
+    for segment in reference[2:].split("/"):
+        key = segment.replace("~1", "/").replace("~0", "~")
+        current = current[key]
+    if not isinstance(current, dict):
+        raise ValueError("schema ref is not an object")
+    return current
+
+
+def validate_schema_subset(schema: dict[str, Any], instance: Any) -> list[dict[str, str]]:
+    errors: list[dict[str, str]] = []
+
+    def add(instance_path: str, schema_path: str, keyword: str, message: str) -> None:
+        errors.append({"instancePath": instance_path, "schemaPath": schema_path, "keyword": keyword, "message": message})
+
+    def escape_pointer(value: str) -> str:
+        return value.replace("~", "~0").replace("/", "~1")
+
+    def visit(node: dict[str, Any], value: Any, instance_path: str, schema_path: str) -> None:
+        if "$ref" in node:
+            visit(resolve_schema_ref(schema, node["$ref"]), value, instance_path, node["$ref"])
+            return
+        if "const" in node and value != node["const"]:
+            add(instance_path, f"{schema_path}/const", "const", "must equal the fixed value")
+            return
+        if "enum" in node and value not in node["enum"]:
+            add(instance_path, f"{schema_path}/enum", "enum", "must equal one allowed value")
+            return
+        if "type" in node:
+            actual = schema_instance_type(value)
+            allowed = node["type"] if isinstance(node["type"], list) else [node["type"]]
+            if not any(item == actual or (item == "number" and actual == "integer") for item in allowed):
+                add(instance_path, f"{schema_path}/type", "type", f"must be {' or '.join(allowed)}")
+                return
+        if isinstance(value, str):
+            if "pattern" in node and re.search(node["pattern"], value) is None:
+                add(instance_path, f"{schema_path}/pattern", "pattern", "must match the fixed pattern")
+            if "minLength" in node and len(value) < node["minLength"]:
+                add(instance_path, f"{schema_path}/minLength", "minLength", "is too short")
+            if "maxLength" in node and len(value) > node["maxLength"]:
+                add(instance_path, f"{schema_path}/maxLength", "maxLength", "is too long")
+        if isinstance(value, list):
+            if "minItems" in node and len(value) < node["minItems"]:
+                add(instance_path, f"{schema_path}/minItems", "minItems", "has too few items")
+            if "maxItems" in node and len(value) > node["maxItems"]:
+                add(instance_path, f"{schema_path}/maxItems", "maxItems", "has too many items")
+            if node.get("uniqueItems") is True:
+                serialized = [json.dumps(item, separators=(",", ":")) for item in value]
+                if len(set(serialized)) != len(serialized):
+                    add(instance_path, f"{schema_path}/uniqueItems", "uniqueItems", "has duplicate items")
+            items = node.get("items")
+            if isinstance(items, dict):
+                for index, item in enumerate(value):
+                    visit(items, item, f"{instance_path}/{index}", f"{schema_path}/items")
+        if isinstance(value, dict):
+            for required in node.get("required", []):
+                if required not in value:
+                    add(instance_path, f"{schema_path}/required", "required", f"missing {required}")
+            properties = node.get("properties", {})
+            for key, child in value.items():
+                if key in properties:
+                    visit(properties[key], child, f"{instance_path}/{escape_pointer(key)}", f"{schema_path}/properties/{key}")
+                elif node.get("additionalProperties") is False:
+                    add(f"{instance_path}/{escape_pointer(key)}", f"{schema_path}/additionalProperties", "additionalProperties", "is not allowed")
+
+    visit(schema, instance, "", "#")
+    return errors
 
 
 def exact_keys(value: Any, expected: set[str], label: str, errors: list[str]) -> bool:
@@ -746,6 +851,111 @@ def verify_composition_vectors(root: Path, vectors_path: Path) -> tuple[list[str
     }
 
 
+def verify_composition_schema_vectors(root: Path, vectors_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        vectors = load_json(vectors_path)
+        base = load_json(root / COMPOSITION_ARTIFACT_NAME)
+        schema = load_json(root / "settlement-contention-composition-vectors.schema.v1.json")
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read composition schema vectors: {error}"], {}
+    exact_keys(vectors, {"vectorVersion", "vectorId", "status", "sources", "contract", "summary", "cases"}, "composition schema vectors", errors)
+    expect(vectors.get("vectorVersion") == 1, "composition schema vector version drift", errors)
+    expect(vectors.get("vectorId") == "iat-promotions-dlc-settlement-contention-composition-schema-v1", "composition schema vector ID drift", errors)
+    status = vectors.get("status")
+    if exact_keys(status, STATUS_KEYS, "composition schema status", errors):
+        expect(status == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "composition schema HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": ("settlement-contention-composition-vectors.v1.json", "canonicalSha256", canonical_sha256(base)),
+        "closedSchema": ("settlement-contention-composition-vectors.schema.v1.json", "canonicalSha256", canonical_sha256(schema)),
+        "nodeEvaluator": ("settlement-contention-composition-schema-mutations.mjs", "normalizedTextSha256", normalized_text_sha256(root / "settlement-contention-composition-schema-mutations.mjs")),
+        "pythonVerifier": ("verify-settlement-contention-vectors.py", "normalizedTextSha256", normalized_text_sha256(Path(__file__).resolve())),
+        "generator": ("generate-settlement-contention-composition-schema-vectors.mjs", "normalizedTextSha256", normalized_text_sha256(root / "generate-settlement-contention-composition-schema-vectors.mjs")),
+    }
+    sources = vectors.get("sources")
+    if exact_keys(sources, set(expected_sources), "composition schema sources", errors):
+        for name, (path, digest_key, digest) in expected_sources.items():
+            entry = sources.get(name)
+            if exact_keys(entry, {"path", digest_key}, f"composition schema sources.{name}", errors):
+                expect(entry.get("path") == path, f"composition schema sources.{name} path drift", errors)
+                expect(entry.get(digest_key) == digest, f"composition schema sources.{name} digest drift", errors)
+    contract = vectors.get("contract") if isinstance(vectors.get("contract"), dict) else {}
+    expect(contract.get("mode") == "DETERMINISTIC_CLOSED_SCHEMA_DIAGNOSTIC_PARITY", "composition schema mode drift", errors)
+    expect(contract.get("caseCount") == 12, "composition schema case-count drift", errors)
+    expect(contract.get("exactNodePythonDiagnosticsRequired") is True, "composition schema diagnostic parity drift", errors)
+    expect(contract.get("mutatedCandidatesRuntimeOnly") is True, "composition schema stores candidates", errors)
+    for field in ["usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"composition schema contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "composition schema activation effect drift", errors)
+
+    cases = vectors.get("cases")
+    if not isinstance(cases, list) or len(cases) != len(COMPOSITION_SCHEMA_MUTATIONS):
+        errors.append("composition schema cases must contain exactly twelve entries")
+        cases = []
+    common_records: list[dict[str, Any]] = []
+    case_commitments: list[str] = []
+    for index, (case_id, family, mutation) in enumerate(COMPOSITION_SCHEMA_MUTATIONS):
+        if index >= len(cases):
+            break
+        case = cases[index]
+        expected_case_keys = {
+            "caseId", "family", "mutation", "expectedAccepted", "candidateCommitmentSha256",
+            "diagnostics", "diagnosticCommitmentSha256", "runtimeCandidateStored", "receiptIssued",
+            "reviewCompleted", "activationAuthorized", "activationEffect", "caseCommitmentSha256",
+        }
+        if not exact_keys(case, expected_case_keys, f"composition schema cases[{index}]", errors):
+            continue
+        candidate = apply_pointer_mutation(base, mutation)
+        diagnostics = validate_schema_subset(schema, candidate)
+        candidate_commitment = canonical_sha256(candidate)
+        diagnostic_commitment = canonical_sha256(diagnostics)
+        expect(case.get("caseId") == case_id, f"{case_id} case ID drift", errors)
+        expect(case.get("family") == family, f"{case_id} family drift", errors)
+        expect(case.get("mutation") == mutation, f"{case_id} mutation drift", errors)
+        expect(case.get("expectedAccepted") is False, f"{case_id} acceptance drift", errors)
+        expect(bool(diagnostics), f"{case_id} unexpectedly accepted by Python schema", errors)
+        expect(case.get("candidateCommitmentSha256") == candidate_commitment, f"{case_id} candidate commitment drift", errors)
+        expect(case.get("diagnostics") == diagnostics, f"{case_id} exact diagnostic drift", errors)
+        expect(case.get("diagnosticCommitmentSha256") == diagnostic_commitment, f"{case_id} diagnostic commitment drift", errors)
+        for field in ["runtimeCandidateStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+            expect(case.get(field) is False, f"{case_id} {field} drift", errors)
+        expect(case.get("activationEffect") == "NONE", f"{case_id} activation effect drift", errors)
+        core = {key: value for key, value in case.items() if key != "caseCommitmentSha256"}
+        case_commitment = canonical_sha256(core)
+        expect(case.get("caseCommitmentSha256") == case_commitment, f"{case_id} case commitment drift", errors)
+        case_commitments.append(case_commitment)
+        common_records.append({
+            "caseId": case_id,
+            "candidateCommitmentSha256": candidate_commitment,
+            "diagnosticCommitmentSha256": diagnostic_commitment,
+            "accepted": False,
+        })
+    summary = vectors.get("summary") if isinstance(vectors.get("summary"), dict) else {}
+    common_commitment = canonical_sha256(common_records)
+    expect(summary.get("caseCount") == "12", "composition schema summary count drift", errors)
+    expect(summary.get("allRejected") is True, "composition schema summary releases candidate", errors)
+    expect(summary.get("exactDiagnosticsPublished") is True, "composition schema diagnostic summary drift", errors)
+    expect(summary.get("commonReplayCommitmentSha256") == common_commitment, "composition schema common replay drift", errors)
+    expect(summary.get("caseSetCommitmentSha256") == canonical_sha256(case_commitments), "composition schema case-set drift", errors)
+    for field in ["runtimeCandidateStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"composition schema summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "composition schema summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "compositionSchemaCaseCount": len(common_records),
+        "commonReplayCommitmentSha256": common_commitment,
+        "exactDiagnosticsMatched": len(common_records) == len(COMPOSITION_SCHEMA_MUTATIONS),
+        "allRejected": len(common_records) == len(COMPOSITION_SCHEMA_MUTATIONS),
+        "runtimeCandidateStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Replay held compact IAT settlement-contention evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -755,10 +965,15 @@ def main() -> int:
     parser.add_argument("--mutation-vectors", type=Path)
     parser.add_argument("--verify-composition-vectors", action="store_true")
     parser.add_argument("--composition-vectors", type=Path)
+    parser.add_argument("--verify-composition-schema-vectors", action="store_true")
+    parser.add_argument("--composition-schema-vectors", type=Path)
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
-    if arguments.verify_composition_vectors:
+    if arguments.verify_composition_schema_vectors:
+        vectors = arguments.composition_schema_vectors.resolve() if arguments.composition_schema_vectors else root / COMPOSITION_SCHEMA_ARTIFACT_NAME
+        errors, report = verify_composition_schema_vectors(root, vectors)
+    elif arguments.verify_composition_vectors:
         vectors = arguments.composition_vectors.resolve() if arguments.composition_vectors else root / COMPOSITION_ARTIFACT_NAME
         errors, report = verify_composition_vectors(root, vectors)
     elif arguments.verify_mutation_vectors:
@@ -774,7 +989,8 @@ def main() -> int:
     else:
         commitment = report.get("commonReplayCommitmentSha256", report.get("replayCommitmentSha256"))
         print(f"Independent compact replay passed: {commitment}")
-    return 2 if errors and (arguments.verify_mutation_vectors or arguments.verify_composition_vectors) else (1 if errors else 0)
+    verification_mode = arguments.verify_mutation_vectors or arguments.verify_composition_vectors or arguments.verify_composition_schema_vectors
+    return 2 if errors and verification_mode else (1 if errors else 0)
 
 
 if __name__ == "__main__":
