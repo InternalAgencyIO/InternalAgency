@@ -819,6 +819,13 @@ rejected and regenerated.
 | **Bucharest Athenaeum Silver Intercept**<br><img src="640-romania-bucharest-athenaeum-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a turquoise concert compass beside Bucharest's Romanian Athenaeum at apricot dawn"> | **Corvin Castle Amber Cipher**<br><img src="641-romania-corvin-castle-cipher.png" width="420" alt="The trio sealing an amber archive prism on a glass path beside Corvin Castle's stone towers and timber bridge"> |
 | **Danube Delta Reedlight Extraction**<br><img src="642-romania-danube-delta-extraction.png" width="420" alt="The trio recombining protected wetland data aboard a sleek skiff in a reed-lined Danube Delta channel at blue hour"> | **Constanta Black Sea Moonline Relay**<br><img src="643-romania-constanta-black-sea-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay beside the historic Constanta Casino on the Black Sea waterfront"> |
 
+## World Series - Africa - Batch 156: Somalia
+
+| | |
+|---|---|
+| **Mogadishu Oceanfront Azure Intercept**<br><img src="644-somalia-mogadishu-oceanfront-arches-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an optical-white ocean compass above Mogadishu's azure Indian Ocean waterfront at apricot dawn"> | **Merca Coral-Stone Amber Cipher**<br><img src="645-somalia-merca-coral-stone-old-town-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Merca's coral-stone merchant houses and coastal arcades"> |
+| **Cal Madow Cloud-Forest Extraction**<br><img src="646-somalia-cal-madow-cloud-forest-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above the misty limestone ridges and woodland of Cal Madow"> | **Kismayo Indian Ocean Moonline Relay**<br><img src="647-somalia-kismayo-indian-ocean-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay above Kismayo's moonlit Indian Ocean shoreline"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
