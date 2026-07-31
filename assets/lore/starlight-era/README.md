@@ -798,6 +798,13 @@ rejected and regenerated.
 | **Astana Bayterek Skyline Prism Intercept**<br><img src="628-kazakhstan-astana-bayterek-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise skyline prism above Astana's Ishim River city centre with Bayterek Tower beyond"> | **Otrar Earthen Ruins Amber Cipher**<br><img src="629-kazakhstan-otrar-archaeological-ruins-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Otrar's earthen archaeological walls and open steppe horizon"> |
 | **Charyn Canyon Red-Rock Climate Extraction**<br><img src="630-kazakhstan-charyn-canyon-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Charyn Canyon's Castle Valley and towering red-rock walls"> | **Aktau Caspian Moonline Relay**<br><img src="631-kazakhstan-aktau-caspian-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet night relay above Aktau's Caspian promenade and pale limestone coast"> |
 
+## World Series - Africa - Batch 153: Chad
+
+| | |
+|---|---|
+| **N'Djamena Chari Waterfront Intercept**<br><img src="632-chad-ndjamena-chari-waterfront-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a turquoise skyline prism above N'Djamena's broad Chari River waterfront"> | **Gaoui Painted Courtyard Amber Cipher**<br><img src="633-chad-gaoui-painted-courtyard-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Gaoui's rounded painted mud-brick courtyard architecture"> |
+| **Ennedi Aloba Arch Climate Extraction**<br><img src="634-chad-ennedi-aloba-arch-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise climate beacon before the monumental Aloba Arch in the Ennedi Plateau"> | **Lake Chad Baga Sola Moonline Relay**<br><img src="635-chad-lake-chad-baga-sola-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald moonline relay above Lake Chad near Baga Sola at cobalt blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
