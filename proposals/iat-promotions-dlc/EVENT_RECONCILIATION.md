@@ -105,3 +105,32 @@ node proposals/iat-promotions-dlc/generate-event-reconciliation-vectors.mjs --wr
 node proposals/iat-promotions-dlc/validate-event-reconciliation-vectors.mjs
 node --test proposals/iat-promotions-dlc/tests/event-reconciliation-vectors.test.mjs
 ```
+
+## Portable Draft-07 schemas
+
+`event-reconciliation-evidence.schema.v1.json` fixes the full input envelope,
+semantic campaign and vault snapshots, complete settlement receipt shape, and
+verifier-registry snapshots. `event-reconciliation-result.schema.v1.json`
+fixes the held result and requires both non-authority booleans to remain true.
+All object shapes are closed, integers are canonical decimal strings, byte
+values are lowercase 32-byte hex, and fixed campaign economics use `const`.
+
+JSON Schema validates structure, not cross-field meaning. Ordered counters,
+same-transaction exhaustion, receipt bijection, reward totals, vault surplus,
+terminal status, and verifier hash heads still require `event-reconciler.mjs`.
+
+`event-reconciliation-schema-examples.v1.json` contains two fully synthetic
+valid evidence envelopes, two held results, and nine pointer-based invalid
+mutations with their expected Draft-07 keyword. Valid evidence is also run
+through semantic reconciliation. The corpus contains commitments only—no raw X
+identity, mutable handle, OAuth material, signing field, or secret.
+
+`json-schema-subset.mjs` is a dependency-free validator only for the Draft-07
+keywords used here. It is not presented as a general JSON Schema engine;
+portable consumers should use any conforming Draft-07 implementation.
+
+```sh
+node proposals/iat-promotions-dlc/generate-event-reconciliation-schema-examples.mjs --write
+node proposals/iat-promotions-dlc/validate-event-reconciliation-schemas.mjs
+node --test proposals/iat-promotions-dlc/tests/event-reconciliation-schema.test.mjs
+```

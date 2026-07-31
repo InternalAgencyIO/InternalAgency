@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 13:54 UTC
+Updated: 2026-07-31 14:09 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `4c7db2a`
+Previously published public increment: `97ed0a7`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -131,10 +131,23 @@ This status file deliberately does not claim a self-referential commit hash.
 - source hashes binding the held policy, event interface, reconciler, and
   deterministic fixture generator;
 - no event bytes, account snapshots, receipt bodies, raw X identities,
-  handles, signatures, or secrets in the compact public artifact; and
-- source, scenario, digest, Merkle, result, privacy, and deployment-drift tests.
+  handles, signatures, or secrets in the compact public artifact;
+- source, scenario, digest, Merkle, result, privacy, and deployment-drift tests;
+- strict portable Draft-07 schemas for full evidence inputs and held results;
+- closed object shapes, canonical decimal strings, lowercase fixed hex, exact
+  status enums, and fixed reward/budget constants;
+- explicit result constants preserving account authority and preventing event
+  streams from claiming state-change authority;
+- deterministic synthetic corpus with two valid evidence envelopes, two held
+  results, and nine invalid pointer-based mutations;
+- dependency-free local validation of the exact Draft-07 keyword subset used by
+  the proposal, without claiming to be a general schema engine;
+- structural validation followed by semantic reconciliation for every valid
+  evidence example;
+- schema source, open-object, economics, type, pattern, enum, required-field,
+  extra-field, authority, privacy, and deployment-drift tests.
 
-Current proposal-only result: **133 tests passed**. This consists of 28 protected
+Current proposal-only result: **139 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -143,7 +156,8 @@ lifecycle tests, seven lifecycle-amendment tests, twelve full-interface
 composition and drift tests, eleven ABI offset/conformance tests, plus twelve
 program-event interface tests and ten event/account reconciliation tests.
 Five compact reconciliation-vector and Merkle-commitment tests complete the
-current suite.
+compact-vector suite, and six Draft-07 schema/example tests complete the current
+suite.
 
 ## Current guarantees of the reference model
 
@@ -175,8 +189,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add portable JSON Schema definitions for the full reconciliation evidence
-envelope, semantic snapshots, and held result, with valid and invalid public
-examples. Preserve the privacy boundary and every unapplied and undeployable
-gate. No production import, chain connection, wallet operation, or site
-deployment is needed for that work.
+Add a content-addressed review manifest and deterministic tree root covering
+every proposal artifact, validator, generator, and test entry point. Preserve
+the privacy boundary and every unapplied and undeployable gate. No production
+import, chain connection, wallet operation, or site deployment is needed for
+that work.

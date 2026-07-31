@@ -80,6 +80,12 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Compact reconciliation vectors](./event-reconciliation-vectors.v1.json)
 - [Deterministic reconciliation-vector generator](./generate-event-reconciliation-vectors.mjs)
 - [Reconciliation-vector validator](./validate-event-reconciliation-vectors.mjs)
+- [Draft-07 evidence schema](./event-reconciliation-evidence.schema.v1.json)
+- [Draft-07 result schema](./event-reconciliation-result.schema.v1.json)
+- [Synthetic schema examples](./event-reconciliation-schema-examples.v1.json)
+- [Dependency-free proposal schema subset validator](./json-schema-subset.mjs)
+- [Schema-example generator](./generate-event-reconciliation-schema-examples.mjs)
+- [Schema and example validator](./validate-event-reconciliation-schemas.mjs)
 - [Proposal-only tests](./tests/)
 
 Run the proposal-only checks with:
@@ -90,6 +96,7 @@ node proposals/iat-promotions-dlc/generate-composed-interface-vectors.mjs --writ
 node proposals/iat-promotions-dlc/generate-abi-offset-manifest.mjs --write
 node proposals/iat-promotions-dlc/generate-program-event-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-event-reconciliation-vectors.mjs --write
+node proposals/iat-promotions-dlc/generate-event-reconciliation-schema-examples.mjs --write
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
 node proposals/iat-promotions-dlc/validate-ed25519-public-vectors.mjs
@@ -98,6 +105,7 @@ node proposals/iat-promotions-dlc/validate-program-interface-composition.mjs
 node proposals/iat-promotions-dlc/validate-abi-offset-manifest.mjs
 node proposals/iat-promotions-dlc/validate-program-event-interface.mjs
 node proposals/iat-promotions-dlc/validate-event-reconciliation-vectors.mjs
+node proposals/iat-promotions-dlc/validate-event-reconciliation-schemas.mjs
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
 node --test proposals/iat-promotions-dlc/tests/attestation-transparency.test.mjs
@@ -113,6 +121,7 @@ node --test proposals/iat-promotions-dlc/tests/abi-offset-manifest.test.mjs
 node --test proposals/iat-promotions-dlc/tests/program-event-interface.test.mjs
 node --test proposals/iat-promotions-dlc/tests/event-reconciler.test.mjs
 node --test proposals/iat-promotions-dlc/tests/event-reconciliation-vectors.test.mjs
+node --test proposals/iat-promotions-dlc/tests/event-reconciliation-schema.test.mjs
 ```
 
 ## Deliberate isolation

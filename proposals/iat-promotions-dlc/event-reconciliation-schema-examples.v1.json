@@ -1,0 +1,383 @@
+{
+  "corpusVersion": 1,
+  "corpusId": "iat-promotions-dlc-reconciliation-schema-examples-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "schemaApplied": false
+  },
+  "sources": {
+    "evidenceSchema": {
+      "path": "event-reconciliation-evidence.schema.v1.json",
+      "canonicalSha256": "e565980ca97a30966ae871e24b7b5fc0ebab5846b3191a1cbeb6bc2344495912"
+    },
+    "resultSchema": {
+      "path": "event-reconciliation-result.schema.v1.json",
+      "canonicalSha256": "c2f0ef842792699c60b060f1d42412252c34a84eb562e69107df8c52aa6d47a4"
+    }
+  },
+  "validExamples": [
+    {
+      "name": "CANCELLED_EVIDENCE",
+      "target": "EVIDENCE",
+      "value": {
+        "records": [
+          {
+            "ordinal": "0",
+            "transaction_message_hash": "a0a81d862f88ac8b1bd958b2845054e8e7ebe3b94f242757cef4f903bf214b5a",
+            "log_index": "0",
+            "bytes_hex": "b894926649ff491b0140c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6a93550727a69afcf4a6fded7a679066a7f3b6e156ebfebad7aad50688c1b375300d2496b0000000080424a6b0000000000400f84b5a30000e80343898f27acc71f812114aaad45f25360740f245aaa8c5c36fe4f61868bc53d90be39fcc104855915a3765629a064955dbeb4e90d52604cdfed0d84b608f40b46"
+          },
+          {
+            "ordinal": "1",
+            "transaction_message_hash": "8016d75bc604cdf2cbfec94e7fe4755ad360b616597fd321ce1f8017ebad4f08",
+            "log_index": "0",
+            "bytes_hex": "66de8f8f2a1c58c00140c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c600400f84b5a3000000400f84b5a30000"
+          },
+          {
+            "ordinal": "2",
+            "transaction_message_hash": "c63125f6d87d666e88f5874c6fa214a9233fc30ed5a9c0e568d40f211c13d3bc",
+            "log_index": "0",
+            "bytes_hex": "7e52e53d3a0eeeed0140c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6e91d9c7abc1104093ced6ab73c592f187783c0866a1de3535cef3a0450f38e3500400f84b5a3000064d2496b00000000"
+          }
+        ],
+        "snapshot": {
+          "campaign": {
+            "address": "40c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6",
+            "mint": "a93550727a69afcf4a6fded7a679066a7f3b6e156ebfebad7aad50688c1b3753",
+            "status": "CANCELLED",
+            "promo_vault": "cf8300c1f9522ff4242dc648282d8f60b17d9ffb0b18719dcf933c1f6e404402",
+            "community_refund_token_account": "e91d9c7abc1104093ced6ab73c592f187783c0866a1de3535cef3a0450f38e35",
+            "verifier_registry": "0000000000000000000000000000000000000000000000000000000000000000",
+            "genesis_timestamp": "1800000000",
+            "earliest_activation_timestamp": "1800028800",
+            "maximum_budget_base_units": "180000000000000",
+            "maximum_completed_pairs": "1000",
+            "completed_pairs": "0",
+            "hero_paid_base_units": "0",
+            "proposer_paid_base_units": "0",
+            "policy_hash": "43898f27acc71f812114aaad45f25360740f245aaa8c5c36fe4f61868bc53d90",
+            "identity_domain_hash": "be39fcc104855915a3765629a064955dbeb4e90d52604cdfed0d84b608f40b46"
+          },
+          "promotionVault": {
+            "address": "cf8300c1f9522ff4242dc648282d8f60b17d9ffb0b18719dcf933c1f6e404402",
+            "balance_base_units": "0"
+          },
+          "settlementReceipts": [],
+          "verifierRegistries": []
+        }
+      }
+    },
+    {
+      "name": "ACTIVE_TWO_PAIR_EVIDENCE",
+      "target": "EVIDENCE",
+      "value": {
+        "records": [
+          {
+            "ordinal": "0",
+            "transaction_message_hash": "a0a81d862f88ac8b1bd958b2845054e8e7ebe3b94f242757cef4f903bf214b5a",
+            "log_index": "0",
+            "bytes_hex": "b894926649ff491b0140c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6a93550727a69afcf4a6fded7a679066a7f3b6e156ebfebad7aad50688c1b375300d2496b0000000080424a6b0000000000400f84b5a30000e80343898f27acc71f812114aaad45f25360740f245aaa8c5c36fe4f61868bc53d90be39fcc104855915a3765629a064955dbeb4e90d52604cdfed0d84b608f40b46"
+          },
+          {
+            "ordinal": "1",
+            "transaction_message_hash": "6a408d668fb45c42c29fa2cdd2bb7860dce6dd01674a7fe77316e9511e2e31db",
+            "log_index": "0",
+            "bytes_hex": "fb29c5160fe6daab01d664023c79d9a872d116a3d6b0f7d53c83cce75215a89d93f196235f22419adb40c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6015e262b124ee53fb0bd37ccadbaaeb484fc118b158fdf3f3584c20cf16e2c0a5ef147154e67a26a177e0e7e89f0daf33a337dc03dbf26a43efd833d79f4c1a2273b67e16b6f3f952eb79230c2c63e772bedefe079ff5ab8d6c339ed91157f5dbe39fcc104855915a3765629a064955dbeb4e90d52604cdfed0d84b608f40b4601d2496b0000000000000000000000000000000000000000000000000000000000000000000000002f682626488058d4c247b5aa6d0158a12190c9af86c65a662790b3e6d34b8547"
+          },
+          {
+            "ordinal": "2",
+            "transaction_message_hash": "8016d75bc604cdf2cbfec94e7fe4755ad360b616597fd321ce1f8017ebad4f08",
+            "log_index": "0",
+            "bytes_hex": "66de8f8f2a1c58c00140c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c600400f84b5a3000000400f84b5a30000"
+          },
+          {
+            "ordinal": "3",
+            "transaction_message_hash": "65a3c220024b778fd59f5be951d22e3530288ab10af1fce7fa8fabc4a1511b9f",
+            "log_index": "0",
+            "bytes_hex": "9ea48f6fc472253f0140c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c680424a6b000000005e6db686187d368594b27641fbc557ee6a1dbb27d585c781c3d0c9f45514f926e24745b68227eda7ff9b5e884bbe8810c710aae970cc8ffa9296222c87d1699143898f27acc71f812114aaad45f25360740f245aaa8c5c36fe4f61868bc53d90"
+          },
+          {
+            "ordinal": "4",
+            "transaction_message_hash": "62e2ad6313e28685211a0a08f2d5120cdca81c08e15a083624d4c01ef7d603a5",
+            "log_index": "0",
+            "bytes_hex": "36351921ca5510610140c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6816a89de8fa7d653ce6001a41da058517772271d6a8a5473377bcbc6eb73c801c53f7aca85861e554bb04c5470fd6afb9978f7c3ccea7405f347fc8ab3c1959a7791b9d90407331f1a6b8f5c8fe90021fbf34dee9bb761497134f2a7ad396b829e5d365a92d34318aec5a0b13c398b9325c780cd4cd27f2a8590d9be720af405613ebcb1767c28884653f173cc7158dfd0b0d225e9bad30e3fcf906bcc5d993e93b5ef685400f68cc544418c0ac7550355e8b4a11948dc8f0ea25755a83ce8749f17a62172c4d4b066aada15244a720109d4c6d9d4965d305b1812189a510100e4424a6b00000000"
+          },
+          {
+            "ordinal": "5",
+            "transaction_message_hash": "6db20c31ffd52834a48bb3f7a8e11e1ad7a7fbd13751b377575a2093f4e88240",
+            "log_index": "0",
+            "bytes_hex": "f51d40b7bc7bd9d90140c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6816a89de8fa7d653ce6001a41da058517772271d6a8a5473377bcbc6eb73c80143bfb624b22b35ff5fcbbb52bfceef46d808cb09f26a7312419895ff2e41ebd8e9969205c532f722877d768250822e65cfe5375b92cc0f1e351790c18bfa3de6c53f7aca85861e554bb04c5470fd6afb9978f7c3ccea7405f347fc8ab3c1959ab10fd508ae98a23b602d6b1713c7db9e00deb9cd697e2bc1a6a67e60f39eb1427791b9d90407331f1a6b8f5c8fe90021fbf34dee9bb761497134f2a7ad396b82613ebcb1767c28884653f173cc7158dfd0b0d225e9bad30e3fcf906bcc5d993e9e5d365a92d34318aec5a0b13c398b9325c780cd4cd27f2a8590d9be720af40500b08ef01b000000005847f80d000000000001000038399b8ba30000e5424a6b00000000"
+          },
+          {
+            "ordinal": "6",
+            "transaction_message_hash": "90501a6dfc8356b243a76c745964ee62018ad942ba6c5358b9898339f1de25d6",
+            "log_index": "0",
+            "bytes_hex": "36351921ca5510610140c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6ba1bfc3a6555add5d7f4b24d3f0ac78d7e14d735823ef9b0ca59ba41102e2f351c69fdfa0f0bdfdde78a802e859f110008eb89855e8e1964642355a90e446a260a3fbe3c24bee57812a3daa6fb41737293362e1202c023539621d6ab3078723871d4235829bd1e99759c9323e112d782c1d1b91a895bb34e7c8cc24898edff08881b7f1bfee0ec8ab909143a4d8d04b3b7fc6282aac38e83d7f11fae5832af28b7dcc5064f534e303b49f761d5d8962d2a7a2dc20610a43d041850858784317dab3d8e1fad7d52297e4ba61eb80ad8b249046c0709c327f485285fa8f8e3ea39e6424a6b00000000"
+          },
+          {
+            "ordinal": "7",
+            "transaction_message_hash": "6e06c305d0f77a08109bc6a3f29eb55329dc63bff50e98e90c3c0f869921730a",
+            "log_index": "0",
+            "bytes_hex": "f51d40b7bc7bd9d90140c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6ba1bfc3a6555add5d7f4b24d3f0ac78d7e14d735823ef9b0ca59ba41102e2f35fd5df6a62567f9dcdd76d16a3e8ecec504233de905e84474f56909ec76e7fd26ec9c73b6193b724259e5b1fff1180a63e2f257bc1dd4076f4ebeccc9e61753aa1c69fdfa0f0bdfdde78a802e859f110008eb89855e8e1964642355a90e446a26a4229d6729970c1e0e08324b8f6e7d525bb261b7ee2df785d303e90e984af9380a3fbe3c24bee57812a3daa6fb41737293362e1202c023539621d6ab30787238881b7f1bfee0ec8ab909143a4d8d04b3b7fc6282aac38e83d7f11fae5832af2871d4235829bd1e99759c9323e112d782c1d1b91a895bb34e7c8cc24898edff0800b08ef01b000000005847f80d00000001000200003063b261a30000e7424a6b00000000"
+          }
+        ],
+        "snapshot": {
+          "campaign": {
+            "address": "40c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6",
+            "mint": "a93550727a69afcf4a6fded7a679066a7f3b6e156ebfebad7aad50688c1b3753",
+            "status": "ACTIVE",
+            "promo_vault": "cf8300c1f9522ff4242dc648282d8f60b17d9ffb0b18719dcf933c1f6e404402",
+            "community_refund_token_account": "e91d9c7abc1104093ced6ab73c592f187783c0866a1de3535cef3a0450f38e35",
+            "verifier_registry": "d664023c79d9a872d116a3d6b0f7d53c83cce75215a89d93f196235f22419adb",
+            "genesis_timestamp": "1800000000",
+            "earliest_activation_timestamp": "1800028800",
+            "maximum_budget_base_units": "180000000000000",
+            "maximum_completed_pairs": "1000",
+            "completed_pairs": "2",
+            "hero_paid_base_units": "240000000000",
+            "proposer_paid_base_units": "120000000000",
+            "policy_hash": "43898f27acc71f812114aaad45f25360740f245aaa8c5c36fe4f61868bc53d90",
+            "identity_domain_hash": "be39fcc104855915a3765629a064955dbeb4e90d52604cdfed0d84b608f40b46"
+          },
+          "promotionVault": {
+            "address": "cf8300c1f9522ff4242dc648282d8f60b17d9ffb0b18719dcf933c1f6e404402",
+            "balance_base_units": "179640000000000"
+          },
+          "settlementReceipts": [
+            {
+              "address": "43bfb624b22b35ff5fcbbb52bfceef46d808cb09f26a7312419895ff2e41ebd8",
+              "campaign": "40c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6",
+              "nomination": "816a89de8fa7d653ce6001a41da058517772271d6a8a5473377bcbc6eb73c801",
+              "hero_wallet": "e9969205c532f722877d768250822e65cfe5375b92cc0f1e351790c18bfa3de6",
+              "proposer_wallet": "c53f7aca85861e554bb04c5470fd6afb9978f7c3ccea7405f347fc8ab3c1959a",
+              "hero_node_commitment": "b10fd508ae98a23b602d6b1713c7db9e00deb9cd697e2bc1a6a67e60f39eb142",
+              "proposer_node_commitment": "7791b9d90407331f1a6b8f5c8fe90021fbf34dee9bb761497134f2a7ad396b82",
+              "hero_x_identity_commitment": "613ebcb1767c28884653f173cc7158dfd0b0d225e9bad30e3fcf906bcc5d993e",
+              "proposer_x_identity_commitment": "9e5d365a92d34318aec5a0b13c398b9325c780cd4cd27f2a8590d9be720af405",
+              "settled_at": "1800028901",
+              "sequence": "0",
+              "hero_reward_base_units": "120000000000",
+              "proposer_reward_base_units": "60000000000"
+            },
+            {
+              "address": "fd5df6a62567f9dcdd76d16a3e8ecec504233de905e84474f56909ec76e7fd26",
+              "campaign": "40c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6",
+              "nomination": "ba1bfc3a6555add5d7f4b24d3f0ac78d7e14d735823ef9b0ca59ba41102e2f35",
+              "hero_wallet": "ec9c73b6193b724259e5b1fff1180a63e2f257bc1dd4076f4ebeccc9e61753aa",
+              "proposer_wallet": "1c69fdfa0f0bdfdde78a802e859f110008eb89855e8e1964642355a90e446a26",
+              "hero_node_commitment": "a4229d6729970c1e0e08324b8f6e7d525bb261b7ee2df785d303e90e984af938",
+              "proposer_node_commitment": "0a3fbe3c24bee57812a3daa6fb41737293362e1202c023539621d6ab30787238",
+              "hero_x_identity_commitment": "881b7f1bfee0ec8ab909143a4d8d04b3b7fc6282aac38e83d7f11fae5832af28",
+              "proposer_x_identity_commitment": "71d4235829bd1e99759c9323e112d782c1d1b91a895bb34e7c8cc24898edff08",
+              "settled_at": "1800028903",
+              "sequence": "1",
+              "hero_reward_base_units": "120000000000",
+              "proposer_reward_base_units": "60000000000"
+            }
+          ],
+          "verifierRegistries": [
+            {
+              "address": "d664023c79d9a872d116a3d6b0f7d53c83cce75215a89d93f196235f22419adb",
+              "campaign": "40c71129604cfa4ce84f8f64e1bee1a98f69cb5d393dae8535ea29f0168bc5c6",
+              "status": "ACTIVE",
+              "last_event_hash": "2f682626488058d4c247b5aa6d0158a12190c9af86c65a662790b3e6d34b8547"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "ACTIVE_RESULT",
+      "target": "RESULT",
+      "value": {
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "reconciliationApplied": false
+        },
+        "eventCount": "8",
+        "campaign": {
+          "status": "ACTIVE",
+          "completedPairs": "2",
+          "heroPaidBaseUnits": "240000000000",
+          "proposerPaidBaseUnits": "120000000000",
+          "vaultBalanceBaseUnits": "179640000000000",
+          "unattributedSurplusBaseUnits": "0",
+          "settlementReceiptCount": "2",
+          "pendingNominationCountAtEnd": "0",
+          "terminalPendingNominationsAreIneligible": false,
+          "surplusFinalized": false
+        },
+        "verifierRegistries": [
+          {
+            "address": "d664023c79d9a872d116a3d6b0f7d53c83cce75215a89d93f196235f22419adb",
+            "status": "ACTIVE",
+            "lastEventHash": "2f682626488058d4c247b5aa6d0158a12190c9af86c65a662790b3e6d34b8547",
+            "eventCount": "1"
+          }
+        ],
+        "accountsAndReceiptsRemainAuthoritative": true,
+        "eventStreamAuthorizedNoStateChange": true
+      }
+    },
+    {
+      "name": "VERIFIER_DISABLED_RESULT",
+      "target": "RESULT",
+      "value": {
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "reconciliationApplied": false
+        },
+        "eventCount": "9",
+        "campaign": {
+          "status": "ACTIVE",
+          "completedPairs": "2",
+          "heroPaidBaseUnits": "240000000000",
+          "proposerPaidBaseUnits": "120000000000",
+          "vaultBalanceBaseUnits": "179640000000000",
+          "unattributedSurplusBaseUnits": "0",
+          "settlementReceiptCount": "2",
+          "pendingNominationCountAtEnd": "0",
+          "terminalPendingNominationsAreIneligible": false,
+          "surplusFinalized": false
+        },
+        "verifierRegistries": [
+          {
+            "address": "d664023c79d9a872d116a3d6b0f7d53c83cce75215a89d93f196235f22419adb",
+            "status": "EMERGENCY_DISABLED",
+            "lastEventHash": "3ab6dd868a9ea386de3f3f65ca91a32394f9f4500141e69530eaeabe13359d20",
+            "eventCount": "2"
+          }
+        ],
+        "accountsAndReceiptsRemainAuthoritative": true,
+        "eventStreamAuthorizedNoStateChange": true
+      }
+    }
+  ],
+  "invalidExamples": [
+    {
+      "name": "NUMERIC_EVENT_ORDINAL",
+      "target": "EVIDENCE",
+      "base": "CANCELLED_EVIDENCE",
+      "mutation": {
+        "operation": "replace",
+        "path": "/records/0/ordinal",
+        "value": 0
+      },
+      "expectedKeyword": "type"
+    },
+    {
+      "name": "ODD_LENGTH_EVENT_BYTES",
+      "target": "EVIDENCE",
+      "base": "CANCELLED_EVIDENCE",
+      "mutation": {
+        "operation": "replace",
+        "path": "/records/0/bytes_hex",
+        "value": "0"
+      },
+      "expectedKeyword": "pattern"
+    },
+    {
+      "name": "UNKNOWN_CAMPAIGN_STATUS",
+      "target": "EVIDENCE",
+      "base": "ACTIVE_TWO_PAIR_EVIDENCE",
+      "mutation": {
+        "operation": "replace",
+        "path": "/snapshot/campaign/status",
+        "value": "UNKNOWN"
+      },
+      "expectedKeyword": "enum"
+    },
+    {
+      "name": "EXTRA_CAMPAIGN_FIELD",
+      "target": "EVIDENCE",
+      "base": "CANCELLED_EVIDENCE",
+      "mutation": {
+        "operation": "add",
+        "path": "/snapshot/campaign/unexpected_field",
+        "value": "0"
+      },
+      "expectedKeyword": "additionalProperties"
+    },
+    {
+      "name": "MISSING_VAULT_ADDRESS",
+      "target": "EVIDENCE",
+      "base": "CANCELLED_EVIDENCE",
+      "mutation": {
+        "operation": "remove",
+        "path": "/snapshot/promotionVault/address"
+      },
+      "expectedKeyword": "required"
+    },
+    {
+      "name": "RELEASED_RESULT_NETWORK",
+      "target": "RESULT",
+      "base": "ACTIVE_RESULT",
+      "mutation": {
+        "operation": "replace",
+        "path": "/status/network",
+        "value": "mainnet-beta"
+      },
+      "expectedKeyword": "const"
+    },
+    {
+      "name": "NUMERIC_RESULT_EVENT_COUNT",
+      "target": "RESULT",
+      "base": "ACTIVE_RESULT",
+      "mutation": {
+        "operation": "replace",
+        "path": "/eventCount",
+        "value": 8
+      },
+      "expectedKeyword": "type"
+    },
+    {
+      "name": "EXTRA_RESULT_FIELD",
+      "target": "RESULT",
+      "base": "VERIFIER_DISABLED_RESULT",
+      "mutation": {
+        "operation": "add",
+        "path": "/unexpected_field",
+        "value": true
+      },
+      "expectedKeyword": "additionalProperties"
+    },
+    {
+      "name": "RESULT_AUTHORITY_ESCALATION",
+      "target": "RESULT",
+      "base": "ACTIVE_RESULT",
+      "mutation": {
+        "operation": "replace",
+        "path": "/eventStreamAuthorizedNoStateChange",
+        "value": false
+      },
+      "expectedKeyword": "const"
+    }
+  ]
+}

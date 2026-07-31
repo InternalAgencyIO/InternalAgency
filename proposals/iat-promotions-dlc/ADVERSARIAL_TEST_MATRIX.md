@@ -141,11 +141,20 @@ security audit or deployment approval.
 | Record, receipt, snapshot, result, or source changes under stale digests | `source, scenario, digest...` | Canonical digest, scenario contract, or source binding fails |
 | Raw X ID, handle, signature, event bytes, snapshot, or receipt body is added | `raw identity, signatures...` | Compact-artifact privacy and size guard rejects the field |
 | Compact vectors claim network, program, deployment, or application | `source, scenario, digest...` | Every vector HOLD gate fails |
+| Evidence ordinal is numeric rather than a decimal string | `all invalid public examples...` | Draft-07 type check rejects the envelope |
+| Event bytes have odd length or non-hex characters | same | Fixed byte pattern rejects the record |
+| Campaign or registry status is outside the public enum | same | Draft-07 enum check rejects the snapshot/result |
+| Required vault/account field is missing | same | Draft-07 required check rejects the snapshot |
+| Unknown field is added to evidence or result | same | Closed-object `additionalProperties: false` rejects it |
+| Result claims mainnet or authority to change state | same | Fixed `const` gates reject the result |
+| Schema opens an object, changes economics, or releases status | `open objects, economics drift...` | Schema contract and source-digest validation fail |
+| Schema adds raw X identity, handle, OAuth, or signing fields | `schema properties expose commitments...` | Privacy-field scan rejects the schema |
+| Structurally valid evidence violates accounting semantics | `every valid evidence example...` | Semantic reconciler remains the required second validation layer |
 
 ## Next matrix expansion
 
-- portable JSON Schema validation for evidence snapshots and reconciliation
-  results, including valid and invalid public examples;
+- content-addressed review manifest and deterministic tree root for every
+  proposal artifact, validator, and test entry point;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.
