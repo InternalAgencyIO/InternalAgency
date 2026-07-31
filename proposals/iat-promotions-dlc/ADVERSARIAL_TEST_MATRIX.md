@@ -263,8 +263,10 @@ security audit or deployment approval.
 | Multiproof omits, reorders, changes, or disconnects a node | same | Canonical 84-node reconstruction fails closed |
 | Multiproof silently drops one collision member | same / `the 84-node multiproof is minimal...` | Membership-derived node coordinates no longer match the proof |
 | Multiproof savings or individual-proof equivalence drifts | `the 84-node multiproof is minimal...` | Fixed 84/208/124 counts and both runtime reconstructions reject drift |
+| Fixed 26-member geometry hides a construction defect | `96 deterministic varied subsets preserve...` | Ninety-six unique subsets spanning one through 256 records must match an independent pairwise coordinate oracle and every individual path |
+| Varied subset proof accepts membership or node-set drift | `varied subsets reject nonminimal nodes...` | Bad roots, duplicate/out-of-range/missing members, and missing/redundant/changed/reordered nodes all fail closed across the compact corpus |
 
 ## Next matrix expansion
 
-- deterministic multiproof property tests over varied record subsets;
+- deterministic multiproof properties over odd-width record trees and duplicate-final-node levels;
 - local-validator transaction rollback and account-lock contention.

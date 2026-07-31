@@ -32,7 +32,7 @@
   },
   "summary": {
     "coveredFileCount": "156",
-    "totalNormalizedByteLength": "2321134",
+    "totalNormalizedByteLength": "2329688",
     "countsByRole": {
       "ARTIFACT": "62",
       "GENERATOR": "20",
@@ -52,9 +52,9 @@
     {
       "path": "ADVERSARIAL_TEST_MATRIX.md",
       "role": "ARTIFACT",
-      "normalizedByteLength": "38148",
-      "contentSha256": "25422810ef42c68a9f120bac77af25aa0ad7ccc6cfeb6ff211aae533d182d337",
-      "leafSha256": "6ca49bf1090059a94cd92f6e822ccf542c6271e191afc0a6529c582cc20edfc5"
+      "normalizedByteLength": "38670",
+      "contentSha256": "51e26f9ae1c5699371c93029cd7d55edea1009da7d6666836f41a6475e4d9a6e",
+      "leafSha256": "15989655db71a2a83eeb55cabb371e03b4a62015b7dff574a4df5bd201f7e1f8"
     },
     {
       "path": "ATTESTATION_AND_TRANSPARENCY.md",
@@ -178,9 +178,9 @@
     {
       "path": "POSITIVE_CAMPAIGN_VECTOR_REPRESENTATION_AUDIT.md",
       "role": "ARTIFACT",
-      "normalizedByteLength": "3170",
-      "contentSha256": "6ca3361e01b248b533da314e88ba3f807b5113e991fe9a50c22418fb5c7e617b",
-      "leafSha256": "98c85e9da3bcec457c12a9c1492606914cff8172e16de7713ff3389a17eb9f70"
+      "normalizedByteLength": "3964",
+      "contentSha256": "a5b7a4df3960c01023c0368302afdf1c62aa8519132d80ecda78fbc8192f4b7e",
+      "leafSha256": "7d85f097054003c2f2efa195ed65da866d32c6aba93a127cf352aaabe150448b"
     },
     {
       "path": "PROGRAM_INTERFACE.md",
@@ -192,9 +192,9 @@
     {
       "path": "README.md",
       "role": "ARTIFACT",
-      "normalizedByteLength": "19095",
-      "contentSha256": "7e5a7afe75fc72a1a58f3230790eaedf192a11818f779b2c39cd2d8753b6e942",
-      "leafSha256": "25293f5d32112ef4beedb8c8e9d32e2669a891a574a1020a60c562542139d75d"
+      "normalizedByteLength": "19121",
+      "contentSha256": "1aab050a2c1e84263144016c9416cb9f9249cf7cb8baef60d2ca5190c307044f",
+      "leafSha256": "bbdfaf37837524aadb4bf11a8b4297dba9d0b69e570dc2b51f88c5fe725cb718"
     },
     {
       "path": "REVIEWER_BUNDLE_LINT.md",
@@ -227,9 +227,9 @@
     {
       "path": "STATUS.md",
       "role": "ARTIFACT",
-      "normalizedByteLength": "27633",
-      "contentSha256": "fd18d1c414983eff43bea82b25cfd380bb5402edf76e2a5f68aac4f84782a4fe",
-      "leafSha256": "6dac730ab6373217c3c99941d07277971cc64edda0a5bd3b6bec26e4ab04a368"
+      "normalizedByteLength": "28212",
+      "contentSha256": "114643fcab51175d4b9a5d768495b0e96b1fb571587c73c2db0252171e387c31",
+      "leafSha256": "0432313d4d848aa7c08bdd33de19e2aa11abb2e119388f1101c7e5e421d7f6a8"
     },
     {
       "path": "THREAT_MODEL.md",
@@ -857,9 +857,9 @@
     {
       "path": "tests/positive-campaign-vector-representation-audit.test.mjs",
       "role": "TEST",
-      "normalizedByteLength": "13531",
-      "contentSha256": "4ff3c7f71d78a8852278d99be7572dae471ae1fea970f1712254ea518564b09e",
-      "leafSha256": "3a863bec092dbc1d317645fa53885f0ab42b165eb35064c0b0cb9459c8a52355"
+      "normalizedByteLength": "20164",
+      "contentSha256": "f3ed0f3d3f8fd19bcf3bd4f9e6192c575b1ad9bfcfe41cd86dc626e297a76583",
+      "leafSha256": "4ecd2560509ea5ee53cc20213d7557c900a9430ca6d4f0de8b358e5ffb86a547"
     },
     {
       "path": "tests/program-event-interface.test.mjs",
@@ -1142,7 +1142,7 @@
         "level": "1",
         "nodeCount": "78",
         "nodeSha256": [
-          "4edbc64111ea2546ab1b1ae789821e36aca3d5d4e583391c9f87c1ba514f7157",
+          "efba2c486d0e98c4636d3e280963cface8cf03239251fb6baf8bd5a339cb9a57",
           "a824fa5ab65a1a7ef69b259b1e24fc7f76c57b1bfb303ce754b6f4aa1f3fb161",
           "664fb24190b046d8b19aabfaac8197727b61e7f49a15104e95992f24de9a41c0",
           "b203ea87c058e203d82442449678e95a9d43025e27cae24893622d5046142e72",
@@ -1151,11 +1151,11 @@
           "b98fc3fa07f2edb3af4280f47e3b58b76385789fe27f92a5c2188fb0309b4138",
           "46ad8dad7295cbda62039dc5edda61a8ca7fccc9bd736df862b7b8eb44212196",
           "7565de3fa6c5dc114dbc8c789b7b78e63ef642c2d13d7499324e70c4e4db0b95",
-          "bbc44bb61193a4a0147aefa05137557192ab03241105c1af210aab6b0febbfc2",
-          "3e42bf70937bf3d2f4f5051cd12d3d39d7bbdfecdc0946b82fd943ef3d26b559",
+          "eb3c6509b2cc84ff9c5f8454ac2077d9922072cfeaa3b40e0a16e2eb2bd88c91",
+          "bffa8da54626643d136c3f0297b1ffe01b183bd38f9965669ffbcb187654251d",
           "fccef84ed7d25e2640cff329d91cadec1970983384083f1de672f96f034bd49b",
           "151003caf175d734f1706606cc1a40a701f194dee25b4b757a7fb167dc1c2d38",
-          "80534acfd8cfd01aa90751a0efef1fdfd7e54b31371d89199fe3c6196272e143",
+          "212d73c374852176e4a6c44dd0119c197966bf212ba2ba7261b2fc2dd08d9610",
           "ad9c777a198eb20341dd9e28042dddb7389f9e73495b0072e1385e6490ecfa68",
           "647244d149853a6e05121806b522ac522f92492d09d7436137f641898dcc346f",
           "8ce08ebd052718024910540cc7e2b6ecc7aa72c3ca57984923de64c509fa4215",
@@ -1200,7 +1200,7 @@
           "13441d4eba250256614ce2a9c60ccad7db11fe06df67d29b6441385bb2d4be7b",
           "bc402881f4ae34a2a99d6ac4462b40f40fd4b6317851ddc0e26f82b3ea832411",
           "14d24a335ad9b1d96014602fb904ba54984d97f0de984d9e95ba315bd223405d",
-          "09a2efe4ee1c24c7b2c27e32cfb3bcfb5e53dd2bf0601b174a9ae446ca08a994",
+          "b0260b283151e2869ffb0d8ac6fc24ff0198fed0580334a6ad0fcacdf9110ee7",
           "fdae34e614a23af0725233fd620b3cf3394df3f9c2c0139902ca3f38b5c8557d",
           "64d0642256dcd27db26e1d39607fd036a3a3c2493e40c774c4ac67ab57bcee7e",
           "66588a2e9b1aab246100efec602519312f54733c967b35c2950593ca94902ea7",
@@ -1226,13 +1226,13 @@
         "level": "2",
         "nodeCount": "39",
         "nodeSha256": [
-          "162bf135e2317f9046e2393cde639cc4c87f5d5c3c1ad49214945721b5ed1dbc",
+          "36d7484345e2451a2cef868447520ceb98746afaf2b0f7f6d8b1c57f110adc00",
           "f5023827cbb7c5ced9bda5d763aab30f1e574e5ac2834d5b47f74e6349972c6c",
           "6ece826171c24832356d0ecba9e0bb8f0759fe93c575b22c9e3aaf52a91e78c3",
           "588c5572c1f2fd8729d919a3c749287c9249bc36769279f36bf7d5c5ad4cd277",
-          "812b876a54a7025fcbaa8efe1fe31bf9e0d6f13205295a8723ad6e8c7b27ec14",
-          "1f2d09c067468036153695bee240e237d6067d511e7a2dfe3998fb53404a9e3a",
-          "c50118aa2c62779241aa72321133a4a187bb83d4b39f9e5acbb108a1c2d7aa43",
+          "cd00fd271395e064c1b5a96106f495443646651abcf5789460644582327a918f",
+          "1faaeaf1044912e44b9f0f6814c9c9382a1fd6f018a7ddbee174201509d7bf61",
+          "6d42ee64bf03e35c3365529978d6c44f305c118053f3cad3f6a66c6867304b10",
           "5ecbda810d0a842f6ccb682c88032abd43ac8820c7f7a1cbbfada214d51a7cb5",
           "59b10cd51acb4a91b2d31027aafd86f713262474049bd610052528f4eede0579",
           "7ce43c64552a3d4530f0c5cc32e5fbd4bf2879013156e7a54bee3821e58e5eb4",
@@ -1255,7 +1255,7 @@
           "14ed1917dd558039539a73891693b2e6ac8b29bf537dfcdfbc48c465b5ef0252",
           "48f83eac746a41a6d71111ab5d9bf589b0cfe2cc2e20eac6dbbc5d2bd0c6e30b",
           "8e236eee848832de81a287033f3ccc6a08898d28dc8f31fa1e19c14d3e35c812",
-          "ecd514f5fb3804cc844937fc54a40cd58048ab9bc0b3289c584578eb7c95e32b",
+          "368fcc7f09e05349e7437a1991e4a9e7d4eab6f947234e030fc2b6bb3206061c",
           "1d819ae7d586aea35d935a4328cd92d686d70a3ff9726b3b8190f061aa7579cb",
           "26edfc4610707a2ee3a33e415a798356e7663c85e50a3d284ef462613f2c77ac",
           "0d2ba1006a2b6b264e33304dc218e8d913bf3c19754bdfea74247ac856861a9c",
@@ -1271,10 +1271,10 @@
         "level": "3",
         "nodeCount": "20",
         "nodeSha256": [
-          "8c548f3351b0ce2427497e37db11a1956a7f95affcdf1afe47fda9eb8538aca8",
+          "81c9d29c132147adaa87cda8f060fb5207ed10ff097afd7ecdff37bfcd9790c8",
           "0332be499fb943fa376f875b71fa5062d22d3b690bacc9ed26e718b9ece04adb",
-          "59a1f22259ccfd71eb4540f5d29a7ad01c1d29476a4bfd0e0fee8d098a6df94b",
-          "2ea4521e0f694992dcb67ae465a1c470fa8fc019e76118bab70840b3452371d8",
+          "0cdfc2616da05ca158e18dd73abb967b8b76b9ad0f2557507c67208ee702f82b",
+          "936fdbea4cc4b279d391ea1fc0c75e391031547377354281dfaa1e4e40e28e98",
           "c0969af84b0c45315d91a99f733efd694ea53c83c51ee950fe31ee801de207b4",
           "9542f302ff6b8d0f77514aed16aecd6549a7598ada71c1eda8b8e12ac8733b7a",
           "ed9ddaf66ee8ed0846a6a40ca077d7e59fcde242a14c1ec34a5cfbefd006a991",
@@ -1285,7 +1285,7 @@
           "9a888dd4f3829f8dc4a812c7c807d120dd033a7512b4d694d05122863ef9295f",
           "6ca187adfcedadf59b0fc20b9aac1d01a0996fbd61a109f2d4b675b4ede8864b",
           "d271dedc8cb739ba1a4f11d4b5fed1ea3d899b1c06de66fa9525687dcf6dba10",
-          "526850c13b7e2cb6228a9cfb80712f1465f3ef46211608a7724febfc3db9308e",
+          "6f7c625b7890a9093c97d9c801be7815f3eca6f9bf9fec4a05ca91798e26684a",
           "4589f8f7244c338e01d222d6fb34da0b747bd3244ee912c906d6b4becc7a64df",
           "a6216fba9849d13e824f8f77b43b03aa88fa82ffd6194c7e516f5dc46f83f7b1",
           "642d3a9dcbd62751346680fc306ded7f77375b23fd0e97561e172141c4f5bad2",
@@ -1297,14 +1297,14 @@
         "level": "4",
         "nodeCount": "10",
         "nodeSha256": [
-          "c65da846bdca500991482687a2a8c525e1396c2a87b7d0f2572ec201c43f8ab6",
-          "326a3711bcbc50243d5239bd27a48ba76e74c151970603438a7440b614f3fbf9",
+          "e4e73bf460f1dbecc8a733e1eaa5c30bbbe80666c9e1252107a24a1f003060b4",
+          "ce88917381e002084782a45b4bb687b4bfe3643914cb68a14d077b744fb1b8db",
           "5d7413b8649fce46f8770b7a09191d532c561323151dead2198867918782832d",
           "88a8c782bf06380d643f7c833ed99f02551f1c2cfbdf8e812f225981b73d15a7",
           "8051317af1406b827564ae4ab90dcbe4168e8d7fed5b0a9efd8ed335848cd586",
           "1046b25f80f8a71dd6bde529faf804c93f69f36e764dbf9bdd4587592d6c4fb6",
           "3d294ba8511c9072558aa0d90ab1bf7af62c33498b5ad45dc1b1abd519d6f58d",
-          "91be7548b047f90f9cedbf168b4d702d6691d74d8bcfcac814fb0eb7502b04fd",
+          "d14a816e44701458e620974be24a8d64a9556fba66afb66e605807aafe195174",
           "e4fae7e679b2a6d356021b5c5594755fdbbc5aed8f59add5040bf48a07f557de",
           "0439146764f8eea4daab96f1fb56fbafb6d7592767dfaaafc0c4850992c10dfa"
         ]
@@ -1313,10 +1313,10 @@
         "level": "5",
         "nodeCount": "5",
         "nodeSha256": [
-          "bd40b16ac667bc8a2376c4a5b680dbe6b1c27b7dc6067f4e57e92c906c8238be",
+          "f33156c8e2433cac0cf5765b478507a103f478123ced0adf5d92bea28ecb5dd8",
           "a6823a7dc4f7be81a0b1d2238922e4f6e19ff6bdab6248e3badf02168e895387",
           "c7c6fdb2bc1303abf8272ff205bdced8bcccfa2744562c5ac75fa9430a7596a1",
-          "4bc75bcccf22e2a15727e0c309345c9ce3d3f06d704d59f2875b3aa1ae279d76",
+          "26e1fe23aba0f4638e46f0ab744e17b755f16889d09755fc24f6eba3ef6995f7",
           "07eec1427c1c430e2c786c6e950fd437345135233a4e2cae7e6a6b37c03c1919"
         ]
       },
@@ -1324,8 +1324,8 @@
         "level": "6",
         "nodeCount": "3",
         "nodeSha256": [
-          "6cf70df13a9c5a03defe7682cc88ddb5461e9db435267dbf35f500535dad30d4",
-          "7ef249af80cef1ded4ec902243237b8f1265856b628e755f049306d0134fa3ba",
+          "a01afdbf5fe3502a96c01ecf3fe1443ba2a6b71edea78d802c6d96103cc40034",
+          "8ad3d48c2a5e108cd5bf9a69a2993050f231da1a4e4b85e92e8136df4a56dda0",
           "1b38607161e51c6db9170256787d490126beda7944183464ed7520de69aaea38"
         ]
       },
@@ -1333,7 +1333,7 @@
         "level": "7",
         "nodeCount": "2",
         "nodeSha256": [
-          "6dc6cb5db32ec1fb4e83a95c1b674addd813a56e6c68150b765f175ea02eb0a2",
+          "be68e810b7e575c231213345a47ca18806c36b169e09e8ed036c6a1f09fe31e3",
           "abbf5dc626d23b75071757cabfd2782231a2a1a82c887bdb5cb13b17168ebf23"
         ]
       },
@@ -1341,10 +1341,10 @@
         "level": "8",
         "nodeCount": "1",
         "nodeSha256": [
-          "841d40b6af33235f0e4465e78f15a6384993633db5325601fd0db182ffa7f91b"
+          "999ee83be502ad5ae7f58bde79b22c2d68b5726f64d422f4da3ef82a02ab968f"
         ]
       }
     ]
   },
-  "treeRootSha256": "841d40b6af33235f0e4465e78f15a6384993633db5325601fd0db182ffa7f91b"
+  "treeRootSha256": "999ee83be502ad5ae7f58bde79b22c2d68b5726f64d422f4da3ef82a02ab968f"
 }

@@ -4,6 +4,7 @@
 
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -33,11 +34,60 @@ const PYTHON = candidates.find((candidate) => spawnSync(candidate, ["--version"]
 const pythonOptions = { encoding: "utf8", env: { ...process.env, PYTHONUTF8: "1" } };
 const bundle = loadPositiveCampaignVectorRepresentationAuditBundle();
 const artifact = bundle.artifact;
+const MULTIPROOF_PROPERTY_CASE_COUNT = 96;
+const MULTIPROOF_PROPERTY_SET_COMMITMENT_SHA256 =
+  "55b6dfca7e24fe93a18ee1a0e45b5086d27ca0f07ec778e283e67953b6582abb";
 
 function runPython(path = null) {
   const args = [PYTHON_VERIFIER, "--verify-representation-audit", "--format", "json"];
   if (path !== null) args.push("--representation-audit", path);
   return spawnSync(PYTHON, args, pythonOptions);
+}
+
+function deterministicMultiproofPropertySubsets(totalLeafCount) {
+  assert.equal(totalLeafCount, 256);
+  const sizes = [
+    1, 2, 3, 4, 5, 7, 8, 13, 16, 21, 26, 31, 32, 33, 55, 63, 64, 65,
+    89, 127, 128, 129, 191, 254, 255, 256,
+  ];
+  for (let cursor = 0; sizes.length < MULTIPROOF_PROPERTY_CASE_COUNT; cursor += 1) {
+    const candidate = ((cursor * 73) % 255) + 1;
+    if (!sizes.includes(candidate)) sizes.push(candidate);
+  }
+  return sizes.map((size, caseIndex) => {
+    const offset = (caseIndex * 97 + 17) % totalLeafCount;
+    const stride = (((caseIndex * 53 + 1) % totalLeafCount) | 1);
+    const indices = Array.from(
+      { length: size },
+      (_, position) => (offset + stride * position) % totalLeafCount,
+    ).sort((left, right) => left - right);
+    assert.equal(new Set(indices).size, size, `case ${caseIndex}`);
+    return indices;
+  });
+}
+
+function independentMinimalMultiproofCoordinates(totalLeafCount, indices) {
+  let active = new Set(indices);
+  let width = totalLeafCount;
+  let level = 0;
+  const coordinates = [];
+  while (width > 1) {
+    const next = new Set();
+    for (let left = 0; left < width; left += 2) {
+      const right = left + 1;
+      const leftActive = active.has(left);
+      const rightActive = right < width && active.has(right);
+      if (!leftActive && !rightActive) continue;
+      next.add(Math.floor(left / 2));
+      if (right < width && leftActive !== rightActive) {
+        coordinates.push(`${level}:${leftActive ? right : left}`);
+      }
+    }
+    active = next;
+    width = Math.ceil(width / 2);
+    level += 1;
+  }
+  return coordinates;
 }
 
 test("the compact 256-input representation audit deterministically regenerates", () => {
@@ -202,6 +252,105 @@ test("missing, redundant, reordered, changed, and disconnected multiproof nodes 
   disconnected[6].index = String(Number(disconnected[6].index) + 2);
   assert.equal(verify(disconnected), false);
   assert.equal(verify(nodes, selected.slice(1)), false);
+});
+
+test("96 deterministic varied subsets preserve exact minimal coordinates and individual-path equivalence", () => {
+  const commitments = artifact.records.map((record) => record.auditRecordCommitmentSha256);
+  const subsets = deterministicMultiproofPropertySubsets(commitments.length);
+  assert.equal(subsets.length, MULTIPROOF_PROPERTY_CASE_COUNT);
+  assert.equal(new Set(subsets.map((indices) => JSON.stringify(indices))).size, subsets.length);
+  assert.equal(subsets.reduce((total, indices) => total + indices.length, 0), 10_579);
+  assert.equal(
+    createHash("sha256").update(JSON.stringify(subsets), "utf8").digest("hex"),
+    MULTIPROOF_PROPERTY_SET_COMMITMENT_SHA256,
+  );
+  let aggregateIndividualNodeCount = 0;
+  let aggregateMultiproofNodeCount = 0;
+  for (const [caseIndex, indices] of subsets.entries()) {
+    const proofNodes = representationAuditMerkleMultiproof(commitments, indices);
+    const expectedCoordinates = independentMinimalMultiproofCoordinates(commitments.length, indices);
+    assert.deepEqual(
+      proofNodes.map((node) => `${node.level}:${node.index}`),
+      expectedCoordinates,
+      `case ${caseIndex}`,
+    );
+    assert.deepEqual(
+      representationAuditMerkleMultiproof(commitments, [...indices].reverse()),
+      proofNodes,
+      `case ${caseIndex} reverse construction`,
+    );
+    const selected = indices.map((index) => ({
+      index,
+      recordCommitmentSha256: commitments[index],
+    }));
+    assert.equal(verifyRepresentationAuditMerkleMultiproof(
+      selected,
+      commitments.length,
+      proofNodes,
+      artifact.summary.auditRecordMerkleRootSha256,
+    ), true, `case ${caseIndex}`);
+    assert.equal(verifyRepresentationAuditMerkleMultiproof(
+      [...selected].reverse(),
+      commitments.length,
+      proofNodes,
+      artifact.summary.auditRecordMerkleRootSha256,
+    ), true, `case ${caseIndex} reverse verification`);
+    for (const record of selected) {
+      const path = representationAuditMerkleProof(commitments, record.index);
+      assert.equal(path.length, 8, `case ${caseIndex} index ${record.index}`);
+      assert.equal(verifyRepresentationAuditMerkleProof(
+        record.recordCommitmentSha256,
+        record.index,
+        path,
+        artifact.summary.auditRecordMerkleRootSha256,
+      ), true, `case ${caseIndex} index ${record.index}`);
+    }
+    aggregateIndividualNodeCount += selected.length * 8;
+    aggregateMultiproofNodeCount += proofNodes.length;
+    assert.ok(proofNodes.length <= selected.length * 8, `case ${caseIndex}`);
+  }
+  assert.equal(aggregateIndividualNodeCount, 84_632);
+  assert.equal(aggregateMultiproofNodeCount, 6_554);
+  assert.equal(aggregateIndividualNodeCount - aggregateMultiproofNodeCount, 78_078);
+});
+
+test("varied subsets reject nonminimal nodes, membership drift, bad roots, and invalid indices", () => {
+  const commitments = artifact.records.map((record) => record.auditRecordCommitmentSha256);
+  const root = artifact.summary.auditRecordMerkleRootSha256;
+  const subsets = deterministicMultiproofPropertySubsets(commitments.length);
+  for (const [caseIndex, indices] of subsets.entries()) {
+    const nodes = representationAuditMerkleMultiproof(commitments, indices);
+    const selected = indices.map((index) => ({
+      index,
+      recordCommitmentSha256: commitments[index],
+    }));
+    const verify = (candidateRecords, candidateNodes, totalLeafCount = commitments.length, expectedRoot = root) =>
+      verifyRepresentationAuditMerkleMultiproof(
+        candidateRecords,
+        totalLeafCount,
+        candidateNodes,
+        expectedRoot,
+      );
+    assert.equal(verify(selected, nodes, commitments.length, "f".repeat(64)), false, `case ${caseIndex} root`);
+    assert.equal(verify([...selected, selected[0]], nodes), false, `case ${caseIndex} duplicate member`);
+    assert.equal(verify([
+      ...selected.slice(0, -1),
+      { index: commitments.length, recordCommitmentSha256: selected.at(-1).recordCommitmentSha256 },
+    ], nodes), false, `case ${caseIndex} out-of-range member`);
+    assert.equal(verify(selected.slice(1), nodes), false, `case ${caseIndex} missing member`);
+    if (nodes.length > 0) {
+      assert.equal(verify(selected, nodes.slice(0, -1)), false, `case ${caseIndex} missing node`);
+      assert.equal(verify(selected, [...nodes, nodes.at(-1)]), false, `case ${caseIndex} redundant node`);
+      const changed = structuredClone(nodes);
+      changed[Math.floor(changed.length / 2)].sha256 = "e".repeat(64);
+      assert.equal(verify(selected, changed), false, `case ${caseIndex} changed node`);
+    }
+    if (nodes.length > 1) {
+      const reordered = structuredClone(nodes);
+      [reordered[0], reordered[1]] = [reordered[1], reordered[0]];
+      assert.equal(verify(selected, reordered), false, `case ${caseIndex} reordered nodes`);
+    }
+  }
 });
 
 test("Python independently reproduces the representation audit", () => {

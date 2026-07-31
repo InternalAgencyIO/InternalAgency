@@ -43,6 +43,18 @@ missing, redundant, reordered, changed, disconnected, or incomplete evidence
 fails. The multiproof commitment binds membership, nodes, minimality,
 individual-proof equivalence, and permanent non-authority.
 
+The proposal-only test suite also derives 96 unique property subsets spanning
+one through 256 selected records. Fixed boundary sizes and deterministic
+odd-stride layouts cover 10,579 selected memberships without publishing any
+expanded input or result corpus. A separate pairwise tree oracle derives the
+required coordinates without calling the multiproof builder. Across the
+compact suite, 84,632 repeated individual-path nodes reduce to 6,554 minimal
+multiproof nodes, saving 78,078 nodes. The ordered subset set is committed as
+`55b6dfca7e24fe93a18ee1a0e45b5086d27ca0f07ec778e283e67953b6582abb`.
+Every case verifies in forward and reverse membership order and rejects bad
+roots, duplicate or out-of-range members, missing members, and missing,
+redundant, changed, or reordered proof nodes.
+
 It does not store the 256 full inputs or results. Node regenerates the artifact;
 Python independently rebuilds every record, collision class, tree root, and
 individual or aggregate proof from the base vectors and fixed seed.
