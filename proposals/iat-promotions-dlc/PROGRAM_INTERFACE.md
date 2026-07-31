@@ -7,6 +7,11 @@ This document explains the network-free interface in
 review, not an Anchor IDL, deployed program, executable artifact, program ID,
 wallet request, or authorization to fund or activate anything.
 
+Security gap: v0 stores one verifier public key and exposes no reviewed rotation
+or emergency-disable instruction. It must not be treated as deployment-ready.
+`VERIFIER_KEY_LIFECYCLE.md` defines the reference behavior that a separately
+reviewed machine-interface amendment still needs to encode.
+
 ## Encoding contract
 
 - The first eight bytes are the first eight bytes of SHA-256 over

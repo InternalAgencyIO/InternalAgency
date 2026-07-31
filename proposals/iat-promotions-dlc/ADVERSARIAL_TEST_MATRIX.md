@@ -69,10 +69,22 @@ security audit or deployment approval.
 | Every byte of both RFC signatures mutated | `every signature-byte mutation...` | All 128 mutations reject |
 | RFC message or public key substituted | same | Verification rejects |
 | Secret-bearing field added to public vectors | `deployment claims, secret-bearing fields...` | Vector validator rejects publication |
+| Rotation without separate review | `rotation requires separate review...` | Rejected with original lifecycle unchanged |
+| Rotation notice shorter than 24 hours | same | Rejected |
+| Key overlap longer than one hour | same | Rejected |
+| New key before explicit activation | `activation and retirement enforce...` | Rejected even after scheduled timestamp |
+| Old key at retirement boundary | same | Invalid exactly at retirement timestamp |
+| Concurrent rotation | `concurrent rotations...` | Rejected while one rotation is pending |
+| Public key reused | same | Permanently rejected for the campaign |
+| Review ID replayed | same | Rejected across later transitions |
+| Emergency disable with pending rotation | `emergency disable is immediate...` | Pending key cancels; new issuance stops immediately |
+| Re-enable after emergency disable | same | Permanently rejected; new reviewed campaign version required |
+| Historical issuance before emergency timestamp | same | Remains verifiable under its original guards |
+| Key-lifecycle log mutation or domain drift | `public checkpoints accept...` | Lifecycle validation and prior checkpoint verification fail |
 
 ## Next matrix expansion
 
-- verifier-key rotation and emergency-disable state model;
+- machine-readable verifier-registry interface amendment;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

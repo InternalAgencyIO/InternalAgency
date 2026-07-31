@@ -52,6 +52,8 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Interface validator](./validate-program-interface.mjs)
 - [Public-key-only RFC 8032 vectors](./ed25519-public-vectors.v0.json)
 - [Ed25519 public-vector validator](./validate-ed25519-public-vectors.mjs)
+- [Verifier-key lifecycle reference policy](./VERIFIER_KEY_LIFECYCLE.md)
+- [Network-free verifier-key lifecycle model](./verifier-key-lifecycle.mjs)
 - [Proposal-only tests](./tests/)
 
 Run the proposal-only checks with:
@@ -68,6 +70,7 @@ node --test proposals/iat-promotions-dlc/tests/program-interface.test.mjs
 node --test proposals/iat-promotions-dlc/tests/instruction-transition-adapter.test.mjs
 node --test proposals/iat-promotions-dlc/tests/deterministic-byte-fuzz.test.mjs
 node --test proposals/iat-promotions-dlc/tests/ed25519-public-vectors.test.mjs
+node --test proposals/iat-promotions-dlc/tests/verifier-key-lifecycle.test.mjs
 ```
 
 ## Deliberate isolation

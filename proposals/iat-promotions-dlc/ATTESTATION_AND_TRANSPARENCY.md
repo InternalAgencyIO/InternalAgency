@@ -79,6 +79,13 @@ During a bounded overlap, old and new public keys may both verify; every
 attestation records the exact `keyId`. Emergency key removal stops new
 attestations but cannot rewrite accepted settlements.
 
+`VERIFIER_KEY_LIFECYCLE.md` and `verifier-key-lifecycle.mjs` now make those
+boundaries executable: 24-hour public notice, at most one hour of overlap,
+single-use review IDs, explicit activation/retirement finalization, immediate
+terminal emergency disable, historical verification semantics, and append-only
+public checkpoints. These are reference-policy choices for review, not deployed
+controls.
+
 ## Public transparency log
 
 Each final attestation outcome appends a minimal public entry containing:

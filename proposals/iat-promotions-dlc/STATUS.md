@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 12:05 UTC
+Updated: 2026-07-31 12:20 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `25ccd1e`
+Previously published public increment: `3a83849`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -57,13 +57,22 @@ This status file deliberately does not claim a self-referential commit hash.
 - complete truncation and trailing-byte rejection across every instruction;
 - canonical decode/re-encode checks for every single-bit vector mutation; and
 - 128 verifier-binding mutations that all preserve byte-identical campaign
-  state.
+  state;
+- pure public-key rotation and emergency-disable lifecycle model;
+- separately reviewed, replay-resistant rotation scheduling;
+- 24-hour minimum public notice and one-hour maximum old/new key overlap;
+- explicit activation and retirement finalization with exact time boundaries;
+- permanent key-reuse rejection and immutable identity-commitment domain;
+- immediate terminal emergency disable with historical verification preserved;
+  and
+- canonical hash-chained key events and append-only public checkpoints.
 
-Current proposal-only result: **71 tests passed**. This consists of 28 protected
+Current proposal-only result: **76 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
-byte-fuzz tests, and three Ed25519 public-vector tests.
+byte-fuzz tests, three Ed25519 public-vector tests, and five verifier-key
+lifecycle tests.
 
 ## Current guarantees of the reference model
 
@@ -84,7 +93,7 @@ These are executable model properties, not claims about any deployed program.
 ## Open security decisions
 
 - revoke standalone upgrade authority or use an enforced public timelock;
-- identity-verifier key custody, rotation, and emergency response;
+- identity-verifier key custody and emergency-reviewer threshold;
 - independent reviewer authority and threshold;
 - identity-commitment pepper custody and auditor procedure;
 - X API terms, availability, minimal scopes, and retention;
@@ -95,6 +104,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Define a verifier-key rotation and emergency-disable state model with public
-transparency records and deterministic transition tests. No production import,
-chain connection, wallet operation, or site deployment is needed for that work.
+Draft a machine-readable verifier-registry interface amendment with account
+locks and deterministic vectors, while keeping v0 explicitly undeployable until
+that amendment receives separate review. No production import, chain
+connection, wallet operation, or site deployment is needed for that work.
