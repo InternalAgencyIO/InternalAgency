@@ -187,11 +187,17 @@ security audit or deployment approval.
 | Approval retains a blocking open-security disposition | `blocking dispositions prevent approval...` | Semantic gate rejects approval while allowing request-changes |
 | Missing external signature is hidden by otherwise complete evidence | `fully aligned public fixture fails only...` | Cryptographic gate remains visibly false and candidate is rejected |
 | Rejection is presented as receipt issuance, completed review, or activation | `no public scenario issues a receipt...` | All result authority fields remain false or `NONE` |
+| Human-readable report hides or reorders a required gate | `gate order is fixed...` | All six policy gates reproduce in one fixed order with explicit PASS/FAIL state |
+| Candidate controls the supposedly expected review target | `separately supplied expected-target mismatch...` | Independently supplied target mismatch visibly fails target binding |
+| Bundle or target changes after linting | `candidate, expected target... receive distinct stable commitments` | Three separate canonical input commitments change with their bound objects |
+| Malformed programmatic input crashes open or claims authority | `malformed programmatic input fails closed...` | Candidate rejects and receipt, review, and activation authority remain false |
+| Rejected CLI result is mistaken for a successful lint | `CLI returns rejection status 2...` | Rejection is human-readable and returns a distinct nonzero status |
+| Linter gains file-write, signing, keygen, or network capability | `linter source has local-read-only capability...` | Import allowlist and forbidden-capability scan fail |
 
 ## Next matrix expansion
 
-- offline reviewer bundle linter and human-readable gate report, still without
-  creating signatures or accepted receipts;
+- closed reviewer-candidate, expected-target, and lint-result schemas with
+  invalid examples that remain rejected and non-activating;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

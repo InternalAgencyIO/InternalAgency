@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 15:46 UTC
+Updated: 2026-07-31 16:01 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `acff29f`
+Previously published public increment: `8387453`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -234,8 +234,19 @@ This status file deliberately does not claim a self-referential commit hash.
 - five additional target, scope, role, blocking, and activation rejection
   vectors; and
 - every public result rejected, unissued, incomplete, and non-activating.
+- local-file-only reviewer-bundle CLI with separately supplied candidate and
+  expected-target inputs;
+- deterministic candidate, expected-target, and receipt-template commitments;
+- fixed six-row PASS/FAIL gate ordering and explicit failure details;
+- distinct exit codes for accepted lint, policy rejection, and malformed input;
+- a reproducible human-readable public report showing five gates passing and
+  the absent external signature gate failing;
+- fail-closed malformed input with no receipt, review, or activation authority;
+  and
+- source-level exclusion of file writes, signing, key generation, wallet, and
+  network capability from the linter.
 
-Current proposal-only result: **187 tests passed**. This consists of 28 protected
+Current proposal-only result: **197 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -255,6 +266,9 @@ and non-activation tests complete the cryptographic verification suite.
 Ten acceptance-gate, target, scope, independence, blocking-finding,
 source-safety, receipt-issuance, and non-activation tests complete the receipt
 policy suite.
+Ten offline linter, deterministic report, input-commitment, CLI-exit,
+fail-closed, source-safety, and non-activation tests complete the reviewer
+bundle presentation suite.
 
 ## Current guarantees of the reference model
 
@@ -286,7 +300,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add an offline reviewer-bundle linter and human-readable gate report without
-creating signatures or accepted receipts. Preserve the privacy boundary and
-every unapplied and undeployable gate. No production import, chain connection,
-wallet operation, or site deployment is needed for that work.
+Add closed Draft-07 schemas for reviewer-candidate, independently supplied
+expected-target, and lint-result files, plus deterministic invalid examples.
+Keep every example rejected, unissued, and non-activating. No signature,
+production import, chain connection, wallet operation, or site deployment is
+needed for that work.
