@@ -62,3 +62,8 @@ Expected Python summary:
   "activationEffect": "NONE"
 }
 ```
+
+The fixed corpus is complemented by the compact seeded 256-case replay in
+[`POSITIVE_CAMPAIGN_VECTOR_FUZZING.md`](./POSITIVE_CAMPAIGN_VECTOR_FUZZING.md).
+That extension stores commitments rather than duplicating every full input and
+result, and remains equally rejection-only and non-authoritative.

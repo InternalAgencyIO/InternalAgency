@@ -15,6 +15,7 @@ import hashlib
 import json
 import re
 import sys
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -24,9 +25,11 @@ DEFAULT_VECTORS = ROOT / "positive-campaign-vector-intake-vectors.v1.json"
 DEFAULT_DIFFERENTIAL_VECTORS = (
     ROOT / "positive-campaign-vector-intake-differential-vectors.v1.json"
 )
+DEFAULT_FUZZ_VECTORS = ROOT / "positive-campaign-vector-intake-fuzz-vectors.v1.json"
 SCHEMA_PATH = ROOT / "positive-campaign-vector-intake.schema.v1.json"
 CAMPAIGN_VECTORS_PATH = ROOT / "campaign-envelope-verification-vectors.v1.json"
 EVALUATOR_PATH = ROOT / "positive-campaign-vector-intake.mjs"
+FUZZ_GENERATOR_PATH = ROOT / "generate-positive-campaign-vector-intake-fuzz-vectors.mjs"
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
 TARGET_KEYS = [
     "targetVersion",
@@ -48,6 +51,23 @@ GATE_ORDER = [
     "INDEPENDENT_VECTOR_REVIEW",
     "NON_AUTHORITY",
 ]
+FUZZ_SEED = 0x49544154
+FUZZ_CASE_COUNT = 256
+FUZZ_FAMILIES = [
+    "CLOSED_SCHEMA",
+    "EXPECTED_TARGET",
+    "PRIVATE_MATERIAL_EXCLUSION",
+    "EXTERNAL_PROVENANCE",
+    "CANONICAL_MESSAGE_BINDING",
+    "PUBLIC_KEY_BINDING",
+    "INDEPENDENT_VECTOR_REVIEW",
+    "NON_AUTHORITY",
+    "CRYPTOGRAPHIC_SIGNATURE",
+    "CRYPTOGRAPHIC_GUARD",
+]
+FUZZ_DERIVATION_DOMAIN = "iat-promotions-dlc-intake-fuzz-v1"
+FUZZ_LEAF_DOMAIN = "iat-promotions-dlc-intake-fuzz-leaf-v1"
+FUZZ_NODE_DOMAIN = "iat-promotions-dlc-intake-fuzz-node-v1"
 PAYLOAD_KEYS = [
     "campaignId",
     "domain",
@@ -838,6 +858,384 @@ def validate_differential_bundle(vectors: Any) -> list[str]:
     return errors
 
 
+def xorshift32(value: int) -> int:
+    state = value & 0xFFFFFFFF
+    state ^= (state << 13) & 0xFFFFFFFF
+    state ^= state >> 17
+    state ^= (state << 5) & 0xFFFFFFFF
+    return state & 0xFFFFFFFF
+
+
+def derived_fuzz_hex(seed_hex: str, index: int, word_hex: str, label: str) -> str:
+    preimage = (
+        f"{FUZZ_DERIVATION_DOMAIN}\0{seed_hex}\0{index}\0{word_hex}\0{label}"
+    )
+    return hashlib.sha256(preimage.encode("utf-8")).hexdigest()
+
+
+def fuzz_leaf_sha256(case_commitment_sha256: str) -> str:
+    if HEX_32.fullmatch(case_commitment_sha256) is None:
+        raise ValueError("INVALID_FUZZ_CASE_COMMITMENT")
+    preimage = (
+        FUZZ_LEAF_DOMAIN.encode("utf-8")
+        + b"\0"
+        + bytes.fromhex(case_commitment_sha256)
+    )
+    return hashlib.sha256(preimage).hexdigest()
+
+
+def fuzz_merkle_root_sha256(case_commitments: list[str]) -> str:
+    if not case_commitments:
+        raise ValueError("FUZZ_TREE_EMPTY")
+    level = [bytes.fromhex(fuzz_leaf_sha256(value)) for value in case_commitments]
+    while len(level) > 1:
+        next_level = []
+        for index in range(0, len(level), 2):
+            left = level[index]
+            right = level[index + 1] if index + 1 < len(level) else left
+            preimage = FUZZ_NODE_DOMAIN.encode("utf-8") + b"\0" + left + right
+            next_level.append(hashlib.sha256(preimage).digest())
+        level = next_level
+    return level[0].hex()
+
+
+def replay_fuzz_case(
+    index: int, base_vectors: dict[str, Any], schema: dict[str, Any]
+) -> dict[str, Any]:
+    if index < 0 or index >= FUZZ_CASE_COUNT:
+        raise ValueError(f"FUZZ_CASE_INDEX_OUT_OF_RANGE:{index}")
+    word = FUZZ_SEED
+    for _cursor in range(index + 1):
+        word = xorshift32(word)
+    word_hex = f"{word:08x}"
+    seed_hex = f"{FUZZ_SEED:08x}"
+    family = FUZZ_FAMILIES[index % len(FUZZ_FAMILIES)]
+    base = base_vectors["scenarios"][0]
+    candidate = deepcopy(base["candidate"])
+    expected_target = deepcopy(base["expectedTarget"])
+
+    if family == "CLOSED_SCHEMA":
+        field = f"fuzz_{word_hex}"
+        candidate[field] = False
+        mutation = {
+            "document": "candidate",
+            "operation": "add",
+            "path": f"/{field}",
+            "variant": word_hex,
+        }
+    elif family == "EXPECTED_TARGET":
+        shift = 1 + word % 7
+        entries = list(expected_target.items())
+        offset = shift % len(entries)
+        expected_target = dict(entries[offset:] + entries[:offset])
+        mutation = {
+            "document": "expectedTarget",
+            "operation": "rotate-keys",
+            "path": "/",
+            "shift": shift,
+            "variant": word_hex,
+        }
+    elif family == "PRIVATE_MATERIAL_EXCLUSION":
+        candidate["provenance"]["accessToken"] = (
+            f"forbidden-fuzz-placeholder-{index}-{word_hex}"
+        )
+        mutation = {
+            "document": "candidate",
+            "operation": "add",
+            "path": "/provenance/accessToken",
+            "variant": word_hex,
+        }
+    elif family == "EXTERNAL_PROVENANCE":
+        candidate["provenance"]["sourceArtifactSha256"] = derived_fuzz_hex(
+            seed_hex, index, word_hex, "provenance"
+        )
+        mutation = {
+            "document": "candidate",
+            "operation": "replace",
+            "path": "/provenance/sourceArtifactSha256",
+            "variant": word_hex,
+        }
+    elif family == "CANONICAL_MESSAGE_BINDING":
+        candidate["campaignVector"]["claimedCanonicalMessageSha256"] = derived_fuzz_hex(
+            seed_hex, index, word_hex, "canonical-message"
+        )
+        mutation = {
+            "document": "candidate",
+            "operation": "replace",
+            "path": "/campaignVector/claimedCanonicalMessageSha256",
+            "variant": word_hex,
+        }
+    elif family == "PUBLIC_KEY_BINDING":
+        candidate["campaignVector"]["publicKeyHex"] = derived_fuzz_hex(
+            seed_hex, index, word_hex, "public-key-binding"
+        )
+        mutation = {
+            "document": "candidate",
+            "operation": "replace",
+            "path": "/campaignVector/publicKeyHex",
+            "variant": word_hex,
+        }
+    elif family == "INDEPENDENT_VECTOR_REVIEW":
+        receipt_sha256 = derived_fuzz_hex(
+            seed_hex, index, word_hex, "review-receipt"
+        )
+        candidate["review"] = {
+            "completed": True,
+            "decision": "APPROVE_VECTOR_ONLY",
+            "reviewerIdentityCommitmentSha256": derived_fuzz_hex(
+                seed_hex, index, word_hex, "reviewer"
+            ),
+            "receiptSha256": receipt_sha256,
+        }
+        expected_target["reviewReceiptSha256"] = receipt_sha256
+        expected_target["positiveVectorAvailable"] = True
+        expected_target["positiveVectorReviewCompleted"] = True
+        mutation = {
+            "document": "candidate+expectedTarget",
+            "operation": "bind-review",
+            "path": "/review",
+            "variant": word_hex,
+        }
+    elif family == "NON_AUTHORITY":
+        authority_fields = [
+            "receiptIssued",
+            "reviewCompletedByIntake",
+            "activationAuthorized",
+        ]
+        field = authority_fields[word % len(authority_fields)]
+        candidate["authority"][field] = True
+        mutation = {
+            "document": "candidate",
+            "operation": "replace",
+            "path": f"/authority/{field}",
+            "variant": word_hex,
+        }
+    elif family == "CRYPTOGRAPHIC_SIGNATURE":
+        signature = bytearray(
+            base64.b64decode(
+                candidate["campaignVector"]["envelope"]["signatureBase64"],
+                validate=True,
+            )
+        )
+        byte_index = (word >> 8) % len(signature)
+        xor_mask = 1 + (word & 0xFF) % 255
+        signature[byte_index] ^= xor_mask
+        changed_base64 = base64.b64encode(bytes(signature)).decode("ascii")
+        candidate["campaignVector"]["envelope"]["signatureBase64"] = changed_base64
+        candidate["campaignVector"]["signatureHex"] = bytes(signature).hex()
+        mutation = {
+            "document": "candidate",
+            "operation": "xor-signature-byte",
+            "path": "/campaignVector/envelope/signatureBase64",
+            "byteIndex": byte_index,
+            "xorMask": xor_mask,
+            "variant": word_hex,
+        }
+    elif family == "CRYPTOGRAPHIC_GUARD":
+        nonce = candidate["campaignVector"]["envelope"]["payload"]["nonce"]
+        candidate["campaignVector"]["envelope"]["payload"]["nonce"] = (
+            f"{nonce}-{word_hex}"
+        )
+        mutation = {
+            "document": "candidate",
+            "operation": "append",
+            "path": "/campaignVector/envelope/payload/nonce",
+            "variant": word_hex,
+        }
+    else:
+        raise ValueError(f"UNKNOWN_FUZZ_FAMILY:{family}")
+
+    result = evaluate_intake(
+        candidate,
+        expected_target,
+        now=base_vectors["evaluationTime"],
+        schema=schema,
+    )
+    passing_gate_ids = [
+        entry["id"] for entry in result["gates"] if entry["result"] == "PASS"
+    ]
+    failing_gate_ids = [
+        entry["id"] for entry in result["gates"] if entry["result"] == "FAIL"
+    ]
+    core = {
+        "index": str(index),
+        "name": f"FUZZ_{index:03d}_{family}_{word_hex}",
+        "family": family,
+        "mutation": mutation,
+        "inputCommitmentSha256": canonical_sha256(
+            {"candidate": candidate, "expectedTarget": expected_target}
+        ),
+        "resultCommitmentSha256": canonical_sha256(result),
+        "structuralValid": result["structuralValid"],
+        "verificationReason": result["verificationReason"],
+        "passingGateIds": passing_gate_ids,
+        "failingGateIds": failing_gate_ids,
+        "expectedAccepted": False,
+        "expectedReceiptIssued": False,
+        "expectedReviewCompleted": False,
+        "expectedActivationAuthorized": False,
+        "expectedActivationEffect": "NONE",
+    }
+    return {
+        "candidate": candidate,
+        "expectedTarget": expected_target,
+        "result": result,
+        "record": {**core, "caseCommitmentSha256": canonical_sha256(core)},
+    }
+
+
+def validate_fuzz_bundle(vectors: Any) -> list[str]:
+    errors: list[str] = []
+
+    def expect(condition: bool, message: str) -> None:
+        if not condition:
+            errors.append(message)
+
+    schema = read_json(SCHEMA_PATH)
+    base_vectors = read_json(DEFAULT_VECTORS)
+    errors.extend(f"base intake: {error}" for error in validate_bundle(base_vectors))
+    expect(vectors.get("vectorVersion") == 1, "fuzz vector version drift")
+    expect(
+        vectors.get("vectorId")
+        == "iat-promotions-dlc-positive-campaign-vector-intake-fuzz-vectors-v1",
+        "fuzz vector ID drift",
+    )
+    status = vectors.get("status", {})
+    expect(status.get("labels") == HOLD_LABELS, "fuzz HOLD labels drift")
+    expect(status.get("network") == "NONE", "fuzz vectors must remain network-free")
+    expect(status.get("programId") is None, "fuzz vectors claim a program ID")
+    expect(status.get("deployable") is False, "fuzz vectors claim deployability")
+    expect(status.get("fuzzCorpusApplied") is False, "fuzz corpus claims application")
+    expect(status.get("positiveVectorAvailable") is False, "fuzz corpus claims a positive vector")
+    expect(
+        status.get("positiveVectorReviewCompleted") is False,
+        "fuzz corpus claims review completion",
+    )
+    expect(
+        status.get("positiveVectorIntegrationBlocked") is True,
+        "fuzz corpus released positive integration HOLD",
+    )
+    contract = vectors.get("contract", {})
+    expect(
+        contract.get("mode") == "SEEDED_CROSS_RUNTIME_VERIFY_ONLY_REJECTION_ONLY",
+        "fuzz mode drift",
+    )
+    expect(contract.get("prng") == "XORSHIFT32", "fuzz PRNG drift")
+    expect(contract.get("seedHex") == f"{FUZZ_SEED:08x}", "fuzz seed drift")
+    expect(contract.get("mutationCount") == FUZZ_CASE_COUNT, "fuzz mutation count drift")
+    expect(contract.get("familyOrder") == FUZZ_FAMILIES, "fuzz family order drift")
+    expect(contract.get("gateOrder") == GATE_ORDER, "fuzz gate order drift")
+    expect(contract.get("everyMutationRejected") is True, "fuzz rejection contract drift")
+    expect(
+        contract.get("nodeAndPythonMustMatchExactly") is True,
+        "fuzz cross-runtime parity disabled",
+    )
+    expect(
+        contract.get("storesInputsOrFullResults") is False,
+        "fuzz corpus stores inputs or full results",
+    )
+    for field in [
+        "validPositiveCampaignVectorPublished",
+        "signingMaterialIncluded",
+        "createsKeys",
+        "createsSignatures",
+        "issuesReviewReceipts",
+        "completesReview",
+        "activationAuthorized",
+    ]:
+        expect(contract.get(field) is False, f"fuzz contract {field} drift")
+    expect(contract.get("activationEffect") == "NONE", "fuzz activation effect drift")
+    sources = vectors.get("sources", {})
+    expect(
+        sources.get("baseVectors", {}).get("canonicalSha256")
+        == canonical_sha256(base_vectors),
+        "fuzz base-vector source digest drift",
+    )
+    expect(
+        sources.get("intakeSchema", {}).get("canonicalSha256")
+        == canonical_sha256(schema),
+        "fuzz schema source digest drift",
+    )
+    expect(
+        sources.get("nodeEvaluator", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(EVALUATOR_PATH),
+        "fuzz Node evaluator source digest drift",
+    )
+    expect(
+        sources.get("pythonVerifier", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(Path(__file__).resolve()),
+        "fuzz Python verifier source digest drift",
+    )
+    expect(
+        sources.get("generator", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(FUZZ_GENERATOR_PATH),
+        "fuzz generator source digest drift",
+    )
+    cases = vectors.get("cases", [])
+    expect(isinstance(cases, list) and len(cases) == FUZZ_CASE_COUNT, "fuzz case count drift")
+    seen: set[str] = set()
+    family_counts = {family: 0 for family in FUZZ_FAMILIES}
+    for index, record in enumerate(cases if isinstance(cases, list) else []):
+        name = record.get("name", "UNKNOWN")
+        expect(record.get("index") == str(index), f"fuzz case index drift at {index}")
+        expect(name not in seen, f"duplicate fuzz case {name}")
+        seen.add(name)
+        family = record.get("family")
+        expect(family in FUZZ_FAMILIES, f"{name}: unknown family")
+        if family in family_counts:
+            family_counts[family] += 1
+        try:
+            replay = replay_fuzz_case(index, base_vectors, schema)
+        except (KeyError, TypeError, ValueError, VerificationFailure) as error:
+            errors.append(f"{name}: independent fuzz replay failed closed: {error}")
+            continue
+        expect(replay["record"] == record, f"{name}: compact fuzz record does not reproduce")
+        result = replay["result"]
+        expect(result["candidateSatisfiesIntakePolicy"] is False, f"{name}: satisfies intake policy")
+        expect(
+            result["positiveVectorAcceptedForSeparateReview"] is False,
+            f"{name}: claims separate-review acceptance",
+        )
+        expect(bool(record.get("failingGateIds")), f"{name}: has no rejecting gate")
+        expect(result["receiptIssued"] is False, f"{name}: issues receipt")
+        expect(result["reviewCompletedByThisEvaluator"] is False, f"{name}: completes review")
+        expect(result["activationAuthorized"] is False, f"{name}: authorizes activation")
+        expect(result["activationEffect"] == "NONE", f"{name}: creates activation effect")
+        expect(
+            canonical_sha256(result) == record.get("resultCommitmentSha256"),
+            f"{name}: result commitment mismatch",
+        )
+        if family == "INDEPENDENT_VECTOR_REVIEW":
+            gates = {entry["id"]: entry["result"] for entry in result["gates"]}
+            expect(gates.get("INDEPENDENT_VECTOR_REVIEW") == "PASS", f"{name}: review gate drift")
+            expect(gates.get("CRYPTOGRAPHIC_SIGNATURE") == "FAIL", f"{name}: crypto HOLD bypassed")
+        if family == "PRIVATE_MATERIAL_EXCLUSION":
+            placeholder = replay["candidate"]["provenance"]["accessToken"]
+            expect(
+                re.fullmatch(r"forbidden-fuzz-placeholder-\d+-[0-9a-f]{8}", placeholder)
+                is not None,
+                f"{name}: private-field placeholder drift",
+            )
+    expected_counts = {family: str(family_counts[family]) for family in FUZZ_FAMILIES}
+    expect(contract.get("familyCounts") == expected_counts, "fuzz contract family counts drift")
+    summary = vectors.get("summary", {})
+    expect(summary.get("caseCount") == str(FUZZ_CASE_COUNT), "fuzz summary case count drift")
+    expect(summary.get("familyCounts") == expected_counts, "fuzz summary family counts drift")
+    expect(summary.get("allRejected") is True, "fuzz summary rejection drift")
+    try:
+        root = fuzz_merkle_root_sha256(
+            [record["caseCommitmentSha256"] for record in cases]
+        )
+    except (KeyError, TypeError, ValueError) as error:
+        errors.append(f"fuzz Merkle reconstruction failed closed: {error}")
+    else:
+        expect(
+            summary.get("caseCommitmentMerkleRootSha256") == root,
+            "fuzz Merkle root drift",
+        )
+    return errors
+
+
 def render_result(valid: bool, errors: list[str], scenario_count: int, output_format: str) -> str:
     result = {
         "valid": valid,
@@ -886,6 +1284,36 @@ def render_differential_result(
     )
 
 
+def render_fuzz_result(
+    valid: bool, errors: list[str], mutation_count: int, merkle_root: str | None,
+    output_format: str
+) -> str:
+    result = {
+        "valid": valid,
+        "errors": errors,
+        "mutationCount": mutation_count,
+        "seedHex": f"{FUZZ_SEED:08x}",
+        "familyCount": len(FUZZ_FAMILIES),
+        "nodeAndPythonMatchExactly": valid,
+        "allRejected": valid,
+        "caseCommitmentMerkleRootSha256": merkle_root,
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+    if output_format == "json":
+        return json.dumps(result, ensure_ascii=False, indent=2)
+    if valid:
+        return (
+            f"Independent seeded intake fuzz verification passed: {mutation_count} "
+            "mutations match Node and remain rejected and non-authoritative."
+        )
+    return "Independent seeded intake fuzz verification failed:\n" + "\n".join(
+        f"- {error}" for error in errors
+    )
+
+
 def main(argv: list[str] | None = None) -> int:
     try:
         parser = OfflineArgumentParser(description=__doc__)
@@ -893,28 +1321,44 @@ def main(argv: list[str] | None = None) -> int:
         parser.add_argument(
             "--differential-vectors", type=Path, default=DEFAULT_DIFFERENTIAL_VECTORS
         )
+        parser.add_argument("--fuzz-vectors", type=Path, default=DEFAULT_FUZZ_VECTORS)
         parser.add_argument("--verify-vectors", action="store_true")
         parser.add_argument("--verify-differential-vectors", action="store_true")
+        parser.add_argument("--verify-fuzz-vectors", action="store_true")
         parser.add_argument("--format", choices=["text", "json"], default="text")
         args = parser.parse_args(argv)
-        if args.verify_vectors == args.verify_differential_vectors:
+        selected_modes = sum([
+            args.verify_vectors,
+            args.verify_differential_vectors,
+            args.verify_fuzz_vectors,
+        ])
+        if selected_modes != 1:
             raise CliUsageError(
-                "exactly one of --verify-vectors or --verify-differential-vectors is required"
+                "exactly one of --verify-vectors, --verify-differential-vectors, "
+                "or --verify-fuzz-vectors is required"
             )
         if args.verify_vectors:
             vectors = read_json(args.vectors)
             errors = validate_bundle(vectors)
-        else:
+        elif args.verify_differential_vectors:
             vectors = read_json(args.differential_vectors)
             errors = validate_differential_bundle(vectors)
+        else:
+            vectors = read_json(args.fuzz_vectors)
+            errors = validate_fuzz_bundle(vectors)
     except (CliUsageError, OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
         print(f"Unable to read public intake vectors: {error}", file=sys.stderr)
         return 1
     case_count = len(vectors.get("scenarios", [])) if isinstance(vectors, dict) else 0
     if args.verify_vectors:
         print(render_result(not errors, errors, case_count, args.format))
-    else:
+    elif args.verify_differential_vectors:
         print(render_differential_result(not errors, errors, case_count, args.format))
+    else:
+        fuzz_cases = vectors.get("cases", []) if isinstance(vectors, dict) else []
+        fuzz_count = len(fuzz_cases) if isinstance(fuzz_cases, list) else 0
+        merkle_root = vectors.get("summary", {}).get("caseCommitmentMerkleRootSha256")
+        print(render_fuzz_result(not errors, errors, fuzz_count, merkle_root, args.format))
     return 0 if not errors else 2
 
 

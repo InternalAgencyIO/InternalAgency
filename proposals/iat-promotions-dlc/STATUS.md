@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 17:53 UTC
+Updated: 2026-07-31 18:08 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `a911dff`
+Previously published public increment: `1932c04`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -327,8 +327,15 @@ This status file deliberately does not claim a self-referential commit hash.
   verifier, with drift rejected in both runtimes; and
 - public mutation evidence fixed to no receipt, no completed review, no
   activation authority, and effect `NONE`.
+- a seeded 256-case compact mutation corpus spanning ten gate families;
+- exact Node/Python replay from fixed seed `49544154`, with no stored full
+  candidate/result expansion and no positive signature or review material;
+- canonical input, result, and case commitments plus a domain-separated
+  ordered SHA-256 Merkle root; and
+- changed-case, changed-root, review/cryptography isolation, family-coverage,
+  source-safety, and permanent non-authority checks.
 
-Current proposal-only result: **250 tests passed**. This consists of 28 protected
+Current proposal-only result: **258 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -372,6 +379,9 @@ cross-runtime intake-verification suite.
 Nine differential-corpus generation, gate-family, Node/Python parity,
 changed-evidence rejection, source-safety, non-authority, and manifest-coverage
 tests complete the fixed mutation suite.
+Eight seeded fuzz generation, family-coverage, rejection, review isolation,
+commitment/Merkle, Python parity, changed-evidence, source-safety, and
+manifest-coverage tests complete the compact high-volume mutation suite.
 
 ## Current guarantees of the reference model
 
@@ -403,7 +413,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add seeded high-volume cross-runtime mutation fuzzing for the positive-vector
-intake schema, canonical message, public key, provenance, review, and authority
-fields. It must remain deterministic, rejection-only, and local while proving
-Node/Python parity without creating any positive signature or review material.
+Add deterministic cross-runtime minimal-counterexample fixtures for every fuzz
+family. Each fixture must reduce to one gate-triggering delta, carry a compact
+commitment, and remain local, rejection-only, and non-authoritative without
+creating positive signature or review material.

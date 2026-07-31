@@ -85,3 +85,15 @@ python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --
 
 That mode independently reproduces every complete Node gate result and returns
 exit `2` if any mutation evidence or source binding drifts.
+
+The same verifier also independently replays the seeded compact fuzz corpus:
+
+```sh
+python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-fuzz-vectors --format json
+```
+
+That mode rebuilds all 256 inputs and complete results from seed `49544154`,
+checks their compact commitments and domain-separated Merkle root, and requires
+exact Node/Python parity. It returns exit `2` for any changed case, source
+binding, family count, authority constant, or root. It creates no positive
+signature or review material.

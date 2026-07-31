@@ -241,9 +241,13 @@ security audit or deployment approval.
 | Review metadata is fully independently bound without valid cryptography | `review binding can pass...` | Review gate passes but cryptographic gate blocks overall acceptance |
 | Receipt or activation authority is added to the candidate | `authority mutations fail...` | Schema and non-authority gates fail; evaluator output remains false/`NONE` |
 | Python differential result differs from published Node evidence | `Python independently reproduces...` | Complete result-object equality is mandatory for all twenty mutations |
+| Seeded fuzz generation drifts across Node and Python | `seeded fuzz corpus deterministically...` / `Python independently reproduces all 256...` | Both runtimes replay seed `49544154`, all ten families, and every compact commitment exactly |
+| One fuzz case or committed result is changed | `Python names changed compact evidence...` | Independent replay exits `2` and names the changed case |
+| Fuzz corpus root is replaced or cases are reordered | same / `case commitments and... Merkle root are mutation-sensitive` | Domain-separated ordered Merkle reconstruction fails closed |
+| Complete review metadata is used to bypass invalid cryptography | `review-complete fuzz cases still fail...` | All review-family cases pass only the review gate and still fail the signature gate |
+| Fuzz tooling stores full candidate/result objects or gains operational capability | `fuzz tooling is offline verification-only...` | Compact-artifact contract and capability scans reject storage or key, signing, wallet, and network paths |
 
 ## Next matrix expansion
 
-- seeded high-volume cross-runtime mutation fuzzing for closed schema,
-  canonical message, public key, provenance, review, and authority fields;
+- deterministic minimal-counterexample fixtures for every intake fuzz family;
 - local-validator transaction rollback and account-lock contention.
