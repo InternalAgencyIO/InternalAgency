@@ -18,6 +18,7 @@ import {
   representationAuditMerkleMultiproof,
   representationAuditMerkleProof,
   representationAuditMerkleRootSha256,
+  representationAuditOddWidthPropertySummary,
   verifyRepresentationAuditMerkleMultiproof,
   verifyRepresentationAuditMerkleProof,
 } from "../generate-positive-campaign-vector-representation-audit.mjs";
@@ -513,6 +514,10 @@ test("odd-width trees preserve minimal coordinates, duplicate-final-node semanti
   assert.equal(aggregateIndividualNodeCount, 21_873);
   assert.equal(aggregateMultiproofNodeCount, 908);
   assert.equal(aggregateIndividualNodeCount - aggregateMultiproofNodeCount, 20_965);
+  assert.deepEqual(
+    representationAuditOddWidthPropertySummary(),
+    artifact.oddWidthMultiproofProperties,
+  );
 });
 
 test("odd-width multiproofs bind width externally and reject membership, coordinate, digest, and node-set drift", () => {
@@ -582,6 +587,12 @@ test("Python independently reproduces the representation audit", () => {
     expectedCollisionMultiproofSavedNodeCount: 124,
     expectedCollisionMultiproofCommitmentSha256:
       artifact.summary.expectedCollisionMultiproofCommitmentSha256,
+    oddWidthMultiproofPropertyCaseCount: 79,
+    oddWidthMultiproofPropertyTreeCount: 15,
+    oddWidthMultiproofPropertySetCommitmentSha256:
+      artifact.oddWidthMultiproofProperties.caseSetCommitmentSha256,
+    oddWidthExactTreeLeafCountRequired: true,
+    oddWidthExpandedCasesStored: false,
     receiptIssued: false,
     reviewCompleted: false,
     activationAuthorized: false,
@@ -617,6 +628,16 @@ test("Python rejects changed compact evidence and a stale set commitment", () =>
     assert.equal(multiproofResult.status, 2, multiproofResult.stderr || multiproofResult.stdout);
     assert.ok(JSON.parse(multiproofResult.stdout).errors.includes(
       "representation multiproof does not independently replay",
+    ));
+
+    const changedOddWidth = structuredClone(artifact);
+    changedOddWidth.oddWidthMultiproofProperties.caseSetCommitmentSha256 = "c".repeat(64);
+    const oddWidthPath = join(directory, "changed-odd-width-properties.json");
+    writeFileSync(oddWidthPath, `${JSON.stringify(changedOddWidth, null, 2)}\n`, "utf8");
+    const oddWidthResult = runPython(oddWidthPath);
+    assert.equal(oddWidthResult.status, 2, oddWidthResult.stderr || oddWidthResult.stdout);
+    assert.ok(JSON.parse(oddWidthResult.stdout).errors.includes(
+      "representation odd-width properties do not independently replay",
     ));
   } finally {
     rmSync(directory, { recursive: true, force: true });

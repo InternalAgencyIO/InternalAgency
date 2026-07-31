@@ -71,6 +71,9 @@ REPRESENTATION_MERKLE_LEAF_DOMAIN = (
 REPRESENTATION_MERKLE_NODE_DOMAIN = (
     "iat-promotions-dlc-representation-audit-node-v1"
 )
+ODD_WIDTH_TREE_LEAF_COUNTS = [
+    1, 3, 5, 7, 9, 15, 17, 31, 33, 63, 65, 127, 129, 255, 257
+]
 FUZZ_FAMILIES = [
     "CLOSED_SCHEMA",
     "EXPECTED_TARGET",
@@ -1491,6 +1494,126 @@ def verify_representation_audit_merkle_multiproof(
     return active.get(0) == expected_root_sha256 and len(used) == len(proof_map)
 
 
+def greatest_common_divisor(left: int, right: int) -> int:
+    a = left
+    b = right
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+
+def representation_audit_odd_width_property_cases() -> list[dict[str, Any]]:
+    cases = []
+    for tree_index, leaf_count in enumerate(ODD_WIDTH_TREE_LEAF_COUNTS):
+        sizes = []
+        for size in [
+            1,
+            min(2, leaf_count),
+            (leaf_count + 2) // 3,
+            leaf_count // 2,
+            max(1, leaf_count - 1),
+            leaf_count,
+        ]:
+            if size > 0 and size not in sizes:
+                sizes.append(size)
+        for size_index, size in enumerate(sizes):
+            if size == 1:
+                indices = [leaf_count - 1]
+            elif size == 2:
+                indices = [0, leaf_count - 1]
+            elif size == leaf_count:
+                indices = list(range(leaf_count))
+            else:
+                offset = (tree_index * 19 + size_index * 11 + 3) % leaf_count
+                stride = (tree_index * 23 + size_index * 17 + 1) % leaf_count
+                if stride == 0:
+                    stride = 1
+                while greatest_common_divisor(stride, leaf_count) != 1:
+                    stride = (stride + 1) % leaf_count
+                    if stride == 0:
+                        stride = 1
+                indices = sorted(
+                    (offset + stride * position) % leaf_count
+                    for position in range(size)
+                )
+            cases.append({"leafCount": leaf_count, "indices": indices})
+    return cases
+
+
+def representation_audit_synthetic_record_commitments(
+    leaf_count: int,
+) -> list[str]:
+    return [
+        hashlib.sha256(
+            f"iat-promotions-dlc-odd-width-record-v1\0{leaf_count}\0{index}".encode(
+                "utf-8"
+            )
+        ).hexdigest()
+        for index in range(leaf_count)
+    ]
+
+
+def replay_representation_audit_odd_width_properties() -> dict[str, Any]:
+    cases = representation_audit_odd_width_property_cases()
+    selected_record_count = 0
+    individual_proof_node_count = 0
+    multiproof_node_count = 0
+    duplicate_final_width_alias_count = 0
+    for property_case in cases:
+        leaf_count = property_case["leafCount"]
+        indices = property_case["indices"]
+        commitments = representation_audit_synthetic_record_commitments(leaf_count)
+        levels = representation_audit_merkle_levels(commitments)
+        root = levels[-1][0]
+        nodes = representation_audit_merkle_multiproof(commitments, indices)
+        selected = [
+            {
+                "index": index,
+                "recordCommitmentSha256": commitments[index],
+            }
+            for index in indices
+        ]
+        if not verify_representation_audit_merkle_multiproof(
+            selected, leaf_count, nodes, root
+        ):
+            raise VerificationFailure("ODD_WIDTH_REPRESENTATION_MULTIPROOF_FAILED")
+        if verify_representation_audit_merkle_multiproof(
+            selected, leaf_count + 1, nodes, root
+        ):
+            duplicate_final_width_alias_count += 1
+        selected_record_count += len(selected)
+        multiproof_node_count += len(nodes)
+        individual_proof_node_count += sum(
+            len(representation_audit_merkle_proof(commitments, record["index"]))
+            for record in selected
+        )
+    case_bytes = json.dumps(
+        cases, ensure_ascii=False, separators=(",", ":")
+    ).encode("utf-8")
+    return {
+        "caseCount": str(len(cases)),
+        "treeCount": str(len(ODD_WIDTH_TREE_LEAF_COUNTS)),
+        "treeLeafCounts": [str(value) for value in ODD_WIDTH_TREE_LEAF_COUNTS],
+        "minimumTreeLeafCount": str(ODD_WIDTH_TREE_LEAF_COUNTS[0]),
+        "maximumTreeLeafCount": str(ODD_WIDTH_TREE_LEAF_COUNTS[-1]),
+        "selectedRecordCount": str(selected_record_count),
+        "individualProofNodeCount": str(individual_proof_node_count),
+        "multiproofNodeCount": str(multiproof_node_count),
+        "savedNodeCount": str(individual_proof_node_count - multiproof_node_count),
+        "duplicateFinalWidthAliasCount": str(duplicate_final_width_alias_count),
+        "caseSetCommitmentSha256": hashlib.sha256(case_bytes).hexdigest(),
+        "allMultiproofsVerify": True,
+        "exactTreeLeafCountRequired": True,
+        "expandedCasesStored": False,
+        "inputOrResultStored": False,
+        "accepted": False,
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def result_gate(result: dict[str, Any], gate_id: str) -> dict[str, str]:
     for entry in result["gates"]:
         if entry["id"] == gate_id:
@@ -1896,12 +2019,16 @@ def replay_representation_audit(
         **multiproof_core,
         "multiproofCommitmentSha256": canonical_sha256(multiproof_core),
     }
+    odd_width_multiproof_properties = (
+        replay_representation_audit_odd_width_properties()
+    )
     return {
         "records": records,
         "canonicalCollisionClasses": collision_classes,
         "recordMerkleRootSha256": merkle_root,
         "expectedCollisionProofs": expected_collision_proofs,
         "expectedCollisionMultiproof": expected_collision_multiproof,
+        "oddWidthMultiproofProperties": odd_width_multiproof_properties,
     }
 
 
@@ -1997,6 +2124,9 @@ def validate_representation_audit(artifact: Any) -> list[str]:
     expect(merkle_contract.get("multiproofRequiresExactTreeLeafCount") is True, "representation multiproof tree-size binding disabled")
     expect(merkle_contract.get("multiproofRequiresMinimalNodeSet") is True, "representation multiproof minimality disabled")
     expect(merkle_contract.get("multiproofEquivalentToIndividualProofs") is True, "representation proof equivalence disabled")
+    expect(merkle_contract.get("oddWidthPropertyCaseCount") == 79, "representation odd-width property case-count drift")
+    expect(merkle_contract.get("oddWidthPropertyTreeCount") == 15, "representation odd-width property tree-count drift")
+    expect(merkle_contract.get("oddWidthPropertiesStoreExpandedCases") is False, "representation odd-width properties store expanded cases")
     sources = artifact.get("sources", {})
     expect(
         sources.get("fuzzVectors", {}).get("canonicalSha256")
@@ -2206,6 +2336,25 @@ def validate_representation_audit(artifact: Any) -> list[str]:
         == multiproof.get("multiproofCommitmentSha256"),
         "representation multiproof summary commitment drift",
     )
+    odd_width_properties = artifact.get("oddWidthMultiproofProperties", {})
+    expect(
+        odd_width_properties == replay["oddWidthMultiproofProperties"],
+        "representation odd-width properties do not independently replay",
+    )
+    expect(odd_width_properties.get("caseCount") == "79", "representation odd-width case-count drift")
+    expect(odd_width_properties.get("treeCount") == "15", "representation odd-width tree-count drift")
+    expect(odd_width_properties.get("caseSetCommitmentSha256") == "937771b307fe23379f7c4840017f1ce7e832186cbd9dfd1420720731624ed354", "representation odd-width case-set commitment drift")
+    expect(odd_width_properties.get("exactTreeLeafCountRequired") is True, "representation odd-width tree-size binding disabled")
+    for field in [
+        "expandedCasesStored",
+        "inputOrResultStored",
+        "accepted",
+        "receiptIssued",
+        "reviewCompleted",
+        "activationAuthorized",
+    ]:
+        expect(odd_width_properties.get(field) is False, f"representation odd-width {field} drift")
+    expect(odd_width_properties.get("activationEffect") == "NONE", "representation odd-width activation effect drift")
     return errors
 
 
@@ -2330,6 +2479,7 @@ def render_representation_result(
     individual_proof_node_count: int,
     multiproof_saved_node_count: int,
     multiproof_commitment: str | None,
+    odd_width_properties: dict[str, Any],
     output_format: str,
 ) -> str:
     result = {
@@ -2349,6 +2499,11 @@ def render_representation_result(
         "expectedCollisionIndividualProofNodeCount": individual_proof_node_count,
         "expectedCollisionMultiproofSavedNodeCount": multiproof_saved_node_count,
         "expectedCollisionMultiproofCommitmentSha256": multiproof_commitment,
+        "oddWidthMultiproofPropertyCaseCount": int(odd_width_properties.get("caseCount", 0)),
+        "oddWidthMultiproofPropertyTreeCount": int(odd_width_properties.get("treeCount", 0)),
+        "oddWidthMultiproofPropertySetCommitmentSha256": odd_width_properties.get("caseSetCommitmentSha256"),
+        "oddWidthExactTreeLeafCountRequired": odd_width_properties.get("exactTreeLeafCountRequired") is True,
+        "oddWidthExpandedCasesStored": odd_width_properties.get("expandedCasesStored") is True,
         "receiptIssued": False,
         "reviewCompleted": False,
         "activationAuthorized": False,
@@ -2460,6 +2615,7 @@ def main(argv: list[str] | None = None) -> int:
             int(summary.get("expectedCollisionIndividualProofNodeCount", 0)),
             int(summary.get("expectedCollisionMultiproofSavedNodeCount", 0)),
             summary.get("expectedCollisionMultiproofCommitmentSha256"),
+            vectors.get("oddWidthMultiproofProperties", {}),
             args.format,
         ))
     return 0 if not errors else 2

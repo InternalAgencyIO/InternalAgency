@@ -32,6 +32,7 @@ const OUTPUT_PATH = fileURLToPath(
 const HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"];
 const MERKLE_LEAF_DOMAIN = "iat-promotions-dlc-representation-audit-leaf-v1";
 const MERKLE_NODE_DOMAIN = "iat-promotions-dlc-representation-audit-node-v1";
+const ODD_WIDTH_TREE_LEAF_COUNTS = [1, 3, 5, 7, 9, 15, 17, 31, 33, 63, 65, 127, 129, 255, 257];
 const HEX_32 = /^[0-9a-f]{64}$/;
 const sha256Hex = (value) => createHash("sha256").update(value).digest("hex");
 const normalizedTextSha256 = (path) => sha256Hex(
@@ -240,6 +241,118 @@ export function verifyRepresentationAuditMerkleMultiproof(
   return active.get(0) === expectedRootSha256 && used.size === proofMap.size;
 }
 
+function greatestCommonDivisor(left, right) {
+  let a = left;
+  let b = right;
+  while (b !== 0) [a, b] = [b, a % b];
+  return a;
+}
+
+export function representationAuditOddWidthPropertyCases() {
+  const cases = [];
+  for (const [treeIndex, leafCount] of ODD_WIDTH_TREE_LEAF_COUNTS.entries()) {
+    const sizes = [...new Set([
+      1,
+      Math.min(2, leafCount),
+      Math.ceil(leafCount / 3),
+      Math.floor(leafCount / 2),
+      Math.max(1, leafCount - 1),
+      leafCount,
+    ])].filter((size) => size > 0);
+    for (const [sizeIndex, size] of sizes.entries()) {
+      let indices;
+      if (size === 1) {
+        indices = [leafCount - 1];
+      } else if (size === 2) {
+        indices = [0, leafCount - 1];
+      } else if (size === leafCount) {
+        indices = Array.from({ length: leafCount }, (_unused, index) => index);
+      } else {
+        const offset = (treeIndex * 19 + sizeIndex * 11 + 3) % leafCount;
+        let stride = (treeIndex * 23 + sizeIndex * 17 + 1) % leafCount;
+        if (stride === 0) stride = 1;
+        while (greatestCommonDivisor(stride, leafCount) !== 1) {
+          stride = (stride + 1) % leafCount;
+          if (stride === 0) stride = 1;
+        }
+        indices = Array.from(
+          { length: size },
+          (_unused, position) => (offset + stride * position) % leafCount,
+        ).sort((left, right) => left - right);
+      }
+      cases.push({ leafCount, indices });
+    }
+  }
+  return cases;
+}
+
+function representationAuditSyntheticRecordCommitments(leafCount) {
+  return Array.from({ length: leafCount }, (_unused, index) => sha256Hex(
+    `iat-promotions-dlc-odd-width-record-v1\0${leafCount}\0${index}`,
+  ));
+}
+
+export function representationAuditOddWidthPropertySummary() {
+  const cases = representationAuditOddWidthPropertyCases();
+  let selectedRecordCount = 0;
+  let individualProofNodeCount = 0;
+  let multiproofNodeCount = 0;
+  let duplicateFinalWidthAliasCount = 0;
+  for (const propertyCase of cases) {
+    const commitments = representationAuditSyntheticRecordCommitments(propertyCase.leafCount);
+    const root = representationAuditMerkleRootSha256(commitments);
+    const nodes = representationAuditMerkleMultiproof(commitments, propertyCase.indices);
+    const selected = propertyCase.indices.map((index) => ({
+      index,
+      recordCommitmentSha256: commitments[index],
+    }));
+    if (!verifyRepresentationAuditMerkleMultiproof(
+      selected,
+      propertyCase.leafCount,
+      nodes,
+      root,
+    )) {
+      throw new Error("ODD_WIDTH_REPRESENTATION_MULTIPROOF_FAILED");
+    }
+    if (verifyRepresentationAuditMerkleMultiproof(
+      selected,
+      propertyCase.leafCount + 1,
+      nodes,
+      root,
+    )) {
+      duplicateFinalWidthAliasCount += 1;
+    }
+    selectedRecordCount += selected.length;
+    multiproofNodeCount += nodes.length;
+    individualProofNodeCount += selected.reduce(
+      (total, record) => total + representationAuditMerkleProof(commitments, record.index).length,
+      0,
+    );
+  }
+  return {
+    caseCount: String(cases.length),
+    treeCount: String(ODD_WIDTH_TREE_LEAF_COUNTS.length),
+    treeLeafCounts: ODD_WIDTH_TREE_LEAF_COUNTS.map(String),
+    minimumTreeLeafCount: String(ODD_WIDTH_TREE_LEAF_COUNTS[0]),
+    maximumTreeLeafCount: String(ODD_WIDTH_TREE_LEAF_COUNTS.at(-1)),
+    selectedRecordCount: String(selectedRecordCount),
+    individualProofNodeCount: String(individualProofNodeCount),
+    multiproofNodeCount: String(multiproofNodeCount),
+    savedNodeCount: String(individualProofNodeCount - multiproofNodeCount),
+    duplicateFinalWidthAliasCount: String(duplicateFinalWidthAliasCount),
+    caseSetCommitmentSha256: sha256Hex(JSON.stringify(cases)),
+    allMultiproofsVerify: true,
+    exactTreeLeafCountRequired: true,
+    expandedCasesStored: false,
+    inputOrResultStored: false,
+    accepted: false,
+    receiptIssued: false,
+    reviewCompleted: false,
+    activationAuthorized: false,
+    activationEffect: "NONE",
+  };
+}
+
 export function replayPositiveCampaignVectorRepresentationAudit() {
   const replays = Array.from({ length: FUZZ_CASE_COUNT }, (_, index) =>
     replayPositiveCampaignVectorIntakeFuzzCase(index));
@@ -338,6 +451,7 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
     ...multiproofCore,
     multiproofCommitmentSha256: canonicalSha256(multiproofCore),
   };
+  const oddWidthMultiproofProperties = representationAuditOddWidthPropertySummary();
   return {
     auditVersion: 1,
     auditId: "iat-promotions-dlc-positive-campaign-vector-representation-audit-v1",
@@ -408,6 +522,9 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
       multiproofRequiresExactTreeLeafCount: true,
       multiproofRequiresMinimalNodeSet: true,
       multiproofEquivalentToIndividualProofs: true,
+      oddWidthPropertyCaseCount: 79,
+      oddWidthPropertyTreeCount: 15,
+      oddWidthPropertiesStoreExpandedCases: false,
     },
     summary: {
       caseCount: String(replay.records.length),
@@ -443,6 +560,7 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
     canonicalCollisionClasses: replay.canonicalCollisionClasses,
     expectedCollisionProofs,
     expectedCollisionMultiproof,
+    oddWidthMultiproofProperties,
     records: replay.records,
   };
 }

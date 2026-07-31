@@ -69,6 +69,13 @@ a leaf-count commitment. The canonical multiproof separately binds
 `treeLeafCount`, and validation requires it to equal the independently replayed
 record count and summary count.
 
+The compact odd-width summary is generated independently in Node and Python.
+Both runtimes derive the same 79 cases, 15 tree sizes, 2,893 memberships,
+21,873 individual nodes, 908 multiproof nodes, 20,965-node saving, 18 known
+root-only width aliases, and case-set commitment. The expanded cases remain
+runtime-only. A changed summary commitment or tree-size binding fails the
+independent Python replay.
+
 It does not store the 256 full inputs or results. Node regenerates the artifact;
 Python independently rebuilds every record, collision class, tree root, and
 individual or aggregate proof from the base vectors and fixed seed.

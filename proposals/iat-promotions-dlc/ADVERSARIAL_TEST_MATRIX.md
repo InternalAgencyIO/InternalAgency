@@ -268,8 +268,10 @@ security audit or deployment approval.
 | Power-of-two-only tests hide duplicate-final-node defects | `odd-width trees preserve...` | Seventy-nine cases across 15 odd widths must match independent root and coordinate oracles plus every individual path |
 | A duplicate-final root is mistaken for a leaf-count commitment | `odd-width multiproofs bind width externally...` | The multiproof separately commits `treeLeafCount`; validators require exact equality with the replayed record and summary counts |
 | Odd-width proof accepts member, coordinate, digest, or node-set drift | same | Duplicate/out-of-range/missing members and missing/redundant/changed-coordinate/changed-digest nodes fail across every compact odd-width case |
+| Node and Python derive different odd-width cases or counts | `Python independently reproduces...` / `odd-width trees preserve...` | Both runtimes must reproduce all compact metrics, 18 root-only aliases, and case-set commitment exactly |
+| Published odd-width summary is changed without the expanded corpus | `Python rejects changed compact evidence...` | Independent Python regeneration rejects the changed compact commitment with exit `2` |
 
 ## Next matrix expansion
 
-- independent Python parity for the compact odd-width property summary and tree-size binding;
+- deterministic boundary mutations for exact `treeLeafCount` below, at, and above the committed count;
 - local-validator transaction rollback and account-lock contention.

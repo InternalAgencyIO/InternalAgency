@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 20:04 UTC
+Updated: 2026-07-31 20:20 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `7530031`
+Previously published public increment: `b95101d`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -380,6 +380,11 @@ This status file deliberately does not claim a self-referential commit hash.
   an odd leaf count against `N + 1` aliasing; and
 - canonical `treeLeafCount` commitment with exact equality to independently
   replayed record and summary counts.
+- compact Node/Python replay of the same 79 odd-width cases, 15 tree sizes,
+  2,893 memberships, 21,873/908/20,965 node accounting, 18 known root-only
+  width aliases, and case-set commitment; and
+- independent Python exit-`2` rejection when the published odd-width property
+  commitment drifts, without storing the expanded synthetic corpus.
 
 Current proposal-only result: **284 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
@@ -436,8 +441,8 @@ Seventeen representation-audit regeneration, ordered-uniqueness, expected-
 collision, family-coverage, record-tree, exact-proof-coverage, proof-mutation,
 minimal-multiproof, varied-subset property, independent-coordinate,
 odd-width root parity, duplicate-final tree-size binding, multiproof-mutation,
-rejection-only, Python-parity, changed-evidence, source-safety, and manifest-
-coverage tests complete the all-input audit suite.
+rejection-only, odd-width Node/Python parity, changed-evidence, source-safety,
+and manifest-coverage tests complete the all-input audit suite.
 
 ## Current guarantees of the reference model
 
@@ -469,7 +474,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add independent zero-dependency Python replay for the compact 79-case odd-width
-property summary and exact tree-size binding. Do not publish the expanded
-synthetic corpus, create positive authority evidence, or weaken any HOLD,
-rejection-only, or non-authority gate.
+Add deterministic boundary mutations for exact `treeLeafCount` below, at, and
+above the committed count, including duplicate-final aliases. Keep the root and
+tree-size commitments separate, publish no expanded synthetic corpus, and
+preserve every HOLD, rejection-only, and non-authority gate.

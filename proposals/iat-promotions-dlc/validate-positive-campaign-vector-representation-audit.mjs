@@ -14,6 +14,7 @@ import {
   representationAuditLeafSha256,
   representationAuditMerkleMultiproof,
   representationAuditMerkleRootSha256,
+  representationAuditOddWidthPropertySummary,
   verifyRepresentationAuditMerkleMultiproof,
   verifyRepresentationAuditMerkleProof,
 } from "./generate-positive-campaign-vector-representation-audit.mjs";
@@ -107,6 +108,9 @@ export function validatePositiveCampaignVectorRepresentationAudit(
   expect(artifact?.merkleContract?.multiproofRequiresExactTreeLeafCount === true, "representation multiproof tree-size binding disabled");
   expect(artifact?.merkleContract?.multiproofRequiresMinimalNodeSet === true, "representation multiproof minimality disabled");
   expect(artifact?.merkleContract?.multiproofEquivalentToIndividualProofs === true, "representation proof equivalence disabled");
+  expect(artifact?.merkleContract?.oddWidthPropertyCaseCount === 79, "representation odd-width property case-count drift");
+  expect(artifact?.merkleContract?.oddWidthPropertyTreeCount === 15, "representation odd-width property tree-count drift");
+  expect(artifact?.merkleContract?.oddWidthPropertiesStoreExpandedCases === false, "representation odd-width properties store expanded cases");
 
   const replay = replayPositiveCampaignVectorRepresentationAudit();
   expect(Array.isArray(artifact?.records) && artifact.records.length === FUZZ_CASE_COUNT, "representation record count drift");
@@ -263,6 +267,30 @@ export function validatePositiveCampaignVectorRepresentationAudit(
       === multiproofCommitmentSha256,
     "representation multiproof summary commitment drift",
   );
+  const oddWidthProperties = artifact?.oddWidthMultiproofProperties ?? {};
+  expect(
+    JSON.stringify(oddWidthProperties) === JSON.stringify(representationAuditOddWidthPropertySummary()),
+    "representation odd-width properties do not deterministically replay",
+  );
+  expect(oddWidthProperties.caseCount === "79", "representation odd-width case-count drift");
+  expect(oddWidthProperties.treeCount === "15", "representation odd-width tree-count drift");
+  expect(
+    oddWidthProperties.caseSetCommitmentSha256
+      === "937771b307fe23379f7c4840017f1ce7e832186cbd9dfd1420720731624ed354",
+    "representation odd-width case-set commitment drift",
+  );
+  expect(oddWidthProperties.exactTreeLeafCountRequired === true, "representation odd-width tree-size binding disabled");
+  for (const field of [
+    "expandedCasesStored",
+    "inputOrResultStored",
+    "accepted",
+    "receiptIssued",
+    "reviewCompleted",
+    "activationAuthorized",
+  ]) {
+    expect(oddWidthProperties[field] === false, `representation odd-width ${field} drift`);
+  }
+  expect(oddWidthProperties.activationEffect === "NONE", "representation odd-width activation effect drift");
   expect(
     JSON.stringify(generatePositiveCampaignVectorRepresentationAudit()) === JSON.stringify(artifact),
     "representation audit does not deterministically regenerate",
