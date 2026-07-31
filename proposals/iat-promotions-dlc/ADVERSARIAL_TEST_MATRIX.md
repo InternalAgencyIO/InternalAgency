@@ -207,11 +207,12 @@ security audit or deployment approval.
 | Structural rejection returns the semantic-rejection exit code | `CLI returns status 3...` | Schema failure uses distinct exit `3`; semantic rejection remains exit `2` |
 | Structural preflight replaces or mutates the pure evaluator | `pure programmatic evaluator remains available...` | Direct evaluator behavior and rejection result remain unchanged |
 | Preflight gains file-write, signing, keygen, or network capability | `preflight source is local-read-only...` | Import and forbidden-capability checks fail |
+| Node validator or renderer hides an implementation-specific result | `Python and Node produce identical...` | Independent Python reproduces all ten complete result objects and normalized Markdown outputs |
+| One published diagnostic is changed after generation | `independent vector verification rejects...` | Python comparison exits nonzero and names the changed scenario |
+| Independent verifier gains network, write, signing, wallet, or authority capability | `independent Python preflight is local-read-only...` | Source capability checks and fixed false/`NONE` authority fields fail |
 
 ## Next matrix expansion
 
-- independent zero-dependency Python reproduction of input-schema validation
-  and every fixed preflight diagnostic;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

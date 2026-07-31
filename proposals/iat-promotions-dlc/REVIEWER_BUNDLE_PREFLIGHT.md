@@ -36,8 +36,18 @@ The vector corpus includes one structurally valid public input pair plus nine
 candidate/expected-target mutations. Every invalid scenario stops semantic
 evaluation and preserves false receipt, review, and activation fields.
 
+## Independent Python reproduction
+
+The zero-dependency Python verifier independently implements the fixed schema
+subset and reproduces every result object and normalized Markdown diagnostic in
+the public corpus. It never calls the Node validator and has no semantic-review,
+signing, receipt, wallet, or network capability. See
+[`INDEPENDENT_PREFLIGHT_VERIFICATION.md`](./INDEPENDENT_PREFLIGHT_VERIFICATION.md).
+
 ```sh
 node proposals/iat-promotions-dlc/generate-reviewer-bundle-preflight-vectors.mjs --write
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-preflight-vectors.mjs
+python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight.test.mjs
+node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight-python.test.mjs
 ```

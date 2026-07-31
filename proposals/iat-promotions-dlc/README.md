@@ -127,6 +127,8 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Deterministic preflight vectors](./reviewer-bundle-preflight-vectors.v1.json)
 - [Preflight-vector generator](./generate-reviewer-bundle-preflight-vectors.mjs)
 - [Preflight-vector validator](./validate-reviewer-bundle-preflight-vectors.mjs)
+- [Independent Python preflight contract](./INDEPENDENT_PREFLIGHT_VERIFICATION.md)
+- [Independent zero-dependency Python preflight](./verify-reviewer-bundle-preflight.py)
 - [Proposal-only tests](./tests/)
 
 Run the proposal-only checks with:
@@ -163,6 +165,7 @@ node proposals/iat-promotions-dlc/validate-independent-review-receipt-acceptance
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-gate-report.mjs
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-schemas.mjs
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-preflight-vectors.mjs
+python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-review-manifest.py
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
@@ -189,6 +192,7 @@ node --test proposals/iat-promotions-dlc/tests/independent-review-receipt-accept
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-linter.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight.test.mjs
+node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight-python.test.mjs
 ```
 
 ## Deliberate isolation

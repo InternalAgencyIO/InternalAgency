@@ -8,7 +8,7 @@ Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `0b0ca81`
+Previously published public increment: `4a52796`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -272,8 +272,18 @@ This status file deliberately does not claim a self-referential commit hash.
   authority or effect.
 - CodeQL-safe Markdown diagnostics that escape backslashes before pipe
   characters and normalize embedded line breaks.
+- an independent, zero-dependency Python implementation of the fixed
+  candidate and expected-target Draft-07 subset;
+- exact cross-runtime reproduction of all ten complete preflight result
+  objects and normalized Markdown diagnostics;
+- independent rejection of a changed published diagnostic with the affected
+  scenario named;
+- structural-validity exit `0`, structural-rejection exit `3`, and local
+  usage/file/encoding/JSON exit `1` without semantic-review execution; and
+- source-level exclusion of write, network, signing, wallet, receipt, review-
+  completion, and activation capabilities from the Python verifier.
 
-Current proposal-only result: **214 tests passed**. This consists of 28 protected
+Current proposal-only result: **220 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -302,6 +312,9 @@ complete the reviewer bundle schema suite.
 Nine structural-preflight, pointer-diagnostic, CLI-exit, semantic-stop,
 pure-evaluator, source-safety, and non-authority tests complete the reviewer
 input preflight suite.
+Six cross-runtime Python reproduction, diagnostic-parity, mutation-rejection,
+CLI-failure, source-safety, and manifest-coverage tests complete the independent
+preflight suite.
 
 ## Current guarantees of the reference model
 
@@ -333,7 +346,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add an independent zero-dependency Python implementation that reproduces both
-input-schema validation and every fixed preflight diagnostic. Keep the tool
-read-only, rejection-only, offline, and incapable of issuing receipts,
-completing reviews, or authorizing activation.
+Add public, externally sourced campaign-envelope signature vectors without
+publishing or generating signing material. Keep the verifier offline and
+verify-only, bind the exact campaign envelope, and preserve every HOLD and
+non-activation gate.
