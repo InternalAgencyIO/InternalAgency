@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 14:43 UTC
+Updated: 2026-07-31 14:58 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `672a9d9`
+Previously published public increment: `67e8323`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -171,8 +171,24 @@ This status file deliberately does not claim a self-referential commit hash.
   mutation; and
 - the independent Python verifier itself classified and content-addressed as a
   validator in the review tree.
+- deterministic machine-readable independent-review receipt template;
+- required future binding to exact Git commit, review-manifest content digest,
+  review-tree root, covered-file count, and canonical scope digest;
+- fixed review coverage across eight security areas, every manifest entry, and
+  every open security-decision disposition;
+- explicit production, site, chain-state, wallet/key, DNS/hosting, and Genesis
+  release-gate exclusions;
+- reviewer-independence contract excluding concurrent author, operator,
+  deployer, promotion-vault, and verifier-operator roles;
+- review-only approval with zero activation effect and mandatory separate
+  activation review;
+- external-only Ed25519 attestation slots with no key generation, signing,
+  public key, signature, reviewer, decision, target, or timestamp in the held
+  template; and
+- drift tests for bindings, scope, independence, decision, attestation,
+  issuance, deployment, and activation claims.
 
-Current proposal-only result: **150 tests passed**. This consists of 28 protected
+Current proposal-only result: **158 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -183,7 +199,8 @@ program-event interface tests and ten event/account reconciliation tests.
 Five compact reconciliation-vector and Merkle-commitment tests complete the
 compact-vector suite, and six Draft-07 schema/example tests complete the current
 suite. Eight content-addressed review-manifest tests and three independent
-Python integration tests complete the review-surface suite.
+Python integration tests complete the review-surface suite. Eight held
+independent-review receipt-template tests complete the review-contract suite.
 
 ## Current guarantees of the reference model
 
@@ -215,8 +232,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a machine-readable independent-review receipt template binding the Git
-commit, review root, review scope, decision, and explicit non-activation status.
-Preserve the privacy boundary and every unapplied and undeployable gate. No
-production import, chain connection, wallet operation, or site deployment is
-needed for that work.
+Add a canonical unsigned review-receipt signing payload and public verification
+vectors without generating keys or signatures. Preserve the privacy boundary
+and every unapplied and undeployable gate. No production import, chain
+connection, wallet operation, or site deployment is needed for that work.

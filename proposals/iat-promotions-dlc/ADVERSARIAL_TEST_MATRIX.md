@@ -160,11 +160,17 @@ security audit or deployment approval.
 | JavaScript and Python normalize, classify, or hash differently | `independent zero-dependency Python verifier...` | Complete independently generated manifests must be equal |
 | Stale digest or intermediate node is submitted to the Python verifier | `independent Python verifier rejects...` | Independent regeneration exits nonzero and reports invalid evidence |
 | Independent verifier is omitted from the review inventory | `the independent verifier is itself covered...` | Required validator entry and deterministic filesystem coverage fail |
+| Receipt does not bind commit, manifest digest, tree root, file count, or scope | `template binds a future receipt...` | Required final-binding contract and commit/tree agreement fail |
+| Reviewer also controls authorship, deployment, vault, ceremony, or verification | `reviewer must be independent...` | Fixed disallowed-role and independence requirements reject the receipt |
+| Review scope silently omits files or open security decisions | `template covers the full manifest...` | Every manifest entry and open-decision disposition remain mandatory |
+| Review approval is treated as activation authorization | `even review approval has no activation effect...` | Approval effect remains `NONE`; separate activation review is required |
+| Template creates keys, signs, or pre-fills a public key or signature | `template never generates keys...` | External-only attestation boundary and null template fields fail |
+| Template claims a final decision, completed review, issuance, or deployment | `deployment, binding, independence...` | HOLD, template-state, and non-activation mutation checks fail |
 
 ## Next matrix expansion
 
-- machine-readable independent-review receipt template binding the Git commit,
-  review root, review scope, decision, and explicit non-activation status;
+- canonical unsigned review-receipt signing payload and public verification
+  vectors, without generating keys or signatures;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.
