@@ -658,6 +658,13 @@ rejected and regenerated.
 | **Tashkent City Canal Intercept**<br><img src="548-uzbekistan-tashkent-city-canal-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a gold atlas-silk prism above Tashkent City Park canal and modern towers"> | **Samarkand Registan Star Cipher**<br><img src="549-uzbekistan-samarkand-registan-star-cipher.png" width="420" alt="The trio sealing a cobalt archive prism before Samarkand Registan's blue-tiled monumental facades"> |
 | **Chimgan Charvak Prism Extraction**<br><img src="550-uzbekistan-chimgan-charvak-prism-extraction.png" width="420" alt="The trio restoring a watershed-data beacon above Charvak Reservoir and the Greater Chimgan mountains"> | **Tashkent Kosmonavtlar Metro Night Relay**<br><img src="551-uzbekistan-tashkent-kosmonavtlar-metro-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three completed light keys inside Tashkent's Kosmonavtlar Metro station"> |
 
+## World Series - Asia - Batch 133: Malaysia
+
+| | |
+|---|---|
+| **Kuala Lumpur KLCC Prism Intercept**<br><img src="552-malaysia-kuala-lumpur-klcc-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald prism above KLCC Park and the Petronas Twin Towers"> | **Penang George Town Shophouse Cipher**<br><img src="553-malaysia-penang-george-town-shophouse-cipher.png" width="420" alt="The trio sealing a cobalt archive prism among George Town's pastel heritage shophouses and five-foot ways"> |
+| **Sabah Kinabalu Cloud Prism Extraction**<br><img src="554-malaysia-sabah-kinabalu-cloud-prism-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Mount Kinabalu and Crocker Range rainforest"> | **Penang Bridge Night Relay**<br><img src="555-malaysia-penang-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three completed light keys above Penang Bridge and the Malacca Strait"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
