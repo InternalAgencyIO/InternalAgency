@@ -60,9 +60,19 @@ security audit or deployment approval.
 | Failure after decoded hero transfer | same | Caller state retains zero partial effects |
 | 1,000 encoded nomination/settlement pairs | `pair 1,000 exhausts through encoded transitions...` | Exact cap and zero remaining vault balance |
 | Repeated terminal surplus finalization | same | First finalization is auditable; repeat is permanently rejected |
+| 2,048 randomized fixed-width instructions | `2,048 deterministic randomized instructions...` | Every value round-trips to one byte representation; seeded digest reproduces |
+| Every proper prefix of every instruction vector | `every truncated vector...` | Decoder rejects all truncations |
+| Random trailing suffixes | same | Decoder rejects all non-canonical trailing bytes |
+| Single-bit instruction mutation | `single-bit mutations...` | Unknown discriminator rejects; valid data mutation re-encodes identically |
+| 128 verifier-binding mutations | `128 deterministic verifier-binding mutations...` | Every mismatch rejects with byte-identical caller state |
+| RFC 8032 Ed25519 tests 1 and 2 | `public-key-only RFC 8032 vectors...` | Public keys verify the published messages/signatures |
+| Every byte of both RFC signatures mutated | `every signature-byte mutation...` | All 128 mutations reject |
+| RFC message or public key substituted | same | Verification rejects |
+| Secret-bearing field added to public vectors | `deployment claims, secret-bearing fields...` | Vector validator rejects publication |
 
 ## Next matrix expansion
 
-- verifier envelope byte-level fuzzing and real Ed25519 public test vectors;
-- property-based codec and decoded-transition fuzzing;
+- verifier-key rotation and emergency-disable state model;
+- canonical campaign-envelope signatures using a reviewed external test-vector
+  generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

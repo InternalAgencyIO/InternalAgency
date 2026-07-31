@@ -121,6 +121,17 @@ The campaign's on-chain state and final settlement receipt separately expose the
 
 `attestation-transparency.mjs` accepts a signature-verification callback so it
 can remain network-free and key-free. Tests use a plainly labelled public hash
-fixture, not cryptography. Replacing that callback with audited Ed25519
-verification and binding its public key into reviewed campaign state is required
-before any Devnet prototype.
+fixture for campaign-envelope integration.
+
+The separate `ed25519-public-vectors.v0.json` contains only the public keys,
+messages, and signatures from RFC 8032 section 7.1 tests 1 and 2. It deliberately
+omits the RFC private keys. `validate-ed25519-public-vectors.mjs` verifies those
+signatures using the runtime's Ed25519 implementation, while mutation tests
+reject every changed signature byte, changed message, and substituted public
+key. The primary source is
+https://datatracker.ietf.org/doc/html/rfc8032#section-7.1.
+
+This proves the public verification primitive, not the future program's
+preinstruction parser or a production verifier deployment. Binding audited
+Ed25519 verification, exact canonical envelope bytes, the reviewed public key,
+and Solana's Instructions sysvar remains required before any Devnet prototype.

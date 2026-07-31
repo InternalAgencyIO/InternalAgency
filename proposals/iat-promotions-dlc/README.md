@@ -50,6 +50,8 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Network-free instruction codec](./program-interface-codec.mjs)
 - [Network-free instruction transition adapter](./instruction-transition-adapter.mjs)
 - [Interface validator](./validate-program-interface.mjs)
+- [Public-key-only RFC 8032 vectors](./ed25519-public-vectors.v0.json)
+- [Ed25519 public-vector validator](./validate-ed25519-public-vectors.mjs)
 - [Proposal-only tests](./tests/)
 
 Run the proposal-only checks with:
@@ -57,12 +59,15 @@ Run the proposal-only checks with:
 ```sh
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
+node proposals/iat-promotions-dlc/validate-ed25519-public-vectors.mjs
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
 node --test proposals/iat-promotions-dlc/tests/attestation-transparency.test.mjs
 node --test proposals/iat-promotions-dlc/tests/randomized-state-machine.test.mjs
 node --test proposals/iat-promotions-dlc/tests/program-interface.test.mjs
 node --test proposals/iat-promotions-dlc/tests/instruction-transition-adapter.test.mjs
+node --test proposals/iat-promotions-dlc/tests/deterministic-byte-fuzz.test.mjs
+node --test proposals/iat-promotions-dlc/tests/ed25519-public-vectors.test.mjs
 ```
 
 ## Deliberate isolation
