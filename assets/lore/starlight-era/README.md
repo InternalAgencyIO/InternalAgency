@@ -693,6 +693,13 @@ rejected and regenerated.
 | **Lima Miraflores Cliff Prism Intercept**<br><img src="568-peru-lima-miraflores-cliff-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber prism above Miraflores, the Costa Verde cliffs, and Lima's Pacific shoreline"> | **Machu Picchu Terrace Light Cipher**<br><img src="569-peru-machu-picchu-terrace-light-cipher.png" width="420" alt="The trio sealing a cobalt archive prism before Machu Picchu's stone terraces and Huayna Picchu"> |
 | **Colca Canyon Data Extraction**<br><img src="570-peru-colca-canyon-data-extraction.png" width="420" alt="The trio restoring a terrain-data beacon above Colca Canyon's immense terraced Andean walls"> | **Urubamba Rail Night Relay**<br><img src="571-peru-urubamba-rail-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald signal relay above the Urubamba Valley railway corridor near Ollantaytambo"> |
 
+## World Series - Africa - Batch 138: Madagascar
+
+| | |
+|---|---|
+| **Antananarivo Independence Avenue Prism Intercept**<br><img src="572-madagascar-antananarivo-independence-avenue-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a crimson prism above Antananarivo's Avenue de l'Indépendance and terraced high city"> | **Rova of Antananarivo Light Cipher**<br><img src="573-madagascar-rova-antananarivo-light-cipher.png" width="420" alt="The trio sealing a cobalt archive prism outside the Rova of Antananarivo on Analamanga hill"> |
+| **Tsingy de Bemaraha Data Extraction**<br><img src="574-madagascar-tsingy-bemaraha-data-extraction.png" width="420" alt="The trio restoring an environmental-data beacon above the limestone pinnacles of Tsingy de Bemaraha"> | **Avenue of the Baobabs Night Relay**<br><img src="575-madagascar-avenue-baobabs-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald signal relay beside the Avenue of the Baobabs near Morondava"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
