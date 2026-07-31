@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 12:54 UTC
+Updated: 2026-07-31 13:09 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `5490d02`
+Previously published public increment: `1605389`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -82,15 +82,26 @@ This status file deliberately does not claim a self-referential commit hash.
 - cross-domain name and discriminator collision rejection;
 - stale source, stale vector, deployment-claim, and writable external-account
   drift tests; and
-- explicit `deployable: false` and `compositionApplied: false` preview gates.
+- explicit `deployable: false` and `compositionApplied: false` preview gates;
+- deterministic all-thirteen-instruction composed vector artifact;
+- explicit removal of the obsolete 32-byte initializer vector payload;
+- vector discriminator, length, byte, and round-trip drift validation;
+- exact byte offsets and end offsets for all eight proposed account layouts;
+- exact data offsets, encoded lengths, and account-meta indices/flags for all
+  thirteen proposed instructions;
+- canonical layout digests bound to the composed preview and vectors;
+- language-neutral u8/u16/u32/u64/i64, bytes, bytes32, and public-key fixtures;
+- gap, overlap, final-size, vector-length, meta-order, unsafe-number, scalar-byte,
+  and stale-source rejection tests; and
+- explicit client-binding-only and undeployable ABI status gates.
 
-Current proposal-only result: **93 tests passed**. This consists of 28 protected
+Current proposal-only result: **106 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
 byte-fuzz tests, three Ed25519 public-vector tests, and five verifier-key
-lifecycle tests, seven lifecycle-amendment tests, plus ten full-interface
-composition and drift tests.
+lifecycle tests, seven lifecycle-amendment tests, twelve full-interface
+composition and drift tests, plus eleven ABI offset/conformance tests.
 
 ## Current guarantees of the reference model
 
@@ -122,7 +133,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Derive a deterministic account/data offset manifest from the held composed
-preview and add cross-language ABI drift fixtures. Preserve every unapplied and
-undeployable gate. No production import, chain connection, wallet operation, or
-site deployment is needed for that work.
+Define deterministic event layouts and public byte vectors for campaign,
+settlement, terminal, and verifier-lifecycle outcomes. Preserve every unapplied
+and undeployable gate. No production import, chain connection, wallet operation,
+or site deployment is needed for that work.

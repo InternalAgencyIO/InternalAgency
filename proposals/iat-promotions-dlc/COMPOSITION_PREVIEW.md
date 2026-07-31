@@ -33,6 +33,13 @@ amendment, base vectors, and lifecycle vectors. The composer preserves each
 source's discriminator domain and rejects duplicate account names, instruction
 names, or discriminators across the composed surface.
 
+`program-interface-composition-vectors.v1.json` is a second derived artifact
+covering all thirteen composed instructions. It removes exactly the obsolete
+32-byte `verifier_ed25519_key` value from the initializer fixture, then
+re-encodes every vector against the composed instruction data. This closes the
+otherwise-valid-looking drift where the preview and inherited v0 initializer
+vector had different lengths.
+
 Run:
 
 ```sh
@@ -43,11 +50,14 @@ node --test proposals/iat-promotions-dlc/tests/program-interface-composition.tes
 The validator recomposes the entire JSON object and requires exact equality. It
 also independently checks the HOLD labels, source/vector coverage, read-only
 attestation dependencies, required guards, forbidden writable external
-accounts, and vector discriminator prefixes.
+accounts, and composed-vector discriminator, length, byte, and round-trip
+agreement.
 
 `node proposals/iat-promotions-dlc/compose-program-interface-preview.mjs
 --write` is proposal-local deterministic code generation. It performs no
 network, chain, wallet, signing, secret, deployment, or production operation.
+The composed-vector generator has the same boundary and must run before the ABI
+offset-manifest generator.
 
 ## Release boundary
 

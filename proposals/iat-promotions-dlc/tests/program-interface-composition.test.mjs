@@ -100,7 +100,37 @@ test("vector removal and discriminator changes cannot hide behind a stale previe
     `0000000000000000${changed.amendmentVectors.vectors[0].expectedHex.slice(16)}`;
   const errors = validateProgramInterfaceComposition(changed);
   assert.ok(errors.includes("preview differs from deterministic composition"));
-  assert.ok(errors.includes("initialize_verifier_registry vector discriminator drift"));
+  assert.ok(errors.includes("composed vectors differ from deterministic generation"));
+});
+
+test("composed vectors remove only the obsolete initializer key bytes and match all 13 instructions", () => {
+  assert.equal(bundle.composedVectors.vectors.length, bundle.preview.instructions.length);
+  const baseInitializer = bundle.baseVectors.vectors.find(
+    (vector) => vector.name === "initialize_campaign",
+  );
+  const composedInitializer = bundle.composedVectors.vectors.find(
+    (vector) => vector.name === "initialize_campaign",
+  );
+  assert.equal("verifier_ed25519_key" in baseInitializer.data, true);
+  assert.equal("verifier_ed25519_key" in composedInitializer.data, false);
+  assert.equal(baseInitializer.expectedHex.length / 2 - composedInitializer.expectedHex.length / 2, 32);
+});
+
+test("a stale composed vector or reintroduced initializer key field is rejected", () => {
+  const stale = clone(bundle);
+  stale.composedVectors.vectors[0].expectedHex += "00";
+  const staleErrors = validateProgramInterfaceComposition(stale);
+  assert.ok(staleErrors.includes("composed vectors differ from deterministic generation"));
+  assert.ok(staleErrors.includes("initialize_campaign composed vector length drift"));
+  assert.ok(staleErrors.includes("initialize_campaign composed vector bytes drift"));
+
+  const reintroduced = clone(bundle);
+  reintroduced.composedVectors.vectors[0].data.verifier_ed25519_key = "00".repeat(32);
+  assert.ok(
+    validateProgramInterfaceComposition(reintroduced).includes(
+      "composed vectors differ from deterministic generation",
+    ),
+  );
 });
 
 test("cross-domain account and instruction discriminator collisions stop composition", () => {

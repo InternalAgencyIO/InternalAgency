@@ -23,6 +23,9 @@ const AMENDMENT_VECTORS_PATH = fileURLToPath(
 const PREVIEW_PATH = fileURLToPath(
   new URL("./program-interface-composition-preview.v1.json", import.meta.url),
 );
+const COMPOSED_VECTORS_PATH = fileURLToPath(
+  new URL("./program-interface-composition-vectors.v1.json", import.meta.url),
+);
 
 const STATUS_LABELS = [
   "DRAFT",
@@ -245,6 +248,7 @@ export function loadCompositionBundle() {
     baseVectors: parse(BASE_VECTORS_PATH),
     amendmentVectors: parse(AMENDMENT_VECTORS_PATH),
     preview: parse(PREVIEW_PATH),
+    composedVectors: parse(COMPOSED_VECTORS_PATH),
   };
 }
 

@@ -100,10 +100,20 @@ security audit or deployment approval.
 | Preview claims mainnet, a program ID, deployment, or application | `deployment claims and writable external accounts...` | Preview status gate and exact recomposition both fail |
 | Treasury or another external lane becomes writable | same | Cross-interface capability scan rejects the instruction |
 | Applied amendment or released v0 HOLD used as preview input | `composition refuses an applied amendment...` | Composer stops; no derived artifact is accepted |
+| Inherited initializer vector retains removed verifier-key bytes | `composed vectors remove only...` | Derived vector is exactly 32 bytes shorter and round-trips against the preview |
+| Stale composed vector or reintroduced key field | `a stale composed vector...` | Composition validator rejects length, bytes, and deterministic-generation drift |
+| Account layout gap, overlap, or wrong final size | `account gaps, overlaps...` | ABI validator rejects the exact field and layout digest |
+| Instruction-data offset or encoded length drift | `instruction data, account-meta order...` | ABI validator rejects layout and public-vector length mismatch |
+| Account-meta reorder or signer/writable/optional flag drift | same | ABI manifest exact generation and contiguous meta-index checks fail |
+| u64/i64 published as unsafe JSON number | `numeric JSON values...` | ABI conformance validator requires a decimal string |
+| Cross-language scalar byte drift | same | Fixed little-endian hex fixture comparison fails |
+| Stale composed preview under ABI manifest | `a changed composed preview...` | Canonical preview binding and deterministic manifest equality fail |
+| ABI manifest claims deployment or applied composition | `deployment claims and released...` | All client-binding HOLD gates reject the artifact |
 
 ## Next matrix expansion
 
-- deterministic account/data offset manifest and cross-language ABI drift checks;
+- deterministic event layouts and byte vectors for campaign and verifier
+  lifecycle outcomes;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

@@ -128,3 +128,10 @@ adds read-only registry/key accounts and issuance-time guards to all three
 attestation consumers, and appends the five lifecycle instructions. The drift
 validator recomputes that result from the two interface sources and both vector
 artifacts so a stale hand-edited preview cannot pass.
+
+The inherited v0 initializer vector is not a valid composed vector because it
+still includes the removed 32-byte verifier key. The separate composed-vector
+artifact re-encodes all thirteen instructions and fixes the shorter initializer
+length explicitly. The ABI offset manifest then binds those composed bytes,
+every account/data offset, and every account-meta position for independent
+client implementations.

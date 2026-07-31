@@ -8,8 +8,14 @@ import {
   composeProgramInterfacePreview,
   loadCompositionBundle,
 } from "./compose-program-interface-preview.mjs";
+import { generateComposedInterfaceVectors } from "./generate-composed-interface-vectors.mjs";
 import { validateKeyLifecycleAmendment } from "./validate-key-lifecycle-amendment.mjs";
 import { validateProgramInterface } from "./validate-program-interface.mjs";
+import {
+  decodeInstruction,
+  encodeInstruction,
+  instructionEncodedLength,
+} from "./program-interface-codec.mjs";
 
 const STATUS_LABELS = [
   "DRAFT",
@@ -44,6 +50,18 @@ export function validateProgramInterfaceComposition(bundle) {
     return errors;
   }
   expect(jsonEqual(bundle.preview, expected), "preview differs from deterministic composition");
+  let expectedComposedVectors;
+  try {
+    expectedComposedVectors = generateComposedInterfaceVectors(bundle);
+  } catch (error) {
+    errors.push(`composed-vector generation failed: ${error.message}`);
+  }
+  if (expectedComposedVectors) {
+    expect(
+      jsonEqual(bundle.composedVectors, expectedComposedVectors),
+      "composed vectors differ from deterministic generation",
+    );
+  }
 
   const status = bundle.preview?.status ?? {};
   expect(jsonEqual(status.labels, STATUS_LABELS), "preview public status labels mismatch");
@@ -109,10 +127,7 @@ export function validateProgramInterfaceComposition(bundle) {
   }
 
   const vectorByName = new Map(
-    [...bundle.baseVectors.vectors, ...bundle.amendmentVectors.vectors].map((vector) => [
-      vector.name,
-      vector,
-    ]),
+    bundle.composedVectors.vectors.map((vector) => [vector.name, vector]),
   );
   expect(vectorByName.size === bundle.preview.instructions.length, "composed vector count mismatch");
   for (const instruction of bundle.preview.instructions) {
@@ -122,6 +137,25 @@ export function validateProgramInterfaceComposition(bundle) {
       vector?.expectedHex.startsWith(instruction.discriminatorHex),
       `${instruction.name} vector discriminator drift`,
     );
+    expect(
+      vector?.expectedHex.length / 2 === instructionEncodedLength(instruction.name, bundle.preview),
+      `${instruction.name} composed vector length drift`,
+    );
+    if (vector) {
+      try {
+        const encoded = encodeInstruction(instruction.name, vector.data, bundle.preview);
+        expect(encoded.toString("hex") === vector.expectedHex, `${instruction.name} composed vector bytes drift`);
+        expect(
+          jsonEqual(decodeInstruction(encoded, bundle.preview), {
+            name: instruction.name,
+            data: vector.data,
+          }),
+          `${instruction.name} composed vector round-trip drift`,
+        );
+      } catch (error) {
+        errors.push(`${instruction.name} composed vector codec failure: ${error.message}`);
+      }
+    }
   }
 
   const forbiddenCapabilities = new Set(bundle.preview.forbiddenCapabilities);
