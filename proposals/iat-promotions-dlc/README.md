@@ -77,6 +77,10 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Ten compact minimal counterexamples](./positive-campaign-vector-intake-minimal-counterexamples.v1.json)
 - [Minimal-counterexample generator](./generate-positive-campaign-vector-intake-minimal-counterexamples.mjs)
 - [Minimal-counterexample validator](./validate-positive-campaign-vector-intake-minimal-counterexamples.mjs)
+- [Representation-sensitivity audit contract](./POSITIVE_CAMPAIGN_VECTOR_REPRESENTATION_AUDIT.md)
+- [Compact 256-input representation audit](./positive-campaign-vector-representation-audit.v1.json)
+- [Representation-audit generator](./generate-positive-campaign-vector-representation-audit.mjs)
+- [Representation-audit validator](./validate-positive-campaign-vector-representation-audit.mjs)
 - [Verifier-key lifecycle reference policy](./VERIFIER_KEY_LIFECYCLE.md)
 - [Network-free verifier-key lifecycle model](./verifier-key-lifecycle.mjs)
 - [Verifier-registry interface amendment](./KEY_LIFECYCLE_AMENDMENT.md)
@@ -177,6 +181,7 @@ node proposals/iat-promotions-dlc/generate-positive-campaign-vector-intake-vecto
 node proposals/iat-promotions-dlc/generate-positive-campaign-vector-intake-differential-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-positive-campaign-vector-intake-fuzz-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-positive-campaign-vector-intake-minimal-counterexamples.mjs --write
+node proposals/iat-promotions-dlc/generate-positive-campaign-vector-representation-audit.mjs --write
 node proposals/iat-promotions-dlc/generate-review-manifest.mjs --write
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
@@ -200,11 +205,13 @@ node proposals/iat-promotions-dlc/validate-positive-campaign-vector-intake-vecto
 node proposals/iat-promotions-dlc/validate-positive-campaign-vector-intake-differential-vectors.mjs
 node proposals/iat-promotions-dlc/validate-positive-campaign-vector-intake-fuzz-vectors.mjs
 node proposals/iat-promotions-dlc/validate-positive-campaign-vector-intake-minimal-counterexamples.mjs
+node proposals/iat-promotions-dlc/validate-positive-campaign-vector-representation-audit.mjs
 python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-differential-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-fuzz-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-minimal-counterexamples --format json
+python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-representation-audit --format json
 python proposals/iat-promotions-dlc/verify-review-manifest.py
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
@@ -238,6 +245,7 @@ node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake-p
 node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake-differential.test.mjs
 node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake-fuzz.test.mjs
 node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake-minimal-counterexamples.test.mjs
+node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-representation-audit.test.mjs
 ```
 
 ## Deliberate isolation

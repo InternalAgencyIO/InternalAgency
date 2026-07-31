@@ -251,9 +251,12 @@ security audit or deployment approval.
 | Missing positive cryptographic material is silently invented for minimization | `signature and guard fixtures stay negative...` | Signature and guard proofs remain rejection-preserving or reason-changing without a positive signature |
 | Canonical hashing hides the expected-target key-order mutation | `ordered commitment binds...` | The canonical collision is explicit and a separate order-sensitive SHA-256 commitment must change |
 | A compact fixture or fixture-set commitment is changed | `Python rejects a changed fixture...` | Independent replay exits `2` and names the family or stale set commitment |
+| An unexpected pair of fuzz inputs becomes canonically identical | `only the 26 expected-target permutations...` | Node and Python reject every canonical collision outside the single expected target-order class |
+| Two distinct fuzz representations share an ordered commitment | `all 256 insertion-order-sensitive...` | Ordered uniqueness fails closed even when canonical JSON intentionally erases key order |
+| Representation audit stores full inputs/results or claims authority | `every compact record remains...` / `representation tooling is offline...` | Compact contract and capability scans reject storage, acceptance, receipt, review, wallet, network, or activation claims |
+| A representation record or set commitment is changed | `Python rejects changed compact evidence...` | Independent 256-case replay exits `2` on record or set drift |
 
 ## Next matrix expansion
 
-- representation-sensitivity audit across every seeded fuzz input, including
-  explicit canonical-collision and ordered-commitment expectations;
+- domain-separated inclusion proofs for the expected canonical collision class;
 - local-validator transaction rollback and account-lock contention.

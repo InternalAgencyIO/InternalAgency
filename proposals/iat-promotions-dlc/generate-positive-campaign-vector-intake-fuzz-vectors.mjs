@@ -78,10 +78,23 @@ function derivedHex(seedHex, index, wordHex, label) {
   return sha256Hex(`${DERIVATION_DOMAIN}\0${seedHex}\0${index}\0${wordHex}\0${label}`);
 }
 
-function rotateObjectKeys(value, shift) {
-  const entries = Object.entries(value);
-  const offset = shift % entries.length;
-  return Object.fromEntries([...entries.slice(offset), ...entries.slice(0, offset)]);
+function factorial(value) {
+  let product = 1;
+  for (let factor = 2; factor <= value; factor += 1) product *= factor;
+  return product;
+}
+
+function permuteObjectKeys(value, ordinal) {
+  const remaining = Object.entries(value);
+  const output = [];
+  let rank = ordinal;
+  while (remaining.length > 0) {
+    const blockSize = factorial(remaining.length - 1);
+    const selected = Math.floor(rank / blockSize) % remaining.length;
+    rank %= blockSize;
+    output.push(remaining.splice(selected, 1)[0]);
+  }
+  return Object.fromEntries(output);
 }
 
 function mutateSignature(base64, word) {
@@ -146,9 +159,15 @@ function mutateCase(baseCandidate, baseTarget, index, word) {
       break;
     }
     case "EXPECTED_TARGET": {
-      const shift = 1 + word % 7;
-      expectedTarget = rotateObjectKeys(expectedTarget, shift);
-      mutation = { document: "expectedTarget", operation: "rotate-keys", path: "/", shift, variant: wordHex };
+      const permutationOrdinal = 1 + Math.floor(index / FUZZ_FAMILIES.length);
+      expectedTarget = permuteObjectKeys(expectedTarget, permutationOrdinal);
+      mutation = {
+        document: "expectedTarget",
+        operation: "permute-keys",
+        path: "/",
+        permutationOrdinal,
+        variant: wordHex,
+      };
       break;
     }
     case "PRIVATE_MATERIAL_EXCLUSION": {
@@ -186,10 +205,13 @@ function mutateCase(baseCandidate, baseTarget, index, word) {
       break;
     }
     case "NON_AUTHORITY": {
-      const authorityFields = ["receiptIssued", "reviewCompletedByIntake", "activationAuthorized"];
-      const field = authorityFields[word % authorityFields.length];
-      candidate.authority[field] = true;
-      mutation = { document: "candidate", operation: "replace", path: `/authority/${field}`, variant: wordHex };
+      candidate.authority.activationEffect = `FUZZ_${wordHex}`;
+      mutation = {
+        document: "candidate",
+        operation: "replace",
+        path: "/authority/activationEffect",
+        variant: wordHex,
+      };
       break;
     }
     case "CRYPTOGRAPHIC_SIGNATURE": {

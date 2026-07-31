@@ -107,3 +107,14 @@ python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --
 It independently rebuilds each control and one-semantic-delta mutation,
 including the insertion-order-sensitive target commitment. Any fixture or set
 commitment drift exits `2`; no control or mutation is accepted.
+
+The compact representation audit has a fifth mode:
+
+```sh
+python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-representation-audit --format json
+```
+
+It reconstructs all 256 ordered inputs, requires 256 unique ordered
+commitments, and independently confirms that the only canonical collision is
+the expected 26-case target-key-order class. It stores no full input or result
+expansions and grants no receipt, review, or activation authority.

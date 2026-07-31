@@ -1,0 +1,42 @@
+# Positive campaign-vector representation audit
+
+> **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
+
+This proposal-only audit replays all 256 seeded negative intake cases and
+commits to each exact ordered input without storing full candidate or result
+objects. It creates no positive signature, review receipt, key, wallet request,
+network action, or activation authority.
+
+## Expected result
+
+- all 256 insertion-order-sensitive input commitments are unique;
+- 231 canonical input commitments are unique;
+- exactly one canonical equivalence class contains more than one case;
+- that class contains the 26 `EXPECTED_TARGET` key-order permutations only;
+- the 26 ordered commitments remain distinct; and
+- every case remains rejected with effect `NONE`.
+
+Canonical JSON intentionally erases object insertion order. The separate
+ordered commitment proves that each tested representation is distinct while
+retaining the canonical hash used by the intake contract. Any other canonical
+collision or any repeated ordered commitment fails both validators.
+
+## Compact evidence
+
+`positive-campaign-vector-representation-audit.v1.json` stores source and
+record commitments, class sizes, the one expected collision-class membership,
+and permanent non-authority flags. It does not store the 256 full inputs or
+results. Node regenerates the artifact; Python independently rebuilds every
+record and collision class from the base vectors and fixed seed.
+
+## Reproduce locally
+
+```text
+node proposals/iat-promotions-dlc/generate-positive-campaign-vector-representation-audit.mjs --write
+node proposals/iat-promotions-dlc/validate-positive-campaign-vector-representation-audit.mjs
+python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-representation-audit --format json
+node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-representation-audit.test.mjs
+```
+
+These commands are offline verification only. They cannot deploy, sign,
+broadcast, move tokens, issue a receipt, complete review, or enable a claim.

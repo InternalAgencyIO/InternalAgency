@@ -98,3 +98,5 @@ The compact seeded 256-case continuation is documented in
 [`POSITIVE_CAMPAIGN_VECTOR_FUZZING.md`](./POSITIVE_CAMPAIGN_VECTOR_FUZZING.md).
 Its ten one-family minimal counterexamples are documented in
 [`POSITIVE_CAMPAIGN_VECTOR_MINIMAL_COUNTEREXAMPLES.md`](./POSITIVE_CAMPAIGN_VECTOR_MINIMAL_COUNTEREXAMPLES.md).
+The compact all-input representation analysis is documented in
+[`POSITIVE_CAMPAIGN_VECTOR_REPRESENTATION_AUDIT.md`](./POSITIVE_CAMPAIGN_VECTOR_REPRESENTATION_AUDIT.md).

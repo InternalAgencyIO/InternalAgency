@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 18:30 UTC
+Updated: 2026-07-31 18:47 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `380e4c5`
+Previously published public increment: `26a2f6c`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -341,8 +341,15 @@ This status file deliberately does not claim a self-referential commit hash.
   bind the expected-target key-order case; and
 - exact Node/Python fixture replay, fixture-set commitment, tamper rejection,
   source-safety, and permanent non-authority checks.
+- a compact representation-sensitivity audit over all 256 seeded inputs;
+- 256 unique ordered commitments and 231 canonical classes, with exactly one
+  permitted 26-case class containing only expected-target key permutations;
+- exact Node/Python replay of every compact audit record, collision class, and
+  record-set commitment without storing full input or result expansions; and
+- changed-record, changed-set, unexpected-collision, duplicate-order,
+  source-safety, and permanent non-authority checks.
 
-Current proposal-only result: **267 tests passed**. This consists of 28 protected
+Current proposal-only result: **275 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -393,6 +400,9 @@ Nine minimal-counterexample generation, family coverage, primary-gate
 transition, negative-cryptography, ordered-commitment, non-authority, Python
 parity, changed-evidence, source-safety, and manifest-coverage tests complete
 the reduced-fixture suite.
+Eight representation-audit regeneration, ordered-uniqueness, expected-
+collision, family-coverage, rejection-only, Python-parity, changed-evidence,
+source-safety, and manifest-coverage tests complete the all-input audit suite.
 
 ## Current guarantees of the reference model
 
@@ -424,7 +434,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a deterministic representation-sensitivity audit over all 256 seeded fuzz
-inputs. It must enumerate only the expected canonical collisions, require
-unique ordered commitments, and remain compact, local, rejection-only, and
+Add a domain-separated Merkle tree over the 256 compact representation-audit
+records and deterministic inclusion proofs for every member of the expected
+canonical collision class. Keep it local, compact, rejection-only, and
 non-authoritative without storing full input or result expansions.

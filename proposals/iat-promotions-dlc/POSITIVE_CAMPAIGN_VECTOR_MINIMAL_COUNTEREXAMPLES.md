@@ -62,3 +62,7 @@ node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake-m
 These commands are local and verification-only. A separately supplied valid
 positive campaign vector and independent review remain mandatory before any
 future integration could be considered.
+
+The same order-sensitivity invariant is exhaustively checked across all seeded
+inputs in
+[`POSITIVE_CAMPAIGN_VECTOR_REPRESENTATION_AUDIT.md`](./POSITIVE_CAMPAIGN_VECTOR_REPRESENTATION_AUDIT.md).

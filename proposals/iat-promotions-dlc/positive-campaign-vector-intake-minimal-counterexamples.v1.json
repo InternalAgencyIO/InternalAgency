@@ -24,7 +24,7 @@
     },
     "fuzzVectors": {
       "path": "positive-campaign-vector-intake-fuzz-vectors.v1.json",
-      "canonicalSha256": "da8ae25657a7f5c68799e1af1486700d3062b0d0f616f1c2267332a7e0da9ec2"
+      "canonicalSha256": "152cd93ddbfbf112bdd7b96d93d32535da4ed2ff4930e6e29f544939f2e8c931"
     },
     "intakeSchema": {
       "path": "positive-campaign-vector-intake.schema.v1.json",
@@ -36,11 +36,11 @@
     },
     "fuzzGenerator": {
       "path": "generate-positive-campaign-vector-intake-fuzz-vectors.mjs",
-      "normalizedTextSha256": "d508aa9203f34293f1faeac59b58ffb86f70f0acc6fd7845ca29d1f85f57edf0"
+      "normalizedTextSha256": "3835801b3c1a3c4543c110c85bb91cd8dcde78ff652bcf4f04c5a5ca052e556f"
     },
     "pythonVerifier": {
       "path": "verify-positive-campaign-vector-intake.py",
-      "normalizedTextSha256": "0ce1c5f8d428b4be4fc39d3ac8648ce7af23c9b324650b5111011b239d057cd2"
+      "normalizedTextSha256": "710065bf5d09ccfb962f65b58c3d620c812f11713a6280d2b1b62d744d30cfde"
     },
     "generator": {
       "path": "generate-positive-campaign-vector-intake-minimal-counterexamples.mjs",
@@ -79,7 +79,7 @@
   "evaluationTime": 1800100001,
   "summary": {
     "fixtureCount": "10",
-    "fixtureSetCommitmentSha256": "13a7c0177842eb78a13f59ae02b767207b7d50ce526ef0091578f32640ee7dfc",
+    "fixtureSetCommitmentSha256": "afcdfd3ec2c789fd48282c306923b06641410cbda182af85100b44c0332a1460",
     "allControlsRejected": true,
     "allMutationsRejected": true
   },
@@ -132,9 +132,9 @@
       "proofMode": "PASS_TO_FAIL_GATE",
       "delta": {
         "document": "expectedTarget",
-        "operation": "rotate-keys",
+        "operation": "permute-keys",
         "path": "/",
-        "shift": 7,
+        "permutationOrdinal": 1,
         "variant": "1a4fe0d6"
       },
       "semanticDeltaCount": "1",
@@ -142,7 +142,7 @@
       "controlInputCanonicalSha256": "59f75a2a6f681cb36fb8193991f9f0350bd4f3e5feb3bcc3c8a83d1d7b1b21b4",
       "mutatedInputCanonicalSha256": "59f75a2a6f681cb36fb8193991f9f0350bd4f3e5feb3bcc3c8a83d1d7b1b21b4",
       "controlInputOrderedSha256": "653b8f50581cd0121107e918e3b539fee076c55e6da1c80d991bbdb66ab7047b",
-      "mutatedInputOrderedSha256": "ec79129b14ec2689cecf38eb42079b33dcae430d34ceaa9b56524425ae0a4f45",
+      "mutatedInputOrderedSha256": "b55d6660fa749a3c737d4854ef20425f1641b641a2ca58eda810c46b4276fceb",
       "controlResultCommitmentSha256": "4e9a4300692985b9d280e6ff08f6f15e6b1915168a5352130de37512b6e72caf",
       "mutatedResultCommitmentSha256": "c456b4914f08fad1070758be0d1facd0dea652a9f3586ae058e58052dfa62218",
       "controlPrimaryGateResult": "PASS",
@@ -160,7 +160,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "fixtureCommitmentSha256": "dd5f4077533ccfe6d0f35de355f293e7a37f0cc03188aaeb40e0bed74a97f207"
+      "fixtureCommitmentSha256": "695c52887e167e7fcfa08a991fd24f3caac388a0fbb46353d78c65ad560dcda3"
     },
     {
       "index": "2",
@@ -358,17 +358,17 @@
       "delta": {
         "document": "candidate",
         "operation": "replace",
-        "path": "/authority/reviewCompletedByIntake",
+        "path": "/authority/activationEffect",
         "variant": "06d42b4f"
       },
       "semanticDeltaCount": "1",
       "storageDeltaCount": "1",
       "controlInputCanonicalSha256": "59f75a2a6f681cb36fb8193991f9f0350bd4f3e5feb3bcc3c8a83d1d7b1b21b4",
-      "mutatedInputCanonicalSha256": "3bb1a82225debce4484def81df4640dd33f80c95ede99aae1eeb7499fbfd7673",
+      "mutatedInputCanonicalSha256": "e6d2d31385df128f481c69a34fecffe8b5962a382e5259b46954d0bf4b894def",
       "controlInputOrderedSha256": "653b8f50581cd0121107e918e3b539fee076c55e6da1c80d991bbdb66ab7047b",
-      "mutatedInputOrderedSha256": "d890583ae7b3869f8ee7910735b517a47b901ef6620945c2a4d7aa078260f09b",
+      "mutatedInputOrderedSha256": "bbcb51e6cce65849a142893ff4838cf853198c6b986ef5308be74deb674b682c",
       "controlResultCommitmentSha256": "4e9a4300692985b9d280e6ff08f6f15e6b1915168a5352130de37512b6e72caf",
-      "mutatedResultCommitmentSha256": "e92564635d3426c8e8a781b895d0aab93b68067ef47fe5817cbc5fb58ff1536d",
+      "mutatedResultCommitmentSha256": "27079c665cacef930309dcc994fbf300df5a9d1b75915aa6d067d79f60bc4603",
       "controlPrimaryGateResult": "PASS",
       "mutatedPrimaryGateResult": "FAIL",
       "controlVerificationReason": "INVALID_ATTESTATION_SIGNATURE",
@@ -385,7 +385,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "fixtureCommitmentSha256": "f1710459abd5c89bb6a243840683cdb3c1bd64703e1d74d6b7360662214203f5"
+      "fixtureCommitmentSha256": "d5fe4f323c6a09fc44924f8ee515bea0efe48b2b7ff54c430957a56b8f32c090"
     },
     {
       "index": "8",

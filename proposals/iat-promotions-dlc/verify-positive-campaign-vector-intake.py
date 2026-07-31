@@ -29,12 +29,18 @@ DEFAULT_FUZZ_VECTORS = ROOT / "positive-campaign-vector-intake-fuzz-vectors.v1.j
 DEFAULT_MINIMAL_COUNTEREXAMPLES = (
     ROOT / "positive-campaign-vector-intake-minimal-counterexamples.v1.json"
 )
+DEFAULT_REPRESENTATION_AUDIT = (
+    ROOT / "positive-campaign-vector-representation-audit.v1.json"
+)
 SCHEMA_PATH = ROOT / "positive-campaign-vector-intake.schema.v1.json"
 CAMPAIGN_VECTORS_PATH = ROOT / "campaign-envelope-verification-vectors.v1.json"
 EVALUATOR_PATH = ROOT / "positive-campaign-vector-intake.mjs"
 FUZZ_GENERATOR_PATH = ROOT / "generate-positive-campaign-vector-intake-fuzz-vectors.mjs"
 MINIMAL_GENERATOR_PATH = (
     ROOT / "generate-positive-campaign-vector-intake-minimal-counterexamples.mjs"
+)
+REPRESENTATION_GENERATOR_PATH = (
+    ROOT / "generate-positive-campaign-vector-representation-audit.mjs"
 )
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
 TARGET_KEYS = [
@@ -942,15 +948,23 @@ def replay_fuzz_case(
             "variant": word_hex,
         }
     elif family == "EXPECTED_TARGET":
-        shift = 1 + word % 7
-        entries = list(expected_target.items())
-        offset = shift % len(entries)
-        expected_target = dict(entries[offset:] + entries[:offset])
+        permutation_ordinal = 1 + index // len(FUZZ_FAMILIES)
+        remaining = list(expected_target.items())
+        permuted: list[tuple[str, Any]] = []
+        rank = permutation_ordinal
+        while remaining:
+            block_size = 1
+            for factor in range(2, len(remaining)):
+                block_size *= factor
+            selected = (rank // block_size) % len(remaining)
+            rank %= block_size
+            permuted.append(remaining.pop(selected))
+        expected_target = dict(permuted)
         mutation = {
             "document": "expectedTarget",
-            "operation": "rotate-keys",
+            "operation": "permute-keys",
             "path": "/",
-            "shift": shift,
+            "permutationOrdinal": permutation_ordinal,
             "variant": word_hex,
         }
     elif family == "PRIVATE_MATERIAL_EXCLUSION":
@@ -1015,17 +1029,11 @@ def replay_fuzz_case(
             "variant": word_hex,
         }
     elif family == "NON_AUTHORITY":
-        authority_fields = [
-            "receiptIssued",
-            "reviewCompletedByIntake",
-            "activationAuthorized",
-        ]
-        field = authority_fields[word % len(authority_fields)]
-        candidate["authority"][field] = True
+        candidate["authority"]["activationEffect"] = f"FUZZ_{word_hex}"
         mutation = {
             "document": "candidate",
             "operation": "replace",
-            "path": f"/authority/{field}",
+            "path": "/authority/activationEffect",
             "variant": word_hex,
         }
     elif family == "CRYPTOGRAPHIC_SIGNATURE":
@@ -1544,6 +1552,219 @@ def validate_minimal_counterexamples(artifact: Any) -> list[str]:
     return errors
 
 
+def replay_representation_audit(
+    base_vectors: dict[str, Any], schema: dict[str, Any]
+) -> dict[str, Any]:
+    replays = [
+        replay_fuzz_case(index, base_vectors, schema)
+        for index in range(FUZZ_CASE_COUNT)
+    ]
+    canonical_commitments = [
+        replay["record"]["inputCommitmentSha256"] for replay in replays
+    ]
+    ordered_commitments = [
+        ordered_input_sha256(replay["candidate"], replay["expectedTarget"])
+        for replay in replays
+    ]
+    canonical_groups: dict[str, list[int]] = {}
+    ordered_groups: dict[str, list[int]] = {}
+    for index, value in enumerate(canonical_commitments):
+        canonical_groups.setdefault(value, []).append(index)
+    for index, value in enumerate(ordered_commitments):
+        ordered_groups.setdefault(value, []).append(index)
+    records = []
+    for index, replay in enumerate(replays):
+        canonical_class = canonical_groups[canonical_commitments[index]]
+        ordered_class = ordered_groups[ordered_commitments[index]]
+        core = {
+            "index": str(index),
+            "family": replay["record"]["family"],
+            "sourceFuzzCaseName": replay["record"]["name"],
+            "sourceCaseCommitmentSha256": replay["record"]["caseCommitmentSha256"],
+            "canonicalInputSha256": canonical_commitments[index],
+            "orderedInputSha256": ordered_commitments[index],
+            "canonicalClassSize": str(len(canonical_class)),
+            "orderedClassSize": str(len(ordered_class)),
+            "canonicalCollisionExpected": replay["record"]["family"] == "EXPECTED_TARGET",
+            "orderedInputUnique": len(ordered_class) == 1,
+            "inputOrResultStored": False,
+            "accepted": False,
+            "receiptIssued": False,
+            "reviewCompleted": False,
+            "activationAuthorized": False,
+            "activationEffect": "NONE",
+        }
+        records.append(
+            {**core, "auditRecordCommitmentSha256": canonical_sha256(core)}
+        )
+    collision_classes = []
+    for canonical_input_sha256, indices in canonical_groups.items():
+        if len(indices) <= 1:
+            continue
+        families = []
+        for index in indices:
+            family = records[index]["family"]
+            if family not in families:
+                families.append(family)
+        collision_classes.append(
+            {
+                "canonicalInputSha256": canonical_input_sha256,
+                "classSize": str(len(indices)),
+                "indices": [str(index) for index in indices],
+                "families": families,
+                "orderedCommitmentsAllDistinct": len(
+                    {ordered_commitments[index] for index in indices}
+                )
+                == len(indices),
+            }
+        )
+    return {"records": records, "canonicalCollisionClasses": collision_classes}
+
+
+def validate_representation_audit(artifact: Any) -> list[str]:
+    errors: list[str] = []
+
+    def expect(condition: bool, message: str) -> None:
+        if not condition:
+            errors.append(message)
+
+    schema = read_json(SCHEMA_PATH)
+    base_vectors = read_json(DEFAULT_VECTORS)
+    fuzz_vectors = read_json(DEFAULT_FUZZ_VECTORS)
+    expect(artifact.get("auditVersion") == 1, "representation audit version drift")
+    expect(
+        artifact.get("auditId")
+        == "iat-promotions-dlc-positive-campaign-vector-representation-audit-v1",
+        "representation audit ID drift",
+    )
+    status = artifact.get("status", {})
+    expect(status.get("labels") == HOLD_LABELS, "representation HOLD labels drift")
+    expect(status.get("network") == "NONE", "representation audit must remain network-free")
+    expect(status.get("programId") is None, "representation audit claims a program ID")
+    expect(status.get("deployable") is False, "representation audit claims deployability")
+    expect(status.get("auditApplied") is False, "representation audit claims application")
+    expect(status.get("positiveVectorAvailable") is False, "representation audit claims a positive vector")
+    expect(
+        status.get("positiveVectorReviewCompleted") is False,
+        "representation audit claims review completion",
+    )
+    expect(
+        status.get("positiveVectorIntegrationBlocked") is True,
+        "representation audit released integration HOLD",
+    )
+    contract = artifact.get("contract", {})
+    expect(
+        contract.get("mode") == "CROSS_RUNTIME_REPRESENTATION_AUDIT_REJECTION_ONLY",
+        "representation mode drift",
+    )
+    expect(contract.get("caseCount") == FUZZ_CASE_COUNT, "representation case count drift")
+    expect(
+        contract.get("expectedCanonicalCollisionFamilies") == ["EXPECTED_TARGET"],
+        "representation expected collision family drift",
+    )
+    expect(
+        contract.get("expectedCanonicalCollisionClassCount") == 1,
+        "representation collision class contract drift",
+    )
+    expect(
+        contract.get("expectedCanonicalCollisionCaseCount") == 26,
+        "representation collision case contract drift",
+    )
+    expect(contract.get("orderedInputsMustBeUnique") is True, "ordered-input uniqueness disabled")
+    expect(contract.get("storesInputsOrFullResults") is False, "representation audit stores full evidence")
+    expect(contract.get("everyCaseRejected") is True, "representation audit claims acceptance")
+    for field in [
+        "validPositiveCampaignVectorPublished",
+        "signingMaterialIncluded",
+        "createsKeys",
+        "createsSignatures",
+        "issuesReviewReceipts",
+        "completesReview",
+        "activationAuthorized",
+    ]:
+        expect(contract.get(field) is False, f"representation contract {field} drift")
+    expect(contract.get("activationEffect") == "NONE", "representation activation effect drift")
+    sources = artifact.get("sources", {})
+    expect(
+        sources.get("fuzzVectors", {}).get("canonicalSha256")
+        == canonical_sha256(fuzz_vectors),
+        "representation fuzz-vector source digest drift",
+    )
+    expect(
+        sources.get("fuzzGenerator", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(FUZZ_GENERATOR_PATH),
+        "representation fuzz generator source digest drift",
+    )
+    expect(
+        sources.get("pythonVerifier", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(Path(__file__).resolve()),
+        "representation Python verifier source digest drift",
+    )
+    expect(
+        sources.get("generator", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(REPRESENTATION_GENERATOR_PATH),
+        "representation generator source digest drift",
+    )
+    replay = replay_representation_audit(base_vectors, schema)
+    records = artifact.get("records", [])
+    expect(isinstance(records, list) and len(records) == FUZZ_CASE_COUNT, "representation record count drift")
+    expect(records == replay["records"], "representation records do not independently replay")
+    expect(
+        artifact.get("canonicalCollisionClasses")
+        == replay["canonicalCollisionClasses"],
+        "representation collision classes do not independently replay",
+    )
+    ordered: set[str] = set()
+    canonical: set[str] = set()
+    for index, record in enumerate(records if isinstance(records, list) else []):
+        name = record.get("sourceFuzzCaseName", "UNKNOWN")
+        expect(record.get("index") == str(index), f"representation index drift at {index}")
+        expect(record.get("orderedClassSize") == "1", f"{name}: ordered input duplicated")
+        expect(record.get("orderedInputUnique") is True, f"{name}: ordered uniqueness drift")
+        expect(record.get("inputOrResultStored") is False, f"{name}: claims stored evidence")
+        expect(record.get("accepted") is False, f"{name}: claims acceptance")
+        expect(record.get("receiptIssued") is False, f"{name}: claims receipt issuance")
+        expect(record.get("reviewCompleted") is False, f"{name}: claims review completion")
+        expect(record.get("activationAuthorized") is False, f"{name}: claims activation authority")
+        expect(record.get("activationEffect") == "NONE", f"{name}: claims activation effect")
+        expect(record.get("orderedInputSha256") not in ordered, f"{name}: repeats ordered commitment")
+        ordered.add(record.get("orderedInputSha256"))
+        canonical.add(record.get("canonicalInputSha256"))
+        if record.get("family") == "EXPECTED_TARGET":
+            expect(record.get("canonicalCollisionExpected") is True, f"{name}: expected collision hidden")
+            expect(record.get("canonicalClassSize") == "26", f"{name}: collision class size drift")
+        else:
+            expect(record.get("canonicalCollisionExpected") is False, f"{name}: unexpected collision claimed")
+            expect(record.get("canonicalClassSize") == "1", f"{name}: unexpected canonical collision")
+    collision_classes = artifact.get("canonicalCollisionClasses", [])
+    expect(len(collision_classes) == 1, "representation collision class count drift")
+    if collision_classes:
+        collision = collision_classes[0]
+        expect(collision.get("classSize") == "26", "representation collision size drift")
+        expect(collision.get("families") == ["EXPECTED_TARGET"], "representation collision family drift")
+        expect(
+            collision.get("orderedCommitmentsAllDistinct") is True,
+            "ordered commitments do not split canonical collision",
+        )
+    summary = artifact.get("summary", {})
+    expect(summary.get("caseCount") == "256", "representation summary case count drift")
+    expect(summary.get("canonicalUniqueCount") == "231", "representation canonical unique count drift")
+    expect(summary.get("orderedUniqueCount") == "256", "representation ordered unique count drift")
+    expect(summary.get("canonicalCollisionClassCount") == "1", "representation collision class drift")
+    expect(summary.get("canonicalCollisionCaseCount") == "26", "representation collision case drift")
+    expect(summary.get("unexpectedCanonicalCollisionCount") == "0", "unexpected canonical collision reported")
+    expect(summary.get("duplicateOrderedInputCount") == "0", "duplicate ordered input reported")
+    expect(summary.get("allRejected") is True, "representation summary rejection drift")
+    expect(len(canonical) == 231, "representation calculated canonical unique count drift")
+    expect(len(ordered) == 256, "representation calculated ordered unique count drift")
+    expect(
+        summary.get("auditRecordSetCommitmentSha256")
+        == canonical_sha256([record["auditRecordCommitmentSha256"] for record in records]),
+        "representation record-set commitment drift",
+    )
+    return errors
+
+
 def render_result(valid: bool, errors: list[str], scenario_count: int, output_format: str) -> str:
     result = {
         "valid": valid,
@@ -1651,6 +1872,42 @@ def render_minimal_result(
     )
 
 
+def render_representation_result(
+    valid: bool,
+    errors: list[str],
+    case_count: int,
+    canonical_unique_count: int,
+    ordered_unique_count: int,
+    record_set_commitment: str | None,
+    output_format: str,
+) -> str:
+    result = {
+        "valid": valid,
+        "errors": errors,
+        "caseCount": case_count,
+        "canonicalUniqueCount": canonical_unique_count,
+        "orderedUniqueCount": ordered_unique_count,
+        "expectedCanonicalCollisionClassCount": 1,
+        "nodeAndPythonMatchExactly": valid,
+        "allRejected": valid,
+        "auditRecordSetCommitmentSha256": record_set_commitment,
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+    if output_format == "json":
+        return json.dumps(result, ensure_ascii=False, indent=2)
+    if valid:
+        return (
+            f"Independent representation audit passed: {case_count} ordered inputs "
+            f"are unique across {canonical_unique_count} canonical classes."
+        )
+    return "Independent representation audit failed:\n" + "\n".join(
+        f"- {error}" for error in errors
+    )
+
+
 def main(argv: list[str] | None = None) -> int:
     try:
         parser = OfflineArgumentParser(description=__doc__)
@@ -1664,10 +1921,16 @@ def main(argv: list[str] | None = None) -> int:
             type=Path,
             default=DEFAULT_MINIMAL_COUNTEREXAMPLES,
         )
+        parser.add_argument(
+            "--representation-audit",
+            type=Path,
+            default=DEFAULT_REPRESENTATION_AUDIT,
+        )
         parser.add_argument("--verify-vectors", action="store_true")
         parser.add_argument("--verify-differential-vectors", action="store_true")
         parser.add_argument("--verify-fuzz-vectors", action="store_true")
         parser.add_argument("--verify-minimal-counterexamples", action="store_true")
+        parser.add_argument("--verify-representation-audit", action="store_true")
         parser.add_argument("--format", choices=["text", "json"], default="text")
         args = parser.parse_args(argv)
         selected_modes = sum([
@@ -1675,11 +1938,13 @@ def main(argv: list[str] | None = None) -> int:
             args.verify_differential_vectors,
             args.verify_fuzz_vectors,
             args.verify_minimal_counterexamples,
+            args.verify_representation_audit,
         ])
         if selected_modes != 1:
             raise CliUsageError(
                 "exactly one of --verify-vectors, --verify-differential-vectors, "
-                "--verify-fuzz-vectors, or --verify-minimal-counterexamples is required"
+                "--verify-fuzz-vectors, --verify-minimal-counterexamples, or "
+                "--verify-representation-audit is required"
             )
         if args.verify_vectors:
             vectors = read_json(args.vectors)
@@ -1690,9 +1955,12 @@ def main(argv: list[str] | None = None) -> int:
         elif args.verify_fuzz_vectors:
             vectors = read_json(args.fuzz_vectors)
             errors = validate_fuzz_bundle(vectors)
-        else:
+        elif args.verify_minimal_counterexamples:
             vectors = read_json(args.minimal_counterexamples)
             errors = validate_minimal_counterexamples(vectors)
+        else:
+            vectors = read_json(args.representation_audit)
+            errors = validate_representation_audit(vectors)
     except (CliUsageError, OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
         print(f"Unable to read public intake vectors: {error}", file=sys.stderr)
         return 1
@@ -1706,7 +1974,7 @@ def main(argv: list[str] | None = None) -> int:
         fuzz_count = len(fuzz_cases) if isinstance(fuzz_cases, list) else 0
         merkle_root = vectors.get("summary", {}).get("caseCommitmentMerkleRootSha256")
         print(render_fuzz_result(not errors, errors, fuzz_count, merkle_root, args.format))
-    else:
+    elif args.verify_minimal_counterexamples:
         fixtures = vectors.get("fixtures", []) if isinstance(vectors, dict) else []
         fixture_count = len(fixtures) if isinstance(fixtures, list) else 0
         set_commitment = vectors.get("summary", {}).get("fixtureSetCommitmentSha256")
@@ -1715,6 +1983,18 @@ def main(argv: list[str] | None = None) -> int:
             errors,
             fixture_count,
             set_commitment,
+            args.format,
+        ))
+    else:
+        records = vectors.get("records", []) if isinstance(vectors, dict) else []
+        summary = vectors.get("summary", {}) if isinstance(vectors, dict) else {}
+        print(render_representation_result(
+            not errors,
+            errors,
+            len(records) if isinstance(records, list) else 0,
+            int(summary.get("canonicalUniqueCount", 0)),
+            int(summary.get("orderedUniqueCount", 0)),
+            summary.get("auditRecordSetCommitmentSha256"),
             args.format,
         ))
     return 0 if not errors else 2

@@ -68,3 +68,9 @@ signature, make no network call, and have no deployment or claim path.
 
 One deterministic semantic counterexample per family is reduced and replayed
 in [`POSITIVE_CAMPAIGN_VECTOR_MINIMAL_COUNTEREXAMPLES.md`](./POSITIVE_CAMPAIGN_VECTOR_MINIMAL_COUNTEREXAMPLES.md).
+
+All 256 generated representations are separately committed and collision-
+audited in
+[`POSITIVE_CAMPAIGN_VECTOR_REPRESENTATION_AUDIT.md`](./POSITIVE_CAMPAIGN_VECTOR_REPRESENTATION_AUDIT.md).
+That audit requires every ordered input to be unique and permits only the
+expected canonical equivalence class created by target-key permutations.
