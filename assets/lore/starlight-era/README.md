@@ -700,6 +700,13 @@ rejected and regenerated.
 | **Antananarivo Independence Avenue Prism Intercept**<br><img src="572-madagascar-antananarivo-independence-avenue-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a crimson prism above Antananarivo's Avenue de l'Indépendance and terraced high city"> | **Rova of Antananarivo Light Cipher**<br><img src="573-madagascar-rova-antananarivo-light-cipher.png" width="420" alt="The trio sealing a cobalt archive prism outside the Rova of Antananarivo on Analamanga hill"> |
 | **Tsingy de Bemaraha Data Extraction**<br><img src="574-madagascar-tsingy-bemaraha-data-extraction.png" width="420" alt="The trio restoring an environmental-data beacon above the limestone pinnacles of Tsingy de Bemaraha"> | **Avenue of the Baobabs Night Relay**<br><img src="575-madagascar-avenue-baobabs-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald signal relay beside the Avenue of the Baobabs near Morondava"> |
 
+## World Series - Africa - Batch 139: Côte d'Ivoire
+
+| | |
+|---|---|
+| **Abidjan Plateau Lagoon Intercept**<br><img src="576-cote-divoire-abidjan-plateau-lagoon-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a gold prism above Abidjan's Plateau skyline and Ébrié Lagoon"> | **Grand-Bassam Colonial Quarter Cipher**<br><img src="577-cote-divoire-grand-bassam-colonial-quarter-cipher.png" width="420" alt="The trio sealing a scarlet archive prism among Grand-Bassam's historic pastel arcades"> |
+| **Taï Rainforest Data Extraction**<br><img src="578-cote-divoire-tai-rainforest-data-extraction.png" width="420" alt="The trio restoring a protected forest-data beacon above Taï rainforest buttress roots and emerald canopy"> | **San-Pédro Port Night Relay**<br><img src="579-cote-divoire-san-pedro-port-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an amber signal relay beside San-Pédro's Atlantic port at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
