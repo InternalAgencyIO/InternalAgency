@@ -293,9 +293,12 @@ security audit or deployment approval.
 | One contention failure masks another when both are present | `every combined candidate exposes exactly both failures...`; `every combined candidate and each isolated constituent reject` | All 28 unordered pairs expose exactly two gates in fixed precedence; both isolated constituents and the combined candidate reject in Node and Python |
 | Pairwise contention evidence publishes a combined candidate or claims operational authority | `published evidence stores descriptors and commitments, never candidates`; composition HOLD contract | Artifact stores descriptors, results, and commitments only; network stays `NONE` and every wallet, transaction, receipt, review, deployment, and activation capability remains false |
 | Pairwise evidence or its gate order changes under stale cross-runtime output | `independent Python rejects changed composition evidence with exit 2`; composition validator | Python independently reconstructs all 28 candidates and exits `2` when compact evidence or the shared commitment drifts |
+| A purported two-gate case is not minimal because one removed mutation leaves both gates or releases the candidate | `all 56 removal candidates expose only the remaining gate and reject` | Each mutation is removed in turn; Node and Python require exactly one named remaining gate, continued rejection, and the committed reduced-candidate digest |
+| Composition evidence adds an unknown candidate, state, trace, or authority field | `closed schema rejects unknown root, case, and removal properties`; `closed schema rejects released status and operational authority` | Closed Draft-07 objects and constant HOLD fields reject the extra or released claim before semantic replay |
 
 ## Next matrix expansion
 
-- add a closed compact schema and independent rejection-minimization proof for
-  the 28-case composition artifact. Preserve runtime-only candidates and every
-  network, wallet, review, deployment, and activation HOLD.
+- add a deterministic closed-schema mutation corpus for the composition
+  artifact with exact Node/Python pointer diagnostics. Preserve runtime-only
+  candidates and every network, wallet, review, deployment, and activation
+  HOLD.

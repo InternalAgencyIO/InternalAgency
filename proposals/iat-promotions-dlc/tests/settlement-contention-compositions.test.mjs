@@ -79,6 +79,9 @@ test("independent Python reproduces the composition commitment", () => {
   assert.equal(report.valid, true);
   assert.equal(report.compositionCaseCount, 28);
   assert.equal(report.commonReplayCommitmentSha256, artifact.summary.commonReplayCommitmentSha256);
+  assert.equal(report.removalReplayCommitmentSha256, artifact.summary.removalReplayCommitmentSha256);
+  assert.equal(report.removalCheckCount, 56);
+  assert.equal(report.allRemovalsMinimal, true);
 });
 
 test("independent Python rejects changed composition evidence with exit 2", () => {
@@ -112,6 +115,7 @@ test("composition files are review-manifest covered", () => {
   const expected = {
     "generate-settlement-contention-composition-vectors.mjs": "GENERATOR",
     "settlement-contention-composition-vectors.v1.json": "ARTIFACT",
+    "settlement-contention-composition-vectors.schema.v1.json": "ARTIFACT",
     "settlement-contention-compositions.mjs": "SUPPORTING_SOURCE",
     "tests/settlement-contention-compositions.test.mjs": "TEST",
     "validate-settlement-contention-composition-vectors.mjs": "VALIDATOR",

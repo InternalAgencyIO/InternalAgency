@@ -35,7 +35,8 @@ The companion compact mutation corpus exercises sixteen structure, status,
 capability, authority, economics, semantic replay, commitment, and source-
 binding failures in both runtimes. See `SETTLEMENT_CONTENTION_MUTATIONS.md`.
 Its composition companion covers all 28 unordered pairs of those gates, with
-fixed precedence and independent no-masking checks. See
+fixed precedence, a closed Draft-07 shape, and 56 independent one-removal
+minimality checks. See
 `SETTLEMENT_CONTENTION_COMPOSITIONS.md`.
 
 ## Reproduce locally
@@ -49,6 +50,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-compositions.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

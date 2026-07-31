@@ -9,14 +9,17 @@ import { fileURLToPath } from "node:url";
 
 import { canonicalSha256 } from "./compose-program-interface-preview.mjs";
 import { generateSettlementContentionCompositionVectors } from "./generate-settlement-contention-composition-vectors.mjs";
+import { validateJsonSchemaSubset } from "./json-schema-subset.mjs";
 import {
   COMPOSITION_GATE_PRECEDENCE,
   CONTENTION_COMPOSITION_DEFINITIONS,
   evaluateContentionComposition,
+  evaluateContentionCompositionRemoval,
 } from "./settlement-contention-compositions.mjs";
 import { loadSettlementContentionVectorBundle } from "./validate-settlement-contention-vectors.mjs";
 
 const ARTIFACT_PATH = fileURLToPath(new URL("./settlement-contention-composition-vectors.v1.json", import.meta.url));
+const SCHEMA_PATH = fileURLToPath(new URL("./settlement-contention-composition-vectors.schema.v1.json", import.meta.url));
 const MUTATIONS_PATH = fileURLToPath(new URL("./settlement-contention-mutations.mjs", import.meta.url));
 const EVALUATOR_PATH = fileURLToPath(new URL("./settlement-contention-compositions.mjs", import.meta.url));
 const GENERATOR_PATH = fileURLToPath(new URL("./generate-settlement-contention-composition-vectors.mjs", import.meta.url));
@@ -29,6 +32,7 @@ const normalizedTextSha256 = (value) => sha256Hex(value.replace(/\r\n?/g, "\n"))
 export function loadSettlementContentionCompositionVectorBundle() {
   return {
     artifact: JSON.parse(readFileSync(ARTIFACT_PATH, "utf8")),
+    schema: JSON.parse(readFileSync(SCHEMA_PATH, "utf8")),
     mutationSource: readFileSync(MUTATIONS_PATH, "utf8"),
     evaluatorSource: readFileSync(EVALUATOR_PATH, "utf8"),
     generatorSource: readFileSync(GENERATOR_PATH, "utf8"),
@@ -39,14 +43,18 @@ export function loadSettlementContentionCompositionVectorBundle() {
 export function validateSettlementContentionCompositionVectors(
   compositionBundle = loadSettlementContentionCompositionVectorBundle(),
 ) {
-  const { artifact, mutationSource, evaluatorSource, generatorSource, pythonSource } = compositionBundle;
+  const { artifact, schema, mutationSource, evaluatorSource, generatorSource, pythonSource } = compositionBundle;
   const errors = [];
   const expect = (condition, message) => { if (!condition) errors.push(message); };
   expect(artifact?.vectorVersion === 1, "composition version drift");
   expect(artifact?.vectorId === "iat-promotions-dlc-settlement-contention-compositions-v1", "composition ID drift");
   expect(JSON.stringify(artifact?.status) === JSON.stringify({ labels: HOLD_LABELS, network: "NONE", programId: null, deployable: false, vectorsApplied: false }), "composition HOLD status drift");
+  for (const schemaError of validateJsonSchemaSubset(schema, artifact)) {
+    errors.push(`composition schema ${schemaError.instancePath || "/"}: ${schemaError.message}`);
+  }
   expect(JSON.stringify(generateSettlementContentionCompositionVectors()) === JSON.stringify(artifact), "compositions do not deterministically regenerate");
   const sources = artifact?.sources ?? {};
+  expect(sources.closedSchema?.canonicalSha256 === canonicalSha256(schema), "composition schema source digest drift");
   expect(sources.mutationCatalog?.normalizedTextSha256 === normalizedTextSha256(mutationSource), "composition mutation source digest drift");
   expect(sources.nodeEvaluator?.normalizedTextSha256 === normalizedTextSha256(evaluatorSource), "composition evaluator source digest drift");
   expect(sources.generator?.normalizedTextSha256 === normalizedTextSha256(generatorSource), "composition generator source digest drift");
@@ -56,6 +64,8 @@ export function validateSettlementContentionCompositionVectors(
   expect(contract.caseCount === 28, "composition case-count drift");
   expect(JSON.stringify(contract.gatePrecedence) === JSON.stringify(COMPOSITION_GATE_PRECEDENCE), "composition precedence drift");
   expect(contract.unorderedPairsComplete === true, "composition pair coverage drift");
+  expect(contract.removalChecksPerPair === 2, "composition removal-check width drift");
+  expect(contract.removalChecksComplete === true, "composition removal-check coverage drift");
   expect(contract.mutatedCandidatesRuntimeOnly === true, "composition publishes candidates");
   for (const field of ["storesExpandedState", "storesExpandedSchedules", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]) {
     expect(contract[field] === false, `composition contract ${field} drift`);
@@ -66,6 +76,7 @@ export function validateSettlementContentionCompositionVectors(
   const cases = Array.isArray(artifact?.cases) ? artifact.cases : [];
   expect(cases.length === CONTENTION_COMPOSITION_DEFINITIONS.length, "composition case length drift");
   const commonRecords = [];
+  const removalRecords = [];
   for (const [index, definition] of CONTENTION_COMPOSITION_DEFINITIONS.entries()) {
     const published = cases[index];
     if (!published) continue;
@@ -79,6 +90,22 @@ export function validateSettlementContentionCompositionVectors(
     expect(published.expectedAccepted === false, `${definition.caseId} releases a candidate`);
     expect(published.candidateCommitmentSha256 === result.commonReplayRecord.candidateCommitmentSha256, `${definition.caseId} candidate commitment drift`);
     expect(published.nodeSemanticErrorCount === String(result.semanticErrors.length), `${definition.caseId} Node error-count drift`);
+    const removalChecks = Array.isArray(published.removalChecks) ? published.removalChecks : [];
+    expect(removalChecks.length === 2, `${definition.caseId} removal-check count drift`);
+    for (const [removalIndex, removedGate] of definition.expectedGates.entries()) {
+      const check = removalChecks[removalIndex];
+      if (!check) continue;
+      const removal = evaluateContentionCompositionRemoval(baseBundle, definition, removedGate);
+      const expectedCheck = {
+        removedGate: removal.removedGate,
+        remainingGate: removal.remainingGate,
+        observedGates: removal.observedGates,
+        candidateCommitmentSha256: removal.candidateCommitmentSha256,
+        expectedAccepted: false,
+      };
+      expect(JSON.stringify(check) === JSON.stringify(expectedCheck), `${definition.caseId} removal proof drift: ${removedGate}`);
+      removalRecords.push({ caseId: definition.caseId, ...expectedCheck });
+    }
     for (const field of ["runtimeCandidateStored", "expandedStateStored", "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]) {
       expect(published[field] === false, `${definition.caseId} ${field} drift`);
     }
@@ -90,10 +117,13 @@ export function validateSettlementContentionCompositionVectors(
   }
   const summary = artifact?.summary ?? {};
   expect(summary.caseCount === "28", "composition summary count drift");
+  expect(summary.removalCheckCount === "56", "composition removal summary count drift");
   expect(summary.allPairsObservedExactly === true, "composition gate observation drift");
   expect(summary.noFailureMasked === true, "composition masking drift");
+  expect(summary.allRemovalsMinimal === true, "composition removal minimality drift");
   expect(summary.allRejected === true, "composition summary releases a candidate");
   expect(summary.commonReplayCommitmentSha256 === canonicalSha256(commonRecords), "composition common replay drift");
+  expect(summary.removalReplayCommitmentSha256 === canonicalSha256(removalRecords), "composition removal replay drift");
   expect(summary.caseSetCommitmentSha256 === canonicalSha256(cases.map((item) => item.caseCommitmentSha256)), "composition case-set drift");
   for (const field of ["runtimeCandidateStored", "expandedStateStored", "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]) {
     expect(summary[field] === false, `composition summary ${field} drift`);

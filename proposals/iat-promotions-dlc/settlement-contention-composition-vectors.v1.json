@@ -19,21 +19,25 @@
       "path": "settlement-contention-vectors.v1.json",
       "canonicalSha256": "00c19fe102449dfb5e12c8bcf458c6b3c11f953049efdee1cf388ed1da1caaa6"
     },
+    "closedSchema": {
+      "path": "settlement-contention-composition-vectors.schema.v1.json",
+      "canonicalSha256": "966b9822e2aa940dc8241500b4d33b53bc2a169dca1ea679a66b1cac22f5f830"
+    },
     "mutationCatalog": {
       "path": "settlement-contention-mutations.mjs",
       "normalizedTextSha256": "08c4b7b621f56254366a36485e8bd6851905a3ed0dfa6dcf9e5544707389d094"
     },
     "nodeEvaluator": {
       "path": "settlement-contention-compositions.mjs",
-      "normalizedTextSha256": "6bf2ad5abadf5559988b7c17415734fc49ac961bad78e6ff569af50bacaa4959"
+      "normalizedTextSha256": "4212b16accbd66525c693fed9cf3c5dcdea5fe8e172c76be1791265a3055fd54"
     },
     "pythonVerifier": {
       "path": "verify-settlement-contention-vectors.py",
-      "normalizedTextSha256": "8d5634872ddb9e82e1358c62d1e8a5fc9871672f37c4db6e4a191c7bc0faf542"
+      "normalizedTextSha256": "e71c6e61f54d75d1d0abc147afa1cc42762a36f402ff303b9be58c9016a274d1"
     },
     "generator": {
       "path": "generate-settlement-contention-composition-vectors.mjs",
-      "normalizedTextSha256": "879099bd842d7ce8edc7cb05dc9687ecf65b60111c053c8013835a4fa3a90522"
+      "normalizedTextSha256": "eb02693bccdcea7cca170d4145226edcbb66e71ca4d0c3ebcd5edf832114f709"
     }
   },
   "contract": {
@@ -50,6 +54,8 @@
       "SOURCE_BINDING"
     ],
     "unorderedPairsComplete": true,
+    "removalChecksPerPair": 2,
+    "removalChecksComplete": true,
     "mutatedCandidatesRuntimeOnly": true,
     "storesExpandedState": false,
     "storesExpandedSchedules": false,
@@ -66,11 +72,14 @@
   },
   "summary": {
     "caseCount": "28",
+    "removalCheckCount": "56",
     "allPairsObservedExactly": true,
     "noFailureMasked": true,
+    "allRemovalsMinimal": true,
     "allRejected": true,
     "commonReplayCommitmentSha256": "4584f45b37ca33a07b5c85e68643d11ce41d4e44e3f4174d36052788f55a2faa",
-    "caseSetCommitmentSha256": "20b037b16e666635cb53d09f9559bbaee3edfc5450767fe36a385910c1ccb6df",
+    "removalReplayCommitmentSha256": "951bd99fd43aa9f519f6cf1b817debba1e3b1b22430c96c0c683f21f1831be1d",
+    "caseSetCommitmentSha256": "7e902e193336b51b8527b909d56edec972f254e1b803352dd436960a4fe9bef6",
     "runtimeCandidateStored": false,
     "expandedStateStored": false,
     "expandedScheduleStored": false,
@@ -102,6 +111,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "d7ea48e54b02cc30cbcfb7cb0ebf390500718a05c4d6b2e932af0257cc7bf895",
       "nodeSemanticErrorCount": "2",
+      "removalChecks": [
+        {
+          "removedGate": "STRUCTURE",
+          "remainingGate": "STATUS",
+          "observedGates": [
+            "STATUS"
+          ],
+          "candidateCommitmentSha256": "25a0bcffc370fcd9514c369b3ec892acdafe91d6b8140a393b2f7e5e97193674",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "STATUS",
+          "remainingGate": "STRUCTURE",
+          "observedGates": [
+            "STRUCTURE"
+          ],
+          "candidateCommitmentSha256": "83f4e5cfe311da9f9cf58e4e636e22f4e41e94695c6f01f2b0dd57cf9b36022f",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -109,7 +138,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "fea8ce009b7266460128025a8a3610dc7bb8c8635fce77b42f325d554ab95989"
+      "caseCommitmentSha256": "b0b50837c47d369bfc4ad4ebebc6d8fda49a58a8f9f71e1f6feff493ee57bc3a"
     },
     {
       "caseId": "STRUCTURE__CAPABILITY",
@@ -133,6 +162,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "6faa2549addbabf6bcb018295be8aef3b70d3d3238e3636206f1a4251d41162a",
       "nodeSemanticErrorCount": "2",
+      "removalChecks": [
+        {
+          "removedGate": "STRUCTURE",
+          "remainingGate": "CAPABILITY",
+          "observedGates": [
+            "CAPABILITY"
+          ],
+          "candidateCommitmentSha256": "4d8a5e3215e77716ab9f29158a8d36180c9a2afa40722e348f2ad67dfeec152d",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "CAPABILITY",
+          "remainingGate": "STRUCTURE",
+          "observedGates": [
+            "STRUCTURE"
+          ],
+          "candidateCommitmentSha256": "83f4e5cfe311da9f9cf58e4e636e22f4e41e94695c6f01f2b0dd57cf9b36022f",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -140,7 +189,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "9257d67999a3714845b8c311296b20e178940d09a85b085a3c2a3c405be1a04b"
+      "caseCommitmentSha256": "22fa4a578ca4f8cba84ae558a3066dd9d3b1d75df49f47174e03c44c2aa73e45"
     },
     {
       "caseId": "STRUCTURE__AUTHORITY",
@@ -164,6 +213,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "8048b3db415325b5c3d9db1a44b556ca193de9de6f05a6c85de5b302117f6e05",
       "nodeSemanticErrorCount": "2",
+      "removalChecks": [
+        {
+          "removedGate": "STRUCTURE",
+          "remainingGate": "AUTHORITY",
+          "observedGates": [
+            "AUTHORITY"
+          ],
+          "candidateCommitmentSha256": "9b6b8ca758bab7920b55ad9ec324048dbcf902532f214f7ff28bc1913ed2893c",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "AUTHORITY",
+          "remainingGate": "STRUCTURE",
+          "observedGates": [
+            "STRUCTURE"
+          ],
+          "candidateCommitmentSha256": "83f4e5cfe311da9f9cf58e4e636e22f4e41e94695c6f01f2b0dd57cf9b36022f",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -171,7 +240,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "941178a8bed007d4363ee51197b719700d98a87584175e91c4edec199eb478d8"
+      "caseCommitmentSha256": "94482d946f88d000e94c90d902e06bfd71493e6edfb8fb5e82e5e2ba63b4f3b6"
     },
     {
       "caseId": "STRUCTURE__ECONOMICS",
@@ -195,6 +264,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "5ac6bec57b108e15a70df275d3ce4bdbabbd228e9c4b3a35e268227be2870ab9",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "STRUCTURE",
+          "remainingGate": "ECONOMICS",
+          "observedGates": [
+            "ECONOMICS"
+          ],
+          "candidateCommitmentSha256": "813201502c29003a3393bcbbc65d5c1119865cf4256b66b05cf383cdfa063998",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "ECONOMICS",
+          "remainingGate": "STRUCTURE",
+          "observedGates": [
+            "STRUCTURE"
+          ],
+          "candidateCommitmentSha256": "83f4e5cfe311da9f9cf58e4e636e22f4e41e94695c6f01f2b0dd57cf9b36022f",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -202,7 +291,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "aed53e638c16b09fd7dd21d23ac419e664b2e589479aaafefad89f8ea416ba3b"
+      "caseCommitmentSha256": "9e3f58a2fb9d7e0e4c86ab2096db515a6d1b1606dab758e1b177dd8722d165ec"
     },
     {
       "caseId": "STRUCTURE__SEMANTIC_REPLAY",
@@ -226,6 +315,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "8879eb2c1a1f3e901169288c018c56ab5438b5e51c556617afe5800759824278",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "STRUCTURE",
+          "remainingGate": "SEMANTIC_REPLAY",
+          "observedGates": [
+            "SEMANTIC_REPLAY"
+          ],
+          "candidateCommitmentSha256": "ac97cd629a8e3b39dfaaac4a6b17359bf852a84a5c84f07af4c4bcec5eefb6a6",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SEMANTIC_REPLAY",
+          "remainingGate": "STRUCTURE",
+          "observedGates": [
+            "STRUCTURE"
+          ],
+          "candidateCommitmentSha256": "83f4e5cfe311da9f9cf58e4e636e22f4e41e94695c6f01f2b0dd57cf9b36022f",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -233,7 +342,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "34e4566040b5464e06b370836dee9b6df66134d41ab76b6fefe28b9e7a0571e1"
+      "caseCommitmentSha256": "f7721a0c3cca75b2f967b1e85f72953e8b3e5ce1d0bedd6dbb9eaf11736f4da8"
     },
     {
       "caseId": "STRUCTURE__COMMITMENT",
@@ -257,6 +366,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "73874c393f25116e3edd5bd9b9acf6da4a6eb4543c07460c31e0cccfdcee723e",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "STRUCTURE",
+          "remainingGate": "COMMITMENT",
+          "observedGates": [
+            "COMMITMENT"
+          ],
+          "candidateCommitmentSha256": "b0603974e3c38540470f9a3929ae7e864ab6fb66398bc634f215bf06da905f71",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "COMMITMENT",
+          "remainingGate": "STRUCTURE",
+          "observedGates": [
+            "STRUCTURE"
+          ],
+          "candidateCommitmentSha256": "83f4e5cfe311da9f9cf58e4e636e22f4e41e94695c6f01f2b0dd57cf9b36022f",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -264,7 +393,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "4774a75eea80c98748098fccc73dae2fd2e1b816304823292d1153f06810c3ad"
+      "caseCommitmentSha256": "e3547cdf2a3cd9f6bf6e12434ee221fbd2d639a4a8433757086f26e2405b743e"
     },
     {
       "caseId": "STRUCTURE__SOURCE_BINDING",
@@ -288,6 +417,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "c4e4acd9dd2d95f35ae08794f566c774938e29d304e6e8a0018ebae253731155",
       "nodeSemanticErrorCount": "2",
+      "removalChecks": [
+        {
+          "removedGate": "STRUCTURE",
+          "remainingGate": "SOURCE_BINDING",
+          "observedGates": [
+            "SOURCE_BINDING"
+          ],
+          "candidateCommitmentSha256": "704b184736bc7c9e397148b1ceea59c684cec412f4d5a39098d06acce0ec6772",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SOURCE_BINDING",
+          "remainingGate": "STRUCTURE",
+          "observedGates": [
+            "STRUCTURE"
+          ],
+          "candidateCommitmentSha256": "83f4e5cfe311da9f9cf58e4e636e22f4e41e94695c6f01f2b0dd57cf9b36022f",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -295,7 +444,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "b6859bc45947230af58e6de9d380930e072c8972f7ff165e2bef52b700b7d44f"
+      "caseCommitmentSha256": "8a7af69afeb1c4ea09c665a39d48ab2e4bcf4f6c1a4908f5f8e9070355475c81"
     },
     {
       "caseId": "STATUS__CAPABILITY",
@@ -319,6 +468,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "767eb0cc461f4919b8f553988a8e4a0ea7f666252e58926080aaff2018f9a66c",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "STATUS",
+          "remainingGate": "CAPABILITY",
+          "observedGates": [
+            "CAPABILITY"
+          ],
+          "candidateCommitmentSha256": "4d8a5e3215e77716ab9f29158a8d36180c9a2afa40722e348f2ad67dfeec152d",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "CAPABILITY",
+          "remainingGate": "STATUS",
+          "observedGates": [
+            "STATUS"
+          ],
+          "candidateCommitmentSha256": "25a0bcffc370fcd9514c369b3ec892acdafe91d6b8140a393b2f7e5e97193674",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -326,7 +495,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "53012cf4a4798c3feb57e502bb5cd2464e327b90b9daaa0f8768e9a95c675924"
+      "caseCommitmentSha256": "266a39855b4cd3eda3e8be9d8b34a326066a4ac07b49fab29171db1fa77768df"
     },
     {
       "caseId": "STATUS__AUTHORITY",
@@ -350,6 +519,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "91e986d481ece30fb1789fbc5f4813c31361565dbb89bedd997a3f639193fe51",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "STATUS",
+          "remainingGate": "AUTHORITY",
+          "observedGates": [
+            "AUTHORITY"
+          ],
+          "candidateCommitmentSha256": "9b6b8ca758bab7920b55ad9ec324048dbcf902532f214f7ff28bc1913ed2893c",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "AUTHORITY",
+          "remainingGate": "STATUS",
+          "observedGates": [
+            "STATUS"
+          ],
+          "candidateCommitmentSha256": "25a0bcffc370fcd9514c369b3ec892acdafe91d6b8140a393b2f7e5e97193674",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -357,7 +546,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "76037e468a2f03fef6c02ab9ff7d99b80ac50dfe29f395ae1a1be57a4767f1a5"
+      "caseCommitmentSha256": "6ba3d8bf3782d4dffa08ad4ee99e923b9de28fc3ab25fcab36d781ad4b0b7022"
     },
     {
       "caseId": "STATUS__ECONOMICS",
@@ -381,6 +570,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "0ea959fe7656b182ce0343b09276724f69f35cf9c9d60fb47dc65607bb0060f3",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "STATUS",
+          "remainingGate": "ECONOMICS",
+          "observedGates": [
+            "ECONOMICS"
+          ],
+          "candidateCommitmentSha256": "813201502c29003a3393bcbbc65d5c1119865cf4256b66b05cf383cdfa063998",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "ECONOMICS",
+          "remainingGate": "STATUS",
+          "observedGates": [
+            "STATUS"
+          ],
+          "candidateCommitmentSha256": "25a0bcffc370fcd9514c369b3ec892acdafe91d6b8140a393b2f7e5e97193674",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -388,7 +597,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "b75a646ceb73cd949fac9c6fa4362ecf79838388a13c6780636ea48815a60e12"
+      "caseCommitmentSha256": "d9138cf00b49aee1644ebb4618929bd69b3c7db0d2f80bc46fcb9acc42b86f50"
     },
     {
       "caseId": "STATUS__SEMANTIC_REPLAY",
@@ -412,6 +621,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "56ad175cd75a49e719fbb6b89f46f5531e081275153a9a6ea4347d9dbbddc7c8",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "STATUS",
+          "remainingGate": "SEMANTIC_REPLAY",
+          "observedGates": [
+            "SEMANTIC_REPLAY"
+          ],
+          "candidateCommitmentSha256": "ac97cd629a8e3b39dfaaac4a6b17359bf852a84a5c84f07af4c4bcec5eefb6a6",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SEMANTIC_REPLAY",
+          "remainingGate": "STATUS",
+          "observedGates": [
+            "STATUS"
+          ],
+          "candidateCommitmentSha256": "25a0bcffc370fcd9514c369b3ec892acdafe91d6b8140a393b2f7e5e97193674",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -419,7 +648,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "a3e7337555c6f3cb90f2b86f49e68a438d321291a91b5653f3689cc615290f85"
+      "caseCommitmentSha256": "b93cc1c519e62149af29d2516b7b88ce5eaadfac020d140521699d103ffb8736"
     },
     {
       "caseId": "STATUS__COMMITMENT",
@@ -443,6 +672,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "e642cedb23af5a274325035acb150858ceaf7b217098f2af82a3dc2dda90f3c5",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "STATUS",
+          "remainingGate": "COMMITMENT",
+          "observedGates": [
+            "COMMITMENT"
+          ],
+          "candidateCommitmentSha256": "b0603974e3c38540470f9a3929ae7e864ab6fb66398bc634f215bf06da905f71",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "COMMITMENT",
+          "remainingGate": "STATUS",
+          "observedGates": [
+            "STATUS"
+          ],
+          "candidateCommitmentSha256": "25a0bcffc370fcd9514c369b3ec892acdafe91d6b8140a393b2f7e5e97193674",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -450,7 +699,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "5150e79deaad05bf457bd1dc0a63f4c6e85330bb6a652276575709f49837e5e6"
+      "caseCommitmentSha256": "4723c85dad0b2e22b6c5f7b217ccc82f47da46a8819c9b0c9f2fa70ec427bd25"
     },
     {
       "caseId": "STATUS__SOURCE_BINDING",
@@ -474,6 +723,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "dc837ed725c2ed967d82f030e864d34a2f5dee02929791a41ed744b1e2dc9154",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "STATUS",
+          "remainingGate": "SOURCE_BINDING",
+          "observedGates": [
+            "SOURCE_BINDING"
+          ],
+          "candidateCommitmentSha256": "704b184736bc7c9e397148b1ceea59c684cec412f4d5a39098d06acce0ec6772",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SOURCE_BINDING",
+          "remainingGate": "STATUS",
+          "observedGates": [
+            "STATUS"
+          ],
+          "candidateCommitmentSha256": "25a0bcffc370fcd9514c369b3ec892acdafe91d6b8140a393b2f7e5e97193674",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -481,7 +750,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "42710e9ed53ef15098eda831559782bfefa9e4b37c1a43e7691dba7b18339074"
+      "caseCommitmentSha256": "1502ccceedd5ff5e29b1888aa912b0b904f2ae9cedfb1673989ff57d273b07dc"
     },
     {
       "caseId": "CAPABILITY__AUTHORITY",
@@ -505,6 +774,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "915e04a6cfa333c650fd08172ce2dd56e72528591e0d04dc91561a2866387fa3",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "CAPABILITY",
+          "remainingGate": "AUTHORITY",
+          "observedGates": [
+            "AUTHORITY"
+          ],
+          "candidateCommitmentSha256": "9b6b8ca758bab7920b55ad9ec324048dbcf902532f214f7ff28bc1913ed2893c",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "AUTHORITY",
+          "remainingGate": "CAPABILITY",
+          "observedGates": [
+            "CAPABILITY"
+          ],
+          "candidateCommitmentSha256": "4d8a5e3215e77716ab9f29158a8d36180c9a2afa40722e348f2ad67dfeec152d",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -512,7 +801,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "0ca7d5d57cf73bc8fdc99e80e5d2d107afaa6096e2d952478e9255cefd259de3"
+      "caseCommitmentSha256": "565be4e6880fe32c3c3879cb562044216dbd71e49d47959d98e1362f85b28f74"
     },
     {
       "caseId": "CAPABILITY__ECONOMICS",
@@ -536,6 +825,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "09a525538eb561fa5934e688f7a2e8bb795b86ff823ac36d40fb163d74442401",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "CAPABILITY",
+          "remainingGate": "ECONOMICS",
+          "observedGates": [
+            "ECONOMICS"
+          ],
+          "candidateCommitmentSha256": "813201502c29003a3393bcbbc65d5c1119865cf4256b66b05cf383cdfa063998",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "ECONOMICS",
+          "remainingGate": "CAPABILITY",
+          "observedGates": [
+            "CAPABILITY"
+          ],
+          "candidateCommitmentSha256": "4d8a5e3215e77716ab9f29158a8d36180c9a2afa40722e348f2ad67dfeec152d",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -543,7 +852,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "218efd218c875c94743971b861a7d479cfb42fc796ee6a97efca6ebe399a83f1"
+      "caseCommitmentSha256": "c43fe765697da9006747eff3b4aa5710e3a20ce29abf787d2fddbd2b0e556a69"
     },
     {
       "caseId": "CAPABILITY__SEMANTIC_REPLAY",
@@ -567,6 +876,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "23109442be0cbfc248bcae2178fc2adbe86fb46ef2e2879827feaa5e44a497c1",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "CAPABILITY",
+          "remainingGate": "SEMANTIC_REPLAY",
+          "observedGates": [
+            "SEMANTIC_REPLAY"
+          ],
+          "candidateCommitmentSha256": "ac97cd629a8e3b39dfaaac4a6b17359bf852a84a5c84f07af4c4bcec5eefb6a6",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SEMANTIC_REPLAY",
+          "remainingGate": "CAPABILITY",
+          "observedGates": [
+            "CAPABILITY"
+          ],
+          "candidateCommitmentSha256": "4d8a5e3215e77716ab9f29158a8d36180c9a2afa40722e348f2ad67dfeec152d",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -574,7 +903,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "742c6a50c2a243cbe8366104d14ea41755b1d59d8ed604a3cc13523de4d8ef5c"
+      "caseCommitmentSha256": "3294a600ecfbf8d3a38b83240b0d71a319235739bd64c1d44f2e0b6a9cf1190c"
     },
     {
       "caseId": "CAPABILITY__COMMITMENT",
@@ -598,6 +927,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "ca676c37d909dc5d60a317877f78d970837d4258d72edaaf80429bec54502829",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "CAPABILITY",
+          "remainingGate": "COMMITMENT",
+          "observedGates": [
+            "COMMITMENT"
+          ],
+          "candidateCommitmentSha256": "b0603974e3c38540470f9a3929ae7e864ab6fb66398bc634f215bf06da905f71",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "COMMITMENT",
+          "remainingGate": "CAPABILITY",
+          "observedGates": [
+            "CAPABILITY"
+          ],
+          "candidateCommitmentSha256": "4d8a5e3215e77716ab9f29158a8d36180c9a2afa40722e348f2ad67dfeec152d",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -605,7 +954,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "f4d3a1f448390203d43ca2b9b9d728233a53aa0557b50b90f88869cc252b9914"
+      "caseCommitmentSha256": "32f730e1ad3fad2bef4f051ebd557494896e8ac0f62c38dcc36eeae8fbe314ac"
     },
     {
       "caseId": "CAPABILITY__SOURCE_BINDING",
@@ -629,6 +978,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "c739234588be3218c06068c09317c9855269ab8aac2dcb28e859b5910a229c4c",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "CAPABILITY",
+          "remainingGate": "SOURCE_BINDING",
+          "observedGates": [
+            "SOURCE_BINDING"
+          ],
+          "candidateCommitmentSha256": "704b184736bc7c9e397148b1ceea59c684cec412f4d5a39098d06acce0ec6772",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SOURCE_BINDING",
+          "remainingGate": "CAPABILITY",
+          "observedGates": [
+            "CAPABILITY"
+          ],
+          "candidateCommitmentSha256": "4d8a5e3215e77716ab9f29158a8d36180c9a2afa40722e348f2ad67dfeec152d",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -636,7 +1005,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "30c6b6ea3d68c40d54a1b673dcce0d0cb50ed9a3f5757b2423e711c0c32c5457"
+      "caseCommitmentSha256": "2fd877426c13ae77af413741095e8aa573807472799c05e40e71ab7e78326b4c"
     },
     {
       "caseId": "AUTHORITY__ECONOMICS",
@@ -660,6 +1029,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "cab3ece9d9ef28e17ae74960383fe2e3e67e600a672b7bfb7e138f622917ff84",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "AUTHORITY",
+          "remainingGate": "ECONOMICS",
+          "observedGates": [
+            "ECONOMICS"
+          ],
+          "candidateCommitmentSha256": "813201502c29003a3393bcbbc65d5c1119865cf4256b66b05cf383cdfa063998",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "ECONOMICS",
+          "remainingGate": "AUTHORITY",
+          "observedGates": [
+            "AUTHORITY"
+          ],
+          "candidateCommitmentSha256": "9b6b8ca758bab7920b55ad9ec324048dbcf902532f214f7ff28bc1913ed2893c",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -667,7 +1056,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "06d9ea423ddf83b770a10805ea9e5aeb2a9ac3516b07b80aae1fac75268a90dd"
+      "caseCommitmentSha256": "6d441642f639089ed21b9fec44cba19da3b99f6d8b735cb4aa5e51616770fe1a"
     },
     {
       "caseId": "AUTHORITY__SEMANTIC_REPLAY",
@@ -691,6 +1080,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "a6e7137202c4e6c0df86339d5953587ca7d291bfdf905e2501cabe4ac4d02723",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "AUTHORITY",
+          "remainingGate": "SEMANTIC_REPLAY",
+          "observedGates": [
+            "SEMANTIC_REPLAY"
+          ],
+          "candidateCommitmentSha256": "ac97cd629a8e3b39dfaaac4a6b17359bf852a84a5c84f07af4c4bcec5eefb6a6",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SEMANTIC_REPLAY",
+          "remainingGate": "AUTHORITY",
+          "observedGates": [
+            "AUTHORITY"
+          ],
+          "candidateCommitmentSha256": "9b6b8ca758bab7920b55ad9ec324048dbcf902532f214f7ff28bc1913ed2893c",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -698,7 +1107,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "cfc76dbd704c7415a74b72768b08c05b2a19c0e10cc5841c4430c93ac362ca46"
+      "caseCommitmentSha256": "99d11221434f3c71f0cece7887a8a4d1fea4aaddce20a902bd0ef7aaa3c4d776"
     },
     {
       "caseId": "AUTHORITY__COMMITMENT",
@@ -722,6 +1131,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "81c809171bd71509d5cb8ba6eb3bd686aa4affcb2b5f719a550f1a496b958e11",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "AUTHORITY",
+          "remainingGate": "COMMITMENT",
+          "observedGates": [
+            "COMMITMENT"
+          ],
+          "candidateCommitmentSha256": "b0603974e3c38540470f9a3929ae7e864ab6fb66398bc634f215bf06da905f71",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "COMMITMENT",
+          "remainingGate": "AUTHORITY",
+          "observedGates": [
+            "AUTHORITY"
+          ],
+          "candidateCommitmentSha256": "9b6b8ca758bab7920b55ad9ec324048dbcf902532f214f7ff28bc1913ed2893c",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -729,7 +1158,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "c70354afd691c300ba68844a350c4964b1fdddb7828fd411a1791729f8eebe0f"
+      "caseCommitmentSha256": "68a8f988a3e87f7daa711322e5ce33bd67d07521b0a4fe7e49dcaab482b20c33"
     },
     {
       "caseId": "AUTHORITY__SOURCE_BINDING",
@@ -753,6 +1182,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "ae21a9d11fd4a9b16b66b0953fce32aeefd1c909fec0f16e131103fda3dc7f54",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "AUTHORITY",
+          "remainingGate": "SOURCE_BINDING",
+          "observedGates": [
+            "SOURCE_BINDING"
+          ],
+          "candidateCommitmentSha256": "704b184736bc7c9e397148b1ceea59c684cec412f4d5a39098d06acce0ec6772",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SOURCE_BINDING",
+          "remainingGate": "AUTHORITY",
+          "observedGates": [
+            "AUTHORITY"
+          ],
+          "candidateCommitmentSha256": "9b6b8ca758bab7920b55ad9ec324048dbcf902532f214f7ff28bc1913ed2893c",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -760,7 +1209,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "2ff26d7b5ceee8ef7da4e51803bde373d429362a709018ed6f3f0a6448b44ea1"
+      "caseCommitmentSha256": "1260eb15d3825575a183253372011173aa291fcff3c83a50972be3e62a3a94c4"
     },
     {
       "caseId": "ECONOMICS__SEMANTIC_REPLAY",
@@ -784,6 +1233,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "b0aaf74bd279a361fea327e8090ef06da132e06a782780128fccedc8de0cea6d",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "ECONOMICS",
+          "remainingGate": "SEMANTIC_REPLAY",
+          "observedGates": [
+            "SEMANTIC_REPLAY"
+          ],
+          "candidateCommitmentSha256": "ac97cd629a8e3b39dfaaac4a6b17359bf852a84a5c84f07af4c4bcec5eefb6a6",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SEMANTIC_REPLAY",
+          "remainingGate": "ECONOMICS",
+          "observedGates": [
+            "ECONOMICS"
+          ],
+          "candidateCommitmentSha256": "813201502c29003a3393bcbbc65d5c1119865cf4256b66b05cf383cdfa063998",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -791,7 +1260,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "da5ad3d5d2ac1ba3cfb4905d9362ef4b7712e01c2c988e6add3fa633d867b25b"
+      "caseCommitmentSha256": "0c1d4668b223ffff993afe3752da543457907f011fef3f4be970838e858d9323"
     },
     {
       "caseId": "ECONOMICS__COMMITMENT",
@@ -815,6 +1284,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "e87ca1adb57c54f84b98e3db00db06b5d20e0b83c994dda7f98678bf9a19e6b4",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "ECONOMICS",
+          "remainingGate": "COMMITMENT",
+          "observedGates": [
+            "COMMITMENT"
+          ],
+          "candidateCommitmentSha256": "b0603974e3c38540470f9a3929ae7e864ab6fb66398bc634f215bf06da905f71",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "COMMITMENT",
+          "remainingGate": "ECONOMICS",
+          "observedGates": [
+            "ECONOMICS"
+          ],
+          "candidateCommitmentSha256": "813201502c29003a3393bcbbc65d5c1119865cf4256b66b05cf383cdfa063998",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -822,7 +1311,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "72756d53e87b2bbe0211821fae6b445d485f68e64b48438c93f0570834553e40"
+      "caseCommitmentSha256": "97a799b2bb8ddc4147983e9ad0cbf077c82705bc62d1ddddde25843cca1c6bff"
     },
     {
       "caseId": "ECONOMICS__SOURCE_BINDING",
@@ -846,6 +1335,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "54ccfa9105fed09ca8a868bf947ed8aa64b4e490ffeba33d3cd5c6b156e96d97",
       "nodeSemanticErrorCount": "4",
+      "removalChecks": [
+        {
+          "removedGate": "ECONOMICS",
+          "remainingGate": "SOURCE_BINDING",
+          "observedGates": [
+            "SOURCE_BINDING"
+          ],
+          "candidateCommitmentSha256": "704b184736bc7c9e397148b1ceea59c684cec412f4d5a39098d06acce0ec6772",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SOURCE_BINDING",
+          "remainingGate": "ECONOMICS",
+          "observedGates": [
+            "ECONOMICS"
+          ],
+          "candidateCommitmentSha256": "813201502c29003a3393bcbbc65d5c1119865cf4256b66b05cf383cdfa063998",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -853,7 +1362,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "3b9cd352859fa88c64ddd7b94eaaf134382adc097476cca416102979443197ca"
+      "caseCommitmentSha256": "28604ffe8269e7dac1fad48822d68c2e8fc6a8780d5ff484b95344bee8e0f791"
     },
     {
       "caseId": "SEMANTIC_REPLAY__COMMITMENT",
@@ -877,6 +1386,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "68708cd3bb030aece199ca46cee6b5237c094c24dd669ac6cb9b49f088d71821",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "SEMANTIC_REPLAY",
+          "remainingGate": "COMMITMENT",
+          "observedGates": [
+            "COMMITMENT"
+          ],
+          "candidateCommitmentSha256": "b0603974e3c38540470f9a3929ae7e864ab6fb66398bc634f215bf06da905f71",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "COMMITMENT",
+          "remainingGate": "SEMANTIC_REPLAY",
+          "observedGates": [
+            "SEMANTIC_REPLAY"
+          ],
+          "candidateCommitmentSha256": "ac97cd629a8e3b39dfaaac4a6b17359bf852a84a5c84f07af4c4bcec5eefb6a6",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -884,7 +1413,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "cf6b00d8e06e075cd3da4263ddfa14e48d962f2b81fc146923c08e9e5af6ec4e"
+      "caseCommitmentSha256": "88984aa1b55d71c5704ece0f77280e80a6e7e32286cb8e4cb33dc33f1b69a693"
     },
     {
       "caseId": "SEMANTIC_REPLAY__SOURCE_BINDING",
@@ -908,6 +1437,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "b299a4615fa1516334e15ed162ea624f3802087a3e84d411d6a5768e98fdd292",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "SEMANTIC_REPLAY",
+          "remainingGate": "SOURCE_BINDING",
+          "observedGates": [
+            "SOURCE_BINDING"
+          ],
+          "candidateCommitmentSha256": "704b184736bc7c9e397148b1ceea59c684cec412f4d5a39098d06acce0ec6772",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SOURCE_BINDING",
+          "remainingGate": "SEMANTIC_REPLAY",
+          "observedGates": [
+            "SEMANTIC_REPLAY"
+          ],
+          "candidateCommitmentSha256": "ac97cd629a8e3b39dfaaac4a6b17359bf852a84a5c84f07af4c4bcec5eefb6a6",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -915,7 +1464,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "9f27b0c7604f36ec08f31aa53c25a1d76ea1fb1143f3633f50fb215cdbc49181"
+      "caseCommitmentSha256": "4830cbee2da9094da712167438574e32ba30734b57e121566cf1c11ac613deb2"
     },
     {
       "caseId": "COMMITMENT__SOURCE_BINDING",
@@ -939,6 +1488,26 @@
       "expectedAccepted": false,
       "candidateCommitmentSha256": "ca5aaf333065f3e904a8083e5dcaa443ed559516337de17037bca75edf0d04d7",
       "nodeSemanticErrorCount": "3",
+      "removalChecks": [
+        {
+          "removedGate": "COMMITMENT",
+          "remainingGate": "SOURCE_BINDING",
+          "observedGates": [
+            "SOURCE_BINDING"
+          ],
+          "candidateCommitmentSha256": "704b184736bc7c9e397148b1ceea59c684cec412f4d5a39098d06acce0ec6772",
+          "expectedAccepted": false
+        },
+        {
+          "removedGate": "SOURCE_BINDING",
+          "remainingGate": "COMMITMENT",
+          "observedGates": [
+            "COMMITMENT"
+          ],
+          "candidateCommitmentSha256": "b0603974e3c38540470f9a3929ae7e864ab6fb66398bc634f215bf06da905f71",
+          "expectedAccepted": false
+        }
+      ],
       "runtimeCandidateStored": false,
       "expandedStateStored": false,
       "expandedScheduleStored": false,
@@ -946,7 +1515,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "5f7dc06daf5fbbe3a8ddc07d1a50144de806eadd447f2c713a7ebf298b3c9af9"
+      "caseCommitmentSha256": "51381577ba3b4280ebd85d2fa3b2995be9d3a4592264a1964e07495a0da8efea"
     }
   ]
 }

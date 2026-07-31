@@ -608,6 +608,7 @@ def verify_composition_vectors(root: Path, vectors_path: Path) -> tuple[list[str
 
     expected_sources = {
         "baseArtifact": ("settlement-contention-vectors.v1.json", "canonicalSha256", canonical_sha256(base)),
+        "closedSchema": ("settlement-contention-composition-vectors.schema.v1.json", "canonicalSha256", canonical_sha256(load_json(root / "settlement-contention-composition-vectors.schema.v1.json"))),
         "mutationCatalog": ("settlement-contention-mutations.mjs", "normalizedTextSha256", normalized_text_sha256(root / "settlement-contention-mutations.mjs")),
         "nodeEvaluator": ("settlement-contention-compositions.mjs", "normalizedTextSha256", normalized_text_sha256(root / "settlement-contention-compositions.mjs")),
         "pythonVerifier": ("verify-settlement-contention-vectors.py", "normalizedTextSha256", normalized_text_sha256(Path(__file__).resolve())),
@@ -626,6 +627,8 @@ def verify_composition_vectors(root: Path, vectors_path: Path) -> tuple[list[str
     expect(contract.get("caseCount") == 28, "composition case-count drift", errors)
     expect(contract.get("gatePrecedence") == COMPOSITION_GATE_PRECEDENCE, "composition precedence drift", errors)
     expect(contract.get("unorderedPairsComplete") is True, "composition pair coverage drift", errors)
+    expect(contract.get("removalChecksPerPair") == 2, "composition removal-check width drift", errors)
+    expect(contract.get("removalChecksComplete") is True, "composition removal-check coverage drift", errors)
     for field in ["storesExpandedState", "storesExpandedSchedules", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
         expect(contract.get(field) is False, f"composition contract {field} drift", errors)
     expect(contract.get("mutatedCandidatesRuntimeOnly") is True, "composition stores candidates", errors)
@@ -636,6 +639,7 @@ def verify_composition_vectors(root: Path, vectors_path: Path) -> tuple[list[str
         errors.append("composition cases must contain exactly twenty-eight entries")
         cases = []
     common_records: list[dict[str, Any]] = []
+    removal_records: list[dict[str, Any]] = []
     case_commitments: list[str] = []
     catalog = {definition[0]: definition for definition in MUTATION_DEFINITIONS}
     for index, (case_id, expected_gates, mutation_ids) in enumerate(COMPOSITION_DEFINITIONS):
@@ -645,7 +649,7 @@ def verify_composition_vectors(root: Path, vectors_path: Path) -> tuple[list[str
         expected_case_keys = {
             "caseId", "expectedGates", "mutationCaseIds", "observedGates", "rejectionPrecedence",
             "bothIsolationsRejected", "expectedAccepted", "candidateCommitmentSha256",
-            "nodeSemanticErrorCount", "runtimeCandidateStored", "expandedStateStored",
+            "nodeSemanticErrorCount", "removalChecks", "runtimeCandidateStored", "expandedStateStored",
             "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized",
             "activationEffect", "caseCommitmentSha256",
         }
@@ -667,6 +671,29 @@ def verify_composition_vectors(root: Path, vectors_path: Path) -> tuple[list[str
         expect(case.get("expectedAccepted") is False, f"{case_id} acceptance drift", errors)
         candidate_commitment = canonical_sha256(candidate)
         expect(case.get("candidateCommitmentSha256") == candidate_commitment, f"{case_id} candidate commitment drift", errors)
+        removal_checks = case.get("removalChecks")
+        if not isinstance(removal_checks, list) or len(removal_checks) != 2:
+            errors.append(f"{case_id} removal checks must contain exactly two entries")
+            removal_checks = []
+        for removal_index, removed_gate in enumerate(expected_gates):
+            if removal_index >= len(removal_checks):
+                break
+            remaining_index = 1 if removal_index == 0 else 0
+            remaining_gate = expected_gates[remaining_index]
+            removal_candidate = apply_contention_composition(base, [mutation_ids[remaining_index]])
+            removal_observed = detect_composition_gates(base, removal_candidate)
+            removal_errors, _ = verify_artifact(root, removal_candidate)
+            expected_check = {
+                "removedGate": removed_gate,
+                "remainingGate": remaining_gate,
+                "observedGates": [remaining_gate],
+                "candidateCommitmentSha256": canonical_sha256(removal_candidate),
+                "expectedAccepted": False,
+            }
+            expect(removal_observed == [remaining_gate], f"{case_id} removal observation drift: {removed_gate}", errors)
+            expect(bool(removal_errors), f"{case_id} removal unexpectedly accepted: {removed_gate}", errors)
+            expect(removal_checks[removal_index] == expected_check, f"{case_id} removal proof drift: {removed_gate}", errors)
+            removal_records.append({"caseId": case_id, **expected_check})
         for field in ["runtimeCandidateStored", "expandedStateStored", "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
             expect(case.get(field) is False, f"{case_id} {field} drift", errors)
         expect(case.get("activationEffect") == "NONE", f"{case_id} activation effect drift", errors)
@@ -686,10 +713,14 @@ def verify_composition_vectors(root: Path, vectors_path: Path) -> tuple[list[str
     summary = vectors.get("summary") if isinstance(vectors.get("summary"), dict) else {}
     common_commitment = canonical_sha256(common_records)
     expect(summary.get("caseCount") == "28", "composition summary count drift", errors)
+    expect(summary.get("removalCheckCount") == "56", "composition removal summary count drift", errors)
     expect(summary.get("allPairsObservedExactly") is True, "composition observation summary drift", errors)
     expect(summary.get("noFailureMasked") is True, "composition masking summary drift", errors)
+    expect(summary.get("allRemovalsMinimal") is True, "composition removal minimality drift", errors)
     expect(summary.get("allRejected") is True, "composition rejection summary drift", errors)
     expect(summary.get("commonReplayCommitmentSha256") == common_commitment, "composition common replay commitment drift", errors)
+    removal_commitment = canonical_sha256(removal_records)
+    expect(summary.get("removalReplayCommitmentSha256") == removal_commitment, "composition removal replay commitment drift", errors)
     expect(summary.get("caseSetCommitmentSha256") == canonical_sha256(case_commitments), "composition case-set commitment drift", errors)
     for field in ["runtimeCandidateStored", "expandedStateStored", "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
         expect(summary.get(field) is False, f"composition summary {field} drift", errors)
@@ -699,8 +730,11 @@ def verify_composition_vectors(root: Path, vectors_path: Path) -> tuple[list[str
         "errors": errors,
         "compositionCaseCount": len(common_records),
         "commonReplayCommitmentSha256": common_commitment,
+        "removalReplayCommitmentSha256": removal_commitment,
+        "removalCheckCount": len(removal_records),
         "allPairsObservedExactly": len(common_records) == len(COMPOSITION_DEFINITIONS),
         "noFailureMasked": len(common_records) == len(COMPOSITION_DEFINITIONS),
+        "allRemovalsMinimal": len(removal_records) == 2 * len(COMPOSITION_DEFINITIONS),
         "allRejected": len(common_records) == len(COMPOSITION_DEFINITIONS),
         "expandedStateStored": False,
         "expandedSchedulesStored": False,

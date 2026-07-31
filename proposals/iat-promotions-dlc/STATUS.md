@@ -438,8 +438,15 @@ This status file deliberately does not claim a self-referential commit hash.
   and
 - Python exit-2 rejection for changed compact composition evidence, with no
   combined candidate, expanded state, schedule, trace, or attempt stored.
+- a closed Draft-07 composition schema rejecting unknown root, case, and
+  removal fields plus released network, wallet, transaction, receipt, review,
+  deployment, or activation authority;
+- 56 one-mutation removal checks proving each pair reduces to exactly its
+  remaining named gate and remains rejected in Node and Python; and
+- shared cross-runtime removal replay commitment
+  `951bd99fd43aa9f519f6cf1b817debba1e3b1b22430c96c0c683f21f1831be1d`.
 
-Current proposal-only result: **320 tests passed**. This consists of 28 protected
+Current proposal-only result: **326 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -513,6 +520,10 @@ Nine complete-pair regeneration, unique coverage, exact precedence,
 independent no-masking rejection, compact-publication, Python parity,
 changed-evidence exit, source-safety, and manifest-coverage tests complete the
 cross-runtime two-gate composition suite.
+Six closed-schema acceptance, unknown-field rejection, HOLD-authority
+rejection, 56-case removal minimality, independent Python tamper rejection,
+source-safety, and manifest-coverage tests complete the composition schema and
+minimization suite.
 
 ## Current guarantees of the reference model
 
@@ -544,7 +555,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a closed compact schema and independent rejection-minimization proof for
-the 28-case composition artifact. Keep candidates runtime-only; do not contact
-a local validator, Devnet, or Mainnet; preserve every network, wallet, review,
-deployment, and activation HOLD.
+Add a deterministic closed-schema mutation corpus for the composition artifact
+with exact Node/Python pointer diagnostics. Keep candidates runtime-only; do
+not contact a local validator, Devnet, or Mainnet; preserve every network,
+wallet, review, deployment, and activation HOLD.

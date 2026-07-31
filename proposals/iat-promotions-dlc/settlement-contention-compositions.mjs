@@ -156,3 +156,33 @@ export function evaluateContentionComposition(bundle, composition) {
     },
   };
 }
+
+export function evaluateContentionCompositionRemoval(bundle, composition, removedGate) {
+  const removedIndex = composition.expectedGates.indexOf(removedGate);
+  if (removedIndex < 0) throw new Error(`REMOVAL_GATE_NOT_FOUND:${composition.caseId}:${removedGate}`);
+  const remainingIndex = removedIndex === 0 ? 1 : 0;
+  const remainingGate = composition.expectedGates[remainingIndex];
+  const reduced = {
+    caseId: `${composition.caseId}__REMOVE_${removedGate}`,
+    expectedGates: [remainingGate],
+    mutationCaseIds: [composition.mutationCaseIds[remainingIndex]],
+  };
+  const candidate = applyContentionComposition(bundle.artifact, reduced);
+  const observedGates = detectContentionCompositionGates(bundle.artifact, candidate);
+  if (!jsonEqual(observedGates, reduced.expectedGates)) {
+    throw new Error(`REMOVAL_GATE_DRIFT:${reduced.caseId}:${observedGates.join(",")}`);
+  }
+  const semanticErrors = validateSettlementContentionVectors(
+    { ...bundle, artifact: candidate },
+    { regenerate: false },
+  );
+  if (semanticErrors.length === 0) throw new Error(`REMOVAL_UNEXPECTEDLY_ACCEPTED:${reduced.caseId}`);
+  return {
+    removedGate,
+    remainingGate,
+    observedGates,
+    candidateCommitmentSha256: canonicalSha256(candidate),
+    semanticErrors,
+    accepted: false,
+  };
+}

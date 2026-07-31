@@ -88,6 +88,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Compact settlement contention vectors](./settlement-contention-vectors.v1.json)
 - [Compact settlement contention mutation vectors](./settlement-contention-mutation-vectors.v1.json)
 - [Compact settlement contention composition vectors](./settlement-contention-composition-vectors.v1.json)
+- [Closed contention composition schema](./settlement-contention-composition-vectors.schema.v1.json)
 - [Closed settlement-contention evidence schema](./settlement-contention-evidence.schema.v1.json)
 - [Settlement contention vector generator](./generate-settlement-contention-vectors.mjs)
 - [Settlement contention mutation generator](./generate-settlement-contention-mutation-vectors.mjs)
@@ -275,6 +276,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-compositions.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema.test.mjs
 ```
 
 ## Deliberate isolation
