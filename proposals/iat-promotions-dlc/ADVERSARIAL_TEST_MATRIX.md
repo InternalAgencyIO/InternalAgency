@@ -81,10 +81,20 @@ security audit or deployment approval.
 | Re-enable after emergency disable | same | Permanently rejected; new reviewed campaign version required |
 | Historical issuance before emergency timestamp | same | Remains verifiable under its original guards |
 | Key-lifecycle log mutation or domain drift | `public checkpoints accept...` | Lifecycle validation and prior checkpoint verification fail |
+| Amendment claims deployment or application | `deployment claims and removed review gates...` | Validator rejects network, program ID, deployable-v0, or applied-amendment claims |
+| Amendment review or Devnet gate removed | same | Validator rejects the weakened release boundary |
+| Amendment account size or discriminator drift | `all amendment account sizes...` | Deterministic layout/discriminator check fails |
+| New lifecycle instruction bytes drift | `every amendment instruction matches...` | All five fixed vectors must round-trip exactly |
+| Token, vault, mint, or V2 account added | `money-account, secret-field...` | Amendment validator rejects the account capability |
+| Private/secret-bearing account field added | same | Amendment validator rejects the field and layout |
+| Notice, overlap, replay, reuse, or identity guard removed | `weakened schedule, emergency...` | Amendment validator rejects the weakened schedule |
+| Emergency terminal or clock guard removed | same | Amendment validator rejects the weakened disable path |
+| Re-enable instruction added | `base attestation binding...` | Instruction set and forbidden-capability validation fail |
+| Read-only registry/key binding removed from settlement | same | Base-interface amendment validation fails |
 
 ## Next matrix expansion
 
-- machine-readable verifier-registry interface amendment;
+- deterministic full-interface composition preview and cross-interface drift checks;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

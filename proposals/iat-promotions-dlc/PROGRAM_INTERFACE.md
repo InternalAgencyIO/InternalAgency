@@ -11,6 +11,9 @@ Security gap: v0 stores one verifier public key and exposes no reviewed rotation
 or emergency-disable instruction. It must not be treated as deployment-ready.
 `VERIFIER_KEY_LIFECYCLE.md` defines the reference behavior that a separately
 reviewed machine-interface amendment still needs to encode.
+`program-interface-key-lifecycle-amendment.v1.json` now encodes that proposed
+delta, but it remains `amendmentApplied: false`; no full composed interface or
+reviewed binary exists.
 
 ## Encoding contract
 

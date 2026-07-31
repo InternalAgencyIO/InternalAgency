@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 12:20 UTC
+Updated: 2026-07-31 12:35 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `3a83849`
+Previously published public increment: `761cf3f`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -65,14 +65,21 @@ This status file deliberately does not claim a self-referential commit hash.
 - permanent key-reuse rejection and immutable identity-commitment domain;
 - immediate terminal emergency disable with historical verification preserved;
   and
-- canonical hash-chained key events and append-only public checkpoints.
+- canonical hash-chained key events and append-only public checkpoints;
+- machine-readable verifier-registry amendment against interface v0;
+- fixed layouts for registry, public-key record, and review receipt accounts;
+- five proposed lifecycle instructions with no money or V2 account capability;
+- read-only registry/key validity guards for every attestation consumer;
+- deterministic byte vectors for all proposed lifecycle instructions;
+- permanent review-receipt and key-record replay barriers; and
+- explicit `baseV0Deployable: false` and `amendmentApplied: false` release gates.
 
-Current proposal-only result: **76 tests passed**. This consists of 28 protected
+Current proposal-only result: **83 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
 byte-fuzz tests, three Ed25519 public-vector tests, and five verifier-key
-lifecycle tests.
+lifecycle tests, plus seven lifecycle-amendment tests.
 
 ## Current guarantees of the reference model
 
@@ -104,7 +111,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Draft a machine-readable verifier-registry interface amendment with account
-locks and deterministic vectors, while keeping v0 explicitly undeployable until
-that amendment receives separate review. No production import, chain
-connection, wallet operation, or site deployment is needed for that work.
+Build a deterministic full-interface composition preview and cross-interface
+drift checks while preserving `amendmentApplied: false` and v0's explicit HOLD.
+No production import, chain connection, wallet operation, or site deployment is
+needed for that work.

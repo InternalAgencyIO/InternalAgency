@@ -92,3 +92,8 @@ normal rotation instructions, emergency-disable instruction, checkpoint event
 schema, and how an in-flight attestation is treated at each boundary. Key
 custody remains outside this repository and should use an audited KMS/HSM or
 equivalent service.
+
+`KEY_LIFECYCLE_AMENDMENT.md` and its machine-readable v1 amendment now propose
+the registry accounts, instruction locks, and attestation guards. They remain an
+unapplied delta; reviewer threshold, full-interface composition, event bytes,
+deterministic binary, and chain rehearsal are still unresolved.
