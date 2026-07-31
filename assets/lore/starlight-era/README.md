@@ -644,6 +644,13 @@ rejected and regenerated.
 | **Kyiv Dnipro Glass Bridge Intercept**<br><img src="540-ukraine-kyiv-dnipro-glass-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism on Kyiv's glass pedestrian bridge above the Dnipro"> | **Lviv Rynok Square Renaissance Cipher**<br><img src="541-ukraine-lviv-rynok-square-renaissance-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism among Lviv Rynok Square's Renaissance facades"> |
 | **Carpathian Synevyr Lake Prism Extraction**<br><img src="542-ukraine-carpathian-synevyr-lake-prism-extraction.png" width="420" alt="The trio restoring a watershed-data beacon above Synevyr Lake and the Ukrainian Carpathians"> | **Odesa Sea Terminal Black Sea Night Relay**<br><img src="543-ukraine-odesa-sea-terminal-black-sea-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three glowing keys beside Odesa Sea Terminal and the Black Sea waterfront"> |
 
+## World Series - Europe - Batch 131: Poland
+
+| | |
+|---|---|
+| **Warsaw Vistula Bridge Intercept**<br><img src="544-poland-warsaw-vistula-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism above Warsaw's Vistula Boulevards and cable bridge"> | **Krakow Cloth Hall Vault Cipher**<br><img src="545-poland-krakow-cloth-hall-vault-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism beside Krakow's Cloth Hall arcades"> |
+| **Tatra Morskie Oko Prism Extraction**<br><img src="546-poland-tatra-morskie-oko-prism-extraction.png" width="420" alt="The trio restoring an alpine watershed beacon above Morskie Oko and the High Tatras"> | **Gdansk Motlawa Crane Night Relay**<br><img src="547-poland-gdansk-motlawa-crane-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three glowing keys beside Gdansk's Motlawa waterfront and medieval port crane"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
