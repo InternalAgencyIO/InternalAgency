@@ -29,6 +29,8 @@ not prove:
 The six-gate acceptance evaluator remains the mandatory semantic layer after
 all three inputs pass structural validation. The expected target must still be
 obtained and compared through an independent publication or reviewer workflow.
+The [CLI structural preflight](./REVIEWER_BUNDLE_PREFLIGHT.md) applies the two
+input schemas before semantic evaluation and emits JSON Pointer diagnostics.
 
 ## Permanent authority boundary
 

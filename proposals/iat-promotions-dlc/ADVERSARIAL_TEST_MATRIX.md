@@ -201,11 +201,16 @@ security audit or deployment approval.
 | Lint result claims receipt, completed review, or activation | `lint-result schema permanently fixes...` | Result schema constants reject every authority escalation |
 | Schema opens an object or claims a released network | `open objects, released status...` | Schema-contract validator rejects the source and source digest |
 | Schema/example corpus exposes raw X identity or private material | `portable schemas expose commitments...` | Privacy scan permits commitments and public attestation only |
+| CLI evaluates semantic gates after malformed structure | `all nine malformed input scenarios stop...` | Structural failure fixes semantic permission and execution to false |
+| CLI hides the failing field behind a generic error | `human diagnostics expose document...` | Document, JSON Pointer, Draft-07 keyword, and message remain explicit |
+| Structural rejection returns the semantic-rejection exit code | `CLI returns status 3...` | Schema failure uses distinct exit `3`; semantic rejection remains exit `2` |
+| Structural preflight replaces or mutates the pure evaluator | `pure programmatic evaluator remains available...` | Direct evaluator behavior and rejection result remain unchanged |
+| Preflight gains file-write, signing, keygen, or network capability | `preflight source is local-read-only...` | Import and forbidden-capability checks fail |
 
 ## Next matrix expansion
 
-- schema-backed CLI preflight with JSON Pointer diagnostics while keeping the
-  pure six-gate evaluator and all non-authority results unchanged;
+- independent zero-dependency Python reproduction of input-schema validation
+  and every fixed preflight diagnostic;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

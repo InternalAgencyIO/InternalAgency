@@ -30,6 +30,7 @@ reviewer can compare exactly which bytes and semantic objects were evaluated.
 
 - exit `0`: all six draft policy gates pass;
 - exit `2`: the bundle was parsed and rejected by one or more gates; and
+- exit `3`: parsed JSON fails candidate or expected-target schema preflight; and
 - exit `1`: usage, file reading, or JSON parsing failed.
 
 Even exit `0` is evaluation-only. It does not issue or publish a receipt and it
@@ -47,6 +48,10 @@ node proposals/iat-promotions-dlc/reviewer-bundle-linter.mjs \
 Use `--format json` for a machine-readable report. The public generated report
 uses the most complete rejection-only candidate: five gates pass and the absent
 external review signature remains visibly failed.
+
+The CLI now runs the [structural preflight](./REVIEWER_BUNDLE_PREFLIGHT.md)
+first. Structural failure prints exact document, JSON Pointer, keyword, and
+message diagnostics and prevents the semantic evaluator from running.
 
 ## Reproduce the public report
 

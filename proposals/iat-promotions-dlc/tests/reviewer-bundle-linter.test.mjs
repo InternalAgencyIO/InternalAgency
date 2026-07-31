@@ -155,6 +155,7 @@ test("linter source has local-read-only capability and no signing or network pat
     "node:url",
     "./compose-program-interface-preview.mjs",
     "./independent-review-receipt-acceptance.mjs",
+    "./reviewer-bundle-preflight.mjs",
   ]);
   assert.match(source, /readFileSync/);
   assert.ok(LINTER_PATH.startsWith(ROOT));

@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 16:16 UTC
+Updated: 2026-07-31 16:31 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `d3bca60`
+Previously published public increment: `9d2c4d4`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -258,8 +258,20 @@ This status file deliberately does not claim a self-referential commit hash.
   type, pattern, enum, scope, HOLD, binding, receipt, and activation guards;
   and
 - deterministic schema-source commitments and mutation validation.
+- local-read-only candidate and expected-target structural preflight before the
+  CLI invokes any semantic gate;
+- exact document, JSON Pointer, schema pointer, Draft-07 keyword, and message
+  diagnostics for every malformed input;
+- distinct exit `3` for structural rejection while preserving exit `2` for
+  semantic rejection and exit `1` for usage, file, or JSON failure;
+- one valid-structure vector and nine invalid input vectors with deterministic
+  preflight results;
+- invalid structure permanently stopping semantic evaluation;
+- direct programmatic access to the unchanged pure six-gate evaluator; and
+- preflight results fixed to no receipt, no completed review, and no activation
+  authority or effect.
 
-Current proposal-only result: **205 tests passed**. This consists of 28 protected
+Current proposal-only result: **214 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -285,6 +297,9 @@ bundle presentation suite.
 Eight portable-schema, structural/semantic-boundary, invalid-example,
 target-authenticity, authority-constant, source-drift, and privacy tests
 complete the reviewer bundle schema suite.
+Nine structural-preflight, pointer-diagnostic, CLI-exit, semantic-stop,
+pure-evaluator, source-safety, and non-authority tests complete the reviewer
+input preflight suite.
 
 ## Current guarantees of the reference model
 
@@ -316,7 +331,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add schema-backed CLI preflight with precise JSON Pointer diagnostics before
-the six semantic gates run. Preserve the local-read-only CLI, keep every public
-example rejected, and leave receipt, review, activation, wallet, production,
-site, and chain authority absent.
+Add an independent zero-dependency Python implementation that reproduces both
+input-schema validation and every fixed preflight diagnostic. Keep the tool
+read-only, rejection-only, offline, and incapable of issuing receipts,
+completing reviews, or authorizing activation.

@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 
 import { canonicalSha256 } from "./compose-program-interface-preview.mjs";
 import { evaluateIndependentReviewReceiptCandidate } from "./independent-review-receipt-acceptance.mjs";
+import { preflightReviewerInputs, renderReviewerInputPreflight } from "./reviewer-bundle-preflight.mjs";
 
 const TEMPLATE_PATH = fileURLToPath(new URL("./independent-review-receipt-template.v1.json", import.meta.url));
 const HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"];
@@ -175,13 +176,23 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const candidate = JSON.parse(readFileSync(args.candidatePath, "utf8"));
     const expectedTarget = JSON.parse(readFileSync(args.expectedTargetPath, "utf8"));
     const receiptTemplate = JSON.parse(readFileSync(TEMPLATE_PATH, "utf8"));
-    const report = lintReviewerBundle(candidate, expectedTarget, receiptTemplate);
-    process.stdout.write(
-      args.format === "json"
-        ? `${JSON.stringify(report, null, 2)}\n`
-        : renderReviewerBundleGateReport(report),
-    );
-    if (!report.candidateSatisfiesPolicy) process.exitCode = 2;
+    const preflight = preflightReviewerInputs(candidate, expectedTarget);
+    if (!preflight.structuralValid) {
+      process.stdout.write(
+        args.format === "json"
+          ? `${JSON.stringify(preflight, null, 2)}\n`
+          : renderReviewerInputPreflight(preflight),
+      );
+      process.exitCode = 3;
+    } else {
+      const report = lintReviewerBundle(candidate, expectedTarget, receiptTemplate);
+      process.stdout.write(
+        args.format === "json"
+          ? `${JSON.stringify(report, null, 2)}\n`
+          : renderReviewerBundleGateReport(report),
+      );
+      if (!report.candidateSatisfiesPolicy) process.exitCode = 2;
+    }
   } catch (error) {
     console.error(error instanceof Error ? error.message : "reviewer bundle lint failed");
     process.exitCode = 1;

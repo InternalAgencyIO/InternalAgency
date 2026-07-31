@@ -122,6 +122,11 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Rejection-only schema examples](./reviewer-bundle-schema-examples.v1.json)
 - [Schema-example generator](./generate-reviewer-bundle-schema-examples.mjs)
 - [Reviewer-bundle schema validator](./validate-reviewer-bundle-schemas.mjs)
+- [Reviewer-input structural preflight](./REVIEWER_BUNDLE_PREFLIGHT.md)
+- [Local-read-only preflight engine](./reviewer-bundle-preflight.mjs)
+- [Deterministic preflight vectors](./reviewer-bundle-preflight-vectors.v1.json)
+- [Preflight-vector generator](./generate-reviewer-bundle-preflight-vectors.mjs)
+- [Preflight-vector validator](./validate-reviewer-bundle-preflight-vectors.mjs)
 - [Proposal-only tests](./tests/)
 
 Run the proposal-only checks with:
@@ -139,6 +144,7 @@ node proposals/iat-promotions-dlc/generate-independent-review-receipt-verificati
 node proposals/iat-promotions-dlc/generate-independent-review-receipt-acceptance-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-reviewer-bundle-gate-report.mjs --write
 node proposals/iat-promotions-dlc/generate-reviewer-bundle-schema-examples.mjs --write
+node proposals/iat-promotions-dlc/generate-reviewer-bundle-preflight-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-review-manifest.mjs --write
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
@@ -156,6 +162,7 @@ node proposals/iat-promotions-dlc/validate-independent-review-receipt-verificati
 node proposals/iat-promotions-dlc/validate-independent-review-receipt-acceptance-vectors.mjs
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-gate-report.mjs
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-schemas.mjs
+node proposals/iat-promotions-dlc/validate-reviewer-bundle-preflight-vectors.mjs
 python proposals/iat-promotions-dlc/verify-review-manifest.py
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
@@ -181,6 +188,7 @@ node --test proposals/iat-promotions-dlc/tests/independent-review-receipt-verifi
 node --test proposals/iat-promotions-dlc/tests/independent-review-receipt-acceptance.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-linter.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-schema.test.mjs
+node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight.test.mjs
 ```
 
 ## Deliberate isolation
