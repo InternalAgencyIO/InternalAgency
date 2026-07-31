@@ -104,6 +104,7 @@ export function validatePositiveCampaignVectorRepresentationAudit(
   expect(artifact?.merkleContract?.multiproofNodeCount === 84, "representation multiproof node count drift");
   expect(artifact?.merkleContract?.individualProofNodeCount === 208, "representation individual proof-node count drift");
   expect(artifact?.merkleContract?.multiproofSavedNodeCount === 124, "representation multiproof savings drift");
+  expect(artifact?.merkleContract?.multiproofRequiresExactTreeLeafCount === true, "representation multiproof tree-size binding disabled");
   expect(artifact?.merkleContract?.multiproofRequiresMinimalNodeSet === true, "representation multiproof minimality disabled");
   expect(artifact?.merkleContract?.multiproofEquivalentToIndividualProofs === true, "representation proof equivalence disabled");
 
@@ -221,6 +222,8 @@ export function validatePositiveCampaignVectorRepresentationAudit(
     selectedRecords.map((record) => record.index),
   );
   expect(multiproof.family === "EXPECTED_TARGET", "representation multiproof family drift");
+  expect(multiproof.treeLeafCount === String(recordCommitments.length), "representation multiproof tree leaf-count drift");
+  expect(multiproof.treeLeafCount === artifact?.summary?.caseCount, "representation multiproof tree leaf-count is not summary-bound");
   expect(multiproof.recordCount === "26", "representation multiproof record count drift");
   expect(JSON.stringify(multiproof.recordIndices) === JSON.stringify(expectedProofIndices), "representation multiproof membership drift");
   expect(multiproof.proofNodeCount === "84", "representation multiproof compact node count drift");

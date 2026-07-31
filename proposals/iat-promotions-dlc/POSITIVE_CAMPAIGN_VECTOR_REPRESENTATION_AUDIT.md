@@ -41,7 +41,9 @@ node coordinates are derived solely from the sorted membership indices. Every
 node must be connected, uniquely required, and in canonical level/index order;
 missing, redundant, reordered, changed, disconnected, or incomplete evidence
 fails. The multiproof commitment binds membership, nodes, minimality,
-individual-proof equivalence, and permanent non-authority.
+individual-proof equivalence, the exact 256-leaf tree size, and permanent
+non-authority. The tree size is also required to equal the artifact summary
+case count.
 
 The proposal-only test suite also derives 96 unique property subsets spanning
 one through 256 selected records. Fixed boundary sizes and deterministic
@@ -54,6 +56,18 @@ multiproof nodes, saving 78,078 nodes. The ordered subset set is committed as
 Every case verifies in forward and reverse membership order and rejects bad
 roots, duplicate or out-of-range members, missing members, and missing,
 redundant, changed, or reordered proof nodes.
+
+A second compact property suite covers 79 subsets across 15 odd tree sizes
+from one through 257 leaves. It exercises 2,893 selected records and every
+duplicate-final-node level, matches an independently implemented root and
+coordinate oracle, and reduces 21,873 individual-path nodes to 908 multiproof
+nodes, saving 20,965. Its case-set commitment is
+`937771b307fe23379f7c4840017f1ce7e832186cbd9dfd1420720731624ed354`.
+Because duplicate-final-node Merkle roots alone can alias an odd `N`-leaf tree
+with a misdeclared `N + 1` tree, the verifier contract never treats the root as
+a leaf-count commitment. The canonical multiproof separately binds
+`treeLeafCount`, and validation requires it to equal the independently replayed
+record count and summary count.
 
 It does not store the 256 full inputs or results. Node regenerates the artifact;
 Python independently rebuilds every record, collision class, tree root, and

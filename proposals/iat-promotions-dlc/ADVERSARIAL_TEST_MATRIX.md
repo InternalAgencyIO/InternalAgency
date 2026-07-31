@@ -265,8 +265,11 @@ security audit or deployment approval.
 | Multiproof savings or individual-proof equivalence drifts | `the 84-node multiproof is minimal...` | Fixed 84/208/124 counts and both runtime reconstructions reject drift |
 | Fixed 26-member geometry hides a construction defect | `96 deterministic varied subsets preserve...` | Ninety-six unique subsets spanning one through 256 records must match an independent pairwise coordinate oracle and every individual path |
 | Varied subset proof accepts membership or node-set drift | `varied subsets reject nonminimal nodes...` | Bad roots, duplicate/out-of-range/missing members, and missing/redundant/changed/reordered nodes all fail closed across the compact corpus |
+| Power-of-two-only tests hide duplicate-final-node defects | `odd-width trees preserve...` | Seventy-nine cases across 15 odd widths must match independent root and coordinate oracles plus every individual path |
+| A duplicate-final root is mistaken for a leaf-count commitment | `odd-width multiproofs bind width externally...` | The multiproof separately commits `treeLeafCount`; validators require exact equality with the replayed record and summary counts |
+| Odd-width proof accepts member, coordinate, digest, or node-set drift | same | Duplicate/out-of-range/missing members and missing/redundant/changed-coordinate/changed-digest nodes fail across every compact odd-width case |
 
 ## Next matrix expansion
 
-- deterministic multiproof properties over odd-width record trees and duplicate-final-node levels;
+- independent Python parity for the compact odd-width property summary and tree-size binding;
 - local-validator transaction rollback and account-lock contention.

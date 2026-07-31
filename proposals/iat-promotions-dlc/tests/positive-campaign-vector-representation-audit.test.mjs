@@ -37,6 +37,16 @@ const artifact = bundle.artifact;
 const MULTIPROOF_PROPERTY_CASE_COUNT = 96;
 const MULTIPROOF_PROPERTY_SET_COMMITMENT_SHA256 =
   "55b6dfca7e24fe93a18ee1a0e45b5086d27ca0f07ec778e283e67953b6582abb";
+const ODD_WIDTH_PROPERTY_SET_COMMITMENT_SHA256 =
+  "937771b307fe23379f7c4840017f1ce7e832186cbd9dfd1420720731624ed354";
+const REPRESENTATION_LEAF_DOMAIN = Buffer.from(
+  "iat-promotions-dlc-representation-audit-leaf-v1",
+  "utf8",
+);
+const REPRESENTATION_NODE_DOMAIN = Buffer.from(
+  "iat-promotions-dlc-representation-audit-node-v1",
+  "utf8",
+);
 
 function runPython(path = null) {
   const args = [PYTHON_VERIFIER, "--verify-representation-audit", "--format", "json"];
@@ -88,6 +98,95 @@ function independentMinimalMultiproofCoordinates(totalLeafCount, indices) {
     level += 1;
   }
   return coordinates;
+}
+
+function hashBuffers(...buffers) {
+  const hash = createHash("sha256");
+  for (const buffer of buffers) hash.update(buffer);
+  return hash.digest("hex");
+}
+
+function independentRepresentationLeaf(recordCommitmentSha256) {
+  return hashBuffers(
+    REPRESENTATION_LEAF_DOMAIN,
+    Buffer.from([0]),
+    Buffer.from(recordCommitmentSha256, "hex"),
+  );
+}
+
+function independentRepresentationParent(leftSha256, rightSha256) {
+  return hashBuffers(
+    REPRESENTATION_NODE_DOMAIN,
+    Buffer.from([0]),
+    Buffer.from(leftSha256, "hex"),
+    Buffer.from(rightSha256, "hex"),
+  );
+}
+
+function independentRepresentationRoot(recordCommitments) {
+  let level = recordCommitments.map(independentRepresentationLeaf);
+  while (level.length > 1) {
+    const next = [];
+    for (let index = 0; index < level.length; index += 2) {
+      next.push(independentRepresentationParent(level[index], level[index + 1] ?? level[index]));
+    }
+    level = next;
+  }
+  return level[0];
+}
+
+function greatestCommonDivisor(left, right) {
+  let a = left;
+  let b = right;
+  while (b !== 0) [a, b] = [b, a % b];
+  return a;
+}
+
+function syntheticOddWidthPropertyCases() {
+  const leafCounts = [1, 3, 5, 7, 9, 15, 17, 31, 33, 63, 65, 127, 129, 255, 257];
+  const cases = [];
+  for (const [treeIndex, leafCount] of leafCounts.entries()) {
+    const sizes = [...new Set([
+      1,
+      Math.min(2, leafCount),
+      Math.ceil(leafCount / 3),
+      Math.floor(leafCount / 2),
+      Math.max(1, leafCount - 1),
+      leafCount,
+    ])].filter((size) => size > 0);
+    for (const [sizeIndex, size] of sizes.entries()) {
+      let indices;
+      if (size === 1) {
+        indices = [leafCount - 1];
+      } else if (size === 2) {
+        indices = [0, leafCount - 1];
+      } else if (size === leafCount) {
+        indices = Array.from({ length: leafCount }, (_, index) => index);
+      } else {
+        const offset = (treeIndex * 19 + sizeIndex * 11 + 3) % leafCount;
+        let stride = (treeIndex * 23 + sizeIndex * 17 + 1) % leafCount;
+        if (stride === 0) stride = 1;
+        while (greatestCommonDivisor(stride, leafCount) !== 1) {
+          stride = (stride + 1) % leafCount;
+          if (stride === 0) stride = 1;
+        }
+        indices = Array.from(
+          { length: size },
+          (_, position) => (offset + stride * position) % leafCount,
+        ).sort((left, right) => left - right);
+      }
+      assert.equal(new Set(indices).size, size, `${leafCount}:${size}`);
+      cases.push({ leafCount, indices });
+    }
+  }
+  return cases;
+}
+
+function syntheticRecordCommitments(leafCount) {
+  return Array.from({ length: leafCount }, (_, index) =>
+    createHash("sha256")
+      .update(`iat-promotions-dlc-odd-width-record-v1\0${leafCount}\0${index}`, "utf8")
+      .digest("hex"));
 }
 
 test("the compact 256-input representation audit deterministically regenerates", () => {
@@ -212,6 +311,9 @@ test("the 84-node multiproof is minimal and equivalent to 26 individual paths", 
     multiproof.proofNodes,
   );
   assert.equal(multiproof.proofNodes.length, 84);
+  assert.equal(multiproof.treeLeafCount, "256");
+  assert.equal(multiproof.treeLeafCount, artifact.summary.caseCount);
+  assert.equal(artifact.merkleContract.multiproofRequiresExactTreeLeafCount, true);
   assert.equal(artifact.expectedCollisionProofs.reduce((total, proof) => total + proof.path.length, 0), 208);
   assert.equal(208 - multiproof.proofNodes.length, 124);
   assert.equal(new Set(multiproof.proofNodes.map((node) => `${node.level}:${node.index}`)).size, 84);
@@ -351,6 +453,110 @@ test("varied subsets reject nonminimal nodes, membership drift, bad roots, and i
       assert.equal(verify(selected, reordered), false, `case ${caseIndex} reordered nodes`);
     }
   }
+});
+
+test("odd-width trees preserve minimal coordinates, duplicate-final-node semantics, and root parity", () => {
+  const cases = syntheticOddWidthPropertyCases();
+  assert.equal(cases.length, 79);
+  assert.equal(new Set(cases.map((propertyCase) => propertyCase.leafCount)).size, 15);
+  assert.equal(
+    createHash("sha256").update(JSON.stringify(cases), "utf8").digest("hex"),
+    ODD_WIDTH_PROPERTY_SET_COMMITMENT_SHA256,
+  );
+  let selectedRecordCount = 0;
+  let aggregateIndividualNodeCount = 0;
+  let aggregateMultiproofNodeCount = 0;
+  for (const [caseIndex, propertyCase] of cases.entries()) {
+    const { leafCount, indices } = propertyCase;
+    const commitments = syntheticRecordCommitments(leafCount);
+    const root = representationAuditMerkleRootSha256(commitments);
+    assert.equal(root, independentRepresentationRoot(commitments), `case ${caseIndex} root`);
+    const nodes = representationAuditMerkleMultiproof(commitments, indices);
+    assert.deepEqual(
+      nodes.map((node) => `${node.level}:${node.index}`),
+      independentMinimalMultiproofCoordinates(leafCount, indices),
+      `case ${caseIndex} coordinates`,
+    );
+    const selected = indices.map((index) => ({
+      index,
+      recordCommitmentSha256: commitments[index],
+    }));
+    assert.equal(verifyRepresentationAuditMerkleMultiproof(
+      selected,
+      leafCount,
+      nodes,
+      root,
+    ), true, `case ${caseIndex} multiproof`);
+    assert.equal(verifyRepresentationAuditMerkleMultiproof(
+      [...selected].reverse(),
+      leafCount,
+      nodes,
+      root,
+    ), true, `case ${caseIndex} reverse`);
+    if (indices.length === 1 && indices[0] === leafCount - 1) {
+      assert.ok(!nodes.some((node) => node.level === "0" && node.index === String(leafCount)));
+    }
+    for (const record of selected) {
+      const path = representationAuditMerkleProof(commitments, record.index);
+      assert.equal(verifyRepresentationAuditMerkleProof(
+        record.recordCommitmentSha256,
+        record.index,
+        path,
+        root,
+      ), true, `case ${caseIndex} index ${record.index}`);
+      aggregateIndividualNodeCount += path.length;
+    }
+    selectedRecordCount += selected.length;
+    aggregateMultiproofNodeCount += nodes.length;
+  }
+  assert.equal(selectedRecordCount, 2_893);
+  assert.equal(aggregateIndividualNodeCount, 21_873);
+  assert.equal(aggregateMultiproofNodeCount, 908);
+  assert.equal(aggregateIndividualNodeCount - aggregateMultiproofNodeCount, 20_965);
+});
+
+test("odd-width multiproofs bind width externally and reject membership, coordinate, digest, and node-set drift", () => {
+  const cases = syntheticOddWidthPropertyCases();
+  let duplicateFinalWidthAliasCount = 0;
+  for (const [caseIndex, propertyCase] of cases.entries()) {
+    const { leafCount, indices } = propertyCase;
+    const commitments = syntheticRecordCommitments(leafCount);
+    const root = representationAuditMerkleRootSha256(commitments);
+    const nodes = representationAuditMerkleMultiproof(commitments, indices);
+    const selected = indices.map((index) => ({
+      index,
+      recordCommitmentSha256: commitments[index],
+    }));
+    const verify = (candidateRecords, candidateNodes, width = leafCount, expectedRoot = root) =>
+      verifyRepresentationAuditMerkleMultiproof(candidateRecords, width, candidateNodes, expectedRoot);
+    if (verify(selected, nodes, leafCount + 1)) duplicateFinalWidthAliasCount += 1;
+    assert.notEqual(
+      createHash("sha256").update(JSON.stringify({ treeLeafCount: leafCount, root }), "utf8").digest("hex"),
+      createHash("sha256").update(JSON.stringify({ treeLeafCount: leafCount + 1, root }), "utf8").digest("hex"),
+      `case ${caseIndex} external width binding`,
+    );
+    assert.equal(verify(selected, nodes, leafCount, "f".repeat(64)), false, `case ${caseIndex} root`);
+    assert.equal(verify([...selected, selected[0]], nodes), false, `case ${caseIndex} duplicate member`);
+    assert.equal(verify(selected.slice(1), nodes), false, `case ${caseIndex} missing member`);
+    const outOfRange = structuredClone(selected);
+    outOfRange.at(-1).index = leafCount;
+    assert.equal(verify(outOfRange, nodes), false, `case ${caseIndex} out-of-range member`);
+    assert.equal(verify(selected, [
+      ...nodes,
+      { level: "0", index: "0", sha256: "e".repeat(64) },
+    ]), false, `case ${caseIndex} redundant node`);
+    if (nodes.length > 0) {
+      assert.equal(verify(selected, nodes.slice(0, -1)), false, `case ${caseIndex} missing node`);
+      const changedDigest = structuredClone(nodes);
+      changedDigest[Math.floor(changedDigest.length / 2)].sha256 = "d".repeat(64);
+      assert.equal(verify(selected, changedDigest), false, `case ${caseIndex} changed digest`);
+      const changedCoordinate = structuredClone(nodes);
+      changedCoordinate[0].index = String(Number(changedCoordinate[0].index) + 1);
+      assert.equal(verify(selected, changedCoordinate), false, `case ${caseIndex} changed coordinate`);
+    }
+  }
+  assert.equal(duplicateFinalWidthAliasCount, 18);
+  assert.equal(verifyRepresentationAuditMerkleMultiproof([], 0, [], "f".repeat(64)), false);
 });
 
 test("Python independently reproduces the representation audit", () => {

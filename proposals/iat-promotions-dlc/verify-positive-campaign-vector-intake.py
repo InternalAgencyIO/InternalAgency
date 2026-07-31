@@ -1877,6 +1877,7 @@ def replay_representation_audit(
     )
     multiproof_core = {
         "family": "EXPECTED_TARGET",
+        "treeLeafCount": str(len(record_commitments)),
         "recordCount": str(len(collision_indices)),
         "recordIndices": [str(index) for index in collision_indices],
         "proofNodes": multiproof_nodes,
@@ -1993,6 +1994,7 @@ def validate_representation_audit(artifact: Any) -> list[str]:
     expect(merkle_contract.get("multiproofNodeCount") == 84, "representation multiproof node count drift")
     expect(merkle_contract.get("individualProofNodeCount") == 208, "representation individual proof-node count drift")
     expect(merkle_contract.get("multiproofSavedNodeCount") == 124, "representation multiproof savings drift")
+    expect(merkle_contract.get("multiproofRequiresExactTreeLeafCount") is True, "representation multiproof tree-size binding disabled")
     expect(merkle_contract.get("multiproofRequiresMinimalNodeSet") is True, "representation multiproof minimality disabled")
     expect(merkle_contract.get("multiproofEquivalentToIndividualProofs") is True, "representation proof equivalence disabled")
     sources = artifact.get("sources", {})
@@ -2159,6 +2161,8 @@ def validate_representation_audit(artifact: Any) -> list[str]:
         [record["index"] for record in selected_records],
     )
     expect(multiproof.get("family") == "EXPECTED_TARGET", "representation multiproof family drift")
+    expect(multiproof.get("treeLeafCount") == str(len(records)), "representation multiproof tree leaf-count drift")
+    expect(multiproof.get("treeLeafCount") == summary.get("caseCount"), "representation multiproof tree leaf-count is not summary-bound")
     expect(multiproof.get("recordCount") == "26", "representation multiproof record count drift")
     expect(multiproof.get("recordIndices") == expected_proof_indices, "representation multiproof membership drift")
     expect(multiproof.get("proofNodeCount") == "84", "representation multiproof compact node count drift")

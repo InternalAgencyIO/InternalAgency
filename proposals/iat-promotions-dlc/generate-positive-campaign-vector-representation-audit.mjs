@@ -319,6 +319,7 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
   );
   const multiproofCore = {
     family: "EXPECTED_TARGET",
+    treeLeafCount: String(recordCommitments.length),
     recordCount: String(expectedCollisionIndices.length),
     recordIndices: expectedCollisionIndices.map(String),
     proofNodes: expectedCollisionMultiproofNodes,
@@ -404,6 +405,7 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
       multiproofNodeCount: 84,
       individualProofNodeCount: 208,
       multiproofSavedNodeCount: 124,
+      multiproofRequiresExactTreeLeafCount: true,
       multiproofRequiresMinimalNodeSet: true,
       multiproofEquivalentToIndividualProofs: true,
     },

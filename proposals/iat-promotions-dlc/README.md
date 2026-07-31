@@ -78,7 +78,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Minimal-counterexample generator](./generate-positive-campaign-vector-intake-minimal-counterexamples.mjs)
 - [Minimal-counterexample validator](./validate-positive-campaign-vector-intake-minimal-counterexamples.mjs)
 - [Representation-sensitivity audit contract](./POSITIVE_CAMPAIGN_VECTOR_REPRESENTATION_AUDIT.md)
-- [Compact representation audit, collision proofs, minimal multiproof, and 96-subset property suite](./positive-campaign-vector-representation-audit.v1.json)
+- [Compact representation audit, collision proofs, tree-size-bound multiproof, and even/odd-width property suites](./positive-campaign-vector-representation-audit.v1.json)
 - [Representation-audit generator](./generate-positive-campaign-vector-representation-audit.mjs)
 - [Representation-audit validator](./validate-positive-campaign-vector-representation-audit.mjs)
 - [Verifier-key lifecycle reference policy](./VERIFIER_KEY_LIFECYCLE.md)
