@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 19:09 UTC
+Updated: 2026-07-31 19:25 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `ccbe6e3`
+Previously published public increment: `b2db223`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -354,8 +354,15 @@ This status file deliberately does not claim a self-referential commit hash.
 - proof and proof-set commitments plus exact Node/Python reconstruction; and
 - index, record, sibling, side, domain, path, root, membership, authority, and
   proof-set mutation rejection.
+- one deterministic minimal multiproof for the same 26 collision members;
+- 84 aggregate proof nodes versus 208 individual-path nodes, with the exact
+  124-node saving bound in the public contract;
+- canonical membership-derived level/index coordinates and exact Node/Python
+  multiproof reconstruction; and
+- missing, redundant, reordered, changed, disconnected, incomplete-membership,
+  authority, equivalence, count, and commitment rejection.
 
-Current proposal-only result: **278 tests passed**. This consists of 28 protected
+Current proposal-only result: **280 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -406,10 +413,11 @@ Nine minimal-counterexample generation, family coverage, primary-gate
 transition, negative-cryptography, ordered-commitment, non-authority, Python
 parity, changed-evidence, source-safety, and manifest-coverage tests complete
 the reduced-fixture suite.
-Eleven representation-audit regeneration, ordered-uniqueness, expected-
+Thirteen representation-audit regeneration, ordered-uniqueness, expected-
 collision, family-coverage, record-tree, exact-proof-coverage, proof-mutation,
-rejection-only, Python-parity, changed-evidence, source-safety, and manifest-
-coverage tests complete the all-input audit suite.
+minimal-multiproof, multiproof-mutation, rejection-only, Python-parity,
+changed-evidence, source-safety, and manifest-coverage tests complete the all-
+input audit suite.
 
 ## Current guarantees of the reference model
 
@@ -441,7 +449,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a deterministic minimal Merkle multiproof for the same 26 expected
-collision members, with exact node-set minimality and equivalence to every
-individual proof. Keep it local, compact, rejection-only, and non-authoritative
-without storing full input or result expansions.
+Add deterministic property tests over varied record subsets to prove
+multiproof construction, exact coordinate minimality, and verification parity
+beyond the fixed 26-member class. Keep every generated case local, compact,
+rejection-only, and non-authoritative without storing full input or result
+expansions.

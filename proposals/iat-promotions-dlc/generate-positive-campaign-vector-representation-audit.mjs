@@ -136,6 +136,110 @@ export function verifyRepresentationAuditMerkleProof(
   return current === expectedRootSha256;
 }
 
+function representationAuditMultiproofNodeKeys(totalLeafCount, indices) {
+  if (!Number.isSafeInteger(totalLeafCount) || totalLeafCount <= 0) {
+    throw new Error("INVALID_REPRESENTATION_MULTIPROOF_LEAF_COUNT");
+  }
+  const unique = [...new Set(indices)].sort((left, right) => left - right);
+  if (
+    unique.length !== indices.length
+    || unique.some((index) => !Number.isSafeInteger(index) || index < 0 || index >= totalLeafCount)
+  ) {
+    throw new Error("INVALID_REPRESENTATION_MULTIPROOF_INDICES");
+  }
+  const keys = [];
+  let active = new Set(unique);
+  let width = totalLeafCount;
+  let level = 0;
+  while (width > 1) {
+    const next = new Set();
+    for (const index of [...active].sort((left, right) => left - right)) {
+      const sibling = index % 2 === 0 ? index + 1 : index - 1;
+      if (sibling < width && !active.has(sibling)) keys.push({ level, index: sibling });
+      next.add(Math.floor(index / 2));
+    }
+    active = next;
+    width = Math.ceil(width / 2);
+    level += 1;
+  }
+  return keys;
+}
+
+export function representationAuditMerkleMultiproof(recordCommitments, indices) {
+  const levels = representationAuditMerkleLevels(recordCommitments);
+  return representationAuditMultiproofNodeKeys(recordCommitments.length, indices).map((key) => ({
+    level: String(key.level),
+    index: String(key.index),
+    sha256: levels[key.level][key.index],
+  }));
+}
+
+export function verifyRepresentationAuditMerkleMultiproof(
+  selectedRecords,
+  totalLeafCount,
+  proofNodes,
+  expectedRootSha256,
+) {
+  if (!Array.isArray(selectedRecords) || selectedRecords.length === 0 || !Array.isArray(proofNodes)) {
+    return false;
+  }
+  const indices = selectedRecords.map((record) => record?.index);
+  let expectedKeys;
+  try {
+    expectedKeys = representationAuditMultiproofNodeKeys(totalLeafCount, indices);
+  } catch {
+    return false;
+  }
+  if (proofNodes.length !== expectedKeys.length) return false;
+  const proofMap = new Map();
+  for (let position = 0; position < proofNodes.length; position += 1) {
+    const node = proofNodes[position];
+    const expected = expectedKeys[position];
+    if (
+      node?.level !== String(expected.level)
+      || node?.index !== String(expected.index)
+      || !HEX_32.test(node?.sha256 ?? "")
+    ) {
+      return false;
+    }
+    proofMap.set(`${node.level}:${node.index}`, node.sha256);
+  }
+  let active = new Map();
+  for (const record of selectedRecords) {
+    if (!Number.isSafeInteger(record?.index) || !HEX_32.test(record?.recordCommitmentSha256 ?? "")) {
+      return false;
+    }
+    active.set(record.index, representationAuditLeafSha256(record.recordCommitmentSha256));
+  }
+  let width = totalLeafCount;
+  let level = 0;
+  const used = new Set();
+  while (width > 1) {
+    const parents = [...new Set([...active.keys()].map((index) => Math.floor(index / 2)))]
+      .sort((left, right) => left - right);
+    const next = new Map();
+    for (const parent of parents) {
+      const leftIndex = parent * 2;
+      const rightIndex = Math.min(leftIndex + 1, width - 1);
+      const resolve = (index) => {
+        if (active.has(index)) return active.get(index);
+        const key = `${level}:${index}`;
+        if (!proofMap.has(key)) return null;
+        used.add(key);
+        return proofMap.get(key);
+      };
+      const left = resolve(leftIndex);
+      const right = resolve(rightIndex);
+      if (left === null || right === null) return false;
+      next.set(parent, representationAuditParentSha256(left, right));
+    }
+    active = next;
+    width = Math.ceil(width / 2);
+    level += 1;
+  }
+  return active.get(0) === expectedRootSha256 && used.size === proofMap.size;
+}
+
 export function replayPositiveCampaignVectorRepresentationAudit() {
   const replays = Array.from({ length: FUZZ_CASE_COUNT }, (_, index) =>
     replayPositiveCampaignVectorIntakeFuzzCase(index));
@@ -208,6 +312,31 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
       };
       return { ...core, proofCommitmentSha256: canonicalSha256(core) };
     });
+  const expectedCollisionIndices = expectedCollisionProofs.map((proof) => Number(proof.index));
+  const expectedCollisionMultiproofNodes = representationAuditMerkleMultiproof(
+    recordCommitments,
+    expectedCollisionIndices,
+  );
+  const multiproofCore = {
+    family: "EXPECTED_TARGET",
+    recordCount: String(expectedCollisionIndices.length),
+    recordIndices: expectedCollisionIndices.map(String),
+    proofNodes: expectedCollisionMultiproofNodes,
+    proofNodeCount: String(expectedCollisionMultiproofNodes.length),
+    proofVerifiedToPublishedRoot: true,
+    minimalNodeSet: true,
+    equivalentToIndividualProofs: true,
+    inputOrResultStored: false,
+    accepted: false,
+    receiptIssued: false,
+    reviewCompleted: false,
+    activationAuthorized: false,
+    activationEffect: "NONE",
+  };
+  const expectedCollisionMultiproof = {
+    ...multiproofCore,
+    multiproofCommitmentSha256: canonicalSha256(multiproofCore),
+  };
   return {
     auditVersion: 1,
     auditId: "iat-promotions-dlc-positive-campaign-vector-representation-audit-v1",
@@ -271,6 +400,12 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
       proofCount: 26,
       proofPathLength: 8,
       publishesProofsForAcceptedVectors: false,
+      multiproofCount: 1,
+      multiproofNodeCount: 84,
+      individualProofNodeCount: 208,
+      multiproofSavedNodeCount: 124,
+      multiproofRequiresMinimalNodeSet: true,
+      multiproofEquivalentToIndividualProofs: true,
     },
     summary: {
       caseCount: String(replay.records.length),
@@ -291,10 +426,21 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
       expectedCollisionProofSetCommitmentSha256: canonicalSha256(
         expectedCollisionProofs.map((proof) => proof.proofCommitmentSha256),
       ),
+      expectedCollisionMultiproofNodeCount: expectedCollisionMultiproof.proofNodeCount,
+      expectedCollisionIndividualProofNodeCount: String(
+        expectedCollisionProofs.reduce((total, proof) => total + proof.path.length, 0),
+      ),
+      expectedCollisionMultiproofSavedNodeCount: String(
+        expectedCollisionProofs.reduce((total, proof) => total + proof.path.length, 0)
+          - expectedCollisionMultiproofNodes.length,
+      ),
+      expectedCollisionMultiproofCommitmentSha256:
+        expectedCollisionMultiproof.multiproofCommitmentSha256,
       allRejected: true,
     },
     canonicalCollisionClasses: replay.canonicalCollisionClasses,
     expectedCollisionProofs,
+    expectedCollisionMultiproof,
     records: replay.records,
   };
 }

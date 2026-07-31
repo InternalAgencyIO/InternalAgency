@@ -1376,6 +1376,121 @@ def verify_representation_audit_merkle_proof(
     return current == expected_root_sha256
 
 
+def representation_audit_multiproof_node_keys(
+    total_leaf_count: int, indices: list[int]
+) -> list[tuple[int, int]]:
+    if total_leaf_count <= 0:
+        raise ValueError("INVALID_REPRESENTATION_MULTIPROOF_LEAF_COUNT")
+    unique = sorted(set(indices))
+    if len(unique) != len(indices) or any(
+        index < 0 or index >= total_leaf_count for index in unique
+    ):
+        raise ValueError("INVALID_REPRESENTATION_MULTIPROOF_INDICES")
+    keys = []
+    active = set(unique)
+    width = total_leaf_count
+    level = 0
+    while width > 1:
+        next_active = set()
+        for index in sorted(active):
+            sibling = index + 1 if index % 2 == 0 else index - 1
+            if sibling < width and sibling not in active:
+                keys.append((level, sibling))
+            next_active.add(index // 2)
+        active = next_active
+        width = (width + 1) // 2
+        level += 1
+    return keys
+
+
+def representation_audit_merkle_multiproof(
+    record_commitments: list[str], indices: list[int]
+) -> list[dict[str, str]]:
+    levels = representation_audit_merkle_levels(record_commitments)
+    return [
+        {
+            "level": str(level),
+            "index": str(index),
+            "sha256": levels[level][index],
+        }
+        for level, index in representation_audit_multiproof_node_keys(
+            len(record_commitments), indices
+        )
+    ]
+
+
+def verify_representation_audit_merkle_multiproof(
+    selected_records: Any,
+    total_leaf_count: int,
+    proof_nodes: Any,
+    expected_root_sha256: str,
+) -> bool:
+    if (
+        not isinstance(selected_records, list)
+        or not selected_records
+        or not isinstance(proof_nodes, list)
+    ):
+        return False
+    indices = [record.get("index") for record in selected_records]
+    try:
+        expected_keys = representation_audit_multiproof_node_keys(
+            total_leaf_count, indices
+        )
+    except (TypeError, ValueError):
+        return False
+    if len(proof_nodes) != len(expected_keys):
+        return False
+    proof_map = {}
+    for position, node in enumerate(proof_nodes):
+        expected_level, expected_index = expected_keys[position]
+        if (
+            not isinstance(node, dict)
+            or node.get("level") != str(expected_level)
+            or node.get("index") != str(expected_index)
+            or not re.fullmatch(r"[0-9a-f]{64}", node.get("sha256", ""))
+        ):
+            return False
+        proof_map[(expected_level, expected_index)] = node["sha256"]
+    active = {}
+    for record in selected_records:
+        index = record.get("index")
+        commitment = record.get("recordCommitmentSha256")
+        if not isinstance(index, int):
+            return False
+        try:
+            active[index] = representation_audit_leaf_sha256(commitment)
+        except ValueError:
+            return False
+    width = total_leaf_count
+    level = 0
+    used = set()
+    while width > 1:
+        parents = sorted({index // 2 for index in active})
+        next_active = {}
+        for parent in parents:
+            left_index = parent * 2
+            right_index = min(left_index + 1, width - 1)
+
+            def resolve(index: int) -> str | None:
+                if index in active:
+                    return active[index]
+                key = (level, index)
+                if key not in proof_map:
+                    return None
+                used.add(key)
+                return proof_map[key]
+
+            left = resolve(left_index)
+            right = resolve(right_index)
+            if left is None or right is None:
+                return False
+            next_active[parent] = representation_audit_parent_sha256(left, right)
+        active = next_active
+        width = (width + 1) // 2
+        level += 1
+    return active.get(0) == expected_root_sha256 and len(used) == len(proof_map)
+
+
 def result_gate(result: dict[str, Any], gate_id: str) -> dict[str, str]:
     for entry in result["gates"]:
         if entry["id"] == gate_id:
@@ -1756,11 +1871,36 @@ def replay_representation_audit(
                 "proofCommitmentSha256": canonical_sha256(proof_core),
             }
         )
+    collision_indices = [int(proof["index"]) for proof in expected_collision_proofs]
+    multiproof_nodes = representation_audit_merkle_multiproof(
+        record_commitments, collision_indices
+    )
+    multiproof_core = {
+        "family": "EXPECTED_TARGET",
+        "recordCount": str(len(collision_indices)),
+        "recordIndices": [str(index) for index in collision_indices],
+        "proofNodes": multiproof_nodes,
+        "proofNodeCount": str(len(multiproof_nodes)),
+        "proofVerifiedToPublishedRoot": True,
+        "minimalNodeSet": True,
+        "equivalentToIndividualProofs": True,
+        "inputOrResultStored": False,
+        "accepted": False,
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+    expected_collision_multiproof = {
+        **multiproof_core,
+        "multiproofCommitmentSha256": canonical_sha256(multiproof_core),
+    }
     return {
         "records": records,
         "canonicalCollisionClasses": collision_classes,
         "recordMerkleRootSha256": merkle_root,
         "expectedCollisionProofs": expected_collision_proofs,
+        "expectedCollisionMultiproof": expected_collision_multiproof,
     }
 
 
@@ -1849,6 +1989,12 @@ def validate_representation_audit(artifact: Any) -> list[str]:
         merkle_contract.get("publishesProofsForAcceptedVectors") is False,
         "representation proof contract claims accepted vectors",
     )
+    expect(merkle_contract.get("multiproofCount") == 1, "representation multiproof count drift")
+    expect(merkle_contract.get("multiproofNodeCount") == 84, "representation multiproof node count drift")
+    expect(merkle_contract.get("individualProofNodeCount") == 208, "representation individual proof-node count drift")
+    expect(merkle_contract.get("multiproofSavedNodeCount") == 124, "representation multiproof savings drift")
+    expect(merkle_contract.get("multiproofRequiresMinimalNodeSet") is True, "representation multiproof minimality disabled")
+    expect(merkle_contract.get("multiproofEquivalentToIndividualProofs") is True, "representation proof equivalence disabled")
     sources = artifact.get("sources", {})
     expect(
         sources.get("fuzzVectors", {}).get("canonicalSha256")
@@ -1883,6 +2029,11 @@ def validate_representation_audit(artifact: Any) -> list[str]:
         artifact.get("expectedCollisionProofs")
         == replay["expectedCollisionProofs"],
         "representation inclusion proofs do not independently replay",
+    )
+    expect(
+        artifact.get("expectedCollisionMultiproof")
+        == replay["expectedCollisionMultiproof"],
+        "representation multiproof does not independently replay",
     )
     ordered: set[str] = set()
     canonical: set[str] = set()
@@ -1994,6 +2145,62 @@ def validate_representation_audit(artifact: Any) -> list[str]:
         summary.get("expectedCollisionProofSetCommitmentSha256")
         == canonical_sha256([proof["proofCommitmentSha256"] for proof in proofs]),
         "representation proof-set commitment drift",
+    )
+    multiproof = artifact.get("expectedCollisionMultiproof", {})
+    selected_records = [
+        {
+            "index": int(proof["index"]),
+            "recordCommitmentSha256": proof["auditRecordCommitmentSha256"],
+        }
+        for proof in proofs
+    ]
+    expected_multiproof_nodes = representation_audit_merkle_multiproof(
+        [record["auditRecordCommitmentSha256"] for record in records],
+        [record["index"] for record in selected_records],
+    )
+    expect(multiproof.get("family") == "EXPECTED_TARGET", "representation multiproof family drift")
+    expect(multiproof.get("recordCount") == "26", "representation multiproof record count drift")
+    expect(multiproof.get("recordIndices") == expected_proof_indices, "representation multiproof membership drift")
+    expect(multiproof.get("proofNodeCount") == "84", "representation multiproof compact node count drift")
+    expect(multiproof.get("proofNodes") == expected_multiproof_nodes, "representation multiproof nodes are not minimal or deterministic")
+    expect(
+        verify_representation_audit_merkle_multiproof(
+            selected_records,
+            len(records),
+            multiproof.get("proofNodes"),
+            replay["recordMerkleRootSha256"],
+        ),
+        "representation multiproof does not reach the published root",
+    )
+    expect(multiproof.get("proofVerifiedToPublishedRoot") is True, "representation multiproof verification claim drift")
+    expect(multiproof.get("minimalNodeSet") is True, "representation multiproof minimality claim drift")
+    expect(multiproof.get("equivalentToIndividualProofs") is True, "representation multiproof equivalence claim drift")
+    for field in [
+        "inputOrResultStored",
+        "accepted",
+        "receiptIssued",
+        "reviewCompleted",
+        "activationAuthorized",
+    ]:
+        expect(multiproof.get(field) is False, f"representation multiproof {field} drift")
+    expect(multiproof.get("activationEffect") == "NONE", "representation multiproof activation effect drift")
+    multiproof_core = {
+        key: value
+        for key, value in multiproof.items()
+        if key != "multiproofCommitmentSha256"
+    }
+    expect(
+        multiproof.get("multiproofCommitmentSha256")
+        == canonical_sha256(multiproof_core),
+        "representation multiproof commitment drift",
+    )
+    expect(summary.get("expectedCollisionMultiproofNodeCount") == "84", "representation multiproof summary node count drift")
+    expect(summary.get("expectedCollisionIndividualProofNodeCount") == "208", "representation individual-proof summary count drift")
+    expect(summary.get("expectedCollisionMultiproofSavedNodeCount") == "124", "representation multiproof summary savings drift")
+    expect(
+        summary.get("expectedCollisionMultiproofCommitmentSha256")
+        == multiproof.get("multiproofCommitmentSha256"),
+        "representation multiproof summary commitment drift",
     )
     return errors
 
@@ -2115,6 +2322,10 @@ def render_representation_result(
     record_merkle_root: str | None,
     expected_collision_proof_count: int,
     proof_set_commitment: str | None,
+    multiproof_node_count: int,
+    individual_proof_node_count: int,
+    multiproof_saved_node_count: int,
+    multiproof_commitment: str | None,
     output_format: str,
 ) -> str:
     result = {
@@ -2130,6 +2341,10 @@ def render_representation_result(
         "auditRecordMerkleRootSha256": record_merkle_root,
         "expectedCollisionProofCount": expected_collision_proof_count,
         "expectedCollisionProofSetCommitmentSha256": proof_set_commitment,
+        "expectedCollisionMultiproofNodeCount": multiproof_node_count,
+        "expectedCollisionIndividualProofNodeCount": individual_proof_node_count,
+        "expectedCollisionMultiproofSavedNodeCount": multiproof_saved_node_count,
+        "expectedCollisionMultiproofCommitmentSha256": multiproof_commitment,
         "receiptIssued": False,
         "reviewCompleted": False,
         "activationAuthorized": False,
@@ -2237,6 +2452,10 @@ def main(argv: list[str] | None = None) -> int:
             summary.get("auditRecordMerkleRootSha256"),
             int(summary.get("expectedCollisionProofCount", 0)),
             summary.get("expectedCollisionProofSetCommitmentSha256"),
+            int(summary.get("expectedCollisionMultiproofNodeCount", 0)),
+            int(summary.get("expectedCollisionIndividualProofNodeCount", 0)),
+            int(summary.get("expectedCollisionMultiproofSavedNodeCount", 0)),
+            summary.get("expectedCollisionMultiproofCommitmentSha256"),
             args.format,
         ))
     return 0 if not errors else 2

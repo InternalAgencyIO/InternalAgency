@@ -259,8 +259,12 @@ security audit or deployment approval.
 | Proof index, sibling digest, side, or record commitment changes | `index, sibling, side, and record mutations...` | Eight-step verification cannot reach the published record root |
 | Proofs omit or add a collision member | `published inclusion proofs cover exactly...` | Proof indices must equal the complete ordered 26-member expected class |
 | Proof claims acceptance, receipt, review, or activation | `published inclusion proofs cover exactly...` | Every proof remains rejection-only and authority-negative |
+| Multiproof repeats or adds an unneeded sibling | `missing, redundant, reordered...` | Exact coordinate minimality rejects surplus nodes before root verification |
+| Multiproof omits, reorders, changes, or disconnects a node | same | Canonical 84-node reconstruction fails closed |
+| Multiproof silently drops one collision member | same / `the 84-node multiproof is minimal...` | Membership-derived node coordinates no longer match the proof |
+| Multiproof savings or individual-proof equivalence drifts | `the 84-node multiproof is minimal...` | Fixed 84/208/124 counts and both runtime reconstructions reject drift |
 
 ## Next matrix expansion
 
-- a compact deterministic multiproof for the same expected collision class;
+- deterministic multiproof property tests over varied record subsets;
 - local-validator transaction rollback and account-lock contention.

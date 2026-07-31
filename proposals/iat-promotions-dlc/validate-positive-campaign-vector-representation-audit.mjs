@@ -12,7 +12,9 @@ import {
   generatePositiveCampaignVectorRepresentationAudit,
   replayPositiveCampaignVectorRepresentationAudit,
   representationAuditLeafSha256,
+  representationAuditMerkleMultiproof,
   representationAuditMerkleRootSha256,
+  verifyRepresentationAuditMerkleMultiproof,
   verifyRepresentationAuditMerkleProof,
 } from "./generate-positive-campaign-vector-representation-audit.mjs";
 
@@ -98,6 +100,12 @@ export function validatePositiveCampaignVectorRepresentationAudit(
   expect(artifact?.merkleContract?.proofCount === 26, "representation proof count contract drift");
   expect(artifact?.merkleContract?.proofPathLength === 8, "representation proof path-length drift");
   expect(artifact?.merkleContract?.publishesProofsForAcceptedVectors === false, "representation proof contract claims accepted vectors");
+  expect(artifact?.merkleContract?.multiproofCount === 1, "representation multiproof count drift");
+  expect(artifact?.merkleContract?.multiproofNodeCount === 84, "representation multiproof node count drift");
+  expect(artifact?.merkleContract?.individualProofNodeCount === 208, "representation individual proof-node count drift");
+  expect(artifact?.merkleContract?.multiproofSavedNodeCount === 124, "representation multiproof savings drift");
+  expect(artifact?.merkleContract?.multiproofRequiresMinimalNodeSet === true, "representation multiproof minimality disabled");
+  expect(artifact?.merkleContract?.multiproofEquivalentToIndividualProofs === true, "representation proof equivalence disabled");
 
   const replay = replayPositiveCampaignVectorRepresentationAudit();
   expect(Array.isArray(artifact?.records) && artifact.records.length === FUZZ_CASE_COUNT, "representation record count drift");
@@ -202,6 +210,55 @@ export function validatePositiveCampaignVectorRepresentationAudit(
       proofs.map((proof) => proof.proofCommitmentSha256),
     ),
     "representation proof-set commitment drift",
+  );
+  const multiproof = artifact?.expectedCollisionMultiproof ?? {};
+  const selectedRecords = proofs.map((proof) => ({
+    index: Number(proof.index),
+    recordCommitmentSha256: proof.auditRecordCommitmentSha256,
+  }));
+  const expectedMultiproofNodes = representationAuditMerkleMultiproof(
+    recordCommitments,
+    selectedRecords.map((record) => record.index),
+  );
+  expect(multiproof.family === "EXPECTED_TARGET", "representation multiproof family drift");
+  expect(multiproof.recordCount === "26", "representation multiproof record count drift");
+  expect(JSON.stringify(multiproof.recordIndices) === JSON.stringify(expectedProofIndices), "representation multiproof membership drift");
+  expect(multiproof.proofNodeCount === "84", "representation multiproof compact node count drift");
+  expect(JSON.stringify(multiproof.proofNodes) === JSON.stringify(expectedMultiproofNodes), "representation multiproof nodes are not minimal or deterministic");
+  expect(
+    verifyRepresentationAuditMerkleMultiproof(
+      selectedRecords,
+      recordCommitments.length,
+      multiproof.proofNodes,
+      merkleRoot,
+    ),
+    "representation multiproof does not reach the published root",
+  );
+  expect(multiproof.proofVerifiedToPublishedRoot === true, "representation multiproof verification claim drift");
+  expect(multiproof.minimalNodeSet === true, "representation multiproof minimality claim drift");
+  expect(multiproof.equivalentToIndividualProofs === true, "representation multiproof equivalence claim drift");
+  for (const field of [
+    "inputOrResultStored",
+    "accepted",
+    "receiptIssued",
+    "reviewCompleted",
+    "activationAuthorized",
+  ]) {
+    expect(multiproof[field] === false, `representation multiproof ${field} drift`);
+  }
+  expect(multiproof.activationEffect === "NONE", "representation multiproof activation effect drift");
+  const { multiproofCommitmentSha256, ...multiproofCore } = multiproof;
+  expect(
+    multiproofCommitmentSha256 === canonicalSha256(multiproofCore),
+    "representation multiproof commitment drift",
+  );
+  expect(artifact?.summary?.expectedCollisionMultiproofNodeCount === "84", "representation multiproof summary node count drift");
+  expect(artifact?.summary?.expectedCollisionIndividualProofNodeCount === "208", "representation individual-proof summary count drift");
+  expect(artifact?.summary?.expectedCollisionMultiproofSavedNodeCount === "124", "representation multiproof summary savings drift");
+  expect(
+    artifact?.summary?.expectedCollisionMultiproofCommitmentSha256
+      === multiproofCommitmentSha256,
+    "representation multiproof summary commitment drift",
   );
   expect(
     JSON.stringify(generatePositiveCampaignVectorRepresentationAudit()) === JSON.stringify(artifact),

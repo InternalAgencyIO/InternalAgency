@@ -119,4 +119,6 @@ commitments, and independently confirms that the only canonical collision is
 the expected 26-case target-key-order class. It stores no full input or result
 expansions. It also reconstructs the domain-separated 256-record Merkle root
 and all 26 eight-step inclusion proofs for that expected class. No proof grants
-a receipt, review, or activation authority.
+a receipt, review, or activation authority. The same mode reconstructs the
+84-node minimal multiproof, proves equivalence to the 208 individual proof
+nodes, rejects redundant or disconnected nodes, and binds the 124-node saving.

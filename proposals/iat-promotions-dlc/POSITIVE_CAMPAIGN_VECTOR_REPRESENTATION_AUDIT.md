@@ -34,9 +34,18 @@ canonical commitments.
 The tree uses SHA-256, distinct leaf and node domains, raw 32-byte digests, and
 duplicate-final-node handling for odd levels. Changing a record, index, sibling,
 side, path order, proof commitment, root, or proof-set commitment fails closed.
+
+A deterministic minimal multiproof covers those same 26 records with 84 proof
+nodes instead of the 208 nodes carried by 26 independent eight-step paths. Its
+node coordinates are derived solely from the sorted membership indices. Every
+node must be connected, uniquely required, and in canonical level/index order;
+missing, redundant, reordered, changed, disconnected, or incomplete evidence
+fails. The multiproof commitment binds membership, nodes, minimality,
+individual-proof equivalence, and permanent non-authority.
+
 It does not store the 256 full inputs or results. Node regenerates the artifact;
 Python independently rebuilds every record, collision class, tree root, and
-proof from the base vectors and fixed seed.
+individual or aggregate proof from the base vectors and fixed seed.
 
 ## Reproduce locally
 

@@ -14,8 +14,10 @@ import { FUZZ_FAMILIES } from "../generate-positive-campaign-vector-intake-fuzz-
 import {
   generatePositiveCampaignVectorRepresentationAudit,
   replayPositiveCampaignVectorRepresentationAudit,
+  representationAuditMerkleMultiproof,
   representationAuditMerkleProof,
   representationAuditMerkleRootSha256,
+  verifyRepresentationAuditMerkleMultiproof,
   verifyRepresentationAuditMerkleProof,
 } from "../generate-positive-campaign-vector-representation-audit.mjs";
 import { loadReviewManifest } from "../validate-review-manifest.mjs";
@@ -148,6 +150,60 @@ test("index, sibling, side, and record mutations invalidate inclusion", () => {
   ), false);
 });
 
+test("the 84-node multiproof is minimal and equivalent to 26 individual paths", () => {
+  const commitments = artifact.records.map((record) => record.auditRecordCommitmentSha256);
+  const selected = artifact.expectedCollisionProofs.map((proof) => ({
+    index: Number(proof.index),
+    recordCommitmentSha256: proof.auditRecordCommitmentSha256,
+  }));
+  const multiproof = artifact.expectedCollisionMultiproof;
+  assert.deepEqual(
+    representationAuditMerkleMultiproof(commitments, selected.map((record) => record.index)),
+    multiproof.proofNodes,
+  );
+  assert.equal(multiproof.proofNodes.length, 84);
+  assert.equal(artifact.expectedCollisionProofs.reduce((total, proof) => total + proof.path.length, 0), 208);
+  assert.equal(208 - multiproof.proofNodes.length, 124);
+  assert.equal(new Set(multiproof.proofNodes.map((node) => `${node.level}:${node.index}`)).size, 84);
+  assert.equal(verifyRepresentationAuditMerkleMultiproof(
+    selected,
+    commitments.length,
+    multiproof.proofNodes,
+    artifact.summary.auditRecordMerkleRootSha256,
+  ), true);
+  assert.equal(multiproof.minimalNodeSet, true);
+  assert.equal(multiproof.equivalentToIndividualProofs, true);
+  assert.equal(multiproof.inputOrResultStored, false);
+  assert.equal(multiproof.accepted, false);
+  assert.equal(multiproof.receiptIssued, false);
+  assert.equal(multiproof.reviewCompleted, false);
+  assert.equal(multiproof.activationAuthorized, false);
+  assert.equal(multiproof.activationEffect, "NONE");
+});
+
+test("missing, redundant, reordered, changed, and disconnected multiproof nodes fail", () => {
+  const selected = artifact.expectedCollisionProofs.map((proof) => ({
+    index: Number(proof.index),
+    recordCommitmentSha256: proof.auditRecordCommitmentSha256,
+  }));
+  const root = artifact.summary.auditRecordMerkleRootSha256;
+  const nodes = artifact.expectedCollisionMultiproof.proofNodes;
+  const verify = (candidateNodes, candidateRecords = selected) =>
+    verifyRepresentationAuditMerkleMultiproof(candidateRecords, 256, candidateNodes, root);
+  assert.equal(verify(nodes.slice(0, -1)), false);
+  assert.equal(verify([...nodes, nodes.at(-1)]), false);
+  const reordered = structuredClone(nodes);
+  [reordered[0], reordered[1]] = [reordered[1], reordered[0]];
+  assert.equal(verify(reordered), false);
+  const changed = structuredClone(nodes);
+  changed[19].sha256 = "f".repeat(64);
+  assert.equal(verify(changed), false);
+  const disconnected = structuredClone(nodes);
+  disconnected[6].index = String(Number(disconnected[6].index) + 2);
+  assert.equal(verify(disconnected), false);
+  assert.equal(verify(nodes, selected.slice(1)), false);
+});
+
 test("Python independently reproduces the representation audit", () => {
   assert.ok(PYTHON, "Python 3 is required for representation verification");
   const result = runPython();
@@ -166,6 +222,11 @@ test("Python independently reproduces the representation audit", () => {
     expectedCollisionProofCount: 26,
     expectedCollisionProofSetCommitmentSha256:
       artifact.summary.expectedCollisionProofSetCommitmentSha256,
+    expectedCollisionMultiproofNodeCount: 84,
+    expectedCollisionIndividualProofNodeCount: 208,
+    expectedCollisionMultiproofSavedNodeCount: 124,
+    expectedCollisionMultiproofCommitmentSha256:
+      artifact.summary.expectedCollisionMultiproofCommitmentSha256,
     receiptIssued: false,
     reviewCompleted: false,
     activationAuthorized: false,
@@ -193,14 +254,14 @@ test("Python rejects changed compact evidence and a stale set commitment", () =>
     assert.equal(setResult.status, 2, setResult.stderr || setResult.stdout);
     assert.ok(JSON.parse(setResult.stdout).errors.includes("representation record-set commitment drift"));
 
-    const changedProof = structuredClone(artifact);
-    changedProof.expectedCollisionProofs[4].path[2].siblingSha256 = "d".repeat(64);
-    const proofPath = join(directory, "changed-proof.json");
-    writeFileSync(proofPath, `${JSON.stringify(changedProof, null, 2)}\n`, "utf8");
-    const proofResult = runPython(proofPath);
-    assert.equal(proofResult.status, 2, proofResult.stderr || proofResult.stdout);
-    assert.ok(JSON.parse(proofResult.stdout).errors.includes(
-      "representation inclusion proofs do not independently replay",
+    const changedMultiproof = structuredClone(artifact);
+    changedMultiproof.expectedCollisionMultiproof.proofNodes[12].sha256 = "d".repeat(64);
+    const multiproofPath = join(directory, "changed-multiproof.json");
+    writeFileSync(multiproofPath, `${JSON.stringify(changedMultiproof, null, 2)}\n`, "utf8");
+    const multiproofResult = runPython(multiproofPath);
+    assert.equal(multiproofResult.status, 2, multiproofResult.stderr || multiproofResult.stdout);
+    assert.ok(JSON.parse(multiproofResult.stdout).errors.includes(
+      "representation multiproof does not independently replay",
     ));
   } finally {
     rmSync(directory, { recursive: true, force: true });
