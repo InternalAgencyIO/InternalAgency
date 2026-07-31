@@ -651,6 +651,13 @@ rejected and regenerated.
 | **Warsaw Vistula Bridge Intercept**<br><img src="544-poland-warsaw-vistula-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald civic-signal prism above Warsaw's Vistula Boulevards and cable bridge"> | **Krakow Cloth Hall Vault Cipher**<br><img src="545-poland-krakow-cloth-hall-vault-cipher.png" width="420" alt="The trio braiding gold, jade, and violet beams into a sealed archive prism beside Krakow's Cloth Hall arcades"> |
 | **Tatra Morskie Oko Prism Extraction**<br><img src="546-poland-tatra-morskie-oko-prism-extraction.png" width="420" alt="The trio restoring an alpine watershed beacon above Morskie Oko and the High Tatras"> | **Gdansk Motlawa Crane Night Relay**<br><img src="547-poland-gdansk-motlawa-crane-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three glowing keys beside Gdansk's Motlawa waterfront and medieval port crane"> |
 
+## World Series - Asia - Batch 132: Uzbekistan
+
+| | |
+|---|---|
+| **Tashkent City Canal Intercept**<br><img src="548-uzbekistan-tashkent-city-canal-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a gold atlas-silk prism above Tashkent City Park canal and modern towers"> | **Samarkand Registan Star Cipher**<br><img src="549-uzbekistan-samarkand-registan-star-cipher.png" width="420" alt="The trio sealing a cobalt archive prism before Samarkand Registan's blue-tiled monumental facades"> |
+| **Chimgan Charvak Prism Extraction**<br><img src="550-uzbekistan-chimgan-charvak-prism-extraction.png" width="420" alt="The trio restoring a watershed-data beacon above Charvak Reservoir and the Greater Chimgan mountains"> | **Tashkent Kosmonavtlar Metro Night Relay**<br><img src="551-uzbekistan-tashkent-kosmonavtlar-metro-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three completed light keys inside Tashkent's Kosmonavtlar Metro station"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
