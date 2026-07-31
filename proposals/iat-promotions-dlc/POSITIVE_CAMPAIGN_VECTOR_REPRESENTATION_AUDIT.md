@@ -25,9 +25,18 @@ collision or any repeated ordered commitment fails both validators.
 
 `positive-campaign-vector-representation-audit.v1.json` stores source and
 record commitments, class sizes, the one expected collision-class membership,
-and permanent non-authority flags. It does not store the 256 full inputs or
-results. Node regenerates the artifact; Python independently rebuilds every
-record and collision class from the base vectors and fixed seed.
+and permanent non-authority flags. A domain-separated binary Merkle tree binds
+all 256 records in numeric index order. The artifact publishes an eight-step
+inclusion proof for each of the 26 expected collision members and no proof for
+an accepted vector. Each proof and the ordered proof set have separate
+canonical commitments.
+
+The tree uses SHA-256, distinct leaf and node domains, raw 32-byte digests, and
+duplicate-final-node handling for odd levels. Changing a record, index, sibling,
+side, path order, proof commitment, root, or proof-set commitment fails closed.
+It does not store the 256 full inputs or results. Node regenerates the artifact;
+Python independently rebuilds every record, collision class, tree root, and
+proof from the base vectors and fixed seed.
 
 ## Reproduce locally
 

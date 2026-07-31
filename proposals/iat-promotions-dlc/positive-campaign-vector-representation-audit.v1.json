@@ -20,7 +20,7 @@
   "sources": {
     "fuzzVectors": {
       "path": "positive-campaign-vector-intake-fuzz-vectors.v1.json",
-      "canonicalSha256": "152cd93ddbfbf112bdd7b96d93d32535da4ed2ff4930e6e29f544939f2e8c931"
+      "canonicalSha256": "dc5d3d9e31bccfb67f86088c9e2854af909e7aee729262aac8050d2460932173"
     },
     "fuzzGenerator": {
       "path": "generate-positive-campaign-vector-intake-fuzz-vectors.mjs",
@@ -28,11 +28,11 @@
     },
     "pythonVerifier": {
       "path": "verify-positive-campaign-vector-intake.py",
-      "normalizedTextSha256": "710065bf5d09ccfb962f65b58c3d620c812f11713a6280d2b1b62d744d30cfde"
+      "normalizedTextSha256": "2ae949e28c5a3c9f73bf13798c5b6e635b354ff4878f9ac6ff34c70ddbcc7ead"
     },
     "generator": {
       "path": "generate-positive-campaign-vector-representation-audit.mjs",
-      "normalizedTextSha256": "16ab79dd4f1d585b97106d51ea71d5f297cc949f1c50dd295d573c37a7e44a5b"
+      "normalizedTextSha256": "6fb846a1cd3dfd2d0b61b659690acd56ce4398e5fccdf3d6a6ace54e9890b5b2"
     }
   },
   "contract": {
@@ -57,6 +57,19 @@
     "activationAuthorized": false,
     "activationEffect": "NONE"
   },
+  "merkleContract": {
+    "hash": "SHA-256",
+    "leafDomain": "iat-promotions-dlc-representation-audit-leaf-v1",
+    "leafPreimage": "domain || 0x00 || raw auditRecordCommitmentSha256",
+    "nodeDomain": "iat-promotions-dlc-representation-audit-node-v1",
+    "nodePreimage": "domain || 0x00 || raw leftSha256 || raw rightSha256",
+    "ordering": "records in ascending numeric index order",
+    "oddNode": "duplicate final node",
+    "proofFamily": "EXPECTED_TARGET",
+    "proofCount": 26,
+    "proofPathLength": 8,
+    "publishesProofsForAcceptedVectors": false
+  },
   "summary": {
     "caseCount": "256",
     "canonicalUniqueCount": "231",
@@ -66,6 +79,9 @@
     "unexpectedCanonicalCollisionCount": "0",
     "duplicateOrderedInputCount": "0",
     "auditRecordSetCommitmentSha256": "5319c8164956a3b826ee43397efb37b0f8aea4250176157dcd1ddfa5e44db6ab",
+    "auditRecordMerkleRootSha256": "75db501f7b59e3376e64067fc485caf98d51f20ec89b8b037f4f1a7f6357d967",
+    "expectedCollisionProofCount": "26",
+    "expectedCollisionProofSetCommitmentSha256": "4573e902b2313c60f6c054306a3dbe9015a81da7fe9ce9ef2c03e650d729a3d2",
     "allRejected": true
   },
   "canonicalCollisionClasses": [
@@ -104,6 +120,1490 @@
         "EXPECTED_TARGET"
       ],
       "orderedCommitmentsAllDistinct": true
+    }
+  ],
+  "expectedCollisionProofs": [
+    {
+      "index": "1",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_001_EXPECTED_TARGET_1a4fe0d6",
+      "auditRecordCommitmentSha256": "d24643d946d6b22b97854cff02c28c81fe93a519b49fb33ee319c7ce3d93fa67",
+      "leafSha256": "fb5685ef60715c2896b09a38205781b9d4066acd78a406392a211a0ca425a1fb",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "9600f9d1329bfb4821292b28682208546ceeeef4acaa3fd4efe7bebfde0ce110"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "af3905b726fe27b2f87658a4c275907e1c127f4d8e7259993109e708bb618702"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "17b286a74c27d01bd7143d3455d3b87e696d6379acd0c4474c7fea708fcb179a"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "56f2e350f0a03d717c7e25c494036df0c2408a774d762259ab4ae1c5d78298c9"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "e6ee11136afd827624cca568bddeb5ac13bdeee1f8a1b6ea4c9c6df91eeb0086"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "aff4597e25a91b509d10fc478ce729f42437d38f2eea89ac8b3eac1bdd167331"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "0311d5fe6fbdf6c630b261c38261f01897b8a09a33c0a680caa7907cb425bf2b"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "0f88572dda0593c23a61427f95b27004de65b1d8a5f73c4c3bc59a0c729de609"
+    },
+    {
+      "index": "11",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_011_EXPECTED_TARGET_2aa4d15c",
+      "auditRecordCommitmentSha256": "5271d55613fdcfbde0c27053787bc5d6ab80dd2660b47f1961ff4333cf0bda52",
+      "leafSha256": "e4383b48ce6615d0df0ff6506b97fae06d17910be0565d33b4d71af5cd804738",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "9bb578499a286fb51fb1261435ada600f0f928fe871a481619e2e0b652502e53"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "9ec3df2355327526ec618c419e76784f29f79ea1a648b552074bd46897126ee1"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "0ac22f0220a154440efdc3a97d243768f770fe9beaceeb1fe4ca6a45d2ad770d"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "53045f0ce16daf56d561e17ed74b11ed1e736e5bcd9a65cf301ab08119d44493"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "e6ee11136afd827624cca568bddeb5ac13bdeee1f8a1b6ea4c9c6df91eeb0086"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "aff4597e25a91b509d10fc478ce729f42437d38f2eea89ac8b3eac1bdd167331"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "0311d5fe6fbdf6c630b261c38261f01897b8a09a33c0a680caa7907cb425bf2b"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "c44d6b421a936eff0e6a13bd8745bb7b9cc6094b0b407b0285b1211c7c6d4bfd"
+    },
+    {
+      "index": "21",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_021_EXPECTED_TARGET_36d36c48",
+      "auditRecordCommitmentSha256": "0a08dd0741b9a9550b7d9f14f78487fe236bf5c42f0ea11209b598159e77c057",
+      "leafSha256": "2ae648d1e36fcfa5de816d5d05c897976c525541418b7b150e14ed43d4acafc4",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "eb19fa9fcf23478f6ff21a94865f216f6fb98a07173f847fe47743496abd8ed3"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "25ceb0422ada212f8a6b5dfd9a30a65a8c87ee039948b49706c4e7bfa7e54dd0"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "460ccb7cd06f168327e4146c3ad34b859e5d6e2c85cc2d286a0e41f00e404b20"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "adfc75eb04851f4478d5e1f960a9128988927ad609b550f7998a4c957ad702bc"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "2e9856a53e4b1d32a2c074ecad8ff58f874f688591a23200a23c2d4b34389470"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "aff4597e25a91b509d10fc478ce729f42437d38f2eea89ac8b3eac1bdd167331"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "0311d5fe6fbdf6c630b261c38261f01897b8a09a33c0a680caa7907cb425bf2b"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "ef4ac64f1e31aa827a54c9c4a3e28b42d607abdabbd4d4a3bdaa155e090cf4f8"
+    },
+    {
+      "index": "31",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_031_EXPECTED_TARGET_bd22d9e1",
+      "auditRecordCommitmentSha256": "a67650e9458d94857eb5e6d24a344480e682631f399a60fdd18307291a0cc939",
+      "leafSha256": "8e3e4ac0f32ed379be20d55ec9f2b085c223808fcf89bbc4c6e20468f63536b8",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "c7a2498fb6b1ab2bd900a955b944e8050537a5fa60376a5f285f0b5239258ea5"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "fc0bc1307ae3129c826c6be2bf6d0b196798df01ee5d03bb4cb054ddbae6da7d"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "dfd84fd0d4a28bb764793f7653afcfe5c96faf8f543cf6dfc7bd4c65b07facf4"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "4a1559560bbc6c5a2629852039c103b27b8318839fec47ffcd97dd7711a3ba81"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "2e9856a53e4b1d32a2c074ecad8ff58f874f688591a23200a23c2d4b34389470"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "aff4597e25a91b509d10fc478ce729f42437d38f2eea89ac8b3eac1bdd167331"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "0311d5fe6fbdf6c630b261c38261f01897b8a09a33c0a680caa7907cb425bf2b"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "e40852bec2ac30980dc8ddef0e60f62cf05d5214090f76b3e5948de3f2481ec1"
+    },
+    {
+      "index": "41",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_041_EXPECTED_TARGET_b6f98cda",
+      "auditRecordCommitmentSha256": "9998f6dab0906c4500d9643e265224d15efe777dd9a8c1c57e9603b6a0a2fe5f",
+      "leafSha256": "e2688b6d6422f5e742973ee7bed06f4786cc75787b047a32d3f49790b306e556",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "f023d166805a0d8e23cbecec277cb7a34e24e0fc83d52bb6d967f29545546188"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "a9546b4be04d0dcb1fb8d6751ceb51991f1d2e8e5ae7374f96145a72eae0a9e3"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "7e4fbae2522d393b5aea7ede63b2f8b418d2fe1531244492b6f3fa6f0362425d"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "6906523f79dedd66ba41682d1cea1549885602221f1bc3e86cd9142231dba89e"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "f43db12dcaee03700ebb99d7388df85fdd6feecdefa2347141cd1ecc740c21a0"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "abd0472db5313233ba57299025e1ae785f972ce8f755d5df560b3c966f39ecce"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "0311d5fe6fbdf6c630b261c38261f01897b8a09a33c0a680caa7907cb425bf2b"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "6ce1b2343d3c44505593b2e8028914f48af83a1f09b97960646cb0f80790a1eb"
+    },
+    {
+      "index": "51",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_051_EXPECTED_TARGET_2482b225",
+      "auditRecordCommitmentSha256": "bca457df9fff18e71964c2b334b82bac16746055204e9858e1451151e6b7ffdd",
+      "leafSha256": "892aae19c4aecf1b2bd701362aee2f815ffcba8745cef6ef904f3f25ded8ab37",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "56a8272bd1d457e11543cc32d491213332494dde57d81f7c4cb22ad7b60ae0b1"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "535aaec09ad4f4c2f5fb7362b9c4e304df33d89a29992479a8f60aaad226d600"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "31caba099ed0195a4a4d51fb1382b7677af66f3b702aa9b3477ae83e66aff15b"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "84a9ac78953f658c4dfec4797e03eae194fc3d842563db5890d8a865fdcc2ffa"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "b076ace91deb3b1f623ae938ad3ff417b2a5ee137de0d815ed89c0e0329d45bb"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "abd0472db5313233ba57299025e1ae785f972ce8f755d5df560b3c966f39ecce"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "0311d5fe6fbdf6c630b261c38261f01897b8a09a33c0a680caa7907cb425bf2b"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "ca40dcf72ccf88db75a07d045e3bdd17cba7c694af889d9271766809863571e3"
+    },
+    {
+      "index": "61",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_061_EXPECTED_TARGET_5e0e60b2",
+      "auditRecordCommitmentSha256": "6d4072ef58a908cadff0aa92afb3ac389617bff2230884f85c02edd8aa317d95",
+      "leafSha256": "0885e677f482552e02138eba650b59078d69265e41551051dbdf19455d609132",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "ab2a60a405cf3759b61b629e600807b96176ad6049859153327a5370f4bb3ff5"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "284c511834df0b3db76b9ea190cd778d908cbe053d0a5c93018d21bb2d8df717"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "1ee00b0685ffc4cb753008fc60621fe14b833afd8408c0d75789bf0187cf1a68"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "050925f6ae4f7c72f400826832529ac2e6c32990e311689dfc82e6121fc0d5ef"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "b076ace91deb3b1f623ae938ad3ff417b2a5ee137de0d815ed89c0e0329d45bb"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "abd0472db5313233ba57299025e1ae785f972ce8f755d5df560b3c966f39ecce"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "0311d5fe6fbdf6c630b261c38261f01897b8a09a33c0a680caa7907cb425bf2b"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "5c21667fb479a7104968064de6f79c52068a01445ae55df71152ae80674bfec0"
+    },
+    {
+      "index": "71",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_071_EXPECTED_TARGET_3a6fc19d",
+      "auditRecordCommitmentSha256": "cd6c32565daf995e69e6db1a832a4be1a9cc702f18a0a32edab4e93653f7127e",
+      "leafSha256": "c687e174588419fd9d63884aaeefe0d658ae468ee8252e043cb86d5811a18de5",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "8a1774bcdecf6ab512353d38c9cc0b15b1518b070411f95983083b4b76cc9396"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "3b570c1bb5a3a071bf7c3cb9800d82510590ba32a6854ab7f8ab1f6c9e3e02f3"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "d90bf840b0ffed65aaf31ace3416020b52bbf27908dc0772017141448107a863"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "b7e74d8f7f5ad66d4c609c2ba108ea741b4d7a5fbec44bd427a37c95759e1b94"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "97abfe1ba53eb49f8596b978da484f48972ccc0091c10144f9ee1d6a674a2125"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "832d51f80e29f6d303b632c577327dea92c49ef1169cff4483cf2bbdc390faac"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "85b284e18d9116a0f74a2c999d43a8e728ae3aaf88a01ba89dec968a42526619"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "214325c367d555ee320cb43258cb9f795c8ac4e9eda79fa3b50fb1ee98644109"
+    },
+    {
+      "index": "81",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_081_EXPECTED_TARGET_ecae9e24",
+      "auditRecordCommitmentSha256": "f8d921be49b7008820a3f5ee2513707826dec0ccb340d83a3bac3eae8f7eff59",
+      "leafSha256": "312405539fc965a74f8c685953b3b841347b59d272ce20a10b39b8c409d5faff",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "d70637a00e47fb5ea5a49cc186dbacad465e90f8331a086da7f45ab69ea9e0da"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "120ac31cc000ea73ee1a80168fc90ca8bcafd6448f3657188caa02a84cb5f1d7"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "88bdc545356df6d5347615c2700d0362f9801a3505520839b5831fcddda11e0d"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "43c4a7f2e7baa8c483a250dc9a8cd6c4bc403e1d2338f2477fad1a2e6154f512"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "a00e0bed7df6e2f3e011a2a9f110636e8cb7772867a61d1fce6462b4af3befda"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "832d51f80e29f6d303b632c577327dea92c49ef1169cff4483cf2bbdc390faac"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "85b284e18d9116a0f74a2c999d43a8e728ae3aaf88a01ba89dec968a42526619"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "89f2f95434b2f65aa9bed92ce7deacc5e005662e920202c1bdba30256fdd6f14"
+    },
+    {
+      "index": "91",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_091_EXPECTED_TARGET_0f969f31",
+      "auditRecordCommitmentSha256": "04cf807cad0da6101dd53b0e4bd6b30a85659c89714f3a7cc73b6902fb0d4c93",
+      "leafSha256": "1c9998c72fb520a955b36c9d65ea34ec1cd8057902b006992a218ae50bf8d156",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "ae0bfdf608108526e2f0b554006e0c3ddb80880f58386c616ff111fba5583396"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "45fc5c701ec69a1dd2533dbfb316cb3a4a8e068c3abbaa5ee16da22325fff069"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "39088a13f3c76ee032959e8a3de19117a3e75095cd58d3e31c11ae9e6497b0b1"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "efb06328aeae5bf76e8dfa92daa1af4bfaa76f9befcc1d1c41f9fae4b53a5c45"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "a00e0bed7df6e2f3e011a2a9f110636e8cb7772867a61d1fce6462b4af3befda"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "832d51f80e29f6d303b632c577327dea92c49ef1169cff4483cf2bbdc390faac"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "85b284e18d9116a0f74a2c999d43a8e728ae3aaf88a01ba89dec968a42526619"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "74a92fd6ceb9f185037530d4673959ac6d4957d4346e2f5930fc5a5ac2c97352"
+    },
+    {
+      "index": "101",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_101_EXPECTED_TARGET_2100c2ac",
+      "auditRecordCommitmentSha256": "f9931e4826408f9aee6ffe18fb3c612acd56ef8829c66c04cf83dd09493120f3",
+      "leafSha256": "f780206e333b10078c9606be8706f04557f5d8b4d430871a2d0f988bdd3820ca",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "a0767ce302e84db30e99d21189c3f28e4f15fbf59c1365573a5fd01a77cc192e"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "74fc8b7930846797b66acf980cb3ee52fdfa63a68253aeacf531ecdd480b1596"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "5d92584f990980323c1c6b82fe8ae4e7a8c5919982c30d98aec5c0b547ba2557"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "084c0e2c9a1c337a3d94038eedcdccb669a33676ec577af3a8bc1cf5a0fc2c3e"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "8757005aece036334ce2422e3aef69ede419691bb020e2f6ce15137df5de2095"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "b7d2ecb8ce6aa799e906a66f3198f6e08c805c50f3cdfed7ee3fa1a1841d4538"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "85b284e18d9116a0f74a2c999d43a8e728ae3aaf88a01ba89dec968a42526619"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "eaa6b56137ff5494644a5fb9f69bb595a5b81eeb8166f6369f2d98b3ba2131aa"
+    },
+    {
+      "index": "111",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_111_EXPECTED_TARGET_5a10ecdd",
+      "auditRecordCommitmentSha256": "fddbf1ae2bb4bc693d050a5f504dc9ac84d73752be26250a8fb32a7915484db7",
+      "leafSha256": "a0d25acdebd3c0d50f9071c0b0690780830bd9b4117f10501494f4f8b474489e",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "e9590de9bd72a04ac384d7294234113d2e1b0b04dd78506b5b3ac3577491e502"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "86c7ac0ef028931a00eb0903af1ba67a4eda78e9c73d14cb595eb997fb9f86e1"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "000a0c78709a368520b5f58326d6d43e2e3d3986245837b4e4f10200ec223d7a"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "df6c0e7c4e4212ac195f6b4a89889b7c71f84c6d75776e7b5768b8b0b73863ae"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "8757005aece036334ce2422e3aef69ede419691bb020e2f6ce15137df5de2095"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "b7d2ecb8ce6aa799e906a66f3198f6e08c805c50f3cdfed7ee3fa1a1841d4538"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "85b284e18d9116a0f74a2c999d43a8e728ae3aaf88a01ba89dec968a42526619"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "31362552c653d62bde7a4c093535c5871f56185f781b079809418c57ef24a8a4"
+    },
+    {
+      "index": "121",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_121_EXPECTED_TARGET_5020338c",
+      "auditRecordCommitmentSha256": "b3644892de1d5bdad0a318b01e2ac068bbb1cb90dca791c4a92817363c4a0558",
+      "leafSha256": "e4c8bc7ac6505eb7d363211681916b2f33c3beee4238e805d5b1a01c2b7c8223",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "6f200bb392857f5228cd983a53311c5a32f48003ebea8f4c18994ca603f7dd3b"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "ede5cb2aee4a12583d334609d1bab5a3eb4957eac41408d503dd7f2fda1ccc8d"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "f5b94697a88bc057bc9b19033cc908199e4c1903e00cea14d91a25ca00cc66f9"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "a3d774fdbce62d93850e0cd58caee4b1524d1719c33dcdfd93d308e427a8cc41"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "808eb3747d24dc05ea6d1f1c2228ede23533b35cca37ea1f4ced19bec8ca67d6"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "b7d2ecb8ce6aa799e906a66f3198f6e08c805c50f3cdfed7ee3fa1a1841d4538"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "85b284e18d9116a0f74a2c999d43a8e728ae3aaf88a01ba89dec968a42526619"
+        },
+        {
+          "level": "7",
+          "side": "RIGHT",
+          "siblingSha256": "d7006a210fd29240ad4d4a3dccea0d4d2875cb7452d40260852ba047acb74ec3"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "2563e16f21c378a0fc4b53004374ddad284fba4dc1ba6e9ee8491e2c072378b1"
+    },
+    {
+      "index": "131",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_131_EXPECTED_TARGET_72041143",
+      "auditRecordCommitmentSha256": "f72ca7301ab58545ef4320eb6f8ebcd9896c63eeddd2d5c80a8afa1cbaba699a",
+      "leafSha256": "70e27451bdc1b52c123fa31e1802552d9fc8d20ce50e79f81f536409cd5a3dde",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "5ba12d0838c1a3b539f7873ee51355065ef3c64191a2b3b2a5716e3c35ee97e3"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "c1538ec6e8fbc00c7e130efab38488ccdb74168816c1207434438db419b8fdd0"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "11de369abaf335e465567832c66e7c59f8bf9c16b57493c8b84d8030c8af4d42"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "4f8b63e39d5f5c13006ace21e9d2d50f9f759746405d3380a15c1d0a94f4a6f8"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "3ad21eeb475b90aa484cbfb87a02faf5641f5998b69e1d800c70b62eb4c0fcef"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "2eefc7587967a63421d20d7f5cfa5fe82ad12da0c039e494911babd1b2fae6d3"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "9cff298cd6e750389328a832591c851fdbf232f22c5f9e304edde7907f63e7e5"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "9cef478fdffe3289d2a2126026e22f7e5b72010fd1975587808df3f813fac875"
+    },
+    {
+      "index": "141",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_141_EXPECTED_TARGET_4694b8e6",
+      "auditRecordCommitmentSha256": "0575d87714c876180803b8bbbf55b20ef82df61897fc620abd30fef9450dae22",
+      "leafSha256": "04bd2189f2d46d78a44cec59c4eb9e2a8b3bd015ef1a650f7d06711965a91984",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "b28f49f4cd9be150e1be3f5f709c01cc2e238ce3142cbcdaaec4eec5e1ab0e99"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "3bb6f4599d60103c85be009713001a889b196374af640124d0bbebc07bbb1439"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "17b4ce46439c2352c11e6e28a0cba6c749b5ad1f13b85ef2255c859907fed58a"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "0011b465aa7b8dd9fd67c208f9cb43c0b9612fa543cbd2eda2dce3e36cb9b120"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "3ad21eeb475b90aa484cbfb87a02faf5641f5998b69e1d800c70b62eb4c0fcef"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "2eefc7587967a63421d20d7f5cfa5fe82ad12da0c039e494911babd1b2fae6d3"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "9cff298cd6e750389328a832591c851fdbf232f22c5f9e304edde7907f63e7e5"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "8a31a4c43a60ab5e013a57cacad8600097e149bb51b996193e811c15707141ee"
+    },
+    {
+      "index": "151",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_151_EXPECTED_TARGET_b69e4c7a",
+      "auditRecordCommitmentSha256": "eb60e79f267d9578002ca5b06b296c0dd35f74f646a570789be98754fbfa1c3d",
+      "leafSha256": "fb1c1e7b6d04a3627889eea91ec040467b283cc3cee6fa7374f5ea1b3068ab71",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "e405d3a15645da807803f4088e9f997225713889e1a279757093e1275cd6e5e1"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "b138c98d84ec638a124b8806323ec1c4b82dc8dfea0a36f21d5cc9eac10683b4"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "f123d8c19247eb06ba0053c78a2ac25a61b82b032f537958b24b49063607a72e"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "6cdcc9a82cc1ff1dd9587f74885ce26418d20ffbf3b804613686259a9bc159a0"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "0d7175e1eb5eca876c621690e8cc13df478b7a0bc087165bc9b5eb55df0195da"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "2eefc7587967a63421d20d7f5cfa5fe82ad12da0c039e494911babd1b2fae6d3"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "9cff298cd6e750389328a832591c851fdbf232f22c5f9e304edde7907f63e7e5"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "f3e97734ef2cacffb1f8af6cce98275f72d2af989f19ee086fbb640f136662ad"
+    },
+    {
+      "index": "161",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_161_EXPECTED_TARGET_aa4587e9",
+      "auditRecordCommitmentSha256": "5440469dcc2cdd99c27829b59df8cdb089e6c4e959781549f4f9bf96e9b8fb1a",
+      "leafSha256": "b00c0a9806326c524c914d07e1a15ff4eac853508c8000557ac2ae8f35dc4bfd",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "d53b2acd017611ad428f6cbe1f500aeb528cc3e73235fb5d645b96dc5b8b3604"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "e206a1d6001caa23532412dea1bec8aabab446f51964c6fd9aa698027fe57dad"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "17620849144066ca47a23fbcfcd0a99826cc02b64d10fce0c9499d8ba049f5e1"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "355d8ff37f352f89a724e4bfebb0f9e3a1ec1f19c655ded460bd0657e1560701"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "ddec2f1c94b0e30e7ba1abb1153e3c2a7f5cd3fd819b05d3a574bdb56549531f"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "97f3e13324aa298b4123a498cad7f2b76687f90cd7d5654ebde1dc9abb1f9936"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "9cff298cd6e750389328a832591c851fdbf232f22c5f9e304edde7907f63e7e5"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "127ae8b818abf50be39df0713dbd96c008d2874bb3d4d15ad7347ffceae746f9"
+    },
+    {
+      "index": "171",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_171_EXPECTED_TARGET_1f802dfd",
+      "auditRecordCommitmentSha256": "95400b0de803477892c9fc421083f5fbee76b46a590d45d22b4ff4aa6e4dd36b",
+      "leafSha256": "f042262e790af4e7eb04376a6240674215b97d0018dc8a821db5319797cdf753",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "19730deca8ce181b2d04d46c99e2e685214b9cd490e43ea6e9c881e68f7554b3"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "45254f007f85c0c0ffc2f0d378f0db2c4e25f6f9a8b35c5ac9a21c306d1ba06e"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "2faaa18983ee9a3b14e4377da108e1f25a8d7695740fad58a0a720409e329266"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "7a21c7bb65f080d217f49ad3948555505a42dc1e01544e75f0d50d3475c865d1"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "ddec2f1c94b0e30e7ba1abb1153e3c2a7f5cd3fd819b05d3a574bdb56549531f"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "97f3e13324aa298b4123a498cad7f2b76687f90cd7d5654ebde1dc9abb1f9936"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "9cff298cd6e750389328a832591c851fdbf232f22c5f9e304edde7907f63e7e5"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "16406666341004b5c8cadc34426873cf8f1c643162eb36a74736e41b4870cfec"
+    },
+    {
+      "index": "181",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_181_EXPECTED_TARGET_f6b5af55",
+      "auditRecordCommitmentSha256": "e8fd34cfef162ada4a27748b5444d0b0ffac990c5000ecdf621324566c910c47",
+      "leafSha256": "d2afdaca88c99362dc9fd27ecd54892e536fbc0a3067ecd2c87465f0d65309d9",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "3bb8b406b64f193a9a79e48ef2cb498d7102c394403726d2d70c4d2a4beddc6c"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "639bb34dcfb51179edc5c2856e9f0a004db6b3f5c12c48fb92809369fde2e465"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "5937b876f6e5da7e025116a051e6d925066494d63f0afd4aed4232ed2aa7f014"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "0501ce932010a8b1cf840e039c318bfca79d9a6f5b22c519c186b8d1a9846b32"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "f066f9e8af592bbce1eb79d5a1c4a993b6d55a9ec57463b6eb5a263c656c29b3"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "97f3e13324aa298b4123a498cad7f2b76687f90cd7d5654ebde1dc9abb1f9936"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "9cff298cd6e750389328a832591c851fdbf232f22c5f9e304edde7907f63e7e5"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "c610ad5c4dcfd9a9595ec916e420f05f0384aaddf4ebe01181e59722889981a9"
+    },
+    {
+      "index": "191",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_191_EXPECTED_TARGET_45d231ed",
+      "auditRecordCommitmentSha256": "1a893c9090fcf843fbcbff3698e3289115ac3b80914995afb18de14d065c7576",
+      "leafSha256": "01acf0179978db99dc0f961e6b6aa8a965f5216c6b5f0da94332b296bf4bb36c",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "5897c216e8f34787d086207435bea674b47ef68710617bec7effe3873136e6b2"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "8ff8eb42b2e4b773835b9bb7bcf16514b646e0bb6b98f3938e6a48185e65ba71"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "13380cb16501215e6c4d5705b4cb5623fb2297bce78a694d78d805a694752fbe"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "79ca85686326375414b8c5fcf916cfacba0b8419277fc7e1de22bcf95f722039"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "f066f9e8af592bbce1eb79d5a1c4a993b6d55a9ec57463b6eb5a263c656c29b3"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "97f3e13324aa298b4123a498cad7f2b76687f90cd7d5654ebde1dc9abb1f9936"
+        },
+        {
+          "level": "6",
+          "side": "RIGHT",
+          "siblingSha256": "9cff298cd6e750389328a832591c851fdbf232f22c5f9e304edde7907f63e7e5"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "73652fbc871b18c15ce50a045998bdad6ebc34f332fc016ce0aef6e58f655784"
+    },
+    {
+      "index": "201",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_201_EXPECTED_TARGET_a305341d",
+      "auditRecordCommitmentSha256": "dda462972b27fb6812cb69271a844ef7fde9b781bde3575721dcdb65b5803ad8",
+      "leafSha256": "d64df7bfbe173eaa59a94c21acab4318c93b42b5fc47e61313dd2a024cae64ed",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "84b8a0087355537b0a8e42adf5ca5768b0a8d1564e1271f2c91143dce694ce44"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "5a00d6a16034ef41adf86c03e75b54ae7adb5db91877400e73d6e992ad511cc2"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "65769a04c353842ea6d7f9c691fb52e26e0e8f9c0c54142352e0e8946cac7715"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "469670d40496c095d389ea3bba3c9e621413d7e45ae41b12d7005a4b7dcad69f"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "3b8d7081fe7cbf4c06a7cf53fadd1d43a6e4f72f1bd262d2bc052e831b406ef6"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "aa8a8978b10673bd903178548951d6b3ef41dc6583ea896511f840ac0de60a19"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "de25647f150e35ee6af4f6aeb709fb21242015cdba0b9ff95274899f767e86a8"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "ea886f0d8e4b89def13910a71fa9be7fcdd6e792f1677bae5ea0737b733bc777"
+    },
+    {
+      "index": "211",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_211_EXPECTED_TARGET_19c85281",
+      "auditRecordCommitmentSha256": "7e163e22a6900010e1d9347798d3cd217e32a853e9b2d0d8232c8bb54a1fca7e",
+      "leafSha256": "482f8061382b5eeb7037c523ac8bf5f58f95b1441f638d47fdfb6b3f924850d5",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "8505c0f8e185e67f7311c4cbf45d16dd117d0e9488a2fa75cdb074e99ef8ae6e"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "e52e5831665d9bc2c4025739994eb162a6681008caffecb7dbecb91e7e3aa892"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "f2590eadcc43f41c5449cfebbb090a742dcdbc1fe647a4dba39450623ac58e9c"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "96f999e9db75fa84da2416a471f2ecb43d11f2670ef5cba887f297bacd37e8db"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "ef842102f395be1e239cfd7218a1ebdf365677f480d4656438c73dabce1595a8"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "aa8a8978b10673bd903178548951d6b3ef41dc6583ea896511f840ac0de60a19"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "de25647f150e35ee6af4f6aeb709fb21242015cdba0b9ff95274899f767e86a8"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "20d2cec5869e15a6b343bf486037eaf6513ce948d5f30b23720211d8b8869017"
+    },
+    {
+      "index": "221",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_221_EXPECTED_TARGET_d56de952",
+      "auditRecordCommitmentSha256": "3e3b9a8a0ce661a7c5a86a001db65bf2a9e1642abcd6c1b3621a8c997de7c06a",
+      "leafSha256": "825693afe83a6ed8b609845d6fbeffe65129e269cdc11824e7696fc523bcd2f9",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "d5665860a85e6e1af5a1014ed85dc99f7ca43812ca12de578ec0804f37c1a4c7"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "ba9ba82590a05b20db6ceeeb7054d11ece74ec9770b2a89453296deeda711d25"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "76db77a54816918f1d09aaa7d94e7df7d4eb05fc2acd71277ac7d157acd65dda"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "5a5ab624b58abfcc86c6fa2d69131e79e84cacf4f59dd942d39ac29264db4747"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "ef842102f395be1e239cfd7218a1ebdf365677f480d4656438c73dabce1595a8"
+        },
+        {
+          "level": "5",
+          "side": "RIGHT",
+          "siblingSha256": "aa8a8978b10673bd903178548951d6b3ef41dc6583ea896511f840ac0de60a19"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "de25647f150e35ee6af4f6aeb709fb21242015cdba0b9ff95274899f767e86a8"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "3c8bfb0fd748243490b96df524c5a71b7682825ce92702943ac5efe0a306328d"
+    },
+    {
+      "index": "231",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_231_EXPECTED_TARGET_f16ca35e",
+      "auditRecordCommitmentSha256": "caeab2874666e128e828ff66cece2b161bf8ee8f33fcf4d203c6054f284e8543",
+      "leafSha256": "6d841dcf55ad19a7c94165c319291d1ca1be18ba7d087a604246dda14c2b1d03",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "bea5dbd630b5311cc55aea7c6df07648b23e6061ee85c9d508b746bc6c7d9601"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "8240be929ef10f7c4f88988bf74bc47878f1b40b74d494cf0d4e8d20e38d0197"
+        },
+        {
+          "level": "2",
+          "side": "LEFT",
+          "siblingSha256": "73ac52885983125f6aef99071b9363e5cec9927f9d6d3ca3246767b7ed2b65cb"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "031d0b9b2a1680e107c29792a38053ba57642f166812875748f1784be7c5bb68"
+        },
+        {
+          "level": "4",
+          "side": "RIGHT",
+          "siblingSha256": "005dbb455043edbc77909c58917aa9c2d07e50eef90ad8046844f9522d59c54b"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "c149488e3bda971a5aff78f7a58df2d0f644edf9134372958816f9c9af3ff92d"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "de25647f150e35ee6af4f6aeb709fb21242015cdba0b9ff95274899f767e86a8"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "8352c5d62c8c6287d9108e7f16b1a192cf0322e0a141305172ad77f6c6a9839b"
+    },
+    {
+      "index": "241",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_241_EXPECTED_TARGET_970c4f03",
+      "auditRecordCommitmentSha256": "5657ae298ecc746ee5f37cf0b9017e7408c2cc4f83e853720419f8dd285e8853",
+      "leafSha256": "a552d7e29830c2f56e2413dc47fdcd7c294f4a61e07517fb478e85297cd0c35c",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "f88326e55c736d7c2c12af0079f27120551bc94a08eee44baae06b04628ccc03"
+        },
+        {
+          "level": "1",
+          "side": "RIGHT",
+          "siblingSha256": "6a89de3eaa42196658f6baa56ad2e35e05a122e2caf162365350cdc2d9e87d08"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "25c65d224f7821fe6815220dc6a6db5c6e89399746a58a14f95d9cd35b18cc0f"
+        },
+        {
+          "level": "3",
+          "side": "RIGHT",
+          "siblingSha256": "27337d3a15ba43cebe13f3316f5b7f81c9bcb7b6ef2e80079ed266cb5c7428f3"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "1ae7c517342fa2bd86cda45f98ce14def4a595a89b75736f440536f88034b9be"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "c149488e3bda971a5aff78f7a58df2d0f644edf9134372958816f9c9af3ff92d"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "de25647f150e35ee6af4f6aeb709fb21242015cdba0b9ff95274899f767e86a8"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "51c9e8cbc32883dfa1b4dfbd2bf9c8f73bc785bb2af9514d62e6edb8c0d8b1b2"
+    },
+    {
+      "index": "251",
+      "family": "EXPECTED_TARGET",
+      "sourceFuzzCaseName": "FUZZ_251_EXPECTED_TARGET_d06a4535",
+      "auditRecordCommitmentSha256": "6a68027f6f0c057edf7cdc7d2cf3ce65b3d86afce4d68ab9783813becefa81eb",
+      "leafSha256": "79cd07172824f80dc3e219855e108eb966d8fd13101524aca00a4d71e30fd3a5",
+      "path": [
+        {
+          "level": "0",
+          "side": "LEFT",
+          "siblingSha256": "aaef6d606e0b6431f976e4629f184a5b8dc22619f0318ef29ee2b68fd3fd07f2"
+        },
+        {
+          "level": "1",
+          "side": "LEFT",
+          "siblingSha256": "3866141f8da1052ca912bde245f376f9c6e816d3d1375058a3e04b8ca6431978"
+        },
+        {
+          "level": "2",
+          "side": "RIGHT",
+          "siblingSha256": "27e6d048a3ba08b54a84e256558a1e690ab1527f32086c5753eb2b9485866f61"
+        },
+        {
+          "level": "3",
+          "side": "LEFT",
+          "siblingSha256": "ef4582e2449e0216210542c92939fe57b3ebcc6b3db197fe0fa00392f497ac5b"
+        },
+        {
+          "level": "4",
+          "side": "LEFT",
+          "siblingSha256": "1ae7c517342fa2bd86cda45f98ce14def4a595a89b75736f440536f88034b9be"
+        },
+        {
+          "level": "5",
+          "side": "LEFT",
+          "siblingSha256": "c149488e3bda971a5aff78f7a58df2d0f644edf9134372958816f9c9af3ff92d"
+        },
+        {
+          "level": "6",
+          "side": "LEFT",
+          "siblingSha256": "de25647f150e35ee6af4f6aeb709fb21242015cdba0b9ff95274899f767e86a8"
+        },
+        {
+          "level": "7",
+          "side": "LEFT",
+          "siblingSha256": "37f4307f26f5d2e6169a9f50f4d3b316524f6206a55b42d93ed665dd3131d985"
+        }
+      ],
+      "proofVerifiedToPublishedRoot": true,
+      "inputOrResultStored": false,
+      "accepted": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "proofCommitmentSha256": "4a327cddeb1ddc4a2aa38709bf6fb21c920cf0a20e859f895713a748eab2c6fc"
     }
   ],
   "records": [

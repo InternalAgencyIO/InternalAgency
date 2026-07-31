@@ -255,8 +255,12 @@ security audit or deployment approval.
 | Two distinct fuzz representations share an ordered commitment | `all 256 insertion-order-sensitive...` | Ordered uniqueness fails closed even when canonical JSON intentionally erases key order |
 | Representation audit stores full inputs/results or claims authority | `every compact record remains...` / `representation tooling is offline...` | Compact contract and capability scans reject storage, acceptance, receipt, review, wallet, network, or activation claims |
 | A representation record or set commitment is changed | `Python rejects changed compact evidence...` | Independent 256-case replay exits `2` on record or set drift |
+| Representation-tree leaf or node domain is substituted | `the domain-separated record tree...` | Recomputed root differs and both runtimes reject the contract drift |
+| Proof index, sibling digest, side, or record commitment changes | `index, sibling, side, and record mutations...` | Eight-step verification cannot reach the published record root |
+| Proofs omit or add a collision member | `published inclusion proofs cover exactly...` | Proof indices must equal the complete ordered 26-member expected class |
+| Proof claims acceptance, receipt, review, or activation | `published inclusion proofs cover exactly...` | Every proof remains rejection-only and authority-negative |
 
 ## Next matrix expansion
 
-- domain-separated inclusion proofs for the expected canonical collision class;
+- a compact deterministic multiproof for the same expected collision class;
 - local-validator transaction rollback and account-lock contention.

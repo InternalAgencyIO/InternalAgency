@@ -65,6 +65,12 @@ GATE_ORDER = [
 ]
 FUZZ_SEED = 0x49544154
 FUZZ_CASE_COUNT = 256
+REPRESENTATION_MERKLE_LEAF_DOMAIN = (
+    "iat-promotions-dlc-representation-audit-leaf-v1"
+)
+REPRESENTATION_MERKLE_NODE_DOMAIN = (
+    "iat-promotions-dlc-representation-audit-node-v1"
+)
 FUZZ_FAMILIES = [
     "CLOSED_SCHEMA",
     "EXPECTED_TARGET",
@@ -1271,6 +1277,105 @@ def ordered_input_sha256(candidate: Any, expected_target: Any) -> str:
     return hashlib.sha256(ordered_json.encode("utf-8")).hexdigest()
 
 
+def representation_audit_leaf_sha256(record_commitment_sha256: str) -> str:
+    if not isinstance(record_commitment_sha256, str) or not re.fullmatch(
+        r"[0-9a-f]{64}", record_commitment_sha256
+    ):
+        raise ValueError("INVALID_REPRESENTATION_RECORD_COMMITMENT")
+    return hashlib.sha256(
+        REPRESENTATION_MERKLE_LEAF_DOMAIN.encode("utf-8")
+        + b"\x00"
+        + bytes.fromhex(record_commitment_sha256)
+    ).hexdigest()
+
+
+def representation_audit_parent_sha256(left_sha256: str, right_sha256: str) -> str:
+    if not re.fullmatch(r"[0-9a-f]{64}", left_sha256 or "") or not re.fullmatch(
+        r"[0-9a-f]{64}", right_sha256 or ""
+    ):
+        raise ValueError("INVALID_REPRESENTATION_MERKLE_NODE")
+    return hashlib.sha256(
+        REPRESENTATION_MERKLE_NODE_DOMAIN.encode("utf-8")
+        + b"\x00"
+        + bytes.fromhex(left_sha256)
+        + bytes.fromhex(right_sha256)
+    ).hexdigest()
+
+
+def representation_audit_merkle_levels(
+    record_commitments: list[str],
+) -> list[list[str]]:
+    if not record_commitments:
+        raise ValueError("REPRESENTATION_TREE_EMPTY")
+    levels = [[representation_audit_leaf_sha256(value) for value in record_commitments]]
+    while len(levels[-1]) > 1:
+        current = levels[-1]
+        next_level = []
+        for index in range(0, len(current), 2):
+            right = current[index + 1] if index + 1 < len(current) else current[index]
+            next_level.append(representation_audit_parent_sha256(current[index], right))
+        levels.append(next_level)
+    return levels
+
+
+def representation_audit_merkle_proof(
+    record_commitments: list[str], index: int
+) -> list[dict[str, str]]:
+    levels = representation_audit_merkle_levels(record_commitments)
+    if index < 0 or index >= len(levels[0]):
+        raise ValueError("REPRESENTATION_PROOF_INDEX_OUT_OF_RANGE")
+    path = []
+    cursor = index
+    for level, nodes in enumerate(levels[:-1]):
+        sibling_index = cursor + 1 if cursor % 2 == 0 else cursor - 1
+        path.append(
+            {
+                "level": str(level),
+                "side": "RIGHT" if cursor % 2 == 0 else "LEFT",
+                "siblingSha256": (
+                    nodes[sibling_index]
+                    if sibling_index < len(nodes)
+                    else nodes[cursor]
+                ),
+            }
+        )
+        cursor //= 2
+    return path
+
+
+def verify_representation_audit_merkle_proof(
+    record_commitment_sha256: str,
+    index: int,
+    path: Any,
+    expected_root_sha256: str,
+) -> bool:
+    if (
+        index < 0
+        or not isinstance(path, list)
+        or not re.fullmatch(r"[0-9a-f]{64}", expected_root_sha256 or "")
+    ):
+        return False
+    current = representation_audit_leaf_sha256(record_commitment_sha256)
+    cursor = index
+    for level, step in enumerate(path):
+        expected_side = "RIGHT" if cursor % 2 == 0 else "LEFT"
+        if (
+            not isinstance(step, dict)
+            or step.get("level") != str(level)
+            or step.get("side") != expected_side
+            or not re.fullmatch(r"[0-9a-f]{64}", step.get("siblingSha256", ""))
+        ):
+            return False
+        sibling = step["siblingSha256"]
+        current = (
+            representation_audit_parent_sha256(sibling, current)
+            if expected_side == "LEFT"
+            else representation_audit_parent_sha256(current, sibling)
+        )
+        cursor //= 2
+    return current == expected_root_sha256
+
+
 def result_gate(result: dict[str, Any], gate_id: str) -> dict[str, str]:
     for entry in result["gates"]:
         if entry["id"] == gate_id:
@@ -1618,7 +1723,45 @@ def replay_representation_audit(
                 == len(indices),
             }
         )
-    return {"records": records, "canonicalCollisionClasses": collision_classes}
+    record_commitments = [
+        record["auditRecordCommitmentSha256"] for record in records
+    ]
+    merkle_levels = representation_audit_merkle_levels(record_commitments)
+    merkle_root = merkle_levels[-1][0]
+    expected_collision_proofs = []
+    for record in records:
+        if not record["canonicalCollisionExpected"]:
+            continue
+        index = int(record["index"])
+        proof_core = {
+            "index": record["index"],
+            "family": record["family"],
+            "sourceFuzzCaseName": record["sourceFuzzCaseName"],
+            "auditRecordCommitmentSha256": record["auditRecordCommitmentSha256"],
+            "leafSha256": representation_audit_leaf_sha256(
+                record["auditRecordCommitmentSha256"]
+            ),
+            "path": representation_audit_merkle_proof(record_commitments, index),
+            "proofVerifiedToPublishedRoot": True,
+            "inputOrResultStored": False,
+            "accepted": False,
+            "receiptIssued": False,
+            "reviewCompleted": False,
+            "activationAuthorized": False,
+            "activationEffect": "NONE",
+        }
+        expected_collision_proofs.append(
+            {
+                **proof_core,
+                "proofCommitmentSha256": canonical_sha256(proof_core),
+            }
+        )
+    return {
+        "records": records,
+        "canonicalCollisionClasses": collision_classes,
+        "recordMerkleRootSha256": merkle_root,
+        "expectedCollisionProofs": expected_collision_proofs,
+    }
 
 
 def validate_representation_audit(artifact: Any) -> list[str]:
@@ -1684,6 +1827,28 @@ def validate_representation_audit(artifact: Any) -> list[str]:
     ]:
         expect(contract.get(field) is False, f"representation contract {field} drift")
     expect(contract.get("activationEffect") == "NONE", "representation activation effect drift")
+    merkle_contract = artifact.get("merkleContract", {})
+    expect(merkle_contract.get("hash") == "SHA-256", "representation Merkle hash drift")
+    expect(
+        merkle_contract.get("leafDomain") == REPRESENTATION_MERKLE_LEAF_DOMAIN,
+        "representation Merkle leaf domain drift",
+    )
+    expect(
+        merkle_contract.get("nodeDomain") == REPRESENTATION_MERKLE_NODE_DOMAIN,
+        "representation Merkle node domain drift",
+    )
+    expect(
+        merkle_contract.get("ordering") == "records in ascending numeric index order",
+        "representation Merkle ordering drift",
+    )
+    expect(merkle_contract.get("oddNode") == "duplicate final node", "representation odd-node contract drift")
+    expect(merkle_contract.get("proofFamily") == "EXPECTED_TARGET", "representation proof family drift")
+    expect(merkle_contract.get("proofCount") == 26, "representation proof count contract drift")
+    expect(merkle_contract.get("proofPathLength") == 8, "representation proof path-length drift")
+    expect(
+        merkle_contract.get("publishesProofsForAcceptedVectors") is False,
+        "representation proof contract claims accepted vectors",
+    )
     sources = artifact.get("sources", {})
     expect(
         sources.get("fuzzVectors", {}).get("canonicalSha256")
@@ -1713,6 +1878,11 @@ def validate_representation_audit(artifact: Any) -> list[str]:
         artifact.get("canonicalCollisionClasses")
         == replay["canonicalCollisionClasses"],
         "representation collision classes do not independently replay",
+    )
+    expect(
+        artifact.get("expectedCollisionProofs")
+        == replay["expectedCollisionProofs"],
+        "representation inclusion proofs do not independently replay",
     )
     ordered: set[str] = set()
     canonical: set[str] = set()
@@ -1761,6 +1931,69 @@ def validate_representation_audit(artifact: Any) -> list[str]:
         summary.get("auditRecordSetCommitmentSha256")
         == canonical_sha256([record["auditRecordCommitmentSha256"] for record in records]),
         "representation record-set commitment drift",
+    )
+    expect(
+        summary.get("auditRecordMerkleRootSha256")
+        == replay["recordMerkleRootSha256"],
+        "representation Merkle root drift",
+    )
+    proofs = artifact.get("expectedCollisionProofs", [])
+    expect(isinstance(proofs, list) and len(proofs) == 26, "representation inclusion-proof count drift")
+    expect(summary.get("expectedCollisionProofCount") == "26", "representation proof summary count drift")
+    expected_proof_indices = [
+        record["index"] for record in records if record.get("family") == "EXPECTED_TARGET"
+    ]
+    expect(
+        [proof.get("index") for proof in proofs] == expected_proof_indices,
+        "representation proofs do not cover exactly the expected collision class",
+    )
+    for proof in proofs:
+        index = int(proof.get("index", -1))
+        record = records[index] if 0 <= index < len(records) else {}
+        expect(proof.get("family") == "EXPECTED_TARGET", f"{index} proof family drift")
+        expect(proof.get("sourceFuzzCaseName") == record.get("sourceFuzzCaseName"), f"{index} proof source drift")
+        expect(
+            proof.get("auditRecordCommitmentSha256")
+            == record.get("auditRecordCommitmentSha256"),
+            f"{index} proof record drift",
+        )
+        expect(
+            proof.get("leafSha256")
+            == representation_audit_leaf_sha256(proof.get("auditRecordCommitmentSha256", "")),
+            f"{index} proof leaf drift",
+        )
+        expect(
+            isinstance(proof.get("path"), list) and len(proof.get("path", [])) == 8,
+            f"{index} proof path-length drift",
+        )
+        expect(
+            verify_representation_audit_merkle_proof(
+                proof.get("auditRecordCommitmentSha256", ""),
+                index,
+                proof.get("path"),
+                replay["recordMerkleRootSha256"],
+            ),
+            f"{index} inclusion proof does not reach the published root",
+        )
+        for field in [
+            "inputOrResultStored",
+            "accepted",
+            "receiptIssued",
+            "reviewCompleted",
+            "activationAuthorized",
+        ]:
+            expect(proof.get(field) is False, f"{index} proof {field} drift")
+        expect(proof.get("proofVerifiedToPublishedRoot") is True, f"{index} proof verification claim drift")
+        expect(proof.get("activationEffect") == "NONE", f"{index} proof activation effect drift")
+        proof_core = {key: value for key, value in proof.items() if key != "proofCommitmentSha256"}
+        expect(
+            proof.get("proofCommitmentSha256") == canonical_sha256(proof_core),
+            f"{index} proof commitment drift",
+        )
+    expect(
+        summary.get("expectedCollisionProofSetCommitmentSha256")
+        == canonical_sha256([proof["proofCommitmentSha256"] for proof in proofs]),
+        "representation proof-set commitment drift",
     )
     return errors
 
@@ -1879,6 +2112,9 @@ def render_representation_result(
     canonical_unique_count: int,
     ordered_unique_count: int,
     record_set_commitment: str | None,
+    record_merkle_root: str | None,
+    expected_collision_proof_count: int,
+    proof_set_commitment: str | None,
     output_format: str,
 ) -> str:
     result = {
@@ -1891,6 +2127,9 @@ def render_representation_result(
         "nodeAndPythonMatchExactly": valid,
         "allRejected": valid,
         "auditRecordSetCommitmentSha256": record_set_commitment,
+        "auditRecordMerkleRootSha256": record_merkle_root,
+        "expectedCollisionProofCount": expected_collision_proof_count,
+        "expectedCollisionProofSetCommitmentSha256": proof_set_commitment,
         "receiptIssued": False,
         "reviewCompleted": False,
         "activationAuthorized": False,
@@ -1995,6 +2234,9 @@ def main(argv: list[str] | None = None) -> int:
             int(summary.get("canonicalUniqueCount", 0)),
             int(summary.get("orderedUniqueCount", 0)),
             summary.get("auditRecordSetCommitmentSha256"),
+            summary.get("auditRecordMerkleRootSha256"),
+            int(summary.get("expectedCollisionProofCount", 0)),
+            summary.get("expectedCollisionProofSetCommitmentSha256"),
             args.format,
         ))
     return 0 if not errors else 2

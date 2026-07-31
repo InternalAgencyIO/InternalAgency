@@ -14,6 +14,9 @@ import { FUZZ_FAMILIES } from "../generate-positive-campaign-vector-intake-fuzz-
 import {
   generatePositiveCampaignVectorRepresentationAudit,
   replayPositiveCampaignVectorRepresentationAudit,
+  representationAuditMerkleProof,
+  representationAuditMerkleRootSha256,
+  verifyRepresentationAuditMerkleProof,
 } from "../generate-positive-campaign-vector-representation-audit.mjs";
 import { loadReviewManifest } from "../validate-review-manifest.mjs";
 import {
@@ -76,6 +79,75 @@ test("every family appears and only target permutations collide canonically", ()
   }
 });
 
+test("the domain-separated record tree deterministically reproduces", () => {
+  const commitments = artifact.records.map((record) => record.auditRecordCommitmentSha256);
+  assert.equal(
+    representationAuditMerkleRootSha256(commitments),
+    artifact.summary.auditRecordMerkleRootSha256,
+  );
+  assert.equal(artifact.merkleContract.leafDomain, "iat-promotions-dlc-representation-audit-leaf-v1");
+  assert.equal(artifact.merkleContract.nodeDomain, "iat-promotions-dlc-representation-audit-node-v1");
+  assert.equal(artifact.merkleContract.publishesProofsForAcceptedVectors, false);
+});
+
+test("published inclusion proofs cover exactly the 26 expected collision members", () => {
+  const expectedIndices = artifact.records
+    .filter((record) => record.family === "EXPECTED_TARGET")
+    .map((record) => record.index);
+  assert.deepEqual(artifact.expectedCollisionProofs.map((proof) => proof.index), expectedIndices);
+  assert.equal(artifact.expectedCollisionProofs.length, 26);
+  for (const proof of artifact.expectedCollisionProofs) {
+    assert.equal(proof.path.length, 8, proof.index);
+    assert.equal(
+      verifyRepresentationAuditMerkleProof(
+        proof.auditRecordCommitmentSha256,
+        Number(proof.index),
+        proof.path,
+        artifact.summary.auditRecordMerkleRootSha256,
+      ),
+      true,
+      proof.index,
+    );
+  }
+});
+
+test("index, sibling, side, and record mutations invalidate inclusion", () => {
+  const commitments = artifact.records.map((record) => record.auditRecordCommitmentSha256);
+  const proof = artifact.expectedCollisionProofs[7];
+  assert.deepEqual(
+    representationAuditMerkleProof(commitments, Number(proof.index)),
+    proof.path,
+  );
+  const changedSibling = structuredClone(proof.path);
+  changedSibling[3].siblingSha256 = "f".repeat(64);
+  assert.equal(verifyRepresentationAuditMerkleProof(
+    proof.auditRecordCommitmentSha256,
+    Number(proof.index),
+    changedSibling,
+    artifact.summary.auditRecordMerkleRootSha256,
+  ), false);
+  const changedSide = structuredClone(proof.path);
+  changedSide[0].side = changedSide[0].side === "LEFT" ? "RIGHT" : "LEFT";
+  assert.equal(verifyRepresentationAuditMerkleProof(
+    proof.auditRecordCommitmentSha256,
+    Number(proof.index),
+    changedSide,
+    artifact.summary.auditRecordMerkleRootSha256,
+  ), false);
+  assert.equal(verifyRepresentationAuditMerkleProof(
+    proof.auditRecordCommitmentSha256,
+    Number(proof.index) + 1,
+    proof.path,
+    artifact.summary.auditRecordMerkleRootSha256,
+  ), false);
+  assert.equal(verifyRepresentationAuditMerkleProof(
+    "e".repeat(64),
+    Number(proof.index),
+    proof.path,
+    artifact.summary.auditRecordMerkleRootSha256,
+  ), false);
+});
+
 test("Python independently reproduces the representation audit", () => {
   assert.ok(PYTHON, "Python 3 is required for representation verification");
   const result = runPython();
@@ -90,6 +162,10 @@ test("Python independently reproduces the representation audit", () => {
     nodeAndPythonMatchExactly: true,
     allRejected: true,
     auditRecordSetCommitmentSha256: artifact.summary.auditRecordSetCommitmentSha256,
+    auditRecordMerkleRootSha256: artifact.summary.auditRecordMerkleRootSha256,
+    expectedCollisionProofCount: 26,
+    expectedCollisionProofSetCommitmentSha256:
+      artifact.summary.expectedCollisionProofSetCommitmentSha256,
     receiptIssued: false,
     reviewCompleted: false,
     activationAuthorized: false,
@@ -116,6 +192,16 @@ test("Python rejects changed compact evidence and a stale set commitment", () =>
     const setResult = runPython(setPath);
     assert.equal(setResult.status, 2, setResult.stderr || setResult.stdout);
     assert.ok(JSON.parse(setResult.stdout).errors.includes("representation record-set commitment drift"));
+
+    const changedProof = structuredClone(artifact);
+    changedProof.expectedCollisionProofs[4].path[2].siblingSha256 = "d".repeat(64);
+    const proofPath = join(directory, "changed-proof.json");
+    writeFileSync(proofPath, `${JSON.stringify(changedProof, null, 2)}\n`, "utf8");
+    const proofResult = runPython(proofPath);
+    assert.equal(proofResult.status, 2, proofResult.stderr || proofResult.stdout);
+    assert.ok(JSON.parse(proofResult.stdout).errors.includes(
+      "representation inclusion proofs do not independently replay",
+    ));
   } finally {
     rmSync(directory, { recursive: true, force: true });
   }

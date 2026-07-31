@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 18:47 UTC
+Updated: 2026-07-31 19:09 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `26a2f6c`
+Previously published public increment: `ccbe6e3`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -348,8 +348,14 @@ This status file deliberately does not claim a self-referential commit hash.
   record-set commitment without storing full input or result expansions; and
 - changed-record, changed-set, unexpected-collision, duplicate-order,
   source-safety, and permanent non-authority checks.
+- a domain-separated binary Merkle tree over all 256 compact audit records;
+- eight-step inclusion proofs for exactly the 26 expected target-order
+  collision members and no accepted vector;
+- proof and proof-set commitments plus exact Node/Python reconstruction; and
+- index, record, sibling, side, domain, path, root, membership, authority, and
+  proof-set mutation rejection.
 
-Current proposal-only result: **275 tests passed**. This consists of 28 protected
+Current proposal-only result: **278 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -400,9 +406,10 @@ Nine minimal-counterexample generation, family coverage, primary-gate
 transition, negative-cryptography, ordered-commitment, non-authority, Python
 parity, changed-evidence, source-safety, and manifest-coverage tests complete
 the reduced-fixture suite.
-Eight representation-audit regeneration, ordered-uniqueness, expected-
-collision, family-coverage, rejection-only, Python-parity, changed-evidence,
-source-safety, and manifest-coverage tests complete the all-input audit suite.
+Eleven representation-audit regeneration, ordered-uniqueness, expected-
+collision, family-coverage, record-tree, exact-proof-coverage, proof-mutation,
+rejection-only, Python-parity, changed-evidence, source-safety, and manifest-
+coverage tests complete the all-input audit suite.
 
 ## Current guarantees of the reference model
 
@@ -434,7 +441,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a domain-separated Merkle tree over the 256 compact representation-audit
-records and deterministic inclusion proofs for every member of the expected
-canonical collision class. Keep it local, compact, rejection-only, and
-non-authoritative without storing full input or result expansions.
+Add a deterministic minimal Merkle multiproof for the same 26 expected
+collision members, with exact node-set minimality and equivalence to every
+individual proof. Keep it local, compact, rejection-only, and non-authoritative
+without storing full input or result expansions.

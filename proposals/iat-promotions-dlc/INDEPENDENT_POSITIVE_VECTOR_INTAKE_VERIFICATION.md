@@ -117,4 +117,6 @@ python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --
 It reconstructs all 256 ordered inputs, requires 256 unique ordered
 commitments, and independently confirms that the only canonical collision is
 the expected 26-case target-key-order class. It stores no full input or result
-expansions and grants no receipt, review, or activation authority.
+expansions. It also reconstructs the domain-separated 256-record Merkle root
+and all 26 eight-step inclusion proofs for that expected class. No proof grants
+a receipt, review, or activation authority.

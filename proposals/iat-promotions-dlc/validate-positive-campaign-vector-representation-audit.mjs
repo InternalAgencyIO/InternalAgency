@@ -11,6 +11,9 @@ import { FUZZ_CASE_COUNT } from "./generate-positive-campaign-vector-intake-fuzz
 import {
   generatePositiveCampaignVectorRepresentationAudit,
   replayPositiveCampaignVectorRepresentationAudit,
+  representationAuditLeafSha256,
+  representationAuditMerkleRootSha256,
+  verifyRepresentationAuditMerkleProof,
 } from "./generate-positive-campaign-vector-representation-audit.mjs";
 
 const ARTIFACT_PATH = fileURLToPath(
@@ -80,6 +83,21 @@ export function validatePositiveCampaignVectorRepresentationAudit(
     expect(artifact?.contract?.[field] === false, `representation contract ${field} drift`);
   }
   expect(artifact?.contract?.activationEffect === "NONE", "representation activation effect drift");
+  expect(artifact?.merkleContract?.hash === "SHA-256", "representation Merkle hash drift");
+  expect(
+    artifact?.merkleContract?.leafDomain === "iat-promotions-dlc-representation-audit-leaf-v1",
+    "representation Merkle leaf domain drift",
+  );
+  expect(
+    artifact?.merkleContract?.nodeDomain === "iat-promotions-dlc-representation-audit-node-v1",
+    "representation Merkle node domain drift",
+  );
+  expect(artifact?.merkleContract?.ordering === "records in ascending numeric index order", "representation Merkle ordering drift");
+  expect(artifact?.merkleContract?.oddNode === "duplicate final node", "representation odd-node contract drift");
+  expect(artifact?.merkleContract?.proofFamily === "EXPECTED_TARGET", "representation proof family drift");
+  expect(artifact?.merkleContract?.proofCount === 26, "representation proof count contract drift");
+  expect(artifact?.merkleContract?.proofPathLength === 8, "representation proof path-length drift");
+  expect(artifact?.merkleContract?.publishesProofsForAcceptedVectors === false, "representation proof contract claims accepted vectors");
 
   const replay = replayPositiveCampaignVectorRepresentationAudit();
   expect(Array.isArray(artifact?.records) && artifact.records.length === FUZZ_CASE_COUNT, "representation record count drift");
@@ -139,6 +157,51 @@ export function validatePositiveCampaignVectorRepresentationAudit(
       artifact.records.map((record) => record.auditRecordCommitmentSha256),
     ),
     "representation record-set commitment drift",
+  );
+  const recordCommitments = artifact.records.map((record) => record.auditRecordCommitmentSha256);
+  const merkleRoot = representationAuditMerkleRootSha256(recordCommitments);
+  expect(artifact?.summary?.auditRecordMerkleRootSha256 === merkleRoot, "representation Merkle root drift");
+  const proofs = artifact?.expectedCollisionProofs ?? [];
+  expect(Array.isArray(proofs) && proofs.length === 26, "representation inclusion-proof count drift");
+  expect(artifact?.summary?.expectedCollisionProofCount === "26", "representation proof summary count drift");
+  const expectedProofIndices = artifact.records
+    .filter((record) => record.family === "EXPECTED_TARGET")
+    .map((record) => record.index);
+  expect(
+    JSON.stringify(proofs.map((proof) => proof.index)) === JSON.stringify(expectedProofIndices),
+    "representation proofs do not cover exactly the expected collision class",
+  );
+  for (const proof of proofs) {
+    const record = artifact.records[Number(proof.index)];
+    expect(proof.family === "EXPECTED_TARGET", `${proof.sourceFuzzCaseName} proof family drift`);
+    expect(proof.sourceFuzzCaseName === record?.sourceFuzzCaseName, `${proof.index} proof source drift`);
+    expect(proof.auditRecordCommitmentSha256 === record?.auditRecordCommitmentSha256, `${proof.index} proof record drift`);
+    expect(proof.leafSha256 === representationAuditLeafSha256(proof.auditRecordCommitmentSha256), `${proof.index} proof leaf drift`);
+    expect(Array.isArray(proof.path) && proof.path.length === 8, `${proof.index} proof path-length drift`);
+    expect(
+      verifyRepresentationAuditMerkleProof(
+        proof.auditRecordCommitmentSha256,
+        Number(proof.index),
+        proof.path,
+        merkleRoot,
+      ),
+      `${proof.index} inclusion proof does not reach the published root`,
+    );
+    expect(proof.proofVerifiedToPublishedRoot === true, `${proof.index} proof verification claim drift`);
+    expect(proof.inputOrResultStored === false, `${proof.index} proof claims stored evidence`);
+    expect(proof.accepted === false, `${proof.index} proof claims acceptance`);
+    expect(proof.receiptIssued === false, `${proof.index} proof claims receipt issuance`);
+    expect(proof.reviewCompleted === false, `${proof.index} proof claims review completion`);
+    expect(proof.activationAuthorized === false, `${proof.index} proof claims activation authority`);
+    expect(proof.activationEffect === "NONE", `${proof.index} proof claims activation effect`);
+    const { proofCommitmentSha256, ...proofCore } = proof;
+    expect(proofCommitmentSha256 === canonicalSha256(proofCore), `${proof.index} proof commitment drift`);
+  }
+  expect(
+    artifact?.summary?.expectedCollisionProofSetCommitmentSha256 === canonicalSha256(
+      proofs.map((proof) => proof.proofCommitmentSha256),
+    ),
+    "representation proof-set commitment drift",
   );
   expect(
     JSON.stringify(generatePositiveCampaignVectorRepresentationAudit()) === JSON.stringify(artifact),

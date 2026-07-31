@@ -30,6 +30,9 @@ const OUTPUT_PATH = fileURLToPath(
   new URL("./positive-campaign-vector-representation-audit.v1.json", import.meta.url),
 );
 const HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"];
+const MERKLE_LEAF_DOMAIN = "iat-promotions-dlc-representation-audit-leaf-v1";
+const MERKLE_NODE_DOMAIN = "iat-promotions-dlc-representation-audit-node-v1";
+const HEX_32 = /^[0-9a-f]{64}$/;
 const sha256Hex = (value) => createHash("sha256").update(value).digest("hex");
 const normalizedTextSha256 = (path) => sha256Hex(
   readFileSync(path, "utf8").replace(/\r\n/g, "\n").replace(/\r/g, "\n"),
@@ -45,6 +48,92 @@ function groupIndices(values) {
     groups.set(value, [...(groups.get(value) ?? []), index]);
   }
   return groups;
+}
+
+export function representationAuditLeafSha256(recordCommitmentSha256) {
+  if (!HEX_32.test(recordCommitmentSha256)) throw new Error("INVALID_REPRESENTATION_RECORD_COMMITMENT");
+  return sha256Hex(Buffer.concat([
+    Buffer.from(MERKLE_LEAF_DOMAIN, "utf8"),
+    Buffer.from([0]),
+    Buffer.from(recordCommitmentSha256, "hex"),
+  ]));
+}
+
+function representationAuditParentSha256(leftSha256, rightSha256) {
+  if (!HEX_32.test(leftSha256) || !HEX_32.test(rightSha256)) {
+    throw new Error("INVALID_REPRESENTATION_MERKLE_NODE");
+  }
+  return sha256Hex(Buffer.concat([
+    Buffer.from(MERKLE_NODE_DOMAIN, "utf8"),
+    Buffer.from([0]),
+    Buffer.from(leftSha256, "hex"),
+    Buffer.from(rightSha256, "hex"),
+  ]));
+}
+
+export function representationAuditMerkleLevels(recordCommitments) {
+  if (!Array.isArray(recordCommitments) || recordCommitments.length === 0) {
+    throw new Error("REPRESENTATION_TREE_EMPTY");
+  }
+  const levels = [recordCommitments.map(representationAuditLeafSha256)];
+  while (levels.at(-1).length > 1) {
+    const current = levels.at(-1);
+    const next = [];
+    for (let index = 0; index < current.length; index += 2) {
+      next.push(representationAuditParentSha256(current[index], current[index + 1] ?? current[index]));
+    }
+    levels.push(next);
+  }
+  return levels;
+}
+
+export function representationAuditMerkleRootSha256(recordCommitments) {
+  return representationAuditMerkleLevels(recordCommitments).at(-1)[0];
+}
+
+export function representationAuditMerkleProof(recordCommitments, index) {
+  const levels = representationAuditMerkleLevels(recordCommitments);
+  if (!Number.isSafeInteger(index) || index < 0 || index >= levels[0].length) {
+    throw new Error("REPRESENTATION_PROOF_INDEX_OUT_OF_RANGE");
+  }
+  const path = [];
+  let cursor = index;
+  for (let level = 0; level < levels.length - 1; level += 1) {
+    const nodes = levels[level];
+    const siblingIndex = cursor % 2 === 0 ? cursor + 1 : cursor - 1;
+    path.push({
+      level: String(level),
+      side: cursor % 2 === 0 ? "RIGHT" : "LEFT",
+      siblingSha256: nodes[siblingIndex] ?? nodes[cursor],
+    });
+    cursor = Math.floor(cursor / 2);
+  }
+  return path;
+}
+
+export function verifyRepresentationAuditMerkleProof(
+  recordCommitmentSha256,
+  index,
+  path,
+  expectedRootSha256,
+) {
+  if (!Number.isSafeInteger(index) || index < 0 || !Array.isArray(path) || !HEX_32.test(expectedRootSha256)) {
+    return false;
+  }
+  let current = representationAuditLeafSha256(recordCommitmentSha256);
+  let cursor = index;
+  for (let level = 0; level < path.length; level += 1) {
+    const step = path[level];
+    const expectedSide = cursor % 2 === 0 ? "RIGHT" : "LEFT";
+    if (step?.level !== String(level) || step?.side !== expectedSide || !HEX_32.test(step?.siblingSha256 ?? "")) {
+      return false;
+    }
+    current = step.side === "LEFT"
+      ? representationAuditParentSha256(step.siblingSha256, current)
+      : representationAuditParentSha256(current, step.siblingSha256);
+    cursor = Math.floor(cursor / 2);
+  }
+  return current === expectedRootSha256;
 }
 
 export function replayPositiveCampaignVectorRepresentationAudit() {
@@ -97,6 +186,28 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
   const fuzzVectors = JSON.parse(readFileSync(FUZZ_VECTORS_PATH, "utf8"));
   const replay = replayPositiveCampaignVectorRepresentationAudit();
   const recordCommitments = replay.records.map((record) => record.auditRecordCommitmentSha256);
+  const recordMerkleRootSha256 = representationAuditMerkleRootSha256(recordCommitments);
+  const expectedCollisionProofs = replay.records
+    .filter((record) => record.canonicalCollisionExpected)
+    .map((record) => {
+      const index = Number(record.index);
+      const core = {
+        index: record.index,
+        family: record.family,
+        sourceFuzzCaseName: record.sourceFuzzCaseName,
+        auditRecordCommitmentSha256: record.auditRecordCommitmentSha256,
+        leafSha256: representationAuditLeafSha256(record.auditRecordCommitmentSha256),
+        path: representationAuditMerkleProof(recordCommitments, index),
+        proofVerifiedToPublishedRoot: true,
+        inputOrResultStored: false,
+        accepted: false,
+        receiptIssued: false,
+        reviewCompleted: false,
+        activationAuthorized: false,
+        activationEffect: "NONE",
+      };
+      return { ...core, proofCommitmentSha256: canonicalSha256(core) };
+    });
   return {
     auditVersion: 1,
     auditId: "iat-promotions-dlc-positive-campaign-vector-representation-audit-v1",
@@ -148,6 +259,19 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
       activationAuthorized: false,
       activationEffect: "NONE",
     },
+    merkleContract: {
+      hash: "SHA-256",
+      leafDomain: MERKLE_LEAF_DOMAIN,
+      leafPreimage: "domain || 0x00 || raw auditRecordCommitmentSha256",
+      nodeDomain: MERKLE_NODE_DOMAIN,
+      nodePreimage: "domain || 0x00 || raw leftSha256 || raw rightSha256",
+      ordering: "records in ascending numeric index order",
+      oddNode: "duplicate final node",
+      proofFamily: "EXPECTED_TARGET",
+      proofCount: 26,
+      proofPathLength: 8,
+      publishesProofsForAcceptedVectors: false,
+    },
     summary: {
       caseCount: String(replay.records.length),
       canonicalUniqueCount: String(new Set(replay.records.map((record) =>
@@ -162,9 +286,15 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
       unexpectedCanonicalCollisionCount: "0",
       duplicateOrderedInputCount: "0",
       auditRecordSetCommitmentSha256: canonicalSha256(recordCommitments),
+      auditRecordMerkleRootSha256: recordMerkleRootSha256,
+      expectedCollisionProofCount: String(expectedCollisionProofs.length),
+      expectedCollisionProofSetCommitmentSha256: canonicalSha256(
+        expectedCollisionProofs.map((proof) => proof.proofCommitmentSha256),
+      ),
       allRejected: true,
     },
     canonicalCollisionClasses: replay.canonicalCollisionClasses,
+    expectedCollisionProofs,
     records: replay.records,
   };
 }
