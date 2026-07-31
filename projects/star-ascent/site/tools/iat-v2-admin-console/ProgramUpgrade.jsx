@@ -375,7 +375,7 @@ export default function ProgramUpgrade({
               >
                 {snapshot?.action === "return-for-repair"
                   ? "CONNECT 7XZ + RETURN BUFFER FOR REPAIR"
-                  : "CONNECT 7XZ + SIMULATE + SIGN"}
+                  : "CONNECT 7XZ MODEL T DIRECTLY + SIMULATE + SIGN"}
               </button>
             ) : (
               <div className="broadcast-panel">

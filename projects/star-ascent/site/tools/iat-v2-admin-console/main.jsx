@@ -9,6 +9,7 @@ import {
   getAccount,
   getMint,
 } from "@solana/spl-token";
+import TrezorConnect from "@trezor/connect-web";
 import {
   assertCanonicalMetadataAccount,
   deriveMetadataAddress,
@@ -42,8 +43,15 @@ import {
   parseUpgradeableProgramData,
   parseV2ConfigAccount,
 } from "../../programs/iat_v2/instructions.mjs";
+import {
+  assertIatV2RehearsalAllocationBalances,
+} from "../../programs/iat_v2/feature-rehearsal.mjs";
 import FeatureRehearsal from "./FeatureRehearsal.jsx";
 import ProgramUpgrade from "./ProgramUpgrade.jsx";
+import {
+  createTrezorTransactionProvider,
+  findTrezorSolanaAccount,
+} from "./trezor-provider.mjs";
 import "./style.css";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
@@ -60,6 +68,14 @@ const FEATURE_GENESIS_STORAGE_KEY = `iat-v2-feature-genesis-timestamp/${ACTIVE_M
 const SECONDS_PER_WEEK = 604_800;
 const FEATURE_BOUNDARY_LEAD_SECONDS = 7_200;
 const connection = new Connection(DEVNET_RPC, "confirmed");
+const TREZOR_CONNECT_API_AVAILABLE = [
+  "init",
+  "solanaGetPublicKey",
+  "solanaSignTransaction",
+].every((method) => typeof TrezorConnect?.[method] === "function");
+document.documentElement.dataset.iatTrezorConnect = TREZOR_CONNECT_API_AVAILABLE ? "ready" : "missing";
+let trezorConnectReady;
+const trezorAccounts = new Map();
 
 const STAGE_COPY = [
   {
@@ -121,31 +137,43 @@ async function sha256Hex(value) {
     .join("");
 }
 
-function providerPublicKey(provider, connected) {
-  const value = connected?.publicKey ?? provider.publicKey;
-  if (!value) throw new Error("Backpack did not return a Solana public address");
-  return value instanceof PublicKey ? value : new PublicKey(value.toString());
+async function initializeTrezorConnect() {
+  if (!TREZOR_CONNECT_API_AVAILABLE) {
+    throw new Error("Trezor Connect SDK did not load correctly; restart the local Devnet console");
+  }
+  if (!trezorConnectReady) {
+    trezorConnectReady = TrezorConnect.init({
+      manifest: {
+        appName: "Internal Agency IAT V2 Devnet Console",
+        appUrl: "https://internalagency.io",
+        email: "opensource@internalagency.io",
+      },
+      coreMode: "auto",
+    }).catch((error) => {
+      trezorConnectReady = undefined;
+      throw error;
+    });
+  }
+  await trezorConnectReady;
 }
 
 async function getHardwareProvider(expectedAddress = IAT_V2_PROGRAM_ADMIN) {
-  const provider = window.backpack?.solana ?? window.solana;
-  if (!provider) throw new Error("Backpack Solana was not found in this browser");
-  if (provider.isBackpack === false) throw new Error("The detected wallet provider is not Backpack");
-  if (typeof provider.signTransaction !== "function") {
-    throw new Error("Backpack does not expose hardware transaction signing");
+  await initializeTrezorConnect();
+  const cacheKey = expectedAddress.toBase58();
+  let account = trezorAccounts.get(cacheKey);
+  if (!account) {
+    account = await findTrezorSolanaAccount({
+      connect: TrezorConnect,
+      expectedAddress,
+    });
+    trezorAccounts.set(cacheKey, account);
   }
-  let connected = await provider.connect();
-  let publicKey = providerPublicKey(provider, connected);
-  if (!publicKey.equals(expectedAddress) && typeof provider.disconnect === "function") {
-    await provider.disconnect();
-    connected = await provider.connect();
-    publicKey = providerPublicKey(provider, connected);
-  }
-  if (!publicKey.equals(expectedAddress)) {
-    throw new Error(
-      `Backpack stayed on ${publicKey.toBase58()} after reconnecting instead of required signer ${expectedAddress.toBase58()}`,
-    );
-  }
+  const publicKey = account.publicKey;
+  const provider = createTrezorTransactionProvider({
+    connect: TrezorConnect,
+    path: account.path,
+    publicKey,
+  });
   return { provider, publicKey };
 }
 
@@ -420,11 +448,11 @@ async function loadChainSnapshot() {
   if (mintState.supply !== IAT_V2_REHEARSAL_SUPPLY) {
     throw new Error(`Mint supply is ${mintState.supply}, not ${IAT_V2_REHEARSAL_SUPPLY}`);
   }
-  for (const [name, allocation] of Object.entries(plan.allocationDestinations)) {
-    if (balances[name] !== allocation.amount) {
-      throw new Error(`${name} balance is ${balances[name]}, expected ${allocation.amount}`);
-    }
-  }
+  assertIatV2RehearsalAllocationBalances({
+    balances,
+    allocationDestinations: plan.allocationDestinations,
+    active: config.active,
+  });
   if (mintState.mintAuthority) {
     assertAuthority(mintState.mintAuthority, IAT_V2_PROGRAM_ADMIN, "Mint authority");
     assertAuthority(mintState.freezeAuthority, IAT_V2_PROGRAM_ADMIN, "Freeze authority");
@@ -832,7 +860,7 @@ function App() {
                   REFRESH CHAIN
                 </button>
                 <button className="connect" onClick={connect} disabled={busy || !local}>
-                  {connected ? `MODEL T ${short(connected)}` : "CONNECT BACKPACK + MODEL T"}
+                  {connected ? `MODEL T ${short(connected)}` : "CONNECT MODEL T DIRECTLY"}
                 </button>
               </>
             )}

@@ -9,6 +9,27 @@ function integerTimestamp(value, label) {
   return normalized;
 }
 
+export function assertIatV2RehearsalAllocationBalances({
+  balances,
+  allocationDestinations,
+  active,
+}) {
+  for (const [name, allocation] of Object.entries(allocationDestinations)) {
+    const balance = balances[name];
+    if (typeof balance !== "bigint") {
+      throw new Error(`${name} balance is unavailable`);
+    }
+    if (!active && balance !== allocation.amount) {
+      throw new Error(`${name} balance is ${balance}, expected ${allocation.amount}`);
+    }
+    if (active && balance > allocation.amount) {
+      throw new Error(
+        `${name} balance is ${balance}, above original allocation ${allocation.amount}`,
+      );
+    }
+  }
+}
+
 export function currentIatV2Week(genesisTimestamp, nowTimestamp) {
   const genesis = integerTimestamp(genesisTimestamp, "Genesis timestamp");
   const now = integerTimestamp(nowTimestamp, "Current timestamp");
