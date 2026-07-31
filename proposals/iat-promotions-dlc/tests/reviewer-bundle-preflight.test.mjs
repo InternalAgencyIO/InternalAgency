@@ -79,6 +79,22 @@ test("human diagnostics expose document, JSON Pointer, keyword, and message", ()
   assert.match(markdown, /pattern/);
   assert.match(markdown, /must match the fixed pattern/);
   assert.match(markdown, /Semantic evaluation ran: \*\*false\*\*/);
+
+  const escaped = renderReviewerInputPreflight({
+    ...scenario.result,
+    documents: [{
+      document: "CANDIDATE",
+      valid: false,
+      errors: [{
+        instancePath: "/bad\\path|field\nnext",
+        schemaPath: "#/properties/bad\\path|field",
+        keyword: "additionalProperties",
+        message: "line one|line two\\tail\nend",
+      }],
+    }],
+  });
+  assert.ok(escaped.includes("/bad\\\\path\\|field next"));
+  assert.ok(escaped.includes("line one\\|line two\\\\tail end"));
 });
 
 test("CLI returns status 3 and JSON diagnostics for structural rejection", () => {

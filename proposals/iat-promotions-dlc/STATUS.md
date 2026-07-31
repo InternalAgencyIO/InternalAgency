@@ -8,7 +8,7 @@ Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `9d2c4d4`
+Previously published public increment: `0b0ca81`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -270,6 +270,8 @@ This status file deliberately does not claim a self-referential commit hash.
 - direct programmatic access to the unchanged pure six-gate evaluator; and
 - preflight results fixed to no receipt, no completed review, and no activation
   authority or effect.
+- CodeQL-safe Markdown diagnostics that escape backslashes before pipe
+  characters and normalize embedded line breaks.
 
 Current proposal-only result: **214 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,

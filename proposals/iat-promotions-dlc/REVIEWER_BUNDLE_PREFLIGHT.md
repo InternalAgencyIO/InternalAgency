@@ -27,6 +27,8 @@ JSON Pointer diagnostics reveal schema paths and validation messages only. They
 do not publish raw X identities, mutable handles, OAuth material, private keys,
 or wallet secrets. Candidate public keys and detached signatures are already
 public review material and remain bound by fixed lowercase-hex patterns.
+Markdown table output escapes backslashes before pipe characters and normalizes
+line breaks, so crafted field names cannot create ambiguous diagnostic cells.
 
 ## Deterministic public vectors
 

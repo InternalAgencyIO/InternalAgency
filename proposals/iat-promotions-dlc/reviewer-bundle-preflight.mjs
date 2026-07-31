@@ -57,7 +57,10 @@ export function preflightReviewerInputs(candidate, expectedTarget, schemas = loa
 }
 
 function escapeTableCell(value) {
-  return String(value).replace(/\|/g, "\\|").replace(/\r?\n/g, " ");
+  return String(value)
+    .replace(/\\/g, "\\\\")
+    .replace(/\|/g, "\\|")
+    .replace(/\r?\n/g, " ");
 }
 
 export function renderReviewerInputPreflight(preflight) {

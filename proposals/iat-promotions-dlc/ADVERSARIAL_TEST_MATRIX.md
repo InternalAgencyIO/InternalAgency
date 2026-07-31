@@ -203,6 +203,7 @@ security audit or deployment approval.
 | Schema/example corpus exposes raw X identity or private material | `portable schemas expose commitments...` | Privacy scan permits commitments and public attestation only |
 | CLI evaluates semantic gates after malformed structure | `all nine malformed input scenarios stop...` | Structural failure fixes semantic permission and execution to false |
 | CLI hides the failing field behind a generic error | `human diagnostics expose document...` | Document, JSON Pointer, Draft-07 keyword, and message remain explicit |
+| Crafted diagnostic contains backslashes, pipes, or line breaks | same | Renderer escapes backslashes first, then pipes, and normalizes newlines |
 | Structural rejection returns the semantic-rejection exit code | `CLI returns status 3...` | Schema failure uses distinct exit `3`; semantic rejection remains exit `2` |
 | Structural preflight replaces or mutates the pure evaluator | `pure programmatic evaluator remains available...` | Direct evaluator behavior and rejection result remain unchanged |
 | Preflight gains file-write, signing, keygen, or network capability | `preflight source is local-read-only...` | Import and forbidden-capability checks fail |
