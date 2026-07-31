@@ -75,3 +75,13 @@ Expected public summary:
 This confirms only that both implementations agree on the published HOLD and
 rejections. It does not provide the absent external positive campaign vector
 or its independent review.
+
+The verifier also supports the separately content-bound twenty-case mutation
+corpus:
+
+```sh
+python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-differential-vectors --format json
+```
+
+That mode independently reproduces every complete Node gate result and returns
+exit `2` if any mutation evidence or source binding drifts.

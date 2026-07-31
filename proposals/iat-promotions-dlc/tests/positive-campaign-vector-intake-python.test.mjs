@@ -116,7 +116,7 @@ test("Python CLI gives exit 1 for invalid usage and malformed JSON", () => {
   const usage = spawnSync(PYTHON, [VERIFIER, "--format", "json"], pythonOptions);
   assert.equal(usage.status, 1);
   assert.equal(usage.stdout, "");
-  assert.match(usage.stderr, /--verify-vectors is required/);
+  assert.match(usage.stderr, /exactly one of --verify-vectors or --verify-differential-vectors is required/);
   const directory = mkdtempSync(join(tmpdir(), "iat-positive-intake-json-"));
   try {
     const path = join(directory, "malformed.json");

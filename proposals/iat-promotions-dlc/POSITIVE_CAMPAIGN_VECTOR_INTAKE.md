@@ -92,3 +92,5 @@ material.
 An independently implemented Python verifier and its standard-library-only
 public Ed25519 operation are documented in
 [`INDEPENDENT_POSITIVE_VECTOR_INTAKE_VERIFICATION.md`](./INDEPENDENT_POSITIVE_VECTOR_INTAKE_VERIFICATION.md).
+The fixed Node/Python mutation-parity corpus is documented in
+[`POSITIVE_CAMPAIGN_VECTOR_DIFFERENTIAL.md`](./POSITIVE_CAMPAIGN_VECTOR_DIFFERENTIAL.md).

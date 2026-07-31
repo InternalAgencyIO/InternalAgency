@@ -21,6 +21,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_VECTORS = ROOT / "positive-campaign-vector-intake-vectors.v1.json"
+DEFAULT_DIFFERENTIAL_VECTORS = (
+    ROOT / "positive-campaign-vector-intake-differential-vectors.v1.json"
+)
 SCHEMA_PATH = ROOT / "positive-campaign-vector-intake.schema.v1.json"
 CAMPAIGN_VECTORS_PATH = ROOT / "campaign-envelope-verification-vectors.v1.json"
 EVALUATOR_PATH = ROOT / "positive-campaign-vector-intake.mjs"
@@ -729,6 +732,112 @@ def validate_bundle(vectors: Any) -> list[str]:
     return errors
 
 
+def validate_differential_bundle(vectors: Any) -> list[str]:
+    errors: list[str] = []
+
+    def expect(condition: bool, message: str) -> None:
+        if not condition:
+            errors.append(message)
+
+    schema = read_json(SCHEMA_PATH)
+    base_vectors = read_json(DEFAULT_VECTORS)
+    base_errors = validate_bundle(base_vectors)
+    errors.extend(f"base intake: {error}" for error in base_errors)
+    expect(vectors.get("vectorVersion") == 1, "differential vector version drift")
+    expect(
+        vectors.get("vectorId")
+        == "iat-promotions-dlc-positive-campaign-vector-intake-differential-vectors-v1",
+        "differential vector ID drift",
+    )
+    status = vectors.get("status", {})
+    expect(status.get("labels") == HOLD_LABELS, "differential HOLD labels drift")
+    expect(status.get("network") == "NONE", "differential vectors must remain network-free")
+    expect(status.get("programId") is None, "differential vectors claim a program ID")
+    expect(status.get("deployable") is False, "differential vectors claim deployability")
+    expect(status.get("differentialCorpusApplied") is False, "differential corpus claims application")
+    expect(status.get("positiveVectorAvailable") is False, "differential corpus claims a positive vector")
+    expect(
+        status.get("positiveVectorReviewCompleted") is False,
+        "differential corpus claims review completion",
+    )
+    expect(
+        status.get("positiveVectorIntegrationBlocked") is True,
+        "differential corpus released positive integration HOLD",
+    )
+    contract = vectors.get("contract", {})
+    expect(
+        contract.get("mode") == "CROSS_RUNTIME_VERIFY_ONLY_REJECTION_ONLY",
+        "differential mode drift",
+    )
+    expect(contract.get("gateOrder") == GATE_ORDER, "differential gate order drift")
+    expect(contract.get("mutationCount") == 20, "differential mutation count drift")
+    expect(contract.get("everyMutationRejected") is True, "differential rejection contract drift")
+    expect(contract.get("nodeAndPythonMustMatchExactly") is True, "cross-runtime parity disabled")
+    for field in [
+        "validPositiveCampaignVectorPublished",
+        "signingMaterialIncluded",
+        "createsKeys",
+        "createsSignatures",
+        "issuesReviewReceipts",
+        "completesReview",
+        "activationAuthorized",
+    ]:
+        expect(contract.get(field) is False, f"differential contract {field} drift")
+    expect(contract.get("activationEffect") == "NONE", "differential activation effect drift")
+    sources = vectors.get("sources", {})
+    expect(
+        sources.get("baseVectors", {}).get("canonicalSha256") == canonical_sha256(base_vectors),
+        "differential base-vector source digest drift",
+    )
+    expect(
+        sources.get("intakeSchema", {}).get("canonicalSha256") == canonical_sha256(schema),
+        "differential schema source digest drift",
+    )
+    expect(
+        sources.get("nodeEvaluator", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(EVALUATOR_PATH),
+        "differential Node evaluator source digest drift",
+    )
+    expect(
+        sources.get("pythonVerifier", {}).get("normalizedTextSha256")
+        == normalized_text_sha256(Path(__file__).resolve()),
+        "differential Python verifier source digest drift",
+    )
+    scenarios = vectors.get("scenarios", [])
+    expect(isinstance(scenarios, list) and len(scenarios) == 20, "differential case count drift")
+    seen: set[str] = set()
+    for scenario in scenarios if isinstance(scenarios, list) else []:
+        name = scenario.get("name", "UNKNOWN")
+        expect(name not in seen, f"duplicate differential scenario {name}")
+        seen.add(name)
+        try:
+            actual = evaluate_intake(
+                scenario["candidate"],
+                scenario["expectedTarget"],
+                now=vectors["evaluationTime"],
+                schema=schema,
+            )
+        except (KeyError, TypeError, ValueError, VerificationFailure) as error:
+            errors.append(f"{name}: independent differential evaluation failed closed: {error}")
+            continue
+        expect(actual == scenario.get("expectedResult"), f"{name}: differential result does not reproduce")
+        expect(actual["candidateSatisfiesIntakePolicy"] is False, f"{name}: satisfies intake policy")
+        expect(
+            actual["positiveVectorAcceptedForSeparateReview"] is False,
+            f"{name}: claims separate-review acceptance",
+        )
+        expect(
+            [entry["id"] for entry in actual["gates"]] == GATE_ORDER,
+            f"{name}: gate order drift",
+        )
+        expect(any(entry["result"] == "FAIL" for entry in actual["gates"]), f"{name}: no rejecting gate")
+        expect(actual["receiptIssued"] is False, f"{name}: issues receipt")
+        expect(actual["reviewCompletedByThisEvaluator"] is False, f"{name}: completes review")
+        expect(actual["activationAuthorized"] is False, f"{name}: authorizes activation")
+        expect(actual["activationEffect"] == "NONE", f"{name}: creates activation effect")
+    return errors
+
+
 def render_result(valid: bool, errors: list[str], scenario_count: int, output_format: str) -> str:
     result = {
         "valid": valid,
@@ -752,22 +861,60 @@ def render_result(valid: bool, errors: list[str], scenario_count: int, output_fo
     )
 
 
+def render_differential_result(
+    valid: bool, errors: list[str], mutation_count: int, output_format: str
+) -> str:
+    result = {
+        "valid": valid,
+        "errors": errors,
+        "mutationCount": mutation_count,
+        "nodeAndPythonMatchExactly": valid,
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+    if output_format == "json":
+        return json.dumps(result, ensure_ascii=False, indent=2)
+    if valid:
+        return (
+            f"Independent differential intake verification passed: {mutation_count} "
+            "mutations match Node and remain rejected and non-authoritative."
+        )
+    return "Independent differential intake verification failed:\n" + "\n".join(
+        f"- {error}" for error in errors
+    )
+
+
 def main(argv: list[str] | None = None) -> int:
     try:
         parser = OfflineArgumentParser(description=__doc__)
         parser.add_argument("--vectors", type=Path, default=DEFAULT_VECTORS)
+        parser.add_argument(
+            "--differential-vectors", type=Path, default=DEFAULT_DIFFERENTIAL_VECTORS
+        )
         parser.add_argument("--verify-vectors", action="store_true")
+        parser.add_argument("--verify-differential-vectors", action="store_true")
         parser.add_argument("--format", choices=["text", "json"], default="text")
         args = parser.parse_args(argv)
-        if not args.verify_vectors:
-            raise CliUsageError("--verify-vectors is required")
-        vectors = read_json(args.vectors)
-        errors = validate_bundle(vectors)
+        if args.verify_vectors == args.verify_differential_vectors:
+            raise CliUsageError(
+                "exactly one of --verify-vectors or --verify-differential-vectors is required"
+            )
+        if args.verify_vectors:
+            vectors = read_json(args.vectors)
+            errors = validate_bundle(vectors)
+        else:
+            vectors = read_json(args.differential_vectors)
+            errors = validate_differential_bundle(vectors)
     except (CliUsageError, OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
         print(f"Unable to read public intake vectors: {error}", file=sys.stderr)
         return 1
-    scenario_count = len(vectors.get("scenarios", [])) if isinstance(vectors, dict) else 0
-    print(render_result(not errors, errors, scenario_count, args.format))
+    case_count = len(vectors.get("scenarios", [])) if isinstance(vectors, dict) else 0
+    if args.verify_vectors:
+        print(render_result(not errors, errors, case_count, args.format))
+    else:
+        print(render_differential_result(not errors, errors, case_count, args.format))
     return 0 if not errors else 2
 
 

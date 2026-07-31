@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 17:38 UTC
+Updated: 2026-07-31 17:53 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `161721c`
+Previously published public increment: `a911dff`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -316,8 +316,19 @@ This status file deliberately does not claim a self-referential commit hash.
   state, and activation claims with distinct verification exit `2`; and
 - source-level exclusion of write, network, wallet, signing, key-generation,
   receipt, completed-review, deployment, and activation capability.
+- a twenty-case deterministic differential corpus spanning closed structure,
+  target shape/binding, private fields, provenance, canonical messages, public
+  keys/signatures, cryptographic guards, review binding, and non-authority;
+- exact complete-result parity between the Node evaluator and independent
+  Python implementation for every mutation;
+- a review-complete case that passes its independent-review gate while the
+  unrelated signature still fails cryptography and blocks overall acceptance;
+- content bindings for base vectors, schema, Node evaluator, and Python
+  verifier, with drift rejected in both runtimes; and
+- public mutation evidence fixed to no receipt, no completed review, no
+  activation authority, and effect `NONE`.
 
-Current proposal-only result: **241 tests passed**. This consists of 28 protected
+Current proposal-only result: **250 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -358,6 +369,9 @@ tests complete the rejection-only intake suite.
 Seven independent Python intake reproduction, RFC-control, drift-rejection,
 HOLD, CLI-failure, source-safety, and manifest-coverage tests complete the
 cross-runtime intake-verification suite.
+Nine differential-corpus generation, gate-family, Node/Python parity,
+changed-evidence rejection, source-safety, non-authority, and manifest-coverage
+tests complete the fixed mutation suite.
 
 ## Current guarantees of the reference model
 
@@ -389,7 +403,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a deterministic cross-runtime mutation corpus for the positive-vector
+Add seeded high-volume cross-runtime mutation fuzzing for the positive-vector
 intake schema, canonical message, public key, provenance, review, and authority
-fields. Every mutation must produce the same ordered gate result in Node and
-Python without creating any positive signature or review material.
+fields. It must remain deterministic, rejection-only, and local while proving
+Node/Python parity without creating any positive signature or review material.

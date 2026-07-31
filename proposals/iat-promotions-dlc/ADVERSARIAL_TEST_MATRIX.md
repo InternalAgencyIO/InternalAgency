@@ -232,9 +232,18 @@ security audit or deployment approval.
 | Corpus releases its HOLD or claims activation authority | `released HOLD or authority claims fail...` | Independent metadata contract rejects released or non-`NONE` authority |
 | Python verifier receives invalid usage or malformed JSON | `Python CLI gives exit 1...` | Offline pre-evaluation failure returns distinct exit `1` with no result authority |
 | Python verifier gains write, network, wallet, signing, keygen, or chain capability | `independent verifier is local-read-only...` | Source capability scan and review-manifest role coverage fail |
+| Candidate version, status, unknown fields, or HOLD-label order drifts | `closed-schema mutations fail...` | Node and Python both fail the closed-schema gate in the same fixed result |
+| Expected-target key order or version changes | `target shape and candidate-target binding...` | Exact independent-target gate fails before acceptance |
+| Expected-target or candidate public key is substituted | same / `canonical-message and signature mutations...` | Canonical binding and cryptographic gates remain deterministic across runtimes |
+| Secret-bearing field name or provenance digest is added | `privacy and provenance mutations...` | Both runtimes expose the same privacy/provenance rejection |
+| Source-signed provenance is asserted over an unrelated signature | same | Provenance can pass while real Ed25519 verification still fails |
+| Canonical bytes, digest, signature hex, payload, or detached signature changes | `canonical-message and signature mutations...` | Both runtimes reproduce exact binding/cryptographic outcomes |
+| Review metadata is fully independently bound without valid cryptography | `review binding can pass...` | Review gate passes but cryptographic gate blocks overall acceptance |
+| Receipt or activation authority is added to the candidate | `authority mutations fail...` | Schema and non-authority gates fail; evaluator output remains false/`NONE` |
+| Python differential result differs from published Node evidence | `Python independently reproduces...` | Complete result-object equality is mandatory for all twenty mutations |
 
 ## Next matrix expansion
 
-- deterministic cross-runtime mutation corpus for intake schema, canonical
-  message, public key, provenance, review, and authority fields;
+- seeded high-volume cross-runtime mutation fuzzing for closed schema,
+  canonical message, public key, provenance, review, and authority fields;
 - local-validator transaction rollback and account-lock contention.

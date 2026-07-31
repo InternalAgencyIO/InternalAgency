@@ -65,6 +65,10 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Intake-vector validator](./validate-positive-campaign-vector-intake-vectors.mjs)
 - [Independent Python intake-verification contract](./INDEPENDENT_POSITIVE_VECTOR_INTAKE_VERIFICATION.md)
 - [Independent zero-dependency Python intake verifier](./verify-positive-campaign-vector-intake.py)
+- [Cross-runtime intake mutation contract](./POSITIVE_CAMPAIGN_VECTOR_DIFFERENTIAL.md)
+- [Twenty-case differential vectors](./positive-campaign-vector-intake-differential-vectors.v1.json)
+- [Differential-vector generator](./generate-positive-campaign-vector-intake-differential-vectors.mjs)
+- [Differential-vector validator](./validate-positive-campaign-vector-intake-differential-vectors.mjs)
 - [Verifier-key lifecycle reference policy](./VERIFIER_KEY_LIFECYCLE.md)
 - [Network-free verifier-key lifecycle model](./verifier-key-lifecycle.mjs)
 - [Verifier-registry interface amendment](./KEY_LIFECYCLE_AMENDMENT.md)
@@ -162,6 +166,7 @@ node proposals/iat-promotions-dlc/generate-reviewer-bundle-schema-examples.mjs -
 node proposals/iat-promotions-dlc/generate-reviewer-bundle-preflight-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-campaign-envelope-verification-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-positive-campaign-vector-intake-vectors.mjs --write
+node proposals/iat-promotions-dlc/generate-positive-campaign-vector-intake-differential-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-review-manifest.mjs --write
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
@@ -182,8 +187,10 @@ node proposals/iat-promotions-dlc/validate-reviewer-bundle-schemas.mjs
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-preflight-vectors.mjs
 node proposals/iat-promotions-dlc/validate-campaign-envelope-verification-vectors.mjs
 node proposals/iat-promotions-dlc/validate-positive-campaign-vector-intake-vectors.mjs
+node proposals/iat-promotions-dlc/validate-positive-campaign-vector-intake-differential-vectors.mjs
 python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-vectors --format json
+python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-differential-vectors --format json
 python proposals/iat-promotions-dlc/verify-review-manifest.py
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
@@ -214,6 +221,7 @@ node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight-python.
 node --test proposals/iat-promotions-dlc/tests/campaign-envelope-verification.test.mjs
 node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake.test.mjs
 node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake-python.test.mjs
+node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake-differential.test.mjs
 ```
 
 ## Deliberate isolation
