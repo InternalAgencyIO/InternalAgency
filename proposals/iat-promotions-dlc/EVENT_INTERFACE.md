@@ -70,3 +70,9 @@ and `eventInterfaceApplied: false`. Matching event vectors do not approve a
 binary, on-chain event format, deployment, funding, activation, Devnet use, or
 mainnet use. Independent review must decide whether log cost and the verifier
 hash-chain design are acceptable before any implementation.
+
+`EVENT_RECONCILIATION.md` defines a separate held audit model that decodes
+these event bytes and compares them with inert semantic account, vault,
+receipt, and verifier-registry snapshots. Passing reconciliation proves only
+internal consistency of supplied evidence; it does not prove chain inclusion,
+finality, account ownership, or deployment.

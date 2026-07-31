@@ -1,0 +1,55 @@
+{
+  "reconciliationPolicyVersion": 1,
+  "reconciliationPolicyId": "iat-promotions-dlc-event-reconciliation-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "reconciliationApplied": false
+  },
+  "sourceEventInterface": {
+    "path": "program-event-interface.v1.json",
+    "canonicalSha256": "61a7f2ce78a8f4a938db350f3321883101bdb0f9ea4feb60a2904d2feaacf0a9"
+  },
+  "economics": {
+    "heroRewardBaseUnits": "120000000000",
+    "proposerRewardBaseUnits": "60000000000",
+    "pairRewardBaseUnits": "180000000000",
+    "maximumCompletedPairs": "1000",
+    "maximumBudgetBaseUnits": "180000000000000"
+  },
+  "requiredEvidence": {
+    "orderedEncodedEventRecords": true,
+    "campaignAccountSnapshot": true,
+    "promotionVaultSnapshot": true,
+    "completeSettlementReceiptSet": true,
+    "verifierRegistrySnapshots": true,
+    "rawXIdentityForbidden": true,
+    "walletOrRpcAccessForbidden": true
+  },
+  "invariants": {
+    "eventVersionEqualsOne": true,
+    "completeCampaignHistoryStartsAtInitialization": true,
+    "eventCampaignMatchesSnapshot": true,
+    "everySettlementHasExactlyOneReceipt": true,
+    "everyReceiptHasExactlyOneSettlement": true,
+    "settlementCountersIncreaseByOne": true,
+    "rewardsEqualFixedEconomics": true,
+    "vaultDeficitForbidden": true,
+    "unattributedVaultSurplusNeverFundsRewards": true,
+    "pairOneThousandRequiresSameTransactionExhaustion": true,
+    "terminalCampaignCannotResume": true,
+    "verifierChainStartsAtZeroHash": true,
+    "verifierPreviousHashMustMatch": true,
+    "registrySnapshotHeadMustMatch": true,
+    "emergencyDisableIsTerminal": true,
+    "eventsRemainNonAuthoritative": true
+  }
+}

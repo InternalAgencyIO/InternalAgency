@@ -120,11 +120,26 @@ security audit or deployment approval.
 | Failed transition allowed to emit an outcome | `deployment, source, audit-rule...` | Rollback and success-only audit rules fail |
 | Event vector or schema changes under stale evidence | `stale vector bytes and event schema...` | Deterministic vector, byte, and length checks fail |
 | Event interface claims a network, program ID, deployment, or application | `deployment, source, audit-rule...` | All event HOLD gates fail |
+| Event ordinal, transaction log index, or cursor is duplicated or reordered | `record truncation, duplicate cursors...` | Reconciler rejects before campaign evidence is evaluated |
+| Event bytes are truncated or ambiguous | same | Fixed event decoder fails closed |
+| Settlement has no receipt, an extra receipt, or a changed receipt field | `receipt set, receipt body...` | Complete receipt bijection and every public field must match |
+| Campaign paid counter or completed-pair counter drifts | same | Aggregate event economics must equal the campaign snapshot |
+| Promotion-vault snapshot differs from the last successful outcome | same | Reconciler rejects the evidence set |
+| Promotion vault drops below fixed budget less exact paired rewards | `unattributed deposits remain surplus...` | Deficit is rejected; outside deposits cannot fund reward capacity |
+| Unattributed vault surplus disappears during settlement | same | Unexplained outflow is rejected |
+| Pair 1,000 has no exhaustion event or a different transaction | `pair 1,000 requires...` | Terminal evidence must immediately follow the final pair in one transaction |
+| Campaign event occurs after cancellation or exhaustion | same | Permanent terminal-state guard rejects resumed work |
+| Pending nominations exist at exhaustion | `a complete 1,000-pair stream...` | They remain unwritten but are derived as ineligible from campaign status |
+| Verifier registry starts from a nonzero hash or forks its prior head | `verifier hash-chain forks...` | Reconciler rejects the broken chain |
+| Registry snapshot head or terminal status differs from events | same | Authoritative registry snapshot must equal the derived final state |
+| Verifier event follows emergency disable | same | Permanent verifier terminal-state guard rejects it |
+| Pre-activation cancellation redirects the refund | `pre-activation cancellation reconciles...` | Only the immutable community refund and exact vault balance are accepted |
+| Reconciliation policy claims network, program, deployment, or application | `deployment claims, source drift...` | Policy HOLD gates fail before evidence processing |
+| Reconciliation source digest or non-authority invariant drifts | same | Source binding and accounts-remain-authoritative rule fail closed |
 
 ## Next matrix expansion
 
-- deterministic reconciliation of event streams against account state,
-  receipts, counters, vault balances, and terminal status;
+- deterministic public reconciliation fixtures and compact evidence digests;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

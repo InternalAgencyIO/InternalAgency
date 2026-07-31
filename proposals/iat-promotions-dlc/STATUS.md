@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 13:24 UTC
+Updated: 2026-07-31 13:39 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `66b0448`
+Previously published public increment: `c5db78a`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -107,16 +107,29 @@ This status file deliberately does not claim a self-referential commit hash.
 - no raw X user ID, mutable X handle, secret, or signing material in events;
 - exhaustive truncation, trailing-byte, malformed-field, privacy, economics,
   stale-vector, source-drift, and deployment-claim rejection; and
-- explicit `eventInterfaceApplied: false` release gate.
+- explicit `eventInterfaceApplied: false` release gate;
+- network-free ordered event/account reconciler with no RPC or wallet import;
+- machine-readable reconciliation policy bound to the event-interface digest;
+- complete campaign-history, funding, activation, cancellation, nomination,
+  settlement, exhaustion, and surplus-finalization ordering checks;
+- exact receipt/event bijection and full receipt-field comparison;
+- campaign counter, reward-total, and promotion-vault snapshot reconciliation;
+- explicit isolation of unsolicited vault deposits as non-budget surplus;
+- same-transaction pair-1,000 exhaustion and permanent terminal-state proof;
+- verifier zero-hash genesis, prior-head continuity, final registry-head, and
+  emergency-terminal reconciliation;
+- a complete 1,000-pair event/receipt/account reconciliation run; and
+- policy, byte, cursor, receipt, counter, vault, terminal, refund, verifier,
+  source-drift, and deployment-claim rejection tests.
 
-Current proposal-only result: **118 tests passed**. This consists of 28 protected
+Current proposal-only result: **128 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
 byte-fuzz tests, three Ed25519 public-vector tests, and five verifier-key
 lifecycle tests, seven lifecycle-amendment tests, twelve full-interface
 composition and drift tests, eleven ABI offset/conformance tests, plus twelve
-program-event interface tests.
+program-event interface tests and ten event/account reconciliation tests.
 
 ## Current guarantees of the reference model
 
@@ -148,8 +161,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Build a network-free reconciler that consumes decoded event streams and proves
-agreement with campaign accounts, settlement receipts, counters, promotion-vault
-balances, verifier hash heads, and terminal status. Preserve every unapplied and
+Add deterministic public reconciliation fixtures and compact evidence digests
+for active, cancelled, exhausted, surplus-finalized, and verifier-disabled
+histories. Keep raw X identities absent and preserve every unapplied and
 undeployable gate. No production import, chain connection, wallet operation, or
 site deployment is needed for that work.

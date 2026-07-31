@@ -74,6 +74,9 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Deterministic event vectors](./program-event-vectors.v1.json)
 - [Event-vector generator](./generate-program-event-vectors.mjs)
 - [Event interface validator](./validate-program-event-interface.mjs)
+- [Event/account reconciliation contract](./EVENT_RECONCILIATION.md)
+- [Machine-readable reconciliation policy](./event-reconciliation-policy.v1.json)
+- [Network-free event reconciler](./event-reconciler.mjs)
 - [Proposal-only tests](./tests/)
 
 Run the proposal-only checks with:
@@ -103,6 +106,7 @@ node --test proposals/iat-promotions-dlc/tests/key-lifecycle-amendment.test.mjs
 node --test proposals/iat-promotions-dlc/tests/program-interface-composition.test.mjs
 node --test proposals/iat-promotions-dlc/tests/abi-offset-manifest.test.mjs
 node --test proposals/iat-promotions-dlc/tests/program-event-interface.test.mjs
+node --test proposals/iat-promotions-dlc/tests/event-reconciler.test.mjs
 ```
 
 ## Deliberate isolation
