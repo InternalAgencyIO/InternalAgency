@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 15:28 UTC
+Updated: 2026-07-31 15:46 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `463a63b`
+Previously published public increment: `acff29f`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -218,8 +218,24 @@ This status file deliberately does not claim a self-referential commit hash.
   reviewer independence, and activation authority; and
 - source-level exclusion of signing, private-key, key-generation, wallet, and
   network capabilities, with no valid review-receipt signature published.
+- pure six-gate future receipt-candidate acceptance evaluator;
+- exact candidate shape and three-way expected-target/candidate-target/signed-
+  payload binding;
+- complete coverage of all manifest entries, eight review areas, seven explicit
+  exclusions, and nine enumerated open security decisions;
+- unique disposition and evidence commitment for every open security decision;
+- independent reviewer binding and rejection of every disallowed concurrent
+  author, ceremony, deployer, promotion-vault, and verifier role;
+- blocking dispositions rejected for review-only approval but preserved for
+  request-changes and rejection decisions;
+- semantic, cryptographic, and non-activation gates kept separate;
+- a fully aligned public candidate that visibly fails only because no external
+  review signature exists;
+- five additional target, scope, role, blocking, and activation rejection
+  vectors; and
+- every public result rejected, unissued, incomplete, and non-activating.
 
-Current proposal-only result: **177 tests passed**. This consists of 28 protected
+Current proposal-only result: **187 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -236,6 +252,9 @@ Ten unsigned review-payload codec, binding, privacy, and byte-vector tests
 complete the canonical payload suite.
 Nine verify-only Ed25519 adapter, public-vector, malformed-input, source-safety,
 and non-activation tests complete the cryptographic verification suite.
+Ten acceptance-gate, target, scope, independence, blocking-finding,
+source-safety, receipt-issuance, and non-activation tests complete the receipt
+policy suite.
 
 ## Current guarantees of the reference model
 
@@ -267,8 +286,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a complete review-receipt acceptance policy combining target, scope,
-independence, semantic, and detached-signature gates without publishing a
-signed receipt. Preserve the privacy boundary and every unapplied and
-undeployable gate. No production import, chain connection, wallet operation, or
-site deployment is needed for that work.
+Add an offline reviewer-bundle linter and human-readable gate report without
+creating signatures or accepted receipts. Preserve the privacy boundary and
+every unapplied and undeployable gate. No production import, chain connection,
+wallet operation, or site deployment is needed for that work.

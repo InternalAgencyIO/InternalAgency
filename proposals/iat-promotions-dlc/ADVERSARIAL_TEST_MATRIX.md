@@ -180,12 +180,18 @@ security audit or deployment approval.
 | Invalid or activation-authorizing payload reaches cryptographic verification | `invalid or activation-authorizing...` | Canonical payload validation fails first and result remains non-activating |
 | Valid cryptography is presented as semantic review, independence, or activation proof | `cryptographic result never claims...` | All three non-cryptographic conclusions remain false or `NONE` |
 | Verify-only adapter gains keygen, signing, wallet, or network capability | `adapter source contains no signing...` | Allowed imports and forbidden-call scan fail |
+| Candidate, target, or reviewer has unknown, missing, or reordered fields | `unknown, missing, or reordered candidate...` | Exact-shape acceptance gate fails |
+| Candidate target differs from expected target or signed payload | `target must match expected...` | Three-way target-binding gate fails |
+| Scope duplicates/omits decisions, omits areas, changes count, or has stale hash | `scope rejects duplicate decisions...` | Complete-scope gate fails closed |
+| Reviewer holds any author/operator/deployer/vault/verifier role | `every disallowed concurrent reviewer role...` | Reviewer-independence gate fails |
+| Approval retains a blocking open-security disposition | `blocking dispositions prevent approval...` | Semantic gate rejects approval while allowing request-changes |
+| Missing external signature is hidden by otherwise complete evidence | `fully aligned public fixture fails only...` | Cryptographic gate remains visibly false and candidate is rejected |
+| Rejection is presented as receipt issuance, completed review, or activation | `no public scenario issues a receipt...` | All result authority fields remain false or `NONE` |
 
 ## Next matrix expansion
 
-- complete review-receipt acceptance policy combining target, scope,
-  independence, semantic, and detached-signature gates without publishing a
-  signed receipt;
+- offline reviewer bundle linter and human-readable gate report, still without
+  creating signatures or accepted receipts;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.
