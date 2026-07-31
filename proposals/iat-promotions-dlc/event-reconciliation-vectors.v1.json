@@ -1,0 +1,293 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-reconciliation-vectors-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "reconciliationApplied": false
+  },
+  "sources": {
+    "reconciliationPolicy": {
+      "path": "event-reconciliation-policy.v1.json",
+      "canonicalSha256": "93c8a8be4ad4ed4c15717ebc823e79c01585b81430e98a2a53d1d145ac9f7ee5"
+    },
+    "eventInterface": {
+      "path": "program-event-interface.v1.json",
+      "canonicalSha256": "61a7f2ce78a8f4a938db350f3321883101bdb0f9ea4feb60a2904d2feaacf0a9"
+    },
+    "reconciler": {
+      "path": "event-reconciler.mjs",
+      "normalizedTextSha256": "b972508ca546cd2b775a90e22853f8e50c11453412b25a24f4695098ccb80130"
+    },
+    "generator": {
+      "path": "generate-event-reconciliation-vectors.mjs",
+      "normalizedTextSha256": "457ddbe8c18a9787092caf3d1cb803548e6bbbe75bc7bca69cc264a8bad3ed6e"
+    }
+  },
+  "digestContract": {
+    "canonicalJson": "recursive lexical object-key order; arrays retain order; JSON scalars unchanged",
+    "hash": "SHA-256",
+    "merkleLeaves": "SHA-256(domain + ':leaf:' + canonical_json(item))",
+    "merkleNodes": "SHA-256(domain + ':node:' + left_32_bytes + right_32_bytes)",
+    "oddNode": "duplicate final node",
+    "emptyRoot": "SHA-256(domain + ':empty')"
+  },
+  "scenarios": [
+    {
+      "name": "ACTIVE_TWO_PAIRS",
+      "eventRecordCount": "8",
+      "settlementReceiptCount": "2",
+      "digests": {
+        "evidenceCanonicalSha256": "5fbc05aeca4c6c9e495ba8884e18d3df7dca96e0a51c7eeb3289d637e6d78e3f",
+        "recordsCanonicalSha256": "a75d68162d15c3aa981c550498ccd59a9bc80e1ea9fa6fe088856329e93f4be2",
+        "snapshotCanonicalSha256": "a83fe55a7f1604281b35a5914f1bb75909e2d4604e04ca34a70324efda4590f9",
+        "recordMerkleRoot": "c2bff52e4c77bd499a59080ad93126e1bac9092fe7b572c7b2e57ae97d64b02e",
+        "receiptMerkleRoot": "f194a5e42e1da59085e558fadca233854284cd4ec7e4d1464afa5aea351a9486",
+        "resultCanonicalSha256": "2428473245f16bf6ebfaf0597f7a7bd6fb0456b35c4b5b30f27f2b5987964dab"
+      },
+      "result": {
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "reconciliationApplied": false
+        },
+        "eventCount": "8",
+        "campaign": {
+          "status": "ACTIVE",
+          "completedPairs": "2",
+          "heroPaidBaseUnits": "240000000000",
+          "proposerPaidBaseUnits": "120000000000",
+          "vaultBalanceBaseUnits": "179640000000000",
+          "unattributedSurplusBaseUnits": "0",
+          "settlementReceiptCount": "2",
+          "pendingNominationCountAtEnd": "0",
+          "terminalPendingNominationsAreIneligible": false,
+          "surplusFinalized": false
+        },
+        "verifierRegistries": [
+          {
+            "address": "d664023c79d9a872d116a3d6b0f7d53c83cce75215a89d93f196235f22419adb",
+            "status": "ACTIVE",
+            "lastEventHash": "2f682626488058d4c247b5aa6d0158a12190c9af86c65a662790b3e6d34b8547",
+            "eventCount": "1"
+          }
+        ],
+        "accountsAndReceiptsRemainAuthoritative": true,
+        "eventStreamAuthorizedNoStateChange": true
+      }
+    },
+    {
+      "name": "CANCELLED_PRE_ACTIVATION",
+      "eventRecordCount": "3",
+      "settlementReceiptCount": "0",
+      "digests": {
+        "evidenceCanonicalSha256": "00862f05575ef7731541b1bae034b0f3325e44dd367243c2eb6694366cd24422",
+        "recordsCanonicalSha256": "83cd61e266665825dab88f1832c96a6c4387cdc0ce5304a88eb103f0857ca46d",
+        "snapshotCanonicalSha256": "7f802e26dfdadbb231c019b73b0ac302ebe41d4303384f08b1e6cd4b11499796",
+        "recordMerkleRoot": "ccdd6dfd31870e378eb1d485af80ce9b4aecf37011c6525d1c31d39801c38993",
+        "receiptMerkleRoot": "019cb112af12c07ee65c330bc237afa2ea4f2f599266a409f364dea1b86b29a6",
+        "resultCanonicalSha256": "e71c11704973d6625f7184abf4fa49acf18948132b21c9144a5f3d12caed27c0"
+      },
+      "result": {
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "reconciliationApplied": false
+        },
+        "eventCount": "3",
+        "campaign": {
+          "status": "CANCELLED",
+          "completedPairs": "0",
+          "heroPaidBaseUnits": "0",
+          "proposerPaidBaseUnits": "0",
+          "vaultBalanceBaseUnits": "0",
+          "unattributedSurplusBaseUnits": "0",
+          "settlementReceiptCount": "0",
+          "pendingNominationCountAtEnd": "0",
+          "terminalPendingNominationsAreIneligible": false,
+          "surplusFinalized": false
+        },
+        "verifierRegistries": [],
+        "accountsAndReceiptsRemainAuthoritative": true,
+        "eventStreamAuthorizedNoStateChange": true
+      }
+    },
+    {
+      "name": "EXHAUSTED_1000",
+      "eventRecordCount": "2006",
+      "settlementReceiptCount": "1000",
+      "digests": {
+        "evidenceCanonicalSha256": "fff7aa7b0fb3b303d2f8084343fd22d192bc28d4df4c7dabeb99681853db3df6",
+        "recordsCanonicalSha256": "746a92f5e79bf4cf2aa7f207767b4b725f4ecb6dabded5ab9add26f05d917876",
+        "snapshotCanonicalSha256": "94c76b05bfd8797dc74bba1f05bbfe9596ef0050bf694ded8a9d769de3e00a13",
+        "recordMerkleRoot": "881d0eb39a4ffe9c0af443ee6351f47390eff65610a3ca8a0eed53484bf48aae",
+        "receiptMerkleRoot": "d360af404f57fe2be8db87654b50246e946f24768eed00e2e02ce2896c8ed240",
+        "resultCanonicalSha256": "7d3efb4e306796441fabbc50117455e0e9b6a391f1aae22cc5f03354dd342bec"
+      },
+      "result": {
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "reconciliationApplied": false
+        },
+        "eventCount": "2006",
+        "campaign": {
+          "status": "EXHAUSTED",
+          "completedPairs": "1000",
+          "heroPaidBaseUnits": "120000000000000",
+          "proposerPaidBaseUnits": "60000000000000",
+          "vaultBalanceBaseUnits": "0",
+          "unattributedSurplusBaseUnits": "0",
+          "settlementReceiptCount": "1000",
+          "pendingNominationCountAtEnd": "1",
+          "terminalPendingNominationsAreIneligible": true,
+          "surplusFinalized": false
+        },
+        "verifierRegistries": [
+          {
+            "address": "d664023c79d9a872d116a3d6b0f7d53c83cce75215a89d93f196235f22419adb",
+            "status": "ACTIVE",
+            "lastEventHash": "2f682626488058d4c247b5aa6d0158a12190c9af86c65a662790b3e6d34b8547",
+            "eventCount": "1"
+          }
+        ],
+        "accountsAndReceiptsRemainAuthoritative": true,
+        "eventStreamAuthorizedNoStateChange": true
+      }
+    },
+    {
+      "name": "SURPLUS_FINALIZED",
+      "eventRecordCount": "2006",
+      "settlementReceiptCount": "1000",
+      "digests": {
+        "evidenceCanonicalSha256": "c1a81e02ab96bad6eb4e69b9dcb6b1e710bdbf6ff5ffa1520b4f52a13a3910de",
+        "recordsCanonicalSha256": "7b0a5d5bc20fb93963550e2c4c8793386358c46b40e22e1148a41bb5f16bba46",
+        "snapshotCanonicalSha256": "94c76b05bfd8797dc74bba1f05bbfe9596ef0050bf694ded8a9d769de3e00a13",
+        "recordMerkleRoot": "be4e78d021df380f2885600092c3eac7ddf216d9f13b7ab742915dcaba92d464",
+        "receiptMerkleRoot": "d360af404f57fe2be8db87654b50246e946f24768eed00e2e02ce2896c8ed240",
+        "resultCanonicalSha256": "2e57d1458aa53280e6a50f1a0c7c1e4ed9d115f45684a099f0b2e90352cf1f79"
+      },
+      "result": {
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "reconciliationApplied": false
+        },
+        "eventCount": "2006",
+        "campaign": {
+          "status": "EXHAUSTED",
+          "completedPairs": "1000",
+          "heroPaidBaseUnits": "120000000000000",
+          "proposerPaidBaseUnits": "60000000000000",
+          "vaultBalanceBaseUnits": "0",
+          "unattributedSurplusBaseUnits": "500",
+          "settlementReceiptCount": "1000",
+          "pendingNominationCountAtEnd": "0",
+          "terminalPendingNominationsAreIneligible": true,
+          "surplusFinalized": true
+        },
+        "verifierRegistries": [
+          {
+            "address": "d664023c79d9a872d116a3d6b0f7d53c83cce75215a89d93f196235f22419adb",
+            "status": "ACTIVE",
+            "lastEventHash": "2f682626488058d4c247b5aa6d0158a12190c9af86c65a662790b3e6d34b8547",
+            "eventCount": "1"
+          }
+        ],
+        "accountsAndReceiptsRemainAuthoritative": true,
+        "eventStreamAuthorizedNoStateChange": true
+      }
+    },
+    {
+      "name": "VERIFIER_DISABLED",
+      "eventRecordCount": "9",
+      "settlementReceiptCount": "2",
+      "digests": {
+        "evidenceCanonicalSha256": "24e30a87043c27e56a3db564079c9d7f6a405d36aa7189403546e34a22ffea7c",
+        "recordsCanonicalSha256": "e7267cb80d56f0809cd00f8a7e8230b7f86e07d4ebc0b22c83bb719f19b77295",
+        "snapshotCanonicalSha256": "f0076eca6985d0f6d1d9de9cd1f36dba1869be9641a8fc882e6b6a8688af276b",
+        "recordMerkleRoot": "0e8c362dd44e2dd91ae8661725582b067bfd2f6ae55e91e10b111627132be1d9",
+        "receiptMerkleRoot": "f194a5e42e1da59085e558fadca233854284cd4ec7e4d1464afa5aea351a9486",
+        "resultCanonicalSha256": "4810fb74a8bc92b9205f13556a8ca294f28d3b8542460c189e0e84fe57507ad2"
+      },
+      "result": {
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "reconciliationApplied": false
+        },
+        "eventCount": "9",
+        "campaign": {
+          "status": "ACTIVE",
+          "completedPairs": "2",
+          "heroPaidBaseUnits": "240000000000",
+          "proposerPaidBaseUnits": "120000000000",
+          "vaultBalanceBaseUnits": "179640000000000",
+          "unattributedSurplusBaseUnits": "0",
+          "settlementReceiptCount": "2",
+          "pendingNominationCountAtEnd": "0",
+          "terminalPendingNominationsAreIneligible": false,
+          "surplusFinalized": false
+        },
+        "verifierRegistries": [
+          {
+            "address": "d664023c79d9a872d116a3d6b0f7d53c83cce75215a89d93f196235f22419adb",
+            "status": "EMERGENCY_DISABLED",
+            "lastEventHash": "3ab6dd868a9ea386de3f3f65ca91a32394f9f4500141e69530eaeabe13359d20",
+            "eventCount": "2"
+          }
+        ],
+        "accountsAndReceiptsRemainAuthoritative": true,
+        "eventStreamAuthorizedNoStateChange": true
+      }
+    }
+  ]
+}

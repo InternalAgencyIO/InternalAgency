@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 13:39 UTC
+Updated: 2026-07-31 13:54 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `c5db78a`
+Previously published public increment: `4c7db2a`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -120,9 +120,21 @@ This status file deliberately does not claim a self-referential commit hash.
   emergency-terminal reconciliation;
 - a complete 1,000-pair event/receipt/account reconciliation run; and
 - policy, byte, cursor, receipt, counter, vault, terminal, refund, verifier,
-  source-drift, and deployment-claim rejection tests.
+  source-drift, and deployment-claim rejection tests;
+- deterministic public fixtures for active, cancelled, exhausted,
+  surplus-finalized, and verifier-disabled histories;
+- two compact commitments over complete 2,006-event, 1,000-receipt histories;
+- canonical evidence, record-array, snapshot, and reconciliation-result SHA-256
+  digests for every fixture;
+- domain-separated ordered record and receipt Merkle roots with fixed odd-node
+  and empty-set rules;
+- source hashes binding the held policy, event interface, reconciler, and
+  deterministic fixture generator;
+- no event bytes, account snapshots, receipt bodies, raw X identities,
+  handles, signatures, or secrets in the compact public artifact; and
+- source, scenario, digest, Merkle, result, privacy, and deployment-drift tests.
 
-Current proposal-only result: **128 tests passed**. This consists of 28 protected
+Current proposal-only result: **133 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -130,6 +142,8 @@ byte-fuzz tests, three Ed25519 public-vector tests, and five verifier-key
 lifecycle tests, seven lifecycle-amendment tests, twelve full-interface
 composition and drift tests, eleven ABI offset/conformance tests, plus twelve
 program-event interface tests and ten event/account reconciliation tests.
+Five compact reconciliation-vector and Merkle-commitment tests complete the
+current suite.
 
 ## Current guarantees of the reference model
 
@@ -161,8 +175,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add deterministic public reconciliation fixtures and compact evidence digests
-for active, cancelled, exhausted, surplus-finalized, and verifier-disabled
-histories. Keep raw X identities absent and preserve every unapplied and
-undeployable gate. No production import, chain connection, wallet operation, or
-site deployment is needed for that work.
+Add portable JSON Schema definitions for the full reconciliation evidence
+envelope, semantic snapshots, and held result, with valid and invalid public
+examples. Preserve the privacy boundary and every unapplied and undeployable
+gate. No production import, chain connection, wallet operation, or site
+deployment is needed for that work.

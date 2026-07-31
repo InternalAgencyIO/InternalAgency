@@ -136,10 +136,16 @@ security audit or deployment approval.
 | Pre-activation cancellation redirects the refund | `pre-activation cancellation reconciles...` | Only the immutable community refund and exact vault balance are accepted |
 | Reconciliation policy claims network, program, deployment, or application | `deployment claims, source drift...` | Policy HOLD gates fail before evidence processing |
 | Reconciliation source digest or non-authority invariant drifts | same | Source binding and accounts-remain-authoritative rule fail closed |
+| Active, cancelled, exhausted, surplus, or verifier-disabled fixture changes | `compact reconciliation vectors reproduce...` | Full deterministic generation no longer equals the published artifact |
+| Event or receipt order changes under a compact vector | `record and receipt Merkle roots...` | Domain-separated Merkle root changes |
+| Record, receipt, snapshot, result, or source changes under stale digests | `source, scenario, digest...` | Canonical digest, scenario contract, or source binding fails |
+| Raw X ID, handle, signature, event bytes, snapshot, or receipt body is added | `raw identity, signatures...` | Compact-artifact privacy and size guard rejects the field |
+| Compact vectors claim network, program, deployment, or application | `source, scenario, digest...` | Every vector HOLD gate fails |
 
 ## Next matrix expansion
 
-- deterministic public reconciliation fixtures and compact evidence digests;
+- portable JSON Schema validation for evidence snapshots and reconciliation
+  results, including valid and invalid public examples;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

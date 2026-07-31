@@ -79,3 +79,29 @@ Run the isolated tests with:
 ```sh
 node --test proposals/iat-promotions-dlc/tests/event-reconciler.test.mjs
 ```
+
+## Compact public vectors
+
+`event-reconciliation-vectors.v1.json` binds five deterministic histories:
+active with two pairs, pre-activation cancellation, pair-1,000 exhaustion,
+surplus finalization, and terminal verifier disable. The two full-cap fixtures
+each contain 2,006 generated events and 1,000 receipt snapshots, but the public
+artifact stores only counts, held reconciliation summaries, canonical SHA-256
+digests, and domain-separated record/receipt Merkle roots.
+
+Leaves commit to canonical JSON and array order. Nodes commit to their raw
+32-byte child hashes; an odd final node is duplicated. Empty sets have a
+domain-separated empty root. The artifact also binds the policy, event
+interface, reconciler source, and generator source.
+
+Source-code hashes normalize CRLF to LF before SHA-256 so the artifact is
+portable across Windows and Unix checkouts. The compact file deliberately
+omits event bytes, full account snapshots,
+receipt bodies, raw X identity, handles, OAuth data, signatures, and secret
+material. Reproduce and validate it with:
+
+```sh
+node proposals/iat-promotions-dlc/generate-event-reconciliation-vectors.mjs --write
+node proposals/iat-promotions-dlc/validate-event-reconciliation-vectors.mjs
+node --test proposals/iat-promotions-dlc/tests/event-reconciliation-vectors.test.mjs
+```
