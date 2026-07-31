@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 13:09 UTC
+Updated: 2026-07-31 13:24 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `1605389`
+Previously published public increment: `66b0448`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -93,15 +93,30 @@ This status file deliberately does not claim a self-referential commit hash.
 - language-neutral u8/u16/u32/u64/i64, bytes, bytes32, and public-key fixtures;
 - gap, overlap, final-size, vector-length, meta-order, unsafe-number, scalar-byte,
   and stale-source rejection tests; and
-- explicit client-binding-only and undeployable ABI status gates.
+- explicit client-binding-only and undeployable ABI status gates;
+- fourteen fixed-width campaign, settlement, terminal, and verifier event
+  layouts covering all thirteen composed instructions;
+- one deterministic public byte vector for every event;
+- fixed event discriminator domain, little-endian codec, and exact round trips;
+- success-only emission and transaction-rollback semantics with accounts and
+  receipts remaining authoritative;
+- exact PairSettled destinations, commitment bindings, 120/60 rewards, receipt,
+  sequence, counters, and vault-balance evidence;
+- terminal pair-1,000 event without impossible arbitrary-account bulk writes;
+- prior/new verifier hash heads bound to registry state;
+- no raw X user ID, mutable X handle, secret, or signing material in events;
+- exhaustive truncation, trailing-byte, malformed-field, privacy, economics,
+  stale-vector, source-drift, and deployment-claim rejection; and
+- explicit `eventInterfaceApplied: false` release gate.
 
-Current proposal-only result: **106 tests passed**. This consists of 28 protected
+Current proposal-only result: **118 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
 byte-fuzz tests, three Ed25519 public-vector tests, and five verifier-key
 lifecycle tests, seven lifecycle-amendment tests, twelve full-interface
-composition and drift tests, plus eleven ABI offset/conformance tests.
+composition and drift tests, eleven ABI offset/conformance tests, plus twelve
+program-event interface tests.
 
 ## Current guarantees of the reference model
 
@@ -133,7 +148,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Define deterministic event layouts and public byte vectors for campaign,
-settlement, terminal, and verifier-lifecycle outcomes. Preserve every unapplied
-and undeployable gate. No production import, chain connection, wallet operation,
-or site deployment is needed for that work.
+Build a network-free reconciler that consumes decoded event streams and proves
+agreement with campaign accounts, settlement receipts, counters, promotion-vault
+balances, verifier hash heads, and terminal status. Preserve every unapplied and
+undeployable gate. No production import, chain connection, wallet operation, or
+site deployment is needed for that work.

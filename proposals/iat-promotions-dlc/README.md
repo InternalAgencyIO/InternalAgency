@@ -68,6 +68,12 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Machine-readable ABI offset manifest](./program-interface-abi-offsets.v1.json)
 - [Deterministic ABI-manifest generator](./generate-abi-offset-manifest.mjs)
 - [ABI offset and conformance validator](./validate-abi-offset-manifest.mjs)
+- [Program event interface](./EVENT_INTERFACE.md)
+- [Machine-readable event layouts](./program-event-interface.v1.json)
+- [Fixed-width event codec](./program-event-codec.mjs)
+- [Deterministic event vectors](./program-event-vectors.v1.json)
+- [Event-vector generator](./generate-program-event-vectors.mjs)
+- [Event interface validator](./validate-program-event-interface.mjs)
 - [Proposal-only tests](./tests/)
 
 Run the proposal-only checks with:
@@ -76,12 +82,14 @@ Run the proposal-only checks with:
 node proposals/iat-promotions-dlc/compose-program-interface-preview.mjs --write
 node proposals/iat-promotions-dlc/generate-composed-interface-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-abi-offset-manifest.mjs --write
+node proposals/iat-promotions-dlc/generate-program-event-vectors.mjs --write
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
 node proposals/iat-promotions-dlc/validate-ed25519-public-vectors.mjs
 node proposals/iat-promotions-dlc/validate-key-lifecycle-amendment.mjs
 node proposals/iat-promotions-dlc/validate-program-interface-composition.mjs
 node proposals/iat-promotions-dlc/validate-abi-offset-manifest.mjs
+node proposals/iat-promotions-dlc/validate-program-event-interface.mjs
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
 node --test proposals/iat-promotions-dlc/tests/attestation-transparency.test.mjs
@@ -94,6 +102,7 @@ node --test proposals/iat-promotions-dlc/tests/verifier-key-lifecycle.test.mjs
 node --test proposals/iat-promotions-dlc/tests/key-lifecycle-amendment.test.mjs
 node --test proposals/iat-promotions-dlc/tests/program-interface-composition.test.mjs
 node --test proposals/iat-promotions-dlc/tests/abi-offset-manifest.test.mjs
+node --test proposals/iat-promotions-dlc/tests/program-event-interface.test.mjs
 ```
 
 ## Deliberate isolation

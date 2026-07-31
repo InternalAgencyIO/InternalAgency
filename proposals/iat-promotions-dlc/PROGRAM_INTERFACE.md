@@ -135,3 +135,10 @@ artifact re-encodes all thirteen instructions and fixes the shorter initializer
 length explicitly. The ABI offset manifest then binds those composed bytes,
 every account/data offset, and every account-meta position for independent
 client implementations.
+
+`program-event-interface.v1.json` separately proposes fourteen fixed-width
+audit events covering every composed instruction and terminal exhaustion. It
+keeps account state and settlement receipts authoritative, emits only after a
+successful transition, publishes commitments rather than raw X identity, and
+does not claim that exhaustion can bulk-write nomination accounts absent from
+the transaction.

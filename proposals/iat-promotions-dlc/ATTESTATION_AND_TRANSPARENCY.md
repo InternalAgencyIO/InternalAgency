@@ -124,6 +124,11 @@ other private diagnostics. One attestation ID receives one final logged outcome.
 The campaign's on-chain state and final settlement receipt separately expose the
 1,000-pair counter, zero remaining committed budget, and permanent shutdown.
 
+The held `program-event-interface.v1.json` draft now defines fixed supplemental
+bytes for nomination, cancellation, paired settlement, exhaustion, and the
+other campaign/verifier transitions. Those events cannot replace this
+transparency record, an on-chain receipt, or authoritative account state.
+
 ## Model limitations
 
 `attestation-transparency.mjs` accepts a signature-verification callback so it

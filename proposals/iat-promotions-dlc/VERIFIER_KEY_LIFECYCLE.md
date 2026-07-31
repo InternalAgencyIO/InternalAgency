@@ -95,5 +95,6 @@ equivalent service.
 
 `KEY_LIFECYCLE_AMENDMENT.md` and its machine-readable v1 amendment now propose
 the registry accounts, instruction locks, and attestation guards. They remain an
-unapplied delta; reviewer threshold, full-interface composition, event bytes,
-deterministic binary, and chain rehearsal are still unresolved.
+unapplied delta. `program-event-interface.v1.json` also proposes deterministic
+verifier-event bytes and registry-head binding. Reviewer threshold, event-cost
+approval, deterministic binary, and chain rehearsal are still unresolved.

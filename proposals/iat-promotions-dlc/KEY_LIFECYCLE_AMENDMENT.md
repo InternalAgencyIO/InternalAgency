@@ -97,6 +97,9 @@ capability, status, or deployment-claim drift.
 
 - the exact independent-reviewer threshold and emergency governance;
 - how the optional pending-key account is represented in a fixed client API;
-- event-byte definitions and whether the on-chain event head is necessary;
 - account rent payer and permanent retention funding; and
 - cross-language IDL generation after the full interface is composed.
+
+`program-event-interface.v1.json` now proposes fixed verifier event bytes and a
+registry-head binding, but independent review must still decide whether the
+additional log and hash-chain cost is justified.

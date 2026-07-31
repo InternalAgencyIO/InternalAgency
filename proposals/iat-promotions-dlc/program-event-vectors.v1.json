@@ -1,0 +1,223 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-event-vectors-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "compositionApplied": false,
+    "eventInterfaceApplied": false
+  },
+  "sourceInterface": {
+    "path": "program-event-interface.v1.json",
+    "canonicalSha256": "61a7f2ce78a8f4a938db350f3321883101bdb0f9ea4feb60a2904d2feaacf0a9"
+  },
+  "vectors": [
+    {
+      "name": "CampaignInitialized",
+      "data": {
+        "version": "1",
+        "campaign": "22adce07b366ba5d35d4f605199f23a8adb5bf852f74c622a3fc80c4b5d77d01",
+        "mint": "8613a3ca6d575ec6fd4698686f77544141cedc6b865fded194b94eec4e8f027d",
+        "genesis_timestamp": "1800000003",
+        "earliest_activation_timestamp": "1800000004",
+        "maximum_budget_base_units": "180000000000000",
+        "maximum_completed_pairs": "1000",
+        "policy_hash": "f8a5ece2b28b3580e7ff715265eaf3d24e7beaae0cbfbdb9537ee4271950ac5b",
+        "identity_domain_hash": "e7a7715d134d93b50f15333c3625b771e856bbd541ed6d4e5e1b75415f966765"
+      },
+      "expectedHex": "b894926649ff491b0122adce07b366ba5d35d4f605199f23a8adb5bf852f74c622a3fc80c4b5d77d018613a3ca6d575ec6fd4698686f77544141cedc6b865fded194b94eec4e8f027d03d2496b0000000004d2496b0000000000400f84b5a30000e803f8a5ece2b28b3580e7ff715265eaf3d24e7beaae0cbfbdb9537ee4271950ac5be7a7715d134d93b50f15333c3625b771e856bbd541ed6d4e5e1b75415f966765"
+    },
+    {
+      "name": "CampaignFunded",
+      "data": {
+        "version": "1",
+        "campaign": "fa59e2916c9998a7538956ab8f32c87516326c2587806efa7b78323fb844ad0b",
+        "amount_base_units": "1000000102",
+        "vault_balance_base_units": "1000000103"
+      },
+      "expectedHex": "66de8f8f2a1c58c001fa59e2916c9998a7538956ab8f32c87516326c2587806efa7b78323fb844ad0b66ca9a3b0000000067ca9a3b00000000"
+    },
+    {
+      "name": "CampaignActivated",
+      "data": {
+        "version": "1",
+        "campaign": "3899e7fa9b4f160a99a9cb6e9f14f42d1724b1aee1bb2089694fec3d9ccea894",
+        "activated_at": "1800000202",
+        "review_hash": "539e6750e3d69a1d600b3348c035fa33d2a049995f49afdf9ae68b06cc51f134",
+        "artifact_hash": "2564b915a84ec82a339908a25aba20e62e762c4f20effebb1e4b585e98c0d1a7",
+        "policy_hash": "e3285ddc3d61b3a7c1016996986a2a68f508c1d69be3197676bfeb040376ff62"
+      },
+      "expectedHex": "9ea48f6fc472253f013899e7fa9b4f160a99a9cb6e9f14f42d1724b1aee1bb2089694fec3d9ccea894cad2496b00000000539e6750e3d69a1d600b3348c035fa33d2a049995f49afdf9ae68b06cc51f1342564b915a84ec82a339908a25aba20e62e762c4f20effebb1e4b585e98c0d1a7e3285ddc3d61b3a7c1016996986a2a68f508c1d69be3197676bfeb040376ff62"
+    },
+    {
+      "name": "CampaignCancelledPreActivation",
+      "data": {
+        "version": "1",
+        "campaign": "2e2acdd8e9f9f4585ffb4fc75369275191d8c33706a6525de9a924de2ae8eefc",
+        "refund_destination": "d9b1d0650cd857df75f49e5543514dfcc5d52254242996fb59e36df4f604c60e",
+        "refunded_base_units": "1000000303",
+        "occurred_at": "1800000304"
+      },
+      "expectedHex": "7e52e53d3a0eeeed012e2acdd8e9f9f4585ffb4fc75369275191d8c33706a6525de9a924de2ae8eefcd9b1d0650cd857df75f49e5543514dfcc5d52254242996fb59e36df4f604c60e2fcb9a3b0000000030d3496b00000000"
+    },
+    {
+      "name": "HeroNominated",
+      "data": {
+        "version": "1",
+        "campaign": "b7cd1e3c104f6221e8c538e4da54e014c80b7233f03ba3fefa31b47021ddc80c",
+        "nomination": "391a8d57bf2c4b2f3064325ee537c05adc85e41193f18cf3fcc90eba32959a95",
+        "proposer_wallet": "6084e58a6044f1593d5e32fc98a47c60a38b657436cda473081dfdcbdccfa4d5",
+        "proposer_node_commitment": "65107973841a6d5edcb9259e043e6302e85c294787f0d25f662f2aa14073c914",
+        "proposer_x_identity_commitment": "6dc0847cbd19371a58df78867598df50aaa33f145b5fa6a3da1dcd004f30926b",
+        "hero_x_identity_commitment": "7563f3e2bd296c1c1ce7ed867db6340ee2111b5c75e912596abc8911499615bb",
+        "attestation_id": "4b2a8522ff63fe3b4bbca5a55c30d893f9f44c29ad05f81d848264fb5c5cc143",
+        "nonce_hash": "48731200ff9539794541a51d7ef3550badb6bbeb69c4b52352b97655de96d242",
+        "occurred_at": "1800000409"
+      },
+      "expectedHex": "36351921ca55106101b7cd1e3c104f6221e8c538e4da54e014c80b7233f03ba3fefa31b47021ddc80c391a8d57bf2c4b2f3064325ee537c05adc85e41193f18cf3fcc90eba32959a956084e58a6044f1593d5e32fc98a47c60a38b657436cda473081dfdcbdccfa4d565107973841a6d5edcb9259e043e6302e85c294787f0d25f662f2aa14073c9146dc0847cbd19371a58df78867598df50aaa33f145b5fa6a3da1dcd004f30926b7563f3e2bd296c1c1ce7ed867db6340ee2111b5c75e912596abc8911499615bb4b2a8522ff63fe3b4bbca5a55c30d893f9f44c29ad05f81d848264fb5c5cc14348731200ff9539794541a51d7ef3550badb6bbeb69c4b52352b97655de96d24299d3496b00000000"
+    },
+    {
+      "name": "NominationCancelled",
+      "data": {
+        "version": "1",
+        "campaign": "88f44bd7a4b8d4065c2e91f0c546c1856e8b19c29609451487fc22b8e75764cb",
+        "nomination": "82fe29426da6de372009393a6d6a1e78dc06d8cf3a381ec7a8ffca600c52f0db",
+        "proposer_wallet": "3cbb3b58f45f6850bf44b917d3f21eb9aa6d26df9e1543fa15a31e4927c606e8",
+        "attestation_id": "8ca2f9ff938cc986e7381b9237cf0507cc8f80714d69919158820f8f04c70bbe",
+        "occurred_at": "1800000505"
+      },
+      "expectedHex": "c1f640475fb63e800188f44bd7a4b8d4065c2e91f0c546c1856e8b19c29609451487fc22b8e75764cb82fe29426da6de372009393a6d6a1e78dc06d8cf3a381ec7a8ffca600c52f0db3cbb3b58f45f6850bf44b917d3f21eb9aa6d26df9e1543fa15a31e4927c606e88ca2f9ff938cc986e7381b9237cf0507cc8f80714d69919158820f8f04c70bbef9d3496b00000000"
+    },
+    {
+      "name": "PairSettled",
+      "data": {
+        "version": "1",
+        "campaign": "7773a991601bdec90b45b79efbea139ff3a175d582588d061c2160bde4edfa28",
+        "nomination": "69dc0f234f93cea71722cd611fb9c9fde6bdc739f079d9778a92bf5cc26adecb",
+        "settlement_receipt": "050a987d18225aa7b85dec8806c6ae90a18635f915b4b041111991070dbf8e32",
+        "hero_wallet": "0c05ae5763b39ae355e32ba07a6eafde4b9b854f8714e68b030e50b82f8d01e4",
+        "proposer_wallet": "2af45456baa1fc73b8e03cd023dd5415cfd975f5e6aaef103c24b69863ada7fc",
+        "hero_node_commitment": "f8771049bcd318bb4b37dbd0d7d1bbe652bdebdf12bfe4af7550cc3709940267",
+        "proposer_node_commitment": "a1d51b3659e56cd9da442767522784109d4889e1017f630bf2763f2a32e94d38",
+        "hero_x_identity_commitment": "fc9e232875927b8d2228c3f1b13f9bd426242c7941bdafe914b618c6afea6783",
+        "proposer_x_identity_commitment": "bca91ec28609c8dc6cd9fbd27aa3972eab8a6fe6c074974e5e826d277883b9d0",
+        "hero_reward_base_units": "120000000000",
+        "proposer_reward_base_units": "60000000000",
+        "sequence": "7",
+        "completed_pairs": "7",
+        "vault_balance_base_units": "1000000614",
+        "settled_at": "1800000615"
+      },
+      "expectedHex": "f51d40b7bc7bd9d9017773a991601bdec90b45b79efbea139ff3a175d582588d061c2160bde4edfa2869dc0f234f93cea71722cd611fb9c9fde6bdc739f079d9778a92bf5cc26adecb050a987d18225aa7b85dec8806c6ae90a18635f915b4b041111991070dbf8e320c05ae5763b39ae355e32ba07a6eafde4b9b854f8714e68b030e50b82f8d01e42af45456baa1fc73b8e03cd023dd5415cfd975f5e6aaef103c24b69863ada7fcf8771049bcd318bb4b37dbd0d7d1bbe652bdebdf12bfe4af7550cc3709940267a1d51b3659e56cd9da442767522784109d4889e1017f630bf2763f2a32e94d38fc9e232875927b8d2228c3f1b13f9bd426242c7941bdafe914b618c6afea6783bca91ec28609c8dc6cd9fbd27aa3972eab8a6fe6c074974e5e826d277883b9d000b08ef01b000000005847f80d0000000700070066cc9a3b0000000067d4496b00000000"
+    },
+    {
+      "name": "CampaignExhausted",
+      "data": {
+        "version": "1",
+        "campaign": "b7f6c1b398075217b92f209d66d7239ee83d5158abd412c0d83c8ed665919703",
+        "triggering_settlement_receipt": "9b35fad5e48723a2baf738e05dbf8aa9de71bc2005d011aa855a3591a0439f8b",
+        "completed_pairs": "1000",
+        "total_paid_base_units": "180000000000000",
+        "vault_balance_base_units": "1000000705",
+        "occurred_at": "1800000706"
+      },
+      "expectedHex": "0e3eb35dd2a7864d01b7f6c1b398075217b92f209d66d7239ee83d5158abd412c0d83c8ed6659197039b35fad5e48723a2baf738e05dbf8aa9de71bc2005d011aa855a3591a0439f8be80300400f84b5a30000c1cc9a3b00000000c2d4496b00000000"
+    },
+    {
+      "name": "ExhaustedSurplusFinalized",
+      "data": {
+        "version": "1",
+        "campaign": "4ccb6829fced96b9dd4ec1fbabea46d4a4d0548a2329963541e2cd9bee3afb51",
+        "refund_destination": "67c39588f83393de9f42b9f936bc38d943067178c083671523c3f464c81a32d3",
+        "returned_base_units": "1000000803",
+        "occurred_at": "1800000804"
+      },
+      "expectedHex": "a9add2e4c27887d8014ccb6829fced96b9dd4ec1fbabea46d4a4d0548a2329963541e2cd9bee3afb5167c39588f83393de9f42b9f936bc38d943067178c083671523c3f464c81a32d323cd9a3b0000000024d5496b00000000"
+    },
+    {
+      "name": "VerifierRegistryInitialized",
+      "data": {
+        "version": "1",
+        "verifier_registry": "7ed5f5a5cf92dc074fcf4c69b56ee2c81b234f5d9fd6cf09e6dba2e4d49c5992",
+        "campaign": "d7d0a37a4d5abfe9291a1896d36f04d2c6b0518a1058ce128d82169fd3dd243e",
+        "initial_key_record": "5892ade619b563aaadaa8054e10ebc49e8f4d4dad55dbb48b15e994fd27c29e5",
+        "key_id": "c0e0a4ae19b3a2b81a476dc3fe76ec21da53832e781c17f724e940fba325785a",
+        "public_key": "bd8de739835a5ba813e4cd1497dcf3041dd33f43d07f801aa820a57f71d6fe7d",
+        "identity_domain_hash": "c3045b92c6abc00e459536fc1b65e664ac65b66b7ddef9e84b556c22cd181fa1",
+        "occurred_at": "1800000907",
+        "previous_event_hash": "d8015571270c1678d2611733228bd717b71056f5e818a356e774cadec8b71bc3",
+        "event_hash": "3364573bf2a13f79456f40c2933ca8186cb291611cf00362e787e67342297817"
+      },
+      "expectedHex": "fb29c5160fe6daab017ed5f5a5cf92dc074fcf4c69b56ee2c81b234f5d9fd6cf09e6dba2e4d49c5992d7d0a37a4d5abfe9291a1896d36f04d2c6b0518a1058ce128d82169fd3dd243e5892ade619b563aaadaa8054e10ebc49e8f4d4dad55dbb48b15e994fd27c29e5c0e0a4ae19b3a2b81a476dc3fe76ec21da53832e781c17f724e940fba325785abd8de739835a5ba813e4cd1497dcf3041dd33f43d07f801aa820a57f71d6fe7dc3045b92c6abc00e459536fc1b65e664ac65b66b7ddef9e84b556c22cd181fa18bd5496b00000000d8015571270c1678d2611733228bd717b71056f5e818a356e774cadec8b71bc33364573bf2a13f79456f40c2933ca8186cb291611cf00362e787e67342297817"
+    },
+    {
+      "name": "VerifierKeyRotationScheduled",
+      "data": {
+        "version": "1",
+        "verifier_registry": "a29c898d7128deedd5e610d488a612e7d7ce2bd48bd45523404d4e1e951942d9",
+        "rotation_id": "191b419578bff710f52c0186a7593a29982f1c76256df6b7585672fcd133519a",
+        "old_key_id": "e1e83b0d53bb05d445eecbc6a0d3568de8a3fca325866e4d590ddfe2915dcdc5",
+        "new_key_id": "41b291458240e1d4ca2b4d5109917067f32c5d49eb5831e7e64396a38d6f351d",
+        "new_public_key": "24dee3affaba807f4cd2933347d9aef5069fe8e3c9f34a446422c7ced57bf862",
+        "activate_at": "1800001006",
+        "retire_old_at": "1800001007",
+        "review_id": "6e2732e281d1becb5a327e2da040ddf1ba13be3352d41e4d270ed26a6d18d286",
+        "review_hash": "218de9f42c3b1dc6b45a2dc874e99a4898c610e097816c5350fa33313c5bba2d",
+        "occurred_at": "1800001010",
+        "previous_event_hash": "519a24edc41d6e5a98d6840a3439e8dcdf49bc99880753b2fbbb147b8609f3d6",
+        "event_hash": "c78230bb5e1e76107f6fc1f581d87aab2d9044f0e2bd305b3812d54547cc3ced"
+      },
+      "expectedHex": "1e97a2a45860022c01a29c898d7128deedd5e610d488a612e7d7ce2bd48bd45523404d4e1e951942d9191b419578bff710f52c0186a7593a29982f1c76256df6b7585672fcd133519ae1e83b0d53bb05d445eecbc6a0d3568de8a3fca325866e4d590ddfe2915dcdc541b291458240e1d4ca2b4d5109917067f32c5d49eb5831e7e64396a38d6f351d24dee3affaba807f4cd2933347d9aef5069fe8e3c9f34a446422c7ced57bf862eed5496b00000000efd5496b000000006e2732e281d1becb5a327e2da040ddf1ba13be3352d41e4d270ed26a6d18d286218de9f42c3b1dc6b45a2dc874e99a4898c610e097816c5350fa33313c5bba2df2d5496b00000000519a24edc41d6e5a98d6840a3439e8dcdf49bc99880753b2fbbb147b8609f3d6c78230bb5e1e76107f6fc1f581d87aab2d9044f0e2bd305b3812d54547cc3ced"
+    },
+    {
+      "name": "VerifierKeyRotationActivated",
+      "data": {
+        "version": "1",
+        "verifier_registry": "6c8901b2ee6d32aa7c3765772985f96b1b9d75758b3c06420a83f4402f5646b9",
+        "rotation_id": "f9ec5089acec815ab5adab56989a7e35f305806339ef51741acc2fe8d43a3254",
+        "old_key_id": "7a0b7ec2de54dfdd263aeda394680d85fef8ba90198e88b36e4f0d8306f89ced",
+        "new_key_id": "0a4388375a87b1dc03497e0abddac3b3dac38de970c8b7d8039535aff978dc4a",
+        "retire_old_at": "1800001105",
+        "occurred_at": "1800001106",
+        "previous_event_hash": "5c360292fae8fad582c83d56685bdc5baccc02879c1739fcdfeac1f7fde9de80",
+        "event_hash": "30252268c2f092bd1994cd6c8cc6275f62e82b8a904787d16cb6fa57fa5c6bdd"
+      },
+      "expectedHex": "2f707f9fafec96f8016c8901b2ee6d32aa7c3765772985f96b1b9d75758b3c06420a83f4402f5646b9f9ec5089acec815ab5adab56989a7e35f305806339ef51741acc2fe8d43a32547a0b7ec2de54dfdd263aeda394680d85fef8ba90198e88b36e4f0d8306f89ced0a4388375a87b1dc03497e0abddac3b3dac38de970c8b7d8039535aff978dc4a51d6496b0000000052d6496b000000005c360292fae8fad582c83d56685bdc5baccc02879c1739fcdfeac1f7fde9de8030252268c2f092bd1994cd6c8cc6275f62e82b8a904787d16cb6fa57fa5c6bdd"
+    },
+    {
+      "name": "VerifierKeyRetirementFinalized",
+      "data": {
+        "version": "1",
+        "verifier_registry": "6df6f0ef68a4b550117ea8468b5797983aac98d135f7f46fd0156cc149733a12",
+        "key_id": "e37d64156e61189164463a54694dc23111dc4502779ff416e2fa612619f8edd4",
+        "occurred_at": "1800001203",
+        "previous_event_hash": "2c2860ca7217575916e12d9ca132b72c7bdaa9bb8f5943d5dba81c722c1c8ec5",
+        "event_hash": "af2f465ba8079994c1a1719dfe551c21560b9276f2153c397e6e36400b31f89e"
+      },
+      "expectedHex": "b4c5003e1b3c293f016df6f0ef68a4b550117ea8468b5797983aac98d135f7f46fd0156cc149733a12e37d64156e61189164463a54694dc23111dc4502779ff416e2fa612619f8edd4b3d6496b000000002c2860ca7217575916e12d9ca132b72c7bdaa9bb8f5943d5dba81c722c1c8ec5af2f465ba8079994c1a1719dfe551c21560b9276f2153c397e6e36400b31f89e"
+    },
+    {
+      "name": "VerifierRegistryEmergencyDisabled",
+      "data": {
+        "version": "1",
+        "verifier_registry": "0a12d9f31e34c87a43861bae7608cd0e7dd8aa24c7cc32e4d38a6dcf82f5b38d",
+        "reason": "1",
+        "review_id": "8d8f89ea576e99a52f450965aeff3267eecb9614f9dafa65c26a1c1717e9ad46",
+        "review_hash": "873c3fc61caf1c6eb61ca4e0a2548dd8afc4c5f86eb91883275c749dc916c2d4",
+        "cancelled_rotation_id": "18e1506c7a9c87ff38a2a6546e8aaf68f55f5759eb6ff1fe8643729d6438ab2c",
+        "occurred_at": "1800001306",
+        "previous_event_hash": "00047d6c6b77375d356f3904351f998c4c89656f4debd37a6105bf1cf8983efe",
+        "event_hash": "1329cc972ea047de126ce84e91c6c1e6e8bc285296a80babc649f447acda671f"
+      },
+      "expectedHex": "591d54081b08b9ad010a12d9f31e34c87a43861bae7608cd0e7dd8aa24c7cc32e4d38a6dcf82f5b38d01008d8f89ea576e99a52f450965aeff3267eecb9614f9dafa65c26a1c1717e9ad46873c3fc61caf1c6eb61ca4e0a2548dd8afc4c5f86eb91883275c749dc916c2d418e1506c7a9c87ff38a2a6546e8aaf68f55f5759eb6ff1fe8643729d6438ab2c1ad7496b0000000000047d6c6b77375d356f3904351f998c4c89656f4debd37a6105bf1cf8983efe1329cc972ea047de126ce84e91c6c1e6e8bc285296a80babc649f447acda671f"
+    }
+  ]
+}
