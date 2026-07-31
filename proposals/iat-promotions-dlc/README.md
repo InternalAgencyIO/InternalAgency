@@ -44,16 +44,23 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Network-free attestation/log model](./attestation-transparency.mjs)
 - [Machine-readable policy](./promotion-policy.v0.json)
 - [Policy validator](./validate-policy.mjs)
-- [Mutation tests](./tests/policy.test.mjs)
+- [Proposed program interface](./PROGRAM_INTERFACE.md)
+- [Machine-readable account/instruction interface](./program-interface.v0.json)
+- [Deterministic instruction vectors](./program-interface-vectors.v0.json)
+- [Network-free instruction codec](./program-interface-codec.mjs)
+- [Interface validator](./validate-program-interface.mjs)
+- [Proposal-only tests](./tests/)
 
 Run the proposal-only checks with:
 
 ```sh
 node proposals/iat-promotions-dlc/validate-policy.mjs
+node proposals/iat-promotions-dlc/validate-program-interface.mjs
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
 node --test proposals/iat-promotions-dlc/tests/attestation-transparency.test.mjs
 node --test proposals/iat-promotions-dlc/tests/randomized-state-machine.test.mjs
+node --test proposals/iat-promotions-dlc/tests/program-interface.test.mjs
 ```
 
 ## Deliberate isolation

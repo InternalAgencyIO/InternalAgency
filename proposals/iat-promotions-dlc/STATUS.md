@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 11:20 UTC
+Updated: 2026-07-31 11:35 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Last published planning baseline: `374ca6a`
+Previously published public increment: `b5e18e6`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -32,11 +32,21 @@ This status file deliberately does not claim a self-referential commit hash.
 - no raw X user ID, OAuth token, or signing key in the public envelope;
 - append-only transparency hash chain and public checkpoints;
 - tamper, key/campaign mismatch, truncation, and history-rewrite tests; and
-- twelve deterministic randomized state-machine traces.
+- twelve deterministic randomized state-machine traces;
+- independent rejection tests for every proposer and hero node/wallet/X role
+  dimension;
+- deterministic cancellation-versus-settlement terminal ordering;
+- fixed account layouts and eight-instruction proposed binary interface;
+- canonical discriminator derivation and fixed little-endian serialization;
+- one public byte vector for every proposed instruction;
+- a network-free codec and structural interface validator; and
+- mutation tests for deployment claims, layout drift, forbidden V2 accounts,
+  integer boundaries, ambiguous bytes, weakened atomicity, and terminal guards.
 
-Current proposal-only result: **49 tests passed**. This consists of 28 protected
-policy tests, 11 reference-engine tests, eight attestation/transparency tests,
-and two deterministic randomized-state-machine tests.
+Current proposal-only result: **59 tests passed**. This consists of 28 protected
+policy tests, 13 reference-engine tests, eight attestation/transparency tests,
+two deterministic randomized-state-machine tests, and eight program-interface
+and codec tests.
 
 ## Current guarantees of the reference model
 
@@ -68,7 +78,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Define the standalone program instruction/account interface and deterministic
-binary serialization vectors, then expand the duplicate and cancellation-versus-
-settlement race matrix. No production import, chain connection, wallet
-operation, or site deployment is needed for that work.
+Add a pure account-transition adapter that binds decoded instruction data to the
+reference engine, then add property-based codec fuzzing and public Ed25519 test
+vectors. No production import, chain connection, wallet operation, or site
+deployment is needed for that work.

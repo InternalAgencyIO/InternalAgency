@@ -277,6 +277,9 @@ export function nominateHero(
 
   assertRoleAvailable(state, RewardRole.PROPOSER, proposer);
   if (proposer.xIdentityCommitment === heroCommitment) fail("SELF_PROPOSAL_X_IDENTITY");
+  if (state.roleMarkers[RewardRole.HERO].xIdentityCommitments.has(heroCommitment)) {
+    fail("HERO_X_IDENTITY_ALREADY_REWARDED");
+  }
   if (state.activeNominationByProposer.has(proposer.nodeId)) fail("PROPOSER_ALREADY_HAS_ACTIVE_NOMINATION");
   if (state.heroReservations.has(heroCommitment)) fail("HERO_ALREADY_RESERVED");
 

@@ -1,0 +1,399 @@
+{
+  "interfaceVersion": 0,
+  "proposalId": "iat-promotions-dlc-v0",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null
+  },
+  "codec": {
+    "discriminatorDomain": "iat-promotions-dlc-v0",
+    "discriminatorBytes": 8,
+    "integerEndian": "little",
+    "integers": "unsigned unless explicitly i64",
+    "variableLengthFields": false
+  },
+  "economics": {
+    "mintDecimals": 9,
+    "heroRewardBaseUnits": "120000000000",
+    "proposerRewardBaseUnits": "60000000000",
+    "pairRewardBaseUnits": "180000000000",
+    "maximumCompletedPairs": 1000,
+    "maximumBudgetBaseUnits": "180000000000000"
+  },
+  "vaultBoundary": {
+    "scope": "PROMOTIONS_DLC_ONLY",
+    "source": "IMMUTABLY_BOUND_COMMUNITY_SOURCE_TOKEN_ACCOUNT",
+    "activeWithdrawal": false,
+    "preActivationRefundOnly": true,
+    "postExhaustionSurplusReturnOnly": true,
+    "destinationForRefundAndSurplus": "IMMUTABLY_BOUND_COMMUNITY_REFUND_TOKEN_ACCOUNT",
+    "externalV2AccountsWritable": false
+  },
+  "accounts": [
+    {
+      "name": "Campaign",
+      "discriminatorHex": "46fe2cdd85f9cb16",
+      "sizeBytes": 424,
+      "seeds": ["literal:promo", "arg:campaign_id"],
+      "fields": [
+        { "name": "version", "type": "u8", "sizeBytes": 1 },
+        { "name": "bump", "type": "u8", "sizeBytes": 1 },
+        { "name": "status", "type": "u8", "sizeBytes": 1 },
+        { "name": "reserved0", "type": "bytes", "sizeBytes": 1 },
+        { "name": "mint", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "token_program", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "promo_vault", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "community_source_token_account", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "community_refund_token_account", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "verified_genesis_config", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "activation_authority", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "review_authority", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "verifier_ed25519_key", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "genesis_timestamp", "type": "i64", "sizeBytes": 8 },
+        { "name": "earliest_activation_timestamp", "type": "i64", "sizeBytes": 8 },
+        { "name": "hero_reward_base_units", "type": "u64", "sizeBytes": 8 },
+        { "name": "proposer_reward_base_units", "type": "u64", "sizeBytes": 8 },
+        { "name": "maximum_budget_base_units", "type": "u64", "sizeBytes": 8 },
+        { "name": "maximum_completed_pairs", "type": "u16", "sizeBytes": 2 },
+        { "name": "completed_pairs", "type": "u16", "sizeBytes": 2 },
+        { "name": "hero_paid_base_units", "type": "u64", "sizeBytes": 8 },
+        { "name": "proposer_paid_base_units", "type": "u64", "sizeBytes": 8 },
+        { "name": "policy_hash", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "identity_domain_hash", "type": "bytes32", "sizeBytes": 32 }
+      ]
+    },
+    {
+      "name": "Nomination",
+      "discriminatorHex": "3f38ed35e24edacb",
+      "sizeBytes": 202,
+      "seeds": ["literal:nomination", "account:campaign", "arg:proposer_node_commitment"],
+      "fields": [
+        { "name": "version", "type": "u8", "sizeBytes": 1 },
+        { "name": "bump", "type": "u8", "sizeBytes": 1 },
+        { "name": "status", "type": "u8", "sizeBytes": 1 },
+        { "name": "reserved0", "type": "bytes", "sizeBytes": 1 },
+        { "name": "campaign", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "proposer_wallet", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "proposer_node_commitment", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "proposer_x_identity_commitment", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "hero_x_identity_commitment", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "created_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "settled_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "terminal_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "terminal_reason", "type": "u16", "sizeBytes": 2 },
+        { "name": "sequence", "type": "u32", "sizeBytes": 4 }
+      ]
+    },
+    {
+      "name": "HeroReservation",
+      "discriminatorHex": "9de616c8f61ebf74",
+      "sizeBytes": 112,
+      "seeds": ["literal:hero-reservation", "account:campaign", "arg:hero_x_identity_commitment"],
+      "fields": [
+        { "name": "version", "type": "u8", "sizeBytes": 1 },
+        { "name": "bump", "type": "u8", "sizeBytes": 1 },
+        { "name": "reserved0", "type": "bytes", "sizeBytes": 6 },
+        { "name": "campaign", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "hero_x_identity_commitment", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "nomination", "type": "pubkey", "sizeBytes": 32 }
+      ]
+    },
+    {
+      "name": "RoleMarker",
+      "discriminatorHex": "18bf19fdb7b22d2a",
+      "sizeBytes": 116,
+      "seeds": [
+        "literal:role",
+        "account:campaign",
+        "arg:role",
+        "arg:identity_kind",
+        "arg:identity_value"
+      ],
+      "fields": [
+        { "name": "version", "type": "u8", "sizeBytes": 1 },
+        { "name": "bump", "type": "u8", "sizeBytes": 1 },
+        { "name": "role", "type": "u8", "sizeBytes": 1 },
+        { "name": "identity_kind", "type": "u8", "sizeBytes": 1 },
+        { "name": "campaign", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "identity_value", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "settlement_receipt", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "sequence", "type": "u16", "sizeBytes": 2 },
+        { "name": "reserved0", "type": "bytes", "sizeBytes": 6 }
+      ]
+    },
+    {
+      "name": "SettlementReceipt",
+      "discriminatorHex": "7c67e7ed51192222",
+      "sizeBytes": 304,
+      "seeds": ["literal:settlement", "account:campaign", "arg:sequence_le_u16"],
+      "fields": [
+        { "name": "version", "type": "u8", "sizeBytes": 1 },
+        { "name": "bump", "type": "u8", "sizeBytes": 1 },
+        { "name": "reserved0", "type": "bytes", "sizeBytes": 6 },
+        { "name": "campaign", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "nomination", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "hero_wallet", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "proposer_wallet", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "hero_node_commitment", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "proposer_node_commitment", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "hero_x_identity_commitment", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "proposer_x_identity_commitment", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "settled_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "sequence", "type": "u16", "sizeBytes": 2 },
+        { "name": "reserved1", "type": "bytes", "sizeBytes": 6 },
+        { "name": "hero_reward_base_units", "type": "u64", "sizeBytes": 8 },
+        { "name": "proposer_reward_base_units", "type": "u64", "sizeBytes": 8 }
+      ]
+    }
+  ],
+  "instructions": [
+    {
+      "name": "initialize_campaign",
+      "discriminatorHex": "52711a2e2d8fc522",
+      "accounts": [
+        { "name": "payer", "signer": true, "writable": true },
+        { "name": "activation_authority", "signer": true, "writable": false },
+        { "name": "review_authority", "signer": false, "writable": false },
+        { "name": "campaign", "signer": false, "writable": true },
+        { "name": "promo_vault", "signer": false, "writable": true },
+        { "name": "mint", "signer": false, "writable": false },
+        { "name": "community_source_token_account", "signer": false, "writable": false },
+        { "name": "community_refund_token_account", "signer": false, "writable": false },
+        { "name": "verified_genesis_config", "signer": false, "writable": false },
+        { "name": "token_program", "signer": false, "writable": false },
+        { "name": "system_program", "signer": false, "writable": false }
+      ],
+      "data": [
+        { "name": "campaign_id", "type": "bytes32" },
+        { "name": "activation_offset_seconds", "type": "u32" },
+        { "name": "hero_reward_base_units", "type": "u64" },
+        { "name": "proposer_reward_base_units", "type": "u64" },
+        { "name": "maximum_budget_base_units", "type": "u64" },
+        { "name": "maximum_completed_pairs", "type": "u16" },
+        { "name": "policy_hash", "type": "bytes32" },
+        { "name": "identity_domain_hash", "type": "bytes32" },
+        { "name": "verifier_ed25519_key", "type": "bytes32" }
+      ],
+      "guards": [
+        "STATUS_INITIALIZED_ONLY",
+        "ORIGINAL_SPL_TOKEN_PROGRAM_ONLY",
+        "GENESIS_CONFIG_READ_ONLY",
+        "ECONOMICS_EQUAL_PUBLIC_POLICY",
+        "PROMO_VAULT_PDA_ONLY"
+      ]
+    },
+    {
+      "name": "fund_campaign",
+      "discriminatorHex": "d60d9630d91b83b5",
+      "accounts": [
+        { "name": "community_funder", "signer": true, "writable": false },
+        { "name": "community_source_token_account", "signer": false, "writable": true },
+        { "name": "campaign", "signer": false, "writable": true },
+        { "name": "promo_vault", "signer": false, "writable": true },
+        { "name": "token_program", "signer": false, "writable": false }
+      ],
+      "data": [
+        { "name": "amount_base_units", "type": "u64" }
+      ],
+      "guards": [
+        "STATUS_INITIALIZED_ONLY",
+        "SOURCE_EQUALS_IMMUTABLE_COMMUNITY_SOURCE",
+        "AMOUNT_EQUALS_180000000000000",
+        "DESTINATION_EQUALS_PROMO_VAULT"
+      ]
+    },
+    {
+      "name": "activate_campaign",
+      "discriminatorHex": "bbecedf511ee0833",
+      "accounts": [
+        { "name": "activation_authority", "signer": true, "writable": false },
+        { "name": "review_authority", "signer": true, "writable": false },
+        { "name": "campaign", "signer": false, "writable": true },
+        { "name": "promo_vault", "signer": false, "writable": false },
+        { "name": "clock_sysvar", "signer": false, "writable": false }
+      ],
+      "data": [
+        { "name": "review_hash", "type": "bytes32" },
+        { "name": "artifact_hash", "type": "bytes32" },
+        { "name": "policy_hash", "type": "bytes32" }
+      ],
+      "guards": [
+        "STATUS_FUNDED_ONLY",
+        "GENESIS_PLUS_28800_REACHED",
+        "VAULT_BALANCE_EQUALS_MAXIMUM_BUDGET",
+        "POLICY_HASH_MATCHES_CAMPAIGN",
+        "SEPARATE_REVIEW_SIGNATURE_REQUIRED"
+      ]
+    },
+    {
+      "name": "cancel_campaign_pre_activation",
+      "discriminatorHex": "af6e435314b7cdfa",
+      "accounts": [
+        { "name": "activation_authority", "signer": true, "writable": false },
+        { "name": "campaign", "signer": false, "writable": true },
+        { "name": "promo_vault", "signer": false, "writable": true },
+        { "name": "community_refund_token_account", "signer": false, "writable": true },
+        { "name": "token_program", "signer": false, "writable": false }
+      ],
+      "data": [],
+      "guards": [
+        "STATUS_INITIALIZED_OR_FUNDED_ONLY",
+        "REFUND_DESTINATION_IMMUTABLE",
+        "ACTIVE_CAMPAIGN_CANNOT_CANCEL"
+      ]
+    },
+    {
+      "name": "nominate_hero",
+      "discriminatorHex": "e792fab4208e9d2a",
+      "accounts": [
+        { "name": "payer", "signer": true, "writable": true },
+        { "name": "proposer_wallet", "signer": true, "writable": false },
+        { "name": "campaign", "signer": false, "writable": false },
+        { "name": "nomination", "signer": false, "writable": true },
+        { "name": "hero_reservation", "signer": false, "writable": true },
+        { "name": "proposer_node_role_marker", "signer": false, "writable": false },
+        { "name": "proposer_wallet_role_marker", "signer": false, "writable": false },
+        { "name": "proposer_x_role_marker", "signer": false, "writable": false },
+        { "name": "hero_x_role_marker", "signer": false, "writable": false },
+        { "name": "instructions_sysvar", "signer": false, "writable": false },
+        { "name": "ed25519_program", "signer": false, "writable": false },
+        { "name": "system_program", "signer": false, "writable": false }
+      ],
+      "data": [
+        { "name": "attestation_id", "type": "bytes32" },
+        { "name": "proposer_node_commitment", "type": "bytes32" },
+        { "name": "proposer_x_identity_commitment", "type": "bytes32" },
+        { "name": "hero_x_identity_commitment", "type": "bytes32" },
+        { "name": "nonce_hash", "type": "bytes32" },
+        { "name": "issued_at", "type": "i64" },
+        { "name": "expires_at", "type": "i64" }
+      ],
+      "guards": [
+        "STATUS_ACTIVE_ONLY",
+        "PROPOSER_WALLET_SIGNS_AND_MATCHES_ATTESTATION",
+        "ED25519_ATTESTATION_PREINSTRUCTION_MATCHES_EXACT_BYTES",
+        "NONCE_UNUSED",
+        "NO_PROPOSER_ROLE_MARKER_EXISTS",
+        "NO_HERO_X_ROLE_MARKER_EXISTS",
+        "NO_ACTIVE_PROPOSER_NOMINATION",
+        "NO_ACTIVE_HERO_RESERVATION",
+        "SELF_X_IDENTITY_REJECTED"
+      ]
+    },
+    {
+      "name": "cancel_nomination",
+      "discriminatorHex": "4a6869adb543bd69",
+      "accounts": [
+        { "name": "payer", "signer": true, "writable": true },
+        { "name": "proposer_wallet", "signer": true, "writable": false },
+        { "name": "campaign", "signer": false, "writable": false },
+        { "name": "nomination", "signer": false, "writable": true },
+        { "name": "hero_reservation", "signer": false, "writable": true },
+        { "name": "instructions_sysvar", "signer": false, "writable": false },
+        { "name": "ed25519_program", "signer": false, "writable": false }
+      ],
+      "data": [
+        { "name": "attestation_id", "type": "bytes32" },
+        { "name": "nonce_hash", "type": "bytes32" },
+        { "name": "issued_at", "type": "i64" },
+        { "name": "expires_at", "type": "i64" }
+      ],
+      "guards": [
+        "STATUS_ACTIVE_ONLY",
+        "NOMINATION_PENDING_ONLY",
+        "PROPOSER_WALLET_SIGNS_AND_MATCHES_NOMINATION",
+        "ED25519_ATTESTATION_PREINSTRUCTION_MATCHES_EXACT_BYTES",
+        "RELEASES_HERO_RESERVATION",
+        "DOES_NOT_INCREMENT_COMPLETED_PAIRS"
+      ]
+    },
+    {
+      "name": "settle_pair",
+      "discriminatorHex": "ce6d604869567c2e",
+      "accounts": [
+        { "name": "payer", "signer": true, "writable": true },
+        { "name": "campaign", "signer": false, "writable": true },
+        { "name": "promo_vault", "signer": false, "writable": true },
+        { "name": "nomination", "signer": false, "writable": true },
+        { "name": "hero_reservation", "signer": false, "writable": true },
+        { "name": "settlement_receipt", "signer": false, "writable": true },
+        { "name": "hero_token_account", "signer": false, "writable": true },
+        { "name": "proposer_token_account", "signer": false, "writable": true },
+        { "name": "hero_node_role_marker", "signer": false, "writable": true },
+        { "name": "hero_wallet_role_marker", "signer": false, "writable": true },
+        { "name": "hero_x_role_marker", "signer": false, "writable": true },
+        { "name": "proposer_node_role_marker", "signer": false, "writable": true },
+        { "name": "proposer_wallet_role_marker", "signer": false, "writable": true },
+        { "name": "proposer_x_role_marker", "signer": false, "writable": true },
+        { "name": "mint", "signer": false, "writable": false },
+        { "name": "instructions_sysvar", "signer": false, "writable": false },
+        { "name": "clock_sysvar", "signer": false, "writable": false },
+        { "name": "ed25519_program", "signer": false, "writable": false },
+        { "name": "token_program", "signer": false, "writable": false },
+        { "name": "associated_token_program", "signer": false, "writable": false },
+        { "name": "system_program", "signer": false, "writable": false }
+      ],
+      "data": [
+        { "name": "attestation_id", "type": "bytes32" },
+        { "name": "hero_node_commitment", "type": "bytes32" },
+        { "name": "hero_x_identity_commitment", "type": "bytes32" },
+        { "name": "nonce_hash", "type": "bytes32" },
+        { "name": "issued_at", "type": "i64" },
+        { "name": "expires_at", "type": "i64" }
+      ],
+      "guards": [
+        "STATUS_ACTIVE_ONLY",
+        "NOMINATION_PENDING_ONLY",
+        "ED25519_ATTESTATION_PREINSTRUCTION_MATCHES_EXACT_BYTES",
+        "HERO_X_MATCHES_NOMINATION",
+        "SELF_NODE_WALLET_X_REJECTED",
+        "ALL_SIX_ROLE_MARKERS_ABSENT",
+        "COMPLETED_PAIRS_BELOW_1000",
+        "VAULT_COVERS_EXACT_PAIR",
+        "HERO_AND_PROPOSER_TRANSFERS_ATOMIC",
+        "RECEIPT_AND_COUNTER_COMMIT_WITH_TRANSFERS",
+        "PAIR_1000_EXPIRES_ALL_REMAINING_NOMINATIONS"
+      ]
+    },
+    {
+      "name": "finalize_exhausted_surplus",
+      "discriminatorHex": "dd58b3ad24cc5495",
+      "accounts": [
+        { "name": "payer", "signer": true, "writable": true },
+        { "name": "campaign", "signer": false, "writable": false },
+        { "name": "promo_vault", "signer": false, "writable": true },
+        { "name": "community_refund_token_account", "signer": false, "writable": true },
+        { "name": "token_program", "signer": false, "writable": false }
+      ],
+      "data": [],
+      "guards": [
+        "STATUS_EXHAUSTED_ONLY",
+        "COMPLETED_PAIRS_EQUALS_1000",
+        "DESTINATION_EQUALS_IMMUTABLE_COMMUNITY_REFUND",
+        "PERMISSIONLESS_PAYER_CANNOT_REDIRECT"
+      ]
+    }
+  ],
+  "forbiddenCapabilities": [
+    "MINT_AUTHORITY",
+    "FREEZE_AUTHORITY",
+    "V2_UPGRADE_AUTHORITY",
+    "TREASURY_ACCESS",
+    "ECOSYSTEM_ACCESS",
+    "LIQUIDITY_ACCESS",
+    "CORE_TEAM_ACCESS",
+    "STAKING_RESERVE_ACCESS",
+    "APY_MUTATION",
+    "VESTING_MUTATION",
+    "CCC_SELECTION_MUTATION",
+    "ACTIVE_CAMPAIGN_WITHDRAWAL",
+    "OPERATOR_REWARD_REDIRECTION"
+  ]
+}

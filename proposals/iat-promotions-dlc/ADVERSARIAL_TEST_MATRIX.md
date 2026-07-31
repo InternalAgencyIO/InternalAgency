@@ -25,7 +25,11 @@ security audit or deployment approval.
 | Reused settlement attestation nonce | `attestation nonces cannot be replayed...` | Rejected; no second payment |
 | Reused proposer wallet | `node, wallet, and X uniqueness...` | Rejected independently of node/X |
 | Reused hero wallet | same | Rejected independently of node/X |
+| Reused proposer node, wallet, or X identity | `every proposer and hero identity dimension...` | Each dimension independently rejects reuse |
+| Reused hero node, wallet, or X identity | same | Hero X rejected at nomination; node/wallet rejected before settlement |
 | Same node earns different roles once each | same | Accepted; role limits remain independent |
+| Cancellation wins before settlement | `cancellation and settlement ordering...` | Settlement rejected; no payment or completed slot |
+| Settlement wins before cancellation | same | Cancellation rejected; exactly one atomic pair remains paid |
 | 1,000 completed pairs | `exactly 1,000 pairs...` | Exactly 180,000 IAT spent; vault reaches zero |
 | Attempted pair 1,001 | same | Permanently rejected |
 | Two candidates for final slot | `the final slot is serialized...` | First canonical settlement wins; other expires unpaid and releases reservations |
@@ -40,11 +44,16 @@ security audit or deployment approval.
 | Transparency-log truncation or rewrite | `published checkpoints...` | Prior public checkpoint verification fails |
 | Canonical envelope to settlement | `verified envelopes drive...` | Verified minimal binding completes one exact pair |
 | Random legal/illegal operation sequences | `randomized-state-machine.test.mjs` | Every invariant holds after every operation |
+| Program interface claims a network or program ID | `network or deployment claims...` | Interface validator rejects the deployment claim |
+| Account size or discriminator mutation | `layout and forbidden-account mutations...` | Interface validator rejects the binary-layout drift |
+| Forbidden V2 account added to an instruction | same | Interface validator rejects the capability leak |
+| Missing atomicity, six-marker, or terminal guard | `economic, vault, atomicity...` | Interface validator rejects the weakened contract |
+| Deterministic instruction serialization | `published vectors encode...` | Every instruction matches its fixed public byte vector and round-trips |
+| Missing, extra, malformed, negative, unsafe, or overflowing field | `the encoder rejects...` | Encoding fails before bytes are produced |
+| Unknown discriminator, truncation, or trailing bytes | `the decoder rejects...` | Decoding fails without accepting an ambiguous instruction |
 
 ## Next matrix expansion
 
-- duplicate tests for every node/wallet/X and hero/proposer combination;
-- nomination cancellation versus settlement ordering;
 - verifier envelope byte-level fuzzing and real Ed25519 public test vectors;
-- malformed integer and overflow boundaries;
+- instruction/account transition adapter and property-based codec fuzzing;
 - local-validator transaction rollback and account-lock contention.

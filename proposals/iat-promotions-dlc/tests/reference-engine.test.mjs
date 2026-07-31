@@ -315,6 +315,105 @@ test("node, wallet, and X uniqueness are independent for each role", () => {
   assertStateInvariants(state);
 });
 
+test("every proposer and hero identity dimension rejects reuse", () => {
+  const state = settleGeneratedPair(activeCampaign(), 0);
+  const proposerCases = [
+    ["node", { nodeId: "node-proposer-0" }, /PROPOSER_NODE_ALREADY_REWARDED/],
+    ["wallet", { wallet: "wallet-proposer-0" }, /PROPOSER_WALLET_ALREADY_REWARDED/],
+    [
+      "x",
+      { xIdentityCommitment: commitment("x-proposer-0") },
+      /PROPOSER_X_IDENTITY_ALREADY_REWARDED/,
+    ],
+  ];
+  for (const [dimension, overrides, error] of proposerCases) {
+    assert.throws(
+      () =>
+        nominateHero(state, {
+          now: ACTIVE_AT,
+          proposerAttestation: attestation(
+            state,
+            AttestationPurpose.NOMINATE,
+            `duplicate-proposer-${dimension}`,
+            ACTIVE_AT,
+            { nonce: `duplicate-proposer-${dimension}`, ...overrides },
+          ),
+          heroXIdentityCommitment: commitment(`x-fresh-hero-${dimension}`),
+          heroDisplayHandle: `@fresh_${dimension}`,
+        }),
+      error,
+    );
+  }
+
+  assert.throws(
+    () => nominate(state, "fresh-proposer-x", "hero-0", 20),
+    /HERO_X_IDENTITY_ALREADY_REWARDED/,
+  );
+
+  const heroNode = nominate(state, "fresh-proposer-node", "fresh-hero-node", 21);
+  assert.throws(
+    () =>
+      settle(heroNode.state, heroNode.nominationId, "fresh-hero-node", 21, ACTIVE_AT + 1, {
+        heroAttestation: { nodeId: "node-hero-0" },
+      }),
+    /HERO_NODE_ALREADY_REWARDED/,
+  );
+
+  const heroWallet = nominate(state, "fresh-proposer-wallet", "fresh-hero-wallet", 22);
+  assert.throws(
+    () =>
+      settle(heroWallet.state, heroWallet.nominationId, "fresh-hero-wallet", 22, ACTIVE_AT + 1, {
+        heroAttestation: { wallet: "wallet-hero-0" },
+      }),
+    /HERO_WALLET_ALREADY_REWARDED/,
+  );
+});
+
+test("cancellation and settlement ordering has exactly one terminal winner", () => {
+  const state = activeCampaign();
+  const pending = nominate(state, "race-proposer", "race-hero", 30);
+
+  const cancelled = cancelNomination(pending.state, {
+    now: ACTIVE_AT + 1,
+    nominationId: pending.nominationId,
+    proposerAttestation: attestation(
+      pending.state,
+      AttestationPurpose.CANCEL,
+      "race-proposer",
+      ACTIVE_AT + 1,
+      { nonce: "race-cancel-first" },
+    ),
+  });
+  const cancelledSnapshot = snapshotState(cancelled);
+  assert.throws(
+    () => settle(cancelled, pending.nominationId, "race-hero", 30, ACTIVE_AT + 2),
+    /NOMINATION_NOT_PENDING/,
+  );
+  assert.equal(snapshotState(cancelled), cancelledSnapshot);
+  assert.equal(cancelled.completedPairs, 0);
+
+  const settled = settle(pending.state, pending.nominationId, "race-hero", 30, ACTIVE_AT + 1);
+  const settledSnapshot = snapshotState(settled);
+  assert.throws(
+    () =>
+      cancelNomination(settled, {
+        now: ACTIVE_AT + 2,
+        nominationId: pending.nominationId,
+        proposerAttestation: attestation(
+          settled,
+          AttestationPurpose.CANCEL,
+          "race-proposer",
+          ACTIVE_AT + 2,
+          { nonce: "race-settle-first" },
+        ),
+      }),
+    /NOMINATION_NOT_PENDING/,
+  );
+  assert.equal(snapshotState(settled), settledSnapshot);
+  assert.equal(settled.completedPairs, 1);
+  assertStateInvariants(settled);
+});
+
 test("exactly 1,000 pairs spend exactly 180,000 IAT and permanently exhaust the campaign", () => {
   let state = activeCampaign();
   for (let sequence = 0; sequence < MAXIMUM_COMPLETED_PAIRS; sequence += 1) {
