@@ -721,6 +721,13 @@ rejected and regenerated.
 | **Douala Bonanjo Wouri Prism Intercept**<br><img src="584-cameroon-douala-bonanjo-wouri-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia securing an amber river prism above Douala's Bonanjo skyline, Wouri River, and bridge geometry"> | **Dschang Civilisations Museum Lattice Cipher**<br><img src="585-cameroon-dschang-civilisations-museum-lattice-cipher.png" width="420" alt="The trio sealing a turquoise archive prism outside Dschang's Museum of Civilisations overlooking Lake Dschang"> |
 | **Mount Cameroon Volcanic Mist Extraction**<br><img src="586-cameroon-mount-cameroon-volcanic-mist-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Mount Cameroon's black lava ridges and equatorial cloud"> | **Limbe Black-Sand Coast Night Relay**<br><img src="587-cameroon-limbe-black-sand-coast-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet coast relay beside Limbe's Atlantic black-sand shore at blue hour"> |
 
+## World Series - South America - Batch 142: Venezuela
+
+| | |
+|---|---|
+| **Caracas Parque Central Prism Intercept**<br><img src="588-venezuela-caracas-parque-central-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia securing an amber mountain prism above Caracas's Parque Central towers with the Ávila skyline beyond"> | **Caracas Ciudad Universitaria Lattice Cipher**<br><img src="589-venezuela-caracas-ciudad-universitaria-lattice-cipher.png" width="420" alt="The trio sealing a turquoise archive prism among the modernist roof forms and colored planes of Ciudad Universitaria de Caracas"> |
+| **Angel Falls Tepui Mist Extraction**<br><img src="590-venezuela-angel-falls-tepui-mist-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Angel Falls and the sheer Auyán-tepui landscape"> | **Maracaibo Lake Bridge Night Relay**<br><img src="591-venezuela-maracaibo-lake-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald lake relay beside the General Rafael Urdaneta Bridge at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
