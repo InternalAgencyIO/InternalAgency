@@ -777,6 +777,13 @@ rejected and regenerated.
 | **Colombo Lotus Tower Sapphire Intercept**<br><img src="616-sri-lanka-colombo-lotus-tower-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise prism above Colombo's Beira Lake waterfront with the Lotus Tower beyond"> | **Galle Fort Rampart Amber Cipher**<br><img src="617-sri-lanka-galle-fort-rampart-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Galle Fort's ocean-facing stone ramparts and tiled rooflines"> |
 | **Horton Plains World's End Cloud Extraction**<br><img src="618-sri-lanka-horton-plains-worlds-end-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Horton Plains at World's End with cloud forest and escarpment beyond"> | **Ella Nine Arch Bridge Starlight Relay**<br><img src="619-sri-lanka-ella-nine-arch-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald night relay beside Ella's Nine Arch Bridge and tea-green hillsides"> |
 
+## World Series - Africa - Batch 150: Malawi
+
+| | |
+|---|---|
+| **Lilongwe City Centre Rift-Light Intercept**<br><img src="620-malawi-lilongwe-city-centre-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise sun prism above Lilongwe's wooded modern City Centre"> | **Blantyre Mandala House Veranda Cipher**<br><img src="621-malawi-blantyre-mandala-house-veranda-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Blantyre's historic Mandala House veranda and garden"> |
+| **Mulanje Massif Granite Cloud Extraction**<br><img src="622-malawi-mulanje-massif-granite-extraction.png" width="420" alt="The trio restoring a climate-data beacon before Mount Mulanje's massive granite faces and high cloud"> | **Cape Maclear Lake Malawi Starlight Relay**<br><img src="623-malawi-cape-maclear-lake-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet night relay above Cape Maclear's Lake Malawi shoreline"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
