@@ -70,6 +70,19 @@ export function validatePolicy(policy) {
   expect(eligibility.rejectSelfProposalByWallet === true, "wallet self-proposal must be rejected");
   expect(eligibility.rejectSelfProposalByXIdentity === true, "X self-proposal must be rejected");
 
+  const attestation = policy?.identityAttestation ?? {};
+  expect(attestation.version === 0, "identity attestation version must remain zero");
+  expect(
+    attestation.domain === "iat-promotions-dlc-attestation-v0",
+    "identity attestation domain mismatch",
+  );
+  expect(attestation.scheme === "ED25519_DETACHED", "identity attestation scheme mismatch");
+  expect(attestation.maximumLifetimeSeconds === 300, "attestation lifetime must be 300 seconds");
+  expect(attestation.maximumWalletProofAgeSeconds === 600, "wallet proof age must be 600 seconds");
+  expect(attestation.rawXUserIdInEnvelope === false, "raw X user ID must not enter the envelope");
+  expect(attestation.oauthTokenInEnvelope === false, "OAuth tokens must not enter the envelope");
+  expect(attestation.privateSigningKeyInRepository === false, "private signing keys must not enter the repository");
+
   const uniqueness = policy?.uniqueness ?? {};
   expect(JSON.stringify(uniqueness.roles) === JSON.stringify(["HERO", "PROPOSER"]), "reward roles mismatch");
   expect(
@@ -92,6 +105,8 @@ export function validatePolicy(policy) {
   expect(capacity.exhaustedIsPermanent === true, "exhaustion must be permanent");
 
   const evidence = policy?.publicEvidence ?? {};
+  expect(evidence.appendOnlyTransparencyLog === true, "append-only transparency log is required");
+  expect(evidence.checkpointedHashChain === true, "checkpointed hash chain is required");
   expect(evidence.publishAggregateState === true, "aggregate state must be public");
   expect(evidence.publishVaultAccounting === true, "vault accounting must be public");
   expect(evidence.publishSettlementTransactions === true, "settlement transactions must be public");

@@ -2,7 +2,7 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 10:59 UTC
+Updated: 2026-07-31 11:20 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
@@ -20,13 +20,23 @@ This status file deliberately does not claim a self-referential commit hash.
 - campaign and nomination state machines;
 - threat model and adversarial matrix;
 - exact integer accounting policy and validator;
-- 23 policy mutation tests;
+- 28 policy mutation tests;
 - standalone, network-free reference engine;
 - isolated community promotion-vault funding gate;
 - pure-state nomination, cancellation, activation, and settlement operations;
 - atomic rollback fault injection after either modeled transfer;
 - replay, stable-X-ID, self-referral, triple-deduplication, full-cap, final-slot,
-  and permanent-terminal-state tests.
+  and permanent-terminal-state tests;
+- canonical verifier-attestation envelope with detached-signature boundary;
+- 300-second attestation and 600-second wallet-proof freshness limits;
+- no raw X user ID, OAuth token, or signing key in the public envelope;
+- append-only transparency hash chain and public checkpoints;
+- tamper, key/campaign mismatch, truncation, and history-rewrite tests; and
+- twelve deterministic randomized state-machine traces.
+
+Current proposal-only result: **49 tests passed**. This consists of 28 protected
+policy tests, 11 reference-engine tests, eight attestation/transparency tests,
+and two deterministic randomized-state-machine tests.
 
 ## Current guarantees of the reference model
 
@@ -58,7 +68,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Define the verifier-attestation envelope and transparency-log format, then add a
-network-free signature/replay model and randomized state-machine property tests.
-No production import, chain connection, wallet operation, or site deployment is
-needed for that work.
+Define the standalone program instruction/account interface and deterministic
+binary serialization vectors, then expand the duplicate and cancellation-versus-
+settlement race matrix. No production import, chain connection, wallet
+operation, or site deployment is needed for that work.

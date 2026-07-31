@@ -81,6 +81,10 @@ The verifier:
 The verifier does **not** decide reward amounts, campaign capacity, or transfer
 destinations after attestation. Those rules are enforced by the program.
 
+The exact version-zero envelope, canonical byte format, freshness bounds, and
+public hash-chain contract are defined in
+[`ATTESTATION_AND_TRANSPARENCY.md`](./ATTESTATION_AND_TRANSPARENCY.md).
+
 ### On-chain promotion program
 
 The program:

@@ -44,6 +44,16 @@
     "rejectSelfProposalByWallet": true,
     "rejectSelfProposalByXIdentity": true
   },
+  "identityAttestation": {
+    "version": 0,
+    "domain": "iat-promotions-dlc-attestation-v0",
+    "scheme": "ED25519_DETACHED",
+    "maximumLifetimeSeconds": 300,
+    "maximumWalletProofAgeSeconds": 600,
+    "rawXUserIdInEnvelope": false,
+    "oauthTokenInEnvelope": false,
+    "privateSigningKeyInRepository": false
+  },
   "uniqueness": {
     "roles": [
       "HERO",
@@ -69,6 +79,8 @@
     "exhaustedIsPermanent": true
   },
   "publicEvidence": {
+    "appendOnlyTransparencyLog": true,
+    "checkpointedHashChain": true,
     "publishAggregateState": true,
     "publishVaultAccounting": true,
     "publishSettlementTransactions": true,

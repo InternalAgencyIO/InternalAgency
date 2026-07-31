@@ -40,6 +40,8 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Public status](./STATUS.md)
 - [Network-free reference engine](./reference-engine.mjs)
 - [Adversarial test matrix](./ADVERSARIAL_TEST_MATRIX.md)
+- [Verifier attestation and transparency contract](./ATTESTATION_AND_TRANSPARENCY.md)
+- [Network-free attestation/log model](./attestation-transparency.mjs)
 - [Machine-readable policy](./promotion-policy.v0.json)
 - [Policy validator](./validate-policy.mjs)
 - [Mutation tests](./tests/policy.test.mjs)
@@ -50,6 +52,8 @@ Run the proposal-only checks with:
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
+node --test proposals/iat-promotions-dlc/tests/attestation-transparency.test.mjs
+node --test proposals/iat-promotions-dlc/tests/randomized-state-machine.test.mjs
 ```
 
 ## Deliberate isolation

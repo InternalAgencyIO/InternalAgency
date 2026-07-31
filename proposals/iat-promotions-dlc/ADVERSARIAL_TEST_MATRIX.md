@@ -30,13 +30,21 @@ security audit or deployment approval.
 | Attempted pair 1,001 | same | Permanently rejected |
 | Two candidates for final slot | `the final slot is serialized...` | First canonical settlement wins; other expires unpaid and releases reservations |
 | Work after terminal state | final two tests | Rejected; state remains unchanged |
+| Canonical-envelope key order ambiguity | `canonical JSON is stable...` | Same bytes and digest regardless of insertion order |
+| Envelope payload or ID tampering | `payload, ID, signature...` | Rejected |
+| Detached-signature tampering | same | Rejected by the supplied verification boundary |
+| Unapproved verifier key or wrong campaign | same | Rejected |
+| Overlong attestation or stale wallet proof | `attestation lifetime...` | Rejected before reference-engine use |
+| Duplicate public outcome | `duplicate outcomes...` | Rejected |
+| Transparency entry mutation or reordering | same | Hash-chain verification fails |
+| Transparency-log truncation or rewrite | `published checkpoints...` | Prior public checkpoint verification fails |
+| Canonical envelope to settlement | `verified envelopes drive...` | Verified minimal binding completes one exact pair |
+| Random legal/illegal operation sequences | `randomized-state-machine.test.mjs` | Every invariant holds after every operation |
 
 ## Next matrix expansion
 
-- randomized model sequences and invariant checking;
 - duplicate tests for every node/wallet/X and hero/proposer combination;
 - nomination cancellation versus settlement ordering;
-- verifier purpose, campaign, expiry, and nonce fuzzing;
+- verifier envelope byte-level fuzzing and real Ed25519 public test vectors;
 - malformed integer and overflow boundaries;
-- transparency-log root and attestation-signature verification; and
 - local-validator transaction rollback and account-lock contention.
