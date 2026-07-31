@@ -193,11 +193,19 @@ security audit or deployment approval.
 | Malformed programmatic input crashes open or claims authority | `malformed programmatic input fails closed...` | Candidate rejects and receipt, review, and activation authority remain false |
 | Rejected CLI result is mistaken for a successful lint | `CLI returns rejection status 2...` | Rejection is human-readable and returns a distinct nonzero status |
 | Linter gains file-write, signing, keygen, or network capability | `linter source has local-read-only capability...` | Import allowlist and forbidden-capability scan fail |
+| Candidate, expected target, or lint result gains an unknown field | `all fourteen invalid examples...` | Closed Draft-07 object shape rejects the field |
+| File count becomes numeric or a hash/signature is malformed | same | Canonical string type and fixed lowercase-hex patterns reject it |
+| Candidate omits a required review area | same | Fixed ordered eight-area scope fails structural validation |
+| Structurally valid candidate is presented as semantically accepted | `structural validity remains separate...` | Six-gate evaluator still rejects the unrelated signature |
+| Structurally valid target is candidate-controlled or mismatched | `a structurally valid but independently mismatched target...` | Semantic target-binding gate fails despite shape validity |
+| Lint result claims receipt, completed review, or activation | `lint-result schema permanently fixes...` | Result schema constants reject every authority escalation |
+| Schema opens an object or claims a released network | `open objects, released status...` | Schema-contract validator rejects the source and source digest |
+| Schema/example corpus exposes raw X identity or private material | `portable schemas expose commitments...` | Privacy scan permits commitments and public attestation only |
 
 ## Next matrix expansion
 
-- closed reviewer-candidate, expected-target, and lint-result schemas with
-  invalid examples that remain rejected and non-activating;
+- schema-backed CLI preflight with JSON Pointer diagnostics while keeping the
+  pure six-gate evaluator and all non-authority results unchanged;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

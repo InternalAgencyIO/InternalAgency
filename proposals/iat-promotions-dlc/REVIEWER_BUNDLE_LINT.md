@@ -10,6 +10,11 @@ template. It prints a deterministic JSON or Markdown gate report.
 It does not write a receipt, create or store a signature, complete an
 independent review, contact a network, access a wallet, or authorize activation.
 
+Portable candidate, expected-target, and lint-result shapes are defined in the
+[reviewer-bundle schema contract](./REVIEWER_BUNDLE_SCHEMAS.md). Passing those
+schemas establishes structure only; the six-gate semantic policy remains
+mandatory.
+
 ## Required trust boundary
 
 The expected target must be obtained independently from the candidate bundle.

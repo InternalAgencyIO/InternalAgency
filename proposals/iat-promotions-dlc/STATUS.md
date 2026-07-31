@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 16:01 UTC
+Updated: 2026-07-31 16:16 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `8387453`
+Previously published public increment: `d3bca60`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -245,8 +245,21 @@ This status file deliberately does not claim a self-referential commit hash.
   and
 - source-level exclusion of file writes, signing, key generation, wallet, and
   network capability from the linter.
+- three closed portable Draft-07 schemas for reviewer candidate, independently
+  supplied expected target, and evaluation-only lint result;
+- fixed lowercase commit/hash/signature formats, canonical decimal strings,
+  exact review-area/exclusion arrays, and closed nested objects;
+- explicit separation of structural validity from target authenticity,
+  semantic review acceptance, and cryptographic validity;
+- lint-result constants permanently preventing receipt issuance, completed
+  review, activation authority, or non-`NONE` activation effects;
+- three structurally valid but rejection-only public examples;
+- fourteen pointer-based invalid examples isolating closed-object, required,
+  type, pattern, enum, scope, HOLD, binding, receipt, and activation guards;
+  and
+- deterministic schema-source commitments and mutation validation.
 
-Current proposal-only result: **197 tests passed**. This consists of 28 protected
+Current proposal-only result: **205 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -269,6 +282,9 @@ policy suite.
 Ten offline linter, deterministic report, input-commitment, CLI-exit,
 fail-closed, source-safety, and non-activation tests complete the reviewer
 bundle presentation suite.
+Eight portable-schema, structural/semantic-boundary, invalid-example,
+target-authenticity, authority-constant, source-drift, and privacy tests
+complete the reviewer bundle schema suite.
 
 ## Current guarantees of the reference model
 
@@ -300,8 +316,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add closed Draft-07 schemas for reviewer-candidate, independently supplied
-expected-target, and lint-result files, plus deterministic invalid examples.
-Keep every example rejected, unissued, and non-activating. No signature,
-production import, chain connection, wallet operation, or site deployment is
-needed for that work.
+Add schema-backed CLI preflight with precise JSON Pointer diagnostics before
+the six semantic gates run. Preserve the local-read-only CLI, keep every public
+example rejected, and leave receipt, review, activation, wallet, production,
+site, and chain authority absent.
