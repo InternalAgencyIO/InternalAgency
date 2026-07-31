@@ -28,6 +28,7 @@ const mutations = [
   ["wallet self-proposal", (p) => (p.eligibility.rejectSelfProposalByWallet = false)],
   ["missing wallet dedupe", (p) => p.uniqueness.dimensionsPerRole.splice(1, 1)],
   ["pending capacity consumption", (p) => (p.capacity.pendingConsumesCapacity = true)],
+  ["expired capacity consumption", (p) => (p.capacity.expiredConsumesCapacity = true)],
   ["reversible exhaustion", (p) => (p.capacity.exhaustedIsPermanent = false)],
   ["private identity publication", (p) => (p.publicEvidence.publishPrivateIdentityData = true)],
 ];

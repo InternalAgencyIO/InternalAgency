@@ -175,8 +175,10 @@ Rules:
 stateDiagram-v2
     [*] --> PENDING: verified proposer nominates resolved X identity
     PENDING --> CANCELLED: proposer cancels before settlement
+    PENDING --> EXPIRED: campaign reaches 1,000 first
     PENDING --> SETTLED: hero binding verified and pair paid atomically
     CANCELLED --> [*]
+    EXPIRED --> [*]
     SETTLED --> [*]
 ```
 
@@ -196,8 +198,11 @@ consuming capacity. If settlement and cancellation race, Solana ordering gives
 one deterministic winner; the second transaction observes a terminal state and
 fails without side effects.
 
-No arbitrary expiry is imposed in version zero because the product promise says
-the hero may connect later. Rate limiting and rent costs control state spam.
+No arbitrary time expiry is imposed in version zero because the product promise
+says the hero may connect later. Rate limiting and rent costs control state
+spam. When the 1,000th pair settles, every remaining pending nomination becomes
+`EXPIRED` with reason `CAMPAIGN_EXHAUSTED`, receives no payment, and releases
+its proposer and hero reservations.
 
 ## 8. Settlement flow
 

@@ -37,6 +37,9 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 
 - [Protocol and delivery plan](./PLAN.md)
 - [Threat model](./THREAT_MODEL.md)
+- [Public status](./STATUS.md)
+- [Network-free reference engine](./reference-engine.mjs)
+- [Adversarial test matrix](./ADVERSARIAL_TEST_MATRIX.md)
 - [Machine-readable policy](./promotion-policy.v0.json)
 - [Policy validator](./validate-policy.mjs)
 - [Mutation tests](./tests/policy.test.mjs)
@@ -46,6 +49,7 @@ Run the proposal-only checks with:
 ```sh
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
+node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
 ```
 
 ## Deliberate isolation

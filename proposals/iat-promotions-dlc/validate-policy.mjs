@@ -85,6 +85,7 @@ export function validatePolicy(policy) {
   const capacity = policy?.capacity ?? {};
   expect(capacity.consumedOnlyByCompletedAtomicPair === true, "only completed pairs consume capacity");
   expect(capacity.pendingConsumesCapacity === false, "pending must not consume capacity");
+  expect(capacity.expiredConsumesCapacity === false, "expired must not consume capacity");
   expect(capacity.invalidConsumesCapacity === false, "invalid must not consume capacity");
   expect(capacity.cancelledConsumesCapacity === false, "cancelled must not consume capacity");
   expect(capacity.duplicateConsumesCapacity === false, "duplicate must not consume capacity");
