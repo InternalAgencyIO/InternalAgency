@@ -166,11 +166,18 @@ security audit or deployment approval.
 | Review approval is treated as activation authorization | `even review approval has no activation effect...` | Approval effect remains `NONE`; separate activation review is required |
 | Template creates keys, signs, or pre-fills a public key or signature | `template never generates keys...` | External-only attestation boundary and null template fields fail |
 | Template claims a final decision, completed review, issuance, or deployment | `deployment, binding, independence...` | HOLD, template-state, and non-activation mutation checks fail |
+| Unsigned payload omits or reorders a bound field | `canonical field order is fixed...` | Exact key set and canonical order reject encoding |
+| Commit, manifest, tree, file count, or scope changes under the same payload digest | `every target and scope binding...` | Each independent mutation produces different message bytes and SHA-256 |
+| Reviewer, decision, rationale, findings, or timestamp is not committed | `reviewer, decision, rationale...` | Each independent mutation changes the payload digest |
+| Payload uses unsafe integers, malformed hex, invalid UTF-8 length, or unknown decision | `malformed hashes, integers...` | Fixed-width and canonical-format validation fails closed |
+| Review payload carries activation authority | `activation authorization and every non-NONE...` | Encoder rejects authorized activation and every non-`NONE` effect |
+| Payload is truncated, extended, or has wrong magic or decision code | `truncation, trailing bytes...` | Decoder rejects every ambiguous byte sequence |
+| Public vectors contain a key, signature, secret, raw identity, handle, or wallet field | `public vectors contain no key...` | Forbidden-field and non-attestation checks fail |
 
 ## Next matrix expansion
 
-- canonical unsigned review-receipt signing payload and public verification
-  vectors, without generating keys or signatures;
+- detached Ed25519 verification adapter for externally supplied receipt
+  attestations, with public verification vectors but no signing or keygen;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

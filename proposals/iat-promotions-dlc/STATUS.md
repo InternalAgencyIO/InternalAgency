@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 14:58 UTC
+Updated: 2026-07-31 15:13 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `67e8323`
+Previously published public increment: `033e2f7`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -187,8 +187,24 @@ This status file deliberately does not claim a self-referential commit hash.
   template; and
 - drift tests for bindings, scope, independence, decision, attestation,
   issuance, deployment, and activation claims.
+- exact domain-separated unsigned receipt-message framing;
+- fixed repository and PR binding plus exact ordered commit, manifest, tree,
+  file-count, scope, reviewer, decision, rationale, findings, timestamp, and
+  non-activation fields;
+- canonical lowercase fixed-width hex and decimal-string JSON formats with
+  fixed little-endian binary integers;
+- one deterministic public unsigned message, length, and SHA-256 digest for
+  each of the three allowed review-only decisions;
+- exact encode/decode round trips with missing, extra, or reordered fields
+  rejected;
+- independent digest-change proof for every target, scope, reviewer, decision,
+  rationale, findings, and timestamp binding;
+- malformed format, false independence, unknown decision, activation claim,
+  truncation, trailing-byte, magic, and decision-code rejection; and
+- no key, signature, secret, raw X identity, handle, wallet capability, or
+  cryptographic attestation in the public payload vectors.
 
-Current proposal-only result: **158 tests passed**. This consists of 28 protected
+Current proposal-only result: **168 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -201,6 +217,8 @@ compact-vector suite, and six Draft-07 schema/example tests complete the current
 suite. Eight content-addressed review-manifest tests and three independent
 Python integration tests complete the review-surface suite. Eight held
 independent-review receipt-template tests complete the review-contract suite.
+Ten unsigned review-payload codec, binding, privacy, and byte-vector tests
+complete the canonical payload suite.
 
 ## Current guarantees of the reference model
 
@@ -232,7 +250,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a canonical unsigned review-receipt signing payload and public verification
-vectors without generating keys or signatures. Preserve the privacy boundary
-and every unapplied and undeployable gate. No production import, chain
-connection, wallet operation, or site deployment is needed for that work.
+Add a detached Ed25519 verification adapter for externally supplied receipt
+attestations, with public verification vectors but no signing or key generation.
+Preserve the privacy boundary and every unapplied and undeployable gate. No
+production import, chain connection, wallet operation, or site deployment is
+needed for that work.
