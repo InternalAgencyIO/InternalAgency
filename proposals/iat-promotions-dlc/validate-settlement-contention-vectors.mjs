@@ -8,10 +8,13 @@ import { fileURLToPath } from "node:url";
 
 import { canonicalSha256 } from "./compose-program-interface-preview.mjs";
 import { generateSettlementContentionVectors } from "./generate-settlement-contention-vectors.mjs";
+import { validateJsonSchemaSubset } from "./json-schema-subset.mjs";
 
 const ARTIFACT_PATH = fileURLToPath(new URL("./settlement-contention-vectors.v1.json", import.meta.url));
+const SCHEMA_PATH = fileURLToPath(new URL("./settlement-contention-evidence.schema.v1.json", import.meta.url));
 const MODEL_PATH = fileURLToPath(new URL("./settlement-contention-model.mjs", import.meta.url));
 const GENERATOR_PATH = fileURLToPath(new URL("./generate-settlement-contention-vectors.mjs", import.meta.url));
+const PYTHON_VERIFIER_PATH = fileURLToPath(new URL("./verify-settlement-contention-vectors.py", import.meta.url));
 const HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"];
 const HEX_32 = /^[0-9a-f]{64}$/;
 const SCENARIO_NAMES = [
@@ -26,15 +29,28 @@ const SCENARIO_NAMES = [
 export function loadSettlementContentionVectorBundle() {
   return {
     artifact: JSON.parse(readFileSync(ARTIFACT_PATH, "utf8")),
+    schema: JSON.parse(readFileSync(SCHEMA_PATH, "utf8")),
     modelSource: readFileSync(MODEL_PATH, "utf8"),
     generatorSource: readFileSync(GENERATOR_PATH, "utf8"),
+    pythonVerifierSource: readFileSync(PYTHON_VERIFIER_PATH, "utf8"),
   };
+}
+
+function everyObjectSchemaIsClosed(schema) {
+  let closed = true;
+  const visit = (value) => {
+    if (!value || typeof value !== "object") return;
+    if (value.type === "object" && value.additionalProperties !== false) closed = false;
+    for (const child of Object.values(value)) visit(child);
+  };
+  visit(schema);
+  return closed;
 }
 
 export function validateSettlementContentionVectors(
   bundle = loadSettlementContentionVectorBundle(),
 ) {
-  const { artifact, modelSource, generatorSource } = bundle;
+  const { artifact, schema, modelSource, generatorSource, pythonVerifierSource } = bundle;
   const errors = [];
   const expect = (condition, message) => {
     if (!condition) errors.push(message);
@@ -46,6 +62,14 @@ export function validateSettlementContentionVectors(
   expect(artifact?.status?.programId === null, "contention vectors claim a program ID");
   expect(artifact?.status?.deployable === false, "contention vectors claim deployability");
   expect(artifact?.status?.vectorsApplied === false, "contention vectors claim application");
+  expect(schema?.$schema === "http://json-schema.org/draft-07/schema#", "contention schema Draft-07 declaration drift");
+  expect(JSON.stringify(schema?.["x-iat-status"]?.labels) === JSON.stringify(HOLD_LABELS), "contention schema HOLD labels drift");
+  expect(schema?.["x-iat-status"]?.network === "NONE", "contention schema claims a network");
+  expect(schema?.["x-iat-status"]?.programId === null, "contention schema claims a program ID");
+  expect(schema?.["x-iat-status"]?.deployable === false, "contention schema claims deployability");
+  expect(schema?.["x-iat-status"]?.schemaApplied === false, "contention schema claims application");
+  expect(everyObjectSchemaIsClosed(schema), "contention schema contains an open object");
+  expect(validateJsonSchemaSubset(schema, artifact).length === 0, "contention artifact fails its closed schema");
   expect(
     JSON.stringify(generateSettlementContentionVectors()) === JSON.stringify(artifact),
     "contention vectors do not deterministically regenerate",
@@ -166,7 +190,7 @@ export function validateSettlementContentionVectors(
       === canonicalSha256(scenarios.map((scenario) => scenario.scenarioCommitmentSha256)),
     "contention scenario-set reconstruction drift",
   );
-  const sources = `${modelSource}\n${generatorSource}`;
+  const sources = `${modelSource}\n${generatorSource}\n${pythonVerifierSource}`;
   expect(!/\bfetch\s*\(|\bWebSocket\s*\(|wallet-adapter|sendTransaction/.test(sources), "contention tooling can access a network or wallet");
   expect(!/\bgenerateKeyPair(?:Sync)?\s*\(|\bcreatePrivateKey\s*\(|\bsign\s*\(/.test(sources), "contention tooling can create keys or signatures");
   expect(!/solana-test-validator|api\.devnet\.solana\.com|api\.mainnet-beta\.solana\.com/.test(sources), "contention tooling can contact a validator or cluster");

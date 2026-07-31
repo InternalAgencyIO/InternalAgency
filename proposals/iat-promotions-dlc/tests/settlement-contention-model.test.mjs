@@ -274,10 +274,14 @@ test("contention tooling is offline, powerless, compact, and manifest-bound", ()
   const expectedRoles = {
     "SETTLEMENT_CONTENTION_MODEL.md": "ARTIFACT",
     "generate-settlement-contention-vectors.mjs": "GENERATOR",
+    "settlement-contention-evidence.schema.v1.json": "ARTIFACT",
     "settlement-contention-model.mjs": "SUPPORTING_SOURCE",
     "settlement-contention-vectors.v1.json": "ARTIFACT",
     "tests/settlement-contention-model.test.mjs": "TEST",
+    "tests/settlement-contention-python.test.mjs": "TEST",
+    "tests/settlement-contention-schema.test.mjs": "TEST",
     "validate-settlement-contention-vectors.mjs": "VALIDATOR",
+    "verify-settlement-contention-vectors.py": "VALIDATOR",
   };
   const roles = Object.fromEntries(loadReviewManifest().entries
     .filter((entry) => Object.hasOwn(expectedRoles, entry.path))

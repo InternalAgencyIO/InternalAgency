@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 21:09 UTC
+Updated: 2026-07-31 21:31 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `bc63996`
+Previously published public increment: `05b9c97`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -404,8 +404,21 @@ This status file deliberately does not claim a self-referential commit hash.
   in every compact scenario; and
 - explicit no-validator, no-RPC, no-wallet, no-transaction, no-receipt,
   no-review, and no-activation capability gates.
+- a fully closed Draft-07 schema for the compact settlement-contention
+  artifact, with no field for expanded state, schedules, traces, or attempts;
+- independent zero-dependency Python replay of all six admission/fault
+  outcomes without importing or executing the JavaScript reference engine;
+- exact cross-runtime reproduction of six conflicts, four rollbacks, six
+  commits, two terminal rejections, and 1,000-pair/zero-vault/120-60 accounting;
+- independent source hashing, scenario-commitment reconstruction, ordered
+  scenario-set reconstruction, and winner-equivalent final-state consistency;
+- compact semantic replay commitment
+  `34049424beac2fd7869365de35419cf86a3824f4eb2a6e5b1a8f9110475ed914`;
+  and
+- rejection of extra/expanded properties, changed economics with recomputed
+  commitments, stale sources, and network/review/activation authority claims.
 
-Current proposal-only result: **292 tests passed**. This consists of 28 protected
+Current proposal-only result: **302 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -467,6 +480,10 @@ Seven settlement-contention regeneration, lock-derivation, final-slot winner,
 two-transfer rollback, reverse-order, invalid-schedule, source-safety, compact-
 evidence, and manifest-coverage tests complete the network-free concurrency
 suite.
+Five closed-schema, unexpected-property, malformed/accounting, authority-gate,
+and manifest-coverage tests plus five independent Python replay, recomputed-
+commitment mutation, expanded-schedule, source-drift, source-safety, and
+manifest-coverage tests complete the portable contention-verification suite.
 
 ## Current guarantees of the reference model
 
@@ -498,7 +515,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a portable closed schema and independent zero-dependency Python replay for
-the compact settlement-contention evidence. Keep expanded state and schedules
-runtime-only; do not contact a local validator, Devnet, or Mainnet; and preserve
-every HOLD, rejection-only, and non-authority gate.
+Add a deterministic cross-runtime mutation corpus for compact contention
+evidence. Cover schema, semantic, commitment, source-binding, and authority-
+gate failures while keeping expanded state and schedules runtime-only; do not
+contact a local validator, Devnet, or Mainnet; preserve every HOLD and
+non-authority gate.

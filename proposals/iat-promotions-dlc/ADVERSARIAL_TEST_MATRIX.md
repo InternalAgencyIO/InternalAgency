@@ -282,8 +282,13 @@ security audit or deployment approval.
 | Admission order is silently biased | `reversing admission order deterministically reverses...` | Reversed deterministic schedule reverses the winner while preserving exact accounting |
 | A schedule leaks a writable lock | `invalid scheduler operations fail...` | Any nonempty terminal lock table fails closed |
 | Contention evidence claims validator, RPC, wallet, transaction, receipt, or activation authority | `contention tooling is offline, powerless...` | Source scans, fixed false fields, HOLD labels, and network `NONE` reject the claim |
+| Compact contention evidence adds an unknown or expanded field | `schema rejects unexpected root...`; `Python replay rejects expanded schedules...` | Closed objects reject root, nested, scenario, expanded-state, and expanded-schedule properties |
+| A producer changes reward accounting and recomputes public commitments | `Python replay rejects changed economics...` | Independent semantic replay rejects the 119.999999999-IAT hero result despite internally consistent recomputed commitments |
+| A contention source binding is stale | `Python replay rejects source-binding drift...` | Python independently hashes the three fixed local sources and rejects digest drift without executing proposal code |
+| A portable surface claims network, wallet, transaction, review, or activation authority | `schema permanently rejects network...`; `Python verifier stays offline...` | Closed constants, source scans, and the report's fixed `NONE`/false gates fail closed |
 
 ## Next matrix expansion
 
-- portable closed schema and independent cross-runtime replay for compact
-  settlement-contention evidence.
+- deterministic cross-runtime mutation corpus for compact contention evidence,
+  covering schema, semantic, commitment, source-binding, and authority-gate
+  failures without publishing expanded schedules or contacting any chain.

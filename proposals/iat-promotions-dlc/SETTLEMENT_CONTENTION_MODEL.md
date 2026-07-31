@@ -45,6 +45,15 @@ The artifact stores only compact state, timeline, trace, attempt-outcome, and
 scenario commitments. It does not store expanded states, timelines, traces, or
 attempt inputs.
 
+## Portable verification
+
+The companion closed Draft-07 schema rejects unknown properties at every
+object boundary and holds all network, deployment, review, and activation
+capabilities false. An independent zero-dependency Python verifier reconstructs
+the six compact lock/economic outcomes without importing or executing this
+JavaScript model. Expanded state and seven-step schedules remain runtime-only.
+See `SETTLEMENT_CONTENTION_PORTABILITY.md` for the exact boundary.
+
 ## Limits and trust boundary
 
 This model intentionally does not claim local-validator, Devnet, or Mainnet
@@ -58,7 +67,10 @@ activation. Nothing here releases any existing HOLD gate.
 ```text
 node proposals/iat-promotions-dlc/generate-settlement-contention-vectors.mjs --write
 node proposals/iat-promotions-dlc/validate-settlement-contention-vectors.mjs
+python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-model.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 ```
 
 These commands are local verification only. They cannot deploy, simulate for
