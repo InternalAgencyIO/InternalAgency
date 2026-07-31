@@ -784,6 +784,13 @@ rejected and regenerated.
 | **Lilongwe City Centre Rift-Light Intercept**<br><img src="620-malawi-lilongwe-city-centre-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise sun prism above Lilongwe's wooded modern City Centre"> | **Blantyre Mandala House Veranda Cipher**<br><img src="621-malawi-blantyre-mandala-house-veranda-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Blantyre's historic Mandala House veranda and garden"> |
 | **Mulanje Massif Granite Cloud Extraction**<br><img src="622-malawi-mulanje-massif-granite-extraction.png" width="420" alt="The trio restoring a climate-data beacon before Mount Mulanje's massive granite faces and high cloud"> | **Cape Maclear Lake Malawi Starlight Relay**<br><img src="623-malawi-cape-maclear-lake-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet night relay above Cape Maclear's Lake Malawi shoreline"> |
 
+## World Series - Africa - Batch 151: Zambia
+
+| | |
+|---|---|
+| **Lusaka Cairo Road Copper Intercept**<br><img src="624-zambia-lusaka-cairo-road-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise skyline prism above Lusaka's Cairo Road and cylindrical FINDECO House tower"> | **Shiwa Ng'andu Manor Veranda Cipher**<br><img src="625-zambia-shiwa-ngandu-manor-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Shiwa Ng'andu's stone manor, columned veranda and highland gardens"> |
+| **South Luangwa Oxbow Climate Extraction**<br><img src="626-zambia-south-luangwa-oxbow-extraction.png" width="420" alt="The trio restoring a climate-data beacon above South Luangwa's oxbow lagoon, tawny floodplain and distant escarpment"> | **Victoria Falls Moon-Spray Relay**<br><img src="627-zambia-victoria-falls-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet night relay before Victoria Falls, its basalt gorge and moonlit spray"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
