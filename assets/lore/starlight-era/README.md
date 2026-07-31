@@ -714,6 +714,13 @@ rejected and regenerated.
 | **Kathmandu Durbar Marg Prism Intercept**<br><img src="580-nepal-kathmandu-durbar-marg-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber mountain prism along Kathmandu's Durbar Marg with Himalayan foothills beyond"> | **Bhaktapur Pottery Square Brick Cipher**<br><img src="581-nepal-bhaktapur-pottery-square-brick-cipher.png" width="420" alt="The trio sealing a turquoise archive prism among Bhaktapur Pottery Square's red-brick courtyards and clay vessels"> |
 | **Kali Gandaki Gorge Wind Extraction**<br><img src="582-nepal-kali-gandaki-gorge-wind-extraction.png" width="420" alt="The trio restoring a climate-data beacon above the Kali Gandaki Gorge beneath the Annapurna and Dhaulagiri ranges"> | **Pokhara Phewa Lake Night Relay**<br><img src="583-nepal-pokhara-phewa-lake-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald signal relay beside Pokhara's Phewa Lake at blue hour"> |
 
+## World Series - Africa - Batch 141: Cameroon
+
+| | |
+|---|---|
+| **Douala Bonanjo Wouri Prism Intercept**<br><img src="584-cameroon-douala-bonanjo-wouri-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia securing an amber river prism above Douala's Bonanjo skyline, Wouri River, and bridge geometry"> | **Dschang Civilisations Museum Lattice Cipher**<br><img src="585-cameroon-dschang-civilisations-museum-lattice-cipher.png" width="420" alt="The trio sealing a turquoise archive prism outside Dschang's Museum of Civilisations overlooking Lake Dschang"> |
+| **Mount Cameroon Volcanic Mist Extraction**<br><img src="586-cameroon-mount-cameroon-volcanic-mist-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Mount Cameroon's black lava ridges and equatorial cloud"> | **Limbe Black-Sand Coast Night Relay**<br><img src="587-cameroon-limbe-black-sand-coast-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet coast relay beside Limbe's Atlantic black-sand shore at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
