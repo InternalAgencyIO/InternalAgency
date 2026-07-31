@@ -173,11 +173,19 @@ security audit or deployment approval.
 | Review payload carries activation authority | `activation authorization and every non-NONE...` | Encoder rejects authorized activation and every non-`NONE` effect |
 | Payload is truncated, extended, or has wrong magic or decision code | `truncation, trailing bytes...` | Decoder rejects every ambiguous byte sequence |
 | Public vectors contain a key, signature, secret, raw identity, handle, or wallet field | `public vectors contain no key...` | Forbidden-field and non-attestation checks fail |
+| Adapter accepts a signature that is valid for an unrelated message | `unrelated valid RFC signatures...` | All three canonical review payloads reject the unrelated RFC signature |
+| Public key, signature, or message byte changes | `changed public key, signature...` | Detached Ed25519 verification returns false |
+| Attestation has malformed material, extra fields, or wrong algorithm | `malformed detached material...` | Exact shape and public-material format checks fail without throwing |
+| Claimed payload digest differs from canonical receipt bytes | `payload digest mismatch stops...` | Verification stops before the signature check |
+| Invalid or activation-authorizing payload reaches cryptographic verification | `invalid or activation-authorizing...` | Canonical payload validation fails first and result remains non-activating |
+| Valid cryptography is presented as semantic review, independence, or activation proof | `cryptographic result never claims...` | All three non-cryptographic conclusions remain false or `NONE` |
+| Verify-only adapter gains keygen, signing, wallet, or network capability | `adapter source contains no signing...` | Allowed imports and forbidden-call scan fail |
 
 ## Next matrix expansion
 
-- detached Ed25519 verification adapter for externally supplied receipt
-  attestations, with public verification vectors but no signing or keygen;
+- complete review-receipt acceptance policy combining target, scope,
+  independence, semantic, and detached-signature gates without publishing a
+  signed receipt;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.

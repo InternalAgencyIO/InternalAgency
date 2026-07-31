@@ -100,6 +100,11 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Public unsigned payload/hash vectors](./independent-review-receipt-payload-vectors.v1.json)
 - [Payload-vector generator](./generate-independent-review-receipt-payload-vectors.mjs)
 - [Payload-vector validator](./validate-independent-review-receipt-payload-vectors.mjs)
+- [Verify-only receipt-attestation contract](./INDEPENDENT_REVIEW_VERIFICATION.md)
+- [Detached Ed25519 verification adapter](./independent-review-receipt-verifier.mjs)
+- [Public verification vectors](./independent-review-receipt-verification-vectors.v1.json)
+- [Verification-vector generator](./generate-independent-review-receipt-verification-vectors.mjs)
+- [Verification-vector validator](./validate-independent-review-receipt-verification-vectors.mjs)
 - [Proposal-only tests](./tests/)
 
 Run the proposal-only checks with:
@@ -113,6 +118,7 @@ node proposals/iat-promotions-dlc/generate-event-reconciliation-vectors.mjs --wr
 node proposals/iat-promotions-dlc/generate-event-reconciliation-schema-examples.mjs --write
 node proposals/iat-promotions-dlc/generate-independent-review-receipt-template.mjs --write
 node proposals/iat-promotions-dlc/generate-independent-review-receipt-payload-vectors.mjs --write
+node proposals/iat-promotions-dlc/generate-independent-review-receipt-verification-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-review-manifest.mjs --write
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
@@ -126,6 +132,7 @@ node proposals/iat-promotions-dlc/validate-event-reconciliation-schemas.mjs
 node proposals/iat-promotions-dlc/validate-review-manifest.mjs
 node proposals/iat-promotions-dlc/validate-independent-review-receipt-template.mjs
 node proposals/iat-promotions-dlc/validate-independent-review-receipt-payload-vectors.mjs
+node proposals/iat-promotions-dlc/validate-independent-review-receipt-verification-vectors.mjs
 python proposals/iat-promotions-dlc/verify-review-manifest.py
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
@@ -147,6 +154,7 @@ node --test proposals/iat-promotions-dlc/tests/review-manifest.test.mjs
 node --test proposals/iat-promotions-dlc/tests/review-manifest-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/independent-review-receipt-template.test.mjs
 node --test proposals/iat-promotions-dlc/tests/independent-review-receipt-payload.test.mjs
+node --test proposals/iat-promotions-dlc/tests/independent-review-receipt-verification.test.mjs
 ```
 
 ## Deliberate isolation
