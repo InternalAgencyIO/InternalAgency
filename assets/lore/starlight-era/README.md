@@ -679,6 +679,13 @@ rejected and regenerated.
 | **Maputo Railway Station Prism Intercept**<br><img src="560-mozambique-maputo-railway-station-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber civic-light prism beside Maputo Central Railway Station"> | **Island of Mozambique Fort Cipher**<br><img src="561-mozambique-island-fort-sao-sebastiao-cipher.png" width="420" alt="The trio sealing a cobalt archive prism outside Fort Sao Sebastiao above the Indian Ocean"> |
 | **Gorongosa Mountain Data Extraction**<br><img src="562-mozambique-gorongosa-mountain-data-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Mount Gorongosa and the Great Rift valley"> | **Maputo-Katembe Bridge Night Relay**<br><img src="563-mozambique-maputo-katembe-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald signal relay above Maputo-Katembe Bridge and Maputo Bay"> |
 
+## World Series - Africa - Batch 136: Ghana
+
+| | |
+|---|---|
+| **Accra National Theatre Prism Intercept**<br><img src="564-ghana-accra-national-theatre-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber prism beside Accra National Theatre and its sculptural civic plaza"> | **Cape Coast Castle Light Cipher**<br><img src="565-ghana-cape-coast-castle-cipher.png" width="420" alt="The trio sealing a cobalt archive prism outside Cape Coast Castle above the Atlantic"> |
+| **Kakum Canopy Data Extraction**<br><img src="566-ghana-kakum-canopy-data-extraction.png" width="420" alt="The trio restoring an environmental-data beacon beside Kakum National Park canopy walkway"> | **Tema Harbour Night Relay**<br><img src="567-ghana-tema-harbour-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald signal relay above Tema Harbour and the Gulf of Guinea"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
