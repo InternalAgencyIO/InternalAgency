@@ -735,6 +735,13 @@ rejected and regenerated.
 | **Sydney Opera House Harbour Intercept**<br><img src="592-australia-sydney-opera-house-harbour-intercept.png" width="420" alt="Radiance, Ellie, and Alia securing an amber harbour prism above Sydney's Opera House sails and Harbour Bridge"> | **Melbourne Royal Exhibition Lattice Cipher**<br><img src="593-australia-melbourne-royal-exhibition-lattice-cipher.png" width="420" alt="The trio sealing a turquoise archive prism outside Melbourne's Royal Exhibition Building and Carlton Gardens"> |
 | **Great Barrier Reef Data Extraction**<br><img src="594-australia-great-barrier-reef-data-extraction.png" width="420" alt="The trio restoring an ocean-data beacon above the turquoise coral shelves and deep-blue channels of the Great Barrier Reef"> | **Melbourne Flinders Street Night Relay**<br><img src="595-australia-melbourne-flinders-street-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet city relay opposite Melbourne's Flinders Street Station at blue hour"> |
 
+## World Series - Africa - Batch 144: Niger
+
+| | |
+|---|---|
+| **Niamey Kennedy Bridge River Intercept**<br><img src="596-niger-niamey-kennedy-bridge-river-intercept.png" width="420" alt="Radiance, Ellie, and Alia securing an amber river prism above Niamey's Niger River bend and Kennedy Bridge"> | **Agadez Old Town Earthwork Cipher**<br><img src="597-niger-agadez-old-town-earthwork-cipher.png" width="420" alt="The trio sealing a turquoise archive prism among Agadez's secular earthen old-town lanes and carved doors"> |
+| **Aïr Mountains Timia Granite Extraction**<br><img src="598-niger-air-mountains-timia-granite-extraction.png" width="420" alt="The trio restoring a climate-data beacon among the Aïr Mountains' granite ridges near Timia"> | **Ténéré Desert Starlight Relay**<br><img src="599-niger-tenere-desert-starlight-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet starlight relay across the dunes of the Ténéré desert"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
