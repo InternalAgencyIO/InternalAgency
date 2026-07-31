@@ -742,6 +742,13 @@ rejected and regenerated.
 | **Niamey Kennedy Bridge River Intercept**<br><img src="596-niger-niamey-kennedy-bridge-river-intercept.png" width="420" alt="Radiance, Ellie, and Alia securing an amber river prism above Niamey's Niger River bend and Kennedy Bridge"> | **Agadez Old Town Earthwork Cipher**<br><img src="597-niger-agadez-old-town-earthwork-cipher.png" width="420" alt="The trio sealing a turquoise archive prism among Agadez's secular earthen old-town lanes and carved doors"> |
 | **Aïr Mountains Timia Granite Extraction**<br><img src="598-niger-air-mountains-timia-granite-extraction.png" width="420" alt="The trio restoring a climate-data beacon among the Aïr Mountains' granite ridges near Timia"> | **Ténéré Desert Starlight Relay**<br><img src="599-niger-tenere-desert-starlight-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet starlight relay across the dunes of the Ténéré desert"> |
 
+## World Series - Asia - Batch 145: North Korea
+
+| | |
+|---|---|
+| **Pyongyang Taedong River Aurora Intercept**<br><img src="600-north-korea-pyongyang-taedong-river-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise aurora prism above Pyongyang's Taedong River and geometric skyline"> | **Kaesong Old City Roofline Cipher**<br><img src="601-north-korea-kaesong-old-city-cipher.png" width="420" alt="The trio sealing an amber archive prism among Kaesong's tiled roofs, timber eaves, and stone lanes"> |
+| **Mount Kumgang Granite Light Extraction**<br><img src="602-north-korea-mount-kumgang-granite-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Mount Kumgang's granite peaks and clear mountain water"> | **Wonsan Coast Starlight Relay**<br><img src="603-north-korea-wonsan-coast-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet starlight relay beside Wonsan's calm cobalt bay"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
