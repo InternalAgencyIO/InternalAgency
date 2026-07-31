@@ -1,0 +1,551 @@
+{
+  "manifestVersion": 1,
+  "manifestId": "iat-promotions-dlc-review-manifest-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "manifestApplied": false
+  },
+  "hashContract": {
+    "hash": "SHA-256",
+    "contentBytes": "valid UTF-8 with CRLF and CR normalized to LF",
+    "pathBytes": "UTF-8 forward-slash proposal-relative path",
+    "ordering": "ascending unsigned UTF-8 path bytes",
+    "leafDomain": "iat-promotions-dlc-review-leaf-v1",
+    "leafPreimage": "domain || 0x00 || path || 0x00 || normalizedByteLength || 0x00 || rawContentSha256",
+    "nodeDomain": "iat-promotions-dlc-review-node-v1",
+    "nodePreimage": "domain || 0x00 || rawLeftSha256 || rawRightSha256",
+    "oddNode": "duplicate final node"
+  },
+  "selfReference": {
+    "path": "review-manifest.v1.json",
+    "includedInTree": false,
+    "reason": "A manifest cannot contain its own content digest without a recursive fixed-point claim."
+  },
+  "summary": {
+    "coveredFileCount": "72",
+    "totalNormalizedByteLength": "682340",
+    "countsByRole": {
+      "ARTIFACT": "30",
+      "GENERATOR": "7",
+      "VALIDATOR": "10",
+      "TEST": "17",
+      "SUPPORTING_SOURCE": "8"
+    }
+  },
+  "entries": [
+    {
+      "path": "ABI_OFFSET_MANIFEST.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "2594",
+      "contentSha256": "8d5a422eaab4010ac3b9b44758bf58cf8d671065358c8c935ea55fe6312f77ea",
+      "leafSha256": "9ccba41127e0c08a3e89095bf630cc4cc8abe7e6a9c32ca141e3f3b4f052350d"
+    },
+    {
+      "path": "ADVERSARIAL_TEST_MATRIX.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "19378",
+      "contentSha256": "784d4fc8649b3d0eba864c596da6f9aec73c0c0e6895379938780f0210d88591",
+      "leafSha256": "d586a35a99aacae07e6c86e7183b210d364dd1c2aa4759f1d7e9a05c7c29e112"
+    },
+    {
+      "path": "ATTESTATION_AND_TRANSPARENCY.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "6293",
+      "contentSha256": "d1f2864e8aa7782de8a7b3f805050751f6ec0f60c6d3eec68ad68f0f23b281be",
+      "leafSha256": "335d8e5cf4d85889165ab74b9beadfd3e5ab1a283b8f06d79caf760bfafc4624"
+    },
+    {
+      "path": "COMPOSITION_PREVIEW.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "3201",
+      "contentSha256": "0d6142832015bee4c07f9fd457c02a573dea89db72c68fcaa4ced8631ce51f44",
+      "leafSha256": "9ff22bca54c11d994a0da16d88b9642e66f9028f9896515cf99225606a14be5e"
+    },
+    {
+      "path": "EVENT_INTERFACE.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "3788",
+      "contentSha256": "41a5034716dd6b789de5679820db0f2ecac7179579fb1fd5288d11e56a790861",
+      "leafSha256": "8e43d216cf63750be3319d528553783af727a7632f3a63930f830ba64d33f034"
+    },
+    {
+      "path": "EVENT_RECONCILIATION.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "6851",
+      "contentSha256": "80a2b678ed72ae0aaf04a94da4ac746ec32379142036dfd0caa0bc99b806bd02",
+      "leafSha256": "7904b74a78aeaec0f1cba4797f1d6a701f2876b121321e68ac30548d6e17aa0d"
+    },
+    {
+      "path": "KEY_LIFECYCLE_AMENDMENT.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "5092",
+      "contentSha256": "a23dcd096fcf1f9e452447840e2bab6059cc447bd698923aacca302aed8db799",
+      "leafSha256": "78f883b8adfdd327e9c3bd3377ba21705e0d7a915a7d5995760fd6375889aeac"
+    },
+    {
+      "path": "PLAN.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "18300",
+      "contentSha256": "01027d0eb14d8421807a98a8b13594d50c71f9e2b2ab2a5a7d635d1e5e7cb3dc",
+      "leafSha256": "450026d1d849068f90c6eb0a16c9557084843a284fe52ea0c077b07796856ef3"
+    },
+    {
+      "path": "PROGRAM_INTERFACE.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "7700",
+      "contentSha256": "a3432df5e1aed2bcf73109b9dce4104b8087cef1ab8008c44df7c29f4580242a",
+      "leafSha256": "8ca34c90399587161d02778de5ed8f4a1ee317846dca98ccdebd0dd0ae01c53a"
+    },
+    {
+      "path": "README.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "8522",
+      "contentSha256": "d5774d777e8d8723364f4d914e3eb6c899f9cec42438be1acd26e7df1d0a9969",
+      "leafSha256": "2f4b939363bd8d2d29e145343dd3539326d6a49e152387339e25f83edaea974f"
+    },
+    {
+      "path": "REVIEW_MANIFEST.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "2367",
+      "contentSha256": "1d99eaaa0d4f0fcec5b8cbacc3b6b5b086f98c153a50d480c3d0eddc2032a3eb",
+      "leafSha256": "d374ef15ac047642a62f0e04f6278dc82b48690246027802d0d8f86d413dcd69"
+    },
+    {
+      "path": "STATUS.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "12179",
+      "contentSha256": "8a175c46209d7890178c07e9d13d9005ac4d7250c570fed04d5afdbe74d3fbe7",
+      "leafSha256": "badcf61afc94a090f85be6ae398ed5ace698b3d67ff8e36d6590384e1e61445d"
+    },
+    {
+      "path": "THREAT_MODEL.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "7587",
+      "contentSha256": "152ddd2d0fdd4c4098bf13ca0f20e15d3a09eb0b167c22f1f250a249a4a15997",
+      "leafSha256": "3bcde931b31842d48a567bf86183db3aad668cef34f4346aa657c9e25e52657c"
+    },
+    {
+      "path": "VERIFIER_KEY_LIFECYCLE.md",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "4680",
+      "contentSha256": "b36f971f1fbec15d1a6b80f6390822211bc6c981ab16220938361ede2f888b70",
+      "leafSha256": "dd1e44b2066d7b1f698996dba75b6527e3f812f0e784f0ef911096844107a96b"
+    },
+    {
+      "path": "attestation-transparency.mjs",
+      "role": "SUPPORTING_SOURCE",
+      "normalizedByteLength": "12935",
+      "contentSha256": "d69de930da34dfefc7385a61ae9b44f4b4c2ea133ff81562c78acfbbca316286",
+      "leafSha256": "c26f03235b5d2b3d072d4dd2f903894e1eb7301ac67ff3a3e5bed6631eabf1cb"
+    },
+    {
+      "path": "compose-program-interface-preview.mjs",
+      "role": "GENERATOR",
+      "normalizedByteLength": "9195",
+      "contentSha256": "3a2e223c4d30fb2fb22657081dbf9601c7d47423464999a1f7df64124fd923c8",
+      "leafSha256": "6ea7d64a43ea34a56b27f0c7e7b081c6ec99ef1073c69c81e8d4b3cdabe554c9"
+    },
+    {
+      "path": "ed25519-public-vectors.v0.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "1132",
+      "contentSha256": "d2e3ce0422d8257deed994aa24a5e4731c0f815eb69d3a8eaba5705668260913",
+      "leafSha256": "ca1d1c94d262f9d0aeba9b55427f8326d3bb33f9db8e1dfd5b82c094c4342e5f"
+    },
+    {
+      "path": "event-reconciler.mjs",
+      "role": "SUPPORTING_SOURCE",
+      "normalizedByteLength": "23275",
+      "contentSha256": "b972508ca546cd2b775a90e22853f8e50c11453412b25a24f4695098ccb80130",
+      "leafSha256": "fb3e07cf0860da05dcc8835f86a27097fcc94d768647f55657870023cfbc4042"
+    },
+    {
+      "path": "event-reconciliation-evidence.schema.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "5999",
+      "contentSha256": "6eb080854dfba530908f0e916c8e853a7b1a6cc6e8e387e7911d04a02bf56357",
+      "leafSha256": "a65787510de85fbcbfb9d7a59361bed829a36ad940e580c3ea58a04b02294ae1"
+    },
+    {
+      "path": "event-reconciliation-policy.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "1820",
+      "contentSha256": "c3d052a881248b18ec1ffd67e5551bf507b31281d86cf2325413e02d05393353",
+      "leafSha256": "bd9cb26b224c56e486a9dcc97506f300611d89d19f633efafbe9bdbec4454a22"
+    },
+    {
+      "path": "event-reconciliation-result.schema.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "3619",
+      "contentSha256": "a0615e79126cf2a32da7f34208df25d03e43266c1248fa9c0d60f3079708c21e",
+      "leafSha256": "325cb368613c403345a2f9cf352ef904f8249659ceef678c61911be99982f14a"
+    },
+    {
+      "path": "event-reconciliation-schema-examples.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "18423",
+      "contentSha256": "5652bc2d27491ad04c0009fb4dfbc3ae341abb3539402675ce01c56e88016e7c",
+      "leafSha256": "ccf8db6e103efea8d9342e8383e26fa9d0387f6f1b12876a994a81dc49cbb024"
+    },
+    {
+      "path": "event-reconciliation-vectors.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "11355",
+      "contentSha256": "d996cedd47714bf6f7c53407c11f3c7a55f69bf49a752b6ed267522b9d2e597d",
+      "leafSha256": "aa6f016311c478b4b6abcfeb084dd2824808ebfc0547f945a44819890103565a"
+    },
+    {
+      "path": "generate-abi-offset-manifest.mjs",
+      "role": "GENERATOR",
+      "normalizedByteLength": "6977",
+      "contentSha256": "4a0b6b2a710341a8f51ee236d13a57a5a98cdc73720d94a8d034f4ab8aaf763e",
+      "leafSha256": "f6e986ffbc9b95c2581807f32bec400224a9edebc065553e76ab18dce322eb8a"
+    },
+    {
+      "path": "generate-composed-interface-vectors.mjs",
+      "role": "GENERATOR",
+      "normalizedByteLength": "4964",
+      "contentSha256": "7403875e851be660cd8de589aef241539163e8a53a443df037d5deb982404f98",
+      "leafSha256": "5d1838595365b3e31db42a956cf443db82ef672335de74be46221b095b28a944"
+    },
+    {
+      "path": "generate-event-reconciliation-schema-examples.mjs",
+      "role": "GENERATOR",
+      "normalizedByteLength": "5167",
+      "contentSha256": "893d0588a74a2a1f9f72b80f2552e5014758d8c67b34359615fa4c4f5d4cf140",
+      "leafSha256": "81c05744bce105641fe5be6d25008f932705be9ce832c46d6b31ba6be457fbf4"
+    },
+    {
+      "path": "generate-event-reconciliation-vectors.mjs",
+      "role": "GENERATOR",
+      "normalizedByteLength": "16107",
+      "contentSha256": "457ddbe8c18a9787092caf3d1cb803548e6bbbe75bc7bca69cc264a8bad3ed6e",
+      "leafSha256": "4ff5a8dba2899359207067d1a5a8e16e5c7bb9e3d409a706f54172537099c604"
+    },
+    {
+      "path": "generate-program-event-vectors.mjs",
+      "role": "GENERATOR",
+      "normalizedByteLength": "3247",
+      "contentSha256": "2b0581b41d27751379698f2311d6ebc693a5b97d3a9aa0965e5c8367b0f53f4e",
+      "leafSha256": "8b393a46f20465599156d67d017fbeb14c80602ebc88d8556c375a782ac7d414"
+    },
+    {
+      "path": "generate-review-manifest.mjs",
+      "role": "GENERATOR",
+      "normalizedByteLength": "6602",
+      "contentSha256": "be970656eb83c4b453fc3173aa25591353aceccf6428fc99fbfbc2e3e4601598",
+      "leafSha256": "4f7a8376d1092e3d80af763480b14cc1bf9ac4f5979f3a15847763aa40d365a0"
+    },
+    {
+      "path": "instruction-transition-adapter.mjs",
+      "role": "SUPPORTING_SOURCE",
+      "normalizedByteLength": "8936",
+      "contentSha256": "7ee2f1cdbe020d1d26ae7d93ec32c559f6c318db6d5166760ecf49ab6ca93d6b",
+      "leafSha256": "0cc9eae5cc167abe76bb1732e0b382fec047907008a5616ed80a3370479baa93"
+    },
+    {
+      "path": "json-schema-subset.mjs",
+      "role": "SUPPORTING_SOURCE",
+      "normalizedByteLength": "6222",
+      "contentSha256": "c33ae26ff4f4345243ac2d215e142466ec6ec9595c219c75975a5f4aee37a604",
+      "leafSha256": "569087fa01b9eb79da3efb1f7dbd24b285888a5f496ff22fabcfd8eeb76bb629"
+    },
+    {
+      "path": "program-event-codec.mjs",
+      "role": "SUPPORTING_SOURCE",
+      "normalizedByteLength": "5116",
+      "contentSha256": "cc8f95cea5c850a547c6b0bea29a1dcd27562767af100e0eef6dd990669e0f4f",
+      "leafSha256": "cfd4ae2408c3cbfaedbacdc8d1203a4043fa5d40c704dc8c4047d8272670b4a7"
+    },
+    {
+      "path": "program-event-interface.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "11919",
+      "contentSha256": "d03fde109cbe35295ab4a75ed80f2bd212a7bc4cd0e75cab8401e9d22603efc7",
+      "leafSha256": "209f2cfb8a2a92e2f9c6ab98cd9c113d57d32ef334927a28d1eb4d59528cb8dc"
+    },
+    {
+      "path": "program-event-vectors.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "15216",
+      "contentSha256": "ee9fae7d170037f7749cc016cf96cafa17f0025b6a07a91e335c2ce7f2291571",
+      "leafSha256": "8d0d627454ad4ea8059b446a9b3a5ed0efcecbabcb65e60d480d362f134e6067"
+    },
+    {
+      "path": "program-interface-abi-offsets.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "56540",
+      "contentSha256": "7d6e037c0a7139a999e5a9babd0d5b5f8899876524d8fecbdd25e5e3550488fe",
+      "leafSha256": "919fbe9f14a00b58b575e38a0db5955bf799bc6e02e501deb8085984d96a6850"
+    },
+    {
+      "path": "program-interface-codec.mjs",
+      "role": "SUPPORTING_SOURCE",
+      "normalizedByteLength": "5140",
+      "contentSha256": "5be154e5d7f4a3addc84a2f199dfd39c5c6404ba4ba716cfcaa17d199d0cdf97",
+      "leafSha256": "efce7a79812544af3e11702bb820bc24844d052c36da90c4d7d8a21a84107cef"
+    },
+    {
+      "path": "program-interface-composition-preview.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "42104",
+      "contentSha256": "fce5420d0cd0b8e3077b68fc7829ce12b3f847a43609fe4d3306d3152df58f09",
+      "leafSha256": "3287696024a5c5c2a1a388bae2799b822797188c00cdc8b98295a675905433bc"
+    },
+    {
+      "path": "program-interface-composition-vectors.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "7375",
+      "contentSha256": "1c3638d6bb2cb6687400253f1507952fcb40f69ff077fe6c0a185425edc73515",
+      "leafSha256": "edf61d3dc48cf2350a4ce9f0801f3e3cfe7ab594cc99d568e839c4b279143621"
+    },
+    {
+      "path": "program-interface-key-lifecycle-amendment.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "11983",
+      "contentSha256": "bfaa03ecc2efbcf0474342982e5365203eab4f262de610a0f732d037a63883bd",
+      "leafSha256": "688e754b8407f5b3d5a1b635a8ee0000d49141196f848de7f5a7d1a7747b3cd6"
+    },
+    {
+      "path": "program-interface-key-lifecycle-vectors.v1.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "2443",
+      "contentSha256": "0a4f764e279fdc26c8a5be6b31a35bd4108f735360779861575a949a880c795c",
+      "leafSha256": "e519bb74a96393b8ccdf21e6fdae34972108a449ee65693aa7cac81d833a1559"
+    },
+    {
+      "path": "program-interface-vectors.v0.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "4703",
+      "contentSha256": "706274722f751e4d167e8253108d9c0b6cfe93f8e898ca44da1e6895338879c5",
+      "leafSha256": "05fb3bba6a716fe578cce54b57290b5b82f76010dc97e6d765684745d68fd7ef"
+    },
+    {
+      "path": "program-interface.v0.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "18001",
+      "contentSha256": "019564ab566e8e8cf2b0d3461b140dac70bc082fd5344f9f7453fa11c44014b5",
+      "leafSha256": "95be0fc6fb0ac45c2950ad6c66767327ee3e2df49b3a6fc3fce9cbe0aa738c3b"
+    },
+    {
+      "path": "promotion-policy.v0.json",
+      "role": "ARTIFACT",
+      "normalizedByteLength": "2780",
+      "contentSha256": "8aaeb384199e2cb2138236a4910f6947244a61c63684ee94a8018c02b5ba48a6",
+      "leafSha256": "d6002f0d7d1f1c29bc5e2ba571aef4d93cb34b8ec4c683cb798eb408ac6cf67f"
+    },
+    {
+      "path": "reference-engine.mjs",
+      "role": "SUPPORTING_SOURCE",
+      "normalizedByteLength": "20302",
+      "contentSha256": "0b9abbb236b2daac2f53d4bb2fb5e31c49eddfcbb55f0fb26e188b4d9aaeb9e6",
+      "leafSha256": "0e7b5c6db9bd3bd7f5a4ecd88146f0301c563d0ad53d9cc48f6bfd04ac23e6ab"
+    },
+    {
+      "path": "tests/abi-offset-manifest.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "7137",
+      "contentSha256": "eaa7c87bca786a075090623c9068daed6f041d84591b0c2faa398f8eb08f66f4",
+      "leafSha256": "e4e1b4204f7831c1654979987032484327081dffcfe47d1dba71c47d84ae8c0b"
+    },
+    {
+      "path": "tests/attestation-transparency.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "9815",
+      "contentSha256": "9e2101f2a79f17d728da032e3df740987fcc9187883b27923a24ccbb07200847",
+      "leafSha256": "0a2fd9af771268b15c5ee7bfda1ee9373b38e62beab9898ecbc19cf1d9d40839"
+    },
+    {
+      "path": "tests/deterministic-byte-fuzz.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "7879",
+      "contentSha256": "fd0291e71d5ed7d3f1b7c879c3cc6ffc7c92fbad1afb051cc700f9300faafa0e",
+      "leafSha256": "fcef4a5374cd6e4d1a442abea42275c61db2f50c1540db3f1bbc934259b5b883"
+    },
+    {
+      "path": "tests/ed25519-public-vectors.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "2256",
+      "contentSha256": "461b9c388971398cf1fb70cf66487b71bb843ab0e5436aa98771e7b8fcddd596",
+      "leafSha256": "61d09f0dfb8d486c5e2ab06bbed8fe6bb322c96e386e7a4a81e49019677c2bc4"
+    },
+    {
+      "path": "tests/event-reconciler.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "19216",
+      "contentSha256": "aac2d65c0e1956faf46a846ff5fa4cbb78e3b117e832c934a2bfbda89b76e380",
+      "leafSha256": "09c39de8d7cb41d0d104467af766ce7138bf47bd06a6aa2d47ec7cf44b502853"
+    },
+    {
+      "path": "tests/event-reconciliation-schema.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "5105",
+      "contentSha256": "8b587475f250b1af395e59af36ff84b40c282011a5fe46b9a723c55fa05f408e",
+      "leafSha256": "dd0a4265d1cd59e984959f1a1783cb7ec2911a135601f952e8e4095ec3ceadc9"
+    },
+    {
+      "path": "tests/event-reconciliation-vectors.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "5555",
+      "contentSha256": "e67495997d66eded8cfc25770c9381b94608b0887c8c064e3ca9b6c717465c54",
+      "leafSha256": "79a65c88d8953ae179c368d3406c6faa1ac70942c39b4b031568f7b18b984a78"
+    },
+    {
+      "path": "tests/instruction-transition-adapter.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "10101",
+      "contentSha256": "2f2f9297f1b7d9bc6496fceac030716f0fac86cf45bc62a683f2189c04d58fba",
+      "leafSha256": "90781b571e9410cc37161292ba33c1f162167c1ab601d60449ac145f36516973"
+    },
+    {
+      "path": "tests/key-lifecycle-amendment.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "8039",
+      "contentSha256": "1253dc946816d6c2f235ba2acd8d4f090917387d60fd77df38f0cf01710264f2",
+      "leafSha256": "25d1d042e5723f00a7bdc2e457fb89391cd01834f19426e785e94f9987c5fbf1"
+    },
+    {
+      "path": "tests/policy.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "2862",
+      "contentSha256": "ccd3b662a0293a7850ae68186fee347b73c223d81ecc51e68315fda310911dce",
+      "leafSha256": "2e5710e968d766625d7a5dca16430bb229330263bdb6373700c070d2735ae7bf"
+    },
+    {
+      "path": "tests/program-event-interface.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "9199",
+      "contentSha256": "9fb313bf110a3192a09585342e4516d0a73a03668f40c91972935b00ea7ccc73",
+      "leafSha256": "20f69b937fc68ac46d688ab9b2bd3112a69a3d89c383a7cd4782e9fd03618129"
+    },
+    {
+      "path": "tests/program-interface-composition.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "7923",
+      "contentSha256": "da87886da864179dcdd12a368fa94a16db6c007a33ebb33f019509de379e9a53",
+      "leafSha256": "52ae76a24d86695aa24ef42955f0a3411f0fd0fa5b69244c06e03fafdefcf0cc"
+    },
+    {
+      "path": "tests/program-interface.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "6914",
+      "contentSha256": "4de5f207024fa1e258e000988a439195e1586f40b49ef8416e50ebb22fb9ff89",
+      "leafSha256": "34500deeaedb39e140ca8e435ad1389fc04606e5f02c87619d6cc2e720827433"
+    },
+    {
+      "path": "tests/randomized-state-machine.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "5118",
+      "contentSha256": "66e69998b8ed785260b98c95732c2118fbd73d13bc9dcb4d7e4adc0a7ed7fdce",
+      "leafSha256": "da604e0e140c6372b943c01dcfe06a1f8c5bad43096e1c78385f51c86622c3a6"
+    },
+    {
+      "path": "tests/reference-engine.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "16388",
+      "contentSha256": "fa633c13a81c483184a8a020bb53c44e659d1f6f39b1614e3d934c730965e98c",
+      "leafSha256": "8f7684255a61dc0ca2ac554128ec5f069f2a19558718bb084fa0a340ad696719"
+    },
+    {
+      "path": "tests/review-manifest.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "5846",
+      "contentSha256": "5d06b48bdaeed2da77b64fe6be93e0f7f62a07977acdc1938216b2b28fcacfd0",
+      "leafSha256": "7c7e64316e24bbca8f505ea6de56774291deec65f892a203f20c46e937277a7d"
+    },
+    {
+      "path": "tests/verifier-key-lifecycle.test.mjs",
+      "role": "TEST",
+      "normalizedByteLength": "8602",
+      "contentSha256": "01759e154875227eb1f41b6a7724bdeb8497606cbbb2a7819a6cea23d470f94a",
+      "leafSha256": "10d19d8989bc24a51a6b8c9e8a9a1a89a67d9109acf708a3668e6342b623e87d"
+    },
+    {
+      "path": "validate-abi-offset-manifest.mjs",
+      "role": "VALIDATOR",
+      "normalizedByteLength": "7388",
+      "contentSha256": "51645a53e7337ea49346ebb9a1e097400850174404dca1914b88e20f54bf6c49",
+      "leafSha256": "1fd9b57c8fa7426078d305221d84fbb5cd2115499c05fd3a772ca3a6e8ba417e"
+    },
+    {
+      "path": "validate-ed25519-public-vectors.mjs",
+      "role": "VALIDATOR",
+      "normalizedByteLength": "3962",
+      "contentSha256": "a823d66b1718ba556089afce3a1703d4ae2399fb357cd94e15e1fa771561bef7",
+      "leafSha256": "96316b447bd4a7f4eacff81962d46e2de66f1084a26457f87d7b2f551d0c0618"
+    },
+    {
+      "path": "validate-event-reconciliation-schemas.mjs",
+      "role": "VALIDATOR",
+      "normalizedByteLength": "7380",
+      "contentSha256": "9456031e5c2978547aef207c12daa5a405ea45352f2e173c4e263ab9e6bede89",
+      "leafSha256": "e57ec618628d50daa9ff20eeedd0f20557a5b72eeb13cd248fc879a101e6906a"
+    },
+    {
+      "path": "validate-event-reconciliation-vectors.mjs",
+      "role": "VALIDATOR",
+      "normalizedByteLength": "5592",
+      "contentSha256": "1f69866a27113a0cd3f636a0ddfd01a2fff4577f6cbd6a72e921f0f386eec95b",
+      "leafSha256": "5849063ac0af2dce17615313dfa0aa1e6518acfe63ad99463b71857e4e3a5983"
+    },
+    {
+      "path": "validate-key-lifecycle-amendment.mjs",
+      "role": "VALIDATOR",
+      "normalizedByteLength": "10033",
+      "contentSha256": "cca4195f80aa89ba4152aaa7a65ac1f931bc261e6da2766aba67257abdd84bbd",
+      "leafSha256": "a8182a37a8f4e4209c69705f15d63b8a01c54173680404530b8fc4733a6f46ac"
+    },
+    {
+      "path": "validate-policy.mjs",
+      "role": "VALIDATOR",
+      "normalizedByteLength": "7977",
+      "contentSha256": "c650dfd08f02f3a4e603c426d517611b0a745b1bebea1d870c63558f0c35b489",
+      "leafSha256": "1071f27caaf070253199afc6c540a902791047e6e04494706d3bccd4c4cef13b"
+    },
+    {
+      "path": "validate-program-event-interface.mjs",
+      "role": "VALIDATOR",
+      "normalizedByteLength": "9176",
+      "contentSha256": "33f93be4cd293854d8d28d240cd36080fad42743cf104278adf34393f33bf602",
+      "leafSha256": "16421316993e97cfcdbb69237475de8a6096f7f44a44463cdc596804235324da"
+    },
+    {
+      "path": "validate-program-interface-composition.mjs",
+      "role": "VALIDATOR",
+      "normalizedByteLength": "7149",
+      "contentSha256": "c24c652785b82c71e3a8b30f49408ba74805af0abc997cdc80ea3f2dac697505",
+      "leafSha256": "95a652e6673ccc739a2536ed07095d60f0227ead74fd3289bee6648b2feacec1"
+    },
+    {
+      "path": "validate-program-interface.mjs",
+      "role": "VALIDATOR",
+      "normalizedByteLength": "6852",
+      "contentSha256": "cf5f7de3db2001999edd416897cd66467ae5479497b6ea6d208d131744fc0400",
+      "leafSha256": "3ee0538e21307e48a744bf05b8420d9b964879dbdb291d45dfbf3b604e336016"
+    },
+    {
+      "path": "validate-review-manifest.mjs",
+      "role": "VALIDATOR",
+      "normalizedByteLength": "5668",
+      "contentSha256": "c5f9289623af0c4f7870fb2e6c3462ee9af4c2661317d9d85f791f3ca85211fb",
+      "leafSha256": "cc1d11ce65ee2bfc274efc18fb2f709e0e00135e240ed9e3c80141162f1303fa"
+    },
+    {
+      "path": "verifier-key-lifecycle.mjs",
+      "role": "SUPPORTING_SOURCE",
+      "normalizedByteLength": "15079",
+      "contentSha256": "0cc845f659a32966185b18f00c2244e126463385a8d878e0aa8110d463d7079f",
+      "leafSha256": "d839a0f72cf8288e82b32516a61aef25ef8bab3398eb3874287a82b8c4599f74"
+    }
+  ],
+  "treeRootSha256": "96497829e488f1d1eafb187cf6a8bb20bae3d0033bdd8f90873cf22019eec57f"
+}

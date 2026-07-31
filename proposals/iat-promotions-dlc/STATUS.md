@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 14:09 UTC
+Updated: 2026-07-31 14:24 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `97ed0a7`
+Previously published public increment: `a9b66f1`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -146,8 +146,23 @@ This status file deliberately does not claim a self-referential commit hash.
   evidence example;
 - schema source, open-object, economics, type, pattern, enum, required-field,
   extra-field, authority, privacy, and deployment-drift tests.
+- deterministic content-addressed inventory of every non-self proposal file;
+- normalized UTF-8 content hashes, domain-separated leaf hashes, and one
+  deterministic binary Merkle root;
+- explicit classification and counts for artifacts, generators, validators,
+  tests, and supporting source;
+- fail-closed symbolic-link, unknown-type, absolute-path, traversal,
+  duplicate-path, malformed-digest, stale-content, stale-role, and stale-root
+  guards;
+- cross-platform LF/CRLF reproduction without weakening path or content
+  commitments;
+- an explicit, honest self-reference exclusion instead of an impossible
+  recursive self-hash claim;
+- no private evidence, identity, OAuth, signature, secret, or signing material
+  in the published review inventory; and
+- fixed network-free, undeployable, and unapplied manifest status gates.
 
-Current proposal-only result: **139 tests passed**. This consists of 28 protected
+Current proposal-only result: **146 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -157,6 +172,7 @@ composition and drift tests, eleven ABI offset/conformance tests, plus twelve
 program-event interface tests and ten event/account reconciliation tests.
 Five compact reconciliation-vector and Merkle-commitment tests complete the
 compact-vector suite, and six Draft-07 schema/example tests complete the current
+suite. Seven content-addressed review-manifest tests complete the review-surface
 suite.
 
 ## Current guarantees of the reference model
@@ -189,8 +205,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a content-addressed review manifest and deterministic tree root covering
-every proposal artifact, validator, generator, and test entry point. Preserve
-the privacy boundary and every unapplied and undeployable gate. No production
-import, chain connection, wallet operation, or site deployment is needed for
-that work.
+Add an independent zero-dependency Python verifier and fixed intermediate
+Merkle vectors for the published review manifest. Preserve the privacy boundary
+and every unapplied and undeployable gate. No production import, chain
+connection, wallet operation, or site deployment is needed for that work.

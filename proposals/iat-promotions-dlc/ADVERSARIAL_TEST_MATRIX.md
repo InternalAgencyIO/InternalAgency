@@ -150,11 +150,17 @@ security audit or deployment approval.
 | Schema opens an object, changes economics, or releases status | `open objects, economics drift...` | Schema contract and source-digest validation fail |
 | Schema adds raw X identity, handle, OAuth, or signing fields | `schema properties expose commitments...` | Privacy-field scan rejects the schema |
 | Structurally valid evidence violates accounting semantics | `every valid evidence example...` | Semantic reconciler remains the required second validation layer |
+| Proposal file content, normalized length, path, or role changes under a stale review root | `path order, content changes...` | Per-file content/leaf hashes, deterministic regeneration, and the tree root fail |
+| Review entry is absolute, traversing, duplicated, malformed, or self-recursive | `absolute, traversing...` | Path-safety, uniqueness, digest, and explicit self-reference guards fail closed |
+| Checkout changes LF to CRLF | `CRLF and LF checkouts...` | UTF-8 newline normalization reproduces the same content hashes and tree root |
+| Validator, generator, test, artifact, or supporting source disappears | `all validator, generator...` | Filesystem regeneration or required-role coverage rejects the stale manifest |
+| Review manifest claims mainnet, a program ID, deployment, or application | `manifest status cannot claim...` | Fixed HOLD status gates reject the manifest |
+| Review manifest publishes private evidence instead of paths and hashes | `manifest publishes only paths...` | Entry-shape and private-field scans reject the artifact |
 
 ## Next matrix expansion
 
-- content-addressed review manifest and deterministic tree root for every
-  proposal artifact, validator, and test entry point;
+- independent zero-dependency Python verification of the published review
+  manifest and fixed intermediate Merkle vectors;
 - canonical campaign-envelope signatures using a reviewed external test-vector
   generator without publishing signing material;
 - local-validator transaction rollback and account-lock contention.
