@@ -665,6 +665,13 @@ rejected and regenerated.
 | **Kuala Lumpur KLCC Prism Intercept**<br><img src="552-malaysia-kuala-lumpur-klcc-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an emerald prism above KLCC Park and the Petronas Twin Towers"> | **Penang George Town Shophouse Cipher**<br><img src="553-malaysia-penang-george-town-shophouse-cipher.png" width="420" alt="The trio sealing a cobalt archive prism among George Town's pastel heritage shophouses and five-foot ways"> |
 | **Sabah Kinabalu Cloud Prism Extraction**<br><img src="554-malaysia-sabah-kinabalu-cloud-prism-extraction.png" width="420" alt="The trio restoring a climate-data beacon above Mount Kinabalu and Crocker Range rainforest"> | **Penang Bridge Night Relay**<br><img src="555-malaysia-penang-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising three completed light keys above Penang Bridge and the Malacca Strait"> |
 
+## World Series - Asia - Batch 134: Saudi Arabia
+
+| | |
+|---|---|
+| **Riyadh KAFD Prism Intercept**<br><img src="556-saudi-arabia-riyadh-kafd-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber prism among Riyadh KAFD's faceted towers and elevated skybridges"> | **AlUla Old Town Cipher**<br><img src="557-saudi-arabia-alula-old-town-cipher.png" width="420" alt="The trio sealing a cobalt archive prism beside AlUla Old Town's mudbrick houses, date palms, and sandstone escarpment"> |
+| **Rub al Khali Data Extraction**<br><img src="558-saudi-arabia-rub-al-khali-data-extraction.png" width="420" alt="The trio restoring a climate-data beacon above the immense red-orange dunes of the Rub al Khali"> | **Jeddah Corniche Night Relay**<br><img src="559-saudi-arabia-jeddah-corniche-night-relay.png" width="420" alt="Radiance, Ellie, and Alia raising completed light keys above Jeddah Corniche, the Red Sea waterfront, and offshore fountain"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
