@@ -34,12 +34,12 @@ check(index.network === "devnet", "public evidence index must remain devnet-only
 check(index.mainnetStatus === "HOLD", "public evidence must not clear mainnet HOLD");
 check(index.independentReviewRequired === true, "independent review must remain required");
 check(index.secretMaterialIncluded === false, "secret-material declaration must remain false");
-check(Array.isArray(index.records) && index.records.length === 8, "expected eight indexed records");
+check(Array.isArray(index.records) && index.records.length === 10, "expected ten indexed records");
 check(
   JSON.stringify(index.canonicalAtPublication) === JSON.stringify([
     "v2-initialization-20260730T074603Z.json",
-    "v2-features-20260731T035210Z.json",
-    "chain-status-20260731T064845Z.json",
+    "v2-features-20260731T101732Z.json",
+    "chain-status-20260731T102046Z.json",
   ]),
   "canonical evidence set is not pinned to the latest reviewed records",
 );
@@ -62,7 +62,7 @@ const init = JSON.parse(
   await readFile(path.join(root, "v2-initialization-20260730T074603Z.json"), "utf8"),
 );
 const feature = JSON.parse(
-  await readFile(path.join(root, "v2-features-20260731T035210Z.json"), "utf8"),
+  await readFile(path.join(root, "v2-features-20260731T101732Z.json"), "utf8"),
 );
 const legacy = JSON.parse(
   await readFile(path.join(root, "legacy-v1-devnet-ceremony-20260729.json"), "utf8"),
@@ -71,13 +71,13 @@ const legacyReceipt = JSON.parse(
   await readFile(path.join(root, "chain-status-20260730T123453Z.json"), "utf8"),
 );
 const receipt = JSON.parse(
-  await readFile(path.join(root, "chain-status-20260731T064845Z.json"), "utf8"),
+  await readFile(path.join(root, "chain-status-20260731T102046Z.json"), "utf8"),
 );
 
 check(init.network === "devnet" && init.mainnetStatus === "HOLD", "V2 initialization boundary drift");
 check(init.transactions?.length === 7, "V2 initialization must retain seven transactions");
 check(feature.network === "devnet" && feature.mainnetStatus === "HOLD", "V2 feature boundary drift");
-check(feature.transactions?.length === 13, "latest V2 feature snapshot must retain 13 transactions");
+check(feature.transactions?.length === 14, "latest V2 feature snapshot must retain 14 transactions");
 check(
   feature.status === "PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW",
   "latest feature snapshot must remain explicitly partial",
@@ -85,6 +85,10 @@ check(
 check(
   feature.positions?.length === 3 && feature.positions.every(Boolean),
   "latest feature snapshot must retain three real stake positions",
+);
+check(
+  feature.positions?.[0]?.paid === "19230769" && feature.positions?.[0]?.settledMask === "1",
+  "latest feature snapshot must retain the finalized standard week-8 settlement",
 );
 check(feature.coreReward?.paid === "326923076", "latest feature snapshot core APY payment drift");
 check(
@@ -109,6 +113,7 @@ const expectedFeatureActions = new Set([
   "CREATE_SWITCHBOARD_RANDOMNESS",
   "COMMIT_CCC_ROUND_7",
   "REVEAL_CCC_ROUND_7",
+  "SETTLE_STANDARD_POSITION_WEEK_8",
 ]);
 const observedFeatureActions = new Set(feature.transactions.map(({ action }) => action));
 check(
@@ -126,7 +131,7 @@ check(
 );
 check(receipt.network === "devnet" && receipt.mainnetStatus === "HOLD", "chain receipt boundary drift");
 check(receipt.signingOrBroadcastPerformed === false, "chain receipt must stay read-only");
-check(receipt.results?.length === 24, "chain receipt must retain 24 transaction statuses");
+check(receipt.results?.length === 25, "chain receipt must retain 25 transaction statuses");
 check(
   receipt.results?.every((result) => result.confirmationStatus === "finalized" && result.err === null),
   "chain receipt contains a non-finalized or failed transaction",
@@ -138,7 +143,7 @@ const expectedSignatures = new Set([
   ...feature.transactions.map(({ signature }) => signature),
 ]);
 const receiptSignatures = new Set(receipt.results.map(({ signature }) => signature));
-check(expectedSignatures.size === 24, "expected signature union must contain 24 unique values");
+check(expectedSignatures.size === 25, "expected signature union must contain 25 unique values");
 check(
   expectedSignatures.size === receiptSignatures.size
     && [...expectedSignatures].every((signature) => receiptSignatures.has(signature)),
@@ -157,6 +162,6 @@ if (failures.length) {
 }
 
 console.log(
-  "Public devnet evidence validation passed: eight indexed records, 24 finalized signatures, CC0, no secret-bearing fields, mainnet HOLD.",
+  "Public devnet evidence validation passed: ten indexed records, 25 finalized signatures, CC0, no secret-bearing fields, mainnet HOLD.",
 );
 

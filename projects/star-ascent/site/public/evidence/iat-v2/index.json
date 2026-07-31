@@ -1,6 +1,6 @@
 {
   "schema": "iat-public-evidence-index/v1",
-  "publishedAtUtc": "2026-07-31T06:48:45.158Z",
+  "publishedAtUtc": "2026-07-31T10:20:46.785Z",
   "license": "CC0-1.0",
   "network": "devnet",
   "mainnetStatus": "HOLD",
@@ -9,8 +9,8 @@
   "repository": "https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/projects/star-ascent/site/public/evidence/iat-v2",
   "canonicalAtPublication": [
     "v2-initialization-20260730T074603Z.json",
-    "v2-features-20260731T035210Z.json",
-    "chain-status-20260731T064845Z.json"
+    "v2-features-20260731T101732Z.json",
+    "chain-status-20260731T102046Z.json"
   ],
   "records": [
     {
@@ -65,8 +65,8 @@
       "file": "v2-features-20260731T035210Z.json",
       "bytes": 12136,
       "sha256": "d97b769a19d9af0fb3711a5c873754c423a651042c677ee5800aee4eca81f325",
-      "scope": "Latest V2 on-chain feature rehearsal snapshot",
-      "status": "PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW",
+      "scope": "Prior V2 on-chain feature rehearsal snapshot",
+      "status": "PARTIAL_SUPERSEDED_BY_LATER_SNAPSHOT",
       "transactions": 13
     },
     {
@@ -76,6 +76,22 @@
       "scope": "Read-only devnet status receipt for the current canonical transaction set",
       "status": "24_OF_24_FINALIZED_NO_REPORTED_ERROR",
       "transactions": 24
+    },
+    {
+      "file": "v2-features-20260731T101732Z.json",
+      "bytes": 12668,
+      "sha256": "4c81fe0dc4e5ec92bf8ac24d73e0c923eff02159d8f03674c13909c82b4d6b85",
+      "scope": "Latest V2 on-chain feature rehearsal snapshot with the first player settlement",
+      "status": "PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW",
+      "transactions": 14
+    },
+    {
+      "file": "chain-status-20260731T102046Z.json",
+      "bytes": 4959,
+      "sha256": "9b2bfa33f82e67a88d109c96173263ecc1b216d10bea751aa60793595d302093",
+      "scope": "Read-only devnet status receipt for the latest canonical transaction set",
+      "status": "25_OF_25_FINALIZED_NO_REPORTED_ERROR",
+      "transactions": 25
     }
   ]
 }
