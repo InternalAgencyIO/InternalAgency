@@ -210,9 +210,15 @@ security audit or deployment approval.
 | Node validator or renderer hides an implementation-specific result | `Python and Node produce identical...` | Independent Python reproduces all ten complete result objects and normalized Markdown outputs |
 | One published diagnostic is changed after generation | `independent vector verification rejects...` | Python comparison exits nonzero and names the changed scenario |
 | Independent verifier gains network, write, signing, wallet, or authority capability | `independent Python preflight is local-read-only...` | Source capability checks and fixed false/`NONE` authority fields fail |
+| Cryptographic library is broken or bypassed | `both externally sourced RFC primitive controls verify` | Two primary-source RFC positive controls must verify |
+| An unrelated valid signature is accepted for the exact campaign envelope | `both unrelated RFC signatures reject...` | Exact canonical message reaches Ed25519 verification and rejects |
+| Any signed campaign field changes without detection | `all eleven canonical field mutations...` | Rebuilt canonical envelope reaches and fails the signature gate |
+| Signature byte or public key is substituted | `cryptographic mutations fail...` | Verify-only adapter rejects both mutations |
+| Domain, scheme, version, or attestation ID bypasses signature ordering | same | Four fixed guards reject before signature verification |
+| Negative controls are presented as positive campaign integration | `campaign-envelope vectors reproduce...` | Missing positive vector remains machine-readable HOLD; no receipt/review/activation effect |
 
 ## Next matrix expansion
 
-- canonical campaign-envelope signatures using a reviewed external test-vector
-  generator without publishing signing material;
+- external positive campaign-vector intake schema and verify-only acceptance
+  gate without accepting or generating signing material;
 - local-validator transaction rollback and account-lock contention.

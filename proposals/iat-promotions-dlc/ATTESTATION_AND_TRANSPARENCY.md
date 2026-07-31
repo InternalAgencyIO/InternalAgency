@@ -147,3 +147,11 @@ This proves the public verification primitive, not the future program's
 preinstruction parser or a production verifier deployment. Binding audited
 Ed25519 verification, exact canonical envelope bytes, the reviewed public key,
 and Solana's Instructions sysvar remains required before any Devnet prototype.
+
+The held campaign-envelope verification vectors now bind the exact canonical
+message to a real verify-only Ed25519 adapter. Both externally sourced RFC
+signatures correctly reject that unrelated message, eleven canonical field
+mutations reach and fail the signature gate, and cryptographic/pre-signature
+guards remain ordered. No positive campaign-envelope signature is published;
+that missing independent vector remains an explicit integration HOLD. See
+[`CAMPAIGN_ENVELOPE_VERIFICATION.md`](./CAMPAIGN_ENVELOPE_VERIFICATION.md).

@@ -52,6 +52,11 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Interface validator](./validate-program-interface.mjs)
 - [Public-key-only RFC 8032 vectors](./ed25519-public-vectors.v0.json)
 - [Ed25519 public-vector validator](./validate-ed25519-public-vectors.mjs)
+- [Campaign-envelope verification boundary](./CAMPAIGN_ENVELOPE_VERIFICATION.md)
+- [Verify-only campaign-envelope adapter](./campaign-envelope-verifier.mjs)
+- [Rejection-only campaign-envelope vectors](./campaign-envelope-verification-vectors.v1.json)
+- [Campaign-envelope vector generator](./generate-campaign-envelope-verification-vectors.mjs)
+- [Campaign-envelope vector validator](./validate-campaign-envelope-verification-vectors.mjs)
 - [Verifier-key lifecycle reference policy](./VERIFIER_KEY_LIFECYCLE.md)
 - [Network-free verifier-key lifecycle model](./verifier-key-lifecycle.mjs)
 - [Verifier-registry interface amendment](./KEY_LIFECYCLE_AMENDMENT.md)
@@ -147,6 +152,7 @@ node proposals/iat-promotions-dlc/generate-independent-review-receipt-acceptance
 node proposals/iat-promotions-dlc/generate-reviewer-bundle-gate-report.mjs --write
 node proposals/iat-promotions-dlc/generate-reviewer-bundle-schema-examples.mjs --write
 node proposals/iat-promotions-dlc/generate-reviewer-bundle-preflight-vectors.mjs --write
+node proposals/iat-promotions-dlc/generate-campaign-envelope-verification-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-review-manifest.mjs --write
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
@@ -165,6 +171,7 @@ node proposals/iat-promotions-dlc/validate-independent-review-receipt-acceptance
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-gate-report.mjs
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-schemas.mjs
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-preflight-vectors.mjs
+node proposals/iat-promotions-dlc/validate-campaign-envelope-verification-vectors.mjs
 python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-review-manifest.py
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
@@ -193,6 +200,7 @@ node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-linter.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight-python.test.mjs
+node --test proposals/iat-promotions-dlc/tests/campaign-envelope-verification.test.mjs
 ```
 
 ## Deliberate isolation
