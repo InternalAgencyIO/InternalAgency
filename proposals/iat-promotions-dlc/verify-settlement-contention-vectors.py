@@ -22,6 +22,7 @@ ARTIFACT_NAME = "settlement-contention-vectors.v1.json"
 MUTATION_ARTIFACT_NAME = "settlement-contention-mutation-vectors.v1.json"
 COMPOSITION_ARTIFACT_NAME = "settlement-contention-composition-vectors.v1.json"
 COMPOSITION_SCHEMA_ARTIFACT_NAME = "settlement-contention-composition-schema-vectors.v1.json"
+DIAGNOSTIC_REPRESENTATION_ARTIFACT_NAME = "settlement-contention-composition-diagnostic-representation-audit.v1.json"
 HOLD_LABELS = [
     "DRAFT",
     "INACTIVE",
@@ -956,6 +957,155 @@ def verify_composition_schema_vectors(root: Path, vectors_path: Path) -> tuple[l
     }
 
 
+def reverse_json_keys(value: Any) -> Any:
+    if isinstance(value, list):
+        return [reverse_json_keys(item) for item in value]
+    if isinstance(value, dict):
+        return {key: reverse_json_keys(item) for key, item in reversed(list(value.items()))}
+    return value
+
+
+def diagnostic_representations(base: dict[str, Any]) -> list[tuple[str, str]]:
+    base_lf = json.dumps(base, ensure_ascii=False, indent=2, separators=(",", ": ")) + "\n"
+    reversed_lf = json.dumps(reverse_json_keys(base), ensure_ascii=False, indent=2, separators=(",", ": ")) + "\n"
+    return [
+        ("BASE_LF", base_lf),
+        ("REVERSED_KEYS_LF", reversed_lf),
+        ("BASE_CRLF", base_lf.replace("\n", "\r\n")),
+    ]
+
+
+def verify_diagnostic_representation_audit(root: Path, vectors_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        vectors = load_json(vectors_path)
+        base = load_json(root / COMPOSITION_ARTIFACT_NAME)
+        schema = load_json(root / "settlement-contention-composition-vectors.schema.v1.json")
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read diagnostic representation audit: {error}"], {}
+    exact_keys(vectors, {"vectorVersion", "vectorId", "status", "sources", "contract", "summary", "cases"}, "diagnostic representation audit", errors)
+    expect(vectors.get("vectorVersion") == 1, "diagnostic representation version drift", errors)
+    expect(vectors.get("vectorId") == "iat-promotions-dlc-contention-composition-diagnostic-representations-v1", "diagnostic representation ID drift", errors)
+    status = vectors.get("status")
+    if exact_keys(status, STATUS_KEYS, "diagnostic representation status", errors):
+        expect(status == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "diagnostic representation HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": ("settlement-contention-composition-vectors.v1.json", "canonicalSha256", canonical_sha256(base)),
+        "closedSchema": ("settlement-contention-composition-vectors.schema.v1.json", "canonicalSha256", canonical_sha256(schema)),
+        "mutationCatalog": ("settlement-contention-composition-schema-mutations.mjs", "normalizedTextSha256", normalized_text_sha256(root / "settlement-contention-composition-schema-mutations.mjs")),
+        "nodeEvaluator": ("settlement-contention-composition-diagnostic-representations.mjs", "normalizedTextSha256", normalized_text_sha256(root / "settlement-contention-composition-diagnostic-representations.mjs")),
+        "pythonVerifier": ("verify-settlement-contention-vectors.py", "normalizedTextSha256", normalized_text_sha256(Path(__file__).resolve())),
+        "generator": ("generate-settlement-contention-composition-diagnostic-representation-audit.mjs", "normalizedTextSha256", normalized_text_sha256(root / "generate-settlement-contention-composition-diagnostic-representation-audit.mjs")),
+    }
+    sources = vectors.get("sources")
+    if exact_keys(sources, set(expected_sources), "diagnostic representation sources", errors):
+        for name, (path, digest_key, digest) in expected_sources.items():
+            entry = sources.get(name)
+            if exact_keys(entry, {"path", digest_key}, f"diagnostic representation sources.{name}", errors):
+                expect(entry.get("path") == path, f"diagnostic representation sources.{name} path drift", errors)
+                expect(entry.get(digest_key) == digest, f"diagnostic representation sources.{name} digest drift", errors)
+    contract = vectors.get("contract") if isinstance(vectors.get("contract"), dict) else {}
+    expect(contract.get("mode") == "DETERMINISTIC_DIAGNOSTIC_REPRESENTATION_AUDIT", "diagnostic representation mode drift", errors)
+    expect(contract.get("mutationCount") == 12 and contract.get("representationCountPerMutation") == 3 and contract.get("trialCount") == 36, "diagnostic representation counts drift", errors)
+    expect(contract.get("representationIds") == ["BASE_LF", "REVERSED_KEYS_LF", "BASE_CRLF"], "diagnostic representation IDs drift", errors)
+    for field in ["exactDiagnosticsStable", "canonicalCandidateStable", "distinctRepresentationDigestsRequired"]:
+        expect(contract.get(field) is True, f"diagnostic representation contract {field} drift", errors)
+    for field in ["serializedRepresentationsStored", "runtimeCandidatesStored", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"diagnostic representation contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "diagnostic representation activation effect drift", errors)
+
+    cases = vectors.get("cases")
+    if not isinstance(cases, list) or len(cases) != len(COMPOSITION_SCHEMA_MUTATIONS):
+        errors.append("diagnostic representation cases must contain exactly twelve entries")
+        cases = []
+    common_records: list[dict[str, Any]] = []
+    case_commitments: list[str] = []
+    for index, (case_id, _family, mutation) in enumerate(COMPOSITION_SCHEMA_MUTATIONS):
+        if index >= len(cases):
+            break
+        case = cases[index]
+        expected_case_keys = {
+            "caseId", "mutation", "representations", "representationSetCommitmentSha256",
+            "diagnosticsStable", "canonicalCandidateStable", "allRejected",
+            "serializedRepresentationsStored", "runtimeCandidatesStored", "receiptIssued",
+            "reviewCompleted", "activationAuthorized", "activationEffect", "caseCommitmentSha256",
+        }
+        if not exact_keys(case, expected_case_keys, f"diagnostic representation cases[{index}]", errors):
+            continue
+        trials: list[dict[str, Any]] = []
+        for representation_id, serialized in diagnostic_representations(base):
+            represented_base = json.loads(serialized, object_pairs_hook=reject_duplicate_pairs)
+            candidate = apply_pointer_mutation(represented_base, mutation)
+            diagnostics = validate_schema_subset(schema, candidate)
+            trials.append({
+                "representationId": representation_id,
+                "representationSha256": hashlib.sha256(serialized.encode("utf-8")).hexdigest(),
+                "candidateCommitmentSha256": canonical_sha256(candidate),
+                "diagnostics": diagnostics,
+                "diagnosticCommitmentSha256": canonical_sha256(diagnostics),
+                "accepted": False,
+            })
+        baseline = trials[0]
+        stable = all(
+            trial["candidateCommitmentSha256"] == baseline["candidateCommitmentSha256"] and
+            trial["diagnostics"] == baseline["diagnostics"] and
+            trial["diagnosticCommitmentSha256"] == baseline["diagnosticCommitmentSha256"] and
+            trial["accepted"] is False for trial in trials
+        )
+        distinct = len({trial["representationSha256"] for trial in trials}) == 3
+        representation_set_commitment = canonical_sha256([{
+            "representationId": trial["representationId"],
+            "representationSha256": trial["representationSha256"],
+        } for trial in trials])
+        expect(case.get("caseId") == case_id, f"{case_id} representation case ID drift", errors)
+        expect(case.get("mutation") == mutation, f"{case_id} representation mutation drift", errors)
+        expect(case.get("representations") == trials, f"{case_id} representation trial drift", errors)
+        expect(stable, f"{case_id} representation diagnostics drift", errors)
+        expect(distinct, f"{case_id} representation digests collide", errors)
+        expect(case.get("representationSetCommitmentSha256") == representation_set_commitment, f"{case_id} representation-set drift", errors)
+        for field in ["diagnosticsStable", "canonicalCandidateStable", "allRejected"]:
+            expect(case.get(field) is True, f"{case_id} {field} drift", errors)
+        for field in ["serializedRepresentationsStored", "runtimeCandidatesStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+            expect(case.get(field) is False, f"{case_id} {field} drift", errors)
+        expect(case.get("activationEffect") == "NONE", f"{case_id} activation effect drift", errors)
+        core = {key: value for key, value in case.items() if key != "caseCommitmentSha256"}
+        case_commitment = canonical_sha256(core)
+        expect(case.get("caseCommitmentSha256") == case_commitment, f"{case_id} representation case commitment drift", errors)
+        case_commitments.append(case_commitment)
+        common_records.append({
+            "caseId": case_id,
+            "candidateCommitmentSha256": baseline["candidateCommitmentSha256"],
+            "diagnosticCommitmentSha256": baseline["diagnosticCommitmentSha256"],
+            "representationSetCommitmentSha256": representation_set_commitment,
+            "stable": True,
+            "accepted": False,
+        })
+    summary = vectors.get("summary") if isinstance(vectors.get("summary"), dict) else {}
+    common_commitment = canonical_sha256(common_records)
+    expect(summary.get("mutationCount") == "12" and summary.get("trialCount") == "36", "diagnostic representation summary count drift", errors)
+    for field in ["allDiagnosticsStable", "allCanonicalCandidatesStable", "allRepresentationDigestsDistinctWithinCase", "allRejected"]:
+        expect(summary.get(field) is True, f"diagnostic representation summary {field} drift", errors)
+    expect(summary.get("commonReplayCommitmentSha256") == common_commitment, "diagnostic representation common replay drift", errors)
+    expect(summary.get("caseSetCommitmentSha256") == canonical_sha256(case_commitments), "diagnostic representation case-set drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "mutationCount": len(common_records),
+        "trialCount": 3 * len(common_records),
+        "commonReplayCommitmentSha256": common_commitment,
+        "allDiagnosticsStable": len(common_records) == 12,
+        "allCanonicalCandidatesStable": len(common_records) == 12,
+        "allRejected": len(common_records) == 12,
+        "serializedRepresentationsStored": False,
+        "runtimeCandidatesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Replay held compact IAT settlement-contention evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -967,10 +1117,15 @@ def main() -> int:
     parser.add_argument("--composition-vectors", type=Path)
     parser.add_argument("--verify-composition-schema-vectors", action="store_true")
     parser.add_argument("--composition-schema-vectors", type=Path)
+    parser.add_argument("--verify-diagnostic-representation-audit", action="store_true")
+    parser.add_argument("--diagnostic-representation-audit", type=Path)
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
-    if arguments.verify_composition_schema_vectors:
+    if arguments.verify_diagnostic_representation_audit:
+        vectors = arguments.diagnostic_representation_audit.resolve() if arguments.diagnostic_representation_audit else root / DIAGNOSTIC_REPRESENTATION_ARTIFACT_NAME
+        errors, report = verify_diagnostic_representation_audit(root, vectors)
+    elif arguments.verify_composition_schema_vectors:
         vectors = arguments.composition_schema_vectors.resolve() if arguments.composition_schema_vectors else root / COMPOSITION_SCHEMA_ARTIFACT_NAME
         errors, report = verify_composition_schema_vectors(root, vectors)
     elif arguments.verify_composition_vectors:
@@ -989,7 +1144,7 @@ def main() -> int:
     else:
         commitment = report.get("commonReplayCommitmentSha256", report.get("replayCommitmentSha256"))
         print(f"Independent compact replay passed: {commitment}")
-    verification_mode = arguments.verify_mutation_vectors or arguments.verify_composition_vectors or arguments.verify_composition_schema_vectors
+    verification_mode = arguments.verify_mutation_vectors or arguments.verify_composition_vectors or arguments.verify_composition_schema_vectors or arguments.verify_diagnostic_representation_audit
     return 2 if errors and verification_mode else (1 if errors else 0)
 
 

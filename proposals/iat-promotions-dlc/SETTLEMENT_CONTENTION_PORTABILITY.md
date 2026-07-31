@@ -41,6 +41,10 @@ minimality checks. See
 Twelve compact schema mutations additionally bind exact Node/Python instance
 and schema pointers, keywords, and messages; see
 `SETTLEMENT_CONTENTION_COMPOSITION_SCHEMA_MUTATIONS.md`.
+The 36-trial diagnostic representation audit separately binds raw key-order
+and line-ending digests while requiring canonical candidates and exact
+diagnostics to remain identical; see
+`SETTLEMENT_CONTENTION_DIAGNOSTIC_REPRESENTATION_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -50,12 +54,14 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --js
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-mutation-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-schema-vectors --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-diagnostic-representation-audit --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-compositions.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema-vectors.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-diagnostic-representation-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

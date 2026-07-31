@@ -17,7 +17,7 @@
   "sources": {
     "baseArtifact": {
       "path": "settlement-contention-composition-vectors.v1.json",
-      "canonicalSha256": "f462b8ce48cc46bb4a557eb1de82e13a05d628f9469a8743f2657882a3bff8a0"
+      "canonicalSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf"
     },
     "closedSchema": {
       "path": "settlement-contention-composition-vectors.schema.v1.json",
@@ -29,7 +29,7 @@
     },
     "pythonVerifier": {
       "path": "verify-settlement-contention-vectors.py",
-      "normalizedTextSha256": "2cb2b787e0d2d51bb63bd67de1217065b6d967bccb4bae03f85e9c244d468544"
+      "normalizedTextSha256": "e3236cf982660bc75890de45175bdc616482c0e43331fa5d8917a77c20d2372d"
     },
     "generator": {
       "path": "generate-settlement-contention-composition-schema-vectors.mjs",
@@ -56,8 +56,8 @@
     "caseCount": "12",
     "allRejected": true,
     "exactDiagnosticsPublished": true,
-    "commonReplayCommitmentSha256": "f7698b7d87a0d5bdfe0aa5a009662cd837fd015d890c87ad1c45dead3866b7fe",
-    "caseSetCommitmentSha256": "ccfec3aa4fab043e56c34c9b9823df6021cd2d08c737867d51b7721e91e25fae",
+    "commonReplayCommitmentSha256": "177a1030a7606fd8370310b237ddf2cf0c25e62870741a72c709caf312ea2118",
+    "caseSetCommitmentSha256": "13b7e986bdf96ab94eeefaba6b479b8b3ed24b6228245bb726ad3744545a8442",
     "runtimeCandidateStored": false,
     "receiptIssued": false,
     "reviewCompleted": false,
@@ -74,7 +74,7 @@
         "value": {}
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "d482f5fc41532a75aca3b5942df471542bd8881fc5fa6a0dd5c7a2e9de24ae86",
+      "candidateCommitmentSha256": "0f46df7cab8ecfef753c962ea04c0db82ccbb14551f93f232f05bb6ac450138c",
       "diagnostics": [
         {
           "instancePath": "/candidate",
@@ -89,7 +89,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "6c03709c88bab23f798346e33e610c54cf352a50bb3ff3f231f97ac8b31c7c2e"
+      "caseCommitmentSha256": "f4e7dddeac424f3a5c2ad7476e95248752f6a5bad75d68d41c67014f4b75a2ec"
     },
     {
       "caseId": "CASE_EXPANDED_STATE",
@@ -100,7 +100,7 @@
         "value": {}
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "5d30151daad4e184377035e10e06d584fb0e81612d9fef9e38e9dbd9238836ed",
+      "candidateCommitmentSha256": "4a085072c37b22d36482c0a14b17029290a7795456844731e08ea742caaa2185",
       "diagnostics": [
         {
           "instancePath": "/cases/0/expandedState",
@@ -115,7 +115,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "bc7ed6900f0099965b381aec5e6bbe15e663dbf4e3e98a0285a5aa706881323f"
+      "caseCommitmentSha256": "532f0d10394631e5bced7b1e6cb25704347f94b08035b9ced0074bfb2436c0e8"
     },
     {
       "caseId": "REMOVAL_TRACE_FIELD",
@@ -126,7 +126,7 @@
         "value": []
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "055d7611ebc1764929ba2c4a726954e38643bc79b657436429c07f2204b8f0de",
+      "candidateCommitmentSha256": "bffcfb2b9ca8a5e7acfd0516b1768f54dda298da8f6177fb8689438c7a387e21",
       "diagnostics": [
         {
           "instancePath": "/cases/0/removalChecks/0/trace",
@@ -141,7 +141,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "e68df26d92275e89de47240e3577f942bf13064d51dce02dc956eeaaecc00588"
+      "caseCommitmentSha256": "f1bd895c94d06376591bf76d5c46a242cadd6ed4d75ae5da9526b433fdc05000"
     },
     {
       "caseId": "STATUS_NETWORK_MAINNET",
@@ -152,7 +152,7 @@
         "value": "MAINNET"
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "5ebd2c4ba53ae011c1bf91262bb85aacb376b0c5a811e4498f268f8be1572b26",
+      "candidateCommitmentSha256": "d7a70b5a31a349b5724d7521ebe08cbcbf73db64965ef3665304ebd378d5347a",
       "diagnostics": [
         {
           "instancePath": "/status/network",
@@ -167,7 +167,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "62b08263d4e3067c53c797ee9e4de174c19614000d7e030c9365e1e264440f92"
+      "caseCommitmentSha256": "c967933eff08c2a4d93bfd0989395d64ed93c28d6e465b29d5e5ed65e6cddb07"
     },
     {
       "caseId": "CONTRACT_RPC_ENABLED",
@@ -178,7 +178,7 @@
         "value": true
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "ce86acdea208a9c2d167df00a5c6481d88300fea69ecb42fdfef797a28001033",
+      "candidateCommitmentSha256": "1050f67f3c9160c911d6fe0652bdf815f7252508f3be1d210636ef88248713c0",
       "diagnostics": [
         {
           "instancePath": "/contract/usesRpc",
@@ -193,7 +193,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "92c23760f40ec691f22928b14aa614140380c40ff3493e015dd18426469b64e9"
+      "caseCommitmentSha256": "58a9812e7baa5d39ddab486c06f0e128fee99b6a2011cb4d664e4ceeef2da5a3"
     },
     {
       "caseId": "CONTRACT_WALLET_ENABLED",
@@ -204,7 +204,7 @@
         "value": true
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "43759b91ae7dae95f4549921dfa4074986e4789d0f0d1bbf035167173509d148",
+      "candidateCommitmentSha256": "d0a51ac0f30e022eae429d0a2855d89475d35cbbb96d5965fd7fab55015b672f",
       "diagnostics": [
         {
           "instancePath": "/contract/usesWallet",
@@ -219,7 +219,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "819eadeccba317bc29416be6faab8d2c30abb0d83810278467d584308159bff6"
+      "caseCommitmentSha256": "817bf019b2628415d3ad6305cd6e87b22636e778b9fdde26b5cf13387644d495"
     },
     {
       "caseId": "CONTRACT_PREPARATION_ENABLED",
@@ -230,7 +230,7 @@
         "value": true
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "31ea11b5b190173f66b3620cf88105835c0cf5836e657dd1f32516a8e7223a2b",
+      "candidateCommitmentSha256": "eb2658185a9bc8c89b1610b698516f271a712bd2a5ebddeacfbab55bb8668e60",
       "diagnostics": [
         {
           "instancePath": "/contract/preparesTransactions",
@@ -245,7 +245,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "2553fee3b20afd00bef171c2e7fa943e5e4f10e4b8becd362db6cbd3690b7902"
+      "caseCommitmentSha256": "11c15b32e5e4d0265f8714a671bdf7822288db1e841ae741697ba2401431142e"
     },
     {
       "caseId": "CONTRACT_ACTIVATION_AUTHORIZED",
@@ -256,7 +256,7 @@
         "value": true
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "7e0c490c8409c633bbf33e32b281e3db06cdbd488794c9f19205da54e9b32e26",
+      "candidateCommitmentSha256": "23194d2083ce108474dbb3509e978cc50c334481f5fb3a77ba3c77c780a7f325",
       "diagnostics": [
         {
           "instancePath": "/contract/activationAuthorized",
@@ -271,7 +271,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "13043d4916e5927123468ba82f05f32fffcb5504df4b0da5a02c811c9805f19d"
+      "caseCommitmentSha256": "a71ec1212fe5e6c116ce4914497561d547a494aee426af5db396fbc14710dab5"
     },
     {
       "caseId": "SUMMARY_REVIEW_COMPLETED",
@@ -282,7 +282,7 @@
         "value": true
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "51fca1e9e88390b79548e8f3a422edb5ec4679d0c3e123ba2915d15d4909eb79",
+      "candidateCommitmentSha256": "66fb34cdf7e44e08d85350fc0f10e5408aa4ec0ae52f2f949a8bf1bfd85c2299",
       "diagnostics": [
         {
           "instancePath": "/summary/reviewCompleted",
@@ -297,7 +297,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "3436fffa36c8b09b0505d5ad7c554675af87b009b08a5f72f90ea65ca6185923"
+      "caseCommitmentSha256": "af3f0692e1f35906d28390517fc21a8fb7dedbb98868d2accb757ac1be872f2d"
     },
     {
       "caseId": "REMOVAL_OBSERVED_TWO_GATES",
@@ -311,7 +311,7 @@
         ]
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "173e466e9cd8a5acec7903d95d68e1b6e2b2a818692edb306bc0dd76f7214e33",
+      "candidateCommitmentSha256": "8de24068af479229383239eb77a520204053b9ccfd63afa867bb2bd69aa60871",
       "diagnostics": [
         {
           "instancePath": "/cases/0/removalChecks/0/observedGates",
@@ -326,7 +326,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "a1dd0d07e2fcb927d1ac300dfa6e56f198d7d7415cf0cb8ddc3c5b47a8205021"
+      "caseCommitmentSha256": "239d98a6fe078561dcb8a918dc49f5195d2ebfb03b29301d0e233ff81eb0b7a9"
     },
     {
       "caseId": "REMOVAL_HASH_UPPERCASE",
@@ -337,7 +337,7 @@
         "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "7013a41b63ba5db861cd5bd9181c9f1d99824be3c153b5c25aae26b6aa0f216e",
+      "candidateCommitmentSha256": "166094f8885a8a497c99f85939517a4dbba8ada4e0b8bb280a5347cc9a96aaf9",
       "diagnostics": [
         {
           "instancePath": "/cases/0/removalChecks/0/candidateCommitmentSha256",
@@ -352,7 +352,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "db4bb70ea5af28f269144ae70b9db96ce827270c3ccbba6fa3626bcb4b40dfbe"
+      "caseCommitmentSha256": "303df7214ab54545c5ab0f73bec405b0e964256714768d0e6a25ac1e2892e5ca"
     },
     {
       "caseId": "REMOVAL_UNKNOWN_GATE",
@@ -363,7 +363,7 @@
         "value": "UNKNOWN"
       },
       "expectedAccepted": false,
-      "candidateCommitmentSha256": "e8243e1088852864239f8b39de684f39589dcf103243702115651f2e7feb5425",
+      "candidateCommitmentSha256": "442ee656153155cfef1cf56e438a7e4e0090eab17318ba86c14c059be94c28ac",
       "diagnostics": [
         {
           "instancePath": "/cases/0/removalChecks/0/remainingGate",
@@ -378,7 +378,7 @@
       "reviewCompleted": false,
       "activationAuthorized": false,
       "activationEffect": "NONE",
-      "caseCommitmentSha256": "7b61ecef04fa1eea7323baa195e05eb7c29aa20fc2efbd9572fbf0f2f220e8f8"
+      "caseCommitmentSha256": "dea702887a0ae99cb440e1e343789919437a7f64e2bb3978c43d80e4054abd9f"
     }
   ]
 }

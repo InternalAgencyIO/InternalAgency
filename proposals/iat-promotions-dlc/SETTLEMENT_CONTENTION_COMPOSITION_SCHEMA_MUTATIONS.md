@@ -38,3 +38,8 @@ These commands are proposal-only and offline. They do not start a validator,
 contact Devnet or Mainnet, access a wallet, prepare, sign, or broadcast a
 transaction, move tokens, issue a receipt, complete review, deploy, or activate
 anything.
+
+The companion
+[`SETTLEMENT_CONTENTION_DIAGNOSTIC_REPRESENTATION_AUDIT.md`](./SETTLEMENT_CONTENTION_DIAGNOSTIC_REPRESENTATION_AUDIT.md)
+proves all twelve exact diagnostics remain stable across reversed key order and
+LF/CRLF serialization in both runtimes.

@@ -297,10 +297,12 @@ security audit or deployment approval.
 | Composition evidence adds an unknown candidate, state, trace, or authority field | `closed schema rejects unknown root, case, and removal properties`; `closed schema rejects released status and operational authority` | Closed Draft-07 objects and constant HOLD fields reject the extra or released claim before semantic replay |
 | Node and Python disagree about the exact location or reason for a composition-schema failure | `independent Python reproduces every exact diagnostic...` | Both runtimes must reproduce the same instance pointer, schema pointer, keyword, message, candidate commitment, and diagnostic commitment for all twelve mutations |
 | A compact schema diagnostic is edited without changing the mutation | `independent Python rejects a changed exact diagnostic with exit 2` | Independent replay recomputes the candidate and exact diagnostic, then exits `2` on any stale pointer or reason |
+| JSON key order changes the canonical candidate or exact schema diagnostic | `canonical candidates and exact diagnostics remain stable across representations` | All twelve mutations replay over recursively reversed object keys with identical canonical candidate and diagnostic commitments |
+| LF and CRLF bytes are conflated with canonical semantic evidence | `LF and CRLF bytes differ without changing parsed rejection evidence` | Raw representation SHA-256 digests differ while parsed candidates and diagnostics remain exactly equal in Node and Python |
 
 ## Next matrix expansion
 
-- add a deterministic diagnostic representation audit proving pointer stability
-  across JSON key-order and LF/CRLF transformations. Preserve runtime-only
-  candidates and every network, wallet, review, deployment, and activation
-  HOLD.
+- add a compact escaped-Unicode and solidus representation corpus proving
+  canonical semantic stability without accepting malformed encodings. Preserve
+  runtime-only candidates and every network, wallet, review, deployment, and
+  activation HOLD.

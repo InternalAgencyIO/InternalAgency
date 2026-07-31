@@ -31,7 +31,7 @@ test("composition schema diagnostic vectors deterministically regenerate", () =>
   assert.deepEqual(generateCompositionSchemaVectors(), artifact);
   assert.equal(artifact.cases.length, 12);
   assert.equal(artifact.summary.commonReplayCommitmentSha256,
-    "f7698b7d87a0d5bdfe0aa5a009662cd837fd015d890c87ad1c45dead3866b7fe");
+    "177a1030a7606fd8370310b237ddf2cf0c25e62870741a72c709caf312ea2118");
 });
 
 test("schema mutation corpus covers closed shape, HOLD, capability, authority, cardinality, hex, and enum families", () => {

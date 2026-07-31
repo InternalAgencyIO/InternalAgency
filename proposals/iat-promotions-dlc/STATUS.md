@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 22:02 UTC
+Updated: 2026-07-31 23:25 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `54cbefb`
+Previously published public increment: `4e53665`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -452,8 +452,15 @@ This status file deliberately does not claim a self-referential commit hash.
   message, candidate commitment, and diagnostic commitment; and
 - shared cross-runtime schema-diagnostic replay commitment
   `f7698b7d87a0d5bdfe0aa5a009662cd837fd015d890c87ad1c45dead3866b7fe`.
+- 36 representation trials spanning every schema mutation over baseline LF,
+  recursively reversed-key LF, and baseline CRLF JSON;
+- distinct raw representation digests with stable canonical candidate,
+  instance pointer, schema pointer, keyword, message, and diagnostic
+  commitments in Node and Python; and
+- shared cross-runtime diagnostic representation replay commitment
+  `e878654551b14af9516e725230dadabdca72433890ff6c8a67cfbba111d0a68a`.
 
-Current proposal-only result: **334 tests passed**. This consists of 28 protected
+Current proposal-only result: **342 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -535,6 +542,10 @@ Eight deterministic diagnostic regeneration, family coverage, JSON Pointer
 provenance, all-rejected, independent Python exact parity, tamper exit,
 compact-publication, source-safety, and manifest-coverage tests complete the
 composition schema mutation suite.
+Eight deterministic representation regeneration, 36-trial coverage, raw-
+digest distinction, canonical/diagnostic stability, LF/CRLF separation,
+independent Python parity, tamper exit, compact-publication, source-safety, and
+manifest-coverage tests complete the diagnostic representation suite.
 
 ## Current guarantees of the reference model
 
@@ -566,7 +577,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a deterministic diagnostic representation audit proving pointer stability
-across JSON key-order and LF/CRLF transformations. Keep candidates runtime-only;
-do not contact a local validator, Devnet, or Mainnet; preserve every network,
-wallet, review, deployment, and activation HOLD.
+Add a compact escaped-Unicode and solidus representation corpus proving
+canonical semantic stability without accepting malformed encodings. Keep
+candidates runtime-only; do not contact a local validator, Devnet, or Mainnet;
+preserve every network, wallet, review, deployment, and activation HOLD.
