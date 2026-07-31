@@ -707,6 +707,13 @@ rejected and regenerated.
 | **Abidjan Plateau Lagoon Intercept**<br><img src="576-cote-divoire-abidjan-plateau-lagoon-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a gold prism above Abidjan's Plateau skyline and Ébrié Lagoon"> | **Grand-Bassam Colonial Quarter Cipher**<br><img src="577-cote-divoire-grand-bassam-colonial-quarter-cipher.png" width="420" alt="The trio sealing a scarlet archive prism among Grand-Bassam's historic pastel arcades"> |
 | **Taï Rainforest Data Extraction**<br><img src="578-cote-divoire-tai-rainforest-data-extraction.png" width="420" alt="The trio restoring a protected forest-data beacon above Taï rainforest buttress roots and emerald canopy"> | **San-Pédro Port Night Relay**<br><img src="579-cote-divoire-san-pedro-port-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an amber signal relay beside San-Pédro's Atlantic port at blue hour"> |
 
+## World Series - Asia - Batch 140: Nepal
+
+| | |
+|---|---|
+| **Kathmandu Durbar Marg Prism Intercept**<br><img src="580-nepal-kathmandu-durbar-marg-prism-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber mountain prism along Kathmandu's Durbar Marg with Himalayan foothills beyond"> | **Bhaktapur Pottery Square Brick Cipher**<br><img src="581-nepal-bhaktapur-pottery-square-brick-cipher.png" width="420" alt="The trio sealing a turquoise archive prism among Bhaktapur Pottery Square's red-brick courtyards and clay vessels"> |
+| **Kali Gandaki Gorge Wind Extraction**<br><img src="582-nepal-kali-gandaki-gorge-wind-extraction.png" width="420" alt="The trio restoring a climate-data beacon above the Kali Gandaki Gorge beneath the Annapurna and Dhaulagiri ranges"> | **Pokhara Phewa Lake Night Relay**<br><img src="583-nepal-pokhara-phewa-lake-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald signal relay beside Pokhara's Phewa Lake at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
