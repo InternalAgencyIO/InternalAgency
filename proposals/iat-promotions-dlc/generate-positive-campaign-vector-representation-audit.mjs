@@ -241,6 +241,24 @@ export function verifyRepresentationAuditMerkleMultiproof(
   return active.get(0) === expectedRootSha256 && used.size === proofMap.size;
 }
 
+export function verifyRepresentationAuditMerkleMultiproofWithExactTreeLeafCount(
+  selectedRecords,
+  candidateTreeLeafCount,
+  committedTreeLeafCount,
+  proofNodes,
+  expectedRootSha256,
+) {
+  return Number.isInteger(candidateTreeLeafCount)
+    && Number.isInteger(committedTreeLeafCount)
+    && candidateTreeLeafCount === committedTreeLeafCount
+    && verifyRepresentationAuditMerkleMultiproof(
+      selectedRecords,
+      candidateTreeLeafCount,
+      proofNodes,
+      expectedRootSha256,
+    );
+}
+
 function greatestCommonDivisor(left, right) {
   let a = left;
   let b = right;
@@ -353,6 +371,101 @@ export function representationAuditOddWidthPropertySummary() {
   };
 }
 
+export function representationAuditTreeLeafCountBoundarySummary() {
+  const cases = representationAuditOddWidthPropertyCases();
+  const roots = [];
+  const committedTreeLeafCounts = [];
+  const outcomes = [];
+  let duplicateFinalRootAliasTreeCount = 0;
+  for (const leafCount of ODD_WIDTH_TREE_LEAF_COUNTS) {
+    const commitments = representationAuditSyntheticRecordCommitments(leafCount);
+    const root = representationAuditMerkleRootSha256(commitments);
+    const explicitlyPaddedRoot = representationAuditMerkleRootSha256([
+      ...commitments,
+      commitments.at(-1),
+    ]);
+    if (root === explicitlyPaddedRoot) duplicateFinalRootAliasTreeCount += 1;
+  }
+  for (const [caseIndex, propertyCase] of cases.entries()) {
+    const commitments = representationAuditSyntheticRecordCommitments(propertyCase.leafCount);
+    const root = representationAuditMerkleRootSha256(commitments);
+    const nodes = representationAuditMerkleMultiproof(commitments, propertyCase.indices);
+    const selected = propertyCase.indices.map((index) => ({
+      index,
+      recordCommitmentSha256: commitments[index],
+    }));
+    roots.push(root);
+    committedTreeLeafCounts.push(String(propertyCase.leafCount));
+    for (const [relation, candidateTreeLeafCount] of [
+      ["BELOW", propertyCase.leafCount - 1],
+      ["EXACT", propertyCase.leafCount],
+      ["ABOVE", propertyCase.leafCount + 1],
+    ]) {
+      const rawMultiproofAccepted = verifyRepresentationAuditMerkleMultiproof(
+        selected,
+        candidateTreeLeafCount,
+        nodes,
+        root,
+      );
+      const exactTreeLeafCountAccepted =
+        verifyRepresentationAuditMerkleMultiproofWithExactTreeLeafCount(
+          selected,
+          candidateTreeLeafCount,
+          propertyCase.leafCount,
+          nodes,
+          root,
+        );
+      outcomes.push({
+        caseIndex: String(caseIndex),
+        relation,
+        candidateTreeLeafCount: String(candidateTreeLeafCount),
+        rawMultiproofAccepted,
+        exactTreeLeafCountAccepted,
+      });
+    }
+  }
+  const exactOutcomes = outcomes.filter((outcome) => outcome.relation === "EXACT");
+  const mismatchedOutcomes = outcomes.filter((outcome) => outcome.relation !== "EXACT");
+  return {
+    propertyCaseCount: String(cases.length),
+    mutationCount: String(outcomes.length),
+    belowMutationCount: String(cases.length),
+    exactCandidateCount: String(cases.length),
+    aboveMutationCount: String(cases.length),
+    exactCandidateAcceptedCount: String(
+      exactOutcomes.filter((outcome) => outcome.exactTreeLeafCountAccepted).length,
+    ),
+    mismatchedCandidateRejectedCount: String(
+      mismatchedOutcomes.filter((outcome) => !outcome.exactTreeLeafCountAccepted).length,
+    ),
+    mismatchedRawMultiproofAcceptedCount: String(
+      mismatchedOutcomes.filter((outcome) => outcome.rawMultiproofAccepted).length,
+    ),
+    duplicateFinalBelowRawMultiproofAliasCount: String(
+      outcomes.filter((outcome) => outcome.relation === "BELOW" && outcome.rawMultiproofAccepted).length,
+    ),
+    duplicateFinalAboveRawMultiproofAliasCount: String(
+      outcomes.filter((outcome) => outcome.relation === "ABOVE" && outcome.rawMultiproofAccepted).length,
+    ),
+    duplicateFinalRootAliasTreeCount: String(duplicateFinalRootAliasTreeCount),
+    unexpectedExactBindingOutcomeCount: String(outcomes.filter((outcome) =>
+      outcome.exactTreeLeafCountAccepted !== (outcome.relation === "EXACT")).length),
+    rootSetCommitmentSha256: sha256Hex(JSON.stringify(roots)),
+    committedTreeLeafCountSetCommitmentSha256:
+      sha256Hex(JSON.stringify(committedTreeLeafCounts)),
+    boundaryOutcomeSetCommitmentSha256: sha256Hex(JSON.stringify(outcomes)),
+    rootAndTreeLeafCountCommitmentsSeparate: true,
+    exactTreeLeafCountRequired: true,
+    expandedCasesStored: false,
+    inputOrResultStored: false,
+    accepted: false,
+    receiptIssued: false,
+    reviewCompleted: false,
+    activationAuthorized: false,
+    activationEffect: "NONE",
+  };
+}
+
 export function replayPositiveCampaignVectorRepresentationAudit() {
   const replays = Array.from({ length: FUZZ_CASE_COUNT }, (_, index) =>
     replayPositiveCampaignVectorIntakeFuzzCase(index));
@@ -452,6 +565,7 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
     multiproofCommitmentSha256: canonicalSha256(multiproofCore),
   };
   const oddWidthMultiproofProperties = representationAuditOddWidthPropertySummary();
+  const treeLeafCountBoundaryProperties = representationAuditTreeLeafCountBoundarySummary();
   return {
     auditVersion: 1,
     auditId: "iat-promotions-dlc-positive-campaign-vector-representation-audit-v1",
@@ -525,6 +639,8 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
       oddWidthPropertyCaseCount: 79,
       oddWidthPropertyTreeCount: 15,
       oddWidthPropertiesStoreExpandedCases: false,
+      treeLeafCountBoundaryMutationCount: 237,
+      treeLeafCountBoundaryPropertiesStoreExpandedCases: false,
     },
     summary: {
       caseCount: String(replay.records.length),
@@ -561,6 +677,7 @@ export function generatePositiveCampaignVectorRepresentationAudit() {
     expectedCollisionProofs,
     expectedCollisionMultiproof,
     oddWidthMultiproofProperties,
+    treeLeafCountBoundaryProperties,
     records: replay.records,
   };
 }

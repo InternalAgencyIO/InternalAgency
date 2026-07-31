@@ -20,7 +20,7 @@
   "sources": {
     "fuzzVectors": {
       "path": "positive-campaign-vector-intake-fuzz-vectors.v1.json",
-      "canonicalSha256": "9b335e7f6b767c58ad9253eff4fa1ac0493f108d0b234f291d9537ddc748926c"
+      "canonicalSha256": "66fe347bb89b08e26576a2e6d4a0f918c82e6ad522c7fe1f89d78df6d0a2fdb3"
     },
     "fuzzGenerator": {
       "path": "generate-positive-campaign-vector-intake-fuzz-vectors.mjs",
@@ -28,11 +28,11 @@
     },
     "pythonVerifier": {
       "path": "verify-positive-campaign-vector-intake.py",
-      "normalizedTextSha256": "2612879dc708c00958c4cae1ebc52052b34d767553ad59eb7091a6aaa8bbd9d1"
+      "normalizedTextSha256": "6435272883716425001573273b3166d759edefbcdb615691e62db84775b116de"
     },
     "generator": {
       "path": "generate-positive-campaign-vector-representation-audit.mjs",
-      "normalizedTextSha256": "ba387c8c1ecaa49c14a73d1f895091872232710a2e9fb45d873e30005c75ed42"
+      "normalizedTextSha256": "8e5936e80a85ada259a140e2fb3300529fc04baa6fe9425f9f68aa1959179f14"
     }
   },
   "contract": {
@@ -78,7 +78,9 @@
     "multiproofEquivalentToIndividualProofs": true,
     "oddWidthPropertyCaseCount": 79,
     "oddWidthPropertyTreeCount": 15,
-    "oddWidthPropertiesStoreExpandedCases": false
+    "oddWidthPropertiesStoreExpandedCases": false,
+    "treeLeafCountBoundaryMutationCount": 237,
+    "treeLeafCountBoundaryPropertiesStoreExpandedCases": false
   },
   "summary": {
     "caseCount": "256",
@@ -2115,6 +2117,32 @@
     "duplicateFinalWidthAliasCount": "18",
     "caseSetCommitmentSha256": "937771b307fe23379f7c4840017f1ce7e832186cbd9dfd1420720731624ed354",
     "allMultiproofsVerify": true,
+    "exactTreeLeafCountRequired": true,
+    "expandedCasesStored": false,
+    "inputOrResultStored": false,
+    "accepted": false,
+    "receiptIssued": false,
+    "reviewCompleted": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "treeLeafCountBoundaryProperties": {
+    "propertyCaseCount": "79",
+    "mutationCount": "237",
+    "belowMutationCount": "79",
+    "exactCandidateCount": "79",
+    "aboveMutationCount": "79",
+    "exactCandidateAcceptedCount": "79",
+    "mismatchedCandidateRejectedCount": "158",
+    "mismatchedRawMultiproofAcceptedCount": "20",
+    "duplicateFinalBelowRawMultiproofAliasCount": "2",
+    "duplicateFinalAboveRawMultiproofAliasCount": "18",
+    "duplicateFinalRootAliasTreeCount": "14",
+    "unexpectedExactBindingOutcomeCount": "0",
+    "rootSetCommitmentSha256": "8662b7f1e1b87dc81d648cefb9fcd847821346ee304792d3b5ce42b32a362d1e",
+    "committedTreeLeafCountSetCommitmentSha256": "759111eb0bb4d9848edc2e3d556093ad98cdd1682bbc5d8c110648c8331738df",
+    "boundaryOutcomeSetCommitmentSha256": "72c8cbf74755b88862b57d58d15a63189740cb5b4d65b3c8324f8bd1eea219d9",
+    "rootAndTreeLeafCountCommitmentsSeparate": true,
     "exactTreeLeafCountRequired": true,
     "expandedCasesStored": false,
     "inputOrResultStored": false,

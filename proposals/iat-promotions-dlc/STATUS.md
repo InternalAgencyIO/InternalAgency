@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 20:20 UTC
+Updated: 2026-07-31 20:41 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `b95101d`
+Previously published public increment: `6e07f6c`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -385,8 +385,16 @@ This status file deliberately does not claim a self-referential commit hash.
   width aliases, and case-set commitment; and
 - independent Python exit-`2` rejection when the published odd-width property
   commitment drifts, without storing the expanded synthetic corpus.
+- 237 deterministic `treeLeafCount` boundary outcomes covering below, exact,
+  and above candidates for all 79 odd-width property cases;
+- 79 exact accepts and 158 bound mismatch rejections despite 20 raw multiproof
+  aliases, including two below and 18 above the committed width;
+- separate root, committed-count, and boundary-outcome commitments reproduced
+  exactly in Node and zero-dependency Python; and
+- compact-only publication with no expanded boundary corpus, acceptance,
+  receipt, completed review, deployment, or activation authority.
 
-Current proposal-only result: **284 tests passed**. This consists of 28 protected
+Current proposal-only result: **285 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -437,12 +445,13 @@ Nine minimal-counterexample generation, family coverage, primary-gate
 transition, negative-cryptography, ordered-commitment, non-authority, Python
 parity, changed-evidence, source-safety, and manifest-coverage tests complete
 the reduced-fixture suite.
-Seventeen representation-audit regeneration, ordered-uniqueness, expected-
+Eighteen representation-audit regeneration, ordered-uniqueness, expected-
 collision, family-coverage, record-tree, exact-proof-coverage, proof-mutation,
 minimal-multiproof, varied-subset property, independent-coordinate,
 odd-width root parity, duplicate-final tree-size binding, multiproof-mutation,
-rejection-only, odd-width Node/Python parity, changed-evidence, source-safety,
-and manifest-coverage tests complete the all-input audit suite.
+exact boundary mutation, rejection-only, odd-width and boundary Node/Python
+parity, changed-evidence, source-safety, and manifest-coverage tests complete
+the all-input audit suite.
 
 ## Current guarantees of the reference model
 
@@ -474,7 +483,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add deterministic boundary mutations for exact `treeLeafCount` below, at, and
-above the committed count, including duplicate-final aliases. Keep the root and
-tree-size commitments separate, publish no expanded synthetic corpus, and
-preserve every HOLD, rejection-only, and non-authority gate.
+Add a deterministic network-free scheduler model for competing final-slot
+settlements and injected two-transfer rollback. Model account-lock contention
+without contacting a local validator, Devnet, or Mainnet, and preserve every
+HOLD, rejection-only, and non-authority gate.

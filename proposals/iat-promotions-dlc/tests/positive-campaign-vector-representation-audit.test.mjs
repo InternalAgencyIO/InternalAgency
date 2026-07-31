@@ -19,7 +19,9 @@ import {
   representationAuditMerkleProof,
   representationAuditMerkleRootSha256,
   representationAuditOddWidthPropertySummary,
+  representationAuditTreeLeafCountBoundarySummary,
   verifyRepresentationAuditMerkleMultiproof,
+  verifyRepresentationAuditMerkleMultiproofWithExactTreeLeafCount,
   verifyRepresentationAuditMerkleProof,
 } from "../generate-positive-campaign-vector-representation-audit.mjs";
 import { loadReviewManifest } from "../validate-review-manifest.mjs";
@@ -564,6 +566,89 @@ test("odd-width multiproofs bind width externally and reject membership, coordin
   assert.equal(verifyRepresentationAuditMerkleMultiproof([], 0, [], "f".repeat(64)), false);
 });
 
+test("237 tree leaf-count boundaries accept only exact counts despite duplicate-final aliases", () => {
+  const cases = syntheticOddWidthPropertyCases();
+  const roots = [];
+  const committedTreeLeafCounts = [];
+  const outcomes = [];
+  let duplicateFinalRootAliasTreeCount = 0;
+  for (const leafCount of [...new Set(cases.map((propertyCase) => propertyCase.leafCount))]) {
+    const commitments = syntheticRecordCommitments(leafCount);
+    const root = independentRepresentationRoot(commitments);
+    const explicitlyPaddedRoot = independentRepresentationRoot([...commitments, commitments.at(-1)]);
+    if (root === explicitlyPaddedRoot) duplicateFinalRootAliasTreeCount += 1;
+  }
+  for (const [caseIndex, propertyCase] of cases.entries()) {
+    const commitments = syntheticRecordCommitments(propertyCase.leafCount);
+    const root = independentRepresentationRoot(commitments);
+    const nodes = representationAuditMerkleMultiproof(commitments, propertyCase.indices);
+    const selected = propertyCase.indices.map((index) => ({
+      index,
+      recordCommitmentSha256: commitments[index],
+    }));
+    roots.push(root);
+    committedTreeLeafCounts.push(String(propertyCase.leafCount));
+    for (const [relation, candidateTreeLeafCount] of [
+      ["BELOW", propertyCase.leafCount - 1],
+      ["EXACT", propertyCase.leafCount],
+      ["ABOVE", propertyCase.leafCount + 1],
+    ]) {
+      const rawMultiproofAccepted = verifyRepresentationAuditMerkleMultiproof(
+        selected,
+        candidateTreeLeafCount,
+        nodes,
+        root,
+      );
+      const exactTreeLeafCountAccepted =
+        verifyRepresentationAuditMerkleMultiproofWithExactTreeLeafCount(
+          selected,
+          candidateTreeLeafCount,
+          propertyCase.leafCount,
+          nodes,
+          root,
+        );
+      assert.equal(exactTreeLeafCountAccepted, relation === "EXACT", `${caseIndex}:${relation}`);
+      outcomes.push({
+        caseIndex: String(caseIndex),
+        relation,
+        candidateTreeLeafCount: String(candidateTreeLeafCount),
+        rawMultiproofAccepted,
+        exactTreeLeafCountAccepted,
+      });
+    }
+  }
+  assert.equal(outcomes.length, 237);
+  assert.equal(outcomes.filter((outcome) => outcome.relation === "EXACT"
+    && outcome.exactTreeLeafCountAccepted).length, 79);
+  assert.equal(outcomes.filter((outcome) => outcome.relation !== "EXACT"
+    && !outcome.exactTreeLeafCountAccepted).length, 158);
+  assert.equal(outcomes.filter((outcome) => outcome.relation !== "EXACT"
+    && outcome.rawMultiproofAccepted).length, 20);
+  assert.equal(outcomes.filter((outcome) => outcome.relation === "BELOW"
+    && outcome.rawMultiproofAccepted).length, 2);
+  assert.equal(outcomes.filter((outcome) => outcome.relation === "ABOVE"
+    && outcome.rawMultiproofAccepted).length, 18);
+  assert.equal(duplicateFinalRootAliasTreeCount, 14);
+  assert.equal(
+    createHash("sha256").update(JSON.stringify(roots), "utf8").digest("hex"),
+    "8662b7f1e1b87dc81d648cefb9fcd847821346ee304792d3b5ce42b32a362d1e",
+  );
+  assert.equal(
+    createHash("sha256").update(JSON.stringify(committedTreeLeafCounts), "utf8").digest("hex"),
+    "759111eb0bb4d9848edc2e3d556093ad98cdd1682bbc5d8c110648c8331738df",
+  );
+  assert.equal(
+    createHash("sha256").update(JSON.stringify(outcomes), "utf8").digest("hex"),
+    "72c8cbf74755b88862b57d58d15a63189740cb5b4d65b3c8324f8bd1eea219d9",
+  );
+  assert.deepEqual(
+    representationAuditTreeLeafCountBoundarySummary(),
+    artifact.treeLeafCountBoundaryProperties,
+  );
+  assert.equal(artifact.treeLeafCountBoundaryProperties.rootAndTreeLeafCountCommitmentsSeparate, true);
+  assert.equal(artifact.treeLeafCountBoundaryProperties.expandedCasesStored, false);
+});
+
 test("Python independently reproduces the representation audit", () => {
   assert.ok(PYTHON, "Python 3 is required for representation verification");
   const result = runPython();
@@ -593,6 +678,18 @@ test("Python independently reproduces the representation audit", () => {
       artifact.oddWidthMultiproofProperties.caseSetCommitmentSha256,
     oddWidthExactTreeLeafCountRequired: true,
     oddWidthExpandedCasesStored: false,
+    treeLeafCountBoundaryMutationCount: 237,
+    treeLeafCountBoundaryExactAcceptedCount: 79,
+    treeLeafCountBoundaryMismatchRejectedCount: 158,
+    treeLeafCountBoundaryRawAliasAcceptedCount: 20,
+    treeLeafCountBoundaryRootSetCommitmentSha256:
+      artifact.treeLeafCountBoundaryProperties.rootSetCommitmentSha256,
+    treeLeafCountBoundaryCountSetCommitmentSha256:
+      artifact.treeLeafCountBoundaryProperties.committedTreeLeafCountSetCommitmentSha256,
+    treeLeafCountBoundaryOutcomeSetCommitmentSha256:
+      artifact.treeLeafCountBoundaryProperties.boundaryOutcomeSetCommitmentSha256,
+    treeLeafCountBoundaryCommitmentsSeparate: true,
+    treeLeafCountBoundaryExpandedCasesStored: false,
     receiptIssued: false,
     reviewCompleted: false,
     activationAuthorized: false,
@@ -632,12 +729,17 @@ test("Python rejects changed compact evidence and a stale set commitment", () =>
 
     const changedOddWidth = structuredClone(artifact);
     changedOddWidth.oddWidthMultiproofProperties.caseSetCommitmentSha256 = "c".repeat(64);
+    changedOddWidth.treeLeafCountBoundaryProperties
+      .committedTreeLeafCountSetCommitmentSha256 = "b".repeat(64);
     const oddWidthPath = join(directory, "changed-odd-width-properties.json");
     writeFileSync(oddWidthPath, `${JSON.stringify(changedOddWidth, null, 2)}\n`, "utf8");
     const oddWidthResult = runPython(oddWidthPath);
     assert.equal(oddWidthResult.status, 2, oddWidthResult.stderr || oddWidthResult.stdout);
     assert.ok(JSON.parse(oddWidthResult.stdout).errors.includes(
       "representation odd-width properties do not independently replay",
+    ));
+    assert.ok(JSON.parse(oddWidthResult.stdout).errors.includes(
+      "representation tree leaf-count boundaries do not independently replay",
     ));
   } finally {
     rmSync(directory, { recursive: true, force: true });

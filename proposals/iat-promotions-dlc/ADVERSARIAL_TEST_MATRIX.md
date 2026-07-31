@@ -270,8 +270,12 @@ security audit or deployment approval.
 | Odd-width proof accepts member, coordinate, digest, or node-set drift | same | Duplicate/out-of-range/missing members and missing/redundant/changed-coordinate/changed-digest nodes fail across every compact odd-width case |
 | Node and Python derive different odd-width cases or counts | `Python independently reproduces...` / `odd-width trees preserve...` | Both runtimes must reproduce all compact metrics, 18 root-only aliases, and case-set commitment exactly |
 | Published odd-width summary is changed without the expanded corpus | `Python rejects changed compact evidence...` | Independent Python regeneration rejects the changed compact commitment with exit `2` |
+| A below or above `treeLeafCount` is accepted because the raw multiproof still reaches the root | `237 tree leaf-count boundaries accept only exact counts...` | Explicit committed-count equality rejects all 158 mismatches, including 20 raw proof aliases |
+| A duplicate-final root is treated as proof of the number of leaves | same | Fourteen raw root aliases remain visible, while separate root and count commitments prevent size substitution |
+| Node and Python disagree on one compact boundary outcome | `tree leaf-count boundaries... independently replay` | Both runtimes reproduce 79 exact accepts, 158 mismatch rejections, and the same root/count/outcome commitments |
+| Expanded synthetic boundary cases are published or gain authority | `expandedCasesStored: false` / HOLD fields | Artifact stores only compact metrics and commitments with false receipt, review, deployment, and activation fields |
 
 ## Next matrix expansion
 
-- deterministic boundary mutations for exact `treeLeafCount` below, at, and above the committed count;
-- local-validator transaction rollback and account-lock contention.
+- network-free transaction rollback and account-lock contention around the
+  final settlement slot.

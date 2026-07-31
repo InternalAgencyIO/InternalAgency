@@ -76,6 +76,20 @@ root-only width aliases, and case-set commitment. The expanded cases remain
 runtime-only. A changed summary commitment or tree-size binding fails the
 independent Python replay.
 
+The boundary suite then evaluates `N - 1`, exact `N`, and `N + 1` for every
+odd-width property case: 237 deterministic outcomes. Raw multiproof mechanics
+accept 20 mismatched widths (two below and 18 above) because duplicate-final
+geometry can alias proofs, while the explicit count binding accepts all 79
+exact candidates and rejects all 158 mismatches. Fourteen of the 15 distinct
+odd trees also share a raw root with an explicitly duplicate-padded `N + 1`
+tree. Root evidence and committed tree sizes therefore use separate
+commitments: `8662b7f1e1b87dc81d648cefb9fcd847821346ee304792d3b5ce42b32a362d1e`
+for roots and `759111eb0bb4d9848edc2e3d556093ad98cdd1682bbc5d8c110648c8331738df`
+for counts. The compact outcome set is
+`72c8cbf74755b88862b57d58d15a63189740cb5b4d65b3c8324f8bd1eea219d9`.
+Node and Python reproduce all three independently; expanded mutations remain
+runtime-only and authority-negative.
+
 It does not store the 256 full inputs or results. Node regenerates the artifact;
 Python independently rebuilds every record, collision class, tree root, and
 individual or aggregate proof from the base vectors and fixed seed.

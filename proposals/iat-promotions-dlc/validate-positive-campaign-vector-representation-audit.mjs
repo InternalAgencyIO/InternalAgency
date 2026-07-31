@@ -15,7 +15,9 @@ import {
   representationAuditMerkleMultiproof,
   representationAuditMerkleRootSha256,
   representationAuditOddWidthPropertySummary,
+  representationAuditTreeLeafCountBoundarySummary,
   verifyRepresentationAuditMerkleMultiproof,
+  verifyRepresentationAuditMerkleMultiproofWithExactTreeLeafCount,
   verifyRepresentationAuditMerkleProof,
 } from "./generate-positive-campaign-vector-representation-audit.mjs";
 
@@ -111,6 +113,8 @@ export function validatePositiveCampaignVectorRepresentationAudit(
   expect(artifact?.merkleContract?.oddWidthPropertyCaseCount === 79, "representation odd-width property case-count drift");
   expect(artifact?.merkleContract?.oddWidthPropertyTreeCount === 15, "representation odd-width property tree-count drift");
   expect(artifact?.merkleContract?.oddWidthPropertiesStoreExpandedCases === false, "representation odd-width properties store expanded cases");
+  expect(artifact?.merkleContract?.treeLeafCountBoundaryMutationCount === 237, "representation tree leaf-count boundary mutation-count drift");
+  expect(artifact?.merkleContract?.treeLeafCountBoundaryPropertiesStoreExpandedCases === false, "representation tree leaf-count boundary properties store expanded cases");
 
   const replay = replayPositiveCampaignVectorRepresentationAudit();
   expect(Array.isArray(artifact?.records) && artifact.records.length === FUZZ_CASE_COUNT, "representation record count drift");
@@ -241,6 +245,36 @@ export function validatePositiveCampaignVectorRepresentationAudit(
     ),
     "representation multiproof does not reach the published root",
   );
+  expect(
+    !verifyRepresentationAuditMerkleMultiproofWithExactTreeLeafCount(
+      selectedRecords,
+      recordCommitments.length - 1,
+      recordCommitments.length,
+      multiproof.proofNodes,
+      merkleRoot,
+    ),
+    "representation multiproof accepts a below-boundary tree leaf count",
+  );
+  expect(
+    verifyRepresentationAuditMerkleMultiproofWithExactTreeLeafCount(
+      selectedRecords,
+      recordCommitments.length,
+      recordCommitments.length,
+      multiproof.proofNodes,
+      merkleRoot,
+    ),
+    "representation multiproof rejects its exact committed tree leaf count",
+  );
+  expect(
+    !verifyRepresentationAuditMerkleMultiproofWithExactTreeLeafCount(
+      selectedRecords,
+      recordCommitments.length + 1,
+      recordCommitments.length,
+      multiproof.proofNodes,
+      merkleRoot,
+    ),
+    "representation multiproof accepts an above-boundary tree leaf count",
+  );
   expect(multiproof.proofVerifiedToPublishedRoot === true, "representation multiproof verification claim drift");
   expect(multiproof.minimalNodeSet === true, "representation multiproof minimality claim drift");
   expect(multiproof.equivalentToIndividualProofs === true, "representation multiproof equivalence claim drift");
@@ -291,6 +325,62 @@ export function validatePositiveCampaignVectorRepresentationAudit(
     expect(oddWidthProperties[field] === false, `representation odd-width ${field} drift`);
   }
   expect(oddWidthProperties.activationEffect === "NONE", "representation odd-width activation effect drift");
+  const treeLeafCountBoundaryProperties = artifact?.treeLeafCountBoundaryProperties ?? {};
+  expect(
+    JSON.stringify(treeLeafCountBoundaryProperties)
+      === JSON.stringify(representationAuditTreeLeafCountBoundarySummary()),
+    "representation tree leaf-count boundaries do not deterministically replay",
+  );
+  const expectedBoundaryFields = {
+    propertyCaseCount: "79",
+    mutationCount: "237",
+    belowMutationCount: "79",
+    exactCandidateCount: "79",
+    aboveMutationCount: "79",
+    exactCandidateAcceptedCount: "79",
+    mismatchedCandidateRejectedCount: "158",
+    mismatchedRawMultiproofAcceptedCount: "20",
+    duplicateFinalBelowRawMultiproofAliasCount: "2",
+    duplicateFinalAboveRawMultiproofAliasCount: "18",
+    duplicateFinalRootAliasTreeCount: "14",
+    unexpectedExactBindingOutcomeCount: "0",
+    rootSetCommitmentSha256: "8662b7f1e1b87dc81d648cefb9fcd847821346ee304792d3b5ce42b32a362d1e",
+    committedTreeLeafCountSetCommitmentSha256:
+      "759111eb0bb4d9848edc2e3d556093ad98cdd1682bbc5d8c110648c8331738df",
+    boundaryOutcomeSetCommitmentSha256:
+      "72c8cbf74755b88862b57d58d15a63189740cb5b4d65b3c8324f8bd1eea219d9",
+  };
+  for (const [field, value] of Object.entries(expectedBoundaryFields)) {
+    expect(
+      treeLeafCountBoundaryProperties[field] === value,
+      `representation tree leaf-count boundary ${field} drift`,
+    );
+  }
+  expect(
+    treeLeafCountBoundaryProperties.rootAndTreeLeafCountCommitmentsSeparate === true,
+    "representation root and tree leaf-count commitments are not separate",
+  );
+  expect(
+    treeLeafCountBoundaryProperties.exactTreeLeafCountRequired === true,
+    "representation boundary tree-size binding disabled",
+  );
+  for (const field of [
+    "expandedCasesStored",
+    "inputOrResultStored",
+    "accepted",
+    "receiptIssued",
+    "reviewCompleted",
+    "activationAuthorized",
+  ]) {
+    expect(
+      treeLeafCountBoundaryProperties[field] === false,
+      `representation tree leaf-count boundary ${field} drift`,
+    );
+  }
+  expect(
+    treeLeafCountBoundaryProperties.activationEffect === "NONE",
+    "representation tree leaf-count boundary activation effect drift",
+  );
   expect(
     JSON.stringify(generatePositiveCampaignVectorRepresentationAudit()) === JSON.stringify(artifact),
     "representation audit does not deterministically regenerate",

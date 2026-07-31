@@ -1494,6 +1494,28 @@ def verify_representation_audit_merkle_multiproof(
     return active.get(0) == expected_root_sha256 and len(used) == len(proof_map)
 
 
+def verify_representation_audit_merkle_multiproof_with_exact_tree_leaf_count(
+    selected_records: list[dict[str, Any]],
+    candidate_tree_leaf_count: int,
+    committed_tree_leaf_count: int,
+    proof_nodes: Any,
+    expected_root_sha256: str,
+) -> bool:
+    return (
+        isinstance(candidate_tree_leaf_count, int)
+        and not isinstance(candidate_tree_leaf_count, bool)
+        and isinstance(committed_tree_leaf_count, int)
+        and not isinstance(committed_tree_leaf_count, bool)
+        and candidate_tree_leaf_count == committed_tree_leaf_count
+        and verify_representation_audit_merkle_multiproof(
+            selected_records,
+            candidate_tree_leaf_count,
+            proof_nodes,
+            expected_root_sha256,
+        )
+    )
+
+
 def greatest_common_divisor(left: int, right: int) -> int:
     a = left
     b = right
@@ -1603,6 +1625,135 @@ def replay_representation_audit_odd_width_properties() -> dict[str, Any]:
         "duplicateFinalWidthAliasCount": str(duplicate_final_width_alias_count),
         "caseSetCommitmentSha256": hashlib.sha256(case_bytes).hexdigest(),
         "allMultiproofsVerify": True,
+        "exactTreeLeafCountRequired": True,
+        "expandedCasesStored": False,
+        "inputOrResultStored": False,
+        "accepted": False,
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
+def replay_representation_audit_tree_leaf_count_boundary_properties(
+) -> dict[str, Any]:
+    cases = representation_audit_odd_width_property_cases()
+    roots = []
+    committed_tree_leaf_counts = []
+    outcomes = []
+    duplicate_final_root_alias_tree_count = 0
+    for leaf_count in ODD_WIDTH_TREE_LEAF_COUNTS:
+        commitments = representation_audit_synthetic_record_commitments(leaf_count)
+        root = representation_audit_merkle_levels(commitments)[-1][0]
+        explicitly_padded_root = representation_audit_merkle_levels(
+            [*commitments, commitments[-1]]
+        )[-1][0]
+        if root == explicitly_padded_root:
+            duplicate_final_root_alias_tree_count += 1
+    for case_index, property_case in enumerate(cases):
+        leaf_count = property_case["leafCount"]
+        commitments = representation_audit_synthetic_record_commitments(leaf_count)
+        root = representation_audit_merkle_levels(commitments)[-1][0]
+        nodes = representation_audit_merkle_multiproof(
+            commitments, property_case["indices"]
+        )
+        selected = [
+            {
+                "index": index,
+                "recordCommitmentSha256": commitments[index],
+            }
+            for index in property_case["indices"]
+        ]
+        roots.append(root)
+        committed_tree_leaf_counts.append(str(leaf_count))
+        for relation, candidate_tree_leaf_count in [
+            ("BELOW", leaf_count - 1),
+            ("EXACT", leaf_count),
+            ("ABOVE", leaf_count + 1),
+        ]:
+            raw_multiproof_accepted = (
+                verify_representation_audit_merkle_multiproof(
+                    selected, candidate_tree_leaf_count, nodes, root
+                )
+            )
+            exact_tree_leaf_count_accepted = (
+                verify_representation_audit_merkle_multiproof_with_exact_tree_leaf_count(
+                    selected,
+                    candidate_tree_leaf_count,
+                    leaf_count,
+                    nodes,
+                    root,
+                )
+            )
+            outcomes.append(
+                {
+                    "caseIndex": str(case_index),
+                    "relation": relation,
+                    "candidateTreeLeafCount": str(candidate_tree_leaf_count),
+                    "rawMultiproofAccepted": raw_multiproof_accepted,
+                    "exactTreeLeafCountAccepted": exact_tree_leaf_count_accepted,
+                }
+            )
+    exact_outcomes = [
+        outcome for outcome in outcomes if outcome["relation"] == "EXACT"
+    ]
+    mismatched_outcomes = [
+        outcome for outcome in outcomes if outcome["relation"] != "EXACT"
+    ]
+
+    def compact_sha256(value: Any) -> str:
+        return hashlib.sha256(
+            json.dumps(value, ensure_ascii=False, separators=(",", ":")).encode(
+                "utf-8"
+            )
+        ).hexdigest()
+
+    return {
+        "propertyCaseCount": str(len(cases)),
+        "mutationCount": str(len(outcomes)),
+        "belowMutationCount": str(len(cases)),
+        "exactCandidateCount": str(len(cases)),
+        "aboveMutationCount": str(len(cases)),
+        "exactCandidateAcceptedCount": str(
+            sum(outcome["exactTreeLeafCountAccepted"] for outcome in exact_outcomes)
+        ),
+        "mismatchedCandidateRejectedCount": str(
+            sum(not outcome["exactTreeLeafCountAccepted"] for outcome in mismatched_outcomes)
+        ),
+        "mismatchedRawMultiproofAcceptedCount": str(
+            sum(outcome["rawMultiproofAccepted"] for outcome in mismatched_outcomes)
+        ),
+        "duplicateFinalBelowRawMultiproofAliasCount": str(
+            sum(
+                outcome["rawMultiproofAccepted"]
+                for outcome in outcomes
+                if outcome["relation"] == "BELOW"
+            )
+        ),
+        "duplicateFinalAboveRawMultiproofAliasCount": str(
+            sum(
+                outcome["rawMultiproofAccepted"]
+                for outcome in outcomes
+                if outcome["relation"] == "ABOVE"
+            )
+        ),
+        "duplicateFinalRootAliasTreeCount": str(
+            duplicate_final_root_alias_tree_count
+        ),
+        "unexpectedExactBindingOutcomeCount": str(
+            sum(
+                outcome["exactTreeLeafCountAccepted"]
+                != (outcome["relation"] == "EXACT")
+                for outcome in outcomes
+            )
+        ),
+        "rootSetCommitmentSha256": compact_sha256(roots),
+        "committedTreeLeafCountSetCommitmentSha256": compact_sha256(
+            committed_tree_leaf_counts
+        ),
+        "boundaryOutcomeSetCommitmentSha256": compact_sha256(outcomes),
+        "rootAndTreeLeafCountCommitmentsSeparate": True,
         "exactTreeLeafCountRequired": True,
         "expandedCasesStored": False,
         "inputOrResultStored": False,
@@ -2022,6 +2173,9 @@ def replay_representation_audit(
     odd_width_multiproof_properties = (
         replay_representation_audit_odd_width_properties()
     )
+    tree_leaf_count_boundary_properties = (
+        replay_representation_audit_tree_leaf_count_boundary_properties()
+    )
     return {
         "records": records,
         "canonicalCollisionClasses": collision_classes,
@@ -2029,6 +2183,7 @@ def replay_representation_audit(
         "expectedCollisionProofs": expected_collision_proofs,
         "expectedCollisionMultiproof": expected_collision_multiproof,
         "oddWidthMultiproofProperties": odd_width_multiproof_properties,
+        "treeLeafCountBoundaryProperties": tree_leaf_count_boundary_properties,
     }
 
 
@@ -2127,6 +2282,15 @@ def validate_representation_audit(artifact: Any) -> list[str]:
     expect(merkle_contract.get("oddWidthPropertyCaseCount") == 79, "representation odd-width property case-count drift")
     expect(merkle_contract.get("oddWidthPropertyTreeCount") == 15, "representation odd-width property tree-count drift")
     expect(merkle_contract.get("oddWidthPropertiesStoreExpandedCases") is False, "representation odd-width properties store expanded cases")
+    expect(
+        merkle_contract.get("treeLeafCountBoundaryMutationCount") == 237,
+        "representation tree leaf-count boundary mutation-count drift",
+    )
+    expect(
+        merkle_contract.get("treeLeafCountBoundaryPropertiesStoreExpandedCases")
+        is False,
+        "representation tree leaf-count boundary properties store expanded cases",
+    )
     sources = artifact.get("sources", {})
     expect(
         sources.get("fuzzVectors", {}).get("canonicalSha256")
@@ -2355,6 +2519,64 @@ def validate_representation_audit(artifact: Any) -> list[str]:
     ]:
         expect(odd_width_properties.get(field) is False, f"representation odd-width {field} drift")
     expect(odd_width_properties.get("activationEffect") == "NONE", "representation odd-width activation effect drift")
+    tree_leaf_count_boundary_properties = artifact.get(
+        "treeLeafCountBoundaryProperties", {}
+    )
+    expect(
+        tree_leaf_count_boundary_properties
+        == replay["treeLeafCountBoundaryProperties"],
+        "representation tree leaf-count boundaries do not independently replay",
+    )
+    expected_boundary_fields = {
+        "propertyCaseCount": "79",
+        "mutationCount": "237",
+        "belowMutationCount": "79",
+        "exactCandidateCount": "79",
+        "aboveMutationCount": "79",
+        "exactCandidateAcceptedCount": "79",
+        "mismatchedCandidateRejectedCount": "158",
+        "mismatchedRawMultiproofAcceptedCount": "20",
+        "duplicateFinalBelowRawMultiproofAliasCount": "2",
+        "duplicateFinalAboveRawMultiproofAliasCount": "18",
+        "duplicateFinalRootAliasTreeCount": "14",
+        "unexpectedExactBindingOutcomeCount": "0",
+        "rootSetCommitmentSha256": "8662b7f1e1b87dc81d648cefb9fcd847821346ee304792d3b5ce42b32a362d1e",
+        "committedTreeLeafCountSetCommitmentSha256": "759111eb0bb4d9848edc2e3d556093ad98cdd1682bbc5d8c110648c8331738df",
+        "boundaryOutcomeSetCommitmentSha256": "72c8cbf74755b88862b57d58d15a63189740cb5b4d65b3c8324f8bd1eea219d9",
+    }
+    for field, value in expected_boundary_fields.items():
+        expect(
+            tree_leaf_count_boundary_properties.get(field) == value,
+            f"representation tree leaf-count boundary {field} drift",
+        )
+    expect(
+        tree_leaf_count_boundary_properties.get(
+            "rootAndTreeLeafCountCommitmentsSeparate"
+        )
+        is True,
+        "representation root and tree leaf-count commitments are not separate",
+    )
+    expect(
+        tree_leaf_count_boundary_properties.get("exactTreeLeafCountRequired")
+        is True,
+        "representation boundary tree-size binding disabled",
+    )
+    for field in [
+        "expandedCasesStored",
+        "inputOrResultStored",
+        "accepted",
+        "receiptIssued",
+        "reviewCompleted",
+        "activationAuthorized",
+    ]:
+        expect(
+            tree_leaf_count_boundary_properties.get(field) is False,
+            f"representation tree leaf-count boundary {field} drift",
+        )
+    expect(
+        tree_leaf_count_boundary_properties.get("activationEffect") == "NONE",
+        "representation tree leaf-count boundary activation effect drift",
+    )
     return errors
 
 
@@ -2480,6 +2702,7 @@ def render_representation_result(
     multiproof_saved_node_count: int,
     multiproof_commitment: str | None,
     odd_width_properties: dict[str, Any],
+    tree_leaf_count_boundary_properties: dict[str, Any],
     output_format: str,
 ) -> str:
     result = {
@@ -2504,6 +2727,44 @@ def render_representation_result(
         "oddWidthMultiproofPropertySetCommitmentSha256": odd_width_properties.get("caseSetCommitmentSha256"),
         "oddWidthExactTreeLeafCountRequired": odd_width_properties.get("exactTreeLeafCountRequired") is True,
         "oddWidthExpandedCasesStored": odd_width_properties.get("expandedCasesStored") is True,
+        "treeLeafCountBoundaryMutationCount": int(
+            tree_leaf_count_boundary_properties.get("mutationCount", 0)
+        ),
+        "treeLeafCountBoundaryExactAcceptedCount": int(
+            tree_leaf_count_boundary_properties.get("exactCandidateAcceptedCount", 0)
+        ),
+        "treeLeafCountBoundaryMismatchRejectedCount": int(
+            tree_leaf_count_boundary_properties.get(
+                "mismatchedCandidateRejectedCount", 0
+            )
+        ),
+        "treeLeafCountBoundaryRawAliasAcceptedCount": int(
+            tree_leaf_count_boundary_properties.get(
+                "mismatchedRawMultiproofAcceptedCount", 0
+            )
+        ),
+        "treeLeafCountBoundaryRootSetCommitmentSha256": (
+            tree_leaf_count_boundary_properties.get("rootSetCommitmentSha256")
+        ),
+        "treeLeafCountBoundaryCountSetCommitmentSha256": (
+            tree_leaf_count_boundary_properties.get(
+                "committedTreeLeafCountSetCommitmentSha256"
+            )
+        ),
+        "treeLeafCountBoundaryOutcomeSetCommitmentSha256": (
+            tree_leaf_count_boundary_properties.get(
+                "boundaryOutcomeSetCommitmentSha256"
+            )
+        ),
+        "treeLeafCountBoundaryCommitmentsSeparate": (
+            tree_leaf_count_boundary_properties.get(
+                "rootAndTreeLeafCountCommitmentsSeparate"
+            )
+            is True
+        ),
+        "treeLeafCountBoundaryExpandedCasesStored": (
+            tree_leaf_count_boundary_properties.get("expandedCasesStored") is True
+        ),
         "receiptIssued": False,
         "reviewCompleted": False,
         "activationAuthorized": False,
@@ -2616,6 +2877,7 @@ def main(argv: list[str] | None = None) -> int:
             int(summary.get("expectedCollisionMultiproofSavedNodeCount", 0)),
             summary.get("expectedCollisionMultiproofCommitmentSha256"),
             vectors.get("oddWidthMultiproofProperties", {}),
+            vectors.get("treeLeafCountBoundaryProperties", {}),
             args.format,
         ))
     return 0 if not errors else 2
