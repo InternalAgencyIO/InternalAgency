@@ -44,12 +44,21 @@ request, wallet prompt, or generated signing material. Until a positive public
 vector passes a separate review, `positiveCampaignIntegrationBlocked` remains
 true and no deployment or activation inference is permitted.
 
+The closed intake schema, independently supplied target boundary, fixed gate
+order, and rejection-only adversarial corpus are specified in
+[`POSITIVE_CAMPAIGN_VECTOR_INTAKE.md`](./POSITIVE_CAMPAIGN_VECTOR_INTAKE.md).
+That intake does not relax this HOLD and does not create signing or review
+material.
+
 ## Offline reproduction
 
 ```sh
 node proposals/iat-promotions-dlc/generate-campaign-envelope-verification-vectors.mjs --write
 node proposals/iat-promotions-dlc/validate-campaign-envelope-verification-vectors.mjs
 node --test proposals/iat-promotions-dlc/tests/campaign-envelope-verification.test.mjs
+node proposals/iat-promotions-dlc/generate-positive-campaign-vector-intake-vectors.mjs --write
+node proposals/iat-promotions-dlc/validate-positive-campaign-vector-intake-vectors.mjs
+node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake.test.mjs
 ```
 
 The generator only assembles canonical envelopes, copies public RFC material,

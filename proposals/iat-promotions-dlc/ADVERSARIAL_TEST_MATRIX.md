@@ -216,9 +216,18 @@ security audit or deployment approval.
 | Signature byte or public key is substituted | `cryptographic mutations fail...` | Verify-only adapter rejects both mutations |
 | Domain, scheme, version, or attestation ID bypasses signature ordering | same | Four fixed guards reject before signature verification |
 | Negative controls are presented as positive campaign integration | `campaign-envelope vectors reproduce...` | Missing positive vector remains machine-readable HOLD; no receipt/review/activation effect |
+| Positive-vector candidate omits provenance or adds an unknown field | `closed schema and private-material exclusion...` | Closed Draft-07 structure rejects the candidate before cryptographic acceptance |
+| Candidate includes a private key, seed, mnemonic, OAuth secret, or access token | same | Independent recursive privacy gate rejects secret-bearing field names |
+| Claimed canonical message bytes or SHA-256 drift | `canonical bytes, digest... remain bound` | Canonical-message binding fails against the verifier's reconstruction |
+| Candidate substitutes the independently supplied public key or source digest | `canonical bytes...` / `provenance cannot be self-asserted...` | Target binding or external provenance fails closed |
+| Candidate labels an unrelated valid signature as source-signed | `provenance cannot be self-asserted...` | Ed25519 verification still fails for the exact campaign message |
+| Candidate claims its own review completion | `candidate review claims... remain powerless` | Independent target flags and review-receipt digest remain unsatisfied |
+| Intake candidate claims receipt, review, deployment, or activation authority | same | Closed schema and non-authority gate reject the claim; evaluator output remains false/`NONE` |
+| Public rejection case is presented as accepted | `every published scenario is rejected...` | At least one of the fixed eight gates fails for every public candidate |
+| Intake evaluator gains write, network, wallet, signing, or keygen capability | `intake evaluator is local-read-only...` | Source capability scan and review-manifest coverage fail |
 
 ## Next matrix expansion
 
-- external positive campaign-vector intake schema and verify-only acceptance
-  gate without accepting or generating signing material;
+- independent Python reproduction of the external positive-vector intake
+  schema, gate results, and rejection corpus;
 - local-validator transaction rollback and account-lock contention.

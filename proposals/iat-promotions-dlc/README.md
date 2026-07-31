@@ -57,6 +57,12 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Rejection-only campaign-envelope vectors](./campaign-envelope-verification-vectors.v1.json)
 - [Campaign-envelope vector generator](./generate-campaign-envelope-verification-vectors.mjs)
 - [Campaign-envelope vector validator](./validate-campaign-envelope-verification-vectors.mjs)
+- [External positive-vector intake boundary](./POSITIVE_CAMPAIGN_VECTOR_INTAKE.md)
+- [Closed positive-vector intake schema](./positive-campaign-vector-intake.schema.v1.json)
+- [Pure verify-only intake evaluator](./positive-campaign-vector-intake.mjs)
+- [Rejection-only intake vectors](./positive-campaign-vector-intake-vectors.v1.json)
+- [Intake-vector generator](./generate-positive-campaign-vector-intake-vectors.mjs)
+- [Intake-vector validator](./validate-positive-campaign-vector-intake-vectors.mjs)
 - [Verifier-key lifecycle reference policy](./VERIFIER_KEY_LIFECYCLE.md)
 - [Network-free verifier-key lifecycle model](./verifier-key-lifecycle.mjs)
 - [Verifier-registry interface amendment](./KEY_LIFECYCLE_AMENDMENT.md)
@@ -153,6 +159,7 @@ node proposals/iat-promotions-dlc/generate-reviewer-bundle-gate-report.mjs --wri
 node proposals/iat-promotions-dlc/generate-reviewer-bundle-schema-examples.mjs --write
 node proposals/iat-promotions-dlc/generate-reviewer-bundle-preflight-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-campaign-envelope-verification-vectors.mjs --write
+node proposals/iat-promotions-dlc/generate-positive-campaign-vector-intake-vectors.mjs --write
 node proposals/iat-promotions-dlc/generate-review-manifest.mjs --write
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
@@ -172,6 +179,7 @@ node proposals/iat-promotions-dlc/validate-reviewer-bundle-gate-report.mjs
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-schemas.mjs
 node proposals/iat-promotions-dlc/validate-reviewer-bundle-preflight-vectors.mjs
 node proposals/iat-promotions-dlc/validate-campaign-envelope-verification-vectors.mjs
+node proposals/iat-promotions-dlc/validate-positive-campaign-vector-intake-vectors.mjs
 python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-review-manifest.py
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
@@ -201,6 +209,7 @@ node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/campaign-envelope-verification.test.mjs
+node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake.test.mjs
 ```
 
 ## Deliberate isolation

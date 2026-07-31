@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 16:31 UTC
+Updated: 2026-07-31 17:23 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `902923d`
+Previously published public increment: `df0895b`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -294,8 +294,19 @@ This status file deliberately does not claim a self-referential commit hash.
   campaign-envelope signature is published; and
 - campaign verification results fixed to no receipt, no completed review, no
   activation authority, and effect `NONE`.
+- a closed Draft-07 schema for future externally supplied positive campaign
+  vectors, with every nested object fixed against unknown fields;
+- a separately supplied expected-target boundary binding campaign, key,
+  provenance, review-receipt, availability, and review-completion state;
+- a pure local-read-only evaluator with eight ordered structural, provenance,
+  privacy, canonical-message, cryptographic, review, and non-authority gates;
+- ten deterministic public rejection scenarios covering missing provenance,
+  private-material fields, message/source/target drift, fake review, unrelated
+  signatures, and forbidden activation claims; and
+- an explicit continued HOLD: no valid positive campaign vector or independent
+  positive-vector review exists, and the intake issues no receipt or authority.
 
-Current proposal-only result: **226 tests passed**. This consists of 28 protected
+Current proposal-only result: **234 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -330,6 +341,9 @@ preflight suite.
 Six campaign-envelope primitive-control, exact-message, field-mutation,
 cryptographic-guard, source-safety, and non-authority tests complete the
 rejection-only signature-integration suite.
+Eight positive-vector intake schema, target-binding, privacy, provenance,
+message-binding, review, non-authority, source-safety, and manifest-coverage
+tests complete the rejection-only intake suite.
 
 ## Current guarantees of the reference model
 
@@ -361,7 +375,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a closed external-positive-vector intake schema and verify-only acceptance
-gate. It must reject missing provenance, message drift, secret-bearing fields,
-and any activation claim while keeping the absent independently supplied
-positive vector as a blocking HOLD.
+Add an independent zero-dependency Python verifier for the positive-vector
+intake schema, fixed eight-gate results, and rejection corpus. It must reproduce
+every published result without writing files or gaining signing, review,
+wallet, network, deployment, or activation capability.
