@@ -63,6 +63,8 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Rejection-only intake vectors](./positive-campaign-vector-intake-vectors.v1.json)
 - [Intake-vector generator](./generate-positive-campaign-vector-intake-vectors.mjs)
 - [Intake-vector validator](./validate-positive-campaign-vector-intake-vectors.mjs)
+- [Independent Python intake-verification contract](./INDEPENDENT_POSITIVE_VECTOR_INTAKE_VERIFICATION.md)
+- [Independent zero-dependency Python intake verifier](./verify-positive-campaign-vector-intake.py)
 - [Verifier-key lifecycle reference policy](./VERIFIER_KEY_LIFECYCLE.md)
 - [Network-free verifier-key lifecycle model](./verifier-key-lifecycle.mjs)
 - [Verifier-registry interface amendment](./KEY_LIFECYCLE_AMENDMENT.md)
@@ -181,6 +183,7 @@ node proposals/iat-promotions-dlc/validate-reviewer-bundle-preflight-vectors.mjs
 node proposals/iat-promotions-dlc/validate-campaign-envelope-verification-vectors.mjs
 node proposals/iat-promotions-dlc/validate-positive-campaign-vector-intake-vectors.mjs
 python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
+python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-review-manifest.py
 node --test proposals/iat-promotions-dlc/tests/policy.test.mjs
 node --test proposals/iat-promotions-dlc/tests/reference-engine.test.mjs
@@ -210,6 +213,7 @@ node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight.test.mj
 node --test proposals/iat-promotions-dlc/tests/reviewer-bundle-preflight-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/campaign-envelope-verification.test.mjs
 node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake.test.mjs
+node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake-python.test.mjs
 ```
 
 ## Deliberate isolation

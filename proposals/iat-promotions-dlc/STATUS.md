@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 17:23 UTC
+Updated: 2026-07-31 17:38 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `df0895b`
+Previously published public increment: `161721c`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -305,8 +305,19 @@ This status file deliberately does not claim a self-referential commit hash.
   signatures, and forbidden activation claims; and
 - an explicit continued HOLD: no valid positive campaign vector or independent
   positive-vector review exists, and the intake issues no receipt or authority.
+- an independent zero-dependency Python implementation of the closed intake
+  schema, canonical campaign message, fixed eight gates, and non-authority
+  result;
+- a public-verification-only Ed25519 implementation with both RFC 8032 positive
+  controls required before any rejection corpus can pass;
+- complete reproduction of all ten Node-published result objects, including
+  JSON Pointer diagnostics and cryptographic rejection reasons;
+- independent rejection of changed results, candidate drift, released HOLD
+  state, and activation claims with distinct verification exit `2`; and
+- source-level exclusion of write, network, wallet, signing, key-generation,
+  receipt, completed-review, deployment, and activation capability.
 
-Current proposal-only result: **234 tests passed**. This consists of 28 protected
+Current proposal-only result: **241 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -344,6 +355,9 @@ rejection-only signature-integration suite.
 Eight positive-vector intake schema, target-binding, privacy, provenance,
 message-binding, review, non-authority, source-safety, and manifest-coverage
 tests complete the rejection-only intake suite.
+Seven independent Python intake reproduction, RFC-control, drift-rejection,
+HOLD, CLI-failure, source-safety, and manifest-coverage tests complete the
+cross-runtime intake-verification suite.
 
 ## Current guarantees of the reference model
 
@@ -375,7 +389,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add an independent zero-dependency Python verifier for the positive-vector
-intake schema, fixed eight-gate results, and rejection corpus. It must reproduce
-every published result without writing files or gaining signing, review,
-wallet, network, deployment, or activation capability.
+Add a deterministic cross-runtime mutation corpus for the positive-vector
+intake schema, canonical message, public key, provenance, review, and authority
+fields. Every mutation must produce the same ordered gate result in Node and
+Python without creating any positive signature or review material.

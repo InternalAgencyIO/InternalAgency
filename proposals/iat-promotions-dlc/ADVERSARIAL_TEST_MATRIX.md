@@ -225,9 +225,16 @@ security audit or deployment approval.
 | Intake candidate claims receipt, review, deployment, or activation authority | same | Closed schema and non-authority gate reject the claim; evaluator output remains false/`NONE` |
 | Public rejection case is presented as accepted | `every published scenario is rejected...` | At least one of the fixed eight gates fails for every public candidate |
 | Intake evaluator gains write, network, wallet, signing, or keygen capability | `intake evaluator is local-read-only...` | Source capability scan and review-manifest coverage fail |
+| Independent verifier skips the public Ed25519 positive controls | `independent Python verifier reproduces... both RFC controls` | Both primary-source controls must verify before the rejection corpus is accepted |
+| Python canonical JSON, schema pointers, or Ed25519 result differs from Node | same | Every complete expected result must reproduce independently |
+| Published gate detail changes under stale Python evidence | `independent verifier rejects and names...` | Independent comparison exits `2` and names the changed scenario |
+| Candidate changes while the published Node result remains stale | `independent verifier rejects candidate drift...` | Recomputed schema, binding, and gate result no longer equals the artifact |
+| Corpus releases its HOLD or claims activation authority | `released HOLD or authority claims fail...` | Independent metadata contract rejects released or non-`NONE` authority |
+| Python verifier receives invalid usage or malformed JSON | `Python CLI gives exit 1...` | Offline pre-evaluation failure returns distinct exit `1` with no result authority |
+| Python verifier gains write, network, wallet, signing, keygen, or chain capability | `independent verifier is local-read-only...` | Source capability scan and review-manifest role coverage fail |
 
 ## Next matrix expansion
 
-- independent Python reproduction of the external positive-vector intake
-  schema, gate results, and rejection corpus;
+- deterministic cross-runtime mutation corpus for intake schema, canonical
+  message, public key, provenance, review, and authority fields;
 - local-validator transaction rollback and account-lock contention.

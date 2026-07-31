@@ -88,3 +88,7 @@ node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake.t
 The evaluator is local-read-only. The generator writes only the deterministic
 public rejection artifact and never generates cryptographic or review
 material.
+
+An independently implemented Python verifier and its standard-library-only
+public Ed25519 operation are documented in
+[`INDEPENDENT_POSITIVE_VECTOR_INTAKE_VERIFICATION.md`](./INDEPENDENT_POSITIVE_VECTOR_INTAKE_VERIFICATION.md).

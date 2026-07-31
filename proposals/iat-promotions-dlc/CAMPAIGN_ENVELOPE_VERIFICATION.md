@@ -59,6 +59,7 @@ node --test proposals/iat-promotions-dlc/tests/campaign-envelope-verification.te
 node proposals/iat-promotions-dlc/generate-positive-campaign-vector-intake-vectors.mjs --write
 node proposals/iat-promotions-dlc/validate-positive-campaign-vector-intake-vectors.mjs
 node --test proposals/iat-promotions-dlc/tests/positive-campaign-vector-intake.test.mjs
+python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-vectors --format json
 ```
 
 The generator only assembles canonical envelopes, copies public RFC material,
