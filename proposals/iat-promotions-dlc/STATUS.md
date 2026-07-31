@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 20:41 UTC
+Updated: 2026-07-31 21:09 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `6e07f6c`
+Previously published public increment: `bc63996`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -393,8 +393,19 @@ This status file deliberately does not claim a self-referential commit hash.
   exactly in Node and zero-dependency Python; and
 - compact-only publication with no expanded boundary corpus, acceptance,
   receipt, completed review, deployment, or activation authority.
+- a deterministic network-free settlement scheduler with canonical sorted
+  write-lock sets for campaign, promotion vault, nomination, sequence, role
+  markers, and destination balances;
+- six seven-step final-slot schedules covering both admission orders and both
+  injected transfer-failure points for either contender;
+- six lock conflicts, four exact atomic rollbacks, six single-winner commits,
+  two permanent-terminal loser rejections, and zero lock leaks;
+- exact 1,000-pair, zero-vault, 120/60 IAT winner, and unpaid-loser accounting
+  in every compact scenario; and
+- explicit no-validator, no-RPC, no-wallet, no-transaction, no-receipt,
+  no-review, and no-activation capability gates.
 
-Current proposal-only result: **285 tests passed**. This consists of 28 protected
+Current proposal-only result: **292 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -452,6 +463,10 @@ odd-width root parity, duplicate-final tree-size binding, multiproof-mutation,
 exact boundary mutation, rejection-only, odd-width and boundary Node/Python
 parity, changed-evidence, source-safety, and manifest-coverage tests complete
 the all-input audit suite.
+Seven settlement-contention regeneration, lock-derivation, final-slot winner,
+two-transfer rollback, reverse-order, invalid-schedule, source-safety, compact-
+evidence, and manifest-coverage tests complete the network-free concurrency
+suite.
 
 ## Current guarantees of the reference model
 
@@ -483,7 +498,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a deterministic network-free scheduler model for competing final-slot
-settlements and injected two-transfer rollback. Model account-lock contention
-without contacting a local validator, Devnet, or Mainnet, and preserve every
-HOLD, rejection-only, and non-authority gate.
+Add a portable closed schema and independent zero-dependency Python replay for
+the compact settlement-contention evidence. Keep expanded state and schedules
+runtime-only; do not contact a local validator, Devnet, or Mainnet; and preserve
+every HOLD, rejection-only, and non-authority gate.

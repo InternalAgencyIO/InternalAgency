@@ -274,8 +274,16 @@ security audit or deployment approval.
 | A duplicate-final root is treated as proof of the number of leaves | same | Fourteen raw root aliases remain visible, while separate root and count commitments prevent size substitution |
 | Node and Python disagree on one compact boundary outcome | `tree leaf-count boundaries... independently replay` | Both runtimes reproduce 79 exact accepts, 158 mismatch rejections, and the same root/count/outcome commitments |
 | Expanded synthetic boundary cases are published or gain authority | `expandedCasesStored: false` / HOLD fields | Artifact stores only compact metrics and commitments with false receipt, review, deployment, and activation fields |
+| Two final-slot settlements execute concurrently against stale state | `both final-slot attempts derive shared... write locks` | Shared campaign, promotion-vault, and settlement-sequence locks permit only one holder |
+| A blocked contender executes without acquiring its locks | `invalid scheduler operations fail...` | Execute-without-lock fails before settlement and leaves caller state byte-identical |
+| The lock winner fails after the hero transfer | `either transfer fault rolls back...` | Private-draft failure preserves the pre-execution digest, releases locks, and permits the contender to settle |
+| The lock winner fails after the proposer transfer | same | Both modeled transfers and every marker/counter/receipt mutation roll back before recovery |
+| The final-slot loser receives either reward | `one lock winner commits...` | Loser hero and proposer balances remain zero and its nomination expires unpaid at terminal exhaustion |
+| Admission order is silently biased | `reversing admission order deterministically reverses...` | Reversed deterministic schedule reverses the winner while preserving exact accounting |
+| A schedule leaks a writable lock | `invalid scheduler operations fail...` | Any nonempty terminal lock table fails closed |
+| Contention evidence claims validator, RPC, wallet, transaction, receipt, or activation authority | `contention tooling is offline, powerless...` | Source scans, fixed false fields, HOLD labels, and network `NONE` reject the claim |
 
 ## Next matrix expansion
 
-- network-free transaction rollback and account-lock contention around the
-  final settlement slot.
+- portable closed schema and independent cross-runtime replay for compact
+  settlement-contention evidence.
