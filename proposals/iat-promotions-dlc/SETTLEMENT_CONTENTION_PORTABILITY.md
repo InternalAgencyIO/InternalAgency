@@ -68,6 +68,10 @@ and NFKC-equivalent key lookalikes; see
 The key-collision companion adds three controls and twelve pre-candidate
 rejections proving decoded aliases collide while normalization lookalikes stay
 distinct but invalid; see `SETTLEMENT_CONTENTION_KEY_COLLISION_AUDIT.md`.
+The marker-value companion adds four canonical controls and sixteen
+pre-candidate rejections proving exact decoded marker comparison without case
+folding, normalization, or confusable mapping; see
+`SETTLEMENT_CONTENTION_MARKER_VALUE_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -84,6 +88,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limit
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-delimiter-whitespace-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-string-token-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-key-collision-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-marker-value-audit --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -97,6 +102,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-numeric-tok
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-delimiter-whitespace-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-string-token-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-key-collision-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-marker-value-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

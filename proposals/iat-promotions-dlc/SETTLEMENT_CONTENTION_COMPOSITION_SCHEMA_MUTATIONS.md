@@ -77,3 +77,9 @@ The key-collision companion
 [`SETTLEMENT_CONTENTION_KEY_COLLISION_AUDIT.md`](./SETTLEMENT_CONTENTION_KEY_COLLISION_AUDIT.md)
 proves escaped aliases collide after decoding while normalization lookalikes
 remain distinct but invalid unexpected keys in both runtimes.
+
+The marker-value companion
+[`SETTLEMENT_CONTENTION_MARKER_VALUE_AUDIT.md`](./SETTLEMENT_CONTENTION_MARKER_VALUE_AUDIT.md)
+accepts JSON escapes that decode exactly to `DRAFT/INACTIVE` and rejects raw
+or escaped controls, case variants, normalization equivalents, and
+cross-script confusables before candidate production in both runtimes.

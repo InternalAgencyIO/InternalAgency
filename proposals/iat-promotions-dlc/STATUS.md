@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-08-01 02:07 UTC
+Updated: 2026-08-01 02:30 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `f5f96ee`
+Previously published public increment: `8e3df88`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -525,8 +525,19 @@ This status file deliberately does not claim a self-referential commit hash.
   `7a65a5117aa4c21caa578d0d4c9d0647d0ee85e5735fcb61158d2756054c858b`,
   and combined replay commitment
   `bfb4789ba299d382338007671b601743504e452e8362fe875127ee860836f7a9`.
+- four canonical marker-value controls spanning the literal marker, escaped
+  ASCII, escaped solidus, and fully escaped canonical ASCII sequence;
+- sixteen pre-candidate marker-value rejections covering three raw controls,
+  four escaped controls, three case variants, four NFKC-equivalent variants,
+  and two cross-script confusables in Node and zero-dependency Python;
+- marker-value control-set commitment
+  `3053aef0920c442e2814fe2c2b1cc0314c311f0e610c2d621698dd5a95679316`,
+  rejection-set commitment
+  `8057b55f1b93ec4bcf7232aaecf47673dcbc6134866da56c66fd58debaccf0ca`,
+  and combined replay commitment
+  `09cb67b11dea7a1bd0efd9ccec2210baffb5bb8ce7ef1dc3c5da18f2f477c789`.
 
-Current proposal-only result: **414 tests passed**. This consists of 28 protected
+Current proposal-only result: **426 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -639,6 +650,11 @@ Twelve required-key collision deterministic regeneration, decoded-equality
 rule, escaped-alias order, dual-escape, normalization-distinct, error-boundary,
 compact-publication, independent Python parity, tamper-exit, source-safety, and
 manifest-coverage tests complete the collision-boundary suite.
+Twelve transport-marker value deterministic regeneration, exact-value rule,
+escaped-canonical control, raw-control syntax, escaped-control semantics,
+case-variant, NFKC-equivalent, cross-script confusable, error-boundary,
+independent Python parity, tamper-exit, source-safety, and manifest-coverage
+tests complete the exact marker-value suite.
 
 ## Current guarantees of the reference model
 
@@ -670,8 +686,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a compact transport-marker value corpus proving escaped canonical values
-accept while control, case, normalization, and confusable variants fail exact
-marker comparison. Keep candidates runtime-only; do not contact a local
-validator, Devnet, or Mainnet; preserve every network, wallet, review,
-deployment, and activation HOLD.
+Add a compact fatal UTF-8 ingress corpus proving truncated, overlong,
+surrogate-encoded, and invalid-continuation byte sequences reject before JSON
+parsing. Keep candidates runtime-only; do not contact a local validator,
+Devnet, or Mainnet; preserve every network, wallet, review, deployment, and
+activation HOLD.

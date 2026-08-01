@@ -53,6 +53,17 @@ export const KEY_COLLISION_RULES = Object.freeze({
   distinctUnexpectedKeysRejected: true,
 });
 
+export const TRANSPORT_MARKER_VALUE_RULES = Object.freeze({
+  canonicalValue: "DRAFT/INACTIVE",
+  comparison: "EXACT_DECODED_UNICODE_SCALAR_SEQUENCE",
+  escapedCanonicalValueSpellingsAllowed: true,
+  rawControlCodePointsAllowed: false,
+  escapedControlCodePointsAllowed: false,
+  caseFoldApplied: false,
+  unicodeNormalizationApplied: false,
+  confusableMappingApplied: false,
+});
+
 const NORMALIZATION_KEY_DEFINITIONS = Object.freeze([
   ["FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"],
   ["FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"],
@@ -760,6 +771,155 @@ export function evaluateKeyCollisionCorpus(baseArtifact) {
       decodedKeysCollide,
       nfkcMatchesRequiredKey,
       distinctDecodedKey,
+      rejectedBeforeCandidate: true,
+      candidateProduced: false,
+      mutationEvaluated: false,
+    };
+  });
+  return { controls, rejections };
+}
+
+function markerTokenEnvelope(markerToken) {
+  return `{"transportMarker":${markerToken},"candidate":{"markerProbe":0}}`;
+}
+
+function markerValueEnvelope(markerValue) {
+  return JSON.stringify({ transportMarker: markerValue, candidate: { markerProbe: 0 } });
+}
+
+export function buildTransportMarkerValueCorpus(baseArtifact) {
+  const controls = [
+    { caseId: "BASELINE_COMPACT", representation: "CANONICAL_LITERAL_MARKER", serialized: JSON.stringify({ transportMarker: TRANSPORT_MARKER, candidate: baseArtifact }), expectedCandidate: baseArtifact },
+    { caseId: "ESCAPED_CANONICAL_D", representation: "ESCAPED_ASCII_D", serialized: markerTokenEnvelope('"\\u0044RAFT/INACTIVE"'), expectedCandidate: { markerProbe: 0 } },
+    { caseId: "ESCAPED_CANONICAL_SOLIDUS", representation: "ESCAPED_SOLIDUS", serialized: markerTokenEnvelope('"DRAFT\\/INACTIVE"'), expectedCandidate: { markerProbe: 0 } },
+    { caseId: "FULLY_ESCAPED_CANONICAL", representation: "ESCAPED_ALL_ASCII", serialized: markerTokenEnvelope('"\\u0044\\u0052\\u0041\\u0046\\u0054\\u002f\\u0049\\u004e\\u0041\\u0043\\u0054\\u0049\\u0056\\u0045"'), expectedCandidate: { markerProbe: 0 } },
+  ];
+  const rawDefinitions = [
+    ["U+0000", "\u0000"],
+    ["U+000A", "\n"],
+    ["U+000D", "\r"],
+  ];
+  const rawControls = rawDefinitions.map(([descriptor, character]) => ({
+    caseId: `RAW_MARKER_CONTROL_${descriptor.slice(2)}`,
+    family: "RAW_CONTROL_IN_MARKER_VALUE",
+    descriptor,
+    serialized: markerTokenEnvelope(`"DRAFT${character}/INACTIVE"`),
+    expectedError: "MALFORMED_JSON",
+    nfkcMatchesCanonical: false,
+    caseInsensitiveMatchesCanonical: false,
+    confusableCrossScript: false,
+  }));
+  const escapedDefinitions = [
+    ["U+0000", "\\u0000"],
+    ["U+0009", "\\t"],
+    ["U+000A", "\\n"],
+    ["U+000D", "\\r"],
+  ];
+  const escapedControls = escapedDefinitions.map(([descriptor, token]) => ({
+    caseId: `ESCAPED_MARKER_CONTROL_${descriptor.slice(2)}`,
+    family: "ESCAPED_CONTROL_IN_MARKER_VALUE",
+    descriptor,
+    serialized: markerTokenEnvelope(`"DRAFT${token}/INACTIVE"`),
+    expectedError: "INVALID_TRANSPORT_ENVELOPE",
+    nfkcMatchesCanonical: false,
+    caseInsensitiveMatchesCanonical: false,
+    confusableCrossScript: false,
+  }));
+  const caseDefinitions = [
+    ["LOWERCASE_DRAFT", "draft/INACTIVE"],
+    ["LOWERCASE_INACTIVE", "DRAFT/inactive"],
+    ["TITLE_CASE_BOTH", "Draft/Inactive"],
+  ];
+  const caseVariants = caseDefinitions.map(([descriptor, markerValue]) => {
+    if (markerValue === TRANSPORT_MARKER || markerValue.toLowerCase() !== TRANSPORT_MARKER.toLowerCase()) {
+      fail(`MARKER_CASE_CORPUS_BUILD_FAILED:${descriptor}`);
+    }
+    return {
+      caseId: `CASE_${descriptor}`,
+      family: "CASE_VARIANT",
+      descriptor,
+      serialized: markerValueEnvelope(markerValue),
+      expectedError: "INVALID_TRANSPORT_ENVELOPE",
+      nfkcMatchesCanonical: false,
+      caseInsensitiveMatchesCanonical: true,
+      confusableCrossScript: false,
+    };
+  });
+  const normalizationDefinitions = [
+    ["FULLWIDTH_D_PREFIX", "ＤRAFT/INACTIVE"],
+    ["FULLWIDTH_SOLIDUS", "DRAFT／INACTIVE"],
+    ["FULLWIDTH_COMPLETE", "ＤＲＡＦＴ／ＩＮＡＣＴＩＶＥ"],
+    ["MATHEMATICAL_BOLD_D_PREFIX", "𝐃RAFT/INACTIVE"],
+  ];
+  const normalizationVariants = normalizationDefinitions.map(([descriptor, markerValue]) => {
+    if (markerValue === TRANSPORT_MARKER || markerValue.normalize("NFKC") !== TRANSPORT_MARKER) {
+      fail(`MARKER_NORMALIZATION_CORPUS_BUILD_FAILED:${descriptor}`);
+    }
+    return {
+      caseId: `NORMALIZATION_${descriptor}`,
+      family: "NORMALIZATION_VARIANT",
+      descriptor,
+      serialized: markerValueEnvelope(markerValue),
+      expectedError: "INVALID_TRANSPORT_ENVELOPE",
+      nfkcMatchesCanonical: true,
+      caseInsensitiveMatchesCanonical: false,
+      confusableCrossScript: false,
+    };
+  });
+  const confusableDefinitions = [
+    ["GREEK_CAPITAL_ALPHA", "DRΑFT/INACTIVE"],
+    ["CYRILLIC_CAPITAL_A", "DRАFT/INACTIVE"],
+  ];
+  const confusableVariants = confusableDefinitions.map(([descriptor, markerValue]) => ({
+    caseId: `CONFUSABLE_${descriptor}`,
+    family: "CROSS_SCRIPT_CONFUSABLE",
+    descriptor,
+    serialized: markerValueEnvelope(markerValue),
+    expectedError: "INVALID_TRANSPORT_ENVELOPE",
+    nfkcMatchesCanonical: false,
+    caseInsensitiveMatchesCanonical: false,
+    confusableCrossScript: true,
+  }));
+  return { controls, rejections: [...rawControls, ...escapedControls, ...caseVariants, ...normalizationVariants, ...confusableVariants] };
+}
+
+export function evaluateTransportMarkerValueCorpus(baseArtifact) {
+  const corpus = buildTransportMarkerValueCorpus(baseArtifact);
+  const controls = corpus.controls.map(({ caseId, representation, serialized, expectedCandidate }) => {
+    const parsed = parseBoundedTransportEnvelope(serialized);
+    if (canonicalSha256(parsed.candidate) !== canonicalSha256(expectedCandidate)) {
+      fail(`MARKER_VALUE_CONTROL_DRIFT:${caseId}`);
+    }
+    return {
+      caseId,
+      representation,
+      representationSha256: sha256Hex(serialized),
+      utf8Bytes: Buffer.byteLength(serialized, "utf8"),
+      candidateCommitmentSha256: canonicalSha256(parsed.candidate),
+      acceptedAtParser: true,
+      candidateStored: false,
+      mutationEvaluated: false,
+    };
+  });
+  const rejections = corpus.rejections.map(({ caseId, family, descriptor, serialized, expectedError, nfkcMatchesCanonical, caseInsensitiveMatchesCanonical, confusableCrossScript }) => {
+    let observedError = null;
+    try {
+      parseBoundedTransportEnvelope(serialized);
+    } catch (error) {
+      observedError = error instanceof Error ? error.message : String(error);
+    }
+    if (observedError !== expectedError) fail(`MARKER_VALUE_REJECTION_DRIFT:${caseId}:${observedError}`);
+    return {
+      caseId,
+      family,
+      descriptor,
+      representationSha256: sha256Hex(serialized),
+      utf8Bytes: Buffer.byteLength(serialized, "utf8"),
+      expectedError,
+      observedError,
+      nfkcMatchesCanonical,
+      caseInsensitiveMatchesCanonical,
+      confusableCrossScript,
       rejectedBeforeCandidate: true,
       candidateProduced: false,
       mutationEvaluated: false,

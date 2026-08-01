@@ -313,10 +313,12 @@ security audit or deployment approval.
 | A compatibility lookalike normalizes to `candidate` or `transportMarker` | NFKC normalization-lookalike tests | Six NFKC-equivalent variants remain distinct decoded scalar sequences and cannot satisfy either required key |
 | Literal and escaped spellings of one required key bypass duplicate detection | decoded-key collision tests | Six order/escape combinations decode to identical keys and reject as `DUPLICATE_JSON_KEY` in Node and Python |
 | A normalization lookalike beside the canonical key is treated as harmless | normalization-distinct collision tests | All six variants stay distinct but add an unexpected field, so exact envelope validation rejects before candidate production |
+| An escaped spelling of the canonical transport marker is rejected despite decoding exactly | escaped canonical marker-value controls | Literal, partial-escape, solidus-escape, and fully escaped forms all decode to `DRAFT/INACTIVE` and accept |
+| A control, case variant, normalization equivalent, or cross-script confusable gains marker authority | exact marker-value rejection families | Raw controls fail syntax; every decoded noncanonical value fails exact scalar comparison before candidate production in Node and Python |
 
 ## Next matrix expansion
 
-- add a compact transport-marker value corpus proving escaped canonical values
-  accept while control, case, normalization, and confusable variants fail exact
-  marker comparison. Preserve runtime-only candidates and every network,
-  wallet, review, deployment, and activation HOLD.
+- add a compact fatal UTF-8 ingress corpus proving truncated, overlong,
+  surrogate-encoded, and invalid-continuation byte sequences reject before
+  JSON parsing. Preserve runtime-only candidates and every network, wallet,
+  review, deployment, and activation HOLD.

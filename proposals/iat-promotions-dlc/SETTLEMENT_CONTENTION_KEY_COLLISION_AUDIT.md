@@ -35,3 +35,8 @@ exits with status `2`.
 
 This audit is review material only. It grants no receipt, deployment,
 activation, claim, wallet, signing, RPC, transaction, or chain capability.
+
+The companion
+[`SETTLEMENT_CONTENTION_MARKER_VALUE_AUDIT.md`](./SETTLEMENT_CONTENTION_MARKER_VALUE_AUDIT.md)
+applies the same decoded-scalar discipline to the required marker value,
+including control, case, normalization, and cross-script negative cases.

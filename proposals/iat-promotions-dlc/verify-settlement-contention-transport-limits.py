@@ -24,6 +24,7 @@ NUMERIC_ARTIFACT_NAME = "settlement-contention-composition-numeric-token-audit.v
 DELIMITER_ARTIFACT_NAME = "settlement-contention-composition-delimiter-whitespace-audit.v1.json"
 STRING_ARTIFACT_NAME = "settlement-contention-composition-string-token-audit.v1.json"
 KEY_COLLISION_ARTIFACT_NAME = "settlement-contention-composition-key-collision-audit.v1.json"
+MARKER_VALUE_ARTIFACT_NAME = "settlement-contention-composition-marker-value-audit.v1.json"
 BASE_NAME = "settlement-contention-composition-vectors.v1.json"
 TRANSPORT_MARKER = "DRAFT/INACTIVE"
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
@@ -67,6 +68,16 @@ KEY_COLLISION_RULES = {
     "unicodeNormalizationAppliedBeforeDuplicateCheck": False,
     "normalizationLookalikesRemainDistinct": True,
     "distinctUnexpectedKeysRejected": True,
+}
+TRANSPORT_MARKER_VALUE_RULES = {
+    "canonicalValue": "DRAFT/INACTIVE",
+    "comparison": "EXACT_DECODED_UNICODE_SCALAR_SEQUENCE",
+    "escapedCanonicalValueSpellingsAllowed": True,
+    "rawControlCodePointsAllowed": False,
+    "escapedControlCodePointsAllowed": False,
+    "caseFoldApplied": False,
+    "unicodeNormalizationApplied": False,
+    "confusableMappingApplied": False,
 }
 NORMALIZATION_KEY_DEFINITIONS = [
     ("FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"),
@@ -726,6 +737,143 @@ def evaluate_key_collision_corpus(base: dict[str, Any]) -> tuple[list[dict[str, 
     return controls, rejections
 
 
+def marker_token_envelope(marker_token: str) -> str:
+    return f'{{"transportMarker":{marker_token},"candidate":{{"markerProbe":0}}}}'
+
+
+def marker_value_envelope(marker_value: str) -> str:
+    return json.dumps({"transportMarker": marker_value, "candidate": {"markerProbe": 0}}, ensure_ascii=False, separators=(",", ":"))
+
+
+def build_marker_value_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    controls = [
+        {"caseId": "BASELINE_COMPACT", "representation": "CANONICAL_LITERAL_MARKER", "serialized": json.dumps({"transportMarker": TRANSPORT_MARKER, "candidate": base}, ensure_ascii=False, separators=(",", ":")), "expectedCandidate": base},
+        {"caseId": "ESCAPED_CANONICAL_D", "representation": "ESCAPED_ASCII_D", "serialized": marker_token_envelope('"\\u0044RAFT/INACTIVE"'), "expectedCandidate": {"markerProbe": 0}},
+        {"caseId": "ESCAPED_CANONICAL_SOLIDUS", "representation": "ESCAPED_SOLIDUS", "serialized": marker_token_envelope('"DRAFT\\/INACTIVE"'), "expectedCandidate": {"markerProbe": 0}},
+        {"caseId": "FULLY_ESCAPED_CANONICAL", "representation": "ESCAPED_ALL_ASCII", "serialized": marker_token_envelope('"\\u0044\\u0052\\u0041\\u0046\\u0054\\u002f\\u0049\\u004e\\u0041\\u0043\\u0054\\u0049\\u0056\\u0045"'), "expectedCandidate": {"markerProbe": 0}},
+    ]
+    raw_definitions = [("U+0000", "\u0000"), ("U+000A", "\n"), ("U+000D", "\r")]
+    raw_controls = [{
+        "caseId": f"RAW_MARKER_CONTROL_{descriptor[2:]}",
+        "family": "RAW_CONTROL_IN_MARKER_VALUE",
+        "descriptor": descriptor,
+        "serialized": marker_token_envelope(f'"DRAFT{character}/INACTIVE"'),
+        "expectedError": "MALFORMED_JSON",
+        "nfkcMatchesCanonical": False,
+        "caseInsensitiveMatchesCanonical": False,
+        "confusableCrossScript": False,
+    } for descriptor, character in raw_definitions]
+    escaped_definitions = [("U+0000", r"\u0000"), ("U+0009", r"\t"), ("U+000A", r"\n"), ("U+000D", r"\r")]
+    escaped_controls = [{
+        "caseId": f"ESCAPED_MARKER_CONTROL_{descriptor[2:]}",
+        "family": "ESCAPED_CONTROL_IN_MARKER_VALUE",
+        "descriptor": descriptor,
+        "serialized": marker_token_envelope(f'"DRAFT{token}/INACTIVE"'),
+        "expectedError": "INVALID_TRANSPORT_ENVELOPE",
+        "nfkcMatchesCanonical": False,
+        "caseInsensitiveMatchesCanonical": False,
+        "confusableCrossScript": False,
+    } for descriptor, token in escaped_definitions]
+    case_definitions = [
+        ("LOWERCASE_DRAFT", "draft/INACTIVE"),
+        ("LOWERCASE_INACTIVE", "DRAFT/inactive"),
+        ("TITLE_CASE_BOTH", "Draft/Inactive"),
+    ]
+    case_variants = []
+    for descriptor, marker_value in case_definitions:
+        if marker_value == TRANSPORT_MARKER or marker_value.lower() != TRANSPORT_MARKER.lower():
+            raise TransportError(f"MARKER_CASE_CORPUS_BUILD_FAILED:{descriptor}")
+        case_variants.append({
+            "caseId": f"CASE_{descriptor}",
+            "family": "CASE_VARIANT",
+            "descriptor": descriptor,
+            "serialized": marker_value_envelope(marker_value),
+            "expectedError": "INVALID_TRANSPORT_ENVELOPE",
+            "nfkcMatchesCanonical": False,
+            "caseInsensitiveMatchesCanonical": True,
+            "confusableCrossScript": False,
+        })
+    normalization_definitions = [
+        ("FULLWIDTH_D_PREFIX", "ＤRAFT/INACTIVE"),
+        ("FULLWIDTH_SOLIDUS", "DRAFT／INACTIVE"),
+        ("FULLWIDTH_COMPLETE", "ＤＲＡＦＴ／ＩＮＡＣＴＩＶＥ"),
+        ("MATHEMATICAL_BOLD_D_PREFIX", "𝐃RAFT/INACTIVE"),
+    ]
+    normalization_variants = []
+    for descriptor, marker_value in normalization_definitions:
+        if marker_value == TRANSPORT_MARKER or unicodedata.normalize("NFKC", marker_value) != TRANSPORT_MARKER:
+            raise TransportError(f"MARKER_NORMALIZATION_CORPUS_BUILD_FAILED:{descriptor}")
+        normalization_variants.append({
+            "caseId": f"NORMALIZATION_{descriptor}",
+            "family": "NORMALIZATION_VARIANT",
+            "descriptor": descriptor,
+            "serialized": marker_value_envelope(marker_value),
+            "expectedError": "INVALID_TRANSPORT_ENVELOPE",
+            "nfkcMatchesCanonical": True,
+            "caseInsensitiveMatchesCanonical": False,
+            "confusableCrossScript": False,
+        })
+    confusable_definitions = [
+        ("GREEK_CAPITAL_ALPHA", "DRΑFT/INACTIVE"),
+        ("CYRILLIC_CAPITAL_A", "DRАFT/INACTIVE"),
+    ]
+    confusable_variants = [{
+        "caseId": f"CONFUSABLE_{descriptor}",
+        "family": "CROSS_SCRIPT_CONFUSABLE",
+        "descriptor": descriptor,
+        "serialized": marker_value_envelope(marker_value),
+        "expectedError": "INVALID_TRANSPORT_ENVELOPE",
+        "nfkcMatchesCanonical": False,
+        "caseInsensitiveMatchesCanonical": False,
+        "confusableCrossScript": True,
+    } for descriptor, marker_value in confusable_definitions]
+    return controls, raw_controls + escaped_controls + case_variants + normalization_variants + confusable_variants
+
+
+def evaluate_marker_value_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    control_inputs, rejection_inputs = build_marker_value_corpus(base)
+    controls = []
+    for item in control_inputs:
+        candidate, _metrics = parse_transport_envelope(item["serialized"])
+        if canonical_sha256(candidate) != canonical_sha256(item["expectedCandidate"]):
+            raise TransportError(f'MARKER_VALUE_CONTROL_DRIFT:{item["caseId"]}')
+        controls.append({
+            "caseId": item["caseId"],
+            "representation": item["representation"],
+            "representationSha256": hashlib.sha256(item["serialized"].encode("utf-8")).hexdigest(),
+            "utf8Bytes": len(item["serialized"].encode("utf-8")),
+            "candidateCommitmentSha256": canonical_sha256(candidate),
+            "acceptedAtParser": True,
+            "candidateStored": False,
+            "mutationEvaluated": False,
+        })
+    rejections = []
+    for item in rejection_inputs:
+        observed_error = None
+        try:
+            parse_transport_envelope(item["serialized"])
+        except TransportError as error:
+            observed_error = str(error)
+        if observed_error != item["expectedError"]:
+            raise TransportError(f'MARKER_VALUE_REJECTION_DRIFT:{item["caseId"]}:{observed_error}')
+        rejections.append({
+            "caseId": item["caseId"],
+            "family": item["family"],
+            "descriptor": item["descriptor"],
+            "representationSha256": hashlib.sha256(item["serialized"].encode("utf-8")).hexdigest(),
+            "utf8Bytes": len(item["serialized"].encode("utf-8")),
+            "expectedError": item["expectedError"],
+            "observedError": observed_error,
+            "nfkcMatchesCanonical": item["nfkcMatchesCanonical"],
+            "caseInsensitiveMatchesCanonical": item["caseInsensitiveMatchesCanonical"],
+            "confusableCrossScript": item["confusableCrossScript"],
+            "rejectedBeforeCandidate": True,
+            "candidateProduced": False,
+            "mutationEvaluated": False,
+        })
+    return controls, rejections
+
+
 def expect(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
@@ -1057,6 +1205,75 @@ def verify_key_collision(root: Path, artifact_path: Path) -> tuple[list[str], di
     }
 
 
+def verify_marker_value(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        artifact = load_json(artifact_path)
+        base = load_json(root / BASE_NAME)
+        controls, rejections = evaluate_marker_value_corpus(base)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read marker-value evidence: {error}"], {}
+    expect(artifact.get("vectorVersion") == 1, "marker-value version drift", errors)
+    expect(artifact.get("vectorId") == "iat-promotions-dlc-contention-composition-marker-values-v1", "marker-value ID drift", errors)
+    expect(artifact.get("status") == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "marker-value HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": {"path": BASE_NAME, "canonicalSha256": canonical_sha256(base)},
+        "boundedParser": {"path": "settlement-contention-composition-transport-limits.mjs", "normalizedTextSha256": normalized_text_sha256(root / "settlement-contention-composition-transport-limits.mjs")},
+        "pythonVerifier": {"path": "verify-settlement-contention-transport-limits.py", "normalizedTextSha256": normalized_text_sha256(Path(__file__).resolve())},
+        "generator": {"path": "generate-settlement-contention-composition-marker-value-audit.mjs", "normalizedTextSha256": normalized_text_sha256(root / "generate-settlement-contention-composition-marker-value-audit.mjs")},
+    }
+    expect(artifact.get("sources") == expected_sources, "marker-value source drift", errors)
+    contract = artifact.get("contract", {})
+    expect(contract.get("mode") == "EXACT_TRANSPORT_MARKER_VALUE", "marker-value mode drift", errors)
+    expect(contract.get("transportMarkerValueRules") == TRANSPORT_MARKER_VALUE_RULES, "marker-value rules drift", errors)
+    expect(contract.get("acceptedControlCount") == 4 and contract.get("rejectionCount") == 16, "marker-value counts drift", errors)
+    family_counts = {
+        "rawControlCaseCount": 3,
+        "escapedControlCaseCount": 4,
+        "caseVariantCount": 3,
+        "normalizationVariantCount": 4,
+        "confusableVariantCount": 2,
+    }
+    for field, value in family_counts.items():
+        expect(contract.get(field) == value, f"marker-value {field} drift", errors)
+    for field in ["escapedCanonicalValuesAccepted", "rawControlsRejectedBeforeCandidate", "escapedControlsRejectedBeforeCandidate", "caseVariantsRejectedBeforeCandidate", "normalizationVariantsRejectedBeforeCandidate", "confusablesRejectedBeforeCandidate"]:
+        expect(contract.get(field) is True, f"marker-value contract {field} drift", errors)
+    for field in ["serializedRepresentationsStored", "runtimeCandidatesStored", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"marker-value contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "marker-value activation effect drift", errors)
+    expect(artifact.get("controls") == controls, "marker-value controls drift", errors)
+    expect(artifact.get("rejections") == rejections, "marker-value rejections drift", errors)
+    summary = artifact.get("summary", {})
+    control_commitment = canonical_sha256(controls)
+    rejection_commitment = canonical_sha256(rejections)
+    combined_commitment = canonical_sha256({"controls": controls, "rejections": rejections})
+    expect(summary.get("acceptedControlCount") == "4" and summary.get("rejectionCount") == "16", "marker-value summary counts drift", errors)
+    expect(summary.get("allCanonicalControlsAccepted") is True and summary.get("allNoncanonicalMarkerValuesRejectedBeforeCandidate") is True, "marker-value summary outcome drift", errors)
+    expect(summary.get("controlSetCommitmentSha256") == control_commitment, "marker-value control-set drift", errors)
+    expect(summary.get("rejectionSetCommitmentSha256") == rejection_commitment, "marker-value rejection-set drift", errors)
+    expect(summary.get("combinedReplayCommitmentSha256") == combined_commitment, "marker-value combined replay drift", errors)
+    for field in ["serializedRepresentationsStored", "runtimeCandidatesStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"marker-value summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "marker-value summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "acceptedControlCount": len(controls),
+        "rejectionCount": len(rejections),
+        "controlSetCommitmentSha256": control_commitment,
+        "rejectionSetCommitmentSha256": rejection_commitment,
+        "combinedReplayCommitmentSha256": combined_commitment,
+        "allNoncanonicalMarkerValuesRejectedBeforeCandidate": len(rejections) == 16,
+        "serializedRepresentationsStored": False,
+        "runtimeCandidatesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Verify held bounded JSON transport evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -1067,6 +1284,7 @@ def main() -> int:
     modes.add_argument("--verify-delimiter-whitespace-audit", action="store_true")
     modes.add_argument("--verify-string-token-audit", action="store_true")
     modes.add_argument("--verify-key-collision-audit", action="store_true")
+    modes.add_argument("--verify-marker-value-audit", action="store_true")
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
@@ -1078,6 +1296,8 @@ def main() -> int:
         artifact_name = STRING_ARTIFACT_NAME
     elif arguments.verify_key_collision_audit:
         artifact_name = KEY_COLLISION_ARTIFACT_NAME
+    elif arguments.verify_marker_value_audit:
+        artifact_name = MARKER_VALUE_ARTIFACT_NAME
     else:
         artifact_name = ARTIFACT_NAME
     artifact = arguments.artifact.resolve() if arguments.artifact else root / artifact_name
@@ -1089,6 +1309,8 @@ def main() -> int:
         errors, report = verify_string(root, artifact)
     elif arguments.verify_key_collision_audit:
         errors, report = verify_key_collision(root, artifact)
+    elif arguments.verify_marker_value_audit:
+        errors, report = verify_marker_value(root, artifact)
     else:
         errors, report = verify(root, artifact)
     if arguments.emit_json:
@@ -1096,7 +1318,7 @@ def main() -> int:
     elif errors:
         print("\n".join(errors), file=sys.stderr)
     else:
-        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else "transport-limit")))
+        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else "transport-limit"))))
         print(f"Independent {label} replay passed: {report['combinedReplayCommitmentSha256']}")
     return 2 if errors else 0
 
