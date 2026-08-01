@@ -65,7 +65,17 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-01T14:24:40.8977380Z",
+    "status": "awaiting_post",
+    "imageNumbers": [641, 642, 644],
+    "countries": ["Romania", "Somalia"],
+    "assets": [
+      {"file": "641-romania-corvin-castle-cipher.png", "sha256": "51b242c826fbb30a1cc02fdf75045957fdb08dd640d2ba9bed3bbc28e00f3193"},
+      {"file": "642-romania-danube-delta-extraction.png", "sha256": "162e1992c833ffd781a57361b631852b298edc24bf0147c6812650478ae51557"},
+      {"file": "644-somalia-mogadishu-oceanfront-arches-intercept.png", "sha256": "f0a34d366bbe9705919fdb9674b6bd2ea3e5016ced0472635a7985ab57be2a21"}
+    ]
+  },
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
