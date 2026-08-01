@@ -105,7 +105,8 @@ const stageKeys = [
   "index",
   "stage",
   "status",
-  "plannedTransactionMessageSha256",
+  "reviewedIntentSha256",
+  "signedMessageSha256",
   "expectedPostStateSha256",
   ...nullableFields,
 ];
@@ -115,6 +116,14 @@ const expectedLimitations = [
   "TERMINAL_HOLD is permanent after the first failure, mismatch, or unresolved submission; recovery requires a new separately reviewed record and must never overwrite history.",
   "RECONCILED permits evidence-first publication review only; it does not authorize publication or claims.",
 ];
+const expectedHashContract = {
+  algorithm: "SHA-256",
+  reviewedIntentEncoding: "RFC8785_CANONICAL_JSON_UTF8",
+  reviewedIntentIncludes: ["stage", "network", "programId", "orderedAccountMetas", "instructionData", "amountsAndAuthorities"],
+  reviewedIntentExcludes: ["recentBlockhash", "signatures"],
+  signedMessageEncoding: "SOLANA_SERIALIZED_MESSAGE_BYTES",
+  postStateEncoding: "RFC8785_CANONICAL_JSON_UTF8",
+};
 
 function explorerMatchesSignature(url, signature) {
   try {
@@ -155,15 +164,16 @@ function unsafeContent(value, path = "journal") {
   return null;
 }
 
-if (!exactKeys(journal, ["schema", "status", "network", "scope", "sourceArtifacts", "artifactDigests", "identity", "controls", "stages", "terminalDecision", "limitations"])) fail("journal must contain exactly the reviewed top-level fields");
-if (journal.schema !== "iat-v2-mainnet-stage-journal/v1") fail("unexpected stage-journal schema");
+if (!exactKeys(journal, ["schema", "status", "network", "scope", "hashContract", "sourceArtifacts", "artifactDigests", "identity", "controls", "stages", "terminalDecision", "limitations"])) fail("journal must contain exactly the reviewed top-level fields");
+if (journal.schema !== "iat-v2-mainnet-stage-journal/v2") fail("unexpected stage-journal schema");
 if (!["HOLD", "ARMED", "TERMINAL_HOLD", "RECONCILED"].includes(journal.status)) fail("status must be HOLD, ARMED, TERMINAL_HOLD, or RECONCILED");
 if (journal.network !== "mainnet-beta") fail("stage journal must remain mainnet-beta");
 if (journal.scope !== "Non-authorizing V2 stage reconciliation journal; this file never signs, broadcasts, retries, repairs, compensates, publishes, or establishes on-chain truth.") fail("scope lost its non-authorizing boundary");
+if (JSON.stringify(journal.hashContract) !== JSON.stringify(expectedHashContract)) fail("hashContract must retain the exact reviewed intent, message, and post-state encodings");
 if (!exactKeys(journal.sourceArtifacts, Object.keys(sourcePaths))) fail("sourceArtifacts must contain exactly the reviewed paths");
 if (!exactKeys(journal.artifactDigests, Object.keys(digestFields))) fail("artifactDigests must contain exactly the reviewed fields");
 if (!exactKeys(journal.identity, ["sourceCommit", "programId", "programDataAddress", "mint", "administrator"])) fail("identity must contain exactly the reviewed public fields");
-if (!exactKeys(journal.controls, ["stageOrderImmutable", "stopAfterFirstNonMatch", "noAutomaticRetry", "noCompensatingTransaction", "noApprovalReuse", "independentVerificationPerFinalizedStage", "noPublicationBeforeFullReconciliation", "preserveTerminalHoldHistory"])) fail("controls must contain exactly the reviewed stop fields");
+if (!exactKeys(journal.controls, ["stageOrderImmutable", "intentBoundBeforeCeremony", "signedMessageBoundBeforeSubmission", "stopAfterFirstNonMatch", "noAutomaticRetry", "noCompensatingTransaction", "noApprovalReuse", "independentVerificationPerFinalizedStage", "noPublicationBeforeFullReconciliation", "preserveTerminalHoldHistory"])) fail("controls must contain exactly the reviewed intent, message, and stop fields");
 if (!exactKeys(journal.terminalDecision, ["state", "failedStage", "reasonCode", "reviewedAtUtc", "reviewerLabel", "publicIncidentUrl"])) fail("terminalDecision must contain exactly the reviewed fields");
 if (unsafeContent(journal)) fail(`journal contains credential-shaped content at ${unsafeContent(journal)}`);
 for (const [field, expected] of Object.entries(sourcePaths)) {
@@ -213,14 +223,15 @@ for (const [offset, stage] of (journal.stages ?? []).entries()) {
   if (!["PENDING", "FINALIZED_MATCHED", "FAILED_OR_MISMATCH", "SUBMITTED_UNRESOLVED", "NOT_ATTEMPTED"].includes(stage.status)) fail(`stages[${offset}].status is not reviewed`);
   if (isHold) {
     if (stage.status !== "PENDING") fail(`HOLD requires stages[${offset}] to remain PENDING`);
-    for (const field of ["plannedTransactionMessageSha256", "expectedPostStateSha256", ...nullableFields]) if (stage[field] !== null) fail(`HOLD requires stages[${offset}].${field} to be null`);
+    for (const field of ["reviewedIntentSha256", "signedMessageSha256", "expectedPostStateSha256", ...nullableFields]) if (stage[field] !== null) fail(`HOLD requires stages[${offset}].${field} to be null`);
     continue;
   }
-  for (const field of ["plannedTransactionMessageSha256", "expectedPostStateSha256"]) if (!isDigest(stage[field])) fail(`non-HOLD requires stages[${offset}].${field}`);
+  for (const field of ["reviewedIntentSha256", "expectedPostStateSha256"]) if (!isDigest(stage[field])) fail(`non-HOLD requires stages[${offset}].${field}`);
   if (stage.status === "PENDING" || stage.status === "NOT_ATTEMPTED") {
-    for (const field of nullableFields) if (stage[field] !== null) fail(`${stage.status} requires stages[${offset}].${field} to be null`);
+    for (const field of ["signedMessageSha256", ...nullableFields]) if (stage[field] !== null) fail(`${stage.status} requires stages[${offset}].${field} to be null`);
   }
   if (stage.status === "FINALIZED_MATCHED") {
+    if (!isDigest(stage.signedMessageSha256)) fail(`stages[${offset}] finalized evidence requires its signed-message digest`);
     if (!isSignature(stage.signature)) fail(`stages[${offset}] requires a usable finalized signature`);
     else if (signatures.has(stage.signature)) fail(`duplicate stage signature at index ${offset}`); else signatures.add(stage.signature);
     if (!explorerMatchesSignature(stage.explorerUrl, stage.signature)) fail(`stages[${offset}].explorerUrl must directly identify its mainnet signature`);
@@ -241,6 +252,8 @@ for (const [offset, stage] of (journal.stages ?? []).entries()) {
     if (stage.confirmedAtUtc !== null && !isCurrentOrPastUtc(stage.confirmedAtUtc)) fail(`stages[${offset}].confirmedAtUtc must be null or non-future canonical UTC`);
     if (stage.confirmedAtUtc !== null && isUtc(stage.independentlyVerifiedAtUtc) && Date.parse(stage.independentlyVerifiedAtUtc) < Date.parse(stage.confirmedAtUtc)) fail(`stages[${offset}] failure verification cannot predate confirmation`);
     if (stage.observedPostStateSha256 !== null && !isDigest(stage.observedPostStateSha256)) fail(`stages[${offset}].observedPostStateSha256 must be null or lowercase SHA-256`);
+    if (stage.signedMessageSha256 !== null && !isDigest(stage.signedMessageSha256)) fail(`stages[${offset}].signedMessageSha256 must be null or lowercase SHA-256`);
+    if (stage.signature !== null && !isDigest(stage.signedMessageSha256)) fail(`stages[${offset}] failure signature requires its signed-message digest`);
   }
   if (stage.status === "SUBMITTED_UNRESOLVED") {
     if (firstStopIndex !== -1) fail("journal may contain only one first stop boundary"); else firstStopIndex = offset;
@@ -248,6 +261,7 @@ for (const [offset, stage] of (journal.stages ?? []).entries()) {
     else if (signatures.has(stage.signature)) fail(`duplicate stage signature at index ${offset}`);
     else signatures.add(stage.signature);
     if (!explorerMatchesSignature(stage.explorerUrl, stage.signature)) fail(`stages[${offset}] unresolved submission must directly identify its mainnet signature`);
+    if (!isDigest(stage.signedMessageSha256)) fail(`stages[${offset}] unresolved submission requires its signed-message digest`);
     if (stage.confirmedAtUtc !== null) fail(`stages[${offset}] unresolved submission cannot claim a confirmation time`);
     if (!isCurrentOrPastUtc(stage.independentlyVerifiedAtUtc) || !isLabel(stage.independentVerifierLabel)) fail(`stages[${offset}] unresolved submission requires a non-future independent review record`);
     if (stage.observedPostStateSha256 !== null) fail(`stages[${offset}] unresolved submission cannot claim an observed post-state digest`);

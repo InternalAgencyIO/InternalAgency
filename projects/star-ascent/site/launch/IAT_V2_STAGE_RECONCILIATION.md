@@ -10,20 +10,25 @@ broadcast, retry, repair, compensate, publish, or establish on-chain truth.
 
 The journal may move from `HOLD` to `ARMED` only after it binds the exact source
 commit, six canonical artifact byte digests, four distinct public identities,
-and precommitted transaction-message and expected-post-state digests for all
-eight stages. The readiness record must retain its safety controls while
-recording a funded, scheduled, regenerated, independently reviewed, explicitly
-authorized attended ceremony. `ARMED` is still a record state, not authority.
+and precommitted reviewed-intent and expected-post-state digests for all eight
+stages. The reviewed intent is SHA-256 over RFC 8785 canonical JSON containing
+the stage, network, program ID, ordered account metas, instruction data, amounts,
+and authorities. It deliberately excludes the expiring recent blockhash and all
+signatures. The readiness record must retain its safety controls while recording
+a funded, scheduled, regenerated, independently reviewed, explicitly authorized
+attended ceremony. `ARMED` is still a record state, not authority.
 Public Solana identities must decode to exactly 32 bytes and cannot use the
 system-program placeholder.
 
 ## After every confirmed stage
 
 Stop. An independent verifier records the direct mainnet Explorer transaction,
-confirmation time, verification time, verifier label, and observed post-state
-digest. Continue only when that digest exactly matches the precommitted expected
-post-state digest. Each signature must decode to exactly 64 bytes and cannot be
-reused between stages.
+SHA-256 of the actual serialized Solana message bytes, confirmation time,
+verification time, verifier label, and observed post-state digest. The actual
+message digest binds the fresh blockhash-bearing message separately from the
+reviewed intent and must exist before submission. Continue only when the
+post-state digest exactly matches its precommitment. Each signature must decode
+to exactly 64 bytes and cannot be reused between stages.
 
 The only successful terminal state is `RECONCILED`, with all eight stages
 `FINALIZED_MATCHED`. Publication remains a separate review after reconciliation.

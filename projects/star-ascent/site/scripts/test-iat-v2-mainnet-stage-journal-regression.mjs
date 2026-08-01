@@ -90,7 +90,7 @@ function armedFixture() {
     administrator: encodeBase58(Buffer.alloc(32, 4)),
   });
   for (const [index, stage] of journal.stages.entries()) {
-    stage.plannedTransactionMessageSha256 = createHash("sha256").update(`planned-stage-${index + 1}`).digest("hex");
+    stage.reviewedIntentSha256 = createHash("sha256").update(`reviewed-intent-stage-${index + 1}`).digest("hex");
     stage.expectedPostStateSha256 = createHash("sha256").update(`expected-stage-${index + 1}`).digest("hex");
   }
   return journal;
@@ -99,6 +99,7 @@ function armedFixture() {
 function matched(stage, index) {
   const signature = encodeBase58(Buffer.alloc(64, index + 1));
   stage.status = "FINALIZED_MATCHED";
+  stage.signedMessageSha256 = createHash("sha256").update(`signed-message-stage-${index + 1}`).digest("hex");
   stage.signature = signature;
   stage.explorerUrl = `https://explorer.solana.com/tx/${signature}?cluster=mainnet-beta`;
   stage.confirmedAtUtc = `2026-08-01T00:${String(index).padStart(2, "0")}:00Z`;
@@ -121,6 +122,10 @@ try {
   compensating.controls.noCompensatingTransaction = false;
   expectFail("compensating transaction authority", compensating, "controls.noCompensatingTransaction must be true");
 
+  const ambiguousIntentHash = clone(baseline);
+  ambiguousIntentHash.hashContract.reviewedIntentExcludes = ["signatures"];
+  expectFail("intent hash that includes an expiring blockhash", ambiguousIntentHash, "hashContract must retain the exact reviewed intent, message, and post-state encodings");
+
   const staleEvidence = clone(baseline);
   staleEvidence.stages[0].signature = "2".repeat(88);
   expectFail("evidence retained on HOLD", staleEvidence, "HOLD requires stages[0].signature to be null");
@@ -131,6 +136,10 @@ try {
 
   const armed = armedFixture();
   expectPass("fully bound ARMED", armed);
+
+  const armedWithSignedMessage = clone(armed);
+  armedWithSignedMessage.stages[0].signedMessageSha256 = createHash("sha256").update("premature-message").digest("hex");
+  expectFail("ARMED record retaining a signed message", armedWithSignedMessage, "PENDING requires stages[0].signedMessageSha256 to be null");
 
   const shapeOnlyAddress = clone(armed);
   shapeOnlyAddress.identity.programId = "2".repeat(32);
@@ -146,6 +155,10 @@ try {
     reviewerLabel: "independent-terminal-reviewer",
   });
   expectPass("eight-stage RECONCILED", reconciled);
+
+  const finalizedWithoutMessage = clone(reconciled);
+  finalizedWithoutMessage.stages[0].signedMessageSha256 = null;
+  expectFail("finalized stage without signed message", finalizedWithoutMessage, "finalized evidence requires its signed-message digest");
 
   const shapeOnlySignature = clone(reconciled);
   shapeOnlySignature.stages[0].signature = "2".repeat(80);
@@ -197,6 +210,7 @@ try {
   const unresolvedSignature = encodeBase58(Buffer.alloc(64, 11));
   Object.assign(unresolved.stages[0], {
     status: "SUBMITTED_UNRESOLVED",
+    signedMessageSha256: createHash("sha256").update("unresolved-signed-message").digest("hex"),
     signature: unresolvedSignature,
     explorerUrl: `https://explorer.solana.com/tx/${unresolvedSignature}?cluster=mainnet-beta`,
     independentlyVerifiedAtUtc: "2026-08-01T00:03:00Z",
@@ -217,6 +231,10 @@ try {
   unresolvedWithoutSignature.stages[0].signature = null;
   unresolvedWithoutSignature.stages[0].explorerUrl = null;
   expectFail("unresolved submission without signature", unresolvedWithoutSignature, "requires its usable public signature");
+
+  const unresolvedWithoutMessage = clone(unresolved);
+  unresolvedWithoutMessage.stages[0].signedMessageSha256 = null;
+  expectFail("unresolved submission without signed message", unresolvedWithoutMessage, "requires its signed-message digest");
 
   const unresolvedWithConfirmationClaim = clone(unresolved);
   unresolvedWithConfirmationClaim.stages[0].confirmedAtUtc = "2026-08-01T00:02:00Z";

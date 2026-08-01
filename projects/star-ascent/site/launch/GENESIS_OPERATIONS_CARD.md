@@ -60,8 +60,11 @@ exactly `1000000000000000000` at 9 decimals.
 ## Reviewed stage order
 
 Do not reorder, omit, or combine an authority boundary:
-Before the first boundary, bind every planned message and expected post-state in
-`launch/iat-v2-mainnet-stage-journal.template.json` and validate it as `ARMED`.
+Before the first boundary, bind every blockhash-free reviewed intent and
+expected post-state in `launch/iat-v2-mainnet-stage-journal.template.json` and
+validate it as `ARMED`. For each stage, hash the actual serialized message after
+its fresh blockhash is added and before submission; do not pretend all eight
+expiring messages can be frozen in advance.
 
 1. `DEPLOY_PROGRAM_WITHOUT_IAT`
 2. `TRANSFER_UPGRADE_AUTHORITY_TO_MODEL_T`
