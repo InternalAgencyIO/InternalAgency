@@ -1036,6 +1036,13 @@ rejected and regenerated.
 | **Vienna MuseumsQuartier Ruby Intercept**<br><img src="764-austria-vienna-museumsquartier-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking ruby-white light keys into a crystal civic compass above Vienna's MuseumsQuartier courtyards"> | **Salzburg Hohensalzburg Crystal Cipher**<br><img src="765-austria-salzburg-hohensalzburg-fortress-cipher.png" width="420" alt="The trio sealing a recovered archive inside a red-glass capsule beside Salzburg's Hohensalzburg Fortress and alpine skyline"> |
 | **Grossglockner Pasterze Alpine Extraction**<br><img src="766-austria-grossglockner-pasterze-extraction.png" width="420" alt="The trio restoring a ruby-and-green habitat beacon above the Pasterze glacier and Grossglockner massif"> | **Semmering Railway Moonline Relay**<br><img src="767-austria-semmering-railway-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-crystal-green rail relay before the Semmering Railway's Kalte Rinne viaduct at blue hour"> |
 
+## World Series - Europe - Batch 187: Belarus
+
+| | |
+|---|---|
+| **Minsk National Library Crystal Intercept**<br><img src="768-belarus-minsk-national-library-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking ruby-white light keys into a green-crystal civic compass above Minsk's faceted National Library precinct"> | **Mir Castle Ruby Cipher**<br><img src="769-belarus-mir-castle-cipher.png" width="420" alt="The trio sealing a recovered archive inside a crystal capsule beside Mir Castle's red-brick towers and still moat landscape"> |
+| **Belovezhskaya Pushcha Forest Extraction**<br><img src="770-belarus-belovezhskaya-pushcha-extraction.png" width="420" alt="The trio restoring a ruby-and-green habitat beacon among Belovezhskaya Pushcha's monumental oak trunks and fern clearings"> | **Brest Railway Crystal Moonline Relay**<br><img src="771-belarus-brest-railway-station-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-green-crystal rail relay above Brest Central railway station at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
