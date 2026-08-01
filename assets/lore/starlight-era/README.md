@@ -966,6 +966,13 @@ rejected and regenerated.
 | **Prague Dancing House Riverlight Intercept**<br><img src="724-czechia-prague-dancing-house-river-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three cobalt light keys into a ruby-and-pearl river compass beside Prague's Dancing House at dawn"> | **Český Krumlov Castle Glass Cipher**<br><img src="725-czechia-cesky-krumlov-castle-cipher.png" width="420" alt="The trio sealing a recovered archive inside a completed garnet capsule beside Český Krumlov Castle's painted Renaissance arcades"> |
 | **Pravčická Brána Sandstone Extraction**<br><img src="726-czechia-pravcicka-brana-terrain-extraction.png" width="420" alt="The trio restoring a cobalt-and-pearl habitat beacon before the monumental sandstone arch of Pravčická Brána"> | **Prague Main Station Glassline Relay**<br><img src="727-czechia-prague-main-station-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-cobalt-pearl rail compass above Prague Main Station at blue hour"> |
 
+## World Series - North America - Batch 177: Honduras
+
+| | |
+|---|---|
+| **Tegucigalpa La Leona Skyline Intercept**<br><img src="728-honduras-tegucigalpa-la-leona-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three cyan light keys into a pearl-and-cobalt hill compass above Tegucigalpa's Parque La Leona overlook"> | **Gracias Casa Galeano Indigo Cipher**<br><img src="729-honduras-gracias-casa-galeano-cipher.png" width="420" alt="The trio sealing a recovered archive inside an indigo light capsule beside Gracias's ochre Casa Galeano courtyard"> |
+| **Pico Bonito Rainforest Data Extraction**<br><img src="730-honduras-pico-bonito-rainforest-extraction.png" width="420" alt="The trio restoring a pearl-and-cobalt habitat beacon above Pico Bonito's misty rainforest river and mountain ridges"> | **Roatán West Bay Coral Relay**<br><img src="731-honduras-roatan-west-bay-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cyan-pearl-cobalt coral relay above Roatán's West Bay shoreline at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
