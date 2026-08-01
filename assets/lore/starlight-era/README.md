@@ -973,6 +973,13 @@ rejected and regenerated.
 | **Tegucigalpa La Leona Skyline Intercept**<br><img src="728-honduras-tegucigalpa-la-leona-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three cyan light keys into a pearl-and-cobalt hill compass above Tegucigalpa's Parque La Leona overlook"> | **Gracias Casa Galeano Indigo Cipher**<br><img src="729-honduras-gracias-casa-galeano-cipher.png" width="420" alt="The trio sealing a recovered archive inside an indigo light capsule beside Gracias's ochre Casa Galeano courtyard"> |
 | **Pico Bonito Rainforest Data Extraction**<br><img src="730-honduras-pico-bonito-rainforest-extraction.png" width="420" alt="The trio restoring a pearl-and-cobalt habitat beacon above Pico Bonito's misty rainforest river and mountain ridges"> | **Roatán West Bay Coral Relay**<br><img src="731-honduras-roatan-west-bay-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cyan-pearl-cobalt coral relay above Roatán's West Bay shoreline at blue hour"> |
 
+## World Series - Europe - Batch 178: Portugal
+
+| | |
+|---|---|
+| **Lisbon Parque das Nações Light Intercept**<br><img src="732-portugal-lisbon-parque-nacoes-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three emerald light keys into a crimson-and-gold estuary compass at Lisbon's Parque das Nações"> | **Sintra Pena Palace Chromatic Cipher**<br><img src="733-portugal-sintra-pena-palace-cipher.png" width="420" alt="The trio sealing a recovered archive inside a porcelain light capsule beside Sintra's vivid Pena Palace terraces"> |
+| **Madeira Pico do Arieiro Cloud Extraction**<br><img src="734-portugal-madeira-pico-arieiro-extraction.png" width="420" alt="The trio restoring an emerald-and-crimson habitat beacon above Pico do Arieiro's volcanic ridges and cloud inversion"> | **Porto Dom Luís I Bridge Night Relay**<br><img src="735-portugal-porto-dom-luis-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-crimson-gold bridge relay above Porto's Dom Luís I Bridge and Douro waterfront at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
