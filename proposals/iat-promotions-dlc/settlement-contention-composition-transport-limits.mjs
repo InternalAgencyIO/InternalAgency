@@ -93,6 +93,18 @@ export const UTF8_BOM_POSITION_RULES = Object.freeze({
   delimiterRejectionAfterSuccessfulDecode: true,
 });
 
+export const BYTE_VIEW_BOUNDARY_RULES = Object.freeze({
+  acceptedInputType: "Uint8Array",
+  byteOffsetRespected: true,
+  byteLengthRespected: true,
+  arrayBufferAccepted: false,
+  dataViewAccepted: false,
+  stringAccepted: false,
+  numericArrayAccepted: false,
+  invalidInputError: "INVALID_BYTE_VIEW",
+  rejectionPrecedesUtf8Decoding: true,
+});
+
 const NORMALIZATION_KEY_DEFINITIONS = Object.freeze([
   ["FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"],
   ["FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"],
@@ -274,7 +286,7 @@ export function parseBoundedTransportEnvelope(serialized) {
 }
 
 export function parseBoundedTransportEnvelopeBytes(serializedBytes) {
-  if (!(serializedBytes instanceof Uint8Array)) fail("INVALID_UTF8");
+  if (!(serializedBytes instanceof Uint8Array)) fail("INVALID_BYTE_VIEW");
   let serialized;
   try {
     serialized = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(serializedBytes);
@@ -1233,6 +1245,100 @@ export function evaluateUtf8BomPositionCorpus() {
       observedError,
       utf8DecodingSucceeded: true,
       jsonParsingAttempted: true,
+      rejectedBeforeCandidate: true,
+      candidateProduced: false,
+      mutationEvaluated: false,
+    };
+  });
+  return { controls, rejections };
+}
+
+function byteViewProbeEnvelope() {
+  return Buffer.from('{"transportMarker":"DRAFT/INACTIVE","candidate":{"byteViewProbe":0}}', "utf8");
+}
+
+function byteViewControl(caseId, prefixBytes, suffixBytes) {
+  const payloadBytes = byteViewProbeEnvelope();
+  const backingBytes = Buffer.concat([Buffer.from(prefixBytes), payloadBytes, Buffer.from(suffixBytes)]);
+  const serializedBytes = new Uint8Array(
+    backingBytes.buffer,
+    backingBytes.byteOffset + prefixBytes.length,
+    payloadBytes.length,
+  );
+  return {
+    caseId,
+    inputType: "Uint8Array",
+    backingBytes,
+    serializedBytes,
+    byteOffset: prefixBytes.length,
+    byteLength: payloadBytes.length,
+    excludedPrefixLength: prefixBytes.length,
+    excludedSuffixLength: suffixBytes.length,
+    expectedCandidate: { byteViewProbe: 0 },
+  };
+}
+
+export function buildByteViewBoundaryCorpus() {
+  const controls = [
+    byteViewControl("NONZERO_OFFSET_EXCLUDES_INVALID_PREFIX", [0xff, 0xc0], []),
+    byteViewControl("BOUNDED_LENGTH_EXCLUDES_INVALID_SUFFIX", [], [0xc0, 0xff]),
+    byteViewControl("OFFSET_AND_LENGTH_EXCLUDE_BOTH_SENTINELS", [0xff, 0xc0], [0xc0, 0xff]),
+  ];
+  const payloadBytes = byteViewProbeEnvelope();
+  const exactArrayBuffer = payloadBytes.buffer.slice(payloadBytes.byteOffset, payloadBytes.byteOffset + payloadBytes.length);
+  const rejections = [
+    { caseId: "ARRAY_BUFFER_REJECTED", inputType: "ArrayBuffer", runtimeInput: exactArrayBuffer },
+    { caseId: "DATA_VIEW_REJECTED", inputType: "DataView", runtimeInput: new DataView(exactArrayBuffer.slice(0)) },
+    { caseId: "STRING_REJECTED", inputType: "string", runtimeInput: payloadBytes.toString("utf8") },
+    { caseId: "NUMERIC_ARRAY_REJECTED", inputType: "Array<number>", runtimeInput: Array.from(payloadBytes) },
+  ].map((item) => ({
+    ...item,
+    payloadBytes,
+    expectedError: "INVALID_BYTE_VIEW",
+  }));
+  return { controls, rejections };
+}
+
+export function evaluateByteViewBoundaryCorpus() {
+  const corpus = buildByteViewBoundaryCorpus();
+  const controls = corpus.controls.map(({ caseId, inputType, backingBytes, serializedBytes, byteOffset, byteLength, excludedPrefixLength, excludedSuffixLength, expectedCandidate }) => {
+    const parsed = parseBoundedTransportEnvelopeBytes(serializedBytes);
+    if (canonicalSha256(parsed.candidate) !== canonicalSha256(expectedCandidate)) {
+      fail(`BYTE_VIEW_BOUNDARY_CONTROL_DRIFT:${caseId}`);
+    }
+    return {
+      caseId,
+      inputType,
+      backingRepresentationSha256: createHash("sha256").update(backingBytes).digest("hex"),
+      visibleRepresentationSha256: createHash("sha256").update(serializedBytes).digest("hex"),
+      backingByteLength: backingBytes.length,
+      byteOffset,
+      byteLength,
+      excludedPrefixLength,
+      excludedSuffixLength,
+      candidateCommitmentSha256: canonicalSha256(parsed.candidate),
+      acceptedAtParser: true,
+      candidateStored: false,
+      mutationEvaluated: false,
+    };
+  });
+  const rejections = corpus.rejections.map(({ caseId, inputType, runtimeInput, payloadBytes, expectedError }) => {
+    let observedError = null;
+    try {
+      parseBoundedTransportEnvelopeBytes(runtimeInput);
+    } catch (error) {
+      observedError = error instanceof Error ? error.message : String(error);
+    }
+    if (observedError !== expectedError) fail(`BYTE_VIEW_BOUNDARY_REJECTION_DRIFT:${caseId}:${observedError}`);
+    return {
+      caseId,
+      inputType,
+      payloadRepresentationSha256: createHash("sha256").update(payloadBytes).digest("hex"),
+      payloadByteLength: payloadBytes.length,
+      expectedError,
+      observedError,
+      utf8DecodingAttempted: false,
+      jsonParsingAttempted: false,
       rejectedBeforeCandidate: true,
       candidateProduced: false,
       mutationEvaluated: false,

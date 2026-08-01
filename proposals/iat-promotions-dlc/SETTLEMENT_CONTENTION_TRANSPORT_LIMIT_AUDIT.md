@@ -52,3 +52,8 @@ The companion
 [`SETTLEMENT_CONTENTION_NUMERIC_TOKEN_AUDIT.md`](./SETTLEMENT_CONTENTION_NUMERIC_TOKEN_AUDIT.md)
 closes exponent, fraction, negative-zero, integer-safety, and non-finite
 coercion paths under the same bounded parser.
+
+The byte-input companion
+[`SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md`](./SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md)
+fixes the `Uint8Array` view bounds applied before byte counting, decoding, and
+these structural limits.

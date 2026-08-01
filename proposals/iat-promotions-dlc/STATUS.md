@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-08-01 03:30 UTC
+Updated: 2026-08-01 03:57 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `b77d9e8`
+Previously published public increment: `25249b5`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -569,8 +569,19 @@ This status file deliberately does not claim a self-referential commit hash.
   `f0f05bde08a9c3c375596cf7182c88f9d6a61b00f4574b6b35de08455d76f3da`,
   and combined replay commitment
   `0923900db598b39f534c91c64408dd3afb07b015303e8fb69f6fb967758d86fa`.
+- three `Uint8Array` view controls proving nonzero offset, bounded length, and
+  combined offset/length exclude invalid UTF-8 bytes outside the visible view;
+- four pre-decode type rejections for `ArrayBuffer`, `DataView`, string, and
+  numeric array inputs in Node, with analogous independently reconstructed
+  container rejection in zero-dependency Python;
+- byte-view boundary control-set commitment
+  `21e39200009e0401baa456131ac2fed1018c4afda491ff7ed981a13024e2c924`,
+  rejection-set commitment
+  `037a27664cdf22db88296cdb06aa7556a0913a48b0dd87a871b4a7c61f8f7bdb`,
+  and combined replay commitment
+  `67aa51b0371b4cde1a0143bfcc11a4291d41dca55266b4057facd7d66b8583f6`.
 
-Current proposal-only result: **462 tests passed**. This consists of 28 protected
+Current proposal-only result: **474 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -703,6 +714,11 @@ in-string U+FEFF acceptance, leading, post-whitespace, and trailing delimiter
 rejection, post-decode error boundary, compact-publication, independent Python
 parity, tamper-exit, source-safety, and manifest-coverage tests complete the
 BOM-position suite.
+Twelve byte-view boundary deterministic regeneration, fixed input-type rule,
+nonzero-offset, bounded-length, combined-view, excluded-sentinel, wrong-type,
+pre-decode error-boundary, compact-publication, independent Python parity,
+tamper-exit, source-safety, and manifest-coverage tests complete the visible-
+byte suite.
 
 ## Current guarantees of the reference model
 
@@ -734,8 +750,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a compact byte-view boundary corpus proving a `Uint8Array` with nonzero
-offset and bounded length decodes only its visible bytes, while `ArrayBuffer`,
-`DataView`, and non-byte inputs fail closed. Keep candidates runtime-only; do
-not contact a local validator, Devnet, or Mainnet; preserve every network,
-wallet, review, deployment, and activation HOLD.
+Add a compact visible-view truncation corpus proving empty, prefix-only,
+suffix-only, and one-byte-short `Uint8Array` views reject without reading
+outside their bounds. Keep candidates runtime-only; do not contact a local
+validator, Devnet, or Mainnet; preserve every network, wallet, review,
+deployment, and activation HOLD.

@@ -84,6 +84,10 @@ The UTF-8 BOM-position companion accepts U+FEFF inside a candidate string and
 rejects leading, post-whitespace, and trailing BOM bytes after successful
 decoding but before candidate production; see
 `SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md`.
+The byte-view boundary companion accepts only the visible bytes of a bounded
+`Uint8Array` view and rejects `ArrayBuffer`, `DataView`, string, and numeric
+array inputs before decoding; see
+`SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -104,6 +108,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limit
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-fatal-utf8-ingress-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-utf8-boundary-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-utf8-bom-position-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-byte-view-boundary-audit --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -121,6 +126,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-marker-valu
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-fatal-utf8-ingress-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-utf8-boundary-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-utf8-bom-position-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-byte-view-boundary-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

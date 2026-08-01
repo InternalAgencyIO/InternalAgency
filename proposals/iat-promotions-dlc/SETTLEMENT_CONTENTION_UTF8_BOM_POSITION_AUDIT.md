@@ -25,6 +25,10 @@ Published evidence contains descriptors, byte-sequence hashes, byte counts,
 error boundaries, and outcomes only. Raw byte sequences and runtime candidates
 are never stored.
 
+The companion
+[`SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md`](./SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md)
+fixes which visible runtime bytes may reach this decoder and delimiter rule.
+
 ## Replay
 
 ```powershell

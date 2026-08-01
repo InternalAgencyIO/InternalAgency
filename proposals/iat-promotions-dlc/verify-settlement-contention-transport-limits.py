@@ -28,6 +28,7 @@ MARKER_VALUE_ARTIFACT_NAME = "settlement-contention-composition-marker-value-aud
 FATAL_UTF8_ARTIFACT_NAME = "settlement-contention-composition-fatal-utf8-ingress-audit.v1.json"
 UTF8_BOUNDARY_ARTIFACT_NAME = "settlement-contention-composition-utf8-boundary-audit.v1.json"
 UTF8_BOM_POSITION_ARTIFACT_NAME = "settlement-contention-composition-utf8-bom-position-audit.v1.json"
+BYTE_VIEW_BOUNDARY_ARTIFACT_NAME = "settlement-contention-composition-byte-view-boundary-audit.v1.json"
 BASE_NAME = "settlement-contention-composition-vectors.v1.json"
 TRANSPORT_MARKER = "DRAFT/INACTIVE"
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
@@ -106,6 +107,17 @@ UTF8_BOM_POSITION_RULES = {
     "trailingBomAllowed": False,
     "bomInsideJsonStringAllowed": True,
     "delimiterRejectionAfterSuccessfulDecode": True,
+}
+BYTE_VIEW_BOUNDARY_RULES = {
+    "acceptedInputType": "Uint8Array",
+    "byteOffsetRespected": True,
+    "byteLengthRespected": True,
+    "arrayBufferAccepted": False,
+    "dataViewAccepted": False,
+    "stringAccepted": False,
+    "numericArrayAccepted": False,
+    "invalidInputError": "INVALID_BYTE_VIEW",
+    "rejectionPrecedesUtf8Decoding": True,
 }
 NORMALIZATION_KEY_DEFINITIONS = [
     ("FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"),
@@ -313,9 +325,9 @@ def parse_transport_envelope(serialized: str) -> tuple[dict[str, Any], dict[str,
     return envelope["candidate"], metrics
 
 
-def parse_transport_envelope_bytes(serialized_bytes: bytes) -> tuple[dict[str, Any], dict[str, int]]:
+def parse_transport_envelope_bytes(serialized_bytes: Any) -> tuple[dict[str, Any], dict[str, int]]:
     if not isinstance(serialized_bytes, bytes):
-        raise TransportError("INVALID_UTF8")
+        raise TransportError("INVALID_BYTE_VIEW")
     try:
         serialized = serialized_bytes.decode("utf-8", "strict")
     except UnicodeDecodeError:
@@ -1185,6 +1197,95 @@ def evaluate_utf8_bom_position_corpus() -> tuple[list[dict[str, Any]], list[dict
     return controls, rejections
 
 
+def byte_view_probe_envelope() -> bytes:
+    return b'{"transportMarker":"DRAFT/INACTIVE","candidate":{"byteViewProbe":0}}'
+
+
+def byte_view_control(case_id: str, prefix_bytes: bytes, suffix_bytes: bytes) -> dict[str, Any]:
+    payload_bytes = byte_view_probe_envelope()
+    backing_bytes = prefix_bytes + payload_bytes + suffix_bytes
+    return {
+        "caseId": case_id,
+        "inputType": "Uint8Array",
+        "backingBytes": backing_bytes,
+        "serializedBytes": backing_bytes[len(prefix_bytes):len(prefix_bytes) + len(payload_bytes)],
+        "byteOffset": len(prefix_bytes),
+        "byteLength": len(payload_bytes),
+        "excludedPrefixLength": len(prefix_bytes),
+        "excludedSuffixLength": len(suffix_bytes),
+        "expectedCandidate": {"byteViewProbe": 0},
+    }
+
+
+def build_byte_view_boundary_corpus() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    controls = [
+        byte_view_control("NONZERO_OFFSET_EXCLUDES_INVALID_PREFIX", bytes([0xFF, 0xC0]), b""),
+        byte_view_control("BOUNDED_LENGTH_EXCLUDES_INVALID_SUFFIX", b"", bytes([0xC0, 0xFF])),
+        byte_view_control("OFFSET_AND_LENGTH_EXCLUDE_BOTH_SENTINELS", bytes([0xFF, 0xC0]), bytes([0xC0, 0xFF])),
+    ]
+    payload_bytes = byte_view_probe_envelope()
+    rejections = [{
+        "caseId": case_id,
+        "inputType": input_type,
+        "runtimeInput": runtime_input,
+        "payloadBytes": payload_bytes,
+        "expectedError": "INVALID_BYTE_VIEW",
+    } for case_id, input_type, runtime_input in [
+        ("ARRAY_BUFFER_REJECTED", "ArrayBuffer", bytearray(payload_bytes)),
+        ("DATA_VIEW_REJECTED", "DataView", memoryview(payload_bytes)),
+        ("STRING_REJECTED", "string", payload_bytes.decode("utf-8")),
+        ("NUMERIC_ARRAY_REJECTED", "Array<number>", list(payload_bytes)),
+    ]]
+    return controls, rejections
+
+
+def evaluate_byte_view_boundary_corpus() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    control_inputs, rejection_inputs = build_byte_view_boundary_corpus()
+    controls = []
+    for item in control_inputs:
+        candidate, _metrics = parse_transport_envelope_bytes(item["serializedBytes"])
+        if canonical_sha256(candidate) != canonical_sha256(item["expectedCandidate"]):
+            raise TransportError(f'BYTE_VIEW_BOUNDARY_CONTROL_DRIFT:{item["caseId"]}')
+        controls.append({
+            "caseId": item["caseId"],
+            "inputType": item["inputType"],
+            "backingRepresentationSha256": hashlib.sha256(item["backingBytes"]).hexdigest(),
+            "visibleRepresentationSha256": hashlib.sha256(item["serializedBytes"]).hexdigest(),
+            "backingByteLength": len(item["backingBytes"]),
+            "byteOffset": item["byteOffset"],
+            "byteLength": item["byteLength"],
+            "excludedPrefixLength": item["excludedPrefixLength"],
+            "excludedSuffixLength": item["excludedSuffixLength"],
+            "candidateCommitmentSha256": canonical_sha256(candidate),
+            "acceptedAtParser": True,
+            "candidateStored": False,
+            "mutationEvaluated": False,
+        })
+    rejections = []
+    for item in rejection_inputs:
+        observed_error = None
+        try:
+            parse_transport_envelope_bytes(item["runtimeInput"])
+        except TransportError as error:
+            observed_error = str(error)
+        if observed_error != item["expectedError"]:
+            raise TransportError(f'BYTE_VIEW_BOUNDARY_REJECTION_DRIFT:{item["caseId"]}:{observed_error}')
+        rejections.append({
+            "caseId": item["caseId"],
+            "inputType": item["inputType"],
+            "payloadRepresentationSha256": hashlib.sha256(item["payloadBytes"]).hexdigest(),
+            "payloadByteLength": len(item["payloadBytes"]),
+            "expectedError": item["expectedError"],
+            "observedError": observed_error,
+            "utf8DecodingAttempted": False,
+            "jsonParsingAttempted": False,
+            "rejectedBeforeCandidate": True,
+            "candidateProduced": False,
+            "mutationEvaluated": False,
+        })
+    return controls, rejections
+
+
 def expect(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
@@ -1770,6 +1871,69 @@ def verify_utf8_bom_position(root: Path, artifact_path: Path) -> tuple[list[str]
     }
 
 
+def verify_byte_view_boundary(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        artifact = load_json(artifact_path)
+        base = load_json(root / BASE_NAME)
+        controls, rejections = evaluate_byte_view_boundary_corpus()
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read byte-view boundary evidence: {error}"], {}
+    expect(artifact.get("vectorVersion") == 1, "byte-view boundary version drift", errors)
+    expect(artifact.get("vectorId") == "iat-promotions-dlc-contention-composition-byte-view-boundary-v1", "byte-view boundary ID drift", errors)
+    expect(artifact.get("status") == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "byte-view boundary HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": {"path": BASE_NAME, "canonicalSha256": canonical_sha256(base)},
+        "boundedParser": {"path": "settlement-contention-composition-transport-limits.mjs", "normalizedTextSha256": normalized_text_sha256(root / "settlement-contention-composition-transport-limits.mjs")},
+        "pythonVerifier": {"path": "verify-settlement-contention-transport-limits.py", "normalizedTextSha256": normalized_text_sha256(Path(__file__).resolve())},
+        "generator": {"path": "generate-settlement-contention-composition-byte-view-boundary-audit.mjs", "normalizedTextSha256": normalized_text_sha256(root / "generate-settlement-contention-composition-byte-view-boundary-audit.mjs")},
+    }
+    expect(artifact.get("sources") == expected_sources, "byte-view boundary source drift", errors)
+    contract = artifact.get("contract", {})
+    expect(contract.get("mode") == "UINT8ARRAY_VISIBLE_BYTE_BOUNDARY", "byte-view boundary mode drift", errors)
+    expect(contract.get("byteViewBoundaryRules") == BYTE_VIEW_BOUNDARY_RULES, "byte-view boundary rules drift", errors)
+    expect(contract.get("acceptedControlCount") == 3 and contract.get("rejectionCount") == 4, "byte-view boundary counts drift", errors)
+    for field in ["nonzeroOffsetAccepted", "boundedLengthAccepted", "outsideSentinelsExcluded", "wrongTypesRejectedBeforeDecode"]:
+        expect(contract.get(field) is True, f"byte-view boundary contract {field} drift", errors)
+    for field in ["backingByteSequencesStored", "visibleByteSequencesStored", "runtimeInputsStored", "runtimeCandidatesStored", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"byte-view boundary contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "byte-view boundary activation effect drift", errors)
+    expect(artifact.get("controls") == controls, "byte-view boundary controls drift", errors)
+    expect(artifact.get("rejections") == rejections, "byte-view boundary rejections drift", errors)
+    summary = artifact.get("summary", {})
+    control_commitment = canonical_sha256(controls)
+    rejection_commitment = canonical_sha256(rejections)
+    combined_commitment = canonical_sha256({"controls": controls, "rejections": rejections})
+    expect(summary.get("acceptedControlCount") == "3" and summary.get("rejectionCount") == "4", "byte-view boundary summary counts drift", errors)
+    expect(summary.get("allVisibleByteControlsAccepted") is True and summary.get("allWrongTypesRejectedBeforeDecode") is True, "byte-view boundary summary outcome drift", errors)
+    expect(summary.get("controlSetCommitmentSha256") == control_commitment, "byte-view boundary control-set drift", errors)
+    expect(summary.get("rejectionSetCommitmentSha256") == rejection_commitment, "byte-view boundary rejection-set drift", errors)
+    expect(summary.get("combinedReplayCommitmentSha256") == combined_commitment, "byte-view boundary combined replay drift", errors)
+    for field in ["backingByteSequencesStored", "visibleByteSequencesStored", "runtimeInputsStored", "runtimeCandidatesStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"byte-view boundary summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "byte-view boundary summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "acceptedControlCount": len(controls),
+        "rejectionCount": len(rejections),
+        "controlSetCommitmentSha256": control_commitment,
+        "rejectionSetCommitmentSha256": rejection_commitment,
+        "combinedReplayCommitmentSha256": combined_commitment,
+        "allVisibleByteControlsAccepted": len(controls) == 3,
+        "allWrongTypesRejectedBeforeDecode": len(rejections) == 4,
+        "backingByteSequencesStored": False,
+        "visibleByteSequencesStored": False,
+        "runtimeInputsStored": False,
+        "runtimeCandidatesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Verify held bounded JSON transport evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -1784,6 +1948,7 @@ def main() -> int:
     modes.add_argument("--verify-fatal-utf8-ingress-audit", action="store_true")
     modes.add_argument("--verify-utf8-boundary-audit", action="store_true")
     modes.add_argument("--verify-utf8-bom-position-audit", action="store_true")
+    modes.add_argument("--verify-byte-view-boundary-audit", action="store_true")
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
@@ -1803,6 +1968,8 @@ def main() -> int:
         artifact_name = UTF8_BOUNDARY_ARTIFACT_NAME
     elif arguments.verify_utf8_bom_position_audit:
         artifact_name = UTF8_BOM_POSITION_ARTIFACT_NAME
+    elif arguments.verify_byte_view_boundary_audit:
+        artifact_name = BYTE_VIEW_BOUNDARY_ARTIFACT_NAME
     else:
         artifact_name = ARTIFACT_NAME
     artifact = arguments.artifact.resolve() if arguments.artifact else root / artifact_name
@@ -1822,6 +1989,8 @@ def main() -> int:
         errors, report = verify_utf8_boundary(root, artifact)
     elif arguments.verify_utf8_bom_position_audit:
         errors, report = verify_utf8_bom_position(root, artifact)
+    elif arguments.verify_byte_view_boundary_audit:
+        errors, report = verify_byte_view_boundary(root, artifact)
     else:
         errors, report = verify(root, artifact)
     if arguments.emit_json:
@@ -1829,7 +1998,7 @@ def main() -> int:
     elif errors:
         print("\n".join(errors), file=sys.stderr)
     else:
-        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else ("fatal-utf8-ingress" if arguments.verify_fatal_utf8_ingress_audit else ("utf8-boundary" if arguments.verify_utf8_boundary_audit else ("utf8-bom-position" if arguments.verify_utf8_bom_position_audit else "transport-limit")))))))
+        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else ("fatal-utf8-ingress" if arguments.verify_fatal_utf8_ingress_audit else ("utf8-boundary" if arguments.verify_utf8_boundary_audit else ("utf8-bom-position" if arguments.verify_utf8_bom_position_audit else ("byte-view-boundary" if arguments.verify_byte_view_boundary_audit else "transport-limit"))))))))
         print(f"Independent {label} replay passed: {report['combinedReplayCommitmentSha256']}")
     return 2 if errors else 0
 

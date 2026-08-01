@@ -28,6 +28,11 @@ The companion
 separately proves that valid BOM bytes are preserved for the delimiter rule
 rather than being mistaken for malformed UTF-8.
 
+The byte-input companion
+[`SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md`](./SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md)
+fixes the accepted runtime view and proves offset/length isolation before this
+decoder runs.
+
 ## Replay
 
 ```powershell

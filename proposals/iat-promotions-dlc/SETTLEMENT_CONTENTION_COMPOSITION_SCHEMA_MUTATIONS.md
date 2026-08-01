@@ -101,3 +101,9 @@ The UTF-8 BOM-position companion
 preserves decoded U+FEFF at document delimiters, rejects it as non-JSON
 whitespace at leading, post-whitespace, and trailing positions, and accepts
 the same scalar inside a candidate string in both runtimes.
+
+The byte-view boundary companion
+[`SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md`](./SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md)
+binds decoding to the visible `Uint8Array` offset/length and rejects non-byte
+views before UTF-8 or JSON processing, with independently reproduced compact
+commitments in Python.
