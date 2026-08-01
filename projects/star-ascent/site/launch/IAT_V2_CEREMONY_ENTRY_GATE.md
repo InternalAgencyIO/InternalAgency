@@ -1,0 +1,58 @@
+# IAT V2 ceremony-entry gate
+
+Status: **DRAFT — UNSCHEDULED — MAINNET HOLD — NO CLAIM ROUTE**
+
+This gate separates ordinary preparation checks from an attended mainnet
+preflight. It is local and read-only. It cannot connect to a wallet, access a
+device, create a key, sign, simulate for signing, broadcast, deploy, mint,
+transfer, schedule, authorize, or publish anything.
+
+## Preparation audit
+
+Run this while preparing artifacts:
+
+```bash
+node scripts/run-launch-preflight.mjs
+```
+
+The command reports the current ceremony-entry blockers and then checks local
+artifact consistency. A passing preparation audit means only that the checked
+HOLD artifacts are internally consistent. It is not permission to enter the
+ceremony.
+
+## Attended ceremony-entry assertion
+
+Run this only during the final attended review:
+
+```bash
+node scripts/run-launch-preflight.mjs --require-ceremony-ready
+```
+
+Before any other ceremony check runs, the assertion requires all six
+conditions recorded in `launch/iat-v2-mainnet-readiness-gate.json`:
+
+1. The read-only balance observation is no more than 30 minutes old with no
+   more than one minute of future skew.
+2. The public mainnet address has at least exactly `8500000000` lamports.
+3. One replacement UTC window is published and the schedule state is
+   `SCHEDULED_HOLD`.
+4. Every bound release artifact was regenerated after both funding and
+   scheduling.
+5. An independent mainnet verifier is assigned.
+6. The exact Model T device path was reviewed in the attended session.
+
+The assessment also independently requires the mainnet HOLD/safety boundary
+and the honest `VERIFIED_LOCAL_HOST_ONLY` classification; either failure adds a
+separate blocker.
+
+If any condition is false, the command exits before the full preflight and
+prints the machine-readable blocker identifiers. No earlier approval or passed
+preparation audit can bypass this boundary.
+
+## What READY means
+
+`READY_FOR_ATTENDED_PREFLIGHT` allows only the remainder of the attended local
+preflight to run. It does not mean `GO`, does not move mainnet from `HOLD`, and
+does not authorize a transaction. Physical review of every transaction,
+separate explicit broadcast approval, confirmed-chain reconciliation, and
+evidence-first publication remain distinct human-controlled boundaries.

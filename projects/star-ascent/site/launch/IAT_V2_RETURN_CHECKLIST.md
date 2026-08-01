@@ -62,6 +62,11 @@ effect.
 8. Reconcile confirmed chain state before publishing any mint, authority,
    allocation, vesting, or claim-route statement.
 
+The final attended session must enter through
+`node scripts/run-launch-preflight.mjs --require-ceremony-ready`. The ordinary
+preparation preflight can pass while blockers remain and never grants ceremony
+entry. See `launch/IAT_V2_CEREMONY_ENTRY_GATE.md`.
+
 ## Mainnet blockers that must stay visible
 
 - Mainnet balance at `2026-08-01T07:31:16Z`: `2.53365957 SOL`.

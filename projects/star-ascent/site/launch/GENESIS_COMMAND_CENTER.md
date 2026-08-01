@@ -8,7 +8,9 @@
 
 ## Before broadcast
 
-1. Run the launch preflight command.
+1. In the attended final review, run
+   `node scripts/run-launch-preflight.mjs --require-ceremony-ready`. The default
+   preflight is preparation-only and cannot open the ceremony.
 2. Open the live site, `/launch`, `/signal`, and `/dossier` in independent tabs.
 3. Confirm the Trezor Model T firmware, PIN, recovery material security, and the intended public address on the device screen. Do not type recovery words into a computer or browser.
 4. Keep the publication payload in **HOLD** until independently verified evidence exists. Do not infer an address, transaction, allocation, or authority state.

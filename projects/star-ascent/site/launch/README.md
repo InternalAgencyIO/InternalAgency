@@ -23,13 +23,30 @@ Before the launch room opens, run the complete local consistency pass:
 node scripts/run-launch-preflight.mjs
 ```
 
-It first runs the isolated negative-case regressions for the manifest, Model T
-rehearsal, signer checklist, mainnet handoff, release packet, and release
-snapshot gates. It then runs the live schedule, supply, manifest, rehearsal,
-signing, handoff, publication, evidence-chain, transaction-order,
-release-packet, and release-snapshot checks in one sequence. A regression
-failure or any live-artifact failure is a HOLD condition; resolve it and rerun
-the complete command rather than treating a later passing check as clearance.
+It first reports the machine-readable ceremony-entry assessment, then validates
+the V2 policy, public Devnet evidence, separate local-only time-gate proof,
+mainnet readiness ledger, and sign-off records before running the isolated
+negative-case regressions for the manifest, Model T rehearsal, signer
+checklist, mainnet handoff, release packet, and release snapshot gates. It then
+runs the live schedule, supply, manifest, rehearsal, signing, handoff,
+publication, evidence-chain, transaction-order, release-packet, and
+release-snapshot checks in one sequence. A regression failure or any
+live-artifact failure is a HOLD condition; resolve it and rerun the complete
+command rather than treating a later passing check as clearance.
+
+The default command is a preparation audit and may pass while reporting
+ceremony blockers. During the final attended review only, require the separate
+entry assertion:
+
+```bash
+node scripts/run-launch-preflight.mjs --require-ceremony-ready
+```
+
+That mode fails before the full preflight unless a fresh read-only balance, the
+exact 8.5 SOL floor, one replacement UTC window,
+post-funding/post-scheduling artifact regeneration, an assigned independent
+verifier, and the reviewed Model T device path are all recorded. See
+[`IAT_V2_CEREMONY_ENTRY_GATE.md`](IAT_V2_CEREMONY_ENTRY_GATE.md).
 
 `genesis-manifest.template.json` is a HOLD-state source of truth. Copy it to a non-template manifest only after the signer and verifier agree on every final value. Its primary validator also requires the fixed five-step Genesis order and all five evidence records to remain `null` while the manifest is `HOLD`, so stale transaction URLs cannot make a HOLD record look partly released.
 

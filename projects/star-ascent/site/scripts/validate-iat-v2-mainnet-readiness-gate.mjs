@@ -40,6 +40,10 @@ check(
   "ceremony-floor Boolean does not match recorded integer balance",
 );
 check(gate.funding?.ceremonyFloorSatisfied === false, "recorded observation must retain the funding blocker");
+check(
+  gate.gates?.physicalModelTDevicePathReviewed === false,
+  "recorded readiness state must retain the attended Model T device-path blocker",
+);
 
 const proofPath = path.resolve(siteRoot, gate.timeGateEvidence?.path ?? "");
 check(proofPath.startsWith(`${siteRoot}${path.sep}`), "time-gate evidence path escapes site root");

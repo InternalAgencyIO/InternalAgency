@@ -17,16 +17,22 @@ machine-readable gate is
 
 ## Before broadcast
 
-1. Run `node scripts/run-launch-preflight.mjs` from the project root. It starts
-   with isolated negative-case gate regressions, then validates the live
-   artifact set; any failure keeps the launch in HOLD.
+1. In the attended final review, run
+   `node scripts/run-launch-preflight.mjs --require-ceremony-ready` from the
+   project root. It fails before the full preflight if a fresh read-only
+   balance, funding, replacement schedule, regeneration, verifier, or Model T
+   device-path review is missing.
+   The default command is preparation-only and cannot open the ceremony.
 2. Validate `launch/iat-v2-mainnet-readiness-gate.json`, then read
    [`GENESIS_COMMAND_CENTER.md`](GENESIS_COMMAND_CENTER.md) and assign the
    roles named there.
-3. Prepare the hardware signer using
+3. Read [`IAT_V2_CEREMONY_ENTRY_GATE.md`](IAT_V2_CEREMONY_ENTRY_GATE.md) and
+   keep `READY_FOR_ATTENDED_PREFLIGHT` distinct from signing or broadcast
+   authority.
+4. Prepare the hardware signer using
    [`../docs/TREZOR_SIGNER_READINESS.md`](../docs/TREZOR_SIGNER_READINESS.md)
    and [`../docs/MODEL_T_SOLANA_SIGNING_GATE.md`](../docs/MODEL_T_SOLANA_SIGNING_GATE.md).
-4. Keep the public surfaces open: `/launch`, `/signal`, `/proof`, and `/dossier`.
+5. Keep the public surfaces open: `/launch`, `/signal`, `/proof`, and `/dossier`.
 
 ## At Genesis
 
