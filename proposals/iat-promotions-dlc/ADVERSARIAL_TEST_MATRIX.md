@@ -301,10 +301,12 @@ security audit or deployment approval.
 | LF and CRLF bytes are conflated with canonical semantic evidence | `LF and CRLF bytes differ without changing parsed rejection evidence` | Raw representation SHA-256 digests differ while parsed candidates and diagnostics remain exactly equal in Node and Python |
 | Escaped Unicode keys or an escaped solidus alter candidate meaning | `escaped Unicode keys decode...`; `escaped solidus decodes...` | Six distinct encodings per mutation must reproduce the same canonical candidate and prior diagnostic commitments across 72 trials |
 | Truncated, non-hex, non-JSON, or unpaired-surrogate escapes reach mutation evaluation | `malformed escapes and unpaired surrogates reject before mutation` | Three syntax errors and three Unicode-scalar failures reject before any candidate is produced in Node and Python |
+| Duplicate envelope, candidate, or deeply nested keys are silently overwritten | `duplicate keys at envelope, candidate, and deep levels reject before mutation` | Duplicate-aware Node and Python decoders reject all three depths before returning a candidate |
+| Oversized or deeply nested JSON consumes unbounded parser resources | `byte limit accepts exactly and rejects plus one`; depth, member, array, and node-limit tests | Exact byte and ordinary controls accept; five independent one-over-limit inputs reject before mutation with fixed metrics |
 
 ## Next matrix expansion
 
-- add a compact duplicate-key plus depth/size-limit transport corpus proving
-  ambiguous or resource-exhaustion envelopes reject before mutation. Preserve
-  runtime-only candidates and every network, wallet, review, deployment, and
-  activation HOLD.
+- add a compact numeric-token boundary corpus proving exponent, negative-zero,
+  integer-safety, and non-finite-equivalent spellings cannot bypass canonical
+  field constraints. Preserve runtime-only candidates and every network,
+  wallet, review, deployment, and activation HOLD.

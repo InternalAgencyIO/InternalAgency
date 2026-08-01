@@ -88,6 +88,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Composition schema mutation diagnostic contract](./SETTLEMENT_CONTENTION_COMPOSITION_SCHEMA_MUTATIONS.md)
 - [Diagnostic representation audit](./SETTLEMENT_CONTENTION_DIAGNOSTIC_REPRESENTATION_AUDIT.md)
 - [Strict JSON escape representation audit](./SETTLEMENT_CONTENTION_ESCAPE_REPRESENTATION_AUDIT.md)
+- [Duplicate-aware bounded JSON transport audit](./SETTLEMENT_CONTENTION_TRANSPORT_LIMIT_AUDIT.md)
 - [Compact settlement contention vectors](./settlement-contention-vectors.v1.json)
 - [Compact settlement contention mutation vectors](./settlement-contention-mutation-vectors.v1.json)
 - [Compact settlement contention composition vectors](./settlement-contention-composition-vectors.v1.json)
@@ -95,6 +96,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Compact composition schema diagnostic vectors](./settlement-contention-composition-schema-vectors.v1.json)
 - [Compact diagnostic representation audit](./settlement-contention-composition-diagnostic-representation-audit.v1.json)
 - [Compact escaped-Unicode, solidus, and malformed-encoding audit](./settlement-contention-composition-escape-representation-audit.v1.json)
+- [Compact duplicate-key and transport-limit audit](./settlement-contention-composition-transport-limit-audit.v1.json)
 - [Closed settlement-contention evidence schema](./settlement-contention-evidence.schema.v1.json)
 - [Settlement contention vector generator](./generate-settlement-contention-vectors.mjs)
 - [Settlement contention mutation generator](./generate-settlement-contention-mutation-vectors.mjs)
@@ -102,14 +104,17 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Composition schema diagnostic generator](./generate-settlement-contention-composition-schema-vectors.mjs)
 - [Diagnostic representation-audit generator](./generate-settlement-contention-composition-diagnostic-representation-audit.mjs)
 - [Escape representation-audit generator](./generate-settlement-contention-composition-escape-representation-audit.mjs)
+- [Bounded transport-audit generator](./generate-settlement-contention-composition-transport-limit-audit.mjs)
 - [Settlement contention vector validator](./validate-settlement-contention-vectors.mjs)
 - [Settlement contention mutation validator](./validate-settlement-contention-mutation-vectors.mjs)
 - [Settlement contention composition validator](./validate-settlement-contention-composition-vectors.mjs)
 - [Composition schema diagnostic validator](./validate-settlement-contention-composition-schema-vectors.mjs)
 - [Diagnostic representation-audit validator](./validate-settlement-contention-composition-diagnostic-representation-audit.mjs)
 - [Escape representation-audit validator](./validate-settlement-contention-composition-escape-representation-audit.mjs)
+- [Bounded transport-audit validator](./validate-settlement-contention-composition-transport-limit-audit.mjs)
 - [Independent zero-dependency Python contention replay](./verify-settlement-contention-vectors.py)
 - [Independent zero-dependency Python escape replay](./verify-settlement-contention-escape-representations.py)
+- [Independent zero-dependency Python bounded-transport replay](./verify-settlement-contention-transport-limits.py)
 - [Verifier-key lifecycle reference policy](./VERIFIER_KEY_LIFECYCLE.md)
 - [Network-free verifier-key lifecycle model](./verifier-key-lifecycle.mjs)
 - [Verifier-registry interface amendment](./KEY_LIFECYCLE_AMENDMENT.md)
@@ -246,12 +251,14 @@ node proposals/iat-promotions-dlc/validate-settlement-contention-composition-vec
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-schema-vectors.mjs
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-diagnostic-representation-audit.mjs
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-escape-representation-audit.mjs
+node proposals/iat-promotions-dlc/validate-settlement-contention-composition-transport-limit-audit.mjs
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-mutation-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-schema-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-diagnostic-representation-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-escape-representations.py --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --json
 python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-differential-vectors --format json
@@ -301,6 +308,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema-vectors.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-diagnostic-representation-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-escape-representation-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-transport-limit-audit.test.mjs
 ```
 
 ## Deliberate isolation

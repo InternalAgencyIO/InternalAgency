@@ -49,6 +49,10 @@ The strict escape companion adds 72 equivalent escaped-Unicode, solidus,
 key-order, and line-ending encodings plus six pre-mutation malformed escape and
 surrogate rejections; see
 `SETTLEMENT_CONTENTION_ESCAPE_REPRESENTATION_AUDIT.md`.
+The bounded transport companion adds two accepted controls and eight
+pre-mutation rejections for duplicate keys and fixed byte, depth, object,
+array, and total-node limits; see
+`SETTLEMENT_CONTENTION_TRANSPORT_LIMIT_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -60,6 +64,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --ve
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-schema-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-diagnostic-representation-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-escape-representations.py --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -68,6 +73,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema-vectors.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-diagnostic-representation-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-escape-representation-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-transport-limit-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

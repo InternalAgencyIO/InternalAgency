@@ -48,3 +48,9 @@ The strict companion
 [`SETTLEMENT_CONTENTION_ESCAPE_REPRESENTATION_AUDIT.md`](./SETTLEMENT_CONTENTION_ESCAPE_REPRESENTATION_AUDIT.md)
 adds 72 escaped-Unicode, escaped-solidus, key-order, and line-ending trials,
 then rejects six malformed escape or surrogate encodings before mutation.
+
+The bounded-transport companion
+[`SETTLEMENT_CONTENTION_TRANSPORT_LIMIT_AUDIT.md`](./SETTLEMENT_CONTENTION_TRANSPORT_LIMIT_AUDIT.md)
+accepts two exact-limit controls and rejects duplicate keys at any depth plus
+UTF-8 byte, depth, object-member, array-length, and total-node overflows before
+mutation in both runtimes.

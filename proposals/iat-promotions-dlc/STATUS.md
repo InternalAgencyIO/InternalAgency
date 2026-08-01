@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-08-01 00:02 UTC
+Updated: 2026-08-01 00:31 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `0597bae`
+Previously published public increment: `70932fa`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -469,8 +469,19 @@ This status file deliberately does not claim a self-referential commit hash.
   `441bf740f2d2329b4ccfd8cc78d117db4238081e9dc7e1a1095941b026ef51b0`
   and malformed-set commitment
   `51e96f7b21417e1e84569f8adb0c80079ed96ecaddf3ae5ebf7895c7221a98e9`.
+- two bounded-transport controls accepting the ordinary envelope and exactly
+  65,536 UTF-8 bytes while preserving the canonical candidate commitment;
+- eight pre-mutation rejections covering duplicate keys at three depths and
+  one-over-limit byte, depth, object-member, array-length, and total-node
+  inputs, independently replayed in Node and zero-dependency Python; and
+- control-set commitment
+  `3d738e4f62f837f5e0efccf14e61f82ae43423b9b907a8f053e1728e6180a249`,
+  rejection-set commitment
+  `8422840dc082a557c0ede2b18c576eea3e3eaa0588d1a102b91fd1c4ce57eebd`,
+  and combined replay commitment
+  `978ec26a9ecf5d0ef9697caa60cea689042feae27070b68a168511b84b24beca`.
 
-Current proposal-only result: **354 tests passed**. This consists of 28 protected
+Current proposal-only result: **366 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -561,6 +572,10 @@ canonical and diagnostic stability, line-ending, escaped-Unicode, solidus,
 malformed-escape, surrogate, independent Python parity, two tamper exits,
 compact-publication, source-safety, and manifest-coverage tests complete the
 escape representation suite.
+Twelve bounded-transport deterministic regeneration, fixed-limit, control,
+duplicate-key, exact-byte, depth, object-member, array-length, total-node,
+independent Python parity, tamper-exit, compact-publication, source-safety, and
+manifest-coverage tests complete the transport-limit suite.
 
 ## Current guarantees of the reference model
 
@@ -592,7 +607,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a compact duplicate-key plus depth/size-limit transport corpus proving
-ambiguous or resource-exhaustion envelopes reject before mutation. Keep
-candidates runtime-only; do not contact a local validator, Devnet, or Mainnet;
-preserve every network, wallet, review, deployment, and activation HOLD.
+Add a compact numeric-token boundary corpus proving exponent, negative-zero,
+integer-safety, and non-finite-equivalent spellings cannot bypass canonical
+field constraints. Keep candidates runtime-only; do not contact a local
+validator, Devnet, or Mainnet; preserve every network, wallet, review,
+deployment, and activation HOLD.

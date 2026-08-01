@@ -1,0 +1,194 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-contention-composition-transport-limits-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "vectorsApplied": false
+  },
+  "sources": {
+    "baseArtifact": {
+      "path": "settlement-contention-composition-vectors.v1.json",
+      "canonicalSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf"
+    },
+    "boundedParser": {
+      "path": "settlement-contention-composition-transport-limits.mjs",
+      "normalizedTextSha256": "57bce4860337ad07ae44ca38813367927b08f436270ce738924d91cc2fa031bc"
+    },
+    "pythonVerifier": {
+      "path": "verify-settlement-contention-transport-limits.py",
+      "normalizedTextSha256": "464c21058ed96e831d79536dc4ab444490b67a3f8f2b5c6f83a5045eb2172551"
+    },
+    "generator": {
+      "path": "generate-settlement-contention-composition-transport-limit-audit.mjs",
+      "normalizedTextSha256": "183714e9b4f677c1dbadc8cc07874031279f48dd25558476a5e24c14780b25d1"
+    }
+  },
+  "contract": {
+    "mode": "DUPLICATE_AWARE_BOUNDED_JSON_TRANSPORT",
+    "limits": {
+      "maxUtf8Bytes": 65536,
+      "maxDepth": 16,
+      "maxObjectMembers": 32,
+      "maxArrayLength": 32,
+      "maxTotalNodes": 2048
+    },
+    "acceptedControlCount": 2,
+    "rejectionCount": 8,
+    "duplicateKeyCaseCount": 3,
+    "limitCaseCount": 5,
+    "duplicateKeysRejectedAtAnyDepth": true,
+    "exactByteBoundaryAccepted": true,
+    "overLimitRejectedBeforeMutation": true,
+    "serializedRepresentationsStored": false,
+    "runtimeCandidatesStored": false,
+    "usesLocalValidator": false,
+    "usesRpc": false,
+    "usesWallet": false,
+    "preparesTransactions": false,
+    "signsTransactions": false,
+    "broadcastsTransactions": false,
+    "issuesReviewReceipts": false,
+    "completesReview": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "summary": {
+    "acceptedControlCount": "2",
+    "rejectionCount": "8",
+    "allControlsAcceptedAtParser": true,
+    "allControlsPreserveBaseCandidate": true,
+    "allAmbiguousOrOverLimitInputsRejectedBeforeMutation": true,
+    "controlSetCommitmentSha256": "3d738e4f62f837f5e0efccf14e61f82ae43423b9b907a8f053e1728e6180a249",
+    "rejectionSetCommitmentSha256": "8422840dc082a557c0ede2b18c576eea3e3eaa0588d1a102b91fd1c4ce57eebd",
+    "combinedReplayCommitmentSha256": "978ec26a9ecf5d0ef9697caa60cea689042feae27070b68a168511b84b24beca",
+    "serializedRepresentationsStored": false,
+    "runtimeCandidatesStored": false,
+    "receiptIssued": false,
+    "reviewCompleted": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "controls": [
+    {
+      "caseId": "BASELINE_WITHIN_LIMITS",
+      "representationSha256": "3e7a0895182aa0e94dc06ae467591adfd79a7215334fa53a024a4cde6e9325bf",
+      "metrics": {
+        "utf8Bytes": 51320,
+        "totalNodes": 1229,
+        "maxDepthObserved": 8,
+        "maxObjectMembersObserved": 19,
+        "maxArrayLengthObserved": 28
+      },
+      "candidateCommitmentSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf",
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "BYTE_LIMIT_EXACT",
+      "representationSha256": "949abbbff1e5011b76f277bd05c57203ae20777549e9ef3cd902238e1c3d1f0e",
+      "metrics": {
+        "utf8Bytes": 65536,
+        "totalNodes": 1229,
+        "maxDepthObserved": 8,
+        "maxObjectMembersObserved": 19,
+        "maxArrayLengthObserved": 28
+      },
+      "candidateCommitmentSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf",
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    }
+  ],
+  "rejections": [
+    {
+      "caseId": "DUPLICATE_TOP_LEVEL_KEY",
+      "family": "DUPLICATE_KEY",
+      "representationSha256": "80b7830baa51cea57f940423a3619a1c4b04b2b2268e090258f09962d28203f7",
+      "utf8Bytes": 51359,
+      "expectedError": "DUPLICATE_JSON_KEY",
+      "observedError": "DUPLICATE_JSON_KEY",
+      "rejectedBeforeMutation": true,
+      "candidateProduced": false
+    },
+    {
+      "caseId": "DUPLICATE_CANDIDATE_KEY",
+      "family": "DUPLICATE_KEY",
+      "representationSha256": "0bc7232e5fe17fd656bfe57efc53dc6d400205c79301865508278f52554c0d15",
+      "utf8Bytes": 51344,
+      "expectedError": "DUPLICATE_JSON_KEY",
+      "observedError": "DUPLICATE_JSON_KEY",
+      "rejectedBeforeMutation": true,
+      "candidateProduced": false
+    },
+    {
+      "caseId": "DUPLICATE_DEEP_KEY",
+      "family": "DUPLICATE_KEY",
+      "representationSha256": "89ee3b41df5536bc952f1181e7424363894cd01d4034b30a4363b745b0b68766",
+      "utf8Bytes": 51359,
+      "expectedError": "DUPLICATE_JSON_KEY",
+      "observedError": "DUPLICATE_JSON_KEY",
+      "rejectedBeforeMutation": true,
+      "candidateProduced": false
+    },
+    {
+      "caseId": "BYTE_LIMIT_PLUS_ONE",
+      "family": "BYTE_LIMIT",
+      "representationSha256": "e4a87c5f0055066e72dc810b400672fb1d1dc45895fd5f673615dbeb4f2fcb11",
+      "utf8Bytes": 65537,
+      "expectedError": "TRANSPORT_BYTE_LIMIT",
+      "observedError": "TRANSPORT_BYTE_LIMIT",
+      "rejectedBeforeMutation": true,
+      "candidateProduced": false
+    },
+    {
+      "caseId": "DEPTH_LIMIT_PLUS_ONE",
+      "family": "DEPTH_LIMIT",
+      "representationSha256": "d548e531e34a7b40f83baa4aaade693f64e094ee795b6a0845383b1647a556cc",
+      "utf8Bytes": 80,
+      "expectedError": "TRANSPORT_DEPTH_LIMIT",
+      "observedError": "TRANSPORT_DEPTH_LIMIT",
+      "rejectedBeforeMutation": true,
+      "candidateProduced": false
+    },
+    {
+      "caseId": "OBJECT_MEMBER_LIMIT_PLUS_ONE",
+      "family": "OBJECT_MEMBER_LIMIT",
+      "representationSha256": "536c9e8003050f9f06d524cb3737b621eb568da64ef834b401eaf51bc95aaf1f",
+      "utf8Bytes": 327,
+      "expectedError": "TRANSPORT_OBJECT_MEMBER_LIMIT",
+      "observedError": "TRANSPORT_OBJECT_MEMBER_LIMIT",
+      "rejectedBeforeMutation": true,
+      "candidateProduced": false
+    },
+    {
+      "caseId": "ARRAY_LENGTH_LIMIT_PLUS_ONE",
+      "family": "ARRAY_LENGTH_LIMIT",
+      "representationSha256": "a41317865698c296b035bba0a98e2728d017e36ff0fecaf190f8d2545bec60a8",
+      "utf8Bytes": 139,
+      "expectedError": "TRANSPORT_ARRAY_LENGTH_LIMIT",
+      "observedError": "TRANSPORT_ARRAY_LENGTH_LIMIT",
+      "rejectedBeforeMutation": true,
+      "candidateProduced": false
+    },
+    {
+      "caseId": "TOTAL_NODE_LIMIT_PLUS_ONE",
+      "family": "NODE_LIMIT",
+      "representationSha256": "faf7f429b257f01e2b54c7cfb17a667bb75de395b1a0cad85cb7ae81d844021d",
+      "utf8Bytes": 6440,
+      "expectedError": "TRANSPORT_NODE_LIMIT",
+      "observedError": "TRANSPORT_NODE_LIMIT",
+      "rejectedBeforeMutation": true,
+      "candidateProduced": false
+    }
+  ]
+}
