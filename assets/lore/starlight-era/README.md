@@ -833,6 +833,13 @@ rejected and regenerated.
 | **Dakar Corniche Teranga Intercept**<br><img src="648-senegal-dakar-corniche-teranga-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a turquoise horizon compass above Dakar's Atlantic Corniche with the Mamelles lighthouse ridge beyond"> | **Saint-Louis Pastel Arcade Amber Cipher**<br><img src="649-senegal-saint-louis-pastel-arcade-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Saint-Louis's pastel merchant houses, arcades, balconies and steel bridge geometry"> |
 | **Lac Rose Salt-Light Extraction**<br><img src="650-senegal-lac-rose-salt-light-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above Lac Rose's pink mineral water and white salt banks"> | **Dakar Railway Station Moonline Relay**<br><img src="651-senegal-dakar-railway-station-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay before Dakar's historic railway station at cobalt blue hour"> |
 
+## World Series - North America - Batch 158: Guatemala
+
+| | |
+|---|---|
+| **Guatemala City Modernist Sky Intercept**<br><img src="652-guatemala-guatemala-city-modernist-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a jade skyline compass above Guatemala City's modernist Centro Civico with volcanic highlands beyond"> | **Antigua Santa Catalina Amber Cipher**<br><img src="653-guatemala-antigua-santa-catalina-arch-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Antigua Guatemala's Santa Catalina Arch with Volcan de Agua aligned beyond"> |
+| **Semuc Champey Riverlight Extraction**<br><img src="654-guatemala-semuc-champey-riverlight-extraction.png" width="420" alt="The trio restoring a gold-and-jade environmental beacon above Semuc Champey's stepped turquoise limestone pools"> | **Flores Lake Peten Moonline Relay**<br><img src="655-guatemala-flores-lake-peten-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay above Flores island's Lake Peten Itza waterfront at cobalt blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
