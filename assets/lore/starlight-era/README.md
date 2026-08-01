@@ -903,6 +903,13 @@ rejected and regenerated.
 | **La Paz Illimani Skyline Intercept**<br><img src="688-bolivia-la-paz-illimani-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a ruby-gold-emerald compass above La Paz's terraced urban bowl and Illimani at coral dawn"> | **Potosi Colonial Mint Courtyard Cipher**<br><img src="689-bolivia-potosi-colonial-mint-courtyard-cipher.png" width="420" alt="The trio closing a ruby, emerald and gold archive cipher beside Potosi's pale stone colonial mint courtyard and Cerro Rico"> |
 | **Salar de Uyuni Salt-Mirror Extraction**<br><img src="690-bolivia-salar-de-uyuni-salt-mirror-extraction.png" width="420" alt="The trio restoring an emerald-and-gold climate beacon over the reflective salt hexagons of Salar de Uyuni"> | **La Paz Mi Teleferico Moonline Relay**<br><img src="691-bolivia-la-paz-mi-teleferico-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-gold-emerald relay above La Paz's aerial transit corridor at cobalt blue hour"> |
 
+## World Series - Africa - Batch 168: Tunisia
+
+| | |
+|---|---|
+| **Tunis Avenue Light-Key Intercept**<br><img src="692-tunisia-tunis-habib-bourguiba-avenue-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three ruby light keys into a pearl-and-gold compass above Avenue Habib Bourguiba in Tunis"> | **El Jem Amphitheatre Amber Cipher**<br><img src="693-tunisia-el-jem-amphitheatre-cipher.png" width="420" alt="The trio sealing an amber archive prism among the monumental honey-stone arcades of El Jem amphitheatre"> |
+| **Chott el Jerid Salt-Mirror Extraction**<br><img src="694-tunisia-chott-el-jerid-salt-extraction.png" width="420" alt="The trio restoring a ruby-and-turquoise environmental beacon above the mineral salt crust of Chott el Jerid"> | **Sidi Bou Said Jasmine Moonline Relay**<br><img src="695-tunisia-sidi-bou-said-blue-hour-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-pearl-cobalt coastal relay above Sidi Bou Said at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
