@@ -31,3 +31,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-marker-valu
 
 These commands are offline and proposal-only. Passing them is evidence for
 review, not permission to activate, deploy, sign, broadcast, or transfer IAT.
+
+The companion
+[`SETTLEMENT_CONTENTION_FATAL_UTF8_INGRESS_AUDIT.md`](./SETTLEMENT_CONTENTION_FATAL_UTF8_INGRESS_AUDIT.md)
+fixes strict byte decoding before this decoded marker rule is evaluated.

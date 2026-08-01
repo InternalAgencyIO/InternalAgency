@@ -25,6 +25,7 @@ DELIMITER_ARTIFACT_NAME = "settlement-contention-composition-delimiter-whitespac
 STRING_ARTIFACT_NAME = "settlement-contention-composition-string-token-audit.v1.json"
 KEY_COLLISION_ARTIFACT_NAME = "settlement-contention-composition-key-collision-audit.v1.json"
 MARKER_VALUE_ARTIFACT_NAME = "settlement-contention-composition-marker-value-audit.v1.json"
+FATAL_UTF8_ARTIFACT_NAME = "settlement-contention-composition-fatal-utf8-ingress-audit.v1.json"
 BASE_NAME = "settlement-contention-composition-vectors.v1.json"
 TRANSPORT_MARKER = "DRAFT/INACTIVE"
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
@@ -78,6 +79,14 @@ TRANSPORT_MARKER_VALUE_RULES = {
     "caseFoldApplied": False,
     "unicodeNormalizationApplied": False,
     "confusableMappingApplied": False,
+}
+FATAL_UTF8_INGRESS_RULES = {
+    "inputType": "BYTE_SEQUENCE",
+    "encoding": "UTF-8",
+    "decoderErrorMode": "FATAL",
+    "replacementCharacterInserted": False,
+    "bomHandling": "PRESERVE_FOR_JSON_DELIMITER_RULE",
+    "rejectionPrecedesJsonParsing": True,
 }
 NORMALIZATION_KEY_DEFINITIONS = [
     ("FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"),
@@ -283,6 +292,16 @@ def parse_transport_envelope(serialized: str) -> tuple[dict[str, Any], dict[str,
     if envelope["transportMarker"] != TRANSPORT_MARKER or not isinstance(envelope["candidate"], dict):
         raise TransportError("INVALID_TRANSPORT_ENVELOPE")
     return envelope["candidate"], metrics
+
+
+def parse_transport_envelope_bytes(serialized_bytes: bytes) -> tuple[dict[str, Any], dict[str, int]]:
+    if not isinstance(serialized_bytes, bytes):
+        raise TransportError("INVALID_UTF8")
+    try:
+        serialized = serialized_bytes.decode("utf-8", "strict")
+    except UnicodeDecodeError:
+        raise TransportError("INVALID_UTF8") from None
+    return parse_transport_envelope(serialized)
 
 
 def evaluate_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -874,6 +893,107 @@ def evaluate_marker_value_corpus(base: dict[str, Any]) -> tuple[list[dict[str, A
     return controls, rejections
 
 
+def utf8_probe_envelope(probe: str) -> bytes:
+    return json.dumps({"transportMarker": TRANSPORT_MARKER, "candidate": {"utf8Probe": probe}}, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+
+
+def invalid_utf8_probe_envelope(injected_bytes: bytes) -> bytes:
+    prefix = b'{"transportMarker":"DRAFT/INACTIVE","candidate":{"utf8Probe":"'
+    suffix = b'"}}'
+    return prefix + injected_bytes + suffix
+
+
+def truncated_utf8_probe_envelope(injected_bytes: bytes) -> bytes:
+    prefix = b'{"transportMarker":"DRAFT/INACTIVE","candidate":{"utf8Probe":"'
+    return prefix + injected_bytes
+
+
+def build_fatal_utf8_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    controls = [
+        {
+            "caseId": "ASCII_BASELINE",
+            "scalarClass": "ONE_BYTE_ASCII",
+            "serializedBytes": json.dumps({"transportMarker": TRANSPORT_MARKER, "candidate": base}, ensure_ascii=False, separators=(",", ":")).encode("utf-8"),
+            "expectedCandidate": base,
+        },
+        {"caseId": "VALID_TWO_BYTE_SCALAR", "scalarClass": "U+00E9", "serializedBytes": utf8_probe_envelope("\u00e9"), "expectedCandidate": {"utf8Probe": "\u00e9"}},
+        {"caseId": "VALID_THREE_BYTE_SCALAR", "scalarClass": "U+20AC", "serializedBytes": utf8_probe_envelope("\u20ac"), "expectedCandidate": {"utf8Probe": "\u20ac"}},
+        {"caseId": "VALID_FOUR_BYTE_SCALAR", "scalarClass": "U+1F642", "serializedBytes": utf8_probe_envelope("\U0001f642"), "expectedCandidate": {"utf8Probe": "\U0001f642"}},
+    ]
+    definitions = [
+        ("TRUNCATED_TWO_BYTE_AT_EOF", "TRUNCATED_UTF8", "TWO_BYTE_LEAD_ONLY", bytes([0xC2])),
+        ("TRUNCATED_THREE_BYTE_AFTER_LEAD", "TRUNCATED_UTF8", "THREE_BYTE_LEAD_ONLY", bytes([0xE2])),
+        ("TRUNCATED_THREE_BYTE_AFTER_ONE_CONTINUATION", "TRUNCATED_UTF8", "THREE_BYTE_ONE_CONTINUATION", bytes([0xE2, 0x82])),
+        ("TRUNCATED_FOUR_BYTE_AFTER_TWO_CONTINUATIONS", "TRUNCATED_UTF8", "FOUR_BYTE_TWO_CONTINUATIONS", bytes([0xF0, 0x9F, 0x99])),
+        ("OVERLONG_TWO_BYTE_NUL", "OVERLONG_UTF8", "TWO_BYTE_NUL", bytes([0xC0, 0x80])),
+        ("OVERLONG_TWO_BYTE_SOLIDUS", "OVERLONG_UTF8", "TWO_BYTE_SOLIDUS", bytes([0xC0, 0xAF])),
+        ("OVERLONG_THREE_BYTE_NUL", "OVERLONG_UTF8", "THREE_BYTE_NUL", bytes([0xE0, 0x80, 0x80])),
+        ("OVERLONG_FOUR_BYTE_NUL", "OVERLONG_UTF8", "FOUR_BYTE_NUL", bytes([0xF0, 0x80, 0x80, 0x80])),
+        ("SURROGATE_HIGH_MIN", "SURROGATE_ENCODED_UTF8", "U+D800", bytes([0xED, 0xA0, 0x80])),
+        ("SURROGATE_HIGH_MAX", "SURROGATE_ENCODED_UTF8", "U+DBFF", bytes([0xED, 0xAF, 0xBF])),
+        ("SURROGATE_LOW_MIN", "SURROGATE_ENCODED_UTF8", "U+DC00", bytes([0xED, 0xB0, 0x80])),
+        ("SURROGATE_LOW_MAX", "SURROGATE_ENCODED_UTF8", "U+DFFF", bytes([0xED, 0xBF, 0xBF])),
+        ("INVALID_LONE_CONTINUATION", "INVALID_CONTINUATION_UTF8", "LONE_CONTINUATION", bytes([0x80])),
+        ("INVALID_TWO_BYTE_ASCII_CONTINUATION", "INVALID_CONTINUATION_UTF8", "TWO_BYTE_ASCII_SECOND", bytes([0xC2, 0x20])),
+        ("INVALID_THREE_BYTE_SECOND", "INVALID_CONTINUATION_UTF8", "THREE_BYTE_INVALID_SECOND", bytes([0xE2, 0x28, 0xA1])),
+        ("INVALID_FOUR_BYTE_SECOND", "INVALID_CONTINUATION_UTF8", "FOUR_BYTE_INVALID_SECOND", bytes([0xF0, 0x28, 0x8C, 0xBC])),
+    ]
+    rejections = [{
+        "caseId": case_id,
+        "family": family,
+        "descriptor": descriptor,
+        "serializedBytes": truncated_utf8_probe_envelope(injected_bytes) if family == "TRUNCATED_UTF8" else invalid_utf8_probe_envelope(injected_bytes),
+        "injectedByteLength": len(injected_bytes),
+        "expectedError": "INVALID_UTF8",
+    } for case_id, family, descriptor, injected_bytes in definitions]
+    return controls, rejections
+
+
+def evaluate_fatal_utf8_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    control_inputs, rejection_inputs = build_fatal_utf8_corpus(base)
+    controls = []
+    for item in control_inputs:
+        candidate, _metrics = parse_transport_envelope_bytes(item["serializedBytes"])
+        if canonical_sha256(candidate) != canonical_sha256(item["expectedCandidate"]):
+            raise TransportError(f'FATAL_UTF8_CONTROL_DRIFT:{item["caseId"]}')
+        controls.append({
+            "caseId": item["caseId"],
+            "scalarClass": item["scalarClass"],
+            "representationSha256": hashlib.sha256(item["serializedBytes"]).hexdigest(),
+            "utf8Bytes": len(item["serializedBytes"]),
+            "candidateCommitmentSha256": canonical_sha256(candidate),
+            "utf8DecodingSucceeded": True,
+            "acceptedAtParser": True,
+            "candidateStored": False,
+            "mutationEvaluated": False,
+        })
+    rejections = []
+    for item in rejection_inputs:
+        observed_error = None
+        try:
+            parse_transport_envelope_bytes(item["serializedBytes"])
+        except TransportError as error:
+            observed_error = str(error)
+        if observed_error != item["expectedError"]:
+            raise TransportError(f'FATAL_UTF8_REJECTION_DRIFT:{item["caseId"]}:{observed_error}')
+        rejections.append({
+            "caseId": item["caseId"],
+            "family": item["family"],
+            "descriptor": item["descriptor"],
+            "representationSha256": hashlib.sha256(item["serializedBytes"]).hexdigest(),
+            "utf8Bytes": len(item["serializedBytes"]),
+            "injectedByteLength": item["injectedByteLength"],
+            "expectedError": item["expectedError"],
+            "observedError": observed_error,
+            "utf8DecodingSucceeded": False,
+            "jsonParsingAttempted": False,
+            "rejectedBeforeCandidate": True,
+            "candidateProduced": False,
+            "mutationEvaluated": False,
+        })
+    return controls, rejections
+
+
 def expect(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
@@ -1274,6 +1394,68 @@ def verify_marker_value(root: Path, artifact_path: Path) -> tuple[list[str], dic
     }
 
 
+def verify_fatal_utf8(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        artifact = load_json(artifact_path)
+        base = load_json(root / BASE_NAME)
+        controls, rejections = evaluate_fatal_utf8_corpus(base)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read fatal UTF-8 evidence: {error}"], {}
+    expect(artifact.get("vectorVersion") == 1, "fatal UTF-8 version drift", errors)
+    expect(artifact.get("vectorId") == "iat-promotions-dlc-contention-composition-fatal-utf8-ingress-v1", "fatal UTF-8 ID drift", errors)
+    expect(artifact.get("status") == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "fatal UTF-8 HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": {"path": BASE_NAME, "canonicalSha256": canonical_sha256(base)},
+        "boundedParser": {"path": "settlement-contention-composition-transport-limits.mjs", "normalizedTextSha256": normalized_text_sha256(root / "settlement-contention-composition-transport-limits.mjs")},
+        "pythonVerifier": {"path": "verify-settlement-contention-transport-limits.py", "normalizedTextSha256": normalized_text_sha256(Path(__file__).resolve())},
+        "generator": {"path": "generate-settlement-contention-composition-fatal-utf8-ingress-audit.mjs", "normalizedTextSha256": normalized_text_sha256(root / "generate-settlement-contention-composition-fatal-utf8-ingress-audit.mjs")},
+    }
+    expect(artifact.get("sources") == expected_sources, "fatal UTF-8 source drift", errors)
+    contract = artifact.get("contract", {})
+    expect(contract.get("mode") == "FATAL_UTF8_BYTE_INGRESS", "fatal UTF-8 mode drift", errors)
+    expect(contract.get("fatalUtf8IngressRules") == FATAL_UTF8_INGRESS_RULES, "fatal UTF-8 rules drift", errors)
+    expect(contract.get("acceptedControlCount") == 4 and contract.get("rejectionCount") == 16, "fatal UTF-8 counts drift", errors)
+    for field in ["truncatedCaseCount", "overlongCaseCount", "surrogateEncodedCaseCount", "invalidContinuationCaseCount"]:
+        expect(contract.get(field) == 4, f"fatal UTF-8 {field} drift", errors)
+    for field in ["validScalarWidthsAccepted", "truncatedRejectedBeforeJson", "overlongRejectedBeforeJson", "surrogateEncodedRejectedBeforeJson", "invalidContinuationsRejectedBeforeJson"]:
+        expect(contract.get(field) is True, f"fatal UTF-8 contract {field} drift", errors)
+    for field in ["serializedByteSequencesStored", "runtimeCandidatesStored", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"fatal UTF-8 contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "fatal UTF-8 activation effect drift", errors)
+    expect(artifact.get("controls") == controls, "fatal UTF-8 controls drift", errors)
+    expect(artifact.get("rejections") == rejections, "fatal UTF-8 rejections drift", errors)
+    summary = artifact.get("summary", {})
+    control_commitment = canonical_sha256(controls)
+    rejection_commitment = canonical_sha256(rejections)
+    combined_commitment = canonical_sha256({"controls": controls, "rejections": rejections})
+    expect(summary.get("acceptedControlCount") == "4" and summary.get("rejectionCount") == "16", "fatal UTF-8 summary counts drift", errors)
+    expect(summary.get("allValidScalarWidthControlsAccepted") is True and summary.get("allMalformedByteSequencesRejectedBeforeJson") is True, "fatal UTF-8 summary outcome drift", errors)
+    expect(summary.get("controlSetCommitmentSha256") == control_commitment, "fatal UTF-8 control-set drift", errors)
+    expect(summary.get("rejectionSetCommitmentSha256") == rejection_commitment, "fatal UTF-8 rejection-set drift", errors)
+    expect(summary.get("combinedReplayCommitmentSha256") == combined_commitment, "fatal UTF-8 combined replay drift", errors)
+    for field in ["serializedByteSequencesStored", "runtimeCandidatesStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"fatal UTF-8 summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "fatal UTF-8 summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "acceptedControlCount": len(controls),
+        "rejectionCount": len(rejections),
+        "controlSetCommitmentSha256": control_commitment,
+        "rejectionSetCommitmentSha256": rejection_commitment,
+        "combinedReplayCommitmentSha256": combined_commitment,
+        "allMalformedByteSequencesRejectedBeforeJson": len(rejections) == 16,
+        "serializedByteSequencesStored": False,
+        "runtimeCandidatesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Verify held bounded JSON transport evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -1285,6 +1467,7 @@ def main() -> int:
     modes.add_argument("--verify-string-token-audit", action="store_true")
     modes.add_argument("--verify-key-collision-audit", action="store_true")
     modes.add_argument("--verify-marker-value-audit", action="store_true")
+    modes.add_argument("--verify-fatal-utf8-ingress-audit", action="store_true")
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
@@ -1298,6 +1481,8 @@ def main() -> int:
         artifact_name = KEY_COLLISION_ARTIFACT_NAME
     elif arguments.verify_marker_value_audit:
         artifact_name = MARKER_VALUE_ARTIFACT_NAME
+    elif arguments.verify_fatal_utf8_ingress_audit:
+        artifact_name = FATAL_UTF8_ARTIFACT_NAME
     else:
         artifact_name = ARTIFACT_NAME
     artifact = arguments.artifact.resolve() if arguments.artifact else root / artifact_name
@@ -1311,6 +1496,8 @@ def main() -> int:
         errors, report = verify_key_collision(root, artifact)
     elif arguments.verify_marker_value_audit:
         errors, report = verify_marker_value(root, artifact)
+    elif arguments.verify_fatal_utf8_ingress_audit:
+        errors, report = verify_fatal_utf8(root, artifact)
     else:
         errors, report = verify(root, artifact)
     if arguments.emit_json:
@@ -1318,7 +1505,7 @@ def main() -> int:
     elif errors:
         print("\n".join(errors), file=sys.stderr)
     else:
-        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else "transport-limit"))))
+        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else ("fatal-utf8-ingress" if arguments.verify_fatal_utf8_ingress_audit else "transport-limit")))))
         print(f"Independent {label} replay passed: {report['combinedReplayCommitmentSha256']}")
     return 2 if errors else 0
 

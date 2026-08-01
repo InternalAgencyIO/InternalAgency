@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-08-01 02:30 UTC
+Updated: 2026-08-01 02:53 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `8e3df88`
+Previously published public increment: `24af882`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -536,8 +536,19 @@ This status file deliberately does not claim a self-referential commit hash.
   `8057b55f1b93ec4bcf7232aaecf47673dcbc6134866da56c66fd58debaccf0ca`,
   and combined replay commitment
   `09cb67b11dea7a1bd0efd9ccec2210baffb5bb8ce7ef1dc3c5da18f2f477c789`.
+- four valid UTF-8 byte-ingress controls spanning one-, two-, three-, and
+  four-byte Unicode scalar encodings;
+- sixteen fatal pre-JSON byte rejections covering four truncated sequences,
+  four overlong encodings, four surrogate-code-point encodings, and four
+  invalid continuation patterns in Node and zero-dependency Python;
+- fatal UTF-8 control-set commitment
+  `68621bc5d34259865bb893e895f62c5eb1e130b11f5d68a99f201d42c1e867d0`,
+  rejection-set commitment
+  `0af2ef6528cbe78c78481f9229852d39bbceb23b050266a6ea4aa205e2acaee9`,
+  and combined replay commitment
+  `f1ad153fdf68fb12b9def32fd918f648ac032dbe71f3c043f8823a82d8e93058`.
 
-Current proposal-only result: **426 tests passed**. This consists of 28 protected
+Current proposal-only result: **438 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -655,6 +666,11 @@ escaped-canonical control, raw-control syntax, escaped-control semantics,
 case-variant, NFKC-equivalent, cross-script confusable, error-boundary,
 independent Python parity, tamper-exit, source-safety, and manifest-coverage
 tests complete the exact marker-value suite.
+Twelve fatal UTF-8 deterministic regeneration, fatal-decoder rule,
+one/two/three/four-byte scalar controls, truncated, overlong,
+surrogate-encoded, invalid-continuation, pre-JSON boundary, family coverage,
+independent Python parity, tamper-exit, source-safety, and manifest-coverage
+tests complete the byte-ingress suite.
 
 ## Current guarantees of the reference model
 
@@ -686,8 +702,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a compact fatal UTF-8 ingress corpus proving truncated, overlong,
-surrogate-encoded, and invalid-continuation byte sequences reject before JSON
-parsing. Keep candidates runtime-only; do not contact a local validator,
-Devnet, or Mainnet; preserve every network, wallet, review, deployment, and
-activation HOLD.
+Add a compact UTF-8 upper-bound and illegal-lead corpus proving U+10FFFF
+accepts while out-of-range scalar encodings, obsolete five/six-byte prefixes,
+FE/FF leads, and redundant continuation runs reject before JSON. Keep
+candidates runtime-only; do not contact a local validator, Devnet, or Mainnet;
+preserve every network, wallet, review, deployment, and activation HOLD.

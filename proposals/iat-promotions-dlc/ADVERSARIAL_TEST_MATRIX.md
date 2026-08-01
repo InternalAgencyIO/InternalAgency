@@ -315,10 +315,13 @@ security audit or deployment approval.
 | A normalization lookalike beside the canonical key is treated as harmless | normalization-distinct collision tests | All six variants stay distinct but add an unexpected field, so exact envelope validation rejects before candidate production |
 | An escaped spelling of the canonical transport marker is rejected despite decoding exactly | escaped canonical marker-value controls | Literal, partial-escape, solidus-escape, and fully escaped forms all decode to `DRAFT/INACTIVE` and accept |
 | A control, case variant, normalization equivalent, or cross-script confusable gains marker authority | exact marker-value rejection families | Raw controls fail syntax; every decoded noncanonical value fails exact scalar comparison before candidate production in Node and Python |
+| A decoder replaces malformed UTF-8 and lets JSON parsing continue | fatal UTF-8 ingress rule and compact pre-JSON results | Replacement is disabled; all sixteen malformed byte sequences reject as `INVALID_UTF8` with `jsonParsingAttempted: false` |
+| Truncated, overlong, surrogate-encoded, or invalid-continuation bytes reach a candidate | four balanced fatal UTF-8 families | Node and Python independently reconstruct four cases per family and commit identical pre-candidate outcomes without publishing raw bytes |
 
 ## Next matrix expansion
 
-- add a compact fatal UTF-8 ingress corpus proving truncated, overlong,
-  surrogate-encoded, and invalid-continuation byte sequences reject before
-  JSON parsing. Preserve runtime-only candidates and every network, wallet,
-  review, deployment, and activation HOLD.
+- add a compact UTF-8 upper-bound and illegal-lead corpus proving U+10FFFF
+  accepts while out-of-range scalar encodings, obsolete five/six-byte prefixes,
+  FE/FF leads, and redundant continuation runs reject before JSON. Preserve
+  runtime-only candidates and every network, wallet, review, deployment, and
+  activation HOLD.

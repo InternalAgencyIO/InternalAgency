@@ -4,6 +4,7 @@
  */
 
 import { createHash } from "node:crypto";
+import { TextDecoder } from "node:util";
 
 import { canonicalSha256 } from "./compose-program-interface-preview.mjs";
 
@@ -62,6 +63,15 @@ export const TRANSPORT_MARKER_VALUE_RULES = Object.freeze({
   caseFoldApplied: false,
   unicodeNormalizationApplied: false,
   confusableMappingApplied: false,
+});
+
+export const FATAL_UTF8_INGRESS_RULES = Object.freeze({
+  inputType: "BYTE_SEQUENCE",
+  encoding: "UTF-8",
+  decoderErrorMode: "FATAL",
+  replacementCharacterInserted: false,
+  bomHandling: "PRESERVE_FOR_JSON_DELIMITER_RULE",
+  rejectionPrecedesJsonParsing: true,
 });
 
 const NORMALIZATION_KEY_DEFINITIONS = Object.freeze([
@@ -242,6 +252,17 @@ export function parseBoundedTransportEnvelope(serialized) {
     fail("INVALID_TRANSPORT_ENVELOPE");
   }
   return { candidate: envelope.candidate, metrics: parsed.metrics };
+}
+
+export function parseBoundedTransportEnvelopeBytes(serializedBytes) {
+  if (!(serializedBytes instanceof Uint8Array)) fail("INVALID_UTF8");
+  let serialized;
+  try {
+    serialized = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(serializedBytes);
+  } catch {
+    fail("INVALID_UTF8");
+  }
+  return parseBoundedTransportEnvelope(serialized);
 }
 
 function replaceRequired(value, search, replacement, caseId) {
@@ -920,6 +941,108 @@ export function evaluateTransportMarkerValueCorpus(baseArtifact) {
       nfkcMatchesCanonical,
       caseInsensitiveMatchesCanonical,
       confusableCrossScript,
+      rejectedBeforeCandidate: true,
+      candidateProduced: false,
+      mutationEvaluated: false,
+    };
+  });
+  return { controls, rejections };
+}
+
+function utf8ProbeEnvelope(probe) {
+  return Buffer.from(JSON.stringify({ transportMarker: TRANSPORT_MARKER, candidate: { utf8Probe: probe } }), "utf8");
+}
+
+function invalidUtf8ProbeEnvelope(injectedBytes) {
+  const prefix = Buffer.from('{"transportMarker":"DRAFT/INACTIVE","candidate":{"utf8Probe":"', "utf8");
+  const suffix = Buffer.from('"}}', "utf8");
+  return Buffer.concat([prefix, Buffer.from(injectedBytes), suffix]);
+}
+
+function truncatedUtf8ProbeEnvelope(injectedBytes) {
+  const prefix = Buffer.from('{"transportMarker":"DRAFT/INACTIVE","candidate":{"utf8Probe":"', "utf8");
+  return Buffer.concat([prefix, Buffer.from(injectedBytes)]);
+}
+
+export function buildFatalUtf8IngressCorpus(baseArtifact) {
+  const controls = [
+    {
+      caseId: "ASCII_BASELINE",
+      scalarClass: "ONE_BYTE_ASCII",
+      serializedBytes: Buffer.from(JSON.stringify({ transportMarker: TRANSPORT_MARKER, candidate: baseArtifact }), "utf8"),
+      expectedCandidate: baseArtifact,
+    },
+    { caseId: "VALID_TWO_BYTE_SCALAR", scalarClass: "U+00E9", serializedBytes: utf8ProbeEnvelope("\u00e9"), expectedCandidate: { utf8Probe: "\u00e9" } },
+    { caseId: "VALID_THREE_BYTE_SCALAR", scalarClass: "U+20AC", serializedBytes: utf8ProbeEnvelope("\u20ac"), expectedCandidate: { utf8Probe: "\u20ac" } },
+    { caseId: "VALID_FOUR_BYTE_SCALAR", scalarClass: "U+1F642", serializedBytes: utf8ProbeEnvelope("\ud83d\ude42"), expectedCandidate: { utf8Probe: "\ud83d\ude42" } },
+  ];
+  const definitions = [
+    ["TRUNCATED_TWO_BYTE_AT_EOF", "TRUNCATED_UTF8", "TWO_BYTE_LEAD_ONLY", [0xc2]],
+    ["TRUNCATED_THREE_BYTE_AFTER_LEAD", "TRUNCATED_UTF8", "THREE_BYTE_LEAD_ONLY", [0xe2]],
+    ["TRUNCATED_THREE_BYTE_AFTER_ONE_CONTINUATION", "TRUNCATED_UTF8", "THREE_BYTE_ONE_CONTINUATION", [0xe2, 0x82]],
+    ["TRUNCATED_FOUR_BYTE_AFTER_TWO_CONTINUATIONS", "TRUNCATED_UTF8", "FOUR_BYTE_TWO_CONTINUATIONS", [0xf0, 0x9f, 0x99]],
+    ["OVERLONG_TWO_BYTE_NUL", "OVERLONG_UTF8", "TWO_BYTE_NUL", [0xc0, 0x80]],
+    ["OVERLONG_TWO_BYTE_SOLIDUS", "OVERLONG_UTF8", "TWO_BYTE_SOLIDUS", [0xc0, 0xaf]],
+    ["OVERLONG_THREE_BYTE_NUL", "OVERLONG_UTF8", "THREE_BYTE_NUL", [0xe0, 0x80, 0x80]],
+    ["OVERLONG_FOUR_BYTE_NUL", "OVERLONG_UTF8", "FOUR_BYTE_NUL", [0xf0, 0x80, 0x80, 0x80]],
+    ["SURROGATE_HIGH_MIN", "SURROGATE_ENCODED_UTF8", "U+D800", [0xed, 0xa0, 0x80]],
+    ["SURROGATE_HIGH_MAX", "SURROGATE_ENCODED_UTF8", "U+DBFF", [0xed, 0xaf, 0xbf]],
+    ["SURROGATE_LOW_MIN", "SURROGATE_ENCODED_UTF8", "U+DC00", [0xed, 0xb0, 0x80]],
+    ["SURROGATE_LOW_MAX", "SURROGATE_ENCODED_UTF8", "U+DFFF", [0xed, 0xbf, 0xbf]],
+    ["INVALID_LONE_CONTINUATION", "INVALID_CONTINUATION_UTF8", "LONE_CONTINUATION", [0x80]],
+    ["INVALID_TWO_BYTE_ASCII_CONTINUATION", "INVALID_CONTINUATION_UTF8", "TWO_BYTE_ASCII_SECOND", [0xc2, 0x20]],
+    ["INVALID_THREE_BYTE_SECOND", "INVALID_CONTINUATION_UTF8", "THREE_BYTE_INVALID_SECOND", [0xe2, 0x28, 0xa1]],
+    ["INVALID_FOUR_BYTE_SECOND", "INVALID_CONTINUATION_UTF8", "FOUR_BYTE_INVALID_SECOND", [0xf0, 0x28, 0x8c, 0xbc]],
+  ];
+  const rejections = definitions.map(([caseId, family, descriptor, injectedBytes]) => ({
+    caseId,
+    family,
+    descriptor,
+    serializedBytes: family === "TRUNCATED_UTF8" ? truncatedUtf8ProbeEnvelope(injectedBytes) : invalidUtf8ProbeEnvelope(injectedBytes),
+    injectedByteLength: injectedBytes.length,
+    expectedError: "INVALID_UTF8",
+  }));
+  return { controls, rejections };
+}
+
+export function evaluateFatalUtf8IngressCorpus(baseArtifact) {
+  const corpus = buildFatalUtf8IngressCorpus(baseArtifact);
+  const controls = corpus.controls.map(({ caseId, scalarClass, serializedBytes, expectedCandidate }) => {
+    const parsed = parseBoundedTransportEnvelopeBytes(serializedBytes);
+    if (canonicalSha256(parsed.candidate) !== canonicalSha256(expectedCandidate)) {
+      fail(`FATAL_UTF8_CONTROL_DRIFT:${caseId}`);
+    }
+    return {
+      caseId,
+      scalarClass,
+      representationSha256: createHash("sha256").update(serializedBytes).digest("hex"),
+      utf8Bytes: serializedBytes.length,
+      candidateCommitmentSha256: canonicalSha256(parsed.candidate),
+      utf8DecodingSucceeded: true,
+      acceptedAtParser: true,
+      candidateStored: false,
+      mutationEvaluated: false,
+    };
+  });
+  const rejections = corpus.rejections.map(({ caseId, family, descriptor, serializedBytes, injectedByteLength, expectedError }) => {
+    let observedError = null;
+    try {
+      parseBoundedTransportEnvelopeBytes(serializedBytes);
+    } catch (error) {
+      observedError = error instanceof Error ? error.message : String(error);
+    }
+    if (observedError !== expectedError) fail(`FATAL_UTF8_REJECTION_DRIFT:${caseId}:${observedError}`);
+    return {
+      caseId,
+      family,
+      descriptor,
+      representationSha256: createHash("sha256").update(serializedBytes).digest("hex"),
+      utf8Bytes: serializedBytes.length,
+      injectedByteLength,
+      expectedError,
+      observedError,
+      utf8DecodingSucceeded: false,
+      jsonParsingAttempted: false,
       rejectedBeforeCandidate: true,
       candidateProduced: false,
       mutationEvaluated: false,

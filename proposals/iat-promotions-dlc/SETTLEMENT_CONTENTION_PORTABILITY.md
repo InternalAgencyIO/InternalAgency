@@ -72,6 +72,10 @@ The marker-value companion adds four canonical controls and sixteen
 pre-candidate rejections proving exact decoded marker comparison without case
 folding, normalization, or confusable mapping; see
 `SETTLEMENT_CONTENTION_MARKER_VALUE_AUDIT.md`.
+The fatal UTF-8 ingress companion adds four valid scalar-width controls and
+sixteen pre-JSON byte rejections for truncated, overlong, surrogate-encoded,
+and invalid-continuation sequences; see
+`SETTLEMENT_CONTENTION_FATAL_UTF8_INGRESS_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -89,6 +93,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limit
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-string-token-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-key-collision-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-marker-value-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-fatal-utf8-ingress-audit --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -103,6 +108,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-delimiter-w
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-string-token-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-key-collision-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-marker-value-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-fatal-utf8-ingress-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

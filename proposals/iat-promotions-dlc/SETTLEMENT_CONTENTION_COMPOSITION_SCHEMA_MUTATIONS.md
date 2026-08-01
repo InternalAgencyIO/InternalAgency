@@ -83,3 +83,9 @@ The marker-value companion
 accepts JSON escapes that decode exactly to `DRAFT/INACTIVE` and rejects raw
 or escaped controls, case variants, normalization equivalents, and
 cross-script confusables before candidate production in both runtimes.
+
+The fatal UTF-8 ingress companion
+[`SETTLEMENT_CONTENTION_FATAL_UTF8_INGRESS_AUDIT.md`](./SETTLEMENT_CONTENTION_FATAL_UTF8_INGRESS_AUDIT.md)
+accepts valid one- through four-byte scalar encodings and rejects truncated,
+overlong, surrogate-encoded, and invalid-continuation byte sequences before
+JSON parsing in both runtimes.
