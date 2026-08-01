@@ -1015,6 +1015,13 @@ rejected and regenerated.
 | **Baku Boulevard Caspian-Light Intercept**<br><img src="752-azerbaijan-baku-boulevard-caspian-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking azure light keys into a ruby-emerald-copper city compass above Baku Boulevard and the Caspian skyline"> | **Sheki Caravanserai Copper Cipher**<br><img src="753-azerbaijan-sheki-caravanserai-cipher.png" width="420" alt="The trio sealing a recovered archive inside a copper-and-glass capsule in Sheki's honey-brick Upper Caravanserai courtyard"> |
 | **Gobustan Mud-Volcano Terrain Extraction**<br><img src="754-azerbaijan-gobustan-mud-volcano-extraction.png" width="420" alt="The trio restoring an azure habitat beacon above Gobustan's gray mud-volcano cones and distant Caspian plain"> | **Baku Nizami Street Moonline Relay**<br><img src="755-azerbaijan-baku-nizami-street-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an azure-ruby-emerald street relay above Baku's illuminated Nizami Street at blue hour"> |
 
+## World Series - Asia - Batch 184: Israel
+
+| | |
+|---|---|
+| **Tel Aviv White City Civic-Light Intercept**<br><img src="756-israel-tel-aviv-white-city-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking cobalt light keys into a white-and-silver civic compass above Tel Aviv's Dizengoff Square and White City facades"> | **Caesarea Aqueduct Silver Cipher**<br><img src="757-israel-caesarea-aqueduct-cipher.png" width="420" alt="The trio sealing a recovered archive inside a blue-glass capsule beside Caesarea's honey-stone Mediterranean aqueduct"> |
+| **Makhtesh Ramon Terrain Extraction**<br><img src="758-israel-makhtesh-ramon-extraction.png" width="420" alt="The trio restoring a cobalt habitat beacon above Makhtesh Ramon's layered desert crater walls"> | **Eilat Red Sea Moonline Relay**<br><img src="759-israel-eilat-red-sea-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cobalt-silver-turquoise waterfront relay above Eilat's Red Sea marina at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
