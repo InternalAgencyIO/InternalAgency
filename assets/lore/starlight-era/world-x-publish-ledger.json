@@ -65,17 +65,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-01T14:18:47.5467436Z",
-    "status": "awaiting_post",
-    "imageNumbers": [638, 639, 640],
-    "countries": ["Chile", "Romania"],
-    "assets": [
-      {"file": "638-chile-torres-del-paine-pehoe-extraction.png", "sha256": "907eda6d395f6ff3b6932d5d15614f92a15a4aae537d214033da71d277b583dc"},
-      {"file": "639-chile-valparaiso-pacific-night-relay.png", "sha256": "5bcfd18b8d645654bd0d999975d14de4c14b8e01ed8808fcadcc35a581ff5902"},
-      {"file": "640-romania-bucharest-athenaeum-intercept.png", "sha256": "f4a100596f7806f7cc0fe4210ec20ab9a1c736f55c9524fa178acabd214dda26"}
-    ]
-  },
+  "pendingPost": null,
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
@@ -2396,6 +2386,17 @@
           "file": "635-chad-lake-chad-baga-sola-night-relay.png",
           "sha256": "f51bd8352d5ce624e493e4fa8238c9dcd86f80668fb8a70d0659d853094f03a4"
         }
+      ]
+    },
+    {
+      "postedAt": "2026-08-01T14:23:43.3905244Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083559025153651000",
+      "imageNumbers": [638, 639, 640],
+      "countries": ["Chile", "Romania"],
+      "assets": [
+        {"file": "638-chile-torres-del-paine-pehoe-extraction.png", "sha256": "907eda6d395f6ff3b6932d5d15614f92a15a4aae537d214033da71d277b583dc"},
+        {"file": "639-chile-valparaiso-pacific-night-relay.png", "sha256": "5bcfd18b8d645654bd0d999975d14de4c14b8e01ed8808fcadcc35a581ff5902"},
+        {"file": "640-romania-bucharest-athenaeum-intercept.png", "sha256": "f4a100596f7806f7cc0fe4210ec20ab9a1c736f55c9524fa178acabd214dda26"}
       ]
     }
   ]
