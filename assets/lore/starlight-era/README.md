@@ -854,6 +854,13 @@ rejected and regenerated.
 | **Rotterdam Erasmus Delta Intercept**<br><img src="660-netherlands-rotterdam-erasmus-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a cyan delta compass above Rotterdam's Maas waterfront and Erasmus Bridge"> | **Kinderdijk Windmill Amber Cipher**<br><img src="661-netherlands-kinderdijk-windmill-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Kinderdijk's windmills, canals, and reed banks"> |
 | **Hoge Veluwe Heathlight Extraction**<br><img src="662-netherlands-hoge-veluwe-heath-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above De Hoge Veluwe's purple heath and drifting sand"> | **Amsterdam Canal Moonline Relay**<br><img src="663-netherlands-amsterdam-canal-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold canal relay before Amsterdam's illuminated Magere Brug at cobalt blue hour"> |
 
+## World Series - Asia - Batch 161: Cambodia
+
+| | |
+|---|---|
+| **Phnom Penh Mekong Confluence Intercept**<br><img src="664-cambodia-phnom-penh-mekong-confluence-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a turquoise confluence compass above Phnom Penh's Tonle Sap and Mekong riverfront"> | **Battambang Shophouse Amber Cipher**<br><img src="665-cambodia-battambang-colonial-shophouse-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Battambang's ochre old-town shophouses and shaded arcades"> |
+| **Cardamom Mountains Rainlight Extraction**<br><img src="666-cambodia-cardamom-mountains-rainforest-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above a misty rainforest river corridor in Cambodia's Cardamom Mountains"> | **Kampot Riverside Moonline Relay**<br><img src="667-cambodia-kampot-riverside-old-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay above Kampot's illuminated riverside and Old Bridge at cobalt blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
