@@ -868,6 +868,13 @@ rejected and regenerated.
 | **Harare Eastgate Flame-Light Intercept**<br><img src="668-zimbabwe-harare-eastgate-city-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise thermal compass amid Harare's Eastgate Centre brick towers and deep arches"> | **Great Zimbabwe Enclosure Amber Cipher**<br><img src="669-zimbabwe-great-enclosure-stone-cipher.png" width="420" alt="The trio sealing an amber archive prism beside the Great Enclosure's curved dry-stone wall and Conical Tower"> |
 | **Mana Pools Zambezi Light Extraction**<br><img src="670-zimbabwe-mana-pools-zambezi-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above Mana Pools and the lower Zambezi floodplain"> | **Victoria Falls Bridge Moonline Relay**<br><img src="671-zimbabwe-victoria-falls-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay before Victoria Falls Bridge and Batoka Gorge at cobalt blue hour"> |
 
+## World Series - Africa - Batch 163: Guinea
+
+| | |
+|---|---|
+| **Conakry Kaloum Atlantic Intercept**<br><img src="672-guinea-conakry-kaloum-waterfront-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise peninsula compass above Conakry's Kaloum waterfront and the Îles de Los at apricot dawn"> | **Dalaba Highland Villa Amber Cipher**<br><img src="673-guinea-dalaba-highland-villa-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Dalaba's weathered highland villas, verandas and misty Fouta Djallon hills"> |
+| **Mount Nimba Forest-Savanna Extraction**<br><img src="674-guinea-mount-nimba-forest-savanna-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above Mount Nimba's iron-rich ridges, grassland and forest folds"> | **Îles de Los Kassa Moonline Relay**<br><img src="675-guinea-iles-de-los-kassa-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet island relay above Kassa's granite Atlantic shore with Conakry lights beyond"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
