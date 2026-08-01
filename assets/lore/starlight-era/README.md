@@ -1043,6 +1043,13 @@ rejected and regenerated.
 | **Minsk National Library Crystal Intercept**<br><img src="768-belarus-minsk-national-library-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking ruby-white light keys into a green-crystal civic compass above Minsk's faceted National Library precinct"> | **Mir Castle Ruby Cipher**<br><img src="769-belarus-mir-castle-cipher.png" width="420" alt="The trio sealing a recovered archive inside a crystal capsule beside Mir Castle's red-brick towers and still moat landscape"> |
 | **Belovezhskaya Pushcha Forest Extraction**<br><img src="770-belarus-belovezhskaya-pushcha-extraction.png" width="420" alt="The trio restoring a ruby-and-green habitat beacon among Belovezhskaya Pushcha's monumental oak trunks and fern clearings"> | **Brest Railway Crystal Moonline Relay**<br><img src="771-belarus-brest-railway-station-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-green-crystal rail relay above Brest Central railway station at blue hour"> |
 
+## World Series - Europe - Batch 188: Switzerland
+
+| | |
+|---|---|
+| **Zürich Hauptbahnhof Precision Intercept**<br><img src="772-switzerland-zurich-hauptbahnhof-precision-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking ruby-white light keys into a silver precision compass above Zürich Hauptbahnhof and Bahnhofstrasse"> | **Chillon Castle Lake Cipher**<br><img src="773-switzerland-chillon-castle-lake-cipher.png" width="420" alt="The trio sealing a recovered archive inside a crystal capsule beside Chillon Castle, Lake Geneva and the Alpine horizon"> |
+| **Aletsch Glacier Data Extraction**<br><img src="774-switzerland-aletsch-glacier-data-extraction.png" width="420" alt="The trio restoring a ruby-and-blue climate beacon above the Great Aletsch Glacier and Bernese Alps"> | **Landwasser Viaduct Alpine Night Relay**<br><img src="775-switzerland-landwasser-viaduct-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-blue-silver rail relay before the Landwasser Viaduct at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
