@@ -980,6 +980,13 @@ rejected and regenerated.
 | **Lisbon Parque das Nações Light Intercept**<br><img src="732-portugal-lisbon-parque-nacoes-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three emerald light keys into a crimson-and-gold estuary compass at Lisbon's Parque das Nações"> | **Sintra Pena Palace Chromatic Cipher**<br><img src="733-portugal-sintra-pena-palace-cipher.png" width="420" alt="The trio sealing a recovered archive inside a porcelain light capsule beside Sintra's vivid Pena Palace terraces"> |
 | **Madeira Pico do Arieiro Cloud Extraction**<br><img src="734-portugal-madeira-pico-arieiro-extraction.png" width="420" alt="The trio restoring an emerald-and-crimson habitat beacon above Pico do Arieiro's volcanic ridges and cloud inversion"> | **Porto Dom Luís I Bridge Night Relay**<br><img src="735-portugal-porto-dom-luis-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-crimson-gold bridge relay above Porto's Dom Luís I Bridge and Douro waterfront at blue hour"> |
 
+## World Series - Asia - Batch 179: Tajikistan
+
+| | |
+|---|---|
+| **Dushanbe National Library Light Intercept**<br><img src="736-tajikistan-dushanbe-national-library-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three ruby light keys into an emerald-and-gold mountain compass beside Dushanbe's National Library and Rudaki Park"> | **Hisor Fortress Gate Cipher**<br><img src="737-tajikistan-hisor-fortress-cipher.png" width="420" alt="The trio sealing a recovered archive inside a porcelain light capsule before Hisor Fortress's monumental ochre gatehouse"> |
+| **Iskanderkul Fann Mountain Extraction**<br><img src="738-tajikistan-iskanderkul-fann-extraction.png" width="420" alt="The trio restoring a ruby-and-emerald habitat beacon above Iskanderkul's turquoise water and the Fann Mountains"> | **Pamir Highway Karakul Night Relay**<br><img src="739-tajikistan-pamir-highway-karakul-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-emerald-gold road relay above the Pamir Highway and Karakul Lake at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
