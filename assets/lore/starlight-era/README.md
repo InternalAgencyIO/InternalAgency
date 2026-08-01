@@ -1001,6 +1001,13 @@ rejected and regenerated.
 | **Stockholm Sergels Torg Light Intercept**<br><img src="744-sweden-stockholm-sergels-torg-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking cobalt light keys into a sun-gold-and-glass city compass above Stockholm's Sergels torg"> | **Visby Ring Wall Amber Cipher**<br><img src="745-sweden-visby-ring-wall-cipher.png" width="420" alt="The trio sealing a recovered archive inside a midnight-blue light capsule beside Visby's medieval ring wall"> |
 | **Abisko Lapporten Terrain Extraction**<br><img src="746-sweden-abisko-lapporten-extraction.png" width="420" alt="The trio restoring a cobalt-and-glass habitat beacon before Abisko's iconic U-shaped Lapporten valley"> | **Malmö Öresund Bridge Night Relay**<br><img src="747-sweden-malmo-oresund-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cobalt-gold-silver bridge relay above Malmö's Öresund shoreline at blue hour"> |
 
+## World Series - Europe - Batch 182: Greece
+
+| | |
+|---|---|
+| **Athens Stavros Niarchos Civic-Light Intercept**<br><img src="748-greece-athens-stavros-niarchos-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking Aegean-blue light keys into a marble-white-and-gold civic compass above Athens's Stavros Niarchos park"> | **Nafplio Palamidi Marble Cipher**<br><img src="749-greece-nafplio-palamidi-fortress-cipher.png" width="420" alt="The trio sealing a recovered archive inside a deep-blue light capsule beside Nafplio's Palamidi Fortress and Argolic Gulf"> |
+| **Vikos Gorge Terrain Extraction**<br><img src="750-greece-vikos-gorge-extraction.png" width="420" alt="The trio restoring an Aegean-blue habitat beacon above Vikos Gorge's limestone walls and forested Pindus slopes"> | **Piraeus Mikrolimano Moonline Relay**<br><img src="751-greece-piraeus-mikrolimano-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cobalt-gold-silver harbor relay above Piraeus's Mikrolimano marina at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
