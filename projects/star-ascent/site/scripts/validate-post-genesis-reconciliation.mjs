@@ -130,6 +130,7 @@ const requiredPaths = {
   publicationPayloadPath: "launch/PUBLICATION_PAYLOAD.template.md",
   releasePacketPath: "launch/release-packet.template.json",
   prePublicationPacketProofPath: "launch/pre-publication-packet-proof.generated.json",
+  iatV2StageJournalPath: "launch/iat-v2-mainnet-stage-journal.template.json",
 };
 const mainnetHandoffPath = "launch/mainnet-handoff.template.json";
 const immutableCeremonyPaths = [
@@ -170,13 +171,15 @@ for (const [field, expected] of Object.entries(requiredPaths)) {
 const publicSourcePaths = [
   requiredPaths.manifestPath,
   requiredPaths.publicationPayloadPath,
+  requiredPaths.iatV2StageJournalPath,
 ];
 const beforePublicSourceValidation = captureDependencyBundle(publicSourcePaths);
 validateCanonicalDependency("validate-genesis-manifest.mjs", record.sourceArtifacts?.manifestPath, "manifest");
 validateCanonicalDependency("validate-publication-payload.mjs", record.sourceArtifacts?.publicationPayloadPath, "publication payload");
+validateCanonicalDependency("validate-iat-v2-mainnet-stage-journal.mjs", record.sourceArtifacts?.iatV2StageJournalPath, "IAT V2 mainnet stage journal");
 const afterPublicSourceValidation = captureDependencyBundle(publicSourcePaths);
 if (!dependencyBundlesMatch(beforePublicSourceValidation, afterPublicSourceValidation, publicSourcePaths)) {
-  fail("canonical manifest or publication payload changed during validation; repeat the reconciliation review");
+  fail("canonical manifest, publication payload, or IAT V2 stage journal changed during validation; repeat the reconciliation review");
 }
 const routingManifest = JSON.parse(beforePublicSourceValidation[requiredPaths.manifestPath].toString("utf8"));
 const routingPayload = beforePublicSourceValidation[requiredPaths.publicationPayloadPath].toString("utf8");
@@ -244,6 +247,7 @@ if (!dependencyBundlesMatch(reviewedDependencyBundle, afterDependencyValidation,
 }
 const manifest = JSON.parse(reviewedDependencyBundle[requiredPaths.manifestPath].toString("utf8"));
 const payload = reviewedDependencyBundle[requiredPaths.publicationPayloadPath].toString("utf8");
+const iatV2StageJournal = JSON.parse(reviewedDependencyBundle[requiredPaths.iatV2StageJournalPath].toString("utf8"));
 for (const field of ["haltOnChannelMismatch", "haltOnExpiredEvidence", "haltOnUnresolvedCorrections", "preserveCorrectionHistory", "noDistributionClaimsWithoutEvidence"]) {
   if (record.controls?.[field] !== true) fail(`controls.${field} must be true`);
 }
@@ -266,6 +270,9 @@ if (record.status === "HOLD") {
 }
 
 if (record.status === "COMPLETE") {
+  if (iatV2StageJournal.status !== "RECONCILED") fail("COMPLETE requires IAT V2 stage journal status RECONCILED");
+  if (!Array.isArray(iatV2StageJournal.stages) || iatV2StageJournal.stages.length !== 8 || iatV2StageJournal.stages.some((stage) => stage.status !== "FINALIZED_MATCHED")) fail("COMPLETE requires all eight IAT V2 stage journal boundaries FINALIZED_MATCHED");
+  if (iatV2StageJournal.terminalDecision?.state !== "RECONCILED" || iatV2StageJournal.terminalDecision?.reasonCode !== "ALL_STAGES_MATCHED") fail("COMPLETE requires the IAT V2 journal terminal ALL_STAGES_MATCHED decision");
   // Reject ambiguous reviewer ownership before considering any external launch
   // artifact. A truthful archive gate needs two independently attributable
   // humans, even when another prerequisite is also incomplete.

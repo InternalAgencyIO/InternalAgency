@@ -24,6 +24,9 @@ post-state digest. Signatures cannot be reused between stages.
 
 The only successful terminal state is `RECONCILED`, with all eight stages
 `FINALIZED_MATCHED`. Publication remains a separate review after reconciliation.
+The canonical post-Genesis reconciliation record includes this journal in its
+stable dependency bundle and cannot become `COMPLETE` unless the journal and
+its terminal decision are both `RECONCILED`.
 
 ## First mismatch or failure
 
