@@ -924,6 +924,13 @@ rejected and regenerated.
 | **Brussels Atomium Sphere-Light Intercept**<br><img src="700-belgium-brussels-atomium-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three ruby light keys into a black-gold-cobalt compass above Brussels' Atomium at golden dawn"> | **Bruges Belfry Canal Amber Cipher**<br><img src="701-belgium-bruges-markt-belfry-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Bruges' Belfry, stepped-gable brick houses and canal reflections"> |
 | **High Fens Heathlight Extraction**<br><img src="702-belgium-high-fens-heath-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above the High Fens boardwalks, heath and bog pools"> | **Antwerp Central Diamond Moonline Relay**<br><img src="703-belgium-antwerp-central-station-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a black-gold-red diamond rail relay before Antwerp Central Station at cobalt blue hour"> |
 
+## World Series - North America - Batch 171: Haiti
+
+| | |
+|---|---|
+| **Port-au-Prince Iron Market Light-Key Intercept**<br><img src="704-haiti-port-au-prince-iron-market-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three ruby light keys into a cobalt-red-pearl compass beside Port-au-Prince's Iron Market at dawn"> | **Milot Sans-Souci Palace Amber Cipher**<br><img src="705-haiti-milot-sans-souci-palace-cipher.png" width="420" alt="The trio sealing an amber archive prism beside the ochre arcades and mountain backdrop of Sans-Souci Palace in Milot"> |
+| **Bassin Bleu Waterlight Extraction**<br><img src="706-haiti-bassin-bleu-waterfall-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above Bassin Bleu's luminous pools and tiered waterfalls"> | **Cap-Haitien Bay Moonline Relay**<br><img src="707-haiti-cap-haitien-waterfront-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cobalt-ruby-pearl harbor relay above Cap-Haitien's waterfront at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
