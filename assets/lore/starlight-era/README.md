@@ -1008,6 +1008,13 @@ rejected and regenerated.
 | **Athens Stavros Niarchos Civic-Light Intercept**<br><img src="748-greece-athens-stavros-niarchos-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking Aegean-blue light keys into a marble-white-and-gold civic compass above Athens's Stavros Niarchos park"> | **Nafplio Palamidi Marble Cipher**<br><img src="749-greece-nafplio-palamidi-fortress-cipher.png" width="420" alt="The trio sealing a recovered archive inside a deep-blue light capsule beside Nafplio's Palamidi Fortress and Argolic Gulf"> |
 | **Vikos Gorge Terrain Extraction**<br><img src="750-greece-vikos-gorge-extraction.png" width="420" alt="The trio restoring an Aegean-blue habitat beacon above Vikos Gorge's limestone walls and forested Pindus slopes"> | **Piraeus Mikrolimano Moonline Relay**<br><img src="751-greece-piraeus-mikrolimano-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cobalt-gold-silver harbor relay above Piraeus's Mikrolimano marina at blue hour"> |
 
+## World Series - Asia - Batch 183: Azerbaijan
+
+| | |
+|---|---|
+| **Baku Boulevard Caspian-Light Intercept**<br><img src="752-azerbaijan-baku-boulevard-caspian-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking azure light keys into a ruby-emerald-copper city compass above Baku Boulevard and the Caspian skyline"> | **Sheki Caravanserai Copper Cipher**<br><img src="753-azerbaijan-sheki-caravanserai-cipher.png" width="420" alt="The trio sealing a recovered archive inside a copper-and-glass capsule in Sheki's honey-brick Upper Caravanserai courtyard"> |
+| **Gobustan Mud-Volcano Terrain Extraction**<br><img src="754-azerbaijan-gobustan-mud-volcano-extraction.png" width="420" alt="The trio restoring an azure habitat beacon above Gobustan's gray mud-volcano cones and distant Caspian plain"> | **Baku Nizami Street Moonline Relay**<br><img src="755-azerbaijan-baku-nizami-street-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an azure-ruby-emerald street relay above Baku's illuminated Nizami Street at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
