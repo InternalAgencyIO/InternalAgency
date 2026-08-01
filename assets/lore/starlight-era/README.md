@@ -896,6 +896,13 @@ rejected and regenerated.
 | **Bujumbura Tanganyika Boulevard Intercept**<br><img src="684-burundi-bujumbura-lake-tanganyika-boulevard-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a ruby-and-emerald compass above Bujumbura's Lake Tanganyika waterfront at coral dawn"> | **Gitega National Museum Tricolor Cipher**<br><img src="685-burundi-gitega-national-museum-cipher.png" width="420" alt="The trio closing a ruby, emerald and pearl archive cipher beside Gitega National Museum's masonry veranda and highland garden"> |
 | **Kibira Canopy Data Extraction**<br><img src="686-burundi-kibira-national-park-canopy-extraction.png" width="420" alt="The trio restoring a white-and-emerald rainfall beacon above Kibira's misty montane forest and tea-edge ridge"> | **Bujumbura Port Moonline Relay**<br><img src="687-burundi-bujumbura-port-lake-tanganyika-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-white-emerald relay above Bujumbura port and Lake Tanganyika at cobalt blue hour"> |
 
+## World Series - South America - Batch 167: Bolivia
+
+| | |
+|---|---|
+| **La Paz Illimani Skyline Intercept**<br><img src="688-bolivia-la-paz-illimani-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a ruby-gold-emerald compass above La Paz's terraced urban bowl and Illimani at coral dawn"> | **Potosi Colonial Mint Courtyard Cipher**<br><img src="689-bolivia-potosi-colonial-mint-courtyard-cipher.png" width="420" alt="The trio closing a ruby, emerald and gold archive cipher beside Potosi's pale stone colonial mint courtyard and Cerro Rico"> |
+| **Salar de Uyuni Salt-Mirror Extraction**<br><img src="690-bolivia-salar-de-uyuni-salt-mirror-extraction.png" width="420" alt="The trio restoring an emerald-and-gold climate beacon over the reflective salt hexagons of Salar de Uyuni"> | **La Paz Mi Teleferico Moonline Relay**<br><img src="691-bolivia-la-paz-mi-teleferico-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-gold-emerald relay above La Paz's aerial transit corridor at cobalt blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
