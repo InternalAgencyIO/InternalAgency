@@ -9,6 +9,19 @@ transfer, schedule, authorize, or publish anything.
 
 ## Preparation audit
 
+Refresh the canonical funding evidence first when a current observation is
+needed:
+
+```bash
+npm run refresh:iat-v2-mainnet-funding
+```
+
+This command performs one finalized `getBalance` request against the official
+mainnet RPC. It accepts no wallet, key, custom endpoint, transaction, signing,
+or broadcast input. A balance at or above the floor updates only the funding
+gate; schedule, artifact, verifier, device, authorization, and all safety gates
+remain unchanged and mainnet remains `HOLD`.
+
 Run this while preparing artifacts:
 
 ```bash

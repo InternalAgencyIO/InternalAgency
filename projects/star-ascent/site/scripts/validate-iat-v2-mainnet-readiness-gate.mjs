@@ -26,20 +26,29 @@ check(
 const observed = BigInt(gate.funding?.observedLamports ?? "-1");
 const rentMinimum = BigInt(gate.funding?.measuredRentExemptMinimumLamports ?? "-1");
 const ceremonyFloor = BigInt(gate.funding?.ceremonyFloorLamports ?? "-1");
+const shortfall = (target) => target > observed ? target - observed : 0n;
+check(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/u.test(gate.observedAtUtc ?? "") && Number.isFinite(Date.parse(gate.observedAtUtc)), "funding observation time must be canonical UTC");
+check(gate.funding?.observationKind === "READ_ONLY_RPC_BALANCE", "funding observation must remain read-only RPC balance evidence");
+check(gate.funding?.rpcEndpoint === "https://api.mainnet-beta.solana.com", "funding observation must identify the official mainnet RPC endpoint");
+check(gate.funding?.commitment === "finalized", "funding observation must use finalized commitment");
+check(/^[1-9]\d*$/u.test(gate.funding?.contextSlot ?? ""), "funding observation must include a positive RPC context slot");
 check(ceremonyFloor === 8_500_000_000n, "ceremony floor must remain exactly 8.5 SOL");
 check(
-  BigInt(gate.funding?.shortfallToRentMinimumLamports ?? "-1") === rentMinimum - observed,
+  BigInt(gate.funding?.shortfallToRentMinimumLamports ?? "-1") === shortfall(rentMinimum),
   "rent-minimum shortfall arithmetic drift",
 );
 check(
-  BigInt(gate.funding?.shortfallToCeremonyFloorLamports ?? "-1") === ceremonyFloor - observed,
+  BigInt(gate.funding?.shortfallToCeremonyFloorLamports ?? "-1") === shortfall(ceremonyFloor),
   "ceremony-floor shortfall arithmetic drift",
 );
 check(
   gate.funding?.ceremonyFloorSatisfied === (observed >= ceremonyFloor),
   "ceremony-floor Boolean does not match recorded integer balance",
 );
-check(gate.funding?.ceremonyFloorSatisfied === false, "recorded observation must retain the funding blocker");
+check(
+  gate.gates?.mainnetFundingFloorSatisfied === gate.funding?.ceremonyFloorSatisfied,
+  "mainnet funding gate must match the finalized read-only balance observation",
+);
 check(
   gate.gates?.physicalModelTDevicePathReviewed === false,
   "recorded readiness state must retain the attended Model T device-path blocker",
@@ -60,6 +69,7 @@ check(
 );
 
 for (const [name, value] of Object.entries(gate.gates ?? {})) {
+  if (name === "mainnetFundingFloorSatisfied") continue;
   if (name.endsWith("Satisfied") || name.endsWith("Published") || name.endsWith("RegeneratedAfterFundingAndScheduling") || name.endsWith("PassedAgainstRegeneratedArtifacts") || name.endsWith("Completed") || name.endsWith("Assigned") || name.endsWith("Authorized")) {
     check(value === false, `pending mainnet gate became true without a new readiness record: ${name}`);
   }
@@ -107,4 +117,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("IAT V2 mainnet readiness gate passed: exact 8.5 SOL floor, UNSCHEDULED_HOLD, ordered regeneration/ceremony controls, no signing or broadcast.");
+console.log(`IAT V2 mainnet readiness gate passed: finalized balance is ${observed} lamports, exact 8.5 SOL floor is ${observed >= ceremonyFloor ? "satisfied" : "not satisfied"}, UNSCHEDULED_HOLD and no signing/broadcast remain enforced.`);

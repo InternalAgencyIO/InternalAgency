@@ -1,6 +1,6 @@
 # IAT V2 return checklist
 
-Updated at `2026-08-01T08:36:35Z`.
+Updated at `2026-08-01T11:04:01Z`.
 
 Mainnet remains `HOLD`. No unattended script may sign or broadcast a mainnet
 transaction.
@@ -49,7 +49,9 @@ effect.
 
 1. Fund `7XZ...fzPH` on mainnet to at least `8.5 SOL` before the ceremony.
 2. Record a fresh read-only balance observation and recompute both integer
-   shortfalls.
+   shortfalls with `npm run refresh:iat-v2-mainnet-funding`. The command uses
+   the official mainnet RPC at finalized commitment, records the context slot,
+   accepts no wallet or RPC arguments, and never lifts mainnet `HOLD`.
 3. After funding is complete, publish one new exact UTC launch time.
 4. Re-run the complete launch preflight and regenerate every bound release
    snapshot, handoff, manifest, signing checklist, and publication payload.
@@ -76,7 +78,8 @@ entry. See `launch/IAT_V2_CEREMONY_ENTRY_GATE.md`.
 
 ## Mainnet blockers that must stay visible
 
-- Mainnet balance at `2026-08-01T07:31:16Z`: `2.53365957 SOL`.
+- Finalized mainnet balance at `2026-08-01T11:04:01Z`, RPC context slot
+  `436549381`: `2.53365957 SOL`.
 - Measured rent-exempt minima: `8.31841104 SOL` before transaction fees:
   - ProgramData: `4.15866264 SOL`;
   - temporary deployment buffer: `4.15860696 SOL`;
