@@ -65,17 +65,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-01T14:43:19.0380535Z",
-    "status": "awaiting_post",
-    "imageNumbers": [648, 649, 647],
-    "countries": ["Senegal", "Somalia"],
-    "assets": [
-      {"file": "648-senegal-dakar-corniche-teranga-intercept.png", "sha256": "40b79397ea04e9c1c6c7bb9d2844853782b7be713d5ea343fc005a543315e2d8"},
-      {"file": "649-senegal-saint-louis-pastel-arcade-cipher.png", "sha256": "07bb65a12c570568c68c6d63f3c11b217c4ad4a5d7633369e448d61d0a4e2afc"},
-      {"file": "647-somalia-kismayo-indian-ocean-night-relay.png", "sha256": "3a03bf28f2d1c2299484fb348cf71c99e46a11d615aaedc84afa3785088455a9"}
-    ]
-  },
+  "pendingPost": null,
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
@@ -2429,6 +2419,17 @@
         {"file": "645-somalia-merca-coral-stone-old-town-cipher.png", "sha256": "4d371f2428be320229a9ab130d851490d6bf3964b4e7f368ab0db5308e17da50"},
         {"file": "646-somalia-cal-madow-cloud-forest-extraction.png", "sha256": "6aa3de9619c4825b1f5e42d32b5d9030476168e55f10f24a917ba936fff0804f"},
         {"file": "643-romania-constanta-black-sea-night-relay.png", "sha256": "fe8880335d66a4212bb4c030686c56b3b45c62a9c1a93145661d2f352a8f0506"}
+      ]
+    },
+    {
+      "postedAt": "2026-08-01T14:44:56.6020310Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083564552872943712",
+      "imageNumbers": [648, 649, 647],
+      "countries": ["Senegal", "Somalia"],
+      "assets": [
+        {"file": "648-senegal-dakar-corniche-teranga-intercept.png", "sha256": "40b79397ea04e9c1c6c7bb9d2844853782b7be713d5ea343fc005a543315e2d8"},
+        {"file": "649-senegal-saint-louis-pastel-arcade-cipher.png", "sha256": "07bb65a12c570568c68c6d63f3c11b217c4ad4a5d7633369e448d61d0a4e2afc"},
+        {"file": "647-somalia-kismayo-indian-ocean-night-relay.png", "sha256": "3a03bf28f2d1c2299484fb348cf71c99e46a11d615aaedc84afa3785088455a9"}
       ]
     }
   ]
