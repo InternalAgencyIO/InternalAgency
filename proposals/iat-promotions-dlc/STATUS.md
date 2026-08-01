@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-08-01 02:53 UTC
+Updated: 2026-08-01 03:13 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `24af882`
+Previously published public increment: `78efc10`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -547,8 +547,19 @@ This status file deliberately does not claim a self-referential commit hash.
   `0af2ef6528cbe78c78481f9229852d39bbceb23b050266a6ea4aa205e2acaee9`,
   and combined replay commitment
   `f1ad153fdf68fb12b9def32fd918f648ac032dbe71f3c043f8823a82d8e93058`.
+- four UTF-8 scalar-boundary controls spanning U+007F, U+07FF, U+D7FF, and
+  the exact maximum Unicode scalar U+10FFFF;
+- sixteen fatal pre-JSON boundary rejections covering four out-of-range scalar
+  encodings, four obsolete five/six-byte forms, four FE/FF lead forms, and
+  four redundant continuation runs in Node and zero-dependency Python;
+- UTF-8 boundary control-set commitment
+  `067f2b1050b06c1adc74da0b9cdf0303dfaa65c6566eb3fc5118d38fa532b455`,
+  rejection-set commitment
+  `651cf8eef421fb00643c45a52736459477ff5932de38ddc758e2b4916baaeaaa`,
+  and combined replay commitment
+  `d8fa15fff3059e48b1d46b8e76faba165be4929ad791da809407774ac4da4534`.
 
-Current proposal-only result: **438 tests passed**. This consists of 28 protected
+Current proposal-only result: **450 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -671,6 +682,11 @@ one/two/three/four-byte scalar controls, truncated, overlong,
 surrogate-encoded, invalid-continuation, pre-JSON boundary, family coverage,
 independent Python parity, tamper-exit, source-safety, and manifest-coverage
 tests complete the byte-ingress suite.
+Twelve UTF-8 boundary deterministic regeneration, fixed scalar/lead rule,
+exact one/two/three/four-byte boundary controls, out-of-range, obsolete
+five/six-byte, FE/FF lead, redundant-continuation, pre-JSON boundary, family
+coverage, independent Python parity, tamper-exit, source-safety, and
+manifest-coverage tests complete the scalar-boundary suite.
 
 ## Current guarantees of the reference model
 
@@ -702,8 +718,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a compact UTF-8 upper-bound and illegal-lead corpus proving U+10FFFF
-accepts while out-of-range scalar encodings, obsolete five/six-byte prefixes,
-FE/FF leads, and redundant continuation runs reject before JSON. Keep
-candidates runtime-only; do not contact a local validator, Devnet, or Mainnet;
-preserve every network, wallet, review, deployment, and activation HOLD.
+Add a compact UTF-8 BOM-position corpus proving leading, post-whitespace, and
+trailing BOM bytes are preserved then rejected by the delimiter rule, while
+U+FEFF inside a candidate string remains a valid scalar. Keep candidates
+runtime-only; do not contact a local validator, Devnet, or Mainnet; preserve
+every network, wallet, review, deployment, and activation HOLD.

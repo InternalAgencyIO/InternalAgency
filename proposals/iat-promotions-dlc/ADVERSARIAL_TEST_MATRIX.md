@@ -317,11 +317,13 @@ security audit or deployment approval.
 | A control, case variant, normalization equivalent, or cross-script confusable gains marker authority | exact marker-value rejection families | Raw controls fail syntax; every decoded noncanonical value fails exact scalar comparison before candidate production in Node and Python |
 | A decoder replaces malformed UTF-8 and lets JSON parsing continue | fatal UTF-8 ingress rule and compact pre-JSON results | Replacement is disabled; all sixteen malformed byte sequences reject as `INVALID_UTF8` with `jsonParsingAttempted: false` |
 | Truncated, overlong, surrogate-encoded, or invalid-continuation bytes reach a candidate | four balanced fatal UTF-8 families | Node and Python independently reconstruct four cases per family and commit identical pre-candidate outcomes without publishing raw bytes |
+| A decoder accepts a scalar above U+10FFFF or an obsolete five/six-byte form | UTF-8 upper-bound and long-form families | U+10FFFF accepts exactly; all eight out-of-range or obsolete forms reject fatally before JSON in Node and Python |
+| FE/FF lead bytes or redundant continuation runs start a valid character | illegal-lead and redundant-continuation families | Four cases per family reject as `INVALID_UTF8` before JSON, without publishing raw bytes or candidates |
 
 ## Next matrix expansion
 
-- add a compact UTF-8 upper-bound and illegal-lead corpus proving U+10FFFF
-  accepts while out-of-range scalar encodings, obsolete five/six-byte prefixes,
-  FE/FF leads, and redundant continuation runs reject before JSON. Preserve
+- add a compact UTF-8 BOM-position corpus proving leading, post-whitespace,
+  and trailing BOM bytes are preserved then rejected by the delimiter rule,
+  while U+FEFF inside a candidate string remains a valid scalar. Preserve
   runtime-only candidates and every network, wallet, review, deployment, and
   activation HOLD.

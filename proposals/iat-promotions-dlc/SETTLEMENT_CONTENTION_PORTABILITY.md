@@ -76,6 +76,10 @@ The fatal UTF-8 ingress companion adds four valid scalar-width controls and
 sixteen pre-JSON byte rejections for truncated, overlong, surrogate-encoded,
 and invalid-continuation sequences; see
 `SETTLEMENT_CONTENTION_FATAL_UTF8_INGRESS_AUDIT.md`.
+The UTF-8 boundary companion adds four exact scalar-boundary controls and
+sixteen pre-JSON rejections for out-of-range scalar encodings, obsolete long
+forms, FE/FF leads, and redundant continuation runs; see
+`SETTLEMENT_CONTENTION_UTF8_BOUNDARY_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -94,6 +98,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limit
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-key-collision-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-marker-value-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-fatal-utf8-ingress-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-utf8-boundary-audit --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -109,6 +114,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-string-toke
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-key-collision-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-marker-value-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-fatal-utf8-ingress-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-utf8-boundary-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

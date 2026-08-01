@@ -26,6 +26,7 @@ STRING_ARTIFACT_NAME = "settlement-contention-composition-string-token-audit.v1.
 KEY_COLLISION_ARTIFACT_NAME = "settlement-contention-composition-key-collision-audit.v1.json"
 MARKER_VALUE_ARTIFACT_NAME = "settlement-contention-composition-marker-value-audit.v1.json"
 FATAL_UTF8_ARTIFACT_NAME = "settlement-contention-composition-fatal-utf8-ingress-audit.v1.json"
+UTF8_BOUNDARY_ARTIFACT_NAME = "settlement-contention-composition-utf8-boundary-audit.v1.json"
 BASE_NAME = "settlement-contention-composition-vectors.v1.json"
 TRANSPORT_MARKER = "DRAFT/INACTIVE"
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
@@ -86,6 +87,14 @@ FATAL_UTF8_INGRESS_RULES = {
     "decoderErrorMode": "FATAL",
     "replacementCharacterInserted": False,
     "bomHandling": "PRESERVE_FOR_JSON_DELIMITER_RULE",
+    "rejectionPrecedesJsonParsing": True,
+}
+UTF8_BOUNDARY_RULES = {
+    "maximumUnicodeScalar": "U+10FFFF",
+    "shortestFormRequired": True,
+    "obsoleteFiveSixByteFormsAllowed": False,
+    "feFfLeadBytesAllowed": False,
+    "continuationBytesRequireActiveSequence": True,
     "rejectionPrecedesJsonParsing": True,
 }
 NORMALIZATION_KEY_DEFINITIONS = [
@@ -994,6 +1003,95 @@ def evaluate_fatal_utf8_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any
     return controls, rejections
 
 
+def build_utf8_boundary_corpus() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    control_definitions = [
+        ("MAX_ONE_BYTE_SCALAR", "U+007F", bytes([0x7F]), "\u007f"),
+        ("MAX_TWO_BYTE_SCALAR", "U+07FF", bytes([0xDF, 0xBF]), "\u07ff"),
+        ("LAST_PRE_SURROGATE_SCALAR", "U+D7FF", bytes([0xED, 0x9F, 0xBF]), "\ud7ff"),
+        ("MAX_UNICODE_SCALAR", "U+10FFFF", bytes([0xF4, 0x8F, 0xBF, 0xBF]), "\U0010ffff"),
+    ]
+    controls = [{
+        "caseId": case_id,
+        "scalarClass": scalar_class,
+        "encodedByteLength": len(encoded_bytes),
+        "serializedBytes": invalid_utf8_probe_envelope(encoded_bytes),
+        "expectedCandidate": {"utf8Probe": scalar},
+    } for case_id, scalar_class, encoded_bytes, scalar in control_definitions]
+    definitions = [
+        ("OUT_OF_RANGE_U_PLUS_110000", "OUT_OF_RANGE_SCALAR_UTF8", "ABOVE_U+10FFFF_MIN", bytes([0xF4, 0x90, 0x80, 0x80])),
+        ("OUT_OF_RANGE_F4_MAX_TAIL", "OUT_OF_RANGE_SCALAR_UTF8", "F4_MAX_CONTINUATIONS", bytes([0xF4, 0xBF, 0xBF, 0xBF])),
+        ("OUT_OF_RANGE_F5_MIN_TAIL", "OUT_OF_RANGE_SCALAR_UTF8", "F5_MIN_CONTINUATIONS", bytes([0xF5, 0x80, 0x80, 0x80])),
+        ("OUT_OF_RANGE_F7_MAX_TAIL", "OUT_OF_RANGE_SCALAR_UTF8", "F7_MAX_CONTINUATIONS", bytes([0xF7, 0xBF, 0xBF, 0xBF])),
+        ("OBSOLETE_FIVE_BYTE_MIN", "OBSOLETE_FIVE_SIX_BYTE_PREFIX", "F8_FIVE_BYTE_FORM", bytes([0xF8, 0x88, 0x80, 0x80, 0x80])),
+        ("OBSOLETE_FIVE_BYTE_MAX", "OBSOLETE_FIVE_SIX_BYTE_PREFIX", "FB_FIVE_BYTE_FORM", bytes([0xFB, 0xBF, 0xBF, 0xBF, 0xBF])),
+        ("OBSOLETE_SIX_BYTE_MIN", "OBSOLETE_FIVE_SIX_BYTE_PREFIX", "FC_SIX_BYTE_FORM", bytes([0xFC, 0x84, 0x80, 0x80, 0x80, 0x80])),
+        ("OBSOLETE_SIX_BYTE_MAX", "OBSOLETE_FIVE_SIX_BYTE_PREFIX", "FD_SIX_BYTE_FORM", bytes([0xFD, 0xBF, 0xBF, 0xBF, 0xBF, 0xBF])),
+        ("ILLEGAL_FE_LEAD_ONLY", "ILLEGAL_FE_FF_LEAD", "FE_LEAD_ONLY", bytes([0xFE])),
+        ("ILLEGAL_FF_LEAD_ONLY", "ILLEGAL_FE_FF_LEAD", "FF_LEAD_ONLY", bytes([0xFF])),
+        ("ILLEGAL_FE_WITH_CONTINUATION", "ILLEGAL_FE_FF_LEAD", "FE_WITH_CONTINUATION", bytes([0xFE, 0x80])),
+        ("ILLEGAL_FF_WITH_CONTINUATION", "ILLEGAL_FE_FF_LEAD", "FF_WITH_CONTINUATION", bytes([0xFF, 0xBF])),
+        ("REDUNDANT_MIN_CONTINUATION_PAIR", "REDUNDANT_CONTINUATION_RUN", "MIN_PAIR", bytes([0x80, 0x80])),
+        ("REDUNDANT_MAX_CONTINUATION_PAIR", "REDUNDANT_CONTINUATION_RUN", "MAX_PAIR", bytes([0xBF, 0xBF])),
+        ("REDUNDANT_MIXED_TRIPLE", "REDUNDANT_CONTINUATION_RUN", "MIXED_TRIPLE", bytes([0x80, 0xBF, 0x80])),
+        ("REDUNDANT_MIXED_QUAD", "REDUNDANT_CONTINUATION_RUN", "MIXED_QUAD", bytes([0xBF, 0x80, 0xBF, 0xBF])),
+    ]
+    rejections = [{
+        "caseId": case_id,
+        "family": family,
+        "descriptor": descriptor,
+        "serializedBytes": invalid_utf8_probe_envelope(injected_bytes),
+        "injectedByteLength": len(injected_bytes),
+        "expectedError": "INVALID_UTF8",
+    } for case_id, family, descriptor, injected_bytes in definitions]
+    return controls, rejections
+
+
+def evaluate_utf8_boundary_corpus() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    control_inputs, rejection_inputs = build_utf8_boundary_corpus()
+    controls = []
+    for item in control_inputs:
+        candidate, _metrics = parse_transport_envelope_bytes(item["serializedBytes"])
+        if canonical_sha256(candidate) != canonical_sha256(item["expectedCandidate"]):
+            raise TransportError(f'UTF8_BOUNDARY_CONTROL_DRIFT:{item["caseId"]}')
+        controls.append({
+            "caseId": item["caseId"],
+            "scalarClass": item["scalarClass"],
+            "encodedByteLength": item["encodedByteLength"],
+            "representationSha256": hashlib.sha256(item["serializedBytes"]).hexdigest(),
+            "utf8Bytes": len(item["serializedBytes"]),
+            "candidateCommitmentSha256": canonical_sha256(candidate),
+            "utf8DecodingSucceeded": True,
+            "acceptedAtParser": True,
+            "candidateStored": False,
+            "mutationEvaluated": False,
+        })
+    rejections = []
+    for item in rejection_inputs:
+        observed_error = None
+        try:
+            parse_transport_envelope_bytes(item["serializedBytes"])
+        except TransportError as error:
+            observed_error = str(error)
+        if observed_error != item["expectedError"]:
+            raise TransportError(f'UTF8_BOUNDARY_REJECTION_DRIFT:{item["caseId"]}:{observed_error}')
+        rejections.append({
+            "caseId": item["caseId"],
+            "family": item["family"],
+            "descriptor": item["descriptor"],
+            "representationSha256": hashlib.sha256(item["serializedBytes"]).hexdigest(),
+            "utf8Bytes": len(item["serializedBytes"]),
+            "injectedByteLength": item["injectedByteLength"],
+            "expectedError": item["expectedError"],
+            "observedError": observed_error,
+            "utf8DecodingSucceeded": False,
+            "jsonParsingAttempted": False,
+            "rejectedBeforeCandidate": True,
+            "candidateProduced": False,
+            "mutationEvaluated": False,
+        })
+    return controls, rejections
+
+
 def expect(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
@@ -1456,6 +1554,68 @@ def verify_fatal_utf8(root: Path, artifact_path: Path) -> tuple[list[str], dict[
     }
 
 
+def verify_utf8_boundary(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        artifact = load_json(artifact_path)
+        base = load_json(root / BASE_NAME)
+        controls, rejections = evaluate_utf8_boundary_corpus()
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read UTF-8 boundary evidence: {error}"], {}
+    expect(artifact.get("vectorVersion") == 1, "UTF-8 boundary version drift", errors)
+    expect(artifact.get("vectorId") == "iat-promotions-dlc-contention-composition-utf8-boundary-v1", "UTF-8 boundary ID drift", errors)
+    expect(artifact.get("status") == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "UTF-8 boundary HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": {"path": BASE_NAME, "canonicalSha256": canonical_sha256(base)},
+        "boundedParser": {"path": "settlement-contention-composition-transport-limits.mjs", "normalizedTextSha256": normalized_text_sha256(root / "settlement-contention-composition-transport-limits.mjs")},
+        "pythonVerifier": {"path": "verify-settlement-contention-transport-limits.py", "normalizedTextSha256": normalized_text_sha256(Path(__file__).resolve())},
+        "generator": {"path": "generate-settlement-contention-composition-utf8-boundary-audit.mjs", "normalizedTextSha256": normalized_text_sha256(root / "generate-settlement-contention-composition-utf8-boundary-audit.mjs")},
+    }
+    expect(artifact.get("sources") == expected_sources, "UTF-8 boundary source drift", errors)
+    contract = artifact.get("contract", {})
+    expect(contract.get("mode") == "UTF8_UPPER_BOUND_AND_ILLEGAL_LEADS", "UTF-8 boundary mode drift", errors)
+    expect(contract.get("utf8BoundaryRules") == UTF8_BOUNDARY_RULES, "UTF-8 boundary rules drift", errors)
+    expect(contract.get("acceptedControlCount") == 4 and contract.get("rejectionCount") == 16, "UTF-8 boundary counts drift", errors)
+    for field in ["outOfRangeCaseCount", "obsoleteLongFormCaseCount", "illegalFeFfLeadCaseCount", "redundantContinuationCaseCount"]:
+        expect(contract.get(field) == 4, f"UTF-8 boundary {field} drift", errors)
+    for field in ["boundaryScalarsAccepted", "outOfRangeRejectedBeforeJson", "obsoleteLongFormsRejectedBeforeJson", "illegalFeFfLeadsRejectedBeforeJson", "redundantContinuationsRejectedBeforeJson"]:
+        expect(contract.get(field) is True, f"UTF-8 boundary contract {field} drift", errors)
+    for field in ["serializedByteSequencesStored", "runtimeCandidatesStored", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"UTF-8 boundary contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "UTF-8 boundary activation effect drift", errors)
+    expect(artifact.get("controls") == controls, "UTF-8 boundary controls drift", errors)
+    expect(artifact.get("rejections") == rejections, "UTF-8 boundary rejections drift", errors)
+    summary = artifact.get("summary", {})
+    control_commitment = canonical_sha256(controls)
+    rejection_commitment = canonical_sha256(rejections)
+    combined_commitment = canonical_sha256({"controls": controls, "rejections": rejections})
+    expect(summary.get("acceptedControlCount") == "4" and summary.get("rejectionCount") == "16", "UTF-8 boundary summary counts drift", errors)
+    expect(summary.get("allBoundaryControlsAccepted") is True and summary.get("allIllegalByteSequencesRejectedBeforeJson") is True, "UTF-8 boundary summary outcome drift", errors)
+    expect(summary.get("controlSetCommitmentSha256") == control_commitment, "UTF-8 boundary control-set drift", errors)
+    expect(summary.get("rejectionSetCommitmentSha256") == rejection_commitment, "UTF-8 boundary rejection-set drift", errors)
+    expect(summary.get("combinedReplayCommitmentSha256") == combined_commitment, "UTF-8 boundary combined replay drift", errors)
+    for field in ["serializedByteSequencesStored", "runtimeCandidatesStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"UTF-8 boundary summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "UTF-8 boundary summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "acceptedControlCount": len(controls),
+        "rejectionCount": len(rejections),
+        "controlSetCommitmentSha256": control_commitment,
+        "rejectionSetCommitmentSha256": rejection_commitment,
+        "combinedReplayCommitmentSha256": combined_commitment,
+        "allIllegalByteSequencesRejectedBeforeJson": len(rejections) == 16,
+        "serializedByteSequencesStored": False,
+        "runtimeCandidatesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Verify held bounded JSON transport evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -1468,6 +1628,7 @@ def main() -> int:
     modes.add_argument("--verify-key-collision-audit", action="store_true")
     modes.add_argument("--verify-marker-value-audit", action="store_true")
     modes.add_argument("--verify-fatal-utf8-ingress-audit", action="store_true")
+    modes.add_argument("--verify-utf8-boundary-audit", action="store_true")
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
@@ -1483,6 +1644,8 @@ def main() -> int:
         artifact_name = MARKER_VALUE_ARTIFACT_NAME
     elif arguments.verify_fatal_utf8_ingress_audit:
         artifact_name = FATAL_UTF8_ARTIFACT_NAME
+    elif arguments.verify_utf8_boundary_audit:
+        artifact_name = UTF8_BOUNDARY_ARTIFACT_NAME
     else:
         artifact_name = ARTIFACT_NAME
     artifact = arguments.artifact.resolve() if arguments.artifact else root / artifact_name
@@ -1498,6 +1661,8 @@ def main() -> int:
         errors, report = verify_marker_value(root, artifact)
     elif arguments.verify_fatal_utf8_ingress_audit:
         errors, report = verify_fatal_utf8(root, artifact)
+    elif arguments.verify_utf8_boundary_audit:
+        errors, report = verify_utf8_boundary(root, artifact)
     else:
         errors, report = verify(root, artifact)
     if arguments.emit_json:
@@ -1505,7 +1670,7 @@ def main() -> int:
     elif errors:
         print("\n".join(errors), file=sys.stderr)
     else:
-        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else ("fatal-utf8-ingress" if arguments.verify_fatal_utf8_ingress_audit else "transport-limit")))))
+        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else ("fatal-utf8-ingress" if arguments.verify_fatal_utf8_ingress_audit else ("utf8-boundary" if arguments.verify_utf8_boundary_audit else "transport-limit"))))))
         print(f"Independent {label} replay passed: {report['combinedReplayCommitmentSha256']}")
     return 2 if errors else 0
 

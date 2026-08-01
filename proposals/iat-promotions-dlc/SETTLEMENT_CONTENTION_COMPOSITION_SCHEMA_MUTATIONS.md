@@ -89,3 +89,9 @@ The fatal UTF-8 ingress companion
 accepts valid one- through four-byte scalar encodings and rejects truncated,
 overlong, surrogate-encoded, and invalid-continuation byte sequences before
 JSON parsing in both runtimes.
+
+The UTF-8 boundary companion
+[`SETTLEMENT_CONTENTION_UTF8_BOUNDARY_AUDIT.md`](./SETTLEMENT_CONTENTION_UTF8_BOUNDARY_AUDIT.md)
+accepts exact scalar-width upper bounds through U+10FFFF and rejects
+out-of-range encodings, obsolete five/six-byte forms, FE/FF leads, and
+redundant continuation runs before JSON in both runtimes.

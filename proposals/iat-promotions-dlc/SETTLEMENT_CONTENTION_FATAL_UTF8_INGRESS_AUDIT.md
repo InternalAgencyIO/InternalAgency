@@ -34,3 +34,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-fatal-utf8-
 
 These commands are offline and proposal-only. Passing them is evidence for
 review, not permission to activate, deploy, sign, broadcast, or transfer IAT.
+
+The companion
+[`SETTLEMENT_CONTENTION_UTF8_BOUNDARY_AUDIT.md`](./SETTLEMENT_CONTENTION_UTF8_BOUNDARY_AUDIT.md)
+extends fatal decoding through the maximum scalar and illegal lead-byte forms.
