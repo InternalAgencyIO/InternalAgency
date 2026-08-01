@@ -959,6 +959,13 @@ rejected and regenerated.
 | **Havana Malecón Wave Intercept**<br><img src="720-cuba-havana-malecon-wave-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three cobalt light keys into a ruby-and-pearl wave beacon above Havana's Malecón at sunrise"> | **Cienfuegos Palacio de Valle Prism Cipher**<br><img src="721-cuba-cienfuegos-palacio-valle-cipher.png" width="420" alt="The trio sealing a recovered archive inside a completed bay-light capsule beside Cienfuegos's ornate Palacio de Valle"> |
 | **Viñales Mogote Data Extraction**<br><img src="722-cuba-vinales-mogote-data-extraction.png" width="420" alt="The trio restoring a cobalt-and-pearl habitat beacon above Viñales Valley's green mogotes, red-earth fields and royal palms"> | **Varadero Moonline Relay Finale**<br><img src="723-cuba-varadero-moonline-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-cobalt-pearl sea compass above Varadero's moonlit turquoise shoreline"> |
 
+## World Series - Europe - Batch 176: Czechia
+
+| | |
+|---|---|
+| **Prague Dancing House Riverlight Intercept**<br><img src="724-czechia-prague-dancing-house-river-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three cobalt light keys into a ruby-and-pearl river compass beside Prague's Dancing House at dawn"> | **Český Krumlov Castle Glass Cipher**<br><img src="725-czechia-cesky-krumlov-castle-cipher.png" width="420" alt="The trio sealing a recovered archive inside a completed garnet capsule beside Český Krumlov Castle's painted Renaissance arcades"> |
+| **Pravčická Brána Sandstone Extraction**<br><img src="726-czechia-pravcicka-brana-terrain-extraction.png" width="420" alt="The trio restoring a cobalt-and-pearl habitat beacon before the monumental sandstone arch of Pravčická Brána"> | **Prague Main Station Glassline Relay**<br><img src="727-czechia-prague-main-station-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-cobalt-pearl rail compass above Prague Main Station at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
