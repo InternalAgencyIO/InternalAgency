@@ -1029,6 +1029,13 @@ rejected and regenerated.
 | **Budapest Chain Bridge Danube Intercept**<br><img src="760-hungary-budapest-chain-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking ruby, white, and emerald light keys into a silver river compass above Budapest's Chain Bridge and Danube"> | **Fisherman's Bastion Pearl Cipher**<br><img src="761-hungary-fishermans-bastion-cipher.png" width="420" alt="The trio sealing a recovered archive inside a pearl-and-green capsule beside Budapest's Fisherman's Bastion terraces"> |
 | **Hortobagy Puszta Terrain Extraction**<br><img src="762-hungary-hortobagy-puszta-extraction.png" width="420" alt="The trio restoring a ruby-and-emerald habitat beacon above Hortobagy's open puszta and Nine-Hole Bridge"> | **Budapest Keleti Moonline Relay**<br><img src="763-hungary-budapest-keleti-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-emerald-silver rail relay above Budapest Keleti station at blue hour"> |
 
+## World Series - Europe - Batch 186: Austria
+
+| | |
+|---|---|
+| **Vienna MuseumsQuartier Ruby Intercept**<br><img src="764-austria-vienna-museumsquartier-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking ruby-white light keys into a crystal civic compass above Vienna's MuseumsQuartier courtyards"> | **Salzburg Hohensalzburg Crystal Cipher**<br><img src="765-austria-salzburg-hohensalzburg-fortress-cipher.png" width="420" alt="The trio sealing a recovered archive inside a red-glass capsule beside Salzburg's Hohensalzburg Fortress and alpine skyline"> |
+| **Grossglockner Pasterze Alpine Extraction**<br><img src="766-austria-grossglockner-pasterze-extraction.png" width="420" alt="The trio restoring a ruby-and-green habitat beacon above the Pasterze glacier and Grossglockner massif"> | **Semmering Railway Moonline Relay**<br><img src="767-austria-semmering-railway-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-crystal-green rail relay before the Semmering Railway's Kalte Rinne viaduct at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
