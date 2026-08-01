@@ -889,6 +889,13 @@ rejected and regenerated.
 | **Kigali Convention Centre Sunline Intercept**<br><img src="680-rwanda-kigali-convention-centre-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise hill compass above Kigali's patterned Convention Centre dome and rolling city hills"> | **Kigali Kandt House Amber Cipher**<br><img src="681-rwanda-kigali-kandt-house-cipher.png" width="420" alt="The trio closing an amber archive cipher beside Kandt House's red-tile roof, pale veranda arches and garden terraces"> |
 | **Virunga Volcano Light Extraction**<br><img src="682-rwanda-volcanoes-national-park-virunga-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon beneath Mount Bisoke and the misty Virunga forest slopes"> | **Rubavu Lake Kivu Moonline Relay**<br><img src="683-rwanda-rubavu-lake-kivu-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald relay above Rubavu's cobalt Lake Kivu shoreline and dark volcanic hills"> |
 
+## World Series - Africa - Batch 166: Burundi
+
+| | |
+|---|---|
+| **Bujumbura Tanganyika Boulevard Intercept**<br><img src="684-burundi-bujumbura-lake-tanganyika-boulevard-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a ruby-and-emerald compass above Bujumbura's Lake Tanganyika waterfront at coral dawn"> | **Gitega National Museum Tricolor Cipher**<br><img src="685-burundi-gitega-national-museum-cipher.png" width="420" alt="The trio closing a ruby, emerald and pearl archive cipher beside Gitega National Museum's masonry veranda and highland garden"> |
+| **Kibira Canopy Data Extraction**<br><img src="686-burundi-kibira-national-park-canopy-extraction.png" width="420" alt="The trio restoring a white-and-emerald rainfall beacon above Kibira's misty montane forest and tea-edge ridge"> | **Bujumbura Port Moonline Relay**<br><img src="687-burundi-bujumbura-port-lake-tanganyika-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-white-emerald relay above Bujumbura port and Lake Tanganyika at cobalt blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
