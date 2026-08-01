@@ -917,6 +917,13 @@ rejected and regenerated.
 | **Juba White Nile Light-Key Intercept**<br><img src="696-south-sudan-juba-white-nile-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three cobalt light keys into a gold-and-turquoise compass above Juba's White Nile riverfront"> | **Wau Railway Arcade Amber Cipher**<br><img src="697-south-sudan-wau-historic-railway-station-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Wau's historic railway-station arcades and savanna tracks"> |
 | **Boma Savanna Canopy-Light Extraction**<br><img src="698-south-sudan-boma-national-park-savanna-extraction.png" width="420" alt="The trio restoring a blue-and-turquoise environmental beacon above Boma National Park's floodplain and escarpment"> | **Sudd Wetlands Moonline Relay**<br><img src="699-south-sudan-sudd-wetlands-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a blue-pearl-emerald river relay above the Sudd wetlands at cobalt blue hour"> |
 
+## World Series - Europe - Batch 170: Belgium
+
+| | |
+|---|---|
+| **Brussels Atomium Sphere-Light Intercept**<br><img src="700-belgium-brussels-atomium-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three ruby light keys into a black-gold-cobalt compass above Brussels' Atomium at golden dawn"> | **Bruges Belfry Canal Amber Cipher**<br><img src="701-belgium-bruges-markt-belfry-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Bruges' Belfry, stepped-gable brick houses and canal reflections"> |
+| **High Fens Heathlight Extraction**<br><img src="702-belgium-high-fens-heath-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above the High Fens boardwalks, heath and bog pools"> | **Antwerp Central Diamond Moonline Relay**<br><img src="703-belgium-antwerp-central-station-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a black-gold-red diamond rail relay before Antwerp Central Station at cobalt blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
