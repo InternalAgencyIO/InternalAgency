@@ -322,10 +322,11 @@ security audit or deployment approval.
 | A decoder strips a leading BOM or treats U+FEFF as JSON whitespace | UTF-8 BOM-position control and three delimiter rejections | U+FEFF accepts inside the candidate string; leading, post-whitespace, and trailing BOM bytes decode successfully then reject as `MALFORMED_JSON` before candidate production in Node and Python |
 | A byte decoder reads the full backing buffer instead of the visible view | three offset/length controls with invalid external sentinels | Nonzero offset, bounded length, and combined bounds accept the same candidate while each complete backing buffer fails UTF-8 decoding |
 | `ArrayBuffer`, `DataView`, string, or numeric array input is coerced into bytes | four wrong-type byte-view rejections | Every wrong type rejects as `INVALID_BYTE_VIEW` before UTF-8 decoding, JSON parsing, or candidate production |
+| A truncated `Uint8Array` view borrows valid JSON bytes outside its bounds | full-view control plus empty, prefix-only, suffix-only, and one-byte-short views | The full view accepts; all four truncations decode successfully then reject as `MALFORMED_JSON` before candidate production in Node and Python |
 
 ## Next matrix expansion
 
-- add a compact visible-view truncation corpus proving empty, prefix-only,
-  suffix-only, and one-byte-short `Uint8Array` views reject without reading
-  outside their bounds. Preserve runtime-only candidates and every network,
-  wallet, review, deployment, and activation HOLD.
+- add a compact visible-view alias-mutation corpus proving changes outside the
+  selected `Uint8Array` bounds cannot alter a result while changes inside the
+  view are detected. Preserve runtime-only bytes and candidates and every
+  network, wallet, review, deployment, and activation HOLD.

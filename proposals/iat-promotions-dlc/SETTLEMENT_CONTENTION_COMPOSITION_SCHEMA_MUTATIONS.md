@@ -107,3 +107,9 @@ The byte-view boundary companion
 binds decoding to the visible `Uint8Array` offset/length and rejects non-byte
 views before UTF-8 or JSON processing, with independently reproduced compact
 commitments in Python.
+
+The visible-view truncation companion
+[`SETTLEMENT_CONTENTION_VISIBLE_VIEW_TRUNCATION_AUDIT.md`](./SETTLEMENT_CONTENTION_VISIBLE_VIEW_TRUNCATION_AUDIT.md)
+uses one valid backing envelope to prove the full view accepts while empty,
+prefix-only, suffix-only, and one-byte-short views decode then reject before
+candidate production. Bytes outside the visible view never complete JSON.

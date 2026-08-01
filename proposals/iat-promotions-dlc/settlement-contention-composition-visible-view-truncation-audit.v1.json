@@ -1,0 +1,184 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-contention-composition-visible-view-truncation-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "vectorsApplied": false
+  },
+  "sources": {
+    "baseArtifact": {
+      "path": "settlement-contention-composition-vectors.v1.json",
+      "canonicalSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf"
+    },
+    "boundedParser": {
+      "path": "settlement-contention-composition-transport-limits.mjs",
+      "normalizedTextSha256": "1fe191bee4b50b3ebfaced7c83b8baa88ee58e2cc8a271507a204714ec093583"
+    },
+    "pythonVerifier": {
+      "path": "verify-settlement-contention-transport-limits.py",
+      "normalizedTextSha256": "ccfd1e94247fd099b396118823124c38c345fa85fc0ab07a036f820ce954eb16"
+    },
+    "generator": {
+      "path": "generate-settlement-contention-composition-visible-view-truncation-audit.mjs",
+      "normalizedTextSha256": "12eb48e2191ad989bfb28b515f51096a359560f91f81189157fdeb634ffd9ed3"
+    }
+  },
+  "contract": {
+    "mode": "UINT8ARRAY_VISIBLE_VIEW_TRUNCATION",
+    "visibleViewTruncationRules": {
+      "acceptedInputType": "Uint8Array",
+      "fullViewAccepted": true,
+      "emptyViewAccepted": false,
+      "prefixOnlyViewAccepted": false,
+      "suffixOnlyViewAccepted": false,
+      "oneByteShortViewAccepted": false,
+      "outsideViewReadAllowed": false,
+      "truncatedViewError": "MALFORMED_JSON",
+      "rejectionAfterSuccessfulUtf8Decode": true
+    },
+    "acceptedControlCount": 1,
+    "rejectionCount": 4,
+    "fullViewAccepted": true,
+    "emptyViewRejected": true,
+    "prefixOnlyViewRejected": true,
+    "suffixOnlyViewRejected": true,
+    "oneByteShortViewRejected": true,
+    "outsideViewBytesExcluded": true,
+    "truncationsRejectedAfterDecode": true,
+    "backingByteSequencesStored": false,
+    "visibleByteSequencesStored": false,
+    "runtimeInputsStored": false,
+    "runtimeCandidatesStored": false,
+    "usesLocalValidator": false,
+    "usesRpc": false,
+    "usesWallet": false,
+    "preparesTransactions": false,
+    "signsTransactions": false,
+    "broadcastsTransactions": false,
+    "issuesReviewReceipts": false,
+    "completesReview": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "summary": {
+    "acceptedControlCount": "1",
+    "rejectionCount": "4",
+    "fullVisibleViewAccepted": true,
+    "allTruncatedVisibleViewsRejectedAfterDecode": true,
+    "controlSetCommitmentSha256": "3aa67759435475ebedc218c711b3a5f20dbf8cdba2dfc1e13a478f27defd7c7c",
+    "rejectionSetCommitmentSha256": "16a01aa00ad261692ee54b3d59cd4bd505b7f36dc5ded1d977aa153f4754010b",
+    "combinedReplayCommitmentSha256": "2967c4e500e0f69a84d43368355fed5ac9fa916fd63eee33eef5ef4347b1fa44",
+    "backingByteSequencesStored": false,
+    "visibleByteSequencesStored": false,
+    "runtimeInputsStored": false,
+    "runtimeCandidatesStored": false,
+    "receiptIssued": false,
+    "reviewCompleted": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "controls": [
+    {
+      "caseId": "FULL_VISIBLE_VIEW_ACCEPTED",
+      "inputType": "Uint8Array",
+      "backingRepresentationSha256": "9b0853e30780f03e4f6bee574e2b5b802764adccbb6ac38b7bdadf9fa21ac9a8",
+      "visibleRepresentationSha256": "9b0853e30780f03e4f6bee574e2b5b802764adccbb6ac38b7bdadf9fa21ac9a8",
+      "backingByteLength": 74,
+      "byteOffset": 0,
+      "byteLength": 74,
+      "excludedPrefixLength": 0,
+      "excludedSuffixLength": 0,
+      "candidateCommitmentSha256": "c158be6418725df65036e2e87aab75c5f62abb74cdc45d4da8cff5ee36b6a473",
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    }
+  ],
+  "rejections": [
+    {
+      "caseId": "EMPTY_VIEW_REJECTED",
+      "family": "EMPTY_VIEW",
+      "inputType": "Uint8Array",
+      "backingRepresentationSha256": "9b0853e30780f03e4f6bee574e2b5b802764adccbb6ac38b7bdadf9fa21ac9a8",
+      "visibleRepresentationSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "backingByteLength": 74,
+      "byteOffset": 0,
+      "byteLength": 0,
+      "excludedPrefixLength": 0,
+      "excludedSuffixLength": 74,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "utf8DecodingSucceeded": true,
+      "jsonParsingAttempted": true,
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "PREFIX_ONLY_VIEW_REJECTED",
+      "family": "PREFIX_ONLY_VIEW",
+      "inputType": "Uint8Array",
+      "backingRepresentationSha256": "9b0853e30780f03e4f6bee574e2b5b802764adccbb6ac38b7bdadf9fa21ac9a8",
+      "visibleRepresentationSha256": "6b67ab6762615db96f72964fa179766caf9761ba5a275162392dd8fd1979f10b",
+      "backingByteLength": 74,
+      "byteOffset": 0,
+      "byteLength": 24,
+      "excludedPrefixLength": 0,
+      "excludedSuffixLength": 50,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "utf8DecodingSucceeded": true,
+      "jsonParsingAttempted": true,
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "SUFFIX_ONLY_VIEW_REJECTED",
+      "family": "SUFFIX_ONLY_VIEW",
+      "inputType": "Uint8Array",
+      "backingRepresentationSha256": "9b0853e30780f03e4f6bee574e2b5b802764adccbb6ac38b7bdadf9fa21ac9a8",
+      "visibleRepresentationSha256": "418423fe1120d828a90ac29c10d6b669bab6d2bef2b8f3dcaec7f58bec909990",
+      "backingByteLength": 74,
+      "byteOffset": 1,
+      "byteLength": 73,
+      "excludedPrefixLength": 1,
+      "excludedSuffixLength": 0,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "utf8DecodingSucceeded": true,
+      "jsonParsingAttempted": true,
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "ONE_BYTE_SHORT_VIEW_REJECTED",
+      "family": "ONE_BYTE_SHORT_VIEW",
+      "inputType": "Uint8Array",
+      "backingRepresentationSha256": "9b0853e30780f03e4f6bee574e2b5b802764adccbb6ac38b7bdadf9fa21ac9a8",
+      "visibleRepresentationSha256": "52071a29391cb59256af7debc942150404bc8f98e6868411abb277424f016027",
+      "backingByteLength": 74,
+      "byteOffset": 0,
+      "byteLength": 73,
+      "excludedPrefixLength": 0,
+      "excludedSuffixLength": 1,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "utf8DecodingSucceeded": true,
+      "jsonParsingAttempted": true,
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    }
+  ]
+}

@@ -105,6 +105,18 @@ export const BYTE_VIEW_BOUNDARY_RULES = Object.freeze({
   rejectionPrecedesUtf8Decoding: true,
 });
 
+export const VISIBLE_VIEW_TRUNCATION_RULES = Object.freeze({
+  acceptedInputType: "Uint8Array",
+  fullViewAccepted: true,
+  emptyViewAccepted: false,
+  prefixOnlyViewAccepted: false,
+  suffixOnlyViewAccepted: false,
+  oneByteShortViewAccepted: false,
+  outsideViewReadAllowed: false,
+  truncatedViewError: "MALFORMED_JSON",
+  rejectionAfterSuccessfulUtf8Decode: true,
+});
+
 const NORMALIZATION_KEY_DEFINITIONS = Object.freeze([
   ["FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"],
   ["FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"],
@@ -1339,6 +1351,103 @@ export function evaluateByteViewBoundaryCorpus() {
       observedError,
       utf8DecodingAttempted: false,
       jsonParsingAttempted: false,
+      rejectedBeforeCandidate: true,
+      candidateProduced: false,
+      mutationEvaluated: false,
+    };
+  });
+  return { controls, rejections };
+}
+
+function visibleViewTruncationProbeEnvelope() {
+  return Buffer.from('{"transportMarker":"DRAFT/INACTIVE","candidate":{"viewTruncationProbe":0}}', "utf8");
+}
+
+function visibleViewTruncationCase(caseId, byteOffset, byteLength) {
+  const backingBytes = visibleViewTruncationProbeEnvelope();
+  const serializedBytes = new Uint8Array(
+    backingBytes.buffer,
+    backingBytes.byteOffset + byteOffset,
+    byteLength,
+  );
+  return {
+    caseId,
+    inputType: "Uint8Array",
+    backingBytes,
+    serializedBytes,
+    byteOffset,
+    byteLength,
+    excludedPrefixLength: byteOffset,
+    excludedSuffixLength: backingBytes.length - byteOffset - byteLength,
+  };
+}
+
+export function buildVisibleViewTruncationCorpus() {
+  const backingLength = visibleViewTruncationProbeEnvelope().length;
+  return {
+    controls: [{
+      ...visibleViewTruncationCase("FULL_VISIBLE_VIEW_ACCEPTED", 0, backingLength),
+      expectedCandidate: { viewTruncationProbe: 0 },
+    }],
+    rejections: [
+      ["EMPTY_VIEW_REJECTED", "EMPTY_VIEW", 0, 0],
+      ["PREFIX_ONLY_VIEW_REJECTED", "PREFIX_ONLY_VIEW", 0, 24],
+      ["SUFFIX_ONLY_VIEW_REJECTED", "SUFFIX_ONLY_VIEW", 1, backingLength - 1],
+      ["ONE_BYTE_SHORT_VIEW_REJECTED", "ONE_BYTE_SHORT_VIEW", 0, backingLength - 1],
+    ].map(([caseId, family, byteOffset, byteLength]) => ({
+      ...visibleViewTruncationCase(caseId, byteOffset, byteLength),
+      family,
+      expectedError: "MALFORMED_JSON",
+    })),
+  };
+}
+
+export function evaluateVisibleViewTruncationCorpus() {
+  const corpus = buildVisibleViewTruncationCorpus();
+  const controls = corpus.controls.map(({ caseId, inputType, backingBytes, serializedBytes, byteOffset, byteLength, excludedPrefixLength, excludedSuffixLength, expectedCandidate }) => {
+    const parsed = parseBoundedTransportEnvelopeBytes(serializedBytes);
+    if (canonicalSha256(parsed.candidate) !== canonicalSha256(expectedCandidate)) {
+      fail(`VISIBLE_VIEW_TRUNCATION_CONTROL_DRIFT:${caseId}`);
+    }
+    return {
+      caseId,
+      inputType,
+      backingRepresentationSha256: createHash("sha256").update(backingBytes).digest("hex"),
+      visibleRepresentationSha256: createHash("sha256").update(serializedBytes).digest("hex"),
+      backingByteLength: backingBytes.length,
+      byteOffset,
+      byteLength,
+      excludedPrefixLength,
+      excludedSuffixLength,
+      candidateCommitmentSha256: canonicalSha256(parsed.candidate),
+      acceptedAtParser: true,
+      candidateStored: false,
+      mutationEvaluated: false,
+    };
+  });
+  const rejections = corpus.rejections.map(({ caseId, family, inputType, backingBytes, serializedBytes, byteOffset, byteLength, excludedPrefixLength, excludedSuffixLength, expectedError }) => {
+    let observedError = null;
+    try {
+      parseBoundedTransportEnvelopeBytes(serializedBytes);
+    } catch (error) {
+      observedError = error instanceof Error ? error.message : String(error);
+    }
+    if (observedError !== expectedError) fail(`VISIBLE_VIEW_TRUNCATION_REJECTION_DRIFT:${caseId}:${observedError}`);
+    return {
+      caseId,
+      family,
+      inputType,
+      backingRepresentationSha256: createHash("sha256").update(backingBytes).digest("hex"),
+      visibleRepresentationSha256: createHash("sha256").update(serializedBytes).digest("hex"),
+      backingByteLength: backingBytes.length,
+      byteOffset,
+      byteLength,
+      excludedPrefixLength,
+      excludedSuffixLength,
+      expectedError,
+      observedError,
+      utf8DecodingSucceeded: true,
+      jsonParsingAttempted: true,
       rejectedBeforeCandidate: true,
       candidateProduced: false,
       mutationEvaluated: false,

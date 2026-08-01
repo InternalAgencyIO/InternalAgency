@@ -26,6 +26,10 @@ Published evidence contains view metadata, hashes, byte counts, error
 boundaries, and outcomes only. Backing bytes, visible bytes, runtime inputs,
 and runtime candidates are never stored.
 
+The companion `SETTLEMENT_CONTENTION_VISIBLE_VIEW_TRUNCATION_AUDIT.md` applies
+the same exact-view rule to empty, prefix-only, suffix-only, and one-byte-short
+views over a valid backing envelope.
+
 ## Replay
 
 ```powershell

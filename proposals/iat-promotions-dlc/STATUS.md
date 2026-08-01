@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-08-01 03:57 UTC
+Updated: 2026-08-01 04:14 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `25249b5`
+Previously published public increment: `7d39c2b`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -580,8 +580,18 @@ This status file deliberately does not claim a self-referential commit hash.
   `037a27664cdf22db88296cdb06aa7556a0913a48b0dd87a871b4a7c61f8f7bdb`,
   and combined replay commitment
   `67aa51b0371b4cde1a0143bfcc11a4291d41dca55266b4057facd7d66b8583f6`.
+- one full-view control proving the complete `Uint8Array` view accepts the
+  shared valid backing envelope;
+- empty, prefix-only, suffix-only, and one-byte-short views proving successful
+  UTF-8 decoding cannot borrow JSON bytes outside the visible bounds;
+- visible-view truncation control-set commitment
+  `3aa67759435475ebedc218c711b3a5f20dbf8cdba2dfc1e13a478f27defd7c7c`,
+  rejection-set commitment
+  `16a01aa00ad261692ee54b3d59cd4bd505b7f36dc5ded1d977aa153f4754010b`,
+  and combined replay commitment
+  `2967c4e500e0f69a84d43368355fed5ac9fa916fd63eee33eef5ef4347b1fa44`.
 
-Current proposal-only result: **474 tests passed**. This consists of 28 protected
+Current proposal-only result: **486 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -719,6 +729,11 @@ nonzero-offset, bounded-length, combined-view, excluded-sentinel, wrong-type,
 pre-decode error-boundary, compact-publication, independent Python parity,
 tamper-exit, source-safety, and manifest-coverage tests complete the visible-
 byte suite.
+Twelve visible-view truncation deterministic regeneration, fixed bound rule,
+full-view acceptance, empty-view, prefix-only, suffix-only, one-byte-short,
+post-decode error-boundary, compact-publication, independent Python parity,
+tamper-exit, source-safety, and manifest-coverage tests complete the truncated-
+view suite.
 
 ## Current guarantees of the reference model
 
@@ -750,8 +765,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a compact visible-view truncation corpus proving empty, prefix-only,
-suffix-only, and one-byte-short `Uint8Array` views reject without reading
-outside their bounds. Keep candidates runtime-only; do not contact a local
-validator, Devnet, or Mainnet; preserve every network, wallet, review,
-deployment, and activation HOLD.
+Add a compact visible-view alias-mutation corpus proving backing-byte changes
+outside a selected `Uint8Array` cannot alter the parsed result while changes
+inside the view are detected. Keep bytes and candidates runtime-only; do not
+contact a local validator, Devnet, or Mainnet; preserve every network, wallet,
+review, deployment, and activation HOLD.
