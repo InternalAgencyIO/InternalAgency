@@ -65,7 +65,17 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-01T14:29:58.7063939Z",
+    "status": "awaiting_post",
+    "imageNumbers": [645, 646, 643],
+    "countries": ["Somalia", "Romania"],
+    "assets": [
+      {"file": "645-somalia-merca-coral-stone-old-town-cipher.png", "sha256": "4d371f2428be320229a9ab130d851490d6bf3964b4e7f368ab0db5308e17da50"},
+      {"file": "646-somalia-cal-madow-cloud-forest-extraction.png", "sha256": "6aa3de9619c4825b1f5e42d32b5d9030476168e55f10f24a917ba936fff0804f"},
+      {"file": "643-romania-constanta-black-sea-night-relay.png", "sha256": "fe8880335d66a4212bb4c030686c56b3b45c62a9c1a93145661d2f352a8f0506"}
+    ]
+  },
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
