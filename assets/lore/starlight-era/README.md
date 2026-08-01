@@ -875,6 +875,13 @@ rejected and regenerated.
 | **Conakry Kaloum Atlantic Intercept**<br><img src="672-guinea-conakry-kaloum-waterfront-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise peninsula compass above Conakry's Kaloum waterfront and the Îles de Los at apricot dawn"> | **Dalaba Highland Villa Amber Cipher**<br><img src="673-guinea-dalaba-highland-villa-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Dalaba's weathered highland villas, verandas and misty Fouta Djallon hills"> |
 | **Mount Nimba Forest-Savanna Extraction**<br><img src="674-guinea-mount-nimba-forest-savanna-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above Mount Nimba's iron-rich ridges, grassland and forest folds"> | **Îles de Los Kassa Moonline Relay**<br><img src="675-guinea-iles-de-los-kassa-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet island relay above Kassa's granite Atlantic shore with Conakry lights beyond"> |
 
+## World Series - Africa - Batch 164: Benin
+
+| | |
+|---|---|
+| **Cotonou Ganhi Lagoon Intercept**<br><img src="676-benin-cotonou-ganhi-lagoon-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise channel compass above Cotonou's Ganhi lagoon waterfront at apricot dawn"> | **Ouidah Portuguese Fort Cipher**<br><img src="677-benin-ouidah-portuguese-fort-cipher.png" width="420" alt="The trio sealing an amber archive prism beside the weathered arcades and palm-lined walls of Ouidah's Portuguese Fort"> |
+| **Tanougou Waterfall Extraction**<br><img src="678-benin-tanougou-waterfall-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon before Tanougou Falls and the Atacora ridges"> | **Grand-Popo Mono Estuary Moonline Relay**<br><img src="679-benin-grand-popo-mono-estuary-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet estuary relay above Grand-Popo where the Mono River lagoon meets the Atlantic"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
