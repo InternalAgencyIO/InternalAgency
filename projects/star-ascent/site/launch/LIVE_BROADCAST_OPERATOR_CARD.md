@@ -1,6 +1,6 @@
 # STAR ASCENT live broadcast operator card
 
-Status: **HOLD — WINDOW OPENS 30 JULY 2026 AT 03:45:00 UTC**
+Status: **UNSCHEDULED — MAINNET HOLD — NO CLAIM ROUTE**
 
 ## Before the window
 

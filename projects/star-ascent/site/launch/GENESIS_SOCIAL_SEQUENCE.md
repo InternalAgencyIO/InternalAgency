@@ -1,9 +1,9 @@
 # STAR ASCENT / Genesis social sequence
 
-Status: **30 JULY 2026 · 03:45:00 UTC / 06:45:00 ISTANBUL**
+Status: **UNSCHEDULED · MAINNET HOLD · NO CLAIM ROUTE**
 
-The open-source ceremony window is scheduled. Every transaction still requires
-physical approval and passing evidence gates.
+No replacement UTC ceremony window is published. If one is later published,
+every transaction still requires physical approval and passing evidence gates.
 
 ## T−60 minutes
 

@@ -2,7 +2,7 @@
 
 **Status:** HOLD
 
-**Public window:** 30 July 2026 at 03:45:00 UTC / 06:45:00 Istanbul
+**Public window:** UNSCHEDULED — replacement UTC time not published
 
 The countdown opens the broadcast and reviewed source. It never connects a
 wallet, signs, submits, or authorizes mainnet.

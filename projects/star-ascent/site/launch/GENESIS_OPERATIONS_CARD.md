@@ -1,9 +1,9 @@
 # IAT V2 Genesis operations card
 
-Status: **HOLD — V2 SBF BUILD AND DEVNET REHEARSAL PENDING**
+Status: **UNSCHEDULED — MAINNET HOLD — FUNDING AND FINAL PACKET PENDING**
 
-The window is public, but there is no automatic transaction. The superseded
-four-transaction `/mint` page is read-only and must not be used.
+No replacement UTC window is published and there is no automatic transaction.
+The superseded four-transaction `/mint` page is read-only and must not be used.
 
 ## Roles
 

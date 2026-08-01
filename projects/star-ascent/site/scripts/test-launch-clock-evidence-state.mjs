@@ -12,40 +12,24 @@ const manifest = JSON.parse(
   readFileSync(resolve("launch/genesis-manifest.template.json"), "utf8"),
 );
 const source = readFileSync(resolve("app/LaunchClock.tsx"), "utf8");
-const targetMs = Date.parse(GENESIS_SCHEDULED_AT_UTC);
-
-assert.equal(GENESIS_SCHEDULED_AT_UTC, "2026-07-30T03:45:00Z");
+assert.equal(GENESIS_SCHEDULED_AT_UTC, null);
+assert.equal(resolveLaunchClockState("HOLD", GENESIS_SCHEDULED_AT_UTC), "UNSCHEDULED_HOLD");
+assert.equal(resolveLaunchClockState("READY", GENESIS_SCHEDULED_AT_UTC), "UNSCHEDULED_HOLD");
+assert.equal(resolveLaunchClockState("PUBLISHED", GENESIS_SCHEDULED_AT_UTC), "LIVE");
 assert.equal(
-  resolveLaunchClockState("HOLD", GENESIS_SCHEDULED_AT_UTC, targetMs - 1),
-  "SCHEDULED_HOLD",
-);
-assert.equal(
-  resolveLaunchClockState("HOLD", GENESIS_SCHEDULED_AT_UTC, targetMs),
-  "WINDOW_OPEN_HOLD",
-);
-assert.equal(
-  resolveLaunchClockState("READY", GENESIS_SCHEDULED_AT_UTC, targetMs + 1),
-  "WINDOW_OPEN_HOLD",
-);
-assert.equal(
-  resolveLaunchClockState("PUBLISHED", GENESIS_SCHEDULED_AT_UTC, targetMs - 1),
-  "LIVE",
-);
-assert.equal(resolveLaunchClockState("HOLD", null, targetMs), "UNSCHEDULED_HOLD");
-assert.equal(
-  resolveLaunchClockState("HOLD", "not-a-date", targetMs),
+  resolveLaunchClockState("HOLD", "not-a-date"),
   "INVALID_SCHEDULE_HOLD",
 );
 assert.equal(
-  resolveLaunchClockState(manifest.status, GENESIS_SCHEDULED_AT_UTC, targetMs - 1),
-  "SCHEDULED_HOLD",
+  resolveLaunchClockState(manifest.status, GENESIS_SCHEDULED_AT_UTC),
+  "UNSCHEDULED_HOLD",
 );
-assert.match(source, /30 JUL 2026 · 03:45:00 UTC/);
-assert.match(source, /30 TEM 2026 · 06:45:00 İSTANBUL/);
+assert.match(source, /REPLACEMENT UTC WINDOW · NOT PUBLISHED/);
+assert.match(source, /YENİ UTC PENCERESİ · YAYIMLANMADI/);
 assert.match(source, /NO AUTOMATIC TRANSACTIONS/);
 assert.match(source, /data-launch-state=\{state\}/);
-assert.match(source, /setInterval/);
-assert.doesNotMatch(source, /2026-07-28/);
+assert.match(source, /data-scheduled-at="UNSCHEDULED"/);
+assert.doesNotMatch(source, /setInterval|2026-07-30|03:45:00|06:45:00/);
 console.log(
-  "Launch clock carries the exact two-hour ceremony window while remaining evidence-gated.",
+  "Launch clock is fail-closed in UNSCHEDULED_HOLD with no stale countdown or actionable timestamp.",
 );

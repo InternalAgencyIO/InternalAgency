@@ -1,8 +1,8 @@
 # STAR ASCENT — Genesis Command Center
 
-**Broadcast:** 30 July 2026, 03:45:00 UTC / 06:45:00 Istanbul
+**Schedule:** UNSCHEDULED
 
-**Genesis ceremony window:** exact time scheduled; evidence HOLD
+**Genesis ceremony window:** replacement UTC time not published; mainnet remains **HOLD**
 
 **Signing device:** Trezor Model T; signing remains a physical operator action.
 
@@ -15,8 +15,9 @@
 
 ## Window-opening sequence
 
-1. At 03:45:00 UTC, open the broadcast and public source record. The countdown
-   does not connect, sign, or submit anything.
+1. After funding is confirmed and one replacement UTC time is published, open
+   the broadcast and public source record at that reviewed time. No clock
+   connects, signs, or submits anything.
 2. Identify the official site and Signal directory.
 3. State the verification rule: no direct messages, no paid registration, no
    seed phrase, and no copied links.

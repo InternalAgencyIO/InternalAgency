@@ -91,9 +91,9 @@ const launchPlan = {
   en: {
     eyebrow: "OPEN-SOURCE EXECUTION WINDOW",
     title: "Public code. Physical approval. Verifiable evidence.",
-    note: "The ceremony window opens at exactly 03:45:00 UTC on 30 July 2026. The source is public now. No transaction is automatic, and mainnet remains blocked unless every evidence gate passes.",
+    note: "The prior ceremony window has expired and no replacement UTC time is published. The source is public now. No transaction is automatic, and mainnet remains on HOLD until funding and every evidence gate pass.",
     items: [
-      ["03:45:00 UTC", "Ceremony window opens", "The open-source transaction builder becomes eligible for human-approved execution. There is no timer-triggered wallet action."],
+      ["UNSCHEDULED", "Replacement UTC window pending", "Publish one new exact time only after funding is confirmed and before every bound release artifact is regenerated."],
       ["DEVNET FIRST", "V2 program rehearsal", "The reviewed V2 program must be built, deployed unfunded, transferred to hardware control, initialized, funded, and exercised on devnet before mainnet can unlock."],
       ["AFTER ALL GATES", "Mainnet decision", "The signer and verifier may proceed only if metadata, destinations, locks, digests, and handoff records all match."],
       ["After site update", "Registration opens", "Use the on-page status—not a direct message—to confirm availability."],
@@ -102,9 +102,9 @@ const launchPlan = {
   tr: {
     eyebrow: "AÇIK KAYNAK YÜRÜTME PENCERESİ",
     title: "Kamuya açık kod. Fiziksel onay. Doğrulanabilir kanıt.",
-    note: "Tören penceresi 30 Temmuz 2026 saat 06:45:00 İstanbul'da açılır. Kaynak kod şimdi açıktır. Hiçbir işlem otomatik değildir ve tüm kanıt eşikleri geçmeden mainnet kilidi açılmaz.",
+    note: "Önceki tören penceresi geçti ve yeni UTC zamanı yayımlanmadı. Kaynak kod şimdi açıktır. Hiçbir işlem otomatik değildir; fonlama ve tüm kanıt eşikleri geçmeden mainnet BEKLET durumunda kalır.",
     items: [
-      ["06:45:00 İSTANBUL", "Tören penceresi açılır", "Açık kaynak işlem kurucu insan onaylı yürütmeye uygun hâle gelir. Zamanlayıcı cüzdan işlemi başlatmaz."],
+      ["PLANLANMADI", "Yeni UTC penceresi bekleniyor", "Yeni tam zamanı yalnızca fonlama doğrulandıktan sonra ve tüm bağlı yayın eserleri yeniden üretilmeden önce yayımla."],
       ["ÖNCE DEVNET", "V2 program provası", "Mainnet kilidi açılmadan önce incelenmiş V2 programı devnette oluşturulmalı, fonlanmadan dağıtılmalı, donanım kontrolüne aktarılmalı, başlatılmalı, fonlanmalı ve test edilmelidir."],
       ["TÜM EŞİKLERDEN SONRA", "Mainnet kararı", "İmzacı ve doğrulayıcı yalnızca metadata, hedefler, kilitler, özetler ve devir kayıtları eşleşirse ilerleyebilir."],
       ["Site güncellemesinden sonra", "Kayıt açılışı", "Kullanılabilirliği doğrudan mesajla değil, sayfadaki durum bilgisiyle doğrulayın."],
@@ -587,7 +587,7 @@ export default function Home() {
     <span className="sr-only" id="registration-safety">{t.free}</span>
     <nav aria-label={language === "en" ? "Primary navigation" : "Ana navigasyon"}><div className="mark" aria-label="Internal Agency">IA<span aria-hidden="true">{"///"}</span></div><div className="nav-links"><a href="#mission">{t.nav[0]}</a><a href="#token">{t.nav[1]}</a><a href="#roadmap">{t.nav[2]}</a><a href="#document-pack-title">{t.nav[3]}</a><a href="/network">{language === "en" ? "Network" : "Ağ"}</a><a href="/launch">{language === "en" ? "Launch" : "Lansman"}</a><a href="/proof">{language === "en" ? "Proof" : "Kanıt"}</a><a href="/signal">{language === "en" ? "Signal" : "Sinyal"}</a></div><div className="nav-actions"><button className="language" onClick={changeLanguage} aria-label={t.languageLabel}>{t.lang}</button><button className="outline" onClick={register} aria-describedby="registration-safety">{t.register}</button></div></nav>
     <main id="main-content" tabIndex={-1}><LaunchSequence language={language} />
-    <section className="hero" aria-labelledby="hero-title"><div className="grid" aria-hidden="true" /><div className="orbital-nodes" aria-hidden="true"><i /><i /><i /><i /></div><div className="signal">{t.signal}</div><div className="terminal-head"><span>{t.terminal}</span><span>{t.terminalNote}</span></div><p className="eyebrow">{t.presents}</p><h1 id="hero-title">STAR<br />ASCENT<span>.</span></h1><p className="lede">{m.lede}</p><div className="actions"><button onClick={register} aria-describedby="registration-safety">{t.enter}</button><a className="text-link" href="#token">{t.disclosure}</a></div><LaunchClock language={language} /><div className="launch-time"><span>{t.genesis}</span><strong>{language === "en" ? "30 JUL · 03:45:00 UTC" : "30 TEM · 06:45:00 İSTANBUL"}</strong><span className="broadcast">{t.broadcast} · {language === "en" ? "CODE PUBLIC // EVIDENCE HOLD" : "KOD AÇIK // KANIT BEKLET"}</span></div></section>
+    <section className="hero" aria-labelledby="hero-title"><div className="grid" aria-hidden="true" /><div className="orbital-nodes" aria-hidden="true"><i /><i /><i /><i /></div><div className="signal">{t.signal}</div><div className="terminal-head"><span>{t.terminal}</span><span>{t.terminalNote}</span></div><p className="eyebrow">{t.presents}</p><h1 id="hero-title">STAR<br />ASCENT<span>.</span></h1><p className="lede">{m.lede}</p><div className="actions"><button onClick={register} aria-describedby="registration-safety">{t.enter}</button><a className="text-link" href="#token">{t.disclosure}</a></div><LaunchClock language={language} /><div className="launch-time"><span>{t.genesis}</span><strong>{language === "en" ? "UNSCHEDULED · MAINNET HOLD" : "PLANLANMADI · MAINNET BEKLET"}</strong><span className="broadcast">{t.broadcast} · {language === "en" ? "CODE PUBLIC // EVIDENCE HOLD" : "KOD AÇIK // KANIT BEKLET"}</span></div></section>
     <div className="signal-ticker" aria-label={language === "en" ? "Project signal" : "Proje sinyali"}><div>{language === "en" ? "THE SIGNAL IS OPEN  //  BUILD THE STRANGE  //  BUILD THE BEAUTIFUL  //  BUILD IN PUBLIC  //  STAR ASCENT" : "SİNYAL AÇIK  //  TUHAFI İNŞA ET  //  GÜZELİ İNŞA ET  //  HERKESİN GÖZÜ ÖNÜNDE İNŞA ET  //  STAR ASCENT"}</div></div>
     <SignalField language={language} onOpenTerminal={openActivation} />
     <section className="brief"><p className="eyebrow">{m.brief}</p><h2>{m.briefTitle}</h2><div className="brief-console">{m.lines.map((line: string) => <p key={line}>{line}</p>)}</div></section>

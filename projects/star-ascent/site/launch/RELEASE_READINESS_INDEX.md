@@ -3,12 +3,25 @@
 This index is the single operator-facing map for Genesis. It keeps the public
 story, the physical signer flow, and the evidence trail in the same order.
 
+Current state: **UNSCHEDULED — MAINNET HOLD — NO CLAIM ROUTE**. The canonical
+machine-readable gate is
+[`iat-v2-mainnet-readiness-gate.json`](iat-v2-mainnet-readiness-gate.json).
+
+## Before scheduling
+
+1. Confirm the public mainnet fee-payer balance is at least the exact
+   `8500000000` lamport ceremony floor using a fresh read-only observation.
+2. Publish one replacement UTC window; invalidate the expired window and every
+   packet or approval that pre-dates the replacement.
+3. Regenerate all bound release artifacts before any final review.
+
 ## Before broadcast
 
 1. Run `node scripts/run-launch-preflight.mjs` from the project root. It starts
    with isolated negative-case gate regressions, then validates the live
    artifact set; any failure keeps the launch in HOLD.
-2. Read [`GENESIS_COMMAND_CENTER.md`](GENESIS_COMMAND_CENTER.md) and assign the
+2. Validate `launch/iat-v2-mainnet-readiness-gate.json`, then read
+   [`GENESIS_COMMAND_CENTER.md`](GENESIS_COMMAND_CENTER.md) and assign the
    roles named there.
 3. Prepare the hardware signer using
    [`../docs/TREZOR_SIGNER_READINESS.md`](../docs/TREZOR_SIGNER_READINESS.md)

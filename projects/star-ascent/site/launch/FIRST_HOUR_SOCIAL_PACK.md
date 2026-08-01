@@ -1,13 +1,14 @@
 # STAR ASCENT — First-Hour Social Pack
 
-Status: **CEREMONY WINDOW · 30 JULY 2026 · 03:45:00 UTC**
+Status: **UNSCHEDULED · MAINNET HOLD · NO CLAIM ROUTE**
 
 Use only after the linked site surface is live. Replace nothing with invented
 transaction, mint, allocation, date, or time claims.
 
 ## T−60 / every platform
 
-Use during the final hour before the scheduled window:
+Use only during the final hour before a newly published, independently checked
+replacement UTC window:
 
 **THE SIGNAL OPENS IN ONE HOUR.**
 

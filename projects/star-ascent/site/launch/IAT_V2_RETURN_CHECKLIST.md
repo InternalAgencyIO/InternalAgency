@@ -5,6 +5,12 @@ Updated at `2026-08-01T07:31:16Z`.
 Mainnet remains `HOLD`. No unattended script may sign or broadcast a mainnet
 transaction.
 
+Canonical machine-readable readiness state:
+`launch/iat-v2-mainnet-readiness-gate.json`. Its validator enforces the exact
+integer funding shortfall, `UNSCHEDULED_HOLD`, regeneration order, local
+time-gate limitations, and false values for every signing/broadcast side
+effect.
+
 ## Completed Devnet sequence
 
 - Program: `62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj`
@@ -41,15 +47,20 @@ transaction.
 
 ## Next launch sequence
 
-1. Retain and independently validate the local host-program time-gate proof;
-   never represent it as a signed Devnet snapshot or validator transaction.
-2. Fund `7XZ...fzPH` on mainnet to at least `8.5 SOL` before the ceremony.
+1. Fund `7XZ...fzPH` on mainnet to at least `8.5 SOL` before the ceremony.
+2. Record a fresh read-only balance observation and recompute both integer
+   shortfalls.
 3. After funding is complete, publish one new exact UTC launch time.
 4. Re-run the complete launch preflight and regenerate every bound release
    snapshot, handoff, manifest, signing checklist, and publication payload.
-5. Keep draft PR #4 unmerged until checks and the remaining gates are complete.
-6. At the scheduled ceremony only, the operator physically reviews and signs
+5. Independently validate the regenerated packet and local host-program
+   time-gate proof; never represent the latter as a signed Devnet snapshot or
+   validator transaction.
+6. Keep draft PR #4 unmerged until checks and the remaining gates are complete.
+7. At the newly scheduled ceremony only, the operator physically reviews and signs
    each mainnet transaction. Broadcasting remains a separate explicit action.
+8. Reconcile confirmed chain state before publishing any mint, authority,
+   allocation, vesting, or claim-route statement.
 
 ## Mainnet blockers that must stay visible
 

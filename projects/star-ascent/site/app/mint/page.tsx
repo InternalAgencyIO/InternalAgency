@@ -37,7 +37,7 @@ export default function MintPage() {
         <div>
           <p>IAT V2 // REQUIRED REHEARSAL</p>
           <h2 id="rehearsal-ready-title">DEPLOY. TEST.<br />VERIFY.</h2>
-          <span>30 JUL 2026 · 03:45:00 UTC / 06:45:00 ISTANBUL</span>
+          <span>UNSCHEDULED · MAINNET HOLD · SIGNING DISABLED</span>
         </div>
         <ol>
           {rehearsalStages.map(([index, title, body]) => (

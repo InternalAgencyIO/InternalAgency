@@ -1,0 +1,64 @@
+{
+  "schema": "iat-v2-mainnet-readiness-gate/v1",
+  "status": "HOLD",
+  "network": "mainnet-beta",
+  "observedAtUtc": "2026-08-01T07:31:16Z",
+  "purpose": "Non-authorizing, read-only launch readiness record. This file cannot sign, simulate for signing, broadcast, deploy, mint, transfer, schedule, or publish.",
+  "schedule": {
+    "state": "UNSCHEDULED_HOLD",
+    "publishedAtUtc": null,
+    "priorWindow": {
+      "scheduledAtUtc": "2026-07-30T03:45:00Z",
+      "state": "EXPIRED_SUPERSEDED_DO_NOT_USE"
+    }
+  },
+  "funding": {
+    "publicAddress": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+    "observationKind": "READ_ONLY_RPC_BALANCE",
+    "observedLamports": "2533659570",
+    "measuredRentExemptMinimumLamports": "8318411040",
+    "ceremonyFloorLamports": "8500000000",
+    "shortfallToRentMinimumLamports": "5784751470",
+    "shortfallToCeremonyFloorLamports": "5966340430",
+    "ceremonyFloorSatisfied": false
+  },
+  "timeGateEvidence": {
+    "status": "VERIFIED_LOCAL_HOST_ONLY",
+    "path": "public/evidence/iat-v2/v2-local-time-gate-proof-20260801T072730Z.json",
+    "sha256": "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+    "signedDevnetEvidence": false,
+    "validatorTransaction": false
+  },
+  "gates": {
+    "devnetFeatureEvidenceIndependentlyReviewed": true,
+    "localTimeGateProofValidated": true,
+    "mainnetFundingFloorSatisfied": false,
+    "replacementUtcWindowPublished": false,
+    "releaseArtifactsRegeneratedAfterFundingAndScheduling": false,
+    "finalPreflightPassedAgainstRegeneratedArtifacts": false,
+    "physicalModelTReviewCompleted": false,
+    "independentMainnetVerifierAssigned": false,
+    "mainnetExecutionAuthorized": false
+  },
+  "requiredOrder": [
+    "FUND_PUBLIC_MAINNET_ADDRESS_TO_AT_LEAST_8500000000_LAMPORTS",
+    "RECORD_FRESH_READ_ONLY_BALANCE_OBSERVATION",
+    "PUBLISH_ONE_NEW_EXACT_UTC_WINDOW",
+    "REGENERATE_ALL_BOUND_RELEASE_ARTIFACTS",
+    "RUN_COMPLETE_PREFLIGHT_AND_INDEPENDENT_REVIEW",
+    "CONDUCT_HUMAN_CONTROLLED_HARDWARE_CEREMONY",
+    "BROADCAST_ONLY_AFTER_SEPARATE_EXPLICIT_APPROVAL",
+    "RECONCILE_CONFIRMED_CHAIN_STATE_BEFORE_PUBLICATION"
+  ],
+  "safety": {
+    "signingPerformed": false,
+    "simulationForSigningPerformed": false,
+    "broadcastingPerformed": false,
+    "walletAccessed": false,
+    "keyCreated": false,
+    "fundsTransferred": false,
+    "deploymentPerformed": false,
+    "mainnetMovedFromHold": false,
+    "authorizesTransaction": false
+  }
+}
