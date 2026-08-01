@@ -20,6 +20,19 @@ const sandbox = mkdtempSync(join(tmpdir(), "iat-v2-stage-journal-"));
 const baseline = JSON.parse(readFileSync(join(root, journalPath), "utf8"));
 const clone = (value) => structuredClone(value);
 const sha256 = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");
+const base58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+const encodeBase58 = (bytes) => {
+  let value = 0n;
+  for (const byte of bytes) value = (value << 8n) + BigInt(byte);
+  let encoded = "";
+  while (value > 0n) {
+    encoded = base58Alphabet[Number(value % 58n)] + encoded;
+    value /= 58n;
+  }
+  let leadingZeroes = 0;
+  while (leadingZeroes < bytes.length && bytes[leadingZeroes] === 0) leadingZeroes += 1;
+  return "1".repeat(leadingZeroes) + encoded;
+};
 
 function copy(path) {
   const target = join(sandbox, path);
@@ -71,10 +84,10 @@ function armedFixture() {
   })) journal.artifactDigests[field] = sha256(join(sandbox, path));
   Object.assign(journal.identity, {
     sourceCommit: "a".repeat(40),
-    programId: "2".repeat(32),
-    programDataAddress: "3".repeat(32),
-    mint: "4".repeat(32),
-    administrator: "5".repeat(32),
+    programId: encodeBase58(Buffer.alloc(32, 1)),
+    programDataAddress: encodeBase58(Buffer.alloc(32, 2)),
+    mint: encodeBase58(Buffer.alloc(32, 3)),
+    administrator: encodeBase58(Buffer.alloc(32, 4)),
   });
   for (const [index, stage] of journal.stages.entries()) {
     stage.plannedTransactionMessageSha256 = createHash("sha256").update(`planned-stage-${index + 1}`).digest("hex");
@@ -84,7 +97,7 @@ function armedFixture() {
 }
 
 function matched(stage, index) {
-  const signature = String(index + 2).repeat(88);
+  const signature = encodeBase58(Buffer.alloc(64, index + 1));
   stage.status = "FINALIZED_MATCHED";
   stage.signature = signature;
   stage.explorerUrl = `https://explorer.solana.com/tx/${signature}?cluster=mainnet-beta`;
@@ -119,6 +132,10 @@ try {
   const armed = armedFixture();
   expectPass("fully bound ARMED", armed);
 
+  const shapeOnlyAddress = clone(armed);
+  shapeOnlyAddress.identity.programId = "2".repeat(32);
+  expectFail("shape-only Base58 address", shapeOnlyAddress, "usable public identity.programId");
+
   const reconciled = clone(armed);
   reconciled.status = "RECONCILED";
   reconciled.stages.forEach(matched);
@@ -129,6 +146,15 @@ try {
     reviewerLabel: "independent-terminal-reviewer",
   });
   expectPass("eight-stage RECONCILED", reconciled);
+
+  const shapeOnlySignature = clone(reconciled);
+  shapeOnlySignature.stages[0].signature = "2".repeat(80);
+  shapeOnlySignature.stages[0].explorerUrl = `https://explorer.solana.com/tx/${shapeOnlySignature.stages[0].signature}?cluster=mainnet-beta`;
+  expectFail("shape-only Base58 signature", shapeOnlySignature, "requires a usable finalized signature");
+
+  const earlyReconciledReview = clone(reconciled);
+  earlyReconciledReview.terminalDecision.reviewedAtUtc = "2026-08-01T00:06:00Z";
+  expectFail("terminal reconciliation before final stage review", earlyReconciledReview, "cannot predate any stage review");
 
   const terminal = clone(armed);
   terminal.status = "TERMINAL_HOLD";
@@ -146,9 +172,21 @@ try {
     reasonCode: "POST_STATE_MISMATCH",
     reviewedAtUtc: "2026-08-01T00:04:00Z",
     reviewerLabel: "independent-terminal-reviewer",
-    publicIncidentUrl: "https://example.com/public-incidents/iat-v2-stage-2",
+    publicIncidentUrl: "https://status.internalagency.io/public-incidents/iat-v2-stage-2",
   });
   expectPass("terminal first-mismatch HOLD", terminal);
+
+  const divergentReason = clone(terminal);
+  divergentReason.terminalDecision.reasonCode = "UNRELATED_FAILURE";
+  expectFail("divergent terminal reason", divergentReason, "reasonCode must equal the failed stage mismatchCode");
+
+  const earlyTerminalReview = clone(terminal);
+  earlyTerminalReview.terminalDecision.reviewedAtUtc = "2026-08-01T00:02:00Z";
+  expectFail("terminal review before failed-stage review", earlyTerminalReview, "cannot predate the failed-stage independent review");
+
+  const placeholderIncident = clone(terminal);
+  placeholderIncident.terminalDecision.publicIncidentUrl = "https://example.com/incident";
+  expectFail("placeholder incident URL", placeholderIncident, "publicIncidentUrl must be null or a public HTTPS URL");
 
   const continuedAfterFailure = clone(terminal);
   matched(continuedAfterFailure.stages[2], 2);
@@ -158,6 +196,10 @@ try {
   duplicateSignature.stages[7].signature = duplicateSignature.stages[0].signature;
   duplicateSignature.stages[7].explorerUrl = duplicateSignature.stages[0].explorerUrl;
   expectFail("replayed signature", duplicateSignature, "duplicate stage signature");
+
+  const alteredLimitations = clone(baseline);
+  alteredLimitations.limitations[3] = "This altered statement is long but no longer preserves the reviewed publication boundary.";
+  expectFail("altered limitations", alteredLimitations, "limitations must retain the four exact reviewed non-authorizing statements");
 
   console.log("IAT V2 stage-journal regression checks pass: HOLD hygiene, immutable order, source binding, eight matched stages, first-mismatch terminal stop, credential rejection, and replay resistance.");
 } finally {

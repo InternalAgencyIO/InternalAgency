@@ -14,13 +14,16 @@ and precommitted transaction-message and expected-post-state digests for all
 eight stages. The readiness record must retain its safety controls while
 recording a funded, scheduled, regenerated, independently reviewed, explicitly
 authorized attended ceremony. `ARMED` is still a record state, not authority.
+Public Solana identities must decode to exactly 32 bytes and cannot use the
+system-program placeholder.
 
 ## After every confirmed stage
 
 Stop. An independent verifier records the direct mainnet Explorer transaction,
 confirmation time, verification time, verifier label, and observed post-state
 digest. Continue only when that digest exactly matches the precommitted expected
-post-state digest. Signatures cannot be reused between stages.
+post-state digest. Each signature must decode to exactly 64 bytes and cannot be
+reused between stages.
 
 The only successful terminal state is `RECONCILED`, with all eight stages
 `FINALIZED_MATCHED`. Publication remains a separate review after reconciliation.

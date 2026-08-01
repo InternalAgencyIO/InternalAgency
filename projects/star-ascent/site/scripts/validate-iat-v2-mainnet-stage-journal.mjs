@@ -30,8 +30,25 @@ const exactKeys = (value, keys) => value && typeof value === "object"
   && JSON.stringify(Object.keys(value)) === JSON.stringify(keys);
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const isDigest = (value) => typeof value === "string" && /^[0-9a-f]{64}$/u.test(value);
-const isAddress = (value) => typeof value === "string" && /^[1-9A-HJ-NP-Za-km-z]{32,44}$/u.test(value);
-const isSignature = (value) => typeof value === "string" && /^[1-9A-HJ-NP-Za-km-z]{80,90}$/u.test(value);
+const base58DecodedLength = (value) => {
+  if (typeof value !== "string" || !/^[1-9A-HJ-NP-Za-km-z]{1,90}$/u.test(value)) return -1;
+  const alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+  let decoded = [0];
+  for (const character of value) {
+    let carry = alphabet.indexOf(character);
+    for (let index = 0; index < decoded.length; index += 1) {
+      carry += decoded[index] * 58;
+      decoded[index] = carry & 0xff;
+      carry >>= 8;
+    }
+    while (carry > 0) { decoded.push(carry & 0xff); carry >>= 8; }
+  }
+  let leadingZeroes = 0;
+  while (leadingZeroes < value.length && value[leadingZeroes] === "1") leadingZeroes += 1;
+  return decoded.length + leadingZeroes - (decoded.length === 1 && decoded[0] === 0 ? 1 : 0);
+};
+const isAddress = (value) => base58DecodedLength(value) === 32 && value !== "11111111111111111111111111111111";
+const isSignature = (value) => base58DecodedLength(value) === 64;
 const isUtc = (value) => typeof value === "string"
   && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/u.test(value)
   && Number.isFinite(Date.parse(value));
@@ -45,7 +62,13 @@ const isReasonCode = (value) => typeof value === "string" && /^[A-Z][A-Z0-9_]{2,
 const isPublicHttpsUrl = (value) => {
   try {
     const parsed = new URL(value);
-    return parsed.protocol === "https:" && parsed.username === "" && parsed.password === "" && parsed.hostname !== "localhost";
+    const hostname = parsed.hostname.toLowerCase().replace(/\.+$/u, "");
+    return parsed.protocol === "https:"
+      && parsed.username === ""
+      && parsed.password === ""
+      && hostname !== "localhost"
+      && hostname !== "example.com"
+      && !hostname.startsWith("placeholder");
   } catch {
     return false;
   }
@@ -85,6 +108,12 @@ const stageKeys = [
   "plannedTransactionMessageSha256",
   "expectedPostStateSha256",
   ...nullableFields,
+];
+const expectedLimitations = [
+  "Explorer URLs and recorded digests are evidence references, not signatures or transaction authority.",
+  "A FINALIZED_MATCHED stage requires a separate independent read of confirmed state.",
+  "TERMINAL_HOLD is permanent for this journal; recovery requires a new separately reviewed record and must never overwrite history.",
+  "RECONCILED permits evidence-first publication review only; it does not authorize publication or claims.",
 ];
 
 function explorerMatchesSignature(url, signature) {
@@ -143,7 +172,7 @@ for (const [field, expected] of Object.entries(sourcePaths)) {
 for (const [field, value] of Object.entries(journal.controls ?? {})) {
   if (value !== true) fail(`controls.${field} must be true`);
 }
-if (!Array.isArray(journal.limitations) || journal.limitations.length !== 4 || !journal.limitations.every((value) => typeof value === "string" && value.length > 30)) fail("four explicit limitations are required");
+if (JSON.stringify(journal.limitations) !== JSON.stringify(expectedLimitations)) fail("limitations must retain the four exact reviewed non-authorizing statements");
 if (!Array.isArray(journal.stages) || journal.stages.length !== V2_STAGE_ORDER.length) fail("journal must contain exactly eight V2 stages");
 let priorStageOffset = -1;
 for (const stage of V2_STAGE_ORDER) {
@@ -227,11 +256,15 @@ if (journal.status === "TERMINAL_HOLD") {
     if (journal.stages[index].status !== expected) fail(`TERMINAL_HOLD stage ${index + 1} must be ${expected}`);
   }
   if (journal.terminalDecision?.state !== "TERMINAL_HOLD" || journal.terminalDecision?.failedStage !== V2_STAGE_ORDER[firstFailureIndex] || !isReasonCode(journal.terminalDecision?.reasonCode) || !isCurrentOrPastUtc(journal.terminalDecision?.reviewedAtUtc) || !isLabel(journal.terminalDecision?.reviewerLabel)) fail("TERMINAL_HOLD decision must bind the first failed stage and non-future independent review");
+  if (journal.terminalDecision?.reasonCode !== journal.stages?.[firstFailureIndex]?.mismatchCode) fail("TERMINAL_HOLD reasonCode must equal the failed stage mismatchCode");
+  if (isUtc(journal.terminalDecision?.reviewedAtUtc) && isUtc(journal.stages?.[firstFailureIndex]?.independentlyVerifiedAtUtc) && Date.parse(journal.terminalDecision.reviewedAtUtc) < Date.parse(journal.stages[firstFailureIndex].independentlyVerifiedAtUtc)) fail("TERMINAL_HOLD review cannot predate the failed-stage independent review");
   if (journal.terminalDecision?.publicIncidentUrl !== null && !isPublicHttpsUrl(journal.terminalDecision.publicIncidentUrl)) fail("TERMINAL_HOLD publicIncidentUrl must be null or a public HTTPS URL");
 }
 if (journal.status === "RECONCILED") {
   if (journal.stages?.some(({ status }) => status !== "FINALIZED_MATCHED")) fail("RECONCILED requires all eight stages FINALIZED_MATCHED");
   if (journal.terminalDecision?.state !== "RECONCILED" || journal.terminalDecision?.failedStage !== null || journal.terminalDecision?.reasonCode !== "ALL_STAGES_MATCHED" || !isCurrentOrPastUtc(journal.terminalDecision?.reviewedAtUtc) || !isLabel(journal.terminalDecision?.reviewerLabel) || journal.terminalDecision?.publicIncidentUrl !== null) fail("RECONCILED decision must record ALL_STAGES_MATCHED without incident evidence");
+  const latestStageReview = Math.max(...(journal.stages ?? []).map((stage) => Date.parse(stage.independentlyVerifiedAtUtc)));
+  if (isUtc(journal.terminalDecision?.reviewedAtUtc) && Number.isFinite(latestStageReview) && Date.parse(journal.terminalDecision.reviewedAtUtc) < latestStageReview) fail("RECONCILED terminal review cannot predate any stage review");
 }
 if (journal.status === "HOLD") {
   if (journal.terminalDecision?.state !== "HOLD" || journal.terminalDecision?.reasonCode !== "NOT_STARTED") fail("HOLD journal must retain terminal HOLD / NOT_STARTED");
