@@ -840,6 +840,13 @@ rejected and regenerated.
 | **Guatemala City Modernist Sky Intercept**<br><img src="652-guatemala-guatemala-city-modernist-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a jade skyline compass above Guatemala City's modernist Centro Civico with volcanic highlands beyond"> | **Antigua Santa Catalina Amber Cipher**<br><img src="653-guatemala-antigua-santa-catalina-arch-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Antigua Guatemala's Santa Catalina Arch with Volcan de Agua aligned beyond"> |
 | **Semuc Champey Riverlight Extraction**<br><img src="654-guatemala-semuc-champey-riverlight-extraction.png" width="420" alt="The trio restoring a gold-and-jade environmental beacon above Semuc Champey's stepped turquoise limestone pools"> | **Flores Lake Peten Moonline Relay**<br><img src="655-guatemala-flores-lake-peten-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay above Flores island's Lake Peten Itza waterfront at cobalt blue hour"> |
 
+## World Series - South America - Batch 159: Ecuador
+
+| | |
+|---|---|
+| **Quito La Carolina Equatorial Intercept**<br><img src="656-ecuador-quito-la-carolina-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber skyline compass above Quito's La Carolina axis with Pichincha beyond"> | **Guayaquil Las Penas Amber Cipher**<br><img src="657-ecuador-guayaquil-las-penas-arcade-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Guayaquil's colorful Las Penas hillside and timber balconies"> |
+| **Cotopaxi Volcanic-Light Extraction**<br><img src="658-ecuador-cotopaxi-volcanic-light-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon before Cotopaxi's snow-capped volcanic cone"> | **Guayaquil Rio Guayas Moonline Relay**<br><img src="659-ecuador-guayaquil-rio-guayas-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay above Guayaquil's illuminated Rio Guayas waterfront"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
