@@ -65,7 +65,33 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-01T14:10:04.5873528Z",
+    "status": "awaiting_post",
+    "imageNumbers": [
+      636,
+      637,
+      635
+    ],
+    "countries": [
+      "Chile",
+      "Chad"
+    ],
+    "assets": [
+      {
+        "file": "636-chile-santiago-mapocho-skyline-intercept.png",
+        "sha256": "fbd4cadc19a4228c8ca317c4cc3b1c55f2210e17a5877634510ac8a77b2ed0a1"
+      },
+      {
+        "file": "637-chile-humberstone-industrial-cipher.png",
+        "sha256": "85fef72768ebc515fa0d00b482b764c844cc6215852b109bb6c920f2e89a836e"
+      },
+      {
+        "file": "635-chad-lake-chad-baga-sola-night-relay.png",
+        "sha256": "f51bd8352d5ce624e493e4fa8238c9dcd86f80668fb8a70d0659d853094f03a4"
+      }
+    ]
+  },
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
