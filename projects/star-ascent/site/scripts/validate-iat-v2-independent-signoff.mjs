@@ -6,7 +6,7 @@ import { resolve } from "node:path";
 import { PublicKey } from "@solana/web3.js";
 
 const canonicalPath = "launch/iat-v2-devnet-independent-signoff.template.json";
-const evidencePath = "launch/iat-v2-devnet-initialization.evidence.json";
+const evidencePath = "public/evidence/iat-v2/v2-initialization-20260730T074603Z.json";
 const requestedPath = process.argv[2] ?? canonicalPath;
 const failures = [];
 const fail = (message) => failures.push(message);

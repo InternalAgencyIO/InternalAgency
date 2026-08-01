@@ -1,27 +1,62 @@
-# IAT V2 devnet initialization review
+# IAT V2 corrected-program feature review
 
 Status: **AUTOMATED CHAIN CHECKS PASS / INDEPENDENT HUMAN REVIEW PENDING**
 
-This card covers only the seven-transaction initialization and activation
-sequence. It does not claim that the later staking, weekly CCC, Switchboard
-commit-reveal, settlement, or maturity flows have completed an on-chain
-rehearsal.
+This card binds the corrected Devnet program to the 18-transaction on-chain
+feature rehearsal. Every immediately available feature action is recorded.
+Later maturity, cliff, and linear-unlock gates remain outside the signed
+snapshot, and mainnet remains `HOLD`.
 
 ## Evidence identity
 
-- Evidence file: `launch/iat-v2-devnet-initialization.evidence.json`
-- Evidence SHA-256:
-  `902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602`
-- Source commit bound to the verified program:
-  `ba88535036da3f3871b65100fc18b655ccfa1d57`
+- Feature evidence:
+  `public/evidence/iat-v2/v2-features-20260801T053340Z.json`
+- Feature evidence SHA-256:
+  `7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9`
+- Read-only chain receipt:
+  `public/evidence/iat-v2/chain-status-20260801T053947Z.json`
+- Chain receipt SHA-256:
+  `0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce`
 - Program:
   `62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj`
-- On-chain program artifact SHA-256:
-  `8239e164b4ba93d19448f9c7e102eb20170c627de95e53352e3f5b1cd4e6b756`
+- ProgramData:
+  `6DaESYUqB7th7kkfYAhsqiYfzmdnCFeFeoxDi5WkejTP`
+- Corrected on-chain program artifact SHA-256:
+  `634d95055b891e6b624a3f6996d10b66e2a7f4bbb1ab50711d6195f72c7772a7`
+- Program bytes: `597336`
+- Corrected artifact deployment slot: `480117343`
 - Upgrade authority:
   `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`
-- Devnet mint:
-  `BTuhzdrH2vnMELbHZWPJ1FoFRoBhkMDAyCSCRRLew4GR`
+- Feature mint:
+  `CAJGkRQWXvJrUxK91XBPereaVSAUGzUY4yagxRKJdKUE`
+- Feature config:
+  `9sqs4iAD9HBUA5a8L8eV39B1KepKb9jrRW3hAzvsPTBP`
+
+The seven-transaction initialization export describes a separate deterministic
+Devnet rehearsal instance. Its different mint and config do not represent a
+mainnet mint and must not be substituted for this feature evidence.
+
+## Automated observations to reproduce
+
+- All 18 feature signatures are finalized with no reported transaction error.
+- The final four transaction-message SHA-256 values match the finalized
+  transaction messages:
+  - round-8 commit at slot `480373915`;
+  - round-8 reveal at slot `480374608`;
+  - CCC-agent settlement at slot `480374877`;
+  - CCC-associate settlement at slot `480375366`.
+- The standard position records 10% APY, paid `19230769` base units for week 8,
+  with settled mask `1`.
+- The CCC-agent position records 28% APY, paid `53846153` base units for week 8,
+  with settled mask `1`.
+- The CCC-associate position records 20% APY, paid `0` for week 8, with settled
+  mask `1`, matching the selected-agency pause rather than a failed settlement.
+- Round 8 is settled with selected agency index `1` and derivation counter `0`.
+- Core reward paid is `326923076` base units and Genesis liquidity principal
+  claimed is `12500000000` base units.
+- The latest receipt covers the exact 29-signature union across historical V1,
+  V2 initialization, and the current feature export; all 29 are finalized with
+  no reported transaction error.
 
 ## Independent verifier
 
@@ -29,41 +64,35 @@ rehearsal.
 - Public address:
   `Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja`
 - Must be independent of the Model T operator.
+- Canonical response template:
+  `launch/iat-v2-devnet-feature-independent-signoff.template.json`
 
 ## Compare
 
-- [ ] All seven transaction signatures in the evidence file are distinct,
-  successful, finalized, and ordered from mint creation through activation.
-- [ ] Every recorded transaction message SHA-256 matches the finalized
-  transaction message.
+- [ ] The feature export SHA-256 matches the value above.
+- [ ] All 18 feature signatures are distinct, successful, finalized, and in the
+  recorded action order.
+- [ ] Every recorded transaction-message SHA-256 matches the finalized message.
 - [ ] The program is executable, contains 597,336 program bytes, matches the
-  artifact SHA-256 above, and is controlled by the reviewed Model T address.
-- [ ] Mint decimals are 9 and total supply is exactly
-  `1000000000000` base units (1,000 rehearsal IAT).
-- [ ] Mint authority is `None`.
-- [ ] Freeze authority is `None`.
-- [ ] Immutable metadata is the canonical IAT record.
-- [ ] Community custody contains `500000000000` base units.
-- [ ] Treasury vault contains `200000000000` base units.
-- [ ] Ecosystem vault contains `150000000000` base units.
-- [ ] Core-team vault contains `100000000000` base units.
-- [ ] Liquidity vault contains `50000000000` base units.
-- [ ] Stake vault exists with zero starting principal.
-- [ ] V2 config is active, in rehearsal mode, has lane mask `30`, and pins the
-  official Switchboard devnet program.
-- [ ] The core reward record fixes 17% for 104 weeks and reserves
-  `34000000000` base units from treasury first.
-- [ ] Mainnet remains `HOLD`.
+  corrected artifact SHA-256, and has the pinned ProgramData and upgrade
+  authority.
+- [ ] The three stake roles, principals, APY rates, reservations, paid amounts,
+  and week-8 settled bits match the export.
+- [ ] Round-8 commit/reveal state, selected agency, and derivation counter match.
+- [ ] The CCC-agent payout and selected-agency CCC-associate pause match.
+- [ ] Core reward, liquidity unlock, and Switchboard devnet ownership match.
+- [ ] The chain receipt contains exactly 29 canonical finalized signatures with
+  no reported error.
+- [ ] Later maturity, cliff, and linear-unlock gates are explicitly acknowledged
+  as not proven by this signed snapshot.
+- [ ] Mainnet remained `HOLD` throughout review.
 
 ## Sign-off
 
-The verifier should return a separate public statement containing:
+Return the completed JSON template with every check set to `true`, no
+exceptions, the exact canonical attestation, and a UTC completion time after
+both evidence records. Do not include a private key, recovery phrase, PIN,
+passphrase, wallet export, signature request, or any other credential material.
 
-1. evidence SHA-256;
-2. verifier accountability label and public address;
-3. exact UTC completion time;
-4. an explicit statement that every checkbox above matched;
-5. any exception or mismatch.
-
-Do not put a private key, recovery phrase, PIN, passphrase, wallet export, or
-signature request in the review statement.
+Independent review does not authorize mainnet. Funding, a new exact UTC launch
+time, and every mainnet release gate remain separate.

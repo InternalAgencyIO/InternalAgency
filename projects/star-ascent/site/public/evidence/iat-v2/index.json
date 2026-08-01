@@ -1,6 +1,6 @@
 {
   "schema": "iat-public-evidence-index/v1",
-  "publishedAtUtc": "2026-07-31T10:20:46.785Z",
+  "publishedAtUtc": "2026-08-01T05:39:47.179Z",
   "license": "CC0-1.0",
   "network": "devnet",
   "mainnetStatus": "HOLD",
@@ -9,8 +9,8 @@
   "repository": "https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/projects/star-ascent/site/public/evidence/iat-v2",
   "canonicalAtPublication": [
     "v2-initialization-20260730T074603Z.json",
-    "v2-features-20260731T101732Z.json",
-    "chain-status-20260731T102046Z.json"
+    "v2-features-20260801T053340Z.json",
+    "chain-status-20260801T053947Z.json"
   ],
   "records": [
     {
@@ -81,8 +81,8 @@
       "file": "v2-features-20260731T101732Z.json",
       "bytes": 12668,
       "sha256": "4c81fe0dc4e5ec92bf8ac24d73e0c923eff02159d8f03674c13909c82b4d6b85",
-      "scope": "Latest V2 on-chain feature rehearsal snapshot with the first player settlement",
-      "status": "PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW",
+      "scope": "Prior V2 on-chain feature rehearsal snapshot with the first player settlement",
+      "status": "PARTIAL_SUPERSEDED_BY_LATER_SNAPSHOT",
       "transactions": 14
     },
     {
@@ -92,6 +92,22 @@
       "scope": "Read-only devnet status receipt for the latest canonical transaction set",
       "status": "25_OF_25_FINALIZED_NO_REPORTED_ERROR",
       "transactions": 25
+    },
+    {
+      "file": "v2-features-20260801T053340Z.json",
+      "bytes": 14726,
+      "sha256": "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+      "scope": "Latest V2 on-chain feature rehearsal snapshot with round-8 and linked-position settlements",
+      "status": "PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW",
+      "transactions": 18
+    },
+    {
+      "file": "chain-status-20260801T053947Z.json",
+      "bytes": 5690,
+      "sha256": "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
+      "scope": "Read-only devnet status receipt for the latest canonical transaction set",
+      "status": "29_OF_29_FINALIZED_NO_REPORTED_ERROR",
+      "transactions": 29
     }
   ]
 }

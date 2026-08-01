@@ -1,0 +1,51 @@
+{
+  "schema": "iat-v2-devnet-feature-independent-signoff/v1",
+  "status": "PENDING",
+  "scope": "CORRECTED_PROGRAM_AND_EIGHTEEN_TRANSACTION_FEATURE_REHEARSAL",
+  "evidence": {
+    "path": "public/evidence/iat-v2/v2-features-20260801T053340Z.json",
+    "sha256": "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+    "programId": "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj",
+    "mint": "CAJGkRQWXvJrUxK91XBPereaVSAUGzUY4yagxRKJdKUE",
+    "config": "9sqs4iAD9HBUA5a8L8eV39B1KepKb9jrRW3hAzvsPTBP",
+    "transactionCount": 18
+  },
+  "chainReceipt": {
+    "path": "public/evidence/iat-v2/chain-status-20260801T053947Z.json",
+    "sha256": "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
+    "signatureCount": 29
+  },
+  "programArtifact": {
+    "sha256": "634d95055b891e6b624a3f6996d10b66e2a7f4bbb1ab50711d6195f72c7772a7",
+    "bytes": 597336,
+    "programData": "6DaESYUqB7th7kkfYAhsqiYfzmdnCFeFeoxDi5WkejTP",
+    "deployedAtSlot": 480117343,
+    "upgradeAuthority": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH"
+  },
+  "verifier": {
+    "accountabilityLabel": "FDF Guard",
+    "publicSolanaAddress": "Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja",
+    "independentOfOperator": null,
+    "didNotOperateModelT": null,
+    "reviewMethod": null,
+    "communicationReference": null
+  },
+  "checks": {
+    "evidenceSha256Matched": false,
+    "eighteenFeatureTransactionsFinalizedAndOrdered": false,
+    "transactionMessageHashesMatched": false,
+    "correctedProgramArtifactAndUpgradeAuthorityMatched": false,
+    "threeStakeRolesAndReservationsMatched": false,
+    "standardWeek8SettlementMatched": false,
+    "cccRound8CommitRevealMatched": false,
+    "linkedWeek8SettlementsMatched": false,
+    "coreAndLiquidityActionsMatched": false,
+    "switchboardIdentityMatched": false,
+    "chainReceipt29Of29Finalized": false,
+    "remainingTimeGatesAcknowledged": false,
+    "mainnetRemainedHold": false
+  },
+  "exceptions": [],
+  "attestation": null,
+  "completedAtUtc": null
+}
