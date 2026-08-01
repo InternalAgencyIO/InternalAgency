@@ -52,7 +52,9 @@ check(Buffer.compare(canonicalBytes, publicBytes) === 0, "launch and public proo
 for (const input of proof.inputs ?? []) {
   const inputPath = path.resolve(siteRoot, input.path);
   check(inputPath.startsWith(`${siteRoot}${path.sep}`), `input escapes site root: ${input.path}`);
-  const bytes = await readFile(inputPath);
+  const sourceBytes = await readFile(inputPath);
+  const bytes = Buffer.from(sourceBytes.toString("utf8").replaceAll("\r\n", "\n"), "utf8");
+  check(input.normalization === "UTF8_LF", `input normalization drift: ${input.path}`);
   check(bytes.length === input.bytes, `input byte count drift: ${input.path}`);
   check(createHash("sha256").update(bytes).digest("hex") === input.sha256, `input hash drift: ${input.path}`);
 }

@@ -47,11 +47,13 @@ const inputPaths = [
 ];
 
 async function digestFile(relativePath) {
-  const bytes = await readFile(path.join(siteRoot, relativePath));
+  const sourceBytes = await readFile(path.join(siteRoot, relativePath));
+  const bytes = Buffer.from(sourceBytes.toString("utf8").replaceAll("\r\n", "\n"), "utf8");
   return {
     path: relativePath,
     bytes: bytes.length,
     sha256: createHash("sha256").update(bytes).digest("hex"),
+    normalization: "UTF8_LF",
   };
 }
 

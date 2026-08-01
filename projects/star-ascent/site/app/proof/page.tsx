@@ -33,7 +33,7 @@ const evidenceRecords = [
   },
   {
     file: "v2-local-time-gate-proof-20260801T072730Z.json",
-    sha256: "51191dbf4bcbe8a522d8ad424ae291af99e3e2b285354927e7475bb608163bce",
+    sha256: "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
     en: ["LOCAL TIME-GATE PROOF", "Exact host-program boundary proof: 34 clock, maturity, cliff, and linear-unlock vectors; four Rust tests and 14 JavaScript tests. No validator transaction, wallet, signing, or broadcast."],
     tr: ["YEREL ZAMAN KAPISI KANITI", "Kesin host-program sınır kanıtı: 34 saat, vade, cliff ve doğrusal açılım vektörü; dört Rust ve 14 JavaScript testi. Validator işlemi, cüzdan, imza veya yayın yoktur."],
   },
