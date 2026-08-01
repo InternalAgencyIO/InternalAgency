@@ -931,6 +931,13 @@ rejected and regenerated.
 | **Port-au-Prince Iron Market Light-Key Intercept**<br><img src="704-haiti-port-au-prince-iron-market-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three ruby light keys into a cobalt-red-pearl compass beside Port-au-Prince's Iron Market at dawn"> | **Milot Sans-Souci Palace Amber Cipher**<br><img src="705-haiti-milot-sans-souci-palace-cipher.png" width="420" alt="The trio sealing an amber archive prism beside the ochre arcades and mountain backdrop of Sans-Souci Palace in Milot"> |
 | **Bassin Bleu Waterlight Extraction**<br><img src="706-haiti-bassin-bleu-waterfall-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above Bassin Bleu's luminous pools and tiered waterfalls"> | **Cap-Haitien Bay Moonline Relay**<br><img src="707-haiti-cap-haitien-waterfront-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cobalt-ruby-pearl harbor relay above Cap-Haitien's waterfront at blue hour"> |
 
+## World Series - Asia - Batch 172: Jordan
+
+| | |
+|---|---|
+| **Amman Abdali Black-Iris Intercept**<br><img src="708-jordan-amman-abdali-boulevard-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking ruby light keys into a black-iris civic compass above Amman's Abdali Boulevard at dawn"> | **Petra Rose-Stone Amber Cipher**<br><img src="709-jordan-petra-treasury-rose-cipher.png" width="420" alt="The trio sealing an amber archive prism before Petra's rose-red Al-Khazneh facade and Siq opening"> |
+| **Wadi Rum Desert-Light Extraction**<br><img src="710-jordan-wadi-rum-desert-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above Wadi Rum's red dunes and sandstone bridge"> | **Aqaba Red Sea Moonline Relay**<br><img src="711-jordan-aqaba-red-sea-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a green-ruby-pearl sea relay above Aqaba's Red Sea waterfront at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
