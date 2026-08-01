@@ -23,6 +23,7 @@ ARTIFACT_NAME = "settlement-contention-composition-transport-limit-audit.v1.json
 NUMERIC_ARTIFACT_NAME = "settlement-contention-composition-numeric-token-audit.v1.json"
 DELIMITER_ARTIFACT_NAME = "settlement-contention-composition-delimiter-whitespace-audit.v1.json"
 STRING_ARTIFACT_NAME = "settlement-contention-composition-string-token-audit.v1.json"
+KEY_COLLISION_ARTIFACT_NAME = "settlement-contention-composition-key-collision-audit.v1.json"
 BASE_NAME = "settlement-contention-composition-vectors.v1.json"
 TRANSPORT_MARKER = "DRAFT/INACTIVE"
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
@@ -60,6 +61,21 @@ STRING_TOKEN_RULES = {
     "unicodeNormalizationAppliedToRequiredKeys": False,
     "unicodeCompatibilityLookalikesAllowed": False,
 }
+KEY_COLLISION_RULES = {
+    "duplicateComparison": "EXACT_DECODED_UNICODE_SCALAR_SEQUENCE",
+    "escapedCanonicalSpellingsCollide": True,
+    "unicodeNormalizationAppliedBeforeDuplicateCheck": False,
+    "normalizationLookalikesRemainDistinct": True,
+    "distinctUnexpectedKeysRejected": True,
+}
+NORMALIZATION_KEY_DEFINITIONS = [
+    ("FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"),
+    ("FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"),
+    ("CIRCLED_C_PREFIX", "ⓒandidate", "candidate"),
+    ("MATHEMATICAL_BOLD_C_PREFIX", "𝐜andidate", "candidate"),
+    ("FULLWIDTH_T_PREFIX", "ｔransportMarker", "transportMarker"),
+    ("FULLWIDTH_CAPITAL_M", "transportＭarker", "transportMarker"),
+]
 
 
 class TransportError(ValueError):
@@ -543,16 +559,8 @@ def build_string_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], lis
         "expectedError": "INVALID_TRANSPORT_ENVELOPE",
         "nfkcMatchesRequiredKey": False,
     } for descriptor, token in escaped_definitions]
-    normalization_definitions = [
-        ("FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"),
-        ("FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"),
-        ("CIRCLED_C_PREFIX", "ⓒandidate", "candidate"),
-        ("MATHEMATICAL_BOLD_C_PREFIX", "𝐜andidate", "candidate"),
-        ("FULLWIDTH_T_PREFIX", "ｔransportMarker", "transportMarker"),
-        ("FULLWIDTH_CAPITAL_M", "transportＭarker", "transportMarker"),
-    ]
     normalization_lookalikes = []
-    for descriptor, variant_key, target_required_key in normalization_definitions:
+    for descriptor, variant_key, target_required_key in NORMALIZATION_KEY_DEFINITIONS:
         if variant_key == target_required_key or unicodedata.normalize("NFKC", variant_key) != target_required_key:
             raise TransportError(f"STRING_NORMALIZATION_CORPUS_BUILD_FAILED:{descriptor}")
         normalization_lookalikes.append({
@@ -603,6 +611,114 @@ def evaluate_string_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], 
             "expectedError": item["expectedError"],
             "observedError": observed_error,
             "nfkcMatchesRequiredKey": item["nfkcMatchesRequiredKey"],
+            "rejectedBeforeCandidate": True,
+            "candidateProduced": False,
+            "mutationEvaluated": False,
+        })
+    return controls, rejections
+
+
+def duplicate_required_key_envelope(target_required_key: str, first_key_token: str, second_key_token: str) -> str:
+    candidate = '{"collisionProbe":0}'
+    if target_required_key == "candidate":
+        return f'{{"transportMarker":"{TRANSPORT_MARKER}",{first_key_token}:{candidate},{second_key_token}:{candidate}}}'
+    if target_required_key == "transportMarker":
+        return f'{{{first_key_token}:"{TRANSPORT_MARKER}",{second_key_token}:"{TRANSPORT_MARKER}","candidate":{candidate}}}'
+    raise TransportError(f"KEY_COLLISION_CORPUS_BUILD_FAILED:{target_required_key}")
+
+
+def normalization_distinct_envelope(variant_key: str, target_required_key: str) -> str:
+    candidate = {"collisionProbe": 0}
+    if target_required_key == "candidate":
+        value = {"transportMarker": TRANSPORT_MARKER, "candidate": candidate, variant_key: candidate}
+    elif target_required_key == "transportMarker":
+        value = {"transportMarker": TRANSPORT_MARKER, variant_key: TRANSPORT_MARKER, "candidate": candidate}
+    else:
+        raise TransportError(f"KEY_COLLISION_CORPUS_BUILD_FAILED:{target_required_key}")
+    return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+
+
+def build_key_collision_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    controls = [
+        {"caseId": "BASELINE_COMPACT", "representation": "CANONICAL_LITERAL_KEYS", "serialized": json.dumps({"transportMarker": TRANSPORT_MARKER, "candidate": base}, ensure_ascii=False, separators=(",", ":")), "expectedCandidate": base},
+        {"caseId": "ESCAPED_CANONICAL_CANDIDATE_KEY", "representation": "ESCAPED_ASCII_CANDIDATE_KEY", "serialized": string_probe_envelope('"\\u0063andidate"').replace("stringProbe", "collisionProbe"), "expectedCandidate": {"collisionProbe": 0}},
+        {"caseId": "ESCAPED_CANONICAL_MARKER_KEY", "representation": "ESCAPED_ASCII_MARKER_KEY", "serialized": string_probe_envelope('"candidate"', '"transport\\u004darker"').replace("stringProbe", "collisionProbe"), "expectedCandidate": {"collisionProbe": 0}},
+    ]
+    duplicate_definitions = [
+        ("CANDIDATE_LITERAL_THEN_ESCAPE", "candidate", '"candidate"', '"\\u0063andidate"'),
+        ("CANDIDATE_ESCAPE_THEN_LITERAL", "candidate", '"\\u0063andidate"', '"candidate"'),
+        ("CANDIDATE_TWO_ESCAPE_SPELLINGS", "candidate", '"\\u0063andidate"', '"c\\u0061ndidate"'),
+        ("MARKER_LITERAL_THEN_ESCAPE", "transportMarker", '"transportMarker"', '"transport\\u004darker"'),
+        ("MARKER_ESCAPE_THEN_LITERAL", "transportMarker", '"transport\\u004darker"', '"transportMarker"'),
+        ("MARKER_TWO_ESCAPE_SPELLINGS", "transportMarker", '"\\u0074ransportMarker"', '"transport\\u004darker"'),
+    ]
+    decoded_duplicates = [{
+        "caseId": f"DUPLICATE_{descriptor}",
+        "family": "DECODED_KEY_DUPLICATE",
+        "descriptor": descriptor,
+        "targetRequiredKey": target_required_key,
+        "serialized": duplicate_required_key_envelope(target_required_key, first_key_token, second_key_token),
+        "expectedError": "DUPLICATE_JSON_KEY",
+        "decodedKeysCollide": True,
+        "nfkcMatchesRequiredKey": False,
+        "distinctDecodedKey": False,
+    } for descriptor, target_required_key, first_key_token, second_key_token in duplicate_definitions]
+    normalization_distinct = []
+    for descriptor, variant_key, target_required_key in NORMALIZATION_KEY_DEFINITIONS:
+        if variant_key == target_required_key or unicodedata.normalize("NFKC", variant_key) != target_required_key:
+            raise TransportError(f"KEY_COLLISION_NORMALIZATION_CORPUS_BUILD_FAILED:{descriptor}")
+        normalization_distinct.append({
+            "caseId": f"DISTINCT_{descriptor}",
+            "family": "NORMALIZATION_LOOKALIKE_DISTINCT_KEY",
+            "descriptor": descriptor,
+            "targetRequiredKey": target_required_key,
+            "serialized": normalization_distinct_envelope(variant_key, target_required_key),
+            "expectedError": "INVALID_TRANSPORT_ENVELOPE",
+            "decodedKeysCollide": False,
+            "nfkcMatchesRequiredKey": True,
+            "distinctDecodedKey": True,
+        })
+    return controls, decoded_duplicates + normalization_distinct
+
+
+def evaluate_key_collision_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    control_inputs, rejection_inputs = build_key_collision_corpus(base)
+    controls = []
+    for item in control_inputs:
+        candidate, _metrics = parse_transport_envelope(item["serialized"])
+        if canonical_sha256(candidate) != canonical_sha256(item["expectedCandidate"]):
+            raise TransportError(f'KEY_COLLISION_CONTROL_DRIFT:{item["caseId"]}')
+        controls.append({
+            "caseId": item["caseId"],
+            "representation": item["representation"],
+            "representationSha256": hashlib.sha256(item["serialized"].encode("utf-8")).hexdigest(),
+            "utf8Bytes": len(item["serialized"].encode("utf-8")),
+            "candidateCommitmentSha256": canonical_sha256(candidate),
+            "acceptedAtParser": True,
+            "candidateStored": False,
+            "mutationEvaluated": False,
+        })
+    rejections = []
+    for item in rejection_inputs:
+        observed_error = None
+        try:
+            parse_transport_envelope(item["serialized"])
+        except TransportError as error:
+            observed_error = str(error)
+        if observed_error != item["expectedError"]:
+            raise TransportError(f'KEY_COLLISION_REJECTION_DRIFT:{item["caseId"]}:{observed_error}')
+        rejections.append({
+            "caseId": item["caseId"],
+            "family": item["family"],
+            "descriptor": item["descriptor"],
+            "targetRequiredKey": item["targetRequiredKey"],
+            "representationSha256": hashlib.sha256(item["serialized"].encode("utf-8")).hexdigest(),
+            "utf8Bytes": len(item["serialized"].encode("utf-8")),
+            "expectedError": item["expectedError"],
+            "observedError": observed_error,
+            "decodedKeysCollide": item["decodedKeysCollide"],
+            "nfkcMatchesRequiredKey": item["nfkcMatchesRequiredKey"],
+            "distinctDecodedKey": item["distinctDecodedKey"],
             "rejectedBeforeCandidate": True,
             "candidateProduced": False,
             "mutationEvaluated": False,
@@ -880,6 +996,67 @@ def verify_string(root: Path, artifact_path: Path) -> tuple[list[str], dict[str,
     }
 
 
+def verify_key_collision(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        artifact = load_json(artifact_path)
+        base = load_json(root / BASE_NAME)
+        controls, rejections = evaluate_key_collision_corpus(base)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read key-collision evidence: {error}"], {}
+    expect(artifact.get("vectorVersion") == 1, "key-collision version drift", errors)
+    expect(artifact.get("vectorId") == "iat-promotions-dlc-contention-composition-key-collisions-v1", "key-collision ID drift", errors)
+    expect(artifact.get("status") == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "key-collision HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": {"path": BASE_NAME, "canonicalSha256": canonical_sha256(base)},
+        "boundedParser": {"path": "settlement-contention-composition-transport-limits.mjs", "normalizedTextSha256": normalized_text_sha256(root / "settlement-contention-composition-transport-limits.mjs")},
+        "pythonVerifier": {"path": "verify-settlement-contention-transport-limits.py", "normalizedTextSha256": normalized_text_sha256(Path(__file__).resolve())},
+        "generator": {"path": "generate-settlement-contention-composition-key-collision-audit.mjs", "normalizedTextSha256": normalized_text_sha256(root / "generate-settlement-contention-composition-key-collision-audit.mjs")},
+    }
+    expect(artifact.get("sources") == expected_sources, "key-collision source drift", errors)
+    contract = artifact.get("contract", {})
+    expect(contract.get("mode") == "DECODED_REQUIRED_KEY_COLLISION_BOUNDARY", "key-collision mode drift", errors)
+    expect(contract.get("keyCollisionRules") == KEY_COLLISION_RULES, "key-collision rules drift", errors)
+    expect(contract.get("acceptedControlCount") == 3 and contract.get("rejectionCount") == 12, "key-collision counts drift", errors)
+    expect(contract.get("decodedDuplicateCaseCount") == 6 and contract.get("normalizationDistinctCaseCount") == 6, "key-collision family counts drift", errors)
+    for field in ["escapedCanonicalSpellingsRejectAsDuplicates", "normalizationLookalikesRemainDistinct", "distinctUnexpectedKeysRejectAtEnvelope"]:
+        expect(contract.get(field) is True, f"key-collision contract {field} drift", errors)
+    for field in ["serializedRepresentationsStored", "runtimeCandidatesStored", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"key-collision contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "key-collision activation effect drift", errors)
+    expect(artifact.get("controls") == controls, "key-collision controls drift", errors)
+    expect(artifact.get("rejections") == rejections, "key-collision rejections drift", errors)
+    summary = artifact.get("summary", {})
+    control_commitment = canonical_sha256(controls)
+    rejection_commitment = canonical_sha256(rejections)
+    combined_commitment = canonical_sha256({"controls": controls, "rejections": rejections})
+    expect(summary.get("acceptedControlCount") == "3" and summary.get("rejectionCount") == "12", "key-collision summary counts drift", errors)
+    expect(summary.get("allCanonicalControlsAccepted") is True and summary.get("allCollisionOrDistinctLookalikeCasesRejectedBeforeCandidate") is True, "key-collision summary outcome drift", errors)
+    expect(summary.get("controlSetCommitmentSha256") == control_commitment, "key-collision control-set drift", errors)
+    expect(summary.get("rejectionSetCommitmentSha256") == rejection_commitment, "key-collision rejection-set drift", errors)
+    expect(summary.get("combinedReplayCommitmentSha256") == combined_commitment, "key-collision combined replay drift", errors)
+    for field in ["serializedRepresentationsStored", "runtimeCandidatesStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"key-collision summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "key-collision summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "acceptedControlCount": len(controls),
+        "rejectionCount": len(rejections),
+        "controlSetCommitmentSha256": control_commitment,
+        "rejectionSetCommitmentSha256": rejection_commitment,
+        "combinedReplayCommitmentSha256": combined_commitment,
+        "allCollisionOrDistinctLookalikeCasesRejectedBeforeCandidate": len(rejections) == 12,
+        "serializedRepresentationsStored": False,
+        "runtimeCandidatesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Verify held bounded JSON transport evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -889,6 +1066,7 @@ def main() -> int:
     modes.add_argument("--verify-numeric-token-audit", action="store_true")
     modes.add_argument("--verify-delimiter-whitespace-audit", action="store_true")
     modes.add_argument("--verify-string-token-audit", action="store_true")
+    modes.add_argument("--verify-key-collision-audit", action="store_true")
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
@@ -898,6 +1076,8 @@ def main() -> int:
         artifact_name = DELIMITER_ARTIFACT_NAME
     elif arguments.verify_string_token_audit:
         artifact_name = STRING_ARTIFACT_NAME
+    elif arguments.verify_key_collision_audit:
+        artifact_name = KEY_COLLISION_ARTIFACT_NAME
     else:
         artifact_name = ARTIFACT_NAME
     artifact = arguments.artifact.resolve() if arguments.artifact else root / artifact_name
@@ -907,6 +1087,8 @@ def main() -> int:
         errors, report = verify_delimiter(root, artifact)
     elif arguments.verify_string_token_audit:
         errors, report = verify_string(root, artifact)
+    elif arguments.verify_key_collision_audit:
+        errors, report = verify_key_collision(root, artifact)
     else:
         errors, report = verify(root, artifact)
     if arguments.emit_json:
@@ -914,7 +1096,7 @@ def main() -> int:
     elif errors:
         print("\n".join(errors), file=sys.stderr)
     else:
-        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else "transport-limit"))
+        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else "transport-limit")))
         print(f"Independent {label} replay passed: {report['combinedReplayCommitmentSha256']}")
     return 2 if errors else 0
 

@@ -45,6 +45,23 @@ export const STRING_TOKEN_RULES = Object.freeze({
   unicodeCompatibilityLookalikesAllowed: false,
 });
 
+export const KEY_COLLISION_RULES = Object.freeze({
+  duplicateComparison: "EXACT_DECODED_UNICODE_SCALAR_SEQUENCE",
+  escapedCanonicalSpellingsCollide: true,
+  unicodeNormalizationAppliedBeforeDuplicateCheck: false,
+  normalizationLookalikesRemainDistinct: true,
+  distinctUnexpectedKeysRejected: true,
+});
+
+const NORMALIZATION_KEY_DEFINITIONS = Object.freeze([
+  ["FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"],
+  ["FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"],
+  ["CIRCLED_C_PREFIX", "ⓒandidate", "candidate"],
+  ["MATHEMATICAL_BOLD_C_PREFIX", "𝐜andidate", "candidate"],
+  ["FULLWIDTH_T_PREFIX", "ｔransportMarker", "transportMarker"],
+  ["FULLWIDTH_CAPITAL_M", "transportＭarker", "transportMarker"],
+]);
+
 const TRANSPORT_MARKER = "DRAFT/INACTIVE";
 const sha256Hex = (value) => createHash("sha256").update(value, "utf8").digest("hex");
 const fail = (code) => { throw new Error(code); };
@@ -578,15 +595,7 @@ export function buildStringTokenCorpus(baseArtifact) {
     expectedError: "INVALID_TRANSPORT_ENVELOPE",
     nfkcMatchesRequiredKey: false,
   }));
-  const normalizationDefinitions = [
-    ["FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"],
-    ["FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"],
-    ["CIRCLED_C_PREFIX", "ⓒandidate", "candidate"],
-    ["MATHEMATICAL_BOLD_C_PREFIX", "𝐜andidate", "candidate"],
-    ["FULLWIDTH_T_PREFIX", "ｔransportMarker", "transportMarker"],
-    ["FULLWIDTH_CAPITAL_M", "transportＭarker", "transportMarker"],
-  ];
-  const normalizationLookalikes = normalizationDefinitions.map(([descriptor, variantKey, targetRequiredKey]) => {
+  const normalizationLookalikes = NORMALIZATION_KEY_DEFINITIONS.map(([descriptor, variantKey, targetRequiredKey]) => {
     if (variantKey === targetRequiredKey || variantKey.normalize("NFKC") !== targetRequiredKey) {
       fail(`STRING_NORMALIZATION_CORPUS_BUILD_FAILED:${descriptor}`);
     }
@@ -639,6 +648,118 @@ export function evaluateStringTokenCorpus(baseArtifact) {
       expectedError,
       observedError,
       nfkcMatchesRequiredKey,
+      rejectedBeforeCandidate: true,
+      candidateProduced: false,
+      mutationEvaluated: false,
+    };
+  });
+  return { controls, rejections };
+}
+
+function duplicateRequiredKeyEnvelope(targetRequiredKey, firstKeyToken, secondKeyToken) {
+  const candidate = '{"collisionProbe":0}';
+  if (targetRequiredKey === "candidate") {
+    return `{"transportMarker":"${TRANSPORT_MARKER}",${firstKeyToken}:${candidate},${secondKeyToken}:${candidate}}`;
+  }
+  if (targetRequiredKey === "transportMarker") {
+    return `{${firstKeyToken}:"${TRANSPORT_MARKER}",${secondKeyToken}:"${TRANSPORT_MARKER}","candidate":${candidate}}`;
+  }
+  fail(`KEY_COLLISION_CORPUS_BUILD_FAILED:${targetRequiredKey}`);
+}
+
+function normalizationDistinctEnvelope(variantKey, targetRequiredKey) {
+  const candidate = { collisionProbe: 0 };
+  if (targetRequiredKey === "candidate") {
+    return JSON.stringify({ transportMarker: TRANSPORT_MARKER, candidate, [variantKey]: candidate });
+  }
+  if (targetRequiredKey === "transportMarker") {
+    return JSON.stringify({ transportMarker: TRANSPORT_MARKER, [variantKey]: TRANSPORT_MARKER, candidate });
+  }
+  fail(`KEY_COLLISION_CORPUS_BUILD_FAILED:${targetRequiredKey}`);
+}
+
+export function buildKeyCollisionCorpus(baseArtifact) {
+  const controls = [
+    { caseId: "BASELINE_COMPACT", representation: "CANONICAL_LITERAL_KEYS", serialized: JSON.stringify({ transportMarker: TRANSPORT_MARKER, candidate: baseArtifact }), expectedCandidate: baseArtifact },
+    { caseId: "ESCAPED_CANONICAL_CANDIDATE_KEY", representation: "ESCAPED_ASCII_CANDIDATE_KEY", serialized: stringProbeEnvelope('"\\u0063andidate"').replaceAll("stringProbe", "collisionProbe"), expectedCandidate: { collisionProbe: 0 } },
+    { caseId: "ESCAPED_CANONICAL_MARKER_KEY", representation: "ESCAPED_ASCII_MARKER_KEY", serialized: stringProbeEnvelope('"candidate"', '"transport\\u004darker"').replaceAll("stringProbe", "collisionProbe"), expectedCandidate: { collisionProbe: 0 } },
+  ];
+  const duplicateDefinitions = [
+    ["CANDIDATE_LITERAL_THEN_ESCAPE", "candidate", '"candidate"', '"\\u0063andidate"'],
+    ["CANDIDATE_ESCAPE_THEN_LITERAL", "candidate", '"\\u0063andidate"', '"candidate"'],
+    ["CANDIDATE_TWO_ESCAPE_SPELLINGS", "candidate", '"\\u0063andidate"', '"c\\u0061ndidate"'],
+    ["MARKER_LITERAL_THEN_ESCAPE", "transportMarker", '"transportMarker"', '"transport\\u004darker"'],
+    ["MARKER_ESCAPE_THEN_LITERAL", "transportMarker", '"transport\\u004darker"', '"transportMarker"'],
+    ["MARKER_TWO_ESCAPE_SPELLINGS", "transportMarker", '"\\u0074ransportMarker"', '"transport\\u004darker"'],
+  ];
+  const decodedDuplicates = duplicateDefinitions.map(([descriptor, targetRequiredKey, firstKeyToken, secondKeyToken]) => ({
+    caseId: `DUPLICATE_${descriptor}`,
+    family: "DECODED_KEY_DUPLICATE",
+    descriptor,
+    targetRequiredKey,
+    serialized: duplicateRequiredKeyEnvelope(targetRequiredKey, firstKeyToken, secondKeyToken),
+    expectedError: "DUPLICATE_JSON_KEY",
+    decodedKeysCollide: true,
+    nfkcMatchesRequiredKey: false,
+    distinctDecodedKey: false,
+  }));
+  const normalizationDistinct = NORMALIZATION_KEY_DEFINITIONS.map(([descriptor, variantKey, targetRequiredKey]) => {
+    if (variantKey === targetRequiredKey || variantKey.normalize("NFKC") !== targetRequiredKey) {
+      fail(`KEY_COLLISION_NORMALIZATION_CORPUS_BUILD_FAILED:${descriptor}`);
+    }
+    return {
+      caseId: `DISTINCT_${descriptor}`,
+      family: "NORMALIZATION_LOOKALIKE_DISTINCT_KEY",
+      descriptor,
+      targetRequiredKey,
+      serialized: normalizationDistinctEnvelope(variantKey, targetRequiredKey),
+      expectedError: "INVALID_TRANSPORT_ENVELOPE",
+      decodedKeysCollide: false,
+      nfkcMatchesRequiredKey: true,
+      distinctDecodedKey: true,
+    };
+  });
+  return { controls, rejections: [...decodedDuplicates, ...normalizationDistinct] };
+}
+
+export function evaluateKeyCollisionCorpus(baseArtifact) {
+  const corpus = buildKeyCollisionCorpus(baseArtifact);
+  const controls = corpus.controls.map(({ caseId, representation, serialized, expectedCandidate }) => {
+    const parsed = parseBoundedTransportEnvelope(serialized);
+    if (canonicalSha256(parsed.candidate) !== canonicalSha256(expectedCandidate)) {
+      fail(`KEY_COLLISION_CONTROL_DRIFT:${caseId}`);
+    }
+    return {
+      caseId,
+      representation,
+      representationSha256: sha256Hex(serialized),
+      utf8Bytes: Buffer.byteLength(serialized, "utf8"),
+      candidateCommitmentSha256: canonicalSha256(parsed.candidate),
+      acceptedAtParser: true,
+      candidateStored: false,
+      mutationEvaluated: false,
+    };
+  });
+  const rejections = corpus.rejections.map(({ caseId, family, descriptor, targetRequiredKey, serialized, expectedError, decodedKeysCollide, nfkcMatchesRequiredKey, distinctDecodedKey }) => {
+    let observedError = null;
+    try {
+      parseBoundedTransportEnvelope(serialized);
+    } catch (error) {
+      observedError = error instanceof Error ? error.message : String(error);
+    }
+    if (observedError !== expectedError) fail(`KEY_COLLISION_REJECTION_DRIFT:${caseId}:${observedError}`);
+    return {
+      caseId,
+      family,
+      descriptor,
+      targetRequiredKey,
+      representationSha256: sha256Hex(serialized),
+      utf8Bytes: Buffer.byteLength(serialized, "utf8"),
+      expectedError,
+      observedError,
+      decodedKeysCollide,
+      nfkcMatchesRequiredKey,
+      distinctDecodedKey,
       rejectedBeforeCandidate: true,
       candidateProduced: false,
       mutationEvaluated: false,

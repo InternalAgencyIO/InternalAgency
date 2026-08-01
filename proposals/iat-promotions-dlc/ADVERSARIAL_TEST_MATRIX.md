@@ -311,10 +311,12 @@ security audit or deployment approval.
 | An unescaped control byte is embedded inside a JSON key string | raw-control string-token tests | Seven controls spanning U+0000 through U+001F fail JSON syntax before a candidate is produced in Node and Python |
 | A valid JSON control escape changes a required key invisibly | escaped-control required-key tests | The token decodes, but exact key-set validation rejects all seven variants as an invalid transport envelope |
 | A compatibility lookalike normalizes to `candidate` or `transportMarker` | NFKC normalization-lookalike tests | Six NFKC-equivalent variants remain distinct decoded scalar sequences and cannot satisfy either required key |
+| Literal and escaped spellings of one required key bypass duplicate detection | decoded-key collision tests | Six order/escape combinations decode to identical keys and reject as `DUPLICATE_JSON_KEY` in Node and Python |
+| A normalization lookalike beside the canonical key is treated as harmless | normalization-distinct collision tests | All six variants stay distinct but add an unexpected field, so exact envelope validation rejects before candidate production |
 
 ## Next matrix expansion
 
-- add a compact key-collision corpus proving escaped canonical key spellings
-  collide as duplicates while normalization lookalikes remain distinct but
-  invalid. Preserve runtime-only candidates and every network, wallet, review,
-  deployment, and activation HOLD.
+- add a compact transport-marker value corpus proving escaped canonical values
+  accept while control, case, normalization, and confusable variants fail exact
+  marker comparison. Preserve runtime-only candidates and every network,
+  wallet, review, deployment, and activation HOLD.

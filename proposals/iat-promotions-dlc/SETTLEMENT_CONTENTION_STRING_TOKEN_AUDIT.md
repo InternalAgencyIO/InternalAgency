@@ -40,3 +40,8 @@ Changed evidence exits with status `2`.
 
 This audit is review material only. It grants no receipt, deployment,
 activation, claim, wallet, signing, RPC, transaction, or chain capability.
+
+The companion
+[`SETTLEMENT_CONTENTION_KEY_COLLISION_AUDIT.md`](./SETTLEMENT_CONTENTION_KEY_COLLISION_AUDIT.md)
+proves how escaped aliases and normalization lookalikes behave when both the
+canonical and alternate spellings occur in one envelope.

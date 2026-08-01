@@ -65,6 +65,9 @@ The string-token companion adds three exact-key controls and twenty
 pre-candidate rejections for raw controls, escaped controls in required keys,
 and NFKC-equivalent key lookalikes; see
 `SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md`.
+The key-collision companion adds three controls and twelve pre-candidate
+rejections proving decoded aliases collide while normalization lookalikes stay
+distinct but invalid; see `SETTLEMENT_CONTENTION_KEY_COLLISION_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -80,6 +83,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limit
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-numeric-token-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-delimiter-whitespace-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-string-token-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-key-collision-audit --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -92,6 +96,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-transport-l
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-numeric-token-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-delimiter-whitespace-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-string-token-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-key-collision-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local
