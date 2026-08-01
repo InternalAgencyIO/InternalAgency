@@ -16,7 +16,8 @@ operator exports; the SHA-256 values in `index.json` identify the exact bytes.
   rounds 7 and 8 are recorded.
 - Every immediately available feature action is recorded. Later maturity,
   cliff, and linear-unlock gates remain outside the latest signed snapshot.
-- Independent review: still required.
+- Corrected-program feature review: **VERIFIED** through an operator-relayed FDF
+  Guard approval completed at `2026-08-01T05:57:36Z`.
 - Signing material: not included.
 
 The V2 initialization and V2 feature records describe separate deterministic
@@ -33,6 +34,12 @@ of all 29 unique transaction signatures in the current canonical exports. Every
 signature was found with `finalized` status and a null transaction error at the
 stated observation time. This receipt does not prove independent review and
 does not authorize mainnet.
+
+`v2-feature-independent-signoff-20260801T055736Z.json` binds the corrected
+program artifact, feature export, and chain receipt to the completed review.
+Its communication reference states that the approval was relayed by the launch
+operator in the Codex launch task; it is not a wallet signature and does not
+authorize mainnet.
 
 The earlier 15-, 24-, and 25-signature receipts and every superseded progress
 snapshot remain in the ledger for a complete audit trail.

@@ -32,14 +32,15 @@ check(index.schema === "iat-public-evidence-index/v1", "unexpected index schema"
 check(index.license === "CC0-1.0", "public evidence must declare CC0-1.0");
 check(index.network === "devnet", "public evidence index must remain devnet-only");
 check(index.mainnetStatus === "HOLD", "public evidence must not clear mainnet HOLD");
-check(index.independentReviewRequired === true, "independent review must remain required");
+check(index.independentReviewRequired === false, "independent feature review must be recorded complete");
 check(index.secretMaterialIncluded === false, "secret-material declaration must remain false");
-check(Array.isArray(index.records) && index.records.length === 12, "expected twelve indexed records");
+check(Array.isArray(index.records) && index.records.length === 13, "expected thirteen indexed records");
 check(
   JSON.stringify(index.canonicalAtPublication) === JSON.stringify([
     "v2-initialization-20260730T074603Z.json",
     "v2-features-20260801T053340Z.json",
     "chain-status-20260801T053947Z.json",
+    "v2-feature-independent-signoff-20260801T055736Z.json",
   ]),
   "canonical evidence set is not pinned to the latest reviewed records",
 );
@@ -72,6 +73,9 @@ const legacyReceipt = JSON.parse(
 );
 const receipt = JSON.parse(
   await readFile(path.join(root, "chain-status-20260801T053947Z.json"), "utf8"),
+);
+const signoff = JSON.parse(
+  await readFile(path.join(root, "v2-feature-independent-signoff-20260801T055736Z.json"), "utf8"),
 );
 
 check(init.network === "devnet" && init.mainnetStatus === "HOLD", "V2 initialization boundary drift");
@@ -169,6 +173,33 @@ check(
     && [...expectedSignatures].every((signature) => receiptSignatures.has(signature)),
   "chain receipt does not exactly cover the published canonical transaction set",
 );
+check(
+  signoff.schema === "iat-v2-devnet-feature-independent-signoff/v1"
+    && signoff.status === "VERIFIED"
+    && signoff.scope === "CORRECTED_PROGRAM_AND_EIGHTEEN_TRANSACTION_FEATURE_REHEARSAL",
+  "independent feature sign-off boundary drift",
+);
+check(
+  signoff.evidence?.path === "public/evidence/iat-v2/v2-features-20260801T053340Z.json"
+    && signoff.evidence?.sha256 === "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
+    && signoff.evidence?.transactionCount === 18,
+  "independent feature sign-off evidence binding drift",
+);
+check(
+  signoff.chainReceipt?.path === "public/evidence/iat-v2/chain-status-20260801T053947Z.json"
+    && signoff.chainReceipt?.sha256 === "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce"
+    && signoff.chainReceipt?.signatureCount === 29,
+  "independent feature sign-off receipt binding drift",
+);
+check(
+  signoff.verifier?.accountabilityLabel === "FDF Guard"
+    && signoff.verifier?.independentOfOperator === true
+    && signoff.verifier?.didNotOperateModelT === true
+    && Object.values(signoff.checks ?? {}).every((value) => value === true)
+    && signoff.exceptions?.length === 0
+    && signoff.completedAtUtc === "2026-08-01T05:57:36Z",
+  "independent feature sign-off completion drift",
+);
 
 const files = await readdir(root);
 for (const required of ["README.md", "CC0-1.0.md", "index.json"]) {
@@ -182,6 +213,6 @@ if (failures.length) {
 }
 
 console.log(
-  "Public devnet evidence validation passed: twelve indexed records, 29 finalized signatures, CC0, no secret-bearing fields, mainnet HOLD.",
+  "Public devnet evidence validation passed: thirteen indexed records, 29 finalized signatures, verified feature review, CC0, no secret-bearing fields, mainnet HOLD.",
 );
 

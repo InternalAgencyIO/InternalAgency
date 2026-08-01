@@ -1,6 +1,6 @@
 # IAT V2 corrected-program feature review
 
-Status: **AUTOMATED CHAIN CHECKS PASS / INDEPENDENT HUMAN REVIEW PENDING**
+Status: **VERIFIED / OPERATOR-RELAYED FDF GUARD APPROVAL / MAINNET HOLD**
 
 This card binds the corrected Devnet program to the 18-transaction on-chain
 feature rehearsal. Every immediately available feature action is recorded.
@@ -17,6 +17,10 @@ snapshot, and mainnet remains `HOLD`.
   `public/evidence/iat-v2/chain-status-20260801T053947Z.json`
 - Chain receipt SHA-256:
   `0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce`
+- Verified review record:
+  `public/evidence/iat-v2/v2-feature-independent-signoff-20260801T055736Z.json`
+- Verified review SHA-256:
+  `74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01`
 - Program:
   `62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj`
 - ProgramData:
@@ -67,32 +71,33 @@ mainnet mint and must not be substituted for this feature evidence.
 - Canonical response template:
   `launch/iat-v2-devnet-feature-independent-signoff.template.json`
 
-## Compare
+## Completed comparison
 
-- [ ] The feature export SHA-256 matches the value above.
-- [ ] All 18 feature signatures are distinct, successful, finalized, and in the
+- [x] The feature export SHA-256 matches the value above.
+- [x] All 18 feature signatures are distinct, successful, finalized, and in the
   recorded action order.
-- [ ] Every recorded transaction-message SHA-256 matches the finalized message.
-- [ ] The program is executable, contains 597,336 program bytes, matches the
+- [x] Every recorded transaction-message SHA-256 matches the finalized message.
+- [x] The program is executable, contains 597,336 program bytes, matches the
   corrected artifact SHA-256, and has the pinned ProgramData and upgrade
   authority.
-- [ ] The three stake roles, principals, APY rates, reservations, paid amounts,
+- [x] The three stake roles, principals, APY rates, reservations, paid amounts,
   and week-8 settled bits match the export.
-- [ ] Round-8 commit/reveal state, selected agency, and derivation counter match.
-- [ ] The CCC-agent payout and selected-agency CCC-associate pause match.
-- [ ] Core reward, liquidity unlock, and Switchboard devnet ownership match.
-- [ ] The chain receipt contains exactly 29 canonical finalized signatures with
+- [x] Round-8 commit/reveal state, selected agency, and derivation counter match.
+- [x] The CCC-agent payout and selected-agency CCC-associate pause match.
+- [x] Core reward, liquidity unlock, and Switchboard devnet ownership match.
+- [x] The chain receipt contains exactly 29 canonical finalized signatures with
   no reported error.
-- [ ] Later maturity, cliff, and linear-unlock gates are explicitly acknowledged
+- [x] Later maturity, cliff, and linear-unlock gates are explicitly acknowledged
   as not proven by this signed snapshot.
-- [ ] Mainnet remained `HOLD` throughout review.
+- [x] Mainnet remained `HOLD` throughout review.
 
 ## Sign-off
 
-Return the completed JSON template with every check set to `true`, no
-exceptions, the exact canonical attestation, and a UTC completion time after
-both evidence records. Do not include a private key, recovery phrase, PIN,
-passphrase, wallet export, signature request, or any other credential material.
+The completed record states that FDF Guard was independent, did not operate the
+Model T, compared evidence hashes, Explorer transactions, accounts, and the
+artifact, and approved at `2026-08-01T05:57:36Z`. The communication reference
+honestly records that the approval was relayed by the launch operator in the
+Codex launch task. No wallet signature or credential material was requested.
 
 Independent review does not authorize mainnet. Funding, a new exact UTC launch
 time, and every mainnet release gate remain separate.

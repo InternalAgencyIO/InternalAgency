@@ -25,29 +25,28 @@ transaction.
 - Feature result: all 18 immediately available actions are recorded, including
   standard and CCC-linked week-8 outcomes and CCC round 8.
 - Canonical chain result: `29 / 29` signatures finalized with no reported error.
+- Corrected-program feature review: **VERIFIED** at
+  `2026-08-01T05:57:36Z` through an operator-relayed FDF Guard approval.
 - Feature evidence status remains
   `PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW` because later
   maturity, cliff, and linear-unlock gates are outside the signed snapshot.
 
 ## Next launch sequence
 
-1. FDF Guard independently completes
-   `launch/iat-v2-devnet-feature-independent-signoff.template.json` using
-   `launch/IAT_V2_DEVNET_INDEPENDENT_REVIEW.md`.
-2. Retain the proposal-only/local-validator time-warp proof for later maturity,
+1. Retain the proposal-only/local-validator time-warp proof for later maturity,
    cliff, and linear-unlock branches; do not wait weeks on live Devnet and do
    not represent those branches as covered by the signed on-chain snapshot.
-3. Fund `7XZ...fzPH` on mainnet to at least `8.5 SOL` before the ceremony.
-4. After review and funding are complete, publish one new exact UTC launch time.
-5. Re-run the complete launch preflight and regenerate every bound release
+2. Fund `7XZ...fzPH` on mainnet to at least `8.5 SOL` before the ceremony.
+3. After funding and the remaining time-gate proof are complete, publish one
+   new exact UTC launch time.
+4. Re-run the complete launch preflight and regenerate every bound release
    snapshot, handoff, manifest, signing checklist, and publication payload.
-6. Keep draft PR #4 unmerged until checks and human review are complete.
-7. At the scheduled ceremony only, the operator physically reviews and signs
+5. Keep draft PR #4 unmerged until checks and the remaining gates are complete.
+6. At the scheduled ceremony only, the operator physically reviews and signs
    each mainnet transaction. Broadcasting remains a separate explicit action.
 
 ## Mainnet blockers that must stay visible
 
-- Independent corrected-program feature review: **PENDING**.
 - Mainnet balance at `2026-08-01T05:40:34Z`: `2.53365957 SOL`.
 - Measured rent-exempt minima: `8.31841104 SOL` before transaction fees:
   - ProgramData: `4.15866264 SOL`;

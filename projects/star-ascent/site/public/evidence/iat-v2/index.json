@@ -1,16 +1,17 @@
 {
   "schema": "iat-public-evidence-index/v1",
-  "publishedAtUtc": "2026-08-01T05:39:47.179Z",
+  "publishedAtUtc": "2026-08-01T06:03:36.716Z",
   "license": "CC0-1.0",
   "network": "devnet",
   "mainnetStatus": "HOLD",
-  "independentReviewRequired": true,
+  "independentReviewRequired": false,
   "secretMaterialIncluded": false,
   "repository": "https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/projects/star-ascent/site/public/evidence/iat-v2",
   "canonicalAtPublication": [
     "v2-initialization-20260730T074603Z.json",
     "v2-features-20260801T053340Z.json",
-    "chain-status-20260801T053947Z.json"
+    "chain-status-20260801T053947Z.json",
+    "v2-feature-independent-signoff-20260801T055736Z.json"
   ],
   "records": [
     {
@@ -108,6 +109,14 @@
       "scope": "Read-only devnet status receipt for the latest canonical transaction set",
       "status": "29_OF_29_FINALIZED_NO_REPORTED_ERROR",
       "transactions": 29
+    },
+    {
+      "file": "v2-feature-independent-signoff-20260801T055736Z.json",
+      "bytes": 2292,
+      "sha256": "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+      "scope": "Operator-relayed FDF Guard review of the corrected program and 18-transaction feature rehearsal",
+      "status": "VERIFIED_MAINNET_HOLD",
+      "transactions": 0
     }
   ]
 }
