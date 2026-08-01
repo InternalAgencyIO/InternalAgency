@@ -1050,6 +1050,13 @@ rejected and regenerated.
 | **Zürich Hauptbahnhof Precision Intercept**<br><img src="772-switzerland-zurich-hauptbahnhof-precision-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking ruby-white light keys into a silver precision compass above Zürich Hauptbahnhof and Bahnhofstrasse"> | **Chillon Castle Lake Cipher**<br><img src="773-switzerland-chillon-castle-lake-cipher.png" width="420" alt="The trio sealing a recovered archive inside a crystal capsule beside Chillon Castle, Lake Geneva and the Alpine horizon"> |
 | **Aletsch Glacier Data Extraction**<br><img src="774-switzerland-aletsch-glacier-data-extraction.png" width="420" alt="The trio restoring a ruby-and-blue climate beacon above the Great Aletsch Glacier and Bernese Alps"> | **Landwasser Viaduct Alpine Night Relay**<br><img src="775-switzerland-landwasser-viaduct-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-blue-silver rail relay before the Landwasser Viaduct at blue hour"> |
 
+## World Series - Africa - Batch 189: Sierra Leone
+
+| | |
+|---|---|
+| **Freetown Lumley Beach Atlantic Intercept**<br><img src="776-sierra-leone-freetown-lumley-beach-city-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking green-white-blue light keys into a crystal Atlantic prism above Freetown's Lumley Beach and hillside skyline"> | **Freetown Railway Museum Brass Cipher**<br><img src="777-sierra-leone-railway-museum-brass-cipher.png" width="420" alt="The trio sealing a fictional archive inside a brass-and-crystal capsule among the restored locomotives of Sierra Leone National Railway Museum"> |
+| **Tiwai Island Rainforest Data Extraction**<br><img src="778-sierra-leone-tiwai-island-rainforest-extraction.png" width="420" alt="The trio restoring a lagoon-blue biodiversity beacon above Tiwai Island's rainforest and Moa River channels"> | **Lungi Ferry Harbor Moonline Relay**<br><img src="779-sierra-leone-lungi-ferry-harbor-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a green-blue-silver estuary relay above Tagrin-Lungi ferry harbor at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
