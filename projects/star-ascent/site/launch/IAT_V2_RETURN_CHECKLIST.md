@@ -1,6 +1,6 @@
 # IAT V2 return checklist
 
-Updated at `2026-08-01T05:40:34Z`.
+Updated at `2026-08-01T07:31:16Z`.
 
 Mainnet remains `HOLD`. No unattended script may sign or broadcast a mainnet
 transaction.
@@ -30,15 +30,21 @@ transaction.
 - Feature evidence status remains
   `PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW` because later
   maturity, cliff, and linear-unlock gates are outside the signed snapshot.
+  That immutable export status is retained for audit history even though the
+  independent review and separate local time-gate proof are now complete.
+- Local time-gate evidence:
+  `public/evidence/iat-v2/v2-local-time-gate-proof-20260801T072730Z.json`.
+- Local result: **VERIFIED LOCAL HOST ONLY** with 34 exact vectors, four Rust
+  host tests, and 14 JavaScript tests. It found and corrected a one-week
+  reference-engine maturity drift; the locked on-chain program source did not
+  change.
 
 ## Next launch sequence
 
-1. Retain the proposal-only/local-validator time-warp proof for later maturity,
-   cliff, and linear-unlock branches; do not wait weeks on live Devnet and do
-   not represent those branches as covered by the signed on-chain snapshot.
+1. Retain and independently validate the local host-program time-gate proof;
+   never represent it as a signed Devnet snapshot or validator transaction.
 2. Fund `7XZ...fzPH` on mainnet to at least `8.5 SOL` before the ceremony.
-3. After funding and the remaining time-gate proof are complete, publish one
-   new exact UTC launch time.
+3. After funding is complete, publish one new exact UTC launch time.
 4. Re-run the complete launch preflight and regenerate every bound release
    snapshot, handoff, manifest, signing checklist, and publication payload.
 5. Keep draft PR #4 unmerged until checks and the remaining gates are complete.
@@ -47,7 +53,7 @@ transaction.
 
 ## Mainnet blockers that must stay visible
 
-- Mainnet balance at `2026-08-01T05:40:34Z`: `2.53365957 SOL`.
+- Mainnet balance at `2026-08-01T07:31:16Z`: `2.53365957 SOL`.
 - Measured rent-exempt minima: `8.31841104 SOL` before transaction fees:
   - ProgramData: `4.15866264 SOL`;
   - temporary deployment buffer: `4.15860696 SOL`;
@@ -55,6 +61,8 @@ transaction.
 - Current pre-fee shortfall: `5.78475147 SOL`.
 - Additional balance required to reach the `8.5 SOL` ceremony floor:
   `5.96634043 SOL`.
+- Local maturity, cliff, and linear-unlock proof is no longer a blocker. Its
+  host-only limitation must remain visible in every release packet.
 - The prior public ceremony time has passed. A replacement UTC time is not yet
   published.
 - `internalagency.io` DNS is no longer a blocker: both required A records,

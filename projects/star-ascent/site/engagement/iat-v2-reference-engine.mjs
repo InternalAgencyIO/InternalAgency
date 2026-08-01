@@ -45,6 +45,22 @@ export function rewardForWeek(principal, annualRateBps, weekOrdinal) {
     - cumulativeRewardDue(principal, annualRateBps, week);
 }
 
+export function policyWeekAtTimestamp(genesisTimestamp, nowTimestamp) {
+  const genesis = asWeek(genesisTimestamp, "Genesis timestamp");
+  const now = asWeek(nowTimestamp, "Current timestamp");
+  if (now < genesis) throw new Error("TIMESTAMP_BEFORE_GENESIS");
+  return Math.floor((now - genesis) / policy.time.secondsPerWeek);
+}
+
+export function cccRoundAtTimestamp(genesisTimestamp, nowTimestamp) {
+  const genesis = asWeek(genesisTimestamp, "Genesis timestamp");
+  const now = asWeek(nowTimestamp, "Current timestamp");
+  const firstSelection = genesis + 86_400;
+  if (!Number.isSafeInteger(firstSelection)) throw new Error("TIMESTAMP_OVERFLOW");
+  if (now < firstSelection) throw new Error("CCC_SELECTION_NOT_OPEN");
+  return Math.floor((now - firstSelection) / policy.time.secondsPerWeek);
+}
+
 export function cumulativeUnlocked(lane, currentWeek) {
   const week = asWeek(currentWeek, "Current week");
   const schedule = policy.allocations[lane];
@@ -249,7 +265,7 @@ export function withdrawPositionPrincipal({ position, currentWeek }) {
   const week = asWeek(currentWeek, "Current week");
   if (position.closed) throw new Error("POSITION_CLOSED");
   if (position.principalReturned) throw new Error("PRINCIPAL_ALREADY_RETURNED");
-  if (week < position.firstAccrualWeek + position.termWeeks) throw new Error("POSITION_TERM_NOT_COMPLETE");
+  if (week < position.acceptedWeek + position.termWeeks) throw new Error("POSITION_TERM_NOT_COMPLETE");
   return {
     position: { ...position, principalReturned: true },
     principalReturned: position.principal,
@@ -259,7 +275,7 @@ export function withdrawPositionPrincipal({ position, currentWeek }) {
 export function closePosition({ ledger, position, currentWeek }) {
   const week = asWeek(currentWeek, "Current week");
   if (position.closed) throw new Error("POSITION_CLOSED");
-  if (week < position.firstAccrualWeek + position.termWeeks) throw new Error("POSITION_TERM_NOT_COMPLETE");
+  if (week < position.acceptedWeek + position.termWeeks) throw new Error("POSITION_TERM_NOT_COMPLETE");
   if (!position.principalReturned) throw new Error("PRINCIPAL_NOT_RETURNED");
   if (position.settledWeeks.length !== position.termWeeks) throw new Error("POSITION_WEEKS_OUTSTANDING");
   return {

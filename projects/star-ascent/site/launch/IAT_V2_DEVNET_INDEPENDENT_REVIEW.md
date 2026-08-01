@@ -7,6 +7,12 @@ feature rehearsal. Every immediately available feature action is recorded.
 Later maturity, cliff, and linear-unlock gates remain outside the signed
 snapshot, and mainnet remains `HOLD`.
 
+A later, separately scoped local host-program proof now covers those time
+boundaries at
+`public/evidence/iat-v2/v2-local-time-gate-proof-20260801T072730Z.json`.
+That artifact was not part of the FDF Guard comparison recorded below and is
+not a wallet signature, validator transaction, or Devnet receipt.
+
 ## Evidence identity
 
 - Feature evidence:

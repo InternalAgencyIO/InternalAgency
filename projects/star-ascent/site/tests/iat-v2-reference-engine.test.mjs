@@ -4,6 +4,7 @@ import {
   IAT_V2_POLICY,
   availableLaneCapacity,
   claimVestedLanePrincipal,
+  cccRoundAtTimestamp,
   closePosition,
   cumulativeCorePrincipalUnlocked,
   cumulativeRewardDue,
@@ -11,6 +12,7 @@ import {
   initializeRewardLedger,
   maximumRewardObligation,
   openPosition,
+  policyWeekAtTimestamp,
   reserveOrdered,
   selectAgencyIndex,
   selectUniformTiebreakOutcome,
@@ -51,6 +53,19 @@ test("core principal has a 26-week cliff and reaches 100% at week 104", () => {
   assert.equal(cumulativeCorePrincipalUnlocked(26), 0n);
   assert.equal(cumulativeCorePrincipalUnlocked(65), 50_000_000n * IAT);
   assert.equal(cumulativeCorePrincipalUnlocked(104), 100_000_000n * IAT);
+});
+
+test("virtual timestamps flip only at exact policy and CCC boundaries", () => {
+  const genesis = 1_900_000_000;
+  const week = IAT_V2_POLICY.time.secondsPerWeek;
+  assert.throws(() => policyWeekAtTimestamp(genesis, genesis - 1), /TIMESTAMP_BEFORE_GENESIS/);
+  assert.equal(policyWeekAtTimestamp(genesis, genesis), 0);
+  assert.equal(policyWeekAtTimestamp(genesis, genesis + 52 * week - 1), 51);
+  assert.equal(policyWeekAtTimestamp(genesis, genesis + 52 * week), 52);
+  assert.throws(() => cccRoundAtTimestamp(genesis, genesis + 86_399), /CCC_SELECTION_NOT_OPEN/);
+  assert.equal(cccRoundAtTimestamp(genesis, genesis + 86_400), 0);
+  assert.equal(cccRoundAtTimestamp(genesis, genesis + 86_400 + week - 1), 0);
+  assert.equal(cccRoundAtTimestamp(genesis, genesis + 86_400 + week), 1);
 });
 
 test("simple annual rates do not compound and round cumulatively", () => {
@@ -183,7 +198,7 @@ test("sniped agency and associates earn zero for the turn while core rate is unc
   assert(coreSettlement.settlement.amount > 0n);
 });
 
-test("unused reserved rewards return only after maturity, principal return, and 52 settlements", () => {
+test("unused reserved rewards return at exact on-chain maturity after principal return and 52 settlements", () => {
   const initialized = initializeRewardLedger();
   let { ledger, position } = openPosition({
     ledger: initialized.ledger,
@@ -202,13 +217,14 @@ test("unused reserved rewards return only after maturity, principal return, and 
   }
   assert.equal(position.paid, 0n);
   assert(position.reservation.treasury > 0n);
+  assert.throws(() => withdrawPositionPrincipal({ position, currentWeek: 51 }), /POSITION_TERM_NOT_COMPLETE/);
   assert.throws(
-    () => closePosition({ ledger, position, currentWeek: 53 }),
+    () => closePosition({ ledger, position, currentWeek: 52 }),
     /PRINCIPAL_NOT_RETURNED/,
   );
-  const withdrawn = withdrawPositionPrincipal({ position, currentWeek: 53 });
+  const withdrawn = withdrawPositionPrincipal({ position, currentWeek: 52 });
   assert.equal(withdrawn.principalReturned, 52_000n * IAT);
-  const closed = closePosition({ ledger, position: withdrawn.position, currentWeek: 53 });
+  const closed = closePosition({ ledger, position: withdrawn.position, currentWeek: 52 });
   assert.equal(closed.position.reservation.treasury, 0n);
 });
 

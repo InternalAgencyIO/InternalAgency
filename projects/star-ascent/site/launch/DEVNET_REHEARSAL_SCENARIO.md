@@ -1,6 +1,6 @@
 # IAT V2 devnet rehearsal
 
-**State:** `PROGRAM + PRIMARY INITIALIZATION VERIFIED / ON-CHAIN FEATURE REHEARSAL PENDING`
+**State:** `PROGRAM + ON-CHAIN FEATURES + LOCAL TIME GATES VERIFIED / MAINNET HOLD`
 
 **Mainnet:** `HOLD`
 
@@ -120,6 +120,17 @@ Complete every scenario listed in the V2 rehearsal template, including:
 
 Local-validator warp tests may prove time boundaries, but the Switchboard
 commit/reveal and authority flow must also be evidenced on devnet.
+
+### Local time-gate follow-up
+
+The deterministic host-program proof at
+`public/evidence/iat-v2/v2-local-time-gate-proof-20260801T072730Z.json` covers
+the exact pre-boundary and boundary behavior for policy weeks, CCC cadence,
+52-week position maturity, 26/52-week cliffs, and 104/208-week linear ends.
+It compiles tests against the exact Rust policy without changing the locked
+program source and cross-checks the JavaScript reference engine. It deliberately
+uses no validator transaction, signer, keypair, wallet, or network state and
+must never be described as signed Devnet evidence.
 
 ## Phase 5 — export and independently verify
 

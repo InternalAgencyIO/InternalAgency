@@ -15,9 +15,12 @@ operator exports; the SHA-256 values in `index.json` identify the exact bytes.
   Genesis liquidity unlock, live Switchboard randomness, and finalized CCC
   rounds 7 and 8 are recorded.
 - Every immediately available feature action is recorded. Later maturity,
-  cliff, and linear-unlock gates remain outside the latest signed snapshot.
+  cliff, and linear-unlock gates remain outside the latest signed snapshot but
+  are now covered separately by deterministic local host-program evidence.
 - Corrected-program feature review: **VERIFIED** through an operator-relayed FDF
   Guard approval completed at `2026-08-01T05:57:36Z`.
+- Local time-gate proof: **VERIFIED LOCAL HOST ONLY** across 34 exact
+  clock/cliff/maturity vectors, four Rust host tests, and 14 JavaScript tests.
 - Signing material: not included.
 
 The V2 initialization and V2 feature records describe separate deterministic
@@ -40,6 +43,13 @@ program artifact, feature export, and chain receipt to the completed review.
 Its communication reference states that the approval was relayed by the launch
 operator in the Codex launch task; it is not a wallet signature and does not
 authorize mainnet.
+
+`v2-local-time-gate-proof-20260801T072730Z.json` binds the exact Rust program
+policy, economic policy, cross-language reference engine, and boundary tests.
+It covers pre-boundary rejection, exact-boundary acceptance, all four vesting
+lanes, and the 52-week position maturity. It used no validator transaction,
+keypair, wallet, signing, simulation for signing, broadcast, or network state.
+It is not Devnet transaction evidence and does not authorize mainnet.
 
 The earlier 15-, 24-, and 25-signature receipts and every superseded progress
 snapshot remain in the ledger for a complete audit trail.

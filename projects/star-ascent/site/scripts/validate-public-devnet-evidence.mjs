@@ -34,13 +34,14 @@ check(index.network === "devnet", "public evidence index must remain devnet-only
 check(index.mainnetStatus === "HOLD", "public evidence must not clear mainnet HOLD");
 check(index.independentReviewRequired === false, "independent feature review must be recorded complete");
 check(index.secretMaterialIncluded === false, "secret-material declaration must remain false");
-check(Array.isArray(index.records) && index.records.length === 13, "expected thirteen indexed records");
+check(Array.isArray(index.records) && index.records.length === 14, "expected fourteen indexed records");
 check(
   JSON.stringify(index.canonicalAtPublication) === JSON.stringify([
     "v2-initialization-20260730T074603Z.json",
     "v2-features-20260801T053340Z.json",
     "chain-status-20260801T053947Z.json",
     "v2-feature-independent-signoff-20260801T055736Z.json",
+    "v2-local-time-gate-proof-20260801T072730Z.json",
   ]),
   "canonical evidence set is not pinned to the latest reviewed records",
 );
@@ -76,6 +77,9 @@ const receipt = JSON.parse(
 );
 const signoff = JSON.parse(
   await readFile(path.join(root, "v2-feature-independent-signoff-20260801T055736Z.json"), "utf8"),
+);
+const timeGateProof = JSON.parse(
+  await readFile(path.join(root, "v2-local-time-gate-proof-20260801T072730Z.json"), "utf8"),
 );
 
 check(init.network === "devnet" && init.mainnetStatus === "HOLD", "V2 initialization boundary drift");
@@ -200,6 +204,29 @@ check(
     && signoff.completedAtUtc === "2026-08-01T05:57:36Z",
   "independent feature sign-off completion drift",
 );
+check(
+  timeGateProof.schema === "iat-v2-local-time-gate-proof/v1"
+    && timeGateProof.status === "VERIFIED_LOCAL_HOST_ONLY"
+    && timeGateProof.network === "local-host"
+    && timeGateProof.mainnetStatus === "HOLD",
+  "local time-gate proof boundary drift",
+);
+check(
+  timeGateProof.method?.localValidatorTransactionUsed === false
+    && timeGateProof.method?.signingPerformed === false
+    && timeGateProof.method?.simulationForSigningPerformed === false
+    && timeGateProof.method?.broadcastingPerformed === false
+    && timeGateProof.method?.walletAccessed === false
+    && timeGateProof.method?.keyCreated === false,
+  "local time-gate proof safety boundary drift",
+);
+check(
+  timeGateProof.observations?.clockCases?.length === 6
+    && timeGateProof.observations?.cccCases?.length === 4
+    && timeGateProof.observations?.laneCases?.length === 24
+    && timeGateProof.observations?.positionCase?.maturityWeek === 59,
+  "local time-gate proof vector set drift",
+);
 
 const files = await readdir(root);
 for (const required of ["README.md", "CC0-1.0.md", "index.json"]) {
@@ -213,6 +240,6 @@ if (failures.length) {
 }
 
 console.log(
-  "Public devnet evidence validation passed: thirteen indexed records, 29 finalized signatures, verified feature review, CC0, no secret-bearing fields, mainnet HOLD.",
+  "Public evidence validation passed: fourteen indexed records, 29 finalized signatures, verified feature review, verified local time gates, CC0, no secret-bearing fields, mainnet HOLD.",
 );
 
