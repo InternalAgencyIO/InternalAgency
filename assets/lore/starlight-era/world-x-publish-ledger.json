@@ -47,7 +47,17 @@
       "reason": "World Series image 627 was visually matched unambiguously in a standalone one-image post; it does not satisfy the required three-image 2+1 composition."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-01T05:58:18.9802497Z",
+    "status": "awaiting_post",
+    "imageNumbers": [626, 627, 628],
+    "countries": ["Zambia", "Kazakhstan"],
+    "assets": [
+      {"file": "626-zambia-south-luangwa-oxbow-extraction.png", "sha256": "4d18ac110d57258efc28199078c4b73de4567d5a99b8f92d84e7972fbe7c203b"},
+      {"file": "627-zambia-victoria-falls-night-relay.png", "sha256": "8aa1818a68b073142d7397f73508577ecef651e69923fb189828d5a4ae3bd7af"},
+      {"file": "628-kazakhstan-astana-bayterek-skyline-intercept.png", "sha256": "539cd6cb940535b0c52e6ce26f267a450c605be7fe6e0990c43e60c270b23a89"}
+    ]
+  },
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
