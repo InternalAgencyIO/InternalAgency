@@ -60,6 +60,8 @@ exactly `1000000000000000000` at 9 decimals.
 ## Reviewed stage order
 
 Do not reorder, omit, or combine an authority boundary:
+Before the first boundary, bind every planned message and expected post-state in
+`launch/iat-v2-mainnet-stage-journal.template.json` and validate it as `ARMED`.
 
 1. `DEPLOY_PROGRAM_WITHOUT_IAT`
 2. `TRANSFER_UPGRADE_AUTHORITY_TO_MODEL_T`
@@ -69,6 +71,12 @@ Do not reorder, omit, or combine an authority boundary:
 6. `REVOKE_MINT_AUTHORITY`
 7. `REVOKE_FREEZE_AUTHORITY`
 8. `ACTIVATE_AFTER_RANDOMNESS_BUILD_AND_REVIEW_GATES`
+
+After each confirmed boundary, stop for independent reconciliation and record a
+direct Explorer URL plus the observed post-state digest. Continue only on an
+exact match. The first failure or mismatch permanently changes this journal to
+`TERMINAL_HOLD`; all later boundaries remain `NOT_ATTEMPTED`. Never retry,
+compensate, or improvise a repair transaction.
 
 After activation, complete every positive and adversarial scenario in the V2
 rehearsal template. Publication is a separate human-controlled action, not a
@@ -90,6 +98,9 @@ Preserve observable evidence and repeat review. Do not improvise a repair
 transaction or reuse an earlier approval.
 
 ## Minimum public record after verification
+
+Do not publish this record until the stage journal is `RECONCILED` with all
+eight boundaries `FINALIZED_MATCHED`.
 
 - Source commit, public program ID, verifiable SBF hash, ProgramData address,
   and hardware-controlled upgrade-authority evidence

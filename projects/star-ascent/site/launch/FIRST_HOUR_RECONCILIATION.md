@@ -2,6 +2,10 @@
 
 ## Before publication
 
+- Validate `launch/iat-v2-mainnet-stage-journal.template.json` as `RECONCILED`.
+  All eight stages must be `FINALIZED_MATCHED`, independently verified, and
+  bound to unique direct mainnet Explorer transactions. If the journal is
+  `HOLD`, `ARMED`, or `TERMINAL_HOLD`, do not publish.
 - Validate the canonical release packet in `READY`.
 - Run `node scripts/create-pre-publication-packet-proof.mjs`, then validate the generated proof.
 - Do not change the manifest to `PUBLISHED` or the payload to `VERIFIED` until the exact READY packet is sealed. Any packet change requires a new seal while the public artifacts are still on HOLD.
@@ -10,6 +14,9 @@
 
 - Publish the Genesis record with exact public links.
 - Confirm the mint, program, supply, and authority states match the prepared release record.
+- Compare the public facts to the journal's source, identity, and post-state
+  digests; a mismatch returns publication to HOLD and is never repaired by an
+  automatic or compensating transaction.
 - Set the Dossier Genesis Proof route to the same values.
 
 ## 10–30 minutes

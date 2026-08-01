@@ -1,6 +1,6 @@
 # IAT V2 return checklist
 
-Updated at `2026-08-01T07:31:16Z`.
+Updated at `2026-08-01T08:36:35Z`.
 
 Mainnet remains `HOLD`. No unattended script may sign or broadcast a mainnet
 transaction.
@@ -59,7 +59,13 @@ effect.
 6. Keep draft PR #4 unmerged until checks and the remaining gates are complete.
 7. At the newly scheduled ceremony only, the operator physically reviews and signs
    each mainnet transaction. Broadcasting remains a separate explicit action.
-8. Reconcile confirmed chain state before publishing any mint, authority,
+8. Before the first stage, validate the source-bound
+   `launch/iat-v2-mainnet-stage-journal.template.json` as `ARMED`. After every
+   confirmed stage, stop for independent post-state reconciliation. The first
+   failure or mismatch permanently ends that journal in `TERMINAL_HOLD`; do not
+   retry or create a compensating transaction.
+9. Reconcile confirmed chain state and validate all eight journal stages as
+   `FINALIZED_MATCHED` before publishing any mint, authority,
    allocation, vesting, or claim-route statement.
 
 The final attended session must enter through

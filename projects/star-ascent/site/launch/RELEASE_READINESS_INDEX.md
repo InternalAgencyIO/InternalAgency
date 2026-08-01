@@ -37,11 +37,16 @@ machine-readable gate is
 ## At Genesis
 
 1. Follow [`GENESIS_OPERATIONS_CARD.md`](GENESIS_OPERATIONS_CARD.md) exactly.
-2. The signer confirms every transaction on-device. No person signs from a
+2. Use the machine-readable
+   [`iat-v2-mainnet-stage-journal.template.json`](iat-v2-mainnet-stage-journal.template.json)
+   and its [`stage reconciliation rules`](IAT_V2_STAGE_RECONCILIATION.md). Stop
+   for independent verification after every confirmed stage; the first
+   mismatch is a permanent terminal HOLD for that journal.
+3. The signer confirms every transaction on-device. No person signs from a
    copied address or an unreviewed prompt.
-3. Record the final mint address, exact supply, authority-revocation evidence,
+4. Record the final mint address, exact supply, authority-revocation evidence,
    allocation-wallet evidence, and timelock evidence.
-4. Publish only facts that can be independently checked; until then, the public
+5. Publish only facts that can be independently checked; until then, the public
    proof board remains in its HOLD state.
 
 ## First hour
