@@ -14,7 +14,10 @@ and precommitted reviewed-intent and expected-post-state digests for all eight
 stages. The reviewed intent is SHA-256 over RFC 8785 canonical JSON containing
 the stage, network, program ID, ordered account metas, instruction data, amounts,
 and authorities. It deliberately excludes the expiring recent blockhash and all
-signatures. The readiness record must retain its safety controls while recording
+signatures. `scripts/iat-v2-canonical-json.mjs` is the dependency-free local
+canonicalization primitive; its regression covers official RFC serialization,
+UTF-16 key ordering, stable digests, and rejection of non-I-JSON inputs. The
+readiness record must retain its safety controls while recording
 a funded, scheduled, regenerated, independently reviewed, explicitly authorized
 attended ceremony. `ARMED` is still a record state, not authority.
 Public Solana identities must decode to exactly 32 bytes and cannot use the
@@ -54,4 +57,5 @@ Validate locally with:
 ```text
 node scripts/validate-iat-v2-mainnet-stage-journal.mjs
 node scripts/test-iat-v2-mainnet-stage-journal-regression.mjs
+node scripts/test-iat-v2-canonical-json-regression.mjs
 ```
