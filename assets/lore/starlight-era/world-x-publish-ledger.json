@@ -65,33 +65,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-01T08:07:24.8911299Z",
-    "status": "awaiting_post",
-    "imageNumbers": [
-      629,
-      630,
-      632
-    ],
-    "countries": [
-      "Kazakhstan",
-      "Chad"
-    ],
-    "assets": [
-      {
-        "file": "629-kazakhstan-otrar-archaeological-ruins-cipher.png",
-        "sha256": "bb737ceb34ff4d9a0b00dae3cf0f1fd77a0c8f8ea9d2ddb1126feccfbacd95d9"
-      },
-      {
-        "file": "630-kazakhstan-charyn-canyon-extraction.png",
-        "sha256": "6e32985aa98ba57edccd6b5061709527d27bdeff02026b8a60b5d823003f9abb"
-      },
-      {
-        "file": "632-chad-ndjamena-chari-waterfront-intercept.png",
-        "sha256": "bc746c686db8e2d4fda5f5b44e09d04a1dd565073417d103aa6d870248a3db96"
-      }
-    ]
-  },
+  "pendingPost": null,
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
@@ -2330,6 +2304,33 @@
         {
           "file": "628-kazakhstan-astana-bayterek-skyline-intercept.png",
           "sha256": "539cd6cb940535b0c52e6ce26f267a450c605be7fe6e0990c43e60c270b23a89"
+        }
+      ]
+    },
+    {
+      "postedAt": "2026-08-01T13:59:04.6238401Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083552878493401405",
+      "imageNumbers": [
+        629,
+        630,
+        632
+      ],
+      "countries": [
+        "Kazakhstan",
+        "Chad"
+      ],
+      "assets": [
+        {
+          "file": "629-kazakhstan-otrar-archaeological-ruins-cipher.png",
+          "sha256": "bb737ceb34ff4d9a0b00dae3cf0f1fd77a0c8f8ea9d2ddb1126feccfbacd95d9"
+        },
+        {
+          "file": "630-kazakhstan-charyn-canyon-extraction.png",
+          "sha256": "6e32985aa98ba57edccd6b5061709527d27bdeff02026b8a60b5d823003f9abb"
+        },
+        {
+          "file": "632-chad-ndjamena-chari-waterfront-intercept.png",
+          "sha256": "bc746c686db8e2d4fda5f5b44e09d04a1dd565073417d103aa6d870248a3db96"
         }
       ]
     }
