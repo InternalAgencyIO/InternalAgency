@@ -47,7 +47,17 @@
       "reason": "World Series image 627 was visually matched unambiguously in a standalone one-image post; it does not satisfy the required three-image 2+1 composition."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-01T05:30:49.7110042Z",
+    "status": "awaiting_post",
+    "imageNumbers": [621, 622, 619],
+    "countries": ["Malawi", "Sri Lanka"],
+    "assets": [
+      {"file": "621-malawi-blantyre-mandala-house-veranda-cipher.png", "sha256": "2bf21890a73d0ce0bcb5aa21d3f71dea9aa79fa07a8a2a5229d9746ef4b4a692"},
+      {"file": "622-malawi-mulanje-massif-granite-extraction.png", "sha256": "b43761080fee9ecea0705de00bc1c6b9e1c2ca64c86dd2ce028a29d9d80cb2fe"},
+      {"file": "619-sri-lanka-ella-nine-arch-bridge-night-relay.png", "sha256": "97d6d3614357458bc949a1f91a96fbbef7868b3ef66968ee037ba05fb3ba934b"}
+    ]
+  },
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
