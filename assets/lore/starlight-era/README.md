@@ -847,6 +847,13 @@ rejected and regenerated.
 | **Quito La Carolina Equatorial Intercept**<br><img src="656-ecuador-quito-la-carolina-skyline-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking an amber skyline compass above Quito's La Carolina axis with Pichincha beyond"> | **Guayaquil Las Penas Amber Cipher**<br><img src="657-ecuador-guayaquil-las-penas-arcade-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Guayaquil's colorful Las Penas hillside and timber balconies"> |
 | **Cotopaxi Volcanic-Light Extraction**<br><img src="658-ecuador-cotopaxi-volcanic-light-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon before Cotopaxi's snow-capped volcanic cone"> | **Guayaquil Rio Guayas Moonline Relay**<br><img src="659-ecuador-guayaquil-rio-guayas-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay above Guayaquil's illuminated Rio Guayas waterfront"> |
 
+## World Series - Europe - Batch 160: Netherlands
+
+| | |
+|---|---|
+| **Rotterdam Erasmus Delta Intercept**<br><img src="660-netherlands-rotterdam-erasmus-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a cyan delta compass above Rotterdam's Maas waterfront and Erasmus Bridge"> | **Kinderdijk Windmill Amber Cipher**<br><img src="661-netherlands-kinderdijk-windmill-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Kinderdijk's windmills, canals, and reed banks"> |
+| **Hoge Veluwe Heathlight Extraction**<br><img src="662-netherlands-hoge-veluwe-heath-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above De Hoge Veluwe's purple heath and drifting sand"> | **Amsterdam Canal Moonline Relay**<br><img src="663-netherlands-amsterdam-canal-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold canal relay before Amsterdam's illuminated Magere Brug at cobalt blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
