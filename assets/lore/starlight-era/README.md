@@ -861,6 +861,13 @@ rejected and regenerated.
 | **Phnom Penh Mekong Confluence Intercept**<br><img src="664-cambodia-phnom-penh-mekong-confluence-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking a turquoise confluence compass above Phnom Penh's Tonle Sap and Mekong riverfront"> | **Battambang Shophouse Amber Cipher**<br><img src="665-cambodia-battambang-colonial-shophouse-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Battambang's ochre old-town shophouses and shaded arcades"> |
 | **Cardamom Mountains Rainlight Extraction**<br><img src="666-cambodia-cardamom-mountains-rainforest-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above a misty rainforest river corridor in Cambodia's Cardamom Mountains"> | **Kampot Riverside Moonline Relay**<br><img src="667-cambodia-kampot-riverside-old-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay above Kampot's illuminated riverside and Old Bridge at cobalt blue hour"> |
 
+## World Series - Africa - Batch 162: Zimbabwe
+
+| | |
+|---|---|
+| **Harare Eastgate Flame-Light Intercept**<br><img src="668-zimbabwe-harare-eastgate-city-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise thermal compass amid Harare's Eastgate Centre brick towers and deep arches"> | **Great Zimbabwe Enclosure Amber Cipher**<br><img src="669-zimbabwe-great-enclosure-stone-cipher.png" width="420" alt="The trio sealing an amber archive prism beside the Great Enclosure's curved dry-stone wall and Conical Tower"> |
+| **Mana Pools Zambezi Light Extraction**<br><img src="670-zimbabwe-mana-pools-zambezi-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above Mana Pools and the lower Zambezi floodplain"> | **Victoria Falls Bridge Moonline Relay**<br><img src="671-zimbabwe-victoria-falls-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-and-gold relay before Victoria Falls Bridge and Batoka Gorge at cobalt blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
