@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-07-31 23:25 UTC
+Updated: 2026-08-01 00:02 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `4e53665`
+Previously published public increment: `0597bae`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -459,8 +459,18 @@ This status file deliberately does not claim a self-referential commit hash.
   commitments in Node and Python; and
 - shared cross-runtime diagnostic representation replay commitment
   `e878654551b14af9516e725230dadabdca72433890ff6c8a67cfbba111d0a68a`.
+- 72 strict JSON escape trials across all twelve schema mutations, spanning
+  escaped Unicode keys, escaped and Unicode solidus spellings, key order, and
+  LF/CRLF bytes while preserving canonical candidate and baseline diagnostic
+  commitments;
+- six malformed escape and unpaired-surrogate representations rejected before
+  mutation in Node and independent zero-dependency Python;
+- escape replay commitment
+  `441bf740f2d2329b4ccfd8cc78d117db4238081e9dc7e1a1095941b026ef51b0`
+  and malformed-set commitment
+  `51e96f7b21417e1e84569f8adb0c80079ed96ecaddf3ae5ebf7895c7221a98e9`.
 
-Current proposal-only result: **342 tests passed**. This consists of 28 protected
+Current proposal-only result: **354 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -546,6 +556,11 @@ Eight deterministic representation regeneration, 36-trial coverage, raw-
 digest distinction, canonical/diagnostic stability, LF/CRLF separation,
 independent Python parity, tamper exit, compact-publication, source-safety, and
 manifest-coverage tests complete the diagnostic representation suite.
+Twelve strict escape regeneration, 72-trial coverage, raw-digest distinction,
+canonical and diagnostic stability, line-ending, escaped-Unicode, solidus,
+malformed-escape, surrogate, independent Python parity, two tamper exits,
+compact-publication, source-safety, and manifest-coverage tests complete the
+escape representation suite.
 
 ## Current guarantees of the reference model
 
@@ -577,7 +592,7 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a compact escaped-Unicode and solidus representation corpus proving
-canonical semantic stability without accepting malformed encodings. Keep
+Add a compact duplicate-key plus depth/size-limit transport corpus proving
+ambiguous or resource-exhaustion envelopes reject before mutation. Keep
 candidates runtime-only; do not contact a local validator, Devnet, or Mainnet;
 preserve every network, wallet, review, deployment, and activation HOLD.

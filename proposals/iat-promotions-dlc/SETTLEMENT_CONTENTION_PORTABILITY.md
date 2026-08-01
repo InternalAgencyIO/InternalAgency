@@ -45,6 +45,10 @@ The 36-trial diagnostic representation audit separately binds raw key-order
 and line-ending digests while requiring canonical candidates and exact
 diagnostics to remain identical; see
 `SETTLEMENT_CONTENTION_DIAGNOSTIC_REPRESENTATION_AUDIT.md`.
+The strict escape companion adds 72 equivalent escaped-Unicode, solidus,
+key-order, and line-ending encodings plus six pre-mutation malformed escape and
+surrogate rejections; see
+`SETTLEMENT_CONTENTION_ESCAPE_REPRESENTATION_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -55,6 +59,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --ve
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-schema-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-diagnostic-representation-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-escape-representations.py --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -62,6 +67,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema-vectors.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-diagnostic-representation-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-escape-representation-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

@@ -43,3 +43,8 @@ The companion
 [`SETTLEMENT_CONTENTION_DIAGNOSTIC_REPRESENTATION_AUDIT.md`](./SETTLEMENT_CONTENTION_DIAGNOSTIC_REPRESENTATION_AUDIT.md)
 proves all twelve exact diagnostics remain stable across reversed key order and
 LF/CRLF serialization in both runtimes.
+
+The strict companion
+[`SETTLEMENT_CONTENTION_ESCAPE_REPRESENTATION_AUDIT.md`](./SETTLEMENT_CONTENTION_ESCAPE_REPRESENTATION_AUDIT.md)
+adds 72 escaped-Unicode, escaped-solidus, key-order, and line-ending trials,
+then rejects six malformed escape or surrogate encodings before mutation.

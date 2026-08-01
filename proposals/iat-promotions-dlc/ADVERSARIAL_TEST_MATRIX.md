@@ -299,10 +299,12 @@ security audit or deployment approval.
 | A compact schema diagnostic is edited without changing the mutation | `independent Python rejects a changed exact diagnostic with exit 2` | Independent replay recomputes the candidate and exact diagnostic, then exits `2` on any stale pointer or reason |
 | JSON key order changes the canonical candidate or exact schema diagnostic | `canonical candidates and exact diagnostics remain stable across representations` | All twelve mutations replay over recursively reversed object keys with identical canonical candidate and diagnostic commitments |
 | LF and CRLF bytes are conflated with canonical semantic evidence | `LF and CRLF bytes differ without changing parsed rejection evidence` | Raw representation SHA-256 digests differ while parsed candidates and diagnostics remain exactly equal in Node and Python |
+| Escaped Unicode keys or an escaped solidus alter candidate meaning | `escaped Unicode keys decode...`; `escaped solidus decodes...` | Six distinct encodings per mutation must reproduce the same canonical candidate and prior diagnostic commitments across 72 trials |
+| Truncated, non-hex, non-JSON, or unpaired-surrogate escapes reach mutation evaluation | `malformed escapes and unpaired surrogates reject before mutation` | Three syntax errors and three Unicode-scalar failures reject before any candidate is produced in Node and Python |
 
 ## Next matrix expansion
 
-- add a compact escaped-Unicode and solidus representation corpus proving
-  canonical semantic stability without accepting malformed encodings. Preserve
+- add a compact duplicate-key plus depth/size-limit transport corpus proving
+  ambiguous or resource-exhaustion envelopes reject before mutation. Preserve
   runtime-only candidates and every network, wallet, review, deployment, and
   activation HOLD.
