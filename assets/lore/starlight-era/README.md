@@ -987,6 +987,13 @@ rejected and regenerated.
 | **Dushanbe National Library Light Intercept**<br><img src="736-tajikistan-dushanbe-national-library-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three ruby light keys into an emerald-and-gold mountain compass beside Dushanbe's National Library and Rudaki Park"> | **Hisor Fortress Gate Cipher**<br><img src="737-tajikistan-hisor-fortress-cipher.png" width="420" alt="The trio sealing a recovered archive inside a porcelain light capsule before Hisor Fortress's monumental ochre gatehouse"> |
 | **Iskanderkul Fann Mountain Extraction**<br><img src="738-tajikistan-iskanderkul-fann-extraction.png" width="420" alt="The trio restoring a ruby-and-emerald habitat beacon above Iskanderkul's turquoise water and the Fann Mountains"> | **Pamir Highway Karakul Night Relay**<br><img src="739-tajikistan-pamir-highway-karakul-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-emerald-gold road relay above the Pamir Highway and Karakul Lake at blue hour"> |
 
+## World Series - Oceania - Batch 180: Papua New Guinea
+
+| | |
+|---|---|
+| **Port Moresby Ela Beach Light Intercept**<br><img src="740-papua-new-guinea-port-moresby-ela-beach-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three scarlet light keys into an obsidian-and-gold coast compass above Port Moresby's Ela Beach waterfront"> | **Kuk Wahgi Valley Earthwork Cipher**<br><img src="741-papua-new-guinea-kuk-wahgi-cipher.png" width="420" alt="The trio sealing a recovered archive inside an obsidian light capsule above the ancient earthwork geometry of Kuk in the Wahgi Valley"> |
+| **Mount Wilhelm Highland Extraction**<br><img src="742-papua-new-guinea-mount-wilhelm-extraction.png" width="420" alt="The trio restoring a scarlet-and-obsidian habitat beacon above Mount Wilhelm's alpine lakes and cloud-wrapped ridges"> | **Rabaul Simpson Harbour Night Relay**<br><img src="743-papua-new-guinea-rabaul-simpson-harbour-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet-obsidian-gold harbour relay above Rabaul's Simpson Harbour at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
