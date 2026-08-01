@@ -178,11 +178,11 @@ try {
 
   const divergentReason = clone(terminal);
   divergentReason.terminalDecision.reasonCode = "UNRELATED_FAILURE";
-  expectFail("divergent terminal reason", divergentReason, "reasonCode must equal the failed stage mismatchCode");
+  expectFail("divergent terminal reason", divergentReason, "reasonCode must equal the stopped stage mismatchCode");
 
   const earlyTerminalReview = clone(terminal);
   earlyTerminalReview.terminalDecision.reviewedAtUtc = "2026-08-01T00:02:00Z";
-  expectFail("terminal review before failed-stage review", earlyTerminalReview, "cannot predate the failed-stage independent review");
+  expectFail("terminal review before stopped-stage review", earlyTerminalReview, "cannot predate the stopped-stage independent review");
 
   const placeholderIncident = clone(terminal);
   placeholderIncident.terminalDecision.publicIncidentUrl = "https://example.com/incident";
@@ -191,6 +191,40 @@ try {
   const continuedAfterFailure = clone(terminal);
   matched(continuedAfterFailure.stages[2], 2);
   expectFail("continued execution after mismatch", continuedAfterFailure, "TERMINAL_HOLD stage 3 must be NOT_ATTEMPTED");
+
+  const unresolved = clone(armed);
+  unresolved.status = "TERMINAL_HOLD";
+  const unresolvedSignature = encodeBase58(Buffer.alloc(64, 11));
+  Object.assign(unresolved.stages[0], {
+    status: "SUBMITTED_UNRESOLVED",
+    signature: unresolvedSignature,
+    explorerUrl: `https://explorer.solana.com/tx/${unresolvedSignature}?cluster=mainnet-beta`,
+    independentlyVerifiedAtUtc: "2026-08-01T00:03:00Z",
+    independentVerifierLabel: "independent-unresolved-reviewer",
+    mismatchCode: "CONFIRMATION_UNKNOWN",
+  });
+  for (const stage of unresolved.stages.slice(1)) stage.status = "NOT_ATTEMPTED";
+  Object.assign(unresolved.terminalDecision, {
+    state: "TERMINAL_HOLD",
+    failedStage: unresolved.stages[0].stage,
+    reasonCode: "CONFIRMATION_UNKNOWN",
+    reviewedAtUtc: "2026-08-01T00:04:00Z",
+    reviewerLabel: "independent-terminal-reviewer",
+  });
+  expectPass("submitted but unresolved terminal HOLD", unresolved);
+
+  const unresolvedWithoutSignature = clone(unresolved);
+  unresolvedWithoutSignature.stages[0].signature = null;
+  unresolvedWithoutSignature.stages[0].explorerUrl = null;
+  expectFail("unresolved submission without signature", unresolvedWithoutSignature, "requires its usable public signature");
+
+  const unresolvedWithConfirmationClaim = clone(unresolved);
+  unresolvedWithConfirmationClaim.stages[0].confirmedAtUtc = "2026-08-01T00:02:00Z";
+  expectFail("unresolved submission with confirmation claim", unresolvedWithConfirmationClaim, "cannot claim a confirmation time");
+
+  const continuedAfterUnknown = clone(unresolved);
+  matched(continuedAfterUnknown.stages[1], 1);
+  expectFail("continued execution after unresolved submission", continuedAfterUnknown, "TERMINAL_HOLD stage 2 must be NOT_ATTEMPTED");
 
   const duplicateSignature = clone(reconciled);
   duplicateSignature.stages[7].signature = duplicateSignature.stages[0].signature;
@@ -201,7 +235,7 @@ try {
   alteredLimitations.limitations[3] = "This altered statement is long but no longer preserves the reviewed publication boundary.";
   expectFail("altered limitations", alteredLimitations, "limitations must retain the four exact reviewed non-authorizing statements");
 
-  console.log("IAT V2 stage-journal regression checks pass: HOLD hygiene, immutable order, source binding, eight matched stages, first-mismatch terminal stop, credential rejection, and replay resistance.");
+  console.log("IAT V2 stage-journal regression checks pass: HOLD hygiene, immutable order, source binding, eight matched stages, failure/mismatch/unresolved terminal stops, credential rejection, and replay resistance.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }

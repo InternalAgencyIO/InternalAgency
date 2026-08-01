@@ -112,7 +112,7 @@ const stageKeys = [
 const expectedLimitations = [
   "Explorer URLs and recorded digests are evidence references, not signatures or transaction authority.",
   "A FINALIZED_MATCHED stage requires a separate independent read of confirmed state.",
-  "TERMINAL_HOLD is permanent for this journal; recovery requires a new separately reviewed record and must never overwrite history.",
+  "TERMINAL_HOLD is permanent after the first failure, mismatch, or unresolved submission; recovery requires a new separately reviewed record and must never overwrite history.",
   "RECONCILED permits evidence-first publication review only; it does not authorize publication or claims.",
 ];
 
@@ -205,12 +205,12 @@ if (isHold) {
 }
 
 const signatures = new Set();
-let firstFailureIndex = -1;
+let firstStopIndex = -1;
 for (const [offset, stage] of (journal.stages ?? []).entries()) {
   if (!exactKeys(stage, stageKeys)) { fail(`stages[${offset}] must contain exactly the reviewed fields`); continue; }
   if (stage.index !== offset + 1) fail(`stages[${offset}].index must be ${offset + 1}`);
   if (stage.stage !== V2_STAGE_ORDER[offset]) fail(`stages[${offset}].stage breaks the immutable V2 order`);
-  if (!["PENDING", "FINALIZED_MATCHED", "FAILED_OR_MISMATCH", "NOT_ATTEMPTED"].includes(stage.status)) fail(`stages[${offset}].status is not reviewed`);
+  if (!["PENDING", "FINALIZED_MATCHED", "FAILED_OR_MISMATCH", "SUBMITTED_UNRESOLVED", "NOT_ATTEMPTED"].includes(stage.status)) fail(`stages[${offset}].status is not reviewed`);
   if (isHold) {
     if (stage.status !== "PENDING") fail(`HOLD requires stages[${offset}] to remain PENDING`);
     for (const field of ["plannedTransactionMessageSha256", "expectedPostStateSha256", ...nullableFields]) if (stage[field] !== null) fail(`HOLD requires stages[${offset}].${field} to be null`);
@@ -231,7 +231,7 @@ for (const [offset, stage] of (journal.stages ?? []).entries()) {
     if (stage.mismatchCode !== null) fail(`FINALIZED_MATCHED stage ${offset} cannot retain a mismatch code`);
   }
   if (stage.status === "FAILED_OR_MISMATCH") {
-    if (firstFailureIndex !== -1) fail("journal may contain only one first failure boundary"); else firstFailureIndex = offset;
+    if (firstStopIndex !== -1) fail("journal may contain only one first stop boundary"); else firstStopIndex = offset;
     if (!isReasonCode(stage.mismatchCode)) fail(`stages[${offset}] requires a portable mismatch code`);
     if (!isCurrentOrPastUtc(stage.independentlyVerifiedAtUtc) || !isLabel(stage.independentVerifierLabel)) fail(`stages[${offset}] failure requires a non-future independent review record`);
     if ((stage.signature === null) !== (stage.explorerUrl === null)) fail(`stages[${offset}] signature and Explorer URL must be both present or both null`);
@@ -242,6 +242,17 @@ for (const [offset, stage] of (journal.stages ?? []).entries()) {
     if (stage.confirmedAtUtc !== null && isUtc(stage.independentlyVerifiedAtUtc) && Date.parse(stage.independentlyVerifiedAtUtc) < Date.parse(stage.confirmedAtUtc)) fail(`stages[${offset}] failure verification cannot predate confirmation`);
     if (stage.observedPostStateSha256 !== null && !isDigest(stage.observedPostStateSha256)) fail(`stages[${offset}].observedPostStateSha256 must be null or lowercase SHA-256`);
   }
+  if (stage.status === "SUBMITTED_UNRESOLVED") {
+    if (firstStopIndex !== -1) fail("journal may contain only one first stop boundary"); else firstStopIndex = offset;
+    if (!isSignature(stage.signature)) fail(`stages[${offset}] unresolved submission requires its usable public signature`);
+    else if (signatures.has(stage.signature)) fail(`duplicate stage signature at index ${offset}`);
+    else signatures.add(stage.signature);
+    if (!explorerMatchesSignature(stage.explorerUrl, stage.signature)) fail(`stages[${offset}] unresolved submission must directly identify its mainnet signature`);
+    if (stage.confirmedAtUtc !== null) fail(`stages[${offset}] unresolved submission cannot claim a confirmation time`);
+    if (!isCurrentOrPastUtc(stage.independentlyVerifiedAtUtc) || !isLabel(stage.independentVerifierLabel)) fail(`stages[${offset}] unresolved submission requires a non-future independent review record`);
+    if (stage.observedPostStateSha256 !== null) fail(`stages[${offset}] unresolved submission cannot claim an observed post-state digest`);
+    if (stage.mismatchCode !== "CONFIRMATION_UNKNOWN") fail(`stages[${offset}] unresolved submission requires CONFIRMATION_UNKNOWN`);
+  }
 }
 
 if (journal.status === "ARMED") {
@@ -250,14 +261,15 @@ if (journal.status === "ARMED") {
   for (const field of ["failedStage", "reviewedAtUtc", "reviewerLabel", "publicIncidentUrl"]) if (journal.terminalDecision?.[field] !== null) fail(`ARMED requires terminalDecision.${field} to be null`);
 }
 if (journal.status === "TERMINAL_HOLD") {
-  if (firstFailureIndex === -1) fail("TERMINAL_HOLD requires one FAILED_OR_MISMATCH stage");
+  if (firstStopIndex === -1) fail("TERMINAL_HOLD requires one failed, mismatched, or unresolved stage");
   for (let index = 0; index < (journal.stages?.length ?? 0); index += 1) {
-    const expected = index < firstFailureIndex ? "FINALIZED_MATCHED" : index === firstFailureIndex ? "FAILED_OR_MISMATCH" : "NOT_ATTEMPTED";
-    if (journal.stages[index].status !== expected) fail(`TERMINAL_HOLD stage ${index + 1} must be ${expected}`);
+    if (index < firstStopIndex && journal.stages[index].status !== "FINALIZED_MATCHED") fail(`TERMINAL_HOLD stage ${index + 1} must be FINALIZED_MATCHED`);
+    if (index === firstStopIndex && !["FAILED_OR_MISMATCH", "SUBMITTED_UNRESOLVED"].includes(journal.stages[index].status)) fail(`TERMINAL_HOLD stage ${index + 1} must be FAILED_OR_MISMATCH or SUBMITTED_UNRESOLVED`);
+    if (index > firstStopIndex && journal.stages[index].status !== "NOT_ATTEMPTED") fail(`TERMINAL_HOLD stage ${index + 1} must be NOT_ATTEMPTED`);
   }
-  if (journal.terminalDecision?.state !== "TERMINAL_HOLD" || journal.terminalDecision?.failedStage !== V2_STAGE_ORDER[firstFailureIndex] || !isReasonCode(journal.terminalDecision?.reasonCode) || !isCurrentOrPastUtc(journal.terminalDecision?.reviewedAtUtc) || !isLabel(journal.terminalDecision?.reviewerLabel)) fail("TERMINAL_HOLD decision must bind the first failed stage and non-future independent review");
-  if (journal.terminalDecision?.reasonCode !== journal.stages?.[firstFailureIndex]?.mismatchCode) fail("TERMINAL_HOLD reasonCode must equal the failed stage mismatchCode");
-  if (isUtc(journal.terminalDecision?.reviewedAtUtc) && isUtc(journal.stages?.[firstFailureIndex]?.independentlyVerifiedAtUtc) && Date.parse(journal.terminalDecision.reviewedAtUtc) < Date.parse(journal.stages[firstFailureIndex].independentlyVerifiedAtUtc)) fail("TERMINAL_HOLD review cannot predate the failed-stage independent review");
+  if (journal.terminalDecision?.state !== "TERMINAL_HOLD" || journal.terminalDecision?.failedStage !== V2_STAGE_ORDER[firstStopIndex] || !isReasonCode(journal.terminalDecision?.reasonCode) || !isCurrentOrPastUtc(journal.terminalDecision?.reviewedAtUtc) || !isLabel(journal.terminalDecision?.reviewerLabel)) fail("TERMINAL_HOLD decision must bind the first stopped stage and non-future independent review");
+  if (journal.terminalDecision?.reasonCode !== journal.stages?.[firstStopIndex]?.mismatchCode) fail("TERMINAL_HOLD reasonCode must equal the stopped stage mismatchCode");
+  if (isUtc(journal.terminalDecision?.reviewedAtUtc) && isUtc(journal.stages?.[firstStopIndex]?.independentlyVerifiedAtUtc) && Date.parse(journal.terminalDecision.reviewedAtUtc) < Date.parse(journal.stages[firstStopIndex].independentlyVerifiedAtUtc)) fail("TERMINAL_HOLD review cannot predate the stopped-stage independent review");
   if (journal.terminalDecision?.publicIncidentUrl !== null && !isPublicHttpsUrl(journal.terminalDecision.publicIncidentUrl)) fail("TERMINAL_HOLD publicIncidentUrl must be null or a public HTTPS URL");
 }
 if (journal.status === "RECONCILED") {
@@ -276,4 +288,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log(`IAT V2 mainnet stage journal passes in ${journal.status}: eight immutable boundaries, independent stage evidence, terminal HOLD on first mismatch, no retry or compensating transaction authority.`);
+console.log(`IAT V2 mainnet stage journal passes in ${journal.status}: eight immutable boundaries, independent stage evidence, terminal HOLD on first failure, mismatch, or unresolved submission, no retry or compensating transaction authority.`);

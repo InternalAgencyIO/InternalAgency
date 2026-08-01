@@ -161,7 +161,7 @@
   "limitations": [
     "Explorer URLs and recorded digests are evidence references, not signatures or transaction authority.",
     "A FINALIZED_MATCHED stage requires a separate independent read of confirmed state.",
-    "TERMINAL_HOLD is permanent for this journal; recovery requires a new separately reviewed record and must never overwrite history.",
+    "TERMINAL_HOLD is permanent after the first failure, mismatch, or unresolved submission; recovery requires a new separately reviewed record and must never overwrite history.",
     "RECONCILED permits evidence-first publication review only; it does not authorize publication or claims."
   ]
 }

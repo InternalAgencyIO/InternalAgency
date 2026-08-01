@@ -33,12 +33,16 @@ its terminal decision are both `RECONCILED`.
 
 ## First mismatch or failure
 
-The first mismatch changes this record permanently to `TERMINAL_HOLD`. Earlier
-matched stages remain recorded, the failed boundary is named, and every later
-stage is `NOT_ATTEMPTED`. There is no automatic retry, compensating transaction,
-approval reuse, or improvised repair path. Preserve the journal and observable
-evidence. Any recovery proposal requires a new separately reviewed record and
-must never overwrite this terminal history.
+The first mismatch or failure changes this record permanently to
+`TERMINAL_HOLD`. If a transaction was submitted but confirmation cannot be
+established, record `SUBMITTED_UNRESOLVED`, the public signature and Explorer
+URL, `CONFIRMATION_UNKNOWN`, and no confirmation time or observed post-state.
+Never infer failure from an unavailable RPC response and never retry an unknown
+signature. Earlier matched stages remain recorded, the stopped boundary is
+named, and every later stage is `NOT_ATTEMPTED`. There is no automatic retry,
+compensating transaction, approval reuse, or improvised repair path. Preserve
+the journal and observable evidence. Any recovery proposal requires a new
+separately reviewed record and must never overwrite this terminal history.
 
 Validate locally with:
 

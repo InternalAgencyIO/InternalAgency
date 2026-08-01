@@ -62,8 +62,9 @@ effect.
 8. Before the first stage, validate the source-bound
    `launch/iat-v2-mainnet-stage-journal.template.json` as `ARMED`. After every
    confirmed stage, stop for independent post-state reconciliation. The first
-   failure or mismatch permanently ends that journal in `TERMINAL_HOLD`; do not
-   retry or create a compensating transaction.
+   failure, mismatch, or unresolved submission permanently ends that journal in
+   `TERMINAL_HOLD`; never retry an unknown signature or create a compensating
+   transaction.
 9. Reconcile confirmed chain state and validate all eight journal stages as
    `FINALIZED_MATCHED` before publishing any mint, authority,
    allocation, vesting, or claim-route statement.

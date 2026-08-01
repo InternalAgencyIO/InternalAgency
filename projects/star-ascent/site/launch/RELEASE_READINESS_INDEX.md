@@ -41,7 +41,8 @@ machine-readable gate is
    [`iat-v2-mainnet-stage-journal.template.json`](iat-v2-mainnet-stage-journal.template.json)
    and its [`stage reconciliation rules`](IAT_V2_STAGE_RECONCILIATION.md). Stop
    for independent verification after every confirmed stage; the first
-   mismatch is a permanent terminal HOLD for that journal.
+   failure, mismatch, or unresolved submission is a permanent terminal HOLD
+   for that journal.
 3. The signer confirms every transaction on-device. No person signs from a
    copied address or an unreviewed prompt.
 4. Record the final mint address, exact supply, authority-revocation evidence,

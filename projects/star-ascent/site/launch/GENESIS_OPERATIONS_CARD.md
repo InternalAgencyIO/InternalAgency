@@ -74,9 +74,10 @@ Before the first boundary, bind every planned message and expected post-state in
 
 After each confirmed boundary, stop for independent reconciliation and record a
 direct Explorer URL plus the observed post-state digest. Continue only on an
-exact match. The first failure or mismatch permanently changes this journal to
-`TERMINAL_HOLD`; all later boundaries remain `NOT_ATTEMPTED`. Never retry,
-compensate, or improvise a repair transaction.
+exact match. The first failure, mismatch, or submitted transaction whose
+confirmation remains unknown permanently changes this journal to
+`TERMINAL_HOLD`; all later boundaries remain `NOT_ATTEMPTED`. Never retry an
+unknown signature, compensate, or improvise a repair transaction.
 
 After activation, complete every positive and adversarial scenario in the V2
 rehearsal template. Publication is a separate human-controlled action, not a
