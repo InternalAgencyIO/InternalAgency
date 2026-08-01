@@ -994,6 +994,13 @@ rejected and regenerated.
 | **Port Moresby Ela Beach Light Intercept**<br><img src="740-papua-new-guinea-port-moresby-ela-beach-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three scarlet light keys into an obsidian-and-gold coast compass above Port Moresby's Ela Beach waterfront"> | **Kuk Wahgi Valley Earthwork Cipher**<br><img src="741-papua-new-guinea-kuk-wahgi-cipher.png" width="420" alt="The trio sealing a recovered archive inside an obsidian light capsule above the ancient earthwork geometry of Kuk in the Wahgi Valley"> |
 | **Mount Wilhelm Highland Extraction**<br><img src="742-papua-new-guinea-mount-wilhelm-extraction.png" width="420" alt="The trio restoring a scarlet-and-obsidian habitat beacon above Mount Wilhelm's alpine lakes and cloud-wrapped ridges"> | **Rabaul Simpson Harbour Night Relay**<br><img src="743-papua-new-guinea-rabaul-simpson-harbour-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet-obsidian-gold harbour relay above Rabaul's Simpson Harbour at blue hour"> |
 
+## World Series - Europe - Batch 181: Sweden
+
+| | |
+|---|---|
+| **Stockholm Sergels Torg Light Intercept**<br><img src="744-sweden-stockholm-sergels-torg-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking cobalt light keys into a sun-gold-and-glass city compass above Stockholm's Sergels torg"> | **Visby Ring Wall Amber Cipher**<br><img src="745-sweden-visby-ring-wall-cipher.png" width="420" alt="The trio sealing a recovered archive inside a midnight-blue light capsule beside Visby's medieval ring wall"> |
+| **Abisko Lapporten Terrain Extraction**<br><img src="746-sweden-abisko-lapporten-extraction.png" width="420" alt="The trio restoring a cobalt-and-glass habitat beacon before Abisko's iconic U-shaped Lapporten valley"> | **Malmö Öresund Bridge Night Relay**<br><img src="747-sweden-malmo-oresund-bridge-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cobalt-gold-silver bridge relay above Malmö's Öresund shoreline at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
