@@ -65,7 +65,33 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-01T14:00:49.9624948Z",
+    "status": "awaiting_post",
+    "imageNumbers": [
+      633,
+      634,
+      631
+    ],
+    "countries": [
+      "Chad",
+      "Kazakhstan"
+    ],
+    "assets": [
+      {
+        "file": "633-chad-gaoui-painted-courtyard-cipher.png",
+        "sha256": "dad0b755c6535ebc3ea0a4c336d1eb6b943b828bbcf98036f0617cae2195fdb7"
+      },
+      {
+        "file": "634-chad-ennedi-aloba-arch-extraction.png",
+        "sha256": "a47a423efc5c476ce10c2f6112d97b8e77c97cd9879a28ef74b3b182040c32ce"
+      },
+      {
+        "file": "631-kazakhstan-aktau-caspian-night-relay.png",
+        "sha256": "d9419b2f854fe5aaa5907929a3578494c417f0514a9eeba2f59d53de634169ff"
+      }
+    ]
+  },
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
