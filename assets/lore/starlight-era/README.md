@@ -882,6 +882,13 @@ rejected and regenerated.
 | **Cotonou Ganhi Lagoon Intercept**<br><img src="676-benin-cotonou-ganhi-lagoon-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise channel compass above Cotonou's Ganhi lagoon waterfront at apricot dawn"> | **Ouidah Portuguese Fort Cipher**<br><img src="677-benin-ouidah-portuguese-fort-cipher.png" width="420" alt="The trio sealing an amber archive prism beside the weathered arcades and palm-lined walls of Ouidah's Portuguese Fort"> |
 | **Tanougou Waterfall Extraction**<br><img src="678-benin-tanougou-waterfall-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon before Tanougou Falls and the Atacora ridges"> | **Grand-Popo Mono Estuary Moonline Relay**<br><img src="679-benin-grand-popo-mono-estuary-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a scarlet estuary relay above Grand-Popo where the Mono River lagoon meets the Atlantic"> |
 
+## World Series - Africa - Batch 165: Rwanda
+
+| | |
+|---|---|
+| **Kigali Convention Centre Sunline Intercept**<br><img src="680-rwanda-kigali-convention-centre-intercept.png" width="420" alt="Radiance, Ellie, and Alia sealing a turquoise hill compass above Kigali's patterned Convention Centre dome and rolling city hills"> | **Kigali Kandt House Amber Cipher**<br><img src="681-rwanda-kigali-kandt-house-cipher.png" width="420" alt="The trio closing an amber archive cipher beside Kandt House's red-tile roof, pale veranda arches and garden terraces"> |
+| **Virunga Volcano Light Extraction**<br><img src="682-rwanda-volcanoes-national-park-virunga-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon beneath Mount Bisoke and the misty Virunga forest slopes"> | **Rubavu Lake Kivu Moonline Relay**<br><img src="683-rwanda-rubavu-lake-kivu-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald relay above Rubavu's cobalt Lake Kivu shoreline and dark volcanic hills"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
