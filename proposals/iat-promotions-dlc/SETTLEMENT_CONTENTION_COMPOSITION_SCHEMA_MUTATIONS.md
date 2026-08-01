@@ -95,3 +95,9 @@ The UTF-8 boundary companion
 accepts exact scalar-width upper bounds through U+10FFFF and rejects
 out-of-range encodings, obsolete five/six-byte forms, FE/FF leads, and
 redundant continuation runs before JSON in both runtimes.
+
+The UTF-8 BOM-position companion
+[`SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md`](./SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md)
+preserves decoded U+FEFF at document delimiters, rejects it as non-JSON
+whitespace at leading, post-whitespace, and trailing positions, and accepts
+the same scalar inside a candidate string in both runtimes.

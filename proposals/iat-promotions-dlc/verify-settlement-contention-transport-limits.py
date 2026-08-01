@@ -27,6 +27,7 @@ KEY_COLLISION_ARTIFACT_NAME = "settlement-contention-composition-key-collision-a
 MARKER_VALUE_ARTIFACT_NAME = "settlement-contention-composition-marker-value-audit.v1.json"
 FATAL_UTF8_ARTIFACT_NAME = "settlement-contention-composition-fatal-utf8-ingress-audit.v1.json"
 UTF8_BOUNDARY_ARTIFACT_NAME = "settlement-contention-composition-utf8-boundary-audit.v1.json"
+UTF8_BOM_POSITION_ARTIFACT_NAME = "settlement-contention-composition-utf8-bom-position-audit.v1.json"
 BASE_NAME = "settlement-contention-composition-vectors.v1.json"
 TRANSPORT_MARKER = "DRAFT/INACTIVE"
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
@@ -96,6 +97,15 @@ UTF8_BOUNDARY_RULES = {
     "feFfLeadBytesAllowed": False,
     "continuationBytesRequireActiveSequence": True,
     "rejectionPrecedesJsonParsing": True,
+}
+UTF8_BOM_POSITION_RULES = {
+    "bomUtf8Bytes": "EF BB BF",
+    "decoderPreservesBomScalar": True,
+    "leadingBomAllowed": False,
+    "postWhitespaceBomAllowed": False,
+    "trailingBomAllowed": False,
+    "bomInsideJsonStringAllowed": True,
+    "delimiterRejectionAfterSuccessfulDecode": True,
 }
 NORMALIZATION_KEY_DEFINITIONS = [
     ("FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"),
@@ -1092,6 +1102,89 @@ def evaluate_utf8_boundary_corpus() -> tuple[list[dict[str, Any]], list[dict[str
     return controls, rejections
 
 
+UTF8_BOM_BYTES = bytes([0xEF, 0xBB, 0xBF])
+
+
+def bom_position_envelope(position: str) -> bytes:
+    envelope = b'{"transportMarker":"DRAFT/INACTIVE","candidate":{"bomProbe":0}}'
+    if position == "LEADING":
+        return UTF8_BOM_BYTES + envelope
+    if position == "POST_WHITESPACE":
+        return b" \t\r\n" + UTF8_BOM_BYTES + envelope
+    if position == "TRAILING":
+        return envelope + UTF8_BOM_BYTES
+    raise TransportError(f"UTF8_BOM_POSITION_CORPUS_BUILD_FAILED:{position}")
+
+
+def build_utf8_bom_position_corpus() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    controls = [{
+        "caseId": "BOM_INSIDE_CANDIDATE_STRING",
+        "family": "BOM_AS_JSON_STRING_SCALAR",
+        "position": "INSIDE_CANDIDATE_STRING",
+        "serializedBytes": invalid_utf8_probe_envelope(UTF8_BOM_BYTES),
+        "expectedCandidate": {"utf8Probe": "\ufeff"},
+    }]
+    rejections = [{
+        "caseId": case_id,
+        "family": "BOM_AT_JSON_DELIMITER",
+        "position": position,
+        "serializedBytes": bom_position_envelope(position),
+        "injectedByteLength": len(UTF8_BOM_BYTES),
+        "expectedError": "MALFORMED_JSON",
+    } for case_id, position in [
+        ("BOM_LEADING_DOCUMENT", "LEADING"),
+        ("BOM_AFTER_STANDARD_WHITESPACE", "POST_WHITESPACE"),
+        ("BOM_TRAILING_DOCUMENT", "TRAILING"),
+    ]]
+    return controls, rejections
+
+
+def evaluate_utf8_bom_position_corpus() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    control_inputs, rejection_inputs = build_utf8_bom_position_corpus()
+    controls = []
+    for item in control_inputs:
+        candidate, _metrics = parse_transport_envelope_bytes(item["serializedBytes"])
+        if canonical_sha256(candidate) != canonical_sha256(item["expectedCandidate"]):
+            raise TransportError(f'UTF8_BOM_POSITION_CONTROL_DRIFT:{item["caseId"]}')
+        controls.append({
+            "caseId": item["caseId"],
+            "family": item["family"],
+            "position": item["position"],
+            "representationSha256": hashlib.sha256(item["serializedBytes"]).hexdigest(),
+            "utf8Bytes": len(item["serializedBytes"]),
+            "candidateCommitmentSha256": canonical_sha256(candidate),
+            "utf8DecodingSucceeded": True,
+            "acceptedAtParser": True,
+            "candidateStored": False,
+            "mutationEvaluated": False,
+        })
+    rejections = []
+    for item in rejection_inputs:
+        observed_error = None
+        try:
+            parse_transport_envelope_bytes(item["serializedBytes"])
+        except TransportError as error:
+            observed_error = str(error)
+        if observed_error != item["expectedError"]:
+            raise TransportError(f'UTF8_BOM_POSITION_REJECTION_DRIFT:{item["caseId"]}:{observed_error}')
+        rejections.append({
+            "caseId": item["caseId"],
+            "family": item["family"],
+            "position": item["position"],
+            "representationSha256": hashlib.sha256(item["serializedBytes"]).hexdigest(),
+            "utf8Bytes": len(item["serializedBytes"]),
+            "injectedByteLength": item["injectedByteLength"],
+            "expectedError": item["expectedError"],
+            "observedError": observed_error,
+            "utf8DecodingSucceeded": True,
+            "jsonParsingAttempted": True,
+            "rejectedBeforeCandidate": True,
+            "candidateProduced": False,
+            "mutationEvaluated": False,
+        })
+    return controls, rejections
+
+
 def expect(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
@@ -1616,6 +1709,67 @@ def verify_utf8_boundary(root: Path, artifact_path: Path) -> tuple[list[str], di
     }
 
 
+def verify_utf8_bom_position(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        artifact = load_json(artifact_path)
+        base = load_json(root / BASE_NAME)
+        controls, rejections = evaluate_utf8_bom_position_corpus()
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read UTF-8 BOM-position evidence: {error}"], {}
+    expect(artifact.get("vectorVersion") == 1, "UTF-8 BOM-position version drift", errors)
+    expect(artifact.get("vectorId") == "iat-promotions-dlc-contention-composition-utf8-bom-position-v1", "UTF-8 BOM-position ID drift", errors)
+    expect(artifact.get("status") == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "UTF-8 BOM-position HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": {"path": BASE_NAME, "canonicalSha256": canonical_sha256(base)},
+        "boundedParser": {"path": "settlement-contention-composition-transport-limits.mjs", "normalizedTextSha256": normalized_text_sha256(root / "settlement-contention-composition-transport-limits.mjs")},
+        "pythonVerifier": {"path": "verify-settlement-contention-transport-limits.py", "normalizedTextSha256": normalized_text_sha256(Path(__file__).resolve())},
+        "generator": {"path": "generate-settlement-contention-composition-utf8-bom-position-audit.mjs", "normalizedTextSha256": normalized_text_sha256(root / "generate-settlement-contention-composition-utf8-bom-position-audit.mjs")},
+    }
+    expect(artifact.get("sources") == expected_sources, "UTF-8 BOM-position source drift", errors)
+    contract = artifact.get("contract", {})
+    expect(contract.get("mode") == "UTF8_BOM_POSITION_DELIMITER_BOUNDARY", "UTF-8 BOM-position mode drift", errors)
+    expect(contract.get("utf8BomPositionRules") == UTF8_BOM_POSITION_RULES, "UTF-8 BOM-position rules drift", errors)
+    expect(contract.get("acceptedControlCount") == 1 and contract.get("rejectionCount") == 3, "UTF-8 BOM-position counts drift", errors)
+    expect(contract.get("leadingBomCaseCount") == 1 and contract.get("postWhitespaceBomCaseCount") == 1 and contract.get("trailingBomCaseCount") == 1, "UTF-8 BOM-position family counts drift", errors)
+    for field in ["bomScalarInsideStringAccepted", "bomBytesPreservedByDecoder", "leadingBomRejectedByDelimiterRule", "postWhitespaceBomRejectedByDelimiterRule", "trailingBomRejectedByDelimiterRule"]:
+        expect(contract.get(field) is True, f"UTF-8 BOM-position contract {field} drift", errors)
+    for field in ["serializedByteSequencesStored", "runtimeCandidatesStored", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"UTF-8 BOM-position contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "UTF-8 BOM-position activation effect drift", errors)
+    expect(artifact.get("controls") == controls, "UTF-8 BOM-position controls drift", errors)
+    expect(artifact.get("rejections") == rejections, "UTF-8 BOM-position rejections drift", errors)
+    summary = artifact.get("summary", {})
+    control_commitment = canonical_sha256(controls)
+    rejection_commitment = canonical_sha256(rejections)
+    combined_commitment = canonical_sha256({"controls": controls, "rejections": rejections})
+    expect(summary.get("acceptedControlCount") == "1" and summary.get("rejectionCount") == "3", "UTF-8 BOM-position summary counts drift", errors)
+    expect(summary.get("bomInsideStringAccepted") is True and summary.get("allDelimiterBomPositionsRejectedAfterDecode") is True, "UTF-8 BOM-position summary outcome drift", errors)
+    expect(summary.get("controlSetCommitmentSha256") == control_commitment, "UTF-8 BOM-position control-set drift", errors)
+    expect(summary.get("rejectionSetCommitmentSha256") == rejection_commitment, "UTF-8 BOM-position rejection-set drift", errors)
+    expect(summary.get("combinedReplayCommitmentSha256") == combined_commitment, "UTF-8 BOM-position combined replay drift", errors)
+    for field in ["serializedByteSequencesStored", "runtimeCandidatesStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"UTF-8 BOM-position summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "UTF-8 BOM-position summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "acceptedControlCount": len(controls),
+        "rejectionCount": len(rejections),
+        "controlSetCommitmentSha256": control_commitment,
+        "rejectionSetCommitmentSha256": rejection_commitment,
+        "combinedReplayCommitmentSha256": combined_commitment,
+        "allDelimiterBomPositionsRejectedAfterDecode": len(rejections) == 3,
+        "serializedByteSequencesStored": False,
+        "runtimeCandidatesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Verify held bounded JSON transport evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -1629,6 +1783,7 @@ def main() -> int:
     modes.add_argument("--verify-marker-value-audit", action="store_true")
     modes.add_argument("--verify-fatal-utf8-ingress-audit", action="store_true")
     modes.add_argument("--verify-utf8-boundary-audit", action="store_true")
+    modes.add_argument("--verify-utf8-bom-position-audit", action="store_true")
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
@@ -1646,6 +1801,8 @@ def main() -> int:
         artifact_name = FATAL_UTF8_ARTIFACT_NAME
     elif arguments.verify_utf8_boundary_audit:
         artifact_name = UTF8_BOUNDARY_ARTIFACT_NAME
+    elif arguments.verify_utf8_bom_position_audit:
+        artifact_name = UTF8_BOM_POSITION_ARTIFACT_NAME
     else:
         artifact_name = ARTIFACT_NAME
     artifact = arguments.artifact.resolve() if arguments.artifact else root / artifact_name
@@ -1663,6 +1820,8 @@ def main() -> int:
         errors, report = verify_fatal_utf8(root, artifact)
     elif arguments.verify_utf8_boundary_audit:
         errors, report = verify_utf8_boundary(root, artifact)
+    elif arguments.verify_utf8_bom_position_audit:
+        errors, report = verify_utf8_bom_position(root, artifact)
     else:
         errors, report = verify(root, artifact)
     if arguments.emit_json:
@@ -1670,7 +1829,7 @@ def main() -> int:
     elif errors:
         print("\n".join(errors), file=sys.stderr)
     else:
-        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else ("fatal-utf8-ingress" if arguments.verify_fatal_utf8_ingress_audit else ("utf8-boundary" if arguments.verify_utf8_boundary_audit else "transport-limit"))))))
+        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else ("fatal-utf8-ingress" if arguments.verify_fatal_utf8_ingress_audit else ("utf8-boundary" if arguments.verify_utf8_boundary_audit else ("utf8-bom-position" if arguments.verify_utf8_bom_position_audit else "transport-limit")))))))
         print(f"Independent {label} replay passed: {report['combinedReplayCommitmentSha256']}")
     return 2 if errors else 0
 

@@ -96,6 +96,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Exact transport-marker value audit](./SETTLEMENT_CONTENTION_MARKER_VALUE_AUDIT.md)
 - [Fatal UTF-8 byte-ingress audit](./SETTLEMENT_CONTENTION_FATAL_UTF8_INGRESS_AUDIT.md)
 - [UTF-8 scalar-boundary and illegal-lead audit](./SETTLEMENT_CONTENTION_UTF8_BOUNDARY_AUDIT.md)
+- [UTF-8 BOM-position and delimiter audit](./SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md)
 - [Compact settlement contention vectors](./settlement-contention-vectors.v1.json)
 - [Compact settlement contention mutation vectors](./settlement-contention-mutation-vectors.v1.json)
 - [Compact settlement contention composition vectors](./settlement-contention-composition-vectors.v1.json)
@@ -111,6 +112,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Compact exact transport-marker value audit](./settlement-contention-composition-marker-value-audit.v1.json)
 - [Compact fatal UTF-8 byte-ingress audit](./settlement-contention-composition-fatal-utf8-ingress-audit.v1.json)
 - [Compact UTF-8 scalar-boundary audit](./settlement-contention-composition-utf8-boundary-audit.v1.json)
+- [Compact UTF-8 BOM-position audit](./settlement-contention-composition-utf8-bom-position-audit.v1.json)
 - [Closed settlement-contention evidence schema](./settlement-contention-evidence.schema.v1.json)
 - [Settlement contention vector generator](./generate-settlement-contention-vectors.mjs)
 - [Settlement contention mutation generator](./generate-settlement-contention-mutation-vectors.mjs)
@@ -126,6 +128,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Transport-marker value audit generator](./generate-settlement-contention-composition-marker-value-audit.mjs)
 - [Fatal UTF-8 ingress audit generator](./generate-settlement-contention-composition-fatal-utf8-ingress-audit.mjs)
 - [UTF-8 boundary audit generator](./generate-settlement-contention-composition-utf8-boundary-audit.mjs)
+- [UTF-8 BOM-position audit generator](./generate-settlement-contention-composition-utf8-bom-position-audit.mjs)
 - [Settlement contention vector validator](./validate-settlement-contention-vectors.mjs)
 - [Settlement contention mutation validator](./validate-settlement-contention-mutation-vectors.mjs)
 - [Settlement contention composition validator](./validate-settlement-contention-composition-vectors.mjs)
@@ -140,6 +143,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Transport-marker value audit validator](./validate-settlement-contention-composition-marker-value-audit.mjs)
 - [Fatal UTF-8 ingress audit validator](./validate-settlement-contention-composition-fatal-utf8-ingress-audit.mjs)
 - [UTF-8 boundary audit validator](./validate-settlement-contention-composition-utf8-boundary-audit.mjs)
+- [UTF-8 BOM-position audit validator](./validate-settlement-contention-composition-utf8-bom-position-audit.mjs)
 - [Independent zero-dependency Python contention replay](./verify-settlement-contention-vectors.py)
 - [Independent zero-dependency Python escape replay](./verify-settlement-contention-escape-representations.py)
 - [Independent zero-dependency Python bounded-transport replay](./verify-settlement-contention-transport-limits.py)
@@ -254,6 +258,7 @@ node proposals/iat-promotions-dlc/generate-settlement-contention-composition-key
 node proposals/iat-promotions-dlc/generate-settlement-contention-composition-marker-value-audit.mjs --write
 node proposals/iat-promotions-dlc/generate-settlement-contention-composition-fatal-utf8-ingress-audit.mjs --write
 node proposals/iat-promotions-dlc/generate-settlement-contention-composition-utf8-boundary-audit.mjs --write
+node proposals/iat-promotions-dlc/generate-settlement-contention-composition-utf8-bom-position-audit.mjs --write
 node proposals/iat-promotions-dlc/generate-review-manifest.mjs --write
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
@@ -292,6 +297,7 @@ node proposals/iat-promotions-dlc/validate-settlement-contention-composition-key
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-marker-value-audit.mjs
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-fatal-utf8-ingress-audit.mjs
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-utf8-boundary-audit.mjs
+node proposals/iat-promotions-dlc/validate-settlement-contention-composition-utf8-bom-position-audit.mjs
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-mutation-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-vectors --json
@@ -306,6 +312,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limit
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-marker-value-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-fatal-utf8-ingress-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-utf8-boundary-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-utf8-bom-position-audit --json
 python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-differential-vectors --format json
@@ -363,6 +370,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-key-collisi
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-marker-value-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-fatal-utf8-ingress-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-utf8-boundary-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-utf8-bom-position-audit.test.mjs
 ```
 
 ## Deliberate isolation

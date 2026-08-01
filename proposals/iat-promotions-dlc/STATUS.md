@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-08-01 03:13 UTC
+Updated: 2026-08-01 03:30 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `78efc10`
+Previously published public increment: `b77d9e8`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -558,8 +558,19 @@ This status file deliberately does not claim a self-referential commit hash.
   `651cf8eef421fb00643c45a52736459477ff5932de38ddc758e2b4916baaeaaa`,
   and combined replay commitment
   `d8fa15fff3059e48b1d46b8e76faba165be4929ad791da809407774ac4da4534`.
+- one literal U+FEFF control accepted inside the candidate string after strict
+  UTF-8 decoding;
+- three BOM-position rejections proving leading, post-whitespace, and trailing
+  `EF BB BF` bytes are preserved then rejected as `MALFORMED_JSON` before
+  candidate production in Node and zero-dependency Python;
+- UTF-8 BOM-position control-set commitment
+  `a1386aa634e5e10509e19bea6cc9566ef6e16bcf20ac84bd4ad99421584063cd`,
+  rejection-set commitment
+  `f0f05bde08a9c3c375596cf7182c88f9d6a61b00f4574b6b35de08455d76f3da`,
+  and combined replay commitment
+  `0923900db598b39f534c91c64408dd3afb07b015303e8fb69f6fb967758d86fa`.
 
-Current proposal-only result: **450 tests passed**. This consists of 28 protected
+Current proposal-only result: **462 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -687,6 +698,11 @@ exact one/two/three/four-byte boundary controls, out-of-range, obsolete
 five/six-byte, FE/FF lead, redundant-continuation, pre-JSON boundary, family
 coverage, independent Python parity, tamper-exit, source-safety, and
 manifest-coverage tests complete the scalar-boundary suite.
+Twelve UTF-8 BOM-position deterministic regeneration, fixed preservation rule,
+in-string U+FEFF acceptance, leading, post-whitespace, and trailing delimiter
+rejection, post-decode error boundary, compact-publication, independent Python
+parity, tamper-exit, source-safety, and manifest-coverage tests complete the
+BOM-position suite.
 
 ## Current guarantees of the reference model
 
@@ -718,8 +734,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a compact UTF-8 BOM-position corpus proving leading, post-whitespace, and
-trailing BOM bytes are preserved then rejected by the delimiter rule, while
-U+FEFF inside a candidate string remains a valid scalar. Keep candidates
-runtime-only; do not contact a local validator, Devnet, or Mainnet; preserve
-every network, wallet, review, deployment, and activation HOLD.
+Add a compact byte-view boundary corpus proving a `Uint8Array` with nonzero
+offset and bounded length decodes only its visible bytes, while `ArrayBuffer`,
+`DataView`, and non-byte inputs fail closed. Keep candidates runtime-only; do
+not contact a local validator, Devnet, or Mainnet; preserve every network,
+wallet, review, deployment, and activation HOLD.

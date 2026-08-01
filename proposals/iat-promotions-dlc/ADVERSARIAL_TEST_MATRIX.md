@@ -319,11 +319,11 @@ security audit or deployment approval.
 | Truncated, overlong, surrogate-encoded, or invalid-continuation bytes reach a candidate | four balanced fatal UTF-8 families | Node and Python independently reconstruct four cases per family and commit identical pre-candidate outcomes without publishing raw bytes |
 | A decoder accepts a scalar above U+10FFFF or an obsolete five/six-byte form | UTF-8 upper-bound and long-form families | U+10FFFF accepts exactly; all eight out-of-range or obsolete forms reject fatally before JSON in Node and Python |
 | FE/FF lead bytes or redundant continuation runs start a valid character | illegal-lead and redundant-continuation families | Four cases per family reject as `INVALID_UTF8` before JSON, without publishing raw bytes or candidates |
+| A decoder strips a leading BOM or treats U+FEFF as JSON whitespace | UTF-8 BOM-position control and three delimiter rejections | U+FEFF accepts inside the candidate string; leading, post-whitespace, and trailing BOM bytes decode successfully then reject as `MALFORMED_JSON` before candidate production in Node and Python |
 
 ## Next matrix expansion
 
-- add a compact UTF-8 BOM-position corpus proving leading, post-whitespace,
-  and trailing BOM bytes are preserved then rejected by the delimiter rule,
-  while U+FEFF inside a candidate string remains a valid scalar. Preserve
-  runtime-only candidates and every network, wallet, review, deployment, and
-  activation HOLD.
+- add a compact byte-view boundary corpus proving a `Uint8Array` with nonzero
+  offset and bounded length decodes only its visible bytes, while `ArrayBuffer`,
+  `DataView`, and non-byte inputs fail closed. Preserve runtime-only candidates
+  and every network, wallet, review, deployment, and activation HOLD.

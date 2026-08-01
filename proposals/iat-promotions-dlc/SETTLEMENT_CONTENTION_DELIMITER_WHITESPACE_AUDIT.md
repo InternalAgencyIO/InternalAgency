@@ -40,3 +40,8 @@ The companion
 [`SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md`](./SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md)
 fixes exact decoded required-key matching and rejects control-character or
 normalization-lookalike key spellings under the same bounded parser.
+
+The byte-level companion
+[`SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md`](./SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md)
+proves BOM bytes are preserved through strict UTF-8 decoding before this
+delimiter rule rejects them outside a JSON string.

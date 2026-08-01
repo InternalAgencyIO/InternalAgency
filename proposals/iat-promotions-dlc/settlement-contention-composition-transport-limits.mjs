@@ -83,6 +83,16 @@ export const UTF8_BOUNDARY_RULES = Object.freeze({
   rejectionPrecedesJsonParsing: true,
 });
 
+export const UTF8_BOM_POSITION_RULES = Object.freeze({
+  bomUtf8Bytes: "EF BB BF",
+  decoderPreservesBomScalar: true,
+  leadingBomAllowed: false,
+  postWhitespaceBomAllowed: false,
+  trailingBomAllowed: false,
+  bomInsideJsonStringAllowed: true,
+  delimiterRejectionAfterSuccessfulDecode: true,
+});
+
 const NORMALIZATION_KEY_DEFINITIONS = Object.freeze([
   ["FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"],
   ["FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"],
@@ -1142,6 +1152,87 @@ export function evaluateUtf8BoundaryCorpus() {
       observedError,
       utf8DecodingSucceeded: false,
       jsonParsingAttempted: false,
+      rejectedBeforeCandidate: true,
+      candidateProduced: false,
+      mutationEvaluated: false,
+    };
+  });
+  return { controls, rejections };
+}
+
+const UTF8_BOM_BYTES = Object.freeze([0xef, 0xbb, 0xbf]);
+
+function bomPositionEnvelope(position) {
+  const envelope = Buffer.from('{"transportMarker":"DRAFT/INACTIVE","candidate":{"bomProbe":0}}', "utf8");
+  const bom = Buffer.from(UTF8_BOM_BYTES);
+  if (position === "LEADING") return Buffer.concat([bom, envelope]);
+  if (position === "POST_WHITESPACE") return Buffer.concat([Buffer.from(" \t\r\n", "utf8"), bom, envelope]);
+  if (position === "TRAILING") return Buffer.concat([envelope, bom]);
+  fail(`UTF8_BOM_POSITION_CORPUS_BUILD_FAILED:${position}`);
+}
+
+export function buildUtf8BomPositionCorpus() {
+  const controls = [{
+    caseId: "BOM_INSIDE_CANDIDATE_STRING",
+    family: "BOM_AS_JSON_STRING_SCALAR",
+    position: "INSIDE_CANDIDATE_STRING",
+    serializedBytes: utf8ByteProbeEnvelope(UTF8_BOM_BYTES),
+    expectedCandidate: { utf8Probe: "\ufeff" },
+  }];
+  const rejections = [
+    ["BOM_LEADING_DOCUMENT", "LEADING"],
+    ["BOM_AFTER_STANDARD_WHITESPACE", "POST_WHITESPACE"],
+    ["BOM_TRAILING_DOCUMENT", "TRAILING"],
+  ].map(([caseId, position]) => ({
+    caseId,
+    family: "BOM_AT_JSON_DELIMITER",
+    position,
+    serializedBytes: bomPositionEnvelope(position),
+    injectedByteLength: UTF8_BOM_BYTES.length,
+    expectedError: "MALFORMED_JSON",
+  }));
+  return { controls, rejections };
+}
+
+export function evaluateUtf8BomPositionCorpus() {
+  const corpus = buildUtf8BomPositionCorpus();
+  const controls = corpus.controls.map(({ caseId, family, position, serializedBytes, expectedCandidate }) => {
+    const parsed = parseBoundedTransportEnvelopeBytes(serializedBytes);
+    if (canonicalSha256(parsed.candidate) !== canonicalSha256(expectedCandidate)) {
+      fail(`UTF8_BOM_POSITION_CONTROL_DRIFT:${caseId}`);
+    }
+    return {
+      caseId,
+      family,
+      position,
+      representationSha256: createHash("sha256").update(serializedBytes).digest("hex"),
+      utf8Bytes: serializedBytes.length,
+      candidateCommitmentSha256: canonicalSha256(parsed.candidate),
+      utf8DecodingSucceeded: true,
+      acceptedAtParser: true,
+      candidateStored: false,
+      mutationEvaluated: false,
+    };
+  });
+  const rejections = corpus.rejections.map(({ caseId, family, position, serializedBytes, injectedByteLength, expectedError }) => {
+    let observedError = null;
+    try {
+      parseBoundedTransportEnvelopeBytes(serializedBytes);
+    } catch (error) {
+      observedError = error instanceof Error ? error.message : String(error);
+    }
+    if (observedError !== expectedError) fail(`UTF8_BOM_POSITION_REJECTION_DRIFT:${caseId}:${observedError}`);
+    return {
+      caseId,
+      family,
+      position,
+      representationSha256: createHash("sha256").update(serializedBytes).digest("hex"),
+      utf8Bytes: serializedBytes.length,
+      injectedByteLength,
+      expectedError,
+      observedError,
+      utf8DecodingSucceeded: true,
+      jsonParsingAttempted: true,
       rejectedBeforeCandidate: true,
       candidateProduced: false,
       mutationEvaluated: false,

@@ -23,6 +23,11 @@ Published evidence contains descriptors, byte-sequence hashes, byte counts,
 error boundaries, and outcomes only. Raw byte sequences and runtime candidates
 are never stored.
 
+The companion
+[`SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md`](./SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md)
+distinguishes valid U+FEFF decoding from its invalid use at JSON document
+delimiters.
+
 ## Replay
 
 ```powershell

@@ -23,6 +23,11 @@ Published evidence contains descriptors, byte-sequence hashes, byte counts,
 error boundaries, and outcomes only. Raw byte sequences and runtime candidates
 are never stored.
 
+The companion
+[`SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md`](./SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md)
+separately proves that valid BOM bytes are preserved for the delimiter rule
+rather than being mistaken for malformed UTF-8.
+
 ## Replay
 
 ```powershell
