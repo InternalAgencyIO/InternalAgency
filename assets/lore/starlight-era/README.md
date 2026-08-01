@@ -938,6 +938,13 @@ rejected and regenerated.
 | **Amman Abdali Black-Iris Intercept**<br><img src="708-jordan-amman-abdali-boulevard-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking ruby light keys into a black-iris civic compass above Amman's Abdali Boulevard at dawn"> | **Petra Rose-Stone Amber Cipher**<br><img src="709-jordan-petra-treasury-rose-cipher.png" width="420" alt="The trio sealing an amber archive prism before Petra's rose-red Al-Khazneh facade and Siq opening"> |
 | **Wadi Rum Desert-Light Extraction**<br><img src="710-jordan-wadi-rum-desert-extraction.png" width="420" alt="The trio restoring a gold-and-turquoise environmental beacon above Wadi Rum's red dunes and sandstone bridge"> | **Aqaba Red Sea Moonline Relay**<br><img src="711-jordan-aqaba-red-sea-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a green-ruby-pearl sea relay above Aqaba's Red Sea waterfront at blue hour"> |
 
+## World Series - North America - Batch 173: Dominican Republic
+
+| | |
+|---|---|
+| **Santo Domingo Malecon Larimar Intercept**<br><img src="712-dominican-republic-santo-domingo-malecon-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three ruby light keys into a cobalt-red-larimar civic compass above Santo Domingo's Caribbean Malecon at dawn"> | **Zona Colonial Alcazar Amber Cipher**<br><img src="713-dominican-republic-zona-colonial-alcazar-cipher.png" width="420" alt="The trio sealing an amber archive prism beside the coral-stone arcades and broad steps of the Alcazar de Colon in Santo Domingo's Zona Colonial"> |
+| **Los Haitises Karst-Light Extraction**<br><img src="714-dominican-republic-los-haitises-karst-extraction.png" width="420" alt="The trio restoring an amber-and-turquoise environmental beacon above Los Haitises' green limestone islets and mangrove channels"> | **Bavaro Caribbean Moonline Relay**<br><img src="715-dominican-republic-bavaro-coast-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cobalt-and-amber coastal relay above Bavaro's pale beach and Caribbean shallows at moonlit blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
