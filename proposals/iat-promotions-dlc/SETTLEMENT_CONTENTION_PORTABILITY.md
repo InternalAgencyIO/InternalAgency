@@ -92,6 +92,10 @@ The visible-view truncation companion proves a full view accepts while empty,
 prefix-only, suffix-only, and one-byte-short views reject after successful
 UTF-8 decoding without reading valid JSON bytes outside the view; see
 `SETTLEMENT_CONTENTION_VISIBLE_VIEW_TRUNCATION_AUDIT.md`.
+The alias-mutation companion mutates a view's shared backing buffer and proves
+excluded prefix/suffix changes cannot alter visible bytes or the candidate,
+while candidate, marker, and delimiter changes inside the view are detected;
+see `SETTLEMENT_CONTENTION_VISIBLE_VIEW_ALIAS_MUTATION_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -114,6 +118,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limit
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-utf8-bom-position-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-byte-view-boundary-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-visible-view-truncation-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-visible-view-alias-mutation-audit --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -133,6 +138,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-utf8-bounda
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-utf8-bom-position-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-byte-view-boundary-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-visible-view-truncation-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-visible-view-alias-mutation-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

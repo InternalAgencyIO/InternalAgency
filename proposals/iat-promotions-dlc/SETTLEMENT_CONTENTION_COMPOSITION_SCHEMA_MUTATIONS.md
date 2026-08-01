@@ -113,3 +113,9 @@ The visible-view truncation companion
 uses one valid backing envelope to prove the full view accepts while empty,
 prefix-only, suffix-only, and one-byte-short views decode then reject before
 candidate production. Bytes outside the visible view never complete JSON.
+
+The shared-buffer alias-mutation companion
+[`SETTLEMENT_CONTENTION_VISIBLE_VIEW_ALIAS_MUTATION_AUDIT.md`](./SETTLEMENT_CONTENTION_VISIBLE_VIEW_ALIAS_MUTATION_AUDIT.md)
+proves excluded backing-byte mutations do not alter the visible representation
+or candidate commitment, while candidate, marker, and delimiter mutations
+inside the same aliased view change a commitment or reject parsing.

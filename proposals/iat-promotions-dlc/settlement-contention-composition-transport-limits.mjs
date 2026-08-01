@@ -117,6 +117,17 @@ export const VISIBLE_VIEW_TRUNCATION_RULES = Object.freeze({
   rejectionAfterSuccessfulUtf8Decode: true,
 });
 
+export const VISIBLE_VIEW_ALIAS_MUTATION_RULES = Object.freeze({
+  acceptedInputType: "Uint8Array",
+  sharedBackingBufferRequired: true,
+  outsideViewMutationsAffectVisibleBytes: false,
+  outsideViewMutationsAffectCandidate: false,
+  insideViewMutationsDetected: true,
+  detectionModes: ["CANDIDATE_COMMITMENT_CHANGED", "PARSER_REJECTION"],
+  backingByteSequencesStored: false,
+  visibleByteSequencesStored: false,
+});
+
 const NORMALIZATION_KEY_DEFINITIONS = Object.freeze([
   ["FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"],
   ["FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"],
@@ -1454,4 +1465,121 @@ export function evaluateVisibleViewTruncationCorpus() {
     };
   });
   return { controls, rejections };
+}
+
+function visibleViewAliasMutationProbeEnvelope() {
+  return Buffer.from('{"transportMarker":"DRAFT/INACTIVE","candidate":{"aliasMutationProbe":0}}', "utf8");
+}
+
+function visibleViewAliasMutationCase(caseId, family, mutationRegion, mutationDescriptor, mutationBackingIndex, replacementByte, expectedAfterError = null) {
+  const payloadBytes = visibleViewAliasMutationProbeEnvelope();
+  const prefixBytes = Buffer.from("!?", "utf8");
+  const suffixBytes = Buffer.from("#$", "utf8");
+  const backingBytes = Buffer.concat([prefixBytes, payloadBytes, suffixBytes]);
+  const serializedBytes = new Uint8Array(
+    backingBytes.buffer,
+    backingBytes.byteOffset + prefixBytes.length,
+    payloadBytes.length,
+  );
+  return {
+    caseId,
+    family,
+    mutationRegion,
+    mutationDescriptor,
+    backingBytes,
+    serializedBytes,
+    byteOffset: prefixBytes.length,
+    byteLength: payloadBytes.length,
+    mutationBackingIndex,
+    mutationViewIndex: mutationRegion === "INSIDE_VIEW" ? mutationBackingIndex - prefixBytes.length : null,
+    replacementByte,
+    expectedAfterError,
+  };
+}
+
+export function buildVisibleViewAliasMutationCorpus() {
+  const payloadBytes = visibleViewAliasMutationProbeEnvelope();
+  const prefixLength = 2;
+  const candidateDigitIndex = prefixLength + payloadBytes.indexOf(Buffer.from("0", "utf8"));
+  const markerInitialIndex = prefixLength + payloadBytes.indexOf(Buffer.from("DRAFT/INACTIVE", "utf8"));
+  const finalDelimiterIndex = prefixLength + payloadBytes.length - 1;
+  return {
+    outsideControls: [
+      visibleViewAliasMutationCase("OUTSIDE_PREFIX_ALIAS_MUTATION", "OUTSIDE_VIEW_ISOLATION", "OUTSIDE_PREFIX", "EXCLUDED_PREFIX_SENTINEL", 0, 0x7e),
+      visibleViewAliasMutationCase("OUTSIDE_SUFFIX_ALIAS_MUTATION", "OUTSIDE_VIEW_ISOLATION", "OUTSIDE_SUFFIX", "EXCLUDED_SUFFIX_SENTINEL", prefixLength + payloadBytes.length, 0x7e),
+      visibleViewAliasMutationCase("OUTSIDE_FINAL_SUFFIX_ALIAS_MUTATION", "OUTSIDE_VIEW_ISOLATION", "OUTSIDE_SUFFIX", "EXCLUDED_FINAL_SUFFIX_SENTINEL", prefixLength + payloadBytes.length + 1, 0x7e),
+    ],
+    insideDetections: [
+      visibleViewAliasMutationCase("INSIDE_CANDIDATE_ALIAS_MUTATION", "INSIDE_VIEW_DETECTION", "INSIDE_VIEW", "CANDIDATE_DIGIT", candidateDigitIndex, 0x31),
+      visibleViewAliasMutationCase("INSIDE_MARKER_ALIAS_MUTATION", "INSIDE_VIEW_DETECTION", "INSIDE_VIEW", "MARKER_INITIAL", markerInitialIndex, 0x58, "INVALID_TRANSPORT_ENVELOPE"),
+      visibleViewAliasMutationCase("INSIDE_DELIMITER_ALIAS_MUTATION", "INSIDE_VIEW_DETECTION", "INSIDE_VIEW", "FINAL_DELIMITER", finalDelimiterIndex, 0x5d, "MALFORMED_JSON"),
+    ],
+  };
+}
+
+function evaluateVisibleViewAliasMutationCase(item) {
+  const beforeBackingRepresentationSha256 = createHash("sha256").update(item.backingBytes).digest("hex");
+  const beforeVisibleRepresentationSha256 = createHash("sha256").update(item.serializedBytes).digest("hex");
+  const before = parseBoundedTransportEnvelopeBytes(item.serializedBytes);
+  const beforeCandidateCommitmentSha256 = canonicalSha256(before.candidate);
+  item.backingBytes[item.mutationBackingIndex] = item.replacementByte;
+  const afterBackingRepresentationSha256 = createHash("sha256").update(item.backingBytes).digest("hex");
+  const afterVisibleRepresentationSha256 = createHash("sha256").update(item.serializedBytes).digest("hex");
+  let afterCandidateCommitmentSha256 = null;
+  let observedAfterError = null;
+  try {
+    afterCandidateCommitmentSha256 = canonicalSha256(parseBoundedTransportEnvelopeBytes(item.serializedBytes).candidate);
+  } catch (error) {
+    observedAfterError = error instanceof Error ? error.message : String(error);
+  }
+  if (observedAfterError !== item.expectedAfterError) {
+    fail(`VISIBLE_VIEW_ALIAS_MUTATION_ERROR_DRIFT:${item.caseId}:${observedAfterError}`);
+  }
+  const visibleBytesChanged = beforeVisibleRepresentationSha256 !== afterVisibleRepresentationSha256;
+  const candidateCommitmentChanged = beforeCandidateCommitmentSha256 !== afterCandidateCommitmentSha256;
+  const parserRejectedAfter = observedAfterError !== null;
+  if (item.mutationRegion === "INSIDE_VIEW") {
+    if (!visibleBytesChanged || (!candidateCommitmentChanged && !parserRejectedAfter)) {
+      fail(`VISIBLE_VIEW_ALIAS_MUTATION_UNDETECTED:${item.caseId}`);
+    }
+  } else if (visibleBytesChanged || candidateCommitmentChanged || parserRejectedAfter) {
+    fail(`VISIBLE_VIEW_ALIAS_MUTATION_ISOLATION_DRIFT:${item.caseId}`);
+  }
+  return {
+    caseId: item.caseId,
+    family: item.family,
+    inputType: "Uint8Array",
+    mutationRegion: item.mutationRegion,
+    mutationDescriptor: item.mutationDescriptor,
+    backingByteLength: item.backingBytes.length,
+    byteOffset: item.byteOffset,
+    byteLength: item.byteLength,
+    mutationBackingIndex: item.mutationBackingIndex,
+    mutationViewIndex: item.mutationViewIndex,
+    beforeBackingRepresentationSha256,
+    afterBackingRepresentationSha256,
+    beforeVisibleRepresentationSha256,
+    afterVisibleRepresentationSha256,
+    beforeCandidateCommitmentSha256,
+    afterCandidateCommitmentSha256,
+    expectedAfterError: item.expectedAfterError,
+    observedAfterError,
+    visibleBytesChanged,
+    candidateCommitmentChanged,
+    parserRejectedAfter,
+    mutationDetected: item.mutationRegion === "INSIDE_VIEW",
+    outsideViewIsolationPreserved: item.mutationRegion !== "INSIDE_VIEW",
+    runtimeBytesStored: false,
+    runtimeCandidatesStored: false,
+    aliasMutationEvaluated: true,
+    campaignMutationEvaluated: false,
+  };
+}
+
+export function evaluateVisibleViewAliasMutationCorpus() {
+  const corpus = buildVisibleViewAliasMutationCorpus();
+  return {
+    outsideControls: corpus.outsideControls.map(evaluateVisibleViewAliasMutationCase),
+    insideDetections: corpus.insideDetections.map(evaluateVisibleViewAliasMutationCase),
+  };
 }

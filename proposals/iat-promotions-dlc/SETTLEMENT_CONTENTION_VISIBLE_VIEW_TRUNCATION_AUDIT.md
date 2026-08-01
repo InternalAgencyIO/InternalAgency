@@ -21,6 +21,10 @@ Backing bytes, visible bytes, runtime inputs, and runtime candidates remain
 runtime-only. Zero-dependency Python independently reconstructs the same
 slices and commitments.
 
+The companion `SETTLEMENT_CONTENTION_VISIBLE_VIEW_ALIAS_MUTATION_AUDIT.md`
+mutates the shared backing buffer before a second parse to distinguish
+outside-view isolation from inside-view detection.
+
 ## Replay
 
 ```powershell

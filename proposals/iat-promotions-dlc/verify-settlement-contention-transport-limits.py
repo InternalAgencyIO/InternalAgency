@@ -30,6 +30,7 @@ UTF8_BOUNDARY_ARTIFACT_NAME = "settlement-contention-composition-utf8-boundary-a
 UTF8_BOM_POSITION_ARTIFACT_NAME = "settlement-contention-composition-utf8-bom-position-audit.v1.json"
 BYTE_VIEW_BOUNDARY_ARTIFACT_NAME = "settlement-contention-composition-byte-view-boundary-audit.v1.json"
 VISIBLE_VIEW_TRUNCATION_ARTIFACT_NAME = "settlement-contention-composition-visible-view-truncation-audit.v1.json"
+VISIBLE_VIEW_ALIAS_MUTATION_ARTIFACT_NAME = "settlement-contention-composition-visible-view-alias-mutation-audit.v1.json"
 BASE_NAME = "settlement-contention-composition-vectors.v1.json"
 TRANSPORT_MARKER = "DRAFT/INACTIVE"
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
@@ -130,6 +131,16 @@ VISIBLE_VIEW_TRUNCATION_RULES = {
     "outsideViewReadAllowed": False,
     "truncatedViewError": "MALFORMED_JSON",
     "rejectionAfterSuccessfulUtf8Decode": True,
+}
+VISIBLE_VIEW_ALIAS_MUTATION_RULES = {
+    "acceptedInputType": "Uint8Array",
+    "sharedBackingBufferRequired": True,
+    "outsideViewMutationsAffectVisibleBytes": False,
+    "outsideViewMutationsAffectCandidate": False,
+    "insideViewMutationsDetected": True,
+    "detectionModes": ["CANDIDATE_COMMITMENT_CHANGED", "PARSER_REJECTION"],
+    "backingByteSequencesStored": False,
+    "visibleByteSequencesStored": False,
 }
 NORMALIZATION_KEY_DEFINITIONS = [
     ("FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"),
@@ -1386,6 +1397,115 @@ def evaluate_visible_view_truncation_corpus() -> tuple[list[dict[str, Any]], lis
     return controls, rejections
 
 
+def visible_view_alias_mutation_probe_envelope() -> bytes:
+    return b'{"transportMarker":"DRAFT/INACTIVE","candidate":{"aliasMutationProbe":0}}'
+
+
+def visible_view_alias_mutation_case(case_id: str, family: str, mutation_region: str, mutation_descriptor: str, mutation_backing_index: int, replacement_byte: int, expected_after_error: str | None = None) -> dict[str, Any]:
+    payload_bytes = visible_view_alias_mutation_probe_envelope()
+    prefix_bytes = b"!?"
+    suffix_bytes = b"#$"
+    backing_bytes = bytearray(prefix_bytes + payload_bytes + suffix_bytes)
+    serialized_view = memoryview(backing_bytes)[len(prefix_bytes):len(prefix_bytes) + len(payload_bytes)]
+    return {
+        "caseId": case_id,
+        "family": family,
+        "mutationRegion": mutation_region,
+        "mutationDescriptor": mutation_descriptor,
+        "backingBytes": backing_bytes,
+        "serializedView": serialized_view,
+        "byteOffset": len(prefix_bytes),
+        "byteLength": len(payload_bytes),
+        "mutationBackingIndex": mutation_backing_index,
+        "mutationViewIndex": mutation_backing_index - len(prefix_bytes) if mutation_region == "INSIDE_VIEW" else None,
+        "replacementByte": replacement_byte,
+        "expectedAfterError": expected_after_error,
+    }
+
+
+def build_visible_view_alias_mutation_corpus() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    payload_bytes = visible_view_alias_mutation_probe_envelope()
+    prefix_length = 2
+    candidate_digit_index = prefix_length + payload_bytes.index(b"0")
+    marker_initial_index = prefix_length + payload_bytes.index(b"DRAFT/INACTIVE")
+    final_delimiter_index = prefix_length + len(payload_bytes) - 1
+    outside_controls = [
+        visible_view_alias_mutation_case("OUTSIDE_PREFIX_ALIAS_MUTATION", "OUTSIDE_VIEW_ISOLATION", "OUTSIDE_PREFIX", "EXCLUDED_PREFIX_SENTINEL", 0, 0x7E),
+        visible_view_alias_mutation_case("OUTSIDE_SUFFIX_ALIAS_MUTATION", "OUTSIDE_VIEW_ISOLATION", "OUTSIDE_SUFFIX", "EXCLUDED_SUFFIX_SENTINEL", prefix_length + len(payload_bytes), 0x7E),
+        visible_view_alias_mutation_case("OUTSIDE_FINAL_SUFFIX_ALIAS_MUTATION", "OUTSIDE_VIEW_ISOLATION", "OUTSIDE_SUFFIX", "EXCLUDED_FINAL_SUFFIX_SENTINEL", prefix_length + len(payload_bytes) + 1, 0x7E),
+    ]
+    inside_detections = [
+        visible_view_alias_mutation_case("INSIDE_CANDIDATE_ALIAS_MUTATION", "INSIDE_VIEW_DETECTION", "INSIDE_VIEW", "CANDIDATE_DIGIT", candidate_digit_index, 0x31),
+        visible_view_alias_mutation_case("INSIDE_MARKER_ALIAS_MUTATION", "INSIDE_VIEW_DETECTION", "INSIDE_VIEW", "MARKER_INITIAL", marker_initial_index, 0x58, "INVALID_TRANSPORT_ENVELOPE"),
+        visible_view_alias_mutation_case("INSIDE_DELIMITER_ALIAS_MUTATION", "INSIDE_VIEW_DETECTION", "INSIDE_VIEW", "FINAL_DELIMITER", final_delimiter_index, 0x5D, "MALFORMED_JSON"),
+    ]
+    return outside_controls, inside_detections
+
+
+def evaluate_visible_view_alias_mutation_case(item: dict[str, Any]) -> dict[str, Any]:
+    before_backing_sha256 = hashlib.sha256(item["backingBytes"]).hexdigest()
+    before_visible_sha256 = hashlib.sha256(item["serializedView"]).hexdigest()
+    before_candidate, _metrics = parse_transport_envelope_bytes(bytes(item["serializedView"]))
+    before_candidate_commitment = canonical_sha256(before_candidate)
+    item["backingBytes"][item["mutationBackingIndex"]] = item["replacementByte"]
+    after_backing_sha256 = hashlib.sha256(item["backingBytes"]).hexdigest()
+    after_visible_sha256 = hashlib.sha256(item["serializedView"]).hexdigest()
+    after_candidate_commitment = None
+    observed_after_error = None
+    try:
+        after_candidate, _metrics = parse_transport_envelope_bytes(bytes(item["serializedView"]))
+        after_candidate_commitment = canonical_sha256(after_candidate)
+    except TransportError as error:
+        observed_after_error = str(error)
+    if observed_after_error != item["expectedAfterError"]:
+        raise TransportError(f'VISIBLE_VIEW_ALIAS_MUTATION_ERROR_DRIFT:{item["caseId"]}:{observed_after_error}')
+    visible_bytes_changed = before_visible_sha256 != after_visible_sha256
+    candidate_commitment_changed = before_candidate_commitment != after_candidate_commitment
+    parser_rejected_after = observed_after_error is not None
+    if item["mutationRegion"] == "INSIDE_VIEW":
+        if not visible_bytes_changed or (not candidate_commitment_changed and not parser_rejected_after):
+            raise TransportError(f'VISIBLE_VIEW_ALIAS_MUTATION_UNDETECTED:{item["caseId"]}')
+    elif visible_bytes_changed or candidate_commitment_changed or parser_rejected_after:
+        raise TransportError(f'VISIBLE_VIEW_ALIAS_MUTATION_ISOLATION_DRIFT:{item["caseId"]}')
+    return {
+        "caseId": item["caseId"],
+        "family": item["family"],
+        "inputType": "Uint8Array",
+        "mutationRegion": item["mutationRegion"],
+        "mutationDescriptor": item["mutationDescriptor"],
+        "backingByteLength": len(item["backingBytes"]),
+        "byteOffset": item["byteOffset"],
+        "byteLength": item["byteLength"],
+        "mutationBackingIndex": item["mutationBackingIndex"],
+        "mutationViewIndex": item["mutationViewIndex"],
+        "beforeBackingRepresentationSha256": before_backing_sha256,
+        "afterBackingRepresentationSha256": after_backing_sha256,
+        "beforeVisibleRepresentationSha256": before_visible_sha256,
+        "afterVisibleRepresentationSha256": after_visible_sha256,
+        "beforeCandidateCommitmentSha256": before_candidate_commitment,
+        "afterCandidateCommitmentSha256": after_candidate_commitment,
+        "expectedAfterError": item["expectedAfterError"],
+        "observedAfterError": observed_after_error,
+        "visibleBytesChanged": visible_bytes_changed,
+        "candidateCommitmentChanged": candidate_commitment_changed,
+        "parserRejectedAfter": parser_rejected_after,
+        "mutationDetected": item["mutationRegion"] == "INSIDE_VIEW",
+        "outsideViewIsolationPreserved": item["mutationRegion"] != "INSIDE_VIEW",
+        "runtimeBytesStored": False,
+        "runtimeCandidatesStored": False,
+        "aliasMutationEvaluated": True,
+        "campaignMutationEvaluated": False,
+    }
+
+
+def evaluate_visible_view_alias_mutation_corpus() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    outside_controls, inside_detections = build_visible_view_alias_mutation_corpus()
+    return (
+        [evaluate_visible_view_alias_mutation_case(item) for item in outside_controls],
+        [evaluate_visible_view_alias_mutation_case(item) for item in inside_detections],
+    )
+
+
 def expect(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
@@ -2097,6 +2217,69 @@ def verify_visible_view_truncation(root: Path, artifact_path: Path) -> tuple[lis
     }
 
 
+def verify_visible_view_alias_mutation(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        artifact = load_json(artifact_path)
+        base = load_json(root / BASE_NAME)
+        outside_controls, inside_detections = evaluate_visible_view_alias_mutation_corpus()
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read visible-view alias-mutation evidence: {error}"], {}
+    expect(artifact.get("vectorVersion") == 1, "visible-view alias-mutation version drift", errors)
+    expect(artifact.get("vectorId") == "iat-promotions-dlc-contention-composition-visible-view-alias-mutation-v1", "visible-view alias-mutation ID drift", errors)
+    expect(artifact.get("status") == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "visible-view alias-mutation HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": {"path": BASE_NAME, "canonicalSha256": canonical_sha256(base)},
+        "boundedParser": {"path": "settlement-contention-composition-transport-limits.mjs", "normalizedTextSha256": normalized_text_sha256(root / "settlement-contention-composition-transport-limits.mjs")},
+        "pythonVerifier": {"path": "verify-settlement-contention-transport-limits.py", "normalizedTextSha256": normalized_text_sha256(Path(__file__).resolve())},
+        "generator": {"path": "generate-settlement-contention-composition-visible-view-alias-mutation-audit.mjs", "normalizedTextSha256": normalized_text_sha256(root / "generate-settlement-contention-composition-visible-view-alias-mutation-audit.mjs")},
+    }
+    expect(artifact.get("sources") == expected_sources, "visible-view alias-mutation source drift", errors)
+    contract = artifact.get("contract", {})
+    expect(contract.get("mode") == "UINT8ARRAY_SHARED_BACKING_ALIAS_MUTATION", "visible-view alias-mutation mode drift", errors)
+    expect(contract.get("visibleViewAliasMutationRules") == VISIBLE_VIEW_ALIAS_MUTATION_RULES, "visible-view alias-mutation rules drift", errors)
+    expect(contract.get("outsideControlCount") == 3 and contract.get("insideDetectionCount") == 3, "visible-view alias-mutation counts drift", errors)
+    for field in ["outsidePrefixIsolationProven", "outsideSuffixIsolationProven", "insideCandidateChangeDetected", "insideMarkerChangeRejected", "insideDelimiterChangeRejected", "sharedBackingAliasesExercised"]:
+        expect(contract.get(field) is True, f"visible-view alias-mutation contract {field} drift", errors)
+    for field in ["backingByteSequencesStored", "visibleByteSequencesStored", "runtimeInputsStored", "runtimeCandidatesStored", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"visible-view alias-mutation contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "visible-view alias-mutation activation effect drift", errors)
+    expect(artifact.get("outsideControls") == outside_controls, "visible-view alias-mutation outside controls drift", errors)
+    expect(artifact.get("insideDetections") == inside_detections, "visible-view alias-mutation inside detections drift", errors)
+    summary = artifact.get("summary", {})
+    outside_commitment = canonical_sha256(outside_controls)
+    inside_commitment = canonical_sha256(inside_detections)
+    combined_commitment = canonical_sha256({"outsideControls": outside_controls, "insideDetections": inside_detections})
+    expect(summary.get("outsideControlCount") == "3" and summary.get("insideDetectionCount") == "3", "visible-view alias-mutation summary counts drift", errors)
+    expect(summary.get("allOutsideMutationsIsolated") is True and summary.get("allInsideMutationsDetected") is True, "visible-view alias-mutation summary outcome drift", errors)
+    expect(summary.get("outsideControlSetCommitmentSha256") == outside_commitment, "visible-view alias-mutation outside-set drift", errors)
+    expect(summary.get("insideDetectionSetCommitmentSha256") == inside_commitment, "visible-view alias-mutation inside-set drift", errors)
+    expect(summary.get("combinedReplayCommitmentSha256") == combined_commitment, "visible-view alias-mutation combined replay drift", errors)
+    for field in ["backingByteSequencesStored", "visibleByteSequencesStored", "runtimeInputsStored", "runtimeCandidatesStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"visible-view alias-mutation summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "visible-view alias-mutation summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "outsideControlCount": len(outside_controls),
+        "insideDetectionCount": len(inside_detections),
+        "outsideControlSetCommitmentSha256": outside_commitment,
+        "insideDetectionSetCommitmentSha256": inside_commitment,
+        "combinedReplayCommitmentSha256": combined_commitment,
+        "allOutsideMutationsIsolated": len(outside_controls) == 3,
+        "allInsideMutationsDetected": len(inside_detections) == 3,
+        "backingByteSequencesStored": False,
+        "visibleByteSequencesStored": False,
+        "runtimeInputsStored": False,
+        "runtimeCandidatesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Verify held bounded JSON transport evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -2113,6 +2296,7 @@ def main() -> int:
     modes.add_argument("--verify-utf8-bom-position-audit", action="store_true")
     modes.add_argument("--verify-byte-view-boundary-audit", action="store_true")
     modes.add_argument("--verify-visible-view-truncation-audit", action="store_true")
+    modes.add_argument("--verify-visible-view-alias-mutation-audit", action="store_true")
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
@@ -2136,6 +2320,8 @@ def main() -> int:
         artifact_name = BYTE_VIEW_BOUNDARY_ARTIFACT_NAME
     elif arguments.verify_visible_view_truncation_audit:
         artifact_name = VISIBLE_VIEW_TRUNCATION_ARTIFACT_NAME
+    elif arguments.verify_visible_view_alias_mutation_audit:
+        artifact_name = VISIBLE_VIEW_ALIAS_MUTATION_ARTIFACT_NAME
     else:
         artifact_name = ARTIFACT_NAME
     artifact = arguments.artifact.resolve() if arguments.artifact else root / artifact_name
@@ -2159,6 +2345,8 @@ def main() -> int:
         errors, report = verify_byte_view_boundary(root, artifact)
     elif arguments.verify_visible_view_truncation_audit:
         errors, report = verify_visible_view_truncation(root, artifact)
+    elif arguments.verify_visible_view_alias_mutation_audit:
+        errors, report = verify_visible_view_alias_mutation(root, artifact)
     else:
         errors, report = verify(root, artifact)
     if arguments.emit_json:
@@ -2166,7 +2354,7 @@ def main() -> int:
     elif errors:
         print("\n".join(errors), file=sys.stderr)
     else:
-        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else ("fatal-utf8-ingress" if arguments.verify_fatal_utf8_ingress_audit else ("utf8-boundary" if arguments.verify_utf8_boundary_audit else ("utf8-bom-position" if arguments.verify_utf8_bom_position_audit else ("byte-view-boundary" if arguments.verify_byte_view_boundary_audit else ("visible-view-truncation" if arguments.verify_visible_view_truncation_audit else "transport-limit")))))))))
+        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else ("fatal-utf8-ingress" if arguments.verify_fatal_utf8_ingress_audit else ("utf8-boundary" if arguments.verify_utf8_boundary_audit else ("utf8-bom-position" if arguments.verify_utf8_bom_position_audit else ("byte-view-boundary" if arguments.verify_byte_view_boundary_audit else ("visible-view-truncation" if arguments.verify_visible_view_truncation_audit else ("visible-view-alias-mutation" if arguments.verify_visible_view_alias_mutation_audit else "transport-limit"))))))))))
         print(f"Independent {label} replay passed: {report['combinedReplayCommitmentSha256']}")
     return 2 if errors else 0
 
