@@ -65,17 +65,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-01T14:24:40.8977380Z",
-    "status": "awaiting_post",
-    "imageNumbers": [641, 642, 644],
-    "countries": ["Romania", "Somalia"],
-    "assets": [
-      {"file": "641-romania-corvin-castle-cipher.png", "sha256": "51b242c826fbb30a1cc02fdf75045957fdb08dd640d2ba9bed3bbc28e00f3193"},
-      {"file": "642-romania-danube-delta-extraction.png", "sha256": "162e1992c833ffd781a57361b631852b298edc24bf0147c6812650478ae51557"},
-      {"file": "644-somalia-mogadishu-oceanfront-arches-intercept.png", "sha256": "f0a34d366bbe9705919fdb9674b6bd2ea3e5016ced0472635a7985ab57be2a21"}
-    ]
-  },
+  "pendingPost": null,
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
@@ -2407,6 +2397,17 @@
         {"file": "638-chile-torres-del-paine-pehoe-extraction.png", "sha256": "907eda6d395f6ff3b6932d5d15614f92a15a4aae537d214033da71d277b583dc"},
         {"file": "639-chile-valparaiso-pacific-night-relay.png", "sha256": "5bcfd18b8d645654bd0d999975d14de4c14b8e01ed8808fcadcc35a581ff5902"},
         {"file": "640-romania-bucharest-athenaeum-intercept.png", "sha256": "f4a100596f7806f7cc0fe4210ec20ab9a1c736f55c9524fa178acabd214dda26"}
+      ]
+    },
+    {
+      "postedAt": "2026-08-01T14:29:07.9573411Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083560372330496256",
+      "imageNumbers": [641, 642, 644],
+      "countries": ["Romania", "Somalia"],
+      "assets": [
+        {"file": "641-romania-corvin-castle-cipher.png", "sha256": "51b242c826fbb30a1cc02fdf75045957fdb08dd640d2ba9bed3bbc28e00f3193"},
+        {"file": "642-romania-danube-delta-extraction.png", "sha256": "162e1992c833ffd781a57361b631852b298edc24bf0147c6812650478ae51557"},
+        {"file": "644-somalia-mogadishu-oceanfront-arches-intercept.png", "sha256": "f0a34d366bbe9705919fdb9674b6bd2ea3e5016ced0472635a7985ab57be2a21"}
       ]
     }
   ]
