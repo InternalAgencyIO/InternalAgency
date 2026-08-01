@@ -1057,6 +1057,13 @@ rejected and regenerated.
 | **Freetown Lumley Beach Atlantic Intercept**<br><img src="776-sierra-leone-freetown-lumley-beach-city-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking green-white-blue light keys into a crystal Atlantic prism above Freetown's Lumley Beach and hillside skyline"> | **Freetown Railway Museum Brass Cipher**<br><img src="777-sierra-leone-railway-museum-brass-cipher.png" width="420" alt="The trio sealing a fictional archive inside a brass-and-crystal capsule among the restored locomotives of Sierra Leone National Railway Museum"> |
 | **Tiwai Island Rainforest Data Extraction**<br><img src="778-sierra-leone-tiwai-island-rainforest-extraction.png" width="420" alt="The trio restoring a lagoon-blue biodiversity beacon above Tiwai Island's rainforest and Moa River channels"> | **Lungi Ferry Harbor Moonline Relay**<br><img src="779-sierra-leone-lungi-ferry-harbor-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a green-blue-silver estuary relay above Tagrin-Lungi ferry harbor at blue hour"> |
 
+## World Series - Africa - Batch 190: Togo
+
+| | |
+|---|---|
+| **Lomé Seafront Gulf-Light Intercept**<br><img src="780-togo-lome-seafront-gulf-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking green-gold-red light keys into a white-and-gold Gulf prism above Lomé's Boulevard du Mono seafront"> | **Palais de Lomé Garden Gold Cipher**<br><img src="781-togo-palais-de-lome-garden-cipher.png" width="420" alt="The trio sealing a fictional archive inside a white crystal capsule in the cultural gardens of the Palais de Lomé"> |
+| **Fazao-Malfakassa Mountain Data Extraction**<br><img src="782-togo-fazao-malfakassa-mountain-extraction.png" width="420" alt="The trio restoring an Atlantic-blue habitat beacon above Fazao-Malfakassa's forested Atakora ridges"> | **Lomé Port Golden Night Relay**<br><img src="783-togo-lome-port-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a green-gold-red Gulf relay above the Port of Lomé at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
