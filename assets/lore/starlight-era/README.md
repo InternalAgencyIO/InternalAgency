@@ -952,6 +952,13 @@ rejected and regenerated.
 | **Dubai Museum of the Future Prism Intercept**<br><img src="716-united-arab-emirates-dubai-museum-future-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking ruby, emerald and pearl light keys into a civic compass above Dubai's Museum of the Future corridor at dawn"> | **Al Ain Al Jahili Fort Amber Cipher**<br><img src="717-united-arab-emirates-al-ain-al-jahili-fort-cipher.png" width="420" alt="The trio sealing an amber archive prism beside Al Jahili Fort's ochre towers, crenellated walls and date palms in Al Ain"> |
 | **Liwa Crescent-Dune Light Extraction**<br><img src="718-united-arab-emirates-liwa-dunes-extraction.png" width="420" alt="The trio restoring a pearl-and-gold environmental beacon above Liwa's copper crescent dunes and distant oasis edge"> | **Dubai Marina Pearl Moonline Relay**<br><img src="719-united-arab-emirates-dubai-marina-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-emerald-pearl relay above Dubai Marina's illuminated waterfront canyon at blue hour"> |
 
+## World Series - North America - Batch 175: Cuba
+
+| | |
+|---|---|
+| **Havana Malecón Wave Intercept**<br><img src="720-cuba-havana-malecon-wave-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking three cobalt light keys into a ruby-and-pearl wave beacon above Havana's Malecón at sunrise"> | **Cienfuegos Palacio de Valle Prism Cipher**<br><img src="721-cuba-cienfuegos-palacio-valle-cipher.png" width="420" alt="The trio sealing a recovered archive inside a completed bay-light capsule beside Cienfuegos's ornate Palacio de Valle"> |
+| **Viñales Mogote Data Extraction**<br><img src="722-cuba-vinales-mogote-data-extraction.png" width="420" alt="The trio restoring a cobalt-and-pearl habitat beacon above Viñales Valley's green mogotes, red-earth fields and royal palms"> | **Varadero Moonline Relay Finale**<br><img src="723-cuba-varadero-moonline-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-cobalt-pearl sea compass above Varadero's moonlit turquoise shoreline"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
