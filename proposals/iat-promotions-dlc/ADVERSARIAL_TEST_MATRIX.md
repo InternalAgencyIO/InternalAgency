@@ -324,10 +324,11 @@ security audit or deployment approval.
 | `ArrayBuffer`, `DataView`, string, or numeric array input is coerced into bytes | four wrong-type byte-view rejections | Every wrong type rejects as `INVALID_BYTE_VIEW` before UTF-8 decoding, JSON parsing, or candidate production |
 | A truncated `Uint8Array` view borrows valid JSON bytes outside its bounds | full-view control plus empty, prefix-only, suffix-only, and one-byte-short views | The full view accepts; all four truncations decode successfully then reject as `MALFORMED_JSON` before candidate production in Node and Python |
 | A shared backing-buffer mutation bypasses visible-view integrity | three outside-view controls and three inside-view detections | Excluded prefix/suffix mutations change only the backing hash; candidate, marker, and delimiter mutations inside the view change the candidate commitment or reject parsing in Node and Python |
+| A caller mutates input while parsing, or supplies a concurrently mutable shared view | three immutable-copy controls plus full, bounded, and empty shared-view rejections | Ordinary visible bytes are copied before decode; later inside/outside alias mutations cannot change the snapshot or its candidate, while every `SharedArrayBuffer`-backed view rejects as `SHARED_BYTE_VIEW_UNSAFE` before snapshot, UTF-8, JSON, or candidate work |
 
 ## Next matrix expansion
 
-- define a compact immutable-input snapshot contract for transport parsing,
-  including explicit rejection or safe copying of `SharedArrayBuffer`-backed
-  views before decode. Preserve runtime-only bytes and candidates and every
-  network, wallet, review, deployment, and activation HOLD.
+- add a compact detached-`ArrayBuffer` view corpus proving detached full,
+  bounded, and empty `Uint8Array` inputs reject before decode without
+  collapsing into valid empty input. Preserve runtime-only bytes and candidates
+  and every network, wallet, review, deployment, and activation HOLD.

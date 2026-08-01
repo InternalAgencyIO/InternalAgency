@@ -31,6 +31,7 @@ UTF8_BOM_POSITION_ARTIFACT_NAME = "settlement-contention-composition-utf8-bom-po
 BYTE_VIEW_BOUNDARY_ARTIFACT_NAME = "settlement-contention-composition-byte-view-boundary-audit.v1.json"
 VISIBLE_VIEW_TRUNCATION_ARTIFACT_NAME = "settlement-contention-composition-visible-view-truncation-audit.v1.json"
 VISIBLE_VIEW_ALIAS_MUTATION_ARTIFACT_NAME = "settlement-contention-composition-visible-view-alias-mutation-audit.v1.json"
+INPUT_SNAPSHOT_ARTIFACT_NAME = "settlement-contention-composition-input-snapshot-audit.v1.json"
 BASE_NAME = "settlement-contention-composition-vectors.v1.json"
 TRANSPORT_MARKER = "DRAFT/INACTIVE"
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
@@ -141,6 +142,16 @@ VISIBLE_VIEW_ALIAS_MUTATION_RULES = {
     "detectionModes": ["CANDIDATE_COMMITMENT_CHANGED", "PARSER_REJECTION"],
     "backingByteSequencesStored": False,
     "visibleByteSequencesStored": False,
+}
+INPUT_SNAPSHOT_RULES = {
+    "acceptedInputType": "Uint8Array",
+    "ordinaryArrayBufferViewAccepted": True,
+    "ordinaryInputCopiedBeforeDecode": True,
+    "snapshotAliasesInput": False,
+    "sharedArrayBufferViewAccepted": False,
+    "sharedArrayBufferError": "SHARED_BYTE_VIEW_UNSAFE",
+    "sharedRejectionPrecedesUtf8Decoding": True,
+    "snapshotByteSequencesStored": False,
 }
 NORMALIZATION_KEY_DEFINITIONS = [
     ("FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"),
@@ -1506,6 +1517,151 @@ def evaluate_visible_view_alias_mutation_corpus() -> tuple[list[dict[str, Any]],
     )
 
 
+def input_snapshot_probe_envelope() -> bytes:
+    return b'{"transportMarker":"DRAFT/INACTIVE","candidate":{"inputSnapshotProbe":0}}'
+
+
+def snapshot_transport_byte_view(serialized_view: Any, shared: bool = False) -> bytes:
+    if shared:
+        raise TransportError("SHARED_BYTE_VIEW_UNSAFE")
+    if not isinstance(serialized_view, (bytes, bytearray, memoryview)):
+        raise TransportError("INVALID_BYTE_VIEW")
+    return bytes(serialized_view)
+
+
+def input_snapshot_control(case_id: str, mutation_region: str, mutation_descriptor: str, mutation_backing_index: int, replacement_byte: int, expected_live_error: str | None = None) -> dict[str, Any]:
+    payload_bytes = input_snapshot_probe_envelope()
+    prefix_bytes = b"!?"
+    suffix_bytes = b"#$"
+    backing_bytes = bytearray(prefix_bytes + payload_bytes + suffix_bytes)
+    serialized_view = memoryview(backing_bytes)[len(prefix_bytes):len(prefix_bytes) + len(payload_bytes)]
+    return {
+        "caseId": case_id,
+        "mutationRegion": mutation_region,
+        "mutationDescriptor": mutation_descriptor,
+        "backingBytes": backing_bytes,
+        "serializedView": serialized_view,
+        "byteOffset": len(prefix_bytes),
+        "byteLength": len(payload_bytes),
+        "mutationBackingIndex": mutation_backing_index,
+        "mutationViewIndex": mutation_backing_index - len(prefix_bytes) if mutation_region == "INSIDE_VIEW" else None,
+        "replacementByte": replacement_byte,
+        "expectedLiveError": expected_live_error,
+    }
+
+
+def build_input_snapshot_corpus() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    payload_bytes = input_snapshot_probe_envelope()
+    prefix_length = 2
+    candidate_digit_index = prefix_length + payload_bytes.index(b"0")
+    marker_initial_index = prefix_length + payload_bytes.index(b"DRAFT/INACTIVE")
+    snapshot_controls = [
+        input_snapshot_control("SNAPSHOT_SURVIVES_CANDIDATE_ALIAS_MUTATION", "INSIDE_VIEW", "CANDIDATE_DIGIT", candidate_digit_index, 0x31),
+        input_snapshot_control("SNAPSHOT_SURVIVES_MARKER_ALIAS_MUTATION", "INSIDE_VIEW", "MARKER_INITIAL", marker_initial_index, 0x58, "INVALID_TRANSPORT_ENVELOPE"),
+        input_snapshot_control("SNAPSHOT_IGNORES_EXCLUDED_PREFIX_MUTATION", "OUTSIDE_PREFIX", "EXCLUDED_PREFIX_SENTINEL", 0, 0x7E),
+    ]
+    shared_rejections = [
+        {"caseId": "SHARED_FULL_VIEW_REJECTED", "viewDescriptor": "FULL_VIEW", "backingByteLength": len(payload_bytes), "byteOffset": 0, "byteLength": len(payload_bytes)},
+        {"caseId": "SHARED_BOUNDED_VIEW_REJECTED", "viewDescriptor": "BOUNDED_VIEW", "backingByteLength": len(payload_bytes) + 4, "byteOffset": 2, "byteLength": len(payload_bytes)},
+        {"caseId": "SHARED_EMPTY_VIEW_REJECTED", "viewDescriptor": "EMPTY_VIEW", "backingByteLength": len(payload_bytes), "byteOffset": 0, "byteLength": 0},
+    ]
+    return snapshot_controls, shared_rejections
+
+
+def evaluate_input_snapshot_control(item: dict[str, Any]) -> dict[str, Any]:
+    before_live_sha256 = hashlib.sha256(item["serializedView"]).hexdigest()
+    snapshot = snapshot_transport_byte_view(item["serializedView"])
+    snapshot_sha256 = hashlib.sha256(snapshot).hexdigest()
+    snapshot_candidate, _metrics = parse_transport_envelope_bytes(snapshot)
+    snapshot_candidate_commitment = canonical_sha256(snapshot_candidate)
+    item["backingBytes"][item["mutationBackingIndex"]] = item["replacementByte"]
+    after_live_sha256 = hashlib.sha256(item["serializedView"]).hexdigest()
+    after_snapshot_sha256 = hashlib.sha256(snapshot).hexdigest()
+    after_snapshot_candidate, _metrics = parse_transport_envelope_bytes(snapshot)
+    after_snapshot_candidate_commitment = canonical_sha256(after_snapshot_candidate)
+    after_live_candidate_commitment = None
+    observed_live_error = None
+    try:
+        after_live_candidate, _metrics = parse_transport_envelope_bytes(bytes(item["serializedView"]))
+        after_live_candidate_commitment = canonical_sha256(after_live_candidate)
+    except TransportError as error:
+        observed_live_error = str(error)
+    if observed_live_error != item["expectedLiveError"]:
+        raise TransportError(f'INPUT_SNAPSHOT_LIVE_ERROR_DRIFT:{item["caseId"]}:{observed_live_error}')
+    live_input_changed = before_live_sha256 != after_live_sha256
+    live_candidate_changed = snapshot_candidate_commitment != after_live_candidate_commitment
+    snapshot_bytes_preserved = snapshot_sha256 == after_snapshot_sha256
+    snapshot_candidate_preserved = snapshot_candidate_commitment == after_snapshot_candidate_commitment
+    if not snapshot_bytes_preserved or not snapshot_candidate_preserved:
+        raise TransportError(f'INPUT_SNAPSHOT_COPY_DRIFT:{item["caseId"]}')
+    if item["mutationRegion"] == "INSIDE_VIEW" and (not live_input_changed or (not live_candidate_changed and observed_live_error is None)):
+        raise TransportError(f'INPUT_SNAPSHOT_INSIDE_MUTATION_UNDETECTED:{item["caseId"]}')
+    if item["mutationRegion"] != "INSIDE_VIEW" and (live_input_changed or live_candidate_changed or observed_live_error is not None):
+        raise TransportError(f'INPUT_SNAPSHOT_OUTSIDE_ISOLATION_DRIFT:{item["caseId"]}')
+    return {
+        "caseId": item["caseId"],
+        "inputType": "Uint8Array",
+        "backingType": "ArrayBuffer",
+        "mutationRegion": item["mutationRegion"],
+        "mutationDescriptor": item["mutationDescriptor"],
+        "backingByteLength": len(item["backingBytes"]),
+        "byteOffset": item["byteOffset"],
+        "byteLength": item["byteLength"],
+        "mutationBackingIndex": item["mutationBackingIndex"],
+        "mutationViewIndex": item["mutationViewIndex"],
+        "beforeLiveRepresentationSha256": before_live_sha256,
+        "afterLiveRepresentationSha256": after_live_sha256,
+        "snapshotRepresentationSha256": snapshot_sha256,
+        "afterSnapshotRepresentationSha256": after_snapshot_sha256,
+        "snapshotCandidateCommitmentSha256": snapshot_candidate_commitment,
+        "afterSnapshotCandidateCommitmentSha256": after_snapshot_candidate_commitment,
+        "afterLiveCandidateCommitmentSha256": after_live_candidate_commitment,
+        "expectedLiveError": item["expectedLiveError"],
+        "observedLiveError": observed_live_error,
+        "liveInputChanged": live_input_changed,
+        "liveCandidateChanged": live_candidate_changed,
+        "snapshotBytesPreserved": snapshot_bytes_preserved,
+        "snapshotCandidatePreserved": snapshot_candidate_preserved,
+        "snapshotAliasesInput": False,
+        "runtimeBytesStored": False,
+        "runtimeCandidatesStored": False,
+        "campaignMutationEvaluated": False,
+    }
+
+
+def evaluate_input_snapshot_corpus() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    snapshot_inputs, shared_inputs = build_input_snapshot_corpus()
+    snapshot_controls = [evaluate_input_snapshot_control(item) for item in snapshot_inputs]
+    shared_rejections = []
+    for item in shared_inputs:
+        observed_error = None
+        try:
+            snapshot_transport_byte_view(b"", shared=True)
+        except TransportError as error:
+            observed_error = str(error)
+        if observed_error != "SHARED_BYTE_VIEW_UNSAFE":
+            raise TransportError(f'INPUT_SNAPSHOT_SHARED_REJECTION_DRIFT:{item["caseId"]}:{observed_error}')
+        shared_rejections.append({
+            "caseId": item["caseId"],
+            "inputType": "Uint8Array",
+            "backingType": "SharedArrayBuffer",
+            "viewDescriptor": item["viewDescriptor"],
+            "backingByteLength": item["backingByteLength"],
+            "byteOffset": item["byteOffset"],
+            "byteLength": item["byteLength"],
+            "expectedError": "SHARED_BYTE_VIEW_UNSAFE",
+            "observedError": observed_error,
+            "snapshotCreated": False,
+            "utf8DecodingAttempted": False,
+            "jsonParsingAttempted": False,
+            "candidateProduced": False,
+            "runtimeBytesStored": False,
+            "runtimeCandidatesStored": False,
+            "campaignMutationEvaluated": False,
+        })
+    return snapshot_controls, shared_rejections
+
+
 def expect(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
@@ -2280,6 +2436,70 @@ def verify_visible_view_alias_mutation(root: Path, artifact_path: Path) -> tuple
     }
 
 
+def verify_input_snapshot(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        artifact = load_json(artifact_path)
+        base = load_json(root / BASE_NAME)
+        snapshot_controls, shared_rejections = evaluate_input_snapshot_corpus()
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read input snapshot evidence: {error}"], {}
+    expect(artifact.get("vectorVersion") == 1, "input snapshot version drift", errors)
+    expect(artifact.get("vectorId") == "iat-promotions-dlc-contention-composition-input-snapshot-v1", "input snapshot ID drift", errors)
+    expect(artifact.get("status") == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "input snapshot HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": {"path": BASE_NAME, "canonicalSha256": canonical_sha256(base)},
+        "boundedParser": {"path": "settlement-contention-composition-transport-limits.mjs", "normalizedTextSha256": normalized_text_sha256(root / "settlement-contention-composition-transport-limits.mjs")},
+        "pythonVerifier": {"path": "verify-settlement-contention-transport-limits.py", "normalizedTextSha256": normalized_text_sha256(Path(__file__).resolve())},
+        "generator": {"path": "generate-settlement-contention-composition-input-snapshot-audit.mjs", "normalizedTextSha256": normalized_text_sha256(root / "generate-settlement-contention-composition-input-snapshot-audit.mjs")},
+    }
+    expect(artifact.get("sources") == expected_sources, "input snapshot source drift", errors)
+    contract = artifact.get("contract", {})
+    expect(contract.get("mode") == "IMMUTABLE_VISIBLE_BYTE_SNAPSHOT", "input snapshot mode drift", errors)
+    expect(contract.get("inputSnapshotRules") == INPUT_SNAPSHOT_RULES, "input snapshot rules drift", errors)
+    expect(contract.get("snapshotControlCount") == 3 and contract.get("sharedRejectionCount") == 3, "input snapshot counts drift", errors)
+    for field in ["ordinaryViewsCopiedBeforeDecode", "insideAliasMutationsCannotChangeSnapshot", "outsideAliasMutationsCannotChangeSnapshot", "sharedViewsRejectedBeforeDecode"]:
+        expect(contract.get(field) is True, f"input snapshot contract {field} drift", errors)
+    for field in ["backingByteSequencesStored", "visibleByteSequencesStored", "snapshotByteSequencesStored", "runtimeInputsStored", "runtimeCandidatesStored", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"input snapshot contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "input snapshot activation effect drift", errors)
+    expect(artifact.get("snapshotControls") == snapshot_controls, "input snapshot controls drift", errors)
+    expect(artifact.get("sharedRejections") == shared_rejections, "input snapshot shared rejections drift", errors)
+    summary = artifact.get("summary", {})
+    control_commitment = canonical_sha256(snapshot_controls)
+    rejection_commitment = canonical_sha256(shared_rejections)
+    combined_commitment = canonical_sha256({"snapshotControls": snapshot_controls, "sharedRejections": shared_rejections})
+    expect(summary.get("snapshotControlCount") == "3" and summary.get("sharedRejectionCount") == "3", "input snapshot summary counts drift", errors)
+    expect(summary.get("allSnapshotsImmutableAfterCopy") is True and summary.get("allSharedViewsRejectedBeforeDecode") is True, "input snapshot summary outcome drift", errors)
+    expect(summary.get("snapshotControlSetCommitmentSha256") == control_commitment, "input snapshot control-set drift", errors)
+    expect(summary.get("sharedRejectionSetCommitmentSha256") == rejection_commitment, "input snapshot rejection-set drift", errors)
+    expect(summary.get("combinedReplayCommitmentSha256") == combined_commitment, "input snapshot combined replay drift", errors)
+    for field in ["backingByteSequencesStored", "visibleByteSequencesStored", "snapshotByteSequencesStored", "runtimeInputsStored", "runtimeCandidatesStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"input snapshot summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "input snapshot summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "snapshotControlCount": len(snapshot_controls),
+        "sharedRejectionCount": len(shared_rejections),
+        "snapshotControlSetCommitmentSha256": control_commitment,
+        "sharedRejectionSetCommitmentSha256": rejection_commitment,
+        "combinedReplayCommitmentSha256": combined_commitment,
+        "allSnapshotsImmutableAfterCopy": len(snapshot_controls) == 3,
+        "allSharedViewsRejectedBeforeDecode": len(shared_rejections) == 3,
+        "backingByteSequencesStored": False,
+        "visibleByteSequencesStored": False,
+        "snapshotByteSequencesStored": False,
+        "runtimeInputsStored": False,
+        "runtimeCandidatesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Verify held bounded JSON transport evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -2297,6 +2517,7 @@ def main() -> int:
     modes.add_argument("--verify-byte-view-boundary-audit", action="store_true")
     modes.add_argument("--verify-visible-view-truncation-audit", action="store_true")
     modes.add_argument("--verify-visible-view-alias-mutation-audit", action="store_true")
+    modes.add_argument("--verify-input-snapshot-audit", action="store_true")
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
@@ -2322,6 +2543,8 @@ def main() -> int:
         artifact_name = VISIBLE_VIEW_TRUNCATION_ARTIFACT_NAME
     elif arguments.verify_visible_view_alias_mutation_audit:
         artifact_name = VISIBLE_VIEW_ALIAS_MUTATION_ARTIFACT_NAME
+    elif arguments.verify_input_snapshot_audit:
+        artifact_name = INPUT_SNAPSHOT_ARTIFACT_NAME
     else:
         artifact_name = ARTIFACT_NAME
     artifact = arguments.artifact.resolve() if arguments.artifact else root / artifact_name
@@ -2347,6 +2570,8 @@ def main() -> int:
         errors, report = verify_visible_view_truncation(root, artifact)
     elif arguments.verify_visible_view_alias_mutation_audit:
         errors, report = verify_visible_view_alias_mutation(root, artifact)
+    elif arguments.verify_input_snapshot_audit:
+        errors, report = verify_input_snapshot(root, artifact)
     else:
         errors, report = verify(root, artifact)
     if arguments.emit_json:
@@ -2354,7 +2579,7 @@ def main() -> int:
     elif errors:
         print("\n".join(errors), file=sys.stderr)
     else:
-        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else ("fatal-utf8-ingress" if arguments.verify_fatal_utf8_ingress_audit else ("utf8-boundary" if arguments.verify_utf8_boundary_audit else ("utf8-bom-position" if arguments.verify_utf8_bom_position_audit else ("byte-view-boundary" if arguments.verify_byte_view_boundary_audit else ("visible-view-truncation" if arguments.verify_visible_view_truncation_audit else ("visible-view-alias-mutation" if arguments.verify_visible_view_alias_mutation_audit else "transport-limit"))))))))))
+        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else ("key-collision" if arguments.verify_key_collision_audit else ("marker-value" if arguments.verify_marker_value_audit else ("fatal-utf8-ingress" if arguments.verify_fatal_utf8_ingress_audit else ("utf8-boundary" if arguments.verify_utf8_boundary_audit else ("utf8-bom-position" if arguments.verify_utf8_bom_position_audit else ("byte-view-boundary" if arguments.verify_byte_view_boundary_audit else ("visible-view-truncation" if arguments.verify_visible_view_truncation_audit else ("visible-view-alias-mutation" if arguments.verify_visible_view_alias_mutation_audit else ("input-snapshot" if arguments.verify_input_snapshot_audit else "transport-limit")))))))))))
         print(f"Independent {label} replay passed: {report['combinedReplayCommitmentSha256']}")
     return 2 if errors else 0
 

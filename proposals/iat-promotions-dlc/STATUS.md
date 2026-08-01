@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-08-01 04:32 UTC
+Updated: 2026-08-01 04:50 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `dcbab11`
+Previously published public increment: `fc5c5b7`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -602,8 +602,19 @@ This status file deliberately does not claim a self-referential commit hash.
   `36fada8a538372117c75f3bba800840b2b6a1187bc0940ad9e634634aece868c`,
   and combined replay commitment
   `d22fbc58baff02839d8074f475e9347ad702a04cf8727f21dca457c31565b8cd`.
+- three ordinary bounded-view controls proving a pre-decode copy preserves
+  bytes and candidate meaning after candidate, marker, and excluded-prefix
+  alias mutations;
+- full, bounded, and empty `SharedArrayBuffer`-backed views rejected as
+  `SHARED_BYTE_VIEW_UNSAFE` before snapshot, UTF-8, JSON, or candidate work;
+- immutable-input snapshot control-set commitment
+  `911a9435376122ebd6344df9db9532528c50ad8ed5c3ee2bca8e135076ac9fc0`,
+  shared-rejection commitment
+  `0648ff010573042b6a8c1a61c5839654b514af85adc408bf9654988a6a767d3f`,
+  and combined replay commitment
+  `18c32f8123725d75976f27737e193409f5848a305766646f3d6b37300ce88b69`.
 
-Current proposal-only result: **498 tests passed**. This consists of 28 protected
+Current proposal-only result: **510 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -751,6 +762,11 @@ rule, shared-alias proof, excluded-prefix, excluded-suffix, candidate-change,
 marker-rejection, delimiter-rejection, compact-publication, independent Python
 parity, tamper-exit, source-safety, and manifest-coverage tests complete the
 shared-backing mutation suite.
+Twelve immutable-input snapshot deterministic regeneration, fixed copy rule,
+independent-buffer, candidate and marker mutation isolation, excluded-prefix
+control, full/bounded/empty shared-view rejection, pre-decode error-boundary,
+compact-publication, independent Python parity, tamper-exit, source-safety, and
+manifest-coverage tests complete the immutable parser-input suite.
 
 ## Current guarantees of the reference model
 
@@ -782,8 +798,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Define a compact immutable-input snapshot contract for transport parsing,
-including explicit rejection or safe copying of `SharedArrayBuffer`-backed
-views before decode. Keep bytes and candidates runtime-only; do not contact a
-local validator, Devnet, or Mainnet; preserve every network, wallet, review,
+Add a compact detached-`ArrayBuffer` view corpus proving detached full, bounded,
+and empty `Uint8Array` inputs reject before decode without collapsing into valid
+empty input. Keep bytes and candidates runtime-only; do not contact a local
+validator, Devnet, or Mainnet; preserve every network, wallet, review,
 deployment, and activation HOLD.

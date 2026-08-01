@@ -100,6 +100,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Byte-view offset, length, and input-type audit](./SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md)
 - [Visible-view truncation audit](./SETTLEMENT_CONTENTION_VISIBLE_VIEW_TRUNCATION_AUDIT.md)
 - [Visible-view alias-mutation audit](./SETTLEMENT_CONTENTION_VISIBLE_VIEW_ALIAS_MUTATION_AUDIT.md)
+- [Immutable-input snapshot audit](./SETTLEMENT_CONTENTION_INPUT_SNAPSHOT_AUDIT.md)
 - [Compact settlement contention vectors](./settlement-contention-vectors.v1.json)
 - [Compact settlement contention mutation vectors](./settlement-contention-mutation-vectors.v1.json)
 - [Compact settlement contention composition vectors](./settlement-contention-composition-vectors.v1.json)
@@ -119,6 +120,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Compact byte-view boundary audit](./settlement-contention-composition-byte-view-boundary-audit.v1.json)
 - [Compact visible-view truncation audit](./settlement-contention-composition-visible-view-truncation-audit.v1.json)
 - [Compact visible-view alias-mutation audit](./settlement-contention-composition-visible-view-alias-mutation-audit.v1.json)
+- [Compact immutable-input snapshot audit](./settlement-contention-composition-input-snapshot-audit.v1.json)
 - [Closed settlement-contention evidence schema](./settlement-contention-evidence.schema.v1.json)
 - [Settlement contention vector generator](./generate-settlement-contention-vectors.mjs)
 - [Settlement contention mutation generator](./generate-settlement-contention-mutation-vectors.mjs)
@@ -138,6 +140,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Byte-view boundary audit generator](./generate-settlement-contention-composition-byte-view-boundary-audit.mjs)
 - [Visible-view truncation audit generator](./generate-settlement-contention-composition-visible-view-truncation-audit.mjs)
 - [Visible-view alias-mutation audit generator](./generate-settlement-contention-composition-visible-view-alias-mutation-audit.mjs)
+- [Immutable-input snapshot audit generator](./generate-settlement-contention-composition-input-snapshot-audit.mjs)
 - [Settlement contention vector validator](./validate-settlement-contention-vectors.mjs)
 - [Settlement contention mutation validator](./validate-settlement-contention-mutation-vectors.mjs)
 - [Settlement contention composition validator](./validate-settlement-contention-composition-vectors.mjs)
@@ -156,6 +159,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Byte-view boundary audit validator](./validate-settlement-contention-composition-byte-view-boundary-audit.mjs)
 - [Visible-view truncation audit validator](./validate-settlement-contention-composition-visible-view-truncation-audit.mjs)
 - [Visible-view alias-mutation audit validator](./validate-settlement-contention-composition-visible-view-alias-mutation-audit.mjs)
+- [Immutable-input snapshot audit validator](./validate-settlement-contention-composition-input-snapshot-audit.mjs)
 - [Independent zero-dependency Python contention replay](./verify-settlement-contention-vectors.py)
 - [Independent zero-dependency Python escape replay](./verify-settlement-contention-escape-representations.py)
 - [Independent zero-dependency Python bounded-transport replay](./verify-settlement-contention-transport-limits.py)
@@ -274,6 +278,7 @@ node proposals/iat-promotions-dlc/generate-settlement-contention-composition-utf
 node proposals/iat-promotions-dlc/generate-settlement-contention-composition-byte-view-boundary-audit.mjs --write
 node proposals/iat-promotions-dlc/generate-settlement-contention-composition-visible-view-truncation-audit.mjs --write
 node proposals/iat-promotions-dlc/generate-settlement-contention-composition-visible-view-alias-mutation-audit.mjs --write
+node proposals/iat-promotions-dlc/generate-settlement-contention-composition-input-snapshot-audit.mjs --write
 node proposals/iat-promotions-dlc/generate-review-manifest.mjs --write
 node proposals/iat-promotions-dlc/validate-policy.mjs
 node proposals/iat-promotions-dlc/validate-program-interface.mjs
@@ -316,6 +321,7 @@ node proposals/iat-promotions-dlc/validate-settlement-contention-composition-utf
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-byte-view-boundary-audit.mjs
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-visible-view-truncation-audit.mjs
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-visible-view-alias-mutation-audit.mjs
+node proposals/iat-promotions-dlc/validate-settlement-contention-composition-input-snapshot-audit.mjs
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-mutation-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-vectors --json
@@ -334,6 +340,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limit
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-byte-view-boundary-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-visible-view-truncation-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-visible-view-alias-mutation-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-input-snapshot-audit --json
 python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-differential-vectors --format json
@@ -395,6 +402,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-utf8-bom-po
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-byte-view-boundary-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-visible-view-truncation-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-visible-view-alias-mutation-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-input-snapshot-audit.test.mjs
 ```
 
 ## Deliberate isolation

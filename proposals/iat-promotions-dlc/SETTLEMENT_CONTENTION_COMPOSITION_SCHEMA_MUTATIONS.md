@@ -119,3 +119,9 @@ The shared-buffer alias-mutation companion
 proves excluded backing-byte mutations do not alter the visible representation
 or candidate commitment, while candidate, marker, and delimiter mutations
 inside the same aliased view change a commitment or reject parsing.
+
+The immutable-input snapshot companion
+[`SETTLEMENT_CONTENTION_INPUT_SNAPSHOT_AUDIT.md`](./SETTLEMENT_CONTENTION_INPUT_SNAPSHOT_AUDIT.md)
+copies an ordinary bounded byte view before decoding and rejects every
+`SharedArrayBuffer`-backed view before snapshot creation. Mutating the live
+alias after the copy cannot change the snapshot or its candidate.

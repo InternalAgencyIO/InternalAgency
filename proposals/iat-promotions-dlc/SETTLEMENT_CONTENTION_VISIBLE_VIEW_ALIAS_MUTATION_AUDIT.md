@@ -23,6 +23,11 @@ bytes, runtime inputs, and runtime candidates remain runtime-only.
 Zero-dependency Python independently reconstructs shared `bytearray` /
 `memoryview` aliases and the same compact results.
 
+The companion immutable-input audit freezes the parser boundary that follows
+from these results: ordinary views are copied before decode, while
+`SharedArrayBuffer`-backed views reject before snapshot creation. See
+[`SETTLEMENT_CONTENTION_INPUT_SNAPSHOT_AUDIT.md`](./SETTLEMENT_CONTENTION_INPUT_SNAPSHOT_AUDIT.md).
+
 ## Replay
 
 ```powershell

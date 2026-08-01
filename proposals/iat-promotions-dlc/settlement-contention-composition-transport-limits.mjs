@@ -128,6 +128,17 @@ export const VISIBLE_VIEW_ALIAS_MUTATION_RULES = Object.freeze({
   visibleByteSequencesStored: false,
 });
 
+export const INPUT_SNAPSHOT_RULES = Object.freeze({
+  acceptedInputType: "Uint8Array",
+  ordinaryArrayBufferViewAccepted: true,
+  ordinaryInputCopiedBeforeDecode: true,
+  snapshotAliasesInput: false,
+  sharedArrayBufferViewAccepted: false,
+  sharedArrayBufferError: "SHARED_BYTE_VIEW_UNSAFE",
+  sharedRejectionPrecedesUtf8Decoding: true,
+  snapshotByteSequencesStored: false,
+});
+
 const NORMALIZATION_KEY_DEFINITIONS = Object.freeze([
   ["FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"],
   ["FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"],
@@ -308,11 +319,19 @@ export function parseBoundedTransportEnvelope(serialized) {
   return { candidate: envelope.candidate, metrics: parsed.metrics };
 }
 
-export function parseBoundedTransportEnvelopeBytes(serializedBytes) {
+export function snapshotBoundedTransportByteView(serializedBytes) {
   if (!(serializedBytes instanceof Uint8Array)) fail("INVALID_BYTE_VIEW");
+  if (typeof SharedArrayBuffer !== "undefined" && serializedBytes.buffer instanceof SharedArrayBuffer) {
+    fail("SHARED_BYTE_VIEW_UNSAFE");
+  }
+  return Uint8Array.from(serializedBytes);
+}
+
+export function parseBoundedTransportEnvelopeBytes(serializedBytes) {
+  const snapshot = snapshotBoundedTransportByteView(serializedBytes);
   let serialized;
   try {
-    serialized = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(serializedBytes);
+    serialized = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(snapshot);
   } catch {
     fail("INVALID_UTF8");
   }
@@ -1582,4 +1601,146 @@ export function evaluateVisibleViewAliasMutationCorpus() {
     outsideControls: corpus.outsideControls.map(evaluateVisibleViewAliasMutationCase),
     insideDetections: corpus.insideDetections.map(evaluateVisibleViewAliasMutationCase),
   };
+}
+
+function inputSnapshotProbeEnvelope() {
+  return Buffer.from('{"transportMarker":"DRAFT/INACTIVE","candidate":{"inputSnapshotProbe":0}}', "utf8");
+}
+
+function inputSnapshotControl(caseId, mutationRegion, mutationDescriptor, mutationBackingIndex, replacementByte, expectedLiveError = null) {
+  const payloadBytes = inputSnapshotProbeEnvelope();
+  const prefixBytes = Buffer.from("!?", "utf8");
+  const suffixBytes = Buffer.from("#$", "utf8");
+  const backingBytes = Buffer.concat([prefixBytes, payloadBytes, suffixBytes]);
+  const serializedBytes = new Uint8Array(backingBytes.buffer, backingBytes.byteOffset + prefixBytes.length, payloadBytes.length);
+  return {
+    caseId,
+    mutationRegion,
+    mutationDescriptor,
+    backingBytes,
+    serializedBytes,
+    byteOffset: prefixBytes.length,
+    byteLength: payloadBytes.length,
+    mutationBackingIndex,
+    mutationViewIndex: mutationRegion === "INSIDE_VIEW" ? mutationBackingIndex - prefixBytes.length : null,
+    replacementByte,
+    expectedLiveError,
+  };
+}
+
+export function buildInputSnapshotCorpus() {
+  const payloadBytes = inputSnapshotProbeEnvelope();
+  const prefixLength = 2;
+  const candidateDigitIndex = prefixLength + payloadBytes.indexOf(Buffer.from("0", "utf8"));
+  const markerInitialIndex = prefixLength + payloadBytes.indexOf(Buffer.from("DRAFT/INACTIVE", "utf8"));
+  if (typeof SharedArrayBuffer === "undefined") fail("SHARED_ARRAY_BUFFER_UNAVAILABLE");
+  const sharedPayload = Uint8Array.from(payloadBytes);
+  const exactSharedBuffer = new SharedArrayBuffer(sharedPayload.length);
+  new Uint8Array(exactSharedBuffer).set(sharedPayload);
+  const boundedSharedBuffer = new SharedArrayBuffer(sharedPayload.length + 4);
+  new Uint8Array(boundedSharedBuffer, 2, sharedPayload.length).set(sharedPayload);
+  return {
+    snapshotControls: [
+      inputSnapshotControl("SNAPSHOT_SURVIVES_CANDIDATE_ALIAS_MUTATION", "INSIDE_VIEW", "CANDIDATE_DIGIT", candidateDigitIndex, 0x31),
+      inputSnapshotControl("SNAPSHOT_SURVIVES_MARKER_ALIAS_MUTATION", "INSIDE_VIEW", "MARKER_INITIAL", markerInitialIndex, 0x58, "INVALID_TRANSPORT_ENVELOPE"),
+      inputSnapshotControl("SNAPSHOT_IGNORES_EXCLUDED_PREFIX_MUTATION", "OUTSIDE_PREFIX", "EXCLUDED_PREFIX_SENTINEL", 0, 0x7e),
+    ],
+    sharedRejections: [
+      { caseId: "SHARED_FULL_VIEW_REJECTED", viewDescriptor: "FULL_VIEW", runtimeInput: new Uint8Array(exactSharedBuffer), byteOffset: 0, byteLength: sharedPayload.length },
+      { caseId: "SHARED_BOUNDED_VIEW_REJECTED", viewDescriptor: "BOUNDED_VIEW", runtimeInput: new Uint8Array(boundedSharedBuffer, 2, sharedPayload.length), byteOffset: 2, byteLength: sharedPayload.length },
+      { caseId: "SHARED_EMPTY_VIEW_REJECTED", viewDescriptor: "EMPTY_VIEW", runtimeInput: new Uint8Array(exactSharedBuffer, 0, 0), byteOffset: 0, byteLength: 0 },
+    ].map((item) => ({ ...item, expectedError: "SHARED_BYTE_VIEW_UNSAFE" })),
+  };
+}
+
+function evaluateInputSnapshotControl(item) {
+  const beforeLiveRepresentationSha256 = createHash("sha256").update(item.serializedBytes).digest("hex");
+  const snapshot = snapshotBoundedTransportByteView(item.serializedBytes);
+  const snapshotRepresentationSha256 = createHash("sha256").update(snapshot).digest("hex");
+  const snapshotCandidateCommitmentSha256 = canonicalSha256(parseBoundedTransportEnvelopeBytes(snapshot).candidate);
+  item.backingBytes[item.mutationBackingIndex] = item.replacementByte;
+  const afterLiveRepresentationSha256 = createHash("sha256").update(item.serializedBytes).digest("hex");
+  const afterSnapshotRepresentationSha256 = createHash("sha256").update(snapshot).digest("hex");
+  const afterSnapshotCandidateCommitmentSha256 = canonicalSha256(parseBoundedTransportEnvelopeBytes(snapshot).candidate);
+  let afterLiveCandidateCommitmentSha256 = null;
+  let observedLiveError = null;
+  try {
+    afterLiveCandidateCommitmentSha256 = canonicalSha256(parseBoundedTransportEnvelopeBytes(item.serializedBytes).candidate);
+  } catch (error) {
+    observedLiveError = error instanceof Error ? error.message : String(error);
+  }
+  if (observedLiveError !== item.expectedLiveError) fail(`INPUT_SNAPSHOT_LIVE_ERROR_DRIFT:${item.caseId}:${observedLiveError}`);
+  const liveInputChanged = beforeLiveRepresentationSha256 !== afterLiveRepresentationSha256;
+  const liveCandidateChanged = snapshotCandidateCommitmentSha256 !== afterLiveCandidateCommitmentSha256;
+  const snapshotBytesPreserved = snapshotRepresentationSha256 === afterSnapshotRepresentationSha256;
+  const snapshotCandidatePreserved = snapshotCandidateCommitmentSha256 === afterSnapshotCandidateCommitmentSha256;
+  if (!snapshotBytesPreserved || !snapshotCandidatePreserved) fail(`INPUT_SNAPSHOT_COPY_DRIFT:${item.caseId}`);
+  if (item.mutationRegion === "INSIDE_VIEW" && (!liveInputChanged || (!liveCandidateChanged && observedLiveError === null))) {
+    fail(`INPUT_SNAPSHOT_INSIDE_MUTATION_UNDETECTED:${item.caseId}`);
+  }
+  if (item.mutationRegion !== "INSIDE_VIEW" && (liveInputChanged || liveCandidateChanged || observedLiveError !== null)) {
+    fail(`INPUT_SNAPSHOT_OUTSIDE_ISOLATION_DRIFT:${item.caseId}`);
+  }
+  return {
+    caseId: item.caseId,
+    inputType: "Uint8Array",
+    backingType: "ArrayBuffer",
+    mutationRegion: item.mutationRegion,
+    mutationDescriptor: item.mutationDescriptor,
+    backingByteLength: item.backingBytes.length,
+    byteOffset: item.byteOffset,
+    byteLength: item.byteLength,
+    mutationBackingIndex: item.mutationBackingIndex,
+    mutationViewIndex: item.mutationViewIndex,
+    beforeLiveRepresentationSha256,
+    afterLiveRepresentationSha256,
+    snapshotRepresentationSha256,
+    afterSnapshotRepresentationSha256,
+    snapshotCandidateCommitmentSha256,
+    afterSnapshotCandidateCommitmentSha256,
+    afterLiveCandidateCommitmentSha256,
+    expectedLiveError: item.expectedLiveError,
+    observedLiveError,
+    liveInputChanged,
+    liveCandidateChanged,
+    snapshotBytesPreserved,
+    snapshotCandidatePreserved,
+    snapshotAliasesInput: false,
+    runtimeBytesStored: false,
+    runtimeCandidatesStored: false,
+    campaignMutationEvaluated: false,
+  };
+}
+
+export function evaluateInputSnapshotCorpus() {
+  const corpus = buildInputSnapshotCorpus();
+  const snapshotControls = corpus.snapshotControls.map(evaluateInputSnapshotControl);
+  const sharedRejections = corpus.sharedRejections.map(({ caseId, viewDescriptor, runtimeInput, byteOffset, byteLength, expectedError }) => {
+    let observedError = null;
+    try {
+      snapshotBoundedTransportByteView(runtimeInput);
+    } catch (error) {
+      observedError = error instanceof Error ? error.message : String(error);
+    }
+    if (observedError !== expectedError) fail(`INPUT_SNAPSHOT_SHARED_REJECTION_DRIFT:${caseId}:${observedError}`);
+    return {
+      caseId,
+      inputType: "Uint8Array",
+      backingType: "SharedArrayBuffer",
+      viewDescriptor,
+      backingByteLength: runtimeInput.buffer.byteLength,
+      byteOffset,
+      byteLength,
+      expectedError,
+      observedError,
+      snapshotCreated: false,
+      utf8DecodingAttempted: false,
+      jsonParsingAttempted: false,
+      candidateProduced: false,
+      runtimeBytesStored: false,
+      runtimeCandidatesStored: false,
+      campaignMutationEvaluated: false,
+    };
+  });
+  return { snapshotControls, sharedRejections };
 }

@@ -96,6 +96,11 @@ The alias-mutation companion mutates a view's shared backing buffer and proves
 excluded prefix/suffix changes cannot alter visible bytes or the candidate,
 while candidate, marker, and delimiter changes inside the view are detected;
 see `SETTLEMENT_CONTENTION_VISIBLE_VIEW_ALIAS_MUTATION_AUDIT.md`.
+The immutable-input snapshot companion copies ordinary `ArrayBuffer`-backed
+views before decoding so later alias mutations cannot change snapshot bytes or
+the candidate. `SharedArrayBuffer`-backed full, bounded, and empty views reject
+as `SHARED_BYTE_VIEW_UNSAFE` before snapshot, UTF-8, JSON, or candidate work;
+see `SETTLEMENT_CONTENTION_INPUT_SNAPSHOT_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -119,6 +124,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limit
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-byte-view-boundary-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-visible-view-truncation-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-visible-view-alias-mutation-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-input-snapshot-audit --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -139,6 +145,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-utf8-bom-po
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-byte-view-boundary-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-visible-view-truncation-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-visible-view-alias-mutation-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-input-snapshot-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local
