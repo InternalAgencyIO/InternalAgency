@@ -1022,6 +1022,13 @@ rejected and regenerated.
 | **Tel Aviv White City Civic-Light Intercept**<br><img src="756-israel-tel-aviv-white-city-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking cobalt light keys into a white-and-silver civic compass above Tel Aviv's Dizengoff Square and White City facades"> | **Caesarea Aqueduct Silver Cipher**<br><img src="757-israel-caesarea-aqueduct-cipher.png" width="420" alt="The trio sealing a recovered archive inside a blue-glass capsule beside Caesarea's honey-stone Mediterranean aqueduct"> |
 | **Makhtesh Ramon Terrain Extraction**<br><img src="758-israel-makhtesh-ramon-extraction.png" width="420" alt="The trio restoring a cobalt habitat beacon above Makhtesh Ramon's layered desert crater walls"> | **Eilat Red Sea Moonline Relay**<br><img src="759-israel-eilat-red-sea-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cobalt-silver-turquoise waterfront relay above Eilat's Red Sea marina at blue hour"> |
 
+## World Series - Europe - Batch 185: Hungary
+
+| | |
+|---|---|
+| **Budapest Chain Bridge Danube Intercept**<br><img src="760-hungary-budapest-chain-bridge-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking ruby, white, and emerald light keys into a silver river compass above Budapest's Chain Bridge and Danube"> | **Fisherman's Bastion Pearl Cipher**<br><img src="761-hungary-fishermans-bastion-cipher.png" width="420" alt="The trio sealing a recovered archive inside a pearl-and-green capsule beside Budapest's Fisherman's Bastion terraces"> |
+| **Hortobagy Puszta Terrain Extraction**<br><img src="762-hungary-hortobagy-puszta-extraction.png" width="420" alt="The trio restoring a ruby-and-emerald habitat beacon above Hortobagy's open puszta and Nine-Hole Bridge"> | **Budapest Keleti Moonline Relay**<br><img src="763-hungary-budapest-keleti-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a ruby-emerald-silver rail relay above Budapest Keleti station at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
