@@ -47,7 +47,17 @@
       "reason": "World Series image 627 was visually matched unambiguously in a standalone one-image post; it does not satisfy the required three-image 2+1 composition."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-01T05:40:58.7607709Z",
+    "status": "awaiting_post",
+    "imageNumbers": [624, 625, 623],
+    "countries": ["Zambia", "Malawi"],
+    "assets": [
+      {"file": "624-zambia-lusaka-cairo-road-intercept.png", "sha256": "c27721186a08ed5d1eb72b8894eeb3d37019e31203d2ed2e403903543ec09071"},
+      {"file": "625-zambia-shiwa-ngandu-manor-cipher.png", "sha256": "1512afa4085a2c3d26004e9ba738eab2aa5f26b5fa5a2d1f1d116824bc1d28b9"},
+      {"file": "623-malawi-cape-maclear-lake-night-relay.png", "sha256": "44a4ed618a836eeef00cfe08a166c0fc2f85e4b61f9166ab11cef8789d72432d"}
+    ]
+  },
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
