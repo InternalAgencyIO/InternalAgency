@@ -26,6 +26,15 @@ export const NUMERIC_TOKEN_RULES = Object.freeze({
   nonFiniteAllowed: false,
 });
 
+export const DELIMITER_WHITESPACE_RULES = Object.freeze({
+  allowedWhitespaceCodePoints: ["U+0020", "U+0009", "U+000A", "U+000D"],
+  bomAllowed: false,
+  unicodeWhitespaceAllowed: false,
+  trailingValuesAllowed: false,
+  concatenatedDocumentsAllowed: false,
+  singleDocumentOnly: true,
+});
+
 const TRANSPORT_MARKER = "DRAFT/INACTIVE";
 const sha256Hex = (value) => createHash("sha256").update(value, "utf8").digest("hex");
 const fail = (code) => { throw new Error(code); };
@@ -394,6 +403,103 @@ export function evaluateNumericTokenCorpus(baseArtifact) {
       family,
       token,
       targetPath,
+      representationSha256: sha256Hex(serialized),
+      utf8Bytes: Buffer.byteLength(serialized, "utf8"),
+      expectedError,
+      observedError,
+      rejectedBeforeCandidate: true,
+      candidateProduced: false,
+      mutationEvaluated: false,
+    };
+  });
+  return { controls, rejections };
+}
+
+function standardWhitespaceProbe() {
+  return ' \n\t{ \r\n"transportMarker"\t:\t"DRAFT/INACTIVE"\r,\n"candidate"\t:\t{\n"whitespaceProbe"\r:\n0\t}\n}\r\n';
+}
+
+function placeCharacter(serialized, character, placement, caseId) {
+  if (placement === "PREFIX") return `${character}${serialized}`;
+  if (placement === "SUFFIX") return `${serialized}${character}`;
+  if (placement === "AFTER_FIRST_COLON") return replaceRequired(serialized, ':"DRAFT/INACTIVE"', `:${character}"DRAFT/INACTIVE"`, caseId);
+  if (placement === "AFTER_FIRST_COMMA") return replaceRequired(serialized, ',"candidate"', `,${character}"candidate"`, caseId);
+  if (placement === "BEFORE_FINAL_BRACE") return `${serialized.slice(0, -1)}${character}}`;
+  fail(`DELIMITER_CORPUS_BUILD_FAILED:${caseId}`);
+}
+
+export function buildDelimiterWhitespaceCorpus(baseArtifact) {
+  const baseLf = `${JSON.stringify({ transportMarker: TRANSPORT_MARKER, candidate: baseArtifact }, null, 2)}\n`;
+  const baseCompact = JSON.stringify({ transportMarker: TRANSPORT_MARKER, candidate: baseArtifact });
+  const baseCrlf = baseLf.replace(/\n/g, "\r\n");
+  const compactProbe = numericEnvelope("0");
+  const controls = [
+    { caseId: "BASELINE_PRETTY_LF", representation: "PRETTY_LF", serialized: baseLf, expectedCandidate: baseArtifact },
+    { caseId: "COMPACT_SINGLE_DOCUMENT", representation: "COMPACT", serialized: baseCompact, expectedCandidate: baseArtifact },
+    { caseId: "BASELINE_PRETTY_CRLF", representation: "PRETTY_CRLF", serialized: baseCrlf, expectedCandidate: baseArtifact },
+    { caseId: "STANDARD_WHITESPACE_MIX", representation: "SPACE_TAB_LF_CR", serialized: standardWhitespaceProbe(), expectedCandidate: { whitespaceProbe: 0 } },
+  ];
+  const definitions = [
+    ["BOM_PREFIX", "BOM", "U+FEFF_PREFIX", "\uFEFF", "PREFIX"],
+    ["BOM_SUFFIX", "BOM", "U+FEFF_SUFFIX", "\uFEFF", "SUFFIX"],
+    ["BOM_AFTER_COLON", "BOM", "U+FEFF_AFTER_FIRST_COLON", "\uFEFF", "AFTER_FIRST_COLON"],
+    ["NBSP_PREFIX", "UNICODE_WHITESPACE", "U+00A0_PREFIX", "\u00A0", "PREFIX"],
+    ["OGHAM_SUFFIX", "UNICODE_WHITESPACE", "U+1680_SUFFIX", "\u1680", "SUFFIX"],
+    ["EN_SPACE_AFTER_COLON", "UNICODE_WHITESPACE", "U+2002_AFTER_FIRST_COLON", "\u2002", "AFTER_FIRST_COLON"],
+    ["LINE_SEPARATOR_AFTER_COMMA", "UNICODE_WHITESPACE", "U+2028_AFTER_FIRST_COMMA", "\u2028", "AFTER_FIRST_COMMA"],
+    ["PARAGRAPH_SEPARATOR_PREFIX", "UNICODE_WHITESPACE", "U+2029_PREFIX", "\u2029", "PREFIX"],
+    ["NARROW_NBSP_BEFORE_CLOSE", "UNICODE_WHITESPACE", "U+202F_BEFORE_FINAL_BRACE", "\u202F", "BEFORE_FINAL_BRACE"],
+    ["IDEOGRAPHIC_SPACE_AFTER_COLON", "UNICODE_WHITESPACE", "U+3000_AFTER_FIRST_COLON", "\u3000", "AFTER_FIRST_COLON"],
+  ];
+  const characterRejections = definitions.map(([caseId, family, descriptor, character, placement]) => ({
+    caseId,
+    family,
+    descriptor,
+    serialized: placeCharacter(baseCompact, character, placement, caseId),
+    expectedError: "MALFORMED_JSON",
+  }));
+  const rejections = [
+    ...characterRejections,
+    { caseId: "TRAILING_SCALAR", family: "TRAILING_VALUE", descriptor: "TRAILING_TRUE", serialized: `${baseCompact} true`, expectedError: "MALFORMED_JSON" },
+    { caseId: "TRAILING_OBJECT", family: "TRAILING_VALUE", descriptor: "TRAILING_EMPTY_OBJECT", serialized: `${baseCompact} {}`, expectedError: "MALFORMED_JSON" },
+    { caseId: "TRAILING_ARRAY", family: "TRAILING_VALUE", descriptor: "TRAILING_EMPTY_ARRAY", serialized: `${baseCompact} []`, expectedError: "MALFORMED_JSON" },
+    { caseId: "CONCATENATED_COMPACT", family: "CONCATENATED_DOCUMENT", descriptor: "COMPACT_NO_SEPARATOR", serialized: `${compactProbe}${compactProbe}`, expectedError: "MALFORMED_JSON" },
+    { caseId: "CONCATENATED_SPACE", family: "CONCATENATED_DOCUMENT", descriptor: "COMPACT_SPACE_COMPACT", serialized: `${compactProbe} ${compactProbe}`, expectedError: "MALFORMED_JSON" },
+    { caseId: "CONCATENATED_NEWLINE", family: "CONCATENATED_DOCUMENT", descriptor: "COMPACT_LF_COMPACT", serialized: `${compactProbe}\n${compactProbe}`, expectedError: "MALFORMED_JSON" },
+  ];
+  return { controls, rejections };
+}
+
+export function evaluateDelimiterWhitespaceCorpus(baseArtifact) {
+  const corpus = buildDelimiterWhitespaceCorpus(baseArtifact);
+  const controls = corpus.controls.map(({ caseId, representation, serialized, expectedCandidate }) => {
+    const parsed = parseBoundedTransportEnvelope(serialized);
+    if (canonicalSha256(parsed.candidate) !== canonicalSha256(expectedCandidate)) {
+      fail(`DELIMITER_CONTROL_DRIFT:${caseId}`);
+    }
+    return {
+      caseId,
+      representation,
+      representationSha256: sha256Hex(serialized),
+      utf8Bytes: Buffer.byteLength(serialized, "utf8"),
+      candidateCommitmentSha256: canonicalSha256(parsed.candidate),
+      acceptedAtParser: true,
+      candidateStored: false,
+      mutationEvaluated: false,
+    };
+  });
+  const rejections = corpus.rejections.map(({ caseId, family, descriptor, serialized, expectedError }) => {
+    let observedError = null;
+    try {
+      parseBoundedTransportEnvelope(serialized);
+    } catch (error) {
+      observedError = error instanceof Error ? error.message : String(error);
+    }
+    if (observedError !== expectedError) fail(`DELIMITER_REJECTION_DRIFT:${caseId}:${observedError}`);
+    return {
+      caseId,
+      family,
+      descriptor,
       representationSha256: sha256Hex(serialized),
       utf8Bytes: Buffer.byteLength(serialized, "utf8"),
       expectedError,

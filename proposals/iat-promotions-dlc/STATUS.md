@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-08-01 00:53 UTC
+Updated: 2026-08-01 01:21 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `606acfc`
+Previously published public increment: `f0837e6`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -492,8 +492,19 @@ This status file deliberately does not claim a self-referential commit hash.
   `949454ae890e8f2cf261c728a8bb4270bac5bb089c6230603e353a94a2b806cd`,
   and combined replay commitment
   `1d0d6fb06996456732cfd9ba0baa8c7b57ca5bea702bcc9c2dc0efb20d93eaa5`.
+- four accepted delimiter controls spanning pretty LF, compact JSON, pretty
+  CRLF, and all four standard JSON whitespace characters;
+- sixteen pre-candidate rejections covering three BOM placements, seven other
+  Unicode whitespace characters, three trailing values, and three
+  concatenated-document separators in Node and zero-dependency Python;
+- delimiter control-set commitment
+  `905d9e437767809082f5b3c81c685c79b61019c8747b7c35df9b3fdbeb777468`,
+  rejection-set commitment
+  `9442728edfb07ce1349c2c135d65c14c7a5df77b0ec22ef42c7ce9745eeeaf55`,
+  and combined replay commitment
+  `7ced5f5f2fe013dc599793c3ad515cb5b8660b747a870014377f966bbd7c4651`.
 
-Current proposal-only result: **378 tests passed**. This consists of 28 protected
+Current proposal-only result: **390 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -592,6 +603,11 @@ Twelve numeric-token deterministic regeneration, exact-rule, canonical-control,
 fraction/exponent-equivalence, negative-zero, unsafe-integer, non-finite,
 non-JSON, compact-publication, independent Python parity, tamper-exit,
 source-safety, and manifest-coverage tests complete the numeric-token suite.
+Twelve delimiter/whitespace deterministic regeneration, exact-rule,
+representation-control, standard-whitespace, BOM, Unicode-whitespace,
+trailing-value, concatenated-document, compact-publication, independent Python
+parity, tamper-exit, source-safety, and manifest-coverage tests complete the
+single-document transport suite.
 
 ## Current guarantees of the reference model
 
@@ -623,8 +639,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a compact delimiter and whitespace corpus proving BOM, Unicode whitespace,
-trailing values, and concatenated JSON documents reject before candidate
-production. Keep candidates runtime-only; do not contact a local validator,
-Devnet, or Mainnet; preserve every network, wallet, review, deployment, and
-activation HOLD.
+Add a compact string-token corpus proving unescaped control bytes, escaped
+control characters in required keys, and Unicode-normalization variants cannot
+masquerade as canonical fields. Keep candidates runtime-only; do not contact a
+local validator, Devnet, or Mainnet; preserve every network, wallet, review,
+deployment, and activation HOLD.

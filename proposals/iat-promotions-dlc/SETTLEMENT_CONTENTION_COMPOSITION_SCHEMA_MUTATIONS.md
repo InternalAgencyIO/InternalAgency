@@ -60,3 +60,9 @@ The numeric-token companion
 requires canonical safe-integer JSON tokens and rejects fractional or exponent
 equivalents, negative zero, unsafe integers, non-finite equivalents, and
 non-JSON constants before a candidate is returned in both runtimes.
+
+The delimiter companion
+[`SETTLEMENT_CONTENTION_DELIMITER_WHITESPACE_AUDIT.md`](./SETTLEMENT_CONTENTION_DELIMITER_WHITESPACE_AUDIT.md)
+accepts only standard JSON whitespace and one complete document, rejecting
+BOM, other Unicode whitespace, trailing values, and concatenated documents
+before candidate production in both runtimes.

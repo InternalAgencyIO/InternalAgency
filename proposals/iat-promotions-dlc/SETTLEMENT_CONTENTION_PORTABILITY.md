@@ -57,6 +57,10 @@ The numeric-token companion adds four canonical safe-integer controls and
 sixteen pre-candidate rejections for fractional or exponent equivalents,
 negative zero, unsafe integers, non-finite equivalents, and non-JSON numeric
 constants; see `SETTLEMENT_CONTENTION_NUMERIC_TOKEN_AUDIT.md`.
+The delimiter companion adds four standard-whitespace controls and sixteen
+pre-candidate rejections for BOM, seven other Unicode whitespace characters,
+trailing values, and concatenated documents; see
+`SETTLEMENT_CONTENTION_DELIMITER_WHITESPACE_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -70,6 +74,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --ve
 python proposals/iat-promotions-dlc/verify-settlement-contention-escape-representations.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-numeric-token-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-delimiter-whitespace-audit --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -80,6 +85,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-diagnostic-
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-escape-representation-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-transport-limit-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-numeric-token-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-delimiter-whitespace-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

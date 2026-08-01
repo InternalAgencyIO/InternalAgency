@@ -306,10 +306,12 @@ security audit or deployment approval.
 | Fractional or exponent spellings coerce to an allowed integer and bypass a schema constant | `fractional and exponent equivalents reject before candidate production` | `1.0`, `1e0`, and `1E+0` reject lexically even though generic JavaScript number parsing would produce `1` |
 | Negative zero, unsafe integers, or non-finite equivalents collapse into ambiguous runtime values | negative-zero, unsafe-integer, and finite-runtime overflow tests | Three negative-zero spellings, three unsafe or precision-colliding integers, and two infinity-producing exponents reject before candidate production in Node and Python |
 | Non-JSON numeric constants or illegal integer prefixes reach the candidate | `non-JSON constants and illegal integer prefixes stay malformed` | `NaN`, both infinity constants, leading plus, and leading zero remain malformed in both runtimes |
+| BOM or non-JSON Unicode whitespace is accepted as an invisible delimiter | BOM and seven-character Unicode-whitespace tests | Three BOM placements and seven Unicode whitespace characters across structural positions reject before candidate production in Node and Python |
+| A valid first document hides a trailing value or second envelope | trailing-value and concatenated-document tests | Scalar, object, and array suffixes plus second documents with no, space, or LF separators all reject below the byte limit |
 
 ## Next matrix expansion
 
-- add a compact delimiter and whitespace corpus proving BOM, Unicode
-  whitespace, trailing values, and concatenated JSON documents reject before
-  candidate production. Preserve runtime-only candidates and every network,
-  wallet, review, deployment, and activation HOLD.
+- add a compact string-token corpus proving unescaped control bytes, escaped
+  control characters in required keys, and Unicode-normalization variants
+  cannot masquerade as canonical fields. Preserve runtime-only candidates and
+  every network, wallet, review, deployment, and activation HOLD.

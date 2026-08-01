@@ -1,0 +1,325 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-contention-composition-delimiter-whitespace-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "vectorsApplied": false
+  },
+  "sources": {
+    "baseArtifact": {
+      "path": "settlement-contention-composition-vectors.v1.json",
+      "canonicalSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf"
+    },
+    "boundedParser": {
+      "path": "settlement-contention-composition-transport-limits.mjs",
+      "normalizedTextSha256": "a8c4f697e6d1f34417acef90f6c3006f7faa0b75ed549fd3a3c8d781b345445f"
+    },
+    "pythonVerifier": {
+      "path": "verify-settlement-contention-transport-limits.py",
+      "normalizedTextSha256": "199f46c328b9bcdadbd5f6536d1b80537c27d8052eca9db63d896a9be5144987"
+    },
+    "generator": {
+      "path": "generate-settlement-contention-composition-delimiter-whitespace-audit.mjs",
+      "normalizedTextSha256": "1bf824b0a3284be939c79ad48fa5f6e037508628e6d7a5c808579653488c6667"
+    }
+  },
+  "contract": {
+    "mode": "STRICT_SINGLE_DOCUMENT_JSON_DELIMITERS",
+    "delimiterWhitespaceRules": {
+      "allowedWhitespaceCodePoints": [
+        "U+0020",
+        "U+0009",
+        "U+000A",
+        "U+000D"
+      ],
+      "bomAllowed": false,
+      "unicodeWhitespaceAllowed": false,
+      "trailingValuesAllowed": false,
+      "concatenatedDocumentsAllowed": false,
+      "singleDocumentOnly": true
+    },
+    "acceptedControlCount": 4,
+    "rejectionCount": 16,
+    "bomCaseCount": 3,
+    "unicodeWhitespaceCaseCount": 7,
+    "trailingValueCaseCount": 3,
+    "concatenatedDocumentCaseCount": 3,
+    "standardWhitespaceAccepted": true,
+    "bomRejectedBeforeCandidate": true,
+    "unicodeWhitespaceRejectedBeforeCandidate": true,
+    "trailingValuesRejectedBeforeCandidate": true,
+    "concatenatedDocumentsRejectedBeforeCandidate": true,
+    "serializedRepresentationsStored": false,
+    "runtimeCandidatesStored": false,
+    "usesLocalValidator": false,
+    "usesRpc": false,
+    "usesWallet": false,
+    "preparesTransactions": false,
+    "signsTransactions": false,
+    "broadcastsTransactions": false,
+    "issuesReviewReceipts": false,
+    "completesReview": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "summary": {
+    "acceptedControlCount": "4",
+    "rejectionCount": "16",
+    "allStandardWhitespaceControlsAccepted": true,
+    "allAmbiguousDelimitersRejectedBeforeCandidate": true,
+    "controlSetCommitmentSha256": "905d9e437767809082f5b3c81c685c79b61019c8747b7c35df9b3fdbeb777468",
+    "rejectionSetCommitmentSha256": "9442728edfb07ce1349c2c135d65c14c7a5df77b0ec22ef42c7ce9745eeeaf55",
+    "combinedReplayCommitmentSha256": "7ced5f5f2fe013dc599793c3ad515cb5b8660b747a870014377f966bbd7c4651",
+    "serializedRepresentationsStored": false,
+    "runtimeCandidatesStored": false,
+    "receiptIssued": false,
+    "reviewCompleted": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "controls": [
+    {
+      "caseId": "BASELINE_PRETTY_LF",
+      "representation": "PRETTY_LF",
+      "representationSha256": "3e7a0895182aa0e94dc06ae467591adfd79a7215334fa53a024a4cde6e9325bf",
+      "utf8Bytes": 51320,
+      "candidateCommitmentSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf",
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "COMPACT_SINGLE_DOCUMENT",
+      "representation": "COMPACT",
+      "representationSha256": "8d2a4e5d077a76a79636b1537b8540d57aeedfb7d02bd7eac21bc6baf07a2950",
+      "utf8Bytes": 34703,
+      "candidateCommitmentSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf",
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "BASELINE_PRETTY_CRLF",
+      "representation": "PRETTY_CRLF",
+      "representationSha256": "cc5308562ba0bd52932b79a7288b9d47316059e2ff68949ae3e448dbc915f455",
+      "utf8Bytes": 52844,
+      "candidateCommitmentSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf",
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "STANDARD_WHITESPACE_MIX",
+      "representation": "SPACE_TAB_LF_CR",
+      "representationSha256": "152efc82afcc8202c08038dd970122cb0db29d29b4faed5c12953bc42db009d1",
+      "utf8Bytes": 89,
+      "candidateCommitmentSha256": "76271de5dd87d6e8cf8e7b4f8cc667aa75b486a757ed6baefd2ea6588bae5471",
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    }
+  ],
+  "rejections": [
+    {
+      "caseId": "BOM_PREFIX",
+      "family": "BOM",
+      "descriptor": "U+FEFF_PREFIX",
+      "representationSha256": "0a0c4ec3801c915ea7a7938931f7fec35458e226e9ad118e716a09a162cd41ed",
+      "utf8Bytes": 34706,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "BOM_SUFFIX",
+      "family": "BOM",
+      "descriptor": "U+FEFF_SUFFIX",
+      "representationSha256": "36145f6ecc255cb85c93b54bfc988f2420aded51299a2a4e53c3d4ed90c41fed",
+      "utf8Bytes": 34706,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "BOM_AFTER_COLON",
+      "family": "BOM",
+      "descriptor": "U+FEFF_AFTER_FIRST_COLON",
+      "representationSha256": "db2a2c618a379d58b0457fa4172946ed9ee530ed8c39b75e7e9f9dc01aaf51eb",
+      "utf8Bytes": 34706,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "NBSP_PREFIX",
+      "family": "UNICODE_WHITESPACE",
+      "descriptor": "U+00A0_PREFIX",
+      "representationSha256": "4029b920d4e99adb35fe39f2b61180cc1dd20c2fc87fdff76c8806664b0bcfae",
+      "utf8Bytes": 34705,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "OGHAM_SUFFIX",
+      "family": "UNICODE_WHITESPACE",
+      "descriptor": "U+1680_SUFFIX",
+      "representationSha256": "43ea443deef02edb700175665abd8228f0560ab33d224c71fb2dcab266e3e805",
+      "utf8Bytes": 34706,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "EN_SPACE_AFTER_COLON",
+      "family": "UNICODE_WHITESPACE",
+      "descriptor": "U+2002_AFTER_FIRST_COLON",
+      "representationSha256": "a6f615c4ff22d093d461eb8297aa88dd897343f0a1e85bc567dcd96b3dff8960",
+      "utf8Bytes": 34706,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "LINE_SEPARATOR_AFTER_COMMA",
+      "family": "UNICODE_WHITESPACE",
+      "descriptor": "U+2028_AFTER_FIRST_COMMA",
+      "representationSha256": "8c70f0c4c3c7fc0128c77c32c0e1679d1ad30b37cd04be36775ffb7885fa8302",
+      "utf8Bytes": 34706,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "PARAGRAPH_SEPARATOR_PREFIX",
+      "family": "UNICODE_WHITESPACE",
+      "descriptor": "U+2029_PREFIX",
+      "representationSha256": "e9777b43116ff22acd4b09cfeee5c90769fe8de562123d5f3c035d1b02b74e92",
+      "utf8Bytes": 34706,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "NARROW_NBSP_BEFORE_CLOSE",
+      "family": "UNICODE_WHITESPACE",
+      "descriptor": "U+202F_BEFORE_FINAL_BRACE",
+      "representationSha256": "da7b2dfe9c2898383357f1d87e616d57b60fcf1c5ae9958f683250817e15cc31",
+      "utf8Bytes": 34706,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "IDEOGRAPHIC_SPACE_AFTER_COLON",
+      "family": "UNICODE_WHITESPACE",
+      "descriptor": "U+3000_AFTER_FIRST_COLON",
+      "representationSha256": "232fa4f1a0aa74dfa679df18051284f2c9750a8d1343dbce89ae1734e0570292",
+      "utf8Bytes": 34706,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "TRAILING_SCALAR",
+      "family": "TRAILING_VALUE",
+      "descriptor": "TRAILING_TRUE",
+      "representationSha256": "d897f83f43ac687cb6e9f5afe56bf3fdb961fd0f1f96cfc7922ef33081350cfd",
+      "utf8Bytes": 34708,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "TRAILING_OBJECT",
+      "family": "TRAILING_VALUE",
+      "descriptor": "TRAILING_EMPTY_OBJECT",
+      "representationSha256": "c34d45161189ea1ba503f03000199677f493752ad59cf29ae2265f23e3d0f3b2",
+      "utf8Bytes": 34706,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "TRAILING_ARRAY",
+      "family": "TRAILING_VALUE",
+      "descriptor": "TRAILING_EMPTY_ARRAY",
+      "representationSha256": "dcfa57316e707a5c007537ef1e11077186158c682f0445809fc78cfafcd407b8",
+      "utf8Bytes": 34706,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "CONCATENATED_COMPACT",
+      "family": "CONCATENATED_DOCUMENT",
+      "descriptor": "COMPACT_NO_SEPARATOR",
+      "representationSha256": "b0bcce437643fad61522386ac758d765c4e0f8012a1a9c9fd410554a064e77b2",
+      "utf8Bytes": 134,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "CONCATENATED_SPACE",
+      "family": "CONCATENATED_DOCUMENT",
+      "descriptor": "COMPACT_SPACE_COMPACT",
+      "representationSha256": "07fc4ce580f118fc6e95df093c374f1c4597988c2e6190ba19875ee3bd9d775b",
+      "utf8Bytes": 135,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "CONCATENATED_NEWLINE",
+      "family": "CONCATENATED_DOCUMENT",
+      "descriptor": "COMPACT_LF_COMPACT",
+      "representationSha256": "716567fff418f455819c91486803d96b513cf981134cad9f0a74efabd0a56985",
+      "utf8Bytes": 135,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    }
+  ]
+}

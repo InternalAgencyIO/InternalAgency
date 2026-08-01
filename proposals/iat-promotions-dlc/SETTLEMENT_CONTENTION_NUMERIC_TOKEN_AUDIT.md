@@ -38,3 +38,8 @@ exits with status `2`.
 
 This audit is review material only. It grants no receipt, deployment,
 activation, claim, wallet, signing, RPC, transaction, or chain capability.
+
+The companion
+[`SETTLEMENT_CONTENTION_DELIMITER_WHITESPACE_AUDIT.md`](./SETTLEMENT_CONTENTION_DELIMITER_WHITESPACE_AUDIT.md)
+fixes the accepted whitespace set and single-document boundary under the same
+bounded parser.

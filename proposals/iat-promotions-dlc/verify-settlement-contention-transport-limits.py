@@ -20,6 +20,7 @@ from typing import Any
 
 ARTIFACT_NAME = "settlement-contention-composition-transport-limit-audit.v1.json"
 NUMERIC_ARTIFACT_NAME = "settlement-contention-composition-numeric-token-audit.v1.json"
+DELIMITER_ARTIFACT_NAME = "settlement-contention-composition-delimiter-whitespace-audit.v1.json"
 BASE_NAME = "settlement-contention-composition-vectors.v1.json"
 TRANSPORT_MARKER = "DRAFT/INACTIVE"
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
@@ -39,6 +40,14 @@ NUMERIC_TOKEN_RULES = {
     "exponentAllowed": False,
     "negativeZeroAllowed": False,
     "nonFiniteAllowed": False,
+}
+DELIMITER_WHITESPACE_RULES = {
+    "allowedWhitespaceCodePoints": ["U+0020", "U+0009", "U+000A", "U+000D"],
+    "bomAllowed": False,
+    "unicodeWhitespaceAllowed": False,
+    "trailingValuesAllowed": False,
+    "concatenatedDocumentsAllowed": False,
+    "singleDocumentOnly": True,
 }
 
 
@@ -366,6 +375,106 @@ def evaluate_numeric_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]],
     return controls, rejections
 
 
+def standard_whitespace_probe() -> str:
+    return ' \n\t{ \r\n"transportMarker"\t:\t"DRAFT/INACTIVE"\r,\n"candidate"\t:\t{\n"whitespaceProbe"\r:\n0\t}\n}\r\n'
+
+
+def place_character(serialized: str, character: str, placement: str, case_id: str) -> str:
+    if placement == "PREFIX":
+        return character + serialized
+    if placement == "SUFFIX":
+        return serialized + character
+    if placement == "AFTER_FIRST_COLON":
+        return replace_required(serialized, ':"DRAFT/INACTIVE"', f':{character}"DRAFT/INACTIVE"', case_id)
+    if placement == "AFTER_FIRST_COMMA":
+        return replace_required(serialized, ',"candidate"', f',{character}"candidate"', case_id)
+    if placement == "BEFORE_FINAL_BRACE":
+        return serialized[:-1] + character + "}"
+    raise TransportError(f"DELIMITER_CORPUS_BUILD_FAILED:{case_id}")
+
+
+def build_delimiter_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    base_lf = render_json({"transportMarker": TRANSPORT_MARKER, "candidate": base})
+    base_compact = json.dumps({"transportMarker": TRANSPORT_MARKER, "candidate": base}, ensure_ascii=False, separators=(",", ":"))
+    base_crlf = base_lf.replace("\n", "\r\n")
+    compact_probe = numeric_envelope("0")
+    controls = [
+        {"caseId": "BASELINE_PRETTY_LF", "representation": "PRETTY_LF", "serialized": base_lf, "expectedCandidate": base},
+        {"caseId": "COMPACT_SINGLE_DOCUMENT", "representation": "COMPACT", "serialized": base_compact, "expectedCandidate": base},
+        {"caseId": "BASELINE_PRETTY_CRLF", "representation": "PRETTY_CRLF", "serialized": base_crlf, "expectedCandidate": base},
+        {"caseId": "STANDARD_WHITESPACE_MIX", "representation": "SPACE_TAB_LF_CR", "serialized": standard_whitespace_probe(), "expectedCandidate": {"whitespaceProbe": 0}},
+    ]
+    definitions = [
+        ("BOM_PREFIX", "BOM", "U+FEFF_PREFIX", "\ufeff", "PREFIX"),
+        ("BOM_SUFFIX", "BOM", "U+FEFF_SUFFIX", "\ufeff", "SUFFIX"),
+        ("BOM_AFTER_COLON", "BOM", "U+FEFF_AFTER_FIRST_COLON", "\ufeff", "AFTER_FIRST_COLON"),
+        ("NBSP_PREFIX", "UNICODE_WHITESPACE", "U+00A0_PREFIX", "\u00a0", "PREFIX"),
+        ("OGHAM_SUFFIX", "UNICODE_WHITESPACE", "U+1680_SUFFIX", "\u1680", "SUFFIX"),
+        ("EN_SPACE_AFTER_COLON", "UNICODE_WHITESPACE", "U+2002_AFTER_FIRST_COLON", "\u2002", "AFTER_FIRST_COLON"),
+        ("LINE_SEPARATOR_AFTER_COMMA", "UNICODE_WHITESPACE", "U+2028_AFTER_FIRST_COMMA", "\u2028", "AFTER_FIRST_COMMA"),
+        ("PARAGRAPH_SEPARATOR_PREFIX", "UNICODE_WHITESPACE", "U+2029_PREFIX", "\u2029", "PREFIX"),
+        ("NARROW_NBSP_BEFORE_CLOSE", "UNICODE_WHITESPACE", "U+202F_BEFORE_FINAL_BRACE", "\u202f", "BEFORE_FINAL_BRACE"),
+        ("IDEOGRAPHIC_SPACE_AFTER_COLON", "UNICODE_WHITESPACE", "U+3000_AFTER_FIRST_COLON", "\u3000", "AFTER_FIRST_COLON"),
+    ]
+    rejections = [{
+        "caseId": case_id,
+        "family": family,
+        "descriptor": descriptor,
+        "serialized": place_character(base_compact, character, placement, case_id),
+        "expectedError": "MALFORMED_JSON",
+    } for case_id, family, descriptor, character, placement in definitions]
+    rejections.extend([
+        {"caseId": "TRAILING_SCALAR", "family": "TRAILING_VALUE", "descriptor": "TRAILING_TRUE", "serialized": base_compact + " true", "expectedError": "MALFORMED_JSON"},
+        {"caseId": "TRAILING_OBJECT", "family": "TRAILING_VALUE", "descriptor": "TRAILING_EMPTY_OBJECT", "serialized": base_compact + " {}", "expectedError": "MALFORMED_JSON"},
+        {"caseId": "TRAILING_ARRAY", "family": "TRAILING_VALUE", "descriptor": "TRAILING_EMPTY_ARRAY", "serialized": base_compact + " []", "expectedError": "MALFORMED_JSON"},
+        {"caseId": "CONCATENATED_COMPACT", "family": "CONCATENATED_DOCUMENT", "descriptor": "COMPACT_NO_SEPARATOR", "serialized": compact_probe + compact_probe, "expectedError": "MALFORMED_JSON"},
+        {"caseId": "CONCATENATED_SPACE", "family": "CONCATENATED_DOCUMENT", "descriptor": "COMPACT_SPACE_COMPACT", "serialized": compact_probe + " " + compact_probe, "expectedError": "MALFORMED_JSON"},
+        {"caseId": "CONCATENATED_NEWLINE", "family": "CONCATENATED_DOCUMENT", "descriptor": "COMPACT_LF_COMPACT", "serialized": compact_probe + "\n" + compact_probe, "expectedError": "MALFORMED_JSON"},
+    ])
+    return controls, rejections
+
+
+def evaluate_delimiter_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    control_inputs, rejection_inputs = build_delimiter_corpus(base)
+    controls = []
+    for item in control_inputs:
+        candidate, _metrics = parse_transport_envelope(item["serialized"])
+        if canonical_sha256(candidate) != canonical_sha256(item["expectedCandidate"]):
+            raise TransportError(f'DELIMITER_CONTROL_DRIFT:{item["caseId"]}')
+        controls.append({
+            "caseId": item["caseId"],
+            "representation": item["representation"],
+            "representationSha256": hashlib.sha256(item["serialized"].encode("utf-8")).hexdigest(),
+            "utf8Bytes": len(item["serialized"].encode("utf-8")),
+            "candidateCommitmentSha256": canonical_sha256(candidate),
+            "acceptedAtParser": True,
+            "candidateStored": False,
+            "mutationEvaluated": False,
+        })
+    rejections = []
+    for item in rejection_inputs:
+        observed_error = None
+        try:
+            parse_transport_envelope(item["serialized"])
+        except TransportError as error:
+            observed_error = str(error)
+        if observed_error != item["expectedError"]:
+            raise TransportError(f'DELIMITER_REJECTION_DRIFT:{item["caseId"]}:{observed_error}')
+        rejections.append({
+            "caseId": item["caseId"],
+            "family": item["family"],
+            "descriptor": item["descriptor"],
+            "representationSha256": hashlib.sha256(item["serialized"].encode("utf-8")).hexdigest(),
+            "utf8Bytes": len(item["serialized"].encode("utf-8")),
+            "expectedError": item["expectedError"],
+            "observedError": observed_error,
+            "rejectedBeforeCandidate": True,
+            "candidateProduced": False,
+            "mutationEvaluated": False,
+        })
+    return controls, rejections
+
+
 def expect(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
@@ -501,24 +610,104 @@ def verify_numeric(root: Path, artifact_path: Path) -> tuple[list[str], dict[str
     }
 
 
+def verify_delimiter(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        artifact = load_json(artifact_path)
+        base = load_json(root / BASE_NAME)
+        controls, rejections = evaluate_delimiter_corpus(base)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read delimiter evidence: {error}"], {}
+    expect(artifact.get("vectorVersion") == 1, "delimiter version drift", errors)
+    expect(artifact.get("vectorId") == "iat-promotions-dlc-contention-composition-delimiter-whitespace-v1", "delimiter ID drift", errors)
+    expect(artifact.get("status") == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "delimiter HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": {"path": BASE_NAME, "canonicalSha256": canonical_sha256(base)},
+        "boundedParser": {"path": "settlement-contention-composition-transport-limits.mjs", "normalizedTextSha256": normalized_text_sha256(root / "settlement-contention-composition-transport-limits.mjs")},
+        "pythonVerifier": {"path": "verify-settlement-contention-transport-limits.py", "normalizedTextSha256": normalized_text_sha256(Path(__file__).resolve())},
+        "generator": {"path": "generate-settlement-contention-composition-delimiter-whitespace-audit.mjs", "normalizedTextSha256": normalized_text_sha256(root / "generate-settlement-contention-composition-delimiter-whitespace-audit.mjs")},
+    }
+    expect(artifact.get("sources") == expected_sources, "delimiter source drift", errors)
+    contract = artifact.get("contract", {})
+    expect(contract.get("mode") == "STRICT_SINGLE_DOCUMENT_JSON_DELIMITERS", "delimiter mode drift", errors)
+    expect(contract.get("delimiterWhitespaceRules") == DELIMITER_WHITESPACE_RULES, "delimiter rules drift", errors)
+    expect(contract.get("acceptedControlCount") == 4 and contract.get("rejectionCount") == 16, "delimiter counts drift", errors)
+    family_counts = {
+        "bomCaseCount": 3,
+        "unicodeWhitespaceCaseCount": 7,
+        "trailingValueCaseCount": 3,
+        "concatenatedDocumentCaseCount": 3,
+    }
+    for field, value in family_counts.items():
+        expect(contract.get(field) == value, f"delimiter {field} drift", errors)
+    for field in ["standardWhitespaceAccepted", "bomRejectedBeforeCandidate", "unicodeWhitespaceRejectedBeforeCandidate", "trailingValuesRejectedBeforeCandidate", "concatenatedDocumentsRejectedBeforeCandidate"]:
+        expect(contract.get(field) is True, f"delimiter contract {field} drift", errors)
+    for field in ["serializedRepresentationsStored", "runtimeCandidatesStored", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"delimiter contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "delimiter activation effect drift", errors)
+    expect(artifact.get("controls") == controls, "delimiter controls drift", errors)
+    expect(artifact.get("rejections") == rejections, "delimiter rejections drift", errors)
+    summary = artifact.get("summary", {})
+    control_commitment = canonical_sha256(controls)
+    rejection_commitment = canonical_sha256(rejections)
+    combined_commitment = canonical_sha256({"controls": controls, "rejections": rejections})
+    expect(summary.get("acceptedControlCount") == "4" and summary.get("rejectionCount") == "16", "delimiter summary counts drift", errors)
+    expect(summary.get("allStandardWhitespaceControlsAccepted") is True and summary.get("allAmbiguousDelimitersRejectedBeforeCandidate") is True, "delimiter summary outcome drift", errors)
+    expect(summary.get("controlSetCommitmentSha256") == control_commitment, "delimiter control-set drift", errors)
+    expect(summary.get("rejectionSetCommitmentSha256") == rejection_commitment, "delimiter rejection-set drift", errors)
+    expect(summary.get("combinedReplayCommitmentSha256") == combined_commitment, "delimiter combined replay drift", errors)
+    for field in ["serializedRepresentationsStored", "runtimeCandidatesStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"delimiter summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "delimiter summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "acceptedControlCount": len(controls),
+        "rejectionCount": len(rejections),
+        "controlSetCommitmentSha256": control_commitment,
+        "rejectionSetCommitmentSha256": rejection_commitment,
+        "combinedReplayCommitmentSha256": combined_commitment,
+        "allAmbiguousDelimitersRejectedBeforeCandidate": len(rejections) == 16,
+        "serializedRepresentationsStored": False,
+        "runtimeCandidatesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Verify held bounded JSON transport evidence offline.")
     default_root = Path(__file__).resolve().parent
     parser.add_argument("--root", type=Path, default=default_root)
     parser.add_argument("--artifact", type=Path)
-    parser.add_argument("--verify-numeric-token-audit", action="store_true")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--verify-numeric-token-audit", action="store_true")
+    modes.add_argument("--verify-delimiter-whitespace-audit", action="store_true")
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
-    artifact_name = NUMERIC_ARTIFACT_NAME if arguments.verify_numeric_token_audit else ARTIFACT_NAME
+    if arguments.verify_numeric_token_audit:
+        artifact_name = NUMERIC_ARTIFACT_NAME
+    elif arguments.verify_delimiter_whitespace_audit:
+        artifact_name = DELIMITER_ARTIFACT_NAME
+    else:
+        artifact_name = ARTIFACT_NAME
     artifact = arguments.artifact.resolve() if arguments.artifact else root / artifact_name
-    errors, report = verify_numeric(root, artifact) if arguments.verify_numeric_token_audit else verify(root, artifact)
+    if arguments.verify_numeric_token_audit:
+        errors, report = verify_numeric(root, artifact)
+    elif arguments.verify_delimiter_whitespace_audit:
+        errors, report = verify_delimiter(root, artifact)
+    else:
+        errors, report = verify(root, artifact)
     if arguments.emit_json:
         print(json.dumps(report, separators=(",", ":")))
     elif errors:
         print("\n".join(errors), file=sys.stderr)
     else:
-        label = "numeric-token" if arguments.verify_numeric_token_audit else "transport-limit"
+        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else "transport-limit")
         print(f"Independent {label} replay passed: {report['combinedReplayCommitmentSha256']}")
     return 2 if errors else 0
 

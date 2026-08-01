@@ -90,6 +90,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Strict JSON escape representation audit](./SETTLEMENT_CONTENTION_ESCAPE_REPRESENTATION_AUDIT.md)
 - [Duplicate-aware bounded JSON transport audit](./SETTLEMENT_CONTENTION_TRANSPORT_LIMIT_AUDIT.md)
 - [Canonical safe-integer JSON token audit](./SETTLEMENT_CONTENTION_NUMERIC_TOKEN_AUDIT.md)
+- [Strict delimiter and JSON-whitespace audit](./SETTLEMENT_CONTENTION_DELIMITER_WHITESPACE_AUDIT.md)
 - [Compact settlement contention vectors](./settlement-contention-vectors.v1.json)
 - [Compact settlement contention mutation vectors](./settlement-contention-mutation-vectors.v1.json)
 - [Compact settlement contention composition vectors](./settlement-contention-composition-vectors.v1.json)
@@ -99,6 +100,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Compact escaped-Unicode, solidus, and malformed-encoding audit](./settlement-contention-composition-escape-representation-audit.v1.json)
 - [Compact duplicate-key and transport-limit audit](./settlement-contention-composition-transport-limit-audit.v1.json)
 - [Compact numeric-token boundary audit](./settlement-contention-composition-numeric-token-audit.v1.json)
+- [Compact delimiter and whitespace boundary audit](./settlement-contention-composition-delimiter-whitespace-audit.v1.json)
 - [Closed settlement-contention evidence schema](./settlement-contention-evidence.schema.v1.json)
 - [Settlement contention vector generator](./generate-settlement-contention-vectors.mjs)
 - [Settlement contention mutation generator](./generate-settlement-contention-mutation-vectors.mjs)
@@ -108,6 +110,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Escape representation-audit generator](./generate-settlement-contention-composition-escape-representation-audit.mjs)
 - [Bounded transport-audit generator](./generate-settlement-contention-composition-transport-limit-audit.mjs)
 - [Numeric-token audit generator](./generate-settlement-contention-composition-numeric-token-audit.mjs)
+- [Delimiter/whitespace audit generator](./generate-settlement-contention-composition-delimiter-whitespace-audit.mjs)
 - [Settlement contention vector validator](./validate-settlement-contention-vectors.mjs)
 - [Settlement contention mutation validator](./validate-settlement-contention-mutation-vectors.mjs)
 - [Settlement contention composition validator](./validate-settlement-contention-composition-vectors.mjs)
@@ -116,6 +119,7 @@ cancelled, or duplicate nominations do not consume a completed-pair slot.
 - [Escape representation-audit validator](./validate-settlement-contention-composition-escape-representation-audit.mjs)
 - [Bounded transport-audit validator](./validate-settlement-contention-composition-transport-limit-audit.mjs)
 - [Numeric-token audit validator](./validate-settlement-contention-composition-numeric-token-audit.mjs)
+- [Delimiter/whitespace audit validator](./validate-settlement-contention-composition-delimiter-whitespace-audit.mjs)
 - [Independent zero-dependency Python contention replay](./verify-settlement-contention-vectors.py)
 - [Independent zero-dependency Python escape replay](./verify-settlement-contention-escape-representations.py)
 - [Independent zero-dependency Python bounded-transport replay](./verify-settlement-contention-transport-limits.py)
@@ -257,6 +261,7 @@ node proposals/iat-promotions-dlc/validate-settlement-contention-composition-dia
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-escape-representation-audit.mjs
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-transport-limit-audit.mjs
 node proposals/iat-promotions-dlc/validate-settlement-contention-composition-numeric-token-audit.mjs
+node proposals/iat-promotions-dlc/validate-settlement-contention-composition-delimiter-whitespace-audit.mjs
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-mutation-vectors --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-vectors --json
@@ -265,6 +270,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --ve
 python proposals/iat-promotions-dlc/verify-settlement-contention-escape-representations.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-numeric-token-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-delimiter-whitespace-audit --json
 python proposals/iat-promotions-dlc/verify-reviewer-bundle-preflight.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-vectors --format json
 python proposals/iat-promotions-dlc/verify-positive-campaign-vector-intake.py --verify-differential-vectors --format json
@@ -316,6 +322,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-diagnostic-
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-escape-representation-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-transport-limit-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-numeric-token-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-delimiter-whitespace-audit.test.mjs
 ```
 
 ## Deliberate isolation
