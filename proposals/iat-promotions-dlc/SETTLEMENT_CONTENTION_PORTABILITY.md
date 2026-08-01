@@ -61,6 +61,10 @@ The delimiter companion adds four standard-whitespace controls and sixteen
 pre-candidate rejections for BOM, seven other Unicode whitespace characters,
 trailing values, and concatenated documents; see
 `SETTLEMENT_CONTENTION_DELIMITER_WHITESPACE_AUDIT.md`.
+The string-token companion adds three exact-key controls and twenty
+pre-candidate rejections for raw controls, escaped controls in required keys,
+and NFKC-equivalent key lookalikes; see
+`SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -75,6 +79,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-escape-represen
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-numeric-token-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-delimiter-whitespace-audit --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-string-token-audit --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -86,6 +91,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-escape-repr
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-transport-limit-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-numeric-token-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-delimiter-whitespace-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-string-token-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-08-01 01:21 UTC
+Updated: 2026-08-01 01:48 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `f0837e6`
+Previously published public increment: `3e4098b`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -503,8 +503,19 @@ This status file deliberately does not claim a self-referential commit hash.
   `9442728edfb07ce1349c2c135d65c14c7a5df77b0ec22ef42c7ce9745eeeaf55`,
   and combined replay commitment
   `7ced5f5f2fe013dc599793c3ad515cb5b8660b747a870014377f966bbd7c4651`.
+- three exact required-key controls spanning literal keys and escaped ASCII
+  spellings of `candidate` and `transportMarker`;
+- twenty pre-candidate string-token rejections covering seven raw controls,
+  seven escaped controls in `candidate`, and six NFKC-equivalent lookalikes
+  across both required keys in Node and zero-dependency Python;
+- string-token control-set commitment
+  `5097123b98678a4a9c00f232c207b099c47eba1586d827ec6c56eb6c9761b0f1`,
+  rejection-set commitment
+  `b3c4987b8e6ec477420379a087609a8c54c2ee048463155c6dd07728fd713912`,
+  and combined replay commitment
+  `50ec472897a5398c8ebcf57f1b5a799da113d9cefd6dae08d0f1d7caaef999b0`.
 
-Current proposal-only result: **390 tests passed**. This consists of 28 protected
+Current proposal-only result: **402 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -608,6 +619,11 @@ representation-control, standard-whitespace, BOM, Unicode-whitespace,
 trailing-value, concatenated-document, compact-publication, independent Python
 parity, tamper-exit, source-safety, and manifest-coverage tests complete the
 single-document transport suite.
+Twelve string-token deterministic regeneration, exact-key rule,
+escaped-canonical control, raw-control syntax, escaped-control semantics,
+NFKC-lookalike, error-boundary, compact-publication, independent Python parity,
+tamper-exit, source-safety, and manifest-coverage tests complete the exact-key
+transport suite.
 
 ## Current guarantees of the reference model
 
@@ -639,8 +655,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a compact string-token corpus proving unescaped control bytes, escaped
-control characters in required keys, and Unicode-normalization variants cannot
-masquerade as canonical fields. Keep candidates runtime-only; do not contact a
-local validator, Devnet, or Mainnet; preserve every network, wallet, review,
-deployment, and activation HOLD.
+Add a compact key-collision corpus proving escaped canonical key spellings
+collide as duplicates while normalization lookalikes remain distinct but
+invalid. Keep candidates runtime-only; do not contact a local validator,
+Devnet, or Mainnet; preserve every network, wallet, review, deployment, and
+activation HOLD.

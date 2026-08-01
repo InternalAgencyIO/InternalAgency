@@ -66,3 +66,9 @@ The delimiter companion
 accepts only standard JSON whitespace and one complete document, rejecting
 BOM, other Unicode whitespace, trailing values, and concatenated documents
 before candidate production in both runtimes.
+
+The string-token companion
+[`SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md`](./SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md)
+requires exact decoded required-key equality, rejecting raw controls, escaped
+controls in required keys, and NFKC-equivalent lookalikes before candidate
+production in both runtimes.

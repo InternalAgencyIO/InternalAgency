@@ -14,6 +14,7 @@ import hashlib
 import json
 import math
 import sys
+import unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -21,6 +22,7 @@ from typing import Any
 ARTIFACT_NAME = "settlement-contention-composition-transport-limit-audit.v1.json"
 NUMERIC_ARTIFACT_NAME = "settlement-contention-composition-numeric-token-audit.v1.json"
 DELIMITER_ARTIFACT_NAME = "settlement-contention-composition-delimiter-whitespace-audit.v1.json"
+STRING_ARTIFACT_NAME = "settlement-contention-composition-string-token-audit.v1.json"
 BASE_NAME = "settlement-contention-composition-vectors.v1.json"
 TRANSPORT_MARKER = "DRAFT/INACTIVE"
 HOLD_LABELS = ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
@@ -48,6 +50,15 @@ DELIMITER_WHITESPACE_RULES = {
     "trailingValuesAllowed": False,
     "concatenatedDocumentsAllowed": False,
     "singleDocumentOnly": True,
+}
+STRING_TOKEN_RULES = {
+    "requiredEnvelopeKeys": ["candidate", "transportMarker"],
+    "keyComparison": "EXACT_DECODED_UNICODE_SCALAR_SEQUENCE",
+    "rawControlCodePointsAllowedInStrings": False,
+    "escapedControlCodePointsAllowedInRequiredKeys": False,
+    "escapedCanonicalKeySpellingsAllowed": True,
+    "unicodeNormalizationAppliedToRequiredKeys": False,
+    "unicodeCompatibilityLookalikesAllowed": False,
 }
 
 
@@ -475,6 +486,130 @@ def evaluate_delimiter_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]
     return controls, rejections
 
 
+def string_probe_envelope(candidate_key_token: str = '"candidate"', marker_key_token: str = '"transportMarker"') -> str:
+    return f'{{{marker_key_token}:"{TRANSPORT_MARKER}",{candidate_key_token}:{{"stringProbe":0}}}}'
+
+
+def string_key_envelope(decoded_key: str, target_required_key: str) -> str:
+    marker_key = decoded_key if target_required_key == "transportMarker" else "transportMarker"
+    candidate_key = decoded_key if target_required_key == "candidate" else "candidate"
+    return json.dumps(
+        {marker_key: TRANSPORT_MARKER, candidate_key: {"stringProbe": 0}},
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+
+
+def build_string_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    base_compact = json.dumps({"transportMarker": TRANSPORT_MARKER, "candidate": base}, ensure_ascii=False, separators=(",", ":"))
+    controls = [
+        {"caseId": "BASELINE_COMPACT", "representation": "CANONICAL_LITERAL_KEYS", "serialized": base_compact, "expectedCandidate": base},
+        {"caseId": "ESCAPED_CANONICAL_CANDIDATE_KEY", "representation": "ESCAPED_ASCII_CANDIDATE_KEY", "serialized": string_probe_envelope('"\\u0063andidate"'), "expectedCandidate": {"stringProbe": 0}},
+        {"caseId": "ESCAPED_CANONICAL_MARKER_KEY", "representation": "ESCAPED_ASCII_MARKER_KEY", "serialized": string_probe_envelope('"candidate"', '"transport\\u004darker"'), "expectedCandidate": {"stringProbe": 0}},
+    ]
+    control_definitions = [
+        ("U+0000", "\u0000"),
+        ("U+0008", "\b"),
+        ("U+0009", "\t"),
+        ("U+000A", "\n"),
+        ("U+000C", "\f"),
+        ("U+000D", "\r"),
+        ("U+001F", "\u001f"),
+    ]
+    raw_controls = [{
+        "caseId": f"RAW_CONTROL_{descriptor[2:]}",
+        "family": "RAW_CONTROL_IN_STRING",
+        "descriptor": descriptor,
+        "targetRequiredKey": "candidate",
+        "serialized": string_probe_envelope(f'"cand{character}idate"'),
+        "expectedError": "MALFORMED_JSON",
+        "nfkcMatchesRequiredKey": False,
+    } for descriptor, character in control_definitions]
+    escaped_definitions = [
+        ("U+0000", r"\u0000"),
+        ("U+0008", r"\b"),
+        ("U+0009", r"\t"),
+        ("U+000A", r"\n"),
+        ("U+000C", r"\f"),
+        ("U+000D", r"\r"),
+        ("U+001F", r"\u001f"),
+    ]
+    escaped_controls = [{
+        "caseId": f"ESCAPED_CONTROL_{descriptor[2:]}",
+        "family": "ESCAPED_CONTROL_IN_REQUIRED_KEY",
+        "descriptor": descriptor,
+        "targetRequiredKey": "candidate",
+        "serialized": string_probe_envelope(f'"cand{token}idate"'),
+        "expectedError": "INVALID_TRANSPORT_ENVELOPE",
+        "nfkcMatchesRequiredKey": False,
+    } for descriptor, token in escaped_definitions]
+    normalization_definitions = [
+        ("FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"),
+        ("FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"),
+        ("CIRCLED_C_PREFIX", "ⓒandidate", "candidate"),
+        ("MATHEMATICAL_BOLD_C_PREFIX", "𝐜andidate", "candidate"),
+        ("FULLWIDTH_T_PREFIX", "ｔransportMarker", "transportMarker"),
+        ("FULLWIDTH_CAPITAL_M", "transportＭarker", "transportMarker"),
+    ]
+    normalization_lookalikes = []
+    for descriptor, variant_key, target_required_key in normalization_definitions:
+        if variant_key == target_required_key or unicodedata.normalize("NFKC", variant_key) != target_required_key:
+            raise TransportError(f"STRING_NORMALIZATION_CORPUS_BUILD_FAILED:{descriptor}")
+        normalization_lookalikes.append({
+            "caseId": f"NORMALIZATION_{descriptor}",
+            "family": "UNICODE_NORMALIZATION_LOOKALIKE",
+            "descriptor": descriptor,
+            "targetRequiredKey": target_required_key,
+            "serialized": string_key_envelope(variant_key, target_required_key),
+            "expectedError": "INVALID_TRANSPORT_ENVELOPE",
+            "nfkcMatchesRequiredKey": True,
+        })
+    return controls, raw_controls + escaped_controls + normalization_lookalikes
+
+
+def evaluate_string_corpus(base: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    control_inputs, rejection_inputs = build_string_corpus(base)
+    controls = []
+    for item in control_inputs:
+        candidate, _metrics = parse_transport_envelope(item["serialized"])
+        if canonical_sha256(candidate) != canonical_sha256(item["expectedCandidate"]):
+            raise TransportError(f'STRING_CONTROL_DRIFT:{item["caseId"]}')
+        controls.append({
+            "caseId": item["caseId"],
+            "representation": item["representation"],
+            "representationSha256": hashlib.sha256(item["serialized"].encode("utf-8")).hexdigest(),
+            "utf8Bytes": len(item["serialized"].encode("utf-8")),
+            "candidateCommitmentSha256": canonical_sha256(candidate),
+            "acceptedAtParser": True,
+            "candidateStored": False,
+            "mutationEvaluated": False,
+        })
+    rejections = []
+    for item in rejection_inputs:
+        observed_error = None
+        try:
+            parse_transport_envelope(item["serialized"])
+        except TransportError as error:
+            observed_error = str(error)
+        if observed_error != item["expectedError"]:
+            raise TransportError(f'STRING_REJECTION_DRIFT:{item["caseId"]}:{observed_error}')
+        rejections.append({
+            "caseId": item["caseId"],
+            "family": item["family"],
+            "descriptor": item["descriptor"],
+            "targetRequiredKey": item["targetRequiredKey"],
+            "representationSha256": hashlib.sha256(item["serialized"].encode("utf-8")).hexdigest(),
+            "utf8Bytes": len(item["serialized"].encode("utf-8")),
+            "expectedError": item["expectedError"],
+            "observedError": observed_error,
+            "nfkcMatchesRequiredKey": item["nfkcMatchesRequiredKey"],
+            "rejectedBeforeCandidate": True,
+            "candidateProduced": False,
+            "mutationEvaluated": False,
+        })
+    return controls, rejections
+
+
 def expect(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
@@ -678,6 +813,73 @@ def verify_delimiter(root: Path, artifact_path: Path) -> tuple[list[str], dict[s
     }
 
 
+def verify_string(root: Path, artifact_path: Path) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    try:
+        artifact = load_json(artifact_path)
+        base = load_json(root / BASE_NAME)
+        controls, rejections = evaluate_string_corpus(base)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot read string-token evidence: {error}"], {}
+    expect(artifact.get("vectorVersion") == 1, "string-token version drift", errors)
+    expect(artifact.get("vectorId") == "iat-promotions-dlc-contention-composition-string-tokens-v1", "string-token ID drift", errors)
+    expect(artifact.get("status") == {"labels": HOLD_LABELS, "network": "NONE", "programId": None, "deployable": False, "vectorsApplied": False}, "string-token HOLD drift", errors)
+    expected_sources = {
+        "baseArtifact": {"path": BASE_NAME, "canonicalSha256": canonical_sha256(base)},
+        "boundedParser": {"path": "settlement-contention-composition-transport-limits.mjs", "normalizedTextSha256": normalized_text_sha256(root / "settlement-contention-composition-transport-limits.mjs")},
+        "pythonVerifier": {"path": "verify-settlement-contention-transport-limits.py", "normalizedTextSha256": normalized_text_sha256(Path(__file__).resolve())},
+        "generator": {"path": "generate-settlement-contention-composition-string-token-audit.mjs", "normalizedTextSha256": normalized_text_sha256(root / "generate-settlement-contention-composition-string-token-audit.mjs")},
+    }
+    expect(artifact.get("sources") == expected_sources, "string-token source drift", errors)
+    contract = artifact.get("contract", {})
+    expect(contract.get("mode") == "EXACT_REQUIRED_KEY_STRING_TOKENS", "string-token mode drift", errors)
+    expect(contract.get("stringTokenRules") == STRING_TOKEN_RULES, "string-token rules drift", errors)
+    expect(contract.get("acceptedControlCount") == 3 and contract.get("rejectionCount") == 20, "string-token counts drift", errors)
+    family_counts = {
+        "rawControlCaseCount": 7,
+        "escapedControlRequiredKeyCaseCount": 7,
+        "normalizationLookalikeCaseCount": 6,
+    }
+    for field, value in family_counts.items():
+        expect(contract.get(field) == value, f"string-token {field} drift", errors)
+    for field in ["escapedCanonicalKeySpellingsAccepted", "rawControlsRejectedBeforeCandidate", "escapedControlsCannotMasqueradeAsRequiredKeys", "normalizationLookalikesCannotMasqueradeAsRequiredKeys"]:
+        expect(contract.get(field) is True, f"string-token contract {field} drift", errors)
+    for field in ["serializedRepresentationsStored", "runtimeCandidatesStored", "usesLocalValidator", "usesRpc", "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions", "issuesReviewReceipts", "completesReview", "activationAuthorized"]:
+        expect(contract.get(field) is False, f"string-token contract {field} drift", errors)
+    expect(contract.get("activationEffect") == "NONE", "string-token activation effect drift", errors)
+    expect(artifact.get("controls") == controls, "string-token controls drift", errors)
+    expect(artifact.get("rejections") == rejections, "string-token rejections drift", errors)
+    summary = artifact.get("summary", {})
+    control_commitment = canonical_sha256(controls)
+    rejection_commitment = canonical_sha256(rejections)
+    combined_commitment = canonical_sha256({"controls": controls, "rejections": rejections})
+    expect(summary.get("acceptedControlCount") == "3" and summary.get("rejectionCount") == "20", "string-token summary counts drift", errors)
+    expect(summary.get("allCanonicalControlsAccepted") is True and summary.get("allAmbiguousStringTokensRejectedBeforeCandidate") is True, "string-token summary outcome drift", errors)
+    expect(summary.get("controlSetCommitmentSha256") == control_commitment, "string-token control-set drift", errors)
+    expect(summary.get("rejectionSetCommitmentSha256") == rejection_commitment, "string-token rejection-set drift", errors)
+    expect(summary.get("combinedReplayCommitmentSha256") == combined_commitment, "string-token combined replay drift", errors)
+    for field in ["serializedRepresentationsStored", "runtimeCandidatesStored", "receiptIssued", "reviewCompleted", "activationAuthorized"]:
+        expect(summary.get(field) is False, f"string-token summary {field} drift", errors)
+    expect(summary.get("activationEffect") == "NONE", "string-token summary activation effect drift", errors)
+    return errors, {
+        "valid": not errors,
+        "errors": errors,
+        "acceptedControlCount": len(controls),
+        "rejectionCount": len(rejections),
+        "controlSetCommitmentSha256": control_commitment,
+        "rejectionSetCommitmentSha256": rejection_commitment,
+        "combinedReplayCommitmentSha256": combined_commitment,
+        "allAmbiguousStringTokensRejectedBeforeCandidate": len(rejections) == 20,
+        "serializedRepresentationsStored": False,
+        "runtimeCandidatesStored": False,
+        "network": "NONE",
+        "receiptIssued": False,
+        "reviewCompleted": False,
+        "activationAuthorized": False,
+        "activationEffect": "NONE",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Verify held bounded JSON transport evidence offline.")
     default_root = Path(__file__).resolve().parent
@@ -686,6 +888,7 @@ def main() -> int:
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--verify-numeric-token-audit", action="store_true")
     modes.add_argument("--verify-delimiter-whitespace-audit", action="store_true")
+    modes.add_argument("--verify-string-token-audit", action="store_true")
     parser.add_argument("--json", action="store_true", dest="emit_json")
     arguments = parser.parse_args()
     root = arguments.root.resolve()
@@ -693,6 +896,8 @@ def main() -> int:
         artifact_name = NUMERIC_ARTIFACT_NAME
     elif arguments.verify_delimiter_whitespace_audit:
         artifact_name = DELIMITER_ARTIFACT_NAME
+    elif arguments.verify_string_token_audit:
+        artifact_name = STRING_ARTIFACT_NAME
     else:
         artifact_name = ARTIFACT_NAME
     artifact = arguments.artifact.resolve() if arguments.artifact else root / artifact_name
@@ -700,6 +905,8 @@ def main() -> int:
         errors, report = verify_numeric(root, artifact)
     elif arguments.verify_delimiter_whitespace_audit:
         errors, report = verify_delimiter(root, artifact)
+    elif arguments.verify_string_token_audit:
+        errors, report = verify_string(root, artifact)
     else:
         errors, report = verify(root, artifact)
     if arguments.emit_json:
@@ -707,7 +914,7 @@ def main() -> int:
     elif errors:
         print("\n".join(errors), file=sys.stderr)
     else:
-        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else "transport-limit")
+        label = "numeric-token" if arguments.verify_numeric_token_audit else ("delimiter-whitespace" if arguments.verify_delimiter_whitespace_audit else ("string-token" if arguments.verify_string_token_audit else "transport-limit"))
         print(f"Independent {label} replay passed: {report['combinedReplayCommitmentSha256']}")
     return 2 if errors else 0
 

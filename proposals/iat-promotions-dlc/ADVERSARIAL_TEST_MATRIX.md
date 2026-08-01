@@ -308,10 +308,13 @@ security audit or deployment approval.
 | Non-JSON numeric constants or illegal integer prefixes reach the candidate | `non-JSON constants and illegal integer prefixes stay malformed` | `NaN`, both infinity constants, leading plus, and leading zero remain malformed in both runtimes |
 | BOM or non-JSON Unicode whitespace is accepted as an invisible delimiter | BOM and seven-character Unicode-whitespace tests | Three BOM placements and seven Unicode whitespace characters across structural positions reject before candidate production in Node and Python |
 | A valid first document hides a trailing value or second envelope | trailing-value and concatenated-document tests | Scalar, object, and array suffixes plus second documents with no, space, or LF separators all reject below the byte limit |
+| An unescaped control byte is embedded inside a JSON key string | raw-control string-token tests | Seven controls spanning U+0000 through U+001F fail JSON syntax before a candidate is produced in Node and Python |
+| A valid JSON control escape changes a required key invisibly | escaped-control required-key tests | The token decodes, but exact key-set validation rejects all seven variants as an invalid transport envelope |
+| A compatibility lookalike normalizes to `candidate` or `transportMarker` | NFKC normalization-lookalike tests | Six NFKC-equivalent variants remain distinct decoded scalar sequences and cannot satisfy either required key |
 
 ## Next matrix expansion
 
-- add a compact string-token corpus proving unescaped control bytes, escaped
-  control characters in required keys, and Unicode-normalization variants
-  cannot masquerade as canonical fields. Preserve runtime-only candidates and
-  every network, wallet, review, deployment, and activation HOLD.
+- add a compact key-collision corpus proving escaped canonical key spellings
+  collide as duplicates while normalization lookalikes remain distinct but
+  invalid. Preserve runtime-only candidates and every network, wallet, review,
+  deployment, and activation HOLD.

@@ -35,6 +35,16 @@ export const DELIMITER_WHITESPACE_RULES = Object.freeze({
   singleDocumentOnly: true,
 });
 
+export const STRING_TOKEN_RULES = Object.freeze({
+  requiredEnvelopeKeys: ["candidate", "transportMarker"],
+  keyComparison: "EXACT_DECODED_UNICODE_SCALAR_SEQUENCE",
+  rawControlCodePointsAllowedInStrings: false,
+  escapedControlCodePointsAllowedInRequiredKeys: false,
+  escapedCanonicalKeySpellingsAllowed: true,
+  unicodeNormalizationAppliedToRequiredKeys: false,
+  unicodeCompatibilityLookalikesAllowed: false,
+});
+
 const TRANSPORT_MARKER = "DRAFT/INACTIVE";
 const sha256Hex = (value) => createHash("sha256").update(value, "utf8").digest("hex");
 const fail = (code) => { throw new Error(code); };
@@ -504,6 +514,131 @@ export function evaluateDelimiterWhitespaceCorpus(baseArtifact) {
       utf8Bytes: Buffer.byteLength(serialized, "utf8"),
       expectedError,
       observedError,
+      rejectedBeforeCandidate: true,
+      candidateProduced: false,
+      mutationEvaluated: false,
+    };
+  });
+  return { controls, rejections };
+}
+
+function stringProbeEnvelope(candidateKeyToken = '"candidate"', markerKeyToken = '"transportMarker"') {
+  return `{${markerKeyToken}:"${TRANSPORT_MARKER}",${candidateKeyToken}:{"stringProbe":0}}`;
+}
+
+function stringKeyEnvelope(decodedKey, targetRequiredKey) {
+  const markerKey = targetRequiredKey === "transportMarker" ? decodedKey : "transportMarker";
+  const candidateKey = targetRequiredKey === "candidate" ? decodedKey : "candidate";
+  return JSON.stringify({
+    [markerKey]: TRANSPORT_MARKER,
+    [candidateKey]: { stringProbe: 0 },
+  });
+}
+
+export function buildStringTokenCorpus(baseArtifact) {
+  const baseCompact = JSON.stringify({ transportMarker: TRANSPORT_MARKER, candidate: baseArtifact });
+  const controls = [
+    { caseId: "BASELINE_COMPACT", representation: "CANONICAL_LITERAL_KEYS", serialized: baseCompact, expectedCandidate: baseArtifact },
+    { caseId: "ESCAPED_CANONICAL_CANDIDATE_KEY", representation: "ESCAPED_ASCII_CANDIDATE_KEY", serialized: stringProbeEnvelope('"\\u0063andidate"'), expectedCandidate: { stringProbe: 0 } },
+    { caseId: "ESCAPED_CANONICAL_MARKER_KEY", representation: "ESCAPED_ASCII_MARKER_KEY", serialized: stringProbeEnvelope('"candidate"', '"transport\\u004darker"'), expectedCandidate: { stringProbe: 0 } },
+  ];
+  const controlDefinitions = [
+    ["U+0000", "\u0000"],
+    ["U+0008", "\b"],
+    ["U+0009", "\t"],
+    ["U+000A", "\n"],
+    ["U+000C", "\f"],
+    ["U+000D", "\r"],
+    ["U+001F", "\u001f"],
+  ];
+  const rawControls = controlDefinitions.map(([descriptor, character]) => ({
+    caseId: `RAW_CONTROL_${descriptor.slice(2)}`,
+    family: "RAW_CONTROL_IN_STRING",
+    descriptor,
+    targetRequiredKey: "candidate",
+    serialized: stringProbeEnvelope(`"cand${character}idate"`),
+    expectedError: "MALFORMED_JSON",
+    nfkcMatchesRequiredKey: false,
+  }));
+  const escapedDefinitions = [
+    ["U+0000", "\\u0000"],
+    ["U+0008", "\\b"],
+    ["U+0009", "\\t"],
+    ["U+000A", "\\n"],
+    ["U+000C", "\\f"],
+    ["U+000D", "\\r"],
+    ["U+001F", "\\u001f"],
+  ];
+  const escapedControls = escapedDefinitions.map(([descriptor, token]) => ({
+    caseId: `ESCAPED_CONTROL_${descriptor.slice(2)}`,
+    family: "ESCAPED_CONTROL_IN_REQUIRED_KEY",
+    descriptor,
+    targetRequiredKey: "candidate",
+    serialized: stringProbeEnvelope(`"cand${token}idate"`),
+    expectedError: "INVALID_TRANSPORT_ENVELOPE",
+    nfkcMatchesRequiredKey: false,
+  }));
+  const normalizationDefinitions = [
+    ["FULLWIDTH_C_PREFIX", "ｃandidate", "candidate"],
+    ["FULLWIDTH_CANDIDATE", "ｃａｎｄｉｄａｔｅ", "candidate"],
+    ["CIRCLED_C_PREFIX", "ⓒandidate", "candidate"],
+    ["MATHEMATICAL_BOLD_C_PREFIX", "𝐜andidate", "candidate"],
+    ["FULLWIDTH_T_PREFIX", "ｔransportMarker", "transportMarker"],
+    ["FULLWIDTH_CAPITAL_M", "transportＭarker", "transportMarker"],
+  ];
+  const normalizationLookalikes = normalizationDefinitions.map(([descriptor, variantKey, targetRequiredKey]) => {
+    if (variantKey === targetRequiredKey || variantKey.normalize("NFKC") !== targetRequiredKey) {
+      fail(`STRING_NORMALIZATION_CORPUS_BUILD_FAILED:${descriptor}`);
+    }
+    return {
+      caseId: `NORMALIZATION_${descriptor}`,
+      family: "UNICODE_NORMALIZATION_LOOKALIKE",
+      descriptor,
+      targetRequiredKey,
+      serialized: stringKeyEnvelope(variantKey, targetRequiredKey),
+      expectedError: "INVALID_TRANSPORT_ENVELOPE",
+      nfkcMatchesRequiredKey: true,
+    };
+  });
+  return { controls, rejections: [...rawControls, ...escapedControls, ...normalizationLookalikes] };
+}
+
+export function evaluateStringTokenCorpus(baseArtifact) {
+  const corpus = buildStringTokenCorpus(baseArtifact);
+  const controls = corpus.controls.map(({ caseId, representation, serialized, expectedCandidate }) => {
+    const parsed = parseBoundedTransportEnvelope(serialized);
+    if (canonicalSha256(parsed.candidate) !== canonicalSha256(expectedCandidate)) {
+      fail(`STRING_CONTROL_DRIFT:${caseId}`);
+    }
+    return {
+      caseId,
+      representation,
+      representationSha256: sha256Hex(serialized),
+      utf8Bytes: Buffer.byteLength(serialized, "utf8"),
+      candidateCommitmentSha256: canonicalSha256(parsed.candidate),
+      acceptedAtParser: true,
+      candidateStored: false,
+      mutationEvaluated: false,
+    };
+  });
+  const rejections = corpus.rejections.map(({ caseId, family, descriptor, targetRequiredKey, serialized, expectedError, nfkcMatchesRequiredKey }) => {
+    let observedError = null;
+    try {
+      parseBoundedTransportEnvelope(serialized);
+    } catch (error) {
+      observedError = error instanceof Error ? error.message : String(error);
+    }
+    if (observedError !== expectedError) fail(`STRING_REJECTION_DRIFT:${caseId}:${observedError}`);
+    return {
+      caseId,
+      family,
+      descriptor,
+      targetRequiredKey,
+      representationSha256: sha256Hex(serialized),
+      utf8Bytes: Buffer.byteLength(serialized, "utf8"),
+      expectedError,
+      observedError,
+      nfkcMatchesRequiredKey,
       rejectedBeforeCandidate: true,
       candidateProduced: false,
       mutationEvaluated: false,

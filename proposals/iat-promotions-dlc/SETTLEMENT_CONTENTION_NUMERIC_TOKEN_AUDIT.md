@@ -43,3 +43,7 @@ The companion
 [`SETTLEMENT_CONTENTION_DELIMITER_WHITESPACE_AUDIT.md`](./SETTLEMENT_CONTENTION_DELIMITER_WHITESPACE_AUDIT.md)
 fixes the accepted whitespace set and single-document boundary under the same
 bounded parser.
+
+The string companion
+[`SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md`](./SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md)
+fixes exact decoded required-key equality under the same bounded parser.

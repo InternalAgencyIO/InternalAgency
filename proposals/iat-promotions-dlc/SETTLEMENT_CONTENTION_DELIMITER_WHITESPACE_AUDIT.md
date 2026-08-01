@@ -35,3 +35,8 @@ exits with status `2`.
 
 This audit is review material only. It grants no receipt, deployment,
 activation, claim, wallet, signing, RPC, transaction, or chain capability.
+
+The companion
+[`SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md`](./SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md)
+fixes exact decoded required-key matching and rejects control-character or
+normalization-lookalike key spellings under the same bounded parser.
