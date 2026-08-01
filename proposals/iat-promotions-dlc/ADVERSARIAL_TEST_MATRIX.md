@@ -303,10 +303,13 @@ security audit or deployment approval.
 | Truncated, non-hex, non-JSON, or unpaired-surrogate escapes reach mutation evaluation | `malformed escapes and unpaired surrogates reject before mutation` | Three syntax errors and three Unicode-scalar failures reject before any candidate is produced in Node and Python |
 | Duplicate envelope, candidate, or deeply nested keys are silently overwritten | `duplicate keys at envelope, candidate, and deep levels reject before mutation` | Duplicate-aware Node and Python decoders reject all three depths before returning a candidate |
 | Oversized or deeply nested JSON consumes unbounded parser resources | `byte limit accepts exactly and rejects plus one`; depth, member, array, and node-limit tests | Exact byte and ordinary controls accept; five independent one-over-limit inputs reject before mutation with fixed metrics |
+| Fractional or exponent spellings coerce to an allowed integer and bypass a schema constant | `fractional and exponent equivalents reject before candidate production` | `1.0`, `1e0`, and `1E+0` reject lexically even though generic JavaScript number parsing would produce `1` |
+| Negative zero, unsafe integers, or non-finite equivalents collapse into ambiguous runtime values | negative-zero, unsafe-integer, and finite-runtime overflow tests | Three negative-zero spellings, three unsafe or precision-colliding integers, and two infinity-producing exponents reject before candidate production in Node and Python |
+| Non-JSON numeric constants or illegal integer prefixes reach the candidate | `non-JSON constants and illegal integer prefixes stay malformed` | `NaN`, both infinity constants, leading plus, and leading zero remain malformed in both runtimes |
 
 ## Next matrix expansion
 
-- add a compact numeric-token boundary corpus proving exponent, negative-zero,
-  integer-safety, and non-finite-equivalent spellings cannot bypass canonical
-  field constraints. Preserve runtime-only candidates and every network,
+- add a compact delimiter and whitespace corpus proving BOM, Unicode
+  whitespace, trailing values, and concatenated JSON documents reject before
+  candidate production. Preserve runtime-only candidates and every network,
   wallet, review, deployment, and activation HOLD.

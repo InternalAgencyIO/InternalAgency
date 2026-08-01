@@ -47,3 +47,8 @@ class, and compact commitment. Changed evidence exits with status `2`.
 
 This audit is review material only. It grants no receipt, deployment,
 activation, claim, wallet, signing, RPC, transaction, or chain capability.
+
+The companion
+[`SETTLEMENT_CONTENTION_NUMERIC_TOKEN_AUDIT.md`](./SETTLEMENT_CONTENTION_NUMERIC_TOKEN_AUDIT.md)
+closes exponent, fraction, negative-zero, integer-safety, and non-finite
+coercion paths under the same bounded parser.

@@ -2,13 +2,13 @@
 
 > **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
 
-Updated: 2026-08-01 00:31 UTC
+Updated: 2026-08-01 00:53 UTC
 
 Public draft PR: https://github.com/InternalAgencyIO/InternalAgency/pull/8
 
 Public branch: `agent/iat-promotions-dlc-draft`
 
-Previously published public increment: `70932fa`
+Previously published public increment: `606acfc`
 
 The authoritative current commit is always the head of the public draft PR.
 This status file deliberately does not claim a self-referential commit hash.
@@ -480,8 +480,20 @@ This status file deliberately does not claim a self-referential commit hash.
   `8422840dc082a557c0ede2b18c576eea3e3eaa0588d1a102b91fd1c4ce57eebd`,
   and combined replay commitment
   `978ec26a9ecf5d0ef9697caa60cea689042feae27070b68a168511b84b24beca`.
+- four canonical numeric-token controls spanning the unchanged composition
+  envelope, zero, and both exact safe-integer boundaries;
+- sixteen pre-candidate rejections covering three fractional or exponent
+  equivalents of one, three negative-zero spellings, three unsafe or
+  precision-colliding integers, two infinity-producing exponents, and five
+  non-JSON constants or illegal prefixes in Node and zero-dependency Python;
+- numeric control-set commitment
+  `a232afc87617e570edadf508e26ba046b2b4a7ee6c97e5992747941c001fcb13`,
+  rejection-set commitment
+  `949454ae890e8f2cf261c728a8bb4270bac5bb089c6230603e353a94a2b806cd`,
+  and combined replay commitment
+  `1d0d6fb06996456732cfd9ba0baa8c7b57ca5bea702bcc9c2dc0efb20d93eaa5`.
 
-Current proposal-only result: **366 tests passed**. This consists of 28 protected
+Current proposal-only result: **378 tests passed**. This consists of 28 protected
 policy tests, 13 reference-engine tests, eight attestation/transparency tests,
 two deterministic randomized-state-machine tests, and eight program-interface
 and codec tests, five encoded transition-adapter tests, four deterministic
@@ -576,6 +588,10 @@ Twelve bounded-transport deterministic regeneration, fixed-limit, control,
 duplicate-key, exact-byte, depth, object-member, array-length, total-node,
 independent Python parity, tamper-exit, compact-publication, source-safety, and
 manifest-coverage tests complete the transport-limit suite.
+Twelve numeric-token deterministic regeneration, exact-rule, canonical-control,
+fraction/exponent-equivalence, negative-zero, unsafe-integer, non-finite,
+non-JSON, compact-publication, independent Python parity, tamper-exit,
+source-safety, and manifest-coverage tests complete the numeric-token suite.
 
 ## Current guarantees of the reference model
 
@@ -607,8 +623,8 @@ These are executable model properties, not claims about any deployed program.
 
 ## Next safe increment
 
-Add a compact numeric-token boundary corpus proving exponent, negative-zero,
-integer-safety, and non-finite-equivalent spellings cannot bypass canonical
-field constraints. Keep candidates runtime-only; do not contact a local
-validator, Devnet, or Mainnet; preserve every network, wallet, review,
-deployment, and activation HOLD.
+Add a compact delimiter and whitespace corpus proving BOM, Unicode whitespace,
+trailing values, and concatenated JSON documents reject before candidate
+production. Keep candidates runtime-only; do not contact a local validator,
+Devnet, or Mainnet; preserve every network, wallet, review, deployment, and
+activation HOLD.

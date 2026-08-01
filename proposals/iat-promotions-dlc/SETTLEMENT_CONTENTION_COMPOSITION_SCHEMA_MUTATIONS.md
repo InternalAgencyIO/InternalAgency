@@ -54,3 +54,9 @@ The bounded-transport companion
 accepts two exact-limit controls and rejects duplicate keys at any depth plus
 UTF-8 byte, depth, object-member, array-length, and total-node overflows before
 mutation in both runtimes.
+
+The numeric-token companion
+[`SETTLEMENT_CONTENTION_NUMERIC_TOKEN_AUDIT.md`](./SETTLEMENT_CONTENTION_NUMERIC_TOKEN_AUDIT.md)
+requires canonical safe-integer JSON tokens and rejects fractional or exponent
+equivalents, negative zero, unsafe integers, non-finite equivalents, and
+non-JSON constants before a candidate is returned in both runtimes.

@@ -53,6 +53,10 @@ The bounded transport companion adds two accepted controls and eight
 pre-mutation rejections for duplicate keys and fixed byte, depth, object,
 array, and total-node limits; see
 `SETTLEMENT_CONTENTION_TRANSPORT_LIMIT_AUDIT.md`.
+The numeric-token companion adds four canonical safe-integer controls and
+sixteen pre-candidate rejections for fractional or exponent equivalents,
+negative zero, unsafe integers, non-finite equivalents, and non-JSON numeric
+constants; see `SETTLEMENT_CONTENTION_NUMERIC_TOKEN_AUDIT.md`.
 
 ## Reproduce locally
 
@@ -65,6 +69,7 @@ python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --ve
 python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-diagnostic-representation-audit --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-escape-representations.py --json
 python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --json
+python proposals/iat-promotions-dlc/verify-settlement-contention-transport-limits.py --verify-numeric-token-audit --json
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-schema.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-python.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-mutations.test.mjs
@@ -74,6 +79,7 @@ node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-diagnostic-representation-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-escape-representation-audit.test.mjs
 node --test proposals/iat-promotions-dlc/tests/settlement-contention-transport-limit-audit.test.mjs
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-numeric-token-audit.test.mjs
 ```
 
 These are local, read-only verification commands. They do not start a local

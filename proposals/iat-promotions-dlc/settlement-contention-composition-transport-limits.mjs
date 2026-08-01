@@ -15,6 +15,17 @@ export const TRANSPORT_LIMITS = Object.freeze({
   maxTotalNodes: 2_048,
 });
 
+export const NUMERIC_TOKEN_RULES = Object.freeze({
+  representation: "CANONICAL_SAFE_INTEGER",
+  canonicalPattern: "0|-?[1-9][0-9]*",
+  minimumSafeInteger: "-9007199254740991",
+  maximumSafeInteger: "9007199254740991",
+  fractionsAllowed: false,
+  exponentAllowed: false,
+  negativeZeroAllowed: false,
+  nonFiniteAllowed: false,
+});
+
 const TRANSPORT_MARKER = "DRAFT/INACTIVE";
 const sha256Hex = (value) => createHash("sha256").update(value, "utf8").digest("hex");
 const fail = (code) => { throw new Error(code); };
@@ -145,9 +156,13 @@ export function parseBoundedJson(serialized, limits = TRANSPORT_LIMITS) {
     }
     const numberMatch = serialized.slice(index).match(/^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/);
     if (numberMatch) {
-      index += numberMatch[0].length;
-      const value = Number(numberMatch[0]);
-      if (!Number.isFinite(value)) fail("MALFORMED_JSON");
+      const token = numberMatch[0];
+      index += token.length;
+      const value = Number(token);
+      if (!Number.isFinite(value)) fail("NONFINITE_JSON_NUMBER");
+      if (value === 0 && token.startsWith("-")) fail("NEGATIVE_ZERO_JSON_NUMBER");
+      if (!/^(?:0|-?[1-9]\d*)$/.test(token)) fail("NONCANONICAL_JSON_NUMBER");
+      if (!Number.isSafeInteger(value)) fail("UNSAFE_JSON_INTEGER");
       return value;
     }
     fail("MALFORMED_JSON");
@@ -273,6 +288,119 @@ export function evaluateTransportLimitCorpus(baseArtifact) {
       observedError,
       rejectedBeforeMutation: true,
       candidateProduced: false,
+    };
+  });
+  return { controls, rejections };
+}
+
+function numericEnvelope(token) {
+  return `{"transportMarker":"${TRANSPORT_MARKER}","candidate":{"numericProbe":${token}}}`;
+}
+
+function numericFieldMutation(baseLf, token, caseId) {
+  return replaceRequired(baseLf, '"vectorVersion": 1,', `"vectorVersion": ${token},`, caseId);
+}
+
+export function buildNumericTokenCorpus(baseArtifact) {
+  const baseLf = `${JSON.stringify({ transportMarker: TRANSPORT_MARKER, candidate: baseArtifact }, null, 2)}\n`;
+  const controls = [
+    {
+      caseId: "BASELINE_CANONICAL_FIELDS",
+      family: "CANONICAL_FIELD_SET",
+      tokens: ["1", "28", "2"],
+      serialized: baseLf,
+      expectedCandidate: baseArtifact,
+    },
+    {
+      caseId: "ZERO_CANONICAL",
+      family: "SAFE_INTEGER_BOUNDARY",
+      tokens: ["0"],
+      serialized: numericEnvelope("0"),
+      expectedCandidate: { numericProbe: 0 },
+    },
+    {
+      caseId: "MAX_SAFE_INTEGER_CANONICAL",
+      family: "SAFE_INTEGER_BOUNDARY",
+      tokens: [NUMERIC_TOKEN_RULES.maximumSafeInteger],
+      serialized: numericEnvelope(NUMERIC_TOKEN_RULES.maximumSafeInteger),
+      expectedCandidate: { numericProbe: Number.MAX_SAFE_INTEGER },
+    },
+    {
+      caseId: "MIN_SAFE_INTEGER_CANONICAL",
+      family: "SAFE_INTEGER_BOUNDARY",
+      tokens: [NUMERIC_TOKEN_RULES.minimumSafeInteger],
+      serialized: numericEnvelope(NUMERIC_TOKEN_RULES.minimumSafeInteger),
+      expectedCandidate: { numericProbe: Number.MIN_SAFE_INTEGER },
+    },
+  ];
+  const definitions = [
+    ["VECTOR_VERSION_DECIMAL_EQUIVALENT", "EQUIVALENT_NONCANONICAL", "1.0", "NONCANONICAL_JSON_NUMBER"],
+    ["VECTOR_VERSION_EXPONENT_LOWER", "EQUIVALENT_NONCANONICAL", "1e0", "NONCANONICAL_JSON_NUMBER"],
+    ["VECTOR_VERSION_EXPONENT_UPPER_PLUS", "EQUIVALENT_NONCANONICAL", "1E+0", "NONCANONICAL_JSON_NUMBER"],
+    ["NEGATIVE_ZERO_INTEGER", "NEGATIVE_ZERO", "-0", "NEGATIVE_ZERO_JSON_NUMBER"],
+    ["NEGATIVE_ZERO_DECIMAL", "NEGATIVE_ZERO", "-0.0", "NEGATIVE_ZERO_JSON_NUMBER"],
+    ["NEGATIVE_ZERO_EXPONENT", "NEGATIVE_ZERO", "-0e0", "NEGATIVE_ZERO_JSON_NUMBER"],
+    ["POSITIVE_SAFE_INTEGER_PLUS_ONE", "UNSAFE_INTEGER", "9007199254740992", "UNSAFE_JSON_INTEGER"],
+    ["NEGATIVE_SAFE_INTEGER_MINUS_ONE", "UNSAFE_INTEGER", "-9007199254740992", "UNSAFE_JSON_INTEGER"],
+    ["PRECISION_COLLISION_INTEGER", "UNSAFE_INTEGER", "9007199254740993", "UNSAFE_JSON_INTEGER"],
+    ["POSITIVE_EXPONENT_OVERFLOW", "NONFINITE_EQUIVALENT", "1e309", "NONFINITE_JSON_NUMBER"],
+    ["NEGATIVE_EXPONENT_OVERFLOW", "NONFINITE_EQUIVALENT", "-1e309", "NONFINITE_JSON_NUMBER"],
+    ["NAN_CONSTANT", "NON_JSON_NUMBER", "NaN", "MALFORMED_JSON"],
+    ["POSITIVE_INFINITY_CONSTANT", "NON_JSON_NUMBER", "Infinity", "MALFORMED_JSON"],
+    ["NEGATIVE_INFINITY_CONSTANT", "NON_JSON_NUMBER", "-Infinity", "MALFORMED_JSON"],
+    ["LEADING_PLUS_INTEGER", "NON_JSON_NUMBER", "+1", "MALFORMED_JSON"],
+    ["LEADING_ZERO_INTEGER", "NON_JSON_NUMBER", "01", "MALFORMED_JSON"],
+  ];
+  const rejections = definitions.map(([caseId, family, token, expectedError]) => ({
+    caseId,
+    family,
+    token,
+    targetPath: "/candidate/vectorVersion",
+    serialized: numericFieldMutation(baseLf, token, caseId),
+    expectedError,
+  }));
+  return { controls, rejections };
+}
+
+export function evaluateNumericTokenCorpus(baseArtifact) {
+  const corpus = buildNumericTokenCorpus(baseArtifact);
+  const controls = corpus.controls.map(({ caseId, family, tokens, serialized, expectedCandidate }) => {
+    const parsed = parseBoundedTransportEnvelope(serialized);
+    if (canonicalSha256(parsed.candidate) !== canonicalSha256(expectedCandidate)) {
+      fail(`NUMERIC_CONTROL_DRIFT:${caseId}`);
+    }
+    return {
+      caseId,
+      family,
+      tokens,
+      representationSha256: sha256Hex(serialized),
+      utf8Bytes: Buffer.byteLength(serialized, "utf8"),
+      candidateCommitmentSha256: canonicalSha256(parsed.candidate),
+      acceptedAtParser: true,
+      candidateStored: false,
+      mutationEvaluated: false,
+    };
+  });
+  const rejections = corpus.rejections.map(({ caseId, family, token, targetPath, serialized, expectedError }) => {
+    let observedError = null;
+    try {
+      parseBoundedTransportEnvelope(serialized);
+    } catch (error) {
+      observedError = error instanceof Error ? error.message : String(error);
+    }
+    if (observedError !== expectedError) fail(`NUMERIC_REJECTION_DRIFT:${caseId}:${observedError}`);
+    return {
+      caseId,
+      family,
+      token,
+      targetPath,
+      representationSha256: sha256Hex(serialized),
+      utf8Bytes: Buffer.byteLength(serialized, "utf8"),
+      expectedError,
+      observedError,
+      rejectedBeforeCandidate: true,
+      candidateProduced: false,
+      mutationEvaluated: false,
     };
   });
   return { controls, rejections };
