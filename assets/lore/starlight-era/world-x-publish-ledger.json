@@ -42,11 +42,11 @@
         "💜",
         "💚"
       ],
-      "nextIndex": 3,
+      "nextIndex": 4,
       "lastReservedImageNumbers": [
-        770,
-        771,
-        772
+        773,
+        774,
+        776
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T11:33:11.834Z",
+    "status": "awaiting_post",
+    "caption": "Switzerland ❤️ Sierra Leone",
+    "imageNumbers": [773, 774, 776],
+    "countries": ["Switzerland", "Sierra Leone"],
+    "assets": [
+      {"file": "773-switzerland-chillon-castle-lake-cipher.png", "sha256": "9b4fb2650fb8d21feeacce66076ff98dab6094bbbbbf3a7f5270360fdcb333fa"},
+      {"file": "774-switzerland-aletsch-glacier-data-extraction.png", "sha256": "56843fddbceabe1961ce2b08a9801e53fc3c8ad40b1cbef34d2251d8c202eb96"},
+      {"file": "776-sierra-leone-freetown-lumley-beach-city-intercept.png", "sha256": "c15be835749d00cec8c48129893552cbcb4ac55873fe8e2d4a2d38e5c4cb0ca8"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
