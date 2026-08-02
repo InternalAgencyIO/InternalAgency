@@ -31,12 +31,12 @@ export default function FutureSystemsPage() {
       </header>
       <section className="future-portals" aria-label="Future feature previews">
         <a className="future-portal portal-pet" href="/future/predictive-engine">
-          <span>01 // TARGET: NOT BEFORE T+31 DAYS</span>
+          <span>01 // TARGET: 30 DAYS AFTER $IAT GENESIS</span>
           <div><p>INTERNAL AGENCY</p><h2>THE PREDICTIVE<br />ENGINE MARKET</h2></div>
           <strong>ENTER THE IA-PET PREVIEW →</strong>
         </a>
         <a className="future-portal portal-casino" href="/future/casino">
-          <span>02 // TARGET: NOT BEFORE T+15 DAYS</span>
+          <span>02 // TARGET: 15 DAYS AFTER $IAT GENESIS</span>
           <div><p>INTERNAL AGENCY</p><h2>THE CASINO<br />DLC</h2></div>
           <strong>ENTER THE CASINO PREVIEW →</strong>
         </a>

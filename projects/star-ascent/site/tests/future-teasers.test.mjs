@@ -17,9 +17,11 @@ test("future previews are explicit, inactive, and transaction-free", async () =>
   assert.match(source, /POST-GENESIS CONCEPT/);
   assert.match(source, /INACTIVE/);
   assert.match(source, /NO WAGER ROUTE/);
-  assert.match(source, /NOT BEFORE GENESIS \+ 31 DAYS/);
-  assert.match(source, /NOT BEFORE GENESIS \+ 15 DAYS/);
+  assert.match(source, /30 DAYS AFTER \$IAT GENESIS/);
+  assert.match(source, /15 DAYS AFTER \$IAT GENESIS/);
   assert.match(source, /FAIRNESS CLAIM \/\/ NOT YET PROVEN/);
+  assert.match(source, /DECORATIVE RUNWAY HARDWARE/);
+  assert.doesNotMatch(source, /handcuff|restraint|bondage/i);
   assert.doesNotMatch(source, /\/api\//i);
   assert.doesNotMatch(source, /connectWallet|sendTransaction|TransactionInstruction|wallet-adapter/i);
   assert.doesNotMatch(source, /<form\b|<button\b/i);

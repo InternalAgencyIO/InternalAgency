@@ -26,7 +26,7 @@ export default function PredictiveEnginePage() {
   return (
     <main className="future-page feature-page feature-pet">
       <FutureNav />
-      <InactiveStrip target="TARGET: NOT BEFORE GENESIS + 31 DAYS" />
+      <InactiveStrip target="TARGET: 30 DAYS AFTER $IAT GENESIS" />
       <header className="feature-hero">
         <div className="feature-hero-copy">
           <p>IA-PET // PREDICTIVE ENGINE MARKET</p>
@@ -38,7 +38,7 @@ export default function PredictiveEnginePage() {
         <img src="/images/future/predictive-engine-hero-v1.png" alt="Radiance, Ellie, and Alia presenting an inactive futuristic prediction-market concept" />
       </header>
       <section className="feature-statline" aria-label="Predictive Engine proposal summary">
-        <div><span>TARGET WINDOW</span><strong>T+31 DAYS</strong></div>
+        <div><span>TARGET WINDOW</span><strong>30 DAYS AFTER $IAT GENESIS</strong></div>
         <div><span>ASSETS PROPOSED</span><strong>IAT + SOL</strong></div>
         <div><span>PROTOCOL EDGE</span><strong>1%</strong></div>
         <div><span>STATUS</span><strong>INACTIVE</strong></div>

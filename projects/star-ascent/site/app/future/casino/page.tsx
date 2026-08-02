@@ -26,7 +26,7 @@ export default function CasinoPage() {
   return (
     <main className="future-page feature-page feature-casino">
       <FutureNav />
-      <InactiveStrip target="TARGET: NOT BEFORE GENESIS + 15 DAYS" />
+      <InactiveStrip target="TARGET: 15 DAYS AFTER $IAT GENESIS" />
       <header className="feature-hero">
         <div className="feature-hero-copy">
           <p>CASINO DLC // EVERY RESULT REPLAYABLE</p>
@@ -38,7 +38,7 @@ export default function CasinoPage() {
         <img src="/images/future/casino-hero-v1.png" alt="Radiance, Ellie, and Alia in a playful inactive Casino DLC concept scene" />
       </header>
       <section className="feature-statline" aria-label="Casino DLC proposal summary">
-        <div><span>TARGET WINDOW</span><strong>T+15 DAYS</strong></div>
+        <div><span>TARGET WINDOW</span><strong>15 DAYS AFTER $IAT GENESIS</strong></div>
         <div><span>ASSETS PROPOSED</span><strong>IAT + SOL</strong></div>
         <div><span>FIXED EDGE TARGET</span><strong>1%</strong></div>
         <div><span>STATUS</span><strong>INACTIVE</strong></div>
