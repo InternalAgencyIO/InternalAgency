@@ -114,18 +114,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T10:05:42.762Z",
-    "status": "awaiting_post",
-    "caption": "United Arab Emirates 💚 Dominican Republic",
-    "imageNumbers": [717, 718, 715],
-    "countries": ["United Arab Emirates", "Dominican Republic"],
-    "assets": [
-      {"file": "717-united-arab-emirates-al-ain-al-jahili-fort-cipher.png", "sha256": "dccbc33c4cad6a05eb570827f543d0317da8bee364dc5c595196f2756362a6fc"},
-      {"file": "718-united-arab-emirates-liwa-dunes-extraction.png", "sha256": "002d56febec12d66bd1ba08df61a725819d56d64d4fbce4936f2a9c30675e7fd"},
-      {"file": "715-dominican-republic-bavaro-coast-night-relay.png", "sha256": "b660c85cd2889b1b1b8c6592e4e654c80e53f148eb76aa33658487117871871d"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2777,6 +2766,19 @@
         {"file": "713-dominican-republic-zona-colonial-alcazar-cipher.png", "sha256": "ccf1e2b0db8856fe823580def5f87acd097c7e801775775b5ee050d37fd7cf4f"},
         {"file": "714-dominican-republic-los-haitises-karst-extraction.png", "sha256": "f7957d1d7db4ded596a08ad54b61f9776b69417e95fd723de1bd362f31013042"},
         {"file": "716-united-arab-emirates-dubai-museum-future-intercept.png", "sha256": "5b83aa616b3ccbb8204555d379563d4bae79e23c6d21359208f9ef475bff0923"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T10:07:30.881Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083857214888923569",
+      "caption": "United Arab Emirates 💚 Dominican Republic",
+      "imageNumbers": [717, 718, 715],
+      "countries": ["United Arab Emirates", "Dominican Republic"],
+      "assets": [
+        {"file": "717-united-arab-emirates-al-ain-al-jahili-fort-cipher.png", "sha256": "dccbc33c4cad6a05eb570827f543d0317da8bee364dc5c595196f2756362a6fc"},
+        {"file": "718-united-arab-emirates-liwa-dunes-extraction.png", "sha256": "002d56febec12d66bd1ba08df61a725819d56d64d4fbce4936f2a9c30675e7fd"},
+        {"file": "715-dominican-republic-bavaro-coast-night-relay.png", "sha256": "b660c85cd2889b1b1b8c6592e4e654c80e53f148eb76aa33658487117871871d"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
