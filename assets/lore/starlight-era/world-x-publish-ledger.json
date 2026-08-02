@@ -114,18 +114,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T11:08:16.173Z",
-    "status": "awaiting_post",
-    "caption": "Israel 💙 Hungary",
-    "imageNumbers": [758, 759, 760],
-    "countries": ["Israel", "Hungary"],
-    "assets": [
-      {"file": "758-israel-makhtesh-ramon-extraction.png", "sha256": "01099d86e86fa838e60e380b57699f9cfd04250c4a922ee523c3048abf478baa"},
-      {"file": "759-israel-eilat-red-sea-night-relay.png", "sha256": "5bc8f95598b541740b0578bb7aa54266bbba8ed5d99872538b237175093783f8"},
-      {"file": "760-hungary-budapest-chain-bridge-intercept.png", "sha256": "0aadaeae507c9a21a2a83332e4975d8b1658bac733a507c46d3eef3af9b0ebc2"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2959,6 +2948,19 @@
         {"file": "756-israel-tel-aviv-white-city-intercept.png", "sha256": "6c70689a0970863a5fe1cd4728f70ffdd0e56cbb56dddc6ce125315966c3a2c8"},
         {"file": "757-israel-caesarea-aqueduct-cipher.png", "sha256": "ef6e06b6004363c84047cc6bc11369fa3cf1115e0486063057d021d11b619c6d"},
         {"file": "755-azerbaijan-baku-nizami-street-night-relay.png", "sha256": "e6b77600fe47da43d43127146dc5e094b19da8a8751db12e7409e7fb34ac3e80"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T11:10:41.435Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083873113624707421",
+      "caption": "Israel 💙 Hungary",
+      "imageNumbers": [758, 759, 760],
+      "countries": ["Israel", "Hungary"],
+      "assets": [
+        {"file": "758-israel-makhtesh-ramon-extraction.png", "sha256": "01099d86e86fa838e60e380b57699f9cfd04250c4a922ee523c3048abf478baa"},
+        {"file": "759-israel-eilat-red-sea-night-relay.png", "sha256": "5bc8f95598b541740b0578bb7aa54266bbba8ed5d99872538b237175093783f8"},
+        {"file": "760-hungary-budapest-chain-bridge-intercept.png", "sha256": "0aadaeae507c9a21a2a83332e4975d8b1658bac733a507c46d3eef3af9b0ebc2"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
