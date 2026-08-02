@@ -111,18 +111,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T09:46:02.922Z",
-    "status": "awaiting_post",
-    "caption": "Haiti 💚 Belgium",
-    "imageNumbers": [705, 706, 703],
-    "countries": ["Haiti", "Belgium"],
-    "assets": [
-      {"file": "705-haiti-milot-sans-souci-palace-cipher.png", "sha256": "fc31d3580d92196032cb3f2574c6fa8cb661f36f67ff53625b3fddc0296ff6cb"},
-      {"file": "706-haiti-bassin-bleu-waterfall-extraction.png", "sha256": "c453e94f06dd877df4aa45e773f81c628b14d66a52161d2d8befd71ab318dac6"},
-      {"file": "703-belgium-antwerp-central-station-night-relay.png", "sha256": "5b6dce9a161701bf4a7e170a437ce46604aa8a456ed782cee200186decc0dff7"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2722,6 +2711,19 @@
         {"file": "701-belgium-bruges-markt-belfry-cipher.png", "sha256": "ea60ed3054aa293788209488333bd2203d5a50c056521ef3699ba1da45a39c3d"},
         {"file": "702-belgium-high-fens-heath-extraction.png", "sha256": "4b724deaac6bfa96b5aa27823d5508dd65c67af0eb78193aafcd53a5309e91fd"},
         {"file": "704-haiti-port-au-prince-iron-market-intercept.png", "sha256": "43007a3761a5b76cf8f7d523c123d258071f102014edd9e6ee00885fa4661988"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T09:48:36.669Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083852457658970193",
+      "caption": "Haiti 💚 Belgium",
+      "imageNumbers": [705, 706, 703],
+      "countries": ["Haiti", "Belgium"],
+      "assets": [
+        {"file": "705-haiti-milot-sans-souci-palace-cipher.png", "sha256": "fc31d3580d92196032cb3f2574c6fa8cb661f36f67ff53625b3fddc0296ff6cb"},
+        {"file": "706-haiti-bassin-bleu-waterfall-extraction.png", "sha256": "c453e94f06dd877df4aa45e773f81c628b14d66a52161d2d8befd71ab318dac6"},
+        {"file": "703-belgium-antwerp-central-station-night-relay.png", "sha256": "5b6dce9a161701bf4a7e170a437ce46604aa8a456ed782cee200186decc0dff7"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
