@@ -1135,6 +1135,13 @@ rejected and regenerated.
 | **Mumbai Marine Drive Aircrew Prism Intercept**<br><img src="816-india-mumbai-marine-drive-prism-intercept.png" width="420" alt="The STAR RAZE trio retrieving a clear prism orb into a gold flight case above Mumbai's illuminated Marine Drive curve"> | **Jaipur Hawa Mahal Aircrew Wind Cipher**<br><img src="817-india-jaipur-hawa-mahal-wind-cipher.png" width="420" alt="The trio aligning a wind cipher with quill, signal ribbon and affectionate cheek gesture before Jaipur's Hawa Mahal"> |
 | **Munnar Tea Hills Aircrew Beacon Recovery**<br><img src="818-india-munnar-tea-hills-beacon-recovery.png" width="420" alt="The trio restoring a climate beacon above Munnar's rolling tea hills with deterministic hair, jewelry and styling details"> | **Mumbai Terminal Night Aircrew Light Relay**<br><img src="819-india-mumbai-terminal-night-light-relay.png" width="420" alt="The trio completing a gold-green-indigo light relay beside Mumbai Terminal 2 in a close affectionate aircrew finale"> |
 
+## THE MILE HIGH THREESOME - Bonus Batch 200: United States
+
+| | |
+|---|---|
+| **New York Brooklyn Bridge Aircrew Route-Light Alignment**<br><img src="820-united-states-new-york-brooklyn-bridge-route-light-alignment.png" width="420" alt="The STAR RAZE trio aligning red-white-blue route lights above the Brooklyn Bridge in short open-waist aircrew couture"> | **Chicago Riverwalk Aircrew Cabin-Signal Calibration**<br><img src="821-united-states-chicago-riverwalk-cabin-signal-calibration.png" width="420" alt="The trio completing a three-color cabin-signal calibration above the Chicago Riverwalk with a glass prism and close affectionate gesture"> |
+| **White Sands Aircrew Star-Map Relay**<br><img src="822-united-states-white-sands-star-map-relay.png" width="420" alt="The trio restoring a star-map relay across White Sands with compact role-coded aircrew styling and linked side-waist choreography"> | **San Francisco Golden Gate Aircrew Beacon Finale**<br><img src="823-united-states-san-francisco-golden-gate-beacon-finale.png" width="420" alt="The trio completing a red-white-blue route beacon before the Golden Gate Bridge in a reconciled affectionate finale"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
