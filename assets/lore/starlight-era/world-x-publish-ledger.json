@@ -42,11 +42,11 @@
         "🧡",
         "💜"
       ],
-      "nextIndex": 8,
+      "nextIndex": 9,
       "lastReservedImageNumbers": [
-        713,
-        714,
-        716
+        717,
+        718,
+        715
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T10:05:42.762Z",
+    "status": "awaiting_post",
+    "caption": "United Arab Emirates 💚 Dominican Republic",
+    "imageNumbers": [717, 718, 715],
+    "countries": ["United Arab Emirates", "Dominican Republic"],
+    "assets": [
+      {"file": "717-united-arab-emirates-al-ain-al-jahili-fort-cipher.png", "sha256": "dccbc33c4cad6a05eb570827f543d0317da8bee364dc5c595196f2756362a6fc"},
+      {"file": "718-united-arab-emirates-liwa-dunes-extraction.png", "sha256": "002d56febec12d66bd1ba08df61a725819d56d64d4fbce4936f2a9c30675e7fd"},
+      {"file": "715-dominican-republic-bavaro-coast-night-relay.png", "sha256": "b660c85cd2889b1b1b8c6592e4e654c80e53f148eb76aa33658487117871871d"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
