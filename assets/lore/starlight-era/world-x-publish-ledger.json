@@ -79,18 +79,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T09:04:22.0728545Z",
-    "status": "awaiting_post",
-    "caption": "Rwanda ❤️ Benin",
-    "imageNumbers": [681, 682, 679],
-    "countries": ["Rwanda", "Benin"],
-    "assets": [
-      {"file": "681-rwanda-kigali-kandt-house-cipher.png", "sha256": "9bf65beef196a2e7a0d1cf4ace45a538194b2e908015e1d033b7d8f2c2b1a75a"},
-      {"file": "682-rwanda-volcanoes-national-park-virunga-extraction.png", "sha256": "5eb2f105f0f4841095d3c360048d744b990a5a288c533cc616cf248fc5cf7526"},
-      {"file": "679-benin-grand-popo-mono-estuary-night-relay.png", "sha256": "eb96e7e751ec04c10021c92a9f7d4398ce3bc5ccdba386bd7260f7014c4d7a49"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2586,6 +2575,19 @@
         {"file": "677-benin-ouidah-portuguese-fort-cipher.png", "sha256": "322c00bcf748018c20fedec817d333db559c41f62b83a02d7de1a91be2503e03"},
         {"file": "678-benin-tanougou-waterfall-extraction.png", "sha256": "169ef4c1f61bb228d4143a5de038e6c983c4ee45805c0699149122056c9069ad"},
         {"file": "680-rwanda-kigali-convention-centre-intercept.png", "sha256": "5b79858ef5a2fbd61c1e33125190204169012156dbae567c9ce1e0fc0da5f3c6"}
+      ],
+      "transmission": "agent_file_input_home_one_click"
+    },
+    {
+      "postedAt": "2026-08-02T09:06:36.7075529Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083841676959690836",
+      "caption": "Rwanda ❤️ Benin",
+      "imageNumbers": [681, 682, 679],
+      "countries": ["Rwanda", "Benin"],
+      "assets": [
+        {"file": "681-rwanda-kigali-kandt-house-cipher.png", "sha256": "9bf65beef196a2e7a0d1cf4ace45a538194b2e908015e1d033b7d8f2c2b1a75a"},
+        {"file": "682-rwanda-volcanoes-national-park-virunga-extraction.png", "sha256": "5eb2f105f0f4841095d3c360048d744b990a5a288c533cc616cf248fc5cf7526"},
+        {"file": "679-benin-grand-popo-mono-estuary-night-relay.png", "sha256": "eb96e7e751ec04c10021c92a9f7d4398ce3bc5ccdba386bd7260f7014c4d7a49"}
       ],
       "transmission": "agent_file_input_home_one_click"
     }
