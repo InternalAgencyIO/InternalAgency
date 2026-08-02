@@ -39,11 +39,11 @@
         "🧡",
         "💜"
       ],
-      "nextIndex": 4,
+      "nextIndex": 5,
       "lastReservedImageNumbers": [
-        701,
-        702,
-        704
+        705,
+        706,
+        703
       ]
     },
     "quotes": false,
@@ -111,7 +111,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T09:46:02.922Z",
+    "status": "awaiting_post",
+    "caption": "Haiti 💚 Belgium",
+    "imageNumbers": [705, 706, 703],
+    "countries": ["Haiti", "Belgium"],
+    "assets": [
+      {"file": "705-haiti-milot-sans-souci-palace-cipher.png", "sha256": "fc31d3580d92196032cb3f2574c6fa8cb661f36f67ff53625b3fddc0296ff6cb"},
+      {"file": "706-haiti-bassin-bleu-waterfall-extraction.png", "sha256": "c453e94f06dd877df4aa45e773f81c628b14d66a52161d2d8befd71ab318dac6"},
+      {"file": "703-belgium-antwerp-central-station-night-relay.png", "sha256": "5b6dce9a161701bf4a7e170a437ce46604aa8a456ed782cee200186decc0dff7"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
