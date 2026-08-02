@@ -1128,6 +1128,13 @@ rejected and regenerated.
 | **Shanghai Bund Pudong Aircrew Intercept**<br><img src="812-china-shanghai-bund-pudong-intercept.png" width="420" alt="The STAR RAZE trio locking crimson-gold-jade light keys into a mirror-gold flight case above Shanghai's Bund and Huangpu River"> | **Xi'an City Wall Gate Aircrew Cipher**<br><img src="813-china-xian-city-wall-gate-cipher.png" width="420" alt="The trio sealing crystal cipher rings into a porcelain archive capsule beside Xi'an's historic city wall"> |
 | **Zhangjiajie Sandstone Aircrew Extraction**<br><img src="814-china-zhangjiajie-sandstone-pillar-extraction.png" width="420" alt="The trio restoring a jade-cobalt terrain beacon above Zhangjiajie's quartz-sandstone pillars"> | **Guangzhou Pearl River Night Aircrew Relay**<br><img src="815-china-guangzhou-pearl-river-night-relay.png" width="420" alt="The trio completing a crimson-gold river-compass relay above Guangzhou's Pearl River waterfront"> |
 
+## THE MILE HIGH THREESOME - Bonus Batch 199: India
+
+| | |
+|---|---|
+| **Mumbai Marine Drive Aircrew Prism Intercept**<br><img src="816-india-mumbai-marine-drive-prism-intercept.png" width="420" alt="The STAR RAZE trio retrieving a clear prism orb into a gold flight case above Mumbai's illuminated Marine Drive curve"> | **Jaipur Hawa Mahal Aircrew Wind Cipher**<br><img src="817-india-jaipur-hawa-mahal-wind-cipher.png" width="420" alt="The trio aligning a wind cipher with quill, signal ribbon and affectionate cheek gesture before Jaipur's Hawa Mahal"> |
+| **Munnar Tea Hills Aircrew Beacon Recovery**<br><img src="818-india-munnar-tea-hills-beacon-recovery.png" width="420" alt="The trio restoring a climate beacon above Munnar's rolling tea hills with deterministic hair, jewelry and styling details"> | **Mumbai Terminal Night Aircrew Light Relay**<br><img src="819-india-mumbai-terminal-night-light-relay.png" width="420" alt="The trio completing a gold-green-indigo light relay beside Mumbai Terminal 2 in a close affectionate aircrew finale"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
