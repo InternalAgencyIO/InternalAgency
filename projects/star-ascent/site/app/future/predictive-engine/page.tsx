@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { EditorialScene } from "../EditorialScene";
 import { FutureNav, InactiveStrip } from "../FutureNav";
 
 export const metadata: Metadata = {
@@ -60,6 +61,15 @@ export default function PredictiveEnginePage() {
         <h2>“PROVABLY FAIR” MUST BE A REPRODUCIBLE PROPERTY, NOT A TAGLINE.</h2>
         <span>The release gate requires public settlement rules, canonical resolution sources, replayable receipts, dispute handling, economic tests, and independent review. Until then this is a design target.</span>
       </section>
+      <EditorialScene
+        eyebrow="FIELD EDITORIAL // FLIGHT DECK RUNWAY"
+        title="THE MARKET TAKES THE DECK."
+        body="Radiance, Ellie, and Alia preview the concept from an aircraft-carrier fashion runway while flight operations continue safely behind them. Rainbow cocktail couture; still inactive."
+        image="/images/future/predictive-engine-carrier-runway-v2.png"
+        imageAlt="Three adult women in rainbow cocktail couture walking a fashion runway on an aircraft carrier with fighter jets operating in the background"
+        video="/media/future/predictive-engine-carrier-teaser-15s-4k-v2.mp4"
+        caption="ORIGINAL EDITORIAL · ADULT FICTIONAL CHARACTERS · CONCEPT ONLY"
+      />
       <section className="feature-next"><a href="/future/casino"><span>NEXT PREVIEW</span>CASINO DLC →</a></section>
       <footer className="future-footer"><a href="/future">← ALL FUTURE SYSTEMS</a><span>NO WALLET · NO WAGER · NO ACTIVATION</span></footer>
     </main>

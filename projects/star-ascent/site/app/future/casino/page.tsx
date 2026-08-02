@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { EditorialScene } from "../EditorialScene";
 import { FutureNav, InactiveStrip } from "../FutureNav";
 
 export const metadata: Metadata = {
@@ -60,6 +61,15 @@ export default function CasinoPage() {
         <h2>NO GAME SHIPS ON A PROMISE OF FAIRNESS.</h2>
         <span>Each game requires exact integer accounting, public randomness commitments, deterministic replay vectors, bankroll solvency limits, failure rollback, abuse controls, and an independent final-code audit.</span>
       </section>
+      <EditorialScene
+        eyebrow="FIELD EDITORIAL // EVEREST TABLE"
+        title="THE HOUSE REACHES THE SUMMIT."
+        body="A cheerful poker-table concept above the clouds: one latex-finish cocktail dress, one lace-overlay cocktail dress, and one opaque corset-seamed cocktail dress in rainbow color."
+        image="/images/future/casino-everest-poker-v2.png"
+        imageAlt="Three adult women in rainbow cocktail dresses cheerfully playing poker at a table on the summit of Mount Everest"
+        video="/media/future/casino-everest-teaser-15s-4k-v2.mp4"
+        caption="ORIGINAL EDITORIAL · ADULT FICTIONAL CHARACTERS · CONCEPT ONLY"
+      />
       <section className="feature-next"><a href="/future/predictive-engine"><span>OTHER PREVIEW</span>PREDICTIVE ENGINE →</a></section>
       <footer className="future-footer"><a href="/future">← ALL FUTURE SYSTEMS</a><span>NO WALLET · NO WAGER · NO ACTIVATION</span></footer>
     </main>
