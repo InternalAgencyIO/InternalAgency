@@ -79,7 +79,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T09:19:38.8238723Z",
+    "status": "awaiting_post",
+    "caption": "Burundi ❤️ Bolivia",
+    "imageNumbers": [686, 687, 688],
+    "countries": ["Burundi", "Bolivia"],
+    "assets": [
+      {"file": "686-burundi-kibira-national-park-canopy-extraction.png", "sha256": "1902b1c0d2aa3b71be81c521795cf89c84c6acf9de8357c1cfdfac5bd4875d58"},
+      {"file": "687-burundi-bujumbura-port-lake-tanganyika-night-relay.png", "sha256": "e985a3e2aac268457acc17cd411801435c67ad1f7d87b8428eff693e073ed076"},
+      {"file": "688-bolivia-la-paz-illimani-skyline-intercept.png", "sha256": "b1e6ef7c4db3ab8d98ab26a68c1700e3f6ab27c3672bc47e63da69abb72b45a6"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
