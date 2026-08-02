@@ -1085,6 +1085,13 @@ rejected and regenerated.
 | **Tripoli Corniche Mediterranean Intercept**<br><img src="792-libya-tripoli-corniche-mediterranean-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking red-black-green light keys into an optical-white harbor prism above Tripoli's Mediterranean Corniche"> | **Leptis Magna Market Cipher**<br><img src="793-libya-leptis-magna-market-cipher.png" width="420" alt="The trio sealing a fictional archive inside an amber crystal capsule beside Leptis Magna's ancient market colonnade"> |
 | **Ubari Lakes Oasis Data Extraction**<br><img src="794-libya-ubari-lakes-oasis-extraction.png" width="420" alt="The trio restoring a turquoise-and-gold habitat beacon above the Ubari Lakes oasis and Fezzan dunes"> | **Benghazi Harbor Night Relay**<br><img src="795-libya-benghazi-harbor-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a red-black-green-gold harbor relay above Benghazi's Mediterranean waterfront at blue hour"> |
 
+## World Series - Asia - Batch 194: Kyrgyzstan
+
+| | |
+|---|---|
+| **Bishkek Ala-Too Alpine Intercept**<br><img src="796-kyrgyzstan-bishkek-ala-too-alpine-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking crimson-gold-cobalt light keys into an alpine prism above Bishkek's Ala-Too Square"> | **Tash Rabat Caravanserai Stone Cipher**<br><img src="797-kyrgyzstan-tash-rabat-caravanserai-cipher.png" width="420" alt="The trio sealing a fictional archive inside an amber crystal capsule beside Tash Rabat's stone caravanserai"> |
+| **Song-Kul Highland Data Extraction**<br><img src="798-kyrgyzstan-song-kul-highland-extraction.png" width="420" alt="The trio restoring a silver-and-turquoise habitat beacon above Song-Kul's high-altitude lake basin"> | **Balykchy Issyk-Kul Rail Night Relay**<br><img src="799-kyrgyzstan-balykchy-issyk-kul-rail-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a crimson-gold-cobalt rail relay above Balykchy and the Issyk-Kul shore at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
