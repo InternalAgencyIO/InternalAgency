@@ -1113,6 +1113,13 @@ rejected and regenerated.
 | **İstanbul Karaköy Bosphorus Aircrew Intercept**<br><img src="808-turkiye-istanbul-karakoy-bosphorus-intercept.png" width="420" alt="The STAR RAZE trio locking red-white-cobalt keys into a gold flight case above İstanbul's Karaköy Bosphorus waterfront"> | **Safranbolu Merchant Arcade Aircrew Cipher**<br><img src="809-turkiye-safranbolu-merchant-arcade-cipher.png" width="420" alt="The trio sealing three crystal cipher rings into an illuminated archive capsule in Safranbolu's historic merchant lane"> |
 | **Pamukkale Travertine Aircrew Extraction**<br><img src="810-turkiye-pamukkale-travertine-terrain-extraction.png" width="420" alt="The trio restoring a cobalt-gold terrain beacon above Pamukkale's white travertines and turquoise pools"> | **İzmir Kordon Night Aircrew Relay**<br><img src="811-turkiye-izmir-kordon-night-tram-relay.png" width="420" alt="The trio locking signal bracelets into a gold compass above İzmir's illuminated Kordon waterfront"> |
 
+## THE MILE HIGH THREESOME - Bonus Batch 198: China
+
+| | |
+|---|---|
+| **Shanghai Bund Pudong Aircrew Intercept**<br><img src="812-china-shanghai-bund-pudong-intercept.png" width="420" alt="The STAR RAZE trio locking crimson-gold-jade light keys into a mirror-gold flight case above Shanghai's Bund and Huangpu River"> | **Xi'an City Wall Gate Aircrew Cipher**<br><img src="813-china-xian-city-wall-gate-cipher.png" width="420" alt="The trio sealing crystal cipher rings into a porcelain archive capsule beside Xi'an's historic city wall"> |
+| **Zhangjiajie Sandstone Aircrew Extraction**<br><img src="814-china-zhangjiajie-sandstone-pillar-extraction.png" width="420" alt="The trio restoring a jade-cobalt terrain beacon above Zhangjiajie's quartz-sandstone pillars"> | **Guangzhou Pearl River Night Aircrew Relay**<br><img src="815-china-guangzhou-pearl-river-night-relay.png" width="420" alt="The trio completing a crimson-gold river-compass relay above Guangzhou's Pearl River waterfront"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
