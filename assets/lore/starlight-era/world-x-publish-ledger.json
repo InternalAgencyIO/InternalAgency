@@ -42,11 +42,11 @@
         "🧡",
         "💜"
       ],
-      "nextIndex": 10,
+      "nextIndex": 11,
       "lastReservedImageNumbers": [
-        720,
-        721,
-        719
+        722,
+        723,
+        724
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T10:14:05.863Z",
+    "status": "awaiting_post",
+    "caption": "Cuba 🧡 Czechia",
+    "imageNumbers": [722, 723, 724],
+    "countries": ["Cuba", "Czechia"],
+    "assets": [
+      {"file": "722-cuba-vinales-mogote-data-extraction.png", "sha256": "3ea429a81bb24cc71847aad9c3e310442cace66ea7fb5349316d7709f8c8d7ab"},
+      {"file": "723-cuba-varadero-moonline-relay.png", "sha256": "9ee02a189b1c2ae9a2d269d83f47b74dda40f6b35e798e47341d5842967d98f8"},
+      {"file": "724-czechia-prague-dancing-house-river-intercept.png", "sha256": "996cb24108f8c49f554d1651855837ed9fcf21cb9caa48e13a99d9325c2d2065"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
