@@ -41,18 +41,27 @@ Run this only during the final attended review:
 node scripts/run-launch-preflight.mjs --require-ceremony-ready
 ```
 
-Before any other ceremony check runs, the assertion requires all six
-conditions recorded in `launch/iat-v2-mainnet-readiness-gate.json`:
+Before any other ceremony check runs, the assertion requires the public
+pre-launch audit clearance and all six conditions recorded in
+`launch/iat-v2-mainnet-readiness-gate.json`:
 
-1. The read-only balance observation is no more than 30 minutes old with no
+1. The canonical pre-launch audit manifest records `CLEAR`, zero open
+   critical/high findings, resolved security blockers, and a completed
+   independent final-code audit.
+2. The read-only balance observation is no more than 30 minutes old with no
    more than one minute of future skew.
-2. The public mainnet address has at least exactly `8500000000` lamports.
-3. One replacement UTC window is published and the schedule state is
+3. The public mainnet address has at least exactly `8500000000` lamports.
+4. One replacement UTC window is published and the schedule state is
    `SCHEDULED_HOLD`.
-4. Every bound release artifact was regenerated after both funding and
+5. Every bound release artifact was regenerated after both funding and
    scheduling.
-5. An independent mainnet verifier is assigned.
-6. The exact Model T device path was reviewed in the attended session.
+6. An independent mainnet verifier is assigned.
+7. The exact Model T device path was reviewed in the attended session.
+
+The source-bound audit package is public at
+[`public/audits/iat-v2-prelaunch-20260802/`](../public/audits/iat-v2-prelaunch-20260802/README.md).
+It is an internal Codex-assisted review, not an independent security audit, and
+it is deliberately fail-closed while any critical/high finding remains open.
 
 The assessment also independently requires the mainnet HOLD/safety boundary
 and the honest `VERIFIED_LOCAL_HOST_ONLY` classification; either failure adds a

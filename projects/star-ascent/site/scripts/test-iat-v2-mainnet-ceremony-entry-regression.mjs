@@ -7,11 +7,13 @@ import { resolve } from "node:path";
 import { assessCeremonyEntry } from "./assess-iat-v2-mainnet-ceremony-entry.mjs";
 
 const gate = JSON.parse(readFileSync(resolve("launch/iat-v2-mainnet-readiness-gate.json"), "utf8"));
+const audit = JSON.parse(readFileSync(resolve("public/audits/iat-v2-prelaunch-20260802/manifest.json"), "utf8"));
 const currentNowMs = Date.parse("2026-08-01T08:18:04Z");
-const current = assessCeremonyEntry(gate, "0".repeat(64), currentNowMs);
+const current = assessCeremonyEntry(gate, "0".repeat(64), currentNowMs, audit);
 assert.equal(current.state, "HOLD");
 assert.equal(current.mainnetStatus, "HOLD");
 assert.deepEqual(current.blockers, [
+  "PRELAUNCH_SECURITY_AUDIT_CLEARANCE",
   "FRESH_READ_ONLY_FUNDING_OBSERVATION",
   "MAINNET_FUNDING_FLOOR",
   "REPLACEMENT_UTC_WINDOW",
@@ -37,6 +39,7 @@ assert.match(preflightResult.stderr, /CEREMONY ENTRY BLOCKED/);
 assert.doesNotMatch(preflightResult.stdout, /== test-accountability-label-normalization\.mjs ==/);
 
 const readyGate = structuredClone(gate);
+const readyAudit = structuredClone(audit);
 readyGate.funding.ceremonyFloorSatisfied = true;
 readyGate.funding.observedLamports = readyGate.funding.ceremonyFloorLamports;
 readyGate.observedAtUtc = "2099-01-01T00:00:00Z";
@@ -45,12 +48,18 @@ readyGate.schedule.publishedAtUtc = "2099-01-01T00:00:00Z";
 readyGate.gates.releaseArtifactsRegeneratedAfterFundingAndScheduling = true;
 readyGate.gates.independentMainnetVerifierAssigned = true;
 readyGate.gates.physicalModelTDevicePathReviewed = true;
-const ready = assessCeremonyEntry(readyGate, "f".repeat(64), Date.parse("2099-01-01T00:15:00Z"));
+readyAudit.launchDecision = "CLEAR";
+readyAudit.findingSummary.openBySeverity.CRITICAL = 0;
+readyAudit.findingSummary.openBySeverity.HIGH = 0;
+readyAudit.clearance.securityBlockersResolved = true;
+readyAudit.clearance.independentAuditComplete = true;
+const ready = assessCeremonyEntry(readyGate, "f".repeat(64), Date.parse("2099-01-01T00:15:00Z"), readyAudit);
 assert.equal(ready.state, "READY_FOR_ATTENDED_PREFLIGHT");
 assert.equal(ready.mainnetStatus, "HOLD_PENDING_ATTENDED_PREFLIGHT");
 assert.deepEqual(ready.blockers, []);
 assert.equal(ready.checks.MAINNET_HOLD_BOUNDARY, true);
 assert.equal(ready.checks.LOCAL_TIME_GATE_CLASSIFICATION, true);
+assert.equal(ready.checks.PRELAUNCH_SECURITY_AUDIT_CLEARANCE, true);
 assert.equal(ready.checks.FRESH_READ_ONLY_FUNDING_OBSERVATION, true);
 assert.equal(ready.checks.MAINNET_FUNDING_FLOOR, true);
 assert.equal(ready.checks.REPLACEMENT_UTC_WINDOW, true);
@@ -58,4 +67,4 @@ assert.equal(ready.checks.BOUND_RELEASE_ARTIFACTS_REGENERATED, true);
 assert.equal(ready.checks.INDEPENDENT_MAINNET_VERIFIER_ASSIGNED, true);
 assert.equal(ready.checks.MODEL_T_DEVICE_PATH_REVIEWED, true);
 
-console.log("IAT V2 ceremony-entry regression passed: current ledger fails closed on six blockers before the full preflight; synthetic ready state grants only attended-preflight entry.");
+console.log("IAT V2 ceremony-entry regression passed: current ledger fails closed on seven blockers including security-audit clearance; synthetic ready state grants only attended-preflight entry.");

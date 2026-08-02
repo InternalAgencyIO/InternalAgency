@@ -7,8 +7,9 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const canonicalGatePath = path.join(siteRoot, "launch/iat-v2-mainnet-readiness-gate.json");
+const canonicalAuditPath = path.join(siteRoot, "public/audits/iat-v2-prelaunch-20260802/manifest.json");
 
-export function assessCeremonyEntry(gate, sourceSha256, nowMs = Date.now()) {
+export function assessCeremonyEntry(gate, sourceSha256, nowMs = Date.now(), audit = undefined) {
   const observedAtMs = Date.parse(gate.observedAtUtc ?? "");
   const fundingObservationFresh = Number.isFinite(observedAtMs)
     && observedAtMs <= nowMs + 60_000
@@ -23,10 +24,16 @@ export function assessCeremonyEntry(gate, sourceSha256, nowMs = Date.now()) {
   const replacementUtcPublished = gate.schedule?.state === "SCHEDULED_HOLD"
     && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/u.test(gate.schedule?.publishedAtUtc ?? "")
     && Number.isFinite(Date.parse(gate.schedule.publishedAtUtc));
+  const securityAuditClear = audit?.launchDecision === "CLEAR"
+    && audit?.findingSummary?.openBySeverity?.CRITICAL === 0
+    && audit?.findingSummary?.openBySeverity?.HIGH === 0
+    && audit?.clearance?.securityBlockersResolved === true
+    && audit?.clearance?.independentAuditComplete === true;
   const safetyValues = Object.values(gate.safety ?? {});
   const required = [
     ["MAINNET_HOLD_BOUNDARY", gate.status === "HOLD" && gate.network === "mainnet-beta" && safetyValues.length > 0 && safetyValues.every((value) => value === false)],
     ["LOCAL_TIME_GATE_CLASSIFICATION", gate.timeGateEvidence?.status === "VERIFIED_LOCAL_HOST_ONLY" && gate.timeGateEvidence?.signedDevnetEvidence === false && gate.timeGateEvidence?.validatorTransaction === false],
+    ["PRELAUNCH_SECURITY_AUDIT_CLEARANCE", securityAuditClear],
     ["FRESH_READ_ONLY_FUNDING_OBSERVATION", fundingObservationFresh],
     ["MAINNET_FUNDING_FLOOR", gate.funding?.ceremonyFloorSatisfied === true && fundingFloorSatisfied],
     ["REPLACEMENT_UTC_WINDOW", replacementUtcPublished],
@@ -39,6 +46,7 @@ export function assessCeremonyEntry(gate, sourceSha256, nowMs = Date.now()) {
     schema: "iat-v2-mainnet-ceremony-entry-assessment/v1",
     sourcePath: "launch/iat-v2-mainnet-readiness-gate.json",
     sourceSha256,
+    auditSourcePath: "public/audits/iat-v2-prelaunch-20260802/manifest.json",
     state: blockers.length === 0 ? "READY_FOR_ATTENDED_PREFLIGHT" : "HOLD",
     mainnetStatus: blockers.length === 0 ? "HOLD_PENDING_ATTENDED_PREFLIGHT" : "HOLD",
     blockers,
@@ -47,17 +55,25 @@ export function assessCeremonyEntry(gate, sourceSha256, nowMs = Date.now()) {
       "This assessment is local and read-only.",
       "READY_FOR_ATTENDED_PREFLIGHT is not transaction, signing, broadcast, deployment, mint, transfer, or publication authority.",
       "The funding observation must be no more than 30 minutes old with no more than one minute of future skew.",
+      "Open critical/high audit findings and missing independent assurance are mandatory ceremony-entry blockers.",
       "Physical review of each transaction and separate broadcast approval remain mandatory after entry.",
     ],
   };
 }
 
 export async function assessCanonicalCeremonyEntry() {
-  const bytes = await readFile(canonicalGatePath);
-  return assessCeremonyEntry(
+  const [bytes, auditBytes] = await Promise.all([
+    readFile(canonicalGatePath),
+    readFile(canonicalAuditPath),
+  ]);
+  const assessment = assessCeremonyEntry(
     JSON.parse(bytes.toString("utf8")),
     createHash("sha256").update(bytes).digest("hex"),
+    Date.now(),
+    JSON.parse(auditBytes.toString("utf8")),
   );
+  assessment.auditSourceSha256 = createHash("sha256").update(auditBytes).digest("hex");
+  return assessment;
 }
 
 const invokedAsCli = process.argv[1]

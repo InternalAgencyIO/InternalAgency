@@ -9,19 +9,24 @@ machine-readable gate is
 
 ## Before scheduling
 
-1. Confirm the public mainnet fee-payer balance is at least the exact
+1. Review the public, source-bound
+   [`IAT V2 pre-launch security audit`](../public/audits/iat-v2-prelaunch-20260802/README.md)
+   and keep ceremony entry blocked until its machine-readable manifest records
+   zero open critical/high findings, resolved security blockers, and a completed
+   independent final-code audit.
+2. Confirm the public mainnet fee-payer balance is at least the exact
    `8500000000` lamport ceremony floor using a fresh read-only observation.
-2. Publish one replacement UTC window; invalidate the expired window and every
+3. Publish one replacement UTC window; invalidate the expired window and every
    packet or approval that pre-dates the replacement.
-3. Regenerate all bound release artifacts before any final review.
+4. Regenerate all bound release artifacts before any final review.
 
 ## Before broadcast
 
 1. In the attended final review, run
    `node scripts/run-launch-preflight.mjs --require-ceremony-ready` from the
    project root. It fails before the full preflight if a fresh read-only
-   balance, funding, replacement schedule, regeneration, verifier, or Model T
-   device-path review is missing.
+   security clearance, balance, funding, replacement schedule, regeneration,
+   verifier, or Model T device-path review is missing.
    The default command is preparation-only and cannot open the ceremony.
 2. Validate `launch/iat-v2-mainnet-readiness-gate.json`, then read
    [`GENESIS_COMMAND_CENTER.md`](GENESIS_COMMAND_CENTER.md) and assign the

@@ -1,0 +1,45 @@
+{
+  "schema": "iat-v2-prelaunch-checks/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "runAtUtc": "2026-08-02T06:48:41Z",
+  "environment": {
+    "windowsNode": "24.14.0",
+    "npm": "11.9.0",
+    "wslRust": "1.97.1",
+    "anchorCli": "1.0.2",
+    "solanaCli": "3.1.10",
+    "cargoAudit": "0.22.2",
+    "githubCli": "2.96.0"
+  },
+  "checks": [
+    {"id":"ROOT_TEST","command":"npm test","result":"PASS","metrics":{"passed":8,"failed":0}},
+    {"id":"IAT_V2_POLICY_AND_TESTS","command":"npm run check:iat-v2","result":"PASS","metrics":{"nodeTestsPassed":41,"nodeTestsFailed":0,"mainnetStatus":"HOLD"}},
+    {"id":"IAT_V2_SIGNOFF","command":"npm run check:iat-v2-signoff","result":"PASS_WITH_PENDING_INITIALIZATION","metrics":{"initializationSignoff":"PENDING","featureSignoff":"PASS","mainnetStatus":"HOLD"}},
+    {"id":"SITE_CANONICAL_INSTALL","command":"npm ci under Node 24.14.0 using package-lock.json","result":"PASS_WITH_ADVISORIES","metrics":{"packagesInstalled":645,"high":7,"moderate":15,"trackedFilesChanged":0}},
+    {"id":"FULL_LAUNCH_GATES","command":"npm run check:launch-gates under the canonical install","result":"PASS","metrics":{"mainnetStatus":"HOLD","ceremonyEntryBlockers":7,"securityAuditClearance":"BLOCKED"}},
+    {"id":"SITE_LINT","command":"npm run lint","result":"PASS_WITH_WARNINGS","metrics":{"errors":0,"warnings":8,"warningClass":"next/no-img-element"}},
+    {"id":"RUST_FMT","command":"cargo fmt --all -- --check","result":"PASS"},
+    {"id":"RUST_TEST","command":"cargo test --workspace --all-targets --locked","result":"PASS","metrics":{"passed":19,"failed":0}},
+    {"id":"RUST_CLIPPY","command":"cargo clippy --workspace --all-targets --locked -- -D warnings","result":"FAIL_QUALITY_GATE","metrics":{"findingClasses":["items_after_test_module","diverging_sub_expression","too_many_arguments"],"runtimeTestFailure":false}},
+    {"id":"RUSTSEC","command":"cargo audit --json","result":"PASS_WITH_INFORMATIONAL_WARNING","metrics":{"lockedDependencies":226,"knownVulnerabilities":0,"unmaintained":1,"unmaintainedPackages":["bincode@1.3.3"],"advisoryDatabaseCommit":"8c1eed913b9c51b5bf817bd4fe724cb049f0406c"}},
+    {"id":"ROOT_NPM_AUDIT_ALL","command":"npm audit --json","result":"FAIL_ADVISORIES","metrics":{"critical":1,"high":12,"moderate":0,"low":0,"notableDirect":["electron-builder"]}},
+    {"id":"ROOT_NPM_AUDIT_PRODUCTION","command":"npm audit --omit=dev --json","result":"PASS","metrics":{"critical":0,"high":0,"moderate":0,"low":0}},
+    {"id":"SITE_NPM_AUDIT_ALL","command":"npm audit --json","result":"FAIL_ADVISORIES","metrics":{"critical":0,"high":7,"moderate":15,"low":0,"notable":["bigint-buffer","postcss","sharp","@solana/web3.js","next"]}},
+    {"id":"SITE_NPM_AUDIT_PRODUCTION","command":"npm audit --omit=dev --json","result":"PASS","metrics":{"critical":0,"high":0,"moderate":0,"low":0}},
+    {"id":"SITE_PNPM_AUDIT_ALTERNATE_LOCK","command":"pnpm audit --json","result":"FAIL_ADVISORIES_AND_NONCANONICAL_LOCK","metrics":{"critical":0,"high":15,"moderate":12,"low":3}},
+    {"id":"CODEQL_PR_CHECKS","command":"gh pr view 4 --json statusCheckRollup","result":"PASS","metrics":{"actions":"SUCCESS","javascriptTypescript":"SUCCESS","python":"SUCCESS","checkedHead":"c23d42d108a33ee105bcbfd32a7acb9f6a66fe96"}},
+    {"id":"GITHUB_DEPENDABOT_ALERT_LIST","command":"gh api repos/InternalAgencyIO/InternalAgency/dependabot/alerts","result":"UNAVAILABLE","metrics":{"httpStatus":404}},
+    {"id":"GITHUB_CODE_SCANNING_ALERT_LIST","command":"gh api repos/InternalAgencyIO/InternalAgency/code-scanning/alerts","result":"UNAVAILABLE","metrics":{"httpStatus":404,"note":"PR CodeQL check conclusions were independently visible and successful"}},
+    {"id":"CURRENT_TREE_SECRET_PATTERNS","command":"git grep path-only scan at audited commit","result":"PASS_LIMITED","metrics":{"patterns":6,"matchedPaths":0}},
+    {"id":"HISTORY_SECRET_PATTERNS","command":"git log -G path-only scan across all refs","result":"PASS_LIMITED","metrics":{"commitsScanned":970,"patterns":5,"matchedPathsAfterBoundaryTriage":0}},
+    {"id":"DIFF_CHECK_BASELINE","command":"git diff --check","result":"PASS"}
+  ],
+  "limitations": [
+    "npm advisory results are registry-time dependent and may change after runAtUtc.",
+    "Production-only npm classification does not prove dev/build dependencies are unreachable from built artifacts or release infrastructure.",
+    "A pre-install probe against the non-canonical pnpm-linked node_modules tree under unsupported Node 18 failed because rpc-websockets CommonJS resolved ESM-only uuid@14; a clean npm ci from package-lock.json under the required Node 24 runtime passed the complete launch-gate suite.",
+    "Secret scanning used bounded credential patterns and is not a complete entropy or semantic secret scanner.",
+    "CodeQL success does not cover Rust smart-contract semantics, economic design, or third-party service internals.",
+    "No production penetration test, wallet access, signing, broadcast, deployment, fund movement, or mainnet mutation occurred."
+  ]
+}

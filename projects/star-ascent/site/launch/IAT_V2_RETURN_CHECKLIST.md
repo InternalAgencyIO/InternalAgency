@@ -78,6 +78,14 @@ entry. See `launch/IAT_V2_CEREMONY_ENTRY_GATE.md`.
 
 ## Mainnet blockers that must stay visible
 
+- The public source-bound pre-launch audit remains `HOLD`: two critical and
+  seven high findings are open. The critical blockers are the permissionless
+  CCC first-commit/reveal liveness failure and the correlated program-admin,
+  community-custody, and upgrade-authority control plane.
+- Ceremony entry now fails closed on
+  `PRELAUNCH_SECURITY_AUDIT_CLEARANCE`. It cannot clear until all critical/high
+  findings are remediated and revalidated and an independent final-code audit
+  is complete.
 - Finalized mainnet balance at `2026-08-01T11:04:01Z`, RPC context slot
   `436549381`: `2.53365957 SOL`.
 - Measured rent-exempt minima: `8.31841104 SOL` before transaction fees:

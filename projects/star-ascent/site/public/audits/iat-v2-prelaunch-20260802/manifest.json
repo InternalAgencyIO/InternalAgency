@@ -1,0 +1,62 @@
+{
+  "schema": "iat-v2-prelaunch-audit-manifest/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "mainnetStatus": "HOLD",
+  "launchDecision": "HOLD",
+  "assurance": "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT",
+  "title": "IAT V2 pre-launch security, Sybil, and game-theory audit",
+  "auditedAtUtc": "2026-08-02T06:48:41Z",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "commit": "c23d42d108a33ee105bcbfd32a7acb9f6a66fe96",
+    "gitTree": "9eb10efb771ee14cc53ce01be96dc2c01a5663e5",
+    "scopePath": "public/audits/iat-v2-prelaunch-20260802/scope.json"
+  },
+  "identityModel": {
+    "unit": "UNIQUE_WALLET_PLUS_IMMUTABLE_X_ID_PLUS_X_PREMIUM",
+    "oneHumanPerAccountRequired": false,
+    "multipleQualifyingPairsPerPersonAllowed": true,
+    "xPremiumRequiredForEveryPair": true,
+    "handleIsIdentityKey": false,
+    "countryIsRealWorldIdentityProof": false
+  },
+  "findingSummary": {
+    "total": 16,
+    "openBySeverity": {
+      "CRITICAL": 2,
+      "HIGH": 7,
+      "MEDIUM": 5,
+      "LOW": 2,
+      "INFO": 0
+    }
+  },
+  "clearance": {
+    "securityBlockersResolved": false,
+    "independentAuditComplete": false,
+    "authorizesDeployment": false,
+    "authorizesFunding": false,
+    "authorizesSigning": false,
+    "authorizesBroadcast": false
+  },
+  "publicDevelopmentSurface": {
+    "draftPullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/4",
+    "packagePath": "projects/star-ascent/site/public/audits/iat-v2-prelaunch-20260802",
+    "deploymentState": "NOT_DEPLOYED"
+  },
+  "artifactSha256": {
+    "README.md": "53e9886f82ff99c75569d3d3af01fa8cbb35286c7e7ab7d164c40a2eaee2cf27",
+    "FINDINGS.md": "be922d8b56b1be7941113460dff0e361f013334de5261de4a4204db08cfe55b0",
+    "SYBIL-AND-GAME-THEORY.md": "23657a7ba7146f91b1954fdd50ce49ba00ba4d24b55095c85ed452f3b76baf6c",
+    "THREAT-MODEL.md": "f62c2994c3e04e10d6c0a25936cf7dd089478c45ba0f9f264932e5f981af39c6",
+    "scope.json": "22561a164762c7ab62422548b0f7c87b43a742439c188db48acdf90e967ab6de",
+    "findings.json": "b99aee513e2ad6b7c86a9fbbf43c542611dcedb38a8e2da370997010ad1df417",
+    "attack-matrix.json": "3a30a470dc4fe5209c6727d77b5352b46cf8a9ec275032fa21f6d7e76f90eb8a",
+    "checks.json": "06aeb862861ca26bcee226afb61e2fd0911b22d478a7020905015a12dceb9ed1"
+  },
+  "limitations": [
+    "This package is not an independent third-party audit or formal proof.",
+    "No wallet, key, signing device, secret, mainnet transaction, or funds were accessed.",
+    "No production penetration test, legal review, market-price analysis, or third-party service audit occurred.",
+    "Open findings require a new source-bound revision after remediation."
+  ]
+}
