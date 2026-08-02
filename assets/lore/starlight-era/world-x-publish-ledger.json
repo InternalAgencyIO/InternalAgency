@@ -114,18 +114,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T11:16:25.312Z",
-    "status": "awaiting_post",
-    "caption": "Austria 🧡 Hungary",
-    "imageNumbers": [765, 766, 763],
-    "countries": ["Austria", "Hungary"],
-    "assets": [
-      {"file": "765-austria-salzburg-hohensalzburg-fortress-cipher.png", "sha256": "4265e82be1c1ab7a970f096bb591150975a108534f0002f272fe922435f3b78f"},
-      {"file": "766-austria-grossglockner-pasterze-extraction.png", "sha256": "e2234fd218d3099271c91f266fcbe348516f5d2cf1480a87a163107a0ff2b7ee"},
-      {"file": "763-hungary-budapest-keleti-night-relay.png", "sha256": "fef4bb33c1749fb81b343d3e50218d745fa97173ed28de87a1c61fef5c4922fb"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2987,6 +2976,19 @@
         {"file": "764-austria-vienna-museumsquartier-intercept.png", "sha256": "b55557e52f1702647af27859c140247e5b074c271418bbd4ebd27aeb2321b11c"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T11:22:56.223Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083876195548942825",
+      "caption": "Austria 🧡 Hungary",
+      "imageNumbers": [765, 766, 763],
+      "countries": ["Austria", "Hungary"],
+      "assets": [
+        {"file": "765-austria-salzburg-hohensalzburg-fortress-cipher.png", "sha256": "4265e82be1c1ab7a970f096bb591150975a108534f0002f272fe922435f3b78f"},
+        {"file": "766-austria-grossglockner-pasterze-extraction.png", "sha256": "e2234fd218d3099271c91f266fcbe348516f5d2cf1480a87a163107a0ff2b7ee"},
+        {"file": "763-hungary-budapest-keleti-night-relay.png", "sha256": "fef4bb33c1749fb81b343d3e50218d745fa97173ed28de87a1c61fef5c4922fb"}
+      ],
+      "transmission": "agent_autonomous_verified_one_click"
     }
   ]
 }
