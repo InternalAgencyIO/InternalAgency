@@ -114,18 +114,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T10:24:13.590Z",
-    "status": "awaiting_post",
-    "caption": "Portugal 🧡 Honduras",
-    "imageNumbers": [732, 733, 731],
-    "countries": ["Portugal", "Honduras"],
-    "assets": [
-      {"file": "732-portugal-lisbon-parque-nacoes-intercept.png", "sha256": "01814cc8ecc6d9c8e8d4eb49da8ef119a2dd0ab2052363f300f3d281577a60f0"},
-      {"file": "733-portugal-sintra-pena-palace-cipher.png", "sha256": "e3cb558a27312a9f8fb5245b82529b73ad7d319e8b27b7cc099800b16a57c5e7"},
-      {"file": "731-honduras-roatan-west-bay-night-relay.png", "sha256": "160d4b541bc132b240d7c69d7e63162ab693025dcaf8190df16d4c9835d497fa"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2842,6 +2831,19 @@
         {"file": "729-honduras-gracias-casa-galeano-cipher.png", "sha256": "30363b83de853a9ba0e341d333e5686a19d98692804194e4d512df4e8aa537b8"},
         {"file": "730-honduras-pico-bonito-rainforest-extraction.png", "sha256": "006b456e4224e7f2c64e2dc564fc42f7065bbc68dbf6489e514994ff2c590487"},
         {"file": "727-czechia-prague-main-station-night-relay.png", "sha256": "ab4c37fcb55b1d7bd900f7f802fa7c594565f354506bafab3d3b13254ecee3ce"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T10:26:34.256Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083862010551312678",
+      "caption": "Portugal 🧡 Honduras",
+      "imageNumbers": [732, 733, 731],
+      "countries": ["Portugal", "Honduras"],
+      "assets": [
+        {"file": "732-portugal-lisbon-parque-nacoes-intercept.png", "sha256": "01814cc8ecc6d9c8e8d4eb49da8ef119a2dd0ab2052363f300f3d281577a60f0"},
+        {"file": "733-portugal-sintra-pena-palace-cipher.png", "sha256": "e3cb558a27312a9f8fb5245b82529b73ad7d319e8b27b7cc099800b16a57c5e7"},
+        {"file": "731-honduras-roatan-west-bay-night-relay.png", "sha256": "160d4b541bc132b240d7c69d7e63162ab693025dcaf8190df16d4c9835d497fa"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
