@@ -4,10 +4,24 @@
   "series": "Radiance, Ellie & Alia: World Series 195x4",
   "renderBatchSize": 4,
   "postSize": 3,
-  "maxPostsPerRun": 2,
+  "maxPostsPerRun": null,
+  "postThroughput": "Drain every currently eligible deterministic trio serially in the run, with one durable reservation at a time, exact reconciliation, and a minimum 30-second pause between confirmed posts and before retries.",
   "ordering": "Starting after the already published images 380 through 385, every new post must mix exactly two images from one country with one image from a different country. Choose the primary country deterministically as the earliest country in countryPriorityOrder with at least two eligible unposted images. Choose the secondary as the earliest different country with at least one eligible unposted image, preferring any older one-image leftover. Preserve ascending numeric order within each country selection and never duplicate or permanently strand an eligible asset.",
   "postComposition": "2+1 country mix",
-  "caption": "",
+  "caption": "<primary country> ❤️ <secondary country>",
+  "captionPolicy": {
+    "status": "active",
+    "format": "<primary country> ❤️ <secondary country>",
+    "countryOrder": "Use the primary two-image country first and the secondary one-image country second, matching the countries array and media order in the reservation.",
+    "separator": " ❤️ ",
+    "quotes": false,
+    "exactness": "Store the fully expanded caption in pendingPost before transmission. Reconcile both the exact three ordered assets and this exact caption before deciding whether a retry is safe. Existing confirmed posts are not edited or reposted."
+  },
+  "followBackPolicy": {
+    "status": "disabled",
+    "disabledAt": "2026-08-02T07:36:47.4436954Z",
+    "rule": "Do not follow or follow back any account until the user explicitly re-enables and tests this phase."
+  },
   "startBatch": 90,
   "endBatch": 284,
   "status": "active",
@@ -68,6 +82,7 @@
   "pendingPost": {
     "stagedAt": "2026-08-02T07:00:49.9660719Z",
     "status": "awaiting_post",
+    "caption": "Zimbabwe ❤️ Cambodia",
     "imageNumbers": [669, 670, 667],
     "countries": ["Zimbabwe", "Cambodia"],
     "assets": [
@@ -75,6 +90,18 @@
       {"file": "670-zimbabwe-mana-pools-zambezi-extraction.png", "sha256": "1674a9b859b27bf3f503eade12c40fb95ab4365566d251ffdea97025772bd232"},
       {"file": "667-cambodia-kampot-riverside-old-bridge-night-relay.png", "sha256": "c851570a3bc5b0d0f7f3d5ef852229b4c511af782eb7b2103703036f0934cd05"}
     ]
+  },
+  "pendingCoverUpdate": {
+    "stagedAt": "2026-08-02T07:00:00Z",
+    "status": "awaiting_upload",
+    "account": "@RaymondRR777",
+    "sourceImageNumber": 592,
+    "selectedFromMostRecentConfirmedTrios": 30,
+    "file": "world-x-cover-592-sydney-v2.png",
+    "width": 1500,
+    "height": 500,
+    "sha256": "66a2d37daf3bcc5790a6b59d34ee9f8e32f3a74018d7257c3236cd1541b5ba69",
+    "rule": "After the current X posting backlog is exhausted, reconcile the visible profile header, then upload this exact prepared master and verify that the header changed before clearing this reservation. Never repeat Save while the prior result is uncertain."
   },
   "posts": [
     {
