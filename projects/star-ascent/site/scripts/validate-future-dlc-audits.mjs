@@ -104,6 +104,13 @@ for (const entry of packages) {
     check(manifest.featureBoundary.automaticActivation === false, "Hero activation must never be automatic");
     check(manifest.featureBoundary.technicallyIsolatedFromGenesisCandidate === true, "Hero proposal isolation drift");
     check(manifest.featureBoundary.deployed === false && manifest.featureBoundary.claimRoute === null, "Hero deployment/claim gate drift");
+    check(identity.minimumXAccountAgeSeconds === 3_456_000, "Hero X account-age minimum must remain exactly 40 days");
+    check(identity.xAccountAgeRequiredForEveryPair === true, "Hero must apply account-age eligibility to both sides of every pair");
+    check(identity.ageEvidenceSource === "AUTHENTICATED_X_CREATED_AT", "Hero account-age evidence source drift");
+    check(identity.ageComparison === "OBSERVED_AT_MINUS_CREATED_AT_GTE_MINIMUM", "Hero account-age boundary drift");
+    check(register.findings.some((finding) => finding.id === "HERO-FUT-002" && /created_at/u.test(JSON.stringify(finding))), "Hero open identity finding must include account-age enforcement");
+    check(matrix.cases.some((testCase) => testCase.id === "H-02A" && testCase.result === "FAIL"), "Hero must retain the under-40-day failing attack case");
+    check(matrix.cases.some((testCase) => testCase.id === "H-02B" && testCase.result === "FAIL"), "Hero must retain the exact-40-day unimplemented boundary case");
   } else {
     check(manifest.featureBoundary.intendedPartOfGenesis === false, "Associates must remain intended future-only");
     check(manifest.featureBoundary.technicallyIsolatedFromGenesisCandidate === false, "Associates isolation finding cannot be masked");

@@ -7,17 +7,17 @@
   "assurance": "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT",
   "auditedAtUtc": "2026-08-02T07:37:30Z",
   "sourceBinding": {"commit":"eafb13c43db78ab182bbbe8fa3890cc1368dd132","gitTree":"0b6a258cf6f75e140431d91e906d2253c62566fe","scopePath":"scope.json"},
-  "identityModel": {"unit":"UNIQUE_WALLET_PLUS_IMMUTABLE_X_ID_PLUS_X_PREMIUM","oneHumanPerAccountRequired":false,"multipleQualifyingPairsPerPersonAllowed":true,"xPremiumRequiredForEveryPair":true},
+  "identityModel": {"unit":"UNIQUE_WALLET_PLUS_IMMUTABLE_X_ID_PLUS_X_PREMIUM","oneHumanPerAccountRequired":false,"multipleQualifyingPairsPerPersonAllowed":true,"xPremiumRequiredForEveryPair":true,"minimumXAccountAgeSeconds":3456000,"xAccountAgeRequiredForEveryPair":true,"ageEvidenceSource":"AUTHENTICATED_X_CREATED_AT","ageComparison":"OBSERVED_AT_MINUS_CREATED_AT_GTE_MINIMUM"},
   "featureBoundary": {"partOfGenesis":false,"active":false,"deployed":false,"claimRoute":null,"earliestOffsetSeconds":28800,"automaticActivation":false,"technicallyIsolatedFromGenesisCandidate":true},
   "findingSummary": {"total":8,"openBySeverity":{"CRITICAL":1,"HIGH":4,"MEDIUM":3,"LOW":0}},
   "clearance": {"securityBlockersResolved":false,"independentAuditComplete":false,"authorizesDeployment":false,"authorizesFunding":false,"authorizesActivation":false,"authorizesSigning":false,"authorizesBroadcast":false},
   "artifactSha256": {
-    "README.md": "93af28f84c7517961ac9f22fc355e8ad79c887f822d183314d3afeae2ff52116",
-    "findings.json": "d4f1d1fc724bb19ce3b6c062cfb26b9f13324b297ee48f501fde5b1c6f279356",
+    "README.md": "b33cf056ece8fa5a4ca4b7d246e41e93f5342469fcb81975cd0fa268e507a51d",
+    "findings.json": "a5444b01eaa3e15e92659dbe48d6fab208d8ae2ef4c75947a67526cd9801ae25",
     "scope.json": "239899b64924418b2e6c5497856c20c9027c33239ebff13692ef25e2ad7a38e3",
-    "attack-matrix.json": "59f2262d14a2c29ed4a3995a04d12e49f540bb9a5487d6a415eea0b5911333ca",
-    "THREAT-AND-GAME-THEORY.md": "8654aa203a80118a98bea8499ce91dc60ae5a377f5d98cc2c39fb8ab7a3f2681",
-    "checks.json": "7af45416e1cf2ace5d2639cfd0c6cd3e79058b09cd8c8aaacbcec87ada514042"
+    "attack-matrix.json": "f4e03cab69baa801e736da9433154c39e49ff9857bf9c62c5952302268c206df",
+    "THREAT-AND-GAME-THEORY.md": "76d8bf6856856f94a1b925160387a689e641753b55af6540619bcd18e9639264",
+    "checks.json": "0dd61c0aaeb2a3ca4dc5b11c6ab19d73d048da56f0a39639d3193a92beacf359"
   },
   "limitations": ["Not an independent audit or formal proof", "No executable Solana implementation was available", "No wallet, secret, signing, network transaction, or funds were accessed"]
 }

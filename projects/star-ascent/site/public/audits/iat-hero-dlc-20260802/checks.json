@@ -7,6 +7,7 @@
     {"check":"all proposal JSON parse","result":"PASS","detail":"54 parsed, 0 failed"},
     {"check":"full 55-file proposal test suite","result":"PASS","detail":"510 passed, 0 failed in 195.0 seconds"},
     {"check":"deployable Solana program present","result":"FAIL","detail":"Reference/model/ABI only; HERO-FUT-001"},
-    {"check":"X Premium enforcement present","result":"FAIL","detail":"No Premium or subscription_type match in proposal tree; HERO-FUT-002"}
+    {"check":"X Premium enforcement present","result":"FAIL","detail":"No Premium or subscription_type match in proposal tree; HERO-FUT-002"},
+    {"check":"40-day X account-age enforcement present","result":"FAIL","detail":"No authenticated created_at evidence or 3456000-second boundary in proposal tree; HERO-FUT-002"}
   ]
 }

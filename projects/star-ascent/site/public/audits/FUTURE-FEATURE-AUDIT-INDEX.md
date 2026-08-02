@@ -14,6 +14,10 @@ third-party audits.
 The accepted identity unit for both reviews is one unique wallet plus one unique
 immutable X user ID plus active X Premium. One person may control multiple
 qualifying pairs. These reports do not use or recommend proof of personhood.
+Propose a Hero additionally requires both authenticated X accounts to be at
+least 40 complete 24-hour periods old at their respective eligibility
+checkpoints. This is account-farm friction, not proof of a unique human or valid
+payment provenance.
 
 The next audit sequence should cover every remaining post-Genesis capability as
 its own source-bound package before that capability receives an activation

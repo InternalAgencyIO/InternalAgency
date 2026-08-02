@@ -17,10 +17,10 @@
       "id": "HERO-FUT-002",
       "severity": "HIGH",
       "status": "OPEN",
-      "title": "X Premium is absent from policy, attestations, and settlement guards",
-      "evidence": ["The proposal tree has no Premium or subscription_type requirement", "Attestation payloads bind node, wallet, and X commitment only", "A verified boolean can represent a non-Premium X account"],
-      "impact": ["The owner-required per-pair qualification and economic cost are bypassed", "Non-Premium pairs can consume the entire 1,000-pair budget in the model"],
-      "remediation": ["Bind allowed X Premium tier and observed-at time inside the signed canonical attestation", "Fail closed on missing, unknown, stale, downgraded, or unverifiable status", "Publish revalidation and X outage behavior"]
+      "title": "X Premium and the 40-day account-age rule are absent from policy, attestations, and settlement guards",
+      "evidence": ["The proposal tree has no Premium, subscription_type, created_at, or minimum-account-age requirement", "Attestation payloads bind node, wallet, and X commitment only", "A verified boolean can represent a non-Premium or newly created X account"],
+      "impact": ["The owner-required per-pair economic cost and preparation-time controls are bypassed", "Non-Premium or newly created pairs can consume the entire 1,000-pair budget in the model"],
+      "remediation": ["Request id, subscription_type, and created_at for the authenticated X user", "Bind the allowed Premium tier, exact account creation time, verifier observation time, immutable X commitment, and policy version inside the signed canonical attestation", "Require observed_at - account_created_at >= 3456000 seconds and fail closed on missing, malformed, future-dated, unknown, stale, downgraded, or unverifiable evidence", "Publish Premium revalidation, X outage, and appeal behavior"]
     },
     {
       "id": "HERO-FUT-003",

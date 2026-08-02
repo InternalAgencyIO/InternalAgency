@@ -4,6 +4,9 @@
   "cases": [
     {"id":"H-01","attack":"Open before verified Genesis plus 8 hours","expected":"Reject against canonical mainnet Genesis record","observed":"Model rejects caller time before its supplied timestamp plus 28800; executable record binding absent","result":"PARTIAL","finding":"HERO-FUT-006"},
     {"id":"H-02","attack":"Non-Premium X account receives attestation","expected":"Reject","observed":"No Premium field or guard","result":"FAIL","finding":"HERO-FUT-002"},
+    {"id":"H-02A","attack":"Authenticated X account is one second younger than 40 complete days","expected":"Reject using observed_at - created_at >= 3456000","observed":"No created_at field, age threshold, or guard","result":"FAIL","finding":"HERO-FUT-002"},
+    {"id":"H-02B","attack":"Authenticated X account is exactly 40 complete days old","expected":"Pass the age boundary if all other qualifications pass","observed":"No created_at field, age threshold, or guard","result":"FAIL","finding":"HERO-FUT-002"},
+    {"id":"H-02C","attack":"X created_at is missing, malformed, or future-dated","expected":"Fail closed","observed":"No created_at evidence is requested or validated","result":"FAIL","finding":"HERO-FUT-002"},
     {"id":"H-03","attack":"Same person uses two distinct qualifying pairs","expected":"Allow under owner identity model","observed":"Allowed if node, wallet, and X markers differ","result":"PASS"},
     {"id":"H-04","attack":"Same wallet or immutable X ID proposes itself","expected":"Reject","observed":"Model rejects matching wallet, node, or X commitment","result":"PASS"},
     {"id":"H-05","attack":"Change X handle after nomination","expected":"Stable immutable ID remains authoritative","observed":"Settlement keys on X commitment, not handle","result":"PASS"},

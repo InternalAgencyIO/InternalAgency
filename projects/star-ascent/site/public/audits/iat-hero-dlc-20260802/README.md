@@ -30,11 +30,16 @@ has no timeout or emergency refund path before pair 1,000.
 ## Identity model applied
 
 A qualifying participant is one unique Solana wallet plus one unique immutable
-X user ID plus active X Premium. One person may control multiple qualifying
-pairs. A same-human referral using two independently qualifying pairs is allowed
-under this model; “self-proposal” can only mean equality of an enforceable
-wallet or immutable X identifier unless the owner later adopts proof of
-personhood.
+X user ID plus active X Premium. The authenticated X account must also be at
+least 40 complete 24-hour periods old at the participant's eligibility
+checkpoint. In exact terms, `observed_at - account_created_at >= 3_456_000`
+seconds. Missing, malformed, future-dated, or too-young `created_at` evidence
+fails closed.
+
+One person may control multiple qualifying pairs. A same-human referral using
+two independently qualifying pairs is allowed under this model;
+“self-proposal” can only mean equality of an enforceable wallet or immutable X
+identifier unless the owner later adopts proof of personhood.
 
 The reviewed proposal also deduplicates a node identifier. That extra dimension
 must be reconciled with the accepted wallet/X/Premium definition so an opaque or
@@ -73,9 +78,11 @@ The exact source digests are in [scope.json](scope.json), the findings in
 1. Implement the final Solana program in a new isolated path and audit the
    actual account constraints, PDA derivations, token CPI, concurrency, rent,
    close authority, upgrade policy, and SBF binary.
-2. Add fail-closed X Premium evidence to the signed attestation, including
-   allowed tiers, observation time, freshness, downgrade, outage, and appeal
-   rules.
+2. Add fail-closed X Premium and 40-day account-age evidence to the signed
+   attestation. Request `id`, `subscription_type`, and `created_at` for the
+   authenticated user; bind the allowed tier, account creation time,
+   observation time, freshness, policy version, and immutable X commitment;
+   and define downgrade, outage, and appeal rules.
 3. Add bounded nomination expiry and permissionless cleanup, plus hero rejection
    or equivalent anti-griefing semantics.
 4. Define an active-campaign timeout/emergency stop and immutable refund path
@@ -91,4 +98,6 @@ This is an internal Codex-assisted source review, not an independent audit,
 formal proof, production penetration test, legal review, X service audit, or
 on-chain execution review. No wallet, key, signing device, secret, network
 transaction, or funds were accessed. Passing a model test does not establish
-Solana atomicity or deployment safety.
+Solana atomicity or deployment safety. The 40-day rule raises the cost and lead
+time of newly created account farms; it does not detect purchased aged accounts,
+payment fraud, common beneficial ownership, or unique humans.
