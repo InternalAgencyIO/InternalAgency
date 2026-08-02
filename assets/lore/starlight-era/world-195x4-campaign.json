@@ -736,10 +736,12 @@
       "fashionContract": "Create original, unmistakably high-fashion STAR RAZE captain, first-officer, and cabin-host silhouettes rather than conventional uniforms. Fuse hot contemporary aircrew couture with a clean American Apparel-inspired stretch-knit, dancewear, bodysuit, crop-top, micro-skirt-over-integrated-shorts, and studio-basics proportion language, plus upscale adult cabaret and strip-club-stage glamour expressed only through fashion styling, never activity or signage. Keep every garment fully opaque, securely constructed, non-explicit, public-safe, and action-safe while favoring short hemlines, bare shoulders, backs, midriffs, and legs where climate permits. Abstract each country's flag palette and recognizable secular craft, landscape, or architectural motifs into bold immediately legible couture color blocking, trims, jewelry, bags, hats, gloves, and surface design; never show a literal flag, official emblem, sacred mark, political symbol, real airline identity, readable rank, logo, copied branded product, or text. Every image gives authentic local secular accessories or craft elements to at least one and preferably two women.",
       "appearanceVariationContract": {
         "status": "binding from image 812 onward",
-        "independenceRule": "Evaluate every character on every image independently. Never apply a group-wide hair, hat or accessory switch merely because one character rolled it. Independent rolls may coincidentally match, but no all-three synchronization is forced.",
+        "independenceRule": "Evaluate every character-scoped trait on every image independently. Never apply a group-wide hair, hat or accessory switch merely because one character rolled it. Independent rolls may coincidentally match, but no all-three synchronization is forced. Traits explicitly marked scope trio-static are the sole exception and use trioStaticDeterministicRoll once per image.",
         "deterministicRoll": "For idempotency, compute SHA-256 of <imageNumber>|<canonicalCharacterName>|<trait>|mile-high-v1, read the first eight hexadecimal digits as an unsigned integer, and take modulo 100. Preserve the stored result when resuming a partial batch.",
         "precisionDeterministicRoll": "For fractional-percentage traits marked rollScale 1000, use the same SHA-256 seed and first eight hexadecimal digits but take modulo 1000. A 2.0% trait triggers on precision rolls 0 through 19, 1.9% on 0 through 18, continuing proportionally through 1.0% on 0 through 9. Existing modulo-100 traits and their stored outcomes never change.",
-        "appendOnlyOddsRule": "The trait list is an ever-growing master odds list. Never delete or repurpose an existing trait. Append every newly approved character roll with its original probability, roll scale and safe visual interpretation, then materialize and store independent rolls on every unfinalized scene before generation. Use deterministicRoll for integer-percentage traits and precisionDeterministicRoll only for traits explicitly marked rollScale 1000.",
+        "trioStaticDeterministicRoll": "For a trait explicitly marked scope trio-static, evaluate it once per image rather than once per character: compute SHA-256 of <imageNumber>|trio|<trait>|mile-high-v1, read the first eight hexadecimal digits as an unsigned integer, and take modulo 1000. Preserve the stored trio result when resuming. A trio-static 2.0% trait triggers on rolls 0 through 19 inclusive, giving the pose an exact two-percent per-image chance rather than three independent character chances.",
+        "trioStaticPoseRule": "A triggered trio-static trait is a single held editorial photograph with no implied action sequence. Compose all three clearly adult women simultaneously in the specified pose, preserve distinct canonical identities and readable faces, hands, anatomy and footwear, and fuse the tableau with the active country, role, wardrobe, mission and relationship requirements. If multiple trio-static traits trigger, combine only visually compatible details and let the earliest array entry control the principal body arrangement.",
+        "appendOnlyOddsRule": "The trait list is an ever-growing master odds list. Never delete or repurpose an existing trait. Append every newly approved roll with its original probability, roll scale, scope and safe visual interpretation, then materialize and store its result on every unfinalized scene before generation. Character-scoped entries use deterministicRoll for integer percentages or precisionDeterministicRoll when marked rollScale 1000; entries explicitly marked scope trio-static use trioStaticDeterministicRoll exactly once per image.",
         "threePassSilhouetteProcedure": "For every image, use a clean single-piece foundation when needed, then attempt three isolated garment-only shortening passes. Pass 1 targets concise mid-thigh length; Pass 2 targets upper-mid-thigh length; Pass 3 makes one final small public-safe reduction. Each pass freezes identities, bodies, coverage, pose, country design, mission, camera, footwear and all other attributes. Separately open the waistline upward around the navel through secure opaque crop-and-skirt or connected cutout architecture when appropriate. Archive any blocked pass and retain the strongest last valid result rather than weakening unrelated requirements.",
         "traits": [
           {
@@ -1312,6 +1314,166 @@
             "trigger": "precision roll 0 through 19 inclusive",
             "probability": "2.0%",
             "rule": "Layer one plush velvet choker with a fine chain choker, then bring two partners forehead-to-forehead with half-smiles, shared breath and unwavering eye contact while the jealous third watches from inches away. Both necklaces remain comfortably fitted and easy-release."
+          },
+          {
+            "trait": "trioVChainChokerFormation",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Hold a close triangular portrait with three coordinated chokers and two short ornamental chains forming a gleaming V between them, the middle pendant floating at upper-chest level as all three exchange charged side glances. Keep both chains visibly slack with easy-release jewelry clasps and no neck tension."
+          },
+          {
+            "trait": "dualCollarNecklineAdjustment",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Place one woman between her partners with both hands simultaneously perfecting their sharply cut collars or opaque neckline details, her gaze moving toward one while the other watches with playful jealousy. Hold the intimate styling tableau with every hand visible."
+          },
+          {
+            "trait": "threeWayForeheadLean",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Bring all three foreheads and temples into one tight triangular lean-in, shoulders touching and smiles nearly shared, so the photograph reads as a private pact among lovers without hiding any canonical face."
+          },
+          {
+            "trait": "trioSideWaistLink",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Build a side-by-side linked line in which each woman places one hand at the next partner's side waist over the minimal opaque garment, creating an unbroken affectionate chain of bare shoulders, close hips and knowing looks."
+          },
+          {
+            "trait": "tripleOverShoulderGlance",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Turn all three women into synchronized over-the-shoulder glances toward the camera, preserving three distinct expressions: warm invitation, amused confidence and playful jealous challenge. Keep the torsos close and the country-designed backs clearly visible."
+          },
+          {
+            "trait": "openBackStrapStylingFrame",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Center one woman in a sharply cut open-back opaque garment while both side partners rest precise styling hands on separate shoulder-strap details, framing her bare back with reciprocal eye contact and visible gentle fingers."
+          },
+          {
+            "trait": "trioStackedHandsMissionProp",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Stack all three sets of interlaced hands together behind the central mission prop, shoulders pressed close and faces arranged above the hand stack in a conspiratorial victory portrait. Keep every finger separable and anatomically clear."
+          },
+          {
+            "trait": "tripleSatinMaskHeadbands",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Style matching satin eye masks fully above the eyes as headbands on all three women, varying color blocking and bow placement by identity while they hold a close shoulder-to-shoulder stare. Every eye and complete face remains unobstructed."
+          },
+          {
+            "trait": "triangularKneelStandFormation",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Compose a balanced triangular editorial formation with two women in equal low kneeling runway poses at the front and the third standing behind, her hands resting warmly on both shoulders as all three meet the camera with equal authority."
+          },
+          {
+            "trait": "trioHipLevelChainDrape",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Let all three hold one long decorative chain drape loosely at hip level, each hand controlling its own slack segment while the chain draws a shallow shining curve across the trio. It attaches to nobody and remains purely a shared couture prop."
+          },
+          {
+            "trait": "operaGloveDualCuffStyling",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Place an opera-gloved woman between her partners with one hand fixing each woman's sculptural cuff bracelet, holding both touches at once while their gazes cross over her shoulders in a charged three-way styling tableau."
+          },
+          {
+            "trait": "trioHipLineLegPop",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Set all three hip-to-hip in one clean fashion line with coordinated alternating leg pops, short secure hemlines and complete statement footwear, keeping their upper bodies linked through shoulders, waists and exchanged looks."
+          },
+          {
+            "trait": "monochromeHarnessStagger",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Arrange the trio at staggered heights in matching-color harness-inspired seam overlays, each layered only over her own solid opaque minimal garment, so the repeated geometry creates one bold country-palette composition without restricting movement."
+          },
+          {
+            "trait": "trioSideProfileJewelryLine",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Align all three in a close side-profile line looking in the same direction, bare shoulders and collarbones offset just enough to display three distinct jewelry treatments while their bodies overlap into one elegant silhouette."
+          },
+          {
+            "trait": "dualCapeClosureStyling",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Frame the central woman between two partners who each adjust one side of her cropped cape or off-shoulder shawl closure, holding the fabric open enough to reveal the short minimal opaque look beneath. Keep the closure slack and the cape removable."
+          },
+          {
+            "trait": "fauxFurCrossedWristCenter",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Give all three matching faux-fur cuff bracelets and cross their separate wrists together at the center of the frame, creating a soft layered starburst of hands while every cuff stays loose and every finger remains readable."
+          },
+          {
+            "trait": "goldLeafCenterShoulderTrio",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Press the trio shoulder-to-shoulder with removable gold-leaf body art illuminating the middle woman's bare shoulder, both partners angling their faces close to admire it while the abstract secular motif remains fully visible."
+          },
+          {
+            "trait": "ribbonAnkletKneelingTableau",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Hold one woman in a graceful kneeling styling pose as she ties a loose decorative ribbon anklet over her standing partner's boot, while the third gathers a detached train-like silk reveal ribbon clear of the floor. Preserve equal authority, stable footing and free ankle movement."
+          },
+          {
+            "trait": "trioLongSilkRibbonWeave",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Pose all three holding one long silk ribbon that weaves in broad loose curves between their visible hands, forming a graphic triangle across the frame without wrapping, tying or attaching to any body."
+          },
+          {
+            "trait": "centralVictoryChokerMirror",
+            "scope": "trio-static",
+            "rollScale": 1000,
+            "trigger": "trio precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Give the center woman a commanding victory stance while both side partners mirror one hand on hip and angle inward, their coordinated choker set fully visible as exchanged smiles turn the formal pose into an unmistakable love-triangle finale."
           }
         ],
         "skinAndLayerRule": "Skin exposure stays deliberately high through bare arms, shoulders, upper backs, midriffs and legs where action and climate permit. Use one principal garment per woman with minimal layers. Optional coats, gloves, capes or overskirts may appear only as brief reveal props and must be visibly removed or carried; the final photographed look remains solid, opaque, non-explicit and public-safe. No visible underwear, nudity, transparent intimate coverage, restraint, coercion, weapons or fetish activity."
