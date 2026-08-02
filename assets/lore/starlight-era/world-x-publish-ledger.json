@@ -111,18 +111,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T09:26:24.9593857Z",
-    "status": "awaiting_post",
-    "caption": "Tunisia 💛 Bolivia",
-    "imageNumbers": [693, 694, 691],
-    "countries": ["Tunisia", "Bolivia"],
-    "assets": [
-      {"file": "693-tunisia-el-jem-amphitheatre-cipher.png", "sha256": "2ed89b0b216eafcf890281045f0f8fdb4cc282486ddaf06ab4a33c455014d103"},
-      {"file": "694-tunisia-chott-el-jerid-salt-extraction.png", "sha256": "1ff0e14c1be20de39779937bd7fdd664cd790c8f20c65567237298be7ebf8791"},
-      {"file": "691-bolivia-la-paz-mi-teleferico-night-relay.png", "sha256": "4ce9aae30036238a44482c88d233f2fd6426b6eb4439de34733e5aa90631f90e"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2670,6 +2659,19 @@
         {"file": "689-bolivia-potosi-colonial-mint-courtyard-cipher.png", "sha256": "61647ce69337e6f90d5a1ba8f0952e576c4fb588608e5a0bd68fbcea108789c1"},
         {"file": "690-bolivia-salar-de-uyuni-salt-mirror-extraction.png", "sha256": "e67412870e6dbc4e1f30d5d73e70407aafd42505fc8aff4ece167fdcb561066c"},
         {"file": "692-tunisia-tunis-habib-bourguiba-avenue-intercept.png", "sha256": "475ad23d9ea12a9796f28a6ba6bfc4208853c3f9fb58d2b10ba91614890984ca"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T09:32:30.226Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083848404103258432",
+      "caption": "Tunisia 💛 Bolivia",
+      "imageNumbers": [693, 694, 691],
+      "countries": ["Tunisia", "Bolivia"],
+      "assets": [
+        {"file": "693-tunisia-el-jem-amphitheatre-cipher.png", "sha256": "2ed89b0b216eafcf890281045f0f8fdb4cc282486ddaf06ab4a33c455014d103"},
+        {"file": "694-tunisia-chott-el-jerid-salt-extraction.png", "sha256": "1ff0e14c1be20de39779937bd7fdd664cd790c8f20c65567237298be7ebf8791"},
+        {"file": "691-bolivia-la-paz-mi-teleferico-night-relay.png", "sha256": "4ce9aae30036238a44482c88d233f2fd6426b6eb4439de34733e5aa90631f90e"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
