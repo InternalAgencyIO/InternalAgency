@@ -65,17 +65,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-01T14:45:51.9694384Z",
-    "status": "awaiting_post",
-    "imageNumbers": [650, 651, 652],
-    "countries": ["Senegal", "Guatemala"],
-    "assets": [
-      {"file": "650-senegal-lac-rose-salt-light-extraction.png", "sha256": "8be09ffea8acfaa6ebe80836c640ff4513b2c3044928afc31b96544563f4fbe1"},
-      {"file": "651-senegal-dakar-railway-station-night-relay.png", "sha256": "6f77b098b8eb8ee6f8723d0f2319f5fd9d828d79eb893db98703c2d83d55869e"},
-      {"file": "652-guatemala-guatemala-city-modernist-intercept.png", "sha256": "bb795ae8c71bd789b439890e0ee9ccc03623e3182cf5878f2c39bdc5714cb08d"}
-    ]
-  },
+  "pendingPost": null,
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
@@ -2440,6 +2430,17 @@
         {"file": "648-senegal-dakar-corniche-teranga-intercept.png", "sha256": "40b79397ea04e9c1c6c7bb9d2844853782b7be713d5ea343fc005a543315e2d8"},
         {"file": "649-senegal-saint-louis-pastel-arcade-cipher.png", "sha256": "07bb65a12c570568c68c6d63f3c11b217c4ad4a5d7633369e448d61d0a4e2afc"},
         {"file": "647-somalia-kismayo-indian-ocean-night-relay.png", "sha256": "3a03bf28f2d1c2299484fb348cf71c99e46a11d615aaedc84afa3785088455a9"}
+      ]
+    },
+    {
+      "postedAt": "2026-08-02T02:12:44.6330301Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083737534731817200",
+      "imageNumbers": [650, 651, 652],
+      "countries": ["Senegal", "Guatemala"],
+      "assets": [
+        {"file": "650-senegal-lac-rose-salt-light-extraction.png", "sha256": "8be09ffea8acfaa6ebe80836c640ff4513b2c3044928afc31b96544563f4fbe1"},
+        {"file": "651-senegal-dakar-railway-station-night-relay.png", "sha256": "6f77b098b8eb8ee6f8723d0f2319f5fd9d828d79eb893db98703c2d83d55869e"},
+        {"file": "652-guatemala-guatemala-city-modernist-intercept.png", "sha256": "bb795ae8c71bd789b439890e0ee9ccc03623e3182cf5878f2c39bdc5714cb08d"}
       ]
     }
   ]
