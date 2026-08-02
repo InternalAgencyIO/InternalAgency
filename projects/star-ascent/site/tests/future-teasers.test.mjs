@@ -5,6 +5,8 @@ import test from "node:test";
 
 const root = new URL("../", import.meta.url);
 const sourceFiles = [
+  "app/future/future-copy.json",
+  "app/future/language.ts",
   "app/future/page.tsx",
   "app/future/FutureNav.tsx",
   "app/future/FashionReveal.tsx",
@@ -13,6 +15,14 @@ const sourceFiles = [
   "app/future/predictive-engine/page.tsx",
   "app/future/casino/page.tsx",
 ];
+
+function copyShape(value) {
+  if (Array.isArray(value)) return value.map(copyShape);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, copyShape(value[key])]));
+  }
+  return typeof value;
+}
 
 test("future previews are explicit, inactive, and transaction-free", async () => {
   const source = (await Promise.all(sourceFiles.map((path) => readFile(new URL(path, root), "utf8")))).join("\n");
@@ -33,6 +43,23 @@ test("future previews are explicit, inactive, and transaction-free", async () =>
   assert.doesNotMatch(source, /\/api\//i);
   assert.doesNotMatch(source, /connectWallet|sendTransaction|TransactionInstruction|wallet-adapter/i);
   assert.doesNotMatch(source, /<form\b|<button\b/i);
+});
+
+test("English and Turkish future copy share one reconciled content contract", async () => {
+  const [copyText, home] = await Promise.all([
+    readFile(new URL("app/future/future-copy.json", root), "utf8"),
+    readFile(new URL("app/page.tsx", root), "utf8"),
+  ]);
+  const copy = JSON.parse(copyText);
+  assert.deepEqual(copyShape(copy.en), copyShape(copy.tr));
+  assert.match(copy.tr.edge.title.join(" "), /%1 PROTOKOL PAYI.*LİKİDİTE HAVUZU.*\$IAT APY SÜRESİNİ UZATAN KAYNAK/);
+  assert.match(copy.tr.edge.caveat, /sabit APY veya getiri garantisi değildir/i);
+  assert.match(copy.tr.predictive.target, /30 GÜN SONRA/);
+  assert.match(copy.tr.casino.target, /15 GÜN SONRA/);
+  assert.doesNotMatch(copyText, /T\+\d+/);
+  assert.doesNotMatch(home, /T\+31|T\+15/);
+  assert.match(home, /Predictive Engine target: 30 days after \$IAT Genesis/);
+  assert.match(home, /Tahmin Motoru hedefi: \$IAT Başlangıcından 30 gün sonra/);
 });
 
 test("future previews use new source-bound art and accessible motion fallbacks", async () => {

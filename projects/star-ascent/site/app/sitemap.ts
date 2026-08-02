@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 const modified = new Date("2026-07-29T00:00:00Z");
+const futureModified = new Date("2026-08-02T00:00:00Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const roots = ["https://internalagency.io", "https://ileriakil.com"];
@@ -16,8 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${root}/tokenomics`, lastModified: modified, changeFrequency: "daily", priority: 0.95 },
     { url: `${root}/network`, lastModified: modified, changeFrequency: "hourly", priority: 0.95 },
     { url: `${root}/world`, lastModified: modified, changeFrequency: "weekly", priority: 0.75 },
-    { url: `${root}/future`, lastModified: modified, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${root}/future/predictive-engine`, lastModified: modified, changeFrequency: "weekly", priority: 0.65 },
-    { url: `${root}/future/casino`, lastModified: modified, changeFrequency: "weekly", priority: 0.65 },
+    { url: `${root}/future`, lastModified: futureModified, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${root}/future/predictive-engine`, lastModified: futureModified, changeFrequency: "weekly", priority: 0.65 },
+    { url: `${root}/future/casino`, lastModified: futureModified, changeFrequency: "weekly", priority: 0.65 },
   ]);
 }

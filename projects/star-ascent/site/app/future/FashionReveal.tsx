@@ -1,19 +1,19 @@
-export function FashionReveal() {
+import { futureCopy, type FutureLanguage } from "./language";
+
+export function FashionReveal({ language }: { language: FutureLanguage }) {
+  const t = futureCopy[language].fashion;
   return (
     <section className="fashion-section" aria-labelledby="fashion-title">
       <div className="fashion-copy">
-        <p>RADIANCE · ELLIE · ALIA // TWO SYSTEMS, TWO LOOKS</p>
-        <h2 id="fashion-title">THE SIGNAL<br />CHANGES OUTFIT.</h2>
-        <span>
-          A sharper couture transition: open-back silhouettes, bare shoulders, long-leg framing,
-          corset lines, and unattached runway hardware. Both products remain inactive.
-        </span>
+        <p>{t.eyebrow}</p>
+        <h2 id="fashion-title">{t.title[0]}<br />{t.title[1]}</h2>
+        <span>{t.body}</span>
       </div>
       <figure className="fashion-reveal">
         {/* eslint-disable-next-line @next/next/no-img-element -- generated editorial master is a local static asset */}
-        <img className="fashion-before" src="/images/future/predictive-engine-hero-v1.png" alt="Adult Internal Agency trio presenting the future Predictive Engine concept" />
+        <img className="fashion-before" src="/images/future/predictive-engine-hero-v1.png" alt={t.beforeAlt} />
         {/* eslint-disable-next-line @next/next/no-img-element -- generated editorial master is a local static asset */}
-        <img className="fashion-after" src="/images/future/casino-hero-v1.png" alt="Adult Internal Agency trio in a playful futuristic Casino DLC pillow fight" />
+        <img className="fashion-after" src="/images/future/casino-hero-v1.png" alt={t.afterAlt} />
         <i className="fabric fabric-one" aria-hidden="true" />
         <i className="fabric fabric-two" aria-hidden="true" />
         <i className="fabric fabric-three" aria-hidden="true" />
@@ -25,7 +25,7 @@ export function FashionReveal() {
           <i className="metal-cuff cuff-one" />
           <i className="metal-cuff cuff-two" />
         </span>
-        <figcaption>ADULT FICTIONAL CHARACTERS · HIGH-SKIN COUTURE · DECORATIVE RUNWAY HARDWARE</figcaption>
+        <figcaption>{t.caption}</figcaption>
       </figure>
     </section>
   );
