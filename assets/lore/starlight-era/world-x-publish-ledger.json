@@ -42,11 +42,11 @@
         "💜",
         "💚"
       ],
-      "nextIndex": 4,
+      "nextIndex": 5,
       "lastReservedImageNumbers": [
-        773,
-        774,
-        776
+        777,
+        778,
+        775
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T11:38:14.596Z",
+    "status": "awaiting_post",
+    "caption": "Sierra Leone 💙 Switzerland",
+    "imageNumbers": [777, 778, 775],
+    "countries": ["Sierra Leone", "Switzerland"],
+    "assets": [
+      {"file": "777-sierra-leone-railway-museum-brass-cipher.png", "sha256": "0eac565113e53a3c3e17dd601fd655f2035cece095eeb136c7fbd4392e56e112"},
+      {"file": "778-sierra-leone-tiwai-island-rainforest-extraction.png", "sha256": "183e160c100b13351d4e3575e05cf2875f0097b68f8d91cb25e9b75e13e1fcc2"},
+      {"file": "775-switzerland-landwasser-viaduct-night-relay.png", "sha256": "144a474b889af2f3ed95ac55d0218c5ed3cdd1db1a4e4ab8613975bde1a3b822"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
