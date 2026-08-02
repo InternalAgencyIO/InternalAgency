@@ -1078,6 +1078,13 @@ rejected and regenerated.
 | **Ashgabat Marble Boulevard Intercept**<br><img src="788-turkmenistan-ashgabat-marble-boulevard-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking emerald-red-white light keys into a gold city prism above Ashgabat's white-marble boulevard"> | **Ancient Merv Kyz Qala Cipher**<br><img src="789-turkmenistan-merv-kyz-qala-cipher.png" width="420" alt="The trio sealing a fictional archive inside an amber crystal capsule beside Great Kyz Qala at Ancient Merv"> |
 | **Yangykala Canyon Data Extraction**<br><img src="790-turkmenistan-yangykala-canyon-extraction.png" width="420" alt="The trio restoring a turquoise-and-gold environmental beacon above Yangykala Canyon's banded desert escarpments"> | **Turkmenbashi Caspian Port Night Relay**<br><img src="791-turkmenistan-turkmenbashi-caspian-port-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-red-gold harbor relay above Turkmenbashi's Caspian seafront at blue hour"> |
 
+## World Series - Africa - Batch 193: Libya
+
+| | |
+|---|---|
+| **Tripoli Corniche Mediterranean Intercept**<br><img src="792-libya-tripoli-corniche-mediterranean-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking red-black-green light keys into an optical-white harbor prism above Tripoli's Mediterranean Corniche"> | **Leptis Magna Market Cipher**<br><img src="793-libya-leptis-magna-market-cipher.png" width="420" alt="The trio sealing a fictional archive inside an amber crystal capsule beside Leptis Magna's ancient market colonnade"> |
+| **Ubari Lakes Oasis Data Extraction**<br><img src="794-libya-ubari-lakes-oasis-extraction.png" width="420" alt="The trio restoring a turquoise-and-gold habitat beacon above the Ubari Lakes oasis and Fezzan dunes"> | **Benghazi Harbor Night Relay**<br><img src="795-libya-benghazi-harbor-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a red-black-green-gold harbor relay above Benghazi's Mediterranean waterfront at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
