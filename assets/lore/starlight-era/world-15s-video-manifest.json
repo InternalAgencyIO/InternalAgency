@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "series": "Radiance, Ellie & Alia: World Series 195x4",
+  "status": "active",
+  "activationBatch": 199,
+  "activationImageNumber": 816,
+  "targetVideos": 106,
+  "completedVideos": 0,
+  "nextVideoBatch": 199,
+  "pendingVideo": null,
+  "contract": {
+    "videosPerCountry": 1,
+    "durationSeconds": 15,
+    "fps": 30,
+    "frameCount": 450,
+    "container": "MP4",
+    "codec": "H.264",
+    "pixelFormat": "yuv420p",
+    "audio": false,
+    "sourceRule": "Use the fourth and final validated still in each four-image country batch as the animation anchor.",
+    "filenameRule": "<source-still-stem>-15s.mp4",
+    "xRule": "The source still is the one withheld archive image. The other three stills remain X-eligible, and the country video accompanies that country when it is primary in the preserved 2+1 image rotation."
+  },
+  "videos": []
+}

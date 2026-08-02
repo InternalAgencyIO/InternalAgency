@@ -70,3 +70,31 @@ Scene prompts, deterministic seeds, source frames, and target durations are in
 `scenes.json`. Final clips are written to `assets/videos/*-full-30fps.mp4`.
 Each output is decoded and verified at 30 fps, then recorded with its frame
 count, duration, byte size, and SHA-256 digest in `assets/videos/manifest.json`.
+
+## World Series country animations
+
+Beginning with World Series Batch 199, each country batch produces four archive
+PNGs plus one 15-second MP4 derived from the fourth, finale still. The country
+renderer trims the FramePack result to exactly 450 frames at 30 fps, writes an
+H.264/yuv420p silent MP4 beside its source still, and records both source and
+video hashes in `assets/lore/starlight-era/world-15s-video-manifest.json`.
+
+Start the same local FramePack server, prepare a UTF-8 motion prompt file, then
+run:
+
+```powershell
+npm run video:world-country -- `
+  -Source assets/lore/starlight-era/819-india-example-finale.png `
+  -Country India `
+  -Batch 199 `
+  -SourceImageNumber 819 `
+  -PromptFile tmp/india-819-video-prompt.txt
+```
+
+The motion prompt must preserve all three canonical faces, the assigned
+captain/first-officer/cabin-host roles, country design, real location, wardrobe,
+footwear, relationship geometry, and the completed aviation objective. Prefer
+one continuous restrained camera move with natural breathing, eye contact,
+hair/fabric response, a readable mission-light change, and one affectionate
+beat. Do not introduce cuts, costume changes, new people, a new location, or a
+second action sequence.

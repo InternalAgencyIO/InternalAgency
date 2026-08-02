@@ -8,6 +8,14 @@ These images form a growing visual lore collection. Each is an
 independent high-resolution asset and a possible future image-to-video anchor,
 avatar memory, wardrobe reference, or reactive scene.
 
+Beginning with World Series Batch 199, every country release contains four
+archive stills plus one exact 15-second animation derived from its fourth,
+finale still. The finale still remains in this public archive but is withheld
+from X; the other three stills preserve the established 2+1 country rotation,
+and the verified country animation accompanies the post in which that country
+is primary. Video hashes and technical validation live in
+[`world-15s-video-manifest.json`](world-15s-video-manifest.json).
+
 ## Chapter I — City lights
 
 | | |
