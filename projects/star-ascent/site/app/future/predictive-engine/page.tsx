@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { EditorialScene } from "../EditorialScene";
 import { FutureNav, InactiveStrip } from "../FutureNav";
+import { ProtocolEdgeLoop } from "../ProtocolEdgeLoop";
 
 export const metadata: Metadata = {
   title: "Predictive Engine Market — Inactive Preview",
@@ -20,7 +21,7 @@ const mechanics = [
   ["CREATE", "Users may propose prediction markets. Objective resolution rules, a named source, review, and dispute handling remain mandatory design gates."],
   ["CANCEL", "A proposal with zero matched volume may be cancelled without penalty. Matched positions cannot be erased by a creator."],
   ["HOLD", "The design target keeps eligible IAT positions in normal APY and CCC accounting while they remain locked. SOL positions do not earn IAT APY."],
-  ["RECYCLE", "The proposed 1% protocol edge returns to an isolated liquidity runway. Exact fee incidence remains under economic review."],
+  ["RECYCLE", "The fixed 1% protocol edge is designed to return to the isolated liquidity pool, extending the APY runway available to eligible $IAT holders. Exact on-chain routing and accounting remain release gates."],
 ];
 
 export default function PredictiveEnginePage() {
@@ -41,7 +42,7 @@ export default function PredictiveEnginePage() {
       <section className="feature-statline" aria-label="Predictive Engine proposal summary">
         <div><span>TARGET WINDOW</span><strong>30 DAYS AFTER $IAT GENESIS</strong></div>
         <div><span>ASSETS PROPOSED</span><strong>IAT + SOL</strong></div>
-        <div><span>PROTOCOL EDGE</span><strong>1%</strong></div>
+        <div><span>PROTOCOL EDGE</span><strong>1% → LIQUIDITY</strong></div>
         <div><span>STATUS</span><strong>INACTIVE</strong></div>
       </section>
       <section className="media-teaser" aria-labelledby="pet-teaser-title">
@@ -61,6 +62,7 @@ export default function PredictiveEnginePage() {
         <h2>“PROVABLY FAIR” MUST BE A REPRODUCIBLE PROPERTY, NOT A TAGLINE.</h2>
         <span>The release gate requires public settlement rules, canonical resolution sources, replayable receipts, dispute handling, economic tests, and independent review. Until then this is a design target.</span>
       </section>
+      <ProtocolEdgeLoop />
       <EditorialScene
         eyebrow="FIELD EDITORIAL // FLIGHT DECK RUNWAY"
         title="THE MARKET TAKES THE DECK."
