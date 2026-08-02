@@ -42,11 +42,11 @@
         "💜",
         "💚"
       ],
-      "nextIndex": 1,
+      "nextIndex": 2,
       "lastReservedImageNumbers": [
-        765,
-        766,
-        763
+        768,
+        769,
+        767
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T11:25:12.944Z",
+    "status": "awaiting_post",
+    "caption": "Belarus 💜 Austria",
+    "imageNumbers": [768, 769, 767],
+    "countries": ["Belarus", "Austria"],
+    "assets": [
+      {"file": "768-belarus-minsk-national-library-intercept.png", "sha256": "53ededdfa9d7506d14458041b9b2bf9a021915d547c2d81e35286b92e63a7323"},
+      {"file": "769-belarus-mir-castle-cipher.png", "sha256": "c044d953aa26fe76079175f4730d4308905a22c2a9936d192f47eb789d59b2c3"},
+      {"file": "767-austria-semmering-railway-night-relay.png", "sha256": "14ec5223cfdce462464e6b12da6a75e419cedffca0d47efa086525a77a4d271a"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
