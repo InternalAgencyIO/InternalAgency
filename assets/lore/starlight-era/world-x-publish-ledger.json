@@ -39,11 +39,11 @@
         "🧡",
         "💜"
       ],
-      "nextIndex": 5,
+      "nextIndex": 6,
       "lastReservedImageNumbers": [
-        705,
-        706,
-        703
+        708,
+        709,
+        707
       ]
     },
     "quotes": false,
@@ -111,7 +111,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T09:51:27.883Z",
+    "status": "awaiting_post",
+    "caption": "Jordan 💙 Haiti",
+    "imageNumbers": [708, 709, 707],
+    "countries": ["Jordan", "Haiti"],
+    "assets": [
+      {"file": "708-jordan-amman-abdali-boulevard-intercept.png", "sha256": "264dd6824878855edb66242951581b5136ca9f82101cac893ab775d5b8b2b718"},
+      {"file": "709-jordan-petra-treasury-rose-cipher.png", "sha256": "540f2e46442761d52beea9d7e41b85573721e2cba0c675322ef1dd9b556a1e56"},
+      {"file": "707-haiti-cap-haitien-waterfront-night-relay.png", "sha256": "790d027bba97a57593f573fd4eb55dcee659886419ba47e452b879989bbb0238"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
