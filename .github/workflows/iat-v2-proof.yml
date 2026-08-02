@@ -31,6 +31,11 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The public pre-launch audit validator recomputes its historical
+          # source commit, tree, and tracked-file inventory. A shallow checkout
+          # cannot provide that source-bound assurance.
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
