@@ -79,7 +79,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T09:07:33.6460656Z",
+    "status": "awaiting_post",
+    "caption": "Burundi ❤️ Rwanda",
+    "imageNumbers": [684, 685, 683],
+    "countries": ["Burundi", "Rwanda"],
+    "assets": [
+      {"file": "684-burundi-bujumbura-lake-tanganyika-boulevard-intercept.png", "sha256": "f7f07a317fc8c9ad24ea8f6d1aeb1518777564a1189161c488eb0b2179b2ba71"},
+      {"file": "685-burundi-gitega-national-museum-cipher.png", "sha256": "fecae8a9a03aaabe63d08a2c162890cad9296ede4e94d055e8a76de8f9fb7bb4"},
+      {"file": "683-rwanda-rubavu-lake-kivu-night-relay.png", "sha256": "e504c408eef870dec8a9583ceabb98bd97c1b6096e0c2ccb9df42fc1cc69eb08"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
