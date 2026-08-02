@@ -1,0 +1,51 @@
+{
+  "schema": "iat-ui-compatibility-audit-manifest/v1",
+  "status": "DRAFT_UI_RELEASE_HOLD",
+  "mainnetStatus": "HOLD",
+  "uiReleaseDecision": "HOLD",
+  "assurance": "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT",
+  "title": "IAT public UI compatibility and accessibility audit",
+  "auditedAtUtc": "2026-08-02T08:39:35Z",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "commit": "b584d51466ef6696af98b5c16b6dc1d7e84eb59e",
+    "gitTree": "ccf4c6705c6f9c49756d9bafae3cb3ad2c625b2d",
+    "scopePath": "public/audits/iat-ui-compatibility-20260802/scope.json"
+  },
+  "findingSummary": {
+    "total": 9,
+    "openBySeverity": {"CRITICAL": 0, "HIGH": 2, "MEDIUM": 4, "LOW": 2, "INFO": 1}
+  },
+  "clearance": {
+    "uiReleaseApproved": false,
+    "responsiveBlockersResolved": false,
+    "accessibilityBlockersResolved": false,
+    "iosSafariCertified": false,
+    "physicalAndroidCertified": false,
+    "linuxGraphicalBrowserCertified": false,
+    "screenReaderCertified": false,
+    "independentReviewComplete": false,
+    "authorizesDeployment": false,
+    "authorizesSigning": false,
+    "authorizesBroadcast": false
+  },
+  "publicDevelopmentSurface": {
+    "draftPullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/4",
+    "packagePath": "projects/star-ascent/site/public/audits/iat-ui-compatibility-20260802",
+    "deploymentState": "NOT_DEPLOYED"
+  },
+  "artifactSha256": {
+    "README.md": "5753a610702a54c7b3b085723977971703b937b1a062b194696228739705b2db",
+    "FINDINGS.md": "f1f09551bef9a52637c4d5bdd31f8fd6b7be10f7153ceb115b5adaaae24314c3",
+    "scope.json": "437247fddc4d7cc0434d4ef8eb123ac73e17d88f619da6e82603eb308e9fbabb",
+    "findings.json": "e10cd181ebabc9a5d51735f71aa443c76842c6a176ac80eb0484f113d013afa9",
+    "checks.json": "4ae5f86ba42b23aa8899c880a48f5f8b905c6e142d356e2f271a7d62dded1b1c",
+    "environment-matrix.json": "7fcf5e7f5d212ccf880bb154d2fdb6a2308a5f7a14550f544d3db21699cc50b3"
+  },
+  "limitations": [
+    "This package is not an independent accessibility certification or browser-lab report.",
+    "iPhone and Android checks are viewport emulation, not physical-device evidence.",
+    "Ubuntu CI evidence is not graphical Linux browser evidence.",
+    "No wallet, key, signing device, secret, deployment, transaction, or funds were accessed."
+  ]
+}

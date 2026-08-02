@@ -1,0 +1,57 @@
+{
+  "schema": "iat-ui-compatibility-audit-scope/v1",
+  "status": "DRAFT_UI_RELEASE_HOLD",
+  "auditedAtUtc": "2026-08-02T08:39:35Z",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "commit": "b584d51466ef6696af98b5c16b6dc1d7e84eb59e",
+    "gitTree": "ccf4c6705c6f9c49756d9bafae3cb3ad2c625b2d"
+  },
+  "routes": [
+    "/",
+    "/network",
+    "/launch",
+    "/proof",
+    "/signal",
+    "/tokenomics",
+    "/dossier",
+    "/world",
+    "/verify",
+    "/mint",
+    "/rewards"
+  ],
+  "sourceSha256": {
+    "projects/star-ascent/site/app/page.tsx": "27540ff85a58066dcd25e467fa5ebe64048f3566502f737386a00b438cf1e3cd",
+    "projects/star-ascent/site/app/globals.css": "e4be773caf0a4dc0fce0ff5eebcc583fae078375515082db471b4b8aa8e9db5d",
+    "projects/star-ascent/site/app/LaunchSequence.tsx": "2e1d84c10269f1ea67c478cc6f6da63d5174059fa1d7ed1096d38c0e22f2f655",
+    "projects/star-ascent/site/app/launch-sequence.css": "64639ed75de09d0a740338859723e99881042d943e89cecd914dc38152c73e3a",
+    "projects/star-ascent/site/app/ActivationTerminal.tsx": "0c0ccbb12f7804daeadea3acf27c220dad78fc6aeb22c0ce7aed50a02aa34153",
+    "projects/star-ascent/site/app/network/page.tsx": "5a46475dfb2be81a4b3a037342d714823e04cd0bf261a4d3ccb7a4caf2373633",
+    "projects/star-ascent/site/app/launch/page.tsx": "e5fd46e4bbcc53a8ed7c95477bc10a6cdd9b80a04f319fe43c43fbe4bd28864c",
+    "projects/star-ascent/site/app/verify/page.tsx": "effd76ced6bf785e86f2449535d2d644d535f36ca437c8fb7ce6202c0bd8cf81",
+    "projects/star-ascent/site/app/verify/verify.css": "498b1dded7d93d074cbb1637a8b72aab52f8e2b489f2ab1fec531243327ef625",
+    "projects/star-ascent/site/tests/rendered-html.test.mjs": "54fa55cb3d5fdc49d997a867eff3514e30685099507a6e52541f239e04a5de7d",
+    ".github/workflows/iat-v2-proof.yml": "aa35bd0fdd3f0e6558bc3c4e625fd7777ed3781b36f733759783605884fb615f"
+  },
+  "included": [
+    "route rendering and visible HOLD state",
+    "home and activation-terminal interactions",
+    "read-only network lookup success and validation failure",
+    "keyboard and focus behavior",
+    "automated accessibility rules and manual semantic inspection",
+    "responsive overflow and visual inspection",
+    "Windows Chrome, Edge, and Firefox headless render smoke",
+    "Ubuntu GitHub Actions build and rendered-HTML evidence"
+  ],
+  "excluded": [
+    "production deployment or penetration test",
+    "wallet connection, signing, simulation for signing, or broadcast",
+    "mainnet or devnet mutation",
+    "physical iOS or Android devices",
+    "real Safari or WebKit execution",
+    "Linux graphical browser execution",
+    "screen-reader certification",
+    "network throttling and laboratory performance scoring",
+    "independent third-party review"
+  ]
+}

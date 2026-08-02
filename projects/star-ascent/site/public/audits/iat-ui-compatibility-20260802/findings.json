@@ -1,0 +1,120 @@
+{
+  "schema": "iat-ui-compatibility-findings/v1",
+  "status": "DRAFT_UI_RELEASE_HOLD",
+  "findings": [
+    {
+      "id": "UI-RESP-001",
+      "severity": "HIGH",
+      "state": "OPEN",
+      "area": "responsive-layout",
+      "routes": ["/"],
+      "summary": "Core launch layout fails at phone and tablet widths",
+      "evidence": [
+        "390x844 Chromium emulation and real Firefox clip the launch-sequence headline",
+        "768x1024 reports 98px horizontal overflow",
+        "real Chrome 150 and Firefox 153 reproduce clipped nav/status content at 768x1024"
+      ],
+      "remediation": "Add phone/tablet layout constraints and automated no-overflow assertions."
+    },
+    {
+      "id": "UI-A11Y-001",
+      "severity": "HIGH",
+      "state": "OPEN",
+      "area": "accessibility-contrast",
+      "routes": ["/", "/network", "/launch", "/proof", "/tokenomics", "/dossier", "/world", "/mint", "/rewards"],
+      "summary": "Axe confirms 28 color-contrast failures across public routes",
+      "evidence": [
+        "home mission eyebrow 3.12:1 where 4.5:1 is required",
+        "home status eyebrow 1.39:1 where 4.5:1 is required",
+        "network pulse text 4.04:1 where 4.5:1 is required",
+        "gradient-backed nodes remain incomplete and require manual review"
+      ],
+      "remediation": "Replace failing color pairs with tested semantic tokens and manually review gradient-backed content."
+    },
+    {
+      "id": "UI-A11Y-002",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "area": "dialog-tabs-keyboard",
+      "routes": ["/"],
+      "summary": "Activation dialog and tabs have an incomplete keyboard and ARIA contract",
+      "evidence": [
+        "focus returns to BODY after Escape close",
+        "background main/nav are not inert or aria-hidden",
+        "ArrowLeft does not change the selected tab",
+        "tabs omit roving tabindex, aria-controls, and tabpanel relationships"
+      ],
+      "remediation": "Restore opener focus, isolate modal siblings, and implement the complete tabs pattern."
+    },
+    {
+      "id": "UI-LAYOUT-001",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "area": "route-overflow",
+      "routes": ["/verify"],
+      "summary": "Decorative verify orbit creates 288px of desktop document overflow",
+      "evidence": ["1440x900 viewport: clientWidth 1425, scrollWidth 1713", ".verify-orbit extends to x=1713"],
+      "remediation": "Contain or clip the decorative orbit and assert zero route-root overflow."
+    },
+    {
+      "id": "UI-A11Y-003",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "area": "focus-semantics",
+      "routes": ["/"],
+      "summary": "Skip focus, heading order, generic ARIA labels, and landmarks need repair",
+      "evidence": [
+        "skip activation leaves focus on the link instead of main",
+        "launch sequence H2 precedes page H1",
+        "axe reports aria-prohibited-attr incomplete on generic div labels",
+        "two home nodes sit outside landmarks"
+      ],
+      "remediation": "Move focus to main, repair the heading outline, use semantic roles, and contain content in landmarks."
+    },
+    {
+      "id": "UI-A11Y-004",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "area": "network-feedback",
+      "routes": ["/network"],
+      "summary": "Network lookup completion and errors are not programmatically announced",
+      "evidence": [
+        "malformed input renders an invalid-address message",
+        "no result-specific alert or live region is present",
+        "focus moves to BODY after submission",
+        "valid public address lookup otherwise succeeds"
+      ],
+      "remediation": "Preserve focus and announce validation/result state through alert/live semantics."
+    },
+    {
+      "id": "UI-FUNC-001",
+      "severity": "LOW",
+      "state": "OPEN",
+      "area": "react-reconciliation",
+      "routes": ["/launch"],
+      "summary": "LaunchPage emits a React unique-key console error",
+      "evidence": ["title.split lines are mapped to anonymous fragments"],
+      "remediation": "Give each fragment a stable key or remove the fragment list."
+    },
+    {
+      "id": "UI-PERF-001",
+      "severity": "LOW",
+      "state": "OPEN",
+      "area": "image-layout-stability",
+      "routes": ["/"],
+      "summary": "Two home images omit intrinsic dimensions",
+      "evidence": ["/images/outer-comms-v1.webp", "/images/ascent-ritual-v1.webp"],
+      "remediation": "Publish matching intrinsic dimensions or aspect-ratio metadata."
+    },
+    {
+      "id": "UI-COVERAGE-001",
+      "severity": "INFO",
+      "state": "OPEN",
+      "area": "environment-coverage",
+      "routes": ["*"],
+      "summary": "iOS Safari, physical Android, Linux graphical browsers, and screen readers were unavailable",
+      "evidence": ["iPhone and Android results are viewport emulation only", "Ubuntu evidence is build/rendered-HTML CI, not graphical browser execution"],
+      "remediation": "Run and publish the same matrix in a real browser/device accessibility lab."
+    }
+  ]
+}

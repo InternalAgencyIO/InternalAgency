@@ -1,0 +1,89 @@
+{
+  "schema": "iat-ui-compatibility-checks/v1",
+  "status": "DRAFT_UI_RELEASE_HOLD",
+  "runAtUtc": "2026-08-02T08:39:35Z",
+  "environment": {
+    "host": "Windows 10/11 compatible Win32",
+    "inAppChromiumUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "chrome": "150.0.7871.187",
+    "edge": "149.0.4022.62",
+    "firefox": "153.0.1",
+    "axeCore": "4.12.1"
+  },
+  "checks": [
+    {
+      "id": "PRIMARY_ROUTE_MATRIX",
+      "result": "PASS_WITH_FINDINGS",
+      "metrics": {"routes": 11, "loaded": 11, "brokenImages": 0, "routesMissingMain": 0, "routesMissingH1": 0, "routesMissingHoldLanguage": 0, "overflowRoutesAt1440": ["/verify"]}
+    },
+    {
+      "id": "HOME_INTERACTIONS",
+      "result": "PASS",
+      "metrics": {"launchEntry": true, "languageRoundTrip": true, "signalArm": true, "dialogOpenClose": true, "callsignUppercaseAndMax28": true, "readinessCheckbox": true, "tabClickSelection": true}
+    },
+    {
+      "id": "KEYBOARD_AND_FOCUS",
+      "result": "FAIL",
+      "metrics": {"escapeClose": true, "backwardFocusTrap": true, "restoreOpenerFocus": false, "skipMovesFocusToMain": false, "tabArrowNavigation": false, "backgroundIsolated": false}
+    },
+    {
+      "id": "NETWORK_LOOKUP",
+      "result": "PASS_WITH_ACCESSIBILITY_FINDING",
+      "metrics": {"invalidInputRejected": true, "validPublicSystemProgramLookup": true, "walletConnectionRequested": false, "signatureRequested": false, "resultAnnounced": false}
+    },
+    {
+      "id": "REDUCED_MOTION",
+      "result": "PASS",
+      "metrics": {"mediaQueryMatched": true, "sequenceAnimation": "none", "fireAnimation": "none", "lineAnimation": "none"}
+    },
+    {
+      "id": "AXE_ROUTE_SWEEP",
+      "result": "FAIL",
+      "metrics": {
+        "routes": 11,
+        "confirmedColorContrastNodes": 28,
+        "confirmedByRoute": {"/": 2, "/network": 2, "/launch": 4, "/proof": 7, "/signal": 0, "/tokenomics": 1, "/dossier": 2, "/world": 4, "/verify": 0, "/mint": 1, "/rewards": 5},
+        "ariaProhibitedAttrIncompleteByRoute": {"/": 4, "/network": 1, "/launch": 2, "/proof": 1, "/signal": 1, "/tokenomics": 1, "/dossier": 2, "/world": 1, "/verify": 1, "/mint": 1, "/rewards": 1},
+        "gradientContrastIncomplete": true
+      }
+    },
+    {
+      "id": "RESPONSIVE_MATRIX",
+      "result": "FAIL",
+      "metrics": {
+        "profiles": {
+          "390x844": {"engine": "Chromium emulation plus real Firefox", "documentOverflowPx": 0, "visibleHeadlineClip": true},
+          "412x915": {"engine": "Chromium emulation", "documentOverflowPx": 0, "statusCollision": true},
+          "768x1024": {"engine": "Chromium emulation plus real Chrome and Firefox", "documentOverflowPx": 98, "navClip": true, "statusOverlap": true},
+          "1440x900": {"engine": "real Chrome, Edge, and Firefox", "homeDocumentOverflowPx": 0, "desktopSmoke": "PASS"}
+        }
+      }
+    },
+    {
+      "id": "BROWSER_CONSOLE",
+      "result": "FAIL_LOW",
+      "metrics": {"runtimeExceptions": 0, "reactErrors": 1, "reactErrorRoute": "/launch", "reactErrorClass": "missing-child-key"}
+    },
+    {
+      "id": "REAL_WINDOWS_BROWSER_RENDER_SMOKE",
+      "result": "PASS_DESKTOP_FAIL_RESPONSIVE",
+      "metrics": {
+        "desktop": {"chrome": "PASS", "edge": "PASS", "firefox": "PASS"},
+        "tablet": {"chrome": "FAIL_LAYOUT", "firefox": "FAIL_LAYOUT"},
+        "phone": {"firefox": "FAIL_HEADLINE_CLIP"}
+      }
+    },
+    {
+      "id": "AUDITED_HEAD_GITHUB_CHECKS",
+      "result": "PASS_CI_ONLY",
+      "metrics": {"draftPullRequest": 4, "head": "b584d51466ef6696af98b5c16b6dc1d7e84eb59e", "ubuntuWebPolicyLaunchGates": "SUCCESS", "codeQL": "SUCCESS", "graphicalLinuxBrowser": "NOT_RUN"}
+    }
+  ],
+  "limitations": [
+    "Headless browser smoke tests do not replace physical-device interactive testing.",
+    "Chromium viewport emulation is not iOS Safari or physical Android evidence.",
+    "Axe incomplete results, especially gradient contrast, require manual review.",
+    "No screen reader, switch control, voice control, network throttling, or performance laboratory was available.",
+    "No deployment, wallet connection, signing, broadcast, transfer, or mainnet/devnet mutation occurred."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "iat-ui-environment-matrix/v1",
+  "status": "DRAFT_UI_RELEASE_HOLD",
+  "environments": [
+    {"id":"WINDOWS_CHROME_150_DESKTOP","kind":"REAL_HEADLESS_BROWSER","viewport":"1440x900","result":"PASS_RENDER_SMOKE","limitations":["headless","interaction coverage supplied by in-app Chromium"]},
+    {"id":"WINDOWS_EDGE_149_DESKTOP","kind":"REAL_HEADLESS_BROWSER","viewport":"1440x900","result":"PASS_RENDER_SMOKE","limitations":["headless","render-only"]},
+    {"id":"WINDOWS_FIREFOX_153_DESKTOP","kind":"REAL_HEADLESS_BROWSER","viewport":"1440x900","result":"PASS_RENDER_SMOKE","limitations":["headless","render-only"]},
+    {"id":"WINDOWS_CHROME_150_TABLET","kind":"REAL_HEADLESS_BROWSER","viewport":"768x1024","result":"FAIL_LAYOUT","limitations":["headless"]},
+    {"id":"WINDOWS_FIREFOX_153_TABLET","kind":"REAL_HEADLESS_BROWSER","viewport":"768x1024","result":"FAIL_LAYOUT","limitations":["headless"]},
+    {"id":"WINDOWS_FIREFOX_153_PHONE_WIDTH","kind":"REAL_HEADLESS_BROWSER","viewport":"390x844","result":"FAIL_HEADLINE_CLIP","limitations":["headless","phone-sized window is not a phone device"]},
+    {"id":"IN_APP_CHROMIUM_INTERACTIVE","kind":"REAL_BROWSER_AUTOMATION","viewport":"1440x900 and responsive matrix","result":"PASS_WITH_FINDINGS","limitations":["Windows Chromium 150"]},
+    {"id":"IPHONE_390_EMULATION","kind":"VIEWPORT_EMULATION","viewport":"390x844","result":"FAIL_HEADLINE_CLIP","limitations":["not iOS","not Safari","no touch hardware"]},
+    {"id":"ANDROID_412_EMULATION","kind":"VIEWPORT_EMULATION","viewport":"412x915","result":"PASS_NO_DOCUMENT_OVERFLOW_WITH_STATUS_COLLISION","limitations":["not a physical Android device","Chromium viewport only"]},
+    {"id":"UBUNTU_GITHUB_ACTIONS","kind":"CI_BUILD_AND_RENDERED_HTML","viewport":null,"result":"PASS_AT_AUDITED_HEAD","limitations":["no graphical browser","no visual or device interaction"]},
+    {"id":"IOS_SAFARI_WEBKIT","kind":"NOT_AVAILABLE","viewport":null,"result":"NOT_TESTED","limitations":["release certification gap"]},
+    {"id":"PHYSICAL_ANDROID_SYSTEM_BROWSER","kind":"NOT_AVAILABLE","viewport":null,"result":"NOT_TESTED","limitations":["release certification gap"]},
+    {"id":"LINUX_FIREFOX_GRAPHICAL","kind":"NOT_AVAILABLE","viewport":null,"result":"NOT_TESTED","limitations":["release certification gap"]},
+    {"id":"SCREEN_READER","kind":"NOT_AVAILABLE","viewport":null,"result":"NOT_TESTED","limitations":["accessibility certification gap"]}
+  ]
+}
