@@ -32,6 +32,11 @@ function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
 }
 
+function canonicalUtf8LfSha256(value) {
+  const normalized = value.toString("utf8").replace(/\r\n?/gu, "\n");
+  return sha256(Buffer.from(normalized, "utf8"));
+}
+
 function countSeverities(findings) {
   return findings.reduce((counts, finding) => {
     check(["CRITICAL", "HIGH", "MEDIUM", "LOW"].includes(finding.severity), `unknown severity ${finding.severity}`);
@@ -105,8 +110,8 @@ for (const entry of packages) {
     check(manifest.featureBoundary.separateDeployableDlcExists === false, "Associates separate-DLC claim is unsupported");
     check(manifest.featureBoundary.timeGateImplemented === false, "Associates time-gate finding cannot be masked");
 
-    for (const [relativePath, expected] of Object.entries(scope.criticalSourceSha256)) {
-      const actual = sha256(bytes(resolve(relativePath)));
+    for (const [relativePath, expected] of Object.entries(scope.criticalSourceCanonicalUtf8LfSha256)) {
+      const actual = canonicalUtf8LfSha256(bytes(resolve(relativePath)));
       check(actual === expected, `Associates audited source drift: ${relativePath}`);
     }
     const lib = bytes(resolve("programs/iat_v2/src/lib.rs")).toString("utf8");
