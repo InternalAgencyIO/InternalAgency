@@ -12,11 +12,11 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: t.metadataTitle,
       description: t.metadataSocialDescription,
-      images: ["/images/future/predictive-engine-hero-v1.png"],
+      images: ["/images/future/predictive-engine-hero-v1.jpg"],
     },
     twitter: {
       card: "summary_large_image",
-      images: ["/images/future/predictive-engine-hero-v1.png"],
+      images: ["/images/future/predictive-engine-hero-v1.jpg"],
     },
   };
 }

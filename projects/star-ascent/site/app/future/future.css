@@ -15,7 +15,7 @@
 .future-portals{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#ffffff25}
 .future-portal{position:relative;isolation:isolate;display:flex;min-height:670px;flex-direction:column;justify-content:space-between;overflow:hidden;padding:clamp(1.5rem,4vw,4rem);background:#09090d}
 .future-portal::before{position:absolute;z-index:-2;inset:0;content:"";background-position:center;background-size:cover;transition:transform .7s ease,filter .7s ease}.future-portal::after{position:absolute;z-index:-1;inset:0;content:"";background:linear-gradient(0deg,#050507 0%,transparent 65%),linear-gradient(90deg,#050507c7,transparent)}
-.portal-pet::before{background-image:url('/images/future/predictive-engine-hero-v1.png')}.portal-casino::before{background-image:url('/images/future/casino-hero-v1.png')}.future-portal:hover::before{transform:scale(1.045);filter:saturate(1.17)}
+.portal-pet::before{background-image:url('/images/future/predictive-engine-hero-v1.jpg')}.portal-casino::before{background-image:url('/images/future/casino-hero-v1.jpg')}.future-portal:hover::before{transform:scale(1.045);filter:saturate(1.17)}
 .future-portal>span,.future-portal>strong{font:900 .6rem ui-monospace,monospace;letter-spacing:.12em}.future-portal>span{align-self:flex-start;border:1px solid #ffffff57;padding:.7rem;background:#050507a6}.future-portal>strong{color:var(--future-gold)}
 .future-portal p{margin:0;color:#ff9e7d;font:900 .6rem ui-monospace,monospace;letter-spacing:.15em}.future-portal h2{margin:.8rem 0 2rem;font-size:clamp(3rem,6.5vw,7rem);line-height:.78;letter-spacing:-.09em}
 .fashion-section{display:grid;grid-template-columns:minmax(280px,.72fr) 1.3fr;min-height:720px;background:#f4e9e2;color:#16090b}
