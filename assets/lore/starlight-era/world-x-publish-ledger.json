@@ -114,18 +114,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T10:42:59.314Z",
-    "status": "awaiting_post",
-    "caption": "Sweden ❤️ Papua New Guinea",
-    "imageNumbers": [744, 745, 743],
-    "countries": ["Sweden", "Papua New Guinea"],
-    "assets": [
-      {"file": "744-sweden-stockholm-sergels-torg-intercept.png", "sha256": "34d41bdccbf08917be14487a146da5e075aa6e0f34f3f87a396ae82c2bf2cdb0"},
-      {"file": "745-sweden-visby-ring-wall-cipher.png", "sha256": "d0fe0abc019163005e05553cb4c6113348ae132295ed63ad290b74f26607555f"},
-      {"file": "743-papua-new-guinea-rabaul-simpson-harbour-night-relay.png", "sha256": "eaee0a525e18090a12b1032bd4a4f5f9a6748cda5091498fb7ec40c5aa5ab08e"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2894,6 +2883,19 @@
         {"file": "741-papua-new-guinea-kuk-wahgi-cipher.png", "sha256": "9ac414356f1aab20fbef39ab03d8a9de9ccf1ade18ae77c963b2c718251c5026"},
         {"file": "742-papua-new-guinea-mount-wilhelm-extraction.png", "sha256": "e0ab3f2e7bd0609a4a9f5517986d8b60dca6b1d1887ba6184172562cd09955ec"},
         {"file": "739-tajikistan-pamir-highway-karakul-night-relay.png", "sha256": "8e3a6aad5b94bb9209c0cd0d42a757d709bbab94bf1ef29a255411ba2463d517"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T10:46:22.640Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083866994995020063",
+      "caption": "Sweden ❤️ Papua New Guinea",
+      "imageNumbers": [744, 745, 743],
+      "countries": ["Sweden", "Papua New Guinea"],
+      "assets": [
+        {"file": "744-sweden-stockholm-sergels-torg-intercept.png", "sha256": "34d41bdccbf08917be14487a146da5e075aa6e0f34f3f87a396ae82c2bf2cdb0"},
+        {"file": "745-sweden-visby-ring-wall-cipher.png", "sha256": "d0fe0abc019163005e05553cb4c6113348ae132295ed63ad290b74f26607555f"},
+        {"file": "743-papua-new-guinea-rabaul-simpson-harbour-night-relay.png", "sha256": "eaee0a525e18090a12b1032bd4a4f5f9a6748cda5091498fb7ec40c5aa5ab08e"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
