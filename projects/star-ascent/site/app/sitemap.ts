@@ -14,5 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${root}/press`, lastModified: modified, changeFrequency: "daily", priority: 0.8 },
     { url: `${root}/rewards`, lastModified: modified, changeFrequency: "daily", priority: 0.9 },
     { url: `${root}/world`, lastModified: modified, changeFrequency: "weekly", priority: 0.75 },
+    { url: `${root}/future`, lastModified: modified, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${root}/future/predictive-engine`, lastModified: modified, changeFrequency: "weekly", priority: 0.65 },
+    { url: `${root}/future/casino`, lastModified: modified, changeFrequency: "weekly", priority: 0.65 },
   ]);
 }

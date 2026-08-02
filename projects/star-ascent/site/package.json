@@ -13,6 +13,7 @@
     "build": "vinext build",
     "start": "vinext start",
     "test": "npm run build && node --import ./tests/register-cloudflare-workers-loader.mjs --test tests/rendered-html.test.mjs",
+    "check:future-teasers": "node --test tests/future-teasers.test.mjs",
     "check:public": "node scripts/check-public-launch-routes.mjs",
     "check:manifest-gate": "node scripts/test-manifest-gate-regression.mjs",
     "check:publication-payload": "node scripts/test-publication-payload-regression.mjs",
