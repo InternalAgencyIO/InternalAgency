@@ -1106,6 +1106,13 @@ rejected and regenerated.
 | **Managua Lakefront Azure Intercept**<br><img src="804-nicaragua-managua-lakefront-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking cobalt-white-turquoise light keys into a silver lake prism above Managua's Lake Xolotlan waterfront"> | **Granada Colonial Arcade Amber Cipher**<br><img src="805-nicaragua-granada-colonial-arcade-cipher.png" width="420" alt="The trio sealing a fictional archive inside an amber crystal capsule among Granada's pastel secular colonial merchant arcades"> |
 | **Masaya Volcano Terrain Extraction**<br><img src="806-nicaragua-masaya-volcano-extraction.png" width="420" alt="The trio restoring a silver-and-amber terrain beacon above Masaya Volcano's caldera and black lava fields"> | **Ometepe Ferry Moonline Relay**<br><img src="807-nicaragua-ometepe-ferry-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cobalt-turquoise-gold lake relay at Moyogalpa's Ometepe ferry pier before the twin volcanoes at blue hour"> |
 
+## THE MILE HIGH THREESOME - Bonus Batch 197: Türkiye
+
+| | |
+|---|---|
+| **İstanbul Karaköy Bosphorus Aircrew Intercept**<br><img src="808-turkiye-istanbul-karakoy-bosphorus-intercept.png" width="420" alt="The STAR RAZE trio locking red-white-cobalt keys into a gold flight case above İstanbul's Karaköy Bosphorus waterfront"> | **Safranbolu Merchant Arcade Aircrew Cipher**<br><img src="809-turkiye-safranbolu-merchant-arcade-cipher.png" width="420" alt="The trio sealing three crystal cipher rings into an illuminated archive capsule in Safranbolu's historic merchant lane"> |
+| **Pamukkale Travertine Aircrew Extraction**<br><img src="810-turkiye-pamukkale-travertine-terrain-extraction.png" width="420" alt="The trio restoring a cobalt-gold terrain beacon above Pamukkale's white travertines and turquoise pools"> | **İzmir Kordon Night Aircrew Relay**<br><img src="811-turkiye-izmir-kordon-night-tram-relay.png" width="420" alt="The trio locking signal bracelets into a gold compass above İzmir's illuminated Kordon waterfront"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
