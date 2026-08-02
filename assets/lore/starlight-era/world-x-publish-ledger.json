@@ -114,18 +114,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T10:30:41.700Z",
-    "status": "awaiting_post",
-    "caption": "Tajikistan ❤️ Papua New Guinea",
-    "imageNumbers": [737, 738, 740],
-    "countries": ["Tajikistan", "Papua New Guinea"],
-    "assets": [
-      {"file": "737-tajikistan-hisor-fortress-cipher.png", "sha256": "ffa90706531ee6f96f747fe30d1e3fbb62b19d1e4ebd905883901a1a81c2eb40"},
-      {"file": "738-tajikistan-iskanderkul-fann-extraction.png", "sha256": "83f023ab9d7c52e11953da088c0be1eba6fe1cc0c88acad3cf42f187a4c8ed1c"},
-      {"file": "740-papua-new-guinea-port-moresby-ela-beach-intercept.png", "sha256": "f99bf3c865456f59cdc73334f4bd266d0fc9988631558728bfbbbd240f127a9c"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2868,6 +2857,19 @@
         {"file": "734-portugal-madeira-pico-arieiro-extraction.png", "sha256": "f6460d432e3c162a034cedb34055cb48152b61a378a5921a3a05ea6984e699be"},
         {"file": "735-portugal-porto-dom-luis-night-relay.png", "sha256": "d0e3290dd938db1766056aab8a22439588bb07eb7122ac4f5e73fb853d1848af"},
         {"file": "736-tajikistan-dushanbe-national-library-intercept.png", "sha256": "bc699c74be5b7c7b33237873149d8378bb1a530d48197741bdc54393b867846a"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T10:37:33.373Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083864775088349221",
+      "caption": "Tajikistan ❤️ Papua New Guinea",
+      "imageNumbers": [737, 738, 740],
+      "countries": ["Tajikistan", "Papua New Guinea"],
+      "assets": [
+        {"file": "737-tajikistan-hisor-fortress-cipher.png", "sha256": "ffa90706531ee6f96f747fe30d1e3fbb62b19d1e4ebd905883901a1a81c2eb40"},
+        {"file": "738-tajikistan-iskanderkul-fann-extraction.png", "sha256": "83f023ab9d7c52e11953da088c0be1eba6fe1cc0c88acad3cf42f187a4c8ed1c"},
+        {"file": "740-papua-new-guinea-port-moresby-ela-beach-intercept.png", "sha256": "f99bf3c865456f59cdc73334f4bd266d0fc9988631558728bfbbbd240f127a9c"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
