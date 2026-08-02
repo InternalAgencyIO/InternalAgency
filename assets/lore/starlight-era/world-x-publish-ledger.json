@@ -42,11 +42,11 @@
         "💙",
         "🧡"
       ],
-      "nextIndex": 6,
+      "nextIndex": 7,
       "lastReservedImageNumbers": [
-        744,
-        745,
-        743
+        746,
+        747,
+        748
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T10:47:17.790Z",
+    "status": "awaiting_post",
+    "caption": "Sweden 💜 Greece",
+    "imageNumbers": [746, 747, 748],
+    "countries": ["Sweden", "Greece"],
+    "assets": [
+      {"file": "746-sweden-abisko-lapporten-extraction.png", "sha256": "edd5f2a8bb0d7f27fbbf877f87aa0db84fd8b54be765e7b225f0415129b9a0f1"},
+      {"file": "747-sweden-malmo-oresund-bridge-night-relay.png", "sha256": "73c61c0ec4254c270f2cbaf18fe335c86924661998398aecc733d66858b7551f"},
+      {"file": "748-greece-athens-stavros-niarchos-intercept.png", "sha256": "57e0db92cbe323daf5098009d8c2c35b5710dd0f45b436e4665583ba95fd707f"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
