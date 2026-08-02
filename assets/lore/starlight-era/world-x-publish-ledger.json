@@ -27,26 +27,26 @@
     "heartCycle": {
       "mode": "two-each-shuffled-12-loop",
       "cycleLength": 12,
-      "cycleNumber": 2,
+      "cycleNumber": 3,
       "order": [
-        "💙",
         "🧡",
+        "💜",
         "💛",
         "❤️",
-        "💛",
-        "❤️",
-        "💜",
-        "💜",
-        "💚",
-        "💚",
         "💙",
-        "🧡"
+        "💚",
+        "🧡",
+        "💙",
+        "❤️",
+        "💛",
+        "💜",
+        "💚"
       ],
-      "nextIndex": 12,
+      "nextIndex": 1,
       "lastReservedImageNumbers": [
-        761,
-        762,
-        764
+        765,
+        766,
+        763
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T11:16:25.312Z",
+    "status": "awaiting_post",
+    "caption": "Austria 🧡 Hungary",
+    "imageNumbers": [765, 766, 763],
+    "countries": ["Austria", "Hungary"],
+    "assets": [
+      {"file": "765-austria-salzburg-hohensalzburg-fortress-cipher.png", "sha256": "4265e82be1c1ab7a970f096bb591150975a108534f0002f272fe922435f3b78f"},
+      {"file": "766-austria-grossglockner-pasterze-extraction.png", "sha256": "e2234fd218d3099271c91f266fcbe348516f5d2cf1480a87a163107a0ff2b7ee"},
+      {"file": "763-hungary-budapest-keleti-night-relay.png", "sha256": "fef4bb33c1749fb81b343d3e50218d745fa97173ed28de87a1c61fef5c4922fb"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
