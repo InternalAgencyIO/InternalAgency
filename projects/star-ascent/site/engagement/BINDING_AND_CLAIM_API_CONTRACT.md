@@ -21,9 +21,9 @@ This contract is a production blueprint. It does not authorize a hosted endpoint
    - Accept only `Premium` and `PremiumPlus`, and require at least 40 full days of account age; fail closed on missing, `None`, `Basic`, unknown, invalid, or too-new values. Record the creation timestamp, tier, and a 24-hour revalidation deadline, then discard the access token.
 6. Atomic node activation transaction
    - Check `x_user_id` and `wallet_address` are not already active.
-   - In one D1 `batch()` transaction, reserve the next integer slot only while fewer than 1,000 rows exist and activate the binding while consuming both nonce hashes.
+   - In one D1 `batch()` transaction, first activate the exact binding while consuming both nonce hashes, then reserve the next integer slot only while fewer than 1,000 rows exist and the just-activated identity/timestamp still match.
    - If full, mark the verified binding active without a slot and return `active-genesis-capacity`.
-   - A duplicate, expired, replayed, or failed activation inserts no slot. Database uniqueness failure aborts the whole batch.
+   - A duplicate, expired, replayed, or failed activation inserts no slot. Activation-first ordering prevents a zero-row activation from committing an orphan reservation; any later SQL failure aborts the whole batch.
 
 ## Epoch flow
 

@@ -3,8 +3,8 @@
 The first 1,000 Genesis Gifts are allocated by one conditional insert inside the same D1 transactional batch that activates the verified binding, never by a browser counter or a read-then-write application counter.
 
 1. Verify the wallet proof, wallet-bound host session, immutable country, signed/PKCE X state, immutable X user ID, and exact Premium/PremiumPlus tier.
-2. Insert `COALESCE(MAX(slot_number), 0) + 1` only while the authoritative table has fewer than 1,000 rows and all one-time session/OAuth predicates still match.
-3. In the same D1 `batch()`, activate that exact binding and clear both nonce hashes. Any uniqueness error aborts and rolls back the batch.
+2. In one D1 `batch()`, activate that exact binding first and clear both nonce hashes. The activation must affect exactly one pending row.
+3. Then insert `COALESCE(MAX(slot_number), 0) + 1` only while the authoritative table has fewer than 1,000 rows and the activated node, wallet, immutable X ID, and activation timestamp still match. A zero-row activation therefore cannot commit an orphan slot, and any later uniqueness error aborts and rolls back the batch.
 4. Return a Genesis-active result only when the insert reports one changed row. If capacity is full, the verified binding still becomes active without a gift slot and returns `active-genesis-capacity`.
 5. Claims remain HOLD until the public Genesis evidence packet is verified and Premium is revalidated when its recorded observation is older than 24 hours.
 

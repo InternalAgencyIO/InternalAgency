@@ -1,5 +1,5 @@
 import { env } from "cloudflare:workers";
-import { GENESIS_REWARD_BASE_UNITS, GENESIS_SLOT_RESERVATION_SQL, isAllowedXSubscriptionType, normalizedEligibleXAccountCreatedAt, premiumRevalidationDeadline } from "../../../../engagement/node-binding-policy.mjs";
+import { GENESIS_REWARD_BASE_UNITS, GENESIS_SLOT_RESERVATION_SQL, NODE_ACTIVATION_SQL, isAllowedXSubscriptionType, normalizedEligibleXAccountCreatedAt, premiumRevalidationDeadline } from "../../../../engagement/node-binding-policy.mjs";
 import { clearNodeSessionCookie, hashNodeSessionNonce, readNodeSessionCookie, verifyNodeSession } from "../../../../engagement/node-session.mjs";
 import { pkceVerifier, verifyXOAuthState } from "../../../../engagement/x-oauth-state.mjs";
 
@@ -43,11 +43,13 @@ export async function GET(request: Request) {
   if (!xAccountCreatedAt) return fail("x-account-too-new");
   const premiumRevalidateAt = premiumRevalidationDeadline(now);
   try {
-    const [reservation, activation] = await env.DB.batch([
+    // D1 rolls a batch back only when a statement fails. Activate first so a
+    // zero-row activation can never be followed by a successful orphan slot.
+    const [activation, reservation] = await env.DB.batch([
+      env.DB.prepare(NODE_ACTIVATION_SQL)
+        .bind(xUserId, xAccountCreatedAt, subscriptionType, nowUtc, premiumRevalidateAt, nowUtc, session.nodeId, session.wallet, hashNodeSessionNonce(session.nonce), nowUtc, hashNodeSessionNonce(payload.nonce), nowUtc, xUserId),
       env.DB.prepare(GENESIS_SLOT_RESERVATION_SQL)
-        .bind(GENESIS_REWARD_BASE_UNITS, nowUtc, session.nodeId, session.wallet, hashNodeSessionNonce(session.nonce), nowUtc, hashNodeSessionNonce(payload.nonce), nowUtc, xUserId),
-      env.DB.prepare("UPDATE node_bindings SET x_user_id = ?, x_account_created_at_utc = ?, x_subscription_type = ?, x_premium_observed_at_utc = ?, x_premium_revalidate_after_utc = ?, state = 'active', genesis_slot = (SELECT slot_number FROM genesis_slots WHERE node_binding_id = ?), activated_at_utc = ?, oauth_nonce_hash = NULL, oauth_expires_at_utc = NULL, session_nonce_hash = NULL, session_expires_at_utc = NULL WHERE id = ? AND wallet_address = ? AND state = 'pending' AND x_user_id IS NULL AND country_code IS NOT NULL AND session_nonce_hash = ? AND session_expires_at_utc >= ? AND oauth_nonce_hash = ? AND oauth_expires_at_utc >= ? AND NOT EXISTS (SELECT 1 FROM node_bindings WHERE x_user_id = ?)")
-        .bind(xUserId, xAccountCreatedAt, subscriptionType, nowUtc, premiumRevalidateAt, session.nodeId, nowUtc, session.nodeId, session.wallet, hashNodeSessionNonce(session.nonce), nowUtc, hashNodeSessionNonce(payload.nonce), nowUtc, xUserId),
+        .bind(GENESIS_REWARD_BASE_UNITS, nowUtc, session.nodeId, session.wallet, xUserId, nowUtc, session.nodeId),
     ]);
     if (activation.meta.changes !== 1) return fail("genesis-capacity-or-race");
     const result = reservation.meta.changes === 1 ? "active" : "active-genesis-capacity";

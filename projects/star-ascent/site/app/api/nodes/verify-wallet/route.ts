@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     env.DB.prepare("INSERT OR IGNORE INTO node_bindings (id, wallet_address, state, created_at_utc) VALUES (?, ?, 'pending', ?)").bind(bindingId, input.wallet, now),
   ]);
   if (consumed.meta.changes !== 1) return json({ error: "CHALLENGE_UNAVAILABLE" }, 409);
-  const binding = await env.DB.prepare("SELECT id, state, genesis_slot FROM node_bindings WHERE wallet_address = ?").bind(input.wallet).first<BindingRow>();
+  const binding = await env.DB.prepare("SELECT node_bindings.id, node_bindings.state, COALESCE(genesis_slots.slot_number, node_bindings.genesis_slot) AS genesis_slot FROM node_bindings LEFT JOIN genesis_slots ON genesis_slots.node_binding_id = node_bindings.id WHERE node_bindings.wallet_address = ?").bind(input.wallet).first<BindingRow>();
   if (!binding) return json({ error: "BINDING_CREATION_FAILED" }, 500);
   if (binding.state !== "pending") return json({ state: binding.state, genesisSlot: binding.genesis_slot, next: null, claimStatus: "HOLD" }, 409);
 

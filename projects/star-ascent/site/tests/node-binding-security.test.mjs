@@ -6,6 +6,7 @@ import {
   ALLOWED_X_SUBSCRIPTION_TYPES,
   GENESIS_REWARD_BASE_UNITS,
   GENESIS_SLOT_RESERVATION_SQL,
+  NODE_ACTIVATION_SQL,
   X_ACCOUNT_MINIMUM_AGE_MS,
   isAllowedXSubscriptionType,
   nextGenesisSlot,
@@ -73,31 +74,43 @@ test("the pure Genesis boundary permits slot 1000 and permanently rejects 1001",
   assert.throws(() => nextGenesisSlot(-1));
 });
 
-test("the production reservation SQL gives exactly one winner for the final slot and fixes the amount", () => {
+test("the activation-first SQL gives exactly 1,000 slots and safely activates completion 1,001 without a gift", () => {
   const db = new DatabaseSync(":memory:");
-  db.exec("CREATE TABLE node_bindings (id TEXT PRIMARY KEY NOT NULL, wallet_address TEXT NOT NULL UNIQUE, x_user_id TEXT UNIQUE, country_code TEXT, state TEXT NOT NULL, session_nonce_hash TEXT, session_expires_at_utc TEXT, oauth_nonce_hash TEXT, oauth_expires_at_utc TEXT)");
-  const migration = readFileSync(new URL("../drizzle/0003_genesis_identity_hardening.sql", import.meta.url), "utf8");
-  const createGenesis = migration.slice(migration.indexOf("CREATE TABLE `genesis_slots`"), migration.indexOf("ALTER TABLE `node_bindings`")).replaceAll("--> statement-breakpoint", "");
-  db.exec(createGenesis);
-  const addBinding = db.prepare("INSERT INTO node_bindings (id, wallet_address, country_code, state, session_nonce_hash, session_expires_at_utc, oauth_nonce_hash, oauth_expires_at_utc) VALUES (?, ?, 'TR', 'pending', 'session', '2026-08-03T00:00:00.000Z', 'oauth', '2026-08-03T00:00:00.000Z')");
+  db.exec(readFileSync(new URL("../engagement/binding-ledger.schema.sql", import.meta.url), "utf8"));
+  const addBinding = db.prepare("INSERT INTO node_bindings (id, wallet_address, country_code, state, session_nonce_hash, session_expires_at_utc, oauth_nonce_hash, oauth_expires_at_utc, created_at_utc) VALUES (?, ?, 'TR', 'pending', 'session', '2026-08-03T00:00:00.000Z', 'oauth', '2026-08-03T00:00:00.000Z', '2026-08-01T00:00:00.000Z')");
+  const activate = db.prepare(NODE_ACTIVATION_SQL);
   const reserve = db.prepare(GENESIS_SLOT_RESERVATION_SQL);
-  for (let index = 1; index <= 1_001; index += 1) addBinding.run(`node-${index}`, `wallet-${index}`);
-  db.prepare("INSERT INTO node_bindings (id, wallet_address, x_user_id, country_code, state) VALUES ('node-existing', 'wallet-existing', 'x-duplicate', 'TR', 'active')").run();
-  db.exec("BEGIN IMMEDIATE");
-  try {
-    assert.equal(reserve.run(GENESIS_REWARD_BASE_UNITS, "2026-08-02T00:00:00.000Z", "node-1", "wallet-1", "wrong-session", "2026-08-02T00:00:00.000Z", "oauth", "2026-08-02T00:00:00.000Z", "x-1").changes, 0);
-    assert.equal(reserve.run(GENESIS_REWARD_BASE_UNITS, "2026-08-02T00:00:00.000Z", "node-1", "wallet-1", "session", "2026-08-02T00:00:00.000Z", "oauth", "2026-08-02T00:00:00.000Z", "x-duplicate").changes, 0);
-    assert.equal(db.prepare("SELECT COUNT(*) AS count FROM genesis_slots").get().count, 0);
-    for (let index = 1; index <= 999; index += 1) {
-      assert.equal(reserve.run(GENESIS_REWARD_BASE_UNITS, "2026-08-02T00:00:00.000Z", `node-${index}`, `wallet-${index}`, "session", "2026-08-02T00:00:00.000Z", "oauth", "2026-08-02T00:00:00.000Z", `x-${index}`).changes, 1);
+  const complete = (index, xUserId = `x-${index}`) => {
+    const nodeId = `node-${index}`;
+    const wallet = `wallet-${index}`;
+    const nowUtc = "2026-08-02T00:00:00.000Z";
+    db.exec("BEGIN IMMEDIATE");
+    try {
+      const activation = activate.run(xUserId, "2026-06-01T00:00:00.000Z", "Premium", nowUtc, "2026-08-03T00:00:00.000Z", nowUtc, nodeId, wallet, "session", nowUtc, "oauth", nowUtc, xUserId);
+      const reservation = reserve.run(GENESIS_REWARD_BASE_UNITS, nowUtc, nodeId, wallet, xUserId, nowUtc, nodeId);
+      db.exec("COMMIT");
+      return { activation, reservation };
+    } catch (error) {
+      db.exec("ROLLBACK");
+      throw error;
     }
-    assert.equal(reserve.run(GENESIS_REWARD_BASE_UNITS, "2026-08-02T00:00:00.000Z", "node-1000", "wallet-1000", "session", "2026-08-02T00:00:00.000Z", "oauth", "2026-08-02T00:00:00.000Z", "x-1000").changes, 1);
-    assert.equal(reserve.run(GENESIS_REWARD_BASE_UNITS, "2026-08-02T00:00:00.000Z", "node-1001", "wallet-1001", "session", "2026-08-02T00:00:00.000Z", "oauth", "2026-08-02T00:00:00.000Z", "x-1001").changes, 0);
-    db.exec("COMMIT");
-  } catch (error) {
-    db.exec("ROLLBACK");
-    throw error;
+  };
+  for (let index = 1; index <= 1_001; index += 1) addBinding.run(`node-${index}`, `wallet-${index}`);
+  db.prepare("INSERT INTO node_bindings (id, wallet_address, x_user_id, country_code, state, created_at_utc) VALUES ('node-existing', 'wallet-existing', 'x-duplicate', 'TR', 'active', '2026-08-01T00:00:00.000Z')").run();
+  const duplicate = complete(1, "x-duplicate");
+  assert.equal(duplicate.activation.changes, 0);
+  assert.equal(duplicate.reservation.changes, 0);
+  assert.equal(db.prepare("SELECT COUNT(*) AS count FROM genesis_slots").get().count, 0);
+  for (let index = 1; index <= 1_000; index += 1) {
+    const result = complete(index);
+    assert.equal(result.activation.changes, 1);
+    assert.equal(result.reservation.changes, 1);
   }
+  const overCapacity = complete(1_001);
+  assert.equal(overCapacity.activation.changes, 1);
+  assert.equal(overCapacity.reservation.changes, 0);
+  assert.equal(db.prepare("SELECT state FROM node_bindings WHERE id = 'node-1001'").get().state, "active");
+  assert.equal(db.prepare("SELECT COUNT(*) AS count FROM genesis_slots WHERE node_binding_id = 'node-1001'").get().count, 0);
   const totals = db.prepare("SELECT COUNT(*) AS count, MIN(slot_number) AS min, MAX(slot_number) AS max, SUM(CAST(amount_base_units AS INTEGER)) AS total FROM genesis_slots").get();
   assert.equal(totals.count, 1_000);
   assert.equal(totals.min, 1);
@@ -112,6 +125,7 @@ test("route source eliminates UUID bearer authorization and enforces one-time Pr
   const countryRoute = readFileSync(new URL("../app/api/nodes/select-country/route.ts", import.meta.url), "utf8");
   const authorizeRoute = readFileSync(new URL("../app/api/x/authorize/route.ts", import.meta.url), "utf8");
   const callbackRoute = readFileSync(new URL("../app/api/x/callback/route.ts", import.meta.url), "utf8");
+  const bindingPolicy = readFileSync(new URL("../engagement/node-binding-policy.mjs", import.meta.url), "utf8");
   assert.doesNotMatch(verifyRoute, /nodeId:\s*binding\?\.id/);
   assert.doesNotMatch(countryRoute, /input\.nodeId/);
   assert.doesNotMatch(authorizeRoute, /searchParams\.get\("nodeId"\)/);
@@ -122,6 +136,6 @@ test("route source eliminates UUID bearer authorization and enforces one-time Pr
   assert.match(callbackRoute, /normalizedEligibleXAccountCreatedAt/);
   assert.match(callbackRoute, /x-account-too-new/);
   assert.match(callbackRoute, /env\.DB\.batch/);
-  assert.match(callbackRoute, /oauth_nonce_hash = NULL/);
+  assert.match(bindingPolicy, /oauth_nonce_hash = NULL/);
   assert.doesNotMatch(callbackRoute, /[?&]node=/);
 });
