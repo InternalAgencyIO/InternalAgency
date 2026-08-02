@@ -6,9 +6,10 @@ type EditorialSceneProps = Readonly<{
   imageAlt: string;
   video: string;
   caption: string;
+  videoFallback: string;
 }>;
 
-export function EditorialScene({ eyebrow, title, body, image, imageAlt, video, caption }: EditorialSceneProps) {
+export function EditorialScene({ eyebrow, title, body, image, imageAlt, video, caption, videoFallback }: EditorialSceneProps) {
   return (
     <section className="editorial-scene" aria-label={title}>
       <div className="editorial-scene-copy">
@@ -23,7 +24,7 @@ export function EditorialScene({ eyebrow, title, body, image, imageAlt, video, c
       </figure>
       <video controls playsInline preload="metadata" poster={image}>
         <source src={video} type="video/mp4" />
-        Your browser does not support the video element.
+        {videoFallback}
       </video>
     </section>
   );
