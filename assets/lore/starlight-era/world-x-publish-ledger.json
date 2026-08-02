@@ -79,18 +79,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T09:19:38.8238723Z",
-    "status": "awaiting_post",
-    "caption": "Burundi ❤️ Bolivia",
-    "imageNumbers": [686, 687, 688],
-    "countries": ["Burundi", "Bolivia"],
-    "assets": [
-      {"file": "686-burundi-kibira-national-park-canopy-extraction.png", "sha256": "1902b1c0d2aa3b71be81c521795cf89c84c6acf9de8357c1cfdfac5bd4875d58"},
-      {"file": "687-burundi-bujumbura-port-lake-tanganyika-night-relay.png", "sha256": "e985a3e2aac268457acc17cd411801435c67ad1f7d87b8428eff693e073ed076"},
-      {"file": "688-bolivia-la-paz-illimani-skyline-intercept.png", "sha256": "b1e6ef7c4db3ab8d98ab26a68c1700e3f6ab27c3672bc47e63da69abb72b45a6"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2612,6 +2601,19 @@
         {"file": "684-burundi-bujumbura-lake-tanganyika-boulevard-intercept.png", "sha256": "f7f07a317fc8c9ad24ea8f6d1aeb1518777564a1189161c488eb0b2179b2ba71"},
         {"file": "685-burundi-gitega-national-museum-cipher.png", "sha256": "fecae8a9a03aaabe63d08a2c162890cad9296ede4e94d055e8a76de8f9fb7bb4"},
         {"file": "683-rwanda-rubavu-lake-kivu-night-relay.png", "sha256": "e504c408eef870dec8a9583ceabb98bd97c1b6096e0c2ccb9df42fc1cc69eb08"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T09:22:17.7909543Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083845608515715072",
+      "caption": "Burundi ❤️ Bolivia",
+      "imageNumbers": [686, 687, 688],
+      "countries": ["Burundi", "Bolivia"],
+      "assets": [
+        {"file": "686-burundi-kibira-national-park-canopy-extraction.png", "sha256": "1902b1c0d2aa3b71be81c521795cf89c84c6acf9de8357c1cfdfac5bd4875d58"},
+        {"file": "687-burundi-bujumbura-port-lake-tanganyika-night-relay.png", "sha256": "e985a3e2aac268457acc17cd411801435c67ad1f7d87b8428eff693e073ed076"},
+        {"file": "688-bolivia-la-paz-illimani-skyline-intercept.png", "sha256": "b1e6ef7c4db3ab8d98ab26a68c1700e3f6ab27c3672bc47e63da69abb72b45a6"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
