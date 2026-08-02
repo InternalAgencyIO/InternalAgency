@@ -39,11 +39,11 @@
         "🧡",
         "💜"
       ],
-      "nextIndex": 6,
+      "nextIndex": 7,
       "lastReservedImageNumbers": [
-        708,
-        709,
-        707
+        710,
+        711,
+        712
       ]
     },
     "quotes": false,
@@ -111,7 +111,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T09:53:32.771Z",
+    "status": "awaiting_post",
+    "caption": "Jordan 🧡 Dominican Republic",
+    "imageNumbers": [710, 711, 712],
+    "countries": ["Jordan", "Dominican Republic"],
+    "assets": [
+      {"file": "710-jordan-wadi-rum-desert-extraction.png", "sha256": "5d4aa82c7a19aacf7d3fa917a15aa903b24f79657e3759e5646e476a0b3c3202"},
+      {"file": "711-jordan-aqaba-red-sea-night-relay.png", "sha256": "73ef2614dbe224714eec2ea5d8179b236c436ee2f74eb995e85f2548f39b9ff7"},
+      {"file": "712-dominican-republic-santo-domingo-malecon-intercept.png", "sha256": "7900de49e3fe12e7bd2d2999826829ea8ccffd47912ca6d95dd4982ddf89ef1e"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
