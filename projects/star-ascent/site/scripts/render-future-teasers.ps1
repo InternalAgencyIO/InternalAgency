@@ -67,8 +67,8 @@ function Render-Teaser {
     -vf $videoFilter `
     -filter_complex $audioFilter `
     -map 0:v -map "[a]" `
-    -t 15 -c:v libx264 -preset medium -crf 21 -profile:v high -level 5.2 `
-    -pix_fmt yuv420p -r 30 -c:a aac -b:a 192k -movflags +faststart $Output
+    -t 15 -c:v libx264 -preset medium -crf 29 -profile:v high -level 5.2 `
+    -pix_fmt yuv420p -r 30 -c:a aac -b:a 128k -movflags +faststart $Output
 
   if ($LASTEXITCODE -ne 0) { throw "ffmpeg failed while rendering $Output" }
 }

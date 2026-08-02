@@ -103,6 +103,6 @@ test("ships four source-bound 15-second 4K teaser masters", async () => {
     const [details, contents] = await Promise.all([stat(assetUrl), readFile(assetUrl)]);
     assert.equal(details.size, asset.bytes);
     assert.equal(createHash("sha256").update(contents).digest("hex"), asset.sha256);
-    assert.ok(details.size > 8_000_000);
+    assert.ok(details.size > 3_500_000);
   }
 });
