@@ -66,7 +66,14 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical,
       languages: languageAlternates(publicPath),
     },
-    icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+    icons: {
+      icon: [
+        { url: "/favicon-radiance-32.png", type: "image/png", sizes: "32x32" },
+        { url: "/favicon-radiance.png", type: "image/png", sizes: "1024x1024" },
+      ],
+      shortcut: "/favicon-radiance-32.png",
+      apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
+    },
     robots: indexable ? { index: true, follow: true } : "noindex, nofollow, noarchive",
     openGraph: { type: "website", url: canonical, siteName: "Internal Agency", title, description, images: [{ url: "/og-star-ascent-v1.png", width: 1792, height: 1024, alt: localeMetadata?.imageAlt ?? "STAR ASCENT launch control" }] },
     twitter: { card: "summary_large_image", title, description, images: ["/og-star-ascent-v1.png"] },
