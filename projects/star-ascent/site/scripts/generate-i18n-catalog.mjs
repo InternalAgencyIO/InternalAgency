@@ -1,5 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 
 const root = process.cwd();
 const baseUrl = process.env.I18N_BASE_URL ?? "http://localhost:4177";
@@ -27,10 +28,18 @@ const interactiveSourcePaths = [
 const protectedTerms = ["Internal Agency", "STAR ASCENT", "$IAT", "$SOL", "IAT", "Solana", "SOLANA", "Model T", "Genesis", "APY", "CCC-Agent", "Radiance", "Ellie", "Alia"];
 
 function decodeHtml(value) {
-  return value
-    .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
-    .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
-    .replace(/&#([0-9]+);/g, (_, code) => String.fromCodePoint(Number(code)));
+  return value.replace(/&(?:nbsp|amp|quot|apos|lt|gt|#39|#x[0-9a-f]+|#[0-9]+);/gi, (entity) => {
+    const normalized = entity.toLowerCase();
+    if (normalized === "&nbsp;") return " ";
+    if (normalized === "&amp;") return "&";
+    if (normalized === "&quot;") return '"';
+    if (normalized === "&apos;" || normalized === "&#39;") return "'";
+    if (normalized === "&lt;") return "<";
+    if (normalized === "&gt;") return ">";
+    const radix = normalized.startsWith("&#x") ? 16 : 10;
+    const digits = normalized.slice(radix === 16 ? 3 : 2, -1);
+    return String.fromCodePoint(Number.parseInt(digits, radix));
+  });
 }
 
 function normalize(value) {
@@ -48,17 +57,61 @@ function isTranslatable(value) {
 
 function extractFromHtml(html) {
   const values = new Set();
-  const cleaned = html
-    .replace(/<!--[\s\S]*?-->/g, "")
-    .replace(/<(script|style|noscript|template)[^>]*>[\s\S]*?<\/\1>/gi, "");
-  for (const match of cleaned.matchAll(/\b(?:alt|aria-label|placeholder|title)=(?:"([^"]*)"|'([^']*)')/gi)) {
-    const value = normalize(match[1] ?? match[2] ?? "");
-    if (isTranslatable(value)) values.add(value);
-  }
-  const text = cleaned.replace(/<[^>]+>/g, "\n");
-  for (const line of text.split(/\n+/)) {
-    const value = normalize(line);
-    if (isTranslatable(value)) values.add(value);
+  const lowerHtml = html.toLowerCase();
+  const rawTextElements = new Set(["script", "style", "noscript", "template"]);
+  const addText = (text) => {
+    for (const line of text.split(/\n+/)) {
+      const value = normalize(line);
+      if (isTranslatable(value)) values.add(value);
+    }
+  };
+  const tagEnd = (start) => {
+    let quote = null;
+    for (let index = start + 1; index < html.length; index += 1) {
+      const character = html[index];
+      if (quote) {
+        if (character === quote) quote = null;
+      } else if (character === '"' || character === "'") {
+        quote = character;
+      } else if (character === ">") {
+        return index;
+      }
+    }
+    return -1;
+  };
+
+  let cursor = 0;
+  while (cursor < html.length) {
+    const open = html.indexOf("<", cursor);
+    if (open === -1) {
+      addText(html.slice(cursor));
+      break;
+    }
+    addText(html.slice(cursor, open));
+    if (html.startsWith("<!--", open)) {
+      const commentEnd = html.indexOf("-->", open + 4);
+      if (commentEnd === -1) break;
+      cursor = commentEnd + 3;
+      continue;
+    }
+    const end = tagEnd(open);
+    if (end === -1) break;
+    const tag = html.slice(open + 1, end);
+    const name = /^\s*\/?\s*([a-z0-9:-]+)/i.exec(tag)?.[1]?.toLowerCase();
+    const closing = /^\s*\//.test(tag);
+    if (!closing && name && rawTextElements.has(name)) {
+      const closeStart = lowerHtml.indexOf(`</${name}`, end + 1);
+      if (closeStart === -1) break;
+      const closeEnd = tagEnd(closeStart);
+      if (closeEnd === -1) break;
+      cursor = closeEnd + 1;
+      continue;
+    }
+    for (const match of tag.matchAll(/\b(?:alt|aria-label|placeholder|title)=(?:"([^"]*)"|'([^']*)')/gi)) {
+      const value = normalize(match[1] ?? match[2] ?? "");
+      if (isTranslatable(value)) values.add(value);
+    }
+    cursor = end + 1;
   }
   return values;
 }
@@ -246,4 +299,6 @@ async function main() {
   process.stdout.write(`Wrote ${ordered.length} canonical source strings across ${localeDefinitions.length} locales.\n`);
 }
 
-await main();
+export { decodeHtml, extractFromHtml, extractInternalRoutes };
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) await main();
