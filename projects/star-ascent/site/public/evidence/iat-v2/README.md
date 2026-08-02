@@ -15,15 +15,17 @@ in `index.json` identify the exact bytes.
   payouts, the selected-agency CCC-associate pause, core APY settlement, the
   Genesis liquidity unlock, live Switchboard randomness, and finalized CCC
   rounds 7 and 8 are recorded.
-- The 18-transaction feature rehearsal and FDF Guard review are historical
-  evidence for the prior program artifact. They do **not** cover remediation
-  source commit `1df716ccd93c47ee1732af6ae1f43b8e6958afe6`.
-- Current remediation proof: **VERIFIED LOCAL HOST ONLY** across 39 exact
+- The 18-transaction feature rehearsal, FDF Guard review, and prior SBF are
+  historical evidence for prior program artifacts. They do **not** cover
+  hardened source commit `b73d2d3ce8572e833b9fdd37df23cd97b40df111`.
+- Current hardened-source proof: **VERIFIED LOCAL HOST ONLY** across 39 exact
   clock, cliff, maturity, terminal-recovery, and neutral-payout vectors, six
   Rust host tests, and 16 JavaScript tests.
-- Fresh signed Devnet evidence for the remediation artifact: **REQUIRED, NOT
-  COMPLETE**.
-- Independent review of the remediation artifact and fresh evidence:
+- Current-source verifiable SBF: **COMPLETE** at 579,480 bytes with SHA-256
+  `d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4`.
+- Fresh signed Devnet evidence for the hardened source and current SBF:
+  **REQUIRED, NOT COMPLETE**.
+- Independent review of the hardened source and fresh evidence:
   **REQUIRED, NOT COMPLETE**.
 - Signing material: not included.
 
@@ -61,6 +63,13 @@ program policy, reference engine, and terminal-recovery boundary tests. It used
 no validator transaction, keypair, wallet, signing, simulation for signing,
 broadcast, or network state. This proof does not replace fresh signed Devnet
 evidence and independent review for the remediation artifact.
+
+`v2-local-time-gate-proof-hardening-20260802T130622Z.json` is the current local
+proof. Its six exact source/test inputs are byte-bound to
+`b73d2d3ce8572e833b9fdd37df23cd97b40df111` and the current 579,480-byte SBF.
+It used no validator transaction, wallet, key, signing,
+simulation for signing, broadcast, or network mutation and therefore cannot
+replace a signed Devnet rehearsal or independent review.
 
 The earlier 15-, 24-, and 25-signature receipts and every superseded progress
 snapshot remain in the ledger for a complete audit trail.

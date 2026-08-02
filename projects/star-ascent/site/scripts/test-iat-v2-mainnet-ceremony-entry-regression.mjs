@@ -57,12 +57,15 @@ readyAudit.findingSummary.openBySeverity.HIGH = 0;
 readyAudit.clearance.securityBlockersResolved = true;
 readyAudit.clearance.independentAuditComplete = true;
 readyRemediationAudit.launchDecision = "CLEAR";
-readyRemediationAudit.findingSummary.openBySeverity.CRITICAL = 0;
+readyRemediationAudit.findingSummary.openBySeverity.CRITICAL = 1;
 readyRemediationAudit.findingSummary.openBySeverity.HIGH = 0;
 readyRemediationAudit.findingSummary.remediatedPendingReview = 0;
+readyRemediationAudit.findingSummary.openBlockers = 0;
 readyRemediationAudit.clearance.securityBlockersResolved = true;
 readyRemediationAudit.clearance.independentAuditComplete = true;
+readyRemediationAudit.clearance.freshCurrentSourceSbfComplete = true;
 readyRemediationAudit.clearance.freshSignedDevnetComplete = true;
+readyRemediationAudit.clearance.productionIdentityIntegrationComplete = true;
 const ready = assessCeremonyEntry(
   readyGate,
   "f".repeat(64),
@@ -84,4 +87,23 @@ assert.equal(ready.checks.BOUND_RELEASE_ARTIFACTS_REGENERATED, true);
 assert.equal(ready.checks.INDEPENDENT_MAINNET_VERIFIER_ASSIGNED, true);
 assert.equal(ready.checks.MODEL_T_DEVICE_PATH_REVIEWED, true);
 
-console.log("IAT V2 ceremony-entry regression passed: current ledger fails closed on eight blockers including both security-audit clearances; synthetic ready state grants only attended-preflight entry.");
+for (const mutate of [
+  (candidate) => { candidate.findingSummary.openBySeverity.CRITICAL = 2; },
+  (candidate) => { candidate.authorityDisposition.classifiedAsRoleSeparation = true; },
+  (candidate) => { candidate.clearance.freshCurrentSourceSbfComplete = false; },
+  (candidate) => { candidate.clearance.productionIdentityIntegrationComplete = false; },
+]) {
+  const candidate = structuredClone(readyRemediationAudit);
+  mutate(candidate);
+  const rejected = assessCeremonyEntry(
+    readyGate,
+    "f".repeat(64),
+    Date.parse("2099-01-01T00:15:00Z"),
+    readyAudit,
+    candidate,
+  );
+  assert.equal(rejected.state, "HOLD");
+  assert.ok(rejected.blockers.includes("REMEDIATION_SECURITY_AUDIT_CLEARANCE"));
+}
+
+console.log("IAT V2 ceremony-entry regression passed: current ledger fails closed; synthetic ready state permits exactly one named owner-accepted Trezor risk while unaccepted criticals, missing current SBF, and missing identity integration remain blockers.");

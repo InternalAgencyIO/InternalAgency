@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -24,15 +25,19 @@ const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."
 const outputArg = process.argv.find((argument) => argument.startsWith("--output="));
 const publicOutputArg = process.argv.find((argument) => argument.startsWith("--public-output="));
 const generatedAtArg = process.argv.find((argument) => argument.startsWith("--generated-at="));
+const sourceCommitArg = process.argv.find((argument) => argument.startsWith("--source-commit="));
 
-if (!outputArg || !publicOutputArg || !generatedAtArg) {
-  throw new Error("Usage: generate-iat-v2-time-gate-proof.mjs --output=<path> --public-output=<path> --generated-at=<ISO-UTC>");
+if (!outputArg || !publicOutputArg || !generatedAtArg || !sourceCommitArg) {
+  throw new Error("Usage: generate-iat-v2-time-gate-proof.mjs --output=<path> --public-output=<path> --generated-at=<ISO-UTC> --source-commit=<full-sha>");
 }
 
 const generatedAtUtc = generatedAtArg.slice("--generated-at=".length);
 if (new Date(generatedAtUtc).toISOString() !== generatedAtUtc) {
   throw new Error("--generated-at must be a canonical ISO-8601 UTC timestamp");
 }
+const sourceCommit = sourceCommitArg.slice("--source-commit=".length);
+if (!/^[0-9a-f]{40}$/u.test(sourceCommit)) throw new Error("--source-commit must be a full lowercase Git SHA-1");
+const sourceTree = execFileSync("git", ["rev-parse", `${sourceCommit}^{tree}`], { encoding: "utf8" }).trim();
 
 const outputPath = path.resolve(siteRoot, outputArg.slice("--output=".length));
 const publicOutputPath = path.resolve(siteRoot, publicOutputArg.slice("--public-output=".length));
@@ -52,6 +57,9 @@ const inputPaths = [
 async function digestFile(relativePath) {
   const sourceBytes = await readFile(path.join(siteRoot, relativePath));
   const bytes = Buffer.from(sourceBytes.toString("utf8").replaceAll("\r\n", "\n"), "utf8");
+  const committedBytes = execFileSync("git", ["show", `${sourceCommit}:projects/star-ascent/site/${relativePath}`], { maxBuffer: 50_000_000 });
+  const committed = Buffer.from(committedBytes.toString("utf8").replaceAll("\r\n", "\n"), "utf8");
+  if (Buffer.compare(bytes, committed) !== 0) throw new Error(`Input is not byte-bound to ${sourceCommit}: ${relativePath}`);
   return {
     path: relativePath,
     bytes: bytes.length,
@@ -207,6 +215,11 @@ const proof = {
   generatedAtUtc,
   network: "local-host",
   mainnetStatus: "HOLD",
+  sourceBinding: {
+    commit: sourceCommit,
+    gitTree: sourceTree,
+    allInputsMatchCommit: true,
+  },
   publicEvidencePath: path.relative(siteRoot, publicOutputPath).replaceAll("\\", "/"),
   method: {
     kind: "DETERMINISTIC_VIRTUAL_CLOCK_OVER_EXACT_PROGRAM_POLICY",
@@ -218,10 +231,13 @@ const proof = {
     keyCreated: false,
   },
   reviewedProgramArtifact: {
-    sha256: "d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22",
-    bytes: 606320,
+    status: "CURRENT_SOURCE_VERIFIABLE_SBF",
+    sourceCommit,
+    sha256: "d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4",
+    bytes: 579480,
     bindingSource: "public/audits/iat-v2-remediation-20260802/scope.json",
     artifactEmbedded: false,
+    coversCurrentSource: true,
   },
   inputs: await Promise.all(inputPaths.map(digestFile)),
   environment: {
@@ -267,8 +283,8 @@ const proof = {
   limitations: [
     "This is deterministic local host-program evidence, not a signed or broadcast transaction.",
     "No local-validator transaction was used because the proof requires no signer, keypair, wallet, or network state.",
-    "The proof binds exact remediation source and cross-language reference behavior; it does not replace a fresh finalized Devnet transaction receipt.",
-    "Earlier Switchboard commit/reveal evidence targets a prior binary and is not evidence for this remediation artifact.",
+    "The proof binds exact hardened source inputs and cross-language reference behavior; it does not replace a fresh finalized Devnet transaction receipt.",
+    "Earlier Switchboard commit/reveal evidence targets a prior binary and is not signed Devnet evidence for the hardened source commit or current SBF.",
     "This artifact does not authorize mainnet, choose a ceremony time, or clear funding and release gates.",
   ],
 };

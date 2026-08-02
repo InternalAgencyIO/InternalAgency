@@ -36,13 +36,23 @@ export function assessCeremonyEntry(
     && audit?.findingSummary?.openBySeverity?.HIGH === 0
     && audit?.clearance?.securityBlockersResolved === true
     && audit?.clearance?.independentAuditComplete === true;
+  const acceptedCritical = remediationAudit?.findingSummary?.ownerAccepted ?? 0;
+  const onlyNamedOwnerAcceptedCriticalRemains = acceptedCritical === 1
+    && remediationAudit?.findingSummary?.openBySeverity?.CRITICAL === acceptedCritical
+    && remediationAudit?.authorityDisposition?.model === "SOLE_TREZOR_MODEL_T"
+    && remediationAudit?.authorityDisposition?.ownerDirected === true
+    && remediationAudit?.authorityDisposition?.classifiedAsRoleSeparation === false
+    && remediationAudit?.authorityDisposition?.riskStatus === "OPEN_OWNER_ACCEPTED";
   const remediationAuditClear = remediationAudit?.launchDecision === "CLEAR"
-    && remediationAudit?.findingSummary?.openBySeverity?.CRITICAL === 0
+    && onlyNamedOwnerAcceptedCriticalRemains
     && remediationAudit?.findingSummary?.openBySeverity?.HIGH === 0
     && remediationAudit?.findingSummary?.remediatedPendingReview === 0
+    && remediationAudit?.findingSummary?.openBlockers === 0
     && remediationAudit?.clearance?.securityBlockersResolved === true
     && remediationAudit?.clearance?.independentAuditComplete === true
-    && remediationAudit?.clearance?.freshSignedDevnetComplete === true;
+    && remediationAudit?.clearance?.freshCurrentSourceSbfComplete === true
+    && remediationAudit?.clearance?.freshSignedDevnetComplete === true
+    && remediationAudit?.clearance?.productionIdentityIntegrationComplete === true;
   const safetyValues = Object.values(gate.safety ?? {});
   const required = [
     ["MAINNET_HOLD_BOUNDARY", gate.status === "HOLD" && gate.network === "mainnet-beta" && safetyValues.length > 0 && safetyValues.every((value) => value === false)],
@@ -71,7 +81,7 @@ export function assessCeremonyEntry(
       "This assessment is local and read-only.",
       "READY_FOR_ATTENDED_PREFLIGHT is not transaction, signing, broadcast, deployment, mint, transfer, or publication authority.",
       "The funding observation must be no more than 30 minutes old with no more than one minute of future skew.",
-      "Open critical/high audit findings and missing independent assurance are mandatory ceremony-entry blockers.",
+      "The sole named owner-accepted Trezor concentration risk may remain; every unaccepted critical/high finding and missing current-source assurance is a mandatory blocker.",
       "Physical review of each transaction and separate broadcast approval remain mandatory after entry.",
     ],
   };

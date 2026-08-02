@@ -1,6 +1,6 @@
 # IAT V2 return checklist
 
-Updated at `2026-08-01T11:04:01Z`.
+Updated at `2026-08-02T12:52:59.475Z`.
 
 Mainnet remains `HOLD`. No unattended script may sign or broadcast a mainnet
 transaction.
@@ -14,7 +14,7 @@ effect.
 ## Completed historical Devnet sequence
 
 The records below remain valid for their exact prior binary. They do not cover
-the current CCC remediation source and cannot clear its fresh Devnet gate.
+the current hardened source and cannot clear its SBF or fresh Devnet gates.
 
 - Program: `62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj`
 - ProgramData: `6DaESYUqB7th7kkfYAhsqiYfzmdnCFeFeoxDi5WkejTP`
@@ -39,38 +39,46 @@ the current CCC remediation source and cannot clear its fresh Devnet gate.
 - Feature evidence status remains
   `PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW` because later
   maturity, cliff, and linear-unlock gates are outside the signed snapshot.
-  That immutable export status is retained for audit history even though the
-  independent review and separate local time-gate proof are now complete.
-- Current remediation local time-gate evidence:
-  `public/evidence/iat-v2/v2-local-time-gate-proof-remediation-20260802T103546Z.json`.
+  That immutable export status is retained for audit history. Its prior-artifact
+  review is complete; the hardened source still requires a fresh signed Devnet
+  run and independent comparison.
+- Current hardened-source local time-gate evidence:
+  `public/evidence/iat-v2/v2-local-time-gate-proof-hardening-20260802T130622Z.json`.
 - Local result: **VERIFIED LOCAL HOST ONLY** with 39 exact vectors, six Rust
-  host tests, and 16 JavaScript tests. The earlier proof found and corrected a one-week
-  reference-engine maturity drift; the locked on-chain program source did not
-  change.
+  host tests, and 16 JavaScript tests. An earlier proof corrected a one-week
+  reference-engine-only maturity drift. The current hardened program changes
+  and 579,480-byte SBF are separately bound by the audit package.
 
 ## Next launch sequence
 
-1. Fund `7XZ...fzPH` on mainnet to at least `8.5 SOL` before the ceremony.
-2. Record a fresh read-only balance observation and recompute both integer
+1. Independently reproduce the current SBF and compare SHA-256
+   `d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4`.
+2. Run the complete signed Devnet rehearsal against that exact binary and
+   obtain an independent source/binary/account/receipt comparison.
+3. Rehearse X OAuth and Cloudflare D1 duplicate, timeout, rollback, retry, and
+   final-slot contention cases in a non-production environment without
+   retaining credentials or personal data.
+4. Fund `7XZ...fzPH` on mainnet to at least `8.5 SOL` before the ceremony.
+5. Record a fresh read-only balance observation and recompute both integer
    shortfalls with `npm run refresh:iat-v2-mainnet-funding`. The command uses
    the official mainnet RPC at finalized commitment, records the context slot,
    accepts no wallet or RPC arguments, and never lifts mainnet `HOLD`.
-3. After funding is complete, publish one new exact UTC launch time.
-4. Re-run the complete launch preflight and regenerate every bound release
+6. After funding is complete, publish one new exact UTC launch time.
+7. Re-run the complete launch preflight and regenerate every bound release
    snapshot, handoff, manifest, signing checklist, and publication payload.
-5. Independently validate the regenerated packet and local host-program
+8. Independently validate the regenerated packet and local host-program
    time-gate proof; never represent the latter as a signed Devnet snapshot or
    validator transaction.
-6. Keep draft PR #4 unmerged until checks and the remaining gates are complete.
-7. At the newly scheduled ceremony only, the operator physically reviews and signs
+9. Keep draft PR #4 unmerged until checks and the remaining gates are complete.
+10. At the newly scheduled ceremony only, the operator physically reviews and signs
    each mainnet transaction. Broadcasting remains a separate explicit action.
-8. Before the first stage, validate the source-bound
+11. Before the first stage, validate the source-bound
    `launch/iat-v2-mainnet-stage-journal.template.json` as `ARMED`. After every
    confirmed stage, stop for independent post-state reconciliation. The first
    failure, mismatch, or unresolved submission permanently ends that journal in
    `TERMINAL_HOLD`; never retry an unknown signature or create a compensating
    transaction.
-9. Reconcile confirmed chain state and validate all eight journal stages as
+12. Reconcile confirmed chain state and validate all eight journal stages as
    `FINALIZED_MATCHED` before publishing any mint, authority,
    allocation, vesting, or claim-route statement.
 
@@ -82,16 +90,17 @@ entry. See `launch/IAT_V2_CEREMONY_ENTRY_GATE.md`.
 ## Mainnet blockers that must stay visible
 
 - The historical source-bound pre-launch audit remains `HOLD` with its recorded
-  two critical and seven high findings. The newer remediation audit also remains
-  `HOLD`: permanent CCC deadlock has a candidate fix, while selective reveal
-  optionality, correlated authority, fresh Devnet evidence, and independent
-  review remain open.
+  two critical and seven high findings. The current hardening audit remains
+  `HOLD` with six remediations pending rehearsal/review, one owner-accepted
+  critical sole-Trezor concentration risk, two high launch blockers, and four
+  tracked medium/low limitations.
 - Ceremony entry now fails closed on
   `PRELAUNCH_SECURITY_AUDIT_CLEARANCE` and
-  `REMEDIATION_SECURITY_AUDIT_CLEARANCE`. Neither can clear until all
-  critical/high findings are remediated and revalidated, fresh signed Devnet
-  evidence covers the remediation source, and an independent final-code audit
-  is complete.
+  `REMEDIATION_SECURITY_AUDIT_CLEARANCE`. The hardening gate permits exactly
+  the named owner-accepted sole-Trezor critical risk, but no unaccepted
+  critical/high finding or open blocker. A current-source reproducible SBF,
+  signed Devnet rehearsal, production identity integration rehearsal, and
+  independent final-code audit are mandatory.
 - Finalized mainnet balance at `2026-08-01T11:04:01Z`, RPC context slot
   `436549381`: `2.53365957 SOL`.
 - Measured rent-exempt minima: `8.31841104 SOL` before transaction fees:

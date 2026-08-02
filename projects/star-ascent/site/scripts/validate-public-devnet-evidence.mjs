@@ -34,7 +34,7 @@ check(index.network === "devnet", "public evidence index must remain devnet-only
 check(index.mainnetStatus === "HOLD", "public evidence must not clear mainnet HOLD");
 check(index.independentReviewRequired === true, "current remediation source must require independent review");
 check(index.secretMaterialIncluded === false, "secret-material declaration must remain false");
-check(Array.isArray(index.records) && index.records.length === 15, "expected fifteen indexed records");
+check(Array.isArray(index.records) && index.records.length === 16, "expected sixteen indexed records");
 check(
   JSON.stringify(index.canonicalAtPublication) === JSON.stringify([
     "v2-initialization-20260730T074603Z.json",
@@ -52,10 +52,16 @@ check(
 );
 check(
   index.currentRemediationState?.sourceCommit
-    === "1df716ccd93c47ee1732af6ae1f43b8e6958afe6"
+    === "b73d2d3ce8572e833b9fdd37df23cd97b40df111"
     && index.currentRemediationState?.localHostProof
-      === "v2-local-time-gate-proof-remediation-20260802T103546Z.json"
+      === "v2-local-time-gate-proof-hardening-20260802T130622Z.json"
     && index.currentRemediationState?.localHostProofStatus === "VERIFIED_LOCAL_HOST_ONLY"
+    && index.currentRemediationState?.verifiableSbf?.sourceCommit
+      === "b73d2d3ce8572e833b9fdd37df23cd97b40df111"
+    && index.currentRemediationState?.verifiableSbf?.sha256
+      === "d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4"
+    && index.currentRemediationState?.verifiableSbf?.bytes === 579480
+    && index.currentRemediationState?.verifiableSbf?.status === "VERIFIED_BUILD_ONLY_NOT_DEPLOYED"
     && index.currentRemediationState?.freshSignedDevnetEvidence === "REQUIRED_NOT_COMPLETE"
     && index.currentRemediationState?.independentReview === "REQUIRED_NOT_COMPLETE"
     && index.currentRemediationState?.mainnetStatus === "HOLD",
@@ -99,7 +105,7 @@ const timeGateProof = JSON.parse(
 );
 const remediationTimeGateProof = JSON.parse(
   await readFile(
-    path.join(root, "v2-local-time-gate-proof-remediation-20260802T103546Z.json"),
+    path.join(root, "v2-local-time-gate-proof-hardening-20260802T130622Z.json"),
     "utf8",
   ),
 );
@@ -255,13 +261,21 @@ check(
     && remediationTimeGateProof.network === "local-host"
     && remediationTimeGateProof.mainnetStatus === "HOLD"
     && remediationTimeGateProof.publicEvidencePath
-      === "public/evidence/iat-v2/v2-local-time-gate-proof-remediation-20260802T103546Z.json",
+      === "public/evidence/iat-v2/v2-local-time-gate-proof-hardening-20260802T130622Z.json"
+    && remediationTimeGateProof.sourceBinding?.commit
+      === "b73d2d3ce8572e833b9fdd37df23cd97b40df111"
+    && remediationTimeGateProof.sourceBinding?.allInputsMatchCommit === true,
   "current remediation local proof boundary drift",
 );
 check(
   remediationTimeGateProof.reviewedProgramArtifact?.sha256
-    === "d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22"
-    && remediationTimeGateProof.reviewedProgramArtifact?.bytes === 606320
+    === "d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4"
+    && remediationTimeGateProof.reviewedProgramArtifact?.bytes === 579480
+    && remediationTimeGateProof.reviewedProgramArtifact?.status
+      === "CURRENT_SOURCE_VERIFIABLE_SBF"
+    && remediationTimeGateProof.reviewedProgramArtifact?.sourceCommit
+      === "b73d2d3ce8572e833b9fdd37df23cd97b40df111"
+    && remediationTimeGateProof.reviewedProgramArtifact?.coversCurrentSource === true
     && remediationTimeGateProof.reviewedProgramArtifact?.bindingSource
       === "public/audits/iat-v2-remediation-20260802/scope.json",
   "current remediation proof program binding drift",
@@ -312,6 +326,6 @@ if (failures.length) {
 }
 
 console.log(
-  "Public evidence validation passed: fifteen indexed records, 29 historical finalized signatures, current local remediation proof, fresh signed Devnet and independent review required, CC0, no secret-bearing fields, mainnet HOLD.",
+  "Public evidence validation passed: sixteen indexed records, 29 historical finalized signatures, current source-bound local proof and verifiable SBF, fresh signed Devnet and independent review required, CC0, no secret-bearing fields, mainnet HOLD.",
 );
 

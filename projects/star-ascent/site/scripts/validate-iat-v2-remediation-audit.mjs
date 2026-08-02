@@ -24,9 +24,29 @@ check(manifest.schema === "iat-v2-remediation-audit-manifest/v1", "unexpected re
 check(manifest.status === "DRAFT_MAINNET_HOLD", "remediation audit must remain DRAFT/HOLD");
 check(manifest.launchDecision === "HOLD" && manifest.mainnetStatus === "HOLD", "remediation audit cannot clear Mainnet");
 check(manifest.assurance === "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT", "assurance boundary drift");
-for (const field of ["securityBlockersResolved", "independentAuditComplete", "freshSignedDevnetComplete", "authorizesDeployment", "authorizesFunding", "authorizesSigning", "authorizesBroadcast"]) {
+for (const field of [
+  "securityBlockersResolved",
+  "independentAuditComplete",
+  "freshSignedDevnetComplete",
+  "productionIdentityIntegrationComplete",
+  "authorizesDeployment",
+  "authorizesFunding",
+  "authorizesSigning",
+  "authorizesBroadcast",
+]) {
   check(manifest.clearance?.[field] === false, `remediation audit unexpectedly sets ${field}`);
 }
+check(manifest.clearance?.freshCurrentSourceSbfComplete === true, "current-source SBF completion must remain recorded");
+
+check(
+  manifest.authorityDisposition?.model === "SOLE_TREZOR_MODEL_T"
+    && manifest.authorityDisposition?.separateAuthorities === false
+    && manifest.authorityDisposition?.multisig === false
+    && manifest.authorityDisposition?.ownerDirected === true
+    && manifest.authorityDisposition?.classifiedAsRoleSeparation === false
+    && manifest.authorityDisposition?.riskStatus === "OPEN_OWNER_ACCEPTED",
+  "sole-Trezor owner-risk disposition drift",
+);
 
 check(scope.schema === "iat-v2-remediation-scope/v1" && scope.status === "DRAFT_MAINNET_HOLD", "unexpected remediation scope");
 check(findings.schema === "iat-v2-remediation-findings/v1" && findings.status === "DRAFT_MAINNET_HOLD", "unexpected remediation findings");
@@ -46,38 +66,79 @@ for (const [path, expected] of Object.entries(scope.criticalSourceCanonicalUtf8L
   check(sha256(canonical(committed)) === expected, `committed remediation source digest mismatch: ${path}`);
 }
 
-check(scope.verifiableSbf?.sha256 === "d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22", "SBF digest drift");
-check(scope.verifiableSbf?.bytes === 606320 && scope.verifiableSbf?.deploymentAuthorized === false, "SBF evidence boundary drift");
-check(scope.historicalDevnetEvidence?.coversThisSourceCommit === false, "old Devnet evidence cannot cover remediation source");
+check(scope.currentProgramArtifact?.builtForThisSource === true, "current-source SBF build missing");
+check(scope.currentProgramArtifact?.sourceCommit === commit, "current-source SBF commit mismatch");
+check(
+  scope.currentProgramArtifact?.sha256 === "d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4"
+    && scope.currentProgramArtifact?.bytes === 579480
+    && scope.currentProgramArtifact?.lockedHostTests === 23
+    && scope.currentProgramArtifact?.forbiddenProgramKeypairProduced === false
+    && scope.currentProgramArtifact?.freshVerifiableSbfRequired === false
+    && scope.currentProgramArtifact?.deploymentAuthorized === false,
+  "current-source SBF evidence drift",
+);
+check(scope.historicalVerifiableSbf?.coversThisSourceCommit === false, "historical SBF cannot cover hardened source");
+check(scope.historicalDevnetEvidence?.coversThisSourceCommit === false, "old Devnet evidence cannot cover hardened source");
 check(scope.historicalDevnetEvidence?.freshSignedRehearsalRequired === true, "fresh signed Devnet requirement removed");
+check(
+  scope.authorityPolicy?.ownerDirection === "KEEP_ALL_CHAIN_AUTHORITIES_ON_THE_SOLE_TREZOR_MODEL_T"
+    && scope.authorityPolicy?.separateAuthoritiesImplemented === false
+    && scope.authorityPolicy?.multisigImplemented === false
+    && scope.authorityPolicy?.hotOrServerSigningKeyAllowed === false
+    && scope.authorityPolicy?.classifiedAsRoleSeparation === false
+    && scope.authorityPolicy?.riskDisposition === "OPEN_OWNER_ACCEPTED_CONCENTRATION_RISK",
+  "authority-policy exception drift",
+);
 
-const allowedStatuses = new Set(["OPEN_BLOCKER", "REMEDIATED_PENDING_REHEARSAL_AND_INDEPENDENT_REVIEW"]);
+const allowedStatuses = new Set([
+  "OPEN_BLOCKER",
+  "OPEN_OWNER_ACCEPTED",
+  "OPEN_TRACKED",
+  "REMEDIATED_PENDING_REHEARSAL_AND_INDEPENDENT_REVIEW",
+]);
 const ids = new Set();
 const counts = { CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0 };
 let pendingReview = 0;
+let ownerAccepted = 0;
+let openBlockers = 0;
+let openTracked = 0;
 for (const finding of findings.findings ?? []) {
   check(/^IAT-REM-\d{3}$/u.test(finding.id ?? ""), `invalid remediation finding id: ${finding.id}`);
   check(!ids.has(finding.id), `duplicate remediation finding id: ${finding.id}`);
   ids.add(finding.id);
   check(Object.hasOwn(counts, finding.severity), `invalid remediation severity: ${finding.id}`);
   check(allowedStatuses.has(finding.status), `invalid remediation status: ${finding.id}`);
-  if (finding.status === "OPEN_BLOCKER") counts[finding.severity] += 1;
-  else pendingReview += 1;
+  if (finding.status === "REMEDIATED_PENDING_REHEARSAL_AND_INDEPENDENT_REVIEW") pendingReview += 1;
+  else {
+    counts[finding.severity] += 1;
+    if (finding.status === "OPEN_OWNER_ACCEPTED") ownerAccepted += 1;
+    if (finding.status === "OPEN_BLOCKER") openBlockers += 1;
+    if (finding.status === "OPEN_TRACKED") openTracked += 1;
+  }
 }
 check(findings.findings.length === manifest.findingSummary?.total, "remediation finding total mismatch");
 check(JSON.stringify(counts) === JSON.stringify(manifest.findingSummary?.openBySeverity), "remediation open finding summary mismatch");
 check(pendingReview === manifest.findingSummary?.remediatedPendingReview, "remediation pending-review count mismatch");
-check(counts.CRITICAL > 0 && counts.HIGH > 0, "remediation audit must retain critical and high blockers");
-check(matrix.cases.some((entry) => entry.id === "REM-07" && entry.result === "FAIL" && entry.finding === "IAT-REM-002"), "selective-withholding attack must remain failed");
-check(matrix.cases.some((entry) => entry.id === "REM-09" && entry.result === "NOT_YET_TESTED"), "local-validator gap must remain explicit");
-check(checks.results.some((entry) => entry.id === "VERIFIABLE_SBF" && entry.result === "PASS"), "SBF check missing");
+check(ownerAccepted === manifest.findingSummary?.ownerAccepted, "owner-accepted count mismatch");
+check(openBlockers === manifest.findingSummary?.openBlockers, "open-blocker count mismatch");
+check(openTracked === manifest.findingSummary?.openTracked, "open-tracked count mismatch");
+check(counts.CRITICAL === 1 && counts.HIGH >= 2, "critical owner risk and high launch blockers must remain public");
+check(
+  findings.findings.some((entry) => entry.id === "IAT-REM-001" && entry.status === "OPEN_OWNER_ACCEPTED"),
+  "sole-Trezor critical finding missing",
+);
+check(matrix.cases.some((entry) => entry.id === "AUTH-01" && entry.result === "FAIL_OWNER_ACCEPTED" && entry.finding === "IAT-REM-001"), "authority concentration attack must remain failed/accepted");
+check(matrix.cases.some((entry) => entry.id === "EVID-02" && entry.result === "NOT_RUN_BLOCKER"), "current-source evidence gap must remain explicit");
+check(checks.results.some((entry) => entry.id === "CURRENT_SOURCE_LOCAL_PROOF" && entry.result === "PASS_LOCAL_ONLY"), "source-bound local proof check missing");
+check(checks.results.some((entry) => entry.id === "CURRENT_SOURCE_VERIFIABLE_SBF" && entry.result === "PASS"), "current-source SBF pass missing");
 check(checks.results.some((entry) => entry.id === "FRESH_SIGNED_DEVNET" && entry.result === "NOT_RUN_BLOCKER"), "fresh Devnet blocker missing");
+check(checks.results.some((entry) => entry.id === "INDEPENDENT_REVIEW" && entry.result === "NOT_RUN_BLOCKER"), "independent review blocker missing");
 
-for (const name of ["README.md", "GAME-THEORY.md", "scope.json", "findings.json", "attack-matrix.json", "checks.json"]) {
+for (const name of ["README.md", "GAME-THEORY.md", "OWNER-RISK-ACCEPTANCE.md", "scope.json", "findings.json", "attack-matrix.json", "checks.json"]) {
   const value = read(name);
   check(manifest.artifactSha256?.[name] === sha256(value), `remediation artifact digest mismatch: ${name}`);
   if (name.endsWith(".md")) {
-    const label = value.toString("utf8").slice(0, 500).toUpperCase();
+    const label = value.toString("utf8").slice(0, 600).toUpperCase();
     check(label.includes("DRAFT") && label.includes("HOLD"), `remediation document lacks DRAFT/HOLD banner: ${name}`);
   }
 }
@@ -91,4 +152,4 @@ const scan = (value) => {
 };
 publicObjects.forEach(scan);
 
-console.log(`IAT V2 remediation audit validated at ${commit}: permanent-lock candidate fixed, ${counts.CRITICAL} critical and ${counts.HIGH} high blockers remain, Mainnet HOLD.`);
+console.log(`IAT V2 hardening audit validated at ${commit}: ${pendingReview} remediations pending rehearsal/review, ${counts.CRITICAL} owner-accepted critical, ${counts.HIGH} high blockers, Mainnet HOLD.`);

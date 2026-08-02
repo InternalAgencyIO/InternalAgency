@@ -1,75 +1,178 @@
 {
   "schema": "iat-v2-remediation-findings/v1",
   "status": "DRAFT_MAINNET_HOLD",
-  "auditedSourceCommit": "1df716ccd93c47ee1732af6ae1f43b8e6958afe6",
+  "auditedSourceCommit": "b73d2d3ce8572e833b9fdd37df23cd97b40df111",
   "findings": [
     {
       "id": "IAT-REM-001",
-      "mapsTo": "IAT-SEC-001",
       "severity": "CRITICAL",
-      "status": "REMEDIATED_PENDING_REHEARSAL_AND_INDEPENDENT_REVIEW",
-      "title": "Permanent CCC round deadlock has bounded terminal recovery",
+      "status": "OPEN_OWNER_ACCEPTED",
+      "title": "All chain authority remains concentrated on one Trezor Model T",
       "evidence": [
-        "Round stores commit_timestamp and terminal status",
-        "settle_round rejects at and after the exact 86,400-second boundary",
-        "expire_round is permissionless only at and after that boundary",
-        "expiry preserves the original snapshot and accepts no replacement randomness",
-        "CCC settlement accepts EXPIRED_NEUTRAL and pays floor(full * (N-1) / N)"
+        "The owner explicitly rejected separate authorities and required all chain authorities to remain on the sole Trezor Model T",
+        "No multisig, second hardware authority, hot key, server key, or alternate authority address was introduced",
+        "Hardware isolation protects key material but is not administrative role separation"
       ],
       "residualRisk": [
-        "No instruction-level local-validator test yet",
-        "No fresh signed Devnet evidence for the changed layout and instruction set",
-        "No independent review"
+        "One device, seed, or operator compromise can correlate otherwise distinct administrative powers",
+        "Device loss or seed loss can create a single recovery and continuity failure",
+        "Owner acceptance does not convert this risk into an independent security control"
+      ],
+      "containment": [
+        "Keep signing attended, offline-first, human-reviewed, and source/evidence bound",
+        "Never permit server-side or automatic signing or broadcast",
+        "Preserve Mainnet HOLD until all non-authority launch blockers close"
       ]
     },
     {
       "id": "IAT-REM-002",
-      "mapsTo": "IAT-SEC-001",
-      "severity": "CRITICAL",
+      "severity": "HIGH",
       "status": "OPEN_BLOCKER",
-      "title": "Reveal controller retains profitable reveal-versus-neutral-expiry optionality",
+      "title": "The hardened source has not received independent final-code review",
       "evidence": [
-        "The randomness authority learns the revealed selected agency",
-        "A successful reveal produces a selected-agency payout vector",
-        "Silence produces a different all-agency neutral payout vector",
-        "An agency-aligned controller can condition its choice on which vector benefits it"
+        "This package is an internal Codex-assisted review",
+        "The earlier FDF Guard sign-off binds a prior source and binary"
       ],
       "remediation": [
-        "Remove unilateral economically interested reveal authority, or enforce objectively slashable collateral greater than maximum withholding gain",
-        "Model collusion, bribery, signer loss, oracle outage, and candidate concentration",
-        "Obtain independent Solana randomness and game-theory review"
+        "Obtain independent review of commit b73d2d3ce8572e833b9fdd37df23cd97b40df111 or its exact successor",
+        "Compare source, build, evidence, program accounts, and transaction hashes before any clearance"
       ]
     },
     {
       "id": "IAT-REM-003",
-      "mapsTo": "IAT-ASSURANCE-001",
       "severity": "HIGH",
       "status": "OPEN_BLOCKER",
-      "title": "Remediation source lacks instruction-level local-validator and fresh signed Devnet evidence",
+      "title": "No signed Devnet rehearsal covers the hardened source and current SBF",
       "evidence": [
-        "Host/model boundary tests and verifiable SBF build pass",
-        "Earlier Explorer transactions bind a prior program layout and binary",
-        "No signed transaction exercises expire_round or EXPIRED_NEUTRAL settlement"
+        "A pinned verifiable build produced a 579,480-byte SBF with SHA-256 d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4 for b73d2d3",
+        "The current local proof is deterministic host evidence and uses no validator transaction, signer, wallet, or broadcast",
+        "The earlier 29 finalized Devnet signatures remain historical only"
       ],
       "remediation": [
-        "Execute before-boundary rejection, exact-boundary expiry, post-expiry replay rejection, and linked-position settlement in local-validator",
-        "Repeat the reviewed flow on Devnet with independent source/binary/evidence hash comparison"
+        "Run the complete signed Devnet rehearsal on that exact binary",
+        "Publish finalized receipts and obtain independent comparison"
       ]
     },
     {
       "id": "IAT-REM-004",
-      "mapsTo": "IAT-SEC-002",
-      "severity": "CRITICAL",
-      "status": "OPEN_BLOCKER",
-      "title": "Upgrade, administration, and community custody authority remain correlated",
+      "severity": "MEDIUM",
+      "status": "OPEN_TRACKED",
+      "title": "Production X OAuth and Cloudflare D1 transaction behavior needs integration rehearsal",
       "evidence": [
-        "PROGRAM_ADMIN and COMMUNITY_CUSTODY remain the same address",
-        "The planned authority separation and timelocked multisig design is not implemented in this increment"
+        "Source and SQLite-model tests cover nonce consumption, Premium and age gates, final-slot contention, and rollback predicates",
+        "No production X OAuth or Cloudflare D1 request was made in this review"
       ],
       "remediation": [
-        "Implement and publish distinct role addresses with threshold/timelock policy",
-        "Exercise signer-loss, compromise, emergency pause, and upgrade-delay procedures",
-        "Bind independent review to final ProgramData authority and bytecode"
+        "Exercise test-environment OAuth callback, D1 batch rollback, retry, duplicate, timeout, and 1,000th-slot concurrency cases",
+        "Retain redacted receipts without tokens, cookies, client secrets, or personal data"
+      ]
+    },
+    {
+      "id": "IAT-REM-005",
+      "severity": "MEDIUM",
+      "status": "OPEN_TRACKED",
+      "title": "X Premium and account-age decisions depend on an external provider trust boundary",
+      "evidence": [
+        "Eligibility is bound to the immutable X user ID, subscription_type, and created_at fields returned by X",
+        "Premium is revalidated within 24 hours and account age is checked at the inclusive exact 40-day boundary",
+        "These controls raise Sybil cost but do not prove one biological person or prevent all purchased or compromised accounts"
+      ],
+      "remediation": [
+        "Monitor provider schema and subscription semantics",
+        "Fail closed on missing, malformed, stale, downgraded, or contradictory identity evidence",
+        "Publish aggregate outcomes without exposing private identity data"
+      ]
+    },
+    {
+      "id": "IAT-REM-006",
+      "severity": "MEDIUM",
+      "status": "OPEN_TRACKED",
+      "title": "Site development toolchain retains upstream dependency advisories",
+      "evidence": [
+        "The site production dependency audit reports zero vulnerabilities",
+        "The full development graph reports 22 upstream advisories through current Solana, Next, Drizzle, sharp, esbuild, postcss, uuid, and bigint-buffer chains",
+        "A normal audit fix made no change; force remediation proposed unsafe major downgrades and was rejected"
+      ],
+      "remediation": [
+        "Track upstream fixed releases and retest lockfile changes",
+        "Keep development dependencies out of the production runtime and deployment image"
+      ]
+    },
+    {
+      "id": "IAT-REM-007",
+      "severity": "LOW",
+      "status": "OPEN_TRACKED",
+      "title": "Eight pre-existing unoptimized image lint warnings remain",
+      "evidence": [
+        "ESLint reports zero errors and eight next/no-img-element warnings"
+      ],
+      "remediation": [
+        "Migrate eligible static images to the reviewed optimization path after launch-security work"
+      ]
+    },
+    {
+      "id": "IAT-REM-008",
+      "severity": "HIGH",
+      "status": "REMEDIATED_PENDING_REHEARSAL_AND_INDEPENDENT_REVIEW",
+      "title": "Genesis node activation no longer trusts a returned UUID as bearer authority",
+      "evidence": [
+        "Wallet proof creates a short-lived signed HttpOnly Secure host cookie bound to node, wallet, nonce, and expiry",
+        "Country selection and X authorization require the bound session and same-origin request",
+        "OAuth state is one-time and callback activation is bound to the immutable X user ID"
+      ]
+    },
+    {
+      "id": "IAT-REM-009",
+      "severity": "HIGH",
+      "status": "REMEDIATED_PENDING_REHEARSAL_AND_INDEPENDENT_REVIEW",
+      "title": "Genesis identity and final-slot accounting are fail-closed",
+      "evidence": [
+        "Wallet and immutable X user ID are independently unique",
+        "Only Premium or PremiumPlus accounts at least 40 days old qualify",
+        "The atomic D1 batch reserves exactly one of 1,000 numbered slots and activates the binding or rolls back"
+      ]
+    },
+    {
+      "id": "IAT-REM-010",
+      "severity": "HIGH",
+      "status": "REMEDIATED_PENDING_REHEARSAL_AND_INDEPENDENT_REVIEW",
+      "title": "Daily reward liability and oversubscription are deterministic and bounded",
+      "evidence": [
+        "At most 1,000 winners receive 12 IAT each per UTC epoch",
+        "The exact maximum is 12,000 IAT per epoch and 4,380,000 IAT over 365 epochs",
+        "Selection rejects duplicate wallet or immutable X identity and stale, young, or non-Premium evidence"
+      ]
+    },
+    {
+      "id": "IAT-REM-011",
+      "severity": "CRITICAL",
+      "status": "REMEDIATED_PENDING_REHEARSAL_AND_INDEPENDENT_REVIEW",
+      "title": "CCC future-DLC instructions are compiled fail-closed for Genesis",
+      "evidence": [
+        "Every CCC registry, eligibility, position, randomness, round, and settlement path returns CccDlcNotActive",
+        "No activation instruction exists in the Genesis program",
+        "Enabling CCC requires a separately reviewed future program upgrade"
+      ]
+    },
+    {
+      "id": "IAT-REM-012",
+      "severity": "MEDIUM",
+      "status": "REMEDIATED_PENDING_REHEARSAL_AND_INDEPENDENT_REVIEW",
+      "title": "Public RPC and desktop overlay boundaries are constrained",
+      "evidence": [
+        "The public RPC proxy is read-only, request and response bounded, timed out, rate limited in D1, and does not disclose a custom endpoint hostname",
+        "The desktop renderer is sandboxed, navigation and popups are denied, permissions are exact-origin, and capture requires the trusted main frame plus user gesture"
+      ]
+    },
+    {
+      "id": "IAT-REM-013",
+      "severity": "HIGH",
+      "status": "REMEDIATED_PENDING_REHEARSAL_AND_INDEPENDENT_REVIEW",
+      "title": "Production dependency graphs and root build tooling are clean under the pinned runtime",
+      "evidence": [
+        "Root production and full dependency audits report zero vulnerabilities",
+        "Site production dependency audit reports zero vulnerabilities",
+        "Node 24.14.0 is used for validation and package-manager versions are pinned"
       ]
     }
   ]

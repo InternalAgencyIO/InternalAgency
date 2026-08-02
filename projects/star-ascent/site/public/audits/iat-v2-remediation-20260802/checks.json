@@ -1,22 +1,39 @@
 {
   "schema": "iat-v2-remediation-checks/v1",
   "status": "DRAFT_MAINNET_HOLD",
-  "runAtUtc": "2026-08-02T10:35:46Z",
+  "runAtUtc": "2026-08-02T13:06:22.212Z",
+  "runtime": {
+    "node": "v24.14.0",
+    "npm": "10.8.2",
+    "rust": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)"
+  },
   "results": [
+    {"id":"RUST_FMT","result":"PASS","detail":"cargo fmt --check"},
     {"id":"RUST_UNIT","result":"PASS","detail":"17 passed, 0 failed"},
-    {"id":"RUST_TIME_WARP","result":"PASS","detail":"6 passed, 0 failed; includes reveal timeout and neutral expected-value boundaries"},
-    {"id":"TARGETED_JAVASCRIPT","result":"PASS","detail":"22 passed, 0 failed across reference model, instruction layout, and rehearsal helpers"},
-    {"id":"POLICY_GATE","result":"PASS","detail":"HOLD preserved and new fail-closed fragments enforced"},
-    {"id":"ADMIN_BUILD","result":"PASS","detail":"Vite production build completed under Node 24.14.0"},
+    {"id":"RUST_TIME_WARP","result":"PASS","detail":"6 passed, 0 failed across exact maturity, cliff, unlock, clock, and future-CCC model boundaries"},
+    {"id":"RUST_CLIPPY","result":"PASS","detail":"cargo clippy --locked --all-targets -- -D warnings"},
+    {"id":"SECURITY_TARGETED_JAVASCRIPT","result":"PASS","detail":"20 passed, 0 failed across node binding, daily budgets, Genesis feature gates, and public RPC"},
+    {"id":"DESKTOP_SECURITY","result":"PASS","detail":"11 total root tests passed, including 3 renderer/permission/IPC security tests"},
+    {"id":"SCHEMA_AND_POLICY","result":"PASS","detail":"Binding schema, reward policy, IAT V2 policy, and future-DLC source bindings validated"},
+    {"id":"SITE_BUILD","result":"PASS","detail":"Production vinext build completed under Node 24.14.0"},
     {"id":"LINT","result":"PASS_WITH_PREEXISTING_WARNINGS","detail":"0 errors, 8 next/no-img-element warnings"},
-    {"id":"VERIFIABLE_SBF","result":"PASS","detail":"Anchor 1.0.2, Solana 3.1.10, Rust 1.97.1; SHA-256 d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22; 606320 bytes"},
-    {"id":"LOCAL_VALIDATOR_ADVERSARIAL","result":"NOT_RUN_BLOCKER","detail":"Instruction-level expiry, replay, settlement, and rollback flow remains required"},
-    {"id":"FRESH_SIGNED_DEVNET","result":"NOT_RUN_BLOCKER","detail":"Prior signed evidence targets earlier source and does not cover this remediation"},
+    {"id":"ROOT_PRODUCTION_AUDIT","result":"PASS","detail":"0 vulnerabilities"},
+    {"id":"ROOT_FULL_AUDIT","result":"PASS","detail":"0 vulnerabilities"},
+    {"id":"SITE_PRODUCTION_AUDIT","result":"PASS","detail":"0 vulnerabilities"},
+    {"id":"SITE_DEVELOPMENT_AUDIT","result":"TRACKED_EXCEPTION","detail":"22 upstream advisories; normal audit fix unavailable and force path would introduce unsafe major downgrades"},
+    {"id":"CURRENT_SOURCE_LOCAL_PROOF","result":"PASS_LOCAL_ONLY","detail":"39 exact vectors bound to b73d2d3; no signer, wallet, validator transaction, or broadcast"},
+    {"id":"CHECK_IAT_V2","result":"PASS","detail":"All source-bound validators and 60 JavaScript tests passed; Mainnet HOLD preserved"},
+    {"id":"CHECK_IAT_V2_SIGNOFF","result":"PASS_HOLD","detail":"Historical feature sign-off validates only for its prior artifact; current-source initialization/final review remains pending"},
+    {"id":"CURRENT_SOURCE_VERIFIABLE_SBF","result":"PASS","detail":"Pinned Anchor 1.0.2 / Solana 3.1.10 / Rust 1.97.1 build; SHA-256 d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4; 579,480 bytes; 23 locked host tests; no forbidden keypair"},
+    {"id":"FRESH_SIGNED_DEVNET","result":"NOT_RUN_BLOCKER","detail":"Historical 29-signature evidence does not cover b73d2d3"},
+    {"id":"PRODUCTION_X_D1_INTEGRATION","result":"NOT_RUN_TRACKED","detail":"Requires a non-production integration rehearsal without retaining secrets or personal data"},
     {"id":"INDEPENDENT_REVIEW","result":"NOT_RUN_BLOCKER","detail":"Internal Codex-assisted review is not independent assurance"}
   ],
   "limitations": [
-    "Host and model tests do not prove Solana runtime account locking, clock, CPI, or rollback behavior",
-    "Verifiable build proves deterministic compilation under the pinned image, not deployment safety",
-    "No wallet, signing, broadcast, deployment, funding, or chain mutation occurred"
+    "Host and SQLite-model tests do not prove Solana runtime or Cloudflare D1 production behavior",
+    "Local time-warp evidence is not a signed Devnet transaction or current-source SBF build",
+    "X account fields remain an external provider trust boundary",
+    "No wallet, secret, signing, simulation for signing, broadcast, deployment, funding, DNS, or chain mutation occurred"
   ]
 }

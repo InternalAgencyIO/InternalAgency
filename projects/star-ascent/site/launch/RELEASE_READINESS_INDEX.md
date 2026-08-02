@@ -12,17 +12,20 @@ machine-readable gate is
 1. Review the public, source-bound
    [`IAT V2 pre-launch security audit`](../public/audits/iat-v2-prelaunch-20260802/README.md)
    and the newer
-   [`CCC randomness remediation review`](../public/audits/iat-v2-remediation-20260802/README.md).
+   [`IAT V2 pre-launch hardening audit`](../public/audits/iat-v2-remediation-20260802/README.md).
    Keep ceremony entry blocked until both machine-readable manifests record
-   zero open critical/high findings, resolved security blockers, completed
-   independent final-code review, and fresh signed Devnet evidence for the
-   remediation source.
+   `CLEAR`, every unaccepted critical/high finding and open blocker is closed,
+   all remediations are revalidated, and current-source SBF, signed Devnet,
+   production identity integration, and independent final-code review are
+   complete. The hardening manifest may retain only the explicitly named
+   owner-accepted sole-Trezor critical risk.
 2. Review the separate future-feature audits for
    [`Propose a Hero`](../public/audits/iat-hero-dlc-20260802/README.md) and
    [`CCC Associates`](../public/audits/iat-associates-dlc-20260802/README.md).
-   Hero remains isolated and undeployable. Associates currently fails technical
-   Genesis isolation because role `2` is compiled into the candidate; do not
-   claim a future-only Associates DLC until that critical finding is closed.
+   Both remain inactive future features. The hardened Genesis program now
+   rejects every CCC registry, eligibility, position, randomness, round, and
+   settlement path and exposes no activation instruction; the future design
+   findings still require separate remediation and review before activation.
 3. Confirm the public mainnet fee-payer balance is at least the exact
    `8500000000` lamport ceremony floor using a fresh read-only observation.
 4. Publish one replacement UTC window; invalidate the expired window and every

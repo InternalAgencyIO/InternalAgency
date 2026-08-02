@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -36,13 +37,22 @@ check(proof.schema === "iat-v2-local-time-gate-proof/v1", "unexpected proof sche
 check(proof.status === "VERIFIED_LOCAL_HOST_ONLY", "time-gate proof is not verified");
 check(proof.network === "local-host", "time-gate proof must remain local-only");
 check(proof.mainnetStatus === "HOLD", "time-gate proof must preserve mainnet HOLD");
+check(
+  proof.sourceBinding?.commit === "b73d2d3ce8572e833b9fdd37df23cd97b40df111"
+    && proof.sourceBinding?.gitTree === "faa4f1c9ddcd78ddaeabed5616b815022ddcd613"
+    && proof.sourceBinding?.allInputsMatchCommit === true,
+  "time-gate proof source binding drift",
+);
 check(proof.method?.kind === "DETERMINISTIC_VIRTUAL_CLOCK_OVER_EXACT_PROGRAM_POLICY", "unexpected proof method");
 for (const field of ["localValidatorTransactionUsed", "signingPerformed", "simulationForSigningPerformed", "broadcastingPerformed", "walletAccessed", "keyCreated"]) {
   check(proof.method?.[field] === false, `unsafe method flag changed: ${field}`);
 }
 check(
-  proof.reviewedProgramArtifact?.sha256 === "d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22"
-    && proof.reviewedProgramArtifact?.bytes === 606320
+  proof.reviewedProgramArtifact?.sha256 === "d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4"
+    && proof.reviewedProgramArtifact?.bytes === 579480
+    && proof.reviewedProgramArtifact?.status === "CURRENT_SOURCE_VERIFIABLE_SBF"
+    && proof.reviewedProgramArtifact?.sourceCommit === proof.sourceBinding?.commit
+    && proof.reviewedProgramArtifact?.coversCurrentSource === true
     && proof.reviewedProgramArtifact?.bindingSource === "public/audits/iat-v2-remediation-20260802/scope.json"
     && proof.reviewedProgramArtifact?.artifactEmbedded === false,
   "reviewed program artifact binding drift",
@@ -58,7 +68,14 @@ for (const input of proof.inputs ?? []) {
   check(inputPath.startsWith(`${siteRoot}${path.sep}`), `input escapes site root: ${input.path}`);
   const sourceBytes = await readFile(inputPath);
   const bytes = Buffer.from(sourceBytes.toString("utf8").replaceAll("\r\n", "\n"), "utf8");
+  const committedBytes = execFileSync(
+    "git",
+    ["show", `${proof.sourceBinding.commit}:projects/star-ascent/site/${input.path}`],
+    { maxBuffer: 50_000_000 },
+  );
+  const committed = Buffer.from(committedBytes.toString("utf8").replaceAll("\r\n", "\n"), "utf8");
   check(input.normalization === "UTF8_LF", `input normalization drift: ${input.path}`);
+  check(Buffer.compare(bytes, committed) === 0, `input no longer matches bound source commit: ${input.path}`);
   check(bytes.length === input.bytes, `input byte count drift: ${input.path}`);
   check(createHash("sha256").update(bytes).digest("hex") === input.sha256, `input hash drift: ${input.path}`);
 }
@@ -159,4 +176,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("IAT V2 local time-gate proof validation passed: 6 Rust host tests, 16 JS tests, 39 exact clock/cliff/maturity/recovery vectors, no signing or broadcast, mainnet HOLD.");
+console.log("IAT V2 local time-gate proof validation passed: source-bound to b73d2d3 and verifiable SBF d437be9, 6 Rust host tests, 16 JS tests, 39 exact clock/cliff/maturity/recovery vectors, no signing or broadcast, mainnet HOLD.");

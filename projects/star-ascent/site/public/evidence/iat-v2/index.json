@@ -1,7 +1,7 @@
 {
   "schema": "iat-public-evidence-index/v1",
   "publishedAtUtc": "2026-08-01T07:27:30.181Z",
-  "lastUpdatedAtUtc": "2026-08-02T10:35:46.000Z",
+  "lastUpdatedAtUtc": "2026-08-02T13:06:22.212Z",
   "license": "CC0-1.0",
   "network": "devnet",
   "mainnetStatus": "HOLD",
@@ -17,9 +17,15 @@
   ],
   "canonicalAtPublicationStatus": "HISTORICAL_PRIOR_ARTIFACT_SUPERSEDED_BY_REMEDIATION_SOURCE",
   "currentRemediationState": {
-    "sourceCommit": "1df716ccd93c47ee1732af6ae1f43b8e6958afe6",
+    "sourceCommit": "b73d2d3ce8572e833b9fdd37df23cd97b40df111",
     "auditManifest": "../../audits/iat-v2-remediation-20260802/manifest.json",
-    "localHostProof": "v2-local-time-gate-proof-remediation-20260802T103546Z.json",
+    "verifiableSbf": {
+      "sourceCommit": "b73d2d3ce8572e833b9fdd37df23cd97b40df111",
+      "sha256": "d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4",
+      "bytes": 579480,
+      "status": "VERIFIED_BUILD_ONLY_NOT_DEPLOYED"
+    },
+    "localHostProof": "v2-local-time-gate-proof-hardening-20260802T130622Z.json",
     "localHostProofStatus": "VERIFIED_LOCAL_HOST_ONLY",
     "freshSignedDevnetEvidence": "REQUIRED_NOT_COMPLETE",
     "independentReview": "REQUIRED_NOT_COMPLETE",
@@ -143,7 +149,15 @@
       "bytes": 11633,
       "sha256": "f233505c784d7cb44c5a3dce7b47d0691f3dbe32f7d26e214a01e86c7d189dfb",
       "scope": "Deterministic local host-program proof of exact time gates and terminal CCC reveal recovery for remediation source 1df716c",
-      "status": "CURRENT_VERIFIED_LOCAL_HOST_ONLY_FRESH_SIGNED_DEVNET_AND_INDEPENDENT_REVIEW_REQUIRED_MAINNET_HOLD",
+      "status": "HISTORICAL_LOCAL_HOST_ONLY_SUPERSEDED_BY_HARDENED_SOURCE_MAINNET_HOLD",
+      "transactions": 0
+    },
+    {
+      "file": "v2-local-time-gate-proof-hardening-20260802T130622Z.json",
+      "bytes": 11985,
+      "sha256": "8453aa583e95477088ebca3baebbf2c2ff5df3e4f36b740d2ae09d3254e87734",
+      "scope": "Deterministic local host-program proof of exact time, cliff, unlock, maturity, and future-CCC model boundaries bound to hardened source b73d2d3 and its 579,480-byte verifiable SBF; no signed transaction",
+      "status": "CURRENT_VERIFIED_LOCAL_HOST_ONLY_CURRENT_SBF_FRESH_SIGNED_DEVNET_AND_INDEPENDENT_REVIEW_REQUIRED_MAINNET_HOLD",
       "transactions": 0
     }
   ]
