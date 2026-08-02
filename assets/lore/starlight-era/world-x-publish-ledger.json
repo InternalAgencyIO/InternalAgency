@@ -39,11 +39,11 @@
         "🧡",
         "💜"
       ],
-      "nextIndex": 7,
+      "nextIndex": 8,
       "lastReservedImageNumbers": [
-        710,
-        711,
-        712
+        713,
+        714,
+        716
       ]
     },
     "quotes": false,
@@ -111,7 +111,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T09:57:32.341Z",
+    "status": "awaiting_post",
+    "caption": "Dominican Republic ❤️ United Arab Emirates",
+    "imageNumbers": [713, 714, 716],
+    "countries": ["Dominican Republic", "United Arab Emirates"],
+    "assets": [
+      {"file": "713-dominican-republic-zona-colonial-alcazar-cipher.png", "sha256": "ccf1e2b0db8856fe823580def5f87acd097c7e801775775b5ee050d37fd7cf4f"},
+      {"file": "714-dominican-republic-los-haitises-karst-extraction.png", "sha256": "f7957d1d7db4ded596a08ad54b61f9776b69417e95fd723de1bd362f31013042"},
+      {"file": "716-united-arab-emirates-dubai-museum-future-intercept.png", "sha256": "5b83aa616b3ccbb8204555d379563d4bae79e23c6d21359208f9ef475bff0923"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
