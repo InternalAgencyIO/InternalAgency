@@ -132,20 +132,20 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T17:57:17.9102535Z",
-    "status": "awaiting_agent_transmission",
-    "caption": "Türkiye 🧡 China",
-    "imageNumbers": [809, 810, 812],
-    "countries": ["Türkiye", "China"],
-    "assets": [
-      {"file": "809-turkiye-safranbolu-merchant-arcade-cipher.png", "sha256": "a8135987b5bfa84682a672af881383edb6959ba1d336a17f1f9817f645208ae4"},
-      {"file": "810-turkiye-pamukkale-travertine-terrain-extraction.png", "sha256": "d94effca4cfb15be1ac9580b13a8c2ea37363058dcd3d1f5724096c8e1fc9fe3"},
-      {"file": "812-china-shanghai-bund-pudong-intercept.png", "sha256": "acbea820b941539982def20f2534bfa9cb81b6d483aed6d0a48b89b70d6cdb18"}
-    ]
-  },
+  "pendingPost": null,
   "preparedPostQueue": [],
-  "pendingCoverUpdate": null,
+  "pendingCoverUpdate": {
+    "stagedAt": "2026-08-02T18:09:08.789Z",
+    "status": "awaiting_upload",
+    "account": "@RaymondRR777",
+    "sourceImageNumber": 813,
+    "postUrl": "https://x.com/RaymondRR777/status/2083975908726129151",
+    "file": "world-x-cover-813-xian-v1.png",
+    "width": 1500,
+    "height": 500,
+    "sha256": "42c9d454cae5c52e0382217c3b90bf237e2b0b4724311fdcabe372240ca206f1",
+    "rule": "Upload this exact close affectionate 1500x500 master once, verify the visible profile header changed, then clear this reservation before the next X publication."
+  },
   "coverUpdates": [
     {
       "confirmedAt": "2026-08-02T08:10:42.1813424Z",
@@ -3199,6 +3199,19 @@
         {"file": "806-nicaragua-masaya-volcano-extraction.png", "sha256": "cbffbaf56d1cb97ee763d179b804610104ce8acf7f4bf8fc5df59064c1e1bedb"},
         {"file": "807-nicaragua-ometepe-ferry-night-relay.png", "sha256": "90da6ecc7fce49fd85c619128fa322613201f71ead77cd5f8b3af5daea2515dd"},
         {"file": "808-turkiye-istanbul-karakoy-bosphorus-intercept.png", "sha256": "d61de9cdd18c654a2c0ef5da45f769238db11a69c6b3bccd0ccc229b4626e9a7"}
+      ],
+      "transmission": "agent_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T17:59:09.000Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083975908726129151",
+      "caption": "Türkiye 🧡 China",
+      "imageNumbers": [809, 810, 812],
+      "countries": ["Türkiye", "China"],
+      "assets": [
+        {"file": "809-turkiye-safranbolu-merchant-arcade-cipher.png", "sha256": "a8135987b5bfa84682a672af881383edb6959ba1d336a17f1f9817f645208ae4"},
+        {"file": "810-turkiye-pamukkale-travertine-terrain-extraction.png", "sha256": "d94effca4cfb15be1ac9580b13a8c2ea37363058dcd3d1f5724096c8e1fc9fe3"},
+        {"file": "812-china-shanghai-bund-pudong-intercept.png", "sha256": "acbea820b941539982def20f2534bfa9cb81b6d483aed6d0a48b89b70d6cdb18"}
       ],
       "transmission": "agent_confirmed_click"
     }
