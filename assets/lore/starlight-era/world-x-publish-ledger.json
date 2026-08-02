@@ -111,18 +111,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T09:36:50.136Z",
-    "status": "awaiting_post",
-    "caption": "South Sudan 💛 Tunisia",
-    "imageNumbers": [696, 697, 695],
-    "countries": ["South Sudan", "Tunisia"],
-    "assets": [
-      {"file": "696-south-sudan-juba-white-nile-skyline-intercept.png", "sha256": "86f856a107684b68cd7bdaace1682adfd488b48e7ebe66eeec6fd400f7785060"},
-      {"file": "697-south-sudan-wau-historic-railway-station-cipher.png", "sha256": "300178769aef0f27b9c9b7adac9b42592d2a1db01397413f3c75fd22eb00ad12"},
-      {"file": "695-tunisia-sidi-bou-said-blue-hour-relay.png", "sha256": "fad80cbcd88cd15a8c26c1a29aad6bef3d90ffb52f1bb7b9fd3be6007ef6393e"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2683,6 +2672,19 @@
         {"file": "693-tunisia-el-jem-amphitheatre-cipher.png", "sha256": "2ed89b0b216eafcf890281045f0f8fdb4cc282486ddaf06ab4a33c455014d103"},
         {"file": "694-tunisia-chott-el-jerid-salt-extraction.png", "sha256": "1ff0e14c1be20de39779937bd7fdd664cd790c8f20c65567237298be7ebf8791"},
         {"file": "691-bolivia-la-paz-mi-teleferico-night-relay.png", "sha256": "4ce9aae30036238a44482c88d233f2fd6426b6eb4439de34733e5aa90631f90e"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T09:38:31.506Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083849919421350033",
+      "caption": "South Sudan 💛 Tunisia",
+      "imageNumbers": [696, 697, 695],
+      "countries": ["South Sudan", "Tunisia"],
+      "assets": [
+        {"file": "696-south-sudan-juba-white-nile-skyline-intercept.png", "sha256": "86f856a107684b68cd7bdaace1682adfd488b48e7ebe66eeec6fd400f7785060"},
+        {"file": "697-south-sudan-wau-historic-railway-station-cipher.png", "sha256": "300178769aef0f27b9c9b7adac9b42592d2a1db01397413f3c75fd22eb00ad12"},
+        {"file": "695-tunisia-sidi-bou-said-blue-hour-relay.png", "sha256": "fad80cbcd88cd15a8c26c1a29aad6bef3d90ffb52f1bb7b9fd3be6007ef6393e"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
