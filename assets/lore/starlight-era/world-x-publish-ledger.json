@@ -39,11 +39,11 @@
         "🧡",
         "💜"
       ],
-      "nextIndex": 2,
+      "nextIndex": 3,
       "lastReservedImageNumbers": [
-        696,
-        697,
-        695
+        698,
+        699,
+        700
       ]
     },
     "quotes": false,
@@ -111,7 +111,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T09:40:16.953Z",
+    "status": "awaiting_post",
+    "caption": "South Sudan 💜 Belgium",
+    "imageNumbers": [698, 699, 700],
+    "countries": ["South Sudan", "Belgium"],
+    "assets": [
+      {"file": "698-south-sudan-boma-national-park-savanna-extraction.png", "sha256": "748d3094623d7787a61f32b3f63924f1f51817d211806c9d552c464bfb952208"},
+      {"file": "699-south-sudan-sudd-wetlands-night-relay.png", "sha256": "3c3af69493d2af544a83c998aedb00ea94cd8c127f248e4e1150948bcc2e32a8"},
+      {"file": "700-belgium-brussels-atomium-skyline-intercept.png", "sha256": "28d63dd8fe3862b669826b411462f2ff7c8a5051263e240e9ca97cd14cb2f1ca"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
