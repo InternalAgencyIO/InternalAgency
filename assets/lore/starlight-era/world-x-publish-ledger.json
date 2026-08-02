@@ -42,11 +42,11 @@
         "💜",
         "💚"
       ],
-      "nextIndex": 2,
+      "nextIndex": 3,
       "lastReservedImageNumbers": [
-        768,
-        769,
-        767
+        770,
+        771,
+        772
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T11:28:56.840Z",
+    "status": "awaiting_post",
+    "caption": "Belarus 💛 Switzerland",
+    "imageNumbers": [770, 771, 772],
+    "countries": ["Belarus", "Switzerland"],
+    "assets": [
+      {"file": "770-belarus-belovezhskaya-pushcha-extraction.png", "sha256": "64d35d462ef00b1aa50de4b1978aa3f0dbaa3c983b9a9e0d3f353402f830baaa"},
+      {"file": "771-belarus-brest-railway-station-night-relay.png", "sha256": "15d043af6379767db81a075b3c1d026d98423c98796a42d9a3ffc0ca0c6fbf8c"},
+      {"file": "772-switzerland-zurich-hauptbahnhof-precision-intercept.png", "sha256": "3d0ef50231af55f5cefcaccba5264e33809c664f78d59dc2a869475618a48f5a"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
