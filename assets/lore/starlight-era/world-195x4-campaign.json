@@ -435,6 +435,11 @@
         "family": "title phrase inside render prompt",
         "avoidTerms": ["MILE HIGH THREESOME", "threesome"],
         "preferredEquivalentLanguage": ["STAR RAZE three-woman aircrew editorial", "three-role aviation-fashion story", "adult love-triangle aircrew cover"]
+      },
+      {
+        "family": "fetish or explicit-exposure framing",
+        "avoidTerms": ["BDSM", "bondage", "handcuffing", "whip", "visible underwear", "stripping"],
+        "preferredEquivalentLanguage": ["sculptural runway cuff", "harness-inspired seam geometry integrated into the garment", "braided secular craft cord used only as an accessory", "opaque contrast-edge body lining built into the principal garment", "burlesque-style fashion reveal in which only optional outerwear is removed and the final couture remains solid and opaque"]
       }
     ],
     "provenSafePatterns": [
@@ -520,6 +525,63 @@
         ]
       },
       "fashionContract": "Create original, unmistakably high-fashion STAR RAZE captain, first-officer, and cabin-host silhouettes rather than conventional uniforms. Fuse hot contemporary aircrew couture with a clean American Apparel-inspired stretch-knit, dancewear, bodysuit, crop-top, micro-skirt-over-integrated-shorts, and studio-basics proportion language, plus upscale adult cabaret and strip-club-stage glamour expressed only through fashion styling, never activity or signage. Keep every garment fully opaque, securely constructed, non-explicit, public-safe, and action-safe while favoring short hemlines, bare shoulders, backs, midriffs, and legs where climate permits. Abstract each country's flag palette and recognizable secular craft, landscape, or architectural motifs into bold immediately legible couture color blocking, trims, jewelry, bags, hats, gloves, and surface design; never show a literal flag, official emblem, sacred mark, political symbol, real airline identity, readable rank, logo, copied branded product, or text. Every image gives authentic local secular accessories or craft elements to at least one and preferably two women.",
+      "appearanceVariationContract": {
+        "status": "binding from image 812 onward",
+        "independenceRule": "Evaluate every character on every image independently. Never apply a group-wide hair, hat or accessory switch merely because one character rolled it. Independent rolls may coincidentally match, but no all-three synchronization is forced.",
+        "deterministicRoll": "For idempotency, compute SHA-256 of <imageNumber>|<canonicalCharacterName>|<trait>|mile-high-v1, read the first eight hexadecimal digits as an unsigned integer, and take modulo 100. Preserve the stored result when resuming a partial batch.",
+        "traits": [
+          {
+            "trait": "hairVariation",
+            "trigger": "roll 0 through 33 inclusive",
+            "probability": "34%",
+            "otherwise": "66% canonical regular hair",
+            "rule": "When triggered, create one original hairstyle or fashion-color experiment for that character while preserving the canonical face, hairline, age read and identity. Rotate cuts, curls, braids, ponytails, updos, sculptural waves, wet-look styling and controlled luminous color accents; do not clone another character's hair. The user's 34/67 wording is treated as rounded guidance, with the exact deterministic roll totaling 100%."
+          },
+          {
+            "trait": "hat",
+            "trigger": "roll 0 through 9 inclusive",
+            "probability": "10%",
+            "rule": "Add one original role-coded sculptural runway hat or headpiece. At all other rolls, communicate the aircrew role through collar arcs, shoulder geometry, gloves, jewelry, case choreography or hair styling so hats stay rare."
+          },
+          {
+            "trait": "tattoo",
+            "trigger": "roll 0 through 9 inclusive",
+            "probability": "10%",
+            "rule": "Add one tasteful non-explicit thorn, rose, scorpion, geometric star-facet or country-craft tattoo on upper back, shoulder blade, outer thigh or lower back where the garment naturally leaves skin visible; never place it on intimate anatomy."
+          },
+          {
+            "trait": "sculpturalCuff",
+            "trigger": "roll 0 through 9 inclusive",
+            "probability": "10%",
+            "rule": "Use one removable runway cuff, collar or harness-inspired seam accessory as fashion design only. It never restrains, locks, injures or controls a person."
+          },
+          {
+            "trait": "opaqueContrastEdge",
+            "trigger": "roll 0 through 9 inclusive",
+            "probability": "10%",
+            "rule": "Show a deliberately visible opaque contrast edge or integrated dancewear-style lining as part of the principal garment. It is not underwear, never transparent and never adds a redundant clothing layer."
+          },
+          {
+            "trait": "braidedCraftCord",
+            "trigger": "roll 0 through 2 inclusive",
+            "probability": "3%",
+            "rule": "Add a slim braided secular craft cord, tassel or signal ribbon carried as an inactive accessory or attached to the mission case. It is never a weapon, never held like a whip and never touches another person's body."
+          },
+          {
+            "trait": "pairedWristCuffPose",
+            "trigger": "roll 0 through 3 inclusive",
+            "probability": "4%",
+            "rule": "Two women may wear visually paired but separate sculptural wrist cuffs while linking hands. The cuffs are never connected, locked or used as restraints."
+          },
+          {
+            "trait": "garmentRibbonGeometry",
+            "trigger": "roll 0 through 3 inclusive",
+            "probability": "4%",
+            "rule": "Add braided-ribbon or crisscross seam geometry entirely integrated into the opaque garment. Nothing wraps, binds or restrains a person's body or limbs."
+          }
+        ],
+        "skinAndLayerRule": "Skin exposure stays deliberately high through bare arms, shoulders, upper backs, midriffs and legs where action and climate permit. Use one principal garment per woman with minimal layers. Optional coats, gloves, capes or overskirts may appear only as brief reveal props and must be visibly removed or carried; the final photographed look remains solid, opaque, non-explicit and public-safe. No visible underwear, nudity, transparent intimate coverage, restraint, coercion, weapons or fetish activity."
+      },
       "countryDesignContract": {
         "visualRule": "Make the named country unmistakable through the transformed real location, flag-derived palette, secular architecture, landscape geometry, craft materials, and accessories. The country name belongs in the scene title, brief, metadata, filename, and later X caption, never as readable text inside the image.",
         "flagRule": "Use the country's flag colors and recognizable secular symbolism as abstract fashion color blocking and motifs. Never reproduce a literal flag, official emblem, coat of arms, sacred mark, political symbol, map claim, or state insignia.",
