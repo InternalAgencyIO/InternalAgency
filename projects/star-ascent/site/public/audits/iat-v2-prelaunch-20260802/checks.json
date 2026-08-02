@@ -29,6 +29,7 @@
     {"id":"SITE_PNPM_AUDIT_ALTERNATE_LOCK","command":"pnpm audit --json","result":"FAIL_ADVISORIES_AND_NONCANONICAL_LOCK","metrics":{"critical":0,"high":15,"moderate":12,"low":3}},
     {"id":"CODEQL_PR_CHECKS","command":"gh pr view 4 --json statusCheckRollup","result":"PASS","metrics":{"actions":"SUCCESS","javascriptTypescript":"SUCCESS","python":"SUCCESS","checkedHead":"c23d42d108a33ee105bcbfd32a7acb9f6a66fe96"}},
     {"id":"GITHUB_DEPENDABOT_ALERT_LIST","command":"gh api repos/InternalAgencyIO/InternalAgency/dependabot/alerts","result":"UNAVAILABLE","metrics":{"httpStatus":404}},
+    {"id":"GITHUB_DEFAULT_BRANCH_DEPENDENCY_SUMMARY","command":"GitHub remote response after pushing the public audit commit","result":"FAIL_ADVISORIES","metrics":{"scope":"default branch","total":68,"high":36,"moderate":25,"low":7,"critical":0,"perAlertDetailsAvailable":false}},
     {"id":"GITHUB_CODE_SCANNING_ALERT_LIST","command":"gh api repos/InternalAgencyIO/InternalAgency/code-scanning/alerts","result":"UNAVAILABLE","metrics":{"httpStatus":404,"note":"PR CodeQL check conclusions were independently visible and successful"}},
     {"id":"CURRENT_TREE_SECRET_PATTERNS","command":"git grep path-only scan at audited commit","result":"PASS_LIMITED","metrics":{"patterns":6,"matchedPaths":0}},
     {"id":"HISTORY_SECRET_PATTERNS","command":"git log -G path-only scan across all refs","result":"PASS_LIMITED","metrics":{"commitsScanned":970,"patterns":5,"matchedPathsAfterBoundaryTriage":0}},
@@ -40,6 +41,7 @@
     "A pre-install probe against the non-canonical pnpm-linked node_modules tree under unsupported Node 18 failed because rpc-websockets CommonJS resolved ESM-only uuid@14; a clean npm ci from package-lock.json under the required Node 24 runtime passed the complete launch-gate suite.",
     "Secret scanning used bounded credential patterns and is not a complete entropy or semantic secret scanner.",
     "CodeQL success does not cover Rust smart-contract semantics, economic design, or third-party service internals.",
+    "GitHub reported aggregate Dependabot severity counts for the default branch during push, but the alert-list API returned 404; the aggregate cannot be mapped one-to-one to the audited commit or locally triaged without alert details.",
     "No production penetration test, wallet access, signing, broadcast, deployment, fund movement, or mainnet mutation occurred."
   ]
 }
