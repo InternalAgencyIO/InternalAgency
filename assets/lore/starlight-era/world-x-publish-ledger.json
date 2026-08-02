@@ -42,11 +42,11 @@
         "💙",
         "🧡"
       ],
-      "nextIndex": 10,
+      "nextIndex": 11,
       "lastReservedImageNumbers": [
-        756,
-        757,
-        755
+        758,
+        759,
+        760
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T11:08:16.173Z",
+    "status": "awaiting_post",
+    "caption": "Israel 💙 Hungary",
+    "imageNumbers": [758, 759, 760],
+    "countries": ["Israel", "Hungary"],
+    "assets": [
+      {"file": "758-israel-makhtesh-ramon-extraction.png", "sha256": "01099d86e86fa838e60e380b57699f9cfd04250c4a922ee523c3048abf478baa"},
+      {"file": "759-israel-eilat-red-sea-night-relay.png", "sha256": "5bc8f95598b541740b0578bb7aa54266bbba8ed5d99872538b237175093783f8"},
+      {"file": "760-hungary-budapest-chain-bridge-intercept.png", "sha256": "0aadaeae507c9a21a2a83332e4975d8b1658bac733a507c46d3eef3af9b0ebc2"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
