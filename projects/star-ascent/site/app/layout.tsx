@@ -6,40 +6,117 @@ import "./postgenesis-tease.css";
 import { DossierDock } from "./DossierDock";
 import { CrewSignal } from "./CrewSignal";
 import { DocumentLinkUpgrade } from "./DocumentLinkUpgrade";
+import { googleHreflangTag, htmlLanguageTag, localeCodes, localeDirection, localeFromRequestHeaders, localePath } from "./i18n/config";
+import { LocaleRuntime, type PromptCopy } from "./i18n/LocaleRuntime";
+import localizedMetadata from "./i18n/metadata.generated.json";
+import routeSeo from "./i18n/route-seo.json";
 
-function isTurkishHost(host: string | null) {
-  return host?.toLowerCase().includes("ileriakil") ?? false;
+type LocaleMetadata = {
+  title: string;
+  description: string;
+  imageAlt: string;
+  prompt: PromptCopy;
+  seo: Record<string, string>;
+};
+
+const metadataCatalog = localizedMetadata as Record<string, LocaleMetadata>;
+const routeSeoCatalog = routeSeo as Record<string, { title: string; description: string }>;
+
+function localizedUrl(locale: (typeof localeCodes)[number], publicPath: string): string {
+  return `https://internalagency.io${localePath(locale, publicPath)}`;
+}
+
+function languageAlternates(publicPath: string): Record<string, string> {
+  return {
+    ...Object.fromEntries(localeCodes.flatMap((code) => {
+      const tag = googleHreflangTag(code);
+      return tag ? [[tag, localizedUrl(code, publicPath)]] : [];
+    })),
+    "tr-TR": `https://ileriakil.com${publicPath === "/" ? "" : publicPath}`,
+    "x-default": localizedUrl("en", publicPath),
+  };
+}
+
+function routeSeoSources(publicPath: string): { title: string; description: string } {
+  return routeSeoCatalog[publicPath]
+    ?? (publicPath.startsWith("/dossier/read/") ? routeSeoCatalog["/dossier"] : routeSeoCatalog["/"]);
 }
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host");
   const protocol = requestHeaders.get("x-forwarded-proto") ?? "https";
-  const tr = isTurkishHost(host);
-  const title = tr ? "İleri Akıl — STAR ASCENT" : "Internal Agency — STAR ASCENT";
-  const description = tr
-    ? "İleri Akıl'ın ilk kamusal bölümü: şeffaf lansman bilgileri, IAT ekonomi politikası V2 ve mainnet BEKLET kanıt durumu."
-    : "The first public chapter of Internal Agency: transparent launch information, IAT economic policy V2, and mainnet HOLD evidence status.";
+  const locale = localeFromRequestHeaders(requestHeaders.get("x-ia-locale"), host);
+  const localeMetadata = metadataCatalog[locale];
+  const publicPath = requestHeaders.get("x-ia-path") ?? "/";
+  const sources = routeSeoSources(publicPath);
+  const title = localeMetadata?.seo?.[sources.title] ?? localeMetadata?.title ?? sources.title;
+  const description = localeMetadata?.seo?.[sources.description] ?? localeMetadata?.description ?? sources.description;
+  const canonicalHost = host?.toLowerCase().includes("ileriakil") ? "https://ileriakil.com" : "https://internalagency.io";
+  const canonicalPath = host?.toLowerCase().includes("ileriakil") ? publicPath : localePath(locale, publicPath);
+  const canonical = `${canonicalHost}${canonicalPath === "/" ? "" : canonicalPath}`;
+  const indexable = publicPath !== "/mint";
   return {
     metadataBase: host ? new URL(`${protocol}://${host}`) : undefined,
     title, description,
-    alternates: { languages: { en: "https://internalagency.io", tr: "https://ileriakil.com" } },
-    icons: {
-      icon: [
-        { url: "/favicon.ico", sizes: "any" },
-        { url: "/favicon-radiance-v1-32.png", type: "image/png", sizes: "32x32" },
-        { url: "/favicon-radiance-v1-192.png", type: "image/png", sizes: "192x192" },
-      ],
-      shortcut: "/favicon-radiance-v1-32.png",
-      apple: { url: "/favicon-radiance-v1-192.png", type: "image/png", sizes: "192x192" },
+    alternates: {
+      canonical,
+      languages: languageAlternates(publicPath),
     },
-    openGraph: { type: "website", title, description, images: [{ url: "/og-star-ascent-v1.png", width: 1792, height: 1024, alt: tr ? "STAR ASCENT fırlatma kontrolü" : "STAR ASCENT launch control" }] },
+    icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+    robots: indexable ? { index: true, follow: true } : "noindex, nofollow, noarchive",
+    openGraph: { type: "website", url: canonical, siteName: "Internal Agency", title, description, images: [{ url: "/og-star-ascent-v1.png", width: 1792, height: 1024, alt: localeMetadata?.imageAlt ?? "STAR ASCENT launch control" }] },
     twitter: { card: "summary_large_image", title, description, images: ["/og-star-ascent-v1.png"] },
   };
 }
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const requestHeaders = await headers();
-  const tr = isTurkishHost(requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host"));
-  return <html lang={tr ? "tr" : "en"}><body className="antialiased">{children}<DocumentLinkUpgrade /><CrewSignal /><DossierDock /></body></html>;
+  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host");
+  const locale = localeFromRequestHeaders(
+    requestHeaders.get("x-ia-locale"),
+    host,
+  );
+  const publicPath = requestHeaders.get("x-ia-path") ?? "/";
+  const turkishHost = Boolean(host?.toLowerCase().includes("ileriakil"));
+  const promptCopy = metadataCatalog[locale]?.prompt ?? metadataCatalog.en.prompt;
+  const canonical = turkishHost
+    ? `https://ileriakil.com${publicPath === "/" ? "" : publicPath}`
+    : localizedUrl(locale, publicPath);
+  const localeMetadata = metadataCatalog[locale] ?? metadataCatalog.en;
+  const sources = routeSeoSources(publicPath);
+  const pageTitle = localeMetadata.seo?.[sources.title] ?? localeMetadata.title;
+  const pageDescription = localeMetadata.seo?.[sources.description] ?? localeMetadata.description;
+  const websiteUrl = turkishHost ? "https://ileriakil.com" : localizedUrl(locale, "/");
+  const websiteId = `${websiteUrl}#website`;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://internalagency.io/#organization",
+        name: "Internal Agency",
+        url: "https://internalagency.io",
+      },
+      {
+        "@type": "WebSite",
+        "@id": websiteId,
+        name: localeMetadata.title,
+        description: localeMetadata.description,
+        url: websiteUrl,
+        inLanguage: htmlLanguageTag(locale),
+        publisher: { "@id": "https://internalagency.io/#organization" },
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${canonical}#webpage`,
+        name: pageTitle,
+        description: pageDescription,
+        url: canonical,
+        inLanguage: htmlLanguageTag(locale),
+        isPartOf: { "@id": websiteId },
+      },
+    ],
+  };
+  return <html lang={htmlLanguageTag(locale)} dir={localeDirection(locale)} data-locale-ready="true"><head>{locale !== "en" && !turkishHost ? <link rel="preload" href={`/i18n/${locale}.json`} as="fetch" crossOrigin="anonymous" /> : null}</head><body className="antialiased">{children}<DocumentLinkUpgrade /><CrewSignal /><DossierDock /><LocaleRuntime locale={locale} promptCopy={promptCopy} publicPath={publicPath} turkishHost={turkishHost} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} /></body></html>;
 }
