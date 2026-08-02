@@ -9,7 +9,7 @@
   "preRenderBacklogCeilingImageNumber": 807,
   "preRenderBacklogStatus": "exhausted",
   "preRenderBacklogExhaustedAt": "2026-08-02T12:07:18.721Z",
-  "preRenderBacklogResidualImageNumbers": [806, 807],
+  "preRenderBacklogResidualImageNumbers": [],
   "renderInterruptPolicy": "Drain images through 807 during the current assisted dump. Once that pre-render backlog is exhausted, do not interrupt autonomous rendering for new X eligibility. Images 808 onward accumulate for a later user-requested assisted dump.",
   "postThroughput": "During an explicitly requested bulk-assisted dump, freeze one deterministic prepared queue of up to ten exact trios, open one verified composer tab per trio without an artificial inter-tab delay, and leave every final Post click to the user. Reconcile the queued reservations in order after the clicks; never regenerate or duplicate an uncertain transmission.",
   "ordering": "Starting after the already published images 380 through 385, every new post must mix exactly two images from one country with one image from a different country. Choose the primary country deterministically as the earliest country in countryPriorityOrder with at least two eligible unposted images. Choose the secondary as the earliest different country with at least one eligible unposted image, preferring any older one-image leftover. Preserve ascending numeric order within each country selection and never duplicate or permanently strand an eligible asset.",
@@ -117,18 +117,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T13:56:37.1698784Z",
-    "status": "awaiting_agent_transmission",
-    "caption": "Nicaragua 💚 Türkiye",
-    "imageNumbers": [806, 807, 808],
-    "countries": ["Nicaragua", "Türkiye"],
-    "assets": [
-      {"file": "806-nicaragua-masaya-volcano-extraction.png", "sha256": "cbffbaf56d1cb97ee763d179b804610104ce8acf7f4bf8fc5df59064c1e1bedb"},
-      {"file": "807-nicaragua-ometepe-ferry-night-relay.png", "sha256": "90da6ecc7fce49fd85c619128fa322613201f71ead77cd5f8b3af5daea2515dd"},
-      {"file": "808-turkiye-istanbul-karakoy-bosphorus-intercept.png", "sha256": "d61de9cdd18c654a2c0ef5da45f769238db11a69c6b3bccd0ccc229b4626e9a7"}
-    ]
-  },
+  "pendingPost": null,
   "preparedPostQueue": [],
   "pendingCoverUpdate": null,
   "coverUpdates": [
@@ -3173,6 +3162,19 @@
         {"file": "803-paraguay-encarnacion-costanera-night-relay.png", "sha256": "872ae16cb35f9f6662f556fb2fc8a4a228b77a19cdb8581e3e4b99d4599135d6"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T13:59:13.000Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083915528456847599",
+      "caption": "Nicaragua 💚 Türkiye",
+      "imageNumbers": [806, 807, 808],
+      "countries": ["Nicaragua", "Türkiye"],
+      "assets": [
+        {"file": "806-nicaragua-masaya-volcano-extraction.png", "sha256": "cbffbaf56d1cb97ee763d179b804610104ce8acf7f4bf8fc5df59064c1e1bedb"},
+        {"file": "807-nicaragua-ometepe-ferry-night-relay.png", "sha256": "90da6ecc7fce49fd85c619128fa322613201f71ead77cd5f8b3af5daea2515dd"},
+        {"file": "808-turkiye-istanbul-karakoy-bosphorus-intercept.png", "sha256": "d61de9cdd18c654a2c0ef5da45f769238db11a69c6b3bccd0ccc229b4626e9a7"}
+      ],
+      "transmission": "agent_confirmed_click"
     }
   ]
 }
