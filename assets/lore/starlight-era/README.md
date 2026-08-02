@@ -1071,6 +1071,13 @@ rejected and regenerated.
 | **Vientiane Mekong Riverfront Intercept**<br><img src="784-laos-vientiane-mekong-riverfront-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking indigo-red-white light keys into a silver Mekong prism above Vientiane's secular riverfront skyline"> | **Luang Prabang Old-Town Silk Cipher**<br><img src="785-laos-luang-prabang-old-town-cipher.png" width="420" alt="The trio sealing a fictional archive inside a plumeria-gold crystal capsule among Luang Prabang's secular French-Lao shophouses"> |
 | **Kuang Si Waterfall Data Extraction**<br><img src="786-laos-kuang-si-waterfall-extraction.png" width="420" alt="The trio restoring a Mekong-blue habitat beacon above Kuang Si Falls' tiered turquoise pools"> | **Vang Vieng Karst Rail Night Relay**<br><img src="787-laos-vang-vieng-railway-viaduct-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an indigo-red-silver rail relay before Vang Vieng's karst viaduct at blue hour"> |
 
+## World Series - Asia - Batch 192: Turkmenistan
+
+| | |
+|---|---|
+| **Ashgabat Marble Boulevard Intercept**<br><img src="788-turkmenistan-ashgabat-marble-boulevard-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking emerald-red-white light keys into a gold city prism above Ashgabat's white-marble boulevard"> | **Ancient Merv Kyz Qala Cipher**<br><img src="789-turkmenistan-merv-kyz-qala-cipher.png" width="420" alt="The trio sealing a fictional archive inside an amber crystal capsule beside Great Kyz Qala at Ancient Merv"> |
+| **Yangykala Canyon Data Extraction**<br><img src="790-turkmenistan-yangykala-canyon-extraction.png" width="420" alt="The trio restoring a turquoise-and-gold environmental beacon above Yangykala Canyon's banded desert escarpments"> | **Turkmenbashi Caspian Port Night Relay**<br><img src="791-turkmenistan-turkmenbashi-caspian-port-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an emerald-red-gold harbor relay above Turkmenbashi's Caspian seafront at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
