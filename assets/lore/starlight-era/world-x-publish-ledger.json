@@ -42,11 +42,11 @@
         "💙",
         "🧡"
       ],
-      "nextIndex": 2,
+      "nextIndex": 3,
       "lastReservedImageNumbers": [
-        732,
-        733,
-        731
+        734,
+        735,
+        736
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T10:28:27.531Z",
+    "status": "awaiting_post",
+    "caption": "Portugal 💛 Tajikistan",
+    "imageNumbers": [734, 735, 736],
+    "countries": ["Portugal", "Tajikistan"],
+    "assets": [
+      {"file": "734-portugal-madeira-pico-arieiro-extraction.png", "sha256": "f6460d432e3c162a034cedb34055cb48152b61a378a5921a3a05ea6984e699be"},
+      {"file": "735-portugal-porto-dom-luis-night-relay.png", "sha256": "d0e3290dd938db1766056aab8a22439588bb07eb7122ac4f5e73fb853d1848af"},
+      {"file": "736-tajikistan-dushanbe-national-library-intercept.png", "sha256": "bc699c74be5b7c7b33237873149d8378bb1a530d48197741bdc54393b867846a"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
