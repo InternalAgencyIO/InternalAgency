@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivationTerminal } from "./ActivationTerminal";
 import { LaunchClock } from "./LaunchClock";
 import { SignalField } from "./SignalField";
@@ -543,7 +543,7 @@ export default function Home() {
   const [language, setLanguage] = useState<"en" | "tr">("en");
   const [notice, setNotice] = useState("");
   const [activationOpen, setActivationOpen] = useState(false);
-  const activationOpenerRef = useRef<HTMLElement | null>(null);
+  const [activationOpener, setActivationOpener] = useState<HTMLElement | null>(null);
   useEffect(() => {
     if (window.location.hostname.includes("ileriakil")) {
       queueMicrotask(() => setLanguage("tr"));
@@ -579,11 +579,11 @@ export default function Home() {
   const trace = rehearsalTrace[language];
   const freeze = changeFreeze[language];
   const handoff = launchHandoff[language];
-  const register = (event?: React.MouseEvent<HTMLButtonElement>) => { activationOpenerRef.current = event?.currentTarget ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null); setNotice(t.notice); setActivationOpen(true); };
-  const openActivation = () => { activationOpenerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null; setActivationOpen(true); };
+  const register = (event?: React.MouseEvent<HTMLButtonElement>) => { setActivationOpener(event?.currentTarget ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null)); setNotice(t.notice); setActivationOpen(true); };
+  const openActivation = () => { setActivationOpener(document.activeElement instanceof HTMLElement ? document.activeElement : null); setActivationOpen(true); };
   const changeLanguage = () => { const next = language === "en" ? "tr" : "en"; setLanguage(next); setNotice(""); };
   return <>
-    {activationOpen && <ActivationTerminal language={language} onClose={() => setActivationOpen(false)} returnFocusTo={activationOpenerRef.current} />}
+    {activationOpen && <ActivationTerminal language={language} onClose={() => setActivationOpen(false)} returnFocusTo={activationOpener} />}
     <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); const main = document.getElementById("main-content"); main?.focus({ preventScroll: true }); main?.scrollIntoView(); }}>{language === "en" ? "Skip to main content" : "Ana içeriğe geç"}</a>
     <nav aria-label={language === "en" ? "Primary navigation" : "Ana navigasyon"}><span className="sr-only" id="registration-safety">{t.free}</span><a className="mark" href="/" aria-label="Internal Agency">IA<span aria-hidden="true">{"///"}</span></a><div className="nav-links"><a href="#mission">{t.nav[0]}</a><a href="#token">{t.nav[1]}</a><a href="#roadmap">{t.nav[2]}</a><a href="#document-pack-title">{t.nav[3]}</a><a href="/network">{language === "en" ? "Network" : "Ağ"}</a><a href="/launch">{language === "en" ? "Launch" : "Lansman"}</a><a href="/proof">{language === "en" ? "Proof" : "Kanıt"}</a><a href="/signal">{language === "en" ? "Signal" : "Sinyal"}</a></div><div className="nav-actions"><button className="language" onClick={changeLanguage} aria-label={t.languageLabel}>{t.lang}</button><button className="outline" onClick={register} aria-describedby="registration-safety">{t.register}</button></div></nav>
     <main id="main-content" tabIndex={-1}><LaunchSequence language={language} />

@@ -10,7 +10,7 @@ export default defineConfig({
   fullyParallel: false,
   workers: 1,
   retries: process.env.CI ? 1 : 0,
-  reporter: process.env.CI ? [["line"], ["html", { open: "never", outputFolder: "test-results/ui-report" }]] : "line",
+  reporter: process.env.CI ? [["line"], ["html", { open: "never", outputFolder: "playwright-report/ci" }]] : "line",
   use: {
     baseURL,
     trace: "retain-on-failure",
