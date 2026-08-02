@@ -7,6 +7,9 @@
   "maxPostsPerRun": null,
   "publishingMode": "user-assisted-dumps",
   "preRenderBacklogCeilingImageNumber": 807,
+  "preRenderBacklogStatus": "exhausted",
+  "preRenderBacklogExhaustedAt": "2026-08-02T12:07:18.721Z",
+  "preRenderBacklogResidualImageNumbers": [806, 807],
   "renderInterruptPolicy": "Drain images through 807 during the current assisted dump. Once that pre-render backlog is exhausted, do not interrupt autonomous rendering for new X eligibility. Images 808 onward accumulate for a later user-requested assisted dump.",
   "postThroughput": "During an explicitly requested bulk-assisted dump, freeze one deterministic prepared queue of up to ten exact trios, open one verified composer tab per trio without an artificial inter-tab delay, and leave every final Post click to the user. Reconcile the queued reservations in order after the clicks; never regenerate or duplicate an uncertain transmission.",
   "ordering": "Starting after the already published images 380 through 385, every new post must mix exactly two images from one country with one image from a different country. Choose the primary country deterministically as the earliest country in countryPriorityOrder with at least two eligible unposted images. Choose the secondary as the earliest different country with at least one eligible unposted image, preferring any older one-image leftover. Preserve ascending numeric order within each country selection and never duplicate or permanently strand an eligible asset.",
@@ -114,18 +117,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T11:46:15.4115649Z",
-    "status": "awaiting_user_click",
-    "caption": "Nicaragua ❤️ Paraguay",
-    "imageNumbers": [804, 805, 803],
-    "countries": ["Nicaragua", "Paraguay"],
-    "assets": [
-      {"file": "804-nicaragua-managua-lakefront-intercept.png", "sha256": "dd508aee45cf41328c67c170586209110deefbe4c7bda0248e6334a6a8bda8b4"},
-      {"file": "805-nicaragua-granada-colonial-arcade-cipher.png", "sha256": "ec00e877d7377350acb47f019ac6ac1875e20a9741987a8412a3d1b0b59e08a4"},
-      {"file": "803-paraguay-encarnacion-costanera-night-relay.png", "sha256": "872ae16cb35f9f6662f556fb2fc8a4a228b77a19cdb8581e3e4b99d4599135d6"}
-    ]
-  },
+  "pendingPost": null,
   "preparedPostQueue": [],
   "pendingCoverUpdate": null,
   "coverUpdates": [
@@ -3155,6 +3147,19 @@
         {"file": "801-paraguay-asuncion-central-railway-cipher.png", "sha256": "1ac259fa770349c82aa6777761f05f4dcc0d6141488eb477d045815e46042e1e"},
         {"file": "802-paraguay-monday-falls-forest-extraction.png", "sha256": "e87b76fb36468751c3b8442301ea8cc67db1e4886596fc74335d82aa49938711"},
         {"file": "799-kyrgyzstan-balykchy-issyk-kul-rail-night-relay.png", "sha256": "b5a67a42f241113721b7fd3c278a6ba5b75201ee89099906a98ea76e763c7b0c"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T12:07:18.721Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083887362874978426",
+      "caption": "Nicaragua ❤️ Paraguay",
+      "imageNumbers": [804, 805, 803],
+      "countries": ["Nicaragua", "Paraguay"],
+      "assets": [
+        {"file": "804-nicaragua-managua-lakefront-intercept.png", "sha256": "dd508aee45cf41328c67c170586209110deefbe4c7bda0248e6334a6a8bda8b4"},
+        {"file": "805-nicaragua-granada-colonial-arcade-cipher.png", "sha256": "ec00e877d7377350acb47f019ac6ac1875e20a9741987a8412a3d1b0b59e08a4"},
+        {"file": "803-paraguay-encarnacion-costanera-night-relay.png", "sha256": "872ae16cb35f9f6662f556fb2fc8a4a228b77a19cdb8581e3e4b99d4599135d6"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
