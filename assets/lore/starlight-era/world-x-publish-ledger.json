@@ -79,18 +79,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T09:23:28.5005829Z",
-    "status": "awaiting_post",
-    "caption": "Bolivia ❤️ Tunisia",
-    "imageNumbers": [689, 690, 692],
-    "countries": ["Bolivia", "Tunisia"],
-    "assets": [
-      {"file": "689-bolivia-potosi-colonial-mint-courtyard-cipher.png", "sha256": "61647ce69337e6f90d5a1ba8f0952e576c4fb588608e5a0bd68fbcea108789c1"},
-      {"file": "690-bolivia-salar-de-uyuni-salt-mirror-extraction.png", "sha256": "e67412870e6dbc4e1f30d5d73e70407aafd42505fc8aff4ece167fdcb561066c"},
-      {"file": "692-tunisia-tunis-habib-bourguiba-avenue-intercept.png", "sha256": "475ad23d9ea12a9796f28a6ba6bfc4208853c3f9fb58d2b10ba91614890984ca"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2625,6 +2614,19 @@
         {"file": "686-burundi-kibira-national-park-canopy-extraction.png", "sha256": "1902b1c0d2aa3b71be81c521795cf89c84c6acf9de8357c1cfdfac5bd4875d58"},
         {"file": "687-burundi-bujumbura-port-lake-tanganyika-night-relay.png", "sha256": "e985a3e2aac268457acc17cd411801435c67ad1f7d87b8428eff693e073ed076"},
         {"file": "688-bolivia-la-paz-illimani-skyline-intercept.png", "sha256": "b1e6ef7c4db3ab8d98ab26a68c1700e3f6ab27c3672bc47e63da69abb72b45a6"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T09:25:36.6172859Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083846485032964187",
+      "caption": "Bolivia ❤️ Tunisia",
+      "imageNumbers": [689, 690, 692],
+      "countries": ["Bolivia", "Tunisia"],
+      "assets": [
+        {"file": "689-bolivia-potosi-colonial-mint-courtyard-cipher.png", "sha256": "61647ce69337e6f90d5a1ba8f0952e576c4fb588608e5a0bd68fbcea108789c1"},
+        {"file": "690-bolivia-salar-de-uyuni-salt-mirror-extraction.png", "sha256": "e67412870e6dbc4e1f30d5d73e70407aafd42505fc8aff4ece167fdcb561066c"},
+        {"file": "692-tunisia-tunis-habib-bourguiba-avenue-intercept.png", "sha256": "475ad23d9ea12a9796f28a6ba6bfc4208853c3f9fb58d2b10ba91614890984ca"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
