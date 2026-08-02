@@ -1064,6 +1064,13 @@ rejected and regenerated.
 | **Lomé Seafront Gulf-Light Intercept**<br><img src="780-togo-lome-seafront-gulf-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking green-gold-red light keys into a white-and-gold Gulf prism above Lomé's Boulevard du Mono seafront"> | **Palais de Lomé Garden Gold Cipher**<br><img src="781-togo-palais-de-lome-garden-cipher.png" width="420" alt="The trio sealing a fictional archive inside a white crystal capsule in the cultural gardens of the Palais de Lomé"> |
 | **Fazao-Malfakassa Mountain Data Extraction**<br><img src="782-togo-fazao-malfakassa-mountain-extraction.png" width="420" alt="The trio restoring an Atlantic-blue habitat beacon above Fazao-Malfakassa's forested Atakora ridges"> | **Lomé Port Golden Night Relay**<br><img src="783-togo-lome-port-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a green-gold-red Gulf relay above the Port of Lomé at blue hour"> |
 
+## World Series - Asia - Batch 191: Laos
+
+| | |
+|---|---|
+| **Vientiane Mekong Riverfront Intercept**<br><img src="784-laos-vientiane-mekong-riverfront-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking indigo-red-white light keys into a silver Mekong prism above Vientiane's secular riverfront skyline"> | **Luang Prabang Old-Town Silk Cipher**<br><img src="785-laos-luang-prabang-old-town-cipher.png" width="420" alt="The trio sealing a fictional archive inside a plumeria-gold crystal capsule among Luang Prabang's secular French-Lao shophouses"> |
+| **Kuang Si Waterfall Data Extraction**<br><img src="786-laos-kuang-si-waterfall-extraction.png" width="420" alt="The trio restoring a Mekong-blue habitat beacon above Kuang Si Falls' tiered turquoise pools"> | **Vang Vieng Karst Rail Night Relay**<br><img src="787-laos-vang-vieng-railway-viaduct-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing an indigo-red-silver rail relay before Vang Vieng's karst viaduct at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
