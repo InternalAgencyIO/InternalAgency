@@ -65,17 +65,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T02:26:20.9078503Z",
-    "status": "awaiting_post",
-    "imageNumbers": [660, 661, 659],
-    "countries": ["Netherlands", "Ecuador"],
-    "assets": [
-      {"file": "660-netherlands-rotterdam-erasmus-bridge-intercept.png", "sha256": "35d845c4b9d63dd1904bb6c23c327e8788cb573ff69efe782061f1292d78dee8"},
-      {"file": "661-netherlands-kinderdijk-windmill-cipher.png", "sha256": "85c5f705107d7346353ceb2a3fdedd99ff419e8b3d2ae3965cf93688611c43d4"},
-      {"file": "659-ecuador-guayaquil-rio-guayas-night-relay.png", "sha256": "2416e447dd4c4b2605b77cc3beefca1967d3f0cc3443341892f3c4f9da797149"}
-    ]
-  },
+  "pendingPost": null,
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
@@ -2473,6 +2463,17 @@
         {"file": "657-ecuador-guayaquil-las-penas-arcade-cipher.png", "sha256": "759e9e1bffc8b48d844e6fab17f0065d6649043c594dc09a02cd1c22463c4ed0"},
         {"file": "658-ecuador-cotopaxi-volcanic-light-extraction.png", "sha256": "5f7f7b2adbfa25cfa5976ba4c2fbed67ec5afeacbb7feda458b037ccb22ad560"},
         {"file": "655-guatemala-flores-lake-peten-night-relay.png", "sha256": "58f9fa8f79ca59bcdaf470466d543275491c75edfb5025ecea183658d05e9546"}
+      ]
+    },
+    {
+      "postedAt": "2026-08-02T06:41:07.6143081Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083805163530174502",
+      "imageNumbers": [660, 661, 659],
+      "countries": ["Netherlands", "Ecuador"],
+      "assets": [
+        {"file": "660-netherlands-rotterdam-erasmus-bridge-intercept.png", "sha256": "35d845c4b9d63dd1904bb6c23c327e8788cb573ff69efe782061f1292d78dee8"},
+        {"file": "661-netherlands-kinderdijk-windmill-cipher.png", "sha256": "85c5f705107d7346353ceb2a3fdedd99ff419e8b3d2ae3965cf93688611c43d4"},
+        {"file": "659-ecuador-guayaquil-rio-guayas-night-relay.png", "sha256": "2416e447dd4c4b2605b77cc3beefca1967d3f0cc3443341892f3c4f9da797149"}
       ]
     }
   ]
