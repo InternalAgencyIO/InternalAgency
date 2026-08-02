@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from "node:crypto";
+import { spawnSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -16,6 +17,7 @@ export function assessCeremonyEntry(
   nowMs = Date.now(),
   audit = undefined,
   remediationAudit = undefined,
+  auditValidation = { prelaunch: false, remediation: false },
 ) {
   const observedAtMs = Date.parse(gate.observedAtUtc ?? "");
   const fundingObservationFresh = Number.isFinite(observedAtMs)
@@ -57,7 +59,9 @@ export function assessCeremonyEntry(
   const required = [
     ["MAINNET_HOLD_BOUNDARY", gate.status === "HOLD" && gate.network === "mainnet-beta" && safetyValues.length > 0 && safetyValues.every((value) => value === false)],
     ["LOCAL_TIME_GATE_CLASSIFICATION", gate.timeGateEvidence?.status === "VERIFIED_LOCAL_HOST_ONLY" && gate.timeGateEvidence?.signedDevnetEvidence === false && gate.timeGateEvidence?.validatorTransaction === false],
+    ["PRELAUNCH_AUDIT_CANONICAL_VALIDATION", auditValidation.prelaunch === true],
     ["PRELAUNCH_SECURITY_AUDIT_CLEARANCE", securityAuditClear],
+    ["REMEDIATION_AUDIT_CANONICAL_VALIDATION", auditValidation.remediation === true],
     ["REMEDIATION_SECURITY_AUDIT_CLEARANCE", remediationAuditClear],
     ["FRESH_READ_ONLY_FUNDING_OBSERVATION", fundingObservationFresh],
     ["MAINNET_FUNDING_FLOOR", gate.funding?.ceremonyFloorSatisfied === true && fundingFloorSatisfied],
@@ -81,6 +85,7 @@ export function assessCeremonyEntry(
       "This assessment is local and read-only.",
       "READY_FOR_ATTENDED_PREFLIGHT is not transaction, signing, broadcast, deployment, mint, transfer, or publication authority.",
       "The funding observation must be no more than 30 minutes old with no more than one minute of future skew.",
+      "Audit summary fields are never trusted alone; both public audit packages must pass their canonical source-binding and artifact-digest validators in this same assessment.",
       "The sole named owner-accepted Trezor concentration risk may remain; every unaccepted critical/high finding and missing current-source assurance is a mandatory blocker.",
       "Physical review of each transaction and separate broadcast approval remain mandatory after entry.",
     ],
@@ -93,17 +98,32 @@ export async function assessCanonicalCeremonyEntry() {
     readFile(canonicalAuditPath),
     readFile(canonicalRemediationAuditPath),
   ]);
+  const validate = (script) => spawnSync(
+    process.execPath,
+    [path.join(siteRoot, "scripts", script)],
+    { cwd: siteRoot, encoding: "utf8", windowsHide: true },
+  );
+  const prelaunchValidation = validate("validate-iat-v2-prelaunch-audit.mjs");
+  const remediationValidation = validate("validate-iat-v2-remediation-audit.mjs");
   const assessment = assessCeremonyEntry(
     JSON.parse(bytes.toString("utf8")),
     createHash("sha256").update(bytes).digest("hex"),
     Date.now(),
     JSON.parse(auditBytes.toString("utf8")),
     JSON.parse(remediationAuditBytes.toString("utf8")),
+    {
+      prelaunch: prelaunchValidation.status === 0,
+      remediation: remediationValidation.status === 0,
+    },
   );
   assessment.auditSourceSha256 = createHash("sha256").update(auditBytes).digest("hex");
   assessment.remediationAuditSourceSha256 = createHash("sha256")
     .update(remediationAuditBytes)
     .digest("hex");
+  assessment.auditValidatorExitCodes = {
+    prelaunch: prelaunchValidation.status,
+    remediation: remediationValidation.status,
+  };
   return assessment;
 }
 

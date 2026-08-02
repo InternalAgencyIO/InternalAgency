@@ -10,7 +10,15 @@ const gate = JSON.parse(readFileSync(resolve("launch/iat-v2-mainnet-readiness-ga
 const audit = JSON.parse(readFileSync(resolve("public/audits/iat-v2-prelaunch-20260802/manifest.json"), "utf8"));
 const remediationAudit = JSON.parse(readFileSync(resolve("public/audits/iat-v2-remediation-20260802/manifest.json"), "utf8"));
 const currentNowMs = Date.parse("2026-08-01T08:18:04Z");
-const current = assessCeremonyEntry(gate, "0".repeat(64), currentNowMs, audit, remediationAudit);
+const canonicalValidation = { prelaunch: true, remediation: true };
+const current = assessCeremonyEntry(
+  gate,
+  "0".repeat(64),
+  currentNowMs,
+  audit,
+  remediationAudit,
+  canonicalValidation,
+);
 assert.equal(current.state, "HOLD");
 assert.equal(current.mainnetStatus, "HOLD");
 assert.deepEqual(current.blockers, [
@@ -72,13 +80,16 @@ const ready = assessCeremonyEntry(
   Date.parse("2099-01-01T00:15:00Z"),
   readyAudit,
   readyRemediationAudit,
+  canonicalValidation,
 );
 assert.equal(ready.state, "READY_FOR_ATTENDED_PREFLIGHT");
 assert.equal(ready.mainnetStatus, "HOLD_PENDING_ATTENDED_PREFLIGHT");
 assert.deepEqual(ready.blockers, []);
 assert.equal(ready.checks.MAINNET_HOLD_BOUNDARY, true);
 assert.equal(ready.checks.LOCAL_TIME_GATE_CLASSIFICATION, true);
+assert.equal(ready.checks.PRELAUNCH_AUDIT_CANONICAL_VALIDATION, true);
 assert.equal(ready.checks.PRELAUNCH_SECURITY_AUDIT_CLEARANCE, true);
+assert.equal(ready.checks.REMEDIATION_AUDIT_CANONICAL_VALIDATION, true);
 assert.equal(ready.checks.REMEDIATION_SECURITY_AUDIT_CLEARANCE, true);
 assert.equal(ready.checks.FRESH_READ_ONLY_FUNDING_OBSERVATION, true);
 assert.equal(ready.checks.MAINNET_FUNDING_FLOOR, true);
@@ -101,9 +112,30 @@ for (const mutate of [
     Date.parse("2099-01-01T00:15:00Z"),
     readyAudit,
     candidate,
+    canonicalValidation,
   );
   assert.equal(rejected.state, "HOLD");
   assert.ok(rejected.blockers.includes("REMEDIATION_SECURITY_AUDIT_CLEARANCE"));
 }
 
-console.log("IAT V2 ceremony-entry regression passed: current ledger fails closed; synthetic ready state permits exactly one named owner-accepted Trezor risk while unaccepted criticals, missing current SBF, and missing identity integration remain blockers.");
+for (const auditValidation of [
+  { prelaunch: false, remediation: true },
+  { prelaunch: true, remediation: false },
+]) {
+  const rejected = assessCeremonyEntry(
+    readyGate,
+    "f".repeat(64),
+    Date.parse("2099-01-01T00:15:00Z"),
+    readyAudit,
+    readyRemediationAudit,
+    auditValidation,
+  );
+  assert.equal(rejected.state, "HOLD");
+  assert.ok(rejected.blockers.includes(
+    auditValidation.prelaunch
+      ? "REMEDIATION_AUDIT_CANONICAL_VALIDATION"
+      : "PRELAUNCH_AUDIT_CANONICAL_VALIDATION",
+  ));
+}
+
+console.log("IAT V2 ceremony-entry regression passed: current ledger fails closed; audit summaries require canonical source/digest validation; synthetic ready state permits exactly one named owner-accepted Trezor risk while unaccepted criticals, missing current SBF, and missing identity integration remain blockers.");
