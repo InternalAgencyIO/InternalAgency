@@ -114,18 +114,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T10:14:05.863Z",
-    "status": "awaiting_post",
-    "caption": "Cuba 🧡 Czechia",
-    "imageNumbers": [722, 723, 724],
-    "countries": ["Cuba", "Czechia"],
-    "assets": [
-      {"file": "722-cuba-vinales-mogote-data-extraction.png", "sha256": "3ea429a81bb24cc71847aad9c3e310442cace66ea7fb5349316d7709f8c8d7ab"},
-      {"file": "723-cuba-varadero-moonline-relay.png", "sha256": "9ee02a189b1c2ae9a2d269d83f47b74dda40f6b35e798e47341d5842967d98f8"},
-      {"file": "724-czechia-prague-dancing-house-river-intercept.png", "sha256": "996cb24108f8c49f554d1651855837ed9fcf21cb9caa48e13a99d9325c2d2065"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2803,6 +2792,19 @@
         {"file": "720-cuba-havana-malecon-wave-intercept.png", "sha256": "163b9e423f51b09ddfc51fa40dcde4d7a503566ac48358a3d579285b82060813"},
         {"file": "721-cuba-cienfuegos-palacio-valle-cipher.png", "sha256": "6db1f1ec7deb27f2729056dc510ef846ceda0f042f5268d1e28516bffe04bca0"},
         {"file": "719-united-arab-emirates-dubai-marina-night-relay.png", "sha256": "2c5ccd6b7a8de37ce68990f12490316724ddf04613b2740f9815c1c5aa3698ee"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T10:15:48.254Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083859301022543956",
+      "caption": "Cuba 🧡 Czechia",
+      "imageNumbers": [722, 723, 724],
+      "countries": ["Cuba", "Czechia"],
+      "assets": [
+        {"file": "722-cuba-vinales-mogote-data-extraction.png", "sha256": "3ea429a81bb24cc71847aad9c3e310442cace66ea7fb5349316d7709f8c8d7ab"},
+        {"file": "723-cuba-varadero-moonline-relay.png", "sha256": "9ee02a189b1c2ae9a2d269d83f47b74dda40f6b35e798e47341d5842967d98f8"},
+        {"file": "724-czechia-prague-dancing-house-river-intercept.png", "sha256": "996cb24108f8c49f554d1651855837ed9fcf21cb9caa48e13a99d9325c2d2065"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
