@@ -54,11 +54,18 @@ record are necessary for fair ordering.
 
 ## Randomness hostage game
 
-The first payer to create a weekly round owns the only round PDA path, while
-Associate settlement requires that round to reach settled status. Withholding
-reveal is cheap compared with the aggregate positions it can freeze. This is a
-denial-of-service game, not a randomness-bias game; uniform sampling after a
-successful reveal does not solve it.
+The first payer to create a weekly round owns the Switchboard reveal authority.
+The revised program prevents permanent lock: at exactly 86,400 seconds the
+round becomes terminal `EXPIRED_NEUTRAL`, and each linked position receives
+`floor(full_reward * (N-1) / N)` without a winner or replacement roll.
+
+That preserves ex-ante expected value and restores closeability, but the reveal
+controller still learns the oracle result before deciding whether to reveal.
+An agency-aligned controller can reveal when another agency is selected and
+withhold when its own agency is selected, choosing between the realized payout
+vector and neutral expiry. The remaining problem is selective optionality, not
+permanent denial of service. A reviewed authority/collateral design and
+independent game-theory audit are still required.
 
 ## Budget competition
 

@@ -32,9 +32,9 @@ check(index.schema === "iat-public-evidence-index/v1", "unexpected index schema"
 check(index.license === "CC0-1.0", "public evidence must declare CC0-1.0");
 check(index.network === "devnet", "public evidence index must remain devnet-only");
 check(index.mainnetStatus === "HOLD", "public evidence must not clear mainnet HOLD");
-check(index.independentReviewRequired === false, "independent feature review must be recorded complete");
+check(index.independentReviewRequired === true, "current remediation source must require independent review");
 check(index.secretMaterialIncluded === false, "secret-material declaration must remain false");
-check(Array.isArray(index.records) && index.records.length === 14, "expected fourteen indexed records");
+check(Array.isArray(index.records) && index.records.length === 15, "expected fifteen indexed records");
 check(
   JSON.stringify(index.canonicalAtPublication) === JSON.stringify([
     "v2-initialization-20260730T074603Z.json",
@@ -44,6 +44,22 @@ check(
     "v2-local-time-gate-proof-20260801T072730Z.json",
   ]),
   "canonical evidence set is not pinned to the latest reviewed records",
+);
+check(
+  index.canonicalAtPublicationStatus
+    === "HISTORICAL_PRIOR_ARTIFACT_SUPERSEDED_BY_REMEDIATION_SOURCE",
+  "prior canonical evidence set must be classified as historical",
+);
+check(
+  index.currentRemediationState?.sourceCommit
+    === "1df716ccd93c47ee1732af6ae1f43b8e6958afe6"
+    && index.currentRemediationState?.localHostProof
+      === "v2-local-time-gate-proof-remediation-20260802T103546Z.json"
+    && index.currentRemediationState?.localHostProofStatus === "VERIFIED_LOCAL_HOST_ONLY"
+    && index.currentRemediationState?.freshSignedDevnetEvidence === "REQUIRED_NOT_COMPLETE"
+    && index.currentRemediationState?.independentReview === "REQUIRED_NOT_COMPLETE"
+    && index.currentRemediationState?.mainnetStatus === "HOLD",
+  "current remediation evidence boundary drift",
 );
 
 const indexedNames = new Set();
@@ -80,6 +96,12 @@ const signoff = JSON.parse(
 );
 const timeGateProof = JSON.parse(
   await readFile(path.join(root, "v2-local-time-gate-proof-20260801T072730Z.json"), "utf8"),
+);
+const remediationTimeGateProof = JSON.parse(
+  await readFile(
+    path.join(root, "v2-local-time-gate-proof-remediation-20260802T103546Z.json"),
+    "utf8",
+  ),
 );
 
 check(init.network === "devnet" && init.mainnetStatus === "HOLD", "V2 initialization boundary drift");
@@ -227,6 +249,56 @@ check(
     && timeGateProof.observations?.positionCase?.maturityWeek === 59,
   "local time-gate proof vector set drift",
 );
+check(
+  remediationTimeGateProof.schema === "iat-v2-local-time-gate-proof/v1"
+    && remediationTimeGateProof.status === "VERIFIED_LOCAL_HOST_ONLY"
+    && remediationTimeGateProof.network === "local-host"
+    && remediationTimeGateProof.mainnetStatus === "HOLD"
+    && remediationTimeGateProof.publicEvidencePath
+      === "public/evidence/iat-v2/v2-local-time-gate-proof-remediation-20260802T103546Z.json",
+  "current remediation local proof boundary drift",
+);
+check(
+  remediationTimeGateProof.reviewedProgramArtifact?.sha256
+    === "d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22"
+    && remediationTimeGateProof.reviewedProgramArtifact?.bytes === 606320
+    && remediationTimeGateProof.reviewedProgramArtifact?.bindingSource
+      === "public/audits/iat-v2-remediation-20260802/scope.json",
+  "current remediation proof program binding drift",
+);
+check(
+  remediationTimeGateProof.method?.localValidatorTransactionUsed === false
+    && remediationTimeGateProof.method?.signingPerformed === false
+    && remediationTimeGateProof.method?.simulationForSigningPerformed === false
+    && remediationTimeGateProof.method?.broadcastingPerformed === false
+    && remediationTimeGateProof.method?.walletAccessed === false
+    && remediationTimeGateProof.method?.keyCreated === false,
+  "current remediation proof safety boundary drift",
+);
+check(
+  remediationTimeGateProof.observations?.clockCases?.length === 6
+    && remediationTimeGateProof.observations?.cccCases?.length === 4
+    && remediationTimeGateProof.observations?.recoveryCases?.length === 2
+    && remediationTimeGateProof.observations?.neutralRewardCases?.length === 3
+    && remediationTimeGateProof.observations?.laneCases?.length === 24
+    && remediationTimeGateProof.observations?.positionCase?.maturityWeek === 59,
+  "current remediation proof vector set drift",
+);
+check(
+  remediationTimeGateProof.commands?.length === 2
+    && remediationTimeGateProof.commands?.every(({ result }) => result === "PASS")
+    && remediationTimeGateProof.commands?.reduce((sum, { tests }) => sum + tests, 0) === 22,
+  "current remediation proof test result drift",
+);
+check(
+  remediationTimeGateProof.limitations?.some((item) =>
+    item.includes("does not replace a fresh finalized Devnet transaction receipt"),
+  )
+    && remediationTimeGateProof.limitations?.some((item) =>
+      item.includes("prior binary"),
+    ),
+  "current remediation proof must retain honest Devnet limitations",
+);
 
 const files = await readdir(root);
 for (const required of ["README.md", "CC0-1.0.md", "index.json"]) {
@@ -240,6 +312,6 @@ if (failures.length) {
 }
 
 console.log(
-  "Public evidence validation passed: fourteen indexed records, 29 finalized signatures, verified feature review, verified local time gates, CC0, no secret-bearing fields, mainnet HOLD.",
+  "Public evidence validation passed: fifteen indexed records, 29 historical finalized signatures, current local remediation proof, fresh signed Devnet and independent review required, CC0, no secret-bearing fields, mainnet HOLD.",
 );
 

@@ -1,0 +1,33 @@
+{
+  "schema": "iat-v2-remediation-scope/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "repository": "InternalAgencyIO/InternalAgency",
+  "publicSourcePullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/4",
+  "sourceBranch": "agent/iat-launch-window",
+  "sourceCommit": "1df716ccd93c47ee1732af6ae1f43b8e6958afe6",
+  "sourceTree": "37afa3b3da2f48f0066f368aedcce51d5f73b033",
+  "programTree": "f5e5a1a2d39317fe663f8c88c637e8ffed2df55a",
+  "criticalSourceCanonicalUtf8LfSha256": {
+    "projects/star-ascent/site/programs/iat_v2/src/lib.rs": "3485d114aebcf5c21d649d963c5c4db08280cccefa98ac2ae31510c4e4d04a09",
+    "projects/star-ascent/site/programs/iat_v2/src/policy.rs": "3d532e0ae01d020c4fdb9259739df1aed6738776277f4f8984966fa9feccca24",
+    "projects/star-ascent/site/programs/iat_v2/feature-instructions.mjs": "4ec9ffde3367d0c29bde5dd97c0ef6c78b4a9f104a90e895fcd9d4d4ab069116",
+    "projects/star-ascent/site/engagement/iat-v2-reference-engine.mjs": "7e1ad54c00a72e763d759e6d0fda5c935583b02d9954f451d109e273c493f661",
+    "projects/star-ascent/site/docs/IAT_V2_PROGRAM_ARCHITECTURE.md": "3fb45d6fa0da2d36c49464f9d6fb90efe1ee0d76e24d3d038f73f63f003ce12b"
+  },
+  "verifiableSbf": {
+    "toolchain": {"anchor":"1.0.2","solana":"3.1.10","rust":"1.97.1"},
+    "sha256": "d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22",
+    "bytes": 606320,
+    "deploymentAuthorized": false
+  },
+  "historicalDevnetEvidence": {
+    "remainsHistoricalEvidence": true,
+    "coversThisSourceCommit": false,
+    "freshSignedRehearsalRequired": true
+  },
+  "exclusions": [
+    "No wallet, key, signing, broadcast, deployment, funding, DNS, or chain mutation",
+    "No local-validator instruction-level execution in this increment",
+    "No independent audit or formal economic proof"
+  ]
+}

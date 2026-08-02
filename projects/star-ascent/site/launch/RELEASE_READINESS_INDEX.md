@@ -11,9 +11,12 @@ machine-readable gate is
 
 1. Review the public, source-bound
    [`IAT V2 pre-launch security audit`](../public/audits/iat-v2-prelaunch-20260802/README.md)
-   and keep ceremony entry blocked until its machine-readable manifest records
-   zero open critical/high findings, resolved security blockers, and a completed
-   independent final-code audit.
+   and the newer
+   [`CCC randomness remediation review`](../public/audits/iat-v2-remediation-20260802/README.md).
+   Keep ceremony entry blocked until both machine-readable manifests record
+   zero open critical/high findings, resolved security blockers, completed
+   independent final-code review, and fresh signed Devnet evidence for the
+   remediation source.
 2. Review the separate future-feature audits for
    [`Propose a Hero`](../public/audits/iat-hero-dlc-20260802/README.md) and
    [`CCC Associates`](../public/audits/iat-associates-dlc-20260802/README.md).

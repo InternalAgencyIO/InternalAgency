@@ -11,7 +11,10 @@ integer funding shortfall, `UNSCHEDULED_HOLD`, regeneration order, local
 time-gate limitations, and false values for every signing/broadcast side
 effect.
 
-## Completed Devnet sequence
+## Completed historical Devnet sequence
+
+The records below remain valid for their exact prior binary. They do not cover
+the current CCC remediation source and cannot clear its fresh Devnet gate.
 
 - Program: `62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj`
 - ProgramData: `6DaESYUqB7th7kkfYAhsqiYfzmdnCFeFeoxDi5WkejTP`
@@ -38,10 +41,10 @@ effect.
   maturity, cliff, and linear-unlock gates are outside the signed snapshot.
   That immutable export status is retained for audit history even though the
   independent review and separate local time-gate proof are now complete.
-- Local time-gate evidence:
-  `public/evidence/iat-v2/v2-local-time-gate-proof-20260801T072730Z.json`.
-- Local result: **VERIFIED LOCAL HOST ONLY** with 34 exact vectors, four Rust
-  host tests, and 14 JavaScript tests. It found and corrected a one-week
+- Current remediation local time-gate evidence:
+  `public/evidence/iat-v2/v2-local-time-gate-proof-remediation-20260802T103546Z.json`.
+- Local result: **VERIFIED LOCAL HOST ONLY** with 39 exact vectors, six Rust
+  host tests, and 16 JavaScript tests. The earlier proof found and corrected a one-week
   reference-engine maturity drift; the locked on-chain program source did not
   change.
 
@@ -78,13 +81,16 @@ entry. See `launch/IAT_V2_CEREMONY_ENTRY_GATE.md`.
 
 ## Mainnet blockers that must stay visible
 
-- The public source-bound pre-launch audit remains `HOLD`: two critical and
-  seven high findings are open. The critical blockers are the permissionless
-  CCC first-commit/reveal liveness failure and the correlated program-admin,
-  community-custody, and upgrade-authority control plane.
+- The historical source-bound pre-launch audit remains `HOLD` with its recorded
+  two critical and seven high findings. The newer remediation audit also remains
+  `HOLD`: permanent CCC deadlock has a candidate fix, while selective reveal
+  optionality, correlated authority, fresh Devnet evidence, and independent
+  review remain open.
 - Ceremony entry now fails closed on
-  `PRELAUNCH_SECURITY_AUDIT_CLEARANCE`. It cannot clear until all critical/high
-  findings are remediated and revalidated and an independent final-code audit
+  `PRELAUNCH_SECURITY_AUDIT_CLEARANCE` and
+  `REMEDIATION_SECURITY_AUDIT_CLEARANCE`. Neither can clear until all
+  critical/high findings are remediated and revalidated, fresh signed Devnet
+  evidence covers the remediation source, and an independent final-code audit
   is complete.
 - Finalized mainnet balance at `2026-08-01T11:04:01Z`, RPC context slot
   `436549381`: `2.53365957 SOL`.

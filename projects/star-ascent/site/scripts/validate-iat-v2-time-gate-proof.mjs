@@ -5,9 +5,12 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  cccRoundRecoveryAvailable,
   cccRoundAtTimestamp,
   cumulativeCorePrincipalUnlocked,
   cumulativeUnlocked,
+  expireCccRound,
+  neutralExpiredRoundReward,
   policyWeekAtTimestamp,
 } from "../engagement/iat-v2-reference-engine.mjs";
 
@@ -38,8 +41,9 @@ for (const field of ["localValidatorTransactionUsed", "signingPerformed", "simul
   check(proof.method?.[field] === false, `unsafe method flag changed: ${field}`);
 }
 check(
-  proof.reviewedProgramArtifact?.sha256 === "634d95055b891e6b624a3f6996d10b66e2a7f4bbb1ab50711d6195f72c7772a7"
-    && proof.reviewedProgramArtifact?.bytes === 597336
+  proof.reviewedProgramArtifact?.sha256 === "d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22"
+    && proof.reviewedProgramArtifact?.bytes === 606320
+    && proof.reviewedProgramArtifact?.bindingSource === "public/audits/iat-v2-remediation-20260802/scope.json"
     && proof.reviewedProgramArtifact?.artifactEmbedded === false,
   "reviewed program artifact binding drift",
 );
@@ -92,6 +96,37 @@ for (const item of proof.observations?.cccCases ?? []) {
 }
 check(proof.observations?.cccCases?.length === 4, "expected four CCC cases");
 
+const expectedRecovery = {
+  RECOVERY_MINUS_ONE_SECOND: ["REJECTED", "ROUND_REVEAL_TIMEOUT_NOT_REACHED", false],
+  RECOVERY_EXACT: ["ACCEPTED", "EXPIRED_NEUTRAL", true],
+};
+for (const item of proof.observations?.recoveryCases ?? []) {
+  const expected = expectedRecovery[item.id];
+  check(Boolean(expected), `unknown recovery case: ${item.id}`);
+  const pending = {
+    week: 0,
+    status: "PENDING",
+    commitTimestamp: proof.observations.genesisTimestamp + 86_400,
+    agencyCountSnapshot: 100,
+    candidateSnapshotHash: "LOCAL_IMMUTABLE_SNAPSHOT",
+  };
+  const observed = observe(() => expireCccRound({ existingRound: pending, nowTimestamp: item.timestamp }).status);
+  check(item.expectedOutcome === expected?.[0] && item.expectedValue === expected?.[1], `recovery expectation drift: ${item.id}`);
+  check(item.recoveryAvailable === expected?.[2], `recovery availability drift: ${item.id}`);
+  check(
+    item.recoveryAvailable === cccRoundRecoveryAvailable(pending.commitTimestamp, item.timestamp),
+    `recovery predicate drift: ${item.id}`,
+  );
+  check(JSON.stringify(item.observed) === JSON.stringify(observed), `recovery observation drift: ${item.id}`);
+}
+check(proof.observations?.recoveryCases?.length === 2, "expected two recovery boundary cases");
+
+for (const item of proof.observations?.neutralRewardCases ?? []) {
+  const observed = String(neutralExpiredRoundReward(BigInt(item.fullReward), item.candidateCount));
+  check(item.observed === item.expected && observed === item.expected, `neutral reward drift: N=${item.candidateCount}`);
+}
+check(proof.observations?.neutralRewardCases?.length === 3, "expected three neutral reward cases");
+
 for (const item of proof.observations?.laneCases ?? []) {
   const observed = String(item.lane === "coreTeam" ? cumulativeCorePrincipalUnlocked(item.week) : cumulativeUnlocked(item.lane, item.week));
   check(observed === item.expected && item.observed === item.expected, `lane observation drift: ${item.lane} week ${item.week}`);
@@ -124,4 +159,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("IAT V2 local time-gate proof validation passed: 4 Rust host tests, 14 JS tests, 34 exact clock/cliff/maturity vectors, no signing or broadcast, mainnet HOLD.");
+console.log("IAT V2 local time-gate proof validation passed: 6 Rust host tests, 16 JS tests, 39 exact clock/cliff/maturity/recovery vectors, no signing or broadcast, mainnet HOLD.");

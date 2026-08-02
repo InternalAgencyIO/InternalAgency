@@ -1,10 +1,11 @@
 {
   "schema": "iat-public-evidence-index/v1",
   "publishedAtUtc": "2026-08-01T07:27:30.181Z",
+  "lastUpdatedAtUtc": "2026-08-02T10:35:46.000Z",
   "license": "CC0-1.0",
   "network": "devnet",
   "mainnetStatus": "HOLD",
-  "independentReviewRequired": false,
+  "independentReviewRequired": true,
   "secretMaterialIncluded": false,
   "repository": "https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/projects/star-ascent/site/public/evidence/iat-v2",
   "canonicalAtPublication": [
@@ -14,6 +15,16 @@
     "v2-feature-independent-signoff-20260801T055736Z.json",
     "v2-local-time-gate-proof-20260801T072730Z.json"
   ],
+  "canonicalAtPublicationStatus": "HISTORICAL_PRIOR_ARTIFACT_SUPERSEDED_BY_REMEDIATION_SOURCE",
+  "currentRemediationState": {
+    "sourceCommit": "1df716ccd93c47ee1732af6ae1f43b8e6958afe6",
+    "auditManifest": "../../audits/iat-v2-remediation-20260802/manifest.json",
+    "localHostProof": "v2-local-time-gate-proof-remediation-20260802T103546Z.json",
+    "localHostProofStatus": "VERIFIED_LOCAL_HOST_ONLY",
+    "freshSignedDevnetEvidence": "REQUIRED_NOT_COMPLETE",
+    "independentReview": "REQUIRED_NOT_COMPLETE",
+    "mainnetStatus": "HOLD"
+  },
   "records": [
     {
       "file": "legacy-v1-devnet-ceremony-20260729.json",
@@ -100,7 +111,7 @@
       "bytes": 14726,
       "sha256": "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
       "scope": "Latest V2 on-chain feature rehearsal snapshot with round-8 and linked-position settlements",
-      "status": "PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW",
+      "status": "HISTORICAL_PRIOR_ARTIFACT_PARTIAL_SUPERSEDED_BY_REMEDIATION_SOURCE",
       "transactions": 18
     },
     {
@@ -116,7 +127,7 @@
       "bytes": 2292,
       "sha256": "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
       "scope": "Operator-relayed FDF Guard review of the corrected program and 18-transaction feature rehearsal",
-      "status": "VERIFIED_MAINNET_HOLD",
+      "status": "VERIFIED_FOR_PRIOR_ARTIFACT_SUPERSEDED_BY_REMEDIATION_SOURCE_MAINNET_HOLD",
       "transactions": 0
     },
     {
@@ -124,7 +135,15 @@
       "bytes": 10393,
       "sha256": "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
       "scope": "Deterministic local host-program proof of maturity, cliff, linear-unlock, and exact clock boundaries",
-      "status": "VERIFIED_LOCAL_HOST_ONLY_MAINNET_HOLD",
+      "status": "VERIFIED_LOCAL_HOST_ONLY_FOR_PRIOR_ARTIFACT_SUPERSEDED_MAINNET_HOLD",
+      "transactions": 0
+    },
+    {
+      "file": "v2-local-time-gate-proof-remediation-20260802T103546Z.json",
+      "bytes": 11633,
+      "sha256": "f233505c784d7cb44c5a3dce7b47d0691f3dbe32f7d26e214a01e86c7d189dfb",
+      "scope": "Deterministic local host-program proof of exact time gates and terminal CCC reveal recovery for remediation source 1df716c",
+      "status": "CURRENT_VERIFIED_LOCAL_HOST_ONLY_FRESH_SIGNED_DEVNET_AND_INDEPENDENT_REVIEW_REQUIRED_MAINNET_HOLD",
       "transactions": 0
     }
   ]

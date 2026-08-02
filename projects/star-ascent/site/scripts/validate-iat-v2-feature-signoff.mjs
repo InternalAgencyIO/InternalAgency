@@ -10,6 +10,7 @@ const featurePath = "public/evidence/iat-v2/v2-features-20260801T053340Z.json";
 const receiptPath = "public/evidence/iat-v2/chain-status-20260801T053947Z.json";
 const initPath = "public/evidence/iat-v2/v2-initialization-20260730T074603Z.json";
 const legacyPath = "public/evidence/iat-v2/legacy-v1-devnet-ceremony-20260729.json";
+const remediationScopePath = "public/audits/iat-v2-remediation-20260802/scope.json";
 const requestedPath = process.argv[2] ?? canonicalPath;
 const failures = [];
 const fail = (message) => failures.push(message);
@@ -67,14 +68,25 @@ let feature;
 let receipt;
 let init;
 let legacy;
+let remediationScope;
 try {
   signoff = readJson(canonicalPath);
   feature = readJson(featurePath);
   receipt = readJson(receiptPath);
   init = readJson(initPath);
   legacy = readJson(legacyPath);
+  remediationScope = readJson(remediationScopePath);
 } catch (error) {
   fail(`sign-off or public evidence is unreadable: ${error.message}`);
+}
+
+if (remediationScope) {
+  if (
+    remediationScope.historicalDevnetEvidence?.remainsHistoricalEvidence !== true
+    || remediationScope.historicalDevnetEvidence?.coversThisSourceCommit !== false
+    || remediationScope.historicalDevnetEvidence?.freshSignedRehearsalRequired !== true
+    || remediationScope.verifiableSbf?.sha256 === "634d95055b891e6b624a3f6996d10b66e2a7f4bbb1ab50711d6195f72c7772a7"
+  ) fail("remediation audit must classify this feature sign-off as historical and require a fresh run");
 }
 
 if (signoff && feature && receipt && init && legacy) {
@@ -250,6 +262,6 @@ if (failures.length) {
 
 console.log(
   signoff.status === "VERIFIED"
-    ? "IAT V2 corrected-program feature sign-off passes. Remaining time and mainnet gates stay separate."
+    ? "IAT V2 historical corrected-program feature sign-off validates for its prior artifact. Current remediation source requires a fresh signed Devnet rehearsal; Mainnet HOLD."
     : "IAT V2 corrected-program feature sign-off is PENDING.",
 );

@@ -1,11 +1,16 @@
-# IAT V2 corrected-program feature review
+# IAT V2 historical corrected-program feature review
 
-Status: **VERIFIED / OPERATOR-RELAYED FDF GUARD APPROVAL / MAINNET HOLD**
+Status: **VERIFIED FOR PRIOR ARTIFACT / SUPERSEDED BY REMEDIATION SOURCE / MAINNET HOLD**
 
 This card binds the corrected Devnet program to the 18-transaction on-chain
 feature rehearsal. Every immediately available feature action is recorded.
 Later maturity, cliff, and linear-unlock gates remain outside the signed
 snapshot, and mainnet remains `HOLD`.
+
+This review does not cover remediation commit
+`1df716ccd93c47ee1732af6ae1f43b8e6958afe6`, its 606,320-byte SBF artifact,
+the new `expire_round` instruction, or the expanded `Round` layout. A fresh
+signed Devnet rehearsal and independent comparison are mandatory.
 
 A later, separately scoped local host-program proof now covers those time
 boundaries at

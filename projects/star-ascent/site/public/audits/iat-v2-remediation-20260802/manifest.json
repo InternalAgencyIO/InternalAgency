@@ -1,0 +1,41 @@
+{
+  "schema": "iat-v2-remediation-audit-manifest/v1",
+  "title": "IAT V2 CCC randomness remediation review",
+  "status": "DRAFT_MAINNET_HOLD",
+  "launchDecision": "HOLD",
+  "mainnetStatus": "HOLD",
+  "assurance": "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT",
+  "auditedAtUtc": "2026-08-02T10:35:46Z",
+  "sourceBinding": {
+    "commit": "1df716ccd93c47ee1732af6ae1f43b8e6958afe6",
+    "gitTree": "37afa3b3da2f48f0066f368aedcce51d5f73b033",
+    "scopePath": "scope.json"
+  },
+  "findingSummary": {
+    "total": 4,
+    "openBySeverity": {"CRITICAL":2,"HIGH":1,"MEDIUM":0,"LOW":0},
+    "remediatedPendingReview": 1
+  },
+  "clearance": {
+    "securityBlockersResolved": false,
+    "independentAuditComplete": false,
+    "freshSignedDevnetComplete": false,
+    "authorizesDeployment": false,
+    "authorizesFunding": false,
+    "authorizesSigning": false,
+    "authorizesBroadcast": false
+  },
+  "artifactSha256": {
+    "README.md": "bffdbf302550b756684b6bdaa6fffd9d41ba776f2cca12750c10ea91ea75216e",
+    "GAME-THEORY.md": "9a16a80bb53c315d0b1d40098512b27bc3054aa06edb87352e7a518f89e7ff3a",
+    "scope.json": "11d1a836feb246745188e14c1594d1c39c0e79a9634b5e594dacd96ff022a85b",
+    "findings.json": "464de6da0eee43055a63bb71adfc7db362832705f7fe7d7465610ddd92abe792",
+    "attack-matrix.json": "d6bea81cc8fecd76268d3729146b0635d52c731fb6c8a5d349a3ce8a7472710c",
+    "checks.json": "2b72a22c767a788c23b6d0ea4d6339b8e30ca851031afe115b3361130a3f82a8"
+  },
+  "limitations": [
+    "Not an independent audit or formal proof",
+    "No local-validator or fresh signed Devnet remediation run",
+    "No wallet, secret, signing, broadcast, deployment, funding, DNS, or chain mutation"
+  ]
+}

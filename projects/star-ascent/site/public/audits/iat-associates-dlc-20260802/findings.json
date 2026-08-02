@@ -1,12 +1,12 @@
 {
   "schema": "iat-future-associates-audit-findings/v1",
   "featureState": "INTENDED_FUTURE_NOT_TECHNICALLY_ISOLATED_NOT_ACTIVE_NO_CLAIM_ROUTE",
-  "auditedSourceCommit": "48660c81e437c51e44cc067e7357f6ebc0c5d4ea",
+  "auditedSourceCommit": "1df716ccd93c47ee1732af6ae1f43b8e6958afe6",
   "identityModel": "UNIQUE_WALLET_PLUS_IMMUTABLE_X_ID_PLUS_X_PREMIUM; MULTIPLE_PAIRS_PER_PERSON_ALLOWED",
   "findings": [
     {
       "id": "ASSOC-FUT-001",
-      "severity": "CRITICAL",
+      "severity": "HIGH",
       "status": "OPEN",
       "title": "Associates is compiled into the Genesis candidate instead of isolated as a future DLC",
       "evidence": ["policy.rs maps role 2 to CCC_ASSOCIATE_RATE_BPS", "set_eligibility accepts every role for which role_rate returns Some", "open_position has no Associates feature-state check", "The public economic policy fixes cccAssociate at 2000 bps"],
@@ -44,10 +44,10 @@
       "id": "ASSOC-FUT-005",
       "severity": "CRITICAL",
       "status": "OPEN_INHERITED",
-      "title": "Associate settlement inherits the permanent CCC reveal-withholding deadlock",
-      "evidence": ["A permissionless payer initializes the unique round PDA", "settle_position_week requires a settled CCC round for every non-standard role", "There is no timeout, replacement, cancellation, or forced reveal path"],
-      "impact": ["The first committer can permanently block an Associate week", "Affected 52-week positions cannot fully settle or close", "Reserved rewards remain locked"],
-      "remediation": ["Implement bounded non-reroll recovery or forced resolution", "Test the exact recovery path in host, SBF/local-validator, and signed Devnet flows", "Obtain independent review of randomness liveness"]
+      "title": "Associate settlement inherits selective reveal withholding despite bounded terminal recovery",
+      "evidence": ["A permissionless payer initializes the unique round PDA and controls the Switchboard reveal authority", "The revised program makes an unrevealed round EXPIRED_NEUTRAL after exactly 86,400 seconds", "The committer can still choose between revealing a known selected-agency vector and allowing the all-agency expected-value fallback"],
+      "impact": ["Permanent position deadlock is removed", "A committer aligned with one agency can reveal favorable outcomes and withhold unfavorable outcomes", "The fallback preserves per-position ex-ante expected value but does not remove outcome optionality for the reveal controller"],
+      "remediation": ["Remove unilateral reveal optionality through a reviewed oracle-authority design or enforce sufficient commit collateral/slashing", "Test the exact recovery and incentive paths in local-validator and signed Devnet flows", "Obtain independent randomness and game-theory review"]
     },
     {
       "id": "ASSOC-FUT-006",

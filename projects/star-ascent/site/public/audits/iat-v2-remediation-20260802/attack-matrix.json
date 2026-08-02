@@ -1,0 +1,15 @@
+{
+  "schema": "iat-v2-remediation-attack-matrix/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "cases": [
+    {"id":"REM-01","attack":"Expire one second before timeout","expected":"Reject","result":"PASS_HOST_AND_MODEL","evidence":"Exact -1 boundary tests"},
+    {"id":"REM-02","attack":"Expire at exact timeout","expected":"Terminal EXPIRED_NEUTRAL","result":"PASS_HOST_AND_MODEL","evidence":"Exact boundary tests"},
+    {"id":"REM-03","attack":"Reveal at or after timeout","expected":"Reject; no race-dependent late reveal","result":"PASS_SOURCE_REVIEW","evidence":"settle_round uses the same recovery predicate and half-open window"},
+    {"id":"REM-04","attack":"Reroll or replace candidate snapshot after expiry","expected":"Impossible","result":"PASS_MODEL_AND_SOURCE","evidence":"Same round account becomes terminal; no replacement randomness accepted"},
+    {"id":"REM-05","attack":"Overflow or overpay neutral fallback","expected":"Checked math and payout no greater than reservation","result":"PASS_HOST_AND_MODEL","evidence":"u128 checked multiplication/division and max-value vectors"},
+    {"id":"REM-06","attack":"Single-candidate expiry","expected":"Zero reward, position week still settles","result":"PASS_HOST_AND_MODEL","evidence":"N=1 exact vector"},
+    {"id":"REM-07","attack":"Agency-aligned committer reveals only favorable outcomes","expected":"No profitable conditional strategy","result":"FAIL","finding":"IAT-REM-002"},
+    {"id":"REM-08","attack":"Treat old signed Devnet receipt as proof of revised source","expected":"Reject","result":"PASS_POLICY","evidence":"Audit and architecture explicitly invalidate that source inference"},
+    {"id":"REM-09","attack":"Instruction-level expiry/account rollback failure","expected":"Atomic rollback proven","result":"NOT_YET_TESTED","finding":"IAT-REM-003"}
+  ]
+}

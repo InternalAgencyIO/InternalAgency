@@ -1,0 +1,76 @@
+{
+  "schema": "iat-v2-remediation-findings/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "auditedSourceCommit": "1df716ccd93c47ee1732af6ae1f43b8e6958afe6",
+  "findings": [
+    {
+      "id": "IAT-REM-001",
+      "mapsTo": "IAT-SEC-001",
+      "severity": "CRITICAL",
+      "status": "REMEDIATED_PENDING_REHEARSAL_AND_INDEPENDENT_REVIEW",
+      "title": "Permanent CCC round deadlock has bounded terminal recovery",
+      "evidence": [
+        "Round stores commit_timestamp and terminal status",
+        "settle_round rejects at and after the exact 86,400-second boundary",
+        "expire_round is permissionless only at and after that boundary",
+        "expiry preserves the original snapshot and accepts no replacement randomness",
+        "CCC settlement accepts EXPIRED_NEUTRAL and pays floor(full * (N-1) / N)"
+      ],
+      "residualRisk": [
+        "No instruction-level local-validator test yet",
+        "No fresh signed Devnet evidence for the changed layout and instruction set",
+        "No independent review"
+      ]
+    },
+    {
+      "id": "IAT-REM-002",
+      "mapsTo": "IAT-SEC-001",
+      "severity": "CRITICAL",
+      "status": "OPEN_BLOCKER",
+      "title": "Reveal controller retains profitable reveal-versus-neutral-expiry optionality",
+      "evidence": [
+        "The randomness authority learns the revealed selected agency",
+        "A successful reveal produces a selected-agency payout vector",
+        "Silence produces a different all-agency neutral payout vector",
+        "An agency-aligned controller can condition its choice on which vector benefits it"
+      ],
+      "remediation": [
+        "Remove unilateral economically interested reveal authority, or enforce objectively slashable collateral greater than maximum withholding gain",
+        "Model collusion, bribery, signer loss, oracle outage, and candidate concentration",
+        "Obtain independent Solana randomness and game-theory review"
+      ]
+    },
+    {
+      "id": "IAT-REM-003",
+      "mapsTo": "IAT-ASSURANCE-001",
+      "severity": "HIGH",
+      "status": "OPEN_BLOCKER",
+      "title": "Remediation source lacks instruction-level local-validator and fresh signed Devnet evidence",
+      "evidence": [
+        "Host/model boundary tests and verifiable SBF build pass",
+        "Earlier Explorer transactions bind a prior program layout and binary",
+        "No signed transaction exercises expire_round or EXPIRED_NEUTRAL settlement"
+      ],
+      "remediation": [
+        "Execute before-boundary rejection, exact-boundary expiry, post-expiry replay rejection, and linked-position settlement in local-validator",
+        "Repeat the reviewed flow on Devnet with independent source/binary/evidence hash comparison"
+      ]
+    },
+    {
+      "id": "IAT-REM-004",
+      "mapsTo": "IAT-SEC-002",
+      "severity": "CRITICAL",
+      "status": "OPEN_BLOCKER",
+      "title": "Upgrade, administration, and community custody authority remain correlated",
+      "evidence": [
+        "PROGRAM_ADMIN and COMMUNITY_CUSTODY remain the same address",
+        "The planned authority separation and timelocked multisig design is not implemented in this increment"
+      ],
+      "remediation": [
+        "Implement and publish distinct role addresses with threshold/timelock policy",
+        "Exercise signer-loss, compromise, emergency pause, and upgrade-delay procedures",
+        "Bind independent review to final ProgramData authority and bytecode"
+      ]
+    }
+  ]
+}

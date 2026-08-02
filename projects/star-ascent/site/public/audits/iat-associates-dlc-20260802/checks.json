@@ -1,13 +1,16 @@
 {
   "schema": "iat-future-associates-audit-checks/v1",
-  "auditedAtUtc": "2026-08-02T07:37:30Z",
+  "auditedAtUtc": "2026-08-02T10:35:46Z",
   "results": [
-    {"check":"source status","result":"PASS","detail":"agent/iat-launch-window clean at 48660c81e437c51e44cc067e7357f6ebc0c5d4ea before audit files"},
+    {"check":"source status","result":"PASS","detail":"Associate report refreshed against remediation source commit 1df716ccd93c47ee1732af6ae1f43b8e6958afe6"},
     {"check":"Associate excluded from Genesis program","result":"FAIL","detail":"Role 2 compiles into common program; ASSOC-FUT-001"},
     {"check":"T+1-week gate","result":"FAIL","detail":"No Associate activation timestamp; ASSOC-FUT-002"},
     {"check":"wallet/X/Premium attestation","result":"FAIL","detail":"Eligibility stores wallet/role/agency only; ASSOC-FUT-003"},
     {"check":"check:iat-v2","result":"PASS","detail":"Future-audit validator, policy/evidence/time/readiness gates, regressions, and 41 JavaScript tests passed while preserving mainnet HOLD"},
-    {"check":"check:iat-v2-signoff","result":"PASS","detail":"Command exited zero: initialization sign-off remains PENDING and corrected-program feature sign-off passes"},
-    {"check":"Rust host tests","result":"PASS","detail":"19 passed, 0 failed across unit and exact time-warp boundary suites"}
+    {"check":"check:iat-v2-signoff","result":"PASS","detail":"Historical feature sign-off validates only for its prior artifact; current remediation source explicitly requires a fresh signed Devnet rehearsal"},
+    {"check":"Rust host tests","result":"PASS","detail":"23 passed, 0 failed across unit and exact time-warp boundary suites"},
+    {"check":"verifiable SBF build","result":"PASS","detail":"SHA-256 d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22; 606320 bytes; build evidence only"},
+    {"check":"signed Devnet rehearsal for remediation source","result":"FAIL","detail":"Earlier signed Devnet evidence targets the prior account layout and instruction set; a fresh rehearsal is required"},
+    {"check":"selective reveal incentive eliminated","result":"FAIL","detail":"Neutral expiry fixes liveness but does not eliminate reveal-versus-expire optionality; ASSOC-FUT-005 remains open"}
   ]
 }

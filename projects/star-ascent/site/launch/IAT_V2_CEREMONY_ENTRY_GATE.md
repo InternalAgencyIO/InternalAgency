@@ -45,9 +45,10 @@ Before any other ceremony check runs, the assertion requires the public
 pre-launch audit clearance and all six conditions recorded in
 `launch/iat-v2-mainnet-readiness-gate.json`:
 
-1. The canonical pre-launch audit manifest records `CLEAR`, zero open
-   critical/high findings, resolved security blockers, and a completed
-   independent final-code audit.
+1. Both canonical pre-launch and remediation audit manifests record `CLEAR`,
+   zero open critical/high findings, resolved security blockers, completed
+   independent final-code review, and fresh signed Devnet evidence for the
+   remediation source.
 2. The read-only balance observation is no more than 30 minutes old with no
    more than one minute of future skew.
 3. The public mainnet address has at least exactly `8500000000` lamports.
@@ -62,6 +63,9 @@ The source-bound audit package is public at
 [`public/audits/iat-v2-prelaunch-20260802/`](../public/audits/iat-v2-prelaunch-20260802/README.md).
 It is an internal Codex-assisted review, not an independent security audit, and
 it is deliberately fail-closed while any critical/high finding remains open.
+The later source-bound randomness remediation review is public at
+[`public/audits/iat-v2-remediation-20260802/`](../public/audits/iat-v2-remediation-20260802/README.md)
+and is an independent ceremony-entry blocker of its own.
 
 The assessment also independently requires the mainnet HOLD/safety boundary
 and the honest `VERIFIED_LOCAL_HOST_ONLY` classification; either failure adds a

@@ -1,0 +1,22 @@
+{
+  "schema": "iat-v2-remediation-checks/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "runAtUtc": "2026-08-02T10:35:46Z",
+  "results": [
+    {"id":"RUST_UNIT","result":"PASS","detail":"17 passed, 0 failed"},
+    {"id":"RUST_TIME_WARP","result":"PASS","detail":"6 passed, 0 failed; includes reveal timeout and neutral expected-value boundaries"},
+    {"id":"TARGETED_JAVASCRIPT","result":"PASS","detail":"22 passed, 0 failed across reference model, instruction layout, and rehearsal helpers"},
+    {"id":"POLICY_GATE","result":"PASS","detail":"HOLD preserved and new fail-closed fragments enforced"},
+    {"id":"ADMIN_BUILD","result":"PASS","detail":"Vite production build completed under Node 24.14.0"},
+    {"id":"LINT","result":"PASS_WITH_PREEXISTING_WARNINGS","detail":"0 errors, 8 next/no-img-element warnings"},
+    {"id":"VERIFIABLE_SBF","result":"PASS","detail":"Anchor 1.0.2, Solana 3.1.10, Rust 1.97.1; SHA-256 d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22; 606320 bytes"},
+    {"id":"LOCAL_VALIDATOR_ADVERSARIAL","result":"NOT_RUN_BLOCKER","detail":"Instruction-level expiry, replay, settlement, and rollback flow remains required"},
+    {"id":"FRESH_SIGNED_DEVNET","result":"NOT_RUN_BLOCKER","detail":"Prior signed evidence targets earlier source and does not cover this remediation"},
+    {"id":"INDEPENDENT_REVIEW","result":"NOT_RUN_BLOCKER","detail":"Internal Codex-assisted review is not independent assurance"}
+  ],
+  "limitations": [
+    "Host and model tests do not prove Solana runtime account locking, clock, CPI, or rollback behavior",
+    "Verifiable build proves deterministic compilation under the pinned image, not deployment safety",
+    "No wallet, signing, broadcast, deployment, funding, or chain mutation occurred"
+  ]
+}

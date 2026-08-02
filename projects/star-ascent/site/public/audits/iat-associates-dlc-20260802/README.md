@@ -36,8 +36,8 @@ enforced at this boundary.
 ## Source and method
 
 - Public launch PR: [draft PR #4](https://github.com/InternalAgencyIO/InternalAgency/pull/4)
-- Audited commit: `48660c81e437c51e44cc067e7357f6ebc0c5d4ea`
-- IAT V2 program tree: `6c06e1a6051de709ddcbd707e563a46d4a89a5b4`
+- Audited commit: `1df716ccd93c47ee1732af6ae1f43b8e6958afe6`
+- IAT V2 program tree: `f5e5a1a2d39317fe663f8c88c637e8ffed2df55a`
 - Deep review: activation, agency registration, eligibility, position opening,
   weekly settlement, CCC round selection, account layouts, economic policy,
   existing Devnet feature evidence, and inherited pre-launch findings.
@@ -55,6 +55,8 @@ and attacks are in [findings.json](findings.json) and
 - Associate weekly rewards use integer math and the same reservation accounting
   as other roles.
 - A selected agency is deterministically paused for the matching settled round.
+- A missing reveal now reaches terminal neutral recovery after exactly 86,400
+  seconds, so linked positions are no longer permanently uncloseable.
 - Duplicate agency-owner wallets are prevented by an owner-index PDA.
 - The Devnet rehearsal exercised Associate eligibility, opening, pause, and
   settlement behavior. That is evidence of implemented behavior, not evidence
@@ -73,8 +75,9 @@ and attacks are in [findings.json](findings.json) and
 4. Require agency-owner consent and an economically qualified, epoch-bounded
    candidate set; otherwise permitted multi-account operators can cheaply pad
    the selection denominator.
-5. Fix the inherited CCC first-committer reveal-withholding deadlock before any
-   Associate position can depend on a round.
+5. Remove the inherited CCC committer's reveal-versus-expiry optionality. The
+   bounded terminal fallback fixes permanent deadlock, but is not a complete
+   incentive fix.
 6. Separate upgrade, administration, identity-verifier, and asset-custody
    authority; obtain independent review of the final code and binary.
 

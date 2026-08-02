@@ -6,11 +6,14 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   IAT_V2_POLICY,
+  cccRoundRecoveryAvailable,
   cccRoundAtTimestamp,
   closePosition,
   cumulativeCorePrincipalUnlocked,
   cumulativeUnlocked,
+  expireCccRound,
   initializeRewardLedger,
+  neutralExpiredRoundReward,
   openPosition,
   policyWeekAtTimestamp,
   settlePositionWeek,
@@ -95,6 +98,36 @@ const cccCases = [
   observed: observe(() => cccRoundAtTimestamp(genesisTimestamp, timestamp)),
 }));
 
+const recoveryCommitTimestamp = genesisTimestamp + 86_400;
+const pendingRecoveryRound = {
+  week: 0,
+  status: "PENDING",
+  commitTimestamp: recoveryCommitTimestamp,
+  agencyCountSnapshot: 100,
+  candidateSnapshotHash: "LOCAL_IMMUTABLE_SNAPSHOT",
+};
+const recoveryCases = [
+  ["RECOVERY_MINUS_ONE_SECOND", recoveryCommitTimestamp + 86_399, "REJECTED", "ROUND_REVEAL_TIMEOUT_NOT_REACHED"],
+  ["RECOVERY_EXACT", recoveryCommitTimestamp + 86_400, "ACCEPTED", "EXPIRED_NEUTRAL"],
+].map(([id, timestamp, expectedOutcome, expectedValue]) => ({
+  id,
+  timestamp,
+  expectedOutcome,
+  expectedValue,
+  recoveryAvailable: cccRoundRecoveryAvailable(recoveryCommitTimestamp, timestamp),
+  observed: observe(() => expireCccRound({ existingRound: pendingRecoveryRound, nowTimestamp: timestamp }).status),
+}));
+const neutralRewardCases = [
+  [1, "0"],
+  [2, "500"],
+  [100, "990"],
+].map(([candidateCount, expected]) => ({
+  fullReward: "1001",
+  candidateCount,
+  expected,
+  observed: String(neutralExpiredRoundReward(1_001n, candidateCount)),
+}));
+
 const laneExpectations = {
   treasury: [[51, "50000000000000000"], [52, "50000000000000000"], [53, "50961538461538461"], [130, "125000000000000000"], [207, "199038461538461538"], [208, "200000000000000000"]],
   ecosystem: [[25, "37500000000000000"], [26, "37500000000000000"], [27, "38942307692307692"], [65, "93750000000000000"], [103, "148557692307692307"], [104, "150000000000000000"]],
@@ -143,6 +176,17 @@ for (const item of [...clockCases, ...cccCases]) {
     throw new Error(`Time case failed: ${item.id}`);
   }
 }
+for (const item of recoveryCases) {
+  const observedValue = item.observed.value ?? item.observed.error;
+  if (item.observed.outcome !== item.expectedOutcome || observedValue !== item.expectedValue) {
+    throw new Error(`Recovery time case failed: ${item.id}`);
+  }
+}
+for (const item of neutralRewardCases) {
+  if (item.observed !== item.expected) {
+    throw new Error(`Neutral recovery reward case failed: N=${item.candidateCount}`);
+  }
+}
 for (const item of laneCases) {
   if (item.observed !== item.expected) throw new Error(`Lane case failed: ${item.lane} week ${item.week}`);
 }
@@ -174,9 +218,9 @@ const proof = {
     keyCreated: false,
   },
   reviewedProgramArtifact: {
-    sha256: "634d95055b891e6b624a3f6996d10b66e2a7f4bbb1ab50711d6195f72c7772a7",
-    bytes: 597336,
-    bindingSource: "public/evidence/iat-v2/v2-feature-independent-signoff-20260801T055736Z.json",
+    sha256: "d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22",
+    bytes: 606320,
+    bindingSource: "public/audits/iat-v2-remediation-20260802/scope.json",
     artifactEmbedded: false,
   },
   inputs: await Promise.all(inputPaths.map(digestFile)),
@@ -191,12 +235,12 @@ const proof = {
     {
       command: "cargo test --locked --test time_warp -- --nocapture",
       result: "PASS",
-      tests: 4,
+      tests: 6,
     },
     {
       command: "node --test tests/iat-v2-reference-engine.test.mjs",
       result: "PASS",
-      tests: 14,
+      tests: 16,
     },
   ],
   observations: {
@@ -204,12 +248,16 @@ const proof = {
     secondsPerWeek,
     clockCases,
     cccCases,
+    recoveryCases,
+    neutralRewardCases,
     laneCases,
     positionCase,
   },
   coverage: [
     "pre-Genesis rejection and exact policy-week boundaries",
     "CCC round zero at exactly 24 hours and weekly cadence",
+    "CCC reveal recovery at exactly 24 hours after commit with no early expiry",
+    "neutral expected-value payout floors for one, two, and 100 candidates",
     "treasury 52-week cliff and 208-week linear end",
     "ecosystem, core-team, and liquidity 26-week cliffs and 104-week linear ends",
     "integer-floor unlock amounts immediately after cliffs and immediately before end weeks",
@@ -219,8 +267,8 @@ const proof = {
   limitations: [
     "This is deterministic local host-program evidence, not a signed or broadcast transaction.",
     "No local-validator transaction was used because the proof requires no signer, keypair, wallet, or network state.",
-    "The proof binds exact program policy source and cross-language reference behavior; it does not replace the finalized Devnet transaction receipt.",
-    "Switchboard commit/reveal and hardware authority were already exercised separately on Devnet and are outside this artifact.",
+    "The proof binds exact remediation source and cross-language reference behavior; it does not replace a fresh finalized Devnet transaction receipt.",
+    "Earlier Switchboard commit/reveal evidence targets a prior binary and is not evidence for this remediation artifact.",
     "This artifact does not authorize mainnet, choose a ceremony time, or clear funding and release gates.",
   ],
 };
