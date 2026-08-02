@@ -1,133 +1,85 @@
 # IAT public UI compatibility and accessibility audit
 
-> **DRAFT UI REVIEW — UI RELEASE HOLD — MAINNET HOLD UNCHANGED — NOT AN INDEPENDENT CERTIFICATION — NOT DEPLOYED — NO CLAIM ROUTE**
+> **DRAFT UI REVIEW - UI RELEASE HOLD - MAINNET HOLD UNCHANGED - NOT AN INDEPENDENT CERTIFICATION - NOT DEPLOYED - NO CLAIM ROUTE**
 
-This package records a source-bound UI, functional, responsive, accessibility,
-and compatibility review of the public STAR ASCENT / IAT surfaces at commit
-`b584d51466ef6696af98b5c16b6dc1d7e84eb59e`.
+This revision records remediation and source-bound verification of the public
+STAR ASCENT / IAT UI at commit
+`eb43a854552ccebaf42efe86bb67a433d2495937`.
 
 ## Decision
 
-**UI RELEASE HOLD.** The audited public UI should not be treated as
-cross-device or accessibility-ready until the two high-severity findings and
-four medium-severity findings are remediated and retested. This decision does
-not change, authorize, or schedule mainnet; mainnet remains independently on
-`HOLD`.
+Eight implementation findings are **closed by automated regression evidence**:
+two high, four medium, and two low. One informational coverage finding remains
+open because physical iOS/Android, graphical Linux, assistive-technology, and
+independent-review sessions were unavailable.
 
-The review found:
+The package remains **UI RELEASE HOLD**. It does not authorize or schedule a
+deployment, signing ceremony, transaction, funding action, or mainnet change.
+Mainnet remains independently on `HOLD`.
 
-- 2 high findings;
-- 4 medium findings;
-- 2 low findings;
-- 1 informational coverage gap;
-- no critical finding.
+## Remediation verified
 
-## What was tested
+- Responsive headline, navigation, status, and route containment at desktop,
+  768px tablet, Pixel 5, and iPhone 13 emulation profiles.
+- Contrast-token changes that clear the targeted axe `color-contrast` rule on
+  all eleven public routes in all seven profiles.
+- Complete activation-dialog focus isolation/restoration and tab keyboard/ARIA
+  relationships.
+- Skip-link focus transfer, heading order, supported ARIA semantics, and
+  landmark containment.
+- Programmatic network loading/error feedback with focus preserved.
+- `/verify` decorative containment, stable React fragment keys, and intrinsic
+  home-image dimensions.
 
-- Eleven primary public routes: `/`, `/network`, `/launch`, `/proof`,
-  `/signal`, `/tokenomics`, `/dossier`, `/world`, `/verify`, `/mint`, and
-  `/rewards`.
-- Launch-sequence entry, English/Turkish switching, local signal activation,
-  activation-terminal opening and closing, callsign normalization, readiness
-  acknowledgement, and all three activation tabs.
-- Keyboard focus trapping, Escape close, focus restoration, skip-link behavior,
-  and tab keyboard behavior.
-- Read-only network lookup rejection for malformed input and successful lookup
-  of the public Solana system-program address.
-- `prefers-reduced-motion: reduce` behavior.
-- Axe-core 4.12.1 scans on all eleven routes using WCAG 2.0 A/AA and WCAG 2.1
-  A/AA rule tags.
-- Chromium viewport checks at 390x844, 412x915, 768x1024, and 1440x900.
-- Real headless render smoke checks on Windows Chrome 150.0.7871.187, Edge
-  149.0.4022.62, and Firefox 153.0.1.
-- The existing Ubuntu GitHub Actions build, rendered-HTML tests, policy gates,
-  and CodeQL result at the audited commit.
+## Automated evidence
 
-## Confirmed results
+Playwright 1.62.1 ran 35 cases with 35 passing and zero failing:
 
-### Passed
-
-- All eleven routes loaded with one `main`, a visible H1, no broken images, and
-  explicit `HOLD` / not-published language.
-- Desktop launch rendering was visually consistent in real Chrome, Edge, and
-  Firefox on Windows.
-- The main launch interactions, local language toggle, callsign transformation,
-  checkbox state, tab click selection, Escape close, and backward focus trap
-  worked.
-- The malformed Solana lookup was rejected and a valid public address produced
-  a read-only balance/activity result and Explorer links without a wallet
-  connection or signature.
-- Reduced-motion emulation removed the launch-sequence, fire, and line
-  animations.
-- No duplicate IDs, broken images, unsafe `_blank` relationships, or browser
-  runtime exceptions were observed on the home page.
-
-### Failed or incomplete
-
-- The opening launch headline is clipped at phone width in Chromium emulation
-  and real Firefox, and the 768px layout has horizontal overflow, a clipped nav
-  action, and overlapping status content in real Chrome and Firefox.
-- Axe confirmed 28 contrast failures across eight of eleven routes. The scan
-  also left many gradient-backed nodes for manual review.
-- The activation terminal does not restore focus to its opener, does not mark
-  background content inert/hidden, and implements tabs without arrow-key,
-  `tabindex`, `aria-controls`, or `tabpanel` behavior.
-- The skip link activates but leaves focus on the link rather than the main
-  target.
-- `/verify` creates 288px of horizontal document overflow at 1440px because the
-  decorative orbit extends beyond the viewport.
-- Invalid network lookup feedback is visible but is not exposed through an
-  alert/live region.
-- `/launch` emits a React unique-key error from heading-line fragments.
-- Two home-page images omit intrinsic width and height metadata.
-
-## Environment truth table
-
-| Environment | Coverage | Result |
+| Profile | Viewport / device | Result |
 | --- | --- | --- |
-| Windows Chrome 150 | Real headless desktop render; interactive Chromium coverage | Desktop smoke pass; responsive failures confirmed |
-| Windows Edge 149 | Real headless desktop render | Pass at 1440x900 |
-| Windows Firefox 153 | Real headless desktop, tablet, and phone render | Desktop pass; tablet and phone failures confirmed |
-| Linux / Ubuntu | GitHub Actions build, rendered-HTML tests, policy checks, CodeQL | Pass at audited commit; no graphical browser render |
-| iPhone 390x844 | Chromium viewport emulation only | Intro clipping confirmed; **not iOS Safari certification** |
-| Android 412x915 | Chromium viewport emulation only | No document overflow; status-label collision observed; **not a physical-device result** |
-| iOS Safari / WebKit | Not available | Not tested |
-| Physical Android system browser | Not available | Not tested |
-| Screen reader | Not available | Not tested |
+| Chromium desktop | 1440x900 | PASS |
+| Firefox desktop | 1440x900 | PASS |
+| WebKit desktop | 1440x900 | PASS |
+| Chromium tablet | 768x1024 | PASS |
+| Firefox tablet | 768x1024 | PASS |
+| Chromium Pixel 5 emulation | Playwright device profile | PASS |
+| WebKit iPhone 13 emulation | Playwright device profile | PASS |
 
-The detailed machine-readable matrix is in
-[environment-matrix.json](environment-matrix.json).
+The suite covers all eleven primary routes, broken images, document overflow,
+the targeted axe rules, unsupported generic ARIA labels, home headline fit,
+image dimensions, skip focus, modal isolation, tab keys, focus restoration,
+network alerts/focus, and the React child-key console defect.
 
-## Remediation order
+The source commit also passed the production build, lint with zero errors,
+41/41 Node tests, IAT V2 HOLD policy gates, source-bound evidence checks,
+canonical JSON checks, funding-observation regression, ceremony-entry
+regression, and corrected feature signoff. Independent initialization signoff
+remains pending by design.
 
-1. Repair the 390–768px launch layout and add automated no-overflow assertions
-   at phone, tablet, and desktop widths.
-2. Fix the 28 confirmed contrast failures and manually resolve the nodes whose
-   gradient backgrounds axe could not evaluate.
-3. Implement a complete dialog and tab keyboard contract, restore opener focus,
-   isolate background content, and make skip navigation transfer focus.
-4. Clip or contain the `/verify` orbit without creating document overflow.
-5. Announce network lookup results, fix the React key warning, and add image
-   dimensions.
-6. Run real Safari/WebKit, Linux Firefox, Android Chrome, and screen-reader
-   passes before claiming compatibility.
+## Open coverage boundary
+
+`UI-COVERAGE-001` remains open. The automated WebKit and mobile profiles are
+useful regression evidence, but they are not physical-device or installed
+mobile-browser certification. No claim is made for:
+
+- physical iOS Safari;
+- physical Android system browser;
+- a graphical Linux desktop session;
+- screen reader, switch control, or voice control;
+- independent third-party review;
+- network-throttling or performance-laboratory scoring.
 
 ## Package map
 
-- [manifest.json](manifest.json) — decision, finding counts, source binding,
-  and artifact hashes.
-- [scope.json](scope.json) — audited routes, source hashes, and exclusions.
-- [findings.json](findings.json) — machine-readable finding register.
-- [FINDINGS.md](FINDINGS.md) — impact, evidence, and remediation guidance.
-- [checks.json](checks.json) — commands, interactions, and measured outcomes.
-- [environment-matrix.json](environment-matrix.json) — real, emulated, CI-only,
-  and untested environments.
+- [manifest.json](manifest.json) - decision, counts, source binding, and hashes.
+- [scope.json](scope.json) - routes, exact source hashes, inclusions, exclusions.
+- [findings.json](findings.json) - machine-readable finding register.
+- [FINDINGS.md](FINDINGS.md) - closure evidence and remaining gap.
+- [checks.json](checks.json) - measured outcomes and limitations.
+- [environment-matrix.json](environment-matrix.json) - automated and unavailable environments.
 
-## Limitations
+## Safety boundary
 
-This was a local, source-bound, Codex-assisted audit. It was not an independent
-third-party accessibility certification, physical-device lab, screen-reader
-study, production penetration test, deployment, wallet interaction, signing
-session, broadcast, or mainnet mutation. Headless rendering is not equivalent
-to a complete user journey on a physical device. Passing build and rendered-HTML
-tests on Ubuntu do not establish Linux browser compatibility.
+This was a local, Codex-assisted audit and code-remediation pass. No wallet,
+key, secret, signing device, funds, deployment, transaction, DNS, mainnet, or
+devnet state was accessed or changed.

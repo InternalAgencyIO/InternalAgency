@@ -1,89 +1,87 @@
 {
   "schema": "iat-ui-compatibility-checks/v1",
   "status": "DRAFT_UI_RELEASE_HOLD",
-  "runAtUtc": "2026-08-02T08:39:35Z",
+  "runAtUtc": "2026-08-02T09:42:20Z",
   "environment": {
     "host": "Windows 10/11 compatible Win32",
-    "inAppChromiumUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
-    "chrome": "150.0.7871.187",
-    "edge": "149.0.4022.62",
-    "firefox": "153.0.1",
-    "axeCore": "4.12.1"
+    "playwright": "1.62.1",
+    "axeCore": "4.12.1",
+    "engineRevisions": {"chromium": "1234", "firefox": "1538", "webkit": "2336"}
   },
   "checks": [
     {
-      "id": "PRIMARY_ROUTE_MATRIX",
-      "result": "PASS_WITH_FINDINGS",
-      "metrics": {"routes": 11, "loaded": 11, "brokenImages": 0, "routesMissingMain": 0, "routesMissingH1": 0, "routesMissingHoldLanguage": 0, "overflowRoutesAt1440": ["/verify"]}
+      "id": "PLAYWRIGHT_UI_REGRESSION",
+      "result": "PASS",
+      "metrics": {"passed": 35, "failed": 0, "profiles": 7, "workers": 1}
     },
     {
-      "id": "HOME_INTERACTIONS",
+      "id": "PRIMARY_ROUTE_MATRIX",
       "result": "PASS",
-      "metrics": {"launchEntry": true, "languageRoundTrip": true, "signalArm": true, "dialogOpenClose": true, "callsignUppercaseAndMax28": true, "readinessCheckbox": true, "tabClickSelection": true}
+      "metrics": {"routes": 11, "loaded": 11, "brokenImages": 0, "routesMissingMain": 0, "documentOverflowDefects": 0, "unsupportedGenericAriaLabels": 0}
     },
     {
       "id": "KEYBOARD_AND_FOCUS",
-      "result": "FAIL",
-      "metrics": {"escapeClose": true, "backwardFocusTrap": true, "restoreOpenerFocus": false, "skipMovesFocusToMain": false, "tabArrowNavigation": false, "backgroundIsolated": false}
-    },
-    {
-      "id": "NETWORK_LOOKUP",
-      "result": "PASS_WITH_ACCESSIBILITY_FINDING",
-      "metrics": {"invalidInputRejected": true, "validPublicSystemProgramLookup": true, "walletConnectionRequested": false, "signatureRequested": false, "resultAnnounced": false}
-    },
-    {
-      "id": "REDUCED_MOTION",
       "result": "PASS",
-      "metrics": {"mediaQueryMatched": true, "sequenceAnimation": "none", "fireAnimation": "none", "lineAnimation": "none"}
+      "metrics": {"escapeClose": true, "focusTrap": true, "restoreOpenerFocus": true, "skipMovesFocusToMain": true, "tabArrowNavigation": true, "tabHomeEndNavigation": true, "backgroundIsolated": true}
     },
     {
-      "id": "AXE_ROUTE_SWEEP",
-      "result": "FAIL",
+      "id": "NETWORK_LOOKUP_FEEDBACK",
+      "result": "PASS",
+      "metrics": {"invalidInputRejected": true, "focusPreserved": true, "loadingAnnounced": true, "errorAnnounced": true, "walletConnectionRequested": false, "signatureRequested": false}
+    },
+    {
+      "id": "AXE_TARGETED_ROUTE_SWEEP",
+      "result": "PASS",
       "metrics": {
         "routes": 11,
-        "confirmedColorContrastNodes": 28,
-        "confirmedByRoute": {"/": 2, "/network": 2, "/launch": 4, "/proof": 7, "/signal": 0, "/tokenomics": 1, "/dossier": 2, "/world": 4, "/verify": 0, "/mint": 1, "/rewards": 5},
-        "ariaProhibitedAttrIncompleteByRoute": {"/": 4, "/network": 1, "/launch": 2, "/proof": 1, "/signal": 1, "/tokenomics": 1, "/dossier": 2, "/world": 1, "/verify": 1, "/mint": 1, "/rewards": 1},
-        "gradientContrastIncomplete": true
+        "profiles": 7,
+        "rules": ["color-contrast", "aria-prohibited-attr", "region", "heading-order"],
+        "confirmedColorContrastNodes": 0,
+        "confirmedSemanticViolations": 0,
+        "manualGradientReviewComplete": false
       }
     },
     {
       "id": "RESPONSIVE_MATRIX",
-      "result": "FAIL",
+      "result": "PASS_AUTOMATED",
       "metrics": {
         "profiles": {
-          "390x844": {"engine": "Chromium emulation plus real Firefox", "documentOverflowPx": 0, "visibleHeadlineClip": true},
-          "412x915": {"engine": "Chromium emulation", "documentOverflowPx": 0, "statusCollision": true},
-          "768x1024": {"engine": "Chromium emulation plus real Chrome and Firefox", "documentOverflowPx": 98, "navClip": true, "statusOverlap": true},
-          "1440x900": {"engine": "real Chrome, Edge, and Firefox", "homeDocumentOverflowPx": 0, "desktopSmoke": "PASS"}
+          "1440x900 Chromium": {"documentOverflowDefects": 0, "homeHeadlineContained": true},
+          "1440x900 Firefox": {"documentOverflowDefects": 0, "homeHeadlineContained": true},
+          "1440x900 WebKit": {"documentOverflowDefects": 0, "homeHeadlineContained": true},
+          "768x1024 Chromium": {"documentOverflowDefects": 0, "homeHeadlineContained": true},
+          "768x1024 Firefox": {"documentOverflowDefects": 0, "homeHeadlineContained": true},
+          "Pixel 5 Chromium emulation": {"homeDocumentOverflowDefects": 0, "homeHeadlineContained": true},
+          "iPhone 13 WebKit emulation": {"homeDocumentOverflowDefects": 0, "homeHeadlineContained": true}
         }
       }
     },
     {
       "id": "BROWSER_CONSOLE",
-      "result": "FAIL_LOW",
-      "metrics": {"runtimeExceptions": 0, "reactErrors": 1, "reactErrorRoute": "/launch", "reactErrorClass": "missing-child-key"}
+      "result": "PASS",
+      "metrics": {"runtimeExceptions": 0, "reactUniqueKeyErrors": 0}
     },
     {
-      "id": "REAL_WINDOWS_BROWSER_RENDER_SMOKE",
-      "result": "PASS_DESKTOP_FAIL_RESPONSIVE",
-      "metrics": {
-        "desktop": {"chrome": "PASS", "edge": "PASS", "firefox": "PASS"},
-        "tablet": {"chrome": "FAIL_LAYOUT", "firefox": "FAIL_LAYOUT"},
-        "phone": {"firefox": "FAIL_HEADLINE_CLIP"}
-      }
+      "id": "IMAGE_LAYOUT_STABILITY",
+      "result": "PASS",
+      "metrics": {"auditedImages": 2, "missingIntrinsicDimensions": 0}
     },
     {
-      "id": "AUDITED_HEAD_GITHUB_CHECKS",
-      "result": "PASS_CI_ONLY",
-      "metrics": {"draftPullRequest": 4, "head": "b584d51466ef6696af98b5c16b6dc1d7e84eb59e", "ubuntuWebPolicyLaunchGates": "SUCCESS", "codeQL": "SUCCESS", "graphicalLinuxBrowser": "NOT_RUN"}
+      "id": "LOCAL_BUILD_AND_POLICY_VALIDATION",
+      "result": "PASS",
+      "metrics": {"productionBuild": "PASS", "eslintErrors": 0, "nodeTests": "41/41 PASS", "iatV2PolicyGate": "PASS_IN_HOLD", "iatV2Signoff": "PASS_WITH_EXPECTED_INDEPENDENT_INITIALIZATION_PENDING", "canonicalJson": "PASS"}
+    },
+    {
+      "id": "SOURCE_COMMIT_GITHUB_CHECKS",
+      "result": "PENDING_PUBLIC_PUSH",
+      "metrics": {"draftPullRequest": 4, "head": "eb43a854552ccebaf42efe86bb67a433d2495937", "localEquivalentChecks": "PASS", "githubActionsForHead": "NOT_YET_OBSERVED"}
     }
   ],
   "limitations": [
-    "Headless browser smoke tests do not replace physical-device interactive testing.",
-    "Chromium viewport emulation is not iOS Safari or physical Android evidence.",
-    "Axe incomplete results, especially gradient contrast, require manual review.",
-    "No screen reader, switch control, voice control, network throttling, or performance laboratory was available.",
+    "Automated browser execution does not replace physical-device interactive testing.",
+    "Playwright WebKit and mobile emulation are not installed iOS Safari or physical Android evidence.",
+    "The targeted axe rule set is not a complete accessibility certification; gradient and assistive-technology review remain open.",
+    "No graphical Linux session, screen reader, switch control, voice control, network-throttling laboratory, or independent reviewer was available.",
     "No deployment, wallet connection, signing, broadcast, transfer, or mainnet/devnet mutation occurred."
   ]
 }

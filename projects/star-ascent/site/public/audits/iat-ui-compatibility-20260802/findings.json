@@ -5,106 +5,82 @@
     {
       "id": "UI-RESP-001",
       "severity": "HIGH",
-      "state": "OPEN",
+      "state": "CLOSED",
       "area": "responsive-layout",
       "routes": ["/"],
-      "summary": "Core launch layout fails at phone and tablet widths",
-      "evidence": [
-        "390x844 Chromium emulation and real Firefox clip the launch-sequence headline",
-        "768x1024 reports 98px horizontal overflow",
-        "real Chrome 150 and Firefox 153 reproduce clipped nav/status content at 768x1024"
-      ],
-      "remediation": "Add phone/tablet layout constraints and automated no-overflow assertions."
+      "summary": "Core launch layout failed at phone and tablet widths",
+      "resolution": "Responsive containment, navigation, launch-status, and headline constraints were added and passed Chromium and Firefox at 768x1024 plus mobile emulation profiles.",
+      "verification": ["35/35 Playwright cases passed", "all eleven routes had zero document overflow in every non-mobile engine profile", "phone and tablet home-layout assertions passed"]
     },
     {
       "id": "UI-A11Y-001",
       "severity": "HIGH",
-      "state": "OPEN",
+      "state": "CLOSED",
       "area": "accessibility-contrast",
       "routes": ["/", "/network", "/launch", "/proof", "/tokenomics", "/dossier", "/world", "/mint", "/rewards"],
-      "summary": "Axe confirms 28 color-contrast failures across public routes",
-      "evidence": [
-        "home mission eyebrow 3.12:1 where 4.5:1 is required",
-        "home status eyebrow 1.39:1 where 4.5:1 is required",
-        "network pulse text 4.04:1 where 4.5:1 is required",
-        "gradient-backed nodes remain incomplete and require manual review"
-      ],
-      "remediation": "Replace failing color pairs with tested semantic tokens and manually review gradient-backed content."
+      "summary": "Axe confirmed 28 color-contrast failures across public routes",
+      "resolution": "Route-scoped foreground tokens were replaced with contrast-safe values.",
+      "verification": ["axe-core color-contrast returned zero confirmed violations across eleven routes in seven profiles", "gradient-backed content still requires physical/manual accessibility review"]
     },
     {
       "id": "UI-A11Y-002",
       "severity": "MEDIUM",
-      "state": "OPEN",
+      "state": "CLOSED",
       "area": "dialog-tabs-keyboard",
       "routes": ["/"],
-      "summary": "Activation dialog and tabs have an incomplete keyboard and ARIA contract",
-      "evidence": [
-        "focus returns to BODY after Escape close",
-        "background main/nav are not inert or aria-hidden",
-        "ArrowLeft does not change the selected tab",
-        "tabs omit roving tabindex, aria-controls, and tabpanel relationships"
-      ],
-      "remediation": "Restore opener focus, isolate modal siblings, and implement the complete tabs pattern."
+      "summary": "Activation dialog and tabs had an incomplete keyboard and ARIA contract",
+      "resolution": "The dialog now isolates background siblings, restores opener focus, traps focus, and implements roving tabs with relationships and arrow/Home/End controls.",
+      "verification": ["keyboard contract passed in Chromium, Firefox, WebKit, tablet, Android emulation, and iOS WebKit emulation profiles"]
     },
     {
       "id": "UI-LAYOUT-001",
       "severity": "MEDIUM",
-      "state": "OPEN",
+      "state": "CLOSED",
       "area": "route-overflow",
       "routes": ["/verify"],
-      "summary": "Decorative verify orbit creates 288px of desktop document overflow",
-      "evidence": ["1440x900 viewport: clientWidth 1425, scrollWidth 1713", ".verify-orbit extends to x=1713"],
-      "remediation": "Contain or clip the decorative orbit and assert zero route-root overflow."
+      "summary": "Decorative verify orbit created desktop document overflow",
+      "resolution": "The verify route now clips and paint-contains decorative overflow without hiding functional controls.",
+      "verification": ["route-matrix overflow assertion passed for /verify in desktop and tablet engines"]
     },
     {
       "id": "UI-A11Y-003",
       "severity": "MEDIUM",
-      "state": "OPEN",
+      "state": "CLOSED",
       "area": "focus-semantics",
       "routes": ["/"],
-      "summary": "Skip focus, heading order, generic ARIA labels, and landmarks need repair",
-      "evidence": [
-        "skip activation leaves focus on the link instead of main",
-        "launch sequence H2 precedes page H1",
-        "axe reports aria-prohibited-attr incomplete on generic div labels",
-        "two home nodes sit outside landmarks"
-      ],
-      "remediation": "Move focus to main, repair the heading outline, use semantic roles, and contain content in landmarks."
+      "summary": "Skip focus, heading order, generic ARIA labels, and landmarks needed repair",
+      "resolution": "Skip activation focuses main, heading order is repaired, labelled generic containers use supported semantics, and floating content is contained by landmarks.",
+      "verification": ["axe heading-order, region, and aria-prohibited-attr checks passed", "explicit generic aria-label assertion returned zero matches"]
     },
     {
       "id": "UI-A11Y-004",
       "severity": "MEDIUM",
-      "state": "OPEN",
+      "state": "CLOSED",
       "area": "network-feedback",
       "routes": ["/network"],
-      "summary": "Network lookup completion and errors are not programmatically announced",
-      "evidence": [
-        "malformed input renders an invalid-address message",
-        "no result-specific alert or live region is present",
-        "focus moves to BODY after submission",
-        "valid public address lookup otherwise succeeds"
-      ],
-      "remediation": "Preserve focus and announce validation/result state through alert/live semantics."
+      "summary": "Network lookup completion and errors were not programmatically announced",
+      "resolution": "Loading and completion use a polite status, failures use an alert, and the invoking button retains focus across the asynchronous request.",
+      "verification": ["network alert and focus assertions passed in all seven profiles"]
     },
     {
       "id": "UI-FUNC-001",
       "severity": "LOW",
-      "state": "OPEN",
+      "state": "CLOSED",
       "area": "react-reconciliation",
       "routes": ["/launch"],
-      "summary": "LaunchPage emits a React unique-key console error",
-      "evidence": ["title.split lines are mapped to anonymous fragments"],
-      "remediation": "Give each fragment a stable key or remove the fragment list."
+      "summary": "LaunchPage emitted a React unique-key console error",
+      "resolution": "Mapped title fragments now have stable keys.",
+      "verification": ["launch route emitted no unique-key console defect in all seven profiles"]
     },
     {
       "id": "UI-PERF-001",
       "severity": "LOW",
-      "state": "OPEN",
+      "state": "CLOSED",
       "area": "image-layout-stability",
       "routes": ["/"],
-      "summary": "Two home images omit intrinsic dimensions",
-      "evidence": ["/images/outer-comms-v1.webp", "/images/ascent-ritual-v1.webp"],
-      "remediation": "Publish matching intrinsic dimensions or aspect-ratio metadata."
+      "summary": "Two home images omitted intrinsic dimensions",
+      "resolution": "Both images now publish their source width and height, lazy loading, and asynchronous decoding metadata.",
+      "verification": ["home image intrinsic-dimension assertion passed in all seven profiles"]
     },
     {
       "id": "UI-COVERAGE-001",
@@ -112,9 +88,9 @@
       "state": "OPEN",
       "area": "environment-coverage",
       "routes": ["*"],
-      "summary": "iOS Safari, physical Android, Linux graphical browsers, and screen readers were unavailable",
-      "evidence": ["iPhone and Android results are viewport emulation only", "Ubuntu evidence is build/rendered-HTML CI, not graphical browser execution"],
-      "remediation": "Run and publish the same matrix in a real browser/device accessibility lab."
+      "summary": "Physical mobile, graphical Linux, assistive-technology, and independent certification remain unavailable",
+      "evidence": ["iPhone and Android results are Playwright emulation, not physical-device evidence", "WebKit automation is not installed mobile Safari", "no screen-reader session or independent reviewer was used"],
+      "remediation": "Run and publish the same matrix in a physical device and assistive-technology lab with independent review."
     }
   ]
 }
