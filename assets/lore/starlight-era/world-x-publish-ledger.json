@@ -42,11 +42,11 @@
         "💙",
         "🧡"
       ],
-      "nextIndex": 3,
+      "nextIndex": 4,
       "lastReservedImageNumbers": [
-        734,
-        735,
-        736
+        737,
+        738,
+        740
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T10:30:41.700Z",
+    "status": "awaiting_post",
+    "caption": "Tajikistan ❤️ Papua New Guinea",
+    "imageNumbers": [737, 738, 740],
+    "countries": ["Tajikistan", "Papua New Guinea"],
+    "assets": [
+      {"file": "737-tajikistan-hisor-fortress-cipher.png", "sha256": "ffa90706531ee6f96f747fe30d1e3fbb62b19d1e4ebd905883901a1a81c2eb40"},
+      {"file": "738-tajikistan-iskanderkul-fann-extraction.png", "sha256": "83f023ab9d7c52e11953da088c0be1eba6fe1cc0c88acad3cf42f187a4c8ed1c"},
+      {"file": "740-papua-new-guinea-port-moresby-ela-beach-intercept.png", "sha256": "f99bf3c865456f59cdc73334f4bd266d0fc9988631558728bfbbbd240f127a9c"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
