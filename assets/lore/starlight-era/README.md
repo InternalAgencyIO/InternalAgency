@@ -1092,6 +1092,13 @@ rejected and regenerated.
 | **Bishkek Ala-Too Alpine Intercept**<br><img src="796-kyrgyzstan-bishkek-ala-too-alpine-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking crimson-gold-cobalt light keys into an alpine prism above Bishkek's Ala-Too Square"> | **Tash Rabat Caravanserai Stone Cipher**<br><img src="797-kyrgyzstan-tash-rabat-caravanserai-cipher.png" width="420" alt="The trio sealing a fictional archive inside an amber crystal capsule beside Tash Rabat's stone caravanserai"> |
 | **Song-Kul Highland Data Extraction**<br><img src="798-kyrgyzstan-song-kul-highland-extraction.png" width="420" alt="The trio restoring a silver-and-turquoise habitat beacon above Song-Kul's high-altitude lake basin"> | **Balykchy Issyk-Kul Rail Night Relay**<br><img src="799-kyrgyzstan-balykchy-issyk-kul-rail-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a crimson-gold-cobalt rail relay above Balykchy and the Issyk-Kul shore at blue hour"> |
 
+## World Series - South America - Batch 195: Paraguay
+
+| | |
+|---|---|
+| **Asuncion Costanera River Intercept**<br><img src="800-paraguay-asuncion-costanera-river-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking red-white-cobalt light keys into a silver river prism above Asuncion's Costanera and riverfront skyline"> | **Asuncion Central Railway Cipher**<br><img src="801-paraguay-asuncion-central-railway-cipher.png" width="420" alt="The trio sealing a fictional archive inside an amber crystal capsule beside Asuncion's historic Central Railway Station"> |
+| **Monday Falls Forest Data Extraction**<br><img src="802-paraguay-monday-falls-forest-extraction.png" width="420" alt="The trio restoring a silver-and-turquoise habitat beacon above Monday Falls' three forested waterfall channels"> | **Encarnacion Costanera Night Relay**<br><img src="803-paraguay-encarnacion-costanera-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a red-white-cobalt river relay above Encarnacion's illuminated Costanera and bridge at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
