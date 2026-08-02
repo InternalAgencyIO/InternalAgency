@@ -1,6 +1,6 @@
 param(
   [string]$FfmpegPath = "C:\Users\A\AppData\Local\Programs\cosmo-downloader\resources\bin\win32-x64\ffmpeg.exe",
-  [ValidateSet("all", "predictive", "casino")]
+  [ValidateSet("all", "predictive", "casino", "predictive-carrier", "casino-everest")]
   [string]$Only = "all"
 )
 
@@ -76,14 +76,27 @@ function Render-Teaser {
 $predictiveVoice = Join-Path $tempRoot "predictive-engine-voice.wav"
 $casinoVoice = Join-Path $tempRoot "casino-voice.wav"
 Write-VoiceTrack -Path $predictiveVoice -Lines @(
-  "At Genesis plus thirty-one days, the Predictive Engine enters its review window.",
+  "Thirty days after I A T Genesis, the Predictive Engine enters its review window.",
   "Create a market. No matched volume? Cancel with no penalty.",
   "I A T or Sol. One percent returns to liquidity. Every result stays verifiable."
 )
 Write-VoiceTrack -Path $casinoVoice -Lines @(
-  "At Genesis plus fifteen days, the Casino D L C enters its review window.",
+  "Fifteen days after I A T Genesis, the Casino D L C enters its review window.",
   "Every game is designed for independent replay.",
   "I A T or Sol. One percent returns to liquidity and extends the runway."
+)
+
+$carrierVoice = Join-Path $tempRoot "predictive-engine-carrier-voice.wav"
+$everestVoice = Join-Path $tempRoot "casino-everest-voice.wav"
+Write-VoiceTrack -Path $carrierVoice -Lines @(
+  "Thirty days after I A T Genesis, the Predictive Engine enters review.",
+  "Markets need named sources, replayable receipts, and public resolution.",
+  "The runway is only a preview. There is no wager route."
+)
+Write-VoiceTrack -Path $everestVoice -Lines @(
+  "Fifteen days after I A T Genesis, the Casino D L C enters review.",
+  "Deal, reveal, and verify. Every result must be replayable.",
+  "One percent returns to liquidity. This remains a concept."
 )
 
 if ($Only -in @("all", "predictive")) {
@@ -102,6 +115,24 @@ if ($Only -in @("all", "casino")) {
     -Voice $casinoVoice `
     -Output (Join-Path $outputRoot "casino-dlc-teaser-15s-4k-v1.mp4") `
     -Tone 68
+}
+
+if ($Only -in @("all", "predictive-carrier")) {
+  Render-Teaser `
+    -Image (Join-Path $siteRoot "public\images\future\predictive-engine-carrier-runway-v2.png") `
+    -Subtitle (Join-Path $siteRoot "scripts\video\future\predictive-engine-carrier-teaser.ass") `
+    -Voice $carrierVoice `
+    -Output (Join-Path $outputRoot "predictive-engine-carrier-teaser-15s-4k-v2.mp4") `
+    -Tone 92
+}
+
+if ($Only -in @("all", "casino-everest")) {
+  Render-Teaser `
+    -Image (Join-Path $siteRoot "public\images\future\casino-everest-poker-v2.png") `
+    -Subtitle (Join-Path $siteRoot "scripts\video\future\casino-everest-teaser.ass") `
+    -Voice $everestVoice `
+    -Output (Join-Path $outputRoot "casino-everest-teaser-15s-4k-v2.mp4") `
+    -Tone 74
 }
 
 Get-Item (Join-Path $outputRoot "*.mp4") | Select-Object Name, Length, LastWriteTime

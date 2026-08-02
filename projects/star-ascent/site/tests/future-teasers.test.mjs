@@ -8,6 +8,7 @@ const sourceFiles = [
   "app/future/page.tsx",
   "app/future/FutureNav.tsx",
   "app/future/FashionReveal.tsx",
+  "app/future/EditorialScene.tsx",
   "app/future/predictive-engine/page.tsx",
   "app/future/casino/page.tsx",
 ];
@@ -19,6 +20,8 @@ test("future previews are explicit, inactive, and transaction-free", async () =>
   assert.match(source, /NO WAGER ROUTE/);
   assert.match(source, /30 DAYS AFTER \$IAT GENESIS/);
   assert.match(source, /15 DAYS AFTER \$IAT GENESIS/);
+  assert.match(source, /predictive-engine-carrier-runway-v2/);
+  assert.match(source, /casino-everest-poker-v2/);
   assert.match(source, /FAIRNESS CLAIM \/\/ NOT YET PROVEN/);
   assert.match(source, /DECORATIVE RUNWAY HARDWARE/);
   assert.doesNotMatch(source, /handcuff|restraint|bondage/i);
@@ -34,7 +37,7 @@ test("future previews use new source-bound art and accessible motion fallbacks",
     readFile(new URL("app/page.tsx", root), "utf8"),
   ]);
   const manifest = JSON.parse(manifestText);
-  assert.equal(manifest.assets.length, 2);
+  assert.equal(manifest.assets.length, 4);
   assert.deepEqual(Object.values(manifest.characters).map((character) => character.canonicalAge), [21, 24, 23]);
   assert.match(manifest.variationPolicy.publicSafety, /no explicit exposure/i);
   assert.match(css, /prefers-reduced-motion:reduce/);
@@ -50,7 +53,7 @@ test("future previews use new source-bound art and accessible motion fallbacks",
   }
 });
 
-test("ships two source-bound 15-second 4K teaser masters", async () => {
+test("ships four source-bound 15-second 4K teaser masters", async () => {
   const manifest = JSON.parse(await readFile(new URL("public/media/future/media-manifest.json", root), "utf8"));
   assert.equal(manifest.status, "POST-GENESIS CONCEPT / INACTIVE / NO WAGER ROUTE");
   assert.deepEqual(manifest.format, {
@@ -61,7 +64,7 @@ test("ships two source-bound 15-second 4K teaser masters", async () => {
     videoCodec: "h264",
     audioCodec: "aac",
   });
-  assert.equal(manifest.assets.length, 2);
+  assert.equal(manifest.assets.length, 4);
   for (const asset of manifest.assets) {
     assert.match(asset.sha256, /^[a-f0-9]{64}$/);
     const assetUrl = new URL(`public${asset.path}`, root);
