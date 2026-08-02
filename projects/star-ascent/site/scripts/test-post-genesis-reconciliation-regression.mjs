@@ -33,7 +33,7 @@ try {
   cpSync(join(repositoryRoot, "app", "mint"), join(sandboxRoot, "app", "mint"), { recursive: true });
   cpSync(join(repositoryRoot, "programs", "iat_v2"), join(sandboxRoot, "programs", "iat_v2"), { recursive: true });
   cpSync(join(repositoryRoot, "engagement"), join(sandboxRoot, "engagement"), { recursive: true });
-  cpSync(join(repositoryRoot, "pnpm-lock.yaml"), join(sandboxRoot, "pnpm-lock.yaml"));
+  cpSync(join(repositoryRoot, "package-lock.json"), join(sandboxRoot, "package-lock.json"));
   symlinkSync(join(repositoryRoot, "node_modules"), join(sandboxRoot, "node_modules"), "junction");
 
   const reconciliationPath = join(sandboxRoot, "launch", "post-genesis-reconciliation.template.json");

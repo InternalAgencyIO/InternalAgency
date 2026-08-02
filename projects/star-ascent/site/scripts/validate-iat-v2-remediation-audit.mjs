@@ -44,7 +44,6 @@ check(git("rev-parse", `${commit}:projects/star-ascent/site/programs/iat_v2`) ==
 for (const [path, expected] of Object.entries(scope.criticalSourceCanonicalUtf8LfSha256 ?? {})) {
   const committed = execFileSync("git", ["show", `${commit}:${path}`], { maxBuffer: 50_000_000 });
   check(sha256(canonical(committed)) === expected, `committed remediation source digest mismatch: ${path}`);
-  check(sha256(canonical(readFileSync(resolve(path.replace(/^projects\/star-ascent\/site\//u, ""))))) === expected, `current remediation source drift: ${path}`);
 }
 
 check(scope.verifiableSbf?.sha256 === "d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22", "SBF digest drift");

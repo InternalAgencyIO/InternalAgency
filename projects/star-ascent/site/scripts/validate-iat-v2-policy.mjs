@@ -89,6 +89,9 @@ if (!policy.program.noOperatorReroll || policy.ccc.operatorReroll) fail("CCC dra
 if (policy.ccc.firstSelectionDelaySeconds !== 86400 || policy.ccc.frequencyWeeks !== 1) {
   fail("CCC selection must open 24 hours after Genesis and then advance every seven days");
 }
+if (policy.ccc.genesisStatus !== "COMPILED_FAIL_CLOSED_FUTURE_DLC" || policy.ccc.genesisActivationInstruction !== null || !policy.ccc.activationRequiresNewReviewedUpgrade) {
+  fail("CCC Agent/Associate agency selection must remain a fail-closed future DLC at Genesis");
+}
 if (
   policy.tieResolution.scope !== "DEFAULT_FOR_EVERY_PROTOCOL_DECISION_WITH_TWO_OR_MORE_EXACTLY_EQUAL_CANDIDATES"
   || policy.tieResolution.oracleRolls !== 1
@@ -202,6 +205,8 @@ if (declaredProgramId === sentinelProgramId) {
 
 for (const fragment of [
   "pub const RANDOMNESS_ADAPTER_VERIFIED: bool = true;",
+  "pub const CCC_DLC_GENESIS_ENABLED: bool = false;",
+  "IatV2Error::CccDlcNotActive",
   "RANDOMNESS_ADAPTER_VERIFIED,",
   "parse_randomness(&data)",
   "validate_commit_instruction(",

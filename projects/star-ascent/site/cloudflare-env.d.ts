@@ -4,5 +4,6 @@ declare namespace Cloudflare {
     X_CLIENT_ID?: string;
     X_OAUTH_STATE_SECRET?: string;
     X_OAUTH_REDIRECT_URI?: string;
+    NODE_SESSION_SECRET?: string;
   }
 }

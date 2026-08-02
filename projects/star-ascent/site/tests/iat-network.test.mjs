@@ -27,7 +27,15 @@ test("network API is read-only, bounded, and has official RPC reads plus a publi
   assert.match(apiSource, /https:\/\/solana-rpc\.publicnode\.com/);
   assert.match(apiSource, /process\.env\.SOLANA_RPC_URL/);
   assert.match(apiSource, /AbortSignal\.timeout\(5_000\)/);
+  assert.match(apiSource, /MAX_RPC_BATCH_SIZE = 5/);
+  assert.match(apiSource, /MAX_RPC_RESPONSE_BYTES = 2_000_000/);
+  assert.match(apiSource, /MAX_REQUESTS_PER_MINUTE = 12/);
+  assert.match(apiSource, /network_read_rate_limits/);
+  assert.match(apiSource, /cf-connecting-ip/);
+  assert.match(apiSource, /configured-rpc/);
+  assert.match(apiSource, /RPC_RESPONSE_TOO_LARGE/);
   assert.match(apiSource, /RPC_ENDPOINTS_EXHAUSTED/);
+  assert.doesNotMatch(apiSource, /source:\s*new URL\(endpoint/);
   assert.doesNotMatch(apiSource, /sendTransaction|sendRawTransaction|signTransaction/);
 });
 

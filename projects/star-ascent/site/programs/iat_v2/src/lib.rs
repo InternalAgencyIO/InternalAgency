@@ -1,6 +1,7 @@
 // Anchor 1.0.2 expands legacy Solana target/feature cfgs that Rust 1.97
 // reports at the consuming crate. They are framework-generated, not IAT gates.
 #![allow(unexpected_cfgs)]
+#![allow(clippy::diverging_sub_expression)]
 
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::program_option::COption;
@@ -30,10 +31,16 @@ pub const LIQUIDITY_BENEFICIARY: Pubkey = pubkey!("2d41i3afUpWuo2LqpuKao5D1ToEU8
 // are compiled into this source. Mainnet authorization remains controlled by
 // the independent evidence and hardware-signing gates outside this constant.
 pub const RANDOMNESS_ADAPTER_VERIFIED: bool = true;
+// CCC Agent/Associate agency selection is a separately reviewed future DLC.
+// Genesis has no instruction that can change this compile-time fail-closed gate.
+pub const CCC_DLC_GENESIS_ENABLED: bool = false;
 pub const ROUND_PENDING: u8 = 0;
 pub const ROUND_SETTLED: u8 = 1;
 pub const ROUND_EXPIRED_NEUTRAL: u8 = 2;
 
+// CCC entrypoints deliberately return the fail-closed error in the Genesis
+// build. Anchor's generated dispatcher therefore contains known-diverging
+// branches for those handlers.
 #[program]
 pub mod iat_v2 {
     use super::*;
@@ -244,6 +251,7 @@ pub mod iat_v2 {
 
     pub fn register_agency(ctx: Context<RegisterAgency>) -> Result<()> {
         require!(ctx.accounts.config.active, IatV2Error::NotActive);
+        require!(CCC_DLC_GENESIS_ENABLED, IatV2Error::CccDlcNotActive);
         let agency = &mut ctx.accounts.agency;
         agency.config = ctx.accounts.config.key();
         agency.owner = ctx.accounts.agency_owner.key();
@@ -280,6 +288,7 @@ pub mod iat_v2 {
         if role == 0 {
             require!(agency_index.is_none(), IatV2Error::StandardCannotLinkAgency);
         } else {
+            require!(CCC_DLC_GENESIS_ENABLED, IatV2Error::CccDlcNotActive);
             require!(agency_index.is_some(), IatV2Error::CccRoleRequiresAgency);
             require!(
                 agency_index.unwrap() < ctx.accounts.config.agency_count,
@@ -330,6 +339,7 @@ pub mod iat_v2 {
                 IatV2Error::StandardCannotLinkAgency
             );
         } else {
+            require!(CCC_DLC_GENESIS_ENABLED, IatV2Error::CccDlcNotActive);
             require!(
                 ctx.accounts.eligibility.agency_index < ctx.accounts.config.agency_count,
                 IatV2Error::InvalidAgencyIndex
@@ -425,6 +435,7 @@ pub mod iat_v2 {
             );
             (false, None)
         } else {
+            require!(CCC_DLC_GENESIS_ENABLED, IatV2Error::CccDlcNotActive);
             let round = ctx
                 .accounts
                 .round
@@ -700,6 +711,7 @@ pub mod iat_v2 {
     }
 
     pub fn commit_round(ctx: Context<CommitRound>, week: u64) -> Result<()> {
+        require!(CCC_DLC_GENESIS_ENABLED, IatV2Error::CccDlcNotActive);
         require!(
             RANDOMNESS_ADAPTER_VERIFIED,
             IatV2Error::RandomnessAdapterNotVerified
@@ -768,6 +780,7 @@ pub mod iat_v2 {
     }
 
     pub fn settle_round(ctx: Context<SettleRound>) -> Result<()> {
+        require!(CCC_DLC_GENESIS_ENABLED, IatV2Error::CccDlcNotActive);
         require!(
             RANDOMNESS_ADAPTER_VERIFIED,
             IatV2Error::RandomnessAdapterNotVerified
@@ -843,6 +856,7 @@ pub mod iat_v2 {
     }
 
     pub fn expire_round(ctx: Context<ExpireRound>) -> Result<()> {
+        require!(CCC_DLC_GENESIS_ENABLED, IatV2Error::CccDlcNotActive);
         require!(ctx.accounts.config.active, IatV2Error::NotActive);
         require_eq!(
             ctx.accounts.round.status,
@@ -1100,6 +1114,7 @@ fn release_three_reservations(
     Ok(())
 }
 
+#[allow(clippy::too_many_arguments)]
 fn transfer_from_vault<'info>(
     token_program: &Program<'info, Token>,
     source: &Account<'info, TokenAccount>,
@@ -1852,6 +1867,8 @@ pub enum IatV2Error {
     NoEligibleAgencies,
     #[msg("Unknown eligibility role.")]
     UnknownRole,
+    #[msg("CCC Agent/Associate agency selection is an inactive future DLC and is not available at Genesis.")]
+    CccDlcNotActive,
     #[msg("A standard position cannot link a CCC agency.")]
     StandardCannotLinkAgency,
     #[msg("A CCC role requires a registered agency index.")]

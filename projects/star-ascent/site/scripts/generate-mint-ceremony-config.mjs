@@ -29,7 +29,7 @@ const validators = [
 const implementationPaths = [
   "app/mint/ceremony.mjs",
   "app/mint/page.tsx",
-  "pnpm-lock.yaml",
+  "package-lock.json",
 ];
 const allocationOrder = ["community", "treasury", "ecosystem", "coreTeam", "liquidity"];
 const expectedModelTAddress = "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH";

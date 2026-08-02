@@ -1,3 +1,4 @@
+import { env } from "cloudflare:workers";
 import {
   classifyLookup,
   decodePositionAccount,
@@ -6,13 +7,18 @@ import {
 } from "../../network/network-state.mjs";
 
 const RPC_ENDPOINTS = [
-  process.env.SOLANA_RPC_URL?.trim(),
-  "https://api.mainnet.solana.com",
-  "https://api.mainnet-beta.solana.com",
-  "https://solana-rpc.publicnode.com",
-].filter((endpoint): endpoint is string => Boolean(endpoint));
+  process.env.SOLANA_RPC_URL?.trim()
+    ? { url: process.env.SOLANA_RPC_URL.trim(), publicLabel: "configured-rpc" }
+    : null,
+  { url: "https://api.mainnet.solana.com", publicLabel: "api.mainnet.solana.com" },
+  { url: "https://api.mainnet-beta.solana.com", publicLabel: "api.mainnet-beta.solana.com" },
+  { url: "https://solana-rpc.publicnode.com", publicLabel: "solana-rpc.publicnode.com" },
+].filter((endpoint): endpoint is { url: string; publicLabel: string } => Boolean(endpoint));
 const POSITION_ACCOUNT_SIZE = 168;
 const POSITION_OWNER_OFFSET = 40;
+const MAX_RPC_BATCH_SIZE = 5;
+const MAX_RPC_RESPONSE_BYTES = 2_000_000;
+const MAX_REQUESTS_PER_MINUTE = 12;
 
 type RpcRequest = {
   id: string;
@@ -37,11 +43,33 @@ function json(body: unknown, status = 200, maxAge = 0) {
   });
 }
 
+async function sha256(value: string) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function reserveReadQuota(request: Request) {
+  if (!env.DB) return false;
+  const clientIp = request.headers.get("cf-connecting-ip")
+    ?? request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+    ?? "anonymous";
+  const subjectHash = await sha256(`network-read:${clientIp}`);
+  const now = new Date();
+  const windowStart = new Date(Math.floor(now.valueOf() / 60_000) * 60_000).toISOString();
+  const result = await env.DB.prepare("INSERT INTO network_read_rate_limits (subject_hash, window_start_utc, request_count) VALUES (?, ?, 1) ON CONFLICT(subject_hash) DO UPDATE SET request_count = CASE WHEN network_read_rate_limits.window_start_utc = excluded.window_start_utc THEN network_read_rate_limits.request_count + 1 ELSE 1 END, window_start_utc = excluded.window_start_utc WHERE network_read_rate_limits.window_start_utc <> excluded.window_start_utc OR network_read_rate_limits.request_count < ?")
+    .bind(subjectHash, windowStart, MAX_REQUESTS_PER_MINUTE)
+    .run();
+  return result.meta.changes === 1;
+}
+
 async function rpcBatch(requests: RpcRequest[]) {
+  if (requests.length === 0 || requests.length > MAX_RPC_BATCH_SIZE) {
+    throw new Error("RPC_BATCH_LIMIT_EXCEEDED");
+  }
   let lastError = "RPC_ENDPOINTS_EXHAUSTED";
   for (const endpoint of RPC_ENDPOINTS) {
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch(endpoint.url, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(
@@ -50,7 +78,10 @@ async function rpcBatch(requests: RpcRequest[]) {
         signal: AbortSignal.timeout(5_000),
       });
       if (!response.ok) throw new Error(`RPC_HTTP_${response.status}`);
-      const payload = await response.json() as RpcReply[];
+      const bytes = await response.arrayBuffer();
+      if (bytes.byteLength > MAX_RPC_RESPONSE_BYTES) throw new Error("RPC_RESPONSE_TOO_LARGE");
+      const payload = JSON.parse(new TextDecoder().decode(bytes)) as RpcReply[];
+      if (!Array.isArray(payload) || payload.length > requests.length) throw new Error("RPC_RESPONSE_INVALID");
       const replies = new Map(payload.map((reply) => [reply.id, reply]));
       return {
         values: Object.fromEntries(
@@ -62,7 +93,7 @@ async function rpcBatch(requests: RpcRequest[]) {
             return [id, reply.result];
           }),
         ),
-        source: new URL(endpoint).hostname,
+        source: endpoint.publicLabel,
       };
     } catch (error) {
       lastError = error instanceof Error ? error.message : "RPC_UNKNOWN_FAILURE";
@@ -220,12 +251,19 @@ async function addressSnapshot(address: string) {
 export async function GET(request: Request) {
   const lookupValue = new URL(request.url).searchParams.get("q");
   try {
+    if (!await reserveReadQuota(request)) {
+      return Response.json(
+        { error: env.DB ? "NETWORK_READ_RATE_LIMITED" : "NETWORK_READ_QUOTA_UNAVAILABLE" },
+        { status: env.DB ? 429 : 503, headers: { "Cache-Control": "no-store", "Retry-After": "60" } },
+      );
+    }
     if (!lookupValue) {
       return json({
         network: PUBLIC_NETWORK_STATE,
         snapshot: await networkSnapshot(),
       }, 200, 15);
     }
+    if (lookupValue.length > 90) return json({ error: "INVALID_SOLANA_ADDRESS_OR_SIGNATURE" }, 400);
     const lookup = classifyLookup(lookupValue);
     if (lookup.kind === "invalid") {
       return json({ error: "INVALID_SOLANA_ADDRESS_OR_SIGNATURE" }, 400);
@@ -234,10 +272,9 @@ export async function GET(request: Request) {
       ? await signatureSnapshot(lookup.value)
       : await addressSnapshot(lookup.value);
     return json({ network: PUBLIC_NETWORK_STATE, result });
-  } catch (error) {
+  } catch {
     return json({
       error: "SOLANA_RPC_UNAVAILABLE",
-      detail: error instanceof Error ? error.message : "Unknown RPC error",
       network: PUBLIC_NETWORK_STATE,
     }, 503);
   }

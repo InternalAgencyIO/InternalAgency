@@ -115,7 +115,10 @@ export default function NetworkPage() {
 
   useEffect(() => {
     if (window.location.hostname.includes("ileriakil")) setLanguage("tr");
-    fetch("/api/network").then((response) => response.json()).then(setStatus).catch(() => setStatus({ error: "SOLANA_RPC_UNAVAILABLE" }));
+    fetch("/api/network")
+      .then((response) => response.json() as Promise<NetworkPayload>)
+      .then((payload) => setStatus(payload))
+      .catch(() => setStatus({ error: "SOLANA_RPC_UNAVAILABLE" }));
   }, []);
 
   const inspect = async (event: FormEvent) => {
@@ -128,7 +131,7 @@ export default function NetworkPage() {
     setResult(null);
     try {
       const response = await fetch(`/api/network?q=${encodeURIComponent(lookup.trim())}`);
-      setResult(await response.json());
+      setResult(await response.json() as NetworkPayload);
     } catch {
       setResult({ error: "SOLANA_RPC_UNAVAILABLE" });
     } finally {

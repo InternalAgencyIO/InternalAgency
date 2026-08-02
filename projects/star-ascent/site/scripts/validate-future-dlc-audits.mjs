@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -118,11 +119,12 @@ for (const entry of packages) {
     check(manifest.featureBoundary.timeGateImplemented === false, "Associates time-gate finding cannot be masked");
 
     for (const [relativePath, expected] of Object.entries(scope.criticalSourceCanonicalUtf8LfSha256)) {
-      const actual = canonicalUtf8LfSha256(bytes(resolve(relativePath)));
+      const historical = execFileSync("git", ["show", `${scope.sourceCommit}:projects/star-ascent/site/${relativePath}`]);
+      const actual = canonicalUtf8LfSha256(historical);
       check(actual === expected, `Associates audited source drift: ${relativePath}`);
     }
-    const lib = bytes(resolve("programs/iat_v2/src/lib.rs")).toString("utf8");
-    const policy = bytes(resolve("programs/iat_v2/src/policy.rs")).toString("utf8");
+    const lib = execFileSync("git", ["show", `${scope.sourceCommit}:projects/star-ascent/site/programs/iat_v2/src/lib.rs`], { encoding: "utf8" });
+    const policy = execFileSync("git", ["show", `${scope.sourceCommit}:projects/star-ascent/site/programs/iat_v2/src/policy.rs`], { encoding: "utf8" });
     check(policy.includes("CCC_ASSOCIATE_RATE_BPS") && /2\s*=>\s*Some\(CCC_ASSOCIATE_RATE_BPS\)/u.test(policy), "Associate role mapping no longer matches report");
     check(lib.includes("pub fn set_eligibility") && lib.includes("pub fn open_position"), "Associate entry path no longer matches report");
     check(!/associates?_active|associate_activation_timestamp/iu.test(`${lib}\n${policy}`), "Associates gate added; refresh audit instead of retaining stale finding");

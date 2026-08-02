@@ -1,21 +1,30 @@
 CREATE TABLE IF NOT EXISTS node_bindings (
   id TEXT PRIMARY KEY,
-  x_user_id TEXT NOT NULL UNIQUE,
-  x_username TEXT NOT NULL,
   wallet_address TEXT NOT NULL UNIQUE,
-  wallet_challenge_hash TEXT NOT NULL,
-  state TEXT NOT NULL CHECK (state IN ('pending', 'active', 'revoked', 'held')),
-  verified_at_utc TEXT,
+  x_user_id TEXT UNIQUE,
+  x_account_created_at_utc TEXT,
+  country_code TEXT,
+  session_nonce_hash TEXT,
+  session_expires_at_utc TEXT,
+  oauth_nonce_hash TEXT,
+  oauth_expires_at_utc TEXT,
+  x_subscription_type TEXT CHECK (x_subscription_type IS NULL OR x_subscription_type IN ('Premium', 'PremiumPlus')),
+  x_premium_observed_at_utc TEXT,
+  x_premium_revalidate_after_utc TEXT,
+  state TEXT NOT NULL CHECK (state IN ('pending', 'active', 'held')),
+  genesis_slot INTEGER UNIQUE,
   created_at_utc TEXT NOT NULL,
-  updated_at_utc TEXT NOT NULL
+  activated_at_utc TEXT
 );
 
 CREATE TABLE IF NOT EXISTS genesis_slots (
   slot_number INTEGER PRIMARY KEY CHECK (slot_number BETWEEN 1 AND 1000),
   node_binding_id TEXT NOT NULL UNIQUE REFERENCES node_bindings(id),
-  amount_base_units TEXT NOT NULL,
+  amount_base_units TEXT NOT NULL CHECK (amount_base_units = '100000000000'),
   reserved_at_utc TEXT NOT NULL,
-  claim_state TEXT NOT NULL CHECK (claim_state IN ('reserved', 'published', 'claimed', 'held', 'expired'))
+  claim_status TEXT NOT NULL CHECK (claim_status IN ('reserved', 'held', 'claimed', 'expired')),
+  claim_transaction TEXT,
+  claimed_at_utc TEXT
 );
 
 CREATE TABLE IF NOT EXISTS reward_epochs (

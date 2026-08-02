@@ -1,3 +1,5 @@
+use solana_sha256_hasher::hashv;
+
 pub const TOKEN_DECIMALS: u8 = 9;
 pub const MAINNET_SUPPLY: u64 = 1_000_000_000_000_000_000;
 pub const REHEARSAL_SUPPLY: u64 = 1_000_000_000_000;
@@ -412,4 +414,3 @@ mod tests {
         );
     }
 }
-use solana_sha256_hasher::hashv;
