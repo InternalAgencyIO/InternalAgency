@@ -23,6 +23,12 @@ in `index.json` identify the exact bytes.
   Rust host tests, and 16 JavaScript tests.
 - Current-source verifiable SBF: **COMPLETE** at 579,480 bytes with SHA-256
   `d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4`.
+- Current identity/D1 rehearsal: **VERIFIED CREDENTIAL-FREE LOCAL MODEL ONLY**
+  at source `01b0ccbc5295064c559cb0cfaf1a434feeac23b0`. It covers
+  activation-first rollback, replay, duplicate wallet/X identity, provider
+  fail-closed gates, and exact final-slot contention without an X or D1 request.
+- Actual non-production X OAuth and Cloudflare D1 integration rehearsal:
+  **REQUIRED, NOT COMPLETE**.
 - Fresh signed Devnet evidence for the hardened source and current SBF:
   **REQUIRED, NOT COMPLETE**.
 - Independent review of the hardened source and fresh evidence:
@@ -70,6 +76,14 @@ proof. Its six exact source/test inputs are byte-bound to
 It used no validator transaction, wallet, key, signing,
 simulation for signing, broadcast, or network mutation and therefore cannot
 replace a signed Devnet rehearsal or independent review.
+
+`v2-local-identity-d1-rehearsal-20260802T194419Z.json` binds the activation-first
+callback, authoritative Genesis-slot lookup, policy SQL, and local adversarial
+tests to commit `01b0ccbc5295064c559cb0cfaf1a434feeac23b0`. The local model
+forces rollback, replay, duplicate-identity, and 999-to-1,000 contention cases.
+It contains no credentials or personal data and made no provider or D1 request.
+It cannot substitute for an actual non-production integration rehearsal,
+fresh signed Devnet evidence, or independent review.
 
 The earlier 15-, 24-, and 25-signature receipts and every superseded progress
 snapshot remain in the ledger for a complete audit trail.

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -34,7 +35,7 @@ check(index.network === "devnet", "public evidence index must remain devnet-only
 check(index.mainnetStatus === "HOLD", "public evidence must not clear mainnet HOLD");
 check(index.independentReviewRequired === true, "current remediation source must require independent review");
 check(index.secretMaterialIncluded === false, "secret-material declaration must remain false");
-check(Array.isArray(index.records) && index.records.length === 16, "expected sixteen indexed records");
+check(Array.isArray(index.records) && index.records.length === 17, "expected seventeen indexed records");
 check(
   JSON.stringify(index.canonicalAtPublication) === JSON.stringify([
     "v2-initialization-20260730T074603Z.json",
@@ -66,6 +67,22 @@ check(
     && index.currentRemediationState?.independentReview === "REQUIRED_NOT_COMPLETE"
     && index.currentRemediationState?.mainnetStatus === "HOLD",
   "current remediation evidence boundary drift",
+);
+check(
+  index.currentIdentityHardeningState?.sourceCommit
+    === "01b0ccbc5295064c559cb0cfaf1a434feeac23b0"
+    && index.currentIdentityHardeningState?.localModelEvidence
+      === "v2-local-identity-d1-rehearsal-20260802T194419Z.json"
+    && index.currentIdentityHardeningState?.localModelStatus
+      === "VERIFIED_CREDENTIAL_FREE_LOCAL_MODEL_ONLY"
+    && index.currentIdentityHardeningState?.actualXOAuthAndD1Integration
+      === "REQUIRED_NOT_COMPLETE"
+    && index.currentIdentityHardeningState?.freshSignedDevnetEvidence
+      === "REQUIRED_NOT_COMPLETE"
+    && index.currentIdentityHardeningState?.independentReview
+      === "REQUIRED_NOT_COMPLETE"
+    && index.currentIdentityHardeningState?.mainnetStatus === "HOLD",
+  "current identity hardening evidence boundary drift",
 );
 
 const indexedNames = new Set();
@@ -106,6 +123,12 @@ const timeGateProof = JSON.parse(
 const remediationTimeGateProof = JSON.parse(
   await readFile(
     path.join(root, "v2-local-time-gate-proof-hardening-20260802T130622Z.json"),
+    "utf8",
+  ),
+);
+const identityD1Rehearsal = JSON.parse(
+  await readFile(
+    path.join(root, "v2-local-identity-d1-rehearsal-20260802T194419Z.json"),
     "utf8",
   ),
 );
@@ -313,6 +336,62 @@ check(
     ),
   "current remediation proof must retain honest Devnet limitations",
 );
+check(
+  identityD1Rehearsal.schema === "iat-v2-local-identity-d1-rehearsal/v1"
+    && identityD1Rehearsal.status === "VERIFIED_CREDENTIAL_FREE_LOCAL_MODEL_ONLY"
+    && identityD1Rehearsal.network === "local-host"
+    && identityD1Rehearsal.mainnetStatus === "HOLD",
+  "local identity/D1 rehearsal boundary drift",
+);
+check(
+  identityD1Rehearsal.method?.providerRequestPerformed === false
+    && identityD1Rehearsal.method?.cloudflareD1RequestPerformed === false
+    && identityD1Rehearsal.method?.credentialMaterialIncluded === false
+    && identityD1Rehearsal.method?.personalDataIncluded === false
+    && identityD1Rehearsal.method?.walletAccessed === false
+    && identityD1Rehearsal.method?.signingPerformed === false
+    && identityD1Rehearsal.method?.simulationForSigningPerformed === false
+    && identityD1Rehearsal.method?.broadcastingPerformed === false
+    && identityD1Rehearsal.method?.networkMutationPerformed === false,
+  "local identity/D1 rehearsal safety boundary drift",
+);
+check(
+  identityD1Rehearsal.scenarios?.length === 8
+    && identityD1Rehearsal.scenarios?.every(({ result }) => result.startsWith("PASS"))
+    && identityD1Rehearsal.validation?.targetedIdentityTests?.passed === 12
+    && identityD1Rehearsal.validation?.targetedIdentityTests?.failed === 0
+    && identityD1Rehearsal.validation?.checkIatV2?.passed === 65
+    && identityD1Rehearsal.validation?.checkIatV2?.failed === 0
+    && identityD1Rehearsal.validation?.fullLaunchGates === "PASS_HOLD"
+    && identityD1Rehearsal.validation?.productionBuild === "PASS",
+  "local identity/D1 rehearsal result set drift",
+);
+check(
+  identityD1Rehearsal.limitations?.some((item) => item.includes("not an actual Cloudflare D1 integration run"))
+    && identityD1Rehearsal.limitations?.some((item) => item.includes("not signed Devnet evidence"))
+    && identityD1Rehearsal.limitations?.some((item) => item.includes("not independent review")),
+  "local identity/D1 rehearsal must retain honest limitations",
+);
+const identityCommit = identityD1Rehearsal.sourceBinding?.commit;
+const git = (...args) => execFileSync("git", args, { encoding: "utf8", maxBuffer: 50_000_000 }).trim();
+check(/^[0-9a-f]{40}$/u.test(identityCommit ?? ""), "identity rehearsal source commit must be a full SHA-1");
+check(git("rev-parse", `${identityCommit}^{tree}`) === identityD1Rehearsal.sourceBinding?.gitTree, "identity rehearsal source tree mismatch");
+check(git("rev-parse", `${identityCommit}:projects/star-ascent/site/programs/iat_v2`) === identityD1Rehearsal.sourceBinding?.programTree, "identity rehearsal program tree mismatch");
+for (const [sourcePath, blob] of Object.entries(identityD1Rehearsal.sourceBinding?.criticalGitBlobs ?? {})) {
+  check(git("rev-parse", `${identityCommit}:${sourcePath}`) === blob, `identity rehearsal source blob mismatch: ${sourcePath}`);
+}
+check(
+  identityD1Rehearsal.reviewedProgramArtifact?.sha256
+    === "d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4"
+    && identityD1Rehearsal.reviewedProgramArtifact?.bytes === 579480
+    && identityD1Rehearsal.reviewedProgramArtifact?.programTreeUnchangedFromReviewedBuild === true
+    && identityD1Rehearsal.reviewedProgramArtifact?.freshPinnedRebuildPassed === true
+    && identityD1Rehearsal.reviewedProgramArtifact?.lockedRustTests === 23
+    && identityD1Rehearsal.reviewedProgramArtifact?.unsafeStackDiagnosticObserved === false
+    && identityD1Rehearsal.reviewedProgramArtifact?.programSigningArtifactProduced === false
+    && identityD1Rehearsal.reviewedProgramArtifact?.deploymentAuthorized === false,
+  "identity rehearsal program artifact boundary drift",
+);
 
 const files = await readdir(root);
 for (const required of ["README.md", "CC0-1.0.md", "index.json"]) {
@@ -326,6 +405,6 @@ if (failures.length) {
 }
 
 console.log(
-  "Public evidence validation passed: sixteen indexed records, 29 historical finalized signatures, current source-bound local proof and verifiable SBF, fresh signed Devnet and independent review required, CC0, no secret-bearing fields, mainnet HOLD.",
+  "Public evidence validation passed: seventeen indexed records, 29 historical finalized signatures, current source-bound local proofs and verifiable SBF, actual D1 integration, fresh signed Devnet, and independent review required, CC0, no secret-bearing fields, mainnet HOLD.",
 );
 
