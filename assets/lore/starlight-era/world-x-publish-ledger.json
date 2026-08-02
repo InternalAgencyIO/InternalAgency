@@ -114,18 +114,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T11:33:11.834Z",
-    "status": "awaiting_post",
-    "caption": "Switzerland ❤️ Sierra Leone",
-    "imageNumbers": [773, 774, 776],
-    "countries": ["Switzerland", "Sierra Leone"],
-    "assets": [
-      {"file": "773-switzerland-chillon-castle-lake-cipher.png", "sha256": "9b4fb2650fb8d21feeacce66076ff98dab6094bbbbbf3a7f5270360fdcb333fa"},
-      {"file": "774-switzerland-aletsch-glacier-data-extraction.png", "sha256": "56843fddbceabe1961ce2b08a9801e53fc3c8ad40b1cbef34d2251d8c202eb96"},
-      {"file": "776-sierra-leone-freetown-lumley-beach-city-intercept.png", "sha256": "c15be835749d00cec8c48129893552cbcb4ac55873fe8e2d4a2d38e5c4cb0ca8"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -3024,6 +3013,19 @@
         {"file": "770-belarus-belovezhskaya-pushcha-extraction.png", "sha256": "64d35d462ef00b1aa50de4b1978aa3f0dbaa3c983b9a9e0d3f353402f830baaa"},
         {"file": "771-belarus-brest-railway-station-night-relay.png", "sha256": "15d043af6379767db81a075b3c1d026d98423c98796a42d9a3ffc0ca0c6fbf8c"},
         {"file": "772-switzerland-zurich-hauptbahnhof-precision-intercept.png", "sha256": "3d0ef50231af55f5cefcaccba5264e33809c664f78d59dc2a869475618a48f5a"}
+      ],
+      "transmission": "agent_autonomous_verified_one_click"
+    },
+    {
+      "postedAt": "2026-08-02T11:36:57.173Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083879722748915920",
+      "caption": "Switzerland ❤️ Sierra Leone",
+      "imageNumbers": [773, 774, 776],
+      "countries": ["Switzerland", "Sierra Leone"],
+      "assets": [
+        {"file": "773-switzerland-chillon-castle-lake-cipher.png", "sha256": "9b4fb2650fb8d21feeacce66076ff98dab6094bbbbbf3a7f5270360fdcb333fa"},
+        {"file": "774-switzerland-aletsch-glacier-data-extraction.png", "sha256": "56843fddbceabe1961ce2b08a9801e53fc3c8ad40b1cbef34d2251d8c202eb96"},
+        {"file": "776-sierra-leone-freetown-lumley-beach-city-intercept.png", "sha256": "c15be835749d00cec8c48129893552cbcb4ac55873fe8e2d4a2d38e5c4cb0ca8"}
       ],
       "transmission": "agent_autonomous_verified_one_click"
     }
