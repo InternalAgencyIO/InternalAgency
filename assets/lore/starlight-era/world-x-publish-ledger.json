@@ -114,18 +114,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T10:47:17.790Z",
-    "status": "awaiting_post",
-    "caption": "Sweden 💜 Greece",
-    "imageNumbers": [746, 747, 748],
-    "countries": ["Sweden", "Greece"],
-    "assets": [
-      {"file": "746-sweden-abisko-lapporten-extraction.png", "sha256": "edd5f2a8bb0d7f27fbbf877f87aa0db84fd8b54be765e7b225f0415129b9a0f1"},
-      {"file": "747-sweden-malmo-oresund-bridge-night-relay.png", "sha256": "73c61c0ec4254c270f2cbaf18fe335c86924661998398aecc733d66858b7551f"},
-      {"file": "748-greece-athens-stavros-niarchos-intercept.png", "sha256": "57e0db92cbe323daf5098009d8c2c35b5710dd0f45b436e4665583ba95fd707f"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2907,6 +2896,19 @@
         {"file": "744-sweden-stockholm-sergels-torg-intercept.png", "sha256": "34d41bdccbf08917be14487a146da5e075aa6e0f34f3f87a396ae82c2bf2cdb0"},
         {"file": "745-sweden-visby-ring-wall-cipher.png", "sha256": "d0fe0abc019163005e05553cb4c6113348ae132295ed63ad290b74f26607555f"},
         {"file": "743-papua-new-guinea-rabaul-simpson-harbour-night-relay.png", "sha256": "eaee0a525e18090a12b1032bd4a4f5f9a6748cda5091498fb7ec40c5aa5ab08e"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T10:52:07.768Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083868442566746234",
+      "caption": "Sweden 💜 Greece",
+      "imageNumbers": [746, 747, 748],
+      "countries": ["Sweden", "Greece"],
+      "assets": [
+        {"file": "746-sweden-abisko-lapporten-extraction.png", "sha256": "edd5f2a8bb0d7f27fbbf877f87aa0db84fd8b54be765e7b225f0415129b9a0f1"},
+        {"file": "747-sweden-malmo-oresund-bridge-night-relay.png", "sha256": "73c61c0ec4254c270f2cbaf18fe335c86924661998398aecc733d66858b7551f"},
+        {"file": "748-greece-athens-stavros-niarchos-intercept.png", "sha256": "57e0db92cbe323daf5098009d8c2c35b5710dd0f45b436e4665583ba95fd707f"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
