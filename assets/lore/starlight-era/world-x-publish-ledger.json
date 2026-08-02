@@ -42,11 +42,11 @@
         "💙",
         "🧡"
       ],
-      "nextIndex": 7,
+      "nextIndex": 8,
       "lastReservedImageNumbers": [
-        746,
-        747,
-        748
+        749,
+        750,
+        752
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T10:53:26.538Z",
+    "status": "awaiting_post",
+    "caption": "Greece 💜 Azerbaijan",
+    "imageNumbers": [749, 750, 752],
+    "countries": ["Greece", "Azerbaijan"],
+    "assets": [
+      {"file": "749-greece-nafplio-palamidi-fortress-cipher.png", "sha256": "c2d465a5722fff86bd310bb9e4aa0e822ba3a38defa2a5ec7e288915dbba7c16"},
+      {"file": "750-greece-vikos-gorge-extraction.png", "sha256": "2a1436beb0aa243f6bc89c5f6f54abf08f3f99f85e472d81f73e3db50ab0015c"},
+      {"file": "752-azerbaijan-baku-boulevard-caspian-intercept.png", "sha256": "81c34f7937069d5ba3cb7baeda4fb5c3aaebdc1b0bb4dd3e7ee0540a0ea821e2"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
