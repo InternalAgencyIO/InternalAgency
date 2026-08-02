@@ -114,18 +114,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T11:11:54.293Z",
-    "status": "awaiting_post",
-    "caption": "Hungary 🧡 Austria",
-    "imageNumbers": [761, 762, 764],
-    "countries": ["Hungary", "Austria"],
-    "assets": [
-      {"file": "761-hungary-fishermans-bastion-cipher.png", "sha256": "3027a338e0b51ef5abf853df9a4ef7923ad829a67dc4dd91562e6e861761cc7b"},
-      {"file": "762-hungary-hortobagy-puszta-extraction.png", "sha256": "a13bba93f085375117234a7f94e3e704409caff0280c1a96d18cc6e53a1c4b98"},
-      {"file": "764-austria-vienna-museumsquartier-intercept.png", "sha256": "b55557e52f1702647af27859c140247e5b074c271418bbd4ebd27aeb2321b11c"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2972,6 +2961,19 @@
         {"file": "758-israel-makhtesh-ramon-extraction.png", "sha256": "01099d86e86fa838e60e380b57699f9cfd04250c4a922ee523c3048abf478baa"},
         {"file": "759-israel-eilat-red-sea-night-relay.png", "sha256": "5bc8f95598b541740b0578bb7aa54266bbba8ed5d99872538b237175093783f8"},
         {"file": "760-hungary-budapest-chain-bridge-intercept.png", "sha256": "0aadaeae507c9a21a2a83332e4975d8b1658bac733a507c46d3eef3af9b0ebc2"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T11:13:41.126Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083873867303375043",
+      "caption": "Hungary 🧡 Austria",
+      "imageNumbers": [761, 762, 764],
+      "countries": ["Hungary", "Austria"],
+      "assets": [
+        {"file": "761-hungary-fishermans-bastion-cipher.png", "sha256": "3027a338e0b51ef5abf853df9a4ef7923ad829a67dc4dd91562e6e861761cc7b"},
+        {"file": "762-hungary-hortobagy-puszta-extraction.png", "sha256": "a13bba93f085375117234a7f94e3e704409caff0280c1a96d18cc6e53a1c4b98"},
+        {"file": "764-austria-vienna-museumsquartier-intercept.png", "sha256": "b55557e52f1702647af27859c140247e5b074c271418bbd4ebd27aeb2321b11c"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
