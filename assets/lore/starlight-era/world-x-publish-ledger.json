@@ -79,18 +79,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T08:44:59.2991509Z",
-    "status": "awaiting_post",
-    "caption": "Benin ❤️ Rwanda",
-    "imageNumbers": [677, 678, 680],
-    "countries": ["Benin", "Rwanda"],
-    "assets": [
-      {"file": "677-benin-ouidah-portuguese-fort-cipher.png", "sha256": "322c00bcf748018c20fedec817d333db559c41f62b83a02d7de1a91be2503e03"},
-      {"file": "678-benin-tanougou-waterfall-extraction.png", "sha256": "169ef4c1f61bb228d4143a5de038e6c983c4ee45805c0699149122056c9069ad"},
-      {"file": "680-rwanda-kigali-convention-centre-intercept.png", "sha256": "5b79858ef5a2fbd61c1e33125190204169012156dbae567c9ce1e0fc0da5f3c6"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2575,6 +2564,19 @@
         {"file": "676-benin-cotonou-ganhi-lagoon-intercept.png", "sha256": "952edcb08b2f572e2068b7119b0c70cd96e9443a0d8e1261f8f5e764009391db"}
       ],
       "transmission": "agent_file_input_one_click"
+    },
+    {
+      "postedAt": "2026-08-02T09:02:27.9751150Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083840673095078199",
+      "caption": "Benin ❤️ Rwanda",
+      "imageNumbers": [677, 678, 680],
+      "countries": ["Benin", "Rwanda"],
+      "assets": [
+        {"file": "677-benin-ouidah-portuguese-fort-cipher.png", "sha256": "322c00bcf748018c20fedec817d333db559c41f62b83a02d7de1a91be2503e03"},
+        {"file": "678-benin-tanougou-waterfall-extraction.png", "sha256": "169ef4c1f61bb228d4143a5de038e6c983c4ee45805c0699149122056c9069ad"},
+        {"file": "680-rwanda-kigali-convention-centre-intercept.png", "sha256": "5b79858ef5a2fbd61c1e33125190204169012156dbae567c9ce1e0fc0da5f3c6"}
+      ],
+      "transmission": "agent_file_input_home_one_click"
     }
   ]
 }
