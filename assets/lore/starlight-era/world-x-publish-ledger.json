@@ -65,7 +65,17 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T07:00:49.9660719Z",
+    "status": "awaiting_post",
+    "imageNumbers": [669, 670, 667],
+    "countries": ["Zimbabwe", "Cambodia"],
+    "assets": [
+      {"file": "669-zimbabwe-great-enclosure-stone-cipher.png", "sha256": "899099aeb33d0031c0a83ebbd09ea66aa06d36eae30ec8f96eda224d27c94f84"},
+      {"file": "670-zimbabwe-mana-pools-zambezi-extraction.png", "sha256": "1674a9b859b27bf3f503eade12c40fb95ab4365566d251ffdea97025772bd232"},
+      {"file": "667-cambodia-kampot-riverside-old-bridge-night-relay.png", "sha256": "c851570a3bc5b0d0f7f3d5ef852229b4c511af782eb7b2103703036f0934cd05"}
+    ]
+  },
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
