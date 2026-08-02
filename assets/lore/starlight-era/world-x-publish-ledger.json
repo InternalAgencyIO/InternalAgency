@@ -111,18 +111,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T09:43:26.995Z",
-    "status": "awaiting_post",
-    "caption": "Belgium ❤️ Haiti",
-    "imageNumbers": [701, 702, 704],
-    "countries": ["Belgium", "Haiti"],
-    "assets": [
-      {"file": "701-belgium-bruges-markt-belfry-cipher.png", "sha256": "ea60ed3054aa293788209488333bd2203d5a50c056521ef3699ba1da45a39c3d"},
-      {"file": "702-belgium-high-fens-heath-extraction.png", "sha256": "4b724deaac6bfa96b5aa27823d5508dd65c67af0eb78193aafcd53a5309e91fd"},
-      {"file": "704-haiti-port-au-prince-iron-market-intercept.png", "sha256": "43007a3761a5b76cf8f7d523c123d258071f102014edd9e6ee00885fa4661988"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2709,6 +2698,19 @@
         {"file": "698-south-sudan-boma-national-park-savanna-extraction.png", "sha256": "748d3094623d7787a61f32b3f63924f1f51817d211806c9d552c464bfb952208"},
         {"file": "699-south-sudan-sudd-wetlands-night-relay.png", "sha256": "3c3af69493d2af544a83c998aedb00ea94cd8c127f248e4e1150948bcc2e32a8"},
         {"file": "700-belgium-brussels-atomium-skyline-intercept.png", "sha256": "28d63dd8fe3862b669826b411462f2ff7c8a5051263e240e9ca97cd14cb2f1ca"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T09:44:56.361Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083851533620220387",
+      "caption": "Belgium ❤️ Haiti",
+      "imageNumbers": [701, 702, 704],
+      "countries": ["Belgium", "Haiti"],
+      "assets": [
+        {"file": "701-belgium-bruges-markt-belfry-cipher.png", "sha256": "ea60ed3054aa293788209488333bd2203d5a50c056521ef3699ba1da45a39c3d"},
+        {"file": "702-belgium-high-fens-heath-extraction.png", "sha256": "4b724deaac6bfa96b5aa27823d5508dd65c67af0eb78193aafcd53a5309e91fd"},
+        {"file": "704-haiti-port-au-prince-iron-market-intercept.png", "sha256": "43007a3761a5b76cf8f7d523c123d258071f102014edd9e6ee00885fa4661988"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
