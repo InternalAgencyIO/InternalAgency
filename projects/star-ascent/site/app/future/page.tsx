@@ -2,21 +2,30 @@ import type { Metadata } from "next";
 import { FashionReveal } from "./FashionReveal";
 import { FutureNav, InactiveStrip } from "./FutureNav";
 import { futureCopy, getFutureLanguage } from "./language";
+import { localizedSeoTexts } from "../i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const language = await getFutureLanguage();
   const t = futureCopy[language].hub;
+  const [title, description, socialDescription, imageAlt] = await localizedSeoTexts([
+    t.metadataTitle,
+    t.metadataDescription,
+    t.metadataSocialDescription,
+    futureCopy[language].predictive.heroAlt,
+  ]);
   return {
-    title: t.metadataTitle,
-    description: t.metadataDescription,
+    title,
+    description,
     openGraph: {
-      title: t.metadataTitle,
-      description: t.metadataSocialDescription,
-      images: ["/images/future/predictive-engine-hero-v1.jpg"],
+      title,
+      description: socialDescription,
+      images: [{ url: "/images/future/predictive-engine-hero-v1.jpg", alt: imageAlt }],
     },
     twitter: {
       card: "summary_large_image",
-      images: ["/images/future/predictive-engine-hero-v1.jpg"],
+      title,
+      description: socialDescription,
+      images: [{ url: "/images/future/predictive-engine-hero-v1.jpg", alt: imageAlt }],
     },
   };
 }

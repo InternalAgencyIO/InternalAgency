@@ -3,15 +3,17 @@ import { EditorialScene } from "../EditorialScene";
 import { FutureNav, InactiveStrip } from "../FutureNav";
 import { futureCopy, getFutureLanguage } from "../language";
 import { ProtocolEdgeLoop } from "../ProtocolEdgeLoop";
+import { localizedSeoTexts } from "../../i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const language = await getFutureLanguage();
   const t = futureCopy[language].predictive;
+  const [title, description, imageAlt] = await localizedSeoTexts([t.metadataTitle, t.metadataDescription, t.heroAlt]);
   return {
-    title: t.metadataTitle,
-    description: t.metadataDescription,
-    openGraph: { title: t.metadataTitle, description: t.metadataDescription, images: ["/images/future/predictive-engine-hero-v1.jpg"] },
-    twitter: { card: "summary_large_image", images: ["/images/future/predictive-engine-hero-v1.jpg"] },
+    title,
+    description,
+    openGraph: { title, description, images: [{ url: "/images/future/predictive-engine-hero-v1.jpg", alt: imageAlt }] },
+    twitter: { card: "summary_large_image", title, description, images: [{ url: "/images/future/predictive-engine-hero-v1.jpg", alt: imageAlt }] },
   };
 }
 
