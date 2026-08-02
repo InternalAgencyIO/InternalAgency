@@ -1,0 +1,12 @@
+{
+  "schema": "iat-future-hero-audit-checks/v1",
+  "auditedAtUtc": "2026-08-02T07:37:30Z",
+  "results": [
+    {"check":"source status","result":"PASS","detail":"agent/iat-promotions-dlc-draft clean at eafb13c43db78ab182bbbe8fa3890cc1368dd132"},
+    {"check":"critical model tests","result":"PASS","detail":"104 passed, 0 failed"},
+    {"check":"all proposal JSON parse","result":"PASS","detail":"54 parsed, 0 failed"},
+    {"check":"full 55-file proposal test suite","result":"PASS","detail":"510 passed, 0 failed in 195.0 seconds"},
+    {"check":"deployable Solana program present","result":"FAIL","detail":"Reference/model/ABI only; HERO-FUT-001"},
+    {"check":"X Premium enforcement present","result":"FAIL","detail":"No Premium or subscription_type match in proposal tree; HERO-FUT-002"}
+  ]
+}

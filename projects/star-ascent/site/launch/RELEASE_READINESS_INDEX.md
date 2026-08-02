@@ -14,11 +14,17 @@ machine-readable gate is
    and keep ceremony entry blocked until its machine-readable manifest records
    zero open critical/high findings, resolved security blockers, and a completed
    independent final-code audit.
-2. Confirm the public mainnet fee-payer balance is at least the exact
+2. Review the separate future-feature audits for
+   [`Propose a Hero`](../public/audits/iat-hero-dlc-20260802/README.md) and
+   [`CCC Associates`](../public/audits/iat-associates-dlc-20260802/README.md).
+   Hero remains isolated and undeployable. Associates currently fails technical
+   Genesis isolation because role `2` is compiled into the candidate; do not
+   claim a future-only Associates DLC until that critical finding is closed.
+3. Confirm the public mainnet fee-payer balance is at least the exact
    `8500000000` lamport ceremony floor using a fresh read-only observation.
-3. Publish one replacement UTC window; invalidate the expired window and every
+4. Publish one replacement UTC window; invalidate the expired window and every
    packet or approval that pre-dates the replacement.
-4. Regenerate all bound release artifacts before any final review.
+5. Regenerate all bound release artifacts before any final review.
 
 ## Before broadcast
 

@@ -1,0 +1,13 @@
+{
+  "schema": "iat-future-associates-audit-checks/v1",
+  "auditedAtUtc": "2026-08-02T07:37:30Z",
+  "results": [
+    {"check":"source status","result":"PASS","detail":"agent/iat-launch-window clean at 48660c81e437c51e44cc067e7357f6ebc0c5d4ea before audit files"},
+    {"check":"Associate excluded from Genesis program","result":"FAIL","detail":"Role 2 compiles into common program; ASSOC-FUT-001"},
+    {"check":"T+1-week gate","result":"FAIL","detail":"No Associate activation timestamp; ASSOC-FUT-002"},
+    {"check":"wallet/X/Premium attestation","result":"FAIL","detail":"Eligibility stores wallet/role/agency only; ASSOC-FUT-003"},
+    {"check":"check:iat-v2","result":"PASS","detail":"Future-audit validator, policy/evidence/time/readiness gates, regressions, and 41 JavaScript tests passed while preserving mainnet HOLD"},
+    {"check":"check:iat-v2-signoff","result":"PASS","detail":"Command exited zero: initialization sign-off remains PENDING and corrected-program feature sign-off passes"},
+    {"check":"Rust host tests","result":"PASS","detail":"19 passed, 0 failed across unit and exact time-warp boundary suites"}
+  ]
+}

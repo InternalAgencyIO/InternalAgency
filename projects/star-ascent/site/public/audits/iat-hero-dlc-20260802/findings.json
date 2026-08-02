@@ -1,0 +1,80 @@
+{
+  "schema": "iat-future-hero-audit-findings/v1",
+  "featureState": "FUTURE_INACTIVE_NOT_GENESIS_NOT_DEPLOYED",
+  "auditedSourceCommit": "eafb13c43db78ab182bbbe8fa3890cc1368dd132",
+  "identityModel": "UNIQUE_WALLET_PLUS_IMMUTABLE_X_ID_PLUS_X_PREMIUM; MULTIPLE_PAIRS_PER_PERSON_ALLOWED",
+  "findings": [
+    {
+      "id": "HERO-FUT-001",
+      "severity": "CRITICAL",
+      "status": "OPEN",
+      "title": "The reviewed implementation is not a deployable Solana program",
+      "evidence": ["The branch contains a network-free JavaScript state model and proposed JSON ABI", "The interface explicitly reports network NONE and unapplied/deployable-false gates", "No executable Anchor/Solana program implements the modeled guards"],
+      "impact": ["Atomic transfers, PDA uniqueness, account ownership, CPI restrictions, final-slot concurrency, rent, and upgrade behavior cannot be established", "Model tests cannot authorize funding or activation"],
+      "remediation": ["Implement the final isolated program without copying production V2 code", "Test Rust host, SBF/local-validator, contention, failure rollback, and signed Devnet flows", "Audit the exact final source and reproducible binary independently"]
+    },
+    {
+      "id": "HERO-FUT-002",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "X Premium is absent from policy, attestations, and settlement guards",
+      "evidence": ["The proposal tree has no Premium or subscription_type requirement", "Attestation payloads bind node, wallet, and X commitment only", "A verified boolean can represent a non-Premium X account"],
+      "impact": ["The owner-required per-pair qualification and economic cost are bypassed", "Non-Premium pairs can consume the entire 1,000-pair budget in the model"],
+      "remediation": ["Bind allowed X Premium tier and observed-at time inside the signed canonical attestation", "Fail closed on missing, unknown, stale, downgraded, or unverifiable status", "Publish revalidation and X outage behavior"]
+    },
+    {
+      "id": "HERO-FUT-003",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "A proposer can reserve a hero indefinitely",
+      "evidence": ["A nomination stores createdAt but no expiresAt", "Only the proposer can cancel a pending nomination", "Pending nominations expire only when pair 1,000 exhausts the whole campaign"],
+      "impact": ["One qualifying proposer pair can deny one target hero for the lifetime of the campaign", "Permitted multi-account operators can buy many durable target locks"],
+      "remediation": ["Add a bounded nomination TTL", "Allow permissionless deterministic expiry cleanup", "Specify hero rejection and race ordering against settlement"]
+    },
+    {
+      "id": "HERO-FUT-004",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "An active campaign has no timeout, emergency cancellation, or residual refund path",
+      "evidence": ["cancel_campaign_pre_activation rejects ACTIVE", "Surplus finalization is available only after exactly 1,000 pairs", "A low-demand or disabled-verifier campaign can remain active indefinitely"],
+      "impact": ["Up to 180,000 IAT can remain locked indefinitely", "Emergency verifier disable stops attestations but does not recover the promotional vault"],
+      "remediation": ["Specify immutable timeout and emergency terminal states", "Require refund only to the pre-bound community account", "Prevent reopening and preserve complete public accounting"]
+    },
+    {
+      "id": "HERO-FUT-005",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "Verifier truth, reviewer threshold, and identity-commitment custody remain unresolved trust assumptions",
+      "evidence": ["The state engine consumes a verified boolean", "The detached signature adapter proves which key signed, not whether X, Premium, wallet, and node facts are true", "STATUS lists verifier key, reviewer threshold, and pepper custody as open decisions"],
+      "impact": ["A compromised or dishonest verifier can manufacture qualifying pairs until the cap", "A compromised pepper may enable identity correlation or targeted reservation"],
+      "remediation": ["Define independent threshold issuance and review", "Publish key lifecycle and emergency-stop authority", "Log privacy-preserving outcomes and conduct an external trust-boundary review"]
+    },
+    {
+      "id": "HERO-FUT-006",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "The reference engine does not itself prove the mainnet Genesis anchor",
+      "evidence": ["createCampaign accepts a caller-provided genesisTimestamp", "activateCampaign checks a MAINNET string and elapsed seconds", "The proposed ABI names verified_genesis_config but no executable owner/type/content checks exist"],
+      "impact": ["An incorrect anchor can open the model before verified Genesis plus eight hours", "The proposed interface cannot yet demonstrate exact cluster or record ownership binding"],
+      "remediation": ["Define the canonical Genesis account owner, discriminator, content, and finality requirements", "Test exact T+8h-1 and T+8h boundaries against the executable program"]
+    },
+    {
+      "id": "HERO-FUT-007",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "The node deduplication dimension is not reconciled with the accepted participant unit",
+      "evidence": ["Owner policy defines one wallet plus immutable X ID plus X Premium as one qualifying unit", "The proposal independently rejects and rewards by node ID as a third identity key"],
+      "impact": ["A regenerated or shared node record may unexpectedly deny a valid wallet/X/Premium pair", "Public eligibility rules and executable markers can disagree"],
+      "remediation": ["Define node identity as a binding attribute or remove it as an independent human proxy", "Add migration, rotation, and collision rules without imposing proof of personhood"]
+    },
+    {
+      "id": "HERO-FUT-008",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "Handle resolution, display consent, and commitment privacy remain incomplete",
+      "evidence": ["The reference engine accepts a hero commitment and display handle without a resolver proof", "Public-handle display consent and pepper custody remain open decisions"],
+      "impact": ["A displayed handle can be stale, unwanted, or mismatched to the reserved commitment", "Weak commitment derivation can expose immutable X IDs to dictionary attack"],
+      "remediation": ["Bind resolver evidence to the nomination", "Require hero display consent before publication", "Use domain-separated keyed commitments with audited custody and rotation"]
+    }
+  ]
+}

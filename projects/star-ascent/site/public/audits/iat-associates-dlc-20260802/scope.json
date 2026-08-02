@@ -1,0 +1,17 @@
+{
+  "schema": "iat-future-associates-audit-scope/v1",
+  "repository": "InternalAgencyIO/InternalAgency",
+  "publicSourcePullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/4",
+  "sourceBranch": "agent/iat-launch-window",
+  "sourceCommit": "48660c81e437c51e44cc067e7357f6ebc0c5d4ea",
+  "programTree": "6c06e1a6051de709ddcbd707e563a46d4a89a5b4",
+  "criticalSourceSha256": {
+    "programs/iat_v2/src/lib.rs": "acf5298ca2967b898f51bbc2ff644501e94a708c711c2b3346ab5b033caeff46",
+    "programs/iat_v2/src/policy.rs": "e8c348e0bb9f1a0f74bcac260e8efe73acc8067c890b3d7c6a0a69be1dcd94af",
+    "engagement/iat-economic-policy.v2.json": "ed553764aa8be1c739e5b6d12295f8286902e88d04bfb8a2292451252a068c47",
+    "engagement/reward-policy.v1.json": "9112c9896f77b8b72f9fe0415230fcb0bc76749490109f44e3a6b40b2cd5704e",
+    "tests/iat-v2-feature-rehearsal.test.mjs": "eb04111c0a9bf8c015e4bdebe132ab4a5d5df10d35d75dcb12b11dec25dc7213"
+  },
+  "reviewedBehavior": ["common activation", "agency registration", "eligibility mutation", "Associate position opening", "weekly CCC pause settlement", "randomness liveness", "reward reservation", "identity and Premium boundary", "Devnet evidence claims"],
+  "exclusions": ["No production, chain, wallet, key, DNS, hosting, or signing change", "No independent audit or legal review", "No claim that Devnet evidence authorizes mainnet or future DLC activation"]
+}
