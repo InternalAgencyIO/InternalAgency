@@ -1099,6 +1099,13 @@ rejected and regenerated.
 | **Asuncion Costanera River Intercept**<br><img src="800-paraguay-asuncion-costanera-river-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking red-white-cobalt light keys into a silver river prism above Asuncion's Costanera and riverfront skyline"> | **Asuncion Central Railway Cipher**<br><img src="801-paraguay-asuncion-central-railway-cipher.png" width="420" alt="The trio sealing a fictional archive inside an amber crystal capsule beside Asuncion's historic Central Railway Station"> |
 | **Monday Falls Forest Data Extraction**<br><img src="802-paraguay-monday-falls-forest-extraction.png" width="420" alt="The trio restoring a silver-and-turquoise habitat beacon above Monday Falls' three forested waterfall channels"> | **Encarnacion Costanera Night Relay**<br><img src="803-paraguay-encarnacion-costanera-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a red-white-cobalt river relay above Encarnacion's illuminated Costanera and bridge at blue hour"> |
 
+## World Series - North America - Batch 196: Nicaragua
+
+| | |
+|---|---|
+| **Managua Lakefront Azure Intercept**<br><img src="804-nicaragua-managua-lakefront-intercept.png" width="420" alt="Radiance, Ellie, and Alia locking cobalt-white-turquoise light keys into a silver lake prism above Managua's Lake Xolotlan waterfront"> | **Granada Colonial Arcade Amber Cipher**<br><img src="805-nicaragua-granada-colonial-arcade-cipher.png" width="420" alt="The trio sealing a fictional archive inside an amber crystal capsule among Granada's pastel secular colonial merchant arcades"> |
+| **Masaya Volcano Terrain Extraction**<br><img src="806-nicaragua-masaya-volcano-extraction.png" width="420" alt="The trio restoring a silver-and-amber terrain beacon above Masaya Volcano's caldera and black lava fields"> | **Ometepe Ferry Moonline Relay**<br><img src="807-nicaragua-ometepe-ferry-night-relay.png" width="420" alt="Radiance, Ellie, and Alia completing a cobalt-turquoise-gold lake relay at Moyogalpa's Ometepe ferry pier before the twin volcanoes at blue hour"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
