@@ -4,16 +4,20 @@ import {
   IAT_V2_POLICY,
   availableLaneCapacity,
   claimVestedLanePrincipal,
+  cccRoundRecoveryAvailable,
   cccRoundAtTimestamp,
   closePosition,
   cumulativeCorePrincipalUnlocked,
   cumulativeRewardDue,
   cumulativeUnlocked,
+  expireCccRound,
   initializeRewardLedger,
   maximumRewardObligation,
+  neutralExpiredRoundReward,
   openPosition,
   policyWeekAtTimestamp,
   reserveOrdered,
+  rewardForWeek,
   selectAgencyIndex,
   selectUniformTiebreakOutcome,
   selectUniformTiebreakIndex,
@@ -152,7 +156,81 @@ test("weekly CCC selection is deterministic, public, and cannot reroll", () => {
   assert.equal(round.selectedAgencyIndex, expected);
   assert.throws(
     () => settleCccRound({ week: 4, agencyCountSnapshot: 11, randomnessHex: "0".repeat(64), existingRound: round }),
-    /ROUND_ALREADY_SETTLED_NO_REROLL/,
+    /ROUND_ALREADY_RESOLVED_NO_REROLL/,
+  );
+});
+
+test("missing CCC reveal becomes terminal only at the exact timeout and cannot reroll", () => {
+  const commitTimestamp = 1_900_000_000;
+  const pending = {
+    week: 1,
+    status: "PENDING",
+    commitTimestamp,
+    agencyCountSnapshot: 4,
+    candidateSnapshotHash: "immutable",
+  };
+  assert.equal(cccRoundRecoveryAvailable(commitTimestamp, commitTimestamp + 86_399), false);
+  assert.equal(cccRoundRecoveryAvailable(commitTimestamp, commitTimestamp + 86_400), true);
+  assert.throws(
+    () => expireCccRound({ existingRound: pending, nowTimestamp: commitTimestamp + 86_399 }),
+    /ROUND_REVEAL_TIMEOUT_NOT_REACHED/,
+  );
+  const expired = expireCccRound({
+    existingRound: pending,
+    nowTimestamp: commitTimestamp + 86_400,
+  });
+  assert.equal(expired.status, "EXPIRED_NEUTRAL");
+  assert.equal(expired.candidateSnapshotHash, "immutable");
+  assert.equal(expired.randomnessHex, null);
+  assert.equal(expired.selectedAgencyIndex, null);
+  assert.throws(
+    () => settleCccRound({
+      week: 1,
+      agencyCountSnapshot: 4,
+      randomnessHex: "a5".repeat(32),
+      existingRound: expired,
+    }),
+    /ROUND_ALREADY_RESOLVED_NO_REROLL/,
+  );
+  assert.throws(
+    () => expireCccRound({ existingRound: expired, nowTimestamp: commitTimestamp + 172_800 }),
+    /ROUND_ALREADY_RESOLVED_NO_REROLL/,
+  );
+});
+
+test("expired CCC round pays the floor of fair expected value and remains closeable", () => {
+  const initialized = initializeRewardLedger();
+  const opened = openPosition({
+    ledger: initialized.ledger,
+    owner: "agent-neutral-recovery",
+    principal: 1_001n * IAT,
+    role: "cccAgent",
+    agencyIndex: 3,
+    acceptedWeek: 0,
+  });
+  const fullReward = rewardForWeek(opened.position.principal, opened.position.annualRateBps, 0);
+  const settled = settlePositionWeek({
+    ledger: opened.ledger,
+    position: opened.position,
+    round: {
+      week: 1,
+      status: "EXPIRED_NEUTRAL",
+      agencyCountSnapshot: 4,
+      selectedAgencyIndex: null,
+    },
+  });
+  assert.equal(settled.settlement.paused, false);
+  assert.equal(settled.settlement.recoveryMode, "NEUTRAL_EXPECTED_VALUE");
+  assert.equal(settled.settlement.amount, neutralExpiredRoundReward(fullReward, 4));
+  assert.equal(neutralExpiredRoundReward(1_001n, 2), 500n);
+  assert.equal(neutralExpiredRoundReward(1_001n, 1), 0n);
+  assert.throws(
+    () => settlePositionWeek({
+      ledger: opened.ledger,
+      position: opened.position,
+      round: { week: 1, status: "EXPIRED_NEUTRAL", agencyCountSnapshot: 3 },
+    }),
+    /AGENCY_NOT_IN_ROUND_SNAPSHOT/,
   );
 });
 

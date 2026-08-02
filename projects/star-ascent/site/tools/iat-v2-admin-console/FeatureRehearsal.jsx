@@ -21,6 +21,7 @@ import {
   IAT_V2_ROLE,
   buildClaimLanePrincipalInstruction,
   buildCommitRoundInstruction,
+  buildExpireRoundInstruction,
   buildOpenPositionInstruction,
   buildRegisterAgencyInstruction,
   buildSetEligibilityInstruction,
@@ -39,6 +40,7 @@ import {
   currentIatV2Week,
   formatRehearsalWait,
   secondsUntilIatV2CccRound,
+  secondsUntilIatV2RoundRecovery,
   secondsUntilIatV2Week,
 } from "../../programs/iat_v2/feature-rehearsal.mjs";
 import {
@@ -343,10 +345,23 @@ function nextFeatureAction(state) {
     };
   }
   if (state.currentRound && state.currentRound.status === 0) {
+    const recoveryWait = secondsUntilIatV2RoundRecovery(
+      Number(state.currentRound.commitTimestamp),
+      state.nowTimestamp,
+    );
+    if (recoveryWait === 0) {
+      return {
+        id: `EXPIRE_CCC_ROUND_${state.currentCccRound}`,
+        title: `Finalize unavailable CCC round ${state.currentCccRound}`,
+        detail: "Permanently resolves the missing reveal without a replacement roll; every linked position receives the floor of its fair expected weekly reward.",
+        signer: IAT_V2_PROGRAM_ADMIN,
+        week: state.currentCccRound,
+      };
+    }
     return {
       id: `REVEAL_CCC_ROUND_${state.currentCccRound}`,
       title: `Reveal and settle CCC round ${state.currentCccRound}`,
-      detail: "Fetches the enclave reveal and settles the unbiased agency index in the same transaction.",
+      detail: `Fetches the enclave reveal and settles the unbiased agency index in the same transaction. Neutral recovery opens in ${formatRehearsalWait(recoveryWait)}.`,
       signer: IAT_V2_PROGRAM_ADMIN,
       week: state.currentCccRound,
     };
@@ -371,11 +386,13 @@ function nextFeatureAction(state) {
     if (!position || bitIsSet(position.settledMask, 0)) continue;
     const week = Number(position.firstAccrualWeek);
     const round = state.linkedRounds[week];
-    if (state.currentWeek >= week && round?.status === 1) {
+    if (state.currentWeek >= week && [1, 2].includes(round?.status)) {
       return {
         id: `SETTLE_LINKED_POSITION_${positionIndex + 1}_WEEK_${week}`,
         title: `Settle ${position.role === 1 ? "CCC-agent" : "CCC-associate"} week ${week}`,
-        detail: "Applies the settled CCC result: the selected agency is paused and every other linked position is paid.",
+        detail: round.status === 1
+          ? "Applies the settled CCC result: the selected agency is paused and every other linked position is paid."
+          : "Applies terminal neutral recovery: no agency is selected and each linked position receives the floor of its fair expected reward.",
         signer: IAT_V2_PROGRAM_ADMIN,
         positionIndex,
         week,
@@ -564,6 +581,11 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
             week: action.week,
           }),
         );
+      } else if (action.id.startsWith("EXPIRE_CCC_ROUND_")) {
+        transaction.add(buildExpireRoundInstruction({
+          mint,
+          week: action.week,
+        }));
       } else if (
         action.id.startsWith("SETTLE_STANDARD_POSITION_WEEK_")
         || action.id.startsWith("SETTLE_LINKED_POSITION_")

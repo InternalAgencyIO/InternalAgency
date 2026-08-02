@@ -8,6 +8,7 @@ import {
   currentIatV2Week,
   formatRehearsalWait,
   secondsUntilIatV2CccRound,
+  secondsUntilIatV2RoundRecovery,
   secondsUntilIatV2Week,
 } from "../programs/iat_v2/feature-rehearsal.mjs";
 
@@ -92,4 +93,20 @@ test("wait helpers expose the unavoidable CCC-linked settlement delay", () => {
     IAT_V2_SECONDS_PER_DAY + 3_600,
   );
   assert.equal(formatRehearsalWait(IAT_V2_SECONDS_PER_DAY + 3_600), "1d 1h 0m");
+});
+
+test("round recovery wait flips only at the exact 24-hour reveal timeout", () => {
+  const committedAt = 1_900_000_000;
+  assert.equal(
+    secondsUntilIatV2RoundRecovery(committedAt, committedAt + IAT_V2_SECONDS_PER_DAY - 1),
+    1,
+  );
+  assert.equal(
+    secondsUntilIatV2RoundRecovery(committedAt, committedAt + IAT_V2_SECONDS_PER_DAY),
+    0,
+  );
+  assert.throws(
+    () => secondsUntilIatV2RoundRecovery(Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
+    /outside the safe integer range/,
+  );
 });

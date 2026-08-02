@@ -24,6 +24,12 @@ export const IAT_V2_ROLE = Object.freeze({
   CCC_ASSOCIATE: 2,
 });
 
+export const IAT_V2_ROUND_STATUS = Object.freeze({
+  PENDING: 0,
+  SETTLED: 1,
+  EXPIRED_NEUTRAL: 2,
+});
+
 export const IAT_V2_FEATURE_DISCRIMINATORS = Object.freeze({
   registerAgency: [102, 193, 24, 185, 91, 84, 85, 245],
   setEligibility: [101, 95, 132, 213, 175, 252, 123, 46],
@@ -35,6 +41,7 @@ export const IAT_V2_FEATURE_DISCRIMINATORS = Object.freeze({
   closePosition: [123, 134, 81, 0, 49, 68, 98, 98],
   commitRound: [229, 102, 157, 34, 152, 217, 15, 70],
   settleRound: [40, 101, 18, 1, 31, 129, 52, 77],
+  expireRound: [238, 222, 71, 141, 104, 222, 76, 248],
 });
 
 function key(value, label) {
@@ -462,6 +469,27 @@ export function buildSettleRoundInstruction({
   });
 }
 
+export function buildExpireRoundInstruction({
+  mint,
+  week,
+  programId = IAT_V2_PROGRAM_ID,
+} = {}) {
+  const derived = laneAccounts(mint, programId);
+  const round = deriveRoundAddress({
+    config: derived.config,
+    programId: derived.programId,
+    week: Number(unsigned(week, 53, "CCC week")),
+  });
+  return new TransactionInstruction({
+    programId: derived.programId,
+    keys: [
+      account(derived.config),
+      account(round, false, true),
+    ],
+    data: discriminator("expireRound"),
+  });
+}
+
 function bytes(value, minimum, label) {
   const data = Buffer.from(value);
   if (data.length < minimum) throw new Error(`${label} is shorter than the reviewed layout`);
@@ -541,19 +569,20 @@ export function parsePositionAccount(data) {
 }
 
 export function parseRoundAccount(data) {
-  const value = bytes(data, 198, "CCC round");
+  const value = bytes(data, 206, "CCC round");
   return {
     config: new PublicKey(value.subarray(8, 40)),
     randomnessAccount: new PublicKey(value.subarray(40, 72)),
     week: value.readBigUInt64LE(72),
     commitSlot: value.readBigUInt64LE(80),
-    randomness: value.subarray(88, 120),
-    agencyRegistryHashSnapshot: value.subarray(120, 152),
-    decisionContext: value.subarray(152, 184),
-    agencyCountSnapshot: value.readUInt32LE(184),
-    selectedAgencyIndex: value.readUInt32LE(188),
-    derivationCounter: value.readUInt32LE(192),
-    status: value[196],
-    bump: value[197],
+    commitTimestamp: value.readBigInt64LE(88),
+    randomness: value.subarray(96, 128),
+    agencyRegistryHashSnapshot: value.subarray(128, 160),
+    decisionContext: value.subarray(160, 192),
+    agencyCountSnapshot: value.readUInt32LE(192),
+    selectedAgencyIndex: value.readUInt32LE(196),
+    derivationCounter: value.readUInt32LE(200),
+    status: value[204],
+    bump: value[205],
   };
 }

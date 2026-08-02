@@ -66,6 +66,16 @@ export function secondsUntilIatV2CccRound(genesisTimestamp, round, nowTimestamp)
   );
 }
 
+export function secondsUntilIatV2RoundRecovery(commitTimestamp, nowTimestamp) {
+  const committedAt = integerTimestamp(commitTimestamp, "CCC commit timestamp");
+  const now = integerTimestamp(nowTimestamp, "Current timestamp");
+  const recoveryTimestamp = committedAt + IAT_V2_SECONDS_PER_DAY;
+  if (!Number.isSafeInteger(recoveryTimestamp)) {
+    throw new Error("CCC recovery timestamp is outside the safe integer range");
+  }
+  return Math.max(0, recoveryTimestamp - now);
+}
+
 export function formatRehearsalWait(seconds) {
   if (!Number.isFinite(seconds) || seconds < 0) throw new Error("Wait must be non-negative");
   const rounded = Math.ceil(seconds);

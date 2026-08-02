@@ -1,7 +1,8 @@
 # IAT V2 program architecture
 
-Status: host-compiled implementation; BPF build, independent review, and
-matching hardware-wallet devnet rehearsal pending. Mainnet HOLD.
+Status: security-remediation candidate; locked Rust host tests and a local
+verifiable SBF build pass, while independent review and a fresh hardware-wallet
+Devnet rehearsal are pending. Mainnet HOLD.
 
 This document translates `engagement/iat-economic-policy.v2.json` into
 enforceable Solana state transitions. It does not authorize a deployment,
@@ -60,9 +61,9 @@ and registry hash, so the operator cannot omit an existing agency or reroll
 around one.
 
 `Round` binds one policy week to one Switchboard randomness account, commit
-slot, snapshotted agency count and registry hash, decision context, final
-32-byte value, accepted derivation counter, and selected index. A settled round
-is immutable.
+slot and timestamp, snapshotted agency count and registry hash, decision
+context, final 32-byte value, accepted derivation counter, selected index, and
+terminal status. A settled or expired-neutral round is immutable.
 
 `Position` binds owner, principal, accepted week, first accrual week, role,
 agency index, rate, 52-bit settlement bitmap, reward paid, and the outstanding
@@ -79,11 +80,12 @@ reservation split across the three ordered lanes.
 7. `open_position`
 8. `commit_round`
 9. `settle_round`
-10. `settle_position_week`
-11. `settle_core_week`
-12. `claim_lane_principal`
-13. `withdraw_position_principal`
-14. `close_position`
+10. `expire_round`
+11. `settle_position_week`
+12. `settle_core_week`
+13. `claim_lane_principal`
+14. `withdraw_position_principal`
+15. `close_position`
 
 `activate` must reject unless the program ID and verified build are published,
 the hardware upgrade authority is already effective, all five allocation
@@ -132,10 +134,12 @@ step removes the modulo bias that would otherwise favor some indices whenever
 `n` does not divide `2^256`. For the supported `u32` candidate range, a rejected
 sample has probability below `2^-224`, and the implementation permits 16
 deterministic derivations. The candidate snapshot, randomness account, commit
-slot, reveal, counter, winner, and settlement transaction are public. There is
-no operator reroll and no unresolved tie. “Immediate” means the request starts
-at once and becomes final on its committed reveal; it does not mean zero
-network latency.
+slot and timestamp, reveal, counter, winner, and settlement transaction are
+public. A valid reveal cannot be replaced or rerolled. If the reveal remains
+unavailable for exactly 86,400 seconds, `expire_round` makes the original round
+terminal without accepting a replacement value or selecting a winner.
+“Immediate” means the request starts at once and becomes final on its committed
+reveal; it does not mean zero network latency.
 
 ## Weekly CCC draw
 
@@ -154,26 +158,43 @@ The CCC winner uses the universal exact-uniform tiebreak above with the
 snapshotted append-only agency registry as its candidate set. Once settled, the
 round cannot be replaced or rerolled.
 
+The reveal window is half-open: a reveal may settle only before
+`commit_timestamp + 86,400`. At that exact boundary, any caller may invoke
+`expire_round`. Expiry preserves the original account, week, randomness
+account, commit slot, commit timestamp, candidate count, registry hash, and
+decision context; clears every winner/randomness output; and permanently sets
+`EXPIRED_NEUTRAL`. It never creates a second round or requests another oracle
+value.
+
+An expired-neutral round pays each linked position
+`floor(full_weekly_reward * (N - 1) / N)`, where `N` is the immutable candidate
+count. This is the exact per-position expected value of a fair one-of-`N`
+pause, including zero when `N = 1`. The floor cannot exceed the position's
+existing reservation. This recovery removes the permanent-lock failure mode,
+but it does not prove that an authority controlling reveal availability lacks
+selective-withholding incentives. Commit-authority separation or collateral
+and independent game-theory review therefore remain launch blockers.
+
 Positions linked to the selected agency receive a zero rate for that week.
 Their principal, earlier accrual, and reservation remain untouched. The
 core-team reward account does not read CCC state and remains fixed at 17%.
 
 ## Explicit blockers
 
-- The Windows host has an isolated Rust 1.97.1 toolchain and the 14 host tests
-  pass, but WSL/Linux, Solana CLI 3.1.10, Anchor CLI 1.0.2, and Docker are not
-  available. A locked SBF/verifiable build has therefore not run on this host.
+- The remediation source passes the locked Rust host suite and a local
+  verifiable SBF build (`d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22`,
+  606,320 bytes). Local-validator adversarial integration is still required.
 - The ABI-pinned Switchboard parser compiles and its discriminator, offsets,
   official cluster program IDs, same-transaction commit instruction, prior-slot
   seed rule, current-slot reveal rule, seed-slot binding, and no-reroll paths
-  have host coverage. The exact
-  Switchboard commit/reveal transaction still requires BPF integration testing
-  and a signed devnet rehearsal.
-- The mint and program IDs do not exist.
-- Program vault PDAs do not exist.
-- No security or economic review has occurred.
-- The existing four-transaction mint ceremony does not initialize or fund this
-  program and is superseded for V2.
+  have host coverage. The exact Switchboard commit/reveal/expiry sequence still
+  requires BPF integration testing and a fresh signed Devnet rehearsal against
+  this source.
+- Earlier signed Devnet evidence remains historically valid for its recorded
+  binary, but it is not evidence for this changed account layout or instruction
+  set and cannot authorize Mainnet.
+- Critical authority separation and independent security/economic review remain
+  open. Mainnet remains HOLD.
 
 ## Required verification
 
@@ -184,7 +205,7 @@ node --test tests/iat-v2-reference-engine.test.mjs
 node scripts/validate-iat-v2-policy.mjs
 ```
 
-After installing the official Linux/WSL toolchain, run the locked Rust tests,
-the SBF/verifiable build, local-validator integration tests, and the
-hardware-wallet devnet rehearsal. Only then may the V2 allocation plan move
-from HOLD.
+Run the locked Rust tests, SBF/verifiable build, local-validator integration
+tests, and fresh hardware-wallet Devnet rehearsal. Only then, and only after
+critical authority findings close independently, may the V2 allocation plan
+move from HOLD.

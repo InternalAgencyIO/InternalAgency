@@ -1,7 +1,8 @@
 use iat_v2::policy::{
-    cumulative_unlocked, current_ccc_round, current_week, lane_policy, position_maturity_week,
-    CCC_FIRST_SELECTION_DELAY_SECONDS, CORE_TEAM, ECOSYSTEM, LIQUIDITY, SECONDS_PER_WEEK, TREASURY,
-    USER_TERM_WEEKS,
+    ccc_round_recovery_available, cumulative_unlocked, current_ccc_round, current_week,
+    lane_policy, neutral_expired_round_reward, position_maturity_week,
+    CCC_FIRST_SELECTION_DELAY_SECONDS, CCC_REVEAL_TIMEOUT_SECONDS, CORE_TEAM, ECOSYSTEM, LIQUIDITY,
+    SECONDS_PER_WEEK, TREASURY, USER_TERM_WEEKS,
 };
 
 const GENESIS: i64 = 1_900_000_000;
@@ -41,6 +42,26 @@ fn ccc_clock_flips_at_twenty_four_hours_and_then_weekly() {
         current_ccc_round(GENESIS, first + SECONDS_PER_WEEK),
         Some(1)
     );
+}
+
+#[test]
+fn ccc_reveal_recovery_is_unavailable_one_second_before_and_terminal_at_timeout() {
+    let committed_at = GENESIS + CCC_FIRST_SELECTION_DELAY_SECONDS;
+    assert_eq!(
+        ccc_round_recovery_available(committed_at, committed_at + CCC_REVEAL_TIMEOUT_SECONDS - 1),
+        Some(false)
+    );
+    assert_eq!(
+        ccc_round_recovery_available(committed_at, committed_at + CCC_REVEAL_TIMEOUT_SECONDS),
+        Some(true)
+    );
+}
+
+#[test]
+fn neutral_recovery_matches_the_fair_one_of_n_expected_reward() {
+    assert_eq!(neutral_expired_round_reward(1_001, 1), Some(0));
+    assert_eq!(neutral_expired_round_reward(1_001, 2), Some(500));
+    assert_eq!(neutral_expired_round_reward(1_000, 100), Some(990));
 }
 
 #[test]

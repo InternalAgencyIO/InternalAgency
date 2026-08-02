@@ -4,9 +4,11 @@ import { PublicKey } from "@solana/web3.js";
 import { getAssociatedTokenAddressSync } from "@solana/spl-token";
 import {
   IAT_V2_ROLE,
+  IAT_V2_ROUND_STATUS,
   buildClaimLanePrincipalInstruction,
   buildClosePositionInstruction,
   buildCommitRoundInstruction,
+  buildExpireRoundInstruction,
   buildOpenPositionInstruction,
   buildRegisterAgencyInstruction,
   buildSetEligibilityInstruction,
@@ -156,6 +158,10 @@ test("feature instruction builders match the deployed Anchor account order and d
     randomnessAccount: randomness,
     week: 8,
   }).keys.length, 3);
+  const expire = buildExpireRoundInstruction({ mint, week: 8 });
+  assert.equal(expire.keys.length, 2);
+  assert.equal(expire.keys[1].pubkey.toBase58(), round.toBase58());
+  assert.deepEqual([...expire.data], [238, 222, 71, 141, 104, 222, 76, 248]);
 });
 
 test("feature account parsers preserve every reviewed field offset", () => {
@@ -219,22 +225,24 @@ test("feature account parsers preserve every reviewed field offset", () => {
   assert.equal(parsedPosition.annualRateBps, 2_800n);
   assert.equal(parsedPosition.principalReturned, true);
 
-  const roundData = Buffer.alloc(198);
+  const roundData = Buffer.alloc(206);
   mint.toBuffer().copy(roundData, 8);
   owner.toBuffer().copy(roundData, 40);
   roundData.writeBigUInt64LE(8n, 72);
   roundData.writeBigUInt64LE(999n, 80);
-  roundData.fill(0xa5, 88, 120);
-  roundData.fill(0xb6, 120, 152);
-  roundData.fill(0xc7, 152, 184);
-  roundData.writeUInt32LE(100, 184);
-  roundData.writeUInt32LE(42, 188);
-  roundData.writeUInt32LE(1, 192);
-  roundData[196] = 1;
-  roundData[197] = 252;
+  roundData.writeBigInt64LE(1_900_000_000n, 88);
+  roundData.fill(0xa5, 96, 128);
+  roundData.fill(0xb6, 128, 160);
+  roundData.fill(0xc7, 160, 192);
+  roundData.writeUInt32LE(100, 192);
+  roundData.writeUInt32LE(42, 196);
+  roundData.writeUInt32LE(1, 200);
+  roundData[204] = IAT_V2_ROUND_STATUS.EXPIRED_NEUTRAL;
+  roundData[205] = 252;
   const parsedRound = parseRoundAccount(roundData);
   assert.equal(parsedRound.week, 8n);
+  assert.equal(parsedRound.commitTimestamp, 1_900_000_000n);
   assert.equal(parsedRound.agencyCountSnapshot, 100);
   assert.equal(parsedRound.selectedAgencyIndex, 42);
-  assert.equal(parsedRound.status, 1);
+  assert.equal(parsedRound.status, IAT_V2_ROUND_STATUS.EXPIRED_NEUTRAL);
 });

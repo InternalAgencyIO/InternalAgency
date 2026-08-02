@@ -30,6 +30,9 @@ pub const LIQUIDITY_BENEFICIARY: Pubkey = pubkey!("2d41i3afUpWuo2LqpuKao5D1ToEU8
 // are compiled into this source. Mainnet authorization remains controlled by
 // the independent evidence and hardware-signing gates outside this constant.
 pub const RANDOMNESS_ADAPTER_VERIFIED: bool = true;
+pub const ROUND_PENDING: u8 = 0;
+pub const ROUND_SETTLED: u8 = 1;
+pub const ROUND_EXPIRED_NEUTRAL: u8 = 2;
 
 #[program]
 pub mod iat_v2 {
@@ -415,12 +418,12 @@ pub mod iat_v2 {
             IatV2Error::PositionWeekAlreadySettled
         );
 
-        let paused = if ctx.accounts.position.role == 0 {
+        let (paused, neutral_candidate_count) = if ctx.accounts.position.role == 0 {
             require!(
                 ctx.accounts.round.is_none(),
                 IatV2Error::StandardRoundMustBeOmitted
             );
-            false
+            (false, None)
         } else {
             let round = ctx
                 .accounts
@@ -433,20 +436,33 @@ pub mod iat_v2 {
                 IatV2Error::WrongRoundConfig
             );
             require_eq!(round.week, week, IatV2Error::WrongRoundWeek);
-            require_eq!(round.status, 1, IatV2Error::RoundNotSettled);
             require!(
                 ctx.accounts.position.agency_index < round.agency_count_snapshot,
                 IatV2Error::AgencyNotInRoundSnapshot
             );
-            ctx.accounts.position.agency_index == round.selected_agency_index
+            match round.status {
+                ROUND_SETTLED => (
+                    ctx.accounts.position.agency_index == round.selected_agency_index,
+                    None,
+                ),
+                ROUND_EXPIRED_NEUTRAL => (false, Some(round.agency_count_snapshot)),
+                _ => return err!(IatV2Error::RoundNotSettled),
+            }
         };
-        let rate = if paused {
+        let full_amount = reward_for_week(
+            ctx.accounts.position.principal,
+            ctx.accounts.position.annual_rate_bps,
+            ordinal,
+        )
+        .ok_or(IatV2Error::ArithmeticOverflow)?;
+        let amount = if paused {
             0
+        } else if let Some(candidate_count) = neutral_candidate_count {
+            neutral_expired_round_reward(full_amount, candidate_count)
+                .ok_or(IatV2Error::ArithmeticOverflow)?
         } else {
-            ctx.accounts.position.annual_rate_bps
+            full_amount
         };
-        let amount = reward_for_week(ctx.accounts.position.principal, rate, ordinal)
-            .ok_or(IatV2Error::ArithmeticOverflow)?;
         let mut treasury_reserved = ctx.accounts.position.treasury_reserved;
         let mut ecosystem_reserved = ctx.accounts.position.ecosystem_reserved;
         let mut liquidity_reserved = ctx.accounts.position.liquidity_reserved;
@@ -742,10 +758,11 @@ pub mod iat_v2 {
             ccc_tiebreak_context(&config_bytes, week, round.agency_registry_hash_snapshot);
         round.randomness_account = ctx.accounts.randomness_account.key();
         round.commit_slot = committed_seed_slot;
+        round.commit_timestamp = clock.unix_timestamp;
         round.randomness = [0; 32];
         round.selected_agency_index = u32::MAX;
         round.derivation_counter = u32::MAX;
-        round.status = 0;
+        round.status = ROUND_PENDING;
         round.bump = ctx.bumps.round;
         Ok(())
     }
@@ -758,7 +775,7 @@ pub mod iat_v2 {
         require!(ctx.accounts.config.active, IatV2Error::NotActive);
         require_eq!(
             ctx.accounts.round.status,
-            0,
+            ROUND_PENDING,
             IatV2Error::RoundAlreadySettled
         );
         require_keys_eq!(
@@ -768,6 +785,14 @@ pub mod iat_v2 {
         );
 
         let clock = Clock::get()?;
+        require!(
+            !ccc_round_recovery_available(
+                ctx.accounts.round.commit_timestamp,
+                clock.unix_timestamp
+            )
+            .ok_or(IatV2Error::ArithmeticOverflow)?,
+            IatV2Error::RoundRevealWindowExpired
+        );
         let (reveal_slot, revealed) = {
             let data = ctx.accounts.randomness_account.data.borrow();
             let randomness = parse_randomness(&data).ok_or(IatV2Error::InvalidRandomnessAccount)?;
@@ -798,7 +823,7 @@ pub mod iat_v2 {
         round.randomness = revealed;
         round.selected_agency_index = outcome.index;
         round.derivation_counter = outcome.derivation_counter;
-        round.status = 1;
+        round.status = ROUND_SETTLED;
 
         emit!(RoundSettled {
             config: round.config,
@@ -813,6 +838,46 @@ pub mod iat_v2 {
             randomness: round.randomness,
             derivation_counter: round.derivation_counter,
             selected_agency_index: round.selected_agency_index,
+        });
+        Ok(())
+    }
+
+    pub fn expire_round(ctx: Context<ExpireRound>) -> Result<()> {
+        require!(ctx.accounts.config.active, IatV2Error::NotActive);
+        require_eq!(
+            ctx.accounts.round.status,
+            ROUND_PENDING,
+            IatV2Error::RoundAlreadySettled
+        );
+        let clock = Clock::get()?;
+        require!(
+            ccc_round_recovery_available(ctx.accounts.round.commit_timestamp, clock.unix_timestamp)
+                .ok_or(IatV2Error::ArithmeticOverflow)?,
+            IatV2Error::RoundRevealTimeoutNotReached
+        );
+        let recovery_timestamp = ctx
+            .accounts
+            .round
+            .commit_timestamp
+            .checked_add(CCC_REVEAL_TIMEOUT_SECONDS)
+            .ok_or(IatV2Error::ArithmeticOverflow)?;
+        let round = &mut ctx.accounts.round;
+        round.randomness = [0; 32];
+        round.selected_agency_index = u32::MAX;
+        round.derivation_counter = u32::MAX;
+        round.status = ROUND_EXPIRED_NEUTRAL;
+
+        emit!(RoundExpiredNeutral {
+            config: round.config,
+            round: round.key(),
+            week: round.week,
+            randomness_account: round.randomness_account,
+            commit_slot: round.commit_slot,
+            commit_timestamp: round.commit_timestamp,
+            recovery_timestamp,
+            agency_count_snapshot: round.agency_count_snapshot,
+            agency_registry_hash_snapshot: round.agency_registry_hash_snapshot,
+            decision_context: round.decision_context,
         });
         Ok(())
     }
@@ -1558,6 +1623,13 @@ pub struct SettleRound<'info> {
     pub randomness_account: UncheckedAccount<'info>,
 }
 
+#[derive(Accounts)]
+pub struct ExpireRound<'info> {
+    pub config: Account<'info, Config>,
+    #[account(mut, has_one = config)]
+    pub round: Account<'info, Round>,
+}
+
 #[account]
 #[derive(InitSpace)]
 pub struct Config {
@@ -1673,6 +1745,7 @@ pub struct Round {
     pub randomness_account: Pubkey,
     pub week: u64,
     pub commit_slot: u64,
+    pub commit_timestamp: i64,
     pub randomness: [u8; 32],
     pub agency_registry_hash_snapshot: [u8; 32],
     pub decision_context: [u8; 32],
@@ -1697,6 +1770,20 @@ pub struct RoundSettled {
     pub randomness: [u8; 32],
     pub derivation_counter: u32,
     pub selected_agency_index: u32,
+}
+
+#[event]
+pub struct RoundExpiredNeutral {
+    pub config: Pubkey,
+    pub round: Pubkey,
+    pub week: u64,
+    pub randomness_account: Pubkey,
+    pub commit_slot: u64,
+    pub commit_timestamp: i64,
+    pub recovery_timestamp: i64,
+    pub agency_count_snapshot: u32,
+    pub agency_registry_hash_snapshot: [u8; 32],
+    pub decision_context: [u8; 32],
 }
 
 #[error_code]
@@ -1821,6 +1908,10 @@ pub enum IatV2Error {
     CccSelectionNotOpen,
     #[msg("This CCC round was already settled; rerolls are forbidden.")]
     RoundAlreadySettled,
+    #[msg("The CCC reveal window has expired; only terminal neutral recovery is allowed.")]
+    RoundRevealWindowExpired,
+    #[msg("The CCC reveal timeout has not elapsed.")]
+    RoundRevealTimeoutNotReached,
     #[msg("The Switchboard randomness account failed discriminator or size validation.")]
     InvalidRandomnessAccount,
     #[msg(

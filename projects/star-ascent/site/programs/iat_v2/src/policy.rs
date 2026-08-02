@@ -6,6 +6,7 @@ pub const RATE_WEEKS: u128 = 52;
 pub const SECONDS_PER_DAY: i64 = 86_400;
 pub const SECONDS_PER_WEEK: i64 = 604_800;
 pub const CCC_FIRST_SELECTION_DELAY_SECONDS: i64 = SECONDS_PER_DAY;
+pub const CCC_REVEAL_TIMEOUT_SECONDS: i64 = SECONDS_PER_DAY;
 pub const USER_TERM_WEEKS: u64 = 52;
 pub const CORE_TERM_WEEKS: u64 = 104;
 pub const CORE_RATE_BPS: u64 = 1_700;
@@ -132,6 +133,28 @@ pub fn current_ccc_round(genesis_timestamp: i64, now_timestamp: i64) -> Option<u
         now_timestamp
             .checked_sub(first_selection)?
             .checked_div(SECONDS_PER_WEEK)?,
+    )
+    .ok()
+}
+
+pub fn ccc_round_recovery_available(commit_timestamp: i64, now_timestamp: i64) -> Option<bool> {
+    let recovery_timestamp = commit_timestamp.checked_add(CCC_REVEAL_TIMEOUT_SECONDS)?;
+    Some(now_timestamp >= recovery_timestamp)
+}
+
+/// Preserves the exact expected reward of a fair one-of-N weekly pause when
+/// the committed oracle result is unavailable. This terminal fallback cannot
+/// select a winner or supply a replacement random value, so it cannot reroll
+/// the immutable candidate snapshot.
+pub fn neutral_expired_round_reward(full_reward: u64, candidate_count: u32) -> Option<u64> {
+    if candidate_count == 0 {
+        return None;
+    }
+    let payable_candidates = u128::from(candidate_count.checked_sub(1)?);
+    u64::try_from(
+        u128::from(full_reward)
+            .checked_mul(payable_candidates)?
+            .checked_div(u128::from(candidate_count))?,
     )
     .ok()
 }
@@ -357,6 +380,35 @@ mod tests {
                 genesis + CCC_FIRST_SELECTION_DELAY_SECONDS + SECONDS_PER_WEEK
             ),
             Some(1)
+        );
+    }
+
+    #[test]
+    fn ccc_reveal_recovery_flips_at_the_exact_timeout_without_overflow() {
+        let committed_at = 1_900_000_000;
+        assert_eq!(
+            ccc_round_recovery_available(
+                committed_at,
+                committed_at + CCC_REVEAL_TIMEOUT_SECONDS - 1
+            ),
+            Some(false)
+        );
+        assert_eq!(
+            ccc_round_recovery_available(committed_at, committed_at + CCC_REVEAL_TIMEOUT_SECONDS),
+            Some(true)
+        );
+        assert_eq!(ccc_round_recovery_available(i64::MAX, i64::MAX), None);
+    }
+
+    #[test]
+    fn expired_round_reward_is_the_floor_of_the_fair_expected_value() {
+        assert_eq!(neutral_expired_round_reward(1_000, 1), Some(0));
+        assert_eq!(neutral_expired_round_reward(1_001, 2), Some(500));
+        assert_eq!(neutral_expired_round_reward(1_000, 100), Some(990));
+        assert_eq!(neutral_expired_round_reward(1_000, 0), None);
+        assert_eq!(
+            neutral_expired_round_reward(u64::MAX, u32::MAX),
+            Some(18_446_744_069_414_584_318)
         );
     }
 }

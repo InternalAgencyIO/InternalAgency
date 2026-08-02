@@ -5,6 +5,7 @@ const BPS = BigInt(policy.rates.denominatorBasisPoints);
 const RATE_WEEKS = BigInt(policy.rates.weeksPerRateYear);
 export const LANE_ORDER = Object.freeze([...policy.rewardReserve.orderedLanes]);
 export const IAT_V2_POLICY = Object.freeze(policy);
+export const CCC_REVEAL_TIMEOUT_SECONDS = 86_400;
 
 function asAmount(value, label) {
   let amount;
@@ -59,6 +60,22 @@ export function cccRoundAtTimestamp(genesisTimestamp, nowTimestamp) {
   if (!Number.isSafeInteger(firstSelection)) throw new Error("TIMESTAMP_OVERFLOW");
   if (now < firstSelection) throw new Error("CCC_SELECTION_NOT_OPEN");
   return Math.floor((now - firstSelection) / policy.time.secondsPerWeek);
+}
+
+export function cccRoundRecoveryAvailable(commitTimestamp, nowTimestamp) {
+  const committedAt = asWeek(commitTimestamp, "Commit timestamp");
+  const now = asWeek(nowTimestamp, "Current timestamp");
+  const recoveryTimestamp = committedAt + CCC_REVEAL_TIMEOUT_SECONDS;
+  if (!Number.isSafeInteger(recoveryTimestamp)) throw new Error("TIMESTAMP_OVERFLOW");
+  return now >= recoveryTimestamp;
+}
+
+export function neutralExpiredRoundReward(fullReward, candidateCount) {
+  const reward = asAmount(fullReward, "Full weekly reward");
+  if (!Number.isSafeInteger(candidateCount) || candidateCount <= 0 || candidateCount > 0xffff_ffff) {
+    throw new Error("CANDIDATE_COUNT_MUST_FIT_POSITIVE_U32");
+  }
+  return reward * BigInt(candidateCount - 1) / BigInt(candidateCount);
 }
 
 export function cumulativeUnlocked(lane, currentWeek) {
@@ -238,10 +255,24 @@ export function settlePositionWeek({ ledger, position, round = null, week = roun
   if (ordinal < 0 || ordinal >= position.termWeeks) throw new Error("ROUND_OUTSIDE_POSITION_TERM");
   if (position.settledWeeks.includes(policyWeek)) throw new Error("POSITION_WEEK_ALREADY_SETTLED");
   if (position.role === "standard" && round !== null) throw new Error("STANDARD_ROUND_MUST_BE_OMITTED");
-  if (position.role !== "standard" && (!round || round.status !== "SETTLED")) throw new Error("CCC_ROUND_NOT_SETTLED");
-  const paused = position.role !== "standard" && position.agencyIndex === round.selectedAgencyIndex;
+  if (
+    position.role !== "standard"
+    && (!round || !["SETTLED", "EXPIRED_NEUTRAL"].includes(round.status))
+  ) throw new Error("CCC_ROUND_NOT_SETTLED");
+  if (
+    position.role !== "standard"
+    && round.status === "EXPIRED_NEUTRAL"
+    && (!Number.isSafeInteger(round.agencyCountSnapshot)
+      || position.agencyIndex >= round.agencyCountSnapshot)
+  ) throw new Error("AGENCY_NOT_IN_ROUND_SNAPSHOT");
+  const paused = position.role !== "standard"
+    && round.status === "SETTLED"
+    && position.agencyIndex === round.selectedAgencyIndex;
   const rate = paused ? 0 : position.annualRateBps;
-  const amount = rewardForWeek(position.principal, rate, ordinal);
+  const fullAmount = rewardForWeek(position.principal, rate, ordinal);
+  const amount = round?.status === "EXPIRED_NEUTRAL"
+    ? neutralExpiredRoundReward(fullAmount, round.agencyCountSnapshot)
+    : fullAmount;
   const payment = payFromReservation(ledger, position.reservation, amount);
   return {
     ledger: payment.ledger,
@@ -254,6 +285,7 @@ export function settlePositionWeek({ ledger, position, round = null, week = roun
     settlement: {
       week: policyWeek,
       paused,
+      recoveryMode: round?.status === "EXPIRED_NEUTRAL" ? "NEUTRAL_EXPECTED_VALUE" : null,
       rateBps: rate,
       amount,
       paidByLane: payment.paidByLane,
@@ -370,7 +402,7 @@ export function settleCccRound({
   existingRound = null,
 }) {
   const roundWeek = asWeek(week, "Round week");
-  if (existingRound?.status === "SETTLED") throw new Error("ROUND_ALREADY_SETTLED_NO_REROLL");
+  if (existingRound && existingRound.status !== "PENDING") throw new Error("ROUND_ALREADY_RESOLVED_NO_REROLL");
   const outcome = selectUniformTiebreakOutcome({
     randomnessHex,
     candidateCount: agencyCountSnapshot,
@@ -384,5 +416,22 @@ export function settleCccRound({
     decisionContextHex: decisionContextHex.toLowerCase(),
     selectedAgencyIndex: outcome.index,
     derivationCounter: outcome.derivationCounter,
+  };
+}
+
+export function expireCccRound({ existingRound, nowTimestamp }) {
+  if (!existingRound || existingRound.status !== "PENDING") {
+    throw new Error("ROUND_ALREADY_RESOLVED_NO_REROLL");
+  }
+  if (!cccRoundRecoveryAvailable(existingRound.commitTimestamp, nowTimestamp)) {
+    throw new Error("ROUND_REVEAL_TIMEOUT_NOT_REACHED");
+  }
+  return {
+    ...existingRound,
+    status: "EXPIRED_NEUTRAL",
+    randomnessHex: null,
+    selectedAgencyIndex: null,
+    derivationCounter: null,
+    recoveryTimestamp: existingRound.commitTimestamp + CCC_REVEAL_TIMEOUT_SECONDS,
   };
 }
