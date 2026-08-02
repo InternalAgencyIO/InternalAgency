@@ -8,14 +8,46 @@
   "postThroughput": "Drain every currently eligible deterministic trio serially in the run, with one durable reservation at a time, exact reconciliation, and a minimum 30-second pause between confirmed posts and before retries.",
   "ordering": "Starting after the already published images 380 through 385, every new post must mix exactly two images from one country with one image from a different country. Choose the primary country deterministically as the earliest country in countryPriorityOrder with at least two eligible unposted images. Choose the secondary as the earliest different country with at least one eligible unposted image, preferring any older one-image leftover. Preserve ascending numeric order within each country selection and never duplicate or permanently strand an eligible asset.",
   "postComposition": "2+1 country mix",
-  "caption": "<primary country> ❤️ <secondary country>",
+  "caption": "<primary country> <reserved heart> <secondary country>",
   "captionPolicy": {
     "status": "active",
-    "format": "<primary country> ❤️ <secondary country>",
+    "format": "<primary country> <reserved heart> <secondary country>",
     "countryOrder": "Use the primary two-image country first and the secondary one-image country second, matching the countries array and media order in the reservation.",
-    "separator": " ❤️ ",
+    "heartPalette": [
+      "❤️",
+      "🧡",
+      "💛",
+      "💚",
+      "💙",
+      "💜"
+    ],
+    "heartCycle": {
+      "mode": "two-each-shuffled-12-loop",
+      "cycleLength": 12,
+      "cycleNumber": 1,
+      "order": [
+        "💛",
+        "💛",
+        "💜",
+        "❤️",
+        "💚",
+        "💙",
+        "🧡",
+        "❤️",
+        "💚",
+        "💙",
+        "🧡",
+        "💜"
+      ],
+      "nextIndex": 1,
+      "lastReservedImageNumbers": [
+        693,
+        694,
+        691
+      ]
+    },
     "quotes": false,
-    "exactness": "Store the fully expanded caption in pendingPost before transmission. Reconcile both the exact three ordered assets and this exact caption before deciding whether a retry is safe. Existing confirmed posts are not edited or reposted."
+    "exactness": "For each 12-post cycle, use exactly two of each palette heart in a shuffled stored order, then materialize a new shuffled 12-heart cycle and repeat. Freeze the selected heart and fully expanded caption in pendingPost before transmission. Retries reuse that reservation without advancing the cycle. Reconcile both the exact three ordered assets and exact caption before deciding whether a retry is safe. Existing confirmed posts are not edited or reposted."
   },
   "followBackPolicy": {
     "status": "disabled",
