@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { EditorialScene } from "../EditorialScene";
 import { FutureNav, InactiveStrip } from "../FutureNav";
+import { ProtocolEdgeLoop } from "../ProtocolEdgeLoop";
 
 export const metadata: Metadata = {
   title: "Casino DLC — Inactive Preview",
@@ -20,7 +21,7 @@ const proofLayers = [
   ["COMMIT", "Publish the game commitment before a result can be known."],
   ["REVEAL", "Expose the inputs needed to reproduce the result after settlement."],
   ["VERIFY", "Let any player replay the calculation without trusting the interface."],
-  ["ACCOUNT", "Route the proposed 1% edge to the isolated liquidity runway with public totals."],
+  ["ACCOUNT", "Route the fixed 1% protocol edge to the isolated liquidity pool with public totals, extending the APY runway available to eligible $IAT holders."],
 ];
 
 export default function CasinoPage() {
@@ -41,7 +42,7 @@ export default function CasinoPage() {
       <section className="feature-statline" aria-label="Casino DLC proposal summary">
         <div><span>TARGET WINDOW</span><strong>15 DAYS AFTER $IAT GENESIS</strong></div>
         <div><span>ASSETS PROPOSED</span><strong>IAT + SOL</strong></div>
-        <div><span>FIXED EDGE TARGET</span><strong>1%</strong></div>
+        <div><span>PROTOCOL EDGE</span><strong>1% → LIQUIDITY</strong></div>
         <div><span>STATUS</span><strong>INACTIVE</strong></div>
       </section>
       <section className="media-teaser" aria-labelledby="casino-teaser-title">
@@ -61,6 +62,7 @@ export default function CasinoPage() {
         <h2>NO GAME SHIPS ON A PROMISE OF FAIRNESS.</h2>
         <span>Each game requires exact integer accounting, public randomness commitments, deterministic replay vectors, bankroll solvency limits, failure rollback, abuse controls, and an independent final-code audit.</span>
       </section>
+      <ProtocolEdgeLoop />
       <EditorialScene
         eyebrow="FIELD EDITORIAL // EVEREST TABLE"
         title="THE HOUSE REACHES THE SUMMIT."

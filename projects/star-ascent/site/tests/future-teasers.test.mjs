@@ -9,6 +9,7 @@ const sourceFiles = [
   "app/future/FutureNav.tsx",
   "app/future/FashionReveal.tsx",
   "app/future/EditorialScene.tsx",
+  "app/future/ProtocolEdgeLoop.tsx",
   "app/future/predictive-engine/page.tsx",
   "app/future/casino/page.tsx",
 ];
@@ -23,6 +24,10 @@ test("future previews are explicit, inactive, and transaction-free", async () =>
   assert.match(source, /predictive-engine-carrier-runway-v2/);
   assert.match(source, /casino-everest-poker-v2/);
   assert.match(source, /FAIRNESS CLAIM \/\/ NOT YET PROVEN/);
+  assert.match(source, /1% PROTOCOL EDGE/);
+  assert.match(source, /LIQUIDITY POOL/);
+  assert.match(source, /EXTENDED \$IAT APY RUNWAY/);
+  assert.match(source, /not a guaranteed fixed APY or return/i);
   assert.match(source, /DECORATIVE RUNWAY HARDWARE/);
   assert.doesNotMatch(source, /handcuff|restraint|bondage/i);
   assert.doesNotMatch(source, /\/api\//i);
