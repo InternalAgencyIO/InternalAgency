@@ -42,11 +42,11 @@
         "💙",
         "🧡"
       ],
-      "nextIndex": 8,
+      "nextIndex": 9,
       "lastReservedImageNumbers": [
-        749,
-        750,
-        752
+        753,
+        754,
+        751
       ]
     },
     "quotes": false,
@@ -114,7 +114,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T10:56:38.337Z",
+    "status": "awaiting_post",
+    "caption": "Azerbaijan 💚 Greece",
+    "imageNumbers": [753, 754, 751],
+    "countries": ["Azerbaijan", "Greece"],
+    "assets": [
+      {"file": "753-azerbaijan-sheki-caravanserai-cipher.png", "sha256": "30e074247caf69f4fc91f531b6124ceb3d33394de16ebc2f622210e28327045f"},
+      {"file": "754-azerbaijan-gobustan-mud-volcano-extraction.png", "sha256": "19a447ce332c21632785634e3d27b03cd0c7f5be61d8e65a781099ab049bdd82"},
+      {"file": "751-greece-piraeus-mikrolimano-night-relay.png", "sha256": "8730a9e49da584fc2344cacd7b7c94db1afb00663a4b9d6976c3ca051a18a594"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
