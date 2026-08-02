@@ -111,18 +111,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T09:51:27.883Z",
-    "status": "awaiting_post",
-    "caption": "Jordan 💙 Haiti",
-    "imageNumbers": [708, 709, 707],
-    "countries": ["Jordan", "Haiti"],
-    "assets": [
-      {"file": "708-jordan-amman-abdali-boulevard-intercept.png", "sha256": "264dd6824878855edb66242951581b5136ca9f82101cac893ab775d5b8b2b718"},
-      {"file": "709-jordan-petra-treasury-rose-cipher.png", "sha256": "540f2e46442761d52beea9d7e41b85573721e2cba0c675322ef1dd9b556a1e56"},
-      {"file": "707-haiti-cap-haitien-waterfront-night-relay.png", "sha256": "790d027bba97a57593f573fd4eb55dcee659886419ba47e452b879989bbb0238"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2735,6 +2724,19 @@
         {"file": "705-haiti-milot-sans-souci-palace-cipher.png", "sha256": "fc31d3580d92196032cb3f2574c6fa8cb661f36f67ff53625b3fddc0296ff6cb"},
         {"file": "706-haiti-bassin-bleu-waterfall-extraction.png", "sha256": "c453e94f06dd877df4aa45e773f81c628b14d66a52161d2d8befd71ab318dac6"},
         {"file": "703-belgium-antwerp-central-station-night-relay.png", "sha256": "5b6dce9a161701bf4a7e170a437ce46604aa8a456ed782cee200186decc0dff7"}
+      ],
+      "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T09:52:39.639Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083853476749005299",
+      "caption": "Jordan 💙 Haiti",
+      "imageNumbers": [708, 709, 707],
+      "countries": ["Jordan", "Haiti"],
+      "assets": [
+        {"file": "708-jordan-amman-abdali-boulevard-intercept.png", "sha256": "264dd6824878855edb66242951581b5136ca9f82101cac893ab775d5b8b2b718"},
+        {"file": "709-jordan-petra-treasury-rose-cipher.png", "sha256": "540f2e46442761d52beea9d7e41b85573721e2cba0c675322ef1dd9b556a1e56"},
+        {"file": "707-haiti-cap-haitien-waterfront-night-relay.png", "sha256": "790d027bba97a57593f573fd4eb55dcee659886419ba47e452b879989bbb0238"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
     }
