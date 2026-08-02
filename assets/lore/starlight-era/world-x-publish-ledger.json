@@ -79,7 +79,18 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T09:04:22.0728545Z",
+    "status": "awaiting_post",
+    "caption": "Rwanda ❤️ Benin",
+    "imageNumbers": [681, 682, 679],
+    "countries": ["Rwanda", "Benin"],
+    "assets": [
+      {"file": "681-rwanda-kigali-kandt-house-cipher.png", "sha256": "9bf65beef196a2e7a0d1cf4ace45a538194b2e908015e1d033b7d8f2c2b1a75a"},
+      {"file": "682-rwanda-volcanoes-national-park-virunga-extraction.png", "sha256": "5eb2f105f0f4841095d3c360048d744b990a5a288c533cc616cf248fc5cf7526"},
+      {"file": "679-benin-grand-popo-mono-estuary-night-relay.png", "sha256": "eb96e7e751ec04c10021c92a9f7d4398ce3bc5ccdba386bd7260f7014c4d7a49"}
+    ]
+  },
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
