@@ -114,18 +114,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T11:25:12.944Z",
-    "status": "awaiting_post",
-    "caption": "Belarus 💜 Austria",
-    "imageNumbers": [768, 769, 767],
-    "countries": ["Belarus", "Austria"],
-    "assets": [
-      {"file": "768-belarus-minsk-national-library-intercept.png", "sha256": "53ededdfa9d7506d14458041b9b2bf9a021915d547c2d81e35286b92e63a7323"},
-      {"file": "769-belarus-mir-castle-cipher.png", "sha256": "c044d953aa26fe76079175f4730d4308905a22c2a9936d192f47eb789d59b2c3"},
-      {"file": "767-austria-semmering-railway-night-relay.png", "sha256": "14ec5223cfdce462464e6b12da6a75e419cedffca0d47efa086525a77a4d271a"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2998,6 +2987,19 @@
         {"file": "765-austria-salzburg-hohensalzburg-fortress-cipher.png", "sha256": "4265e82be1c1ab7a970f096bb591150975a108534f0002f272fe922435f3b78f"},
         {"file": "766-austria-grossglockner-pasterze-extraction.png", "sha256": "e2234fd218d3099271c91f266fcbe348516f5d2cf1480a87a163107a0ff2b7ee"},
         {"file": "763-hungary-budapest-keleti-night-relay.png", "sha256": "fef4bb33c1749fb81b343d3e50218d745fa97173ed28de87a1c61fef5c4922fb"}
+      ],
+      "transmission": "agent_autonomous_verified_one_click"
+    },
+    {
+      "postedAt": "2026-08-02T11:27:18.729Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083877296578932784",
+      "caption": "Belarus 💜 Austria",
+      "imageNumbers": [768, 769, 767],
+      "countries": ["Belarus", "Austria"],
+      "assets": [
+        {"file": "768-belarus-minsk-national-library-intercept.png", "sha256": "53ededdfa9d7506d14458041b9b2bf9a021915d547c2d81e35286b92e63a7323"},
+        {"file": "769-belarus-mir-castle-cipher.png", "sha256": "c044d953aa26fe76079175f4730d4308905a22c2a9936d192f47eb789d59b2c3"},
+        {"file": "767-austria-semmering-railway-night-relay.png", "sha256": "14ec5223cfdce462464e6b12da6a75e419cedffca0d47efa086525a77a4d271a"}
       ],
       "transmission": "agent_autonomous_verified_one_click"
     }
