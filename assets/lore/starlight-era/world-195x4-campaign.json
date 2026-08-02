@@ -4,12 +4,12 @@
   "status": "active",
   "batchSize": 4,
   "targetCountries": 195,
-  "targetBatches": 195,
-  "targetImages": 780,
+  "targetBatches": 215,
+  "targetImages": 860,
   "startBatch": 90,
-  "endBatch": 284,
+  "endBatch": 304,
   "firstNumber": 380,
-  "lastNumber": 1159,
+  "lastNumber": 1239,
   "nextBatch": 197,
   "nextNumber": 808,
   "completedCountries": 107,
@@ -125,7 +125,7 @@
     "nicaragua"
   ],
   "countryOrderPolicy": {
-    "rule": "Batch 90 is Türkiye. Batches 91 through 284 follow descending national population across the remaining 194 countries, largest first, while continentSubpacks remain the authoritative continent membership and milestone grouping.",
+    "rule": "Batch 90 is Türkiye. The 195 unique-country batches otherwise follow descending national population across the remaining 194 countries, largest first. Batches 197 through 216 insert the 20-country THE MILE HIGH THREESOME bonus revisit sequence without consuming or reordering unfinished unique countries. Batch 217 resumes with the first country that was unfinished when Batch 197 began, and the unique-country sequence then continues through Batch 304. continentSubpacks remain the authoritative continent membership and unique-country milestone grouping.",
     "populationBasis": "World Bank Population, total (SP.POP.TOTL), 2024 values, consulted 2026-07-29; Vatican City and Nauru use small-state fallback estimates only for tail ordering.",
     "source": "https://data.worldbank.org/indicator/SP.POP.TOTL?most_recent_value_desc=true"
   },
@@ -362,7 +362,7 @@
     "blockedPromptArchive": "When an image-generation attempt is rejected by the safety system, preserve only the exact rejected prompt on that planned scene under \"Render blocked prompt\" as a chronological array. Include every distinct rejected attempt, including blocked correction attempts. Never store or disclose a prompt that produced an image."
   },
   "planningContract": {
-    "rule": "Before generating a country batch, materialize exactly one plannedBatches entry for the current nextBatch and nextNumber using the first country in countryPriorityOrder that is not in completedCountrySlugs and has no completed planned batch. Use continentSubpacks only to resolve continent membership and subpack milestones. Give the batch exactly four unique numbered scenes and expected filenames. Once written, that scene plan is binding and must be resumed idempotently until complete.",
+    "rule": "Before generating a country batch, materialize exactly one plannedBatches entry for the current nextBatch and nextNumber. For Batches 197 through 216, use the country at expansionPacks[0].countries[nextBatch - 197] even though it is already in completedCountrySlugs; these are bonus revisit batches and do not consume the normal unique-country selector. For Batch 217 onward, resume the first country in countryPriorityOrder that is not in completedCountrySlugs and has no completed unique-country planned batch, which is the same unfinished point held before Batch 197. Use continentSubpacks only to resolve continent membership and unique-country milestones. Give every batch exactly four unique numbered scenes and expected filenames. Once written, that scene plan is binding and must be resumed idempotently until complete.",
     "scenePattern": [
       "urban or civic interception at a recognizable real location",
       "historic or architectural cipher operation at a different real location",
@@ -371,7 +371,7 @@
     ],
     "filename": "<number>-<country-slug>-<scene-slug>.png",
     "research": "Use established general knowledge only. Never browse the web during automated runs. If uncertain about a landmark, choose a widely known real place or geographically specific environment rather than inventing a factual claim.",
-    "activeExpansionRule": "For Batches 197 through 216, every newly materialized plannedBatches entry must expand the binding THE MILE HIGH THREESOME contract below into all four exact scene briefs. The expansion changes fashion, role choreography, hair, and relationship storytelling only; it never changes the binding country, continent, four-real-location scene pattern, safe mission objective, exactly-three-adult identity lock, numbering, or filename rules."
+    "activeExpansionRule": "For Batches 197 through 216, every newly materialized plannedBatches entry must use the expansion pack's binding countrySequenceOverride and expand the full THE MILE HIGH THREESOME contract below into all four exact scene briefs. This bonus pack intentionally revisits 20 already completed countries, beginning with Türkiye, and changes the country source, fashion, role choreography, hair, and relationship storytelling while preserving continent membership, four-real-location scene pattern, safe mission objective, exactly-three-adult identity lock, numbering, and filename rules. After Batch 216, the normal unique-country selector resumes exactly where it paused."
   },
   "expansionPacks": [
     {
@@ -385,27 +385,34 @@
       "imageCount": 80,
       "imagesPerBatch": 4,
       "countries": [
-        "Serbia",
-        "Bulgaria",
-        "El Salvador",
-        "Republic of the Congo",
-        "Singapore",
-        "Denmark",
-        "Lebanon",
-        "Finland",
-        "Liberia",
-        "Norway",
-        "Slovakia",
-        "Ireland",
-        "Central African Republic",
-        "New Zealand",
-        "Palestine",
-        "Oman",
-        "Mauritania",
-        "Costa Rica",
-        "Kuwait",
-        "Panama"
+        "Türkiye",
+        "China",
+        "India",
+        "United States",
+        "Indonesia",
+        "Pakistan",
+        "Nigeria",
+        "Brazil",
+        "Bangladesh",
+        "Russia",
+        "Ethiopia",
+        "Mexico",
+        "Japan",
+        "Egypt",
+        "Philippines",
+        "Democratic Republic of the Congo",
+        "Vietnam",
+        "Iran",
+        "Germany",
+        "Thailand"
       ],
+      "countrySequenceOverride": {
+        "rule": "Map Batch 197 to countries[0], Batch 198 to countries[1], and continue one country per four-image batch through Batch 216. Türkiye, China, India, and United States are the explicit opening order; the remaining sixteen follow descending population from Indonesia through Thailand. These are deliberate bonus revisits of countries already completed in the base World Series. Do not add their slugs again to completedCountrySlugs and do not increment completedCountries or continent unique-country counts. Increment completedBatches, completedImages, nextBatch, and nextNumber normally. Batch 217 resumes the previously paused unique-country order at Serbia.",
+        "namingLock": "Always spell the country and slug as Türkiye / turkiye. Never write or display Turkey as the country name.",
+        "activationGate": "Do not materialize or render Batch 197 until the pre-render assisted X backlog through image 807 is exhausted and ledger.pendingPost is null. Once that gate is satisfied, X eligibility from images 808 onward must not interrupt rendering; those posts wait for a later user-requested assisted dump.",
+        "resumeCountry": "Serbia",
+        "resumeBatch": 217
+      },
       "premise": "Radiance, Ellie, and Alia become a fictional STAR RAZE couture aircrew in every image. Captain, first officer, and cabin host are fashion-story roles rather than real operational credentials. Rotate all three roles on every successive image so the same woman never holds the same role in consecutive renders.",
       "roleRotation": {
         "indexRule": "Use (imageNumber - 808) modulo 3 to select the assignment. This three-image cycle runs continuously across batch boundaries and changes every woman's role on every successive image.",
@@ -415,7 +422,18 @@
           {"Radiance": "cabin host", "Ellie": "captain", "Alia": "first officer"}
         ]
       },
-      "fashionContract": "Create original, unmistakably high-fashion STAR RAZE captain, first-officer, and cabin-host silhouettes rather than conventional uniforms. Keep every garment fully opaque, securely constructed, non-explicit, public-safe, and action-safe while favoring short hemlines over integrated opaque shorts, bare shoulders, backs, midriffs, and legs where climate permits. Abstract each country's flag palette and recognizable secular craft, landscape, or architectural motifs into couture color blocking, trims, jewelry, bags, hats, gloves, and surface design; never show a literal flag, official emblem, sacred mark, political symbol, real airline identity, readable rank, logo, or text. Every image gives authentic local secular accessories or craft elements to at least one and preferably two women.",
+      "fashionContract": "Create original, unmistakably high-fashion STAR RAZE captain, first-officer, and cabin-host silhouettes rather than conventional uniforms. Fuse hot contemporary aircrew couture with a clean American Apparel-inspired stretch-knit, dancewear, bodysuit, crop-top, micro-skirt-over-integrated-shorts, and studio-basics proportion language, plus upscale adult cabaret and strip-club-stage glamour expressed only through fashion styling, never activity or signage. Keep every garment fully opaque, securely constructed, non-explicit, public-safe, and action-safe while favoring short hemlines, bare shoulders, backs, midriffs, and legs where climate permits. Abstract each country's flag palette and recognizable secular craft, landscape, or architectural motifs into bold immediately legible couture color blocking, trims, jewelry, bags, hats, gloves, and surface design; never show a literal flag, official emblem, sacred mark, political symbol, real airline identity, readable rank, logo, copied branded product, or text. Every image gives authentic local secular accessories or craft elements to at least one and preferably two women.",
+      "countryDesignContract": {
+        "visualRule": "Make the named country unmistakable through the transformed real location, flag-derived palette, secular architecture, landscape geometry, craft materials, and accessories. The country name belongs in the scene title, brief, metadata, filename, and later X caption, never as readable text inside the image.",
+        "flagRule": "Use the country's flag colors and recognizable secular symbolism as abstract fashion color blocking and motifs. Never reproduce a literal flag, official emblem, coat of arms, sacred mark, political symbol, map claim, or state insignia.",
+        "localRule": "Every image must place at least one authentic secular local accessory or craft category on one woman and preferably on two, adapted as contemporary couture rather than costume."
+      },
+      "openingBatchOverride": {
+        "batch": 197,
+        "country": "Türkiye",
+        "rule": "Launch the pack at maximum concept clarity: four distinct hot fictional aircrew editorials combining the Batch 197 latex-led arc, clean American Apparel-inspired body-skimming basics, upscale fully opaque cabaret/strip-club-stage glamour, obvious rotating captain/first-officer/cabin-host roles, Türkiye's hot red and optical white with turquoise, cobalt, black and molten-gold accents, secular tulip, Bosphorus-current, Iznik-inspired geometric tile, nazar-blue glass, kilim-weave and contemporary metalwork motifs, and the pack's wordless adult love triangle. Use Türkiye and turkiye everywhere; never Turkey. Keep styling tasteful, secure, public-safe, action-safe, logo-free, and non-explicit.",
+        "relationshipRule": "Across the four Türkiye images, make Ellie and Radiance the primary romantic current through pecks, hugs, waist and shoulder touches and sustained looks; make Ellie and Alia visibly reciprocal in at least one frame; use playful Radiance-versus-Alia jealousy over Ellie in at least one other frame; finish with all three reconciled in a close affectionate group composition."
+      },
       "styleArcs": [
         {"batches": [197, 198], "mode": "fully opaque latex-led aerodynamic aviation couture"},
         {"batches": [199, 200], "mode": "lace-led aviation couture over solid fully opaque secure bases"},
@@ -454,7 +472,7 @@
       "accessoryRotation": "Rotate sculptural cap or collar arcs, gloves, compact flight cases, jewelry, scarves, eyewear, and country-specific secular craft accessories. Do not use literal pilot wings, real rank bars, airline badges, passports, tickets, or readable documents.",
       "footwearRotation": "Rotate stilettos, platforms, couture flight boots, and heeled sandals while keeping all footwear complete, visible where the crop permits, and safe for the depicted movement.",
       "settingSafety": "Use transformed real country locations and harmless fictional spy-fashion action. No passengers, airport staff, operational cockpit controls, active runway incursion, dangerous aircraft proximity, real agency, real airline, military or police treatment, victims, weapons in use, impacts, or graphic violence.",
-      "materialization": "Expand the applicable style arc, global role assignment, hair capsule when applicable, relationship beat, country adaptation, local accessories, scene choreography, and existing renderContract into each of the four planned scenes before generation. Once materialized, the scene remains binding and may only be safely rewritten under the existing blocked-scene fallback."
+      "materialization": "First apply countrySequenceOverride, then expand the applicable style arc, openingBatchOverride when Batch 197, global role assignment, hair capsule when applicable, relationship beat, countryDesignContract, local accessories, scene choreography, and existing renderContract into each of the four planned scenes before generation. Once materialized, the scene remains binding and may only be safely rewritten under the existing blocked-scene fallback."
     }
   ],
   "continentSubpacks": [

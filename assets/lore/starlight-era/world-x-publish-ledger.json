@@ -5,7 +5,10 @@
   "renderBatchSize": 4,
   "postSize": 3,
   "maxPostsPerRun": null,
-  "postThroughput": "Drain every currently eligible deterministic trio serially in the run, with one durable reservation at a time, exact reconciliation, and a minimum 30-second pause between confirmed posts and before retries.",
+  "publishingMode": "user-assisted-dumps",
+  "preRenderBacklogCeilingImageNumber": 807,
+  "renderInterruptPolicy": "Drain images through 807 during the current assisted dump. Once that pre-render backlog is exhausted, do not interrupt autonomous rendering for new X eligibility. Images 808 onward accumulate for a later user-requested assisted dump.",
+  "postThroughput": "During an active user-assisted dump, drain deterministic trios serially with one durable reservation at a time and exact reconciliation. Do not impose a fixed inter-post delay unless X visibly throttles; the user performs the final Post click.",
   "ordering": "Starting after the already published images 380 through 385, every new post must mix exactly two images from one country with one image from a different country. Choose the primary country deterministically as the earliest country in countryPriorityOrder with at least two eligible unposted images. Choose the secondary as the earliest different country with at least one eligible unposted image, preferring any older one-image leftover. Preserve ascending numeric order within each country selection and never duplicate or permanently strand an eligible asset.",
   "postComposition": "2+1 country mix",
   "caption": "<primary country> <reserved heart> <secondary country>",
@@ -55,7 +58,7 @@
     "rule": "Do not follow or follow back any account until the user explicitly re-enables and tests this phase."
   },
   "startBatch": 90,
-  "endBatch": 284,
+  "endBatch": 304,
   "status": "active",
   "preflight": {
     "batch": 89,

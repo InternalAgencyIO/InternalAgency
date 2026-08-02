@@ -2,8 +2,8 @@
   "campaign": "Radiance, Ellie & Alia: World Series 195x4",
   "status": "active",
   "batchSize": 4,
-  "targetBatches": 277,
-  "targetImages": 1108,
+  "targetBatches": 297,
+  "targetImages": 1188,
   "startNumber": 52,
   "nextNumber": 808,
   "completedBatches": 189,
@@ -27,16 +27,18 @@
     "batchCount": 20,
     "imageCount": 80,
     "contractSource": "world-195x4-campaign.json",
-    "rule": "Apply the binding fictional STAR RAZE aircrew role rotation, two-batch fashion arcs, four-batch unique-hair capsule, country palette and secular accessory adaptation, and wordless adult love-triangle choreography while preserving the World Series country, location, mission, identity, safety, numbering, and four-images-per-country contracts."
+    "countrySequenceSource": "world-195x4-campaign.json expansionPacks[0].countries",
+    "activationGate": "Begin only after the assisted X backlog through image 807 is exhausted and world-x-publish-ledger.json has no pendingPost. Images 808 onward do not interrupt rendering and wait for a later user-requested assisted dump.",
+    "rule": "Apply the binding 20-country bonus revisit order beginning Türkiye, China, India, and United States; always use Türkiye, never Turkey. Apply the fictional STAR RAZE captain/first-officer/cabin-host role rotation, two-batch fashion arcs, Türkiye opening override, four-batch unique-hair capsule, flag-color and secular-motif country adaptation, American Apparel-inspired clean basics, upscale fully opaque cabaret-stage glamour, and wordless adult love-triangle choreography while preserving real locations, safe missions, identity, safety, numbering, and four-images-per-country contracts. Batch 217 resumes the paused unique-country order at Serbia."
   },
   "extension": {
     "name": "World Series 195x4",
     "startBatch": 90,
-    "endBatch": 284,
-    "addedBatches": 195,
-    "addedImages": 780,
+    "endBatch": 304,
+    "addedBatches": 215,
+    "addedImages": 860,
     "continentSubpacks": 6,
-    "countryRule": "One four-image mission batch for each of 195 sovereign states."
+    "countryRule": "One four-image mission batch for each of 195 sovereign states plus the inserted 20-country, 80-image THE MILE HIGH THREESOME bonus revisit pack. Bonus revisits do not increment unique-country or continent milestone counts."
   },
   "batches": [
     {
