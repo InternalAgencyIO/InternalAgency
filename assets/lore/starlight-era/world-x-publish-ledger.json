@@ -79,18 +79,7 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-02T08:12:35.6369890Z",
-    "status": "awaiting_post",
-    "caption": "Guinea ❤️ Zimbabwe",
-    "imageNumbers": [672, 673, 671],
-    "countries": ["Guinea", "Zimbabwe"],
-    "assets": [
-      {"file": "672-guinea-conakry-kaloum-waterfront-intercept.png", "sha256": "e04c7bfc46b722f54fe4f6ba06e219df095cfa0802714c63cd14bba65982dffb"},
-      {"file": "673-guinea-dalaba-highland-villa-cipher.png", "sha256": "1d34cd6c27bd50792a5c2366b65b5c2ca92cb16292ea4760ef0cb21e9a3e22ea"},
-      {"file": "671-zimbabwe-victoria-falls-bridge-night-relay.png", "sha256": "3053c740fe8ebe286835ce1458a53414be2f5664d64657c61f701fff4e2aa94c"}
-    ]
-  },
+  "pendingPost": null,
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
@@ -2549,6 +2538,19 @@
         {"file": "667-cambodia-kampot-riverside-old-bridge-night-relay.png", "sha256": "c851570a3bc5b0d0f7f3d5ef852229b4c511af782eb7b2103703036f0934cd05"}
       ],
       "transmission": "agent_staged_user_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-02T08:18:27.000Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2083829769771098260",
+      "caption": "Guinea ❤️ Zimbabwe",
+      "imageNumbers": [672, 673, 671],
+      "countries": ["Guinea", "Zimbabwe"],
+      "assets": [
+        {"file": "672-guinea-conakry-kaloum-waterfront-intercept.png", "sha256": "e04c7bfc46b722f54fe4f6ba06e219df095cfa0802714c63cd14bba65982dffb"},
+        {"file": "673-guinea-dalaba-highland-villa-cipher.png", "sha256": "1d34cd6c27bd50792a5c2366b65b5c2ca92cb16292ea4760ef0cb21e9a3e22ea"},
+        {"file": "671-zimbabwe-victoria-falls-bridge-night-relay.png", "sha256": "3053c740fe8ebe286835ce1458a53414be2f5664d64657c61f701fff4e2aa94c"}
+      ],
+      "transmission": "agent_file_input_one_click"
     }
   ]
 }
