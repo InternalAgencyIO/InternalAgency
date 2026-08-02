@@ -738,7 +738,8 @@
         "status": "binding from image 812 onward",
         "independenceRule": "Evaluate every character on every image independently. Never apply a group-wide hair, hat or accessory switch merely because one character rolled it. Independent rolls may coincidentally match, but no all-three synchronization is forced.",
         "deterministicRoll": "For idempotency, compute SHA-256 of <imageNumber>|<canonicalCharacterName>|<trait>|mile-high-v1, read the first eight hexadecimal digits as an unsigned integer, and take modulo 100. Preserve the stored result when resuming a partial batch.",
-        "appendOnlyOddsRule": "The trait list is an ever-growing master odds list. Never delete or repurpose an existing trait. Append every newly approved character roll with its original probability and safe visual interpretation, then materialize and store independent rolls on every unfinalized scene before generation.",
+        "precisionDeterministicRoll": "For fractional-percentage traits marked rollScale 1000, use the same SHA-256 seed and first eight hexadecimal digits but take modulo 1000. A 2.0% trait triggers on precision rolls 0 through 19, 1.9% on 0 through 18, continuing proportionally through 1.0% on 0 through 9. Existing modulo-100 traits and their stored outcomes never change.",
+        "appendOnlyOddsRule": "The trait list is an ever-growing master odds list. Never delete or repurpose an existing trait. Append every newly approved character roll with its original probability, roll scale and safe visual interpretation, then materialize and store independent rolls on every unfinalized scene before generation. Use deterministicRoll for integer-percentage traits and precisionDeterministicRoll only for traits explicitly marked rollScale 1000.",
         "threePassSilhouetteProcedure": "For every image, use a clean single-piece foundation when needed, then attempt three isolated garment-only shortening passes. Pass 1 targets concise mid-thigh length; Pass 2 targets upper-mid-thigh length; Pass 3 makes one final small public-safe reduction. Each pass freezes identities, bodies, coverage, pose, country design, mission, camera, footwear and all other attributes. Separately open the waistline upward around the navel through secure opaque crop-and-skirt or connected cutout architecture when appropriate. Archive any blocked pass and retain the strongest last valid result rather than weakening unrelated requirements.",
         "traits": [
           {
@@ -891,6 +892,111 @@
             "trigger": "roll 0 through 2 inclusive",
             "probability": "3%",
             "rule": "Add one tasteful patch of removable gold-leaf shoulder body art using abstract country-craft geometry, never a sacred, official, political or literal flag symbol."
+          },
+          {
+            "trait": "silkMasqueradeMaskReveal",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 19 inclusive",
+            "probability": "2.0%",
+            "rule": "Add one silk masquerade mask playfully pushed above the eyes to reveal a sharp calculating stare. Keep the full face recognizable, the mask secular and original, and the gesture elegant rather than threatening."
+          },
+          {
+            "trait": "equestrianRhythmProp",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 18 inclusive",
+            "probability": "1.9%",
+            "rule": "Give the character a slender leather-bound equestrian rhythm prop tapped against her own knee-high riding boot as a poised fashion beat. It remains decorative, never raised toward or used on another person, and never framed as a weapon or fetish implement."
+          },
+          {
+            "trait": "subtleTacticalWebbing",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 17 inclusive",
+            "probability": "1.8%",
+            "rule": "Integrate intricate woven utility-webbing geometry subtly into the principal garment beneath one open-front lightweight trench-dress silhouette. The webbing is decorative, non-load-bearing and non-restraining; avoid military insignia, weapons and excess layers."
+          },
+          {
+            "trait": "glassCheeklineProp",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 16 inclusive",
+            "probability": "1.7%",
+            "rule": "Rest one smooth solid-glass decorative mission prop lightly against the cheekline for a cool, controlled portrait beat. The glass has rounded edges, remains harmless and never obscures identity."
+          },
+          {
+            "trait": "puzzleRingTwirl",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 15 inclusive",
+            "probability": "1.6%",
+            "rule": "Show ornate interlocking metal puzzle rings casually twirled around one finger while the character holds unwavering eye contact. Keep the rings loose, decorative and clearly unrelated to restraint."
+          },
+          {
+            "trait": "velvetChokerPendantSignal",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 14 inclusive",
+            "probability": "1.5%",
+            "rule": "Add a heavy silver pendant on a comfortably fitted velvet choker; the wearer lifts the pendant slightly as a quiet warning signal while the choker itself stays loose and untouched. No neck pulling, constriction or coercion."
+          },
+          {
+            "trait": "shoulderBodyChain",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 13 inclusive",
+            "probability": "1.4%",
+            "rule": "Drape a delicate silver jewelry chain elegantly across the shoulders over the principal opaque evening garment. Keep it loose, removable, non-restraining and away from intimate anatomy."
+          },
+          {
+            "trait": "dossierSealingWax",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 12 inclusive",
+            "probability": "1.3%",
+            "rule": "Use a vintage sealing kit to drip warm crimson wax deliberately onto a fictional high-stakes dossier, with protected hands, a stable surface and no contact with skin or architecture."
+          },
+          {
+            "trait": "quillMapTrace",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 11 inclusive",
+            "probability": "1.2%",
+            "rule": "Use an elaborate feathered quill to trace the edge of a critical fictional map slowly and deliberately. The map remains unreadable and non-political, and the quill is a harmless mission pointer."
+          },
+          {
+            "trait": "pocketWatchWristChain",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 10 inclusive",
+            "probability": "1.1%",
+            "rule": "Wrap a heavy industrial-style pocket-watch chain loosely around the wearer's own wrist as a removable bracelet, leaving visible slack and full hand mobility. It never connects people or functions as a restraint."
+          },
+          {
+            "trait": "kneelingSpyglassPresentation",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 9 inclusive",
+            "probability": "1.0%",
+            "rule": "Show the character kneeling gracefully in a task-focused presentation pose, offering a polished antique spyglass on a velvet cushion to an adult partner. Keep the exchange reciprocal, non-subservient and mission-centered."
+          },
+          {
+            "trait": "communicationEarpiecePocketWink",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 9 inclusive",
+            "probability": "1.0%",
+            "rule": "Slip a silver-plated fictional communication earpiece into a small structured garment pocket with a knowing heavy-lidded wink. The device is harmless, logo-free and unrelated to any real agency."
+          },
+          {
+            "trait": "bootLacedSilverHairpinFlourish",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 9 inclusive",
+            "probability": "1.0%",
+            "rule": "Wear thigh-high glossy leather fashion boots laced with a blunt decorative silver hairpin; remove and display the hairpin with a graceful flourish as a styling accessory. It is never sharpened, brandished or treated as a weapon."
+          },
+          {
+            "trait": "hiddenVaultKeyTurn",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 9 inclusive",
+            "probability": "1.0%",
+            "rule": "Turn a small antique vault key concealed among an original multi-strand necklace, using it only on a visible fictional mission lock while preserving clear hands, objective and identity."
+          },
+          {
+            "trait": "metallicCorsetBeltReveal",
+            "rollScale": 1000,
+            "trigger": "precision roll 0 through 9 inclusive",
+            "probability": "1.0%",
+            "rule": "Briefly reveal an ornate interlocking metallic waist belt with a decorative faux-lock clasp beneath a carried-open lightweight floor-length cloak. The belt fits comfortably, never locks or constricts, and the cloak functions only as a removable reveal prop over a fully opaque principal garment."
           }
         ],
         "skinAndLayerRule": "Skin exposure stays deliberately high through bare arms, shoulders, upper backs, midriffs and legs where action and climate permit. Use one principal garment per woman with minimal layers. Optional coats, gloves, capes or overskirts may appear only as brief reveal props and must be visibly removed or carried; the final photographed look remains solid, opaque, non-explicit and public-safe. No visible underwear, nudity, transparent intimate coverage, restraint, coercion, weapons or fetish activity."
