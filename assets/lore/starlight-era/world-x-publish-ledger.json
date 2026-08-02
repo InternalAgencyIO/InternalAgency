@@ -65,7 +65,17 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T06:42:16.0124387Z",
+    "status": "awaiting_post",
+    "imageNumbers": [662, 663, 664],
+    "countries": ["Netherlands", "Cambodia"],
+    "assets": [
+      {"file": "662-netherlands-hoge-veluwe-heath-extraction.png", "sha256": "fd6f569bff9976b476a8a6645a0f57c77d3dab3d5cd95dd2c24ee8b98b0496b6"},
+      {"file": "663-netherlands-amsterdam-canal-night-relay.png", "sha256": "09772892dc3c5ed057e6fdd962d743e341f7280a721d99814f1df2aefa18de30"},
+      {"file": "664-cambodia-phnom-penh-mekong-confluence-intercept.png", "sha256": "f95868a5a68a2b7824e5815890504b309070890d6833544fb3494ae7735b6d90"}
+    ]
+  },
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
