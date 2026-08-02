@@ -65,7 +65,17 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-02T02:21:24.6871719Z",
+    "status": "awaiting_post",
+    "imageNumbers": [657, 658, 655],
+    "countries": ["Ecuador", "Guatemala"],
+    "assets": [
+      {"file": "657-ecuador-guayaquil-las-penas-arcade-cipher.png", "sha256": "759e9e1bffc8b48d844e6fab17f0065d6649043c594dc09a02cd1c22463c4ed0"},
+      {"file": "658-ecuador-cotopaxi-volcanic-light-extraction.png", "sha256": "5f7f7b2adbfa25cfa5976ba4c2fbed67ec5afeacbb7feda458b037ccb22ad560"},
+      {"file": "655-guatemala-flores-lake-peten-night-relay.png", "sha256": "58f9fa8f79ca59bcdaf470466d543275491c75edfb5025ecea183658d05e9546"}
+    ]
+  },
   "posts": [
     {
       "postedAt": "2026-07-29T19:47:08.3322748Z",
