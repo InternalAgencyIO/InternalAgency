@@ -8,7 +8,7 @@
   "publishingMode": "user-assisted-dumps",
   "preRenderBacklogCeilingImageNumber": 807,
   "renderInterruptPolicy": "Drain images through 807 during the current assisted dump. Once that pre-render backlog is exhausted, do not interrupt autonomous rendering for new X eligibility. Images 808 onward accumulate for a later user-requested assisted dump.",
-  "postThroughput": "During an active user-assisted dump, drain deterministic trios serially with one durable reservation at a time and exact reconciliation. Do not impose a fixed inter-post delay unless X visibly throttles; the user performs the final Post click.",
+  "postThroughput": "During an explicitly requested bulk-assisted dump, freeze one deterministic prepared queue of up to ten exact trios, open one verified composer tab per trio without an artificial inter-tab delay, and leave every final Post click to the user. Reconcile the queued reservations in order after the clicks; never regenerate or duplicate an uncertain transmission.",
   "ordering": "Starting after the already published images 380 through 385, every new post must mix exactly two images from one country with one image from a different country. Choose the primary country deterministically as the earliest country in countryPriorityOrder with at least two eligible unposted images. Choose the secondary as the earliest different country with at least one eligible unposted image, preferring any older one-image leftover. Preserve ascending numeric order within each country selection and never duplicate or permanently strand an eligible asset.",
   "postComposition": "2+1 country mix",
   "caption": "<primary country> <reserved heart> <secondary country>",
@@ -27,30 +27,30 @@
     "heartCycle": {
       "mode": "two-each-shuffled-12-loop",
       "cycleLength": 12,
-      "cycleNumber": 3,
+      "cycleNumber": 4,
       "order": [
-        "🧡",
         "💜",
-        "💛",
         "❤️",
-        "💙",
         "💚",
         "🧡",
-        "💙",
-        "❤️",
         "💛",
+        "💙",
+        "💛",
+        "🧡",
+        "💙",
         "💜",
+        "❤️",
         "💚"
       ],
-      "nextIndex": 5,
+      "nextIndex": 2,
       "lastReservedImageNumbers": [
-        777,
-        778,
-        775
+        804,
+        805,
+        803
       ]
     },
     "quotes": false,
-    "exactness": "For each 12-post cycle, use exactly two of each palette heart in a shuffled stored order, then materialize a new shuffled 12-heart cycle and repeat. Freeze the selected heart and fully expanded caption in pendingPost before transmission. Retries reuse that reservation without advancing the cycle. Reconcile both the exact three ordered assets and exact caption before deciding whether a retry is safe. Existing confirmed posts are not edited or reposted."
+    "exactness": "For each 12-post cycle, use exactly two of each palette heart in a shuffled stored order, then materialize a new shuffled 12-heart cycle and repeat. Freeze the selected heart and fully expanded caption in pendingPost or preparedPostQueue before transmission. Retries reuse the frozen reservation without advancing the cycle. Reconcile both the exact three ordered assets and exact caption before deciding whether a retry is safe. Existing confirmed posts are not edited or reposted."
   },
   "followBackPolicy": {
     "status": "disabled",
@@ -116,7 +116,7 @@
   ],
   "pendingPost": {
     "stagedAt": "2026-08-02T11:38:14.596Z",
-    "status": "awaiting_post",
+    "status": "awaiting_user_click",
     "caption": "Sierra Leone 💙 Switzerland",
     "imageNumbers": [777, 778, 775],
     "countries": ["Sierra Leone", "Switzerland"],
@@ -126,6 +126,116 @@
       {"file": "775-switzerland-landwasser-viaduct-night-relay.png", "sha256": "144a474b889af2f3ed95ac55d0218c5ed3cdd1db1a4e4ab8613975bde1a3b822"}
     ]
   },
+  "preparedPostQueue": [
+    {
+      "stagedAt": "2026-08-02T11:46:15.4115649Z",
+      "status": "awaiting_user_click",
+      "caption": "Togo 💚 Sierra Leone",
+      "imageNumbers": [780, 781, 779],
+      "countries": ["Togo", "Sierra Leone"],
+      "assets": [
+        {"file": "780-togo-lome-seafront-gulf-intercept.png", "sha256": "f9da551718123207b5b7855457114f1a401d90cbbd76f9139ac2d034485424c3"},
+        {"file": "781-togo-palais-de-lome-garden-cipher.png", "sha256": "ed36ece5066641beeacba768552a392dda8bc441715b1b0f707330458892e3d3"},
+        {"file": "779-sierra-leone-lungi-ferry-harbor-night-relay.png", "sha256": "2718c688816c75b58d67ecf931fc2f0966ec1d9ca173664d627b765e4e2da1c0"}
+      ]
+    },
+    {
+      "stagedAt": "2026-08-02T11:46:15.4115649Z",
+      "status": "awaiting_user_click",
+      "caption": "Togo 🧡 Laos",
+      "imageNumbers": [782, 783, 784],
+      "countries": ["Togo", "Laos"],
+      "assets": [
+        {"file": "782-togo-fazao-malfakassa-mountain-extraction.png", "sha256": "646ba8b633648419570180971780757936e7e9f8c8ff56ceb1d9e80151143747"},
+        {"file": "783-togo-lome-port-night-relay.png", "sha256": "189d34b3e93bbc84a608eea56c0e6e3cf261012bf398d38278f80fdba4db2021"},
+        {"file": "784-laos-vientiane-mekong-riverfront-intercept.png", "sha256": "3659898eaca522a7b1cd6898635a246b0567774c81beadf89083ac8a3ad5524d"}
+      ]
+    },
+    {
+      "stagedAt": "2026-08-02T11:46:15.4115649Z",
+      "status": "awaiting_user_click",
+      "caption": "Laos 💙 Turkmenistan",
+      "imageNumbers": [785, 786, 788],
+      "countries": ["Laos", "Turkmenistan"],
+      "assets": [
+        {"file": "785-laos-luang-prabang-old-town-cipher.png", "sha256": "409350156f7b4d74117fbd4591d51abe29671e1edc3f8d7f90e5a3a45fed5ef0"},
+        {"file": "786-laos-kuang-si-waterfall-extraction.png", "sha256": "7e055ddac76185aea9c130ccc7c581ce93011da87eb51b872f427ed44378c101"},
+        {"file": "788-turkmenistan-ashgabat-marble-boulevard-intercept.png", "sha256": "69ddac6a7b589c47c6dd001b16cd16e224eefe7193f229876e11ce9595791425"}
+      ]
+    },
+    {
+      "stagedAt": "2026-08-02T11:46:15.4115649Z",
+      "status": "awaiting_user_click",
+      "caption": "Turkmenistan ❤️ Laos",
+      "imageNumbers": [789, 790, 787],
+      "countries": ["Turkmenistan", "Laos"],
+      "assets": [
+        {"file": "789-turkmenistan-merv-kyz-qala-cipher.png", "sha256": "54231fa4d52b2b94a68d9a17e01d2859dc5a5cdc0642ba382eb9b981b615524b"},
+        {"file": "790-turkmenistan-yangykala-canyon-extraction.png", "sha256": "a56d93295af90501507b1685b864bab305c611c7a59dd2284c8a08f23b73f1d2"},
+        {"file": "787-laos-vang-vieng-railway-viaduct-night-relay.png", "sha256": "fc2c76f4da2aba7ac123088812d4467a5785c395039e02e0231938a1ae39def8"}
+      ]
+    },
+    {
+      "stagedAt": "2026-08-02T11:46:15.4115649Z",
+      "status": "awaiting_user_click",
+      "caption": "Libya 💛 Turkmenistan",
+      "imageNumbers": [792, 793, 791],
+      "countries": ["Libya", "Turkmenistan"],
+      "assets": [
+        {"file": "792-libya-tripoli-corniche-mediterranean-intercept.png", "sha256": "ff77b3f00cce067b121e52dc9347f25834f5a405e03ffac2a3039afffe8589e4"},
+        {"file": "793-libya-leptis-magna-market-cipher.png", "sha256": "7b11225955b11c4d9d50d34e7c06f9e29618789f55f7dd2dd9bf77f437397959"},
+        {"file": "791-turkmenistan-turkmenbashi-caspian-port-night-relay.png", "sha256": "156ce48576d8b01b5e1ea14621ffa4c53b4fb4a23466e00b58ae37efc8f6fb5b"}
+      ]
+    },
+    {
+      "stagedAt": "2026-08-02T11:46:15.4115649Z",
+      "status": "awaiting_user_click",
+      "caption": "Libya 💜 Kyrgyzstan",
+      "imageNumbers": [794, 795, 796],
+      "countries": ["Libya", "Kyrgyzstan"],
+      "assets": [
+        {"file": "794-libya-ubari-lakes-oasis-extraction.png", "sha256": "8b6abe3131b2486bc0eb3c66cf85380dbb2fd5f2f786c66f3e3c3e920829a297"},
+        {"file": "795-libya-benghazi-harbor-night-relay.png", "sha256": "152de1d97b5e2a3a0be947503da20b783bc56a605004dd6653834653d8288956"},
+        {"file": "796-kyrgyzstan-bishkek-ala-too-alpine-intercept.png", "sha256": "df20d6b77eaf0f8485a3f3c712957c116cf30a86ab0e3f9a8a734dd6f7a0d472"}
+      ]
+    },
+    {
+      "stagedAt": "2026-08-02T11:46:15.4115649Z",
+      "status": "awaiting_user_click",
+      "caption": "Kyrgyzstan 💚 Paraguay",
+      "imageNumbers": [797, 798, 800],
+      "countries": ["Kyrgyzstan", "Paraguay"],
+      "assets": [
+        {"file": "797-kyrgyzstan-tash-rabat-caravanserai-cipher.png", "sha256": "e83533376b74d9433563476bba369fd4923d165620f0b1399537067bb95624be"},
+        {"file": "798-kyrgyzstan-song-kul-highland-extraction.png", "sha256": "511db10c497e1dee6fd7b5d635061e19d7a5b82af33f55f2a077516f4b10735e"},
+        {"file": "800-paraguay-asuncion-costanera-river-intercept.png", "sha256": "9aea286b28fe9a6aea949fc052adb2a19bc7723dea33e275e5035d86a20b3218"}
+      ]
+    },
+    {
+      "stagedAt": "2026-08-02T11:46:15.4115649Z",
+      "status": "awaiting_user_click",
+      "caption": "Paraguay 💜 Kyrgyzstan",
+      "imageNumbers": [801, 802, 799],
+      "countries": ["Paraguay", "Kyrgyzstan"],
+      "assets": [
+        {"file": "801-paraguay-asuncion-central-railway-cipher.png", "sha256": "1ac259fa770349c82aa6777761f05f4dcc0d6141488eb477d045815e46042e1e"},
+        {"file": "802-paraguay-monday-falls-forest-extraction.png", "sha256": "e87b76fb36468751c3b8442301ea8cc67db1e4886596fc74335d82aa49938711"},
+        {"file": "799-kyrgyzstan-balykchy-issyk-kul-rail-night-relay.png", "sha256": "b5a67a42f241113721b7fd3c278a6ba5b75201ee89099906a98ea76e763c7b0c"}
+      ]
+    },
+    {
+      "stagedAt": "2026-08-02T11:46:15.4115649Z",
+      "status": "awaiting_user_click",
+      "caption": "Nicaragua ❤️ Paraguay",
+      "imageNumbers": [804, 805, 803],
+      "countries": ["Nicaragua", "Paraguay"],
+      "assets": [
+        {"file": "804-nicaragua-managua-lakefront-intercept.png", "sha256": "dd508aee45cf41328c67c170586209110deefbe4c7bda0248e6334a6a8bda8b4"},
+        {"file": "805-nicaragua-granada-colonial-arcade-cipher.png", "sha256": "ec00e877d7377350acb47f019ac6ac1875e20a9741987a8412a3d1b0b59e08a4"},
+        {"file": "803-paraguay-encarnacion-costanera-night-relay.png", "sha256": "872ae16cb35f9f6662f556fb2fc8a4a228b77a19cdb8581e3e4b99d4599135d6"}
+      ]
+    }
+  ],
   "pendingCoverUpdate": null,
   "coverUpdates": [
     {
