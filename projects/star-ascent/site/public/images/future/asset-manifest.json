@@ -1,0 +1,36 @@
+{
+  "status": "POST-GENESIS CONCEPT / INACTIVE / NO WAGER ROUTE",
+  "generatedAtUtc": "2026-08-02T14:20:00Z",
+  "characters": {
+    "radiance": { "canonicalAge": 21, "canonicalHair": "long golden-blonde curls" },
+    "ellie": { "canonicalAge": 24, "canonicalHair": "glossy deep-brunette blunt bob" },
+    "alia": { "canonicalAge": 23, "canonicalHair": "long dark-auburn curls" }
+  },
+  "variationPolicy": {
+    "hair": "Independent per character and image; target approximately 33% alternate styling and 67% canonical styling across a sufficiently large set.",
+    "hats": "Target at most 10% per character across a sufficiently large set.",
+    "publicSafety": "Adult fictional characters; fully opaque secure styling; no explicit exposure, visible underwear, sexual restraint, bondage, handcuff play, or weapons."
+  },
+  "assets": [
+    {
+      "path": "/images/future/predictive-engine-hero-v1.png",
+      "purpose": "Predictive Engine website hero and motion teaser master",
+      "bytes": 2314268,
+      "sha256": "62517890f509b95a7ce5d6148c3473665656486c49dab485643ac175bdaccc07",
+      "radianceHair": "canonical",
+      "ellieHair": "canonical",
+      "aliaHair": "canonical",
+      "hats": []
+    },
+    {
+      "path": "/images/future/casino-hero-v1.png",
+      "purpose": "Casino DLC website hero and motion teaser master",
+      "bytes": 2453059,
+      "sha256": "9c66d9923dfb5316d4be0be6f3f18ec14159aaa0de34af1bfbea7340aa925858",
+      "radianceHair": "canonical",
+      "ellieHair": "alternate sleek chin-length bob",
+      "aliaHair": "canonical",
+      "hats": []
+    }
+  ]
+}

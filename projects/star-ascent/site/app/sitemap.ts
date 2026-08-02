@@ -16,5 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${root}/tokenomics`, lastModified: modified, changeFrequency: "daily", priority: 0.95 },
     { url: `${root}/network`, lastModified: modified, changeFrequency: "hourly", priority: 0.95 },
     { url: `${root}/world`, lastModified: modified, changeFrequency: "weekly", priority: 0.75 },
+    { url: `${root}/future`, lastModified: modified, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${root}/future/predictive-engine`, lastModified: modified, changeFrequency: "weekly", priority: 0.65 },
+    { url: `${root}/future/casino`, lastModified: modified, changeFrequency: "weekly", priority: 0.65 },
   ]);
 }
