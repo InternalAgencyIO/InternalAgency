@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { LaunchClock } from "../LaunchClock";
 import "./launch.css";
 
@@ -29,7 +29,7 @@ export default function LaunchPage() {
     <section className="launch-rewards-entry"><p>{language === "en" ? "NODE REWARDS // GENESIS GIFT" : "DÜĞÜM ÖDÜLLERİ // BAŞLANGIÇ HEDİYESİ"}</p><h2>{language === "en" ? <>100 IAT.<br />THE FIRST 1,000.</> : <>100 IAT.<br />İLK 1.000.</>}</h2><span>{language === "en" ? "The public claim system remains on HOLD until verified Genesis evidence and node-binding gates are live." : "Kamu claim sistemi, doğrulanmış Başlangıç kanıtı ve düğüm bağlama eşikleri canlı olana kadar BEKLET durumundadır."}</span><a href="/rewards">{language === "en" ? "OPEN NODE REWARDS" : "DÜĞÜM ÖDÜLLERİNİ AÇ"} ↗</a></section>
     <section className="launch-run"><p>{t.runTitle}</p><div>{t.moments.map(([time,title,body],i)=><article key={time}><span>0{i+1}</span><time>{time}</time><h2>{title}</h2><p>{body}</p></article>)}</div></section>
     <section className="launch-evidence"><p>{t.real}</p><h2>{t.realTitle}</h2><div>{t.proofs.map((item,index)=><article key={item}><span>0{index + 1}</span><p>{item}</p></article>)}</div></section>
-    <section className="launch-operators"><p>{t.gate}</p><h2>{t.gateTitle}</h2><div>{t.operators.map(([role,title,body])=><article key={role}><span>{role}</span><h3>{title.split("\n").map((line,index)=><>{line}{index === 0 && <br />}</>)}</h3><p>{body}</p></article>)}</div><a href="/dossier/read/mint-manifest">{t.manifest} ↗</a></section>
+    <section className="launch-operators"><p>{t.gate}</p><h2>{t.gateTitle}</h2><div>{t.operators.map(([role,title,body])=><article key={role}><span>{role}</span><h3>{title.split("\n").map((line,index)=><Fragment key={`${role}-${line}`}>{line}{index === 0 && <br />}</Fragment>)}</h3><p>{body}</p></article>)}</div><a href="/dossier/read/mint-manifest">{t.manifest} ↗</a></section>
     <section className="launch-rule"><p>{t.rule}</p><h2>{t.ruleText}</h2><a href="/?activate=1">{t.terminal} →</a></section><footer>{t.footer}</footer>
   </main>;
 }

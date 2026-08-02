@@ -31,6 +31,7 @@ export function LaunchClock({ language }: { language: "en" | "tr" }) {
   return (
     <div
       className={`launch-clock${live ? " launch-clock--live" : ""}`}
+      role="status"
       aria-label={`${label}. ${exactTime}. ${signal}`}
       aria-live="polite"
       data-launch-state={state}

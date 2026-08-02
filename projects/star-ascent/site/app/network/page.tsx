@@ -120,7 +120,10 @@ export default function NetworkPage() {
 
   const inspect = async (event: FormEvent) => {
     event.preventDefault();
-    if (!lookup.trim()) return;
+    if (!lookup.trim() || loading) return;
+    const activeElement = document.activeElement instanceof HTMLElement && document.activeElement !== document.body
+      ? document.activeElement
+      : event.currentTarget.querySelector<HTMLButtonElement>('button[type="submit"]');
     setLoading(true);
     setResult(null);
     try {
@@ -130,6 +133,7 @@ export default function NetworkPage() {
       setResult({ error: "SOLANA_RPC_UNAVAILABLE" });
     } finally {
       setLoading(false);
+      queueMicrotask(() => activeElement?.focus());
     }
   };
 
@@ -174,12 +178,14 @@ export default function NetworkPage() {
       <form onSubmit={inspect}>
         <label className="sr-only" htmlFor="network-lookup">{t.placeholder}</label>
         <input id="network-lookup" value={lookup} onChange={(event) => setLookup(event.target.value)} placeholder={t.placeholder} autoComplete="off" spellCheck={false} />
-        <button type="submit" disabled={loading}>{loading ? "READING…" : t.search} <span>→</span></button>
+        <button type="submit" aria-disabled={loading}>{loading ? "READING…" : t.search} <span>→</span></button>
       </form>
 
+      <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">{loading ? "Reading public Solana data." : found ? `${found.kind} lookup complete.` : ""}</p>
+
       {!result && <div className="network-empty"><span>◎</span><p>{t.noLookup}</p><strong>{t.noIat}</strong></div>}
-      {result?.error && <div className="network-error"><span>!</span><p>{result.error.replaceAll("_", " ")}</p></div>}
-      {found && <div className="network-result">
+      {result?.error && <div className="network-error" role="alert"><span>!</span><p>{result.error.replaceAll("_", " ")}</p></div>}
+      {found && <div className="network-result" role="region" aria-label="Public Solana lookup result">
         <header><div><small>{found.kind.toUpperCase()}</small><h2>{shorten(found.address ?? found.signature ?? "")}</h2></div><a href={found.explorerUrl} target="_blank" rel="noreferrer">{t.explorer} ↗</a></header>
         {found.kind === "address" && <>
           <div className="network-wallet-stats">
