@@ -10,8 +10,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t.metadataTitle,
     description: t.metadataDescription,
-    openGraph: { title: t.metadataTitle, description: t.metadataDescription, images: ["/images/future/predictive-engine-hero-v1.png"] },
-    twitter: { card: "summary_large_image", images: ["/images/future/predictive-engine-hero-v1.png"] },
+    openGraph: { title: t.metadataTitle, description: t.metadataDescription, images: ["/images/future/predictive-engine-hero-v1.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/images/future/predictive-engine-hero-v1.jpg"] },
   };
 }
 
@@ -31,14 +31,14 @@ export default async function PredictiveEnginePage() {
           <a href="#mechanics">{t.heroCta}</a>
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element -- generated editorial master is a local static asset */}
-        <img src="/images/future/predictive-engine-hero-v1.png" alt={t.heroAlt} />
+        <img src="/images/future/predictive-engine-hero-v1.jpg" alt={t.heroAlt} />
       </header>
       <section className="feature-statline" aria-label={t.statLabel}>
         {t.stats.map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}
       </section>
       <section className="media-teaser" aria-labelledby="pet-teaser-title">
         <div><p>{t.teaserEyebrow}</p><h2 id="pet-teaser-title">{t.teaserTitle[0]}<br />{t.teaserTitle[1]}</h2><span>{t.teaserBody}</span></div>
-        <video controls playsInline preload="metadata" poster="/images/future/predictive-engine-hero-v1.png">
+        <video controls playsInline preload="metadata" poster="/images/future/predictive-engine-hero-v1.jpg">
           <source src="/media/future/predictive-engine-teaser-15s-4k-v1.mp4" type="video/mp4" />
           {common.videoFallback}
         </video>
@@ -58,7 +58,7 @@ export default async function PredictiveEnginePage() {
         eyebrow={t.editorialEyebrow}
         title={t.editorialTitle}
         body={t.editorialBody}
-        image="/images/future/predictive-engine-carrier-runway-v2.png"
+        image="/images/future/predictive-engine-carrier-runway-v2.jpg"
         imageAlt={t.editorialAlt}
         video="/media/future/predictive-engine-carrier-teaser-15s-4k-v2.mp4"
         caption={common.adultEditorial}

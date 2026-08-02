@@ -101,7 +101,7 @@ Write-VoiceTrack -Path $everestVoice -Lines @(
 
 if ($Only -in @("all", "predictive")) {
   Render-Teaser `
-    -Image (Join-Path $siteRoot "public\images\future\predictive-engine-hero-v1.png") `
+    -Image (Join-Path $siteRoot "assets\future-teaser-masters\predictive-engine-hero-v1.png") `
     -Subtitle (Join-Path $siteRoot "scripts\video\future\predictive-engine-teaser.ass") `
     -Voice $predictiveVoice `
     -Output (Join-Path $outputRoot "predictive-engine-teaser-15s-4k-v1.mp4") `
@@ -110,7 +110,7 @@ if ($Only -in @("all", "predictive")) {
 
 if ($Only -in @("all", "casino")) {
   Render-Teaser `
-    -Image (Join-Path $siteRoot "public\images\future\casino-hero-v1.png") `
+    -Image (Join-Path $siteRoot "assets\future-teaser-masters\casino-hero-v1.png") `
     -Subtitle (Join-Path $siteRoot "scripts\video\future\casino-teaser.ass") `
     -Voice $casinoVoice `
     -Output (Join-Path $outputRoot "casino-dlc-teaser-15s-4k-v1.mp4") `
@@ -119,7 +119,7 @@ if ($Only -in @("all", "casino")) {
 
 if ($Only -in @("all", "predictive-carrier")) {
   Render-Teaser `
-    -Image (Join-Path $siteRoot "public\images\future\predictive-engine-carrier-runway-v2.png") `
+    -Image (Join-Path $siteRoot "assets\future-teaser-masters\predictive-engine-carrier-runway-v2.png") `
     -Subtitle (Join-Path $siteRoot "scripts\video\future\predictive-engine-carrier-teaser.ass") `
     -Voice $carrierVoice `
     -Output (Join-Path $outputRoot "predictive-engine-carrier-teaser-15s-4k-v2.mp4") `
@@ -128,7 +128,7 @@ if ($Only -in @("all", "predictive-carrier")) {
 
 if ($Only -in @("all", "casino-everest")) {
   Render-Teaser `
-    -Image (Join-Path $siteRoot "public\images\future\casino-everest-poker-v2.png") `
+    -Image (Join-Path $siteRoot "assets\future-teaser-masters\casino-everest-poker-v2.png") `
     -Subtitle (Join-Path $siteRoot "scripts\video\future\casino-everest-teaser.ass") `
     -Voice $everestVoice `
     -Output (Join-Path $outputRoot "casino-everest-teaser-15s-4k-v2.mp4") `

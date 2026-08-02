@@ -79,7 +79,7 @@ test("future previews use new source-bound art and accessible motion fallbacks",
   for (const asset of manifest.assets) {
     const assetUrl = new URL(`public${asset.path}`, root);
     const [details, contents] = await Promise.all([stat(assetUrl), readFile(assetUrl)]);
-    assert.ok(details.size > 1_000_000, `${asset.path} must retain the inspected high-resolution source`);
+    assert.ok(details.size > 300_000, `${asset.path} must retain a high-resolution web delivery master`);
     assert.equal(details.size, asset.bytes);
     assert.equal(createHash("sha256").update(contents).digest("hex"), asset.sha256);
   }

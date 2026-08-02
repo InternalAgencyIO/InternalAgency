@@ -11,9 +11,9 @@ export function FashionReveal({ language }: { language: FutureLanguage }) {
       </div>
       <figure className="fashion-reveal">
         {/* eslint-disable-next-line @next/next/no-img-element -- generated editorial master is a local static asset */}
-        <img className="fashion-before" src="/images/future/predictive-engine-hero-v1.png" alt={t.beforeAlt} />
+        <img className="fashion-before" src="/images/future/predictive-engine-hero-v1.jpg" alt={t.beforeAlt} />
         {/* eslint-disable-next-line @next/next/no-img-element -- generated editorial master is a local static asset */}
-        <img className="fashion-after" src="/images/future/casino-hero-v1.png" alt={t.afterAlt} />
+        <img className="fashion-after" src="/images/future/casino-hero-v1.jpg" alt={t.afterAlt} />
         <i className="fabric fabric-one" aria-hidden="true" />
         <i className="fabric fabric-two" aria-hidden="true" />
         <i className="fabric fabric-three" aria-hidden="true" />
