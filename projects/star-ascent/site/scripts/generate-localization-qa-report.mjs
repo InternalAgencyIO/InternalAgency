@@ -72,14 +72,11 @@ const report = {
   validation: {
     runDate: "2026-08-03",
     commands: [
-      { command: "npm test", outcome: "PASS", automatedTestsPassed: 37 },
-      { command: "npm run lint", outcome: "PASS_WITH_WARNINGS", errors: 0, warnings: 8 },
+      { command: "npm test", outcome: "PASS", automatedTestsPassed: 45 },
+      { command: "npm run lint", outcome: "PASS", errors: 0, warnings: 0 },
       { command: "npm run check:future-teasers", outcome: "PASS", automatedTestsPassed: 4 },
     ],
-    nonBlockingWarnings: [
-      "The lint run reported eight existing @next/next/no-img-element warnings and no errors.",
-      "The production build reported existing bigint fallback, punycode deprecation, and large-chunk warnings.",
-    ],
+    nonBlockingWarnings: [],
   },
   semanticDecision: overrides.semanticRule,
   reviewStatus: overrides.reviewStatus,

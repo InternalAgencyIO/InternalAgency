@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-03T09:51:58.696Z",
+  "generatedAt": "2026-08-03T13:07:53.891Z",
   "title": "Internal Agency multilingual usability and localization QA",
   "publicStatus": "DRAFT / STATIC QA / NOT LAUNCH APPROVAL",
   "mainnetDecision": "HOLD (unchanged by this package)",
@@ -24,13 +24,13 @@
       {
         "command": "npm test",
         "outcome": "PASS",
-        "automatedTestsPassed": 37
+        "automatedTestsPassed": 45
       },
       {
         "command": "npm run lint",
-        "outcome": "PASS_WITH_WARNINGS",
+        "outcome": "PASS",
         "errors": 0,
-        "warnings": 8
+        "warnings": 0
       },
       {
         "command": "npm run check:future-teasers",
@@ -38,10 +38,7 @@
         "automatedTestsPassed": 4
       }
     ],
-    "nonBlockingWarnings": [
-      "The lint run reported eight existing @next/next/no-img-element warnings and no errors.",
-      "The production build reported existing bigint fallback, punycode deprecation, and large-chunk warnings."
-    ]
+    "nonBlockingWarnings": []
   },
   "semanticDecision": "In the launch checklist, GO means the subsystem is ready, not an instruction to move.",
   "reviewStatus": "AI-assisted cadence and terminology pass; native-speaker review required before claiming native localization.",

@@ -2,7 +2,7 @@
 
 **STATIC QA / NOT LAUNCH APPROVAL / MAINNET HOLD / NO DEPLOYMENT PERFORMED**
 
-Generated: 2026-08-03T09:51:58.696Z
+Generated: 2026-08-03T13:07:53.891Z
 
 ## Outcome
 
@@ -15,8 +15,8 @@ The launch-checklist word “GO” is treated semantically as “ready,” not a
 
 ## Validation
 
-- `npm test`: **PASS** (37 tests)
-- `npm run lint`: **PASS_WITH_WARNINGS** (0 errors, 8 warnings)
+- `npm test`: **PASS** (45 tests)
+- `npm run lint`: **PASS** (0 errors, 0 warnings)
 - `npm run check:future-teasers`: **PASS** (4 tests)
 
 ## Locale matrix

@@ -113,14 +113,27 @@ export default function DossierReaderPage() {
   useEffect(() => { if (window.location.hostname.includes("ileriakil")) setLanguage("tr"); }, []);
   const record = useMemo(() => repairLegacyEncoding((language === "tr" ? TR : EN)[params.slug] ?? fallback(language, params.slug)), [language, params.slug]);
   const fragments = repairLegacyEncoding(archiveFragments(language, params.slug));
-  const radianceArt = params.slug === "broadcast-pack" || params.slug === "social-kit" ? "/images/radiance-studio-signal.png" : params.slug === "genesis-run" || params.slug === "readiness" ? "/images/radiance-bike-operator.webp" : params.slug === "white-dossier" ? "/images/radiance-roller-rave.webp" : "/images/radiance-snow-train.webp";
+  const radianceArt = params.slug === "broadcast-pack" || params.slug === "social-kit"
+    ? { src: "/images/radiance-studio-signal.png", width: 800, height: 1966 }
+    : params.slug === "genesis-run" || params.slug === "readiness"
+      ? { src: "/images/radiance-bike-operator.webp", width: 1024, height: 1536 }
+      : params.slug === "white-dossier"
+        ? { src: "/images/radiance-roller-rave.webp", width: 853, height: 1844 }
+        : { src: "/images/radiance-snow-train.webp", width: 864, height: 1820 };
   const nextRecordHref = NEXT_RECORD_ROUTES[params.slug] ?? "/dossier";
   return <main className="reader-page">
     <div className="reader-noise" aria-hidden="true" />
     <nav className="reader-nav"><a href="/">IA<span>///</span></a><div><a href="/dossier">{language === "tr" ? "DOSYA" : "DOSSIER"}</a><button onClick={() => setLanguage(language === "en" ? "tr" : "en")}>{language === "en" ? "TR" : "EN"}</button></div></nav>
-    <section className="reader-hero"><div><p>{record.label}</p><h1>{record.title}</h1><strong>{record.state}</strong><p className="reader-deck">{record.deck}</p>{params.slug === "genesis-proof" && <p className="reader-live-note">{language === "tr" ? "CANLI KAYIT: Başlangıç sonrası kanonik bağlantılar burada görünür." : "LIVE RECORD: canonical Genesis links appear here after publication."}</p>}</div><figure><img src={radianceArt} alt="Radiance, Internal Agency field operator" /><figcaption>RADIANCE // LIVE ARCHIVE OPERATOR</figcaption></figure></section>
+    <section className="reader-hero"><div><p>{record.label}</p><h1>{record.title}</h1><strong>{record.state}</strong><p className="reader-deck">{record.deck}</p>{params.slug === "genesis-proof" && <p className="reader-live-note">{language === "tr" ? "CANLI KAYIT: Başlangıç sonrası kanonik bağlantılar burada görünür." : "LIVE RECORD: canonical Genesis links appear here after publication."}</p>}</div><figure>
+      {/* eslint-disable-next-line @next/next/no-img-element -- Vinext runtime does not safely support next/image; this local asset has exact intrinsic dimensions. */}
+      <img {...radianceArt} loading="lazy" decoding="async" alt="Radiance, Internal Agency field operator" />
+      <figcaption>RADIANCE // LIVE ARCHIVE OPERATOR</figcaption>
+    </figure></section>
     <section className="reader-sheet"><div className="reader-spine"><span>STAR ASCENT</span><b>0{Math.max(1, Object.keys(EN).indexOf(params.slug) + 1)}</b><span>2026</span></div><div className="reader-content">{record.blocks.map(([heading, text], index) => <article key={heading}><span>0{index + 1}</span><h2>{heading}</h2><p>{text}</p></article>)}</div></section>
-    <section className="reader-lore"><figure><img src="/images/scorpion-crew-arrival-v1.webp" alt={language === "tr" ? "STAR ASCENT ekibi kırmızı ışık altında geliyor" : "STAR ASCENT crew arriving under red light"} /></figure><div>{fragments.map(([heading, text], index) => <article key={heading}><span>0{index + 4}</span><h2>{heading}</h2><p>{text}</p></article>)}</div></section>
+    <section className="reader-lore"><figure>
+      {/* eslint-disable-next-line @next/next/no-img-element -- Vinext runtime does not safely support next/image; this local asset has exact intrinsic dimensions. */}
+      <img src="/images/scorpion-crew-arrival-v1.webp" width={1672} height={941} loading="lazy" decoding="async" alt={language === "tr" ? "STAR ASCENT ekibi kırmızı ışık altında geliyor" : "STAR ASCENT crew arriving under red light"} />
+    </figure><div>{fragments.map(([heading, text], index) => <article key={heading}><span>0{index + 4}</span><h2>{heading}</h2><p>{text}</p></article>)}</div></section>
     <section className="reader-next"><p>{language === "tr" ? "BİR SONRAKİ KAYIT" : "NEXT RECORD"}</p><a href={nextRecordHref}>{record.next}<span>↗</span></a><a className="reader-world-link" href="/world">{language === "tr" ? "DÜNYA ARŞİVİNE GİR" : "ENTER THE WORLD ARCHIVE"}<span>◌</span></a></section>
   </main>;
 }
