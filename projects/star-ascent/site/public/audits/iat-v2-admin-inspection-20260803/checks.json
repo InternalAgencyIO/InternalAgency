@@ -1,0 +1,53 @@
+{
+  "schema": "iat-v2-admin-inspection-checks/v1",
+  "status": "DRAFT_PARTIALLY_REMEDIATED_QA_HOLD",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "sourceBinding": {
+    "commit": "bb79f564850f3a1a032aaa8bb1625e398089fdb3",
+    "gitTree": "f621ab17724a70d8fbc8366f8432691289bc5a7b"
+  },
+  "build": {
+    "result": "PASS_WITH_TRACKED_WARNINGS",
+    "modulesTransformed": 1304,
+    "priorInitialJavaScriptBytes": 2148150,
+    "currentInitialJavaScriptBytes": 1063820,
+    "initialJavaScriptReductionBytes": 1084330,
+    "initialJavaScriptReductionPercent": 50.48,
+    "featureOnlyChunkBytes": 909373,
+    "trezorOnlyChunkBytes": 169595,
+    "programUpgradeChunkBytes": 10990
+  },
+  "inspectionRuntime": {
+    "result": "PASS",
+    "serverIsolation": "EPHEMERAL_LOOPBACK_EXACT_BIND",
+    "httpStatus": 200,
+    "externalRequests": 0,
+    "pageErrors": 0,
+    "consoleErrors": 0,
+    "trezorConnectState": "unloaded",
+    "operatorControlsDisabled": true,
+    "hardwareOrFeatureChunksLoaded": false,
+    "rpcReadsPerformed": false,
+    "hardwareAccessPerformed": false,
+    "simulationPerformed": false,
+    "signingPerformed": false,
+    "broadcastingPerformed": false
+  },
+  "finding": {
+    "id": "QA-ADMIN-001",
+    "state": "PARTIALLY_REMEDIATED_OPEN",
+    "remainingExternalizedNodeImports": [
+      "util",
+      "crypto"
+    ],
+    "remainingScope": "Feature-only Switchboard dependency path and future independent hardware/runtime review"
+  },
+  "clearance": {
+    "adminRuntimeFullyCleared": false,
+    "independentHardwareReviewComplete": false,
+    "authorizesSigning": false,
+    "authorizesBroadcast": false,
+    "authorizesDeployment": false,
+    "authorizesMainnetChange": false
+  }
+}
