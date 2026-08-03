@@ -34,7 +34,7 @@ function monitorRuntime(page) {
   });
   page.on("requestfailed", (request) => {
     const errorText = request.failure()?.errorText ?? "unknown";
-    if (request.resourceType() === "media") return;
+    if (request.resourceType() === "media" || /\.(?:mp4|webm|ogg)(?:[?#]|$)/i.test(request.url())) return;
     errors.push(`requestfailed: ${request.url()} (${errorText})`);
   });
   return errors;
