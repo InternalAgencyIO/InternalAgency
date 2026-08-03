@@ -1142,6 +1142,13 @@ rejected and regenerated.
 | **New York Brooklyn Bridge Aircrew Route-Light Alignment**<br><img src="820-united-states-new-york-brooklyn-bridge-route-light-alignment.png" width="420" alt="The STAR RAZE trio aligning red-white-blue route lights above the Brooklyn Bridge in short open-waist aircrew couture"> | **Chicago Riverwalk Aircrew Cabin-Signal Calibration**<br><img src="821-united-states-chicago-riverwalk-cabin-signal-calibration.png" width="420" alt="The trio completing a three-color cabin-signal calibration above the Chicago Riverwalk with a glass prism and close affectionate gesture"> |
 | **White Sands Aircrew Star-Map Relay**<br><img src="822-united-states-white-sands-star-map-relay.png" width="420" alt="The trio restoring a star-map relay across White Sands with compact role-coded aircrew styling and linked side-waist choreography"> | **San Francisco Golden Gate Aircrew Beacon Finale**<br><img src="823-united-states-san-francisco-golden-gate-beacon-finale.png" width="420" alt="The trio completing a red-white-blue route beacon before the Golden Gate Bridge in a reconciled affectionate finale"> |
 
+## THE MILE HIGH THREESOME - Bonus Batch 201: Indonesia
+
+| | |
+|---|---|
+| **Jakarta Bundaran HI Aircrew Command Route Grid**<br><img src="824-indonesia-jakarta-bundaran-hi-command-route-grid.png" width="420" alt="The STAR RAZE trio locking three route lights into a command case above Jakarta in compact open-waist aircrew tailoring"> | **Surabaya Suramadu Aircrew Cabin-Signal Calibration**<br><img src="825-indonesia-surabaya-suramadu-cabin-signal-calibration.png" width="420" alt="The trio calibrating a cabin signal beside Suramadu Bridge with a prism, spyglass and shared three-hand ribbon"> |
+| **Raja Ampat Piaynemo Aircrew Star-Map Relay**<br><img src="826-indonesia-raja-ampat-piaynemo-star-map-relay.png" width="420" alt="The trio restoring a star-map relay above Raja Ampat with three readable hands stacked on the mission globe"> | **Makassar Losari Aircrew Runway-Beacon Finale**<br><img src="827-indonesia-makassar-losari-runway-beacon-finale.png" width="420" alt="The trio completing a runway beacon above Makassar in a close reconciled embrace with a shared three-hand signal ribbon"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
