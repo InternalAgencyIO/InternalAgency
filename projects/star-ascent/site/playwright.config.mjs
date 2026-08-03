@@ -17,7 +17,7 @@ export default defineConfig({
     screenshot: "only-on-failure",
   },
   webServer: externalBaseURL ? undefined : {
-    command: "node ./node_modules/vinext/dist/cli.js dev -p 4176",
+    command: "npm run compile:i18n && node ./node_modules/vinext/dist/cli.js dev -p 4176",
     url: baseURL,
     timeout: 120_000,
     reuseExistingServer: !process.env.CI,

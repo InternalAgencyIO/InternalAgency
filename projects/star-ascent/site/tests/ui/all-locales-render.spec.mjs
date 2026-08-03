@@ -25,7 +25,17 @@ function monitorRuntime(page) {
   const errors = [];
   page.on("pageerror", (error) => errors.push(`pageerror: ${error.message}`));
   page.on("console", (message) => {
-    if (message.type() === "error") errors.push(`console: ${message.text()}`);
+    if (message.type() !== "error") return;
+    const location = message.location().url;
+    errors.push(`console: ${message.text()}${location ? ` @ ${location}` : ""}`);
+  });
+  page.on("response", (response) => {
+    if (response.status() >= 400) errors.push(`response: ${response.status()} ${response.url()}`);
+  });
+  page.on("requestfailed", (request) => {
+    const errorText = request.failure()?.errorText ?? "unknown";
+    if (request.resourceType() === "media") return;
+    errors.push(`requestfailed: ${request.url()} (${errorText})`);
   });
   return errors;
 }

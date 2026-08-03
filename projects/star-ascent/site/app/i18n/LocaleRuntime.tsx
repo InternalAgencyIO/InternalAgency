@@ -92,15 +92,12 @@ export function LocaleRuntime({ locale, promptCopy, publicPath, turkishHost }: {
     let observer: MutationObserver | null = null;
     const nativeTurkishHost = locale === "tr" && window.location.hostname.includes("ileriakil");
     const routeLocale: LocaleCode = nativeTurkishHost ? "en" : locale;
-    const revealFallback = window.setTimeout(() => {
-      document.documentElement.dataset.localeReady = "true";
-    }, 5_000);
 
     const activate = (catalog: LocaleCatalog) => {
       if (!active) return;
       localizeTree(document.body, locale, catalog, routeLocale);
       document.documentElement.dataset.localeReady = "true";
-      window.clearTimeout(revealFallback);
+      delete document.documentElement.dataset.localeError;
       observer = new MutationObserver((changes) => {
         for (const change of changes) {
           for (const node of change.addedNodes) localizeTree(node, locale, catalog, routeLocale);
@@ -122,13 +119,12 @@ export function LocaleRuntime({ locale, promptCopy, publicPath, turkishHost }: {
           activate(payload.messages);
         })
         .catch(() => {
-          if (active) document.documentElement.dataset.localeReady = "true";
+          if (active) document.documentElement.dataset.localeError = "payload-unavailable";
         });
     }
 
     return () => {
       active = false;
-      window.clearTimeout(revealFallback);
       observer?.disconnect();
     };
   }, [definition.dir, locale]);

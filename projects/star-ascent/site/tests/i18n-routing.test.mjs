@@ -215,22 +215,27 @@ test("country defaults cover every sovereign state in Europe and the Americas", 
 });
 
 test("the locale runtime stays static, prompts for English, and ships one locale payload", async () => {
-  const [runtime, layout, worker, styles] = await Promise.all([
+  const [runtime, layout, worker, styles, playwright] = await Promise.all([
     readFile(new URL("../app/i18n/LocaleRuntime.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../worker/index.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../playwright.config.mjs", import.meta.url), "utf8"),
   ]);
   assert.match(runtime, /window\.setTimeout\(\(\) => setShowPrompt\(false\), 15_000\)/);
   assert.match(runtime, /ia_language=en/);
   assert.match(runtime, /returnToEnglish/);
   assert.doesNotMatch(runtime, /import masterMessages/);
   assert.match(runtime, /fetch\(`\/i18n\/\$\{locale\}\.json`/);
+  assert.match(runtime, /dataset\.localeError = "payload-unavailable"/);
+  assert.doesNotMatch(runtime, /revealFallback/);
+  assert.doesNotMatch(runtime, /\.catch\(\(\) => \{\s*if \(active\) document\.documentElement\.dataset\.localeReady = "true"/);
   assert.doesNotMatch(layout, /messages\.json/);
   assert.match(layout, /data-locale-ready=\{localeReady \? "true" : "false"\}/);
   assert.match(layout, /promptCopy=\{promptCopy\}/);
   assert.match(layout, /"@context": "https:\/\/schema\.org"/);
   assert.match(layout, /"x-default"/);
   assert.match(worker, /acceptedLanguages\.length\) return "en"/);
+  assert.match(playwright, /command: "npm run compile:i18n && node .*vinext.* dev -p 4176"/);
   assert.doesNotMatch(styles, /data-locale-ready="false"[^}]*opacity:0/);
 });
