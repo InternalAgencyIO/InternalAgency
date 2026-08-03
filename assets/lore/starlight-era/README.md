@@ -1156,6 +1156,13 @@ rejected and regenerated.
 | **Karachi Frere Hall Aircrew Command Route Grid**<br><img src="828-pakistan-karachi-frere-hall-command-route-grid.png" width="420" alt="The STAR RAZE trio aligning emerald-white-gold route lights at Karachi Frere Hall in compact open-waist aircrew couture"> | **Lahore Delhi Gate Aircrew Cabin-Signal Calibration**<br><img src="829-pakistan-lahore-delhi-gate-cabin-signal-calibration.png" width="420" alt="The trio calibrating three cabin-signal lights in Lahore with a close Ellie and Alia forehead touch and Radiance linked at the shoulder"> |
 | **Hunza Passu Cones Aircrew Star-Map Relay**<br><img src="830-pakistan-hunza-passu-cones-star-map-relay.png" width="420" alt="The trio restoring an emerald-gold star-map relay above Hunza in short role-coded aircrew separates"> | **Karachi Jinnah Terminal Aircrew Runway-Beacon Finale**<br><img src="831-pakistan-karachi-jinnah-terminal-runway-beacon-finale.png" width="420" alt="The trio completing a runway beacon at Karachi blue hour with Ellie and Radiance forehead-to-forehead and Alia warmly linked"> |
 
+## THE MILE HIGH THREESOME - Bonus Batch 203: Nigeria
+
+| | |
+|---|---|
+| **Lagos National Theatre Aircrew Route-Light Intercept**<br><img src="832-nigeria-lagos-national-theatre-route-light-intercept.png" width="420" alt="The STAR RAZE trio aligning emerald-white route lights before Lagos National Theatre in concise open-waist aircrew couture"> | **Kano Kofar Mata Aircrew Cabin-Signal Cipher**<br><img src="833-nigeria-kano-kofar-mata-cabin-signal-cipher.png" width="420" alt="The trio sealing a glowing cabin-signal orb beside Kano's Kofar Mata dye pits in compact role-coded aircrew styling"> |
+| **Zuma Rock Aircrew Star-Map Relay**<br><img src="834-nigeria-zuma-rock-star-map-relay.png" width="420" alt="The trio restoring an emerald-gold star-map globe before Zuma Rock with quill mission choreography"> | **Lagos Lekki-Ikoyi Aircrew Runway-Beacon Finale**<br><img src="835-nigeria-lagos-lekki-ikoyi-runway-beacon-finale.png" width="420" alt="The trio completing a runway beacon beneath Lekki-Ikoyi Bridge in a close linked finale"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
