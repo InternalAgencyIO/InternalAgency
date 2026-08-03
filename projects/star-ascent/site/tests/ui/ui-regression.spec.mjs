@@ -59,6 +59,9 @@ test("public routes remain contained and clear confirmed audit rules", async ({ 
     expect(geometry.title, `${route} document title`).not.toBe("");
     expect(geometry.mojibake, `${route} mojibake`).toEqual([]);
     expect(await confirmedA11yViolations(page), `${route} accessibility violations`).toEqual([]);
+    if (route === "/network") {
+      await expect(page.getByText("QA_FIXTURE", { exact: false }), "network fixture resolution").toBeVisible();
+    }
     expect(runtimeErrors, `${route} runtime errors`).toEqual([]);
   }
 });

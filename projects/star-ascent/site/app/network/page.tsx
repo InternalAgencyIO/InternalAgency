@@ -115,10 +115,22 @@ export default function NetworkPage() {
 
   useEffect(() => {
     if (window.location.hostname.includes("ileriakil")) setLanguage("tr");
-    fetch("/api/network")
+    const controller = new AbortController();
+    let active = true;
+    fetch("/api/network", { signal: controller.signal })
       .then((response) => response.json() as Promise<NetworkPayload>)
-      .then((payload) => setStatus(payload))
-      .catch(() => setStatus({ error: "SOLANA_RPC_UNAVAILABLE" }));
+      .then((payload) => {
+        if (active) setStatus(payload);
+      })
+      .catch((error: unknown) => {
+        if (active && !(error instanceof DOMException && error.name === "AbortError")) {
+          setStatus({ error: "SOLANA_RPC_UNAVAILABLE" });
+        }
+      });
+    return () => {
+      active = false;
+      controller.abort();
+    };
   }, []);
 
   const inspect = async (event: FormEvent) => {
