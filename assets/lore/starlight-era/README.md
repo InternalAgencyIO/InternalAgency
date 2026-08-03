@@ -1198,3 +1198,13 @@ The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
 contract.
+
+## THE MILE HIGH THREESOME - Bonus Batch 207: Ethiopia
+
+| | |
+|---|---|
+| **Addis Ababa Entoto Command Route-Light Intercept**<br><img src="848-ethiopia-addis-ababa-entoto-command-route-light-intercept.png" width="420" alt="The STAR RAZE trio completing an Ethiopia route-light mission above Addis Ababa"> | **Gondar Fasil Ghebbi Cabin-Signal Cipher**<br><img src="849-ethiopia-gondar-fasil-ghebbi-cabin-signal-cipher.png" width="420" alt="The trio calibrating a cabin-signal cipher at Gondar's Fasil Ghebbi"> |
+| **Simien Mountains Star-Map Relay**<br><img src="850-ethiopia-simien-mountains-star-map-relay.png" width="420" alt="The trio completing a luminous star-map relay above the Simien escarpments"> | **Addis-Djibouti Railway Arrival-Beacon Finale**<br><img src="851-ethiopia-addis-djibouti-railway-arrival-beacon-finale.png" width="420" alt="The trio sealing an arrival beacon at Addis Ababa's modern railway terminal"> |
+
+The machine-readable collection index is in
+[`manifest.json`](manifest.json). Original foundations and accepted sequential refinements remain checkpointed under the batch staging folder.
