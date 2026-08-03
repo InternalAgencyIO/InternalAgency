@@ -140,39 +140,20 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-03T05:52:32.470Z",
+  "pendingPost": null,
+  "preparedPostQueue": [],
+  "pendingCoverUpdate": {
+    "reservedAt": "2026-08-03T05:55:05.701Z",
     "account": "@RaymondRR777",
-    "caption": "China 💛 Türkiye",
-    "heart": "💛",
-    "imageNumbers": [
-      813,
-      814,
-      811
-    ],
-    "countries": [
-      "China",
-      "Türkiye"
-    ],
-    "assets": [
-      {
-        "file": "813-china-xian-city-wall-gate-cipher.png",
-        "sha256": "55affa299d0f1d25b624d4bb5067cd9a587575cb68cef0707563080f063e721a"
-      },
-      {
-        "file": "814-china-zhangjiajie-sandstone-pillar-extraction.png",
-        "sha256": "d8792b7a9168cf7746ae5ff444cb14737a72dd24d98aa657dc10eb6dbbb51275"
-      },
-      {
-        "file": "811-turkiye-izmir-kordon-night-tram-relay.png",
-        "sha256": "5c22c629d3b59047457e3c096c061965dce8734653dcd04058d9b40619208591"
-      }
-    ],
-    "mediaMode": "legacy-image-only",
+    "postUrl": "https://x.com/RaymondRR777/status/2084156079265452099",
+    "sourceImageNumber": 813,
+    "file": "world-x-cover-813-xian-v1.png",
+    "width": 1500,
+    "height": 500,
+    "sha256": "42c9d454cae5c52e0382217c3b90bf237e2b0b4724311fdcabe372240ca206f1",
+    "previousHeaderUrl": "https://pbs.twimg.com/profile_banners/2063542993303326720/1785707322/1500x500",
     "status": "reserved"
   },
-  "preparedPostQueue": [],
-  "pendingCoverUpdate": null,
   "coverUpdates": [
     {
       "confirmedAt": "2026-08-02T08:10:42.1813424Z",
@@ -3252,6 +3233,21 @@
         {"file": "812-china-shanghai-bund-pudong-intercept.png", "sha256": "acbea820b941539982def20f2534bfa9cb81b6d483aed6d0a48b89b70d6cdb18"}
       ],
       "transmission": "agent_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-03T05:55:05.701Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2084156079265452099",
+      "caption": "China 💛 Türkiye",
+      "imageNumbers": [813, 814, 811],
+      "countries": ["China", "Türkiye"],
+      "assets": [
+        {"file": "813-china-xian-city-wall-gate-cipher.png", "sha256": "55affa299d0f1d25b624d4bb5067cd9a587575cb68cef0707563080f063e721a"},
+        {"file": "814-china-zhangjiajie-sandstone-pillar-extraction.png", "sha256": "d8792b7a9168cf7746ae5ff444cb14737a72dd24d98aa657dc10eb6dbbb51275"},
+        {"file": "811-turkiye-izmir-kordon-night-tram-relay.png", "sha256": "5c22c629d3b59047457e3c096c061965dce8734653dcd04058d9b40619208591"}
+      ],
+      "mediaMode": "legacy-image-only",
+      "verification": "exact reserved three-file chooser transmission, exact caption/status URL, and public photo/1 through photo/3 endpoints",
+      "transmission": "agent_staged_user_confirmed_click"
     }
   ]
 }
