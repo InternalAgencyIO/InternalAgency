@@ -9,6 +9,8 @@ const expectedLocales = [
   "hy", "az", "ka",
 ];
 const sourceKeys = Object.keys(catalog.messages.en);
+const criticalUi = JSON.parse(await readFile(new URL("../app/i18n/critical-ui-source.json", import.meta.url), "utf8"));
+const criticalUiOverrides = JSON.parse(await readFile(new URL("../app/i18n/critical-ui-overrides.json", import.meta.url), "utf8"));
 const protectedTerms = [
   "Internal Agency", "STAR ASCENT", "$IAT", "$SOL", "IAT", "SOLANA", "Solana", "Model T", "Genesis",
   "APY", "CCC-Agent", "Radiance", "Ellie", "Alia", "UTC", "İSTANBUL",
@@ -21,6 +23,9 @@ const exactTokenPattern = /https?:\/\/[^\s]+|@[A-Za-z0-9_]+|\$[A-Z][A-Z0-9_-]*|\
 assert.ok(sourceKeys.length >= 250, `Expected a whole-site catalog, found only ${sourceKeys.length} source strings`);
 assert.equal(catalog.meta.sourceCount, sourceKeys.length, "Catalog source count must match English keys");
 assert.deepEqual(Object.keys(catalog.messages), expectedLocales, "Catalog locale order changed unexpectedly");
+for (const source of Object.values(criticalUi)) {
+  assert.ok(sourceKeys.includes(source), `Critical UI source is absent from the canonical catalog: ${source}`);
+}
 
 for (const locale of expectedLocales) {
   const keys = Object.keys(catalog.messages[locale]);
@@ -51,7 +56,27 @@ for (const locale of expectedLocales) {
   }
   const promptSource = catalog.prompts.en.english;
   assert.ok(catalog.prompts[locale]?.english || catalog.messages[locale][promptSource], `${locale} is missing the local-language English-return prompt`);
+  if (locale !== "en") {
+    assert.deepEqual(
+      Object.keys(criticalUiOverrides.translations[locale] ?? {}).sort(),
+      Object.values(criticalUi).sort(),
+      `${locale} must have an explicit critical UI editorial override`,
+    );
+    for (const source of Object.values(criticalUi)) {
+      assert.equal(
+        catalog.messages[locale][source],
+        criticalUiOverrides.translations[locale][source],
+        `${locale} critical UI copy drifted from its editorial override: ${source}`,
+      );
+      assert.notEqual(
+        catalog.messages[locale][source].trim().toLocaleLowerCase(),
+        source.toLocaleLowerCase(),
+        `${locale} leaks unchanged English critical UI copy: ${source}`,
+      );
+    }
+  }
 }
+assert.match(criticalUiOverrides.reviewStatus, /native-speaker review required/i);
 
 assert.equal(catalog.messages.en["This closes on its own in 15 seconds."], "This closes on its own in 15 seconds.");
 assert.match(catalog.meta.translationMode ?? "", /static committed output/i, "Catalog must disclose static translation mode");

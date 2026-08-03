@@ -6,6 +6,8 @@ const root = process.cwd();
 const baseUrl = process.env.I18N_BASE_URL ?? "http://localhost:4177";
 const outputPath = join(root, "app", "i18n", "messages.json");
 const routeSeoPath = join(root, "app", "i18n", "route-seo.json");
+const criticalUiPath = join(root, "app", "i18n", "critical-ui-source.json");
+const criticalUiOverridesPath = join(root, "app", "i18n", "critical-ui-overrides.json");
 const localeDefinitions = [
   ["en", "en"], ["zh", "zh-CN"], ["es", "es"], ["hi", "hi"], ["fr", "fr"], ["ar", "ar"], ["bn", "bn"],
   ["pt", "pt"], ["id", "id"], ["ur", "ur"], ["ru", "ru"], ["de", "de"], ["ja", "ja"], ["pcm", "pcm"], ["tr", "tr"],
@@ -234,12 +236,15 @@ async function translateBatch(batch, target) {
 async function main() {
   const existing = JSON.parse(await readFile(outputPath, "utf8"));
   const routeSeo = JSON.parse(await readFile(routeSeoPath, "utf8"));
+  const criticalUi = JSON.parse(await readFile(criticalUiPath, "utf8"));
+  const criticalUiOverrides = JSON.parse(await readFile(criticalUiOverridesPath, "utf8"));
   const sources = new Set([
     "Internal Agency — STAR ASCENT",
     "The first public chapter of Internal Agency: transparent launch information, token disclosure, and operator safety guidance.",
     "STAR ASCENT launch control",
     ...Object.values(existing.prompts.en),
     ...Object.values(routeSeo).flatMap(({ title, description }) => [title, description]),
+    ...Object.values(criticalUi),
   ]);
   const routeQueue = [...seedRoutes];
   const visited = new Set();
@@ -261,14 +266,15 @@ async function main() {
   const messages = { en: Object.fromEntries(ordered.map((source) => [source, source])) };
   for (const [locale] of localeDefinitions.slice(1)) {
     const cached = existing.messages?.[locale] ?? {};
-    messages[locale] = Object.fromEntries(ordered.map((source) => [source, cached[source] ?? ""]));
+    const overrides = criticalUiOverrides.translations?.[locale] ?? {};
+    messages[locale] = Object.fromEntries(ordered.map((source) => [source, overrides[source] ?? cached[source] ?? ""]));
   }
   const metadata = {
     ...existing.meta,
     generatedAt: new Date().toISOString(),
     sourceCount: ordered.length,
     renderedRoutes: [...visited].sort(),
-    sourceFiles: [...interactiveSourcePaths, "app/i18n/route-seo.json"],
+    sourceFiles: [...interactiveSourcePaths, "app/i18n/route-seo.json", "app/i18n/critical-ui-source.json", "app/i18n/critical-ui-overrides.json"],
   };
   const persist = async () => writeFile(outputPath, `${JSON.stringify({ ...existing, meta: metadata, messages }, null, 2)}\n`, "utf8");
   await persist();
@@ -278,14 +284,15 @@ async function main() {
   }
   for (const [locale, googleCode] of localeDefinitions.slice(1)) {
     const cached = existing.messages?.[locale] ?? {};
-    if (ordered.every((source) => typeof cached[source] === "string" && cached[source].trim())) {
+    const missing = ordered.filter((source) => !cached[source]?.trim());
+    if (!missing.length) {
       messages[locale] = Object.fromEntries(ordered.map((source) => [source, cached[source]]));
       process.stdout.write(`Reused complete ${locale} catalog.\n`);
       continue;
     }
-    process.stdout.write(`Translating ${ordered.length} source strings to ${locale}...\n`);
-    const dictionary = {};
-    for (const batch of batches(ordered)) {
+    process.stdout.write(`Translating ${missing.length} missing source strings to ${locale}...\n`);
+    const dictionary = Object.fromEntries(ordered.map((source) => [source, cached[source] ?? ""]));
+    for (const batch of batches(missing)) {
       const translated = await translateBatch(batch, googleCode);
       batch.forEach((source, index) => { dictionary[source] = translated[index]; });
       await new Promise((resolve) => setTimeout(resolve, 300));
