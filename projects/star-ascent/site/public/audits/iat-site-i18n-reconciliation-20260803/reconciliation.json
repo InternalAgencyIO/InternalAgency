@@ -20,6 +20,16 @@
     "nonEnglishLocalesRequiringTranslation": 49,
     "nonEnglishLocalesRequiringNativeReview": 49
   },
+  "driftGuard": {
+    "sourceCommit": "c400b430434f21f52fd5da559017f3b5ce55e5bc",
+    "status": "ENFORCED_IN_CHECK_QA_I18N",
+    "serverIsolation": "EPHEMERAL_LOOPBACK_EXACT_BIND",
+    "canonicalRoutesRendered": 25,
+    "expectedPendingStrings": 247,
+    "expectedAffectedRoutes": 15,
+    "failsOnSourceOrRouteDrift": true,
+    "activatesPendingCopy": false
+  },
   "runtime": {
     "pendingArtifactActive": false,
     "automaticEnglishFallbackApproved": false,

@@ -26,6 +26,14 @@ check(execFileSync("git", ["rev-parse", `${manifest.sourceBinding.commit}^{tree}
 for (const [path, expected] of Object.entries(manifest.sourceSha256)) {
   check(sha256(execFileSync("git", ["show", `${manifest.sourceBinding.commit}:${path}`], { cwd: repoRoot })) === expected, `source hash mismatch for ${path}`);
 }
+check(reconciliation.driftGuard.sourceCommit === manifest.driftGuardSourceBinding.commit, "drift-guard source commit mismatch");
+check(execFileSync("git", ["rev-parse", `${manifest.driftGuardSourceBinding.commit}^{tree}`], { cwd: repoRoot, encoding: "utf8" }).trim() === manifest.driftGuardSourceBinding.gitTree, "drift-guard source tree mismatch");
+for (const [path, expected] of Object.entries(manifest.driftGuardSha256)) {
+  check(sha256(execFileSync("git", ["show", `${manifest.driftGuardSourceBinding.commit}:${path}`], { cwd: repoRoot })) === expected, `drift-guard source hash mismatch for ${path}`);
+}
+const driftGuardPackage = JSON.parse(execFileSync("git", ["show", `${manifest.driftGuardSourceBinding.commit}:projects/star-ascent/site/package.json`], { cwd: repoRoot, encoding: "utf8" }));
+check(driftGuardPackage.scripts["check:i18n:rendered-drift"] === "node scripts/capture-pending-i18n-source.mjs --start-server --check", "rendered drift command mismatch");
+check(driftGuardPackage.scripts["check:qa:i18n"].includes("npm run check:i18n:rendered-drift"), "rendered drift guard is not in localization QA");
 for (const [name, expected] of Object.entries(manifest.artifactSha256)) {
   check(expected !== "PENDING", `${name} hash remains pending`);
   check(sha256(readFileSync(resolve(auditRoot, name))) === expected, `artifact hash mismatch for ${name}`);
@@ -42,6 +50,10 @@ check(Object.values(pending.runtime).every((value) => value === false), "pending
 check(reconciliation.priorFinding.uncatalogedVisibleStrings === 247, "prior finding count mismatch");
 check(reconciliation.reconciliation.capturedPendingStrings === 247, "captured pending count mismatch");
 check(reconciliation.reconciliation.untrackedVisibleStrings === 0, "untracked visible source remains");
+check(reconciliation.driftGuard.status === "ENFORCED_IN_CHECK_QA_I18N", "rendered drift guard is not enforced");
+check(reconciliation.driftGuard.serverIsolation === "EPHEMERAL_LOOPBACK_EXACT_BIND", "rendered drift server isolation changed");
+check(reconciliation.driftGuard.canonicalRoutesRendered === 25 && reconciliation.driftGuard.expectedPendingStrings === 247 && reconciliation.driftGuard.expectedAffectedRoutes === 15, "rendered drift expectations changed");
+check(reconciliation.driftGuard.failsOnSourceOrRouteDrift === true && reconciliation.driftGuard.activatesPendingCopy === false, "rendered drift guard safety boundary changed");
 check(reconciliation.findingDisposition.inventoryAndWorkflowGap === "REMEDIATED", "inventory remediation missing");
 check(reconciliation.findingDisposition.translationGap === "OPEN" && reconciliation.findingDisposition.nativeReviewGap === "OPEN", "language gaps must remain open");
 check(reconciliation.findingDisposition.releaseDecision === "HOLD", "localization release must remain HOLD");
