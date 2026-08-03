@@ -227,6 +227,7 @@ test("the locale runtime stays static, prompts for English, and ships one locale
   assert.doesNotMatch(runtime, /import masterMessages/);
   assert.match(runtime, /fetch\(`\/i18n\/\$\{locale\}\.json`/);
   assert.doesNotMatch(layout, /messages\.json/);
+  assert.match(layout, /data-locale-ready=\{localeReady \? "true" : "false"\}/);
   assert.match(layout, /promptCopy=\{promptCopy\}/);
   assert.match(layout, /"@context": "https:\/\/schema\.org"/);
   assert.match(layout, /"x-default"/);

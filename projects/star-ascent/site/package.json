@@ -20,6 +20,7 @@
     "test": "npm run check:qa:i18n && npm run check:favicon && npm run check:metadata-origin && npm run check:native-images && npm run build && node --import ./tests/register-cloudflare-workers-loader.mjs --test tests/rendered-html.test.mjs tests/i18n-routing.test.mjs",
     "check:favicon": "node --test tests/favicon.test.mjs",
     "check:metadata-origin": "node --test tests/metadata-origin.test.mjs",
+    "check:site-config": "npm run build && node scripts/validate-site-hosting-config.mjs",
     "check:native-images": "node --test tests/native-image-runtime.test.mjs",
     "check:future-teasers": "node --test tests/future-teasers.test.mjs",
     "extract:i18n": "node scripts/generate-i18n-catalog.mjs --extract-only",

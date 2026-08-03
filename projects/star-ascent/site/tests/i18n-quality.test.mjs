@@ -50,12 +50,14 @@ test("the public report is honest, source-bound, and remains non-authorizing", (
 });
 
 test("localized routes keep document language ownership and touch targets after hydration", async () => {
-  const [page, globalStyles, futureStyles] = await Promise.all([
+  const [page, tokenomics, globalStyles, futureStyles] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/tokenomics/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/future/future.css", import.meta.url), "utf8"),
   ]);
   assert.match(page, /if \(isLocaleCode\(routeLocale\)\) return;[\s\S]*document\.documentElement\.lang = language/);
+  assert.match(tokenomics, /if \(isLocaleCode\(routeLocale\)\) return;[\s\S]*document\.documentElement\.lang = language/);
   assert.match(globalStyles, /nav a,\.text-link,footer a\{display:inline-flex;min-height:24px/);
   assert.match(futureStyles, /\.future-nav div a\{display:inline-flex;min-height:32px/);
 });

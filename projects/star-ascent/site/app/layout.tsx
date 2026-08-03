@@ -131,5 +131,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       },
     ],
   };
-  return <html lang={htmlLanguageTag(locale)} dir={localeDirection(locale)} data-locale-ready="true"><head>{locale !== "en" && !turkishHost ? <link rel="preload" href={`/i18n/${locale}.json`} as="fetch" crossOrigin="anonymous" /> : null}</head><body className="antialiased">{children}<DocumentLinkUpgrade /><CrewSignal /><DossierDock /><LocaleRuntime locale={locale} promptCopy={promptCopy} publicPath={publicPath} turkishHost={turkishHost} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} /></body></html>;
+  const localeReady = locale === "en" || (locale === "tr" && turkishHost);
+  return <html lang={htmlLanguageTag(locale)} dir={localeDirection(locale)} data-locale-ready={localeReady ? "true" : "false"}><head>{locale !== "en" && !turkishHost ? <link rel="preload" href={`/i18n/${locale}.json`} as="fetch" crossOrigin="anonymous" /> : null}</head><body className="antialiased">{children}<DocumentLinkUpgrade /><CrewSignal /><DossierDock /><LocaleRuntime locale={locale} promptCopy={promptCopy} publicPath={publicPath} turkishHost={turkishHost} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} /></body></html>;
 }
