@@ -9,8 +9,15 @@ import { assessCeremonyEntry } from "./assess-iat-v2-mainnet-ceremony-entry.mjs"
 const gate = JSON.parse(readFileSync(resolve("launch/iat-v2-mainnet-readiness-gate.json"), "utf8"));
 const audit = JSON.parse(readFileSync(resolve("public/audits/iat-v2-prelaunch-20260802/manifest.json"), "utf8"));
 const remediationAudit = JSON.parse(readFileSync(resolve("public/audits/iat-v2-remediation-20260802/manifest.json"), "utf8"));
+const ceremonyReview = JSON.parse(readFileSync(resolve("launch/iat-v2-ceremony-review.template.json"), "utf8"));
+const stageJournal = JSON.parse(readFileSync(resolve("launch/iat-v2-mainnet-stage-journal.template.json"), "utf8"));
 const currentNowMs = Date.parse("2026-08-01T08:18:04Z");
 const canonicalValidation = { prelaunch: true, remediation: true };
+const canonicalCeremonyArtifacts = {
+  ceremonyReview,
+  stageJournal,
+  validation: { ceremonyReview: true, stageJournal: true },
+};
 const current = assessCeremonyEntry(
   gate,
   "0".repeat(64),
@@ -18,6 +25,7 @@ const current = assessCeremonyEntry(
   audit,
   remediationAudit,
   canonicalValidation,
+  canonicalCeremonyArtifacts,
 );
 assert.equal(current.state, "HOLD");
 assert.equal(current.mainnetStatus, "HOLD");
@@ -51,6 +59,8 @@ assert.doesNotMatch(preflightResult.stdout, /== test-accountability-label-normal
 const readyGate = structuredClone(gate);
 const readyAudit = structuredClone(audit);
 const readyRemediationAudit = structuredClone(remediationAudit);
+const readyCeremonyReview = structuredClone(ceremonyReview);
+const readyStageJournal = structuredClone(stageJournal);
 readyGate.funding.ceremonyFloorSatisfied = true;
 readyGate.funding.observedLamports = readyGate.funding.ceremonyFloorLamports;
 readyGate.observedAtUtc = "2099-01-01T00:00:00Z";
@@ -59,6 +69,24 @@ readyGate.schedule.publishedAtUtc = "2099-01-01T00:00:00Z";
 readyGate.gates.releaseArtifactsRegeneratedAfterFundingAndScheduling = true;
 readyGate.gates.independentMainnetVerifierAssigned = true;
 readyGate.gates.physicalModelTDevicePathReviewed = true;
+readyCeremonyReview.status = "READY";
+readyCeremonyReview.review.releaseArtifactsRegeneratedAfterFundingAndScheduling = true;
+Object.assign(readyCeremonyReview.participants.independentVerifier, {
+  label: "Independent evidence verifier",
+  reviewedArtifacts: true,
+  reviewedStagePlan: true,
+});
+Object.assign(readyCeremonyReview.participants.soleTrezorOperator, {
+  label: "Attended Model T operator",
+  publicAddress: readyGate.funding.publicAddress,
+  devicePathReviewed: true,
+});
+readyStageJournal.status = "ARMED";
+const readyCeremonyArtifacts = {
+  ceremonyReview: readyCeremonyReview,
+  stageJournal: readyStageJournal,
+  validation: { ceremonyReview: true, stageJournal: true },
+};
 readyAudit.launchDecision = "CLEAR";
 readyAudit.findingSummary.openBySeverity.CRITICAL = 0;
 readyAudit.findingSummary.openBySeverity.HIGH = 0;
@@ -81,6 +109,7 @@ const ready = assessCeremonyEntry(
   readyAudit,
   readyRemediationAudit,
   canonicalValidation,
+  readyCeremonyArtifacts,
 );
 assert.equal(ready.state, "READY_FOR_ATTENDED_PREFLIGHT");
 assert.equal(ready.mainnetStatus, "HOLD_PENDING_ATTENDED_PREFLIGHT");
@@ -94,6 +123,8 @@ assert.equal(ready.checks.REMEDIATION_SECURITY_AUDIT_CLEARANCE, true);
 assert.equal(ready.checks.FRESH_READ_ONLY_FUNDING_OBSERVATION, true);
 assert.equal(ready.checks.MAINNET_FUNDING_FLOOR, true);
 assert.equal(ready.checks.REPLACEMENT_UTC_WINDOW, true);
+assert.equal(ready.checks.V2_CEREMONY_REVIEW_CANONICAL_VALIDATION, true);
+assert.equal(ready.checks.V2_STAGE_JOURNAL_CANONICAL_VALIDATION, true);
 assert.equal(ready.checks.BOUND_RELEASE_ARTIFACTS_REGENERATED, true);
 assert.equal(ready.checks.INDEPENDENT_MAINNET_VERIFIER_ASSIGNED, true);
 assert.equal(ready.checks.MODEL_T_DEVICE_PATH_REVIEWED, true);
@@ -113,6 +144,7 @@ for (const mutate of [
     readyAudit,
     candidate,
     canonicalValidation,
+    readyCeremonyArtifacts,
   );
   assert.equal(rejected.state, "HOLD");
   assert.ok(rejected.blockers.includes("REMEDIATION_SECURITY_AUDIT_CLEARANCE"));
@@ -129,6 +161,7 @@ for (const auditValidation of [
     readyAudit,
     readyRemediationAudit,
     auditValidation,
+    readyCeremonyArtifacts,
   );
   assert.equal(rejected.state, "HOLD");
   assert.ok(rejected.blockers.includes(
@@ -138,4 +171,51 @@ for (const auditValidation of [
   ));
 }
 
-console.log("IAT V2 ceremony-entry regression passed: current ledger fails closed; audit summaries require canonical source/digest validation; synthetic ready state permits exactly one named owner-accepted Trezor risk while unaccepted criticals, missing current SBF, and missing identity integration remain blockers.");
+for (const [name, mutate, blockers] of [
+  [
+    "V2 ceremony-review validator failure",
+    (artifacts) => { artifacts.validation.ceremonyReview = false; },
+    ["V2_CEREMONY_REVIEW_CANONICAL_VALIDATION", "BOUND_RELEASE_ARTIFACTS_REGENERATED", "INDEPENDENT_MAINNET_VERIFIER_ASSIGNED", "MODEL_T_DEVICE_PATH_REVIEWED"],
+  ],
+  [
+    "HOLD V2 ceremony review with true readiness summaries",
+    (artifacts) => { artifacts.ceremonyReview.status = "HOLD"; },
+    ["BOUND_RELEASE_ARTIFACTS_REGENERATED", "INDEPENDENT_MAINNET_VERIFIER_ASSIGNED", "MODEL_T_DEVICE_PATH_REVIEWED"],
+  ],
+  [
+    "V2 stage-journal validator failure",
+    (artifacts) => { artifacts.validation.stageJournal = false; },
+    ["V2_STAGE_JOURNAL_CANONICAL_VALIDATION", "BOUND_RELEASE_ARTIFACTS_REGENERATED"],
+  ],
+  [
+    "HOLD stage journal with a true regeneration summary",
+    (artifacts) => { artifacts.stageJournal.status = "HOLD"; },
+    ["BOUND_RELEASE_ARTIFACTS_REGENERATED"],
+  ],
+  [
+    "unreviewed V2 artifacts with a named verifier",
+    (artifacts) => { artifacts.ceremonyReview.participants.independentVerifier.reviewedArtifacts = false; },
+    ["INDEPENDENT_MAINNET_VERIFIER_ASSIGNED"],
+  ],
+  [
+    "operator address outside the sole-Trezor readiness record",
+    (artifacts) => { artifacts.ceremonyReview.participants.soleTrezorOperator.publicAddress = "Vote111111111111111111111111111111111111111"; },
+    ["MODEL_T_DEVICE_PATH_REVIEWED"],
+  ],
+]) {
+  const artifacts = structuredClone(readyCeremonyArtifacts);
+  mutate(artifacts);
+  const rejected = assessCeremonyEntry(
+    readyGate,
+    "f".repeat(64),
+    Date.parse("2099-01-01T00:15:00Z"),
+    readyAudit,
+    readyRemediationAudit,
+    canonicalValidation,
+    artifacts,
+  );
+  assert.equal(rejected.state, "HOLD", name);
+  for (const blocker of blockers) assert.ok(rejected.blockers.includes(blocker), `${name}: ${blocker}`);
+}
+
+console.log("IAT V2 ceremony-entry regression passed: current ledger fails closed; audit, V2 ceremony-review, and V2 stage-journal summaries require canonical validation; synthetic ready state permits exactly one named owner-accepted Trezor risk while unaccepted criticals, stale artifacts, unreviewed verifier data, and an unbound Model T address remain blockers.");

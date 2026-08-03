@@ -42,7 +42,7 @@ node scripts/run-launch-preflight.mjs --require-ceremony-ready
 ```
 
 Before any other ceremony check runs, the assertion requires the public
-pre-launch audit clearance and all six conditions recorded in
+pre-launch audit clearance and all seven conditions recorded in
 `launch/iat-v2-mainnet-readiness-gate.json`:
 
 1. Both canonical pre-launch and hardening audit manifests record `CLEAR`.
@@ -59,9 +59,13 @@ pre-launch audit clearance and all six conditions recorded in
 4. One replacement UTC window is published and the schedule state is
    `SCHEDULED_HOLD`.
 5. Every bound release artifact was regenerated after both funding and
-   scheduling.
-6. An independent mainnet verifier is assigned.
-7. The exact Model T device path was reviewed in the attended session.
+   scheduling, the canonical V2 ceremony review is `READY`, the canonical V2
+   stage journal is `ARMED`, and both validators pass in this same assessment.
+6. An independent mainnet verifier is assigned in that validated V2 ceremony
+   review and has recorded both artifact and stage-plan review without signing
+   authority.
+7. The exact Model T device path was reviewed in the attended session for the
+   sole signer address bound to the readiness ledger in that validated review.
 
 The source-bound audit package is public at
 [`public/audits/iat-v2-prelaunch-20260802/`](../public/audits/iat-v2-prelaunch-20260802/README.md).
@@ -73,9 +77,13 @@ and is an independent ceremony-entry blocker of its own. Its sole-Trezor
 exception is accepted only as a named owner risk; it is never described as
 authority separation.
 
-The assessment also independently requires the mainnet HOLD/safety boundary
-and the honest `VERIFIED_LOCAL_HOST_ONLY` classification; either failure adds a
-separate blocker.
+The assessment also independently requires the mainnet HOLD/safety boundary,
+the honest `VERIFIED_LOCAL_HOST_ONLY` classification, and canonical validation
+of `iat-v2-ceremony-review.template.json` and
+`iat-v2-mainnet-stage-journal.template.json`. Summary booleans in the readiness
+ledger cannot substitute for those V2 source artifacts; any validation failure,
+non-`READY` ceremony review, or non-`ARMED` stage journal keeps the
+corresponding ceremony gate closed.
 
 If any condition is false, the command exits before the full preflight and
 prints the machine-readable blocker identifiers. No earlier approval or passed

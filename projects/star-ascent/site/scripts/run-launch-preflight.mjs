@@ -24,6 +24,8 @@ const checks = [
   ["validate-public-devnet-evidence.mjs"],
   ["validate-iat-v2-time-gate-proof.mjs"],
   ["validate-iat-v2-mainnet-readiness-gate.mjs"],
+  ["validate-iat-v2-ceremony-review.mjs"],
+  ["test-iat-v2-ceremony-review-regression.mjs"],
   ["test-iat-v2-mainnet-ceremony-entry-regression.mjs"],
   ["test-iat-v2-canonical-json-regression.mjs"],
   ["validate-iat-v2-mainnet-stage-journal.mjs"],

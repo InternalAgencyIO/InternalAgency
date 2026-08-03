@@ -1,6 +1,6 @@
 # IAT V2 return checklist
 
-Updated at `2026-08-02T12:52:59.475Z`.
+Updated at `2026-08-03T04:32:09.348Z`.
 
 Mainnet remains `HOLD`. No unattended script may sign or broadcast a mainnet
 transaction.
@@ -101,6 +101,12 @@ entry. See `launch/IAT_V2_CEREMONY_ENTRY_GATE.md`.
   critical/high finding or open blocker. A current-source reproducible SBF,
   signed Devnet rehearsal, production identity integration rehearsal, and
   independent final-code audit are mandatory.
+- Regeneration, verifier-assignment, and Model T path-review summary booleans
+  no longer clear ceremony entry by themselves. The V2-only ceremony review
+  and V2 stage journal must both pass their validators in the same assessment;
+  they must be `READY` and `ARMED`, respectively. The evidence-only verifier
+  must record artifact and stage-plan review without signing authority, and the
+  signer must retain the physically reviewed sole-Trezor public address.
 - Finalized mainnet balance at `2026-08-01T11:04:01Z`, RPC context slot
   `436549381`: `2.53365957 SOL`.
 - Measured rent-exempt minima: `8.31841104 SOL` before transaction fees:

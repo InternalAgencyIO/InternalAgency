@@ -45,8 +45,20 @@ node scripts/run-launch-preflight.mjs --require-ceremony-ready
 That mode fails before the full preflight unless a fresh read-only balance, the
 exact 8.5 SOL floor, one replacement UTC window,
 post-funding/post-scheduling artifact regeneration, an assigned independent
-verifier, and the reviewed Model T device path are all recorded. See
+verifier, and the reviewed Model T device path are all recorded. The artifact,
+verifier, and device-path summaries are accepted only when the canonical
+`READY` V2 ceremony review and `ARMED` V2 stage journal pass their validators in
+that same assessment; flipping readiness-ledger booleans cannot clear them. See
 [`IAT_V2_CEREMONY_ENTRY_GATE.md`](IAT_V2_CEREMONY_ENTRY_GATE.md).
+
+`iat-v2-ceremony-review.template.json` is the V2-only attended-review record.
+It binds the readiness ledger, V2 stage journal, economic policy, V2 allocation
+plan, remediation audit, and local time-gate proof by SHA-256. While `HOLD`, it
+must contain no identities, digests, completed reviews, or readiness timestamp.
+`READY` requires a fresh attended review, the sole Model T signer address, a
+distinct evidence-only verifier with no signing authority, current SBF and
+signed-Devnet evidence review, an `ARMED` V2 stage journal, and separate
+broadcast approval. It never stores a derivation path, PIN, seed, or key.
 
 `genesis-manifest.template.json` is a HOLD-state source of truth. Copy it to a non-template manifest only after the signer and verifier agree on every final value. Its primary validator also requires the fixed five-step Genesis order and all five evidence records to remain `null` while the manifest is `HOLD`, so stale transaction URLs cannot make a HOLD record look partly released.
 

@@ -10,6 +10,8 @@ const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."
 const canonicalGatePath = path.join(siteRoot, "launch/iat-v2-mainnet-readiness-gate.json");
 const canonicalAuditPath = path.join(siteRoot, "public/audits/iat-v2-prelaunch-20260802/manifest.json");
 const canonicalRemediationAuditPath = path.join(siteRoot, "public/audits/iat-v2-remediation-20260802/manifest.json");
+const canonicalCeremonyReviewPath = path.join(siteRoot, "launch/iat-v2-ceremony-review.template.json");
+const canonicalStageJournalPath = path.join(siteRoot, "launch/iat-v2-mainnet-stage-journal.template.json");
 
 export function assessCeremonyEntry(
   gate,
@@ -18,6 +20,11 @@ export function assessCeremonyEntry(
   audit = undefined,
   remediationAudit = undefined,
   auditValidation = { prelaunch: false, remediation: false },
+  ceremonyArtifacts = {
+    ceremonyReview: undefined,
+    stageJournal: undefined,
+    validation: { ceremonyReview: false, stageJournal: false },
+  },
 ) {
   const observedAtMs = Date.parse(gate.observedAtUtc ?? "");
   const fundingObservationFresh = Number.isFinite(observedAtMs)
@@ -55,6 +62,33 @@ export function assessCeremonyEntry(
     && remediationAudit?.clearance?.freshCurrentSourceSbfComplete === true
     && remediationAudit?.clearance?.freshSignedDevnetComplete === true
     && remediationAudit?.clearance?.productionIdentityIntegrationComplete === true;
+  const ceremonyReviewValidated = ceremonyArtifacts.validation?.ceremonyReview === true;
+  const stageJournalValidated = ceremonyArtifacts.validation?.stageJournal === true;
+  const ceremonyReviewReady = ceremonyReviewValidated
+    && ceremonyArtifacts.ceremonyReview?.status === "READY";
+  const releaseArtifactsBound = ceremonyReviewReady
+    && stageJournalValidated
+    && ceremonyArtifacts.stageJournal?.status === "ARMED"
+    && ceremonyArtifacts.ceremonyReview?.review?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true
+    && gate.gates?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true;
+  const soleTrezorOperator = ceremonyArtifacts.ceremonyReview?.participants?.soleTrezorOperator;
+  const verifier = ceremonyArtifacts.ceremonyReview?.participants?.independentVerifier;
+  const independentVerifierAssigned = ceremonyReviewReady
+    && gate.gates?.independentMainnetVerifierAssigned === true
+    && verifier?.role === "INDEPENDENT_VERIFIER"
+    && typeof verifier?.label === "string"
+    && verifier.label.length > 0
+    && verifier.label.toLocaleLowerCase("en") !== soleTrezorOperator?.label?.toLocaleLowerCase("en")
+    && verifier.reviewedArtifacts === true
+    && verifier.reviewedStagePlan === true
+    && verifier.hasNoSigningAuthority === true;
+  const modelTDevicePathReviewed = ceremonyReviewReady
+    && gate.gates?.physicalModelTDevicePathReviewed === true
+    && soleTrezorOperator?.role === "SOLE_TREZOR_SIGNER"
+    && soleTrezorOperator?.physicalConfirmationRequired === true
+    && soleTrezorOperator?.devicePathReviewed === true
+    && typeof soleTrezorOperator?.publicAddress === "string"
+    && soleTrezorOperator.publicAddress === gate.funding?.publicAddress;
   const safetyValues = Object.values(gate.safety ?? {});
   const required = [
     ["MAINNET_HOLD_BOUNDARY", gate.status === "HOLD" && gate.network === "mainnet-beta" && safetyValues.length > 0 && safetyValues.every((value) => value === false)],
@@ -66,9 +100,11 @@ export function assessCeremonyEntry(
     ["FRESH_READ_ONLY_FUNDING_OBSERVATION", fundingObservationFresh],
     ["MAINNET_FUNDING_FLOOR", gate.funding?.ceremonyFloorSatisfied === true && fundingFloorSatisfied],
     ["REPLACEMENT_UTC_WINDOW", replacementUtcPublished],
-    ["BOUND_RELEASE_ARTIFACTS_REGENERATED", gate.gates?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true],
-    ["INDEPENDENT_MAINNET_VERIFIER_ASSIGNED", gate.gates?.independentMainnetVerifierAssigned === true],
-    ["MODEL_T_DEVICE_PATH_REVIEWED", gate.gates?.physicalModelTDevicePathReviewed === true],
+    ["V2_CEREMONY_REVIEW_CANONICAL_VALIDATION", ceremonyReviewValidated],
+    ["V2_STAGE_JOURNAL_CANONICAL_VALIDATION", stageJournalValidated],
+    ["BOUND_RELEASE_ARTIFACTS_REGENERATED", releaseArtifactsBound],
+    ["INDEPENDENT_MAINNET_VERIFIER_ASSIGNED", independentVerifierAssigned],
+    ["MODEL_T_DEVICE_PATH_REVIEWED", modelTDevicePathReviewed],
   ];
   const blockers = required.filter(([, passed]) => !passed).map(([id]) => id);
   return {
@@ -86,6 +122,7 @@ export function assessCeremonyEntry(
       "READY_FOR_ATTENDED_PREFLIGHT is not transaction, signing, broadcast, deployment, mint, transfer, or publication authority.",
       "The funding observation must be no more than 30 minutes old with no more than one minute of future skew.",
       "Audit summary fields are never trusted alone; both public audit packages must pass their canonical source-binding and artifact-digest validators in this same assessment.",
+      "Release and attended-review summary fields are never trusted alone; the canonical V2 ceremony review and V2 stage journal must pass their validators in this same assessment.",
       "The sole named owner-accepted Trezor concentration risk may remain; every unaccepted critical/high finding and missing current-source assurance is a mandatory blocker.",
       "Physical review of each transaction and separate broadcast approval remain mandatory after entry.",
     ],
@@ -93,10 +130,12 @@ export function assessCeremonyEntry(
 }
 
 export async function assessCanonicalCeremonyEntry() {
-  const [bytes, auditBytes, remediationAuditBytes] = await Promise.all([
+  const [bytes, auditBytes, remediationAuditBytes, ceremonyReviewBytes, stageJournalBytes] = await Promise.all([
     readFile(canonicalGatePath),
     readFile(canonicalAuditPath),
     readFile(canonicalRemediationAuditPath),
+    readFile(canonicalCeremonyReviewPath),
+    readFile(canonicalStageJournalPath),
   ]);
   const validate = (script) => spawnSync(
     process.execPath,
@@ -105,6 +144,8 @@ export async function assessCanonicalCeremonyEntry() {
   );
   const prelaunchValidation = validate("validate-iat-v2-prelaunch-audit.mjs");
   const remediationValidation = validate("validate-iat-v2-remediation-audit.mjs");
+  const ceremonyReviewValidation = validate("validate-iat-v2-ceremony-review.mjs");
+  const stageJournalValidation = validate("validate-iat-v2-mainnet-stage-journal.mjs");
   const assessment = assessCeremonyEntry(
     JSON.parse(bytes.toString("utf8")),
     createHash("sha256").update(bytes).digest("hex"),
@@ -115,14 +156,34 @@ export async function assessCanonicalCeremonyEntry() {
       prelaunch: prelaunchValidation.status === 0,
       remediation: remediationValidation.status === 0,
     },
+    {
+      ceremonyReview: JSON.parse(ceremonyReviewBytes.toString("utf8")),
+      stageJournal: JSON.parse(stageJournalBytes.toString("utf8")),
+      validation: {
+        ceremonyReview: ceremonyReviewValidation.status === 0,
+        stageJournal: stageJournalValidation.status === 0,
+      },
+    },
   );
   assessment.auditSourceSha256 = createHash("sha256").update(auditBytes).digest("hex");
   assessment.remediationAuditSourceSha256 = createHash("sha256")
     .update(remediationAuditBytes)
     .digest("hex");
+  assessment.ceremonyReviewSourcePath = "launch/iat-v2-ceremony-review.template.json";
+  assessment.ceremonyReviewSourceSha256 = createHash("sha256")
+    .update(ceremonyReviewBytes)
+    .digest("hex");
+  assessment.stageJournalSourcePath = "launch/iat-v2-mainnet-stage-journal.template.json";
+  assessment.stageJournalSourceSha256 = createHash("sha256")
+    .update(stageJournalBytes)
+    .digest("hex");
   assessment.auditValidatorExitCodes = {
     prelaunch: prelaunchValidation.status,
     remediation: remediationValidation.status,
+  };
+  assessment.ceremonyArtifactValidatorExitCodes = {
+    ceremonyReview: ceremonyReviewValidation.status,
+    stageJournal: stageJournalValidation.status,
   };
   return assessment;
 }
