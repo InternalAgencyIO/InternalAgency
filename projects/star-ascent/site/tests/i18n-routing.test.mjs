@@ -148,6 +148,17 @@ test("route-specific SEO copy and structured data are localized", async () => {
   const dossierHtml = await dossierRecord.text();
   assert.ok(dossierHtml.includes(metadata.fr.seo[routeSeo["/dossier/read/white-dossier"].title]));
   assert.ok(dossierHtml.includes(metadata.fr.seo[routeSeo["/dossier/read/white-dossier"].description]));
+
+  for (const publicPath of ["/network", "/tokenomics"]) {
+    const localized = await request(`/fr${publicPath}`);
+    assert.equal(localized.status, 200, `${publicPath} localized route status`);
+    const localizedHtml = await localized.text();
+    const localizedTitle = metadata.fr.seo[routeSeo[publicPath].title];
+    const localizedDescription = metadata.fr.seo[routeSeo[publicPath].description];
+    assert.notEqual(localizedTitle, routeSeo[publicPath].title, `${publicPath} must not reuse its English title`);
+    assert.ok(localizedHtml.includes(localizedTitle), `${publicPath} is missing its localized title`);
+    assert.ok(localizedHtml.includes(localizedDescription), `${publicPath} is missing its localized description`);
+  }
 });
 
 test("the signing ceremony tool is excluded from search indexes", async () => {
@@ -160,17 +171,22 @@ test("the signing ceremony tool is excluded from search indexes", async () => {
 });
 
 test("the sitemap publishes equivalent-route alternates for every locale", async () => {
+  const sitemapSource = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
+  const routeCount = [...sitemapSource.matchAll(/\{\s*path:\s*"([^"]*)"/g)].length;
   const sitemap = await request("/sitemap.xml");
   assert.equal(sitemap.status, 200);
   const xml = await sitemap.text();
   assert.match(xml, /https:\/\/internalagency\.io\/es\/future\/predictive-engine/);
   assert.match(xml, /https:\/\/internalagency\.io\/pcm\/future\/casino/);
+  assert.match(xml, /https:\/\/internalagency\.io\/fr\/network/);
+  assert.match(xml, /https:\/\/internalagency\.io\/ar\/tokenomics/);
   assert.match(xml, /hreflang="x-default"/i);
   assert.match(xml, /hreflang="zh-Hans"/i);
   assert.doesNotMatch(xml, /hreflang="pcm"/i);
   const locations = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  assert.equal(locations.length, 1173);
-  assert.equal(new Set(locations).size, 1173);
+  const expectedLocationCount = routeCount * 51; // two canonical hosts plus 49 non-English locale paths
+  assert.equal(locations.length, expectedLocationCount);
+  assert.equal(new Set(locations).size, expectedLocationCount);
   assert.ok(Buffer.byteLength(xml, "utf8") < 50 * 1024 * 1024, "sitemap must stay below Google's 50 MB limit");
 });
 

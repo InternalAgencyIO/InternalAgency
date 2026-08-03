@@ -83,6 +83,12 @@ assert.match(catalog.meta.translationMode ?? "", /static committed output/i, "Ca
 
 const metadata = JSON.parse(await readFile(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8"));
 const routeSeo = JSON.parse(await readFile(new URL("../app/i18n/route-seo.json", import.meta.url), "utf8"));
+const sitemapSource = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
+const sitemapPaths = [...sitemapSource.matchAll(/\{\s*path:\s*"([^"]*)"/g)]
+  .map((match) => match[1] || "/");
+for (const publicPath of sitemapPaths) {
+  assert.ok(routeSeo[publicPath], `Sitemap route is missing route-specific SEO copy: ${publicPath}`);
+}
 const routeSeoSources = [...new Set(Object.values(routeSeo).flatMap(({ title, description }) => [title, description]))];
 for (const source of routeSeoSources) {
   assert.ok(sourceKeys.includes(source), `Route SEO source is not part of the canonical translation catalog: ${source}`);
