@@ -3,8 +3,8 @@
   "status": "DRAFT_PARTIALLY_REMEDIATED_QA_HOLD",
   "mainnetStatus": "UNSCHEDULED_HOLD",
   "sourceBinding": {
-    "commit": "3ee6dbc326c25fc674c5f1ca25d9ce0c1978b863",
-    "gitTree": "c7469bc5b540ba20b205d638b4bcd2bce182eb22"
+    "commit": "ed8bf69274b9f7d17f223f39e7f49fd2c6a6d7e5",
+    "gitTree": "d13df9da20dd25a21e49f59eaa4ae1c94d79aec4"
   },
   "build": {
     "result": "PASS_WITH_TRACKED_SIZE_WARNING",
@@ -32,6 +32,17 @@
       "UNSUPPORTED_INPUT_FAIL_CLOSED",
       "INSPECT_CUSTOM_AND_CYCLE_SAFETY"
     ]
+  },
+  "bundleRegression": {
+    "result": "PASS",
+    "byteBudgets": {
+      "initialEntryMaximum": 1100000,
+      "featureOnlyMaximum": 950000,
+      "trezorOnlyMaximum": 180000,
+      "programUpgradeMaximum": 15000
+    },
+    "forbiddenExternalizationMarkersFound": 0,
+    "sha256CompatibilityRemainsFeatureOnly": true
   },
   "inspectionRuntime": {
     "result": "PASS",

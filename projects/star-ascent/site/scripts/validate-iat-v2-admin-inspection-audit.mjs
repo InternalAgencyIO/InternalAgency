@@ -33,7 +33,7 @@ const packageJson = JSON.parse(execFileSync("git", ["show", `${manifest.sourceBi
 const mainSource = execFileSync("git", ["show", `${manifest.sourceBinding.commit}:projects/star-ascent/site/tools/iat-v2-admin-console/main.jsx`], { cwd: repoRoot, encoding: "utf8" });
 const cssSource = execFileSync("git", ["show", `${manifest.sourceBinding.commit}:projects/star-ascent/site/tools/iat-v2-admin-console/style.css`], { cwd: repoRoot, encoding: "utf8" });
 const testSource = execFileSync("git", ["show", `${manifest.sourceBinding.commit}:projects/star-ascent/site/scripts/test-iat-v2-admin-inspection-runtime.mjs`], { cwd: repoRoot, encoding: "utf8" });
-check(packageJson.scripts["check:iat-v2-admin-inspection"] === "node --test tests/iat-v2-admin-browser-shims.test.mjs && npm run build:iat-v2-admin && node scripts/test-iat-v2-admin-inspection-runtime.mjs", "inspection command mismatch");
+check(packageJson.scripts["check:iat-v2-admin-inspection"] === "node --test tests/iat-v2-admin-browser-shims.test.mjs && npm run build:iat-v2-admin && node scripts/test-iat-v2-admin-bundle-regression.mjs && node scripts/test-iat-v2-admin-inspection-runtime.mjs", "inspection command mismatch");
 check(packageJson.devDependencies["@noble/hashes"] === "1.8.0", "SHA-256 provider must remain directly and exactly pinned");
 check(packageJson.scripts["check:iat-v2"].includes("npm run check:iat-v2-admin-inspection"), "inspection runtime is not in the IAT V2 gate");
 for (const marker of ["mode\") === \"inspect", "RPC reads, hardware loading, simulation, signing, and broadcast are disabled", "lazy(() => import(\"./FeatureRehearsal.jsx\"))", "await import(\"@trezor/connect-web\")"]) {
@@ -53,6 +53,10 @@ check(JSON.stringify(checks.build.remainingExternalizedNodeImports) === "[]", "N
 check(JSON.stringify(checks.build.remainingWarnings) === JSON.stringify(["LAZY_CHUNK_OVER_500_KB"]), "build warning inventory changed");
 check(checks.browserCompatibility.result === "PASS" && checks.browserCompatibility.sha256Provider === "@noble/hashes@1.8.0", "browser compatibility result changed");
 check(checks.browserCompatibility.testsPassed === 4 && checks.browserCompatibility.testsFailed === 0, "browser compatibility test count changed");
+check(checks.bundleRegression.result === "PASS", "bundle regression result changed");
+check(JSON.stringify(checks.bundleRegression.byteBudgets) === JSON.stringify({ initialEntryMaximum: 1100000, featureOnlyMaximum: 950000, trezorOnlyMaximum: 180000, programUpgradeMaximum: 15000 }), "bundle byte budgets changed");
+check(checks.bundleRegression.forbiddenExternalizationMarkersFound === 0, "bundle contains externalization markers");
+check(checks.bundleRegression.sha256CompatibilityRemainsFeatureOnly === true, "SHA-256 compatibility leaked into the initial entry");
 for (const field of ["externalRequests", "pageErrors", "consoleErrors"]) check(checks.inspectionRuntime[field] === 0, `${field} must be zero`);
 for (const field of ["operatorControlsDisabled"]) check(checks.inspectionRuntime[field] === true, `${field} must be true`);
 for (const field of ["hardwareOrFeatureChunksLoaded", "rpcReadsPerformed", "hardwareAccessPerformed", "simulationPerformed", "signingPerformed", "broadcastingPerformed"]) check(checks.inspectionRuntime[field] === false, `${field} must be false`);
@@ -63,4 +67,4 @@ check(checks.finding.remainingScope.includes("chunk size") && checks.finding.rem
 for (const [field, value] of Object.entries(checks.clearance)) check(value === false, `checks clearance ${field} must remain false`);
 for (const [field, value] of Object.entries(manifest.clearance)) check(value === false, `manifest clearance ${field} must remain false`);
 
-console.log("IAT V2 admin inspection audit valid: externalized Node imports removed with four compatibility tests, non-signing runtime isolated, QA-ADMIN-001 remains partially remediated/open for size and independent review, mainnet HOLD.");
+console.log("IAT V2 admin inspection audit valid: externalized Node imports removed, compatibility and bundle budgets fail closed, non-signing runtime isolated, QA-ADMIN-001 remains open for size and independent review, mainnet HOLD.");

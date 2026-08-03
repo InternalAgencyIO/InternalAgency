@@ -15,6 +15,7 @@ This source-bound package evaluates the local IAT V2 admin console without conne
 - Replaced the feature-only bundle's externalized Node `crypto` and `util` imports with narrow browser compatibility modules. SHA-256 delegates to directly pinned `@noble/hashes@1.8.0`; no cryptographic primitive was implemented locally.
 - Four deterministic compatibility tests match Node SHA-256 across text, binary, and chunked inputs, verify the `inspect.custom` symbol, and fail closed for unsupported algorithms, encodings, input types, or hash reuse.
 - The rebuilt feature chunk emits no externalized Node-import warnings. The only build warning is the tracked lazy chunk size warning.
+- A fail-closed post-build regression gate now enforces explicit byte budgets for the entry, feature, Trezor, and upgrade chunks; rejects Node-externalization markers; verifies that SHA-256 compatibility remains feature-only; and runs in every IAT V2 admin inspection gate.
 
 ## Residual finding
 
@@ -22,4 +23,4 @@ This source-bound package evaluates the local IAT V2 admin console without conne
 
 ## Source binding and limits
 
-The implementation and non-signing browser proof are bound to commit `3ee6dbc326c25fc674c5f1ca25d9ce0c1978b863`, Git tree `c7469bc5b540ba20b205d638b4bcd2bce182eb22`. All measurements are local build/runtime evidence. No wallet, hardware device, secret, signing, simulation for signing, broadcast, deployment, funding, DNS change, or Devnet/Mainnet mutation occurred. Mainnet remains `UNSCHEDULED_HOLD`.
+The implementation and non-signing browser proof are bound to commit `ed8bf69274b9f7d17f223f39e7f49fd2c6a6d7e5`, Git tree `d13df9da20dd25a21e49f59eaa4ae1c94d79aec4`. All measurements are local build/runtime evidence. No wallet, hardware device, secret, signing, simulation for signing, broadcast, deployment, funding, DNS change, or Devnet/Mainnet mutation occurred. Mainnet remains `UNSCHEDULED_HOLD`.
