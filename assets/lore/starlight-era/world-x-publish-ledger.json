@@ -140,50 +140,9 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-03T10:48:30.000Z",
-    "account": "@RaymondRR777",
-    "caption": "India 💛 United States",
-    "heart": "💛",
-    "imageNumbers": [
-      818,
-      819,
-      820
-    ],
-    "countries": [
-      "India",
-      "United States"
-    ],
-    "assets": [
-      {
-        "file": "818-india-munnar-tea-hills-beacon-recovery.png",
-        "sha256": "d3b938bb855aec20aa11b978fda5aac0d350274a1d896487d0f2609c36956b07"
-      },
-      {
-        "file": "819-india-mumbai-terminal-night-light-relay.png",
-        "sha256": "6d82f5a597a14981a5c7c8aba7fbeaba463d46db4759ba75f134762a9788c604"
-      },
-      {
-        "file": "820-united-states-new-york-brooklyn-bridge-route-light-alignment.png",
-        "sha256": "ae5db566d43b3bea889e288ad81aee058794aeff0620903f908130392a45fb9f"
-      }
-    ],
-    "mediaMode": "video-pause-image-only",
-    "status": "reserved"
-  },
+  "pendingPost": null,
   "preparedPostQueue": [],
-  "pendingCoverUpdate": {
-    "reservedAt": "2026-08-03T05:55:05.701Z",
-    "account": "@RaymondRR777",
-    "postUrl": "https://x.com/RaymondRR777/status/2084156079265452099",
-    "sourceImageNumber": 813,
-    "file": "world-x-cover-813-xian-v1.png",
-    "width": 1500,
-    "height": 500,
-    "sha256": "42c9d454cae5c52e0382217c3b90bf237e2b0b4724311fdcabe372240ca206f1",
-    "previousHeaderUrl": "https://pbs.twimg.com/profile_banners/2063542993303326720/1785707322/1500x500",
-    "status": "reserved"
-  },
+  "pendingCoverUpdate": null,
   "coverUpdates": [
     {
       "confirmedAt": "2026-08-02T08:10:42.1813424Z",
@@ -206,6 +165,19 @@
       "height": 500,
       "sha256": "42c9d454cae5c52e0382217c3b90bf237e2b0b4724311fdcabe372240ca206f1",
       "liveHeaderUrl": "https://pbs.twimg.com/profile_banners/2063542993303326720/1785707322/1500x500"
+    },
+    {
+      "confirmedAt": "2026-08-03T16:15:29.3962708Z",
+      "account": "@RaymondRR777",
+      "sourceImageNumber": 813,
+      "postUrl": "https://x.com/RaymondRR777/status/2084156079265452099",
+      "file": "world-x-cover-813-xian-v1.png",
+      "width": 1500,
+      "height": 500,
+      "sha256": "42c9d454cae5c52e0382217c3b90bf237e2b0b4724311fdcabe372240ca206f1",
+      "previousHeaderUrl": "https://pbs.twimg.com/profile_banners/2063542993303326720/1785707322/1500x500",
+      "liveHeaderUrl": "https://pbs.twimg.com/profile_banners/2063542993303326720/1785773709/1080x360",
+      "verification": "reserved banner uploaded in the bound Chrome account, saved once, and live profile_banners URL changed"
     }
   ],
   "posts": [
@@ -3293,6 +3265,21 @@
       "mediaMode": "video-pause-image-only",
       "verification": "exact reserved three-file chooser transmission, exact caption/status URL, and public photo/1 through photo/3 endpoints",
       "transmission": "agent_confirmed_click"
+    },
+    {
+      "postedAt": "2026-08-03T16:16:46.000Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2084312528591401347",
+      "caption": "India 💛 United States",
+      "imageNumbers": [818, 819, 820],
+      "countries": ["India", "United States"],
+      "assets": [
+        {"file": "818-india-munnar-tea-hills-beacon-recovery.png", "sha256": "d3b938bb855aec20aa11b978fda5aac0d350274a1d896487d0f2609c36956b07"},
+        {"file": "819-india-mumbai-terminal-night-light-relay.png", "sha256": "6d82f5a597a14981a5c7c8aba7fbeaba463d46db4759ba75f134762a9788c604"},
+        {"file": "820-united-states-new-york-brooklyn-bridge-route-light-alignment.png", "sha256": "ae5db566d43b3bea889e288ad81aee058794aeff0620903f908130392a45fb9f"}
+      ],
+      "mediaMode": "video-pause-image-only",
+      "verification": "exact reserved three-file chooser transmission, exact caption/status URL, and public photo/1 through photo/3 endpoints",
+      "transmission": "agent_autonomous_verified_one_click"
     }
   ]
 }
