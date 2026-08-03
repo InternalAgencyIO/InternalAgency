@@ -1163,6 +1163,13 @@ rejected and regenerated.
 | **Lagos National Theatre Aircrew Route-Light Intercept**<br><img src="832-nigeria-lagos-national-theatre-route-light-intercept.png" width="420" alt="The STAR RAZE trio aligning emerald-white route lights before Lagos National Theatre in concise open-waist aircrew couture"> | **Kano Kofar Mata Aircrew Cabin-Signal Cipher**<br><img src="833-nigeria-kano-kofar-mata-cabin-signal-cipher.png" width="420" alt="The trio sealing a glowing cabin-signal orb beside Kano's Kofar Mata dye pits in compact role-coded aircrew styling"> |
 | **Zuma Rock Aircrew Star-Map Relay**<br><img src="834-nigeria-zuma-rock-star-map-relay.png" width="420" alt="The trio restoring an emerald-gold star-map globe before Zuma Rock with quill mission choreography"> | **Lagos Lekki-Ikoyi Aircrew Runway-Beacon Finale**<br><img src="835-nigeria-lagos-lekki-ikoyi-runway-beacon-finale.png" width="420" alt="The trio completing a runway beacon beneath Lekki-Ikoyi Bridge in a close linked finale"> |
 
+## THE MILE HIGH THREESOME - Bonus Batch 204: Brazil
+
+| | |
+|---|---|
+| **Rio Museu do Amanhã Aircrew Command Route-Light Grid**<br><img src="836-brazil-rio-museu-do-amanha-command-route-light-grid.png" width="420" alt="The STAR RAZE trio aligning green-yellow-blue route lights before Rio's Museu do Amanhã in short opaque open-waist aircrew tailoring"> | **Salvador Elevador Lacerda Aircrew Cabin-Signal Cipher**<br><img src="837-brazil-salvador-elevador-lacerda-cabin-signal-cipher.png" width="420" alt="The trio sealing a glowing cabin-signal orb beside Salvador's Elevador Lacerda with close linked affection and Brazil-colored couture"> |
+| **Lençóis Maranhenses Aircrew Star-Map Relay**<br><img src="838-brazil-lencois-maranhenses-star-map-relay.png" width="420" alt="The trio restoring a green-gold star-map globe above Lençóis Maranhenses in compact role-coded aircrew separates"> | **São Paulo Octávio Frias Aircrew Runway-Beacon Finale**<br><img src="839-brazil-sao-paulo-octavio-frias-runway-beacon-finale.png" width="420" alt="The trio completing a runway beacon before São Paulo's Octávio Frias Bridge while adjusting the captain's sculptural collar wings"> |
+
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
