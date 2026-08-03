@@ -1174,3 +1174,15 @@ The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
 contract.
+
+## THE MILE HIGH THREESOME - Bonus Batch 205: Bangladesh
+
+| | |
+|---|---|
+| **Dhaka Hatirjheel Aircrew Command Route-Light Grid**<br><img src="840-bangladesh-dhaka-hatirjheel-command-route-light-grid.png" width="420" alt="The STAR RAZE trio aligning emerald-crimson-gold route lights above Dhaka's Hatirjheel in short opaque open-waist aircrew tailoring"> | **Sonargaon Panam City Aircrew Cabin-Signal Cipher**<br><img src="841-bangladesh-sonargaon-panam-city-cabin-signal-cipher.png" width="420" alt="The trio sealing a glowing cabin-signal orb at Panam City in compact mirror-metallic Bangladesh-colored aircrew couture"> |
+| **Cox's Bazar Aircrew Star-Map Relay**<br><img src="842-bangladesh-coxs-bazar-star-map-relay.png" width="420" alt="The trio restoring a green-crimson star-map globe above Cox's Bazar with close forehead-to-forehead affection"> | **Padma Bridge Aircrew Runway-Beacon Finale**<br><img src="843-bangladesh-padma-bridge-runway-beacon-finale.png" width="420" alt="The trio completing a runway beacon before Padma Bridge in a reconciled shoulder-linked finale"> |
+
+The machine-readable collection index is in
+[`manifest.json`](manifest.json). Original generated assets are preserved
+alongside any restrained face-only corrections accepted by the campaign
+contract.
