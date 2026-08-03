@@ -68,11 +68,11 @@
         "❤️",
         "💚"
       ],
-      "nextIndex": 5,
+      "nextIndex": 6,
       "lastReservedImageNumbers": [
-        813,
-        814,
-        811
+        816,
+        817,
+        815
       ]
     },
     "quotes": false,
@@ -140,7 +140,37 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "stagedAt": "2026-08-03T08:53:01.4605949Z",
+    "account": "@RaymondRR777",
+    "caption": "India 💙 China",
+    "heart": "💙",
+    "imageNumbers": [
+      816,
+      817,
+      815
+    ],
+    "countries": [
+      "India",
+      "China"
+    ],
+    "assets": [
+      {
+        "file": "816-india-mumbai-marine-drive-prism-intercept.png",
+        "sha256": "9acdcd8a303c22d8093f89fe126f50bb3b2a240178debbfc51b651cb5083db77"
+      },
+      {
+        "file": "817-india-jaipur-hawa-mahal-wind-cipher.png",
+        "sha256": "f384b3aae80be8fe3e29c0477e3c4551e6d3697abb98499d611fcb8cb5accc00"
+      },
+      {
+        "file": "815-china-guangzhou-pearl-river-night-relay.png",
+        "sha256": "0a1817a46aa12f64104ac89513492cfe918ad4a9174d40c535b7d38fcc1a6ee0"
+      }
+    ],
+    "mediaMode": "video-pause-image-only",
+    "status": "reserved"
+  },
   "preparedPostQueue": [],
   "pendingCoverUpdate": {
     "reservedAt": "2026-08-03T05:55:05.701Z",
