@@ -74,7 +74,7 @@ const checkById = new Map(checks.checks.map((entry) => [entry.id, entry]));
 check(checkById.get("SITE_TEST_BUILD")?.metrics.passed === 45, "site test count mismatch");
 check(checkById.get("PLAYWRIGHT_FULL_MATRIX")?.metrics.passed === 43, "Playwright pass count mismatch");
 check(checkById.get("PLAYWRIGHT_FULL_MATRIX")?.metrics.failed === 0, "Playwright failures must be zero");
-check(checkById.get("FRESH_CHECKOUT_LOCALE_ASSETS")?.result === "PASS_LOCAL_HOSTED_RERUN_PENDING", "fresh-checkout remediation status mismatch");
+check(checkById.get("FRESH_CHECKOUT_LOCALE_ASSETS")?.result === "PASS_LOCAL_FINAL_HOSTED_RERUN_PENDING", "fresh-checkout remediation status mismatch");
 check(findings.findings.some(({ id, state }) => id === "WEB-QA-002" && state === "CLOSED"), "fresh-checkout finding must be closed locally");
 check(checkById.get("HOSTING_PACKAGE")?.metrics.migrations === 6, "migration package count mismatch");
 check(checkById.get("PRODUCTION_DEPENDENCY_AUDIT")?.metrics.vulnerabilities === 0, "production audit must be clean");

@@ -75,7 +75,7 @@
       "state": "CLOSED",
       "title": "Fresh CI checkouts omitted generated locale payloads",
       "evidence": "Both hosted web jobs at 921bf02 returned /i18n payload 404s because Playwright started Vinext directly while public/i18n is intentionally generated and git-ignored; the runtime then exposed an English fallback as ready.",
-      "remediation": "Playwright now runs compile:i18n before starting Vinext, payload failures remain localeReady=false with an explicit localeError marker, and browser diagnostics preserve exact HTTP and non-media request failures. The complete local 49-case matrix passes at b88b412d2b5400650468e1ad53200752582fdab6; hosted rerun is pending."
+      "remediation": "Playwright now runs compile:i18n before starting Vinext, payload failures remain localeReady=false with an explicit localeError marker, and browser diagnostics preserve exact HTTP and non-media request failures while ignoring engine-specific cancellation of MP4 streams. The complete local matrix passes at 762cdf4b7d44e43878187c9103b4a5c7f226667e; final hosted rerun is pending."
     }
   ]
 }

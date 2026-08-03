@@ -2,7 +2,7 @@
 
 **DRAFT / STATIC QA / NOT LAUNCH APPROVAL / NO DEPLOYMENT / MAINNET HOLD**
 
-This package binds a deep website QA pass to source commit `b88b412d2b5400650468e1ad53200752582fdab6`. It covers the 50-locale routing model, SEO identity, client-side localization settlement, responsive browser rendering, targeted accessibility rules, Sites/Cloudflare packaging, D1 migration packaging, dependency exposure, and the launch gate regression surface.
+This package binds a deep website QA pass to source commit `762cdf4b7d44e43878187c9103b4a5c7f226667e`. It covers the 50-locale routing model, SEO identity, client-side localization settlement, responsive browser rendering, targeted accessibility rules, Sites/Cloudflare packaging, D1 migration packaging, dependency exposure, and the launch gate regression surface.
 
 ## Decision
 
@@ -28,7 +28,7 @@ One material localization blocker remains: 247 unique visible source strings acr
 - Production dependency audit: 0 vulnerabilities. Full dev/tooling graph: 15 moderate and 7 high transitive advisories; automated fixes propose breaking downgrades and were not applied.
 - IAT V2 regression: 65 passed, 0 failed. Complete launch-gate bundle passed in its fail-closed `UNSCHEDULED_HOLD` state.
 
-The first hosted run for `921bf02` failed both web jobs and exposed the fresh-checkout locale-payload defect. Source commit `b88b412d2b5400650468e1ad53200752582fdab6` closes that defect and passes the complete local matrix; its hosted rerun was pending when this source-bound package was generated and is not represented as already green.
+The first hosted run for `921bf02` failed both web jobs and exposed the fresh-checkout locale-payload defect. At intermediate head `498cc4c`, one complete hosted web run passed while its duplicate failed only because WebKit labeled a cancelled MP4 stream as a non-media request; all page assertions passed. Source commit `762cdf4b7d44e43878187c9103b4a5c7f226667e` normalizes that engine-specific diagnostic and passes the repeated local locale matrix. Its final hosted rerun was pending when this source-bound package was generated and is not represented as already green.
 
 ## Limitations
 
