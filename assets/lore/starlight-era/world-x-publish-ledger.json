@@ -17,22 +17,28 @@
   "preferredAttachmentCount": 4,
   "videoActivationBatch": 199,
   "videoActivationImageNumber": 816,
-  "maxPostsPerRun": 10,
-  "publishingMode": "agent-autonomous-overdrive-by-explicit-user",
+  "maxPostsPerRun": 1,
+  "publishingMode": "guardian-autonomous-cadence-after-overdrive-drain",
   "backlogDrainPolicy": {
-    "status": "immediate-overdrive-by-user",
+    "status": "drained-to-two-image-residual",
     "requestedAt": "2026-08-03T18:02:10.035Z",
+    "completedAt": "2026-08-03T18:29:08.048Z",
     "instruction": "Clear the entire deterministically eligible X campaign backlog now through the signed-in Chrome account; the prior 45-50 minute cadence is explicitly overridden for this drain.",
-    "throughput": "Prepare up to three independent composers concurrently, serialize each final Post click and exact URL/media proof, and continue without artificial delay unless X visibly throttles.",
-    "target": "Transmit the frozen ten-trio queue, leaving only the two-image Mexico residual that cannot form a valid 2+1 group.",
-    "coverHandling": "Cover updates remain paused and do not block publication."
+    "outcome": "Ten exactly verified 2+1 posts transmitted 30 reserved assets. Only Mexico images 854 and 855 remain, which cannot form a valid three-image 2+1 group until a different-country asset becomes eligible.",
+    "confirmedPostCount": 10,
+    "residualImageNumbers": [
+      854,
+      855
+    ],
+    "coverHandling": "Cover updates remain paused and no profile fields were modified.",
+    "cadenceAfterDrain": "Return future X publishing to one exactly verified logical group at the established 45-50 minute cadence unless the user explicitly requests another immediate bulk drain."
   },
   "preRenderBacklogCeilingImageNumber": 807,
   "preRenderBacklogStatus": "exhausted",
   "preRenderBacklogExhaustedAt": "2026-08-02T12:07:18.721Z",
   "preRenderBacklogResidualImageNumbers": [],
   "renderInterruptPolicy": "Drain images through 807 during the current assisted dump. Once that pre-render backlog is exhausted, do not interrupt autonomous rendering for new X eligibility. Images 808 onward accumulate for a later user-requested assisted dump.",
-  "postThroughput": "During the explicit immediate backlog-clearing override, freeze up to ten exact trios, prepare up to three independent composers concurrently, serialize every final Post click and exact URL/media reconciliation, and impose no artificial delay unless X visibly throttles.",
+  "postThroughput": "After the completed explicit overdrive drain, publish one exactly verified logical group at the established 45-50 minute cadence. Safe independent preparation and validation may use up to three concurrent lanes, but final Post clicks and ledger reconciliation remain serialized.",
   "ordering": "Starting after the already published images 380 through 385, every new image set must mix exactly two images from one country with one image from a different country. Choose the primary country deterministically as the earliest country in countryPriorityOrder with at least two eligible unposted images. Choose the secondary as the earliest different country with at least one eligible unposted image, preferring any older one-image leftover. Preserve ascending numeric order within each country selection and never duplicate or permanently strand an eligible asset. Images through 815 retain legacy four-still eligibility. Beginning with Batch 199/image 816, only the first three stills in each country batch are X-eligible; the fourth is represented exclusively by its verified 15-second video. With three stills per media-enabled country, paired countries naturally produce reciprocal 2+1 sets, and each country's video accompanies the set where that country is primary.",
   "postComposition": "2+1 country image mix plus the primary country's 15-second video",
   "countryMediaContract": {
@@ -148,78 +154,8 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": {
-    "stagedAt": "2026-08-03T18:02:10.035Z",
-    "account": "@RaymondRR777",
-    "caption": "Indonesia 💙 United States",
-    "heart": "💙",
-    "imageNumbers": [
-      825,
-      826,
-      823
-    ],
-    "countries": [
-      "Indonesia",
-      "United States"
-    ],
-    "assets": [
-      {
-        "file": "825-indonesia-surabaya-suramadu-cabin-signal-calibration.png",
-        "sha256": "bd7233c9ebcbab10099c5c1c9fc093874e3aa29d84e568784e9657f570cbc195"
-      },
-      {
-        "file": "826-indonesia-raja-ampat-piaynemo-star-map-relay.png",
-        "sha256": "73be210e8357d69a33dfd2fe4e643c885c65d0c4555efca18bd73be3fe27a546"
-      },
-      {
-        "file": "823-united-states-san-francisco-golden-gate-beacon-finale.png",
-        "sha256": "597dcd0fa56486ae67abb2206d018f600f038891cffa08369d537450e3dfb9b1"
-      }
-    ],
-    "mediaMode": "video-pause-image-only",
-    "status": "reserved-for-immediate-autonomous-transmission",
-    "attempts": 3,
-    "lastAttemptAt": "2026-08-03T18:23:15.705Z",
-    "lastOutcome": "Three exact submissions across two clean composer sessions returned X’s generic rejection; exact-caption search showed no public transmission, and the original files remain valid and visually public-safe.",
-    "nextMethod": "Preserve caption, order and hashes; after a cooldown, reconcile exact recent statuses and retry once from a clean composer."
-  },
-  "preparedPostQueue": [
-    {
-      "stagedAt": "2026-08-03T18:02:10.035Z",
-      "account": "@RaymondRR777",
-      "caption": "Mexico 💜 Ethiopia",
-      "heart": "💜",
-      "imageNumbers": [
-        852,
-        853,
-        851
-      ],
-      "countries": [
-        "Mexico",
-        "Ethiopia"
-      ],
-      "assets": [
-        {
-          "file": "852-mexico-city-bellas-artes-command-route-light-grid.png",
-          "sha256": "2ca35b9b69cdcfd15c600c4ceb5e149fc77882fe5ed3cc678143cdc345eb77d8"
-        },
-        {
-          "file": "853-mexico-guanajuato-juarez-cabin-signal-cipher.png",
-          "sha256": "26f6d859be1a554e798c3612e8bc87820c61b94d45193fa1b5400ff773fd4f81"
-        },
-        {
-          "file": "851-ethiopia-addis-djibouti-railway-arrival-beacon-finale.png",
-          "sha256": "e848212a5802f0badf56d8b0a0a603872f41691c4def41b3c30ee38f6eeca41e"
-        }
-      ],
-      "mediaMode": "video-pause-image-only",
-      "status": "reserved-for-immediate-autonomous-transmission",
-      "attempts": 1,
-      "lastAttemptAt": "2026-08-03T18:23:15.880Z",
-      "lastOutcome": "The exact submission after eight accepted burst posts returned X’s generic rejection with no status URL, consistent with burst throttling.",
-      "nextMethod": "Preserve caption, order and hashes; after a cooldown, reconcile exact recent statuses and retry once from a clean composer."
-    }
-  ],
+  "pendingPost": null,
+  "preparedPostQueue": [],
   "pendingCoverUpdate": null,
   "coverUpdatePolicy": {
     "status": "paused-by-user",
@@ -3622,6 +3558,68 @@
         {
           "file": "847-russia-vladivostok-russky-bridge-runway-beacon-finale.png",
           "sha256": "a4a919033ca97f39028cfccedaa8e1e2e24e31195570e4d9cc79efc4af72bf04"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "verification": "exact frozen caption and three-file chooser order, one enabled Post click, public status caption, and photo/1 through photo/3 endpoints",
+      "transmission": "agent_autonomous_overdrive_verified_one_click_cover_paused"
+    },
+    {
+      "postedAt": "2026-08-03T18:26:44.130Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2084345123920281921",
+      "caption": "Mexico 💜 Ethiopia",
+      "imageNumbers": [
+        852,
+        853,
+        851
+      ],
+      "countries": [
+        "Mexico",
+        "Ethiopia"
+      ],
+      "assets": [
+        {
+          "file": "852-mexico-city-bellas-artes-command-route-light-grid.png",
+          "sha256": "2ca35b9b69cdcfd15c600c4ceb5e149fc77882fe5ed3cc678143cdc345eb77d8"
+        },
+        {
+          "file": "853-mexico-guanajuato-juarez-cabin-signal-cipher.png",
+          "sha256": "26f6d859be1a554e798c3612e8bc87820c61b94d45193fa1b5400ff773fd4f81"
+        },
+        {
+          "file": "851-ethiopia-addis-djibouti-railway-arrival-beacon-finale.png",
+          "sha256": "e848212a5802f0badf56d8b0a0a603872f41691c4def41b3c30ee38f6eeca41e"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "verification": "exact frozen caption and three-file chooser order, one enabled Post click, public status caption, and photo/1 through photo/3 endpoints",
+      "transmission": "agent_autonomous_overdrive_verified_one_click_cover_paused"
+    },
+    {
+      "postedAt": "2026-08-03T18:27:54.570Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2084345361582154070",
+      "caption": "Indonesia 💙 United States",
+      "imageNumbers": [
+        825,
+        826,
+        823
+      ],
+      "countries": [
+        "Indonesia",
+        "United States"
+      ],
+      "assets": [
+        {
+          "file": "825-indonesia-surabaya-suramadu-cabin-signal-calibration.png",
+          "sha256": "bd7233c9ebcbab10099c5c1c9fc093874e3aa29d84e568784e9657f570cbc195"
+        },
+        {
+          "file": "826-indonesia-raja-ampat-piaynemo-star-map-relay.png",
+          "sha256": "73be210e8357d69a33dfd2fe4e643c885c65d0c4555efca18bd73be3fe27a546"
+        },
+        {
+          "file": "823-united-states-san-francisco-golden-gate-beacon-finale.png",
+          "sha256": "597dcd0fa56486ae67abb2206d018f600f038891cffa08369d537450e3dfb9b1"
         }
       ],
       "mediaMode": "video-pause-image-only",
