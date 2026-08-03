@@ -177,7 +177,11 @@
       }
     ],
     "mediaMode": "video-pause-image-only",
-    "status": "reserved-for-immediate-autonomous-transmission"
+    "status": "reserved-for-immediate-autonomous-transmission",
+    "attempts": 3,
+    "lastAttemptAt": "2026-08-03T18:23:15.705Z",
+    "lastOutcome": "Three exact submissions across two clean composer sessions returned X’s generic rejection; exact-caption search showed no public transmission, and the original files remain valid and visually public-safe.",
+    "nextMethod": "Preserve caption, order and hashes; after a cooldown, reconcile exact recent statuses and retry once from a clean composer."
   },
   "preparedPostQueue": [
     {
@@ -209,7 +213,11 @@
         }
       ],
       "mediaMode": "video-pause-image-only",
-      "status": "reserved-for-immediate-autonomous-transmission"
+      "status": "reserved-for-immediate-autonomous-transmission",
+      "attempts": 1,
+      "lastAttemptAt": "2026-08-03T18:23:15.880Z",
+      "lastOutcome": "The exact submission after eight accepted burst posts returned X’s generic rejection with no status URL, consistent with burst throttling.",
+      "nextMethod": "Preserve caption, order and hashes; after a cooldown, reconcile exact recent statuses and retry once from a clean composer."
     }
   ],
   "pendingCoverUpdate": null,
