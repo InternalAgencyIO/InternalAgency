@@ -1,17 +1,17 @@
 {
   "schema": "iat-site-locale-config-qa-manifest/v1",
-  "generatedAtUtc": "2026-08-03T14:29:08.635Z",
+  "generatedAtUtc": "2026-08-03T15:12:46.929Z",
   "status": "DRAFT_LOCALIZATION_RELEASE_HOLD",
   "mainnetStatus": "HOLD_UNCHANGED",
   "sourceBinding": {
     "branch": "agent/iat-launch-window",
-    "commit": "a0a1f611a2bc05de2a0a93d26d4644921c4b1124",
-    "gitTree": "484d800cc1f9acc638bfa4aeeaf04d631b79d92d"
+    "commit": "b88b412d2b5400650468e1ad53200752582fdab6",
+    "gitTree": "a0a311952ad90553129aa26ae751da6ac2114948"
   },
   "findingSummary": {
-    "total": 8,
+    "total": 9,
     "openBySeverity": { "CRITICAL": 0, "HIGH": 2, "MEDIUM": 2, "LOW": 0, "INFO": 0 },
-    "closedBySeverity": { "CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 1, "INFO": 0 }
+    "closedBySeverity": { "CRITICAL": 0, "HIGH": 1, "MEDIUM": 3, "LOW": 1, "INFO": 0 }
   },
   "clearance": {
     "allLocaleRootHydrationPassed": true,
@@ -28,12 +28,12 @@
     "authorizesBroadcast": false
   },
   "artifactSha256": {
-    "README.md": "e33068437945211a25cddbb54509f8220fc10987442c373b0a26efb6475ddbe6",
-    "checks.json": "da404b74d26eb64b85fa1a64a33829cb7a61a66f6f52996a1800f9b67f1e38a0",
+    "README.md": "05f067ac4474a87faee56d8f8735548e731b1e4f970a82c78e77c6ea5d5c1039",
+    "checks.json": "0647ddec4496a3812e433fffa94df2af835e893e4beacbdfd9b505ad2169782e",
     "environment-matrix.json": "d5ff248ce052a276dbc5fd5fdd75cdd954a15b2f1a0a81df9428a63026885f2a",
-    "findings.json": "3aca4ec9227469539f8c79efb3feba59d0fae88d1ea49ac44b32cee955baf642",
+    "findings.json": "f4d194268e4207c6a3145ad5b83cbd8abd8997d365656ac9b9834443d36ebbd4",
     "hosting-observation.json": "9587444f4924b462c43631f2e020026e3649b2199087473cc0e2e27af98ff4f2",
     "localization-coverage.json": "10b6c5c72ce801536de6442b966f3effbcd612a2ec6ce0cc38fcf3409d0138b2",
-    "scope.json": "cb7a77dea581820b764a0e7216c4f1bbee59cfc89e912c981ee46825d7885b33"
+    "scope.json": "7d2ddedac33f59580e26d73eb1c15260238c8443ccb3f6980ad9b504aebed19c"
   }
 }

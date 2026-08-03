@@ -1,11 +1,11 @@
 {
   "schema": "iat-site-locale-config-qa-scope/v1",
-  "generatedAtUtc": "2026-08-03T14:29:08.635Z",
+  "generatedAtUtc": "2026-08-03T15:12:46.929Z",
   "status": "DRAFT_STATIC_QA_MAINNET_HOLD",
   "sourceBinding": {
     "branch": "agent/iat-launch-window",
-    "commit": "a0a1f611a2bc05de2a0a93d26d4644921c4b1124",
-    "gitTree": "484d800cc1f9acc638bfa4aeeaf04d631b79d92d"
+    "commit": "b88b412d2b5400650468e1ad53200752582fdab6",
+    "gitTree": "a0a311952ad90553129aa26ae751da6ac2114948"
   },
   "coverage": {
     "localeCount": 50,
@@ -24,7 +24,10 @@
     "projects/star-ascent/site/app/i18n/route-seo.json": "8931654068f87d2c8ffcca328cf82882be5a09a2b5d90a8cefb163b221f525e4",
     "projects/star-ascent/site/.openai/hosting.json": "4c56488724f0f16e294c8021859e968e58f1cf407f9378100ec81bda42cd4dfe",
     "projects/star-ascent/site/vite.config.ts": "f7c14b8a38546bb6a7ec93cba22f8e8f131da9fbfe8b39327422ed5bb98d4613",
-    "projects/star-ascent/site/tests/ui/all-locales-render.spec.mjs": "cebd5f4f429534552f235fbdbfaf20a04b476a286341d01a4a6893eda5f22093",
+    "projects/star-ascent/site/app/i18n/LocaleRuntime.tsx": "963ff2d4bb8a0c5478600343df157abe96a3cbdb3fa2f114310f18cecfc2ab3b",
+    "projects/star-ascent/site/playwright.config.mjs": "68db1babea4f4392a4685124a5e09c0e8bc818ff187a3e5672ea7ae0be26b3a7",
+    "projects/star-ascent/site/tests/i18n-routing.test.mjs": "17db0e5ab3dcde27f9d7b8df6c2c3075d7e020feb6774dcdfae9bfc49f8adf7b",
+    "projects/star-ascent/site/tests/ui/all-locales-render.spec.mjs": "4ee484ad538637e0995f90dcabd769d465b42d66e2da36d15d9ad0a3fa2818cc",
     "projects/star-ascent/site/scripts/validate-site-hosting-config.mjs": "29a404f52bb5b69ff84ff68f265b1b2d24321efab61fe54999d918d485b58b7b"
   },
   "excluded": [

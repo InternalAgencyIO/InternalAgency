@@ -2,17 +2,18 @@
 
 **DRAFT / STATIC QA / NOT LAUNCH APPROVAL / NO DEPLOYMENT / MAINNET HOLD**
 
-This package binds a deep website QA pass to source commit `a0a1f611a2bc05de2a0a93d26d4644921c4b1124`. It covers the 50-locale routing model, SEO identity, client-side localization settlement, responsive browser rendering, targeted accessibility rules, Sites/Cloudflare packaging, D1 migration packaging, dependency exposure, and the launch gate regression surface.
+This package binds a deep website QA pass to source commit `b88b412d2b5400650468e1ad53200752582fdab6`. It covers the 50-locale routing model, SEO identity, client-side localization settlement, responsive browser rendering, targeted accessibility rules, Sites/Cloudflare packaging, D1 migration packaging, dependency exposure, and the launch gate regression surface.
 
 ## Decision
 
 Website localization release remains **HOLD**. Mainnet remains **HOLD** for its existing independent gates. This QA performed no deployment, signing, simulation for signing, broadcast, wallet access, transfer, DNS change, or launch scheduling.
 
-The expanded browser and configuration checks passed after three source fixes:
+The expanded browser and configuration checks passed locally after four source fixes:
 
 - localized tokenomics routes retain their route-owned `lang` and `dir`;
 - predictive-engine mechanics labels and the locale-prompt timeout meet the targeted contrast rule;
 - non-English pages report locale readiness only after the client catalog has actually settled.
+- fresh CI checkouts compile the intentionally generated locale payloads before Playwright starts, and a payload failure can no longer declare an untranslated fallback ready.
 
 One material localization blocker remains: 247 unique visible source strings across 15 of 25 canonical route documents are outside the 50-language catalog. Affected locales can therefore show localized metadata and navigation while retaining English prose. The largest gap is `/tokenomics` with 63 uncataloged strings. The catalog must be re-extracted from current source, translated with protocol terms preserved, reviewed by native speakers, and rerun through this matrix before the 50-language rollout can be called complete.
 
@@ -26,6 +27,8 @@ One material localization blocker remains: 247 unique visible source strings acr
 - Hosting package: exact project binding, D1 binding `DB`, R2 disabled, and six migrations copied byte-for-byte.
 - Production dependency audit: 0 vulnerabilities. Full dev/tooling graph: 15 moderate and 7 high transitive advisories; automated fixes propose breaking downgrades and were not applied.
 - IAT V2 regression: 65 passed, 0 failed. Complete launch-gate bundle passed in its fail-closed `UNSCHEDULED_HOLD` state.
+
+The first hosted run for `921bf02` failed both web jobs and exposed the fresh-checkout locale-payload defect. Source commit `b88b412d2b5400650468e1ad53200752582fdab6` closes that defect and passes the complete local matrix; its hosted rerun was pending when this source-bound package was generated and is not represented as already green.
 
 ## Limitations
 

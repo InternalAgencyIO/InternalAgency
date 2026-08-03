@@ -68,6 +68,14 @@
       "title": "Locale prompt timeout text failed targeted contrast on iOS emulation",
       "evidence": "Axe reported .locale-prompt small below the targeted contrast rule.",
       "remediation": "Foreground opacity increased from 0.42 to 0.72 and passes the rerun."
+    },
+    {
+      "id": "WEB-QA-002",
+      "severity": "MEDIUM",
+      "state": "CLOSED",
+      "title": "Fresh CI checkouts omitted generated locale payloads",
+      "evidence": "Both hosted web jobs at 921bf02 returned /i18n payload 404s because Playwright started Vinext directly while public/i18n is intentionally generated and git-ignored; the runtime then exposed an English fallback as ready.",
+      "remediation": "Playwright now runs compile:i18n before starting Vinext, payload failures remain localeReady=false with an explicit localeError marker, and browser diagnostics preserve exact HTTP and non-media request failures. The complete local 49-case matrix passes at b88b412d2b5400650468e1ad53200752582fdab6; hosted rerun is pending."
     }
   ]
 }
