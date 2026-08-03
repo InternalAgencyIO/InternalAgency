@@ -10,6 +10,7 @@ import { googleHreflangTag, htmlLanguageTag, localeCodes, localeDirection, local
 import { LocaleRuntime, type PromptCopy } from "./i18n/LocaleRuntime";
 import localizedMetadata from "./i18n/metadata.generated.json";
 import routeSeo from "./i18n/route-seo.json";
+import { metadataBaseFromRequest } from "./metadata-origin.mjs";
 
 type LocaleMetadata = {
   title: string;
@@ -45,7 +46,7 @@ function routeSeoSources(publicPath: string): { title: string; description: stri
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host");
-  const protocol = requestHeaders.get("x-forwarded-proto") ?? "https";
+  const metadataBase = metadataBaseFromRequest(host, requestHeaders.get("x-forwarded-proto"));
   const locale = localeFromRequestHeaders(requestHeaders.get("x-ia-locale"), host);
   const localeMetadata = metadataCatalog[locale];
   const publicPath = requestHeaders.get("x-ia-path") ?? "/";
@@ -57,7 +58,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonical = `${canonicalHost}${canonicalPath === "/" ? "" : canonicalPath}`;
   const indexable = publicPath !== "/mint";
   return {
-    metadataBase: host ? new URL(`${protocol}://${host}`) : undefined,
+    metadataBase,
     title, description,
     alternates: {
       canonical,
