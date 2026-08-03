@@ -161,7 +161,7 @@ def update_manifest(
         **metadata,
         "codec": "H.264",
         "pixelFormat": "yuv420p",
-        "audio": false,
+        "audio": False,
         "seed": seed,
         "promptSha256": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
         "status": "rendered",

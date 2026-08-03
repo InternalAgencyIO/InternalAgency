@@ -19,9 +19,9 @@
     "fps": 30,
     "frameCount": 450,
     "status": "pending",
-    "attempts": 2,
-    "lastAttemptAt": "2026-08-02T23:47:59.5560393Z",
-    "lastOutcome": "The single supported FramePack retry exceeded the bounded client wait without producing a validated 450-frame MP4; the healthy server remained available and no placeholder MP4 was written.",
+    "attempts": 3,
+    "lastAttemptAt": "2026-08-03T01:43:44.6391728Z",
+    "lastOutcome": "The single supported FramePack retry reached the bounded client timeout after producing only a 392-frame, 13.067-second H.264 yuv420p temporary encode. The incomplete temporary file was rejected and removed; no final MP4 was promoted. The sole FramePack server remained healthy.",
     "resumeRule": "Retry this oldest pending country once on the next heartbeat using the same source hash and motion prompt; do not make India X-video-eligible until exact MP4 validation succeeds."
   },
   "contract": {
