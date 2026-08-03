@@ -12,7 +12,7 @@
     "iat:v2-admin": "vite --config tools/iat-v2-admin-console/vite.config.mjs",
     "iat:v2-feature-preflight": "node scripts/iat-v2-feature-preflight.mjs",
     "build:iat-v2-admin": "vite build --config tools/iat-v2-admin-console/vite.config.mjs",
-    "check:iat-v2-admin-inspection": "node --test tests/iat-v2-admin-browser-shims.test.mjs && npm run build:iat-v2-admin && node scripts/test-iat-v2-admin-inspection-runtime.mjs",
+    "check:iat-v2-admin-inspection": "node --test tests/iat-v2-admin-browser-shims.test.mjs && npm run build:iat-v2-admin && node scripts/test-iat-v2-admin-bundle-regression.mjs && node scripts/test-iat-v2-admin-inspection-runtime.mjs",
     "predev": "npm run generate:mint-config && npm run compile:i18n",
     "dev": "vinext dev",
     "prebuild": "npm run generate:mint-config && npm run compile:i18n",
