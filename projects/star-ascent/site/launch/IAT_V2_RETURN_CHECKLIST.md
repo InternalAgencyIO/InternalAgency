@@ -1,6 +1,6 @@
 # IAT V2 return checklist
 
-Updated at `2026-08-03T04:32:09.348Z`.
+Updated at `2026-08-03T05:41:05Z`.
 
 Mainnet remains `HOLD`. No unattended script may sign or broadcast a mainnet
 transaction.
@@ -89,6 +89,15 @@ entry. See `launch/IAT_V2_CEREMONY_ENTRY_GATE.md`.
 
 ## Mainnet blockers that must stay visible
 
+- The source-bound launch QA package at
+  `public/audits/iat-v2-launch-qa-20260803/` passes 35/35 automated browser
+  cases, the production build, 19/19 rendered-page tests, 65/65 V2 tests, and
+  the complete local launch-gate chain. It remains `QA HOLD`: read-only live
+  checks found four `/tokenomics` or `/network` 404s, two incorrect V2
+  tokenomics redirects, two sitemap omissions, and Turkish metadata requiring
+  fluent human review. Resolving those public-site findings requires a
+  separately authorized deployment/reconciliation pass; this checklist grants
+  no deployment authority.
 - The historical source-bound pre-launch audit remains `HOLD` with its recorded
   two critical and seven high findings. The current hardening audit remains
   `HOLD` with six remediations pending rehearsal/review, one owner-accepted

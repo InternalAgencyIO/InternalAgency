@@ -1,0 +1,60 @@
+{
+  "schema": "iat-v2-launch-qa-findings/v1",
+  "status": "DRAFT_QA_HOLD",
+  "findings": [
+    {
+      "id": "QA-RUNTIME-001",
+      "severity": "MEDIUM",
+      "state": "CLOSED",
+      "area": "browser-runtime",
+      "summary": "Unused next/font loading emitted blocked local module requests",
+      "resolution": "Removed the unused loader and font variables, then added route-wide browser exception and console-error assertions.",
+      "evidence": ["35/35 strengthened Playwright cases passed", "zero page exceptions", "zero console errors"]
+    },
+    {
+      "id": "QA-LIVE-001",
+      "severity": "HIGH",
+      "state": "OPEN",
+      "area": "live-publication-drift",
+      "summary": "The live public origins do not expose the complete reviewed launch route/redirect/sitemap surface",
+      "evidence": ["four /tokenomics or /network 404 responses", "two V2 tokenomics redirects target archive-record", "two sitemap checks omit canonical /tokenomics"],
+      "remediation": "Use a separately authorized deployment/reconciliation workflow, then rerun the read-only public contract check."
+    },
+    {
+      "id": "QA-L10N-001",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "area": "localization-metadata",
+      "summary": "Turkish public metadata is not at fluent bilingual parity and the title contract needs reconciliation",
+      "evidence": ["Turkish root served the English brand title", "multiple Turkish route titles were visibly mistranslated", "38 title/description mismatches include both real defects and route-specific-title policy differences"],
+      "remediation": "Reconcile the intended metadata contract and obtain fluent Turkish human review before publishing a bilingual parity claim."
+    },
+    {
+      "id": "QA-ADMIN-001",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "area": "local-admin-runtime",
+      "summary": "The isolated admin bundle retains browser-externalized Node imports and a large output chunk",
+      "evidence": ["Vite build completed", "util and crypto were browser-externalized", "largest chunk approximately 2148.15 kB and 487.84 kB gzip"],
+      "remediation": "Prove the built localhost console in an isolated non-signing runtime and reduce or document the dependency surface before ceremony use."
+    },
+    {
+      "id": "QA-DEPS-001",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "area": "development-dependencies",
+      "summary": "Development tooling retains upstream advisories while production dependencies are clear",
+      "evidence": ["production audit total 0", "full audit total 22", "15 moderate and 7 high, 0 critical"],
+      "remediation": "Review non-breaking upstream resolutions and reproduce every launch gate before accepting toolchain changes."
+    },
+    {
+      "id": "QA-COVERAGE-001",
+      "severity": "INFO",
+      "state": "OPEN",
+      "area": "environment-coverage",
+      "summary": "Physical-device, graphical Linux, assistive-technology, performance-lab, and independent QA coverage is unavailable",
+      "evidence": ["mobile results are Playwright emulation", "no installed mobile Safari", "no independent reviewer session"],
+      "remediation": "Run and publish the matrix in the missing environments with independent review."
+    }
+  ]
+}

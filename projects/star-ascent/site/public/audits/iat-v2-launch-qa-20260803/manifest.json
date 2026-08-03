@@ -1,0 +1,53 @@
+{
+  "schema": "iat-v2-launch-qa-manifest/v1",
+  "status": "DRAFT_QA_HOLD",
+  "mainnetStatus": "HOLD",
+  "qaDecision": "HOLD",
+  "assurance": "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT",
+  "title": "IAT V2 launch QA consolidation - 2026-08-03",
+  "auditedAtUtc": "2026-08-03T05:41:05Z",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "commit": "4b7b121640e65586aaadf2fcf2c6d5b96808108b",
+    "gitTree": "8f1532c9942446a8dd12a89be3e9f4db7809c688",
+    "scopePath": "public/audits/iat-v2-launch-qa-20260803/scope.json"
+  },
+  "findingSummary": {
+    "total": 6,
+    "openBySeverity": {"CRITICAL":0,"HIGH":1,"MEDIUM":3,"LOW":0,"INFO":1},
+    "closedBySeverity": {"CRITICAL":0,"HIGH":0,"MEDIUM":1,"LOW":0,"INFO":0}
+  },
+  "clearance": {
+    "reviewedSourceAutomatedChecksPass": true,
+    "livePublicationReconciled": false,
+    "bilingualMetadataApproved": false,
+    "adminRuntimeWarningsClosed": false,
+    "productionDependenciesClear": true,
+    "developmentDependenciesReviewed": false,
+    "externalEnvironmentCoverageComplete": false,
+    "qaReleaseApproved": false,
+    "authorizesDeployment": false,
+    "authorizesSigning": false,
+    "authorizesBroadcast": false,
+    "authorizesMainnetChange": false
+  },
+  "publicDevelopmentSurface": {
+    "draftPullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/4",
+    "packagePath": "projects/star-ascent/site/public/audits/iat-v2-launch-qa-20260803",
+    "deploymentState": "NOT_DEPLOYED"
+  },
+  "artifactSha256": {
+    "README.md": "42f4124da1605defb5d59f1446f2694a900fa744914511700113e57e0c67617a",
+    "FINDINGS.md": "041b0b0774c72656b492a6394d534327fd89c4ed9d6b5cc30e491aab912a1285",
+    "scope.json": "108490ee9970e97448f900aa36c74c1ade3d641636a0bfbfbafae04a79359434",
+    "checks.json": "8e9d34ec7fcd72921bf6fbfc9dfc5bd666d27f59cc0ecc6492414a053d592d69",
+    "findings.json": "c886ba9e4b8cb0cf2aef863fa05bd6488e31775b200edea0a7bca6830687e1c8",
+    "environment-matrix.json": "34520c86b0d57c3b8942e79abc98f94851ea3e86c5611469aa2170a50428cfc4"
+  },
+  "limitations": [
+    "This package is not an independent security, accessibility, localization, or physical-device certification.",
+    "Live public-route observations are timestamped read-only HTTP evidence and do not prove future availability.",
+    "Generic title-contract mismatches require human policy review before remediation.",
+    "No wallet, key, hardware signer, secret, deployment, signing, transaction, transfer, DNS, mainnet, or devnet state was accessed or changed."
+  ]
+}

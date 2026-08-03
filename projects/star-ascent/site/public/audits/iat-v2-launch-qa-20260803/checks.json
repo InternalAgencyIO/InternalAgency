@@ -1,0 +1,26 @@
+{
+  "schema": "iat-v2-launch-qa-checks/v1",
+  "status": "DRAFT_QA_HOLD",
+  "runAtUtc": "2026-08-03T05:41:05Z",
+  "checks": [
+    {"id":"PRODUCTION_BUILD_AND_RENDERED_HTML","result":"PASS","metrics":{"build":"PASS","renderedHtmlPassed":19,"renderedHtmlFailed":0,"mainnetEvidenceGates":16}},
+    {"id":"PLAYWRIGHT_RUNTIME_MATRIX","result":"PASS","metrics":{"passed":35,"failed":0,"profiles":7,"primaryRoutes":11,"pageExceptions":0,"consoleErrors":0,"non200PageResponses":0,"brokenImages":0,"documentOverflowDefects":0,"mojibakeMatches":0,"genericAriaLabelDefects":0,"targetedAxeViolations":0}},
+    {"id":"LINT","result":"PASS_WITH_WARNINGS","metrics":{"errors":0,"warnings":8,"warningRule":"@next/next/no-img-element"}},
+    {"id":"PRODUCTION_DEPENDENCY_AUDIT","result":"PASS","metrics":{"total":0,"moderate":0,"high":0,"critical":0}},
+    {"id":"FULL_DEPENDENCY_AUDIT","result":"HOLD_REVIEW","metrics":{"total":22,"moderate":15,"high":7,"critical":0,"productionReachable":false}},
+    {"id":"IAT_V2_VALIDATION","result":"PASS_IN_HOLD","metrics":{"nodeTestsPassed":65,"nodeTestsFailed":0,"policy":"PASS_IN_HOLD","timeGateProof":"PASS_LOCAL_ONLY","publicEvidence":"PASS_WITH_CURRENT_REHEARSAL_REQUIREMENTS"}},
+    {"id":"IAT_V2_SIGNOFF","result":"VALID_HOLD","metrics":{"independentInitializationSignoff":"PENDING","historicalFeatureArtifact":"VALID_FOR_PRIOR_ARTIFACT","currentRemediationRequiresFreshSignedDevnet":true}},
+    {"id":"LAUNCH_GATES","result":"PASS_IN_HOLD","metrics":{"schedule":"UNSCHEDULED_HOLD","observedLamports":2533659570,"requiredLamports":8500000000,"fundingFloorSatisfied":false,"authorizesSigning":false,"authorizesBroadcast":false}},
+    {"id":"LOCAL_ADMIN_BUILD","result":"PASS_WITH_WARNINGS","metrics":{"built":true,"largestChunkKb":2148.15,"largestChunkGzipKb":487.84,"browserExternalizedImports":["util","crypto"]}},
+    {"id":"LIVE_PUBLIC_CONTRACT","result":"FAIL_HOLD","observedAtUtc":"2026-08-03T05:41:05Z","metrics":{"origins":2,"passedLegacyRedirects":30,"passedRobots":2,"failures":46,"directRoutingPublicationDrift":8,"titleDescriptionContractMismatches":38,"route404s":4,"incorrectV2Redirects":2,"sitemapOmissions":2,"productionMutated":false}},
+    {"id":"SOURCE_COMMIT_GITHUB_CHECKS","result":"IN_PROGRESS_AT_PACKAGE_TIME","metrics":{"draftPullRequest":4,"head":"4b7b121640e65586aaadf2fcf2c6d5b96808108b","localEquivalentChecks":"PASS","githubActionsFinalResult":"NOT_YET_OBSERVED"}}
+  ],
+  "limitations": [
+    "The public-route check is a timestamped read-only observation, not a continuous monitor or deployment test.",
+    "Route-title mismatches mix genuine localization defects with a generic checker expectation that may be stale; they require human contract review.",
+    "Playwright mobile profiles and WebKit are emulation/engine evidence, not physical mobile or installed Safari certification.",
+    "Targeted axe rules and automated keyboard checks do not replace full assistive-technology testing.",
+    "The admin console build warning was not closed by a physical Trezor or ceremony session.",
+    "No deployment, wallet access, signing, transaction, transfer, DNS, mainnet, or devnet mutation occurred."
+  ]
+}
