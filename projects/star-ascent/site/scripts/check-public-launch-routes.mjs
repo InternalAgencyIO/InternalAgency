@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { readFileSync } from "node:fs";
 
 const timeoutMs = 12_000;
 const concurrency = 1;
@@ -16,8 +17,11 @@ const launchRoutes = [
   "/tokenomics",
   "/network",
 ];
-const sitemapRoutes = [...launchRoutes, "/world"];
 const pages = publicOrigins.flatMap((origin) => launchRoutes.map((route) => `${origin}${route}`));
+const metadataCatalog = JSON.parse(readFileSync(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8"));
+const routeSeoCatalog = JSON.parse(readFileSync(new URL("../app/i18n/route-seo.json", import.meta.url), "utf8"));
+const sitemapRoutes = Object.keys(routeSeoCatalog);
+const localeCodes = Object.keys(metadataCatalog);
 
 const disclosureRedirects = {
   "star-ascent-whitepaper-v2": "white-dossier",
@@ -65,18 +69,18 @@ function attribute(tag, name) {
 }
 
 function metadataError(url, html) {
-  const origin = new URL(url).origin;
-  const expected = origin === "https://ileriakil.com"
-    ? {
-      lang: "tr",
-      title: "İleri Akıl — STAR ASCENT",
-      description: "İleri Akıl'ın ilk kamusal bölümü: şeffaf lansman bilgileri, IAT ekonomi politikası V2 ve mainnet BEKLET kanıt durumu.",
-    }
-    : {
-      lang: "en",
-      title: "Internal Agency — STAR ASCENT",
-      description: "The first public chapter of Internal Agency: transparent launch information, IAT economic policy V2, and mainnet HOLD evidence status.",
-    };
+  const parsedUrl = new URL(url);
+  const origin = parsedUrl.origin;
+  const publicPath = parsedUrl.pathname || "/";
+  const locale = origin === "https://ileriakil.com" ? "tr" : "en";
+  const localeMetadata = metadataCatalog[locale];
+  const seoSources = routeSeoCatalog[publicPath]
+    ?? (publicPath.startsWith("/dossier/read/") ? routeSeoCatalog["/dossier"] : routeSeoCatalog["/"]);
+  const expected = {
+    lang: locale,
+    title: localeMetadata.seo[seoSources.title] ?? localeMetadata.title,
+    description: localeMetadata.seo[seoSources.description] ?? localeMetadata.description,
+  };
   const language = html.match(/<html\b[^>]*\blang="([^"]+)"/i)?.[1] ?? "";
   const title = html.match(/<title>([^<]*)<\/title>/i)?.[1] ?? "";
   const metaTags = html.match(/<meta\b[^>]*>/gi) ?? [];
@@ -89,6 +93,8 @@ function metadataError(url, html) {
     const tag = linkTags.find((candidate) => attribute(candidate, "rel") === "alternate" && attribute(candidate, "hreflang") === language);
     return tag ? attribute(tag, "href") : "";
   };
+  const canonicalTag = linkTags.find((candidate) => attribute(candidate, "rel") === "canonical");
+  const canonicalHref = canonicalTag ? attribute(canonicalTag, "href") : "";
   const ogImageUrl = metaValue("og:image");
   if (language !== expected.lang) return `expected html lang=${expected.lang}; got ${language || "missing"}`;
   if (title !== expected.title) return `expected title ${expected.title}; got ${title || "missing"}`;
@@ -103,8 +109,12 @@ function metadataError(url, html) {
   if (metaValue("twitter:title", "name") !== expected.title) return "expected Twitter title to exactly match the document title";
   if (metaValue("twitter:description", "name") !== expected.description) return "expected Twitter description to exactly match the canonical bilingual description";
   if (metaValue("twitter:image", "name") !== `${origin}/og-star-ascent-v1.png`) return "expected canonical Twitter image";
-  if (alternateHref("en") !== "https://internalagency.io") return "expected exact English alternate link to the canonical English origin";
-  if (alternateHref("tr") !== "https://ileriakil.com") return "expected exact Turkish alternate link to the canonical Turkish origin";
+  const routeSuffix = publicPath === "/" ? "" : publicPath;
+  if (canonicalHref !== `${origin}${routeSuffix}`) return `expected exact canonical route ${origin}${routeSuffix}; got ${canonicalHref || "missing"}`;
+  if (alternateHref("en") !== `https://internalagency.io${routeSuffix}`) return "expected exact English alternate route";
+  if (alternateHref("tr") !== `https://internalagency.io/tr${routeSuffix}`) return "expected exact Turkish locale alternate route";
+  if (alternateHref("tr-TR") !== `https://ileriakil.com${routeSuffix}`) return "expected exact Turkish-origin alternate route";
+  if (alternateHref("x-default") !== `https://internalagency.io${routeSuffix}`) return "expected exact x-default alternate route";
   return null;
 }
 
@@ -144,7 +154,11 @@ function sitemapError(origin, xml) {
     return "expected a sitemap.org urlset";
   }
   const locations = [...xml.matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/gi)].map((match) => match[1]);
-  const expected = publicOrigins.flatMap((site) => sitemapRoutes.map((route) => route === "/" ? site : `${site}${route}`));
+  const canonical = publicOrigins.flatMap((site) => sitemapRoutes.map((route) => route === "/" ? site : `${site}${route}`));
+  const localized = localeCodes
+    .filter((locale) => locale !== "en")
+    .flatMap((locale) => sitemapRoutes.map((route) => `https://internalagency.io/${locale}${route === "/" ? "" : route}`));
+  const expected = [...canonical, ...localized];
   const missing = expected.filter((url) => !locations.includes(url));
   const unexpected = locations.filter((url) => !expected.includes(url));
   const duplicates = locations.filter((url, index) => locations.indexOf(url) !== index);

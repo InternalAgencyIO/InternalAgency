@@ -2,7 +2,7 @@
 
 **STATIC QA / NOT LAUNCH APPROVAL / MAINNET HOLD / NO DEPLOYMENT PERFORMED**
 
-Generated: 2026-08-03T09:06:32.961Z
+Generated: 2026-08-03T09:34:29.478Z
 
 ## Outcome
 
@@ -37,7 +37,7 @@ The launch-checklist word “GO” is treated semantically as “ready,” not a
 | de | 0 | 0 | 185 | required |
 | ja | 0 | 0 | 65 | required |
 | pcm | 0 | 0 | 728 | required |
-| tr | 0 | 0 | 231 | required |
+| tr | 0 | 0 | 230 | required |
 | sq | 0 | 0 | 249 | required |
 | ca | 0 | 0 | 235 | required |
 | be | 0 | 0 | 53 | required |
