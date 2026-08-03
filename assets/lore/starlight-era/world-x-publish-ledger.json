@@ -19,6 +19,13 @@
   "videoActivationImageNumber": 816,
   "maxPostsPerRun": null,
   "publishingMode": "user-assisted-dumps",
+  "backlogDrainPolicy": {
+    "status": "active-by-user",
+    "requestedAt": "2026-08-03T17:10:17.9960365Z",
+    "instruction": "Clear the eligible X campaign backlog through the signed-in Chrome account while preserving the established cadence and deterministic reservation order.",
+    "cadence": "Publish one exactly verified logical 2+1 country group at the first Guardian wake at least 45 minutes after the prior confirmed publication, normally within 45-50 minutes; continue until fewer than three deterministically eligible unposted stills remain.",
+    "coverHandling": "Cover updates are paused separately and do not block backlog drain."
+  },
   "preRenderBacklogCeilingImageNumber": 807,
   "preRenderBacklogStatus": "exhausted",
   "preRenderBacklogExhaustedAt": "2026-08-02T12:07:18.721Z",
@@ -68,11 +75,11 @@
         "❤️",
         "💚"
       ],
-      "nextIndex": 7,
+      "nextIndex": 8,
       "lastReservedImageNumbers": [
-        818,
-        819,
-        820
+          821,
+          822,
+          824
       ]
     },
     "quotes": false,
@@ -143,6 +150,12 @@
   "pendingPost": null,
   "preparedPostQueue": [],
   "pendingCoverUpdate": null,
+  "coverUpdatePolicy": {
+    "status": "paused-by-user",
+    "pausedAt": "2026-08-03T17:10:17.9960365Z",
+    "instruction": "Pause all X profile-cover updates until the user explicitly says to resume them.",
+    "gateEffect": "While paused, do not create or apply pendingCoverUpdate records and do not let the cover gate block exact eligible campaign publications. Modify no profile fields."
+  },
   "coverUpdates": [
     {
       "confirmedAt": "2026-08-02T08:10:42.1813424Z",
@@ -3280,6 +3293,21 @@
       "mediaMode": "video-pause-image-only",
       "verification": "exact reserved three-file chooser transmission, exact caption/status URL, and public photo/1 through photo/3 endpoints",
       "transmission": "agent_autonomous_verified_one_click"
+    },
+    {
+      "postedAt": "2026-08-03T17:21:00.000Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2084328703467614710",
+      "caption": "United States 🧡 Indonesia",
+      "imageNumbers": [821, 822, 824],
+      "countries": ["United States", "Indonesia"],
+      "assets": [
+        {"file": "821-united-states-chicago-riverwalk-cabin-signal-calibration.png", "sha256": "98f6f64e0c77238dcabe381ab4a73946dd068df59d1310c8218967ea9b13f71a"},
+        {"file": "822-united-states-white-sands-star-map-relay.png", "sha256": "876c7364bf60b706134f13e060213e551e7d7c8a1be084b7b1bccff000ba5248"},
+        {"file": "824-indonesia-jakarta-bundaran-hi-command-route-grid.png", "sha256": "4a048dc66a41d2831f1ba619da0d09e2ad13e204c304904d85562f43860e0191"}
+      ],
+      "mediaMode": "video-pause-image-only",
+      "verification": "exact reserved caption and three-file chooser order, sent through one enabled Post click, then confirmed by the public status with photo/1 through photo/3 endpoints",
+      "transmission": "agent_autonomous_verified_one_click_cover_paused"
     }
   ]
 }
