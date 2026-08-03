@@ -12,7 +12,9 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      crypto: path.join(root, "crypto-browser-shim.mjs"),
       https: path.join(root, "https-browser-shim.mjs"),
+      util: path.join(root, "util-browser-shim.mjs"),
     },
   },
   server: {
