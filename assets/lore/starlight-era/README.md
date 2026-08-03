@@ -1186,3 +1186,15 @@ The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original generated assets are preserved
 alongside any restrained face-only corrections accepted by the campaign
 contract.
+
+## THE MILE HIGH THREESOME - Bonus Batch 206: Russia
+
+| | |
+|---|---|
+| **Moscow Zaryadye Aircrew Command Route-Light Grid**<br><img src="844-russia-moscow-zaryadye-command-route-light-grid.png" width="420" alt="The STAR RAZE trio aligning cobalt-crimson-gold route lights above Moscow's Zaryadye Park in mirror-metallic aircrew couture"> | **Saint Petersburg New Holland Aircrew Cabin-Signal Calibration**<br><img src="845-russia-saint-petersburg-new-holland-cabin-signal-calibration.png" width="420" alt="The trio calibrating a cabin-signal prism beside New Holland Island in pearl, cobalt and amber role-coded styling"> |
+| **Lake Baikal Ice Aircrew Star-Map Relay**<br><img src="846-russia-lake-baikal-ice-star-map-relay.png" width="420" alt="The trio relaying a luminous star map across Lake Baikal ice in compact reflective aircrew fashion"> | **Vladivostok Russky Bridge Aircrew Runway-Beacon Finale**<br><img src="847-russia-vladivostok-russky-bridge-runway-beacon-finale.png" width="420" alt="The trio sealing a runway beacon before Russky Bridge in a balanced linked finale"> |
+
+The machine-readable collection index is in
+[`manifest.json`](manifest.json). Original generated assets are preserved
+alongside any restrained face-only corrections accepted by the campaign
+contract.
