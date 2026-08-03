@@ -1,0 +1,74 @@
+{
+  "schema": "iat-v2-continuous-improvement-work-ledger/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "auditPackages": [
+    {
+      "path": "../iat-associates-dlc-20260802/manifest.json",
+      "schema": "iat-future-associates-audit-manifest/v1",
+      "status": "INTENDED_FUTURE_NOT_TECHNICALLY_ISOLATED_INACTIVE_NOT_DEPLOYED_MAINNET_NO_CLAIM_ROUTE",
+      "sourceCommit": "1df716ccd93c47ee1732af6ae1f43b8e6958afe6",
+      "assurance": "FUTURE_DLC_INTERNAL_REVIEW_ONLY"
+    },
+    {
+      "path": "../iat-hero-dlc-20260802/manifest.json",
+      "schema": "iat-future-hero-audit-manifest/v1",
+      "status": "FUTURE_INACTIVE_NOT_GENESIS_NOT_DEPLOYED_NO_CLAIM_ROUTE",
+      "sourceCommit": "eafb13c43db78ab182bbbe8fa3890cc1368dd132",
+      "assurance": "FUTURE_DLC_INTERNAL_REVIEW_ONLY"
+    },
+    {
+      "path": "../iat-site-locale-config-qa-20260803/manifest.json",
+      "schema": "iat-site-locale-config-qa-manifest/v1",
+      "status": "DRAFT_LOCALIZATION_RELEASE_HOLD",
+      "sourceCommit": "762cdf4b7d44e43878187c9103b4a5c7f226667e",
+      "assurance": "INTERNAL_CODEX_ASSISTED_NOT_NATIVE_CERTIFICATION"
+    },
+    {
+      "path": "../iat-ui-compatibility-20260802/manifest.json",
+      "schema": "iat-ui-compatibility-audit-manifest/v1",
+      "status": "DRAFT_UI_RELEASE_HOLD",
+      "sourceCommit": "eb43a854552ccebaf42efe86bb67a433d2495937",
+      "assurance": "INTERNAL_CODEX_ASSISTED_NOT_PHYSICAL_DEVICE_CERTIFICATION"
+    },
+    {
+      "path": "../iat-v2-launch-qa-20260803/manifest.json",
+      "schema": "iat-v2-launch-qa-manifest/v1",
+      "status": "DRAFT_QA_HOLD",
+      "sourceCommit": "4b7b121640e65586aaadf2fcf2c6d5b96808108b",
+      "assurance": "INTERNAL_QA_SNAPSHOT_SUPERSEDED_BY_R2"
+    },
+    {
+      "path": "../iat-v2-launch-qa-20260803-r2/manifest.json",
+      "schema": "iat-v2-launch-qa-manifest/v1",
+      "status": "DRAFT_QA_HOLD",
+      "sourceCommit": "58d6976f3217831c57a1a5858cb32406f88d1fcd",
+      "assurance": "INTERNAL_CODEX_ASSISTED_QA_NOT_INDEPENDENT"
+    },
+    {
+      "path": "../iat-v2-prelaunch-20260802/manifest.json",
+      "schema": "iat-v2-prelaunch-audit-manifest/v1",
+      "status": "DRAFT_MAINNET_HOLD",
+      "sourceCommit": "c23d42d108a33ee105bcbfd32a7acb9f6a66fe96",
+      "assurance": "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT"
+    },
+    {
+      "path": "../iat-v2-remediation-20260802/manifest.json",
+      "schema": "iat-v2-remediation-audit-manifest/v1",
+      "status": "DRAFT_MAINNET_HOLD",
+      "sourceCommit": "b73d2d3ce8572e833b9fdd37df23cd97b40df111",
+      "assurance": "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT"
+    }
+  ],
+  "publicEvidence": {
+    "indexPath": "../../evidence/iat-v2/index.json",
+    "schema": "iat-public-evidence-index/v1",
+    "network": "devnet",
+    "recordCount": 17,
+    "mainnetStatus": "HOLD",
+    "historicalFinalizedReceipt": "29_OF_29_FINALIZED_NO_REPORTED_ERROR",
+    "historicalIndependentFeatureSignoff": "VALID_FOR_PRIOR_ARTIFACT_ONLY",
+    "currentSourceSignedDevnet": "REQUIRED_NOT_COMPLETE",
+    "currentSourceIndependentReview": "REQUIRED_NOT_COMPLETE"
+  },
+  "interpretation": "Each entry reports what an existing public artifact says. The ledger does not elevate internal or historical evidence into current-source independent clearance."
+}
