@@ -17,21 +17,22 @@
   "preferredAttachmentCount": 4,
   "videoActivationBatch": 199,
   "videoActivationImageNumber": 816,
-  "maxPostsPerRun": null,
-  "publishingMode": "user-assisted-dumps",
+  "maxPostsPerRun": 10,
+  "publishingMode": "agent-autonomous-overdrive-by-explicit-user",
   "backlogDrainPolicy": {
-    "status": "active-by-user",
-    "requestedAt": "2026-08-03T17:10:17.9960365Z",
-    "instruction": "Clear the eligible X campaign backlog through the signed-in Chrome account while preserving the established cadence and deterministic reservation order.",
-    "cadence": "Publish one exactly verified logical 2+1 country group at the first Guardian wake at least 45 minutes after the prior confirmed publication, normally within 45-50 minutes; continue until fewer than three deterministically eligible unposted stills remain.",
-    "coverHandling": "Cover updates are paused separately and do not block backlog drain."
+    "status": "immediate-overdrive-by-user",
+    "requestedAt": "2026-08-03T18:02:10.035Z",
+    "instruction": "Clear the entire deterministically eligible X campaign backlog now through the signed-in Chrome account; the prior 45-50 minute cadence is explicitly overridden for this drain.",
+    "throughput": "Prepare up to three independent composers concurrently, serialize each final Post click and exact URL/media proof, and continue without artificial delay unless X visibly throttles.",
+    "target": "Transmit the frozen ten-trio queue, leaving only the two-image Mexico residual that cannot form a valid 2+1 group.",
+    "coverHandling": "Cover updates remain paused and do not block publication."
   },
   "preRenderBacklogCeilingImageNumber": 807,
   "preRenderBacklogStatus": "exhausted",
   "preRenderBacklogExhaustedAt": "2026-08-02T12:07:18.721Z",
   "preRenderBacklogResidualImageNumbers": [],
   "renderInterruptPolicy": "Drain images through 807 during the current assisted dump. Once that pre-render backlog is exhausted, do not interrupt autonomous rendering for new X eligibility. Images 808 onward accumulate for a later user-requested assisted dump.",
-  "postThroughput": "During an explicitly requested bulk-assisted dump, freeze one deterministic prepared queue of up to ten exact trios, open one verified composer tab per trio without an artificial inter-tab delay, and leave every final Post click to the user. Reconcile the queued reservations in order after the clicks; never regenerate or duplicate an uncertain transmission.",
+  "postThroughput": "During the explicit immediate backlog-clearing override, freeze up to ten exact trios, prepare up to three independent composers concurrently, serialize every final Post click and exact URL/media reconciliation, and impose no artificial delay unless X visibly throttles.",
   "ordering": "Starting after the already published images 380 through 385, every new image set must mix exactly two images from one country with one image from a different country. Choose the primary country deterministically as the earliest country in countryPriorityOrder with at least two eligible unposted images. Choose the secondary as the earliest different country with at least one eligible unposted image, preferring any older one-image leftover. Preserve ascending numeric order within each country selection and never duplicate or permanently strand an eligible asset. Images through 815 retain legacy four-still eligibility. Beginning with Batch 199/image 816, only the first three stills in each country batch are X-eligible; the fourth is represented exclusively by its verified 15-second video. With three stills per media-enabled country, paired countries naturally produce reciprocal 2+1 sets, and each country's video accompanies the set where that country is primary.",
   "postComposition": "2+1 country image mix plus the primary country's 15-second video",
   "countryMediaContract": {
@@ -60,26 +61,26 @@
     "heartCycle": {
       "mode": "two-each-shuffled-12-loop",
       "cycleLength": 12,
-      "cycleNumber": 4,
+      "cycleNumber": 5,
       "order": [
+        "💚",
+        "💛",
+        "🧡",
+        "💛",
+        "💙",
         "💜",
         "❤️",
         "💚",
         "🧡",
-        "💛",
         "💙",
-        "💛",
-        "🧡",
-        "💙",
-        "💜",
         "❤️",
-        "💚"
+        "💜"
       ],
-      "nextIndex": 8,
+      "nextIndex": 6,
       "lastReservedImageNumbers": [
-          821,
-          822,
-          824
+        852,
+        853,
+        851
       ]
     },
     "quotes": false,
@@ -147,8 +148,318 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
-  "preparedPostQueue": [],
+  "pendingPost": {
+    "stagedAt": "2026-08-03T18:02:10.035Z",
+    "account": "@RaymondRR777",
+    "caption": "Indonesia 💙 United States",
+    "heart": "💙",
+    "imageNumbers": [
+      825,
+      826,
+      823
+    ],
+    "countries": [
+      "Indonesia",
+      "United States"
+    ],
+    "assets": [
+      {
+        "file": "825-indonesia-surabaya-suramadu-cabin-signal-calibration.png",
+        "sha256": "bd7233c9ebcbab10099c5c1c9fc093874e3aa29d84e568784e9657f570cbc195"
+      },
+      {
+        "file": "826-indonesia-raja-ampat-piaynemo-star-map-relay.png",
+        "sha256": "73be210e8357d69a33dfd2fe4e643c885c65d0c4555efca18bd73be3fe27a546"
+      },
+      {
+        "file": "823-united-states-san-francisco-golden-gate-beacon-finale.png",
+        "sha256": "597dcd0fa56486ae67abb2206d018f600f038891cffa08369d537450e3dfb9b1"
+      }
+    ],
+    "mediaMode": "video-pause-image-only",
+    "status": "reserved-for-immediate-autonomous-transmission"
+  },
+  "preparedPostQueue": [
+    {
+      "stagedAt": "2026-08-03T18:02:10.035Z",
+      "account": "@RaymondRR777",
+      "caption": "Pakistan 💜 Indonesia",
+      "heart": "💜",
+      "imageNumbers": [
+        828,
+        829,
+        827
+      ],
+      "countries": [
+        "Pakistan",
+        "Indonesia"
+      ],
+      "assets": [
+        {
+          "file": "828-pakistan-karachi-frere-hall-command-route-grid.png",
+          "sha256": "48ce31021cd5bd1b54d14f1bff9ddb90730b554b3dfb1a44c5b4f48965aab326"
+        },
+        {
+          "file": "829-pakistan-lahore-delhi-gate-cabin-signal-calibration.png",
+          "sha256": "cd283569ff4830738fe525d6d263f7c4b9ea7abe87eb8bf62c2b6c8e64ed30e2"
+        },
+        {
+          "file": "827-indonesia-makassar-losari-runway-beacon-finale.png",
+          "sha256": "0de1f98abb18fd173070b06c5d2ac4bf08fe702ac626b7fe9145e10d1ac29752"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "status": "reserved-for-immediate-autonomous-transmission"
+    },
+    {
+      "stagedAt": "2026-08-03T18:02:10.035Z",
+      "account": "@RaymondRR777",
+      "caption": "Pakistan ❤️ Nigeria",
+      "heart": "❤️",
+      "imageNumbers": [
+        830,
+        831,
+        832
+      ],
+      "countries": [
+        "Pakistan",
+        "Nigeria"
+      ],
+      "assets": [
+        {
+          "file": "830-pakistan-hunza-passu-cones-star-map-relay.png",
+          "sha256": "6c6126b37c1c68f21bfce0d790d7ff90df4db4aa28fadc80ca58e738c63327f1"
+        },
+        {
+          "file": "831-pakistan-karachi-jinnah-terminal-runway-beacon-finale.png",
+          "sha256": "f376382fab2a1ee54a5b72712846adbb2d3760f7295394b59b2c164dc375d9d0"
+        },
+        {
+          "file": "832-nigeria-lagos-national-theatre-route-light-intercept.png",
+          "sha256": "1f91372e2cf1aa6dbea67604048cb125dc9b7a7a328a3003fff3f6103dcea165"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "status": "reserved-for-immediate-autonomous-transmission"
+    },
+    {
+      "stagedAt": "2026-08-03T18:02:10.035Z",
+      "account": "@RaymondRR777",
+      "caption": "Nigeria 💚 Brazil",
+      "heart": "💚",
+      "imageNumbers": [
+        833,
+        834,
+        836
+      ],
+      "countries": [
+        "Nigeria",
+        "Brazil"
+      ],
+      "assets": [
+        {
+          "file": "833-nigeria-kano-kofar-mata-cabin-signal-cipher.png",
+          "sha256": "908f6a3ae95d290207671d66852fd9cacd1d89147e8d3e496ba5e9a70a2a87d0"
+        },
+        {
+          "file": "834-nigeria-zuma-rock-star-map-relay.png",
+          "sha256": "f35bc15fadeb543ebf5c21f9645cf55294b09d2c28d57770a3df97af10b71402"
+        },
+        {
+          "file": "836-brazil-rio-museu-do-amanha-command-route-light-grid.png",
+          "sha256": "51f5f7209a6940108a120638f792ca709f66c4991ecfe565a64b92132f55cb80"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "status": "reserved-for-immediate-autonomous-transmission"
+    },
+    {
+      "stagedAt": "2026-08-03T18:02:10.035Z",
+      "account": "@RaymondRR777",
+      "caption": "Brazil 💚 Nigeria",
+      "heart": "💚",
+      "imageNumbers": [
+        837,
+        838,
+        835
+      ],
+      "countries": [
+        "Brazil",
+        "Nigeria"
+      ],
+      "assets": [
+        {
+          "file": "837-brazil-salvador-elevador-lacerda-cabin-signal-cipher.png",
+          "sha256": "22becb5d70af5825f3dcb4f8256e7689ae8c761eb641184adbf8e591aa7b6aa4"
+        },
+        {
+          "file": "838-brazil-lencois-maranhenses-star-map-relay.png",
+          "sha256": "ce0dc6511d22929e450bf26fb8f3eda7882f50a849ad2f760070d6812c020848"
+        },
+        {
+          "file": "835-nigeria-lagos-lekki-ikoyi-runway-beacon-finale.png",
+          "sha256": "93cfbdae626528cb59ee9ef36fdc266dc3a11de2b88818ae9771a1d85de221b0"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "status": "reserved-for-immediate-autonomous-transmission"
+    },
+    {
+      "stagedAt": "2026-08-03T18:02:10.035Z",
+      "account": "@RaymondRR777",
+      "caption": "Bangladesh 💛 Brazil",
+      "heart": "💛",
+      "imageNumbers": [
+        840,
+        841,
+        839
+      ],
+      "countries": [
+        "Bangladesh",
+        "Brazil"
+      ],
+      "assets": [
+        {
+          "file": "840-bangladesh-dhaka-hatirjheel-command-route-light-grid.png",
+          "sha256": "23da73b3d23b3629473056a8561d29f7eed2d74ada2d9e1e6b5b802aae5d58eb"
+        },
+        {
+          "file": "841-bangladesh-sonargaon-panam-city-cabin-signal-cipher.png",
+          "sha256": "c1432d8dd6248b7ff7f240fc3ff007d2b155cc3a9f4f97aeea8daaf5bad56337"
+        },
+        {
+          "file": "839-brazil-sao-paulo-octavio-frias-runway-beacon-finale.png",
+          "sha256": "43baa675d99daf4b13c56b76e4733b9552b1f803bb4bef007fbeb57f5d8cc558"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "status": "reserved-for-immediate-autonomous-transmission"
+    },
+    {
+      "stagedAt": "2026-08-03T18:02:10.035Z",
+      "account": "@RaymondRR777",
+      "caption": "Bangladesh 🧡 Russia",
+      "heart": "🧡",
+      "imageNumbers": [
+        842,
+        843,
+        844
+      ],
+      "countries": [
+        "Bangladesh",
+        "Russia"
+      ],
+      "assets": [
+        {
+          "file": "842-bangladesh-coxs-bazar-star-map-relay.png",
+          "sha256": "71ca245d4bc7253bedc5fa6ecb502ba6b9d6e771c1753e28fb307c7a4d0ed32f"
+        },
+        {
+          "file": "843-bangladesh-padma-bridge-runway-beacon-finale.png",
+          "sha256": "5c487c3cb03a6aff2eb61f39759d3677061b1a048e9390d16cdf781a7fe38fb0"
+        },
+        {
+          "file": "844-russia-moscow-zaryadye-command-route-light-grid.png",
+          "sha256": "1c5b2e29397a063fda5b64251cb20add66810ca07e330a457802c540d95dc488"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "status": "reserved-for-immediate-autonomous-transmission"
+    },
+    {
+      "stagedAt": "2026-08-03T18:02:10.035Z",
+      "account": "@RaymondRR777",
+      "caption": "Russia 💛 Ethiopia",
+      "heart": "💛",
+      "imageNumbers": [
+        845,
+        846,
+        848
+      ],
+      "countries": [
+        "Russia",
+        "Ethiopia"
+      ],
+      "assets": [
+        {
+          "file": "845-russia-saint-petersburg-new-holland-cabin-signal-calibration.png",
+          "sha256": "d3078bca63c0f83ee4fc214ea5ae37744852100d4e50560af140bd0d1f06c566"
+        },
+        {
+          "file": "846-russia-lake-baikal-ice-star-map-relay.png",
+          "sha256": "4574f83d13da12b634c4d85f2a7cc0a29df11c94d6f8a74bdf3d039d968cc71f"
+        },
+        {
+          "file": "848-ethiopia-addis-ababa-entoto-command-route-light-intercept.png",
+          "sha256": "c3b842cb49ac9f49461dd714582853ed8ffef1ffd2e5b33061abdf57baa0f632"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "status": "reserved-for-immediate-autonomous-transmission"
+    },
+    {
+      "stagedAt": "2026-08-03T18:02:10.035Z",
+      "account": "@RaymondRR777",
+      "caption": "Ethiopia 💙 Russia",
+      "heart": "💙",
+      "imageNumbers": [
+        849,
+        850,
+        847
+      ],
+      "countries": [
+        "Ethiopia",
+        "Russia"
+      ],
+      "assets": [
+        {
+          "file": "849-ethiopia-gondar-fasil-ghebbi-cabin-signal-cipher.png",
+          "sha256": "fed5307476275a13801b8bfb856fd3dd0dfeb38a55b026ae90d068e4f23ed424"
+        },
+        {
+          "file": "850-ethiopia-simien-mountains-star-map-relay.png",
+          "sha256": "3bd5b84567f447cfd067f3617cd951efa187cdfbf1d08fd6a40587c534fff6af"
+        },
+        {
+          "file": "847-russia-vladivostok-russky-bridge-runway-beacon-finale.png",
+          "sha256": "a4a919033ca97f39028cfccedaa8e1e2e24e31195570e4d9cc79efc4af72bf04"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "status": "reserved-for-immediate-autonomous-transmission"
+    },
+    {
+      "stagedAt": "2026-08-03T18:02:10.035Z",
+      "account": "@RaymondRR777",
+      "caption": "Mexico 💜 Ethiopia",
+      "heart": "💜",
+      "imageNumbers": [
+        852,
+        853,
+        851
+      ],
+      "countries": [
+        "Mexico",
+        "Ethiopia"
+      ],
+      "assets": [
+        {
+          "file": "852-mexico-city-bellas-artes-command-route-light-grid.png",
+          "sha256": "2ca35b9b69cdcfd15c600c4ceb5e149fc77882fe5ed3cc678143cdc345eb77d8"
+        },
+        {
+          "file": "853-mexico-guanajuato-juarez-cabin-signal-cipher.png",
+          "sha256": "26f6d859be1a554e798c3612e8bc87820c61b94d45193fa1b5400ff773fd4f81"
+        },
+        {
+          "file": "851-ethiopia-addis-djibouti-railway-arrival-beacon-finale.png",
+          "sha256": "e848212a5802f0badf56d8b0a0a603872f41691c4def41b3c30ee38f6eeca41e"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "status": "reserved-for-immediate-autonomous-transmission"
+    }
+  ],
   "pendingCoverUpdate": null,
   "coverUpdatePolicy": {
     "status": "paused-by-user",
