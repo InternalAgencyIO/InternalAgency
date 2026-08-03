@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "runAt": "2026-08-03T07:10:00.000Z",
+  "outcome": "PASS_REPRESENTATIVE_RENDERED_QA",
+  "engine": "Chromium via Codex in-app browser",
+  "baseUrl": "http://localhost:4177",
+  "reducedMotion": true,
+  "allLocaleRootMatrix": {
+    "localeCount": 50,
+    "checks": [
+      "post-hydration html lang",
+      "post-hydration direction",
+      "locale-ready state",
+      "all eight expected critical launch strings rendered",
+      "zero critical English fallbacks",
+      "image alt presence",
+      "button accessible names",
+      "link accessible names",
+      "duplicate IDs",
+      "single H1",
+      "horizontal overflow"
+    ],
+    "failures": 0
+  },
+  "responsiveMatrix": {
+    "viewports": [
+      { "name": "iOS-sized", "width": 390, "height": 844 },
+      { "name": "Android-sized", "width": 412, "height": 915 },
+      { "name": "desktop", "width": 1440, "height": 900 }
+    ],
+    "routes": [
+      "/",
+      "/fr/future/predictive-engine",
+      "/ar/dossier",
+      "/ja/future/casino",
+      "/pcm/launch",
+      "/tr/proof"
+    ],
+    "checks": 18,
+    "failures": 0,
+    "postFixMobileTouchTargetAdvisories": 0
+  },
+  "findingsClosedDuringRun": [
+    "Localized root pages no longer regress their html lang to en after hydration.",
+    "Visible navigation and prominent text links now retain at least a 24px target height in the representative mobile matrix.",
+    "Hydration-only launch sequence copy renders its explicit locale value across all 50 locale roots."
+  ],
+  "limitations": [
+    "Viewport-sized Chromium checks are not physical iOS Safari, Android Chrome, or Firefox certification.",
+    "No screen-reader, voice-control, high-contrast OS, or physical keyboard laboratory run was performed.",
+    "The matrix is representative for deep routes; it is exhaustive only for the 50 locale root pages.",
+    "Native-speaker language review remains required."
+  ]
+}

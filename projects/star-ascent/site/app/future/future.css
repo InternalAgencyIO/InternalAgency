@@ -4,7 +4,7 @@
 .future-page a{color:inherit;text-decoration:none}
 .future-nav{position:relative;z-index:20;display:flex;align-items:center;justify-content:space-between;min-height:76px;border-bottom:1px solid #ffffff29;padding:0 clamp(1.1rem,5vw,5rem);background:#050507e6;backdrop-filter:blur(18px)}
 .future-mark{font-size:1.2rem;font-weight:1000;letter-spacing:-.08em}.future-mark span{color:var(--future-red)}
-.future-nav div{display:flex;gap:clamp(.8rem,3vw,2.6rem)}.future-nav div a{font:800 .63rem ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}.future-nav div a:hover{color:var(--future-gold)}
+.future-nav div{display:flex;gap:clamp(.8rem,3vw,2.6rem)}.future-nav div a{display:inline-flex;min-height:32px;align-items:center;font:800 .63rem ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}.future-nav div a:hover{color:var(--future-gold)}
 .inactive-strip{position:relative;z-index:19;display:grid;grid-template-columns:repeat(3,max-content) 1fr;align-items:center;gap:1rem;padding:.65rem clamp(1.1rem,5vw,5rem);background:#ff302d;color:#160506;font:900 .58rem ui-monospace,monospace;letter-spacing:.12em}
 .inactive-strip span{border-right:1px solid #1905074d;padding-right:1rem}.inactive-strip strong{justify-self:end}
 .future-hub-hero{position:relative;isolation:isolate;display:flex;min-height:72vh;flex-direction:column;justify-content:flex-end;padding:8vw clamp(1.2rem,7vw,8rem);background:radial-gradient(circle at 82% 14%,#ff2c2545,transparent 24rem),radial-gradient(circle at 64% 54%,#436eff30,transparent 26rem),#07070a}

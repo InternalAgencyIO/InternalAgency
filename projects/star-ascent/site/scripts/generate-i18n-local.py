@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import os
 import re
 import sys
@@ -16,6 +17,8 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 ROOT = Path.cwd()
 CATALOG_PATH = ROOT / "app" / "i18n" / "messages.json"
 FUTURE_COPY_PATH = ROOT / "app" / "future" / "future-copy.json"
+CRITICAL_UI_PATH = ROOT / "app" / "i18n" / "critical-ui-source.json"
+CRITICAL_UI_OVERRIDES_PATH = ROOT / "app" / "i18n" / "critical-ui-overrides.json"
 MODEL_ID = "facebook/nllb-200-distilled-600M"
 
 LANGUAGES = {
@@ -210,6 +213,11 @@ def main() -> None:
     catalog_path = checkpoint if checkpoint.exists() and checkpoint.stat().st_mtime > CATALOG_PATH.stat().st_mtime else CATALOG_PATH
     catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
     sources = list(catalog["messages"]["en"].keys())
+    critical_sources = set(json.loads(CRITICAL_UI_PATH.read_text(encoding="utf-8")).values())
+    critical_source_digest = hashlib.sha256(
+        json.dumps(sorted(critical_sources), ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    refresh_critical = catalog.get("meta", {}).get("criticalUiSourceDigest") != critical_source_digest
     if len(sources) < 250:
         raise RuntimeError(f"Expected a whole-site English catalog; found {len(sources)} strings")
 
@@ -247,7 +255,9 @@ def main() -> None:
         existing = catalog.get("messages", {}).get(locale, {})
         missing_sources = [
             source for source in sources
-            if not isinstance(existing.get(source), str) or not existing[source].strip()
+            if not isinstance(existing.get(source), str)
+            or not existing[source].strip()
+            or (refresh_critical and source in critical_sources)
         ]
         if not missing_sources:
             print(f"Reusing complete {locale} catalog.", flush=True)
@@ -268,8 +278,13 @@ def main() -> None:
         locale: catalog["messages"][locale]
         for locale in ["en", *LANGUAGES.keys()]
     }
+    critical_overrides = json.loads(CRITICAL_UI_OVERRIDES_PATH.read_text(encoding="utf-8"))["translations"]
+    for locale, overrides in critical_overrides.items():
+        catalog["messages"][locale].update(overrides)
+        catalog["messages"][locale] = {source: catalog["messages"][locale][source] for source in sources}
     catalog["meta"]["translationEngine"] = MODEL_ID
     catalog["meta"]["translationMode"] = "local GPU generation; static committed output; no runtime translation service"
+    catalog["meta"]["criticalUiSourceDigest"] = critical_source_digest
     persist(catalog)
     print(f"Completed {len(LANGUAGES) + 1} locale catalogs.", flush=True)
 

@@ -5,6 +5,7 @@ import { ActivationTerminal } from "./ActivationTerminal";
 import { LaunchClock } from "./LaunchClock";
 import { SignalField } from "./SignalField";
 import { LaunchSequence } from "./LaunchSequence";
+import { isLocaleCode } from "./i18n/config";
 
 const copy = {
   en: {
@@ -538,6 +539,8 @@ export default function Home() {
     window.history.replaceState({}, "", `${window.location.pathname}${suffix ? `?${suffix}` : ""}${window.location.hash}`);
   }, []);
   useEffect(() => {
+    const routeLocale = window.location.pathname.split("/").filter(Boolean)[0];
+    if (isLocaleCode(routeLocale)) return;
     document.documentElement.lang = language;
   }, [language]);
   const t = language === "tr" ? { ...repairLegacyEncoding(copy.tr), ...trPublicVoice } : repairLegacyEncoding(copy.en);
