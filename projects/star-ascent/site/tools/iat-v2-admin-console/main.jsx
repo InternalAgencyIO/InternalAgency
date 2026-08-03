@@ -1,5 +1,5 @@
 import "./buffer-polyfill.mjs";
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Connection,
@@ -9,7 +9,6 @@ import {
   getAccount,
   getMint,
 } from "@solana/spl-token";
-import TrezorConnect from "@trezor/connect-web";
 import {
   assertCanonicalMetadataAccount,
   deriveMetadataAddress,
@@ -46,8 +45,6 @@ import {
 import {
   assertIatV2RehearsalAllocationBalances,
 } from "../../programs/iat_v2/feature-rehearsal.mjs";
-import FeatureRehearsal from "./FeatureRehearsal.jsx";
-import ProgramUpgrade from "./ProgramUpgrade.jsx";
 import {
   createTrezorTransactionProvider,
   findTrezorSolanaAccount,
@@ -59,6 +56,7 @@ const SOURCE_COMMIT = "ba88535036da3f3871b65100fc18b655ccfa1d57";
 const CONSOLE_PARAMS = new URLSearchParams(window.location.search);
 const FEATURE_MODE = CONSOLE_PARAMS.get("mode") === "features";
 const UPGRADE_MODE = CONSOLE_PARAMS.get("mode") === "upgrade";
+const INSPECTION_MODE = CONSOLE_PARAMS.get("mode") === "inspect";
 const FEATURE_GENESIS_OVERRIDE = CONSOLE_PARAMS.get("genesis");
 const ACTIVE_MINT_SEED = FEATURE_MODE ? DEVNET_FEATURE_MINT_SEED : DEVNET_MINT_SEED;
 const STORAGE_KEY = FEATURE_MODE
@@ -68,12 +66,11 @@ const FEATURE_GENESIS_STORAGE_KEY = `iat-v2-feature-genesis-timestamp/${ACTIVE_M
 const SECONDS_PER_WEEK = 604_800;
 const FEATURE_BOUNDARY_LEAD_SECONDS = 7_200;
 const connection = new Connection(DEVNET_RPC, "confirmed");
-const TREZOR_CONNECT_API_AVAILABLE = [
-  "init",
-  "solanaGetPublicKey",
-  "solanaSignTransaction",
-].every((method) => typeof TrezorConnect?.[method] === "function");
-document.documentElement.dataset.iatTrezorConnect = TREZOR_CONNECT_API_AVAILABLE ? "ready" : "missing";
+const FeatureRehearsal = lazy(() => import("./FeatureRehearsal.jsx"));
+const ProgramUpgrade = lazy(() => import("./ProgramUpgrade.jsx"));
+document.documentElement.dataset.iatAdminMode = INSPECTION_MODE ? "inspection" : UPGRADE_MODE ? "upgrade" : FEATURE_MODE ? "features" : "initialization";
+document.documentElement.dataset.iatTrezorConnect = "unloaded";
+let trezorConnect;
 let trezorConnectReady;
 const trezorAccounts = new Map();
 
@@ -138,11 +135,22 @@ async function sha256Hex(value) {
 }
 
 async function initializeTrezorConnect() {
-  if (!TREZOR_CONNECT_API_AVAILABLE) {
+  if (INSPECTION_MODE) throw new Error("Hardware loading is disabled in non-signing inspection mode");
+  if (!trezorConnect) {
+    const trezorModule = await import("@trezor/connect-web");
+    trezorConnect = trezorModule.default;
+  }
+  const apiAvailable = [
+    "init",
+    "solanaGetPublicKey",
+    "solanaSignTransaction",
+  ].every((method) => typeof trezorConnect?.[method] === "function");
+  document.documentElement.dataset.iatTrezorConnect = apiAvailable ? "ready" : "missing";
+  if (!apiAvailable) {
     throw new Error("Trezor Connect SDK did not load correctly; restart the local Devnet console");
   }
   if (!trezorConnectReady) {
-    trezorConnectReady = TrezorConnect.init({
+    trezorConnectReady = trezorConnect.init({
       manifest: {
         appName: "Internal Agency IAT V2 Devnet Console",
         appUrl: "https://internalagency.io",
@@ -155,22 +163,23 @@ async function initializeTrezorConnect() {
     });
   }
   await trezorConnectReady;
+  return trezorConnect;
 }
 
 async function getHardwareProvider(expectedAddress = IAT_V2_PROGRAM_ADMIN) {
-  await initializeTrezorConnect();
+  const connect = await initializeTrezorConnect();
   const cacheKey = expectedAddress.toBase58();
   let account = trezorAccounts.get(cacheKey);
   if (!account) {
     account = await findTrezorSolanaAccount({
-      connect: TrezorConnect,
+      connect,
       expectedAddress,
     });
     trezorAccounts.set(cacheKey, account);
   }
   const publicKey = account.publicKey;
   const provider = createTrezorTransactionProvider({
-    connect: TrezorConnect,
+    connect,
     path: account.path,
     publicKey,
   });
@@ -579,11 +588,14 @@ function App() {
   const [logs, setLogs] = useState([]);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState(
-    local ? "VERIFYING DEPLOYMENT // NO SIGNING YET" : "DISABLED // LOCALHOST ONLY",
+    INSPECTION_MODE
+      ? "INSPECTION ONLY // NETWORK, HARDWARE, SIGNING, BROADCAST DISABLED"
+      : local ? "VERIFYING DEPLOYMENT // NO SIGNING YET" : "DISABLED // LOCALHOST ONLY",
   );
   const [error, setError] = useState("");
 
   async function refresh() {
+    if (INSPECTION_MODE) return null;
     setBusy(true);
     setError("");
     setStatus("VERIFYING CHAIN // PROGRAM, AUTHORITY, MINT, VAULTS");
@@ -605,7 +617,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (!local) return;
+    if (!local || INSPECTION_MODE) return;
     refresh().catch(() => {});
   }, [local]);
 
@@ -614,6 +626,7 @@ function App() {
   }, [evidence]);
 
   async function connect() {
+    if (INSPECTION_MODE) return;
     setBusy(true);
     setError("");
     setStatus("CONNECTING // CONFIRM THE MODEL T ADDRESS");
@@ -632,7 +645,7 @@ function App() {
   }
 
   async function simulateAndSign() {
-    if (!local || !connected || pending) return;
+    if (INSPECTION_MODE || !local || !connected || pending) return;
     setBusy(true);
     setError("");
     setLogs([]);
@@ -684,7 +697,7 @@ function App() {
   }
 
   async function broadcastSigned() {
-    if (!pending || busy) return;
+    if (INSPECTION_MODE || !pending || busy) return;
     setBusy(true);
     setError("");
     setStatus("BROADCASTING USER-APPROVED SIGNED TRANSACTION");
@@ -829,6 +842,13 @@ function App() {
           </div>
         )}
 
+        {INSPECTION_MODE && (
+          <div className="fatal" role="status">
+            <strong>NON-SIGNING INSPECTION MODE</strong>
+            <span>RPC reads, hardware loading, simulation, signing, and broadcast are disabled.</span>
+          </div>
+        )}
+
         <section className="attestation">
           <div>
             <small>CHAIN ATTESTATION</small>
@@ -856,10 +876,10 @@ function App() {
               <strong>USE THE EXACT-SIGNER ACTION BELOW</strong>
             ) : (
               <>
-                <button className="quiet" onClick={() => refresh().catch(() => {})} disabled={busy || !local}>
+                <button className="quiet" onClick={() => refresh().catch(() => {})} disabled={busy || !local || INSPECTION_MODE}>
                   REFRESH CHAIN
                 </button>
-                <button className="connect" onClick={connect} disabled={busy || !local}>
+                <button className="connect" onClick={connect} disabled={busy || !local || INSPECTION_MODE}>
                   {connected ? `MODEL T ${short(connected)}` : "CONNECT MODEL T DIRECTLY"}
                 </button>
               </>
@@ -909,7 +929,7 @@ function App() {
               {!pending ? (
                 <button
                   onClick={simulateAndSign}
-                  disabled={busy || !local || !connected || !snapshot}
+                  disabled={busy || !local || !connected || !snapshot || INSPECTION_MODE}
                 >
                   {busy ? "VERIFYING…" : "SIMULATE + REQUEST MODEL T SIGNATURE"}
                 </button>
@@ -917,7 +937,7 @@ function App() {
                 <div className="broadcast-panel">
                   <code>MESSAGE {short(pending.messageSha256, 10)}</code>
                   <code>{pending.wireSize} BYTES // SIGNATURE VERIFIED</code>
-                  <button onClick={broadcastSigned} disabled={busy}>BROADCAST SIGNED DEVNET TRANSACTION</button>
+                  <button onClick={broadcastSigned} disabled={busy || INSPECTION_MODE}>BROADCAST SIGNED DEVNET TRANSACTION</button>
                   <button className="discard" onClick={discardSigned} disabled={busy}>DISCARD WITHOUT BROADCAST</button>
                 </div>
               )}
@@ -976,7 +996,7 @@ function App() {
 
         <footer>
           <span>SOURCE {SOURCE_COMMIT.slice(0, 12)}</span>
-          <span>RPC // DEVNET ONLY</span>
+          <span>{INSPECTION_MODE ? "RPC // DISABLED" : "RPC // DEVNET ONLY"}</span>
           <span>INDEPENDENT REVIEW REQUIRED</span>
         </footer>
       </section>
@@ -985,14 +1005,16 @@ function App() {
 }
 
 createRoot(document.getElementById("root")).render(
-  UPGRADE_MODE
-    ? (
-        <ProgramUpgrade
-          getHardwareProvider={getHardwareProvider}
-          isLocalOperatorHost={isLocalOperatorHost}
-          sha256Hex={sha256Hex}
-          short={short}
-        />
-      )
-    : <App />,
+  <Suspense fallback={<main className="console-shell"><strong>LOADING LOCAL CONSOLE...</strong></main>}>
+    {UPGRADE_MODE
+      ? (
+          <ProgramUpgrade
+            getHardwareProvider={getHardwareProvider}
+            isLocalOperatorHost={isLocalOperatorHost}
+            sha256Hex={sha256Hex}
+            short={short}
+          />
+        )
+      : <App />}
+  </Suspense>,
 );

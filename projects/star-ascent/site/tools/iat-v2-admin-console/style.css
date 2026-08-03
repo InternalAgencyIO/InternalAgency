@@ -1,8 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&display=swap");
-
 :root {
   color-scheme: dark;
-  font-family: Inter, Arial, sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #080a09;
   color: #f2f3ec;
   font-synthesis: none;
@@ -12,7 +10,7 @@
   --muted: #92978e;
   --line: #272b26;
   --panel: #101310;
-  --mono: "DM Mono", monospace;
+  --mono: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 * {
