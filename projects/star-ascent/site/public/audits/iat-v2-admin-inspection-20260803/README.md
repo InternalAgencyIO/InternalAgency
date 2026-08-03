@@ -7,7 +7,7 @@ This source-bound package evaluates the local IAT V2 admin console without conne
 ## Result
 
 - Added an explicit `?mode=inspect` runtime that disables RPC refresh, hardware loading, simulation, signing, and broadcast.
-- The built inspection page returned HTTP 200 on an isolated ephemeral loopback origin with zero external requests, zero page errors, and zero console errors.
+- The built inspection page returned HTTP 200 in Chromium, Firefox, and WebKit on an isolated ephemeral loopback origin with zero external requests, zero page errors, and zero console errors in every engine.
 - Trezor Connect remained `unloaded`; hardware, feature-rehearsal, and upgrade-only chunks were not requested.
 - Every rendered refresh, connection, simulation, and broadcast control was disabled.
 - Removed the Google Fonts request and retained local system/monospace stacks for offline inspection.
@@ -23,4 +23,4 @@ This source-bound package evaluates the local IAT V2 admin console without conne
 
 ## Source binding and limits
 
-The implementation and non-signing browser proof are bound to commit `ed8bf69274b9f7d17f223f39e7f49fd2c6a6d7e5`, Git tree `d13df9da20dd25a21e49f59eaa4ae1c94d79aec4`. All measurements are local build/runtime evidence. No wallet, hardware device, secret, signing, simulation for signing, broadcast, deployment, funding, DNS change, or Devnet/Mainnet mutation occurred. Mainnet remains `UNSCHEDULED_HOLD`.
+The implementation and non-signing browser proof are bound to commit `e4277fd54960d33a117ab7c6b1508225427bf00f`, Git tree `93e052d23375aaeb617d647af3350bd2fc39c59a`. All measurements are local build/runtime evidence. Browser engines ran headlessly on one Windows host; this is not physical-device or independent review. No wallet, hardware device, secret, signing, simulation for signing, broadcast, deployment, funding, DNS change, or Devnet/Mainnet mutation occurred. Mainnet remains `UNSCHEDULED_HOLD`.

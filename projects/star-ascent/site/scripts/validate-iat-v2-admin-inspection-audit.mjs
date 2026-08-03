@@ -58,6 +58,9 @@ check(JSON.stringify(checks.bundleRegression.byteBudgets) === JSON.stringify({ i
 check(checks.bundleRegression.forbiddenExternalizationMarkersFound === 0, "bundle contains externalization markers");
 check(checks.bundleRegression.sha256CompatibilityRemainsFeatureOnly === true, "SHA-256 compatibility leaked into the initial entry");
 for (const field of ["externalRequests", "pageErrors", "consoleErrors"]) check(checks.inspectionRuntime[field] === 0, `${field} must be zero`);
+check(JSON.stringify(checks.inspectionRuntime.engines) === JSON.stringify(["chromium", "firefox", "webkit"]), "inspection engine matrix changed");
+check(checks.inspectionRuntime.engineRunsPassed === 3 && checks.inspectionRuntime.engineRunsFailed === 0, "inspection engine results changed");
+check(checks.inspectionRuntime.hostCoverage === "HEADLESS_ENGINES_ON_ONE_WINDOWS_HOST", "inspection host limitation changed");
 for (const field of ["operatorControlsDisabled"]) check(checks.inspectionRuntime[field] === true, `${field} must be true`);
 for (const field of ["hardwareOrFeatureChunksLoaded", "rpcReadsPerformed", "hardwareAccessPerformed", "simulationPerformed", "signingPerformed", "broadcastingPerformed"]) check(checks.inspectionRuntime[field] === false, `${field} must be false`);
 check(checks.inspectionRuntime.trezorConnectState === "unloaded", "Trezor must remain unloaded in inspection mode");
