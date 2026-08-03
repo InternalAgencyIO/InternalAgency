@@ -1,0 +1,32 @@
+{
+  "schema": "iat-site-i18n-reconciliation-manifest/v1",
+  "title": "Visible-source localization reconciliation",
+  "generatedAtUtc": "2026-08-03T17:03:00.000Z",
+  "status": "DRAFT_TRANSLATION_AND_NATIVE_REVIEW_HOLD",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "assurance": "INTERNAL_CODEX_ASSISTED_NOT_NATIVE_REVIEW",
+  "sourceBinding": {
+    "commit": "b88402cbcc7151610b37573c887b7ea080f092c1",
+    "gitTree": "d778eb80420f510e2003f359903f41981aba98a6"
+  },
+  "sourceSha256": {
+    "projects/star-ascent/site/app/i18n/pending-visible-source.json": "bfb6a88eabead215b15560f3a1f830a2423cd7ec3e178461862e1cf2d2ceec93",
+    "projects/star-ascent/site/scripts/capture-pending-i18n-source.mjs": "a7a5f821ca50888303ff93e3d84397b63cbfbf256bdb8840bf3d6843d49a96bb",
+    "projects/star-ascent/site/scripts/validate-pending-i18n-source.mjs": "84d412945ac4c9088b9dff84e12a49ad9ca285467ebb86e605b444874e39ddc9",
+    "projects/star-ascent/site/package.json": "13b592b26a744dded2bce708cb33aff7501ce58e95af700f9c357dc057173856"
+  },
+  "artifactSha256": {
+    "README.md": "e8e786ae4c0ceac9c30e12f8b6b406ef6049606a0b15d27a89bb6d7165a0a966",
+    "reconciliation.json": "f98d7679ce5f03684d9263cdf0336e88fe81e242abdae3207f23432f00a86980"
+  },
+  "clearance": {
+    "inventoryComplete": true,
+    "translationComplete": false,
+    "nativeReviewComplete": false,
+    "runtimeActivationApproved": false,
+    "localizationReleaseApproved": false,
+    "authorizesDeployment": false,
+    "authorizesSigning": false,
+    "authorizesBroadcast": false
+  }
+}
