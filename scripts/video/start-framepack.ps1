@@ -14,11 +14,10 @@ if (-not (Test-Path -LiteralPath $python) -or -not (Test-Path -LiteralPath $serv
   throw "FramePack is not installed under $runtimeRoot. Follow scripts/video/README.md."
 }
 
-$existing = Get-CimInstance Win32_Process |
-  Where-Object { $_.CommandLine -like "*demo_gradio.py*--port*$Port*" } |
-  Select-Object -First 1
-if ($existing) {
-  Write-Output "FramePack is already running on port $Port (PID $($existing.ProcessId))."
+$listener = netstat -ano -p tcp | Select-String -Pattern "^\s*TCP\s+\S+:$Port\s+\S+\s+LISTENING\s+(\d+)\s*$" | Select-Object -First 1
+if ($listener) {
+  $listenerPid = [regex]::Match($listener.Line, "(\d+)\s*$").Groups[1].Value
+  Write-Output "FramePack is already running on port $Port (PID $listenerPid)."
   exit 0
 }
 

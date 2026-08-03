@@ -13,6 +13,10 @@ from gradio_client import Client, handle_file
 FPS = 30
 DURATION_SECONDS = 15
 FRAME_COUNT = FPS * DURATION_SECONDS
+# FramePack emits 433 frames for a nominal 15-second request. Request one
+# additional source second, then deterministically trim to the contracted 450
+# frames in exact_15_second_master().
+REQUEST_SECONDS = DURATION_SECONDS + 1
 
 
 def parse_args() -> argparse.Namespace:
@@ -212,7 +216,7 @@ def main() -> None:
         prompt,
         negative_prompt,
         seed,
-        DURATION_SECONDS,
+        REQUEST_SECONDS,
         9,
         25,
         1.0,
