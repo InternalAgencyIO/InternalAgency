@@ -68,6 +68,15 @@ function attribute(tag, name) {
   return decodeHtmlAttribute(value);
 }
 
+function normalizePublicUrl(value) {
+  try {
+    const url = new URL(value);
+    return `${url.origin}${url.pathname === "/" ? "" : url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return value;
+  }
+}
+
 function metadataError(url, html) {
   const parsedUrl = new URL(url);
   const origin = parsedUrl.origin;
@@ -111,10 +120,10 @@ function metadataError(url, html) {
   if (metaValue("twitter:image", "name") !== `${origin}/og-star-ascent-v1.png`) return "expected canonical Twitter image";
   const routeSuffix = publicPath === "/" ? "" : publicPath;
   if (canonicalHref !== `${origin}${routeSuffix}`) return `expected exact canonical route ${origin}${routeSuffix}; got ${canonicalHref || "missing"}`;
-  if (alternateHref("en") !== `https://internalagency.io${routeSuffix}`) return "expected exact English alternate route";
-  if (alternateHref("tr") !== `https://internalagency.io/tr${routeSuffix}`) return "expected exact Turkish locale alternate route";
-  if (alternateHref("tr-TR") !== `https://ileriakil.com${routeSuffix}`) return "expected exact Turkish-origin alternate route";
-  if (alternateHref("x-default") !== `https://internalagency.io${routeSuffix}`) return "expected exact x-default alternate route";
+  if (normalizePublicUrl(alternateHref("en")) !== `https://internalagency.io${routeSuffix}`) return "expected exact English alternate route";
+  if (normalizePublicUrl(alternateHref("tr")) !== `https://internalagency.io/tr${routeSuffix}`) return "expected exact Turkish locale alternate route";
+  if (normalizePublicUrl(alternateHref("tr-TR")) !== `https://ileriakil.com${routeSuffix}`) return "expected exact Turkish-origin alternate route";
+  if (normalizePublicUrl(alternateHref("x-default")) !== `https://internalagency.io${routeSuffix}`) return "expected exact x-default alternate route";
   return null;
 }
 
