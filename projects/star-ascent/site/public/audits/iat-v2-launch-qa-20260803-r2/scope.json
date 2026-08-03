@@ -1,0 +1,63 @@
+{
+  "schema": "iat-v2-launch-qa-scope/v1",
+  "status": "DRAFT_QA_HOLD",
+  "auditedAtUtc": "2026-08-03T13:23:14Z",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "commit": "58d6976f3217831c57a1a5858cb32406f88d1fcd",
+    "gitTree": "be92001720a617545da35ccbe6bf8122e5736817"
+  },
+  "routes": [
+    "/",
+    "/network",
+    "/launch",
+    "/proof",
+    "/signal",
+    "/tokenomics",
+    "/dossier",
+    "/world",
+    "/verify",
+    "/mint",
+    "/rewards",
+    "/press"
+  ],
+  "sourceSha256": {
+    ".github/workflows/iat-v2-proof.yml": "201e44036a6d5ab995796d10d8c01a66c6f4bea83cb6738ec2d98d9df53e8d60",
+    "projects/star-ascent/site/app/layout.tsx": "a759ab89c438efadf0ddc42cea337df56bc3fbb80b9c4ff9057d46fe23a98278",
+    "projects/star-ascent/site/app/page.tsx": "5a216d244bf1ebfd892a3d14ef41686708a70466f4190e0ff9a8cb36eadb48a0",
+    "projects/star-ascent/site/app/dossier/page.tsx": "3ff4fa1c6441ed021c07cfb4ebb78ed863802643a7ba33d97d98cad36c92ec14",
+    "projects/star-ascent/site/app/dossier/read/[slug]/page.tsx": "fc664a08907e88c6aa92360cd164b28377b4215e13d20c3a002b65e02085ed0b",
+    "projects/star-ascent/site/app/press/page.tsx": "22add7f37d7c4dec703a72ee5059b2cc368e573f124fb56b31b5099ab425cd4b",
+    "projects/star-ascent/site/app/world/page.tsx": "956f750daf391fdb40463047f6158128ae33f179da08d5abbe6c3e7d50713189",
+    "projects/star-ascent/site/app/i18n/messages.json": "c3e82214be7dcaf7f3fb1dbe116c83848a326095a958f8a12ee0ebe507783a1a",
+    "projects/star-ascent/site/tests/native-image-runtime.test.mjs": "cef35cb6e460eb812c70b88786b0d4485d21010ea0afad9c8f2106b4e780031e",
+    "projects/star-ascent/site/tests/ui/ui-regression.spec.mjs": "0e4d9367184e993a63bd04097a70f0a16cb36027c246af521210339e728301c7",
+    "projects/star-ascent/site/playwright.config.mjs": "1aa373bb25194fe05d3830eac556781c9c93f7a7f8e46ec735c1906612b8c4bc",
+    "projects/star-ascent/site/scripts/check-public-launch-routes.mjs": "91827fca59de2944d8a61efd387b46d6eee0bd4a31394467ecb9e372849d9fba",
+    "projects/star-ascent/site/package.json": "78dc813421d8c4578533f44e429ac9debfcea6d5bb92740225d56564a6fe2b82",
+    "projects/star-ascent/site/app/api/network/route.ts": "b7a52ab5bbb53254e7c4010ecf18a126daec0eb4d1a2de9fe8cb473ccbda5604",
+    "projects/star-ascent/site/app/network/page.tsx": "783dd8cbfd5707f25ac302723b8bbd4394f64c0d7451d793d30c962bc53c75bf"
+  },
+  "included": [
+    "production build, twenty rendered-HTML tests, and ten locale-routing tests",
+    "eleven primary public routes in seven automated browser profiles",
+    "HTTP status, document language/title, encoding, browser exception, console error, overflow, image, ARIA, focus, keyboard, and targeted axe assertions",
+    "fifty-locale catalog completeness and critical-copy fallback checks",
+    "native-image runtime regression coverage for the Vinext compatibility boundary",
+    "production and full dependency audit summaries",
+    "IAT V2, signoff, launch-gate, release, rollback, and reconciliation validators",
+    "isolated local admin-console build warnings",
+    "read-only HTTPS observations of internalagency.io and ileriakil.com"
+  ],
+  "excluded": [
+    "production or pre-production deployment",
+    "wallet, hardware signer, secret, signing, simulation for signing, broadcast, mint, or transfer",
+    "mainnet or devnet mutation",
+    "DNS or hosting changes",
+    "physical iOS or Android devices and installed mobile Safari",
+    "graphical Linux desktop and assistive-technology certification",
+    "performance-lab and network-throttling certification",
+    "native-speaker certification for non-English locales",
+    "independent third-party security or QA review"
+  ]
+}
