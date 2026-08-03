@@ -1208,3 +1208,13 @@ contract.
 
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original foundations and accepted sequential refinements remain checkpointed under the batch staging folder.
+
+## THE MILE HIGH THREESOME - Bonus Batch 208: Mexico
+
+| | |
+|---|---|
+| **Mexico City Bellas Artes Command Route-Light Grid**<br><img src="852-mexico-city-bellas-artes-command-route-light-grid.png" width="420" alt="The STAR RAZE trio completing a route-light mission above Mexico City's Palacio de Bellas Artes"> | **Guanajuato Juarez Cabin-Signal Cipher**<br><img src="853-mexico-guanajuato-juarez-cabin-signal-cipher.png" width="420" alt="The trio calibrating a cabin-signal cipher at Guanajuato's Teatro Juarez"> |
+| **Copper Canyon Star-Map Relay**<br><img src="854-mexico-copper-canyon-star-map-relay.png" width="420" alt="The trio completing a luminous star-map relay above Mexico's Copper Canyon"> | **Cabo San Lucas Arch Arrival-Beacon Finale**<br><img src="855-mexico-cabo-san-lucas-arch-arrival-beacon-finale.png" width="420" alt="The trio sealing an arrival beacon beside Cabo San Lucas's El Arco"> |
+
+The machine-readable collection index is in
+[`manifest.json`](manifest.json). Original foundations and accepted sequential refinements remain checkpointed under the batch staging folder.
