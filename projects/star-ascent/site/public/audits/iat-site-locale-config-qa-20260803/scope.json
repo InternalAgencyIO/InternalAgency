@@ -1,0 +1,37 @@
+{
+  "schema": "iat-site-locale-config-qa-scope/v1",
+  "generatedAtUtc": "2026-08-03T14:29:08.635Z",
+  "status": "DRAFT_STATIC_QA_MAINNET_HOLD",
+  "sourceBinding": {
+    "branch": "agent/iat-launch-window",
+    "commit": "a0a1f611a2bc05de2a0a93d26d4644921c4b1124",
+    "gitTree": "484d800cc1f9acc638bfa4aeeaf04d631b79d92d"
+  },
+  "coverage": {
+    "localeCount": 50,
+    "canonicalRouteCount": 25,
+    "playwrightProjectCount": 7,
+    "allLocaleRootDocuments": 50,
+    "crossEngineStressDocuments": 42,
+    "catalogSourceCount": 1280
+  },
+  "sourceSha256": {
+    "projects/star-ascent/site/app/layout.tsx": "df25c47ae2d35c0da202746bca17e4b9c2688634a2c31561ea426d65ce999e86",
+    "projects/star-ascent/site/app/tokenomics/page.tsx": "1d515aad0529f1e4941ebadc5e914a87c4cb25afe23562a41f37ff8ed00d6d51",
+    "projects/star-ascent/site/app/future/future.css": "7a6839ce169f51172ada507ae30dc55c320b40138449bfba8bd5cdddbfdd10c2",
+    "projects/star-ascent/site/app/globals.css": "89eb75265021e6c41bf68487755890470c0728f07cb08c1086e587f8b879a209",
+    "projects/star-ascent/site/app/i18n/messages.json": "c3e82214be7dcaf7f3fb1dbe116c83848a326095a958f8a12ee0ebe507783a1a",
+    "projects/star-ascent/site/app/i18n/route-seo.json": "8931654068f87d2c8ffcca328cf82882be5a09a2b5d90a8cefb163b221f525e4",
+    "projects/star-ascent/site/.openai/hosting.json": "4c56488724f0f16e294c8021859e968e58f1cf407f9378100ec81bda42cd4dfe",
+    "projects/star-ascent/site/vite.config.ts": "f7c14b8a38546bb6a7ec93cba22f8e8f131da9fbfe8b39327422ed5bb98d4613",
+    "projects/star-ascent/site/tests/ui/all-locales-render.spec.mjs": "cebd5f4f429534552f235fbdbfaf20a04b476a286341d01a4a6893eda5f22093",
+    "projects/star-ascent/site/scripts/validate-site-hosting-config.mjs": "29a404f52bb5b69ff84ff68f265b1b2d24321efab61fe54999d918d485b58b7b"
+  },
+  "excluded": [
+    "physical-device testing",
+    "native Linux and macOS browser hosts",
+    "native-language editorial approval",
+    "deployment or hosted-version mutation",
+    "wallet, signing, broadcast, transfer, DNS, and mainnet operations"
+  ]
+}

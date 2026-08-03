@@ -1,0 +1,26 @@
+{
+  "schema": "iat-site-localization-coverage/v1",
+  "result": "HOLD_CATALOG_DRIFT",
+  "routesScanned": 25,
+  "routesWithDrift": 15,
+  "uniqueUncatalogedVisibleStrings": 247,
+  "byRoute": {
+    "/": 30,
+    "/dossier": 14,
+    "/dossier/read/white-dossier": 1,
+    "/dossier/read/tokenomics": 8,
+    "/dossier/read/broadcast-pack": 6,
+    "/dossier/read/social-kit": 9,
+    "/dossier/read/authority-map": 8,
+    "/dossier/read/technical-spec": 8,
+    "/dossier/read/readiness": 7,
+    "/dossier/read/incident-response": 6,
+    "/launch": 18,
+    "/proof": 45,
+    "/rewards": 9,
+    "/tokenomics": 63,
+    "/network": 25
+  },
+  "interpretation": "Structural catalog completeness does not prove current visible-source coverage. These values are absent from messages.en and therefore cannot be translated by the 49 derived locale payloads.",
+  "releaseCondition": "Re-extract current visible source, translate, obtain native-language review, and rerun the full matrix with zero uncataloged visible source strings."
+}

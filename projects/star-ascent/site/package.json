@@ -21,6 +21,7 @@
     "check:favicon": "node --test tests/favicon.test.mjs",
     "check:metadata-origin": "node --test tests/metadata-origin.test.mjs",
     "check:site-config": "npm run build && node scripts/validate-site-hosting-config.mjs",
+    "check:site-qa-audit": "node scripts/validate-iat-site-locale-config-qa.mjs",
     "check:native-images": "node --test tests/native-image-runtime.test.mjs",
     "check:future-teasers": "node --test tests/future-teasers.test.mjs",
     "extract:i18n": "node scripts/generate-i18n-catalog.mjs --extract-only",

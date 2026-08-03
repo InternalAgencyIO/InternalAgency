@@ -1,0 +1,20 @@
+{
+  "schema": "iat-site-locale-config-qa-checks/v1",
+  "checks": [
+    { "id": "SITE_TEST_BUILD", "result": "PASS", "metrics": { "passed": 45, "failed": 0 } },
+    { "id": "CATALOG_STRUCTURE", "result": "PASS", "metrics": { "locales": 50, "sourceStrings": 1280, "payloads": 50 } },
+    { "id": "SEO_AND_ROUTING", "result": "PASS", "metrics": { "canonicalRoutes": 25, "sitemapLocations": 1275, "countryRegions": ["Europe", "North America", "South America"] } },
+    { "id": "PLAYWRIGHT_FULL_MATRIX", "result": "PASS", "metrics": { "cases": 49, "passed": 43, "intentionalSkips": 6, "failed": 0 } },
+    { "id": "ALL_LOCALE_ROOT_HYDRATION", "result": "PASS", "metrics": { "localeDocuments": 50, "runtimeFailures": 0 } },
+    { "id": "CROSS_ENGINE_STRESS", "result": "PASS", "metrics": { "projects": 7, "routesPerProject": 6, "documentRenders": 42, "runtimeFailures": 0 } },
+    { "id": "TARGETED_AXE", "result": "PASS", "metrics": { "rules": ["color-contrast", "aria-prohibited-attr", "region", "heading-order"], "confirmedViolationsAfterFix": 0 } },
+    { "id": "HOSTING_PACKAGE", "result": "PASS", "metrics": { "d1Binding": "DB", "r2Enabled": false, "migrations": 6, "byteMismatches": 0 } },
+    { "id": "LINT", "result": "PASS", "metrics": { "errors": 0, "warnings": 0 } },
+    { "id": "PRODUCTION_DEPENDENCY_AUDIT", "result": "PASS", "metrics": { "vulnerabilities": 0 } },
+    { "id": "FULL_DEPENDENCY_AUDIT", "result": "OPEN_FINDING", "metrics": { "moderate": 15, "high": 7, "total": 22, "forceFixApplied": false } },
+    { "id": "IAT_V2_REGRESSION", "result": "PASS_HOLD", "metrics": { "testsPassed": 65, "testsFailed": 0 } },
+    { "id": "LAUNCH_GATE_BUNDLE", "result": "PASS_HOLD", "metrics": { "launchState": "UNSCHEDULED_HOLD", "signingAuthorized": false, "broadcastAuthorized": false } },
+    { "id": "CATALOG_DRIFT_SCAN", "result": "HOLD", "metrics": { "routesScanned": 25, "routesWithDrift": 15, "uniqueUncatalogedVisibleStrings": 247 } },
+    { "id": "MANUAL_VISUAL_QA", "result": "PASS_WITH_OPEN_LOCALIZATION_FINDING", "metrics": { "surfaces": ["/ur/tokenomics", "/zh/future/predictive-engine"], "overflowFailures": 0 } }
+  ]
+}
