@@ -1,23 +1,28 @@
 {
   "schema": "iat-v2-admin-inspection-manifest/v1",
   "title": "IAT V2 admin non-signing inspection-runtime audit",
-  "generatedAtUtc": "2026-08-03T17:28:10.842Z",
+  "generatedAtUtc": "2026-08-03T17:40:14.721Z",
   "status": "DRAFT_PARTIALLY_REMEDIATED_QA_HOLD",
   "mainnetStatus": "UNSCHEDULED_HOLD",
   "assurance": "INTERNAL_CODEX_ASSISTED_LOCAL_NON_SIGNING_QA",
   "sourceBinding": {
-    "commit": "bb79f564850f3a1a032aaa8bb1625e398089fdb3",
-    "gitTree": "f621ab17724a70d8fbc8366f8432691289bc5a7b"
+    "commit": "3ee6dbc326c25fc674c5f1ca25d9ce0c1978b863",
+    "gitTree": "c7469bc5b540ba20b205d638b4bcd2bce182eb22"
   },
   "sourceSha256": {
-    "projects/star-ascent/site/package.json": "4ddde479a64a9b36c5994e7445def91f0b74368e06689e068c3d0c3188658595",
+    "projects/star-ascent/site/package.json": "13db6375b9a7d3dec15d9ffe013d955f7c0f598c7a6f5be973cbebe96d3e4fb0",
+    "projects/star-ascent/site/package-lock.json": "81bac2f217536fbab411275eb5c1405e12da3bef38b63cfeb67a6236d011a0d5",
     "projects/star-ascent/site/tools/iat-v2-admin-console/main.jsx": "44d9f3d0271b9662e4a04e9df131222add8b22eec516531b5c9dd66c3138fbc4",
     "projects/star-ascent/site/tools/iat-v2-admin-console/style.css": "0c7bf7e2692cacc4b7298315aa1a773789e4cd45d034899950bd38501f577de4",
-    "projects/star-ascent/site/scripts/test-iat-v2-admin-inspection-runtime.mjs": "779aac71edc6691ec353d08bb145d06b813d818900eb9cb28a81f44d456de9e9"
+    "projects/star-ascent/site/tools/iat-v2-admin-console/vite.config.mjs": "30b24e45c081c34b7e8ad9e3798cb1e18b0f40354c86a8b033ef67c4bf6c9fe6",
+    "projects/star-ascent/site/tools/iat-v2-admin-console/crypto-browser-shim.mjs": "64b5da938264e1e0d6d98d6732548359c33d008caef9355f64ee57a1bd2a72dd",
+    "projects/star-ascent/site/tools/iat-v2-admin-console/util-browser-shim.mjs": "32fb67623cbfe895e364ad2676dc9b98b1dc917944113c4af02eb494eb574d8d",
+    "projects/star-ascent/site/scripts/test-iat-v2-admin-inspection-runtime.mjs": "779aac71edc6691ec353d08bb145d06b813d818900eb9cb28a81f44d456de9e9",
+    "projects/star-ascent/site/tests/iat-v2-admin-browser-shims.test.mjs": "df81c4ebdf29628a61b4930ab177379c5e09ed0b03453fb40b3096a825dea5f0"
   },
   "artifactSha256": {
-    "README.md": "8764a82a67a70258847da9c95243283acc31be30d128fe0b2b26bc8383cfe395",
-    "checks.json": "2597b05b33c651f21f0713d966f13fb4922d28506f0d58295b7cc73a4fcd3e1a"
+    "README.md": "5d307236ede5c2a01e0752262e3183ddca7ffe1f0c38eb6eae91f73d4d772f27",
+    "checks.json": "28b8c6ea855c7a19599be14fb6e0499e9f6f22ca4f26a5c7eeda925fbcbabb6c"
   },
   "clearance": {
     "findingClosed": false,

@@ -12,11 +12,14 @@ This source-bound package evaluates the local IAT V2 admin console without conne
 - Every rendered refresh, connection, simulation, and broadcast control was disabled.
 - Removed the Google Fonts request and retained local system/monospace stacks for offline inspection.
 - Split feature rehearsal, program upgrade, and Trezor dependencies behind dynamic imports. The initial JavaScript chunk fell from 2,148,150 bytes to 1,063,820 bytes, a 50.48% reduction.
+- Replaced the feature-only bundle's externalized Node `crypto` and `util` imports with narrow browser compatibility modules. SHA-256 delegates to directly pinned `@noble/hashes@1.8.0`; no cryptographic primitive was implemented locally.
+- Four deterministic compatibility tests match Node SHA-256 across text, binary, and chunked inputs, verify the `inspect.custom` symbol, and fail closed for unsupported algorithms, encodings, input types, or hash reuse.
+- The rebuilt feature chunk emits no externalized Node-import warnings. The only build warning is the tracked lazy chunk size warning.
 
 ## Residual finding
 
-`QA-ADMIN-001` remains **PARTIALLY_REMEDIATED_OPEN**. The feature-only Switchboard dependency chunk is 909,373 bytes and still produces browser-compatibility warnings for externalized Node `util` and `crypto` imports. The Trezor-only chunk is 169,595 bytes. Inspection mode proves those chunks are not loaded there; it does not prove the future signing/feature modes on independent hardware or remove their upstream dependency warnings.
+`QA-ADMIN-001` remains **PARTIALLY_REMEDIATED_OPEN**. The externalized Node-import warnings are removed, but the feature-only Switchboard dependency chunk remains 915,400 bytes and the Trezor-only chunk remains 169,595 bytes. Inspection mode proves those chunks are not loaded there; it does not prove the future signing/feature modes on independent hardware. Bundle-size reduction and independent hardware/runtime review remain open.
 
 ## Source binding and limits
 
-The implementation and non-signing browser proof are bound to commit `bb79f564850f3a1a032aaa8bb1625e398089fdb3`, Git tree `f621ab17724a70d8fbc8366f8432691289bc5a7b`. All measurements are local build/runtime evidence. No wallet, hardware device, secret, signing, simulation for signing, broadcast, deployment, funding, DNS change, or Devnet/Mainnet mutation occurred. Mainnet remains `UNSCHEDULED_HOLD`.
+The implementation and non-signing browser proof are bound to commit `3ee6dbc326c25fc674c5f1ca25d9ce0c1978b863`, Git tree `c7469bc5b540ba20b205d638b4bcd2bce182eb22`. All measurements are local build/runtime evidence. No wallet, hardware device, secret, signing, simulation for signing, broadcast, deployment, funding, DNS change, or Devnet/Mainnet mutation occurred. Mainnet remains `UNSCHEDULED_HOLD`.

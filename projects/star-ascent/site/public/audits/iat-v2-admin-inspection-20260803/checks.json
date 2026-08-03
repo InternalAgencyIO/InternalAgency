@@ -3,19 +3,35 @@
   "status": "DRAFT_PARTIALLY_REMEDIATED_QA_HOLD",
   "mainnetStatus": "UNSCHEDULED_HOLD",
   "sourceBinding": {
-    "commit": "bb79f564850f3a1a032aaa8bb1625e398089fdb3",
-    "gitTree": "f621ab17724a70d8fbc8366f8432691289bc5a7b"
+    "commit": "3ee6dbc326c25fc674c5f1ca25d9ce0c1978b863",
+    "gitTree": "c7469bc5b540ba20b205d638b4bcd2bce182eb22"
   },
   "build": {
-    "result": "PASS_WITH_TRACKED_WARNINGS",
-    "modulesTransformed": 1304,
+    "result": "PASS_WITH_TRACKED_SIZE_WARNING",
+    "modulesTransformed": 1312,
     "priorInitialJavaScriptBytes": 2148150,
     "currentInitialJavaScriptBytes": 1063820,
     "initialJavaScriptReductionBytes": 1084330,
     "initialJavaScriptReductionPercent": 50.48,
-    "featureOnlyChunkBytes": 909373,
+    "featureOnlyChunkBytes": 915400,
     "trezorOnlyChunkBytes": 169595,
-    "programUpgradeChunkBytes": 10990
+    "programUpgradeChunkBytes": 10990,
+    "remainingExternalizedNodeImports": [],
+    "remainingWarnings": [
+      "LAZY_CHUNK_OVER_500_KB"
+    ]
+  },
+  "browserCompatibility": {
+    "result": "PASS",
+    "sha256Provider": "@noble/hashes@1.8.0",
+    "testsPassed": 4,
+    "testsFailed": 0,
+    "testedBoundaries": [
+      "TEXT_VECTOR_PARITY",
+      "BINARY_AND_CHUNKED_PARITY",
+      "UNSUPPORTED_INPUT_FAIL_CLOSED",
+      "INSPECT_CUSTOM_AND_CYCLE_SAFETY"
+    ]
   },
   "inspectionRuntime": {
     "result": "PASS",
@@ -36,11 +52,8 @@
   "finding": {
     "id": "QA-ADMIN-001",
     "state": "PARTIALLY_REMEDIATED_OPEN",
-    "remainingExternalizedNodeImports": [
-      "util",
-      "crypto"
-    ],
-    "remainingScope": "Feature-only Switchboard dependency path and future independent hardware/runtime review"
+    "remainingExternalizedNodeImports": [],
+    "remainingScope": "Feature-only chunk size and future independent hardware/runtime review"
   },
   "clearance": {
     "adminRuntimeFullyCleared": false,
