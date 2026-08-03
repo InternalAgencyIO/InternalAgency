@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 import "./audit-remediation.css";
 import { DossierDock } from "./DossierDock";
 import { CrewSignal } from "./CrewSignal";
 import { DocumentLinkUpgrade } from "./DocumentLinkUpgrade";
-
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 function isTurkishHost(host: string | null) {
   return host?.toLowerCase().includes("ileriakil") ?? false;
@@ -44,5 +40,5 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const requestHeaders = await headers();
   const tr = isTurkishHost(requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host"));
-  return <html lang={tr ? "tr" : "en"}><body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}<DocumentLinkUpgrade /><CrewSignal /><DossierDock /></body></html>;
+  return <html lang={tr ? "tr" : "en"}><body className="antialiased">{children}<DocumentLinkUpgrade /><CrewSignal /><DossierDock /></body></html>;
 }

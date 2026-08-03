@@ -15,19 +15,51 @@ async function confirmedA11yViolations(page) {
 }
 
 test("public routes remain contained and clear confirmed audit rules", async ({ page, isMobile }) => {
+  await page.route("**/api/network", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        network: { networkLabel: "SOLANA MAINNET BETA", programId: null, mint: null },
+        snapshot: {
+          health: "ok",
+          slot: 1,
+          blockHeight: 1,
+          epoch: { epoch: 1 },
+          observedAtUtc: "2026-08-03T00:00:00Z",
+          rpcSource: "QA_FIXTURE",
+        },
+      }),
+    });
+  });
+  const runtimeErrors = [];
+  page.on("pageerror", (error) => runtimeErrors.push(`pageerror: ${error.message}`));
+  page.on("console", (message) => {
+    if (message.type() === "error") runtimeErrors.push(`console: ${message.text()}`);
+  });
   for (const route of routes) {
     if (isMobile && desktopOnlyRoutes.has(route)) continue;
-    await page.goto(route, { waitUntil: "domcontentloaded" });
+    runtimeErrors.length = 0;
+    const response = await page.goto(route, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(250);
     const geometry = await page.evaluate(() => ({
       clientWidth: document.documentElement.clientWidth,
       scrollWidth: document.documentElement.scrollWidth,
       brokenImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).length,
       genericAriaLabels: document.querySelectorAll('div[aria-label]:not([role]), span[aria-label]:not([role])').length,
+      language: document.documentElement.lang,
+      title: document.title,
+      mojibake: (document.body.textContent ?? "").match(/(?:Ã.|Ä.|Å.|â€|â†|ï¿½)/gu) ?? [],
     }));
+    expect(response?.status(), `${route} HTTP status`).toBe(200);
     expect(geometry.scrollWidth, `${route} document overflow`).toBeLessThanOrEqual(geometry.clientWidth);
     expect(geometry.brokenImages, `${route} broken images`).toBe(0);
     expect(geometry.genericAriaLabels, `${route} generic ARIA labels`).toBe(0);
+    expect(geometry.language, `${route} document language`).toBe("en");
+    expect(geometry.title, `${route} document title`).not.toBe("");
+    expect(geometry.mojibake, `${route} mojibake`).toEqual([]);
     expect(await confirmedA11yViolations(page), `${route} accessibility violations`).toEqual([]);
+    expect(runtimeErrors, `${route} runtime errors`).toEqual([]);
   }
 });
 
