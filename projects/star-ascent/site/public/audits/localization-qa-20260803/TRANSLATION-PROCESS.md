@@ -101,6 +101,12 @@ Failed experiments, private paths, model caches, credentials, wallet material,
 and transient files are not public evidence. A failed gate is reported but not
 published as passing.
 
+Before report generation, `npm run check:i18n:active-artifacts` verifies every
+file bound by the active public report. Any content, size, missing-file, or path
+ownership drift fails before generated evidence can be rewritten. A deliberate
+change to a bound file therefore requires a new append-only provenance run; it
+must never silently overwrite the active run's hashes.
+
 ## Read-only live deployment parity
 
 Run `npm run check:i18n:live` to compare every one of the 50 committed locale
