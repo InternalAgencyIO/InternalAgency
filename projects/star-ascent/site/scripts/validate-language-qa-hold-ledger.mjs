@@ -131,8 +131,14 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
   };
   const sourceCommit = scorecard.sourceBinding.headCommit;
   check(git(["cat-file", "-e", `${sourceCommit}^{commit}`]) !== null, "scorecard source commit is unavailable");
+  check(git(["merge-base", "--is-ancestor", sourceCommit, "HEAD"]) !== null, "scorecard source commit is outside the current branch history");
   const sourceTree = git(["rev-parse", `${sourceCommit}^{tree}`]);
   check(sourceTree?.trim() === scorecard.sourceBinding.headTree, "scorecard source tree mismatch");
+  const generatedAtMs = Date.parse(scorecard.generatedAt);
+  check(Number.isFinite(generatedAtMs) && new Date(generatedAtMs).toISOString() === scorecard.generatedAt, "scorecard generation time must be canonical UTC");
+  const sourceCommittedAt = git(["show", "-s", "--format=%cI", sourceCommit]);
+  const sourceCommittedAtText = sourceCommittedAt?.toString("utf8").trim();
+  check(Number.isFinite(Date.parse(sourceCommittedAtText)) && Date.parse(sourceCommittedAtText) <= generatedAtMs, "scorecard generation predates its source commit");
 
   const sourceFiles = {
     definitionSha256: ["projects/star-ascent/site/app/i18n/language-qa-checks.v1.json", (bytes) => sha256(bytes)],
@@ -143,10 +149,31 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
     routeSeoSha256: ["projects/star-ascent/site/app/i18n/route-seo.json", canonicalDigest],
     pendingSha256: ["projects/star-ascent/site/app/i18n/pending-visible-source.json", canonicalDigest],
   };
+  const sourceBytes = {};
   for (const [field, [sourcePath, digest]] of Object.entries(sourceFiles)) {
     const bytes = git(["show", `${sourceCommit}:${sourcePath}`]);
     check(bytes !== null, `scorecard source file is unavailable: ${sourcePath}`);
     check(digest(bytes) === scorecard.sourceBinding[field], `scorecard source binding ${field} mismatch`);
+    sourceBytes[field] = bytes;
+  }
+
+  const sourceDefinition = JSON.parse(sourceBytes.definitionSha256.toString("utf8"));
+  const sourceCatalog = JSON.parse(sourceBytes.messagesFileSha256.toString("utf8"));
+  const sourceRouteSeo = JSON.parse(sourceBytes.routeSeoSha256.toString("utf8"));
+  check(sourceDefinition.schema === "iat-language-qa-check-definition/v1", "source check definition schema mismatch");
+  check(sourceDefinition.localeCount === 50 && sourceDefinition.checksPerLocale === 100 && sourceDefinition.resultCount === 5000, "source check definition cardinality mismatch");
+  check(Array.isArray(sourceDefinition.checks) && sourceDefinition.checks.length === 100, "source check definition must contain exactly 100 checks");
+  check(sameJson(sourceDefinition.checks.map(({ id }) => id), expectedCheckIds), "source check definition ID inventory mismatch");
+  check(sameJson(Object.keys(sourceCatalog.messages ?? {}), expectedLocales), "source message catalog locale inventory mismatch");
+  check(Object.keys(sourceCatalog.messages.en ?? {}).length === scorecard.scope.canonicalStrings, "scorecard canonical-string scope mismatch");
+  check(Object.keys(sourceRouteSeo).length === scorecard.scope.canonicalRoutes, "scorecard canonical-route scope mismatch");
+
+  for (const localeRow of scorecard.locales) {
+    check(canonicalDigest(Buffer.from(JSON.stringify(sourceCatalog.messages[localeRow.locale]))) === localeRow.localeMessagesSha256, `${localeRow.locale} digest does not match the source message catalog`);
+    for (const [index, result] of localeRow.checks.entries()) {
+      const definition = sourceDefinition.checks[index];
+      check(result.id === definition.id && result.mode === definition.mode && result.category === definition.category, `${localeRow.locale}/${result.id} does not match the source check definition`);
+    }
   }
 
   check(ledger.schemaVersion === 1, "unexpected ledger schema version");

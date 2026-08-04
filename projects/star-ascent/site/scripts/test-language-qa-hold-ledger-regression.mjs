@@ -49,5 +49,9 @@ expectFail("missing source commit", (scorecard) => { scorecard.sourceBinding.hea
 expectFail("source tree substitution", (scorecard) => { scorecard.sourceBinding.headTree = "0".repeat(40); }, /source tree mismatch/u);
 expectFail("source digest substitution", (scorecard) => { scorecard.sourceBinding.definitionSha256 = "0".repeat(64); }, /definitionSha256 mismatch/u);
 expectFail("dirty source claim", (scorecard) => { scorecard.sourceBinding.worktreeDirty = true; }, /clean source worktree/u);
+expectFail("noncanonical generation time", (scorecard) => { scorecard.generatedAt = "2026-08-04 07:48:10Z"; }, /canonical UTC/u);
+expectFail("locale digest substitution", (scorecard) => { scorecard.locales[0].localeMessagesSha256 = "0".repeat(64); }, /does not match the source message catalog/u);
+expectFail("source-definition category drift", (scorecard) => { scorecard.locales[0].checks[0].category = "invented"; }, /does not match the source check definition/u);
+expectFail("canonical-string scope drift", (scorecard) => { scorecard.scope.canonicalStrings -= 1; }, /canonical-string scope mismatch/u);
 
-console.log("Language QA HOLD ledger regression passed: exact 50 x 100 topology, unique ordered locale/check identities, status/mode/evidence structure, recomputed summaries, Git-resolved commit/tree/input digests, and fail-closed assurances survived 15 mutation probes.");
+console.log("Language QA HOLD ledger regression passed: exact 50 x 100 topology, unique ordered locale/check identities, status/mode/evidence structure, recomputed summaries, Git-resolved commit/tree/input/row bindings, and fail-closed assurances survived 19 mutation probes.");
