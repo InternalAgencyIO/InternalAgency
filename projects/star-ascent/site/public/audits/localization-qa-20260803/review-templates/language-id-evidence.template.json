@@ -1,0 +1,407 @@
+{
+  "schema": "iat-language-id-evidence/v1",
+  "templateStatus": "UNEXECUTED_HOLD",
+  "instructions": "Record output from an independent language-identification engine. Do not prefill identifiedLocale, confidence, or engine from the expected locale.",
+  "locales": {
+    "en": {
+      "expectedLocale": "en",
+      "localeMessagesSha256": "90ac9dc7575b9d5d69a78e35f780beb7aff11718937ccdc46fa4528f20bd1f39",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "zh": {
+      "expectedLocale": "zh",
+      "localeMessagesSha256": "fb8c52d0859db01ee75b5f5b3f4dcfea737226c03b415067afda4c8ba768fd44",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "es": {
+      "expectedLocale": "es",
+      "localeMessagesSha256": "d5672cb32d7a4f58c04a2af50c19aacc08704093e1c213d8ca94ab5675287a80",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "hi": {
+      "expectedLocale": "hi",
+      "localeMessagesSha256": "76a9c69804177cd44a923918c91af989bb3bf20ab0b4cbce3c7a99d5c76c2ed5",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "fr": {
+      "expectedLocale": "fr",
+      "localeMessagesSha256": "b827f4065d3441b13014474b4da3a2313b9914cb2fb56346c57c02df1555bebb",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "ar": {
+      "expectedLocale": "ar",
+      "localeMessagesSha256": "2519837503ec5a170a83199d12afbc0aef3beff1438df5da0bd212043a698f6a",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "bn": {
+      "expectedLocale": "bn",
+      "localeMessagesSha256": "e3f192365aff62f2b7c0e8d72fc9d9c59acc0b25b66b69c7eb5e755d75cfe940",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "pt": {
+      "expectedLocale": "pt",
+      "localeMessagesSha256": "d33a9c8cdd4771a405fc695de4ca979247bf86ade814568442a7eb1950da771a",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "id": {
+      "expectedLocale": "id",
+      "localeMessagesSha256": "81d03981ed663d90b4e765ca60478dbd1c4271b931ec1fbf75a531c620023f93",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "ur": {
+      "expectedLocale": "ur",
+      "localeMessagesSha256": "b8b329471cf050f3da7a1c5bd6a761cede835e6be291d8ce61f0b8db7526775b",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "ru": {
+      "expectedLocale": "ru",
+      "localeMessagesSha256": "5916a9da51e08624a53675c8d716d84a2d8db9050dbf11981b54697dd7eec5f2",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "de": {
+      "expectedLocale": "de",
+      "localeMessagesSha256": "453b76c3c072dce1f869755bf859e7835b23ce5983e1caf401e38bf4ad3f402f",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "ja": {
+      "expectedLocale": "ja",
+      "localeMessagesSha256": "b8e73fdecb7c7e827e4e3997f60b0bbfd1409c8c9c0d715d94a88a9ab91534e9",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "pcm": {
+      "expectedLocale": "pcm",
+      "localeMessagesSha256": "63f64a8721899574fd6286bafa8d6664708a4a857129a13385bf94bc99e02394",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "tr": {
+      "expectedLocale": "tr",
+      "localeMessagesSha256": "25a3d6b65cbbce3fb8144b54f443411ac5b2ac1aaf5b362b6d029920777ecf67",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "sq": {
+      "expectedLocale": "sq",
+      "localeMessagesSha256": "991c561ef654a8e7bb500353161c99fae1b8e5f86add9702619ffae7e350c612",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "ca": {
+      "expectedLocale": "ca",
+      "localeMessagesSha256": "a6e69da2df70df45c3c4de3d638b2e1a037e2fd15f83fba57e98229be1623a33",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "be": {
+      "expectedLocale": "be",
+      "localeMessagesSha256": "a39a84efa46a703eac349208cf2747a93267cedaa40b12a5ffb7ae1a468835ed",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "nl": {
+      "expectedLocale": "nl",
+      "localeMessagesSha256": "08bfba5e5475cd5df58965c118741b85fa8efcc3299f4abc128ba1ef9f217346",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "bs": {
+      "expectedLocale": "bs",
+      "localeMessagesSha256": "ef60d1c701181fba7dcf1106b02834357c3ade9a57fffa088ebe03d41c228ead",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "bg": {
+      "expectedLocale": "bg",
+      "localeMessagesSha256": "7ca6fe2311d2064abbfbbe9c82b4b3ba880e75546380bf9eba079d8922299ef3",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "hr": {
+      "expectedLocale": "hr",
+      "localeMessagesSha256": "aa905bba1e098109d2d4ec608e1c9ac44a2cc5b0741935e2583a910eb9774622",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "el": {
+      "expectedLocale": "el",
+      "localeMessagesSha256": "07ac15f0ad1bf74480fb25f309193f0c4598aefa4a0fa51debd93db90cf6a00c",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "cs": {
+      "expectedLocale": "cs",
+      "localeMessagesSha256": "682eb4aa6b785a4639d1717c6746d888c942143e049c35d10356d6c43416271c",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "da": {
+      "expectedLocale": "da",
+      "localeMessagesSha256": "972141ba508b7d5f7ff2f6a983c7c0430e5297ad1d318c7a2816b9e02623f0c4",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "et": {
+      "expectedLocale": "et",
+      "localeMessagesSha256": "315f52146323734fe0fdf11c614ec202e314da9a2163f121f76374126049e7d7",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "fi": {
+      "expectedLocale": "fi",
+      "localeMessagesSha256": "6044639536e19a9165cd9fff8142092042c663567f7587b1af82da3b2d8bc836",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "hu": {
+      "expectedLocale": "hu",
+      "localeMessagesSha256": "cdfd9143ca1a654abbd5184d1d71f7a736c4d69440318a293fa0becb3ad83830",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "is": {
+      "expectedLocale": "is",
+      "localeMessagesSha256": "d1128eca785ba3eb325e7e36073508c51441f80361b2500ec3f84366080665e1",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "ga": {
+      "expectedLocale": "ga",
+      "localeMessagesSha256": "163e08e7031798c089653dc7f22548297fb1f55dd9690a5d92b69887347954dd",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "it": {
+      "expectedLocale": "it",
+      "localeMessagesSha256": "bc50bd215fafc829d35231755c81962adfa08c736d368a37d0fecbbc263025b8",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "lv": {
+      "expectedLocale": "lv",
+      "localeMessagesSha256": "94960a9529245c0d9c984e8d7382105e7bf620cf5e442ffb00db7a569ba39ccf",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "lt": {
+      "expectedLocale": "lt",
+      "localeMessagesSha256": "c1b003f09e52c2fdd5b1f5a0f119523d812268460555d67554cba9834bc566dd",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "lb": {
+      "expectedLocale": "lb",
+      "localeMessagesSha256": "a9d90711a289ce740b63338d45cb3e2d46893fa087aa5174afb5b5bd5e8a4784",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "mk": {
+      "expectedLocale": "mk",
+      "localeMessagesSha256": "1975ca6909ab5d49f22189b609208aded6a9e36e2edf1acde08979ee1ea1968d",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "mt": {
+      "expectedLocale": "mt",
+      "localeMessagesSha256": "49afdb0299493b00e7b032ea6c074049cc0e2c9cab7c64d149450d3110cb0eee",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "no": {
+      "expectedLocale": "no",
+      "localeMessagesSha256": "a565487c0e7f35c17b52310277018f3dfb2ce9f1289d4784aa8d0e46cc13beb6",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "pl": {
+      "expectedLocale": "pl",
+      "localeMessagesSha256": "7413513e9ab6002ecc01554555f19f583cb2b475d487f0551d135c4cd505fe4c",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "ro": {
+      "expectedLocale": "ro",
+      "localeMessagesSha256": "e258d62bf61d6c4c4e65d137f5fac1c2f0aff6d5a6716dc811d92a37541b6918",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "sr": {
+      "expectedLocale": "sr",
+      "localeMessagesSha256": "3152d419f2c62d589c49a816b5119636690a8393baaefd93e3b0c6e8f14d04ff",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "sk": {
+      "expectedLocale": "sk",
+      "localeMessagesSha256": "8def24f324d4cbac8a59df64140794df11899fb844cc4a70558d0175cc9100fa",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "sl": {
+      "expectedLocale": "sl",
+      "localeMessagesSha256": "6d30a14c03892d4b5486e423d7cb889f19f3bff1a6785f74cfa6b57cb31dea0a",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "sv": {
+      "expectedLocale": "sv",
+      "localeMessagesSha256": "01e59f58c4ccafed740fbb30b86d4d8c5abe1a39d56df44702687ac25fa595fb",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "uk": {
+      "expectedLocale": "uk",
+      "localeMessagesSha256": "bed9c366505fbd01458d58961febb6adecf34bc18f1cce01c6b4973c0722c1ae",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "ht": {
+      "expectedLocale": "ht",
+      "localeMessagesSha256": "bc5e6bb902b2e2bf3c5475f1a1019624028e955c30ed0c8fcdadde4470a9adfb",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "gn": {
+      "expectedLocale": "gn",
+      "localeMessagesSha256": "0038c321ffa37722292f48efea9d46444b02797d242f5ab58f92d007c9ccea5d",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "qu": {
+      "expectedLocale": "qu",
+      "localeMessagesSha256": "098e664a7c23a7d60e731f971e65c1da943c2fe0e5a75388153abde83cafdd49",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "hy": {
+      "expectedLocale": "hy",
+      "localeMessagesSha256": "7e1e713ea3246b122284abc6b8e7db4ff40c48487f6a03089245dba472cab142",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "az": {
+      "expectedLocale": "az",
+      "localeMessagesSha256": "b558a56003a27d52cc44688481ea050cd7eb2a7eacbe23047c851ce05c8778dc",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    },
+    "ka": {
+      "expectedLocale": "ka",
+      "localeMessagesSha256": "a6588824aee6b35b97a59d3529c9da1be62cedb8a2e0b2466cea7f0ff51358cf",
+      "identifiedLocale": "",
+      "confidence": 0,
+      "threshold": 0.8,
+      "engine": ""
+    }
+  }
+}
