@@ -1,12 +1,14 @@
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+
+import { readCanonicalTrackedFile } from "./lib/read-canonical-tracked-file.mjs";
 
 const siteRoot = process.cwd();
 const repoRoot = resolve(siteRoot, "../../..");
 const auditRoot = resolve(siteRoot, "public/audits/iat-v2-admin-inspection-20260803");
-const readJson = (name) => JSON.parse(readFileSync(resolve(auditRoot, name), "utf8"));
+const readArtifact = (name) => readCanonicalTrackedFile({ repoRoot, absolutePath: resolve(auditRoot, name) });
+const readJson = (name) => JSON.parse(readArtifact(name).toString("utf8"));
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const check = (condition, message) => {
   if (!condition) throw new Error(`IAT V2 admin inspection audit validation failed: ${message}`);
@@ -26,7 +28,7 @@ for (const [path, expected] of Object.entries(manifest.sourceSha256)) {
 }
 for (const [name, expected] of Object.entries(manifest.artifactSha256)) {
   check(expected !== "PENDING", `${name} hash remains pending`);
-  check(sha256(readFileSync(resolve(auditRoot, name))) === expected, `artifact hash mismatch for ${name}`);
+  check(sha256(readArtifact(name)) === expected, `artifact hash mismatch for ${name}`);
 }
 
 const packageJson = JSON.parse(execFileSync("git", ["show", `${manifest.sourceBinding.commit}:projects/star-ascent/site/package.json`], { cwd: repoRoot, encoding: "utf8" }));

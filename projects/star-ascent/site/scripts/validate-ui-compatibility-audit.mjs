@@ -1,13 +1,15 @@
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+
+import { readCanonicalTrackedFile } from "./lib/read-canonical-tracked-file.mjs";
 
 const siteRoot = process.cwd();
 const repoRoot = resolve(siteRoot, "../../..");
 const auditRoot = resolve(siteRoot, "public/audits/iat-ui-compatibility-20260802");
 
-const readJson = (name) => JSON.parse(readFileSync(resolve(auditRoot, name), "utf8"));
+const readArtifact = (name) => readCanonicalTrackedFile({ repoRoot, absolutePath: resolve(auditRoot, name) });
+const readJson = (name) => JSON.parse(readArtifact(name).toString("utf8"));
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const check = (condition, message) => {
   if (!condition) throw new Error(`UI audit validation failed: ${message}`);
@@ -59,7 +61,7 @@ for (const [relativePath, expected] of Object.entries(scope.sourceSha256)) {
 }
 
 for (const [name, expected] of Object.entries(manifest.artifactSha256)) {
-  check(sha256(readFileSync(resolve(auditRoot, name))) === expected, `artifact hash mismatch for ${name}`);
+  check(sha256(readArtifact(name)) === expected, `artifact hash mismatch for ${name}`);
 }
 
 const requiredArtifacts = ["README.md", "FINDINGS.md", "scope.json", "findings.json", "checks.json", "environment-matrix.json"];

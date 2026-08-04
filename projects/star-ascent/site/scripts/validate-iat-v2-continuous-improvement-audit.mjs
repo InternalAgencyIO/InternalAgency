@@ -1,12 +1,14 @@
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
+
+import { readCanonicalTrackedFile } from "./lib/read-canonical-tracked-file.mjs";
 
 const siteRoot = process.cwd();
 const repoRoot = resolve(siteRoot, "../../..");
 const auditRoot = resolve(siteRoot, "public/audits/iat-v2-continuous-improvement-20260803");
-const readJson = (path) => JSON.parse(readFileSync(path, "utf8"));
+const readCanonical = (path) => readCanonicalTrackedFile({ repoRoot, absolutePath: path });
+const readJson = (path) => JSON.parse(readCanonical(path).toString("utf8"));
 const readAuditJson = (name) => readJson(resolve(auditRoot, name));
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const check = (condition, message) => {
@@ -35,7 +37,7 @@ for (const [relativePath, expected] of Object.entries(manifest.sourceSha256)) {
 }
 for (const [name, expected] of Object.entries(manifest.artifactSha256)) {
   check(expected !== "PENDING", `${name} hash is still pending`);
-  check(sha256(readFileSync(resolve(auditRoot, name))) === expected, `artifact hash mismatch for ${name}`);
+  check(sha256(readCanonical(resolve(auditRoot, name))) === expected, `artifact hash mismatch for ${name}`);
 }
 
 check(ledger.auditPackages.length === 8, "audit package inventory must contain eight manifests");
