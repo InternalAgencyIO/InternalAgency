@@ -41,3 +41,4 @@
 12. Uploaded the first six primary V2 files to the existing Drive delivery folder before the workflow switched to build-in-public publication. No Drive identifiers are included in this public record.
 13. Copied all 36 originals and all 36 V2 outputs into this public GitHub release directory.
 14. Generated `asset-manifest.json` and ran repository-safe validation before the narrow commit and push.
+15. Published the complete LFS-backed release to the public `agent/iat-launch-window` branch in commit `15d22fd9c2eb49a38b1433099686fb0f4ec4e396`.
