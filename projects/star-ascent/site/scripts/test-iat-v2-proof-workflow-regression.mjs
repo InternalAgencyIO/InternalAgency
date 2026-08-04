@@ -53,7 +53,7 @@ const exactSignoffCommand =
   "node scripts/validate-iat-v2-independent-signoff.mjs && node scripts/validate-iat-v2-feature-signoff.mjs";
 const requiredActionPins = new Map([
   ["actions/checkout@11d5960a326750d5838078e36cf38b85af677262", 3],
-  ["actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020", 1],
+  ["actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020", 2],
   ["actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02", 1],
 ]);
 const agaveInstallerUrl =
@@ -159,6 +159,12 @@ function validateConfiguration(workflowText, scripts) {
   if (scripts["check:iat-v2-proof-workflow"] !== "node scripts/test-iat-v2-proof-workflow-regression.mjs") {
     fail("workflow regression package script must remain bound to the canonical validator");
   }
+  if (scripts["check:iat-v2-ci-sbf-evidence"] !== "node scripts/test-iat-v2-ci-sbf-evidence-regression.mjs") {
+    fail("SBF evidence regression package script must remain bound to the canonical validator");
+  }
+  if (!scripts["check:iat-v2"]?.includes("npm run check:iat-v2-ci-sbf-evidence")) {
+    fail("main IAT V2 validation must retain the SBF evidence regression suite");
+  }
   if (scripts["check:iat-v2-signoff"] !== exactSignoffCommand) {
     fail("signoff package script must retain both canonical validators in order");
   }
@@ -233,6 +239,9 @@ function validateSbfProofScript(scriptText) {
   }
   if (!scriptText.includes('sha256sum "$binary" "$idl" "$evidence" "$sbf_log"')) {
     fail("SBF proof must digest the binary, IDL, manifest, and complete build log");
+  }
+  if (!scriptText.includes('node scripts/validate-iat-v2-ci-sbf-evidence.mjs "$evidence"')) {
+    fail("SBF proof must run the canonical independent manifest validator before upload");
   }
 
   return failures;
@@ -317,6 +326,15 @@ const mutationProbes = [
     ),
     scripts: packageJson.scripts,
   },
+  {
+    name: "main validation omits SBF evidence regression",
+    workflow,
+    scripts: {
+      ...packageJson.scripts,
+      "check:iat-v2": packageJson.scripts["check:iat-v2"]
+        .replace(" && npm run check:iat-v2-ci-sbf-evidence", ""),
+    },
+  },
 ];
 
 for (const probe of mutationProbes) {
@@ -361,6 +379,10 @@ const sbfProofMutationProbes = [
     name: "PR merge accepted without exact head parent",
     script: sbfProofScript.replace("git rev-parse 'HEAD^2'", "printf '%s' \"$source_head_commit\""),
   },
+  {
+    name: "canonical manifest validator bypassed",
+    script: sbfProofScript.replace('node scripts/validate-iat-v2-ci-sbf-evidence.mjs "$evidence"', "true"),
+  },
 ];
 
 for (const probe of sbfProofMutationProbes) {
@@ -375,5 +397,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 5 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout-bound binary/IDL evidence, deduplicated branch concurrency, read-only permissions, and 19 fail-closed mutation probes remain bound.`,
+  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout-bound binary/IDL evidence, canonical manifest validation, deduplicated branch concurrency, read-only permissions, and 21 fail-closed mutation probes remain bound.`,
 );

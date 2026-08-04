@@ -5,7 +5,7 @@ expected_anchor="anchor-cli 1.0.2"
 expected_solana="solana-cli 3.1.10"
 expected_rustc_prefix="rustc 1.97.1 "
 
-for command_name in cargo rustc anchor solana docker git sha256sum python3; do
+for command_name in cargo rustc anchor solana docker git node sha256sum python3; do
   if ! command -v "$command_name" >/dev/null 2>&1; then
     echo "FAIL: required command is missing: $command_name" >&2
     exit 1
@@ -226,6 +226,7 @@ pathlib.Path(evidence_path).write_text(
     encoding="utf-8",
 )
 PY
+node scripts/validate-iat-v2-ci-sbf-evidence.mjs "$evidence"
 
 echo "PASS: locked host tests and program-ID-bound verifiable SBF artifacts completed."
 sha256sum "$binary" "$idl" "$evidence" "$sbf_log"

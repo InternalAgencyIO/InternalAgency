@@ -74,6 +74,9 @@ jobs:
           # Pull-request builds test GitHub's synthetic merge commit. Full
           # history is required to bind that checkout to its exact head parent.
           fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
       - name: Install the pinned official Solana and Anchor toolchain
         run: |
           rustup toolchain install 1.97.1 --profile minimal
