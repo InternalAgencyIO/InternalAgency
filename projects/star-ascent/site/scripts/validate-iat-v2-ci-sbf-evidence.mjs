@@ -10,6 +10,14 @@ const expectedProgramId = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
 const expectedRepository = "InternalAgencyIO/InternalAgency";
 const expectedRepositoryId = 1313660798;
 const expectedWorkflowRef = /^InternalAgencyIO\/InternalAgency\/\.github\/workflows\/iat-v2-proof\.yml@refs\/(?:heads\/.+|pull\/[1-9][0-9]*\/merge)$/;
+const expectedBuildContainer = {
+  image: "solanafoundation/anchor",
+  tag: "v1.0.2",
+  indexDigest: "sha256:05a13b9f0a6d7dd5dc86955dd0e14a098110f12d2862ac5e0cf588049a48841b",
+  platform: "linux/amd64",
+  platformManifestDigest: "sha256:28fde4e63a063727c9520a925de4e9a3be29fcc717b5d759363c23ddea28f59d",
+  reference: "solanafoundation/anchor@sha256:05a13b9f0a6d7dd5dc86955dd0e14a098110f12d2862ac5e0cf588049a48841b",
+};
 const expectedArtifacts = {
   programBinary: "target/verifiable/iat_v2.so",
   programIdl: "target/idl/iat_v2.json",
@@ -63,13 +71,13 @@ export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath 
   const manifest = JSON.parse(manifestText);
   check(manifestText === `${JSON.stringify(sortJson(manifest), null, 2)}\n`, "manifest JSON is not canonical sorted-key UTF-8 JSON");
 
-  exactKeys(manifest, ["schema", "status", "ciProvenance", "sourceBinding", "programId", "toolchain", "artifacts", "limitations"], "manifest");
-  check(manifest.schema === "iat-v2-ci-verifiable-sbf-evidence/v3", "unexpected evidence schema");
+  exactKeys(manifest, ["schema", "status", "ciProvenance", "buildContainer", "sourceBinding", "programId", "toolchain", "artifacts", "limitations"], "manifest");
+  check(manifest.schema === "iat-v2-ci-verifiable-sbf-evidence/v4", "unexpected evidence schema");
   check(manifest.status === "BUILD_ONLY_HOLD", "evidence status must remain BUILD_ONLY_HOLD");
   check(manifest.programId === expectedProgramId, "reviewed program ID drifted");
   check(JSON.stringify(manifest.limitations) === JSON.stringify(expectedLimitations), "HOLD limitations drifted");
 
-  exactKeys(manifest.ciProvenance, ["serverUrl", "repository", "repositoryId", "workflowRef", "runId", "runAttempt"], "ciProvenance");
+  exactKeys(manifest.ciProvenance, ["serverUrl", "repository", "repositoryId", "workflowRef", "runId", "runAttempt", "runnerOs", "runnerArch"], "ciProvenance");
   const provenance = manifest.ciProvenance;
   check(provenance.serverUrl === "https://github.com", "CI server is not public GitHub");
   check(provenance.repository === expectedRepository, "CI repository drifted");
@@ -77,6 +85,10 @@ export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath 
   check(expectedWorkflowRef.test(provenance.workflowRef), "CI workflow reference drifted");
   check(Number.isSafeInteger(provenance.runId) && provenance.runId > 0, "CI run ID is invalid");
   check(Number.isSafeInteger(provenance.runAttempt) && provenance.runAttempt > 0, "CI run attempt is invalid");
+  check(provenance.runnerOs === "Linux" && provenance.runnerArch === "X64", "CI runner platform drifted");
+
+  exactKeys(manifest.buildContainer, Object.keys(expectedBuildContainer), "buildContainer");
+  check(JSON.stringify(sortJson(manifest.buildContainer)) === JSON.stringify(sortJson(expectedBuildContainer)), "immutable build-container binding drifted");
 
   exactKeys(manifest.toolchain, ["rustc", "anchor", "solana"], "toolchain");
   check(/^rustc 1\.97\.1 \([0-9a-f]+ [0-9]{4}-[0-9]{2}-[0-9]{2}\)$/.test(manifest.toolchain.rustc), "Rust toolchain is not exact 1.97.1");

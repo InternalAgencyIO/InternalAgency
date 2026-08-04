@@ -4,6 +4,12 @@ set -euo pipefail
 expected_anchor="anchor-cli 1.0.2"
 expected_solana="solana-cli 3.1.10"
 expected_rustc_prefix="rustc 1.97.1 "
+build_container_image="solanafoundation/anchor"
+build_container_tag="v1.0.2"
+build_container_index_digest="sha256:05a13b9f0a6d7dd5dc86955dd0e14a098110f12d2862ac5e0cf588049a48841b"
+build_container_platform="linux/amd64"
+build_container_platform_digest="sha256:28fde4e63a063727c9520a925de4e9a3be29fcc717b5d759363c23ddea28f59d"
+build_container_reference="${build_container_image}@${build_container_index_digest}"
 
 for command_name in cargo rustc anchor solana docker git node sha256sum python3; do
   if ! command -v "$command_name" >/dev/null 2>&1; then
@@ -56,6 +62,8 @@ ci_repository_id="${GITHUB_REPOSITORY_ID:-}"
 ci_workflow_ref="${GITHUB_WORKFLOW_REF:-}"
 ci_run_id="${GITHUB_RUN_ID:-}"
 ci_run_attempt="${GITHUB_RUN_ATTEMPT:-}"
+ci_runner_os="${RUNNER_OS:-}"
+ci_runner_arch="${RUNNER_ARCH:-}"
 if [[ ! "$source_head_commit" =~ ^[0-9a-f]{40}$ ]]; then
   echo "FAIL: workflow did not provide an exact lowercase source-head commit" >&2
   exit 1
@@ -78,6 +86,10 @@ if [[ ! "$ci_workflow_ref" =~ ^InternalAgencyIO/InternalAgency/\.github/workflow
 fi
 if [[ ! "$ci_run_id" =~ ^[1-9][0-9]*$ || ! "$ci_run_attempt" =~ ^[1-9][0-9]*$ ]]; then
   echo "FAIL: build provenance is missing a canonical GitHub run ID or attempt" >&2
+  exit 1
+fi
+if [[ "$ci_runner_os" != "Linux" || "$ci_runner_arch" != "X64" ]]; then
+  echo "FAIL: verifiable build requires the reviewed Linux/X64 runner platform" >&2
   exit 1
 fi
 if ! git cat-file -e "${source_head_commit}^{commit}"; then
@@ -103,7 +115,12 @@ fi
 cargo fmt --all -- --check
 cargo test --workspace --all-targets --locked
 sbf_log="target/iat-v2-sbf-build.log"
-anchor build --verifiable --ignore-keys 2>&1 | tee "$sbf_log"
+anchor build --verifiable --ignore-keys --docker-image "$build_container_reference" 2>&1 | tee "$sbf_log"
+
+if ! grep -Fxq "Using image \"$build_container_reference\"" "$sbf_log"; then
+  echo "FAIL: Anchor did not use the reviewed immutable build-container digest" >&2
+  exit 1
+fi
 
 if grep -Eqi \
   'Stack offset of|stack frame of [0-9]+ bytes exceeds|max offset exceeded|overwrites values|undefined behavior' \
@@ -169,6 +186,14 @@ python3 - \
   "$ci_workflow_ref" \
   "$ci_run_id" \
   "$ci_run_attempt" \
+  "$ci_runner_os" \
+  "$ci_runner_arch" \
+  "$build_container_image" \
+  "$build_container_tag" \
+  "$build_container_index_digest" \
+  "$build_container_platform" \
+  "$build_container_platform_digest" \
+  "$build_container_reference" \
   "$source_head_commit" \
   "$source_head_tree" \
   "$checkout_commit" \
@@ -197,6 +222,14 @@ import sys
     ci_workflow_ref,
     ci_run_id,
     ci_run_attempt,
+    ci_runner_os,
+    ci_runner_arch,
+    build_container_image,
+    build_container_tag,
+    build_container_index_digest,
+    build_container_platform,
+    build_container_platform_digest,
+    build_container_reference,
     source_head_commit,
     source_head_tree,
     checkout_commit,
@@ -214,7 +247,7 @@ import sys
     log_bytes,
 ) = sys.argv[1:]
 document = {
-    "schema": "iat-v2-ci-verifiable-sbf-evidence/v3",
+    "schema": "iat-v2-ci-verifiable-sbf-evidence/v4",
     "status": "BUILD_ONLY_HOLD",
     "ciProvenance": {
         "serverUrl": ci_server_url,
@@ -223,6 +256,16 @@ document = {
         "workflowRef": ci_workflow_ref,
         "runId": int(ci_run_id),
         "runAttempt": int(ci_run_attempt),
+        "runnerOs": ci_runner_os,
+        "runnerArch": ci_runner_arch,
+    },
+    "buildContainer": {
+        "image": build_container_image,
+        "tag": build_container_tag,
+        "indexDigest": build_container_index_digest,
+        "platform": build_container_platform,
+        "platformManifestDigest": build_container_platform_digest,
+        "reference": build_container_reference,
     },
     "sourceBinding": {
         "workflowEvent": workflow_event,

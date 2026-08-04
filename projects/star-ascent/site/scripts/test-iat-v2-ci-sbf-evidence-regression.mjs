@@ -71,7 +71,7 @@ try {
   const checkoutTree = runGit("rev-parse", "HEAD^{tree}");
   const artifactBytes = writeArtifacts();
   const baseline = {
-    schema: "iat-v2-ci-verifiable-sbf-evidence/v3",
+    schema: "iat-v2-ci-verifiable-sbf-evidence/v4",
     status: "BUILD_ONLY_HOLD",
     ciProvenance: {
       serverUrl: "https://github.com",
@@ -80,6 +80,16 @@ try {
       workflowRef: "InternalAgencyIO/InternalAgency/.github/workflows/iat-v2-proof.yml@refs/pull/4/merge",
       runId: 30904276707,
       runAttempt: 1,
+      runnerOs: "Linux",
+      runnerArch: "X64",
+    },
+    buildContainer: {
+      image: "solanafoundation/anchor",
+      tag: "v1.0.2",
+      indexDigest: "sha256:05a13b9f0a6d7dd5dc86955dd0e14a098110f12d2862ac5e0cf588049a48841b",
+      platform: "linux/amd64",
+      platformManifestDigest: "sha256:28fde4e63a063727c9520a925de4e9a3be29fcc717b5d759363c23ddea28f59d",
+      reference: "solanafoundation/anchor@sha256:05a13b9f0a6d7dd5dc86955dd0e14a098110f12d2862ac5e0cf588049a48841b",
     },
     sourceBinding: {
       workflowEvent: "pull_request",
@@ -124,6 +134,10 @@ try {
   expectFail("repository ID drift", (value) => { value.ciProvenance.repositoryId += 1; }, /repository ID drifted/);
   expectFail("workflow reference drift", (value) => { value.ciProvenance.workflowRef = "InternalAgencyIO/InternalAgency/.github/workflows/other.yml@refs/heads/main"; }, /workflow reference drifted/);
   expectFail("invalid CI run ID", (value) => { value.ciProvenance.runId = 0; }, /run ID is invalid/);
+  expectFail("runner architecture drift", (value) => { value.ciProvenance.runnerArch = "ARM64"; }, /runner platform drifted/);
+  expectFail("container reference drift", (value) => { value.buildContainer.reference = "solanafoundation/anchor:v1.0.2"; }, /build-container binding drifted/);
+  expectFail("container index digest drift", (value) => { value.buildContainer.indexDigest = `sha256:${"0".repeat(64)}`; }, /build-container binding drifted/);
+  expectFail("container platform digest drift", (value) => { value.buildContainer.platformManifestDigest = `sha256:${"0".repeat(64)}`; }, /build-container binding drifted/);
   expectFail("artifact path drift", (value) => { value.artifacts.buildLog.path = "other.log"; }, /path drifted/);
   expectFail("tracked source mutation", () => { writeFileSync(join(sandbox, "base.txt"), "dirty\n"); }, /tracked worktree is not clean/);
   expectFail("missing build log", () => { rmSync(join(sandbox, paths.buildLog)); }, /ENOENT/);
@@ -154,7 +168,7 @@ try {
     "artifact symlink indirection",
   );
 
-  console.log("IAT V2 CI SBF evidence regression passed: exact PR head/merge/public-run binding and 16 provenance, artifact, schema, HOLD, digest, size, path, canonical-JSON, symlink, worktree, and program-ID mutations fail closed.");
+  console.log("IAT V2 CI SBF evidence regression passed: exact PR head/merge/public-run/container binding and 20 provenance, runner, container, artifact, schema, HOLD, digest, size, path, canonical-JSON, symlink, worktree, and program-ID mutations fail closed.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }
