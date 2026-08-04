@@ -49,6 +49,11 @@ const requiredLaunchGateScripts = [
 ];
 const exactSignoffCommand =
   "node scripts/validate-iat-v2-independent-signoff.mjs && node scripts/validate-iat-v2-feature-signoff.mjs";
+const requiredActionPins = new Map([
+  ["actions/checkout@11d5960a326750d5838078e36cf38b85af677262", 3],
+  ["actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020", 1],
+  ["actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02", 1],
+]);
 
 function validateConfiguration(workflowText, scripts) {
   const failures = [];
@@ -56,6 +61,10 @@ function validateConfiguration(workflowText, scripts) {
   const commandLines = workflowText
     .split("\n")
     .map((line) => line.match(/^\s*- run:\s+(.+?)\s*$/)?.[1] ?? null)
+    .filter(Boolean);
+  const actionUses = workflowText
+    .split("\n")
+    .map((line) => line.match(/^\s*- uses:\s+([^\s#]+)(?:\s+#.*)?$/)?.[1] ?? null)
     .filter(Boolean);
   const orderedPositions = requiredOrderedCommands.map((command) => commandLines.indexOf(command));
 
@@ -83,6 +92,18 @@ function validateConfiguration(workflowText, scripts) {
   }
   if (!/fetch-depth:\s+0\s*$/m.test(workflowText)) {
     fail("release-proof workflow must retain full history for source-bound audit validation");
+  }
+  if (actionUses.some((action) => !/^[a-z0-9_.-]+\/[a-z0-9_.-]+@[0-9a-f]{40}$/.test(action))) {
+    fail("every third-party action must be pinned to an immutable 40-character commit SHA");
+  }
+  for (const [action, expectedCount] of requiredActionPins) {
+    const actualCount = actionUses.filter((candidate) => candidate === action).length;
+    if (actualCount !== expectedCount) {
+      fail(`required action pin ${action} appears ${actualCount} times; expected ${expectedCount}`);
+    }
+  }
+  if (actionUses.length !== [...requiredActionPins.values()].reduce((sum, count) => sum + count, 0)) {
+    fail("release-proof workflow contains an unreviewed third-party action");
   }
 
   for (const command of commandLines) {
@@ -156,6 +177,14 @@ const mutationProbes = [
     workflow: workflow.replace("      - run: npm run check:iat-v2-signoff\n", "      - run: npm run check:iat-v2-signoff\n        continue-on-error: true\n"),
     scripts: packageJson.scripts,
   },
+  {
+    name: "floating checkout tag",
+    workflow: workflow.replace(
+      "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "actions/checkout@v4",
+    ),
+    scripts: packageJson.scripts,
+  },
 ];
 
 for (const probe of mutationProbes) {
@@ -170,5 +199,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, read-only permissions, and 4 fail-closed mutation probes remain bound.`,
+  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 5 immutable action uses, read-only permissions, and 5 fail-closed mutation probes remain bound.`,
 );

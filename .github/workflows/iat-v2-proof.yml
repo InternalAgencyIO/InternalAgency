@@ -30,13 +30,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           # The public pre-launch audit validator recomputes its historical
           # source commit, tree, and tracked-file inventory. A shallow checkout
           # cannot provide that source-bound assurance.
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 24
           cache: npm
@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - run: cargo test --workspace --all-targets --locked
 
   verifiable-sbf:
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: Install the pinned official Solana and Anchor toolchain
         run: |
           rustup toolchain install 1.97.1 --profile minimal
@@ -84,7 +84,7 @@ jobs:
           } >> "$GITHUB_PATH"
       - name: Produce deterministic build evidence
         run: bash scripts/verify-iat-v2-sbf.sh
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: iat-v2-verifiable-sbf
           path: |
