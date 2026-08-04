@@ -1,23 +1,38 @@
 import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { mkdir, writeFile } from "node:fs/promises";
+import { join, resolve } from "node:path";
+
+import { readCanonicalTrackedFile } from "./lib/read-canonical-tracked-file.mjs";
 
 const root = process.cwd();
+const repoRoot = resolve(root, "../../..");
 const auditDir = join(root, "public", "audits", "localization-qa-20260803");
 const trackedFiles = [
+  "app/i18n/language-qa-checks.v1.json",
   "app/i18n/messages.json",
   "app/i18n/critical-ui-source.json",
   "app/i18n/critical-ui-overrides.json",
+  "app/i18n/metadata.generated.json",
+  "app/i18n/route-seo.json",
+  "app/i18n/pending-visible-source.json",
   "app/i18n/LocaleRuntime.tsx",
   "scripts/generate-i18n-catalog.mjs",
   "scripts/check-i18n-catalog.mjs",
   "public/audits/localization-qa-20260803/browser-qa.json",
+  "app/i18n/language-render-evidence.v1.json",
+  "public/audits/localization-qa-20260803/language-qa-scorecard.json",
 ];
-const readJson = async (path) => JSON.parse(await readFile(join(root, path), "utf8"));
-const [catalog, critical, overrides] = await Promise.all([
+const readCanonical = (path) => readCanonicalTrackedFile({ repoRoot, absolutePath: join(root, path) });
+const readJson = async (path) => JSON.parse(readCanonical(path).toString("utf8"));
+const [catalog, critical, overrides, metadata, routeSeo, pending, scorecard, renderEvidence] = await Promise.all([
   readJson("app/i18n/messages.json"),
   readJson("app/i18n/critical-ui-source.json"),
   readJson("app/i18n/critical-ui-overrides.json"),
+  readJson("app/i18n/metadata.generated.json"),
+  readJson("app/i18n/route-seo.json"),
+  readJson("app/i18n/pending-visible-source.json"),
+  readJson("public/audits/localization-qa-20260803/language-qa-scorecard.json"),
+  readJson("app/i18n/language-render-evidence.v1.json"),
 ]);
 const browserQa = await readJson("public/audits/localization-qa-20260803/browser-qa.json");
 const sources = Object.keys(catalog.messages.en);
@@ -30,9 +45,32 @@ const exactSourceMatches = (locale) => sources.filter((source) => {
 
 const files = {};
 for (const path of trackedFiles) {
-  const content = await readFile(join(root, path));
+  const content = readCanonical(path);
   files[path] = { sha256: createHash("sha256").update(content).digest("hex"), bytes: content.length };
 }
+const canonical = (value) => {
+  if (Array.isArray(value)) return `[${value.map(canonical).join(",")}]`;
+  if (value && typeof value === "object") return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonical(value[key])}`).join(",")}}`;
+  return JSON.stringify(value);
+};
+const canonicalDigest = (value) => createHash("sha256").update(canonical(value)).digest("hex");
+const currentBindings = {
+  definitionSha256: files["app/i18n/language-qa-checks.v1.json"].sha256,
+  messagesFileSha256: files["app/i18n/messages.json"].sha256,
+  metadataSha256: canonicalDigest(metadata),
+  routeSeoSha256: canonicalDigest(routeSeo),
+  pendingSha256: canonicalDigest(pending),
+};
+for (const [field, expected] of Object.entries(currentBindings)) {
+  if (scorecard.sourceBinding?.[field] !== expected) throw new Error(`Language QA scorecard has stale ${field}`);
+  if (renderEvidence.sourceBinding?.[field] !== expected) throw new Error(`Language render evidence has stale ${field}`);
+}
+const scorecardResults = Object.values(scorecard.summary ?? {}).reduce((total, count) => total + count, 0);
+if (scorecard.scope?.locales !== 50 || scorecard.scope?.checksPerLocale !== 100 || scorecardResults !== 5000) throw new Error("Language QA scorecard cardinality is not 100 checks across 50 locales");
+if (scorecard.status !== "HOLD" || scorecard.summary.FAIL !== 0 || scorecard.summary.NOT_RUN !== 0 || scorecard.summary.HOLD === 0) throw new Error("Language QA scorecard must remain a zero-FAIL, zero-NOT_RUN, evidence-dependent HOLD");
+if (scorecard.assurance?.nativeQualityClaimAllowed !== false || scorecard.assurance?.releaseApproved !== false) throw new Error("Language QA scorecard must not claim native quality or release approval");
+const renderRecords = Object.values(renderEvidence.locales ?? {}).flatMap((locale) => Object.values(locale.checks ?? {}));
+if (renderEvidence.status !== "PASS" || renderRecords.length !== 1250 || renderRecords.some((record) => record.status !== "PASS")) throw new Error("Language render evidence must contain exactly 1,250 passing results");
 const locales = Object.keys(catalog.messages).map((locale) => {
   const exact = locale === "en" ? [] : exactSourceMatches(locale);
   const criticalLeaks = locale === "en" ? [] : criticalSources.filter(
@@ -60,17 +98,21 @@ const report = {
     locales: locales.length,
     canonicalStrings: sources.length,
     criticalHydrationOnlyStrings: criticalSources.length,
-    canonicalRouteDocumentsCoveredByExistingRouteTests: 1173,
+    canonicalRoutes: scorecard.scope.canonicalRoutes,
+    languageQaResults: scorecardResults,
   },
   outcome: {
     automatedCatalogCompleteness: locales.every((entry) => entry.emptyCount === 0) ? "PASS" : "FAIL",
     criticalEnglishFallbackGate: locales.every((entry) => entry.criticalEnglishFallbackCount === 0) ? "PASS" : "FAIL",
     nativeLanguageSignoff: "HOLD — native-speaker review required for every non-English locale",
     generalExactMatchHeuristic: "ADVISORY — includes legitimate protocol names and technical labels; samples require human triage",
+    sourceBoundLanguageScorecard: scorecard.status,
+    sourceBoundRenderEvidence: renderEvidence.status,
     browserAccessibilityReview: browserQa.outcome,
   },
-  validation: {
+  historicalValidation: {
     runDate: "2026-08-03",
+    provenance: "Recorded by the earlier public QA package; regeneration does not claim these commands were rerun.",
     commands: [
       { command: "npm test", outcome: "PASS", automatedTestsPassed: 45 },
       { command: "npm run lint", outcome: "PASS", errors: 0, warnings: 0 },
@@ -87,15 +129,39 @@ const report = {
     "Rendered browser checks are representative, not an exhaustive physical-device or assistive-technology certification.",
     "This package does not authorize deployment, signing, broadcasting, funding, or mainnet launch.",
   ],
+  scorecard: {
+    path: "language-qa-scorecard.json",
+    generatedAt: scorecard.generatedAt,
+    status: scorecard.status,
+    summary: scorecard.summary,
+    lanes: scorecard.lanes,
+    assurance: scorecard.assurance,
+  },
+  renderEvidence: {
+    path: "../../../app/i18n/language-render-evidence.v1.json",
+    generatedAt: renderEvidence.generatedAt,
+    status: renderEvidence.status,
+    scope: renderEvidence.scope,
+    environment: renderEvidence.environment,
+    limitations: renderEvidence.limitations,
+  },
   files,
   browserQa,
   locales,
 };
 const table = locales.map((entry) => `| ${entry.locale} | ${entry.emptyCount} | ${entry.criticalEnglishFallbackCount} | ${entry.exactSourceMatchHeuristicCount} | ${entry.nativeSpeakerReview} |`).join("\n");
-const validation = report.validation.commands.map((item) => {
+const historicalValidation = report.historicalValidation.commands.map((item) => {
   const count = item.automatedTestsPassed ? ` (${item.automatedTestsPassed} tests)` : ` (${item.errors} errors, ${item.warnings} warnings)`;
   return `- \`${item.command}\`: **${item.outcome}**${count}`;
 }).join("\n");
+const validation = [
+  `- Exact scorecard: **${scorecard.summary.PASS} PASS / ${scorecard.summary.FAIL} FAIL / ${scorecard.summary.HOLD} HOLD / ${scorecard.summary.NOT_RUN} NOT_RUN** across ${scorecardResults} results.`,
+  `- Source-bound browser/render evidence: **${renderEvidence.status}** for ${renderRecords.length}/${renderRecords.length} recorded checks.`,
+  "",
+  "Historical command record from 2026-08-03; regenerating this summary does not claim these commands were rerun:",
+  "",
+  historicalValidation,
+].join("\n");
 const markdown = `# DRAFT localization, usability, and accessibility QA\n\n**STATIC QA / NOT LAUNCH APPROVAL / MAINNET HOLD / NO DEPLOYMENT PERFORMED**\n\nGenerated: ${report.generatedAt}\n\n## Outcome\n\n- Catalog completeness: **${report.outcome.automatedCatalogCompleteness}** across ${report.scope.locales} locales and ${report.scope.canonicalStrings} canonical strings.\n- Critical hydration-only English fallback gate: **${report.outcome.criticalEnglishFallbackGate}** for ${report.scope.criticalHydrationOnlyStrings} launch-control strings.\n- Native-language signoff: **HOLD**. Every non-English locale still requires a native-speaker review before it can be described as native-quality.\n- Mainnet decision: **HOLD, unchanged**. This package is not launch approval.\n\nThe launch-checklist word “GO” is treated semantically as “ready,” not as an instruction to move. The critical override keeps this cadence explicit.\n\n## Validation\n\n${validation}\n\n## Locale matrix\n\n| Locale | Empty | Critical English fallbacks | Exact-source heuristic | Native review |\n|---|---:|---:|---:|---|\n${table}\n\n## Limitations\n\n${report.limitations.map((item) => `- ${item}`).join("\n")}\n\nSee [report.json](./report.json) for source digests, samples, and machine-readable results.\n`;
 await mkdir(auditDir, { recursive: true });
 await Promise.all([

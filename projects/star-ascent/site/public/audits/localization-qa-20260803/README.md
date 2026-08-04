@@ -2,11 +2,11 @@
 
 **STATIC QA / NOT LAUNCH APPROVAL / MAINNET HOLD / NO DEPLOYMENT PERFORMED**
 
-Generated: 2026-08-03T15:09:40.285Z
+Generated: 2026-08-04T07:56:09.736Z
 
 ## Outcome
 
-- Catalog completeness: **PASS** across 50 locales and 1280 canonical strings.
+- Catalog completeness: **PASS** across 50 locales and 1468 canonical strings.
 - Critical hydration-only English fallback gate: **PASS** for 8 launch-control strings.
 - Native-language signoff: **HOLD**. Every non-English locale still requires a native-speaker review before it can be described as native-quality.
 - Mainnet decision: **HOLD, unchanged**. This package is not launch approval.
@@ -14,6 +14,11 @@ Generated: 2026-08-03T15:09:40.285Z
 The launch-checklist word “GO” is treated semantically as “ready,” not as an instruction to move. The critical override keeps this cadence explicit.
 
 ## Validation
+
+- Exact scorecard: **4544 PASS / 0 FAIL / 456 HOLD / 0 NOT_RUN** across 5000 results.
+- Source-bound browser/render evidence: **PASS** for 1250/1250 recorded checks.
+
+Historical command record from 2026-08-03; regenerating this summary does not claim these commands were rerun:
 
 - `npm test`: **PASS** (45 tests)
 - `npm run lint`: **PASS** (0 errors, 0 warnings)
@@ -24,55 +29,55 @@ The launch-checklist word “GO” is treated semantically as “ready,” not a
 | Locale | Empty | Critical English fallbacks | Exact-source heuristic | Native review |
 |---|---:|---:|---:|---|
 | en | 0 | 0 | 0 | source |
-| zh | 0 | 0 | 22 | required |
-| es | 0 | 0 | 123 | required |
-| hi | 0 | 0 | 76 | required |
-| fr | 0 | 0 | 112 | required |
-| ar | 0 | 0 | 44 | required |
+| zh | 0 | 0 | 29 | required |
+| es | 0 | 0 | 120 | required |
+| hi | 0 | 0 | 74 | required |
+| fr | 0 | 0 | 117 | required |
+| ar | 0 | 0 | 50 | required |
 | bn | 0 | 0 | 89 | required |
-| pt | 0 | 0 | 178 | required |
-| id | 0 | 0 | 218 | required |
-| ur | 0 | 0 | 98 | required |
-| ru | 0 | 0 | 53 | required |
-| de | 0 | 0 | 185 | required |
-| ja | 0 | 0 | 65 | required |
-| pcm | 0 | 0 | 728 | required |
-| tr | 0 | 0 | 230 | required |
-| sq | 0 | 0 | 249 | required |
-| ca | 0 | 0 | 235 | required |
-| be | 0 | 0 | 53 | required |
-| nl | 0 | 0 | 194 | required |
-| bs | 0 | 0 | 207 | required |
-| bg | 0 | 0 | 66 | required |
-| hr | 0 | 0 | 177 | required |
-| el | 0 | 0 | 62 | required |
-| cs | 0 | 0 | 198 | required |
-| da | 0 | 0 | 215 | required |
-| et | 0 | 0 | 188 | required |
-| fi | 0 | 0 | 171 | required |
-| hu | 0 | 0 | 203 | required |
-| is | 0 | 0 | 166 | required |
-| ga | 0 | 0 | 245 | required |
-| it | 0 | 0 | 189 | required |
-| lv | 0 | 0 | 232 | required |
-| lt | 0 | 0 | 174 | required |
-| lb | 0 | 0 | 250 | required |
-| mk | 0 | 0 | 48 | required |
-| mt | 0 | 0 | 202 | required |
-| no | 0 | 0 | 230 | required |
-| pl | 0 | 0 | 186 | required |
-| ro | 0 | 0 | 209 | required |
-| sr | 0 | 0 | 38 | required |
-| sk | 0 | 0 | 219 | required |
-| sl | 0 | 0 | 210 | required |
-| sv | 0 | 0 | 188 | required |
-| uk | 0 | 0 | 82 | required |
-| ht | 0 | 0 | 264 | required |
-| gn | 0 | 0 | 227 | required |
-| qu | 0 | 0 | 242 | required |
-| hy | 0 | 0 | 126 | required |
-| az | 0 | 0 | 236 | required |
-| ka | 0 | 0 | 75 | required |
+| pt | 0 | 0 | 173 | required |
+| id | 0 | 0 | 207 | required |
+| ur | 0 | 0 | 104 | required |
+| ru | 0 | 0 | 56 | required |
+| de | 0 | 0 | 186 | required |
+| ja | 0 | 0 | 73 | required |
+| pcm | 0 | 0 | 719 | required |
+| tr | 0 | 0 | 250 | required |
+| sq | 0 | 0 | 243 | required |
+| ca | 0 | 0 | 227 | required |
+| be | 0 | 0 | 52 | required |
+| nl | 0 | 0 | 192 | required |
+| bs | 0 | 0 | 203 | required |
+| bg | 0 | 0 | 64 | required |
+| hr | 0 | 0 | 178 | required |
+| el | 0 | 0 | 59 | required |
+| cs | 0 | 0 | 192 | required |
+| da | 0 | 0 | 213 | required |
+| et | 0 | 0 | 181 | required |
+| fi | 0 | 0 | 163 | required |
+| hu | 0 | 0 | 191 | required |
+| is | 0 | 0 | 155 | required |
+| ga | 0 | 0 | 243 | required |
+| it | 0 | 0 | 181 | required |
+| lv | 0 | 0 | 230 | required |
+| lt | 0 | 0 | 163 | required |
+| lb | 0 | 0 | 244 | required |
+| mk | 0 | 0 | 50 | required |
+| mt | 0 | 0 | 200 | required |
+| no | 0 | 0 | 221 | required |
+| pl | 0 | 0 | 175 | required |
+| ro | 0 | 0 | 196 | required |
+| sr | 0 | 0 | 39 | required |
+| sk | 0 | 0 | 211 | required |
+| sl | 0 | 0 | 203 | required |
+| sv | 0 | 0 | 181 | required |
+| uk | 0 | 0 | 83 | required |
+| ht | 0 | 0 | 254 | required |
+| gn | 0 | 0 | 214 | required |
+| qu | 0 | 0 | 232 | required |
+| hy | 0 | 0 | 128 | required |
+| az | 0 | 0 | 229 | required |
+| ka | 0 | 0 | 69 | required |
 
 ## Limitations
 

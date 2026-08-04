@@ -39,14 +39,24 @@ test("catalogs reject replacement characters, bidi overrides, and executable tra
 
 test("the public report is honest, source-bound, and remains non-authorizing", () => {
   assert.equal(report.scope.locales, 50);
+  assert.equal(report.scope.canonicalStrings, Object.keys(catalog.messages.en).length);
+  assert.equal(report.scope.languageQaResults, 5000);
   assert.equal(report.outcome.automatedCatalogCompleteness, "PASS");
   assert.equal(report.outcome.criticalEnglishFallbackGate, "PASS");
+  assert.equal(report.outcome.sourceBoundLanguageScorecard, "HOLD");
+  assert.equal(report.outcome.sourceBoundRenderEvidence, "PASS");
   assert.match(report.outcome.nativeLanguageSignoff, /^HOLD/);
   assert.match(report.mainnetDecision, /^HOLD/);
   assert.equal(report.deploymentPerformed, false);
   assert.equal(report.browserQa.allLocaleRootMatrix.localeCount, 50);
   assert.equal(report.browserQa.allLocaleRootMatrix.failures, 0);
   assert.equal(report.browserQa.responsiveMatrix.failures, 0);
+  assert.deepEqual(report.scorecard.summary, { PASS: 4544, FAIL: 0, HOLD: 456, NOT_RUN: 0 });
+  assert.equal(report.scorecard.assurance.nativeQualityClaimAllowed, false);
+  assert.equal(report.scorecard.assurance.releaseApproved, false);
+  assert.equal(report.renderEvidence.status, "PASS");
+  assert.equal(report.renderEvidence.scope.localeCount * report.renderEvidence.scope.claimedChecksPerLocale, 1250);
+  assert.match(report.historicalValidation.provenance, /does not claim these commands were rerun/u);
   for (const file of Object.values(report.files)) assert.match(file.sha256, /^[a-f0-9]{64}$/);
 });
 
