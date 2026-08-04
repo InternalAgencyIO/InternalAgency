@@ -45,5 +45,9 @@ expectFail("global summary drift", (scorecard) => { scorecard.summary.PASS -= 1;
 expectFail("lane summary drift", (scorecard) => { scorecard.lanes.render.summary.PASS -= 1; }, /render lane summary mismatch/u);
 expectFail("invalid locale digest", (scorecard) => { scorecard.locales[0].localeMessagesSha256 = "0"; }, /invalid locale digest/u);
 expectFail("release assurance bypass", (scorecard) => { scorecard.assurance.releaseApproved = true; }, /assurance flags must remain false/u);
+expectFail("missing source commit", (scorecard) => { scorecard.sourceBinding.headCommit = "0".repeat(40); }, /source commit is unavailable/u);
+expectFail("source tree substitution", (scorecard) => { scorecard.sourceBinding.headTree = "0".repeat(40); }, /source tree mismatch/u);
+expectFail("source digest substitution", (scorecard) => { scorecard.sourceBinding.definitionSha256 = "0".repeat(64); }, /definitionSha256 mismatch/u);
+expectFail("dirty source claim", (scorecard) => { scorecard.sourceBinding.worktreeDirty = true; }, /clean source worktree/u);
 
-console.log("Language QA HOLD ledger regression passed: exact 50 x 100 topology, unique ordered locale/check identities, status/mode/evidence structure, recomputed summaries, source digests, and fail-closed assurances survived 11 mutation probes.");
+console.log("Language QA HOLD ledger regression passed: exact 50 x 100 topology, unique ordered locale/check identities, status/mode/evidence structure, recomputed summaries, Git-resolved commit/tree/input digests, and fail-closed assurances survived 15 mutation probes.");

@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -17,6 +18,14 @@ const expectedCheckIds = Array.from(
 );
 const statusVocabulary = ["PASS", "FAIL", "HOLD", "NOT_RUN"];
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const canonical = (value) => {
+  if (Array.isArray(value)) return `[${value.map(canonical).join(",")}]`;
+  if (value && typeof value === "object") {
+    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonical(value[key])}`).join(",")}}`;
+  }
+  return JSON.stringify(value);
+};
+const canonicalDigest = (bytes) => sha256(canonical(JSON.parse(bytes.toString("utf8"))));
 const sameJson = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const summarize = (results) => results.reduce(
   (summary, result) => ({ ...summary, [result.status]: summary[result.status] + 1 }),
@@ -34,7 +43,7 @@ const expectedMode = (index) => {
   return "NATIVE";
 };
 
-export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBytes }) {
+export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBytes, repoRoot = resolve(process.cwd(), "../../..") }) {
   const scorecard = JSON.parse(scorecardBytes.toString("utf8"));
   const ledger = JSON.parse(ledgerBytes.toString("utf8"));
   const check = (condition, message) => {
@@ -104,7 +113,41 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
   ]) {
     check(/^[0-9a-f]{64}$/u.test(scorecard.sourceBinding?.[field]), `scorecard source binding ${field} is invalid`);
   }
-  check(typeof scorecard.sourceBinding.worktreeDirty === "boolean", "scorecard worktree state must be explicit");
+  check(scorecard.sourceBinding.worktreeDirty === false, "public scorecard must bind a clean source worktree");
+  check(scorecard.sourceBinding.worktreeStatusSha256 === sha256(""), "clean scorecard worktree-status digest mismatch");
+
+  const git = (args) => {
+    try {
+      return execFileSync("git", args, {
+        cwd: repoRoot,
+        encoding: args[0] === "show" ? null : "utf8",
+        maxBuffer: 64 * 1024 * 1024,
+        windowsHide: true,
+        stdio: ["ignore", "pipe", "ignore"],
+      });
+    } catch {
+      return null;
+    }
+  };
+  const sourceCommit = scorecard.sourceBinding.headCommit;
+  check(git(["cat-file", "-e", `${sourceCommit}^{commit}`]) !== null, "scorecard source commit is unavailable");
+  const sourceTree = git(["rev-parse", `${sourceCommit}^{tree}`]);
+  check(sourceTree?.trim() === scorecard.sourceBinding.headTree, "scorecard source tree mismatch");
+
+  const sourceFiles = {
+    definitionSha256: ["projects/star-ascent/site/app/i18n/language-qa-checks.v1.json", (bytes) => sha256(bytes)],
+    messagesFileSha256: ["projects/star-ascent/site/app/i18n/messages.json", (bytes) => sha256(bytes)],
+    criticalSha256: ["projects/star-ascent/site/app/i18n/critical-ui-source.json", canonicalDigest],
+    overridesSha256: ["projects/star-ascent/site/app/i18n/critical-ui-overrides.json", canonicalDigest],
+    metadataSha256: ["projects/star-ascent/site/app/i18n/metadata.generated.json", canonicalDigest],
+    routeSeoSha256: ["projects/star-ascent/site/app/i18n/route-seo.json", canonicalDigest],
+    pendingSha256: ["projects/star-ascent/site/app/i18n/pending-visible-source.json", canonicalDigest],
+  };
+  for (const [field, [sourcePath, digest]] of Object.entries(sourceFiles)) {
+    const bytes = git(["show", `${sourceCommit}:${sourcePath}`]);
+    check(bytes !== null, `scorecard source file is unavailable: ${sourcePath}`);
+    check(digest(bytes) === scorecard.sourceBinding[field], `scorecard source binding ${field} mismatch`);
+  }
 
   check(ledger.schemaVersion === 1, "unexpected ledger schema version");
   check(ledger.status === "HOLD", "ledger must remain HOLD");
@@ -167,6 +210,7 @@ function main() {
   const result = validateLanguageQaHoldLedgerArtifacts({
     scorecardBytes: readArtifact("language-qa-scorecard.json"),
     ledgerBytes: readArtifact("hold-remediation-ledger.json"),
+    repoRoot,
   });
   console.log(`Language QA HOLD ledger valid: ${result.summary.PASS} PASS, ${result.summary.FAIL} FAIL, ${result.summary.HOLD} HOLD, ${result.summary.NOT_RUN} NOT_RUN; ${result.externalHoldCount} external-evidence gates and ${result.heuristicHoldCount} heuristic editorial reviews remain fail closed across 50 locales.`);
 }
