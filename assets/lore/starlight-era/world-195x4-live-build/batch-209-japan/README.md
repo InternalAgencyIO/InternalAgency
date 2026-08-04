@@ -1,16 +1,16 @@
 # World 195x4 Live Build — Batch 209 Japan
 
-This directory publishes durable, non-final production checkpoints for the Japan Mile High country batch while it is being completed.
+This directory publishes the durable production history and validated finals for the Japan Mile High country batch.
 
-The files are identity-preserving relationship and silhouette stage masters. They are not archived campaign finals and are not X-eligible until the remaining refinement, triggered-detail, validation, campaign-accounting, commit, and push gates pass.
+The files include identity-preserving relationship, silhouette, refinement, triggered-detail and recovery masters plus all four archived campaign finals. X eligibility remains governed by the separate publication ledger.
 
 Current checkpoint:
 
 - Four relationship masters are accepted.
 - Four concise silhouette masters and four refinement masters are accepted.
-- Tokyo, Himeji, and Yokohama are validated finals. Fuji remains the sole unresolved lane; its PAWS-and-wrist-jewelry recovery foundation is accepted, with three previously accepted accents queued for one-variable replay.
+- Tokyo, Himeji, Fuji and Yokohama are validated finals. Fuji completed its recovery branch through three sequential one-variable replays without returning to the artifacted older master.
 - The prior country-post reservation is confirmed published and the X backlog is reconciled empty; paused cover work remains outside this build.
-- PAWS is present in every unfinalized Japan promotion image, while validated Tokyo 856 remains grandfathered under the campaign contract.
-- All 33 checkpoint files are fully opaque, public-safe, and SHA-256 recorded in `asset-manifest.json`.
+- PAWS is present in Japan promotion images 857â€“859, while validated Tokyo 856 remains grandfathered under the campaign contract.
+- All 37 checkpoint files are fully opaque, public-safe, and SHA-256 recorded in `asset-manifest.json`.
 
 No browser state, credentials, Drive identifiers, machine-local paths, rejected media, or unrelated repository changes are included.
