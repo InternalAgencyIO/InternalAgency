@@ -25,15 +25,21 @@ const baseUrl = process.env.I18N_BASE_URL
   ?? (startServer ? `http://127.0.0.1:${await reserveLoopbackPort()}` : "http://localhost:4177");
 let serverProcess = null;
 if (startServer) {
+  let serverOutput = "";
   serverProcess = spawn(process.execPath, ["./node_modules/vinext/dist/cli.js", "dev", "-H", new URL(baseUrl).hostname, "-p", new URL(baseUrl).port || "4177"], {
     cwd: root,
-    stdio: "ignore",
+    stdio: ["ignore", "pipe", "pipe"],
     windowsHide: true,
   });
+  const recordOutput = (chunk) => {
+    serverOutput = `${serverOutput}${chunk.toString("utf8")}`.slice(-8_000);
+  };
+  serverProcess.stdout.on("data", recordOutput);
+  serverProcess.stderr.on("data", recordOutput);
   let ready = false;
-  for (let attempt = 0; attempt < 40; attempt += 1) {
+  for (let attempt = 0; attempt < 120; attempt += 1) {
     if (serverProcess.exitCode !== null) {
-      throw new Error(`Vinext capture server exited before readiness with code ${serverProcess.exitCode}`);
+      throw new Error(`Vinext capture server exited before readiness with code ${serverProcess.exitCode}\n${serverOutput}`);
     }
     try {
       const response = await fetch(baseUrl, { signal: AbortSignal.timeout(2_000) });
@@ -46,7 +52,7 @@ if (startServer) {
   }
   if (!ready) {
     serverProcess.kill();
-    throw new Error(`Vinext capture server did not become ready at ${baseUrl}`);
+    throw new Error(`Vinext capture server did not become ready at ${baseUrl}\n${serverOutput}`);
   }
 }
 

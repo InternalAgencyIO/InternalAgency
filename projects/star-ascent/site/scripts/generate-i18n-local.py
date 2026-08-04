@@ -36,7 +36,7 @@ LANGUAGES = {
 
 PROTECTED_TERMS = [
     "Internal Agency", "STAR ASCENT", "$IAT", "$SOL", "IAT", "SOLANA", "Solana", "Model T", "Genesis",
-    "APY", "CCC-Agent", "Radiance", "Ellie", "Alia", "UTC", "İSTANBUL",
+    "APY", "CCC-Agent", "Radiance", "Ellie", "Alia", "UTC", "İSTANBUL", "Devnet", "CC0", "FDF Guard", "mainnet", "HOLD",
 ]
 APPROVED_EQUIVALENTS = {
     "tr": {"Internal Agency": "İleri Akıl", "Genesis": "Başlangıç"},
@@ -176,6 +176,9 @@ def translate_sources(model, tokenizer, device, target_language: str, sources: l
         language_sources = [source for source in sources if source_language(source) == detected_language]
         if not language_sources:
             continue
+        if detected_language == target_language:
+            output.update({source: source for source in language_sources})
+            continue
         tokenizer.src_lang = detected_language
         output.update(translate_sources_for_language(model, tokenizer, device, target_language, language_sources, model_batch_size))
     return output
@@ -282,8 +285,15 @@ def main() -> None:
     for locale, overrides in critical_overrides.items():
         catalog["messages"][locale].update(overrides)
         catalog["messages"][locale] = {source: catalog["messages"][locale][source] for source in sources}
-    catalog["meta"]["translationEngine"] = MODEL_ID
-    catalog["meta"]["translationMode"] = "local GPU generation; static committed output; no runtime translation service"
+    remote_assisted = "remote-assisted" in catalog.get("meta", {}).get("translationMode", "")
+    catalog["meta"]["translationEngine"] = (
+        f"mixed cached {MODEL_ID} plus Google Translate draft gap fill"
+        if remote_assisted else MODEL_ID
+    )
+    catalog["meta"]["translationMode"] = (
+        "remote-assisted and local GPU draft generation; static committed output; no runtime translation service; native review required"
+        if remote_assisted else "local GPU generation; static committed output; no runtime translation service"
+    )
     catalog["meta"]["criticalUiSourceDigest"] = critical_source_digest
     persist(catalog)
     print(f"Completed {len(LANGUAGES) + 1} locale catalogs.", flush=True)

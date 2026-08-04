@@ -93,6 +93,25 @@ test("renders reconciled future previews in both public languages", async () => 
   assert.match(turkish[2], /\$IAT BAŞLANGICINDAN 15 GÜN SONRA/);
 });
 
+test("renders proof copy in Turkish on both Turkish public routes before hydration", async () => {
+  const [prefixed, dedicatedHost] = await Promise.all([
+    render("https://internalagency.io/tr/proof"),
+    render("https://ileriakil.com/proof"),
+  ]);
+  const [prefixedHtml, dedicatedHostHtml] = await Promise.all([
+    prefixed.text(),
+    dedicatedHost.text(),
+  ]);
+  const englishLeak = /Every non-secret Devnet export and the separate local time-gate proof/;
+  const turkishCopy = /Gizli olmayan tüm Devnet dışa aktarımları ve ayrı yerel zaman kapısı kanıtı/;
+
+  for (const html of [prefixedHtml, dedicatedHostHtml]) {
+    assert.match(html, /<html lang="tr"/i);
+    assert.match(html, turkishCopy);
+    assert.doesNotMatch(html, englishLeak);
+  }
+});
+
 test("renders the STAR ASCENT launch page and transparent disclosure", async () => {
   const response = await render();
   assert.equal(response.status, 200);

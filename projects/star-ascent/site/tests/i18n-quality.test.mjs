@@ -31,6 +31,7 @@ test("catalogs reject replacement characters, bidi overrides, and executable tra
     for (const [source, translation] of Object.entries(messages)) {
       assert.doesNotMatch(translation, /\uFFFD/, `${locale} replacement character in ${source}`);
       assert.doesNotMatch(translation, /[\u202A-\u202E\u2066-\u2069]/u, `${locale} bidi override/isolate in ${source}`);
+      assert.doesNotMatch(translation, /__IA_(?:TERM|EXACT)_[A-Z]+__/u, `${locale} unresolved placeholder in ${source}`);
       assert.doesNotMatch(translation, /<script\b|javascript:/i, `${locale} executable text in ${source}`);
     }
   }

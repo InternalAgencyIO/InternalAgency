@@ -1,6 +1,5 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { headers } from "next/headers";
+import { localeFromRequestHeaders } from "../i18n/config";
 
 const EVIDENCE_ROOT = "/evidence/iat-v2";
 const GITHUB_EVIDENCE =
@@ -110,9 +109,12 @@ const copy = {
   },
 };
 
-export default function ProofPage() {
-  const [language, setLanguage] = useState<"en" | "tr">("en");
-  useEffect(() => { if (window.location.hostname.includes("ileriakil")) setLanguage("tr"); }, []);
+export default async function ProofPage() {
+  const requestHeaders = await headers();
+  const language = localeFromRequestHeaders(
+    requestHeaders.get("x-ia-locale"),
+    requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host"),
+  ) === "tr" ? "tr" : "en";
   const t = copy[language];
   return <main className="proof-page"><div className="proof-stars" aria-hidden="true" /><nav><a href="/">IA<span>///</span></a><a href="/launch">{t.launch} ↗</a></nav>
     <section className="proof-hero"><p>{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lede}</p></section>

@@ -101,7 +101,7 @@ export const locales: readonly LocaleDefinition[] = [
   { code: "no", name: "Norwegian", nativeName: "Norsk", dir: "ltr", googleCode: "no" },
   { code: "pl", name: "Polish", nativeName: "Polski", dir: "ltr", googleCode: "pl" },
   { code: "ro", name: "Romanian", nativeName: "Română", dir: "ltr", googleCode: "ro" },
-  { code: "sr", name: "Serbian / Montenegrin", nativeName: "Srpski / Crnogorski", dir: "ltr", googleCode: "sr" },
+  { code: "sr", name: "Serbian (Cyrillic)", nativeName: "Српски", dir: "ltr", googleCode: "sr" },
   { code: "sk", name: "Slovak", nativeName: "Slovenčina", dir: "ltr", googleCode: "sk" },
   { code: "sl", name: "Slovenian", nativeName: "Slovenščina", dir: "ltr", googleCode: "sl" },
   { code: "sv", name: "Swedish", nativeName: "Svenska", dir: "ltr", googleCode: "sv" },

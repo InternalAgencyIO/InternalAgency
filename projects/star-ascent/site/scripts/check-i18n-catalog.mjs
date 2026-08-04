@@ -9,19 +9,29 @@ const expectedLocales = [
   "hy", "az", "ka",
 ];
 const sourceKeys = Object.keys(catalog.messages.en);
+const sitemapSource = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
+const sitemapRoutes = [...sitemapSource.matchAll(/\{\s*path:\s*"([^"]*)"/g)]
+  .map((match) => match[1] || "/")
+  .sort();
 const criticalUi = JSON.parse(await readFile(new URL("../app/i18n/critical-ui-source.json", import.meta.url), "utf8"));
 const criticalUiOverrides = JSON.parse(await readFile(new URL("../app/i18n/critical-ui-overrides.json", import.meta.url), "utf8"));
 const protectedTerms = [
   "Internal Agency", "STAR ASCENT", "$IAT", "$SOL", "IAT", "SOLANA", "Solana", "Model T", "Genesis",
-  "APY", "CCC-Agent", "Radiance", "Ellie", "Alia", "UTC", "İSTANBUL",
+  "APY", "CCC-Agent", "Radiance", "Ellie", "Alia", "UTC", "İSTANBUL", "Devnet", "CC0", "FDF Guard", "mainnet", "HOLD",
 ];
 const approvedEquivalents = {
   tr: { "Internal Agency": "İleri Akıl", Genesis: "Başlangıç" },
 };
 const exactTokenPattern = /https?:\/\/[^\s]+|@[A-Za-z0-9_]+|\$[A-Z][A-Z0-9_-]*|\bT\+\d+(?:[.,:]\d+)*\b/g;
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+const containsProtectedTerm = (value, term) => new RegExp(
+  `(?<![\\p{L}\\p{N}])${escapeRegex(term)}(?![\\p{L}\\p{N}])`,
+  "u",
+).test(value);
 
 assert.ok(sourceKeys.length >= 250, `Expected a whole-site catalog, found only ${sourceKeys.length} source strings`);
 assert.equal(catalog.meta.sourceCount, sourceKeys.length, "Catalog source count must match English keys");
+assert.deepEqual(catalog.meta.renderedRoutes, sitemapRoutes, "Catalog extraction must cover all 25 canonical sitemap routes");
 assert.deepEqual(Object.keys(catalog.messages), expectedLocales, "Catalog locale order changed unexpectedly");
 for (const source of Object.values(criticalUi)) {
   assert.ok(sourceKeys.includes(source), `Critical UI source is absent from the canonical catalog: ${source}`);
@@ -35,12 +45,18 @@ for (const locale of expectedLocales) {
     assert.ok(catalog.messages[locale][source].trim(), `${locale} has an empty translation for ${source}`);
     for (const protectedTerm of protectedTerms) {
       const approved = approvedEquivalents[locale]?.[protectedTerm];
-      if (source.includes(protectedTerm)) assert.ok(
-        catalog.messages[locale][source].includes(protectedTerm) || Boolean(approved && catalog.messages[locale][source].includes(approved)),
+      if (containsProtectedTerm(source, protectedTerm)) assert.ok(
+        catalog.messages[locale][source].includes(protectedTerm)
+          || Boolean(approved && catalog.messages[locale][source].includes(approved)),
         `${locale} changed protected term ${protectedTerm}`,
       );
     }
     assert.doesNotMatch(catalog.messages[locale][source], /ZXQTERM\d+QXZ/i, `${locale} leaked a translation placeholder for ${source}`);
+    assert.doesNotMatch(
+      catalog.messages[locale][source],
+      /__IA_(?:TERM|EXACT)_[A-Z]+__/u,
+      `${locale} leaked an IAT translation placeholder for ${source}`,
+    );
     for (const number of source.match(/(?<![\p{L}\p{N}_])\d+(?:[.,:]\d+)*(?:[A-Za-z]+|%)?(?![\p{L}\p{N}_])/gu) ?? []) {
       assert.ok(catalog.messages[locale][source].includes(number), `${locale} changed numeric/unit token ${number} in ${source}`);
     }
@@ -83,10 +99,7 @@ assert.match(catalog.meta.translationMode ?? "", /static committed output/i, "Ca
 
 const metadata = JSON.parse(await readFile(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8"));
 const routeSeo = JSON.parse(await readFile(new URL("../app/i18n/route-seo.json", import.meta.url), "utf8"));
-const sitemapSource = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
-const sitemapPaths = [...sitemapSource.matchAll(/\{\s*path:\s*"([^"]*)"/g)]
-  .map((match) => match[1] || "/");
-for (const publicPath of sitemapPaths) {
+for (const publicPath of sitemapRoutes) {
   assert.ok(routeSeo[publicPath], `Sitemap route is missing route-specific SEO copy: ${publicPath}`);
 }
 const routeSeoSources = [...new Set(Object.values(routeSeo).flatMap(({ title, description }) => [title, description]))];
