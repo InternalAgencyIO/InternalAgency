@@ -106,11 +106,13 @@ published as passing.
 Run `npm run check:i18n:live` to compare every one of the 50 committed locale
 payloads byte-for-byte on both active public domains. The verifier also checks
 one rendered Network page for every locale on both domains: 100 route checks
-for successful HTML responses, HTML content type, a non-trivial response body,
-and the expected `lang` attribute. Cache-busting request parameters and
-no-cache headers reduce stale edge-cache ambiguity. The command is deliberately
-separate from offline CI: it requires network access, changes no hosting or
-chain state, and does not deploy.
+for successful HTML responses, exact origin/path without redirects, HTML
+content type, exact `Content-Language`, a non-trivial response body, and the
+expected `lang` and LTR/RTL attributes. Payload checks likewise require JSON
+content type and exact no-redirect origin/path ownership before comparing
+SHA-256. Cache-busting request parameters and no-cache headers reduce stale
+edge-cache ambiguity. The command is deliberately separate from offline CI: it
+requires network access, changes no hosting or chain state, and does not deploy.
 
 Passing proves that the checked public payload bytes match the committed
 catalog and that every locale has a checked public route on each domain. It

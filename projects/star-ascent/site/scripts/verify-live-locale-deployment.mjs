@@ -9,9 +9,20 @@ const contractPath = resolve(siteRoot, "app/i18n/payload-contract.json");
 const payloadRoot = resolve(siteRoot, "public");
 
 const domains = ["https://internalagency.io", "https://ileriakil.com"];
+const rtlLocales = new Set(["ar", "ur"]);
 
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const htmlLanguageTag = (locale) => (locale === "zh" ? "zh-Hans" : locale === "sr" ? "sr-Cyrl" : locale);
+
+function responseIdentityError(requestedUrl, response) {
+  const requested = new URL(requestedUrl);
+  const final = new URL(response.url);
+  if (response.redirected) return `unexpected redirect to ${response.url}`;
+  if (final.origin !== requested.origin || final.pathname !== requested.pathname) {
+    return `final origin/path ${final.origin}${final.pathname} != ${requested.origin}${requested.pathname}`;
+  }
+  return null;
+}
 
 async function fetchBytes(url) {
   const response = await fetch(url, {
@@ -85,6 +96,11 @@ const payloadResults = await mapConcurrent(payloadJobs, 10, async ({ domain, loc
   if (response.status !== 200) {
     return { ok: false, label, detail: `HTTP ${response.status} at ${url}` };
   }
+  const identityError = responseIdentityError(url, response);
+  if (identityError) return { ok: false, label, detail: identityError };
+  if (!response.headers.get("content-type")?.toLowerCase().includes("application/json")) {
+    return { ok: false, label, detail: `unexpected content type ${response.headers.get("content-type") ?? "missing"}` };
+  }
   if (actualHash !== expectedHash) {
     return {
       ok: false,
@@ -101,23 +117,37 @@ const pageJobs = domains.flatMap((domain) =>
     return { domain, locale, route, expectedLang: htmlLanguageTag(locale), label: `${domain}${route}` };
   }),
 );
-const pageResults = await mapConcurrent(pageJobs, 8, async ({ domain, route, expectedLang, label }) => {
+const pageResults = await mapConcurrent(pageJobs, 8, async ({ domain, locale, route, expectedLang, label }) => {
   const url = `${domain}${route}?verify=${cacheBuster}`;
   const { response, bytes } = await fetchBytes(url);
   const html = bytes.toString("utf8");
   const actualLang = html.match(/<html[^>]*\blang=["']([^"']+)/i)?.[1];
+  const actualDir = html.match(/<html[^>]*\bdir=["']([^"']+)/i)?.[1];
+  const expectedDir = rtlLocales.has(locale) ? "rtl" : "ltr";
 
   if (response.status !== 200) {
     return { ok: false, label, detail: `HTTP ${response.status} at ${url}` };
   }
+  const identityError = responseIdentityError(url, response);
+  if (identityError) return { ok: false, label, detail: identityError };
   if (!response.headers.get("content-type")?.toLowerCase().includes("text/html")) {
     return { ok: false, label, detail: `unexpected content type ${response.headers.get("content-type") ?? "missing"}` };
+  }
+  if (response.headers.get("content-language")?.toLowerCase() !== locale) {
+    return {
+      ok: false,
+      label,
+      detail: `Content-Language ${response.headers.get("content-language") ?? "missing"} != ${locale}`,
+    };
   }
   if (bytes.length < 1_000) {
     return { ok: false, label, detail: `unexpectedly small HTML response (${bytes.length} bytes)` };
   }
   if (actualLang !== expectedLang) {
     return { ok: false, label, detail: `HTML lang ${actualLang ?? "missing"} != ${expectedLang}` };
+  }
+  if (actualDir !== expectedDir) {
+    return { ok: false, label, detail: `HTML dir ${actualDir ?? "missing"} != ${expectedDir}` };
   }
   return { ok: true, label };
 });
