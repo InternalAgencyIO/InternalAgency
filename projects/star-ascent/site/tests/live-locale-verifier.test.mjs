@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  cachePolicyError,
   responseIdentityError,
   runtimeBundleError,
   runtimeParityError,
@@ -40,6 +41,27 @@ test("response identity accepts only the exact requested origin and path without
     responseIdentityError(requested, { redirected: false, url: "https://internalagency.io/assets/other.js" }),
     /final origin\/path/,
   );
+});
+
+test("cache policy prevents stale HTML and safely handles content-addressed assets", () => {
+  assert.equal(
+    cachePolicyError({ cacheControl: "no-store, must-revalidate", contentAddressed: false }),
+    null,
+  );
+  assert.equal(
+    cachePolicyError({ cacheControl: "public, max-age=0, must-revalidate", contentAddressed: true }),
+    null,
+  );
+  assert.equal(
+    cachePolicyError({ cacheControl: "public, max-age=31536000, immutable", contentAddressed: true }),
+    null,
+  );
+  assert.match(cachePolicyError({ cacheControl: "max-age=300", contentAddressed: false }), /HTML cache policy/);
+  assert.match(
+    cachePolicyError({ cacheControl: "public, max-age=3600", contentAddressed: true }),
+    /content-addressed response/,
+  );
+  assert.match(cachePolicyError({ cacheControl: null, contentAddressed: false }), /missing/);
 });
 
 test("runtime bundle contract accepts a complete current fingerprint", () => {

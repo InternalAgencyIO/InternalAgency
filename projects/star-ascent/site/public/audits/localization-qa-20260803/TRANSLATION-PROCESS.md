@@ -130,6 +130,9 @@ contract markers, and the retired payload path all fail closed.
 The two domains must also reference the same fingerprinted runtime path and
 serve byte-identical runtime SHA-256; a stale domain therefore fails even when
 its older bundle still contains individually valid contract markers.
+Rendered HTML must be `no-store, must-revalidate`. Content-addressed locale
+payloads and runtime bundles must either be immutable or use immediate
+`max-age=0, must-revalidate`; missing or permissive stale-cache policies fail.
 
 Passing proves that the checked public payload bytes match the committed
 catalog, every locale has a checked public route on each domain, and each

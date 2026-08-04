@@ -2,7 +2,12 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { responseIdentityError, runtimeBundleError, runtimeParityError } from "./live-locale-verifier-lib.mjs";
+import {
+  cachePolicyError,
+  responseIdentityError,
+  runtimeBundleError,
+  runtimeParityError,
+} from "./live-locale-verifier-lib.mjs";
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const catalogPath = resolve(siteRoot, "app/i18n/messages.json");
@@ -92,6 +97,11 @@ const payloadResults = await mapConcurrent(payloadJobs, 10, async ({ domain, loc
   if (!response.headers.get("content-type")?.toLowerCase().includes("application/json")) {
     return { ok: false, label, detail: `unexpected content type ${response.headers.get("content-type") ?? "missing"}` };
   }
+  const cacheError = cachePolicyError({
+    cacheControl: response.headers.get("cache-control"),
+    contentAddressed: true,
+  });
+  if (cacheError) return { ok: false, label, detail: cacheError };
   if (actualHash !== expectedHash) {
     return {
       ok: false,
@@ -124,6 +134,11 @@ const pageResults = await mapConcurrent(pageJobs, 8, async ({ domain, locale, ro
   if (!response.headers.get("content-type")?.toLowerCase().includes("text/html")) {
     return { ok: false, label, detail: `unexpected content type ${response.headers.get("content-type") ?? "missing"}` };
   }
+  const cacheError = cachePolicyError({
+    cacheControl: response.headers.get("cache-control"),
+    contentAddressed: false,
+  });
+  if (cacheError) return { ok: false, label, detail: cacheError };
   if (response.headers.get("content-language")?.toLowerCase() !== locale) {
     return {
       ok: false,
@@ -174,6 +189,11 @@ const runtimeResults = await mapConcurrent(runtimeJobs, 2, async ({ domain, labe
   }
   const runtimeIdentityError = responseIdentityError(runtimeUrl, response);
   if (runtimeIdentityError) return { ok: false, label, detail: runtimeIdentityError };
+  const cacheError = cachePolicyError({
+    cacheControl: response.headers.get("cache-control"),
+    contentAddressed: true,
+  });
+  if (cacheError) return { ok: false, label, detail: cacheError };
   const bundleError = runtimeBundleError({
     contentType: response.headers.get("content-type"),
     bytes,
@@ -203,7 +223,7 @@ if (failures.length > 0) {
     `Live locale deployment PASS: ${payloadResults.length}/${payloadResults.length} exact payloads and ` +
       `${pageResults.length}/${pageResults.length} locale pages and ` +
       `${runtimeResults.length}/${runtimeResults.length} matching locale runtime bundles across ` +
-      `${domains.length} active domains; ` +
+      `${domains.length} active domains with freshness-safe cache policies; ` +
       `catalog ${contract.catalogSha256}.`,
   );
   console.log("Read-only verification only: no deployment, signing, funding, or chain state was changed.");

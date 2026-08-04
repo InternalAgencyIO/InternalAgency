@@ -8,6 +8,18 @@ export function responseIdentityError(requestedUrl, response) {
   return null;
 }
 
+export function cachePolicyError({ cacheControl, contentAddressed }) {
+  const policy = cacheControl?.toLowerCase() ?? "";
+  const directives = new Set(policy.split(",").map((directive) => directive.trim()).filter(Boolean));
+  if (contentAddressed) {
+    if (directives.has("immutable")) return null;
+    if (directives.has("max-age=0") && directives.has("must-revalidate")) return null;
+    return `content-addressed response cache policy is not immutable or immediately revalidated: ${cacheControl ?? "missing"}`;
+  }
+  if (directives.has("no-store") && directives.has("must-revalidate")) return null;
+  return `HTML cache policy is not no-store and must-revalidate: ${cacheControl ?? "missing"}`;
+}
+
 export function runtimeBundleError({ contentType, bytes, contract }) {
   if (!contentType?.toLowerCase().includes("javascript")) {
     return `unexpected runtime content type ${contentType ?? "missing"}`;
