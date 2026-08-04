@@ -283,12 +283,15 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
     check(gate.disposition.startsWith("BLOCKED_"), "external evidence must remain blocked");
   }
 
-  for (const priority of ledger.priorityLocales) {
-    const localeHolds = heuristicHolds.filter(({ locale }) => locale === priority.locale);
-    check(priority.heuristicHoldCount === localeHolds.length, `priority count mismatch for ${priority.locale}`);
-    check(sameJson(priority.checkIds, localeHolds.map(({ id }) => id)), `priority check order mismatch for ${priority.locale}`);
-  }
-  check(ledger.priorityLocales.length === 5 && ledger.priorityLocales.every(({ heuristicHoldCount }) => heuristicHoldCount === 5), "priority queue must contain the five highest-density locales");
+  const expectedPriorityLocales = [...new Set(heuristicHolds.map(({ locale }) => locale))]
+    .map((locale) => {
+      const localeHolds = heuristicHolds.filter((entry) => entry.locale === locale);
+      return { locale, heuristicHoldCount: localeHolds.length, checkIds: localeHolds.map(({ id }) => id) };
+    })
+    .sort((left, right) => right.heuristicHoldCount - left.heuristicHoldCount)
+    .slice(0, 5);
+  check(sameJson(ledger.priorityLocales, expectedPriorityLocales), "priority queue must contain the five highest-density locales");
+  check(ledger.priorityLocales.every(({ heuristicHoldCount }) => heuristicHoldCount >= 5), "priority locale density unexpectedly fell below five HOLD checks");
   check(ledger.decisions.some(({ id, state }) => id === "LQA-HOLD-003" && state === "NO_RELEASE_CLAIM"), "no-release decision missing");
   check(Object.values(ledger.assurance).every((value) => value === false), "ledger assurance flags must remain false");
   check(ledger.limitations.length === 4, "limitation inventory drift");

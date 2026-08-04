@@ -1,18 +1,18 @@
 {
   "schema": "iat-language-qa-scorecard/v1",
-  "generatedAt": "2026-08-04T14:37:19.287Z",
+  "generatedAt": "2026-08-04T15:08:21.468Z",
   "sourceBinding": {
-    "headCommit": "a3df3668ac40ba7f527fcc8ebf86c088f8e7888a",
-    "headTree": "a930160b17ae63d40ded06344d9a514b2f6683c3",
+    "headCommit": "7965f4b8bed41420b14e1e2640b1989165e662fb",
+    "headTree": "6f176fe04aae631740a53986bc371cb4eb0de649",
     "worktreeDirty": false,
     "worktreeStatusSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "definitionSha256": "7781abc913b4d927519678f833164127e81fa2205cd66bc282bb70a9a47dae33",
-    "messagesFileSha256": "073d9b8d91d4122a62d79e2fdff5a1d71ef0bc9711ccf969625e3c2bd1f60d21",
+    "messagesFileSha256": "05dbc2cd3599b42e5af82b1a07715bd1328825637ed9144c8578fcd20ed79b84",
     "criticalSha256": "528d25b74c8f18ce1b5a84d70ef13879c5bf63444fcc184527863c48f34d3a34",
     "overridesSha256": "c9d4b411a741dad8808c68a442e16e5b1dc667674fb15e1bbb9895470f72148e",
-    "metadataSha256": "e453736018923c82071c7c627130aa4a7e08c0d24aab17bcd2d7d1c1c750264c",
+    "metadataSha256": "10331d7efa970167104a1ab5a651110224ee792e74ba577cb5edf2e227418c52",
     "routeSeoSha256": "3e930c5d8bf6e4a6c9ce14d273caf7628d68d1caf9f76479787058033c38aca7",
-    "pendingSha256": "6cd11905cd4e1d4255c88eed956054575035648c1fe33123acef31129b948082"
+    "pendingSha256": "6d637683843941b037333198dfa2020babef15dce13891612dc974d4a75284b2"
   },
   "scope": {
     "locales": 50,
@@ -35,18 +35,18 @@
   },
   "status": "HOLD",
   "summary": {
-    "PASS": 4544,
+    "PASS": 4538,
     "FAIL": 0,
-    "HOLD": 456,
+    "HOLD": 462,
     "NOT_RUN": 0
   },
   "lanes": {
     "static": {
       "status": "HOLD",
       "summary": {
-        "PASS": 3294,
+        "PASS": 3288,
         "FAIL": 0,
-        "HOLD": 206,
+        "HOLD": 212,
         "NOT_RUN": 0
       }
     },
@@ -1137,7 +1137,7 @@
     },
     {
       "locale": "zh",
-      "localeMessagesSha256": "fb8c52d0859db01ee75b5f5b3f4dcfea737226c03b415067afda4c8ba768fd44",
+      "localeMessagesSha256": "ef459fa3d341c5281080796100b48e77599fb7543ad72fe850aab4b60e8e3e33",
       "status": "HOLD",
       "summary": {
         "PASS": 89,
@@ -1701,7 +1701,7 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 16,
+            "warningCount": 12,
             "samples": [
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
@@ -1709,12 +1709,12 @@
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK TÖREN KODUNU İNCELE ↗",
-              "Casino DLC — Inactive Preview",
               "Internal Agency — STAR ASCENT",
               "RADIANCE, ELLIE & ALIA",
               "Shqip",
-              "Türkçe hazırlık puan kartını indir"
+              "Српски",
+              "日本語",
+              "简体中文"
             ]
           }
         },
@@ -1738,7 +1738,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.8591,
+            "ratio": 0.863,
             "threshold": 0.25
           }
         },
@@ -2221,7 +2221,7 @@
     },
     {
       "locale": "es",
-      "localeMessagesSha256": "d5672cb32d7a4f58c04a2af50c19aacc08704093e1c213d8ca94ab5675287a80",
+      "localeMessagesSha256": "859a6510b27c047841db075bf1e580a8bfd63c142fff304c391f224a49296dd1",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -2785,7 +2785,7 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 93,
+            "warningCount": 32,
             "samples": [
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
@@ -2793,12 +2793,12 @@
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "Altı zorunlu kayıt",
-              "ARZ TASARIM HEDEFİ"
+              "Bengali",
+              "Bosanski",
+              "Dansk",
+              "Eesti",
+              "Español",
+              "Guaraní"
             ]
           }
         },
@@ -2842,8 +2842,8 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0463,
-            "groups": 33,
+            "ratio": 0.0504,
+            "groups": 36,
             "samples": [
               [
                 "A signal.",
@@ -2854,16 +2854,16 @@
                 "Allocation controls"
               ],
               [
+                "Allocation map",
+                "Tahsis haritası"
+              ],
+              [
                 "Azerbaijani",
                 "Azərbaycanca"
               ],
               [
                 "Deutsch",
                 "German"
-              ],
-              [
-                "Dossier",
-                "DOSSIER"
               ]
             ]
           }
@@ -3291,7 +3291,7 @@
     },
     {
       "locale": "hi",
-      "localeMessagesSha256": "76a9c69804177cd44a923918c91af989bb3bf20ab0b4cbce3c7a99d5c76c2ed5",
+      "localeMessagesSha256": "2fc4501cec140f15f9749da5eade69cb82de335c05592efd00cfc0ba2816f929",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -3855,7 +3855,7 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 55,
+            "warningCount": 21,
             "samples": [
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
@@ -3863,12 +3863,12 @@
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Bahasa Indonesia"
+              "Bahasa Indonesia",
+              "CASINO DLC →",
+              "Internal Agency — STAR ASCENT",
+              "Lietuvių",
+              "RADIANCE, ELLIE & ALIA",
+              "Shqip"
             ]
           }
         },
@@ -3892,7 +3892,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.8501,
+            "ratio": 0.8698,
             "threshold": 0.25
           }
         },
@@ -3912,8 +3912,8 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.049,
-            "groups": 34,
+            "ratio": 0.0518,
+            "groups": 36,
             "samples": [
               [
                 "ALLOCATION CONTROL",
@@ -4373,7 +4373,7 @@
     },
     {
       "locale": "fr",
-      "localeMessagesSha256": "b827f4065d3441b13014474b4da3a2313b9914cb2fb56346c57c02df1555bebb",
+      "localeMessagesSha256": "22e44955e36ad8f58b786b8339d887d8f8c713d453e393a52e5d7365132e6f3c",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -4937,20 +4937,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 89,
+            "warningCount": 29,
             "samples": [
-              "[02] $IAT bir topluluk katmanıdır; getiri sözü değildir.",
-              "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı"
+              "Ana navigasyon",
+              "Bosanski",
+              "Catalan",
+              "Dansk",
+              "Français",
+              "Guaraní"
             ]
           }
         },
@@ -5453,7 +5453,7 @@
     },
     {
       "locale": "ar",
-      "localeMessagesSha256": "2519837503ec5a170a83199d12afbc0aef3beff1438df5da0bd212043a698f6a",
+      "localeMessagesSha256": "c41e38a47615c048e4bd5c96ff75119f6ec119e43a102bca1a6e08f5f3e7d1a6",
       "status": "HOLD",
       "summary": {
         "PASS": 89,
@@ -6017,7 +6017,7 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 36,
+            "warningCount": 15,
             "samples": [
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
@@ -6025,12 +6025,12 @@
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "DIŞ İLETİŞİM // GÜVENLİ",
-              "Dutch",
-              "EKİP // VARIŞ PENCERESİ",
-              "ETKİLEŞİM BU EKRANDA YERELDİR",
-              "GENESIS // AKTİVASYON TERMİNALİ",
-              "İçerik özetleri"
+              "Internal Agency — STAR ASCENT",
+              "RADIANCE, ELLIE & ALIA",
+              "Shqip",
+              "V2 · HOLD",
+              "ქართული",
+              "Հայերեն"
             ]
           }
         },
@@ -6054,7 +6054,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.903,
+            "ratio": 0.9131,
             "threshold": 0.25
           }
         },
@@ -6539,7 +6539,7 @@
     },
     {
       "locale": "bn",
-      "localeMessagesSha256": "e3f192365aff62f2b7c0e8d72fc9d9c59acc0b25b66b69c7eb5e755d75cfe940",
+      "localeMessagesSha256": "19acbae32e201d8a182acd3e55897f719875cc8a0fca5f092b85c6aff2aa866f",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -7103,7 +7103,7 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 66,
+            "warningCount": 22,
             "samples": [
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
@@ -7111,12 +7111,12 @@
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Ana navigasyon"
+              "Ana navigasyon",
+              "Internal Agency — STAR ASCENT",
+              "Lietuvių",
+              "RADIANCE, ELLIE & ALIA",
+              "Shqip",
+              "T−15"
             ]
           }
         },
@@ -7140,7 +7140,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.8162,
+            "ratio": 0.8441,
             "threshold": 0.25
           }
         },
@@ -7160,8 +7160,8 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0484,
-            "groups": 34,
+            "ratio": 0.0497,
+            "groups": 35,
             "samples": [
               [
                 "ALLOCATION CONTROL",
@@ -7622,7 +7622,7 @@
     },
     {
       "locale": "pt",
-      "localeMessagesSha256": "d33a9c8cdd4771a405fc695de4ca979247bf86ade814568442a7eb1950da771a",
+      "localeMessagesSha256": "931c328d988ed0fb3d3895b4871d86771c53a0959eaba4e82f51c34f28fc19c2",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -8186,7 +8186,7 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 144,
+            "warningCount": 40,
             "samples": [
               "← RETURN TO STAR ASCENT",
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
@@ -8195,11 +8195,11 @@
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ"
+              "Ana navigasyon",
+              "Avañe'ẽ",
+              "Bosanski",
+              "Dansk",
+              "Eesti"
             ]
           }
         },
@@ -8243,12 +8243,16 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0313,
-            "groups": 23,
+            "ratio": 0.0388,
+            "groups": 28,
             "samples": [
               [
                 "A signal.",
                 "ONE SIGNAL."
+              ],
+              [
+                "Allocation map",
+                "Tahsis haritası"
               ],
               [
                 "Azerbaijani",
@@ -8261,10 +8265,6 @@
               [
                 "BOUNDARY // 001",
                 "İLETİM // 001"
-              ],
-              [
-                "Deutsch",
-                "German"
               ]
             ]
           }
@@ -8697,12 +8697,12 @@
     },
     {
       "locale": "id",
-      "localeMessagesSha256": "81d03981ed663d90b4e765ca60478dbd1c4271b931ec1fbf75a531c620023f93",
+      "localeMessagesSha256": "1726e12d515bd9bb4d405ba78e2baecf10cd363906e2667e49273fbe987d968c",
       "status": "HOLD",
       "summary": {
-        "PASS": 91,
+        "PASS": 90,
         "FAIL": 0,
-        "HOLD": 9,
+        "HOLD": 10,
         "NOT_RUN": 0
       },
       "checks": [
@@ -9261,7 +9261,7 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 163,
+            "warningCount": 39,
             "samples": [
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
@@ -9269,12 +9269,12 @@
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ"
+              "Ana navigasyon",
+              "Bahasa Indonesia",
+              "Bosanski",
+              "Dansk",
+              "Eesti",
+              "Hrvatski"
             ]
           }
         },
@@ -9283,11 +9283,13 @@
           "mode": "STATIC",
           "category": "heuristic",
           "evidenceClass": "STATIC_HEURISTIC",
-          "status": "PASS",
-          "detail": "No high-confidence English stopword clusters",
+          "status": "HOLD",
+          "detail": "English stopword clusters require review",
           "metrics": {
-            "warningCount": 0,
-            "samples": []
+            "warningCount": 1,
+            "samples": [
+              "SİNYAL AÇIK // TUHAFI İNŞA ET // GÜZELİ İNŞA ET // HERKESİN GÖZÜ ÖNÜNDE İNŞA ET // STAR ASCENT"
+            ]
           }
         },
         {
@@ -9318,14 +9320,22 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0409,
-            "groups": 27,
+            "ratio": 0.0559,
+            "groups": 38,
             "samples": [
+              [
+                "Adult stage commander and light operators in a red spacecraft launch hangar",
+                "Kırmızı uzay aracı fırlatma hangarında yetişkin sahne komutanı ve ışık operatörleri"
+              ],
               [
                 "ALLOCATIONS",
                 "THE BOUNDARY",
                 "THE PREDICTIVE",
                 "THE TRANSMISSION"
+              ],
+              [
+                "Authority evidence",
+                "Yetki kanıtı"
               ],
               [
                 "Bahasa Indonesia",
@@ -9334,18 +9344,8 @@
                 "বাংলা"
               ],
               [
-                "English",
-                "Български",
-                "Русский",
-                "اردو"
-              ],
-              [
-                "Español",
-                "Spanish"
-              ],
-              [
-                "EVIDENCE",
-                "Proof"
+                "Channel consistency",
+                "Kanal tutarlılığı"
               ]
             ]
           }
@@ -9775,7 +9775,7 @@
     },
     {
       "locale": "ur",
-      "localeMessagesSha256": "b8b329471cf050f3da7a1c5bd6a761cede835e6be291d8ce61f0b8db7526775b",
+      "localeMessagesSha256": "1a9c37ee246e5ae4f57bff7216692cf4b0a661b5ef0aead53476fd0c0a6b4a3d",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -10339,20 +10339,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 82,
+            "warningCount": 21,
             "samples": [
-              "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
-              "[02] $IAT bir topluluk katmanıdır; getiri sözü değildir.",
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ"
+              "Ana navigasyon",
+              "CASINO DLC →",
+              "Internal Agency — STAR ASCENT",
+              "Lietuvių",
+              "RADIANCE, ELLIE & ALIA",
+              "Shqip"
             ]
           }
         },
@@ -10376,7 +10376,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.839,
+            "ratio": 0.8647,
             "threshold": 0.25
           }
         },
@@ -10396,9 +10396,13 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0456,
-            "groups": 32,
+            "ratio": 0.0497,
+            "groups": 35,
             "samples": [
+              [
+                "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
+                "[01] İleri Akıl ilk kamuya açık bölümünü açıyor."
+              ],
               [
                 "ALLOCATIONS",
                 "DISTRIBUTION"
@@ -10412,12 +10416,8 @@
                 "Беларуская"
               ],
               [
-                "CHECK",
-                "Czech"
-              ],
-              [
-                "CONFIRM",
-                "VERIFICATION"
+                "Channel consistency",
+                "Kanal tutarlılığı"
               ]
             ]
           }
@@ -10857,7 +10857,7 @@
     },
     {
       "locale": "ru",
-      "localeMessagesSha256": "5916a9da51e08624a53675c8d716d84a2d8db9050dbf11981b54697dd7eec5f2",
+      "localeMessagesSha256": "1bd5e4276f832c99e4ef3a011773b038028c4011abdf2ba87806faa838a4b798",
       "status": "HOLD",
       "summary": {
         "PASS": 91,
@@ -11421,7 +11421,7 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 42,
+            "warningCount": 17,
             "samples": [
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
@@ -11429,12 +11429,12 @@
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "Açık güncellik aralığı",
-              "Altı zorunlu kayıt",
-              "BAŞLANGIÇ // DOĞRULANMIŞ CANLI",
-              "BAŞLANGIÇ // KOMUTA MERKEZİ",
-              "BAŞLANGIÇ ETKİNLİĞİ",
-              "BAŞLANGIÇ GETİRİSİ"
+              "Hrvatski",
+              "Internal Agency — STAR ASCENT",
+              "RADIANCE, ELLIE & ALIA",
+              "Shqip",
+              "Türkçe",
+              "Български"
             ]
           }
         },
@@ -11458,7 +11458,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.9187,
+            "ratio": 0.9288,
             "threshold": 0.25
           }
         },
@@ -11929,7 +11929,7 @@
     },
     {
       "locale": "de",
-      "localeMessagesSha256": "453b76c3c072dce1f869755bf859e7835b23ce5983e1caf401e38bf4ad3f402f",
+      "localeMessagesSha256": "cc10a488c0d1a423d3fa0db7f9b465b99182c1ba704ac9f39633b5fd3c4725d3",
       "status": "HOLD",
       "summary": {
         "PASS": 91,
@@ -12493,7 +12493,7 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 139,
+            "warningCount": 47,
             "samples": [
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
@@ -12501,12 +12501,12 @@
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "Altı zorunlu kayıt",
-              "ARZ TASARIM HEDEFİ"
+              "Bosanski",
+              "Casino DLC",
+              "Dansk",
+              "Deutsch",
+              "Dossier",
+              "DÜZELT"
             ]
           }
         },
@@ -12550,8 +12550,8 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0477,
-            "groups": 31,
+            "ratio": 0.0511,
+            "groups": 33,
             "samples": [
               [
                 "01 // ROOT",
@@ -12576,10 +12576,8 @@
                 "BROADCAST WINDOW"
               ],
               [
-                "Deutsch",
-                "German",
-                "Հայերեն",
-                "বাংলা"
+                "Channel consistency",
+                "Kanal tutarlılığı"
               ]
             ]
           }
@@ -13009,7 +13007,7 @@
     },
     {
       "locale": "ja",
-      "localeMessagesSha256": "b8e73fdecb7c7e827e4e3997f60b0bbfd1409c8c9c0d715d94a88a9ab91534e9",
+      "localeMessagesSha256": "8925ae05c30a667d57a159d2e82aa451b2c20acfbc3bb770e263ebee43c58b07",
       "status": "HOLD",
       "summary": {
         "PASS": 89,
@@ -13573,7 +13571,7 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 54,
+            "warningCount": 22,
             "samples": [
               "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
@@ -13581,12 +13579,12 @@
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK TÖREN KODUNU İNCELE ↗",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "Altı zorunlu kayıt",
-              "ARZ TASARIM HEDEFİ",
-              "Avañe'ẽ"
+              "Avañe'ẽ",
+              "CASINO DLC →",
+              "Internal Agency — STAR ASCENT",
+              "RADIANCE, ELLIE & ALIA",
+              "Shqip",
+              "Suomi"
             ]
           }
         },
@@ -13612,7 +13610,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.7932,
+            "ratio": 0.8146,
             "threshold": 0.25
           }
         },
@@ -14099,12 +14097,12 @@
     },
     {
       "locale": "pcm",
-      "localeMessagesSha256": "63f64a8721899574fd6286bafa8d6664708a4a857129a13385bf94bc99e02394",
+      "localeMessagesSha256": "4d81c084c425c70e59c37a0f79cdc0e5fa41dc49eace4a07f7ed100c3cbd105a",
       "status": "HOLD",
       "summary": {
-        "PASS": 89,
+        "PASS": 88,
         "FAIL": 0,
-        "HOLD": 11,
+        "HOLD": 12,
         "NOT_RUN": 0
       },
       "checks": [
@@ -14663,20 +14661,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 486,
+            "warningCount": 174,
             "samples": [
-              "[01] Eski dünyayı optimize etmek için burada değiliz.",
-              "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
-              "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
-              "[01] Internal Agency is opening its first public chapter.",
-              "[02] $IAT bir topluluk katmanıdır; getiri sözü değildir.",
-              "[02] $IAT is the community layer; it is not a promise of return.",
-              "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
               "[03] Official information appears only through verified project channels.",
-              "[03] Resmî bilgiler yalnızca doğrulanmış proje kanallarında yayımlanır.",
-              "© 2026 İleri Akıl. $IAT yüksek riskli ve spekülatiftir. Finansal getiri vaadi yoktur.",
-              "© 2026 Internal Agency. $IAT is highly speculative. No financial return is promised.",
-              "1,000,000,000 IAT"
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
+              "1,000,000,000 IAT",
+              "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "6-month cliff, then linear release through month 24.",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
+              "A designed evidence ledger for the moment a proposal becomes a public network fact.",
+              "A gathering.",
+              "A living set of language and visual cues for the Scorpion Generation signal.",
+              "A matching record across every official surface."
             ]
           }
         },
@@ -14696,7 +14694,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.9971,
+            "ratio": 0.9964,
             "threshold": 0.5
           }
         },
@@ -14716,9 +14714,13 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0661,
-            "groups": 28,
+            "ratio": 0.1294,
+            "groups": 47,
             "samples": [
+              [
+                "[01] Eski dünyayı optimize etmek için burada değiliz.",
+                "[01] We are not here to optimize the old world."
+              ],
               [
                 "← RETURN TO STAR ASCENT",
                 "RETURN TO STAR ASCENT"
@@ -14741,41 +14743,11 @@
                 "We gather at the edge of the signal: artists, operators, believers and night people. The ship rises; the room becomes a constellation."
               ],
               [
-                "AFTER FUNDING",
-                "AFTER SCHEDULING",
-                "CHAIN STATUS RECEIPT",
-                "Feature progress",
-                "For an eligible, accepted and fully collateralized staking position.",
-                "NO UNFUNDED PROMISES",
-                "ONE SCREEN.",
-                "OPEN NODE REWARDS",
-                "OPEN SIGNAL DIRECTORY",
-                "OPEN WHITE DOSSIER",
-                "PLAYER VIEW",
-                "REFERENCE EDITION",
-                "RUN OF SHOW",
-                "STANDARD USER",
-                "STOP CONDITION",
-                "THE TERMS",
-                "UNSCHEDULED"
-              ],
-              [
-                "AKTİVASYON TERMİNALİNİ AÇ",
-                "Azərbaycanca",
-                "BAŞLANGIÇ AKIŞI",
-                "BAŞLANGIÇ ETKİNLİĞİ",
-                "Belarusian",
-                "Kanallar arası tutarlılık",
-                "Launch",
-                "No wallet connection",
-                "No wallet connection required",
-                "Open Launch Control from the official site. Do not begin from a reply, a direct message, or a copied wallet link.",
-                "Registration should request only a human-readable wallet message. If the wallet asks you to approve a transaction, token access, spending permission, or a transfer, cancel and return to this page independently.",
-                "START AT THE SOURCE",
-                "The ascent ritual",
-                "The future is not handed down.",
-                "THE MARKET TAKES THE DECK.",
-                "Македонски"
+                "ACCOUNT",
+                "Future",
+                "IS OPEN.",
+                "OPEN",
+                "PUBLICATION GATE"
               ]
             ]
           }
@@ -14802,13 +14774,13 @@
           "status": "HOLD",
           "detail": "Extreme contraction requires review",
           "metrics": {
-            "warningCount": 13,
+            "warningCount": 25,
             "samples": [
+              "Amounts must be positive whole-number strings, avoiding floating-point rounding.",
+              "Arz, kategori toplamları ve alıcı toplamları tam sayı taban birimlerinde birebir eşleşmelidir.",
               "Before accepting a new position, the program must reserve its complete maximum reward obligation from currently unlocked lane capacity. If that capacity is unavailable, the position is rejected. Existing reserved obligations remain funded; the program creates no reward debt.",
-              "Distribution and reward activation must not begin while any launch-critical implementation or evidence remains pending.",
-              "Every canonical signature across the published V1 and V2 exports was observed finalized with no reported transaction error.",
-              "Every technical statement should resolve to a mint address, program reference, account state, or a clear pending label.",
-              "Independent security and economic review findings are public, including unresolved risks."
+              "Before any address publication, the website, pinned announcement, and livestream must carry the same launch-critical values character for character.",
+              "Direct explorer evidence for current mint and freeze authorities is not yet linked and independently reviewed."
             ]
           }
         },
@@ -14820,12 +14792,13 @@
           "status": "HOLD",
           "detail": "Sentence-count divergence requires review",
           "metrics": {
-            "warningCount": 4,
+            "warningCount": 8,
             "samples": [
+              "Anlık görünüm yalnızca sağlanan yerel sonuçları birleştirir. Kamu bağlantılarını getirmez, kanıtı doğrulamaz, Solana'yı incelemez, cüzdan verisi işlemez veya BEKLET kararını HAZIR durumuna dönüştürmez.",
+              "Doğrulayıcı yalnızca sağlanan yerel dosyaları okur. Web sitesini getirmez, kanıtı doğrulamaz, Solana'yı incelemez, cüzdan verisi işlemez veya lansman hazırlığını onaylamaz. Eşleşen paket bile BEKLET döndürür.",
               "Ekonomi politikası /tokenomics adresinde kamusaldır. Resmî mint, program kasaları, ödül yönlendiricisi ve yetki kanıtı henüz yayımlanmadı; program aktif değildir.",
-              "Move through the field. The constellation answers. This is a visual transmission only—no wallet, account, or data connection occurs here.",
-              "No. Official support will never ask to recover, import, verify, or inspect your wallet, and cannot reverse a transfer. Anyone requesting wallet secrets or payment is impersonating the project.",
-              "Use known official addresses and independent evidence. Never accept a wallet or link from a reply, DM, or rushed message."
+              "İleri Akıl, yapay zekâ çağında sadece izlemek istemeyenler için yaratıcı ve teknik bir deneydir. STAR ASCENT bitmiş bir vaat değil; herkesin gözü önünde başlayan açık bir inşadır.",
+              "Move through the field. The constellation answers. This is a visual transmission only—no wallet, account, or data connection occurs here."
             ]
           }
         },
@@ -14846,11 +14819,14 @@
           "mode": "STATIC",
           "category": "heuristic",
           "evidenceClass": "STATIC_HEURISTIC",
-          "status": "PASS",
-          "detail": "No unexplained whole-string all-caps escalation",
+          "status": "HOLD",
+          "detail": "All-caps escalation requires editorial review",
           "metrics": {
-            "warningCount": 0,
-            "samples": []
+            "warningCount": 2,
+            "samples": [
+              "STAR ASCENT is a public build across culture, technology, and collective imagination. The work stays visible so the record can be inspected in real time.",
+              "STAR ASCENT is not a product universe. It is a live cultural machine: a ship held together by people who chose signal over noise."
+            ]
           }
         },
         {
@@ -15216,7 +15192,7 @@
     },
     {
       "locale": "tr",
-      "localeMessagesSha256": "25a3d6b65cbbce3fb8144b54f443411ac5b2ac1aaf5b362b6d029920777ecf67",
+      "localeMessagesSha256": "ab8df168257924dae16578b1a4f2b35202d759b9c9fd4c57a16042ad7c0232c7",
       "status": "HOLD",
       "summary": {
         "PASS": 91,
@@ -15780,7 +15756,7 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 213,
+            "warningCount": 215,
             "samples": [
               "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
               "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
@@ -15790,10 +15766,10 @@
               "%50/%20/%15/%10/%5 tahsis, 400M sıralı ödül rezervi, hak ediş takvimleri, yıllık ödül oranları, haftalık CCC Wildcard ve evrensel tek çekilişli eşitlik bozma yöntemi öneri olarak yayımlandı. Zincir üstü uygulama ve kanıt bekliyor.",
               "© 2026 İleri Akıl. IAT yüksek riskli ve spekülatiftir. Token fiyatı, kâr veya garantili piyasa değeri vaat edilmez.",
               "$IAT yatırım vaadi midir?",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
-              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602"
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01"
             ]
           }
         },
@@ -15837,8 +15813,8 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0497,
-            "groups": 33,
+            "ratio": 0.0511,
+            "groups": 34,
             "samples": [
               [
                 "Ana içeriğe geç",
@@ -16030,7 +16006,7 @@
           "status": "PASS",
           "detail": "Generated metadata is complete and within bounds",
           "metrics": {
-            "titleLength": 24,
+            "titleLength": 29,
             "descriptionLength": 114,
             "missingCount": 0
           }
@@ -16291,7 +16267,7 @@
     },
     {
       "locale": "sq",
-      "localeMessagesSha256": "991c561ef654a8e7bb500353161c99fae1b8e5f86add9702619ffae7e350c612",
+      "localeMessagesSha256": "8eabcd6bc2704c9b44c83302a4c82d6dc866112345596bf7a557d5fd83c87813",
       "status": "HOLD",
       "summary": {
         "PASS": 91,
@@ -16855,20 +16831,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 182,
+            "warningCount": 55,
             "samples": [
-              "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
-              "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ"
+              "Ana navigasyon",
+              "Avañe'ẽ",
+              "Bahasa Indonesia",
+              "Bengali",
+              "Bosanski",
+              "Čeština"
             ]
           }
         },
@@ -16912,12 +16888,16 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0177,
-            "groups": 13,
+            "ratio": 0.0286,
+            "groups": 21,
             "samples": [
               [
                 "A signal.",
                 "ONE SIGNAL."
+              ],
+              [
+                "After site update",
+                "Site güncellemesinden sonra"
               ],
               [
                 "ALLOCATION CONTROL",
@@ -16928,12 +16908,8 @@
                 "German"
               ],
               [
-                "FUTURE.",
-                "THE FUTURE."
-              ],
-              [
-                "Hindi",
-                "हिन्दी"
+                "Final token configuration",
+                "Nihai token yapılandırması"
               ]
             ]
           }
@@ -17365,7 +17341,7 @@
     },
     {
       "locale": "ca",
-      "localeMessagesSha256": "a6e69da2df70df45c3c4de3d638b2e1a037e2fd15f83fba57e98229be1623a33",
+      "localeMessagesSha256": "9bcd7eda0092a236e1d9d45ac3345752145fb9ba0fe64c569f7f6d99a549f055",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -17929,20 +17905,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 162,
+            "warningCount": 48,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt"
+              "Ana navigasyon",
+              "Avañe'ẽ",
+              "Bengali",
+              "Bosanski",
+              "Bulgarian",
+              "Catalan"
             ]
           }
         },
@@ -17986,8 +17962,8 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0191,
-            "groups": 14,
+            "ratio": 0.0286,
+            "groups": 21,
             "samples": [
               [
                 "Bengali",
@@ -18002,12 +17978,12 @@
                 "DOSSIER"
               ],
               [
-                "Français",
-                "French"
+                "Download English checklist",
+                "Türkçe kontrol listesini indir"
               ],
               [
-                "FUTURE.",
-                "THE FUTURE."
+                "Dutch",
+                "Nederlands"
               ]
             ]
           }
@@ -18438,7 +18414,7 @@
     },
     {
       "locale": "be",
-      "localeMessagesSha256": "a39a84efa46a703eac349208cf2747a93267cedaa40b12a5ffb7ae1a468835ed",
+      "localeMessagesSha256": "6b4bc6ded3d8c43e72f2285dca4c42f24ea7287428741e0243e11e01b71687e1",
       "status": "HOLD",
       "summary": {
         "PASS": 93,
@@ -19002,20 +18978,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 38,
+            "warningCount": 17,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "Altı zorunlu kayıt",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
               "CASINO DLC →",
-              "Cüzdan bağlantısı gerekmiyor",
-              "DOĞRULANMIŞ SİNYAL AÇIK.",
-              "EKİP // VARIŞ PENCERESİ",
-              "ETKİLEŞİM BU EKRANDA YERELDİR",
-              "GELECEK SİSTEMLER ÖNİZLEMESİNE GİR →"
+              "Internal Agency — STAR ASCENT",
+              "RADIANCE, ELLIE & ALIA",
+              "Shqip",
+              "V2 · HOLD",
+              "Беларуская"
             ]
           }
         },
@@ -19039,7 +19015,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.8964,
+            "ratio": 0.9038,
             "threshold": 0.25
           }
         },
@@ -19508,7 +19484,7 @@
     },
     {
       "locale": "nl",
-      "localeMessagesSha256": "08bfba5e5475cd5df58965c118741b85fa8efcc3299f4abc128ba1ef9f217346",
+      "localeMessagesSha256": "96f2908a6c1b2663e47a23639d9421858350210fa660130c711eeedf21d82efd",
       "status": "HOLD",
       "summary": {
         "PASS": 91,
@@ -20072,20 +20048,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 136,
+            "warningCount": 44,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
               "Ana navigasyon",
-              "ANA SİNYALE DÖN"
+              "Bosanski",
+              "Casino DLC",
+              "Català",
+              "Dansk",
+              "Devnet live"
             ]
           }
         },
@@ -20129,16 +20105,12 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0334,
-            "groups": 23,
+            "ratio": 0.0347,
+            "groups": 24,
             "samples": [
               [
                 "02 // RECORD",
                 "02 // VERIFIER"
-              ],
-              [
-                "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
-                "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01"
               ],
               [
                 "A signal.",
@@ -20148,6 +20120,10 @@
                 "Bileşik hazırlık anlık görünümünü indir",
                 "Herhangi bir adres yayınından önce web sitesi, sabitlenmiş duyuru ve canlı yayın, lansman açısından kritik değerleri karakter karakter aynı göstermelidir.",
                 "Tüm kamu dosyaları ve kritik lansman öncesi uyarılar yerel yayın denetiminden geçmelidir."
+              ],
+              [
+                "Channel consistency",
+                "Kanal tutarlılığı"
               ],
               [
                 "Croatian",
@@ -20581,7 +20557,7 @@
     },
     {
       "locale": "bs",
-      "localeMessagesSha256": "ef60d1c701181fba7dcf1106b02834357c3ade9a57fffa088ebe03d41c228ead",
+      "localeMessagesSha256": "2eef6f7feeab3da5d82c7889c17501a6b2ac0a268782b65bf9048df8561e2888",
       "status": "HOLD",
       "summary": {
         "PASS": 89,
@@ -21145,20 +21121,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 144,
+            "warningCount": 40,
             "samples": [
-              "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
-              "ARZ TASARIM HEDEFİ"
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
+              "Bahasa Indonesia",
+              "Bosanski",
+              "CASINO DLC →",
+              "Čeština",
+              "Dansk",
+              "Eesti"
             ]
           }
         },
@@ -21218,12 +21194,12 @@
                 "Azərbaycanca"
               ],
               [
-                "Bengali",
-                "বাংলা"
-              ],
-              [
                 "Bosanski",
                 "Bosnian"
+              ],
+              [
+                "CLAIM",
+                "REVIEW"
               ]
             ]
           }
@@ -21658,7 +21634,7 @@
     },
     {
       "locale": "bg",
-      "localeMessagesSha256": "7ca6fe2311d2064abbfbbe9c82b4b3ba880e75546380bf9eba079d8922299ef3",
+      "localeMessagesSha256": "a9e0b2e2e2f267fd5170e3ff89c2c42b8dbd31843f81e73fd45a1dbdf6051732",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -22222,20 +22198,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 48,
+            "warningCount": 14,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "Altı zorunlu kayıt",
-              "Benzersiz tanımlayıcılar",
-              "Bileşik hazırlık anlık görünümünü indir",
-              "Canlı yayın",
-              "Cüzdan bağlantısı gerekmiyor",
-              "Değişiklik dondurma doğrulayıcısını indir"
+              "Internal Agency — STAR ASCENT",
+              "RADIANCE, ELLIE & ALIA",
+              "Shqip",
+              "Türkçe",
+              "Български",
+              "Македонски"
             ]
           }
         },
@@ -22259,7 +22235,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.9031,
+            "ratio": 0.9169,
             "threshold": 0.25
           }
         },
@@ -22279,12 +22255,16 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0225,
-            "groups": 16,
+            "ratio": 0.0238,
+            "groups": 17,
             "samples": [
               [
                 "A signal.",
                 "SIGNAL."
+              ],
+              [
+                "Benzersiz tanımlayıcılar",
+                "Unique identifiers"
               ],
               [
                 "Bulgarian",
@@ -22298,10 +22278,6 @@
               [
                 "Français",
                 "French"
-              ],
-              [
-                "FUTURE.",
-                "THE FUTURE."
               ]
             ]
           }
@@ -22731,7 +22707,7 @@
     },
     {
       "locale": "hr",
-      "localeMessagesSha256": "aa905bba1e098109d2d4ec608e1c9ac44a2cc5b0741935e2583a910eb9774622",
+      "localeMessagesSha256": "3c405c7f6ecd43841106c52aa73a634df4d36f5badb4b2d9992e9ec1c66bfc6e",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -23295,20 +23271,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 132,
+            "warningCount": 40,
             "samples": [
-              "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
-              "ARZ TASARIM HEDEFİ",
-              "AŞAMALI YAYIN"
+              "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
+              "Bahasa Indonesia",
+              "Bosanski",
+              "CASINO DLC →",
+              "Čeština",
+              "Dansk",
+              "Eesti"
             ]
           }
         },
@@ -23352,14 +23328,9 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0545,
+            "ratio": 0.0531,
             "groups": 34,
             "samples": [
-              [
-                "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-                "Independent security and economic review findings are public, including unresolved risks.",
-                "Previously accrued rewards, wallet assets and vested principal are not removed."
-              ],
               [
                 "A signal.",
                 "SIGNAL."
@@ -23375,6 +23346,12 @@
               [
                 "Amounts must be positive whole-number strings, avoiding floating-point rounding.",
                 "Expose the inputs needed to reproduce the result after settlement."
+              ],
+              [
+                "ANTI-SCAM PROTOCOL",
+                "BAŞLANGIÇ AKIŞI",
+                "FIXED-SUPPLY PROTOCOL",
+                "OPERATOR PROTOCOL"
               ]
             ]
           }
@@ -23812,7 +23789,7 @@
     },
     {
       "locale": "el",
-      "localeMessagesSha256": "07ac15f0ad1bf74480fb25f309193f0c4598aefa4a0fa51debd93db90cf6a00c",
+      "localeMessagesSha256": "f6b8656e95cf0c43ac4b458e24cb4d1d5277c9787d641869262e33f98c5758a3",
       "status": "HOLD",
       "summary": {
         "PASS": 91,
@@ -24376,20 +24353,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 44,
+            "warningCount": 15,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "Altı zorunlu kayıt",
+              "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
               "Ana navigasyon",
-              "BAŞLANGIÇ // DOĞRULANMIŞ CANLI",
-              "BAŞLANGIÇ // KOMUTA MERKEZİ",
-              "BİLEŞİK HAZIRLIK ANLIK GÖRÜNÜMÜ · YALNIZCA YEREL",
-              "Canlı yayın",
-              "Cüzdan bağlantısı gerekmiyor",
-              "EKİP // VARIŞ PENCERESİ",
-              "GELECEK SİSTEMLER ÖNİZLEMESİNE GİR →"
+              "Internal Agency — STAR ASCENT",
+              "Lietuvių",
+              "RADIANCE, ELLIE & ALIA",
+              "Shqip",
+              "Ελληνικά"
             ]
           }
         },
@@ -24413,7 +24390,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.9112,
+            "ratio": 0.9237,
             "threshold": 0.25
           }
         },
@@ -24433,8 +24410,8 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0334,
-            "groups": 22,
+            "ratio": 0.0347,
+            "groups": 23,
             "samples": [
               [
                 "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
@@ -24886,7 +24863,7 @@
     },
     {
       "locale": "cs",
-      "localeMessagesSha256": "682eb4aa6b785a4639d1717c6746d888c942143e049c35d10356d6c43416271c",
+      "localeMessagesSha256": "8ad705177d5c04919cbee187b219fdb9e38933cf0c82f9a569ecc717e4b7956b",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -25450,20 +25427,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 148,
+            "warningCount": 41,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
-              "ANA SİNYALE DÖN"
+              "Avañe'ẽ",
+              "Bosanski",
+              "Dansk",
+              "Dossier",
+              "Eesti",
+              "Guaraní"
             ]
           }
         },
@@ -25507,12 +25484,16 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0245,
-            "groups": 16,
+            "ratio": 0.0286,
+            "groups": 19,
             "samples": [
               [
                 "A signal.",
                 "SIGNAL."
+              ],
+              [
+                "Allocation map",
+                "Tahsis haritası"
               ],
               [
                 "AUTHORITY",
@@ -25526,10 +25507,6 @@
               [
                 "Belarusian",
                 "বাংলা"
-              ],
-              [
-                "Deutsch",
-                "German"
               ]
             ]
           }
@@ -25965,7 +25942,7 @@
     },
     {
       "locale": "da",
-      "localeMessagesSha256": "972141ba508b7d5f7ff2f6a983c7c0430e5297ad1d318c7a2816b9e02623f0c4",
+      "localeMessagesSha256": "4ce5684ed77d27023eea2b81f8e8f6052034fefc5ee787054ac2c8d9e9d8e892",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -26529,20 +26506,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 152,
+            "warningCount": 49,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
               "Ana navigasyon",
-              "ANA SİNYALE DÖN"
+              "Bosanski",
+              "Casino DLC",
+              "CASINO DLC →",
+              "Català",
+              "Dansk"
             ]
           }
         },
@@ -26606,8 +26583,8 @@
                 "DOSSIER"
               ],
               [
-                "Español",
-                "Spanish"
+                "Dutch",
+                "Nederlands"
               ]
             ]
           }
@@ -27038,7 +27015,7 @@
     },
     {
       "locale": "et",
-      "localeMessagesSha256": "315f52146323734fe0fdf11c614ec202e314da9a2163f121f76374126049e7d7",
+      "localeMessagesSha256": "fd6f5ad96f4cb2610040deb25bde09b219391571848db2abbf7a327b7cca0d8b",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -27602,20 +27579,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 143,
+            "warningCount": 40,
             "samples": [
-              "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Alan içinde hareket et. Takımyıldız yanıt verir. Bu yalnızca görsel bir iletimdir; burada cüzdan, hesap veya veri bağlantısı kurulmaz."
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
+              "Ana navigasyon",
+              "Avañe'ẽ",
+              "Bahasa Indonesia",
+              "Bosanski",
+              "CASINO DLC →",
+              "Čeština"
             ]
           }
         },
@@ -27679,8 +27656,8 @@
                 "Беларуская"
               ],
               [
-                "Bengali",
-                "বাংলা"
+                "Channel consistency",
+                "Kanal tutarlılığı"
               ]
             ]
           }
@@ -28112,12 +28089,12 @@
     },
     {
       "locale": "fi",
-      "localeMessagesSha256": "6044639536e19a9165cd9fff8142092042c663567f7587b1af82da3b2d8bc836",
+      "localeMessagesSha256": "b135ae50fc9bee042e481e008fa148fd5bc5385f6502660a7fd348255c3ba58f",
       "status": "HOLD",
       "summary": {
-        "PASS": 92,
+        "PASS": 91,
         "FAIL": 0,
-        "HOLD": 8,
+        "HOLD": 9,
         "NOT_RUN": 0
       },
       "checks": [
@@ -28676,20 +28653,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 132,
+            "warningCount": 35,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
               "Ana navigasyon",
-              "Armenian"
+              "Avañe'ẽ",
+              "Bengali",
+              "Bosanski",
+              "CASINO DLC →",
+              "Čeština"
             ]
           }
         },
@@ -28730,19 +28707,15 @@
           "mode": "STATIC",
           "category": "heuristic",
           "evidenceClass": "STATIC_HEURISTIC",
-          "status": "PASS",
-          "detail": "Translation collision ratio is within threshold",
+          "status": "HOLD",
+          "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.03,
+            "ratio": 0.0307,
             "groups": 21,
             "samples": [
               [
                 "A signal.",
                 "SIGNAL."
-              ],
-              [
-                "Armenian",
-                "Հայերեն"
               ],
               [
                 "CHECK",
@@ -28755,6 +28728,11 @@
               [
                 "DOĞRULANMIŞ SİNYAL AÇIK.",
                 "Lansman açıklaması, canlı yayın ve operatör kaydı."
+              ],
+              [
+                "DÜNYA",
+                "THE WORLD",
+                "THE WORLD ↗"
               ]
             ]
           }
@@ -29184,12 +29162,12 @@
     },
     {
       "locale": "hu",
-      "localeMessagesSha256": "cdfd9143ca1a654abbd5184d1d71f7a736c4d69440318a293fa0becb3ad83830",
+      "localeMessagesSha256": "3697eecd4a4249878f3db31681400b9ceadf95e597c621a0cdb82ec3f8845d8c",
       "status": "HOLD",
       "summary": {
-        "PASS": 92,
+        "PASS": 91,
         "FAIL": 0,
-        "HOLD": 8,
+        "HOLD": 9,
         "NOT_RUN": 0
       },
       "checks": [
@@ -29748,20 +29726,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 155,
+            "warningCount": 44,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
-              "Ana içeriğe geç",
+              "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
               "Ana navigasyon",
-              "ANA SİNYALE DÖN"
+              "Bengali",
+              "Bosanski",
+              "Čeština",
+              "Dansk",
+              "Eesti"
             ]
           }
         },
@@ -29802,16 +29780,12 @@
           "mode": "STATIC",
           "category": "heuristic",
           "evidenceClass": "STATIC_HEURISTIC",
-          "status": "PASS",
-          "detail": "Translation collision ratio is within threshold",
+          "status": "HOLD",
+          "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0286,
-            "groups": 20,
+            "ratio": 0.0313,
+            "groups": 22,
             "samples": [
-              [
-                "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
-                "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602"
-              ],
               [
                 "A signal.",
                 "ONE SIGNAL."
@@ -29819,6 +29793,10 @@
               [
                 "COMMIT",
                 "IA"
+              ],
+              [
+                "Dutch",
+                "Nederlands"
               ],
               [
                 "EVIDENCE",
@@ -30257,7 +30235,7 @@
     },
     {
       "locale": "is",
-      "localeMessagesSha256": "d1128eca785ba3eb325e7e36073508c51441f80361b2500ec3f84366080665e1",
+      "localeMessagesSha256": "d168f8055047060c491c578d4bedfcd84e38e508c3869a4127b3763a9f5c132b",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -30821,20 +30799,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 127,
+            "warningCount": 42,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
-              "22 DOSYA · 7 DİL ÇİFTİ",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
-              "ARZ TASARIM HEDEFİ",
-              "AŞAMALI YAYIN"
+              "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
+              "Bengali",
+              "Bosanski",
+              "CASINO DLC →",
+              "Dansk",
+              "Eesti",
+              "Guaraní"
             ]
           }
         },
@@ -30878,16 +30856,12 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0327,
-            "groups": 20,
+            "ratio": 0.0313,
+            "groups": 19,
             "samples": [
               [
                 "02 // RECORD",
                 "02 // VERIFIER"
-              ],
-              [
-                "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-                "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
               ],
               [
                 "AKREP",
@@ -30900,6 +30874,12 @@
               [
                 "BROADCAST",
                 "THE TRANSMISSION"
+              ],
+              [
+                "Croatian",
+                "Estonian",
+                "Slovenian",
+                "Ελληνικά"
               ]
             ]
           }
@@ -31327,7 +31307,7 @@
     },
     {
       "locale": "ga",
-      "localeMessagesSha256": "163e08e7031798c089653dc7f22548297fb1f55dd9690a5d92b69887347954dd",
+      "localeMessagesSha256": "669e21dccda7df039788937e8678a35801bc97e2264c4c52e376434f40c49ecb",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -31891,20 +31871,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 172,
+            "warningCount": 54,
             "samples": [
-              "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-              "22 DOSYA · 7 DİL ÇİFTİ",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ"
+              "Albanian",
+              "Ana navigasyon",
+              "Azerbaijani",
+              "Bahasa Indonesia",
+              "Bosanski",
+              "Catalan"
             ]
           }
         },
@@ -31948,9 +31928,21 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0191,
-            "groups": 13,
+            "ratio": 0.0259,
+            "groups": 18,
             "samples": [
+              [
+                "[01] Eski dünyayı optimize etmek için burada değiliz.",
+                "[01] İleri Akıl ilk kamuya açık bölümünü açıyor."
+              ],
+              [
+                "Allocation map",
+                "Tahsis haritası"
+              ],
+              [
+                "BAŞLANGIÇ AKIŞI",
+                "BAŞLANGIÇ GETİRİSİ"
+              ],
               [
                 "Belarusian",
                 "Беларуская"
@@ -31958,20 +31950,6 @@
               [
                 "Català",
                 "Catalan"
-              ],
-              [
-                "Dossier",
-                "DOSSIER"
-              ],
-              [
-                "English",
-                "Español",
-                "Portuguese",
-                "বাংলা"
-              ],
-              [
-                "Français",
-                "French"
               ]
             ]
           }
@@ -32401,7 +32379,7 @@
     },
     {
       "locale": "it",
-      "localeMessagesSha256": "bc50bd215fafc829d35231755c81962adfa08c736d368a37d0fecbbc263025b8",
+      "localeMessagesSha256": "4f266f6de9f2f1b72250e56b81c524c5d489b9c1aff1f06c88e9b179923254d7",
       "status": "HOLD",
       "summary": {
         "PASS": 91,
@@ -32965,20 +32943,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 141,
+            "warningCount": 43,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "Altı zorunlu kayıt",
-              "Ana içeriğe geç"
+              "Bahasa Indonesia",
+              "Bengali",
+              "Bosanski",
+              "Bulgarian",
+              "Dansk",
+              "Dossier"
             ]
           }
         },
@@ -33022,8 +33000,8 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.032,
-            "groups": 23,
+            "ratio": 0.0347,
+            "groups": 25,
             "samples": [
               [
                 "Azerbaijani",
@@ -33476,7 +33454,7 @@
     },
     {
       "locale": "lv",
-      "localeMessagesSha256": "94960a9529245c0d9c984e8d7382105e7bf620cf5e442ffb00db7a569ba39ccf",
+      "localeMessagesSha256": "128dd0d2639ea4bff98f38b4851373979c0f641a3b54bfa31a9c5bf918bed68f",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -34040,20 +34018,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 161,
+            "warningCount": 41,
             "samples": [
-              "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt"
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
+              "Ana navigasyon",
+              "Avañe'ẽ",
+              "Bosanski",
+              "CASINO DLC →",
+              "Čeština",
+              "Dansk"
             ]
           }
         },
@@ -34097,8 +34075,8 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0204,
-            "groups": 15,
+            "ratio": 0.0252,
+            "groups": 18,
             "samples": [
               [
                 "Azerbaijani",
@@ -34109,16 +34087,17 @@
                 "Български"
               ],
               [
+                "Canlı yayın",
+                "Network",
+                "Use only after a new window is formally scheduled."
+              ],
+              [
                 "CONTAIN",
                 "STOP"
               ],
               [
                 "FIELD STANDBY",
                 "Македонски"
-              ],
-              [
-                "FUTURE.",
-                "THE FUTURE."
               ]
             ]
           }
@@ -34548,12 +34527,12 @@
     },
     {
       "locale": "lt",
-      "localeMessagesSha256": "c1b003f09e52c2fdd5b1f5a0f119523d812268460555d67554cba9834bc566dd",
+      "localeMessagesSha256": "f8e7800d66ef225a8e5b9018b4a739017246c5199805b2f34f4e708f296c3415",
       "status": "HOLD",
       "summary": {
-        "PASS": 92,
+        "PASS": 91,
         "FAIL": 0,
-        "HOLD": 8,
+        "HOLD": 9,
         "NOT_RUN": 0
       },
       "checks": [
@@ -35112,20 +35091,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 129,
+            "warningCount": 33,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
-              "Ana içeriğe geç",
-              "ANA SİNYALE DÖN"
+              "Bosanski",
+              "Dansk",
+              "Eesti",
+              "Hrvatski",
+              "Internal Agency — STAR ASCENT",
+              "Íslenska"
             ]
           }
         },
@@ -35166,11 +35145,11 @@
           "mode": "STATIC",
           "category": "heuristic",
           "evidenceClass": "STATIC_HEURISTIC",
-          "status": "PASS",
-          "detail": "Translation collision ratio is within threshold",
+          "status": "HOLD",
+          "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.03,
-            "groups": 20,
+            "ratio": 0.0334,
+            "groups": 22,
             "samples": [
               [
                 "ACTIVATION",
@@ -35180,6 +35159,7 @@
                 "ALLOCATIONS",
                 "MAKE A",
                 "MAKE THE",
+                "ÖNCÜL",
                 "VERIFY"
               ],
               [
@@ -35187,12 +35167,12 @@
                 "Indonesian"
               ],
               [
-                "Bengali",
-                "বাংলা"
-              ],
-              [
                 "Català",
                 "Catalan"
+              ],
+              [
+                "Channel consistency",
+                "Kanal tutarlılığı"
               ]
             ]
           }
@@ -35624,7 +35604,7 @@
     },
     {
       "locale": "lb",
-      "localeMessagesSha256": "a9d90711a289ce740b63338d45cb3e2d46893fa087aa5174afb5b5bd5e8a4784",
+      "localeMessagesSha256": "898f52d811882e16cc094c0fd3e908fa9a7895302cce2bae5b7d4704e46d74a1",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -36188,20 +36168,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 167,
+            "warningCount": 59,
             "samples": [
-              "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
               "← RETURN TO STAR ASCENT",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt"
+              "Ana navigasyon",
+              "Avañe'ẽ",
+              "Bosanski",
+              "Casino DLC",
+              "CASINO DLC →"
             ]
           }
         },
@@ -36245,8 +36225,8 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0232,
-            "groups": 16,
+            "ratio": 0.0245,
+            "groups": 17,
             "samples": [
               [
                 "CANCEL",
@@ -36703,7 +36683,7 @@
     },
     {
       "locale": "mk",
-      "localeMessagesSha256": "1975ca6909ab5d49f22189b609208aded6a9e36e2edf1acde08979ee1ea1968d",
+      "localeMessagesSha256": "575114a92774d32185e1bfa9973804406ec41aa16587b3965a49ffb5fb532bd7",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -37267,20 +37247,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 38,
+            "warningCount": 18,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "Açık güncellik aralığı",
-              "Altı zorunlu kayıt",
-              "ARZ TASARIM HEDEFİ",
-              "Bileşik hazırlık anlık görünümünü indir",
-              "Canlı yayın",
-              "Cüzdan bağlantısı gerekmiyor",
-              "GELECEK SİSTEMLER ÖNİZLEMESİNE GİR →"
+              "Hrvatski",
+              "Internal Agency — STAR ASCENT",
+              "Lietuvių",
+              "RADIANCE, ELLIE & ALIA",
+              "Shqip",
+              "Türkçe"
             ]
           }
         },
@@ -37304,7 +37284,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.8955,
+            "ratio": 0.9043,
             "threshold": 0.25
           }
         },
@@ -37777,7 +37757,7 @@
     },
     {
       "locale": "mt",
-      "localeMessagesSha256": "49afdb0299493b00e7b032ea6c074049cc0e2c9cab7c64d149450d3110cb0eee",
+      "localeMessagesSha256": "a73fbfd8c4ae2faeea01f2f942c0340dd353dc735dabfdd9b61c64d6b0308da0",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -38341,20 +38321,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 143,
+            "warningCount": 38,
             "samples": [
               "→ LIQUIDITY POOL",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
-              "Ana içeriğe geç"
+              "Ana navigasyon",
+              "Bengali",
+              "Bosanski",
+              "Dansk",
+              "Eesti"
             ]
           }
         },
@@ -38378,7 +38358,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.9997,
+            "ratio": 0.9996,
             "threshold": 0.5
           }
         },
@@ -38858,7 +38838,7 @@
     },
     {
       "locale": "no",
-      "localeMessagesSha256": "a565487c0e7f35c17b52310277018f3dfb2ce9f1289d4784aa8d0e46cc13beb6",
+      "localeMessagesSha256": "baf4727ba6861a878d1ff5dadfcf26a9806249b90f5424d02fa52d13833c2d51",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -39422,20 +39402,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 158,
+            "warningCount": 57,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKTİVASYON TERMİNALİNİ AÇ",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
               "Ana navigasyon",
-              "ARZ TASARIM HEDEFİ",
-              "AŞAMALI YAYIN",
-              "Ayrı inceleme"
+              "Bahasa Indonesia",
+              "Bosanski",
+              "Casino DLC",
+              "CASINO DLC →",
+              "Català"
             ]
           }
         },
@@ -39479,8 +39459,8 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0286,
-            "groups": 20,
+            "ratio": 0.03,
+            "groups": 21,
             "samples": [
               [
                 "Danish",
@@ -39931,7 +39911,7 @@
     },
     {
       "locale": "pl",
-      "localeMessagesSha256": "7413513e9ab6002ecc01554555f19f583cb2b475d487f0551d135c4cd505fe4c",
+      "localeMessagesSha256": "5bb77634a0b1ffc67ea07374538e51920a25bed8da2da4e7cc5a68d3b8d838d0",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -40495,20 +40475,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 137,
+            "warningCount": 36,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
+              "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
               "Ana navigasyon",
-              "ARZ TASARIM HEDEFİ",
-              "AŞAMALI YAYIN"
+              "Bahasa Indonesia",
+              "Bosanski",
+              "Dansk",
+              "Eesti",
+              "Haitian Creole"
             ]
           }
         },
@@ -40552,13 +40532,9 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0327,
-            "groups": 22,
+            "ratio": 0.0341,
+            "groups": 23,
             "samples": [
-              [
-                "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
-                "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602"
-              ],
               [
                 "ACCOUNT",
                 "DOSSIER"
@@ -40574,6 +40550,10 @@
               [
                 "ALLOCATIONS",
                 "FIELD GUIDE"
+              ],
+              [
+                "Azerbaijani",
+                "Azərbaycanca"
               ]
             ]
           }
@@ -41007,7 +40987,7 @@
     },
     {
       "locale": "ro",
-      "localeMessagesSha256": "e258d62bf61d6c4c4e65d137f5fac1c2f0aff6d5a6716dc811d92a37541b6918",
+      "localeMessagesSha256": "31db683096ba1ef8382559092abd46c88ddcaa92c26b61b70befb5ba17b67a5f",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -41571,20 +41551,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 154,
+            "warningCount": 40,
             "samples": [
-              "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "Altı zorunlu kayıt",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
               "Ana navigasyon",
-              "ARZ TASARIM HEDEFİ",
-              "AŞAMALI YAYIN"
+              "Avañe'ẽ",
+              "Bahasa Indonesia",
+              "Bengali",
+              "Bosanski",
+              "Eesti"
             ]
           }
         },
@@ -41628,14 +41608,9 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.032,
-            "groups": 23,
+            "ratio": 0.0354,
+            "groups": 26,
             "samples": [
-              [
-                "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
-                "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-                "Previously accrued rewards, wallet assets and vested principal are not removed."
-              ],
               [
                 "ALLOCATION CONTROL",
                 "Allocation controls"
@@ -41651,6 +41626,10 @@
               [
                 "Deutsch",
                 "German"
+              ],
+              [
+                "Español",
+                "Spanish"
               ]
             ]
           }
@@ -42083,7 +42062,7 @@
     },
     {
       "locale": "sr",
-      "localeMessagesSha256": "3152d419f2c62d589c49a816b5119636690a8393baaefd93e3b0c6e8f14d04ff",
+      "localeMessagesSha256": "68c5779176cb2fefc6cca653293c9815a3b1d78f1addfa02cdf79992d57ea47d",
       "status": "HOLD",
       "summary": {
         "PASS": 91,
@@ -42647,20 +42626,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 28,
+            "warningCount": 18,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
-              "Açık güncellik aralığı",
-              "Altı zorunlu kayıt",
-              "Cüzdan bağlantısı gerekmiyor",
-              "İçerik özetleri",
+              "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
               "Internal Agency — STAR ASCENT",
               "Lietuvių",
-              "ÖN SATIŞ",
-              "ÖNCE DEVNET",
-              "Prova izi doğrulayıcısını indir",
               "RADIANCE, ELLIE & ALIA",
-              "Shqip"
+              "Shqip",
+              "Türkçe",
+              "Български"
             ]
           }
         },
@@ -42684,7 +42663,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.9053,
+            "ratio": 0.9094,
             "threshold": 0.25
           }
         },
@@ -43158,7 +43137,7 @@
     },
     {
       "locale": "sk",
-      "localeMessagesSha256": "8def24f324d4cbac8a59df64140794df11899fb844cc4a70558d0175cc9100fa",
+      "localeMessagesSha256": "492075b7cce61f5ca9a43f4d4e15fb201c197d6fe23fdc768a2133906f9b849d",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -43722,20 +43701,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 154,
+            "warningCount": 44,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
               "Ana navigasyon",
-              "ANA SİNYALE DÖN",
-              "ARZ TASARIM HEDEFİ"
+              "Avañe'ẽ",
+              "Bosanski",
+              "Dansk",
+              "Dossier",
+              "Eesti"
             ]
           }
         },
@@ -43781,12 +43760,16 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0232,
-            "groups": 16,
+            "ratio": 0.03,
+            "groups": 21,
             "samples": [
               [
                 "A signal.",
                 "SIGNAL."
+              ],
+              [
+                "Cross-channel consistency",
+                "Kanallar arası tutarlılık"
               ],
               [
                 "Deutsch",
@@ -43797,12 +43780,8 @@
                 "DOSSIER"
               ],
               [
-                "English",
-                "বাংলা"
-              ],
-              [
-                "Français",
-                "French"
+                "Dutch",
+                "Nederlands"
               ]
             ]
           }
@@ -44234,7 +44213,7 @@
     },
     {
       "locale": "sl",
-      "localeMessagesSha256": "6d30a14c03892d4b5486e423d7cb889f19f3bff1a6785f74cfa6b57cb31dea0a",
+      "localeMessagesSha256": "92d9930cf47c2895e74ac699d15a64c21011367bdafb842be7f42638ef54940d",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -44798,20 +44777,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 150,
+            "warningCount": 46,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-              "22 DOSYA · 7 DİL ÇİFTİ",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
-              "ARZ TASARIM HEDEFİ"
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
+              "Bahasa Indonesia",
+              "Bosanski",
+              "CASINO DLC →",
+              "Čeština",
+              "Dansk",
+              "Eesti"
             ]
           }
         },
@@ -44855,8 +44834,8 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0334,
-            "groups": 24,
+            "ratio": 0.0402,
+            "groups": 29,
             "samples": [
               [
                 "A signal.",
@@ -44875,8 +44854,8 @@
                 "VERIFICATION"
               ],
               [
-                "Español",
-                "Spanish"
+                "Dutch",
+                "Nederlands"
               ]
             ]
           }
@@ -45308,7 +45287,7 @@
     },
     {
       "locale": "sv",
-      "localeMessagesSha256": "01e59f58c4ccafed740fbb30b86d4d8c5abe1a39d56df44702687ac25fa595fb",
+      "localeMessagesSha256": "3e652d038750e41019f9390ea087b7842a401f6338a5d98e47f9bf24ac38e1b7",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -45872,20 +45851,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 132,
+            "warningCount": 44,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
               "Ana navigasyon",
-              "ARZ TASARIM HEDEFİ"
+              "Bosanski",
+              "Casino DLC",
+              "CASINO DLC →",
+              "Dansk",
+              "Dossier"
             ]
           }
         },
@@ -46378,7 +46357,7 @@
     },
     {
       "locale": "uk",
-      "localeMessagesSha256": "bed9c366505fbd01458d58961febb6adecf34bc18f1cce01c6b4973c0722c1ae",
+      "localeMessagesSha256": "80aead8c0755cadac80638b850fde415b0ed15fa0776bcdfb602f98583e57ce4",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -46942,20 +46921,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 64,
+            "warningCount": 25,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "Açık güncellik aralığı",
-              "Altı zorunlu kayıt",
-              "BAŞLANGIÇ // DOĞRULANMIŞ CANLI",
-              "BAŞLANGIÇ // KOMUTA MERKEZİ",
-              "BAŞLANGIÇ ETKİNLİĞİ",
-              "BAŞLANGIÇ GETİRİSİ",
-              "Belirlenimci sonuç"
+              "CASINO DLC →",
+              "Eesti",
+              "Hrvatski",
+              "Internal Agency — STAR ASCENT",
+              "Lietuvių",
+              "RADIANCE, ELLIE & ALIA"
             ]
           }
         },
@@ -46979,7 +46958,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.8791,
+            "ratio": 0.8939,
             "threshold": 0.25
           }
         },
@@ -46999,8 +46978,8 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0191,
-            "groups": 13,
+            "ratio": 0.0204,
+            "groups": 14,
             "samples": [
               [
                 "CHANGE.",
@@ -47450,7 +47429,7 @@
     },
     {
       "locale": "ht",
-      "localeMessagesSha256": "bc5e6bb902b2e2bf3c5475f1a1019624028e955c30ed0c8fcdadde4470a9adfb",
+      "localeMessagesSha256": "badb9db7b78271afd46b289fcd64b04dd4b812691313fa29f6f12ce5966b8038",
       "status": "HOLD",
       "summary": {
         "PASS": 92,
@@ -48014,20 +47993,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 188,
+            "warningCount": 51,
             "samples": [
-              "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
-              "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ"
+              "Ana navigasyon",
+              "Armenian",
+              "Bahasa Indonesia",
+              "Bengali",
+              "Bosanski",
+              "Bosnian"
             ]
           }
         },
@@ -48071,28 +48050,28 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0218,
-            "groups": 16,
+            "ratio": 0.0232,
+            "groups": 17,
             "samples": [
               [
                 "Armenian",
                 "Հայերեն"
               ],
               [
+                "Authority evidence",
+                "Yetki kanıtı"
+              ],
+              [
                 "Bengali",
                 "বাংলা"
               ],
               [
+                "Channel consistency",
+                "Kanal tutarlılığı"
+              ],
+              [
                 "Deutsch",
                 "German"
-              ],
-              [
-                "Dossier",
-                "DOSSIER"
-              ],
-              [
-                "Español",
-                "Spanish"
               ]
             ]
           }
@@ -48522,7 +48501,7 @@
     },
     {
       "locale": "gn",
-      "localeMessagesSha256": "0038c321ffa37722292f48efea9d46444b02797d242f5ab58f92d007c9ccea5d",
+      "localeMessagesSha256": "e7654df41594f88a8c5d170a4315a6cffb1580233c9d3504dc746163ac3cdcf5",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -49086,20 +49065,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 170,
+            "warningCount": 41,
             "samples": [
-              "[02] $IAT bir topluluk katmanıdır; getiri sözü değildir.",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ"
+              "Avañe'ẽ",
+              "Bahasa Indonesia",
+              "Bosanski",
+              "CASINO DLC →",
+              "Čeština",
+              "Dansk"
             ]
           }
         },
@@ -49123,7 +49102,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.9986,
+            "ratio": 0.9977,
             "threshold": 0.5
           }
         },
@@ -49143,8 +49122,8 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0416,
-            "groups": 22,
+            "ratio": 0.0456,
+            "groups": 24,
             "samples": [
               [
                 "ACCOUNT",
@@ -49174,8 +49153,8 @@
                 "INCIDENT RESPONSE · PUBLIC PROTOCOL"
               ],
               [
-                "Bulgarian",
-                "Danish"
+                "BAŞLANGIÇ ETKİNLİĞİ",
+                "DERİN ARŞİVİ AÇ"
               ]
             ]
           }
@@ -49609,7 +49588,7 @@
     },
     {
       "locale": "qu",
-      "localeMessagesSha256": "098e664a7c23a7d60e731f971e65c1da943c2fe0e5a75388153abde83cafdd49",
+      "localeMessagesSha256": "cf09377187fd4297c6190fa964918e1b42befd43093b3806a80857f76e7ccadf",
       "status": "HOLD",
       "summary": {
         "PASS": 90,
@@ -50173,20 +50152,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 176,
+            "warningCount": 42,
             "samples": [
-              "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-              "22 DOSYA · 7 DİL ÇİFTİ",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ"
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
+              "Ana navigasyon",
+              "Bahasa Indonesia",
+              "Bosanski",
+              "CASINO DLC →",
+              "Chain receipt",
+              "Danish"
             ]
           }
         },
@@ -50210,7 +50189,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.9988,
+            "ratio": 0.9986,
             "threshold": 0.5
           }
         },
@@ -50230,8 +50209,8 @@
           "status": "HOLD",
           "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0804,
-            "groups": 38,
+            "ratio": 0.0865,
+            "groups": 40,
             "samples": [
               [
                 "ACCOUNT",
@@ -50254,7 +50233,8 @@
                 "AFTER FUNDING",
                 "AFTER SCHEDULING",
                 "ASSETS PROPOSED",
-                "FINALIZED HEIGHT"
+                "FINALIZED HEIGHT",
+                "SOSYAL KİT"
               ],
               [
                 "Approved inventory",
@@ -50264,13 +50244,14 @@
                 "Verified"
               ],
               [
-                "Avañe'ẽ",
-                "DLC",
-                "DUR",
-                "VERIFY",
-                "Website",
-                "Беларуская",
-                "Српски"
+                "ARZ TASARIM HEDEFİ",
+                "Ayrılmış rol kodları",
+                "BROADCAST",
+                "BROADCAST PACK",
+                "Operator Registration",
+                "Separated role codes",
+                "Standart girdiler",
+                "ZİNCİRİ OKU"
               ]
             ]
           }
@@ -50710,7 +50691,7 @@
     },
     {
       "locale": "hy",
-      "localeMessagesSha256": "7e1e713ea3246b122284abc6b8e7db4ff40c48487f6a03089245dba472cab142",
+      "localeMessagesSha256": "8d417221bd955a3d04b629b70b5290ee836a122c96d61b859f15e1562da5a54f",
       "status": "HOLD",
       "summary": {
         "PASS": 91,
@@ -51274,20 +51255,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 99,
+            "warningCount": 27,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "Altı zorunlu kayıt",
-              "ARZ TASARIM HEDEFİ",
-              "Ayrı inceleme",
-              "BAŞLANGIÇ // DOĞRULANMIŞ CANLI"
+              "CASINO DLC →",
+              "Hrvatski",
+              "Internal Agency — STAR ASCENT",
+              "Kanonik lansman belgeleri",
+              "Lietuvių",
+              "RADIANCE, ELLIE & ALIA"
             ]
           }
         },
@@ -51311,7 +51292,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.8579,
+            "ratio": 0.8795,
             "threshold": 0.25
           }
         },
@@ -51331,8 +51312,8 @@
           "status": "PASS",
           "detail": "Translation collision ratio is within threshold",
           "metrics": {
-            "ratio": 0.0259,
-            "groups": 17,
+            "ratio": 0.0279,
+            "groups": 18,
             "samples": [
               [
                 "Armenian",
@@ -51355,8 +51336,9 @@
                 "German"
               ],
               [
-                "Español",
-                "Spanish"
+                "DÜNYA",
+                "THE WORLD",
+                "THE WORLD ↗"
               ]
             ]
           }
@@ -51792,12 +51774,12 @@
     },
     {
       "locale": "az",
-      "localeMessagesSha256": "b558a56003a27d52cc44688481ea050cd7eb2a7eacbe23047c851ce05c8778dc",
+      "localeMessagesSha256": "c544f4cd2e24663e3941f0718e5faa5b2bbbf0ca8db8e9775b660f2292d0ab52",
       "status": "HOLD",
       "summary": {
-        "PASS": 91,
+        "PASS": 90,
         "FAIL": 0,
-        "HOLD": 9,
+        "HOLD": 10,
         "NOT_RUN": 0
       },
       "checks": [
@@ -52356,20 +52338,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 180,
+            "warningCount": 49,
             "samples": [
-              "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
-              "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
-              "[03] Bu kamusal bir inşa. Merakını getir. Ateşini getir.",
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
               "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+              "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
               "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-              "AÇIK KAYNAK GENESIS TÖRENİ",
-              "AÇIK KAYNAK YÜRÜTME PENCERESİ",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ"
+              "Ana navigasyon",
+              "Avañe'ẽ",
+              "Bahasa Indonesia",
+              "Bengali",
+              "Bosanski",
+              "Casino DLC"
             ]
           }
         },
@@ -52410,23 +52392,23 @@
           "mode": "STATIC",
           "category": "heuristic",
           "evidenceClass": "STATIC_HEURISTIC",
-          "status": "PASS",
-          "detail": "Translation collision ratio is within threshold",
+          "status": "HOLD",
+          "detail": "Translation collision ratio requires review",
           "metrics": {
-            "ratio": 0.0245,
-            "groups": 17,
+            "ratio": 0.0327,
+            "groups": 23,
             "samples": [
               [
-                "CANLI YAYIN",
-                "Canlı yayın"
+                "Ayrılmış rol kodları",
+                "Separated role codes"
+              ],
+              [
+                "BEFORE",
+                "ÖNCÜL"
               ],
               [
                 "CANONICAL DOSSIER",
                 "KANONİK DOSYA"
-              ],
-              [
-                "Channel consistency",
-                "Kanal tutarlılığı"
               ],
               [
                 "CLOSE",
@@ -52434,8 +52416,8 @@
                 "MAKE THE"
               ],
               [
-                "Français",
-                "French"
+                "Cüzdan bağlantısı gerekmiyor",
+                "No wallet connection required"
               ]
             ]
           }
@@ -52868,7 +52850,7 @@
     },
     {
       "locale": "ka",
-      "localeMessagesSha256": "a6588824aee6b35b97a59d3529c9da1be62cedb8a2e0b2466cea7f0ff51358cf",
+      "localeMessagesSha256": "60b422473b2d451266e8dbb884418a93c58568c66caff8500fa0235c979ba98f",
       "status": "HOLD",
       "summary": {
         "PASS": 91,
@@ -53432,20 +53414,20 @@
           "status": "HOLD",
           "detail": "Unchanged source-language prose requires review",
           "metrics": {
-            "warningCount": 49,
+            "warningCount": 13,
             "samples": [
+              "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
               "1,000,000,000 IAT",
               "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+              "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
               "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
-              "Açık çözülmemiş toplam",
-              "Açık güncellik aralığı",
-              "AKREP NESLİ",
-              "AKREP NESLİ // FIRLATMA KONTROLÜ",
-              "AKTİVASYON TERMİNALİNİ AÇ",
-              "Altı zorunlu kayıt",
-              "ARZ TASARIM HEDEFİ",
-              "Bileşik hazırlık anlık görünümünü indir",
-              "Canlı yayın"
+              "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
+              "CASINO DLC →",
+              "Internal Agency — STAR ASCENT",
+              "RADIANCE, ELLIE & ALIA",
+              "V2 · HOLD",
+              "ქართული",
+              "日本語"
             ]
           }
         },
@@ -53469,7 +53451,7 @@
           "status": "PASS",
           "detail": "Target-script ratio meets the locale threshold",
           "metrics": {
-            "ratio": 0.9036,
+            "ratio": 0.9161,
             "threshold": 0.25
           }
         },
@@ -53493,10 +53475,6 @@
             "groups": 24,
             "samples": [
               [
-                "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
-                "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602"
-              ],
-              [
                 "ACCOUNT",
                 "REPORT"
               ],
@@ -53511,6 +53489,10 @@
               [
                 "Dossier",
                 "DOSSIER"
+              ],
+              [
+                "Español",
+                "Spanish"
               ]
             ]
           }

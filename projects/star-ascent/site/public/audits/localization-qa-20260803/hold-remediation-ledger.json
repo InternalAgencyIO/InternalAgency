@@ -1,33 +1,35 @@
 {
   "schemaVersion": 1,
   "title": "IAT 50-locale QA HOLD remediation ledger",
-  "generatedAt": "2026-08-04T14:37:19.287Z",
+  "generatedAt": "2026-08-04T15:08:21.468Z",
   "status": "HOLD",
   "mainnetStatus": "UNSCHEDULED_HOLD",
   "sourceBinding": {
     "scorecardPath": "projects/star-ascent/site/public/audits/localization-qa-20260803/language-qa-scorecard.json",
-    "scorecardSha256": "fa296c69c9dd6b98c546f623c3b46b6deead7a66692a387fb3c8d93d4c76ab51",
-    "scorecardGeneratedAt": "2026-08-04T14:37:19.287Z",
-    "catalogHeadCommit": "a3df3668ac40ba7f527fcc8ebf86c088f8e7888a",
-    "catalogHeadTree": "a930160b17ae63d40ded06344d9a514b2f6683c3"
+    "scorecardSha256": "e2c01fe4bf066048b1bd04bf88abf5e84d37554401cb18063c26ae642020bdeb",
+    "scorecardGeneratedAt": "2026-08-04T15:08:21.468Z",
+    "catalogHeadCommit": "7965f4b8bed41420b14e1e2640b1989165e662fb",
+    "catalogHeadTree": "6f176fe04aae631740a53986bc371cb4eb0de649"
   },
   "scorecardSummary": {
-    "PASS": 4544,
+    "PASS": 4538,
     "FAIL": 0,
-    "HOLD": 456,
+    "HOLD": 462,
     "NOT_RUN": 0
   },
   "holdSummary": {
-    "total": 456,
-    "static": 206,
+    "total": 462,
+    "static": 212,
     "native": 250,
     "externalEvidenceOnly": 300,
-    "heuristicEditorialReview": 156,
+    "heuristicEditorialReview": 162,
     "automationMayApprove": 0
   },
   "externalEvidenceGates": [
     {
-      "checkIds": ["LQA-054"],
+      "checkIds": [
+        "LQA-054"
+      ],
       "results": 50,
       "localeCoverage": "ALL_50",
       "requiredEvidence": "Independent language-identification evidence bound to each locale catalog digest, including engine, threshold, identified locale, and confidence.",
@@ -37,7 +39,13 @@
       "disposition": "BLOCKED_EXTERNAL_EVIDENCE"
     },
     {
-      "checkIds": ["LQA-096", "LQA-097", "LQA-098", "LQA-099", "LQA-100"],
+      "checkIds": [
+        "LQA-096",
+        "LQA-097",
+        "LQA-098",
+        "LQA-099",
+        "LQA-100"
+      ],
       "results": 250,
       "localeCoverage": "ALL_50",
       "requiredEvidence": "Accountable native-language review records for meaning, cadence/register, regional fit, safety terminology, and all 25 canonical routes.",
@@ -51,7 +59,57 @@
     {
       "checkId": "LQA-051",
       "results": 49,
-      "locales": ["zh", "es", "hi", "fr", "ar", "bn", "pt", "id", "ur", "ru", "de", "ja", "pcm", "tr", "sq", "ca", "be", "nl", "bs", "bg", "hr", "el", "cs", "da", "et", "fi", "hu", "is", "ga", "it", "lv", "lt", "lb", "mk", "mt", "no", "pl", "ro", "sr", "sk", "sl", "sv", "uk", "ht", "gn", "qu", "hy", "az", "ka"],
+      "locales": [
+        "zh",
+        "es",
+        "hi",
+        "fr",
+        "ar",
+        "bn",
+        "pt",
+        "id",
+        "ur",
+        "ru",
+        "de",
+        "ja",
+        "pcm",
+        "tr",
+        "sq",
+        "ca",
+        "be",
+        "nl",
+        "bs",
+        "bg",
+        "hr",
+        "el",
+        "cs",
+        "da",
+        "et",
+        "fi",
+        "hu",
+        "is",
+        "ga",
+        "it",
+        "lv",
+        "lt",
+        "lb",
+        "mk",
+        "mt",
+        "no",
+        "pl",
+        "ro",
+        "sr",
+        "sk",
+        "sl",
+        "sv",
+        "uk",
+        "ht",
+        "gn",
+        "qu",
+        "hy",
+        "az",
+        "ka"
+      ],
       "reason": "Unchanged source-language prose requires review.",
       "nextAction": "Classify every unchanged value as an approved invariant, locale/language name, protocol term, or untranslated prose; retranslate only confirmed prose and regenerate the scorecard.",
       "automationMayPrepare": true,
@@ -59,8 +117,12 @@
     },
     {
       "checkId": "LQA-052",
-      "results": 2,
-      "locales": ["ja", "sk"],
+      "results": 3,
+      "locales": [
+        "id",
+        "ja",
+        "sk"
+      ],
       "reason": "English stopword clusters require review.",
       "nextAction": "Inspect the recorded source samples, remove confirmed English fallback, and preserve protocol tokens before regenerating the scorecard.",
       "automationMayPrepare": true,
@@ -68,8 +130,41 @@
     },
     {
       "checkId": "LQA-055",
-      "results": 28,
-      "locales": ["zh", "es", "hi", "fr", "ar", "bn", "pt", "id", "ur", "ru", "de", "pcm", "tr", "nl", "bs", "hr", "el", "et", "is", "it", "mk", "pl", "ro", "sl", "sv", "gn", "qu", "ka"],
+      "results": 32,
+      "locales": [
+        "zh",
+        "es",
+        "hi",
+        "fr",
+        "ar",
+        "bn",
+        "pt",
+        "id",
+        "ur",
+        "ru",
+        "de",
+        "pcm",
+        "tr",
+        "nl",
+        "bs",
+        "hr",
+        "el",
+        "et",
+        "fi",
+        "hu",
+        "is",
+        "it",
+        "lt",
+        "mk",
+        "pl",
+        "ro",
+        "sl",
+        "sv",
+        "gn",
+        "qu",
+        "az",
+        "ka"
+      ],
       "reason": "Translation collision ratio requires review.",
       "nextAction": "Review high-cardinality collisions first, separate legitimate repeated labels from collapsed prose, and rewrite only confirmed semantic collisions.",
       "automationMayPrepare": true,
@@ -78,7 +173,27 @@
     {
       "checkId": "LQA-056",
       "results": 19,
-      "locales": ["pt", "de", "pcm", "sq", "bs", "hr", "cs", "et", "lv", "lt", "lb", "mk", "mt", "ro", "sl", "ht", "gn", "qu", "az"],
+      "locales": [
+        "pt",
+        "de",
+        "pcm",
+        "sq",
+        "bs",
+        "hr",
+        "cs",
+        "et",
+        "lv",
+        "lt",
+        "lb",
+        "mk",
+        "mt",
+        "ro",
+        "sl",
+        "ht",
+        "gn",
+        "qu",
+        "az"
+      ],
       "reason": "Suspicious repeated-token runs require review.",
       "nextAction": "Inspect four-token repetition samples and repair confirmed generator loops without changing intentional chants, names, or protocol sequences.",
       "automationMayPrepare": true,
@@ -87,7 +202,21 @@
     {
       "checkId": "LQA-057",
       "results": 13,
-      "locales": ["zh", "ar", "ja", "pcm", "bs", "cs", "ga", "lb", "mt", "pl", "sk", "uk", "hy"],
+      "locales": [
+        "zh",
+        "ar",
+        "ja",
+        "pcm",
+        "bs",
+        "cs",
+        "ga",
+        "lb",
+        "mt",
+        "pl",
+        "sk",
+        "uk",
+        "hy"
+      ],
       "reason": "Extreme contraction requires review.",
       "nextAction": "Compare every long source with its short target, restore omitted facts and safety qualifiers, then require native review for acceptable concise phrasing.",
       "automationMayPrepare": true,
@@ -96,7 +225,43 @@
     {
       "checkId": "LQA-058",
       "results": 35,
-      "locales": ["zh", "hi", "ar", "bn", "pt", "id", "ur", "ja", "pcm", "tr", "sq", "ca", "nl", "bs", "bg", "hr", "el", "cs", "da", "fi", "hu", "it", "lb", "mt", "no", "pl", "ro", "sr", "sk", "sl", "gn", "qu", "hy", "az", "ka"],
+      "locales": [
+        "zh",
+        "hi",
+        "ar",
+        "bn",
+        "pt",
+        "id",
+        "ur",
+        "ja",
+        "pcm",
+        "tr",
+        "sq",
+        "ca",
+        "nl",
+        "bs",
+        "bg",
+        "hr",
+        "el",
+        "cs",
+        "da",
+        "fi",
+        "hu",
+        "it",
+        "lb",
+        "mt",
+        "no",
+        "pl",
+        "ro",
+        "sr",
+        "sk",
+        "sl",
+        "gn",
+        "qu",
+        "hy",
+        "az",
+        "ka"
+      ],
       "reason": "Sentence-count divergence requires review.",
       "nextAction": "Inspect the recorded divergences for missing facts or accidental concatenation; do not force sentence-count parity when the target language legitimately differs.",
       "automationMayPrepare": true,
@@ -104,8 +269,20 @@
     },
     {
       "checkId": "LQA-060",
-      "results": 10,
-      "locales": ["zh", "hi", "ar", "bn", "ur", "ru", "ja", "et", "mk", "sr"],
+      "results": 11,
+      "locales": [
+        "zh",
+        "hi",
+        "ar",
+        "bn",
+        "ur",
+        "ru",
+        "ja",
+        "pcm",
+        "et",
+        "mk",
+        "sr"
+      ],
       "reason": "All-caps escalation requires editorial review.",
       "nextAction": "Restore ordinary target-language case where the source is not an all-caps display label; keep protocol names and intentional UI labels unchanged.",
       "automationMayPrepare": true,
@@ -114,29 +291,60 @@
   ],
   "priorityLocales": [
     {
+      "locale": "pcm",
+      "heuristicHoldCount": 6,
+      "checkIds": [
+        "LQA-051",
+        "LQA-055",
+        "LQA-056",
+        "LQA-057",
+        "LQA-058",
+        "LQA-060"
+      ]
+    },
+    {
       "locale": "zh",
       "heuristicHoldCount": 5,
-      "checkIds": ["LQA-051", "LQA-055", "LQA-057", "LQA-058", "LQA-060"]
+      "checkIds": [
+        "LQA-051",
+        "LQA-055",
+        "LQA-057",
+        "LQA-058",
+        "LQA-060"
+      ]
     },
     {
       "locale": "ar",
       "heuristicHoldCount": 5,
-      "checkIds": ["LQA-051", "LQA-055", "LQA-057", "LQA-058", "LQA-060"]
+      "checkIds": [
+        "LQA-051",
+        "LQA-055",
+        "LQA-057",
+        "LQA-058",
+        "LQA-060"
+      ]
     },
     {
       "locale": "ja",
       "heuristicHoldCount": 5,
-      "checkIds": ["LQA-051", "LQA-052", "LQA-057", "LQA-058", "LQA-060"]
-    },
-    {
-      "locale": "pcm",
-      "heuristicHoldCount": 5,
-      "checkIds": ["LQA-051", "LQA-055", "LQA-056", "LQA-057", "LQA-058"]
+      "checkIds": [
+        "LQA-051",
+        "LQA-052",
+        "LQA-057",
+        "LQA-058",
+        "LQA-060"
+      ]
     },
     {
       "locale": "bs",
       "heuristicHoldCount": 5,
-      "checkIds": ["LQA-051", "LQA-055", "LQA-056", "LQA-057", "LQA-058"]
+      "checkIds": [
+        "LQA-051",
+        "LQA-055",
+        "LQA-056",
+        "LQA-057",
+        "LQA-058"
+      ]
     }
   ],
   "decisions": [
