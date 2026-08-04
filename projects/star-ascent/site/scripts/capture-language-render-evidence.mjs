@@ -96,7 +96,7 @@ function runPackageCommand(command, args, options) {
   return execFileSync(command, args, options);
 }
 
-const [definitionRaw, messagesRaw, metadataRaw, routeSeoRaw, pendingRaw, sitemapSource] = await Promise.all([
+let [definitionRaw, messagesRaw, metadataRaw, routeSeoRaw, pendingRaw, sitemapSource] = await Promise.all([
   readFile(resolve(root, "app/i18n/language-qa-checks.v1.json"), "utf8"),
   readFile(resolve(root, "app/i18n/messages.json"), "utf8"),
   readFile(resolve(root, "app/i18n/metadata.generated.json"), "utf8"),
@@ -104,13 +104,13 @@ const [definitionRaw, messagesRaw, metadataRaw, routeSeoRaw, pendingRaw, sitemap
   readFile(resolve(root, "app/i18n/pending-visible-source.json"), "utf8"),
   readFile(resolve(root, "app/sitemap.ts"), "utf8"),
 ]);
-const definition = JSON.parse(definitionRaw);
-const catalog = JSON.parse(messagesRaw);
-const metadata = JSON.parse(metadataRaw);
-const routeSeo = JSON.parse(routeSeoRaw);
-const pending = JSON.parse(pendingRaw);
+let definition = JSON.parse(definitionRaw);
+let catalog = JSON.parse(messagesRaw);
+let metadata = JSON.parse(metadataRaw);
+let routeSeo = JSON.parse(routeSeoRaw);
+let pending = JSON.parse(pendingRaw);
 const locales = Object.keys(catalog.messages);
-const sourceSet = new Set(Object.keys(catalog.messages.en));
+let sourceSet = new Set(Object.keys(catalog.messages.en));
 const routes = [...sitemapSource.matchAll(/\{\s*path:\s*"([^"]*)"/gu)].map((match) => match[1] || "/");
 if (locales.length !== 50 || routes.length !== 25) throw new Error(`Unexpected scope: ${locales.length} locales, ${routes.length} routes`);
 
@@ -127,6 +127,21 @@ let serverProcess;
 let browser;
 try {
   runPackageCommand("npm", ["run", "build"], { cwd: root, stdio: "inherit" });
+  [definitionRaw, messagesRaw, metadataRaw, routeSeoRaw, pendingRaw] = await Promise.all([
+    readFile(resolve(root, "app/i18n/language-qa-checks.v1.json"), "utf8"),
+    readFile(resolve(root, "app/i18n/messages.json"), "utf8"),
+    readFile(resolve(root, "app/i18n/metadata.generated.json"), "utf8"),
+    readFile(resolve(root, "app/i18n/route-seo.json"), "utf8"),
+    readFile(resolve(root, "app/i18n/pending-visible-source.json"), "utf8"),
+  ]);
+  definition = JSON.parse(definitionRaw);
+  catalog = JSON.parse(messagesRaw);
+  metadata = JSON.parse(metadataRaw);
+  routeSeo = JSON.parse(routeSeoRaw);
+  pending = JSON.parse(pendingRaw);
+  const compiledLocales = Object.keys(catalog.messages);
+  if (compiledLocales.join("\0") !== locales.join("\0")) throw new Error("Build changed the configured locale set");
+  sourceSet = new Set(Object.keys(catalog.messages.en));
   serverProcess = spawn(process.execPath, ["./node_modules/vinext/dist/cli.js", "dev", "-H", "127.0.0.1", "-p", String(port)], {
     cwd: root,
     stdio: ["ignore", "pipe", "pipe"],
