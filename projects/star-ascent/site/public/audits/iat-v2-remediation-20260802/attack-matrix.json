@@ -1,0 +1,25 @@
+{
+  "schema": "iat-v2-remediation-attack-matrix/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "cases": [
+    {"id":"AUTH-01","attack":"Compromise the sole Trezor, seed, or attended operator","expected":"No correlated authority loss","result":"FAIL_OWNER_ACCEPTED","finding":"IAT-REM-001"},
+    {"id":"AUTH-02","attack":"Lose the sole device and recovery material","expected":"Independent continuity path","result":"FAIL_OWNER_ACCEPTED","finding":"IAT-REM-001"},
+    {"id":"ID-01","attack":"Reuse a returned node UUID as bearer authorization","expected":"Reject without a valid bound session","result":"PASS_SOURCE_AND_TEST","evidence":"Signed short-lived HttpOnly session and route-source tests"},
+    {"id":"ID-02","attack":"Activate two nodes with one wallet or immutable X user ID","expected":"Unique constraint and atomic activation reject","result":"PASS_SCHEMA_SOURCE_AND_MODEL","evidence":"D1 uniqueness plus activation batch"},
+    {"id":"ID-03","attack":"Qualify an X account one second younger than 40 days","expected":"Reject","result":"PASS_MODEL","evidence":"Inclusive exact boundary test"},
+    {"id":"ID-04","attack":"Qualify a non-Premium or missing-subscription X account","expected":"Reject","result":"PASS_SOURCE_AND_MODEL","evidence":"Exact Premium and PremiumPlus allowlist"},
+    {"id":"ID-05","attack":"Use stale or downgraded Premium evidence for daily rewards","expected":"Reject","result":"PASS_MODEL","evidence":"24-hour freshness and tier validation"},
+    {"id":"ID-06","attack":"Forge or compromise provider-returned X attributes","expected":"Detect independently of X","result":"EXTERNAL_TRUST_BOUNDARY","finding":"IAT-REM-005"},
+    {"id":"CAP-01","attack":"Race multiple requests for Genesis slot 1,000","expected":"Exactly one activation and no slot 1,001","result":"PASS_SQLITE_MODEL_PENDING_D1_INTEGRATION","finding":"IAT-REM-004"},
+    {"id":"CAP-02","attack":"Fail activation after reserving a slot","expected":"Atomic rollback leaves no consumed slot","result":"PASS_SOURCE_PENDING_D1_INTEGRATION","finding":"IAT-REM-004"},
+    {"id":"BUD-01","attack":"Submit 10,000 qualifying daily pairs","expected":"At most 1,000 deterministic winners","result":"PASS_MODEL","evidence":"Deterministic oversubscription test"},
+    {"id":"BUD-02","attack":"Recycle, refill, duplicate, or replay daily claims","expected":"No increase above 12,000 IAT per epoch or 4,380,000 IAT lifetime","result":"PASS_POLICY_SCHEMA_AND_MODEL","evidence":"Exact integer caps and wallet/X uniqueness"},
+    {"id":"CCC-01","attack":"Invoke a CCC registry, position, randomness, round, or settlement path at Genesis","expected":"Always fail closed","result":"PASS_RUST_SOURCE_AND_TEST","evidence":"Compile-time false gate and no activation instruction"},
+    {"id":"NET-01","attack":"Flood or enlarge public RPC proxy requests","expected":"Read-only bounded fail-closed service","result":"PASS_SOURCE_AND_TEST","evidence":"D1 quota, batch and response bounds, deadlines, sanitized errors"},
+    {"id":"DESK-01","attack":"Navigate, pop up, forge IPC, or capture without exact origin and gesture","expected":"Reject","result":"PASS_SOURCE_AND_TEST","evidence":"Sandbox, origin/frame checks, permission handlers, IPC validation"},
+    {"id":"SUP-01","attack":"Reach known vulnerable package through production dependency graph","expected":"No known audit finding","result":"PASS_PRODUCTION_GRAPHS","evidence":"Root and site production audits report zero vulnerabilities"},
+    {"id":"EVID-01","attack":"Relabel historical SBF or Devnet signatures as proof of b73d2d3","expected":"Reject","result":"PASS_POLICY_AND_VALIDATOR","evidence":"Public index and local proof declare the historical boundary"},
+    {"id":"EVID-02","attack":"Launch the current-source SBF without matching signed Devnet evidence","expected":"HOLD","result":"NOT_RUN_BLOCKER","finding":"IAT-REM-003"},
+    {"id":"REVIEW-01","attack":"Treat internal review as independent clearance","expected":"HOLD","result":"NOT_RUN_BLOCKER","finding":"IAT-REM-002"}
+  ]
+}

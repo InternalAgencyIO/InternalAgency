@@ -1,0 +1,39 @@
+{
+  "schema": "iat-site-locale-config-qa-manifest/v1",
+  "generatedAtUtc": "2026-08-03T15:37:53.837Z",
+  "status": "DRAFT_LOCALIZATION_RELEASE_HOLD",
+  "mainnetStatus": "HOLD_UNCHANGED",
+  "sourceBinding": {
+    "branch": "agent/iat-launch-window",
+    "commit": "762cdf4b7d44e43878187c9103b4a5c7f226667e",
+    "gitTree": "06ecafba1034b8c02850eb7791d4f14b6b443e8c"
+  },
+  "findingSummary": {
+    "total": 9,
+    "openBySeverity": { "CRITICAL": 0, "HIGH": 2, "MEDIUM": 2, "LOW": 0, "INFO": 0 },
+    "closedBySeverity": { "CRITICAL": 0, "HIGH": 1, "MEDIUM": 3, "LOW": 1, "INFO": 0 }
+  },
+  "clearance": {
+    "allLocaleRootHydrationPassed": true,
+    "crossEngineStressPassed": true,
+    "hostingPackageValidated": true,
+    "productionDependencyAuditPassed": true,
+    "catalogCurrentVisibleSourceCoveragePassed": false,
+    "nativeLanguageReviewComplete": false,
+    "physicalDeviceReviewComplete": false,
+    "localizationReleaseApproved": false,
+    "mainnetLaunchApproved": false,
+    "authorizesDeployment": false,
+    "authorizesSigning": false,
+    "authorizesBroadcast": false
+  },
+  "artifactSha256": {
+    "README.md": "dc5e163758da36f6d58a2f1edcc597a99e30b93651dfdf437d2c6131aa97da34",
+    "checks.json": "0752e525e177794264b37b383ea4defbe32cc0495c6a35ff96ba6e1db8d09057",
+    "environment-matrix.json": "d5ff248ce052a276dbc5fd5fdd75cdd954a15b2f1a0a81df9428a63026885f2a",
+    "findings.json": "ba7d6111098c5f5ef5ddc113334e734cb341dedcfdcf7781c78ce0caffeb41e4",
+    "hosting-observation.json": "9587444f4924b462c43631f2e020026e3649b2199087473cc0e2e27af98ff4f2",
+    "localization-coverage.json": "10b6c5c72ce801536de6442b966f3effbcd612a2ec6ce0cc38fcf3409d0138b2",
+    "scope.json": "347a94b0075fea0c239208f4b10151b3d898a4284757938c1a5524af894d7b1f"
+  }
+}

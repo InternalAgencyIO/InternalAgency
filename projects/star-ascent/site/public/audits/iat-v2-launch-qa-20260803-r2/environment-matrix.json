@@ -1,0 +1,158 @@
+{
+  "schema": "iat-v2-launch-qa-environments/v1",
+  "status": "DRAFT_QA_HOLD",
+  "environments": [
+    {
+      "id": "PLAYWRIGHT_CHROMIUM_DESKTOP",
+      "kind": "AUTOMATED_ENGINE",
+      "viewport": "1440x900",
+      "result": "PASS",
+      "limitations": [
+        "headless",
+        "Windows host"
+      ]
+    },
+    {
+      "id": "PLAYWRIGHT_FIREFOX_DESKTOP",
+      "kind": "AUTOMATED_ENGINE",
+      "viewport": "1440x900",
+      "result": "PASS",
+      "limitations": [
+        "headless",
+        "Windows host"
+      ]
+    },
+    {
+      "id": "PLAYWRIGHT_WEBKIT_DESKTOP",
+      "kind": "AUTOMATED_ENGINE",
+      "viewport": "1440x900",
+      "result": "PASS",
+      "limitations": [
+        "headless",
+        "not installed Safari"
+      ]
+    },
+    {
+      "id": "PLAYWRIGHT_CHROMIUM_TABLET",
+      "kind": "AUTOMATED_ENGINE",
+      "viewport": "768x1024",
+      "result": "PASS",
+      "limitations": [
+        "headless",
+        "not a physical tablet"
+      ]
+    },
+    {
+      "id": "PLAYWRIGHT_FIREFOX_TABLET",
+      "kind": "AUTOMATED_ENGINE",
+      "viewport": "768x1024",
+      "result": "PASS",
+      "limitations": [
+        "headless",
+        "not a physical tablet"
+      ]
+    },
+    {
+      "id": "PLAYWRIGHT_PIXEL_5",
+      "kind": "DEVICE_EMULATION",
+      "viewport": "393x851",
+      "result": "PASS_AUTOMATED",
+      "limitations": [
+        "not physical Android",
+        "emulated device metrics"
+      ]
+    },
+    {
+      "id": "PLAYWRIGHT_IPHONE_13_WEBKIT",
+      "kind": "DEVICE_EMULATION",
+      "viewport": "390x664",
+      "result": "PASS_AUTOMATED",
+      "limitations": [
+        "not iOS",
+        "not installed Safari"
+      ]
+    },
+    {
+      "id": "WINDOWS_LOCAL_BUILD",
+      "kind": "LOCAL_BUILD",
+      "viewport": null,
+      "result": "PASS",
+      "limitations": [
+        "single host"
+      ]
+    },
+    {
+      "id": "LIVE_PUBLIC_HTTPS_READ_ONLY",
+      "kind": "READ_ONLY_REMOTE_OBSERVATION",
+      "viewport": null,
+      "result": "PASS",
+      "limitations": [
+        "timestamped observation",
+        "no deployment or mutation"
+      ]
+    },
+    {
+      "id": "IOS_SAFARI_PHYSICAL",
+      "kind": "NOT_AVAILABLE",
+      "viewport": null,
+      "result": "NOT_TESTED",
+      "limitations": [
+        "coverage gap"
+      ]
+    },
+    {
+      "id": "PHYSICAL_ANDROID_SYSTEM_BROWSER",
+      "kind": "NOT_AVAILABLE",
+      "viewport": null,
+      "result": "NOT_TESTED",
+      "limitations": [
+        "coverage gap"
+      ]
+    },
+    {
+      "id": "LINUX_GRAPHICAL_BROWSER",
+      "kind": "NOT_AVAILABLE",
+      "viewport": null,
+      "result": "NOT_TESTED",
+      "limitations": [
+        "coverage gap"
+      ]
+    },
+    {
+      "id": "ASSISTIVE_TECHNOLOGY",
+      "kind": "NOT_AVAILABLE",
+      "viewport": null,
+      "result": "NOT_TESTED",
+      "limitations": [
+        "screen reader, switch control, and voice control not certified"
+      ]
+    },
+    {
+      "id": "PERFORMANCE_LAB",
+      "kind": "NOT_AVAILABLE",
+      "viewport": null,
+      "result": "NOT_TESTED",
+      "limitations": [
+        "no throttled device laboratory"
+      ]
+    },
+    {
+      "id": "NATIVE_SPEAKER_REVIEW",
+      "kind": "NOT_AVAILABLE",
+      "viewport": null,
+      "result": "NOT_REVIEWED",
+      "limitations": [
+        "all non-English locales remain human-review pending"
+      ]
+    },
+    {
+      "id": "INDEPENDENT_QA_REVIEWER",
+      "kind": "NOT_AVAILABLE",
+      "viewport": null,
+      "result": "NOT_REVIEWED",
+      "limitations": [
+        "internal Codex-assisted evidence only"
+      ]
+    }
+  ]
+}

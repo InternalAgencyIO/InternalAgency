@@ -1,6 +1,37 @@
 import { spawnSync } from "node:child_process";
 
+const options = new Set(process.argv.slice(2));
+const allowedOptions = new Set(["--require-ceremony-ready"]);
+const unknownOptions = [...options].filter((option) => !allowedOptions.has(option));
+if (unknownOptions.length) {
+  console.error(`Unknown preflight option: ${unknownOptions.join(", ")}`);
+  process.exit(2);
+}
+
+const requireCeremonyReady = options.has("--require-ceremony-ready");
+const entryAssessment = spawnSync(
+  process.execPath,
+  [
+    "scripts/assess-iat-v2-mainnet-ceremony-entry.mjs",
+    ...(requireCeremonyReady ? ["--require-ready"] : []),
+  ],
+  { stdio: "inherit" },
+);
+if (entryAssessment.status !== 0) process.exit(entryAssessment.status ?? 1);
+
 const checks = [
+  ["validate-iat-v2-policy.mjs"],
+  ["validate-public-devnet-evidence.mjs"],
+  ["validate-iat-v2-time-gate-proof.mjs"],
+  ["validate-iat-v2-mainnet-readiness-gate.mjs"],
+  ["validate-iat-v2-ceremony-review.mjs"],
+  ["test-iat-v2-ceremony-review-regression.mjs"],
+  ["test-iat-v2-mainnet-ceremony-entry-regression.mjs"],
+  ["test-iat-v2-canonical-json-regression.mjs"],
+  ["validate-iat-v2-mainnet-stage-journal.mjs"],
+  ["test-iat-v2-mainnet-stage-journal-regression.mjs"],
+  ["validate-iat-v2-independent-signoff.mjs"],
+  ["validate-iat-v2-feature-signoff.mjs"],
   ["test-accountability-label-normalization.mjs"],
   ["test-manifest-gate-regression.mjs"],
   ["test-publication-payload-regression.mjs"],
@@ -49,4 +80,8 @@ for (const [script, ...args] of checks) {
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
 
-console.log("\nPRELIGHT COMPLETE: local package consistency confirmed. Physical signing and independent on-chain verification remain separate launch actions.");
+console.log(
+  requireCeremonyReady
+    ? "\nATTENDED PREFLIGHT COMPLETE: reviewed local artifacts passed. This result still does not authorize signing, broadcast, deployment, minting, transfer, or publication."
+    : "\nPREPARATION PREFLIGHT COMPLETE: local consistency confirmed; ceremony entry was not requested and mainnet remains HOLD. Use --require-ceremony-ready only during the attended final review.",
+);

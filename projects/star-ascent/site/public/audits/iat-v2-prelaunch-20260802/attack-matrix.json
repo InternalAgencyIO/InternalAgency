@@ -1,0 +1,33 @@
+{
+  "schema": "iat-v2-prelaunch-attack-matrix/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "identityModel": "UNIQUE_WALLET_PLUS_IMMUTABLE_X_ID_PLUS_X_PREMIUM; MULTIPLE_PAIRS_PER_PERSON_ALLOWED",
+  "cases": [
+    {"id":"RND-01","surface":"CCC randomness","attack":"Malicious payer commits first and never reveals","expected":"Eventual single settlement without reroll","observed":"Permanent pending round; no recovery","result":"FAIL","finding":"IAT-SEC-001"},
+    {"id":"RND-02","surface":"CCC randomness","attack":"Wrong account, wrong program, stale seed, non-adjacent commit, stale reveal","expected":"Reject","observed":"Source checks and unit tests reject","result":"PASS"},
+    {"id":"RND-03","surface":"CCC randomness","attack":"Modulo-bias candidate selection","expected":"Exact uniform result","observed":"Domain-separated rejection sampling across 256-bit samples","result":"PASS"},
+    {"id":"AUTH-01","surface":"Node binding","attack":"Possessor of leaked pending nodeId selects country","expected":"Require wallet-bound session","observed":"UUID alone authorizes immutable update","result":"FAIL","finding":"IAT-SEC-003"},
+    {"id":"AUTH-02","surface":"Node binding","attack":"Possessor of leaked pending nodeId starts OAuth with own X","expected":"Require wallet-bound session","observed":"UUID alone receives signed OAuth state","result":"FAIL","finding":"IAT-SEC-003"},
+    {"id":"AUTH-03","surface":"Wallet proof","attack":"Replay consumed challenge or use wrong signature/wallet/origin","expected":"Reject","observed":"Exact proof and atomic consume reject","result":"PASS"},
+    {"id":"ID-01","surface":"X binding","attack":"Non-Premium X account authenticates","expected":"Reject","observed":"subscription_type is not requested; binding activates","result":"FAIL","finding":"IAT-SEC-004"},
+    {"id":"ID-02","surface":"X binding","attack":"Same immutable X ID binds twice","expected":"Reject/HOLD","observed":"Unique D1 index rejects; callback error handling still needs explicit HOLD mapping","result":"PARTIAL","finding":"IAT-SEC-004"},
+    {"id":"ID-03","surface":"Wallet binding","attack":"Same wallet binds twice","expected":"One canonical binding","observed":"Unique D1 index and INSERT OR IGNORE preserve one row","result":"PASS"},
+    {"id":"ID-04","surface":"X binding","attack":"X handle changes","expected":"Identity remains stable","observed":"Immutable X ID, not handle, is dedupe key","result":"PASS"},
+    {"id":"CAP-01","surface":"Genesis slots","attack":"Two completions race for slot 1000","expected":"One slot 1000, one capacity reached","observed":"No production slot allocation transaction exists","result":"FAIL","finding":"IAT-SEC-005"},
+    {"id":"CAP-02","surface":"Genesis slots","attack":"Completion 1001","expected":"Active without gift slot and explicit capacity response","observed":"Binding activates with genesis_slot null and no cap response for all completions","result":"FAIL","finding":"IAT-SEC-005"},
+    {"id":"CCC-01","surface":"Agency registry","attack":"Register same owner wallet twice","expected":"Reject","observed":"Owner-index PDA prevents duplicate owner","result":"PASS"},
+    {"id":"CCC-02","surface":"Agency registry","attack":"Register many inactive/unbonded wallets","expected":"Only economically eligible consented candidates","observed":"Admin can append arbitrary unchecked owners","result":"FAIL","finding":"IAT-GAME-001"},
+    {"id":"ECON-01","surface":"Daily rewards","attack":"Demand exceeds distributor/epoch budget","expected":"Published deterministic cap and allocation rule","observed":"No aggregate epoch or lifetime amount cap","result":"FAIL","finding":"IAT-GAME-002"},
+    {"id":"ECON-02","surface":"Reward reserves","attack":"Open position without full reward collateral","expected":"Atomic reject","observed":"Ordered full-term reservation rejects debt","result":"PASS"},
+    {"id":"TOKEN-01","surface":"Activation","attack":"Activate with wrong supply, authority, allocation, mint, vault owner, or balance","expected":"Reject","observed":"Exact activation checks and tests","result":"PASS"},
+    {"id":"TOKEN-02","surface":"Settlement","attack":"Redirect permissionless payout","expected":"Reject wrong destination owner/mint","observed":"Destination owner and mint are verified","result":"PASS"},
+    {"id":"CPI-01","surface":"Solana program","attack":"EVM-style reentrancy or arbitrary CPI target","expected":"No untrusted CPI","observed":"Only pinned SPL Token CPI; atomic rollback","result":"PASS"},
+    {"id":"ARITH-01","surface":"Solana program","attack":"Overflow, underflow, precision debt","expected":"Checked integer arithmetic and bounded rounding","observed":"Checked operations, overflow-checks, cumulative rewards, full reservation","result":"PASS"},
+    {"id":"UPG-01","surface":"Program governance","attack":"Single planned authority is compromised","expected":"Independent multi-party containment","observed":"Same address is upgrade/admin/community custody","result":"FAIL","finding":"IAT-SEC-002"},
+    {"id":"WEB-01","surface":"Network API","attack":"Flood valid lookups that invoke RPC scans","expected":"Bounded client/global cost","observed":"Timeouts but no rate/cache/concurrency budget","result":"FAIL","finding":"IAT-SEC-008"},
+    {"id":"MERKLE-01","surface":"Epoch manifest","attack":"Base58-shaped but non-32-byte wallet","expected":"Reject","observed":"Regex shape only","result":"FAIL","finding":"IAT-SEC-010"},
+    {"id":"MERKLE-02","surface":"Epoch manifest","attack":"Duplicate wallet or invalid proof/total","expected":"Reject","observed":"Duplicate check, total calculation, and independent proof verification","result":"PASS"},
+    {"id":"SUPPLY-01","surface":"Dependencies","attack":"Known vulnerable build/runtime-adjacent path","expected":"No unresolved high/critical advisories or bounded exception","observed":"Root critical/high and site high advisories","result":"FAIL","finding":"IAT-SEC-006"},
+    {"id":"SECRET-01","surface":"Repository","attack":"Credential-shaped secret committed in current tree/history","expected":"No match","observed":"No match across bounded patterns after false-positive triage","result":"PASS_LIMITED"}
+  ]
+}

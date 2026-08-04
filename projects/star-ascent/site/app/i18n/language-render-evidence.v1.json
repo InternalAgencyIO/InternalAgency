@@ -1,0 +1,5836 @@
+{
+  "schema": "iat-language-render-evidence/v1",
+  "generatedAt": "2026-08-04T07:46:41.509Z",
+  "status": "PASS",
+  "scope": {
+    "localeCount": 50,
+    "routeCount": 25,
+    "claimedChecksPerLocale": 25,
+    "omittedChecks": []
+  },
+  "sourceBinding": {
+    "definitionSha256": "7781abc913b4d927519678f833164127e81fa2205cd66bc282bb70a9a47dae33",
+    "messagesFileSha256": "073d9b8d91d4122a62d79e2fdff5a1d71ef0bc9711ccf969625e3c2bd1f60d21",
+    "metadataSha256": "e453736018923c82071c7c627130aa4a7e08c0d24aab17bcd2d7d1c1c750264c",
+    "routeSeoSha256": "3e930c5d8bf6e4a6c9ce14d273caf7628d68d1caf9f76479787058033c38aca7",
+    "pendingSha256": "6cd11905cd4e1d4255c88eed956054575035648c1fe33123acef31129b948082"
+  },
+  "environment": {
+    "origin": "EPHEMERAL_LOOPBACK",
+    "browser": "chromium",
+    "crossEngineMatrix": [
+      "chromium",
+      "firefox",
+      "webkit",
+      "tablet",
+      "android-emulation",
+      "ios-emulation"
+    ],
+    "mainnetChanged": false
+  },
+  "limitations": [
+    "This is local browser evidence, not native-language review or production deployment evidence."
+  ],
+  "locales": {
+    "en": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "zh": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "es": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "hi": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "fr": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "ar": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "bn": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "pt": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "id": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "ur": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "ru": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "de": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "ja": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "pcm": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "tr": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "sq": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "ca": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "be": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "nl": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "bs": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "bg": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "hr": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "el": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "cs": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "da": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "et": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "fi": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "hu": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "is": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "ga": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "it": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "lv": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "lt": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "lb": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "mk": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "mt": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "no": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "pl": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "ro": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "sr": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "sk": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "sl": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "sv": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "uk": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "ht": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "gn": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "qu": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "hy": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "az": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    },
+    "ka": {
+      "checks": {
+        "LQA-071": {
+          "status": "PASS",
+          "detail": "Fresh-checkout production build compiled all 50 locale assets before server start"
+        },
+        "LQA-072": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-073": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-074": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-075": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-076": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-077": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-078": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-079": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-080": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-081": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-082": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-083": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-084": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-085": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 5
+          }
+        },
+        "LQA-086": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 7
+          }
+        },
+        "LQA-087": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-088": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed",
+          "metrics": {
+            "inspected": 0
+          }
+        },
+        "LQA-089": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-090": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-091": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-092": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-093": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-094": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        },
+        "LQA-095": {
+          "status": "PASS",
+          "detail": "Source-bound clean-build loopback render check passed"
+        }
+      }
+    }
+  }
+}

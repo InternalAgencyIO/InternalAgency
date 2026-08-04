@@ -1,0 +1,81 @@
+{
+  "schema": "iat-site-locale-config-qa-findings/v1",
+  "findings": [
+    {
+      "id": "WEB-I18N-001",
+      "severity": "HIGH",
+      "state": "OPEN",
+      "title": "Current visible source has drifted beyond the 50-language catalog",
+      "evidence": "247 unique visible source strings are uncataloged across 15 of 25 canonical routes; /tokenomics contributes 63.",
+      "impact": "Localized URLs can publish localized SEO identity and partial UI while leaving substantive English prose visible.",
+      "remediation": "Re-extract the current rendered route inventory, translate with protected protocol terms, review natively, and repeat the 50-locale browser matrix."
+    },
+    {
+      "id": "WEB-I18N-002",
+      "severity": "HIGH",
+      "state": "OPEN",
+      "title": "Native-language review is incomplete",
+      "evidence": "Automated catalog structure and rendering passed, but no native reviewer approved all 49 non-English locale payloads.",
+      "impact": "Meaning, cadence, idiom, and culturally appropriate wording are not independently assured.",
+      "remediation": "Record locale-by-locale native review, corrections, reviewer role, source digest, and UTC review time."
+    },
+    {
+      "id": "WEB-DEPS-001",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "title": "Development and build dependency graph retains transitive advisories",
+      "evidence": "Production audit reports zero vulnerabilities; the complete graph reports 15 moderate and 7 high advisories in build/dev and Solana tooling chains.",
+      "impact": "These packages are not represented as shipped production dependencies, but they remain a release-engineering and local-tooling exposure.",
+      "remediation": "Track upstream compatible releases and upgrade through tested dependency changes; do not apply npm's proposed breaking force-downgrades."
+    },
+    {
+      "id": "WEB-PHYSICAL-001",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "title": "Physical and native-OS browser coverage is incomplete",
+      "evidence": "Android and iOS are emulated; no physical iPhone/Android, native Linux host, or native macOS Safari host was tested.",
+      "impact": "Device-specific font, viewport, GPU, media, and browser chrome behavior remains outside this evidence.",
+      "remediation": "Run a source-bound smoke matrix on representative physical devices and native Linux/macOS hosts."
+    },
+    {
+      "id": "WEB-LANG-001",
+      "severity": "HIGH",
+      "state": "CLOSED",
+      "title": "Tokenomics client toggle overwrote localized document language",
+      "evidence": "The legacy EN/TR effect wrote lang=en on /ur/tokenomics and other localized tokenomics routes.",
+      "remediation": "Localized route ownership now prevents the legacy toggle from mutating document language."
+    },
+    {
+      "id": "WEB-A11Y-001",
+      "severity": "MEDIUM",
+      "state": "CLOSED",
+      "title": "Predictive mechanics labels failed targeted contrast",
+      "evidence": "Axe confirmed color-contrast failures for the mechanics eyebrow and number labels across Firefox, WebKit, and iOS emulation.",
+      "remediation": "Light-surface labels now use #981019 and pass the repeated matrix."
+    },
+    {
+      "id": "WEB-QA-001",
+      "severity": "MEDIUM",
+      "state": "CLOSED",
+      "title": "Locale readiness could report true before translation settlement",
+      "evidence": "The server emitted data-locale-ready=true before the client locale payload applied, allowing a premature test observation.",
+      "remediation": "Non-English documents now begin false and turn true only after catalog activation."
+    },
+    {
+      "id": "WEB-A11Y-002",
+      "severity": "LOW",
+      "state": "CLOSED",
+      "title": "Locale prompt timeout text failed targeted contrast on iOS emulation",
+      "evidence": "Axe reported .locale-prompt small below the targeted contrast rule.",
+      "remediation": "Foreground opacity increased from 0.42 to 0.72 and passes the rerun."
+    },
+    {
+      "id": "WEB-QA-002",
+      "severity": "MEDIUM",
+      "state": "CLOSED",
+      "title": "Fresh CI checkouts omitted generated locale payloads",
+      "evidence": "Both hosted web jobs at 921bf02 returned /i18n payload 404s because Playwright started Vinext directly while public/i18n is intentionally generated and git-ignored; the runtime then exposed an English fallback as ready.",
+      "remediation": "Playwright now runs compile:i18n before starting Vinext, payload failures remain localeReady=false with an explicit localeError marker, and browser diagnostics preserve exact HTTP and non-media request failures while ignoring engine-specific cancellation of MP4 streams. The complete local matrix passes at 762cdf4b7d44e43878187c9103b4a5c7f226667e; final hosted rerun is pending."
+    }
+  ]
+}

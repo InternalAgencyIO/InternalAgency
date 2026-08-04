@@ -1,0 +1,115 @@
+{
+  "schema": "iat-v2-devnet-rehearsal/v1",
+  "status": "PLANNED",
+  "network": "devnet",
+  "purpose": "Exercise the IAT V2 program, scaled vault funding, vesting math, fully collateralized rewards, weekly CCC draw, and failure paths without authorizing mainnet.",
+  "safety": {
+    "mainnetTransactionsAllowed": false,
+    "automaticWalletSignaturesAllowed": false,
+    "secretsAllowedInRepositoryOrEvidence": false,
+    "hardwareConfirmationRequired": true,
+    "independentVerifierRequired": true,
+    "programMustBeHardwareControlledBeforeTokenFunding": true
+  },
+  "toolchain": {
+    "requiredEnvironment": "WSL2_OR_LINUX",
+    "rust": "1.97.1",
+    "solanaCli": "3.1.10",
+    "anchorCli": "1.0.2",
+    "anchorLang": "1.0.2",
+    "switchboardRandomnessAccountAbi": "0.13.0",
+    "compatibilityStatus": "HOST_TESTS_PASS_BPF_AND_DEVNET_PENDING"
+  },
+  "sources": {
+    "policyPath": "engagement/iat-economic-policy.v2.json",
+    "allocationPlanPath": "launch/iat-v2-allocation-plan.template.json",
+    "programPath": "programs/iat_v2",
+    "referenceEnginePath": "engagement/iat-v2-reference-engine.mjs",
+    "policySha256": null,
+    "allocationPlanSha256": null,
+    "programSha256": null,
+    "referenceEngineSha256": null
+  },
+  "scaledToken": {
+    "symbol": "IATDEV2",
+    "decimals": 9,
+    "fixedSupplyDisplayUnits": "1000",
+    "fixedSupplyBaseUnits": "1000000000000",
+    "mint": null,
+    "metadataAddress": null,
+    "mintAuthorityRevocationTransaction": null,
+    "freezeAuthorityRevocationTransaction": null
+  },
+  "scaledAllocations": {
+    "community": "500000000000",
+    "treasury": "200000000000",
+    "ecosystem": "150000000000",
+    "coreTeam": "100000000000",
+    "liquidity": "50000000000"
+  },
+  "programDeployment": {
+    "programId": null,
+    "deploymentTransaction": null,
+    "programBinarySha256": null,
+    "upgradeAuthorityBeforeFunding": null,
+    "upgradeAuthorityTransferTransaction": null,
+    "upgradeAuthorityAfterFunding": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH"
+  },
+  "vaults": {
+    "config": null,
+    "vaultAuthority": null,
+    "stakeVault": null,
+    "treasury": null,
+    "ecosystem": null,
+    "coreTeam": null,
+    "liquidity": null,
+    "fundingTransactions": []
+  },
+  "requiredScenarios": [
+    "INITIALIZE_SCALED_POLICY_AND_FIVE_DESTINATIONS",
+    "VERIFY_25_PERCENT_GENESIS_REWARD_CAPACITY",
+    "RESERVE_SCALED_CORE_REWARD_OBLIGATION_FIRST",
+    "ACCEPT_FULLY_COLLATERALIZED_STANDARD_POSITION",
+    "ACCEPT_FULLY_COLLATERALIZED_CCC_AGENT_POSITION",
+    "REJECT_CCC_SELECTION_BEFORE_24_HOURS",
+    "OPEN_FIRST_CCC_SELECTION_AT_24_HOURS_THEN_ADVANCE_EVERY_7_DAYS",
+    "REJECT_ONE_BASE_UNIT_UNDERCOLLATERALIZED_POSITION",
+    "SETTLE_SWITCHBOARD_COMMIT_REVEAL_WEEK_WITHOUT_REROLL",
+    "REJECT_NON_OFFICIAL_SWITCHBOARD_PROGRAM_ID",
+    "REJECT_NON_ATOMIC_OR_NON_ADJACENT_SWITCHBOARD_COMMIT",
+    "REJECT_WRONG_SWITCHBOARD_COMMIT_DISCRIMINATOR_ACCOUNT_OR_AUTHORITY",
+    "REJECT_INVALID_OR_SHORT_RANDOMNESS_ACCOUNT_DATA",
+    "REJECT_RANDOMNESS_ACCOUNT_WITHOUT_FRESH_PRIOR_SLOT_SEED",
+    "REJECT_RANDOMNESS_ACCOUNT_ALREADY_REVEALED_AT_COMMIT",
+    "REJECT_STALE_REVEAL_AND_MISMATCHED_COMMIT_SLOT",
+    "REJECT_SECOND_SETTLEMENT_OF_THE_SAME_ROUND",
+    "RESOLVE_TWO_WAY_AND_ONE_HUNDRED_WAY_TIES_FROM_ONE_COMMITTED_REVEAL",
+    "VERIFY_CANDIDATE_SNAPSHOT_DOMAIN_SEPARATION_AND_EXACT_UNIFORM_MAPPING",
+    "PAUSE_SELECTED_AGENCY_AND_EXISTING_DOWNSTREAM_POSITIONS",
+    "KEEP_CORE_REWARD_AT_17_PERCENT_DURING_SELECTED_WEEK",
+    "CROSS_TREASURY_TO_ECOSYSTEM_TO_LIQUIDITY_RESERVATIONS",
+    "REJECT_REWARD_DEBT_AFTER_ALL_UNLOCKED_CAPACITY_IS_RESERVED",
+    "VERIFY_CORE_AND_RESERVE_VESTING_BOUNDARIES_IN_LOCAL_WARP_TESTS",
+    "RETURN_USER_PRINCIPAL_AND_RELEASE_UNUSED_RESERVED_REWARD",
+    "VERIFY_MINT_AND_FREEZE_AUTHORITIES_ARE_NONE"
+  ],
+  "transactions": [],
+  "operator": {
+    "label": "Internal Agency",
+    "address": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+    "walletInterface": "Backpack with Trezor Model T",
+    "confirmedActions": [],
+    "completedAtUtc": null
+  },
+  "verifier": {
+    "label": "FDF Guard",
+    "address": "Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja",
+    "independentOfOperator": true,
+    "comparedDestinations": false,
+    "comparedPolicyAndProgramDigests": false,
+    "comparedVaultsAndProgramAuthority": false,
+    "comparedRandomnessCommitAndSettlement": false,
+    "comparedFailurePaths": false,
+    "completedAtUtc": null
+  }
+}

@@ -1,7 +1,12 @@
 import { createHmac, createHash, timingSafeEqual } from "node:crypto";
 const base64url = (value) => Buffer.from(value).toString("base64url");
 const decode = (value) => JSON.parse(Buffer.from(value, "base64url").toString("utf8"));
-const mac = (secret, value) => createHmac("sha256", secret).update(value).digest("base64url");
+const mac = (secret, value) => {
+  // This is a high-entropy server HMAC key (minimum 32 characters below), not
+  // a user password. HMAC-SHA-256 authenticates OAuth state and PKCE material.
+  // codeql[js/insufficient-password-hash]
+  return createHmac("sha256", secret).update(value).digest("base64url");
+};
 export function issueXOAuthState({ nodeId, secret, now = new Date(), ttlMs = 5 * 60_000, nonce }) {
   if (!secret || secret.length < 32) throw new Error("X OAuth state secret must be at least 32 characters");
   if (!/^[0-9a-f-]{36}$/i.test(nodeId)) throw new Error("node id must be a UUID");
@@ -18,4 +23,9 @@ export function verifyXOAuthState({ state, secret, now = new Date() }) {
   if (now.valueOf() > payload.exp) throw new Error("OAuth state expired"); return payload;
 }
 export function pkceVerifier({ state, secret, now }) { verifyXOAuthState({ state, secret, now }); return mac(secret, `pkce:${state}`); }
-export function pkceChallenge(verifier) { return createHash("sha256").update(verifier).digest("base64url"); }
+export function pkceChallenge(verifier) {
+  // RFC 7636 section 4.2 requires SHA-256 for the S256 PKCE transform. This
+  // value is a public verifier challenge, not a password or password hash.
+  // codeql[js/insufficient-password-hash]
+  return createHash("sha256").update(verifier).digest("base64url");
+}

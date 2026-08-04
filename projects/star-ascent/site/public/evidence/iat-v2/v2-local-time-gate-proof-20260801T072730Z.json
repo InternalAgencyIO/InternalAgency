@@ -1,0 +1,368 @@
+{
+  "schema": "iat-v2-local-time-gate-proof/v1",
+  "status": "VERIFIED_LOCAL_HOST_ONLY",
+  "generatedAtUtc": "2026-08-01T07:27:30.181Z",
+  "network": "local-host",
+  "mainnetStatus": "HOLD",
+  "publicEvidencePath": "public/evidence/iat-v2/v2-local-time-gate-proof-20260801T072730Z.json",
+  "method": {
+    "kind": "DETERMINISTIC_VIRTUAL_CLOCK_OVER_EXACT_PROGRAM_POLICY",
+    "localValidatorTransactionUsed": false,
+    "signingPerformed": false,
+    "simulationForSigningPerformed": false,
+    "broadcastingPerformed": false,
+    "walletAccessed": false,
+    "keyCreated": false
+  },
+  "reviewedProgramArtifact": {
+    "sha256": "634d95055b891e6b624a3f6996d10b66e2a7f4bbb1ab50711d6195f72c7772a7",
+    "bytes": 597336,
+    "bindingSource": "public/evidence/iat-v2/v2-feature-independent-signoff-20260801T055736Z.json",
+    "artifactEmbedded": false
+  },
+  "inputs": [
+    {
+      "path": "programs/iat_v2/src/lib.rs",
+      "bytes": 66764,
+      "sha256": "6a64ba700a14b413ad41d553fa2e5218353ae7543d6d01268248bf24c1f37c5a",
+      "normalization": "UTF8_LF"
+    },
+    {
+      "path": "programs/iat_v2/src/policy.rs",
+      "bytes": 11490,
+      "sha256": "a81a8348974f5ef1a041104299d7204135472f16157380332f65f115ec4dc0f1",
+      "normalization": "UTF8_LF"
+    },
+    {
+      "path": "programs/iat_v2/tests/time_warp.rs",
+      "bytes": 3262,
+      "sha256": "45dfbe347bb945f06f9507315f35f64e6fbc9f647b2c9fc7621dc65ab3b6c538",
+      "normalization": "UTF8_LF"
+    },
+    {
+      "path": "engagement/iat-economic-policy.v2.json",
+      "bytes": 5102,
+      "sha256": "17199484e263afde4483520ecedc92f1644140f70e739b310bf9601239e71320",
+      "normalization": "UTF8_LF"
+    },
+    {
+      "path": "engagement/iat-v2-reference-engine.mjs",
+      "bytes": 14695,
+      "sha256": "40f927ff61ee2ad97ff62afd8699f0c84fbe81dee73253d2aacb443b913175ab",
+      "normalization": "UTF8_LF"
+    },
+    {
+      "path": "tests/iat-v2-reference-engine.test.mjs",
+      "bytes": 9525,
+      "sha256": "658b18c72ee7b73c4828a1580d01f83498f7cfa78f6bdffe0ac9eb3e214cf324",
+      "normalization": "UTF8_LF"
+    }
+  ],
+  "environment": {
+    "node": "v24.14.0",
+    "rust": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "solana": "solana-cli 3.1.10",
+    "anchor": "anchor-cli 1.0.2"
+  },
+  "commands": [
+    {
+      "command": "cargo test --locked --test time_warp -- --nocapture",
+      "result": "PASS",
+      "tests": 4
+    },
+    {
+      "command": "node --test tests/iat-v2-reference-engine.test.mjs",
+      "result": "PASS",
+      "tests": 14
+    }
+  ],
+  "observations": {
+    "genesisTimestamp": 1900000000,
+    "secondsPerWeek": 604800,
+    "clockCases": [
+      {
+        "id": "PRE_GENESIS",
+        "timestamp": 1899999999,
+        "expectedOutcome": "REJECTED",
+        "expectedValue": "TIMESTAMP_BEFORE_GENESIS",
+        "observed": {
+          "outcome": "REJECTED",
+          "error": "TIMESTAMP_BEFORE_GENESIS"
+        }
+      },
+      {
+        "id": "GENESIS",
+        "timestamp": 1900000000,
+        "expectedOutcome": "ACCEPTED",
+        "expectedValue": "0",
+        "observed": {
+          "outcome": "ACCEPTED",
+          "value": "0"
+        }
+      },
+      {
+        "id": "WEEK_52_MINUS_ONE_SECOND",
+        "timestamp": 1931449599,
+        "expectedOutcome": "ACCEPTED",
+        "expectedValue": "51",
+        "observed": {
+          "outcome": "ACCEPTED",
+          "value": "51"
+        }
+      },
+      {
+        "id": "WEEK_52_EXACT",
+        "timestamp": 1931449600,
+        "expectedOutcome": "ACCEPTED",
+        "expectedValue": "52",
+        "observed": {
+          "outcome": "ACCEPTED",
+          "value": "52"
+        }
+      },
+      {
+        "id": "WEEK_104_EXACT",
+        "timestamp": 1962899200,
+        "expectedOutcome": "ACCEPTED",
+        "expectedValue": "104",
+        "observed": {
+          "outcome": "ACCEPTED",
+          "value": "104"
+        }
+      },
+      {
+        "id": "WEEK_208_EXACT",
+        "timestamp": 2025798400,
+        "expectedOutcome": "ACCEPTED",
+        "expectedValue": "208",
+        "observed": {
+          "outcome": "ACCEPTED",
+          "value": "208"
+        }
+      }
+    ],
+    "cccCases": [
+      {
+        "id": "ROUND_0_MINUS_ONE_SECOND",
+        "timestamp": 1900086399,
+        "expectedOutcome": "REJECTED",
+        "expectedValue": "CCC_SELECTION_NOT_OPEN",
+        "observed": {
+          "outcome": "REJECTED",
+          "error": "CCC_SELECTION_NOT_OPEN"
+        }
+      },
+      {
+        "id": "ROUND_0_EXACT",
+        "timestamp": 1900086400,
+        "expectedOutcome": "ACCEPTED",
+        "expectedValue": "0",
+        "observed": {
+          "outcome": "ACCEPTED",
+          "value": "0"
+        }
+      },
+      {
+        "id": "ROUND_1_MINUS_ONE_SECOND",
+        "timestamp": 1900691199,
+        "expectedOutcome": "ACCEPTED",
+        "expectedValue": "0",
+        "observed": {
+          "outcome": "ACCEPTED",
+          "value": "0"
+        }
+      },
+      {
+        "id": "ROUND_1_EXACT",
+        "timestamp": 1900691200,
+        "expectedOutcome": "ACCEPTED",
+        "expectedValue": "1",
+        "observed": {
+          "outcome": "ACCEPTED",
+          "value": "1"
+        }
+      }
+    ],
+    "laneCases": [
+      {
+        "lane": "treasury",
+        "week": 51,
+        "expected": "50000000000000000",
+        "observed": "50000000000000000"
+      },
+      {
+        "lane": "treasury",
+        "week": 52,
+        "expected": "50000000000000000",
+        "observed": "50000000000000000"
+      },
+      {
+        "lane": "treasury",
+        "week": 53,
+        "expected": "50961538461538461",
+        "observed": "50961538461538461"
+      },
+      {
+        "lane": "treasury",
+        "week": 130,
+        "expected": "125000000000000000",
+        "observed": "125000000000000000"
+      },
+      {
+        "lane": "treasury",
+        "week": 207,
+        "expected": "199038461538461538",
+        "observed": "199038461538461538"
+      },
+      {
+        "lane": "treasury",
+        "week": 208,
+        "expected": "200000000000000000",
+        "observed": "200000000000000000"
+      },
+      {
+        "lane": "ecosystem",
+        "week": 25,
+        "expected": "37500000000000000",
+        "observed": "37500000000000000"
+      },
+      {
+        "lane": "ecosystem",
+        "week": 26,
+        "expected": "37500000000000000",
+        "observed": "37500000000000000"
+      },
+      {
+        "lane": "ecosystem",
+        "week": 27,
+        "expected": "38942307692307692",
+        "observed": "38942307692307692"
+      },
+      {
+        "lane": "ecosystem",
+        "week": 65,
+        "expected": "93750000000000000",
+        "observed": "93750000000000000"
+      },
+      {
+        "lane": "ecosystem",
+        "week": 103,
+        "expected": "148557692307692307",
+        "observed": "148557692307692307"
+      },
+      {
+        "lane": "ecosystem",
+        "week": 104,
+        "expected": "150000000000000000",
+        "observed": "150000000000000000"
+      },
+      {
+        "lane": "coreTeam",
+        "week": 25,
+        "expected": "0",
+        "observed": "0"
+      },
+      {
+        "lane": "coreTeam",
+        "week": 26,
+        "expected": "0",
+        "observed": "0"
+      },
+      {
+        "lane": "coreTeam",
+        "week": 27,
+        "expected": "1282051282051282",
+        "observed": "1282051282051282"
+      },
+      {
+        "lane": "coreTeam",
+        "week": 65,
+        "expected": "50000000000000000",
+        "observed": "50000000000000000"
+      },
+      {
+        "lane": "coreTeam",
+        "week": 103,
+        "expected": "98717948717948717",
+        "observed": "98717948717948717"
+      },
+      {
+        "lane": "coreTeam",
+        "week": 104,
+        "expected": "100000000000000000",
+        "observed": "100000000000000000"
+      },
+      {
+        "lane": "liquidity",
+        "week": 25,
+        "expected": "12500000000000000",
+        "observed": "12500000000000000"
+      },
+      {
+        "lane": "liquidity",
+        "week": 26,
+        "expected": "12500000000000000",
+        "observed": "12500000000000000"
+      },
+      {
+        "lane": "liquidity",
+        "week": 27,
+        "expected": "12980769230769230",
+        "observed": "12980769230769230"
+      },
+      {
+        "lane": "liquidity",
+        "week": 65,
+        "expected": "31250000000000000",
+        "observed": "31250000000000000"
+      },
+      {
+        "lane": "liquidity",
+        "week": 103,
+        "expected": "49519230769230769",
+        "observed": "49519230769230769"
+      },
+      {
+        "lane": "liquidity",
+        "week": 104,
+        "expected": "50000000000000000",
+        "observed": "50000000000000000"
+      }
+    ],
+    "positionCase": {
+      "acceptedWeek": 7,
+      "firstAccrualWeek": 8,
+      "finalAccrualWeek": 59,
+      "maturityWeek": 59,
+      "preBoundaryWeek": 58,
+      "preBoundaryResult": {
+        "outcome": "REJECTED",
+        "error": "POSITION_TERM_NOT_COMPLETE"
+      },
+      "exactBoundaryResult": {
+        "outcome": "ACCEPTED",
+        "principalReturned": "520000000000",
+        "paidReward": "52000000000",
+        "settledWeeks": 52,
+        "closed": true
+      }
+    }
+  },
+  "coverage": [
+    "pre-Genesis rejection and exact policy-week boundaries",
+    "CCC round zero at exactly 24 hours and weekly cadence",
+    "treasury 52-week cliff and 208-week linear end",
+    "ecosystem, core-team, and liquidity 26-week cliffs and 104-week linear ends",
+    "integer-floor unlock amounts immediately after cliffs and immediately before end weeks",
+    "52-week position maturity on the same policy week as its final accrual",
+    "pre-maturity rejection, exact-maturity principal return, and residual reservation release"
+  ],
+  "limitations": [
+    "This is deterministic local host-program evidence, not a signed or broadcast transaction.",
+    "No local-validator transaction was used because the proof requires no signer, keypair, wallet, or network state.",
+    "The proof binds exact program policy source and cross-language reference behavior; it does not replace the finalized Devnet transaction receipt.",
+    "Switchboard commit/reveal and hardware authority were already exercised separately on Devnet and are outside this artifact.",
+    "This artifact does not authorize mainnet, choose a ceremony time, or clear funding and release gates."
+  ]
+}

@@ -3,6 +3,7 @@ const routes: Record<string, string> = {
   "star-ascent-white-dossier-v2": "white-dossier",
   "iat-litepaper": "white-dossier",
   "iat-tokenomics-v1": "tokenomics",
+  "iat-tokenomics-v2": "tokenomics",
   "iat-token-implementation-manifest": "mint-manifest",
   "iat-genesis-evidence-record": "genesis-proof",
   "star-ascent-broadcast-pack": "broadcast-pack",

@@ -1,0 +1,58 @@
+{
+  "schema": "iat-ui-compatibility-audit-scope/v1",
+  "status": "DRAFT_UI_RELEASE_HOLD",
+  "auditedAtUtc": "2026-08-02T09:42:20Z",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "commit": "eb43a854552ccebaf42efe86bb67a433d2495937",
+    "gitTree": "098bfe802a3238a6bfdab01e00b3039eeac20e77"
+  },
+  "routes": [
+    "/",
+    "/network",
+    "/launch",
+    "/proof",
+    "/signal",
+    "/tokenomics",
+    "/dossier",
+    "/world",
+    "/verify",
+    "/mint",
+    "/rewards"
+  ],
+  "sourceSha256": {
+    ".github/workflows/iat-v2-proof.yml": "201e44036a6d5ab995796d10d8c01a66c6f4bea83cb6738ec2d98d9df53e8d60",
+    "projects/star-ascent/site/app/page.tsx": "002e19afb74e937c5acf38baad36384c31a143562168e0cb435d76c0dda60d28",
+    "projects/star-ascent/site/app/ActivationTerminal.tsx": "be072749f0c624b1ce02fa415cda586e94e56be8f799deb6117e2ffb6a09ff67",
+    "projects/star-ascent/site/app/CrewSignal.tsx": "72a469209102e54b4f5439ba6720133ec867b731b452bbf711f1abacebc03e6d",
+    "projects/star-ascent/site/app/LaunchClock.tsx": "e76e67ccda58d3f1b0e0ed56c5aafa11cd631d39ee4e5063e4d32cd7c36f7bf3",
+    "projects/star-ascent/site/app/LaunchSequence.tsx": "1aa3f917b1ce546d0850f8f834c61f6eadf23dd3847c5e9ec09507aba7365e87",
+    "projects/star-ascent/site/app/audit-remediation.css": "2d5e6139847865a883d33560d7c2d89d02babe17b5bf178193a62bf30735ae56",
+    "projects/star-ascent/site/app/dossier/page.tsx": "a8adb4254077aec158b2b5bdbe299bdac4540fceea99c1bb3495c447da795869",
+    "projects/star-ascent/site/app/launch/page.tsx": "08db6ec2100d72c39cf9ffa9cad11caefa8605fc9ee11ff43e14ff3981fade45",
+    "projects/star-ascent/site/app/layout.tsx": "a390bc52a1ff2b2895b0c91a5c9c556a51e4bd8b2a12e810d479d70acbab0795",
+    "projects/star-ascent/site/app/network/page.tsx": "eeb8ecb49b52bdd0dfccb348a807a7118d070b708b53884cc3b2e9ed2b318904",
+    "projects/star-ascent/site/playwright.config.mjs": "7c9200aa00764389fc0669ac13d6863d6514f59234f8edc915cb7ef6689b6148",
+    "projects/star-ascent/site/tests/ui/ui-regression.spec.mjs": "25d019f9e49d1e4d4ca09debf1702a5e2f85cfb5bbb7c48167c6489fb97c0bef"
+  },
+  "included": [
+    "eleven primary public routes",
+    "responsive containment at 1440x900, 768x1024, Pixel 5, and iPhone 13 emulation profiles",
+    "Chromium, Firefox, and WebKit automated execution",
+    "keyboard focus, modal isolation, tab navigation, and network result announcements",
+    "axe-core color-contrast, aria-prohibited-attr, region, and heading-order rules",
+    "broken-image, intrinsic-image-dimension, overflow, and React console assertions",
+    "build, lint, IAT V2 policy, signoff, canonical JSON, and regression validation"
+  ],
+  "excluded": [
+    "production deployment or penetration testing",
+    "wallet connection, signing, simulation for signing, or broadcast",
+    "mainnet or devnet mutation",
+    "physical iOS or Android devices",
+    "installed mobile Safari or Android system browser",
+    "Linux graphical desktop session",
+    "screen-reader, switch-control, or voice-control certification",
+    "network-throttling and performance laboratory scoring",
+    "independent third-party review"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schema": "iat-v2-continuous-improvement-assurance-boundaries/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "sourceCommit": "d97587cd7616d62d6ba1e494160da2c1b0e582ca",
+  "domains": {
+    "uiAndWebsite": {
+      "automatedEvidence": {
+        "playwrightPassed": 43,
+        "playwrightIntentionalSkips": 6,
+        "playwrightFailed": 0,
+        "siteTestsPassed": 45,
+        "lintErrors": 0,
+        "lintWarnings": 0,
+        "localeCount": 50,
+        "canonicalStringsPerLocale": 1280,
+        "uncatalogedVisibleSourceStrings": 247,
+        "routesWithVisibleSourceDrift": 15
+      },
+      "decision": "LOCALIZATION_RELEASE_HOLD",
+      "limitations": [
+        "Forty-nine non-English locales lack accountable native-speaker certification.",
+        "Physical iOS, Android, graphical Linux, and assistive-technology sessions remain incomplete.",
+        "Automated browser emulation is not physical-device certification."
+      ]
+    },
+    "smartContractsAndLaunchLogic": {
+      "automatedEvidence": {
+        "nodeTestsPassed": 65,
+        "nodeTestsFailed": 0,
+        "currentSourceReproducibleSbfJobsPassed": 2,
+        "currentSourceReproducibleSbfJobsFailed": 0,
+        "productionDependencyAdvisories": 0,
+        "developmentToolingAdvisories": 22,
+        "developmentToolingHigh": 7,
+        "developmentToolingCritical": 0
+      },
+      "decision": "MAINNET_HOLD",
+      "limitations": [
+        "Internal Codex-assisted review is not an independent smart-contract audit or formal proof.",
+        "Sole-Trezor authority concentration remains an owner-accepted open risk.",
+        "Current hardened source lacks a fresh matching signed Devnet rehearsal and independent review."
+      ]
+    },
+    "devnet": {
+      "historicalPriorArtifact": {
+        "chainReceipt": "29_OF_29_FINALIZED_NO_REPORTED_ERROR",
+        "independentFeatureSignoff": "VERIFIED_FOR_PRIOR_ARTIFACT_ONLY"
+      },
+      "currentHardenedSource": {
+        "localTimeGateProof": "VERIFIED_LOCAL_HOST_ONLY",
+        "localIdentityD1Model": "VERIFIED_CREDENTIAL_FREE_LOCAL_MODEL_ONLY",
+        "signedDevnetRehearsal": "REQUIRED_NOT_COMPLETE",
+        "independentReview": "REQUIRED_NOT_COMPLETE"
+      },
+      "decision": "DO_NOT_REUSE_HISTORICAL_EVIDENCE_AS_CURRENT_CLEARANCE"
+    },
+    "futureDlc": {
+      "hero": "FUTURE_INACTIVE_NOT_GENESIS_NOT_DEPLOYED_NO_CLAIM_ROUTE",
+      "associates": "INTENDED_FUTURE_NOT_TECHNICALLY_ISOLATED_INACTIVE_NOT_DEPLOYED_MAINNET_NO_CLAIM_ROUTE",
+      "decision": "NOT_PART_OF_GENESIS"
+    }
+  },
+  "launch": {
+    "schedule": "UNSCHEDULED_HOLD",
+    "mainnetStatus": "HOLD",
+    "fundingFloorSatisfied": false,
+    "authorizesDeployment": false,
+    "authorizesFunding": false,
+    "authorizesWalletAccess": false,
+    "authorizesSigning": false,
+    "authorizesSimulationForSigning": false,
+    "authorizesBroadcast": false,
+    "authorizesMinting": false,
+    "authorizesTransfer": false,
+    "authorizesDnsChange": false,
+    "authorizesSchedulePublication": false,
+    "authorizesMainnetStateChange": false
+  }
+}

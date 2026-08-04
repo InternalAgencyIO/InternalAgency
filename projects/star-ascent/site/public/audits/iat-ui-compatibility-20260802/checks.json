@@ -1,0 +1,87 @@
+{
+  "schema": "iat-ui-compatibility-checks/v1",
+  "status": "DRAFT_UI_RELEASE_HOLD",
+  "runAtUtc": "2026-08-02T09:42:20Z",
+  "environment": {
+    "host": "Windows 10/11 compatible Win32",
+    "playwright": "1.62.1",
+    "axeCore": "4.12.1",
+    "engineRevisions": {"chromium": "1234", "firefox": "1538", "webkit": "2336"}
+  },
+  "checks": [
+    {
+      "id": "PLAYWRIGHT_UI_REGRESSION",
+      "result": "PASS",
+      "metrics": {"passed": 35, "failed": 0, "profiles": 7, "workers": 1}
+    },
+    {
+      "id": "PRIMARY_ROUTE_MATRIX",
+      "result": "PASS",
+      "metrics": {"routes": 11, "loaded": 11, "brokenImages": 0, "routesMissingMain": 0, "documentOverflowDefects": 0, "unsupportedGenericAriaLabels": 0}
+    },
+    {
+      "id": "KEYBOARD_AND_FOCUS",
+      "result": "PASS",
+      "metrics": {"escapeClose": true, "focusTrap": true, "restoreOpenerFocus": true, "skipMovesFocusToMain": true, "tabArrowNavigation": true, "tabHomeEndNavigation": true, "backgroundIsolated": true}
+    },
+    {
+      "id": "NETWORK_LOOKUP_FEEDBACK",
+      "result": "PASS",
+      "metrics": {"invalidInputRejected": true, "focusPreserved": true, "loadingAnnounced": true, "errorAnnounced": true, "walletConnectionRequested": false, "signatureRequested": false}
+    },
+    {
+      "id": "AXE_TARGETED_ROUTE_SWEEP",
+      "result": "PASS",
+      "metrics": {
+        "routes": 11,
+        "profiles": 7,
+        "rules": ["color-contrast", "aria-prohibited-attr", "region", "heading-order"],
+        "confirmedColorContrastNodes": 0,
+        "confirmedSemanticViolations": 0,
+        "manualGradientReviewComplete": false
+      }
+    },
+    {
+      "id": "RESPONSIVE_MATRIX",
+      "result": "PASS_AUTOMATED",
+      "metrics": {
+        "profiles": {
+          "1440x900 Chromium": {"documentOverflowDefects": 0, "homeHeadlineContained": true},
+          "1440x900 Firefox": {"documentOverflowDefects": 0, "homeHeadlineContained": true},
+          "1440x900 WebKit": {"documentOverflowDefects": 0, "homeHeadlineContained": true},
+          "768x1024 Chromium": {"documentOverflowDefects": 0, "homeHeadlineContained": true},
+          "768x1024 Firefox": {"documentOverflowDefects": 0, "homeHeadlineContained": true},
+          "Pixel 5 Chromium emulation": {"homeDocumentOverflowDefects": 0, "homeHeadlineContained": true},
+          "iPhone 13 WebKit emulation": {"homeDocumentOverflowDefects": 0, "homeHeadlineContained": true}
+        }
+      }
+    },
+    {
+      "id": "BROWSER_CONSOLE",
+      "result": "PASS",
+      "metrics": {"runtimeExceptions": 0, "reactUniqueKeyErrors": 0}
+    },
+    {
+      "id": "IMAGE_LAYOUT_STABILITY",
+      "result": "PASS",
+      "metrics": {"auditedImages": 2, "missingIntrinsicDimensions": 0}
+    },
+    {
+      "id": "LOCAL_BUILD_AND_POLICY_VALIDATION",
+      "result": "PASS",
+      "metrics": {"productionBuild": "PASS", "eslintErrors": 0, "nodeTests": "41/41 PASS", "iatV2PolicyGate": "PASS_IN_HOLD", "iatV2Signoff": "PASS_WITH_EXPECTED_INDEPENDENT_INITIALIZATION_PENDING", "canonicalJson": "PASS"}
+    },
+    {
+      "id": "SOURCE_COMMIT_GITHUB_CHECKS",
+      "result": "PENDING_PUBLIC_PUSH",
+      "metrics": {"draftPullRequest": 4, "head": "eb43a854552ccebaf42efe86bb67a433d2495937", "localEquivalentChecks": "PASS", "githubActionsForHead": "NOT_YET_OBSERVED"}
+    }
+  ],
+  "limitations": [
+    "Automated browser execution does not replace physical-device interactive testing.",
+    "Playwright WebKit and mobile emulation are not installed iOS Safari or physical Android evidence.",
+    "The targeted axe rule set is not a complete accessibility certification; gradient and assistive-technology review remain open.",
+    "No graphical Linux session, screen reader, switch control, voice control, network-throttling laboratory, or independent reviewer was available.",
+    "No deployment, wallet connection, signing, broadcast, transfer, or mainnet/devnet mutation occurred."
+  ]
+}

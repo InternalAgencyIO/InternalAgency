@@ -1,0 +1,181 @@
+{
+  "schema": "iat-public-evidence-index/v1",
+  "publishedAtUtc": "2026-08-01T07:27:30.181Z",
+  "lastUpdatedAtUtc": "2026-08-02T19:44:19.917Z",
+  "license": "CC0-1.0",
+  "network": "devnet",
+  "mainnetStatus": "HOLD",
+  "independentReviewRequired": true,
+  "secretMaterialIncluded": false,
+  "repository": "https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/projects/star-ascent/site/public/evidence/iat-v2",
+  "canonicalAtPublication": [
+    "v2-initialization-20260730T074603Z.json",
+    "v2-features-20260801T053340Z.json",
+    "chain-status-20260801T053947Z.json",
+    "v2-feature-independent-signoff-20260801T055736Z.json",
+    "v2-local-time-gate-proof-20260801T072730Z.json"
+  ],
+  "canonicalAtPublicationStatus": "HISTORICAL_PRIOR_ARTIFACT_SUPERSEDED_BY_REMEDIATION_SOURCE",
+  "currentRemediationState": {
+    "sourceCommit": "b73d2d3ce8572e833b9fdd37df23cd97b40df111",
+    "auditManifest": "../../audits/iat-v2-remediation-20260802/manifest.json",
+    "verifiableSbf": {
+      "sourceCommit": "b73d2d3ce8572e833b9fdd37df23cd97b40df111",
+      "sha256": "d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4",
+      "bytes": 579480,
+      "status": "VERIFIED_BUILD_ONLY_NOT_DEPLOYED"
+    },
+    "localHostProof": "v2-local-time-gate-proof-hardening-20260802T130622Z.json",
+    "localHostProofStatus": "VERIFIED_LOCAL_HOST_ONLY",
+    "freshSignedDevnetEvidence": "REQUIRED_NOT_COMPLETE",
+    "independentReview": "REQUIRED_NOT_COMPLETE",
+    "mainnetStatus": "HOLD"
+  },
+  "currentIdentityHardeningState": {
+    "sourceCommit": "01b0ccbc5295064c559cb0cfaf1a434feeac23b0",
+    "localModelEvidence": "v2-local-identity-d1-rehearsal-20260802T194419Z.json",
+    "localModelStatus": "VERIFIED_CREDENTIAL_FREE_LOCAL_MODEL_ONLY",
+    "actualXOAuthAndD1Integration": "REQUIRED_NOT_COMPLETE",
+    "freshSignedDevnetEvidence": "REQUIRED_NOT_COMPLETE",
+    "independentReview": "REQUIRED_NOT_COMPLETE",
+    "mainnetStatus": "HOLD"
+  },
+  "records": [
+    {
+      "file": "legacy-v1-devnet-ceremony-20260729.json",
+      "bytes": 2535,
+      "sha256": "670951401e68a611a7287365d99ab4206b7e493d54f57b29c4c23445157489d9",
+      "scope": "Historical V1 devnet ceremony",
+      "status": "SUPERSEDED_BY_V2",
+      "transactions": 4
+    },
+    {
+      "file": "v2-initialization-20260730T074603Z.json",
+      "bytes": 6980,
+      "sha256": "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
+      "scope": "V2 devnet deployment and initialization rehearsal",
+      "status": "RECORDED_MAINNET_HOLD",
+      "transactions": 7
+    },
+    {
+      "file": "v2-features-20260730T120809Z.json",
+      "bytes": 2383,
+      "sha256": "09ec499c92c0bb8ab03b227b38502e5fc95bc937864051a384367a849987608c",
+      "scope": "V2 feature rehearsal progress snapshot",
+      "status": "PARTIAL_SUPERSEDED_BY_LATER_SNAPSHOT",
+      "transactions": 1
+    },
+    {
+      "file": "v2-features-20260730T122222Z.json",
+      "bytes": 3936,
+      "sha256": "c503e1f0afdeaa956d5dcf5af77730e6802c442f63e05900d4c570aa81ff0273",
+      "scope": "V2 feature rehearsal progress snapshot",
+      "status": "PARTIAL_SUPERSEDED_BY_LATER_SNAPSHOT",
+      "transactions": 4
+    },
+    {
+      "file": "v2-features-20260730T122300Z.json",
+      "bytes": 3936,
+      "sha256": "b57bf2171d06a72dbd6b171efd0bcfaa6ccf7d2729e323e51f6c9e98cbe95678",
+      "scope": "V2 feature rehearsal progress snapshot",
+      "status": "PARTIAL_SUPERSEDED_BY_LATER_SNAPSHOT",
+      "transactions": 4
+    },
+    {
+      "file": "chain-status-20260730T123453Z.json",
+      "bytes": 3129,
+      "sha256": "db4b88364337fb3f0db06d38e5bb68b3ca849196549416db6d5b9ea821696839",
+      "scope": "Read-only devnet status receipt for every published transaction signature",
+      "status": "15_OF_15_FINALIZED_NO_REPORTED_ERROR",
+      "transactions": 15
+    },
+    {
+      "file": "v2-features-20260731T035210Z.json",
+      "bytes": 12136,
+      "sha256": "d97b769a19d9af0fb3711a5c873754c423a651042c677ee5800aee4eca81f325",
+      "scope": "Prior V2 on-chain feature rehearsal snapshot",
+      "status": "PARTIAL_SUPERSEDED_BY_LATER_SNAPSHOT",
+      "transactions": 13
+    },
+    {
+      "file": "chain-status-20260731T064845Z.json",
+      "bytes": 4776,
+      "sha256": "8284f4ecff56b8d2417a5b733a0772ba5dab456ff8eba123d0e2bb53fd350ed4",
+      "scope": "Read-only devnet status receipt for the current canonical transaction set",
+      "status": "24_OF_24_FINALIZED_NO_REPORTED_ERROR",
+      "transactions": 24
+    },
+    {
+      "file": "v2-features-20260731T101732Z.json",
+      "bytes": 12668,
+      "sha256": "4c81fe0dc4e5ec92bf8ac24d73e0c923eff02159d8f03674c13909c82b4d6b85",
+      "scope": "Prior V2 on-chain feature rehearsal snapshot with the first player settlement",
+      "status": "PARTIAL_SUPERSEDED_BY_LATER_SNAPSHOT",
+      "transactions": 14
+    },
+    {
+      "file": "chain-status-20260731T102046Z.json",
+      "bytes": 4959,
+      "sha256": "9b2bfa33f82e67a88d109c96173263ecc1b216d10bea751aa60793595d302093",
+      "scope": "Read-only devnet status receipt for the latest canonical transaction set",
+      "status": "25_OF_25_FINALIZED_NO_REPORTED_ERROR",
+      "transactions": 25
+    },
+    {
+      "file": "v2-features-20260801T053340Z.json",
+      "bytes": 14726,
+      "sha256": "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
+      "scope": "Latest V2 on-chain feature rehearsal snapshot with round-8 and linked-position settlements",
+      "status": "HISTORICAL_PRIOR_ARTIFACT_PARTIAL_SUPERSEDED_BY_REMEDIATION_SOURCE",
+      "transactions": 18
+    },
+    {
+      "file": "chain-status-20260801T053947Z.json",
+      "bytes": 5690,
+      "sha256": "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
+      "scope": "Read-only devnet status receipt for the latest canonical transaction set",
+      "status": "29_OF_29_FINALIZED_NO_REPORTED_ERROR",
+      "transactions": 29
+    },
+    {
+      "file": "v2-feature-independent-signoff-20260801T055736Z.json",
+      "bytes": 2292,
+      "sha256": "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+      "scope": "Operator-relayed FDF Guard review of the corrected program and 18-transaction feature rehearsal",
+      "status": "VERIFIED_FOR_PRIOR_ARTIFACT_SUPERSEDED_BY_REMEDIATION_SOURCE_MAINNET_HOLD",
+      "transactions": 0
+    },
+    {
+      "file": "v2-local-time-gate-proof-20260801T072730Z.json",
+      "bytes": 10393,
+      "sha256": "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+      "scope": "Deterministic local host-program proof of maturity, cliff, linear-unlock, and exact clock boundaries",
+      "status": "VERIFIED_LOCAL_HOST_ONLY_FOR_PRIOR_ARTIFACT_SUPERSEDED_MAINNET_HOLD",
+      "transactions": 0
+    },
+    {
+      "file": "v2-local-time-gate-proof-remediation-20260802T103546Z.json",
+      "bytes": 11633,
+      "sha256": "f233505c784d7cb44c5a3dce7b47d0691f3dbe32f7d26e214a01e86c7d189dfb",
+      "scope": "Deterministic local host-program proof of exact time gates and terminal CCC reveal recovery for remediation source 1df716c",
+      "status": "HISTORICAL_LOCAL_HOST_ONLY_SUPERSEDED_BY_HARDENED_SOURCE_MAINNET_HOLD",
+      "transactions": 0
+    },
+    {
+      "file": "v2-local-time-gate-proof-hardening-20260802T130622Z.json",
+      "bytes": 11985,
+      "sha256": "8453aa583e95477088ebca3baebbf2c2ff5df3e4f36b740d2ae09d3254e87734",
+      "scope": "Deterministic local host-program proof of exact time, cliff, unlock, maturity, and future-CCC model boundaries bound to hardened source b73d2d3 and its 579,480-byte verifiable SBF; no signed transaction",
+      "status": "CURRENT_VERIFIED_LOCAL_HOST_ONLY_CURRENT_SBF_FRESH_SIGNED_DEVNET_AND_INDEPENDENT_REVIEW_REQUIRED_MAINNET_HOLD",
+      "transactions": 0
+    },
+    {
+      "file": "v2-local-identity-d1-rehearsal-20260802T194419Z.json",
+      "bytes": 4650,
+      "sha256": "809227b6fe3f7524a17a44ec97fd59998979dc2ffa647c534545dac391841eb4",
+      "scope": "Credential-free local OAuth and SQLite/D1-semantics rehearsal for rollback, replay, duplicate identity, provider gates, and exact final-slot contention at source 01b0ccb; no provider or D1 request",
+      "status": "CURRENT_VERIFIED_CREDENTIAL_FREE_LOCAL_MODEL_ONLY_ACTUAL_INTEGRATION_AND_INDEPENDENT_REVIEW_REQUIRED_MAINNET_HOLD",
+      "transactions": 0
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "iat-ui-compatibility-findings/v1",
+  "status": "DRAFT_UI_RELEASE_HOLD",
+  "findings": [
+    {
+      "id": "UI-RESP-001",
+      "severity": "HIGH",
+      "state": "CLOSED",
+      "area": "responsive-layout",
+      "routes": ["/"],
+      "summary": "Core launch layout failed at phone and tablet widths",
+      "resolution": "Responsive containment, navigation, launch-status, and headline constraints were added and passed Chromium and Firefox at 768x1024 plus mobile emulation profiles.",
+      "verification": ["35/35 Playwright cases passed", "all eleven routes had zero document overflow in every non-mobile engine profile", "phone and tablet home-layout assertions passed"]
+    },
+    {
+      "id": "UI-A11Y-001",
+      "severity": "HIGH",
+      "state": "CLOSED",
+      "area": "accessibility-contrast",
+      "routes": ["/", "/network", "/launch", "/proof", "/tokenomics", "/dossier", "/world", "/mint", "/rewards"],
+      "summary": "Axe confirmed 28 color-contrast failures across public routes",
+      "resolution": "Route-scoped foreground tokens were replaced with contrast-safe values.",
+      "verification": ["axe-core color-contrast returned zero confirmed violations across eleven routes in seven profiles", "gradient-backed content still requires physical/manual accessibility review"]
+    },
+    {
+      "id": "UI-A11Y-002",
+      "severity": "MEDIUM",
+      "state": "CLOSED",
+      "area": "dialog-tabs-keyboard",
+      "routes": ["/"],
+      "summary": "Activation dialog and tabs had an incomplete keyboard and ARIA contract",
+      "resolution": "The dialog now isolates background siblings, restores opener focus, traps focus, and implements roving tabs with relationships and arrow/Home/End controls.",
+      "verification": ["keyboard contract passed in Chromium, Firefox, WebKit, tablet, Android emulation, and iOS WebKit emulation profiles"]
+    },
+    {
+      "id": "UI-LAYOUT-001",
+      "severity": "MEDIUM",
+      "state": "CLOSED",
+      "area": "route-overflow",
+      "routes": ["/verify"],
+      "summary": "Decorative verify orbit created desktop document overflow",
+      "resolution": "The verify route now clips and paint-contains decorative overflow without hiding functional controls.",
+      "verification": ["route-matrix overflow assertion passed for /verify in desktop and tablet engines"]
+    },
+    {
+      "id": "UI-A11Y-003",
+      "severity": "MEDIUM",
+      "state": "CLOSED",
+      "area": "focus-semantics",
+      "routes": ["/"],
+      "summary": "Skip focus, heading order, generic ARIA labels, and landmarks needed repair",
+      "resolution": "Skip activation focuses main, heading order is repaired, labelled generic containers use supported semantics, and floating content is contained by landmarks.",
+      "verification": ["axe heading-order, region, and aria-prohibited-attr checks passed", "explicit generic aria-label assertion returned zero matches"]
+    },
+    {
+      "id": "UI-A11Y-004",
+      "severity": "MEDIUM",
+      "state": "CLOSED",
+      "area": "network-feedback",
+      "routes": ["/network"],
+      "summary": "Network lookup completion and errors were not programmatically announced",
+      "resolution": "Loading and completion use a polite status, failures use an alert, and the invoking button retains focus across the asynchronous request.",
+      "verification": ["network alert and focus assertions passed in all seven profiles"]
+    },
+    {
+      "id": "UI-FUNC-001",
+      "severity": "LOW",
+      "state": "CLOSED",
+      "area": "react-reconciliation",
+      "routes": ["/launch"],
+      "summary": "LaunchPage emitted a React unique-key console error",
+      "resolution": "Mapped title fragments now have stable keys.",
+      "verification": ["launch route emitted no unique-key console defect in all seven profiles"]
+    },
+    {
+      "id": "UI-PERF-001",
+      "severity": "LOW",
+      "state": "CLOSED",
+      "area": "image-layout-stability",
+      "routes": ["/"],
+      "summary": "Two home images omitted intrinsic dimensions",
+      "resolution": "Both images now publish their source width and height, lazy loading, and asynchronous decoding metadata.",
+      "verification": ["home image intrinsic-dimension assertion passed in all seven profiles"]
+    },
+    {
+      "id": "UI-COVERAGE-001",
+      "severity": "INFO",
+      "state": "OPEN",
+      "area": "environment-coverage",
+      "routes": ["*"],
+      "summary": "Physical mobile, graphical Linux, assistive-technology, and independent certification remain unavailable",
+      "evidence": ["iPhone and Android results are Playwright emulation, not physical-device evidence", "WebKit automation is not installed mobile Safari", "no screen-reader session or independent reviewer was used"],
+      "remediation": "Run and publish the same matrix in a physical device and assistive-technology lab with independent review."
+    }
+  ]
+}

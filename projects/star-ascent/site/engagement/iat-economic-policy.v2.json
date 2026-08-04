@@ -1,0 +1,150 @@
+{
+  "schema": "iat-economic-policy/v2",
+  "status": "HOLD_UNTIL_PROGRAM_REVIEW_AND_MATCHING_DEVNET_REHEARSAL",
+  "networkTarget": "mainnet-beta",
+  "token": {
+    "name": "Internal Agency Token",
+    "symbol": "IAT",
+    "program": "Original SPL Token Program",
+    "programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "decimals": 9,
+    "fixedSupplyBaseUnits": "1000000000000000000",
+    "mint": null
+  },
+  "publicRoles": {
+    "programAdmin": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+    "communityCustody": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+    "treasuryBeneficiary": "CucS4oym18YjEMUmXYVx45q6HUGhW35wE3qpwkcnSCFQ",
+    "ecosystemBeneficiary": "HypAfe9RwaBRnZeLpqvYU1rBbAwHTSBnm24enRL6Qx18",
+    "coreTeamBeneficiary": "2yBK1NkeUoTToE4cfz33WRckho4Qr2BV1ZtCTrw3AHyB",
+    "liquidityBeneficiary": "2d41i3afUpWuo2LqpuKao5D1ToEU88aBokiQ3z8HQtPC",
+    "publicationOperator": "HpqX8EU3FSEPwdurSE8PudsjzpcZLJoaVB8R1Y1HfC6X",
+    "independentVerifier": {
+      "label": "FDF Guard",
+      "address": "Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja"
+    }
+  },
+  "program": {
+    "programId": "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj",
+    "upgradeAuthorityRule": "PROGRAM_ADMIN_HARDWARE_WALLET_BEFORE_ANY_IAT_FUNDING",
+    "randomnessProvider": "SWITCHBOARD_ON_DEMAND_COMMIT_REVEAL",
+    "randomnessProgramId": "SBondMDrcV3K4kxZR1HNVT7osZxAHVHgYXL5Ze1oMUv",
+    "noOperatorReroll": true
+  },
+  "time": {
+    "secondsPerWeek": 604800,
+    "userPositionTermWeeks": 52,
+    "coreRewardTermWeeks": 104,
+    "monthToWeekConvention": {
+      "6Months": 26,
+      "12Months": 52,
+      "24Months": 104,
+      "36Months": 156
+    }
+  },
+  "allocations": {
+    "community": {
+      "baseUnitAmount": "500000000000000000",
+      "custody": "COMMUNITY_HARDWARE_WALLET",
+      "rewardSource": false
+    },
+    "treasury": {
+      "baseUnitAmount": "200000000000000000",
+      "custody": "PROGRAM_VAULT_PDA",
+      "rewardSource": true,
+      "genesisUnlockedBaseUnits": "50000000000000000",
+      "cliffWeek": 52,
+      "linearEndWeek": 208
+    },
+    "ecosystem": {
+      "baseUnitAmount": "150000000000000000",
+      "custody": "PROGRAM_VAULT_PDA",
+      "rewardSource": true,
+      "genesisUnlockedBaseUnits": "37500000000000000",
+      "cliffWeek": 26,
+      "linearEndWeek": 104
+    },
+    "coreTeam": {
+      "baseUnitAmount": "100000000000000000",
+      "custody": "PROGRAM_VAULT_PDA",
+      "rewardSource": false,
+      "genesisUnlockedBaseUnits": "0",
+      "cliffWeek": 26,
+      "linearEndWeek": 104
+    },
+    "liquidity": {
+      "baseUnitAmount": "50000000000000000",
+      "custody": "PROGRAM_VAULT_PDA",
+      "rewardSource": true,
+      "genesisUnlockedBaseUnits": "12500000000000000",
+      "cliffWeek": 26,
+      "linearEndWeek": 104
+    }
+  },
+  "rewardReserve": {
+    "baseUnitAmount": "400000000000000000",
+    "orderedLanes": [
+      "treasury",
+      "ecosystem",
+      "liquidity"
+    ],
+    "genesisUnlockedBaseUnits": "100000000000000000",
+    "mayReachZero": true,
+    "existingReservationsHavePriority": true,
+    "rewardDebtAllowed": false
+  },
+  "rates": {
+    "denominatorBasisPoints": 10000,
+    "weeksPerRateYear": 52,
+    "automaticCompounding": false,
+    "coreTeam": 1700,
+    "standard": 1000,
+    "cccAgent": 2800,
+    "cccAssociate": 2000
+  },
+  "positions": {
+    "permissionlessOpen": true,
+    "principalCustody": "PROGRAM_STAKE_VAULT_PDA",
+    "firstAccrualWeek": "WEEK_AFTER_ACCEPTANCE",
+    "maximumObligationReservedAtAcceptance": true,
+    "insufficientUnlockedCapacityAction": "REJECT",
+    "renewal": "NEW_POSITION_REQUIRING_NEW_FULL_COLLATERAL"
+  },
+  "tieResolution": {
+    "scope": "DEFAULT_FOR_EVERY_PROTOCOL_DECISION_WITH_TWO_OR_MORE_EXACTLY_EQUAL_CANDIDATES",
+    "candidateOrdering": "CANONICAL_ORDER_COMMITTED_BEFORE_RANDOMNESS",
+    "candidateSnapshotHashRequired": true,
+    "oracleRolls": 1,
+    "randomness": "SWITCHBOARD_ON_DEMAND_COMMIT_REVEAL",
+    "mapping": "SHA256_DOMAIN_SEPARATED_COUNTER_EXPANSION_WITH_EXACT_UNIFORM_REJECTION_SAMPLING",
+    "maximumCandidateCount": 4294967295,
+    "operatorReroll": false,
+    "resultFinal": true,
+    "publication": [
+      "DECISION_ID",
+      "CANONICAL_CANDIDATE_SET_OR_COMMITMENT",
+      "CANDIDATE_COUNT",
+      "RANDOMNESS_ACCOUNT_AND_COMMIT_SLOT",
+      "REVEALED_256_BIT_RANDOMNESS",
+      "DERIVATION_COUNTER",
+      "WINNING_INDEX",
+      "SETTLEMENT_TRANSACTION"
+    ],
+    "latencyDisclosure": "INITIATED_IMMEDIATELY_AND_FINAL_ON_THE_SINGLE_COMMITTED_REVEAL_NOT_ZERO_NETWORK_LATENCY"
+  },
+  "ccc": {
+    "genesisStatus": "COMPILED_FAIL_CLOSED_FUTURE_DLC",
+    "genesisActivationInstruction": null,
+    "activationRequiresNewReviewedUpgrade": true,
+    "firstSelectionDelaySeconds": 86400,
+    "frequencyWeeks": 1,
+    "eligibleAgencyRegistry": "APPEND_ONLY_ON_CHAIN_INDEX",
+    "snapshot": "AGENCY_COUNT_AND_EXISTING_POSITION_LINKS_AT_ROUND_COMMIT",
+    "winnerMapping": "UNIVERSAL_EXACT_UNIFORM_ONE_ROLL_TIEBREAK_OVER_CANONICAL_AGENCY_SNAPSHOT",
+    "selectedAgencyEffect": "NO_NEW_WEEKLY_ACCESS_POINTS_OR_IAT_REWARD",
+    "selectedDownstreamEffect": "NO_NEW_WEEKLY_ACCESS_POINTS_OR_IAT_REWARD",
+    "previousAccrualAndPrincipalUntouched": true,
+    "coreRateUnaffected": true,
+    "operatorReroll": false
+  }
+}

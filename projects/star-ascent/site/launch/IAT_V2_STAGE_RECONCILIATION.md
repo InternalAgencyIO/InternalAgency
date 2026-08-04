@@ -1,0 +1,61 @@
+# IAT V2 mainnet stage reconciliation
+
+Status: **DRAFT — INACTIVE — MAINNET HOLD — NO TRANSACTION AUTHORITY**
+
+`iat-v2-mainnet-stage-journal.template.json` is the canonical non-authorizing
+record for the eight reviewed V2 ceremony boundaries. It does not sign,
+broadcast, retry, repair, compensate, publish, or establish on-chain truth.
+
+## Before any stage
+
+The journal may move from `HOLD` to `ARMED` only after it binds the exact source
+commit, six canonical artifact byte digests, four distinct public identities,
+and precommitted reviewed-intent and expected-post-state digests for all eight
+stages. The reviewed intent is SHA-256 over RFC 8785 canonical JSON containing
+the stage, network, program ID, ordered account metas, instruction data, amounts,
+and authorities. It deliberately excludes the expiring recent blockhash and all
+signatures. `scripts/iat-v2-canonical-json.mjs` is the dependency-free local
+canonicalization primitive; its regression covers official RFC serialization,
+UTF-16 key ordering, stable digests, and rejection of non-I-JSON inputs. The
+readiness record must retain its safety controls while recording
+a funded, scheduled, regenerated, independently reviewed, explicitly authorized
+attended ceremony. `ARMED` is still a record state, not authority.
+Public Solana identities must decode to exactly 32 bytes and cannot use the
+system-program placeholder.
+
+## After every confirmed stage
+
+Stop. An independent verifier records the direct mainnet Explorer transaction,
+SHA-256 of the actual serialized Solana message bytes, confirmation time,
+verification time, verifier label, and observed post-state digest. The actual
+message digest binds the fresh blockhash-bearing message separately from the
+reviewed intent and must exist before submission. Continue only when the
+post-state digest exactly matches its precommitment. Each signature must decode
+to exactly 64 bytes and cannot be reused between stages.
+
+The only successful terminal state is `RECONCILED`, with all eight stages
+`FINALIZED_MATCHED`. Publication remains a separate review after reconciliation.
+The canonical post-Genesis reconciliation record includes this journal in its
+stable dependency bundle and cannot become `COMPLETE` unless the journal and
+its terminal decision are both `RECONCILED`.
+
+## First mismatch or failure
+
+The first mismatch or failure changes this record permanently to
+`TERMINAL_HOLD`. If a transaction was submitted but confirmation cannot be
+established, record `SUBMITTED_UNRESOLVED`, the public signature and Explorer
+URL, `CONFIRMATION_UNKNOWN`, and no confirmation time or observed post-state.
+Never infer failure from an unavailable RPC response and never retry an unknown
+signature. Earlier matched stages remain recorded, the stopped boundary is
+named, and every later stage is `NOT_ATTEMPTED`. There is no automatic retry,
+compensating transaction, approval reuse, or improvised repair path. Preserve
+the journal and observable evidence. Any recovery proposal requires a new
+separately reviewed record and must never overwrite this terminal history.
+
+Validate locally with:
+
+```text
+node scripts/validate-iat-v2-mainnet-stage-journal.mjs
+node scripts/test-iat-v2-mainnet-stage-journal-regression.mjs
+node scripts/test-iat-v2-canonical-json-regression.mjs
+```

@@ -1,0 +1,98 @@
+{
+  "schema": "iat-v2-devnet-on-chain-feature-rehearsal-evidence/v1",
+  "status": "PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW",
+  "network": "devnet",
+  "rpc": "https://api.devnet.solana.com",
+  "programId": "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj",
+  "mint": "8Lx1fQDbWNArCo2kWQCYbvx8JgahrkvNgadUPaGhudPM",
+  "config": "Rde8P6ZbVUit66XGvrnxwDD1hUkCbtLoGz32qjHwi9S",
+  "genesisTimestamp": 1780580406,
+  "currentWeek": 7,
+  "currentCccRound": 7,
+  "agencies": [
+    {
+      "index": 0,
+      "owner": "Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja"
+    },
+    {
+      "index": 1,
+      "owner": "HpqX8EU3FSEPwdurSE8PudsjzpcZLJoaVB8R1Y1HfC6X"
+    }
+  ],
+  "participant": "5Kg9jnaL4DuuT5Fr5surbexX8NeCiNpp4wKmi3Wp3C4H",
+  "participantBalanceLamports": 30000000,
+  "positions": [
+    null,
+    null,
+    null
+  ],
+  "coreReward": {
+    "config": "Rde8P6ZbVUit66XGvrnxwDD1hUkCbtLoGz32qjHwi9S",
+    "principal": "100000000000",
+    "annualRateBps": "1700",
+    "termWeeks": "104",
+    "treasuryReserved": "34000000000",
+    "ecosystemReserved": "0",
+    "liquidityReserved": "0",
+    "paid": "0",
+    "settledLow": "0",
+    "settledHigh": "0",
+    "bump": 253
+  },
+  "liquidityLane": {
+    "config": "Rde8P6ZbVUit66XGvrnxwDD1hUkCbtLoGz32qjHwi9S",
+    "tokenAccount": "CSy5nFf5bWrYCXWBKAz6fbAgp5o9uAxKaGMVYb27ZrtS",
+    "beneficiary": "2d41i3afUpWuo2LqpuKao5D1ToEU88aBokiQ3z8HQtPC",
+    "total": "50000000000",
+    "genesisUnlocked": "12500000000",
+    "cliffWeek": "26",
+    "linearEndWeek": "104",
+    "reserved": "0",
+    "paid": "0",
+    "principalClaimed": "0",
+    "lane": 4,
+    "rewardSource": true,
+    "bump": 254,
+    "tokenBump": 245
+  },
+  "randomnessAccount": null,
+  "currentRound": null,
+  "transactions": [
+    {
+      "action": "REGISTER_AGENCY_0",
+      "title": "Register FDF Guard agency",
+      "signature": "2sW2XEEYT6tFPgnmm2Zkw4fYqw2n1EfjvCFVCwTr15swy2WmRuJLLswboj6dWNzzUPspW7xj1jzv6H1tK1Wg1KDx",
+      "messageSha256": "8fa833995285c9777bd665c5552804d1f53cdd905efc82db0a3cf88babd95bdf",
+      "explorerUrl": "https://explorer.solana.com/tx/2sW2XEEYT6tFPgnmm2Zkw4fYqw2n1EfjvCFVCwTr15swy2WmRuJLLswboj6dWNzzUPspW7xj1jzv6H1tK1Wg1KDx?cluster=devnet",
+      "confirmedAtUtc": "2026-07-30T12:08:08.812Z"
+    },
+    {
+      "action": "REGISTER_AGENCY_1",
+      "title": "Register publication-operator agency",
+      "signature": "mNjN86QnU1SuCJARwtkwMhKW87u6KhJ3ZfM9iSqYLYFVCx7ncNQ5hJvSgZH6N6ZuYJhY8fLDj3wWh95fhQw2vMb",
+      "messageSha256": "20986e2396703343ae2b2296bfe1a977b06f553334d0768d2555db47c2ba713e",
+      "explorerUrl": "https://explorer.solana.com/tx/mNjN86QnU1SuCJARwtkwMhKW87u6KhJ3ZfM9iSqYLYFVCx7ncNQ5hJvSgZH6N6ZuYJhY8fLDj3wWh95fhQw2vMb?cluster=devnet",
+      "confirmedAtUtc": "2026-07-30T12:17:13.077Z"
+    },
+    {
+      "action": "SET_STANDARD_ELIGIBILITY",
+      "title": "Certify standard staking role",
+      "signature": "3qLqVk1geV2jTW8VsXTUcJMQV3YnxkXK2nrQQ4GQHML7zB9VJc9qRjvbtj1raPrNcnWU1hNAnTBcSaCh5amFSBYD",
+      "messageSha256": "a05c37c80ce075f8a0b4bb4bb75d5b3050dd6761a62063c288751dab4d5768e0",
+      "explorerUrl": "https://explorer.solana.com/tx/3qLqVk1geV2jTW8VsXTUcJMQV3YnxkXK2nrQQ4GQHML7zB9VJc9qRjvbtj1raPrNcnWU1hNAnTBcSaCh5amFSBYD?cluster=devnet",
+      "confirmedAtUtc": "2026-07-30T12:17:31.106Z"
+    },
+    {
+      "action": "FUND_PARTICIPANT_RENT",
+      "title": "Fund participant account rent",
+      "signature": "3SNUHCkhMM3Njq1diJF7jTuNKhvgKgAhjoLmVhCjC9BxDY1yRtkRrh4yUF6YPWLQGbLJdspJjyMpg7Uc6ktfTL4P",
+      "messageSha256": "6f338dd6c90c7258de6ce9dca3614f4ce40ce3ad0f1a15e96afbd0759f243260",
+      "explorerUrl": "https://explorer.solana.com/tx/3SNUHCkhMM3Njq1diJF7jTuNKhvgKgAhjoLmVhCjC9BxDY1yRtkRrh4yUF6YPWLQGbLJdspJjyMpg7Uc6ktfTL4P?cluster=devnet",
+      "confirmedAtUtc": "2026-07-30T12:17:41.117Z"
+    }
+  ],
+  "exportedAtUtc": "2026-07-30T12:23:00.413Z",
+  "mainnetStatus": "HOLD",
+  "independentReviewRequired": true,
+  "secretMaterialIncluded": false
+}

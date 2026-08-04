@@ -1,0 +1,59 @@
+{
+  "schema": "iat-v2-remediation-scope/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "repository": "InternalAgencyIO/InternalAgency",
+  "publicSourcePullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/4",
+  "sourceBranch": "agent/iat-launch-window",
+  "sourceCommit": "b73d2d3ce8572e833b9fdd37df23cd97b40df111",
+  "sourceTree": "faa4f1c9ddcd78ddaeabed5616b815022ddcd613",
+  "programTree": "494825173877488b87f12ebac31971a8a14ff470",
+  "criticalSourceCanonicalUtf8LfSha256": {
+    "projects/star-ascent/site/programs/iat_v2/src/lib.rs": "7fada9b0b78b055c165d502579d2220daa8825ba2d90253cd9f591e391e94796",
+    "projects/star-ascent/site/programs/iat_v2/src/policy.rs": "cac29a55e8c66f1a59bf99d29fc7495df0a905b7aa7e944a21c0e971df176632",
+    "projects/star-ascent/site/engagement/iat-economic-policy.v2.json": "62659311856834dc1d9e6016d0afc4f63b2430d14b8f1131817d193a6e49c6ff",
+    "projects/star-ascent/site/engagement/reward-policy.v1.json": "a2e2f1efe057935271e6a403d11a5045353a308f2fb060d4747459eb2857d0f7",
+    "projects/star-ascent/site/engagement/node-session.mjs": "9972c2e358a3582b1d9cf74f6ef3e8cd7654a1468be6f4d8b2599812c55be3d0",
+    "projects/star-ascent/site/engagement/node-binding-policy.mjs": "ac77f4eb54fc1753ed6ac2a033ba88afc38c86d1c8eac92b3af3d458062377ab",
+    "projects/star-ascent/site/engagement/epoch-engine.mjs": "4d93dc15cef21e5a980f39c8d484b5ed79dfd17087dfe91c7cd7e7704e61224c",
+    "projects/star-ascent/site/app/api/x/callback/route.ts": "357c37abd73d27b86e5b48a8c690c01f1c3661c705f1239b2661a793a2c16293",
+    "projects/star-ascent/site/app/api/network/route.ts": "b7a52ab5bbb53254e7c4010ecf18a126daec0eb4d1a2de9fe8cb473ccbda5604",
+    "src/main.cjs": "ea3a2d038c4dcbab3e449e1ebe2fa521a8eb10d4d6b4b1b91e754efdea3b4200"
+  },
+  "currentProgramArtifact": {
+    "builtForThisSource": true,
+    "sourceCommit": "b73d2d3ce8572e833b9fdd37df23cd97b40df111",
+    "toolchain": {"anchor":"1.0.2","solana":"3.1.10","rust":"1.97.1"},
+    "sha256": "d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4",
+    "bytes": 579480,
+    "lockedHostTests": 23,
+    "forbiddenProgramKeypairProduced": false,
+    "freshVerifiableSbfRequired": false,
+    "deploymentAuthorized": false
+  },
+  "historicalVerifiableSbf": {
+    "sourceCommit": "1df716ccd93c47ee1732af6ae1f43b8e6958afe6",
+    "sha256": "d01d56161396ce7de28c1ff8c7386bf2fdf1014f6f62935c29106054b0e93e22",
+    "bytes": 606320,
+    "coversThisSourceCommit": false,
+    "deploymentAuthorized": false
+  },
+  "historicalDevnetEvidence": {
+    "remainsHistoricalEvidence": true,
+    "coversThisSourceCommit": false,
+    "freshSignedRehearsalRequired": true
+  },
+  "authorityPolicy": {
+    "ownerDirection": "KEEP_ALL_CHAIN_AUTHORITIES_ON_THE_SOLE_TREZOR_MODEL_T",
+    "separateAuthoritiesImplemented": false,
+    "multisigImplemented": false,
+    "hotOrServerSigningKeyAllowed": false,
+    "classifiedAsRoleSeparation": false,
+    "riskDisposition": "OPEN_OWNER_ACCEPTED_CONCENTRATION_RISK"
+  },
+  "exclusions": [
+    "No wallet, secret, signing, simulation for signing, broadcast, deployment, funding, DNS, or chain mutation",
+    "No signed Devnet transaction for the current-source SBF",
+    "No production X OAuth or Cloudflare D1 integration exercise",
+    "No independent audit, formal proof, custody review, or economic guarantee"
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "title": "IAT V2 dependency security triage",
+  "generatedAt": "2026-08-04T08:46:12.1365065Z",
+  "status": "DRAFT_QA_HOLD",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "deploymentPerformed": false,
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "branch": "agent/iat-launch-window",
+    "commit": "b5d1c6f055445ee60914d6db80c1259cec7a4267",
+    "gitTree": "057e9019504d2d8149162bf2e60e63357983423c",
+    "sha256": {
+      "projects/star-ascent/site/package.json": "66a1cb00ff112087d1e9d449944ad2bffd1e57b396730e50943189796d485523",
+      "projects/star-ascent/site/package-lock.json": "81bac2f217536fbab411275eb5c1405e12da3bef38b63cfeb67a6236d011a0d5"
+    }
+  },
+  "githubDefaultBranchSnapshot": {
+    "query": "Dependabot alerts: state=open, per_page=100",
+    "total": 78,
+    "severity": {
+      "critical": 0,
+      "high": 38,
+      "moderate": 33,
+      "low": 7
+    },
+    "note": "This is GitHub's default-branch alert state. It includes alerts for an older pnpm-lock.yaml that is absent from the bound draft source and therefore is not interchangeable with the current npm lock audit."
+  },
+  "currentLockNpmAudit": {
+    "command": "npm audit --package-lock-only --json",
+    "auditReportVersion": 2,
+    "dependencyCounts": {
+      "production": 6,
+      "development": 854,
+      "optional": 232,
+      "peer": 41,
+      "total": 859
+    },
+    "vulnerabilityCounts": {
+      "critical": 0,
+      "high": 10,
+      "moderate": 16,
+      "low": 0,
+      "total": 26
+    },
+    "directHigh": [
+      "@solana/spl-token",
+      "@switchboard-xyz/on-demand",
+      "next"
+    ],
+    "transitiveHigh": [
+      "@solana/buffer-layout-utils",
+      "bigint-buffer",
+      "brace-expansion",
+      "fast-uri",
+      "postcss",
+      "sharp",
+      "undici"
+    ],
+    "directModerate": [
+      "@cloudflare/vite-plugin",
+      "@coral-xyz/anchor",
+      "@solana/web3.js",
+      "drizzle-kit",
+      "wrangler"
+    ]
+  },
+  "exactDirectPins": {
+    "@cloudflare/vite-plugin": "1.48.0",
+    "@coral-xyz/anchor": "0.31.1",
+    "@solana/spl-token": "0.4.15",
+    "@solana/web3.js": "1.98.4",
+    "@switchboard-xyz/on-demand": "3.10.6",
+    "drizzle-kit": "0.31.10",
+    "next": "16.2.12",
+    "wrangler": "4.115.0"
+  },
+  "decisions": [
+    {
+      "id": "DEP-001",
+      "state": "HOLD",
+      "subject": "Do not run npm audit fix or bulk-upgrade launch dependencies",
+      "reason": "Several suggested fixes are semver-major graph changes or apparent downgrades across Solana, Switchboard, Cloudflare, and Drizzle packages. Automatic mutation would be higher risk than source-bound review and targeted rehearsal."
+    },
+    {
+      "id": "DEP-002",
+      "state": "HOLD",
+      "subject": "bigint-buffer has no upstream patched release in the captured Dependabot record",
+      "reason": "The package is transitive through Solana buffer-layout tooling. Replacement or graph removal requires dependency-owner and reachability review; it is not safe to claim remediated by a suggested @solana/spl-token downgrade."
+    },
+    {
+      "id": "DEP-003",
+      "state": "REVIEW_REQUIRED",
+      "subject": "Prioritize runtime reachability and supported upgrade paths",
+      "reason": "The next safe increment is a source/import/bundle reachability matrix for the ten current-lock high findings, followed by supported upstream upgrades and a fresh Devnet rehearsal when protocol-facing packages change."
+    }
+  ],
+  "assurance": {
+    "allVulnerabilitiesRemediated": false,
+    "runtimeReachabilityProven": false,
+    "safeUpgradePathProven": false,
+    "releaseApproved": false,
+    "mainnetStateChanged": false
+  },
+  "limitations": [
+    "Advisory data is time-bound and may change after this capture.",
+    "npm audit reports dependency graph exposure; it does not by itself prove that vulnerable code is reachable in the production bundle or launch ceremony.",
+    "GitHub default-branch Dependabot totals and the bound draft package-lock audit cover different manifest states and must not be compared as if they were one scanner run.",
+    "No dependency was upgraded, downgraded, overridden, dismissed, deployed, signed, or broadcast by this audit increment."
+  ]
+}

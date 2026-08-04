@@ -1,0 +1,52 @@
+{
+  "schema": "iat-ui-compatibility-audit-manifest/v1",
+  "status": "DRAFT_UI_RELEASE_HOLD",
+  "mainnetStatus": "HOLD",
+  "uiReleaseDecision": "HOLD",
+  "assurance": "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT",
+  "title": "IAT public UI compatibility and accessibility audit - remediation revision",
+  "auditedAtUtc": "2026-08-02T09:42:20Z",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "commit": "eb43a854552ccebaf42efe86bb67a433d2495937",
+    "gitTree": "098bfe802a3238a6bfdab01e00b3039eeac20e77",
+    "scopePath": "public/audits/iat-ui-compatibility-20260802/scope.json"
+  },
+  "findingSummary": {
+    "total": 9,
+    "openBySeverity": {"CRITICAL": 0, "HIGH": 0, "MEDIUM": 0, "LOW": 0, "INFO": 1},
+    "closedBySeverity": {"CRITICAL": 0, "HIGH": 2, "MEDIUM": 4, "LOW": 2, "INFO": 0}
+  },
+  "clearance": {
+    "uiReleaseApproved": false,
+    "responsiveBlockersResolved": true,
+    "accessibilityBlockersResolved": true,
+    "iosSafariCertified": false,
+    "physicalAndroidCertified": false,
+    "linuxGraphicalBrowserCertified": false,
+    "screenReaderCertified": false,
+    "independentReviewComplete": false,
+    "authorizesDeployment": false,
+    "authorizesSigning": false,
+    "authorizesBroadcast": false
+  },
+  "publicDevelopmentSurface": {
+    "draftPullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/4",
+    "packagePath": "projects/star-ascent/site/public/audits/iat-ui-compatibility-20260802",
+    "deploymentState": "NOT_DEPLOYED"
+  },
+  "artifactSha256": {
+    "README.md": "a4864adadd106fdce44b4d5321a03007f7bfdeb93a7e11f91868f097e48cf600",
+    "FINDINGS.md": "804311907c8b2aad85a7629a2d5f2b2d5ebab92bc8aac918f4e5c193ef36b2b6",
+    "scope.json": "1c64f4d449d717caa8a37cd4a310b7006aba53e44fe87fd7d6518a8ea1e65889",
+    "findings.json": "4610e205083dc94ce1d97f76aea1ec34fc7b3b18948de4821a28cd59eb6a1b2a",
+    "checks.json": "0767bddc5bd16a07e88eec5c1566587844ffcc2e40b7d7f848827253cef57af1",
+    "environment-matrix.json": "04d90dcac9a2a7b7fec600ba3b673fc7cb4484706197dec355fc12fe0668ca6a"
+  },
+  "limitations": [
+    "This package is not an independent accessibility certification or physical-device browser-lab report.",
+    "Playwright WebKit and mobile emulation are not installed iOS Safari or physical Android evidence.",
+    "No graphical Linux session or assistive-technology certification was performed.",
+    "No wallet, key, signing device, secret, deployment, transaction, or funds were accessed."
+  ]
+}

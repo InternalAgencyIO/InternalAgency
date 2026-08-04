@@ -1,0 +1,40 @@
+{
+  "schema": "iat-v2-launch-qa-scope/v1",
+  "status": "DRAFT_QA_HOLD",
+  "auditedAtUtc": "2026-08-03T05:41:05Z",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "commit": "4b7b121640e65586aaadf2fcf2c6d5b96808108b",
+    "gitTree": "8f1532c9942446a8dd12a89be3e9f4db7809c688"
+  },
+  "routes": ["/", "/network", "/launch", "/proof", "/signal", "/tokenomics", "/dossier", "/world", "/verify", "/mint", "/rewards"],
+  "sourceSha256": {
+    ".github/workflows/iat-v2-proof.yml": "201e44036a6d5ab995796d10d8c01a66c6f4bea83cb6738ec2d98d9df53e8d60",
+    "projects/star-ascent/site/app/layout.tsx": "3c3168b9b836d497158a7a8fcad67e409783e3323527885da6dbbf9ebfbf5053",
+    "projects/star-ascent/site/tests/ui/ui-regression.spec.mjs": "0e4d9367184e993a63bd04097a70f0a16cb36027c246af521210339e728301c7",
+    "projects/star-ascent/site/playwright.config.mjs": "1aa373bb25194fe05d3830eac556781c9c93f7a7f8e46ec735c1906612b8c4bc",
+    "projects/star-ascent/site/scripts/check-public-launch-routes.mjs": "ec5a4c5cb8aa133aa79ea47091532e1c3c5451101156b5a5d02fc52e25b637a1",
+    "projects/star-ascent/site/package.json": "2912d053318b6d979adcf131acdf39af40b8564c7e16f8073435382071fddac2",
+    "projects/star-ascent/site/app/api/network/route.ts": "b7a52ab5bbb53254e7c4010ecf18a126daec0eb4d1a2de9fe8cb473ccbda5604",
+    "projects/star-ascent/site/app/network/page.tsx": "783dd8cbfd5707f25ac302723b8bbd4394f64c0d7451d793d30c962bc53c75bf"
+  },
+  "included": [
+    "production build and nineteen rendered-HTML tests",
+    "eleven primary public routes in seven automated browser profiles",
+    "HTTP status, document language/title, encoding, browser exception, console error, overflow, image, ARIA, focus, keyboard, and targeted axe assertions",
+    "production and full dependency audit summaries",
+    "IAT V2, signoff, launch-gate, release, rollback, and reconciliation validators",
+    "isolated local admin-console build warnings",
+    "read-only HTTPS observations of internalagency.io and ileriakil.com"
+  ],
+  "excluded": [
+    "production or pre-production deployment",
+    "wallet, hardware signer, secret, signing, simulation for signing, broadcast, mint, or transfer",
+    "mainnet or devnet mutation",
+    "DNS or hosting changes",
+    "physical iOS or Android devices and installed mobile Safari",
+    "graphical Linux desktop and assistive-technology certification",
+    "performance-lab and network-throttling certification",
+    "independent third-party review"
+  ]
+}

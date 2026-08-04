@@ -1,7 +1,8 @@
 import { execFileSync } from "node:child_process";
+import { readFileSync } from "node:fs";
 
 const timeoutMs = 12_000;
-const concurrency = 4;
+const concurrency = 1;
 
 const publicOrigins = ["https://internalagency.io", "https://ileriakil.com"];
 const launchRoutes = [
@@ -13,15 +14,21 @@ const launchRoutes = [
   "/dossier",
   "/press",
   "/rewards",
+  "/tokenomics",
+  "/network",
 ];
-const sitemapRoutes = [...launchRoutes, "/world"];
 const pages = publicOrigins.flatMap((origin) => launchRoutes.map((route) => `${origin}${route}`));
+const metadataCatalog = JSON.parse(readFileSync(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8"));
+const routeSeoCatalog = JSON.parse(readFileSync(new URL("../app/i18n/route-seo.json", import.meta.url), "utf8"));
+const sitemapRoutes = Object.keys(routeSeoCatalog);
+const localeCodes = Object.keys(metadataCatalog);
 
 const disclosureRedirects = {
   "star-ascent-whitepaper-v2": "white-dossier",
   "star-ascent-white-dossier-v2": "white-dossier",
   "iat-litepaper": "white-dossier",
   "iat-tokenomics-v1": "tokenomics",
+  "iat-tokenomics-v2": "tokenomics",
   "iat-token-implementation-manifest": "mint-manifest",
   "iat-genesis-evidence-record": "genesis-proof",
   "star-ascent-broadcast-pack": "broadcast-pack",
@@ -61,19 +68,28 @@ function attribute(tag, name) {
   return decodeHtmlAttribute(value);
 }
 
+function normalizePublicUrl(value) {
+  try {
+    const url = new URL(value);
+    return `${url.origin}${url.pathname === "/" ? "" : url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return value;
+  }
+}
+
 function metadataError(url, html) {
-  const origin = new URL(url).origin;
-  const expected = origin === "https://ileriakil.com"
-    ? {
-      lang: "tr",
-      title: "İleri Akıl — STAR ASCENT",
-      description: "İleri Akıl'ın ilk kamusal bölümü: şeffaf lansman bilgileri, token açıklaması ve operatör güvenlik rehberi.",
-    }
-    : {
-      lang: "en",
-      title: "Internal Agency — STAR ASCENT",
-      description: "The first public chapter of Internal Agency: transparent launch information, token disclosure, and operator safety guidance.",
-    };
+  const parsedUrl = new URL(url);
+  const origin = parsedUrl.origin;
+  const publicPath = parsedUrl.pathname || "/";
+  const locale = origin === "https://ileriakil.com" ? "tr" : "en";
+  const localeMetadata = metadataCatalog[locale];
+  const seoSources = routeSeoCatalog[publicPath]
+    ?? (publicPath.startsWith("/dossier/read/") ? routeSeoCatalog["/dossier"] : routeSeoCatalog["/"]);
+  const expected = {
+    lang: locale,
+    title: localeMetadata.seo[seoSources.title] ?? localeMetadata.title,
+    description: localeMetadata.seo[seoSources.description] ?? localeMetadata.description,
+  };
   const language = html.match(/<html\b[^>]*\blang="([^"]+)"/i)?.[1] ?? "";
   const title = html.match(/<title>([^<]*)<\/title>/i)?.[1] ?? "";
   const metaTags = html.match(/<meta\b[^>]*>/gi) ?? [];
@@ -86,6 +102,8 @@ function metadataError(url, html) {
     const tag = linkTags.find((candidate) => attribute(candidate, "rel") === "alternate" && attribute(candidate, "hreflang") === language);
     return tag ? attribute(tag, "href") : "";
   };
+  const canonicalTag = linkTags.find((candidate) => attribute(candidate, "rel") === "canonical");
+  const canonicalHref = canonicalTag ? attribute(canonicalTag, "href") : "";
   const ogImageUrl = metaValue("og:image");
   if (language !== expected.lang) return `expected html lang=${expected.lang}; got ${language || "missing"}`;
   if (title !== expected.title) return `expected title ${expected.title}; got ${title || "missing"}`;
@@ -100,14 +118,20 @@ function metadataError(url, html) {
   if (metaValue("twitter:title", "name") !== expected.title) return "expected Twitter title to exactly match the document title";
   if (metaValue("twitter:description", "name") !== expected.description) return "expected Twitter description to exactly match the canonical bilingual description";
   if (metaValue("twitter:image", "name") !== `${origin}/og-star-ascent-v1.png`) return "expected canonical Twitter image";
-  if (alternateHref("en") !== "https://internalagency.io") return "expected exact English alternate link to the canonical English origin";
-  if (alternateHref("tr") !== "https://ileriakil.com") return "expected exact Turkish alternate link to the canonical Turkish origin";
+  const routeSuffix = publicPath === "/" ? "" : publicPath;
+  if (canonicalHref !== `${origin}${routeSuffix}`) return `expected exact canonical route ${origin}${routeSuffix}; got ${canonicalHref || "missing"}`;
+  if (normalizePublicUrl(alternateHref("en")) !== `https://internalagency.io${routeSuffix}`) return "expected exact English alternate route";
+  if (normalizePublicUrl(alternateHref("tr")) !== `https://internalagency.io/tr${routeSuffix}`) return "expected exact Turkish locale alternate route";
+  if (normalizePublicUrl(alternateHref("tr-TR")) !== `https://ileriakil.com${routeSuffix}`) return "expected exact Turkish-origin alternate route";
+  if (normalizePublicUrl(alternateHref("x-default")) !== `https://internalagency.io${routeSuffix}`) return "expected exact x-default alternate route";
   return null;
 }
 
-function publicSurfaceSafetyError(html) {
+function publicSurfaceSafetyError(url, html) {
   const interactiveControl = html.match(/<(form|input|textarea|select|option)\b/i)?.[1];
-  if (interactiveControl) return `public launch surface must not expose a ${interactiveControl} control before the verified activation gate`;
+  if (interactiveControl && new URL(url).pathname !== "/network") {
+    return `public launch surface must not expose a ${interactiveControl} control before the verified activation gate`;
+  }
   if (/\b(?:phantom|solflare|backpack|walletconnect)\b/i.test(html)) {
     return "public launch surface must not expose a wallet-provider integration before the verified activation gate";
   }
@@ -139,7 +163,11 @@ function sitemapError(origin, xml) {
     return "expected a sitemap.org urlset";
   }
   const locations = [...xml.matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/gi)].map((match) => match[1]);
-  const expected = publicOrigins.flatMap((site) => sitemapRoutes.map((route) => route === "/" ? site : `${site}${route}`));
+  const canonical = publicOrigins.flatMap((site) => sitemapRoutes.map((route) => route === "/" ? site : `${site}${route}`));
+  const localized = localeCodes
+    .filter((locale) => locale !== "en")
+    .flatMap((locale) => sitemapRoutes.map((route) => `https://internalagency.io/${locale}${route === "/" ? "" : route}`));
+  const expected = [...canonical, ...localized];
   const missing = expected.filter((url) => !locations.includes(url));
   const unexpected = locations.filter((url) => !expected.includes(url));
   const duplicates = locations.filter((url, index) => locations.indexOf(url) !== index);
@@ -240,34 +268,43 @@ function isExpectedRedirectTarget(sourceUrl, location, expectedPath) {
 }
 
 async function checkPage(url) {
-  try {
-    const response = await request(url);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    if (response.url !== url) throw new Error(`expected the canonical public route to remain ${url}; got ${response.url}`);
-    const contentTypeIssue = htmlContentTypeError(response.headers.get("content-type"));
-    if (contentTypeIssue) throw new Error(contentTypeIssue);
-    const html = await response.text();
-    const metadataIssue = metadataError(url, html);
-    if (metadataIssue) throw new Error(metadataIssue);
-    const safetyIssue = publicSurfaceSafetyError(html);
-    if (safetyIssue) throw new Error(safetyIssue);
-    console.log(`OK ${response.status} ${url} (UTF-8 HTML, language, alternate links, social metadata, and pre-activation safety)`);
-    return true;
-  } catch (error) {
+  let lastError = new Error("public route verification did not run");
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
     try {
-      const status = headerStatus(curlHeaders(url));
-      if (status >= 200 && status < 300) {
-        const binary = process.platform === "win32" ? "curl.exe" : "curl";
-        const headers = curlHeaders(url);
-        const contentTypeIssue = htmlContentTypeError(headerValue(headers, "content-type"));
-        const html = execFileSync(binary, ["-sS", "--connect-timeout", "5", "--max-time", "12", url], { encoding: "utf8" });
-        const metadataIssue = metadataError(url, html);
-        const safetyIssue = publicSurfaceSafetyError(html);
-        if (!contentTypeIssue && !metadataIssue && !safetyIssue) { console.log(`OK ${status} ${url} (curl fallback; UTF-8 HTML, language, alternate links, social metadata, and pre-activation safety)`); return true; }
-      }
-    } catch { /* preserve the original network error below */ }
-    console.error(`FAIL ${url}: ${error.message}`); return false;
+      const response = await request(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      if (response.url !== url) throw new Error(`expected the canonical public route to remain ${url}; got ${response.url}`);
+      const contentTypeIssue = htmlContentTypeError(response.headers.get("content-type"));
+      if (contentTypeIssue) throw new Error(contentTypeIssue);
+      const html = await response.text();
+      const metadataIssue = metadataError(url, html);
+      if (metadataIssue) throw new Error(metadataIssue);
+      const safetyIssue = publicSurfaceSafetyError(url, html);
+      if (safetyIssue) throw new Error(safetyIssue);
+      const retryNote = attempt > 1 ? ` after ${attempt} attempts` : "";
+      console.log(`OK ${response.status} ${url}${retryNote} (UTF-8 HTML, language, alternate links, social metadata, and pre-activation safety)`);
+      return true;
+    } catch (error) {
+      lastError = error;
+    }
   }
+  try {
+    const status = headerStatus(curlHeaders(url));
+    if (status >= 200 && status < 300) {
+      const binary = process.platform === "win32" ? "curl.exe" : "curl";
+      const headers = curlHeaders(url);
+      const contentTypeIssue = htmlContentTypeError(headerValue(headers, "content-type"));
+      const html = execFileSync(binary, ["-sS", "--connect-timeout", "5", "--max-time", "12", url], { encoding: "utf8" });
+      const metadataIssue = metadataError(url, html);
+      const safetyIssue = publicSurfaceSafetyError(url, html);
+      if (!contentTypeIssue && !metadataIssue && !safetyIssue) {
+        console.log(`OK ${status} ${url} (curl fallback; UTF-8 HTML, language, alternate links, social metadata, and pre-activation safety)`);
+        return true;
+      }
+    }
+  } catch { /* preserve the latest fetch error below */ }
+  console.error(`FAIL ${url}: ${lastError.message}`);
+  return false;
 }
 
 async function checkRedirect(url, expectedPath) {

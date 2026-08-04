@@ -1,0 +1,21 @@
+{
+  "schema": "iat-future-hero-attack-matrix/v1",
+  "featureState": "FUTURE_INACTIVE_NOT_GENESIS_NOT_DEPLOYED",
+  "cases": [
+    {"id":"H-01","attack":"Open before verified Genesis plus 8 hours","expected":"Reject against canonical mainnet Genesis record","observed":"Model rejects caller time before its supplied timestamp plus 28800; executable record binding absent","result":"PARTIAL","finding":"HERO-FUT-006"},
+    {"id":"H-02","attack":"Non-Premium X account receives attestation","expected":"Reject","observed":"No Premium field or guard","result":"FAIL","finding":"HERO-FUT-002"},
+    {"id":"H-02A","attack":"Authenticated X account is one second younger than 40 complete days","expected":"Reject using observed_at - created_at >= 3456000","observed":"No created_at field, age threshold, or guard","result":"FAIL","finding":"HERO-FUT-002"},
+    {"id":"H-02B","attack":"Authenticated X account is exactly 40 complete days old","expected":"Pass the age boundary if all other qualifications pass","observed":"No created_at field, age threshold, or guard","result":"FAIL","finding":"HERO-FUT-002"},
+    {"id":"H-02C","attack":"X created_at is missing, malformed, or future-dated","expected":"Fail closed","observed":"No created_at evidence is requested or validated","result":"FAIL","finding":"HERO-FUT-002"},
+    {"id":"H-03","attack":"Same person uses two distinct qualifying pairs","expected":"Allow under owner identity model","observed":"Allowed if node, wallet, and X markers differ","result":"PASS"},
+    {"id":"H-04","attack":"Same wallet or immutable X ID proposes itself","expected":"Reject","observed":"Model rejects matching wallet, node, or X commitment","result":"PASS"},
+    {"id":"H-05","attack":"Change X handle after nomination","expected":"Stable immutable ID remains authoritative","observed":"Settlement keys on X commitment, not handle","result":"PASS"},
+    {"id":"H-06","attack":"Replay signed attestation nonce","expected":"Reject","observed":"Used nonce set rejects replay in model","result":"PASS"},
+    {"id":"H-07","attack":"Malicious proposer locks target forever","expected":"Bounded expiry or hero rejection","observed":"Only proposer cancellation or global pair-1000 exhaustion releases reservation","result":"FAIL","finding":"HERO-FUT-003"},
+    {"id":"H-08","attack":"Race two settlements for final slot","expected":"Exactly one pair 1000, no partial pair","observed":"Pure-state contention model passes; no executable account-lock proof","result":"UNPROVEN","finding":"HERO-FUT-001"},
+    {"id":"H-09","attack":"Fail after either reward transfer","expected":"Both transfers and counters roll back","observed":"Copy-on-write JavaScript fault injection passes; no token CPI implementation","result":"UNPROVEN","finding":"HERO-FUT-001"},
+    {"id":"H-10","attack":"Verifier fabricates valid identity facts","expected":"Independent threshold/fraud controls","observed":"Signature authenticity does not prove attested facts; custody decisions open","result":"FAIL","finding":"HERO-FUT-005"},
+    {"id":"H-11","attack":"Campaign stalls after activation below 1000 pairs","expected":"Safe terminal refund policy","observed":"No active cancellation or timeout","result":"FAIL","finding":"HERO-FUT-004"},
+    {"id":"H-12","attack":"Attempt pair 1001 or reopen exhausted campaign","expected":"Permanent reject","observed":"Model cap and terminal-state tests pass","result":"PASS"}
+  ]
+}

@@ -117,7 +117,7 @@ try {
   // Fault-inject a release-snapshot edit after every semantic and digest check
   // has passed. The final stable reread must still reject the validator run.
   const validatorPath = join(sandboxRoot, "scripts", "validate-pre-publication-packet-proof.mjs");
-  const canonicalValidatorSource = readFileSync(validatorPath, "utf8");
+  const canonicalValidatorSource = readFileSync(validatorPath, "utf8").replaceAll("\r\n", "\n");
   const stableReadMarker = [
     "if (!process.exitCode) {",
     "  for (const [path, reviewedBytes] of reviewedInputBytes) {",

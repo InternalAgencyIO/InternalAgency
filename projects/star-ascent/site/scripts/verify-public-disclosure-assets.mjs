@@ -12,6 +12,7 @@ const requiredPairs = [
   "iat-solana-technical-spec",
   "iat-token-implementation-manifest",
   "iat-tokenomics-v1",
+  "iat-tokenomics-v2",
   "star-ascent-broadcast-pack",
   "star-ascent-communications-kit",
   "star-ascent-genesis-run-sheet",

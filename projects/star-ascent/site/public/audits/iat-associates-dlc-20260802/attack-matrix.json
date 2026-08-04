@@ -1,0 +1,16 @@
+{
+  "schema": "iat-future-associates-attack-matrix/v1",
+  "featureState": "INTENDED_FUTURE_NOT_TECHNICALLY_ISOLATED_NOT_ACTIVE_NO_CLAIM_ROUTE",
+  "cases": [
+    {"id":"A-01","attack":"Admin enables Associate at Genesis","expected":"Impossible before separate DLC activation","observed":"set_eligibility role 2 is available whenever common config.active is true","result":"FAIL","finding":"ASSOC-FUT-001"},
+    {"id":"A-02","attack":"Enable before, at, or after Genesis plus one week","expected":"Exact owner-approved time invariant","observed":"No Associate time check in eligibility or position opening","result":"FAIL","finding":"ASSOC-FUT-002"},
+    {"id":"A-03","attack":"Non-Premium unbound wallet receives Associate role","expected":"Reject","observed":"Admin may certify any unchecked wallet","result":"FAIL","finding":"ASSOC-FUT-003"},
+    {"id":"A-04","attack":"One person uses many independently qualifying pairs","expected":"Allow","observed":"Program is wallet-addressed and allows distinct wallets","result":"PASS_WITH_MISSING_PREMIUM","finding":"ASSOC-FUT-003"},
+    {"id":"A-05","attack":"Register same agency-owner wallet twice","expected":"Reject","observed":"Owner-index PDA uniqueness rejects","result":"PASS"},
+    {"id":"A-06","attack":"Register many inactive agency wallets","expected":"Only consented economically qualified candidates","observed":"No owner signature, Premium, stake, bond, activity, or expiry","result":"FAIL","finding":"ASSOC-FUT-004"},
+    {"id":"A-07","attack":"First CCC committer withholds reveal","expected":"Bounded resolution without reroll or selective outcome optionality","observed":"Exact 86,400-second expiry prevents permanent lock and pays neutral expected value, but the reveal controller can still choose reveal versus neutral expiry after learning the oracle result","result":"PARTIAL","finding":"ASSOC-FUT-005"},
+    {"id":"A-08","attack":"Settle selected-agency Associate week","expected":"Zero reward and release corresponding reservation","observed":"Reviewed logic sets rate to zero for selected agency","result":"PASS"},
+    {"id":"A-09","attack":"Overwrite wallet from Associate to another role","expected":"Versioned auditable lifecycle","observed":"init_if_needed eligibility is rewritten without receipt history","result":"FAIL","finding":"ASSOC-FUT-007"},
+    {"id":"A-10","attack":"Enroll Associates until shared reward capacity is crowded out","expected":"Published DLC cap and deterministic cutoff","observed":"Only per-position common-lane reservation applies","result":"FAIL","finding":"ASSOC-FUT-008"}
+  ]
+}

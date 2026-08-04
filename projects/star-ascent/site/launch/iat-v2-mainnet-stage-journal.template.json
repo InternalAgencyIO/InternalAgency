@@ -1,0 +1,195 @@
+{
+  "schema": "iat-v2-mainnet-stage-journal/v2",
+  "status": "HOLD",
+  "network": "mainnet-beta",
+  "scope": "Non-authorizing V2 stage reconciliation journal; this file never signs, broadcasts, retries, repairs, compensates, publishes, or establishes on-chain truth.",
+  "hashContract": {
+    "algorithm": "SHA-256",
+    "reviewedIntentEncoding": "RFC8785_CANONICAL_JSON_UTF8",
+    "reviewedIntentIncludes": [
+      "stage",
+      "network",
+      "programId",
+      "orderedAccountMetas",
+      "instructionData",
+      "amountsAndAuthorities"
+    ],
+    "reviewedIntentExcludes": [
+      "recentBlockhash",
+      "signatures"
+    ],
+    "signedMessageEncoding": "SOLANA_SERIALIZED_MESSAGE_BYTES",
+    "postStateEncoding": "RFC8785_CANONICAL_JSON_UTF8"
+  },
+  "sourceArtifacts": {
+    "programClientPath": "programs/iat_v2/client.mjs",
+    "policyPath": "engagement/iat-economic-policy.v2.json",
+    "allocationPlanPath": "launch/iat-v2-allocation-plan.template.json",
+    "readinessGatePath": "launch/iat-v2-mainnet-readiness-gate.json",
+    "releaseSnapshotPath": "launch/release-snapshot.generated.json",
+    "localTimeGateProofPath": "launch/iat-v2-local-time-gate-proof.json"
+  },
+  "artifactDigests": {
+    "programClientSha256": null,
+    "policySha256": null,
+    "allocationPlanSha256": null,
+    "readinessGateSha256": null,
+    "releaseSnapshotSha256": null,
+    "localTimeGateProofSha256": null
+  },
+  "identity": {
+    "sourceCommit": null,
+    "programId": null,
+    "programDataAddress": null,
+    "mint": null,
+    "administrator": null
+  },
+  "controls": {
+    "stageOrderImmutable": true,
+    "intentBoundBeforeCeremony": true,
+    "signedMessageBoundBeforeSubmission": true,
+    "stopAfterFirstNonMatch": true,
+    "noAutomaticRetry": true,
+    "noCompensatingTransaction": true,
+    "noApprovalReuse": true,
+    "independentVerificationPerFinalizedStage": true,
+    "noPublicationBeforeFullReconciliation": true,
+    "preserveTerminalHoldHistory": true
+  },
+  "stages": [
+    {
+      "index": 1,
+      "stage": "DEPLOY_PROGRAM_WITHOUT_IAT",
+      "status": "PENDING",
+      "reviewedIntentSha256": null,
+      "signedMessageSha256": null,
+      "expectedPostStateSha256": null,
+      "signature": null,
+      "explorerUrl": null,
+      "confirmedAtUtc": null,
+      "independentlyVerifiedAtUtc": null,
+      "independentVerifierLabel": null,
+      "observedPostStateSha256": null,
+      "mismatchCode": null
+    },
+    {
+      "index": 2,
+      "stage": "TRANSFER_UPGRADE_AUTHORITY_TO_MODEL_T",
+      "status": "PENDING",
+      "reviewedIntentSha256": null,
+      "signedMessageSha256": null,
+      "expectedPostStateSha256": null,
+      "signature": null,
+      "explorerUrl": null,
+      "confirmedAtUtc": null,
+      "independentlyVerifiedAtUtc": null,
+      "independentVerifierLabel": null,
+      "observedPostStateSha256": null,
+      "mismatchCode": null
+    },
+    {
+      "index": 3,
+      "stage": "CREATE_INITIALIZE_IMMUTABLE_MINT_AND_METADATA",
+      "status": "PENDING",
+      "reviewedIntentSha256": null,
+      "signedMessageSha256": null,
+      "expectedPostStateSha256": null,
+      "signature": null,
+      "explorerUrl": null,
+      "confirmedAtUtc": null,
+      "independentlyVerifiedAtUtc": null,
+      "independentVerifierLabel": null,
+      "observedPostStateSha256": null,
+      "mismatchCode": null
+    },
+    {
+      "index": 4,
+      "stage": "INITIALIZE_CONFIG_LANE_VAULTS_AND_STAKE_VAULT",
+      "status": "PENDING",
+      "reviewedIntentSha256": null,
+      "signedMessageSha256": null,
+      "expectedPostStateSha256": null,
+      "signature": null,
+      "explorerUrl": null,
+      "confirmedAtUtc": null,
+      "independentlyVerifiedAtUtc": null,
+      "independentVerifierLabel": null,
+      "observedPostStateSha256": null,
+      "mismatchCode": null
+    },
+    {
+      "index": 5,
+      "stage": "MINT_COMMUNITY_AND_FOUR_PROGRAM_VAULT_ALLOCATIONS",
+      "status": "PENDING",
+      "reviewedIntentSha256": null,
+      "signedMessageSha256": null,
+      "expectedPostStateSha256": null,
+      "signature": null,
+      "explorerUrl": null,
+      "confirmedAtUtc": null,
+      "independentlyVerifiedAtUtc": null,
+      "independentVerifierLabel": null,
+      "observedPostStateSha256": null,
+      "mismatchCode": null
+    },
+    {
+      "index": 6,
+      "stage": "REVOKE_MINT_AUTHORITY",
+      "status": "PENDING",
+      "reviewedIntentSha256": null,
+      "signedMessageSha256": null,
+      "expectedPostStateSha256": null,
+      "signature": null,
+      "explorerUrl": null,
+      "confirmedAtUtc": null,
+      "independentlyVerifiedAtUtc": null,
+      "independentVerifierLabel": null,
+      "observedPostStateSha256": null,
+      "mismatchCode": null
+    },
+    {
+      "index": 7,
+      "stage": "REVOKE_FREEZE_AUTHORITY",
+      "status": "PENDING",
+      "reviewedIntentSha256": null,
+      "signedMessageSha256": null,
+      "expectedPostStateSha256": null,
+      "signature": null,
+      "explorerUrl": null,
+      "confirmedAtUtc": null,
+      "independentlyVerifiedAtUtc": null,
+      "independentVerifierLabel": null,
+      "observedPostStateSha256": null,
+      "mismatchCode": null
+    },
+    {
+      "index": 8,
+      "stage": "ACTIVATE_AFTER_RANDOMNESS_BUILD_AND_REVIEW_GATES",
+      "status": "PENDING",
+      "reviewedIntentSha256": null,
+      "signedMessageSha256": null,
+      "expectedPostStateSha256": null,
+      "signature": null,
+      "explorerUrl": null,
+      "confirmedAtUtc": null,
+      "independentlyVerifiedAtUtc": null,
+      "independentVerifierLabel": null,
+      "observedPostStateSha256": null,
+      "mismatchCode": null
+    }
+  ],
+  "terminalDecision": {
+    "state": "HOLD",
+    "failedStage": null,
+    "reasonCode": "NOT_STARTED",
+    "reviewedAtUtc": null,
+    "reviewerLabel": null,
+    "publicIncidentUrl": null
+  },
+  "limitations": [
+    "Explorer URLs and recorded digests are evidence references, not signatures or transaction authority.",
+    "A FINALIZED_MATCHED stage requires a separate independent read of confirmed state.",
+    "TERMINAL_HOLD is permanent after the first failure, mismatch, or unresolved submission; recovery requires a new separately reviewed record and must never overwrite history.",
+    "RECONCILED permits evidence-first publication review only; it does not authorize publication or claims."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "schema": "iat-v2-prelaunch-audit-scope/v1",
+  "status": "DRAFT_MAINNET_HOLD",
+  "auditedAtUtc": "2026-08-02T06:48:41Z",
+  "repository": "InternalAgencyIO/InternalAgency",
+  "branch": "agent/iat-launch-window",
+  "sourceBinding": {
+    "commit": "c23d42d108a33ee105bcbfd32a7acb9f6a66fe96",
+    "gitTree": "9eb10efb771ee14cc53ce01be96dc2c01a5663e5",
+    "lsTreeSha256": "6a8fdcae676057005f94312becb1417b3a5584062afb3618735fef5290e6fc1c",
+    "trackedFiles": 817,
+    "trackedBytes": 24030029
+  },
+  "extensionCounts": {
+    "png": 404,
+    "mjs": 123,
+    "md": 66,
+    "json": 63,
+    "txt": 32,
+    "ts": 23,
+    "tsx": 22,
+    "css": 11,
+    "webp": 9,
+    "ps1": 7,
+    "sql": 5,
+    "sh": 5,
+    "toml": 4,
+    "cmd": 4,
+    "rs": 4,
+    "svg": 4,
+    "other": 25
+  },
+  "manualReviewSurfaces": [
+    "Solana Anchor program and exact account constraints",
+    "Switchboard commit/reveal adapter and CCC economic state machine",
+    "wallet challenge and Ed25519 verification",
+    "X OAuth state, callback, identity binding, and D1 schema",
+    "Genesis and daily reward policy, Merkle engine, and claim blueprint",
+    "instruction builders, admin console, Trezor adapter, and evidence parsers",
+    "mainnet readiness, stage reconciliation, release packet, and CI controls",
+    "network explorer API and Cloudflare worker boundary",
+    "Electron main/preload/renderer privilege boundary",
+    "npm, pnpm, Cargo locks and GitHub check results"
+  ],
+  "criticalSourceSha256": {
+    "projects/star-ascent/site/programs/iat_v2/src/lib.rs": "6a64ba700a14b413ad41d553fa2e5218353ae7543d6d01268248bf24c1f37c5a",
+    "projects/star-ascent/site/programs/iat_v2/src/policy.rs": "a81a8348974f5ef1a041104299d7204135472f16157380332f65f115ec4dc0f1",
+    "projects/star-ascent/site/programs/iat_v2/src/switchboard_randomness.rs": "448d6b1ba3e4148e6919d4a632da64f3602f535c1c1d9ffb20d01c02aec450b9",
+    "projects/star-ascent/site/app/api/x/callback/route.ts": "8f51b60668a4581ec1bd1d9c5d0b9c6727ecf4d8d57f6d68b1f2b95f1dfd09e9",
+    "projects/star-ascent/site/app/api/x/authorize/route.ts": "6b60b50dcf69279795ae7dba6c7a5b494a0b4e1d09a3f2cf24203c3045b19aca",
+    "projects/star-ascent/site/app/api/nodes/verify-wallet/route.ts": "85c13a92bbf4e5aaf9809c44ddeaa851be5caff03f93bae41fa2e38a2dc9847a",
+    "projects/star-ascent/site/app/api/nodes/select-country/route.ts": "666111b9c7d8020104f106a7d3c0645ebb271de9e3b9f162f0ebcba9442f3c46",
+    "projects/star-ascent/site/engagement/epoch-engine.mjs": "bd90187cc1301404b3d3538419f1a26ef938fc7193564bd456143c0d3d476ffc",
+    "projects/star-ascent/site/package-lock.json": "4c00ed20f63d68226082c4d0023c20e82011fdce72a95627c5cd5656a97f3abd",
+    "package-lock.json": "cab0b865d63ef7606f5ed4846ebeb0653ce09abad11443e687546414b14499fb"
+  },
+  "excludedFromManualSemanticReview": [
+    "pixel-level interpretation of image and video assets",
+    "infrastructure or source not present in the repository",
+    "X, Cloudflare, Solana, Switchboard, Trezor, and package-registry internals",
+    "wallet firmware, key material, live production configuration, and mainnet state",
+    "legal, regulatory, tax, sanctions, and market-price analysis"
+  ],
+  "assuranceBoundary": "Internal source review only; not an independent audit or guarantee."
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "iat-site-locale-config-qa-scope/v1",
+  "generatedAtUtc": "2026-08-03T15:37:53.837Z",
+  "status": "DRAFT_STATIC_QA_MAINNET_HOLD",
+  "sourceBinding": {
+    "branch": "agent/iat-launch-window",
+    "commit": "762cdf4b7d44e43878187c9103b4a5c7f226667e",
+    "gitTree": "06ecafba1034b8c02850eb7791d4f14b6b443e8c"
+  },
+  "coverage": {
+    "localeCount": 50,
+    "canonicalRouteCount": 25,
+    "playwrightProjectCount": 7,
+    "allLocaleRootDocuments": 50,
+    "crossEngineStressDocuments": 42,
+    "catalogSourceCount": 1280
+  },
+  "sourceSha256": {
+    "projects/star-ascent/site/app/layout.tsx": "df25c47ae2d35c0da202746bca17e4b9c2688634a2c31561ea426d65ce999e86",
+    "projects/star-ascent/site/app/tokenomics/page.tsx": "1d515aad0529f1e4941ebadc5e914a87c4cb25afe23562a41f37ff8ed00d6d51",
+    "projects/star-ascent/site/app/future/future.css": "7a6839ce169f51172ada507ae30dc55c320b40138449bfba8bd5cdddbfdd10c2",
+    "projects/star-ascent/site/app/globals.css": "89eb75265021e6c41bf68487755890470c0728f07cb08c1086e587f8b879a209",
+    "projects/star-ascent/site/app/i18n/messages.json": "c3e82214be7dcaf7f3fb1dbe116c83848a326095a958f8a12ee0ebe507783a1a",
+    "projects/star-ascent/site/app/i18n/route-seo.json": "8931654068f87d2c8ffcca328cf82882be5a09a2b5d90a8cefb163b221f525e4",
+    "projects/star-ascent/site/.openai/hosting.json": "4c56488724f0f16e294c8021859e968e58f1cf407f9378100ec81bda42cd4dfe",
+    "projects/star-ascent/site/vite.config.ts": "f7c14b8a38546bb6a7ec93cba22f8e8f131da9fbfe8b39327422ed5bb98d4613",
+    "projects/star-ascent/site/app/i18n/LocaleRuntime.tsx": "963ff2d4bb8a0c5478600343df157abe96a3cbdb3fa2f114310f18cecfc2ab3b",
+    "projects/star-ascent/site/playwright.config.mjs": "68db1babea4f4392a4685124a5e09c0e8bc818ff187a3e5672ea7ae0be26b3a7",
+    "projects/star-ascent/site/tests/i18n-routing.test.mjs": "17db0e5ab3dcde27f9d7b8df6c2c3075d7e020feb6774dcdfae9bfc49f8adf7b",
+    "projects/star-ascent/site/tests/ui/all-locales-render.spec.mjs": "9e82bb452c3d1b46da94f7594f028f108aed534889ac7c71a7b4288aad33a776",
+    "projects/star-ascent/site/scripts/validate-site-hosting-config.mjs": "29a404f52bb5b69ff84ff68f265b1b2d24321efab61fe54999d918d485b58b7b"
+  },
+  "excluded": [
+    "physical-device testing",
+    "native Linux and macOS browser hosts",
+    "native-language editorial approval",
+    "deployment or hosted-version mutation",
+    "wallet, signing, broadcast, transfer, DNS, and mainnet operations"
+  ]
+}

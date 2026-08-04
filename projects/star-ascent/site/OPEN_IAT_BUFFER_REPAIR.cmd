@@ -1,0 +1,7 @@
+@echo off
+title IAT BUFFER REPAIR RETIRED
+echo.
+echo IN-PLACE REPAIR IS RETIRED.
+echo USE OPEN_IAT_DEVNET_FRESH_REBUILD.cmd
+echo.
+pause

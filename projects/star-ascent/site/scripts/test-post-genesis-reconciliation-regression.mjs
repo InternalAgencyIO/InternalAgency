@@ -31,7 +31,9 @@ try {
   cpSync(join(repositoryRoot, "scripts"), join(sandboxRoot, "scripts"), { recursive: true });
   cpSync(join(repositoryRoot, "public"), join(sandboxRoot, "public"), { recursive: true });
   cpSync(join(repositoryRoot, "app", "mint"), join(sandboxRoot, "app", "mint"), { recursive: true });
-  cpSync(join(repositoryRoot, "pnpm-lock.yaml"), join(sandboxRoot, "pnpm-lock.yaml"));
+  cpSync(join(repositoryRoot, "programs", "iat_v2"), join(sandboxRoot, "programs", "iat_v2"), { recursive: true });
+  cpSync(join(repositoryRoot, "engagement"), join(sandboxRoot, "engagement"), { recursive: true });
+  cpSync(join(repositoryRoot, "package-lock.json"), join(sandboxRoot, "package-lock.json"));
   symlinkSync(join(repositoryRoot, "node_modules"), join(sandboxRoot, "node_modules"), "junction");
 
   const reconciliationPath = join(sandboxRoot, "launch", "post-genesis-reconciliation.template.json");
@@ -63,6 +65,31 @@ try {
   };
 
   assertValid("the canonical HOLD reconciliation record");
+  const stageJournalPath = join(sandboxRoot, "launch", "iat-v2-mainnet-stage-journal.template.json");
+  const stageJournalValidatorPath = join(sandboxRoot, "scripts", "validate-iat-v2-mainnet-stage-journal.mjs");
+  const reviewedStageJournalBytes = readFileSync(stageJournalPath);
+  const stageJournalValidatorSource = readFileSync(stageJournalValidatorPath, "utf8");
+  try {
+    writeFileSync(stageJournalValidatorPath, [
+      'import { appendFileSync } from "node:fs";',
+      'appendFileSync("launch/iat-v2-mainnet-stage-journal.template.json", " ");',
+      "process.exit(0);",
+      "",
+    ].join("\n"), "utf8");
+    writeRecord(canonicalRecord);
+    const stageJournalSwapValidation = runValidator();
+    const stageJournalSwapOutput = `${stageJournalSwapValidation.stdout}\n${stageJournalSwapValidation.stderr}`;
+    if (stageJournalSwapValidation.error || stageJournalSwapValidation.status === 0) {
+      fail("post-Genesis reconciliation accepted a stage journal changed by its validator");
+    } else if (!stageJournalSwapOutput.includes("IAT V2 stage journal changed during validation")) {
+      fail("post-Genesis reconciliation did not report a stage-journal validation race");
+    } else {
+      console.log("OK: post-Genesis reconciliation rejects a stage journal changed by its validator");
+    }
+  } finally {
+    writeFileSync(stageJournalPath, reviewedStageJournalBytes);
+    writeFileSync(stageJournalValidatorPath, stageJournalValidatorSource, "utf8");
+  }
   const substitutedReconciliationPath = join(sandboxRoot, "launch", "substituted-post-genesis-reconciliation.json");
   writeFileSync(substitutedReconciliationPath, `${JSON.stringify(canonicalRecord, null, 2)}\n`, "utf8");
   const substitutedPathValidation = runValidatorAt("launch/substituted-post-genesis-reconciliation.json");
@@ -88,6 +115,20 @@ try {
     "a non-canonical release-packet source path",
     (fixture) => { fixture.sourceArtifacts.releasePacketPath = "launch/review-copy.json"; },
     "releasePacketPath must point to the canonical artifact",
+  );
+  assertRejected(
+    "a non-canonical IAT V2 stage-journal source path",
+    (fixture) => { fixture.sourceArtifacts.iatV2StageJournalPath = "launch/review-stage-journal.json"; },
+    "iatV2StageJournalPath must point to the canonical artifact",
+  );
+  assertRejected(
+    "a COMPLETE archive while the stage journal remains HOLD",
+    (fixture) => {
+      fixture.status = "COMPLETE";
+      fixture.reconciliation.archiveOwnerLabel = "Evidence archive owner";
+      fixture.reconciliation.independentReviewerLabel = "Independent evidence reviewer";
+    },
+    "COMPLETE requires IAT V2 stage journal status RECONCILED",
   );
   assertRejected(
     "a credential-bearing archive owner label",
@@ -251,10 +292,19 @@ try {
   for (const validator of [
     "validate-genesis-manifest.mjs",
     "validate-publication-payload.mjs",
+    "validate-iat-v2-mainnet-stage-journal.mjs",
   ]) {
     writeFileSync(join(sandboxRoot, "scripts", validator), "process.exit(0);\n", "utf8");
   }
   writeFileSync(join(sandboxRoot, "scripts", "validate-release-packet.mjs"), "process.exit(1);\n", "utf8");
+  const stageJournal = JSON.parse(readFileSync(stageJournalPath, "utf8"));
+  stageJournal.status = "RECONCILED";
+  for (const stage of stageJournal.stages) stage.status = "FINALIZED_MATCHED";
+  Object.assign(stageJournal.terminalDecision, {
+    state: "RECONCILED",
+    reasonCode: "ALL_STAGES_MATCHED",
+  });
+  writeFileSync(stageJournalPath, `${JSON.stringify(stageJournal, null, 2)}\n`, "utf8");
   const mint = "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx";
   const mintAuthorityEvidence = "https://explorer.solana.com/tx/AKAh9LUoWFG2sxAMotzmLNpKwPTCiG6Q4YTwAinZMnkvYKPAKVPwYSfoQDp8XLKWzpbCNx66XB1BrcD1ZUPqU39";
   const freezeAuthorityEvidence = "https://explorer.solana.com/tx/BUguQsv2ZuHus54HAFzjdJHzZBkygAjKhEeYwSG19tUfUyvvz3worsdQCdAXDNjakJHioSiyxhFiDJrm8XpSXRA";

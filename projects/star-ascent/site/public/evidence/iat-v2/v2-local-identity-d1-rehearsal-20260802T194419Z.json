@@ -1,0 +1,113 @@
+{
+  "schema": "iat-v2-local-identity-d1-rehearsal/v1",
+  "status": "VERIFIED_CREDENTIAL_FREE_LOCAL_MODEL_ONLY",
+  "observedAtUtc": "2026-08-02T19:44:19.917Z",
+  "network": "local-host",
+  "mainnetStatus": "HOLD",
+  "sourceBinding": {
+    "commit": "01b0ccbc5295064c559cb0cfaf1a434feeac23b0",
+    "gitTree": "27a88596a4226ba5acadea70bfd0299168105777",
+    "programTree": "494825173877488b87f12ebac31971a8a14ff470",
+    "criticalGitBlobs": {
+      "projects/star-ascent/site/app/api/x/callback/route.ts": "04367ab36be124ef11835e39ab31a419a5204db8",
+      "projects/star-ascent/site/app/api/nodes/verify-wallet/route.ts": "d1da80e1a8362f156b1dbff3373c07e9774161ae",
+      "projects/star-ascent/site/engagement/node-binding-policy.mjs": "37fd33d5f818c67c50a5b894b36195723df0b14c",
+      "projects/star-ascent/site/tests/x-oauth-d1-local-rehearsal.test.mjs": "b8b3e8e762cdfdc272c446da53bc2654c4f36d5f",
+      "projects/star-ascent/site/tests/node-binding-security.test.mjs": "14034145d07c9e0dc0987989c29836975814df8e"
+    }
+  },
+  "reviewedProgramArtifact": {
+    "sha256": "d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4",
+    "bytes": 579480,
+    "programTreeUnchangedFromReviewedBuild": true,
+    "freshPinnedRebuildPassed": true,
+    "lockedRustTests": 23,
+    "unsafeStackDiagnosticObserved": false,
+    "programSigningArtifactProduced": false,
+    "deploymentAuthorized": false
+  },
+  "method": {
+    "runtime": "Node.js v24.14.0 node:sqlite in-memory database",
+    "model": "SQLite transaction model matching documented Cloudflare D1 batch rollback semantics",
+    "providerRequestPerformed": false,
+    "cloudflareD1RequestPerformed": false,
+    "credentialMaterialIncluded": false,
+    "personalDataIncluded": false,
+    "walletAccessed": false,
+    "signingPerformed": false,
+    "simulationForSigningPerformed": false,
+    "broadcastingPerformed": false,
+    "networkMutationPerformed": false
+  },
+  "scenarios": [
+    {
+      "id": "OAUTH-STATE-01",
+      "result": "PASS",
+      "assertion": "Signed OAuth state is expiring, PKCE-bound, and tamper evident"
+    },
+    {
+      "id": "D1-ROLLBACK-01",
+      "result": "PASS",
+      "assertion": "A forced later statement failure rolls activation and both nonce consumptions back"
+    },
+    {
+      "id": "IDENTITY-DUPLICATE-01",
+      "result": "PASS",
+      "assertion": "Duplicate immutable X ID and duplicate wallet are rejected without consuming a gift slot"
+    },
+    {
+      "id": "OAUTH-REPLAY-01",
+      "result": "PASS",
+      "assertion": "Callback replay consumes neither a second identity activation nor a second gift slot"
+    },
+    {
+      "id": "GENESIS-CONTENTION-01",
+      "result": "PASS",
+      "assertion": "Serialized 999-to-1000 contention produces exactly one slot 1000 and one active capacity result"
+    },
+    {
+      "id": "GENESIS-ORPHAN-01",
+      "result": "PASS",
+      "assertion": "Activation-first ordering prevents a zero-row activation from committing an orphan reservation"
+    },
+    {
+      "id": "OAUTH-DEADLINE-01",
+      "result": "PASS_SOURCE",
+      "assertion": "Token and profile requests retain independent five-second deadlines and fail-closed outcomes"
+    },
+    {
+      "id": "PROVIDER-GATE-01",
+      "result": "PASS_LOCAL",
+      "assertion": "Unknown Premium tier, malformed creation time, and accounts younger than 40 complete days fail closed"
+    }
+  ],
+  "validation": {
+    "targetedIdentityTests": {
+      "passed": 12,
+      "failed": 0
+    },
+    "checkIatV2": {
+      "passed": 65,
+      "failed": 0
+    },
+    "checkIatV2Signoff": "PASS_HOLD_HISTORICAL_SIGNOFF_RESTRICTED",
+    "fullLaunchGates": "PASS_HOLD",
+    "productionBuild": "PASS",
+    "lint": "PASS_WITH_8_PREEXISTING_IMAGE_WARNINGS",
+    "diffCheck": "PASS",
+    "additionCredentialScan": "PASS"
+  },
+  "externalSemanticsReference": {
+    "provider": "Cloudflare D1",
+    "url": "https://developers.cloudflare.com/d1/worker-api/d1-database/#batch",
+    "reviewedAtUtc": "2026-08-02T19:44:19.917Z",
+    "relevantBoundary": "Statements run sequentially; a failing statement aborts and rolls back the batch, while a successful zero-row statement is not itself a failure"
+  },
+  "limitations": [
+    "This is a credential-free local SQLite model, not an actual Cloudflare D1 integration run",
+    "No X OAuth token exchange or profile request was made",
+    "Provider-returned Premium and account-age fields remain an external trust boundary",
+    "This is internal Codex-assisted evidence, not independent review",
+    "This is not signed Devnet evidence and does not authorize funding, scheduling, signing, broadcast, deployment, or Mainnet"
+  ]
+}

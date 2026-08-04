@@ -1,0 +1,89 @@
+{
+  "schema": "iat-future-associates-audit-findings/v1",
+  "featureState": "INTENDED_FUTURE_NOT_TECHNICALLY_ISOLATED_NOT_ACTIVE_NO_CLAIM_ROUTE",
+  "auditedSourceCommit": "1df716ccd93c47ee1732af6ae1f43b8e6958afe6",
+  "identityModel": "UNIQUE_WALLET_PLUS_IMMUTABLE_X_ID_PLUS_X_PREMIUM; MULTIPLE_PAIRS_PER_PERSON_ALLOWED",
+  "findings": [
+    {
+      "id": "ASSOC-FUT-001",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "Associates is compiled into the Genesis candidate instead of isolated as a future DLC",
+      "evidence": ["policy.rs maps role 2 to CCC_ASSOCIATE_RATE_BPS", "set_eligibility accepts every role for which role_rate returns Some", "open_position has no Associates feature-state check", "The public economic policy fixes cccAssociate at 2000 bps"],
+      "impact": ["After common V2 activation, the administrator can enable an Associate immediately", "Public claims that Associates is not part of Genesis are not enforced by code", "A separate audit or activation transaction is not mandatory"],
+      "remediation": ["Remove role 2 from the Genesis binary, or add an immutable default-off DLC state with separate authority and policy hash", "Require a separately reviewed one-way activation instruction", "Prove Genesis instructions cannot create or use Associate eligibility"]
+    },
+    {
+      "id": "ASSOC-FUT-002",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "No T+1-week Associates activation bound exists",
+      "evidence": ["set_eligibility checks config.active but not Genesis time", "open_position checks config.active but not feature time", "CCC round zero opens at Genesis plus 24 hours, which is a different clock and does not gate Associate eligibility"],
+      "impact": ["Associate access can begin immediately after V2 activation", "No latest, exact, or earliest one-week policy can be audited", "Operators can conflate the 24-hour CCC round delay with DLC activation"],
+      "remediation": ["Specify one exact T+1-week semantic", "Store canonical Genesis and DLC activation state", "Add T-1, T, T+1 boundary tests and irreversible terminal behavior"]
+    },
+    {
+      "id": "ASSOC-FUT-003",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "Wallet/X/Premium qualification is absent from Associate eligibility",
+      "evidence": ["Eligibility stores config, wallet, agency_index, role, and bump only", "The admin certifies an unchecked wallet", "There is no immutable X commitment, Premium tier, observation time, nonce, or verifier signature"],
+      "impact": ["Non-Premium and unbound wallets can receive the higher Associate rate", "The accepted per-pair cost model is bypassed", "The chain cannot publicly audit why a wallet qualified"],
+      "remediation": ["Verify an exact signed identity envelope on-chain", "Bind wallet, immutable X commitment, active Premium tier, agency, role, freshness, nonce, and policy", "Keep raw X IDs and OAuth tokens off-chain"]
+    },
+    {
+      "id": "ASSOC-FUT-004",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "Agency registry padding can manipulate Associate pause economics",
+      "evidence": ["register_agency accepts an unchecked agency_owner without that owner's signature", "Registration requires no Premium pair, stake, active position, bond, or expiry", "Selection snapshots all registered agencies"],
+      "impact": ["Permitted multi-wallet operators can cheaply add inactive agencies", "Padding dilutes the probability that an economically active agency is selected and paused", "Uniform random sampling can still produce economically manipulated outcomes"],
+      "remediation": ["Require owner consent and a qualifying wallet/X/Premium attestation", "Require an active bounded stake or bond and epoch eligibility", "Publish padding and concentration simulations"]
+    },
+    {
+      "id": "ASSOC-FUT-005",
+      "severity": "CRITICAL",
+      "status": "OPEN_INHERITED",
+      "title": "Associate settlement inherits selective reveal withholding despite bounded terminal recovery",
+      "evidence": ["A permissionless payer initializes the unique round PDA and controls the Switchboard reveal authority", "The revised program makes an unrevealed round EXPIRED_NEUTRAL after exactly 86,400 seconds", "The committer can still choose between revealing a known selected-agency vector and allowing the all-agency expected-value fallback"],
+      "impact": ["Permanent position deadlock is removed", "A committer aligned with one agency can reveal favorable outcomes and withhold unfavorable outcomes", "The fallback preserves per-position ex-ante expected value but does not remove outcome optionality for the reveal controller"],
+      "remediation": ["Remove unilateral reveal optionality through a reviewed oracle-authority design or enforce sufficient commit collateral/slashing", "Test the exact recovery and incentive paths in local-validator and signed Devnet flows", "Obtain independent randomness and game-theory review"]
+    },
+    {
+      "id": "ASSOC-FUT-006",
+      "severity": "HIGH",
+      "status": "OPEN_INHERITED",
+      "title": "Associate certification is concentrated in the common administrator",
+      "evidence": ["register_agency and set_eligibility both require config.admin", "The existing pre-launch audit records correlated upgrade, administration, and community-custody authority"],
+      "impact": ["One authority can grant the higher-rate role and shape the candidate set", "Compromise, coercion, or favoritism creates direct economic rents"],
+      "remediation": ["Separate upgrade, eligibility, verifier, and custody roles", "Use enforced threshold/timelock controls", "Publish approvals and policy-bound eligibility receipts"]
+    },
+    {
+      "id": "ASSOC-FUT-007",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "Eligibility can be overwritten without an explicit versioned lifecycle",
+      "evidence": ["The eligibility PDA uses init_if_needed", "set_eligibility rewrites role and agency_index", "No revision, expiry, revocation reason, or event is stored"],
+      "impact": ["Current eligibility cannot be reconstructed from account state alone", "Off-chain reviewers cannot distinguish correction, revocation, or discretionary reassignment"],
+      "remediation": ["Define immutable/versioned eligibility receipts and events", "Specify expiry, revocation, appeal, and effect on already-open positions"]
+    },
+    {
+      "id": "ASSOC-FUT-008",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "The Associate DLC lacks its own economic cap and shutdown state",
+      "evidence": ["Associate rewards draw from common reward lanes", "No Associate participant cap, obligation cap, activation budget, expiry, or terminal state exists", "Individual positions reserve maximum obligations but aggregate Associate exposure is not separately published"],
+      "impact": ["The future feature has no auditable standalone budget", "Administrative enrollment can consume shared reward capacity and crowd out later positions"],
+      "remediation": ["Publish exact aggregate Associate budget and enrollment behavior", "Add fail-closed capacity and permanent terminal rules", "Model concentration and lane-exhaustion outcomes"]
+    },
+    {
+      "id": "ASSOC-FUT-009",
+      "severity": "LOW",
+      "status": "OPEN",
+      "title": "Numeric role encoding is not self-describing at the account boundary",
+      "evidence": ["Role 2 is the Associate semantic", "Eligibility and Position store only u8 role values"],
+      "impact": ["Client or indexer drift can mislabel a financially meaningful role"],
+      "remediation": ["Publish a versioned enum/interface digest and reject unknown versions", "Include named role semantics in events and audit tooling"]
+    }
+  ]
+}

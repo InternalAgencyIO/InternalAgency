@@ -28,7 +28,7 @@ try {
   cpSync(join(repositoryRoot, "scripts"), join(sandboxRoot, "scripts"), { recursive: true });
   cpSync(join(repositoryRoot, "public"), join(sandboxRoot, "public"), { recursive: true });
   cpSync(join(repositoryRoot, "app", "mint"), join(sandboxRoot, "app", "mint"), { recursive: true });
-  cpSync(join(repositoryRoot, "pnpm-lock.yaml"), join(sandboxRoot, "pnpm-lock.yaml"));
+  cpSync(join(repositoryRoot, "package-lock.json"), join(sandboxRoot, "package-lock.json"));
   symlinkSync(join(repositoryRoot, "node_modules"), join(sandboxRoot, "node_modules"), "junction");
 
   const handoffPath = join(sandboxRoot, "launch", "mainnet-handoff.template.json");

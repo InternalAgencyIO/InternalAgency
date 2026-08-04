@@ -1,104 +1,118 @@
-# $IAT Genesis Operations Card
+# IAT V2 Genesis operations card
 
-Status: **HOLD — CEREMONY WINDOW 29 JULY 2026, 15:00:00 UTC**
+Status: **UNSCHEDULED — MAINNET HOLD — FUNDING AND FINAL PACKET PENDING**
 
-Use this as a one-page run-of-show. No secret, recovery phrase, PIN, private
-key, passphrase, or wallet export belongs on this card.
+No replacement UTC window is published and there is no automatic transaction.
+The superseded four-transaction `/mint` page is read-only and must not be used.
 
 ## Roles
 
 | Role | Required action |
 | --- | --- |
-| Signer | Physically reviews and confirms only comprehensible transactions on the Trezor Model T. |
-| Builder | Prepares transactions from the frozen manifest; cannot substitute addresses. |
-| Verifier | Independently checks every address, amount, authority state, and Explorer result. |
-| Broadcaster | Publishes only text copied from the verified publication payload. |
+| Signer | Reviews every authority-changing or value-moving action on the physical Model T. |
+| Builder | Builds only from the committed, program-ID-bound source and cannot substitute addresses. |
+| Verifier | Independently checks source/binary identity, every address, amount, authority, scenario, and Explorer result. |
+| Broadcaster | Publishes only text copied from the independently verified evidence packet. |
 
-## Canonical artifact gates
+## Canonical V2 gates
 
-Complete these gates in order. A locally passing gate never authorizes a
-transaction or publication.
-
-1. Validate `launch/token-metadata.template.json`,
-   `launch/allocation-lock-plan.template.json`, and
-   `launch/genesis-manifest.template.json` while all release evidence remains
-   `HOLD` / `null`.
-2. Complete the exact four-transaction Model T rehearsal in
-   `launch/devnet-rehearsal.template.json` and move
-   `launch/genesis-signing-checklist.template.json` to `READY`.
-3. Generate and validate `launch/release-snapshot.generated.json` in `HOLD`.
-   Never edit this generated file by hand.
-4. Independently review the public surfaces and record that review time.
-5. Validate `launch/mainnet-handoff.template.json` as `APPROVED`,
-   `launch/release-packet.template.json` as `READY`, and
-   `launch/pre-publication-packet-proof.generated.json` against the exact frozen
-   files. Keep `launch/PUBLICATION_PAYLOAD.template.md` on `HOLD`.
-6. The public ceremony window opens at 15:00:00 UTC. This is not mainnet
-   authorization; mainnet remains locked unless all previous gates are current.
-
-The snapshot, handoff, packet, and proof bind reviewed files; they never sign,
-submit, or approve a transaction.
+1. Review `engagement/iat-economic-policy.v2.json`,
+   `launch/iat-v2-allocation-plan.template.json`,
+   `launch/iat-v2-devnet-rehearsal.template.json`,
+   `docs/IAT_V2_PROGRAM_ARCHITECTURE.md`, and `programs/iat_v2/README.md`.
+2. Bind a new public program ID using `scripts/bind-iat-v2-program-id.mjs`.
+   Commit the exact bound source; program-keypair material stays outside the
+   repository.
+3. Run `scripts/verify-iat-v2-sbf.sh` in the pinned Linux/WSL2 toolchain and
+   preserve the verifiable SBF hash.
+4. Follow `launch/DEVNET_REHEARSAL_SCENARIO.md`. Deploy unfunded, transfer
+   upgrade authority to hardware control, initialize, fund, activate, and test
+   V2 on devnet.
+5. FDF Guard independently compares the complete devnet evidence and negative
+   cases against the source, policy, plan, program authority, and binary.
+6. Regenerate `launch/release-snapshot.generated.json` in `HOLD`. The legacy
+   `launch/token-metadata.template.json`,
+   `launch/allocation-lock-plan.template.json`,
+   `launch/genesis-manifest.template.json`,
+   `launch/devnet-rehearsal.template.json`, and
+   `launch/genesis-signing-checklist.template.json` remain historical
+   consistency artifacts; they cannot authorize V2.
+7. `launch/mainnet-handoff.template.json` may become `APPROVED` and
+   `launch/release-packet.template.json` may become `READY` only after they are
+   upgraded to bind the V2 evidence. Keep
+   `launch/pre-publication-packet-proof.generated.json` and
+   `launch/PUBLICATION_PAYLOAD.template.md` on HOLD until direct mainnet
+   evidence exists.
 
 ## Exact planned allocation math
 
-These are reviewed targets, not claims of completed minting. The five base-unit
-amounts must total exactly `1000000000000000000` at 9 decimals.
+These are targets, not claims of completed minting. The base-unit amounts total
+exactly `1000000000000000000` at 9 decimals.
 
-| Destination | Share | Base units |
-| --- | ---: | ---: |
-| Community | 50% | `500000000000000000` |
-| Treasury | 20% | `200000000000000000` |
-| Ecosystem | 15% | `150000000000000000` |
-| Core team | 10% | `100000000000000000` |
-| Liquidity | 5% | `50000000000000000` |
+| Destination | Share | Base units | Custody |
+| --- | ---: | ---: | --- |
+| Community | 50% | `500000000000000000` | Published hardware-wallet custody |
+| Treasury | 20% | `200000000000000000` | IAT V2 program vault PDA |
+| Ecosystem | 15% | `150000000000000000` | IAT V2 program vault PDA |
+| Core team | 10% | `100000000000000000` | IAT V2 program vault PDA |
+| Liquidity | 5% | `50000000000000000` | IAT V2 program vault PDA |
 
-## Before a new window is scheduled
+## Reviewed stage order
 
-- [ ] Model T model, firmware, and wallet interface match the successful devnet rehearsal.
-- [ ] Fee-payer/signer address is confirmed on the physical device and matches the READY signing checklist.
-- [ ] Every allocation owner, derived token account, lock mechanism, and exact base-unit amount matches the READY artifacts.
-- [ ] Release owner, independent verifier, and correction owner are named, usable, and distinct.
-- [ ] Both public domains show `HOLD` with no mint address.
-- [ ] Broadcast screen and pinned-post template contain no unverified address.
+Do not reorder, omit, or combine an authority boundary:
+Before the first boundary, bind every blockhash-free reviewed intent and
+expected post-state in `launch/iat-v2-mainnet-stage-journal.template.json` and
+validate it as `ARMED`. For each stage, hash the actual serialized message after
+its fresh blockhash is added and before submission; do not pretend all eight
+expiring messages can be frozen in advance.
 
-## Exact four-transaction ceremony
+1. `DEPLOY_PROGRAM_WITHOUT_IAT`
+2. `TRANSFER_UPGRADE_AUTHORITY_TO_MODEL_T`
+3. `CREATE_INITIALIZE_IMMUTABLE_MINT_AND_METADATA`
+4. `INITIALIZE_CONFIG_LANE_VAULTS_AND_STAKE_VAULT`
+5. `MINT_COMMUNITY_AND_FOUR_PROGRAM_VAULT_ALLOCATIONS`
+6. `REVOKE_MINT_AUTHORITY`
+7. `REVOKE_FREEZE_AUTHORITY`
+8. `ACTIVATE_AFTER_RANDOMNESS_BUILD_AND_REVIEW_GATES`
 
-Do not insert, remove, rename, or reorder a transaction.
+After each confirmed boundary, stop for independent reconciliation and record a
+direct Explorer URL plus the observed post-state digest. Continue only on an
+exact match. The first failure, mismatch, or submitted transaction whose
+confirmation remains unknown permanently changes this journal to
+`TERMINAL_HOLD`; all later boundaries remain `NOT_ATTEMPTED`. Never retry an
+unknown signature, compensate, or improvise a repair transaction.
 
-1. `CREATE_INITIALIZE_IMMUTABLE_METADATA` — atomically create the mint, initialize
-   9 decimals under the Original SPL Token Program, and create immutable
-   Metaplex metadata.
-2. `MINT_FIVE_ALLOCATION_DESTINATIONS` — create/verify the five canonical
-   associated token accounts and mint the exact reviewed base-unit amounts.
-3. `REVOKE_MINT_AUTHORITY` — revoke mint authority to `None`; independently
-   verify the transaction and mint account.
-4. `REVOKE_FREEZE_AUTHORITY` — revoke freeze authority to `None`; independently
-   verify the transaction and mint account.
+After activation, complete every positive and adversarial scenario in the V2
+rehearsal template. Publication is a separate human-controlled action, not a
+transaction or protocol stage.
 
-After all four confirmations, independently verify the mint, immutable
-metadata, supply, five allocation accounts, and both revoked authorities.
-Publication is a separate human-controlled action, not a fifth transaction.
+## Stop and return to HOLD if
 
-## STOP — return to HOLD immediately if
+- a device prompt is unclear, blind, or unexpected;
+- source, binary, deployed program, ProgramData, or upgrade authority differs;
+- an address, amount, program, decimal, metadata field, vault, or mint
+  authority differs;
+- the official cluster-specific Switchboard program is not used;
+- a positive case fails or a negative case succeeds;
+- a digest, review, deployment, or approval timestamp is absent or stale;
+- a credential, secret, reroll, reward debt, or unreviewed correction is
+  requested.
 
-- a device confirmation is unclear or unexpected;
-- an address, amount, program, decimal, metadata field, or authority differs;
-- the devnet-proven path cannot produce the required mainnet transaction;
-- direct RPC and Explorer evidence are unavailable or inconsistent;
-- a digest, review, or approval timestamp is stale;
-- a credential, secret, blind approval, or unreviewed correction is requested;
-- a custody wallet is described as an enforceable time lock.
-
-On any stop, preserve observable evidence, clear stale approvals, regenerate
-derived artifacts, and repeat independent review. Do not improvise a corrective
+Preserve observable evidence and repeat review. Do not improvise a repair
 transaction or reuse an earlier approval.
 
-## Minimum public payload after verification
+## Minimum public record after verification
 
-- Mint address and mainnet Explorer link
-- Original SPL Token Program confirmation and 9 decimals
-- Immutable metadata account, URI, and digest
-- Exact total supply and five allocation accounts
-- Mint-authority and freeze-authority revocation evidence
-- Allocation lock/vesting mechanism and direct evidence
-- UTC checked-at time and verifier role
+Do not publish this record until the stage journal is `RECONCILED` with all
+eight boundaries `FINALIZED_MATCHED`.
+
+- Source commit, public program ID, verifiable SBF hash, ProgramData address,
+  and hardware-controlled upgrade-authority evidence
+- Mint address, metadata, Original SPL Token Program, 9 decimals, and exact
+  fixed supply
+- Five allocation accounts, vault PDAs, schedules, and balances
+- Mint- and freeze-authority revocation evidence
+- Switchboard program/account, commit, reveal, derivation counter, winning
+  index, and settlement evidence
+- Devnet scenario matrix, independent-verifier record, UTC timestamps, and
+  clear remaining mainnet HOLD/GO decision

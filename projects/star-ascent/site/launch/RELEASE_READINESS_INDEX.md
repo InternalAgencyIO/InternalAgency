@@ -3,26 +3,68 @@
 This index is the single operator-facing map for Genesis. It keeps the public
 story, the physical signer flow, and the evidence trail in the same order.
 
+Current state: **UNSCHEDULED — MAINNET HOLD — NO CLAIM ROUTE**. The canonical
+machine-readable gate is
+[`iat-v2-mainnet-readiness-gate.json`](iat-v2-mainnet-readiness-gate.json).
+
+## Before scheduling
+
+1. Review the public, source-bound
+   [`IAT V2 pre-launch security audit`](../public/audits/iat-v2-prelaunch-20260802/README.md)
+   and the newer
+   [`IAT V2 pre-launch hardening audit`](../public/audits/iat-v2-remediation-20260802/README.md).
+   Keep ceremony entry blocked until both machine-readable manifests record
+   `CLEAR`, every unaccepted critical/high finding and open blocker is closed,
+   all remediations are revalidated, and current-source SBF, signed Devnet,
+   production identity integration, and independent final-code review are
+   complete. The hardening manifest may retain only the explicitly named
+   owner-accepted sole-Trezor critical risk.
+2. Review the separate future-feature audits for
+   [`Propose a Hero`](../public/audits/iat-hero-dlc-20260802/README.md) and
+   [`CCC Associates`](../public/audits/iat-associates-dlc-20260802/README.md).
+   Both remain inactive future features. The hardened Genesis program now
+   rejects every CCC registry, eligibility, position, randomness, round, and
+   settlement path and exposes no activation instruction; the future design
+   findings still require separate remediation and review before activation.
+3. Confirm the public mainnet fee-payer balance is at least the exact
+   `8500000000` lamport ceremony floor using a fresh read-only observation.
+4. Publish one replacement UTC window; invalidate the expired window and every
+   packet or approval that pre-dates the replacement.
+5. Regenerate all bound release artifacts before any final review.
+
 ## Before broadcast
 
-1. Run `node scripts/run-launch-preflight.mjs` from the project root. It starts
-   with isolated negative-case gate regressions, then validates the live
-   artifact set; any failure keeps the launch in HOLD.
-2. Read [`GENESIS_COMMAND_CENTER.md`](GENESIS_COMMAND_CENTER.md) and assign the
+1. In the attended final review, run
+   `node scripts/run-launch-preflight.mjs --require-ceremony-ready` from the
+   project root. It fails before the full preflight if a fresh read-only
+   security clearance, balance, funding, replacement schedule, regeneration,
+   verifier, or Model T device-path review is missing.
+   The default command is preparation-only and cannot open the ceremony.
+2. Validate `launch/iat-v2-mainnet-readiness-gate.json`, then read
+   [`GENESIS_COMMAND_CENTER.md`](GENESIS_COMMAND_CENTER.md) and assign the
    roles named there.
-3. Prepare the hardware signer using
+3. Read [`IAT_V2_CEREMONY_ENTRY_GATE.md`](IAT_V2_CEREMONY_ENTRY_GATE.md) and
+   keep `READY_FOR_ATTENDED_PREFLIGHT` distinct from signing or broadcast
+   authority.
+4. Prepare the hardware signer using
    [`../docs/TREZOR_SIGNER_READINESS.md`](../docs/TREZOR_SIGNER_READINESS.md)
    and [`../docs/MODEL_T_SOLANA_SIGNING_GATE.md`](../docs/MODEL_T_SOLANA_SIGNING_GATE.md).
-4. Keep the public surfaces open: `/launch`, `/signal`, `/proof`, and `/dossier`.
+5. Keep the public surfaces open: `/launch`, `/signal`, `/proof`, and `/dossier`.
 
 ## At Genesis
 
 1. Follow [`GENESIS_OPERATIONS_CARD.md`](GENESIS_OPERATIONS_CARD.md) exactly.
-2. The signer confirms every transaction on-device. No person signs from a
+2. Use the machine-readable
+   [`iat-v2-mainnet-stage-journal.template.json`](iat-v2-mainnet-stage-journal.template.json)
+   and its [`stage reconciliation rules`](IAT_V2_STAGE_RECONCILIATION.md). Stop
+   for independent verification after every confirmed stage; the first
+   failure, mismatch, or unresolved submission is a permanent terminal HOLD
+   for that journal.
+3. The signer confirms every transaction on-device. No person signs from a
    copied address or an unreviewed prompt.
-3. Record the final mint address, exact supply, authority-revocation evidence,
+4. Record the final mint address, exact supply, authority-revocation evidence,
    allocation-wallet evidence, and timelock evidence.
-4. Publish only facts that can be independently checked; until then, the public
+5. Publish only facts that can be independently checked; until then, the public
    proof board remains in its HOLD state.
 
 ## First hour

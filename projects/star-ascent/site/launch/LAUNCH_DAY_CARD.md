@@ -1,46 +1,35 @@
-# STAR ASCENT / Launch window
+# STAR ASCENT / launch window
 
 **Status:** HOLD
 
-**Ceremony window:** 29 July 2026 at 15:00:00 UTC / 18:00:00 Istanbul
+**Public window:** UNSCHEDULED — replacement UTC time not published
 
-Announce this exact ceremony window together with the public source record.
-State clearly that the timer never signs or submits a transaction and mainnet
-remains blocked until the complete frozen release packet passes independent
-review.
+The countdown opens the broadcast and reviewed source. It never connects a
+wallet, signs, submits, or authorizes mainnet.
 
-## The room
+## Sequence
 
-STAR ASCENT opens as a public signal: the World Archive, the White Dossier, the
-crew, the broadcast, and the first visible on-chain chapter.
+1. Open the broadcast and identify `internalagency.io`, `ileriakil.com`, and
+   the public source record. State that token execution remains `HOLD`.
+2. Confirm `launch/release-snapshot.generated.json` is current and `HOLD`.
+   Legacy `launch/mainnet-handoff.template.json` `APPROVED` and
+   `launch/release-packet.template.json` `READY` states are insufficient until
+   they bind the V2 program evidence.
+3. Follow the V2 runbook in `launch/GENESIS_OPERATIONS_CARD.md` and
+   `launch/DEVNET_REHEARSAL_SCENARIO.md`. Do not use `/mint`; it is a disabled
+   archive of the superseded mint-only path.
+4. The signer confirms only reviewed authority or value actions on the physical
+   device. The verifier captures direct evidence before the next boundary.
+5. Publish only fields that match the verified packet across `/proof`, the
+   sites, the pinned announcement, and the broadcast.
 
-## The sequence
+Any mismatch returns the system to HOLD and invalidates stale approvals.
 
-1. Open the broadcast and describe the project as *a public cultural build on
-   Solana, made in the open.* State that the token status remains `HOLD`.
-2. Confirm `launch/release-snapshot.generated.json` is current and `HOLD`,
-   `launch/mainnet-handoff.template.json` is `APPROVED`, and
-   `launch/release-packet.template.json` is `READY`. Confirm the sealed
-   pre-publication proof. These artifacts do not authorize signing.
-3. Follow the exact four-transaction ceremony documented in
-   `launch/GENESIS_OPERATIONS_CARD.md`.
-4. The signer confirms only the reviewed transaction shown on the physical
-   device; the verifier captures direct evidence before the next transaction.
-5. After complete independent verification, publish only fields that match the
-   validated manifest and publication payload across every public channel.
-
-Any mismatch stops the sequence and invalidates stale approvals. The correction
-owner coordinates the canonical fix, snapshot regeneration, and repeated
-independent review.
-
-## The public link order
+## Public link order
 
 1. `internalagency.io` / `ileriakil.com`
 2. `/dossier`
 3. `/proof`
 4. Official broadcast channel
 
-## The tone
-
-Keep it short. Keep it beautiful. Do not explain the machinery before people
-have felt the signal. The record is there for anyone who wants to go deeper.
+Keep the public story concise. Keep the technical record complete.

@@ -1,0 +1,19 @@
+{
+  "schema": "iat-ui-environment-matrix/v1",
+  "status": "DRAFT_UI_RELEASE_HOLD",
+  "environments": [
+    {"id":"PLAYWRIGHT_CHROMIUM_DESKTOP","kind":"AUTOMATED_ENGINE","viewport":"1440x900","result":"PASS","limitations":["headless","Windows host"]},
+    {"id":"PLAYWRIGHT_FIREFOX_DESKTOP","kind":"AUTOMATED_ENGINE","viewport":"1440x900","result":"PASS","limitations":["headless","Windows host"]},
+    {"id":"PLAYWRIGHT_WEBKIT_DESKTOP","kind":"AUTOMATED_ENGINE","viewport":"1440x900","result":"PASS","limitations":["headless","not installed Safari"]},
+    {"id":"PLAYWRIGHT_CHROMIUM_TABLET","kind":"AUTOMATED_ENGINE","viewport":"768x1024","result":"PASS","limitations":["headless","viewport profile is not a physical tablet"]},
+    {"id":"PLAYWRIGHT_FIREFOX_TABLET","kind":"AUTOMATED_ENGINE","viewport":"768x1024","result":"PASS","limitations":["headless","viewport profile is not a physical tablet"]},
+    {"id":"PLAYWRIGHT_PIXEL_5","kind":"DEVICE_EMULATION","viewport":"393x851","result":"PASS_AUTOMATED","limitations":["not physical Android","emulated touch and device metrics"]},
+    {"id":"PLAYWRIGHT_IPHONE_13_WEBKIT","kind":"DEVICE_EMULATION","viewport":"390x664","result":"PASS_AUTOMATED","limitations":["not iOS","not installed Safari","no touch hardware"]},
+    {"id":"UBUNTU_GITHUB_ACTIONS_FOR_SOURCE_HEAD","kind":"CI","viewport":null,"result":"PENDING_PUBLIC_PUSH","limitations":["not yet observed for source commit","no graphical desktop claim"]},
+    {"id":"IOS_SAFARI_PHYSICAL","kind":"NOT_AVAILABLE","viewport":null,"result":"NOT_TESTED","limitations":["release-certification gap"]},
+    {"id":"PHYSICAL_ANDROID_SYSTEM_BROWSER","kind":"NOT_AVAILABLE","viewport":null,"result":"NOT_TESTED","limitations":["release-certification gap"]},
+    {"id":"LINUX_GRAPHICAL_BROWSER","kind":"NOT_AVAILABLE","viewport":null,"result":"NOT_TESTED","limitations":["release-certification gap"]},
+    {"id":"SCREEN_READER","kind":"NOT_AVAILABLE","viewport":null,"result":"NOT_TESTED","limitations":["accessibility-certification gap"]},
+    {"id":"INDEPENDENT_REVIEWER","kind":"NOT_AVAILABLE","viewport":null,"result":"NOT_REVIEWED","limitations":["internal Codex-assisted evidence only"]}
+  ]
+}

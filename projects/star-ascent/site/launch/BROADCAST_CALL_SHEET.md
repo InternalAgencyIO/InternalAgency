@@ -1,9 +1,10 @@
 # STAR ASCENT / broadcast call sheet
 
-Status: **29 JULY 2026 · 15:00:00 UTC / 18:00:00 ISTANBUL**
+Status: **UNSCHEDULED · MAINNET HOLD · NO CLAIM ROUTE**
 
-Announce the exact open-source ceremony window. Also state that every
-transaction remains human-approved and evidence-gated.
+Do not announce a time until one replacement UTC window has been published
+after funding confirmation. State that every transaction remains
+human-approved and evidence-gated.
 
 ## Open
 

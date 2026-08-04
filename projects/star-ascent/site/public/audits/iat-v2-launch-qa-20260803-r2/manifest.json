@@ -1,0 +1,68 @@
+{
+  "schema": "iat-v2-launch-qa-manifest/v1",
+  "status": "DRAFT_QA_HOLD",
+  "mainnetStatus": "HOLD",
+  "qaDecision": "HOLD",
+  "assurance": "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT",
+  "title": "IAT V2 launch QA consolidation — 2026-08-03 revision 2",
+  "auditedAtUtc": "2026-08-03T13:23:14Z",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "commit": "58d6976f3217831c57a1a5858cb32406f88d1fcd",
+    "gitTree": "be92001720a617545da35ccbe6bf8122e5736817",
+    "scopePath": "public/audits/iat-v2-launch-qa-20260803-r2/scope.json"
+  },
+  "findingSummary": {
+    "total": 11,
+    "openBySeverity": {
+      "CRITICAL": 1,
+      "HIGH": 2,
+      "MEDIUM": 3,
+      "LOW": 0,
+      "INFO": 1
+    },
+    "closedBySeverity": {
+      "CRITICAL": 0,
+      "HIGH": 1,
+      "MEDIUM": 2,
+      "LOW": 1,
+      "INFO": 0
+    }
+  },
+  "clearance": {
+    "reviewedSourceAutomatedChecksPass": true,
+    "livePublicationReconciled": true,
+    "bilingualMetadataAutomatedChecksPass": true,
+    "nativeSpeakerReviewComplete": false,
+    "adminRuntimeWarningsClosed": false,
+    "productionDependenciesClear": true,
+    "developmentDependenciesReviewed": false,
+    "externalEnvironmentCoverageComplete": false,
+    "freshSourceBoundDevnetSignoffComplete": false,
+    "fundingFloorSatisfied": false,
+    "soleAuthorityRiskClosed": false,
+    "qaReleaseApproved": false,
+    "authorizesDeployment": false,
+    "authorizesSigning": false,
+    "authorizesBroadcast": false,
+    "authorizesMainnetChange": false
+  },
+  "publicDevelopmentSurface": {
+    "draftPullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/4",
+    "packagePath": "projects/star-ascent/site/public/audits/iat-v2-launch-qa-20260803-r2",
+    "deploymentState": "NOT_DEPLOYED"
+  },
+  "artifactSha256": {
+    "README.md": "690c080e8dc7eb25fa2ffc9d16cfd27bb913d6a866c6e70c3159d5e031bf0001",
+    "FINDINGS.md": "3f8ddc669148579233d5eddbc1dfd084522db452df895574a25158ca834d4619",
+    "scope.json": "980c6706f0716bca108732d4cc8f1d4b8649f3f7fc01a9c861725c4242284798",
+    "checks.json": "d5670d3d494fea81fc01b3d39b93d1d4da6df5a5faf84d6d6f249a82a9b06cb3",
+    "findings.json": "32bc851f9303d86790ec0747db29df8bf99e84a9ed3b684765688ac60cf8515a",
+    "environment-matrix.json": "caa51450c9ad8e5247ae722c8f36bf9c845f787eb3c50a86f409ce415dcbdc7e"
+  },
+  "limitations": [
+    "This package is not an independent security, accessibility, localization, or physical-device certification.",
+    "Live public-route observations are timestamped read-only HTTP evidence and do not prove future availability.",
+    "No wallet, key, hardware signer, secret, deployment, signing, transaction, transfer, DNS, mainnet, or devnet state was accessed or changed."
+  ]
+}

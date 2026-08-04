@@ -1,6 +1,6 @@
 {
   "schema": "star-ascent-daily-rewards-policy/v1",
-  "status": "HOLD_UNTIL_X_AND_DISTRIBUTOR_GATES_PASS",
+  "status": "HOLD_UNTIL_X_BUDGET_AND_TREZOR_GATES_PASS",
   "asset": {
     "symbol": "IAT",
     "decimals": 9,
@@ -10,20 +10,43 @@
   "genesis": {
     "rewardDisplayUnits": 100,
     "maximumClaims": 1000,
-    "eligibility": "The first 1,000 verified nodes: one X account linked to one public Solana wallet through OAuth plus a wallet-signature challenge.",
+    "eligibility": "The first 1,000 verified nodes: one immutable X user ID with an observed Premium or PremiumPlus tier linked to one public Solana wallet through OAuth plus a wallet-signature challenge.",
     "claimModel": "First-come claimable after the verified Genesis record is public. A slot is reserved only after the X link and wallet-signature challenge both complete; never sent to an unlinked or unverified wallet.",
     "onePerWallet": true,
     "onePerXAccount": true
+  },
+  "identityModel": {
+    "unit": "UNIQUE_WALLET_PLUS_IMMUTABLE_X_ID_PLUS_X_PREMIUM",
+    "oneHumanPerAccountRequired": false,
+    "multipleQualifyingPairsPerPersonAllowed": true,
+    "oneWalletPerPair": true,
+    "oneImmutableXUserIdPerPair": true,
+    "allowedSubscriptionTypes": ["Premium", "PremiumPlus"],
+    "minimumXAccountAgeDays": 40,
+    "premiumObservationMaximumAgeHours": 24,
+    "xHandleIsIdentityKey": false
   },
   "daily": {
     "snapshotAtUtc": "00:00",
     "claimOpenAtUtc": "00:05",
     "rewardDisplayUnits": 12,
+    "maximumClaimsPerEpoch": 1000,
     "maximumQualifyingActionsPerEpoch": 1,
     "epoch": "Previous closed UTC day. No retroactive edits after the manifest is published.",
     "qualifyingAction": "One original X post or reply that matches the public daily prompt, includes the canonical campaign tag, and is returned by the official X API collection job.",
     "excludedActions": ["likes alone", "reposts alone", "duplicate posts", "copied text", "automated posting", "deleted posts", "activity outside the closed UTC window"],
     "claimExpiryDays": 30
+  },
+  "budget": {
+    "maximumPublishedEpochs": 365,
+    "maximumEpochBaseUnits": "12000000000000",
+    "maximumLifetimeBaseUnits": "4380000000000000",
+    "refillAllowed": false,
+    "expiredClaimsRecycled": false,
+    "consumptionRule": "Every amount placed in a published epoch permanently consumes lifetime budget, whether later claimed or expired.",
+    "oversubscriptionRule": "IAT_DAILY_BUDGET_V1_ASCENDING_SHA256",
+    "oversubscriptionInputs": ["closed UTC epoch", "canonical candidate snapshot SHA-256", "predeclared finalized Solana slot hash after snapshot", "immutable X user ID", "wallet"],
+    "exhaustionRule": "Stop creating claims when 365 epochs are published, fewer than 12 IAT remain, or the next epoch would exceed either cap. Never create debt, prorate, refill, or silently reassign an expired claim."
   },
   "fairness": {
     "walletBinding": "A wallet may bind to only one X account; an X account may bind to only one wallet until a documented cooldown and re-verification complete.",
@@ -31,8 +54,10 @@
     "manualHold": "Suspicious or duplicate activity is held from that epoch and documented; it is never silently reassigned."
   },
   "distribution": {
-    "model": "Merkle-proof claim served from a small dedicated distributor wallet. The treasury wallet is never exposed to the web application.",
-    "payer": "Dedicated distributor only, funded to a capped operational balance after Genesis verification.",
+    "model": "Merkle-proof manifests and unsigned distribution batches are prepared offline. The web application has no signing key and cannot submit a transfer.",
+    "payer": "The owner-controlled Trezor Model T is the only signing device. Every bounded batch requires physical review and confirmation; no hot distributor key or separate authority is authorized.",
+    "serverSigningAllowed": false,
+    "automaticBroadcastAllowed": false,
     "proofPayload": ["epoch", "wallet", "amountBaseUnits", "merkleProof", "policyHash", "manifestDigest"],
     "publicEvidence": ["epoch manifest", "Merkle root", "claim total", "distribution transaction links", "unclaimed-expiry policy"]
   },

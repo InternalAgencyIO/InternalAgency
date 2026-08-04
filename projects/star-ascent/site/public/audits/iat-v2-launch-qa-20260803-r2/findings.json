@@ -1,0 +1,147 @@
+{
+  "schema": "iat-v2-launch-qa-findings/v1",
+  "status": "DRAFT_QA_HOLD",
+  "findings": [
+    {
+      "id": "QA-RUNTIME-001",
+      "severity": "MEDIUM",
+      "state": "CLOSED",
+      "area": "browser-runtime",
+      "summary": "Unused next/font loading emitted blocked local module requests",
+      "resolution": "Removed the unused loader and added route-wide browser exception and console-error assertions.",
+      "evidence": [
+        "35/35 Playwright cases passed",
+        "zero page exceptions",
+        "zero console errors"
+      ]
+    },
+    {
+      "id": "QA-LIVE-001",
+      "severity": "HIGH",
+      "state": "CLOSED",
+      "area": "live-publication-drift",
+      "summary": "Historical public-route, redirect, metadata, and sitemap drift",
+      "resolution": "The read-only public contract now passes every English and Turkish direct page, legacy redirect, metadata, alternate-link, sitemap, and robots check.",
+      "evidence": [
+        "76/76 current read-only live checks passed",
+        "zero live contract failures",
+        "productionMutated=false"
+      ]
+    },
+    {
+      "id": "QA-L10N-AUTO-001",
+      "severity": "MEDIUM",
+      "state": "CLOSED",
+      "area": "localization-automation",
+      "summary": "Automated metadata and critical-copy parity gaps",
+      "resolution": "Reconciled route metadata and critical runtime copy across the fifty-locale catalog.",
+      "evidence": [
+        "50 locales × 1,280 canonical strings",
+        "zero empty catalog values",
+        "zero critical English fallbacks"
+      ]
+    },
+    {
+      "id": "QA-LINT-001",
+      "severity": "LOW",
+      "state": "CLOSED",
+      "area": "image-runtime-lint",
+      "summary": "Eight native-image lint warnings obscured an unsafe framework-image substitution",
+      "resolution": "Retained Vinext-compatible native images with verified intrinsic dimensions, documented narrow lint exceptions, and regression tests that reject next/image imports in runtime-sensitive pages.",
+      "evidence": [
+        "eslint: 0 errors, 0 warnings",
+        "2/2 native-image runtime tests passed",
+        "35/35 browser cases passed"
+      ]
+    },
+    {
+      "id": "QA-L10N-HUMAN-001",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "area": "localization-human-review",
+      "summary": "Non-English locales have no native-speaker certification",
+      "evidence": [
+        "automated completeness is not fluency proof",
+        "AI-assisted translations remain labelled as such"
+      ],
+      "remediation": "Obtain and publish accountable native-speaker review before making native-quality claims."
+    },
+    {
+      "id": "QA-ADMIN-001",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "area": "local-admin-runtime",
+      "summary": "The isolated admin bundle retains browser-externalized Node imports and a large output chunk",
+      "evidence": [
+        "Vite build completed",
+        "util and crypto were browser-externalized",
+        "largest chunk 2148.15 kB and 487.84 kB gzip"
+      ],
+      "remediation": "Prove the built localhost console in an isolated non-signing runtime and reduce or document the dependency surface before ceremony use."
+    },
+    {
+      "id": "QA-DEPS-001",
+      "severity": "MEDIUM",
+      "state": "OPEN",
+      "area": "development-dependencies",
+      "summary": "Development tooling retains upstream advisories while production dependencies are clear",
+      "evidence": [
+        "production audit total 0",
+        "full audit total 22",
+        "15 moderate and 7 high, 0 critical"
+      ],
+      "remediation": "Review non-breaking upstream resolutions and reproduce every launch gate before accepting toolchain changes."
+    },
+    {
+      "id": "QA-COVERAGE-001",
+      "severity": "INFO",
+      "state": "OPEN",
+      "area": "environment-coverage",
+      "summary": "Physical-device, graphical Linux, assistive-technology, performance-lab, and independent QA coverage is unavailable",
+      "evidence": [
+        "mobile results are Playwright emulation",
+        "no installed mobile Safari",
+        "no independent reviewer session"
+      ],
+      "remediation": "Run and publish the missing environment matrix with independent review."
+    },
+    {
+      "id": "QA-SIGNOFF-001",
+      "severity": "HIGH",
+      "state": "OPEN",
+      "area": "independent-devnet-signoff",
+      "summary": "Independent initialization signoff is pending and current remediation source requires a fresh signed Devnet rehearsal",
+      "evidence": [
+        "historical feature artifact validates only for its prior artifact",
+        "current source is not cleared by the historical rehearsal"
+      ],
+      "remediation": "Complete a fresh, source-bound signed Devnet rehearsal and independent review without reusing stale evidence."
+    },
+    {
+      "id": "QA-FUNDING-001",
+      "severity": "HIGH",
+      "state": "OPEN",
+      "area": "mainnet-readiness",
+      "summary": "The reviewed mainnet address remains below the exact ceremony funding floor",
+      "evidence": [
+        "observed 2,533,659,570 lamports",
+        "required 8,500,000,000 lamports",
+        "fundingFloorSatisfied=false"
+      ],
+      "remediation": "Fund through the separately authorized owner workflow, then rerun the read-only finalized balance gate."
+    },
+    {
+      "id": "QA-AUTHORITY-001",
+      "severity": "CRITICAL",
+      "state": "OPEN",
+      "area": "authority-concentration",
+      "summary": "The sole-Trezor authority model is an owner-accepted concentration risk",
+      "evidence": [
+        "single-hardware-authority policy is intentional",
+        "the risk remains recorded in the remediation audit",
+        "no independent authority separation exists"
+      ],
+      "remediation": "Retain explicit owner acceptance and independent ceremony verification; do not describe the concentration risk as remediated."
+    }
+  ]
+}

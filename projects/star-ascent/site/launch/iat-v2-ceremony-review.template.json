@@ -1,0 +1,60 @@
+{
+  "schema": "iat-v2-ceremony-review/v1",
+  "status": "HOLD",
+  "network": "mainnet-beta",
+  "scope": "Non-authorizing V2 attended-review record; this file never signs, simulates for signing, broadcasts, deploys, mints, transfers, schedules, publishes, or stores wallet credentials.",
+  "sourceArtifacts": {
+    "readinessGatePath": "launch/iat-v2-mainnet-readiness-gate.json",
+    "stageJournalPath": "launch/iat-v2-mainnet-stage-journal.template.json",
+    "policyPath": "engagement/iat-economic-policy.v2.json",
+    "allocationPlanPath": "launch/iat-v2-allocation-plan.template.json",
+    "remediationAuditPath": "public/audits/iat-v2-remediation-20260802/manifest.json",
+    "localTimeGateProofPath": "launch/iat-v2-local-time-gate-proof.json"
+  },
+  "artifactDigests": {
+    "readinessGateSha256": null,
+    "stageJournalSha256": null,
+    "policySha256": null,
+    "allocationPlanSha256": null,
+    "remediationAuditSha256": null,
+    "localTimeGateProofSha256": null
+  },
+  "participants": {
+    "soleTrezorOperator": {
+      "role": "SOLE_TREZOR_SIGNER",
+      "label": null,
+      "publicAddress": null,
+      "physicalConfirmationRequired": true,
+      "devicePathReviewed": false
+    },
+    "independentVerifier": {
+      "role": "INDEPENDENT_VERIFIER",
+      "label": null,
+      "reviewedArtifacts": false,
+      "reviewedStagePlan": false,
+      "hasNoSigningAuthority": true
+    }
+  },
+  "controls": {
+    "soleTrezorAuthorityTopology": true,
+    "authorityRoleSeparationClaimed": false,
+    "noServerSigner": true,
+    "noAutomaticSigning": true,
+    "noBlindApproval": true,
+    "separateBroadcastApprovalRequired": true,
+    "noSecretsInRecord": true
+  },
+  "review": {
+    "releaseArtifactsRegeneratedAfterFundingAndScheduling": false,
+    "replacementUtcWindowReviewed": false,
+    "currentSbfDigestReviewed": false,
+    "currentSignedDevnetEvidenceReviewed": false,
+    "readyAtUtc": null
+  },
+  "limitations": [
+    "READY permits only attended preflight while mainnet remains HOLD.",
+    "The independent verifier observes and compares evidence but receives no signing authority.",
+    "The sole-Trezor topology is an owner-accepted concentration risk and is not authority role separation.",
+    "Physical transaction review and separate explicit broadcast approval remain mandatory."
+  ]
+}

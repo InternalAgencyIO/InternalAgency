@@ -1,0 +1,45 @@
+{
+  "schema": "iat-v2-continuous-improvement-manifest/v1",
+  "title": "IAT V2 continuous-improvement public ledger",
+  "generatedAtUtc": "2026-08-03T16:28:59.882Z",
+  "status": "DRAFT_MAINNET_HOLD",
+  "mainnetStatus": "HOLD",
+  "assurance": "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT",
+  "sourceBinding": {
+    "branch": "agent/iat-launch-window",
+    "commit": "d97587cd7616d62d6ba1e494160da2c1b0e582ca",
+    "gitTree": "51b99b4956edba35418b69ef94c61e22be831c0b"
+  },
+  "sourceSha256": {
+    "SECURITY.md": "433069f75d50617a3865b2b48da0560c57fd3845765ab563e3a09613313ff813",
+    "projects/star-ascent/site/package.json": "48795713c1d05b945db042bd55da1c769498c2c1f60881aeb99c2500e73779ab",
+    "projects/star-ascent/site/programs/iat_v2/src/lib.rs": "7fada9b0b78b055c165d502579d2220daa8825ba2d90253cd9f591e391e94796",
+    "projects/star-ascent/site/app/i18n/LocaleRuntime.tsx": "963ff2d4bb8a0c5478600343df157abe96a3cbdb3fa2f114310f18cecfc2ab3b",
+    "projects/star-ascent/site/playwright.config.mjs": "68db1babea4f4392a4685124a5e09c0e8bc818ff187a3e5672ea7ae0be26b3a7",
+    "projects/star-ascent/site/public/evidence/iat-v2/index.json": "5e5f55c02d9e39fe7bc5dc1347a8ed3758977b6e61ff8f92c03305a3a1e798c3",
+    "projects/star-ascent/site/public/audits/iat-site-locale-config-qa-20260803/manifest.json": "b1a6299bd028d6e199cf6ad090f7c6ec88ec50eade154d4ee3986d56d7848645",
+    "projects/star-ascent/site/public/audits/iat-v2-remediation-20260802/manifest.json": "8aac92195d5aafe1eb9b421e2f630ffa3d4bd2d1f897a4b277c80eda135a88bf",
+    "projects/star-ascent/site/app/network/page.tsx": "9e9802f64fac799095d4358b3a94b8e4fde8cd5079b58076948f0c891e89ea98",
+    "projects/star-ascent/site/tests/ui/ui-regression.spec.mjs": "1a7c611c2121efd42933738cfcfc4a5984fb0c2b819b1b5560488a8e501923a1"
+  },
+  "clearance": {
+    "independentAuditComplete": false,
+    "currentSourceSignedDevnetComplete": false,
+    "currentSourceIndependentReviewComplete": false,
+    "humanAttributionVerificationComplete": false,
+    "legalAuthorshipDetermined": false,
+    "authorizesDeployment": false,
+    "authorizesFunding": false,
+    "authorizesWalletAccess": false,
+    "authorizesSigning": false,
+    "authorizesSimulationForSigning": false,
+    "authorizesBroadcast": false,
+    "authorizesMainnetChange": false
+  },
+  "artifactSha256": {
+    "README.md": "8d3cb0db9c45247be7c869ccb46d35b0b842bb905c1c325c63fefd4c515c2d3a",
+    "attribution.json": "f29e7d7d8e552430729a4b49ecf8247ecb3127da884da0017bfc4b62ea768864",
+    "work-ledger.json": "5edcc47011f167d6c8d5b748da401c604640470744527cdc9182d9809d2ae5b5",
+    "assurance-boundaries.json": "9ac64ec5024582b49122bcd22ed2c13ae0f7edb7663bb908940f3877426bf598"
+  }
+}

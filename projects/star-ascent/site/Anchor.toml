@@ -1,0 +1,24 @@
+[toolchain]
+anchor_version = "1.0.2"
+solana_version = "3.1.10"
+package_manager = "npm"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+iat_v2 = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj"
+
+[programs.devnet]
+iat_v2 = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj"
+
+[programs.mainnet]
+iat_v2 = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj"
+
+[provider]
+cluster = "Localnet"
+wallet = "launch/HOLD-no-signing-wallet.json"
+
+[scripts]
+test = "node --test tests/iat-v2-reference-engine.test.mjs"

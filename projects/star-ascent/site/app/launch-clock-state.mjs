@@ -1,4 +1,4 @@
-export const GENESIS_SCHEDULED_AT_UTC = "2026-07-29T15:00:00Z";
+export const GENESIS_SCHEDULED_AT_UTC = null;
 
 export function resolveLaunchClockState(
   manifestStatus,

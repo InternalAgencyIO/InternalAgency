@@ -1,0 +1,17 @@
+{
+  "schema": "iat-site-locale-config-qa-environments/v1",
+  "environments": [
+    { "id": "CHROMIUM_DESKTOP", "kind": "AUTOMATED", "result": "PASS" },
+    { "id": "FIREFOX_DESKTOP", "kind": "AUTOMATED", "result": "PASS" },
+    { "id": "WEBKIT_DESKTOP", "kind": "AUTOMATED", "result": "PASS" },
+    { "id": "CHROMIUM_TABLET", "kind": "AUTOMATED", "result": "PASS" },
+    { "id": "FIREFOX_TABLET", "kind": "AUTOMATED", "result": "PASS" },
+    { "id": "ANDROID_CHROMIUM_EMULATION", "kind": "EMULATION", "result": "PASS" },
+    { "id": "IOS_WEBKIT_EMULATION", "kind": "EMULATION", "result": "PASS" },
+    { "id": "WINDOWS_IN_APP_BROWSER_MANUAL", "kind": "MANUAL", "result": "PASS_WITH_OPEN_LOCALIZATION_FINDING" },
+    { "id": "PHYSICAL_IOS_SAFARI", "kind": "PHYSICAL", "result": "NOT_TESTED" },
+    { "id": "PHYSICAL_ANDROID_CHROME", "kind": "PHYSICAL", "result": "NOT_TESTED" },
+    { "id": "NATIVE_LINUX_BROWSER_HOST", "kind": "NATIVE_OS", "result": "NOT_TESTED" },
+    { "id": "NATIVE_MACOS_SAFARI_HOST", "kind": "NATIVE_OS", "result": "NOT_TESTED" }
+  ]
+}

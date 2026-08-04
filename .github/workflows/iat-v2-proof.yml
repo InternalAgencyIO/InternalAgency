@@ -1,0 +1,109 @@
+name: IAT V2 release proof
+
+on:
+  push:
+    branches:
+      - agent/iat-launch-window
+    paths:
+      - ".github/workflows/iat-v2-proof.yml"
+      - "projects/star-ascent/site/**"
+  pull_request:
+    paths:
+      - ".github/workflows/iat-v2-proof.yml"
+      - "projects/star-ascent/site/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # A push to the public draft branch and its pull_request event describe the
+  # same source head. Share one group so the newer event cancels duplicate work.
+  group: iat-v2-proof-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: projects/star-ascent/site
+
+jobs:
+  web-and-policy:
+    name: Web, policy, and launch gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # The public pre-launch audit validator recomputes its historical
+          # source commit, tree, and tracked-file inventory. A shallow checkout
+          # cannot provide that source-bound assurance.
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: projects/star-ascent/site/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run check:iat-v2-proof-workflow
+      - run: npm run check:ui-regression
+      - run: npm run check:iat-v2
+      - run: npm run check:launch-gates
+      - run: npm run check:iat-v2-signoff
+      - run: npm test
+      - run: npm run lint
+
+  rust-host:
+    name: Rust host tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - run: cargo test --workspace --all-targets --locked
+
+  verifiable-sbf:
+    name: Verifiable Solana SBF build
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      IAT_V2_WORKFLOW_EVENT: ${{ github.event_name }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # Pull-request builds test GitHub's synthetic merge commit. Full
+          # history is required to bind that checkout to its exact head parent.
+          fetch-depth: 0
+      - name: Install the pinned official Solana and Anchor toolchain
+        run: |
+          rustup toolchain install 1.97.1 --profile minimal
+          agave_install_init="$RUNNER_TEMP/agave-install-init-v3.1.10"
+          curl --proto '=https' --tlsv1.2 -sSfL \
+            https://release.anza.xyz/v3.1.10/agave-install-init-x86_64-unknown-linux-gnu \
+            -o "$agave_install_init"
+          echo "ffb25b5f2c9649a13b566b26e48d441a1eaf6d3c50d2198a70e19a5e1dfae96b  $agave_install_init" \
+            | sha256sum --check --strict -
+          chmod u+x "$agave_install_init"
+          "$agave_install_init" v3.1.10
+          cargo +1.97.1 install \
+            --git https://github.com/solana-foundation/anchor \
+            --rev 1314a6b83b16e6a31947b372d57988fd0e81559c \
+            --locked \
+            --force \
+            anchor-cli
+          {
+            echo "$HOME/.local/share/solana/install/active_release/bin"
+            echo "$HOME/.cargo/bin"
+          } >> "$GITHUB_PATH"
+      - name: Produce deterministic build evidence
+        run: bash scripts/verify-iat-v2-sbf.sh
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: iat-v2-verifiable-sbf
+          path: |
+            projects/star-ascent/site/target/verifiable/iat_v2.so
+            projects/star-ascent/site/target/verifiable/iat-v2-build-evidence.json
+            projects/star-ascent/site/target/idl/iat_v2.json
+            projects/star-ascent/site/target/iat-v2-sbf-build.log
+          if-no-files-found: error
+          retention-days: 30

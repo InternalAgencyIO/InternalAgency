@@ -1,12 +1,28 @@
 import { env } from "cloudflare:workers";
+import { hashNodeSessionNonce, readNodeSessionCookie, verifyNodeSession } from "../../../../engagement/node-session.mjs";
+
+const allowedOrigins = new Set(["https://internalagency.io", "https://ileriakil.com"]);
+const json = (body: unknown, status = 200) => Response.json(body, { status, headers: { "Cache-Control": "no-store" } });
 
 export async function POST(request: Request) {
-  if (!env.DB) return Response.json({ error: "CLAIM_SERVICE_NOT_CONFIGURED" }, { status: 503 });
-  let input: { nodeId?: string; countryCode?: string };
-  try { input = await request.json(); } catch { return Response.json({ error: "INVALID_REQUEST" }, { status: 400 }); }
+  const origin = request.headers.get("origin") ?? new URL(request.url).origin;
+  if (!allowedOrigins.has(origin)) return json({ error: "UNTRUSTED_ORIGIN" }, 403);
+  if (!env.DB) return json({ error: "CLAIM_SERVICE_NOT_CONFIGURED" }, 503);
+  if (!env.NODE_SESSION_SECRET || env.NODE_SESSION_SECRET.length < 32) return json({ error: "NODE_SESSION_NOT_CONFIGURED" }, 503);
+  let session: { nodeId: string; wallet: string; nonce: string };
+  try {
+    session = verifyNodeSession({ token: readNodeSessionCookie(request), secret: env.NODE_SESSION_SECRET });
+  } catch {
+    return json({ error: "NODE_SESSION_INVALID" }, 401);
+  }
+  let input: { countryCode?: string };
+  try { input = await request.json(); } catch { return json({ error: "INVALID_REQUEST" }, 400); }
   const countryCode = input.countryCode?.trim().toUpperCase() ?? "";
-  if (!/^[A-Z]{2}$/.test(countryCode) || !input.nodeId || !/^[0-9a-f-]{36}$/i.test(input.nodeId)) return Response.json({ error: "INVALID_COUNTRY_SELECTION" }, { status: 400 });
-  const result = await env.DB.prepare("UPDATE node_bindings SET country_code = ? WHERE id = ? AND state = 'pending' AND country_code IS NULL").bind(countryCode, input.nodeId).run();
-  if (result.meta.changes !== 1) return Response.json({ error: "COUNTRY_SELECTION_LOCKED" }, { status: 409 });
-  return Response.json({ nodeId: input.nodeId, countryCode, next: "X_OAUTH_REQUIRED", claimStatus: "HOLD" }, { headers: { "Cache-Control": "no-store" } });
+  if (!/^[A-Z]{2}$/.test(countryCode)) return json({ error: "INVALID_COUNTRY_SELECTION" }, 400);
+  const now = new Date().toISOString();
+  const result = await env.DB.prepare("UPDATE node_bindings SET country_code = ? WHERE id = ? AND wallet_address = ? AND state = 'pending' AND country_code IS NULL AND session_nonce_hash = ? AND session_expires_at_utc >= ?")
+    .bind(countryCode, session.nodeId, session.wallet, hashNodeSessionNonce(session.nonce), now)
+    .run();
+  if (result.meta.changes !== 1) return json({ error: "COUNTRY_SELECTION_LOCKED" }, 409);
+  return json({ countryCode, next: "X_OAUTH_REQUIRED", claimStatus: "HOLD" });
 }

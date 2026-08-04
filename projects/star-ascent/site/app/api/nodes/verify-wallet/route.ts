@@ -1,4 +1,5 @@
 import { env } from "cloudflare:workers";
+import { hashNodeSessionNonce, issueNodeSession, nodeSessionCookie } from "../../../../engagement/node-session.mjs";
 import { verifyNodeChallenge } from "../../../../engagement/solana-wallet-proof.mjs";
 
 const allowedOrigins = new Set(["https://internalagency.io", "https://ileriakil.com"]);
@@ -16,6 +17,7 @@ export async function POST(request: Request) {
   const origin = request.headers.get("origin") ?? new URL(request.url).origin;
   if (!allowedOrigins.has(origin)) return json({ error: "UNTRUSTED_ORIGIN" }, 403);
   if (!env.DB) return json({ error: "CLAIM_SERVICE_NOT_CONFIGURED" }, 503);
+  if (!env.NODE_SESSION_SECRET || env.NODE_SESSION_SECRET.length < 32) return json({ error: "NODE_SESSION_NOT_CONFIGURED" }, 503);
 
   let input: { challengeId?: string; wallet?: string; nonce?: string; signatureBase58?: string };
   try { input = await request.json(); } catch { return json({ error: "INVALID_REQUEST" }, 400); }
@@ -33,10 +35,24 @@ export async function POST(request: Request) {
 
   const now = new Date().toISOString();
   const bindingId = crypto.randomUUID();
-  const consumed = await env.DB.prepare("UPDATE node_challenges SET consumed_at_utc = ? WHERE id = ? AND consumed_at_utc IS NULL AND expires_at_utc >= ?").bind(now, challenge.id, now).run();
+  const [consumed] = await env.DB.batch([
+    env.DB.prepare("UPDATE node_challenges SET consumed_at_utc = ? WHERE id = ? AND consumed_at_utc IS NULL AND expires_at_utc >= ?").bind(now, challenge.id, now),
+    env.DB.prepare("INSERT OR IGNORE INTO node_bindings (id, wallet_address, state, created_at_utc) VALUES (?, ?, 'pending', ?)").bind(bindingId, input.wallet, now),
+  ]);
   if (consumed.meta.changes !== 1) return json({ error: "CHALLENGE_UNAVAILABLE" }, 409);
-  await env.DB.prepare("INSERT OR IGNORE INTO node_bindings (id, wallet_address, state, created_at_utc) VALUES (?, ?, 'pending', ?)").bind(bindingId, input.wallet, now).run();
-  const binding = await env.DB.prepare("SELECT id, state, genesis_slot FROM node_bindings WHERE wallet_address = ?").bind(input.wallet).first<BindingRow>();
+  const binding = await env.DB.prepare("SELECT node_bindings.id, node_bindings.state, COALESCE(genesis_slots.slot_number, node_bindings.genesis_slot) AS genesis_slot FROM node_bindings LEFT JOIN genesis_slots ON genesis_slots.node_binding_id = node_bindings.id WHERE node_bindings.wallet_address = ?").bind(input.wallet).first<BindingRow>();
+  if (!binding) return json({ error: "BINDING_CREATION_FAILED" }, 500);
+  if (binding.state !== "pending") return json({ state: binding.state, genesisSlot: binding.genesis_slot, next: null, claimStatus: "HOLD" }, 409);
 
-  return json({ nodeId: binding?.id, state: binding?.state ?? "pending", genesisSlot: binding?.genesis_slot ?? null, next: "X_OAUTH_REQUIRED", claimStatus: "HOLD" });
+  const session = issueNodeSession({ nodeId: binding.id, wallet: input.wallet, secret: env.NODE_SESSION_SECRET });
+  const sessionExpiresAt = new Date(session.payload.exp).toISOString();
+  const rotated = await env.DB.prepare("UPDATE node_bindings SET session_nonce_hash = ?, session_expires_at_utc = ? WHERE id = ? AND wallet_address = ? AND state = 'pending'")
+    .bind(hashNodeSessionNonce(session.payload.nonce), sessionExpiresAt, binding.id, input.wallet)
+    .run();
+  if (rotated.meta.changes !== 1) return json({ error: "BINDING_SESSION_FAILED" }, 409);
+
+  return Response.json(
+    { state: "pending", genesisSlot: null, next: "COUNTRY_SELECTION_REQUIRED", claimStatus: "HOLD" },
+    { headers: { "Cache-Control": "no-store", "Set-Cookie": nodeSessionCookie(session.token) } },
+  );
 }

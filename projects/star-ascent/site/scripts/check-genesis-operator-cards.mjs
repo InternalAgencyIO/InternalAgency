@@ -1,41 +1,33 @@
 #!/usr/bin/env node
 
 import { readFileSync } from "node:fs";
+import { V2_STAGE_ORDER } from "../programs/iat_v2/client.mjs";
 
-const releaseEvidenceOrder = [
-  "CREATE_MINT",
-  "MINT_ALLOCATION_DESTINATIONS",
-  "REVOKE_MINT_AUTHORITY",
-  "REVOKE_FREEZE_AUTHORITY",
-  "PUBLISH_EVIDENCE",
-];
-const ceremonyTransactionOrder = [
-  "CREATE_INITIALIZE_IMMUTABLE_METADATA",
-  "MINT_FIVE_ALLOCATION_DESTINATIONS",
-  "REVOKE_MINT_AUTHORITY",
-  "REVOKE_FREEZE_AUTHORITY",
-];
-
-const manifestPath = "launch/genesis-manifest.template.json";
-const rehearsalPath = "launch/devnet-rehearsal.template.json";
-const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
-const rehearsal = JSON.parse(readFileSync(rehearsalPath, "utf8"));
+const policy = JSON.parse(readFileSync("engagement/iat-economic-policy.v2.json", "utf8"));
+const rehearsal = JSON.parse(
+  readFileSync("launch/iat-v2-devnet-rehearsal.template.json", "utf8"),
+);
+const mintPage = readFileSync("app/mint/page.tsx", "utf8");
 
 if (
-  JSON.stringify(manifest.releaseEvidence?.transactionOrder) !==
-  JSON.stringify(releaseEvidenceOrder)
+  rehearsal.schema !== "iat-v2-devnet-rehearsal/v1"
+  || rehearsal.status !== "PLANNED"
+  || rehearsal.network !== "devnet"
 ) {
-  throw new Error(
-    `${manifestPath} no longer contains the fixed release-evidence order`,
-  );
+  throw new Error("the canonical V2 rehearsal must remain PLANNED on devnet");
 }
-if (
-  JSON.stringify(rehearsal.mainnetPlan?.transactionOrder) !==
-  JSON.stringify(ceremonyTransactionOrder)
-) {
-  throw new Error(
-    `${rehearsalPath} no longer contains the exact four-transaction ceremony`,
-  );
+if (rehearsal.requiredScenarios.length < 20) {
+  throw new Error("the V2 rehearsal scenario matrix is incomplete");
+}
+for (const marker of [
+  "const V2_MINT_ONLY_PATH_SUPERSEDED = true;",
+  "SUPERSEDED // DO NOT SIGN",
+  "disabled={V2_MINT_ONLY_PATH_SUPERSEDED}",
+  "It has no wallet provider, signer, transaction builder, or",
+]) {
+  if (!mintPage.includes(marker)) {
+    throw new Error(`app/mint/page.tsx is missing fail-closed marker ${marker}`);
+  }
 }
 
 const cardPaths = [
@@ -48,8 +40,8 @@ const cards = new Map(
 );
 const gateStatusPatterns = [
   [/launch\/release-snapshot\.generated\.json.{0,100}`HOLD`/s, "HOLD release snapshot"],
-  [/launch\/mainnet-handoff\.template\.json.{0,100}`APPROVED`/s, "APPROVED mainnet handoff"],
-  [/launch\/release-packet\.template\.json.{0,100}`READY`/s, "READY release packet"],
+  [/launch\/mainnet-handoff\.template\.json.{0,100}`APPROVED`/s, "legacy APPROVED handoff boundary"],
+  [/launch\/release-packet\.template\.json.{0,100}`READY`/s, "legacy READY packet boundary"],
 ];
 
 for (const [path, content] of cards) {
@@ -58,11 +50,11 @@ for (const [path, content] of cards) {
   }
   for (const [pattern, label] of gateStatusPatterns) {
     if (!pattern.test(content)) {
-      throw new Error(`${path} must distinguish the ${label} state`);
+      throw new Error(`${path} must distinguish the ${label}`);
     }
   }
-  if (/five[- ]transaction|fifth transaction is publication/i.test(content)) {
-    throw new Error(`${path} must not describe publication as a transaction`);
+  if (/follow the exact four-transaction|execute exactly four|use .*\/mint.*sign/i.test(content)) {
+    throw new Error(`${path} still instructs the superseded mint-only ceremony`);
   }
 }
 
@@ -72,80 +64,66 @@ for (const path of [
 ]) {
   const content = cards.get(path);
   let previousIndex = -1;
-  for (const transaction of ceremonyTransactionOrder) {
-    const marker = `\`${transaction}\``;
+  for (const stage of V2_STAGE_ORDER) {
+    const marker = `\`${stage}\``;
     const matches = [...content.matchAll(new RegExp(marker, "g"))];
     if (matches.length !== 1) {
-      throw new Error(
-        `${path} must contain ceremony transaction ${marker} exactly once`,
-      );
+      throw new Error(`${path} must contain V2 stage ${marker} exactly once`);
     }
     if (matches[0].index <= previousIndex) {
-      throw new Error(`${path} does not preserve the ceremony transaction order`);
+      throw new Error(`${path} does not preserve the V2 stage order`);
     }
     previousIndex = matches[0].index;
   }
-  if (!/publication is a separate human/i.test(content)) {
-    throw new Error(`${path} must separate publication from the four transactions`);
+  if (!/Publication is a separate human/i.test(content)) {
+    throw new Error(`${path} must separate publication from protocol execution`);
   }
 }
 
 const launchDayCard = cards.get("launch/LAUNCH_DAY_CARD.md");
 if (
-  !launchDayCard.includes("exact four-transaction ceremony") ||
-  !launchDayCard.includes("launch/GENESIS_OPERATIONS_CARD.md")
+  !launchDayCard.includes("V2 runbook")
+  || !launchDayCard.includes("launch/GENESIS_OPERATIONS_CARD.md")
+  || !launchDayCard.includes("launch/DEVNET_REHEARSAL_SCENARIO.md")
 ) {
-  throw new Error(
-    "launch/LAUNCH_DAY_CARD.md must delegate to the exact four-transaction operations card",
-  );
+  throw new Error("launch/LAUNCH_DAY_CARD.md must delegate to the V2 runbooks");
 }
 
 const operationsCard = cards.get("launch/GENESIS_OPERATIONS_CARD.md");
 const requiredArtifacts = [
-  "launch/token-metadata.template.json",
-  "launch/allocation-lock-plan.template.json",
-  "launch/genesis-manifest.template.json",
-  "launch/devnet-rehearsal.template.json",
-  "launch/genesis-signing-checklist.template.json",
+  "engagement/iat-economic-policy.v2.json",
+  "launch/iat-v2-allocation-plan.template.json",
+  "launch/iat-v2-devnet-rehearsal.template.json",
+  "docs/IAT_V2_PROGRAM_ARCHITECTURE.md",
+  "programs/iat_v2/README.md",
+  "scripts/bind-iat-v2-program-id.mjs",
+  "scripts/verify-iat-v2-sbf.sh",
   "launch/release-snapshot.generated.json",
   "launch/mainnet-handoff.template.json",
   "launch/release-packet.template.json",
-  "launch/pre-publication-packet-proof.generated.json",
   "launch/PUBLICATION_PAYLOAD.template.md",
 ];
 for (const path of requiredArtifacts) {
   if (!operationsCard.includes(`\`${path}\``)) {
-    throw new Error(
-      `launch/GENESIS_OPERATIONS_CARD.md must name canonical artifact ${path}`,
-    );
+    throw new Error(`launch/GENESIS_OPERATIONS_CARD.md must name ${path}`);
   }
 }
 
-if (operationsCard.includes("genesis-manifest.json")) {
-  throw new Error(
-    "launch/GENESIS_OPERATIONS_CARD.md must not name the retired non-canonical manifest",
-  );
-}
-
-const expectedBaseUnits = Object.values(manifest.allocations).map(
+const expectedBaseUnits = Object.values(policy.allocations).map(
   ({ baseUnitAmount }) => baseUnitAmount,
 );
 for (const amount of expectedBaseUnits) {
   if (!operationsCard.includes(`\`${amount}\``)) {
-    throw new Error(
-      `launch/GENESIS_OPERATIONS_CARD.md must preserve allocation amount ${amount}`,
-    );
+    throw new Error(`operations card must preserve allocation amount ${amount}`);
   }
 }
 const totalBaseUnits = expectedBaseUnits
   .reduce((total, amount) => total + BigInt(amount), 0n)
   .toString();
 if (!operationsCard.includes(`\`${totalBaseUnits}\``)) {
-  throw new Error(
-    `launch/GENESIS_OPERATIONS_CARD.md must preserve allocation total ${totalBaseUnits}`,
-  );
+  throw new Error(`operations card must preserve allocation total ${totalBaseUnits}`);
 }
 
 console.log(
-  "OK: operator cards separate the exact four-transaction ceremony from the five-stage evidence workflow, preserve allocation math, and retain HOLD boundaries",
+  "OK: operator cards enforce the V2 stage order, disable the superseded mint path, preserve allocation math, and retain HOLD boundaries",
 );

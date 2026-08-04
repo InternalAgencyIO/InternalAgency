@@ -1,5 +1,20 @@
 # Genesis Manifest Workflow
 
+> **MAINNET HOLD — TOKENOMICS V2 SUPERSEDES THE FOUR-TRANSACTION CEREMONY**
+>
+> The public policy at `/tokenomics` and
+> `archive/public-disclosures/source/iat-tokenomics-v2-{en,tr}.txt` introduces
+> vested reward lanes, full-obligation collateralization, fixed annual reward
+> rates, and a weekly CCC reassignment. The existing allocation-lock plan,
+> four-transaction rehearsal, generated mint configuration, and ceremony
+> validators do not implement those mechanics. The `/mint` controls are
+> deliberately disabled. These V1 artifacts remain regression-only historical
+> scaffolding and must not be used for devnet execution or mainnet approval.
+> The canonical implementation is now `programs/iat_v2`, with
+> `engagement/iat-economic-policy.v2.json`,
+> `launch/iat-v2-allocation-plan.template.json`, and
+> `launch/iat-v2-devnet-rehearsal.template.json`.
+
 ## One-command preflight
 
 Before the launch room opens, run the complete local consistency pass:
@@ -8,13 +23,42 @@ Before the launch room opens, run the complete local consistency pass:
 node scripts/run-launch-preflight.mjs
 ```
 
-It first runs the isolated negative-case regressions for the manifest, Model T
-rehearsal, signer checklist, mainnet handoff, release packet, and release
-snapshot gates. It then runs the live schedule, supply, manifest, rehearsal,
-signing, handoff, publication, evidence-chain, transaction-order,
-release-packet, and release-snapshot checks in one sequence. A regression
-failure or any live-artifact failure is a HOLD condition; resolve it and rerun
-the complete command rather than treating a later passing check as clearance.
+It first reports the machine-readable ceremony-entry assessment, then validates
+the V2 policy, public Devnet evidence, separate local-only time-gate proof,
+mainnet readiness ledger, and sign-off records before running the isolated
+negative-case regressions for the manifest, Model T rehearsal, signer
+checklist, mainnet handoff, release packet, and release snapshot gates. It then
+runs the live schedule, supply, manifest, rehearsal, signing, handoff,
+publication, evidence-chain, transaction-order, release-packet, and
+release-snapshot checks in one sequence. A regression failure or any
+live-artifact failure is a HOLD condition; resolve it and rerun the complete
+command rather than treating a later passing check as clearance.
+
+The default command is a preparation audit and may pass while reporting
+ceremony blockers. During the final attended review only, require the separate
+entry assertion:
+
+```bash
+node scripts/run-launch-preflight.mjs --require-ceremony-ready
+```
+
+That mode fails before the full preflight unless a fresh read-only balance, the
+exact 8.5 SOL floor, one replacement UTC window,
+post-funding/post-scheduling artifact regeneration, an assigned independent
+verifier, and the reviewed Model T device path are all recorded. The artifact,
+verifier, and device-path summaries are accepted only when the canonical
+`READY` V2 ceremony review and `ARMED` V2 stage journal pass their validators in
+that same assessment; flipping readiness-ledger booleans cannot clear them. See
+[`IAT_V2_CEREMONY_ENTRY_GATE.md`](IAT_V2_CEREMONY_ENTRY_GATE.md).
+
+`iat-v2-ceremony-review.template.json` is the V2-only attended-review record.
+It binds the readiness ledger, V2 stage journal, economic policy, V2 allocation
+plan, remediation audit, and local time-gate proof by SHA-256. While `HOLD`, it
+must contain no identities, digests, completed reviews, or readiness timestamp.
+`READY` requires a fresh attended review, the sole Model T signer address, a
+distinct evidence-only verifier with no signing authority, current SBF and
+signed-Devnet evidence review, an `ARMED` V2 stage journal, and separate
+broadcast approval. It never stores a derivation path, PIN, seed, or key.
 
 `genesis-manifest.template.json` is a HOLD-state source of truth. Copy it to a non-template manifest only after the signer and verifier agree on every final value. Its primary validator also requires the fixed five-step Genesis order and all five evidence records to remain `null` while the manifest is `HOLD`, so stale transaction URLs cannot make a HOLD record look partly released.
 
@@ -26,17 +70,23 @@ node scripts/validate-genesis-manifest.mjs launch/genesis-manifest.template.json
 
 The validator checks intended network, program, decimals, supply target, and the declared exact base-unit supply/allocation amounts using integer arithmetic. It also checks whether a PUBLISHED manifest has all mandatory evidence fields. Published evidence must be non-placeholder HTTPS URLs, while mint and allocation destinations must use Solana base58 address form. Each allocation must have its own destination and public evidence URL, preventing a single wallet or record from silently satisfying multiple allocation buckets. It does not sign a transaction, inspect a wallet, or replace independent Explorer verification.
 
-## Model T rehearsal
+## Superseded V1 rehearsal record
 
-Use `devnet-rehearsal.template.json` as the non-secret record for the exact four-transaction path intended for Genesis. It must stay on devnet and must not contain a seed phrase, PIN, private key, passphrase, wallet export, derivation/account path, or any other credential. The validator rejects credential-bearing fields anywhere in the record. A completed rehearsal binds the current manifest, immutable metadata plan, allocation-lock plan, reviewed mainnet-plan digest, devnet mint and metadata PDA, five allocation owners and canonical ATAs, exact test balances, four transaction proofs, Model T environment, and independent review.
+`devnet-rehearsal.template.json` and its validator are retained only to test
+that the former V1 fail-closed evidence system does not accept malformed or
+secret-bearing records. A completed V1 record cannot authorize V2.
 
-Validate it before declaring the rehearsal complete:
+The active rehearsal runbook and evidence schema are:
 
 ```bash
-node scripts/validate-devnet-rehearsal.mjs launch/devnet-rehearsal.template.json
+cat launch/DEVNET_REHEARSAL_SCENARIO.md
+node scripts/validate-iat-v2-policy.mjs
 ```
 
-Only four distinct canonical devnet transaction identities clear the gate: atomic create/initialize/immutable-metadata, five-destination allocation mint, mint-authority revocation, and freeze-authority revocation. The first transaction prevents an uninitialized or unlabelled mint from existing between confirmations; the second preserves the exact 50/20/15/10/5 shape. A `PLANNED` record must clear every completed-state field. The Model T operator and independent verifier must repeat the same four actions, four proofs, plan digest, device environment, mint, metadata PDA, five owners, five ATAs, and five amounts. Review must follow device completion within 30 minutes, and evidence expires after 24 hours.
+Complete `launch/iat-v2-devnet-rehearsal.template.json` only after a bound,
+verifiable SBF build, unfunded deployment, hardware-control transfer, V2
+initialization, scaled funding, authority revocation, activation, full positive
+and adversarial scenario matrix, and independent verification.
 
 The mainnet handoff uses the same non-secret boundary: its validator rejects credential-bearing fields anywhere in the record, including nested or unused `walletSeedPhrase`, `privateKey`, recovery-material, PIN, and derivation/account-path aliases. An `APPROVED` handoff also reruns the canonical devnet rehearsal validator against its fixed source path; `COMPLETED` status alone cannot bypass missing, stale, malformed, or inconsistent rehearsal proof. Remove a secret-bearing field entirely; never replace a real secret with a redacted value in a launch artifact.
 

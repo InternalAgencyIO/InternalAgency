@@ -1,0 +1,24 @@
+{
+  "schema": "iat-future-hero-audit-scope/v1",
+  "repository": "InternalAgencyIO/InternalAgency",
+  "publicSourcePullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/8",
+  "sourceBranch": "agent/iat-promotions-dlc-draft",
+  "sourceCommit": "eafb13c43db78ab182bbbe8fa3890cc1368dd132",
+  "scopePath": "proposals/iat-promotions-dlc",
+  "gitTree": "0b6a258cf6f75e140431d91e906d2253c62566fe",
+  "lsTreeSha256": "a1879961fe15b1d1f43a058a8ff6c9918eba866e8960c602f54200a0ddd4ae3a",
+  "trackedFileCount": 268,
+  "trackedBytes": 3694779,
+  "criticalSourceSha256": {
+    "reference-engine.mjs": "0b9abbb236b2daac2f53d4bb2fb5e31c49eddfcbb55f0fb26e188b4d9aaeb9e6",
+    "promotion-policy.v0.json": "8aaeb384199e2cb2138236a4910f6947244a61c63684ee94a8018c02b5ba48a6",
+    "program-interface.v0.json": "019564ab566e8e8cf2b0d3461b140dac70bc082fd5344f9f7453fa11c44014b5",
+    "attestation-transparency.mjs": "d69de930da34dfefc7385a61ae9b44f4b4c2ea133ff81562c78acfbbca316286",
+    "campaign-envelope-verifier.mjs": "74caf849ecdb42d4155bc40c206c647c98840964a3484bf571cb99ddb89c86a5",
+    "instruction-transition-adapter.mjs": "7ee2f1cdbe020d1d26ae7d93ec32c559f6c318db6d5166760ecf49ab6ca93d6b",
+    "verifier-key-lifecycle.mjs": "0cc845f659a32966185b18f00c2244e126463385a8d878e0aa8110d463d7079f",
+    "event-reconciler.mjs": "b972508ca546cd2b775a90e22853f8e50c11453412b25a24f4695098ccb80130",
+    "review-manifest.v1.json": "2b73f37d8a36fde81ce5d46b4f3d6783937433c9122ed54562e020b5fcdc320c"
+  },
+  "exclusions": ["No production or existing V2 file was modified", "No chain, wallet, key, DNS, hosting, or signing surface was accessed", "No independent audit or legal review was performed"]
+}

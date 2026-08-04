@@ -1,0 +1,68 @@
+IAT TOKENOMICS // PUBLIC ECONOMIC POLICY V2
+Version 2.0 — 30 July 2026
+Status: PROPOSED — NOT ACTIVE — MAINNET HOLD
+Canonical public route: https://internalagency.io/tokenomics
+
+This policy is published before execution. It is not evidence that the IAT mint, four program vaults, reward router, randomness method, or staking contracts exist. No reward program is live and no staking position can currently earn the rates below. Mainnet remains on HOLD until the exact implementation, addresses, independent review, and a matching devnet rehearsal are public.
+
+01 // FIXED SUPPLY
+Maximum supply: 1,000,000,000 IAT
+Decimals: 9
+Additional issuance: none intended
+
+Community — 50% — 500,000,000 IAT
+Treasury — 20% — 200,000,000 IAT
+Ecosystem — 15% — 150,000,000 IAT
+Core team — 10% — 100,000,000 IAT
+Liquidity — 5% — 50,000,000 IAT
+
+02 // ORDERED REWARD RESERVE
+Treasury, ecosystem, and liquidity form an intentionally exhaustible 400,000,000 IAT reward reserve. Payments draw from treasury first, then ecosystem, then liquidity. The design allows all three lanes to reach zero. No separately protected market-liquidity reserve exists in this proposal.
+
+Genesis availability target:
+- Treasury: 50,000,000 IAT available; 150,000,000 IAT vested
+- Ecosystem: 37,500,000 IAT available; 112,500,000 IAT vested
+- Liquidity: 12,500,000 IAT available; 37,500,000 IAT vested
+- Total available at Genesis target: 100,000,000 IAT
+
+The 100,000,000 IAT figure is a design target, not current on-chain availability.
+
+03 // VESTING
+Treasury remainder: 12-month cliff, then linear release over the following 36 months.
+Ecosystem remainder: 6-month cliff, then linear release over the following 24 months.
+Liquidity remainder: 6-month cliff, then linear release through month 24.
+Core-team principal: 100,000,000 IAT with a 6-month cliff, then linear release through month 24. No discretionary early unlock.
+
+04 // ANNUAL REWARD RATES
+The percentages below are simple annual reward rates paid weekly without automatic compounding. The program interface may call them APY, but compounding is not automatic.
+
+Core team: fixed 17% across the full 100,000,000 IAT core-team principal while it vests. CCC status never changes this rate.
+Standard eligible user: 10%.
+Active CCC Agent: 28%.
+Eligible downstream CCC associate: 20%.
+
+Core-team rewards and user rewards draw from the same ordered 400,000,000 IAT reserve. Core-team principal is not a reward source lane.
+
+05 // COLLATERALIZATION
+Before accepting a new position, the program must reserve its complete maximum reward obligation from currently unlocked lane capacity. If sufficient capacity is unavailable, the position is rejected. Existing reserved obligations remain funded. The program creates no reward debt and makes no payment promise beyond accepted, fully collateralized positions.
+
+06 // CCC WILDCARD
+The first publicly verifiable CCC draw opens 24 hours after Genesis. A new draw opens every seven days after that. The core-team role temporarily occupies one eligible Agency position for the turn.
+
+- The selected Agency and its snapshotted downstream associates or stakers lose new turn-specific access, points, and IAT rewards for that week.
+- Previously accrued rewards, wallet assets, and vested principal are not removed.
+- Paused rewards do not accrue and remain in the current source lane.
+- The operator cannot reroll.
+- The eligible set, snapshot, randomness input, result, and settlement record must be public.
+- The core team’s fixed 17% rate is unchanged by the draw.
+
+07 // ACTIVATION GATES
+The program may not activate until:
+- Open-source staking, vesting, reserve-routing, and CCC contracts match this policy.
+- Program vaults and beneficiary addresses are published and independently compared.
+- Weekly randomness is reproducible, bias-resistant, and has no operator reroll.
+- A new devnet rehearsal covers vesting, reserve exhaustion, role reassignment, and failure paths.
+- Independent security and economic review findings, including unresolved risks, are public.
+
+08 // RISK BOUNDARY
+IAT is highly speculative. These rates are program rules, not a promise of token price, market value, profit, or uninterrupted availability. Eligibility, accepted positions, and payments depend on the published contract and remaining unlocked reserve. No presale or paid registration is part of this policy. Never share a seed phrase or private key.

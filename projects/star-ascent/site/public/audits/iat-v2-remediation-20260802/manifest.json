@@ -1,0 +1,56 @@
+{
+  "schema": "iat-v2-remediation-audit-manifest/v1",
+  "title": "IAT V2 pre-launch hardening audit",
+  "status": "DRAFT_MAINNET_HOLD",
+  "launchDecision": "HOLD",
+  "mainnetStatus": "HOLD",
+  "assurance": "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT",
+  "auditedAtUtc": "2026-08-02T13:06:22.212Z",
+  "sourceBinding": {
+    "commit": "b73d2d3ce8572e833b9fdd37df23cd97b40df111",
+    "gitTree": "faa4f1c9ddcd78ddaeabed5616b815022ddcd613",
+    "scopePath": "scope.json"
+  },
+  "findingSummary": {
+    "total": 13,
+    "openBySeverity": {"CRITICAL":1,"HIGH":2,"MEDIUM":3,"LOW":1},
+    "remediatedPendingReview": 6,
+    "ownerAccepted": 1,
+    "openBlockers": 2,
+    "openTracked": 4
+  },
+  "authorityDisposition": {
+    "model": "SOLE_TREZOR_MODEL_T",
+    "separateAuthorities": false,
+    "multisig": false,
+    "ownerDirected": true,
+    "classifiedAsRoleSeparation": false,
+    "riskStatus": "OPEN_OWNER_ACCEPTED"
+  },
+  "clearance": {
+    "securityBlockersResolved": false,
+    "independentAuditComplete": false,
+    "freshCurrentSourceSbfComplete": true,
+    "freshSignedDevnetComplete": false,
+    "productionIdentityIntegrationComplete": false,
+    "authorizesDeployment": false,
+    "authorizesFunding": false,
+    "authorizesSigning": false,
+    "authorizesBroadcast": false
+  },
+  "artifactSha256": {
+    "README.md": "8b692f93ed3a2d4f6c6a3c3035a42900995bab0c3d78d06337584cf287bd3aa5",
+    "GAME-THEORY.md": "9e9092ef51275a8216c2cced6cd3acd9f40ad7e11fa922c0844292317068043f",
+    "OWNER-RISK-ACCEPTANCE.md": "44a081213752737ae960b1ddbf46c3580d35e4713ad725a74d264711f5007cdd",
+    "scope.json": "731d01fedf72111572adf6f44c137fbcf2d727f747081900abc38692e4329ac9",
+    "findings.json": "b1435f755eef93b2b20c1526a0e8596cd83751ba4071b8be8f8f72292f667229",
+    "attack-matrix.json": "111b07c08d52b031388ab26a6292f319bceb9614d70d5bd48847f9b76dcfc08d",
+    "checks.json": "13c530e9f0ac20dc96bdcc274ce57296a7f2483596b5eaabff43bbba995b304c"
+  },
+  "limitations": [
+    "Not an independent audit, formal proof, custody guarantee, or production penetration test",
+    "Current-source SBF is build evidence only; no matching signed Devnet run",
+    "No production X OAuth or Cloudflare D1 integration rehearsal",
+    "No wallet, secret, signing, simulation for signing, broadcast, deployment, funding, DNS, or chain mutation"
+  ]
+}

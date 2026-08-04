@@ -1,22 +1,25 @@
 # STAR ASCENT — Genesis Command Center
 
-**Broadcast:** 29 July 2026, 15:00:00 UTC / 18:00:00 Istanbul
+**Schedule:** UNSCHEDULED
 
-**Genesis ceremony window:** exact time scheduled; evidence HOLD
+**Genesis ceremony window:** replacement UTC time not published; mainnet remains **HOLD**
 
 **Signing device:** Trezor Model T; signing remains a physical operator action.
 
 ## Before broadcast
 
-1. Run the launch preflight command.
+1. In the attended final review, run
+   `node scripts/run-launch-preflight.mjs --require-ceremony-ready`. The default
+   preflight is preparation-only and cannot open the ceremony.
 2. Open the live site, `/launch`, `/signal`, and `/dossier` in independent tabs.
 3. Confirm the Trezor Model T firmware, PIN, recovery material security, and the intended public address on the device screen. Do not type recovery words into a computer or browser.
 4. Keep the publication payload in **HOLD** until independently verified evidence exists. Do not infer an address, transaction, allocation, or authority state.
 
 ## Window-opening sequence
 
-1. At 15:00:00 UTC, open the broadcast and public source record. The countdown
-   does not connect, sign, or submit anything.
+1. After funding is confirmed and one replacement UTC time is published, open
+   the broadcast and public source record at that reviewed time. No clock
+   connects, signs, or submits anything.
 2. Identify the official site and Signal directory.
 3. State the verification rule: no direct messages, no paid registration, no
    seed phrase, and no copied links.

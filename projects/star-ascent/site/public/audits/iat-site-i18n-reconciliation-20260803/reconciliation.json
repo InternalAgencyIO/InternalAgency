@@ -1,0 +1,53 @@
+{
+  "schema": "iat-site-i18n-reconciliation/v1",
+  "status": "DRAFT_TRANSLATION_AND_NATIVE_REVIEW_HOLD",
+  "sourceBinding": {
+    "commit": "b88402cbcc7151610b37573c887b7ea080f092c1",
+    "gitTree": "d778eb80420f510e2003f359903f41981aba98a6"
+  },
+  "priorFinding": {
+    "id": "WEB-I18N-001",
+    "uncatalogedVisibleStrings": 247,
+    "affectedRoutes": 15,
+    "canonicalRoutes": 25
+  },
+  "reconciliation": {
+    "capturedPendingStrings": 247,
+    "capturedAffectedRoutes": 15,
+    "untrackedVisibleStrings": 0,
+    "activeCatalogStrings": 1280,
+    "localeWorkflowCount": 50,
+    "nonEnglishLocalesRequiringTranslation": 49,
+    "nonEnglishLocalesRequiringNativeReview": 49
+  },
+  "driftGuard": {
+    "sourceCommit": "c400b430434f21f52fd5da559017f3b5ce55e5bc",
+    "status": "ENFORCED_IN_CHECK_QA_I18N",
+    "serverIsolation": "EPHEMERAL_LOOPBACK_EXACT_BIND",
+    "canonicalRoutesRendered": 25,
+    "expectedPendingStrings": 247,
+    "expectedAffectedRoutes": 15,
+    "failsOnSourceOrRouteDrift": true,
+    "activatesPendingCopy": false
+  },
+  "runtime": {
+    "pendingArtifactActive": false,
+    "automaticEnglishFallbackApproved": false,
+    "translationComplete": false,
+    "nativeReviewComplete": false,
+    "localizationReleaseApproved": false
+  },
+  "findingDisposition": {
+    "inventoryAndWorkflowGap": "REMEDIATED",
+    "translationGap": "OPEN",
+    "nativeReviewGap": "OPEN",
+    "releaseDecision": "HOLD"
+  },
+  "clearance": {
+    "authorizesDeployment": false,
+    "authorizesDnsChange": false,
+    "authorizesSigning": false,
+    "authorizesBroadcast": false,
+    "authorizesMainnetChange": false
+  }
+}

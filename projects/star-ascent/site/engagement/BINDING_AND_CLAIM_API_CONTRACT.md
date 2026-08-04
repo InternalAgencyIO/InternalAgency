@@ -11,15 +11,19 @@ This contract is a production blueprint. It does not authorize a hosted endpoint
 2. `POST /api/nodes/verify-wallet`
    - Input: wallet address, signed message, nonce id.
    - Verify the Ed25519 signature server-side with `engagement/solana-wallet-proof.mjs`. Create or update a `pending` node binding only after signature validation.
-3. `GET /api/x/authorize`
-   - Start X OAuth 2.0 PKCE, bound to the pending node id in a signed, short-lived state value.
-4. `GET /api/x/callback`
-   - Validate state, exchange the authorization code, read the X user identity, then discard access tokens unless a narrowly-scoped refresh flow is explicitly approved.
-5. Atomic node activation transaction
+   - Return no internal node ID. Set a signed 15-minute `Secure`, `HttpOnly`, `SameSite=Lax`, host-only session cookie whose nonce is stored only as a hash.
+3. `POST /api/nodes/select-country`
+   - Require the wallet-bound session. Accept only a two-letter country code and make the first valid choice immutable.
+4. `GET /api/x/authorize`
+   - Require the wallet-bound session. Start X OAuth 2.0 PKCE and persist a hash of the signed state's one-time nonce.
+5. `GET /api/x/callback`
+   - Require the same wallet-bound session, validate signed state and the stored nonce, exchange with five-second deadlines, and request the authenticated immutable X user ID plus `created_at` and `subscription_type`.
+   - Accept only `Premium` and `PremiumPlus`, and require at least 40 full days of account age; fail closed on missing, `None`, `Basic`, unknown, invalid, or too-new values. Record the creation timestamp, tier, and a 24-hour revalidation deadline, then discard the access token.
+6. Atomic node activation transaction
    - Check `x_user_id` and `wallet_address` are not already active.
-   - Count `genesis_slots` where slot number is 1–1000.
-   - If fewer than 1,000 slots exist, insert the next slot and mark the binding `active` in the same database transaction.
-   - If full, keep the binding active without a Genesis slot and return `GENESIS_CAPACITY_REACHED`.
+   - In one D1 `batch()` transaction, first activate the exact binding while consuming both nonce hashes, then reserve the next integer slot only while fewer than 1,000 rows exist and the just-activated identity/timestamp still match.
+   - If full, mark the verified binding active without a slot and return `active-genesis-capacity`.
+   - A duplicate, expired, replayed, or failed activation inserts no slot. Activation-first ordering prevents a zero-row activation from committing an orphan reservation; any later SQL failure aborts the whole batch.
 
 ## Epoch flow
 
@@ -30,15 +34,16 @@ At 00:00 UTC, the scheduler opens a transaction that creates one `reward_epochs`
 `POST /api/claims/prepare`
 
 - Require a fresh wallet signature tied to the existing bound wallet.
-- Return only that wallet’s epoch, amount, leaf, Merkle proof, root, and policy digest.
+- Return only that wallet's epoch, amount, leaf, Merkle proof, root, and policy digest.
 - Do not accept an arbitrary destination wallet.
-- The distributor service submits only an idempotent transfer for a claim whose state is still `eligible`; record the resulting transaction before marking `claimed`.
+- An offline tool may build only a bounded unsigned batch whose destinations exactly match eligible bound wallets. The owner reviews and signs each batch physically on the sole Trezor Model T; there is no server, hot, or second signing key. Record a finalized transaction before marking any included claim `claimed`.
 
 ## Hard stops
 
 - Any duplicate X account or wallet binding: HOLD the request.
+- Any missing/unknown X tier, X account younger than 40 full days, or stale Premium observation: HOLD the request or epoch.
 - Any epoch root/manifest mismatch: HOLD the full epoch.
-- Any distributor balance, mint, token program, or destination mismatch: HOLD the claim.
+- Any source balance, mint, token program, batch total, or destination mismatch: HOLD the batch.
 - Any unverified Genesis record: do not create Genesis slots or publish claim routes.
 
-No request, log, table, manifest, or error message may contain a recovery phrase, private key, PIN, passphrase, OAuth client secret, bearer token, or distributor key.
+No request, log, table, manifest, or error message may contain a recovery phrase, private key, PIN, passphrase, OAuth client secret, bearer token, or signing key.

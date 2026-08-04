@@ -1,0 +1,184 @@
+{
+  "schema": "iat-v2-launch-qa-checks/v1",
+  "status": "DRAFT_QA_HOLD",
+  "runAtUtc": "2026-08-03T13:23:14Z",
+  "checks": [
+    {
+      "id": "PRODUCTION_BUILD_AND_RENDERED_HTML",
+      "result": "PASS",
+      "metrics": {
+        "build": "PASS",
+        "npmTestPassed": 45,
+        "renderedHtmlPassed": 20,
+        "localeRoutingPassed": 10,
+        "failed": 0,
+        "mainnetEvidenceGates": 16
+      }
+    },
+    {
+      "id": "PLAYWRIGHT_RUNTIME_MATRIX",
+      "result": "PASS",
+      "metrics": {
+        "passed": 35,
+        "failed": 0,
+        "profiles": 7,
+        "primaryRoutes": 11,
+        "pageExceptions": 0,
+        "consoleErrors": 0,
+        "non200PageResponses": 0,
+        "brokenImages": 0,
+        "documentOverflowDefects": 0,
+        "mojibakeMatches": 0,
+        "genericAriaLabelDefects": 0,
+        "targetedAxeViolations": 0
+      }
+    },
+    {
+      "id": "LINT",
+      "result": "PASS",
+      "metrics": {
+        "errors": 0,
+        "warnings": 0,
+        "documentedNativeImageExceptions": true
+      }
+    },
+    {
+      "id": "NATIVE_IMAGE_RUNTIME",
+      "result": "PASS",
+      "metrics": {
+        "testsPassed": 2,
+        "testsFailed": 0,
+        "frameworkImageImportsInSensitivePages": 0,
+        "verifiedStaticAssets": 7
+      }
+    },
+    {
+      "id": "LOCALIZATION_AUTOMATED",
+      "result": "PASS_WITH_HUMAN_REVIEW_PENDING",
+      "metrics": {
+        "locales": 50,
+        "canonicalStringsPerLocale": 1280,
+        "catalogEmptyValues": 0,
+        "criticalEnglishFallbacks": 0,
+        "nativeSpeakerReviewComplete": false
+      }
+    },
+    {
+      "id": "FAVICON_AND_METADATA_ORIGIN",
+      "result": "PASS",
+      "metrics": {
+        "testsPassed": 5,
+        "testsFailed": 0
+      }
+    },
+    {
+      "id": "PRODUCTION_DEPENDENCY_AUDIT",
+      "result": "PASS",
+      "metrics": {
+        "total": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0
+      }
+    },
+    {
+      "id": "FULL_DEPENDENCY_AUDIT",
+      "result": "HOLD_REVIEW",
+      "metrics": {
+        "total": 22,
+        "moderate": 15,
+        "high": 7,
+        "critical": 0,
+        "productionReachable": false
+      }
+    },
+    {
+      "id": "IAT_V2_VALIDATION",
+      "result": "PASS_IN_HOLD",
+      "metrics": {
+        "nodeTestsPassed": 65,
+        "nodeTestsFailed": 0,
+        "policy": "PASS_IN_HOLD",
+        "timeGateProof": "PASS_LOCAL_ONLY",
+        "publicEvidence": "PASS_WITH_CURRENT_REHEARSAL_REQUIREMENTS"
+      }
+    },
+    {
+      "id": "IAT_V2_SIGNOFF",
+      "result": "VALID_HOLD",
+      "metrics": {
+        "independentInitializationSignoff": "PENDING",
+        "historicalFeatureArtifact": "VALID_FOR_PRIOR_ARTIFACT",
+        "currentRemediationRequiresFreshSignedDevnet": true
+      }
+    },
+    {
+      "id": "LAUNCH_GATES",
+      "result": "PASS_IN_HOLD",
+      "metrics": {
+        "schedule": "UNSCHEDULED_HOLD",
+        "observedLamports": 2533659570,
+        "requiredLamports": 8500000000,
+        "fundingFloorSatisfied": false,
+        "fullGateCommand": "PASS",
+        "authorizesSigning": false,
+        "authorizesBroadcast": false
+      }
+    },
+    {
+      "id": "LOCAL_ADMIN_BUILD",
+      "result": "PASS_WITH_WARNINGS",
+      "metrics": {
+        "built": true,
+        "largestChunkKb": 2148.15,
+        "largestChunkGzipKb": 487.84,
+        "browserExternalizedImports": [
+          "util",
+          "crypto"
+        ]
+      }
+    },
+    {
+      "id": "FUTURE_TEASERS",
+      "result": "PASS_INACTIVE",
+      "metrics": {
+        "testsPassed": 4,
+        "testsFailed": 0,
+        "deployedAtGenesis": false,
+        "claimRoute": false
+      }
+    },
+    {
+      "id": "LIVE_PUBLIC_CONTRACT",
+      "result": "PASS",
+      "observedAtUtc": "2026-08-03T13:23:14Z",
+      "metrics": {
+        "origins": 2,
+        "directPagesPassed": 42,
+        "legacyRedirectsPassed": 30,
+        "sitemapAndRobotsPassed": 4,
+        "totalChecksPassed": 76,
+        "failures": 0,
+        "productionMutated": false
+      }
+    },
+    {
+      "id": "SOURCE_COMMIT_GITHUB_CHECKS",
+      "result": "NOT_YET_OBSERVED",
+      "metrics": {
+        "draftPullRequest": 4,
+        "head": "58d6976f3217831c57a1a5858cb32406f88d1fcd",
+        "localEquivalentChecks": "PASS",
+        "githubActionsFinalResult": "PENDING_PUSH"
+      }
+    }
+  ],
+  "limitations": [
+    "The public-route check is a timestamped read-only observation, not a continuous monitor or deployment test.",
+    "Playwright mobile profiles and WebKit are emulation/engine evidence, not physical mobile or installed Safari certification.",
+    "Targeted axe rules and automated keyboard checks do not replace full assistive-technology testing.",
+    "Automated localization completeness does not prove native fluency or cultural quality.",
+    "The admin console build warning was not closed by a physical Trezor or ceremony session.",
+    "No deployment, wallet access, signing, transaction, transfer, DNS, mainnet, or devnet mutation occurred."
+  ]
+}

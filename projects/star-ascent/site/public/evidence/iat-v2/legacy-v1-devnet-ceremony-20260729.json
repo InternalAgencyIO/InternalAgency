@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "network": "devnet",
+  "configurationSha256": "e5ea3f7ebda8872717add0d5d8094d696d81d9dde160ee588ba013cbe47eb9cb",
+  "expectedSigner": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+  "mint": "Hoqm3ezgaJXQVw9sT7NFSVLhwDcufAi5omdcxuNagzC9",
+  "metadataAddress": "5dyRuTHDLeoRXkb3mzDuvetN9KBeRAGVD9RDAWdyNHGQ",
+  "allocations": [
+    {
+      "name": "community",
+      "amount": "500000000000",
+      "owner": "4GnwJuJ1JUuft5wMqHG4rnFKW8X56haRRbDe3VKgWQBv"
+    },
+    {
+      "name": "treasury",
+      "amount": "200000000000",
+      "owner": "Dbkrdrv6kQ6YugYqCJYF3b8HwT4SSqC4ptT7FitP3JqP"
+    },
+    {
+      "name": "ecosystem",
+      "amount": "150000000000",
+      "owner": "HKscczqRbhUScoddiKg1jpN1yEeSj58PVijWXgSTdk7a"
+    },
+    {
+      "name": "coreTeam",
+      "amount": "100000000000",
+      "owner": "8RYg5muEcR96iR5nSDHCjQ4Stco5Ji9DVRqdnxigXTij"
+    },
+    {
+      "name": "liquidity",
+      "amount": "50000000000",
+      "owner": "4AcgYnKZik2z2RWgh8vUpwa4o2isUnDSKCYwtmokgms5"
+    }
+  ],
+  "transactions": [
+    {
+      "label": "CREATE + INITIALIZE + METADATA",
+      "signature": "2WeyFxQfoWxG72gBCNu6i23NycJJdP4LYqR3W57yfArQNqorZ9CszQguzXkhwD2AtU4NdMxZbyTE2GT58sEKJyQC",
+      "explorerUrl": "https://explorer.solana.com/tx/2WeyFxQfoWxG72gBCNu6i23NycJJdP4LYqR3W57yfArQNqorZ9CszQguzXkhwD2AtU4NdMxZbyTE2GT58sEKJyQC?cluster=devnet"
+    },
+    {
+      "label": "MINT FIVE ALLOCATIONS",
+      "signature": "4pTE1j3x2FWQdus1gLXV9JHYPEQgoAUBVejcFEUkZT5ePvzcdSP6YdZ6gty42pYgsZs9FApx9c5ZN7UtAvH4jS9q",
+      "explorerUrl": "https://explorer.solana.com/tx/4pTE1j3x2FWQdus1gLXV9JHYPEQgoAUBVejcFEUkZT5ePvzcdSP6YdZ6gty42pYgsZs9FApx9c5ZN7UtAvH4jS9q?cluster=devnet"
+    },
+    {
+      "label": "REVOKE MINT AUTHORITY",
+      "signature": "3rsWVx4FWsF72U9Jd3bZeG35tH7W6XvyzD56QdZtTv4jiZqp9qAuS8Z1y3LYLqnQu4igeNw7DaLyukkVb5m3gLRo",
+      "explorerUrl": "https://explorer.solana.com/tx/3rsWVx4FWsF72U9Jd3bZeG35tH7W6XvyzD56QdZtTv4jiZqp9qAuS8Z1y3LYLqnQu4igeNw7DaLyukkVb5m3gLRo?cluster=devnet"
+    },
+    {
+      "label": "REVOKE FREEZE AUTHORITY",
+      "signature": "3ZV6ZZDP3cWz4fAya3Gj2Xf6ksmhnotaiTD2Ccu1crKMFVY14GMbC2Dtz7df6UJtqaqp8hof5DcTi4hGT6tDeQKC",
+      "explorerUrl": "https://explorer.solana.com/tx/3ZV6ZZDP3cWz4fAya3Gj2Xf6ksmhnotaiTD2Ccu1crKMFVY14GMbC2Dtz7df6UJtqaqp8hof5DcTi4hGT6tDeQKC?cluster=devnet"
+    }
+  ],
+  "exportedAtUtc": "2026-07-29T14:53:46.256Z",
+  "independentReviewRequired": true,
+  "notice": "Public evidence only. This file contains no seed phrase, private key, PIN, or wallet export."
+}

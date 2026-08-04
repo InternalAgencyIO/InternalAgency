@@ -34,17 +34,83 @@ import {
 globalThis.__filename = fileURLToPath(import.meta.url);
 globalThis.__dirname = dirname(globalThis.__filename);
 
-async function render() {
+async function render(url = "http://localhost/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
+  const requestUrl = new URL(url, "http://localhost/");
 
   return worker.fetch(
-    new Request("http://localhost/", { headers: { accept: "text/html" } }),
+    new Request(requestUrl, { headers: {
+      accept: "text/html",
+      host: requestUrl.host,
+      "x-forwarded-host": requestUrl.host,
+      "x-forwarded-proto": requestUrl.protocol.replace(":", ""),
+    } }),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
     { waitUntil() {}, passThroughOnException() {} },
   );
 }
+
+test("renders the read-only IAT Network explorer in fail-closed launch state", async () => {
+  const response = await render("/network");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /IAT NETWORK \/\/ LIVE SOLANA READOUT/);
+  assert.match(html, /READ ONLY \/\/ NO WALLET CONNECTION/);
+  assert.match(html, /IAT PROGRAM \/\/ MAINNET HOLD/);
+  assert.match(html, /Wallet, transaction, program, or mint/);
+  assert.match(html, /Balances and positions switch on only after verified Genesis evidence/);
+  assert.doesNotMatch(html, /\b(?:phantom|solflare|backpack|walletconnect)\b/i);
+});
+
+test("renders reconciled future previews in both public languages", async () => {
+  const paths = ["/future", "/future/predictive-engine", "/future/casino"];
+  const [english, turkish] = await Promise.all([
+    Promise.all(paths.map(async (path) => (await render(`https://internalagency.io${path}`)).text())),
+    Promise.all(paths.map(async (path) => (await render(`https://ileriakil.com${path}`)).text())),
+  ]);
+
+  for (const html of english) {
+    assert.match(html, /<html lang="en"/i);
+    assert.match(html, /POST-GENESIS CONCEPT/);
+    assert.match(html, /INACTIVE/);
+    assert.match(html, /NO WAGER ROUTE/);
+  }
+  for (const html of turkish) {
+    assert.match(html, /<html lang="tr"/i);
+    assert.match(html, /BAŞLANGIÇ SONRASI KONSEPT/);
+    assert.match(html, /PASİF/);
+    assert.match(html, /BAHİS YOLU YOK/);
+  }
+
+  assert.match(english[1], /1% PROTOCOL EDGE/);
+  assert.match(english[1], /EXTENDED \$IAT APY RUNWAY/);
+  assert.match(english[2], /15 DAYS AFTER \$IAT GENESIS/);
+  assert.match(turkish[1], /%1 PROTOKOL PAYI/);
+  assert.match(turkish[1], /LİKİDİTE HAVUZU/);
+  assert.match(turkish[1], /\$IAT APY SÜRESİNİ UZATAN KAYNAK/);
+  assert.match(turkish[2], /\$IAT BAŞLANGICINDAN 15 GÜN SONRA/);
+});
+
+test("renders proof copy in Turkish on both Turkish public routes before hydration", async () => {
+  const [prefixed, dedicatedHost] = await Promise.all([
+    render("https://internalagency.io/tr/proof"),
+    render("https://ileriakil.com/proof"),
+  ]);
+  const [prefixedHtml, dedicatedHostHtml] = await Promise.all([
+    prefixed.text(),
+    dedicatedHost.text(),
+  ]);
+  const englishLeak = /Every non-secret Devnet export and the separate local time-gate proof/;
+  const turkishCopy = /Gizli olmayan tüm Devnet dışa aktarımları ve ayrı yerel zaman kapısı kanıtı/;
+
+  for (const html of [prefixedHtml, dedicatedHostHtml]) {
+    assert.match(html, /<html lang="tr"/i);
+    assert.match(html, turkishCopy);
+    assert.doesNotMatch(html, englishLeak);
+  }
+});
 
 test("renders the STAR ASCENT launch page and transparent disclosure", async () => {
   const response = await render();
@@ -54,7 +120,9 @@ test("renders the STAR ASCENT launch page and transparent disclosure", async () 
   const html = await response.text();
   assert.match(html, /<title>Internal Agency — STAR ASCENT<\/title>/i);
   assert.match(html, /STAR ASCENT/);
-  assert.match(html, /No financial return is promised/);
+  assert.match(html, /No token price, profit, or guaranteed market value is promised/);
+  assert.match(html, /REWARD CONTRACT/);
+  assert.match(html, /PROPOSED \/ HOLD/);
   assert.match(html, /No wallet connection required/);
   assert.match(html, /href="#main-content"[^>]*>Skip to main content<\/a>/i);
   assert.match(html, /<main id="main-content" tabindex="-1">/i);
@@ -95,8 +163,10 @@ test("keeps bilingual and accessibility safeguards in source", async () => {
   assert.match(page, /ARZ TASARIM HEDEFİ/);
   assert.match(page, /current status is not yet verified/);
   assert.match(page, /mevcut durum henüz doğrulanmadı/);
-  assert.match(page, /Distribution must not begin/);
-  assert.match(page, /dağıtım başlamamalıdır/);
+  assert.match(page, /Distribution and reward activation must not begin/);
+  assert.match(page, /dağıtım ve ödül aktivasyonu başlamamalıdır/);
+  assert.match(page, /Read the complete proposed terms/);
+  assert.match(page, /Önerilen şartların tamamını oku/);
   assert.match(page, /Evidence required before distribution/);
   assert.match(page, /Dağıtımdan önce gereken kanıtlar/);
   assert.match(page, /Direct explorer links/);

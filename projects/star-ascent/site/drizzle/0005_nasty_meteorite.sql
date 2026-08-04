@@ -1,0 +1,1 @@
+ALTER TABLE `node_bindings` ADD `x_account_created_at_utc` text;

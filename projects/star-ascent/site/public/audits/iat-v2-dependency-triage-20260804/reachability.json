@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "title": "IAT V2 high-severity dependency reachability and ownership matrix",
+  "generatedAt": "2026-08-04T08:58:57.7170829Z",
+  "status": "DRAFT_QA_HOLD",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "branch": "agent/iat-launch-window",
+    "commit": "ab1d1d28db4f10ddcacdd5ed22b0d8258ac4d7ca",
+    "gitTree": "9a4cb98cbd4c5e38cc405401247e83b631680234",
+    "sha256": {
+      "projects/star-ascent/site/package.json": "921222f7bcd60303df1973305aff994e9fa6cc58cccc3823ee1d5c551ff6f36d",
+      "projects/star-ascent/site/package-lock.json": "81bac2f217536fbab411275eb5c1405e12da3bef38b63cfeb67a6236d011a0d5",
+      "projects/star-ascent/site/public/audits/iat-v2-dependency-triage-20260804/report.json": "4d2ed0f5f373d6bb772a86bd2d2ceef403cdf8842a3d9de1baa17952fd34485f",
+      "projects/star-ascent/site/app/mint/ceremony.mjs": "eebb95fde788853f38c24d5a198392aa2fef645da2a3f6a9cfee04623299511e",
+      "projects/star-ascent/site/tools/iat-v2-admin-console/FeatureRehearsal.jsx": "fd4dbbeb664f26851fc556d2fa62226da86e75e1ae56e67a76083118761f9261",
+      "projects/star-ascent/site/app/layout.tsx": "df25c47ae2d35c0da202746bca17e4b9c2688634a2c31561ea426d65ce999e86"
+    }
+  },
+  "methodology": {
+    "commands": [
+      "npm audit --package-lock-only --json",
+      "npm explain <package>",
+      "rg fixed-string source-reference scan with node_modules, generated locale catalogs, prior audit artifacts, package-lock.json, dist, and .next excluded"
+    ],
+    "interpretation": "A dependency path or source import is evidence of potential execution, not proof that an advisory's vulnerable function is called. Absence from the scoped source scan is not proof that bundlers, framework adapters, or transitive runtime code cannot execute the package.",
+    "scanExclusions": [
+      "node_modules",
+      "generated locale catalogs",
+      "prior public audit artifacts",
+      "package-lock.json",
+      "dist",
+      ".next"
+    ]
+  },
+  "summary": {
+    "highFindings": 10,
+    "directFindings": 3,
+    "transitiveFindings": 7,
+    "confirmedSourceReference": 3,
+    "noDirectSourceReference": 7,
+    "vulnerableFunctionReachabilityProven": 0,
+    "productionBundleAbsenceProven": 0,
+    "targetedReviewHold": 10
+  },
+  "findings": [
+    {
+      "name": "@solana/spl-token",
+      "graphClass": "DIRECT",
+      "installedVersions": ["0.4.15"],
+      "dependencyPaths": [
+        "root devDependency -> @solana/spl-token@0.4.15",
+        "root devDependency -> @switchboard-xyz/on-demand@3.10.6 -> @solana/spl-token@0.4.15"
+      ],
+      "sourceDirectImportFound": true,
+      "sourceEvidence": [
+        "projects/star-ascent/site/app/mint/ceremony.mjs",
+        "projects/star-ascent/site/programs/iat_v2/client.mjs",
+        "projects/star-ascent/site/programs/iat_v2/instructions.mjs",
+        "projects/star-ascent/site/programs/iat_v2/feature-instructions.mjs",
+        "projects/star-ascent/site/tools/iat-v2-admin-console/main.jsx",
+        "projects/star-ascent/site/tools/iat-v2-admin-console/FeatureRehearsal.jsx"
+      ],
+      "executionBoundary": "Mint ceremony, IAT V2 instruction construction, and isolated admin/rehearsal clients.",
+      "reachabilityState": "CONFIRMED_SOURCE_IMPORT_VULNERABLE_FUNCTION_UNPROVEN",
+      "vulnerableFunctionReachabilityProven": false,
+      "productionBundleAbsenceProven": false,
+      "owner": "protocol-client-and-ceremony",
+      "nextAction": "Evaluate the supported Solana SPL upgrade line, rerun all 66 protocol/client/security tests, rebuild the admin console, and require a fresh signed Devnet rehearsal before accepting a protocol-facing version change.",
+      "launchDisposition": "HOLD_PENDING_TARGETED_REMEDIATION"
+    },
+    {
+      "name": "@switchboard-xyz/on-demand",
+      "graphClass": "DIRECT",
+      "installedVersions": ["3.10.6"],
+      "dependencyPaths": [
+        "root devDependency -> @switchboard-xyz/on-demand@3.10.6"
+      ],
+      "sourceDirectImportFound": true,
+      "sourceEvidence": [
+        "projects/star-ascent/site/tools/iat-v2-admin-console/FeatureRehearsal.jsx"
+      ],
+      "executionBoundary": "Inactive future-feature Devnet rehearsal panel in the isolated admin console; not a Genesis public claim route.",
+      "reachabilityState": "CONFIRMED_SOURCE_IMPORT_VULNERABLE_FUNCTION_UNPROVEN",
+      "vulnerableFunctionReachabilityProven": false,
+      "productionBundleAbsenceProven": false,
+      "owner": "future-feature-rehearsal",
+      "nextAction": "Map imported Switchboard APIs to advisories, select a supported non-downgrade release, and rerun feature-preflight, admin browser, and fresh signed Devnet rehearsal gates after any change.",
+      "launchDisposition": "HOLD_PENDING_TARGETED_REMEDIATION"
+    },
+    {
+      "name": "next",
+      "graphClass": "DIRECT",
+      "installedVersions": ["16.2.12"],
+      "dependencyPaths": [
+        "root devDependency -> next@16.2.12",
+        "root devDependency -> vinext@0.0.50 -> @unpic/react@1.0.2 -> next peer@16.2.12"
+      ],
+      "sourceDirectImportFound": true,
+      "sourceEvidence": [
+        "projects/star-ascent/site/app/layout.tsx",
+        "projects/star-ascent/site/app/chatgpt-auth.ts",
+        "projects/star-ascent/site/app/proof/page.tsx",
+        "projects/star-ascent/site/app/future/language.ts",
+        "projects/star-ascent/site/app/dossier/read/[slug]/page.tsx"
+      ],
+      "executionBoundary": "Next-compatible metadata, headers, redirect, and navigation APIs consumed through the Vinext/Cloudflare site build and runtime boundary.",
+      "reachabilityState": "CONFIRMED_FRAMEWORK_API_REFERENCE_VULNERABLE_FUNCTION_UNPROVEN",
+      "vulnerableFunctionReachabilityProven": false,
+      "productionBundleAbsenceProven": false,
+      "owner": "web-runtime-and-hosting",
+      "nextAction": "Test the supported patched Next line with Vinext, then rerun all route, rendered HTML, browser-engine, accessibility, metadata, hosting, and performance gates before accepting the upgrade.",
+      "launchDisposition": "HOLD_PENDING_TARGETED_REMEDIATION"
+    },
+    {
+      "name": "@solana/buffer-layout-utils",
+      "graphClass": "TRANSITIVE",
+      "installedVersions": ["0.3.0"],
+      "dependencyPaths": [
+        "root -> @solana/spl-token@0.4.15 -> @solana/buffer-layout-utils@0.3.0"
+      ],
+      "sourceDirectImportFound": false,
+      "sourceEvidence": [],
+      "executionBoundary": "Inherited through SPL Token serialization used by ceremony and IAT V2 clients.",
+      "reachabilityState": "CONFIRMED_TRANSITIVE_PROTOCOL_PATH_VULNERABLE_FUNCTION_UNPROVEN",
+      "vulnerableFunctionReachabilityProven": false,
+      "productionBundleAbsenceProven": false,
+      "owner": "protocol-client-and-ceremony",
+      "nextAction": "Resolve through a supported SPL Token upgrade or documented upstream replacement; prove instruction bytes and address derivations remain identical where the protocol requires them.",
+      "launchDisposition": "HOLD_PENDING_TARGETED_REMEDIATION"
+    },
+    {
+      "name": "bigint-buffer",
+      "graphClass": "TRANSITIVE",
+      "installedVersions": ["1.1.5"],
+      "dependencyPaths": [
+        "root -> @solana/spl-token@0.4.15 -> @solana/buffer-layout-utils@0.3.0 -> bigint-buffer@1.1.5"
+      ],
+      "sourceDirectImportFound": false,
+      "sourceEvidence": [],
+      "executionBoundary": "Inherited numeric serialization path beneath SPL Token buffer-layout utilities.",
+      "reachabilityState": "CONFIRMED_TRANSITIVE_PROTOCOL_PATH_NO_PATCH_VULNERABLE_FUNCTION_UNPROVEN",
+      "vulnerableFunctionReachabilityProven": false,
+      "productionBundleAbsenceProven": false,
+      "owner": "protocol-client-and-ceremony",
+      "nextAction": "Treat the lack of an upstream patched release as an explicit exception blocker; pursue supported graph removal or replacement and independent review rather than an audit-suggested SPL downgrade.",
+      "launchDisposition": "HOLD_PENDING_TARGETED_REMEDIATION"
+    },
+    {
+      "name": "brace-expansion",
+      "graphClass": "TRANSITIVE",
+      "installedVersions": ["1.1.17", "5.0.8"],
+      "dependencyPaths": [
+        "root tooling -> minimatch@3.1.5 -> brace-expansion@1.1.17",
+        "root tooling -> @typescript-eslint/typescript-estree@8.65.0 -> minimatch@10.2.6 -> brace-expansion@5.0.8"
+      ],
+      "sourceDirectImportFound": false,
+      "sourceEvidence": [],
+      "executionBoundary": "Lint, TypeScript parsing, glob matching, and related development tooling.",
+      "reachabilityState": "CONFIRMED_TRANSITIVE_BUILD_TOOL_PATH_VULNERABLE_FUNCTION_UNPROVEN",
+      "vulnerableFunctionReachabilityProven": false,
+      "productionBundleAbsenceProven": false,
+      "owner": "build-and-quality-tooling",
+      "nextAction": "Update the parent minimatch/tooling graph through supported releases, then rerun lint, TypeScript, locale extraction, and deterministic site builds.",
+      "launchDisposition": "HOLD_PENDING_TARGETED_REMEDIATION"
+    },
+    {
+      "name": "fast-uri",
+      "graphClass": "TRANSITIVE",
+      "installedVersions": ["3.1.4"],
+      "dependencyPaths": [
+        "root tooling -> schema-utils -> ajv@8.20.0 -> fast-uri@3.1.4",
+        "root tooling -> ajv-formats -> ajv@8.20.0 -> fast-uri@3.1.4"
+      ],
+      "sourceDirectImportFound": false,
+      "sourceEvidence": [],
+      "executionBoundary": "Schema validation used by build and quality tooling.",
+      "reachabilityState": "CONFIRMED_TRANSITIVE_BUILD_TOOL_PATH_VULNERABLE_FUNCTION_UNPROVEN",
+      "vulnerableFunctionReachabilityProven": false,
+      "productionBundleAbsenceProven": false,
+      "owner": "build-and-quality-tooling",
+      "nextAction": "Upgrade through supported AJV/schema-utils parent releases and rerun build, lint, configuration, and launch-artifact validators.",
+      "launchDisposition": "HOLD_PENDING_TARGETED_REMEDIATION"
+    },
+    {
+      "name": "postcss",
+      "graphClass": "TRANSITIVE",
+      "installedVersions": ["8.4.31", "8.5.25"],
+      "affectedDependencyPaths": [
+        "root -> next@16.2.12 -> postcss@8.4.31"
+      ],
+      "nonAffectedObservedPaths": [
+        "root tooling -> postcss@8.5.25"
+      ],
+      "dependencyPaths": [
+        "root -> next@16.2.12 -> postcss@8.4.31",
+        "root tooling -> postcss@8.5.25"
+      ],
+      "sourceDirectImportFound": false,
+      "sourceEvidence": [],
+      "executionBoundary": "CSS processing inside the Next-compatible/Vinext build graph; the advisory is attached to Next's nested 8.4.31 copy, not the observed root 8.5.25 copy.",
+      "reachabilityState": "CONFIRMED_TRANSITIVE_WEB_BUILD_PATH_VULNERABLE_FUNCTION_UNPROVEN",
+      "vulnerableFunctionReachabilityProven": false,
+      "productionBundleAbsenceProven": false,
+      "owner": "web-runtime-and-hosting",
+      "nextAction": "Move to the supported patched Next line and verify CSS output hashes, all 50 locale renders, responsive layouts, and hosting builds.",
+      "launchDisposition": "HOLD_PENDING_TARGETED_REMEDIATION"
+    },
+    {
+      "name": "sharp",
+      "graphClass": "TRANSITIVE",
+      "installedVersions": ["0.34.5", "0.35.2"],
+      "affectedDependencyPaths": [
+        "root -> next@16.2.12 -> optional sharp@0.34.5"
+      ],
+      "nonAffectedObservedPaths": [
+        "root tooling -> miniflare@4.20260722.1 -> sharp@0.35.2"
+      ],
+      "dependencyPaths": [
+        "root -> next@16.2.12 -> optional sharp@0.34.5",
+        "root tooling -> miniflare@4.20260722.1 -> sharp@0.35.2"
+      ],
+      "sourceDirectImportFound": false,
+      "sourceEvidence": [],
+      "executionBoundary": "Optional image processing under Next and local Cloudflare tooling. Runtime-sensitive pages prohibit next/image, but that regression test does not prove every framework path avoids the nested copy.",
+      "reachabilityState": "CONFIRMED_TRANSITIVE_OPTIONAL_WEB_PATH_VULNERABLE_FUNCTION_UNPROVEN",
+      "vulnerableFunctionReachabilityProven": false,
+      "productionBundleAbsenceProven": false,
+      "owner": "web-runtime-and-hosting",
+      "nextAction": "Verify the patched Next graph removes the affected nested Sharp copy, then rerun native-image, asset, responsive, browser, and hosting checks.",
+      "launchDisposition": "HOLD_PENDING_TARGETED_REMEDIATION"
+    },
+    {
+      "name": "undici",
+      "graphClass": "TRANSITIVE",
+      "installedVersions": ["7.28.0"],
+      "dependencyPaths": [
+        "root tooling -> miniflare@4.20260722.1 -> undici@7.28.0"
+      ],
+      "sourceDirectImportFound": false,
+      "sourceEvidence": [],
+      "executionBoundary": "Local Cloudflare Workers emulation and hosting-tool request handling.",
+      "reachabilityState": "CONFIRMED_TRANSITIVE_HOSTING_TOOL_PATH_VULNERABLE_FUNCTION_UNPROVEN",
+      "vulnerableFunctionReachabilityProven": false,
+      "productionBundleAbsenceProven": false,
+      "owner": "web-runtime-and-hosting",
+      "nextAction": "Select a supported Cloudflare/Miniflare graph that includes patched Undici, then rerun local Workers route, OAuth, D1, hosting-config, and browser inspection gates.",
+      "launchDisposition": "HOLD_PENDING_TARGETED_REMEDIATION"
+    }
+  ],
+  "assurance": {
+    "allHighFindingsRemediated": false,
+    "vulnerableFunctionReachabilityProven": false,
+    "productionBundleAbsenceProven": false,
+    "safeUpgradePathProven": false,
+    "freshSignedDevnetAfterDependencyChange": false,
+    "releaseApproved": false,
+    "mainnetStateChanged": false
+  },
+  "limitations": [
+    "This is static graph and source-reference triage, not dynamic taint analysis or exploitability proof.",
+    "Development-class packages can still execute during build, ceremony, local emulation, or artifact production; the dev flag is not treated as proof of safety.",
+    "The scan does not claim that any advisory's vulnerable function is reachable or unreachable.",
+    "No dependency was upgraded, downgraded, overridden, dismissed, deployed, signed, or broadcast by this increment."
+  ]
+}
