@@ -5,6 +5,7 @@ import { spawnSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { normalizeAccountabilityLabel } from "./normalize-accountability-label.mjs";
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const canonicalGatePath = path.join(siteRoot, "launch/iat-v2-mainnet-readiness-gate.json");
@@ -85,12 +86,14 @@ export function assessCeremonyEntry(
     && gate.gates?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true;
   const soleTrezorOperator = ceremonyArtifacts.ceremonyReview?.participants?.soleTrezorOperator;
   const verifier = ceremonyArtifacts.ceremonyReview?.participants?.independentVerifier;
+  const normalizedOperatorLabel = normalizeAccountabilityLabel(soleTrezorOperator?.label);
+  const normalizedVerifierLabel = normalizeAccountabilityLabel(verifier?.label);
   const independentVerifierAssigned = ceremonyReviewReady
     && gate.gates?.independentMainnetVerifierAssigned === true
     && verifier?.role === "INDEPENDENT_VERIFIER"
-    && typeof verifier?.label === "string"
-    && verifier.label.length > 0
-    && verifier.label.toLocaleLowerCase("en") !== soleTrezorOperator?.label?.toLocaleLowerCase("en")
+    && normalizedOperatorLabel.length >= 3
+    && normalizedVerifierLabel.length >= 3
+    && normalizedVerifierLabel !== normalizedOperatorLabel
     && verifier.reviewedArtifacts === true
     && verifier.reviewedStagePlan === true
     && verifier.hasNoSigningAuthority === true;

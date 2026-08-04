@@ -11,6 +11,7 @@ const sandbox = mkdtempSync(join(tmpdir(), "iat-v2-ceremony-review-"));
 const reviewPath = "launch/iat-v2-ceremony-review.template.json";
 const validatorPath = "scripts/validate-iat-v2-ceremony-review.mjs";
 const sourcePaths = [
+  "scripts/normalize-accountability-label.mjs",
   "launch/iat-v2-mainnet-readiness-gate.json",
   "launch/iat-v2-mainnet-stage-journal.template.json",
   "engagement/iat-economic-policy.v2.json",
@@ -123,6 +124,14 @@ try {
   const sameReviewer = clone(ready);
   sameReviewer.participants.independentVerifier.label = sameReviewer.participants.soleTrezorOperator.label;
   expectFail("operator reused as verifier", sameReviewer, "verifier distinct from the sole-Trezor operator");
+
+  const disguisedSameReviewer = clone(ready);
+  disguisedSameReviewer.participants.independentVerifier.label = "  ATTENDED\u200b   MODEL T OPERATOR  ";
+  expectFail(
+    "operator reused through whitespace and format characters",
+    disguisedSameReviewer,
+    "accountability-label normalization",
+  );
 
   const missingSignedDevnetReview = clone(ready);
   missingSignedDevnetReview.review.currentSignedDevnetEvidenceReviewed = false;

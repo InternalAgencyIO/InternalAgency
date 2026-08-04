@@ -244,6 +244,11 @@ for (const [name, mutate, blockers] of [
     ["INDEPENDENT_MAINNET_VERIFIER_ASSIGNED"],
   ],
   [
+    "operator reused through whitespace and format characters",
+    (artifacts) => { artifacts.ceremonyReview.participants.independentVerifier.label = "  ATTENDED\u200b   MODEL T OPERATOR  "; },
+    ["INDEPENDENT_MAINNET_VERIFIER_ASSIGNED"],
+  ],
+  [
     "operator address outside the sole-Trezor readiness record",
     (artifacts) => { artifacts.ceremonyReview.participants.soleTrezorOperator.publicAddress = "Vote111111111111111111111111111111111111111"; },
     ["MODEL_T_DEVICE_PATH_REVIEWED"],

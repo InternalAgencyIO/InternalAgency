@@ -246,6 +246,11 @@ try {
     (fixture) => { fixture.mainnetPlan.planSha256 = "0".repeat(64); },
     "canonical mainnet plan digest",
   );
+  rejectCompleted(
+    "device operator reused as verifier through whitespace and format characters",
+    (fixture) => { fixture.verifier.reviewedBy = "  DEVICE\u200b   OPERATOR  "; },
+    "accountability-label normalization",
+  );
 } finally {
   rmSync(sandboxRoot, { recursive: true, force: true });
 }

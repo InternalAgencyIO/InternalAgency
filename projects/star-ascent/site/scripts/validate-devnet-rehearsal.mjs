@@ -6,6 +6,7 @@ import { resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { PublicKey } from "@solana/web3.js";
 import { getAssociatedTokenAddressSync, TOKEN_PROGRAM_ID } from "@solana/spl-token";
+import { normalizeAccountabilityLabel } from "./normalize-accountability-label.mjs";
 
 const canonicalPath = "launch/devnet-rehearsal.template.json";
 const requestedPath = process.argv[2] ?? canonicalPath;
@@ -225,7 +226,11 @@ if (rehearsal) {
     if (JSON.stringify(rehearsal.device?.confirmedActions) !== JSON.stringify(actions) || JSON.stringify(rehearsal.device?.confirmedTransactionEvidence) !== JSON.stringify(transactionEvidence)) fail("COMPLETED device evidence must bind the exact four actions and transactions");
     if (rehearsal.device?.confirmedPlanSha256 !== plan.planSha256) fail("COMPLETED device evidence must bind the mainnet plan digest");
 
-    if (!label(rehearsal.verifier?.reviewedBy) || rehearsal.verifier.reviewedBy.toLocaleLowerCase("en") === rehearsal.device.operatorLabel.toLocaleLowerCase("en")) fail("COMPLETED rehearsal requires a distinct independent verifier");
+    if (
+      !label(rehearsal.verifier?.reviewedBy)
+      || normalizeAccountabilityLabel(rehearsal.verifier.reviewedBy)
+        === normalizeAccountabilityLabel(rehearsal.device.operatorLabel)
+    ) fail("COMPLETED rehearsal requires a distinct independent verifier after accountability-label normalization");
     if (rehearsal.verifier?.independentOfDeviceOperator !== true) fail("COMPLETED rehearsal requires verifier independence");
     if (JSON.stringify(rehearsal.verifier?.reviewedDevice) !== JSON.stringify({ model: rehearsal.device.model, firmwareVersion: rehearsal.device.firmwareVersion, suiteOrWalletInterface: rehearsal.device.suiteOrWalletInterface })) fail("COMPLETED verifier must review the same Model T environment");
     if (rehearsal.verifier?.reviewedMint !== token.mint || rehearsal.verifier?.reviewedMetadataAddress !== token.metadataAddress) fail("COMPLETED verifier must review the exact mint and metadata addresses");

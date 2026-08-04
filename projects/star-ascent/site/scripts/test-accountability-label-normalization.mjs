@@ -18,5 +18,15 @@ assert.equal(
   normalizeAccountabilityLabel("R\u00e9lease Owner"),
   "composed and decomposed labels must compare identically",
 );
+assert.equal(
+  normalizeAccountabilityLabel("  Release\t\nOwner  "),
+  normalizeAccountabilityLabel("Release Owner"),
+  "padding and repeated Unicode whitespace must not represent separate reviewers",
+);
+assert.equal(
+  normalizeAccountabilityLabel("Release\u200b Owner"),
+  normalizeAccountabilityLabel("Release Owner"),
+  "zero-width format characters must not represent separate reviewers",
+);
 
 console.log("Accountability-label normalization regression passes.");

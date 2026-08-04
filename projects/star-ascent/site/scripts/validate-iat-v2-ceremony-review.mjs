@@ -2,6 +2,7 @@
 
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
+import { normalizeAccountabilityLabel } from "./normalize-accountability-label.mjs";
 
 const canonicalPath = "launch/iat-v2-ceremony-review.template.json";
 const reviewPath = process.argv[2] ?? canonicalPath;
@@ -128,7 +129,10 @@ if (review.status === "READY") {
   check(operator?.publicAddress === gate.funding?.publicAddress, "READY operator address must match the reviewed mainnet funding/administrator address");
   check(operator?.devicePathReviewed === true, "READY requires attended Model T device-path review");
   check(label(verifier?.label), "READY requires an independent verifier label");
-  check(operator?.label?.toLocaleLowerCase("en") !== verifier?.label?.toLocaleLowerCase("en"), "READY requires a verifier distinct from the sole-Trezor operator");
+  check(
+    normalizeAccountabilityLabel(operator?.label) !== normalizeAccountabilityLabel(verifier?.label),
+    "READY requires a verifier distinct from the sole-Trezor operator after accountability-label normalization",
+  );
   check(verifier?.reviewedArtifacts === true && verifier?.reviewedStagePlan === true, "READY requires independent artifact and stage-plan review");
   check(journal.status === "ARMED", "READY requires the canonical V2 stage journal to be ARMED");
   const publishedAtMs = utc(gate.schedule?.publishedAtUtc) ? Date.parse(gate.schedule.publishedAtUtc) : Number.NaN;
