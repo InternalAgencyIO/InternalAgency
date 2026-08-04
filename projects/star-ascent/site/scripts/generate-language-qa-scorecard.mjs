@@ -419,7 +419,13 @@ function evaluateStatic(context, locale, check) {
     }
     case "LQA-030": {
       const payload = context.payloads[locale];
-      const ok = payload && payload.locale === locale && arraysEqual(Object.keys(payload.messages ?? {}), context.sourceKeys) && canonical(payload.messages) === canonical(messages);
+      const ok = payload
+        && payload.schema === context.payloadContract.schema
+        && payload.catalogSha256 === context.payloadContract.catalogSha256
+        && payload.sourceCount === context.sourceKeys.length
+        && payload.locale === locale
+        && arraysEqual(Object.keys(payload.messages ?? {}), context.sourceKeys)
+        && canonical(payload.messages) === canonical(messages);
       return deterministic(Boolean(ok), "Compiled payload exactly matches catalog", "Compiled payload is missing, mislabeled, incomplete, or stale", { payloadPresent: Boolean(payload) });
     }
     case "LQA-031": {
@@ -729,9 +735,10 @@ async function buildContext(options) {
     metadata: resolve(siteRoot, "app/i18n/metadata.generated.json"),
     routeSeo: resolve(siteRoot, "app/i18n/route-seo.json"),
     pending: resolve(siteRoot, "app/i18n/pending-visible-source.json"),
+    payloadContract: resolve(siteRoot, "app/i18n/payload-contract.json"),
     sitemap: resolve(siteRoot, "app/sitemap.ts"),
   };
-  const [definitionRaw, messagesRaw, configRaw, critical, overrides, metadata, routeSeo, pending, sitemapRaw, nativeEvidence, languageIdEvidence, renderEvidence] = await Promise.all([
+  const [definitionRaw, messagesRaw, configRaw, critical, overrides, metadata, routeSeo, pending, payloadContract, sitemapRaw, nativeEvidence, languageIdEvidence, renderEvidence] = await Promise.all([
     readText(definitionPath),
     readText(paths.messages),
     readText(paths.config),
@@ -740,6 +747,7 @@ async function buildContext(options) {
     readJson(paths.metadata),
     readJson(paths.routeSeo),
     readJson(paths.pending),
+    readJson(paths.payloadContract),
     readText(paths.sitemap),
     readOptionalJson(options.nativeEvidence),
     readOptionalJson(options.languageIdEvidence),
@@ -751,9 +759,10 @@ async function buildContext(options) {
   const config = parseLocaleConfig(configRaw);
   const routes = parseSitemapRoutes(sitemapRaw);
   const sourceKeys = Object.keys(catalog.messages.en ?? {});
+  const payloadRoot = resolve(siteRoot, `public/${payloadContract.assetNamespace}/${payloadContract.catalogSha256.slice(0, 16)}`);
   const payloadEntries = await Promise.all(config.codes.map(async (locale) => {
     try {
-      return [locale, await readJson(resolve(siteRoot, `public/i18n/${locale}.json`))];
+      return [locale, await readJson(resolve(payloadRoot, `${locale}.json`))];
     } catch {
       return [locale, null];
     }
@@ -771,6 +780,7 @@ async function buildContext(options) {
     sourceKeys,
     sourceKeySet: new Set(sourceKeys),
     payloads: Object.fromEntries(payloadEntries),
+    payloadContract,
     nativeEvidence,
     languageIdEvidence,
     renderEvidence,

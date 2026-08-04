@@ -122,3 +122,58 @@ test("RTL, CJK, long-copy, and Turkish routes survive every browser and viewport
     }
   }
 });
+
+test("the Chinese network route replaces cataloged English copy", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium-desktop", "The focused Chinese regression runs once.");
+  await page.route("**/api/network", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        network: { networkLabel: "SOLANA MAINNET BETA", programId: null, mint: null },
+        snapshot: {
+          health: "ok",
+          slot: 1,
+          blockHeight: 1,
+          epoch: { epoch: 1, slotIndex: 1, slotsInEpoch: 432000 },
+          observedAtUtc: "2026-08-04T00:00:00Z",
+          rpcSource: "LOCALE_QA_FIXTURE",
+        },
+      }),
+    });
+  });
+  const runtimeErrors = monitorRuntime(page);
+  await assertLocalizedDocument(page, "zh", "/zh/network", { accessibility: true });
+  const bodyText = await page.locator("body").innerText();
+  for (const expected of ["一屏。", "IAT 网络 // 实时 SOLANA 读出", "返回 ⟨STAR ASCENT⟩", "整个信号。", "链脉冲", "玩家视图"]) {
+    expect(bodyText, `Chinese network copy: ${expected}`).toContain(expected);
+  }
+  for (const fallback of ["ONE SCREEN.", "IAT NETWORK // LIVE SOLANA READOUT", "RETURN TO STAR ASCENT", "THE WHOLE SIGNAL.", "CHAIN PULSE", "PLAYER VIEW"]) {
+    expect(bodyText, `English network fallback: ${fallback}`).not.toContain(fallback);
+  }
+  expect(runtimeErrors, "Chinese network runtime errors").toEqual([]);
+});
+
+test("a stale locale payload cannot mark the document ready", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium-desktop", "The payload-contract rejection runs once.");
+  await page.route("**/i18n-v2/**/*.json", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        schema: "iat-locale-payload/v1",
+        catalogSha256: "stale",
+        sourceCount: 1,
+        locale: "zh",
+        messages: { "ONE SCREEN.": "错误的旧载荷" },
+      }),
+    });
+  });
+  await page.goto("/zh/network", { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.documentElement.dataset.localeError === "payload-contract-failed");
+  const state = await page.evaluate(() => ({
+    ready: document.documentElement.dataset.localeReady,
+    error: document.documentElement.dataset.localeError,
+  }));
+  expect(state).toEqual({ ready: "false", error: "payload-contract-failed" });
+});

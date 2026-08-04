@@ -226,8 +226,9 @@ test("the locale runtime stays static, prompts for English, and ships one locale
   assert.match(runtime, /ia_language=en/);
   assert.match(runtime, /returnToEnglish/);
   assert.doesNotMatch(runtime, /import masterMessages/);
-  assert.match(runtime, /fetch\(`\/i18n\/\$\{locale\}\.json`/);
-  assert.match(runtime, /dataset\.localeError = "payload-unavailable"/);
+  assert.match(runtime, /fetch\(localePayloadPath\(locale\)/);
+  assert.match(runtime, /payload\.catalogSha256 !== localePayloadContract\.catalogSha256/);
+  assert.match(runtime, /dataset\.localeError = "payload-contract-failed"/);
   assert.doesNotMatch(runtime, /revealFallback/);
   assert.doesNotMatch(runtime, /\.catch\(\(\) => \{\s*if \(active\) document\.documentElement\.dataset\.localeReady = "true"/);
   assert.doesNotMatch(layout, /messages\.json/);

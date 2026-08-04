@@ -8,6 +8,7 @@ import { CrewSignal } from "./CrewSignal";
 import { DocumentLinkUpgrade } from "./DocumentLinkUpgrade";
 import { googleHreflangTag, htmlLanguageTag, localeCodes, localeDirection, localeFromRequestHeaders, localePath } from "./i18n/config";
 import { LocaleRuntime, type PromptCopy } from "./i18n/LocaleRuntime";
+import { localePayloadPath } from "./i18n/payload-contract";
 import localizedMetadata from "./i18n/metadata.generated.json";
 import routeSeo from "./i18n/route-seo.json";
 import { metadataBaseFromRequest } from "./metadata-origin.mjs";
@@ -132,5 +133,5 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     ],
   };
   const localeReady = locale === "en" || (locale === "tr" && turkishHost);
-  return <html lang={htmlLanguageTag(locale)} dir={localeDirection(locale)} data-locale-ready={localeReady ? "true" : "false"}><head>{locale !== "en" && !turkishHost ? <link rel="preload" href={`/i18n/${locale}.json`} as="fetch" crossOrigin="anonymous" /> : null}</head><body className="antialiased">{children}<DocumentLinkUpgrade /><CrewSignal /><DossierDock /><LocaleRuntime locale={locale} promptCopy={promptCopy} publicPath={publicPath} turkishHost={turkishHost} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} /></body></html>;
+  return <html lang={htmlLanguageTag(locale)} dir={localeDirection(locale)} data-locale-ready={localeReady ? "true" : "false"}><head>{locale !== "en" && !turkishHost ? <link rel="preload" href={localePayloadPath(locale)} as="fetch" crossOrigin="anonymous" /> : null}</head><body className="antialiased">{children}<DocumentLinkUpgrade /><CrewSignal /><DossierDock /><LocaleRuntime locale={locale} promptCopy={promptCopy} publicPath={publicPath} turkishHost={turkishHost} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} /></body></html>;
 }

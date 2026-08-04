@@ -2,9 +2,17 @@
 
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { htmlLanguageTag, localePath, locales, type LocaleCode } from "./config";
+import { localePayloadContract, localePayloadPath } from "./payload-contract";
 
 export type LocaleCatalog = Record<string, string>;
 export type PromptCopy = { eyebrow: string; title: string; body: string; stay: string; english: string; close: string; timeout: string };
+type LocalePayload = {
+  schema: string;
+  catalogSha256: string;
+  sourceCount: number;
+  locale: LocaleCode;
+  messages: LocaleCatalog;
+};
 
 const translatableAttributes = ["alt", "aria-label", "placeholder", "title"] as const;
 const legacyLanguageLabels = new Set(["TR", "EN", "TÜRKÇE", "ENGLISH"]);
@@ -109,17 +117,23 @@ export function LocaleRuntime({ locale, promptCopy, publicPath, turkishHost }: {
 
     if (locale === "en" || nativeTurkishHost) activate({});
     else {
-      fetch(`/i18n/${locale}.json`, { cache: "force-cache" })
+      fetch(localePayloadPath(locale), { cache: "force-cache" })
         .then((response) => {
           if (!response.ok) throw new Error(`Locale payload failed: ${response.status}`);
-          return response.json() as Promise<{ locale: LocaleCode; messages: LocaleCatalog }>;
+          return response.json() as Promise<LocalePayload>;
         })
         .then((payload) => {
           if (payload.locale !== locale) throw new Error("Locale payload mismatch");
+          if (
+            payload.schema !== localePayloadContract.schema
+            || payload.catalogSha256 !== localePayloadContract.catalogSha256
+            || payload.sourceCount !== localePayloadContract.sourceCount
+            || Object.keys(payload.messages ?? {}).length !== localePayloadContract.sourceCount
+          ) throw new Error("Locale payload contract mismatch");
           activate(payload.messages);
         })
         .catch(() => {
-          if (active) document.documentElement.dataset.localeError = "payload-unavailable";
+          if (active) document.documentElement.dataset.localeError = "payload-contract-failed";
         });
     }
 

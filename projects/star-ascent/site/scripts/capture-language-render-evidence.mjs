@@ -98,12 +98,13 @@ function runPackageCommand(command, args, options) {
   return execFileSync(command, args, options);
 }
 
-let [definitionRaw, messagesRaw, metadataRaw, routeSeoRaw, pendingRaw, sitemapSource] = await Promise.all([
+let [definitionRaw, messagesRaw, metadataRaw, routeSeoRaw, pendingRaw, payloadContractRaw, sitemapSource] = await Promise.all([
   readRepoText(resolve(root, "app/i18n/language-qa-checks.v1.json")),
   readRepoText(resolve(root, "app/i18n/messages.json")),
   readRepoText(resolve(root, "app/i18n/metadata.generated.json")),
   readRepoText(resolve(root, "app/i18n/route-seo.json")),
   readRepoText(resolve(root, "app/i18n/pending-visible-source.json")),
+  readRepoText(resolve(root, "app/i18n/payload-contract.json")),
   readRepoText(resolve(root, "app/sitemap.ts")),
 ]);
 let definition = JSON.parse(definitionRaw);
@@ -111,6 +112,8 @@ let catalog = JSON.parse(messagesRaw);
 let metadata = JSON.parse(metadataRaw);
 let routeSeo = JSON.parse(routeSeoRaw);
 let pending = JSON.parse(pendingRaw);
+const payloadContract = JSON.parse(payloadContractRaw);
+const payloadRoot = `/${payloadContract.assetNamespace}/${payloadContract.catalogSha256.slice(0, 16)}`;
 const locales = Object.keys(catalog.messages);
 let sourceSet = new Set(Object.keys(catalog.messages.en));
 const routes = [...sitemapSource.matchAll(/\{\s*path:\s*"([^"]*)"/gu)].map((match) => match[1] || "/");
@@ -232,11 +235,19 @@ try {
   });
 
   for (const locale of locales) {
-    const payloadResponse = await fetch(`${baseUrl}/i18n/${locale}.json`, { signal: AbortSignal.timeout(30_000) });
+    const payloadResponse = await fetch(`${baseUrl}${payloadRoot}/${locale}.json`, { signal: AbortSignal.timeout(30_000) });
     try {
       const payload = await payloadResponse.json();
       const contentType = payloadResponse.headers.get("content-type") ?? "";
-      if (!payloadResponse.ok || !/application\/json/iu.test(contentType) || payload.locale !== locale || Object.keys(payload.messages ?? {}).length !== sourceSet.size) {
+      if (
+        !payloadResponse.ok
+        || !/application\/json/iu.test(contentType)
+        || payload.schema !== payloadContract.schema
+        || payload.catalogSha256 !== payloadContract.catalogSha256
+        || payload.sourceCount !== sourceSet.size
+        || payload.locale !== locale
+        || Object.keys(payload.messages ?? {}).length !== sourceSet.size
+      ) {
         addFailure(locale, "LQA-072", `payload status/content/schema mismatch`);
       }
     } catch (error) { addFailure(locale, "LQA-072", `payload parse failed: ${error.message}`); }
@@ -305,7 +316,7 @@ try {
       if (state.lang !== expectedTag(locale) || state.dir !== (rtlLocales.has(locale) ? "rtl" : "ltr")) addFailure(locale, "LQA-077", `hydrated lang/dir ${state.lang}/${state.dir}`);
       if (state.ready !== "true" || state.error !== null) addFailure(locale, "LQA-078", `localeReady=${state.ready}, localeError=${state.error}`);
       const translationRequests = requests.filter((url) => /translate\.googleapis\.com|translate\.google\./iu.test(url));
-      const payloadObserved = locale === "en" || requests.some((url) => new URL(url).pathname === `/i18n/${locale}.json`);
+      const payloadObserved = locale === "en" || requests.some((url) => new URL(url).pathname === `${payloadRoot}/${locale}.json`);
       if (translationRequests.length > 0 || !payloadObserved) addFailure(locale, "LQA-079", `external translation or missing local payload request`);
       if (runtimeErrors.length > 0) addFailure(locale, "LQA-080", runtimeErrors.slice(0, 5).join(" | "));
 

@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 
 const catalog = JSON.parse(await readFile(new URL("../app/i18n/messages.json", import.meta.url), "utf8"));
+const payloadContract = JSON.parse(await readFile(new URL("../app/i18n/payload-contract.json", import.meta.url), "utf8"));
+const catalogSha256 = createHash("sha256").update(JSON.stringify(catalog.messages)).digest("hex");
+const payloadRoot = `../public/${payloadContract.assetNamespace}/${catalogSha256.slice(0, 16)}/`;
 const expectedLocales = [
   "en", "zh", "es", "hi", "fr", "ar", "bn", "pt", "id", "ur", "ru", "de", "ja", "pcm", "tr",
   "sq", "ca", "be", "nl", "bs", "bg", "hr", "el", "cs", "da", "et", "fi", "hu", "is", "ga", "it",
@@ -31,6 +35,9 @@ const containsProtectedTerm = (value, term) => new RegExp(
 
 assert.ok(sourceKeys.length >= 250, `Expected a whole-site catalog, found only ${sourceKeys.length} source strings`);
 assert.equal(catalog.meta.sourceCount, sourceKeys.length, "Catalog source count must match English keys");
+assert.equal(payloadContract.schema, "iat-locale-payload/v2", "Locale payload contract schema must be v2");
+assert.equal(payloadContract.sourceCount, sourceKeys.length, "Locale payload contract source count must match the catalog");
+assert.equal(payloadContract.catalogSha256, catalogSha256, "Locale payload contract digest must match every locale message");
 assert.deepEqual(catalog.meta.renderedRoutes, sitemapRoutes, "Catalog extraction must cover all 25 canonical sitemap routes");
 assert.deepEqual(Object.keys(catalog.messages), expectedLocales, "Catalog locale order changed unexpectedly");
 for (const source of Object.values(criticalUi)) {
@@ -108,7 +115,10 @@ for (const source of routeSeoSources) {
 }
 assert.deepEqual(Object.keys(metadata), expectedLocales, "Localized metadata must cover every locale");
 for (const locale of expectedLocales) {
-  const payload = JSON.parse(await readFile(new URL(`../public/i18n/${locale}.json`, import.meta.url), "utf8"));
+  const payload = JSON.parse(await readFile(new URL(`${payloadRoot}${locale}.json`, import.meta.url), "utf8"));
+  assert.equal(payload.schema, payloadContract.schema, `${locale} static payload has the wrong schema`);
+  assert.equal(payload.catalogSha256, catalogSha256, `${locale} static payload has the wrong catalog digest`);
+  assert.equal(payload.sourceCount, sourceKeys.length, `${locale} static payload has the wrong source count`);
   assert.equal(payload.locale, locale, `${locale} static payload is mislabeled`);
   assert.equal(Object.keys(payload.messages).length, sourceKeys.length, `${locale} static payload is incomplete`);
   assert.equal(metadata[locale].prompt.timeout.includes("15"), true, `${locale} prompt must retain the 15-second timeout`);
