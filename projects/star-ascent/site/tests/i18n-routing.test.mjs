@@ -140,29 +140,31 @@ test("the Turkish host keeps Turkish ownership without collapsing other locale c
     host: "ileriakil.com",
     "x-forwarded-host": "ileriakil.com",
   };
+  const metadata = JSON.parse(
+    await readFile(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8"),
+  );
+  const locales = Object.keys(metadata);
+  assert.equal(locales.length, 50);
 
-  const turkish = await request("/network", turkishHeaders);
-  assert.equal(turkish.status, 200);
-  assert.equal(turkish.headers.get("content-language"), "tr");
-  const turkishHtml = await turkish.text();
-  assert.match(turkishHtml, /rel="canonical" href="https:\/\/ileriakil\.com\/network"/i);
-  assert.match(turkishHtml, /property="og:url" content="https:\/\/ileriakil\.com\/network"/i);
-
-  const chinese = await request("/zh/network", turkishHeaders);
-  assert.equal(chinese.status, 200);
-  assert.equal(chinese.headers.get("content-language"), "zh");
-  const chineseHtml = await chinese.text();
-  assert.match(chineseHtml, /<html lang="zh-Hans"/i);
-  assert.match(chineseHtml, /rel="canonical" href="https:\/\/internalagency\.io\/zh\/network"/i);
-  assert.match(chineseHtml, /property="og:url" content="https:\/\/internalagency\.io\/zh\/network"/i);
-  assert.match(chineseHtml, /"url":"https:\/\/internalagency\.io\/zh\/network"/i);
-
-  const english = await request("/en/network", turkishHeaders);
-  assert.equal(english.status, 200);
-  assert.equal(english.headers.get("content-language"), "en");
-  const englishHtml = await english.text();
-  assert.match(englishHtml, /rel="canonical" href="https:\/\/internalagency\.io\/network"/i);
-  assert.match(englishHtml, /property="og:url" content="https:\/\/internalagency\.io\/network"/i);
+  for (let start = 0; start < locales.length; start += 5) {
+    await Promise.all(locales.slice(start, start + 5).map(async (locale) => {
+      const path = locale === "tr" ? "/network" : `/${locale}/network`;
+      const canonical = locale === "tr"
+        ? "https://ileriakil.com/network"
+        : `https://internalagency.io${locale === "en" ? "" : `/${locale}`}/network`;
+      const languageTag = locale === "zh" ? "zh-Hans" : locale === "sr" ? "sr-Cyrl" : locale;
+      const response = await request(path, turkishHeaders);
+      assert.equal(response.status, 200, `${locale} Turkish-host route status`);
+      assert.equal(response.headers.get("content-language"), locale, `${locale} Content-Language`);
+      const html = await response.text();
+      const head = html.slice(0, html.indexOf("</head>"));
+      assert.match(html, new RegExp(`<html lang="${languageTag}"`), `${locale} HTML language`);
+      assert.ok(head.includes(`rel="canonical" href="${canonical}"`), `${locale} canonical ownership`);
+      assert.ok(head.includes(`property="og:url" content="${canonical}"`), `${locale} Open Graph ownership`);
+      assert.ok(html.includes(`"url":"${canonical}"`), `${locale} structured-data ownership`);
+      assert.equal((head.match(/rel="canonical"/g) ?? []).length, 1, `${locale} canonical count`);
+    }));
+  }
 });
 
 test("route-specific SEO copy and structured data are localized", async () => {
