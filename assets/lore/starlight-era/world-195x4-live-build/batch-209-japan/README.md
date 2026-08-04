@@ -8,8 +8,9 @@ Current checkpoint:
 
 - Four relationship masters are accepted.
 - Four concise silhouette masters and four refinement masters are accepted.
-- Tokyo is a validated final after six accepted deterministic details; Himeji has one accepted detail master, Fuji has four, and Yokohama has five.
-- The immediate X-drain override is active and the exact Mexico 854/855 plus Japan 856 image-only reservation is frozen with verified hashes.
-- All 28 checkpoint files are fully opaque, public-safe, and SHA-256 recorded in `asset-manifest.json`.
+- Tokyo, Himeji, and Yokohama are validated finals. Fuji remains the sole unresolved lane with one deterministic wrist-jewelry tableau outstanding.
+- The prior country-post reservation is confirmed published and the X backlog is reconciled empty; paused cover work remains outside this build.
+- PAWS is present in every unfinalized Japan promotion image, while validated Tokyo 856 remains grandfathered under the campaign contract.
+- All 32 checkpoint files are fully opaque, public-safe, and SHA-256 recorded in `asset-manifest.json`.
 
 No browser state, credentials, Drive identifiers, machine-local paths, rejected media, or unrelated repository changes are included.
