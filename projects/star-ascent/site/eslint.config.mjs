@@ -25,6 +25,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Playwright owns these generated browser traces, reports, screenshots,
+    // videos, and attachments. Lint the tests and app source, not vendored
+    // report-viewer bundles emitted by a preceding CI step.
+    "playwright-report/**",
+    "test-results/**",
   ]),
 ]);
 
