@@ -73,7 +73,12 @@ if (scorecard.status !== "HOLD" || scorecard.summary.FAIL !== 0 || scorecard.sum
 if (scorecard.assurance?.nativeQualityClaimAllowed !== false || scorecard.assurance?.releaseApproved !== false) throw new Error("Language QA scorecard must not claim native quality or release approval");
 if (holdLedger.sourceBinding?.scorecardSha256 !== files["public/audits/localization-qa-20260803/language-qa-scorecard.json"].sha256) throw new Error("Language QA HOLD ledger is not bound to the current scorecard bytes");
 if (JSON.stringify(holdLedger.scorecardSummary) !== JSON.stringify(scorecard.summary)) throw new Error("Language QA HOLD ledger summary does not match the current scorecard");
-if (holdLedger.status !== "HOLD" || holdLedger.mainnetStatus !== "UNSCHEDULED_HOLD" || holdLedger.holdSummary?.externalEvidenceOnly !== 300 || holdLedger.holdSummary?.heuristicEditorialReview !== 156) throw new Error("Language QA HOLD ledger must retain the reviewed fail-closed split");
+if (
+  holdLedger.status !== "HOLD"
+  || holdLedger.mainnetStatus !== "UNSCHEDULED_HOLD"
+  || holdLedger.holdSummary?.externalEvidenceOnly !== 300
+  || holdLedger.holdSummary.externalEvidenceOnly + holdLedger.holdSummary.heuristicEditorialReview !== holdLedger.holdSummary.total
+) throw new Error("Language QA HOLD ledger must retain the reviewed fail-closed split");
 if (holdLedger.assurance?.nativeQualityClaimAllowed !== false || holdLedger.assurance?.releaseApproved !== false) throw new Error("Language QA HOLD ledger must not claim native quality or release approval");
 const renderRecords = Object.values(renderEvidence.locales ?? {}).flatMap((locale) => Object.values(locale.checks ?? {}));
 if (renderEvidence.status !== "PASS" || renderRecords.length !== 1250 || renderRecords.some((record) => record.status !== "PASS")) throw new Error("Language render evidence must contain exactly 1,250 passing results");

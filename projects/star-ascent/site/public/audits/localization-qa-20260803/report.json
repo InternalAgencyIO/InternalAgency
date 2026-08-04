@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-04T07:48:10.756Z",
+  "generatedAt": "2026-08-04T15:08:21.468Z",
   "generatedAtPolicy": "SOURCE_SCORECARD_GENERATED_AT_FOR_REPRODUCIBLE_OUTPUT",
   "title": "Internal Agency multilingual usability and localization QA",
   "publicStatus": "DRAFT / STATIC QA / NOT LAUNCH APPROVAL",
@@ -56,21 +56,21 @@
   ],
   "scorecard": {
     "path": "language-qa-scorecard.json",
-    "generatedAt": "2026-08-04T07:48:10.756Z",
+    "generatedAt": "2026-08-04T15:08:21.468Z",
     "status": "HOLD",
     "summary": {
-      "PASS": 4544,
+      "PASS": 4538,
       "FAIL": 0,
-      "HOLD": 456,
+      "HOLD": 462,
       "NOT_RUN": 0
     },
     "lanes": {
       "static": {
         "status": "HOLD",
         "summary": {
-          "PASS": 3294,
+          "PASS": 3288,
           "FAIL": 0,
-          "HOLD": 206,
+          "HOLD": 212,
           "NOT_RUN": 0
         }
       },
@@ -104,17 +104,29 @@
   },
   "holdRemediationLedger": {
     "path": "hold-remediation-ledger.json",
-    "generatedAt": "2026-08-04T09:07:05.3030188Z",
+    "generatedAt": "2026-08-04T15:08:21.468Z",
     "status": "HOLD",
     "summary": {
-      "total": 456,
-      "static": 206,
+      "total": 462,
+      "static": 212,
       "native": 250,
       "externalEvidenceOnly": 300,
-      "heuristicEditorialReview": 156,
+      "heuristicEditorialReview": 162,
       "automationMayApprove": 0
     },
     "priorityLocales": [
+      {
+        "locale": "pcm",
+        "heuristicHoldCount": 6,
+        "checkIds": [
+          "LQA-051",
+          "LQA-055",
+          "LQA-056",
+          "LQA-057",
+          "LQA-058",
+          "LQA-060"
+        ]
+      },
       {
         "locale": "zh",
         "heuristicHoldCount": 5,
@@ -149,17 +161,6 @@
         ]
       },
       {
-        "locale": "pcm",
-        "heuristicHoldCount": 5,
-        "checkIds": [
-          "LQA-051",
-          "LQA-055",
-          "LQA-056",
-          "LQA-057",
-          "LQA-058"
-        ]
-      },
-      {
         "locale": "bs",
         "heuristicHoldCount": 5,
         "checkIds": [
@@ -182,7 +183,7 @@
   },
   "renderEvidence": {
     "path": "../../../app/i18n/language-render-evidence.v1.json",
-    "generatedAt": "2026-08-04T07:46:41.509Z",
+    "generatedAt": "2026-08-04T15:07:49.143Z",
     "status": "PASS",
     "scope": {
       "localeCount": 50,
@@ -213,8 +214,8 @@
       "bytes": 16652
     },
     "app/i18n/messages.json": {
-      "sha256": "073d9b8d91d4122a62d79e2fdff5a1d71ef0bc9711ccf969625e3c2bd1f60d21",
-      "bytes": 9815415
+      "sha256": "05dbc2cd3599b42e5af82b1a07715bd1328825637ed9144c8578fcd20ed79b84",
+      "bytes": 9830479
     },
     "app/i18n/critical-ui-source.json": {
       "sha256": "907299be1075bcff77180b62f3ad5dc890f53fbcedeaa70a72ee562920eab3fa",
@@ -225,44 +226,44 @@
       "bytes": 36156
     },
     "app/i18n/metadata.generated.json": {
-      "sha256": "459d0396f298614714e7795291a2c4f78441964aeb03eaa7a6b0fad7ccbb4c20",
-      "bytes": 467640
+      "sha256": "f0e09ea16e0b7996d24a1571cbacc6f9f48c5b24c898491723d6f5eeb55e9eb4",
+      "bytes": 467604
     },
     "app/i18n/route-seo.json": {
       "sha256": "8931654068f87d2c8ffcca328cf82882be5a09a2b5d90a8cefb163b221f525e4",
       "bytes": 4518
     },
     "app/i18n/pending-visible-source.json": {
-      "sha256": "d3ada3444226b7bce0d7a5e126290030fd0633968a8c13d85e6eae24e77708ab",
+      "sha256": "2d8cebfb157beb0e22a6698617af357f12f816c9bb607cdef1efeb0f5edc7ee2",
       "bytes": 3442
     },
     "app/i18n/LocaleRuntime.tsx": {
-      "sha256": "963ff2d4bb8a0c5478600343df157abe96a3cbdb3fa2f114310f18cecfc2ab3b",
-      "bytes": 8099
+      "sha256": "83752b11c71364d2fff51a953e15aab129764f48f448cf2f6cc9904c296eee2c",
+      "bytes": 8678
     },
     "scripts/generate-i18n-catalog.mjs": {
       "sha256": "fd11c1655c9a4d7a77e2b18ecaa108c096a95bf6634c12727ecaecded186f153",
       "bytes": 18402
     },
     "scripts/check-i18n-catalog.mjs": {
-      "sha256": "2c0d7acb087c742f5ca17c986e1b6b9231077075070d92756d228f57a4804fdc",
-      "bytes": 7380
+      "sha256": "6afec0d92802611028d43d2aad812ca8370dc060aa088afdca91763c187dcdf0",
+      "bytes": 8669
     },
     "public/audits/localization-qa-20260803/browser-qa.json": {
       "sha256": "615a8524d7ab501bfc38fddb7a5249b1118e4a3aedd10704855ac1f882853b3d",
       "bytes": 1913
     },
     "app/i18n/language-render-evidence.v1.json": {
-      "sha256": "0320157f4e804fe3abfc34013cef747a15fd93547bd77c773ac1478b95d2e332",
+      "sha256": "5b9d1f6e613bf07ef702b3d8d55b821e62b2579facba50def92456bb2ccf3cdb",
       "bytes": 187325
     },
     "public/audits/localization-qa-20260803/language-qa-scorecard.json": {
-      "sha256": "4e79fe371e443ffb6b9bdb98a8613f4adb0342f63ced402a8a446b1a6a6edef1",
-      "bytes": 1621901
+      "sha256": "e2c01fe4bf066048b1bd04bf88abf5e84d37554401cb18063c26ae642020bdeb",
+      "bytes": 1620624
     },
     "public/audits/localization-qa-20260803/hold-remediation-ledger.json": {
-      "sha256": "4b1674fc0432bc81ca0a3699e5d15942ea02dd09a6447c37d0d6f4f02f6e8cdd",
-      "bytes": 7624
+      "sha256": "aa8cd3d68ae7327af589f0d62e70ba48e6e40a0e67002d58d456e3b86f41fe4c",
+      "bytes": 9332
     }
   },
   "browserQa": {
@@ -348,7 +349,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 29,
+      "exactSourceMatchHeuristicCount": 25,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
@@ -371,7 +372,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 120,
+      "exactSourceMatchHeuristicCount": 54,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
@@ -380,11 +381,11 @@
         "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-        "18 TX"
+        "18 TX",
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -394,7 +395,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 74,
+      "exactSourceMatchHeuristicCount": 41,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
@@ -417,10 +418,8 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 117,
+      "exactSourceMatchHeuristicCount": 53,
       "exactSourceMatchHeuristicSamples": [
-        "[02] $IAT bir topluluk katmanıdır; getiri sözü değildir.",
-        "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
@@ -430,7 +429,9 @@
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
         "100 IAT",
-        "100 IAT."
+        "100 IAT.",
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "18 TX"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -440,7 +441,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 50,
+      "exactSourceMatchHeuristicCount": 30,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
@@ -463,7 +464,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 89,
+      "exactSourceMatchHeuristicCount": 44,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
@@ -486,7 +487,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 173,
+      "exactSourceMatchHeuristicCount": 67,
       "exactSourceMatchHeuristicSamples": [
         "← RETURN TO STAR ASCENT",
         "$IAT / SOLANA",
@@ -496,10 +497,10 @@
         "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
-        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c"
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -509,7 +510,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 207,
+      "exactSourceMatchHeuristicCount": 79,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
@@ -518,11 +519,11 @@
         "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01"
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -532,10 +533,8 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 104,
+      "exactSourceMatchHeuristicCount": 41,
       "exactSourceMatchHeuristicSamples": [
-        "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
-        "[02] $IAT bir topluluk katmanıdır; getiri sözü değildir.",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
@@ -545,7 +544,9 @@
         "1.000.000.000 IAT",
         "100 IAT",
         "100 IAT.",
-        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c"
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -555,7 +556,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 56,
+      "exactSourceMatchHeuristicCount": 32,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
@@ -578,7 +579,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 186,
+      "exactSourceMatchHeuristicCount": 87,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
@@ -588,10 +589,10 @@
         "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
-        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c"
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "18 TX"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -601,7 +602,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 73,
+      "exactSourceMatchHeuristicCount": 40,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
@@ -624,20 +625,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 719,
+      "exactSourceMatchHeuristicCount": 269,
       "exactSourceMatchHeuristicSamples": [
-        "[01] Eski dünyayı optimize etmek için burada değiliz.",
-        "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
-        "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
-        "[01] Internal Agency is opening its first public chapter.",
-        "[02] $IAT bir topluluk katmanıdır; getiri sözü değildir.",
-        "[02] $IAT is the community layer; it is not a promise of return.",
-        "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
         "[03] Official information appears only through verified project channels.",
-        "[03] Resmî bilgiler yalnızca doğrulanmış proje kanallarında yayımlanır.",
-        "© 2026 İleri Akıl. $IAT yüksek riskli ve spekülatiftir. Finansal getiri vaadi yoktur.",
-        "© 2026 Internal Agency. $IAT is highly speculative. No financial return is promised.",
-        "$IAT / SOLANA"
+        "$IAT / SOLANA",
+        "00 // HOLD",
+        "00:00 UTC",
+        "00:05 UTC",
+        "01 // ROOT",
+        "01 // SIGNER",
+        "02 // RECORD",
+        "02 // VERIFIER",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
+        "1,000,000,000 IAT",
+        "1.000.000.000 IAT"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -647,7 +648,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 250,
+      "exactSourceMatchHeuristicCount": 256,
       "exactSourceMatchHeuristicSamples": [
         "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
         "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
@@ -670,20 +671,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 243,
+      "exactSourceMatchHeuristicCount": 114,
       "exactSourceMatchHeuristicSamples": [
-        "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
-        "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
-        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c"
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "18 TX",
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -693,7 +694,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 227,
+      "exactSourceMatchHeuristicCount": 111,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
@@ -702,9 +703,9 @@
         "01 // ROOT",
         "02 / TOKENOMICS",
         "02 // RECORD",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT."
       ],
@@ -716,20 +717,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 52,
+      "exactSourceMatchHeuristicCount": 33,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
         "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
-        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
-        "AKREP NESLİ // FIRLATMA KONTROLÜ"
+        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -739,20 +740,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 192,
+      "exactSourceMatchHeuristicCount": 99,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
         "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-        "18 TX",
-        "AÇIK KAYNAK GENESIS TÖRENİ"
+        "18 TX"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -762,20 +763,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 203,
+      "exactSourceMatchHeuristicCount": 96,
       "exactSourceMatchHeuristicSamples": [
-        "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
-        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c"
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "18 TX"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -785,20 +786,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 64,
+      "exactSourceMatchHeuristicCount": 31,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-        "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
-        "Açık çözülmemiş toplam"
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -808,19 +809,19 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 178,
+      "exactSourceMatchHeuristicCount": 83,
       "exactSourceMatchHeuristicSamples": [
-        "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
         "18 TX"
       ],
       "nativeSpeakerReview": "required"
@@ -831,20 +832,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 59,
+      "exactSourceMatchHeuristicCount": 31,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
-        "Açık çözülmemiş toplam",
-        "Açık güncellik aralığı",
-        "Altı zorunlu kayıt"
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -854,16 +855,16 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 192,
+      "exactSourceMatchHeuristicCount": 85,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
@@ -877,16 +878,16 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 213,
+      "exactSourceMatchHeuristicCount": 105,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
@@ -900,128 +901,13 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 181,
-      "exactSourceMatchHeuristicSamples": [
-        "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
-        "$IAT / SOLANA",
-        "00 // HOLD",
-        "00:00 UTC",
-        "00:05 UTC",
-        "1,000,000,000 IAT",
-        "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
-        "100 IAT",
-        "100 IAT.",
-        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-        "18 TX"
-      ],
-      "nativeSpeakerReview": "required"
-    },
-    {
-      "locale": "fi",
-      "sourceCount": 1468,
-      "emptyCount": 0,
-      "criticalCopyCount": 8,
-      "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 163,
+      "exactSourceMatchHeuristicCount": 77,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
-        "1,000,000,000 IAT",
-        "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
-        "100 IAT",
-        "100 IAT.",
-        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-        "AÇIK KAYNAK GENESIS TÖRENİ",
-        "AÇIK KAYNAK YÜRÜTME PENCERESİ"
-      ],
-      "nativeSpeakerReview": "required"
-    },
-    {
-      "locale": "hu",
-      "sourceCount": 1468,
-      "emptyCount": 0,
-      "criticalCopyCount": 8,
-      "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 191,
-      "exactSourceMatchHeuristicSamples": [
-        "$IAT / SOLANA",
-        "00 // HOLD",
-        "00:00 UTC",
-        "00:05 UTC",
-        "02 / TOKENOMICS",
-        "1,000,000,000 IAT",
-        "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
-        "100 IAT",
-        "100 IAT.",
-        "18 TX",
-        "AÇIK KAYNAK GENESIS TÖRENİ"
-      ],
-      "nativeSpeakerReview": "required"
-    },
-    {
-      "locale": "is",
-      "sourceCount": 1468,
-      "emptyCount": 0,
-      "criticalCopyCount": 8,
-      "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 155,
-      "exactSourceMatchHeuristicSamples": [
-        "$IAT / SOLANA",
-        "00 // HOLD",
-        "00:00 UTC",
-        "00:05 UTC",
-        "1,000,000,000 IAT",
-        "1.000.000.000 IAT",
-        "100 IAT",
-        "100 IAT.",
-        "18 TX",
-        "22 DOSYA · 7 DİL ÇİFTİ",
-        "AÇIK KAYNAK GENESIS TÖRENİ",
-        "AÇIK KAYNAK YÜRÜTME PENCERESİ"
-      ],
-      "nativeSpeakerReview": "required"
-    },
-    {
-      "locale": "ga",
-      "sourceCount": 1468,
-      "emptyCount": 0,
-      "criticalCopyCount": 8,
-      "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 243,
-      "exactSourceMatchHeuristicSamples": [
-        "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
-        "$IAT / SOLANA",
-        "00 // HOLD",
-        "00:00 UTC",
-        "00:05 UTC",
-        "01 // ROOT",
-        "01 // SIGNER",
-        "02 / TOKENOMICS",
-        "02 // RECORD",
-        "02 // VERIFIER",
-        "1,000,000,000 IAT",
-        "1.000.000.000 IAT"
-      ],
-      "nativeSpeakerReview": "required"
-    },
-    {
-      "locale": "it",
-      "sourceCount": 1468,
-      "emptyCount": 0,
-      "criticalCopyCount": 8,
-      "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 181,
-      "exactSourceMatchHeuristicSamples": [
-        "$IAT / SOLANA",
-        "00 // HOLD",
-        "00:00 UTC",
-        "00:05 UTC",
-        "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
         "100 IAT",
@@ -1033,25 +919,140 @@
       "nativeSpeakerReview": "required"
     },
     {
+      "locale": "fi",
+      "sourceCount": 1468,
+      "emptyCount": 0,
+      "criticalCopyCount": 8,
+      "criticalEnglishFallbackCount": 0,
+      "exactSourceMatchHeuristicCount": 65,
+      "exactSourceMatchHeuristicSamples": [
+        "$IAT / SOLANA",
+        "00 // HOLD",
+        "00:00 UTC",
+        "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
+        "1,000,000,000 IAT",
+        "1.000.000.000 IAT",
+        "100 IAT",
+        "100 IAT.",
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
+      ],
+      "nativeSpeakerReview": "required"
+    },
+    {
+      "locale": "hu",
+      "sourceCount": 1468,
+      "emptyCount": 0,
+      "criticalCopyCount": 8,
+      "criticalEnglishFallbackCount": 0,
+      "exactSourceMatchHeuristicCount": 79,
+      "exactSourceMatchHeuristicSamples": [
+        "$IAT / SOLANA",
+        "00 // HOLD",
+        "00:00 UTC",
+        "00:05 UTC",
+        "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
+        "1,000,000,000 IAT",
+        "1.000.000.000 IAT",
+        "100 IAT",
+        "100 IAT.",
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "18 TX"
+      ],
+      "nativeSpeakerReview": "required"
+    },
+    {
+      "locale": "is",
+      "sourceCount": 1468,
+      "emptyCount": 0,
+      "criticalCopyCount": 8,
+      "criticalEnglishFallbackCount": 0,
+      "exactSourceMatchHeuristicCount": 70,
+      "exactSourceMatchHeuristicSamples": [
+        "$IAT / SOLANA",
+        "00 // HOLD",
+        "00:00 UTC",
+        "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
+        "1,000,000,000 IAT",
+        "1.000.000.000 IAT",
+        "100 IAT",
+        "100 IAT.",
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "18 TX",
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01"
+      ],
+      "nativeSpeakerReview": "required"
+    },
+    {
+      "locale": "ga",
+      "sourceCount": 1468,
+      "emptyCount": 0,
+      "criticalCopyCount": 8,
+      "criticalEnglishFallbackCount": 0,
+      "exactSourceMatchHeuristicCount": 120,
+      "exactSourceMatchHeuristicSamples": [
+        "$IAT / SOLANA",
+        "00 // HOLD",
+        "00:00 UTC",
+        "00:05 UTC",
+        "01 // ROOT",
+        "01 // SIGNER",
+        "02 / TOKENOMICS",
+        "02 // RECORD",
+        "02 // VERIFIER",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
+        "1,000,000,000 IAT",
+        "1.000.000.000 IAT"
+      ],
+      "nativeSpeakerReview": "required"
+    },
+    {
+      "locale": "it",
+      "sourceCount": 1468,
+      "emptyCount": 0,
+      "criticalCopyCount": 8,
+      "criticalEnglishFallbackCount": 0,
+      "exactSourceMatchHeuristicCount": 82,
+      "exactSourceMatchHeuristicSamples": [
+        "$IAT / SOLANA",
+        "00 // HOLD",
+        "00:00 UTC",
+        "00:05 UTC",
+        "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
+        "1,000,000,000 IAT",
+        "1.000.000.000 IAT",
+        "100 IAT",
+        "100 IAT.",
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "18 TX"
+      ],
+      "nativeSpeakerReview": "required"
+    },
+    {
       "locale": "lv",
       "sourceCount": 1468,
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 230,
+      "exactSourceMatchHeuristicCount": 108,
       "exactSourceMatchHeuristicSamples": [
-        "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "02 // VERIFIER",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
-        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c"
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "18 TX"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1061,20 +1062,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 163,
+      "exactSourceMatchHeuristicCount": 69,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-        "18 TX",
-        "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602"
+        "18 TX"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1084,15 +1085,15 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 244,
+      "exactSourceMatchHeuristicCount": 132,
       "exactSourceMatchHeuristicSamples": [
-        "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
         "← RETURN TO STAR ASCENT",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
         "1% PROTOCOL EDGE",
@@ -1107,20 +1108,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 50,
+      "exactSourceMatchHeuristicCount": 32,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
         "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
-        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
-        "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602"
+        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1130,7 +1131,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 200,
+      "exactSourceMatchHeuristicCount": 94,
       "exactSourceMatchHeuristicSamples": [
         "→ LIQUIDITY POOL",
         "$IAT / SOLANA",
@@ -1140,9 +1141,9 @@
         "01 // ROOT",
         "01 // SIGNER",
         "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT"
       ],
       "nativeSpeakerReview": "required"
@@ -1153,20 +1154,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 221,
+      "exactSourceMatchHeuristicCount": 116,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
         "18 TX",
-        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1176,20 +1177,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 175,
+      "exactSourceMatchHeuristicCount": 75,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
-        "18 TX",
-        "AÇIK KAYNAK GENESIS TÖRENİ"
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "18 TX"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1199,20 +1200,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 196,
+      "exactSourceMatchHeuristicCount": 78,
       "exactSourceMatchHeuristicSamples": [
-        "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "02 // RECORD",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
-        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c"
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "18 TX"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1222,20 +1223,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 39,
+      "exactSourceMatchHeuristicCount": 31,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
         "100 IAT",
         "100 IAT.",
-        "Açık güncellik aralığı",
-        "Altı zorunlu kayıt",
-        "Cüzdan bağlantısı gerekmiyor",
-        "GENESIS"
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1245,16 +1246,16 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 211,
+      "exactSourceMatchHeuristicCount": 99,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
@@ -1268,20 +1269,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 203,
+      "exactSourceMatchHeuristicCount": 97,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
         "18 TX",
-        "22 DOSYA · 7 DİL ÇİFTİ"
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1291,7 +1292,7 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 181,
+      "exactSourceMatchHeuristicCount": 88,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
@@ -1299,9 +1300,9 @@
         "00:05 UTC",
         "01 // ROOT",
         "02 / TOKENOMICS",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c"
@@ -1314,15 +1315,15 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 83,
+      "exactSourceMatchHeuristicCount": 45,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
@@ -1337,20 +1338,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 254,
+      "exactSourceMatchHeuristicCount": 116,
       "exactSourceMatchHeuristicSamples": [
-        "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
-        "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "01 // SIGNER",
         "02 // RECORD",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
         "100 IAT",
-        "100 IAT."
+        "100 IAT.",
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1360,20 +1361,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 214,
+      "exactSourceMatchHeuristicCount": 79,
       "exactSourceMatchHeuristicSamples": [
-        "[02] $IAT bir topluluk katmanıdır; getiri sözü değildir.",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "01 // ROOT",
         "02 // VERIFIER",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
         "100 IAT",
-        "100 IAT."
+        "100 IAT.",
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1383,9 +1384,8 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 232,
+      "exactSourceMatchHeuristicCount": 95,
       "exactSourceMatchHeuristicSamples": [
-        "[01] İleri Akıl ilk açık bölümünü başlatıyor.",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
@@ -1393,10 +1393,11 @@
         "02 / TOKENOMICS",
         "02 // RECORD",
         "02 // VERIFIER",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "1% PROTOCOL EDGE",
-        "100 IAT"
+        "100 IAT",
+        "100 IAT."
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1406,13 +1407,13 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 128,
+      "exactSourceMatchHeuristicCount": 50,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
-        "01 // ROOT",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
         "100 IAT",
@@ -1429,20 +1430,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 229,
+      "exactSourceMatchHeuristicCount": 98,
       "exactSourceMatchHeuristicSamples": [
-        "[01] İleri Akıl ilk kamuya açık bölümünü açıyor.",
-        "[02] $IAT topluluk katmanıdır; getiri vaadi değildir.",
-        "[03] Bu kamusal bir inşa. Merakını getir. Ateşini getir.",
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
         "01 // ROOT",
         "02 // VERIFIER",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
-        "100 IAT"
+        "100 IAT",
+        "100 IAT.",
+        "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c"
       ],
       "nativeSpeakerReview": "required"
     },
@@ -1452,20 +1453,20 @@
       "emptyCount": 0,
       "criticalCopyCount": 8,
       "criticalEnglishFallbackCount": 0,
-      "exactSourceMatchHeuristicCount": 69,
+      "exactSourceMatchHeuristicCount": 32,
       "exactSourceMatchHeuristicSamples": [
         "$IAT / SOLANA",
         "00 // HOLD",
         "00:00 UTC",
         "00:05 UTC",
+        "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce",
         "1,000,000,000 IAT",
         "1.000.000.000 IAT",
         "100 IAT",
         "100 IAT.",
         "11245226a3ed1941519cf1f8fa875e3f6448d4a4144c0b612672a09750c22e6c",
-        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9",
-        "Açık çözülmemiş toplam",
-        "Açık güncellik aralığı"
+        "74487d17063e2bcf25bf00c9a23299f357bdf122b078342e2d40d46c58a7bf01",
+        "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
       ],
       "nativeSpeakerReview": "required"
     }
