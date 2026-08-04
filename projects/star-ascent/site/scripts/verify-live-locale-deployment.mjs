@@ -152,7 +152,67 @@ const pageResults = await mapConcurrent(pageJobs, 8, async ({ domain, locale, ro
   return { ok: true, label };
 });
 
-const failures = [...payloadResults, ...pageResults].filter((result) => !result.ok);
+const runtimeJobs = domains.map((domain) => ({ domain, label: `${domain} locale runtime` }));
+const runtimeResults = await mapConcurrent(runtimeJobs, 2, async ({ domain, label }) => {
+  const pageUrl = `${domain}/zh/network?verify=${cacheBuster}`;
+  const { response: pageResponse, bytes: pageBytes } = await fetchBytes(pageUrl);
+
+  if (pageResponse.status !== 200) {
+    return { ok: false, label, detail: `HTTP ${pageResponse.status} at ${pageUrl}` };
+  }
+  const pageIdentityError = responseIdentityError(pageUrl, pageResponse);
+  if (pageIdentityError) return { ok: false, label, detail: pageIdentityError };
+  if (!pageResponse.headers.get("content-type")?.toLowerCase().includes("text/html")) {
+    return {
+      ok: false,
+      label,
+      detail: `unexpected page content type ${pageResponse.headers.get("content-type") ?? "missing"}`,
+    };
+  }
+
+  const html = pageBytes.toString("utf8");
+  const runtimePath = html.match(/(?:src|href)=["']([^"']*LocaleRuntime-[^"']+\.js)["']/i)?.[1];
+  if (!runtimePath) {
+    return { ok: false, label, detail: "fingerprinted LocaleRuntime bundle was not referenced by rendered HTML" };
+  }
+
+  const runtimeUrl = new URL(runtimePath, domain).toString();
+  const { response, bytes } = await fetchBytes(`${runtimeUrl}?verify=${cacheBuster}`);
+  if (response.status !== 200) {
+    return { ok: false, label, detail: `HTTP ${response.status} at ${runtimeUrl}` };
+  }
+  const runtimeIdentityError = responseIdentityError(runtimeUrl, response);
+  if (runtimeIdentityError) return { ok: false, label, detail: runtimeIdentityError };
+  if (!response.headers.get("content-type")?.toLowerCase().includes("javascript")) {
+    return {
+      ok: false,
+      label,
+      detail: `unexpected runtime content type ${response.headers.get("content-type") ?? "missing"}`,
+    };
+  }
+  if (bytes.length < 1_000) {
+    return { ok: false, label, detail: `unexpectedly small runtime response (${bytes.length} bytes)` };
+  }
+
+  const runtime = bytes.toString("utf8");
+  const requiredMarkers = [
+    contract.schema,
+    contract.assetNamespace,
+    contract.catalogSha256,
+    contract.catalogSha256.slice(0, 16),
+    "payload-contract-failed",
+  ];
+  const missingMarkers = requiredMarkers.filter((marker) => !runtime.includes(marker));
+  if (missingMarkers.length > 0) {
+    return { ok: false, label, detail: `runtime missing committed marker(s): ${missingMarkers.join(", ")}` };
+  }
+  if (runtime.includes("/i18n/")) {
+    return { ok: false, label, detail: "runtime still contains the legacy /i18n/ payload path" };
+  }
+  return { ok: true, label };
+});
+
+const failures = [...payloadResults, ...pageResults, ...runtimeResults].filter((result) => !result.ok);
 if (failures.length > 0) {
   console.error(`Live locale deployment FAIL: ${failures.length} check(s) failed.`);
   for (const failure of failures) {
@@ -162,7 +222,8 @@ if (failures.length > 0) {
 } else {
   console.log(
     `Live locale deployment PASS: ${payloadResults.length}/${payloadResults.length} exact payloads and ` +
-      `${pageResults.length}/${pageResults.length} locale pages across ${domains.length} active domains; ` +
+      `${pageResults.length}/${pageResults.length} locale pages and ` +
+      `${runtimeResults.length}/${runtimeResults.length} locale runtime bundles across ${domains.length} active domains; ` +
       `catalog ${contract.catalogSha256}.`,
   );
   console.log("Read-only verification only: no deployment, signing, funding, or chain state was changed.");

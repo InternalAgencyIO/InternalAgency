@@ -117,14 +117,20 @@ content type, exact `Content-Language`, a non-trivial response body, and the
 expected `lang` and LTR/RTL attributes. Payload checks likewise require JSON
 content type and exact no-redirect origin/path ownership before comparing
 SHA-256. Cache-busting request parameters and no-cache headers reduce stale
-edge-cache ambiguity. The command is deliberately separate from offline CI: it
-requires network access, changes no hosting or chain state, and does not deploy.
+edge-cache ambiguity. For each active domain, it additionally resolves the
+fingerprinted `LocaleRuntime` bundle referenced by the rendered HTML, requires
+exact no-redirect host/path ownership and JavaScript content type, and verifies
+that the bundle embeds the committed payload schema, namespace, full and short
+catalog digests, fail-closed payload marker, and no legacy `/i18n/` payload
+path. The command is deliberately separate from offline CI: it requires
+network access, changes no hosting or chain state, and does not deploy.
 
 Passing proves that the checked public payload bytes match the committed
-catalog and that every locale has a checked public route on each domain. It
-does not prove native
-meaning, cadence, slang, cultural fluency, browser layout quality, or universal
-cache eviction for responses that were not requested.
+catalog, every locale has a checked public route on each domain, and each
+checked domain's referenced hydration runtime is bound to the current payload
+contract. It does not prove native meaning, cadence, slang, cultural fluency,
+browser layout quality, full application behavior, or universal cache eviction
+for responses that were not requested.
 
 ## Assurance boundary
 
