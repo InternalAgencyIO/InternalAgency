@@ -16,6 +16,7 @@ const expectedCheckIds = Array.from(
   { length: 100 },
   (_, index) => `LQA-${String(index + 1).padStart(3, "0")}`,
 );
+const expectedRenderCheckIds = expectedCheckIds.slice(70, 95);
 const statusVocabulary = ["PASS", "FAIL", "HOLD", "NOT_RUN"];
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const canonical = (value) => {
@@ -103,6 +104,20 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
   check(scorecard.lanes.native.summary.PASS + scorecard.lanes.native.summary.HOLD === 250, "native lane must contain exactly 250 reviewed results");
   check(scorecard.lanes.native.nativePassClaimAllowed === false, "native PASS claim must remain disabled while native results are on HOLD");
   check(Object.values(scorecard.assurance ?? {}).every((value) => value === false), "scorecard assurance flags must remain false");
+  check(
+    sameJson(Object.keys(scorecard.evidenceInputs ?? {}), ["nativeReview", "languageId", "render"]),
+    "evidence input inventory drift",
+  );
+  for (const [name, expectedPath, expectedPresent] of [
+    ["nativeReview", "app/i18n/native-review-signoffs.v1.json", false],
+    ["languageId", "app/i18n/language-id-evidence.v1.json", false],
+    ["render", "app/i18n/language-render-evidence.v1.json", true],
+  ]) {
+    const evidence = scorecard.evidenceInputs[name];
+    check(evidence?.path === expectedPath, `${name} evidence path drift`);
+    check(evidence?.present === expectedPresent, `${name} evidence presence claim mismatch`);
+    check(evidence?.parseError === null, `${name} evidence parse-error claim mismatch`);
+  }
 
   for (const field of ["headCommit", "headTree"]) {
     check(/^[0-9a-f]{40}$/u.test(scorecard.sourceBinding?.[field]), `scorecard source binding ${field} is invalid`);
@@ -168,11 +183,63 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
   check(Object.keys(sourceCatalog.messages.en ?? {}).length === scorecard.scope.canonicalStrings, "scorecard canonical-string scope mismatch");
   check(Object.keys(sourceRouteSeo).length === scorecard.scope.canonicalRoutes, "scorecard canonical-route scope mismatch");
 
+  const renderEvidencePath = `projects/star-ascent/site/${scorecard.evidenceInputs.render.path}`;
+  const renderEvidenceBytes = git(["show", `${sourceCommit}:${renderEvidencePath}`]);
+  check(renderEvidenceBytes !== null, "source-bound render evidence is unavailable");
+  let renderEvidence;
+  try {
+    renderEvidence = JSON.parse(renderEvidenceBytes.toString("utf8"));
+  } catch {
+    check(false, "source-bound render evidence is not valid JSON");
+  }
+  check(renderEvidence.schema === "iat-language-render-evidence/v1", "source-bound render evidence schema mismatch");
+  check(renderEvidence.status === "PASS", "source-bound render evidence must remain PASS");
+  check(
+    renderEvidence.scope?.localeCount === 50
+      && renderEvidence.scope?.claimedChecksPerLocale === 25
+      && Array.isArray(renderEvidence.scope?.omittedChecks)
+      && renderEvidence.scope.omittedChecks.length === 0,
+    "source-bound render evidence scope mismatch",
+  );
+  const renderGeneratedAtMs = Date.parse(renderEvidence.generatedAt);
+  check(
+    Number.isFinite(renderGeneratedAtMs) && new Date(renderGeneratedAtMs).toISOString() === renderEvidence.generatedAt,
+    "source-bound render evidence generation time must be canonical UTC",
+  );
+  check(renderGeneratedAtMs <= generatedAtMs, "scorecard predates its source-bound render evidence");
+  for (const field of ["definitionSha256", "messagesFileSha256", "metadataSha256", "routeSeoSha256", "pendingSha256"]) {
+    check(renderEvidence.sourceBinding?.[field] === scorecard.sourceBinding[field], `render evidence source binding ${field} mismatch`);
+  }
+  check(
+    sameJson(Object.keys(renderEvidence.locales ?? {}), expectedLocales),
+    "source-bound render evidence locale inventory mismatch",
+  );
+
   for (const localeRow of scorecard.locales) {
     check(canonicalDigest(Buffer.from(JSON.stringify(sourceCatalog.messages[localeRow.locale]))) === localeRow.localeMessagesSha256, `${localeRow.locale} digest does not match the source message catalog`);
     for (const [index, result] of localeRow.checks.entries()) {
       const definition = sourceDefinition.checks[index];
       check(result.id === definition.id && result.mode === definition.mode && result.category === definition.category, `${localeRow.locale}/${result.id} does not match the source check definition`);
+    }
+    const renderChecks = renderEvidence.locales[localeRow.locale]?.checks;
+    check(
+      sameJson(Object.keys(renderChecks ?? {}), expectedRenderCheckIds),
+      `${localeRow.locale} source-bound render check inventory mismatch`,
+    );
+    for (const result of localeRow.checks.slice(70, 95)) {
+      const record = renderChecks[result.id];
+      check(["PASS", "FAIL"].includes(record?.status), `${localeRow.locale}/${result.id} source-bound render status is invalid`);
+      const expectedResult = {
+        status: record.status,
+        detail: record.detail ?? "Source-bound clean-build render evidence",
+        ...(record.metrics ? { metrics: record.metrics } : {}),
+      };
+      const actualResult = {
+        status: result.status,
+        detail: result.detail,
+        ...(Object.hasOwn(result, "metrics") ? { metrics: result.metrics } : {}),
+      };
+      check(sameJson(actualResult, expectedResult), `${localeRow.locale}/${result.id} does not match source-bound render evidence`);
     }
   }
 
