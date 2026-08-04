@@ -140,9 +140,10 @@ test("the Turkish host keeps Turkish ownership without collapsing other locale c
     host: "ileriakil.com",
     "x-forwarded-host": "ileriakil.com",
   };
-  const metadata = JSON.parse(
-    await readFile(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8"),
-  );
+  const [metadata, payloadContract] = await Promise.all([
+    readFile(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/i18n/payload-contract.json", import.meta.url), "utf8").then(JSON.parse),
+  ]);
   const locales = Object.keys(metadata);
   assert.equal(locales.length, 50);
 
@@ -163,6 +164,15 @@ test("the Turkish host keeps Turkish ownership without collapsing other locale c
       assert.ok(head.includes(`property="og:url" content="${canonical}"`), `${locale} Open Graph ownership`);
       assert.ok(html.includes(`"url":"${canonical}"`), `${locale} structured-data ownership`);
       assert.equal((head.match(/rel="canonical"/g) ?? []).length, 1, `${locale} canonical count`);
+      const payloadPath = `/${payloadContract.assetNamespace}/${payloadContract.catalogSha256.slice(0, 16)}/${locale}.json`;
+      if (locale === "en" || locale === "tr") {
+        assert.doesNotMatch(head, /rel="preload" href="\/i18n-v2\//, `${locale} unnecessary locale preload`);
+      } else {
+        assert.ok(
+          head.includes(`rel="preload" href="${payloadPath}" as="fetch"`),
+          `${locale} source-bound locale preload`,
+        );
+      }
     }));
   }
 });
