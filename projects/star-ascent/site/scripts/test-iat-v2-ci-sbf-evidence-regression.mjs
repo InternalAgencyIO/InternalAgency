@@ -71,8 +71,16 @@ try {
   const checkoutTree = runGit("rev-parse", "HEAD^{tree}");
   const artifactBytes = writeArtifacts();
   const baseline = {
-    schema: "iat-v2-ci-verifiable-sbf-evidence/v2",
+    schema: "iat-v2-ci-verifiable-sbf-evidence/v3",
     status: "BUILD_ONLY_HOLD",
+    ciProvenance: {
+      serverUrl: "https://github.com",
+      repository: "InternalAgencyIO/InternalAgency",
+      repositoryId: 1313660798,
+      workflowRef: "InternalAgencyIO/InternalAgency/.github/workflows/iat-v2-proof.yml@refs/pull/4/merge",
+      runId: 30904276707,
+      runAttempt: 1,
+    },
     sourceBinding: {
       workflowEvent: "pull_request",
       sourceHeadCommit,
@@ -112,6 +120,10 @@ try {
   expectFail("binary digest drift", (value) => { value.artifacts.programBinary.sha256 = "0".repeat(64); }, /sha256 does not match/);
   expectFail("IDL byte drift", (value) => { value.artifacts.programIdl.bytes += 1; }, /bytes does not match/);
   expectFail("extra manifest field", (value) => { value.unreviewed = true; }, /manifest fields are not exact/);
+  expectFail("repository drift", (value) => { value.ciProvenance.repository = "lookalike/InternalAgency"; }, /repository drifted/);
+  expectFail("repository ID drift", (value) => { value.ciProvenance.repositoryId += 1; }, /repository ID drifted/);
+  expectFail("workflow reference drift", (value) => { value.ciProvenance.workflowRef = "InternalAgencyIO/InternalAgency/.github/workflows/other.yml@refs/heads/main"; }, /workflow reference drifted/);
+  expectFail("invalid CI run ID", (value) => { value.ciProvenance.runId = 0; }, /run ID is invalid/);
   expectFail("artifact path drift", (value) => { value.artifacts.buildLog.path = "other.log"; }, /path drifted/);
   expectFail("tracked source mutation", () => { writeFileSync(join(sandbox, "base.txt"), "dirty\n"); }, /tracked worktree is not clean/);
   expectFail("missing build log", () => { rmSync(join(sandbox, paths.buildLog)); }, /ENOENT/);
@@ -142,7 +154,7 @@ try {
     "artifact symlink indirection",
   );
 
-  console.log("IAT V2 CI SBF evidence regression passed: exact PR head/merge binding and 12 artifact, schema, HOLD, digest, size, path, canonical-JSON, symlink, worktree, and program-ID mutations fail closed.");
+  console.log("IAT V2 CI SBF evidence regression passed: exact PR head/merge/public-run binding and 16 provenance, artifact, schema, HOLD, digest, size, path, canonical-JSON, symlink, worktree, and program-ID mutations fail closed.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }

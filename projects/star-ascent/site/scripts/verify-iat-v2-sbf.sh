@@ -50,6 +50,12 @@ fi
 
 source_head_commit="${IAT_V2_SOURCE_HEAD_SHA:-}"
 workflow_event="${IAT_V2_WORKFLOW_EVENT:-}"
+ci_server_url="${GITHUB_SERVER_URL:-}"
+ci_repository="${GITHUB_REPOSITORY:-}"
+ci_repository_id="${GITHUB_REPOSITORY_ID:-}"
+ci_workflow_ref="${GITHUB_WORKFLOW_REF:-}"
+ci_run_id="${GITHUB_RUN_ID:-}"
+ci_run_attempt="${GITHUB_RUN_ATTEMPT:-}"
 if [[ ! "$source_head_commit" =~ ^[0-9a-f]{40}$ ]]; then
   echo "FAIL: workflow did not provide an exact lowercase source-head commit" >&2
   exit 1
@@ -58,6 +64,20 @@ if [[ "$workflow_event" != "push" \
   && "$workflow_event" != "pull_request" \
   && "$workflow_event" != "workflow_dispatch" ]]; then
   echo "FAIL: unsupported or missing workflow event: $workflow_event" >&2
+  exit 1
+fi
+if [[ "$ci_server_url" != "https://github.com" \
+  || "$ci_repository" != "InternalAgencyIO/InternalAgency" \
+  || "$ci_repository_id" != "1313660798" ]]; then
+  echo "FAIL: build provenance is not the reviewed public GitHub repository" >&2
+  exit 1
+fi
+if [[ ! "$ci_workflow_ref" =~ ^InternalAgencyIO/InternalAgency/\.github/workflows/iat-v2-proof\.yml@refs/(heads/.+|pull/[0-9]+/merge)$ ]]; then
+  echo "FAIL: build provenance is not the reviewed release-proof workflow" >&2
+  exit 1
+fi
+if [[ ! "$ci_run_id" =~ ^[1-9][0-9]*$ || ! "$ci_run_attempt" =~ ^[1-9][0-9]*$ ]]; then
+  echo "FAIL: build provenance is missing a canonical GitHub run ID or attempt" >&2
   exit 1
 fi
 if ! git cat-file -e "${source_head_commit}^{commit}"; then
@@ -143,6 +163,12 @@ evidence="target/verifiable/iat-v2-build-evidence.json"
 python3 - \
   "$evidence" \
   "$workflow_event" \
+  "$ci_server_url" \
+  "$ci_repository" \
+  "$ci_repository_id" \
+  "$ci_workflow_ref" \
+  "$ci_run_id" \
+  "$ci_run_attempt" \
   "$source_head_commit" \
   "$source_head_tree" \
   "$checkout_commit" \
@@ -165,6 +191,12 @@ import sys
 (
     evidence_path,
     workflow_event,
+    ci_server_url,
+    ci_repository,
+    ci_repository_id,
+    ci_workflow_ref,
+    ci_run_id,
+    ci_run_attempt,
     source_head_commit,
     source_head_tree,
     checkout_commit,
@@ -182,8 +214,16 @@ import sys
     log_bytes,
 ) = sys.argv[1:]
 document = {
-    "schema": "iat-v2-ci-verifiable-sbf-evidence/v2",
+    "schema": "iat-v2-ci-verifiable-sbf-evidence/v3",
     "status": "BUILD_ONLY_HOLD",
+    "ciProvenance": {
+        "serverUrl": ci_server_url,
+        "repository": ci_repository,
+        "repositoryId": int(ci_repository_id),
+        "workflowRef": ci_workflow_ref,
+        "runId": int(ci_run_id),
+        "runAttempt": int(ci_run_attempt),
+    },
     "sourceBinding": {
         "workflowEvent": workflow_event,
         "sourceHeadCommit": source_head_commit,

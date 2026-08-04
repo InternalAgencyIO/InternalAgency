@@ -224,8 +224,18 @@ function validateSbfProofScript(scriptText) {
   ) {
     fail("SBF proof must bind a clean tracked worktree to both source-head and checkout trees");
   }
-  if (!scriptText.includes('"schema": "iat-v2-ci-verifiable-sbf-evidence/v2"') || !scriptText.includes('"status": "BUILD_ONLY_HOLD"')) {
+  if (!scriptText.includes('"schema": "iat-v2-ci-verifiable-sbf-evidence/v3"') || !scriptText.includes('"status": "BUILD_ONLY_HOLD"')) {
     fail("SBF proof must emit the reviewed machine-readable HOLD evidence schema");
+  }
+  if (
+    !scriptText.includes('ci_repository="${GITHUB_REPOSITORY:-}"')
+    || !scriptText.includes('ci_repository_id="${GITHUB_REPOSITORY_ID:-}"')
+    || !scriptText.includes('ci_workflow_ref="${GITHUB_WORKFLOW_REF:-}"')
+    || !scriptText.includes('ci_run_id="${GITHUB_RUN_ID:-}"')
+    || !scriptText.includes('ci_run_attempt="${GITHUB_RUN_ATTEMPT:-}"')
+    || !scriptText.includes('"ciProvenance": {')
+  ) {
+    fail("SBF proof must bind the public repository, workflow, run, and attempt provenance");
   }
   if (
     !scriptText.includes('git rev-parse \'HEAD^2\'')
@@ -383,6 +393,10 @@ const sbfProofMutationProbes = [
     name: "canonical manifest validator bypassed",
     script: sbfProofScript.replace('node scripts/validate-iat-v2-ci-sbf-evidence.mjs "$evidence"', "true"),
   },
+  {
+    name: "public Actions run provenance omitted",
+    script: sbfProofScript.replace('ci_run_id="${GITHUB_RUN_ID:-}"', 'ci_run_id="1"'),
+  },
 ];
 
 for (const probe of sbfProofMutationProbes) {
@@ -397,5 +411,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout-bound binary/IDL evidence, canonical manifest validation, deduplicated branch concurrency, read-only permissions, and 21 fail-closed mutation probes remain bound.`,
+  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout/public-run-bound binary/IDL evidence, canonical manifest validation, deduplicated branch concurrency, read-only permissions, and 22 fail-closed mutation probes remain bound.`,
 );

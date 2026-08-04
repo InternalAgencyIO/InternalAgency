@@ -7,6 +7,9 @@ import { fileURLToPath } from "node:url";
 import { isAbsolute, normalize, relative, resolve } from "node:path";
 
 const expectedProgramId = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
+const expectedRepository = "InternalAgencyIO/InternalAgency";
+const expectedRepositoryId = 1313660798;
+const expectedWorkflowRef = /^InternalAgencyIO\/InternalAgency\/\.github\/workflows\/iat-v2-proof\.yml@refs\/(?:heads\/.+|pull\/[1-9][0-9]*\/merge)$/;
 const expectedArtifacts = {
   programBinary: "target/verifiable/iat_v2.so",
   programIdl: "target/idl/iat_v2.json",
@@ -60,11 +63,20 @@ export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath 
   const manifest = JSON.parse(manifestText);
   check(manifestText === `${JSON.stringify(sortJson(manifest), null, 2)}\n`, "manifest JSON is not canonical sorted-key UTF-8 JSON");
 
-  exactKeys(manifest, ["schema", "status", "sourceBinding", "programId", "toolchain", "artifacts", "limitations"], "manifest");
-  check(manifest.schema === "iat-v2-ci-verifiable-sbf-evidence/v2", "unexpected evidence schema");
+  exactKeys(manifest, ["schema", "status", "ciProvenance", "sourceBinding", "programId", "toolchain", "artifacts", "limitations"], "manifest");
+  check(manifest.schema === "iat-v2-ci-verifiable-sbf-evidence/v3", "unexpected evidence schema");
   check(manifest.status === "BUILD_ONLY_HOLD", "evidence status must remain BUILD_ONLY_HOLD");
   check(manifest.programId === expectedProgramId, "reviewed program ID drifted");
   check(JSON.stringify(manifest.limitations) === JSON.stringify(expectedLimitations), "HOLD limitations drifted");
+
+  exactKeys(manifest.ciProvenance, ["serverUrl", "repository", "repositoryId", "workflowRef", "runId", "runAttempt"], "ciProvenance");
+  const provenance = manifest.ciProvenance;
+  check(provenance.serverUrl === "https://github.com", "CI server is not public GitHub");
+  check(provenance.repository === expectedRepository, "CI repository drifted");
+  check(provenance.repositoryId === expectedRepositoryId, "CI repository ID drifted");
+  check(expectedWorkflowRef.test(provenance.workflowRef), "CI workflow reference drifted");
+  check(Number.isSafeInteger(provenance.runId) && provenance.runId > 0, "CI run ID is invalid");
+  check(Number.isSafeInteger(provenance.runAttempt) && provenance.runAttempt > 0, "CI run attempt is invalid");
 
   exactKeys(manifest.toolchain, ["rustc", "anchor", "solana"], "toolchain");
   check(/^rustc 1\.97\.1 \([0-9a-f]+ [0-9]{4}-[0-9]{2}-[0-9]{2}\)$/.test(manifest.toolchain.rustc), "Rust toolchain is not exact 1.97.1");
@@ -128,6 +140,7 @@ export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath 
     checkoutCommit: binding.checkoutCommit,
     checkoutRelation: binding.checkoutRelation,
     artifactCount: Object.keys(expectedArtifacts).length,
+    runUrl: `${provenance.serverUrl}/${provenance.repository}/actions/runs/${provenance.runId}/attempts/${provenance.runAttempt}`,
   };
 }
 
@@ -135,7 +148,7 @@ const invokedPath = process.argv[1] ? resolve(process.argv[1]) : null;
 if (invokedPath === fileURLToPath(import.meta.url)) {
   try {
     const result = validateSbfEvidence({ manifestPath: process.argv[2] });
-    console.log(`IAT V2 CI SBF evidence valid: ${result.sourceHeadCommit.slice(0, 8)} -> ${result.checkoutCommit.slice(0, 8)} (${result.checkoutRelation}), ${result.artifactCount} artifacts, manifest ${result.manifestSha256}. BUILD_ONLY_HOLD.`);
+    console.log(`IAT V2 CI SBF evidence valid: ${result.sourceHeadCommit.slice(0, 8)} -> ${result.checkoutCommit.slice(0, 8)} (${result.checkoutRelation}), ${result.artifactCount} artifacts, manifest ${result.manifestSha256}, public run ${result.runUrl}. BUILD_ONLY_HOLD.`);
   } catch (error) {
     console.error(`FAIL: ${error.message}`);
     process.exit(1);
