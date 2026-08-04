@@ -61,6 +61,12 @@ const agaveInstallerUrl =
 const agaveInstallerSha256 = "ffb25b5f2c9649a13b566b26e48d441a1eaf6d3c50d2198a70e19a5e1dfae96b";
 const anchorSourceRevision = "1314a6b83b16e6a31947b372d57988fd0e81559c";
 const expectedProgramId = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
+const requiredSbfArtifactPaths = [
+  "projects/star-ascent/site/target/verifiable/iat_v2.so",
+  "projects/star-ascent/site/target/verifiable/iat-v2-build-evidence.json",
+  "projects/star-ascent/site/target/idl/iat_v2.json",
+  "projects/star-ascent/site/target/iat-v2-sbf-build.log",
+];
 
 function validateConfiguration(workflowText, scripts) {
   const failures = [];
@@ -88,8 +94,8 @@ function validateConfiguration(workflowText, scripts) {
   if (!/^permissions:\n\s+contents:\s+read\s*$/m.test(workflowText)) {
     fail("release-proof workflow must retain read-only repository permissions");
   }
-  if (!/concurrency:\n\s+group:\s+iat-v2-proof-\$\{\{ github\.ref \}\}\n\s+cancel-in-progress:\s+true/m.test(workflowText)) {
-    fail("release-proof workflow must retain branch-scoped concurrency cancellation");
+  if (!/concurrency:\n(?:\s+#.*\n)*\s+group:\s+iat-v2-proof-\$\{\{ github\.event\.pull_request\.head\.ref \|\| github\.ref_name \}\}\n\s+cancel-in-progress:\s+true/m.test(workflowText)) {
+    fail("release-proof workflow must deduplicate push and pull-request runs for one source branch");
   }
   if (/continue-on-error:\s+true/.test(workflowText)) {
     fail("release-proof workflow must not weaken a gate with continue-on-error");
@@ -128,6 +134,11 @@ function validateConfiguration(workflowText, scripts) {
   }
   if (/sh -c "\$\(curl|--tag\s+v1\.0\.2|\bavm\s+(?:install|use)\b/.test(workflowText)) {
     fail("release-proof workflow reintroduced a mutable toolchain bootstrap path");
+  }
+  for (const artifactPath of requiredSbfArtifactPaths) {
+    if (!workflowText.includes(artifactPath)) {
+      fail(`release-proof workflow does not publish required SBF evidence artifact ${artifactPath}`);
+    }
   }
 
   for (const command of commandLines) {
@@ -191,6 +202,21 @@ function validateSbfProofScript(scriptText) {
   if (!scriptText.includes('sha256sum "$binary" "$idl"')) {
     fail("SBF proof must publish both binary and IDL SHA-256 digests");
   }
+  if (!scriptText.includes('expected_rustc_prefix="rustc 1.97.1 "') || !scriptText.includes('actual_rustc="$(rustc --version)"')) {
+    fail("SBF proof must verify the actual pinned Rust compiler version");
+  }
+  if (!scriptText.includes('git status --porcelain=v1 --untracked-files=no') || !scriptText.includes("git rev-parse 'HEAD^{tree}'")) {
+    fail("SBF proof must bind a clean tracked worktree to its source commit and tree");
+  }
+  if (!scriptText.includes('"schema": "iat-v2-ci-verifiable-sbf-evidence/v1"') || !scriptText.includes('"status": "BUILD_ONLY_HOLD"')) {
+    fail("SBF proof must emit the reviewed machine-readable HOLD evidence schema");
+  }
+  if (!scriptText.includes('"programId": program_id') || !scriptText.includes('"buildLog": {')) {
+    fail("SBF evidence manifest must bind the reviewed program ID and complete build log");
+  }
+  if (!scriptText.includes('sha256sum "$binary" "$idl" "$evidence" "$sbf_log"')) {
+    fail("SBF proof must digest the binary, IDL, manifest, and complete build log");
+  }
 
   return failures;
 }
@@ -242,6 +268,22 @@ const mutationProbes = [
     workflow: workflow.replace(`--rev ${anchorSourceRevision}`, "--tag v1.0.2"),
     scripts: packageJson.scripts,
   },
+  {
+    name: "duplicate push and pull-request concurrency groups",
+    workflow: workflow.replace(
+      "github.event.pull_request.head.ref || github.ref_name",
+      "github.ref",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "missing published SBF build log",
+    workflow: workflow.replace(
+      "            projects/star-ascent/site/target/iat-v2-sbf-build.log\n",
+      "",
+    ),
+    scripts: packageJson.scripts,
+  },
 ];
 
 for (const probe of mutationProbes) {
@@ -263,6 +305,25 @@ const sbfProofMutationProbes = [
     name: "missing generated IDL digest",
     script: sbfProofScript.replace('sha256sum "$binary" "$idl"', 'sha256sum "$binary"'),
   },
+  {
+    name: "missing actual Rust compiler gate",
+    script: sbfProofScript.replace('actual_rustc="$(rustc --version)"', 'actual_rustc="$expected_rustc_prefix"'),
+  },
+  {
+    name: "missing source-tree binding",
+    script: sbfProofScript.replace("git rev-parse 'HEAD^{tree}'", "printf '%040d' 0"),
+  },
+  {
+    name: "launch-authorizing build status",
+    script: sbfProofScript.replace('"status": "BUILD_ONLY_HOLD"', '"status": "READY"'),
+  },
+  {
+    name: "missing machine-readable evidence digest",
+    script: sbfProofScript.replace(
+      'sha256sum "$binary" "$idl" "$evidence" "$sbf_log"',
+      'sha256sum "$binary" "$idl" "$sbf_log"',
+    ),
+  },
 ];
 
 for (const probe of sbfProofMutationProbes) {
@@ -277,5 +338,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 5 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, program-ID-bound binary/IDL evidence, read-only permissions, and 10 fail-closed mutation probes remain bound.`,
+  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 5 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, clean-source program-ID-bound binary/IDL evidence, deduplicated branch concurrency, read-only permissions, and 16 fail-closed mutation probes remain bound.`,
 );

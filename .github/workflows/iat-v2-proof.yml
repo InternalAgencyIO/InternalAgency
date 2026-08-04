@@ -17,7 +17,9 @@ permissions:
   contents: read
 
 concurrency:
-  group: iat-v2-proof-${{ github.ref }}
+  # A push to the public draft branch and its pull_request event describe the
+  # same source head. Share one group so the newer event cancels duplicate work.
+  group: iat-v2-proof-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: true
 
 defaults:
@@ -93,6 +95,8 @@ jobs:
           name: iat-v2-verifiable-sbf
           path: |
             projects/star-ascent/site/target/verifiable/iat_v2.so
+            projects/star-ascent/site/target/verifiable/iat-v2-build-evidence.json
             projects/star-ascent/site/target/idl/iat_v2.json
+            projects/star-ascent/site/target/iat-v2-sbf-build.log
           if-no-files-found: error
           retention-days: 30

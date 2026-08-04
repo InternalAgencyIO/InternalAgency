@@ -3,8 +3,9 @@ set -euo pipefail
 
 expected_anchor="anchor-cli 1.0.2"
 expected_solana="solana-cli 3.1.10"
+expected_rustc_prefix="rustc 1.97.1 "
 
-for command_name in cargo anchor solana docker sha256sum python3; do
+for command_name in cargo rustc anchor solana docker git sha256sum python3; do
   if ! command -v "$command_name" >/dev/null 2>&1; then
     echo "FAIL: required command is missing: $command_name" >&2
     exit 1
@@ -13,6 +14,7 @@ done
 
 actual_anchor="$(anchor --version)"
 actual_solana="$(solana --version)"
+actual_rustc="$(rustc --version)"
 if [[ "$actual_anchor" != "$expected_anchor" ]]; then
   echo "FAIL: expected $expected_anchor; found $actual_anchor" >&2
   exit 1
@@ -20,6 +22,10 @@ fi
 if [[ "$actual_solana" != "$expected_solana" \
   && "$actual_solana" != "$expected_solana "* ]]; then
   echo "FAIL: expected $expected_solana; found $actual_solana" >&2
+  exit 1
+fi
+if [[ "$actual_rustc" != "$expected_rustc_prefix"* ]]; then
+  echo "FAIL: expected ${expected_rustc_prefix% }; found $actual_rustc" >&2
   exit 1
 fi
 
@@ -35,6 +41,10 @@ fi
 if ! grep -Fq 'wallet = "launch/HOLD-no-signing-wallet.json"' Anchor.toml \
   || [[ -e launch/HOLD-no-signing-wallet.json ]]; then
   echo "FAIL: build-only Anchor wallet boundary drifted" >&2
+  exit 1
+fi
+if [[ -n "$(git status --porcelain=v1 --untracked-files=no)" ]]; then
+  echo "FAIL: verifiable proof must start from a clean tracked source tree" >&2
   exit 1
 fi
 
@@ -84,8 +94,97 @@ if document.get("address") != expected_program_id:
     )
 PY
 
+if [[ -n "$(git status --porcelain=v1 --untracked-files=no)" ]]; then
+  echo "FAIL: verifiable build modified tracked source files" >&2
+  exit 1
+fi
+
+source_commit="$(git rev-parse HEAD)"
+source_tree="$(git rev-parse 'HEAD^{tree}')"
+binary_sha256="$(sha256sum "$binary" | awk '{print $1}')"
+idl_sha256="$(sha256sum "$idl" | awk '{print $1}')"
+log_sha256="$(sha256sum "$sbf_log" | awk '{print $1}')"
+binary_bytes="$(stat --printf='%s' "$binary")"
+idl_bytes="$(stat --printf='%s' "$idl")"
+log_bytes="$(stat --printf='%s' "$sbf_log")"
+evidence="target/verifiable/iat-v2-build-evidence.json"
+python3 - \
+  "$evidence" \
+  "$source_commit" \
+  "$source_tree" \
+  "$actual_rustc" \
+  "$actual_anchor" \
+  "$actual_solana" \
+  "$expected_program_id" \
+  "$binary_sha256" \
+  "$binary_bytes" \
+  "$idl_sha256" \
+  "$idl_bytes" \
+  "$log_sha256" \
+  "$log_bytes" <<'PY'
+import json
+import pathlib
+import sys
+
+(
+    evidence_path,
+    source_commit,
+    source_tree,
+    rustc_version,
+    anchor_version,
+    solana_version,
+    program_id,
+    binary_sha256,
+    binary_bytes,
+    idl_sha256,
+    idl_bytes,
+    log_sha256,
+    log_bytes,
+) = sys.argv[1:]
+document = {
+    "schema": "iat-v2-ci-verifiable-sbf-evidence/v1",
+    "status": "BUILD_ONLY_HOLD",
+    "sourceBinding": {
+        "commit": source_commit,
+        "tree": source_tree,
+        "trackedWorktree": "CLEAN",
+    },
+    "programId": program_id,
+    "toolchain": {
+        "rustc": rustc_version,
+        "anchor": anchor_version,
+        "solana": solana_version,
+    },
+    "artifacts": {
+        "programBinary": {
+            "path": "target/verifiable/iat_v2.so",
+            "sha256": binary_sha256,
+            "bytes": int(binary_bytes),
+        },
+        "programIdl": {
+            "path": "target/idl/iat_v2.json",
+            "sha256": idl_sha256,
+            "bytes": int(idl_bytes),
+        },
+        "buildLog": {
+            "path": "target/iat-v2-sbf-build.log",
+            "sha256": log_sha256,
+            "bytes": int(log_bytes),
+        },
+    },
+    "limitations": [
+        "Build evidence only; not signed Devnet evidence.",
+        "Does not authorize deployment, signing, broadcast, funding, or Mainnet launch.",
+    ],
+}
+pathlib.Path(evidence_path).write_text(
+    json.dumps(document, indent=2, sort_keys=True) + "\n",
+    encoding="utf-8",
+)
+PY
+
 echo "PASS: locked host tests and program-ID-bound verifiable SBF artifacts completed."
-sha256sum "$binary" "$idl"
-stat --printf='programBinaryBytes=%s\n' "$binary"
-stat --printf='programIdlBytes=%s\n' "$idl"
+sha256sum "$binary" "$idl" "$evidence" "$sbf_log"
+printf 'programBinaryBytes=%s\n' "$binary_bytes"
+printf 'programIdlBytes=%s\n' "$idl_bytes"
 echo "HOLD: this output is build evidence only; it does not authorize deployment or a transaction."
