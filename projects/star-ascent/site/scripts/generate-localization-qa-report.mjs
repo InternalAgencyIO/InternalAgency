@@ -25,7 +25,7 @@ const trackedFiles = [
 ];
 const readCanonical = (path) => readCanonicalTrackedFile({ repoRoot, absolutePath: join(root, path) });
 const readJson = async (path) => JSON.parse(readCanonical(path).toString("utf8"));
-const [catalog, critical, overrides, metadata, routeSeo, pending, scorecard, renderEvidence, holdLedger] = await Promise.all([
+const [catalog, critical, overrides, metadata, routeSeo, pending, scorecard, renderEvidence, holdLedger, provenance] = await Promise.all([
   readJson("app/i18n/messages.json"),
   readJson("app/i18n/critical-ui-source.json"),
   readJson("app/i18n/critical-ui-overrides.json"),
@@ -35,8 +35,10 @@ const [catalog, critical, overrides, metadata, routeSeo, pending, scorecard, ren
   readJson("public/audits/localization-qa-20260803/language-qa-scorecard.json"),
   readJson("app/i18n/language-render-evidence.v1.json"),
   readJson("public/audits/localization-qa-20260803/hold-remediation-ledger.json"),
+  readJson("public/audits/localization-qa-20260803/translation-provenance.v1.json"),
 ]);
 const browserQa = await readJson("public/audits/localization-qa-20260803/browser-qa.json");
+const provenanceRun = provenance.runs.at(-1);
 const sources = Object.keys(catalog.messages.en);
 const criticalSources = Object.values(critical);
 const nonLinguistic = /^(?:STAR ASCENT|IAT|SOL|SOLANA|APY|UTC|X|T\+\d+|\d+(?:[.,:]\d+)*(?:%|[A-Z]+)?)$/i;
@@ -178,6 +180,9 @@ const validation = [
   `- Exact scorecard: **${scorecard.summary.PASS} PASS / ${scorecard.summary.FAIL} FAIL / ${scorecard.summary.HOLD} HOLD / ${scorecard.summary.NOT_RUN} NOT_RUN** across ${scorecardResults} results.`,
   `- HOLD remediation ledger: [\`hold-remediation-ledger.json\`](./hold-remediation-ledger.json) separates **${holdLedger.holdSummary.externalEvidenceOnly} external-evidence gates** from **${holdLedger.holdSummary.heuristicEditorialReview} heuristic editorial reviews** without closing or downgrading any result.`,
   `- Source-bound browser/render evidence: **${renderEvidence.status}** for ${renderRecords.length}/${renderRecords.length} recorded checks.`,
+  `- Public process: [\`TRANSLATION-PROCESS.md\`](./TRANSLATION-PROCESS.md) records the model revision, runtime, generation parameters, deterministic repair stages, public commit chain, and future append-only update protocol.`,
+  `- Machine-readable provenance: [\`translation-provenance.v1.json\`](./translation-provenance.v1.json) binds ${provenanceRun.artifacts.length} artifacts by raw SHA-256 and byte count and classifies all ${provenanceRun.outcomes.changedLocaleEntries.toLocaleString("en-US")} catalog mutations from the public baseline.`,
+  `- Data license: [\`CC0-DATA-DEDICATION.md\`](./CC0-DATA-DEDICATION.md) dedicates the project-owned, non-secret localization data and QA evidence under CC0 1.0 while explicitly excluding software, third-party model weights and runtimes, trademarks, secrets, and material the project does not own.`,
   "",
   `The remediation ledger prioritizes ${holdLedger.priorityLocales.map(({ locale }) => `\`${locale}\``).join(", ")} because each has five heuristic HOLDs, while preserving all language-identification and native-review gates. Automation may prepare candidates and evidence inventories; it may not approve native quality or independent language identification.`,
   "",
@@ -189,6 +194,13 @@ const markdown = `# DRAFT localization, usability, and accessibility QA\n\n**STA
 await mkdir(auditDir, { recursive: true });
 await Promise.all([
   writeFile(join(auditDir, "report.json"), `${JSON.stringify(report, null, 2)}\n`, "utf8"),
-  writeFile(join(auditDir, "README.md"), markdown, "utf8"),
+  writeFile(
+    join(auditDir, "README.md"),
+    markdown.replace(
+      "See [report.json](./report.json) for source digests, samples, and machine-readable results.",
+      "See [report.json](./report.json) for source digests, samples, and machine-readable results. Run `npm run check:i18n:provenance` from `projects/star-ascent/site` to verify public commit ancestry, historical mutation counts, file hashes, evidence totals, HOLD boundaries, and the append-only run policy.",
+    ),
+    "utf8",
+  ),
 ]);
 console.log(`Localization QA report generated for ${locales.length} locales.`);

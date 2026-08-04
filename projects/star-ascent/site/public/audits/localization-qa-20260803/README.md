@@ -18,6 +18,9 @@ The launch-checklist word “GO” is treated semantically as “ready,” not a
 - Exact scorecard: **4538 PASS / 0 FAIL / 462 HOLD / 0 NOT_RUN** across 5000 results.
 - HOLD remediation ledger: [`hold-remediation-ledger.json`](./hold-remediation-ledger.json) separates **300 external-evidence gates** from **162 heuristic editorial reviews** without closing or downgrading any result.
 - Source-bound browser/render evidence: **PASS** for 1250/1250 recorded checks.
+- Public process: [`TRANSLATION-PROCESS.md`](./TRANSLATION-PROCESS.md) records the model revision, runtime, generation parameters, deterministic repair stages, public commit chain, and future append-only update protocol.
+- Machine-readable provenance: [`translation-provenance.v1.json`](./translation-provenance.v1.json) binds 20 artifacts by raw SHA-256 and byte count and classifies all 4,748 catalog mutations from the public baseline.
+- Data license: [`CC0-DATA-DEDICATION.md`](./CC0-DATA-DEDICATION.md) dedicates the project-owned, non-secret localization data and QA evidence under CC0 1.0 while explicitly excluding software, third-party model weights and runtimes, trademarks, secrets, and material the project does not own.
 
 The remediation ledger prioritizes `pcm`, `zh`, `ar`, `ja`, `bs` because each has five heuristic HOLDs, while preserving all language-identification and native-review gates. Automation may prepare candidates and evidence inventories; it may not approve native quality or independent language identification.
 
@@ -90,4 +93,4 @@ Historical command record from 2026-08-03; regenerating this summary does not cl
 - Rendered browser checks are representative, not an exhaustive physical-device or assistive-technology certification.
 - This package does not authorize deployment, signing, broadcasting, funding, or mainnet launch.
 
-See [report.json](./report.json) for source digests, samples, and machine-readable results.
+See [report.json](./report.json) for source digests, samples, and machine-readable results. Run `npm run check:i18n:provenance` from `projects/star-ascent/site` to verify public commit ancestry, historical mutation counts, file hashes, evidence totals, HOLD boundaries, and the append-only run policy.

@@ -1,0 +1,190 @@
+{
+  "schema": "iat-localization-provenance/v1",
+  "status": "PUBLIC_MACHINE_DRAFT_NATIVE_REVIEW_HOLD",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "license": {
+    "spdx": "CC0-1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "dedication": "To the extent the project holds the necessary rights, the non-secret localization data, QA evidence, provenance records, and project-authored process documentation in this public audit packet are dedicated under CC0 1.0.",
+    "scope": [
+      "localization catalog data",
+      "localization QA scorecards and reports",
+      "source-bound render and pending-source evidence",
+      "localization provenance records",
+      "project-authored localization process documentation"
+    ],
+    "exclusions": [
+      "repository software under its existing license",
+      "third-party model weights, runtimes, libraries, fonts, and media",
+      "trademarks, names, and logos",
+      "personal data, credentials, wallet material, secrets, and non-public files",
+      "material for which the project does not hold the required rights"
+    ],
+    "file": "public/audits/localization-qa-20260803/CC0-DATA-DEDICATION.md"
+  },
+  "policy": {
+    "appendOnlyRuns": true,
+    "overwritePriorRunRecords": false,
+    "runtimeTranslationService": false,
+    "nativeQualityClaimAllowed": false,
+    "publishOnlyCoherentValidatedIncrements": true
+  },
+  "runs": [
+    {
+      "id": "2026-08-04-source-match-refresh-v1",
+      "status": "MACHINE_DRAFT_NATIVE_REVIEW_REQUIRED",
+      "recordedAt": "2026-08-04T18:03:15+03:00",
+      "timeBasis": "OUTPUT_COMMIT_COMMITTER_TIME_NOT_MODEL_START_TIME",
+      "baselineCommit": "6290df543ab7471ae5ce6320675173eded73908b",
+      "outputCommit": "93532d459114cb6d30923a19cd42a199d89d70e1",
+      "model": {
+        "provider": "Hugging Face model repository",
+        "identifier": "facebook/nllb-200-distilled-600M",
+        "revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "weightsPublishedInRepository": false,
+        "scope": "This run refreshed source-equal prose only; the full catalog also contains prior cached NLLB drafts, Google Translate gap-fill drafts, deterministic repairs, and editorial overrides."
+      },
+      "runtime": {
+        "operatingSystem": "Windows local workstation",
+        "python": "3.12.13",
+        "torch": "2.11.0+cu128",
+        "transformers": "5.14.1",
+        "tokenizers": "0.22.2",
+        "sentencepiece": "0.2.2",
+        "cuda": "12.8",
+        "gpu": "NVIDIA GeForce RTX 3080 Ti",
+        "absolutePathsPublished": false
+      },
+      "generation": {
+        "entrypoint": "scripts/generate-i18n-local.py",
+        "refreshSourceMatches": true,
+        "batchSize": 96,
+        "maxLength": 384,
+        "numBeams": 1,
+        "noRepeatNgramSize": 3,
+        "repetitionPenalty": 1.15,
+        "sourceLocales": [
+          "en",
+          "tr"
+        ],
+        "translationAlgorithmVersion": 2,
+        "sourceMatchRefreshAlgorithmVersion": 1,
+        "staticCommittedOutput": true,
+        "deterministicStages": [
+          "scripts/prune-i18n-catalog.mjs",
+          "scripts/apply-i18n-editorial-overrides.mjs",
+          "scripts/repair-i18n-invariants.mjs",
+          "scripts/compile-i18n-assets.mjs"
+        ],
+        "protectedClasses": [
+          "URLs",
+          "handles",
+          "token tickers",
+          "canonical 64-character hashes",
+          "time-gate tokens",
+          "numeric and unit tokens",
+          "protocol terms"
+        ]
+      },
+      "scope": {
+        "localeCount": 50,
+        "canonicalStrings": 1468,
+        "canonicalRoutes": 25,
+        "sourceEqualCandidatesRefreshed": 4560
+      },
+      "outcomes": {
+        "changedLocaleEntries": 4748,
+        "sourceEqualDraftReplacements": 4560,
+        "literalOnlyRestorations": 187,
+        "corruptedSha256ValuesBefore": 109,
+        "corruptedSha256ValuesAfter": 0,
+        "otherDeterministicPipelineChanges": 1,
+        "unexplainedMutations": 0,
+        "missingOrEmptyEntries": 0,
+        "pendingVisibleSourceStrings": 0,
+        "renderChecks": {
+          "PASS": 1250,
+          "FAIL": 0
+        },
+        "scorecard": {
+          "PASS": 4538,
+          "FAIL": 0,
+          "HOLD": 462,
+          "NOT_RUN": 0,
+          "externalEvidenceHold": 300,
+          "heuristicEditorialHold": 162
+        }
+      },
+      "commitChain": [
+        {
+          "role": "baseline",
+          "commit": "6290df543ab7471ae5ce6320675173eded73908b"
+        },
+        {
+          "role": "catalog-output",
+          "commit": "93532d459114cb6d30923a19cd42a199d89d70e1"
+        },
+        {
+          "role": "pending-source-evidence",
+          "commit": "3989241f3805cdf8214f571073585471ab280130"
+        },
+        {
+          "role": "render-evidence",
+          "commit": "7965f4b8bed41420b14e1e2640b1989165e662fb"
+        },
+        {
+          "role": "scorecard",
+          "commit": "ebc5b6b511e95856233cfc1506c158ee480f13d9"
+        },
+        {
+          "role": "report",
+          "commit": "814f6006be9c2fb6dbf41e6c5f02f51d4edb4599"
+        },
+        {
+          "role": "report-regression-binding",
+          "commit": "02ebead2fa30e1c6fb7b38f4d28f8a5a4702ee62"
+        }
+      ],
+      "artifacts": [
+        { "path": "app/i18n/messages.json", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "05dbc2cd3599b42e5af82b1a07715bd1328825637ed9144c8578fcd20ed79b84", "bytes": 9830479 },
+        { "path": "app/i18n/metadata.generated.json", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "f0e09ea16e0b7996d24a1571cbacc6f9f48c5b24c898491723d6f5eeb55e9eb4", "bytes": 467604 },
+        { "path": "app/i18n/payload-contract.json", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "c99150bd6831b73f1a043ede9b0fa1b1a494ce16786ccc0f74369ca8f267b840", "bytes": 181 },
+        { "path": "app/i18n/pending-visible-source.json", "bindingCommit": "3989241f3805cdf8214f571073585471ab280130", "sha256": "2d8cebfb157beb0e22a6698617af357f12f816c9bb607cdef1efeb0f5edc7ee2", "bytes": 3442 },
+        { "path": "app/i18n/language-render-evidence.v1.json", "bindingCommit": "7965f4b8bed41420b14e1e2640b1989165e662fb", "sha256": "5b9d1f6e613bf07ef702b3d8d55b821e62b2579facba50def92456bb2ccf3cdb", "bytes": 187325 },
+        { "path": "app/i18n/language-qa-checks.v1.json", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "7781abc913b4d927519678f833164127e81fa2205cd66bc282bb70a9a47dae33", "bytes": 16652 },
+        { "path": "app/i18n/critical-ui-source.json", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "907299be1075bcff77180b62f3ad5dc890f53fbcedeaa70a72ee562920eab3fa", "bytes": 443 },
+        { "path": "app/i18n/critical-ui-overrides.json", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "c1bf53743b01ed173c38d0b3d939b6757cf51e7c51048975c036d8e0c16e38a7", "bytes": 36156 },
+        { "path": "app/i18n/route-seo.json", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "8931654068f87d2c8ffcca328cf82882be5a09a2b5d90a8cefb163b221f525e4", "bytes": 4518 },
+        { "path": "public/audits/localization-qa-20260803/language-qa-scorecard.json", "bindingCommit": "ebc5b6b511e95856233cfc1506c158ee480f13d9", "sha256": "e2c01fe4bf066048b1bd04bf88abf5e84d37554401cb18063c26ae642020bdeb", "bytes": 1620624 },
+        { "path": "public/audits/localization-qa-20260803/hold-remediation-ledger.json", "bindingCommit": "ebc5b6b511e95856233cfc1506c158ee480f13d9", "sha256": "aa8cd3d68ae7327af589f0d62e70ba48e6e40a0e67002d58d456e3b86f41fe4c", "bytes": 9332 },
+        { "path": "public/audits/localization-qa-20260803/report.json", "bindingCommit": "814f6006be9c2fb6dbf41e6c5f02f51d4edb4599", "sha256": "7379c6c2f54f57e77bad0a42c8bac1b87a8e2b25131f5f3017979f8fc4251248", "bytes": 45984 },
+        { "path": "scripts/generate-i18n-local.py", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "54e4572815f2467295c84f9e199125404e81a8443ea09c9122f5a536810b3f27", "bytes": 15701 },
+        { "path": "scripts/prune-i18n-catalog.mjs", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "189746a1b62f1a19b53787a2534ef7448caf5a92baa3a60be788123b53e8abec", "bytes": 6102 },
+        { "path": "scripts/repair-i18n-invariants.mjs", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "ced5282a986d527da82814d12f1eed2d3151f2b62ce71874c1569c8f98986e1e", "bytes": 8249 },
+        { "path": "scripts/compile-i18n-assets.mjs", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "f74ec67a8b1776c9d2ceb0a1872465808094bd45c2a937f18970e08499f4510a", "bytes": 3462 },
+        { "path": "scripts/capture-pending-i18n-source.mjs", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "e613e9d9d8a6337f00faeddee01051034c3ec96c5a93ffeb918343510f716fc3", "bytes": 6077 },
+        { "path": "scripts/capture-language-render-evidence.mjs", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "3f46b4dbbf416b0d20f9ff9005b29a71df324db36707ae8ee672ae9841e68df2", "bytes": 24528 },
+        { "path": "scripts/generate-language-qa-scorecard.mjs", "bindingCommit": "93532d459114cb6d30923a19cd42a199d89d70e1", "sha256": "70634bdfff7ed3f8f7e1182147bd8c8236559e30c37ae501c5068fe55c14699a", "bytes": 53732 },
+        { "path": "scripts/verify-language-qa-scorecard-replay.mjs", "bindingCommit": "02ebead2fa30e1c6fb7b38f4d28f8a5a4702ee62", "sha256": "3005eba74524443fd1ed91d4c0ac70b335e25f466c6e32c26bb6c15b5e1e0a63", "bytes": 7898 }
+      ],
+      "validation": {
+        "catalogQa": "PASS",
+        "pendingVisibleSource": "PASS",
+        "sourceBoundRenderChecks": "PASS",
+        "scorecardReplay": "PASS",
+        "iatV2Checks": "PASS_66_TESTS",
+        "iatV2Signoff": "EXIT_0_WITH_CURRENT_SOURCE_SIGNED_DEVNET_PENDING",
+        "nativeLanguageReview": "HOLD",
+        "mainnetLaunch": "HOLD"
+      },
+      "limitations": [
+        "The run timestamp is represented by the output commit committer time, not an independently captured model start time.",
+        "The model refresh covers source-equal prose values, not every pre-existing catalog value.",
+        "Automated completeness and render evidence do not certify meaning, cadence, slang, cultural fluency, or native quality.",
+        "No native-speaker approval or independent language-identification evidence is claimed.",
+        "Local paths and model weights are intentionally omitted from the public repository.",
+        "This record is not deployment, signing, funding, or launch authorization."
+      ]
+    }
+  ]
+}
