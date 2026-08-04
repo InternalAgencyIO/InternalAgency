@@ -101,6 +101,21 @@ Failed experiments, private paths, model caches, credentials, wallet material,
 and transient files are not public evidence. A failed gate is reported but not
 published as passing.
 
+## Read-only live deployment parity
+
+Run `npm run check:i18n:live` to compare every one of the 50 committed locale
+payloads byte-for-byte on both active public domains. The verifier also checks
+representative English, Chinese, Turkish, French, Arabic, Spanish, Japanese,
+and Portuguese pages for successful HTML responses and the expected `lang`
+attribute. Cache-busting request parameters and no-cache headers reduce stale
+edge-cache ambiguity. The command is deliberately separate from offline CI: it
+requires network access, changes no hosting or chain state, and does not deploy.
+
+Passing proves that the checked public payload bytes match the committed
+catalog and that the representative routes render. It does not prove native
+meaning, cadence, slang, cultural fluency, browser layout quality, or universal
+cache eviction for responses that were not requested.
+
 ## Assurance boundary
 
 The current scorecard is 4,538 PASS, 0 FAIL, 462 HOLD, and 0 NOT_RUN. The 462
