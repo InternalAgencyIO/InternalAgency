@@ -27,7 +27,7 @@
     "restartRequestedAt": "2026-08-04T09:32:23.369Z",
     "restartInstruction": "Clear the remaining X country-post backlog now; do not wait for the normal cadence once an exact eligible group exists.",
     "restartCadenceOverride": "immediate-first-eligible-group",
-    "currentGate": "The user explicitly overrode duplicate-media protection and authorized the exact-caption publication despite the earlier captionless 854/855/856 post. X rejected the initial Post click and one bounded retry with a visible composer error. A live profile count check and a focused Latest search for the caption found no new post. The reservation and prepared composer remain frozen pending recovery; no further clicks are authorized this run.",
+    "currentGate": "The user explicitly overrode duplicate-media protection and authorized the exact-caption publication despite the earlier captionless 854/855/856 post. X rejected the initial Post click, one immediate bounded retry, and one additional cooldown retry on the next heartbeat with the same visible composer error. Focused Latest searches found no new captioned post. The reservation and prepared composer remain frozen pending platform recovery; no further clicks are authorized this wake.",
     "coverHandling": "Cover updates remain paused and no profile fields were modified.",
     "cadenceAfterDrain": "Return future X publishing to one exactly verified logical group at the established 45-50 minute cadence unless the user explicitly requests another immediate bulk drain."
   },
@@ -185,14 +185,14 @@
     ],
     "mediaMode": "video-pause-image-only",
     "transmissionPolicy": "Use the existing signed-in Chrome account, upload the three files in frozen order, require three distinct previews and one unique enabled Post button, click Post once, then preserve the reservation until exact public URL and photo/1 through photo/3 proof are confirmed.",
-    "lastTransmissionAttemptAt": "2026-08-04T13:09:44.6050757Z",
-    "lastTransmissionOutcome": "After the user explicitly said to post anyway, the agent re-prepared the exact Mexico ❤️ Japan caption and exact 854/855/856 media. X rejected the initial Post click and one bounded retry with 'Something went wrong'. The public profile count remained 2,555 and a focused Latest search returned no matching captioned post, so no successful URL can be confirmed and the reservation remains intact.",
+    "lastTransmissionAttemptAt": "2026-08-04T13:22:10.7416247Z",
+    "lastTransmissionOutcome": "After the user explicitly said to post anyway, the agent re-prepared the exact Mexico ❤️ Japan caption and exact 854/855/856 media. X rejected the initial Post click, one immediate bounded retry, and one additional cooldown retry on the next heartbeat with 'Something went wrong'. Focused Latest searches returned no matching captioned post, so no successful URL can be confirmed and the reservation remains intact.",
     "explicitDuplicateOverride": {
       "status": "active-for-this-reservation",
       "instruction": "post anyway",
       "receivedAt": "2026-08-04T13:05:00Z",
-      "composerAttempts": 2,
-      "outcome": "Both exact-caption Post clicks were rejected by X; no confirmed publication URL."
+      "composerAttempts": 3,
+      "outcome": "All three exact-caption Post clicks across two bounded recovery runs were rejected by X; no confirmed publication URL."
     },
     "observedTransmission": {
       "status": "public-exact-media-caption-missing",
