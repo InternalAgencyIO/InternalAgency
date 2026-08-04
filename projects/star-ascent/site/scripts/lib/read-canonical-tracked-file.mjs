@@ -25,6 +25,9 @@ export function readCanonicalTrackedFile({ repoRoot, absolutePath }) {
         windowsHide: true,
       });
     }
+    if (!worktreeClean && !indexClean) {
+      throw new Error(`Refusing ambiguous tracked-file read because index and worktree differ: ${repoRelativePath}`);
+    }
   }
 
   return readFileSync(absolutePath);

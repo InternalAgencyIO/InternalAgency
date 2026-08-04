@@ -37,6 +37,14 @@ test("canonical tracked reads ignore checkout-only CRLF conversion but preserve 
     writeFileSync(artifactPath, changedBytes);
     assert.notEqual(spawnSync("git", ["diff", "--quiet", "--", "artifact.md"], { cwd: repoRoot }).status, 0);
     assert.deepEqual(readCanonicalTrackedFile({ repoRoot, absolutePath: artifactPath }), changedBytes);
+
+    git(repoRoot, ["add", "artifact.md"]);
+    assert.deepEqual(readCanonicalTrackedFile({ repoRoot, absolutePath: artifactPath }), changedBytes);
+    writeFileSync(artifactPath, "alpha\r\ndelta\r\n", "utf8");
+    assert.throws(
+      () => readCanonicalTrackedFile({ repoRoot, absolutePath: artifactPath }),
+      /index and worktree differ/u,
+    );
   } finally {
     rmSync(repoRoot, { recursive: true, force: true });
   }
