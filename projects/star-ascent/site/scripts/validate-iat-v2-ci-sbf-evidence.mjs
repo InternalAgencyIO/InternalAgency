@@ -2,9 +2,9 @@
 
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { readFileSync, statSync } from "node:fs";
+import { lstatSync, readFileSync, realpathSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { isAbsolute, resolve } from "node:path";
+import { isAbsolute, normalize, relative, resolve } from "node:path";
 
 const expectedProgramId = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
 const expectedArtifacts = {
@@ -12,6 +12,7 @@ const expectedArtifacts = {
   programIdl: "target/idl/iat_v2.json",
   buildLog: "target/iat-v2-sbf-build.log",
 };
+const expectedManifest = "target/verifiable/iat-v2-build-evidence.json";
 const expectedLimitations = [
   "Build evidence only; not signed Devnet evidence.",
   "Does not authorize deployment, signing, broadcast, funding, or Mainnet launch.",
@@ -37,11 +38,27 @@ function exactKeys(value, keys, label) {
   check(JSON.stringify(actual) === JSON.stringify(expected), `${label} fields are not exact`);
 }
 
+function sortJson(value) {
+  if (Array.isArray(value)) return value.map(sortJson);
+  if (!value || typeof value !== "object") return value;
+  return Object.fromEntries(Object.keys(value).sort().map((key) => [key, sortJson(value[key])]));
+}
+
+function assertCanonicalRegularFile(root, candidate, expectedPath, label) {
+  const entry = lstatSync(candidate);
+  check(entry.isFile() && !entry.isSymbolicLink(), `${label} must be a regular non-symlink file`);
+  const resolvedRelativePath = normalize(relative(realpathSync(root), realpathSync(candidate)));
+  check(resolvedRelativePath === normalize(expectedPath), `${label} does not resolve to its canonical evidence path`);
+}
+
 export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath } = {}) {
   const root = resolve(projectRoot);
-  const requestedManifest = manifestPath ?? "target/verifiable/iat-v2-build-evidence.json";
+  const requestedManifest = manifestPath ?? expectedManifest;
   const resolvedManifest = isAbsolute(requestedManifest) ? requestedManifest : resolve(root, requestedManifest);
-  const manifest = JSON.parse(readFileSync(resolvedManifest, "utf8"));
+  assertCanonicalRegularFile(root, resolvedManifest, expectedManifest, "manifest");
+  const manifestText = readFileSync(resolvedManifest, "utf8");
+  const manifest = JSON.parse(manifestText);
+  check(manifestText === `${JSON.stringify(sortJson(manifest), null, 2)}\n`, "manifest JSON is not canonical sorted-key UTF-8 JSON");
 
   exactKeys(manifest, ["schema", "status", "sourceBinding", "programId", "toolchain", "artifacts", "limitations"], "manifest");
   check(manifest.schema === "iat-v2-ci-verifiable-sbf-evidence/v2", "unexpected evidence schema");
@@ -94,14 +111,15 @@ export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath 
     check(record.path === expectedPath, `artifacts.${name}.path drifted`);
     check(sha256Pattern.test(record.sha256), `artifacts.${name}.sha256 is malformed`);
     check(Number.isSafeInteger(record.bytes) && record.bytes > 0, `artifacts.${name}.bytes is invalid`);
-    const bytes = readFileSync(resolve(root, expectedPath));
+    const artifactPath = resolve(root, expectedPath);
+    assertCanonicalRegularFile(root, artifactPath, expectedPath, `artifacts.${name}`);
+    const bytes = readFileSync(artifactPath);
     check(bytes.length === record.bytes, `artifacts.${name}.bytes does not match the file`);
     check(sha256(bytes) === record.sha256, `artifacts.${name}.sha256 does not match the file`);
   }
 
   const idl = JSON.parse(readFileSync(resolve(root, expectedArtifacts.programIdl), "utf8"));
   check(idl.address === expectedProgramId, "generated IDL address does not match the reviewed program ID");
-  check(statSync(resolvedManifest).size > 0, "manifest is empty");
 
   return {
     status: "PASS",

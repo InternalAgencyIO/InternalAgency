@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { mkdtempSync, mkdirSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { validateSbfEvidence } from "./validate-iat-v2-ci-sbf-evidence.mjs";
@@ -40,7 +40,12 @@ function artifactRecord(path, bytes) {
 
 function writeManifest(manifest) {
   const path = join(sandbox, "target/verifiable/iat-v2-build-evidence.json");
-  writeFileSync(path, `${JSON.stringify(manifest, null, 2)}\n`);
+  const sortJson = (value) => {
+    if (Array.isArray(value)) return value.map(sortJson);
+    if (!value || typeof value !== "object") return value;
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, sortJson(value[key])]));
+  };
+  writeFileSync(path, `${JSON.stringify(sortJson(manifest), null, 2)}\n`);
   return path;
 }
 
@@ -116,7 +121,28 @@ try {
     value.artifacts.programIdl = artifactRecord(paths.programIdl, bytes);
   }, /IDL address/);
 
-  console.log("IAT V2 CI SBF evidence regression passed: exact PR head/merge binding and 10 artifact, schema, HOLD, digest, size, path, worktree, and program-ID mutations fail closed.");
+  writeArtifacts();
+  writeManifest(baseline);
+  writeFileSync(manifestPath, `${JSON.stringify(baseline, null, 4)}\n`);
+  assert.throws(
+    () => validateSbfEvidence({ projectRoot: sandbox, manifestPath }),
+    /manifest JSON is not canonical/,
+    "non-canonical manifest encoding",
+  );
+
+  writeArtifacts();
+  writeManifest(baseline);
+  const decoyDirectory = join(sandbox, "target/symlink-decoy");
+  mkdirSync(decoyDirectory, { recursive: true });
+  rmSync(join(sandbox, paths.buildLog));
+  symlinkSync(decoyDirectory, join(sandbox, paths.buildLog), "junction");
+  assert.throws(
+    () => validateSbfEvidence({ projectRoot: sandbox, manifestPath }),
+    /regular non-symlink file/,
+    "artifact symlink indirection",
+  );
+
+  console.log("IAT V2 CI SBF evidence regression passed: exact PR head/merge binding and 12 artifact, schema, HOLD, digest, size, path, canonical-JSON, symlink, worktree, and program-ID mutations fail closed.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }
