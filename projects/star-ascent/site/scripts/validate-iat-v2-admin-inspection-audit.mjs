@@ -42,7 +42,8 @@ for (const marker of ["mode\") === \"inspect", "RPC reads, hardware loading, sim
   check(mainSource.includes(marker), `admin source lacks ${marker}`);
 }
 check(!mainSource.includes("import TrezorConnect from"), "Trezor Connect became an eager import");
-check(!cssSource.includes("fonts.googleapis.com") && !cssSource.includes("fonts.gstatic.com"), "admin CSS requires an external font origin");
+const externalCssReferences = [...new Set(cssSource.match(/(?:https?:)?\/\/[^\s"'()<>]+/giu) ?? [])];
+check(externalCssReferences.length === 0, `admin CSS requires external URL references: ${externalCssReferences.join(", ")}`);
 for (const marker of ["externalRequests", "data-iat-trezor-connect", "is enabled in inspection mode", "FeatureRehearsal|ProgramUpgrade|\\/lib-"]) {
   check(testSource.includes(marker), `inspection test lacks ${marker}`);
 }

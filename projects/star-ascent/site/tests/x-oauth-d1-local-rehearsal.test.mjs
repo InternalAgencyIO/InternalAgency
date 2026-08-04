@@ -79,6 +79,13 @@ test("credential-free OAuth state is signed, expiring, PKCE-bound, and tamper ev
   assert.throws(() => verifyXOAuthState({ state, secret: STATE_SECRET, now: new Date(now.valueOf() + 1_001) }), /expired/);
 });
 
+test("PKCE S256 challenge matches the RFC 7636 appendix B vector", () => {
+  assert.equal(
+    pkceChallenge("dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk"),
+    "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
+  );
+});
+
 test("a later D1-style statement failure rolls activation and nonce consumption back", () => {
   const db = openLedger();
   addPending(db, "rollback-node", "rollback-wallet");

@@ -18,4 +18,9 @@ export function verifyXOAuthState({ state, secret, now = new Date() }) {
   if (now.valueOf() > payload.exp) throw new Error("OAuth state expired"); return payload;
 }
 export function pkceVerifier({ state, secret, now }) { verifyXOAuthState({ state, secret, now }); return mac(secret, `pkce:${state}`); }
-export function pkceChallenge(verifier) { return createHash("sha256").update(verifier).digest("base64url"); }
+export function pkceChallenge(verifier) {
+  // RFC 7636 section 4.2 requires SHA-256 for the S256 PKCE transform. This
+  // value is a public verifier challenge, not a password or password hash.
+  // codeql[js/insufficient-password-hash]
+  return createHash("sha256").update(verifier).digest("base64url");
+}
