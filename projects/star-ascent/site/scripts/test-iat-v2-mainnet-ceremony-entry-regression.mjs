@@ -4,7 +4,10 @@ import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { assessCeremonyEntry } from "./assess-iat-v2-mainnet-ceremony-entry.mjs";
+import {
+  assessCanonicalCeremonyEntry,
+  assessCeremonyEntry,
+} from "./assess-iat-v2-mainnet-ceremony-entry.mjs";
 
 const gate = JSON.parse(readFileSync(resolve("launch/iat-v2-mainnet-readiness-gate.json"), "utf8"));
 const audit = JSON.parse(readFileSync(resolve("public/audits/iat-v2-prelaunch-20260802/manifest.json"), "utf8"));
@@ -12,7 +15,7 @@ const remediationAudit = JSON.parse(readFileSync(resolve("public/audits/iat-v2-r
 const ceremonyReview = JSON.parse(readFileSync(resolve("launch/iat-v2-ceremony-review.template.json"), "utf8"));
 const stageJournal = JSON.parse(readFileSync(resolve("launch/iat-v2-mainnet-stage-journal.template.json"), "utf8"));
 const currentNowMs = Date.parse("2026-08-01T08:18:04Z");
-const canonicalValidation = { prelaunch: true, remediation: true };
+const canonicalValidation = { readiness: true, prelaunch: true, remediation: true };
 const canonicalCeremonyArtifacts = {
   ceremonyReview,
   stageJournal,
@@ -116,6 +119,7 @@ assert.equal(ready.state, "READY_FOR_ATTENDED_PREFLIGHT");
 assert.equal(ready.mainnetStatus, "HOLD_PENDING_ATTENDED_PREFLIGHT");
 assert.deepEqual(ready.blockers, []);
 assert.equal(ready.checks.MAINNET_HOLD_BOUNDARY, true);
+assert.equal(ready.checks.MAINNET_READINESS_CANONICAL_VALIDATION, true);
 assert.equal(ready.checks.LOCAL_TIME_GATE_CLASSIFICATION, true);
 assert.equal(ready.checks.PRELAUNCH_AUDIT_CANONICAL_VALIDATION, true);
 assert.equal(ready.checks.PRELAUNCH_SECURITY_AUDIT_CLEARANCE, true);
@@ -191,8 +195,9 @@ for (const mutate of [
 }
 
 for (const auditValidation of [
-  { prelaunch: false, remediation: true },
-  { prelaunch: true, remediation: false },
+  { readiness: false, prelaunch: true, remediation: true },
+  { readiness: true, prelaunch: false, remediation: true },
+  { readiness: true, prelaunch: true, remediation: false },
 ]) {
   const rejected = assessCeremonyEntry(
     readyGate,
@@ -204,11 +209,12 @@ for (const auditValidation of [
     readyCeremonyArtifacts,
   );
   assert.equal(rejected.state, "HOLD");
-  assert.ok(rejected.blockers.includes(
-    auditValidation.prelaunch
-      ? "REMEDIATION_AUDIT_CANONICAL_VALIDATION"
-      : "PRELAUNCH_AUDIT_CANONICAL_VALIDATION",
-  ));
+  const expectedBlocker = !auditValidation.readiness
+    ? "MAINNET_READINESS_CANONICAL_VALIDATION"
+    : !auditValidation.prelaunch
+      ? "PRELAUNCH_AUDIT_CANONICAL_VALIDATION"
+      : "REMEDIATION_AUDIT_CANONICAL_VALIDATION";
+  assert.ok(rejected.blockers.includes(expectedBlocker));
 }
 
 for (const [name, mutate, blockers] of [
@@ -258,4 +264,9 @@ for (const [name, mutate, blockers] of [
   for (const blocker of blockers) assert.ok(rejected.blockers.includes(blocker), `${name}: ${blocker}`);
 }
 
-console.log("IAT V2 ceremony-entry regression passed: current ledger fails closed; audit, V2 ceremony-review, and V2 stage-journal summaries require canonical validation; synthetic ready state permits exactly one named owner-accepted Trezor risk while missing, expired, or impossible UTC windows, unaccepted criticals, stale artifacts, unreviewed verifier data, and an unbound Model T address remain blockers.");
+const canonical = await assessCanonicalCeremonyEntry();
+assert.equal(canonical.state, "HOLD");
+assert.equal(canonical.readinessValidatorExitCode, 0);
+assert.equal(canonical.checks.MAINNET_READINESS_CANONICAL_VALIDATION, true);
+
+console.log("IAT V2 ceremony-entry regression passed: the readiness ledger, audits, V2 ceremony review, and V2 stage journal require same-assessment canonical validation; synthetic ready state permits exactly one named owner-accepted Trezor risk while missing, expired, or impossible UTC windows, unaccepted criticals, stale artifacts, unreviewed verifier data, and an unbound Model T address remain blockers.");

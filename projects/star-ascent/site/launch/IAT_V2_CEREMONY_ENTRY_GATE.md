@@ -80,7 +80,9 @@ and is an independent ceremony-entry blocker of its own. Its sole-Trezor
 exception is accepted only as a named owner risk; it is never described as
 authority separation.
 
-The assessment also independently requires the mainnet HOLD/safety boundary,
+The assessment also independently runs and requires the canonical mainnet
+readiness-ledger validator before it can report entry readiness. It separately
+requires the mainnet HOLD/safety boundary,
 the honest `VERIFIED_LOCAL_HOST_ONLY` classification, and canonical validation
 of `iat-v2-ceremony-review.template.json` and
 `iat-v2-mainnet-stage-journal.template.json`. Summary booleans in the readiness

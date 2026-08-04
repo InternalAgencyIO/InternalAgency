@@ -19,7 +19,7 @@ export function assessCeremonyEntry(
   nowMs = Date.now(),
   audit = undefined,
   remediationAudit = undefined,
-  auditValidation = { prelaunch: false, remediation: false },
+  auditValidation = { readiness: false, prelaunch: false, remediation: false },
   ceremonyArtifacts = {
     ceremonyReview: undefined,
     stageJournal: undefined,
@@ -103,6 +103,7 @@ export function assessCeremonyEntry(
     && soleTrezorOperator.publicAddress === gate.funding?.publicAddress;
   const safetyValues = Object.values(gate.safety ?? {});
   const required = [
+    ["MAINNET_READINESS_CANONICAL_VALIDATION", auditValidation.readiness === true],
     ["MAINNET_HOLD_BOUNDARY", gate.status === "HOLD" && gate.network === "mainnet-beta" && safetyValues.length > 0 && safetyValues.every((value) => value === false)],
     ["LOCAL_TIME_GATE_CLASSIFICATION", gate.timeGateEvidence?.status === "VERIFIED_LOCAL_HOST_ONLY" && gate.timeGateEvidence?.signedDevnetEvidence === false && gate.timeGateEvidence?.validatorTransaction === false],
     ["PRELAUNCH_AUDIT_CANONICAL_VALIDATION", auditValidation.prelaunch === true],
@@ -134,6 +135,7 @@ export function assessCeremonyEntry(
       "READY_FOR_ATTENDED_PREFLIGHT is not transaction, signing, broadcast, deployment, mint, transfer, or publication authority.",
       "The funding observation must be no more than 30 minutes old with no more than one minute of future skew.",
       "The replacement schedule must bind one canonical UTC ceremony time that is still future at assessment and later than its non-future publication time.",
+      "The mainnet readiness ledger is never trusted from summary fields alone; its canonical validator must pass in this same assessment.",
       "Audit summary fields are never trusted alone; both public audit packages must pass their canonical source-binding and artifact-digest validators in this same assessment.",
       "Release and attended-review summary fields are never trusted alone; the canonical V2 ceremony review and V2 stage journal must pass their validators in this same assessment.",
       "The sole named owner-accepted Trezor concentration risk may remain; every unaccepted critical/high finding and missing current-source assurance is a mandatory blocker.",
@@ -155,6 +157,7 @@ export async function assessCanonicalCeremonyEntry() {
     [path.join(siteRoot, "scripts", script)],
     { cwd: siteRoot, encoding: "utf8", windowsHide: true },
   );
+  const readinessValidation = validate("validate-iat-v2-mainnet-readiness-gate.mjs");
   const prelaunchValidation = validate("validate-iat-v2-prelaunch-audit.mjs");
   const remediationValidation = validate("validate-iat-v2-remediation-audit.mjs");
   const ceremonyReviewValidation = validate("validate-iat-v2-ceremony-review.mjs");
@@ -166,6 +169,7 @@ export async function assessCanonicalCeremonyEntry() {
     JSON.parse(auditBytes.toString("utf8")),
     JSON.parse(remediationAuditBytes.toString("utf8")),
     {
+      readiness: readinessValidation.status === 0,
       prelaunch: prelaunchValidation.status === 0,
       remediation: remediationValidation.status === 0,
     },
@@ -190,6 +194,7 @@ export async function assessCanonicalCeremonyEntry() {
   assessment.stageJournalSourceSha256 = createHash("sha256")
     .update(stageJournalBytes)
     .digest("hex");
+  assessment.readinessValidatorExitCode = readinessValidation.status;
   assessment.auditValidatorExitCodes = {
     prelaunch: prelaunchValidation.status,
     remediation: remediationValidation.status,
