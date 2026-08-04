@@ -15,3 +15,8 @@
 13. Rejected one Tokyo accessory edit that did not visibly satisfy its assigned detail contract and retained the immediately previous valid master.
 14. Recorded the user's immediate X-backlog restart. Exact publication remains gated because Mexico stills 854 and 855 require a validated different-country final; no premature reservation or malformed two-image group was created.
 15. Published this sanitized 21-asset checkpoint with exact hashes. All files remain non-final and non-X-eligible until their scene validation and campaign accounting gates pass.
+16. Accepted Tokyo's mask headpiece and boot-mounted runway baton through two independent one-variable edits.
+17. Rejected a Tokyo relationship edit that assigned the requested pose to the wrong pair, then recovered with Alia explicitly fixed as the right-side participant.
+18. Validated and archived Tokyo 856 with exactly three adult fictional identities, complete footwear, safe opaque couture, the completed route-light mission, the Japan location, 941x1672 dimensions, and SHA-256 proof.
+19. Accepted Fuji's independently fastened paired anklet illusion and Yokohama's fixed silver lacing seam; blocked or visually incorrect alternatives remained unpublished.
+20. Materialized the exact final residual X reservation: Mexico 854 and 855 followed by Japan 856, caption `Mexico ❤️ Japan`, under the active Batch 202–211 image-only video pause.

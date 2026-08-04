@@ -20,7 +20,7 @@
   "maxPostsPerRun": 1,
   "publishingMode": "guardian-autonomous-cadence-after-overdrive-drain",
   "backlogDrainPolicy": {
-    "status": "active-awaiting-different-country-eligibility",
+    "status": "active-residual-reserved-ready-to-transmit",
     "requestedAt": "2026-08-03T18:02:10.035Z",
     "completedAt": "2026-08-03T18:29:08.048Z",
     "instruction": "Clear the entire deterministically eligible X campaign backlog now through the signed-in Chrome account; the prior 45-50 minute cadence is explicitly overridden for this drain.",
@@ -33,7 +33,7 @@
     "restartRequestedAt": "2026-08-04T09:32:23.369Z",
     "restartInstruction": "Clear the remaining X country-post backlog now; do not wait for the normal cadence once an exact eligible group exists.",
     "restartCadenceOverride": "immediate-first-eligible-group",
-    "currentGate": "Mexico images 854 and 855 require at least one validated different-country still; Japan Batch 209 is the active dependency and no reservation may be created before its exact final asset and hash become eligible.",
+    "currentGate": "Cleared: Japan image 856 is a validated final with exact hash proof. The frozen Mexico 854/855 plus Japan 856 reservation is ready for one serialized Chrome transmission.",
     "coverHandling": "Cover updates remain paused and no profile fields were modified.",
     "cadenceAfterDrain": "Return future X publishing to one exactly verified logical group at the established 45-50 minute cadence unless the user explicitly requests another immediate bulk drain."
   },
@@ -86,11 +86,11 @@
         "❤️",
         "💜"
       ],
-      "nextIndex": 6,
+      "nextIndex": 7,
       "lastReservedImageNumbers": [
-        852,
-        853,
-        851
+        854,
+        855,
+        856
       ]
     },
     "quotes": false,
@@ -158,7 +158,42 @@
       "reason": "The caption-free click-time status exposes exactly one media item, so it is a malformed partial post and does not satisfy the pending 629/630/632 three-image 2+1 composition. The visible media did not load sufficiently for a safe asset-number inference; the reservation remains intact."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "status": "reserved-ready-to-transmit",
+    "reservedAt": "2026-08-04T10:53:26.361Z",
+    "reason": "Immediate user-requested residual backlog drain after the first validated different-country final became eligible.",
+    "caption": "Mexico ❤️ Japan",
+    "heartReservation": {
+      "cycleNumber": 5,
+      "index": 6,
+      "heart": "❤️"
+    },
+    "imageNumbers": [
+      854,
+      855,
+      856
+    ],
+    "countries": [
+      "Mexico",
+      "Japan"
+    ],
+    "assets": [
+      {
+        "file": "854-mexico-copper-canyon-star-map-relay.png",
+        "sha256": "fd07e81ea25316749f4fd6e54dba359f00a7a10617126366ecec0983f58bbd17"
+      },
+      {
+        "file": "855-mexico-cabo-san-lucas-arch-arrival-beacon-finale.png",
+        "sha256": "04e3507840698d0936e58161e6b3fd0935710e02e65af85e2762f134c83cfd20"
+      },
+      {
+        "file": "856-japan-tokyo-shibuya-command-route-light-grid.png",
+        "sha256": "3de767bca9e1b0ecb6f2cbf1d4505fa3abba3e76d375c87c8b8b4d88046dde73"
+      }
+    ],
+    "mediaMode": "video-pause-image-only",
+    "transmissionPolicy": "Use the existing signed-in Chrome account, upload the three files in frozen order, require three distinct previews and one unique enabled Post button, click Post once, then preserve the reservation until exact public URL and photo/1 through photo/3 proof are confirmed."
+  },
   "preparedPostQueue": [],
   "pendingCoverUpdate": null,
   "coverUpdatePolicy": {
