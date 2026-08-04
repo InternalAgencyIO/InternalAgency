@@ -28,6 +28,17 @@ function localizedUrl(locale: (typeof localeCodes)[number], publicPath: string):
   return `https://internalagency.io${localePath(locale, publicPath)}`;
 }
 
+function canonicalUrl(
+  locale: (typeof localeCodes)[number],
+  publicPath: string,
+  turkishHost: boolean,
+): string {
+  if (turkishHost && locale === "tr") {
+    return `https://ileriakil.com${publicPath === "/" ? "" : publicPath}`;
+  }
+  return localizedUrl(locale, publicPath);
+}
+
 function languageAlternates(publicPath: string): Record<string, string> {
   return {
     ...Object.fromEntries(localeCodes.flatMap((code) => {
@@ -54,9 +65,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const sources = routeSeoSources(publicPath);
   const title = localeMetadata?.seo?.[sources.title] ?? localeMetadata?.title ?? sources.title;
   const description = localeMetadata?.seo?.[sources.description] ?? localeMetadata?.description ?? sources.description;
-  const canonicalHost = host?.toLowerCase().includes("ileriakil") ? "https://ileriakil.com" : "https://internalagency.io";
-  const canonicalPath = host?.toLowerCase().includes("ileriakil") ? publicPath : localePath(locale, publicPath);
-  const canonical = `${canonicalHost}${canonicalPath === "/" ? "" : canonicalPath}`;
+  const turkishHost = Boolean(host?.toLowerCase().includes("ileriakil"));
+  const canonical = canonicalUrl(locale, publicPath, turkishHost);
   const indexable = publicPath !== "/mint";
   return {
     metadataBase,
@@ -94,14 +104,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const publicPath = requestHeaders.get("x-ia-path") ?? "/";
   const turkishHost = Boolean(host?.toLowerCase().includes("ileriakil"));
   const promptCopy = metadataCatalog[locale]?.prompt ?? metadataCatalog.en.prompt;
-  const canonical = turkishHost
-    ? `https://ileriakil.com${publicPath === "/" ? "" : publicPath}`
-    : localizedUrl(locale, publicPath);
+  const canonical = canonicalUrl(locale, publicPath, turkishHost);
   const localeMetadata = metadataCatalog[locale] ?? metadataCatalog.en;
   const sources = routeSeoSources(publicPath);
   const pageTitle = localeMetadata.seo?.[sources.title] ?? localeMetadata.title;
   const pageDescription = localeMetadata.seo?.[sources.description] ?? localeMetadata.description;
-  const websiteUrl = turkishHost ? "https://ileriakil.com" : localizedUrl(locale, "/");
+  const websiteUrl = turkishHost && locale === "tr" ? "https://ileriakil.com" : localizedUrl(locale, "/");
   const websiteId = `${websiteUrl}#website`;
   const structuredData = {
     "@context": "https://schema.org",
