@@ -40,6 +40,7 @@
     "check:i18n:pending": "node scripts/validate-pending-i18n-source.mjs",
     "check:seo:i18n": "npm run build && node --import ./tests/register-cloudflare-workers-loader.mjs --test tests/i18n-routing.test.mjs",
     "check:public": "node scripts/check-public-launch-routes.mjs",
+    "check:iat-v2-proof-workflow": "node scripts/test-iat-v2-proof-workflow-regression.mjs",
     "check:ui-regression": "playwright test",
     "check:manifest-gate": "node scripts/test-manifest-gate-regression.mjs",
     "check:publication-payload": "node scripts/test-publication-payload-regression.mjs",
