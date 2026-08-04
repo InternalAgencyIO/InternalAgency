@@ -10,3 +10,8 @@
 8. Retried Tokyo and Yokohama with solid sleeveless tailoring; advanced Himeji to silhouette and Fuji to surface refinement in the same four-lane wave.
 9. Accepted the Tokyo and Yokohama silhouette masters. Himeji silhouette and Fuji refinement attempts were blocked, recorded, and left at their immediately previous valid assets.
 10. Published this sanitized seven-asset checkpoint with exact hashes. No intermediate asset is a campaign final or X-eligible yet.
+11. Recovered the Himeji silhouette with a material-and-sleeve-only method and accepted one independent refinement master for every Japan lane.
+12. Advanced Tokyo, Fuji, and Yokohama through three accepted one-variable triggered-detail edits each; Himeji accepted its first relationship-hand detail after an earlier accessory attempt was blocked.
+13. Rejected one Tokyo accessory edit that did not visibly satisfy its assigned detail contract and retained the immediately previous valid master.
+14. Recorded the user's immediate X-backlog restart. Exact publication remains gated because Mexico stills 854 and 855 require a validated different-country final; no premature reservation or malformed two-image group was created.
+15. Published this sanitized 21-asset checkpoint with exact hashes. All files remain non-final and non-X-eligible until their scene validation and campaign accounting gates pass.

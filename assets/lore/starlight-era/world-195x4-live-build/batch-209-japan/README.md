@@ -7,9 +7,9 @@ The files are identity-preserving relationship and silhouette stage masters. The
 Current checkpoint:
 
 - Four relationship masters are accepted.
-- Tokyo, Fuji, and Yokohama have accepted concise silhouette masters.
-- Himeji remains at its relationship master after a blocked silhouette attempt.
-- Fuji remains at its silhouette master after a blocked surface-finishing attempt.
+- Four concise silhouette masters and four refinement masters are accepted.
+- Tokyo has three accepted triggered-detail masters, Himeji has one, Fuji has three, and Yokohama has three.
+- The immediate X-drain override is recorded, but Mexico stills 854 and 855 remain correctly unreserved until at least one Japan scene becomes a validated campaign final.
 - Every accepted file is fully opaque, public-safe, and SHA-256 recorded in `asset-manifest.json`.
 
 No browser state, credentials, Drive identifiers, machine-local paths, rejected media, or unrelated repository changes are included.
