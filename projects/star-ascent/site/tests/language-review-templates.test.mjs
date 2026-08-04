@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { resolve } from "node:path";
+import { isAbsolute, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
@@ -56,6 +56,22 @@ test("blank templates preserve all 456 HOLD results without inferring render evi
     assert.deepEqual(scorecard.summary, { PASS: 3294, FAIL: 0, HOLD: 456, NOT_RUN: 1250 });
     assert.equal(scorecard.assurance.nativeQualityClaimAllowed, false);
     assert.equal(scorecard.assurance.releaseApproved, false);
+  } finally {
+    rmSync(temporary, { recursive: true, force: true });
+  }
+});
+
+test("public scorecard evidence paths are portable and reveal no local workspace root", () => {
+  const temporary = mkdtempSync(resolve(tmpdir(), "iat-language-review-"));
+  try {
+    const scorecard = generateScorecard(resolve(temporary, "scorecard.json"));
+    assert.equal(scorecard.evidenceInputs.nativeReview.path, "public/audits/localization-qa-20260803/review-templates/native-review-signoffs.template.json");
+    assert.equal(scorecard.evidenceInputs.languageId.path, "public/audits/localization-qa-20260803/review-templates/language-id-evidence.template.json");
+    assert.match(scorecard.evidenceInputs.render.path, /^<external>\//u);
+    for (const evidence of Object.values(scorecard.evidenceInputs)) {
+      assert.equal(isAbsolute(evidence.path), false);
+      assert.doesNotMatch(evidence.path, /(?:^[A-Za-z]:|\\)/u);
+    }
   } finally {
     rmSync(temporary, { recursive: true, force: true });
   }

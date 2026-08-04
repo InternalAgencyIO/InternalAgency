@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { basename, dirname, isAbsolute, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const siteRoot = fileURLToPath(new URL("../", import.meta.url));
@@ -70,6 +70,13 @@ const canonical = (value) => {
   return JSON.stringify(value);
 };
 const canonicalDigest = (value) => sha256(canonical(value));
+const publicEvidencePath = (path) => {
+  const repoRelative = relative(siteRoot, path).replaceAll("\\", "/");
+  if (!isAbsolute(repoRelative) && repoRelative !== ".." && !repoRelative.startsWith("../")) {
+    return repoRelative || ".";
+  }
+  return `<external>/${basename(path)}`;
+};
 const normalizeSource = (value) => value.trim().replace(/\s+/gu, " ");
 const decimalZeroCodePoints = [0x30, 0x660, 0x6f0, 0x966, 0x9e6];
 const normalizeDecimalDigits = (value) => [...value].map((character) => {
@@ -831,9 +838,9 @@ async function main() {
       mainnetStateChanged: false,
     },
     evidenceInputs: {
-      nativeReview: { path: options.nativeEvidence, present: context.nativeEvidence.present, parseError: context.nativeEvidence.error ?? null },
-      languageId: { path: options.languageIdEvidence, present: context.languageIdEvidence.present, parseError: context.languageIdEvidence.error ?? null },
-      render: { path: options.renderEvidence, present: context.renderEvidence.present, parseError: context.renderEvidence.error ?? null },
+      nativeReview: { path: publicEvidencePath(options.nativeEvidence), present: context.nativeEvidence.present, parseError: context.nativeEvidence.error ?? null },
+      languageId: { path: publicEvidencePath(options.languageIdEvidence), present: context.languageIdEvidence.present, parseError: context.languageIdEvidence.error ?? null },
+      render: { path: publicEvidencePath(options.renderEvidence), present: context.renderEvidence.present, parseError: context.renderEvidence.error ?? null },
     },
     locales: localeRows,
   };
