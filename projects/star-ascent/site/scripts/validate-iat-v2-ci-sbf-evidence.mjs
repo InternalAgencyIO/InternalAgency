@@ -17,6 +17,7 @@ const expectedBuildContainer = {
   platform: "linux/amd64",
   platformManifestDigest: "sha256:28fde4e63a063727c9520a925de4e9a3be29fcc717b5d759363c23ddea28f59d",
   reference: "solanafoundation/anchor@sha256:05a13b9f0a6d7dd5dc86955dd0e14a098110f12d2862ac5e0cf588049a48841b",
+  registryVerification: "DOCKER_MANIFEST_AND_LOCAL_PLATFORM",
 };
 const expectedArtifacts = {
   programBinary: "target/verifiable/iat_v2.so",
@@ -72,7 +73,7 @@ export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath 
   check(manifestText === `${JSON.stringify(sortJson(manifest), null, 2)}\n`, "manifest JSON is not canonical sorted-key UTF-8 JSON");
 
   exactKeys(manifest, ["schema", "status", "ciProvenance", "buildContainer", "sourceBinding", "programId", "toolchain", "artifacts", "limitations"], "manifest");
-  check(manifest.schema === "iat-v2-ci-verifiable-sbf-evidence/v4", "unexpected evidence schema");
+  check(manifest.schema === "iat-v2-ci-verifiable-sbf-evidence/v5", "unexpected evidence schema");
   check(manifest.status === "BUILD_ONLY_HOLD", "evidence status must remain BUILD_ONLY_HOLD");
   check(manifest.programId === expectedProgramId, "reviewed program ID drifted");
   check(JSON.stringify(manifest.limitations) === JSON.stringify(expectedLimitations), "HOLD limitations drifted");

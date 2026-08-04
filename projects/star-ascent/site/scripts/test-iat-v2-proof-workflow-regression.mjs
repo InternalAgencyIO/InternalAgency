@@ -224,7 +224,7 @@ function validateSbfProofScript(scriptText) {
   ) {
     fail("SBF proof must bind a clean tracked worktree to both source-head and checkout trees");
   }
-  if (!scriptText.includes('"schema": "iat-v2-ci-verifiable-sbf-evidence/v4"') || !scriptText.includes('"status": "BUILD_ONLY_HOLD"')) {
+  if (!scriptText.includes('"schema": "iat-v2-ci-verifiable-sbf-evidence/v5"') || !scriptText.includes('"status": "BUILD_ONLY_HOLD"')) {
     fail("SBF proof must emit the reviewed machine-readable HOLD evidence schema");
   }
   if (
@@ -258,8 +258,11 @@ function validateSbfProofScript(scriptText) {
     || !scriptText.includes('build_container_platform_digest="sha256:28fde4e63a063727c9520a925de4e9a3be29fcc717b5d759363c23ddea28f59d"')
     || !scriptText.includes('--docker-image "$build_container_reference"')
     || !scriptText.includes('Using image \\"$build_container_reference\\"')
+    || !scriptText.includes('docker manifest inspect "$build_container_reference"')
+    || !scriptText.includes('docker pull --platform "$build_container_platform" "$build_container_reference"')
+    || !scriptText.includes("docker image inspect --format '{{.Os}}/{{.Architecture}}' \"$build_container_reference\"")
   ) {
-    fail("SBF proof must run Anchor with the reviewed immutable container index and platform digests");
+    fail("SBF proof must verify and run Anchor with the reviewed immutable container index and platform digests");
   }
 
   return failures;
@@ -409,6 +412,10 @@ const sbfProofMutationProbes = [
     name: "floating Anchor build-container tag",
     script: sbfProofScript.replace('--docker-image "$build_container_reference"', '--docker-image "$build_container_image:$build_container_tag"'),
   },
+  {
+    name: "container platform descriptor verification omitted",
+    script: sbfProofScript.replace('docker manifest inspect "$build_container_reference"', 'printf \'{}\''),
+  },
 ];
 
 for (const probe of sbfProofMutationProbes) {
@@ -423,5 +430,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout/public-run/container-bound binary/IDL evidence, canonical manifest validation, deduplicated branch concurrency, read-only permissions, and 23 fail-closed mutation probes remain bound.`,
+  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout/public-run/container-bound binary/IDL evidence, canonical manifest validation, deduplicated branch concurrency, read-only permissions, and 24 fail-closed mutation probes remain bound.`,
 );

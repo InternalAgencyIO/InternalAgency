@@ -115,7 +115,31 @@ fi
 cargo fmt --all -- --check
 cargo test --workspace --all-targets --locked
 sbf_log="target/iat-v2-sbf-build.log"
-anchor build --verifiable --ignore-keys --docker-image "$build_container_reference" 2>&1 | tee "$sbf_log"
+{
+  echo "Verify immutable container index and platform manifest"
+  actual_platform_digest="$(
+    docker manifest inspect "$build_container_reference" \
+      | python3 -c 'import json, sys
+document = json.load(sys.stdin)
+matches = [entry["digest"] for entry in document.get("manifests", []) if entry.get("platform", {}).get("os") == "linux" and entry.get("platform", {}).get("architecture") == "amd64"]
+if len(matches) != 1:
+    raise SystemExit("expected exactly one linux/amd64 container manifest")
+print(matches[0])'
+  )"
+  if [[ "$actual_platform_digest" != "$build_container_platform_digest" ]]; then
+    echo "FAIL: immutable container platform manifest drifted" >&2
+    exit 1
+  fi
+  docker pull --platform "$build_container_platform" "$build_container_reference"
+  actual_local_platform="$(docker image inspect --format '{{.Os}}/{{.Architecture}}' "$build_container_reference")"
+  if [[ "$actual_local_platform" != "$build_container_platform" ]]; then
+    echo "FAIL: pulled container platform does not match the reviewed Linux/X64 runner" >&2
+    exit 1
+  fi
+  echo "PASS: immutable container index, linux/amd64 descriptor, and local image platform match"
+} 2>&1 | tee "$sbf_log"
+
+anchor build --verifiable --ignore-keys --docker-image "$build_container_reference" 2>&1 | tee -a "$sbf_log"
 
 if ! grep -Fxq "Using image \"$build_container_reference\"" "$sbf_log"; then
   echo "FAIL: Anchor did not use the reviewed immutable build-container digest" >&2
@@ -247,7 +271,7 @@ import sys
     log_bytes,
 ) = sys.argv[1:]
 document = {
-    "schema": "iat-v2-ci-verifiable-sbf-evidence/v4",
+    "schema": "iat-v2-ci-verifiable-sbf-evidence/v5",
     "status": "BUILD_ONLY_HOLD",
     "ciProvenance": {
         "serverUrl": ci_server_url,
@@ -266,6 +290,7 @@ document = {
         "platform": build_container_platform,
         "platformManifestDigest": build_container_platform_digest,
         "reference": build_container_reference,
+        "registryVerification": "DOCKER_MANIFEST_AND_LOCAL_PLATFORM",
     },
     "sourceBinding": {
         "workflowEvent": workflow_event,
