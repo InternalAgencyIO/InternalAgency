@@ -59,13 +59,23 @@ function historicalCatalog(commit) {
 }
 
 function validateAppendOnlyHistory(currentManifest) {
-  const prior = spawnSync("git", ["show", `HEAD:${manifestRelativeToRepository}`], {
-    cwd: repositoryRoot,
-    encoding: "utf8",
-    maxBuffer: 8 * 1024 * 1024,
-  });
-  if (prior.status !== 0) return;
-  const priorManifest = JSON.parse(prior.stdout);
+  const history = git([
+    "log",
+    "--format=%H",
+    "-n",
+    "32",
+    "--",
+    manifestRelativeToRepository,
+  ]).split(/\r?\n/u).filter(Boolean);
+  let priorManifest;
+  for (const commit of history) {
+    const candidate = JSON.parse(git(["show", `${commit}:${manifestRelativeToRepository}`]));
+    if (JSON.stringify(candidate) !== JSON.stringify(currentManifest)) {
+      priorManifest = candidate;
+      break;
+    }
+  }
+  if (!priorManifest) return;
   assert(
     currentManifest.runs.length >= priorManifest.runs.length,
     "run history cannot shrink",

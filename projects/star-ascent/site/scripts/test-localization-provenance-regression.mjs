@@ -93,7 +93,31 @@ try {
     () => writeFileSync(messagesPath, originalMessages),
   );
 
-  console.log("Localization provenance regression passed: baseline plus 6 status, license, assurance, path, history, and artifact mutations fail closed.");
+  writeManifest((value) => { value.runs[0].outcomes.changedLocaleEntries += 1; });
+  const stageRewrite = run("git", ["add", "--", manifestRelative], cloneRoot);
+  assert(stageRewrite.status === 0, `failed to stage committed rewrite probe: ${stageRewrite.stderr}`);
+  const commitRewrite = run(
+    "git",
+    [
+      "-c",
+      "user.name=IAT Provenance Regression",
+      "-c",
+      "user.email=provenance-regression@example.invalid",
+      "commit",
+      "-m",
+      "test: rewrite prior provenance run",
+    ],
+    cloneRoot,
+  );
+  assert(commitRewrite.status === 0, `failed to commit rewrite probe: ${commitRewrite.stderr}`);
+  const committedRewrite = runValidator();
+  assert(committedRewrite.status !== 0, "committed historical rewrite unexpectedly passed");
+  assert(
+    `${committedRewrite.stdout}\n${committedRewrite.stderr}`.includes("localization provenance validation failed"),
+    "committed historical rewrite failed outside the provenance gate",
+  );
+
+  console.log("Localization provenance regression passed: baseline plus 7 status, license, assurance, path, worktree-history, committed-history, and artifact mutations fail closed.");
 } finally {
   rmSync(temporaryRoot, { recursive: true, force: true });
 }
