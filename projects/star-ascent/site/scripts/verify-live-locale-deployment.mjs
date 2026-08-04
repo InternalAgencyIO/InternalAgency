@@ -9,18 +9,9 @@ const contractPath = resolve(siteRoot, "app/i18n/payload-contract.json");
 const payloadRoot = resolve(siteRoot, "public");
 
 const domains = ["https://internalagency.io", "https://ileriakil.com"];
-const representativeRoutes = [
-  { locale: "en", route: "/network", expectedLang: { internalagency: "en", ileriakil: "tr" } },
-  { locale: "zh", route: "/zh/network", expectedLang: "zh-Hans" },
-  { locale: "tr", route: "/tr/network", expectedLang: "tr" },
-  { locale: "fr", route: "/fr/future/predictive-engine", expectedLang: "fr" },
-  { locale: "ar", route: "/ar/network", expectedLang: "ar" },
-  { locale: "es", route: "/es/network", expectedLang: "es" },
-  { locale: "ja", route: "/ja/network", expectedLang: "ja" },
-  { locale: "pt", route: "/pt/network", expectedLang: "pt" },
-];
 
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
+const htmlLanguageTag = (locale) => (locale === "zh" ? "zh-Hans" : locale === "sr" ? "sr-Cyrl" : locale);
 
 async function fetchBytes(url) {
   const response = await fetch(url, {
@@ -105,24 +96,28 @@ const payloadResults = await mapConcurrent(payloadJobs, 10, async ({ domain, loc
 });
 
 const pageJobs = domains.flatMap((domain) =>
-  representativeRoutes.map((entry) => ({ domain, ...entry, label: `${domain}${entry.route}` })),
+  locales.map((locale) => {
+    const route = `/${locale}/network`;
+    return { domain, locale, route, expectedLang: htmlLanguageTag(locale), label: `${domain}${route}` };
+  }),
 );
 const pageResults = await mapConcurrent(pageJobs, 8, async ({ domain, route, expectedLang, label }) => {
   const url = `${domain}${route}?verify=${cacheBuster}`;
   const { response, bytes } = await fetchBytes(url);
   const html = bytes.toString("utf8");
   const actualLang = html.match(/<html[^>]*\blang=["']([^"']+)/i)?.[1];
-  const domainKey = domain.includes("ileriakil.com") ? "ileriakil" : "internalagency";
-  const requiredLang = typeof expectedLang === "string" ? expectedLang : expectedLang[domainKey];
 
   if (response.status !== 200) {
     return { ok: false, label, detail: `HTTP ${response.status} at ${url}` };
   }
+  if (!response.headers.get("content-type")?.toLowerCase().includes("text/html")) {
+    return { ok: false, label, detail: `unexpected content type ${response.headers.get("content-type") ?? "missing"}` };
+  }
   if (bytes.length < 1_000) {
     return { ok: false, label, detail: `unexpectedly small HTML response (${bytes.length} bytes)` };
   }
-  if (actualLang !== requiredLang) {
-    return { ok: false, label, detail: `HTML lang ${actualLang ?? "missing"} != ${requiredLang}` };
+  if (actualLang !== expectedLang) {
+    return { ok: false, label, detail: `HTML lang ${actualLang ?? "missing"} != ${expectedLang}` };
   }
   return { ok: true, label };
 });
@@ -137,7 +132,7 @@ if (failures.length > 0) {
 } else {
   console.log(
     `Live locale deployment PASS: ${payloadResults.length}/${payloadResults.length} exact payloads and ` +
-      `${pageResults.length}/${pageResults.length} representative pages across ${domains.length} active domains; ` +
+      `${pageResults.length}/${pageResults.length} locale pages across ${domains.length} active domains; ` +
       `catalog ${contract.catalogSha256}.`,
   );
   console.log("Read-only verification only: no deployment, signing, funding, or chain state was changed.");
