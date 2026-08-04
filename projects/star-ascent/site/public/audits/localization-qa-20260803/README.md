@@ -2,7 +2,7 @@
 
 **STATIC QA / NOT LAUNCH APPROVAL / MAINNET HOLD / NO DEPLOYMENT PERFORMED**
 
-Generated: 2026-08-04T07:56:09.736Z
+Generated: 2026-08-04T07:48:10.756Z
 
 ## Outcome
 
@@ -16,7 +16,10 @@ The launch-checklist word “GO” is treated semantically as “ready,” not a
 ## Validation
 
 - Exact scorecard: **4544 PASS / 0 FAIL / 456 HOLD / 0 NOT_RUN** across 5000 results.
+- HOLD remediation ledger: [`hold-remediation-ledger.json`](./hold-remediation-ledger.json) separates **300 external-evidence gates** from **156 heuristic editorial reviews** without closing or downgrading any result.
 - Source-bound browser/render evidence: **PASS** for 1250/1250 recorded checks.
+
+The remediation ledger prioritizes `zh`, `ar`, `ja`, `pcm`, `bs` because each has five heuristic HOLDs, while preserving all language-identification and native-review gates. Automation may prepare candidates and evidence inventories; it may not approve native quality or independent language identification.
 
 Historical command record from 2026-08-03; regenerating this summary does not claim these commands were rerun:
 

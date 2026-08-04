@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-04T07:56:09.736Z",
+  "generatedAt": "2026-08-04T07:48:10.756Z",
+  "generatedAtPolicy": "SOURCE_SCORECARD_GENERATED_AT_FOR_REPRODUCIBLE_OUTPUT",
   "title": "Internal Agency multilingual usability and localization QA",
   "publicStatus": "DRAFT / STATIC QA / NOT LAUNCH APPROVAL",
   "mainnetDecision": "HOLD (unchanged by this package)",
@@ -101,6 +102,84 @@
       "mainnetStateChanged": false
     }
   },
+  "holdRemediationLedger": {
+    "path": "hold-remediation-ledger.json",
+    "generatedAt": "2026-08-04T09:07:05.3030188Z",
+    "status": "HOLD",
+    "summary": {
+      "total": 456,
+      "static": 206,
+      "native": 250,
+      "externalEvidenceOnly": 300,
+      "heuristicEditorialReview": 156,
+      "automationMayApprove": 0
+    },
+    "priorityLocales": [
+      {
+        "locale": "zh",
+        "heuristicHoldCount": 5,
+        "checkIds": [
+          "LQA-051",
+          "LQA-055",
+          "LQA-057",
+          "LQA-058",
+          "LQA-060"
+        ]
+      },
+      {
+        "locale": "ar",
+        "heuristicHoldCount": 5,
+        "checkIds": [
+          "LQA-051",
+          "LQA-055",
+          "LQA-057",
+          "LQA-058",
+          "LQA-060"
+        ]
+      },
+      {
+        "locale": "ja",
+        "heuristicHoldCount": 5,
+        "checkIds": [
+          "LQA-051",
+          "LQA-052",
+          "LQA-057",
+          "LQA-058",
+          "LQA-060"
+        ]
+      },
+      {
+        "locale": "pcm",
+        "heuristicHoldCount": 5,
+        "checkIds": [
+          "LQA-051",
+          "LQA-055",
+          "LQA-056",
+          "LQA-057",
+          "LQA-058"
+        ]
+      },
+      {
+        "locale": "bs",
+        "heuristicHoldCount": 5,
+        "checkIds": [
+          "LQA-051",
+          "LQA-055",
+          "LQA-056",
+          "LQA-057",
+          "LQA-058"
+        ]
+      }
+    ],
+    "assurance": {
+      "allFiveThousandPassed": false,
+      "nativeQualityClaimAllowed": false,
+      "languageIdIndependentlyVerified": false,
+      "heuristicHoldsResolved": false,
+      "releaseApproved": false,
+      "mainnetStateChanged": false
+    }
+  },
   "renderEvidence": {
     "path": "../../../app/i18n/language-render-evidence.v1.json",
     "generatedAt": "2026-08-04T07:46:41.509Z",
@@ -180,6 +259,10 @@
     "public/audits/localization-qa-20260803/language-qa-scorecard.json": {
       "sha256": "4e79fe371e443ffb6b9bdb98a8613f4adb0342f63ced402a8a446b1a6a6edef1",
       "bytes": 1621901
+    },
+    "public/audits/localization-qa-20260803/hold-remediation-ledger.json": {
+      "sha256": "4b1674fc0432bc81ca0a3699e5d15942ea02dd09a6447c37d0d6f4f02f6e8cdd",
+      "bytes": 7624
     }
   },
   "browserQa": {

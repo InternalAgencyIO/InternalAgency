@@ -21,10 +21,11 @@ const trackedFiles = [
   "public/audits/localization-qa-20260803/browser-qa.json",
   "app/i18n/language-render-evidence.v1.json",
   "public/audits/localization-qa-20260803/language-qa-scorecard.json",
+  "public/audits/localization-qa-20260803/hold-remediation-ledger.json",
 ];
 const readCanonical = (path) => readCanonicalTrackedFile({ repoRoot, absolutePath: join(root, path) });
 const readJson = async (path) => JSON.parse(readCanonical(path).toString("utf8"));
-const [catalog, critical, overrides, metadata, routeSeo, pending, scorecard, renderEvidence] = await Promise.all([
+const [catalog, critical, overrides, metadata, routeSeo, pending, scorecard, renderEvidence, holdLedger] = await Promise.all([
   readJson("app/i18n/messages.json"),
   readJson("app/i18n/critical-ui-source.json"),
   readJson("app/i18n/critical-ui-overrides.json"),
@@ -33,6 +34,7 @@ const [catalog, critical, overrides, metadata, routeSeo, pending, scorecard, ren
   readJson("app/i18n/pending-visible-source.json"),
   readJson("public/audits/localization-qa-20260803/language-qa-scorecard.json"),
   readJson("app/i18n/language-render-evidence.v1.json"),
+  readJson("public/audits/localization-qa-20260803/hold-remediation-ledger.json"),
 ]);
 const browserQa = await readJson("public/audits/localization-qa-20260803/browser-qa.json");
 const sources = Object.keys(catalog.messages.en);
@@ -69,6 +71,10 @@ const scorecardResults = Object.values(scorecard.summary ?? {}).reduce((total, c
 if (scorecard.scope?.locales !== 50 || scorecard.scope?.checksPerLocale !== 100 || scorecardResults !== 5000) throw new Error("Language QA scorecard cardinality is not 100 checks across 50 locales");
 if (scorecard.status !== "HOLD" || scorecard.summary.FAIL !== 0 || scorecard.summary.NOT_RUN !== 0 || scorecard.summary.HOLD === 0) throw new Error("Language QA scorecard must remain a zero-FAIL, zero-NOT_RUN, evidence-dependent HOLD");
 if (scorecard.assurance?.nativeQualityClaimAllowed !== false || scorecard.assurance?.releaseApproved !== false) throw new Error("Language QA scorecard must not claim native quality or release approval");
+if (holdLedger.sourceBinding?.scorecardSha256 !== files["public/audits/localization-qa-20260803/language-qa-scorecard.json"].sha256) throw new Error("Language QA HOLD ledger is not bound to the current scorecard bytes");
+if (JSON.stringify(holdLedger.scorecardSummary) !== JSON.stringify(scorecard.summary)) throw new Error("Language QA HOLD ledger summary does not match the current scorecard");
+if (holdLedger.status !== "HOLD" || holdLedger.mainnetStatus !== "UNSCHEDULED_HOLD" || holdLedger.holdSummary?.externalEvidenceOnly !== 300 || holdLedger.holdSummary?.heuristicEditorialReview !== 156) throw new Error("Language QA HOLD ledger must retain the reviewed fail-closed split");
+if (holdLedger.assurance?.nativeQualityClaimAllowed !== false || holdLedger.assurance?.releaseApproved !== false) throw new Error("Language QA HOLD ledger must not claim native quality or release approval");
 const renderRecords = Object.values(renderEvidence.locales ?? {}).flatMap((locale) => Object.values(locale.checks ?? {}));
 if (renderEvidence.status !== "PASS" || renderRecords.length !== 1250 || renderRecords.some((record) => record.status !== "PASS")) throw new Error("Language render evidence must contain exactly 1,250 passing results");
 const locales = Object.keys(catalog.messages).map((locale) => {
@@ -89,7 +95,8 @@ const locales = Object.keys(catalog.messages).map((locale) => {
 });
 const report = {
   schemaVersion: 1,
-  generatedAt: new Date().toISOString(),
+  generatedAt: scorecard.generatedAt,
+  generatedAtPolicy: "SOURCE_SCORECARD_GENERATED_AT_FOR_REPRODUCIBLE_OUTPUT",
   title: "Internal Agency multilingual usability and localization QA",
   publicStatus: "DRAFT / STATIC QA / NOT LAUNCH APPROVAL",
   mainnetDecision: "HOLD (unchanged by this package)",
@@ -137,6 +144,14 @@ const report = {
     lanes: scorecard.lanes,
     assurance: scorecard.assurance,
   },
+  holdRemediationLedger: {
+    path: "hold-remediation-ledger.json",
+    generatedAt: holdLedger.generatedAt,
+    status: holdLedger.status,
+    summary: holdLedger.holdSummary,
+    priorityLocales: holdLedger.priorityLocales,
+    assurance: holdLedger.assurance,
+  },
   renderEvidence: {
     path: "../../../app/i18n/language-render-evidence.v1.json",
     generatedAt: renderEvidence.generatedAt,
@@ -156,7 +171,10 @@ const historicalValidation = report.historicalValidation.commands.map((item) => 
 }).join("\n");
 const validation = [
   `- Exact scorecard: **${scorecard.summary.PASS} PASS / ${scorecard.summary.FAIL} FAIL / ${scorecard.summary.HOLD} HOLD / ${scorecard.summary.NOT_RUN} NOT_RUN** across ${scorecardResults} results.`,
+  `- HOLD remediation ledger: [\`hold-remediation-ledger.json\`](./hold-remediation-ledger.json) separates **${holdLedger.holdSummary.externalEvidenceOnly} external-evidence gates** from **${holdLedger.holdSummary.heuristicEditorialReview} heuristic editorial reviews** without closing or downgrading any result.`,
   `- Source-bound browser/render evidence: **${renderEvidence.status}** for ${renderRecords.length}/${renderRecords.length} recorded checks.`,
+  "",
+  `The remediation ledger prioritizes ${holdLedger.priorityLocales.map(({ locale }) => `\`${locale}\``).join(", ")} because each has five heuristic HOLDs, while preserving all language-identification and native-review gates. Automation may prepare candidates and evidence inventories; it may not approve native quality or independent language identification.`,
   "",
   "Historical command record from 2026-08-03; regenerating this summary does not claim these commands were rerun:",
   "",
