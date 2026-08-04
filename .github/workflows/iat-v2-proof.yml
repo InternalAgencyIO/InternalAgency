@@ -68,17 +68,21 @@ jobs:
       - name: Install the pinned official Solana and Anchor toolchain
         run: |
           rustup toolchain install 1.97.1 --profile minimal
-          sh -c "$(curl --proto '=https' --tlsv1.2 -sSfL https://release.anza.xyz/v3.1.10/install)"
+          agave_install_init="$RUNNER_TEMP/agave-install-init-v3.1.10"
+          curl --proto '=https' --tlsv1.2 -sSfL \
+            https://release.anza.xyz/v3.1.10/agave-install-init-x86_64-unknown-linux-gnu \
+            -o "$agave_install_init"
+          echo "ffb25b5f2c9649a13b566b26e48d441a1eaf6d3c50d2198a70e19a5e1dfae96b  $agave_install_init" \
+            | sha256sum --check --strict -
+          chmod u+x "$agave_install_init"
+          "$agave_install_init" v3.1.10
           cargo +1.97.1 install \
             --git https://github.com/solana-foundation/anchor \
-            --tag v1.0.2 \
+            --rev 1314a6b83b16e6a31947b372d57988fd0e81559c \
             --locked \
             --force \
-            avm
-          avm install 1.0.2
-          avm use 1.0.2
+            anchor-cli
           {
-            echo "$HOME/.avm/bin"
             echo "$HOME/.local/share/solana/install/active_release/bin"
             echo "$HOME/.cargo/bin"
           } >> "$GITHUB_PATH"

@@ -54,6 +54,10 @@ const requiredActionPins = new Map([
   ["actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020", 1],
   ["actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02", 1],
 ]);
+const agaveInstallerUrl =
+  "https://release.anza.xyz/v3.1.10/agave-install-init-x86_64-unknown-linux-gnu";
+const agaveInstallerSha256 = "ffb25b5f2c9649a13b566b26e48d441a1eaf6d3c50d2198a70e19a5e1dfae96b";
+const anchorSourceRevision = "1314a6b83b16e6a31947b372d57988fd0e81559c";
 
 function validateConfiguration(workflowText, scripts) {
   const failures = [];
@@ -104,6 +108,23 @@ function validateConfiguration(workflowText, scripts) {
   }
   if (actionUses.length !== [...requiredActionPins.values()].reduce((sum, count) => sum + count, 0)) {
     fail("release-proof workflow contains an unreviewed third-party action");
+  }
+  if (
+    !workflowText.includes(agaveInstallerUrl)
+    || !workflowText.includes(`${agaveInstallerSha256}  $agave_install_init`)
+    || !workflowText.includes("sha256sum --check --strict -")
+    || !workflowText.includes('"$agave_install_init" v3.1.10')
+  ) {
+    fail("Agave installer must remain URL-, version-, and SHA-256-bound before execution");
+  }
+  if (
+    !workflowText.includes(`--rev ${anchorSourceRevision}`)
+    || !workflowText.includes("            anchor-cli")
+  ) {
+    fail("Anchor CLI must remain bound to the reviewed source revision");
+  }
+  if (/sh -c "\$\(curl|--tag\s+v1\.0\.2|\bavm\s+(?:install|use)\b/.test(workflowText)) {
+    fail("release-proof workflow reintroduced a mutable toolchain bootstrap path");
   }
 
   for (const command of commandLines) {
@@ -185,6 +206,16 @@ const mutationProbes = [
     ),
     scripts: packageJson.scripts,
   },
+  {
+    name: "drifted Agave installer checksum",
+    workflow: workflow.replace(agaveInstallerSha256, `${agaveInstallerSha256.slice(0, -1)}0`),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "floating Anchor source tag",
+    workflow: workflow.replace(`--rev ${anchorSourceRevision}`, "--tag v1.0.2"),
+    scripts: packageJson.scripts,
+  },
 ];
 
 for (const probe of mutationProbes) {
@@ -199,5 +230,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 5 immutable action uses, read-only permissions, and 5 fail-closed mutation probes remain bound.`,
+  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 5 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, read-only permissions, and 7 fail-closed mutation probes remain bound.`,
 );
