@@ -3,7 +3,7 @@
   "series": "World 195x4 Mile High",
   "batch": 210,
   "country": "Egypt",
-  "status": "durable-non-final-checkpoint",
+  "status": "complete",
   "assets": [
     {
       "number": 860,
@@ -46,6 +46,34 @@
       "path": "details/861-detail-01-boot-wand.png",
       "bytes": 2382695,
       "sha256": "333d971bd6cd936ea13e2025498a943823495ca994634d608c00ea617f1058fa"
+    },
+    {
+      "number": 860,
+      "stage": "final",
+      "path": "final/860-egypt-cairo-tower-nile-route-light-grid.png",
+      "bytes": 2398465,
+      "sha256": "cf945fe8b9ed7b2da60501c908ed619680bcae3032c8f3b5abce9c884119e01b"
+    },
+    {
+      "number": 861,
+      "stage": "final",
+      "path": "final/861-egypt-alexandria-bibliotheca-cabin-signal-cipher.png",
+      "bytes": 2382695,
+      "sha256": "333d971bd6cd936ea13e2025498a943823495ca994634d608c00ea617f1058fa"
+    },
+    {
+      "number": 862,
+      "stage": "final",
+      "path": "final/862-egypt-white-desert-star-map-relay.png",
+      "bytes": 2429895,
+      "sha256": "3890ce8c02b19acbdf6e48fd402acf05c42f2b6fb4c3b505e0e515dc6b4b1758"
+    },
+    {
+      "number": 863,
+      "stage": "final",
+      "path": "final/863-egypt-siwa-oasis-arrival-beacon-finale.png",
+      "bytes": 2318694,
+      "sha256": "c8a9a2f100cb56078b33af6221737ab6b87d1c2b80b5dc762daef00547cfffa7"
     }
   ],
   "validation": {
@@ -56,7 +84,7 @@
     "PAWSPresent": true,
     "completeFootwearAtAcceptedStage": true,
     "rejectedMediaPublished": false,
-    "campaignFinal": false,
+    "campaignFinal": true,
     "xEligible": false
   }
 }
