@@ -94,8 +94,8 @@ function validateConfiguration(workflowText, scripts) {
   if (!/^permissions:\n\s+contents:\s+read\s*$/m.test(workflowText)) {
     fail("release-proof workflow must retain read-only repository permissions");
   }
-  if (!/concurrency:\n(?:\s+#.*\n)*\s+group:\s+iat-v2-proof-\$\{\{ github\.event\.pull_request\.head\.ref \|\| github\.ref_name \}\}\n\s+cancel-in-progress:\s+true/m.test(workflowText)) {
-    fail("release-proof workflow must deduplicate push and pull-request runs for one source branch");
+  if (!/concurrency:\n(?:\s+#.*\n)*\s+group:\s+iat-v2-proof-\$\{\{ github\.event\.pull_request\.head\.sha \|\| github\.sha \}\}\n\s+cancel-in-progress:\s+true/m.test(workflowText)) {
+    fail("release-proof workflow must deduplicate events for one exact source head without cancelling another published head");
   }
   if (/continue-on-error:\s+true/.test(workflowText)) {
     fail("release-proof workflow must not weaken a gate with continue-on-error");
@@ -316,10 +316,10 @@ const mutationProbes = [
     scripts: packageJson.scripts,
   },
   {
-    name: "duplicate push and pull-request concurrency groups",
+    name: "cross-head branch concurrency cancellation",
     workflow: workflow.replace(
+      "github.event.pull_request.head.sha || github.sha",
       "github.event.pull_request.head.ref || github.ref_name",
-      "github.ref",
     ),
     scripts: packageJson.scripts,
   },
@@ -430,5 +430,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout/public-run/container-bound binary/IDL evidence, canonical manifest validation, deduplicated branch concurrency, read-only permissions, and 24 fail-closed mutation probes remain bound.`,
+  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout/public-run/container-bound binary/IDL evidence, canonical manifest validation, exact-source-head concurrency, read-only permissions, and 24 fail-closed mutation probes remain bound.`,
 );

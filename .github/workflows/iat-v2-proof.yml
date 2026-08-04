@@ -18,8 +18,10 @@ permissions:
 
 concurrency:
   # A push to the public draft branch and its pull_request event describe the
-  # same source head. Share one group so the newer event cancels duplicate work.
-  group: iat-v2-proof-${{ github.event.pull_request.head.ref || github.ref_name }}
+  # same source head. Deduplicate only that exact head; a later public commit
+  # must not cancel source-bound proof that is already running for an earlier
+  # published increment.
+  group: iat-v2-proof-${{ github.event.pull_request.head.sha || github.sha }}
   cancel-in-progress: true
 
 defaults:
