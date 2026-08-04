@@ -2,7 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 
 const catalogUrl = new URL("../app/i18n/messages.json", import.meta.url);
 const catalog = JSON.parse(await readFile(catalogUrl, "utf8"));
-const forbiddenBidiControls = /[\u202A-\u202E\u2066-\u2069]/gu;
+const forbiddenControls = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F\u202A-\u202E\u2066-\u2069]/gu;
 const pairedDelimiters = [["(", ")"], ["[", "]"], ["{", "}"], ["“", "”"], ["«", "»"], ["「", "」"], ["『", "』"]];
 const sourceKeys = Object.keys(catalog.messages.en);
 const retainedKeys = sourceKeys.filter(
@@ -23,7 +23,8 @@ function occurrences(value, token) {
 }
 
 function repairBalancedDelimiters(value) {
-  let repaired = value;
+  const sequenceMarker = value.match(/^\[\d{1,3}\]\s*/u)?.[0] ?? "";
+  let repaired = sequenceMarker ? value.slice(sequenceMarker.length) : value;
   for (const [open, close] of pairedDelimiters) {
     let openCount = occurrences(repaired, open);
     let closeCount = occurrences(repaired, close);
@@ -37,7 +38,7 @@ function repairBalancedDelimiters(value) {
     const lastQuote = repaired.lastIndexOf('"');
     repaired = `${repaired.slice(0, lastQuote)}${repaired.slice(lastQuote + 1)}`;
   }
-  return repaired;
+  return `${sequenceMarker}${repaired}`;
 }
 
 function questionPattern(locale) {
@@ -56,9 +57,21 @@ for (const [locale, messages] of Object.entries(catalog.messages)) {
     if (normalized !== translation) {
       normalizedUnicodeStrings += 1;
     }
-    normalized = normalized.replace(forbiddenBidiControls, "");
+    normalized = normalized.replace(forbiddenControls, "");
     if (normalized !== translation) {
       sanitizedBidiControls += 1;
+    }
+
+    const sourceSequenceMarker = source.match(
+      /^(\[\d{1,3}\]|\d{2}\s*\/\/)\s*/u,
+    )?.[1];
+    if (sourceSequenceMarker && !normalized.startsWith(sourceSequenceMarker)) {
+      const withoutTranslatedMarker = normalized.replace(
+        /^\s*(?:[\[(]?\p{Nd}{1,3}[\])\].:-]?|\p{Nd}{2}\s*[/\\|:.-]{1,2})\s*/u,
+        "",
+      );
+      normalized = `${sourceSequenceMarker} ${withoutTranslatedMarker}`.trimEnd();
+      restoredSequenceMarkers += 1;
     }
 
     const balanced = repairBalancedDelimiters(normalized);
@@ -74,18 +87,6 @@ for (const [locale, messages] of Object.entries(catalog.messages)) {
     if (source.includes("!") && !/[!！՜]/u.test(normalized)) {
       normalized = `${normalized.trimEnd()}!`;
       restoredSentenceIntent += 1;
-    }
-
-    const sourceSequenceMarker = source.match(
-      /^(\[\d{1,3}\]|\d{2}\s*\/\/)\s*/u,
-    )?.[1];
-    if (sourceSequenceMarker && !normalized.startsWith(sourceSequenceMarker)) {
-      const withoutTranslatedMarker = normalized.replace(
-        /^\s*(?:[\[(]?\p{Nd}{1,3}[\])\].:-]?|\p{Nd}{2}\s*[/\\|:.-]{1,2})\s*/u,
-        "",
-      );
-      normalized = `${sourceSequenceMarker} ${withoutTranslatedMarker}`.trimEnd();
-      restoredSequenceMarkers += 1;
     }
 
     const sourceDoubleSlashCount = (source.match(/\/\//gu) ?? []).length;

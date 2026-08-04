@@ -21,7 +21,8 @@ const criticalUi = JSON.parse(await readFile(new URL("../app/i18n/critical-ui-so
 const criticalUiOverrides = JSON.parse(await readFile(new URL("../app/i18n/critical-ui-overrides.json", import.meta.url), "utf8"));
 const protectedTerms = [
   "Internal Agency", "STAR ASCENT", "$IAT", "$SOL", "IAT", "SOLANA", "Solana", "Model T", "Genesis",
-  "APY", "CCC-Agent", "Radiance", "Ellie", "Alia", "UTC", "İSTANBUL", "Devnet", "CC0", "FDF Guard", "mainnet", "HOLD",
+  "APY", "CCC", "CCC-Agent", "RPC", "SBF", "NFT", "DAO", "JSON", "D1", "PKCE", "OAuth", "SHA-256",
+  "Radiance", "Ellie", "Alia", "UTC", "İSTANBUL", "Devnet", "CC0", "FDF Guard", "mainnet", "HOLD",
 ];
 const approvedEquivalents = {
   tr: { "Internal Agency": "İleri Akıl", Genesis: "Başlangıç" },
@@ -59,6 +60,9 @@ for (const locale of expectedLocales) {
       );
     }
     assert.doesNotMatch(catalog.messages[locale][source], /ZXQTERM\d+QXZ/i, `${locale} leaked a translation placeholder for ${source}`);
+    if (/^[0-9a-f]{64}$/u.test(source)) {
+      assert.equal(catalog.messages[locale][source], source, `${locale} changed immutable SHA-256 evidence text`);
+    }
     assert.doesNotMatch(
       catalog.messages[locale][source],
       /__IA_(?:TERM|EXACT)_[A-Z]+__/u,

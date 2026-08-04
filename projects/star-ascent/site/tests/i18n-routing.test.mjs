@@ -94,6 +94,9 @@ test("multilingual countries honor a locally appropriate browser language", asyn
 });
 
 test("localized paths render canonical routes with locale metadata", async () => {
+  const payloadContract = JSON.parse(
+    await readFile(new URL("../app/i18n/payload-contract.json", import.meta.url), "utf8"),
+  );
   const french = await request("/fr/future");
   assert.equal(french.status, 200);
   assert.equal(french.headers.get("content-language"), "fr");
@@ -111,7 +114,11 @@ test("localized paths render canonical routes with locale metadata", async () =>
   assert.equal((frenchHead.match(/rel="canonical"/g) ?? []).length, 1);
   assert.match(frenchHtml, /"@type":"WebPage"/i);
   assert.match(frenchHtml, /"inLanguage":"fr"/i);
-  assert.match(frenchHtml, /rel="preload" href="\/i18n\/fr\.json" as="fetch"/i);
+  const payloadPath = `/${payloadContract.assetNamespace}/${payloadContract.catalogSha256.slice(0, 16)}/fr.json`;
+  assert.match(
+    frenchHtml,
+    new RegExp(`rel="preload" href="${payloadPath.replaceAll("/", "\\/")}" as="fetch"`, "i"),
+  );
   assert.equal((frenchHtml.match(/role="menuitem"/g) ?? []).length, 50);
 
   const arabic = await request("/ar");

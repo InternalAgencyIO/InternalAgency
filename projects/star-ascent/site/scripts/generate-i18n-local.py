@@ -19,6 +19,7 @@ CATALOG_PATH = ROOT / "app" / "i18n" / "messages.json"
 FUTURE_COPY_PATH = ROOT / "app" / "future" / "future-copy.json"
 CRITICAL_UI_PATH = ROOT / "app" / "i18n" / "critical-ui-source.json"
 CRITICAL_UI_OVERRIDES_PATH = ROOT / "app" / "i18n" / "critical-ui-overrides.json"
+CONFIG_PATH = ROOT / "app" / "i18n" / "config.ts"
 MODEL_ID = "facebook/nllb-200-distilled-600M"
 
 LANGUAGES = {
@@ -36,7 +37,8 @@ LANGUAGES = {
 
 PROTECTED_TERMS = [
     "Internal Agency", "STAR ASCENT", "$IAT", "$SOL", "IAT", "SOLANA", "Solana", "Model T", "Genesis",
-    "APY", "CCC-Agent", "Radiance", "Ellie", "Alia", "UTC", "İSTANBUL", "Devnet", "CC0", "FDF Guard", "mainnet", "HOLD",
+    "APY", "CCC", "CCC-Agent", "RPC", "SBF", "NFT", "DAO", "JSON", "D1", "PKCE", "OAuth", "SHA-256",
+    "Radiance", "Ellie", "Alia", "UTC", "İSTANBUL", "Devnet", "CC0", "FDF Guard", "mainnet", "HOLD",
 ]
 APPROVED_EQUIVALENTS = {
     "tr": {"Internal Agency": "İleri Akıl", "Genesis": "Başlangıç"},
@@ -47,12 +49,22 @@ TURKISH_WORDS = {
     "yalnızca", "yayın", "yok",
 }
 TRANSLATION_ALGORITHM_VERSION = 2
+
+
+def protected_term_pattern(term: str) -> str:
+    escaped = re.escape(term)
+    if re.fullmatch(r"[A-Za-z0-9-]+", term):
+        return rf"(?<![\w]){escaped}(?![\w])"
+    return escaped
+
+
 PROTECTED_PATTERN = re.compile(
     "(" + "|".join([
-        *(re.escape(term) for term in sorted(PROTECTED_TERMS, key=len, reverse=True)),
+        *(protected_term_pattern(term) for term in sorted(PROTECTED_TERMS, key=len, reverse=True)),
         r"https?://[^\s]+",
         r"@[A-Za-z0-9_]+",
         r"\$[A-Z][A-Z0-9_-]*",
+        r"\b[0-9a-f]{64}\b",
         r"\bT\+\d+(?:[.,:]\d+)*\b",
         r"(?<![\w])\d+(?:[.,:]\d+)*(?:[A-Za-z]+|%)?(?![\w])",
     ]) + ")",
@@ -200,7 +212,7 @@ def collect_pairs(source, translated, output: dict[str, str]) -> None:
 def persist(catalog: dict) -> None:
     temporary = CATALOG_PATH.with_suffix(".json.tmp")
     payload = json.dumps(catalog, ensure_ascii=False, indent=2) + "\n"
-    temporary.write_text(payload, encoding="utf-8")
+    temporary.write_bytes(payload.encode("utf-8"))
     for attempt in range(5):
         try:
             temporary.replace(CATALOG_PATH)
@@ -221,6 +233,8 @@ def main() -> None:
         json.dumps(sorted(critical_sources), ensure_ascii=False, separators=(",", ":")).encode("utf-8")
     ).hexdigest()
     refresh_critical = catalog.get("meta", {}).get("criticalUiSourceDigest") != critical_source_digest
+    refresh_source_matches = os.environ.get("I18N_REFRESH_SOURCE_MATCHES") == "1"
+    native_language_names = set(re.findall(r'nativeName:\s*"([^"]+)"', CONFIG_PATH.read_text(encoding="utf-8")))
     if len(sources) < 250:
         raise RuntimeError(f"Expected a whole-site English catalog; found {len(sources)} strings")
 
@@ -261,6 +275,12 @@ def main() -> None:
             if not isinstance(existing.get(source), str)
             or not existing[source].strip()
             or (refresh_critical and source in critical_sources)
+            or (
+                refresh_source_matches
+                and existing[source].strip() == source.strip()
+                and source not in native_language_names
+                and any(segment[0] == "prose" for segment in segment_source(source))
+            )
         ]
         if not missing_sources:
             print(f"Reusing complete {locale} catalog.", flush=True)
@@ -285,6 +305,18 @@ def main() -> None:
     for locale, overrides in critical_overrides.items():
         catalog["messages"][locale].update(overrides)
         catalog["messages"][locale] = {source: catalog["messages"][locale][source] for source in sources}
+    literal_only_repairs = 0
+    literal_only_sources = [
+        source for source in sources
+        if all(segment[0] == "literal" for segment in segment_source(source))
+    ]
+    for locale, dictionary in catalog["messages"].items():
+        if locale == "en":
+            continue
+        for source in sources:
+            if all(segment[0] == "literal" for segment in segment_source(source)) and dictionary[source] != source:
+                dictionary[source] = source
+                literal_only_repairs += 1
     remote_assisted = "remote-assisted" in catalog.get("meta", {}).get("translationMode", "")
     catalog["meta"]["translationEngine"] = (
         f"mixed cached {MODEL_ID} plus Google Translate draft gap fill"
@@ -295,6 +327,19 @@ def main() -> None:
         if remote_assisted else "local GPU generation; static committed output; no runtime translation service"
     )
     catalog["meta"]["criticalUiSourceDigest"] = critical_source_digest
+    catalog["meta"]["literalOnlyIntegrity"] = {
+        "mode": "DETERMINISTIC_EXACT_SOURCE",
+        "algorithmVersion": 1,
+        "sourceCount": len(literal_only_sources),
+        "verifiedLocaleEntries": len(literal_only_sources) * len(LANGUAGES),
+        "repairedThisRun": literal_only_repairs,
+    }
+    if refresh_source_matches:
+        catalog["meta"]["sourceMatchRefresh"] = {
+            "mode": "LOCAL_NLLB_MACHINE_DRAFT_NATIVE_REVIEW_REQUIRED",
+            "algorithmVersion": 1,
+            "literalOnlyRepairs": literal_only_repairs,
+        }
     persist(catalog)
     print(f"Completed {len(LANGUAGES) + 1} locale catalogs.", flush=True)
 
