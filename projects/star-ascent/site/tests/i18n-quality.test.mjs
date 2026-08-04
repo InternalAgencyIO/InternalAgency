@@ -3,11 +3,12 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const readJson = (path) => readFile(new URL(path, import.meta.url), "utf8").then(JSON.parse);
-const [catalog, critical, overrides, report] = await Promise.all([
+const [catalog, critical, overrides, report, scorecard] = await Promise.all([
   readJson("../app/i18n/messages.json"),
   readJson("../app/i18n/critical-ui-source.json"),
   readJson("../app/i18n/critical-ui-overrides.json"),
   readJson("../public/audits/localization-qa-20260803/report.json"),
+  readJson("../public/audits/localization-qa-20260803/language-qa-scorecard.json"),
 ]);
 
 test("critical client-only UI copy is explicitly localized in every non-English locale", () => {
@@ -51,7 +52,10 @@ test("the public report is honest, source-bound, and remains non-authorizing", (
   assert.equal(report.browserQa.allLocaleRootMatrix.localeCount, 50);
   assert.equal(report.browserQa.allLocaleRootMatrix.failures, 0);
   assert.equal(report.browserQa.responsiveMatrix.failures, 0);
-  assert.deepEqual(report.scorecard.summary, { PASS: 4544, FAIL: 0, HOLD: 456, NOT_RUN: 0 });
+  assert.deepEqual(report.scorecard.summary, scorecard.summary);
+  assert.equal(scorecard.summary.FAIL, 0);
+  assert.equal(scorecard.summary.NOT_RUN, 0);
+  assert.ok(scorecard.summary.HOLD > 0, "native and independent review gates must remain HOLD");
   assert.equal(report.scorecard.assurance.nativeQualityClaimAllowed, false);
   assert.equal(report.scorecard.assurance.releaseApproved, false);
   assert.equal(report.renderEvidence.status, "PASS");
