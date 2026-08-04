@@ -1,73 +1,174 @@
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 
 import { readCanonicalTrackedFile } from "./lib/read-canonical-tracked-file.mjs";
 
-const siteRoot = process.cwd();
-const repoRoot = resolve(siteRoot, "../../..");
-const auditRoot = resolve(siteRoot, "public/audits/localization-qa-20260803");
-const readArtifact = (name) => readCanonicalTrackedFile({ repoRoot, absolutePath: resolve(auditRoot, name) });
-const scorecardBytes = readArtifact("language-qa-scorecard.json");
-const scorecard = JSON.parse(scorecardBytes.toString("utf8"));
-const ledger = JSON.parse(readArtifact("hold-remediation-ledger.json").toString("utf8"));
+const expectedLocales = [
+  "en", "zh", "es", "hi", "fr", "ar", "bn", "pt", "id", "ur",
+  "ru", "de", "ja", "pcm", "tr", "sq", "ca", "be", "nl", "bs",
+  "bg", "hr", "el", "cs", "da", "et", "fi", "hu", "is", "ga",
+  "it", "lv", "lt", "lb", "mk", "mt", "no", "pl", "ro", "sr",
+  "sk", "sl", "sv", "uk", "ht", "gn", "qu", "hy", "az", "ka",
+];
+const expectedCheckIds = Array.from(
+  { length: 100 },
+  (_, index) => `LQA-${String(index + 1).padStart(3, "0")}`,
+);
+const statusVocabulary = ["PASS", "FAIL", "HOLD", "NOT_RUN"];
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
-const check = (condition, message) => {
-  if (!condition) throw new Error(`Language QA HOLD ledger validation failed: ${message}`);
+const sameJson = (left, right) => JSON.stringify(left) === JSON.stringify(right);
+const summarize = (results) => results.reduce(
+  (summary, result) => ({ ...summary, [result.status]: summary[result.status] + 1 }),
+  { PASS: 0, FAIL: 0, HOLD: 0, NOT_RUN: 0 },
+);
+const aggregateStatus = (summary) => {
+  if (summary.FAIL > 0) return "FAIL";
+  if (summary.HOLD > 0) return "HOLD";
+  if (summary.NOT_RUN > 0) return "NOT_RUN";
+  return "PASS";
+};
+const expectedMode = (index) => {
+  if (index < 70) return "STATIC";
+  if (index < 95) return "RENDER";
+  return "NATIVE";
 };
 
-check(ledger.schemaVersion === 1, "unexpected schema version");
-check(ledger.status === "HOLD", "ledger must remain HOLD");
-check(ledger.mainnetStatus === "UNSCHEDULED_HOLD", "Mainnet must remain unscheduled HOLD");
-check(ledger.sourceBinding.scorecardSha256 === sha256(scorecardBytes), "scorecard hash mismatch");
-check(ledger.sourceBinding.scorecardGeneratedAt === scorecard.generatedAt, "scorecard generation time mismatch");
-check(ledger.sourceBinding.catalogHeadCommit === scorecard.sourceBinding.headCommit, "catalog source commit mismatch");
-check(ledger.sourceBinding.catalogHeadTree === scorecard.sourceBinding.headTree, "catalog source tree mismatch");
-check(JSON.stringify(ledger.scorecardSummary) === JSON.stringify(scorecard.summary), "scorecard summary mismatch");
+export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBytes }) {
+  const scorecard = JSON.parse(scorecardBytes.toString("utf8"));
+  const ledger = JSON.parse(ledgerBytes.toString("utf8"));
+  const check = (condition, message) => {
+    if (!condition) throw new Error(`Language QA HOLD ledger validation failed: ${message}`);
+  };
 
-const holds = [];
-for (const locale of scorecard.locales) {
-  for (const result of locale.checks) {
-    if (result.status === "HOLD") holds.push({ locale: locale.locale, ...result });
+  check(scorecard.schema === "iat-language-qa-scorecard/v1", "unexpected scorecard schema");
+  check(scorecard.status === "HOLD", "scorecard must remain HOLD until every result passes");
+  check(sameJson(scorecard.policy?.statusVocabulary, statusVocabulary), "status vocabulary drift");
+  check(scorecard.scope?.locales === 50, "scorecard scope must declare exactly 50 locales");
+  check(scorecard.scope?.checksPerLocale === 100, "scorecard scope must declare exactly 100 checks per locale");
+  check(scorecard.scope?.results === 5000, "scorecard scope must declare exactly 5,000 results");
+  check(Array.isArray(scorecard.locales) && scorecard.locales.length === 50, "scorecard must contain exactly 50 locale rows");
+  check(
+    sameJson(scorecard.locales.map(({ locale }) => locale), expectedLocales),
+    "locale rows must retain the exact reviewed order without omissions or duplicates",
+  );
+
+  const allResults = [];
+  for (const localeRow of scorecard.locales) {
+    check(/^[0-9a-f]{64}$/u.test(localeRow.localeMessagesSha256), `${localeRow.locale} has an invalid locale digest`);
+    check(Array.isArray(localeRow.checks) && localeRow.checks.length === 100, `${localeRow.locale} must contain exactly 100 checks`);
+    check(
+      sameJson(localeRow.checks.map(({ id }) => id), expectedCheckIds),
+      `${localeRow.locale} check ID order must be unique and contiguous from LQA-001 through LQA-100`,
+    );
+    for (const [index, result] of localeRow.checks.entries()) {
+      check(statusVocabulary.includes(result.status), `${localeRow.locale}/${result.id} has invalid status ${result.status}`);
+      check(result.mode === expectedMode(index), `${localeRow.locale}/${result.id} mode drift`);
+      check(typeof result.category === "string" && result.category.trim(), `${localeRow.locale}/${result.id} lacks a category`);
+      check(typeof result.detail === "string" && result.detail.trim(), `${localeRow.locale}/${result.id} lacks evidence detail`);
+      if (result.mode === "STATIC") {
+        check(["STATIC_DETERMINISTIC", "STATIC_HEURISTIC"].includes(result.evidenceClass), `${localeRow.locale}/${result.id} has invalid static evidence class`);
+      } else if (result.mode === "RENDER") {
+        check(result.evidenceClass === "RENDER_REQUIRED", `${localeRow.locale}/${result.id} has invalid render evidence class`);
+      } else {
+        check(result.evidenceClass === "NATIVE_REVIEW_RECORD", `${localeRow.locale}/${result.id} has invalid native evidence class`);
+      }
+    }
+    const localeSummary = summarize(localeRow.checks);
+    check(sameJson(localeRow.summary, localeSummary), `${localeRow.locale} summary mismatch`);
+    check(localeRow.status === aggregateStatus(localeSummary), `${localeRow.locale} aggregate status mismatch`);
+    allResults.push(...localeRow.checks.map((result) => ({ locale: localeRow.locale, ...result })));
   }
+
+  check(allResults.length === 5000, "computed result topology must equal exactly 5,000");
+  const summary = summarize(allResults);
+  check(sameJson(scorecard.summary, summary), "global summary mismatch");
+  check(scorecard.status === aggregateStatus(summary), "global aggregate status mismatch");
+  check(summary.FAIL === 0 && summary.NOT_RUN === 0, "current public scorecard must not contain FAIL or NOT_RUN results");
+
+  for (const [laneName, mode] of [["static", "STATIC"], ["render", "RENDER"], ["native", "NATIVE"]]) {
+    const laneSummary = summarize(allResults.filter((result) => result.mode === mode));
+    check(sameJson(scorecard.lanes?.[laneName]?.summary, laneSummary), `${laneName} lane summary mismatch`);
+    check(scorecard.lanes?.[laneName]?.status === aggregateStatus(laneSummary), `${laneName} lane status mismatch`);
+  }
+  check(scorecard.lanes.native.summary.PASS + scorecard.lanes.native.summary.HOLD === 250, "native lane must contain exactly 250 reviewed results");
+  check(scorecard.lanes.native.nativePassClaimAllowed === false, "native PASS claim must remain disabled while native results are on HOLD");
+  check(Object.values(scorecard.assurance ?? {}).every((value) => value === false), "scorecard assurance flags must remain false");
+
+  for (const field of ["headCommit", "headTree"]) {
+    check(/^[0-9a-f]{40}$/u.test(scorecard.sourceBinding?.[field]), `scorecard source binding ${field} is invalid`);
+  }
+  for (const field of [
+    "worktreeStatusSha256", "definitionSha256", "messagesFileSha256", "criticalSha256",
+    "overridesSha256", "metadataSha256", "routeSeoSha256", "pendingSha256",
+  ]) {
+    check(/^[0-9a-f]{64}$/u.test(scorecard.sourceBinding?.[field]), `scorecard source binding ${field} is invalid`);
+  }
+  check(typeof scorecard.sourceBinding.worktreeDirty === "boolean", "scorecard worktree state must be explicit");
+
+  check(ledger.schemaVersion === 1, "unexpected ledger schema version");
+  check(ledger.status === "HOLD", "ledger must remain HOLD");
+  check(ledger.mainnetStatus === "UNSCHEDULED_HOLD", "Mainnet must remain unscheduled HOLD");
+  check(ledger.sourceBinding.scorecardSha256 === sha256(scorecardBytes), "scorecard hash mismatch");
+  check(ledger.sourceBinding.scorecardGeneratedAt === scorecard.generatedAt, "scorecard generation time mismatch");
+  check(ledger.sourceBinding.catalogHeadCommit === scorecard.sourceBinding.headCommit, "catalog source commit mismatch");
+  check(ledger.sourceBinding.catalogHeadTree === scorecard.sourceBinding.headTree, "catalog source tree mismatch");
+  check(sameJson(ledger.scorecardSummary, summary), "ledger scorecard summary mismatch");
+
+  const holds = allResults.filter(({ status }) => status === "HOLD");
+  const staticHolds = holds.filter(({ mode }) => mode === "STATIC");
+  const nativeHolds = holds.filter(({ mode }) => mode === "NATIVE");
+  const externalHolds = holds.filter(({ id }) => id === "LQA-054" || /^LQA-(?:096|097|098|099|100)$/u.test(id));
+  const heuristicHolds = staticHolds.filter(({ id }) => id !== "LQA-054");
+
+  check(holds.length === ledger.holdSummary.total, "total HOLD count mismatch");
+  check(staticHolds.length === ledger.holdSummary.static, "static HOLD count mismatch");
+  check(nativeHolds.length === ledger.holdSummary.native, "native HOLD count mismatch");
+  check(externalHolds.length === ledger.holdSummary.externalEvidenceOnly, "external-evidence HOLD count mismatch");
+  check(heuristicHolds.length === ledger.holdSummary.heuristicEditorialReview, "heuristic editorial HOLD count mismatch");
+  check(ledger.holdSummary.automationMayApprove === 0, "automation cannot approve HOLD results");
+
+  const expectedQueueIds = ["LQA-051", "LQA-052", "LQA-055", "LQA-056", "LQA-057", "LQA-058", "LQA-060"];
+  check(sameJson(ledger.heuristicEditorialQueue.map(({ checkId }) => checkId), expectedQueueIds), "heuristic queue inventory drift");
+  for (const queue of ledger.heuristicEditorialQueue) {
+    const matching = heuristicHolds.filter(({ id }) => id === queue.checkId);
+    check(queue.results === matching.length, `result count mismatch for ${queue.checkId}`);
+    check(sameJson(queue.locales, matching.map(({ locale }) => locale)), `locale order mismatch for ${queue.checkId}`);
+    check(queue.automationMayPrepare === true, `candidate preparation must remain explicit for ${queue.checkId}`);
+    check(queue.automationMayApprove === false, `automation cannot approve ${queue.checkId}`);
+    check(queue.nextAction.length > 80, `next action missing for ${queue.checkId}`);
+  }
+
+  check(ledger.externalEvidenceGates.reduce((total, gate) => total + gate.results, 0) === 300, "external evidence gate total mismatch");
+  for (const gate of ledger.externalEvidenceGates) {
+    check(gate.localeCoverage === "ALL_50", "external evidence must cover all 50 locales");
+    check(gate.automationMayApprove === false, "automation cannot approve external evidence");
+    check(gate.disposition.startsWith("BLOCKED_"), "external evidence must remain blocked");
+  }
+
+  for (const priority of ledger.priorityLocales) {
+    const localeHolds = heuristicHolds.filter(({ locale }) => locale === priority.locale);
+    check(priority.heuristicHoldCount === localeHolds.length, `priority count mismatch for ${priority.locale}`);
+    check(sameJson(priority.checkIds, localeHolds.map(({ id }) => id)), `priority check order mismatch for ${priority.locale}`);
+  }
+  check(ledger.priorityLocales.length === 5 && ledger.priorityLocales.every(({ heuristicHoldCount }) => heuristicHoldCount === 5), "priority queue must contain the five highest-density locales");
+  check(ledger.decisions.some(({ id, state }) => id === "LQA-HOLD-003" && state === "NO_RELEASE_CLAIM"), "no-release decision missing");
+  check(Object.values(ledger.assurance).every((value) => value === false), "ledger assurance flags must remain false");
+  check(ledger.limitations.length === 4, "limitation inventory drift");
+
+  return { summary, externalHoldCount: externalHolds.length, heuristicHoldCount: heuristicHolds.length };
 }
-const staticHolds = holds.filter(({ mode }) => mode === "STATIC");
-const nativeHolds = holds.filter(({ mode }) => mode === "NATIVE");
-const externalHolds = holds.filter(({ id }) => id === "LQA-054" || /^LQA-(?:096|097|098|099|100)$/u.test(id));
-const heuristicHolds = staticHolds.filter(({ id }) => id !== "LQA-054");
 
-check(holds.length === ledger.holdSummary.total, "total HOLD count mismatch");
-check(staticHolds.length === ledger.holdSummary.static, "static HOLD count mismatch");
-check(nativeHolds.length === ledger.holdSummary.native, "native HOLD count mismatch");
-check(externalHolds.length === ledger.holdSummary.externalEvidenceOnly, "external-evidence HOLD count mismatch");
-check(heuristicHolds.length === ledger.holdSummary.heuristicEditorialReview, "heuristic editorial HOLD count mismatch");
-check(ledger.holdSummary.automationMayApprove === 0, "automation cannot approve HOLD results");
-
-const expectedQueueIds = ["LQA-051", "LQA-052", "LQA-055", "LQA-056", "LQA-057", "LQA-058", "LQA-060"];
-check(JSON.stringify(ledger.heuristicEditorialQueue.map(({ checkId }) => checkId)) === JSON.stringify(expectedQueueIds), "heuristic queue inventory drift");
-for (const queue of ledger.heuristicEditorialQueue) {
-  const matching = heuristicHolds.filter(({ id }) => id === queue.checkId);
-  check(queue.results === matching.length, `result count mismatch for ${queue.checkId}`);
-  check(JSON.stringify(queue.locales) === JSON.stringify(matching.map(({ locale }) => locale)), `locale order mismatch for ${queue.checkId}`);
-  check(queue.automationMayPrepare === true, `candidate preparation must remain explicit for ${queue.checkId}`);
-  check(queue.automationMayApprove === false, `automation cannot approve ${queue.checkId}`);
-  check(queue.nextAction.length > 80, `next action missing for ${queue.checkId}`);
+function main() {
+  const siteRoot = process.cwd();
+  const repoRoot = resolve(siteRoot, "../../..");
+  const auditRoot = resolve(siteRoot, "public/audits/localization-qa-20260803");
+  const readArtifact = (name) => readCanonicalTrackedFile({ repoRoot, absolutePath: resolve(auditRoot, name) });
+  const result = validateLanguageQaHoldLedgerArtifacts({
+    scorecardBytes: readArtifact("language-qa-scorecard.json"),
+    ledgerBytes: readArtifact("hold-remediation-ledger.json"),
+  });
+  console.log(`Language QA HOLD ledger valid: ${result.summary.PASS} PASS, ${result.summary.FAIL} FAIL, ${result.summary.HOLD} HOLD, ${result.summary.NOT_RUN} NOT_RUN; ${result.externalHoldCount} external-evidence gates and ${result.heuristicHoldCount} heuristic editorial reviews remain fail closed across 50 locales.`);
 }
 
-check(ledger.externalEvidenceGates.reduce((total, gate) => total + gate.results, 0) === 300, "external evidence gate total mismatch");
-for (const gate of ledger.externalEvidenceGates) {
-  check(gate.localeCoverage === "ALL_50", "external evidence must cover all 50 locales");
-  check(gate.automationMayApprove === false, "automation cannot approve external evidence");
-  check(gate.disposition.startsWith("BLOCKED_"), "external evidence must remain blocked");
-}
-
-for (const priority of ledger.priorityLocales) {
-  const localeHolds = heuristicHolds.filter(({ locale }) => locale === priority.locale);
-  check(priority.heuristicHoldCount === localeHolds.length, `priority count mismatch for ${priority.locale}`);
-  check(JSON.stringify(priority.checkIds) === JSON.stringify(localeHolds.map(({ id }) => id)), `priority check order mismatch for ${priority.locale}`);
-}
-check(ledger.priorityLocales.length === 5 && ledger.priorityLocales.every(({ heuristicHoldCount }) => heuristicHoldCount === 5), "priority queue must contain the five highest-density locales");
-check(ledger.decisions.some(({ id, state }) => id === "LQA-HOLD-003" && state === "NO_RELEASE_CLAIM"), "no-release decision missing");
-for (const value of Object.values(ledger.assurance)) check(value === false, "assurance flags must remain false");
-check(ledger.limitations.length === 4, "limitation inventory drift");
-
-console.log("Language QA HOLD ledger valid: 4544 PASS, 0 FAIL, 456 HOLD, 0 NOT_RUN; 300 external-evidence gates and 156 heuristic editorial reviews remain fail closed across 50 locales.");
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
