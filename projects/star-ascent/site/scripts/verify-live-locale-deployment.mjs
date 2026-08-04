@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { responseIdentityError, runtimeBundleError } from "./live-locale-verifier-lib.mjs";
+import { responseIdentityError, runtimeBundleError, runtimeParityError } from "./live-locale-verifier-lib.mjs";
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const catalogPath = resolve(siteRoot, "app/i18n/messages.json");
@@ -180,10 +180,18 @@ const runtimeResults = await mapConcurrent(runtimeJobs, 2, async ({ domain, labe
     contract,
   });
   if (bundleError) return { ok: false, label, detail: bundleError };
-  return { ok: true, label };
+  return { ok: true, label, assetPath: new URL(runtimeUrl).pathname, sha256: sha256(bytes) };
 });
 
-const failures = [...payloadResults, ...pageResults, ...runtimeResults].filter((result) => !result.ok);
+const runtimeParityDetail = runtimeParityError(runtimeResults);
+const runtimeParityResult = {
+  ok: runtimeParityDetail === null,
+  label: "cross-domain locale runtime parity",
+  detail: runtimeParityDetail,
+};
+const failures = [...payloadResults, ...pageResults, ...runtimeResults, runtimeParityResult].filter(
+  (result) => !result.ok,
+);
 if (failures.length > 0) {
   console.error(`Live locale deployment FAIL: ${failures.length} check(s) failed.`);
   for (const failure of failures) {
@@ -194,7 +202,8 @@ if (failures.length > 0) {
   console.log(
     `Live locale deployment PASS: ${payloadResults.length}/${payloadResults.length} exact payloads and ` +
       `${pageResults.length}/${pageResults.length} locale pages and ` +
-      `${runtimeResults.length}/${runtimeResults.length} locale runtime bundles across ${domains.length} active domains; ` +
+      `${runtimeResults.length}/${runtimeResults.length} matching locale runtime bundles across ` +
+      `${domains.length} active domains; ` +
       `catalog ${contract.catalogSha256}.`,
   );
   console.log("Read-only verification only: no deployment, signing, funding, or chain state was changed.");

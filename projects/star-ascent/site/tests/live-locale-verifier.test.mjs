@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { responseIdentityError, runtimeBundleError } from "../scripts/live-locale-verifier-lib.mjs";
+import {
+  responseIdentityError,
+  runtimeBundleError,
+  runtimeParityError,
+} from "../scripts/live-locale-verifier-lib.mjs";
 
 const contract = {
   schema: "iat-locale-payload/v2",
@@ -70,4 +74,20 @@ test("runtime bundle contract fails closed on every missing committed marker", (
 test("runtime bundle contract rejects the retired payload path", () => {
   const mutated = Buffer.concat([validRuntime(), Buffer.from("|/i18n/zh.json")]);
   assert.match(runtimeBundleError({ contentType: "application/javascript", bytes: mutated, contract }), /legacy/);
+});
+
+test("runtime parity requires the same fingerprinted path and bytes on every domain", () => {
+  const reference = {
+    ok: true,
+    assetPath: "/assets/LocaleRuntime-current.js",
+    sha256: "a".repeat(64),
+  };
+  assert.equal(runtimeParityError([reference, { ...reference }]), null);
+  assert.match(
+    runtimeParityError([reference, { ...reference, assetPath: "/assets/LocaleRuntime-stale.js" }]),
+    /asset path/,
+  );
+  assert.match(runtimeParityError([reference, { ...reference, sha256: "b".repeat(64) }]), /SHA-256/);
+  assert.match(runtimeParityError([reference, { ok: false }]), /incomplete/);
+  assert.match(runtimeParityError([reference]), /at least 2 domains/);
 });

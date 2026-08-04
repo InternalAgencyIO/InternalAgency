@@ -33,3 +33,21 @@ export function runtimeBundleError({ contentType, bytes, contract }) {
   }
   return null;
 }
+
+export function runtimeParityError(results) {
+  if (results.length < 2) return `runtime parity requires at least 2 domains; found ${results.length}`;
+  if (results.some((result) => !result.ok || !result.assetPath || !result.sha256)) {
+    return "runtime parity unavailable because a per-domain runtime result is incomplete";
+  }
+
+  const [reference, ...others] = results;
+  const pathDrift = others.find((result) => result.assetPath !== reference.assetPath);
+  if (pathDrift) {
+    return `runtime asset path ${pathDrift.assetPath} != ${reference.assetPath}`;
+  }
+  const hashDrift = others.find((result) => result.sha256 !== reference.sha256);
+  if (hashDrift) {
+    return `runtime SHA-256 ${hashDrift.sha256} != ${reference.sha256}`;
+  }
+  return null;
+}

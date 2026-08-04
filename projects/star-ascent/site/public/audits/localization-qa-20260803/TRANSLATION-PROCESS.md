@@ -127,6 +127,9 @@ network access, changes no hosting or chain state, and does not deploy.
 Before the network requests, mutation-based local tests prove that redirected
 or cross-origin responses, wrong content types, undersized bundles, missing
 contract markers, and the retired payload path all fail closed.
+The two domains must also reference the same fingerprinted runtime path and
+serve byte-identical runtime SHA-256; a stale domain therefore fails even when
+its older bundle still contains individually valid contract markers.
 
 Passing proves that the checked public payload bytes match the committed
 catalog, every locale has a checked public route on each domain, and each
