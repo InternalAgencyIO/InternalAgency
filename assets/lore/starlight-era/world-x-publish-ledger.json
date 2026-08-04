@@ -14,7 +14,7 @@
   "videoActivationImageNumber": 816,
   "publishingMode": "guardian-autonomous-cadence-after-overdrive-drain",
   "backlogDrainPolicy": {
-    "status": "active-residual-reserved-ready-to-transmit",
+    "status": "blocked-chrome-extension-transport-reservation-preserved",
     "requestedAt": "2026-08-03T18:02:10.035Z",
     "completedAt": "2026-08-03T18:29:08.048Z",
     "instruction": "Clear the entire deterministically eligible X campaign backlog now through the signed-in Chrome account; the prior 45-50 minute cadence is explicitly overridden for this drain.",
@@ -27,7 +27,7 @@
     "restartRequestedAt": "2026-08-04T09:32:23.369Z",
     "restartInstruction": "Clear the remaining X country-post backlog now; do not wait for the normal cadence once an exact eligible group exists.",
     "restartCadenceOverride": "immediate-first-eligible-group",
-    "currentGate": "Cleared: Japan image 856 is a validated final with exact hash proof. The frozen Mexico 854/855 plus Japan 856 reservation is ready for one serialized Chrome transmission.",
+    "currentGate": "Media eligibility is cleared and the exact reservation remains frozen, but Chrome browser-control transport was unavailable after the initial connection attempt and one bounded retry. No composer opened and no Post click occurred.",
     "coverHandling": "Cover updates remain paused and no profile fields were modified.",
     "cadenceAfterDrain": "Return future X publishing to one exactly verified logical group at the established 45-50 minute cadence unless the user explicitly requests another immediate bulk drain."
   },
@@ -151,7 +151,7 @@
     }
   ],
   "pendingPost": {
-    "status": "reserved-ready-to-transmit",
+    "status": "reserved-chrome-unavailable",
     "reservedAt": "2026-08-04T10:53:26.361Z",
     "reason": "Immediate user-requested residual backlog drain after the first validated different-country final became eligible.",
     "caption": "Mexico ❤️ Japan",
@@ -184,7 +184,9 @@
       }
     ],
     "mediaMode": "video-pause-image-only",
-    "transmissionPolicy": "Use the existing signed-in Chrome account, upload the three files in frozen order, require three distinct previews and one unique enabled Post button, click Post once, then preserve the reservation until exact public URL and photo/1 through photo/3 proof are confirmed."
+    "transmissionPolicy": "Use the existing signed-in Chrome account, upload the three files in frozen order, require three distinct previews and one unique enabled Post button, click Post once, then preserve the reservation until exact public URL and photo/1 through photo/3 proof are confirmed.",
+    "lastTransmissionAttemptAt": "2026-08-04T10:53:26.361Z",
+    "lastTransmissionOutcome": "Chrome browser-control binding unavailable after initial connection attempt and one bounded retry; no composer opened, no media uploaded, and no Post click occurred."
   },
   "preparedPostQueue": [],
   "pendingCoverUpdate": null,
