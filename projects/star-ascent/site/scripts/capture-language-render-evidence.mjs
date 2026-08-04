@@ -1,13 +1,16 @@
 import { createHash } from "node:crypto";
 import { execFileSync, spawn } from "node:child_process";
-import { access, readFile, writeFile } from "node:fs/promises";
+import { access, writeFile } from "node:fs/promises";
 import { createServer } from "node:net";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 import axe from "axe-core";
 import { extractFromHtml } from "./generate-i18n-catalog.mjs";
+import { readCanonicalTrackedFile } from "./lib/read-canonical-tracked-file.mjs";
 
 const root = process.cwd();
+const repoRoot = resolve(root, "../../..");
+const readRepoText = (path) => Promise.resolve(readCanonicalTrackedFile({ repoRoot, absolutePath: path }).toString("utf8"));
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const canonical = (value) => {
   if (Array.isArray(value)) return `[${value.map(canonical).join(",")}]`;
@@ -24,7 +27,6 @@ const valueCounts = (values) => {
 const htmlTags = { zh: "zh-Hans", sr: "sr-Cyrl" };
 const rtlLocales = new Set(["ar", "ur"]);
 const renderCheckIds = Array.from({ length: 25 }, (_, index) => `LQA-${String(index + 71).padStart(3, "0")}`);
-const repoRoot = resolve(root, "../../..");
 const initialWorktreeStatus = execFileSync("git", ["status", "--short", "--untracked-files=all"], {
   cwd: repoRoot,
   encoding: "utf8",
@@ -97,12 +99,12 @@ function runPackageCommand(command, args, options) {
 }
 
 let [definitionRaw, messagesRaw, metadataRaw, routeSeoRaw, pendingRaw, sitemapSource] = await Promise.all([
-  readFile(resolve(root, "app/i18n/language-qa-checks.v1.json"), "utf8"),
-  readFile(resolve(root, "app/i18n/messages.json"), "utf8"),
-  readFile(resolve(root, "app/i18n/metadata.generated.json"), "utf8"),
-  readFile(resolve(root, "app/i18n/route-seo.json"), "utf8"),
-  readFile(resolve(root, "app/i18n/pending-visible-source.json"), "utf8"),
-  readFile(resolve(root, "app/sitemap.ts"), "utf8"),
+  readRepoText(resolve(root, "app/i18n/language-qa-checks.v1.json")),
+  readRepoText(resolve(root, "app/i18n/messages.json")),
+  readRepoText(resolve(root, "app/i18n/metadata.generated.json")),
+  readRepoText(resolve(root, "app/i18n/route-seo.json")),
+  readRepoText(resolve(root, "app/i18n/pending-visible-source.json")),
+  readRepoText(resolve(root, "app/sitemap.ts")),
 ]);
 let definition = JSON.parse(definitionRaw);
 let catalog = JSON.parse(messagesRaw);
@@ -128,11 +130,11 @@ let browser;
 try {
   runPackageCommand("npm", ["run", "build"], { cwd: root, stdio: "inherit" });
   [definitionRaw, messagesRaw, metadataRaw, routeSeoRaw, pendingRaw] = await Promise.all([
-    readFile(resolve(root, "app/i18n/language-qa-checks.v1.json"), "utf8"),
-    readFile(resolve(root, "app/i18n/messages.json"), "utf8"),
-    readFile(resolve(root, "app/i18n/metadata.generated.json"), "utf8"),
-    readFile(resolve(root, "app/i18n/route-seo.json"), "utf8"),
-    readFile(resolve(root, "app/i18n/pending-visible-source.json"), "utf8"),
+    readRepoText(resolve(root, "app/i18n/language-qa-checks.v1.json")),
+    readRepoText(resolve(root, "app/i18n/messages.json")),
+    readRepoText(resolve(root, "app/i18n/metadata.generated.json")),
+    readRepoText(resolve(root, "app/i18n/route-seo.json")),
+    readRepoText(resolve(root, "app/i18n/pending-visible-source.json")),
   ]);
   definition = JSON.parse(definitionRaw);
   catalog = JSON.parse(messagesRaw);

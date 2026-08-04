@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -72,6 +73,8 @@ test("public scorecard evidence paths are portable and reveal no local workspace
       assert.equal(isAbsolute(evidence.path), false);
       assert.doesNotMatch(evidence.path, /(?:^[A-Za-z]:|\\)/u);
     }
+    const canonicalDefinition = execFileSync("git", ["show", "HEAD:projects/star-ascent/site/app/i18n/language-qa-checks.v1.json"], { cwd: siteRoot });
+    assert.equal(scorecard.sourceBinding.definitionSha256, createHash("sha256").update(canonicalDefinition).digest("hex"));
   } finally {
     rmSync(temporary, { recursive: true, force: true });
   }

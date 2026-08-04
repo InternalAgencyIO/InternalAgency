@@ -4,7 +4,10 @@ import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, isAbsolute, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { readCanonicalTrackedFile } from "./lib/read-canonical-tracked-file.mjs";
+
 const siteRoot = fileURLToPath(new URL("../", import.meta.url));
+const repoRoot = resolve(siteRoot, "../../..");
 const definitionPath = resolve(siteRoot, "app/i18n/language-qa-checks.v1.json");
 const defaultNativeEvidencePath = resolve(siteRoot, "app/i18n/native-review-signoffs.v1.json");
 const defaultLanguageIdEvidencePath = resolve(siteRoot, "app/i18n/language-id-evidence.v1.json");
@@ -98,7 +101,13 @@ const sameMultiset = (left, right) => {
 };
 const sample = (values, maximum = 5) => values.slice(0, maximum);
 
+function isWithinRepo(path) {
+  const repoRelative = relative(repoRoot, path);
+  return !isAbsolute(repoRelative) && repoRelative !== ".." && !repoRelative.startsWith(`..${process.platform === "win32" ? "\\" : "/"}`);
+}
+
 async function readText(path) {
+  if (isWithinRepo(path)) return readCanonicalTrackedFile({ repoRoot, absolutePath: path }).toString("utf8");
   return readFile(path, "utf8");
 }
 
