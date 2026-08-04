@@ -6,12 +6,21 @@ import { localizedCoverageError } from "./live-locale-verifier-lib.mjs";
 
 const catalog = JSON.parse(await readFile(new URL("../app/i18n/messages.json", import.meta.url), "utf8"));
 const contract = JSON.parse(await readFile(new URL("../app/i18n/payload-contract.json", import.meta.url), "utf8"));
+const sitemapSource = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
 const locales = Object.keys(catalog.messages ?? {}).sort();
+const routes = [...sitemapSource.matchAll(/\{\s*path:\s*"([^"]*)"/gu)].map((match) => match[1] || "/");
 const rtlLocales = new Set(["ar", "ur"]);
 const htmlLanguageTag = (locale) => (locale === "zh" ? "zh-Hans" : locale === "sr" ? "sr-Cyrl" : locale);
 const payloadRoot = `/${contract.assetNamespace}/${contract.catalogSha256.slice(0, 16)}`;
+const concurrency = Number.parseInt(process.env.I18N_HYDRATION_WORKERS ?? "8", 10);
 
 if (locales.length !== 50) throw new Error(`Expected 50 catalog locales; found ${locales.length}`);
+if (routes.length !== 25 || new Set(routes).size !== 25) {
+  throw new Error(`Expected 25 unique canonical sitemap routes; found ${routes.length}/${new Set(routes).size}`);
+}
+if (!Number.isSafeInteger(concurrency) || concurrency < 1 || concurrency > 16) {
+  throw new Error(`I18N_HYDRATION_WORKERS must be an integer from 1 through 16; received ${process.env.I18N_HYDRATION_WORKERS}`);
+}
 
 const port = await new Promise((resolvePort, reject) => {
   const reservation = createServer();
@@ -56,7 +65,7 @@ async function waitForServer() {
   throw new Error(`Render server did not become ready\n${serverOutput}`);
 }
 
-async function verifyPage(page, { host, locale, label }) {
+async function verifyPage(page, { host, locale, route, label }) {
   const requests = [];
   page.on("request", (request) => requests.push(request.url()));
   await page.addInitScript(() => {
@@ -67,7 +76,8 @@ async function verifyPage(page, { host, locale, label }) {
       return nativeFetch(input, init);
     };
   });
-  const url = `http://${host}.localhost:${port}/${locale}/network`;
+  const localizedPath = route === "/" ? `/${locale}` : `/${locale}${route}`;
+  const url = `http://${host}.localhost:${port}${localizedPath}`;
   const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30_000 });
   if (!response || response.status() !== 200) {
     return { ok: false, label, detail: `HTTP ${response?.status() ?? "missing"}` };
@@ -132,7 +142,14 @@ async function verifyPage(page, { host, locale, label }) {
 }
 
 const jobs = ["internalagency", "ileriakil"].flatMap((host) =>
-  locales.map((locale) => ({ host, locale, label: `${host}.localhost/${locale}/network` })),
+  locales.flatMap((locale) =>
+    routes.map((route) => ({
+      host,
+      locale,
+      route,
+      label: `${host}.localhost/${locale}${route === "/" ? "" : route}`,
+    })),
+  ),
 );
 const results = new Array(jobs.length);
 let cursor = 0;
@@ -141,7 +158,7 @@ try {
   await waitForServer();
   browser = await chromium.launch();
   await Promise.all(
-    Array.from({ length: 4 }, async () => {
+    Array.from({ length: concurrency }, async () => {
       const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
       try {
         while (cursor < jobs.length) {
@@ -177,8 +194,9 @@ if (failures.length > 0) {
   process.exitCode = 1;
 } else {
   console.log(
-    `Dual-host locale hydration PASS: ${results.length}/${results.length} Network pages reached localeReady with ` +
-      `99 committed-catalog renders plus 1 native Turkish source render; catalog ${contract.catalogSha256}.`,
+    `Dual-host locale hydration PASS: ${results.length}/${results.length} canonical pages reached localeReady across ` +
+      `${locales.length} locales x ${routes.length} routes x 2 hosts, with 2475 committed-catalog renders plus ` +
+      `25 native Turkish source renders; catalog ${contract.catalogSha256}.`,
   );
   console.log("Ephemeral loopback browser evidence only: no deployment or public/chain state was changed.");
 }

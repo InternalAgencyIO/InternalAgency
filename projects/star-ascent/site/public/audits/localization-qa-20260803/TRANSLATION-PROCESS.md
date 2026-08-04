@@ -143,12 +143,15 @@ for responses that were not requested.
 
 Before a cross-domain localization deployment, run
 `npm run check:i18n:dual-host-hydration`. It builds the current source, starts
-an ephemeral loopback server, and opens the Network route for all 50 locales
-through both `internalagency.localhost` and `ileriakil.localhost`. The browser
-must reach `localeReady`, request the source-bound payload when required, avoid
-external translation services, render every committed localized text and
-attribute value, and leave no replaced English source node behind. This proves
-the checked source behavior only; it is not production or native-review proof.
+an ephemeral loopback server, and opens all 25 canonical sitemap routes for all
+50 locales through both `internalagency.localhost` and `ileriakil.localhost`:
+2,500 browser renders in total. The browser must reach `localeReady`, request
+the source-bound payload when required, avoid external translation services,
+render every committed localized text and attribute value, and leave no
+replaced English source node behind. The 25 native Turkish source renders on
+the Turkish host are classified separately from the 2,475 catalog-backed
+renders. This proves the checked source behavior only; it is not production or
+native-review proof.
 
 ## Assurance boundary
 
