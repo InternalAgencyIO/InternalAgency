@@ -65,8 +65,15 @@ jobs:
     name: Verifiable Solana SBF build
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    env:
+      IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      IAT_V2_WORKFLOW_EVENT: ${{ github.event_name }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # Pull-request builds test GitHub's synthetic merge commit. Full
+          # history is required to bind that checkout to its exact head parent.
+          fetch-depth: 0
       - name: Install the pinned official Solana and Anchor toolchain
         run: |
           rustup toolchain install 1.97.1 --profile minimal

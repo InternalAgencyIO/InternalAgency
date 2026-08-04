@@ -103,8 +103,14 @@ function validateConfiguration(workflowText, scripts) {
   if (!/node-version:\s+24(?:\.x)?\s*$/m.test(workflowText)) {
     fail("release-proof workflow must retain the reviewed Node 24 runtime");
   }
-  if (!/fetch-depth:\s+0\s*$/m.test(workflowText)) {
-    fail("release-proof workflow must retain full history for source-bound audit validation");
+  if ((workflowText.match(/fetch-depth:\s+0\s*$/gm) ?? []).length !== 2) {
+    fail("web audit and verifiable SBF jobs must both retain full source history");
+  }
+  if (
+    !workflowText.includes("IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}")
+    || !workflowText.includes("IAT_V2_WORKFLOW_EVENT: ${{ github.event_name }}")
+  ) {
+    fail("verifiable SBF job must receive the exact source-head SHA and workflow event");
   }
   if (actionUses.some((action) => !/^[a-z0-9_.-]+\/[a-z0-9_.-]+@[0-9a-f]{40}$/.test(action))) {
     fail("every third-party action must be pinned to an immutable 40-character commit SHA");
@@ -205,11 +211,22 @@ function validateSbfProofScript(scriptText) {
   if (!scriptText.includes('expected_rustc_prefix="rustc 1.97.1 "') || !scriptText.includes('actual_rustc="$(rustc --version)"')) {
     fail("SBF proof must verify the actual pinned Rust compiler version");
   }
-  if (!scriptText.includes('git status --porcelain=v1 --untracked-files=no') || !scriptText.includes("git rev-parse 'HEAD^{tree}'")) {
-    fail("SBF proof must bind a clean tracked worktree to its source commit and tree");
+  if (
+    !scriptText.includes('git status --porcelain=v1 --untracked-files=no')
+    || !scriptText.includes('git rev-parse "${source_head_commit}^{tree}"')
+    || !scriptText.includes("git rev-parse 'HEAD^{tree}'")
+  ) {
+    fail("SBF proof must bind a clean tracked worktree to both source-head and checkout trees");
   }
-  if (!scriptText.includes('"schema": "iat-v2-ci-verifiable-sbf-evidence/v1"') || !scriptText.includes('"status": "BUILD_ONLY_HOLD"')) {
+  if (!scriptText.includes('"schema": "iat-v2-ci-verifiable-sbf-evidence/v2"') || !scriptText.includes('"status": "BUILD_ONLY_HOLD"')) {
     fail("SBF proof must emit the reviewed machine-readable HOLD evidence schema");
+  }
+  if (
+    !scriptText.includes('git rev-parse \'HEAD^2\'')
+    || !scriptText.includes('checkout_relation="PR_MERGE_SECOND_PARENT"')
+    || !scriptText.includes('checkout_relation="IDENTICAL"')
+  ) {
+    fail("SBF proof must distinguish an exact PR merge checkout from an identical branch head");
   }
   if (!scriptText.includes('"programId": program_id') || !scriptText.includes('"buildLog": {')) {
     fail("SBF evidence manifest must bind the reviewed program ID and complete build log");
@@ -284,6 +301,22 @@ const mutationProbes = [
     ),
     scripts: packageJson.scripts,
   },
+  {
+    name: "missing exact SBF source-head environment",
+    workflow: workflow.replace(
+      "      IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}\n",
+      "",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "shallow SBF checkout cannot verify PR head parent",
+    workflow: workflow.replace(
+      "          # Pull-request builds test GitHub's synthetic merge commit. Full\n          # history is required to bind that checkout to its exact head parent.\n          fetch-depth: 0",
+      "          fetch-depth: 1",
+    ),
+    scripts: packageJson.scripts,
+  },
 ];
 
 for (const probe of mutationProbes) {
@@ -311,7 +344,7 @@ const sbfProofMutationProbes = [
   },
   {
     name: "missing source-tree binding",
-    script: sbfProofScript.replace("git rev-parse 'HEAD^{tree}'", "printf '%040d' 0"),
+    script: sbfProofScript.replace('git rev-parse "${source_head_commit}^{tree}"', "printf '%040d' 0"),
   },
   {
     name: "launch-authorizing build status",
@@ -323,6 +356,10 @@ const sbfProofMutationProbes = [
       'sha256sum "$binary" "$idl" "$evidence" "$sbf_log"',
       'sha256sum "$binary" "$idl" "$sbf_log"',
     ),
+  },
+  {
+    name: "PR merge accepted without exact head parent",
+    script: sbfProofScript.replace("git rev-parse 'HEAD^2'", "printf '%s' \"$source_head_commit\""),
   },
 ];
 
@@ -338,5 +375,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 5 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, clean-source program-ID-bound binary/IDL evidence, deduplicated branch concurrency, read-only permissions, and 16 fail-closed mutation probes remain bound.`,
+  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 5 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout-bound binary/IDL evidence, deduplicated branch concurrency, read-only permissions, and 19 fail-closed mutation probes remain bound.`,
 );

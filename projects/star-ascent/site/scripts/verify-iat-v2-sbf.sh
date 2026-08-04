@@ -48,6 +48,38 @@ if [[ -n "$(git status --porcelain=v1 --untracked-files=no)" ]]; then
   exit 1
 fi
 
+source_head_commit="${IAT_V2_SOURCE_HEAD_SHA:-}"
+workflow_event="${IAT_V2_WORKFLOW_EVENT:-}"
+if [[ ! "$source_head_commit" =~ ^[0-9a-f]{40}$ ]]; then
+  echo "FAIL: workflow did not provide an exact lowercase source-head commit" >&2
+  exit 1
+fi
+if [[ "$workflow_event" != "push" \
+  && "$workflow_event" != "pull_request" \
+  && "$workflow_event" != "workflow_dispatch" ]]; then
+  echo "FAIL: unsupported or missing workflow event: $workflow_event" >&2
+  exit 1
+fi
+if ! git cat-file -e "${source_head_commit}^{commit}"; then
+  echo "FAIL: source-head commit is absent from the full checkout" >&2
+  exit 1
+fi
+
+checkout_commit="$(git rev-parse HEAD)"
+if [[ "$workflow_event" == "pull_request" ]]; then
+  if [[ "$(git rev-list --parents -n 1 HEAD | awk '{print NF - 1}')" != "2" \
+    || "$(git rev-parse 'HEAD^2')" != "$source_head_commit" ]]; then
+    echo "FAIL: pull-request checkout is not the exact synthetic merge of the declared source head" >&2
+    exit 1
+  fi
+  checkout_relation="PR_MERGE_SECOND_PARENT"
+elif [[ "$checkout_commit" != "$source_head_commit" ]]; then
+  echo "FAIL: branch checkout does not equal the declared source head" >&2
+  exit 1
+else
+  checkout_relation="IDENTICAL"
+fi
+
 cargo fmt --all -- --check
 cargo test --workspace --all-targets --locked
 sbf_log="target/iat-v2-sbf-build.log"
@@ -99,8 +131,8 @@ if [[ -n "$(git status --porcelain=v1 --untracked-files=no)" ]]; then
   exit 1
 fi
 
-source_commit="$(git rev-parse HEAD)"
-source_tree="$(git rev-parse 'HEAD^{tree}')"
+source_head_tree="$(git rev-parse "${source_head_commit}^{tree}")"
+checkout_tree="$(git rev-parse 'HEAD^{tree}')"
 binary_sha256="$(sha256sum "$binary" | awk '{print $1}')"
 idl_sha256="$(sha256sum "$idl" | awk '{print $1}')"
 log_sha256="$(sha256sum "$sbf_log" | awk '{print $1}')"
@@ -110,8 +142,12 @@ log_bytes="$(stat --printf='%s' "$sbf_log")"
 evidence="target/verifiable/iat-v2-build-evidence.json"
 python3 - \
   "$evidence" \
-  "$source_commit" \
-  "$source_tree" \
+  "$workflow_event" \
+  "$source_head_commit" \
+  "$source_head_tree" \
+  "$checkout_commit" \
+  "$checkout_tree" \
+  "$checkout_relation" \
   "$actual_rustc" \
   "$actual_anchor" \
   "$actual_solana" \
@@ -128,8 +164,12 @@ import sys
 
 (
     evidence_path,
-    source_commit,
-    source_tree,
+    workflow_event,
+    source_head_commit,
+    source_head_tree,
+    checkout_commit,
+    checkout_tree,
+    checkout_relation,
     rustc_version,
     anchor_version,
     solana_version,
@@ -142,11 +182,15 @@ import sys
     log_bytes,
 ) = sys.argv[1:]
 document = {
-    "schema": "iat-v2-ci-verifiable-sbf-evidence/v1",
+    "schema": "iat-v2-ci-verifiable-sbf-evidence/v2",
     "status": "BUILD_ONLY_HOLD",
     "sourceBinding": {
-        "commit": source_commit,
-        "tree": source_tree,
+        "workflowEvent": workflow_event,
+        "sourceHeadCommit": source_head_commit,
+        "sourceHeadTree": source_head_tree,
+        "checkoutCommit": checkout_commit,
+        "checkoutTree": checkout_tree,
+        "checkoutRelation": checkout_relation,
         "trackedWorktree": "CLEAN",
     },
     "programId": program_id,
