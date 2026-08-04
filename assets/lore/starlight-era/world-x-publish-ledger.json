@@ -7,6 +7,92 @@
   "maxPostsPerRun": 2,
   "ordering": "Strict ascending image number beginning at 380. Slice the continuous validated World Series image stream into consecutive three-image posts without preserving country boundaries.",
   "caption": "",
+  "imagePostSize": 3,
+  "videoPostSize": 1,
+  "preferredAttachmentCount": 4,
+  "videoActivationBatch": 199,
+  "videoActivationImageNumber": 816,
+  "publishingMode": "guardian-autonomous-cadence-after-overdrive-drain",
+  "backlogDrainPolicy": {
+    "status": "active-awaiting-different-country-eligibility",
+    "requestedAt": "2026-08-03T18:02:10.035Z",
+    "completedAt": "2026-08-03T18:29:08.048Z",
+    "instruction": "Clear the entire deterministically eligible X campaign backlog now through the signed-in Chrome account; the prior 45-50 minute cadence is explicitly overridden for this drain.",
+    "outcome": "Ten exactly verified 2+1 posts transmitted 30 reserved assets. Only Mexico images 854 and 855 remain, which cannot form a valid three-image 2+1 group until a different-country asset becomes eligible.",
+    "confirmedPostCount": 10,
+    "residualImageNumbers": [
+      854,
+      855
+    ],
+    "restartRequestedAt": "2026-08-04T09:32:23.369Z",
+    "restartInstruction": "Clear the remaining X country-post backlog now; do not wait for the normal cadence once an exact eligible group exists.",
+    "restartCadenceOverride": "immediate-first-eligible-group",
+    "currentGate": "Mexico images 854 and 855 require at least one validated different-country still; Japan Batch 209 is the active dependency and no reservation may be created before its exact final asset and hash become eligible.",
+    "coverHandling": "Cover updates remain paused and no profile fields were modified.",
+    "cadenceAfterDrain": "Return future X publishing to one exactly verified logical group at the established 45-50 minute cadence unless the user explicitly requests another immediate bulk drain."
+  },
+  "preRenderBacklogCeilingImageNumber": 807,
+  "preRenderBacklogStatus": "exhausted",
+  "preRenderBacklogExhaustedAt": "2026-08-02T12:07:18.721Z",
+  "preRenderBacklogResidualImageNumbers": [],
+  "renderInterruptPolicy": "Drain images through 807 during the current assisted dump. Once that pre-render backlog is exhausted, do not interrupt autonomous rendering for new X eligibility. Images 808 onward accumulate for a later user-requested assisted dump.",
+  "postThroughput": "After the completed explicit overdrive drain, publish one exactly verified logical group at the established 45-50 minute cadence. Safe independent preparation and validation may use up to three concurrent lanes, but final Post clicks and ledger reconciliation remain serialized.",
+  "postComposition": "2+1 country image mix plus the primary country's 15-second video",
+  "countryMediaContract": {
+    "status": "binding from Batch 199/image 816",
+    "renderProduct": "four PNG stills plus one 15-second MP4 per country",
+    "xStillSelection": "Upload exactly stills one, two and three across the preserved reciprocal 2+1 rotation. Never upload the fourth video-source still to X.",
+    "videoSelection": "Attach exactly one verified world-15s-video-manifest.json asset belonging to the primary two-image country. A video is eligible once only and its source image number must equal that country's withheld fourth still.",
+    "preferredComposer": "Use one composer with the exact three ordered PNGs and the primary country's exact MP4 selected together. Require the frozen caption, three distinct still previews, one distinct video preview, and one unique enabled Post button before a single Post click.",
+    "mixedMediaFallback": "If the supported signed-in X composer explicitly refuses mixed photo and video attachments, preserve the 2+1 image post unchanged and transmit it once; after exact confirmation, create one immediately associated video-only companion post for the same primary country and frozen caption. Record both exact URLs as one logical country-media publication. Never omit the video, re-add the withheld fourth still, duplicate a transmission or alter the 2+1 image ordering.",
+    "reservation": "For media-enabled countries, pendingPost or preparedPostQueue freezes the three ordered PNG image numbers, filenames and hashes plus video country, source image number, filename and hash. Reconciliation must prove the exact media form used before clearing either image or video eligibility.",
+    "legacyRule": "Countries and images through Batch 198/image 815 remain governed by the prior image-only ledger and do not acquire retroactive video debt."
+  },
+  "captionPolicy": {
+    "status": "active",
+    "format": "<primary country> <reserved heart> <secondary country>",
+    "countryOrder": "Use the primary two-image country first and the secondary one-image country second, matching the countries array and media order in the reservation.",
+    "heartPalette": [
+      "❤️",
+      "🧡",
+      "💛",
+      "💚",
+      "💙",
+      "💜"
+    ],
+    "heartCycle": {
+      "mode": "two-each-shuffled-12-loop",
+      "cycleLength": 12,
+      "cycleNumber": 5,
+      "order": [
+        "💚",
+        "💛",
+        "🧡",
+        "💛",
+        "💙",
+        "💜",
+        "❤️",
+        "💚",
+        "🧡",
+        "💙",
+        "❤️",
+        "💜"
+      ],
+      "nextIndex": 6,
+      "lastReservedImageNumbers": [
+        852,
+        853,
+        851
+      ]
+    },
+    "quotes": false,
+    "exactness": "For each 12-post cycle, use exactly two of each palette heart in a shuffled stored order, then materialize a new shuffled 12-heart cycle and repeat. Freeze the selected heart and fully expanded caption in pendingPost or preparedPostQueue before transmission. Retries reuse the frozen reservation without advancing the cycle. Reconcile both the exact three ordered assets and exact caption before deciding whether a retry is safe. Existing confirmed posts are not edited or reposted."
+  },
+  "followBackPolicy": {
+    "status": "disabled",
+    "disabledAt": "2026-08-02T07:36:47.4436954Z",
+    "rule": "Do not follow or follow back any account until the user explicitly re-enables and tests this phase."
+  },
   "startBatch": 90,
   "endBatch": 284,
   "status": "active",
