@@ -4,7 +4,7 @@ set -euo pipefail
 expected_anchor="anchor-cli 1.0.2"
 expected_solana="solana-cli 3.1.10"
 
-for command_name in cargo anchor solana docker sha256sum; do
+for command_name in cargo anchor solana docker sha256sum python3; do
   if ! command -v "$command_name" >/dev/null 2>&1; then
     echo "FAIL: required command is missing: $command_name" >&2
     exit 1
@@ -61,7 +61,31 @@ if [[ ! -s "$binary" ]]; then
   exit 1
 fi
 
-echo "PASS: locked host tests and verifiable SBF build completed."
-sha256sum "$binary"
+idl="target/idl/iat_v2.json"
+expected_program_id="62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj"
+if [[ ! -s "$idl" ]]; then
+  echo "FAIL: verifiable build did not produce $idl" >&2
+  exit 1
+fi
+python3 - "$idl" "$expected_program_id" <<'PY'
+import json
+import pathlib
+import sys
+
+idl_path = pathlib.Path(sys.argv[1])
+expected_program_id = sys.argv[2]
+try:
+    document = json.loads(idl_path.read_text(encoding="utf-8"))
+except (OSError, UnicodeError, json.JSONDecodeError) as error:
+    raise SystemExit(f"FAIL: generated IDL is not valid UTF-8 JSON: {error}") from error
+if document.get("address") != expected_program_id:
+    raise SystemExit(
+        "FAIL: generated IDL address does not match the reviewed IAT V2 program ID"
+    )
+PY
+
+echo "PASS: locked host tests and program-ID-bound verifiable SBF artifacts completed."
+sha256sum "$binary" "$idl"
 stat --printf='programBinaryBytes=%s\n' "$binary"
+stat --printf='programIdlBytes=%s\n' "$idl"
 echo "HOLD: this output is build evidence only; it does not authorize deployment or a transaction."

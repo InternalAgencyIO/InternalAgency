@@ -9,6 +9,8 @@ const workflowPath = resolve(
   ".github/workflows/iat-v2-proof.yml",
 );
 const workflow = readFileSync(workflowPath, "utf8").replaceAll("\r\n", "\n");
+const sbfProofScriptPath = resolve(process.cwd(), "scripts/verify-iat-v2-sbf.sh");
+const sbfProofScript = readFileSync(sbfProofScriptPath, "utf8").replaceAll("\r\n", "\n");
 const packageJson = JSON.parse(readFileSync(resolve(process.cwd(), "package.json"), "utf8"));
 
 const requiredOrderedCommands = [
@@ -58,6 +60,7 @@ const agaveInstallerUrl =
   "https://release.anza.xyz/v3.1.10/agave-install-init-x86_64-unknown-linux-gnu";
 const agaveInstallerSha256 = "ffb25b5f2c9649a13b566b26e48d441a1eaf6d3c50d2198a70e19a5e1dfae96b";
 const anchorSourceRevision = "1314a6b83b16e6a31947b372d57988fd0e81559c";
+const expectedProgramId = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
 
 function validateConfiguration(workflowText, scripts) {
   const failures = [];
@@ -172,7 +175,30 @@ function validateConfiguration(workflowText, scripts) {
   return failures;
 }
 
-const failures = validateConfiguration(workflow, packageJson.scripts ?? {});
+function validateSbfProofScript(scriptText) {
+  const failures = [];
+  const fail = (message) => failures.push(message);
+
+  if (!scriptText.includes('idl="target/idl/iat_v2.json"') || !scriptText.includes('[[ ! -s "$idl" ]]')) {
+    fail("SBF proof must reject a missing or empty generated IDL");
+  }
+  if (!scriptText.includes(`expected_program_id="${expectedProgramId}"`)) {
+    fail("SBF proof must remain bound to the reviewed IAT V2 program ID");
+  }
+  if (!scriptText.includes("json.loads") || !scriptText.includes('document.get("address") != expected_program_id')) {
+    fail("SBF proof must parse the IDL and reject a mismatched program address");
+  }
+  if (!scriptText.includes('sha256sum "$binary" "$idl"')) {
+    fail("SBF proof must publish both binary and IDL SHA-256 digests");
+  }
+
+  return failures;
+}
+
+const failures = [
+  ...validateConfiguration(workflow, packageJson.scripts ?? {}),
+  ...validateSbfProofScript(sbfProofScript),
+];
 const mutationProbes = [
   {
     name: "missing workflow signoff step",
@@ -224,11 +250,32 @@ for (const probe of mutationProbes) {
   }
 }
 
+const sbfProofMutationProbes = [
+  {
+    name: "missing generated IDL size gate",
+    script: sbfProofScript.replace('if [[ ! -s "$idl" ]]; then', 'if [[ -s "$idl" ]]; then'),
+  },
+  {
+    name: "drifted generated IDL program ID",
+    script: sbfProofScript.replace(expectedProgramId, "Vote111111111111111111111111111111111111111"),
+  },
+  {
+    name: "missing generated IDL digest",
+    script: sbfProofScript.replace('sha256sum "$binary" "$idl"', 'sha256sum "$binary"'),
+  },
+];
+
+for (const probe of sbfProofMutationProbes) {
+  if (validateSbfProofScript(probe.script).length === 0) {
+    failures.push(`mutation probe did not fail closed: ${probe.name}`);
+  }
+}
+
 if (failures.length) {
   failures.forEach((message) => console.error(`FAIL: ${message}`));
   process.exit(1);
 }
 
 console.log(
-  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 5 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, read-only permissions, and 7 fail-closed mutation probes remain bound.`,
+  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 5 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, program-ID-bound binary/IDL evidence, read-only permissions, and 10 fail-closed mutation probes remain bound.`,
 );
