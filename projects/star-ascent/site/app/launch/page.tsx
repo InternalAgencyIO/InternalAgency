@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useState } from "react";
 import { LaunchClock } from "../LaunchClock";
+import { sourceLanguageForClientPath } from "../i18n/config";
 import "./launch.css";
 
 const copy = {
@@ -21,7 +22,7 @@ const copy = {
 
 export default function LaunchPage() {
   const [language, setLanguage] = useState<"en" | "tr">("en");
-  useEffect(() => { if (window.location.hostname.includes("ileriakil")) setLanguage("tr"); }, []);
+  useEffect(() => setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname)), []);
   const t = copy[language];
   return <main className="launch-page"><div className="launch-page-stars" aria-hidden="true" /><nav><a href="/">IA<span>///</span></a><a href="/dossier">{t.dossier} ↗</a></nav>
     <section className="launch-page-hero"><p>{t.eyebrow}</p><h1>{t.title}</h1><span>{t.lede}</span><LaunchClock language={language} /><div className="launch-page-actions"><a href="/network">{t.actions[0]} ↗</a><a href="/signal">{t.actions[1]} ↗</a><a href="/proof">{t.actions[2]} ↗</a><a href="/verify">{t.actions[3]} ↗</a><a href="/press">{t.actions[4]} ↗</a><a href="/dossier">{t.actions[5]} ↗</a><a href="https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/projects/star-ascent/site" target="_blank" rel="noreferrer">{t.actions[6]} ↗</a></div></section>

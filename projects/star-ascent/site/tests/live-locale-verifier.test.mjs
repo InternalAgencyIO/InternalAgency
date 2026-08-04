@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   cachePolicyError,
+  localizedCoverageError,
   responseIdentityError,
   runtimeBundleError,
   runtimeParityError,
@@ -62,6 +63,27 @@ test("cache policy prevents stale HTML and safely handles content-addressed asse
     /content-addressed response/,
   );
   assert.match(cachePolicyError({ cacheControl: null, contentAddressed: false }), /missing/);
+});
+
+test("localized coverage requires committed replacements and rejects English leakage", () => {
+  const localeMessages = { Hello: "你好", "Internal Agency": "Internal Agency" };
+  assert.equal(
+    localizedCoverageError({
+      sourceValues: ["Hello", "Internal Agency"],
+      currentValues: ["你好", "Internal Agency"],
+      localeMessages,
+    }),
+    null,
+  );
+  assert.match(
+    localizedCoverageError({ sourceValues: ["Hello"], currentValues: ["Hello"], localeMessages }),
+    /absent/,
+  );
+  assert.match(
+    localizedCoverageError({ sourceValues: ["Hello"], currentValues: ["你好", "Hello"], localeMessages }),
+    /English source/,
+  );
+  assert.match(localizedCoverageError({ sourceValues: ["Unknown"], currentValues: [], localeMessages }), /no canonical/);
 });
 
 test("runtime bundle contract accepts a complete current fingerprint", () => {

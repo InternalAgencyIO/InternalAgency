@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sourceLanguageForClientPath } from "../i18n/config";
 import "./rewards.css";
 
 const copy = {
@@ -12,7 +13,7 @@ const copy = {
 
 export default function RewardsPage() {
   const [language, setLanguage] = useState<"en" | "tr">("en");
-  useEffect(() => { if (window.location.hostname.includes("ileriakil")) setLanguage("tr"); }, []);
+  useEffect(() => setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname)), []);
   const t = copy[language];
   return <main className="rewards-page"><div className="rewards-stars" aria-hidden="true" />
     <nav><a href="/">IA<span>///</span></a><a href="/dossier">{language === "en" ? "WHITE DOSSIER" : "BEYAZ DOSYA"} ↗</a></nav>

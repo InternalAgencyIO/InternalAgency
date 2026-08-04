@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sourceLanguageForClientPath } from "../i18n/config";
 
 const content = {
   en: {
@@ -25,7 +26,7 @@ const content = {
 
 export default function DossierPage() {
   const [language, setLanguage] = useState<"en" | "tr">("en");
-  useEffect(() => { if (window.location.hostname.includes("ileriakil")) setLanguage("tr"); }, []);
+  useEffect(() => setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname)), []);
   const t = content[language];
   const proposedLocks = t.locks.map(([label, detail]) => [label, `${language === "en" ? "Proposed: " : "ÖNERİ: "}${detail}`]);
   const lockHeading = language === "en" ? "THE LOCK IS THE MESSAGE // PROPOSED" : "KİLİT MESAJDIR // ÖNERİ";

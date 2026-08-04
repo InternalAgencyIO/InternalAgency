@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sourceLanguageForClientPath } from "../i18n/config";
 import "./verify.css";
 
 const copy = {
@@ -18,7 +19,7 @@ const copy = {
 
 export default function VerifyPage() {
   const [language, setLanguage] = useState<"en" | "tr">("en");
-  useEffect(() => { if (window.location.hostname.includes("ileriakil")) setLanguage("tr"); }, []);
+  useEffect(() => setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname)), []);
   const t = copy[language];
   return <main className="verify-page"><div className="verify-orbit" aria-hidden="true" /><nav><a href="/">IA<span>///</span></a><a href="/proof">{t.proof} ↗</a></nav>
     <header><p>{t.eyebrow}</p><h1>{t.title}</h1><strong>{t.lede}</strong></header>

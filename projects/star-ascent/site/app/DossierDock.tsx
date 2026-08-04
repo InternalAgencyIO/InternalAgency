@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { LaunchClock } from "./LaunchClock";
+import { sourceLanguageForClientPath } from "./i18n/config";
 
 type Language = "en" | "tr";
 
@@ -13,7 +14,7 @@ const links = {
 export function DossierDock() {
   const [language, setLanguage] = useState<Language | null>(null);
   const [open, setOpen] = useState(false);
-  useEffect(() => setLanguage(window.location.hostname.includes("ileriakil") ? "tr" : "en"), []);
+  useEffect(() => setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname)), []);
   if (!language) return null;
   const tr = language === "tr";
   return <aside className={`dossier-dock${open ? " dossier-dock--open" : ""}`} aria-label={tr ? "Kanonik lansman belgeleri" : "Canonical launch documents"}>

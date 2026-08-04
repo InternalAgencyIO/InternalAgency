@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
+import { sourceLanguageForClientPath } from "../../../i18n/config";
 
 type Copy = { label: string; title: string; deck: string; state: string; blocks: [string, string][]; next: string };
 
@@ -110,7 +111,7 @@ function archiveFragments(language: "en" | "tr", slug: string) {
 export default function DossierReaderPage() {
   const params = useParams<{ slug: string }>();
   const [language, setLanguage] = useState<"en" | "tr">("en");
-  useEffect(() => { if (window.location.hostname.includes("ileriakil")) setLanguage("tr"); }, []);
+  useEffect(() => setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname)), []);
   const record = useMemo(() => repairLegacyEncoding((language === "tr" ? TR : EN)[params.slug] ?? fallback(language, params.slug)), [language, params.slug]);
   const fragments = repairLegacyEncoding(archiveFragments(language, params.slug));
   const radianceArt = params.slug === "broadcast-pack" || params.slug === "social-kit"

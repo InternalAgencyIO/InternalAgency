@@ -5,7 +5,7 @@ import { ActivationTerminal } from "./ActivationTerminal";
 import { LaunchClock } from "./LaunchClock";
 import { SignalField } from "./SignalField";
 import { LaunchSequence } from "./LaunchSequence";
-import { isLocaleCode } from "./i18n/config";
+import { isLocaleCode, sourceLanguageForClientPath } from "./i18n/config";
 
 const copy = {
   en: {
@@ -546,9 +546,7 @@ export default function Home() {
   const [activationOpen, setActivationOpen] = useState(false);
   const [activationOpener, setActivationOpener] = useState<HTMLElement | null>(null);
   useEffect(() => {
-    if (window.location.hostname.includes("ileriakil")) {
-      queueMicrotask(() => setLanguage("tr"));
-    }
+    queueMicrotask(() => setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname)));
   }, []);
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);

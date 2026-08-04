@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { sourceLanguageForClientPath } from "../i18n/config";
 import "./network.css";
 
 type NetworkPayload = {
@@ -114,7 +115,7 @@ export default function NetworkPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (window.location.hostname.includes("ileriakil")) setLanguage("tr");
+    setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname));
     const controller = new AbortController();
     let active = true;
     fetch("/api/network", { signal: controller.signal })

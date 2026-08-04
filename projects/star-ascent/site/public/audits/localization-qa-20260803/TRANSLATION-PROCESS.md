@@ -141,6 +141,15 @@ contract. It does not prove native meaning, cadence, slang, cultural fluency,
 browser layout quality, full application behavior, or universal cache eviction
 for responses that were not requested.
 
+Before a cross-domain localization deployment, run
+`npm run check:i18n:dual-host-hydration`. It builds the current source, starts
+an ephemeral loopback server, and opens the Network route for all 50 locales
+through both `internalagency.localhost` and `ileriakil.localhost`. The browser
+must reach `localeReady`, request the source-bound payload when required, avoid
+external translation services, render every committed localized text and
+attribute value, and leave no replaced English source node behind. This proves
+the checked source behavior only; it is not production or native-review proof.
+
 ## Assurance boundary
 
 The current scorecard is 4,538 PASS, 0 FAIL, 462 HOLD, and 0 NOT_RUN. The 462

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sourceLanguageForClientPath } from "../i18n/config";
 
 const copy = {
   en: { label: "INTERNAL AGENCY // OFFICIAL SIGNAL DIRECTORY", title: <>ONE SIGNAL.<br />NO SHADOW LINKS.</>, intro: "Every verified public route begins here. Read the record, enter the activation terminal, and follow only channels published from this directory.", site: "MAIN SIGNAL", dossier: "WHITE DOSSIER", terminal: "ACTIVATION TERMINAL", broadcast: "BROADCAST WINDOW", status: "CHANNELS ACTIVATING", note: "New official social profiles will appear here as they are created and verified. Until then, the site and Dossier are the only canonical public surfaces.", safety: "NO SEED PHRASE. NO PRIVATE KEY. NO PAYMENT. NO IMPERSONATORS.", lang: "TÜRKÇE" },
@@ -9,7 +10,7 @@ const copy = {
 
 export default function SignalPage() {
   const [language, setLanguage] = useState<"en" | "tr">("en");
-  useEffect(() => { if (window.location.hostname.includes("ileriakil")) setLanguage("tr"); }, []);
+  useEffect(() => setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname)), []);
   const t = copy[language];
   return <main className="signal-page"><div className="signal-page-noise" aria-hidden="true" />
     <nav className="signal-page-nav"><a href="/">IA<span>///</span></a><button onClick={() => setLanguage(language === "en" ? "tr" : "en")}>{t.lang}</button></nav>

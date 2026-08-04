@@ -125,6 +125,13 @@ export function localeFromPath(pathname: string): LocaleCode | null {
   return isLocaleCode(first) ? first : null;
 }
 
+export function sourceLanguageForClientPath(pathname: string, hostname: string): "en" | "tr" {
+  const explicitLocale = localeFromPath(pathname);
+  const turkishHost = hostname.toLowerCase().includes("ileriakil");
+  if (explicitLocale) return explicitLocale === "tr" && turkishHost ? "tr" : "en";
+  return turkishHost ? "tr" : "en";
+}
+
 export function stripLocalePrefix(pathname: string): string {
   const locale = localeFromPath(pathname);
   if (!locale) return pathname || "/";

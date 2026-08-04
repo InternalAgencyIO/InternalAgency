@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { isLocaleCode } from "../i18n/config";
+import { isLocaleCode, sourceLanguageForClientPath } from "../i18n/config";
 import "./tokenomics.css";
 
 const copy = {
@@ -158,7 +158,7 @@ const copy = {
 export default function TokenomicsPage() {
   const [language, setLanguage] = useState<"en" | "tr">("en");
   useEffect(() => {
-    if (window.location.hostname.includes("ileriakil")) setLanguage("tr");
+    setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname));
   }, []);
   useEffect(() => {
     const routeLocale = window.location.pathname.split("/").filter(Boolean)[0];

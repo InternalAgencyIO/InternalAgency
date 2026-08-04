@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sourceLanguageForClientPath } from "../i18n/config";
 
 const copy = {
   en: {
@@ -13,7 +14,7 @@ const copy = {
 
 export default function WorldPage() {
   const [language, setLanguage] = useState<"en" | "tr">("en");
-  useEffect(() => { if (window.location.hostname.includes("ileriakil")) setLanguage("tr"); }, []);
+  useEffect(() => setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname)), []);
   const t = copy[language];
   return <main className="world-page"><div className="world-stars" aria-hidden="true" /><nav className="world-nav"><a href="/">IA<span>///</span></a><div><a href="/dossier">{language === "tr" ? "DOSYA" : "DOSSIER"}</a><button onClick={() => setLanguage(language === "en" ? "tr" : "en")}>{language === "en" ? "TR" : "EN"}</button></div></nav><section className="world-hero"><p>{t.kicker}</p><h1>{t.title}</h1><p>{t.intro}</p></section><figure className="world-art">
     {/* eslint-disable-next-line @next/next/no-img-element -- Vinext runtime does not safely support next/image; this local asset has exact intrinsic dimensions. */}

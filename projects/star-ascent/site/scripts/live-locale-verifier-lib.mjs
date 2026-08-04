@@ -20,6 +20,34 @@ export function cachePolicyError({ cacheControl, contentAddressed }) {
   return `HTML cache policy is not no-store and must-revalidate: ${cacheControl ?? "missing"}`;
 }
 
+const normalizeVisible = (value) => value.trim().replace(/\s+/gu, " ");
+
+export function localizedCoverageError({ sourceValues, currentValues, localeMessages }) {
+  const canonicalSources = sourceValues.filter((source) => Object.hasOwn(localeMessages, source));
+  if (canonicalSources.length === 0) return "rendered page exposed no canonical pre-hydration source values";
+  const counts = (values) => {
+    const result = new Map();
+    for (const value of values.map(normalizeVisible)) result.set(value, (result.get(value) ?? 0) + 1);
+    return result;
+  };
+  const currentCounts = counts(currentValues);
+  const expectedCounts = counts(canonicalSources.map((source) => localeMessages[source]));
+  const missing = [...expectedCounts]
+    .filter(([value, count]) => (currentCounts.get(value) ?? 0) < count)
+    .map(([value]) => value);
+  if (missing.length > 0) {
+    return `${missing.length} committed localized value(s) absent after hydration: ${missing.slice(0, 3).join(" | ")}`;
+  }
+  const leaks = [...new Set(canonicalSources)].filter((source) => {
+    if (localeMessages[source] === source) return false;
+    return (currentCounts.get(normalizeVisible(source)) ?? 0) > (expectedCounts.get(normalizeVisible(source)) ?? 0);
+  });
+  if (leaks.length > 0) {
+    return `${leaks.length} replaced English source value(s) remain after hydration: ${leaks.slice(0, 3).join(" | ")}`;
+  }
+  return null;
+}
+
 export function runtimeBundleError({ contentType, bytes, contract }) {
   if (!contentType?.toLowerCase().includes("javascript")) {
     return `unexpected runtime content type ${contentType ?? "missing"}`;
