@@ -131,7 +131,15 @@ if (review.status === "READY") {
   check(operator?.label?.toLocaleLowerCase("en") !== verifier?.label?.toLocaleLowerCase("en"), "READY requires a verifier distinct from the sole-Trezor operator");
   check(verifier?.reviewedArtifacts === true && verifier?.reviewedStagePlan === true, "READY requires independent artifact and stage-plan review");
   check(journal.status === "ARMED", "READY requires the canonical V2 stage journal to be ARMED");
-  check(gate.schedule?.state === "SCHEDULED_HOLD" && Number.isFinite(Date.parse(gate.schedule?.publishedAtUtc ?? "")), "READY requires a reviewed replacement UTC window while mainnet remains HOLD");
+  const publishedAtMs = utc(gate.schedule?.publishedAtUtc) ? Date.parse(gate.schedule.publishedAtUtc) : Number.NaN;
+  const scheduledAtMs = utc(gate.schedule?.scheduledAtUtc) ? Date.parse(gate.schedule.scheduledAtUtc) : Number.NaN;
+  check(
+    gate.schedule?.state === "SCHEDULED_HOLD"
+      && Number.isFinite(publishedAtMs)
+      && Number.isFinite(scheduledAtMs)
+      && scheduledAtMs > publishedAtMs,
+    "READY requires one exact replacement UTC ceremony time later than its publication time while mainnet remains HOLD",
+  );
   check(gate.gates?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true, "READY requires post-funding/post-scheduling artifact regeneration");
   check(review.review?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true, "READY requires regeneration review");
   check(review.review?.replacementUtcWindowReviewed === true, "READY requires replacement-window review");

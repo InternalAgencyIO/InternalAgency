@@ -9,6 +9,8 @@ const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."
 const gatePath = path.join(siteRoot, "launch/iat-v2-mainnet-readiness-gate.json");
 const gate = JSON.parse(await readFile(gatePath, "utf8"));
 const failures = [];
+const exactKeys = (value, keys) => value && typeof value === "object" && !Array.isArray(value)
+  && JSON.stringify(Object.keys(value).sort()) === JSON.stringify([...keys].sort());
 
 function check(condition, message) {
   if (!condition) failures.push(message);
@@ -16,8 +18,17 @@ function check(condition, message) {
 
 check(gate.schema === "iat-v2-mainnet-readiness-gate/v1", "unexpected readiness schema");
 check(gate.status === "HOLD" && gate.network === "mainnet-beta", "mainnet readiness must remain HOLD");
+check(
+  exactKeys(gate.schedule, ["state", "publishedAtUtc", "scheduledAtUtc", "priorWindow"]),
+  "schedule must contain only the canonical publication, ceremony, and prior-window fields",
+);
+check(
+  exactKeys(gate.schedule?.priorWindow, ["scheduledAtUtc", "state"]),
+  "prior window must contain only its canonical time and terminal state",
+);
 check(gate.schedule?.state === "UNSCHEDULED_HOLD", "schedule must remain UNSCHEDULED_HOLD");
 check(gate.schedule?.publishedAtUtc === null, "replacement UTC window must not be populated before publication");
+check(gate.schedule?.scheduledAtUtc === null, "replacement UTC ceremony time must not be populated before scheduling");
 check(
   gate.schedule?.priorWindow?.state === "EXPIRED_SUPERSEDED_DO_NOT_USE",
   "prior window must be explicitly expired and non-actionable",

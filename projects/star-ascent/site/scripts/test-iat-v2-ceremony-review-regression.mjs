@@ -55,6 +55,7 @@ function readyFixture() {
   const gate = JSON.parse(readFileSync(join(sandbox, gatePath), "utf8"));
   gate.schedule.state = "SCHEDULED_HOLD";
   gate.schedule.publishedAtUtc = new Date().toISOString();
+  gate.schedule.scheduledAtUtc = new Date(Date.now() + 60 * 60_000).toISOString();
   gate.gates.releaseArtifactsRegeneratedAfterFundingAndScheduling = true;
   writeJson(gatePath, gate);
   const journal = JSON.parse(readFileSync(join(sandbox, journalPath), "utf8"));
@@ -134,7 +135,14 @@ try {
   unarmed.artifactDigests.stageJournalSha256 = sha256("launch/iat-v2-mainnet-stage-journal.template.json");
   expectFail("unarmed stage journal", unarmed, "stage journal to be ARMED");
 
-  console.log("IAT V2 ceremony-review regression passed: HOLD hygiene, V2-only source binding, sole-Trezor truthfulness, independent verifier separation, signed-Devnet review, stage arming, credential rejection, and digest drift all fail closed.");
+  const missingCeremonyTimeGate = JSON.parse(readFileSync(join(sandbox, "launch/iat-v2-mainnet-readiness-gate.json"), "utf8"));
+  missingCeremonyTimeGate.schedule.scheduledAtUtc = null;
+  writeJson("launch/iat-v2-mainnet-readiness-gate.json", missingCeremonyTimeGate);
+  const missingCeremonyTime = clone(ready);
+  missingCeremonyTime.artifactDigests.readinessGateSha256 = sha256("launch/iat-v2-mainnet-readiness-gate.json");
+  expectFail("READY without exact ceremony time", missingCeremonyTime, "exact replacement UTC ceremony time");
+
+  console.log("IAT V2 ceremony-review regression passed: HOLD hygiene, exact UTC ceremony scheduling, V2-only source binding, sole-Trezor truthfulness, independent verifier separation, signed-Devnet review, stage arming, credential rejection, and digest drift all fail closed.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }

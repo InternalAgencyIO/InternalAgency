@@ -65,7 +65,12 @@ function expectFail(name, journal, needle) {
 
 function armedFixture() {
   const readiness = JSON.parse(readFileSync(join(sandbox, "launch/iat-v2-mainnet-readiness-gate.json"), "utf8"));
-  readiness.schedule = { state: "SCHEDULED_HOLD", publishedAtUtc: "2026-07-31T23:30:00Z", priorWindow: readiness.schedule.priorWindow };
+  readiness.schedule = {
+    state: "SCHEDULED_HOLD",
+    publishedAtUtc: "2026-07-31T23:30:00Z",
+    scheduledAtUtc: "2026-08-01T03:30:00Z",
+    priorWindow: readiness.schedule.priorWindow,
+  };
   readiness.funding.observedLamports = readiness.funding.ceremonyFloorLamports;
   readiness.funding.shortfallToCeremonyFloorLamports = "0";
   readiness.funding.ceremonyFloorSatisfied = true;
@@ -133,6 +138,13 @@ try {
   const credential = clone(baseline);
   credential.identity.secretKey = "do-not-store-credentials";
   expectFail("credential-shaped field", credential, "credential-shaped content");
+
+  const missingCeremonyTimeArmed = armedFixture();
+  const missingCeremonyTimeGate = JSON.parse(readFileSync(join(sandbox, "launch/iat-v2-mainnet-readiness-gate.json"), "utf8"));
+  missingCeremonyTimeGate.schedule.scheduledAtUtc = null;
+  writeJson("launch/iat-v2-mainnet-readiness-gate.json", missingCeremonyTimeGate);
+  missingCeremonyTimeArmed.artifactDigests.readinessGateSha256 = sha256(join(sandbox, "launch/iat-v2-mainnet-readiness-gate.json"));
+  expectFail("ARMED without exact ceremony time", missingCeremonyTimeArmed, "exact SCHEDULED_HOLD UTC ceremony time");
 
   const armed = armedFixture();
   expectPass("fully bound ARMED", armed);
@@ -253,7 +265,7 @@ try {
   alteredLimitations.limitations[3] = "This altered statement is long but no longer preserves the reviewed publication boundary.";
   expectFail("altered limitations", alteredLimitations, "limitations must retain the four exact reviewed non-authorizing statements");
 
-  console.log("IAT V2 stage-journal regression checks pass: HOLD hygiene, immutable order, source binding, eight matched stages, failure/mismatch/unresolved terminal stops, credential rejection, and replay resistance.");
+  console.log("IAT V2 stage-journal regression checks pass: HOLD hygiene, exact UTC ceremony scheduling, immutable order, source binding, eight matched stages, failure/mismatch/unresolved terminal stops, credential rejection, and replay resistance.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }

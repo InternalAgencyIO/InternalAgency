@@ -66,6 +66,7 @@ readyGate.funding.observedLamports = readyGate.funding.ceremonyFloorLamports;
 readyGate.observedAtUtc = "2099-01-01T00:00:00Z";
 readyGate.schedule.state = "SCHEDULED_HOLD";
 readyGate.schedule.publishedAtUtc = "2099-01-01T00:00:00Z";
+readyGate.schedule.scheduledAtUtc = "2099-01-01T01:00:00Z";
 readyGate.gates.releaseArtifactsRegeneratedAfterFundingAndScheduling = true;
 readyGate.gates.independentMainnetVerifierAssigned = true;
 readyGate.gates.physicalModelTDevicePathReviewed = true;
@@ -128,6 +129,45 @@ assert.equal(ready.checks.V2_STAGE_JOURNAL_CANONICAL_VALIDATION, true);
 assert.equal(ready.checks.BOUND_RELEASE_ARTIFACTS_REGENERATED, true);
 assert.equal(ready.checks.INDEPENDENT_MAINNET_VERIFIER_ASSIGNED, true);
 assert.equal(ready.checks.MODEL_T_DEVICE_PATH_REVIEWED, true);
+
+for (const [name, scheduledAtUtc] of [
+  ["missing exact ceremony time", null],
+  ["ceremony time before publication", "2098-12-31T23:59:59Z"],
+  ["expired ceremony time", "2099-01-01T00:10:00Z"],
+]) {
+  const candidate = structuredClone(readyGate);
+  candidate.schedule.scheduledAtUtc = scheduledAtUtc;
+  const rejected = assessCeremonyEntry(
+    candidate,
+    "f".repeat(64),
+    Date.parse("2099-01-01T00:15:00Z"),
+    readyAudit,
+    readyRemediationAudit,
+    canonicalValidation,
+    readyCeremonyArtifacts,
+  );
+  assert.equal(rejected.state, "HOLD", name);
+  assert.ok(rejected.blockers.includes("REPLACEMENT_UTC_WINDOW"), name);
+}
+
+for (const [name, publishedAtUtc] of [
+  ["noncanonical publication time", "2099-01-01T00:00:00.000Z"],
+  ["future publication time", "2099-01-01T00:16:01Z"],
+]) {
+  const candidate = structuredClone(readyGate);
+  candidate.schedule.publishedAtUtc = publishedAtUtc;
+  const rejected = assessCeremonyEntry(
+    candidate,
+    "f".repeat(64),
+    Date.parse("2099-01-01T00:15:00Z"),
+    readyAudit,
+    readyRemediationAudit,
+    canonicalValidation,
+    readyCeremonyArtifacts,
+  );
+  assert.equal(rejected.state, "HOLD", name);
+  assert.ok(rejected.blockers.includes("REPLACEMENT_UTC_WINDOW"), name);
+}
 
 for (const mutate of [
   (candidate) => { candidate.findingSummary.openBySeverity.CRITICAL = 2; },
@@ -218,4 +258,4 @@ for (const [name, mutate, blockers] of [
   for (const blocker of blockers) assert.ok(rejected.blockers.includes(blocker), `${name}: ${blocker}`);
 }
 
-console.log("IAT V2 ceremony-entry regression passed: current ledger fails closed; audit, V2 ceremony-review, and V2 stage-journal summaries require canonical validation; synthetic ready state permits exactly one named owner-accepted Trezor risk while unaccepted criticals, stale artifacts, unreviewed verifier data, and an unbound Model T address remain blockers.");
+console.log("IAT V2 ceremony-entry regression passed: current ledger fails closed; audit, V2 ceremony-review, and V2 stage-journal summaries require canonical validation; synthetic ready state permits exactly one named owner-accepted Trezor risk while missing, expired, or impossible UTC windows, unaccepted criticals, stale artifacts, unreviewed verifier data, and an unbound Model T address remain blockers.");

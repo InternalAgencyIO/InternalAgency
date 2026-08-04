@@ -45,6 +45,8 @@ assert.equal(funded.funding.ceremonyFloorSatisfied, true);
 assert.equal(funded.gates.mainnetFundingFloorSatisfied, true);
 assert.equal(funded.status, "HOLD", "funding observation never lifts mainnet HOLD");
 assert.equal(funded.schedule.state, "UNSCHEDULED_HOLD");
+assert.equal(funded.schedule.publishedAtUtc, null);
+assert.equal(funded.schedule.scheduledAtUtc, null);
 
 let requestedUrl;
 let requestedOptions;

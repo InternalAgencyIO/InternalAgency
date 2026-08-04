@@ -57,7 +57,10 @@ pre-launch audit clearance and all seven conditions recorded in
    more than one minute of future skew.
 3. The public mainnet address has at least exactly `8500000000` lamports.
 4. One replacement UTC window is published and the schedule state is
-   `SCHEDULED_HOLD`.
+   `SCHEDULED_HOLD`. The readiness record binds both the non-future publication
+   time (`publishedAtUtc`) and the exact ceremony time (`scheduledAtUtc`). The
+   ceremony time must be canonical UTC, later than publication, and still in
+   the future when ceremony entry is assessed.
 5. Every bound release artifact was regenerated after both funding and
    scheduling, the canonical V2 ceremony review is `READY`, the canonical V2
    stage journal is `ARMED`, and both validators pass in this same assessment.

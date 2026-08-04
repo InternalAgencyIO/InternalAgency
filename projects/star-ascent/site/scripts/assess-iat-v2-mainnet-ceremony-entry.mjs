@@ -37,9 +37,21 @@ export function assessCeremonyEntry(
   } catch {
     fundingFloorSatisfied = false;
   }
+  const canonicalUtcMs = (value) => {
+    if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/u.test(value)) return Number.NaN;
+    const parsed = Date.parse(value);
+    return Number.isFinite(parsed) && new Date(parsed).toISOString().replace(".000Z", "Z") === value
+      ? parsed
+      : Number.NaN;
+  };
+  const publishedAtMs = canonicalUtcMs(gate.schedule?.publishedAtUtc);
+  const scheduledAtMs = canonicalUtcMs(gate.schedule?.scheduledAtUtc);
   const replacementUtcPublished = gate.schedule?.state === "SCHEDULED_HOLD"
-    && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/u.test(gate.schedule?.publishedAtUtc ?? "")
-    && Number.isFinite(Date.parse(gate.schedule.publishedAtUtc));
+    && Number.isFinite(publishedAtMs)
+    && publishedAtMs <= nowMs + 60_000
+    && Number.isFinite(scheduledAtMs)
+    && scheduledAtMs > nowMs
+    && scheduledAtMs > publishedAtMs;
   const securityAuditClear = audit?.launchDecision === "CLEAR"
     && audit?.findingSummary?.openBySeverity?.CRITICAL === 0
     && audit?.findingSummary?.openBySeverity?.HIGH === 0
@@ -121,6 +133,7 @@ export function assessCeremonyEntry(
       "This assessment is local and read-only.",
       "READY_FOR_ATTENDED_PREFLIGHT is not transaction, signing, broadcast, deployment, mint, transfer, or publication authority.",
       "The funding observation must be no more than 30 minutes old with no more than one minute of future skew.",
+      "The replacement schedule must bind one canonical UTC ceremony time that is still future at assessment and later than its non-future publication time.",
       "Audit summary fields are never trusted alone; both public audit packages must pass their canonical source-binding and artifact-digest validators in this same assessment.",
       "Release and attended-review summary fields are never trusted alone; the canonical V2 ceremony review and V2 stage journal must pass their validators in this same assessment.",
       "The sole named owner-accepted Trezor concentration risk may remain; every unaccepted critical/high finding and missing current-source assurance is a mandatory blocker.",

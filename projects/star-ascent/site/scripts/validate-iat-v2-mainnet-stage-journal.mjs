@@ -206,7 +206,18 @@ if (isHold) {
   const identityAddresses = [journal.identity?.programId, journal.identity?.programDataAddress, journal.identity?.mint, journal.identity?.administrator];
   if (new Set(identityAddresses).size !== identityAddresses.length) fail("program, ProgramData, mint, and administrator identities must be distinct");
   if (readinessGate.status !== "HOLD" || readinessGate.network !== "mainnet-beta") fail("non-HOLD journal requires a canonical mainnet readiness record still preserving HOLD");
-  if (readinessGate.schedule?.state !== "SCHEDULED_HOLD" || !isUtc(readinessGate.schedule?.publishedAtUtc)) fail("non-HOLD journal requires a newly published SCHEDULED_HOLD UTC window");
+  const schedulePublishedAtMs = isUtc(readinessGate.schedule?.publishedAtUtc)
+    ? Date.parse(readinessGate.schedule.publishedAtUtc)
+    : Number.NaN;
+  const ceremonyScheduledAtMs = isUtc(readinessGate.schedule?.scheduledAtUtc)
+    ? Date.parse(readinessGate.schedule.scheduledAtUtc)
+    : Number.NaN;
+  if (
+    readinessGate.schedule?.state !== "SCHEDULED_HOLD"
+      || !Number.isFinite(schedulePublishedAtMs)
+      || !Number.isFinite(ceremonyScheduledAtMs)
+      || ceremonyScheduledAtMs <= schedulePublishedAtMs
+  ) fail("non-HOLD journal requires one exact SCHEDULED_HOLD UTC ceremony time later than its publication time");
   if (readinessGate.funding?.ceremonyFloorSatisfied !== true || readinessGate.gates?.mainnetFundingFloorSatisfied !== true) fail("non-HOLD journal requires the recorded ceremony funding floor");
   for (const field of ["replacementUtcWindowPublished", "releaseArtifactsRegeneratedAfterFundingAndScheduling", "finalPreflightPassedAgainstRegeneratedArtifacts", "physicalModelTDevicePathReviewed", "physicalModelTReviewCompleted", "independentMainnetVerifierAssigned", "mainnetExecutionAuthorized"]) {
     if (readinessGate.gates?.[field] !== true) fail(`non-HOLD journal requires readinessGate.gates.${field}`);
