@@ -20,3 +20,9 @@
 18. Validated and archived Tokyo 856 with exactly three adult fictional identities, complete footwear, safe opaque couture, the completed route-light mission, the Japan location, 941x1672 dimensions, and SHA-256 proof.
 19. Accepted Fuji's independently fastened paired anklet illusion and Yokohama's fixed silver lacing seam; blocked or visually incorrect alternatives remained unpublished.
 20. Materialized the exact final residual X reservation: Mexico 854 and 855 followed by Japan 856, caption `Mexico ❤️ Japan`, under the active Batch 202–211 image-only video pause.
+21. Reconciled the exact residual publication after public confirmation; the country X-post backlog is now empty and cover updates remain paused by user instruction.
+22. Added the campaign's recurring PAWS companion contract and locked the Batch 209–212 promotion override. Tokyo 856 remains grandfathered; every still still under production includes the same collarless young golden British Shorthair.
+23. Applied the strict clean-face gate and rejected every glitter-specked, misplaced-accessory, identity-regressed, or contract-breaking candidate without replacing its accepted master.
+24. Validated and archived Himeji 857 after an integrated clean branch preserved the three adult identities, cabin-signal console, linked trio geometry, four deterministic details, PAWS, complete footwear, and Himeji Castle.
+25. Validated and archived Yokohama 859 after its final branch preserved all nine deterministic details and placed the route mark on Radiance rather than on fabric, with clean faces, PAWS, complete footwear, beacon, and harbor continuity.
+26. Fuji 858 remains the sole unresolved lane. A new moderation block was appended to the permanent corpus, the deterministic preflight cache was rebuilt, and subsequent visual miswirings were rejected without changing the accepted PAWS master.
