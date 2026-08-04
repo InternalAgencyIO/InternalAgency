@@ -14,11 +14,11 @@
   "endBatch": 304,
   "firstNumber": 380,
   "lastNumber": 1239,
-  "nextBatch": 209,
-  "nextNumber": 856,
+  "nextBatch": 210,
+  "nextNumber": 860,
   "completedCountries": 107,
-  "completedBatches": 119,
-  "completedImages": 476,
+  "completedBatches": 120,
+  "completedImages": 480,
   "completedCountrySlugs": [
     "turkiye",
     "india",
@@ -12461,16 +12461,16 @@
       "country": "Japan",
       "countrySlug": "japan",
       "theme": "THE MILE HIGH THREESOME - Japan Resort-Flight and Sunset-Departure Aircrew",
-      "status": "planned",
+      "status": "complete",
       "bonusExpansion": true,
       "renderTiming": {
         "startedAt": "2026-08-03T18:41:18.238Z",
         "targetMinutes": 45,
         "firstFoundationAt": "2026-08-03T20:23:43.050Z",
-        "validationCompletedAt": null,
-        "elapsedMinutes": null,
-        "withinTarget": null,
-        "overrunReason": null
+        "validationCompletedAt": "2026-08-04T18:56:14.2816034Z",
+        "elapsedMinutes": 1454.93,
+        "withinTarget": false,
+        "overrunReason": "Extended identity-safe accessory recovery and clean-face validation across the four Japan lanes."
       },
       "scenes": [
         {
@@ -12919,7 +12919,12 @@
               ],
               "remaining": []
             }
-          }
+          },
+          "status": "rendered",
+          "completedAt": "2026-08-04T18:37:33.0359366Z",
+          "width": 941,
+          "height": 1672,
+          "sha256": "8a73db873af240f5d221f3f1e2ecdf0c878fd523387c7c4ff9f86e178c6ca4a2"
         },
         {
           "number": 858,
@@ -13002,11 +13007,31 @@
             "storage": "base rolls plus every triggered roll; all 84 character and 20 trio-static traits evaluated from the current mutable master"
           },
           "renderState": {
-            "status": "refining",
-            "lastValidStage": "triggeredDetails",
-            "lastValidAsset": "tmp/world-195x4/batch-209/details/858-detail-07-paws.png",
-            "attempts": 24,
+            "status": "complete",
+            "lastValidStage": "validation",
+            "lastValidAsset": "assets/lore/starlight-era/858-japan-fuji-kawaguchi-star-map-relay.png",
+            "attempts": 28,
             "blocker": null,
+            "recoveryBranch": {
+              "status": "promoted-to-final",
+              "acceptedAt": "2026-08-04T18:56:14.2816034Z",
+              "lastValidAsset": "assets/lore/starlight-era/858-japan-fuji-kawaguchi-star-map-relay.png",
+              "sha256": "3929b2e3eb6d3a4108aea292042dfcc31a08e7594b2f0959b158be2abad80cae",
+              "bytes": 2192183,
+              "width": 941,
+              "height": 1672,
+              "completed": [
+                "Ellie.chainAccentWideCuffDuo",
+                "companion.PAWS",
+                "Radiance.opaqueContrastEdge",
+                "Radiance.bodyPiercing",
+                "Radiance.hat",
+                "Ellie.shoulderBodyChain",
+                "Alia.chainAnkletPartnerIllusion"
+              ],
+              "replayRemaining": [],
+              "nextMethod": "None; the recovery branch passed validation and was promoted to the immutable archived final."
+            },
             "retryVariantRolls": [],
             "identityReferences": [
               "468-france-paris-la-defense-prism-intercept.png",
@@ -13017,8 +13042,8 @@
               "relationship": "passed_identity_preserving_relationship_edit",
               "silhouette": "passed_concise_opaque_resort_flight_silhouette",
               "refinement": "passed_single_variable_indigo_piping_retry",
-              "triggeredDetails": "in_progress_6_of_7",
-              "validation": "pending"
+              "triggeredDetails": "passed_all_7_deterministic_details_and_paws",
+              "validation": "passed"
             },
             "blockedPrompts": [
               {
@@ -13176,7 +13201,8 @@
             "relationshipSha256": "33a14c79e1da00418eb9011b18ff3028a1905c4794cf892550aca60453afee47",
             "silhouetteSha256": "1aafe2d4d4524d34319b92860d2c363d806b324eaa3d9f5e23e02b358957757e",
             "refinementSha256": "7587af5cbef3d1767464132402a104c4c7d186687c6be6989973e14adc7602da",
-            "triggeredDetailsSha256": "deb6719907aeb060898eefa8ea918fee10dccd6de618d4c59396085fae1849d2",
+            "triggeredDetailsSha256": "3929b2e3eb6d3a4108aea292042dfcc31a08e7594b2f0959b158be2abad80cae",
+            "archiveSha256": "3929b2e3eb6d3a4108aea292042dfcc31a08e7594b2f0959b158be2abad80cae",
             "detailProgress": {
               "completed": [
                 "Radiance.hat",
@@ -13186,11 +13212,14 @@
                 "Radiance.bodyPiercing",
                 "companion.PAWS"
               ],
-              "remaining": [
-                "Ellie.chainAccentWideCuffDuo"
-              ]
+              "remaining": []
             }
-          }
+          },
+          "status": "rendered",
+          "completedAt": "2026-08-04T18:56:14.2816034Z",
+          "width": 941,
+          "height": 1672,
+          "sha256": "3929b2e3eb6d3a4108aea292042dfcc31a08e7594b2f0959b158be2abad80cae"
         },
         {
           "number": 859,
@@ -13394,13 +13423,19 @@
               ],
               "remaining": []
             }
-          }
+          },
+          "status": "rendered",
+          "completedAt": "2026-08-04T18:37:33.0359366Z",
+          "width": 941,
+          "height": 1672,
+          "sha256": "48b7802d13bb0af8f9ad6a7565cc527f2c933a640cce63bce2476f56a89a8eea"
         }
       ],
       "videoPause": {
         "status": "not-scheduled",
         "reason": "Binding four-PNG-only pause for render Batches 202 through 211."
-      }
+      },
+      "completedAt": "2026-08-04T18:56:14.2816034Z"
     }
   ]
 }

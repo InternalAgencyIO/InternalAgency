@@ -1218,3 +1218,13 @@ The machine-readable collection index is in
 
 The machine-readable collection index is in
 [`manifest.json`](manifest.json). Original foundations and accepted sequential refinements remain checkpointed under the batch staging folder.
+
+## THE MILE HIGH THREESOME - Bonus Batch 209: Japan
+
+| | |
+|---|---|
+| **Tokyo Shibuya Command Route-Light Grid**<br><img src="856-japan-tokyo-shibuya-command-route-light-grid.png" width="420" alt="The STAR RAZE trio completing a route-light mission above Tokyo's Shibuya crossing"> | **Himeji Castle Cabin-Signal Cipher**<br><img src="857-japan-himeji-castle-cabin-signal-cipher.png" width="420" alt="The trio calibrating a cabin-signal cipher at Himeji Castle with PAWS beside the console"> |
+| **Fuji Kawaguchi Star-Map Relay**<br><img src="858-japan-fuji-kawaguchi-star-map-relay.png" width="420" alt="The trio and PAWS completing a luminous star-map relay above Lake Kawaguchi and Mount Fuji"> | **Yokohama Minato Mirai Arrival-Beacon Finale**<br><img src="859-japan-yokohama-minato-mirai-arrival-beacon-finale.png" width="420" alt="The trio and PAWS sealing an arrival beacon at Yokohama's Minato Mirai waterfront"> |
+
+The machine-readable collection index is in
+[`manifest.json`](manifest.json). Original foundations and accepted sequential refinements remain checkpointed under the batch staging folder.
