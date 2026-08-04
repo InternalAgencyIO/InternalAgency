@@ -124,6 +124,9 @@ that the bundle embeds the committed payload schema, namespace, full and short
 catalog digests, fail-closed payload marker, and no legacy `/i18n/` payload
 path. The command is deliberately separate from offline CI: it requires
 network access, changes no hosting or chain state, and does not deploy.
+Before the network requests, mutation-based local tests prove that redirected
+or cross-origin responses, wrong content types, undersized bundles, missing
+contract markers, and the retired payload path all fail closed.
 
 Passing proves that the checked public payload bytes match the committed
 catalog, every locale has a checked public route on each domain, and each

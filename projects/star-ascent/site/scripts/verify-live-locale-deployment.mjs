@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { responseIdentityError, runtimeBundleError } from "./live-locale-verifier-lib.mjs";
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const catalogPath = resolve(siteRoot, "app/i18n/messages.json");
@@ -13,16 +14,6 @@ const rtlLocales = new Set(["ar", "ur"]);
 
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const htmlLanguageTag = (locale) => (locale === "zh" ? "zh-Hans" : locale === "sr" ? "sr-Cyrl" : locale);
-
-function responseIdentityError(requestedUrl, response) {
-  const requested = new URL(requestedUrl);
-  const final = new URL(response.url);
-  if (response.redirected) return `unexpected redirect to ${response.url}`;
-  if (final.origin !== requested.origin || final.pathname !== requested.pathname) {
-    return `final origin/path ${final.origin}${final.pathname} != ${requested.origin}${requested.pathname}`;
-  }
-  return null;
-}
 
 async function fetchBytes(url) {
   const response = await fetch(url, {
@@ -183,32 +174,12 @@ const runtimeResults = await mapConcurrent(runtimeJobs, 2, async ({ domain, labe
   }
   const runtimeIdentityError = responseIdentityError(runtimeUrl, response);
   if (runtimeIdentityError) return { ok: false, label, detail: runtimeIdentityError };
-  if (!response.headers.get("content-type")?.toLowerCase().includes("javascript")) {
-    return {
-      ok: false,
-      label,
-      detail: `unexpected runtime content type ${response.headers.get("content-type") ?? "missing"}`,
-    };
-  }
-  if (bytes.length < 1_000) {
-    return { ok: false, label, detail: `unexpectedly small runtime response (${bytes.length} bytes)` };
-  }
-
-  const runtime = bytes.toString("utf8");
-  const requiredMarkers = [
-    contract.schema,
-    contract.assetNamespace,
-    contract.catalogSha256,
-    contract.catalogSha256.slice(0, 16),
-    "payload-contract-failed",
-  ];
-  const missingMarkers = requiredMarkers.filter((marker) => !runtime.includes(marker));
-  if (missingMarkers.length > 0) {
-    return { ok: false, label, detail: `runtime missing committed marker(s): ${missingMarkers.join(", ")}` };
-  }
-  if (runtime.includes("/i18n/")) {
-    return { ok: false, label, detail: "runtime still contains the legacy /i18n/ payload path" };
-  }
+  const bundleError = runtimeBundleError({
+    contentType: response.headers.get("content-type"),
+    bytes,
+    contract,
+  });
+  if (bundleError) return { ok: false, label, detail: bundleError };
   return { ok: true, label };
 });
 
