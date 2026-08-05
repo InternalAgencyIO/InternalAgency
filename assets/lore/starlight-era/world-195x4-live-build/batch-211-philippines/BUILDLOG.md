@@ -27,3 +27,10 @@
 - Vigan accepted the linked-shoulder and shared-smile relationship while retaining secure lap-copilot handling.
 - Banaue accepted the mirrored partner link and mission whisper while keeping PAWS's console interaction reciprocal.
 - El Nido accepted the assigned velvet choker and signal pendant without changing the three-way embrace or crew dash.
+
+## Second detail pass
+
+- Manila restored the exact active ribbon-chase prop while keeping the complete-footwear and route-light gates intact.
+- Vigan added the assigned compact angular wrist sculpture without changing the lap-copilot interaction.
+- Banaue added the tiny secular shoulder mark while keeping every face clean and natural.
+- El Nido added the separate collarbone chain below the accepted velvet choker without changing PAWS or the embrace.
