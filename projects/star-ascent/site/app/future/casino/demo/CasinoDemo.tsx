@@ -2,77 +2,238 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Phase = "ready" | "staged" | "committed" | "dealt" | "settled";
+type Phase = "ready" | "staged" | "committed" | "revealed" | "settled";
 type Suit = "♠" | "♥" | "♦" | "♣";
+type Scene = "plinko" | "dice" | "roulette" | "mines" | "keno" | "limbo" | "slots" | "baccarat" | "blackjack" | "crash";
 
 type DemoCard = {
   rank: string;
   suit: Suit;
 };
 
-type DemoRound = {
+type GameDefinition = {
+  id: string;
+  order: string;
+  name: string;
+  scene: Scene;
   participant: string;
-  playerCards: DemoCard[];
-  houseCards: DemoCard[];
-  playerScore: number;
-  houseScore: number;
-  outcome: "PLAYER WIN" | "PUSH" | "HOUSE WIN";
-  multiplier: -1 | 0 | 1;
+  tagline: string;
+  instruction: string;
+  selection: string;
+  outcome: string;
+  sceneLabel: string;
+  payoutLabel: string;
+  netFactor: number;
   seed: string;
   receipt: string;
+  demandSignal: string;
+  buildTier: "FOUNDATION" | "ADVANCED";
 };
 
 type DemoReceipt = {
   id: string;
+  game: string;
   participant: string;
-  outcome: DemoRound["outcome"];
+  outcome: string;
   credits: number;
 };
 
-const demoRounds: DemoRound[] = [
+const games: GameDefinition[] = [
   {
+    id: "plinko",
+    order: "01",
+    name: "Plinko",
+    scene: "plinko",
     participant: "Nora Vale",
-    playerCards: [{ rank: "A", suit: "♠" }, { rank: "8", suit: "♥" }],
-    houseCards: [{ rank: "K", suit: "♦" }, { rank: "7", suit: "♣" }],
-    playerScore: 19,
-    houseScore: 17,
-    outcome: "PLAYER WIN",
-    multiplier: 1,
-    seed: "DEMO-SEED-ALPHA-104",
-    receipt: "DLC-DEMO-001",
+    tagline: "One drop. Every turn replayable.",
+    instruction: "Choose a risk lane and watch a preset ball path resolve into one multiplier pocket.",
+    selection: "MEDIUM RISK // 12 ROWS",
+    outcome: "4.20× LANDING",
+    sceneLabel: "A demo Plinko board with a ball landing in the 4.20 times pocket",
+    payoutLabel: "+3.20× net",
+    netFactor: 3.2,
+    seed: "DEMO-PLINKO-A104",
+    receipt: "DLC-PLINKO",
+    demandSignal: "145.9M operator-reported 2025 plays",
+    buildTier: "FOUNDATION",
   },
   {
+    id: "dice",
+    order: "02",
+    name: "Dice",
+    scene: "dice",
     participant: "Eli Mercer",
-    playerCards: [{ rank: "Q", suit: "♣" }, { rank: "10", suit: "♦" }],
-    houseCards: [{ rank: "A", suit: "♥" }, { rank: "9", suit: "♠" }],
-    playerScore: 20,
-    houseScore: 20,
-    outcome: "PUSH",
-    multiplier: 0,
-    seed: "DEMO-SEED-BRAVO-208",
-    receipt: "DLC-DEMO-002",
+    tagline: "Set the line. Read the roll.",
+    instruction: "Set a roll-under threshold. The preset result misses the line to demonstrate a losing receipt.",
+    selection: "ROLL UNDER 71.00",
+    outcome: "ROLL 86 // MISS",
+    sceneLabel: "A demo dice roll of 86 missing a roll-under target of 71",
+    payoutLabel: "−1.00× net",
+    netFactor: -1,
+    seed: "DEMO-DICE-B208",
+    receipt: "DLC-DICE",
+    demandSignal: "174.6M operator-reported 2025 plays",
+    buildTier: "FOUNDATION",
   },
   {
+    id: "roulette",
+    order: "03",
+    name: "Roulette",
+    scene: "roulette",
     participant: "Samira Cole",
-    playerCards: [{ rank: "J", suit: "♥" }, { rank: "8", suit: "♣" }],
-    houseCards: [{ rank: "K", suit: "♠" }, { rank: "A", suit: "♦" }],
-    playerScore: 18,
-    houseScore: 21,
-    outcome: "HOUSE WIN",
-    multiplier: -1,
-    seed: "DEMO-SEED-CHARLIE-312",
-    receipt: "DLC-DEMO-003",
+    tagline: "A classic wheel, reduced to one result.",
+    instruction: "Place a preset straight-up selection and follow the wheel to its deterministic demo pocket.",
+    selection: "STRAIGHT UP // 17",
+    outcome: "17 // STRAIGHT HIT",
+    sceneLabel: "A European roulette demo wheel resolving to pocket 17",
+    payoutLabel: "+35.00× net",
+    netFactor: 35,
+    seed: "DEMO-ROULETTE-C312",
+    receipt: "DLC-ROULETTE",
+    demandSignal: "36% UK virtual-table survey participation",
+    buildTier: "FOUNDATION",
+  },
+  {
+    id: "mines",
+    order: "04",
+    name: "Mines",
+    scene: "mines",
+    participant: "Theo Park",
+    tagline: "Open tiles. Stop before danger.",
+    instruction: "Reveal a preset run of safe tiles, then cash out before the full fictional mine map appears.",
+    selection: "3 MINES // 8 SAFE PICKS",
+    outcome: "CASH OUT // SAFE",
+    sceneLabel: "A five by five demo Mines grid with eight safe tiles and three revealed mines",
+    payoutLabel: "+1.12× net",
+    netFactor: 1.12,
+    seed: "DEMO-MINES-D416",
+    receipt: "DLC-MINES",
+    demandSignal: "25.5M operator-reported 2025 plays",
+    buildTier: "FOUNDATION",
+  },
+  {
+    id: "keno",
+    order: "05",
+    name: "Keno",
+    scene: "keno",
+    participant: "Maya Rook",
+    tagline: "Pick numbers. Reveal the field.",
+    instruction: "Five preset picks meet a ten-number demo draw with four visible matches.",
+    selection: "5 PICKS // CLASSIC RISK",
+    outcome: "4 HITS // WIN",
+    sceneLabel: "A forty-number Keno demo board showing five picks and four matching draws",
+    payoutLabel: "+2.00× net",
+    netFactor: 2,
+    seed: "DEMO-KENO-E520",
+    receipt: "DLC-KENO",
+    demandSignal: "61.6M operator-reported 2025 plays",
+    buildTier: "FOUNDATION",
+  },
+  {
+    id: "limbo",
+    order: "06",
+    name: "Limbo",
+    scene: "limbo",
+    participant: "Lena Ortiz",
+    tagline: "Choose a target. Clear the line.",
+    instruction: "Commit a 2.00 times target and compare it with a preset 2.40 times result.",
+    selection: "TARGET // 2.00×",
+    outcome: "2.40× // CLEARED",
+    sceneLabel: "A Limbo demo result of 2.40 times clearing a 2.00 times target",
+    payoutLabel: "+1.00× net",
+    netFactor: 1,
+    seed: "DEMO-LIMBO-F624",
+    receipt: "DLC-LIMBO",
+    demandSignal: "40.0M operator-reported 2025 plays",
+    buildTier: "FOUNDATION",
+  },
+  {
+    id: "slots",
+    order: "07",
+    name: "Original Slots",
+    scene: "slots",
+    participant: "Jules Carter",
+    tagline: "One original machine. One fixed table.",
+    instruction: "Spin a fictional 3 by 3 original reel set with a fixed demo paytable and no licensed content.",
+    selection: "3×3 REELS // FIXED TABLE",
+    outcome: "TRIPLE SEVEN // WIN",
+    sceneLabel: "An original three by three slot demo resolving to three sevens on the center line",
+    payoutLabel: "+4.00× net",
+    netFactor: 4,
+    seed: "DEMO-SLOTS-G728",
+    receipt: "DLC-SLOTS",
+    demandSignal: "24.4B quarterly UK-regulated spins",
+    buildTier: "ADVANCED",
+  },
+  {
+    id: "baccarat",
+    order: "08",
+    name: "Baccarat",
+    scene: "baccarat",
+    participant: "Arin Moss",
+    tagline: "High-recognition play, automatic rules.",
+    instruction: "Back the banker and watch both preset hands resolve without any player decision tree.",
+    selection: "BANKER // STANDARD RULES",
+    outcome: "BANKER 8 // WIN",
+    sceneLabel: "A demo Baccarat table where the banker wins eight to six",
+    payoutLabel: "+0.95× net",
+    netFactor: 0.95,
+    seed: "DEMO-BACCARAT-H832",
+    receipt: "DLC-BACCARAT",
+    demandSignal: "Operator-revenue classic",
+    buildTier: "ADVANCED",
+  },
+  {
+    id: "blackjack",
+    order: "09",
+    name: "Blackjack",
+    scene: "blackjack",
+    participant: "Priya Shaw",
+    tagline: "Familiar cards, explicit state.",
+    instruction: "A preset stand decision reveals a player 19 against the house 17.",
+    selection: "STAND // PLAYER 19",
+    outcome: "PLAYER 19 // WIN",
+    sceneLabel: "A demo Blackjack table where player 19 beats house 17",
+    payoutLabel: "+1.00× net",
+    netFactor: 1,
+    seed: "DEMO-BLACKJACK-I936",
+    receipt: "DLC-BLACKJACK",
+    demandSignal: "27% UK online-table survey participation",
+    buildTier: "ADVANCED",
+  },
+  {
+    id: "crash",
+    order: "10",
+    name: "Crash",
+    scene: "crash",
+    participant: "Luca Vale",
+    tagline: "A rising line with the target locked first.",
+    instruction: "Commit a 2.00 times auto-exit before the round; the preset curve crashes later at 2.64 times.",
+    selection: "AUTO EXIT // 2.00×",
+    outcome: "EXIT 2.00× // CRASH 2.64×",
+    sceneLabel: "A Crash demo curve automatically exiting at 2.00 times before a 2.64 times crash",
+    payoutLabel: "+1.00× net",
+    netFactor: 1,
+    seed: "DEMO-CRASH-J040",
+    receipt: "DLC-CRASH",
+    demandSignal: "Crypto-original demand signal",
+    buildTier: "ADVANCED",
   },
 ];
 
-const phaseOrder: Exclude<Phase, "ready">[] = ["staged", "committed", "dealt", "settled"];
+const phaseOrder: Exclude<Phase, "ready">[] = ["staged", "committed", "revealed", "settled"];
 const phaseCopy: Record<Phase, string> = {
-  ready: "Demo table ready. Choose a simulated stake and run the first round.",
+  ready: "Demo room ready. Choose simulated credits and run the preset round.",
   staged: "Simulated credits staged locally. No value moved.",
-  committed: "Preset demo seed committed for the replay walkthrough.",
-  dealt: "Preset cards revealed from the deterministic demo script.",
+  committed: "Preset choice and demo seed committed for the walkthrough.",
+  revealed: "Deterministic demo outcome revealed. The animation only replays it.",
   settled: "Demo result settled and a fictional replay receipt recorded.",
 };
+
+const blackjackPlayer: DemoCard[] = [{ rank: "A", suit: "♠" }, { rank: "8", suit: "♥" }];
+const blackjackHouse: DemoCard[] = [{ rank: "K", suit: "♦" }, { rank: "7", suit: "♣" }];
+const baccaratPlayer: DemoCard[] = [{ rank: "4", suit: "♥" }, { rank: "2", suit: "♠" }];
+const baccaratBanker: DemoCard[] = [{ rank: "5", suit: "♦" }, { rank: "3", suit: "♣" }];
 
 function DemoCardView({ card, hidden }: { card: DemoCard; hidden: boolean }) {
   const red = card.suit === "♥" || card.suit === "♦";
@@ -83,16 +244,56 @@ function DemoCardView({ card, hidden }: { card: DemoCard; hidden: boolean }) {
   );
 }
 
+function GameScene({ game, revealed, settled }: { game: GameDefinition; revealed: boolean; settled: boolean }) {
+  const stateClass = `${revealed ? " is-revealed" : ""}${settled ? " is-settled" : ""}`;
+  if (game.scene === "plinko") {
+    return <div className={`game-scene scene-plinko${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="plinko-board">{Array.from({ length: 45 }, (_, index) => <span className="plinko-peg" key={index} />)}<i className="plinko-ball" /></div><div className="plinko-pockets"><span>0.40×</span><span>1.20×</span><strong>4.20×</strong><span>1.20×</span><span>0.40×</span></div></div>;
+  }
+  if (game.scene === "dice") {
+    return <div className={`game-scene scene-dice${stateClass}`} role="img" aria-label={game.sceneLabel}><span className="scene-kicker">PRESET ROLL</span><strong className="dice-number">{revealed ? "86" : "—"}</strong><div className="dice-track"><i style={{ left: revealed ? "86%" : "0%" }} /><span style={{ left: "71%" }}>TARGET 71</span></div></div>;
+  }
+  if (game.scene === "roulette") {
+    const pockets = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27];
+    return <div className={`game-scene scene-roulette${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="roulette-wheel">{pockets.map((pocket, index) => <span key={pocket} style={{ transform: `rotate(${index * 30}deg) translateY(-8.5rem)` }}>{pocket}</span>)}<i /><strong>{revealed ? "17" : "?"}</strong></div><small>EUROPEAN // SINGLE ZERO</small></div>;
+  }
+  if (game.scene === "mines") {
+    const safeTiles = new Set([0, 1, 2, 3, 4, 6, 7, 8]);
+    const mines = new Set([10, 17, 24]);
+    return <div className={`game-scene scene-mines${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="mines-grid">{Array.from({ length: 25 }, (_, index) => <span className={`${revealed && safeTiles.has(index) ? "is-safe" : ""}${settled && mines.has(index) ? " is-mine" : ""}`} key={index}>{revealed && safeTiles.has(index) ? "✓" : settled && mines.has(index) ? "✦" : ""}</span>)}</div><small>{settled ? "FULL PRESET MAP REVEALED" : "8 SAFE PICKS // CASH OUT READY"}</small></div>;
+  }
+  if (game.scene === "keno") {
+    const picks = new Set([3, 7, 18, 28, 36]);
+    const hits = new Set([3, 7, 18, 36]);
+    return <div className={`game-scene scene-keno${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="keno-grid">{Array.from({ length: 40 }, (_, index) => { const number = index + 1; return <span className={`${picks.has(number) ? "is-picked" : ""}${revealed && hits.has(number) ? " is-hit" : ""}`} key={number}>{number}</span>; })}</div><small>5 PICKS // {revealed ? "4 MATCHES" : "DRAW PENDING"}</small></div>;
+  }
+  if (game.scene === "limbo") {
+    return <div className={`game-scene scene-limbo${stateClass}`} role="img" aria-label={game.sceneLabel}><span className="scene-kicker">DEMO MULTIPLIER</span><strong>{revealed ? "2.40×" : "0.00×"}</strong><div><i style={{ width: revealed ? "80%" : "0%" }} /><span>TARGET 2.00×</span></div></div>;
+  }
+  if (game.scene === "slots") {
+    const symbols = ["◆", "7", "★", "7", "7", "7", "●", "BAR", "◆"];
+    return <div className={`game-scene scene-slots${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="slot-machine"><span>IA ORIGINAL // FIXED DEMO TABLE</span><div>{symbols.map((symbol, index) => <i className={index >= 3 && index <= 5 ? "is-payline" : ""} key={`${symbol}-${index}`}>{revealed ? symbol : "IA"}</i>)}</div></div><small>NO LICENSED ART // NO VARIABLE PAYTABLE</small></div>;
+  }
+  if (game.scene === "baccarat" || game.scene === "blackjack") {
+    const player = game.scene === "baccarat" ? baccaratPlayer : blackjackPlayer;
+    const house = game.scene === "baccarat" ? baccaratBanker : blackjackHouse;
+    const playerScore = game.scene === "baccarat" ? 6 : 19;
+    const houseScore = game.scene === "baccarat" ? 8 : 17;
+    return <div className={`game-scene scene-cards${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="demo-hand"><span>{game.scene === "baccarat" ? "BANKER" : "HOUSE"} // SIMULATED</span><div>{house.map((card) => <DemoCardView key={`${card.rank}-${card.suit}`} card={card} hidden={!revealed} />)}</div><strong>{revealed ? houseScore : "—"}</strong></div><div className="demo-table-mark" aria-hidden="true"><span>IA</span><i>{game.name.toUpperCase()}</i></div><div className="demo-hand"><span>{game.scene === "baccarat" ? "PLAYER" : game.participant.toUpperCase()} // SIMULATED</span><div>{player.map((card) => <DemoCardView key={`${card.rank}-${card.suit}`} card={card} hidden={!revealed} />)}</div><strong>{revealed ? playerScore : "—"}</strong></div></div>;
+  }
+  return <div className={`game-scene scene-crash${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="crash-chart"><span className="crash-grid" /><i className="crash-line" /><b className="crash-target">AUTO 2.00×</b><strong>{revealed ? "2.64×" : "1.00×"}</strong></div><small>AUTO TARGET LOCKED BEFORE PRESET REVEAL</small></div>;
+}
+
 export function CasinoDemo() {
   const [phase, setPhase] = useState<Phase>("ready");
-  const [roundIndex, setRoundIndex] = useState(0);
+  const [selectedId, setSelectedId] = useState(games[0].id);
   const [stake, setStake] = useState(100);
   const [balance, setBalance] = useState(5_000);
   const [history, setHistory] = useState<DemoReceipt[]>([]);
+  const [runCount, setRunCount] = useState(0);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
-  const round = demoRounds[roundIndex];
+  const game = games.find((item) => item.id === selectedId) ?? games[0];
   const running = phase !== "ready" && phase !== "settled";
-  const cardsVisible = phase === "dealt" || phase === "settled";
+  const revealed = phase === "revealed" || phase === "settled";
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
@@ -101,182 +302,121 @@ export function CasinoDemo() {
     timers.current = [];
   }
 
+  function selectGame(id: string) {
+    if (running) return;
+    clearTimers();
+    setSelectedId(id);
+    setPhase("ready");
+  }
+
   function runRound() {
     if (running) return;
     clearTimers();
-    const nextIndex = phase === "settled" ? (roundIndex + 1) % demoRounds.length : roundIndex;
-    const nextRound = demoRounds[nextIndex];
+    const roundGame = game;
     const roundStake = stake;
-    setRoundIndex(nextIndex);
+    const nextRun = runCount + 1;
+    const delta = Math.round(roundStake * roundGame.netFactor);
+    setRunCount(nextRun);
     setPhase("staged");
     timers.current = [
-      setTimeout(() => setPhase("committed"), 550),
-      setTimeout(() => setPhase("dealt"), 1_150),
+      setTimeout(() => setPhase("committed"), 450),
+      setTimeout(() => setPhase("revealed"), 900),
       setTimeout(() => {
         setPhase("settled");
-        setBalance((current) => current + (roundStake * nextRound.multiplier));
+        setBalance((current) => current + delta);
         setHistory((current) => [{
-          id: nextRound.receipt,
-          participant: nextRound.participant,
-          outcome: nextRound.outcome,
-          credits: roundStake * nextRound.multiplier,
-        }, ...current].slice(0, 3));
-      }, 2_050),
+          id: `${roundGame.receipt}-${String(nextRun).padStart(2, "0")}`,
+          game: roundGame.name,
+          participant: roundGame.participant,
+          outcome: roundGame.outcome,
+          credits: delta,
+        }, ...current].slice(0, 6));
+      }, 1_500),
     ];
   }
 
   function resetDemo() {
     clearTimers();
     setPhase("ready");
-    setRoundIndex(0);
+    setSelectedId(games[0].id);
     setStake(100);
     setBalance(5_000);
     setHistory([]);
+    setRunCount(0);
   }
 
   const phaseIndex = phaseOrder.indexOf(phase as Exclude<Phase, "ready">);
+  const delta = Math.round(stake * game.netFactor);
 
   return (
     <main className="casino-demo" data-no-translate>
-      <a className="demo-skip" href="#demo-table">Skip to demo table</a>
+      <a className="demo-skip" href="#game-lobby">Skip to the ten-game lobby</a>
       <header className="demo-header">
         <nav aria-label="Casino demo navigation">
           <a className="demo-wordmark" href="/future/casino">IA<span aria-hidden="true">///</span>CASINO</a>
-          <div>
-            <span>ENGLISH ONLY</span>
-            <a href="/future/casino">EXIT DEMO</a>
-          </div>
+          <div><span>ENGLISH ONLY</span><a href="/future/casino">EXIT DEMO</a></div>
         </nav>
         <div className="demo-alert" role="note">
-          <strong>DEMO ONLY</strong>
-          <span>SIMULATED CREDITS</span>
-          <span>FICTIONAL ADULT PARTICIPANTS</span>
-          <span>NO REAL WAGERS</span>
+          <strong>DEMO ONLY</strong><span>SIMULATED CREDITS</span><span>FICTIONAL ADULT PARTICIPANTS</span><span>NO REAL WAGERS</span>
         </div>
         <div className="demo-hero">
           <div className="demo-hero-copy">
-            <p>CASINO DLC // FRONT-END WALKTHROUGH</p>
-            <h1>SEE THE<br /><i>WHOLE LOOP.</i></h1>
-            <span>This interactive mock shows the proposed experience using preset outcomes, fake names, and demo credits. Nothing connects to a wallet, contract, account, payment rail, or live game.</span>
-            <a href="#demo-table">RUN THE DEMO ↓</a>
+            <p>CASINO DLC // TEN-GAME FRONT-END WALKTHROUGH</p>
+            <h1>TEN ROOMS.<br /><i>ONE CLEAR LOOP.</i></h1>
+            <span>Explore ten researched casino concepts using preset outcomes, fake adult names, and demo credits. Nothing connects to a wallet, contract, account, payment rail, randomness provider, or live game.</span>
+            <a href="#game-lobby">ENTER THE DEMO LOBBY ↓</a>
           </div>
-          <div className="demo-orbit" aria-hidden="true">
-            <span className="orbit orbit-one" />
-            <span className="orbit orbit-two" />
-            <span className="orbit orbit-three" />
-            <div className="demo-chip"><b>DEMO</b><i>NO VALUE</i></div>
-          </div>
+          <div className="demo-orbit" aria-hidden="true"><span className="orbit orbit-one" /><span className="orbit orbit-two" /><span className="orbit orbit-three" /><div className="demo-chip"><b>10</b><i>DEMO ROOMS</i></div></div>
         </div>
       </header>
 
       <section className="demo-boundary" aria-labelledby="boundary-title">
-        <div>
-          <p>WHAT THIS IS</p>
-          <h2 id="boundary-title">A working interface prototype.</h2>
-          <span>Buttons, transitions, deterministic rounds, balances, and receipts run locally in your browser.</span>
+        <div><p>WHAT THIS IS</p><h2 id="boundary-title">A working ten-game interface prototype.</h2><span>Every selection, transition, animation, balance, and receipt runs locally from deterministic demo data.</span></div>
+        <ul><li><strong>10</strong><span>Playable mock rooms</span></li><li><strong>0</strong><span>Wallet or account calls</span></li><li><strong>0</strong><span>Network round requests</span></li><li><strong>0</strong><span>Real-value outcomes</span></li></ul>
+      </section>
+
+      <section className="demo-lobby" id="game-lobby" aria-labelledby="lobby-title">
+        <div className="demo-lobby-heading"><div><p>RESEARCHED ROSTER // ENGLISH DEMO</p><h2 id="lobby-title">Choose a room.</h2></div><p>These demand signals come from different public datasets and are not directly comparable market shares. They guide the prototype; they do not promise a launch.</p></div>
+        <div className="game-selector" role="list" aria-label="Ten Casino DLC demo games">
+          {games.map((item) => <div role="listitem" key={item.id}><button type="button" aria-pressed={item.id === selectedId} data-testid={`game-${item.id}`} className={item.id === selectedId ? "is-selected" : ""} onClick={() => selectGame(item.id)} disabled={running}><span>{item.order} // {item.buildTier}</span><strong>{item.name}</strong><i>{item.tagline}</i><small>{item.demandSignal}</small></button></div>)}
         </div>
-        <ul>
-          <li><strong>0</strong><span>Accounts created</span></li>
-          <li><strong>0</strong><span>Wallet calls</span></li>
-          <li><strong>0</strong><span>Network requests</span></li>
-          <li><strong>0</strong><span>Real-value outcomes</span></li>
-        </ul>
+        <div className="demo-sources" role="note"><strong>PUBLIC DEMAND REFERENCES</strong><a href="https://stake.us/blog/2025-online-gaming-player-statistics-trends">Stake.us 2025 operator play counts ↗</a><a href="https://www.gamblingcommission.gov.uk/statistics-and-research/publication/market-overview-operator-data-to-june-2025-published-august-2025">UK slots activity ↗</a><a href="https://www.gamblingcommission.gov.uk/about-us/guide/page/online-casino-games-excluding-slots-key-findings">UK non-slot participation survey ↗</a></div>
       </section>
 
       <section className="demo-stage" id="demo-table" aria-labelledby="demo-table-title">
-        <div className="demo-stage-heading">
-          <div><p>PLAYABLE MOCK // SIGNAL 21</p><h2 id="demo-table-title">One click.<br />Four visible stages.</h2></div>
-          <aside role="note"><strong>IMPORTANT</strong> Every card, result, identity, credit, seed, and receipt on this screen is fictional and pre-scripted for demonstration.</aside>
-        </div>
-
+        <div className="demo-stage-heading"><div><p>PLAYABLE MOCK // {game.order} {game.name.toUpperCase()}</p><h2 id="demo-table-title">One kernel.<br />Ten visual stories.</h2></div><aside role="note"><strong>IMPORTANT</strong> Every result, identity, credit, seed, receipt, card, tile, number, reel, and curve is fictional and pre-scripted.</aside></div>
         <div className="demo-shell">
-          <div className="demo-shell-topbar">
-            <div><span className="demo-live-dot" aria-hidden="true" />LOCAL SIMULATION</div>
-            <div>TABLE // SIGNAL 21</div>
-            <div>ROUND // {String(roundIndex + 1).padStart(2, "0")}</div>
-          </div>
-
+          <div className="demo-shell-topbar"><div><span className="demo-live-dot" aria-hidden="true" />LOCAL SIMULATION</div><div>ROOM // {game.name.toUpperCase()}</div><div>DEMO RUN // {String(runCount + 1).padStart(2, "0")}</div></div>
+          <div className="demo-room-summary"><div><span>{game.order} // {game.buildTier}</span><h3>{game.name}</h3><p>{game.instruction}</p></div><strong>{game.selection}</strong></div>
           <div className="demo-workspace">
-            <aside className="demo-sidebar" aria-label="Demo player and credit controls">
-              <div className="demo-profile">
-                <span aria-hidden="true">{round.participant.split(" ").map((name) => name[0]).join("")}</span>
-                <div><small>FICTIONAL ADULT</small><strong>{round.participant}</strong><i>Demo participant</i></div>
-              </div>
+            <aside className="demo-sidebar" aria-label="Demo participant and credit controls">
+              <div className="demo-profile"><span aria-hidden="true">{game.participant.split(" ").map((name) => name[0]).join("")}</span><div><small>FICTIONAL ADULT</small><strong>{game.participant}</strong><i>Demo participant</i></div></div>
               <div className="demo-balance"><span>SIMULATED BALANCE</span><strong>{balance.toLocaleString("en-US")}</strong><small>DEMO CREDITS</small></div>
-              <div className="demo-stake">
-                <span>SIMULATED STAKE</span>
-                <div>
-                  <button type="button" onClick={() => setStake((value) => Math.max(25, value - 25))} disabled={running || stake === 25} aria-label="Decrease simulated stake by 25 credits">−</button>
-                  <strong>{stake}</strong>
-                  <button type="button" onClick={() => setStake((value) => Math.min(250, value + 25))} disabled={running || stake === 250} aria-label="Increase simulated stake by 25 credits">+</button>
-                </div>
-                <small>Credits have no monetary value.</small>
-              </div>
-              <button className="demo-run" type="button" onClick={runRound} disabled={running}>{running ? "RUNNING DEMO…" : phase === "settled" ? "RUN NEXT DEMO ROUND" : "RUN DEMO ROUND"}<span aria-hidden="true">→</span></button>
-              <button className="demo-reset" type="button" onClick={resetDemo}>RESET DEMO</button>
+              <div className="demo-stake"><span>SIMULATED STAKE</span><div><button type="button" onClick={() => setStake((value) => Math.max(25, value - 25))} disabled={running || stake === 25} aria-label="Decrease simulated stake by 25 credits">−</button><strong>{stake}</strong><button type="button" onClick={() => setStake((value) => Math.min(250, value + 25))} disabled={running || stake === 250} aria-label="Increase simulated stake by 25 credits">+</button></div><small>Credits have no monetary value.</small></div>
+              <button className="demo-run" type="button" onClick={runRound} disabled={running}>{running ? "RUNNING DEMO…" : phase === "settled" ? "REPLAY THIS PRESET" : `RUN ${game.name.toUpperCase()} DEMO`}<span aria-hidden="true">→</span></button>
+              <button className="demo-reset" type="button" onClick={resetDemo}>RESET ALL DEMO DATA</button>
             </aside>
 
-            <div className={`demo-table phase-${phase}`}>
+            <div className={`demo-table game-${game.scene} phase-${phase}`} data-testid="active-game-scene">
               <div className="demo-table-glow" aria-hidden="true" />
-              <div className="demo-hand house-hand">
-                <span>HOUSE // SIMULATED</span>
-                <div>{round.houseCards.map((card, index) => <DemoCardView key={`${card.rank}-${card.suit}`} card={card} hidden={!cardsVisible || (index === 1 && phase === "dealt")} />)}</div>
-                <strong>{phase === "settled" ? round.houseScore : cardsVisible ? "?" : "—"}</strong>
-              </div>
-              <div className="demo-table-mark" aria-hidden="true"><span>IA</span><i>DEMO TABLE</i></div>
-              <div className="demo-hand player-hand">
-                <span>{round.participant.toUpperCase()} // SIMULATED</span>
-                <div>{round.playerCards.map((card) => <DemoCardView key={`${card.rank}-${card.suit}`} card={card} hidden={!cardsVisible} />)}</div>
-                <strong>{cardsVisible ? round.playerScore : "—"}</strong>
-              </div>
-              <div className={`demo-result result-${round.multiplier}`} aria-hidden={phase !== "settled"}>
-                <span>DEMO RESULT</span><strong>{round.outcome}</strong><i>{round.multiplier === 1 ? `+${stake}` : round.multiplier === -1 ? `−${stake}` : "±0"} demo credits</i>
-              </div>
+              <GameScene game={game} revealed={revealed} settled={phase === "settled"} />
+              <div className={`demo-result ${game.netFactor < 0 ? "result--1" : "result-1"}`} aria-hidden={phase !== "settled"}><span>DEMO RESULT</span><strong>{game.outcome}</strong><i>{delta > 0 ? "+" : ""}{delta} demo credits // {game.payoutLabel}</i></div>
             </div>
 
-            <aside className="demo-proof" aria-label="Demo stage and replay receipt">
+            <aside className="demo-proof" aria-label="Demo stages and replay receipt">
               <div className="demo-phase-status" aria-live="polite"><span>CURRENT STATUS</span><strong>{phaseCopy[phase]}</strong></div>
-              <ol>
-                {phaseOrder.map((item, index) => {
-                  const state = phase === "ready" ? "waiting" : index < phaseIndex ? "complete" : index === phaseIndex ? "active" : "waiting";
-                  return <li className={`is-${state}`} key={item}><span>0{index + 1}</span><div><strong>{item === "staged" ? "Stage credits" : item === "committed" ? "Commit demo seed" : item === "dealt" ? "Reveal cards" : "Settle + receipt"}</strong><small>{state.toUpperCase()}</small></div></li>;
-                })}
-              </ol>
-              <div className="demo-receipt">
-                <span>REPLAY RECEIPT // FICTIONAL</span>
-                <dl>
-                  <div><dt>ID</dt><dd data-testid="demo-receipt-id">{phase === "settled" ? round.receipt : "PENDING"}</dd></div>
-                  <div><dt>SEED</dt><dd>{phase === "committed" || cardsVisible ? round.seed : "HIDDEN"}</dd></div>
-                  <div><dt>PLAYER</dt><dd>{round.participant}</dd></div>
-                  <div><dt>VALUE</dt><dd>NONE</dd></div>
-                </dl>
-              </div>
+              <ol>{phaseOrder.map((item, index) => { const state = phase === "ready" ? "waiting" : index < phaseIndex ? "complete" : index === phaseIndex ? "active" : "waiting"; return <li className={`is-${state}`} key={item}><span>0{index + 1}</span><div><strong>{item === "staged" ? "Stage demo credits" : item === "committed" ? "Commit preset choice" : item === "revealed" ? "Reveal deterministic result" : "Settle + receipt"}</strong><small>{state.toUpperCase()}</small></div></li>; })}</ol>
+              <div className="demo-receipt"><span>REPLAY RECEIPT // FICTIONAL</span><dl><div><dt>ID</dt><dd data-testid="demo-receipt-id">{phase === "settled" ? `${game.receipt}-${String(runCount).padStart(2, "0")}` : "PENDING"}</dd></div><div><dt>GAME</dt><dd>{game.name.toUpperCase()}</dd></div><div><dt>SEED</dt><dd>{phase === "committed" || revealed ? game.seed : "HIDDEN"}</dd></div><div><dt>RULE</dt><dd>{game.selection}</dd></div><div><dt>VALUE</dt><dd>NONE</dd></div></dl></div>
             </aside>
           </div>
         </div>
       </section>
 
-      <section className="demo-history" aria-labelledby="history-title">
-        <div><p>LOCAL SESSION LOG</p><h2 id="history-title">Replay the story,<br />not a transaction.</h2></div>
-        <div className="demo-history-list">
-          {history.length === 0 ? <p>No demo rounds recorded yet. Run the walkthrough above.</p> : history.map((receipt) => <article key={receipt.id}><span>{receipt.id}</span><strong>{receipt.participant}</strong><i>{receipt.outcome}</i><b>{receipt.credits > 0 ? "+" : ""}{receipt.credits} DEMO</b></article>)}
-        </div>
-      </section>
+      <section className="demo-history" aria-labelledby="history-title"><div><p>LOCAL SESSION LOG</p><h2 id="history-title">Replay the story,<br />not a transaction.</h2></div><div className="demo-history-list">{history.length === 0 ? <p>No demo rounds recorded yet. Choose any room and run its preset walkthrough.</p> : history.map((receipt) => <article key={receipt.id}><span>{receipt.id}</span><strong>{receipt.game}</strong><i>{receipt.participant}</i><b>{receipt.credits > 0 ? "+" : ""}{receipt.credits} DEMO</b></article>)}</div></section>
 
-      <section className="demo-explainer" aria-labelledby="explainer-title">
-        <p>HOW THE PROPOSED UX READS</p>
-        <h2 id="explainer-title">Transparent by design.<br />Still only a demo.</h2>
-        <div>
-          <article><span>01</span><h3>Choose</h3><p>A participant selects an amount. Here it is a local number representing credits with no monetary value.</p></article>
-          <article><span>02</span><h3>Observe</h3><p>The interface exposes each conceptual stage instead of hiding the round behind a single loading spinner.</p></article>
-          <article><span>03</span><h3>Replay</h3><p>A fictional receipt explains the outcome. It is not signed, published, or evidence of a real system.</p></article>
-        </div>
-      </section>
+      <section className="demo-explainer" aria-labelledby="explainer-title"><p>HOW EVERY ROOM READS</p><h2 id="explainer-title">Result first.<br />Animation second.</h2><div><article><span>01</span><h3>Choose</h3><p>Select a room, a fixed demo rule, and simulated credits. No identity, account, deposit, or wallet exists.</p></article><article><span>02</span><h3>Observe</h3><p>The interface exposes stage, commitment, reveal, and settlement instead of hiding the conceptual flow.</p></article><article><span>03</span><h3>Replay</h3><p>The recorded preset result drives each visual. A fictional receipt explains the round but proves no real system.</p></article></div></section>
 
-      <footer className="demo-footer">
-        <div><strong>CASINO DLC // INTERACTIVE DEMO</strong><span>Front-end mock only. No real gameplay, account, deposit, withdrawal, wallet, smart contract, or network operation.</span></div>
-        <a href="/future/casino">RETURN TO INACTIVE PREVIEW →</a>
-      </footer>
+      <footer className="demo-footer"><div><strong>CASINO DLC // TEN-GAME INTERACTIVE DEMO</strong><span>Front-end mock only. No real gameplay, account, deposit, withdrawal, wallet, smart contract, oracle, payment, or network operation.</span></div><a href="/future/casino">RETURN TO INACTIVE PREVIEW →</a></footer>
     </main>
   );
 }

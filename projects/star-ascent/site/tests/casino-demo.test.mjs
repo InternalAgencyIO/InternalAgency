@@ -23,8 +23,17 @@ test("Casino DLC demo is explicit, English-only, deterministic, and transaction-
   assert.match(source, /FICTIONAL ADULT PARTICIPANTS/);
   assert.match(source, /NO REAL WAGERS/);
   assert.match(source, /No account\. No deposit|No real gameplay, account, deposit/i);
-  assert.match(component, /const demoRounds: DemoRound\[\] = \[/);
-  assert.equal((component.match(/receipt: "DLC-DEMO-/g) ?? []).length, 3);
+  assert.match(component, /const games: GameDefinition\[\] = \[/);
+  assert.equal((component.match(/receipt: "DLC-[A-Z]+"/g) ?? []).length, 10);
+  for (const game of ["plinko", "dice", "roulette", "mines", "keno", "limbo", "slots", "baccarat", "blackjack", "crash"]) {
+    assert.match(component, new RegExp(`id: "${game}"`));
+    assert.match(component, new RegExp(`scene: "${game}"`));
+  }
+  assert.match(component, /data-testid=\{`game-\$\{item\.id\}`\}/);
+  assert.match(component, /24\.4B quarterly UK-regulated spins/);
+  assert.match(component, /145\.9M operator-reported 2025 plays/);
+  assert.match(component, /AUTO TARGET LOCKED BEFORE PRESET REVEAL/);
+  assert.match(component, /The animation only replays it/);
   assert.doesNotMatch(source, /Math\.random|crypto\.getRandomValues/);
   assert.doesNotMatch(source, /fetch\s*\(|XMLHttpRequest|WebSocket|EventSource/);
   assert.doesNotMatch(source, /connectWallet|sendTransaction|TransactionInstruction|wallet-adapter|@solana|@coral-xyz/);
@@ -41,8 +50,10 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
     read("app/future/casino/demo/CasinoDemo.tsx"),
     read("app/future/casino/demo/casino-demo.css"),
   ]);
-  assert.match(component, /href="#demo-table">Skip to demo table/);
+  assert.match(component, /href="#game-lobby">Skip to the ten-game lobby/);
   assert.match(component, /aria-live="polite"/);
+  assert.match(component, /aria-label="Ten Casino DLC demo games"/);
+  assert.equal((component.match(/sceneLabel: "/g) ?? []).length, 10);
   assert.match(component, /aria-label="Decrease simulated stake by 25 credits"/);
   assert.match(component, /aria-label="Increase simulated stake by 25 credits"/);
   assert.match(css, /:focus-visible/);

@@ -21,6 +21,15 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await expect(page.getByText("NO REAL WAGERS", { exact: true })).toBeVisible();
   await expect(page.locator(".dossier-dock")).toBeHidden();
   await expect(page.locator(".locale-switcher")).toBeHidden();
+  await expect(page.locator(".game-selector button")).toHaveCount(10);
+
+  const gameIds = ["plinko", "dice", "roulette", "mines", "keno", "limbo", "slots", "baccarat", "blackjack", "crash"];
+  for (const gameId of gameIds) {
+    await page.getByTestId(`game-${gameId}`).click();
+    await expect(page.getByTestId(`game-${gameId}`)).toHaveAttribute("aria-pressed", "true");
+    await expect(page.getByTestId("active-game-scene")).toHaveClass(new RegExp(`game-${gameId}`));
+  }
+  await page.getByTestId("game-plinko").click();
 
   const geometry = await page.evaluate(() => ({
     clientWidth: document.documentElement.clientWidth,
@@ -48,21 +57,55 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await page.getByRole("button", { name: "Increase simulated stake by 25 credits" }).click();
   await expect(page.locator(".demo-stake strong")).toHaveText("125");
   roundRunning = true;
-  await page.getByRole("button", { name: "RUN DEMO ROUND" }).click();
+  await page.getByRole("button", { name: "RUN PLINKO DEMO" }).click();
   await expect(page.locator(".demo-phase-status strong")).toHaveText("Demo result settled and a fictional replay receipt recorded.");
   roundRunning = false;
 
-  await expect(page.locator(".demo-result strong")).toHaveText("PLAYER WIN");
-  await expect(page.locator(".demo-balance strong")).toHaveText("5,125");
-  await expect(page.getByTestId("demo-receipt-id")).toHaveText("DLC-DEMO-001");
+  await expect(page.locator(".demo-result strong")).toHaveText("4.20× LANDING");
+  await expect(page.locator(".demo-balance strong")).toHaveText("5,400");
+  await expect(page.getByTestId("demo-receipt-id")).toHaveText("DLC-PLINKO-01");
   await expect(page.locator(".demo-history-list article")).toHaveCount(1);
   expect(roundRequests, "a demo round must not initiate any request").toEqual([]);
 
-  await page.getByRole("button", { name: "RESET DEMO" }).click();
+  await page.getByRole("button", { name: "RESET ALL DEMO DATA" }).click();
   await expect(page.locator(".demo-balance strong")).toHaveText("5,000");
   await expect(page.locator(".demo-stake strong")).toHaveText("100");
   await expect(page.locator(".demo-history-list article")).toHaveCount(0);
   expect(runtimeErrors).toEqual([]);
+});
+
+test("all ten Casino DLC rooms complete their deterministic local walkthrough", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium-desktop", "The ten-room walkthrough runs once; all engines cover the shared selector and round kernel.");
+  test.setTimeout(60_000);
+  const games = [
+    ["plinko", "4.20× LANDING", "DLC-PLINKO-01"],
+    ["dice", "ROLL 86 // MISS", "DLC-DICE-02"],
+    ["roulette", "17 // STRAIGHT HIT", "DLC-ROULETTE-03"],
+    ["mines", "CASH OUT // SAFE", "DLC-MINES-04"],
+    ["keno", "4 HITS // WIN", "DLC-KENO-05"],
+    ["limbo", "2.40× // CLEARED", "DLC-LIMBO-06"],
+    ["slots", "TRIPLE SEVEN // WIN", "DLC-SLOTS-07"],
+    ["baccarat", "BANKER 8 // WIN", "DLC-BACCARAT-08"],
+    ["blackjack", "PLAYER 19 // WIN", "DLC-BLACKJACK-09"],
+    ["crash", "EXIT 2.00× // CRASH 2.64×", "DLC-CRASH-10"],
+  ];
+  const roundRequests = [];
+  let running = false;
+  page.on("request", (request) => { if (running) roundRequests.push(request.url()); });
+  await page.goto("/future/casino/demo", { waitUntil: "domcontentloaded" });
+  await page.waitForLoadState("networkidle");
+
+  for (const [gameId, outcome, receipt] of games) {
+    await page.getByTestId(`game-${gameId}`).click();
+    running = true;
+    await page.getByRole("button", { name: new RegExp(`RUN ${gameId === "slots" ? "ORIGINAL SLOTS" : gameId.toUpperCase()} DEMO`) }).click();
+    await expect(page.getByTestId("demo-receipt-id")).toHaveText(receipt);
+    running = false;
+    await expect(page.locator(".demo-result strong")).toHaveText(outcome);
+  }
+
+  await expect(page.locator(".demo-history-list article")).toHaveCount(6);
+  expect(roundRequests, "no demo room may initiate a round request").toEqual([]);
 });
 
 test("Casino DLC demo honors reduced-motion preferences", async ({ page }, testInfo) => {
