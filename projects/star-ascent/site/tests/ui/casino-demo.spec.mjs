@@ -27,7 +27,17 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await expect(page.locator(".dossier-dock")).toBeHidden();
   await expect(page.locator(".locale-switcher")).toBeHidden();
   await expect(page.locator(".game-selector button")).toHaveCount(10);
+  const skipLink = page.getByRole("link", { name: "Skip to the ten-game lobby" });
+  await expect(skipLink).toHaveCSS("position", "fixed");
+  await expect(skipLink).toHaveCSS("clip-path", "inset(50%)");
+  await skipLink.focus();
+  await expect(skipLink).toBeVisible();
+  await expect(skipLink).toHaveCSS("color", "rgb(9, 8, 12)");
+  await expect(skipLink).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await page.evaluate(() => document.activeElement?.blur());
   const lightControl = page.getByRole("button", { name: "SAFE PULSE OFF" });
+  await expect(page.locator("main.casino-demo")).toHaveAttribute("data-interactive-ready", "true");
+  await expect(lightControl).toBeEnabled();
   await expect(lightControl).toHaveAttribute("aria-pressed", "false");
   await lightControl.click();
   await expect(page.getByRole("button", { name: "SAFE PULSE ON" })).toHaveAttribute("aria-pressed", "true");
@@ -123,7 +133,10 @@ test("Casino DLC demo honors reduced-motion preferences", async ({ page }, testI
   test.skip(testInfo.project.name !== "chromium-desktop", "The reduced-motion contract runs once; CSS is shared by every engine.");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/future/casino/demo", { waitUntil: "domcontentloaded" });
-  await page.getByRole("button", { name: "SAFE PULSE OFF" }).click();
+  const lightControl = page.getByRole("button", { name: "SAFE PULSE OFF" });
+  await expect(page.locator("main.casino-demo")).toHaveAttribute("data-interactive-ready", "true");
+  await expect(lightControl).toBeEnabled();
+  await lightControl.click();
   await expect(page.locator("main.casino-demo")).toHaveClass(/is-pulse-on/);
   const motion = await page.evaluate(() => ({
     preference: matchMedia("(prefers-reduced-motion: reduce)").matches,

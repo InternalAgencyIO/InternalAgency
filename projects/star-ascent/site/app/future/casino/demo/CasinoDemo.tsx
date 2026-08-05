@@ -305,13 +305,17 @@ export function CasinoDemo() {
   const [history, setHistory] = useState<DemoReceipt[]>([]);
   const [runCount, setRunCount] = useState(0);
   const [lightPulse, setLightPulse] = useState(false);
+  const [interactiveReady, setInteractiveReady] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const game = games.find((item) => item.id === selectedId) ?? games[0];
   const host = hosts[(Number(game.order) - 1) % hosts.length];
   const running = phase !== "ready" && phase !== "settled";
   const revealed = phase === "revealed" || phase === "settled";
 
-  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  useEffect(() => {
+    setInteractiveReady(true);
+    return () => timers.current.forEach(clearTimeout);
+  }, []);
 
   function clearTimers() {
     timers.current.forEach(clearTimeout);
@@ -365,13 +369,13 @@ export function CasinoDemo() {
   const delta = Math.round(stake * game.netFactor);
 
   return (
-    <main className={`casino-demo${lightPulse ? " is-pulse-on" : ""}`} data-no-translate>
+    <main className={`casino-demo${lightPulse ? " is-pulse-on" : ""}`} data-interactive-ready={interactiveReady} data-no-translate>
       <div className="demo-light-wash" aria-hidden="true" />
       <a className="demo-skip" href="#game-lobby">Skip to the ten-game lobby</a>
       <header className="demo-header">
         <nav aria-label="Casino demo navigation">
           <a className="demo-wordmark" href="/future/casino">IA<span aria-hidden="true">///</span>NIGHTFLIGHT</a>
-          <div><span>ENGLISH ONLY</span><button className="light-control" type="button" aria-pressed={lightPulse} onClick={() => setLightPulse((enabled) => !enabled)}><i aria-hidden="true" />SAFE PULSE {lightPulse ? "ON" : "OFF"}</button><a href="/future/casino">EXIT DEMO</a></div>
+          <div><span>ENGLISH ONLY</span><button className="light-control" type="button" aria-pressed={lightPulse} disabled={!interactiveReady} onClick={() => setLightPulse((enabled) => !enabled)}><i aria-hidden="true" />SAFE PULSE {lightPulse ? "ON" : "OFF"}</button><a href="/future/casino">EXIT DEMO</a></div>
         </nav>
         <div className="demo-alert" role="note">
           <strong>DEMO ONLY</strong><span>SIMULATED CREDITS</span><span>FICTIONAL ADULT HOSTS</span><span>FICTIONAL ADULT PARTICIPANTS</span><span>NO REAL WAGERS</span><span>OPT-IN SAFE LIGHT PULSE</span>

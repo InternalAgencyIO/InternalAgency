@@ -63,8 +63,13 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.match(component, /aria-label="Decrease simulated stake by 25 credits"/);
   assert.match(component, /aria-label="Increase simulated stake by 25 credits"/);
   assert.match(component, /aria-pressed=\{lightPulse\}/);
+  assert.match(component, /disabled=\{!interactiveReady\}/);
+  assert.match(component, /data-interactive-ready=\{interactiveReady\}/);
   assert.match(component, /SAFE PULSE \{lightPulse \? "ON" : "OFF"\}/);
   assert.match(css, /:focus-visible/);
+  assert.match(css, /\.casino-demo \.demo-skip\{[^}]*clip-path:inset\(50%\)/);
+  assert.match(css, /\.casino-demo \.demo-skip:focus\{[^}]*clip-path:none/);
+  assert.match(css, /\.casino-demo>\*:not\(\.demo-light-wash\):not\(\.demo-skip\)/);
   assert.match(css, /body:has\(\.casino-demo\) \.locale-switcher\{display:none!important\}/);
   assert.match(css, /@media\(max-width:900px\)/);
   assert.match(css, /@media\(max-width:620px\)/);
