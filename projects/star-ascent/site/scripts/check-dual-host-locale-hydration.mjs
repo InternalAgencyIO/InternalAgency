@@ -7,6 +7,11 @@ import {
   engineConcurrencyCaps,
   hydrationOptionsFromEnvironment,
 } from "./dual-host-locale-hydration-plan.mjs";
+import {
+  createHydrationShardRecord,
+  hydrationShardRecordPrefix,
+  readCleanGitSourceBinding,
+} from "./hydration-shard-evidence.mjs";
 import { localizedCoverageError } from "./live-locale-verifier-lib.mjs";
 
 const catalog = JSON.parse(await readFile(new URL("../app/i18n/messages.json", import.meta.url), "utf8"));
@@ -19,8 +24,12 @@ const htmlLanguageTag = (locale) => (locale === "zh" ? "zh-Hans" : locale === "s
 const payloadRoot = `/${contract.assetNamespace}/${contract.catalogSha256.slice(0, 16)}`;
 const browserTypes = { chromium, firefox, webkit };
 const options = hydrationOptionsFromEnvironment(process.env);
-const { concurrency, maxFailures, pageTimeoutMs, engineNames, shardIndex } = options;
+const { concurrency, maxFailures, pageTimeoutMs, engineNames, shardIndex, emitShardRecord } = options;
 const enginePlans = createHydrationPlans({ locales, routes, ...options });
+const fullProfilePlans = emitShardRecord
+  ? createHydrationPlans({ locales, routes, ...options, shardIndex: null })
+  : null;
+const sourceBinding = emitShardRecord ? readCleanGitSourceBinding() : null;
 
 const port = await new Promise((resolvePort, reject) => {
   const reservation = createServer();
@@ -308,6 +317,16 @@ if (failures.length > 0 || incompleteCount > 0) {
       `Dual-host locale hydration SHARD PASS: ${results.length}/${results.length} assigned pages reached localeReady ` +
         `for shard ${shardIndex}/50 (${coverageSummary}); this is not aggregate 7,500-page proof.`,
     );
+    if (emitShardRecord) {
+      const record = createHydrationShardRecord({
+        shardPlans: enginePlans,
+        fullProfilePlans,
+        shardIndex,
+        catalogSha256: contract.catalogSha256,
+        sourceBinding,
+      });
+      console.log(`${hydrationShardRecordPrefix}${JSON.stringify(record)}`);
+    }
   }
   console.log("Ephemeral loopback browser evidence only: no deployment or public/chain state was changed.");
 }

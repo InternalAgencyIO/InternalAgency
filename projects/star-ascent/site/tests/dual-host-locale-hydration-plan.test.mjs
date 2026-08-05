@@ -27,6 +27,7 @@ test("default hydration options are bounded and cross-engine", () => {
     diagnosticLocale: null,
     diagnosticRoute: null,
     shardIndex: null,
+    emitShardRecord: false,
   });
 });
 
@@ -92,6 +93,7 @@ test("runner labels shard success as non-aggregate and enforces a page deadline"
   assert.match(runner, /this is not aggregate 7,500-page proof/u);
   assert.match(runner, /withinPageDeadline/u);
   assert.match(runner, /exceeded the \$\{pageTimeoutMs\}ms page deadline/u);
+  assert.match(runner, /readCleanGitSourceBinding\(\)/u);
 });
 
 test("engine subsets preserve the selected engine and bounded sentinel scope", () => {
@@ -153,6 +155,14 @@ test("invalid environment options and incomplete route inventories fail closed",
   assert.throws(
     () => hydrationOptionsFromEnvironment({ I18N_HYDRATION_SHARD_INDEX: "1" }),
     /requires I18N_HYDRATION_FULL_CROSS_ENGINE=1/,
+  );
+  assert.throws(
+    () => hydrationOptionsFromEnvironment({ I18N_HYDRATION_EMIT_SHARD_RECORD: "1" }),
+    /requires I18N_HYDRATION_SHARD_INDEX/,
+  );
+  assert.throws(
+    () => hydrationOptionsFromEnvironment({ I18N_HYDRATION_EMIT_SHARD_RECORD: "yes" }),
+    /must be 0 or 1/,
   );
   assert.throws(
     () => hydrationOptionsFromEnvironment({

@@ -61,6 +61,14 @@ export function hydrationOptionsFromEnvironment(environment = {}) {
         1,
         exhaustiveLocaleShardCount,
       );
+  const emitShardRecordValue = environment.I18N_HYDRATION_EMIT_SHARD_RECORD;
+  if (!new Set([undefined, "0", "1"]).has(emitShardRecordValue)) {
+    throw new Error(`I18N_HYDRATION_EMIT_SHARD_RECORD must be 0 or 1; received ${emitShardRecordValue}`);
+  }
+  const emitShardRecord = emitShardRecordValue === "1";
+  if (emitShardRecord && shardIndex === null) {
+    throw new Error("I18N_HYDRATION_EMIT_SHARD_RECORD=1 requires I18N_HYDRATION_SHARD_INDEX");
+  }
   if (shardIndex !== null) {
     if (fullCrossEngineValue !== "1") {
       throw new Error("I18N_HYDRATION_SHARD_INDEX requires I18N_HYDRATION_FULL_CROSS_ENGINE=1");
@@ -94,6 +102,7 @@ export function hydrationOptionsFromEnvironment(environment = {}) {
     diagnosticLocale,
     diagnosticRoute,
     shardIndex,
+    emitShardRecord,
   };
 }
 
