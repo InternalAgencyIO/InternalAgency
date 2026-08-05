@@ -1,0 +1,28 @@
+{
+  "schema": "iat-v2-architecture-work-manifest/v1",
+  "status": "ACTIVE_SAFE_WORK_MILESTONE_HALF_COMPLETE",
+  "generatedAtUtc": "2026-08-05T01:55:54Z",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "branch": "agent/iat-launch-window",
+    "commit": "ebbcc910450114333541539e2bd71eec26acc3d0",
+    "gitTree": "6fcca377e567afee64f010b1a94e8271b291a239"
+  },
+  "artifactSha256": {
+    "README.md": "592e6d4353e6627b94afbd69122e7d6bd7555a68b5231e33389e0db31270b672",
+    "hydration-proof.json": "95a10fb9c4aa559d93a646a319c9052678f0c64fedcb33371580723e3acb50a8",
+    "work-ledger.json": "5ecd12b1031e8cbe4dafe517c97efb96cc96d32f6cfc07d693f2000f7054e953"
+  },
+  "clearance": {
+    "halfSafeTaskMilestoneSatisfied": true,
+    "allSafeTasksComplete": false,
+    "externalLaunchBlockersClosed": false,
+    "deploymentApproved": false,
+    "fundingApproved": false,
+    "walletAccessApproved": false,
+    "signingApproved": false,
+    "broadcastApproved": false,
+    "mainnetApproved": false
+  }
+}

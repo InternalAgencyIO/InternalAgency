@@ -1,0 +1,72 @@
+{
+  "schema": "iat-v2-cross-engine-hydration-proof/v1",
+  "status": "PASS",
+  "recordedAtUtc": "2026-08-05T01:41:58.2784450Z",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "branch": "agent/iat-launch-window",
+    "contentCommittedAs": "5cad49b2d73cbe870e9a0a8e7861a5b75b25a069",
+    "gitTree": "845e1fd7941fc84aeb9c063d4df3862abfee0d5e"
+  },
+  "command": {
+    "entrypoint": "node scripts/check-dual-host-locale-hydration.mjs",
+    "environment": {
+      "I18N_HYDRATION_WORKERS": "16",
+      "I18N_HYDRATION_MAX_FAILURES": "20",
+      "I18N_HYDRATION_FULL_CROSS_ENGINE": "0"
+    }
+  },
+  "profile": {
+    "configuredLocales": 50,
+    "hosts": ["internalagency.localhost", "ileriakil.localhost"],
+    "canonicalRoutes": 25,
+    "sentinelRoutes": ["/", "/dossier/read/white-dossier", "/future", "/network", "/tokenomics"],
+    "engines": {
+      "chromium": { "routes": 25, "pages": 2500, "workers": 16, "failures": 0 },
+      "firefox": { "routes": 5, "pages": 500, "workers": 4, "failures": 0 },
+      "webkit": { "routes": 5, "pages": 500, "workers": 8, "failures": 0 }
+    }
+  },
+  "result": {
+    "plannedPages": 3500,
+    "completedPages": 3500,
+    "failedPages": 0,
+    "incompletePages": 0,
+    "catalogBackedRenders": 3465,
+    "nativeTurkishSourceRenders": 35,
+    "catalogSha256": "893cf8efbbb850b5cfb4133987a135785269b087d2d650de3fcb1946f050adce"
+  },
+  "transientRunnerLog": {
+    "retainedInRepository": false,
+    "stdoutSha256": "2b4784b649d2bdfdfcecc4e17f647c3256e9cba03c1701ee85a3a2336c6e3ca6",
+    "stdoutBytes": 3418,
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrBytes": 0
+  },
+  "supportingValidation": {
+    "targetedNodeTests": "PASS_20",
+    "focusedCrossEngineDiagnostics": "PASS_6_OF_6",
+    "applicationBuild": "PASS",
+    "iatV2Gate": "PASS_66_NODE_TESTS_PLUS_BOUND_AUDITS",
+    "iatV2Signoff": "EXIT_0_CURRENT_SOURCE_SIGNED_DEVNET_PENDING",
+    "liveLocaleParity": "PASS_202_OF_202",
+    "localizationQa": "PASS_WITH_4538_PASS_462_HOLD"
+  },
+  "assurance": {
+    "independent": false,
+    "physicalDeviceCoverage": false,
+    "nativeLanguageApproval": false,
+    "deploymentPerformed": false,
+    "signingPerformed": false,
+    "broadcastPerformed": false,
+    "mainnetChanged": false
+  },
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "limitations": [
+    "The proof is local, headless, internally executed, and bound to one Windows host.",
+    "Firefox and WebKit cover five representative canonical routes per locale and host; the opt-in exhaustive profile contains 7,500 pages.",
+    "The transient runner log is represented by its digest and byte count rather than committed as a machine-local log.",
+    "This proof does not replace native-language, physical-device, assistive-technology, or independent review.",
+    "This proof does not authorize deployment, funding, signing, broadcasting, or Mainnet launch."
+  ]
+}

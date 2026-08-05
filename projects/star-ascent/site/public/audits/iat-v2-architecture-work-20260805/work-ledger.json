@@ -1,0 +1,146 @@
+{
+  "schema": "iat-v2-architecture-work-ledger/v1",
+  "status": "ACTIVE_SAFE_WORK_MILESTONE_HALF_COMPLETE",
+  "generatedAtUtc": "2026-08-05T01:55:54Z",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "sourceBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "branch": "agent/iat-launch-window",
+    "commit": "ebbcc910450114333541539e2bd71eec26acc3d0",
+    "gitTree": "6fcca377e567afee64f010b1a94e8271b291a239",
+    "draftPullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/4"
+  },
+  "milestone": {
+    "totalSafeTasks": 8,
+    "minimumCompletedForHalf": 4,
+    "completed": 5,
+    "open": 3,
+    "halfMilestoneSatisfied": true
+  },
+  "tasks": [
+    {
+      "id": "IAT-ARCH-001",
+      "title": "Make locale hydration provenance-safe and readiness monotonic",
+      "status": "COMPLETE",
+      "owner": "architecture",
+      "completionCommit": "5cad49b2d73cbe870e9a0a8e7861a5b75b25a069",
+      "evidence": [
+        "app/i18n/LocaleRuntime.tsx",
+        "tests/i18n-quality.test.mjs",
+        "public/audits/localization-qa-20260803/translation-provenance.v1.json"
+      ],
+      "acceptance": "Text nodes retain per-activation localized-value provenance, observation covers hydration rewrites, and localeReady becomes true only after an initial mutation-quiet window without later flapping."
+    },
+    {
+      "id": "IAT-ARCH-002",
+      "title": "Define deterministic standard, diagnostic, and exhaustive hydration profiles",
+      "status": "COMPLETE",
+      "owner": "architecture",
+      "completionCommit": "5cad49b2d73cbe870e9a0a8e7861a5b75b25a069",
+      "evidence": [
+        "scripts/dual-host-locale-hydration-plan.mjs",
+        "tests/dual-host-locale-hydration-plan.test.mjs"
+      ],
+      "acceptance": "The planner fails closed on inventory or environment drift and deterministically produces 3,500 standard pages, 7,500 exhaustive pages, or a bounded diagnostic slice."
+    },
+    {
+      "id": "IAT-ARCH-003",
+      "title": "Bound cross-engine execution and expose progress and fail-fast state",
+      "status": "COMPLETE",
+      "owner": "architecture",
+      "completionCommit": "5cad49b2d73cbe870e9a0a8e7861a5b75b25a069",
+      "evidence": [
+        "scripts/check-dual-host-locale-hydration.mjs",
+        "public/audits/localization-qa-20260803/TRANSLATION-PROCESS.md"
+      ],
+      "acceptance": "Chromium, Firefox, and WebKit execute sequentially with engine-specific worker caps, bounded failure collection, incomplete-page reporting, and 100-page progress checkpoints."
+    },
+    {
+      "id": "IAT-ARCH-004",
+      "title": "Make localization coverage collision-aware with actionable diagnostics",
+      "status": "COMPLETE",
+      "owner": "architecture",
+      "completionCommit": "5cad49b2d73cbe870e9a0a8e7861a5b75b25a069",
+      "evidence": [
+        "scripts/live-locale-verifier-lib.mjs",
+        "tests/live-locale-verifier.test.mjs",
+        "scripts/check-dual-host-locale-hydration.mjs"
+      ],
+      "acceptance": "Legitimate source/target collisions are not reported as English leaks, required replacement multiplicity still fails closed, and failures include bounded DOM-region and producer-count evidence."
+    },
+    {
+      "id": "IAT-ARCH-005",
+      "title": "Complete the standard 3,500-page dual-host cross-engine proof",
+      "status": "COMPLETE",
+      "owner": "architecture",
+      "completionCommit": "5cad49b2d73cbe870e9a0a8e7861a5b75b25a069",
+      "evidence": [
+        "public/audits/iat-v2-architecture-work-20260805/hydration-proof.json"
+      ],
+      "acceptance": "All 3,500 planned pages complete with zero failures and zero incomplete pages across 50 configured locales, two hosts, and three browser engines."
+    },
+    {
+      "id": "IAT-ARCH-006",
+      "title": "Reduce and independently review the admin feature and Trezor surfaces",
+      "status": "OPEN",
+      "owner": "admin-runtime",
+      "evidence": [
+        "public/audits/iat-v2-admin-inspection-20260803/README.md",
+        "public/audits/iat-v2-admin-inspection-20260803/checks.json"
+      ],
+      "nextAction": "Reduce or justify the remaining lazy feature and Trezor chunks, then obtain independent hardware/runtime review without enabling signing or broadcast."
+    },
+    {
+      "id": "IAT-ARCH-007",
+      "title": "Test supported dependency upgrades and advisory preconditions",
+      "status": "OPEN",
+      "owner": "dependency-security",
+      "evidence": [
+        "public/audits/iat-v2-dependency-triage-20260804/README.md",
+        "public/audits/iat-v2-dependency-triage-20260804/reachability.json"
+      ],
+      "nextAction": "Exercise supported upstream upgrades and advisory preconditions; do not use automatic audit fixes or protocol-facing overrides without full regression and independent review."
+    },
+    {
+      "id": "IAT-ARCH-008",
+      "title": "Validate current-source Rust accounting and surplus invariants",
+      "status": "OPEN",
+      "owner": "program-invariants",
+      "evidence": [
+        "programs/iat_v2/src/lib.rs",
+        "tests/iat-v2-reference-engine.test.mjs",
+        "tests/iat-v2-instructions.test.mjs"
+      ],
+      "nextAction": "Review and validate the surplus-tolerant accounting path in an isolated clean tree while preserving the user-owned dirty anchor, then refresh reproducible SBF and signed Devnet evidence separately."
+    }
+  ],
+  "externalLaunchBlockers": [
+    { "id": "IAT-EXT-001", "status": "HOLD", "title": "Independent current-source SBF reproduction" },
+    { "id": "IAT-EXT-002", "status": "HOLD", "title": "Exact 8.5 SOL operational funding floor" },
+    { "id": "IAT-EXT-003", "status": "HOLD", "title": "Fresh current-source signed Devnet rehearsal" },
+    { "id": "IAT-EXT-004", "status": "HOLD", "title": "Independent review and signoff" },
+    { "id": "IAT-EXT-005", "status": "HOLD", "title": "Real X OAuth and D1 production bindings" },
+    { "id": "IAT-EXT-006", "status": "HOLD", "title": "Named owner acceptance of sole-Trezor operational risk" },
+    { "id": "IAT-EXT-007", "status": "HOLD", "title": "Replacement UTC ceremony window and regenerated packets" },
+    { "id": "IAT-EXT-008", "status": "HOLD", "title": "Attended ceremony with independent stage evidence" },
+    { "id": "IAT-EXT-009", "status": "HOLD", "title": "Post-ceremony public reconciliation" }
+  ],
+  "assurance": {
+    "independentReviewComplete": false,
+    "nativeLanguageReviewComplete": false,
+    "fundingFloorSatisfied": false,
+    "currentSourceSignedDevnetComplete": false,
+    "deploymentApproved": false,
+    "fundingApproved": false,
+    "walletAccessApproved": false,
+    "signingApproved": false,
+    "broadcastApproved": false,
+    "mainnetApproved": false
+  },
+  "preservation": {
+    "originalDirtyWorktreeModified": false,
+    "unrelatedUserChangesRemoved": false,
+    "forcePushAllowed": false,
+    "mergeAllowedByThisLedger": false
+  }
+}
