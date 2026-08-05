@@ -28,6 +28,14 @@ test("Casino DLC demo is explicit, English-only, deterministic, and transaction-
   assert.match(source, /STARSHIP CASINO DLC/);
   assert.match(source, /NIGHTFLIGHT/);
   assert.match(source, /NO REAL WAGERS/);
+  assert.match(source, /FICTIONAL TRAINING BOARD/);
+  assert.match(source, /FAKE CREDITS/);
+  assert.match(source, /NO PRIZES/);
+  assert.match(source, /STATIC PRESENTATION ONLY/);
+  assert.match(component, /const demoRankings: DemoRanking\[\] = \[/);
+  assert.equal((component.match(/participant: "[^"]+", module:/g) ?? []).length, 6);
+  assert.match(component, /aria-label="Scrollable fictional demo leaderboard"/);
+  assert.match(component, /<caption>Preset Nightflight training standings/);
   assert.match(source, /No account\. No deposit|No real gameplay, account, deposit/i);
   assert.match(component, /const games: GameDefinition\[\] = \[/);
   assert.equal((component.match(/receipt: "DLC-[A-Z]+"/g) ?? []).length, 10);
