@@ -192,7 +192,7 @@ test("keeps canonical-English review-HOLD, archive-routing, and accessibility sa
   assert.match(page, /Authority plans stay proposed until the evidence is public/);
   assert.doesNotMatch(page, /permanently revoked/i);
   assert.match(page, /canonical English fallback only/);
-  assert.match(page, /archived records, not executable downloads/);
+  assert.match(page, /canonical Dossier context, not executable downloads or preserved validator bytes/);
   assert.doesNotMatch(page, /-tr\.txt|\b(?:TR|tailoredTR)\b|"en"\s*\|\s*"tr"/u);
   assert.doesNotMatch(page, /[\u011e\u011f\u0130\u0131\u015e\u015f]|[\u0370-\u052f\u0530-\u058f\u0600-\u06ff\u0900-\u0d7f\u10a0-\u10ff\u3040-\u30ff\u3400-\u9fff]/u);
   assert.doesNotMatch(page, /\b(?:sourceLanguageForClientPath|localeFromRequestHeaders)\b/);
