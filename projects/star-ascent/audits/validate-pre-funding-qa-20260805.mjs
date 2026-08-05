@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 const auditRoot = dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = resolve(auditRoot, "..", "..", "..");
 const siteRoot = resolve(repositoryRoot, "projects", "star-ascent", "site");
-const evidencePath = resolve(auditRoot, "pre-funding-qa-20260805-nightflight-hydration-shards-1-2.json");
+const evidencePath = resolve(auditRoot, "pre-funding-qa-20260805-nightflight-hydration-shards-1-4.json");
 const scorecardPath = resolve(siteRoot, "public", "audits", "localization-qa-20260803", "language-qa-scorecard.json");
 const catalogPath = resolve(siteRoot, "app", "i18n", "messages.json");
 const gitNoLfsFilters = [
@@ -90,29 +90,59 @@ for (const result of evidence.checks) {
 const hydration = evidence.hydration;
 check(hydration.schema === "iat-v2-hydration-partial-evidence/v1", "hydration schema drifted");
 check(hydration.status === "PARTIAL_PASS_NOT_AGGREGATE", "hydration status overclaims aggregate proof");
-check(JSON.stringify(hydration.range) === JSON.stringify({ shardStart: 1, shardEnd: 2 }), "hydration batch range drifted");
-check(hydration.evidenceSetSha256 === "0ea1247f7de93eaed39e25181aac40fb709b0b5c240b23858acf537ced6e006f", "hydration evidence-set digest drifted");
+const expectedBatches = [
+  {
+    range: { shardStart: 1, shardEnd: 2 },
+    evidenceSetSha256: "0ea1247f7de93eaed39e25181aac40fb709b0b5c240b23858acf537ced6e006f",
+    commit: "7a6d8cd975ef15402974e6104cec90cbf930e783",
+    tree: "6281d55446ec728f2e92e22236304648246326be",
+  },
+  {
+    range: { shardStart: 3, shardEnd: 4 },
+    evidenceSetSha256: "7e12db50a0cf135611bbfc3fc229a7a2811c1af6f5c03667e6139b671f01f20a",
+    commit: "7cf9e88359977521867ee07258e38418d00a1b2c",
+    tree: "3ea1b15e2d4147b7947c649fbd20360e2aaf9e10",
+  },
+];
+check(hydration.batches.length === expectedBatches.length, "hydration batch count drifted");
+for (const [index, batch] of hydration.batches.entries()) {
+  const expected = expectedBatches[index];
+  check(JSON.stringify(batch.range) === JSON.stringify(expected.range), `hydration batch ${index + 1} range drifted`);
+  check(batch.evidenceSetSha256 === expected.evidenceSetSha256, `hydration batch ${index + 1} digest drifted`);
+  check(batch.sourceBinding.commit === expected.commit && batch.sourceBinding.tree === expected.tree, `hydration batch ${index + 1} source drifted`);
+  check(git("rev-parse", `${batch.sourceBinding.commit}^{tree}`) === batch.sourceBinding.tree, `hydration batch ${index + 1} tree is not Git-bound`);
+  check(isAncestor(batch.sourceBinding.commit, binding.commit), `hydration batch ${index + 1} does not precede the evidence source`);
+  check(batch.sourceBinding.scopePath === binding.sitePath && batch.sourceBinding.scopeTree === binding.siteTree, `hydration batch ${index + 1} site scope drifted`);
+  check(git("rev-parse", `${batch.sourceBinding.commit}:${batch.sourceBinding.scopePath}`) === binding.siteTree, `hydration batch ${index + 1} site tree is not Git-bound`);
+}
 check(
-  hydration.completedShards === 2 && hydration.requiredShards === 50
-    && hydration.completedPages === 300 && hydration.fullProfilePages === 7500
+  hydration.completedShards === 4 && hydration.requiredShards === 50
+    && hydration.completedPages === 600 && hydration.fullProfilePages === 7500
     && hydration.failedPages === 0 && hydration.incompletePages === 0,
   "hydration summary drifted",
 );
-check(hydration.records.length === 2, "hydration record count drifted");
-const expectedLocales = ["ar", "az"];
+check(hydration.records.length === 4, "hydration record count drifted");
+const expectedLocales = ["ar", "az", "be", "bg"];
 const expectedAssignments = [
   "52ee9742123e36e8b089badd7ad4c9e436e085283dd4f3e84898c1baa9dd9b65",
   "fe6253897dd7ce61da6f741f20114dbee46ed3e1079ea6510c963eec3008fafb",
+  "862666f4d4df79e068a7fee240095929a75798a6360f6691efc6a1cb994dcba8",
+  "c8652e2883bcdb6b6cee7967bc92d03ebf4887a379197113b5d3d6a84ee9b501",
 ];
 for (const [index, record] of hydration.records.entries()) {
   check(record.schema === "iat-v2-hydration-shard-record/v2", `shard ${index + 1} schema drifted`);
   check(record.status === "SHARD_PASS_NOT_AGGREGATE", `shard ${index + 1} overclaims aggregate proof`);
-  check(record.sourceBinding.commit === binding.commit && record.sourceBinding.tree === binding.tree, `shard ${index + 1} source binding drifted`);
+  check(Number.isFinite(Date.parse(record.recordedAtUtc)), `shard ${index + 1} timestamp drifted`);
+  check(/^[0-9a-f]{40}$/u.test(record.sourceBinding.commit), `shard ${index + 1} source commit is invalid`);
+  check(git("rev-parse", `${record.sourceBinding.commit}^{tree}`) === record.sourceBinding.tree, `shard ${index + 1} source tree is not Git-bound`);
+  check(isAncestor(record.sourceBinding.commit, binding.commit), `shard ${index + 1} does not precede the evidence source`);
   check(record.sourceBinding.scopePath === binding.sitePath && record.sourceBinding.scopeTree === binding.siteTree, `shard ${index + 1} site scope drifted`);
+  check(git("rev-parse", `${record.sourceBinding.commit}:${record.sourceBinding.scopePath}`) === binding.siteTree, `shard ${index + 1} site tree is not Git-bound`);
   check(record.catalogSha256 === binding.catalogSha256, `shard ${index + 1} catalog binding drifted`);
   check(record.profile.shardIndex === index + 1 && record.profile.shardCount === 50, `shard ${index + 1} assignment index drifted`);
   check(record.profile.locale === expectedLocales[index], `shard ${index + 1} locale drifted`);
   check(JSON.stringify(record.profile.hosts) === JSON.stringify(["internalagency", "ileriakil"]), `shard ${index + 1} hosts drifted`);
+  check(record.profile.canonicalRoutes === 25, `shard ${index + 1} route count drifted`);
   check(JSON.stringify(record.profile.engines) === JSON.stringify({ chromium: 50, firefox: 50, webkit: 50 }), `shard ${index + 1} engine totals drifted`);
   check(record.profile.assignedPages === 150 && record.profile.fullProfilePages === 7500, `shard ${index + 1} page totals drifted`);
   check(record.profile.assignedJobsSha256 === expectedAssignments[index], `shard ${index + 1} assignment digest drifted`);
@@ -129,7 +159,7 @@ check(evidence.languageQa.nativeMeaningCadenceSlang === "ACCOUNTABLE_NATIVE_REVI
 check(scorecard.assurance.nativeQualityClaimAllowed === false && scorecard.assurance.releaseApproved === false, "scorecard assurance overclaims approval");
 check(Object.values(evidence.assurance).every((value) => value === false), "QA assurance overclaims completion or mutation");
 check(evidence.mainnetStatus === "UNSCHEDULED_HOLD", "Mainnet status changed");
-check(evidence.limitations.some((item) => /two of fifty/u.test(item)), "partial hydration limitation missing");
+check(evidence.limitations.some((item) => /four of fifty/u.test(item)), "partial hydration limitation missing");
 check(evidence.limitations.some((item) => /Playwright matrix was not rerun/u.test(item)), "browser UI limitation missing");
 check(evidence.limitations.some((item) => /accountable native review/u.test(item)), "native review limitation missing");
 check(evidence.limitations.some((item) => /No deployment, wallet access, signing, funding/u.test(item)), "mutation safety limitation missing");
