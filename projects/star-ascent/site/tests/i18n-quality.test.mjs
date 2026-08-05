@@ -76,3 +76,21 @@ test("localized routes keep document language ownership and touch targets after 
   assert.match(globalStyles, /nav a,\.text-link,footer a\{display:inline-flex;min-height:24px/);
   assert.match(futureStyles, /\.future-nav div a\{display:inline-flex;min-height:32px/);
 });
+
+test("locale readiness preserves source-to-target translation and waits for a mutation-quiet hydration window", async () => {
+  const runtime = await readFile(new URL("../app/i18n/LocaleRuntime.tsx", import.meta.url), "utf8");
+  const activate = runtime.slice(runtime.indexOf("const activate"), runtime.indexOf("if (locale ===", runtime.indexOf("const activate")));
+  const localizeIndex = activate.indexOf("localizeTree(document.body");
+  const observeIndex = activate.indexOf("observer.observe(document.body");
+  const readinessIndex = activate.lastIndexOf("armReadiness()");
+  assert.ok(observeIndex >= 0 && observeIndex < localizeIndex, "observation must cover the initial translation and any concurrent hydration rewrite");
+  assert.ok(localizeIndex < readinessIndex, "readiness must begin only after initial localization completes");
+  assert.match(runtime, /const localizedTextValues = new WeakMap<Text, string>\(\)/);
+  assert.match(runtime, /if \(localizedTextValues\.get\(node\) === value\) return;/);
+  assert.match(runtime, /localizedTextValues\.set\(node, node\.nodeValue \?\? ""\);/);
+  assert.match(activate, /new MutationObserver[\s\S]+armReadiness\(\)/);
+  assert.match(runtime, /const hydrationQuietWindowMs = 100;/);
+  assert.match(runtime, /if \(document\.documentElement\.dataset\.localeReady === "true"\) return;/);
+  assert.match(runtime, /document\.documentElement\.dataset\.localeReady = "false";[\s\S]+clearTimeout[\s\S]+setTimeout/);
+  assert.match(runtime, /if \(readinessTimer !== null\) window\.clearTimeout\(readinessTimer\);[\s\S]+observer\?\.disconnect\(\)/);
+});

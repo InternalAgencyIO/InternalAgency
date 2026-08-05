@@ -96,6 +96,7 @@ export function replayLanguageQaScorecard({ scorecardBytes, repoRoot }) {
     execFileSync("git", ["worktree", "add", "--detach", worktreeRoot, sourceCommit], {
       cwd: repoRoot,
       encoding: "utf8",
+      env: { ...process.env, GIT_LFS_SKIP_SMUDGE: "1", GIT_TERMINAL_PROMPT: "0" },
       maxBuffer: 64 * 1024 * 1024,
       windowsHide: true,
       stdio: ["ignore", "pipe", "pipe"],

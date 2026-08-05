@@ -32,6 +32,7 @@ export function localizedCoverageError({ sourceValues, currentValues, localeMess
   };
   const currentCounts = counts(currentValues);
   const expectedCounts = counts(canonicalSources.map((source) => localeMessages[source]));
+  const catalogTargetValues = new Set(Object.values(localeMessages).map(normalizeVisible));
   const missing = [...expectedCounts]
     .filter(([value, count]) => (currentCounts.get(value) ?? 0) < count)
     .map(([value]) => value);
@@ -40,6 +41,7 @@ export function localizedCoverageError({ sourceValues, currentValues, localeMess
   }
   const leaks = [...new Set(canonicalSources)].filter((source) => {
     if (localeMessages[source] === source) return false;
+    if (catalogTargetValues.has(normalizeVisible(source))) return false;
     return (currentCounts.get(normalizeVisible(source)) ?? 0) > (expectedCounts.get(normalizeVisible(source)) ?? 0);
   });
   if (leaks.length > 0) {

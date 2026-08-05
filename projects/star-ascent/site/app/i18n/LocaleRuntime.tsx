@@ -16,20 +16,23 @@ type LocalePayload = {
 
 const translatableAttributes = ["alt", "aria-label", "placeholder", "title"] as const;
 const legacyLanguageLabels = new Set(["TR", "EN", "TÜRKÇE", "ENGLISH"]);
+const hydrationQuietWindowMs = 100;
 
 function translate(catalog: LocaleCatalog, locale: LocaleCode, source: string): string {
   if (locale === "en") return source;
   return catalog[source] ?? source;
 }
 
-function translateTextNode(node: Text, locale: LocaleCode, catalog: LocaleCatalog) {
+function translateTextNode(node: Text, locale: LocaleCode, catalog: LocaleCatalog, localizedTextValues: WeakMap<Text, string>) {
   const value = node.nodeValue ?? "";
+  if (localizedTextValues.get(node) === value) return;
   const leading = value.match(/^\s*/)?.[0] ?? "";
   const trailing = value.match(/\s*$/)?.[0] ?? "";
   const source = value.trim().replace(/\s+/g, " ");
   if (!source) return;
   const localized = translate(catalog, locale, source);
   if (localized !== source) node.nodeValue = `${leading}${localized}${trailing}`;
+  localizedTextValues.set(node, node.nodeValue ?? "");
 }
 
 function shouldLocalizeHref(href: string) {
@@ -61,9 +64,15 @@ function localizeElement(element: Element, locale: LocaleCode, catalog: LocaleCa
   }
 }
 
-function localizeTree(root: Node, locale: LocaleCode, catalog: LocaleCatalog, routeLocale: LocaleCode) {
+function localizeTree(
+  root: Node,
+  locale: LocaleCode,
+  catalog: LocaleCatalog,
+  routeLocale: LocaleCode,
+  localizedTextValues: WeakMap<Text, string>,
+) {
   if (root.nodeType === Node.TEXT_NODE) {
-    translateTextNode(root as Text, locale, catalog);
+    translateTextNode(root as Text, locale, catalog, localizedTextValues);
     return;
   }
   if (!(root instanceof Element || root instanceof Document)) return;
@@ -71,7 +80,7 @@ function localizeTree(root: Node, locale: LocaleCode, catalog: LocaleCatalog, ro
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
   let current = walker.nextNode();
   while (current) {
-    if (current.nodeType === Node.TEXT_NODE) translateTextNode(current as Text, locale, catalog);
+    if (current.nodeType === Node.TEXT_NODE) translateTextNode(current as Text, locale, catalog, localizedTextValues);
     else localizeElement(current as Element, locale, catalog, routeLocale);
     current = walker.nextNode();
   }
@@ -98,21 +107,35 @@ export function LocaleRuntime({ locale, promptCopy, publicPath, turkishHost }: {
     document.documentElement.dir = definition.dir;
     let active = true;
     let observer: MutationObserver | null = null;
+    let readinessTimer: number | null = null;
+    const localizedTextValues = new WeakMap<Text, string>();
     const nativeTurkishHost = locale === "tr" && window.location.hostname.includes("ileriakil");
     const routeLocale: LocaleCode = nativeTurkishHost ? "en" : locale;
 
+    const armReadiness = () => {
+      if (document.documentElement.dataset.localeReady === "true") return;
+      document.documentElement.dataset.localeReady = "false";
+      if (readinessTimer !== null) window.clearTimeout(readinessTimer);
+      readinessTimer = window.setTimeout(() => {
+        readinessTimer = null;
+        if (!active) return;
+        document.documentElement.dataset.localeReady = "true";
+        delete document.documentElement.dataset.localeError;
+      }, hydrationQuietWindowMs);
+    };
+
     const activate = (catalog: LocaleCatalog) => {
       if (!active) return;
-      localizeTree(document.body, locale, catalog, routeLocale);
-      document.documentElement.dataset.localeReady = "true";
-      delete document.documentElement.dataset.localeError;
       observer = new MutationObserver((changes) => {
         for (const change of changes) {
-          for (const node of change.addedNodes) localizeTree(node, locale, catalog, routeLocale);
-          if (change.type === "characterData") localizeTree(change.target, locale, catalog, routeLocale);
+          for (const node of change.addedNodes) localizeTree(node, locale, catalog, routeLocale, localizedTextValues);
+          if (change.type === "characterData") localizeTree(change.target, locale, catalog, routeLocale, localizedTextValues);
         }
+        armReadiness();
       });
       observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+      localizeTree(document.body, locale, catalog, routeLocale, localizedTextValues);
+      armReadiness();
     };
 
     if (locale === "en" || nativeTurkishHost) activate({});
@@ -139,6 +162,7 @@ export function LocaleRuntime({ locale, promptCopy, publicPath, turkishHost }: {
 
     return () => {
       active = false;
+      if (readinessTimer !== null) window.clearTimeout(readinessTimer);
       observer?.disconnect();
     };
   }, [definition.dir, locale]);

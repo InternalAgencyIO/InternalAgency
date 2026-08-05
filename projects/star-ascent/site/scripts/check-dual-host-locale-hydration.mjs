@@ -1,7 +1,12 @@
 import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { createServer } from "node:net";
-import { chromium } from "playwright";
+import { chromium, firefox, webkit } from "playwright";
+import {
+  createHydrationPlans,
+  engineConcurrencyCaps,
+  hydrationOptionsFromEnvironment,
+} from "./dual-host-locale-hydration-plan.mjs";
 import { localizedCoverageError } from "./live-locale-verifier-lib.mjs";
 
 const catalog = JSON.parse(await readFile(new URL("../app/i18n/messages.json", import.meta.url), "utf8"));
@@ -12,15 +17,10 @@ const routes = [...sitemapSource.matchAll(/\{\s*path:\s*"([^"]*)"/gu)].map((matc
 const rtlLocales = new Set(["ar", "ur"]);
 const htmlLanguageTag = (locale) => (locale === "zh" ? "zh-Hans" : locale === "sr" ? "sr-Cyrl" : locale);
 const payloadRoot = `/${contract.assetNamespace}/${contract.catalogSha256.slice(0, 16)}`;
-const concurrency = Number.parseInt(process.env.I18N_HYDRATION_WORKERS ?? "8", 10);
-
-if (locales.length !== 50) throw new Error(`Expected 50 catalog locales; found ${locales.length}`);
-if (routes.length !== 25 || new Set(routes).size !== 25) {
-  throw new Error(`Expected 25 unique canonical sitemap routes; found ${routes.length}/${new Set(routes).size}`);
-}
-if (!Number.isSafeInteger(concurrency) || concurrency < 1 || concurrency > 16) {
-  throw new Error(`I18N_HYDRATION_WORKERS must be an integer from 1 through 16; received ${process.env.I18N_HYDRATION_WORKERS}`);
-}
+const browserTypes = { chromium, firefox, webkit };
+const options = hydrationOptionsFromEnvironment(process.env);
+const { concurrency, maxFailures, engineNames } = options;
+const enginePlans = createHydrationPlans({ locales, routes, ...options });
 
 const port = await new Promise((resolvePort, reject) => {
   const reservation = createServer();
@@ -138,65 +138,151 @@ async function verifyPage(page, { host, locale, route, label }) {
         currentValues: state.currentValues,
         localeMessages: catalog.messages[locale],
       });
-  return coverageError ? { ok: false, label, detail: coverageError } : { ok: true, label };
-}
+  if (!coverageError) return { ok: true, label };
 
-const jobs = ["internalagency", "ileriakil"].flatMap((host) =>
-  locales.flatMap((locale) =>
-    routes.map((route) => ({
-      host,
-      locale,
-      route,
-      label: `${host}.localhost/${locale}${route === "/" ? "" : route}`,
-    })),
-  ),
-);
-const results = new Array(jobs.length);
-let cursor = 0;
-let browser;
-try {
-  await waitForServer();
-  browser = await chromium.launch();
-  await Promise.all(
-    Array.from({ length: concurrency }, async () => {
-      const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-      try {
-        while (cursor < jobs.length) {
-          const index = cursor;
-          cursor += 1;
-          const page = await context.newPage();
-          try {
-            results[index] = await verifyPage(page, jobs[index]);
-          } catch (error) {
-            results[index] = {
-              ok: false,
-              label: jobs[index].label,
-              detail: error instanceof Error ? error.message : String(error),
-            };
-          } finally {
-            await page.close();
+  const leakedValues = coverageError.match(/remain after hydration: (.+)$/u)?.[1]?.split(" | ") ?? [];
+  const domSamples = leakedValues.length === 0
+    ? []
+    : await page.evaluate((values) => {
+        const normalize = (value) => value.trim().replace(/\s+/g, " ");
+        const targets = new Set(values);
+        const samples = [];
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        for (let node = walker.nextNode(); node && samples.length < 10; node = walker.nextNode()) {
+          const value = normalize(node.nodeValue ?? "");
+          if (!targets.has(value) || node.parentElement?.closest("script, style, code, pre, [data-no-translate]")) continue;
+          const region = node.parentElement?.closest("section, aside, nav, main, footer");
+          samples.push({
+            kind: "text",
+            value,
+            parent: node.parentElement?.outerHTML.slice(0, 320) ?? null,
+            region: region ? `${region.tagName.toLowerCase()}${region.id ? `#${region.id}` : ""}${region.className ? `.${String(region.className).trim().replace(/\s+/g, ".")}` : ""}` : null,
+          });
+        }
+        for (const attribute of ["alt", "aria-label", "placeholder", "title"]) {
+          for (const element of document.body.querySelectorAll(`[${attribute}]`)) {
+            const value = normalize(element.getAttribute(attribute) ?? "");
+            if (!targets.has(value) || element.closest("script, style, code, pre, [data-no-translate]")) continue;
+            samples.push({ kind: attribute, value, parent: element.outerHTML.slice(0, 320) });
+            if (samples.length >= 10) return samples;
           }
         }
-      } finally {
-        await context.close();
-      }
-    }),
-  );
+        return samples;
+      }, leakedValues);
+  const normalize = (value) => value.trim().replace(/\s+/g, " ");
+  const collisionCounts = leakedValues.map((target) => {
+    const producers = Object.entries(catalog.messages[locale])
+      .filter(([, localized]) => normalize(localized) === normalize(target))
+      .map(([source]) => ({
+        source,
+        sourceCount: state.sourceValues.filter((value) => normalize(value) === normalize(source)).length,
+      }));
+    return {
+      target,
+      expectedCount: producers.reduce((total, producer) => total + producer.sourceCount, 0),
+      currentCount: state.currentValues.filter((value) => normalize(value) === normalize(target)).length,
+      producers,
+    };
+  });
+  const diagnostic = domSamples.length > 0
+    ? `; DOM samples ${JSON.stringify(domSamples)}; collision counts ${JSON.stringify(collisionCounts)}`
+    : "";
+  return { ok: false, label, detail: `${coverageError}${diagnostic}` };
+}
+
+const resultOffset = enginePlans.reduce((total, plan) => total + plan.jobs.length, 0);
+const results = new Array(resultOffset);
+
+async function runEngine({ engineName, jobs, resultOffset: engineResultOffset }) {
+  const browser = await browserTypes[engineName].launch();
+  const engineConcurrency = Math.min(concurrency, engineConcurrencyCaps[engineName]);
+  let cursor = 0;
+  let failureCount = 0;
+  let completedCount = 0;
+  try {
+    await Promise.all(
+      Array.from({ length: engineConcurrency }, async () => {
+        const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+        try {
+          while (cursor < jobs.length && failureCount < maxFailures) {
+            const index = cursor;
+            cursor += 1;
+            const page = await context.newPage();
+            try {
+              const result = await verifyPage(page, {
+                ...jobs[index],
+                label: `${engineName}:${jobs[index].label}`,
+              });
+              results[engineResultOffset + index] = result;
+              if (!result.ok) failureCount += 1;
+            } catch (error) {
+              results[engineResultOffset + index] = {
+                ok: false,
+                label: `${engineName}:${jobs[index].label}`,
+                detail: error instanceof Error ? error.message : String(error),
+              };
+              failureCount += 1;
+            } finally {
+              await page.close();
+              completedCount += 1;
+              if (completedCount % 100 === 0 || completedCount === jobs.length) {
+                console.log(
+                  `Dual-host locale hydration: ${engineName} completed ${completedCount}/${jobs.length} ` +
+                    `page(s), ${failureCount} failure(s).`,
+                );
+              }
+            }
+          }
+        } finally {
+          await context.close();
+        }
+      }),
+    );
+    if (failureCount >= maxFailures) {
+      console.error(`Dual-host locale hydration: ${engineName} stopped after ${failureCount} failure(s).`);
+    }
+  } finally {
+    await browser.close();
+  }
+}
+
+try {
+  await waitForServer();
+  for (const [index, plan] of enginePlans.entries()) {
+    console.log(
+      `Dual-host locale hydration: starting ${plan.engineName} (${index + 1}/${enginePlans.length}, ` +
+        `${plan.jobs.length} pages across ${plan.routeCount} routes, ` +
+        `${Math.min(concurrency, engineConcurrencyCaps[plan.engineName])} workers).`,
+    );
+    await runEngine(plan);
+  }
 } finally {
-  await browser?.close();
   await stopServer();
 }
 
-const failures = results.filter((result) => !result.ok);
-if (failures.length > 0) {
-  console.error(`Dual-host locale hydration FAIL: ${failures.length}/${results.length} page(s) failed.`);
+const completedResults = results.filter(Boolean);
+const failures = completedResults.filter((result) => !result.ok);
+const incompleteCount = results.length - completedResults.length;
+if (failures.length > 0 || incompleteCount > 0) {
+  console.error(
+    `Dual-host locale hydration FAIL: ${failures.length}/${completedResults.length} completed page(s) failed; ` +
+      `${incompleteCount} page(s) were not run after the fail-fast ceiling.`,
+  );
   for (const failure of failures) console.error(`- ${failure.label}: ${failure.detail}`);
   process.exitCode = 1;
 } else {
+  const nativeTurkishRenders = enginePlans.reduce(
+    (total, plan) => total + plan.jobs.filter((job) => job.host === "ileriakil" && job.locale === "tr").length,
+    0,
+  );
+  const catalogBackedRenders = results.length - nativeTurkishRenders;
+  const coverageSummary = enginePlans.map((plan) => `${plan.engineName}:${plan.jobs.length}`).join(", ");
+  const profileLocaleCount = new Set(enginePlans.flatMap((plan) => plan.jobs.map((job) => job.locale))).size;
   console.log(
-    `Dual-host locale hydration PASS: ${results.length}/${results.length} canonical pages reached localeReady across ` +
-      `${locales.length} locales x ${routes.length} routes x 2 hosts, with 2475 committed-catalog renders plus ` +
-      `25 native Turkish source renders; catalog ${contract.catalogSha256}.`,
+    `Dual-host locale hydration PASS: ${results.length}/${results.length} profile pages reached localeReady across ` +
+      `${profileLocaleCount} locale(s) and 2 hosts (${coverageSummary}), with ${catalogBackedRenders} ` +
+      `committed-catalog renders plus ${nativeTurkishRenders} native Turkish source renders; ` +
+      `catalog ${contract.catalogSha256}.`,
   );
   console.log("Ephemeral loopback browser evidence only: no deployment or public/chain state was changed.");
 }

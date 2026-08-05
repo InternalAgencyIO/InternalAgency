@@ -86,6 +86,22 @@ test("localized coverage requires committed replacements and rejects English lea
   assert.match(localizedCoverageError({ sourceValues: ["Unknown"], currentValues: [], localeMessages }), /no canonical/);
 });
 
+test("localized coverage accepts source/target collisions without masking a missing required replacement", () => {
+  const localeMessages = { ASCENT: "STOP", "SOCIAL KIT": "STOP", STOP: "STOP!" };
+  assert.equal(
+    localizedCoverageError({
+      sourceValues: ["ASCENT", "STOP"],
+      currentValues: ["STOP", "STOP!", "STOP"],
+      localeMessages,
+    }),
+    null,
+  );
+  assert.match(
+    localizedCoverageError({ sourceValues: ["ASCENT", "STOP"], currentValues: ["STOP", "STOP"], localeMessages }),
+    /absent/,
+  );
+});
+
 test("runtime bundle contract accepts a complete current fingerprint", () => {
   assert.equal(
     runtimeBundleError({ contentType: "text/javascript; charset=utf-8", bytes: validRuntime(), contract }),

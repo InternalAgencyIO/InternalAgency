@@ -145,13 +145,31 @@ Before a cross-domain localization deployment, run
 `npm run check:i18n:dual-host-hydration`. It builds the current source, starts
 an ephemeral loopback server, and opens all 25 canonical sitemap routes for all
 50 locales through both `internalagency.localhost` and `ileriakil.localhost`:
-2,500 browser renders in total. The browser must reach `localeReady`, request
-the source-bound payload when required, avoid external translation services,
-render every committed localized text and attribute value, and leave no
-replaced English source node behind. The 25 native Turkish source renders on
-the Turkish host are classified separately from the 2,475 catalog-backed
-renders. This proves the checked source behavior only; it is not production or
-native-review proof.
+2,500 exhaustive Chromium pages. Firefox and WebKit each cover all 50 locales
+and both hosts on five sentinel routes representing the landing page, a dynamic
+Network client, the localized Dossier reader, the server-rendered Future area,
+and Tokenomics. The standard profile therefore contains 3,500 browser renders:
+2,500 Chromium plus 500 Firefox plus 500 WebKit. Every browser must reach
+`localeReady`, request the source-bound payload when required, avoid external
+translation services, render every committed localized text and attribute
+value, and leave no unambiguous replaced English source node behind. When a
+localized target is also an English source key, required replacement counts
+remain enforced while the verifier avoids misclassifying legitimate dynamic
+targets as leaks. The 35 native Turkish source renders are classified separately
+from the 3,465 catalog-backed renders. A bounded fail-fast ceiling prevents a
+broken engine or host contract from spending the full matrix timeout collecting
+redundant failures. Per-engine worker caps keep Firefox and WebKit below their
+observed resource-saturation thresholds while Chromium retains higher
+parallelism. Each engine emits progress every 100 completed pages. Exhaustive
+7,500-page cross-engine coverage remains an opt-in diagnostic because it exceeds
+the bounded pre-push runtime on the current hardware. This proves checked source
+behavior only; it is not production or native-review proof.
+
+For diagnosis only, `I18N_HYDRATION_DIAGNOSTIC_LOCALE` and
+`I18N_HYDRATION_DIAGNOSTIC_ROUTE` may select one configured locale and one
+canonical route across both hosts and all selected engines. Both values are
+required together and fail closed outside the committed inventories. A focused
+diagnostic never substitutes for the standard 3,500-page publication proof.
 
 ## Assurance boundary
 
