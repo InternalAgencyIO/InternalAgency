@@ -67,6 +67,8 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
     await page.getByTestId(`game-${gameId}`).click();
     await expect(page.getByTestId(`game-${gameId}`)).toHaveAttribute("aria-pressed", "true");
     await expect(page.getByTestId("active-game-scene")).toHaveClass(new RegExp(`game-${gameId}`));
+    await expect(page.locator("#demo-table-title")).toBeFocused();
+    await expect(page.locator("#demo-table")).toBeInViewport();
   }
   await page.getByTestId("game-plinko").click();
 

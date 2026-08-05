@@ -76,6 +76,9 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.match(component, /SAFE PULSE \{lightPulse \? "ON" : "OFF"\}/);
   assert.match(component, /aria-pressed=\{cinemaActive\}/);
   assert.match(component, /CINEMA LOOP \{cinemaActive \? "ON" : "PAUSED"\}/);
+  assert.match(component, /scrollIntoView\(\{ behavior: reduceMotion \? "auto" : "smooth", block: "start" \}\)/);
+  assert.match(component, /#demo-table-title/);
+  assert.match(component, /OPEN MODULE ↓/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /\.casino-demo \.demo-skip\{[^}]*clip-path:inset\(50%\)/);
   assert.match(css, /\.casino-demo \.demo-skip:focus\{[^}]*clip-path:none/);
@@ -89,6 +92,8 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.match(css, /\.casino-demo\.is-pulse-on \.demo-light-wash\{animation:none!important;opacity:0\}/);
   assert.match(css, /@keyframes cinema-drift/);
   assert.match(css, /@keyframes anime-flight/);
+  assert.match(css, /@keyframes host-fashion-reveal/);
+  assert.match(css, /@keyframes campaign-fashion-reveal/);
   assert.match(css, /prefers-reduced-motion:reduce[\s\S]*\.cinema-frame img/);
 });
 

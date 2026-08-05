@@ -123,3 +123,10 @@ body:has(.casino-demo) .locale-switcher{display:none!important}
 @media(max-width:900px){.nightflight-cinema-heading{grid-template-columns:1fr}.nightflight-cinema-grid{grid-template-columns:1fr}.cinema-frame-media{height:min(132vw,860px)}.cinema-frame-anime{width:min(100%,650px);justify-self:center}}
 @media(max-width:620px){.nightflight-cinema{padding-inline:1rem}.nightflight-cinema-heading h2{font-size:15vw}.cinema-frame-media{height:142vw;min-height:520px}.cinema-frame-live,.cinema-frame-anime{border-radius:1rem}.cinema-frame figcaption{right:.7rem;bottom:.7rem;left:.7rem}.cinema-frame figcaption span{font-size:.7rem}}
 @media(prefers-reduced-motion:reduce){.cinema-frame img,.cinema-launch-flare,.cinema-scanline,.cinema-speedline{animation:none!important;transform:none!important}.cinema-launch-flare{opacity:.4}.cinema-scanline,.cinema-speedline{display:none}}
+
+/* Game cards open the playable deck; host art reveals again for each selected module. */
+.demo-stage{scroll-margin-top:1rem}.demo-stage-heading h2:focus{outline:none}.demo-stage-heading h2:focus-visible{outline:2px solid #7df8ff;outline-offset:.35rem}
+.game-selector button>em{display:inline-flex;width:max-content;margin-top:auto;border-bottom:1px solid currentColor;padding-top:.85rem;color:#ffe29b;font:900 .48rem ui-monospace,monospace;font-style:normal;letter-spacing:.12em}.game-selector button:hover>em{color:#fff}.game-selector button.is-selected>em{color:#17091a}
+.host-thumb img{animation:host-fashion-reveal .62s cubic-bezier(.2,.75,.2,1) both}.demo-table-campaign{animation:campaign-fashion-reveal .8s cubic-bezier(.2,.75,.2,1) both}
+@keyframes host-fashion-reveal{0%{clip-path:inset(100% 0 0 0);opacity:0;transform:scale(1.08) translateY(8%)}100%{clip-path:inset(0);opacity:1;transform:scale(1) translateY(0)}}@keyframes campaign-fashion-reveal{0%{clip-path:inset(0 100% 0 0);opacity:0;transform:scale(1.08)}100%{clip-path:inset(0);opacity:.16;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.host-thumb img,.demo-table-campaign{animation:none!important;clip-path:none!important;transform:none!important}}
