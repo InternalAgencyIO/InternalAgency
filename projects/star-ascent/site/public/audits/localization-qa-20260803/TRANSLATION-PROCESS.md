@@ -182,14 +182,19 @@ Each page also has a 45-second total deadline by default; the bounded override
 A successful shard is labeled `SHARD PASS` and explicitly says it is not
 aggregate proof. Set `I18N_HYDRATION_EMIT_SHARD_RECORD=1` only on a clean,
 committed worktree to append one machine-readable record to that shard's log.
-The record binds the commit, tree, catalog, assigned 150-job digest, and full
-7,500-job digest while keeping aggregate completion false. After all 50 logs
-exist, run `node scripts/reconcile-dual-host-hydration-shards.mjs` with the 50
-log paths. The reconciler requires every index exactly once, recomputes every
-assignment from the checked-out source, rejects source/catalog/count/status
-drift, and emits aggregate PASS only for 7,500/7,500 completed pages. The
-current source has no such 50-record set, so exhaustive aggregate evidence
-remains HOLD.
+The v2 record retains its exact execution commit and whole-repository tree,
+and also binds the fixed `projects/star-ascent/site` subtree tree, catalog,
+assigned 150-job digest, and full 7,500-job digest while keeping aggregate
+completion false. After all 50 logs exist, run
+`node scripts/reconcile-dual-host-hydration-shards.mjs` with the 50 log paths.
+The reconciler accepts UTF-8 and BOM-marked UTF-16 logs, requires every index
+exactly once, recomputes every assignment from the checked-out source, and
+uses Git to re-resolve every historical commit and full tree. Records from
+different commits may reconcile only when their Git-verified fixed site
+subtree is byte-identical to the clean current head; any site-source, catalog,
+assignment, count, status, or assurance drift fails closed. Aggregate PASS is
+emitted only for 7,500/7,500 completed pages. The current source has no such
+50-record set, so exhaustive aggregate evidence remains HOLD.
 
 ## Assurance boundary
 

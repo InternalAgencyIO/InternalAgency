@@ -1,11 +1,13 @@
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
+import { resolve } from "node:path";
 
 import { exhaustiveLocaleShardCount } from "./dual-host-locale-hydration-plan.mjs";
 
 export const hydrationShardRecordPrefix = "HYDRATION_SHARD_RECORD ";
-export const hydrationShardRecordSchema = "iat-v2-hydration-shard-record/v1";
-export const hydrationAggregateSchema = "iat-v2-hydration-shard-aggregate/v1";
+export const hydrationShardRecordSchema = "iat-v2-hydration-shard-record/v2";
+export const hydrationAggregateSchema = "iat-v2-hydration-shard-aggregate/v2";
+export const hydrationSourceScopePath = "projects/star-ascent/site";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -24,15 +26,50 @@ export function hydrationJobSetSha256(plans) {
   return sha256(JSON.stringify(hydrationJobKeys(plans)));
 }
 
+function assertSourceBinding(sourceBinding, label = "Source binding") {
+  assert(
+    sourceBinding
+      && Object.keys(sourceBinding).toSorted().join(",") === "commit,scopePath,scopeTree,tree"
+      && /^[0-9a-f]{40}$/u.test(sourceBinding.commit)
+      && /^[0-9a-f]{40}$/u.test(sourceBinding.tree)
+      && sourceBinding.scopePath === hydrationSourceScopePath
+      && /^[0-9a-f]{40}$/u.test(sourceBinding.scopeTree),
+    `${label} is invalid`,
+  );
+}
+
+export function readGitSourceBindingAtCommit(commit, cwd = process.cwd()) {
+  assert(commit === "HEAD" || /^[0-9a-f]{40}$/u.test(commit), "Git source commit is invalid");
+  const git = (args) => execFileSync("git", args, { cwd, encoding: "utf8", windowsHide: true }).trim();
+  const repoRoot = git(["rev-parse", "--show-toplevel"]);
+  assert(
+    resolve(cwd) === resolve(repoRoot, hydrationSourceScopePath),
+    `Hydration evidence must run from the fixed ${hydrationSourceScopePath} source scope`,
+  );
+  const resolvedCommit = git(["rev-parse", `${commit}^{commit}`]);
+  const sourceBinding = {
+    commit: resolvedCommit,
+    tree: git(["rev-parse", `${resolvedCommit}^{tree}`]),
+    scopePath: hydrationSourceScopePath,
+    scopeTree: git(["rev-parse", `${resolvedCommit}:${hydrationSourceScopePath}`]),
+  };
+  assertSourceBinding(sourceBinding, "Git source binding");
+  return sourceBinding;
+}
+
+export function createGitSourceBindingResolver(cwd = process.cwd()) {
+  const cache = new Map();
+  return (commit) => {
+    if (!cache.has(commit)) cache.set(commit, readGitSourceBindingAtCommit(commit, cwd));
+    return cache.get(commit);
+  };
+}
+
 export function readCleanGitSourceBinding(cwd = process.cwd()) {
   const git = (args) => execFileSync("git", args, { cwd, encoding: "utf8", windowsHide: true }).trim();
   const worktreeChanges = git(["status", "--porcelain"]);
   assert(worktreeChanges === "", "Shard evidence requires a clean worktree with no tracked or untracked changes");
-  const commit = git(["rev-parse", "HEAD"]);
-  const tree = git(["rev-parse", "HEAD^{tree}"]);
-  assert(/^[0-9a-f]{40}$/u.test(commit), "Shard evidence commit binding is invalid");
-  assert(/^[0-9a-f]{40}$/u.test(tree), "Shard evidence tree binding is invalid");
-  return { commit, tree };
+  return readGitSourceBindingAtCommit("HEAD", cwd);
 }
 
 export function createHydrationShardRecord({
@@ -51,7 +88,7 @@ export function createHydrationShardRecord({
   assert(fullJobs.length === 7_500 && new Set(fullJobs).size === 7_500, "The exhaustive profile must contain 7,500 unique jobs");
   assert(locales.size === 1, "A shard must contain exactly one locale");
   assert(/^[0-9a-f]{64}$/u.test(catalogSha256), "Catalog digest is invalid");
-  assert(/^[0-9a-f]{40}$/u.test(sourceBinding.commit) && /^[0-9a-f]{40}$/u.test(sourceBinding.tree), "Source binding is invalid");
+  assertSourceBinding(sourceBinding);
 
   return {
     schema: hydrationShardRecordSchema,
@@ -83,6 +120,24 @@ export function createHydrationShardRecord({
   };
 }
 
+export function decodeHydrationShardLog(bytes, label = "log") {
+  assert(Buffer.isBuffer(bytes), `${label} must be read as bytes`);
+  let encoding = "utf-8";
+  let offset = 0;
+  if (bytes[0] === 0xff && bytes[1] === 0xfe) {
+    encoding = "utf-16le";
+    offset = 2;
+  } else if (bytes[0] === 0xfe && bytes[1] === 0xff) {
+    encoding = "utf-16be";
+    offset = 2;
+  }
+  try {
+    return new TextDecoder(encoding, { fatal: true }).decode(bytes.subarray(offset));
+  } catch (error) {
+    throw new Error(`${label} is not valid ${encoding}: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+
 export function parseHydrationShardRecordLog(logText, label = "log") {
   const matches = logText.split(/\r?\n/u).filter((line) => line.startsWith(hydrationShardRecordPrefix));
   assert(matches.length === 1, `${label} must contain exactly one shard record; found ${matches.length}`);
@@ -98,12 +153,20 @@ export function reconcileHydrationShardRecords({
   expectedShardPlans,
   fullProfilePlans,
   catalogSha256,
-  sourceBinding,
+  currentSourceBinding,
+  sourceBindingResolver,
 }) {
   assert(records.length === exhaustiveLocaleShardCount, `Expected 50 shard records; found ${records.length}`);
   assert(expectedShardPlans.length === exhaustiveLocaleShardCount, "Expected plans must contain all 50 shards");
+  assert(typeof sourceBindingResolver === "function", "Source binding resolver is required");
+  assertSourceBinding(currentSourceBinding, "Current source binding");
+  assert(
+    JSON.stringify(sourceBindingResolver(currentSourceBinding.commit)) === JSON.stringify(currentSourceBinding),
+    "Current source binding is not Git-verifiable",
+  );
   const fullProfileJobsSha256 = hydrationJobSetSha256(fullProfilePlans);
   const seen = new Set();
+  const evidenceSourceBindings = new Map();
 
   for (const record of records) {
     assert(record?.schema === hydrationShardRecordSchema, "Unexpected shard record schema");
@@ -114,8 +177,15 @@ export function reconcileHydrationShardRecords({
     seen.add(index);
     const expectedPlans = expectedShardPlans[index - 1];
     const expectedLocale = expectedPlans[0].jobs[0].locale;
-    assert(record.sourceBinding?.commit === sourceBinding.commit, `Shard ${index} commit binding differs`);
-    assert(record.sourceBinding?.tree === sourceBinding.tree, `Shard ${index} tree binding differs`);
+    assertSourceBinding(record.sourceBinding, `Shard ${index} source binding`);
+    const resolvedSourceBinding = sourceBindingResolver(record.sourceBinding.commit);
+    assert(
+      JSON.stringify(record.sourceBinding) === JSON.stringify(resolvedSourceBinding),
+      `Shard ${index} source binding is not Git-verifiable`,
+    );
+    assert(record.sourceBinding.scopePath === currentSourceBinding.scopePath, `Shard ${index} source scope differs`);
+    assert(record.sourceBinding.scopeTree === currentSourceBinding.scopeTree, `Shard ${index} scoped tree differs`);
+    evidenceSourceBindings.set(record.sourceBinding.commit, record.sourceBinding);
     assert(record.catalogSha256 === catalogSha256, `Shard ${index} catalog binding differs`);
     assert(record.profile.shardCount === exhaustiveLocaleShardCount, `Shard ${index} count differs`);
     assert(record.profile.locale === expectedLocale, `Shard ${index} locale assignment differs`);
@@ -133,11 +203,22 @@ export function reconcileHydrationShardRecords({
   return {
     schema: hydrationAggregateSchema,
     status: "PASS",
-    sourceBinding,
+    sourceBinding: currentSourceBinding,
+    sourceEquivalence: {
+      scopePath: currentSourceBinding.scopePath,
+      scopeTree: currentSourceBinding.scopeTree,
+      evidenceSourceBindings: [...evidenceSourceBindings.values()].toSorted((left, right) =>
+        left.commit.localeCompare(right.commit)),
+    },
     catalogSha256,
     evidenceSetSha256: sha256(JSON.stringify(records
       .toSorted((left, right) => left.profile.shardIndex - right.profile.shardIndex)
-      .map((record) => [record.profile.shardIndex, record.recordedAtUtc, record.profile.assignedJobsSha256]))),
+      .map((record) => [
+        record.profile.shardIndex,
+        record.recordedAtUtc,
+        record.sourceBinding,
+        record.profile.assignedJobsSha256,
+      ]))),
     result: {
       shardRecords: 50,
       plannedPages: 7_500,
