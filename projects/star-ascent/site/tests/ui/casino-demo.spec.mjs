@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import axe from "axe-core";
-import { hostProfiles, storyByGame } from "../../app/future/casino/demo/nightflight-narrative.mjs";
+import { campaignArt, campaignScenes, hostForId, hostProfiles, storyByGame } from "../../app/future/casino/demo/nightflight-narrative.mjs";
 
 test("Casino DLC demo is labeled, contained, accessible, deterministic, and locally interactive", async ({ page }) => {
   test.setTimeout(120_000);
@@ -24,18 +24,24 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await expect(page.getByRole("heading", { name: "Radiance" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Ellie" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Alia" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "AI ECE" })).toBeVisible();
   await expect(page.getByText("NO REAL WAGERS", { exact: true })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Launch night,\s*in two languages\./i })).toBeVisible();
-  const heroImage = page.locator('img[src="/future/casino/nightflight/nightflight-launch-hero-v1.png"]');
+  await expect(page.getByRole("heading", { name: /Launch night,\s*four signals\./i })).toBeVisible();
+  const heroImage = page.locator('.demo-campaign-hero > img[src="/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp"]');
   await expect(heroImage).toBeVisible();
   await expect(heroImage).toHaveAttribute("fetchpriority", "high");
-  await expect(page.locator('main.casino-demo img[loading="lazy"][decoding="async"]')).toHaveCount(18);
-  await expect(page.locator('img[src="/future/casino/nightflight/nightflight-anime-runway-v1.png"]')).toBeVisible();
-  await expect(page.locator('img[src="/future/casino/nightflight/nightflight-launch-motion-source-v1.png"]')).toBeVisible();
-  const generatedCampaignImages = page.locator('img[src*="/future/casino/nightflight/"][src*="-v1.png"]');
-  await expect(generatedCampaignImages).toHaveCount(3);
+  await expect(page.locator('main.casino-demo img[loading="lazy"][decoding="async"]')).toHaveCount(19);
+  const activeCampaignImages = page.locator('img[src*="/future/casino/nightflight/signal-four-"]');
+  await expect(activeCampaignImages).toHaveCount(20);
   for (const selector of [".night-crew", ".nightflight-cinema", "#game-lobby", "#demo-table"]) await page.locator(selector).scrollIntoViewIfNeeded();
-  await expect.poll(() => generatedCampaignImages.evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0))).toBe(true);
+  for (const src of new Set(Object.values(campaignScenes).map((scene) => scene.src))) {
+    const sourceImages = page.locator(`img[src="${src}"]`);
+    for (let index = 0; index < await sourceImages.count(); index += 1) {
+      const sourceImage = sourceImages.nth(index);
+      await sourceImage.evaluate((image) => image.scrollIntoView({ block: "center", behavior: "auto" }));
+      await expect.poll(() => sourceImage.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+    }
+  }
   const cinemaControl = page.getByRole("button", { name: "CINEMA LOOP ON" });
   await expect(cinemaControl).toHaveAttribute("aria-pressed", "true");
   await cinemaControl.click();
@@ -51,7 +57,14 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await expect(page.locator(".dossier-dock")).toBeHidden();
   await expect(page.locator(".locale-switcher")).toBeHidden();
   await expect(page.locator(".game-selector button")).toHaveCount(10);
-  await expect(page.locator(".host-roster .host-card h3")).toHaveText(["Radiance", "Ellie", "Alia"]);
+  await expect(page.locator(".host-roster .host-card h3")).toHaveText(["Radiance", "Ellie", "Alia", "AI ECE"]);
+  expect(await page.locator(".host-roster .host-card").evaluateAll((cards) => cards.map((card) => card.getAttribute("data-host-id")))).toEqual(["radiance", "ellie", "alia", "ece"]);
+  for (const host of hostProfiles) {
+    const portrait = page.locator(`.host-card[data-host-id="${host.id}"] img`);
+    await expect(portrait).toHaveAttribute("src", campaignArt[host.portraitArt]);
+    await portrait.evaluate((image) => image.scrollIntoView({ block: "center", behavior: "auto" }));
+    await expect.poll(() => portrait.evaluate((image) => image.complete && image.naturalWidth === 480 && image.naturalHeight === 720)).toBe(true);
+  }
   const skipLink = page.getByRole("link", { name: "Skip to the ten-game lobby" });
   await expect(skipLink).toHaveCSS("position", "fixed");
   await expect(skipLink).toHaveCSS("clip-path", "inset(50%)");
@@ -77,8 +90,11 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
     await expect(page.getByTestId("active-game-scene")).toHaveClass(new RegExp(`game-${gameId}`));
     await expect(page.getByTestId("nightflight-narrative")).toBeVisible();
     await expect(page.getByTestId("nightflight-narrative")).toHaveAttribute("data-story-id", story.id);
-    await expect(page.getByTestId("nightflight-narrative")).toHaveAttribute("data-lead-host", story.leadHost);
+    await expect(page.getByTestId("nightflight-narrative")).toHaveAttribute("data-lead-id", story.leadId);
+    await expect(page.getByTestId("nightflight-narrative")).toHaveAttribute("data-focus-ids", story.focusIds.join("|"));
+    await expect(page.getByTestId("nightflight-narrative")).toHaveAttribute("data-paws-present", String(story.paws.present));
     await expect(page.getByTestId("nightflight-narrative")).toContainText(story.interaction);
+    await expect(page.getByTestId("nightflight-narrative").locator(".heartline-node")).toHaveCount(4);
     await expect(page.locator("#demo-table-title")).toBeFocused();
     await expect(page.locator("#demo-table")).toBeInViewport();
   }
@@ -150,16 +166,23 @@ test("all ten Casino DLC rooms complete their deterministic local walkthrough", 
 
   for (const [gameId, outcome, receipt] of games) {
     const story = storyByGame[gameId];
-    const host = hostProfiles.find((candidate) => candidate.name === story.leadHost);
+    const host = hostForId(story.leadId);
     await page.getByTestId(`game-${gameId}`).click();
     const narrative = page.getByTestId("nightflight-narrative");
     await expect(narrative).toHaveAttribute("data-story-id", story.id);
     await expect(narrative).toHaveAttribute("data-game-id", gameId);
-    await expect(narrative).toHaveAttribute("data-lead-host", story.leadHost);
+    await expect(narrative).toHaveAttribute("data-lead-id", story.leadId);
     await expect(narrative).toHaveAttribute("data-participants", story.participants.join("|"));
+    await expect(narrative).toHaveAttribute("data-focus-ids", story.focusIds.join("|"));
+    await expect(narrative).toHaveAttribute("data-arc", story.arc);
+    await expect(narrative).toHaveAttribute("data-paws-present", String(story.paws.present));
+    await expect(narrative).toHaveAttribute("data-paws-action", story.paws.action);
+    await expect(narrative.locator(".heartline-node")).toHaveCount(4);
+    await expect(narrative.locator('.heartline-node[data-focus="true"]')).toHaveCount(story.focusIds.length);
     await expect(narrative).toContainText(story.interaction);
-    await expect(narrative).toContainText(story.pawsAction);
-    await expect(narrative).toContainText(host.tattoo);
+    await expect(narrative).toContainText(story.paws.beat);
+    await expect(narrative).toContainText(host.signatureCue);
+    await expect(page.locator(".demo-table-campaign")).toHaveAttribute("src", campaignScenes[story.scene].src);
     running = true;
     await page.getByRole("button", { name: new RegExp(`RUN ${gameId === "slots" ? "ORIGINAL SLOTS" : gameId.toUpperCase()} DEMO`) }).click();
     await expect(page.getByTestId("demo-receipt-id")).toHaveText(receipt);
@@ -187,9 +210,9 @@ test("Casino DLC demo honors reduced-motion preferences", async ({ page }, testI
     resultTransition: getComputedStyle(document.querySelector(".demo-result")).transitionDuration,
     lightAnimation: getComputedStyle(document.querySelector(".demo-light-wash")).animationName,
     lightOpacity: getComputedStyle(document.querySelector(".demo-light-wash")).opacity,
-    triangleAnimation: getComputedStyle(document.querySelector(".demo-triangle-narrative")).animationName,
-    triangleTransition: getComputedStyle(document.querySelector(".demo-triangle-narrative")).transitionDuration,
-    triangleTransform: getComputedStyle(document.querySelector(".demo-triangle-narrative")).transform,
+    constellationAnimation: getComputedStyle(document.querySelector(".demo-constellation-narrative")).animationName,
+    constellationTransition: getComputedStyle(document.querySelector(".demo-constellation-narrative")).transitionDuration,
+    constellationTransform: getComputedStyle(document.querySelector(".demo-constellation-narrative")).transform,
   }));
-  expect(motion).toEqual({ preference: true, orbitDuration: "1e-05s", resultTransition: "1e-05s", lightAnimation: "none", lightOpacity: "0", triangleAnimation: "none", triangleTransition: "0s", triangleTransform: "none" });
+  expect(motion).toEqual({ preference: true, orbitDuration: "1e-05s", resultTransition: "1e-05s", lightAnimation: "none", lightOpacity: "0", constellationAnimation: "none", constellationTransition: "0s", constellationTransform: "none" });
 });

@@ -1,48 +1,75 @@
+type HostId = "radiance" | "ellie" | "alia" | "ece";
+type HostPortrait = "portraitRadiance" | "portraitEllie" | "portraitAlia" | "portraitEce";
+
 type HostProfile = {
-  name: "Radiance" | "Ellie" | "Alia";
+  id: HostId;
+  name: "Radiance" | "Ellie" | "Alia" | "AI ECE";
   callSign: string;
   role: string;
   signal: string;
-  tone: "solar" | "sapphire" | "crimson";
-  imagePosition: string;
-  tattoo: string;
+  tone: "solar" | "sapphire" | "crimson" | "emerald";
+  portraitArt: HostPortrait;
+  signatureCue: string;
   minimumAge: number;
 };
 
 type NarrativeBeat = {
   id: string;
   gameId: string;
-  leadHost: HostProfile["name"];
-  participants: readonly HostProfile["name"][];
-  art: "gala" | "runway" | "constellation";
+  leadId: HostId;
+  participants: readonly HostId[];
+  focusIds: readonly HostId[];
+  arc: string;
+  scene: "signalFourAnchor" | "signalFourTension" | "signalFourRelay" | "signalFourFinale";
   interaction: string;
-  pawsAction: string;
+  paws: {
+    present: boolean;
+    action: string;
+    beat: string;
+    affectsOutcome: false;
+  };
 };
+
+const constellationNodes: readonly { id: HostId; label: string; className: string }[] = [
+  { id: "radiance", label: "R", className: "node-r" },
+  { id: "ellie", label: "EL", className: "node-el" },
+  { id: "alia", label: "A", className: "node-a" },
+  { id: "ece", label: "EC", className: "node-ec" },
+];
 
 export function NightflightNarrative({ story, host }: { story: NarrativeBeat; host: HostProfile }) {
   return (
     <aside
-      className={`demo-triangle-narrative cue-${host.tone}`}
+      className={`demo-constellation-narrative cue-${host.tone}`}
       data-testid="nightflight-narrative"
       data-story-id={story.id}
       data-game-id={story.gameId}
-      data-lead-host={story.leadHost}
+      data-lead-id={story.leadId}
       data-participants={story.participants.join("|")}
+      data-focus-ids={story.focusIds.join("|")}
+      data-arc={story.arc}
+      data-paws-present={String(story.paws.present)}
+      data-paws-action={story.paws.action}
     >
-      <div className="triangle-heartline" aria-hidden="true">
-        <i className="heartline-edge edge-one" />
-        <i className="heartline-edge edge-two" />
-        <i className="heartline-edge edge-three" />
-        <span className="heartline-node node-r">R</span>
-        <span className="heartline-node node-e">E</span>
-        <span className="heartline-node node-a">A</span>
+      <div className="constellation-heartline" aria-hidden="true">
+        {Array.from({ length: 6 }, (_, index) => <i className={`heartline-edge edge-${index + 1}`} key={index} />)}
+        {constellationNodes.map((node) => (
+          <span
+            className={`heartline-node ${node.className}${story.focusIds.includes(node.id) ? " is-focus" : ""}`}
+            data-member-id={node.id}
+            data-focus={String(story.focusIds.includes(node.id))}
+            key={node.id}
+          >
+            {node.label}
+          </span>
+        ))}
       </div>
-      <div className="triangle-story-copy">
-        <span>TRIANGLE HEARTBEAT // {host.name.toUpperCase()}</span>
+      <div className="constellation-story-copy">
+        <span>LOVE CONSTELLATION // {host.name.toUpperCase()}</span>
         <strong id="nightflight-narrative-summary">{story.interaction}</strong>
         <dl>
-          <div><dt>VISIBLE CUE</dt><dd>{host.tattoo}</dd></div>
-          <div><dt>PAWS</dt><dd>{story.pawsAction}</dd></div>
+          <div><dt>SIGNAL</dt><dd>{host.signatureCue}</dd></div>
+          <div><dt>PAWS</dt><dd>{story.paws.beat}</dd></div>
         </dl>
       </div>
     </aside>

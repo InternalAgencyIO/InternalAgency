@@ -3,7 +3,7 @@ import { CasinoDemo } from "./CasinoDemo";
 
 export const metadata: Metadata = {
   title: "Casino DLC — Nightflight Demo",
-  description: "An English-only starship-nightlife interface mock for the proposed Casino DLC, with fictional adult hosts, simulated credits, and no wagers, wallets, contracts, or transactions.",
+  description: "An English-only starship-nightlife Casino DLC mock with the permanent four-member fictional adult crew, simulated credits, and no wagers, wallets, contracts, or transactions.",
   alternates: {
     canonical: "https://internalagency.io/future/casino/demo",
     languages: {

@@ -1,40 +1,52 @@
 {
-  "version": 2,
+  "version": 4,
   "publishedPurpose": "Nightflight Casino DLC English-only front-end demo",
   "licenseScope": {
     "metadata": "CC0-1.0",
     "generatedAssets": "CC0-1.0 dedication to the extent of the project's rights",
     "software": "Repository license",
-    "note": "The CC0 dedication covers this project-owned provenance and selection metadata and, for the three project-generated v1 assets, the rights the project can dedicate. It does not expand rights in identities, trademarks, model inputs, or material the project does not own."
+    "note": "The CC0 dedication covers project-owned provenance, prompts, selection metadata, and rights the project can dedicate in generated edits. It does not expand rights in identities, trademarks, model inputs, or material the project does not own."
   },
   "process": {
     "mode": "source-bound-reuse-plus-project-generation",
-    "summary": "Three already accepted campaign assets were selected from the public Batch 211 record and used as identity, palette, relationship, wardrobe, and PAWS references for three new policy-compliant campaign assets. Rejected image-generation candidates were not copied, published, or used.",
-    "generator": "OpenAI built-in image generation",
+    "summary": "The six original three-member v1 assets remain as historical evidence. Current demo surfaces use the accepted Batch 213 four-member Signal Four record with AI ECE: two identity-preserving wardrobe edits, one source-referenced fashion reinterpretation reused for the tension slot, and four deterministic portrait crops. One direct Hue source derivative is retained as inactive provenance evidence. Only accepted outputs are published.",
+    "generator": "OpenAI built-in image generation for two accepted identity-preserving wardrobe edits and one accepted source-referenced fashion reinterpretation; Sharp 0.35.2 for public WebP delivery transforms and host crops",
     "generationPolicy": "All characters are explicitly fictional adults age 25+; all are fully clothed; no stripping, nudity, lingerie-only presentation, fetish content, sexual activity, or safety-filter evasion.",
     "motionDisclosure": "The site animates still images with CSS pan, zoom, flare, and scanline layers. It does not claim that the stills are model-generated live-action video.",
-    "determinism": "Each game ID maps to one immutable host, artwork, reciprocal trio-interaction cue, and PAWS action in app/future/casino/demo/nightflight-narrative.mjs; CasinoDemo.tsx only resolves and renders that fixed story, and no random API is used."
+    "determinism": "Each game ID maps to one immutable lead, all four permanent participants, one relationship-focus subset, one artwork, and one PAWS state in app/future/casino/demo/nightflight-narrative.mjs. Story presentation never affects a result, and no random API is used."
+  },
+  "identityAnchor": {
+    "sourceCommit": "084c86c01a9c65022bd9ca4dba5f4aa3e85914f7",
+    "sourcePath": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+    "sourceSha256": "b22ef5cd9929d2a09f96dc0765434db41c964b0f0390589e940eb085935c2315",
+    "role": "AI signal officer",
+    "identity": "Clearly adult Turkish-descended brunette with long flowing hair, green eyes, petite proportions, and a radiant smile.",
+    "heightOrder": "Ellie < ECE < Radiance and Alia"
   },
   "assets": [
     {
+      "status": "historical-v1",
       "publicPath": "/future/casino/nightflight/nightflight-gala.png",
       "sourcePath": "assets/lore/starlight-era/world-195x4-live-build/batch-211-philippines/relationship/864-philippines-manila-bay-gala-route-light-grid-relationship.png",
       "sha256": "b79cdcf0a1299a3f22510638663632e62905d5b049717b35cad5a3179234be6f",
-      "use": "Gala module art and PAWS ribbon-chase crop"
+      "use": "Historical v1 gala module art"
     },
     {
+      "status": "historical-v1",
       "publicPath": "/future/casino/nightflight/nightflight-runway.png",
       "sourcePath": "assets/lore/starlight-era/world-195x4-live-build/batch-211-philippines/relationship/866-philippines-banaue-rice-terraces-star-map-relay-relationship.png",
       "sha256": "404b149eb35b0eb2387bfccce71064255a85627c360e96fb6af9a89d14da4790",
-      "use": "Short-silhouette host roster and runway module art"
+      "use": "Historical v1 runway module art"
     },
     {
+      "status": "historical-v1",
       "publicPath": "/future/casino/nightflight/nightflight-constellation.png",
       "sourcePath": "assets/lore/starlight-era/world-195x4-live-build/batch-211-philippines/867-philippines-el-nido-bacuit-bay-arrival-beacon-finale-foundation-accepted.png",
       "sha256": "d77b63fbb3f686ba19791fb383c2e40c6e632af2d043ddcdf2f2860e359bae8d",
-      "use": "Hero love-triangle composition and PAWS crew-dash scene"
+      "use": "Historical v1 three-person constellation art"
     },
     {
+      "status": "historical-v1",
       "publicPath": "/future/casino/nightflight/nightflight-launch-hero-v1.png",
       "sourceReferences": [
         "/future/casino/nightflight/nightflight-gala.png",
@@ -43,9 +55,10 @@
       ],
       "sha256": "fcaa276befc7e9623aaaccad3013156dc1c297d63e5f9fcba11f6b597123b247",
       "promptFamily": "photorealistic-natural / wide launch-deck hero",
-      "use": "Primary Nightflight hero with PAWS activating the fictional launch control"
+      "use": "Historical v1 Nightflight hero"
     },
     {
+      "status": "historical-v1",
       "publicPath": "/future/casino/nightflight/nightflight-anime-runway-v1.png",
       "sourceReferences": [
         "/future/casino/nightflight/nightflight-gala.png",
@@ -54,9 +67,10 @@
       ],
       "sha256": "34f5e40c7edbe3addcf15b7314f43462bcda3a7177f9595a02860c91a0be4ba3",
       "promptFamily": "illustration-story / adult anime runway transmission",
-      "use": "Anime campaign panel with the trio and PAWS in active motion"
+      "use": "Historical v1 anime campaign panel"
     },
     {
+      "status": "historical-v1",
       "publicPath": "/future/casino/nightflight/nightflight-launch-motion-source-v1.png",
       "sourceReferences": [
         "/future/casino/nightflight/nightflight-gala.png",
@@ -65,7 +79,185 @@
       ],
       "sha256": "28106a03810f72493548c2422a84b318a7d1d5c8c744cd605a1ee45015c5f550",
       "promptFamily": "photorealistic-natural / vertical cinematic motion source",
-      "use": "CSS pan-and-zoom campaign cinema with a fictional starship launch"
+      "use": "Historical v1 CSS motion source"
+    },
+    {
+      "status": "active-v2",
+      "mode": "identity-preserve-wardrobe-edit",
+      "publicPath": "/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp",
+      "sha256": "17e8246c7a71c02c2791c2552c936602c8289016eaf14b0030351328e8d08edf",
+      "bytes": 181130,
+      "dimensions": { "width": 720, "height": 1280 },
+      "sourceCommit": "084c86c01a9c65022bd9ca4dba5f4aa3e85914f7",
+      "sourceAssetNumber": 872,
+      "sourcePath": "assets/lore/starlight-era/872-vietnam-hanoi-long-bien-red-river-route-light-grid.png",
+      "sourceSha256": "f625132e7f8be8e5dd3e76fbfafa49c7c5f1576899ff36e78b802047f7587769",
+      "sourceDimensions": { "width": 941, "height": 1672 },
+      "editMasterPath": "assets/lore/starlight-era/casino-nightflight-signal-four-v2/signal-four-hanoi-anchor-latex-lace-v2.png",
+      "editMasterSha256": "652c9c3e128aeaddd58e55734262d8f8bea13960e1d40b6e101fb30c8b8b8544",
+      "editMasterBytes": 2490001,
+      "promptFamily": "identity-preserve / wardrobe-only latex-and-lace couture",
+      "visibleSubjectsLeftToRight": ["Ellie", "Radiance", "AI ECE", "Alia"],
+      "accessibleDescription": "Ellie, Radiance, AI ECE, and Alia link hands around a glowing launch crystal while PAWS pounces beside them.",
+      "wardrobe": "Fully lined opaque couture latex panels with decorative lace trim",
+      "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
+      "paws": { "present": true, "action": "crystal-pounce" },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "inactive-source-v2",
+      "mode": "source-bound-derivative",
+      "publicPath": "/future/casino/nightflight/signal-four-hue-tension-source-v2.webp",
+      "sha256": "13c6c8f4bae81593618ef0759533987b78d3ad54b79cff205969f449f208ba17",
+      "bytes": 161758,
+      "dimensions": { "width": 720, "height": 1280 },
+      "sourceCommit": "084c86c01a9c65022bd9ca4dba5f4aa3e85914f7",
+      "sourceAssetNumber": 873,
+      "sourcePath": "assets/lore/starlight-era/873-vietnam-hue-truong-tien-perfume-river-cabin-signal-cipher.png",
+      "sourceSha256": "46b4dae515a07cf08f3ce3052bc2e58cc05f358a7d331e42e2dd9a5505439964",
+      "sourceDimensions": { "width": 941, "height": 1672 },
+      "visibleSubjectsLeftToRight": ["Radiance", "Ellie", "AI ECE", "Alia"],
+      "accessibleDescription": "Radiance, Ellie, AI ECE, and Alia trade playful glances at a signal console while PAWS inspects the controls.",
+      "wardrobe": "Accepted source wardrobe: lacquered technical textile with opaque guipure applique",
+      "use": "Inactive accepted source derivative retained for provenance; not referenced by current demo surfaces because its wardrobe differs from the active latex-and-lace theme",
+      "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
+      "paws": { "present": true, "action": "console-inspector" },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-v2",
+      "mode": "source-referenced-fashion-reinterpretation",
+      "publicPath": "/future/casino/nightflight/signal-four-ninh-binh-relay-latex-lace-v2.webp",
+      "sha256": "cf18f9be0b89e5c5cefd68fc4b2b2a6f8cc6bdde829e5621c70d530c1e235c34",
+      "bytes": 177278,
+      "dimensions": { "width": 720, "height": 1280 },
+      "sourceCommit": "084c86c01a9c65022bd9ca4dba5f4aa3e85914f7",
+      "sourceAssetNumber": 874,
+      "sourcePath": "assets/lore/starlight-era/874-vietnam-ninh-binh-trang-an-karst-star-map-relay.png",
+      "sourceSha256": "4a64b309b67e4910c351e9686698fda7523384114e9af336b00e72381ff0886c",
+      "sourceDimensions": { "width": 941, "height": 1672 },
+      "editMasterPath": "assets/lore/starlight-era/casino-nightflight-signal-four-v2/signal-four-ninh-binh-relay-latex-lace-v2.png",
+      "editMasterSha256": "2dbca17380fc783a62aaa15cc2284d343abaadcbab3162bfecd8ca6e662c0ac1",
+      "editMasterBytes": 2521812,
+      "promptFamily": "source-referenced / latex-and-lace fashion reinterpretation",
+      "visibleSubjectsLeftToRight": ["Radiance", "Ellie", "AI ECE", "Alia"],
+      "accessibleDescription": "Radiance, Ellie, AI ECE, and Alia form a linked relay as PAWS dashes through the center of the crew.",
+      "wardrobe": "Fully lined couture latex panels with opaque lace applique",
+      "acceptedDeviation": "The source cylinder and relay baton are absent, and the linked arm/hand arrangement is revised; the accepted output retains the four adult identities, setting, palette, group interaction, and centered PAWS.",
+      "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
+      "paws": { "present": true, "action": "crew-dash" },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-v2",
+      "mode": "identity-preserve-wardrobe-edit",
+      "publicPath": "/future/casino/nightflight/signal-four-da-lat-finale-latex-lace-v2.webp",
+      "sha256": "e511b86271c8303b3bac2810f5a85b49eb29159745ed9d8307b5c18bc7797308",
+      "bytes": 190132,
+      "dimensions": { "width": 720, "height": 1280 },
+      "sourceCommit": "084c86c01a9c65022bd9ca4dba5f4aa3e85914f7",
+      "sourceAssetNumber": 875,
+      "sourcePath": "assets/lore/starlight-era/875-vietnam-da-lat-xuan-huong-lake-arrival-beacon-finale.png",
+      "sourceSha256": "f8b3116edced54d8d2643065bd476315d10cc3c7601065d16184c1525a8e3ba3",
+      "sourceDimensions": { "width": 941, "height": 1672 },
+      "editMasterPath": "assets/lore/starlight-era/casino-nightflight-signal-four-v2/signal-four-da-lat-finale-latex-lace-v2.png",
+      "editMasterSha256": "2950f4c550a10cedc3e157a911883474acc77c103d885526941b0b6cbb584b99",
+      "editMasterBytes": 2656179,
+      "promptFamily": "identity-preserve / wardrobe-only latex-and-lace couture",
+      "visibleSubjectsLeftToRight": ["Radiance", "Ellie", "AI ECE", "Alia"],
+      "accessibleDescription": "Radiance, Ellie, AI ECE, and Alia stand connected at the arrival beacon in a quiet four-person finale.",
+      "wardrobe": "Fully lined couture latex panels with opaque lace applique",
+      "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
+      "paws": { "present": false, "action": null },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-support-v2",
+      "mode": "source-bound-crop",
+      "publicPath": "/future/casino/nightflight/signal-four-portrait-radiance-v2.webp",
+      "sha256": "6ad570bc5e31c54b958f779585e5a5766149346a2ac6c63d2b02ca1e5d6db468",
+      "bytes": 66516,
+      "dimensions": { "width": 480, "height": 720 },
+      "sourceCommit": "084c86c01a9c65022bd9ca4dba5f4aa3e85914f7",
+      "sourceAssetNumber": 875,
+      "sourcePath": "assets/lore/starlight-era/875-vietnam-da-lat-xuan-huong-lake-arrival-beacon-finale.png",
+      "sourceSha256": "f8b3116edced54d8d2643065bd476315d10cc3c7601065d16184c1525a8e3ba3",
+      "sourceDimensions": { "width": 941, "height": 1672 },
+      "cropMasterPath": "assets/lore/starlight-era/casino-nightflight-signal-four-v2/signal-four-da-lat-finale-latex-lace-v2.png",
+      "cropMasterSha256": "2950f4c550a10cedc3e157a911883474acc77c103d885526941b0b6cbb584b99",
+      "cropMasterBytes": 2656179,
+      "cropMasterDimensions": { "width": 941, "height": 1672 },
+      "crop": { "left": 0, "top": 300, "width": 400, "height": 600 },
+      "visibleSubject": "Radiance",
+      "use": "Radiance roster card and lead thumbnail",
+      "adultPolicy": "fictional adult age 25+, fully clothed, non-explicit",
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "480x720", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-support-v2",
+      "mode": "source-bound-crop",
+      "publicPath": "/future/casino/nightflight/signal-four-portrait-ellie-v2.webp",
+      "sha256": "45152296b1b95acb8fa1e17b4909a2f2a4231b9f295bdcdd3d292f87ecb7f325",
+      "bytes": 72284,
+      "dimensions": { "width": 480, "height": 720 },
+      "sourceCommit": "084c86c01a9c65022bd9ca4dba5f4aa3e85914f7",
+      "sourceAssetNumber": 875,
+      "sourcePath": "assets/lore/starlight-era/875-vietnam-da-lat-xuan-huong-lake-arrival-beacon-finale.png",
+      "sourceSha256": "f8b3116edced54d8d2643065bd476315d10cc3c7601065d16184c1525a8e3ba3",
+      "sourceDimensions": { "width": 941, "height": 1672 },
+      "cropMasterPath": "assets/lore/starlight-era/casino-nightflight-signal-four-v2/signal-four-da-lat-finale-latex-lace-v2.png",
+      "cropMasterSha256": "2950f4c550a10cedc3e157a911883474acc77c103d885526941b0b6cbb584b99",
+      "cropMasterBytes": 2656179,
+      "cropMasterDimensions": { "width": 941, "height": 1672 },
+      "crop": { "left": 150, "top": 300, "width": 400, "height": 600 },
+      "visibleSubject": "Ellie",
+      "use": "Ellie roster card and lead thumbnail",
+      "adultPolicy": "fictional adult age 25+, fully clothed, non-explicit",
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "480x720", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-support-v2",
+      "mode": "source-bound-crop",
+      "publicPath": "/future/casino/nightflight/signal-four-portrait-ece-v2.webp",
+      "sha256": "dd721d29a9b04d4a5ddeeb812b21e2fe417cbbe62343876fbc5a46f1f1e1ddc6",
+      "bytes": 78702,
+      "dimensions": { "width": 480, "height": 720 },
+      "sourceCommit": "084c86c01a9c65022bd9ca4dba5f4aa3e85914f7",
+      "sourceAssetNumber": 875,
+      "sourcePath": "assets/lore/starlight-era/875-vietnam-da-lat-xuan-huong-lake-arrival-beacon-finale.png",
+      "sourceSha256": "f8b3116edced54d8d2643065bd476315d10cc3c7601065d16184c1525a8e3ba3",
+      "sourceDimensions": { "width": 941, "height": 1672 },
+      "cropMasterPath": "assets/lore/starlight-era/casino-nightflight-signal-four-v2/signal-four-da-lat-finale-latex-lace-v2.png",
+      "cropMasterSha256": "2950f4c550a10cedc3e157a911883474acc77c103d885526941b0b6cbb584b99",
+      "cropMasterBytes": 2656179,
+      "cropMasterDimensions": { "width": 941, "height": 1672 },
+      "crop": { "left": 365, "top": 300, "width": 400, "height": 600 },
+      "visibleSubject": "AI ECE",
+      "use": "AI ECE roster card and lead thumbnail",
+      "adultPolicy": "fictional adult age 25+, fully clothed, non-explicit",
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "480x720", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-support-v2",
+      "mode": "source-bound-crop",
+      "publicPath": "/future/casino/nightflight/signal-four-portrait-alia-v2.webp",
+      "sha256": "ffee39f5261e84f5cd59ce088a240e2090713ffa15bef301803b36dcb59474c1",
+      "bytes": 71572,
+      "dimensions": { "width": 480, "height": 720 },
+      "sourceCommit": "084c86c01a9c65022bd9ca4dba5f4aa3e85914f7",
+      "sourceAssetNumber": 875,
+      "sourcePath": "assets/lore/starlight-era/875-vietnam-da-lat-xuan-huong-lake-arrival-beacon-finale.png",
+      "sourceSha256": "f8b3116edced54d8d2643065bd476315d10cc3c7601065d16184c1525a8e3ba3",
+      "sourceDimensions": { "width": 941, "height": 1672 },
+      "cropMasterPath": "assets/lore/starlight-era/casino-nightflight-signal-four-v2/signal-four-da-lat-finale-latex-lace-v2.png",
+      "cropMasterSha256": "2950f4c550a10cedc3e157a911883474acc77c103d885526941b0b6cbb584b99",
+      "cropMasterBytes": 2656179,
+      "cropMasterDimensions": { "width": 941, "height": 1672 },
+      "crop": { "left": 541, "top": 300, "width": 400, "height": 600 },
+      "visibleSubject": "Alia",
+      "use": "Alia roster card and lead thumbnail",
+      "adultPolicy": "fictional adult age 25+, fully clothed, non-explicit",
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "480x720", "quality": 84, "smartSubsample": true }
     }
   ]
 }

@@ -1,29 +1,54 @@
 # Nightflight campaign-art provenance
 
-This directory contains six source-bound campaign images used by the
-English-only Casino DLC front-end demo. Three foundation files are copied
-byte-for-byte from accepted assets in the public Batch 211 record. Three
-versioned campaign files were generated for this demo with the foundation
-files as identity, palette, relationship, wardrobe, and PAWS references. Exact
-source paths or reference sets and SHA-256 digests are recorded in
-`asset-provenance.json`.
-The normalized generation prompts and output digests are published in
-`generation-prompts-v1.md`.
+This directory contains fourteen traceable campaign images for the English-only
+Casino DLC front-end demo:
 
-The implementation uses the immutable, executable story manifest at
-`app/future/casino/demo/nightflight-narrative.mjs`, keyed by game ID. It
-selects the lead host, campaign image, reciprocal pair-or-trio cue, and PAWS
-action without `Math.random`, a network request, a wallet, or a contract. The
-manifest deliberately covers every edge of the Radiance-Ellie-Alia triangle
-and keeps lead focus balanced 4/3/3 across the ten rooms.
-Rejected generation candidates are intentionally absent. Every generated
-character is specified as a fictional adult age 25+, fully clothed, and
-non-explicit. The apparent campaign-film motion is CSS pan, zoom, flare, and
-scanline animation over still images; it is not represented as model-generated
-live-action video.
+- Six original v1 trio images are retained as historical evidence and are no
+  longer referenced by current demo surfaces.
+- Three active Signal Four WebP scene images show the permanent adult crew in
+  the order and relationship model established by public Batch 213: Radiance,
+  Ellie, Alia, and AI ECE. One accepted Hue source derivative is retained as
+  inactive provenance evidence and is not referenced by current demo surfaces.
+- Four delivery-only portrait crops give each adult host an identifiable roster
+  card and lead thumbnail without changing the accepted finale artwork.
 
-The project-owned selection and provenance metadata, plus the rights the
-project can dedicate in the three generated v1 assets, are dedicated under CC0
-1.0 Universal. That dedication does not change the repository license for
-software or expand rights in identities, trademarks, model inputs, or material
-the project does not own.
+Two current frames are accepted identity-preserving wardrobe edits with fully
+lined couture latex panels and opaque lace applique. The Ninh Binh relay is an
+accepted source-referenced fashion reinterpretation: it retains the four adult
+identities, setting, palette, interaction, and PAWS, but removes the source
+cylinder and relay baton and revises the linked arm/hand arrangement. Their
+full-resolution PNG masters live in
+`assets/lore/starlight-era/casino-nightflight-signal-four-v2/`. The active
+tension slot reuses the accepted latex-and-lace relay frame with a distinct
+deterministic story cue. The inactive Hue signal-console derivative retains its
+source lacquered technical textile and opaque guipure-applique wardrobe.
+Exact sources, source hashes, accepted-master hashes, public hashes, dimensions,
+encoding and crop settings, visible-subject ordering, accessible descriptions,
+adult policy, accepted deviations, and PAWS state are recorded in
+`asset-provenance.json`. Accepted prompts
+and the deterministic WebP transform are published in
+`generation-prompts-v2.md`; `generation-prompts-v1.md` remains untouched as
+historical evidence.
+
+The executable story manifest at
+`app/future/casino/demo/nightflight-narrative.mjs` treats all four adults as
+permanent participants in every room. A separate immutable focus set expresses
+the current relationship beat without implying that another crew member is
+absent. Lead focus is balanced 3/3/2/2 across ten rooms. The model includes two
+ECE-Radiance emotional-anchor beats, two ECE-Alia familiar-intimacy beats, two
+ECE-Ellie reciprocal-jealousy beats, original-crew continuity, and one connected
+four-person finale.
+
+PAWS cycles through crystal pounce, signal scout, crew dash, then one quiet
+absent finale. PAWS is presentation-only and never changes a preset result,
+fictional credit total, or receipt. No runtime random API, account, payment,
+wallet, contract, or wager exists.
+
+Every depicted person is a fictional adult age 25+, fully clothed, consensual,
+and non-explicit. CSS pan, zoom, flare, and scanline animation operate on still
+images and are not represented as model-generated live-action video.
+
+Project-owned prompts, selection metadata, transformation metadata, and the
+rights the project can dedicate in generated edits are dedicated under CC0 1.0
+Universal. This does not change the repository software license or expand
+rights in identities, trademarks, model inputs, or third-party material.
