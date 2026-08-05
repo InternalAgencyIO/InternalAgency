@@ -1,0 +1,43 @@
+{
+  "schema": "iat-v2-admin-lazy-boundary-policy/v1",
+  "status": "DRAFT_PARTIAL_REMEDIATION_QA_HOLD",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "buildManifestRequired": true,
+  "baseline": {
+    "priorCombinedFeatureChunkBytes": 912348
+  },
+  "boundaries": {
+    "inspectionEntryStaticClosureExcludes": [
+      "FEATURE_REHEARSAL",
+      "PROGRAM_UPGRADE",
+      "TREZOR_CONNECT",
+      "SWITCHBOARD_ON_DEMAND"
+    ],
+    "featureShellStaticClosureExcludes": [
+      "SWITCHBOARD_ON_DEMAND"
+    ],
+    "featureShellDynamicImports": [
+      "SWITCHBOARD_ON_DEMAND"
+    ]
+  },
+  "byteBudgets": {
+    "initialEntryMaximum": 1100000,
+    "featureShellMaximum": 150000,
+    "switchboardOnDemandMaximum": 1000000,
+    "trezorConnectMaximum": 180000,
+    "programUpgradeMaximum": 15000
+  },
+  "assurance": {
+    "independentHardwareReviewComplete": false,
+    "signingApproved": false,
+    "broadcastApproved": false,
+    "deploymentApproved": false,
+    "mainnetApproved": false
+  },
+  "limitations": [
+    "The generated Vite manifest and browser checks prove local build and request boundaries only.",
+    "The 976707-byte Switchboard action payload is larger than the prior combined feature chunk; this increment reduces the feature-shell startup surface rather than total oracle-action bytes.",
+    "The Switchboard and Trezor packages remain present as lazy operator surfaces and require independent review before use.",
+    "No hardware, wallet, RPC, simulation, signing, broadcast, deployment, Devnet, or Mainnet action is authorized by this policy."
+  ]
+}

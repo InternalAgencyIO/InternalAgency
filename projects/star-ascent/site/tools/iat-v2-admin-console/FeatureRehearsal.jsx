@@ -11,7 +11,6 @@ import {
   createAssociatedTokenAccountIdempotentInstruction,
   getAssociatedTokenAddressSync,
 } from "@solana/spl-token";
-import * as switchboard from "@switchboard-xyz/on-demand";
 import {
   deriveAgencyAddress,
   derivePositionAddress,
@@ -434,12 +433,21 @@ function switchboardWallet(provider, publicKey) {
   };
 }
 
+let switchboardModulePromise;
+
+function loadSwitchboardModule() {
+  switchboardModulePromise ??= import("@switchboard-xyz/on-demand");
+  return switchboardModulePromise;
+}
+
 async function switchboardProgram(provider, publicKey) {
-  return switchboard.AnchorUtils.loadProgramFromConnection(
+  const switchboard = await loadSwitchboardModule();
+  const program = await switchboard.AnchorUtils.loadProgramFromConnection(
     connection,
     switchboardWallet(provider, publicKey),
     SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID,
   );
+  return { program, switchboard };
 }
 
 async function buildActionTransaction(action, state, baseSnapshot, provider) {
@@ -540,7 +548,7 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
     case "CREATE_SWITCHBOARD_RANDOMNESS": {
       ephemeralKeypair = Keypair.generate();
       randomnessAddress = ephemeralKeypair.publicKey;
-      const program = await switchboardProgram(provider, action.signer);
+      const { program, switchboard } = await switchboardProgram(provider, action.signer);
       const [, initializeIx] = await switchboard.Randomness.create(
         program,
         ephemeralKeypair,
@@ -552,7 +560,7 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
     }
     default:
       if (action.id.startsWith("COMMIT_CCC_ROUND_")) {
-        const program = await switchboardProgram(provider, action.signer);
+        const { program, switchboard } = await switchboardProgram(provider, action.signer);
         const randomness = new switchboard.Randomness(program, state.randomnessAddress);
         const commitIx = await randomness.commitIx(
           switchboard.ON_DEMAND_DEVNET_QUEUE,
@@ -569,7 +577,7 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
           }),
         );
       } else if (action.id.startsWith("REVEAL_CCC_ROUND_")) {
-        const program = await switchboardProgram(provider, action.signer);
+        const { program, switchboard } = await switchboardProgram(provider, action.signer);
         const randomness = new switchboard.Randomness(program, state.randomnessAddress);
         const revealIx = await randomness.revealIx(action.signer);
         transaction.add(

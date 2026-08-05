@@ -33,5 +33,6 @@ export default defineConfig({
   build: {
     outDir: path.join(root, "dist"),
     emptyOutDir: true,
+    manifest: true,
   },
 });

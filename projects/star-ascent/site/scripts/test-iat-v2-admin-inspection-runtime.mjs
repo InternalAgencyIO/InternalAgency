@@ -1,9 +1,18 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
+import { readFileSync } from "node:fs";
 import { createServer } from "node:net";
+import { resolve } from "node:path";
 import { chromium, firefox, webkit } from "@playwright/test";
 
 const root = process.cwd();
+const manifest = JSON.parse(readFileSync(resolve(root, "tools/iat-v2-admin-console/dist/.vite/manifest.json"), "utf8"));
+const lazyAssetPaths = new Set(
+  Object.values(manifest)
+    .filter(({ isDynamicEntry }) => isDynamicEntry)
+    .map(({ file }) => `/${file}`),
+);
+assert.ok(lazyAssetPaths.size >= 4, "admin manifest must expose separate feature, upgrade, Trezor, and Switchboard lazy assets");
 const reserveLoopbackPort = () => new Promise((resolve, reject) => {
   const reservation = createServer();
   reservation.unref();
@@ -84,7 +93,8 @@ try {
         assert.equal(await actionButtons.nth(index).isDisabled(), true, `${engineName}: operator control ${index + 1} is enabled in inspection mode`);
       }
       assert.deepEqual(externalRequests, [], `${engineName}: inspection mode attempted an external request`);
-      assert.equal(localRequests.some((path) => /FeatureRehearsal|ProgramUpgrade|\/lib-/u.test(path)), false, `${engineName}: inspection mode loaded a hardware, upgrade, or feature-only chunk`);
+      const requestedLazyAssets = localRequests.filter((path) => lazyAssetPaths.has(path));
+      assert.deepEqual(requestedLazyAssets, [], `${engineName}: inspection mode loaded lazy operator assets`);
       assert.deepEqual(pageErrors, [], `${engineName}: inspection mode emitted a page error`);
       assert.deepEqual(consoleErrors, [], `${engineName}: inspection mode emitted a console error`);
     } finally {
