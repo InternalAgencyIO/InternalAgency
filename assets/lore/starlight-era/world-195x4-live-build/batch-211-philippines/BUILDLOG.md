@@ -41,3 +41,10 @@
 - Vigan added the distinct cabin-host headpiece above Alia's curls.
 - Banaue added the assigned ring choker and separate slack hip-level jewelry accent.
 - El Nido's lower-back mark was withheld: two placements landed on the front/fabric, and a pose-only reveal regressed the three-way embrace. The prior accepted asset remains active.
+
+## Fourth detail pass
+
+- Manila passed final triggered-detail visual audit without another edit; its existing accepted master already contains the assigned hair, headpiece, back lacing, shoulder mark, side-waist link and ribbon-linked hands.
+- Vigan accepted exactly one blunt rounded gold fashion wand at the outer red ankle after a duplicated-accessory candidate was rejected and withheld.
+- Banaue corrected PAWS into the exact stored console-inspector beat: the tiny golden kitten walks beside the low star-map console and reaches toward its harmless pearl light.
+- All accepted assets retain three clean adult faces, one tiny richly golden two-month-old PAWS, complete anatomy, secure opaque couture, recognizable locations and all six shoes.
