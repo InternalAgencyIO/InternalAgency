@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   createHydrationPlans,
   exhaustiveLocaleShardCount,
+  expectedHydrationCanonical,
   hydrationOptionsFromEnvironment,
 } from "../scripts/dual-host-locale-hydration-plan.mjs";
 
@@ -55,6 +56,69 @@ test("full cross-engine diagnostic profile contains 7,500 pages with stable offs
   assert.deepEqual(plans.map((plan) => plan.jobs.length), [2_500, 2_500, 2_500]);
   assert.deepEqual(plans.map((plan) => plan.resultOffset), [0, 2_500, 5_000]);
   assert.equal(plans.reduce((total, plan) => total + plan.routeCount, 0), 75);
+});
+
+test("expected canonicals normalize origin roots without changing localized root policy", () => {
+  assert.equal(
+    expectedHydrationCanonical({
+      host: "internalagency",
+      locale: "ar",
+      route: "/",
+      contentLocale: "en",
+      hostReviewHold: false,
+    }),
+    "https://internalagency.io/",
+  );
+  assert.equal(
+    expectedHydrationCanonical({
+      host: "internalagency",
+      locale: "ar",
+      route: "/network",
+      contentLocale: "en",
+      hostReviewHold: false,
+    }),
+    "https://internalagency.io/network",
+  );
+  assert.equal(
+    expectedHydrationCanonical({
+      host: "ileriakil",
+      locale: "tr",
+      route: "/",
+      contentLocale: "tr",
+      hostReviewHold: false,
+    }),
+    "https://ileriakil.com/",
+  );
+  assert.equal(
+    expectedHydrationCanonical({
+      host: "internalagency",
+      locale: "fr",
+      route: "/",
+      contentLocale: "fr",
+      hostReviewHold: false,
+    }),
+    "https://internalagency.io/fr",
+  );
+  assert.equal(
+    expectedHydrationCanonical({
+      host: "internalagency",
+      locale: "fr",
+      route: "/network",
+      contentLocale: "fr",
+      hostReviewHold: false,
+    }),
+    "https://internalagency.io/fr/network",
+  );
+  assert.throws(
+    () => expectedHydrationCanonical({
+      host: "internalagency",
+      locale: "en",
+      route: "network",
+      contentLocale: "en",
+      hostReviewHold: false,
+    }),
+    /route must start with \//,
+  );
 });
 
 test("50 bounded locale shards are disjoint and exactly reconstruct the 7,500-page profile", () => {

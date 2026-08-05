@@ -5,6 +5,7 @@ import { chromium, firefox, webkit } from "playwright";
 import {
   createHydrationPlans,
   engineConcurrencyCaps,
+  expectedHydrationCanonical,
   hydrationOptionsFromEnvironment,
 } from "./dual-host-locale-hydration-plan.mjs";
 import {
@@ -132,14 +133,7 @@ async function verifyPage(page, { host, locale, route, label }) {
     return { ok: false, label, detail: "review-HOLD response is missing X-Robots-Tag noindex" };
   }
   const serverHtml = await response.text();
-  const publicPath = route === "/" ? "" : route;
-  const expectedCanonical = contentLocale !== locale || hostReviewHold
-    ? `https://internalagency.io${publicPath}`
-    : host === "ileriakil" && locale === "tr"
-      ? `https://ileriakil.com${publicPath}`
-      : locale === "en"
-        ? `https://internalagency.io${publicPath}`
-        : `https://internalagency.io/${locale}${publicPath}`;
+  const expectedCanonical = expectedHydrationCanonical({ host, locale, route, contentLocale, hostReviewHold });
   const canonical = serverHtml.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)/iu)?.[1]
     ?? serverHtml.match(/<link[^>]+href=["']([^"']+)["'][^>]+rel=["']canonical["']/iu)?.[1]
     ?? "";

@@ -15,6 +15,23 @@ export const engineConcurrencyCaps = {
 const browserEngineNames = Object.keys(engineConcurrencyCaps);
 export const exhaustiveLocaleShardCount = 50;
 
+export function expectedHydrationCanonical({ host, locale, route, contentLocale, hostReviewHold }) {
+  if (typeof route !== "string" || !route.startsWith("/")) {
+    throw new Error(`Hydration canonical route must start with /; received ${route}`);
+  }
+
+  const publicPath = route === "/" ? "" : route;
+  const canonical = contentLocale !== locale || hostReviewHold
+    ? `https://internalagency.io${route}`
+    : host === "ileriakil" && locale === "tr"
+      ? `https://ileriakil.com${publicPath}`
+      : locale === "en"
+        ? `https://internalagency.io${route}`
+        : `https://internalagency.io/${locale}${publicPath}`;
+
+  return new URL(canonical).href;
+}
+
 function parseBoundedInteger(value, fallback, name, minimum, maximum) {
   const parsed = Number(value ?? fallback);
   if (!Number.isSafeInteger(parsed) || parsed < minimum || parsed > maximum) {
