@@ -56,3 +56,11 @@
 - Banaue accepted Alia's compact layered gold collar detail while preserving the mission whisper, linked trio, terrace setting, and PAWS's console-inspector action.
 - One Banaue output-moderation block produced no asset; the lane recovered from its immediately prior accepted image with a narrower neutral object edit. No rejected media is published.
 - Both accepted images retain exactly three clean adult faces, one tiny richly golden two-month-old PAWS, complete anatomy, secure opaque couture, recognizable locations and all six shoes.
+
+## Sixth detail pass
+
+- Vigan accepted exactly one delicate partner-illusion anklet on Ellie's ankle nearest Alia; the opposite ankle remains bare and no chain touches either shoe.
+- A first Vigan candidate duplicated the anklet on both ankles, so it was rejected and withheld before a single-lane recovery from the prior accepted master.
+- Banaue accepted Ellie's slim cobalt-and-gold geometric tailoring overlay while preserving the whispering trio, complete footwear, terraces, and PAWS's active console inspection.
+- Alia's distinct gala hairstyle remains visibly satisfied at Banaue and was reconciled without a redundant edit.
+- Both accepted images retain exactly three clean adult faces, one tiny richly golden two-month-old PAWS, complete anatomy, secure opaque couture, recognizable locations and all six shoes.

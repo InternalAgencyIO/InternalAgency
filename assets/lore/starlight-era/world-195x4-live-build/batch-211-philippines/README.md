@@ -15,6 +15,7 @@ Foundation state:
 - The third accepted pass compacts Manila's ribbon path, adds Vigan's cabin-host headpiece, and adds Banaue's ring-choker/hip accent.
 - The fourth accepted pass freezes Manila after final detail audit, adds Vigan's single ankle fashion wand, and corrects Banaue PAWS into the exact active console-inspector beat.
 - The fifth accepted pass adds Vigan's task-focused signal-token reach and Banaue's compact layered gold collar detail while preserving the approved relationships and active PAWS actions.
+- The sixth accepted pass adds Vigan's single partner-illusion anklet and Banaue's geometric tailoring overlay while preserving the approved identities, clean faces, six-shoe framing, and PAWS continuity.
 - El Nido's lower-back mark remains blocked after three one-variable methods; its accepted jewelry asset is frozen and no failed candidate is published.
 - Companion, silhouette, and remaining triggered-detail refinements are still in progress. These assets are not final campaign stills and are not X-eligible.
 - Video is not scheduled under the binding four-PNG-only pause for Batches 202–211.
