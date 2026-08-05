@@ -25,11 +25,16 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await expect(page.getByRole("heading", { name: "Alia" })).toBeVisible();
   await expect(page.getByText("NO REAL WAGERS", { exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Launch night,\s*in two languages\./i })).toBeVisible();
-  await expect(page.locator('img[src="/future/casino/nightflight/nightflight-launch-hero-v1.png"]')).toBeVisible();
+  const heroImage = page.locator('img[src="/future/casino/nightflight/nightflight-launch-hero-v1.png"]');
+  await expect(heroImage).toBeVisible();
+  await expect(heroImage).toHaveAttribute("fetchpriority", "high");
+  await expect(page.locator('main.casino-demo img[loading="lazy"][decoding="async"]')).toHaveCount(18);
   await expect(page.locator('img[src="/future/casino/nightflight/nightflight-anime-runway-v1.png"]')).toBeVisible();
   await expect(page.locator('img[src="/future/casino/nightflight/nightflight-launch-motion-source-v1.png"]')).toBeVisible();
-  const generatedCampaignImagesLoaded = await page.locator('img[src*="/future/casino/nightflight/"][src*="-v1.png"]').evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0));
-  expect(generatedCampaignImagesLoaded).toBe(true);
+  const generatedCampaignImages = page.locator('img[src*="/future/casino/nightflight/"][src*="-v1.png"]');
+  await expect(generatedCampaignImages).toHaveCount(3);
+  for (const selector of [".night-crew", ".nightflight-cinema", "#game-lobby", "#demo-table"]) await page.locator(selector).scrollIntoViewIfNeeded();
+  await expect.poll(() => generatedCampaignImages.evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0))).toBe(true);
   const cinemaControl = page.getByRole("button", { name: "CINEMA LOOP ON" });
   await expect(cinemaControl).toHaveAttribute("aria-pressed", "true");
   await cinemaControl.click();
@@ -99,7 +104,7 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await expect(page.locator(".demo-stake strong")).toHaveText("125");
   roundRunning = true;
   await page.getByRole("button", { name: "RUN PLINKO DEMO" }).click();
-  await expect(page.locator(".demo-phase-status strong")).toHaveText("Demo result settled and a fictional replay receipt recorded.");
+  await expect(page.getByRole("status")).toHaveText("CURRENT STATUSPlinko: 4.20× LANDING. +400 demo credits. Balance 5,400.");
   roundRunning = false;
 
   await expect(page.locator(".demo-result strong")).toHaveText("4.20× LANDING");

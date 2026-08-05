@@ -66,6 +66,10 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   ]);
   assert.match(component, /href="#game-lobby">Skip to the ten-game lobby/);
   assert.match(component, /aria-live="polite"/);
+  assert.match(component, /role="status" aria-live="polite" aria-atomic="true"/);
+  assert.match(component, /const phaseStatus = phase === "settled"/);
+  assert.equal((component.match(/loading="lazy" decoding="async"/g) ?? []).length, 7);
+  assert.match(component, /campaignArt\.launchHero[\s\S]{0,300}fetchPriority="high"/);
   assert.match(component, /aria-label="Ten Casino DLC demo games"/);
   assert.equal((component.match(/sceneLabel: "/g) ?? []).length, 10);
   assert.match(component, /aria-label="Decrease simulated stake by 25 credits"/);

@@ -44,6 +44,10 @@ function expectFailure(label, mutate, restore) {
 try {
   const clone = run("git", ["clone", "--shared", "--no-checkout", repositoryRoot, cloneRoot], repositoryRoot);
   assert(clone.status === 0, `temporary shared clone failed: ${clone.stderr}`);
+  const configureLongPaths = run("git", ["config", "core.longpaths", "true"], cloneRoot);
+  assert(configureLongPaths.status === 0, `temporary clone long-path configuration failed: ${configureLongPaths.stderr}`);
+  const sparseCheckout = run("git", ["sparse-checkout", "set", relativeSiteRoot], cloneRoot);
+  assert(sparseCheckout.status === 0, `temporary sparse checkout configuration failed: ${sparseCheckout.stderr}`);
   const checkout = run("git", ["-c", "core.autocrlf=false", "checkout", "--detach", "HEAD"], cloneRoot);
   assert(checkout.status === 0, `temporary checkout failed: ${checkout.stderr}`);
 
