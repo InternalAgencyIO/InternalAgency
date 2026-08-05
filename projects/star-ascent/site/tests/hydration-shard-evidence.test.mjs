@@ -10,6 +10,7 @@ import {
   hydrationShardRecordPrefix,
   hydrationSourceScopePath,
   parseHydrationShardRecordLog,
+  parseHydrationShardRecordsLog,
   reconcileHydrationShardRecords,
 } from "../scripts/hydration-shard-evidence.mjs";
 
@@ -126,6 +127,19 @@ test("record parser accepts exactly one prefixed JSON record", () => {
   assert.throws(() => parseHydrationShardRecordLog("no record"), /exactly one shard record/);
   assert.throws(() => parseHydrationShardRecordLog(`${log}${log}`), /found 2/);
   assert.throws(() => parseHydrationShardRecordLog(`${hydrationShardRecordPrefix}{broken`), /not valid JSON/);
+});
+
+test("batch logs accept one or more records without weakening single-record parsing", () => {
+  const combined = [records[0], records[1], records[2]]
+    .map((record) => `${hydrationShardRecordPrefix}${JSON.stringify(record)}`)
+    .join("\n");
+  assert.deepEqual(parseHydrationShardRecordsLog(combined), records.slice(0, 3));
+  assert.throws(() => parseHydrationShardRecordsLog("no record"), /at least one shard record/);
+  assert.throws(() => parseHydrationShardRecordLog(combined), /exactly one shard record; found 3/);
+  assert.throws(
+    () => parseHydrationShardRecordsLog(`${combined}\n${hydrationShardRecordPrefix}{broken`),
+    /shard record 4 is not valid JSON/,
+  );
 });
 
 test("all 50 Git-verified scoped records reconcile to one 7,500-page aggregate", () => {

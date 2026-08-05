@@ -223,8 +223,17 @@ two-snapshot contract does not detect transient changes that are fully reverted
 to the identical clean binding before the completion check. After all 50 logs
 exist, run
 `node scripts/reconcile-dual-host-hydration-shards.mjs` with the 50 log paths.
-The reconciler accepts UTF-8 and BOM-marked UTF-16 logs, requires every index
-exactly once, recomputes every assignment from the checked-out source, and
+For bounded sequential execution without rebuilding before every locale, run
+`npm run check:i18n:dual-host-hydration-batch`. It builds once, runs the
+focused contract tests, and then executes shards 1 through 50 in order. The
+bounded `I18N_HYDRATION_SHARD_START` and `I18N_HYDRATION_SHARD_END` overrides
+select an inclusive subset. The batch stops on the first failed or missing
+record, rechecks the clean source binding across the entire batch, and labels
+any subset `PARTIAL_PASS_NOT_AGGREGATE`; only an exact 50-record run invokes
+aggregate reconciliation. Batch output may be retained as one log because the
+standalone reconciler accepts 1 through 50 UTF-8 or BOM-marked UTF-16 log files,
+each containing one or more records. It still requires 50 total records and
+every index exactly once, recomputes every assignment from the checked-out source, and
 uses Git to re-resolve every historical commit and full tree. Records from
 different commits may reconcile only when their Git-verified fixed site
 subtree is byte-identical to the clean current head; any site-source, catalog,

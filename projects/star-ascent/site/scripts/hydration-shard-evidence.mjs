@@ -26,6 +26,17 @@ export function hydrationJobSetSha256(plans) {
   return sha256(JSON.stringify(hydrationJobKeys(plans)));
 }
 
+export function hydrationEvidenceSetSha256(records) {
+  return sha256(JSON.stringify(records
+    .toSorted((left, right) => left.profile.shardIndex - right.profile.shardIndex)
+    .map((record) => [
+      record.profile.shardIndex,
+      record.recordedAtUtc,
+      record.sourceBinding,
+      record.profile.assignedJobsSha256,
+    ])));
+}
+
 function assertSourceBinding(sourceBinding, label = "Source binding") {
   assert(
     sourceBinding
@@ -148,14 +159,29 @@ export function decodeHydrationShardLog(bytes, label = "log") {
   }
 }
 
-export function parseHydrationShardRecordLog(logText, label = "log") {
+function parseHydrationShardRecordLines(logText, label) {
   const matches = logText.split(/\r?\n/u).filter((line) => line.startsWith(hydrationShardRecordPrefix));
-  assert(matches.length === 1, `${label} must contain exactly one shard record; found ${matches.length}`);
-  try {
-    return JSON.parse(matches[0].slice(hydrationShardRecordPrefix.length));
-  } catch (error) {
-    throw new Error(`${label} shard record is not valid JSON: ${error instanceof Error ? error.message : String(error)}`);
-  }
+  return matches.map((line, index) => {
+    try {
+      return JSON.parse(line.slice(hydrationShardRecordPrefix.length));
+    } catch (error) {
+      throw new Error(
+        `${label} shard record ${index + 1} is not valid JSON: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  });
+}
+
+export function parseHydrationShardRecordsLog(logText, label = "log") {
+  const records = parseHydrationShardRecordLines(logText, label);
+  assert(records.length > 0, `${label} must contain at least one shard record; found 0`);
+  return records;
+}
+
+export function parseHydrationShardRecordLog(logText, label = "log") {
+  const records = parseHydrationShardRecordLines(logText, label);
+  assert(records.length === 1, `${label} must contain exactly one shard record; found ${records.length}`);
+  return records[0];
 }
 
 export function reconcileHydrationShardRecords({
@@ -221,14 +247,7 @@ export function reconcileHydrationShardRecords({
         left.commit.localeCompare(right.commit)),
     },
     catalogSha256,
-    evidenceSetSha256: sha256(JSON.stringify(records
-      .toSorted((left, right) => left.profile.shardIndex - right.profile.shardIndex)
-      .map((record) => [
-        record.profile.shardIndex,
-        record.recordedAtUtc,
-        record.sourceBinding,
-        record.profile.assignedJobsSha256,
-      ]))),
+    evidenceSetSha256: hydrationEvidenceSetSha256(records),
     result: {
       shardRecords: 50,
       plannedPages: 7_500,

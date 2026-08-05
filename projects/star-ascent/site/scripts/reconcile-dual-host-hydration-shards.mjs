@@ -7,14 +7,14 @@ import {
 import {
   createGitSourceBindingResolver,
   decodeHydrationShardLog,
-  parseHydrationShardRecordLog,
+  parseHydrationShardRecordsLog,
   readCleanGitSourceBinding,
   reconcileHydrationShardRecords,
 } from "./hydration-shard-evidence.mjs";
 
 const logPaths = process.argv.slice(2);
-if (logPaths.length !== exhaustiveLocaleShardCount) {
-  throw new Error(`Expected exactly 50 shard log paths; received ${logPaths.length}`);
+if (logPaths.length < 1 || logPaths.length > exhaustiveLocaleShardCount) {
+  throw new Error(`Expected 1 through 50 shard or batch log paths; received ${logPaths.length}`);
 }
 
 const [catalog, contract, sitemapSource, logTexts] = await Promise.all([
@@ -29,9 +29,9 @@ const engineNames = ["chromium", "firefox", "webkit"];
 const fullProfilePlans = createHydrationPlans({ locales, routes, engineNames, fullCrossEngine: true });
 const expectedShardPlans = Array.from({ length: exhaustiveLocaleShardCount }, (_, offset) =>
   createHydrationPlans({ locales, routes, engineNames, fullCrossEngine: true, shardIndex: offset + 1 }));
-const records = logTexts.map((bytes, index) => {
+const records = logTexts.flatMap((bytes, index) => {
   const label = `shard log ${index + 1}`;
-  return parseHydrationShardRecordLog(decodeHydrationShardLog(bytes, label), label);
+  return parseHydrationShardRecordsLog(decodeHydrationShardLog(bytes, label), label);
 });
 const currentSourceBinding = readCleanGitSourceBinding();
 const aggregate = reconcileHydrationShardRecords({
