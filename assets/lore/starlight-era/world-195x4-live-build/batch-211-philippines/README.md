@@ -12,6 +12,8 @@ Foundation state:
 - Known safety rejections were recovered through narrower safe wording and one-variable edits; rejected media is not published.
 - Manila, Vigan, and Banaue have accepted relationship-stage assets; El Nido has an accepted first triggered-detail asset.
 - The second accepted detail pass adds Manila's active ribbon chase, Vigan's angular cuff, Banaue's small shoulder mark, and El Nido's separate collarbone chain.
+- The third accepted pass compacts Manila's ribbon path, adds Vigan's cabin-host headpiece, and adds Banaue's ring-choker/hip accent.
+- El Nido's lower-back mark remains blocked after three one-variable methods; its accepted jewelry asset is frozen and no failed candidate is published.
 - Companion, silhouette, and remaining triggered-detail refinements are still in progress. These assets are not final campaign stills and are not X-eligible.
 - Video is not scheduled under the binding four-PNG-only pause for Batches 202–211.
 

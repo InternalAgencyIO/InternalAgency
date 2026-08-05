@@ -34,3 +34,10 @@
 - Vigan added the assigned compact angular wrist sculpture without changing the lap-copilot interaction.
 - Banaue added the tiny secular shoulder mark while keeping every face clean and natural.
 - El Nido added the separate collarbone chain below the accepted velvet choker without changing PAWS or the embrace.
+
+## Third detail pass
+
+- Manila reduced the ribbon to one safe continuous curve while retaining PAWS's exact contact point.
+- Vigan added the distinct cabin-host headpiece above Alia's curls.
+- Banaue added the assigned ring choker and separate slack hip-level jewelry accent.
+- El Nido's lower-back mark was withheld: two placements landed on the front/fabric, and a pose-only reveal regressed the three-way embrace. The prior accepted asset remains active.
