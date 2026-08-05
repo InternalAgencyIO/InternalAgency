@@ -287,6 +287,8 @@ test("the locale runtime stays static, prompts for English, and ships one locale
   assert.match(layout, /"@context": "https:\/\/schema\.org"/);
   assert.match(layout, /"x-default"/);
   assert.match(worker, /acceptedLanguages\.length\) return "en"/);
-  assert.match(playwright, /command: "npm run compile:i18n && node .*vinext.* dev -p 4176"/);
+  assert.match(playwright, /process\.env\.UI_AUDIT_PORT \?\? "4176"/);
+  assert.match(playwright, /reuseExistingServerValue === "1"/);
+  assert.doesNotMatch(playwright, /reuseExistingServer: !process\.env\.CI/);
   assert.doesNotMatch(styles, /data-locale-ready="false"[^}]*opacity:0/);
 });
