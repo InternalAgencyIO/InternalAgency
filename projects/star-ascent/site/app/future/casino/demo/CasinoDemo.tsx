@@ -38,6 +38,14 @@ type DemoReceipt = {
   credits: number;
 };
 
+type HostDefinition = {
+  name: "Radiance" | "Ellie" | "Alia";
+  callSign: string;
+  role: string;
+  signal: string;
+  tone: "solar" | "sapphire" | "crimson";
+};
+
 const games: GameDefinition[] = [
   {
     id: "plinko",
@@ -221,6 +229,12 @@ const games: GameDefinition[] = [
   },
 ];
 
+const hosts: HostDefinition[] = [
+  { name: "Radiance", callSign: "R-01", role: "Flight lead", signal: "Gold-spectrum launch control", tone: "solar" },
+  { name: "Ellie", callSign: "E-02", role: "Orbit host", signal: "Sapphire navigation channel", tone: "sapphire" },
+  { name: "Alia", callSign: "A-03", role: "Night deck host", signal: "Crimson stage telemetry", tone: "crimson" },
+];
+
 const phaseOrder: Exclude<Phase, "ready">[] = ["staged", "committed", "revealed", "settled"];
 const phaseCopy: Record<Phase, string> = {
   ready: "Demo room ready. Choose simulated credits and run the preset round.",
@@ -290,8 +304,10 @@ export function CasinoDemo() {
   const [balance, setBalance] = useState(5_000);
   const [history, setHistory] = useState<DemoReceipt[]>([]);
   const [runCount, setRunCount] = useState(0);
+  const [lightPulse, setLightPulse] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const game = games.find((item) => item.id === selectedId) ?? games[0];
+  const host = hosts[(Number(game.order) - 1) % hosts.length];
   const running = phase !== "ready" && phase !== "settled";
   const revealed = phase === "revealed" || phase === "settled";
 
@@ -349,34 +365,40 @@ export function CasinoDemo() {
   const delta = Math.round(stake * game.netFactor);
 
   return (
-    <main className="casino-demo" data-no-translate>
+    <main className={`casino-demo${lightPulse ? " is-pulse-on" : ""}`} data-no-translate>
+      <div className="demo-light-wash" aria-hidden="true" />
       <a className="demo-skip" href="#game-lobby">Skip to the ten-game lobby</a>
       <header className="demo-header">
         <nav aria-label="Casino demo navigation">
-          <a className="demo-wordmark" href="/future/casino">IA<span aria-hidden="true">///</span>CASINO</a>
-          <div><span>ENGLISH ONLY</span><a href="/future/casino">EXIT DEMO</a></div>
+          <a className="demo-wordmark" href="/future/casino">IA<span aria-hidden="true">///</span>NIGHTFLIGHT</a>
+          <div><span>ENGLISH ONLY</span><button className="light-control" type="button" aria-pressed={lightPulse} onClick={() => setLightPulse((enabled) => !enabled)}><i aria-hidden="true" />SAFE PULSE {lightPulse ? "ON" : "OFF"}</button><a href="/future/casino">EXIT DEMO</a></div>
         </nav>
         <div className="demo-alert" role="note">
-          <strong>DEMO ONLY</strong><span>SIMULATED CREDITS</span><span>FICTIONAL ADULT PARTICIPANTS</span><span>NO REAL WAGERS</span>
+          <strong>DEMO ONLY</strong><span>SIMULATED CREDITS</span><span>FICTIONAL ADULT HOSTS</span><span>FICTIONAL ADULT PARTICIPANTS</span><span>NO REAL WAGERS</span><span>OPT-IN SAFE LIGHT PULSE</span>
         </div>
         <div className="demo-hero">
           <div className="demo-hero-copy">
-            <p>CASINO DLC // TEN-GAME FRONT-END WALKTHROUGH</p>
-            <h1>TEN ROOMS.<br /><i>ONE CLEAR LOOP.</i></h1>
-            <span>Explore ten researched casino concepts using preset outcomes, fake adult names, and demo credits. Nothing connects to a wallet, contract, account, payment rail, randomness provider, or live game.</span>
-            <a href="#game-lobby">ENTER THE DEMO LOBBY ↓</a>
+            <p>STARSHIP CASINO DLC // DARK-TECHNO NIGHT LAUNCH</p>
+            <h1>BOARD THE<br /><i>NIGHTFLIGHT.</i></h1>
+            <span>Radiance, Ellie, and Alia host ten neon demo modules aboard a fictional orbital nightlife deck. Every result is preset, every credit is simulated, and nothing connects to a wallet, contract, payment rail, randomness provider, or live game.</span>
+            <a href="#game-lobby">ENTER THE LAUNCH DECK ↓</a>
           </div>
-          <div className="demo-orbit" aria-hidden="true"><span className="orbit orbit-one" /><span className="orbit orbit-two" /><span className="orbit orbit-three" /><div className="demo-chip"><b>10</b><i>DEMO ROOMS</i></div></div>
+          <div className="demo-orbit" aria-hidden="true"><span className="orbit orbit-one" /><span className="orbit orbit-two" /><span className="orbit orbit-three" /><span className="orbit-beam beam-one" /><span className="orbit-beam beam-two" /><div className="demo-chip"><b>10</b><i>LAUNCH MODULES</i></div></div>
         </div>
       </header>
 
+      <section className="night-crew" aria-labelledby="night-crew-title">
+        <div className="night-crew-heading"><p>FICTIONAL ADULT HOSTS // FULLY CLOTHED NIGHTLIFE CAST</p><h2 id="night-crew-title">Meet the flight deck.</h2><span>Three fictional adult hosts guide the visual walkthrough. Their identities, costumes, roles, and signals exist only inside this front-end demo.</span></div>
+        <div className="host-roster">{hosts.map((item, index) => <article className={`host-card host-${item.tone}`} key={item.name}><div aria-hidden="true"><span>{item.callSign}</span><b>{item.name[0]}</b><i /></div><small>0{index + 1} // {item.role.toUpperCase()}</small><h3>{item.name}</h3><p>{item.signal}</p><strong>FICTIONAL ADULT HOST</strong></article>)}</div>
+      </section>
+
       <section className="demo-boundary" aria-labelledby="boundary-title">
-        <div><p>WHAT THIS IS</p><h2 id="boundary-title">A working ten-game interface prototype.</h2><span>Every selection, transition, animation, balance, and receipt runs locally from deterministic demo data.</span></div>
+        <div><p>MISSION BOUNDARY</p><h2 id="boundary-title">A starship interface prototype.</h2><span>Every room selection, light cue, transition, animation, balance, and receipt runs locally from deterministic demo data. The nightlife atmosphere changes presentation, never the outcome.</span></div>
         <ul><li><strong>10</strong><span>Playable mock rooms</span></li><li><strong>0</strong><span>Wallet or account calls</span></li><li><strong>0</strong><span>Network round requests</span></li><li><strong>0</strong><span>Real-value outcomes</span></li></ul>
       </section>
 
       <section className="demo-lobby" id="game-lobby" aria-labelledby="lobby-title">
-        <div className="demo-lobby-heading"><div><p>RESEARCHED ROSTER // ENGLISH DEMO</p><h2 id="lobby-title">Choose a room.</h2></div><p>These demand signals come from different public datasets and are not directly comparable market shares. They guide the prototype; they do not promise a launch.</p></div>
+        <div className="demo-lobby-heading"><div><p>ORBITAL NIGHTCLUB // ENGLISH DEMO</p><h2 id="lobby-title">Choose a module.</h2></div><p>Ten game concepts become illuminated starship decks. Demand signals come from different public datasets and are not directly comparable market shares; they guide the mock, not a launch promise.</p></div>
         <div className="game-selector" role="list" aria-label="Ten Casino DLC demo games">
           {games.map((item) => <div role="listitem" key={item.id}><button type="button" aria-pressed={item.id === selectedId} data-testid={`game-${item.id}`} className={item.id === selectedId ? "is-selected" : ""} onClick={() => selectGame(item.id)} disabled={running}><span>{item.order} // {item.buildTier}</span><strong>{item.name}</strong><i>{item.tagline}</i><small>{item.demandSignal}</small></button></div>)}
         </div>
@@ -384,13 +406,14 @@ export function CasinoDemo() {
       </section>
 
       <section className="demo-stage" id="demo-table" aria-labelledby="demo-table-title">
-        <div className="demo-stage-heading"><div><p>PLAYABLE MOCK // {game.order} {game.name.toUpperCase()}</p><h2 id="demo-table-title">One kernel.<br />Ten visual stories.</h2></div><aside role="note"><strong>IMPORTANT</strong> Every result, identity, credit, seed, receipt, card, tile, number, reel, and curve is fictional and pre-scripted.</aside></div>
+        <div className="demo-stage-heading"><div><p>NIGHTFLIGHT MODULE // {game.order} {game.name.toUpperCase()}</p><h2 id="demo-table-title">One vessel.<br />Ten neon missions.</h2></div><aside role="note"><strong>IMPORTANT</strong> Every host, result, identity, credit, seed, receipt, card, tile, number, reel, curve, and light cue is fictional and pre-scripted.</aside></div>
         <div className="demo-shell">
-          <div className="demo-shell-topbar"><div><span className="demo-live-dot" aria-hidden="true" />LOCAL SIMULATION</div><div>ROOM // {game.name.toUpperCase()}</div><div>DEMO RUN // {String(runCount + 1).padStart(2, "0")}</div></div>
+          <div className="demo-shell-topbar"><div><span className="demo-live-dot" aria-hidden="true" />LOCAL NIGHTFLIGHT</div><div>HOST // {host.name.toUpperCase()}</div><div>MISSION // {String(runCount + 1).padStart(2, "0")}</div></div>
           <div className="demo-room-summary"><div><span>{game.order} // {game.buildTier}</span><h3>{game.name}</h3><p>{game.instruction}</p></div><strong>{game.selection}</strong></div>
           <div className="demo-workspace">
-            <aside className="demo-sidebar" aria-label="Demo participant and credit controls">
-              <div className="demo-profile"><span aria-hidden="true">{game.participant.split(" ").map((name) => name[0]).join("")}</span><div><small>FICTIONAL ADULT</small><strong>{game.participant}</strong><i>Demo participant</i></div></div>
+            <aside className="demo-sidebar" aria-label="Fictional host, participant, and credit controls">
+              <div className={`demo-profile host-profile host-${host.tone}`}><span aria-hidden="true">{host.name[0]}</span><div><small>{host.callSign} // {host.role.toUpperCase()}</small><strong>{host.name}</strong><i>{host.signal}</i></div></div>
+              <div className="demo-passenger"><span>FICTIONAL ADULT PARTICIPANT</span><strong>{game.participant}</strong><small>LOCAL DEMO IDENTITY</small></div>
               <div className="demo-balance"><span>SIMULATED BALANCE</span><strong>{balance.toLocaleString("en-US")}</strong><small>DEMO CREDITS</small></div>
               <div className="demo-stake"><span>SIMULATED STAKE</span><div><button type="button" onClick={() => setStake((value) => Math.max(25, value - 25))} disabled={running || stake === 25} aria-label="Decrease simulated stake by 25 credits">−</button><strong>{stake}</strong><button type="button" onClick={() => setStake((value) => Math.min(250, value + 25))} disabled={running || stake === 250} aria-label="Increase simulated stake by 25 credits">+</button></div><small>Credits have no monetary value.</small></div>
               <button className="demo-run" type="button" onClick={runRound} disabled={running}>{running ? "RUNNING DEMO…" : phase === "settled" ? "REPLAY THIS PRESET" : `RUN ${game.name.toUpperCase()} DEMO`}<span aria-hidden="true">→</span></button>
@@ -400,7 +423,7 @@ export function CasinoDemo() {
             <div className={`demo-table game-${game.scene} phase-${phase}`} data-testid="active-game-scene">
               <div className="demo-table-glow" aria-hidden="true" />
               <GameScene game={game} revealed={revealed} settled={phase === "settled"} />
-              <div className={`demo-result ${game.netFactor < 0 ? "result--1" : "result-1"}`} aria-hidden={phase !== "settled"}><span>DEMO RESULT</span><strong>{game.outcome}</strong><i>{delta > 0 ? "+" : ""}{delta} demo credits // {game.payoutLabel}</i></div>
+              <div className={`demo-result ${game.netFactor < 0 ? "result--1" : "result-1"}`} aria-hidden={phase !== "settled"}><span>NIGHTFLIGHT DEMO RESULT</span><strong>{game.outcome}</strong><i>{delta > 0 ? "+" : ""}{delta} demo credits // {game.payoutLabel}</i></div>
             </div>
 
             <aside className="demo-proof" aria-label="Demo stages and replay receipt">
@@ -416,7 +439,7 @@ export function CasinoDemo() {
 
       <section className="demo-explainer" aria-labelledby="explainer-title"><p>HOW EVERY ROOM READS</p><h2 id="explainer-title">Result first.<br />Animation second.</h2><div><article><span>01</span><h3>Choose</h3><p>Select a room, a fixed demo rule, and simulated credits. No identity, account, deposit, or wallet exists.</p></article><article><span>02</span><h3>Observe</h3><p>The interface exposes stage, commitment, reveal, and settlement instead of hiding the conceptual flow.</p></article><article><span>03</span><h3>Replay</h3><p>The recorded preset result drives each visual. A fictional receipt explains the round but proves no real system.</p></article></div></section>
 
-      <footer className="demo-footer"><div><strong>CASINO DLC // TEN-GAME INTERACTIVE DEMO</strong><span>Front-end mock only. No real gameplay, account, deposit, withdrawal, wallet, smart contract, oracle, payment, or network operation.</span></div><a href="/future/casino">RETURN TO INACTIVE PREVIEW →</a></footer>
+      <footer className="demo-footer"><div><strong>STARSHIP NIGHTFLIGHT // TEN-GAME INTERACTIVE DEMO</strong><span>Dark-techno nightlife presentation, fully clothed fictional adult hosts, and an opt-in low-frequency light pulse. Front-end mock only: no real gameplay, account, deposit, withdrawal, wallet, smart contract, oracle, payment, or network operation.</span></div><a href="/future/casino">RETURN TO INACTIVE PREVIEW →</a></footer>
     </main>
   );
 }
