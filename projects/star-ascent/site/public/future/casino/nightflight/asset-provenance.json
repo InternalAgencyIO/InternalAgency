@@ -1,14 +1,18 @@
 {
-  "version": 1,
+  "version": 2,
   "publishedPurpose": "Nightflight Casino DLC English-only front-end demo",
   "licenseScope": {
     "metadata": "CC0-1.0",
+    "generatedAssets": "CC0-1.0 dedication to the extent of the project's rights",
     "software": "Repository license",
-    "note": "The CC0 dedication covers this project-owned provenance and selection metadata. It does not expand rights in trademarks or material the project does not own."
+    "note": "The CC0 dedication covers this project-owned provenance and selection metadata and, for the three project-generated v1 assets, the rights the project can dedicate. It does not expand rights in identities, trademarks, model inputs, or material the project does not own."
   },
   "process": {
-    "mode": "source-bound-reuse",
-    "summary": "Three already accepted campaign assets were selected from the public Batch 211 record. Rejected image-generation candidates were not copied, published, or used.",
+    "mode": "source-bound-reuse-plus-project-generation",
+    "summary": "Three already accepted campaign assets were selected from the public Batch 211 record and used as identity, palette, relationship, wardrobe, and PAWS references for three new policy-compliant campaign assets. Rejected image-generation candidates were not copied, published, or used.",
+    "generator": "OpenAI built-in image generation",
+    "generationPolicy": "All characters are explicitly fictional adults age 25+; all are fully clothed; no stripping, nudity, lingerie-only presentation, fetish content, sexual activity, or safety-filter evasion.",
+    "motionDisclosure": "The site animates still images with CSS pan, zoom, flare, and scanline layers. It does not claim that the stills are model-generated live-action video.",
     "determinism": "Each game ID maps to a fixed host, artwork, tattoo cue, trio-interaction cue, and PAWS action in CasinoDemo.tsx; no random API is used."
   },
   "assets": [
@@ -29,6 +33,39 @@
       "sourcePath": "assets/lore/starlight-era/world-195x4-live-build/batch-211-philippines/867-philippines-el-nido-bacuit-bay-arrival-beacon-finale-foundation-accepted.png",
       "sha256": "d77b63fbb3f686ba19791fb383c2e40c6e632af2d043ddcdf2f2860e359bae8d",
       "use": "Hero love-triangle composition and PAWS crew-dash scene"
+    },
+    {
+      "publicPath": "/future/casino/nightflight/nightflight-launch-hero-v1.png",
+      "sourceReferences": [
+        "/future/casino/nightflight/nightflight-gala.png",
+        "/future/casino/nightflight/nightflight-runway.png",
+        "/future/casino/nightflight/nightflight-constellation.png"
+      ],
+      "sha256": "fcaa276befc7e9623aaaccad3013156dc1c297d63e5f9fcba11f6b597123b247",
+      "promptFamily": "photorealistic-natural / wide launch-deck hero",
+      "use": "Primary Nightflight hero with PAWS activating the fictional launch control"
+    },
+    {
+      "publicPath": "/future/casino/nightflight/nightflight-anime-runway-v1.png",
+      "sourceReferences": [
+        "/future/casino/nightflight/nightflight-gala.png",
+        "/future/casino/nightflight/nightflight-runway.png",
+        "/future/casino/nightflight/nightflight-constellation.png"
+      ],
+      "sha256": "34f5e40c7edbe3addcf15b7314f43462bcda3a7177f9595a02860c91a0be4ba3",
+      "promptFamily": "illustration-story / adult anime runway transmission",
+      "use": "Anime campaign panel with the trio and PAWS in active motion"
+    },
+    {
+      "publicPath": "/future/casino/nightflight/nightflight-launch-motion-source-v1.png",
+      "sourceReferences": [
+        "/future/casino/nightflight/nightflight-gala.png",
+        "/future/casino/nightflight/nightflight-runway.png",
+        "/future/casino/nightflight/nightflight-constellation.png"
+      ],
+      "sha256": "28106a03810f72493548c2422a84b318a7d1d5c8c744cd605a1ee45015c5f550",
+      "promptFamily": "photorealistic-natural / vertical cinematic motion source",
+      "use": "CSS pan-and-zoom campaign cinema with a fictional starship launch"
     }
   ]
 }

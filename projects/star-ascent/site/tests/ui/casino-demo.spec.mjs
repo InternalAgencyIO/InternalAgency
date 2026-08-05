@@ -24,6 +24,18 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await expect(page.getByRole("heading", { name: "Ellie" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Alia" })).toBeVisible();
   await expect(page.getByText("NO REAL WAGERS", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Launch night,\s*in two languages\./i })).toBeVisible();
+  await expect(page.locator('img[src="/future/casino/nightflight/nightflight-launch-hero-v1.png"]')).toBeVisible();
+  await expect(page.locator('img[src="/future/casino/nightflight/nightflight-anime-runway-v1.png"]')).toBeVisible();
+  await expect(page.locator('img[src="/future/casino/nightflight/nightflight-launch-motion-source-v1.png"]')).toBeVisible();
+  const generatedCampaignImagesLoaded = await page.locator('img[src*="/future/casino/nightflight/"][src*="-v1.png"]').evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0));
+  expect(generatedCampaignImagesLoaded).toBe(true);
+  const cinemaControl = page.getByRole("button", { name: "CINEMA LOOP ON" });
+  await expect(cinemaControl).toHaveAttribute("aria-pressed", "true");
+  await cinemaControl.click();
+  await expect(page.getByRole("button", { name: "CINEMA LOOP PAUSED" })).toHaveAttribute("aria-pressed", "false");
+  await expect(page.locator("main.casino-demo")).toHaveClass(/is-cinema-paused/);
+  await page.getByRole("button", { name: "CINEMA LOOP PAUSED" }).click();
   await expect(page.getByRole("heading", { name: "Crew standings, zero stakes." })).toBeVisible();
   const leaderboardBoundary = page.locator(".demo-leaderboard-heading");
   await expect(leaderboardBoundary.getByText("FAKE CREDITS", { exact: true })).toBeVisible();

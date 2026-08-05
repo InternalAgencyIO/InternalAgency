@@ -56,7 +56,7 @@ type HostDefinition = {
   imagePosition: string;
 };
 
-type CampaignArt = "gala" | "runway" | "constellation";
+type CampaignArt = "gala" | "runway" | "constellation" | "launchHero" | "animeRunway" | "launchMotion";
 
 type NightflightRoll = {
   host: HostDefinition["name"];
@@ -70,6 +70,9 @@ const campaignArt: Record<CampaignArt, string> = {
   gala: "/future/casino/nightflight/nightflight-gala.png",
   runway: "/future/casino/nightflight/nightflight-runway.png",
   constellation: "/future/casino/nightflight/nightflight-constellation.png",
+  launchHero: "/future/casino/nightflight/nightflight-launch-hero-v1.png",
+  animeRunway: "/future/casino/nightflight/nightflight-anime-runway-v1.png",
+  launchMotion: "/future/casino/nightflight/nightflight-launch-motion-source-v1.png",
 };
 
 const demoRankings: DemoRanking[] = [
@@ -353,6 +356,7 @@ export function CasinoDemo() {
   const [history, setHistory] = useState<DemoReceipt[]>([]);
   const [runCount, setRunCount] = useState(0);
   const [lightPulse, setLightPulse] = useState(false);
+  const [cinemaActive, setCinemaActive] = useState(true);
   const [interactiveReady, setInteractiveReady] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const game = games.find((item) => item.id === selectedId) ?? games[0];
@@ -418,7 +422,7 @@ export function CasinoDemo() {
   const delta = Math.round(stake * game.netFactor);
 
   return (
-    <main className={`casino-demo${lightPulse ? " is-pulse-on" : ""}`} data-interactive-ready={interactiveReady} data-no-translate>
+    <main className={`casino-demo${lightPulse ? " is-pulse-on" : ""}${cinemaActive ? "" : " is-cinema-paused"}`} data-interactive-ready={interactiveReady} data-no-translate>
       <div className="demo-light-wash" aria-hidden="true" />
       <a className="demo-skip" href="#game-lobby">Skip to the ten-game lobby</a>
       <header className="demo-header">
@@ -437,7 +441,7 @@ export function CasinoDemo() {
             <a href="#game-lobby">ENTER THE LAUNCH DECK ↓</a>
           </div>
           <figure className="demo-campaign-hero">
-            <img src={campaignArt.constellation} alt="Radiance, Ellie, and Alia, three fictional adult fashion hosts, sharing a cheerful Nightflight launch moment while PAWS runs toward the camera" fetchPriority="high" />
+            <img src={campaignArt.launchHero} alt="Radiance, Ellie, and Alia, three fictional adult fashion hosts, laughing together as PAWS activates a fictional starship launch control" fetchPriority="high" />
             <div className="demo-orbit" aria-hidden="true"><span className="orbit orbit-one" /><span className="orbit orbit-two" /><span className="orbit orbit-three" /><span className="orbit-beam beam-one" /><span className="orbit-beam beam-two" /><div className="demo-chip"><b>10</b><i>LAUNCH MODULES</i></div></div>
             <figcaption>THE NIGHTFLIGHT TRIANGLE // RADIANCE × ELLIE × ALIA × PAWS</figcaption>
           </figure>
@@ -448,6 +452,23 @@ export function CasinoDemo() {
         <div className="night-crew-heading"><p>FICTIONAL ADULT HOSTS // HIGH-GLOSS RUNWAY COUTURE</p><h2 id="night-crew-title">Meet the flight deck.</h2><span>Three fictional adult hosts move through one playful love-triangle story: exchanged glances, linked hands, shared launch cues, and no static lineup. Their identities and story exist only inside this front-end demo.</span></div>
         <div className="host-roster">{hosts.map((item, index) => { const rosterArt = index === 0 ? campaignArt.gala : index === 1 ? campaignArt.runway : campaignArt.constellation; return <article className={`host-card host-${item.tone}`} key={item.name}><div className="host-card-visual"><span>{item.callSign}</span><img src={rosterArt} alt={`${item.name} leading Radiance, Ellie, and Alia through a coordinated fictional-adult Nightflight runway scene`} /><i aria-hidden="true" /></div><small>0{index + 1} // {item.role.toUpperCase()}</small><h3>{item.name}</h3><p>{item.signal}</p><strong>FICTIONAL ADULT HOST // RUNWAY CUE</strong></article>; })}</div>
         <article className="paws-companion"><div><p>PAWS // GOLDEN COPILOT</p><h3>Never parked at the edge.</h3><span>PAWS ribbon-chases, inspects consoles, asks paws-up, and dashes through the crew. Her motion cue changes deterministically with each demo module.</span></div><figure><img src={campaignArt.gala} alt="PAWS, a tiny golden fictional kitten, actively chasing a ribbon beside the three Nightflight hosts" /><figcaption>ACTIVE SCENE RULE // RECIPROCAL CREW INTERACTION</figcaption></figure></article>
+      </section>
+
+      <section className="nightflight-cinema" aria-labelledby="nightflight-cinema-title">
+        <div className="nightflight-cinema-heading">
+          <div><p>CAMPAIGN FILM // SOURCE-BOUND MOTION DESIGN</p><h2 id="nightflight-cinema-title">Launch night,<br />in two languages.</h2></div>
+          <div><span>Photoreal campaign cinema meets a purpose-built anime transmission. Both are front-end presentation layers: no live video feed, wagering system, or launch control exists.</span><button type="button" aria-pressed={cinemaActive} onClick={() => setCinemaActive((active) => !active)}><i aria-hidden="true" />CINEMA LOOP {cinemaActive ? "ON" : "PAUSED"}</button></div>
+        </div>
+        <div className="nightflight-cinema-grid">
+          <figure className="cinema-frame cinema-frame-live">
+            <div className="cinema-frame-media"><img src={campaignArt.launchMotion} alt="Radiance, Ellie, and Alia, three fictional adult fashion hosts, cheering around PAWS during a cinematic fictional starship launch" /><span className="cinema-launch-flare" aria-hidden="true" /><span className="cinema-scanline" aria-hidden="true" /></div>
+            <figcaption><strong>01 // ORBITAL LAUNCH FILM</strong><span>Gentle pan-and-zoom motion design from a generated still. Not model-generated live-action video.</span></figcaption>
+          </figure>
+          <figure className="cinema-frame cinema-frame-anime">
+            <div className="cinema-frame-media"><img src={campaignArt.animeRunway} alt="Anime key art of the same three fictional adult hosts running together with PAWS along a starship runway" /><span className="cinema-speedline" aria-hidden="true" /></div>
+            <figcaption><strong>02 // ANIME RUNWAY TRANSMISSION</strong><span>Adult high-fashion character key art with PAWS leading the launch-deck sprint.</span></figcaption>
+          </figure>
+        </div>
       </section>
 
       <section className="demo-boundary" aria-labelledby="boundary-title">

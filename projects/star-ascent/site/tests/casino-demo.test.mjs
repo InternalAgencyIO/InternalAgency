@@ -74,6 +74,8 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.match(component, /disabled=\{!interactiveReady\}/);
   assert.match(component, /data-interactive-ready=\{interactiveReady\}/);
   assert.match(component, /SAFE PULSE \{lightPulse \? "ON" : "OFF"\}/);
+  assert.match(component, /aria-pressed=\{cinemaActive\}/);
+  assert.match(component, /CINEMA LOOP \{cinemaActive \? "ON" : "PAUSED"\}/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /\.casino-demo \.demo-skip\{[^}]*clip-path:inset\(50%\)/);
   assert.match(css, /\.casino-demo \.demo-skip:focus\{[^}]*clip-path:none/);
@@ -85,6 +87,9 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.match(css, /animation-duration:\.01ms!important/);
   assert.match(css, /nightlife-pulse 1\.6s ease-in-out infinite/);
   assert.match(css, /\.casino-demo\.is-pulse-on \.demo-light-wash\{animation:none!important;opacity:0\}/);
+  assert.match(css, /@keyframes cinema-drift/);
+  assert.match(css, /@keyframes anime-flight/);
+  assert.match(css, /prefers-reduced-motion:reduce[\s\S]*\.cinema-frame img/);
 });
 
 test("Nightflight campaign art is source-bound, deterministic, and traceable", async () => {
@@ -94,14 +99,25 @@ test("Nightflight campaign art is source-bound, deterministic, and traceable", a
     read("public/future/casino/nightflight/asset-provenance.json").then(JSON.parse),
   ]);
   assert.equal(provenance.licenseScope.metadata, "CC0-1.0");
-  assert.equal(provenance.process.mode, "source-bound-reuse");
-  assert.equal(provenance.assets.length, 3);
-  assert.equal(new Set(provenance.assets.map((asset) => asset.sha256)).size, 3);
+  assert.equal(provenance.licenseScope.generatedAssets, "CC0-1.0 dedication to the extent of the project's rights");
+  assert.equal(provenance.process.mode, "source-bound-reuse-plus-project-generation");
+  assert.match(provenance.process.generationPolicy, /fictional adults age 25\+/);
+  assert.match(provenance.process.motionDisclosure, /does not claim.*live-action video/i);
+  assert.equal(provenance.assets.length, 6);
+  assert.equal(new Set(provenance.assets.map((asset) => asset.sha256)).size, 6);
   for (const asset of provenance.assets) {
-    assert.match(asset.publicPath, /^\/future\/casino\/nightflight\/nightflight-[a-z]+\.png$/);
-    assert.match(asset.sourcePath, /^assets\/lore\/starlight-era\/world-195x4-live-build\/batch-211-philippines\//);
+    assert.match(asset.publicPath, /^\/future\/casino\/nightflight\/nightflight-[a-z0-9-]+\.png$/);
     assert.match(asset.sha256, /^[a-f0-9]{64}$/);
     assert.match(component, new RegExp(asset.publicPath.replaceAll("/", "\\/")));
+  }
+  const reusedAssets = provenance.assets.filter((asset) => asset.sourcePath);
+  const generatedAssets = provenance.assets.filter((asset) => asset.sourceReferences);
+  assert.equal(reusedAssets.length, 3);
+  assert.equal(generatedAssets.length, 3);
+  for (const asset of reusedAssets) assert.match(asset.sourcePath, /^assets\/lore\/starlight-era\/world-195x4-live-build\/batch-211-philippines\//);
+  for (const asset of generatedAssets) {
+    assert.equal(asset.sourceReferences.length, 3);
+    assert.match(asset.promptFamily, /photorealistic-natural|illustration-story/);
   }
   assert.match(component, /const nightflightRolls: Record<string, NightflightRoll> = \{/);
   assert.equal((component.match(/pawsAction: "/g) ?? []).length, 10);
@@ -109,6 +125,8 @@ test("Nightflight campaign art is source-bound, deterministic, and traceable", a
   assert.equal((component.match(/interaction: "/g) ?? []).length, 10);
   assert.match(component, /PAWS \/\/ GOLDEN COPILOT/);
   assert.match(component, /THE NIGHTFLIGHT TRIANGLE/);
+  assert.match(component, /SOURCE-BOUND MOTION DESIGN/);
+  assert.match(component, /Not model-generated live-action video/);
   assert.match(css, /@keyframes paws-copilot/);
   assert.match(css, /prefers-reduced-motion:reduce[\s\S]*\.paws-companion img/);
 });
