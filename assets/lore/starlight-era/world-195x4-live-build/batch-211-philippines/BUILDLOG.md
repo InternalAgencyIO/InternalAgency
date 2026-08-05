@@ -48,3 +48,11 @@
 - Vigan accepted exactly one blunt rounded gold fashion wand at the outer red ankle after a duplicated-accessory candidate was rejected and withheld.
 - Banaue corrected PAWS into the exact stored console-inspector beat: the tiny golden kitten walks beside the low star-map console and reaches toward its harmless pearl light.
 - All accepted assets retain three clean adult faces, one tiny richly golden two-month-old PAWS, complete anatomy, secure opaque couture, recognizable locations and all six shoes.
+
+## Fifth detail pass
+
+- Vigan accepted Alia's task-focused low reach toward the stable signal token while preserving the linked trio and PAWS's active lap-copilot interaction.
+- Vigan's already-visible captain hairstyle, headpiece, and active PAWS contract were reconciled into the durable detail ledger without redundant rendering.
+- Banaue accepted Alia's compact layered gold collar detail while preserving the mission whisper, linked trio, terrace setting, and PAWS's console-inspector action.
+- One Banaue output-moderation block produced no asset; the lane recovered from its immediately prior accepted image with a narrower neutral object edit. No rejected media is published.
+- Both accepted images retain exactly three clean adult faces, one tiny richly golden two-month-old PAWS, complete anatomy, secure opaque couture, recognizable locations and all six shoes.

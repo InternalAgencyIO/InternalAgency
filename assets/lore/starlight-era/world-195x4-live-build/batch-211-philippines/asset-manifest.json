@@ -3,7 +3,7 @@
   "series": "World 195x4 Mile High",
   "batch": 211,
   "country": "Philippines",
-  "status": "refinement-partial",
+  "status": "triggered-detail-partial",
   "assets": [
     {
       "number": 864,
@@ -127,6 +127,20 @@
       "path": "details/866-philippines-banaue-detail-03-console-inspector.png",
       "bytes": 2413893,
       "sha256": "d22fb23ae355e770191dd5c33489371ce8e451db2b1f6dc027a158c67b5bfeba"
+    },
+    {
+      "number": 865,
+      "stage": "triggered-detail",
+      "path": "details/865-philippines-vigan-detail-04-signal-token-reach.png",
+      "bytes": 2511689,
+      "sha256": "dab2e0e4b3146ccc2a5175b02d6d8aac022b46eabea28aa9a4525f0a00ada585"
+    },
+    {
+      "number": 866,
+      "stage": "triggered-detail",
+      "path": "details/866-philippines-banaue-detail-04-layered-collar-connector.png",
+      "bytes": 2503836,
+      "sha256": "de10b2f8b6240cad2417f67af7029190ee1189a7536e14393d4e227864cb29cb"
     }
   ],
   "validation": {
@@ -144,6 +158,8 @@
     "xEligible": false,
     "detailPass04": "passed",
     "detailPass04At": "2026-08-05T03:06:46.941Z",
-    "acceptedAssetCount": 17
+    "detailPass05": "passed",
+    "detailPass05At": "2026-08-05T03:52:34.342Z",
+    "acceptedAssetCount": 19
   }
 }
