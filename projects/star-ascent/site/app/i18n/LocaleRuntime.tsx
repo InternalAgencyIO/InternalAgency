@@ -24,6 +24,7 @@ function translate(catalog: LocaleCatalog, locale: LocaleCode, source: string): 
 }
 
 function translateTextNode(node: Text, locale: LocaleCode, catalog: LocaleCatalog, localizedTextValues: WeakMap<Text, string>) {
+  if (node.parentElement?.closest("script, style, code, pre, [data-no-translate]")) return;
   const value = node.nodeValue ?? "";
   if (localizedTextValues.get(node) === value) return;
   const leading = value.match(/^\s*/)?.[0] ?? "";

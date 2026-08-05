@@ -86,6 +86,7 @@ test("locale readiness preserves source-to-target translation and waits for a mu
   assert.ok(observeIndex >= 0 && observeIndex < localizeIndex, "observation must cover the initial translation and any concurrent hydration rewrite");
   assert.ok(localizeIndex < readinessIndex, "readiness must begin only after initial localization completes");
   assert.match(runtime, /const localizedTextValues = new WeakMap<Text, string>\(\)/);
+  assert.match(runtime, /node\.parentElement\?\.closest\("script, style, code, pre, \[data-no-translate\]"\)/);
   assert.match(runtime, /if \(localizedTextValues\.get\(node\) === value\) return;/);
   assert.match(runtime, /localizedTextValues\.set\(node, node\.nodeValue \?\? ""\);/);
   assert.match(activate, /new MutationObserver[\s\S]+armReadiness\(\)/);

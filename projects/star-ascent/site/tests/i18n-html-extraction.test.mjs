@@ -17,6 +17,10 @@ test("extracts visible copy while excluding comments and raw-text elements", () 
       <script>dangerous script copy</script>
       <style>.hidden { content: "style copy"; }</style>
       <template>hidden template copy</template>
+      <div data-no-translate title="Excluded title">
+        Excluded English-only copy
+        <div><span>Excluded nested copy</span></div>
+      </div>
       <img alt="Radiance launch portrait" src="/favicon-radiance.png">
     </main>
   `;

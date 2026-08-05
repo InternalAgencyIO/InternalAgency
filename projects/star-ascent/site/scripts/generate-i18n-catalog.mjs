@@ -102,6 +102,8 @@ function extractFromHtml(html) {
   const values = new Set();
   const lowerHtml = html.toLowerCase();
   const rawTextElements = new Set(["script", "style", "noscript", "template"]);
+  const voidElements = new Set(["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"]);
+  let noTranslateDepth = 0;
   const addText = (text) => {
     for (const line of text.split(/\n+/)) {
       const value = normalize(line);
@@ -127,10 +129,10 @@ function extractFromHtml(html) {
   while (cursor < html.length) {
     const open = html.indexOf("<", cursor);
     if (open === -1) {
-      addText(html.slice(cursor));
+      if (noTranslateDepth === 0) addText(html.slice(cursor));
       break;
     }
-    addText(html.slice(cursor, open));
+    if (noTranslateDepth === 0) addText(html.slice(cursor, open));
     if (html.startsWith("<!--", open)) {
       const commentEnd = html.indexOf("-->", open + 4);
       if (commentEnd === -1) break;
@@ -142,6 +144,18 @@ function extractFromHtml(html) {
     const tag = html.slice(open + 1, end);
     const name = /^\s*\/?\s*([a-z0-9:-]+)/i.exec(tag)?.[1]?.toLowerCase();
     const closing = /^\s*\//.test(tag);
+    const selfClosing = /\/\s*$/.test(tag) || (name ? voidElements.has(name) : false);
+    if (noTranslateDepth > 0) {
+      if (closing) noTranslateDepth -= 1;
+      else if (!selfClosing) noTranslateDepth += 1;
+      cursor = end + 1;
+      continue;
+    }
+    if (!closing && /\bdata-no-translate(?:\s|=|$)/i.test(tag)) {
+      if (!selfClosing) noTranslateDepth = 1;
+      cursor = end + 1;
+      continue;
+    }
     if (!closing && name && rawTextElements.has(name)) {
       const closeStart = lowerHtml.indexOf(`</${name}`, end + 1);
       if (closeStart === -1) break;
