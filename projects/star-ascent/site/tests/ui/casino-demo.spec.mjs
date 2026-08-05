@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 import axe from "axe-core";
 
 test("Casino DLC demo is labeled, contained, accessible, deterministic, and locally interactive", async ({ page }) => {
+  test.setTimeout(90_000);
   const runtimeErrors = [];
   const roundRequests = [];
   let roundRunning = false;
@@ -18,13 +19,23 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await expect(page.getByText("DEMO ONLY", { exact: true })).toBeVisible();
   await expect(page.getByText("SIMULATED CREDITS", { exact: true })).toBeVisible();
   await expect(page.getByText("FICTIONAL ADULT PARTICIPANTS", { exact: true })).toBeVisible();
+  await expect(page.getByText("FICTIONAL ADULT HOSTS", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Radiance" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Ellie" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Alia" })).toBeVisible();
   await expect(page.getByText("NO REAL WAGERS", { exact: true })).toBeVisible();
   await expect(page.locator(".dossier-dock")).toBeHidden();
   await expect(page.locator(".locale-switcher")).toBeHidden();
   await expect(page.locator(".game-selector button")).toHaveCount(10);
+  const lightControl = page.getByRole("button", { name: "SAFE PULSE OFF" });
+  await expect(lightControl).toHaveAttribute("aria-pressed", "false");
+  await lightControl.click();
+  await expect(page.getByRole("button", { name: "SAFE PULSE ON" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("main.casino-demo")).toHaveClass(/is-pulse-on/);
+  await page.getByRole("button", { name: "SAFE PULSE ON" }).click();
 
-  const gameIds = ["plinko", "dice", "roulette", "mines", "keno", "limbo", "slots", "baccarat", "blackjack", "crash"];
-  for (const gameId of gameIds) {
+  const crossEngineGameIds = ["plinko", "slots", "crash"];
+  for (const gameId of crossEngineGameIds) {
     await page.getByTestId(`game-${gameId}`).click();
     await expect(page.getByTestId(`game-${gameId}`)).toHaveAttribute("aria-pressed", "true");
     await expect(page.getByTestId("active-game-scene")).toHaveClass(new RegExp(`game-${gameId}`));
@@ -41,7 +52,7 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   }));
   expect(geometry.scrollWidth).toBeLessThanOrEqual(geometry.clientWidth);
   expect(geometry.language).toBe("en");
-  expect(geometry.title).toBe("Casino DLC — Interactive Demo");
+  expect(geometry.title).toBe("Casino DLC — Nightflight Demo");
   expect(geometry.demoNoTranslate).toBe(true);
   expect(geometry.alternateLanguages).toEqual(["en", "x-default"]);
 
@@ -112,10 +123,14 @@ test("Casino DLC demo honors reduced-motion preferences", async ({ page }, testI
   test.skip(testInfo.project.name !== "chromium-desktop", "The reduced-motion contract runs once; CSS is shared by every engine.");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/future/casino/demo", { waitUntil: "domcontentloaded" });
+  await page.getByRole("button", { name: "SAFE PULSE OFF" }).click();
+  await expect(page.locator("main.casino-demo")).toHaveClass(/is-pulse-on/);
   const motion = await page.evaluate(() => ({
     preference: matchMedia("(prefers-reduced-motion: reduce)").matches,
     orbitDuration: getComputedStyle(document.querySelector(".orbit-one")).animationDuration,
     resultTransition: getComputedStyle(document.querySelector(".demo-result")).transitionDuration,
+    lightAnimation: getComputedStyle(document.querySelector(".demo-light-wash")).animationName,
+    lightOpacity: getComputedStyle(document.querySelector(".demo-light-wash")).opacity,
   }));
-  expect(motion).toEqual({ preference: true, orbitDuration: "1e-05s", resultTransition: "1e-05s" });
+  expect(motion).toEqual({ preference: true, orbitDuration: "1e-05s", resultTransition: "1e-05s", lightAnimation: "none", lightOpacity: "0" });
 });

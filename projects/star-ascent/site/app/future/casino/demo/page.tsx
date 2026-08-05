@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { CasinoDemo } from "./CasinoDemo";
 
 export const metadata: Metadata = {
-  title: "Casino DLC — Interactive Demo",
-  description: "An English-only, front-end simulation of the proposed Casino DLC. Demo credits and fictional participants only; no wagers, wallets, contracts, or transactions.",
+  title: "Casino DLC — Nightflight Demo",
+  description: "An English-only starship-nightlife interface mock for the proposed Casino DLC, with fictional adult hosts, simulated credits, and no wagers, wallets, contracts, or transactions.",
   alternates: {
     canonical: "https://internalagency.io/future/casino/demo",
     languages: {

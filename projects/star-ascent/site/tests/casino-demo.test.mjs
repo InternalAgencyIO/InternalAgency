@@ -21,6 +21,12 @@ test("Casino DLC demo is explicit, English-only, deterministic, and transaction-
   assert.match(source, /DEMO ONLY/);
   assert.match(source, /SIMULATED CREDITS/);
   assert.match(source, /FICTIONAL ADULT PARTICIPANTS/);
+  assert.match(source, /FICTIONAL ADULT HOSTS/);
+  assert.match(source, /Radiance/);
+  assert.match(source, /Ellie/);
+  assert.match(source, /Alia/);
+  assert.match(source, /STARSHIP CASINO DLC/);
+  assert.match(source, /NIGHTFLIGHT/);
   assert.match(source, /NO REAL WAGERS/);
   assert.match(source, /No account\. No deposit|No real gameplay, account, deposit/i);
   assert.match(component, /const games: GameDefinition\[\] = \[/);
@@ -56,10 +62,14 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.equal((component.match(/sceneLabel: "/g) ?? []).length, 10);
   assert.match(component, /aria-label="Decrease simulated stake by 25 credits"/);
   assert.match(component, /aria-label="Increase simulated stake by 25 credits"/);
+  assert.match(component, /aria-pressed=\{lightPulse\}/);
+  assert.match(component, /SAFE PULSE \{lightPulse \? "ON" : "OFF"\}/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /body:has\(\.casino-demo\) \.locale-switcher\{display:none!important\}/);
   assert.match(css, /@media\(max-width:900px\)/);
   assert.match(css, /@media\(max-width:620px\)/);
   assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
   assert.match(css, /animation-duration:\.01ms!important/);
+  assert.match(css, /nightlife-pulse 1\.6s ease-in-out infinite/);
+  assert.match(css, /\.casino-demo\.is-pulse-on \.demo-light-wash\{animation:none!important;opacity:0\}/);
 });
