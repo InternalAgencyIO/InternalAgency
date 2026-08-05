@@ -171,6 +171,20 @@ canonical route across both hosts and all selected engines. Both values are
 required together and fail closed outside the committed inventories. A focused
 diagnostic never substitutes for the standard 3,500-page publication proof.
 
+The exhaustive profile may be split into exactly 50 deterministic locale
+shards by setting `I18N_HYDRATION_FULL_CROSS_ENGINE=1` and
+`I18N_HYDRATION_SHARD_INDEX` from 1 through 50. Each shard selects one locale
+from the sorted committed catalog and still covers both hosts, all 25 canonical
+routes, and Chromium, Firefox, and WebKit: 150 assigned pages. The 50 shards are
+disjoint and their tested union is exactly the intended 7,500-page profile.
+Each page also has a 45-second total deadline by default; the bounded override
+`I18N_HYDRATION_PAGE_TIMEOUT_MS` accepts only 5,000 through 60,000 milliseconds.
+A successful shard is labeled `SHARD PASS` and explicitly says it is not
+aggregate proof. No exhaustive PASS may be claimed until all 50 shards from the
+same source and catalog are present in a source-bound reconciliation record;
+that aggregate evidence remains HOLD until such a reconciler is published and
+validated.
+
 ## Assurance boundary
 
 The current scorecard is 4,538 PASS, 0 FAIL, 462 HOLD, and 0 NOT_RUN. The 462

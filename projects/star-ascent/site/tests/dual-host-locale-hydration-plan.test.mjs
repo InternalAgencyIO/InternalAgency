@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import {
   createHydrationPlans,
+  exhaustiveLocaleShardCount,
   hydrationOptionsFromEnvironment,
 } from "../scripts/dual-host-locale-hydration-plan.mjs";
 
@@ -19,10 +21,12 @@ test("default hydration options are bounded and cross-engine", () => {
   assert.deepEqual(hydrationOptionsFromEnvironment(), {
     concurrency: 8,
     maxFailures: 20,
+    pageTimeoutMs: 45_000,
     fullCrossEngine: false,
     engineNames: ["chromium", "firefox", "webkit"],
     diagnosticLocale: null,
     diagnosticRoute: null,
+    shardIndex: null,
   });
 });
 
@@ -50,6 +54,44 @@ test("full cross-engine diagnostic profile contains 7,500 pages with stable offs
   assert.deepEqual(plans.map((plan) => plan.jobs.length), [2_500, 2_500, 2_500]);
   assert.deepEqual(plans.map((plan) => plan.resultOffset), [0, 2_500, 5_000]);
   assert.equal(plans.reduce((total, plan) => total + plan.routeCount, 0), 75);
+});
+
+test("50 bounded locale shards are disjoint and exactly reconstruct the 7,500-page profile", () => {
+  assert.equal(exhaustiveLocaleShardCount, 50);
+  const fullPlans = createHydrationPlans({
+    locales,
+    routes,
+    engineNames: ["chromium", "firefox", "webkit"],
+    fullCrossEngine: true,
+  });
+  const key = (plan, job) => `${plan.engineName}:${job.host}:${job.locale}:${job.route}`;
+  const expected = fullPlans.flatMap((plan) => plan.jobs.map((job) => key(plan, job))).sort();
+  const assigned = [];
+
+  for (let shardIndex = 1; shardIndex <= exhaustiveLocaleShardCount; shardIndex += 1) {
+    const options = hydrationOptionsFromEnvironment({
+      I18N_HYDRATION_FULL_CROSS_ENGINE: "1",
+      I18N_HYDRATION_SHARD_INDEX: String(shardIndex),
+    });
+    const plans = createHydrationPlans({ locales, routes, ...options });
+    assert.deepEqual(plans.map((plan) => plan.jobs.length), [50, 50, 50]);
+    assert.deepEqual(plans.map((plan) => plan.resultOffset), [0, 50, 100]);
+    assert.equal(plans.reduce((total, plan) => total + plan.jobs.length, 0), 150);
+    assert.ok(plans.flatMap((plan) => plan.jobs).every((job) => job.locale === locales[shardIndex - 1]));
+    assigned.push(...plans.flatMap((plan) => plan.jobs.map((job) => key(plan, job))));
+  }
+
+  assert.equal(assigned.length, 7_500);
+  assert.equal(new Set(assigned).size, 7_500);
+  assert.deepEqual(assigned.sort(), expected);
+});
+
+test("runner labels shard success as non-aggregate and enforces a page deadline", () => {
+  const runner = readFileSync(new URL("../scripts/check-dual-host-locale-hydration.mjs", import.meta.url), "utf8");
+  assert.match(runner, /Dual-host locale hydration SHARD PASS:/u);
+  assert.match(runner, /this is not aggregate 7,500-page proof/u);
+  assert.match(runner, /withinPageDeadline/u);
+  assert.match(runner, /exceeded the \$\{pageTimeoutMs\}ms page deadline/u);
 });
 
 test("engine subsets preserve the selected engine and bounded sentinel scope", () => {
@@ -97,12 +139,44 @@ test("invalid environment options and incomplete route inventories fail closed",
     /integer from 1 through 100/,
   );
   assert.throws(
+    () => hydrationOptionsFromEnvironment({ I18N_HYDRATION_PAGE_TIMEOUT_MS: "4000" }),
+    /integer from 5000 through 60000/,
+  );
+  assert.throws(
     () => hydrationOptionsFromEnvironment({ I18N_HYDRATION_FULL_CROSS_ENGINE: "2" }),
     /must be 0 or 1/,
   );
   assert.throws(
     () => hydrationOptionsFromEnvironment({ I18N_HYDRATION_DIAGNOSTIC_LOCALE: "hr" }),
     /must be supplied together/,
+  );
+  assert.throws(
+    () => hydrationOptionsFromEnvironment({ I18N_HYDRATION_SHARD_INDEX: "1" }),
+    /requires I18N_HYDRATION_FULL_CROSS_ENGINE=1/,
+  );
+  assert.throws(
+    () => hydrationOptionsFromEnvironment({
+      I18N_HYDRATION_FULL_CROSS_ENGINE: "1",
+      I18N_HYDRATION_SHARD_INDEX: "51",
+    }),
+    /integer from 1 through 50/,
+  );
+  assert.throws(
+    () => hydrationOptionsFromEnvironment({
+      I18N_HYDRATION_FULL_CROSS_ENGINE: "1",
+      I18N_HYDRATION_SHARD_INDEX: "1",
+      I18N_HYDRATION_ENGINES: "chromium,webkit",
+    }),
+    /must retain chromium,firefox,webkit in canonical order/,
+  );
+  assert.throws(
+    () => hydrationOptionsFromEnvironment({
+      I18N_HYDRATION_FULL_CROSS_ENGINE: "1",
+      I18N_HYDRATION_SHARD_INDEX: "1",
+      I18N_HYDRATION_DIAGNOSTIC_LOCALE: "hr",
+      I18N_HYDRATION_DIAGNOSTIC_ROUTE: "/",
+    }),
+    /cannot be combined/,
   );
   assert.throws(
     () => createHydrationPlans({

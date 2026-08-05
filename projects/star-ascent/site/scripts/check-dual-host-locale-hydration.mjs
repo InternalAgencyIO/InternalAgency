@@ -19,7 +19,7 @@ const htmlLanguageTag = (locale) => (locale === "zh" ? "zh-Hans" : locale === "s
 const payloadRoot = `/${contract.assetNamespace}/${contract.catalogSha256.slice(0, 16)}`;
 const browserTypes = { chromium, firefox, webkit };
 const options = hydrationOptionsFromEnvironment(process.env);
-const { concurrency, maxFailures, engineNames } = options;
+const { concurrency, maxFailures, pageTimeoutMs, engineNames, shardIndex } = options;
 const enginePlans = createHydrationPlans({ locales, routes, ...options });
 
 const port = await new Promise((resolvePort, reject) => {
@@ -63,6 +63,23 @@ async function waitForServer() {
     await new Promise((resolveWait) => setTimeout(resolveWait, 500));
   }
   throw new Error(`Render server did not become ready\n${serverOutput}`);
+}
+
+async function withinPageDeadline(task, label) {
+  let timeout;
+  try {
+    return await Promise.race([
+      task,
+      new Promise((_, reject) => {
+        timeout = setTimeout(
+          () => reject(new Error(`${label} exceeded the ${pageTimeoutMs}ms page deadline`)),
+          pageTimeoutMs,
+        );
+      }),
+    ]);
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 async function verifyPage(page, { host, locale, route, label }) {
@@ -209,10 +226,11 @@ async function runEngine({ engineName, jobs, resultOffset: engineResultOffset })
             cursor += 1;
             const page = await context.newPage();
             try {
-              const result = await verifyPage(page, {
-                ...jobs[index],
-                label: `${engineName}:${jobs[index].label}`,
-              });
+              const label = `${engineName}:${jobs[index].label}`;
+              const result = await withinPageDeadline(
+                verifyPage(page, { ...jobs[index], label }),
+                label,
+              );
               results[engineResultOffset + index] = result;
               if (!result.ok) failureCount += 1;
             } catch (error) {
@@ -278,11 +296,18 @@ if (failures.length > 0 || incompleteCount > 0) {
   const catalogBackedRenders = results.length - nativeTurkishRenders;
   const coverageSummary = enginePlans.map((plan) => `${plan.engineName}:${plan.jobs.length}`).join(", ");
   const profileLocaleCount = new Set(enginePlans.flatMap((plan) => plan.jobs.map((job) => job.locale))).size;
-  console.log(
-    `Dual-host locale hydration PASS: ${results.length}/${results.length} profile pages reached localeReady across ` +
-      `${profileLocaleCount} locale(s) and 2 hosts (${coverageSummary}), with ${catalogBackedRenders} ` +
-      `committed-catalog renders plus ${nativeTurkishRenders} native Turkish source renders; ` +
-      `catalog ${contract.catalogSha256}.`,
-  );
+  if (shardIndex === null) {
+    console.log(
+      `Dual-host locale hydration PASS: ${results.length}/${results.length} profile pages reached localeReady across ` +
+        `${profileLocaleCount} locale(s) and 2 hosts (${coverageSummary}), with ${catalogBackedRenders} ` +
+        `committed-catalog renders plus ${nativeTurkishRenders} native Turkish source renders; ` +
+        `catalog ${contract.catalogSha256}.`,
+    );
+  } else {
+    console.log(
+      `Dual-host locale hydration SHARD PASS: ${results.length}/${results.length} assigned pages reached localeReady ` +
+        `for shard ${shardIndex}/50 (${coverageSummary}); this is not aggregate 7,500-page proof.`,
+    );
+  }
   console.log("Ephemeral loopback browser evidence only: no deployment or public/chain state was changed.");
 }

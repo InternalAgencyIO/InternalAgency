@@ -13,6 +13,7 @@ export const engineConcurrencyCaps = {
 };
 
 const browserEngineNames = Object.keys(engineConcurrencyCaps);
+export const exhaustiveLocaleShardCount = 50;
 
 function parseBoundedInteger(value, fallback, name, minimum, maximum) {
   const parsed = Number(value ?? fallback);
@@ -51,6 +52,27 @@ export function hydrationOptionsFromEnvironment(environment = {}) {
     );
   }
 
+  const shardIndex = environment.I18N_HYDRATION_SHARD_INDEX === undefined
+    ? null
+    : parseBoundedInteger(
+        environment.I18N_HYDRATION_SHARD_INDEX,
+        environment.I18N_HYDRATION_SHARD_INDEX,
+        "I18N_HYDRATION_SHARD_INDEX",
+        1,
+        exhaustiveLocaleShardCount,
+      );
+  if (shardIndex !== null) {
+    if (fullCrossEngineValue !== "1") {
+      throw new Error("I18N_HYDRATION_SHARD_INDEX requires I18N_HYDRATION_FULL_CROSS_ENGINE=1");
+    }
+    if (engineNames.join(",") !== browserEngineNames.join(",")) {
+      throw new Error("A hydration shard must retain chromium,firefox,webkit in canonical order");
+    }
+    if (diagnosticLocale || diagnosticRoute) {
+      throw new Error("Hydration shard and diagnostic locale/route scopes cannot be combined");
+    }
+  }
+
   return {
     concurrency: parseBoundedInteger(environment.I18N_HYDRATION_WORKERS, "8", "I18N_HYDRATION_WORKERS", 1, 16),
     maxFailures: parseBoundedInteger(
@@ -60,10 +82,18 @@ export function hydrationOptionsFromEnvironment(environment = {}) {
       1,
       100,
     ),
+    pageTimeoutMs: parseBoundedInteger(
+      environment.I18N_HYDRATION_PAGE_TIMEOUT_MS,
+      "45000",
+      "I18N_HYDRATION_PAGE_TIMEOUT_MS",
+      5_000,
+      60_000,
+    ),
     fullCrossEngine: fullCrossEngineValue === "1",
     engineNames,
     diagnosticLocale,
     diagnosticRoute,
+    shardIndex,
   };
 }
 
@@ -74,6 +104,7 @@ export function createHydrationPlans({
   fullCrossEngine,
   diagnosticLocale = null,
   diagnosticRoute = null,
+  shardIndex = null,
 }) {
   if (locales.length !== 50 || new Set(locales).size !== 50) {
     throw new Error(`Expected 50 unique catalog locales; found ${locales.length}/${new Set(locales).size}`);
@@ -90,8 +121,23 @@ export function createHydrationPlans({
   if (diagnosticRoute && !routes.includes(diagnosticRoute)) {
     throw new Error(`Diagnostic route is absent from the canonical sitemap inventory: ${diagnosticRoute}`);
   }
+  if (shardIndex !== null) {
+    if (!Number.isSafeInteger(shardIndex) || shardIndex < 1 || shardIndex > exhaustiveLocaleShardCount) {
+      throw new Error(`Hydration shard index must be 1 through ${exhaustiveLocaleShardCount}; received ${shardIndex}`);
+    }
+    if (!fullCrossEngine || engineNames.join(",") !== browserEngineNames.join(",")) {
+      throw new Error("A hydration shard requires the canonical full cross-engine profile");
+    }
+    if (diagnosticLocale || diagnosticRoute) {
+      throw new Error("Hydration shard and diagnostic locale/route scopes cannot be combined");
+    }
+  }
 
-  const localeScope = diagnosticLocale ? [diagnosticLocale] : locales;
+  const localeScope = diagnosticLocale
+    ? [diagnosticLocale]
+    : shardIndex === null
+      ? locales
+      : [locales[shardIndex - 1]];
   let resultOffset = 0;
   return engineNames.map((engineName) => {
     const routeScope = diagnosticRoute
