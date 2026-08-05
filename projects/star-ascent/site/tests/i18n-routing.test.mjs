@@ -119,12 +119,22 @@ test("HOLD locale paths render canonical routes with English fallback metadata",
   assert.equal((frenchHead.match(/rel="canonical"/g) ?? []).length, 1);
   assert.match(frenchHtml, /"@type":"WebPage"/i);
   assert.match(frenchHtml, /"inLanguage":"en"/i);
+  const frenchLocaleButton = frenchHtml.match(/<button[^>]+aria-controls="locale-menu"[^>]*>([\s\S]*?)<\/button>/i)?.[1] ?? "";
+  assert.match(frenchLocaleButton, /French \(FR\)/);
+  assert.match(frenchLocaleButton, /English fallback is active/);
   const payloadPath = `/${payloadContract.assetNamespace}/${payloadContract.payloadNamespaceSha256.slice(0, 16)}/fr.json`;
   assert.doesNotMatch(
     frenchHtml,
     new RegExp(`rel="preload" href="${payloadPath.replaceAll("/", "\\/")}" as="fetch"`, "i"),
   );
   assert.equal((frenchHtml.match(/role="menuitem"/g) ?? []).length, 50);
+
+  const english = await request("/future");
+  assert.equal(english.status, 200);
+  const englishHtml = await english.text();
+  const englishLocaleButton = englishHtml.match(/<button[^>]+aria-controls="locale-menu"[^>]*>([\s\S]*?)<\/button>/i)?.[1] ?? "";
+  assert.match(englishLocaleButton, /English/);
+  assert.doesNotMatch(englishLocaleButton, /English fallback is active/);
 
   const arabic = await request("/ar");
   assert.equal(arabic.status, 200);

@@ -243,7 +243,8 @@ export function LocaleRuntime({ locale, contentLocale, promptCopy, publicPath, t
           aria-controls="locale-menu"
           onClick={() => setShowMenu((open) => !open)}
         >
-          {reviewedLocaleLabel(definition)} <span aria-hidden="true">⌄</span>
+          {reviewedLocaleLabel(definition)}
+          {contentLocale === locale ? null : ` · ${promptCopy.title}`} <span aria-hidden="true">⌄</span>
         </button>
           <div id="locale-menu" role="menu" hidden={!showMenu} aria-hidden={!showMenu}>
             {locales.map((entry) => {

@@ -47,6 +47,8 @@ async function assertLocalizedDocument(page, locale, path, { accessibility = fal
     const canonical = document.querySelector('link[rel="canonical"]')?.href ?? "";
     const alternates = Array.from(document.querySelectorAll('link[rel="alternate"][hrefLang]'));
     const bodyText = document.body.innerText;
+    const localeButton = document.querySelector(".locale-switcher > button");
+    const localeButtonRect = localeButton?.getBoundingClientRect() ?? null;
     return {
       lang: document.documentElement.lang,
       dir: document.documentElement.dir,
@@ -59,6 +61,11 @@ async function assertLocalizedDocument(page, locale, path, { accessibility = fal
       hasDefaultAlternate: alternates.some((link) => link.getAttribute("hrefLang") === "x-default"),
       visibleBody: getComputedStyle(document.body).visibility !== "hidden" && getComputedStyle(document.body).opacity !== "0",
       bodyLength: bodyText.trim().length,
+      localeButtonText: localeButton?.textContent?.replace(/\s+/gu, " ").trim() ?? "",
+      localeButtonBounds: localeButtonRect
+        ? { left: localeButtonRect.left, right: localeButtonRect.right }
+        : null,
+      viewportWidth: document.documentElement.clientWidth,
       localePayloadRequests: performance.getEntriesByType("resource")
         .filter((entry) => entry.name.includes("/i18n-v2/")).length,
       documentFits: document.documentElement.scrollWidth <= document.documentElement.clientWidth,
@@ -82,6 +89,15 @@ async function assertLocalizedDocument(page, locale, path, { accessibility = fal
   expect(state.hasDefaultAlternate, `${locale} x-default alternate`).toBe(true);
   expect(state.visibleBody, `${locale} body visibility`).toBe(true);
   expect(state.bodyLength, `${locale} rendered body length`).toBeGreaterThan(300);
+  expect(state.localeButtonBounds, `${locale} locale button bounds`).not.toBeNull();
+  expect(state.localeButtonBounds.left, `${locale} locale button left containment`).toBeGreaterThanOrEqual(0);
+  expect(state.localeButtonBounds.right, `${locale} locale button right containment`).toBeLessThanOrEqual(state.viewportWidth);
+  if (locale === "en") {
+    expect(state.localeButtonText, `${locale} locale button label`).toContain("English");
+    expect(state.localeButtonText, `${locale} canonical locale button`).not.toContain("English fallback is active");
+  } else {
+    expect(state.localeButtonText, `${locale} fallback locale button`).toContain("English fallback is active");
+  }
   expect(state.documentFits, `${locale} horizontal containment`).toBe(true);
   expect(state.genericAriaLabels, `${locale} generic ARIA labels`).toBe(0);
   expect(state.mojibake, `${locale} mojibake`).toEqual([]);
