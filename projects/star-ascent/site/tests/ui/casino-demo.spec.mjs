@@ -33,6 +33,7 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await expect(page.locator('main.casino-demo img[loading="lazy"][decoding="async"]')).toHaveCount(19);
   const activeCampaignImages = page.locator('img[src*="/future/casino/nightflight/signal-four-"]');
   await expect(activeCampaignImages).toHaveCount(20);
+  expect(new Set(Object.values(campaignScenes).map((scene) => scene.src)).size).toBe(4);
   for (const selector of [".night-crew", ".nightflight-cinema", "#game-lobby", "#demo-table"]) await page.locator(selector).scrollIntoViewIfNeeded();
   for (const src of new Set(Object.values(campaignScenes).map((scene) => scene.src))) {
     const sourceImages = page.locator(`img[src="${src}"]`);
@@ -62,6 +63,7 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   for (const host of hostProfiles) {
     const portrait = page.locator(`.host-card[data-host-id="${host.id}"] img`);
     await expect(portrait).toHaveAttribute("src", campaignArt[host.portraitArt]);
+    await expect(portrait).toHaveAttribute("alt", host.portraitDescription);
     await portrait.evaluate((image) => image.scrollIntoView({ block: "center", behavior: "auto" }));
     await expect.poll(() => portrait.evaluate((image) => image.complete && image.naturalWidth === 480 && image.naturalHeight === 720)).toBe(true);
   }
@@ -147,16 +149,16 @@ test("all ten Casino DLC rooms complete their deterministic local walkthrough", 
   test.skip(testInfo.project.name !== "chromium-desktop", "The ten-room walkthrough runs once; all engines cover the shared selector and round kernel.");
   test.setTimeout(60_000);
   const games = [
-    ["plinko", "4.20× LANDING", "DLC-PLINKO-01"],
-    ["dice", "ROLL 86 // MISS", "DLC-DICE-02"],
-    ["roulette", "17 // STRAIGHT HIT", "DLC-ROULETTE-03"],
-    ["mines", "CASH OUT // SAFE", "DLC-MINES-04"],
-    ["keno", "4 HITS // WIN", "DLC-KENO-05"],
-    ["limbo", "2.40× // CLEARED", "DLC-LIMBO-06"],
-    ["slots", "TRIPLE SEVEN // WIN", "DLC-SLOTS-07"],
-    ["baccarat", "BANKER 8 // WIN", "DLC-BACCARAT-08"],
-    ["blackjack", "PLAYER 19 // WIN", "DLC-BLACKJACK-09"],
-    ["crash", "EXIT 2.00× // CRASH 2.64×", "DLC-CRASH-10"],
+    { gameId: "plinko", outcome: "4.20× LANDING", receipt: "DLC-PLINKO-01", pending: "A demo Plinko board awaiting its preset drop", revealed: "A demo Plinko board with a ball landing in the 4.20 times pocket" },
+    { gameId: "dice", outcome: "ROLL 86 // MISS", receipt: "DLC-DICE-02", pending: "A demo Dice interface awaiting its preset roll", revealed: "A demo dice roll of 86 missing a roll-under target of 71" },
+    { gameId: "roulette", outcome: "17 // STRAIGHT HIT", receipt: "DLC-ROULETTE-03", pending: "A European roulette demo wheel awaiting its preset spin", revealed: "A European roulette demo wheel resolving to pocket 17" },
+    { gameId: "mines", outcome: "CASH OUT // SAFE", receipt: "DLC-MINES-04", pending: "A five by five demo Mines grid with its preset map concealed", revealed: "A five by five demo Mines grid showing eight preset safe tiles", settled: "A five by five demo Mines grid with eight safe tiles and three revealed mines" },
+    { gameId: "keno", outcome: "4 HITS // WIN", receipt: "DLC-KENO-05", pending: "A forty-number Keno demo board awaiting its preset draw", revealed: "A forty-number Keno demo board showing five picks and four matching draws" },
+    { gameId: "limbo", outcome: "2.40× // CLEARED", receipt: "DLC-LIMBO-06", pending: "A Limbo demo interface awaiting its preset multiplier", revealed: "A Limbo demo result of 2.40 times clearing a 2.00 times target" },
+    { gameId: "slots", outcome: "TRIPLE SEVEN // WIN", receipt: "DLC-SLOTS-07", pending: "An original three by three slot demo with all reels concealed", revealed: "An original three by three slot demo resolving to three sevens on the center line" },
+    { gameId: "baccarat", outcome: "BANKER 8 // WIN", receipt: "DLC-BACCARAT-08", pending: "A demo Baccarat table with both preset hands face down", revealed: "A demo Baccarat table where the banker wins eight to six" },
+    { gameId: "blackjack", outcome: "PLAYER 19 // WIN", receipt: "DLC-BLACKJACK-09", pending: "A demo Blackjack table with both preset hands face down", revealed: "A demo Blackjack table where player 19 beats house 17" },
+    { gameId: "crash", outcome: "EXIT 2.00× // CRASH 2.64×", receipt: "DLC-CRASH-10", pending: "A Crash demo curve awaiting its preset run with a 2.00 times auto-exit set", revealed: "A Crash demo curve automatically exiting at 2.00 times before a 2.64 times crash" },
   ];
   const roundRequests = [];
   let running = false;
@@ -164,10 +166,12 @@ test("all ten Casino DLC rooms complete their deterministic local walkthrough", 
   await page.goto("/future/casino/demo", { waitUntil: "domcontentloaded" });
   await page.waitForLoadState("networkidle");
 
-  for (const [gameId, outcome, receipt] of games) {
+  for (const { gameId, outcome, receipt, pending, revealed, settled } of games) {
     const story = storyByGame[gameId];
     const host = hostForId(story.leadId);
     await page.getByTestId(`game-${gameId}`).click();
+    const gameScene = page.locator(".game-scene");
+    await expect(gameScene).toHaveAttribute("aria-label", pending);
     const narrative = page.getByTestId("nightflight-narrative");
     await expect(narrative).toHaveAttribute("data-story-id", story.id);
     await expect(narrative).toHaveAttribute("data-game-id", gameId);
@@ -185,8 +189,11 @@ test("all ten Casino DLC rooms complete their deterministic local walkthrough", 
     await expect(page.locator(".demo-table-campaign")).toHaveAttribute("src", campaignScenes[story.scene].src);
     running = true;
     await page.getByRole("button", { name: new RegExp(`RUN ${gameId === "slots" ? "ORIGINAL SLOTS" : gameId.toUpperCase()} DEMO`) }).click();
+    await expect(page.locator(".demo-table")).toHaveClass(/phase-revealed/);
+    await expect(gameScene).toHaveAttribute("aria-label", revealed);
     await expect(page.getByTestId("demo-receipt-id")).toHaveText(receipt);
     running = false;
+    await expect(gameScene).toHaveAttribute("aria-label", settled ?? revealed);
     await expect(page.locator(".demo-result strong")).toHaveText(outcome);
   }
 

@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { campaignArt, hostProfiles } from "../app/future/casino/demo/nightflight-narrative.mjs";
 
@@ -9,6 +11,10 @@ const root = new URL("../", import.meta.url);
 const repositoryRoot = new URL("../../../", root);
 const read = (path) => readFile(new URL(path, root), "utf8");
 const sha256 = (buffer) => createHash("sha256").update(buffer).digest("hex");
+const gitShow = (commit, path) => execFileSync("git", ["show", `${commit}:${path}`], {
+  cwd: fileURLToPath(repositoryRoot),
+  encoding: "utf8",
+});
 
 test("Casino DLC demo is explicit, English-only, deterministic, and transaction-free", async () => {
   const [page, component, narrative, narrativeComponent, preview, sitemap, worker] = await Promise.all([
@@ -83,7 +89,12 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.equal((component.match(/loading="lazy" decoding="async"/g) ?? []).length, 7);
   assert.match(component, /campaignArt\.signalFourAnchor[\s\S]{0,400}fetchPriority="high"/);
   assert.match(component, /aria-label="Ten Casino DLC demo games"/);
-  assert.equal((component.match(/sceneLabel: "/g) ?? []).length, 10);
+  assert.equal((component.match(/^    sceneLabels: \{/gmu) ?? []).length, 10);
+  assert.equal((component.match(/^      pending: "/gmu) ?? []).length, 10);
+  assert.equal((component.match(/^      revealed: "/gmu) ?? []).length, 10);
+  assert.equal((component.match(/^      settled: "/gmu) ?? []).length, 1);
+  assert.match(component, /settled && game\.sceneLabels\.settled[\s\S]*game\.sceneLabels\.revealed[\s\S]*game\.sceneLabels\.pending/);
+  assert.doesNotMatch(component, /aria-label=\{game\.sceneLabel\}/);
   assert.match(component, /aria-label="Decrease simulated stake by 25 credits"/);
   assert.match(component, /aria-label="Increase simulated stake by 25 credits"/);
   assert.match(component, /aria-pressed=\{lightPulse\}/);
@@ -92,6 +103,7 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.match(component, /SAFE PULSE \{lightPulse \? "ON" : "OFF"\}/);
   assert.match(component, /aria-pressed=\{cinemaActive\}/);
   assert.match(component, /CINEMA LOOP \{cinemaActive \? "ON" : "PAUSED"\}/);
+  assert.match(component, /alt=\{item\.portraitDescription\}/);
   assert.match(component, /scrollIntoView\(\{ behavior: reduceMotion \? "auto" : "smooth", block: "start" \}\)/);
   assert.match(component, /#demo-table-title/);
   assert.match(component, /aria-describedby="nightflight-narrative-summary"/);
@@ -133,13 +145,13 @@ test("Nightflight Signal Four art is source-bound, deterministic, and traceable"
   assert.equal(packageLock.packages["node_modules/sharp"].version, "0.35.2", "the deterministic image processor must remain lock-pinned");
   assert.equal(provenance.licenseScope.metadata, "CC0-1.0");
   assert.equal(provenance.licenseScope.generatedAssets, "CC0-1.0 dedication to the extent of the project's rights");
-  assert.equal(provenance.version, 4);
+  assert.equal(provenance.version, 5);
   assert.equal(provenance.process.mode, "source-bound-reuse-plus-project-generation");
   assert.match(provenance.process.generationPolicy, /fictional adults age 25\+/);
   assert.match(provenance.process.motionDisclosure, /does not claim.*live-action video/i);
   assert.match(provenance.process.summary, /four-member.*AI ECE/i);
-  assert.equal(provenance.assets.length, 14);
-  assert.equal(new Set(provenance.assets.map((asset) => asset.sha256)).size, 14);
+  assert.equal(provenance.assets.length, 15);
+  assert.equal(new Set(provenance.assets.map((asset) => asset.sha256)).size, 15);
   assert.equal(provenance.identityAnchor.role, "AI signal officer");
   assert.equal(provenance.identityAnchor.sourceSha256, "b22ef5cd9929d2a09f96dc0765434db41c964b0f0390589e940eb085935c2315");
   for (const asset of provenance.assets) {
@@ -164,6 +176,10 @@ test("Nightflight Signal Four art is source-bound, deterministic, and traceable"
       const masterBytes = await readFile(new URL(asset.editMasterPath, repositoryRoot));
       assert.equal(sha256(masterBytes), asset.editMasterSha256, `${asset.editMasterPath} hash must match provenance`);
       assert.equal(masterBytes.byteLength, asset.editMasterBytes, `${asset.editMasterPath} bytes must match provenance`);
+      if (asset.editMasterDimensions) {
+        const metadata = await sharp(masterBytes).metadata();
+        assert.deepEqual({ width: metadata.width, height: metadata.height }, asset.editMasterDimensions, `${asset.editMasterPath} dimensions must match provenance`);
+      }
     }
     if (asset.cropMasterPath) {
       const masterBytes = await readFile(new URL(asset.cropMasterPath, repositoryRoot));
@@ -175,10 +191,12 @@ test("Nightflight Signal Four art is source-bound, deterministic, and traceable"
   }
   const legacyAssets = provenance.assets.filter((asset) => asset.status === "historical-v1");
   const activeAssets = provenance.assets.filter((asset) => asset.status === "active-v2");
+  const generatedAssets = provenance.assets.filter((asset) => asset.status === "active-v3");
   const inactiveAssets = provenance.assets.filter((asset) => asset.status === "inactive-source-v2");
   const supportAssets = provenance.assets.filter((asset) => asset.status === "active-support-v2");
   assert.equal(legacyAssets.length, 6);
   assert.equal(activeAssets.length, 3);
+  assert.equal(generatedAssets.length, 1);
   assert.equal(inactiveAssets.length, 1);
   assert.equal(supportAssets.length, 4);
   assert.deepEqual(activeAssets.map((asset) => asset.sourceAssetNumber), [872, 874, 875]);
@@ -201,6 +219,39 @@ test("Nightflight Signal Four art is source-bound, deterministic, and traceable"
       .toBuffer();
     assert.equal(sha256(regenerated), asset.sha256, `${asset.publicPath} must reproduce from its declared source and transform`);
   }
+  const generatedTension = generatedAssets[0];
+  assert.equal(generatedTension.mode, "reference-guided-campaign-generation");
+  assert.equal(generatedTension.sourceCommit, "cf1f55783fa64ce89433e891b87c92567c018c70");
+  assert.equal(generatedTension.generationRecord, "generation-prompts-v3.md");
+  assert.equal(generatedTension.sourceReferences.length, 3);
+  for (const reference of generatedTension.sourceReferences) {
+    const referenceBytes = await readFile(new URL(reference.path, repositoryRoot));
+    assert.equal(sha256(referenceBytes), reference.sha256, `${reference.path} reference hash must match provenance`);
+    const pointer = gitShow(generatedTension.sourceCommit, reference.path);
+    assert.match(pointer, /^version https:\/\/git-lfs\.github\.com\/spec\/v1$/m, `${reference.path} must exist as LFS content at sourceCommit`);
+    assert.equal(pointer.match(/^oid sha256:([0-9a-f]{64})$/m)?.[1], reference.sha256, `${reference.path} LFS OID must match provenance at sourceCommit`);
+    assert.equal(Number(pointer.match(/^size (\d+)$/m)?.[1]), referenceBytes.byteLength, `${reference.path} LFS size must match sourceCommit`);
+  }
+  const generationRecord = await read(`public/future/casino/nightflight/${generatedTension.generationRecord}`);
+  assert.match(generationRecord, /^# Signal Four orbital-tension generation record$/m);
+  assert.match(generationRecord, /^## Accepted prompt$/m);
+  assert.match(generationRecord, /^## Accepted-output deviation$/m);
+  assert.match(generationRecord, /two pairwise handholds: Radiance with Ellie, and AI ECE with Alia/);
+  assert.match(generationRecord, /built-in OpenAI image-generation workflow/);
+  for (const reference of generatedTension.sourceReferences) assert.match(generationRecord, new RegExp(reference.path.replaceAll("/", "\\/")));
+  assert.match(generationRecord, new RegExp(generatedTension.editMasterPath.replaceAll("/", "\\/")));
+  assert.match(generationRecord, new RegExp(generatedTension.publicPath.replaceAll("/", "\\/")));
+  assert.deepEqual(generatedTension.dimensions, { width: 720, height: 1280 });
+  assert.equal(generatedTension.adultPolicy, "four fictional adults age 25+, fully clothed, non-explicit");
+  assert.deepEqual(generatedTension.visibleSubjectsLeftToRight, ["Radiance", "Ellie", "AI ECE", "Alia"]);
+  assert.match(`${component}\n${narrative}`, new RegExp(generatedTension.publicPath.replaceAll("/", "\\/")));
+  const generatedInput = await readFile(new URL(generatedTension.editMasterPath, repositoryRoot));
+  const generatedDelivery = await sharp(generatedInput)
+    .resize({ width: 720, height: 1280, fit: "cover", position: "centre" })
+    .webp({ quality: 84, smartSubsample: true })
+    .toBuffer();
+  assert.equal(sha256(generatedDelivery), generatedTension.sha256, "generated tension delivery must reproduce from its accepted master");
+  assert.notEqual(campaignArt.signalFourTension, campaignArt.signalFourRelay, "tension and relay scenes must use distinct active art");
   assert.equal(inactiveAssets[0].sourceAssetNumber, 873);
   assert.equal(inactiveAssets[0].mode, "source-bound-derivative");
   assert.match(inactiveAssets[0].use, /Inactive.*not referenced.*latex-and-lace/i);

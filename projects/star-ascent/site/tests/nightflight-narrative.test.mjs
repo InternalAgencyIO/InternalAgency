@@ -34,6 +34,7 @@ test("Nightflight permanent crew and story manifest are complete, immutable, and
     assert.equal(host.fictionalAdult, true);
     assert.ok(host.minimumAge >= 25);
     assert.ok(host.signatureCue.length > 10);
+    assert.match(host.portraitDescription, new RegExp(`${host.name}.*fictional adult.*latex.*lace.*runway`, "i"));
     assert.match(host.portraitArt, /^portrait(?:Radiance|Ellie|Alia|Ece)$/);
     assert.match(campaignArt[host.portraitArt], /^\/future\/casino\/nightflight\/signal-four-portrait-/);
     assert.ok(!names.has(host.name));
@@ -45,6 +46,11 @@ test("Nightflight permanent crew and story manifest are complete, immutable, and
   }
   assert.equal(hostForId("ece").role, "AI signal officer");
   assert.equal(portraitArt.size, 4);
+  assert.equal(new Set(hostProfiles.map(({ portraitDescription }) => portraitDescription)).size, 4);
+  assert.equal(new Set(Object.values(campaignScenes).map(({ src }) => src)).size, 4);
+  assert.notEqual(campaignArt.signalFourTension, campaignArt.signalFourRelay);
+  assert.equal(campaignScenes.signalFourTension.sourceAssetNumber, null);
+  assert.equal(campaignScenes.signalFourTension.generationRecord, "generation-prompts-v3.md");
   assert.deepEqual(Object.fromEntries(hostProfiles.map(({ id, portraitArt: art }) => [id, art])), {
     radiance: "portraitRadiance",
     ellie: "portraitEllie",

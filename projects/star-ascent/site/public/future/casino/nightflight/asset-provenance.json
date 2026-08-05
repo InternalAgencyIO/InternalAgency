@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "publishedPurpose": "Nightflight Casino DLC English-only front-end demo",
   "licenseScope": {
     "metadata": "CC0-1.0",
@@ -9,8 +9,8 @@
   },
   "process": {
     "mode": "source-bound-reuse-plus-project-generation",
-    "summary": "The six original three-member v1 assets remain as historical evidence. Current demo surfaces use the accepted Batch 213 four-member Signal Four record with AI ECE: two identity-preserving wardrobe edits, one source-referenced fashion reinterpretation reused for the tension slot, and four deterministic portrait crops. One direct Hue source derivative is retained as inactive provenance evidence. Only accepted outputs are published.",
-    "generator": "OpenAI built-in image generation for two accepted identity-preserving wardrobe edits and one accepted source-referenced fashion reinterpretation; Sharp 0.35.2 for public WebP delivery transforms and host crops",
+    "summary": "The six original three-member v1 assets remain as historical evidence. Current demo surfaces use the accepted Batch 213 four-member Signal Four record with AI ECE: two identity-preserving wardrobe edits, one source-referenced fashion reinterpretation, one distinct reference-guided orbital-tension generation, and four deterministic portrait crops. One direct Hue source derivative is retained as inactive provenance evidence. Only accepted outputs are published.",
+    "generator": "OpenAI built-in image generation for two accepted identity-preserving wardrobe edits, one accepted source-referenced fashion reinterpretation, and one distinct reference-guided orbital-tension generation; Sharp 0.35.2 for public WebP delivery transforms and host crops",
     "generationPolicy": "All characters are explicitly fictional adults age 25+; all are fully clothed; no stripping, nudity, lingerie-only presentation, fetish content, sexual activity, or safety-filter evasion.",
     "motionDisclosure": "The site animates still images with CSS pan, zoom, flare, and scanline layers. It does not claim that the stills are model-generated live-action video.",
     "determinism": "Each game ID maps to one immutable lead, all four permanent participants, one relationship-focus subset, one artwork, and one PAWS state in app/future/casino/demo/nightflight-narrative.mjs. Story presentation never affects a result, and no random API is used."
@@ -122,6 +122,41 @@
       "use": "Inactive accepted source derivative retained for provenance; not referenced by current demo surfaces because its wardrobe differs from the active latex-and-lace theme",
       "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
       "paws": { "present": true, "action": "console-inspector" },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-v3",
+      "mode": "reference-guided-campaign-generation",
+      "publicPath": "/future/casino/nightflight/signal-four-orbital-tension-latex-lace-v3.webp",
+      "sha256": "a963531b25e81c812f4c19bdf984088884354a6d9615c8cb48b6df0b87dff853",
+      "bytes": 177502,
+      "dimensions": { "width": 720, "height": 1280 },
+      "sourceCommit": "cf1f55783fa64ce89433e891b87c92567c018c70",
+      "sourceReferences": [
+        {
+          "path": "assets/lore/starlight-era/casino-nightflight-signal-four-v2/signal-four-hanoi-anchor-latex-lace-v2.png",
+          "sha256": "652c9c3e128aeaddd58e55734262d8f8bea13960e1d40b6e101fb30c8b8b8544"
+        },
+        {
+          "path": "assets/lore/starlight-era/casino-nightflight-signal-four-v2/signal-four-ninh-binh-relay-latex-lace-v2.png",
+          "sha256": "2dbca17380fc783a62aaa15cc2284d343abaadcbab3162bfecd8ca6e662c0ac1"
+        },
+        {
+          "path": "assets/lore/starlight-era/casino-nightflight-signal-four-v2/signal-four-da-lat-finale-latex-lace-v2.png",
+          "sha256": "2950f4c550a10cedc3e157a911883474acc77c103d885526941b0b6cbb584b99"
+        }
+      ],
+      "editMasterPath": "assets/lore/starlight-era/casino-nightflight-signal-four-v3/signal-four-orbital-tension-latex-lace-v3.png",
+      "editMasterSha256": "54e7cbc42e93c60712d8b1790762fc791b76fee0922a80e2056f7f7877ee336f",
+      "editMasterBytes": 2509704,
+      "editMasterDimensions": { "width": 941, "height": 1672 },
+      "promptFamily": "photorealistic-natural / reference-guided orbital-tension latex-and-lace campaign",
+      "generationRecord": "generation-prompts-v3.md",
+      "visibleSubjectsLeftToRight": ["Radiance", "Ellie", "AI ECE", "Alia"],
+      "accessibleDescription": "Radiance holds hands with Ellie while AI ECE holds hands with Alia inside an orbital signal gallery; Ellie carries a sapphire prism and PAWS scouts the foreground.",
+      "wardrobe": "Fully opaque latex-and-lined-lace cocktail couture in the established gold, sapphire, emerald, and red palettes",
+      "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
+      "paws": { "present": true, "action": "signal-scout" },
       "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
     },
     {

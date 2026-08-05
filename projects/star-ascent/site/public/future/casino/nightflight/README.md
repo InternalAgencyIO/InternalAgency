@@ -1,14 +1,16 @@
 # Nightflight campaign-art provenance
 
-This directory contains fourteen traceable campaign images for the English-only
+This directory contains fifteen traceable campaign images for the English-only
 Casino DLC front-end demo:
 
 - Six original v1 trio images are retained as historical evidence and are no
   longer referenced by current demo surfaces.
-- Three active Signal Four WebP scene images show the permanent adult crew in
+- Four active Signal Four WebP scene images show the permanent adult crew in
   the order and relationship model established by public Batch 213: Radiance,
-  Ellie, Alia, and AI ECE. One accepted Hue source derivative is retained as
-  inactive provenance evidence and is not referenced by current demo surfaces.
+  Ellie, Alia, and AI ECE. The orbital-tension frame is a distinct
+  reference-guided generation from the three accepted v2 masters. One accepted
+  Hue source derivative is retained as inactive provenance evidence and is not
+  referenced by current demo surfaces.
 - Four delivery-only portrait crops give each adult host an identifiable roster
   card and lead thumbnail without changing the accepted finale artwork.
 
@@ -18,17 +20,19 @@ accepted source-referenced fashion reinterpretation: it retains the four adult
 identities, setting, palette, interaction, and PAWS, but removes the source
 cylinder and relay baton and revises the linked arm/hand arrangement. Their
 full-resolution PNG masters live in
-`assets/lore/starlight-era/casino-nightflight-signal-four-v2/`. The active
-tension slot reuses the accepted latex-and-lace relay frame with a distinct
-deterministic story cue. The inactive Hue signal-console derivative retains its
-source lacquered technical textile and opaque guipure-applique wardrobe.
+`assets/lore/starlight-era/casino-nightflight-signal-four-v2/`. The distinct
+orbital-tension master lives in
+`assets/lore/starlight-era/casino-nightflight-signal-four-v3/` and replaces the
+previous tension/relay visual reuse. The inactive Hue signal-console derivative
+retains its source lacquered technical textile and opaque guipure-applique
+wardrobe.
 Exact sources, source hashes, accepted-master hashes, public hashes, dimensions,
 encoding and crop settings, visible-subject ordering, accessible descriptions,
 adult policy, accepted deviations, and PAWS state are recorded in
 `asset-provenance.json`. Accepted prompts
-and the deterministic WebP transform are published in
-`generation-prompts-v2.md`; `generation-prompts-v1.md` remains untouched as
-historical evidence.
+and the deterministic WebP transforms are published in
+`generation-prompts-v2.md` and `generation-prompts-v3.md`;
+`generation-prompts-v1.md` remains untouched as historical evidence.
 
 The executable story manifest at
 `app/future/casino/demo/nightflight-narrative.mjs` treats all four adults as

@@ -11,8 +11,9 @@ The Hue signal-console frame is a direct WebP derivative of accepted Batch 213
 asset 873. It retains that source's lacquered technical textile and opaque
 guipure-applique wardrobe; no generated wardrobe edit is claimed for it. It is
 retained as inactive provenance evidence and is not referenced by current demo
-surfaces. The active tension slot reuses the accepted latex-and-lace relay frame
-with a separate deterministic story cue.
+surfaces. Version 2 initially reused the accepted latex-and-lace relay frame for
+the tension slot; `generation-prompts-v3.md` records the distinct frame that now
+serves the active tension slot.
 
 ## Hanoi anchor / asset 872
 

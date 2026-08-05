@@ -24,7 +24,11 @@ type GameDefinition = {
   instruction: string;
   selection: string;
   outcome: string;
-  sceneLabel: string;
+  sceneLabels: {
+    pending: string;
+    revealed: string;
+    settled?: string;
+  };
   payoutLabel: string;
   netFactor: number;
   seed: string;
@@ -60,6 +64,7 @@ type HostDefinition = {
   signal: string;
   tone: "solar" | "sapphire" | "crimson" | "emerald";
   portraitArt: HostPortrait;
+  portraitDescription: string;
   signatureCue: string;
   minimumAge: number;
 };
@@ -102,7 +107,10 @@ const games: GameDefinition[] = [
     instruction: "Choose a risk lane and watch a preset ball path resolve into one multiplier pocket.",
     selection: "MEDIUM RISK // 12 ROWS",
     outcome: "4.20× LANDING",
-    sceneLabel: "A demo Plinko board with a ball landing in the 4.20 times pocket",
+    sceneLabels: {
+      pending: "A demo Plinko board awaiting its preset drop",
+      revealed: "A demo Plinko board with a ball landing in the 4.20 times pocket",
+    },
     payoutLabel: "+3.20× net",
     netFactor: 3.2,
     seed: "DEMO-PLINKO-A104",
@@ -120,7 +128,10 @@ const games: GameDefinition[] = [
     instruction: "Set a roll-under threshold. The preset result misses the line to demonstrate a losing receipt.",
     selection: "ROLL UNDER 71.00",
     outcome: "ROLL 86 // MISS",
-    sceneLabel: "A demo dice roll of 86 missing a roll-under target of 71",
+    sceneLabels: {
+      pending: "A demo Dice interface awaiting its preset roll",
+      revealed: "A demo dice roll of 86 missing a roll-under target of 71",
+    },
     payoutLabel: "−1.00× net",
     netFactor: -1,
     seed: "DEMO-DICE-B208",
@@ -138,7 +149,10 @@ const games: GameDefinition[] = [
     instruction: "Place a preset straight-up selection and follow the wheel to its deterministic demo pocket.",
     selection: "STRAIGHT UP // 17",
     outcome: "17 // STRAIGHT HIT",
-    sceneLabel: "A European roulette demo wheel resolving to pocket 17",
+    sceneLabels: {
+      pending: "A European roulette demo wheel awaiting its preset spin",
+      revealed: "A European roulette demo wheel resolving to pocket 17",
+    },
     payoutLabel: "+35.00× net",
     netFactor: 35,
     seed: "DEMO-ROULETTE-C312",
@@ -156,7 +170,11 @@ const games: GameDefinition[] = [
     instruction: "Reveal a preset run of safe tiles, then cash out before the full fictional mine map appears.",
     selection: "3 MINES // 8 SAFE PICKS",
     outcome: "CASH OUT // SAFE",
-    sceneLabel: "A five by five demo Mines grid with eight safe tiles and three revealed mines",
+    sceneLabels: {
+      pending: "A five by five demo Mines grid with its preset map concealed",
+      revealed: "A five by five demo Mines grid showing eight preset safe tiles",
+      settled: "A five by five demo Mines grid with eight safe tiles and three revealed mines",
+    },
     payoutLabel: "+1.12× net",
     netFactor: 1.12,
     seed: "DEMO-MINES-D416",
@@ -174,7 +192,10 @@ const games: GameDefinition[] = [
     instruction: "Five preset picks meet a ten-number demo draw with four visible matches.",
     selection: "5 PICKS // CLASSIC RISK",
     outcome: "4 HITS // WIN",
-    sceneLabel: "A forty-number Keno demo board showing five picks and four matching draws",
+    sceneLabels: {
+      pending: "A forty-number Keno demo board awaiting its preset draw",
+      revealed: "A forty-number Keno demo board showing five picks and four matching draws",
+    },
     payoutLabel: "+2.00× net",
     netFactor: 2,
     seed: "DEMO-KENO-E520",
@@ -192,7 +213,10 @@ const games: GameDefinition[] = [
     instruction: "Commit a 2.00 times target and compare it with a preset 2.40 times result.",
     selection: "TARGET // 2.00×",
     outcome: "2.40× // CLEARED",
-    sceneLabel: "A Limbo demo result of 2.40 times clearing a 2.00 times target",
+    sceneLabels: {
+      pending: "A Limbo demo interface awaiting its preset multiplier",
+      revealed: "A Limbo demo result of 2.40 times clearing a 2.00 times target",
+    },
     payoutLabel: "+1.00× net",
     netFactor: 1,
     seed: "DEMO-LIMBO-F624",
@@ -210,7 +234,10 @@ const games: GameDefinition[] = [
     instruction: "Spin a fictional 3 by 3 original reel set with a fixed demo paytable and no licensed content.",
     selection: "3×3 REELS // FIXED TABLE",
     outcome: "TRIPLE SEVEN // WIN",
-    sceneLabel: "An original three by three slot demo resolving to three sevens on the center line",
+    sceneLabels: {
+      pending: "An original three by three slot demo with all reels concealed",
+      revealed: "An original three by three slot demo resolving to three sevens on the center line",
+    },
     payoutLabel: "+4.00× net",
     netFactor: 4,
     seed: "DEMO-SLOTS-G728",
@@ -228,7 +255,10 @@ const games: GameDefinition[] = [
     instruction: "Back the banker and watch both preset hands resolve without any player decision tree.",
     selection: "BANKER // STANDARD RULES",
     outcome: "BANKER 8 // WIN",
-    sceneLabel: "A demo Baccarat table where the banker wins eight to six",
+    sceneLabels: {
+      pending: "A demo Baccarat table with both preset hands face down",
+      revealed: "A demo Baccarat table where the banker wins eight to six",
+    },
     payoutLabel: "+0.95× net",
     netFactor: 0.95,
     seed: "DEMO-BACCARAT-H832",
@@ -246,7 +276,10 @@ const games: GameDefinition[] = [
     instruction: "A preset stand decision reveals a player 19 against the house 17.",
     selection: "STAND // PLAYER 19",
     outcome: "PLAYER 19 // WIN",
-    sceneLabel: "A demo Blackjack table where player 19 beats house 17",
+    sceneLabels: {
+      pending: "A demo Blackjack table with both preset hands face down",
+      revealed: "A demo Blackjack table where player 19 beats house 17",
+    },
     payoutLabel: "+1.00× net",
     netFactor: 1,
     seed: "DEMO-BLACKJACK-I936",
@@ -264,7 +297,10 @@ const games: GameDefinition[] = [
     instruction: "Commit a 2.00 times auto-exit before the round; the preset curve crashes later at 2.64 times.",
     selection: "AUTO EXIT // 2.00×",
     outcome: "EXIT 2.00× // CRASH 2.64×",
-    sceneLabel: "A Crash demo curve automatically exiting at 2.00 times before a 2.64 times crash",
+    sceneLabels: {
+      pending: "A Crash demo curve awaiting its preset run with a 2.00 times auto-exit set",
+      revealed: "A Crash demo curve automatically exiting at 2.00 times before a 2.64 times crash",
+    },
     payoutLabel: "+1.00× net",
     netFactor: 1,
     seed: "DEMO-CRASH-J040",
@@ -301,41 +337,46 @@ function DemoCardView({ card, hidden }: { card: DemoCard; hidden: boolean }) {
 
 function GameScene({ game, revealed, settled }: { game: GameDefinition; revealed: boolean; settled: boolean }) {
   const stateClass = `${revealed ? " is-revealed" : ""}${settled ? " is-settled" : ""}`;
+  const sceneLabel = settled && game.sceneLabels.settled
+    ? game.sceneLabels.settled
+    : revealed
+      ? game.sceneLabels.revealed
+      : game.sceneLabels.pending;
   if (game.scene === "plinko") {
-    return <div className={`game-scene scene-plinko${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="plinko-board">{Array.from({ length: 45 }, (_, index) => <span className="plinko-peg" key={index} />)}<i className="plinko-ball" /></div><div className="plinko-pockets"><span>0.40×</span><span>1.20×</span><strong>4.20×</strong><span>1.20×</span><span>0.40×</span></div></div>;
+    return <div className={`game-scene scene-plinko${stateClass}`} role="img" aria-label={sceneLabel}><div className="plinko-board">{Array.from({ length: 45 }, (_, index) => <span className="plinko-peg" key={index} />)}<i className="plinko-ball" /></div><div className="plinko-pockets"><span>0.40×</span><span>1.20×</span><strong>4.20×</strong><span>1.20×</span><span>0.40×</span></div></div>;
   }
   if (game.scene === "dice") {
-    return <div className={`game-scene scene-dice${stateClass}`} role="img" aria-label={game.sceneLabel}><span className="scene-kicker">PRESET ROLL</span><strong className="dice-number">{revealed ? "86" : "—"}</strong><div className="dice-track"><i style={{ left: revealed ? "86%" : "0%" }} /><span style={{ left: "71%" }}>TARGET 71</span></div></div>;
+    return <div className={`game-scene scene-dice${stateClass}`} role="img" aria-label={sceneLabel}><span className="scene-kicker">PRESET ROLL</span><strong className="dice-number">{revealed ? "86" : "—"}</strong><div className="dice-track"><i style={{ left: revealed ? "86%" : "0%" }} /><span style={{ left: "71%" }}>TARGET 71</span></div></div>;
   }
   if (game.scene === "roulette") {
     const pockets = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27];
-    return <div className={`game-scene scene-roulette${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="roulette-wheel">{pockets.map((pocket, index) => <span key={pocket} style={{ transform: `rotate(${index * 30}deg) translateY(-8.5rem)` }}>{pocket}</span>)}<i /><strong>{revealed ? "17" : "?"}</strong></div><small>EUROPEAN // SINGLE ZERO</small></div>;
+    return <div className={`game-scene scene-roulette${stateClass}`} role="img" aria-label={sceneLabel}><div className="roulette-wheel">{pockets.map((pocket, index) => <span key={pocket} style={{ transform: `rotate(${index * 30}deg) translateY(-8.5rem)` }}>{pocket}</span>)}<i /><strong>{revealed ? "17" : "?"}</strong></div><small>EUROPEAN // SINGLE ZERO</small></div>;
   }
   if (game.scene === "mines") {
     const safeTiles = new Set([0, 1, 2, 3, 4, 6, 7, 8]);
     const mines = new Set([10, 17, 24]);
-    return <div className={`game-scene scene-mines${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="mines-grid">{Array.from({ length: 25 }, (_, index) => <span className={`${revealed && safeTiles.has(index) ? "is-safe" : ""}${settled && mines.has(index) ? " is-mine" : ""}`} key={index}>{revealed && safeTiles.has(index) ? "✓" : settled && mines.has(index) ? "✦" : ""}</span>)}</div><small>{settled ? "FULL PRESET MAP REVEALED" : "8 SAFE PICKS // CASH OUT READY"}</small></div>;
+    return <div className={`game-scene scene-mines${stateClass}`} role="img" aria-label={sceneLabel}><div className="mines-grid">{Array.from({ length: 25 }, (_, index) => <span className={`${revealed && safeTiles.has(index) ? "is-safe" : ""}${settled && mines.has(index) ? " is-mine" : ""}`} key={index}>{revealed && safeTiles.has(index) ? "✓" : settled && mines.has(index) ? "✦" : ""}</span>)}</div><small>{settled ? "FULL PRESET MAP REVEALED" : "8 SAFE PICKS // CASH OUT READY"}</small></div>;
   }
   if (game.scene === "keno") {
     const picks = new Set([3, 7, 18, 28, 36]);
     const hits = new Set([3, 7, 18, 36]);
-    return <div className={`game-scene scene-keno${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="keno-grid">{Array.from({ length: 40 }, (_, index) => { const number = index + 1; return <span className={`${picks.has(number) ? "is-picked" : ""}${revealed && hits.has(number) ? " is-hit" : ""}`} key={number}>{number}</span>; })}</div><small>5 PICKS // {revealed ? "4 MATCHES" : "DRAW PENDING"}</small></div>;
+    return <div className={`game-scene scene-keno${stateClass}`} role="img" aria-label={sceneLabel}><div className="keno-grid">{Array.from({ length: 40 }, (_, index) => { const number = index + 1; return <span className={`${picks.has(number) ? "is-picked" : ""}${revealed && hits.has(number) ? " is-hit" : ""}`} key={number}>{number}</span>; })}</div><small>5 PICKS // {revealed ? "4 MATCHES" : "DRAW PENDING"}</small></div>;
   }
   if (game.scene === "limbo") {
-    return <div className={`game-scene scene-limbo${stateClass}`} role="img" aria-label={game.sceneLabel}><span className="scene-kicker">DEMO MULTIPLIER</span><strong>{revealed ? "2.40×" : "0.00×"}</strong><div><i style={{ width: revealed ? "80%" : "0%" }} /><span>TARGET 2.00×</span></div></div>;
+    return <div className={`game-scene scene-limbo${stateClass}`} role="img" aria-label={sceneLabel}><span className="scene-kicker">DEMO MULTIPLIER</span><strong>{revealed ? "2.40×" : "0.00×"}</strong><div><i style={{ width: revealed ? "80%" : "0%" }} /><span>TARGET 2.00×</span></div></div>;
   }
   if (game.scene === "slots") {
     const symbols = ["◆", "7", "★", "7", "7", "7", "●", "BAR", "◆"];
-    return <div className={`game-scene scene-slots${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="slot-machine"><span>IA ORIGINAL // FIXED DEMO TABLE</span><div>{symbols.map((symbol, index) => <i className={index >= 3 && index <= 5 ? "is-payline" : ""} key={`${symbol}-${index}`}>{revealed ? symbol : "IA"}</i>)}</div></div><small>NO LICENSED ART // NO VARIABLE PAYTABLE</small></div>;
+    return <div className={`game-scene scene-slots${stateClass}`} role="img" aria-label={sceneLabel}><div className="slot-machine"><span>IA ORIGINAL // FIXED DEMO TABLE</span><div>{symbols.map((symbol, index) => <i className={index >= 3 && index <= 5 ? "is-payline" : ""} key={`${symbol}-${index}`}>{revealed ? symbol : "IA"}</i>)}</div></div><small>NO LICENSED ART // NO VARIABLE PAYTABLE</small></div>;
   }
   if (game.scene === "baccarat" || game.scene === "blackjack") {
     const player = game.scene === "baccarat" ? baccaratPlayer : blackjackPlayer;
     const house = game.scene === "baccarat" ? baccaratBanker : blackjackHouse;
     const playerScore = game.scene === "baccarat" ? 6 : 19;
     const houseScore = game.scene === "baccarat" ? 8 : 17;
-    return <div className={`game-scene scene-cards${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="demo-hand"><span>{game.scene === "baccarat" ? "BANKER" : "HOUSE"} // SIMULATED</span><div>{house.map((card) => <DemoCardView key={`${card.rank}-${card.suit}`} card={card} hidden={!revealed} />)}</div><strong>{revealed ? houseScore : "—"}</strong></div><div className="demo-table-mark" aria-hidden="true"><span>IA</span><i>{game.name.toUpperCase()}</i></div><div className="demo-hand"><span>{game.scene === "baccarat" ? "PLAYER" : game.participant.toUpperCase()} // SIMULATED</span><div>{player.map((card) => <DemoCardView key={`${card.rank}-${card.suit}`} card={card} hidden={!revealed} />)}</div><strong>{revealed ? playerScore : "—"}</strong></div></div>;
+    return <div className={`game-scene scene-cards${stateClass}`} role="img" aria-label={sceneLabel}><div className="demo-hand"><span>{game.scene === "baccarat" ? "BANKER" : "HOUSE"} // SIMULATED</span><div>{house.map((card) => <DemoCardView key={`${card.rank}-${card.suit}`} card={card} hidden={!revealed} />)}</div><strong>{revealed ? houseScore : "—"}</strong></div><div className="demo-table-mark" aria-hidden="true"><span>IA</span><i>{game.name.toUpperCase()}</i></div><div className="demo-hand"><span>{game.scene === "baccarat" ? "PLAYER" : game.participant.toUpperCase()} // SIMULATED</span><div>{player.map((card) => <DemoCardView key={`${card.rank}-${card.suit}`} card={card} hidden={!revealed} />)}</div><strong>{revealed ? playerScore : "—"}</strong></div></div>;
   }
-  return <div className={`game-scene scene-crash${stateClass}`} role="img" aria-label={game.sceneLabel}><div className="crash-chart"><span className="crash-grid" /><i className="crash-line" /><b className="crash-target">AUTO 2.00×</b><strong>{revealed ? "2.64×" : "1.00×"}</strong></div><small>AUTO TARGET LOCKED BEFORE PRESET REVEAL</small></div>;
+  return <div className={`game-scene scene-crash${stateClass}`} role="img" aria-label={sceneLabel}><div className="crash-chart"><span className="crash-grid" /><i className="crash-line" /><b className="crash-target">AUTO 2.00×</b><strong>{revealed ? "2.64×" : "1.00×"}</strong></div><small>AUTO TARGET LOCKED BEFORE PRESET REVEAL</small></div>;
 }
 
 export function CasinoDemo() {
@@ -456,8 +497,8 @@ export function CasinoDemo() {
       </header>
 
       <section className="night-crew" aria-labelledby="night-crew-title">
-        <div className="night-crew-heading"><p>FICTIONAL ADULT HOSTS // HIGH-GLOSS RUNWAY COUTURE</p><h2 id="night-crew-title">Meet the flight deck.</h2><span>Linked hands. Shared launch cues. One magnetic four-person constellation.</span></div>
-        <div className="host-roster">{hosts.map((item, index) => <article className={`host-card host-${item.tone}`} data-host-id={item.id} key={item.id}><div className="host-card-visual"><span>{item.callSign}</span><img src={campaignArt[item.portraitArt]} alt="" loading="lazy" decoding="async" /><i aria-hidden="true" /></div><small>0{index + 1} // {item.role.toUpperCase()}</small><h3>{item.name}</h3><p>{item.signal}</p><strong>PERMANENT FICTIONAL ADULT CREW // {item.signatureCue.toUpperCase()}</strong></article>)}</div>
+        <div className="night-crew-heading"><p>FICTIONAL ADULT HOSTS // OPAQUE LATEX + LINED LACE COUTURE</p><h2 id="night-crew-title">Meet the flight deck.</h2><span>Linked hands. Shared launch cues. One magnetic four-person constellation.</span></div>
+        <div className="host-roster">{hosts.map((item, index) => <article className={`host-card host-${item.tone}`} data-host-id={item.id} key={item.id}><div className="host-card-visual"><span>{item.callSign}</span><img src={campaignArt[item.portraitArt]} alt={item.portraitDescription} loading="lazy" decoding="async" /><i aria-hidden="true" /></div><small>0{index + 1} // {item.role.toUpperCase()}</small><h3>{item.name}</h3><p>{item.signal}</p><strong>PERMANENT FICTIONAL ADULT CREW // {item.signatureCue.toUpperCase()}</strong></article>)}</div>
         <article className="paws-companion"><div><p>PAWS // GOLDEN COPILOT</p><h3>Chaos has four favorite humans.</h3><span>PAWS pounces on crystals, inspects consoles, and dashes through the crew. Sometimes she steals the scene; once, she leaves the four-person finale quiet.</span></div><figure><img src={campaignArt.signalFourRelay} alt="PAWS, a tiny golden fictional kitten, dashing between Radiance, Ellie, AI ECE, and Alia as the four adult crew members form a linked relay" loading="lazy" decoding="async" /><figcaption>DETERMINISTIC COMIC CUE // NEVER CHANGES A DEMO RESULT</figcaption></figure></article>
       </section>
 
@@ -472,8 +513,8 @@ export function CasinoDemo() {
             <figcaption><strong>01 // ORBITAL LAUNCH FILM</strong><span>Gentle pan-and-zoom motion design from a generated still. Not model-generated live-action video.</span></figcaption>
           </figure>
           <figure className="cinema-frame cinema-frame-anime">
-            <div className="cinema-frame-media"><img src={campaignArt.signalFourTension} alt="Radiance, Ellie, AI ECE, and Alia, four fictional adult crew members, trading playful glances in a linked relay while PAWS scouts the signal line" loading="lazy" decoding="async" /><span className="cinema-speedline" aria-hidden="true" /></div>
-            <figcaption><strong>02 // SIGNAL-CIPHER TRANSMISSION</strong><span>Mutual glances, familiar timing, and PAWS crossing the signal relay.</span></figcaption>
+            <div className="cinema-frame-media"><img src={campaignArt.signalFourTension} alt="Radiance holds hands with Ellie while AI ECE holds hands with Alia inside an orbital signal gallery; Ellie carries a sapphire prism and PAWS scouts the foreground" loading="lazy" decoding="async" /><span className="cinema-speedline" aria-hidden="true" /></div>
+            <figcaption><strong>02 // SIGNAL-CIPHER TRANSMISSION</strong><span>Two pairwise handholds, a sapphire prism, and PAWS scouting the orbital signal gallery.</span></figcaption>
           </figure>
         </div>
       </section>
@@ -539,7 +580,7 @@ export function CasinoDemo() {
 
       <section className="demo-explainer" aria-labelledby="explainer-title"><p>HOW EVERY ROOM READS</p><h2 id="explainer-title">Result first.<br />Animation second.</h2><div><article><span>01</span><h3>Choose</h3><p>Select a room, a fixed demo rule, and simulated credits. No identity, account, deposit, or wallet exists.</p></article><article><span>02</span><h3>Observe</h3><p>The interface exposes stage, commitment, reveal, and settlement instead of hiding the conceptual flow.</p></article><article><span>03</span><h3>Replay</h3><p>The recorded preset result drives each visual. A fictional receipt explains the round but proves no real system.</p></article></div></section>
 
-      <footer className="demo-footer"><div><strong>STARSHIP NIGHTFLIGHT // TEN-GAME INTERACTIVE DEMO</strong><span>Dark-techno nightlife presentation, opaque high-gloss runway couture on fictional adult hosts, and an opt-in low-frequency light pulse. Front-end mock only: no real gameplay, account, deposit, withdrawal, wallet, smart contract, oracle, payment, or network operation.</span></div><a href="/future/casino">RETURN TO INACTIVE PREVIEW →</a></footer>
+      <footer className="demo-footer"><div><strong>STARSHIP NIGHTFLIGHT // TEN-GAME INTERACTIVE DEMO</strong><span>Dark-techno nightlife presentation, opaque latex-and-lined-lace runway couture on fictional adult hosts, and an opt-in low-frequency light pulse. Front-end mock only: no real gameplay, account, deposit, withdrawal, wallet, smart contract, oracle, payment, or network operation.</span></div><a href="/future/casino">RETURN TO INACTIVE PREVIEW →</a></footer>
     </main>
   );
 }

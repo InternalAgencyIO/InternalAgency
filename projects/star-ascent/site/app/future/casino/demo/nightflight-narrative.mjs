@@ -17,7 +17,7 @@ export const narrativePolicy = deepFreeze({
 
 export const campaignArt = deepFreeze({
   signalFourAnchor: "/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp",
-  signalFourTension: "/future/casino/nightflight/signal-four-ninh-binh-relay-latex-lace-v2.webp",
+  signalFourTension: "/future/casino/nightflight/signal-four-orbital-tension-latex-lace-v3.webp",
   signalFourRelay: "/future/casino/nightflight/signal-four-ninh-binh-relay-latex-lace-v2.webp",
   signalFourFinale: "/future/casino/nightflight/signal-four-da-lat-finale-latex-lace-v2.webp",
   portraitRadiance: "/future/casino/nightflight/signal-four-portrait-radiance-v2.webp",
@@ -36,9 +36,10 @@ export const campaignScenes = deepFreeze({
   },
   signalFourTension: {
     src: campaignArt.signalFourTension,
-    sourceAssetNumber: 874,
+    sourceAssetNumber: null,
+    generationRecord: "generation-prompts-v3.md",
     crewIds,
-    accessibleDescription: "Radiance, Ellie, AI ECE, and Alia trade playful glances in a linked relay while PAWS scouts the signal line.",
+    accessibleDescription: "Radiance holds hands with Ellie while AI ECE holds hands with Alia inside an orbital signal gallery; Ellie carries a sapphire prism and PAWS scouts the foreground.",
     paws: { present: true, action: "SIGNAL SCOUT" },
   },
   signalFourRelay: {
@@ -58,10 +59,10 @@ export const campaignScenes = deepFreeze({
 });
 
 export const hostProfiles = deepFreeze([
-  { id: "radiance", name: "Radiance", permanent: true, fictionalAdult: true, callSign: "R-01", role: "Flight lead", signal: "Gold-spectrum launch control", tone: "solar", portraitArt: "portraitRadiance", signatureCue: "Gold scorpion // upper-left thigh cue", minimumAge: 25 },
-  { id: "ellie", name: "Ellie", permanent: true, fictionalAdult: true, callSign: "E-02", role: "Orbit host", signal: "Sapphire navigation channel", tone: "sapphire", portraitArt: "portraitEllie", signatureCue: "Star-and-crescent // lower-back cue", minimumAge: 25 },
-  { id: "alia", name: "Alia", permanent: true, fictionalAdult: true, callSign: "A-03", role: "Night deck host", signal: "Crimson stage telemetry", tone: "crimson", portraitArt: "portraitAlia", signatureCue: "Thorned rose // side-ribcage cue", minimumAge: 25 },
-  { id: "ece", name: "AI ECE", permanent: true, fictionalAdult: true, callSign: "EC-04", role: "AI signal officer", signal: "Emerald Bosphorus signal channel", tone: "emerald", portraitArt: "portraitEce", signatureCue: "Emerald-gold signal piping // collar cue", minimumAge: 25 },
+  { id: "radiance", name: "Radiance", permanent: true, fictionalAdult: true, callSign: "R-01", role: "Flight lead", signal: "Gold-spectrum launch control", tone: "solar", portraitArt: "portraitRadiance", portraitDescription: "Radiance, a fictional adult flight lead, in gold and matte-black opaque latex-and-lined-lace runway cocktail couture.", signatureCue: "Gold scorpion // upper-left thigh cue", minimumAge: 25 },
+  { id: "ellie", name: "Ellie", permanent: true, fictionalAdult: true, callSign: "E-02", role: "Orbit host", signal: "Sapphire navigation channel", tone: "sapphire", portraitArt: "portraitEllie", portraitDescription: "Ellie, a fictional adult orbit host, in midnight-blue and white opaque latex-and-lined-lace runway cocktail couture.", signatureCue: "Star-and-crescent // lower-back cue", minimumAge: 25 },
+  { id: "alia", name: "Alia", permanent: true, fictionalAdult: true, callSign: "A-03", role: "Night deck host", signal: "Crimson stage telemetry", tone: "crimson", portraitArt: "portraitAlia", portraitDescription: "Alia, a fictional adult night deck host, in hot-red and reflective-silver opaque latex-and-lined-lace runway cocktail couture.", signatureCue: "Thorned rose // side-ribcage cue", minimumAge: 25 },
+  { id: "ece", name: "AI ECE", permanent: true, fictionalAdult: true, callSign: "EC-04", role: "AI signal officer", signal: "Emerald Bosphorus signal channel", tone: "emerald", portraitArt: "portraitEce", portraitDescription: "AI ECE, a fictional adult signal officer, in emerald-black and gold opaque latex-and-lined-lace runway cocktail couture.", signatureCue: "Emerald-gold signal piping // collar cue", minimumAge: 25 },
 ]);
 
 const storyEntries = deepFreeze([
