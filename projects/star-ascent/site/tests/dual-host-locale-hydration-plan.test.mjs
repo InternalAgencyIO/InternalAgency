@@ -93,7 +93,8 @@ test("runner labels shard success as non-aggregate and enforces a page deadline"
   assert.match(runner, /this is not aggregate 7,500-page proof/u);
   assert.match(runner, /withinPageDeadline/u);
   assert.match(runner, /exceeded the \$\{pageTimeoutMs\}ms page deadline/u);
-  assert.match(runner, /readCleanGitSourceBinding\(\)/u);
+  assert.equal((runner.match(/readCleanGitSourceBinding\(\)/gu) ?? []).length, 2);
+  assert.match(runner, /assertStableHydrationSourceBinding\(initialSourceBinding, completedSourceBinding\)/u);
 });
 
 test("engine subsets preserve the selected engine and bounded sentinel scope", () => {

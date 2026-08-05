@@ -3,6 +3,7 @@ import test from "node:test";
 
 import { createHydrationPlans } from "../scripts/dual-host-locale-hydration-plan.mjs";
 import {
+  assertStableHydrationSourceBinding,
   createHydrationShardRecord,
   decodeHydrationShardLog,
   hydrationAggregateSchema,
@@ -80,6 +81,26 @@ function reconcile(candidateRecords = records, candidateCurrentSourceBinding = c
     sourceBindingResolver,
   });
 }
+
+test("shard emission fails closed when its clean source binding changes during execution", () => {
+  assert.deepEqual(
+    assertStableHydrationSourceBinding(evidenceSourceBinding, { ...evidenceSourceBinding }),
+    evidenceSourceBinding,
+  );
+  for (const changedField of ["commit", "tree", "scopeTree"]) {
+    assert.throws(
+      () => assertStableHydrationSourceBinding(evidenceSourceBinding, {
+        ...evidenceSourceBinding,
+        [changedField]: "0".repeat(40),
+      }),
+      /changed during shard execution/,
+    );
+  }
+  assert.throws(
+    () => assertStableHydrationSourceBinding(evidenceSourceBinding, { ...evidenceSourceBinding, scopePath: "other" }),
+    /Completed source binding is invalid/,
+  );
+});
 
 test("shard records remain explicitly partial and bind one exact 150-page assignment", () => {
   const record = records[0];

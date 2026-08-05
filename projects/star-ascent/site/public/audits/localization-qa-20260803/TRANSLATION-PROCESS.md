@@ -182,10 +182,15 @@ Each page also has a 45-second total deadline by default; the bounded override
 A successful shard is labeled `SHARD PASS` and explicitly says it is not
 aggregate proof. Set `I18N_HYDRATION_EMIT_SHARD_RECORD=1` only on a clean,
 committed worktree to append one machine-readable record to that shard's log.
-The v2 record retains its exact execution commit and whole-repository tree,
-and also binds the fixed `projects/star-ascent/site` subtree tree, catalog,
-assigned 150-job digest, and full 7,500-job digest while keeping aggregate
-completion false. After all 50 logs exist, run
+The recorder reads the clean source binding before browser execution and again
+immediately before emission. A dirty worktree or a changed commit, repository
+tree, or fixed `projects/star-ascent/site` subtree aborts record emission. The
+v2 record retains that stable exact execution commit and whole-repository tree,
+and also binds the fixed site subtree tree, catalog, assigned 150-job digest,
+and full 7,500-job digest while keeping aggregate completion false. This
+two-snapshot contract does not detect transient changes that are fully reverted
+to the identical clean binding before the completion check. After all 50 logs
+exist, run
 `node scripts/reconcile-dual-host-hydration-shards.mjs` with the 50 log paths.
 The reconciler accepts UTF-8 and BOM-marked UTF-16 logs, requires every index
 exactly once, recomputes every assignment from the checked-out source, and

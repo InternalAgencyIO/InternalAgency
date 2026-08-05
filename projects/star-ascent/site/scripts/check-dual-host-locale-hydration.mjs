@@ -8,6 +8,7 @@ import {
   hydrationOptionsFromEnvironment,
 } from "./dual-host-locale-hydration-plan.mjs";
 import {
+  assertStableHydrationSourceBinding,
   createHydrationShardRecord,
   hydrationShardRecordPrefix,
   readCleanGitSourceBinding,
@@ -29,7 +30,7 @@ const enginePlans = createHydrationPlans({ locales, routes, ...options });
 const fullProfilePlans = emitShardRecord
   ? createHydrationPlans({ locales, routes, ...options, shardIndex: null })
   : null;
-const sourceBinding = emitShardRecord ? readCleanGitSourceBinding() : null;
+const initialSourceBinding = emitShardRecord ? readCleanGitSourceBinding() : null;
 
 const port = await new Promise((resolvePort, reject) => {
   const reservation = createServer();
@@ -318,12 +319,14 @@ if (failures.length > 0 || incompleteCount > 0) {
         `for shard ${shardIndex}/50 (${coverageSummary}); this is not aggregate 7,500-page proof.`,
     );
     if (emitShardRecord) {
+      const completedSourceBinding = readCleanGitSourceBinding();
+      assertStableHydrationSourceBinding(initialSourceBinding, completedSourceBinding);
       const record = createHydrationShardRecord({
         shardPlans: enginePlans,
         fullProfilePlans,
         shardIndex,
         catalogSha256: contract.catalogSha256,
-        sourceBinding,
+        sourceBinding: completedSourceBinding,
       });
       console.log(`${hydrationShardRecordPrefix}${JSON.stringify(record)}`);
     }

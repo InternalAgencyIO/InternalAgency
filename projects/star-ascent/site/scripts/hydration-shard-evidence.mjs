@@ -38,6 +38,16 @@ function assertSourceBinding(sourceBinding, label = "Source binding") {
   );
 }
 
+export function assertStableHydrationSourceBinding(initialSourceBinding, completedSourceBinding) {
+  assertSourceBinding(initialSourceBinding, "Initial source binding");
+  assertSourceBinding(completedSourceBinding, "Completed source binding");
+  assert(
+    JSON.stringify(initialSourceBinding) === JSON.stringify(completedSourceBinding),
+    "Hydration source binding changed during shard execution",
+  );
+  return completedSourceBinding;
+}
+
 export function readGitSourceBindingAtCommit(commit, cwd = process.cwd()) {
   assert(commit === "HEAD" || /^[0-9a-f]{40}$/u.test(commit), "Git source commit is invalid");
   const git = (args) => execFileSync("git", args, { cwd, encoding: "utf8", windowsHide: true }).trim();
