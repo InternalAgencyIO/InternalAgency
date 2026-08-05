@@ -10,9 +10,12 @@ source paths or reference sets and SHA-256 digests are recorded in
 The normalized generation prompts and output digests are published in
 `generation-prompts-v1.md`.
 
-The implementation uses a deterministic lookup table keyed by game ID. It
-selects the host, campaign image, tattoo cue, trio-interaction cue, and PAWS
-action without `Math.random`, a network request, a wallet, or a contract.
+The implementation uses the immutable, executable story manifest at
+`app/future/casino/demo/nightflight-narrative.mjs`, keyed by game ID. It
+selects the lead host, campaign image, reciprocal pair-or-trio cue, and PAWS
+action without `Math.random`, a network request, a wallet, or a contract. The
+manifest deliberately covers every edge of the Radiance-Ellie-Alia triangle
+and keeps lead focus balanced 4/3/3 across the ten rooms.
 Rejected generation candidates are intentionally absent. Every generated
 character is specified as a fictional adult age 25+, fully clothed, and
 non-explicit. The apparent campaign-film motion is CSS pan, zoom, flare, and

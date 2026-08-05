@@ -6,14 +6,16 @@ const root = new URL("../", import.meta.url);
 const read = (path) => readFile(new URL(path, root), "utf8");
 
 test("Casino DLC demo is explicit, English-only, deterministic, and transaction-free", async () => {
-  const [page, component, preview, sitemap, worker] = await Promise.all([
+  const [page, component, narrative, narrativeComponent, preview, sitemap, worker] = await Promise.all([
     read("app/future/casino/demo/page.tsx"),
     read("app/future/casino/demo/CasinoDemo.tsx"),
+    read("app/future/casino/demo/nightflight-narrative.mjs"),
+    read("app/future/casino/demo/NightflightNarrative.tsx"),
     read("app/future/casino/page.tsx"),
     read("app/sitemap.ts"),
     read("worker/index.ts"),
   ]);
-  const source = `${page}\n${component}`;
+  const source = `${page}\n${component}\n${narrative}\n${narrativeComponent}`;
   assert.match(page, /robots: "noindex, nofollow, noarchive"/);
   assert.match(page, /languages:[\s\S]*en: "https:\/\/internalagency\.io\/future\/casino\/demo"[\s\S]*"x-default": "https:\/\/internalagency\.io\/future\/casino\/demo"/);
   assert.match(component, /data-no-translate/);
@@ -44,6 +46,8 @@ test("Casino DLC demo is explicit, English-only, deterministic, and transaction-
     assert.match(component, new RegExp(`scene: "${game}"`));
   }
   assert.match(component, /data-testid=\{`game-\$\{item\.id\}`\}/);
+  assert.match(component, /storyForGame\(game\.id\)/);
+  assert.match(component, /<NightflightNarrative key=\{roll\.id\}/);
   assert.match(component, /24\.4B quarterly UK-regulated spins/);
   assert.match(component, /145\.9M operator-reported 2025 plays/);
   assert.match(component, /AUTO TARGET LOCKED BEFORE PRESET REVEAL/);
@@ -60,8 +64,9 @@ test("Casino DLC demo is explicit, English-only, deterministic, and transaction-
 });
 
 test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-motion support", async () => {
-  const [component, css] = await Promise.all([
+  const [component, narrativeComponent, css] = await Promise.all([
     read("app/future/casino/demo/CasinoDemo.tsx"),
+    read("app/future/casino/demo/NightflightNarrative.tsx"),
     read("app/future/casino/demo/casino-demo.css"),
   ]);
   assert.match(component, /href="#game-lobby">Skip to the ten-game lobby/);
@@ -82,6 +87,10 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.match(component, /CINEMA LOOP \{cinemaActive \? "ON" : "PAUSED"\}/);
   assert.match(component, /scrollIntoView\(\{ behavior: reduceMotion \? "auto" : "smooth", block: "start" \}\)/);
   assert.match(component, /#demo-table-title/);
+  assert.match(component, /aria-describedby="nightflight-narrative-summary"/);
+  assert.match(narrativeComponent, /data-testid="nightflight-narrative"/);
+  assert.match(narrativeComponent, /data-story-id=\{story\.id\}/);
+  assert.match(narrativeComponent, /data-participants=\{story\.participants\.join\("\|"\)\}/);
   assert.match(component, /OPEN MODULE ↓/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /\.casino-demo \.demo-skip\{[^}]*clip-path:inset\(50%\)/);
@@ -98,12 +107,16 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.match(css, /@keyframes anime-flight/);
   assert.match(css, /@keyframes host-fashion-reveal/);
   assert.match(css, /@keyframes campaign-fashion-reveal/);
+  assert.match(css, /@keyframes triangle-story-reveal/);
+  assert.match(css, /prefers-reduced-motion:reduce[\s\S]*\.demo-triangle-narrative/);
   assert.match(css, /prefers-reduced-motion:reduce[\s\S]*\.cinema-frame img/);
 });
 
 test("Nightflight campaign art is source-bound, deterministic, and traceable", async () => {
-  const [component, css, provenance] = await Promise.all([
+  const [component, narrative, narrativeComponent, css, provenance] = await Promise.all([
     read("app/future/casino/demo/CasinoDemo.tsx"),
+    read("app/future/casino/demo/nightflight-narrative.mjs"),
+    read("app/future/casino/demo/NightflightNarrative.tsx"),
     read("app/future/casino/demo/casino-demo.css"),
     read("public/future/casino/nightflight/asset-provenance.json").then(JSON.parse),
   ]);
@@ -117,7 +130,7 @@ test("Nightflight campaign art is source-bound, deterministic, and traceable", a
   for (const asset of provenance.assets) {
     assert.match(asset.publicPath, /^\/future\/casino\/nightflight\/nightflight-[a-z0-9-]+\.png$/);
     assert.match(asset.sha256, /^[a-f0-9]{64}$/);
-    assert.match(component, new RegExp(asset.publicPath.replaceAll("/", "\\/")));
+    assert.match(`${component}\n${narrative}`, new RegExp(asset.publicPath.replaceAll("/", "\\/")));
   }
   const reusedAssets = provenance.assets.filter((asset) => asset.sourcePath);
   const generatedAssets = provenance.assets.filter((asset) => asset.sourceReferences);
@@ -128,10 +141,12 @@ test("Nightflight campaign art is source-bound, deterministic, and traceable", a
     assert.equal(asset.sourceReferences.length, 3);
     assert.match(asset.promptFamily, /photorealistic-natural|illustration-story/);
   }
-  assert.match(component, /const nightflightRolls: Record<string, NightflightRoll> = \{/);
-  assert.equal((component.match(/pawsAction: "/g) ?? []).length, 10);
-  assert.equal((component.match(/tattoo: "/g) ?? []).length, 10);
-  assert.equal((component.match(/interaction: "/g) ?? []).length, 10);
+  assert.match(component, /storyForGame/);
+  assert.equal((narrative.match(/pawsAction: "/g) ?? []).length, 10);
+  assert.equal((narrative.match(/interaction: "/g) ?? []).length, 10);
+  assert.equal((narrative.match(/tattoo: "/g) ?? []).length, 3);
+  assert.match(narrativeComponent, /TRIANGLE HEARTBEAT/);
+  assert.match(provenance.process.determinism, /nightflight-narrative\.mjs/);
   assert.match(component, /PAWS \/\/ GOLDEN COPILOT/);
   assert.match(component, /THE NIGHTFLIGHT TRIANGLE/);
   assert.match(component, /SOURCE-BOUND MOTION DESIGN/);

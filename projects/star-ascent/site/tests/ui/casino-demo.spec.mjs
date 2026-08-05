@@ -1,8 +1,9 @@
 import { expect, test } from "@playwright/test";
 import axe from "axe-core";
+import { hostProfiles, storyByGame } from "../../app/future/casino/demo/nightflight-narrative.mjs";
 
 test("Casino DLC demo is labeled, contained, accessible, deterministic, and locally interactive", async ({ page }) => {
-  test.setTimeout(90_000);
+  test.setTimeout(120_000);
   const runtimeErrors = [];
   const roundRequests = [];
   let roundRunning = false;
@@ -50,6 +51,7 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await expect(page.locator(".dossier-dock")).toBeHidden();
   await expect(page.locator(".locale-switcher")).toBeHidden();
   await expect(page.locator(".game-selector button")).toHaveCount(10);
+  await expect(page.locator(".host-roster .host-card h3")).toHaveText(["Radiance", "Ellie", "Alia"]);
   const skipLink = page.getByRole("link", { name: "Skip to the ten-game lobby" });
   await expect(skipLink).toHaveCSS("position", "fixed");
   await expect(skipLink).toHaveCSS("clip-path", "inset(50%)");
@@ -69,9 +71,14 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
 
   const crossEngineGameIds = ["plinko", "slots", "crash"];
   for (const gameId of crossEngineGameIds) {
+    const story = storyByGame[gameId];
     await page.getByTestId(`game-${gameId}`).click();
     await expect(page.getByTestId(`game-${gameId}`)).toHaveAttribute("aria-pressed", "true");
     await expect(page.getByTestId("active-game-scene")).toHaveClass(new RegExp(`game-${gameId}`));
+    await expect(page.getByTestId("nightflight-narrative")).toBeVisible();
+    await expect(page.getByTestId("nightflight-narrative")).toHaveAttribute("data-story-id", story.id);
+    await expect(page.getByTestId("nightflight-narrative")).toHaveAttribute("data-lead-host", story.leadHost);
+    await expect(page.getByTestId("nightflight-narrative")).toContainText(story.interaction);
     await expect(page.locator("#demo-table-title")).toBeFocused();
     await expect(page.locator("#demo-table")).toBeInViewport();
   }
@@ -142,7 +149,17 @@ test("all ten Casino DLC rooms complete their deterministic local walkthrough", 
   await page.waitForLoadState("networkidle");
 
   for (const [gameId, outcome, receipt] of games) {
+    const story = storyByGame[gameId];
+    const host = hostProfiles.find((candidate) => candidate.name === story.leadHost);
     await page.getByTestId(`game-${gameId}`).click();
+    const narrative = page.getByTestId("nightflight-narrative");
+    await expect(narrative).toHaveAttribute("data-story-id", story.id);
+    await expect(narrative).toHaveAttribute("data-game-id", gameId);
+    await expect(narrative).toHaveAttribute("data-lead-host", story.leadHost);
+    await expect(narrative).toHaveAttribute("data-participants", story.participants.join("|"));
+    await expect(narrative).toContainText(story.interaction);
+    await expect(narrative).toContainText(story.pawsAction);
+    await expect(narrative).toContainText(host.tattoo);
     running = true;
     await page.getByRole("button", { name: new RegExp(`RUN ${gameId === "slots" ? "ORIGINAL SLOTS" : gameId.toUpperCase()} DEMO`) }).click();
     await expect(page.getByTestId("demo-receipt-id")).toHaveText(receipt);
@@ -163,12 +180,16 @@ test("Casino DLC demo honors reduced-motion preferences", async ({ page }, testI
   await expect(lightControl).toBeEnabled();
   await lightControl.click();
   await expect(page.locator("main.casino-demo")).toHaveClass(/is-pulse-on/);
+  await page.getByTestId("game-slots").click();
   const motion = await page.evaluate(() => ({
     preference: matchMedia("(prefers-reduced-motion: reduce)").matches,
     orbitDuration: getComputedStyle(document.querySelector(".orbit-one")).animationDuration,
     resultTransition: getComputedStyle(document.querySelector(".demo-result")).transitionDuration,
     lightAnimation: getComputedStyle(document.querySelector(".demo-light-wash")).animationName,
     lightOpacity: getComputedStyle(document.querySelector(".demo-light-wash")).opacity,
+    triangleAnimation: getComputedStyle(document.querySelector(".demo-triangle-narrative")).animationName,
+    triangleTransition: getComputedStyle(document.querySelector(".demo-triangle-narrative")).transitionDuration,
+    triangleTransform: getComputedStyle(document.querySelector(".demo-triangle-narrative")).transform,
   }));
-  expect(motion).toEqual({ preference: true, orbitDuration: "1e-05s", resultTransition: "1e-05s", lightAnimation: "none", lightOpacity: "0" });
+  expect(motion).toEqual({ preference: true, orbitDuration: "1e-05s", resultTransition: "1e-05s", lightAnimation: "none", lightOpacity: "0", triangleAnimation: "none", triangleTransition: "0s", triangleTransform: "none" });
 });
