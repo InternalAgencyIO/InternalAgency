@@ -64,3 +64,10 @@
 - Banaue accepted Ellie's slim cobalt-and-gold geometric tailoring overlay while preserving the whispering trio, complete footwear, terraces, and PAWS's active console inspection.
 - Alia's distinct gala hairstyle remains visibly satisfied at Banaue and was reconciled without a redundant edit.
 - Both accepted images retain exactly three clean adult faces, one tiny richly golden two-month-old PAWS, complete anatomy, secure opaque couture, recognizable locations and all six shoes.
+
+## Seventh detail pass
+
+- Vigan accepted exactly two matching sculptural gold collar closures, one on Ellie's blue jacket and one on Alia's red jacket, without adding capes or changing either silhouette.
+- Banaue accepted Alia's stored mission-whisper hand link: her free hand now interlaces with Ellie's at waist height while the opposite shoulder connection remains intact.
+- Banaue's playful side-eye and three-profile jewelry line remain visibly satisfied and were reconciled without redundant edits.
+- Both accepted images retain exactly three clean adult faces, one tiny richly golden two-month-old PAWS, complete anatomy, secure opaque couture, recognizable locations and all six shoes.
