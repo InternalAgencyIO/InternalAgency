@@ -78,3 +78,29 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.match(css, /nightlife-pulse 1\.6s ease-in-out infinite/);
   assert.match(css, /\.casino-demo\.is-pulse-on \.demo-light-wash\{animation:none!important;opacity:0\}/);
 });
+
+test("Nightflight campaign art is source-bound, deterministic, and traceable", async () => {
+  const [component, css, provenance] = await Promise.all([
+    read("app/future/casino/demo/CasinoDemo.tsx"),
+    read("app/future/casino/demo/casino-demo.css"),
+    read("public/future/casino/nightflight/asset-provenance.json").then(JSON.parse),
+  ]);
+  assert.equal(provenance.licenseScope.metadata, "CC0-1.0");
+  assert.equal(provenance.process.mode, "source-bound-reuse");
+  assert.equal(provenance.assets.length, 3);
+  assert.equal(new Set(provenance.assets.map((asset) => asset.sha256)).size, 3);
+  for (const asset of provenance.assets) {
+    assert.match(asset.publicPath, /^\/future\/casino\/nightflight\/nightflight-[a-z]+\.png$/);
+    assert.match(asset.sourcePath, /^assets\/lore\/starlight-era\/world-195x4-live-build\/batch-211-philippines\//);
+    assert.match(asset.sha256, /^[a-f0-9]{64}$/);
+    assert.match(component, new RegExp(asset.publicPath.replaceAll("/", "\\/")));
+  }
+  assert.match(component, /const nightflightRolls: Record<string, NightflightRoll> = \{/);
+  assert.equal((component.match(/pawsAction: "/g) ?? []).length, 10);
+  assert.equal((component.match(/tattoo: "/g) ?? []).length, 10);
+  assert.equal((component.match(/interaction: "/g) ?? []).length, 10);
+  assert.match(component, /PAWS \/\/ GOLDEN COPILOT/);
+  assert.match(component, /THE NIGHTFLIGHT TRIANGLE/);
+  assert.match(css, /@keyframes paws-copilot/);
+  assert.match(css, /prefers-reduced-motion:reduce[\s\S]*\.paws-companion img/);
+});

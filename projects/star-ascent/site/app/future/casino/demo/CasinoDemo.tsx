@@ -44,6 +44,23 @@ type HostDefinition = {
   role: string;
   signal: string;
   tone: "solar" | "sapphire" | "crimson";
+  imagePosition: string;
+};
+
+type CampaignArt = "gala" | "runway" | "constellation";
+
+type NightflightRoll = {
+  host: HostDefinition["name"];
+  art: CampaignArt;
+  tattoo: string;
+  interaction: string;
+  pawsAction: string;
+};
+
+const campaignArt: Record<CampaignArt, string> = {
+  gala: "/future/casino/nightflight/nightflight-gala.png",
+  runway: "/future/casino/nightflight/nightflight-runway.png",
+  constellation: "/future/casino/nightflight/nightflight-constellation.png",
 };
 
 const games: GameDefinition[] = [
@@ -230,10 +247,23 @@ const games: GameDefinition[] = [
 ];
 
 const hosts: HostDefinition[] = [
-  { name: "Radiance", callSign: "R-01", role: "Flight lead", signal: "Gold-spectrum launch control", tone: "solar" },
-  { name: "Ellie", callSign: "E-02", role: "Orbit host", signal: "Sapphire navigation channel", tone: "sapphire" },
-  { name: "Alia", callSign: "A-03", role: "Night deck host", signal: "Crimson stage telemetry", tone: "crimson" },
+  { name: "Radiance", callSign: "R-01", role: "Flight lead", signal: "Gold-spectrum launch control", tone: "solar", imagePosition: "22% center" },
+  { name: "Ellie", callSign: "E-02", role: "Orbit host", signal: "Sapphire navigation channel", tone: "sapphire", imagePosition: "50% center" },
+  { name: "Alia", callSign: "A-03", role: "Night deck host", signal: "Crimson stage telemetry", tone: "crimson", imagePosition: "79% center" },
 ];
+
+const nightflightRolls: Record<string, NightflightRoll> = {
+  plinko: { host: "Radiance", art: "runway", tattoo: "Gold scorpion // upper-left thigh cue", interaction: "Radiance steadies Ellie's launch hand", pawsAction: "PAWS-UP REQUEST" },
+  dice: { host: "Ellie", art: "gala", tattoo: "Star-and-crescent // lower-back cue", interaction: "Ellie passes Alia the sapphire ribbon", pawsAction: "RIBBON CHASE" },
+  roulette: { host: "Alia", art: "constellation", tattoo: "Thorned rose // side-ribcage cue", interaction: "Alia draws both pilots into orbit", pawsAction: "CREW DASH" },
+  mines: { host: "Radiance", art: "runway", tattoo: "Gold scorpion // upper-left thigh cue", interaction: "Radiance and Alia mirror the safe lane", pawsAction: "CONSOLE INSPECTOR" },
+  keno: { host: "Ellie", art: "constellation", tattoo: "Star-and-crescent // lower-back cue", interaction: "Ellie links hands across the triangle", pawsAction: "PAWS-UP REQUEST" },
+  limbo: { host: "Alia", art: "gala", tattoo: "Thorned rose // side-ribcage cue", interaction: "Alia whispers the target to Ellie", pawsAction: "RIBBON CHASE" },
+  slots: { host: "Radiance", art: "constellation", tattoo: "Gold scorpion // upper-left thigh cue", interaction: "Radiance cues a three-way victory lean", pawsAction: "CREW DASH" },
+  baccarat: { host: "Ellie", art: "runway", tattoo: "Star-and-crescent // lower-back cue", interaction: "Ellie deals between Radiance and Alia", pawsAction: "LAP COPILOT" },
+  blackjack: { host: "Alia", art: "gala", tattoo: "Thorned rose // side-ribcage cue", interaction: "Alia locks the reveal with Radiance", pawsAction: "CONSOLE INSPECTOR" },
+  crash: { host: "Radiance", art: "runway", tattoo: "Gold scorpion // upper-left thigh cue", interaction: "The trio braces together for cutoff", pawsAction: "CREW DASH" },
+};
 
 const phaseOrder: Exclude<Phase, "ready">[] = ["staged", "committed", "revealed", "settled"];
 const phaseCopy: Record<Phase, string> = {
@@ -308,7 +338,8 @@ export function CasinoDemo() {
   const [interactiveReady, setInteractiveReady] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const game = games.find((item) => item.id === selectedId) ?? games[0];
-  const host = hosts[(Number(game.order) - 1) % hosts.length];
+  const roll = nightflightRolls[game.id];
+  const host = hosts.find((item) => item.name === roll.host) ?? hosts[0];
   const running = phase !== "ready" && phase !== "settled";
   const revealed = phase === "revealed" || phase === "settled";
 
@@ -387,13 +418,18 @@ export function CasinoDemo() {
             <span>Radiance, Ellie, and Alia host ten neon demo modules aboard a fictional orbital nightlife deck. Every result is preset, every credit is simulated, and nothing connects to a wallet, contract, payment rail, randomness provider, or live game.</span>
             <a href="#game-lobby">ENTER THE LAUNCH DECK ↓</a>
           </div>
-          <div className="demo-orbit" aria-hidden="true"><span className="orbit orbit-one" /><span className="orbit orbit-two" /><span className="orbit orbit-three" /><span className="orbit-beam beam-one" /><span className="orbit-beam beam-two" /><div className="demo-chip"><b>10</b><i>LAUNCH MODULES</i></div></div>
+          <figure className="demo-campaign-hero">
+            <img src={campaignArt.constellation} alt="Radiance, Ellie, and Alia, three fictional adult fashion hosts, sharing a cheerful Nightflight launch moment while PAWS runs toward the camera" fetchPriority="high" />
+            <div className="demo-orbit" aria-hidden="true"><span className="orbit orbit-one" /><span className="orbit orbit-two" /><span className="orbit orbit-three" /><span className="orbit-beam beam-one" /><span className="orbit-beam beam-two" /><div className="demo-chip"><b>10</b><i>LAUNCH MODULES</i></div></div>
+            <figcaption>THE NIGHTFLIGHT TRIANGLE // RADIANCE × ELLIE × ALIA × PAWS</figcaption>
+          </figure>
         </div>
       </header>
 
       <section className="night-crew" aria-labelledby="night-crew-title">
-        <div className="night-crew-heading"><p>FICTIONAL ADULT HOSTS // FULLY CLOTHED NIGHTLIFE CAST</p><h2 id="night-crew-title">Meet the flight deck.</h2><span>Three fictional adult hosts guide the visual walkthrough. Their identities, costumes, roles, and signals exist only inside this front-end demo.</span></div>
-        <div className="host-roster">{hosts.map((item, index) => <article className={`host-card host-${item.tone}`} key={item.name}><div aria-hidden="true"><span>{item.callSign}</span><b>{item.name[0]}</b><i /></div><small>0{index + 1} // {item.role.toUpperCase()}</small><h3>{item.name}</h3><p>{item.signal}</p><strong>FICTIONAL ADULT HOST</strong></article>)}</div>
+        <div className="night-crew-heading"><p>FICTIONAL ADULT HOSTS // HIGH-GLOSS RUNWAY COUTURE</p><h2 id="night-crew-title">Meet the flight deck.</h2><span>Three fictional adult hosts move through one playful love-triangle story: exchanged glances, linked hands, shared launch cues, and no static lineup. Their identities and story exist only inside this front-end demo.</span></div>
+        <div className="host-roster">{hosts.map((item, index) => { const rosterArt = index === 0 ? campaignArt.gala : index === 1 ? campaignArt.runway : campaignArt.constellation; return <article className={`host-card host-${item.tone}`} key={item.name}><div className="host-card-visual"><span>{item.callSign}</span><img src={rosterArt} alt={`${item.name} leading Radiance, Ellie, and Alia through a coordinated fictional-adult Nightflight runway scene`} /><i aria-hidden="true" /></div><small>0{index + 1} // {item.role.toUpperCase()}</small><h3>{item.name}</h3><p>{item.signal}</p><strong>FICTIONAL ADULT HOST // RUNWAY CUE</strong></article>; })}</div>
+        <article className="paws-companion"><div><p>PAWS // GOLDEN COPILOT</p><h3>Never parked at the edge.</h3><span>PAWS ribbon-chases, inspects consoles, asks paws-up, and dashes through the crew. Her motion cue changes deterministically with each demo module.</span></div><figure><img src={campaignArt.gala} alt="PAWS, a tiny golden fictional kitten, actively chasing a ribbon beside the three Nightflight hosts" /><figcaption>ACTIVE SCENE RULE // RECIPROCAL CREW INTERACTION</figcaption></figure></article>
       </section>
 
       <section className="demo-boundary" aria-labelledby="boundary-title">
@@ -404,7 +440,7 @@ export function CasinoDemo() {
       <section className="demo-lobby" id="game-lobby" aria-labelledby="lobby-title">
         <div className="demo-lobby-heading"><div><p>ORBITAL NIGHTCLUB // ENGLISH DEMO</p><h2 id="lobby-title">Choose a module.</h2></div><p>Ten game concepts become illuminated starship decks. Demand signals come from different public datasets and are not directly comparable market shares; they guide the mock, not a launch promise.</p></div>
         <div className="game-selector" role="list" aria-label="Ten Casino DLC demo games">
-          {games.map((item) => <div role="listitem" key={item.id}><button type="button" aria-pressed={item.id === selectedId} data-testid={`game-${item.id}`} className={item.id === selectedId ? "is-selected" : ""} onClick={() => selectGame(item.id)} disabled={running}><span>{item.order} // {item.buildTier}</span><strong>{item.name}</strong><i>{item.tagline}</i><small>{item.demandSignal}</small></button></div>)}
+          {games.map((item) => { const itemRoll = nightflightRolls[item.id]; const itemHost = hosts.find((candidate) => candidate.name === itemRoll.host) ?? hosts[0]; return <div role="listitem" key={item.id}><button type="button" aria-pressed={item.id === selectedId} data-testid={`game-${item.id}`} className={item.id === selectedId ? "is-selected" : ""} onClick={() => selectGame(item.id)} disabled={running}><span className="game-selector-art"><img src={campaignArt[itemRoll.art]} alt="" style={{ objectPosition: itemHost.imagePosition }} /><b>{itemRoll.host} // {itemRoll.pawsAction}</b></span><span>{item.order} // {item.buildTier}</span><strong>{item.name}</strong><i>{item.tagline}</i><small>{item.demandSignal}</small></button></div>; })}
         </div>
         <div className="demo-sources" role="note"><strong>PUBLIC DEMAND REFERENCES</strong><a href="https://stake.us/blog/2025-online-gaming-player-statistics-trends">Stake.us 2025 operator play counts ↗</a><a href="https://www.gamblingcommission.gov.uk/statistics-and-research/publication/market-overview-operator-data-to-june-2025-published-august-2025">UK slots activity ↗</a><a href="https://www.gamblingcommission.gov.uk/about-us/guide/page/online-casino-games-excluding-slots-key-findings">UK non-slot participation survey ↗</a></div>
       </section>
@@ -416,8 +452,9 @@ export function CasinoDemo() {
           <div className="demo-room-summary"><div><span>{game.order} // {game.buildTier}</span><h3>{game.name}</h3><p>{game.instruction}</p></div><strong>{game.selection}</strong></div>
           <div className="demo-workspace">
             <aside className="demo-sidebar" aria-label="Fictional host, participant, and credit controls">
-              <div className={`demo-profile host-profile host-${host.tone}`}><span aria-hidden="true">{host.name[0]}</span><div><small>{host.callSign} // {host.role.toUpperCase()}</small><strong>{host.name}</strong><i>{host.signal}</i></div></div>
+              <div className={`demo-profile host-profile host-${host.tone}`}><span className="host-thumb"><img src={campaignArt[roll.art]} alt="" style={{ objectPosition: host.imagePosition }} /></span><div><small>{host.callSign} // {host.role.toUpperCase()}</small><strong>{host.name}</strong><i>{host.signal}</i></div></div>
               <div className="demo-passenger"><span>FICTIONAL ADULT PARTICIPANT</span><strong>{game.participant}</strong><small>LOCAL DEMO IDENTITY</small></div>
+              <dl className="nightflight-roll"><div><dt>TATTOO ROLL</dt><dd>{roll.tattoo}</dd></div><div><dt>TRIANGLE CUE</dt><dd>{roll.interaction}</dd></div><div><dt>PAWS ACTION</dt><dd>{roll.pawsAction}</dd></div></dl>
               <div className="demo-balance"><span>SIMULATED BALANCE</span><strong>{balance.toLocaleString("en-US")}</strong><small>DEMO CREDITS</small></div>
               <div className="demo-stake"><span>SIMULATED STAKE</span><div><button type="button" onClick={() => setStake((value) => Math.max(25, value - 25))} disabled={running || stake === 25} aria-label="Decrease simulated stake by 25 credits">−</button><strong>{stake}</strong><button type="button" onClick={() => setStake((value) => Math.min(250, value + 25))} disabled={running || stake === 250} aria-label="Increase simulated stake by 25 credits">+</button></div><small>Credits have no monetary value.</small></div>
               <button className="demo-run" type="button" onClick={runRound} disabled={running}>{running ? "RUNNING DEMO…" : phase === "settled" ? "REPLAY THIS PRESET" : `RUN ${game.name.toUpperCase()} DEMO`}<span aria-hidden="true">→</span></button>
@@ -425,6 +462,7 @@ export function CasinoDemo() {
             </aside>
 
             <div className={`demo-table game-${game.scene} phase-${phase}`} data-testid="active-game-scene">
+              <img className="demo-table-campaign" src={campaignArt[roll.art]} alt="" style={{ objectPosition: host.imagePosition }} />
               <div className="demo-table-glow" aria-hidden="true" />
               <GameScene game={game} revealed={revealed} settled={phase === "settled"} />
               <div className={`demo-result ${game.netFactor < 0 ? "result--1" : "result-1"}`} aria-hidden={phase !== "settled"}><span>NIGHTFLIGHT DEMO RESULT</span><strong>{game.outcome}</strong><i>{delta > 0 ? "+" : ""}{delta} demo credits // {game.payoutLabel}</i></div>
@@ -443,7 +481,7 @@ export function CasinoDemo() {
 
       <section className="demo-explainer" aria-labelledby="explainer-title"><p>HOW EVERY ROOM READS</p><h2 id="explainer-title">Result first.<br />Animation second.</h2><div><article><span>01</span><h3>Choose</h3><p>Select a room, a fixed demo rule, and simulated credits. No identity, account, deposit, or wallet exists.</p></article><article><span>02</span><h3>Observe</h3><p>The interface exposes stage, commitment, reveal, and settlement instead of hiding the conceptual flow.</p></article><article><span>03</span><h3>Replay</h3><p>The recorded preset result drives each visual. A fictional receipt explains the round but proves no real system.</p></article></div></section>
 
-      <footer className="demo-footer"><div><strong>STARSHIP NIGHTFLIGHT // TEN-GAME INTERACTIVE DEMO</strong><span>Dark-techno nightlife presentation, fully clothed fictional adult hosts, and an opt-in low-frequency light pulse. Front-end mock only: no real gameplay, account, deposit, withdrawal, wallet, smart contract, oracle, payment, or network operation.</span></div><a href="/future/casino">RETURN TO INACTIVE PREVIEW →</a></footer>
+      <footer className="demo-footer"><div><strong>STARSHIP NIGHTFLIGHT // TEN-GAME INTERACTIVE DEMO</strong><span>Dark-techno nightlife presentation, opaque high-gloss runway couture on fictional adult hosts, and an opt-in low-frequency light pulse. Front-end mock only: no real gameplay, account, deposit, withdrawal, wallet, smart contract, oracle, payment, or network operation.</span></div><a href="/future/casino">RETURN TO INACTIVE PREVIEW →</a></footer>
     </main>
   );
 }

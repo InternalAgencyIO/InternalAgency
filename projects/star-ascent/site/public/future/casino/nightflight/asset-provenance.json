@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "publishedPurpose": "Nightflight Casino DLC English-only front-end demo",
+  "licenseScope": {
+    "metadata": "CC0-1.0",
+    "software": "Repository license",
+    "note": "The CC0 dedication covers this project-owned provenance and selection metadata. It does not expand rights in trademarks or material the project does not own."
+  },
+  "process": {
+    "mode": "source-bound-reuse",
+    "summary": "Three already accepted campaign assets were selected from the public Batch 211 record. Rejected image-generation candidates were not copied, published, or used.",
+    "determinism": "Each game ID maps to a fixed host, artwork, tattoo cue, trio-interaction cue, and PAWS action in CasinoDemo.tsx; no random API is used."
+  },
+  "assets": [
+    {
+      "publicPath": "/future/casino/nightflight/nightflight-gala.png",
+      "sourcePath": "assets/lore/starlight-era/world-195x4-live-build/batch-211-philippines/relationship/864-philippines-manila-bay-gala-route-light-grid-relationship.png",
+      "sha256": "b79cdcf0a1299a3f22510638663632e62905d5b049717b35cad5a3179234be6f",
+      "use": "Gala module art and PAWS ribbon-chase crop"
+    },
+    {
+      "publicPath": "/future/casino/nightflight/nightflight-runway.png",
+      "sourcePath": "assets/lore/starlight-era/world-195x4-live-build/batch-211-philippines/relationship/866-philippines-banaue-rice-terraces-star-map-relay-relationship.png",
+      "sha256": "404b149eb35b0eb2387bfccce71064255a85627c360e96fb6af9a89d14da4790",
+      "use": "Short-silhouette host roster and runway module art"
+    },
+    {
+      "publicPath": "/future/casino/nightflight/nightflight-constellation.png",
+      "sourcePath": "assets/lore/starlight-era/world-195x4-live-build/batch-211-philippines/867-philippines-el-nido-bacuit-bay-arrival-beacon-finale-foundation-accepted.png",
+      "sha256": "d77b63fbb3f686ba19791fb383c2e40c6e632af2d043ddcdf2f2860e359bae8d",
+      "use": "Hero love-triangle composition and PAWS crew-dash scene"
+    }
+  ]
+}
