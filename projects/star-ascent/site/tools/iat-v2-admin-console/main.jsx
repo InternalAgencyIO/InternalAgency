@@ -6,10 +6,6 @@ import {
   PublicKey,
 } from "@solana/web3.js";
 import {
-  getAccount,
-  getMint,
-} from "@solana/spl-token";
-import {
   assertCanonicalMetadataAccount,
   deriveMetadataAddress,
   isLocalOperatorHost,
@@ -49,6 +45,10 @@ import {
   createTrezorTransactionProvider,
   findTrezorSolanaAccount,
 } from "./trezor-provider.mjs";
+import {
+  decodeOriginalTokenAccountInfo,
+  decodeOriginalTokenMintInfo,
+} from "./original-token-decode.mjs";
 import "./style.css";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
@@ -254,7 +254,11 @@ async function readTokenAccount(address, mint, owner, required) {
     if (required) throw new Error(`Required token account ${address.toBase58()} is missing`);
     return null;
   }
-  const account = await getAccount(connection, address, "confirmed", TOKEN_PROGRAM_ID);
+  const account = decodeOriginalTokenAccountInfo({
+    address,
+    info,
+    programId: TOKEN_PROGRAM_ID,
+  });
   assertKey(account.mint, mint, "Token-account mint");
   assertKey(account.owner, owner, "Token-account authority");
   return account;
@@ -318,7 +322,11 @@ async function loadChainSnapshot() {
     mint,
     updateAuthority: IAT_V2_PROGRAM_ADMIN,
   });
-  const mintState = await getMint(connection, mint, "confirmed", TOKEN_PROGRAM_ID);
+  const mintState = decodeOriginalTokenMintInfo({
+    address: mint,
+    info: mintInfo,
+    programId: TOKEN_PROGRAM_ID,
+  });
   if (mintState.decimals !== 9) throw new Error("V2 mint does not have exactly 9 decimals");
 
   const lanePairs = [

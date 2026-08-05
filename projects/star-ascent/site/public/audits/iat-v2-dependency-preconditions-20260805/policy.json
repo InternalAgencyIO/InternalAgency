@@ -1,0 +1,41 @@
+{
+  "schema": "iat-v2-dependency-advisory-preconditions/v1",
+  "status": "DRAFT_QA_HOLD_UNPATCHED_DEPENDENCY",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "advisory": {
+    "id": "GHSA-3gc7-fjrx-p6mg",
+    "severity": "HIGH",
+    "package": "bigint-buffer",
+    "affectedRange": "<=1.1.5",
+    "patchedVersions": "NONE_PUBLISHED",
+    "effect": "APPLICATION_AVAILABILITY_CRASH"
+  },
+  "lockedGraph": {
+    "@solana/spl-token": "0.4.15",
+    "@solana/buffer-layout-utils": "0.3.0",
+    "bigint-buffer": "1.1.5"
+  },
+  "preconditions": {
+    "directProjectImportOfBigintBufferAllowed": false,
+    "directProjectImportOfBufferLayoutUtilsAllowed": false,
+    "originalTokenAccountBytes": 165,
+    "originalTokenMintBytes": 82,
+    "splScalarDecodeBytes": 8,
+    "decodeUsesAlreadyVerifiedRpcSnapshot": true,
+    "secondRpcReadBeforeDecodeAllowed": false
+  },
+  "assurance": {
+    "dependencyPatched": false,
+    "vulnerableFunctionUnreachableProven": false,
+    "independentSecurityReviewComplete": false,
+    "signedDevnetAfterDependencyChangeComplete": false,
+    "releaseApproved": false,
+    "mainnetApproved": false
+  },
+  "limitations": [
+    "Exact outer account sizes and fixed u64 layout slices narrow the reviewed admin decode path; they do not prove the vulnerable package unreachable elsewhere in its dependency graph.",
+    "The advisory has no published patched version, so supported graph removal or replacement and independent review remain required.",
+    "This policy does not dismiss, downgrade, override, or remediate the high-severity advisory.",
+    "No RPC, wallet, hardware, simulation, signing, broadcast, deployment, funding, Devnet, or Mainnet action is authorized."
+  ]
+}
