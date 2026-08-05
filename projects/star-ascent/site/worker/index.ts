@@ -173,6 +173,22 @@ const worker = {
 
     const incomingLocale = pathLocale(url.pathname);
     const turkishHost = url.hostname.toLowerCase().includes("ileriakil");
+    const strippedPathname = incomingLocale
+      ? url.pathname.slice(incomingLocale.length + 1) || "/"
+      : url.pathname;
+    const englishOnlyCasinoDemo = strippedPathname === "/future/casino/demo";
+
+    if (englishOnlyCasinoDemo && (incomingLocale || turkishHost)) {
+      const destination = new URL("https://internalagency.io/future/casino/demo");
+      destination.search = url.search;
+      return new Response(null, {
+        status: 308,
+        headers: {
+          Location: destination.toString(),
+          "Cache-Control": "public, max-age=300",
+        },
+      });
+    }
 
     if (url.pathname === "/" && !turkishHost) {
       const preferred = preferredLanguage(request);
@@ -191,8 +207,7 @@ const worker = {
     }
 
     if (incomingLocale) {
-      const stripped = url.pathname.slice(incomingLocale.length + 1);
-      url.pathname = stripped.startsWith("/") ? stripped : stripped ? `/${stripped}` : "/";
+      url.pathname = strippedPathname.startsWith("/") ? strippedPathname : `/${strippedPathname}`;
     }
 
     const localizedHeaders = new Headers(request.headers);
