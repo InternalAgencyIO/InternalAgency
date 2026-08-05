@@ -24,6 +24,12 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   await expect(page.getByRole("heading", { name: "Ellie" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Alia" })).toBeVisible();
   await expect(page.getByText("NO REAL WAGERS", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Crew standings, zero stakes." })).toBeVisible();
+  const leaderboardBoundary = page.locator(".demo-leaderboard-heading");
+  await expect(leaderboardBoundary.getByText("FAKE CREDITS", { exact: true })).toBeVisible();
+  await expect(leaderboardBoundary.getByText("NO PRIZES", { exact: true })).toBeVisible();
+  await expect(page.locator(".demo-leaderboard tbody tr")).toHaveCount(6);
+  await expect(page.locator(".demo-leaderboard tbody tr").first()).toContainText("Samira Cole");
   await expect(page.locator(".dossier-dock")).toBeHidden();
   await expect(page.locator(".locale-switcher")).toBeHidden();
   await expect(page.locator(".game-selector button")).toHaveCount(10);

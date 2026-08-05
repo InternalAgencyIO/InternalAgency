@@ -38,6 +38,15 @@ type DemoReceipt = {
   credits: number;
 };
 
+type DemoRanking = {
+  rank: string;
+  participant: string;
+  module: string;
+  missions: number;
+  credits: number;
+  badge: string;
+};
+
 type HostDefinition = {
   name: "Radiance" | "Ellie" | "Alia";
   callSign: string;
@@ -62,6 +71,15 @@ const campaignArt: Record<CampaignArt, string> = {
   runway: "/future/casino/nightflight/nightflight-runway.png",
   constellation: "/future/casino/nightflight/nightflight-constellation.png",
 };
+
+const demoRankings: DemoRanking[] = [
+  { rank: "01", participant: "Samira Cole", module: "Roulette", missions: 12, credits: 8_420, badge: "ORBIT ACE" },
+  { rank: "02", participant: "Jules Carter", module: "Original Slots", missions: 11, credits: 7_960, badge: "REEL PILOT" },
+  { rank: "03", participant: "Nora Vale", module: "Plinko", missions: 10, credits: 7_540, badge: "DROP VECTOR" },
+  { rank: "04", participant: "Maya Rook", module: "Keno", missions: 9, credits: 6_880, badge: "SIGNAL FINDER" },
+  { rank: "05", participant: "Arin Moss", module: "Baccarat", missions: 8, credits: 6_210, badge: "TABLE LEAD" },
+  { rank: "06", participant: "Luca Vale", module: "Crash", missions: 7, credits: 5_940, badge: "CUTOFF CREW" },
+];
 
 const games: GameDefinition[] = [
   {
@@ -406,7 +424,7 @@ export function CasinoDemo() {
       <header className="demo-header">
         <nav aria-label="Casino demo navigation">
           <a className="demo-wordmark" href="/future/casino">IA<span aria-hidden="true">///</span>NIGHTFLIGHT</a>
-          <div><span>ENGLISH ONLY</span><button className="light-control" type="button" aria-pressed={lightPulse} disabled={!interactiveReady} onClick={() => setLightPulse((enabled) => !enabled)}><i aria-hidden="true" />SAFE PULSE {lightPulse ? "ON" : "OFF"}</button><a href="/future/casino">EXIT DEMO</a></div>
+          <div><span>ENGLISH ONLY</span><a href="#demo-leaderboard">DEMO BOARD</a><button className="light-control" type="button" aria-pressed={lightPulse} disabled={!interactiveReady} onClick={() => setLightPulse((enabled) => !enabled)}><i aria-hidden="true" />SAFE PULSE {lightPulse ? "ON" : "OFF"}</button><a href="/future/casino">EXIT DEMO</a></div>
         </nav>
         <div className="demo-alert" role="note">
           <strong>DEMO ONLY</strong><span>SIMULATED CREDITS</span><span>FICTIONAL ADULT HOSTS</span><span>FICTIONAL ADULT PARTICIPANTS</span><span>NO REAL WAGERS</span><span>OPT-IN SAFE LIGHT PULSE</span>
@@ -478,6 +496,18 @@ export function CasinoDemo() {
       </section>
 
       <section className="demo-history" aria-labelledby="history-title"><div><p>LOCAL SESSION LOG</p><h2 id="history-title">Replay the story,<br />not a transaction.</h2></div><div className="demo-history-list">{history.length === 0 ? <p>No demo rounds recorded yet. Choose any room and run its preset walkthrough.</p> : history.map((receipt) => <article key={receipt.id}><span>{receipt.id}</span><strong>{receipt.game}</strong><i>{receipt.participant}</i><b>{receipt.credits > 0 ? "+" : ""}{receipt.credits} DEMO</b></article>)}</div></section>
+
+      <section className="demo-leaderboard" id="demo-leaderboard" aria-labelledby="leaderboard-title">
+        <div className="demo-leaderboard-heading"><div><p>FICTIONAL TRAINING BOARD // STATIC DEMO DATA</p><h2 id="leaderboard-title">Crew standings,<br />zero stakes.</h2></div><aside role="note"><strong>DEMO BOARD ONLY</strong><span>FAKE CREDITS</span><span>NO PRIZES</span><span>NO REAL VALUE</span></aside></div>
+        <div className="demo-leaderboard-table" role="region" aria-label="Scrollable fictional demo leaderboard" tabIndex={0}>
+          <table>
+            <caption>Preset Nightflight training standings. These fictional scores never leave this front-end demo.</caption>
+            <thead><tr><th scope="col">RANK</th><th scope="col">FICTIONAL ADULT PARTICIPANT</th><th scope="col">MODULE</th><th scope="col">PRESET MISSIONS</th><th scope="col">FAKE CREDITS</th><th scope="col">DEMO BADGE</th></tr></thead>
+            <tbody>{demoRankings.map((entry) => <tr key={entry.rank}><td><strong>{entry.rank}</strong></td><th scope="row">{entry.participant}</th><td>{entry.module}</td><td>{entry.missions}</td><td>{entry.credits.toLocaleString("en-US")}</td><td><span>{entry.badge}</span></td></tr>)}</tbody>
+          </table>
+        </div>
+        <p className="demo-leaderboard-note">STATIC PRESENTATION ONLY // No account, profile, competition, prize, persistence, payment, wager, or ranking request exists.</p>
+      </section>
 
       <section className="demo-explainer" aria-labelledby="explainer-title"><p>HOW EVERY ROOM READS</p><h2 id="explainer-title">Result first.<br />Animation second.</h2><div><article><span>01</span><h3>Choose</h3><p>Select a room, a fixed demo rule, and simulated credits. No identity, account, deposit, or wallet exists.</p></article><article><span>02</span><h3>Observe</h3><p>The interface exposes stage, commitment, reveal, and settlement instead of hiding the conceptual flow.</p></article><article><span>03</span><h3>Replay</h3><p>The recorded preset result drives each visual. A fictional receipt explains the round but proves no real system.</p></article></div></section>
 
