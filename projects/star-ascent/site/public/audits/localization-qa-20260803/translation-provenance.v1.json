@@ -2378,6 +2378,306 @@
         "No wallet, hardware signer, secret, deployment, funding, signing, broadcast, Devnet, or Mainnet state was accessed or changed.",
         "This record is not deployment, signing, funding, native-quality, or launch authorization."
       ]
+    },
+    {
+      "id": "2026-08-05-codeql-html-metadata-global-fail-closed-v2",
+      "status": "GLOBAL_FAIL_CLOSED_NATIVE_REVIEW_HOLD",
+      "recordedAt": "2026-08-05T17:35:34+03:00",
+      "timeBasis": "OUTPUT_COMMIT_COMMITTER_TIME_NOT_MODEL_START_TIME",
+      "baselineCommit": "15476f90a6f4f5d433fc8e01b6ce4758ddda3698",
+      "outputCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+      "model": {
+        "used": false,
+        "provider": "none",
+        "identifier": "none",
+        "revision": null,
+        "weightsPublishedInRepository": false,
+        "scope": "No translation model ran. The global fail-closed catalog is unchanged; this increment removes incomplete regex-based HTML metadata sanitization from the live verifier and adds exact comparison-only normalization coverage."
+      },
+      "runtime": {
+        "operatingSystem": "Windows local workstation",
+        "node": "24.14.0",
+        "browserEngines": [
+          "Chromium",
+          "Firefox",
+          "WebKit"
+        ],
+        "absolutePathsPublished": false
+      },
+      "generation": {
+        "entrypoint": "No catalog generation; CodeQL HTML metadata verifier correction only",
+        "refreshSourceMatches": false,
+        "translationAlgorithmVersion": 2,
+        "sourceMatchRefreshAlgorithmVersion": 1,
+        "staticCommittedOutput": true,
+        "deterministicStages": [
+          "scripts/prune-i18n-catalog.mjs",
+          "scripts/apply-i18n-editorial-overrides.mjs",
+          "scripts/repair-i18n-invariants.mjs",
+          "scripts/compile-i18n-assets.mjs",
+          "scripts/capture-pending-i18n-source.mjs",
+          "scripts/capture-language-render-evidence.mjs",
+          "scripts/generate-language-qa-scorecard.mjs",
+          "scripts/generate-language-qa-hold-ledger.mjs",
+          "scripts/generate-localization-qa-report.mjs"
+        ],
+        "protectedClasses": [
+          "URLs",
+          "handles",
+          "token tickers",
+          "canonical 64-character hashes",
+          "time-gate tokens",
+          "numeric and unit tokens",
+          "protocol terms",
+          "markup and interpolation tokens"
+        ]
+      },
+      "scope": {
+        "localeCount": 50,
+        "canonicalStrings": 985,
+        "canonicalRoutes": 25,
+        "sourceEqualCandidatesRefreshed": 0
+      },
+      "commitChain": [
+        {
+          "role": "hydration-root-canonical-baseline",
+          "commit": "15476f90a6f4f5d433fc8e01b6ce4758ddda3698"
+        },
+        {
+          "role": "codeql-html-metadata-verifier-v2",
+          "commit": "c02504d0c763f23db92cce928097140ae96b8028"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "app/i18n/messages.json",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "735a5035bcb914958b773e04c18134f336f60fe297aff57c26a9952117598e4f",
+          "bytes": 5917932
+        },
+        {
+          "path": "app/i18n/metadata.generated.json",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "429983d0fbe36c648e36de881add769b53b1c412c32e2156fb82b4ccb064e3a1",
+          "bytes": 419004
+        },
+        {
+          "path": "app/i18n/payload-contract.json",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "e446e81ad48d31902f00f89c4c677f5f7582db14bd9f6c33898ab43559cb6b09",
+          "bytes": 4526
+        },
+        {
+          "path": "app/i18n/reviewed-localization-policy.json",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "66662977cf8867f6a7aba1dfe6e5126e6fd55b22a43aae226850bf5fbbeca358",
+          "bytes": 1507
+        },
+        {
+          "path": "app/i18n/language-qa-checks.v1.json",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "54f97aad003f478537acac24a001366bd8213d13daddd48ab31faf78eed0d853",
+          "bytes": 17141
+        },
+        {
+          "path": "app/i18n/pending-visible-source.json",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "af8e59e938f9807477169f8d39dd1afe2dea29ed7924c47c627d7e0c63d23c74",
+          "bytes": 3442
+        },
+        {
+          "path": "app/i18n/language-render-evidence.v1.json",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "e943ba3ef561bff028d13f983730b28c0352fc679b1e1821903783afe26c23b6",
+          "bytes": 187556
+        },
+        {
+          "path": "public/audits/localization-qa-20260803/language-qa-scorecard.json",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "40533bb68f0c7de430730a9fddb7bc32e35b7d9c02152c41eadf366b39e69cd2",
+          "bytes": 1572071
+        },
+        {
+          "path": "public/audits/localization-qa-20260803/hold-remediation-ledger.json",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "75339c3e7b00eb41d2d54aad3bd04a83bbc6273e59fbc54acbab3892ecddbadd",
+          "bytes": 3407
+        },
+        {
+          "path": "public/audits/localization-qa-20260803/README.md",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "8673e54955f206f56388d84555d098cd17fd328767ceb095faf7a662cad0257b",
+          "bytes": 5828
+        },
+        {
+          "path": "public/audits/localization-qa-20260803/report.json",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "f8b86599989caf77926f04bea479d53a0570dc00e3fed62369607258cfa336d8",
+          "bytes": 36178
+        },
+        {
+          "path": "public/audits/localization-qa-20260803/TRANSLATION-PROCESS.md",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "67627bf4fdda0aadc13b9a289bfa03a796caf809048dc6508f07d950460af2ea",
+          "bytes": 14549
+        },
+        {
+          "path": "scripts/capture-language-render-evidence.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "05f74a6a8b3df9b037c75f40a4ce6ced7c697fa6aa5841b713ecaa05fc5f749e",
+          "bytes": 28336
+        },
+        {
+          "path": "scripts/check-i18n-bundle-quarantine.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "2d87215014237314695f47a55b43852b25fd74637771eea90cb954a7be585219",
+          "bytes": 22295
+        },
+        {
+          "path": "scripts/validate-localization-provenance.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "32737ce7ca06394bff78925381c636575bec25d768cab6d05fa2f1164532e4f6",
+          "bytes": 15865
+        },
+        {
+          "path": "tests/i18n-quality.test.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "55032228373338f20ce4c08bbeb705d48830661eaefbfc77a09dcb7559a75e83",
+          "bytes": 13181
+        },
+        {
+          "path": "package.json",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "222121941df21ecfe66a13a91fc3a1e62d233ca77aabfec3ec9281cbf887691c",
+          "bytes": 14510
+        },
+        {
+          "path": "scripts/hydration-shard-evidence.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "9d796356bfd47c5c3fe27a7016539914bbc592305a2db6a203e09afcfd1fd962",
+          "bytes": 11578
+        },
+        {
+          "path": "scripts/reconcile-dual-host-hydration-shards.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "5fa5300d00e5946af4198d7b038f474eb9e183ed0336bcc24638b5a4e76e7e8a",
+          "bytes": 2490
+        },
+        {
+          "path": "scripts/hydration-shard-batch.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "147e537e8e58097fee18dd7544ae8af350c91afc7f4b6858216787e9cee3e9df",
+          "bytes": 3938
+        },
+        {
+          "path": "scripts/run-dual-host-hydration-shards.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "1bc17199c0ce29482401a9328af4e03714f464af010ce737f64c66c070733e2a",
+          "bytes": 4301
+        },
+        {
+          "path": "tests/hydration-shard-evidence.test.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "90e5262dea7446ce0e7662141dc506d397f5b5e7ba80c86ef2f8b7afb9b66d31",
+          "bytes": 9392
+        },
+        {
+          "path": "tests/hydration-shard-batch.test.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "7626453a0cf46677b701bb85142e1ffcea6c41fbd69cd59c4c9b2101a6e8c698",
+          "bytes": 5314
+        },
+        {
+          "path": "scripts/check-dual-host-locale-hydration.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "425ab919b97f4f78432b0da40d4d0098b49171999cf13483f62accf2a6c7f17e",
+          "bytes": 17374
+        },
+        {
+          "path": "scripts/dual-host-locale-hydration-plan.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "0502bb2041685c8723fc0170846be18b3da92494a86e8185070ee2f3ab2f63ff",
+          "bytes": 6911
+        },
+        {
+          "path": "tests/dual-host-locale-hydration-plan.test.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "97df4dc2e6ecc744794d8b6ce7a59f3c68ce1fdefbc78d00577d21fc8724e31c",
+          "bytes": 9540
+        },
+        {
+          "path": "scripts/live-locale-verifier-lib.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "095dbd1678a979480fcbb206b453d26427011d294634cc879a5d06a0e016a0ac",
+          "bytes": 8066
+        },
+        {
+          "path": "scripts/verify-live-locale-deployment.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "5ca93ba3990e5a133fe99c8ed6aeec19cdb82854ea03894e40c39634b88ec899",
+          "bytes": 22261
+        },
+        {
+          "path": "tests/live-locale-verifier.test.mjs",
+          "bindingCommit": "c02504d0c763f23db92cce928097140ae96b8028",
+          "sha256": "848696ee9819e799c0c59c71555c7251b058b232849fe7bafd1c5f8d5453cd71",
+          "bytes": 9628
+        }
+      ],
+      "outcomes": {
+        "changedLocaleEntries": 0,
+        "sourceEqualDraftReplacements": 0,
+        "literalOnlyRestorations": 0,
+        "otherDeterministicPipelineChanges": 0,
+        "removedCanonicalSourceKeys": 0,
+        "addedCanonicalSourceKeys": 0,
+        "removedLocaleEntries": 0,
+        "addedLocaleEntries": 0,
+        "corruptedSha256ValuesBefore": 0,
+        "corruptedSha256ValuesAfter": 0,
+        "unexplainedMutations": 0,
+        "missingOrEmptyEntries": 0,
+        "pendingVisibleSourceStrings": 0,
+        "reviewedRuntimeCells": 0,
+        "canonicalFallbackCells": 48265,
+        "renderChecks": {
+          "PASS": 1250,
+          "FAIL": 0
+        },
+        "scorecard": {
+          "PASS": 4700,
+          "FAIL": 0,
+          "HOLD": 300,
+          "NOT_RUN": 0,
+          "externalEvidenceHold": 300,
+          "heuristicEditorialHold": 0
+        }
+      },
+      "validation": {
+        "catalogQa": "PASS_GLOBAL_FAIL_CLOSED_50_LOCALES_NO_CATALOG_CHANGE",
+        "pendingVisibleSource": "PASS_0_PENDING",
+        "sourceBoundRenderChecks": "PASS_1250_RETAINED",
+        "languageQaScorecard": "HOLD_4700_PASS_300_EXTERNAL_REVIEW_HOLD",
+        "bundleQuarantine": "PASS_0_UNREVIEWED_TARGET_LANGUAGE_VIOLATIONS",
+        "codeqlFinding": "FIX_IMPLEMENTED_PENDING_PUBLIC_CODEQL_RESCAN",
+        "metadataNormalizationContract": "PASS_SINGLE_DECODE_COMPARISON_ONLY_NO_MARKUP_STRIPPING",
+        "focusedTests": "PASS_33",
+        "targetedEslint": "PASS",
+        "iatV2Checks": "PENDING_PROVENANCE_COMMIT_VALIDATION",
+        "iatV2Signoff": "PENDING_PROVENANCE_COMMIT_VALIDATION",
+        "nativeLanguageReview": "HOLD",
+        "mainnetLaunch": "UNSCHEDULED_HOLD"
+      },
+      "limitations": [
+        "All 49 non-English locales render canonical English, remain noindex, and request no target-language payload until accountable review evidence exists.",
+        "The 300 HOLD results require independent language-identification and accountable native review; automation cannot approve them.",
+        "The public CodeQL check must rerun on the published commit before this finding can be described as cleared.",
+        "Metadata text is decoded only for exact comparison and is never rendered, inserted into HTML, or treated as sanitized output.",
+        "The current hydration record remains shard 1/50 only; no 7,500-page aggregate is claimed.",
+        "No translation model ran and no native-language approval is claimed.",
+        "No wallet, hardware signer, secret, deployment, funding, signing, broadcast, Devnet, or Mainnet state was accessed or changed.",
+        "This record is not deployment, signing, funding, native-quality, security-clearance, or launch authorization."
+      ]
     }
   ]
 }
