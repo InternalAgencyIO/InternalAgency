@@ -1,0 +1,40 @@
+{
+  "version": "mile-high-v2-active-paws",
+  "name": "PAWS",
+  "species": "NY11 golden British Shorthair kitten",
+  "sex": "female",
+  "growthEpoch": 1,
+  "age": "approximately two months",
+  "identity": {
+    "scale": "tiny kitten",
+    "face": "oversized round baby face",
+    "eyes": "large green eyes",
+    "ears": "small rounded ears",
+    "legs": "short little legs",
+    "coat": "baby-soft luminous honey-apricot-gold with pale warm-gold undercoat and fine cinnamon-gold tipping"
+  },
+  "actionSeed": "<imageNumber>|companion-action|PAWS|mile-high-v2",
+  "actions": [
+    "lap-copilot",
+    "crystal-pounce",
+    "paws-up-request",
+    "ribbon-chase",
+    "console-inspector",
+    "crew-dash"
+  ],
+  "batchVariety": {
+    "avoidTriggeredRepeats": true,
+    "promotionBatchDistinctActions": 4,
+    "promotionBatchMinimumDirectWomanInteractions": 2
+  },
+  "rejectionGates": [
+    "adult-sized or mature-faced",
+    "passive isolated frame-edge sitting",
+    "dull or non-golden coat drift",
+    "unsafe jump or hazardous contact",
+    "motion smear, distress or malformed feline anatomy",
+    "obscured canonical face, hand, mission, landmark, garment or footwear",
+    "duplicate cat"
+  ],
+  "actionContractSha256": "8f3e6524cd5b3d07f8fffce91f8f174513ccfe1527c43de43feaf8a2de8a6fc7"
+}
