@@ -3,35 +3,31 @@
 import { readFileSync } from "node:fs";
 
 const source = readFileSync("app/dossier/read/[slug]/page.tsx", "utf8");
-const match = source.match(/function repairLegacyEncoding<T>[\s\S]*?\r?\n}\r?\n\r?\nconst EN/);
-if (!match) throw new Error("Could not locate the Dossier legacy-encoding repair helper");
 
-const helperSource = match[0]
-  .replace(/\r?\n\r?\nconst EN$/, "")
-  .replace("function repairLegacyEncoding<T>(value: T): T", "function repairLegacyEncoding(value)")
-  .replace("new Map<number, number>", "new Map")
-  .replaceAll("const bytes: number[]", "const bytes")
-  .replaceAll("codePointAt(0)!", "codePointAt(0)")
-  .replaceAll(" as T", "");
-const repairLegacyEncoding = Function(`${helperSource}\nreturn repairLegacyEncoding;`)();
-
-const expected = "Başlangıç: STAR ASCENT’in kanıtı →";
-const windows1252Artifact = new TextDecoder("windows-1252").decode(new TextEncoder().encode(expected));
-if (repairLegacyEncoding(windows1252Artifact) !== expected) {
-  throw new Error("Dossier reader did not repair Windows-1252 Turkish copy and punctuation");
+if (source !== source.normalize("NFC")) {
+  throw new Error("Dossier reader source must remain NFC-normalized UTF-8");
 }
-const labelArtifact = "KANONÄ°K KAYIT";
-if (repairLegacyEncoding(labelArtifact) !== "KANONİK KAYIT") {
-  throw new Error("Dossier reader did not repair a Turkish dotted-I label without other mojibake markers");
+if (/\uFFFD/u.test(source)) {
+  throw new Error("Dossier reader source contains a Unicode replacement character");
 }
-if (repairLegacyEncoding(expected) !== expected) {
-  throw new Error("Dossier reader changed already-correct Turkish copy");
+if (/\b(?:repairLegacyEncoding|TextDecoder|windows-1252)\b/u.test(source)) {
+  throw new Error("Dossier reader must not carry the retired runtime encoding-repair path");
 }
-if (!source.includes('title: "NON-CANONICAL ADDRESS"') || !source.includes('title: "KANONİK OLMAYAN ADRES"')) {
-  throw new Error("Dossier reader must identify unknown routes as non-canonical in both languages");
+if (/\b(?:TR|tailoredTR)\b|[\u011e\u011f\u0130\u0131\u015e\u015f]|[\u0370-\u052f\u0530-\u058f\u0600-\u06ff\u0900-\u0d7f\u10a0-\u10ff\u3040-\u30ff\u3400-\u9fff]/u.test(source)) {
+  throw new Error("Dossier reader contains unreviewed target-language production copy");
+}
+if (!source.includes('const record = EN[params.slug] ?? fallback(params.slug);')) {
+  throw new Error("Dossier reader must resolve every record from canonical English copy");
+}
+if (
+  !source.includes('label: "RECORD NOT FOUND"')
+  || !source.includes('title: "NON-CANONICAL ADDRESS"')
+  || !source.includes('state: "RECORD NOT PUBLISHED"')
+) {
+  throw new Error("Unknown Dossier routes must fail closed as an unpublished non-canonical English record");
 }
 if (source.includes('title: "DOSSIER RECORD"') || source.includes('state: "LIVE BUILD"')) {
-  throw new Error("Dossier reader must not present an unknown route as a live archive record");
+  throw new Error("Unknown Dossier routes must not masquerade as a live archive record");
 }
 
-console.log("OK: Dossier reader repairs legacy Turkish text and marks unknown routes as non-canonical");
+console.log("OK: Dossier reader is canonical-English UTF-8 and unknown routes fail closed");

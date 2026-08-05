@@ -13,26 +13,32 @@ const extractRecordKeys = (start, end) => {
 
 const englishKeys = extractRecordKeys(
   "const EN: Record<string, Copy> = \\{",
-  "\\r?\\n\\};\\r?\\n\\r?\\nconst TR:",
-);
-const turkishKeys = extractRecordKeys(
-  "const TR: Record<string, Copy> = \\{",
   "\\r?\\n\\};\\r?\\n\\r?\\nconst tailoredEN:",
 );
 const tailoredEnglishKeys = extractRecordKeys(
   "const tailoredEN: Record<string, Copy> = \\{",
-  "\\r?\\n\\};\\r?\\n\\r?\\nconst tailoredTR:",
-);
-const tailoredTurkishKeys = extractRecordKeys(
-  "const tailoredTR: Record<string, Copy> = \\{",
   "\\r?\\n\\};\\r?\\n\\r?\\nfunction fallback",
 );
+const recordKeys = new Set([...englishKeys, ...tailoredEnglishKeys]);
+const expectedRecordKeys = [
+  "white-dossier",
+  "tokenomics",
+  "mint-manifest",
+  "genesis-proof",
+  "broadcast-pack",
+  "social-kit",
+  "genesis-run",
+  "authority-map",
+  "technical-spec",
+  "readiness",
+  "incident-response",
+];
 
-if (JSON.stringify(englishKeys) !== JSON.stringify(turkishKeys)) {
-  throw new Error("English and Turkish canonical Dossier record inventories diverge");
+if (JSON.stringify([...recordKeys]) !== JSON.stringify(expectedRecordKeys)) {
+  throw new Error("Canonical English Dossier record inventory changed without updating navigation coverage");
 }
-if (JSON.stringify(tailoredEnglishKeys) !== JSON.stringify(tailoredTurkishKeys)) {
-  throw new Error("English and Turkish tailored Dossier record inventories diverge");
+if (/\b(?:const TR|tailoredTR)\b|"en"\s*\|\s*"tr"/u.test(source)) {
+  throw new Error("Dossier navigation must not depend on an unreviewed bilingual branch");
 }
 
 const routeMatch = source.match(
@@ -55,22 +61,17 @@ const expectedNextRecordRoutes = {
 };
 
 if (JSON.stringify(nextRecordRoutes) !== JSON.stringify(expectedNextRecordRoutes)) {
-  throw new Error("Dossier next-record destinations do not match their bilingual CTA labels");
+  throw new Error("Dossier next-record destinations do not match the canonical English CTA sequence");
 }
-
-const recordKeys = new Set([
-  ...englishKeys,
-  ...tailoredEnglishKeys,
-]);
 if (
   recordKeys.size !== Object.keys(nextRecordRoutes).length
   || [...recordKeys].some((slug) => !(slug in nextRecordRoutes))
 ) {
-  throw new Error("Every bilingual Dossier record must have one canonical next-record destination");
+  throw new Error("Every canonical English Dossier record must have one next-record destination");
 }
 for (const destination of Object.values(nextRecordRoutes)) {
   if (!destination.startsWith("/")) {
-    throw new Error("Dossier next-record destinations must remain same-origin for bilingual host parity");
+    throw new Error("Dossier next-record destinations must remain same-origin");
   }
   if (destination === "/dossier") continue;
   const targetSlug = destination.match(/^\/dossier\/read\/([^/?#]+)$/)?.[1];
@@ -83,10 +84,10 @@ if (!source.includes('const nextRecordHref = NEXT_RECORD_ROUTES[params.slug] ?? 
   throw new Error("Known and unknown Dossier routes must use the canonical navigation resolver");
 }
 if (!source.includes("<a href={nextRecordHref}>{record.next}")) {
-  throw new Error("The bilingual next-record CTA must use the canonical resolved destination");
+  throw new Error("The next-record CTA must use the canonical resolved destination");
 }
 if (source.includes('"/dossier#tokenomics"')) {
-  throw new Error("The next-record CTA must open the direct Tokenomics document, not its index summary");
+  throw new Error("The next-record CTA must open the direct Tokenomics record, not its index summary");
 }
 
-console.log("OK: Dossier next-record navigation matches every English and Turkish record");
+console.log("OK: Dossier navigation covers every canonical English record and fails closed for unknown routes");

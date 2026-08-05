@@ -16,14 +16,6 @@ const sourceFiles = [
   "app/future/casino/page.tsx",
 ];
 
-function copyShape(value) {
-  if (Array.isArray(value)) return value.map(copyShape);
-  if (value && typeof value === "object") {
-    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, copyShape(value[key])]));
-  }
-  return typeof value;
-}
-
 test("future previews are explicit, inactive, and transaction-free", async () => {
   const source = (await Promise.all(sourceFiles.map((path) => readFile(new URL(path, root), "utf8")))).join("\n");
   assert.match(source, /POST-GENESIS CONCEPT/);
@@ -45,21 +37,32 @@ test("future previews are explicit, inactive, and transaction-free", async () =>
   assert.doesNotMatch(source, /<form\b|<button\b/i);
 });
 
-test("English and Turkish future copy share one reconciled content contract", async () => {
-  const [copyText, home] = await Promise.all([
+test("future previews expose only canonical English while target-language review is on HOLD", async () => {
+  const [copyText, languageSource, reviewedPolicyText] = await Promise.all([
     readFile(new URL("app/future/future-copy.json", root), "utf8"),
-    readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("app/future/language.ts", root), "utf8"),
+    readFile(new URL("app/i18n/reviewed-localization-policy.json", root), "utf8"),
   ]);
   const copy = JSON.parse(copyText);
-  assert.deepEqual(copyShape(copy.en), copyShape(copy.tr));
-  assert.match(copy.tr.edge.title.join(" "), /%1 PROTOKOL PAYI.*LİKİDİTE HAVUZU.*\$IAT APY SÜRESİNİ UZATAN KAYNAK/);
-  assert.match(copy.tr.edge.caveat, /sabit APY veya getiri garantisi değildir/i);
-  assert.match(copy.tr.predictive.target, /30 GÜN SONRA/);
-  assert.match(copy.tr.casino.target, /15 GÜN SONRA/);
+  const reviewedPolicy = JSON.parse(reviewedPolicyText);
+
+  assert.equal(reviewedPolicy.mode, "GLOBAL_FAIL_CLOSED");
+  assert.equal(reviewedPolicy.machineDraftRuntimeAllowed, false);
+  assert.equal(reviewedPolicy.unreviewedTargetLanguageBundleAllowed, false);
+  assert.equal(reviewedPolicy.unreviewedLocaleAutonymsAllowed, false);
+  assert.equal(reviewedPolicy.directComponentReviewBundleComplete, false);
+  assert.deepEqual(reviewedPolicy.translations, {});
+  assert.deepEqual(reviewedPolicy.reviews, []);
+  assert.deepEqual(Object.keys(copy), ["en"]);
+  assert.match(copy.en.edge.title.join(" "), /1% PROTOCOL EDGE.*LIQUIDITY POOL.*EXTENDED \$IAT APY RUNWAY/);
+  assert.match(copy.en.edge.caveat, /not a guaranteed fixed APY or return/i);
+  assert.match(copy.en.predictive.target, /30 DAYS AFTER \$IAT GENESIS/);
+  assert.match(copy.en.casino.target, /15 DAYS AFTER \$IAT GENESIS/);
+  assert.match(languageSource, /export type FutureLanguage = keyof typeof futureCopy/);
+  assert.match(languageSource, /return "en"/);
+  assert.doesNotMatch(languageSource, /\b(?:tr|ar|zh|ja|ru)\b\s*[:=]/);
+  assert.doesNotMatch(copyText, /[ĞğİıŞş]|\b(?:BEKLET|DOSYA|SİNYAL|Türkçe)\b/u);
   assert.doesNotMatch(copyText, /T\+\d+/);
-  assert.doesNotMatch(home, /T\+31|T\+15/);
-  assert.match(home, /Predictive Engine target: 30 days after \$IAT Genesis/);
-  assert.match(home, /Tahmin Motoru hedefi: \$IAT Başlangıcından 30 gün sonra/);
 });
 
 test("future previews use new source-bound art and accessible motion fallbacks", async () => {

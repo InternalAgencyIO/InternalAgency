@@ -1,6 +1,6 @@
 {
   "schema": "iat-language-render-evidence/v1",
-  "generatedAt": "2026-08-04T15:07:49.143Z",
+  "generatedAt": "2026-08-05T13:36:17.179Z",
   "status": "PASS",
   "scope": {
     "localeCount": 50,
@@ -9,11 +9,12 @@
     "omittedChecks": []
   },
   "sourceBinding": {
-    "definitionSha256": "7781abc913b4d927519678f833164127e81fa2205cd66bc282bb70a9a47dae33",
-    "messagesFileSha256": "05dbc2cd3599b42e5af82b1a07715bd1328825637ed9144c8578fcd20ed79b84",
-    "metadataSha256": "10331d7efa970167104a1ab5a651110224ee792e74ba577cb5edf2e227418c52",
-    "routeSeoSha256": "3e930c5d8bf6e4a6c9ce14d273caf7628d68d1caf9f76479787058033c38aca7",
-    "pendingSha256": "6d637683843941b037333198dfa2020babef15dce13891612dc974d4a75284b2"
+    "definitionSha256": "54f97aad003f478537acac24a001366bd8213d13daddd48ab31faf78eed0d853",
+    "messagesFileSha256": "735a5035bcb914958b773e04c18134f336f60fe297aff57c26a9952117598e4f",
+    "metadataSha256": "2cfe82adb6e2a0a7cee5ad5e428add17d0bf7525f407700bcc90fdc8d6fbb045",
+    "routeSeoSha256": "d4f09ad807eed5049cb4d9f9c0fb2db22efcef30ecf1bb5d205749f3ec16dae0",
+    "pendingSha256": "d19e5afd3a5acb07eba73b7efd10b6bd25fb82256281c5bf26c66e0f466367e1",
+    "reviewedPolicySha256": "3ae84db60d3d08e4547be7abdfb0100db36e62dc0775e985b19bfdb376747777"
   },
   "environment": {
     "origin": "EPHEMERAL_LOOPBACK",
@@ -29,7 +30,8 @@
     "mainnetChanged": false
   },
   "limitations": [
-    "This is local browser evidence, not native-language review or production deployment evidence."
+    "This is local browser evidence, not native-language review or production deployment evidence.",
+    "Locales without complete accountable review render canonical English, remain noindex, and do not request a non-English payload."
   ],
   "locales": {
     "en": {

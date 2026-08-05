@@ -9,7 +9,6 @@ export function FutureNav({ language }: { language: FutureLanguage }) {
         <a href="/future">{t.systems}</a>
         <a href="/future/predictive-engine">IA-PET</a>
         <a href="/future/casino">{t.casino}</a>
-        <a href={t.switchHref} hrefLang={language === "en" ? "tr" : "en"}>{t.switchLabel}</a>
       </div>
     </nav>
   );

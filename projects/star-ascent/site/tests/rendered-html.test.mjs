@@ -64,7 +64,7 @@ test("renders the read-only IAT Network explorer in fail-closed launch state", a
   assert.doesNotMatch(html, /\b(?:phantom|solflare|backpack|walletconnect)\b/i);
 });
 
-test("renders reconciled future previews in both public languages", async () => {
+test("renders canonical English future previews on both hosts while Turkish is on review HOLD", async () => {
   const paths = ["/future", "/future/predictive-engine", "/future/casino"];
   const [english, turkish] = await Promise.all([
     Promise.all(paths.map(async (path) => (await render(`https://internalagency.io${path}`)).text())),
@@ -78,22 +78,22 @@ test("renders reconciled future previews in both public languages", async () => 
     assert.match(html, /NO WAGER ROUTE/);
   }
   for (const html of turkish) {
-    assert.match(html, /<html lang="tr"/i);
-    assert.match(html, /BAŞLANGIÇ SONRASI KONSEPT/);
-    assert.match(html, /PASİF/);
-    assert.match(html, /BAHİS YOLU YOK/);
+    assert.match(html, /<html lang="en"/i);
+    assert.match(html, /POST-GENESIS CONCEPT/);
+    assert.match(html, /INACTIVE/);
+    assert.match(html, /NO WAGER ROUTE/);
+    assert.match(html, /name="robots" content="noindex, nofollow, noarchive"/i);
   }
 
   assert.match(english[1], /1% PROTOCOL EDGE/);
   assert.match(english[1], /EXTENDED \$IAT APY RUNWAY/);
   assert.match(english[2], /15 DAYS AFTER \$IAT GENESIS/);
-  assert.match(turkish[1], /%1 PROTOKOL PAYI/);
-  assert.match(turkish[1], /LİKİDİTE HAVUZU/);
-  assert.match(turkish[1], /\$IAT APY SÜRESİNİ UZATAN KAYNAK/);
-  assert.match(turkish[2], /\$IAT BAŞLANGICINDAN 15 GÜN SONRA/);
+  assert.match(turkish[1], /1% PROTOCOL EDGE/);
+  assert.match(turkish[1], /EXTENDED \$IAT APY RUNWAY/);
+  assert.match(turkish[2], /15 DAYS AFTER \$IAT GENESIS/);
 });
 
-test("renders proof copy in Turkish on both Turkish public routes before hydration", async () => {
+test("renders English proof fallback on both Turkish public routes before hydration", async () => {
   const [prefixed, dedicatedHost] = await Promise.all([
     render("https://internalagency.io/tr/proof"),
     render("https://ileriakil.com/proof"),
@@ -102,13 +102,14 @@ test("renders proof copy in Turkish on both Turkish public routes before hydrati
     prefixed.text(),
     dedicatedHost.text(),
   ]);
-  const englishLeak = /Every non-secret Devnet export and the separate local time-gate proof/;
-  const turkishCopy = /Gizli olmayan tüm Devnet dışa aktarımları ve ayrı yerel zaman kapısı kanıtı/;
+  const englishCopy = /Every non-secret Devnet export and the separate local time-gate proof/;
+  const turkishDraft = /Gizli olmayan tüm Devnet dışa aktarımları ve ayrı yerel zaman kapısı kanıtı/;
 
   for (const html of [prefixedHtml, dedicatedHostHtml]) {
-    assert.match(html, /<html lang="tr"/i);
-    assert.match(html, turkishCopy);
-    assert.doesNotMatch(html, englishLeak);
+    assert.match(html, /<html lang="en"/i);
+    assert.match(html, englishCopy);
+    assert.doesNotMatch(html, turkishDraft);
+    assert.match(html, /name="robots" content="noindex, nofollow, noarchive"/i);
   }
 });
 
@@ -133,64 +134,43 @@ test("renders the STAR ASCENT launch page and transparent disclosure", async () 
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/i);
 });
 
-test("keeps bilingual and accessibility safeguards in source", async () => {
-  const [page, css, keyArt] = await Promise.all([
+test("keeps canonical-English review-HOLD, archive-routing, and accessibility safeguards in production source", async () => {
+  const [page, css, keyArt, linkUpgrade, layout] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../public/images/star-ascent-keyart-v2.png", import.meta.url)),
+    readFile(new URL("../app/DocumentLinkUpgrade.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /Skip to mission/);
-  assert.match(page, /Misyona geç/);
-  assert.match(page, /aria-label=\{t\.languageLabel\}/);
   assert.match(page, /aria-live="polite"/);
   assert.match(page, /id="registration-safety"/);
   assert.match(page, /aria-describedby="registration-safety"/);
   assert.match(css, /\.sr-only\{/);
-  assert.match(page, /document\.documentElement\.lang = language/);
   assert.match(page, /ANTI-SCAM PROTOCOL/);
-  assert.match(page, /DOLANDIRICILIKTAN KORUNMA/);
   assert.match(page, /No transaction is automatic/);
-  assert.match(page, /Hiçbir işlem otomatik değildir/);
   assert.match(page, /There is no private sale, paid registration/);
   assert.match(page, /transaction, token access, spending permission/);
-  assert.match(page, /işlem, token erişimi, harcama izni/);
   assert.match(page, /treat those details as pending—not implied/);
-  assert.match(page, /ayrıntıları kesinleşmemiş kabul edin/);
   assert.match(page, /Design targets are not live facts/);
-  assert.match(page, /Tasarım hedefleri canlı veriler değildir/);
   assert.match(page, /SUPPLY DESIGN TARGET/);
-  assert.match(page, /ARZ TASARIM HEDEFİ/);
   assert.match(page, /current status is not yet verified/);
-  assert.match(page, /mevcut durum henüz doğrulanmadı/);
   assert.match(page, /Distribution and reward activation must not begin/);
-  assert.match(page, /dağıtım ve ödül aktivasyonu başlamamalıdır/);
   assert.match(page, /Read the complete proposed terms/);
-  assert.match(page, /Önerilen şartların tamamını oku/);
   assert.match(page, /Evidence required before distribution/);
-  assert.match(page, /Dağıtımdan önce gereken kanıtlar/);
   assert.match(page, /Direct explorer links/);
-  assert.match(page, /doğrudan explorer bağlantıları/);
   assert.match(page, /mathematical total of 100%/);
-  assert.match(page, /matematiksel olarak %100 toplam/);
   assert.match(page, /iat-allocation-authority-checklist-en\.txt/);
-  assert.match(page, /iat-allocation-authority-checklist-tr\.txt/);
   assert.match(page, /Read the design before any wallet action/);
-  assert.match(page, /Herhangi bir cüzdan işleminden önce tasarımı okuyun/);
   assert.match(page, /iat-litepaper-en\.txt/);
-  assert.match(page, /iat-litepaper-tr\.txt/);
   assert.match(page, /iat-solana-technical-spec-en\.txt/);
-  assert.match(page, /iat-solana-technical-spec-tr\.txt/);
   assert.match(page, /iat-allocation-validator\.mjs/);
   assert.match(page, /iat-authority-plan-validator\.mjs/);
   assert.match(page, /star-ascent-communications-kit-en\.txt/);
-  assert.match(page, /star-ascent-communications-kit-tr\.txt/);
   assert.match(page, /star-ascent-launch-rehearsal-en\.txt/);
-  assert.match(page, /star-ascent-launch-rehearsal-tr\.txt/);
   assert.match(page, /star-ascent-readiness-scorecard-en\.txt/);
-  assert.match(page, /star-ascent-readiness-scorecard-tr\.txt/);
   assert.match(page, /star-ascent-incident-response-en\.txt/);
-  assert.match(page, /star-ascent-incident-response-tr\.txt/);
   assert.match(page, /star-ascent-release-packet-validator\.mjs/);
   assert.match(page, /star-ascent-evidence-ledger-validator\.mjs/);
   assert.match(page, /star-ascent-readiness-snapshot-validator\.mjs/);
@@ -198,34 +178,27 @@ test("keeps bilingual and accessibility safeguards in source", async () => {
   assert.match(page, /star-ascent-change-freeze-validator\.mjs/);
   assert.match(page, /star-ascent-launch-handoff-validator\.mjs/);
   assert.match(page, /Current readiness: HOLD/);
-  assert.match(page, /Mevcut hazırlık durumu: BEKLET/);
   assert.match(page, /Freshness is a launch gate/);
-  assert.match(page, /Güncellik bir lansman eşiğidir/);
   assert.match(page, /If a launch signal conflicts, stop the action/);
-  assert.match(page, /Lansman sinyalleri çelişirse işlemi durdurun/);
   assert.match(page, /One source\. Three public surfaces\. No silent substitutions/);
-  assert.match(page, /Tek kaynak\. Üç kamu yüzeyi\. Sessiz değişiklik yok/);
-  assert.match(page, /22 FILES · 7 LANGUAGE PAIRS/);
-  assert.match(page, /22 DOSYA · 7 DİL ÇİFTİ/);
   assert.match(page, /Current evidence needs an expiry, two reviewers, and a direct link/);
-  assert.match(page, /Güncel kanıt; sona erme zamanı, iki inceleyen ve doğrudan bağlantı gerektirir/);
   assert.match(page, /Three gates\. One fail-closed snapshot/);
-  assert.match(page, /Üç eşik\. Kapalı durumda başarısız olan tek görünüm/);
   assert.match(page, /Timed checks need an auditable handoff/);
-  assert.match(page, /Zamanlı kontroller denetlenebilir bir devre teslimi gerektirir/);
   assert.match(page, /Freeze the reviewed bundle\. Detect every silent change/);
-  assert.match(page, /İncelenen paketi dondurun\. Her sessiz değişikliği tespit edin/);
   assert.match(page, /Package the evidence\. Keep the final decision human/);
-  assert.match(page, /Kanıtları paketleyin\. Nihai kararı insanda tutun/);
   assert.match(page, /names and email addresses are rejected/);
-  assert.match(page, /adlar ve e-posta adresleri reddedilir/);
   assert.match(page, /What the allocation validator proves/);
-  assert.match(page, /Tahsis doğrulayıcının kanıtladığı/);
   assert.match(page, /does not prove token authenticity/);
-  assert.match(page, /token gerçekliğini/i);
   assert.match(page, /Authority plans stay proposed until the evidence is public/);
-  assert.match(page, /Kanıtlar kamuya açılana kadar yetki planları öneri olarak kalır/);
-  assert.doesNotMatch(page, /permanently revoked|kalıcı olarak kaldırılır/i);
+  assert.doesNotMatch(page, /permanently revoked/i);
+  assert.match(page, /canonical English fallback only/);
+  assert.match(page, /archived records, not executable downloads/);
+  assert.doesNotMatch(page, /-tr\.txt|\b(?:TR|tailoredTR)\b|"en"\s*\|\s*"tr"/u);
+  assert.doesNotMatch(page, /[\u011e\u011f\u0130\u0131\u015e\u015f]|[\u0370-\u052f\u0530-\u058f\u0600-\u06ff\u0900-\u0d7f\u10a0-\u10ff\u3040-\u30ff\u3400-\u9fff]/u);
+  assert.doesNotMatch(page, /\b(?:sourceLanguageForClientPath|localeFromRequestHeaders)\b/);
+  assert.match(linkUpgrade, /link\.href = readerPath\(href\)/);
+  assert.match(linkUpgrade, /link\.removeAttribute\("download"\)/);
+  assert.match(layout, /<DocumentLinkUpgrade \/>/);
   assert.match(css, /prefers-reduced-motion:reduce/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /\.status \.eyebrow\{color:#4a3508\}/);
@@ -233,13 +206,11 @@ test("keeps bilingual and accessibility safeguards in source", async () => {
   assert.match(page, /\/images\/star-ascent-keyart-v2\.png/);
   assert.match(page, /width=\{1728\} height=\{909\} loading="lazy" decoding="async" fetchPriority="low"/);
   assert.match(page, /Amber STAR ASCENT signal-acquired deep-space telemetry artwork/);
-  assert.match(page, /Kehribar STAR ASCENT sinyal alındı derin uzay telemetri görseli/);
   assert.match(css, /\.keyart-frame\{[^}]*overflow:hidden[^}]*isolation:isolate/);
   assert.match(css, /\.keyart-frame::after\{[^}]*pointer-events:none[^}]*animation:keyart-scan 14s linear infinite/);
   assert.match(css, /\.keyart img\{[^}]*height:auto[^}]*transition:transform 1\.2s ease/);
   assert.match(css, /@media\(prefers-reduced-motion:reduce\)\{html\{scroll-behavior:auto\}\.pulse,\.keyart-frame::after\{animation:none\}/);
   assert.match(page, /PRE-LAUNCH ART · Decorative brand artwork — not live telemetry or network status\./);
-  assert.match(page, /LANSMAN ÖNCESİ GÖRSEL · Dekoratif marka görseli — canlı telemetri veya ağ durumu değildir\./);
   assert.match(css, /\.keyart figcaption\{[^}]*text-transform:uppercase/);
   assert.match(css, /\.keyart\{[^}]*content-visibility:auto[^}]*contain-intrinsic-size:auto 52vw/);
   assert.match(css, /@media\(max-width:700px\)\{\.keyart\{[^}]*contain-intrinsic-size:auto 76vw\}/);
@@ -262,7 +233,7 @@ test("keeps bilingual and accessibility safeguards in source", async () => {
   assert.match(css, /\.launch-handoff/);
 });
 
-test("ships bilingual readiness scorecards with freshness and hold gates", async () => {
+test("ships paired-source readiness scorecard drafts with freshness and HOLD gates", async () => {
   const [english, turkish] = await Promise.all([
     readFile(new URL("../archive/public-disclosures/source/star-ascent-readiness-scorecard-en.txt", import.meta.url), "utf8"),
     readFile(new URL("../archive/public-disclosures/source/star-ascent-readiness-scorecard-tr.txt", import.meta.url), "utf8"),
@@ -278,24 +249,72 @@ test("ships bilingual readiness scorecards with freshness and hold gates", async
   assert.match(turkish, /BEKLET veya BAŞARISIZ durumu adres yayınını/);
 });
 
-test("audits every public document link and bilingual critical marker", async () => {
-  const page = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+test("routes every production disclosure link to an English archive response", async () => {
+  const [page, routeSource, linkUpgrade] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/disclosures/[legacy]/route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/DocumentLinkUpgrade.tsx", import.meta.url), "utf8"),
+  ]);
   const linkedFiles = new Set(
     [...page.matchAll(/\/disclosures\/([a-z0-9.-]+)/gi)].map((match) => match[1]),
   );
+  const expectedLinkedFiles = new Set([
+    ...PUBLICATION_MANIFEST.bilingualPairs.map((pair) => pair.en),
+    ...PUBLICATION_MANIFEST.sharedFiles.map((file) => file.path),
+    "star-ascent-publication-audit.mjs",
+  ]);
+  assert.deepEqual([...linkedFiles].sort(), [...expectedLinkedFiles].sort());
+  assert.ok([...linkedFiles].every((path) => !/-tr\.txt$/i.test(path)));
+
+  const extractRouting = (source, declaration) => {
+    const match = source.match(new RegExp(`const ${declaration}(?:: Record<string, string>)? = (\\{[\\s\\S]*?\\n?\\});`));
+    assert.ok(match, `expected ${declaration} route map`);
+    return Function(`"use strict"; return (${match[1]});`)();
+  };
+  const serverRoutes = extractRouting(routeSource, "routes");
+  const clientRoutes = extractRouting(linkUpgrade, "routing");
+  assert.deepEqual(clientRoutes, serverRoutes, "server and hydrated disclosure routing must stay identical");
+  assert.match(routeSource, /replace\(\/\-\(en\|tr\)\$\/i, ""\)/);
+  assert.match(linkUpgrade, /replace\(\/\-\(\?:en\|tr\)\$\/i, ""\)/);
+  assert.match(linkUpgrade, /link\.removeAttribute\("download"\)/);
+
+  const destinations = new Set();
+  for (const path of linkedFiles) {
+    const archive = await readFile(new URL(`../archive/public-disclosures/source/${path}`, import.meta.url), "utf8");
+    assert.ok(archive.trim(), `${path} must remain a non-empty quarantined archive source`);
+    const key = path.replace(/\.(?:txt|mjs)$/i, "").replace(/-(?:en|tr)$/i, "");
+    assert.ok(serverRoutes[key], `${path} must have an honest canonical Dossier destination`);
+    const destination = `/dossier/read/${serverRoutes[key]}`;
+    destinations.add(destination);
+
+    const redirect = await render(`/disclosures/${path}`);
+    assert.equal(redirect.status, 308, `${path} must redirect instead of download`);
+    assert.equal(
+      new URL(redirect.headers.get("location"), "http://localhost").pathname,
+      destination,
+      `${path} destination`,
+    );
+  }
+
+  for (const destination of destinations) {
+    const response = await render(destination);
+    assert.equal(response.status, 200, `${destination} must resolve to an archive page`);
+    assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+    const html = await response.text();
+    assert.match(html, /<html lang="en"/i);
+    assert.match(html, /NEXT RECORD/);
+    assert.doesNotMatch(html, /[\u011e\u011f\u0130\u0131\u015e\u015f]|[\u0370-\u052f\u0530-\u058f\u0600-\u06ff\u0900-\u0d7f\u10a0-\u10ff\u3040-\u30ff\u3400-\u9fff]/u);
+  }
+
+  const unavailable = await render("/disclosures/not-a-canonical-record.txt");
+  assert.equal(unavailable.status, 410, "unknown disclosure identifiers must fail closed instead of rendering a successful fallback record");
+});
+
+test("audits quarantined historical paired-source critical markers without exposing them as production copy", async () => {
   const auditedFiles = new Set([
     ...PUBLICATION_MANIFEST.bilingualPairs.flatMap((pair) => [pair.en, pair.tr]),
     ...PUBLICATION_MANIFEST.sharedFiles.map((file) => file.path),
   ]);
-
-  for (const path of linkedFiles) {
-    const file = await readFile(new URL(`../archive/public-disclosures/source/${path}`, import.meta.url), "utf8");
-    assert.ok(file.trim(), `${path} must be a non-empty public file`);
-  }
-  assert.deepEqual(
-    [...linkedFiles].filter((path) => path !== "star-ascent-publication-audit.mjs").sort(),
-    [...auditedFiles].sort(),
-  );
 
   const bundle = new Map(
     await Promise.all(
@@ -663,7 +682,7 @@ test("cross-channel release packet keeps exact public fields on HOLD", () => {
   );
 });
 
-test("ships bilingual incident-response runbooks with automatic hold triggers", async () => {
+test("ships paired-source incident-response drafts with automatic HOLD triggers", async () => {
   const [english, turkish] = await Promise.all([
     readFile(new URL("../archive/public-disclosures/source/star-ascent-incident-response-en.txt", import.meta.url), "utf8"),
     readFile(new URL("../archive/public-disclosures/source/star-ascent-incident-response-tr.txt", import.meta.url), "utf8"),
@@ -679,7 +698,7 @@ test("ships bilingual incident-response runbooks with automatic hold triggers", 
   assert.match(turkish, /Destek bir olayı özel mesajla çözmez/);
 });
 
-test("ships bilingual allocation and authority checklists as pending templates", async () => {
+test("ships paired-source allocation and authority checklists as pending templates", async () => {
   const [english, turkish] = await Promise.all([
     readFile(new URL("../archive/public-disclosures/source/iat-allocation-authority-checklist-en.txt", import.meta.url), "utf8"),
     readFile(new URL("../archive/public-disclosures/source/iat-allocation-authority-checklist-tr.txt", import.meta.url), "utf8"),
@@ -693,7 +712,7 @@ test("ships bilingual allocation and authority checklists as pending templates",
   assert.match(turkish, /dağıtım durmalıdır/);
 });
 
-test("ships bilingual litepapers as unverified pre-launch design drafts", async () => {
+test("ships paired-source litepapers as unreviewed pre-launch design drafts", async () => {
   const [english, turkish] = await Promise.all([
     readFile(new URL("../archive/public-disclosures/source/iat-litepaper-en.txt", import.meta.url), "utf8"),
     readFile(new URL("../archive/public-disclosures/source/iat-litepaper-tr.txt", import.meta.url), "utf8"),
@@ -707,7 +726,7 @@ test("ships bilingual litepapers as unverified pre-launch design drafts", async 
   assert.match(turkish, /Dağıtım durmalıdır/);
 });
 
-test("ships bilingual design-only Solana specification with safety gates", async () => {
+test("ships paired-source design-only Solana specification drafts with safety gates", async () => {
   const [english, turkish] = await Promise.all([
     readFile(new URL("../archive/public-disclosures/source/iat-solana-technical-spec-en.txt", import.meta.url), "utf8"),
     readFile(new URL("../archive/public-disclosures/source/iat-solana-technical-spec-tr.txt", import.meta.url), "utf8"),
@@ -830,7 +849,7 @@ test("authority validator keeps proposed transitions behind a public evidence ga
   );
 });
 
-test("ships bilingual launch communications kits with anti-scam publishing gates", async () => {
+test("ships paired-source launch communications drafts with anti-scam publishing gates", async () => {
   const [english, turkish] = await Promise.all([
     readFile(new URL("../archive/public-disclosures/source/star-ascent-communications-kit-en.txt", import.meta.url), "utf8"),
     readFile(new URL("../archive/public-disclosures/source/star-ascent-communications-kit-tr.txt", import.meta.url), "utf8"),
@@ -848,7 +867,7 @@ test("ships bilingual launch communications kits with anti-scam publishing gates
   assert.match(turkish, /Token adresi, fiyat, grafik, cüzdan bakiyesi/);
 });
 
-test("ships bilingual rehearsal playbooks with preflight and escalation gates", async () => {
+test("ships paired-source rehearsal playbook drafts with preflight and escalation gates", async () => {
   const [english, turkish] = await Promise.all([
     readFile(new URL("../archive/public-disclosures/source/star-ascent-launch-rehearsal-en.txt", import.meta.url), "utf8"),
     readFile(new URL("../archive/public-disclosures/source/star-ascent-launch-rehearsal-tr.txt", import.meta.url), "utf8"),

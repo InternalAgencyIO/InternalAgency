@@ -14,18 +14,30 @@ import {
   readCleanGitSourceBinding,
 } from "./hydration-shard-evidence.mjs";
 import { localizedCoverageError } from "./live-locale-verifier-lib.mjs";
+import { runtimeContentLocaleForPolicy } from "../app/i18n/runtime-content-policy.js";
 
 const catalog = JSON.parse(await readFile(new URL("../app/i18n/messages.json", import.meta.url), "utf8"));
 const contract = JSON.parse(await readFile(new URL("../app/i18n/payload-contract.json", import.meta.url), "utf8"));
+const reviewedPolicy = JSON.parse(await readFile(new URL("../app/i18n/reviewed-localization-policy.json", import.meta.url), "utf8"));
 const sitemapSource = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
 const locales = Object.keys(catalog.messages ?? {}).sort();
 const routes = [...sitemapSource.matchAll(/\{\s*path:\s*"([^"]*)"/gu)].map((match) => match[1] || "/");
 const rtlLocales = new Set(["ar", "ur"]);
 const htmlLanguageTag = (locale) => (locale === "zh" ? "zh-Hans" : locale === "sr" ? "sr-Cyrl" : locale);
-const payloadRoot = `/${contract.assetNamespace}/${contract.catalogSha256.slice(0, 16)}`;
+if (
+  reviewedPolicy.schema !== "iat-reviewed-localization-policy/v1"
+  || reviewedPolicy.mode !== "GLOBAL_FAIL_CLOSED"
+  || reviewedPolicy.fallback !== "canonical-english"
+  || reviewedPolicy.machineDraftRuntimeAllowed !== false
+  || reviewedPolicy.unreviewedTargetLanguageBundleAllowed !== false
+  || reviewedPolicy.unreviewedLocaleAutonymsAllowed !== false
+  || reviewedPolicy.directComponentReviewBundleComplete !== false
+) throw new Error("Dual-host hydration requires the complete GLOBAL_FAIL_CLOSED policy");
+const contentLocaleFor = (locale) => runtimeContentLocaleForPolicy(reviewedPolicy, locale);
+const payloadRoot = `/${contract.assetNamespace}/${contract.payloadNamespaceSha256.slice(0, 16)}`;
 const browserTypes = { chromium, firefox, webkit };
 const options = hydrationOptionsFromEnvironment(process.env);
-const { concurrency, maxFailures, pageTimeoutMs, engineNames, shardIndex, emitShardRecord } = options;
+const { concurrency, maxFailures, pageTimeoutMs, shardIndex, emitShardRecord } = options;
 const enginePlans = createHydrationPlans({ locales, routes, ...options });
 const fullProfilePlans = emitShardRecord
   ? createHydrationPlans({ locales, routes, ...options, shardIndex: null })
@@ -103,13 +115,41 @@ async function verifyPage(page, { host, locale, route, label }) {
       return nativeFetch(input, init);
     };
   });
-  const localizedPath = route === "/" ? `/${locale}` : `/${locale}${route}`;
+  const contentLocale = contentLocaleFor(locale);
+  const hostReviewHold = host === "ileriakil" && contentLocaleFor("tr") !== "tr";
+  const localizedPath = host === "ileriakil" && locale === "tr"
+    ? route
+    : route === "/" ? `/${locale}` : `/${locale}${route}`;
   const url = `http://${host}.localhost:${port}${localizedPath}`;
   const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30_000 });
   if (!response || response.status() !== 200) {
     return { ok: false, label, detail: `HTTP ${response?.status() ?? "missing"}` };
   }
+  if ((await response.headerValue("content-language")) !== contentLocale) {
+    return { ok: false, label, detail: `Content-Language ${await response.headerValue("content-language") ?? "missing"}, expected ${contentLocale}` };
+  }
+  if ((contentLocale !== locale || hostReviewHold) && !/noindex/iu.test(await response.headerValue("x-robots-tag") ?? "")) {
+    return { ok: false, label, detail: "review-HOLD response is missing X-Robots-Tag noindex" };
+  }
   const serverHtml = await response.text();
+  const publicPath = route === "/" ? "" : route;
+  const expectedCanonical = contentLocale !== locale || hostReviewHold
+    ? `https://internalagency.io${publicPath}`
+    : host === "ileriakil" && locale === "tr"
+      ? `https://ileriakil.com${publicPath}`
+      : locale === "en"
+        ? `https://internalagency.io${publicPath}`
+        : `https://internalagency.io/${locale}${publicPath}`;
+  const canonical = serverHtml.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)/iu)?.[1]
+    ?? serverHtml.match(/<link[^>]+href=["']([^"']+)["'][^>]+rel=["']canonical["']/iu)?.[1]
+    ?? "";
+  const robotsMeta = serverHtml.match(/<meta[^>]+name=["']robots["'][^>]+content=["']([^"']+)/iu)?.[1] ?? "";
+  if (canonical !== expectedCanonical) {
+    return { ok: false, label, detail: `canonical ${canonical || "missing"}, expected ${expectedCanonical}` };
+  }
+  if ((contentLocale !== locale || hostReviewHold) && !/noindex/iu.test(robotsMeta)) {
+    return { ok: false, label, detail: "review-HOLD document is missing meta robots noindex" };
+  }
   await page.waitForFunction(
     () => document.documentElement.dataset.localeReady === "true" || Boolean(document.documentElement.dataset.localeError),
     null,
@@ -145,26 +185,22 @@ async function verifyPage(page, { host, locale, route, label }) {
   if (state.ready !== "true" || state.error !== null) {
     return { ok: false, label, detail: `localeReady=${state.ready ?? "missing"}, localeError=${state.error ?? "none"}` };
   }
-  if (state.lang !== htmlLanguageTag(locale) || state.dir !== (rtlLocales.has(locale) ? "rtl" : "ltr")) {
-    return { ok: false, label, detail: `hydrated lang/dir ${state.lang}/${state.dir}` };
+  if (state.lang !== htmlLanguageTag(contentLocale) || state.dir !== (rtlLocales.has(contentLocale) ? "rtl" : "ltr")) {
+    return { ok: false, label, detail: `hydrated lang/dir ${state.lang}/${state.dir}, expected ${htmlLanguageTag(contentLocale)}/${rtlLocales.has(contentLocale) ? "rtl" : "ltr"}` };
   }
-  if (locale !== "en" && !(host === "ileriakil" && locale === "tr")) {
-    const expectedPayload = `${payloadRoot}/${locale}.json`;
-    if (!requests.some((requestUrl) => new URL(requestUrl).pathname === expectedPayload)) {
-      return { ok: false, label, detail: `hydration did not request ${expectedPayload}` };
-    }
+  const expectedPayload = `${payloadRoot}/${locale}.json`;
+  const payloadObserved = requests.some((requestUrl) => new URL(requestUrl).pathname === expectedPayload);
+  if (payloadObserved !== (contentLocale !== "en")) {
+    return { ok: false, label, detail: `reviewed/fallback payload request mismatch for ${expectedPayload}` };
   }
   if (requests.some((requestUrl) => /translate\.googleapis\.com|translate\.google\./iu.test(requestUrl))) {
     return { ok: false, label, detail: "hydration contacted an external translation service" };
   }
-  const nativeTurkishSource = host === "ileriakil" && locale === "tr";
-  const coverageError = nativeTurkishSource
-    ? null
-    : localizedCoverageError({
-        sourceValues: state.sourceValues,
-        currentValues: state.currentValues,
-        localeMessages: catalog.messages[locale],
-      });
+  const coverageError = localizedCoverageError({
+    sourceValues: state.sourceValues,
+    currentValues: state.currentValues,
+    localeMessages: catalog.messages[contentLocale],
+  });
   if (!coverageError) return { ok: true, label };
 
   const leakedValues = coverageError.match(/remain after hydration: (.+)$/u)?.[1]?.split(" | ") ?? [];
@@ -198,7 +234,7 @@ async function verifyPage(page, { host, locale, route, label }) {
       }, leakedValues);
   const normalize = (value) => value.trim().replace(/\s+/g, " ");
   const collisionCounts = leakedValues.map((target) => {
-    const producers = Object.entries(catalog.messages[locale])
+    const producers = Object.entries(catalog.messages[contentLocale])
       .filter(([, localized]) => normalize(localized) === normalize(target))
       .map(([source]) => ({
         source,
@@ -299,18 +335,18 @@ if (failures.length > 0 || incompleteCount > 0) {
   for (const failure of failures) console.error(`- ${failure.label}: ${failure.detail}`);
   process.exitCode = 1;
 } else {
-  const nativeTurkishRenders = enginePlans.reduce(
-    (total, plan) => total + plan.jobs.filter((job) => job.host === "ileriakil" && job.locale === "tr").length,
+  const reviewedCatalogRenders = enginePlans.reduce(
+    (total, plan) => total + plan.jobs.filter((job) => contentLocaleFor(job.locale) !== "en").length,
     0,
   );
-  const catalogBackedRenders = results.length - nativeTurkishRenders;
+  const canonicalEnglishRenders = results.length - reviewedCatalogRenders;
   const coverageSummary = enginePlans.map((plan) => `${plan.engineName}:${plan.jobs.length}`).join(", ");
   const profileLocaleCount = new Set(enginePlans.flatMap((plan) => plan.jobs.map((job) => job.locale))).size;
   if (shardIndex === null) {
     console.log(
       `Dual-host locale hydration PASS: ${results.length}/${results.length} profile pages reached localeReady across ` +
-        `${profileLocaleCount} locale(s) and 2 hosts (${coverageSummary}), with ${catalogBackedRenders} ` +
-        `committed-catalog renders plus ${nativeTurkishRenders} native Turkish source renders; ` +
+        `${profileLocaleCount} locale(s) and 2 hosts (${coverageSummary}), with ${canonicalEnglishRenders} ` +
+        `canonical-English source/fallback renders plus ${reviewedCatalogRenders} evidence-reviewed catalog renders; ` +
         `catalog ${contract.catalogSha256}.`,
     );
   } else {

@@ -1,3 +1,6 @@
+import reviewedLocalizationPolicy from "./reviewed-localization-policy.json";
+import { runtimeContentLocaleForPolicy } from "./runtime-content-policy.js";
+
 export const localeCodes = [
   "en",
   "zh",
@@ -63,55 +66,55 @@ export type LocaleDefinition = {
 
 export const locales: readonly LocaleDefinition[] = [
   { code: "en", name: "English", nativeName: "English", dir: "ltr", googleCode: "en" },
-  { code: "zh", name: "Mandarin Chinese", nativeName: "简体中文", dir: "ltr", googleCode: "zh-CN" },
-  { code: "es", name: "Spanish", nativeName: "Español", dir: "ltr", googleCode: "es" },
-  { code: "hi", name: "Hindi", nativeName: "हिन्दी", dir: "ltr", googleCode: "hi" },
-  { code: "fr", name: "French", nativeName: "Français", dir: "ltr", googleCode: "fr" },
-  { code: "ar", name: "Modern Standard Arabic", nativeName: "العربية", dir: "rtl", googleCode: "ar" },
-  { code: "bn", name: "Bengali", nativeName: "বাংলা", dir: "ltr", googleCode: "bn" },
-  { code: "pt", name: "Portuguese", nativeName: "Português", dir: "ltr", googleCode: "pt" },
-  { code: "id", name: "Indonesian", nativeName: "Bahasa Indonesia", dir: "ltr", googleCode: "id" },
-  { code: "ur", name: "Urdu", nativeName: "اردو", dir: "rtl", googleCode: "ur" },
-  { code: "ru", name: "Russian", nativeName: "Русский", dir: "ltr", googleCode: "ru" },
-  { code: "de", name: "German", nativeName: "Deutsch", dir: "ltr", googleCode: "de" },
-  { code: "ja", name: "Japanese", nativeName: "日本語", dir: "ltr", googleCode: "ja" },
-  { code: "pcm", name: "Nigerian Pidgin", nativeName: "Naijá Píjin", dir: "ltr", googleCode: "pcm" },
-  { code: "tr", name: "Turkish", nativeName: "Türkçe", dir: "ltr", googleCode: "tr" },
-  { code: "sq", name: "Albanian", nativeName: "Shqip", dir: "ltr", googleCode: "sq" },
-  { code: "ca", name: "Catalan", nativeName: "Català", dir: "ltr", googleCode: "ca" },
-  { code: "be", name: "Belarusian", nativeName: "Беларуская", dir: "ltr", googleCode: "be" },
-  { code: "nl", name: "Dutch", nativeName: "Nederlands", dir: "ltr", googleCode: "nl" },
-  { code: "bs", name: "Bosnian", nativeName: "Bosanski", dir: "ltr", googleCode: "bs" },
-  { code: "bg", name: "Bulgarian", nativeName: "Български", dir: "ltr", googleCode: "bg" },
-  { code: "hr", name: "Croatian", nativeName: "Hrvatski", dir: "ltr", googleCode: "hr" },
-  { code: "el", name: "Greek", nativeName: "Ελληνικά", dir: "ltr", googleCode: "el" },
-  { code: "cs", name: "Czech", nativeName: "Čeština", dir: "ltr", googleCode: "cs" },
-  { code: "da", name: "Danish", nativeName: "Dansk", dir: "ltr", googleCode: "da" },
-  { code: "et", name: "Estonian", nativeName: "Eesti", dir: "ltr", googleCode: "et" },
-  { code: "fi", name: "Finnish", nativeName: "Suomi", dir: "ltr", googleCode: "fi" },
-  { code: "hu", name: "Hungarian", nativeName: "Magyar", dir: "ltr", googleCode: "hu" },
-  { code: "is", name: "Icelandic", nativeName: "Íslenska", dir: "ltr", googleCode: "is" },
-  { code: "ga", name: "Irish", nativeName: "Gaeilge", dir: "ltr", googleCode: "ga" },
-  { code: "it", name: "Italian", nativeName: "Italiano", dir: "ltr", googleCode: "it" },
-  { code: "lv", name: "Latvian", nativeName: "Latviešu", dir: "ltr", googleCode: "lv" },
-  { code: "lt", name: "Lithuanian", nativeName: "Lietuvių", dir: "ltr", googleCode: "lt" },
-  { code: "lb", name: "Luxembourgish", nativeName: "Lëtzebuergesch", dir: "ltr", googleCode: "lb" },
-  { code: "mk", name: "Macedonian", nativeName: "Македонски", dir: "ltr", googleCode: "mk" },
-  { code: "mt", name: "Maltese", nativeName: "Malti", dir: "ltr", googleCode: "mt" },
-  { code: "no", name: "Norwegian", nativeName: "Norsk", dir: "ltr", googleCode: "no" },
-  { code: "pl", name: "Polish", nativeName: "Polski", dir: "ltr", googleCode: "pl" },
-  { code: "ro", name: "Romanian", nativeName: "Română", dir: "ltr", googleCode: "ro" },
-  { code: "sr", name: "Serbian (Cyrillic)", nativeName: "Српски", dir: "ltr", googleCode: "sr" },
-  { code: "sk", name: "Slovak", nativeName: "Slovenčina", dir: "ltr", googleCode: "sk" },
-  { code: "sl", name: "Slovenian", nativeName: "Slovenščina", dir: "ltr", googleCode: "sl" },
-  { code: "sv", name: "Swedish", nativeName: "Svenska", dir: "ltr", googleCode: "sv" },
-  { code: "uk", name: "Ukrainian", nativeName: "Українська", dir: "ltr", googleCode: "uk" },
-  { code: "ht", name: "Haitian Creole", nativeName: "Kreyòl ayisyen", dir: "ltr", googleCode: "ht" },
-  { code: "gn", name: "Guaraní", nativeName: "Avañe'ẽ", dir: "ltr", googleCode: "gn" },
-  { code: "qu", name: "Quechua", nativeName: "Runa Simi", dir: "ltr", googleCode: "qu" },
-  { code: "hy", name: "Armenian", nativeName: "Հայերեն", dir: "ltr", googleCode: "hy" },
-  { code: "az", name: "Azerbaijani", nativeName: "Azərbaycanca", dir: "ltr", googleCode: "az" },
-  { code: "ka", name: "Georgian", nativeName: "ქართული", dir: "ltr", googleCode: "ka" },
+  { code: "zh", name: "Mandarin Chinese", nativeName: "Mandarin Chinese", dir: "ltr", googleCode: "zh-CN" },
+  { code: "es", name: "Spanish", nativeName: "Spanish", dir: "ltr", googleCode: "es" },
+  { code: "hi", name: "Hindi", nativeName: "Hindi", dir: "ltr", googleCode: "hi" },
+  { code: "fr", name: "French", nativeName: "French", dir: "ltr", googleCode: "fr" },
+  { code: "ar", name: "Modern Standard Arabic", nativeName: "Modern Standard Arabic", dir: "rtl", googleCode: "ar" },
+  { code: "bn", name: "Bengali", nativeName: "Bengali", dir: "ltr", googleCode: "bn" },
+  { code: "pt", name: "Portuguese", nativeName: "Portuguese", dir: "ltr", googleCode: "pt" },
+  { code: "id", name: "Indonesian", nativeName: "Indonesian", dir: "ltr", googleCode: "id" },
+  { code: "ur", name: "Urdu", nativeName: "Urdu", dir: "rtl", googleCode: "ur" },
+  { code: "ru", name: "Russian", nativeName: "Russian", dir: "ltr", googleCode: "ru" },
+  { code: "de", name: "German", nativeName: "German", dir: "ltr", googleCode: "de" },
+  { code: "ja", name: "Japanese", nativeName: "Japanese", dir: "ltr", googleCode: "ja" },
+  { code: "pcm", name: "Nigerian Pidgin", nativeName: "Nigerian Pidgin", dir: "ltr", googleCode: "pcm" },
+  { code: "tr", name: "Turkish", nativeName: "Turkish", dir: "ltr", googleCode: "tr" },
+  { code: "sq", name: "Albanian", nativeName: "Albanian", dir: "ltr", googleCode: "sq" },
+  { code: "ca", name: "Catalan", nativeName: "Catalan", dir: "ltr", googleCode: "ca" },
+  { code: "be", name: "Belarusian", nativeName: "Belarusian", dir: "ltr", googleCode: "be" },
+  { code: "nl", name: "Dutch", nativeName: "Dutch", dir: "ltr", googleCode: "nl" },
+  { code: "bs", name: "Bosnian", nativeName: "Bosnian", dir: "ltr", googleCode: "bs" },
+  { code: "bg", name: "Bulgarian", nativeName: "Bulgarian", dir: "ltr", googleCode: "bg" },
+  { code: "hr", name: "Croatian", nativeName: "Croatian", dir: "ltr", googleCode: "hr" },
+  { code: "el", name: "Greek", nativeName: "Greek", dir: "ltr", googleCode: "el" },
+  { code: "cs", name: "Czech", nativeName: "Czech", dir: "ltr", googleCode: "cs" },
+  { code: "da", name: "Danish", nativeName: "Danish", dir: "ltr", googleCode: "da" },
+  { code: "et", name: "Estonian", nativeName: "Estonian", dir: "ltr", googleCode: "et" },
+  { code: "fi", name: "Finnish", nativeName: "Finnish", dir: "ltr", googleCode: "fi" },
+  { code: "hu", name: "Hungarian", nativeName: "Hungarian", dir: "ltr", googleCode: "hu" },
+  { code: "is", name: "Icelandic", nativeName: "Icelandic", dir: "ltr", googleCode: "is" },
+  { code: "ga", name: "Irish", nativeName: "Irish", dir: "ltr", googleCode: "ga" },
+  { code: "it", name: "Italian", nativeName: "Italian", dir: "ltr", googleCode: "it" },
+  { code: "lv", name: "Latvian", nativeName: "Latvian", dir: "ltr", googleCode: "lv" },
+  { code: "lt", name: "Lithuanian", nativeName: "Lithuanian", dir: "ltr", googleCode: "lt" },
+  { code: "lb", name: "Luxembourgish", nativeName: "Luxembourgish", dir: "ltr", googleCode: "lb" },
+  { code: "mk", name: "Macedonian", nativeName: "Macedonian", dir: "ltr", googleCode: "mk" },
+  { code: "mt", name: "Maltese", nativeName: "Maltese", dir: "ltr", googleCode: "mt" },
+  { code: "no", name: "Norwegian", nativeName: "Norwegian", dir: "ltr", googleCode: "no" },
+  { code: "pl", name: "Polish", nativeName: "Polish", dir: "ltr", googleCode: "pl" },
+  { code: "ro", name: "Romanian", nativeName: "Romanian", dir: "ltr", googleCode: "ro" },
+  { code: "sr", name: "Serbian (Cyrillic)", nativeName: "Serbian (Cyrillic)", dir: "ltr", googleCode: "sr" },
+  { code: "sk", name: "Slovak", nativeName: "Slovak", dir: "ltr", googleCode: "sk" },
+  { code: "sl", name: "Slovenian", nativeName: "Slovenian", dir: "ltr", googleCode: "sl" },
+  { code: "sv", name: "Swedish", nativeName: "Swedish", dir: "ltr", googleCode: "sv" },
+  { code: "uk", name: "Ukrainian", nativeName: "Ukrainian", dir: "ltr", googleCode: "uk" },
+  { code: "ht", name: "Haitian Creole", nativeName: "Haitian Creole", dir: "ltr", googleCode: "ht" },
+  { code: "gn", name: "Guarani", nativeName: "Guarani", dir: "ltr", googleCode: "gn" },
+  { code: "qu", name: "Quechua", nativeName: "Quechua", dir: "ltr", googleCode: "qu" },
+  { code: "hy", name: "Armenian", nativeName: "Armenian", dir: "ltr", googleCode: "hy" },
+  { code: "az", name: "Azerbaijani", nativeName: "Azerbaijani", dir: "ltr", googleCode: "az" },
+  { code: "ka", name: "Georgian", nativeName: "Georgian", dir: "ltr", googleCode: "ka" },
 ] as const;
 
 const supported = new Set<string>(localeCodes);
@@ -125,11 +128,17 @@ export function localeFromPath(pathname: string): LocaleCode | null {
   return isLocaleCode(first) ? first : null;
 }
 
-export function sourceLanguageForClientPath(pathname: string, hostname: string): "en" | "tr" {
-  const explicitLocale = localeFromPath(pathname);
-  const turkishHost = hostname.toLowerCase().includes("ileriakil");
-  if (explicitLocale) return explicitLocale === "tr" && turkishHost ? "tr" : "en";
-  return turkishHost ? "tr" : "en";
+export function runtimeContentLocale(locale: LocaleCode): LocaleCode {
+  return runtimeContentLocaleForPolicy(reviewedLocalizationPolicy, locale) as LocaleCode;
+}
+
+export function sourceLanguageForClientPath(_pathname: string, _hostname: string): "en" {
+  // Direct component copy has no per-string review binding. It therefore stays
+  // canonical English; reviewed non-English content is applied only through the
+  // evidence-bound runtime catalog.
+  void _pathname;
+  void _hostname;
+  return "en";
 }
 
 export function stripLocalePrefix(pathname: string): string {

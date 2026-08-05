@@ -4,10 +4,11 @@ This is the live public-build repository for the STAR ASCENT Genesis surface.
 
 The work is intentionally visible: source, public documents, visual iterations, and production decisions are committed as the project advances. The repository is a record of what is present—not a substitute for independent verification.
 
-## Live surfaces
+## Live surfaces and localization status
 
-- English and international: `internalagency.io`
-- Turkish: `ileriakil.com`
+- Indexable canonical English and international surface: `internalagency.io`
+- Turkish-intent host: `ileriakil.com` — Turkish is on localization review `HOLD`; the host currently serves canonical English fallback with `noindex` and must not be described as an approved Turkish-language surface.
+- All other non-English locale-intent routes are also `HOLD` until exact overrides have accountable, source-bound review evidence.
 - Canonical public document index: `/dossier`
 
 ## Repository map

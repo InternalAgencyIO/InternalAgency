@@ -6,19 +6,17 @@ const metadata = JSON.parse(
   readFileSync(new URL("../../app/i18n/metadata.generated.json", import.meta.url), "utf8"),
 );
 const localeCodes = Object.keys(metadata);
-const rtlLocales = new Set(["ar", "ur"]);
-const htmlLanguageTags = { zh: "zh-Hans", sr: "sr-Cyrl" };
 const stressRoutes = [
-  ["ar", "/ar"],
-  ["ur", "/ur/tokenomics"],
-  ["zh", "/zh/future/predictive-engine"],
-  ["ja", "/ja/dossier"],
-  ["de", "/de/launch"],
-  ["tr", "/tr/future/casino"],
+  ["ar", "/ar", "INTERNAL AGENCY PRESENTS"],
+  ["ur", "/ur/tokenomics", "IAT // PUBLIC ECONOMIC POLICY V2"],
+  ["zh", "/zh/future/predictive-engine", "PREDICTIVE ENGINE"],
+  ["ja", "/ja/dossier", "INTERNAL AGENCY // CANONICAL DOSSIER"],
+  ["de", "/de/launch", "STAR ASCENT // GENESIS CONTROL"],
+  ["tr", "/tr/future/casino", "CASINO DLC // EVERY RESULT REPLAYABLE"],
 ];
 
-function expectedLanguage(locale) {
-  return htmlLanguageTags[locale] ?? locale;
+function expectedLanguage() {
+  return "en";
 }
 
 function monitorRuntime(page) {
@@ -40,7 +38,7 @@ function monitorRuntime(page) {
   return errors;
 }
 
-async function assertLocalizedDocument(page, locale, path, { accessibility = false } = {}) {
+async function assertLocalizedDocument(page, locale, path, { accessibility = false, englishMarker = null } = {}) {
   const response = await page.goto(path, { waitUntil: "domcontentloaded" });
   expect(response?.status(), `${locale} HTTP status`).toBe(200);
   await page.waitForFunction(() => document.documentElement.dataset.localeReady === "true");
@@ -54,33 +52,47 @@ async function assertLocalizedDocument(page, locale, path, { accessibility = fal
       dir: document.documentElement.dir,
       title: document.title,
       description: document.querySelector('meta[name="description"]')?.getAttribute("content") ?? "",
+      robots: document.querySelector('meta[name="robots"]')?.getAttribute("content") ?? "",
       canonical,
       canonicalCount: document.querySelectorAll('link[rel="canonical"]').length,
       alternateCount: alternates.length,
       hasDefaultAlternate: alternates.some((link) => link.getAttribute("hrefLang") === "x-default"),
       visibleBody: getComputedStyle(document.body).visibility !== "hidden" && getComputedStyle(document.body).opacity !== "0",
       bodyLength: bodyText.trim().length,
-      starshipControlLeak: bodyText.includes("STARSHIP CONTROL. GO."),
+      localePayloadRequests: performance.getEntriesByType("resource")
+        .filter((entry) => entry.name.includes("/i18n-v2/")).length,
       documentFits: document.documentElement.scrollWidth <= document.documentElement.clientWidth,
       genericAriaLabels: document.querySelectorAll('div[aria-label]:not([role]), span[aria-label]:not([role])').length,
       mojibake: bodyText.match(/(?:\u00c3\u0192.|\u00c3\u201e.|\u00c3\u2026.|\u00c3\u00a2\u00e2\u201a\u00ac|\u00c3\u00af\u00c2\u00bf\u00c2\u00bd)/gu) ?? [],
+      targetLanguageScript: bodyText.match(/[\u0370-\u052f\u0530-\u058f\u0600-\u06ff\u0900-\u0d7f\u10a0-\u10ff\u3040-\u30ff\u3400-\u9fff]/gu) ?? [],
+      turkishSpecificLetters: bodyText.match(/[\u011e\u011f\u0130\u0131\u015e\u015f]/gu) ?? [],
     };
   });
 
   expect(state.lang, `${locale} document language`).toBe(expectedLanguage(locale));
-  expect(state.dir, `${locale} document direction`).toBe(rtlLocales.has(locale) ? "rtl" : "ltr");
+  expect(await response?.headerValue("content-language"), `${locale} response content language`).toBe("en");
+  expect(state.dir, `${locale} document direction`).toBe("ltr");
   expect(state.title, `${locale} document title`).not.toBe("");
   expect(state.description, `${locale} description`).not.toBe("");
   expect(state.canonicalCount, `${locale} canonical count`).toBe(1);
-  expect(new URL(state.canonical).pathname, `${locale} canonical path`).toBe(path);
-  expect(state.alternateCount, `${locale} alternate count`).toBe(51);
+  const canonicalPath = locale === "en" ? path : path.slice(locale.length + 1) || "/";
+  expect(new URL(state.canonical).origin, `${locale} canonical origin`).toBe("https://internalagency.io");
+  expect(new URL(state.canonical).pathname, `${locale} canonical path`).toBe(canonicalPath);
+  expect(state.alternateCount, `${locale} alternate count`).toBe(2);
   expect(state.hasDefaultAlternate, `${locale} x-default alternate`).toBe(true);
   expect(state.visibleBody, `${locale} body visibility`).toBe(true);
   expect(state.bodyLength, `${locale} rendered body length`).toBeGreaterThan(300);
   expect(state.documentFits, `${locale} horizontal containment`).toBe(true);
   expect(state.genericAriaLabels, `${locale} generic ARIA labels`).toBe(0);
   expect(state.mojibake, `${locale} mojibake`).toEqual([]);
-  if (locale !== "en") expect(state.starshipControlLeak, `${locale} critical English fallback`).toBe(false);
+  expect(state.targetLanguageScript, `${locale} unreviewed target-language script`).toEqual([]);
+  expect(state.turkishSpecificLetters, `${locale} unreviewed Turkish copy`).toEqual([]);
+  if (englishMarker) expect(await page.locator("body").innerText(), `${locale} visible English fallback marker`).toContain(englishMarker);
+  if (locale !== "en") {
+    expect(state.robots, `${locale} review-HOLD indexing`).toContain("noindex");
+    expect(await response?.headerValue("x-robots-tag"), `${locale} review-HOLD response indexing`).toContain("noindex");
+    expect(state.localePayloadRequests, `${locale} review-HOLD payload isolation`).toBe(0);
+  }
 
   if (accessibility) {
     await page.addScriptTag({ content: axe.source });
@@ -94,7 +106,7 @@ async function assertLocalizedDocument(page, locale, path, { accessibility = fal
   }
 }
 
-test("all 50 locale roots hydrate with localized document ownership", async ({ page }, testInfo) => {
+test("all 50 locale roots hydrate with reviewed-or-English document ownership", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "chromium-desktop", "The exhaustive locale pass runs once; the stress matrix covers every project.");
   test.setTimeout(240_000);
   expect(localeCodes, "locale catalog size").toHaveLength(50);
@@ -103,19 +115,19 @@ test("all 50 locale roots hydrate with localized document ownership", async ({ p
   for (const locale of localeCodes) {
     runtimeErrors.length = 0;
     const path = locale === "en" ? "/" : `/${locale}`;
-    await assertLocalizedDocument(page, locale, path);
+    await assertLocalizedDocument(page, locale, path, { englishMarker: "INTERNAL AGENCY PRESENTS" });
     expect(runtimeErrors, `${locale} runtime errors`).toEqual([]);
   }
 });
 
-test("RTL, CJK, long-copy, and Turkish routes survive every browser and viewport profile", async ({ context }) => {
+test("HOLD script groups and long-copy routes preserve English fallback across every browser and viewport", async ({ context }) => {
   test.setTimeout(180_000);
 
-  for (const [locale, path] of stressRoutes) {
+  for (const [locale, path, englishMarker] of stressRoutes) {
     const page = await context.newPage();
     const runtimeErrors = monitorRuntime(page);
     try {
-      await assertLocalizedDocument(page, locale, path, { accessibility: true });
+      await assertLocalizedDocument(page, locale, path, { accessibility: true, englishMarker });
       expect(runtimeErrors, `${locale} runtime errors`).toEqual([]);
     } finally {
       await page.close();
@@ -123,7 +135,7 @@ test("RTL, CJK, long-copy, and Turkish routes survive every browser and viewport
   }
 });
 
-test("the Chinese network route replaces cataloged English copy", async ({ page }, testInfo) => {
+test("the Chinese network route keeps canonical English until accountable review", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "chromium-desktop", "The focused Chinese regression runs once.");
   await page.route("**/api/network", async (route) => {
     await route.fulfill({
@@ -146,17 +158,19 @@ test("the Chinese network route replaces cataloged English copy", async ({ page 
   await assertLocalizedDocument(page, "zh", "/zh/network", { accessibility: true });
   const bodyText = await page.locator("body").innerText();
   for (const expected of ["一屏。", "IAT 网络 // 实时 SOLANA 读出", "返回 ⟨STAR ASCENT⟩", "整个信号。", "链脉冲", "玩家视图"]) {
-    expect(bodyText, `Chinese network copy: ${expected}`).toContain(expected);
+    expect(bodyText, `unreviewed Chinese machine draft: ${expected}`).not.toContain(expected);
   }
   for (const fallback of ["ONE SCREEN.", "IAT NETWORK // LIVE SOLANA READOUT", "RETURN TO STAR ASCENT", "THE WHOLE SIGNAL.", "CHAIN PULSE", "PLAYER VIEW"]) {
-    expect(bodyText, `English network fallback: ${fallback}`).not.toContain(fallback);
+    expect(bodyText, `review-HOLD English fallback: ${fallback}`).toContain(fallback);
   }
   expect(runtimeErrors, "Chinese network runtime errors").toEqual([]);
 });
 
-test("a stale locale payload cannot mark the document ready", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "chromium-desktop", "The payload-contract rejection runs once.");
+test("a review-HOLD route never requests or applies an unreviewed locale payload", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium-desktop", "The fail-closed payload isolation check runs once.");
+  let payloadRequested = false;
   await page.route("**/i18n-v2/**/*.json", async (route) => {
+    payloadRequested = true;
     await route.fulfill({
       status: 200,
       contentType: "application/json",
@@ -170,10 +184,14 @@ test("a stale locale payload cannot mark the document ready", async ({ page }, t
     });
   });
   await page.goto("/zh/network", { waitUntil: "domcontentloaded" });
-  await page.waitForFunction(() => document.documentElement.dataset.localeError === "payload-contract-failed");
+  await page.waitForFunction(() => document.documentElement.dataset.localeReady === "true");
   const state = await page.evaluate(() => ({
     ready: document.documentElement.dataset.localeReady,
-    error: document.documentElement.dataset.localeError,
+    error: document.documentElement.dataset.localeError ?? null,
+    body: document.body.innerText,
   }));
-  expect(state).toEqual({ ready: "false", error: "payload-contract-failed" });
+  expect(payloadRequested).toBe(false);
+  expect(state.ready).toBe("true");
+  expect(state.error).toBeNull();
+  expect(state.body).toContain("IAT NETWORK // LIVE SOLANA READOUT");
 });

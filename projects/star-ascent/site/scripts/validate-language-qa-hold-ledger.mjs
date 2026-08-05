@@ -124,7 +124,7 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
   }
   for (const field of [
     "worktreeStatusSha256", "definitionSha256", "messagesFileSha256", "criticalSha256",
-    "overridesSha256", "metadataSha256", "routeSeoSha256", "pendingSha256",
+    "overridesSha256", "metadataSha256", "routeSeoSha256", "pendingSha256", "reviewedPolicySha256",
   ]) {
     check(/^[0-9a-f]{64}$/u.test(scorecard.sourceBinding?.[field]), `scorecard source binding ${field} is invalid`);
   }
@@ -163,6 +163,7 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
     metadataSha256: ["projects/star-ascent/site/app/i18n/metadata.generated.json", canonicalDigest],
     routeSeoSha256: ["projects/star-ascent/site/app/i18n/route-seo.json", canonicalDigest],
     pendingSha256: ["projects/star-ascent/site/app/i18n/pending-visible-source.json", canonicalDigest],
+    reviewedPolicySha256: ["projects/star-ascent/site/app/i18n/reviewed-localization-policy.json", canonicalDigest],
   };
   const sourceBytes = {};
   for (const [field, [sourcePath, digest]] of Object.entries(sourceFiles)) {
@@ -175,6 +176,7 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
   const sourceDefinition = JSON.parse(sourceBytes.definitionSha256.toString("utf8"));
   const sourceCatalog = JSON.parse(sourceBytes.messagesFileSha256.toString("utf8"));
   const sourceRouteSeo = JSON.parse(sourceBytes.routeSeoSha256.toString("utf8"));
+  const sourceReviewedPolicy = JSON.parse(sourceBytes.reviewedPolicySha256.toString("utf8"));
   check(sourceDefinition.schema === "iat-language-qa-check-definition/v1", "source check definition schema mismatch");
   check(sourceDefinition.localeCount === 50 && sourceDefinition.checksPerLocale === 100 && sourceDefinition.resultCount === 5000, "source check definition cardinality mismatch");
   check(Array.isArray(sourceDefinition.checks) && sourceDefinition.checks.length === 100, "source check definition must contain exactly 100 checks");
@@ -182,6 +184,23 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
   check(sameJson(Object.keys(sourceCatalog.messages ?? {}), expectedLocales), "source message catalog locale inventory mismatch");
   check(Object.keys(sourceCatalog.messages.en ?? {}).length === scorecard.scope.canonicalStrings, "scorecard canonical-string scope mismatch");
   check(Object.keys(sourceRouteSeo).length === scorecard.scope.canonicalRoutes, "scorecard canonical-route scope mismatch");
+  check(
+    sourceReviewedPolicy.schema === "iat-reviewed-localization-policy/v1"
+      && sourceReviewedPolicy.mode === "GLOBAL_FAIL_CLOSED"
+      && sourceReviewedPolicy.fallback === "canonical-english"
+      && sourceReviewedPolicy.machineDraftRuntimeAllowed === false
+      && sourceReviewedPolicy.unreviewedTargetLanguageBundleAllowed === false
+      && sourceReviewedPolicy.unreviewedLocaleAutonymsAllowed === false
+      && sourceReviewedPolicy.directComponentReviewBundleComplete === false,
+    "reviewed-localization policy is not fail closed",
+  );
+  const reviewedRuntimeCells = Object.values(sourceReviewedPolicy.translations ?? {})
+    .reduce((total, translations) => total + Object.keys(translations ?? {}).length, 0);
+  const canonicalFallbackCells = scorecard.scope.canonicalStrings * (expectedLocales.length - 1) - reviewedRuntimeCells;
+  check(scorecard.scope.reviewedRuntimeCells === reviewedRuntimeCells, "reviewed runtime-cell scope mismatch");
+  check(scorecard.scope.canonicalFallbackCells === canonicalFallbackCells, "canonical fallback-cell scope mismatch");
+  check(scorecard.policy.runtimeMode === sourceReviewedPolicy.mode, "runtime policy mode mismatch");
+  check(scorecard.policy.runtimeFallback === sourceReviewedPolicy.fallback, "runtime fallback policy mismatch");
 
   const renderEvidencePath = `projects/star-ascent/site/${scorecard.evidenceInputs.render.path}`;
   const renderEvidenceBytes = git(["show", `${sourceCommit}:${renderEvidencePath}`]);
@@ -207,7 +226,7 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
     "source-bound render evidence generation time must be canonical UTC",
   );
   check(renderGeneratedAtMs <= generatedAtMs, "scorecard predates its source-bound render evidence");
-  for (const field of ["definitionSha256", "messagesFileSha256", "metadataSha256", "routeSeoSha256", "pendingSha256"]) {
+  for (const field of ["definitionSha256", "messagesFileSha256", "metadataSha256", "routeSeoSha256", "pendingSha256", "reviewedPolicySha256"]) {
     check(renderEvidence.sourceBinding?.[field] === scorecard.sourceBinding[field], `render evidence source binding ${field} mismatch`);
   }
   check(
@@ -250,6 +269,7 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
   check(ledger.sourceBinding.scorecardGeneratedAt === scorecard.generatedAt, "scorecard generation time mismatch");
   check(ledger.sourceBinding.catalogHeadCommit === scorecard.sourceBinding.headCommit, "catalog source commit mismatch");
   check(ledger.sourceBinding.catalogHeadTree === scorecard.sourceBinding.headTree, "catalog source tree mismatch");
+  check(ledger.sourceBinding.reviewedPolicySha256 === scorecard.sourceBinding.reviewedPolicySha256, "reviewed policy digest mismatch");
   check(sameJson(ledger.scorecardSummary, summary), "ledger scorecard summary mismatch");
 
   const holds = allResults.filter(({ status }) => status === "HOLD");
@@ -265,7 +285,7 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
   check(heuristicHolds.length === ledger.holdSummary.heuristicEditorialReview, "heuristic editorial HOLD count mismatch");
   check(ledger.holdSummary.automationMayApprove === 0, "automation cannot approve HOLD results");
 
-  const expectedQueueIds = ["LQA-051", "LQA-052", "LQA-055", "LQA-056", "LQA-057", "LQA-058", "LQA-060"];
+  const expectedQueueIds = [...new Set(heuristicHolds.map(({ id }) => id))];
   check(sameJson(ledger.heuristicEditorialQueue.map(({ checkId }) => checkId), expectedQueueIds), "heuristic queue inventory drift");
   for (const queue of ledger.heuristicEditorialQueue) {
     const matching = heuristicHolds.filter(({ id }) => id === queue.checkId);
@@ -291,7 +311,11 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
     .sort((left, right) => right.heuristicHoldCount - left.heuristicHoldCount)
     .slice(0, 5);
   check(sameJson(ledger.priorityLocales, expectedPriorityLocales), "priority queue must contain the five highest-density locales");
-  check(ledger.priorityLocales.every(({ heuristicHoldCount }) => heuristicHoldCount >= 5), "priority locale density unexpectedly fell below five HOLD checks");
+  if (heuristicHolds.length > 0) {
+    check(ledger.priorityLocales.every(({ heuristicHoldCount }) => heuristicHoldCount >= 1), "priority locale density must remain positive while heuristic HOLDs exist");
+  } else {
+    check(ledger.priorityLocales.length === 0, "priority locale queue must be empty when no heuristic HOLDs exist");
+  }
   check(ledger.decisions.some(({ id, state }) => id === "LQA-HOLD-003" && state === "NO_RELEASE_CLAIM"), "no-release decision missing");
   check(Object.values(ledger.assurance).every((value) => value === false), "ledger assurance flags must remain false");
   check(ledger.limitations.length === 4, "limitation inventory drift");

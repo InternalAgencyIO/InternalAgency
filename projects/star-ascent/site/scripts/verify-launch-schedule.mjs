@@ -41,7 +41,6 @@ const requiredMarkers = new Map([
     "app/LaunchClock.tsx",
     [
       "GENESIS // UNSCHEDULED · MAINNET HOLD",
-      "BAŞLANGIÇ // PLANLANMADI · MAINNET BEKLET",
       "REPLACEMENT UTC WINDOW · NOT PUBLISHED",
       'data-scheduled-at="UNSCHEDULED"',
     ],

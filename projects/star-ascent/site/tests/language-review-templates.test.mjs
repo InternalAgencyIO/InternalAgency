@@ -50,11 +50,11 @@ test("review templates cover all 50 locales without pre-authorizing evidence", (
   }
 });
 
-test("blank templates preserve all 456 HOLD results without inferring render evidence", () => {
+test("blank templates preserve all 300 evidence HOLDs without inferring render evidence", () => {
   const temporary = mkdtempSync(resolve(tmpdir(), "iat-language-review-"));
   try {
     const scorecard = generateScorecard(resolve(temporary, "scorecard.json"));
-    assert.deepEqual(scorecard.summary, { PASS: 3294, FAIL: 0, HOLD: 456, NOT_RUN: 1250 });
+    assert.deepEqual(scorecard.summary, { PASS: 3450, FAIL: 0, HOLD: 300, NOT_RUN: 1250 });
     assert.equal(scorecard.assurance.nativeQualityClaimAllowed, false);
     assert.equal(scorecard.assurance.releaseApproved, false);
   } finally {
@@ -88,7 +88,7 @@ test("a native PASS with an incomplete reviewer envelope remains HOLD", () => {
     const tamperedPath = resolve(temporary, "native.json");
     writeFileSync(tamperedPath, `${JSON.stringify(tampered)}\n`, "utf8");
     const scorecard = generateScorecard(resolve(temporary, "scorecard.json"), tamperedPath);
-    assert.deepEqual(scorecard.summary, { PASS: 3294, FAIL: 0, HOLD: 456, NOT_RUN: 1250 });
+    assert.deepEqual(scorecard.summary, { PASS: 3450, FAIL: 0, HOLD: 300, NOT_RUN: 1250 });
     const check = scorecard.locales.find(({ locale }) => locale === "en").checks.find(({ id }) => id === "LQA-096");
     assert.equal(check.status, "HOLD");
     assert.match(check.detail, /not source-bound or complete/i);

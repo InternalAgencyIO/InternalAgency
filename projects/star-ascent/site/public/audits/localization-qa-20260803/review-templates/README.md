@@ -4,10 +4,12 @@ These files make the remaining language QA gates actionable. They do **not**
 approve a locale, change Mainnet state, or turn automated heuristics into native
 review.
 
-The current public scorecard has 4,544 PASS, 0 FAIL, 456 HOLD, and 0 NOT_RUN
-results. Of the HOLD results, 250 are the five native-review checks across 50
-locales and 50 require independent language-identification evidence. The other
-156 are editorial heuristics that reviewers should use as a focused queue.
+With complete source-bound render evidence, the current GLOBAL_FAIL_CLOSED
+policy produces 4,700 PASS, 0 FAIL, 300 HOLD, and 0 NOT_RUN results. Of the
+HOLD results, 250 are the five native-review checks across 50 locales and 50
+require independent language-identification evidence. Inactive canonical
+English fallback cells are excluded from target-language heuristics, so there
+is no manufactured heuristic remediation queue.
 
 ## Safe workflow
 
@@ -16,11 +18,13 @@ locales and 50 require independent language-identification evidence. The other
 2. Run `npm run generate:i18n:review-templates` to bind fresh templates to the
    exact catalog and per-locale message digests.
 3. Give one locale at a time to an accountable reviewer with documented locale
-   competency. Do not record `PASS` until all 1,468 keys and the required route
-   coverage have actually been reviewed.
+   competency. Do not record `PASS` until every key identified by the current
+   template's `reviewedKeyCount` and the required route coverage have actually
+   been reviewed.
 4. For LQA-096 through LQA-100, fill the reviewer identity, role, competency,
    independence statement, evidence note, UTC review time, and any required
-   region or route fields. A blank field keeps the result on HOLD.
+   region or route fields. Review every key bound by `reviewedKeyCount` in the
+   generated template. A blank field keeps the result on HOLD.
 5. Run an independent language-identification engine against each locale
    catalog. Record the engine, its identified locale, confidence, and threshold.
    Do not infer or prefill the result from the expected locale.

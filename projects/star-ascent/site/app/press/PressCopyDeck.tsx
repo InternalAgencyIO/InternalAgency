@@ -4,12 +4,12 @@ import { useState } from "react";
 
 const posts: ReadonlyArray<readonly [string, string]> = [
   [
-    "T−60",
-    "THE SIGNAL OPENS IN ONE HOUR.\n\nSTAR ASCENT is a live public build from Internal Agency. The room opens in one hour.\n\nUse only after a new window is formally scheduled.\n\nhttps://internalagency.io/launch",
+    "SCHEDULE DRAFT",
+    "DRAFT · DO NOT PUBLISH · NO WINDOW SCHEDULED\n\nIf a future launch window is formally scheduled, replace this draft with source-bound copy that states the exact reviewed UTC time.\n\nhttps://internalagency.io/launch",
   ],
   [
-    "OPEN",
-    "WELCOME TO STAR ASCENT.\n\nThe room is open. Follow one route only: Signal → Launch Control → Proof Board.\n\nhttps://internalagency.io/signal",
+    "OPENING DRAFT",
+    "DRAFT · DO NOT PUBLISH · NO WINDOW SCHEDULED\n\nNo launch room or claim route is open. If an opening is later approved, verify it through Signal → Launch Control → Proof Board.\n\nhttps://internalagency.io/signal",
   ],
   [
     "HOLD",
@@ -44,10 +44,10 @@ export function PressCopyDeck() {
 
   return (
     <section className="press-copy-deck">
-      <p>SHARE-READY COPY</p>
-      <h2>THE SIGNAL, IN FOUR MOVES.</h2>
+      <p>HOLD-SAFE DRAFT COPY</p>
+      <h2>NOT FOR PUBLICATION UNTIL A WINDOW IS REVIEWED.</h2>
       <span className="press-copy-status" role="status" aria-live="polite">
-        {copied ? `${copied} post copied.` : ""}
+        {copied ? `${copied} draft copied.` : ""}
       </span>
       <div>
         {posts.map(([label, body]) => (
@@ -55,7 +55,7 @@ export function PressCopyDeck() {
             <span>{label}</span>
             <pre>{body}</pre>
             <button type="button" onClick={() => copy(label, body)}>
-              {copied === label ? "COPIED" : "COPY POST"}
+              {copied === label ? "COPIED" : "COPY DRAFT"}
             </button>
           </article>
         ))}

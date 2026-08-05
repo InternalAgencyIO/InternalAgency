@@ -1,7 +1,7 @@
 /** Cloudflare Worker entry point for the vinext-starter template. */
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
-import { localeCodes } from "../app/i18n/config";
+import { localeCodes, runtimeContentLocale, type LocaleCode } from "../app/i18n/config";
 
 const supportedLocales = new Set<string>(localeCodes);
 
@@ -127,9 +127,9 @@ function preferredLanguage(request: Request): string {
   return acceptedLanguages[0] ?? "en";
 }
 
-function pathLocale(pathname: string): string | null {
+function pathLocale(pathname: string): LocaleCode | null {
   const candidate = pathname.split("/").filter(Boolean)[0]?.toLowerCase();
-  return candidate && supportedLocales.has(candidate) ? candidate : null;
+  return candidate && supportedLocales.has(candidate) ? candidate as LocaleCode : null;
 }
 
 interface Env {
@@ -192,7 +192,7 @@ const worker = {
 
     if (url.pathname === "/" && !turkishHost) {
       const preferred = preferredLanguage(request);
-      if (preferred !== "en") {
+      if (preferred !== "en" && runtimeContentLocale(preferred as LocaleCode) === preferred) {
         const destination = new URL(request.url);
         destination.pathname = `/${preferred}`;
         return new Response(null, {
@@ -219,12 +219,19 @@ const worker = {
     const responseHeaders = new Headers(response.headers);
     const contentType = responseHeaders.get("content-type") ?? "";
     if (contentType.includes("text/html")) {
-      responseHeaders.set("Content-Language", incomingLocale ?? (turkishHost ? "tr" : "en"));
+      const requestedLocale = incomingLocale ?? (turkishHost ? "tr" : "en");
+      const contentLanguage = runtimeContentLocale(requestedLocale);
+      responseHeaders.set("Content-Language", contentLanguage);
       if (!incomingLocale && !turkishHost) responseHeaders.append("Vary", "Accept-Language, CF-IPCountry, Cookie");
-      if (url.pathname === "/mint") responseHeaders.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+      const turkishHostReviewHold = turkishHost && runtimeContentLocale("tr") !== "tr";
+      if (url.pathname === "/mint" || contentLanguage !== requestedLocale || turkishHostReviewHold) {
+        responseHeaders.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+      }
     }
-    if (/^\/i18n\/[a-z-]+\.json$/i.test(originalPathname)) {
-      responseHeaders.set("Cache-Control", "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800");
+    if (/^\/i18n-v2\/[a-f0-9]{16}\/[a-z-]+\.json$/i.test(originalPathname)) {
+      responseHeaders.set("Cache-Control", "public, max-age=31536000, s-maxage=31536000, immutable");
+    } else if (/^\/i18n\/[a-z-]+\.json$/i.test(originalPathname)) {
+      responseHeaders.set("Cache-Control", "public, max-age=0, must-revalidate");
     }
     return new Response(response.body, {
       status: response.status,

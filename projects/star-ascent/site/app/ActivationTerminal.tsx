@@ -2,14 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Language = "en" | "tr";
-
-export function ActivationTerminal({ language, onClose, returnFocusTo }: { language: Language; onClose: () => void; returnFocusTo?: HTMLElement | null }) {
+export function ActivationTerminal({ onClose, returnFocusTo }: { onClose: () => void; returnFocusTo?: HTMLElement | null }) {
   const [tab, setTab] = useState<"activate" | "claim" | "broadcast">("activate");
   const [callsign, setCallsign] = useState("");
   const [acknowledged, setAcknowledged] = useState(false);
   const dialogRef = useRef<HTMLElement>(null);
-  const tr = language === "tr";
   useEffect(() => {
     const dialog = dialogRef.current;
     const backdrop = dialog?.parentElement;
@@ -66,10 +63,8 @@ export function ActivationTerminal({ language, onClose, returnFocusTo }: { langu
     event.preventDefault();
     selectTab(tabKeys[next]);
   };
-  const copy = tr ? {
-    label: "GENESIS // AKTİVASYON TERMİNALİ", title: "SİNYALİNİ HAZIRLA.", tabs: ["AKTİVASYON", "CLAIM DURUMU", "YAYIN"], close: "KAPAT", callsign: "OPERATÖR ÇAĞRI ADI", placeholder: "TERCİHE BAĞLI // HENÜZ KAYDEDİLMEZ", acknowledgement: "Resmî mint ve claim yolu yayımlanana kadar hiçbir cüzdan veya işlem isteminin geçerli olmadığını anlıyorum.", ready: "GENESIS İÇİN HAZIR", notReady: "SİNYAL BEKLENİYOR", activateText: "Bu terminal bir hazırlık alanıdır. Şu an cüzdan bağlamaz, veri toplamaz, imza istemez ve hiçbir işlemi başlatmaz.", activateBullets: ["Resmî yayın kanallarını izle", "Mint adresini üç kez doğrula", "Yalnızca okunabilir, insan-dili bir mesajı incele"], claimText: "Claim penceresi genesis sırasında yalnızca doğrulanmış kanallarda duyurulacaktır.", claimStatus: "CLAIM ROUTE // HENÜZ YAYINLANMADI", broadcastText: "AÇIK KAYNAK GENESIS TÖRENİ", broadcastTime: "YENİ UTC PENCERESİ // YAYIMLANMADI", broadcastNote: "Aktif tören saati yoktur. Mainnet fonlama, yeniden üretilmiş paketler ve tüm kanıt eşikleri tamamlanana kadar BEKLET durumundadır.", return: "ANA SİNYALE DÖN", proof: "KANIT PANOSUNU AÇ", launch: "YAYIN KONTROLÜNÜ AÇ"
-  } : {
-    label: "GENESIS // ACTIVATION TERMINAL", title: "PREPARE YOUR SIGNAL.", tabs: ["ACTIVATION", "CLAIM STATUS", "BROADCAST"], close: "CLOSE", callsign: "OPERATOR CALLSIGN", placeholder: "OPTIONAL // NOT SAVED YET", acknowledgement: "I understand that no wallet or transaction request is valid until the official mint and claim route are published.", ready: "GENESIS READY", notReady: "SIGNAL PENDING", activateText: "This terminal is a preparation space. It does not connect a wallet, collect data, request a signature, or initiate a transaction.", activateBullets: ["Watch verified project channels", "Verify the mint address three times", "Review only a human-readable message"], claimText: "The claim window will be announced during genesis only through verified channels.", claimStatus: "CLAIM ROUTE // NOT PUBLISHED", broadcastText: "OPEN-SOURCE GENESIS CEREMONY", broadcastTime: "REPLACEMENT UTC WINDOW // NOT PUBLISHED", broadcastNote: "No ceremony time is active. Mainnet stays on HOLD until funding, regenerated packets, and every evidence gate pass.", return: "RETURN TO MAIN SIGNAL", proof: "OPEN PROOF BOARD", launch: "OPEN LAUNCH CONTROL"
+  const copy = {
+    label: "GENESIS // ACTIVATION TERMINAL", title: "PREPARE YOUR SIGNAL.", tabs: ["ACTIVATION", "CLAIM STATUS", "BROADCAST"], close: "CLOSE", callsign: "OPERATOR CALLSIGN", placeholder: "OPTIONAL // NOT SAVED YET", acknowledgement: "I understand that no wallet or transaction request is valid until the official mint and claim route are published.", ready: "LOCAL CHECKLIST ACKNOWLEDGED // MAINNET HOLD", notReady: "SIGNAL PENDING // MAINNET HOLD", activateText: "This terminal is a preparation space. It does not connect a wallet, collect data, request a signature, or initiate a transaction.", activateBullets: ["Watch verified project channels", "Verify the mint address three times", "Review only a human-readable message"], claimText: "The claim window will be announced during genesis only through verified channels.", claimStatus: "CLAIM ROUTE // NOT PUBLISHED", broadcastText: "OPEN-SOURCE GENESIS CEREMONY", broadcastTime: "REPLACEMENT UTC WINDOW // NOT PUBLISHED", broadcastNote: "No ceremony time is active. Mainnet stays on HOLD until funding, regenerated packets, and every evidence gate pass.", return: "RETURN TO MAIN SIGNAL", proof: "OPEN PROOF BOARD", launch: "OPEN LAUNCH CONTROL"
   };
   return <div className="activation-backdrop" role="presentation" onMouseDown={onClose}>
     <section ref={dialogRef} className="activation-terminal" role="dialog" aria-modal="true" aria-labelledby="activation-title" onMouseDown={(event) => event.stopPropagation()}>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
-import { htmlLanguageTag, localePath, locales, type LocaleCode } from "./config";
+import { htmlLanguageTag, localePath, locales, runtimeContentLocale, type LocaleCode } from "./config";
 import { localePayloadContract, localePayloadPath } from "./payload-contract";
 
 export type LocaleCatalog = Record<string, string>;
@@ -11,12 +11,56 @@ type LocalePayload = {
   catalogSha256: string;
   sourceCount: number;
   locale: LocaleCode;
+  sourceKeysSha256: string;
+  contentSha256: string;
   messages: LocaleCatalog;
 };
 
 const translatableAttributes = ["alt", "aria-label", "placeholder", "title"] as const;
-const legacyLanguageLabels = new Set(["TR", "EN", "TÜRKÇE", "ENGLISH"]);
+const legacyLanguageLabels = new Set(["TR", "EN", "ENGLISH"]);
 const hydrationQuietWindowMs = 100;
+const payloadFields = ["catalogSha256", "contentSha256", "locale", "messages", "schema", "sourceCount", "sourceKeysSha256"].sort();
+
+async function sha256Hex(value: string): Promise<string> {
+  if (!globalThis.crypto?.subtle) throw new Error("Web Crypto SHA-256 is unavailable");
+  const digest = await globalThis.crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function verifyLocalePayloadIntegrity(payload: LocalePayload, locale: LocaleCode): Promise<LocaleCatalog> {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) throw new Error("Locale payload is not an object");
+  if (JSON.stringify(Object.keys(payload).sort()) !== JSON.stringify(payloadFields)) {
+    throw new Error("Locale payload fields mismatch");
+  }
+  if (!payload.messages || typeof payload.messages !== "object" || Array.isArray(payload.messages)) {
+    throw new Error("Locale payload messages are invalid");
+  }
+  if (payload.locale !== locale) throw new Error("Locale payload mismatch");
+  const sourceKeys = Object.keys(payload.messages);
+  if (
+    payload.schema !== localePayloadContract.schema
+    || payload.catalogSha256 !== localePayloadContract.catalogSha256
+    || payload.sourceCount !== localePayloadContract.sourceCount
+    || sourceKeys.length !== localePayloadContract.sourceCount
+    || payload.sourceKeysSha256 !== localePayloadContract.sourceKeysSha256
+  ) throw new Error("Locale payload contract mismatch");
+
+  const computedSourceKeysSha256 = await sha256Hex(JSON.stringify(sourceKeys));
+  if (computedSourceKeysSha256 !== payload.sourceKeysSha256) throw new Error("Locale payload source-key digest mismatch");
+  const computedContentSha256 = await sha256Hex(JSON.stringify({
+    schema: payload.schema,
+    catalogSha256: payload.catalogSha256,
+    sourceCount: payload.sourceCount,
+    locale: payload.locale,
+    sourceKeysSha256: payload.sourceKeysSha256,
+    messages: payload.messages,
+  }));
+  const expectedContentSha256 = localePayloadContract.localeContentSha256[locale];
+  if (payload.contentSha256 !== expectedContentSha256 || computedContentSha256 !== expectedContentSha256) {
+    throw new Error("Locale payload content digest mismatch");
+  }
+  return payload.messages;
+}
 
 function translate(catalog: LocaleCatalog, locale: LocaleCode, source: string): string {
   if (locale === "en") return source;
@@ -98,20 +142,26 @@ function switchLocale(locale: LocaleCode) {
   document.cookie = `ia_language=${locale}; Max-Age=31536000; Path=/; SameSite=Lax; Secure`;
 }
 
-export function LocaleRuntime({ locale, promptCopy, publicPath, turkishHost }: { locale: LocaleCode; promptCopy: PromptCopy; publicPath: string; turkishHost: boolean }) {
+function reviewedLocaleLabel(entry: { code: LocaleCode; name: string; nativeName: string }) {
+  return runtimeContentLocale(entry.code) === entry.code
+    ? entry.nativeName
+    : `${entry.name} (${entry.code.toUpperCase()})`;
+}
+
+export function LocaleRuntime({ locale, contentLocale, promptCopy, publicPath, turkishHost }: { locale: LocaleCode; contentLocale: LocaleCode; promptCopy: PromptCopy; publicPath: string; turkishHost: boolean }) {
   const [showPrompt, setShowPrompt] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const definition = useMemo(() => locales.find((entry) => entry.code === locale) ?? locales[0], [locale]);
+  const contentDefinition = useMemo(() => locales.find((entry) => entry.code === contentLocale) ?? locales[0], [contentLocale]);
   useLayoutEffect(() => {
     document.documentElement.dataset.localeReady = "false";
-    document.documentElement.lang = htmlLanguageTag(locale);
-    document.documentElement.dir = definition.dir;
+    document.documentElement.lang = htmlLanguageTag(contentLocale);
+    document.documentElement.dir = contentDefinition.dir;
     let active = true;
     let observer: MutationObserver | null = null;
     let readinessTimer: number | null = null;
     const localizedTextValues = new WeakMap<Text, string>();
-    const nativeTurkishHost = locale === "tr" && window.location.hostname.includes("ileriakil");
-    const routeLocale: LocaleCode = nativeTurkishHost ? "en" : locale;
+    const routeLocale: LocaleCode = turkishHost && locale === "tr" ? "en" : locale;
 
     const armReadiness = () => {
       if (document.documentElement.dataset.localeReady === "true") return;
@@ -129,32 +179,26 @@ export function LocaleRuntime({ locale, promptCopy, publicPath, turkishHost }: {
       if (!active) return;
       observer = new MutationObserver((changes) => {
         for (const change of changes) {
-          for (const node of change.addedNodes) localizeTree(node, locale, catalog, routeLocale, localizedTextValues);
-          if (change.type === "characterData") localizeTree(change.target, locale, catalog, routeLocale, localizedTextValues);
+          for (const node of change.addedNodes) localizeTree(node, contentLocale, catalog, routeLocale, localizedTextValues);
+          if (change.type === "characterData") localizeTree(change.target, contentLocale, catalog, routeLocale, localizedTextValues);
         }
         armReadiness();
       });
       observer.observe(document.body, { childList: true, subtree: true, characterData: true });
-      localizeTree(document.body, locale, catalog, routeLocale, localizedTextValues);
+      localizeTree(document.body, contentLocale, catalog, routeLocale, localizedTextValues);
       armReadiness();
     };
 
-    if (locale === "en" || nativeTurkishHost) activate({});
+    if (contentLocale === "en") activate({});
     else {
       fetch(localePayloadPath(locale), { cache: "force-cache" })
         .then((response) => {
           if (!response.ok) throw new Error(`Locale payload failed: ${response.status}`);
           return response.json() as Promise<LocalePayload>;
         })
-        .then((payload) => {
-          if (payload.locale !== locale) throw new Error("Locale payload mismatch");
-          if (
-            payload.schema !== localePayloadContract.schema
-            || payload.catalogSha256 !== localePayloadContract.catalogSha256
-            || payload.sourceCount !== localePayloadContract.sourceCount
-            || Object.keys(payload.messages ?? {}).length !== localePayloadContract.sourceCount
-          ) throw new Error("Locale payload contract mismatch");
-          activate(payload.messages);
+        .then(async (payload) => {
+          const messages = await verifyLocalePayloadIntegrity(payload, locale);
+          activate(messages);
         })
         .catch(() => {
           if (active) document.documentElement.dataset.localeError = "payload-contract-failed";
@@ -166,7 +210,7 @@ export function LocaleRuntime({ locale, promptCopy, publicPath, turkishHost }: {
       if (readinessTimer !== null) window.clearTimeout(readinessTimer);
       observer?.disconnect();
     };
-  }, [definition.dir, locale]);
+  }, [contentDefinition.dir, contentLocale, locale, turkishHost]);
 
   useEffect(() => {
     if (locale === "en" || sessionStorage.getItem("ia-language-prompt-seen") === locale) return;
@@ -199,7 +243,7 @@ export function LocaleRuntime({ locale, promptCopy, publicPath, turkishHost }: {
           aria-controls="locale-menu"
           onClick={() => setShowMenu((open) => !open)}
         >
-          {definition.nativeName} <span aria-hidden="true">⌄</span>
+          {reviewedLocaleLabel(definition)} <span aria-hidden="true">⌄</span>
         </button>
           <div id="locale-menu" role="menu" hidden={!showMenu} aria-hidden={!showMenu}>
             {locales.map((entry) => {
@@ -211,10 +255,10 @@ export function LocaleRuntime({ locale, promptCopy, publicPath, turkishHost }: {
                 aria-current={entry.code === locale ? "true" : undefined}
                 onClick={() => switchLocale(entry.code)}
                 href={href}
-                hrefLang={htmlLanguageTag(entry.code)}
-                lang={htmlLanguageTag(entry.code)}
+                hrefLang={runtimeContentLocale(entry.code) === entry.code ? htmlLanguageTag(entry.code) : undefined}
+                lang={htmlLanguageTag(runtimeContentLocale(entry.code))}
               >
-                <span>{entry.nativeName}</span><small>{entry.name}</small>
+                <span>{reviewedLocaleLabel(entry)}</span><small>Locale code {entry.code.toUpperCase()}</small>
               </a>;
             })}
           </div>

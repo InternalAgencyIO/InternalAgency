@@ -17,8 +17,8 @@ const canonical = (value) => {
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const sameJson = (left, right) => canonical(left) === canonical(right);
 const trustedHistoricalExecutables = {
-  "projects/star-ascent/site/scripts/compile-i18n-assets.mjs": "f74ec67a8b1776c9d2ceb0a1872465808094bd45c2a937f18970e08499f4510a",
-  "projects/star-ascent/site/scripts/generate-language-qa-scorecard.mjs": "70634bdfff7ed3f8f7e1182147bd8c8236559e30c37ae501c5068fe55c14699a",
+  "projects/star-ascent/site/scripts/compile-i18n-assets.mjs": "64ca0f41857f64ef4750c75da82062607fb79ede96192085ca1bd96ff965c58c",
+  "projects/star-ascent/site/scripts/generate-language-qa-scorecard.mjs": "6fc777101ecf2af45ba4767af60a3d45120aa090b222e0d5bb42a2e31755862f",
   "projects/star-ascent/site/scripts/lib/read-canonical-tracked-file.mjs": "fddcaa53a532b161ba23c93e92f73838c014e94c33b5e10bd0e8ff191566ebc3",
 };
 

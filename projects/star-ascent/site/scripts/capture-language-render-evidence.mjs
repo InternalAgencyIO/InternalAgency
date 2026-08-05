@@ -7,6 +7,7 @@ import { chromium } from "playwright";
 import axe from "axe-core";
 import { extractFromHtml } from "./generate-i18n-catalog.mjs";
 import { readCanonicalTrackedFile } from "./lib/read-canonical-tracked-file.mjs";
+import { runtimeContentLocaleForPolicy } from "../app/i18n/runtime-content-policy.js";
 
 const root = process.cwd();
 const repoRoot = resolve(root, "../../..");
@@ -69,14 +70,8 @@ function expectedTag(locale) {
   return htmlTags[locale] ?? locale;
 }
 
-function sourceAttributeValues(html, attribute, sourceSet) {
-  const values = [];
-  const pattern = new RegExp(`\\b${attribute}=(?:"([^"]*)"|'([^']*)')`, "giu");
-  for (const match of html.matchAll(pattern)) {
-    const value = normalize(match[1] ?? match[2] ?? "");
-    if (sourceSet.has(value)) values.push(value);
-  }
-  return [...new Set(values)];
+function contentLocaleFor(policy, locale) {
+  return runtimeContentLocaleForPolicy(policy, locale);
 }
 
 async function mapLimit(items, limit, worker) {
@@ -91,6 +86,8 @@ async function mapLimit(items, limit, worker) {
   await Promise.all(runners);
 }
 
+const delay = (milliseconds) => new Promise((resolveWait) => setTimeout(resolveWait, milliseconds));
+
 function runPackageCommand(command, args, options) {
   if (process.platform === "win32") {
     return execFileSync(process.env.ComSpec ?? "C:\\Windows\\System32\\cmd.exe", ["/d", "/s", "/c", `${command}.cmd ${args.join(" ")}`], options);
@@ -98,7 +95,7 @@ function runPackageCommand(command, args, options) {
   return execFileSync(command, args, options);
 }
 
-let [definitionRaw, messagesRaw, metadataRaw, routeSeoRaw, pendingRaw, payloadContractRaw, sitemapSource] = await Promise.all([
+let [definitionRaw, messagesRaw, metadataRaw, routeSeoRaw, pendingRaw, payloadContractRaw, sitemapSource, reviewedPolicyRaw] = await Promise.all([
   readRepoText(resolve(root, "app/i18n/language-qa-checks.v1.json")),
   readRepoText(resolve(root, "app/i18n/messages.json")),
   readRepoText(resolve(root, "app/i18n/metadata.generated.json")),
@@ -106,18 +103,29 @@ let [definitionRaw, messagesRaw, metadataRaw, routeSeoRaw, pendingRaw, payloadCo
   readRepoText(resolve(root, "app/i18n/pending-visible-source.json")),
   readRepoText(resolve(root, "app/i18n/payload-contract.json")),
   readRepoText(resolve(root, "app/sitemap.ts")),
+  readRepoText(resolve(root, "app/i18n/reviewed-localization-policy.json")),
 ]);
-let definition = JSON.parse(definitionRaw);
 let catalog = JSON.parse(messagesRaw);
 let metadata = JSON.parse(metadataRaw);
 let routeSeo = JSON.parse(routeSeoRaw);
 let pending = JSON.parse(pendingRaw);
+let reviewedPolicy = JSON.parse(reviewedPolicyRaw);
 const payloadContract = JSON.parse(payloadContractRaw);
-const payloadRoot = `/${payloadContract.assetNamespace}/${payloadContract.catalogSha256.slice(0, 16)}`;
+const payloadRoot = `/${payloadContract.assetNamespace}/${payloadContract.payloadNamespaceSha256.slice(0, 16)}`;
 const locales = Object.keys(catalog.messages);
 let sourceSet = new Set(Object.keys(catalog.messages.en));
 const routes = [...sitemapSource.matchAll(/\{\s*path:\s*"([^"]*)"/gu)].map((match) => match[1] || "/");
 if (locales.length !== 50 || routes.length !== 25) throw new Error(`Unexpected scope: ${locales.length} locales, ${routes.length} routes`);
+if (
+  reviewedPolicy.schema !== "iat-reviewed-localization-policy/v1"
+  || reviewedPolicy.mode !== "GLOBAL_FAIL_CLOSED"
+  || reviewedPolicy.fallback !== "canonical-english"
+  || reviewedPolicy.machineDraftRuntimeAllowed !== false
+  || reviewedPolicy.unreviewedTargetLanguageBundleAllowed !== false
+  || reviewedPolicy.unreviewedLocaleAutonymsAllowed !== false
+  || reviewedPolicy.directComponentReviewBundleComplete !== false
+  || locales.some((locale) => !Object.hasOwn(reviewedPolicy.localeStatus ?? {}, locale))
+) throw new Error("Reviewed-localization policy is missing, unsafe, or incomplete");
 
 const failures = Object.fromEntries(locales.map((locale) => [locale, Object.fromEntries(renderCheckIds.map((id) => [id, []]))]));
 const metrics = Object.fromEntries(locales.map((locale) => [locale, Object.fromEntries(renderCheckIds.map((id) => [id, {}]))]));
@@ -139,11 +147,12 @@ try {
     readRepoText(resolve(root, "app/i18n/route-seo.json")),
     readRepoText(resolve(root, "app/i18n/pending-visible-source.json")),
   ]);
-  definition = JSON.parse(definitionRaw);
   catalog = JSON.parse(messagesRaw);
   metadata = JSON.parse(metadataRaw);
   routeSeo = JSON.parse(routeSeoRaw);
   pending = JSON.parse(pendingRaw);
+  reviewedPolicyRaw = await readRepoText(resolve(root, "app/i18n/reviewed-localization-policy.json"));
+  reviewedPolicy = JSON.parse(reviewedPolicyRaw);
   const compiledLocales = Object.keys(catalog.messages);
   if (compiledLocales.join("\0") !== locales.join("\0")) throw new Error("Build changed the configured locale set");
   sourceSet = new Set(Object.keys(catalog.messages.en));
@@ -184,29 +193,46 @@ try {
   if (!sitemapResponse.ok) addGlobalFailure("LQA-092", `sitemap.xml returned ${sitemapResponse.status}`);
 
   const tasks = locales.flatMap((locale) => routes.map((route) => ({ locale, route })));
+  const approvedHreflangLocales = locales.filter((locale) => contentLocaleFor(reviewedPolicy, locale) === locale && locale !== "pcm");
+  const expectedAlternateCount = approvedHreflangLocales.length + 1 + (contentLocaleFor(reviewedPolicy, "tr") === "tr" ? 1 : 0);
   const unknownSources = new Set();
-  await mapLimit(tasks, 10, async ({ locale, route }) => {
+  await mapLimit(tasks, 4, async ({ locale, route }) => {
     const path = localizedPath(locale, route);
+    const contentLocale = contentLocaleFor(reviewedPolicy, locale);
+    const indexable = contentLocale === locale;
     let response;
-    try {
-      response = await fetch(`${baseUrl}${path}`, { headers: { "x-forwarded-host": "internalagency.io" }, signal: AbortSignal.timeout(30_000) });
-    } catch (error) {
-      for (const id of ["LQA-073", "LQA-074", "LQA-075", "LQA-076", "LQA-090", "LQA-091", "LQA-093"]) addFailure(locale, id, `${path}: ${error.message}`);
+    let responseError;
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      try {
+        const candidate = await fetch(`${baseUrl}${path}`, { headers: { "x-forwarded-host": "internalagency.io" }, signal: AbortSignal.timeout(30_000) });
+        if (candidate.status === 200 || attempt === 3) {
+          response = candidate;
+          break;
+        }
+        responseError = new Error(`HTTP ${candidate.status}`);
+        await candidate.arrayBuffer();
+      } catch (error) {
+        responseError = error;
+      }
+      await delay(250 * attempt);
+    }
+    if (!response) {
+      for (const id of ["LQA-073", "LQA-074", "LQA-075", "LQA-076", "LQA-090", "LQA-091", "LQA-093"]) addFailure(locale, id, `${path}: ${responseError?.message ?? "request failed"}`);
       return;
     }
     if (response.status !== 200) addFailure(locale, "LQA-073", `${path}: HTTP ${response.status}`);
-    if (response.headers.get("content-language") !== locale) addFailure(locale, "LQA-074", `${path}: Content-Language ${response.headers.get("content-language") ?? "missing"}`);
+    if (response.headers.get("content-language") !== contentLocale) addFailure(locale, "LQA-074", `${path}: Content-Language ${response.headers.get("content-language") ?? "missing"}, expected ${contentLocale}`);
     const html = await response.text();
     if (route === "/") rootHtml.set(locale, html);
     const htmlTag = html.match(/<html\b[^>]*>/iu)?.[0] ?? "";
     const htmlAttrs = attrs(htmlTag);
-    if (htmlAttrs.lang !== expectedTag(locale)) addFailure(locale, "LQA-075", `${path}: html lang ${htmlAttrs.lang ?? "missing"}`);
-    const expectedDirection = rtlLocales.has(locale) ? "rtl" : "ltr";
+    if (htmlAttrs.lang !== expectedTag(contentLocale)) addFailure(locale, "LQA-075", `${path}: html lang ${htmlAttrs.lang ?? "missing"}`);
+    const expectedDirection = rtlLocales.has(contentLocale) ? "rtl" : "ltr";
     if (htmlAttrs.dir !== expectedDirection) addFailure(locale, "LQA-076", `${path}: html dir ${htmlAttrs.dir ?? "missing"}`);
 
     const linkTags = tags(html, "link");
     const canonicals = linkTags.filter((entry) => entry.attrs.rel === "canonical");
-    const expectedCanonicalPath = path || "/";
+    const expectedCanonicalPath = localizedPath(contentLocale, route);
     if (canonicals.length !== 1) addFailure(locale, "LQA-090", `${path}: ${canonicals.length} canonicals`);
     else {
       try {
@@ -215,17 +241,21 @@ try {
     }
     const alternates = linkTags.filter((entry) => entry.attrs.rel === "alternate" && entry.attrs.hreflang);
     const alternateNames = alternates.map((entry) => entry.attrs.hreflang);
-    if (alternates.length !== 51 || new Set(alternateNames).size !== 51 || !alternateNames.includes("x-default")) addFailure(locale, "LQA-091", `${path}: hreflang count/uniqueness mismatch`);
+    if (alternates.length !== expectedAlternateCount || new Set(alternateNames).size !== expectedAlternateCount || !alternateNames.includes("x-default")) addFailure(locale, "LQA-091", `${path}: hreflang count/uniqueness mismatch`);
 
     const seo = routeSeo[route];
-    const expectedTitle = metadata[locale]?.seo?.[seo?.title];
-    const expectedDescription = metadata[locale]?.seo?.[seo?.description];
+    const expectedTitle = metadata[contentLocale]?.seo?.[seo?.title];
+    const expectedDescription = metadata[contentLocale]?.seo?.[seo?.description];
     const scriptMatch = html.match(/<script\b[^>]*type=(?:"application\/ld\+json"|'application\/ld\+json')[^>]*>([\s\S]*?)<\/script>/iu);
     try {
       const jsonLd = JSON.parse(scriptMatch?.[1] ?? "null");
       const pageNode = jsonLd?.["@graph"]?.find((entry) => entry["@type"] === "WebPage");
-      if (!pageNode || pageNode.inLanguage !== expectedTag(locale) || pageNode.name !== expectedTitle || pageNode.description !== expectedDescription || new URL(pageNode.url).pathname !== expectedCanonicalPath) {
-        addFailure(locale, "LQA-093", `${path}: localized JSON-LD/metadata mismatch`);
+      const robotsMeta = tags(html, "meta").find((entry) => entry.attrs.name === "robots")?.attrs.content ?? "";
+      const shouldNoindex = !indexable || route === "/mint";
+      const headerNoindex = /noindex/iu.test(response.headers.get("x-robots-tag") ?? "");
+      const metaNoindex = /noindex/iu.test(robotsMeta);
+      if (!pageNode || pageNode.inLanguage !== expectedTag(contentLocale) || pageNode.name !== expectedTitle || pageNode.description !== expectedDescription || new URL(pageNode.url).pathname !== expectedCanonicalPath || (shouldNoindex && (!headerNoindex || !metaNoindex)) || (!shouldNoindex && metaNoindex)) {
+        addFailure(locale, "LQA-093", `${path}: effective-locale JSON-LD/metadata/indexing mismatch`);
       }
     } catch (error) {
       addFailure(locale, "LQA-093", `${path}: JSON-LD ${error.message}`);
@@ -254,14 +284,18 @@ try {
 
     const rootPath = localizedPath(locale, "/");
     const locNeedle = `<loc>https://internalagency.io${rootPath === "/" ? "" : rootPath}</loc>`;
-    if (!sitemapXml.includes(locNeedle) || !sitemapXml.includes('hreflang="x-default"')) addFailure(locale, "LQA-092", `localized root or alternate cluster missing from sitemap`);
+    const shouldPublish = contentLocaleFor(reviewedPolicy, locale) === locale;
+    if ((shouldPublish && !sitemapXml.includes(locNeedle)) || (!shouldPublish && sitemapXml.includes(locNeedle)) || !sitemapXml.includes('hreflang="x-default"')) {
+      addFailure(locale, "LQA-092", `review-approved sitemap inclusion/exclusion or alternate cluster mismatch`);
+    }
   }
   if (unknownSources.size > 0) addGlobalFailure("LQA-081", `Unknown rendered sources: ${[...unknownSources].slice(0, 5).join(" | ")}`);
   if (pending.capture?.routeCount !== routes.length || pending.capture?.pendingSourceCount !== 0) addGlobalFailure("LQA-082", "Pending rendered-source binding is not a zero-drift 25-route capture");
 
   browser = await chromium.launch();
   const browserCheckIds = ["LQA-077", "LQA-078", "LQA-079", "LQA-080", "LQA-083", "LQA-084", "LQA-085", "LQA-086", "LQA-087", "LQA-088", "LQA-089", "LQA-094", "LQA-095"];
-  await mapLimit(locales, 3, async (locale) => {
+  await mapLimit(locales, 2, async (locale) => {
+    const contentLocale = contentLocaleFor(reviewedPolicy, locale);
     for (let attempt = 1; attempt <= 2; attempt += 1) {
       const failureCheckpoints = Object.fromEntries(browserCheckIds.map((id) => [id, failures[locale][id].length]));
       let context;
@@ -269,16 +303,26 @@ try {
         context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
         const page = await context.newPage();
         const runtimeErrors = [];
+        const criticalRequestFailures = [];
         const requests = [];
         page.on("pageerror", (error) => runtimeErrors.push(`pageerror: ${error.message}`));
         page.on("console", (message) => { if (message.type() === "error") runtimeErrors.push(`console: ${message.text()}`); });
         page.on("request", (request) => requests.push(request.url()));
         page.on("response", (response) => { if (response.status() >= 400 && response.request().resourceType() !== "media") runtimeErrors.push(`response: ${response.status()} ${response.url()}`); });
-        page.on("requestfailed", (request) => { if (request.resourceType() !== "media") runtimeErrors.push(`requestfailed: ${request.url()}`); });
+        page.on("requestfailed", (request) => {
+          if (request.resourceType() === "media") return;
+          const detail = `requestfailed: ${request.url()} (${request.failure()?.errorText ?? "unknown"})`;
+          runtimeErrors.push(detail);
+          if (["stylesheet", "script"].includes(request.resourceType())) criticalRequestFailures.push(detail);
+        });
       const path = localizedPath(locale, "/");
       const response = await page.goto(`${baseUrl}${path}`, { waitUntil: "domcontentloaded" });
       if (response?.status() !== 200) addFailure(locale, "LQA-080", `root HTTP ${response?.status() ?? "missing"}`);
       await page.waitForFunction(() => document.documentElement.dataset.localeReady === "true", null, { timeout: 30_000 });
+      await page.waitForLoadState("load", { timeout: 30_000 });
+      if (criticalRequestFailures.length > 0 && attempt < 2) {
+        throw new Error(`critical asset request failed: ${criticalRequestFailures.slice(0, 3).join(" | ")}`);
+      }
       const html = rootHtml.get(locale) ?? "";
       const state = await page.evaluate((serverHtml) => {
         const skipped = (node) => node.parentElement?.closest("script, style, code, pre, [data-no-translate]");
@@ -313,27 +357,30 @@ try {
           preHydrationAttributes,
         };
       }, html);
-      if (state.lang !== expectedTag(locale) || state.dir !== (rtlLocales.has(locale) ? "rtl" : "ltr")) addFailure(locale, "LQA-077", `hydrated lang/dir ${state.lang}/${state.dir}`);
+      if (state.lang !== expectedTag(contentLocale) || state.dir !== (rtlLocales.has(contentLocale) ? "rtl" : "ltr")) addFailure(locale, "LQA-077", `hydrated lang/dir ${state.lang}/${state.dir}, expected ${expectedTag(contentLocale)}/${rtlLocales.has(contentLocale) ? "rtl" : "ltr"}`);
       if (state.ready !== "true" || state.error !== null) addFailure(locale, "LQA-078", `localeReady=${state.ready}, localeError=${state.error}`);
       const translationRequests = requests.filter((url) => /translate\.googleapis\.com|translate\.google\./iu.test(url));
-      const payloadObserved = locale === "en" || requests.some((url) => new URL(url).pathname === `${payloadRoot}/${locale}.json`);
-      if (translationRequests.length > 0 || !payloadObserved) addFailure(locale, "LQA-079", `external translation or missing local payload request`);
+      const payloadObserved = requests.some((url) => new URL(url).pathname === `${payloadRoot}/${locale}.json`);
+      const shouldRequestPayload = contentLocale !== "en";
+      if (translationRequests.length > 0 || payloadObserved !== shouldRequestPayload) addFailure(locale, "LQA-079", `external translation or reviewed/fallback payload request mismatch`);
       if (runtimeErrors.length > 0) addFailure(locale, "LQA-080", runtimeErrors.slice(0, 5).join(" | "));
 
       const sourceValues = [...state.preHydrationSources, ...Object.values(state.preHydrationAttributes).flat()].filter((source) => sourceSet.has(source));
       const sources = [...new Set(sourceValues)];
       const currentValues = [...state.texts, ...Object.values(state.attributeValues).flat()].map(normalize);
-      const expectedValues = sourceValues.map((source) => normalize(catalog.messages[locale][source]));
+      const expectedValues = sourceValues.map((source) => normalize(catalog.messages[contentLocale][source]));
       const currentCounts = valueCounts(currentValues);
       const expectedCounts = valueCounts(expectedValues);
       const missingValues = [...expectedCounts].filter(([value, count]) => (currentCounts.get(value) ?? 0) < count).map(([value]) => value);
       if (missingValues.length > 0) addFailure(locale, "LQA-084", `${missingValues.length} expected root values absent: ${missingValues.slice(0, 3).join(" | ")}`);
-      if (locale !== "en") {
-        const leaks = sources.filter((source) => catalog.messages[locale][source] !== source && (currentCounts.get(normalize(source)) ?? 0) > (expectedCounts.get(normalize(source)) ?? 0));
-        if (leaks.length > 0) addFailure(locale, "LQA-083", `${leaks.length} replaced English sources remain: ${leaks.slice(0, 3).join(" | ")}`);
+      if (contentLocale !== "en") {
+        const leaks = sources.filter((source) => catalog.messages[contentLocale][source] !== source && (currentCounts.get(normalize(source)) ?? 0) > (expectedCounts.get(normalize(source)) ?? 0));
+        if (leaks.length > 0) addFailure(locale, "LQA-083", `${leaks.length} reviewed replacements retain source prose: ${leaks.slice(0, 3).join(" | ")}`);
+      } else if (payloadObserved) {
+        addFailure(locale, "LQA-083", "Review-HOLD route requested a non-English payload");
       }
       for (const [attribute, id] of [["alt", "LQA-085"], ["aria-label", "LQA-086"], ["placeholder", "LQA-087"], ["title", "LQA-088"]]) {
-        const expected = [...new Set(state.preHydrationAttributes[attribute].filter((source) => sourceSet.has(source)))].map((source) => normalize(catalog.messages[locale][source]));
+        const expected = [...new Set(state.preHydrationAttributes[attribute].filter((source) => sourceSet.has(source)))].map((source) => normalize(catalog.messages[contentLocale][source]));
         const actual = new Set(state.attributeValues[attribute].map(normalize));
         const missing = expected.filter((value) => !actual.has(value));
         if (missing.length > 0 || [...actual].some((value) => !value)) addFailure(locale, id, `${missing.length} localized ${attribute} values absent`);
@@ -341,7 +388,9 @@ try {
       }
       const invalidLinks = state.hrefs.filter((href) => {
         if (!href?.startsWith("/") || href.startsWith("//") || href.startsWith("/_") || href.startsWith("/api/") || href.startsWith("/disclosures/") || /\.[a-z0-9]{2,5}(?:[?#]|$)/iu.test(href)) return false;
-        return locale === "en" ? /^\/[a-z]{2,3}(?:\/|$)/u.test(href) : !href.startsWith(`/${locale}/`) && href !== `/${locale}`;
+        return contentLocale === "en"
+          ? /^\/[a-z]{2,3}(?:\/|$)/u.test(href)
+          : !href.startsWith(`/${contentLocale}/`) && href !== `/${contentLocale}`;
       });
       if (invalidLinks.length > 0) addFailure(locale, "LQA-089", `${invalidLinks.length} locale-unsafe internal links: ${invalidLinks.slice(0, 3).join(" | ")}`);
       if (state.overflow || !matrixPassed) addFailure(locale, "LQA-094", state.overflow ? "root horizontal overflow" : "cross-engine matrix failed");
@@ -349,6 +398,8 @@ try {
       await page.addScriptTag({ content: axe.source });
       const violations = await page.evaluate(async () => (await globalThis.axe.run(document, { runOnly: { type: "rule", values: ["color-contrast", "aria-prohibited-attr", "region", "heading-order"] } })).violations.map(({ id }) => id));
       if (violations.length > 0 || state.duplicateIds.length > 0 || state.headingCount === 0 || !matrixPassed) addFailure(locale, "LQA-095", `axe=${violations.join(",")}; duplicateIds=${state.duplicateIds.join(",")}; headings=${state.headingCount}`);
+      const attemptFailures = browserCheckIds.flatMap((id) => failures[locale][id].slice(failureCheckpoints[id]));
+      if (attemptFailures.length > 0 && attempt < 2) throw new Error(`retryable browser QA failure: ${attemptFailures.slice(0, 3).join(" | ")}`);
         return;
       } catch (error) {
         for (const id of browserCheckIds) failures[locale][id].length = failureCheckpoints[id];
@@ -377,11 +428,13 @@ try {
       metadataSha256: canonicalDigest(metadata),
       routeSeoSha256: canonicalDigest(routeSeo),
       pendingSha256: canonicalDigest(pending),
+      reviewedPolicySha256: canonicalDigest(reviewedPolicy),
     },
     environment: { origin: "EPHEMERAL_LOOPBACK", browser: "chromium", crossEngineMatrix: ["chromium", "firefox", "webkit", "tablet", "android-emulation", "ios-emulation"], mainnetChanged: false },
     limitations: [
       ...(!startedFromCleanCheckout ? ["LQA-071 remains unclaimed because this evidence was produced from a dirty bound worktree, not a fresh Git checkout."] : []),
       "This is local browser evidence, not native-language review or production deployment evidence.",
+      "Locales without complete accountable review render canonical English, remain noindex, and do not request a non-English payload.",
     ],
     locales: Object.fromEntries(locales.map((locale) => [locale, {
       checks: Object.fromEntries(claimedRenderCheckIds.map((id) => [id, {
@@ -406,6 +459,7 @@ try {
   }
   await writeFile(destination, `${JSON.stringify(artifact, null, 2)}\n`, "utf8");
   console.log(`Wrote ${locales.length * claimedRenderCheckIds.length} source-bound render results to ${destination}: ${artifact.status}`);
+  if (artifact.status !== "PASS") process.exitCode = 1;
 } finally {
   await browser?.close();
   serverProcess?.kill();

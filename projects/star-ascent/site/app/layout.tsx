@@ -6,7 +6,7 @@ import "./postgenesis-tease.css";
 import { DossierDock } from "./DossierDock";
 import { CrewSignal } from "./CrewSignal";
 import { DocumentLinkUpgrade } from "./DocumentLinkUpgrade";
-import { googleHreflangTag, htmlLanguageTag, localeCodes, localeDirection, localeFromRequestHeaders, localePath } from "./i18n/config";
+import { googleHreflangTag, htmlLanguageTag, localeCodes, localeDirection, localeFromRequestHeaders, localePath, runtimeContentLocale } from "./i18n/config";
 import { LocaleRuntime, type PromptCopy } from "./i18n/LocaleRuntime";
 import { localePayloadPath } from "./i18n/payload-contract";
 import localizedMetadata from "./i18n/metadata.generated.json";
@@ -33,6 +33,12 @@ function canonicalUrl(
   publicPath: string,
   turkishHost: boolean,
 ): string {
+  if (turkishHost && runtimeContentLocale("tr") !== "tr") {
+    return localizedUrl("en", publicPath);
+  }
+  if (runtimeContentLocale(locale) !== locale) {
+    return localizedUrl("en", publicPath);
+  }
   if (turkishHost && locale === "tr") {
     return `https://ileriakil.com${publicPath === "/" ? "" : publicPath}`;
   }
@@ -40,12 +46,14 @@ function canonicalUrl(
 }
 
 function languageAlternates(publicPath: string): Record<string, string> {
+  const turkishReady = runtimeContentLocale("tr") === "tr";
   return {
     ...Object.fromEntries(localeCodes.flatMap((code) => {
+      if (runtimeContentLocale(code) !== code) return [];
       const tag = googleHreflangTag(code);
       return tag ? [[tag, localizedUrl(code, publicPath)]] : [];
     })),
-    "tr-TR": `https://ileriakil.com${publicPath === "/" ? "" : publicPath}`,
+    ...(turkishReady ? { "tr-TR": `https://ileriakil.com${publicPath === "/" ? "" : publicPath}` } : {}),
     "x-default": localizedUrl("en", publicPath),
   };
 }
@@ -60,14 +68,18 @@ export async function generateMetadata(): Promise<Metadata> {
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host");
   const metadataBase = metadataBaseFromRequest(host, requestHeaders.get("x-forwarded-proto"));
   const locale = localeFromRequestHeaders(requestHeaders.get("x-ia-locale"), host);
-  const localeMetadata = metadataCatalog[locale];
+  const contentLocale = runtimeContentLocale(locale);
+  const localeMetadata = metadataCatalog[contentLocale];
   const publicPath = requestHeaders.get("x-ia-path") ?? "/";
   const sources = routeSeoSources(publicPath);
   const title = localeMetadata?.seo?.[sources.title] ?? localeMetadata?.title ?? sources.title;
   const description = localeMetadata?.seo?.[sources.description] ?? localeMetadata?.description ?? sources.description;
   const turkishHost = Boolean(host?.toLowerCase().includes("ileriakil"));
+  const turkishHostReviewHold = turkishHost && runtimeContentLocale("tr") !== "tr";
   const canonical = canonicalUrl(locale, publicPath, turkishHost);
-  const indexable = publicPath !== "/mint";
+  const indexable = publicPath !== "/mint"
+    && contentLocale === locale
+    && !turkishHostReviewHold;
   return {
     metadataBase,
     title, description,
@@ -103,13 +115,25 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   );
   const publicPath = requestHeaders.get("x-ia-path") ?? "/";
   const turkishHost = Boolean(host?.toLowerCase().includes("ileriakil"));
-  const promptCopy = metadataCatalog[locale]?.prompt ?? metadataCatalog.en.prompt;
+  const contentLocale = runtimeContentLocale(locale);
+  const fallbackPromptCopy: PromptCopy = {
+    eyebrow: "LANGUAGE REVIEW HOLD",
+    title: "English fallback is active",
+    body: "This language is awaiting accountable review, so unreviewed machine text is not shown.",
+    stay: "Continue in English",
+    english: "Open English route",
+    close: "Close language notice",
+    timeout: "This closes on its own in 15 seconds.",
+  };
+  const promptCopy = contentLocale === locale
+    ? metadataCatalog[locale]?.prompt ?? metadataCatalog.en.prompt
+    : fallbackPromptCopy;
   const canonical = canonicalUrl(locale, publicPath, turkishHost);
-  const localeMetadata = metadataCatalog[locale] ?? metadataCatalog.en;
+  const localeMetadata = metadataCatalog[contentLocale] ?? metadataCatalog.en;
   const sources = routeSeoSources(publicPath);
   const pageTitle = localeMetadata.seo?.[sources.title] ?? localeMetadata.title;
   const pageDescription = localeMetadata.seo?.[sources.description] ?? localeMetadata.description;
-  const websiteUrl = turkishHost && locale === "tr" ? "https://ileriakil.com" : localizedUrl(locale, "/");
+  const websiteUrl = canonicalUrl(locale, "/", turkishHost);
   const websiteId = `${websiteUrl}#website`;
   const structuredData = {
     "@context": "https://schema.org",
@@ -126,7 +150,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         name: localeMetadata.title,
         description: localeMetadata.description,
         url: websiteUrl,
-        inLanguage: htmlLanguageTag(locale),
+        inLanguage: htmlLanguageTag(contentLocale),
         publisher: { "@id": "https://internalagency.io/#organization" },
       },
       {
@@ -135,11 +159,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         name: pageTitle,
         description: pageDescription,
         url: canonical,
-        inLanguage: htmlLanguageTag(locale),
+        inLanguage: htmlLanguageTag(contentLocale),
         isPartOf: { "@id": websiteId },
       },
     ],
   };
-  const localeReady = locale === "en" || (locale === "tr" && turkishHost);
-  return <html lang={htmlLanguageTag(locale)} dir={localeDirection(locale)} data-locale-ready={localeReady ? "true" : "false"}><head>{!localeReady ? <link rel="preload" href={localePayloadPath(locale)} as="fetch" crossOrigin="anonymous" /> : null}</head><body className="antialiased">{children}<DocumentLinkUpgrade /><CrewSignal /><DossierDock /><LocaleRuntime locale={locale} promptCopy={promptCopy} publicPath={publicPath} turkishHost={turkishHost} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} /></body></html>;
+  const localeReady = contentLocale === "en";
+  return <html lang={htmlLanguageTag(contentLocale)} dir={localeDirection(contentLocale)} data-route-locale={locale} data-locale-ready={localeReady ? "true" : "false"}><head>{!localeReady ? <link rel="preload" href={localePayloadPath(locale)} as="fetch" crossOrigin="anonymous" /> : null}</head><body className="antialiased">{children}<DocumentLinkUpgrade /><CrewSignal /><DossierDock /><LocaleRuntime locale={locale} contentLocale={contentLocale} promptCopy={promptCopy} publicPath={publicPath} turkishHost={turkishHost} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} /></body></html>;
 }

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { googleHreflangTag, localeCodes, localePath } from "./i18n/config";
+import { googleHreflangTag, localeCodes, localePath, runtimeContentLocale } from "./i18n/config";
 
 const modified = new Date("2026-08-03T00:00:00Z");
 
@@ -33,18 +33,23 @@ const routes = [
 
 function languageAlternates(path: string): Record<string, string> {
   const pathname = path || "/";
+  const turkishReady = runtimeContentLocale("tr") === "tr";
   return {
     ...Object.fromEntries(localeCodes.flatMap((locale) => {
+      if (runtimeContentLocale(locale) !== locale) return [];
       const tag = googleHreflangTag(locale);
       return tag ? [[tag, `https://internalagency.io${localePath(locale, pathname)}`]] : [];
     })),
-    "tr-TR": `https://ileriakil.com${path}`,
+    ...(turkishReady ? { "tr-TR": `https://ileriakil.com${path}` } : {}),
     "x-default": `https://internalagency.io${path}`,
   };
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const canonicalRoots = ["https://internalagency.io", "https://ileriakil.com"];
+  const canonicalRoots = [
+    "https://internalagency.io",
+    ...(runtimeContentLocale("tr") === "tr" ? ["https://ileriakil.com"] : []),
+  ];
   const canonical = canonicalRoots.flatMap((root) => routes.map((route) => ({
     url: `${root}${route.path}`,
     lastModified: modified,
@@ -53,7 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     alternates: { languages: languageAlternates(route.path) },
   })));
   const localized = localeCodes
-    .filter((locale) => locale !== "en")
+    .filter((locale) => locale !== "en" && runtimeContentLocale(locale) === locale)
     .flatMap((locale) => routes.map((route) => ({
       url: `https://internalagency.io/${locale}${route.path}`,
       lastModified: modified,

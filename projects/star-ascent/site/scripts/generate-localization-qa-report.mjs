@@ -3,6 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 
 import { readCanonicalTrackedFile } from "./lib/read-canonical-tracked-file.mjs";
+import { runtimeContentLocaleForPolicy } from "../app/i18n/runtime-content-policy.js";
 
 const root = process.cwd();
 const repoRoot = resolve(root, "../../..");
@@ -12,6 +13,7 @@ const trackedFiles = [
   "app/i18n/messages.json",
   "app/i18n/critical-ui-source.json",
   "app/i18n/critical-ui-overrides.json",
+  "app/i18n/reviewed-localization-policy.json",
   "app/i18n/metadata.generated.json",
   "app/i18n/route-seo.json",
   "app/i18n/pending-visible-source.json",
@@ -25,24 +27,32 @@ const trackedFiles = [
 ];
 const readCanonical = (path) => readCanonicalTrackedFile({ repoRoot, absolutePath: join(root, path) });
 const readJson = async (path) => JSON.parse(readCanonical(path).toString("utf8"));
-const [catalog, critical, overrides, metadata, routeSeo, pending, scorecard, renderEvidence, holdLedger, provenance] = await Promise.all([
+const [catalog, critical, reviewedPolicy, metadata, routeSeo, pending, scorecard, renderEvidence, holdLedger] = await Promise.all([
   readJson("app/i18n/messages.json"),
   readJson("app/i18n/critical-ui-source.json"),
-  readJson("app/i18n/critical-ui-overrides.json"),
+  readJson("app/i18n/reviewed-localization-policy.json"),
   readJson("app/i18n/metadata.generated.json"),
   readJson("app/i18n/route-seo.json"),
   readJson("app/i18n/pending-visible-source.json"),
   readJson("public/audits/localization-qa-20260803/language-qa-scorecard.json"),
   readJson("app/i18n/language-render-evidence.v1.json"),
   readJson("public/audits/localization-qa-20260803/hold-remediation-ledger.json"),
-  readJson("public/audits/localization-qa-20260803/translation-provenance.v1.json"),
 ]);
 const browserQa = await readJson("public/audits/localization-qa-20260803/browser-qa.json");
-const provenanceRun = provenance.runs.at(-1);
+if (
+  reviewedPolicy.schema !== "iat-reviewed-localization-policy/v1"
+  || reviewedPolicy.mode !== "GLOBAL_FAIL_CLOSED"
+  || reviewedPolicy.fallback !== "canonical-english"
+  || reviewedPolicy.machineDraftRuntimeAllowed !== false
+  || reviewedPolicy.unreviewedTargetLanguageBundleAllowed !== false
+  || reviewedPolicy.unreviewedLocaleAutonymsAllowed !== false
+  || reviewedPolicy.directComponentReviewBundleComplete !== false
+) throw new Error("Localization QA report requires the complete GLOBAL_FAIL_CLOSED policy");
 const sources = Object.keys(catalog.messages.en);
 const criticalSources = Object.values(critical);
 const nonLinguistic = /^(?:STAR ASCENT|IAT|SOL|SOLANA|APY|UTC|X|T\+\d+|\d+(?:[.,:]\d+)*(?:%|[A-Z]+)?)$/i;
 const exactSourceMatches = (locale) => sources.filter((source) => {
+  if (!Object.hasOwn(reviewedPolicy.translations?.[locale] ?? {}, source)) return false;
   const translated = catalog.messages[locale][source]?.trim();
   return translated === source.trim() && /\p{L}/u.test(source) && !nonLinguistic.test(source.trim());
 });
@@ -64,6 +74,7 @@ const currentBindings = {
   metadataSha256: canonicalDigest(metadata),
   routeSeoSha256: canonicalDigest(routeSeo),
   pendingSha256: canonicalDigest(pending),
+  reviewedPolicySha256: canonicalDigest(reviewedPolicy),
 };
 for (const [field, expected] of Object.entries(currentBindings)) {
   if (scorecard.sourceBinding?.[field] !== expected) throw new Error(`Language QA scorecard has stale ${field}`);
@@ -86,17 +97,30 @@ const renderRecords = Object.values(renderEvidence.locales ?? {}).flatMap((local
 if (renderEvidence.status !== "PASS" || renderRecords.length !== 1250 || renderRecords.some((record) => record.status !== "PASS")) throw new Error("Language render evidence must contain exactly 1,250 passing results");
 const locales = Object.keys(catalog.messages).map((locale) => {
   const exact = locale === "en" ? [] : exactSourceMatches(locale);
-  const criticalLeaks = locale === "en" ? [] : criticalSources.filter(
-    (source) => catalog.messages[locale][source].trim().toLocaleLowerCase() === source.toLocaleLowerCase(),
+  const reviewed = reviewedPolicy.translations?.[locale] ?? {};
+  const runtimeStatus = reviewedPolicy.localeStatus?.[locale] ?? "MISSING";
+  const contentLocale = runtimeContentLocaleForPolicy(reviewedPolicy, locale);
+  const policyViolations = locale === "en" ? [] : sources.filter(
+    (source) => catalog.messages[locale][source] !== (reviewed[source] ?? source),
+  );
+  const criticalFallbacks = locale === "en" ? [] : criticalSources.filter(
+    (source) => !Object.hasOwn(reviewed, source) && catalog.messages[locale][source] === source,
   );
   return {
     locale,
+    requestedLocale: locale,
+    contentLocale,
+    runtimeStatus,
     sourceCount: sources.length,
     emptyCount: Object.values(catalog.messages[locale]).filter((value) => !value.trim()).length,
     criticalCopyCount: criticalSources.length,
-    criticalEnglishFallbackCount: criticalLeaks.length,
-    exactSourceMatchHeuristicCount: exact.length,
-    exactSourceMatchHeuristicSamples: exact.slice(0, 12),
+    reviewedCatalogCellCount: Object.keys(reviewed).length,
+    canonicalFallbackCellCount: locale === "en" ? 0 : sources.length - Object.keys(reviewed).length,
+    criticalCanonicalFallbackCount: criticalFallbacks.length,
+    policyViolationCount: policyViolations.length,
+    policyViolationSamples: policyViolations.slice(0, 12),
+    reviewedExactSourceHeuristicCount: exact.length,
+    reviewedExactSourceHeuristicSamples: exact.slice(0, 12),
     nativeSpeakerReview: locale === "en" ? "source" : "required",
   };
 });
@@ -114,12 +138,14 @@ const report = {
     criticalHydrationOnlyStrings: criticalSources.length,
     canonicalRoutes: scorecard.scope.canonicalRoutes,
     languageQaResults: scorecardResults,
+    reviewedRuntimeCells: catalog.meta.runtimeLocalizationPolicy?.reviewedRuntimeCells ?? 0,
+    canonicalFallbackCells: catalog.meta.runtimeLocalizationPolicy?.fallbackRuntimeCells ?? 0,
   },
   outcome: {
     automatedCatalogCompleteness: locales.every((entry) => entry.emptyCount === 0) ? "PASS" : "FAIL",
-    criticalEnglishFallbackGate: locales.every((entry) => entry.criticalEnglishFallbackCount === 0) ? "PASS" : "FAIL",
+    reviewedRuntimePolicyGate: locales.every((entry) => entry.policyViolationCount === 0) ? "PASS" : "FAIL",
     nativeLanguageSignoff: "HOLD — native-speaker review required for every non-English locale",
-    generalExactMatchHeuristic: "ADVISORY — includes legitimate protocol names and technical labels; samples require human triage",
+    reviewedExactMatchHeuristic: "ADVISORY — applies only to evidence-backed target-language cells; canonical fallback is excluded",
     sourceBoundLanguageScorecard: scorecard.status,
     sourceBoundRenderEvidence: renderEvidence.status,
     browserAccessibilityReview: browserQa.outcome,
@@ -134,12 +160,13 @@ const report = {
     ],
     nonBlockingWarnings: [],
   },
-  semanticDecision: overrides.semanticRule,
-  reviewStatus: overrides.reviewStatus,
+  semanticDecision: reviewedPolicy.mode,
+  reviewStatus: "All non-English locales remain HOLD until accountable evidence is added to the reviewed-localization policy.",
   limitations: [
     "Automated completeness proves that a static value exists; it does not prove idiomatic or culturally fluent language.",
-    "The editorial critical-copy pass is AI-assisted and must not be described as native-speaker reviewed.",
-    "Exact source-match counts are a triage heuristic, not a standalone defect count.",
+    "Legacy editorial and critical-copy drafts are AI-assisted evidence only and are not active runtime translations.",
+    "Canonical English fallback is an intentional safety state, not native-language approval.",
+    "Exact source-match counts inspect reviewed cells only and remain a triage heuristic, not a standalone defect count.",
     "Rendered browser checks are representative, not an exhaustive physical-device or assistive-technology certification.",
     "This package does not authorize deployment, signing, broadcasting, funding, or mainnet launch.",
   ],
@@ -171,7 +198,7 @@ const report = {
   browserQa,
   locales,
 };
-const table = locales.map((entry) => `| ${entry.locale} | ${entry.emptyCount} | ${entry.criticalEnglishFallbackCount} | ${entry.exactSourceMatchHeuristicCount} | ${entry.nativeSpeakerReview} |`).join("\n");
+const table = locales.map((entry) => `| ${entry.locale} | ${entry.contentLocale} | ${entry.runtimeStatus} | ${entry.emptyCount} | ${entry.reviewedCatalogCellCount} | ${entry.canonicalFallbackCellCount} | ${entry.policyViolationCount} | ${entry.nativeSpeakerReview} |`).join("\n");
 const historicalValidation = report.historicalValidation.commands.map((item) => {
   const count = item.automatedTestsPassed ? ` (${item.automatedTestsPassed} tests)` : ` (${item.errors} errors, ${item.warnings} warnings)`;
   return `- \`${item.command}\`: **${item.outcome}**${count}`;
@@ -181,16 +208,18 @@ const validation = [
   `- HOLD remediation ledger: [\`hold-remediation-ledger.json\`](./hold-remediation-ledger.json) separates **${holdLedger.holdSummary.externalEvidenceOnly} external-evidence gates** from **${holdLedger.holdSummary.heuristicEditorialReview} heuristic editorial reviews** without closing or downgrading any result.`,
   `- Source-bound browser/render evidence: **${renderEvidence.status}** for ${renderRecords.length}/${renderRecords.length} recorded checks.`,
   `- Public process: [\`TRANSLATION-PROCESS.md\`](./TRANSLATION-PROCESS.md) records the model revision, runtime, generation parameters, deterministic repair stages, public commit chain, and future append-only update protocol.`,
-  `- Machine-readable provenance: [\`translation-provenance.v1.json\`](./translation-provenance.v1.json) binds ${provenanceRun.artifacts.length} artifacts by raw SHA-256 and byte count and classifies all ${provenanceRun.outcomes.changedLocaleEntries.toLocaleString("en-US")} catalog mutations from the public baseline.`,
+  "- Machine-readable provenance: [`translation-provenance.v1.json`](./translation-provenance.v1.json) is append-only and is validated separately against exact tracked bytes and commit ancestry.",
   `- Data license: [\`CC0-DATA-DEDICATION.md\`](./CC0-DATA-DEDICATION.md) dedicates the project-owned, non-secret localization data and QA evidence under CC0 1.0 while explicitly excluding software, third-party model weights and runtimes, trademarks, secrets, and material the project does not own.`,
   "",
-  `The remediation ledger prioritizes ${holdLedger.priorityLocales.map(({ locale }) => `\`${locale}\``).join(", ")} because each has five heuristic HOLDs, while preserving all language-identification and native-review gates. Automation may prepare candidates and evidence inventories; it may not approve native quality or independent language identification.`,
+  holdLedger.priorityLocales.length > 0
+    ? `The remediation ledger prioritizes ${holdLedger.priorityLocales.map(({ locale }) => `\`${locale}\``).join(", ")} for evidence-backed editorial review, while preserving all language-identification and native-review gates.`
+    : "No heuristic editorial queue remains because unreviewed target-language drafts are inactive. Language-identification and native-review gates remain HOLD for every locale.",
   "",
   "Historical command record from 2026-08-03; regenerating this summary does not claim these commands were rerun:",
   "",
   historicalValidation,
 ].join("\n");
-const markdown = `# DRAFT localization, usability, and accessibility QA\n\n**STATIC QA / NOT LAUNCH APPROVAL / MAINNET HOLD / NO DEPLOYMENT PERFORMED**\n\nGenerated: ${report.generatedAt}\n\n## Outcome\n\n- Catalog completeness: **${report.outcome.automatedCatalogCompleteness}** across ${report.scope.locales} locales and ${report.scope.canonicalStrings} canonical strings.\n- Critical hydration-only English fallback gate: **${report.outcome.criticalEnglishFallbackGate}** for ${report.scope.criticalHydrationOnlyStrings} launch-control strings.\n- Native-language signoff: **HOLD**. Every non-English locale still requires a native-speaker review before it can be described as native-quality.\n- Mainnet decision: **HOLD, unchanged**. This package is not launch approval.\n\nThe launch-checklist word “GO” is treated semantically as “ready,” not as an instruction to move. The critical override keeps this cadence explicit.\n\n## Validation\n\n${validation}\n\n## Locale matrix\n\n| Locale | Empty | Critical English fallbacks | Exact-source heuristic | Native review |\n|---|---:|---:|---:|---|\n${table}\n\n## Limitations\n\n${report.limitations.map((item) => `- ${item}`).join("\n")}\n\nSee [report.json](./report.json) for source digests, samples, and machine-readable results.\n`;
+const markdown = `# DRAFT localization, usability, and accessibility QA\n\n**STATIC QA / NOT LAUNCH APPROVAL / MAINNET HOLD / NO DEPLOYMENT PERFORMED**\n\nGenerated: ${report.generatedAt}\n\n## Outcome\n\n- Catalog completeness: **${report.outcome.automatedCatalogCompleteness}** across ${report.scope.locales} locales and ${report.scope.canonicalStrings} canonical strings.\n- Reviewed-runtime policy gate: **${report.outcome.reviewedRuntimePolicyGate}** with ${report.scope.reviewedRuntimeCells} reviewed cells and ${report.scope.canonicalFallbackCells} canonical-English fallback cells.\n- Native-language signoff: **HOLD**. Every non-English locale still requires an accountable native review before it can be described as native-quality.\n- Mainnet decision: **HOLD, unchanged**. This package is not launch approval.\n\nUnreviewed target-language drafts are not served. Safety-critical copy remains canonical English until exact review evidence is committed.\n\n## Validation\n\n${validation}\n\n## Locale matrix\n\n| Route locale | Content locale | Runtime status | Empty | Reviewed cells | Fallback cells | Policy violations | Native review |\n|---|---|---|---:|---:|---:|---:|---|\n${table}\n\n## Limitations\n\n${report.limitations.map((item) => `- ${item}`).join("\n")}\n\nSee [report.json](./report.json) for source digests, samples, and machine-readable results.\n`;
 await mkdir(auditDir, { recursive: true });
 await Promise.all([
   writeFile(join(auditDir, "report.json"), `${JSON.stringify(report, null, 2)}\n`, "utf8"),

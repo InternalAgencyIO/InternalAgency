@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 const catalogUrl = new URL("../app/i18n/messages.json", import.meta.url);
 const metadataUrl = new URL("../app/i18n/metadata.generated.json", import.meta.url);
 const pendingUrl = new URL("../app/i18n/pending-visible-source.json", import.meta.url);
+const reviewedPolicyUrl = new URL("../app/i18n/reviewed-localization-policy.json", import.meta.url);
 
 // Exceptions must be narrow, source-bound, and reviewed in this file. Broad locale
 // or rule suppression is intentionally unsupported.
@@ -125,11 +126,21 @@ function truncate(value, length = 150) {
   return compact.length > length ? `${compact.slice(0, length - 1)}…` : compact;
 }
 
-const [catalog, metadata, pending] = await Promise.all([
+const [catalog, metadata, pending, reviewedPolicy] = await Promise.all([
   readFile(catalogUrl, "utf8").then(JSON.parse),
   readFile(metadataUrl, "utf8").then(JSON.parse),
   readFile(pendingUrl, "utf8").then(JSON.parse),
+  readFile(reviewedPolicyUrl, "utf8").then(JSON.parse),
 ]);
+if (
+  reviewedPolicy.schema !== "iat-reviewed-localization-policy/v1"
+  || reviewedPolicy.mode !== "GLOBAL_FAIL_CLOSED"
+  || reviewedPolicy.fallback !== "canonical-english"
+  || reviewedPolicy.machineDraftRuntimeAllowed !== false
+  || reviewedPolicy.unreviewedTargetLanguageBundleAllowed !== false
+  || reviewedPolicy.unreviewedLocaleAutonymsAllowed !== false
+  || reviewedPolicy.directComponentReviewBundleComplete !== false
+) throw new Error("Linguistic-integrity validation requires the complete GLOBAL_FAIL_CLOSED policy");
 
 const locales = Object.keys(catalog.messages ?? {});
 const sourceMessages = catalog.messages?.en ?? {};
@@ -150,6 +161,7 @@ const counts = Object.fromEntries(locales.map((locale) => [locale, {
   noLetter: 0,
   exactEnglishCatalog: 0,
   exactEnglishMetadata: 0,
+  unreviewedRuntime: 0,
 }]));
 
 for (const source of selectorSources) {
@@ -163,6 +175,12 @@ for (const locale of locales) {
     const translation = messages[source];
     if (typeof translation !== "string") continue;
     const key = localizedKey(locale, source);
+    const reviewedTranslation = reviewedPolicy.translations?.[locale]?.[source];
+    const expectedRuntimeTranslation = reviewedTranslation ?? source;
+    if (translation !== expectedRuntimeTranslation) {
+      counts[locale].unreviewedRuntime += 1;
+      findings.push({ rule: "unreviewed-runtime-translation", scope: "catalog", locale, source, translation });
+    }
     const reasons = collapseReasons(translation);
     if (reasons.length > 0 && !allowlist.collapseTranslations.has(key)) {
       counts[locale].collapse += 1;
@@ -178,6 +196,7 @@ for (const locale of locales) {
     }
     if (
       englishSentenceSources.has(source)
+      && reviewedTranslation !== undefined
       && normalize(translation) === normalize(source)
       && !allowlist.exactEnglishCatalogFallbacks.has(key)
     ) {
@@ -191,6 +210,7 @@ for (const locale of locales) {
     const englishValue = englishMetadataByPath.get(leaf.path);
     if (
       englishValue !== undefined
+      && reviewedPolicy.localeStatus?.[locale] === "REVIEWED"
       && normalizedValue === englishValue
       && !allowlist.exactEnglishMetadataFallbacks.has(metadataKey(locale, leaf.path, englishValue))
     ) {
@@ -232,6 +252,7 @@ for (const locale of locales) {
     `noLetter=${entry.noLetter}`,
     `exactEnglishCatalog=${entry.exactEnglishCatalog}`,
     `exactEnglishMetadata=${entry.exactEnglishMetadata}`,
+    `unreviewedRuntime=${entry.unreviewedRuntime}`,
     `triggers=${triggerCount}`,
   ].join(" "));
 }

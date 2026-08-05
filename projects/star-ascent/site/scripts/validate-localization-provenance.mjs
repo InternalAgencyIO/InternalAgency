@@ -12,6 +12,12 @@ const manifestPath = join(siteRoot, auditRelative, "translation-provenance.v1.js
 const manifestRelativeToRepository =
   "projects/star-ascent/site/public/audits/localization-qa-20260803/translation-provenance.v1.json";
 const catalogRelativeToRepository = "projects/star-ascent/site/app/i18n/messages.json";
+const gitNoLfsFilters = [
+  "-c", "filter.lfs.clean=",
+  "-c", "filter.lfs.smudge=",
+  "-c", "filter.lfs.process=",
+  "-c", "filter.lfs.required=false",
+];
 
 function fail(message) {
   throw new Error(`localization provenance validation failed: ${message}`);
@@ -26,7 +32,7 @@ function readJson(path) {
 }
 
 function git(args, options = {}) {
-  return execFileSync("git", args, {
+  return execFileSync("git", [...gitNoLfsFilters, ...args], {
     cwd: repositoryRoot,
     encoding: "utf8",
     maxBuffer: 32 * 1024 * 1024,
@@ -35,7 +41,7 @@ function git(args, options = {}) {
 }
 
 function commitExists(commit) {
-  const result = spawnSync("git", ["cat-file", "-e", `${commit}^{commit}`], {
+  const result = spawnSync("git", [...gitNoLfsFilters, "cat-file", "-e", `${commit}^{commit}`], {
     cwd: repositoryRoot,
     encoding: "utf8",
   });
@@ -43,7 +49,7 @@ function commitExists(commit) {
 }
 
 function isAncestor(ancestor, descendant) {
-  const result = spawnSync("git", ["merge-base", "--is-ancestor", ancestor, descendant], {
+  const result = spawnSync("git", [...gitNoLfsFilters, "merge-base", "--is-ancestor", ancestor, descendant], {
     cwd: repositoryRoot,
     encoding: "utf8",
   });
@@ -91,7 +97,7 @@ function validateAppendOnlyHistory(currentManifest) {
 const manifestText = readFileSync(manifestPath, "utf8");
 const manifest = JSON.parse(manifestText);
 assert(manifest.schema === "iat-localization-provenance/v1", "unexpected schema");
-assert(manifest.status === "PUBLIC_MACHINE_DRAFT_NATIVE_REVIEW_HOLD", "status must remain HOLD");
+assert(manifest.status === "GLOBAL_FAIL_CLOSED_NATIVE_REVIEW_HOLD", "status must remain reviewed-localization HOLD");
 assert(manifest.mainnetStatus === "UNSCHEDULED_HOLD", "mainnet status must remain UNSCHEDULED_HOLD");
 assert(manifest.license?.spdx === "CC0-1.0", "CC0-1.0 SPDX identifier is required");
 assert(manifest.license?.scope?.length >= 5, "CC0 scope is incomplete");
@@ -123,7 +129,11 @@ for (const run of manifest.runs) {
     run.timeBasis === "OUTPUT_COMMIT_COMMITTER_TIME_NOT_MODEL_START_TIME",
     `${run.id} timestamp basis is not explicit`,
   );
-  assert(run.model?.revision && /^[0-9a-f]{40}$/.test(run.model.revision), `${run.id} model revision missing`);
+  if (run.model?.used === false) {
+    assert(run.model.provider === "none" && run.model.identifier === "none" && run.model.revision === null, `${run.id} no-model declaration is incomplete`);
+  } else {
+    assert(run.model?.revision && /^[0-9a-f]{40}$/.test(run.model.revision), `${run.id} model revision missing`);
+  }
   assert(run.model?.weightsPublishedInRepository === false, `${run.id} must not publish model weights`);
   assert(run.runtime?.absolutePathsPublished === false, `${run.id} path privacy declaration missing`);
   assert(run.generation?.staticCommittedOutput === true, `${run.id} output must be static`);
@@ -145,7 +155,7 @@ for (const run of manifest.runs) {
     assert(chain.includes(artifact.bindingCommit), `${artifact.path} is bound outside the run commit chain`);
     const buffer = execFileSync(
       "git",
-      ["show", `${artifact.bindingCommit}:projects/star-ascent/site/${artifact.path}`],
+      [...gitNoLfsFilters, "show", `${artifact.bindingCommit}:projects/star-ascent/site/${artifact.path}`],
       { cwd: repositoryRoot, maxBuffer: 32 * 1024 * 1024 },
     );
     assert(buffer.length === artifact.bytes, `${artifact.path} historical byte count drifted`);
@@ -160,10 +170,19 @@ for (const run of manifest.runs) {
   let otherChanges = 0;
   let corruptHashesBefore = 0;
   let corruptHashesAfter = 0;
+  const baselineSourceKeys = new Set(Object.keys(baseline.en ?? {}));
+  const outputSourceKeys = new Set(Object.keys(output.en ?? {}));
+  const removedCanonicalSourceKeys = [...baselineSourceKeys].filter((source) => !outputSourceKeys.has(source)).length;
+  const addedCanonicalSourceKeys = [...outputSourceKeys].filter((source) => !baselineSourceKeys.has(source)).length;
+  let removedLocaleEntries = 0;
+  let addedLocaleEntries = 0;
   for (const [locale, values] of Object.entries(output)) {
     assert(baseline[locale], `${run.id} baseline is missing locale ${locale}`);
+    removedLocaleEntries += Object.keys(baseline[locale]).filter((source) => !(source in values)).length;
+    addedLocaleEntries += Object.keys(values).filter((source) => !(source in baseline[locale])).length;
     for (const [source, value] of Object.entries(values)) {
       const before = baseline[locale][source];
+      if (!(source in baseline[locale])) continue;
       if (before !== value) {
         changed += 1;
         if (before === source && value !== source) sourceEqualDrafts += 1;
@@ -181,12 +200,21 @@ for (const run of manifest.runs) {
   assert(sourceEqualDrafts === outcome.sourceEqualDraftReplacements, `${run.id} source-match count drifted`);
   assert(literalRestorations === outcome.literalOnlyRestorations, `${run.id} literal restoration count drifted`);
   assert(otherChanges === outcome.otherDeterministicPipelineChanges, `${run.id} other-change count drifted`);
+  assert(removedCanonicalSourceKeys === (outcome.removedCanonicalSourceKeys ?? 0), `${run.id} removed canonical-source count drifted`);
+  assert(addedCanonicalSourceKeys === (outcome.addedCanonicalSourceKeys ?? 0), `${run.id} added canonical-source count drifted`);
+  assert(removedLocaleEntries === (outcome.removedLocaleEntries ?? 0), `${run.id} removed locale-entry count drifted`);
+  assert(addedLocaleEntries === (outcome.addedLocaleEntries ?? 0), `${run.id} added locale-entry count drifted`);
   assert(corruptHashesBefore === outcome.corruptedSha256ValuesBefore, `${run.id} prior SHA count drifted`);
   assert(corruptHashesAfter === outcome.corruptedSha256ValuesAfter, `${run.id} output SHA count drifted`);
   assert(outcome.unexplainedMutations === 0, `${run.id} unexplained mutations must be zero`);
 }
 
 const activeRun = manifest.runs.at(-1);
+assert(activeRun.status === "GLOBAL_FAIL_CLOSED_NATIVE_REVIEW_HOLD", "active run must retain reviewed-localization HOLD");
+assert(
+  activeRun.artifacts.some((artifact) => artifact.path === "app/i18n/messages.json"),
+  "active run must bind the current localization catalog",
+);
 for (const artifact of activeRun.artifacts) {
   const buffer = readFileSync(join(siteRoot, artifact.path));
   assert(buffer.length === artifact.bytes, `${artifact.path} active byte count is not recorded`);
@@ -203,7 +231,21 @@ assert(catalog.meta.sourceCount === activeRun.scope.canonicalStrings, "catalog m
 assert(catalog.meta.renderedRoutes.length === activeRun.scope.canonicalRoutes, "catalog route count drifted");
 assert(catalog.meta.translationAlgorithmVersion === activeRun.generation.translationAlgorithmVersion, "algorithm version drifted");
 assert(catalog.meta.sourceMatchRefresh?.algorithmVersion === activeRun.generation.sourceMatchRefreshAlgorithmVersion, "refresh version drifted");
-assert(catalog.meta.translationDraftStatus === "MACHINE_DRAFT_NATIVE_REVIEW_REQUIRED", "catalog draft status drifted");
+assert(catalog.meta.translationDraftStatus === "QUARANTINED_MACHINE_DRAFTS_RUNTIME_REVIEW_ONLY", "catalog draft quarantine status drifted");
+const reviewedPolicy = readJson(join(siteRoot, "app/i18n/reviewed-localization-policy.json"));
+assert(
+  reviewedPolicy.schema === "iat-reviewed-localization-policy/v1"
+    && reviewedPolicy.mode === "GLOBAL_FAIL_CLOSED"
+    && reviewedPolicy.fallback === "canonical-english"
+    && reviewedPolicy.machineDraftRuntimeAllowed === false
+    && reviewedPolicy.unreviewedTargetLanguageBundleAllowed === false
+    && reviewedPolicy.unreviewedLocaleAutonymsAllowed === false
+    && reviewedPolicy.directComponentReviewBundleComplete === false,
+  "reviewed-localization policy is not fail closed",
+);
+assert(Object.entries(reviewedPolicy.localeStatus ?? {}).every(([locale, status]) => locale === "en" ? status === "SOURCE" : status === "HOLD"), "non-English locale escaped HOLD without review evidence");
+assert(catalog.meta.runtimeLocalizationPolicy?.reviewedRuntimeCells === activeRun.outcomes.reviewedRuntimeCells, "reviewed runtime-cell count drifted");
+assert(catalog.meta.runtimeLocalizationPolicy?.fallbackRuntimeCells === activeRun.outcomes.canonicalFallbackCells, "canonical fallback-cell count drifted");
 
 const pending = readJson(join(siteRoot, "app/i18n/pending-visible-source.json"));
 assert(pending.capture.routeCount === activeRun.scope.canonicalRoutes, "pending capture route count drifted");
@@ -234,6 +276,8 @@ assert(JSON.stringify(scorecard.summary) === JSON.stringify({
 }), "scorecard summary drifted");
 assert(scorecard.scope.locales === activeRun.scope.localeCount, "scorecard locale count drifted");
 assert(scorecard.scope.canonicalStrings === activeRun.scope.canonicalStrings, "scorecard source count drifted");
+assert(scorecard.scope.reviewedRuntimeCells === activeRun.outcomes.reviewedRuntimeCells, "scorecard reviewed runtime-cell count drifted");
+assert(scorecard.scope.canonicalFallbackCells === activeRun.outcomes.canonicalFallbackCells, "scorecard fallback runtime-cell count drifted");
 assert(scorecard.assurance.nativeQualityClaimAllowed === false, "scorecard improperly allows native-quality claim");
 assert(scorecard.assurance.releaseApproved === false, "scorecard improperly approves release");
 assert(scorecard.assurance.mainnetStateChanged === false, "scorecard improperly changes mainnet state");

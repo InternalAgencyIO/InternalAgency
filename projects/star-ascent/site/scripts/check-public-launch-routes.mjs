@@ -2,26 +2,67 @@ import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 
 const timeoutMs = 12_000;
-const concurrency = 1;
+const concurrency = 8;
 
 const publicOrigins = ["https://internalagency.io", "https://ileriakil.com"];
-const launchRoutes = [
-  "/",
-  "/launch",
-  "/proof",
-  "/verify",
-  "/signal",
-  "/dossier",
-  "/press",
-  "/rewards",
-  "/tokenomics",
-  "/network",
-];
-const pages = publicOrigins.flatMap((origin) => launchRoutes.map((route) => `${origin}${route}`));
 const metadataCatalog = JSON.parse(readFileSync(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8"));
 const routeSeoCatalog = JSON.parse(readFileSync(new URL("../app/i18n/route-seo.json", import.meta.url), "utf8"));
+const reviewedPolicy = JSON.parse(readFileSync(new URL("../app/i18n/reviewed-localization-policy.json", import.meta.url), "utf8"));
 const sitemapRoutes = Object.keys(routeSeoCatalog);
 const localeCodes = Object.keys(metadataCatalog);
+const localeCodeSet = new Set(localeCodes);
+const stressRoutes = ["/", "/launch", "/proof", "/dossier", "/network"];
+const pages = [...new Set([
+  ...publicOrigins.flatMap((origin) => sitemapRoutes.map((route) => `${origin}${route}`)),
+  ...localeCodes.flatMap((locale) => stressRoutes.map((route) =>
+    `https://internalagency.io/${locale}${route === "/" ? "" : route}`,
+  )),
+])];
+const contentLocaleFor = () => "en";
+const htmlLanguageTag = (locale) => locale === "zh" ? "zh-Hans" : locale === "sr" ? "sr-Cyrl" : locale;
+const googleHreflangTag = (locale) => locale === "pcm" ? null : htmlLanguageTag(locale);
+const englishBodyMarkers = {
+  "/": "INTERNAL AGENCY PRESENTS",
+  "/launch": "STAR ASCENT // GENESIS CONTROL",
+  "/proof": "STAR ASCENT // PUBLIC PROOF BOARD",
+  "/verify": "STAR ASCENT // FIELD GUIDE 01",
+  "/signal": "INTERNAL AGENCY // OFFICIAL SIGNAL DIRECTORY",
+  "/dossier": "INTERNAL AGENCY // CANONICAL DOSSIER",
+  "/press": "INTERNAL AGENCY // PRESS ROOM",
+  "/rewards": "STAR ASCENT // NODE REWARDS",
+  "/tokenomics": "IAT // PUBLIC ECONOMIC POLICY V2",
+  "/network": "IAT NETWORK // LIVE SOLANA READOUT",
+};
+
+if (
+  reviewedPolicy.schema !== "iat-reviewed-localization-policy/v1"
+  || reviewedPolicy.mode !== "GLOBAL_FAIL_CLOSED"
+  || reviewedPolicy.fallback !== "canonical-english"
+  || reviewedPolicy.machineDraftRuntimeAllowed !== false
+  || reviewedPolicy.unreviewedTargetLanguageBundleAllowed !== false
+  || reviewedPolicy.unreviewedLocaleAutonymsAllowed !== false
+  || reviewedPolicy.directComponentReviewBundleComplete !== false
+) throw new Error("reviewed-localization policy is not GLOBAL_FAIL_CLOSED");
+if (
+  JSON.stringify(Object.keys(reviewedPolicy.localeStatus ?? {})) !== JSON.stringify(localeCodes)
+  || reviewedPolicy.localeStatus.en !== "SOURCE"
+  || localeCodes.slice(1).some((locale) => reviewedPolicy.localeStatus[locale] !== "HOLD")
+  || Object.keys(reviewedPolicy.translations ?? {}).length !== 0
+  || (reviewedPolicy.reviews ?? []).length !== 0
+) throw new Error("public verification requires the exact evidence-free 49-locale HOLD policy; a status marker cannot activate copy");
+
+function pageIdentity(url) {
+  const parsed = new URL(url);
+  const segments = parsed.pathname.split("/").filter(Boolean);
+  const prefixedLocale = segments.length > 0 && localeCodeSet.has(segments[0]) ? segments[0] : null;
+  const locale = prefixedLocale ?? (parsed.origin === "https://ileriakil.com" ? "tr" : "en");
+  const publicSegments = prefixedLocale ? segments.slice(1) : segments;
+  return {
+    origin: parsed.origin,
+    locale,
+    publicPath: publicSegments.length > 0 ? `/${publicSegments.join("/")}` : "/",
+  };
+}
 
 const disclosureRedirects = {
   "star-ascent-whitepaper-v2": "white-dossier",
@@ -78,15 +119,13 @@ function normalizePublicUrl(value) {
 }
 
 function metadataError(url, html) {
-  const parsedUrl = new URL(url);
-  const origin = parsedUrl.origin;
-  const publicPath = parsedUrl.pathname || "/";
-  const locale = origin === "https://ileriakil.com" ? "tr" : "en";
-  const localeMetadata = metadataCatalog[locale];
+  const { origin, locale, publicPath } = pageIdentity(url);
+  const contentLocale = contentLocaleFor(locale);
+  const localeMetadata = metadataCatalog[contentLocale];
   const seoSources = routeSeoCatalog[publicPath]
     ?? (publicPath.startsWith("/dossier/read/") ? routeSeoCatalog["/dossier"] : routeSeoCatalog["/"]);
   const expected = {
-    lang: locale,
+    lang: contentLocale,
     title: localeMetadata.seo[seoSources.title] ?? localeMetadata.title,
     description: localeMetadata.seo[seoSources.description] ?? localeMetadata.description,
   };
@@ -98,38 +137,71 @@ function metadataError(url, html) {
     const tag = metaTags.find((candidate) => attribute(candidate, kind) === name);
     return tag ? attribute(tag, "content") : "";
   };
-  const alternateHref = (language) => {
-    const tag = linkTags.find((candidate) => attribute(candidate, "rel") === "alternate" && attribute(candidate, "hreflang") === language);
-    return tag ? attribute(tag, "href") : "";
-  };
   const canonicalTag = linkTags.find((candidate) => attribute(candidate, "rel") === "canonical");
   const canonicalHref = canonicalTag ? attribute(canonicalTag, "href") : "";
   const ogImageUrl = metaValue("og:image");
+  const routeSuffix = publicPath === "/" ? "" : publicPath;
+  const hostReviewHold = origin === "https://ileriakil.com" && contentLocaleFor("tr") !== "tr";
+  const reviewHold = contentLocale !== locale || hostReviewHold;
+  const expectedCanonical = reviewHold ? `https://internalagency.io${routeSuffix}` : `${origin}${routeSuffix}`;
   if (language !== expected.lang) return `expected html lang=${expected.lang}; got ${language || "missing"}`;
   if (title !== expected.title) return `expected title ${expected.title}; got ${title || "missing"}`;
-  if (metaValue("description", "name") !== expected.description) return "expected canonical bilingual meta description";
+  if (metaValue("description", "name") !== expected.description) return "expected reviewed-or-fallback meta description";
   if (ogImageUrl !== `${origin}/og-star-ascent-v1.png`) return `expected canonical OG image; got ${ogImageUrl || "missing"}`;
   if (metaValue("og:title") !== expected.title) return "expected OG title to exactly match the document title";
-  if (metaValue("og:description") !== expected.description) return "expected OG description to exactly match the canonical bilingual description";
+  if (metaValue("og:description") !== expected.description) return "expected OG description to exactly match the reviewed-or-fallback description";
   if (metaValue("og:type") !== "website") return `expected og:type=website; got ${metaValue("og:type") || "missing"}`;
   if (metaValue("og:image:width") !== "1792" || metaValue("og:image:height") !== "1024") return "expected canonical OG image dimensions";
   if (!metaValue("og:image:alt")) return "expected non-empty OG image alt text";
+  if (normalizePublicUrl(metaValue("og:url")) !== expectedCanonical) return "expected OG URL to match the effective canonical route";
   if (metaValue("twitter:card", "name") !== "summary_large_image") return "expected Twitter large-image card";
   if (metaValue("twitter:title", "name") !== expected.title) return "expected Twitter title to exactly match the document title";
-  if (metaValue("twitter:description", "name") !== expected.description) return "expected Twitter description to exactly match the canonical bilingual description";
+  if (metaValue("twitter:description", "name") !== expected.description) return "expected Twitter description to exactly match the reviewed-or-fallback description";
   if (metaValue("twitter:image", "name") !== `${origin}/og-star-ascent-v1.png`) return "expected canonical Twitter image";
-  const routeSuffix = publicPath === "/" ? "" : publicPath;
-  if (canonicalHref !== `${origin}${routeSuffix}`) return `expected exact canonical route ${origin}${routeSuffix}; got ${canonicalHref || "missing"}`;
-  if (normalizePublicUrl(alternateHref("en")) !== `https://internalagency.io${routeSuffix}`) return "expected exact English alternate route";
-  if (normalizePublicUrl(alternateHref("tr")) !== `https://internalagency.io/tr${routeSuffix}`) return "expected exact Turkish locale alternate route";
-  if (normalizePublicUrl(alternateHref("tr-TR")) !== `https://ileriakil.com${routeSuffix}`) return "expected exact Turkish-origin alternate route";
-  if (normalizePublicUrl(alternateHref("x-default")) !== `https://internalagency.io${routeSuffix}`) return "expected exact x-default alternate route";
+  if (normalizePublicUrl(canonicalHref) !== expectedCanonical) return `expected exact canonical route ${expectedCanonical}; got ${canonicalHref || "missing"}`;
+  const expectedAlternates = new Map();
+  for (const candidate of localeCodes) {
+    if (contentLocaleFor(candidate) !== candidate) continue;
+    const tag = googleHreflangTag(candidate);
+    if (!tag) continue;
+    expectedAlternates.set(tag, candidate === "en"
+      ? `https://internalagency.io${routeSuffix}`
+      : `https://internalagency.io/${candidate}${routeSuffix}`);
+  }
+  if (contentLocaleFor("tr") === "tr") expectedAlternates.set("tr-TR", `https://ileriakil.com${routeSuffix}`);
+  expectedAlternates.set("x-default", `https://internalagency.io${routeSuffix}`);
+  const alternateTags = linkTags.filter((candidate) => attribute(candidate, "rel") === "alternate" && attribute(candidate, "hreflang"));
+  const actualAlternates = new Map(alternateTags.map((candidate) => [attribute(candidate, "hreflang"), normalizePublicUrl(attribute(candidate, "href"))]));
+  if (
+    alternateTags.length !== expectedAlternates.size
+    || actualAlternates.size !== expectedAlternates.size
+    || [...expectedAlternates].some(([tag, href]) => actualAlternates.get(tag) !== href)
+  ) return "hreflang inventory includes a HOLD locale or omits an approved canonical alternate";
+  const robots = metaValue("robots", "name");
+  if (reviewHold && !/noindex/i.test(robots)) return "review-HOLD route must publish meta robots noindex";
+  if (reviewHold && /\/i18n-v2\//i.test(html)) return "review-HOLD route must not reference a locale payload";
+  const bodyMarker = englishBodyMarkers[publicPath];
+  if (contentLocale === "en" && bodyMarker && !html.includes(bodyMarker)) return `canonical English body marker is missing: ${bodyMarker}`;
+  const structuredDataScripts = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+  let webPage = null;
+  for (const match of structuredDataScripts) {
+    try {
+      const value = JSON.parse(match[1]);
+      const nodes = Array.isArray(value?.["@graph"]) ? value["@graph"] : [value];
+      webPage ??= nodes.find((node) => node?.["@type"] === "WebPage") ?? null;
+    } catch {
+      return "JSON-LD is not valid JSON";
+    }
+  }
+  if (!webPage || normalizePublicUrl(webPage.url) !== expectedCanonical || webPage.inLanguage !== htmlLanguageTag(contentLocale)) {
+    return "JSON-LD WebPage identity does not match the effective content language and canonical URL";
+  }
   return null;
 }
 
 function publicSurfaceSafetyError(url, html) {
   const interactiveControl = html.match(/<(form|input|textarea|select|option)\b/i)?.[1];
-  if (interactiveControl && new URL(url).pathname !== "/network") {
+  if (interactiveControl && pageIdentity(url).publicPath !== "/network") {
     return `public launch surface must not expose a ${interactiveControl} control before the verified activation gate`;
   }
   if (/\b(?:phantom|solflare|backpack|walletconnect)\b/i.test(html)) {
@@ -143,7 +215,7 @@ function htmlContentTypeError(contentType) {
     return `expected an HTML document Content-Type; got ${contentType || "missing"}`;
   }
   if (!/(?:^|;)\s*charset=utf-8\s*(?:;|$)/i.test(contentType)) {
-    return `expected UTF-8 HTML for bilingual launch copy; got ${contentType}`;
+    return `expected UTF-8 HTML for reviewed-or-fallback launch copy; got ${contentType}`;
   }
   return null;
 }
@@ -163,9 +235,13 @@ function sitemapError(origin, xml) {
     return "expected a sitemap.org urlset";
   }
   const locations = [...xml.matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/gi)].map((match) => match[1]);
-  const canonical = publicOrigins.flatMap((site) => sitemapRoutes.map((route) => route === "/" ? site : `${site}${route}`));
+  const canonicalOrigins = [
+    "https://internalagency.io",
+    ...(contentLocaleFor("tr") === "tr" ? ["https://ileriakil.com"] : []),
+  ];
+  const canonical = canonicalOrigins.flatMap((site) => sitemapRoutes.map((route) => route === "/" ? site : `${site}${route}`));
   const localized = localeCodes
-    .filter((locale) => locale !== "en")
+    .filter((locale) => locale !== "en" && contentLocaleFor(locale) === locale)
     .flatMap((locale) => sitemapRoutes.map((route) => `https://internalagency.io/${locale}${route === "/" ? "" : route}`));
   const expected = [...canonical, ...localized];
   const missing = expected.filter((url) => !locations.includes(url));
@@ -182,11 +258,14 @@ function robotsError(origin, body) {
   const lines = body.replace(/\r/g, "").split("\n").map((line) => line.trim()).filter(Boolean);
   const hasAllowAll = lines.some((line) => /^allow:\s*\/$/i.test(line));
   const sitemaps = lines.filter((line) => /^sitemap:/i.test(line)).map((line) => line.replace(/^sitemap:\s*/i, ""));
-  const expected = publicOrigins.map((site) => `${site}/sitemap.xml`);
+  const expected = [
+    "https://internalagency.io/sitemap.xml",
+    ...(contentLocaleFor("tr") === "tr" ? ["https://ileriakil.com/sitemap.xml"] : []),
+  ];
   if (!lines.some((line) => /^user-agent:\s*\*$/i.test(line))) return "expected a wildcard robots user agent rule";
   if (!hasAllowAll) return "expected robots to allow the public launch surfaces";
   if (sitemaps.length !== expected.length || expected.some((url) => !sitemaps.includes(url))) {
-    return `expected robots to declare both canonical sitemaps, including ${origin}/sitemap.xml`;
+    return `expected robots to declare only review-approved canonical sitemaps for ${origin}`;
   }
   return null;
 }
@@ -201,7 +280,7 @@ async function checkSitemap(origin) {
     if (contentTypeIssue) throw new Error(contentTypeIssue);
     const issue = sitemapError(origin, await response.text());
     if (issue) throw new Error(issue);
-    console.log(`OK ${response.status} ${url} (canonical bilingual launch sitemap)`);
+    console.log(`OK ${response.status} ${url} (review-approved canonical launch sitemap)`);
     return true;
   } catch (error) {
     try {
@@ -210,7 +289,7 @@ async function checkSitemap(origin) {
       const contentTypeIssue = xmlContentTypeError(headerValue(headers, "content-type"));
       const issue = sitemapError(origin, execFileSync(binary, ["-sS", "--connect-timeout", "5", "--max-time", "12", url], { encoding: "utf8" }));
       if (headerStatus(headers) >= 200 && headerStatus(headers) < 300 && !contentTypeIssue && !issue) {
-        console.log(`OK ${headerStatus(headers)} ${url} (curl fallback; canonical bilingual launch sitemap)`); return true;
+        console.log(`OK ${headerStatus(headers)} ${url} (curl fallback; review-approved canonical launch sitemap)`); return true;
       }
     } catch { /* preserve the original network error below */ }
     console.error(`FAIL ${url}: ${error.message}`); return false;
@@ -276,6 +355,15 @@ async function checkPage(url) {
       if (response.url !== url) throw new Error(`expected the canonical public route to remain ${url}; got ${response.url}`);
       const contentTypeIssue = htmlContentTypeError(response.headers.get("content-type"));
       if (contentTypeIssue) throw new Error(contentTypeIssue);
+      const routeLocale = pageIdentity(url).locale;
+      const contentLocale = contentLocaleFor(routeLocale);
+      if (response.headers.get("content-language")?.toLowerCase() !== contentLocale) {
+        throw new Error(`expected Content-Language ${contentLocale}; got ${response.headers.get("content-language") ?? "missing"}`);
+      }
+      const hostReviewHold = new URL(url).origin === "https://ileriakil.com" && contentLocaleFor("tr") !== "tr";
+      if ((contentLocale !== routeLocale || hostReviewHold) && !/noindex/i.test(response.headers.get("x-robots-tag") ?? "")) {
+        throw new Error("review-HOLD route must publish X-Robots-Tag noindex");
+      }
       const html = await response.text();
       const metadataIssue = metadataError(url, html);
       if (metadataIssue) throw new Error(metadataIssue);
@@ -294,10 +382,15 @@ async function checkPage(url) {
       const binary = process.platform === "win32" ? "curl.exe" : "curl";
       const headers = curlHeaders(url);
       const contentTypeIssue = htmlContentTypeError(headerValue(headers, "content-type"));
+      const routeLocale = pageIdentity(url).locale;
+      const contentLocale = contentLocaleFor(routeLocale);
+      const languageIssue = headerValue(headers, "content-language").toLowerCase() !== contentLocale;
+      const hostReviewHold = new URL(url).origin === "https://ileriakil.com" && contentLocaleFor("tr") !== "tr";
+      const indexingIssue = (contentLocale !== routeLocale || hostReviewHold) && !/noindex/i.test(headerValue(headers, "x-robots-tag"));
       const html = execFileSync(binary, ["-sS", "--connect-timeout", "5", "--max-time", "12", url], { encoding: "utf8" });
       const metadataIssue = metadataError(url, html);
       const safetyIssue = publicSurfaceSafetyError(url, html);
-      if (!contentTypeIssue && !metadataIssue && !safetyIssue) {
+      if (!contentTypeIssue && !languageIssue && !indexingIssue && !metadataIssue && !safetyIssue) {
         console.log(`OK ${status} ${url} (curl fallback; UTF-8 HTML, language, alternate links, social metadata, and pre-activation safety)`);
         return true;
       }
@@ -348,4 +441,4 @@ const results = await runLimited([
   ]),
 ]);
 if (results.some((result) => !result)) process.exit(1);
-console.log("PUBLIC ROUTE CHECK COMPLETE: English and Turkish launch and direct-document routes have exact language alternates, approved metadata, pre-activation safety, and canonical sitemap/robots coverage; every documented legacy redirect is reachable.");
+console.log("PUBLIC ROUTE CHECK COMPLETE: both public origins enforce reviewed-or-English content identity, safe indexing/alternates, approved metadata, pre-activation safety, and canonical sitemap/robots coverage; every documented legacy redirect is reachable.");

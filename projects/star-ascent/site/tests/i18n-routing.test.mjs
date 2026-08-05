@@ -27,14 +27,14 @@ async function request(path = "/", headers = {}) {
   );
 }
 
-test("country routing wins unless a saved language preference exists", async () => {
+test("country routing keeps HOLD language preferences on canonical English", async () => {
   const france = await request("/", {
     "accept-language": "en-US,en;q=0.9",
     "cf-ipcountry": "FR",
   });
-  assert.equal(france.status, 302);
-  assert.equal(new URL(france.headers.get("location")).pathname, "/fr");
-  assert.equal(france.headers.get("cache-control"), "private, no-store");
+  assert.equal(france.status, 200);
+  assert.equal(france.headers.get("location"), null);
+  assert.equal(france.headers.get("content-language"), "en");
   assert.match(france.headers.get("vary"), /CF-IPCountry/i);
 
   const savedEnglish = await request("/", {
@@ -49,7 +49,7 @@ test("country routing wins unless a saved language preference exists", async () 
   assert.equal(crawlerStyleRequest.headers.get("content-language"), "en");
 });
 
-test("every locale route returns its own indexable document identity", async () => {
+test("every locale route returns honest reviewed-or-English document identity", async () => {
   const metadata = JSON.parse(await readFile(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8"));
   const locales = Object.keys(metadata);
   assert.equal(locales.length, 50);
@@ -58,34 +58,40 @@ test("every locale route returns its own indexable document identity", async () 
       const path = locale === "en" ? "/future" : `/${locale}/future`;
       const response = await request(path);
       assert.equal(response.status, 200, `${locale} route status`);
-      assert.equal(response.headers.get("content-language"), locale, `${locale} Content-Language`);
+      assert.equal(response.headers.get("content-language"), "en", `${locale} Content-Language`);
       const html = await response.text();
-      const languageTag = locale === "zh" ? "zh-Hans" : locale === "sr" ? "sr-Cyrl" : locale;
-      assert.match(html, new RegExp(`<html lang="${languageTag}"`), `${locale} HTML language`);
-      assert.match(html, new RegExp(`rel="canonical" href="https:\\/\\/internalagency\\.io${path.replaceAll("/", "\\/")}"`), `${locale} canonical`);
-      assert.doesNotMatch(html, /<meta[^>]+(?:noindex|nofollow)/i, `${locale} must remain indexable`);
+      assert.match(html, /<html lang="en" dir="ltr"/i, `${locale} HTML language`);
+      assert.match(html, /rel="canonical" href="https:\/\/internalagency\.io\/future"/i, `${locale} canonical`);
+      if (locale === "en") assert.doesNotMatch(html, /<meta[^>]+(?:noindex|nofollow)/i, `${locale} source route indexability`);
+      else assert.match(html, /<meta[^>]+name="robots"[^>]+content="noindex, nofollow, noarchive"/i, `${locale} review-HOLD indexing`);
     }));
   }
 });
 
-test("multilingual countries honor a locally appropriate browser language", async () => {
+test("multilingual countries do not redirect into unreviewed locale routes", async () => {
   const canada = await request("/", {
     "accept-language": "en-CA;q=0.7,fr-CA;q=1,fr;q=0.9",
     "cf-ipcountry": "CA",
   });
-  assert.equal(new URL(canada.headers.get("location")).pathname, "/fr");
+  assert.equal(canada.status, 200);
+  assert.equal(canada.headers.get("location"), null);
+  assert.equal(canada.headers.get("content-language"), "en");
 
   const switzerland = await request("/", {
     "accept-language": "it-CH,it;q=0.9,en;q=0.7",
     "cf-ipcountry": "CH",
   });
-  assert.equal(new URL(switzerland.headers.get("location")).pathname, "/it");
+  assert.equal(switzerland.status, 200);
+  assert.equal(switzerland.headers.get("location"), null);
+  assert.equal(switzerland.headers.get("content-language"), "en");
 
   const catalanSpain = await request("/", {
     "accept-language": "ca-ES,ca;q=0.9,es;q=0.8",
     "cf-ipcountry": "ES",
   });
-  assert.equal(new URL(catalanSpain.headers.get("location")).pathname, "/ca");
+  assert.equal(catalanSpain.status, 200);
+  assert.equal(catalanSpain.headers.get("location"), null);
+  assert.equal(catalanSpain.headers.get("content-language"), "en");
 
   const rejectsZeroQuality = await request("/", {
     "accept-language": "fr;q=0,en;q=1",
@@ -94,29 +100,27 @@ test("multilingual countries honor a locally appropriate browser language", asyn
   assert.equal(rejectsZeroQuality.status, 200);
 });
 
-test("localized paths render canonical routes with locale metadata", async () => {
+test("HOLD locale paths render canonical routes with English fallback metadata", async () => {
   const payloadContract = JSON.parse(
     await readFile(new URL("../app/i18n/payload-contract.json", import.meta.url), "utf8"),
   );
   const french = await request("/fr/future");
   assert.equal(french.status, 200);
-  assert.equal(french.headers.get("content-language"), "fr");
+  assert.equal(french.headers.get("content-language"), "en");
   const frenchHtml = await french.text();
-  assert.match(frenchHtml, /<html lang="fr" dir="ltr"/i);
-  assert.match(frenchHtml, /rel="canonical" href="https:\/\/internalagency\.io\/fr\/future"/i);
-  assert.match(frenchHtml, /hrefLang="es" href="https:\/\/internalagency\.io\/es\/future"/i);
+  assert.match(frenchHtml, /<html lang="en" dir="ltr"[^>]+data-route-locale="fr"/i);
+  assert.match(frenchHtml, /rel="canonical" href="https:\/\/internalagency\.io\/future"/i);
   assert.match(frenchHtml, /hrefLang="x-default" href="https:\/\/internalagency\.io\/future"/i);
-  assert.match(frenchHtml, /hrefLang="zh-Hans"/i);
-  assert.match(frenchHtml, /hrefLang="sr-Cyrl"/i);
   const frenchHead = frenchHtml.slice(0, frenchHtml.indexOf("</head>"));
-  assert.doesNotMatch(frenchHead, /hrefLang="pcm"/i);
-  assert.match(frenchHtml, /href="\/pcm\/future" hrefLang="pcm" lang="pcm"/i);
-  assert.equal((frenchHead.match(/rel="alternate"/g) ?? []).length, 51);
+  assert.doesNotMatch(frenchHead, /hrefLang="(?:es|fr|zh-Hans|sr-Cyrl|pcm)"/i);
+  assert.match(frenchHtml, /href="\/pcm\/future" lang="en"/i);
+  assert.doesNotMatch(frenchHtml, /href="\/pcm\/future" hrefLang=/i);
+  assert.equal((frenchHead.match(/rel="alternate"/g) ?? []).length, 2);
   assert.equal((frenchHead.match(/rel="canonical"/g) ?? []).length, 1);
   assert.match(frenchHtml, /"@type":"WebPage"/i);
-  assert.match(frenchHtml, /"inLanguage":"fr"/i);
-  const payloadPath = `/${payloadContract.assetNamespace}/${payloadContract.catalogSha256.slice(0, 16)}/fr.json`;
-  assert.match(
+  assert.match(frenchHtml, /"inLanguage":"en"/i);
+  const payloadPath = `/${payloadContract.assetNamespace}/${payloadContract.payloadNamespaceSha256.slice(0, 16)}/fr.json`;
+  assert.doesNotMatch(
     frenchHtml,
     new RegExp(`rel="preload" href="${payloadPath.replaceAll("/", "\\/")}" as="fetch"`, "i"),
   );
@@ -124,60 +128,49 @@ test("localized paths render canonical routes with locale metadata", async () =>
 
   const arabic = await request("/ar");
   assert.equal(arabic.status, 200);
-  assert.equal(arabic.headers.get("content-language"), "ar");
-  assert.match(await arabic.text(), /<html lang="ar" dir="rtl"/i);
+  assert.equal(arabic.headers.get("content-language"), "en");
+  assert.match(await arabic.text(), /<html lang="en" dir="ltr"[^>]+data-route-locale="ar"/i);
 
   const pidgin = await request("/pcm/future");
   assert.equal(pidgin.status, 200);
-  assert.equal(pidgin.headers.get("content-language"), "pcm");
+  assert.equal(pidgin.headers.get("content-language"), "en");
   const pidginHtml = await pidgin.text();
-  assert.match(pidginHtml, /<html lang="pcm" dir="ltr"/i);
-  assert.match(pidginHtml, /rel="canonical" href="https:\/\/internalagency\.io\/pcm\/future"/i);
+  assert.match(pidginHtml, /<html lang="en" dir="ltr"[^>]+data-route-locale="pcm"/i);
+  assert.match(pidginHtml, /rel="canonical" href="https:\/\/internalagency\.io\/future"/i);
 });
 
-test("the Turkish host keeps Turkish ownership without collapsing other locale canonicals", async () => {
+test("the Turkish host keeps canonical ownership while unreviewed Turkish content falls back", async () => {
   const turkishHeaders = {
     host: "ileriakil.com",
     "x-forwarded-host": "ileriakil.com",
   };
-  const [metadata, payloadContract] = await Promise.all([
-    readFile(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8").then(JSON.parse),
-    readFile(new URL("../app/i18n/payload-contract.json", import.meta.url), "utf8").then(JSON.parse),
-  ]);
+  const metadata = await readFile(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8").then(JSON.parse);
   const locales = Object.keys(metadata);
   assert.equal(locales.length, 50);
 
   for (let start = 0; start < locales.length; start += 5) {
     await Promise.all(locales.slice(start, start + 5).map(async (locale) => {
       const path = locale === "tr" ? "/network" : `/${locale}/network`;
-      const canonical = locale === "tr"
-        ? "https://ileriakil.com/network"
-        : `https://internalagency.io${locale === "en" ? "" : `/${locale}`}/network`;
-      const languageTag = locale === "zh" ? "zh-Hans" : locale === "sr" ? "sr-Cyrl" : locale;
+      const canonical = "https://internalagency.io/network";
+      const contentLanguage = "en";
       const response = await request(path, turkishHeaders);
       assert.equal(response.status, 200, `${locale} Turkish-host route status`);
-      assert.equal(response.headers.get("content-language"), locale, `${locale} Content-Language`);
+      assert.equal(response.headers.get("content-language"), contentLanguage, `${locale} Content-Language`);
       const html = await response.text();
       const head = html.slice(0, html.indexOf("</head>"));
-      assert.match(html, new RegExp(`<html lang="${languageTag}"`), `${locale} HTML language`);
+      assert.match(html, new RegExp(`<html lang="${contentLanguage}"`), `${locale} HTML language`);
       assert.ok(head.includes(`rel="canonical" href="${canonical}"`), `${locale} canonical ownership`);
       assert.ok(head.includes(`property="og:url" content="${canonical}"`), `${locale} Open Graph ownership`);
       assert.ok(html.includes(`"url":"${canonical}"`), `${locale} structured-data ownership`);
       assert.equal((head.match(/rel="canonical"/g) ?? []).length, 1, `${locale} canonical count`);
-      const payloadPath = `/${payloadContract.assetNamespace}/${payloadContract.catalogSha256.slice(0, 16)}/${locale}.json`;
-      if (locale === "en" || locale === "tr") {
-        assert.doesNotMatch(head, /rel="preload" href="\/i18n-v2\//, `${locale} unnecessary locale preload`);
-      } else {
-        assert.ok(
-          head.includes(`rel="preload" href="${payloadPath}" as="fetch"`),
-          `${locale} source-bound locale preload`,
-        );
-      }
+      assert.doesNotMatch(head, /rel="preload" href="\/i18n-v2\//, `${locale} review-HOLD route must not preload an unreviewed catalog`);
+      assert.match(head, /name="robots" content="noindex, nofollow, noarchive"/i, `${locale} Turkish-host review-HOLD indexing`);
+      assert.equal(response.headers.get("x-robots-tag"), "noindex, nofollow, noarchive", `${locale} Turkish-host review-HOLD response indexing`);
     }));
   }
 });
 
-test("route-specific SEO copy and structured data are localized", async () => {
+test("route-specific SEO copy and structured data use canonical English while review is HOLD", async () => {
   const [metadata, routeSeo] = await Promise.all([
     readFile(new URL("../app/i18n/metadata.generated.json", import.meta.url), "utf8").then(JSON.parse),
     readFile(new URL("../app/i18n/route-seo.json", import.meta.url), "utf8").then(JSON.parse),
@@ -187,11 +180,11 @@ test("route-specific SEO copy and structured data are localized", async () => {
   const html = await response.text();
   const expectedTitle = metadata.fr.seo[routeSeo["/launch"].title];
   const expectedDescription = metadata.fr.seo[routeSeo["/launch"].description];
-  assert.notEqual(expectedTitle, routeSeo["/launch"].title);
+  assert.equal(expectedTitle, routeSeo["/launch"].title);
   assert.ok(html.includes(expectedTitle));
   assert.ok(html.includes(expectedDescription));
   assert.match(html, /"@type":"WebPage"/);
-  assert.match(html, /"isPartOf":\{"@id":"https:\/\/internalagency\.io\/fr#website"\}/);
+  assert.match(html, /"isPartOf":\{"@id":"https:\/\/internalagency\.io\/#website"\}/);
 
   const dossierRecord = await request("/fr/dossier/read/white-dossier");
   assert.equal(dossierRecord.status, 200);
@@ -201,13 +194,13 @@ test("route-specific SEO copy and structured data are localized", async () => {
 
   for (const publicPath of ["/network", "/tokenomics"]) {
     const localized = await request(`/fr${publicPath}`);
-    assert.equal(localized.status, 200, `${publicPath} localized route status`);
+    assert.equal(localized.status, 200, `${publicPath} HOLD route status`);
     const localizedHtml = await localized.text();
     const localizedTitle = metadata.fr.seo[routeSeo[publicPath].title];
     const localizedDescription = metadata.fr.seo[routeSeo[publicPath].description];
-    assert.notEqual(localizedTitle, routeSeo[publicPath].title, `${publicPath} must not reuse its English title`);
-    assert.ok(localizedHtml.includes(localizedTitle), `${publicPath} is missing its localized title`);
-    assert.ok(localizedHtml.includes(localizedDescription), `${publicPath} is missing its localized description`);
+    assert.equal(localizedTitle, routeSeo[publicPath].title, `${publicPath} must use canonical English while review is HOLD`);
+    assert.ok(localizedHtml.includes(localizedTitle), `${publicPath} is missing its canonical fallback title`);
+    assert.ok(localizedHtml.includes(localizedDescription), `${publicPath} is missing its canonical fallback description`);
   }
 });
 
@@ -220,32 +213,30 @@ test("the signing ceremony tool is excluded from search indexes", async () => {
   }
 });
 
-test("the sitemap publishes equivalent-route alternates for every locale", async () => {
+test("the sitemap excludes review-HOLD locale routes and publishes source alternates", async () => {
   const sitemapSource = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
   const routeCount = [...sitemapSource.matchAll(/\{\s*path:\s*"([^"]*)"/g)].length;
   const sitemap = await request("/sitemap.xml");
   assert.equal(sitemap.status, 200);
   const xml = await sitemap.text();
-  assert.match(xml, /https:\/\/internalagency\.io\/es\/future\/predictive-engine/);
-  assert.match(xml, /https:\/\/internalagency\.io\/pcm\/future\/casino/);
-  assert.match(xml, /https:\/\/internalagency\.io\/fr\/network/);
-  assert.match(xml, /https:\/\/internalagency\.io\/ar\/tokenomics/);
+  assert.doesNotMatch(xml, /https:\/\/internalagency\.io\/(?:es|pcm|fr|ar)\//);
   assert.match(xml, /hreflang="x-default"/i);
-  assert.match(xml, /hreflang="zh-Hans"/i);
+  assert.doesNotMatch(xml, /hreflang="tr-TR"/i);
+  assert.doesNotMatch(xml, /hreflang="zh-Hans"/i);
   assert.doesNotMatch(xml, /hreflang="pcm"/i);
   const locations = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  const expectedLocationCount = routeCount * 51; // two canonical hosts plus 49 non-English locale paths
+  const expectedLocationCount = routeCount; // Only canonical English is review-approved.
   assert.equal(locations.length, expectedLocationCount);
   assert.equal(new Set(locations).size, expectedLocationCount);
   assert.ok(Buffer.byteLength(xml, "utf8") < 50 * 1024 * 1024, "sitemap must stay below Google's 50 MB limit");
 });
 
-test("robots publishes both canonical sitemap endpoints", async () => {
+test("robots publishes only the review-approved canonical sitemap endpoint", async () => {
   const response = await request("/robots.txt");
   assert.equal(response.status, 200);
   const robots = await response.text();
   assert.match(robots, /Sitemap: https:\/\/internalagency\.io\/sitemap\.xml/i);
-  assert.match(robots, /Sitemap: https:\/\/ileriakil\.com\/sitemap\.xml/i);
+  assert.doesNotMatch(robots, /Sitemap: https:\/\/ileriakil\.com\/sitemap\.xml/i);
 });
 
 test("country defaults cover every sovereign state in Europe and the Americas", async () => {

@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { sourceLanguageForClientPath } from "../i18n/config";
 import "./network.css";
 
 type NetworkPayload = {
@@ -78,24 +77,6 @@ const copy = {
     positions: "IAT POSITIONS",
     back: "RETURN TO STAR ASCENT",
   },
-  tr: {
-    eyebrow: "IAT AĞI // CANLI SOLANA OKUMASI",
-    title: <>TEK EKRAN.<br /><i>TÜM SİNYAL.</i></>,
-    lede: "Cüzdan bağlamadan zinciri izle, cüzdan veya işlemi incele ve IAT oyuncu durumunu gör.",
-    hold: "IAT PROGRAMI // MAINNET BEKLET",
-    placeholder: "Cüzdan, işlem, program veya mint",
-    search: "İNCELE",
-    chain: "ZİNCİR NABZI",
-    player: "OYUNCU GÖRÜNÜMÜ",
-    noLookup: "Kamuya açık bir Solana adresi veya işlem imzası yapıştır. Bu ekran salt okunurdur ve asla imza istemez.",
-    noIat: "IAT mint ve program adresleri henüz yayımlanmadı. Bakiye ve pozisyonlar yalnızca doğrulanmış Başlangıç kanıtından sonra açılır.",
-    rpcUnavailable: "CANLI RPC ERİŞİLEMİYOR // SOLANA OKUMASI YENİDEN DENENECEK",
-    notFound: "Eşleşen zincir üstü kayıt bulunamadı.",
-    explorer: "SOLANA EXPLORER'DA AÇ",
-    recent: "SON HAREKETLER",
-    positions: "IAT POZİSYONLARI",
-    back: "STAR ASCENT'E DÖN",
-  },
 };
 
 const roleName = (role: number) => ["STANDARD", "CCC AGENT", "CCC ASSOCIATE"][role] ?? "UNKNOWN";
@@ -108,14 +89,12 @@ const iat = (baseUnits: string) => {
 };
 
 export default function NetworkPage() {
-  const [language, setLanguage] = useState<"en" | "tr">("en");
   const [status, setStatus] = useState<NetworkPayload | null>(null);
   const [lookup, setLookup] = useState("");
   const [result, setResult] = useState<NetworkPayload | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname));
     const controller = new AbortController();
     let active = true;
     fetch("/api/network", { signal: controller.signal })
@@ -153,7 +132,7 @@ export default function NetworkPage() {
     }
   };
 
-  const t = copy[language];
+  const t = copy.en;
   const chain = status?.snapshot;
   const found = result?.result;
   const positions = found?.positions?.items ?? [];

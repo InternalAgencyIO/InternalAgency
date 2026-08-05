@@ -122,13 +122,13 @@ For a PUBLISHED manifest, every sequence step requires its own non-placeholder p
 
 ## Public document assets
 
-Before a document-index or Dossier deployment, confirm the bilingual public assets and local validator files are present:
+Before a document-index or Dossier deployment, confirm the paired English/Turkish source artifacts and local validator files are present:
 
 ```bash
 node scripts/verify-public-disclosure-assets.mjs
 ```
 
-This is a local existence check only. It does not verify production URLs, document accuracy, or launch readiness.
+This is a local existence check only. It does not verify production URLs, document accuracy, launch readiness, or accountable Turkish-language review. A Turkish filename or paired artifact must not be treated as permission to activate Turkish runtime copy.
 
 ## Public route integrity
 
@@ -138,20 +138,23 @@ Use the production route check before announcing a public route:
 npm run check:public
 ```
 
-It requires every English and Turkish launch surface and every canonical Dossier document target to return its exact canonical HTTPS URL without a redirect, as well as the expected language metadata, cross-language alternates, social card metadata, and pre-activation safety boundary. It separately verifies that each documented legacy URL returns a same-origin HTTPS 308 to its reviewed Dossier target. A page with familiar content at a different URL is a failure: publish only the checked official route.
+It requires the canonical English launch surface, every locale-intent route, both public hosts, and every canonical Dossier document target to return the exact expected HTTPS URL without an unintended redirect. Language metadata, alternates, social metadata, runtime payload use, and indexing must follow `reviewed-localization-policy.json`. While Turkish is `HOLD`, both `/tr/...` and `ileriakil.com` must serve canonical English (`lang` and `Content-Language` `en`), carry meta/header `noindex`, omit Turkish hreflang/sitemap discovery, and request no Turkish runtime payload. It separately verifies that each documented legacy URL returns a same-origin HTTPS 308 to its reviewed Dossier target. Familiar content at a different URL or a Turkish-looking route with unreviewed Turkish copy is a failure.
 
 ## Launch schedule
 
-Confirm that every active English/Turkish operator surface uses the exact
-scheduled open-source ceremony window:
+Confirm that every active operator surface and paired source artifact uses the
+exact scheduled open-source ceremony window:
 
 ```bash
 node scripts/verify-launch-schedule.mjs
 ```
 
-The scheduled time opens the broadcast window only. It never signs, submits,
-or authorizes a transaction. Mainnet remains on evidence HOLD until the exact
-devnet rehearsal and independent evidence chain pass.
+The schedule comparison is not localization review. Turkish remains on
+localization `HOLD` and the active web UI remains English fallback until
+accountable, source-bound review evidence is accepted. The scheduled time opens
+the broadcast window only. It never signs, submits, or authorizes a transaction.
+Mainnet remains on evidence HOLD until the exact devnet rehearsal and independent
+evidence chain pass.
 
 ## Fixed-supply arithmetic
 

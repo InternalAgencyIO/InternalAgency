@@ -11,6 +11,8 @@ const readJson = (name) => JSON.parse(readFileSync(join(auditDir, name), "utf8")
 const manifest = readJson("manifest.json");
 const ledger = readJson("work-ledger.json");
 const proof = readJson("hydration-proof.json");
+const reviewedLocalizationPolicy = JSON.parse(readFileSync(join(siteRoot, "app", "i18n", "reviewed-localization-policy.json"), "utf8"));
+const currentPayloadContract = JSON.parse(readFileSync(join(siteRoot, "app", "i18n", "payload-contract.json"), "utf8"));
 
 function fail(message) {
   throw new Error(`IAT V2 architecture work validation failed: ${message}`);
@@ -127,6 +129,23 @@ assert(proof.result.failedPages === 0 && proof.result.incompletePages === 0, "hy
 assert(proof.result.catalogBackedRenders + proof.result.nativeTurkishSourceRenders === 3500, "hydration proof render classification differs");
 assert(proof.profile.configuredLocales === 50 && proof.profile.hosts.length === 2, "hydration proof locale/host topology differs");
 assert(proof.result.catalogSha256 === "893cf8efbbb850b5cfb4133987a135785269b087d2d650de3fcb1946f050adce", "hydration catalog digest differs");
+assert(
+  reviewedLocalizationPolicy.mode === "GLOBAL_FAIL_CLOSED"
+    && reviewedLocalizationPolicy.fallback === "canonical-english"
+    && reviewedLocalizationPolicy.machineDraftRuntimeAllowed === false
+    && reviewedLocalizationPolicy.unreviewedTargetLanguageBundleAllowed === false
+    && reviewedLocalizationPolicy.unreviewedLocaleAutonymsAllowed === false
+    && reviewedLocalizationPolicy.directComponentReviewBundleComplete === false,
+  "current reviewed-localization policy is not fail closed",
+);
+assert(
+  Object.entries(reviewedLocalizationPolicy.localeStatus ?? {}).every(([locale, status]) => locale === "en" ? status === "SOURCE" : status === "HOLD"),
+  "current architecture gate requires every non-English locale to remain HOLD until evidence-backed review exists",
+);
+assert(
+  proof.result.catalogSha256 !== currentPayloadContract.catalogSha256,
+  "historical hydration proof must not be mistaken for proof of the current fail-closed catalog",
+);
 
 const externalBlockers = ledger.externalLaunchBlockers ?? [];
 assert(externalBlockers.length === 9, "external launch blocker inventory must contain exactly 9 blockers");
@@ -142,6 +161,6 @@ assert(ledger.preservation.forcePushAllowed === false && ledger.preservation.mer
 
 console.log(
   `IAT V2 architecture work ledger valid: ${completed.length}/${tasks.length} safe tasks complete, ` +
-    `${proof.result.completedPages}/${proof.result.plannedPages} hydration pages PASS, ` +
-    `${externalBlockers.length} external blockers HOLD, Mainnet UNSCHEDULED_HOLD.`,
+    `${proof.result.completedPages}/${proof.result.plannedPages} historical hydration pages retained (not current localization approval), ` +
+    `current 50-locale runtime GLOBAL_FAIL_CLOSED, ${externalBlockers.length} external blockers HOLD, Mainnet UNSCHEDULED_HOLD.`,
 );

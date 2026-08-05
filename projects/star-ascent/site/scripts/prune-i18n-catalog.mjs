@@ -118,7 +118,7 @@ for (const [locale, messages] of Object.entries(catalog.messages)) {
   }
 }
 
-if (
+const changed = (
   retainedKeys.length !== sourceKeys.length ||
   normalizedUnicodeStrings > 0 ||
   sanitizedBidiControls > 0 ||
@@ -126,21 +126,24 @@ if (
   restoredSentenceIntent > 0 ||
   restoredSequenceMarkers > 0 ||
   restoredStructuralSeparators > 0
-) {
+);
+if (changed) {
   for (const locale of Object.keys(catalog.messages)) {
     catalog.messages[locale] = Object.fromEntries(
       retainedKeys.map((source) => [source, catalog.messages[locale][source]]),
     );
   }
-  catalog.meta.sourceCount = retainedKeys.length;
-    catalog.meta.prunedNonContentStrings = sourceKeys.length - retainedKeys.length;
-    catalog.meta.normalizedUnicodeStrings = normalizedUnicodeStrings;
-    catalog.meta.sanitizedBidiControls = sanitizedBidiControls;
-    catalog.meta.balancedDelimiterStrings = balancedDelimiterStrings;
-    catalog.meta.restoredSentenceIntent = restoredSentenceIntent;
-  catalog.meta.restoredSequenceMarkers = restoredSequenceMarkers;
-  catalog.meta.restoredStructuralSeparators = restoredStructuralSeparators;
-  await writeFile(catalogUrl, `${JSON.stringify(catalog, null, 2)}\n`, "utf8");
+}
+catalog.meta.sourceCount = retainedKeys.length;
+catalog.meta.prunedNonContentStrings = sourceKeys.length - retainedKeys.length;
+catalog.meta.normalizedUnicodeStrings = normalizedUnicodeStrings;
+catalog.meta.sanitizedBidiControls = sanitizedBidiControls;
+catalog.meta.balancedDelimiterStrings = balancedDelimiterStrings;
+catalog.meta.restoredSentenceIntent = restoredSentenceIntent;
+catalog.meta.restoredSequenceMarkers = restoredSequenceMarkers;
+catalog.meta.restoredStructuralSeparators = restoredStructuralSeparators;
+await writeFile(catalogUrl, `${JSON.stringify(catalog, null, 2)}\n`, "utf8");
+if (changed) {
   console.log(
     `Pruned ${sourceKeys.length - retainedKeys.length} non-content source string(s); normalized ${normalizedUnicodeStrings} Unicode string(s); sanitized ${sanitizedBidiControls} bidi-control translation(s); balanced ${balancedDelimiterStrings} delimiter string(s); restored ${restoredSentenceIntent} sentence-intent mark(s), ${restoredSequenceMarkers} sequence marker(s), and ${restoredStructuralSeparators} structural separator(s).`,
   );

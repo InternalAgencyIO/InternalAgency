@@ -1,12 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { isLocaleCode, sourceLanguageForClientPath } from "../i18n/config";
 import "./tokenomics.css";
 
 const copy = {
-  en: {
-    lang: "TR",
     kicker: "IAT // PUBLIC ECONOMIC POLICY V2",
     title: <>THE TERMS<br />ARE VISIBLE.</>,
     intro: "This is the proposed reward and vesting design for IAT. It is public before execution so the code, funding and consequences can be reviewed.",
@@ -78,100 +74,16 @@ const copy = {
     dossier: "OPEN THE DOSSIER",
     rewards: "OPEN REWARD STATUS",
     proof: "OPEN PROOF BOARD",
-  },
-  tr: {
-    lang: "EN",
-    kicker: "IAT // KAMUSAL EKONOMİ POLİTİKASI V2",
-    title: <>ŞARTLAR<br />GÖRÜNÜR.</>,
-    intro: "Bu, IAT için önerilen ödül ve hak ediş tasarımıdır. Kod, fonlama ve sonuçları yürütme öncesinde incelenebilsin diye açıkça yayımlanır.",
-    state: "SUNUCU TESTLERİ GEÇTİ · DAĞITILMADI · MAINNET BEKLET",
-    noticeTitle: "Canlı bir ödül programı yok.",
-    notice: "Açık kaynak zincir üstü uygulama, sunucu politika ve adaptör testlerini geçti. Doğrulanabilir SBF derlemesi, bağımsız güvenlik ve ekonomi incelemesi ve eşleşen donanım cüzdanlı devnet provası henüz tamamlanmadı. Şu anda kimse bu oranları kazanamaz. Mainnet BEKLET durumundadır.",
-    allocation: "SABİT ARZ",
-    supply: "1.000.000.000 IAT · 9 ONDALIK · EK İHRAÇ PLANLANMIYOR",
-    allocations: [
-      ["TOPLULUK", "500M", "%50"],
-      ["HAZİNE", "200M", "%20"],
-      ["EKOSİSTEM", "150M", "%15"],
-      ["ÇEKİRDEK EKİP", "100M", "%10"],
-      ["LİKİDİTE", "50M", "%5"],
-    ],
-    reserve: "400M ÖDÜL REZERVİ",
-    reserveIntro: "Hazine, ekosistem ve likidite sıralı ödül hatlarıdır. Tasarım gereği tükenebilirler.",
-    lanes: [
-      ["01", "HAZİNE", "Toplam 200M · Başlangıç hedefinde 50M kullanılabilir · 150M hak edişli"],
-      ["02", "EKOSİSTEM", "Toplam 150M · Başlangıç hedefinde 37,5M kullanılabilir · 112,5M hak edişli"],
-      ["03", "LİKİDİTE", "Toplam 50M · Başlangıç hedefinde 12,5M kullanılabilir · 37,5M hak edişli"],
-    ],
-    reserveRule: "Ödemeler önce hazineden, sonra ekosistemden, ardından likiditeden çekilir. Sistem, üç hattın da sıfıra ulaşmasına izin verecek şekilde tasarlanmıştır. Bu öneride ayrıca korunan bir piyasa likiditesi rezervi yoktur.",
-    vesting: "HAK EDİŞ",
-    schedules: [
-      ["HAZİNE KALANI", "12 ay cliff, ardından sonraki 36 ay boyunca doğrusal serbest bırakma."],
-      ["EKOSİSTEM KALANI", "6 ay cliff, ardından sonraki 24 ay boyunca doğrusal serbest bırakma."],
-      ["LİKİDİTE KALANI", "6 ay cliff, ardından 24. aya kadar doğrusal serbest bırakma."],
-      ["ÇEKİRDEK EKİP ANAPARASI", "100M IAT: 6 ay cliff, ardından 24. aya kadar doğrusal serbest bırakma. İsteğe bağlı erken kilit açma yoktur."],
-    ],
-    rates: "YILLIK ÖDÜL ORANLARI",
-    ratesIntro: "Aşağıdaki yüzdeler haftalık ödenen, otomatik bileşik getirisi olmayan basit yıllık ödül oranlarıdır. Program arayüzü bunlara APY diyebilir; bileşik getiri otomatik değildir.",
-    rateRows: [
-      ["ÇEKİRDEK EKİP", "%17", "Hak ediş sürerken 100M çekirdek ekip anaparasının tamamına sabit uygulanır. CCC durumu bu oranı değiştirmez."],
-      ["STANDART KULLANICI", "%10", "Uygun, kabul edilmiş ve tam teminatlandırılmış staking pozisyonu için."],
-      ["CCC AGENT", "%28", "Yalnızca cüzdan ilgili turda aktif CCC Agent rolünü taşırken uygulanır."],
-      ["CCC ASSOCIATE", "%20", "Yayımlanmış tur anlık görüntüsündeki uygun alt ilişkili hesaplara uygulanır."],
-    ],
-    collateral: "FONLANMAMIŞ VAAT YOK",
-    collateralBody: "Program yeni bir pozisyonu kabul etmeden önce azami ödül yükümlülüğünün tamamını o anda kilidi açık hat kapasitesinden ayırmalıdır. Kapasite yoksa pozisyon reddedilir. Mevcut ayrılmış yükümlülükler fonlu kalır; sistem ödül borcu yaratmaz.",
-    wildcard: "CCC WILDCARD // HAFTALIK",
-    wildcardIntro: "Kamuya açık biçimde doğrulanabilir ilk CCC çekilişi Başlangıçtan 24 saat sonra açılır. Sonrasında her yedi günde yeni bir çekiliş açılır. Çekirdek ekip rolü bir tur boyunca uygun bir Agency konumunu geçici olarak işgal eder.",
-    wildcardRules: [
-      "Seçilen Agency ile anlık görüntüdeki alt associate veya staker hesapları o haftanın yeni erişim, puan ve IAT ödüllerini kaybeder.",
-      "Daha önce tahakkuk etmiş ödüller, cüzdan varlıkları ve hak edilmiş anapara kaldırılmaz.",
-      "Duraklatılan ödüller tahakkuk etmez ve mevcut kaynak hattında kalır.",
-      "Operatör yeniden çekiliş yapamaz. Uygun küme, anlık görüntü, rastgelelik girdisi, sonuç ve ödeme kaydı kamusal olmalıdır.",
-      "Çekirdek ekibin sabit %17 oranı çekilişten etkilenmez.",
-    ],
-    tiebreak: "EVRENSEL EŞİTLİK BOZMA // TEK ÇEKİLİŞ",
-    tiebreakIntro: "Yayımlanmış bir protokol kuralı iki veya daha fazla adayı tamamen eşit bıraktığında, sistem eşitliği tek bir taahhütlü ve kamuya açık doğrulanabilir rastgele sonuçla çözer. Son oyu operatör vermez.",
-    tiebreakRules: [
-      "Eşit adayların tamamı ve kanonik sırası rastgelelik istenmeden önce anlık görüntülenir.",
-      "Resmî Switchboard On-Demand commit işlemi aynı işlem içinde karar anlık görüntüsünün hemen önünde olmalıdır; taze önceki-slot seed değeri zincir üstünde bağlanır.",
-      "Karara özgü SHA-256 alanı tek reveal sonucunu genişletir. Tam eşit dağılımlı rejection sampling, modulo yanlılığı olmadan kazanan indeks üretir.",
-      "Aynı matematik 2’li, 100’lü ve daha büyük eşitliklerde kullanılır.",
-      "Karar kimliği, aday kümesi taahhüdü, rastgelelik hesabı, commit slotu, reveal, türetme sayacı, kazanan indeks ve settlement işlemi kamusal olmalıdır.",
-      "İlk geçerli sonuç kesindir. Operatör yeniden çekiliş yapamaz ve çözülmemiş eşitlik kalmaz.",
-    ],
-    gates: "AKTİVASYON EŞİKLERİ",
-    gateRows: [
-      ["KOD", "Açık kaynak staking, hak ediş, rezerv yönlendirme ve CCC sözleşmeleri bu politikayla eşleşir."],
-      ["FONLAMA", "Tüm program kasaları ve lehtar adresleri yayımlanır ve bağımsız olarak karşılaştırılır."],
-      ["RASTGELELİK", "Haftalık çekiliş ve her tam eşitlik, operatörün yeniden çekilişine kapalı tek çekilişli ve tam eşit dağılımlı yöntemi kullanır."],
-      ["PROVA", "Yeni devnet provası hak edişi, rezerv tükenmesini, rol atamasını ve hata yollarını kapsar."],
-      ["İNCELEME", "Bağımsız güvenlik ve ekonomik inceleme bulguları, çözülmemiş risklerle birlikte yayımlanır."],
-    ],
-    boundary: "IAT yüksek riskli ve spekülatiftir. Bu oranlar program kurallarıdır; token fiyatı, piyasa değeri, kâr veya kesintisiz kullanılabilirlik vaadi değildir. Uygunluk, kabul edilen pozisyonlar ve ödemeler yayımlanmış sözleşmeye ve kalan kilidi açık rezerve bağlıdır.",
-    dossier: "DOSYAYI AÇ",
-    rewards: "ÖDÜL DURUMUNU AÇ",
-    proof: "KANIT PANOSUNU AÇ",
-  },
 };
 
 export default function TokenomicsPage() {
-  const [language, setLanguage] = useState<"en" | "tr">("en");
-  useEffect(() => {
-    setLanguage(sourceLanguageForClientPath(window.location.pathname, window.location.hostname));
-  }, []);
-  useEffect(() => {
-    const routeLocale = window.location.pathname.split("/").filter(Boolean)[0];
-    if (isLocaleCode(routeLocale)) return;
-    document.documentElement.lang = language;
-  }, [language]);
-  const t = copy[language];
+  const t = copy;
 
   return <main className="policy-page">
     <div className="policy-stars" aria-hidden="true" />
     <nav className="policy-nav">
       <a href="/">IA<span>///</span></a>
-      <div><a href="/dossier">{language === "en" ? "DOSSIER" : "DOSYA"}</a><button onClick={() => setLanguage(language === "en" ? "tr" : "en")}>{t.lang}</button></div>
+      <div><a href="/dossier">DOSSIER</a></div>
     </nav>
 
     <header className="policy-hero">

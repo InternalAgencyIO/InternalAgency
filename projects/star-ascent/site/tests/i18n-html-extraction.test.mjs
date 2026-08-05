@@ -43,9 +43,10 @@ test("critical hydration-only launch copy stays in the canonical source manifest
   for (const source of Object.values(criticalUi)) {
     assert.ok(component.includes(JSON.stringify(source)), `LaunchSequence source is missing manifest value: ${source}`);
   }
-  assert.deepEqual(
-    Object.values(criticalUi).filter((source) => source.endsWith(". GO.")).length,
-    6,
-    "The complete six-line readiness sequence must be guarded",
-  );
+  const guardedSequence = Object.entries(criticalUi)
+    .filter(([key]) => key.endsWith("Ready"))
+    .map(([, source]) => source);
+  assert.equal(guardedSequence.length, 6, "The complete six-line preflight sequence must be guarded");
+  assert.ok(guardedSequence.every((source) => /(?:CHECK|STANDBY)\.$/u.test(source)));
+  assert.ok(guardedSequence.every((source) => !/\bGO\b/u.test(source)), "HOLD copy must not contain a launch command");
 });

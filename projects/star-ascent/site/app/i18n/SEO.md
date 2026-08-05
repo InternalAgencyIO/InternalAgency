@@ -1,35 +1,38 @@
-# 50-locale SEO contract
+# 50-locale-intent SEO contract
 
-This is the release gate for multilingual discovery. It applies to every localized public route, not only the home page.
+This is the release gate for locale discovery. It applies to every public route, not only the home page, and is subordinate to `reviewed-localization-policy.json`.
+
+The current `GLOBAL_FAIL_CLOSED` state has one indexable content locale: English. All 49 non-English locales, including Turkish, are `HOLD` and serve canonical English fallback with `noindex`.
 
 ## Implemented
 
-- Stable language URLs (`/es`, `/fr`, `/zh`, `/pcm`, and equivalent nested routes).
-- Self-referencing canonical URLs on every locale/route pair.
-- Reciprocal equivalent-route `hreflang` annotations, plus `x-default` to the English route.
-- Script-specific tags where material (`zh-Hans`, `sr-Cyrl`) and `dir="rtl"` for Arabic and Urdu.
-- Nigerian Pidgin remains available at `/pcm` with a self-canonical, `lang="pcm"`, sitemap discovery, and explicit language-selector links. It is deliberately omitted from Google `hreflang` because Google accepts ISO 639-1 there and `pcm` is ISO 639-3; emitting an invalid tag would be fake coverage.
-- Locale- and route-specific title, description, Open Graph image alt, canonical URL, WebSite/WebPage JSON-LD, and `Content-Language` across all 23 indexable public routes.
-- XML sitemap entries for all public route/locale pairs, with equivalent-route alternates for every Google-supported language tag.
-- Crawlable `<a href>` language choices on every page. JavaScript enhances preference storage but is not required to discover locale URLs.
-- Localized head metadata is server-rendered. Visible page copy is hydrated from a same-origin, static locale payload; Google renders that JavaScript content, while the canonical/hreflang/sitemap discovery layer never depends on client execution.
-- Locale payloads are preloaded and cacheable. English fallback copy remains visible while localization hydrates, so a slow or blocked payload never produces a blank page.
-- The root country redirect only runs for requests that present a browser language. Requests without `Accept-Language` keep the stable English root, so crawlers can reach the canonical fallback while sitemaps and alternates expose every locale.
-- `robots.txt` allows the site and names both public sitemap URLs.
+- Stable locale-intent URLs (`/es`, `/fr`, `/zh`, `/pcm`, and equivalent nested routes) remain navigable while review is pending.
+- Each response emits exactly one canonical URL. A HOLD route canonicalizes to the corresponding unprefixed English route on `internalagency.io`; `noindex` and exclusion from hreflang/sitemaps prevent its locale-intent alias from being advertised as reviewed localized content.
+- Head alternates contain only review-approved content locales plus `x-default`. In the current state that means English and `x-default`; `zh-Hans`, `sr-Cyrl`, `tr-TR`, and every other non-English tag are absent.
+- A language-selector option may link to a HOLD locale-intent route, but it must not use `hreflang` to claim that the target resource is written in that language.
+- Every HOLD page uses canonical English title, description, Open Graph alt, visible copy, WebSite/WebPage JSON-LD `inLanguage`, `Content-Language: en`, `<html lang="en" dir="ltr">`, and both meta/header `noindex, nofollow, noarchive`.
+- A compiled locale artifact may exist for integrity verification, but a HOLD page neither preloads nor fetches a non-English payload. Its runtime cells must remain canonical English unless an exact reviewed override is active.
+- The XML sitemap contains only review-approved routes and alternates. Nigerian Pidgin, Turkish, and every other HOLD route are currently absent.
+- `ileriakil.com` is a Turkish-intent host under review HOLD. It serves English fallback with `noindex`; its sitemap is not advertised by `robots.txt` until Turkish becomes evidence-bound `REVIEWED`.
+- The root country redirect runs only for requests that present a browser language. A redirect records locale intent only and must not change the effective English fallback or indexing boundary for a HOLD locale.
+- `robots.txt` currently names only the review-approved `https://internalagency.io/sitemap.xml`.
 - The wallet-signing `/mint` ceremony tool is intentionally absent from the sitemap and emits both an HTML `noindex` directive and `X-Robots-Tag: noindex, nofollow, noarchive`.
 
 ## Validation gates
 
-- Every locale must have all canonical source strings and a compiled static payload.
+- Every locale must have all canonical source strings; any compiled payload must exactly follow reviewed-or-fallback policy.
 - Every Europe/Americas sovereign-country ISO code must resolve to a supported default.
-- Every localized page must self-canonicalize and expose the same reciprocal alternate cluster.
-- `x-default`, `zh-Hans`, and `sr-Cyrl` must be present; invalid `hreflang="pcm"` must be absent.
-- Locale pages must return `200`, the matching `Content-Language`, and the matching HTML `lang`/`dir`.
+- Every route must emit one canonical, but only review-approved content locales may enter reciprocal hreflang clusters or the sitemap.
+- `x-default` must be present. `zh-Hans`, `sr-Cyrl`, `tr-TR`, and other non-English tags must remain absent while their locales are HOLD; invalid `hreflang="pcm"` is always absent.
+- Locale-intent pages must return `200` with `Content-Language`, HTML `lang`/`dir`, metadata, JSON-LD, payload use, and indexing directives derived from the effective reviewed-or-fallback content locale.
+- Every HOLD page must have both meta and response-header `noindex`, must request zero non-English runtime payloads, and must contain no unreviewed target-language prose.
+- Both public hosts must agree on the runtime bundle, catalog digest, fallback semantics, and freshness-safe cache policy. The Turkish-intent host must not bypass review.
 - Country routing must yield to a saved choice and must not redirect a crawler-style request with no browser language.
-- Protocol names, URLs, dates, times, and numeric tokens must survive translation byte-for-byte.
+- Protocol names, URLs, dates, times, placeholders, markup, and numeric tokens must survive every reviewed override byte-for-byte where required.
 
 ## Honest boundaries
 
-- Search engines determine language primarily from visible page content, not just URL or `lang`; that is why full-content catalog coverage and rendered-content tests are required. The present visible-body localization still depends on JavaScript execution even though metadata and discovery do not.
-- IP-derived country selection is a user convenience, not an SEO signal. Locale URLs, canonicals, alternates, links, and sitemaps are the indexing contract.
-- Machine-generated copy remains reviewable static content. Native-speaker editorial review can improve cadence without changing routes or SEO relationships.
+- A locale-looking URL, native language name, compiled artifact, or machine-generated candidate is not evidence of approval.
+- Search engines determine language primarily from visible content. Therefore HOLD pages state their actual English identity and remain non-indexable rather than pretending that route intent is translated content.
+- IP-derived country selection is a user convenience, not an SEO signal. Review status controls content language and discovery.
+- Machine-generated copy may be retained only outside production-imported and public-static paths as quarantined review input. It cannot enter a built client asset, visible copy, metadata, JSON-LD, or a differing runtime payload cell without accountable, source-bound review evidence.

@@ -1,14 +1,45 @@
 # Public localization process and traceability
 
-**MACHINE DRAFT / NATIVE REVIEW HOLD / MAINNET UNSCHEDULED_HOLD / NO DEPLOYMENT**
+**CURRENT: GLOBAL_FAIL_CLOSED / NATIVE REVIEW HOLD / MAINNET UNSCHEDULED_HOLD / NO DEPLOYMENT**
 
-This document describes how the 50-locale static catalog was refreshed,
-checked, and bound to public Git history. The machine-readable companion is
+This document describes the current 50-locale runtime policy and preserves the
+historical model-assisted run as an append-only record. The machine-readable companion is
 [`translation-provenance.v1.json`](./translation-provenance.v1.json), and the
 scoped public-domain dedication is
 [`CC0-DATA-DEDICATION.md`](./CC0-DATA-DEDICATION.md).
 
-## What this run changed
+## Current runtime policy — 2026-08-05
+
+- The runtime catalog contains 985 strings extracted from the 25 canonical
+  English renders plus explicit English SEO, prompt, and critical-UI sources.
+- All 49 non-English locales are `HOLD`. Their 48,265 runtime cells are exact
+  canonical-English fallbacks until accountable, source-bound human review is
+  recorded.
+- There are zero evidence-backed non-English runtime cells. Machine drafts,
+  legacy localized prompt maps, and direct component-source candidates are not
+  retained in or compiled into the runtime catalog.
+- Production-imported components, language labels, and built client assets
+  contain no target-language draft copy. A post-build quarantine scan blocks
+  known Turkish launch vocabulary, Turkish-specific letters, and target-script
+  ranges from re-entering the public bundle.
+- The retired local NLLB entry point fails closed. Remote draft generation is
+  also disabled. A locale cannot activate from a status marker alone; every
+  canonical source requires a reviewed override and evidence, and direct
+  component copy requires a future review bundle before activation.
+
+The public scorecard and evidence artifacts are regenerated from the current
+catalog and committed source bindings. Native-speaker quality remains an
+external HOLD boundary; this policy does not claim native approval.
+
+## Historical model-assisted run — 2026-08-04
+
+**HISTORICAL MACHINE DRAFT / NATIVE REVIEW HOLD / NO LONGER ACTIVE RUNTIME INPUT**
+
+The following section records an earlier run. Its counts, source languages,
+commands, and NLLB configuration describe that historical commit chain only;
+they are not instructions for the current runtime catalog.
+
+### What the historical run changed
 
 The 2026-08-04 run refreshed only catalog values that still exactly matched
 their English or Turkish source text. It did not regenerate every existing

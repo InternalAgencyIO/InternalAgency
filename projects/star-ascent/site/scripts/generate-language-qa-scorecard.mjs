@@ -12,6 +12,7 @@ const definitionPath = resolve(siteRoot, "app/i18n/language-qa-checks.v1.json");
 const defaultNativeEvidencePath = resolve(siteRoot, "app/i18n/native-review-signoffs.v1.json");
 const defaultLanguageIdEvidencePath = resolve(siteRoot, "app/i18n/language-id-evidence.v1.json");
 const defaultRenderEvidencePath = resolve(siteRoot, "app/i18n/language-render-evidence.v1.json");
+const defaultPublishedOutputPath = resolve(siteRoot, "public/audits/localization-qa-20260803/language-qa-scorecard.json");
 const statuses = new Set(["PASS", "FAIL", "HOLD", "NOT_RUN"]);
 const heuristicIds = new Set([
   "LQA-051", "LQA-052", "LQA-053", "LQA-054", "LQA-055",
@@ -24,6 +25,7 @@ function usage() {
     "",
     "Options:",
     "  --output <path>              Write JSON to a new file instead of stdout.",
+    "  --replace                    Replace only the canonical published scorecard path.",
     "  --native-evidence <path>     Read optional native-review evidence.",
     "  --language-id-evidence <path> Read optional independent language-ID evidence.",
     "  --render-evidence <path>      Read optional clean-build browser/render evidence.",
@@ -41,6 +43,7 @@ function parseArgs(argv) {
     renderEvidence: defaultRenderEvidencePath,
     compact: false,
     gate: false,
+    replace: false,
   };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -50,6 +53,7 @@ function parseArgs(argv) {
     }
     if (arg === "--compact") options.compact = true;
     else if (arg === "--gate") options.gate = true;
+    else if (arg === "--replace") options.replace = true;
     else if (arg === "--output" || arg === "--native-evidence" || arg === "--language-id-evidence" || arg === "--render-evidence") {
       const value = argv[index + 1];
       if (!value || value.startsWith("--")) throw new Error(`${arg} requires a path`);
@@ -60,6 +64,9 @@ function parseArgs(argv) {
       else if (arg === "--language-id-evidence") options.languageIdEvidence = absolute;
       else options.renderEvidence = absolute;
     } else throw new Error(`Unknown option: ${arg}`);
+  }
+  if (options.replace && options.output !== defaultPublishedOutputPath) {
+    throw new Error("--replace is restricted to the canonical published scorecard path");
   }
   return options;
 }
@@ -124,13 +131,20 @@ async function readOptionalJson(path) {
   }
 }
 
+const gitNoLfsFilters = [
+  "-c", "filter.lfs.clean=",
+  "-c", "filter.lfs.smudge=",
+  "-c", "filter.lfs.process=",
+  "-c", "filter.lfs.required=false",
+];
+
 function git(args) {
-  return execFileSync("git", args, { cwd: siteRoot, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
+  return execFileSync("git", [...gitNoLfsFilters, ...args], { cwd: siteRoot, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 }
 
 function gitCommitExists(commit) {
   try {
-    execFileSync("git", ["cat-file", "-e", `${commit}^{commit}`], { cwd: siteRoot, stdio: "ignore" });
+    execFileSync("git", [...gitNoLfsFilters, "cat-file", "-e", `${commit}^{commit}`], { cwd: siteRoot, stdio: "ignore" });
     return true;
   } catch {
     return false;
@@ -184,6 +198,14 @@ function inspectMessages(context, locale, predicate) {
     if (!predicate(source, translation)) failures.push(source);
   }
   return failures;
+}
+
+function reviewKey(locale, source) {
+  return `${locale}\u0000${source}`;
+}
+
+function expectedCatalogValue(context, locale, source) {
+  return context.reviewedPolicy.translations?.[locale]?.[source] ?? source;
 }
 
 function extract(regex, value) {
@@ -297,18 +319,24 @@ function nativeEvidenceResult(context, locale, check) {
 function evaluateStatic(context, locale, check) {
   const messages = context.catalog.messages[locale] ?? {};
   const sourceMessages = context.catalog.messages.en ?? {};
-  const values = Object.values(messages);
   const definition = context.config.definitions.get(locale);
   const criticalSources = Object.values(context.critical);
   const metadata = context.metadata[locale] ?? {};
-  // The runtime consumes the compiled prompt in metadata.generated.json. Only
-  // the earliest locales retain a legacy catalog.prompts entry, so scoring the
-  // legacy map directly reports false missing-field failures for valid runtime
-  // prompts. Prefer the compiled, shipped prompt and retain the legacy fallback
-  // for compatibility with older artifacts.
-  const prompt = metadata.prompt ?? context.catalog.prompts?.[locale] ?? {};
+  // Runtime prompts are compiled from the reviewed locale cells or canonical
+  // English fallback. Unreviewed localized prompt maps are not retained.
+  const prompt = metadata.prompt ?? context.catalog.prompts?.en ?? {};
   const nonEnglish = locale !== "en";
   const bad = (predicate) => inspectMessages(context, locale, predicate);
+  const reviewedEntries = Object.entries(context.reviewedPolicy.translations?.[locale] ?? {});
+  const linguisticMessages = nonEnglish ? Object.fromEntries(reviewedEntries) : messages;
+  const linguisticValues = Object.values(linguisticMessages);
+  const badLinguistic = (predicate) => Object.entries(linguisticMessages)
+    .filter(([source, translation]) => !predicate(source, translation))
+    .map(([source]) => source);
+
+  if (heuristicIds.has(check.id) && check.id !== "LQA-054" && nonEnglish && reviewedEntries.length === 0) {
+    return pass("No evidence-backed target-language cells are active; canonical English fallback is intentionally excluded from linguistic heuristics", { reviewedCellCount: 0 });
+  }
 
   switch (check.id) {
     case "LQA-001":
@@ -321,12 +349,20 @@ function evaluateStatic(context, locale, check) {
     }
     case "LQA-004":
       return deterministic(/^[a-z]{2,3}$/.test(locale), "Locale code has approved lowercase syntax", `Noncanonical locale code: ${locale}`);
-    case "LQA-005":
-      return deterministic(Boolean(definition?.name.trim() && definition?.nativeName.trim()), "Locale names are present", "Locale display or native name is empty");
+    case "LQA-005": {
+      const holdLabelIsEnglish = locale === "en"
+        || context.reviewedPolicy.localeStatus?.[locale] !== "HOLD"
+        || definition?.nativeName === definition?.name;
+      return deterministic(
+        Boolean(definition?.name.trim() && definition?.nativeName.trim() && holdLabelIsEnglish),
+        "Locale labels are present and HOLD uses canonical English",
+        "Locale display label is empty or exposes an unreviewed autonym",
+      );
+    }
     case "LQA-006": {
       const nativeName = definition?.nativeName ?? "";
       const ok = nativeName === nativeName.normalize("NFC") && !context.mojibakePattern.test(nativeName) && !nativeName.includes("\uFFFD");
-      return deterministic(ok, "Native name is normalized and encoding-clean", "Native name has normalization or encoding damage");
+      return deterministic(ok, "Locale-menu label is normalized and encoding-clean", "Locale-menu label has normalization or encoding damage");
     }
     case "LQA-007": {
       const expected = context.rtlLocales.has(locale) ? "rtl" : "ltr";
@@ -430,8 +466,7 @@ function evaluateStatic(context, locale, check) {
     }
     case "LQA-031": {
       const protectedTerms = ["Internal Agency", "STAR ASCENT", "$IAT", "$SOL", "Solana", "Genesis", "APY", "CCC-Agent"];
-      const approved = { tr: { "Internal Agency": "İleri Akıl", Genesis: "Başlangıç" } };
-      const failures = bad((source, translation) => protectedTerms.every((term) => !source.includes(term) || translation.includes(term) || Boolean(approved[locale]?.[term] && translation.includes(approved[locale][term]))));
+      const failures = bad((source, translation) => protectedTerms.every((term) => !source.includes(term) || translation.includes(term)));
       return deterministic(failures.length === 0, "Protected brands retain approved forms", "Protected brand drift detected", { failureCount: failures.length, samples: sample(failures) });
     }
     case "LQA-032": {
@@ -530,17 +565,17 @@ function evaluateStatic(context, locale, check) {
     case "LQA-051": {
       if (!nonEnglish) return pass("English is the source-locale identity baseline");
       const invariant = /^(?:[\d\s.,:%+$€£₺/|—–-]+|[A-Z0-9$%+_.:/ -]{2,}|Internal Agency|STAR ASCENT|Solana|Genesis|APY|CCC-Agent)$/u;
-      const failures = Object.entries(messages).filter(([source, translation]) => source === translation && /\p{L}/u.test(source) && !invariant.test(source)).map(([source]) => source);
+      const failures = Object.entries(linguisticMessages).filter(([source, translation]) => source === translation && /\p{L}/u.test(source) && !invariant.test(source)).map(([source]) => source);
       return heuristic(failures.length === 0, "No suspicious unchanged linguistic source text", "Unchanged source-language prose requires review", { warningCount: failures.length, samples: sample(failures, 12) });
     }
     case "LQA-052": {
       if (locale === "en" || locale === "pcm") return pass("Locale-specific English-source leakage threshold is not diagnostic for this locale");
       const stopwords = /\b(?:the|and|with|from|this|that|before|after|while|through|public|launch|review|required|pending)\b/gi;
-      const warnings = Object.entries(messages).filter(([source, translation]) => translation !== source && (translation.match(stopwords) ?? []).length >= 3).map(([source]) => source);
+      const warnings = Object.entries(linguisticMessages).filter(([source, translation]) => translation !== source && (translation.match(stopwords) ?? []).length >= 3).map(([source]) => source);
       return heuristic(warnings.length === 0, "No high-confidence English stopword clusters", "English stopword clusters require review", { warningCount: warnings.length, samples: sample(warnings) });
     }
     case "LQA-053": {
-      const linguistic = values.filter((value) => /\p{L}/u.test(value)).join(" ");
+      const linguistic = linguisticValues.filter((value) => /\p{L}/u.test(value)).join(" ");
       const ratio = scriptRatio(linguistic, locale);
       const threshold = context.nonLatinLocales.has(locale) ? 0.25 : 0.5;
       return heuristic(ratio >= threshold, "Target-script ratio meets the locale threshold", "Target-script ratio is below threshold and needs review", { ratio: Number(ratio.toFixed(4)), threshold });
@@ -555,7 +590,7 @@ function evaluateStatic(context, locale, check) {
     }
     case "LQA-055": {
       const groups = new Map();
-      for (const [source, translation] of Object.entries(messages)) {
+      for (const [source, translation] of Object.entries(linguisticMessages)) {
         if (!/\p{L}/u.test(source) || translation.length < 3) continue;
         const key = normalizeSource(translation).toLocaleLowerCase(locale);
         const list = groups.get(key) ?? [];
@@ -564,20 +599,20 @@ function evaluateStatic(context, locale, check) {
       }
       const collisions = [...groups.values()].filter((group) => group.length > 1);
       const affected = collisions.reduce((total, group) => total + group.length, 0);
-      const ratio = affected / Math.max(1, Object.keys(messages).length);
+      const ratio = affected / Math.max(1, Object.keys(linguisticMessages).length);
       return heuristic(ratio <= 0.03, "Translation collision ratio is within threshold", "Translation collision ratio requires review", { ratio: Number(ratio.toFixed(4)), groups: collisions.length, samples: sample(collisions) });
     }
     case "LQA-056": {
-      const warnings = Object.entries(messages).filter(([, translation]) => /\b(\p{L}{2,})\b(?:[\s,;:—-]+\1\b){3,}/iu.test(translation)).map(([source]) => source);
+      const warnings = Object.entries(linguisticMessages).filter(([, translation]) => /\b(\p{L}{2,})\b(?:[\s,;:—-]+\1\b){3,}/iu.test(translation)).map(([source]) => source);
       return heuristic(warnings.length === 0, "No four-token repetition runs detected", "Suspicious repeated-token runs require review", { warningCount: warnings.length, samples: sample(warnings) });
     }
     case "LQA-057": {
-      const warnings = Object.entries(messages).filter(([source, translation]) => source.length >= 80 && translation.length / source.length < 0.18).map(([source]) => source);
+      const warnings = Object.entries(linguisticMessages).filter(([source, translation]) => source.length >= 80 && translation.length / source.length < 0.18).map(([source]) => source);
       return heuristic(warnings.length === 0, "Long-copy contraction floor passes", "Extreme contraction requires review", { warningCount: warnings.length, samples: sample(warnings) });
     }
     case "LQA-058": {
       const sentenceCount = (value) => (value.match(/[.!?。！？]/gu) ?? []).length;
-      const warnings = Object.entries(messages).filter(([source, translation]) => {
+      const warnings = Object.entries(linguisticMessages).filter(([source, translation]) => {
         const sourceCount = sentenceCount(source);
         if (sourceCount < 2) return false;
         return Math.abs(sourceCount - sentenceCount(translation)) > Math.max(2, Math.ceil(sourceCount * 0.6));
@@ -586,11 +621,11 @@ function evaluateStatic(context, locale, check) {
     }
     case "LQA-059": {
       const questionMark = locale === "el" ? /[?？؟՞;]/u : /[?？؟՞]/u;
-      const failures = bad((source, translation) => (!source.includes("?") || questionMark.test(translation)) && (!source.includes("!") || /[!！՜]/u.test(translation)));
+      const failures = badLinguistic((source, translation) => (!source.includes("?") || questionMark.test(translation)) && (!source.includes("!") || /[!！՜]/u.test(translation)));
       return deterministic(failures.length === 0, "Question and exclamation intent is preserved", "Question or exclamation intent was lost", { failureCount: failures.length, samples: sample(failures) });
     }
     case "LQA-060": {
-      const warnings = Object.entries(messages).filter(([source, translation]) => {
+      const warnings = Object.entries(linguisticMessages).filter(([source, translation]) => {
         const sourceLetters = [...source].filter((character) => /[A-Za-z]/.test(character)).join("");
         const targetLetters = [...translation].filter((character) => /\p{Ll}|\p{Lu}/u.test(character)).join("");
         return sourceLetters.length >= 8 && sourceLetters !== sourceLetters.toUpperCase() && targetLetters.length >= 8 && targetLetters === targetLetters.toLocaleUpperCase(locale);
@@ -601,18 +636,19 @@ function evaluateStatic(context, locale, check) {
       return deterministic(criticalSources.length === 8 && criticalSources.every((source) => Object.hasOwn(messages, source)), "All eight critical sources are covered", "Critical source coverage is incomplete", { criticalCount: criticalSources.length });
     case "LQA-062": {
       if (!nonEnglish) return pass("English critical source is the canonical baseline");
-      const keys = Object.keys(context.overrides.translations?.[locale] ?? {});
-      return deterministic(arraysEqual(sorted(keys), sorted(criticalSources)), "Critical override key set is exact", "Critical override key set is incomplete or excessive", { keys: keys.length });
+      const keys = Object.keys(context.reviewedPolicy.translations?.[locale] ?? {}).filter((source) => criticalSources.includes(source));
+      const missingEvidence = keys.filter((source) => !context.reviewIndex.has(reviewKey(locale, source)));
+      return deterministic(missingEvidence.length === 0, "Every active critical translation has explicit review evidence; fallback needs no override", "A critical translation lacks explicit review evidence", { reviewedCriticalKeys: keys.length, missingEvidence });
     }
     case "LQA-063": {
       if (!nonEnglish) return pass("English critical source is the canonical baseline");
-      const failures = criticalSources.filter((source) => messages[source] !== context.overrides.translations?.[locale]?.[source]);
-      return deterministic(failures.length === 0, "Critical catalog values equal overrides", "Critical values drifted from overrides", { failures });
+      const failures = criticalSources.filter((source) => messages[source] !== expectedCatalogValue(context, locale, source));
+      return deterministic(failures.length === 0, "Critical catalog values equal reviewed translations or canonical fallback", "Critical values drifted from reviewed-or-fallback policy", { failures });
     }
     case "LQA-064": {
       if (!nonEnglish) return pass("English is the source-locale baseline");
-      const failures = criticalSources.filter((source) => messages[source]?.trim().toLocaleLowerCase(locale) === source.toLocaleLowerCase("en"));
-      return deterministic(failures.length === 0, "Critical values contain no unchanged English prose", "Critical English fallback detected", { failures });
+      const failures = criticalSources.filter((source) => messages[source] !== expectedCatalogValue(context, locale, source));
+      return deterministic(failures.length === 0, "Unreviewed critical cells fail closed to canonical English", "A critical cell bypasses the reviewed-or-fallback policy", { failures });
     }
     case "LQA-065": {
       const failures = criticalSources.filter((source) => (source.match(/\/\//g) ?? []).length !== (messages[source]?.match(/\/\//g) ?? []).length);
@@ -620,15 +656,19 @@ function evaluateStatic(context, locale, check) {
     }
     case "LQA-066": {
       const fields = ["eyebrow", "title", "body", "stay", "english", "close", "timeout"];
+      const sourcePrompt = context.metadata.en?.prompt ?? {};
       const missing = fields.filter((field) => typeof prompt[field] !== "string" || !prompt[field].trim());
-      return deterministic(missing.length === 0, "All seven prompt fields are present", "Prompt fields are missing", { missing });
+      const drift = fields.filter((field) => typeof sourcePrompt[field] === "string" && prompt[field] !== expectedCatalogValue(context, locale, sourcePrompt[field]));
+      return deterministic(missing.length === 0 && drift.length === 0, "All seven prompt fields follow reviewed-or-fallback policy", "Prompt fields are missing or bypass policy", { missing, drift });
     }
     case "LQA-067":
       return deterministic(/15/.test(normalizeDecimalDigits(prompt.timeout ?? "")), "Prompt retains the 15-second fact", "Prompt lost or changed the 15-second timeout");
     case "LQA-068": {
       const englishAction = prompt.english ?? "";
-      const ok = englishAction.trim() && (!nonEnglish || englishAction.trim().toLocaleLowerCase(locale) !== "Switch to English".toLocaleLowerCase("en"));
-      return deterministic(Boolean(ok), "English-return action is present and localized", "English-return action is empty or unchanged English");
+      const sourceAction = context.metadata.en?.prompt?.english ?? "";
+      const expectedAction = expectedCatalogValue(context, locale, sourceAction);
+      const ok = englishAction.trim() && englishAction === expectedAction;
+      return deterministic(Boolean(ok), "English-return action follows reviewed-or-fallback policy", "English-return action is empty or bypasses policy");
     }
     case "LQA-069": {
       const sources = [...new Set(Object.values(context.routeSeo).map((entry) => entry.title))];
@@ -659,7 +699,7 @@ function renderEvidenceResult(context, locale, check) {
   if (evidence.error) return fail(`Render evidence could not be parsed: ${evidence.error}`);
   const artifact = evidence.value;
   if (artifact?.schema !== "iat-language-render-evidence/v1") return fail("Render evidence schema is invalid");
-  const requiredBindings = ["definitionSha256", "messagesFileSha256", "metadataSha256", "routeSeoSha256", "pendingSha256"];
+  const requiredBindings = ["definitionSha256", "messagesFileSha256", "metadataSha256", "routeSeoSha256", "pendingSha256", "reviewedPolicySha256"];
   const mismatches = requiredBindings.filter((field) => artifact.sourceBinding?.[field] !== context.digests[field]);
   if (mismatches.length > 0) return fail("Render evidence source binding does not match the current catalog", { mismatches });
   const record = artifact.locales?.[locale]?.checks?.[check.id];
@@ -737,8 +777,9 @@ async function buildContext(options) {
     pending: resolve(siteRoot, "app/i18n/pending-visible-source.json"),
     payloadContract: resolve(siteRoot, "app/i18n/payload-contract.json"),
     sitemap: resolve(siteRoot, "app/sitemap.ts"),
+    reviewedPolicy: resolve(siteRoot, "app/i18n/reviewed-localization-policy.json"),
   };
-  const [definitionRaw, messagesRaw, configRaw, critical, overrides, metadata, routeSeo, pending, payloadContract, sitemapRaw, nativeEvidence, languageIdEvidence, renderEvidence] = await Promise.all([
+  const [definitionRaw, messagesRaw, configRaw, critical, overrides, metadata, routeSeo, pending, payloadContract, sitemapRaw, reviewedPolicy, nativeEvidence, languageIdEvidence, renderEvidence] = await Promise.all([
     readText(definitionPath),
     readText(paths.messages),
     readText(paths.config),
@@ -749,6 +790,7 @@ async function buildContext(options) {
     readJson(paths.pending),
     readJson(paths.payloadContract),
     readText(paths.sitemap),
+    readJson(paths.reviewedPolicy),
     readOptionalJson(options.nativeEvidence),
     readOptionalJson(options.languageIdEvidence),
     readOptionalJson(options.renderEvidence),
@@ -757,9 +799,21 @@ async function buildContext(options) {
   const catalog = JSON.parse(messagesRaw);
   validateDefinition(definition);
   const config = parseLocaleConfig(configRaw);
+  if (
+    reviewedPolicy.schema !== "iat-reviewed-localization-policy/v1"
+    || reviewedPolicy.mode !== "GLOBAL_FAIL_CLOSED"
+    || reviewedPolicy.fallback !== "canonical-english"
+    || reviewedPolicy.machineDraftRuntimeAllowed !== false
+    || reviewedPolicy.unreviewedTargetLanguageBundleAllowed !== false
+    || reviewedPolicy.unreviewedLocaleAutonymsAllowed !== false
+    || reviewedPolicy.directComponentReviewBundleComplete !== false
+    || reviewedPolicy.localeStatus?.en !== "SOURCE"
+    || config.codes.some((locale) => !Object.hasOwn(reviewedPolicy.localeStatus ?? {}, locale))
+    || !Array.isArray(reviewedPolicy.reviews)
+  ) throw new Error("Reviewed-localization policy is missing, unsafe, or incomplete");
   const routes = parseSitemapRoutes(sitemapRaw);
   const sourceKeys = Object.keys(catalog.messages.en ?? {});
-  const payloadRoot = resolve(siteRoot, `public/${payloadContract.assetNamespace}/${payloadContract.catalogSha256.slice(0, 16)}`);
+  const payloadRoot = resolve(siteRoot, `public/${payloadContract.assetNamespace}/${payloadContract.payloadNamespaceSha256.slice(0, 16)}`);
   const payloadEntries = await Promise.all(config.codes.map(async (locale) => {
     try {
       return [locale, await readJson(resolve(payloadRoot, `${locale}.json`))];
@@ -784,6 +838,8 @@ async function buildContext(options) {
     nativeEvidence,
     languageIdEvidence,
     renderEvidence,
+    reviewedPolicy,
+    reviewIndex: new Set((reviewedPolicy.reviews ?? []).map((review) => reviewKey(review.locale, review.source))),
     localeDigests: Object.fromEntries(config.codes.map((locale) => [locale, canonicalDigest(catalog.messages[locale] ?? {})])),
     digests: {
       definitionSha256: sha256(definitionRaw),
@@ -793,6 +849,7 @@ async function buildContext(options) {
       metadataSha256: canonicalDigest(metadata),
       routeSeoSha256: canonicalDigest(routeSeo),
       pendingSha256: canonicalDigest(pending),
+      reviewedPolicySha256: canonicalDigest(reviewedPolicy),
     },
     rtlLocales: new Set(["ar", "ur"]),
     nonLatinLocales: new Set(["zh", "hi", "ar", "ur", "bn", "ru", "be", "bg", "mk", "sr", "uk", "ja", "el", "hy", "ka"]),
@@ -834,8 +891,12 @@ async function main() {
       results: allResults.length,
       canonicalStrings: context.sourceKeys.length,
       canonicalRoutes: context.routes.length,
+      reviewedRuntimeCells: context.catalog.meta.runtimeLocalizationPolicy?.reviewedRuntimeCells ?? 0,
+      canonicalFallbackCells: context.catalog.meta.runtimeLocalizationPolicy?.fallbackRuntimeCells ?? 0,
     },
     policy: {
+      runtimeMode: context.reviewedPolicy.mode,
+      runtimeFallback: context.reviewedPolicy.fallback,
       statusVocabulary: ["PASS", "FAIL", "HOLD", "NOT_RUN"],
       renderChecks: "PASS or FAIL only from a source-bound clean-build browser/render evidence artifact; missing checks remain NOT_RUN.",
       nativeChecks: "PASS only from complete source-bound native-review records; heuristic PASS never satisfies native review.",
@@ -866,11 +927,13 @@ async function main() {
 
   const serialized = `${JSON.stringify(scorecard, null, options.compact ? 0 : 2)}\n`;
   if (options.output) {
-    try {
-      await access(options.output);
-      throw new Error(`Refusing to overwrite existing output: ${options.output}`);
-    } catch (error) {
-      if (error?.code !== "ENOENT") throw error;
+    if (!options.replace) {
+      try {
+        await access(options.output);
+        throw new Error(`Refusing to overwrite existing output: ${options.output}`);
+      } catch (error) {
+        if (error?.code !== "ENOENT") throw error;
+      }
     }
     await mkdir(dirname(options.output), { recursive: true });
     await writeFile(options.output, serialized, "utf8");
