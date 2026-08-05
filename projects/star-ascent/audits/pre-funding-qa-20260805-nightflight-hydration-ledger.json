@@ -1,11 +1,11 @@
 {
   "schema": "iat-pre-funding-current-source-qa/v1",
   "status": "PARTIAL_PASS_NOT_LAUNCH_APPROVAL",
-  "recordedAtUtc": "2026-08-05T18:53:34.071Z",
+  "recordedAtUtc": "2026-08-05T19:20:48.304Z",
   "timeBasis": "LATEST_RECORDED_CHECK_TIME",
   "sourceBinding": {
-    "commit": "11f69960c67091f811cea87fbb41db30eadba430",
-    "tree": "0a1b81e5ce312876a93a1f3dca0b11745382c58f",
+    "commit": "80a9fe4c5e549a80246bb06958ba504d024d4190",
+    "tree": "6266cb1edfc8481abc6542901e543fe8c18ce222",
     "sitePath": "projects/star-ascent/site",
     "siteTree": "f3b27795466d982f0bdd92ba66559987e77d95da",
     "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53"
@@ -23,7 +23,9 @@
       "7a6d8cd975ef15402974e6104cec90cbf930e783",
       "7cf9e88359977521867ee07258e38418d00a1b2c",
       "59954a0a53ab10ee3aa76028bdc39b265bb9c285",
-      "11f69960c67091f811cea87fbb41db30eadba430"
+      "11f69960c67091f811cea87fbb41db30eadba430",
+      "ef11246c31a52753fda30d7e3393023ec244ad67",
+      "80a9fe4c5e549a80246bb06958ba504d024d4190"
     ],
     "nightflightRooms": 10,
     "nightflightAssets": 15,
@@ -89,11 +91,24 @@
           "scopePath": "projects/star-ascent/site",
           "scopeTree": "f3b27795466d982f0bdd92ba66559987e77d95da"
         }
+      },
+      {
+        "range": {
+          "shardStart": 3,
+          "shardEnd": 4
+        },
+        "evidenceSetSha256": "8267cd68feedf538d27c2a1001b4acf8ec2bc0cddbb0f5d5880617ad1920b22a",
+        "sourceBinding": {
+          "commit": "ef11246c31a52753fda30d7e3393023ec244ad67",
+          "tree": "32ef49396ea26e201b5e20eaf95ffae84e47f883",
+          "scopePath": "projects/star-ascent/site",
+          "scopeTree": "f3b27795466d982f0bdd92ba66559987e77d95da"
+        }
       }
     ],
-    "completedShards": 2,
+    "completedShards": 4,
     "requiredShards": 50,
-    "completedPages": 300,
+    "completedPages": 600,
     "fullProfilePages": 7500,
     "failedPages": 0,
     "incompletePages": 0,
@@ -185,6 +200,94 @@
           "mainnetChanged": false
         },
         "mainnetStatus": "UNSCHEDULED_HOLD"
+      },
+      {
+        "schema": "iat-v2-hydration-shard-record/v2",
+        "status": "SHARD_PASS_NOT_AGGREGATE",
+        "recordedAtUtc": "2026-08-05T19:19:49.549Z",
+        "sourceBinding": {
+          "commit": "ef11246c31a52753fda30d7e3393023ec244ad67",
+          "tree": "32ef49396ea26e201b5e20eaf95ffae84e47f883",
+          "scopePath": "projects/star-ascent/site",
+          "scopeTree": "f3b27795466d982f0bdd92ba66559987e77d95da"
+        },
+        "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53",
+        "profile": {
+          "shardIndex": 3,
+          "shardCount": 50,
+          "locale": "be",
+          "hosts": [
+            "internalagency",
+            "ileriakil"
+          ],
+          "canonicalRoutes": 25,
+          "engines": {
+            "chromium": 50,
+            "firefox": 50,
+            "webkit": 50
+          },
+          "assignedPages": 150,
+          "fullProfilePages": 7500,
+          "assignedJobsSha256": "862666f4d4df79e068a7fee240095929a75798a6360f6691efc6a1cb994dcba8",
+          "fullProfileJobsSha256": "1f035cca45792e63056e961dc90b6783f1d210d62968b837e3dc8216746ccbd7"
+        },
+        "result": {
+          "completedPages": 150,
+          "failedPages": 0,
+          "incompletePages": 0
+        },
+        "assurance": {
+          "aggregateComplete": false,
+          "independent": false,
+          "nativeLanguageApproval": false,
+          "deploymentPerformed": false,
+          "mainnetChanged": false
+        },
+        "mainnetStatus": "UNSCHEDULED_HOLD"
+      },
+      {
+        "schema": "iat-v2-hydration-shard-record/v2",
+        "status": "SHARD_PASS_NOT_AGGREGATE",
+        "recordedAtUtc": "2026-08-05T19:20:48.304Z",
+        "sourceBinding": {
+          "commit": "ef11246c31a52753fda30d7e3393023ec244ad67",
+          "tree": "32ef49396ea26e201b5e20eaf95ffae84e47f883",
+          "scopePath": "projects/star-ascent/site",
+          "scopeTree": "f3b27795466d982f0bdd92ba66559987e77d95da"
+        },
+        "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53",
+        "profile": {
+          "shardIndex": 4,
+          "shardCount": 50,
+          "locale": "bg",
+          "hosts": [
+            "internalagency",
+            "ileriakil"
+          ],
+          "canonicalRoutes": 25,
+          "engines": {
+            "chromium": 50,
+            "firefox": 50,
+            "webkit": 50
+          },
+          "assignedPages": 150,
+          "fullProfilePages": 7500,
+          "assignedJobsSha256": "c8652e2883bcdb6b6cee7967bc92d03ebf4887a379197113b5d3d6a84ee9b501",
+          "fullProfileJobsSha256": "1f035cca45792e63056e961dc90b6783f1d210d62968b837e3dc8216746ccbd7"
+        },
+        "result": {
+          "completedPages": 150,
+          "failedPages": 0,
+          "incompletePages": 0
+        },
+        "assurance": {
+          "aggregateComplete": false,
+          "independent": false,
+          "nativeLanguageApproval": false,
+          "deploymentPerformed": false,
+          "mainnetChanged": false
+        },
+        "mainnetStatus": "UNSCHEDULED_HOLD"
       }
     ]
   },
@@ -212,7 +315,7 @@
   },
   "mainnetStatus": "UNSCHEDULED_HOLD",
   "limitations": [
-    "This is current-source partial QA for two of fifty hydration shards, not 7,500-page aggregate evidence.",
+    "This is current-source partial QA for four of fifty hydration shards, not 7,500-page aggregate evidence.",
     "Four shards and 600 pages from the prior site tree are retained only as historical partial evidence and are excluded from current-source totals.",
     "The dedicated Casino Playwright spec passed 9 tests with 12 explicit expected skips; physical devices, assistive technologies, broader browser suites, and independent review remain outside this evidence.",
     "All 49 non-English locales remain canonical-English noindex fallback until accountable native review exists.",
