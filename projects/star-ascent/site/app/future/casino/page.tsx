@@ -31,6 +31,7 @@ export default async function CasinoPage() {
           <h1>{t.title[0]}<br /><i>{t.title[1]}</i></h1>
           <span>{t.lede}</span>
           <a href="#proof-layers">{t.heroCta}</a>
+          <a className="casino-demo-launch" data-no-translate href="/future/casino/demo">OPEN ENGLISH DEMO →</a>
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element -- generated editorial master is a local static asset */}
         <img src="/images/future/casino-hero-v1.jpg" alt={t.heroAlt} />
