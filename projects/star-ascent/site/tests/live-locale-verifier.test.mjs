@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   cachePolicyError,
   localizedCoverageError,
+  normalizeHtmlMetadataText,
   payloadIntegrityError,
   responseIdentityError,
   runtimeBundleError,
@@ -42,6 +43,13 @@ const contract = {
   retiredCatalogNamespaces: ["i18n-v2/4c1f960016ec313e"],
 };
 const validPayload = { ...payloadDigestInput, contentSha256 };
+
+test("metadata normalization decodes once without incomplete markup stripping", () => {
+  assert.equal(normalizeHtmlMetadataText("  Launch &amp; HOLD  "), "Launch & HOLD");
+  assert.equal(normalizeHtmlMetadataText("&amp;lt;script&amp;gt;"), "&lt;script&gt;");
+  assert.equal(normalizeHtmlMetadataText("<script>literal comparison text</script>"), "<script>literal comparison text</script>");
+  assert.equal(normalizeHtmlMetadataText("Line\n  two"), "Line two");
+});
 
 function validRuntime() {
   return Buffer.from(

@@ -4,6 +4,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   cachePolicyError,
+  normalizeHtmlMetadataText,
   payloadIntegrityError,
   responseIdentityError,
   runtimeBundleError,
@@ -33,19 +34,6 @@ const normalizePublicUrl = (value, base) => {
   }
 };
 const htmlAttribute = (tag, name) => tag.match(new RegExp(`\\b${name}=["']([^"']*)["']`, "i"))?.[1] ?? "";
-const decodeHtml = (value) => value.replace(/&(#(?:x[0-9a-f]+|[0-9]+)|amp|apos|gt|lt|quot);/giu, (entity, token) => {
-  const normalized = token.toLowerCase();
-  if (normalized === "amp") return "&";
-  if (normalized === "apos") return "'";
-  if (normalized === "gt") return ">";
-  if (normalized === "lt") return "<";
-  if (normalized === "quot") return '"';
-  const codePoint = normalized.startsWith("#x")
-    ? Number.parseInt(normalized.slice(2), 16)
-    : Number.parseInt(normalized.slice(1), 10);
-  return Number.isFinite(codePoint) ? String.fromCodePoint(codePoint) : entity;
-});
-const normalizeHtmlText = (value) => decodeHtml(value).replace(/<[^>]*>/gu, "").trim().replace(/\s+/gu, " ");
 
 async function fetchBytes(url) {
   const response = await fetch(url, {
@@ -350,10 +338,10 @@ const pageResults = await mapConcurrent(pageJobs, 20, async ({ domain, locale, c
     return { ok: false, label, detail: `canonical English body marker is missing: ${bodyMarker}` };
   }
   const routeSources = routeSeo[publicPath];
-  const title = normalizeHtmlText(html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? "");
+  const title = normalizeHtmlMetadataText(html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? "");
   const metaTags = html.match(/<meta\b[^>]*>/gi) ?? [];
   const descriptionTag = metaTags.find((tag) => htmlAttribute(tag, "name").toLowerCase() === "description");
-  const description = normalizeHtmlText(descriptionTag ? htmlAttribute(descriptionTag, "content") : "");
+  const description = normalizeHtmlMetadataText(descriptionTag ? htmlAttribute(descriptionTag, "content") : "");
   if (contentLocale === "en" && (title !== routeSources.title || description !== routeSources.description)) {
     return {
       ok: false,

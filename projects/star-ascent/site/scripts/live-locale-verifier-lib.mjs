@@ -3,6 +3,27 @@ import { createHash } from "node:crypto";
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const payloadFields = ["catalogSha256", "contentSha256", "locale", "messages", "schema", "sourceCount", "sourceKeysSha256"].sort();
 
+function decodeHtmlTextOnce(value) {
+  return value.replace(/&(#(?:x[0-9a-f]+|[0-9]+)|amp|apos|gt|lt|quot);/giu, (entity, token) => {
+    const normalized = token.toLowerCase();
+    if (normalized === "amp") return "&";
+    if (normalized === "apos") return "'";
+    if (normalized === "gt") return ">";
+    if (normalized === "lt") return "<";
+    if (normalized === "quot") return '"';
+    const codePoint = normalized.startsWith("#x")
+      ? Number.parseInt(normalized.slice(2), 16)
+      : Number.parseInt(normalized.slice(1), 10);
+    return Number.isFinite(codePoint) ? String.fromCodePoint(codePoint) : entity;
+  });
+}
+
+export function normalizeHtmlMetadataText(value) {
+  // This is comparison-only data. Preserve literal markup instead of attempting
+  // an incomplete multi-character sanitizer that entity decoding could bypass.
+  return decodeHtmlTextOnce(value).trim().replace(/\s+/gu, " ");
+}
+
 export function payloadIntegrityError({ payload, contract, locale }) {
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) return "payload is not an object";
   if (JSON.stringify(Object.keys(payload).sort()) !== JSON.stringify(payloadFields)) {
