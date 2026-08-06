@@ -1,13 +1,13 @@
 {
   "schema": "iat-pre-funding-current-source-qa/v1",
   "status": "PARTIAL_PASS_NOT_LAUNCH_APPROVAL",
-  "recordedAtUtc": "2026-08-06T15:58:25.977Z",
+  "recordedAtUtc": "2026-08-06T16:49:50.623Z",
   "timeBasis": "LATEST_RECORDED_CHECK_TIME",
   "sourceBinding": {
-    "commit": "80bc90bb1d477eff0a2bc5495ed75f2f2983ac8e",
-    "tree": "ffad4299027554d706d9cb33a707a1a3be51cb2e",
+    "commit": "344c07f6d5fa6db3c0691dacbeca7da61570fd4f",
+    "tree": "408d083732bdca23401a0c45eb096827afada8f6",
     "sitePath": "projects/star-ascent/site",
-    "siteTree": "175044045bdb8a3779dd133f137ba40de6ca4b2b",
+    "siteTree": "48f969f6cbeb9bfaba6f6b102fa7bb7d6ed07146",
     "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53"
   },
   "scope": {
@@ -49,7 +49,9 @@
       "0c7d310da4f34cf41ba9116a0f641f8e843ba623",
       "2363ad783202825f60f33e89082b65679d71fd8e",
       "983c468c1d04688bdde580ef2164a4d060e83270",
-      "80bc90bb1d477eff0a2bc5495ed75f2f2983ac8e"
+      "80bc90bb1d477eff0a2bc5495ed75f2f2983ac8e",
+      "47820161c19cc77c663431a053c7ccf1b7135f73",
+      "344c07f6d5fa6db3c0691dacbeca7da61570fd4f"
     ],
     "nightflightRooms": 10,
     "nightflightAssets": 15,
@@ -101,7 +103,27 @@
   ],
   "hydration": {
     "schema": "iat-v2-hydration-partial-evidence/v1",
-    "status": "PARTIAL_PASS_NOT_AGGREGATE",
+    "status": "NOT_RUN_CURRENT_SOURCE",
+    "batches": [],
+    "completedShards": 0,
+    "requiredShards": 50,
+    "completedPages": 0,
+    "fullProfilePages": 7500,
+    "failedPages": 0,
+    "incompletePages": 7500,
+    "records": []
+  },
+  "supersededCurrentHydrations": [{
+    "schema": "iat-v2-hydration-historical-evidence/v1",
+    "status": "HISTORICAL_PARTIAL_NOT_CURRENT_SOURCE_PROOF",
+    "sourceBinding": {
+      "commit": "47820161c19cc77c663431a053c7ccf1b7135f73",
+      "tree": "9fbb86ddb12e26bef21c08739d9d6711119cefe6",
+      "sitePath": "projects/star-ascent/site",
+      "siteTree": "175044045bdb8a3779dd133f137ba40de6ca4b2b",
+      "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53"
+    },
+    "supersededBySiteTree": "48f969f6cbeb9bfaba6f6b102fa7bb7d6ed07146",
     "batches": [
       {
         "range": {
@@ -246,8 +268,7 @@
         "mainnetStatus": "UNSCHEDULED_HOLD"
       }
     ]
-  },
-  "supersededCurrentHydration": {
+  }, {
     "schema": "iat-v2-hydration-historical-summary/v1",
     "status": "HISTORICAL_PARTIAL_NOT_CURRENT_SOURCE_PROOF",
     "sourceBinding": {
@@ -306,7 +327,7 @@
     ],
     "assurance": {"aggregateComplete": false, "independent": false, "nativeLanguageApproval": false, "deploymentPerformed": false, "mainnetChanged": false},
     "mainnetStatus": "UNSCHEDULED_HOLD"
-  },
+  }],
   "priorSiteTreeHydration": {
     "schema": "iat-v2-hydration-historical-evidence/v1",
     "status": "HISTORICAL_PARTIAL_NOT_CURRENT_SOURCE_PROOF",
@@ -2474,8 +2495,9 @@
   },
   "mainnetStatus": "UNSCHEDULED_HOLD",
   "limitations": [
-    "This is current-source partial QA for four of fifty hydration shards, not 7,500-page aggregate evidence.",
-    "Six shards and 900 pages from the immediately prior site tree are retained only as historical partial evidence and are excluded from current-source totals.",
+    "Current-source hydration is not run for this site tree: zero of fifty shards and zero of 7,500 pages are current evidence.",
+    "Four shards and 600 pages from the immediately prior site tree are retained only as historical partial evidence and are excluded from current-source totals.",
+    "Six shards and 900 pages from an earlier site tree are retained only as historical partial evidence and are excluded from current-source totals.",
     "Forty-two shards and 6,300 pages from an earlier site tree are retained only as historical partial evidence and are excluded from current-source totals.",
     "Four shards and 600 pages from an older site tree are retained only as superseded historical partial evidence and are excluded from current-source totals.",
     "The dedicated Casino Playwright spec passed 9 tests with 12 explicit expected skips; physical devices, assistive technologies, broader browser suites, and independent review remain outside this evidence.",
