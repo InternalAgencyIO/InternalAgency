@@ -81,7 +81,7 @@
     "check:iat-v2-stage-journal": "node scripts/validate-iat-v2-mainnet-stage-journal.mjs && node scripts/test-iat-v2-mainnet-stage-journal-regression.mjs",
     "check:iat-v2-canonical-json": "node scripts/test-iat-v2-canonical-json-regression.mjs",
     "check:public-evidence": "node scripts/validate-public-devnet-evidence.mjs",
-    "check:iat-v2-signoff": "node scripts/validate-iat-v2-independent-signoff.mjs && node scripts/validate-iat-v2-feature-signoff.mjs",
+    "check:iat-v2-signoff": "node scripts/validate-iat-v2-independent-signoff.mjs && node scripts/validate-iat-v2-feature-signoff.mjs && node scripts/test-iat-v2-signoff-regression.mjs",
     "check:allocation-lock-plan": "node scripts/validate-allocation-lock-plan.mjs",
     "check:mint-config": "node scripts/test-mint-config-regression.mjs",
     "check:signer-checklist": "node scripts/test-signing-checklist-regression.mjs",
