@@ -153,6 +153,12 @@ const expectedCurrentBatches = [
     commit: "090c4ab69d268b32b7998ebc2e111d2144b18816",
     tree: "9f480d2e47505f534cd712e470f225e2f342ca72",
   },
+  {
+    range: { shardStart: 21, shardEnd: 22 },
+    evidenceSetSha256: "4791ed695c6ea4a54faf5cbd2aa031d5c48467b98af4dd4b11193cbcda880919",
+    commit: "70e3b14135599dd20ad95092225081e758d5513d",
+    tree: "f68640c2bdfe8b34e65e755023c285191f22bcb2",
+  },
 ];
 check(hydration.batches.length === expectedCurrentBatches.length, "current hydration batch count drifted");
 for (const [index, batch] of hydration.batches.entries()) {
@@ -166,13 +172,13 @@ for (const [index, batch] of hydration.batches.entries()) {
   check(git("rev-parse", `${batch.sourceBinding.commit}:${batch.sourceBinding.scopePath}`) === binding.siteTree, `current hydration batch ${index + 1} site tree is not Git-bound`);
 }
 check(
-  hydration.completedShards === 20 && hydration.requiredShards === 50
-    && hydration.completedPages === 3000 && hydration.fullProfilePages === 7500
+  hydration.completedShards === 22 && hydration.requiredShards === 50
+    && hydration.completedPages === 3300 && hydration.fullProfilePages === 7500
     && hydration.failedPages === 0 && hydration.incompletePages === 0,
   "hydration summary drifted",
 );
-check(hydration.records.length === 20, "current hydration record count drifted");
-const expectedLocales = ["ar", "az", "be", "bg", "bn", "bs", "ca", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr", "ga", "gn", "hi", "hr"];
+check(hydration.records.length === 22, "current hydration record count drifted");
+const expectedLocales = ["ar", "az", "be", "bg", "bn", "bs", "ca", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr", "ga", "gn", "hi", "hr", "ht", "hu"];
 const expectedAssignments = [
   "52ee9742123e36e8b089badd7ad4c9e436e085283dd4f3e84898c1baa9dd9b65",
   "fe6253897dd7ce61da6f741f20114dbee46ed3e1079ea6510c963eec3008fafb",
@@ -194,6 +200,8 @@ const expectedAssignments = [
   "1fd452555ddfac528fb53d5276d267897f398d6474c8ef8e640f9d3a8175ab6d",
   "858422650691eb1ce97520067899c073c15e297f2a022dda2c2928c86a97526e",
   "77bdf305084bf3c88d14a656b5cf5bd5a4d4fa10d31c825c5719306c1b596d70",
+  "33a321c5e1daa7528beadf9c6dfc3f49a911be8b53604f6b92b9be46a14d4de2",
+  "40ad87a17ffc1fe47167217a40236a7397f5b852555d9c507efb7fd654912330",
 ];
 for (const [index, record] of hydration.records.entries()) {
   check(record.schema === "iat-v2-hydration-shard-record/v2", `shard ${index + 1} schema drifted`);
@@ -265,7 +273,7 @@ check(evidence.languageQa.nativeMeaningCadenceSlang === "ACCOUNTABLE_NATIVE_REVI
 check(scorecard.assurance.nativeQualityClaimAllowed === false && scorecard.assurance.releaseApproved === false, "scorecard assurance overclaims approval");
 check(Object.values(evidence.assurance).every((value) => value === false), "QA assurance overclaims completion or mutation");
 check(evidence.mainnetStatus === "UNSCHEDULED_HOLD", "Mainnet status changed");
-check(evidence.limitations.some((item) => /twenty of fifty/u.test(item)), "partial hydration limitation missing");
+check(evidence.limitations.some((item) => /twenty-two of fifty/u.test(item)), "partial hydration limitation missing");
 check(evidence.limitations.some((item) => /historical partial evidence/u.test(item)), "historical hydration limitation missing");
 check(evidence.limitations.some((item) => /12 explicit expected skips/u.test(item)), "browser UI limitation missing");
 check(evidence.limitations.some((item) => /accountable native review/u.test(item)), "native review limitation missing");
