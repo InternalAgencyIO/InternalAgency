@@ -94,18 +94,24 @@ const currentHydration = evidence.hydration;
 check(currentHydration.schema === "iat-v2-hydration-partial-evidence/v1", "current hydration schema drifted");
 check(currentHydration.status === "PARTIAL_PASS_NOT_AGGREGATE", "current hydration status overclaims aggregate proof");
 check(
-  currentHydration.completedShards === 2 && currentHydration.requiredShards === 50
-    && currentHydration.completedPages === 300 && currentHydration.fullProfilePages === 7500
+  currentHydration.completedShards === 4 && currentHydration.requiredShards === 50
+    && currentHydration.completedPages === 600 && currentHydration.fullProfilePages === 7500
     && currentHydration.failedPages === 0 && currentHydration.incompletePages === 0,
   "current hydration summary drifted",
 );
-check(currentHydration.batches.length === 1 && currentHydration.records.length === 2, "current hydration inventory drifted");
+check(currentHydration.batches.length === 2 && currentHydration.records.length === 4, "current hydration inventory drifted");
 const expectedCurrentBatches = [
   {
     range: { shardStart: 49, shardEnd: 50 },
     evidenceSetSha256: "560779845efa2a7b24f8765f070a38129bedb3a80f16e2c0de0e03bff41f20e9",
     commit: "983c468c1d04688bdde580ef2164a4d060e83270",
     tree: "1cf84b95e4eb5c76f6d5a1632a1a834803ace418",
+  },
+  {
+    range: { shardStart: 1, shardEnd: 2 },
+    evidenceSetSha256: "96beeb04c4aecf23fb2ed5a028af49fcc9dfd728cacd8225352b1fc13eb4121b",
+    commit: "80bc90bb1d477eff0a2bc5495ed75f2f2983ac8e",
+    tree: "ffad4299027554d706d9cb33a707a1a3be51cb2e",
   },
 ];
 for (const [index, batch] of currentHydration.batches.entries()) {
@@ -117,13 +123,16 @@ for (const [index, batch] of currentHydration.batches.entries()) {
   check(isAncestor(batch.sourceBinding.commit, binding.commit), `current hydration batch ${index + 1} does not precede the evidence source`);
   check(batch.sourceBinding.scopePath === binding.sitePath && batch.sourceBinding.scopeTree === binding.siteTree, `current hydration batch ${index + 1} scope drifted`);
 }
-const currentLocales = ["ur", "zh"];
+const currentShardIndices = [49, 50, 1, 2];
+const currentLocales = ["ur", "zh", "ar", "az"];
 const currentAssignments = [
   "0d9210a79f1a9fbec036d35b73dcf52397240269909e4d1e31329db8f04e84ec",
   "e5f5cb3be9728093305bed55a17af5c2d1578df25a10253eaf7735e7bbaa814a",
+  "52ee9742123e36e8b089badd7ad4c9e436e085283dd4f3e84898c1baa9dd9b65",
+  "fe6253897dd7ce61da6f741f20114dbee46ed3e1079ea6510c963eec3008fafb",
 ];
 for (const [index, record] of currentHydration.records.entries()) {
-  const shardIndex = index + 49;
+  const shardIndex = currentShardIndices[index];
   check(record.schema === "iat-v2-hydration-shard-record/v2" && record.status === "SHARD_PASS_NOT_AGGREGATE", `current shard ${shardIndex} status drifted`);
   check(git("rev-parse", `${record.sourceBinding.commit}^{tree}`) === record.sourceBinding.tree, `current shard ${shardIndex} source tree is not Git-bound`);
   check(isAncestor(record.sourceBinding.commit, binding.commit), `current shard ${shardIndex} does not precede the evidence source`);
@@ -477,7 +486,7 @@ check(evidence.languageQa.nativeMeaningCadenceSlang === "ACCOUNTABLE_NATIVE_REVI
 check(scorecard.assurance.nativeQualityClaimAllowed === false && scorecard.assurance.releaseApproved === false, "scorecard assurance overclaims approval");
 check(Object.values(evidence.assurance).every((value) => value === false), "QA assurance overclaims completion or mutation");
 check(evidence.mainnetStatus === "UNSCHEDULED_HOLD", "Mainnet status changed");
-check(evidence.limitations.some((item) => /two of fifty/u.test(item)), "current partial hydration limitation missing");
+check(evidence.limitations.some((item) => /four of fifty/u.test(item)), "current partial hydration limitation missing");
 check(evidence.limitations.some((item) => /Six shards and 900 pages/u.test(item)), "superseded-current hydration limitation missing");
 check(evidence.limitations.some((item) => /Forty-two shards and 6,300 pages/u.test(item)), "prior-site hydration limitation missing");
 check(evidence.limitations.some((item) => /historical partial evidence/u.test(item)), "historical hydration limitation missing");
