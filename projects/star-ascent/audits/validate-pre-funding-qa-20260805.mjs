@@ -94,19 +94,21 @@ const currentHydration = evidence.hydration;
 check(currentHydration.schema === "iat-v2-hydration-partial-evidence/v1", "current hydration schema drifted");
 check(currentHydration.status === "PARTIAL_PASS_NOT_AGGREGATE", "current hydration status must remain partial and non-aggregate");
 check(
-  currentHydration.completedShards === 2 && currentHydration.requiredShards === 50
-    && currentHydration.completedPages === 300 && currentHydration.fullProfilePages === 7500
+  currentHydration.completedShards === 3 && currentHydration.requiredShards === 50
+    && currentHydration.completedPages === 450 && currentHydration.fullProfilePages === 7500
     && currentHydration.failedPages === 0 && currentHydration.incompletePages === 0,
   "current hydration summary drifted",
 );
-check(currentHydration.batches.length === 2 && currentHydration.records.length === 2, "current hydration inventory drifted");
+check(currentHydration.batches.length === 3 && currentHydration.records.length === 3, "current hydration inventory drifted");
 const activeSources = [
   ["41bbb6108aba9b3353e0ec746190fb3679ac20a1", "63de5e1a1dcc1b186669f05cac3ce5a7ce10d985"],
   ["659a5e1f6ed58349309a7bceb422f2d779ea1aa8", "ce9f1c4acfcde917cd4e558dc15a58c6697fb172"],
+  ["a76d2eb19fc87d5daafb1ce94366ad135aeebd62", "75b1c7c7811fa19994650a07ba11d1b26e0e2f55"],
 ];
 const activeBatchDigests = [
   "3d776635e700ff91ff32ba82b607b87abb293d1ebb0106a9521de11ce341f90c",
   "cc5cba4794259759dc9125a516c4e71133d1b29c47f57a1f7b75b2bb65603132",
+  "b28350398271b38b1f0c3161fd8483eea5cb721719cd0cc90e0b4a74be33a835",
 ];
 const currentBatchResult = { shardRecords: 1, completedPages: 150, failedPages: 0, incompletePages: 0, remainingShards: 49, remainingPages: 7350 };
 for (const [index, currentBatch] of currentHydration.batches.entries()) {
@@ -123,10 +125,11 @@ for (const [index, currentBatch] of currentHydration.batches.entries()) {
   check(JSON.stringify(currentBatch.result) === JSON.stringify(currentBatchResult), `current hydration batch ${shardIndex} result drifted`);
   check(Object.values(currentBatch.assurance).every((value) => value === false) && currentBatch.mainnetStatus === "UNSCHEDULED_HOLD", `current hydration batch ${shardIndex} assurance drifted`);
 }
-const activeLocales = ["ar", "az"];
+const activeLocales = ["ar", "az", "be"];
 const activeAssignments = [
   "52ee9742123e36e8b089badd7ad4c9e436e085283dd4f3e84898c1baa9dd9b65",
   "fe6253897dd7ce61da6f741f20114dbee46ed3e1079ea6510c963eec3008fafb",
+  "862666f4d4df79e068a7fee240095929a75798a6360f6691efc6a1cb994dcba8",
 ];
 for (const [index, currentRecord] of currentHydration.records.entries()) {
   const shardIndex = index + 1;
@@ -630,7 +633,7 @@ check(evidence.languageQa.nativeMeaningCadenceSlang === "ACCOUNTABLE_NATIVE_REVI
 check(scorecard.assurance.nativeQualityClaimAllowed === false && scorecard.assurance.releaseApproved === false, "scorecard assurance overclaims approval");
 check(Object.values(evidence.assurance).every((value) => value === false), "QA assurance overclaims completion or mutation");
 check(evidence.mainnetStatus === "UNSCHEDULED_HOLD", "Mainnet status changed");
-check(evidence.limitations.some((item) => /two of fifty/u.test(item) && /not aggregate proof/u.test(item)), "current partial hydration limitation missing");
+check(evidence.limitations.some((item) => /three of fifty/u.test(item) && /not aggregate proof/u.test(item)), "current partial hydration limitation missing");
 check(evidence.limitations.some((item) => /Four shards and 600 pages from the immediately prior site tree/u.test(item)), "just-superseded hydration limitation missing");
 check(evidence.limitations.some((item) => /Four shards and 600 pages from an earlier site tree/u.test(item)), "immediately superseded hydration limitation missing");
 check(evidence.limitations.some((item) => /Six shards and 900 pages/u.test(item)), "earlier superseded hydration limitation missing");
