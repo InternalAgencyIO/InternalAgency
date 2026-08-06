@@ -296,9 +296,32 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
     check(queue.nextAction.length > 80, `next action missing for ${queue.checkId}`);
   }
 
-  check(ledger.externalEvidenceGates.reduce((total, gate) => total + gate.results, 0) === 300, "external evidence gate total mismatch");
+  const expectedExternalGateTopology = [
+    {
+      checkIds: ["LQA-054"],
+      owner: "independent-language-id-reviewer",
+      disposition: "BLOCKED_EXTERNAL_EVIDENCE",
+    },
+    {
+      checkIds: ["LQA-096", "LQA-097", "LQA-098", "LQA-099", "LQA-100"],
+      owner: "accountable-native-reviewers",
+      disposition: "BLOCKED_NATIVE_REVIEW",
+    },
+  ];
+  check(
+    sameJson(
+      ledger.externalEvidenceGates.map(({ checkIds, owner, disposition }) => ({ checkIds, owner, disposition })),
+      expectedExternalGateTopology,
+    ),
+    "external evidence gate topology drift",
+  );
+  check(ledger.externalEvidenceGates.reduce((total, gate) => total + gate.results, 0) === externalHolds.length, "external evidence gate total mismatch");
   for (const gate of ledger.externalEvidenceGates) {
+    const matching = externalHolds.filter(({ id }) => gate.checkIds.includes(id));
+    check(gate.results === matching.length, `external evidence result count mismatch for ${gate.checkIds.join(",")}`);
     check(gate.localeCoverage === "ALL_50", "external evidence must cover all 50 locales");
+    check(typeof gate.requiredEvidence === "string" && gate.requiredEvidence.length > 80, "external evidence requirement is incomplete");
+    check(gate.automationMayPrepare === true, "external evidence preparation authority drift");
     check(gate.automationMayApprove === false, "automation cannot approve external evidence");
     check(gate.disposition.startsWith("BLOCKED_"), "external evidence must remain blocked");
   }

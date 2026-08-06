@@ -58,5 +58,11 @@ expectFail("render evidence presence denial", (scorecard) => { scorecard.evidenc
 expectFail("invented native evidence presence", (scorecard) => { scorecard.evidenceInputs.nativeReview.present = true; }, /nativeReview evidence presence claim mismatch/u);
 expectFail("render detail substitution", (scorecard) => { scorecard.locales[0].checks[70].detail = "Copied PASS without source evidence"; }, /does not match source-bound render evidence/u);
 expectFail("render metric substitution", (scorecard) => { scorecard.locales[0].checks[84].metrics.inspected += 1; }, /does not match source-bound render evidence/u);
+expectFail("external gate ID substitution", (_scorecard, ledger) => { ledger.externalEvidenceGates[0].checkIds[0] = "LQA-055"; }, /external evidence gate topology drift/u);
+expectFail("external gate result redistribution", (_scorecard, ledger) => {
+  ledger.externalEvidenceGates[0].results -= 1;
+  ledger.externalEvidenceGates[1].results += 1;
+}, /external evidence result count mismatch/u);
+expectFail("external gate owner substitution", (_scorecard, ledger) => { ledger.externalEvidenceGates[1].owner = "automation"; }, /external evidence gate topology drift/u);
 
-console.log("Language QA HOLD ledger regression passed: exact 50 x 100 topology, unique ordered locale/check identities, status/mode/evidence structure, recomputed summaries, Git-resolved commit/tree/input/row/render bindings, and fail-closed assurances survived 24 mutation probes.");
+console.log("Language QA HOLD ledger regression passed: exact 50 x 100 topology, unique ordered locale/check identities, status/mode/evidence structure, recomputed summaries, Git-resolved commit/tree/input/row/render bindings, exact external-gate ownership/count topology, and fail-closed assurances survived 27 mutation probes.");
