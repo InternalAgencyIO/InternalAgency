@@ -3,8 +3,11 @@ import { spawnSync } from "node:child_process";
 import test from "node:test";
 
 const configUrl = new URL("../playwright.config.mjs", import.meta.url).href;
-const inspectSource = `
-  import config from ${JSON.stringify(configUrl)};
+const productionConfigUrl = new URL("../playwright.production.config.mjs", import.meta.url).href;
+
+function inspectSource(configHref) {
+  return `
+  import config from ${JSON.stringify(configHref)};
   console.log(JSON.stringify({
     baseURL: config.use.baseURL,
     webServer: config.webServer ? {
@@ -14,14 +17,15 @@ const inspectSource = `
     } : null,
   }));
 `;
+}
 
-function inspectConfig(overrides = {}) {
+function inspectConfig(overrides = {}, inspectedConfigUrl = configUrl) {
   const env = { ...process.env };
   delete env.UI_AUDIT_BASE_URL;
   delete env.UI_AUDIT_PORT;
   delete env.UI_AUDIT_REUSE_EXISTING_SERVER;
   Object.assign(env, overrides);
-  const result = spawnSync(process.execPath, ["--input-type=module", "--eval", inspectSource], {
+  const result = spawnSync(process.execPath, ["--input-type=module", "--eval", inspectSource(inspectedConfigUrl)], {
     encoding: "utf8",
     env,
     windowsHide: true,
@@ -39,6 +43,31 @@ test("Playwright starts a source-local server and never reuses one by default", 
       url: "http://localhost:4176",
       reuseExistingServer: false,
     },
+  });
+});
+
+test("production Playwright starts only the packaged server", () => {
+  const result = inspectConfig({}, productionConfigUrl);
+  assert.equal(result.status, 0, result.combined);
+  assert.deepEqual(JSON.parse(result.stdout), {
+    baseURL: "http://localhost:4176",
+    webServer: {
+      command: "node ./node_modules/vite/bin/vite.js preview --port 4176",
+      url: "http://localhost:4176",
+      reuseExistingServer: false,
+    },
+  });
+});
+
+test("production Playwright preserves external audit isolation", () => {
+  const result = inspectConfig(
+    { UI_AUDIT_BASE_URL: "https://preview.example.invalid" },
+    productionConfigUrl,
+  );
+  assert.equal(result.status, 0, result.combined);
+  assert.deepEqual(JSON.parse(result.stdout), {
+    baseURL: "https://preview.example.invalid",
+    webServer: null,
   });
 });
 

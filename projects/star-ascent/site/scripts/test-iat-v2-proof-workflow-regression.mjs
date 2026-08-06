@@ -15,6 +15,7 @@ const packageJson = JSON.parse(readFileSync(resolve(process.cwd(), "package.json
 
 const requiredOrderedCommands = [
   "npm run check:iat-v2-proof-workflow",
+  "npm run check:release-surface",
   "npm run check:ui-regression",
   "npm run check:iat-v2",
   "npm run check:launch-gates",

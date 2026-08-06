@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
+import { socialImageContractForPath } from "./iat-public-social-image-contract.mjs";
 
 const timeoutMs = 12_000;
 const concurrency = 8;
@@ -140,6 +141,8 @@ function metadataError(url, html) {
   const canonicalTag = linkTags.find((candidate) => attribute(candidate, "rel") === "canonical");
   const canonicalHref = canonicalTag ? attribute(canonicalTag, "href") : "";
   const ogImageUrl = metaValue("og:image");
+  const socialImageContract = socialImageContractForPath(publicPath);
+  const expectedSocialImageUrl = `${origin}${socialImageContract.path}`;
   const routeSuffix = publicPath === "/" ? "" : publicPath;
   const hostReviewHold = origin === "https://ileriakil.com" && contentLocaleFor("tr") !== "tr";
   const reviewHold = contentLocale !== locale || hostReviewHold;
@@ -147,17 +150,25 @@ function metadataError(url, html) {
   if (language !== expected.lang) return `expected html lang=${expected.lang}; got ${language || "missing"}`;
   if (title !== expected.title) return `expected title ${expected.title}; got ${title || "missing"}`;
   if (metaValue("description", "name") !== expected.description) return "expected reviewed-or-fallback meta description";
-  if (ogImageUrl !== `${origin}/og-star-ascent-v1.png`) return `expected canonical OG image; got ${ogImageUrl || "missing"}`;
+  if (ogImageUrl !== expectedSocialImageUrl) return `expected route-bound OG image ${expectedSocialImageUrl}; got ${ogImageUrl || "missing"}`;
   if (metaValue("og:title") !== expected.title) return "expected OG title to exactly match the document title";
   if (metaValue("og:description") !== expected.description) return "expected OG description to exactly match the reviewed-or-fallback description";
   if (metaValue("og:type") !== "website") return `expected og:type=website; got ${metaValue("og:type") || "missing"}`;
-  if (metaValue("og:image:width") !== "1792" || metaValue("og:image:height") !== "1024") return "expected canonical OG image dimensions";
-  if (!metaValue("og:image:alt")) return "expected non-empty OG image alt text";
+  if (
+    socialImageContract.width
+    && (
+      metaValue("og:image:width") !== socialImageContract.width
+      || metaValue("og:image:height") !== socialImageContract.height
+    )
+  ) return "expected route-bound OG image dimensions";
+  const ogImageAlt = metaValue("og:image:alt");
+  if (!ogImageAlt) return "expected non-empty OG image alt text";
   if (normalizePublicUrl(metaValue("og:url")) !== expectedCanonical) return "expected OG URL to match the effective canonical route";
   if (metaValue("twitter:card", "name") !== "summary_large_image") return "expected Twitter large-image card";
   if (metaValue("twitter:title", "name") !== expected.title) return "expected Twitter title to exactly match the document title";
   if (metaValue("twitter:description", "name") !== expected.description) return "expected Twitter description to exactly match the reviewed-or-fallback description";
-  if (metaValue("twitter:image", "name") !== `${origin}/og-star-ascent-v1.png`) return "expected canonical Twitter image";
+  if (metaValue("twitter:image", "name") !== expectedSocialImageUrl) return "expected route-bound Twitter image";
+  if (metaValue("twitter:image:alt", "name") !== ogImageAlt) return "expected Twitter image alt text to match the route-bound OG image";
   if (normalizePublicUrl(canonicalHref) !== expectedCanonical) return `expected exact canonical route ${expectedCanonical}; got ${canonicalHref || "missing"}`;
   const expectedAlternates = new Map();
   for (const candidate of localeCodes) {

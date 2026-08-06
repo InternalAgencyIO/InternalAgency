@@ -48,6 +48,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run check:iat-v2-proof-workflow
+      - run: npm run check:release-surface
       - run: npm run check:ui-regression
       - run: npm run check:iat-v2
       - run: npm run check:launch-gates
