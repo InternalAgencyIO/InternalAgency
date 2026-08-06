@@ -49,7 +49,8 @@ const evidence = JSON.parse(evidenceText);
 check(!/(^|["'\s])[A-Za-z]:[\\/]/mu.test(evidenceText), "workstation paths are forbidden");
 check(exactKeys(evidence, [
   "schema", "status", "recordedAtUtc", "timeBasis", "sourceBinding", "scope", "checks", "hydration",
-  "priorSiteTreeHydration", "historicalHydration", "languageQa", "assurance", "mainnetStatus", "limitations",
+  "supersededCurrentHydration", "priorSiteTreeHydration", "historicalHydration", "languageQa", "assurance",
+  "mainnetStatus", "limitations",
 ]), "top-level contract drifted");
 check(evidence.schema === "iat-pre-funding-current-source-qa/v1", "schema drifted");
 check(evidence.status === "PARTIAL_PASS_NOT_LAUNCH_APPROVAL", "status must remain partial and non-authorizing");
@@ -93,24 +94,18 @@ const currentHydration = evidence.hydration;
 check(currentHydration.schema === "iat-v2-hydration-partial-evidence/v1", "current hydration schema drifted");
 check(currentHydration.status === "PARTIAL_PASS_NOT_AGGREGATE", "current hydration status overclaims aggregate proof");
 check(
-  currentHydration.completedShards === 4 && currentHydration.requiredShards === 50
-    && currentHydration.completedPages === 600 && currentHydration.fullProfilePages === 7500
+  currentHydration.completedShards === 2 && currentHydration.requiredShards === 50
+    && currentHydration.completedPages === 300 && currentHydration.fullProfilePages === 7500
     && currentHydration.failedPages === 0 && currentHydration.incompletePages === 0,
   "current hydration summary drifted",
 );
-check(currentHydration.batches.length === 2 && currentHydration.records.length === 4, "current hydration inventory drifted");
+check(currentHydration.batches.length === 1 && currentHydration.records.length === 2, "current hydration inventory drifted");
 const expectedCurrentBatches = [
   {
-    range: { shardStart: 43, shardEnd: 44 },
-    evidenceSetSha256: "c2e352d1b008dd5400f95ced4a139f9689ac11cdaba41e814bbc2b14d955fab4",
-    commit: "d4b855cee78844af35eef6226e113abafd9c64f0",
-    tree: "97fd45482a9444fa3aa943379bccec047c2678b7",
-  },
-  {
-    range: { shardStart: 45, shardEnd: 46 },
-    evidenceSetSha256: "36241a635f423bb963b446c098fd59af59e02eb7f3770076dad3eeea5acd5c03",
-    commit: "0c7d310da4f34cf41ba9116a0f641f8e843ba623",
-    tree: "ef4d7528bc023f7f916a107a27361fbd9c8ca159",
+    range: { shardStart: 49, shardEnd: 50 },
+    evidenceSetSha256: "560779845efa2a7b24f8765f070a38129bedb3a80f16e2c0de0e03bff41f20e9",
+    commit: "983c468c1d04688bdde580ef2164a4d060e83270",
+    tree: "1cf84b95e4eb5c76f6d5a1632a1a834803ace418",
   },
 ];
 for (const [index, batch] of currentHydration.batches.entries()) {
@@ -122,15 +117,13 @@ for (const [index, batch] of currentHydration.batches.entries()) {
   check(isAncestor(batch.sourceBinding.commit, binding.commit), `current hydration batch ${index + 1} does not precede the evidence source`);
   check(batch.sourceBinding.scopePath === binding.sitePath && batch.sourceBinding.scopeTree === binding.siteTree, `current hydration batch ${index + 1} scope drifted`);
 }
-const currentLocales = ["sl", "sq", "sr", "sv"];
+const currentLocales = ["ur", "zh"];
 const currentAssignments = [
-  "870ec3358883b5ae111f92bced35002678eb6b18a533aa7e1427e00c15f9bc20",
-  "52d462a5b2df1495faf12921f32af0fb59608e8d6c9aac29e06aa8c97a7d2a28",
-  "abf3dfd0f128fccbdb9ab89d002b3a5caf0153245dabc24b274c9dc1ab8e6fdc",
-  "e4712926ca49d617557c175befc88f1097729a7a7932b6645d0e021aa613f3d8",
+  "0d9210a79f1a9fbec036d35b73dcf52397240269909e4d1e31329db8f04e84ec",
+  "e5f5cb3be9728093305bed55a17af5c2d1578df25a10253eaf7735e7bbaa814a",
 ];
 for (const [index, record] of currentHydration.records.entries()) {
-  const shardIndex = index + 43;
+  const shardIndex = index + 49;
   check(record.schema === "iat-v2-hydration-shard-record/v2" && record.status === "SHARD_PASS_NOT_AGGREGATE", `current shard ${shardIndex} status drifted`);
   check(git("rev-parse", `${record.sourceBinding.commit}^{tree}`) === record.sourceBinding.tree, `current shard ${shardIndex} source tree is not Git-bound`);
   check(isAncestor(record.sourceBinding.commit, binding.commit), `current shard ${shardIndex} does not precede the evidence source`);
@@ -146,11 +139,76 @@ for (const [index, record] of currentHydration.records.entries()) {
   check(Object.values(record.assurance).every((value) => value === false) && record.mainnetStatus === "UNSCHEDULED_HOLD", `current shard ${shardIndex} assurance drifted`);
 }
 
+const supersededCurrent = evidence.supersededCurrentHydration;
+check(supersededCurrent.schema === "iat-v2-hydration-historical-summary/v1", "superseded-current hydration schema drifted");
+check(supersededCurrent.status === "HISTORICAL_PARTIAL_NOT_CURRENT_SOURCE_PROOF", "superseded-current hydration status overclaims current proof");
+check(supersededCurrent.sourceBinding.siteTree === "3d6ea7807ed8eb80a1f4fef79e584651532f984a", "superseded-current site tree drifted");
+check(supersededCurrent.supersededBySiteTree === binding.siteTree, "superseded-current hydration successor drifted");
+check(git("rev-parse", `${supersededCurrent.sourceBinding.commit}^{tree}`) === supersededCurrent.sourceBinding.tree, "superseded-current source tree is not Git-bound");
+check(git("rev-parse", `${supersededCurrent.sourceBinding.commit}:${supersededCurrent.sourceBinding.sitePath}`) === supersededCurrent.sourceBinding.siteTree, "superseded-current site tree is not Git-bound");
+check(isAncestor(supersededCurrent.sourceBinding.commit, binding.commit), "superseded-current source does not precede current source");
+check(supersededCurrent.sourceBinding.catalogSha256 === binding.catalogSha256, "superseded-current catalog drifted");
+check(
+  supersededCurrent.completedShards === 6 && supersededCurrent.requiredShards === 50
+    && supersededCurrent.completedPages === 900 && supersededCurrent.fullProfilePages === 7500
+    && supersededCurrent.failedPages === 0 && supersededCurrent.incompletePages === 0,
+  "superseded-current hydration summary drifted",
+);
+const expectedSupersededBatches = [
+  {
+    range: { shardStart: 43, shardEnd: 44 },
+    evidenceSetSha256: "c2e352d1b008dd5400f95ced4a139f9689ac11cdaba41e814bbc2b14d955fab4",
+    commit: "d4b855cee78844af35eef6226e113abafd9c64f0",
+    tree: "97fd45482a9444fa3aa943379bccec047c2678b7",
+  },
+  {
+    range: { shardStart: 45, shardEnd: 46 },
+    evidenceSetSha256: "36241a635f423bb963b446c098fd59af59e02eb7f3770076dad3eeea5acd5c03",
+    commit: "0c7d310da4f34cf41ba9116a0f641f8e843ba623",
+    tree: "ef4d7528bc023f7f916a107a27361fbd9c8ca159",
+  },
+  {
+    range: { shardStart: 47, shardEnd: 48 },
+    evidenceSetSha256: "fbc5a122de4e881f15a4e799a412006e9bd973b76a301170729e6e4f161b45d9",
+    commit: "2363ad783202825f60f33e89082b65679d71fd8e",
+    tree: "9fa07b45767b52fe9530785cc6daa902f4068c34",
+  },
+];
+check(supersededCurrent.batches.length === expectedSupersededBatches.length, "superseded-current batch count drifted");
+for (const [index, batch] of supersededCurrent.batches.entries()) {
+  const expected = expectedSupersededBatches[index];
+  check(JSON.stringify(batch.range) === JSON.stringify(expected.range), `superseded-current batch ${index + 1} range drifted`);
+  check(batch.evidenceSetSha256 === expected.evidenceSetSha256, `superseded-current batch ${index + 1} digest drifted`);
+  check(batch.sourceBinding.commit === expected.commit && batch.sourceBinding.tree === expected.tree, `superseded-current batch ${index + 1} source drifted`);
+  check(git("rev-parse", `${batch.sourceBinding.commit}^{tree}`) === batch.sourceBinding.tree, `superseded-current batch ${index + 1} source tree is not Git-bound`);
+  check(isAncestor(batch.sourceBinding.commit, binding.commit), `superseded-current batch ${index + 1} does not precede current source`);
+  check(batch.sourceBinding.scopePath === supersededCurrent.sourceBinding.sitePath && batch.sourceBinding.scopeTree === supersededCurrent.sourceBinding.siteTree, `superseded-current batch ${index + 1} scope drifted`);
+  check(git("rev-parse", `${batch.sourceBinding.commit}:${batch.sourceBinding.scopePath}`) === supersededCurrent.sourceBinding.siteTree, `superseded-current batch ${index + 1} site tree is not Git-bound`);
+}
+const supersededLocales = ["sl", "sq", "sr", "sv", "tr", "uk"];
+const supersededAssignments = [
+  "870ec3358883b5ae111f92bced35002678eb6b18a533aa7e1427e00c15f9bc20",
+  "52d462a5b2df1495faf12921f32af0fb59608e8d6c9aac29e06aa8c97a7d2a28",
+  "abf3dfd0f128fccbdb9ab89d002b3a5caf0153245dabc24b274c9dc1ab8e6fdc",
+  "e4712926ca49d617557c175befc88f1097729a7a7932b6645d0e021aa613f3d8",
+  "ffd4e63c255944816f4937857b50b98b333ef6dcabe16b57870a95700ab24231",
+  "7bafcd9deca978d19786139d452ce1a21b5269a7398c8a6220709d793c13783d",
+];
+check(supersededCurrent.recordSummaries.length === supersededLocales.length, "superseded-current record summary count drifted");
+for (const [index, record] of supersededCurrent.recordSummaries.entries()) {
+  const shardIndex = index + 43;
+  check(record.shardIndex === shardIndex && record.locale === supersededLocales[index], `superseded-current shard ${shardIndex} identity drifted`);
+  check(record.assignedJobsSha256 === supersededAssignments[index], `superseded-current shard ${shardIndex} assignment drifted`);
+  check(Number.isFinite(Date.parse(record.recordedAtUtc)) && record.completedPages === 150, `superseded-current shard ${shardIndex} result drifted`);
+}
+check(Object.values(supersededCurrent.assurance).every((value) => value === false), "superseded-current assurance overclaims proof");
+check(supersededCurrent.mainnetStatus === "UNSCHEDULED_HOLD", "superseded-current hydration changed Mainnet status");
+
 const hydration = evidence.priorSiteTreeHydration;
 check(hydration.schema === "iat-v2-hydration-historical-evidence/v1", "prior-site hydration schema drifted");
 check(hydration.status === "HISTORICAL_PARTIAL_NOT_CURRENT_SOURCE_PROOF", "prior-site hydration status overclaims current proof");
 check(hydration.sourceBinding.siteTree === "f3b27795466d982f0bdd92ba66559987e77d95da", "prior-site hydration tree drifted");
-check(hydration.supersededBySiteTree === binding.siteTree, "prior-site hydration supersession drifted");
+check(hydration.supersededBySiteTree === supersededCurrent.sourceBinding.siteTree, "prior-site hydration supersession drifted");
 check(git("rev-parse", `${hydration.sourceBinding.commit}^{tree}`) === hydration.sourceBinding.tree, "prior-site source tree is not Git-bound");
 check(git("rev-parse", `${hydration.sourceBinding.commit}:${hydration.sourceBinding.sitePath}`) === hydration.sourceBinding.siteTree, "prior-site site tree is not Git-bound");
 check(isAncestor(hydration.sourceBinding.commit, binding.commit), "prior-site source does not precede current source");
@@ -419,7 +477,8 @@ check(evidence.languageQa.nativeMeaningCadenceSlang === "ACCOUNTABLE_NATIVE_REVI
 check(scorecard.assurance.nativeQualityClaimAllowed === false && scorecard.assurance.releaseApproved === false, "scorecard assurance overclaims approval");
 check(Object.values(evidence.assurance).every((value) => value === false), "QA assurance overclaims completion or mutation");
 check(evidence.mainnetStatus === "UNSCHEDULED_HOLD", "Mainnet status changed");
-check(evidence.limitations.some((item) => /four of fifty/u.test(item)), "current partial hydration limitation missing");
+check(evidence.limitations.some((item) => /two of fifty/u.test(item)), "current partial hydration limitation missing");
+check(evidence.limitations.some((item) => /Six shards and 900 pages/u.test(item)), "superseded-current hydration limitation missing");
 check(evidence.limitations.some((item) => /Forty-two shards and 6,300 pages/u.test(item)), "prior-site hydration limitation missing");
 check(evidence.limitations.some((item) => /historical partial evidence/u.test(item)), "historical hydration limitation missing");
 check(evidence.limitations.some((item) => /12 explicit expected skips/u.test(item)), "browser UI limitation missing");
