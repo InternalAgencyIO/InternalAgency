@@ -1,13 +1,13 @@
 {
   "schema": "iat-pre-funding-current-source-qa/v1",
   "status": "PARTIAL_PASS_NOT_LAUNCH_APPROVAL",
-  "recordedAtUtc": "2026-08-06T17:04:05.333Z",
+  "recordedAtUtc": "2026-08-06T17:21:48.367Z",
   "timeBasis": "LATEST_RECORDED_CHECK_TIME",
   "sourceBinding": {
-    "commit": "b51e8fd864a688179b195af90b01be18945ad5af",
-    "tree": "ed2684854d857e958236c6848c6f78efae8c9fc7",
+    "commit": "177db674d9d9d51e7708e0bfa19ccb3eeb52040a",
+    "tree": "c37a902a7de4f2c8bfc6f1e11ed259d88dd7c66a",
     "sitePath": "projects/star-ascent/site",
-    "siteTree": "48f969f6cbeb9bfaba6f6b102fa7bb7d6ed07146",
+    "siteTree": "7b8ce9f48e6f71407cb354939d798924b587e49a",
     "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53"
   },
   "scope": {
@@ -52,7 +52,10 @@
       "80bc90bb1d477eff0a2bc5495ed75f2f2983ac8e",
       "47820161c19cc77c663431a053c7ccf1b7135f73",
       "344c07f6d5fa6db3c0691dacbeca7da61570fd4f",
-      "b51e8fd864a688179b195af90b01be18945ad5af"
+      "b51e8fd864a688179b195af90b01be18945ad5af",
+      "a20e6bd829f0fc02bb494df99a35b7d337295b88",
+      "f760ef82c7ae5f82e385112a37aed2a25678f350",
+      "177db674d9d9d51e7708e0bfa19ccb3eeb52040a"
     ],
     "nightflightRooms": 10,
     "nightflightAssets": 15,
@@ -104,7 +107,27 @@
   ],
   "hydration": {
     "schema": "iat-v2-hydration-partial-evidence/v1",
-    "status": "PARTIAL_PASS_NOT_AGGREGATE",
+    "status": "NOT_RUN_CURRENT_SOURCE",
+    "batches": [],
+    "completedShards": 0,
+    "requiredShards": 50,
+    "completedPages": 0,
+    "fullProfilePages": 7500,
+    "failedPages": 0,
+    "incompletePages": 7500,
+    "records": []
+  },
+  "supersededCurrentHydrations": [{
+    "schema": "iat-v2-hydration-historical-evidence/v1",
+    "status": "HISTORICAL_PARTIAL_NOT_CURRENT_SOURCE_PROOF",
+    "sourceBinding": {
+      "commit": "a20e6bd829f0fc02bb494df99a35b7d337295b88",
+      "tree": "083c31afabcffa91ec921b269834a2016a4ad92c",
+      "sitePath": "projects/star-ascent/site",
+      "siteTree": "48f969f6cbeb9bfaba6f6b102fa7bb7d6ed07146",
+      "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53"
+    },
+    "supersededBySiteTree": "7b8ce9f48e6f71407cb354939d798924b587e49a",
     "batches": [
       {
         "range": {"shardStart": 3, "shardEnd": 4},
@@ -115,11 +138,21 @@
           "scopePath": "projects/star-ascent/site",
           "scopeTree": "48f969f6cbeb9bfaba6f6b102fa7bb7d6ed07146"
         }
+      },
+      {
+        "range": {"shardStart": 5, "shardEnd": 6},
+        "evidenceSetSha256": "dd8b5f5536b63dcf8cf060705ce143440b56ee7a009c9280d080dd410c41934a",
+        "sourceBinding": {
+          "commit": "a20e6bd829f0fc02bb494df99a35b7d337295b88",
+          "tree": "083c31afabcffa91ec921b269834a2016a4ad92c",
+          "scopePath": "projects/star-ascent/site",
+          "scopeTree": "48f969f6cbeb9bfaba6f6b102fa7bb7d6ed07146"
+        }
       }
     ],
-    "completedShards": 2,
+    "completedShards": 4,
     "requiredShards": 50,
-    "completedPages": 300,
+    "completedPages": 600,
     "fullProfilePages": 7500,
     "failedPages": 0,
     "incompletePages": 0,
@@ -177,10 +210,63 @@
         "result": {"completedPages": 150, "failedPages": 0, "incompletePages": 0},
         "assurance": {"aggregateComplete": false, "independent": false, "nativeLanguageApproval": false, "deploymentPerformed": false, "mainnetChanged": false},
         "mainnetStatus": "UNSCHEDULED_HOLD"
+      },
+      {
+        "schema": "iat-v2-hydration-shard-record/v2",
+        "status": "SHARD_PASS_NOT_AGGREGATE",
+        "recordedAtUtc": "2026-08-06T17:20:46.803Z",
+        "sourceBinding": {
+          "commit": "a20e6bd829f0fc02bb494df99a35b7d337295b88",
+          "tree": "083c31afabcffa91ec921b269834a2016a4ad92c",
+          "scopePath": "projects/star-ascent/site",
+          "scopeTree": "48f969f6cbeb9bfaba6f6b102fa7bb7d6ed07146"
+        },
+        "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53",
+        "profile": {
+          "shardIndex": 5,
+          "shardCount": 50,
+          "locale": "bn",
+          "hosts": ["internalagency", "ileriakil"],
+          "canonicalRoutes": 25,
+          "engines": {"chromium": 50, "firefox": 50, "webkit": 50},
+          "assignedPages": 150,
+          "fullProfilePages": 7500,
+          "assignedJobsSha256": "5c5a95018a9d4dc86b956c7b8e850f7a26d7e7c24499846719b139722960e6e2",
+          "fullProfileJobsSha256": "1f035cca45792e63056e961dc90b6783f1d210d62968b837e3dc8216746ccbd7"
+        },
+        "result": {"completedPages": 150, "failedPages": 0, "incompletePages": 0},
+        "assurance": {"aggregateComplete": false, "independent": false, "nativeLanguageApproval": false, "deploymentPerformed": false, "mainnetChanged": false},
+        "mainnetStatus": "UNSCHEDULED_HOLD"
+      },
+      {
+        "schema": "iat-v2-hydration-shard-record/v2",
+        "status": "SHARD_PASS_NOT_AGGREGATE",
+        "recordedAtUtc": "2026-08-06T17:21:48.367Z",
+        "sourceBinding": {
+          "commit": "a20e6bd829f0fc02bb494df99a35b7d337295b88",
+          "tree": "083c31afabcffa91ec921b269834a2016a4ad92c",
+          "scopePath": "projects/star-ascent/site",
+          "scopeTree": "48f969f6cbeb9bfaba6f6b102fa7bb7d6ed07146"
+        },
+        "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53",
+        "profile": {
+          "shardIndex": 6,
+          "shardCount": 50,
+          "locale": "bs",
+          "hosts": ["internalagency", "ileriakil"],
+          "canonicalRoutes": 25,
+          "engines": {"chromium": 50, "firefox": 50, "webkit": 50},
+          "assignedPages": 150,
+          "fullProfilePages": 7500,
+          "assignedJobsSha256": "cf71e3ba150185c02042aa50012b15ec014bd2da53f0d4c449d55c250c96ef9e",
+          "fullProfileJobsSha256": "1f035cca45792e63056e961dc90b6783f1d210d62968b837e3dc8216746ccbd7"
+        },
+        "result": {"completedPages": 150, "failedPages": 0, "incompletePages": 0},
+        "assurance": {"aggregateComplete": false, "independent": false, "nativeLanguageApproval": false, "deploymentPerformed": false, "mainnetChanged": false},
+        "mainnetStatus": "UNSCHEDULED_HOLD"
       }
     ]
-  },
-  "supersededCurrentHydrations": [{
+  }, {
     "schema": "iat-v2-hydration-historical-evidence/v1",
     "status": "HISTORICAL_PARTIAL_NOT_CURRENT_SOURCE_PROOF",
     "sourceBinding": {
@@ -2562,8 +2648,9 @@
   },
   "mainnetStatus": "UNSCHEDULED_HOLD",
   "limitations": [
-    "This is current-source partial QA for two of fifty hydration shards and 300 of 7,500 pages, not aggregate evidence.",
+    "Current-source hydration is not run for this site tree: zero of fifty shards and zero of 7,500 pages are current evidence.",
     "Four shards and 600 pages from the immediately prior site tree are retained only as historical partial evidence and are excluded from current-source totals.",
+    "Four shards and 600 pages from an earlier site tree are retained only as historical partial evidence and are excluded from current-source totals.",
     "Six shards and 900 pages from an earlier site tree are retained only as historical partial evidence and are excluded from current-source totals.",
     "Forty-two shards and 6,300 pages from an earlier site tree are retained only as historical partial evidence and are excluded from current-source totals.",
     "Four shards and 600 pages from an older site tree are retained only as superseded historical partial evidence and are excluded from current-source totals.",
