@@ -1,11 +1,11 @@
 {
   "schema": "iat-pre-funding-current-source-qa/v1",
   "status": "PARTIAL_PASS_NOT_LAUNCH_APPROVAL",
-  "recordedAtUtc": "2026-08-06T09:17:35.349Z",
+  "recordedAtUtc": "2026-08-06T09:37:28.846Z",
   "timeBasis": "LATEST_RECORDED_CHECK_TIME",
   "sourceBinding": {
-    "commit": "4312ffd85d30fe6a001edd38f62d3545b1051353",
-    "tree": "581d202465487016dd640b4d7fa22a88bbda2617",
+    "commit": "090c4ab69d268b32b7998ebc2e111d2144b18816",
+    "tree": "9f480d2e47505f534cd712e470f225e2f342ca72",
     "sitePath": "projects/star-ascent/site",
     "siteTree": "f3b27795466d982f0bdd92ba66559987e77d95da",
     "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53"
@@ -32,7 +32,8 @@
       "36eb7832be47c453e321d2b848788854cf9f3017",
       "1c150b5b2c8334276f41d106ca95c5331c3ae485",
       "4c1a2e47af696715d9158bf0a43677a93ccb27d7",
-      "4312ffd85d30fe6a001edd38f62d3545b1051353"
+      "4312ffd85d30fe6a001edd38f62d3545b1051353",
+      "090c4ab69d268b32b7998ebc2e111d2144b18816"
     ],
     "nightflightRooms": 10,
     "nightflightAssets": 15,
@@ -202,11 +203,24 @@
           "scopePath": "projects/star-ascent/site",
           "scopeTree": "f3b27795466d982f0bdd92ba66559987e77d95da"
         }
+      },
+      {
+        "range": {
+          "shardStart": 19,
+          "shardEnd": 20
+        },
+        "evidenceSetSha256": "41c4c6ebf38ed405b7321d77f56ce144227ae670dd6ac6bb3c6f298460408893",
+        "sourceBinding": {
+          "commit": "090c4ab69d268b32b7998ebc2e111d2144b18816",
+          "tree": "9f480d2e47505f534cd712e470f225e2f342ca72",
+          "scopePath": "projects/star-ascent/site",
+          "scopeTree": "f3b27795466d982f0bdd92ba66559987e77d95da"
+        }
       }
     ],
-    "completedShards": 18,
+    "completedShards": 20,
     "requiredShards": 50,
-    "completedPages": 2700,
+    "completedPages": 3000,
     "fullProfilePages": 7500,
     "failedPages": 0,
     "incompletePages": 0,
@@ -1002,6 +1016,94 @@
           "mainnetChanged": false
         },
         "mainnetStatus": "UNSCHEDULED_HOLD"
+      },
+      {
+        "schema": "iat-v2-hydration-shard-record/v2",
+        "status": "SHARD_PASS_NOT_AGGREGATE",
+        "recordedAtUtc": "2026-08-06T09:36:21.322Z",
+        "sourceBinding": {
+          "commit": "090c4ab69d268b32b7998ebc2e111d2144b18816",
+          "tree": "9f480d2e47505f534cd712e470f225e2f342ca72",
+          "scopePath": "projects/star-ascent/site",
+          "scopeTree": "f3b27795466d982f0bdd92ba66559987e77d95da"
+        },
+        "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53",
+        "profile": {
+          "shardIndex": 19,
+          "shardCount": 50,
+          "locale": "hi",
+          "hosts": [
+            "internalagency",
+            "ileriakil"
+          ],
+          "canonicalRoutes": 25,
+          "engines": {
+            "chromium": 50,
+            "firefox": 50,
+            "webkit": 50
+          },
+          "assignedPages": 150,
+          "fullProfilePages": 7500,
+          "assignedJobsSha256": "858422650691eb1ce97520067899c073c15e297f2a022dda2c2928c86a97526e",
+          "fullProfileJobsSha256": "1f035cca45792e63056e961dc90b6783f1d210d62968b837e3dc8216746ccbd7"
+        },
+        "result": {
+          "completedPages": 150,
+          "failedPages": 0,
+          "incompletePages": 0
+        },
+        "assurance": {
+          "aggregateComplete": false,
+          "independent": false,
+          "nativeLanguageApproval": false,
+          "deploymentPerformed": false,
+          "mainnetChanged": false
+        },
+        "mainnetStatus": "UNSCHEDULED_HOLD"
+      },
+      {
+        "schema": "iat-v2-hydration-shard-record/v2",
+        "status": "SHARD_PASS_NOT_AGGREGATE",
+        "recordedAtUtc": "2026-08-06T09:37:28.846Z",
+        "sourceBinding": {
+          "commit": "090c4ab69d268b32b7998ebc2e111d2144b18816",
+          "tree": "9f480d2e47505f534cd712e470f225e2f342ca72",
+          "scopePath": "projects/star-ascent/site",
+          "scopeTree": "f3b27795466d982f0bdd92ba66559987e77d95da"
+        },
+        "catalogSha256": "8190dbe58dbff609db0310fd06a3dfcf7da6c495602a1822bbad7e8d527d6e53",
+        "profile": {
+          "shardIndex": 20,
+          "shardCount": 50,
+          "locale": "hr",
+          "hosts": [
+            "internalagency",
+            "ileriakil"
+          ],
+          "canonicalRoutes": 25,
+          "engines": {
+            "chromium": 50,
+            "firefox": 50,
+            "webkit": 50
+          },
+          "assignedPages": 150,
+          "fullProfilePages": 7500,
+          "assignedJobsSha256": "77bdf305084bf3c88d14a656b5cf5bd5a4d4fa10d31c825c5719306c1b596d70",
+          "fullProfileJobsSha256": "1f035cca45792e63056e961dc90b6783f1d210d62968b837e3dc8216746ccbd7"
+        },
+        "result": {
+          "completedPages": 150,
+          "failedPages": 0,
+          "incompletePages": 0
+        },
+        "assurance": {
+          "aggregateComplete": false,
+          "independent": false,
+          "nativeLanguageApproval": false,
+          "deploymentPerformed": false,
+          "mainnetChanged": false
+        },
+        "mainnetStatus": "UNSCHEDULED_HOLD"
       }
     ]
   },
@@ -1029,7 +1131,7 @@
   },
   "mainnetStatus": "UNSCHEDULED_HOLD",
   "limitations": [
-    "This is current-source partial QA for eighteen of fifty hydration shards, not 7,500-page aggregate evidence.",
+    "This is current-source partial QA for twenty of fifty hydration shards, not 7,500-page aggregate evidence.",
     "Four shards and 600 pages from the prior site tree are retained only as historical partial evidence and are excluded from current-source totals.",
     "The dedicated Casino Playwright spec passed 9 tests with 12 explicit expected skips; physical devices, assistive technologies, broader browser suites, and independent review remain outside this evidence.",
     "All 49 non-English locales remain canonical-English noindex fallback until accountable native review exists.",
