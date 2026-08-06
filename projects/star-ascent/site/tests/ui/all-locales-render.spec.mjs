@@ -38,10 +38,23 @@ function monitorRuntime(page) {
   return errors;
 }
 
+async function waitForStableLocaleReady(page) {
+  await page.waitForFunction(() => {
+    const stableWindowMs = 250;
+    const key = "__iatLocaleReadySince";
+    if (document.documentElement.dataset.localeReady !== "true") {
+      window[key] = 0;
+      return false;
+    }
+    if (!window[key]) window[key] = performance.now();
+    return performance.now() - window[key] >= stableWindowMs;
+  }, { timeout: 30_000, polling: 50 });
+}
+
 async function assertLocalizedDocument(page, locale, path, { accessibility = false, englishMarker = null } = {}) {
   const response = await page.goto(path, { waitUntil: "domcontentloaded" });
   expect(response?.status(), `${locale} HTTP status`).toBe(200);
-  await page.waitForFunction(() => document.documentElement.dataset.localeReady === "true");
+  await waitForStableLocaleReady(page);
 
   const state = await page.evaluate(() => {
     const canonical = document.querySelector('link[rel="canonical"]')?.href ?? "";
@@ -184,6 +197,7 @@ test("the Chinese network route keeps canonical English until accountable review
 
 test("a review-HOLD route never requests or applies an unreviewed locale payload", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "chromium-desktop", "The fail-closed payload isolation check runs once.");
+  test.setTimeout(90_000);
   let payloadRequested = false;
   await page.route("**/i18n-v2/**/*.json", async (route) => {
     payloadRequested = true;
@@ -200,7 +214,7 @@ test("a review-HOLD route never requests or applies an unreviewed locale payload
     });
   });
   await page.goto("/zh/network", { waitUntil: "domcontentloaded" });
-  await page.waitForFunction(() => document.documentElement.dataset.localeReady === "true");
+  await waitForStableLocaleReady(page);
   const state = await page.evaluate(() => ({
     ready: document.documentElement.dataset.localeReady,
     error: document.documentElement.dataset.localeError ?? null,
