@@ -1,0 +1,77 @@
+{
+  "batch": 255,
+  "country": "India",
+  "status": "accepted",
+  "acceptedScenes": [
+    "1040-india-mumbai-overcast-route-grid.png",
+    "1041-india-jaipur-golden-signal-cipher.png",
+    "1042-india-kerala-golden-star-map-relay.png",
+    "1043-india-ladakh-dust-arrival.png"
+  ],
+  "preservedOriginals": [
+    "1041-india-jaipur-golden-signal-cipher-raw-original.png"
+  ],
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-8",
+    "paws": "0-24"
+  },
+  "rolls": {
+    "1040": {
+      "weather": { "roll": 24, "result": "soft dramatic overcast" },
+      "paws": { "roll": 78, "active": false },
+      "poleDanceTheme": { "roll": 58, "active": false },
+      "rainbowOnly": { "roll": 25, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 24, "result": "calm contentment" }, "visibleMidriff": 56, "straplessDress": 82, "fullyOpenBack": 50 },
+        "Ellie": { "emotion": { "roll": 88, "result": "fear and urgent vulnerability" }, "visibleMidriff": 73, "straplessDress": 99, "fullyOpenBack": 88 },
+        "Alia": { "emotion": { "roll": 55, "result": "aching romantic longing" }, "visibleMidriff": 21, "straplessDress": 67, "fullyOpenBack": 36 },
+        "AI ECE": { "emotion": { "roll": 11, "result": "romantic joy" }, "visibleMidriff": 37, "straplessDress": 73, "fullyOpenBack": 90 }
+      }
+    },
+    "1041": {
+      "weather": { "roll": 7, "result": "clear golden-hour radiance" },
+      "paws": { "roll": 63, "active": false },
+      "poleDanceTheme": { "roll": 12, "active": false },
+      "rainbowOnly": { "roll": 60, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 27, "result": "hope" }, "visibleMidriff": 21, "straplessDress": 6, "fullyOpenBack": 58 },
+        "Ellie": { "emotion": { "roll": 65, "result": "visible jealousy" }, "visibleMidriff": 45, "straplessDress": 29, "fullyOpenBack": 58 },
+        "Alia": { "emotion": { "roll": 14, "result": "romantic joy" }, "visibleMidriff": 53, "straplessDress": 9, "fullyOpenBack": 93 },
+        "AI ECE": { "emotion": { "roll": 79, "result": "deep sadness" }, "visibleMidriff": 62, "straplessDress": 76, "fullyOpenBack": 50 }
+      }
+    },
+    "1042": {
+      "weather": { "roll": 0, "result": "clear golden-hour radiance" },
+      "paws": { "roll": 89, "active": false },
+      "poleDanceTheme": { "roll": 85, "active": false },
+      "rainbowOnly": { "roll": 13, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 13, "result": "romantic joy" }, "visibleMidriff": 73, "straplessDress": 40, "fullyOpenBack": 13 },
+        "Ellie": { "emotion": { "roll": 96, "result": "defiance" }, "visibleMidriff": 52, "straplessDress": 89, "fullyOpenBack": 67 },
+        "Alia": { "emotion": { "roll": 86, "result": "full sobbing" }, "visibleMidriff": 24, "straplessDress": 79, "fullyOpenBack": 0 },
+        "AI ECE": { "emotion": { "roll": 78, "result": "deep sadness" }, "visibleMidriff": 94, "straplessDress": 23, "fullyOpenBack": 4 }
+      }
+    },
+    "1043": {
+      "weather": { "roll": 72, "result": "red-gold dust storm" },
+      "paws": { "roll": 58, "active": false },
+      "poleDanceTheme": { "roll": 50, "active": false },
+      "rainbowOnly": { "roll": 27, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 22, "result": "playful mischief" }, "visibleMidriff": 16, "straplessDress": 9, "fullyOpenBack": 38 },
+        "Ellie": { "emotion": { "roll": 16, "result": "extreme happiness" }, "visibleMidriff": 7, "straplessDress": 5, "fullyOpenBack": 17 },
+        "Alia": { "emotion": { "roll": 3, "result": "tender affection" }, "visibleMidriff": 59, "straplessDress": 70, "fullyOpenBack": 17 },
+        "AI ECE": { "emotion": { "roll": 79, "result": "deep sadness" }, "visibleMidriff": 47, "straplessDress": 52, "fullyOpenBack": 94 }
+      }
+    }
+  },
+  "recovery": "Scene 1041 received one framing recovery pass so every heel is fully visible; the raw original is preserved.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "not needed; all accepted garments read above knee",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "nextQueueCountry": "Russia"
+}
