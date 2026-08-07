@@ -1,0 +1,78 @@
+{
+  "batch": 256,
+  "country": "Russia",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1044-russia-moscow-windstorm-route-grid.png"
+  ],
+  "blockedScenes": [
+    "1045-russia-st-petersburg-lightning-signal-cipher.png",
+    "1046-russia-sochi-sea-mist-pole-relay.png",
+    "1047-russia-baikal-overcast-arrival.png"
+  ],
+  "rollMethod": "FNV-1a over batch256-russia-scene-field, reduced modulo 100",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-8",
+    "paws": "0-24"
+  },
+  "rolls": {
+    "1044": {
+      "weather": { "roll": 77, "result": "powerful windstorm with controlled fabric motion" },
+      "paws": { "roll": 22, "active": true },
+      "poleDanceTheme": { "roll": 53, "active": false },
+      "rainbowOnly": { "roll": 95, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 14, "result": "romantic joy" }, "visibleMidriff": 20, "straplessDress": 24, "fullyOpenBack": 74 },
+        "Ellie": { "emotion": { "roll": 40, "result": "determination" }, "visibleMidriff": 6, "straplessDress": 42, "fullyOpenBack": 76 },
+        "Alia": { "emotion": { "roll": 36, "result": "magnetic confidence" }, "visibleMidriff": 70, "straplessDress": 38, "fullyOpenBack": 12 },
+        "AI ECE": { "emotion": { "roll": 98, "result": "defiance" }, "visibleMidriff": 56, "straplessDress": 8, "fullyOpenBack": 38 }
+      }
+    },
+    "1045": {
+      "weather": { "roll": 50, "result": "active lightning storm with distant bolts" },
+      "paws": { "roll": 67, "active": false },
+      "poleDanceTheme": { "roll": 20, "active": false },
+      "rainbowOnly": { "roll": 20, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 7, "result": "tender affection" }, "visibleMidriff": 17, "straplessDress": 81, "fullyOpenBack": 29 },
+        "Ellie": { "emotion": { "roll": 79, "result": "deep sadness" }, "visibleMidriff": 49, "straplessDress": 97, "fullyOpenBack": 53 },
+        "Alia": { "emotion": { "roll": 93, "result": "guilt and remorse" }, "visibleMidriff": 35, "straplessDress": 11, "fullyOpenBack": 15 },
+        "AI ECE": { "emotion": { "roll": 59, "result": "aching romantic longing" }, "visibleMidriff": 93, "straplessDress": 17, "fullyOpenBack": 97 }
+      }
+    },
+    "1046": {
+      "weather": { "roll": 71, "result": "coastal sea mist" },
+      "paws": { "roll": 56, "active": false },
+      "poleDanceTheme": { "roll": 3, "active": true },
+      "rainbowOnly": { "roll": 21, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 72, "result": "betrayal shock" }, "visibleMidriff": 54, "straplessDress": 30, "fullyOpenBack": 72 },
+        "Ellie": { "emotion": { "roll": 46, "result": "awe" }, "visibleMidriff": 76, "straplessDress": 48, "fullyOpenBack": 54 },
+        "Alia": { "emotion": { "roll": 50, "result": "startled surprise" }, "visibleMidriff": 4, "straplessDress": 16, "fullyOpenBack": 38 },
+        "AI ECE": { "emotion": { "roll": 36, "result": "magnetic confidence" }, "visibleMidriff": 62, "straplessDress": 30, "fullyOpenBack": 24 }
+      }
+    },
+    "1047": {
+      "weather": { "roll": 20, "result": "soft dramatic overcast" },
+      "paws": { "roll": 93, "active": false },
+      "poleDanceTheme": { "roll": 98, "active": false },
+      "rainbowOnly": { "roll": 82, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 1, "result": "tender affection" }, "visibleMidriff": 99, "straplessDress": 47, "fullyOpenBack": 83 },
+        "Ellie": { "emotion": { "roll": 1, "result": "tender affection" }, "visibleMidriff": 31, "straplessDress": 31, "fullyOpenBack": 91 },
+        "Alia": { "emotion": { "roll": 87, "result": "fear and urgent vulnerability" }, "visibleMidriff": 57, "straplessDress": 81, "fullyOpenBack": 73 },
+        "AI ECE": { "emotion": { "roll": 21, "result": "playful mischief" }, "visibleMidriff": 51, "straplessDress": 87, "fullyOpenBack": 87 }
+      }
+    }
+  },
+  "recovery": "The initial concurrent render attempt was blocked. Scene 1044 succeeded on the simplified public-safe pass. Scenes 1045 and 1047 remained blocked. Scene 1046 rendered but missed the three-touch minimum, and its one correction pass was blocked, so it was not accepted.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "not needed on the accepted scene",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "xPublishing": "deferred because fewer than two accepted main-country scenes are available",
+  "nextQueueCountry": "Japan"
+}
