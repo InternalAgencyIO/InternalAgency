@@ -1,0 +1,61 @@
+{
+  "batch": 262,
+  "country": "Austria",
+  "status": "accepted",
+  "acceptedScenes": [
+    "1068-austria-vienna-fog-route-grid.png",
+    "1069-austria-salzburg-thunderstorm-signal-cipher.png",
+    "1070-austria-hallstatt-blue-hour-star-map-relay.png",
+    "1071-austria-innsbruck-aurora-arrival.png"
+  ],
+  "preservedOriginals": [
+    "1068-austria-vienna-fog-route-grid-raw-original.png",
+    "1069-austria-salzburg-thunderstorm-signal-cipher-raw-original.png"
+  ],
+  "blockedScenes": [],
+  "rollMethod": "FNV-1a over batch262-austria-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1068": {
+      "weather": { "roll": 66, "result": "fog" }, "paws": { "roll": 75, "active": false }, "poleDanceTheme": { "roll": 24, "active": false }, "rainbowOnly": { "roll": 32, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 3, "result": "tender affection" }, "visibleMidriff": 45, "straplessDress": 61, "fullyOpenBack": 29 },
+        "Ellie": { "emotion": { "roll": 11, "result": "romantic joy" }, "visibleMidriff": 41, "straplessDress": 77, "fullyOpenBack": 21 },
+        "Alia": { "emotion": { "roll": 1, "result": "tender affection" }, "visibleMidriff": 31, "straplessDress": 63, "fullyOpenBack": 43 },
+        "AI ECE": { "emotion": { "roll": 75, "result": "contained resentment" }, "visibleMidriff": 37, "straplessDress": 5, "fullyOpenBack": 97 }
+      }
+    },
+    "1069": {
+      "weather": { "roll": 45, "result": "thunderstorm" }, "paws": { "roll": 94, "active": false }, "poleDanceTheme": { "roll": 93, "active": false }, "rainbowOnly": { "roll": 99, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 78, "result": "deep sadness" }, "visibleMidriff": 12, "straplessDress": 48, "fullyOpenBack": 18 },
+        "Ellie": { "emotion": { "roll": 28, "result": "hope" }, "visibleMidriff": 58, "straplessDress": 50, "fullyOpenBack": 40 },
+        "Alia": { "emotion": { "roll": 44, "result": "awe" }, "visibleMidriff": 74, "straplessDress": 74, "fullyOpenBack": 32 },
+        "AI ECE": { "emotion": { "roll": 38, "result": "magnetic confidence" }, "visibleMidriff": 72, "straplessDress": 88, "fullyOpenBack": 98 }
+      }
+    },
+    "1070": {
+      "weather": { "roll": 15, "result": "blue hour" }, "paws": { "roll": 24, "active": true }, "poleDanceTheme": { "roll": 43, "active": false }, "rainbowOnly": { "roll": 77, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 0, "result": "tender affection" }, "visibleMidriff": 50, "straplessDress": 38, "fullyOpenBack": 36 },
+        "Ellie": { "emotion": { "roll": 66, "result": "possessive tension" }, "visibleMidriff": 48, "straplessDress": 60, "fullyOpenBack": 2 },
+        "Alia": { "emotion": { "roll": 70, "result": "suspicion" }, "visibleMidriff": 60, "straplessDress": 64, "fullyOpenBack": 78 },
+        "AI ECE": { "emotion": { "roll": 84, "result": "crying with visible tears" }, "visibleMidriff": 30, "straplessDress": 86, "fullyOpenBack": 92 }
+      }
+    },
+    "1071": {
+      "weather": { "roll": 88, "result": "aurora" }, "paws": { "roll": 81, "active": false }, "poleDanceTheme": { "roll": 54, "active": false }, "rainbowOnly": { "roll": 50, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 13, "result": "romantic joy" }, "visibleMidriff": 11, "straplessDress": 51, "fullyOpenBack": 3 },
+        "Ellie": { "emotion": { "roll": 13, "result": "romantic joy" }, "visibleMidriff": 31, "straplessDress": 59, "fullyOpenBack": 43 },
+        "Alia": { "emotion": { "roll": 31, "result": "overwhelming relief" }, "visibleMidriff": 25, "straplessDress": 61, "fullyOpenBack": 93 },
+        "AI ECE": { "emotion": { "roll": 77, "result": "contained resentment" }, "visibleMidriff": 3, "straplessDress": 59, "fullyOpenBack": 7 }
+      }
+    }
+  },
+  "recovery": "Scenes 1068 and 1071 were accepted after one simplified recovery pass. Scenes 1069 and 1070 were accepted on the initial pass.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "accepted for scenes 1068 and 1069",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "nextQueueCountry": "Belarus"
+}
