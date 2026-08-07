@@ -1,6 +1,6 @@
 # IAT B3 architecture baseline
 
-Status: draft 0.2
+Status: draft 0.3
 
 Source baseline: `f0a794952ab822d823c8d8eba0c4c8f5d9ae4796`
 
@@ -14,19 +14,22 @@ Architecture branch: `agent/iat-b3-architecture`
 2. Every V2 feature stays unless the project owner explicitly records a cut.
 3. Correctness, security, reliability, evidence quality, and auditability take
    priority over deployment cost.
-4. The Random Friday Lockdown Law is a base-protocol rule, not a contract
+4. The Daily Lockdown Law is a base-protocol rule, not a contract
    option, administrator switch, governance parameter, or UI convention.
-5. Each Friday is selected independently with exact probability `6733/10000`.
-6. A selected lockdown starts at nominal Friday 00:01 and ends at nominal
-   Saturday 00:01 under fixed UTC+03:00 protocol time.
-7. The decision is bound by the last protocol block before the opening height,
-   using a unique, proof-verifiable, consensus-native randomness output.
-8. The law has no privileged bypass, oracle, mutable clock, or reroll.
-9. Public read-only access continues during a selected lockdown.
-10. A cost target that cannot be achieved without weakening these constraints
+5. Each non-Friday day is selected independently with exact probability
+   `100/10000` (1%). Friday is the only exception, at exact probability
+   `6667/10000` (66.67%).
+6. The first block whose height-derived nominal UTC+03:00 time reaches 00:00
+   is the decision block and, if selected, the first locked block.
+7. A selected lockdown lasts one nominal 24-hour height interval.
+8. The decision uses a unique, proof-verifiable, consensus-native randomness
+   output committed in the decision block.
+9. The law has no privileged bypass, oracle, mutable clock, or reroll.
+10. Public read-only access continues during a selected lockdown.
+11. A cost target that cannot be achieved without weakening these constraints
    must be declared infeasible.
 
-## 2. Architectural consequence of the Friday requirement
+## 2. Architectural consequence of the lockdown requirement
 
 The existing V2 runtime is an Anchor program on Solana. It can accept or reject
 only instructions that invoke that program. It cannot reject:
@@ -36,13 +39,13 @@ only instructions that invoke that program. It cannot reject:
 - state changes in unrelated programs;
 - validator votes, block production, or Solana protocol transitions.
 
-Therefore a chain-wide Friday rule is impossible inside the current Solana
+Therefore a chain-wide daily lockdown law is impossible inside the current Solana
 program boundary. Making the Anchor program immutable would make only that
 program immutable; it would not turn its policy into Solana consensus.
 
-The non-negotiable Friday requirement consequently makes B3 a sovereign
+The non-negotiable lockdown requirement consequently makes B3 a sovereign
 protocol network: an independent L1, appchain, or other validator-executed
-state machine whose block-validity rules include the Friday gate. V2/Solana
+state machine whose block-validity rules include the daily gate. V2/Solana
 remains the behavioral reference and migration origin. It may remain live
 during a separately governed transition, but it is not the final B3 consensus
 runtime.
@@ -66,7 +69,7 @@ Public website / explorer / localized documents
           |                                  +-- randomness and tiebreaks
           |                                  +-- migration registry
           |
-          +-- immutable random-Friday lockdown
+          +-- immutable daily lockdown draw
 
 V2 Solana snapshot/proofs -> audited migration manifest -> B3 genesis/import
 ```
@@ -84,7 +87,7 @@ During a selected lockdown:
 - blocks, votes, finality, peer synchronization, and protocol housekeeping
   continue;
 - a valid block contains no user state-changing transaction;
-- submitted user transactions receive deterministic `FRIDAY_LOCKDOWN`
+- submitted user transactions receive deterministic `DAILY_LOCKDOWN`
   rejection;
 - no fee is charged and no nonce is consumed for a rejected transaction;
 - nodes do not silently queue transactions across the boundary;
@@ -102,9 +105,10 @@ oracle participates in lockdown validity. Genesis permanently commits:
 
 ```text
 IAT_PROTOCOL_OFFSET_SECONDS = 10_800       // fixed UTC+03:00 label
-LOCKDOWN_START_LOCAL_SECOND = 60           // Friday 00:01
-LOCKDOWN_DURATION_NOMINAL_SECONDS = 86_400 // through Saturday 00:01
-LOCKDOWN_CHANCE = 6733 / 10000
+DAILY_DECISION_LOCAL_SECOND = 0            // first block reaching 00:00
+LOCKDOWN_DURATION_NOMINAL_SECONDS = 86_400
+NORMAL_DAY_LOCKDOWN_CHANCE = 100 / 10000   // 1%
+FRIDAY_LOCKDOWN_CHANCE = 6667 / 10000      // 66.67%
 GENESIS_NOMINAL_UNIX_SECONDS
 GENESIS_HEIGHT
 NOMINAL_BLOCK_SECONDS
@@ -118,41 +122,48 @@ nominal_time(H) = genesis_nominal_time
                 + (H - genesis_height) * nominal_block_seconds
 ```
 
-The opening height is the first height whose derived nominal time is at or
-after Friday 00:01 in fixed UTC+03:00. The closing height is calculated the
-same way for Saturday 00:01. The interval is half-open. Network latency or a
-change in real block-production rate can move the wall-clock appearance of
-these heights; that drift is accepted. Validators never consult their local
-clock to decide whether a block is locked.
+For every local day, the decision height is the first height whose derived
+nominal time is at or after 00:00 in fixed UTC+03:00. It is also the opening
+height if selected. The closing height is the first height reaching the next
+local 00:00, making the interval half-open. Network latency or a change in real
+block-production rate can move the wall-clock appearance of these heights;
+that drift is accepted. Validators never consult their local clock to decide
+whether a block is locked.
 
 The final production chain specification must freeze the Genesis anchor and
 nominal block period. It must choose a period for which the number of locked
 heights approximates 24 hours at the intended block rate. Once Genesis exists,
 neither value is a governance parameter.
 
-### 3.3 Provable random decision
+### 3.3 Provable daily decision
 
-The block at `opening_height - 1` is the decision block. Its header commits the
-unique output and proof of the network's consensus-native threshold VRF or
-equivalent bias-resistant random beacon. The production verifier and proof
-suite are part of consensus, not a replaceable adapter.
+The first block reaching each nominal local 00:00 is the decision block. Its
+header commits the unique output and proof of the network's consensus-native
+threshold VRF or equivalent bias-resistant random beacon. Validators derive
+the decision from the header before executing the block body. If selected, a
+decision block containing a user state-changing transaction is invalid. The
+production verifier and proof suite are part of consensus, not a replaceable
+adapter.
 
-The weekly draw is domain-separated by the law identifier, network identity,
-and Friday local-day number. A SHA-256 counter expansion performs rejection
-sampling into 10,000 exact-uniform buckets. Buckets `0..6732` lock the network;
-buckets `6733..9999` leave it open. Rejection removes modulo bias. The counter
-expands the one proven randomness output and is not a reroll.
+The daily draw is domain-separated by the law identifier, network identity,
+and local-day number. A SHA-256 counter expansion performs rejection sampling
+into 10,000 exact-uniform buckets. On non-Friday days, buckets `0..99` lock and
+`100..9999` remain open. On Friday, buckets `0..6666` lock and `6667..9999`
+remain open. Rejection removes modulo bias. The counter expands the one proven
+randomness output and is not a reroll.
 
 Every validator and outside observer can reproduce the bucket from the
 decision-block header. A proposer cannot substitute a different output, proof,
-week, counter, or result. A missing or invalid proof cannot produce a valid
-decision block. Withholding may halt consensus under the selected consensus
+day, counter, chance class, or result. A missing or invalid proof cannot
+produce a valid decision block. Withholding may halt consensus under the
+selected consensus
 engine's stated liveness assumptions, but it cannot turn a selected lockdown
-into an open Friday.
+into an open day. Each day is a new independent draw. Consecutive selections
+are valid and form one continuous multi-day period without an unlocked block.
 
 ### 3.4 Immutability definition
 
-The Random Friday Lockdown Law has:
+The Daily Lockdown Law has:
 
 - no storage parameter;
 - no administrator key;
@@ -289,7 +300,7 @@ approval after evidence is available.
 ### Phase 0: specification lock
 
 - source-control this feature-parity contract;
-- keep the executable random-Friday schedule, probability, draw, decision,
+- keep the executable daily schedule, normal/Friday probabilities, draw, decision,
   and boundary vectors green;
 - extract pure V2 transition vectors;
 - define exact migration state and invariants;
@@ -297,8 +308,8 @@ approval after evidence is available.
 
 ### Phase 1: protocol skeleton
 
-- node, consensus, height-derived schedule, native random beacon, and
-  selected-Friday empty-block behavior;
+- node, consensus, height-derived schedule, native random beacon, and selected
+  daily-lockdown empty-block behavior;
 - native IAT supply;
 - query RPC and explorer indexing;
 - adversarial consensus tests with malicious proposals.
@@ -328,7 +339,7 @@ approval after evidence is available.
 B3 cannot advance from a phase while any of these fail:
 
 - V2 feature-parity ledger is incomplete;
-- Friday boundary, decision-proof, exact-probability, or malicious-proposer
+- daily boundary, decision-proof, exact-probability, or malicious-proposer
   test fails;
 - any user state transition is permitted during a selected lockdown;
 - any read-only surface unnecessarily stops during a selected lockdown;
@@ -347,7 +358,7 @@ The following require measured prototypes, not assumption:
 - B3 fee asset and fee schedule outside selected lockdowns;
 - threshold-VRF or equivalent consensus beacon suite and validator parameters;
 - migration custody model;
-- validator governance outside the immutable Random Friday Lockdown Law;
+- validator governance outside the immutable Daily Lockdown Law;
 - relationship between Solana IAT and native B3 IAT;
 - operational cost target for a sovereign network.
 

@@ -3,16 +3,16 @@ import { createHash } from "node:crypto";
 export const IAT_PROTOCOL_OFFSET_SECONDS = 10_800n;
 export const SECONDS_PER_DAY = 86_400n;
 export const FRIDAY_LOCAL_DAY_MODULUS = 1n;
-export const LOCKDOWN_START_LOCAL_SECOND = 60n;
+export const DAILY_DECISION_LOCAL_SECOND = 0n;
 export const LOCKDOWN_DURATION_NOMINAL_SECONDS = SECONDS_PER_DAY;
-export const LOCKDOWN_CHANCE_NUMERATOR = 6_733n;
-export const LOCKDOWN_CHANCE_DENOMINATOR = 10_000n;
-export const FRIDAY_LOCKDOWN_ERROR = "FRIDAY_LOCKDOWN";
-export const RANDOM_FRIDAY_LOCKDOWN_LAW_ID = "IAT_B3_RANDOM_FRIDAY_LOCKDOWN_V1";
+export const DRAW_DENOMINATOR = 10_000n;
+export const NORMAL_DAY_LOCKDOWN_NUMERATOR = 100n;
+export const FRIDAY_LOCKDOWN_NUMERATOR = 6_667n;
+export const DAILY_LOCKDOWN_ERROR = "DAILY_LOCKDOWN";
+export const DAILY_LOCKDOWN_LAW_ID = "IAT_B3_DAILY_LOCKDOWN_LAW_V1";
 
 const TWO_TO_256 = 1n << 256n;
-const UNBIASED_DRAW_LIMIT =
-  TWO_TO_256 - (TWO_TO_256 % LOCKDOWN_CHANCE_DENOMINATOR);
+const UNBIASED_DRAW_LIMIT = TWO_TO_256 - (TWO_TO_256 % DRAW_DENOMINATOR);
 
 export const OPERATION_KIND = Object.freeze({
   USER_TRANSACTION: "USER_TRANSACTION",
@@ -76,6 +76,16 @@ export function protocolLocalDay(nominalUnixSeconds) {
   return floorDiv(seconds + IAT_PROTOCOL_OFFSET_SECONDS, SECONDS_PER_DAY);
 }
 
+export function isFridayLocalDay(localDay) {
+  return floorMod(asInteger(localDay, "localDay"), 7n) === FRIDAY_LOCAL_DAY_MODULUS;
+}
+
+export function lockdownChanceNumerator(localDay) {
+  return isFridayLocalDay(localDay)
+    ? FRIDAY_LOCKDOWN_NUMERATOR
+    : NORMAL_DAY_LOCKDOWN_NUMERATOR;
+}
+
 export function createImmutableSchedule({
   genesisHeight,
   genesisNominalUnixSeconds,
@@ -124,21 +134,17 @@ export function firstHeightAtOrAfterNominalUnixSeconds(nominalUnixSeconds, sched
   );
 }
 
-export function fridayLockdownWindow(fridayLocalDay, schedule) {
+export function dailyLockdownWindow(localDay, schedule) {
   const spec = normalizeSchedule(schedule);
-  const localDay = asInteger(fridayLocalDay, "fridayLocalDay");
-  if (floorMod(localDay, 7n) !== FRIDAY_LOCAL_DAY_MODULUS) {
-    throw new RangeError("fridayLocalDay must identify a Friday in fixed UTC+03:00");
-  }
-
-  const opensAtNominalUnixSeconds =
-    localDay * SECONDS_PER_DAY -
+  const day = asInteger(localDay, "localDay");
+  const decisionAtNominalUnixSeconds =
+    day * SECONDS_PER_DAY -
     IAT_PROTOCOL_OFFSET_SECONDS +
-    LOCKDOWN_START_LOCAL_SECOND;
+    DAILY_DECISION_LOCAL_SECOND;
   const closesAtNominalUnixSeconds =
-    opensAtNominalUnixSeconds + LOCKDOWN_DURATION_NOMINAL_SECONDS;
-  const opensAtHeight = firstHeightAtOrAfterNominalUnixSeconds(
-    opensAtNominalUnixSeconds,
+    decisionAtNominalUnixSeconds + LOCKDOWN_DURATION_NOMINAL_SECONDS;
+  const decisionHeight = firstHeightAtOrAfterNominalUnixSeconds(
+    decisionAtNominalUnixSeconds,
     spec,
   );
   const closesAtHeight = firstHeightAtOrAfterNominalUnixSeconds(
@@ -146,84 +152,80 @@ export function fridayLockdownWindow(fridayLocalDay, schedule) {
     spec,
   );
 
-  if (opensAtHeight <= spec.genesisHeight) {
-    throw new RangeError("Friday lockdown window must begin after the Genesis block");
+  if (decisionHeight <= spec.genesisHeight) {
+    throw new RangeError("daily decision must occur after the Genesis block");
   }
 
   return Object.freeze({
-    fridayLocalDay: localDay,
-    decisionHeight: opensAtHeight - 1n,
-    opensAtHeight,
+    localDay: day,
+    isFriday: isFridayLocalDay(day),
+    decisionHeight,
+    opensAtHeight: decisionHeight,
     closesAtHeight,
-    opensAtNominalUnixSeconds,
+    decisionAtNominalUnixSeconds,
     closesAtNominalUnixSeconds,
   });
 }
 
-function encodeDrawInput(networkId, fridayLocalDay, randomnessOutputHex, counter) {
+function encodeDrawInput(networkId, localDay, randomnessOutputHex, counter) {
   const counterHex = counter.toString(16).padStart(16, "0");
   if (counterHex.length > 16) throw new RangeError("draw counter exceeds uint64");
   return Buffer.concat([
-    Buffer.from(RANDOM_FRIDAY_LOCKDOWN_LAW_ID, "utf8"),
+    Buffer.from(DAILY_LOCKDOWN_LAW_ID, "utf8"),
     Buffer.from([0]),
-    Buffer.from(networkId, "utf8"),
+    Buffer.from(networkId, "ascii"),
     Buffer.from([0]),
-    Buffer.from(fridayLocalDay.toString(10), "ascii"),
+    Buffer.from(localDay.toString(10), "ascii"),
     Buffer.from([0]),
     Buffer.from(randomnessOutputHex, "hex"),
     Buffer.from(counterHex, "hex"),
   ]);
 }
 
-export function deriveLockdownDraw({
-  randomnessOutputHex,
-  fridayLocalDay,
-  networkId,
-}) {
+export function deriveLockdownDraw({ randomnessOutputHex, localDay, networkId }) {
   const entropy = asBytes32Hex(randomnessOutputHex, "randomnessOutputHex");
-  const localDay = asInteger(fridayLocalDay, "fridayLocalDay");
+  const day = asInteger(localDay, "localDay");
   const domainNetworkId = asNetworkId(networkId);
-  if (floorMod(localDay, 7n) !== FRIDAY_LOCAL_DAY_MODULUS) {
-    throw new RangeError("fridayLocalDay must identify a Friday in fixed UTC+03:00");
-  }
+  const chanceNumerator = lockdownChanceNumerator(day);
 
   for (let counter = 0n; ; counter += 1n) {
     const digest = createHash("sha256")
-      .update(encodeDrawInput(domainNetworkId, localDay, entropy, counter))
+      .update(encodeDrawInput(domainNetworkId, day, entropy, counter))
       .digest();
     const sample = BigInt(`0x${digest.toString("hex")}`);
     if (sample >= UNBIASED_DRAW_LIMIT) continue;
 
-    const bucket = sample % LOCKDOWN_CHANCE_DENOMINATOR;
+    const bucket = sample % DRAW_DENOMINATOR;
     return Object.freeze({
       counter,
       bucket,
-      locked: bucket < LOCKDOWN_CHANCE_NUMERATOR,
+      chanceNumerator,
+      chanceDenominator: DRAW_DENOMINATOR,
+      locked: bucket < chanceNumerator,
     });
   }
 }
 
-export function createLockdownDecision({
-  fridayLocalDay,
-  randomnessOutputHex,
-  schedule,
-}) {
+export function createLockdownDecision({ localDay, randomnessOutputHex, schedule }) {
   const spec = normalizeSchedule(schedule);
-  const window = fridayLockdownWindow(fridayLocalDay, spec);
+  const window = dailyLockdownWindow(localDay, spec);
   const entropy = asBytes32Hex(randomnessOutputHex, "randomnessOutputHex");
   const draw = deriveLockdownDraw({
     randomnessOutputHex: entropy,
-    fridayLocalDay: window.fridayLocalDay,
+    localDay: window.localDay,
     networkId: spec.networkId,
   });
 
   return Object.freeze({
-    lawId: RANDOM_FRIDAY_LOCKDOWN_LAW_ID,
-    fridayLocalDay: window.fridayLocalDay,
+    lawId: DAILY_LOCKDOWN_LAW_ID,
+    localDay: window.localDay,
+    isFriday: window.isFriday,
     decisionHeight: window.decisionHeight,
     randomnessOutputHex: entropy,
     drawCounter: draw.counter,
     drawBucket: draw.bucket,
+    chanceNumerator: draw.chanceNumerator,
+    chanceDenominator: draw.chanceDenominator,
     locked: draw.locked,
   });
 }
@@ -233,17 +235,20 @@ export function validateLockdownDecision(decision, schedule) {
     throw new TypeError("decision must be a lockdown decision object");
   }
   const expected = createLockdownDecision({
-    fridayLocalDay: decision.fridayLocalDay,
+    localDay: decision.localDay,
     randomnessOutputHex: decision.randomnessOutputHex,
     schedule,
   });
   for (const field of [
     "lawId",
-    "fridayLocalDay",
+    "localDay",
+    "isFriday",
     "decisionHeight",
     "randomnessOutputHex",
     "drawCounter",
     "drawBucket",
+    "chanceNumerator",
+    "chanceDenominator",
     "locked",
   ]) {
     if (decision[field] !== expected[field]) {
@@ -253,10 +258,10 @@ export function validateLockdownDecision(decision, schedule) {
   return true;
 }
 
-export function isFridayLockdown(protocolHeight, decision, schedule) {
+export function isDailyLockdown(protocolHeight, decision, schedule) {
   const height = asInteger(protocolHeight, "protocolHeight");
   validateLockdownDecision(decision, schedule);
-  const window = fridayLockdownWindow(decision.fridayLocalDay, schedule);
+  const window = dailyLockdownWindow(decision.localDay, schedule);
   return (
     decision.locked &&
     height >= window.opensAtHeight &&
@@ -269,9 +274,9 @@ export function operationDisposition(protocolHeight, decision, operationKind, sc
     throw new TypeError(`unknown operation kind: ${operationKind}`);
   }
 
-  const locked = isFridayLockdown(protocolHeight, decision, schedule);
+  const locked = isDailyLockdown(protocolHeight, decision, schedule);
   if (locked && operationKind === OPERATION_KIND.USER_TRANSACTION) {
-    return Object.freeze({ accepted: false, code: FRIDAY_LOCKDOWN_ERROR, binding: true });
+    return Object.freeze({ accepted: false, code: DAILY_LOCKDOWN_ERROR, binding: true });
   }
   if (operationKind === OPERATION_KIND.SIMULATION) {
     return Object.freeze({ accepted: true, code: "NON_BINDING_SIMULATION", binding: false });
@@ -287,9 +292,9 @@ export function validateBlockUserTransactions(
 ) {
   const count = asInteger(userTransactionCount, "userTransactionCount");
   if (count < 0n) throw new RangeError("userTransactionCount cannot be negative");
-  if (isFridayLockdown(protocolHeight, decision, schedule) && count !== 0n) {
+  if (isDailyLockdown(protocolHeight, decision, schedule) && count !== 0n) {
     throw new Error(
-      `${FRIDAY_LOCKDOWN_ERROR}: locked Friday blocks cannot contain user transactions`,
+      `${DAILY_LOCKDOWN_ERROR}: locked blocks cannot contain user transactions`,
     );
   }
   return true;

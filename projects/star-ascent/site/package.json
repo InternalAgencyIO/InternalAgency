@@ -9,7 +9,7 @@
   "scripts": {
     "generate:mint-config": "node scripts/generate-mint-ceremony-config.mjs",
     "bind:iat-v2-program-id": "node scripts/bind-iat-v2-program-id.mjs",
-    "check:iat-b3-spec": "node --test tests/iat-b3-friday-consensus.test.mjs",
+    "check:iat-b3-spec": "node --test tests/iat-b3-daily-lockdown-consensus.test.mjs",
     "iat:v2-admin": "vite --config tools/iat-v2-admin-console/vite.config.mjs",
     "iat:v2-feature-preflight": "node scripts/iat-v2-feature-preflight.mjs",
     "build:iat-v2-admin": "vite build --config tools/iat-v2-admin-console/vite.config.mjs",

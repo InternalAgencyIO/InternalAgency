@@ -99,7 +99,7 @@ numbers.
 
 ### Sovereign B3 protocol
 
-The immutable Random Friday Lockdown Law requires a sovereign validator
+The immutable Daily Lockdown Law requires a sovereign validator
 protocol. Solana
 ProgramData rent then ceases to be the B3 deployment-cost model. B3 must instead
 budget validator infrastructure, RPC, indexing, monitoring, audits, Genesis,

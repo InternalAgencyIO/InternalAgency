@@ -53,7 +53,7 @@ to remove behavior.
 | Reproducible SBF and source binding | Keep for V2; add reproducible B3 node/runtime builds | Independent reproduction |
 | Public audit/evidence chain | Keep and extend | Manifest replay |
 | Launch HOLD and ceremony gates | Keep until superseded by stricter B3 gates | Fail-closed regressions |
-| Random Friday Lockdown Law | New immutable B3 base-protocol requirement: exact 67.33% draw, pre-lockdown proof, height-derived 24-hour nominal window, no oracle or bypass | Multi-validator proof, boundary, replay, withholding, and external-reproduction tests |
+| Daily Lockdown Law | New immutable B3 base-protocol requirement: exact 1% normal-day draw, exact 66.67% Friday draw, first-block-after-00:00 proof, height-derived 24-hour nominal window, no oracle or bypass | Multi-validator proof, boundary, consecutive-day, replay, withholding, and external-reproduction tests |
 
 ## Change control
 
