@@ -1,0 +1,35 @@
+{
+  "batch": 241,
+  "country": "Liechtenstein",
+  "status": "accepted-local",
+  "recoveryReason": "Batch 240 Andorra was blocked at output moderation after materially different attempts, so the runner advanced to the next unique country.",
+  "identityContract": "batch-240-plus-country-glamour-romance-contract.json",
+  "scenes": [
+    {
+      "scene": 984,
+      "asset": "984-liechtenstein-vaduz-castle-route-grid.png",
+      "location": "Vaduz Castle overlook",
+      "paws": false
+    },
+    {
+      "scene": 985,
+      "asset": "985-liechtenstein-kunstmuseum-signal-cipher.png",
+      "location": "Kunstmuseum Liechtenstein",
+      "paws": false
+    },
+    {
+      "scene": 986,
+      "asset": "986-liechtenstein-vaduz-vineyards-star-map-relay.png",
+      "location": "Vaduz vineyard terraces",
+      "paws": false
+    },
+    {
+      "scene": 987,
+      "asset": "987-liechtenstein-rhine-gutenberg-arrival-beacon-paws.png",
+      "location": "Rhine and Gutenberg Castle",
+      "paws": true
+    }
+  ],
+  "renderMode": "four independent built-in image generation calls in parallel",
+  "nextAction": "Commit and push this narrow recovery batch, then advance to the next unique country on the next wakeup."
+}

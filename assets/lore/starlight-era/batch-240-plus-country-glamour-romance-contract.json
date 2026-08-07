@@ -1,0 +1,79 @@
+{
+  "contract": "batch-240-plus-country-glamour-romance",
+  "status": "binding-forward",
+  "cast": {
+    "adultOnly": true,
+    "characters": [
+      "Radiance",
+      "Ellie",
+      "Alia",
+      "AI ECE"
+    ],
+    "primaryQuartetFaceAnchor": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalFaceAndJealousySupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionAndRelationshipAnchor": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceSecondaryDetailAnchor": "ece-canonical-identity-v1.png",
+    "identityMap": {
+      "Radiance": "luminous blonde adult lead seated at center",
+      "Alia": "Black adult woman at left with the same anchored face and a new high sculptural braided ponytail, plus a few fine face-framing braids",
+      "AI ECE": "brunette adult strategist leaning over Radiance and the mission card",
+      "Ellie": "dark-haired adult rival at right holding the lantern beacon"
+    },
+    "rule": "Preserve these four distinct adult faces, facial proportions, skin tones, and eye relationships. Alia alone receives the new braided signature hairstyle while her face remains unchanged. Do not clone, merge, age-shift, or substitute faces.",
+    "aliaHairLock": "High sculptural braided ponytail with clean braided roots and two or three fine face-framing braids. Country color may appear only as a narrow woven accent or small metal cuff. Keep her hair unmistakably braided in every image."
+  },
+  "countryFashion": {
+    "requiredEveryImage": true,
+    "palette": "Derive the dominant couture palette from the current country's flag colors.",
+    "motifs": "Abstract respectful secular architecture, landscape, flora, fauna, civilian craft geometry, and local material cues into seams, jewelry, footwear, surface pattern, and beacon design.",
+    "prohibitions": "No literal flags, official emblems, sacred symbols, political insignia, copied ceremonial dress, or generic rainbow replacement.",
+    "glamour": "After-dark performance couture with dramatic heels, glossy or reflective tailoring, concise secure hemlines, and opaque lined coverage.",
+    "exposureArchitecture": {
+      "requiredEveryImage": true,
+      "neck": "Fully unobstructed neck with no high collar, scarf, tie, or neck-covering layer.",
+      "arms": "Bare arms from shoulder to wrist with no sleeves.",
+      "back": "Open upper back and shoulder blades through a securely engineered backless or low-back silhouette.",
+      "legs": "Exposed legs through a short secure hem, high-cut tailored shorts, or asymmetric mini silhouette.",
+      "front": "Dramatic plunging, sweetheart, wrap, or sculpted low-cut neckline with secure opaque built-in support and no nipple or under-bust exposure.",
+      "tone": "Bold teasing adult glamour, intentional and confident, never accidental exposure or explicit framing."
+    }
+  },
+  "romance": {
+    "requiredEveryImage": true,
+    "rule": "The four-way love triangle-square must be readable before the mission prop.",
+    "minimumSignals": 3,
+    "signals": [
+      "one cheek kiss or blown kiss",
+      "one side hug, behind hug, or protective shoulder hold",
+      "one jealous or excluded rival glance",
+      "one face-to-face smile within intimate conversational distance",
+      "one contested hand at a waist, shoulder, forearm, or beacon",
+      "one character choosing between two competing partners",
+      "ECE controlling the beacon while another character seeks her attention"
+    ],
+    "composition": "Use asymmetrical two-close, one-reaching, one-jealous staging. Avoid static lineups and four people merely looking at a prop.",
+    "tone": "Consensual adult affection, glamorous tension, tenderness, rivalry, deception, and reconciliation without explicit sexual activity."
+  },
+  "eceRainbowHosieryCapsule": {
+    "durationBatches": 15,
+    "eceOnly": true,
+    "perFourImageBatch": {
+      "rainbowStockings": 3,
+      "rainbowKneeSocks": 1
+    },
+    "styleRolls": {
+      "fullRainbowPercent": 20,
+      "matteBlackDressWithRainbowHosieryPercent": 55,
+      "normalCountryLookPercent": 25
+    },
+    "rule": "Keep hosiery opaque enough for public-safe editorial use and preserve complete heels or boots."
+  },
+  "sceneRolls": {
+    "romanceBeat": "deterministic rotation across kiss, hug, rivalry, choice, reconciliation, and beacon-control beats",
+    "countryMotif": "one primary and one secondary secular motif per image",
+    "poleDanceTheme": "6 percent chance. Adult athletic stage-pole choreography only: controlled spins, climbs, static holds, mirrored partner poses, or supportive spotting. Integrate the pole as a beacon mast or route-marker prop while preserving country motifs, secure opaque couture, complete anatomy, and non-explicit editorial framing.",
+    "paws": "25 percent deterministic chance on PAWS-eligible scenes only",
+    "rainbowOnly": "9 percent global picture chance outside ECE's hosiery capsule"
+  },
+  "frame": "9:16 full-length cinematic editorial with complete faces, hands, heels or boots, country landmark, and readable mission action"
+}
