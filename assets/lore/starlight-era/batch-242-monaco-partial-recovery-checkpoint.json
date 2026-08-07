@@ -4,13 +4,19 @@
   "status": "partial-recovery",
   "acceptedScenes": [
     {
+      "scene": 989,
+      "asset": "989-monaco-port-hercule-signal-cipher.png",
+      "location": "Port Hercule",
+      "paws": false
+    },
+    {
       "scene": 991,
       "asset": "991-monaco-larvotto-arrival-beacon-paws.png",
       "location": "Larvotto waterfront",
       "paws": true
     }
   ],
-  "blockedScenes": [988, 989, 990],
+  "blockedScenes": [988, 990],
   "blockedReason": "output moderation",
-  "nextAction": "On the next wakeup, make one materially simplified public-safe recovery pass for scenes 988 through 990, preserving the accepted scene 991 without modification."
+  "nextAction": "On the next wakeup, make one materially simplified public-safe recovery pass for scenes 988 and 990, preserving accepted scenes 989 and 991 without modification."
 }

@@ -42,6 +42,7 @@
     "requiredEveryImage": true,
     "rule": "The four-way love triangle-square must be readable before the mission prop.",
     "minimumSignals": 3,
+    "minimumVisibleTouches": 2,
     "signals": [
       "one cheek kiss or blown kiss",
       "one side hug, behind hug, or protective shoulder hold",
@@ -51,7 +52,21 @@
       "one character choosing between two competing partners",
       "ECE controlling the beacon while another character seeks her attention"
     ],
-    "composition": "Use asymmetrical two-close, one-reaching, one-jealous staging. Avoid static lineups and four people merely looking at a prop.",
+    "composition": "Use asymmetrical bodies-in-motion staging with two clearly separate physical contacts and one emotional counter-beat. Avoid static lineups, equal spacing, parallel poses, and four people merely looking at a prop.",
+    "dynamicBeatRolls": [
+      "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold.",
+      "Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance.",
+      "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind.",
+      "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile.",
+      "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips.",
+      "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder.",
+      "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile.",
+      "Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy.",
+      "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist.",
+      "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss.",
+      "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face.",
+      "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+    ],
     "tone": "Consensual adult affection, glamorous tension, tenderness, rivalry, deception, and reconciliation without explicit sexual activity."
   },
   "eceRainbowHosieryCapsule": {
@@ -66,11 +81,14 @@
       "matteBlackDressWithRainbowHosieryPercent": 55,
       "normalCountryLookPercent": 25
     },
-    "rule": "Keep hosiery opaque enough for public-safe editorial use and preserve complete heels or boots."
+    "rule": "Future images only. Make ECE's rainbow hosiery visibly colorful but vary the treatment every time: crisp stripes, soft ombre transitions, prismatic fades, two-to-four-color gradients, broken-spectrum blocks, diagonal color sweeps, painterly transitions, reflective color shifts, or asymmetric rainbow placement. Keep enough contrast to read as rainbow-inspired without requiring all seven colors in every look. Avoid repeating the same pattern in consecutive images. Keep hosiery opaque enough for public-safe editorial use and preserve complete heels or boots."
   },
   "sceneRolls": {
     "romanceBeat": "deterministic rotation across kiss, hug, rivalry, choice, reconciliation, and beacon-control beats",
     "countryMotif": "one primary and one secondary secular motif per image",
+    "visibleMidriffPerCharacter": "Roll independently for Radiance, Ellie, Alia, and AI ECE in every image. Results 0 through 49 of 100 expose the ordinary waist and belly button through a secure cropped-top, cutout-waist, or two-piece couture construction; results 50 through 99 keep the midriff covered. Never apply one shared roll to the whole image.",
+    "straplessDressPerCharacter": "Roll independently for Radiance, Ellie, Alia, and AI ECE in every image. Results 0 through 34 of 100 use a fully strapless dress with completely bare shoulders and no straps, strings, halter, sleeves, collar, illusion mesh, or shoulder attachments. Use secure opaque sculpted, folded, asymmetric, corsage-inspired, or architectural bodice engineering. Results 35 through 99 use the normal country-adapted silhouette.",
+    "fullyOpenBackPerCharacter": "Roll independently for Radiance, Ellie, Alia, and AI ECE in every image. Results 0 through 29 of 100 use a completely open-back silhouette from shoulder blades to the secure lower-back waistline, with no straps crossing the back, no fabric panel, no illusion mesh, and no cape or hair covering the design. Preserve secure opaque front and side construction. Results 30 through 99 use the normal back architecture.",
     "poleDanceTheme": "6 percent chance. Adult athletic stage-pole choreography only: controlled spins, climbs, static holds, mirrored partner poses, or supportive spotting. Integrate the pole as a beacon mast or route-marker prop while preserving country motifs, secure opaque couture, complete anatomy, and non-explicit editorial framing.",
     "paws": "25 percent deterministic chance on PAWS-eligible scenes only",
     "rainbowOnly": "9 percent global picture chance outside ECE's hosiery capsule"
