@@ -1,0 +1,58 @@
+{
+  "batch": 261,
+  "country": "Andorra",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1064-andorra-caldea-rain-route-grid.png",
+    "1065-andorra-casa-de-la-vall-golden-signal-cipher.png"
+  ],
+  "blockedScenes": [
+    "1066-andorra-vallnord-blue-hour-star-map-relay.png",
+    "1067-andorra-engolasters-rain-arrival.png"
+  ],
+  "rollMethod": "FNV-1a over batch261-andorra-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1064": {
+      "weather": { "roll": 31, "result": "light rain" }, "paws": { "roll": 52, "active": false }, "poleDanceTheme": { "roll": 71, "active": false }, "rainbowOnly": { "roll": 93, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 88, "result": "fear and urgent vulnerability" }, "visibleMidriff": 38, "straplessDress": 54, "fullyOpenBack": 36 },
+        "Ellie": { "emotion": { "roll": 62, "result": "visible jealousy" }, "visibleMidriff": 44, "straplessDress": 4, "fullyOpenBack": 46 },
+        "Alia": { "emotion": { "roll": 26, "result": "calm contentment" }, "visibleMidriff": 16, "straplessDress": 64, "fullyOpenBack": 98 },
+        "AI ECE": { "emotion": { "roll": 80, "result": "deep sadness" }, "visibleMidriff": 30, "straplessDress": 74, "fullyOpenBack": 96 }
+      }
+    },
+    "1065": {
+      "weather": { "roll": 4, "result": "golden hour" }, "paws": { "roll": 9, "active": true }, "poleDanceTheme": { "roll": 82, "active": false }, "rainbowOnly": { "roll": 62, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 1, "result": "tender affection" }, "visibleMidriff": 99, "straplessDress": 67, "fullyOpenBack": 99 },
+        "Ellie": { "emotion": { "roll": 13, "result": "romantic joy" }, "visibleMidriff": 31, "straplessDress": 3, "fullyOpenBack": 87 },
+        "Alia": { "emotion": { "roll": 87, "result": "fear and urgent vulnerability" }, "visibleMidriff": 81, "straplessDress": 61, "fullyOpenBack": 13 },
+        "AI ECE": { "emotion": { "roll": 73, "result": "betrayal shock" }, "visibleMidriff": 99, "straplessDress": 47, "fullyOpenBack": 7 }
+      }
+    },
+    "1066": {
+      "weather": { "roll": 17, "result": "blue hour" }, "paws": { "roll": 90, "active": false }, "poleDanceTheme": { "roll": 33, "active": false }, "rainbowOnly": { "roll": 63, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 2, "result": "tender affection" }, "visibleMidriff": 20, "straplessDress": 8, "fullyOpenBack": 50 },
+        "Ellie": { "emotion": { "roll": 88, "result": "fear and urgent vulnerability" }, "visibleMidriff": 78, "straplessDress": 82, "fullyOpenBack": 40 },
+        "Alia": { "emotion": { "roll": 36, "result": "magnetic confidence" }, "visibleMidriff": 26, "straplessDress": 10, "fullyOpenBack": 64 },
+        "AI ECE": { "emotion": { "roll": 38, "result": "magnetic confidence" }, "visibleMidriff": 56, "straplessDress": 72, "fullyOpenBack": 66 }
+      }
+    },
+    "1067": {
+      "weather": { "roll": 30, "result": "light rain" }, "paws": { "roll": 11, "active": true }, "poleDanceTheme": { "roll": 76, "active": false }, "rainbowOnly": { "roll": 44, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 75, "result": "contained resentment" }, "visibleMidriff": 89, "straplessDress": 37, "fullyOpenBack": 5 },
+        "Ellie": { "emotion": { "roll": 63, "result": "visible jealousy" }, "visibleMidriff": 25, "straplessDress": 1, "fullyOpenBack": 61 },
+        "Alia": { "emotion": { "roll": 73, "result": "betrayal shock" }, "visibleMidriff": 3, "straplessDress": 15, "fullyOpenBack": 87 },
+        "AI ECE": { "emotion": { "roll": 79, "result": "deep sadness" }, "visibleMidriff": 61, "straplessDress": 81, "fullyOpenBack": 73 }
+      }
+    }
+  },
+  "recovery": "All four initial renders were output-blocked. Scenes 1064 and 1065 were accepted after one simplified recovery pass. Scenes 1066 and 1067 remained blocked after their single recovery pass.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "not required; accepted garments read as concise cocktail proportions",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "nextQueueCountry": "Austria"
+}
