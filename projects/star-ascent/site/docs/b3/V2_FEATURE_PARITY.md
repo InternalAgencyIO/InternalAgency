@@ -8,11 +8,11 @@ to remove behavior.
 
 | V2 capability or guarantee | B3 disposition | Acceptance evidence |
 | --- | --- | --- |
-| Fixed 1B IAT supply, 9 decimals | Keep; rewrite as native asset | Genesis supply invariant and replay tests |
-| Original SPL representation | Keep during migration; define final relationship explicitly | Supply/custody proof |
-| Confidential IAT transfers | New; Token-2022 encrypted amounts and confidential balances, no global auditor by default | Exact-version Devnet hook/proof tests, key recovery, privacy-boundary review |
+| Fixed 1B IAT supply, 9 decimals | Keep unchanged in canonical V2 IAT | Supply invariant and replay tests |
+| Original SPL representation | Keep as the canonical default asset and transaction path | Mint identity and supply proof |
+| Optional Privacy Vault | New; opt-in 1:1 vIAT receipt with Token-2022 encrypted amounts and confidential balances, no global auditor by default | Exact-version Devnet hook/proof tests, continuous escrow backing, key recovery, privacy-boundary review |
 | Five allocation lanes | Keep exact amounts | Canonical vector parity |
-| Community hardware custody boundary | Keep until migration model replaces it explicitly | Custody review |
+| Community hardware custody boundary | Keep unchanged for canonical IAT | Custody review |
 | Treasury/ecosystem/core/liquidity vesting | Keep exact cliffs and linear schedules | Boundary vectors |
 | Ordered reward lanes | Keep treasury -> ecosystem -> liquidity | Differential tests |
 | Full collateral reservation | Keep | Solvency and contention tests |
@@ -54,7 +54,7 @@ to remove behavior.
 | Reproducible SBF and source binding | Keep for V2; add reproducible B3 node/runtime builds | Independent reproduction |
 | Public audit/evidence chain | Keep and extend | Manifest replay |
 | Launch HOLD and ceremony gates | Keep until superseded by stricter B3 gates | Fail-closed regressions |
-| Daily Lockdown Law | New immutable IAT ownership-transfer law: exact 1%/66.67% bucket thresholds, first successful permissionless finalization after 00:00, lagged Solana slot-hash input, fail closed until finalized, no external oracle or privileged bypass. Chainwide scope, first-block decision, unbiased threshold VRF, and independent clock are explicitly relaxed. | Public/confidential hook invocation, boundary, absent-day, consecutive-day, rollback, replay, malicious-finalizer, timing-influence, and external-reproduction tests |
+| Daily Lockdown Law | New immutable optional-vault law: exact 1%/66.67% bucket thresholds, first successful permissionless finalization after 00:00, lagged Solana slot-hash input, fail closed until finalized, no external oracle or privileged vault bypass. Universal canonical-IAT enforcement, chainwide scope, first-block decision, unbiased threshold VRF, and independent clock are explicitly relaxed. | Deposit/redemption and public/confidential vIAT hook invocation, boundary, absent-day, consecutive-day, rollback, backing, replay, malicious-finalizer, timing-influence, and external-reproduction tests |
 
 ## Change control
 

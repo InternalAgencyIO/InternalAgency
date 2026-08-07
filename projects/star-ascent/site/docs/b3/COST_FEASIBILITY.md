@@ -99,22 +99,25 @@ numbers.
 
 ### Selected Solana-hosted B3 profile
 
-The owner selected an immutable IAT transfer law on Solana and explicitly
-relaxed chainwide scope, first-block execution, threshold-VRF randomness, and
-independent-clock guarantees. B3 therefore needs no validator investment.
+The owner selected an immutable optional-vault law on Solana and explicitly
+relaxed universal canonical-IAT enforcement, chainwide scope, first-block
+execution, threshold-VRF randomness, and independent-clock guarantees. B3
+therefore needs no validator investment and adds no cost to default transfers.
 
-Incremental B3 project cost consists of the small IAT Daily Law hook, day-record
-state, Token-2022 mint configuration, RPC/indexing, confidential-wallet support,
-migration, monitoring, and audits. Solana's deployed Token-2022 and native ZK
-proof program provide the confidential-transfer cryptography.
+Incremental B3 project cost consists of the optional vault/wrapper, small Daily
+Law hook, day-record state, vIAT Token-2022 configuration, RPC/indexing,
+confidential-wallet support, monitoring, and audits. Solana's deployed
+Token-2022 and native ZK proof program provide the confidential-transfer
+cryptography. Canonical IAT and its default transaction path stay unchanged.
 
-User cost is separate from project deployment cost. Current Solana guidance
-places the confidential-account extension at roughly `0.0015 SOL` of extra rent
-reserve. The canonical current three-transaction transfer example has six
-signatures, an illustrative base-fee floor of `0.000030 SOL` before optional
-priority fees, plus another transaction when the recipient applies a pending
-balance. Temporary proof-context rent is reclaimed on correct closure. These
-figures require Devnet measurement and are not production quotes.
+Default IAT users pay no privacy-related cost. Only opt-in vault users fund the
+confidential-account extension, currently estimated at roughly `0.0015 SOL` of
+extra rent reserve. The canonical current three-transaction confidential
+transfer example has six signatures, an illustrative base-fee floor of
+`0.000030 SOL` before optional priority fees, plus another transaction when the
+recipient applies a pending balance and ordinary deposit/redemption
+transactions. Temporary proof-context rent is reclaimed on correct closure.
+These figures require Devnet measurement and are not production quotes.
 
 The former sovereign profile remains the only design that can make the law a
 chainwide Solana-independent consensus rule. Its validator and network budget

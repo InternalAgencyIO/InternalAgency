@@ -66,7 +66,7 @@ pub struct LockdownDecision {
 /// Persistent result recorded by the permissionless Solana `finalize_day`
 /// instruction. The slot-selection rule and SlotHashes access live in the
 /// onchain adapter; this kernel binds the selected ancestor hash to the day,
-/// host-chain identity, IAT mint, and entropy slot.
+/// host-chain identity, vIAT receipt mint, and entropy slot.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct SolanaDailyDecision {
     pub local_day: i64,
@@ -80,7 +80,7 @@ pub struct SolanaDailyDecision {
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub enum IatTransferDisposition {
+pub enum VaultTransferDisposition {
     Allowed,
     DayUnfinalized,
     RejectedDailyLockdown,
@@ -325,7 +325,7 @@ pub fn derive_solana_lockdown_draw(
     local_day: i64,
     entropy_slot: u64,
     solana_genesis_hash: [u8; 32],
-    iat_mint: [u8; 32],
+    viat_mint: [u8; 32],
 ) -> Result<LockdownDraw, LawError> {
     let day = DecimalI64::new(local_day);
     let rejection_tail = two_to_256_mod(DRAW_DENOMINATOR);
@@ -337,7 +337,7 @@ pub fn derive_solana_lockdown_draw(
         hasher.update([0]);
         hasher.update(solana_genesis_hash);
         hasher.update([0]);
-        hasher.update(iat_mint);
+        hasher.update(viat_mint);
         hasher.update([0]);
         hasher.update(day.as_bytes());
         hasher.update([0]);
@@ -366,14 +366,14 @@ pub fn create_solana_daily_decision(
     entropy_slot: u64,
     ancestor_slot_hash: [u8; 32],
     solana_genesis_hash: [u8; 32],
-    iat_mint: [u8; 32],
+    viat_mint: [u8; 32],
 ) -> Result<SolanaDailyDecision, LawError> {
     let draw = derive_solana_lockdown_draw(
         ancestor_slot_hash,
         local_day,
         entropy_slot,
         solana_genesis_hash,
-        iat_mint,
+        viat_mint,
     )?;
     Ok(SolanaDailyDecision {
         local_day,
@@ -390,14 +390,14 @@ pub fn create_solana_daily_decision(
 pub fn validate_solana_daily_decision(
     decision: SolanaDailyDecision,
     solana_genesis_hash: [u8; 32],
-    iat_mint: [u8; 32],
+    viat_mint: [u8; 32],
 ) -> Result<(), LawError> {
     let expected = create_solana_daily_decision(
         decision.local_day,
         decision.entropy_slot,
         decision.ancestor_slot_hash,
         solana_genesis_hash,
-        iat_mint,
+        viat_mint,
     )?;
     if decision != expected {
         return Err(LawError::InvalidDecision);
@@ -405,25 +405,26 @@ pub fn validate_solana_daily_decision(
     Ok(())
 }
 
-/// Fail-closed IAT ownership-transfer gate for the Solana-hosted profile.
-pub fn iat_transfer_disposition(
+/// Fail-closed movement gate for the optional Solana-hosted Privacy Vault.
+/// Canonical IAT transfers outside the vault do not call this function.
+pub fn vault_transfer_disposition(
     current_unix_seconds: i64,
     decision: Option<SolanaDailyDecision>,
     solana_genesis_hash: [u8; 32],
-    iat_mint: [u8; 32],
-) -> Result<IatTransferDisposition, LawError> {
+    viat_mint: [u8; 32],
+) -> Result<VaultTransferDisposition, LawError> {
     let current_day = protocol_local_day(current_unix_seconds);
     let Some(decision) = decision else {
-        return Ok(IatTransferDisposition::DayUnfinalized);
+        return Ok(VaultTransferDisposition::DayUnfinalized);
     };
-    validate_solana_daily_decision(decision, solana_genesis_hash, iat_mint)?;
+    validate_solana_daily_decision(decision, solana_genesis_hash, viat_mint)?;
     if decision.local_day != current_day {
-        return Ok(IatTransferDisposition::DayUnfinalized);
+        return Ok(VaultTransferDisposition::DayUnfinalized);
     }
     if decision.locked {
-        return Ok(IatTransferDisposition::RejectedDailyLockdown);
+        return Ok(VaultTransferDisposition::RejectedDailyLockdown);
     }
-    Ok(IatTransferDisposition::Allowed)
+    Ok(VaultTransferDisposition::Allowed)
 }
 
 pub fn create_lockdown_decision(
@@ -509,7 +510,7 @@ mod tests {
     const FRIDAY_LOCAL_DAY: i64 = 20_672;
     const SATURDAY_LOCAL_DAY: i64 = 20_673;
     const SOLANA_GENESIS_HASH: [u8; 32] = [0x11; 32];
-    const IAT_MINT: [u8; 32] = [0x22; 32];
+    const VIAT_MINT: [u8; 32] = [0x22; 32];
 
     #[test]
     fn schedule_matches_the_public_javascript_vectors() {
@@ -665,18 +666,18 @@ mod tests {
             42_424_242,
             [0x33; 32],
             SOLANA_GENESIS_HASH,
-            IAT_MINT,
+            VIAT_MINT,
         )
         .unwrap();
         assert_eq!(decision.chance_numerator, FRIDAY_LOCKDOWN_NUMERATOR);
         assert_eq!(decision.chance_denominator, DRAW_DENOMINATOR);
         assert!(decision.draw_bucket < DRAW_DENOMINATOR);
         assert_eq!(
-            validate_solana_daily_decision(decision, SOLANA_GENESIS_HASH, IAT_MINT),
+            validate_solana_daily_decision(decision, SOLANA_GENESIS_HASH, VIAT_MINT),
             Ok(())
         );
         assert_eq!(
-            validate_solana_daily_decision(decision, [0x44; 32], IAT_MINT),
+            validate_solana_daily_decision(decision, [0x44; 32], VIAT_MINT),
             Err(LawError::InvalidDecision)
         );
     }
@@ -685,8 +686,8 @@ mod tests {
     fn solana_profile_transfer_gate_fails_closed_for_missing_or_stale_day() {
         let friday_midnight_utc = 1_786_050_000;
         assert_eq!(
-            iat_transfer_disposition(friday_midnight_utc, None, SOLANA_GENESIS_HASH, IAT_MINT,),
-            Ok(IatTransferDisposition::DayUnfinalized)
+            vault_transfer_disposition(friday_midnight_utc, None, SOLANA_GENESIS_HASH, VIAT_MINT,),
+            Ok(VaultTransferDisposition::DayUnfinalized)
         );
 
         let stale = create_solana_daily_decision(
@@ -694,17 +695,17 @@ mod tests {
             42_424_000,
             [0x55; 32],
             SOLANA_GENESIS_HASH,
-            IAT_MINT,
+            VIAT_MINT,
         )
         .unwrap();
         assert_eq!(
-            iat_transfer_disposition(
+            vault_transfer_disposition(
                 friday_midnight_utc,
                 Some(stale),
                 SOLANA_GENESIS_HASH,
-                IAT_MINT,
+                VIAT_MINT,
             ),
-            Ok(IatTransferDisposition::DayUnfinalized)
+            Ok(VaultTransferDisposition::DayUnfinalized)
         );
     }
 
@@ -716,20 +717,20 @@ mod tests {
             42_424_242,
             [0x33; 32],
             SOLANA_GENESIS_HASH,
-            IAT_MINT,
+            VIAT_MINT,
         )
         .unwrap();
         let expected = if decision.locked {
-            IatTransferDisposition::RejectedDailyLockdown
+            VaultTransferDisposition::RejectedDailyLockdown
         } else {
-            IatTransferDisposition::Allowed
+            VaultTransferDisposition::Allowed
         };
         assert_eq!(
-            iat_transfer_disposition(
+            vault_transfer_disposition(
                 friday_midnight_utc,
                 Some(decision),
                 SOLANA_GENESIS_HASH,
-                IAT_MINT,
+                VIAT_MINT,
             ),
             Ok(expected)
         );

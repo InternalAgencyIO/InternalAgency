@@ -32,11 +32,12 @@ The documents deliberately separate two deployment profiles:
 
 1. **V2/Solana** is the existing program, website, launch-control, and evidence
    system. It is the migration source and behavioral reference.
-2. **B3/Solana** is the selected least-cost profile: a Token-2022 IAT mint with
-   native confidential transfers and an immutable IAT Daily Law hook. The owner
-   explicitly relaxed chainwide scope, first-block decision, threshold-VRF
-   randomness, and independent-clock guarantees to avoid operating a sovereign
-   validator network. The exact boundary is recorded in
+2. **B3/Solana** is the selected least-cost profile: unchanged canonical V2 IAT
+   plus an optional 1:1 Token-2022 Privacy Vault. Only opt-in vault users pay
+   confidential-transfer costs. The owner explicitly relaxed universal IAT
+   enforcement, chainwide scope, first-block decision, threshold-VRF randomness,
+   and independent-clock guarantees to preserve default cost and avoid a
+   sovereign validator network. The exact boundary is recorded in
    [Native confidential IAT transfers](SHIELDED_TRANSFERS.md).
 
 The former sovereign profile remains the only route to making the Daily Law a
