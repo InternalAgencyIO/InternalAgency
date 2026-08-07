@@ -1,0 +1,13 @@
+[package]
+name = "iat-b3-consensus"
+version = "0.1.0"
+description = "Framework-neutral IAT B3 immutable consensus-law kernel"
+edition = "2021"
+license = "AGPL-3.0-or-later"
+publish = false
+
+[lib]
+name = "iat_b3_consensus"
+
+[dependencies]
+sha2 = { version = "=0.10.9", default-features = false }

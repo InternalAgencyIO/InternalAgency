@@ -12,10 +12,13 @@ This directory contains the first source-controlled B3 design set:
 - [Architecture baseline](ARCHITECTURE_BASELINE.md)
 - [Repository and live-estate baseline](ESTATE_BASELINE.md)
 - [V2 feature-parity contract](V2_FEATURE_PARITY.md)
+- [V2 source inheritance and port inventory](V2_SOURCE_INVENTORY.md)
 - [Deployment-cost feasibility](COST_FEASIBILITY.md)
 - [White paper draft](WHITEPAPER_DRAFT.md)
 
-The first executable specification is
+The framework-neutral Rust consensus-law kernel is
+[`programs/iat_b3_consensus`](../../programs/iat_b3_consensus). Its fixed
+vectors match the independent JavaScript specification in
 [`programs/iat_b3_reference/daily-lockdown-consensus.mjs`](../../programs/iat_b3_reference/daily-lockdown-consensus.mjs),
 with boundary and block-validity tests in
 [`tests/iat-b3-daily-lockdown-consensus.test.mjs`](../../tests/iat-b3-daily-lockdown-consensus.test.mjs).
