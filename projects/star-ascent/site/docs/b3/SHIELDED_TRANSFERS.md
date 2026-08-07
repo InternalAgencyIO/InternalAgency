@@ -1,228 +1,221 @@
-# Optional IAT Privacy Vault
+# B3 IAT-wide Daily Law and optional Privacy Vault
 
-Status: selected opt-in architecture, pending Devnet prototype, measurement,
-independent security review, and explicit deployment approval.
+Status: primary B3 architecture, pending exact-version Devnet prototype,
+measurement, migration decision, independent review, and Mainnet approval.
 
-Ordinary IAT remains the canonical V2 SPL token with its existing transaction
-path and cost. No holder is required to use the vault, create a Token-2022
-account, generate a proof, or pay a privacy-related fee.
+The Daily Law applies to **all canonical B3 IAT ownership transfers**. Privacy
+is optional. The 1% non-Friday and 66.67% Friday thresholds are unchanged.
 
-"Shielded" means that transfers inside the optional vault hide amounts and
-vault balances. It does **not** mean sender, recipient, timing, transaction
-graph, vault entry, or vault exit anonymity.
+"Privacy Vault" is the wallet-facing name for a user's optional confidential
+balance on the same canonical IAT mint. It is not a second token, mixer, bridge,
+or separately backed receipt.
 
-## 1. Selected least-expensive design
+## 1. Canonical B3 asset
 
-B3 remains on Solana and does not operate validators. The optional IAT Privacy
-Vault uses two assets:
+B3 uses one canonical Token-2022 IAT mint with:
 
-1. **IAT:** the unchanged canonical V2 SPL token. Ordinary transfers remain the
-   default and retain ordinary SPL transaction cost and compatibility.
-2. **vIAT:** an opt-in Token-2022 vault receipt. Each vIAT base unit is backed
-   1:1 by one canonical IAT base unit held in the immutable vault escrow.
+- fixed total supply of 1,000,000,000 IAT and nine decimals;
+- no post-Genesis mint or freeze authority;
+- `TransferHook` permanently bound to the immutable IAT Daily Law program;
+- `ConfidentialTransferMint` enabled for opt-in confidential accounts;
+- no global confidential-transfer auditor key by default.
 
-The vault creates and redeems vIAT only against an equal escrow movement. Its
-mint authority is a program-derived address, not a human or administrator. The
-vault program enforces:
+Every public and confidential IAT ownership transfer invokes the same Daily Law
+hook. Released Token-2022 code invokes Transfer Hooks for confidential transfers
+without revealing the encrypted amount to the hook.
 
-```text
-vIAT total supply == canonical IAT held in vault escrow
-```
+Ordinary users keep public balances and ordinary Token-2022 transfers. They do
+not configure confidential accounts, generate zero-knowledge proofs, maintain
+encryption keys, or pay confidential-account rent.
 
-The vIAT mint uses Solana's native:
+## 2. Optional Privacy Vault
 
-- `ConfidentialTransferMint` and `ConfidentialTransferAccount` extensions;
-- ZK ElGamal Proof program for equality, ciphertext-validity, and range proofs;
-- `TransferHook` extension pointing to the IAT Vault Daily Law hook;
-- no global auditor key by default.
-
-The project deploys only the vault/wrapper and small law hook. Solana's existing
-validator set, Token-2022, and proof verifier supply the expensive shared
-infrastructure. Default IAT does not invoke these programs.
-
-## 2. User flow
+An IAT holder may configure their token account for confidential transfers and
+move IAT between that account's public and confidential balance. The mint does
+not change and no wrapped asset is created.
 
 ```text
-ordinary IAT holder
-  |-- ordinary transfer --------------------> ordinary IAT holder
-  |
-  +-- deposit clear amount into vault
-          -> receive equal vIAT
-          -> move amount into confidential balance
-          -> confidential vIAT transfers
-          -> move amount back to public vIAT
-          -> redeem clear amount
-          -> receive equal ordinary IAT
+same canonical IAT mint
+
+public IAT balance
+    |  clear amount: deposit into confidential balance
+confidential IAT balance (Privacy Vault mode)
+    |  encrypted amount: confidential transfer
+recipient confidential IAT balance
+    |  clear amount: withdraw to public balance
+public IAT balance
 ```
 
-Deposit and redemption are public because the vault must prove 1:1 backing.
-Transfers between configured confidential vIAT accounts use client-generated
-zero-knowledge proofs and encrypted balances.
+Incoming confidential transfers first enter the recipient's encrypted pending
+balance. The recipient applies pending funds before spending them.
 
-## 3. What is private
+## 3. Privacy boundary
 
-For a confidential vIAT transfer, public observers cannot read:
+Hidden during a confidential IAT transfer:
 
-- the transferred vIAT amount;
-- the sender's confidential available balance;
-- the recipient's confidential pending and available balances.
+- transferred IAT amount;
+- sender's confidential available balance;
+- recipient's confidential pending and available balances.
 
-The following remain public and linkable:
+Still public and linkable:
 
-- sender and recipient token-account addresses and their owners;
-- the IAT and vIAT mints and invoked programs;
-- the fact, time, slot, signature, and SOL fee of the operation;
-- the amount and account entering or leaving the vault;
-- the amount moved between public and confidential vIAT balance;
-- every ordinary IAT balance and transfer;
-- proof-context transactions and their relationship to the transfer;
-- the public transfer graph.
+- sender and recipient token-account addresses and owners;
+- the canonical IAT mint and invoked programs;
+- time, slot, signature, transaction type, and SOL fee;
+- public IAT balances and ordinary transfers;
+- amounts deposited into or withdrawn from confidential balance;
+- proof-context transactions and the counterparty graph.
 
-This is amount and balance confidentiality inside the vault, not anonymity, an
-unlinkable mixer, or protection against traffic and graph analysis. No public
-claim may call it anonymous.
+This is amount and balance confidentiality, not anonymity, an unlinkable mixer,
+or protection against traffic analysis. B3 must never market it as anonymous.
 
 No global auditor key is selected because one global secret could decrypt every
-confidential vIAT transfer amount. Users may selectively disclose their own view
+confidential transfer amount. Users may selectively disclose their own view
 keys. Any future auditor-key proposal requires a separate owner decision and
 security/legal review.
 
-## 4. Who pays
+## 4. User cost
 
-### Default IAT users
+### Ordinary public IAT
 
-Nothing changes. They pay only the normal Solana fee for the transactions they
-already use. They do not fund confidential-account rent or proof transactions.
+Ordinary users do not pay any confidential-transfer cost. They pay the normal
+Solana fee for a Token-2022 transfer plus the Daily Law hook's compute overhead.
+The base fee remains signature-based; the hook requires no additional user
+signature. Optional priority fees may be affected by compute requirements, so
+the exact difference from an unhooked transfer must be measured on Devnet.
 
-### Opt-in vault users
-
-Vault users pay Solana fees in SOL unless an application sponsor pays them.
-There is no additional IAT-denominated privacy fee in the baseline.
+### Optional confidential IAT
 
 Current Solana integration guidance implies:
 
 - a confidential token account adds roughly 295 bytes and about `0.0015 SOL`
-  of extra rent reserve at setup; this is account funding, not a protocol fee,
-  and is normally recoverable when a closable account is closed;
+  of extra rent reserve at setup;
 - a confidential transfer currently uses several dependent transactions for
   proof-context creation, proof verification, transfer, and context closure;
 - the canonical three-transaction Rust example carries six signatures, whose
   base-fee floor at `5,000` lamports per signature is about `0.000030 SOL`;
-- priority fees are optional and variable, so the actual cost can be higher;
-- temporary proof-context rent is reclaimed when context accounts close;
-- applying a received pending balance is another transaction and fee;
-- deposit and redemption are additional ordinary transactions;
-- proof generation consumes the user's device CPU but requires no B3 validator.
+- optional priority fees can increase actual cost;
+- temporary proof-context rent is reclaimed on correct closure;
+- applying pending balance is another transaction and fee;
+- proof generation consumes client CPU but requires no B3 validator.
 
-The `0.000030 SOL` figure is an illustrative current-example floor, not a quote.
-Devnet measurements must publish setup, deposit, transfer, apply, redemption,
-retry, priority-fee, and rent-recovery behavior. Gas sponsorship moves the cost
-to the sponsor; it does not eliminate the Solana fee.
+These are current-example figures, not production quotes. A fee sponsor can pay
+for users, but the Solana cost still exists.
 
-## 5. Vault Daily Law
+## 5. IAT-wide Daily Law
 
-Released Token-2022 code executes a configured Transfer Hook for ordinary and
-confidential Token-2022 transfers. For confidential transfers it passes an
-amount sentinel, so the hook does not learn the encrypted amount.
-
-Every vIAT transfer supplies the current-day record. The immutable hook:
+Every canonical IAT public or confidential ownership transfer supplies the
+current-day record to the immutable hook. The hook:
 
 1. reads Solana's consensus-provided `Clock` sysvar;
-2. adds the fixed 10,800-second UTC+03:00 label;
+2. adds the fixed 10,800-second UTC+03:00 offset;
 3. derives the local day and Friday status;
 4. rejects with `DAY_UNFINALIZED` if the exact day record is absent;
 5. rejects with `DAILY_LOCKDOWN` if the day is selected;
-6. otherwise permits the vIAT transfer.
+6. otherwise permits Token-2022 to finish the transfer.
 
-Vault deposit and redemption instructions call the same gate directly. A stale
-or absent day record fails closed for every vault value movement, so delayed
-finalization cannot create a vault transfer gap. It can create extra vault
-downtime on an open day.
+Missing records fail closed. No canonical IAT ownership transfer can pass after
+a day boundary merely because finalization is late. An open day may experience
+additional downtime until the result is finalized.
 
-The default canonical IAT token does not have this hook. Canonical IAT transfers
-outside the vault continue even when the vault is locked. This is the explicit
-cost/compatibility tradeoff selected by making privacy optional.
+All B3 application instructions that move IAT or mutate B3 economic state must
+call the same law kernel directly. Token-2022 public/confidential balance
+conversion is account-local bookkeeping rather than a change of owner and is not
+a Transfer Hook call; it must be disclosed as outside the ownership-transfer
+hook boundary unless the exact deployed Token-2022 version supplies another
+enforcement mechanism.
 
-## 6. Permissionless finalization
+## 6. Permissionless daily finalization
 
 Solana programs do not execute automatically at midnight. Any caller may submit
 `finalize_day` after local 00:00. The instruction:
 
-1. requires the current day record to be absent;
-2. reads `Clock` and the canonical recent SlotHashes sysvar;
-3. selects an ancestor hash at a fixed lag using one specified skipped-slot
-   fallback;
-4. domain-separates it by law identifier, Solana genesis identity, vIAT mint,
-   local-day number, and entropy slot;
+1. requires the current-day record to be absent;
+2. reads `Clock` and the recent SlotHashes sysvar;
+3. selects an ancestor hash at a fixed lag using one immutable skipped-slot rule;
+4. domain-separates it by law identifier, Solana genesis identity, canonical IAT
+   mint, local-day number, and entropy slot;
 5. applies SHA-256 rejection sampling into 10,000 buckets;
-6. records one immutable result for the day.
+6. stores one immutable result for the day.
 
-Buckets `0..99` select a non-Friday lockdown. Buckets `0..6666` select a Friday
-lockdown. The mapping is exactly `100/10000` and `6667/10000` for a uniform
-input and has no modulo bias.
+Buckets `0..99` select lockdown on non-Friday days. Buckets `0..6666` select it
+on Friday. The mapping is exactly `100/10000` and `6667/10000` for a uniform
+input, without modulo bias.
 
-Finalization must succeed as a separate transaction. If a later instruction in
-the same Solana transaction failed, the day write would roll back. Official
-clients finalize first, then continue only when the stored result is open.
+Finalization must be a separate successful transaction. If a later instruction
+in the same Solana transaction failed, the stored day result would roll back.
+Official clients finalize first, then continue only if the persistent record is
+open. There is no operator-only finalizer, reroll call, override, or bypass.
 
-## 7. Requirements preserved
+## 7. Preserved requirements
 
-- all V2 features remain unless separately cut;
-- canonical IAT, wallet compatibility, and default transaction cost stay
-  unchanged;
-- no IAT validator network;
-- optional native Token-2022 encrypted amounts and confidential balances;
-- 1:1 public backing between vIAT supply and escrowed canonical IAT;
-- client-side proofs and native Solana proof verification;
+- all V2 features remain unless explicitly cut;
+- Daily Law applies to every canonical B3 IAT ownership transfer;
+- exact 1% non-Friday and 66.67% Friday bucket thresholds;
+- fixed UTC+03:00 label;
 - no external time API, NTP input, timezone database, or randomness oracle;
-- exact 10,000-bucket threshold mapping;
-- one persistent result per day and no reroll after finalization;
-- no administrator vault bypass;
-- fail-closed vault movements before finalization;
-- public read-only Solana, explorer, balance, and history access.
+- permissionless public finalization and reproducible result;
+- no reroll after finalization and no privileged IAT transfer bypass;
+- fail-closed transfers before finalization;
+- optional confidential amounts and balances on the same IAT mint;
+- no IAT validator network;
+- Solana consensus and read-only access continue during lockdown.
 
-## 8. Requirements explicitly relaxed
+## 8. Explicitly relaxed requirements
 
-1. **Optional scope:** the Daily Law controls vIAT and vault entry/exit, not
-   ordinary canonical IAT transfers outside the vault.
-2. **Network scope:** the law is not a Solana-wide consensus rule. SOL,
-   unrelated tokens, and unrelated programs continue.
-3. **Decision event:** the first successful permissionless `finalize_day`
+These are the only selected Solana-hosting relaxations:
+
+1. **Network scope:** the law is IAT-wide, not Solana-wide. SOL, unrelated
+   assets, and unrelated programs continue.
+2. **Decision event:** the first successful permissionless `finalize_day`
    records the result, not the first Solana block after 00:00.
-4. **Randomness strength:** a lagged ancestor slot hash replaces a threshold
+3. **Randomness strength:** a lagged Solana ancestor hash replaces a threshold
    VRF. Leaders, schedulers, and prospective finalizers may have limited
-   influence. Thresholds remain exact, but perfectly unbiased entropy and an
-   unconditional exact realized probability are not claimed.
-5. **Liveness:** vault movements fail closed until somebody finalizes the day.
-6. **Time:** the vault uses Solana `Clock` with fixed `+03:00`, inheriting Solana
-   clock drift and consensus behavior.
-7. **Immutability boundary:** the vault and hook can have loader authorities
-   revoked, but they inherit Solana and Token-2022 upgrades and social forks.
-8. **Privacy boundary:** amounts and confidential balances are hidden inside
-   vIAT; addresses, graph, entry, and exit remain public.
+   influence. The thresholds remain exact, but perfectly unbiased entropy and
+   an unconditional exact realized probability are not claimed.
+4. **Liveness:** all IAT transfers fail closed until somebody finalizes the day.
+5. **Time:** the program uses Solana `Clock` with fixed `+03:00`, inheriting
+   Solana clock drift and consensus behavior.
+6. **Host-chain immutability:** the IAT program and hook configuration can be
+   made immutable, but B3 inherits Solana and Token-2022 upgrades and social forks.
+7. **Account-local conversion:** conversion between public and confidential
+   balance does not change ownership and is not currently a Transfer Hook call.
 
-No document may claim this optional profile stops all canonical IAT transfers.
-Doing so while retaining unchanged default SPL-token transfers is technically
-impossible. Universal IAT enforcement requires migrating the canonical mint to
-a hooked Token-2022 mint; chainwide enforcement requires validator-level control.
+Privacy is optional; IAT-wide ownership-transfer enforcement is not.
 
-## 9. Release gates
+## 9. Existing-mint boundary
 
-- prove exact deployed Token-2022 and ZK proof program identities;
-- prove ordinary and confidential vIAT transfers invoke the hook on Devnet;
-- prove every deposit and redemption executes the same Daily Law gate;
-- prove `vIAT supply == escrowed IAT` after every success and rollback path;
+An original SPL Token mint cannot be retrofitted with Token-2022 extensions.
+Therefore:
+
+- if canonical IAT has not launched, B3 must create the canonical mint as
+  Token-2022 from the beginning;
+- if an original SPL canonical mint is already live, universal IAT transfer
+  enforcement requires an explicitly approved, supply-reconciled migration to a
+  new canonical B3 mint.
+
+No migration, mint creation, or authority revocation is authorized by this
+document. Mainnet remains HOLD until the actual chain state is independently
+verified and the migration question is resolved.
+
+## 10. Release gates
+
+- independently determine whether a canonical live mint already exists;
+- pin the exact Token-2022 and ZK proof program identities available on Mainnet;
+- prove ordinary and confidential IAT transfers both invoke the hook on Devnet;
+- prove public transfers pay no confidential proof or account-rent cost;
+- measure hook compute, account-list, wallet, priority-fee, and compatibility
+  overhead for default transfers;
 - test missing, open, selected, Friday, non-Friday, consecutive-day, skipped-slot,
-  delayed-finalization, replay, and direct-client paths;
-- benchmark actual user fees, proof time, transaction count, and rent recovery;
-- independently audit vault custody, mint authority PDA, law hook, cryptography,
-  client key recovery, and migration-free default behavior;
-- complete privacy-language, sanctions, AML, money-transmission, tax, and
-  jurisdictional review before offering a hosted vault interface;
-- revoke vault and hook program authorities only after the final reviewed
-  binaries, configuration, and recovery UX are reproducible.
+  delayed-finalization, rollback, replay, and direct-client paths;
+- prove all B3 economic mutations use the shared gate;
+- complete independent Solana, cryptographic, economic, migration, privacy, and
+  legal review;
+- publish reproducible binaries, mint configuration, test vectors, and evidence;
+- revoke mint, hook-update, and program-upgrade authorities only after every
+  Mainnet gate passes.
 
-## 10. Primary implementation references
+## 11. Primary implementation references
 
 - Solana Confidential Transfer integration guide:
   <https://solana.com/docs/tokens/extensions/confidential-transfer/integration-guide>

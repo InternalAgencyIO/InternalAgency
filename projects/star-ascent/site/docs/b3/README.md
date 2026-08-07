@@ -1,7 +1,8 @@
 # IAT B3 architecture workspace
 
-Status: draft architecture baseline. No deployment, signing, funding, network
-mutation, site publication, or Mainnet authorization is implied.
+Status: B3 is the primary forward architecture. Implementation and evidence are
+in progress. Mainnet remains HOLD; no deployment, signing, funding, network
+mutation, site publication, or authority revocation is implied.
 
 B3 evolves the complete IAT V2 system. Unless the project owner records an
 explicit cut, every V2 behavior, safety property, inactive future feature,
@@ -15,6 +16,7 @@ This directory contains the first source-controlled B3 design set:
 - [V2 source inheritance and port inventory](V2_SOURCE_INVENTORY.md)
 - [Deployment-cost feasibility](COST_FEASIBILITY.md)
 - [Native confidential IAT transfers](SHIELDED_TRANSFERS.md)
+- [Gated path to Mainnet](MAINNET_PATH.md)
 - [White paper draft](WHITEPAPER_DRAFT.md)
 
 The framework-neutral Rust daily-law kernel is
@@ -32,18 +34,20 @@ The documents deliberately separate two deployment profiles:
 
 1. **V2/Solana** is the existing program, website, launch-control, and evidence
    system. It is the migration source and behavioral reference.
-2. **B3/Solana** is the selected least-cost profile: unchanged canonical V2 IAT
-   plus an optional 1:1 Token-2022 Privacy Vault. Only opt-in vault users pay
-   confidential-transfer costs. The owner explicitly relaxed universal IAT
-   enforcement, chainwide scope, first-block decision, threshold-VRF randomness,
-   and independent-clock guarantees to preserve default cost and avoid a
-   sovereign validator network. The exact boundary is recorded in
+2. **B3/Solana** is the primary forward architecture: one canonical Token-2022
+   IAT mint with an immutable Daily Law hook on every public and confidential
+   ownership transfer. Privacy is an optional confidential-balance mode on the
+   same mint; only opt-in users pay ZK-proof and confidential-account costs.
+   Chainwide Solana scope, first-block decision, threshold-VRF randomness, and
+   an independent clock are explicitly relaxed to avoid a sovereign validator
+   network. The exact boundary is recorded in
    [Native confidential IAT transfers](SHIELDED_TRANSFERS.md).
 
 The former sovereign profile remains the only route to making the Daily Law a
-chainwide consensus rule for all transactions. It is not the selected build
-because its validator and operations investment conflicts with the current
-cost constraint.
+chainwide consensus rule for all Solana-independent transactions. It is not the
+selected build because its validator and operations investment conflicts with
+the current cost constraint. This does not narrow the selected law: it remains
+IAT-wide for the canonical B3 mint.
 
 No B3 implementation may replace a V2 guarantee with a weaker approximation
 to meet a size, cost, schedule, or marketing target.

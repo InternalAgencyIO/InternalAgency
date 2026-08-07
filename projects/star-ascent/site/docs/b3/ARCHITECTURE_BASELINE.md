@@ -1,6 +1,6 @@
 # IAT B3 architecture baseline
 
-Status: draft 0.5, optional Solana-hosted Privacy Vault selected
+Status: draft 0.6, primary Solana-hosted B3 architecture
 
 Source baseline: `f0a794952ab822d823c8d8eba0c4c8f5d9ae4796`
 
@@ -14,19 +14,21 @@ Architecture branch: `agent/iat-b3-architecture`
 2. Every V2 feature stays unless the project owner explicitly records a cut.
 3. Correctness, security, reliability, evidence quality, and auditability take
    priority over deployment cost.
-4. The selected Daily Law is an immutable optional-vault rule, not an
-   administrator switch, governance parameter, or UI convention. Canonical IAT
-   remains unchanged and outside this enforcement boundary.
+4. The selected Daily Law is an immutable canonical-IAT rule, not an
+   administrator switch, governance parameter, optional vault rule, or UI
+   convention.
 5. The bucket mapping remains exactly `100/10000` on non-Friday days and
    `6667/10000` on Friday. Because the selected Solana slot-hash input is not a
    threshold VRF, B3 does not claim an unconditionally exact realized chance.
 6. The first successful permissionless `finalize_day` interaction after local
-   00:00 records the result. Until then all vault value movements fail closed.
-7. A selected result rejects vault entry, exit, and vIAT transfers until the
-   next fixed UTC+03:00 civil-day boundary and the next day is finalized open.
+   00:00 records the result. Until then all canonical IAT ownership transfers
+   fail closed.
+7. A selected result rejects every public and confidential canonical IAT
+   ownership transfer until the next fixed UTC+03:00 civil-day boundary and the
+   next day is finalized open.
 8. The decision uses a canonically lagged Solana ancestor slot hash, with its
    limited leader, scheduler, and finalizer-influence risks disclosed.
-9. The vault law has no privileged transfer bypass, external oracle, result
+9. The IAT law has no privileged transfer bypass, external oracle, result
    override, or reroll after finalization.
 10. Public read-only access continues during a selected lockdown.
 11. The former chainwide, first-block, threshold-VRF, independent-clock profile
@@ -38,34 +40,31 @@ Architecture branch: `agent/iat-b3-architecture`
 ## 2. Selected deployment decision
 
 B3 remains on Solana. It does not operate a Solana validator or a separate
-validator network. Canonical V2 IAT and ordinary transfers stay unchanged. The
-selected privacy feature is an optional 1:1 vault whose Token-2022 receipt,
-vIAT, combines Confidential Transfer with a permanently configured Daily Law
-Transfer Hook. The small hook enforces the current finalized day record for
-vault movements; Solana's existing ZK proof program verifies confidential vIAT
-amounts and balances.
+validator network. B3 uses one canonical Token-2022 IAT mint. Its permanently
+configured Daily Law Transfer Hook executes on every public and confidential
+ownership transfer. Confidential balance is an optional account mode on the
+same mint, called the Privacy Vault in wallet UX. Ordinary holders do not create
+proofs or confidential accounts. Solana's existing ZK proof program verifies
+confidential IAT amounts and balances for opt-in users.
 
 ```text
-wallet: derive private keys and proofs
-                  |
-canonical IAT --1:1 escrow-- Token-2022 vIAT mint
-          /                 \
-public transfer       confidential transfer
-          \                 /
-        immutable Vault Daily Law hook
+              canonical Token-2022 IAT mint
+                    /                 \
+     public balance/transfer    optional confidential balance/transfer
+                    \                 /
+             immutable IAT Daily Law hook
                   |
      day PDA: absent / open / locked
                   |
  Clock + lagged ancestor SlotHashes
 ```
 
-Every vault entry, exit, or vIAT transfer after a new local day begins must
-reference that exact day's record. Missing records fail closed. Any caller can
-create the record with a separate successful `finalize_day` transaction, after
-which vault movements either remain rejected for the selected day or proceed
-for the open day. Canonical IAT transfers outside the optional vault continue.
-The separate transaction is necessary because Solana rolls back the result
-write if a later instruction fails.
+Every public or confidential IAT ownership transfer after a new local day begins
+must reference that exact day's record. Missing records fail closed. Any caller
+can create the record with a separate successful `finalize_day` transaction,
+after which all IAT ownership transfers either remain rejected for the selected
+day or proceed for the open day. The separate transaction is necessary because
+Solana rolls back the result write if a later instruction fails.
 
 The complete privacy boundary, current user-cost model, entropy construction,
 release gates, and owner-authorized relaxations are normative in
@@ -247,10 +246,10 @@ Preserve the V2 supply and arithmetic contract:
 - fixed supply: `1_000_000_000_000_000_000` base units;
 - no post-Genesis mint or freeze authority.
 
-B3 keeps canonical V2 IAT unchanged. The optional vault locks canonical IAT and
-issues an equal Token-2022 vIAT receipt with Confidential Transfer and the Vault
-Daily Law hook. The immutable vault must maintain exact 1:1 supply-to-escrow
-backing. vIAT is a receipt, not additional unbacked IAT supply.
+B3 uses one canonical Token-2022 IAT mint with fixed supply, nine decimals,
+Confidential Transfer, and the immutable IAT Daily Law hook. Public balances are
+the default. Optional confidential balances use the same mint and supply; no
+wrapper, second token, bridge, or additional issuance exists.
 
 ### 5.2 Allocation and vesting
 
@@ -318,31 +317,33 @@ mode, hardware-wallet boundary, source-bound audits, reproducible builds, CI,
 release packets, and ceremony gates are B3 system components. They are not
 discarded because they are outside the validator runtime.
 
-## 6. Optional vault activation
+## 6. Canonical mint decision and activation
 
-Canonical V2 IAT and existing holder balances do not migrate. Vault activation:
+An original SPL mint cannot acquire Token-2022 extensions after creation. B3
+activation therefore begins with an independent live-chain check:
 
-1. freezes a reviewed V2 and vault source identity;
-2. creates the Token-2022 vIAT receipt mint and immutable escrow relationships;
-3. proves every successful deposit mints exactly equal vIAT and every redemption
-   burns exactly equal vIAT before releasing canonical IAT;
-4. proves failure and rollback paths cannot create unbacked receipts or strand
-   backing silently;
-5. publishes continuous `vIAT supply == escrowed IAT` reconciliation;
-6. obtains independent custody, cryptographic, Solana, economic, and legal review;
-7. activates only the optional vault interface. Default IAT paths remain intact.
+1. determine whether canonical IAT already exists on Mainnet and publish proof;
+2. if it does not, create B3 IAT as Token-2022 from inception;
+3. if an original SPL mint exists, select and rehearse a supply-reconciled
+   migration before calling the new mint canonical;
+4. prove fixed supply, allocation, holder, position, reservation, vesting, and
+   authority invariants independently;
+5. prove every public and confidential transfer invokes the same law hook;
+6. obtain independent Solana, cryptographic, economic, migration, and legal review;
+7. revoke authorities only after the complete Mainnet evidence packet passes.
 
 ## 7. Implementation strategy
 
 ### Phase 0: Solana compatibility proof
 
 - pin the deployed Token-2022 and ZK proof program identities;
-- prove that ordinary and confidential vIAT transfers both invoke the configured
-  vault hook on Devnet;
+- prove that ordinary and confidential canonical IAT transfers both invoke the
+  configured law hook on Devnet;
 - prototype `PodSlotHashes` access, fixed-lag selection, day finalization, and
   fail-closed missing-record behavior;
 - measure account rent, proof time, transaction count, and user fees;
-- do not move canonical IAT or revoke any authority during this prototype.
+- do not create a canonical mint, migrate IAT, or revoke any authority during
+  this prototype.
 
 ### Phase 1: specification lock
 
@@ -350,21 +351,22 @@ Canonical V2 IAT and existing holder balances do not migrate. Vault activation:
 - keep the executable daily schedule, normal/Friday probabilities, draw, decision,
   and boundary vectors green;
 - extract pure V2 transition vectors;
-- define exact vault escrow, receipt-supply, rollback, and recovery invariants.
+- define exact canonical-mint, migration, transfer, rollback, and authority
+  invariants.
 
-### Phase 2: Vault Daily Law hook
+### Phase 2: IAT-wide Daily Law hook
 
 - immutable day-state schema and permissionless finalization;
 - fixed UTC+03:00 Clock derivation and fixed-lag SlotHashes entropy;
 - exact-threshold rejection sampling shared with the existing law kernel;
-- deposit, redemption, and public/confidential vIAT enforcement;
+- public and confidential canonical-IAT enforcement;
 - malicious finalizer, transaction-ordering, rollback, and delayed-finalization
   tests.
 
 ### Phase 3: V2 continuity
 
 - preserve allocations, vesting, reservations, positions, and settlement;
-- prove the optional vault changes no default V2 path or arithmetic;
+- prove optional confidentiality changes no V2 economic arithmetic;
 - retain all existing V2 differential and launch-gate tests.
 
 ### Phase 4: registry and randomness parity
@@ -373,10 +375,10 @@ Canonical V2 IAT and existing holder balances do not migrate. Vault activation:
 - CCC retained fail-closed;
 - reviewed randomness adapter and no-reroll tests.
 
-### Phase 5: optional vault and public surfaces
+### Phase 5: canonical mint, optional privacy, and public surfaces
 
-- Token-2022 vIAT configuration, confidential-wallet flows, vault backing
-  reconciliation, and proof manifest;
+- canonical Token-2022 IAT configuration, confidential-wallet flows, migration
+  evidence if required, and proof manifest;
 - live-site B3 read paths;
 - admin and evidence pipeline;
 - rehearsals, audit, and staged rollout.
@@ -388,12 +390,12 @@ B3 cannot advance from a phase while any of these fail:
 - V2 feature-parity ledger is incomplete;
 - daily boundary, slot-hash selection, bucket mapping, malicious-finalizer, or
   rollback test fails;
-- a vault deposit, redemption, or ordinary/confidential vIAT transfer is
-  permitted while the day is absent or selected;
+- a public or confidential canonical IAT ownership transfer is permitted while
+  the day is absent or selected;
 - any read-only surface unnecessarily stops during a selected lockdown;
 - supply, allocation, reservation, or settlement differs from canonical V2;
 - inactive DLC becomes reachable;
-- vIAT supply and escrowed canonical IAT do not reconcile;
+- canonical supply, migrated supply if any, or allocation state does not reconcile;
 - a cost reduction weakens a security or audit invariant;
 - reproducible build or independent review is missing.
 
@@ -404,7 +406,8 @@ The following require measured prototypes, not assumption:
 - fixed ancestor-slot lag and skipped-slot rule, after Devnet measurement;
 - exact deployed Token-2022 and ZK proof program versions;
 - whether B3 sponsors Solana fees or users pay SOL directly;
-- vIAT mint-PDA, escrow, close, and pre-immutability recovery policy;
+- canonical mint creation or migration model;
+- confidential-account recovery and selective-disclosure UX;
 - selective-disclosure UX and whether a future auditor-key proposal is ever
   acceptable;
 - legal and jurisdictional treatment of the hosted confidential-transfer UI.

@@ -69,6 +69,27 @@ accessibility, or deployment-source certification. The Turkish domain's
 fail-closed indexing header must remain until the existing accountable review
 gates permit a change.
 
+## Mainnet IAT mint evidence
+
+The repository contains no published Mainnet IAT mint address. Its independent
+surfaces consistently describe a pre-mint state:
+
+- `HANDOFF_FOR_NEXT_AI.md` states that no IAT mint transaction has been created,
+  signed, or deployed;
+- `app/proof/page.tsx` labels the Mainnet mint "Not published" and says Devnet
+  records do not represent a Mainnet IAT mint;
+- `app/network/page.tsx` says the IAT mint and program addresses are not
+  published;
+- `launch/iat-v2-mainnet-readiness-gate.json` remains `HOLD`, records
+  `mainnetExecutionAuthorized: false`, and records no signing, broadcasting,
+  deployment, or Mainnet release from hold.
+
+This evidence makes a new canonical Token-2022 B3 mint the working design and
+avoids a needless wrapper or second asset. It is not proof that an undisclosed
+mint does not exist. Before any ceremony, Gate 0 must obtain the owner-controlled
+candidate address or a signed no-candidate assertion, then independently query
+and publish the exact Mainnet observation.
+
 ## Ownership boundary for B3 work
 
 Until explicit publication authority is granted, B3 work remains on its local
