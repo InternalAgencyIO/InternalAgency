@@ -1,0 +1,42 @@
+{
+  "batch": 253,
+  "country": "United States",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1033-united-states-golden-gate-rain-paws.png",
+    "1034-united-states-las-vegas-golden-pole-route.png",
+    "1035-united-states-grand-canyon-lightning-arrival.png"
+  ],
+  "blockedScenes": ["1032-united-states-brooklyn-blue-hour-route-grid.png"],
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1032": { "weather": { "roll": 14, "result": "crisp blue hour" }, "paws": { "roll": 30, "active": false }, "poleDanceTheme": { "roll": 74, "active": false }, "rainbowOnly": { "roll": 54, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 11, "result": "romantic joy" }, "visibleMidriff": 9, "straplessDress": 24, "fullyOpenBack": 11 },
+      "Ellie": { "emotion": { "roll": 10, "result": "romantic joy" }, "visibleMidriff": 65, "straplessDress": 63, "fullyOpenBack": 58 },
+      "Alia": { "emotion": { "roll": 73, "result": "betrayal shock" }, "visibleMidriff": 60, "straplessDress": 23, "fullyOpenBack": 77 },
+      "AI ECE": { "emotion": { "roll": 39, "result": "magnetic confidence" }, "visibleMidriff": 94, "straplessDress": 52, "fullyOpenBack": 92 }
+    } },
+    "1033": { "weather": { "roll": 29, "result": "cinematic light rain with reflections" }, "paws": { "roll": 18, "active": true }, "poleDanceTheme": { "roll": 59, "active": false }, "rainbowOnly": { "roll": 34, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 1, "result": "tender affection" }, "visibleMidriff": 2, "straplessDress": 62, "fullyOpenBack": 11 },
+      "Ellie": { "emotion": { "roll": 21, "result": "playful mischief" }, "visibleMidriff": 85, "straplessDress": 93, "fullyOpenBack": 97 },
+      "Alia": { "emotion": { "roll": 62, "result": "visible jealousy" }, "visibleMidriff": 62, "straplessDress": 89, "fullyOpenBack": 12 },
+      "AI ECE": { "emotion": { "roll": 48, "result": "startled surprise" }, "visibleMidriff": 38, "straplessDress": 37, "fullyOpenBack": 30 }
+    } },
+    "1034": { "weather": { "roll": 1, "result": "clear golden-hour radiance" }, "paws": { "roll": 99, "active": false }, "poleDanceTheme": { "roll": 0, "active": true }, "rainbowOnly": { "roll": 33, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 27, "result": "hope" }, "visibleMidriff": 88, "straplessDress": 42, "fullyOpenBack": 94 },
+      "Ellie": { "emotion": { "roll": 48, "result": "startled surprise" }, "visibleMidriff": 37, "straplessDress": 25, "fullyOpenBack": 56 },
+      "Alia": { "emotion": { "roll": 61, "result": "visible jealousy" }, "visibleMidriff": 74, "straplessDress": 70, "fullyOpenBack": 86 },
+      "AI ECE": { "emotion": { "roll": 53, "result": "intense curiosity" }, "visibleMidriff": 67, "straplessDress": 35, "fullyOpenBack": 86 }
+    } },
+    "1035": { "weather": { "roll": 51, "result": "active lightning storm with distant bolts" }, "paws": { "roll": 86, "active": false }, "poleDanceTheme": { "roll": 96, "active": false }, "rainbowOnly": { "roll": 70, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 29, "result": "hope" }, "visibleMidriff": 1, "straplessDress": 32, "fullyOpenBack": 41 },
+      "Ellie": { "emotion": { "roll": 48, "result": "startled surprise" }, "visibleMidriff": 74, "straplessDress": 40, "fullyOpenBack": 75 },
+      "Alia": { "emotion": { "roll": 36, "result": "magnetic confidence" }, "visibleMidriff": 87, "straplessDress": 89, "fullyOpenBack": 3 },
+      "AI ECE": { "emotion": { "roll": 54, "result": "aching romantic longing" }, "visibleMidriff": 5, "straplessDress": 90, "fullyOpenBack": 61 }
+    } }
+  },
+  "recovery": "Scene 1032 remained blocked after one simplified recovery pass. Scene 1034 was accepted on its simplified recovery.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "not-needed on accepted scenes",
+  "nextQueueCountry": "China"
+}
