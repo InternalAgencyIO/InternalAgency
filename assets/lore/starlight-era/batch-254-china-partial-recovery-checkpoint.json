@@ -1,0 +1,43 @@
+{
+  "batch": 254,
+  "country": "China",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1036-china-shanghai-overcast-pole-route.png",
+    "1037-china-great-wall-fog-signal-cipher.png",
+    "1038-china-zhangjiajie-golden-star-map-relay.png"
+  ],
+  "blockedScenes": ["1039-china-xian-thunderstorm-arrival.png"],
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1036": { "weather": { "roll": 23, "result": "soft dramatic overcast" }, "paws": { "roll": 52, "active": false }, "poleDanceTheme": { "roll": 3, "active": true }, "rainbowOnly": { "roll": 26, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 67, "result": "possessive tension" }, "visibleMidriff": 69, "straplessDress": 91, "fullyOpenBack": 84 },
+      "Ellie": { "emotion": { "roll": 55, "result": "aching romantic longing" }, "visibleMidriff": 96, "straplessDress": 23, "fullyOpenBack": 35 },
+      "Alia": { "emotion": { "roll": 81, "result": "deep sadness" }, "visibleMidriff": 48, "straplessDress": 53, "fullyOpenBack": 18 },
+      "AI ECE": { "emotion": { "roll": 16, "result": "extreme happiness" }, "visibleMidriff": 94, "straplessDress": 47, "fullyOpenBack": 16 }
+    } },
+    "1037": { "weather": { "roll": 62, "result": "dense rolling fog" }, "paws": { "roll": 35, "active": false }, "poleDanceTheme": { "roll": 82, "active": false }, "rainbowOnly": { "roll": 52, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 54, "result": "aching romantic longing" }, "visibleMidriff": 6, "straplessDress": 37, "fullyOpenBack": 12 },
+      "Ellie": { "emotion": { "roll": 69, "result": "suspicion" }, "visibleMidriff": 46, "straplessDress": 16, "fullyOpenBack": 62 },
+      "Alia": { "emotion": { "roll": 75, "result": "contained resentment" }, "visibleMidriff": 2, "straplessDress": 0, "fullyOpenBack": 10 },
+      "AI ECE": { "emotion": { "roll": 67, "result": "possessive tension" }, "visibleMidriff": 0, "straplessDress": 21, "fullyOpenBack": 90 }
+    } },
+    "1038": { "weather": { "roll": 8, "result": "clear golden-hour radiance" }, "paws": { "roll": 37, "active": false }, "poleDanceTheme": { "roll": 52, "active": false }, "rainbowOnly": { "roll": 42, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 43, "result": "determination" }, "visibleMidriff": 24, "straplessDress": 39, "fullyOpenBack": 77 },
+      "Ellie": { "emotion": { "roll": 2, "result": "tender affection" }, "visibleMidriff": 31, "straplessDress": 45, "fullyOpenBack": 43 },
+      "Alia": { "emotion": { "roll": 49, "result": "startled surprise" }, "visibleMidriff": 30, "straplessDress": 34, "fullyOpenBack": 61 },
+      "AI ECE": { "emotion": { "roll": 79, "result": "deep sadness" }, "visibleMidriff": 18, "straplessDress": 12, "fullyOpenBack": 95 }
+    } },
+    "1039": { "weather": { "roll": 41, "result": "rolling thunderstorm" }, "paws": { "roll": 77, "active": false }, "poleDanceTheme": { "roll": 53, "active": false }, "rainbowOnly": { "roll": 80, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 1, "result": "tender affection" }, "visibleMidriff": 25, "straplessDress": 25, "fullyOpenBack": 86 },
+      "Ellie": { "emotion": { "roll": 4, "result": "tender affection" }, "visibleMidriff": 99, "straplessDress": 6, "fullyOpenBack": 67 },
+      "Alia": { "emotion": { "roll": 20, "result": "playful mischief" }, "visibleMidriff": 91, "straplessDress": 46, "fullyOpenBack": 21 },
+      "AI ECE": { "emotion": { "roll": 41, "result": "determination" }, "visibleMidriff": 57, "straplessDress": 39, "fullyOpenBack": 61 }
+    } }
+  },
+  "recovery": "Scene 1039 remained blocked after one simplified recovery pass.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "not-needed on accepted scenes",
+  "eceHosieryCapsule": "Batch 254 completes the original 15-batch capsule window.",
+  "nextQueueCountry": "India"
+}
