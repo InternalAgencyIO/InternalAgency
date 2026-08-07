@@ -1,0 +1,58 @@
+{
+  "batch": 250,
+  "country": "Eswatini",
+  "status": "accepted-complete",
+  "acceptedScenes": [
+    "1020-eswatini-mbabane-sibebe-dust-route-grid.png",
+    "1021-eswatini-maguga-dam-overcast-signal-cipher.png",
+    "1022-eswatini-malolotja-hail-star-map-relay.png",
+    "1023-eswatini-ezulwini-thunderstorm-arrival-paws.png"
+  ],
+  "blockedScenes": [],
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1020": {
+      "weather": { "roll": 72, "result": "red-gold dust storm" }, "paws": { "roll": 82, "active": false }, "poleDanceTheme": { "roll": 57, "active": false }, "rainbowOnly": { "roll": 26, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 94, "result": "shame and social vulnerability" }, "visibleMidriff": 45, "straplessDress": 36, "fullyOpenBack": 15 },
+        "Ellie": { "emotion": { "roll": 63, "result": "visible jealousy" }, "visibleMidriff": 60, "straplessDress": 33, "fullyOpenBack": 74 },
+        "Alia": { "emotion": { "roll": 61, "result": "visible jealousy" }, "visibleMidriff": 8, "straplessDress": 92, "fullyOpenBack": 71 },
+        "AI ECE": { "emotion": { "roll": 26, "result": "calm contentment" }, "visibleMidriff": 94, "straplessDress": 63, "fullyOpenBack": 50 }
+      }
+    },
+    "1021": {
+      "weather": { "roll": 21, "result": "soft dramatic overcast" }, "paws": { "roll": 78, "active": false }, "poleDanceTheme": { "roll": 59, "active": false }, "rainbowOnly": { "roll": 62, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 34, "result": "overwhelming relief" }, "visibleMidriff": 35, "straplessDress": 54, "fullyOpenBack": 77 },
+        "Ellie": { "emotion": { "roll": 78, "result": "deep sadness" }, "visibleMidriff": 9, "straplessDress": 9, "fullyOpenBack": 5 },
+        "Alia": { "emotion": { "roll": 93, "result": "guilt and remorse" }, "visibleMidriff": 15, "straplessDress": 76, "fullyOpenBack": 67 },
+        "AI ECE": { "emotion": { "roll": 14, "result": "romantic joy" }, "visibleMidriff": 85, "straplessDress": 1, "fullyOpenBack": 93 }
+      }
+    },
+    "1022": {
+      "weather": { "roll": 53, "result": "hailstorm with hard backlight" }, "paws": { "roll": 51, "active": false }, "poleDanceTheme": { "roll": 28, "active": false }, "rainbowOnly": { "roll": 60, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 26, "result": "calm contentment" }, "visibleMidriff": 31, "straplessDress": 77, "fullyOpenBack": 65 },
+        "Ellie": { "emotion": { "roll": 96, "result": "defiance" }, "visibleMidriff": 99, "straplessDress": 93, "fullyOpenBack": 84 },
+        "Alia": { "emotion": { "roll": 47, "result": "awe" }, "visibleMidriff": 18, "straplessDress": 90, "fullyOpenBack": 87 },
+        "AI ECE": { "emotion": { "roll": 26, "result": "calm contentment" }, "visibleMidriff": 21, "straplessDress": 9, "fullyOpenBack": 60 }
+      }
+    },
+    "1023": {
+      "weather": { "roll": 41, "result": "rolling thunderstorm" }, "paws": { "roll": 6, "active": true }, "poleDanceTheme": { "roll": 51, "active": false }, "rainbowOnly": { "roll": 65, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 41, "result": "determination" }, "visibleMidriff": 5, "straplessDress": 30, "fullyOpenBack": 41 },
+        "Ellie": { "emotion": { "roll": 76, "result": "contained resentment" }, "visibleMidriff": 47, "straplessDress": 42, "fullyOpenBack": 37 },
+        "Alia": { "emotion": { "roll": 75, "result": "contained resentment" }, "visibleMidriff": 53, "straplessDress": 90, "fullyOpenBack": 19 },
+        "AI ECE": { "emotion": { "roll": 38, "result": "magnetic confidence" }, "visibleMidriff": 75, "straplessDress": 46, "fullyOpenBack": 76 }
+      }
+    }
+  },
+  "renderAttempts": 1,
+  "rawOriginalsPreserved": true,
+  "shorteningPass": {
+    "scene": 1022,
+    "status": "blocked-after-single-recovery",
+    "note": "The leftmost skirt read longer than the contract target. Both the initial non-destructive edit and its one permitted recovery pass were blocked; the accepted raw remains preserved."
+  }
+}
