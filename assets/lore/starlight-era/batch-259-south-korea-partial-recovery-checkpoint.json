@@ -1,0 +1,60 @@
+{
+  "batch": 259,
+  "country": "South Korea",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1056-south-korea-seoul-rainbow-route-grid.png",
+    "1057-south-korea-busan-golden-signal-cipher.png",
+    "1058-south-korea-jeju-mammatus-star-map-relay.png"
+  ],
+  "preservedOriginals": [
+    "1056-south-korea-seoul-rainbow-route-grid-raw-original.png",
+    "1057-south-korea-busan-golden-signal-cipher-raw-original.png"
+  ],
+  "blockedScenes": ["1059-south-korea-seoul-aurora-arrival.png"],
+  "rollMethod": "FNV-1a over batch259-south-korea-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1056": {
+      "weather": { "roll": 86, "result": "double rainbow after rain" }, "paws": { "roll": 91, "active": false }, "poleDanceTheme": { "roll": 48, "active": false }, "rainbowOnly": { "roll": 64, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 31, "result": "overwhelming relief" }, "visibleMidriff": 1, "straplessDress": 5, "fullyOpenBack": 89 },
+        "Ellie": { "emotion": { "roll": 59, "result": "aching romantic longing" }, "visibleMidriff": 41, "straplessDress": 53, "fullyOpenBack": 5 },
+        "Alia": { "emotion": { "roll": 49, "result": "startled surprise" }, "visibleMidriff": 99, "straplessDress": 55, "fullyOpenBack": 79 },
+        "AI ECE": { "emotion": { "roll": 39, "result": "magnetic confidence" }, "visibleMidriff": 49, "straplessDress": 53, "fullyOpenBack": 33 }
+      }
+    },
+    "1057": {
+      "weather": { "roll": 9, "result": "clear golden-hour radiance" }, "paws": { "roll": 6, "active": true }, "poleDanceTheme": { "roll": 85, "active": false }, "rainbowOnly": { "roll": 15, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 10, "result": "romantic joy" }, "visibleMidriff": 28, "straplessDress": 40, "fullyOpenBack": 6 },
+        "Ellie": { "emotion": { "roll": 84, "result": "crying with visible tears" }, "visibleMidriff": 86, "straplessDress": 74, "fullyOpenBack": 20 },
+        "Alia": { "emotion": { "roll": 52, "result": "intense curiosity" }, "visibleMidriff": 6, "straplessDress": 62, "fullyOpenBack": 4 },
+        "AI ECE": { "emotion": { "roll": 86, "result": "full sobbing with tear-streaked face and shaking posture" }, "visibleMidriff": 4, "straplessDress": 32, "fullyOpenBack": 58 }
+      }
+    },
+    "1058": {
+      "weather": { "roll": 96, "result": "mammatus storm ceiling" }, "paws": { "roll": 1, "active": true }, "poleDanceTheme": { "roll": 82, "active": false }, "rainbowOnly": { "roll": 74, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 57, "result": "aching romantic longing" }, "visibleMidriff": 83, "straplessDress": 7, "fullyOpenBack": 27 },
+        "Ellie": { "emotion": { "roll": 53, "result": "intense curiosity" }, "visibleMidriff": 39, "straplessDress": 67, "fullyOpenBack": 27 },
+        "Alia": { "emotion": { "roll": 63, "result": "visible jealousy" }, "visibleMidriff": 77, "straplessDress": 37, "fullyOpenBack": 61 },
+        "AI ECE": { "emotion": { "roll": 5, "result": "tender affection" }, "visibleMidriff": 19, "straplessDress": 71, "fullyOpenBack": 79 }
+      }
+    },
+    "1059": {
+      "weather": { "roll": 87, "result": "rare aurora sky" }, "paws": { "roll": 0, "active": true }, "poleDanceTheme": { "roll": 63, "active": false }, "rainbowOnly": { "roll": 65, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 64, "result": "visible jealousy" }, "visibleMidriff": 30, "straplessDress": 26, "fullyOpenBack": 44 },
+        "Ellie": { "emotion": { "roll": 10, "result": "romantic joy" }, "visibleMidriff": 4, "straplessDress": 68, "fullyOpenBack": 78 },
+        "Alia": { "emotion": { "roll": 6, "result": "tender affection" }, "visibleMidriff": 68, "straplessDress": 48, "fullyOpenBack": 66 },
+        "AI ECE": { "emotion": { "roll": 68, "result": "possessive tension" }, "visibleMidriff": 50, "straplessDress": 38, "fullyOpenBack": 96 }
+      }
+    }
+  },
+  "recovery": "Scene 1058 succeeded on the one simplified recovery pass. Scene 1059 remained blocked. Scenes 1056 and 1057 received successful non-destructive shortening variants, with both raw originals preserved.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "accepted for scenes 1056 and 1057",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "nextQueueCountry": "Albania"
+}
