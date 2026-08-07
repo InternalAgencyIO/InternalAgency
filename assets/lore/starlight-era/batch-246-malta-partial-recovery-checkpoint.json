@@ -1,0 +1,21 @@
+{
+  "batch": 246,
+  "country": "Malta",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1005-malta-mdina-signal-cipher.png",
+    "1006-malta-blue-grotto-star-map-relay.png"
+  ],
+  "blockedScenes": [
+    "1004-malta-valletta-grand-harbour-route-grid.png",
+    "1007-malta-upper-barrakka-arrival-paws.png"
+  ],
+  "recoveryPolicy": "One recovery attempt per blocked scene; no repeated retries.",
+  "forwardPropContract": {
+    "character": "AI ECE",
+    "prop": "rainbow-gradient Desert Eagle-style mission prop",
+    "handling": "non-threatening carry, pointed safely away or secured, finger off trigger, no firing"
+  },
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "pending-non-destructive"
+}
