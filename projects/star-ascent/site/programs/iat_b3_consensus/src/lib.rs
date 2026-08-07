@@ -9,6 +9,7 @@ pub const DRAW_DENOMINATOR: u16 = 10_000;
 pub const NORMAL_DAY_LOCKDOWN_NUMERATOR: u16 = 100;
 pub const FRIDAY_LOCKDOWN_NUMERATOR: u16 = 6_667;
 pub const DAILY_LOCKDOWN_LAW_ID: &[u8] = b"IAT_B3_DAILY_LOCKDOWN_LAW_V1";
+pub const SOLANA_DAILY_LAW_ID: &[u8] = b"IAT_B3_SOLANA_DAILY_LAW_V1";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum LawError {
@@ -60,6 +61,29 @@ pub struct LockdownDecision {
     pub chance_numerator: u16,
     pub chance_denominator: u16,
     pub locked: bool,
+}
+
+/// Persistent result recorded by the permissionless Solana `finalize_day`
+/// instruction. The slot-selection rule and SlotHashes access live in the
+/// onchain adapter; this kernel binds the selected ancestor hash to the day,
+/// host-chain identity, IAT mint, and entropy slot.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct SolanaDailyDecision {
+    pub local_day: i64,
+    pub entropy_slot: u64,
+    pub ancestor_slot_hash: [u8; 32],
+    pub draw_counter: u64,
+    pub draw_bucket: u16,
+    pub chance_numerator: u16,
+    pub chance_denominator: u16,
+    pub locked: bool,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum IatTransferDisposition {
+    Allowed,
+    DayUnfinalized,
+    RejectedDailyLockdown,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -291,6 +315,117 @@ pub fn derive_lockdown_draw(
     Err(LawError::ArithmeticOverflow)
 }
 
+/// Derive the selected Solana-hosted profile's exact bucket mapping.
+///
+/// This function makes no claim that `ancestor_slot_hash` is an unbiased VRF.
+/// It only guarantees deterministic domain separation, rejection sampling, and
+/// exact thresholds for the supplied hash.
+pub fn derive_solana_lockdown_draw(
+    ancestor_slot_hash: [u8; 32],
+    local_day: i64,
+    entropy_slot: u64,
+    solana_genesis_hash: [u8; 32],
+    iat_mint: [u8; 32],
+) -> Result<LockdownDraw, LawError> {
+    let day = DecimalI64::new(local_day);
+    let rejection_tail = two_to_256_mod(DRAW_DENOMINATOR);
+    let chance_numerator = lockdown_chance_numerator(local_day);
+
+    for counter in 0..=u64::MAX {
+        let mut hasher = Sha256::new();
+        hasher.update(SOLANA_DAILY_LAW_ID);
+        hasher.update([0]);
+        hasher.update(solana_genesis_hash);
+        hasher.update([0]);
+        hasher.update(iat_mint);
+        hasher.update([0]);
+        hasher.update(day.as_bytes());
+        hasher.update([0]);
+        hasher.update(entropy_slot.to_be_bytes());
+        hasher.update([0]);
+        hasher.update(ancestor_slot_hash);
+        hasher.update(counter.to_be_bytes());
+        let sample: [u8; 32] = hasher.finalize().into();
+        if sample_is_in_rejection_tail(&sample, rejection_tail) {
+            continue;
+        }
+        let bucket = sample_mod(&sample, DRAW_DENOMINATOR);
+        return Ok(LockdownDraw {
+            counter,
+            bucket,
+            chance_numerator,
+            chance_denominator: DRAW_DENOMINATOR,
+            locked: bucket < chance_numerator,
+        });
+    }
+    Err(LawError::ArithmeticOverflow)
+}
+
+pub fn create_solana_daily_decision(
+    local_day: i64,
+    entropy_slot: u64,
+    ancestor_slot_hash: [u8; 32],
+    solana_genesis_hash: [u8; 32],
+    iat_mint: [u8; 32],
+) -> Result<SolanaDailyDecision, LawError> {
+    let draw = derive_solana_lockdown_draw(
+        ancestor_slot_hash,
+        local_day,
+        entropy_slot,
+        solana_genesis_hash,
+        iat_mint,
+    )?;
+    Ok(SolanaDailyDecision {
+        local_day,
+        entropy_slot,
+        ancestor_slot_hash,
+        draw_counter: draw.counter,
+        draw_bucket: draw.bucket,
+        chance_numerator: draw.chance_numerator,
+        chance_denominator: draw.chance_denominator,
+        locked: draw.locked,
+    })
+}
+
+pub fn validate_solana_daily_decision(
+    decision: SolanaDailyDecision,
+    solana_genesis_hash: [u8; 32],
+    iat_mint: [u8; 32],
+) -> Result<(), LawError> {
+    let expected = create_solana_daily_decision(
+        decision.local_day,
+        decision.entropy_slot,
+        decision.ancestor_slot_hash,
+        solana_genesis_hash,
+        iat_mint,
+    )?;
+    if decision != expected {
+        return Err(LawError::InvalidDecision);
+    }
+    Ok(())
+}
+
+/// Fail-closed IAT ownership-transfer gate for the Solana-hosted profile.
+pub fn iat_transfer_disposition(
+    current_unix_seconds: i64,
+    decision: Option<SolanaDailyDecision>,
+    solana_genesis_hash: [u8; 32],
+    iat_mint: [u8; 32],
+) -> Result<IatTransferDisposition, LawError> {
+    let current_day = protocol_local_day(current_unix_seconds);
+    let Some(decision) = decision else {
+        return Ok(IatTransferDisposition::DayUnfinalized);
+    };
+    validate_solana_daily_decision(decision, solana_genesis_hash, iat_mint)?;
+    if decision.local_day != current_day {
+        return Ok(IatTransferDisposition::DayUnfinalized);
+    }
+    if decision.locked {
+        return Ok(IatTransferDisposition::RejectedDailyLockdown);
+    }
+    Ok(IatTransferDisposition::Allowed)
+}
+
 pub fn create_lockdown_decision(
     local_day: i64,
     randomness_output: [u8; 32],
@@ -373,6 +508,8 @@ mod tests {
     };
     const FRIDAY_LOCAL_DAY: i64 = 20_672;
     const SATURDAY_LOCAL_DAY: i64 = 20_673;
+    const SOLANA_GENESIS_HASH: [u8; 32] = [0x11; 32];
+    const IAT_MINT: [u8; 32] = [0x22; 32];
 
     #[test]
     fn schedule_matches_the_public_javascript_vectors() {
@@ -519,5 +656,82 @@ mod tests {
         assert!(outcome.bucket < DRAW_DENOMINATOR);
         assert_eq!(floor_div(-1, SECONDS_PER_DAY), -1);
         assert_eq!(floor_mod(-1, 7), 6);
+    }
+
+    #[test]
+    fn solana_profile_decision_is_domain_separated_and_reproducible() {
+        let decision = create_solana_daily_decision(
+            FRIDAY_LOCAL_DAY,
+            42_424_242,
+            [0x33; 32],
+            SOLANA_GENESIS_HASH,
+            IAT_MINT,
+        )
+        .unwrap();
+        assert_eq!(decision.chance_numerator, FRIDAY_LOCKDOWN_NUMERATOR);
+        assert_eq!(decision.chance_denominator, DRAW_DENOMINATOR);
+        assert!(decision.draw_bucket < DRAW_DENOMINATOR);
+        assert_eq!(
+            validate_solana_daily_decision(decision, SOLANA_GENESIS_HASH, IAT_MINT),
+            Ok(())
+        );
+        assert_eq!(
+            validate_solana_daily_decision(decision, [0x44; 32], IAT_MINT),
+            Err(LawError::InvalidDecision)
+        );
+    }
+
+    #[test]
+    fn solana_profile_transfer_gate_fails_closed_for_missing_or_stale_day() {
+        let friday_midnight_utc = 1_786_050_000;
+        assert_eq!(
+            iat_transfer_disposition(friday_midnight_utc, None, SOLANA_GENESIS_HASH, IAT_MINT,),
+            Ok(IatTransferDisposition::DayUnfinalized)
+        );
+
+        let stale = create_solana_daily_decision(
+            FRIDAY_LOCAL_DAY - 1,
+            42_424_000,
+            [0x55; 32],
+            SOLANA_GENESIS_HASH,
+            IAT_MINT,
+        )
+        .unwrap();
+        assert_eq!(
+            iat_transfer_disposition(
+                friday_midnight_utc,
+                Some(stale),
+                SOLANA_GENESIS_HASH,
+                IAT_MINT,
+            ),
+            Ok(IatTransferDisposition::DayUnfinalized)
+        );
+    }
+
+    #[test]
+    fn solana_profile_transfer_gate_matches_the_recorded_result() {
+        let friday_midnight_utc = 1_786_050_000;
+        let decision = create_solana_daily_decision(
+            FRIDAY_LOCAL_DAY,
+            42_424_242,
+            [0x33; 32],
+            SOLANA_GENESIS_HASH,
+            IAT_MINT,
+        )
+        .unwrap();
+        let expected = if decision.locked {
+            IatTransferDisposition::RejectedDailyLockdown
+        } else {
+            IatTransferDisposition::Allowed
+        };
+        assert_eq!(
+            iat_transfer_disposition(
+                friday_midnight_utc,
+                Some(decision),
+                SOLANA_GENESIS_HASH,
+                IAT_MINT,
+            ),
+            Ok(expected)
+        );
     }
 }

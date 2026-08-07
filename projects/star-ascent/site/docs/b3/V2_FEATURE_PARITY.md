@@ -10,6 +10,7 @@ to remove behavior.
 | --- | --- | --- |
 | Fixed 1B IAT supply, 9 decimals | Keep; rewrite as native asset | Genesis supply invariant and replay tests |
 | Original SPL representation | Keep during migration; define final relationship explicitly | Supply/custody proof |
+| Confidential IAT transfers | New; Token-2022 encrypted amounts and confidential balances, no global auditor by default | Exact-version Devnet hook/proof tests, key recovery, privacy-boundary review |
 | Five allocation lanes | Keep exact amounts | Canonical vector parity |
 | Community hardware custody boundary | Keep until migration model replaces it explicitly | Custody review |
 | Treasury/ecosystem/core/liquidity vesting | Keep exact cliffs and linear schedules | Boundary vectors |
@@ -53,7 +54,7 @@ to remove behavior.
 | Reproducible SBF and source binding | Keep for V2; add reproducible B3 node/runtime builds | Independent reproduction |
 | Public audit/evidence chain | Keep and extend | Manifest replay |
 | Launch HOLD and ceremony gates | Keep until superseded by stricter B3 gates | Fail-closed regressions |
-| Daily Lockdown Law | New immutable B3 base-protocol requirement: exact 1% normal-day draw, exact 66.67% Friday draw, first-block-after-00:00 proof, height-derived 24-hour nominal window, no oracle or bypass | Multi-validator proof, boundary, consecutive-day, replay, withholding, and external-reproduction tests |
+| Daily Lockdown Law | New immutable IAT ownership-transfer law: exact 1%/66.67% bucket thresholds, first successful permissionless finalization after 00:00, lagged Solana slot-hash input, fail closed until finalized, no external oracle or privileged bypass. Chainwide scope, first-block decision, unbiased threshold VRF, and independent clock are explicitly relaxed. | Public/confidential hook invocation, boundary, absent-day, consecutive-day, rollback, replay, malicious-finalizer, timing-influence, and external-reproduction tests |
 
 ## Change control
 

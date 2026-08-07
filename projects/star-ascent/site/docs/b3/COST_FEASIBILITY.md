@@ -97,13 +97,28 @@ No V2 safety check, arithmetic invariant, inactive DLC boundary, randomness
 guard, evidence hook, or user feature will be removed to force one of these
 numbers.
 
-### Sovereign B3 protocol
+### Selected Solana-hosted B3 profile
 
-The immutable Daily Lockdown Law requires a sovereign validator
-protocol. Solana
-ProgramData rent then ceases to be the B3 deployment-cost model. B3 must instead
-budget validator infrastructure, RPC, indexing, monitoring, audits, Genesis,
-and migration. A `1.5 SOL` figure is not a meaningful sovereign-network budget.
+The owner selected an immutable IAT transfer law on Solana and explicitly
+relaxed chainwide scope, first-block execution, threshold-VRF randomness, and
+independent-clock guarantees. B3 therefore needs no validator investment.
+
+Incremental B3 project cost consists of the small IAT Daily Law hook, day-record
+state, Token-2022 mint configuration, RPC/indexing, confidential-wallet support,
+migration, monitoring, and audits. Solana's deployed Token-2022 and native ZK
+proof program provide the confidential-transfer cryptography.
+
+User cost is separate from project deployment cost. Current Solana guidance
+places the confidential-account extension at roughly `0.0015 SOL` of extra rent
+reserve. The canonical current three-transaction transfer example has six
+signatures, an illustrative base-fee floor of `0.000030 SOL` before optional
+priority fees, plus another transaction when the recipient applies a pending
+balance. Temporary proof-context rent is reclaimed on correct closure. These
+figures require Devnet measurement and are not production quotes.
+
+The former sovereign profile remains the only design that can make the law a
+chainwide Solana-independent consensus rule. Its validator and network budget
+is intentionally not part of the selected low-cost profile.
 
 ## 6. Safe optimization work that remains allowed
 

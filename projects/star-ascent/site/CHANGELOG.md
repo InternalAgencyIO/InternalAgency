@@ -6,6 +6,10 @@ All timestamps and chain-specific facts require independent verification at Gene
 
 ### Added
 
+- B3's selected Solana-hosted confidential-transfer architecture: a Token-2022
+  IAT mint, native encrypted amounts and balances, an immutable Daily Law hook,
+  permissionless slot-hash day finalization, user-cost model, and explicit list
+  of guarantees relaxed to avoid a sovereign validator network.
 - Scorpion Generation editorial visual system: hot-red signal palette, moving atmosphere, responsive story panels, and Genesis-stage artwork.
 - An in-page Genesis Activation Terminal with Activation, Claim Status, and Broadcast views.
 - Canonical Dossier route and direct public document links in English and Turkish.

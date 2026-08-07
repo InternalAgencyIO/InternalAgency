@@ -1,322 +1,308 @@
 # Internal Agency B3 protocol white paper
 
-Draft 0.3 — daily-lockdown architecture edition
+Draft 0.4 — Solana-hosted confidential-transfer architecture
 
-No token launch, investment return, deployment, bridge, or network-activation
+No token launch, investment return, deployment, migration, or network-activation
 claim is made by this draft.
 
 ## Abstract
 
-Internal Agency B3 is a proposed sovereign protocol that preserves the full
-IAT V2 economic and public-system contract while adding an immutable Daily
-Lockdown Law. The first block reaching nominal 00:00 under fixed UTC+03:00
-commits a proof-verifiable daily decision. Every non-Friday day has an exact 1%
-lockdown chance; Friday is the only exception, at exactly 66.67%. If selected,
-user state transitions remain invalid for one nominal 24-hour height interval.
-Consensus, syncing, balances, history, proofs, explorers, and other read-only
-node operations continue.
+Internal Agency B3 is a proposed Solana-hosted evolution of the complete IAT V2
+system. It preserves V2 behavior unless explicitly cut, migrates IAT to a fixed-
+supply Token-2022 mint, adds native confidential amounts and balances, and
+enforces an immutable Daily Law on ordinary and confidential IAT ownership
+transfers through a Transfer Hook.
 
-B3 is not merely a new Solana smart contract. A Solana program cannot impose a
-chain-wide rule on native transfers, unrelated token transfers, or validator
-consensus. B3 therefore separates the existing V2/Solana system, which is the
-behavioral and migration reference, from a sovereign validator-executed B3
-state machine.
+Every fixed UTC+03:00 day has one permissionlessly finalized result. The bucket
+mapping is exactly 1% on non-Friday days and 66.67% on Friday for a uniform
+input. A lagged Solana ancestor slot hash supplies the low-cost public entropy.
+Transfers fail closed until the day is finalized. If selected, IAT ownership
+transfers remain invalid through that local day; Solana consensus, unrelated
+assets, read-only access, and protocol housekeeping continue.
+
+B3 does not operate validators. This cost decision explicitly relaxes the
+former chainwide, first-block, threshold-VRF, and independent-clock design. The
+slot hash is publicly reproducible but is not a bias-resistant threshold VRF,
+so B3 does not claim that the realized outcome has an unconditional exact
+probability. The precise privacy and relaxation boundaries are normative in
+[`SHIELDED_TRANSFERS.md`](SHIELDED_TRANSFERS.md).
 
 ## 1. Design principles
 
-1. **Protocol before operator.** No administrator can bypass consensus.
-2. **Solvency before growth.** Rewards are fully reserved before acceptance.
-3. **One result, no reroll.** Exact-uniform decisions bind one public
-   randomness event to one canonical candidate set.
-4. **Feature continuity.** V2 features remain unless explicitly cut.
-5. **Fail closed.** Inactive or unreviewed features are unreachable.
-6. **Evidence is part of the system.** Source, binaries, state, migration, and
-   public claims must be independently reproducible.
-7. **Reliability before cost.** A cost target cannot weaken protocol behavior.
-8. **Time without an oracle.** Lockdown boundaries derive from height and
-   immutable Genesis constants, accepting wall-clock drift rather than trusting
-   a mutable external time source.
+1. **Protocol before operator.** No administrator can override a recorded day
+   or bypass the hook for an IAT ownership transfer.
+2. **Privacy without invented claims.** B3 hides confidential amounts and
+   balances, not addresses, timing, counterparties, or the public graph.
+3. **Solvency before growth.** Rewards are fully reserved before acceptance.
+4. **One result, no reroll.** A finalized daily result and an accepted V2
+   randomness result cannot be replaced.
+5. **Feature continuity.** V2 features remain unless explicitly cut.
+6. **Fail closed.** An absent day record, inactive feature, or unreviewed path
+   cannot silently become permissive.
+7. **Evidence is part of the system.** Source, binaries, mint configuration,
+   state, migration, and public claims must be reproducible.
+8. **Reliability before cost.** Cost reduction cannot be hidden as equivalence.
 
-## 2. The Daily Lockdown Law
+## 2. Native confidential IAT
 
-### 2.1 Immutable schedule
+### 2.1 Token architecture
 
-The public label is fixed UTC+03:00. Every local day has one decision. A
-selected lockdown begins in that decision block and spans one 24-hour nominal
-height interval.
+B3 uses a new Token-2022 mint with:
 
-The validity rule does not read a clock. Genesis permanently commits the
-network identity, Genesis height, nominal Genesis Unix second, and nominal
-seconds per block. For protocol height `H`:
+- fixed supply of 1,000,000,000 IAT and nine decimals;
+- Confidential Transfer enabled;
+- an IAT Daily Law Transfer Hook configured at mint creation;
+- no post-migration mint or freeze authority;
+- no global auditor key by default;
+- hook-update and IAT-program upgrade authorities revoked only after the final
+  audited binary and migration are independently verified.
+
+Solana's ZK ElGamal Proof program verifies confidential transfers. Wallets
+derive account-specific ElGamal and AES keys and generate equality, ciphertext-
+validity, and range proofs locally. Validators learn that the transfer is valid
+without learning its plaintext amount.
+
+### 2.2 Privacy boundary
+
+Encrypted:
+
+- confidential transfer amount;
+- confidential available balance;
+- confidential pending balance.
+
+Public:
+
+- sender and recipient accounts and owners;
+- mint, program, instruction type, timing, slot, signature, and SOL fees;
+- transaction and counterparty graph;
+- public IAT balances and ordinary transfers;
+- cleartext public-to-confidential deposits and confidential-to-public
+  withdrawals;
+- proof-context lifecycle.
+
+This is confidentiality, not anonymity or an unlinkable mixer. Selective user
+disclosure is supported through view keys. A global auditor key is excluded
+from the baseline because it would create a single secret capable of decrypting
+all confidential transfer amounts.
+
+### 2.3 User cost
+
+Users pay Solana fees in SOL unless B3 sponsors them. No additional IAT privacy
+fee is selected. Current Solana guidance indicates roughly `0.0015 SOL` of
+extra rent reserve for the confidential account extension. Current confidential
+transfers span several dependent proof and transfer transactions; the canonical
+three-transaction Rust example carries six signatures, giving an illustrative
+base-fee floor of about `0.000030 SOL` before optional priority fees. Temporary
+proof-context rent is reclaimed when those accounts close. Receiving users pay
+another transaction fee when applying pending balances.
+
+These are current-example figures, not a production quote. Devnet benchmarking
+must publish the real setup, finalization, transfer, apply, failure, priority-
+fee, and recovery costs before launch.
+
+## 3. The IAT Daily Law
+
+### 3.1 Schedule and scope
+
+The public timezone label is a fixed UTC+03:00 offset. The IAT hook reads
+Solana's consensus-provided `Clock` sysvar, adds exactly 10,800 seconds, and
+derives the local day and weekday without NTP, an API, or a timezone database.
+
+Every IAT ownership transfer, ordinary or confidential, invokes the hook and
+must provide the current day's record. An absent record rejects with
+`DAY_UNFINALIZED`. A selected record rejects with `DAILY_LOCKDOWN`. An open
+record allows Token-2022 to complete the transfer.
+
+Consequently no IAT ownership transfer can slip through after the day boundary
+because finalization is late. An open day may experience additional fail-closed
+downtime until finalization. The law does not stop SOL, unrelated tokens,
+unrelated programs, Solana voting, block production, proof setup, or read-only
+queries.
+
+### 3.2 Permissionless decision
+
+Solana programs do not run automatically at midnight. Any caller may submit a
+separate successful `finalize_day` instruction after 00:00. It reads a canonical
+lagged ancestor from the recent SlotHashes sysvar, domain-separates the hash by
+law identifier, Solana genesis identity, mint, local-day number, and entropy
+slot, then runs SHA-256 counter expansion and rejection sampling into 10,000
+exact-uniform buckets.
 
 ```text
-nominal_time(H) = genesis_nominal_time
-                + (H - genesis_height) * nominal_block_seconds
+non-Friday: buckets 0..99 lock; 100..9999 open
+Friday:     buckets 0..6666 lock; 6667..9999 open
 ```
 
-The decision height is the first block whose derived nominal time is at or
-after local 00:00. If selected, that same block is the opening height. The
-closing height is the first height reaching the next local 00:00, and is
-excluded from the ending interval. Real block production may run early or
-late, so the civil-time appearance can drift. The locked-height count is fixed
-to approximate 24 real hours at the intended block rate. NTP, local clocks,
-timezone databases, APIs, and other time oracles are never consensus inputs.
+The threshold mapping is exactly `100/10000` and `6667/10000` for a uniform
+input. Rejection sampling removes modulo bias. Once stored, the record cannot be
+overwritten, rerolled, or administratively changed.
 
-### 2.2 Exact-probability decision
+Finalization must be separate from a transfer that will be rejected. Solana
+rolls back all earlier writes if a later instruction fails, which would
+otherwise erase a selected result. Official clients finalize first and submit a
+transfer plan only when the persistent record is open.
 
-Every local day is independently selected. The exact probabilities are:
+### 3.3 Randomness limitation
 
-```text
-NORMAL_DAY_LOCKDOWN_CHANCE = 100 / 10000 = 1%
-FRIDAY_LOCKDOWN_CHANCE = 6667 / 10000 = 66.67%
-```
+A Solana ancestor slot hash is inexpensive, public, and replayable, but it is
+not a consensus-native threshold VRF dedicated to B3. Leaders and transaction
+schedulers may have limited influence, and a prospective caller may choose when
+to submit finalization. Permissionless competition and a fixed lag reduce but do
+not remove that influence.
 
-Friday is the only exception to the normal-day probability. The decision
-block's header commits the unique output and cryptographic proof of the
-consensus-native threshold VRF or equivalent bias-resistant random beacon.
-Every validator verifies the proof and derives the result before executing the
-block body. If selected, a decision block containing a user state-changing
-transaction is invalid.
+Accordingly the protocol may claim exact bucket thresholds, not perfectly
+unbiased entropy or an unconditional exact realized probability. Recovering
+those stronger claims requires validator-level protocol control or an external
+randomness network; neither is selected.
 
-The output is hashed with the immutable law identifier, network identity,
-local-day number, and a counter. Rejection sampling maps it without modulo bias
-into one of 10,000 exact-uniform buckets. On non-Friday days, buckets `0..99`
-select a lockdown. On Friday, buckets `0..6666` select it. All other buckets
-leave that day open. Counter expansion derives from the same proven output and
-is not another roll.
+### 3.4 Selected-day behavior
 
-The decision record, beacon output, proof, accepted counter, bucket, and result
-are committed to the decision block. An outside verifier can reproduce the
-result from public chain data. A forged, missing, or inconsistent record makes
-the block invalid. Randomness withholding may halt progress only within the
-published liveness assumptions of the selected consensus engine; it cannot
-force an open result or reroll a selected lockdown. Consecutive daily
-selections are valid: the closing height of one day is the independently
-decided opening height of the next, so no unlocked block is inserted.
+During a selected day:
 
-### 2.3 What continues during a selected lockdown
+- ordinary and confidential IAT ownership transfers fail;
+- all V2 application mutations guarded by the shared Daily Law fail;
+- no privileged IAT transfer bypass exists;
+- public balances, ciphertexts, proofs, history, explorer pages, RPC reads, and
+  subscriptions remain available;
+- Solana and unrelated assets continue normally.
 
-- validator consensus messages and finality;
-- production of valid empty or protocol-housekeeping blocks;
-- peer synchronization and archival ingestion;
-- RPC queries and cryptographic state proofs;
-- balances, transaction history, explorer, and public documents;
-- transaction construction and simulation clearly labeled as non-acceptance.
+Token-2022 public/confidential balance conversion and proof bookkeeping are not
+ownership transfers and are not automatically Transfer Hook calls. They must
+not be described as chainwide or all-state lockdown enforcement.
 
-### 2.4 What stops during a selected lockdown
+### 3.5 Immutability
 
-- IAT transfers;
-- fee-bearing user calls;
-- position opening, settlement, withdrawal, or claim execution;
-- allocation and vesting withdrawals;
-- registry, eligibility, identity, or agency state transitions;
-- contract or runtime calls submitted as user transactions;
-- governance or administrator transactions.
+The law constants, fixed timezone offset, day derivation, slot-selection rule,
+domain separation, rejection sampler, thresholds, record schema, and transfer
+gate have no administrator parameter or result-override instruction. The IAT
+program becomes immutable by revoking its loader authority, and the mint's hook-
+update authority is removed after audit.
 
-Rejected transactions do not pay fees, consume nonces, enter blocks, or queue
-silently across the lock. The closing-height block may accept user transactions
-only if that new day's independent decision is open.
+B3 nevertheless inherits Solana runtime, Token-2022, Clock, SlotHashes, validator
+behavior, upgrades, and social forks. "Immutable" therefore means immutable in
+the deployed IAT program and mint configuration, not control over the host chain.
 
-### 2.5 Immutability
-
-The law identifier, probability, schedule derivation, boundary constants,
-randomness proof verifier, domain separation, bucket mapping, and enforcement
-path have no administrator key, governance parameter, emergency exception,
-runtime flag, oracle, or application override.
-
-Changing any part requires incompatible software and a different public
-network identity. People can create a social hard fork, but the existing B3
-network cannot accept a violating block under its immutable chain law.
-
-### 2.6 Purpose and claim boundary
-
-The first purpose is to create a recurring opportunity for operators to unplug
-from digital systems, including Internal Agency. The second is to prevent
-continuous on-network transfer and settlement service, intentionally making
-the protocol incompatible with always-on centralized custody expectations.
-
-The network cannot control a bank's or exchange's private database. A third
-party could maintain an off-chain internal ledger or suspend deposits and
-withdrawals. The precise protocol claim is therefore that on-network execution
-is impossible during a selected lockdown—not that third parties are physically
-or legally incapable of listing IAT.
-
-Vesting and accrual heights continue while execution is locked. Entitlements
-that mature during a selected day become executable after reopening; they are
-not lost.
-
-## 3. Native IAT economics
+## 4. V2 economics
 
 B3 preserves the V2 token contract:
 
 - fixed supply: 1,000,000,000 IAT;
 - decimals: 9;
-- no post-Genesis mint or freeze authority;
 - 500,000,000 IAT community;
 - 200,000,000 IAT treasury;
 - 150,000,000 IAT ecosystem;
 - 100,000,000 IAT core team;
 - 50,000,000 IAT liquidity.
 
-Treasury, ecosystem, and liquidity are the reward sources in that exact order.
+Treasury, ecosystem, and liquidity remain reward sources in that exact order.
 Core-team principal is not a reward source. Vesting preserves V2 Genesis
 unlocks, cliffs, and weekly linear schedules.
 
-## 4. Positions and rewards
+## 5. Positions and rewards
 
-User positions last 52 weeks. The core reward lasts 104 weeks. Rates are
-expressed in basis points over 52 weekly periods:
+User positions last 52 weeks. The core reward lasts 104 weeks. Rates remain:
 
-- core team: 1,700 bps;
-- standard: 1,000 bps;
-- CCC Agent: 2,800 bps;
-- CCC Associate: 2,000 bps.
+- core team: 1,700 basis points;
+- standard: 1,000 basis points;
+- CCC Agent: 2,800 basis points;
+- CCC Associate: 2,000 basis points.
 
-There is no automatic compounding. Before a position is accepted, B3 reserves
-the maximum complete reward obligation from unlocked, unreserved treasury,
-then ecosystem, then liquidity capacity. If any base unit remains unfunded,
-the position is rejected atomically. The protocol records no reward debt.
+There is no automatic compounding. Before accepting a position B3 reserves the
+maximum complete reward obligation from unlocked, unreserved treasury, then
+ecosystem, then liquidity capacity. An incompletely funded position is rejected
+atomically, and the protocol records no reward debt. Previously accepted
+reservations retain priority.
 
-Previously accepted reservations have priority. Principal return, settlement,
-and residual release preserve the V2 lifecycle and arithmetic.
+## 6. Agencies, eligibility, CCC, and tiebreaks
 
-## 5. Agencies, eligibility, and CCC
+The agency registry remains append-only, owner-deduplicated, and commitment-
+tracked. CCC Agent and Associate behavior stays in scope but remains fail closed
+until its existing activation requirements are satisfied.
 
-The agency registry is append-only. Owner indexing prevents repeated
-registration by the same wallet from weighting a draw. Every registry append
-updates a rolling commitment. A decision snapshots the complete candidate
-count and registry commitment.
+Application tiebreaks preserve one public randomness event, canonical candidate
+commitment, domain separation, exact-uniform rejection sampling, no operator
+reroll, and the terminal 86,400-second neutral-expiry path. The final reviewed
+transport remains an open implementation decision and is distinct from the
+Daily Law's slot-hash input.
 
-CCC Agent and CCC Associate behavior remains part of B3 scope but retains the
-V2 fail-closed Genesis status until separate activation requirements, evidence,
-security review, and economic review are complete. Preservation does not imply
-activation.
+## 7. Migration
 
-## 6. Universal one-roll resolution
+The original V2 mint cannot be assumed to acquire Token-2022 extensions. B3
+therefore requires a new mint and a published finalized V2 snapshot. Independent
+exporters reconcile supply, balances, allocations, positions, reservations,
+vesting, registries, eligibility commitments, and terminal rounds.
 
-For every protocol decision with two or more exactly equal candidates:
+Burn-and-mint, lock-and-mint, and a one-time snapshot have different custody and
+rollback risks. No model is selected silently. Activation requires an explicit
+owner decision, public rehearsal, canonical manifest and Merkle root, exact
+supply reconciliation, and independent verification.
 
-1. canonically order and commit the complete candidate set;
-2. bind one public randomness event to the decision and commitment;
-3. derive domain-separated 256-bit samples with a counter;
-4. reject only samples in the modulo-bias tail;
-5. accept the first exact-uniform index;
-6. publish the commitment, randomness, counter, winner, and settlement proof.
+## 8. Public-system continuity
 
-The counter expands one randomness event; it is not another roll. A valid
-result cannot be replaced or rerolled. A reveal unavailable for 86,400 seconds
-enters the terminal V2 neutral-expiry path rather than requesting a replacement
-value. The application-level transport for these V2 tiebreaks is not selected
-in this draft; it must meet or exceed the V2 bias, liveness, withholding, and
-replay guarantees. It is distinct from the immutable consensus-native beacon
-required by the Daily Lockdown Law.
+The website, English and Turkish domains, 50-locale route system, explorer,
+tokenomics, inactive previews, admin inspection mode, hardware-signing boundary,
+source-bound audits, CI, and release evidence remain part of B3. Read-only
+surfaces remain available during selected days. Unreviewed localization and
+inactive future features remain fail closed.
 
-## 7. State and execution architecture
+## 9. Security and legal boundaries
 
-B3 separates consensus validity from application modules. `ConsensusGuard`
-verifies the daily decision and enforces a selected day before the
-runtime. Runtime modules implement the native asset,
-allocations, vesting, reward capacity, positions, agencies, eligibility,
-randomness, migrations, and event commitments.
+B3 assumes adversaries may control wallets, RPC endpoints, indexers, transaction
+ordering, finalization timing, identity accounts, and confidential-transfer
+clients. Required evidence includes:
 
-Public RPC and indexers are read-only consumers. The website and explorer do
-not decide protocol state. Identity-provider and D1 services can establish
-reviewed eligibility facts, but cannot bypass consensus or mint supply.
+- ordinary and confidential transfer-hook invocation tests against the exact
+  deployed Token-2022 version;
+- day-boundary, missing-record, selected, open, consecutive-day, skipped-slot,
+  delayed-finalization, rollback, replay, and malicious-finalizer tests;
+- cross-language bucket and domain-separation vectors;
+- sound key derivation, recovery, pending-balance, and selective-disclosure UX;
+- supply, allocation, reservation, settlement, and migration reconciliation;
+- reproducible programs and independent security review.
 
-## 8. Security model
+Privacy technology does not remove sanctions, AML, money-transmission, tax,
+consumer-protection, or jurisdictional obligations. A hosted interface requires
+specialized review before public activation. B3 must describe actual technical
+privacy and must not market anonymity it does not provide.
 
-B3 assumes adversaries may control users, RPC endpoints, indexers, block
-proposers, a minority of validators, identity accounts, and transaction order.
-Security requirements include:
+## 10. Cost feasibility
 
-- deterministic block replay;
-- Byzantine-finality assumptions stated for the selected consensus engine;
-- height-derived schedule replay from immutable Genesis constants;
-- decision-block proof verification and exact normal-day `100/10000` and
-  Friday `6667/10000` draw reproduction;
-- selected-day enforcement at admission, proposal, validation, and replay;
-- overflow-safe fixed-point arithmetic;
-- supply and reservation reconciliation;
-- no-reroll randomness and terminal liveness;
-- replay-resistant migration proofs;
-- no privileged Daily Lockdown bypass;
-- reproducible node and runtime builds;
-- independent source, economic, and migration review.
+The selected profile removes sovereign validator, consensus, and independent-
+RPC network investment. Project costs are Solana program deployment, mint and
+state rent, RPC/indexing, wallet integration, migration, monitoring, and audits.
+User costs are confidential-account rent reserve, Solana transaction fees, and
+local proof computation.
 
-No claim of decentralization or Byzantine threshold is made until the
-validator and consensus model is selected and measured.
+The existing V2 monolith does not meet a 1.5 SOL peak deployment target without
+major restructuring. B3 will not delete V2 behavior or security checks merely
+to force that number. The smaller Daily Law hook and reuse of native Token-2022
+cryptography minimize incremental B3 bytecode, but the complete aggregate cost
+must be measured rather than inferred.
 
-## 9. Governance and upgrades
+## 11. Roadmap
 
-The Daily Lockdown Law is outside mutable governance. Other B3
-components may have a reviewed upgrade process, but an upgrade cannot produce
-a valid block that changes its schedule, probability, draw, proof verifier, or
-enforcement on the existing protocol version. Any alteration is an
-incompatible hard fork and must use a new protocol version and public network
-identity.
+1. pin exact Token-2022 and ZK proof program versions;
+2. prototype confidential and ordinary hook invocation on Devnet;
+3. implement permissionless day finalization and fail-closed transfer vectors;
+4. measure entropy access, account rent, transaction count, proof time, and fees;
+5. port V2 economic modules with differential tests;
+6. build confidential-wallet key recovery, pending-balance, and error UX;
+7. implement and rehearse the selected migration model;
+8. obtain independent Solana, cryptographic, economic, migration, and legal
+   review;
+9. publish reproducible binaries, mint configuration, test vectors, and evidence;
+10. revoke authorities only after all release gates pass.
 
-The exact governance, validator admission, slashing, and non-lockdown upgrade
-model remain open design decisions.
+## 12. Open decisions
 
-## 10. V2 migration
+- fixed ancestor-slot lag and skipped-slot selection rule;
+- exact deployed Token-2022 and ZK proof program identities;
+- user-paid versus sponsored Solana fees;
+- V2-to-B3 migration custody model;
+- confidential-wallet support and recovery policy;
+- selective disclosure and whether any future auditor-key proposal is acceptable;
+- application-level randomness transport for preserved V2 tiebreaks;
+- legal, tax, and jurisdictional review.
 
-B3 begins from a published finalized V2 snapshot. Independent exporters
-reconcile supply, balances, allocations, positions, reservations, vesting,
-registries, eligibility commitments, and terminal rounds. A canonical manifest
-and Merkle root bind the imported state.
-
-Burn-and-mint, lock-and-mint, and one-time snapshot models have different
-custody and rollback risks. This draft does not select one. B3 activation
-requires a public rehearsal, supply reconciliation, independent verification,
-and explicit migration decision.
-
-## 11. Public system continuity
-
-The Internal Agency website, English and Turkish domains, 50-locale route
-system, explorer, tokenomics, inactive future previews, admin inspection mode,
-hardware-signing boundary, source-bound audits, CI, and release evidence remain
-part of B3. Read-only surfaces are specifically expected to stay operational
-during selected lockdowns.
-
-Unreviewed localization remains fail-closed. Inactive future features remain
-inactive. A public preview is not protocol activation.
-
-## 12. Cost and feasibility
-
-The recorded V2 loader-v3 peak is `8.31841104 SOL` before fees. A safe unchanged
-size-optimized build measures `524,672` bytes, approximately `7.30692816 SOL`
-peak and `3.65406264 SOL` permanent rent under the current model.
-
-Therefore 3 SOL peak and 1.5 SOL peak are not achieved. B3 will not delete
-features or guards to force those values. Moreover, a sovereign B3 network has
-a different cost model: validator, RPC, indexer, monitoring, audit, migration,
-and ongoing operations replace Solana ProgramData rent as the dominant budget.
-
-## 13. Roadmap
-
-1. lock the V2 feature-parity and Daily Lockdown specifications;
-2. benchmark mature consensus frameworks;
-3. implement multi-validator decision-proof, randomness-withholding, boundary,
-   and restart tests;
-4. port native IAT supply and V2 economic invariants;
-5. add positions, vesting, and reservations with differential tests;
-6. preserve inactive CCC and future-feature boundaries;
-7. select and audit B3 randomness;
-8. build snapshot and migration proofs;
-9. integrate read-only website and explorer paths;
-10. complete public testnet, independent audits, and migration rehearsal.
-
-## 14. Unresolved decisions
-
-- validator and consensus framework;
-- validator admission and Byzantine threshold;
-- fee market outside selected lockdowns;
-- concrete threshold-VRF or equivalent beacon suite and validator parameters;
-- bridge or snapshot custody model;
-- upgrade process outside the immutable rule;
-- final Solana/B3 asset relationship;
-- legal, tax, and jurisdictional review;
-- validator and infrastructure budget.
-
-Until these are resolved and independently reviewed, B3 remains an
-architecture proposal, not a live protocol.
+Until these are resolved, prototyped, measured, and independently reviewed, B3
+remains an architecture proposal rather than a live confidential asset.
