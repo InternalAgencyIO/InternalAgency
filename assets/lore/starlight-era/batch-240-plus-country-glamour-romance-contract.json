@@ -16,8 +16,8 @@
     "identityMap": {
       "Radiance": "luminous blonde adult lead seated at center",
       "Alia": "Black adult woman at left with the same anchored face and a new high sculptural braided ponytail, plus a few fine face-framing braids",
-      "AI ECE": "brunette adult strategist leaning over Radiance and the mission card",
-      "Ellie": "dark-haired adult rival at right holding the lantern beacon"
+      "AI ECE": "brunette adult strategist carrying the rainbow-finish mission sidearm",
+      "Ellie": "dark-haired adult rival at right"
     },
     "rule": "Preserve these four distinct adult faces, facial proportions, skin tones, and eye relationships. Alia alone receives the new braided signature hairstyle while her face remains unchanged. Do not clone, merge, age-shift, or substitute faces.",
     "aliaHairLock": "High sculptural braided ponytail with clean braided roots and two or three fine face-framing braids. Country color may appear only as a narrow woven accent or small metal cuff. Keep her hair unmistakably braided in every image."
@@ -44,7 +44,7 @@
     "referenceDirection": "Use scene 989's close spacing, waist embrace, linked hands, shoulder touch, opposing face directions, and visible relationship split as the minimum baseline. Future scenes should add more overlapping affection, clearer eye-line conflict, and less symmetry.",
     "rule": "The four-way love triangle-square must be readable before the mission prop.",
     "minimumSignals": 3,
-    "minimumVisibleTouches": 2,
+    "minimumVisibleTouches": 3,
     "compoundAffectionTarget": "At least one image per four-scene batch must show a simultaneous three-person affection beat: one woman held in a full face-to-face or behind embrace while she gives another woman a quick cheek peck, forehead kiss, blown kiss at close range, or linked-hand invitation. The fourth woman supplies the rival emotional counter-beat.",
     "signals": [
       "one cheek kiss or blown kiss",
@@ -99,6 +99,78 @@
       "normalCountryLookPercent": 25
     },
     "rule": "Future images only. Make ECE's rainbow hosiery visibly colorful but vary the treatment every time: crisp stripes, soft ombre transitions, prismatic fades, two-to-four-color gradients, broken-spectrum blocks, diagonal color sweeps, painterly transitions, reflective color shifts, or asymmetric rainbow placement. Keep enough contrast to read as rainbow-inspired without requiring all seven colors in every look. Avoid repeating the same pattern in consecutive images. Keep hosiery opaque enough for public-safe editorial use and preserve complete heels or boots."
+  },
+  "eceMissionProp": {
+    "requiredEveryImage": true,
+    "design": "Photorealistic full-size Desert Eagle-style mission sidearm with a vivid polished rainbow-gradient metal finish and realistic proportions, controls, grip, and reflections.",
+    "handling": "ECE actively poses with it in one hand: raised beside her face, angled upward, extended toward open sky, or directed toward clearly empty background space. The muzzle never crosses a person or the camera. Trigger finger stays straight along the frame outside the trigger guard.",
+    "prohibitions": "No passive low-side carry, holster, display case, transparent enclosure, toy-like proportions, aiming at a person or camera, firing, muzzle flash, ammunition, threat, injury, combat, or contact with another character.",
+    "routeInterface": "Route information appears as a separate floating holographic map controlled by ECE's free hand."
+  },
+  "emotionRolls": {
+    "scope": "Roll independently for Radiance, Ellie, Alia, and AI ECE in every image using a stored deterministic integer from 0 through 99. Do not give all four characters the same emotion unless their independent rolls match.",
+    "performance": "Make each result readable in eyes, brows, mouth, breathing, tears where applicable, posture, touch pressure, and attention direction while preserving facial identity and attractive natural anatomy.",
+    "distribution": [
+      { "range": "0-7", "percent": 8, "emotion": "tender affection" },
+      { "range": "8-14", "percent": 7, "emotion": "romantic joy" },
+      { "range": "15-18", "percent": 4, "emotion": "extreme happiness, radiant laughing delight" },
+      { "range": "19-23", "percent": 5, "emotion": "playful mischief" },
+      { "range": "24-26", "percent": 3, "emotion": "calm contentment" },
+      { "range": "27-30", "percent": 4, "emotion": "hope" },
+      { "range": "31-34", "percent": 4, "emotion": "overwhelming relief" },
+      { "range": "35-39", "percent": 5, "emotion": "magnetic confidence" },
+      { "range": "40-43", "percent": 4, "emotion": "determination" },
+      { "range": "44-47", "percent": 4, "emotion": "awe" },
+      { "range": "48-50", "percent": 3, "emotion": "startled surprise" },
+      { "range": "51-53", "percent": 3, "emotion": "intense curiosity" },
+      { "range": "54-59", "percent": 6, "emotion": "aching romantic longing" },
+      { "range": "60-65", "percent": 6, "emotion": "visible jealousy" },
+      { "range": "66-68", "percent": 3, "emotion": "possessive tension" },
+      { "range": "69-71", "percent": 3, "emotion": "suspicion" },
+      { "range": "72-74", "percent": 3, "emotion": "betrayal shock" },
+      { "range": "75-77", "percent": 3, "emotion": "contained resentment" },
+      { "range": "78-81", "percent": 4, "emotion": "deep sadness" },
+      { "range": "82-84", "percent": 3, "emotion": "crying with visible tears" },
+      { "range": "85-86", "percent": 2, "emotion": "full sobbing with tear-streaked face and shaking posture" },
+      { "range": "87-88", "percent": 2, "emotion": "fear and urgent vulnerability" },
+      { "range": "89-91", "percent": 3, "emotion": "anger" },
+      { "range": "92-93", "percent": 2, "emotion": "guilt and remorse" },
+      { "range": "94-95", "percent": 2, "emotion": "shame and social vulnerability" },
+      { "range": "96-98", "percent": 3, "emotion": "defiance" },
+      { "range": "99", "percent": 1, "emotion": "emotional exhaustion" }
+    ],
+    "interactionRule": "Translate all four independent emotions into one coherent romance-square beat. Tears receive comfort or conflicted attention; joy creates shared motion; jealousy, anger, resentment, suspicion, guilt, shame, fear, and defiance remain consensual and nonviolent."
+  },
+  "weatherRolls": {
+    "scope": "Roll once per image using a stored deterministic integer from 0 through 99. Weather affects the whole scene, lighting, fabric motion, hair, reflections, atmosphere, and landmark visibility.",
+    "distribution": [
+      { "range": "0-10", "percent": 11, "weather": "clear golden-hour radiance" },
+      { "range": "11-18", "percent": 8, "weather": "crisp blue hour" },
+      { "range": "19-26", "percent": 8, "weather": "soft dramatic overcast" },
+      { "range": "27-34", "percent": 8, "weather": "cinematic light rain with reflections" },
+      { "range": "35-40", "percent": 6, "weather": "heavy rain curtain" },
+      { "range": "41-47", "percent": 7, "weather": "rolling thunderstorm" },
+      { "range": "48-51", "percent": 4, "weather": "active lightning storm with distant bolts" },
+      { "range": "52-54", "percent": 3, "weather": "hailstorm with suspended ice and hard backlight" },
+      { "range": "55-58", "percent": 4, "weather": "snow flurries" },
+      { "range": "59-61", "percent": 3, "weather": "heavy snow or cinematic blizzard" },
+      { "range": "62-67", "percent": 6, "weather": "dense rolling fog" },
+      { "range": "68-71", "percent": 4, "weather": "coastal sea mist" },
+      { "range": "72-73", "percent": 2, "weather": "red-gold dust storm" },
+      { "range": "74-75", "percent": 2, "weather": "dramatic sandstorm wall" },
+      { "range": "76-80", "percent": 5, "weather": "powerful windstorm with controlled fabric motion" },
+      { "range": "81-84", "percent": 4, "weather": "sunshower with sparkling droplets" },
+      { "range": "85-86", "percent": 2, "weather": "double rainbow after rain" },
+      { "range": "87-88", "percent": 2, "weather": "rare aurora sky" },
+      { "range": "89-90", "percent": 2, "weather": "meteor shower" },
+      { "range": "91", "percent": 1, "weather": "solar eclipse atmosphere" },
+      { "range": "92", "percent": 1, "weather": "distant volcanic-ash sunset sky" },
+      { "range": "93", "percent": 1, "weather": "distant waterspout over open water" },
+      { "range": "94-95", "percent": 2, "weather": "stacked lenticular clouds" },
+      { "range": "96-97", "percent": 2, "weather": "mammatus storm ceiling" },
+      { "range": "98-99", "percent": 2, "weather": "silent heat lightning on the horizon" }
+    ],
+    "safetyRule": "Rare weather is cinematic background and atmosphere only. Preserve clear faces, complete anatomy, stable footing, landmark readability, and no injury, disaster victim framing, or unsafe weapon handling."
   },
   "sceneRolls": {
     "romanceBeat": "deterministic rotation across kiss, hug, rivalry, choice, reconciliation, and beacon-control beats",
