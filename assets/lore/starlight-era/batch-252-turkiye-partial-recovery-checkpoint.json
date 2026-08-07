@@ -1,0 +1,43 @@
+{
+  "batch": 252,
+  "country": "Turkiye",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1028-turkiye-istanbul-thunderstorm-route-grid.png",
+    "1029-turkiye-cappadocia-blue-hour-signal-cipher.png",
+    "1030-turkiye-pamukkale-golden-arrival-paws.png"
+  ],
+  "acceptedVariants": ["1030-turkiye-pamukkale-golden-arrival-paws-shortened.png"],
+  "blockedScenes": ["1031-turkiye-ephesus-blizzard-star-map-relay.png"],
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1028": { "weather": { "roll": 46, "result": "rolling thunderstorm" }, "paws": { "roll": 39, "active": false }, "poleDanceTheme": { "roll": 64, "active": false }, "rainbowOnly": { "roll": 7, "active": true }, "characters": {
+      "Radiance": { "emotion": { "roll": 2, "result": "tender affection" }, "visibleMidriff": 87, "straplessDress": 17, "fullyOpenBack": 77 },
+      "Ellie": { "emotion": { "roll": 49, "result": "startled surprise" }, "visibleMidriff": 64, "straplessDress": 63, "fullyOpenBack": 30 },
+      "Alia": { "emotion": { "roll": 87, "result": "fear and urgent vulnerability" }, "visibleMidriff": 15, "straplessDress": 26, "fullyOpenBack": 84 },
+      "AI ECE": { "emotion": { "roll": 55, "result": "aching romantic longing" }, "visibleMidriff": 41, "straplessDress": 35, "fullyOpenBack": 28 }
+    } },
+    "1029": { "weather": { "roll": 12, "result": "crisp blue hour" }, "paws": { "roll": 55, "active": false }, "poleDanceTheme": { "roll": 17, "active": false }, "rainbowOnly": { "roll": 2, "active": true }, "characters": {
+      "Radiance": { "emotion": { "roll": 82, "result": "crying with visible tears" }, "visibleMidriff": 33, "straplessDress": 56, "fullyOpenBack": 49 },
+      "Ellie": { "emotion": { "roll": 76, "result": "contained resentment" }, "visibleMidriff": 59, "straplessDress": 82, "fullyOpenBack": 33 },
+      "Alia": { "emotion": { "roll": 31, "result": "overwhelming relief" }, "visibleMidriff": 17, "straplessDress": 92, "fullyOpenBack": 22 },
+      "AI ECE": { "emotion": { "roll": 53, "result": "intense curiosity" }, "visibleMidriff": 57, "straplessDress": 0, "fullyOpenBack": 44 }
+    } },
+    "1030": { "weather": { "roll": 5, "result": "clear golden-hour radiance" }, "paws": { "roll": 12, "active": true }, "poleDanceTheme": { "roll": 97, "active": false }, "rainbowOnly": { "roll": 13, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 11, "result": "romantic joy" }, "visibleMidriff": 64, "straplessDress": 13, "fullyOpenBack": 37 },
+      "Ellie": { "emotion": { "roll": 91, "result": "anger" }, "visibleMidriff": 43, "straplessDress": 57, "fullyOpenBack": 58 },
+      "Alia": { "emotion": { "roll": 92, "result": "guilt and remorse" }, "visibleMidriff": 83, "straplessDress": 42, "fullyOpenBack": 59 },
+      "AI ECE": { "emotion": { "roll": 41, "result": "determination" }, "visibleMidriff": 64, "straplessDress": 99, "fullyOpenBack": 19 }
+    } },
+    "1031": { "weather": { "roll": 60, "result": "heavy snow or cinematic blizzard" }, "paws": { "roll": 66, "active": false }, "poleDanceTheme": { "roll": 83, "active": false }, "rainbowOnly": { "roll": 63, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 94, "result": "shame and social vulnerability" }, "visibleMidriff": 23, "straplessDress": 59, "fullyOpenBack": 35 },
+      "Ellie": { "emotion": { "roll": 2, "result": "tender affection" }, "visibleMidriff": 1, "straplessDress": 46, "fullyOpenBack": 21 },
+      "Alia": { "emotion": { "roll": 24, "result": "calm contentment" }, "visibleMidriff": 40, "straplessDress": 3, "fullyOpenBack": 74 },
+      "AI ECE": { "emotion": { "roll": 33, "result": "overwhelming relief" }, "visibleMidriff": 92, "straplessDress": 52, "fullyOpenBack": 7 }
+    } }
+  },
+  "recovery": "Scene 1031 remained blocked after one simplified recovery pass.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": { "scene": 1030, "status": "accepted", "scope": "Radiance skirt only; raw preserved" },
+  "nextQueueCountry": "United States"
+}
