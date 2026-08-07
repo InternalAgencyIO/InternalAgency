@@ -103,8 +103,8 @@ The owner selected an immutable IAT-wide transfer law on Solana and explicitly
 relaxed Solana-wide scope, first-block execution, threshold-VRF randomness, and
 independent-clock guarantees. B3 therefore needs no validator investment.
 
-Incremental B3 project cost consists of the small Daily Law hook, day-record
-state, canonical Token-2022 mint configuration, RPC/indexing, confidential-
+Incremental B3 project cost consists of the small Daily Law hook, one fixed
+law-state account, canonical Token-2022 mint configuration, RPC/indexing, confidential-
 wallet support, possible migration, monitoring, and audits. Solana's deployed
 Token-2022 and native ZK proof program provide the confidential-transfer
 cryptography.

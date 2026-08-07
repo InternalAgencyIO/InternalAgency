@@ -65,6 +65,8 @@ const expectedProgramId = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
 const requiredSbfArtifactPaths = [
   "projects/star-ascent/site/target/verifiable/iat_v2.so",
   "projects/star-ascent/site/target/verifiable/iat-v2-build-evidence.json",
+  "projects/star-ascent/site/target/verifiable/iat_b3_law.so",
+  "projects/star-ascent/site/target/verifiable/iat-b3-law.sha256",
   "projects/star-ascent/site/target/idl/iat_v2.json",
   "projects/star-ascent/site/target/iat-v2-sbf-build.log",
 ];
@@ -146,6 +148,15 @@ function validateConfiguration(workflowText, scripts) {
     if (!workflowText.includes(artifactPath)) {
       fail(`release-proof workflow does not publish required SBF evidence artifact ${artifactPath}`);
     }
+  }
+  if (
+    !workflowText.includes("cargo build-sbf \\")
+    || !workflowText.includes("--manifest-path programs/iat_b3_law/Cargo.toml")
+    || !workflowText.includes("--sbf-out-dir target/verifiable")
+    || !workflowText.includes("test -s target/verifiable/iat_b3_law.so")
+    || !workflowText.includes("sha256sum target/verifiable/iat_b3_law.so")
+  ) {
+    fail("B3 law adapter must retain its pinned build-only SBF and SHA-256 evidence step");
   }
 
   for (const command of commandLines) {
@@ -333,6 +344,11 @@ const mutationProbes = [
     scripts: packageJson.scripts,
   },
   {
+    name: "B3 law SBF build bypassed",
+    workflow: workflow.replace("test -s target/verifiable/iat_b3_law.so", "true"),
+    scripts: packageJson.scripts,
+  },
+  {
     name: "missing exact SBF source-head environment",
     workflow: workflow.replace(
       "      IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}\n",
@@ -431,5 +447,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout/public-run/container-bound binary/IDL evidence, canonical manifest validation, exact-source-head concurrency, read-only permissions, and 24 fail-closed mutation probes remain bound.`,
+  `IAT V2/B3 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout/public-run/container-bound binary/IDL evidence, B3 build-only SBF evidence, canonical manifest validation, exact-source-head concurrency, read-only permissions, and 25 fail-closed mutation probes remain bound.`,
 );

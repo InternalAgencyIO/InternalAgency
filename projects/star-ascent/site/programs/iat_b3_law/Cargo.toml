@@ -1,0 +1,36 @@
+[package]
+name = "iat-b3-law"
+version = "0.1.0"
+description = "Native Solana Token-2022 Transfer Hook and daily finalizer for canonical B3 IAT"
+edition = "2021"
+license = "AGPL-3.0-or-later"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "iat_b3_law"
+
+[features]
+default = []
+no-entrypoint = []
+custom-heap = []
+custom-panic = []
+
+[dependencies]
+iat-b3-consensus = { path = "../iat_b3_consensus" }
+solana-account-info = "=3.1.1"
+solana-clock = { version = "=3.2.0", features = ["sysvar"] }
+solana-cpi = "=3.1.0"
+solana-program-entrypoint = "=3.1.1"
+solana-program-error = "=3.0.1"
+solana-pubkey = { version = "=3.0.0", features = ["curve25519"] }
+solana-rent = { version = "=3.1.0", features = ["sysvar"] }
+solana-sdk-ids = "=3.1.0"
+solana-system-interface = { version = "=2.0.0", features = ["bincode"] }
+solana-sysvar = { version = "=3.1.1", features = ["bytemuck"] }
+spl-tlv-account-resolution = "=0.11.1"
+spl-token-2022-interface = "=2.1.0"
+spl-transfer-hook-interface = "=2.1.0"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

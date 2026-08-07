@@ -104,12 +104,23 @@ jobs:
           } >> "$GITHUB_PATH"
       - name: Produce deterministic build evidence
         run: bash scripts/verify-iat-v2-sbf.sh
+      - name: Build the B3 native law adapter without deploying it
+        run: |
+          mkdir -p target/verifiable
+          cargo build-sbf \
+            --manifest-path programs/iat_b3_law/Cargo.toml \
+            --sbf-out-dir target/verifiable
+          test -s target/verifiable/iat_b3_law.so
+          sha256sum target/verifiable/iat_b3_law.so \
+            | tee target/verifiable/iat-b3-law.sha256
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: iat-v2-verifiable-sbf
+          name: iat-v2-b3-verifiable-sbf
           path: |
             projects/star-ascent/site/target/verifiable/iat_v2.so
             projects/star-ascent/site/target/verifiable/iat-v2-build-evidence.json
+            projects/star-ascent/site/target/verifiable/iat_b3_law.so
+            projects/star-ascent/site/target/verifiable/iat-b3-law.sha256
             projects/star-ascent/site/target/idl/iat_v2.json
             projects/star-ascent/site/target/iat-v2-sbf-build.log
           if-no-files-found: error

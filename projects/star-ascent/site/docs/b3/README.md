@@ -16,6 +16,7 @@ This directory contains the first source-controlled B3 design set:
 - [V2 source inheritance and port inventory](V2_SOURCE_INVENTORY.md)
 - [Deployment-cost feasibility](COST_FEASIBILITY.md)
 - [Native confidential IAT transfers](SHIELDED_TRANSFERS.md)
+- [Native Daily Law adapter](LAW_ADAPTER.md)
 - [Gated path to Mainnet](MAINNET_PATH.md)
 - [White paper draft](WHITEPAPER_DRAFT.md)
 
@@ -25,10 +26,12 @@ vectors match the independent JavaScript specification in
 [`programs/iat_b3_reference/daily-lockdown-consensus.mjs`](../../programs/iat_b3_reference/daily-lockdown-consensus.mjs),
 with boundary and block-validity tests in
 [`tests/iat-b3-daily-lockdown-consensus.test.mjs`](../../tests/iat-b3-daily-lockdown-consensus.test.mjs).
-The same Rust crate now also contains the selected Solana-profile domain
-separation, persistent daily-decision validation, and fail-closed IAT transfer
-disposition. SlotHashes account access and the Token-2022 hook adapter remain
-the next measured implementation phase.
+The same Rust crate also contains the selected Solana-profile domain separation,
+persistent daily-decision validation, and fail-closed IAT transfer disposition.
+The first native adapter in [`programs/iat_b3_law`](../../programs/iat_b3_law)
+now implements the standard hook dispatcher, mint-bound law-state PDA,
+permissionless SlotHashes finalizer, and same-day no-reroll guard. It remains a
+host-tested prototype pending SBF and local-validator evidence.
 
 The documents deliberately separate two deployment profiles:
 

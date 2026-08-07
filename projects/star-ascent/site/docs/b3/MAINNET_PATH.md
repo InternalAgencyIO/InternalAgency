@@ -57,12 +57,14 @@ State: **OPEN**
 
 ## Gate 2 — immutable IAT Daily Law adapter
 
-State: **OPEN**
+State: **IN PROGRESS — HOST-TESTED NATIVE ADAPTER**
 
-- implement the Solana Transfer Hook adapter around the reviewed Rust law kernel;
-- implement `finalize_day` with canonical SlotHashes selection;
-- freeze the ancestor lag, skipped-slot fallback, domain separation, and PDA schema;
-- reject absent, stale, forged, or selected day records;
+- complete SBF and local-validator proof for the native Transfer Hook adapter;
+- validate `finalize_day` and its provisional 150-slot ancestor lag under
+  realistic Solana timing;
+- freeze the ancestor lag, skipped-slot fallback, domain separation, and fixed
+  law-state PDA schema;
+- reject absent, stale, forged, or selected current-day state;
 - prove ordinary and confidential direct clients cannot bypass the hook;
 - prove every B3 economic mutation calls the same gate;
 - measure default-transfer compute and priority-fee overhead.
@@ -141,9 +143,9 @@ capture before requesting any signature.
 
 ## Immediate implementation order
 
-1. finish the framework-neutral Solana-profile law vectors;
-2. build the minimal Transfer Hook and `finalize_day` adapter;
-3. run exact-version local/Devnet compatibility tests;
+1. produce the pinned SBF binary and digest for the native law adapter;
+2. build exact-version local-validator public/confidential transfer tests;
+3. run exact-version Devnet compatibility tests only after explicit deployment authorization;
 4. benchmark ordinary-transfer overhead before adding wallet privacy UX;
 5. implement opt-in confidential-account flows;
 6. determine the live canonical-mint state and migration consequence;

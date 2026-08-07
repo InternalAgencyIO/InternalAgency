@@ -110,7 +110,7 @@ current-day record to the immutable hook. The hook:
 1. reads Solana's consensus-provided `Clock` sysvar;
 2. adds the fixed 10,800-second UTC+03:00 offset;
 3. derives the local day and Friday status;
-4. rejects with `DAY_UNFINALIZED` if the exact day record is absent;
+4. rejects with `DAY_UNFINALIZED` if the exact current-day decision is absent;
 5. rejects with `DAILY_LOCKDOWN` if the day is selected;
 6. otherwise permits Token-2022 to finish the transfer.
 
@@ -130,7 +130,7 @@ enforcement mechanism.
 Solana programs do not execute automatically at midnight. Any caller may submit
 `finalize_day` after local 00:00. The instruction:
 
-1. requires the current-day record to be absent;
+1. requires the fixed law state not to contain a decision for the current day;
 2. reads `Clock` and the recent SlotHashes sysvar;
 3. selects an ancestor hash at a fixed lag using one immutable skipped-slot rule;
 4. domain-separates it by law identifier, Solana genesis identity, canonical IAT

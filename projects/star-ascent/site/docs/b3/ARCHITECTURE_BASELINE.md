@@ -54,7 +54,7 @@ confidential IAT amounts and balances for opt-in users.
                     \                 /
              immutable IAT Daily Law hook
                   |
-     day PDA: absent / open / locked
+ fixed law-state PDA: no current result / open / locked
                   |
  Clock + lagged ancestor SlotHashes
 ```
@@ -356,7 +356,7 @@ activation therefore begins with an independent live-chain check:
 
 ### Phase 2: IAT-wide Daily Law hook
 
-- immutable day-state schema and permissionless finalization;
+- immutable fixed law-state schema and permissionless finalization;
 - fixed UTC+03:00 Clock derivation and fixed-lag SlotHashes entropy;
 - exact-threshold rejection sampling shared with the existing law kernel;
 - public and confidential canonical-IAT enforcement;
