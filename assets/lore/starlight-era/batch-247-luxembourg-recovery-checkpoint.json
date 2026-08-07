@@ -1,0 +1,28 @@
+{
+  "batch": 247,
+  "country": "Luxembourg",
+  "status": "raw-accepted-shortening-pending",
+  "scenes": [
+    "1008-luxembourg-grand-ducal-palace-route-grid.png",
+    "1009-luxembourg-adolphe-bridge-signal-cipher.png",
+    "1010-luxembourg-vianden-castle-star-map-relay.png",
+    "1011-luxembourg-corniche-arrival-paws.png"
+  ],
+  "renderPolicy": {
+    "parallelTarget": 4,
+    "uniqueOutfits": true,
+    "outfitRepeats": 0,
+    "minimumVisibleContacts": 3,
+    "rawOriginalsPreserved": true,
+    "shorteningPass": "pending-non-destructive"
+  },
+  "propContract": "ECE rainbow-gradient Desert Eagle-style inert costume mission prop, safely carried or enclosed in a closed display holster",
+  "recovery": {
+    "scene1008": "accepted from initial parallel render",
+    "scenes1009to1011": "accepted after one simplified public-gala recovery pass"
+  },
+  "paws": {
+    "scene1011": "active",
+    "otherScenes": "inactive"
+  }
+}
