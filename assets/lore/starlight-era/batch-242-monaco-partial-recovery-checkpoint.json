@@ -1,12 +1,24 @@
 {
   "batch": 242,
   "country": "Monaco",
-  "status": "partial-recovery",
+  "status": "accepted-complete",
   "acceptedScenes": [
+    {
+      "scene": 988,
+      "asset": "988-monaco-casino-square-route-grid.png",
+      "location": "Casino Square",
+      "paws": false
+    },
     {
       "scene": 989,
       "asset": "989-monaco-port-hercule-signal-cipher.png",
       "location": "Port Hercule",
+      "paws": false
+    },
+    {
+      "scene": 990,
+      "asset": "990-monaco-harbor-hairpin-star-map-relay.png",
+      "location": "Monaco harbor hairpin overlook",
       "paws": false
     },
     {
@@ -16,7 +28,7 @@
       "paws": true
     }
   ],
-  "blockedScenes": [988, 990],
-  "blockedReason": "output moderation",
-  "nextAction": "On the next wakeup, make one materially simplified public-safe recovery pass for scenes 988 and 990, preserving accepted scenes 989 and 991 without modification."
+  "blockedScenes": [],
+  "blockedReason": null,
+  "nextAction": "Advance automatically to the next unique country batch on the next runner wakeup."
 }
