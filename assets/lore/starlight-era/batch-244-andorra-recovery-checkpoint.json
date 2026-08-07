@@ -1,0 +1,26 @@
+{
+  "batch": 244,
+  "country": "Andorra",
+  "status": "raw-accepted-shortening-pending",
+  "scenes": [
+    "996-andorra-casa-de-la-vall-route-grid.png",
+    "997-andorra-roc-del-quer-signal-cipher.png",
+    "998-andorra-sant-joan-de-caselles-star-map-relay.png",
+    "999-andorra-placa-del-poble-arrival-beacon-paws.png"
+  ],
+  "renderPolicy": {
+    "parallelTarget": 4,
+    "uniqueOutfits": true,
+    "outfitRepeats": 0,
+    "rawOriginalsPreserved": true,
+    "shorteningPass": "pending-non-destructive"
+  },
+  "recovery": {
+    "scene996": "accepted after one simplified public-gala recovery pass",
+    "scenes997to999": "accepted from initial parallel render"
+  },
+  "paws": {
+    "scene999": "active",
+    "otherScenes": "inactive"
+  }
+}
