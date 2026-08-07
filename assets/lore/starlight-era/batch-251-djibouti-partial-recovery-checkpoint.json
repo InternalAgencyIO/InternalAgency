@@ -1,0 +1,43 @@
+{
+  "batch": 251,
+  "country": "Djibouti",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1024-djibouti-day-forest-overcast-route-grid.png",
+    "1025-djibouti-lake-assal-golden-signal-cipher.png",
+    "1026-djibouti-lac-abbe-blue-hour-star-map-relay.png"
+  ],
+  "blockedScenes": ["1027-djibouti-tadjoura-heavy-rain-arrival.png"],
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1024": { "weather": { "roll": 24, "result": "soft dramatic overcast" }, "paws": { "roll": 95, "active": false }, "poleDanceTheme": { "roll": 12, "active": false }, "rainbowOnly": { "roll": 20, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 5, "result": "tender affection" }, "visibleMidriff": 32, "straplessDress": 73, "fullyOpenBack": 75 },
+      "Ellie": { "emotion": { "roll": 16, "result": "extreme happiness" }, "visibleMidriff": 51, "straplessDress": 20, "fullyOpenBack": 9 },
+      "Alia": { "emotion": { "roll": 53, "result": "intense curiosity" }, "visibleMidriff": 46, "straplessDress": 97, "fullyOpenBack": 22 },
+      "AI ECE": { "emotion": { "roll": 71, "result": "suspicion" }, "visibleMidriff": 79, "straplessDress": 92, "fullyOpenBack": 2 }
+    } },
+    "1025": { "weather": { "roll": 8, "result": "clear golden-hour radiance" }, "paws": { "roll": 85, "active": false }, "poleDanceTheme": { "roll": 38, "active": false }, "rainbowOnly": { "roll": 49, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 0, "result": "tender affection" }, "visibleMidriff": 16, "straplessDress": 81, "fullyOpenBack": 84 },
+      "Ellie": { "emotion": { "roll": 85, "result": "full sobbing" }, "visibleMidriff": 89, "straplessDress": 27, "fullyOpenBack": 54 },
+      "Alia": { "emotion": { "roll": 34, "result": "overwhelming relief" }, "visibleMidriff": 24, "straplessDress": 53, "fullyOpenBack": 2 },
+      "AI ECE": { "emotion": { "roll": 49, "result": "startled surprise" }, "visibleMidriff": 91, "straplessDress": 3, "fullyOpenBack": 52 }
+    } },
+    "1026": { "weather": { "roll": 13, "result": "crisp blue hour" }, "paws": { "roll": 81, "active": false }, "poleDanceTheme": { "roll": 90, "active": false }, "rainbowOnly": { "roll": 41, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 2, "result": "tender affection" }, "visibleMidriff": 10, "straplessDress": 75, "fullyOpenBack": 45 },
+      "Ellie": { "emotion": { "roll": 11, "result": "romantic joy" }, "visibleMidriff": 5, "straplessDress": 24, "fullyOpenBack": 48 },
+      "Alia": { "emotion": { "roll": 92, "result": "guilt and remorse" }, "visibleMidriff": 54, "straplessDress": 69, "fullyOpenBack": 55 },
+      "AI ECE": { "emotion": { "roll": 30, "result": "hope" }, "visibleMidriff": 46, "straplessDress": 35, "fullyOpenBack": 81 }
+    } },
+    "1027": { "weather": { "roll": 39, "result": "heavy rain curtain" }, "paws": { "roll": 65, "active": false }, "poleDanceTheme": { "roll": 63, "active": false }, "rainbowOnly": { "roll": 49, "active": false }, "characters": {
+      "Radiance": { "emotion": { "roll": 4, "result": "tender affection" }, "visibleMidriff": 32, "straplessDress": 1, "fullyOpenBack": 98 },
+      "Ellie": { "emotion": { "roll": 46, "result": "awe" }, "visibleMidriff": 68, "straplessDress": 28, "fullyOpenBack": 33 },
+      "Alia": { "emotion": { "roll": 56, "result": "aching romantic longing" }, "visibleMidriff": 12, "straplessDress": 50, "fullyOpenBack": 31 },
+      "AI ECE": { "emotion": { "roll": 77, "result": "contained resentment" }, "visibleMidriff": 58, "straplessDress": 51, "fullyOpenBack": 0 }
+    } }
+  },
+  "recovery": "Scene 1027 remained blocked after one simplified recovery pass.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "not-needed on accepted scenes",
+  "nextQueueOverride": ["Turkiye", "United States", "China", "India", "Russia", "Japan", "North Korea", "South Korea", "European countries"],
+  "resumeAfterLoopback": "Return to Djibouti scene 1027, then continue the prior country order."
+}
