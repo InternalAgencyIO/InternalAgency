@@ -1,0 +1,58 @@
+{
+  "batch": 258,
+  "country": "North Korea",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1052-north-korea-pyongyang-rain-route-grid.png",
+    "1055-north-korea-pyongyang-blue-hour-arrival.png"
+  ],
+  "blockedScenes": [
+    "1053-north-korea-paektu-hail-signal-cipher.png",
+    "1054-north-korea-wonsan-thunderstorm-star-map-relay.png"
+  ],
+  "rollMethod": "FNV-1a over batch258-north-korea-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1052": {
+      "weather": { "roll": 37, "result": "heavy rain curtain" }, "paws": { "roll": 94, "active": false }, "poleDanceTheme": { "roll": 41, "active": false }, "rainbowOnly": { "roll": 51, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 6, "result": "tender affection" }, "visibleMidriff": 56, "straplessDress": 92, "fullyOpenBack": 30 },
+        "Ellie": { "emotion": { "roll": 84, "result": "crying with visible tears" }, "visibleMidriff": 34, "straplessDress": 74, "fullyOpenBack": 8 },
+        "Alia": { "emotion": { "roll": 80, "result": "deep sadness" }, "visibleMidriff": 82, "straplessDress": 78, "fullyOpenBack": 68 },
+        "AI ECE": { "emotion": { "roll": 42, "result": "determination" }, "visibleMidriff": 28, "straplessDress": 4, "fullyOpenBack": 82 }
+      }
+    },
+    "1053": {
+      "weather": { "roll": 54, "result": "hailstorm with suspended ice and hard backlight" }, "paws": { "roll": 3, "active": true }, "poleDanceTheme": { "roll": 60, "active": false }, "rainbowOnly": { "roll": 28, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 43, "result": "determination" }, "visibleMidriff": 9, "straplessDress": 21, "fullyOpenBack": 29 },
+        "Ellie": { "emotion": { "roll": 63, "result": "visible jealousy" }, "visibleMidriff": 45, "straplessDress": 49, "fullyOpenBack": 65 },
+        "Alia": { "emotion": { "roll": 81, "result": "deep sadness" }, "visibleMidriff": 31, "straplessDress": 59, "fullyOpenBack": 43 },
+        "AI ECE": { "emotion": { "roll": 95, "result": "shame and social vulnerability" }, "visibleMidriff": 53, "straplessDress": 65, "fullyOpenBack": 89 }
+      }
+    },
+    "1054": {
+      "weather": { "roll": 47, "result": "rolling thunderstorm" }, "paws": { "roll": 12, "active": true }, "poleDanceTheme": { "roll": 79, "active": false }, "rainbowOnly": { "roll": 29, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 76, "result": "contained resentment" }, "visibleMidriff": 6, "straplessDress": 90, "fullyOpenBack": 0 },
+        "Ellie": { "emotion": { "roll": 98, "result": "defiance" }, "visibleMidriff": 12, "straplessDress": 88, "fullyOpenBack": 82 },
+        "Alia": { "emotion": { "roll": 6, "result": "tender affection" }, "visibleMidriff": 64, "straplessDress": 68, "fullyOpenBack": 2 },
+        "AI ECE": { "emotion": { "roll": 8, "result": "romantic joy" }, "visibleMidriff": 66, "straplessDress": 86, "fullyOpenBack": 56 }
+      }
+    },
+    "1055": {
+      "weather": { "roll": 12, "result": "crisp blue hour" }, "paws": { "roll": 1, "active": true }, "poleDanceTheme": { "roll": 78, "active": false }, "rainbowOnly": { "roll": 62, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 81, "result": "deep sadness" }, "visibleMidriff": 31, "straplessDress": 91, "fullyOpenBack": 99 },
+        "Ellie": { "emotion": { "roll": 21, "result": "playful mischief" }, "visibleMidriff": 55, "straplessDress": 15, "fullyOpenBack": 3 },
+        "Alia": { "emotion": { "roll": 15, "result": "extreme happiness" }, "visibleMidriff": 33, "straplessDress": 89, "fullyOpenBack": 13 },
+        "AI ECE": { "emotion": { "roll": 61, "result": "visible jealousy" }, "visibleMidriff": 39, "straplessDress": 79, "fullyOpenBack": 99 }
+      }
+    }
+  },
+  "recovery": "Scenes 1053 and 1054 remained blocked after one simplified recovery pass. Accepted scenes preserve the three-touch romance-square baseline. The planned compound blown-kiss beat was tied to blocked scene 1054 and was not recovered.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "not needed on accepted scenes",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "nextQueueCountry": "South Korea"
+}
