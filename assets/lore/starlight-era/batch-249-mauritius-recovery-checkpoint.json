@@ -15,6 +15,14 @@
     "1018": { "weather": { "roll": 15, "result": "crisp blue hour" }, "paws": { "roll": 41, "active": false }, "emotions": { "Radiance": { "roll": 11, "result": "romantic joy" }, "Ellie": { "roll": 0, "result": "tender affection" }, "Alia": { "roll": 81, "result": "deep sadness" }, "AI ECE": { "roll": 67, "result": "possessive tension" } } },
     "1019": { "weather": { "roll": 22, "result": "soft dramatic overcast" }, "paws": { "roll": 69, "active": false }, "emotions": { "Radiance": { "roll": 76, "result": "contained resentment" }, "Ellie": { "roll": 49, "result": "startled surprise" }, "Alia": { "roll": 37, "result": "magnetic confidence" }, "AI ECE": { "roll": 7, "result": "tender affection" } } }
   },
+  "appearanceRollAudit": {
+    "thresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8" },
+    "1016": { "characters": { "Radiance": { "visibleMidriff": 94, "straplessDress": 68, "fullyOpenBack": 78 }, "Ellie": { "visibleMidriff": 9, "straplessDress": 59, "fullyOpenBack": 15 }, "Alia": { "visibleMidriff": 84, "straplessDress": 17, "fullyOpenBack": 7 }, "AI ECE": { "visibleMidriff": 39, "straplessDress": 5, "fullyOpenBack": 81 } }, "poleDanceTheme": 8, "rainbowOnly": 48 },
+    "1017": { "characters": { "Radiance": { "visibleMidriff": 58, "straplessDress": 15, "fullyOpenBack": 97 }, "Ellie": { "visibleMidriff": 31, "straplessDress": 10, "fullyOpenBack": 20 }, "Alia": { "visibleMidriff": 89, "straplessDress": 90, "fullyOpenBack": 36 }, "AI ECE": { "visibleMidriff": 96, "straplessDress": 68, "fullyOpenBack": 54 } }, "poleDanceTheme": 71, "rainbowOnly": 98 },
+    "1018": { "characters": { "Radiance": { "visibleMidriff": 59, "straplessDress": 29, "fullyOpenBack": 17 }, "Ellie": { "visibleMidriff": 15, "straplessDress": 14, "fullyOpenBack": 6 }, "Alia": { "visibleMidriff": 47, "straplessDress": 95, "fullyOpenBack": 92 }, "AI ECE": { "visibleMidriff": 76, "straplessDress": 35, "fullyOpenBack": 95 } }, "poleDanceTheme": 72, "rainbowOnly": 86 },
+    "1019": { "characters": { "Radiance": { "visibleMidriff": 1, "straplessDress": 70, "fullyOpenBack": 89 }, "Ellie": { "visibleMidriff": 29, "straplessDress": 77, "fullyOpenBack": 25 }, "Alia": { "visibleMidriff": 8, "straplessDress": 45, "fullyOpenBack": 77 }, "AI ECE": { "visibleMidriff": 50, "straplessDress": 46, "fullyOpenBack": 23 } }, "poleDanceTheme": 43, "rainbowOnly": 1 }
+  },
+  "appearanceCompliance": "All forward batches must materialize and checkpoint every contract roll before rendering. Batch 249 raw acceptance is preserved; its stored appearance audit remains available for a later non-destructive correction queue.",
   "renderAttempts": 2,
   "recovery": "The initial four lanes were blocked. One simplified public-safe recovery pass produced four accepted scenes.",
   "rawOriginalsPreserved": true,
