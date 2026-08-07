@@ -1,0 +1,61 @@
+{
+  "batch": 257,
+  "country": "Japan",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1048-japan-tokyo-overcast-route-grid.png",
+    "1051-japan-arashiyama-golden-arrival.png"
+  ],
+  "preservedOriginals": [
+    "1048-japan-tokyo-overcast-route-grid-raw-original.png"
+  ],
+  "blockedScenes": [
+    "1049-japan-osaka-golden-signal-cipher.png",
+    "1050-japan-hokkaido-snow-star-map-relay.png"
+  ],
+  "rollMethod": "FNV-1a over batch257-japan-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1048": {
+      "weather": { "roll": 25, "result": "soft dramatic overcast" }, "paws": { "roll": 62, "active": false }, "poleDanceTheme": { "roll": 93, "active": false }, "rainbowOnly": { "roll": 19, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 2, "result": "tender affection" }, "visibleMidriff": 88, "straplessDress": 40, "fullyOpenBack": 94 },
+        "Ellie": { "emotion": { "roll": 12, "result": "romantic joy" }, "visibleMidriff": 42, "straplessDress": 86, "fullyOpenBack": 60 },
+        "Alia": { "emotion": { "roll": 4, "result": "tender affection" }, "visibleMidriff": 42, "straplessDress": 18, "fullyOpenBack": 48 },
+        "AI ECE": { "emotion": { "roll": 66, "result": "possessive tension" }, "visibleMidriff": 96, "straplessDress": 80, "fullyOpenBack": 98 }
+      }
+    },
+    "1049": {
+      "weather": { "roll": 6, "result": "clear golden-hour radiance" }, "paws": { "roll": 99, "active": false }, "poleDanceTheme": { "roll": 68, "active": false }, "rainbowOnly": { "roll": 72, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 35, "result": "magnetic confidence" }, "visibleMidriff": 85, "straplessDress": 49, "fullyOpenBack": 61 },
+        "Ellie": { "emotion": { "roll": 87, "result": "fear and urgent vulnerability" }, "visibleMidriff": 81, "straplessDress": 69, "fullyOpenBack": 17 },
+        "Alia": { "emotion": { "roll": 77, "result": "contained resentment" }, "visibleMidriff": 3, "straplessDress": 99, "fullyOpenBack": 83 },
+        "AI ECE": { "emotion": { "roll": 11, "result": "romantic joy" }, "visibleMidriff": 49, "straplessDress": 77, "fullyOpenBack": 81 }
+      }
+    },
+    "1050": {
+      "weather": { "roll": 56, "result": "snow flurries" }, "paws": { "roll": 5, "active": true }, "poleDanceTheme": { "roll": 62, "active": false }, "rainbowOnly": { "roll": 34, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 21, "result": "playful mischief" }, "visibleMidriff": 47, "straplessDress": 19, "fullyOpenBack": 95 },
+        "Ellie": { "emotion": { "roll": 61, "result": "visible jealousy" }, "visibleMidriff": 87, "straplessDress": 63, "fullyOpenBack": 47 },
+        "Alia": { "emotion": { "roll": 87, "result": "fear and urgent vulnerability" }, "visibleMidriff": 33, "straplessDress": 93, "fullyOpenBack": 17 },
+        "AI ECE": { "emotion": { "roll": 41, "result": "determination" }, "visibleMidriff": 63, "straplessDress": 71, "fullyOpenBack": 63 }
+      }
+    },
+    "1051": {
+      "weather": { "roll": 3, "result": "clear golden-hour radiance" }, "paws": { "roll": 68, "active": false }, "poleDanceTheme": { "roll": 67, "active": false }, "rainbowOnly": { "roll": 45, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 40, "result": "determination" }, "visibleMidriff": 74, "straplessDress": 26, "fullyOpenBack": 56 },
+        "Ellie": { "emotion": { "roll": 10, "result": "romantic joy" }, "visibleMidriff": 96, "straplessDress": 36, "fullyOpenBack": 22 },
+        "Alia": { "emotion": { "roll": 94, "result": "shame and social vulnerability" }, "visibleMidriff": 60, "straplessDress": 72, "fullyOpenBack": 18 },
+        "AI ECE": { "emotion": { "roll": 44, "result": "awe" }, "visibleMidriff": 78, "straplessDress": 90, "fullyOpenBack": 52 }
+      }
+    }
+  },
+  "recovery": "Scenes 1049 and 1050 remained blocked after one simplified recovery pass. Scene 1048 received one successful non-destructive shortening pass; the raw original is preserved. A cheek-kiss correction for scene 1051 was blocked, so its accepted raw preserves the three-touch affection beat without that change.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "scene 1048 accepted after removing the long asymmetric panel",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "nextQueueCountry": "North Korea"
+}
