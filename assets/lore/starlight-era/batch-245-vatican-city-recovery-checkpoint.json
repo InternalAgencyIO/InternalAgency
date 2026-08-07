@@ -1,0 +1,23 @@
+{
+  "batch": 245,
+  "country": "Vatican City",
+  "status": "raw-accepted-shortening-pending",
+  "scenes": [
+    "1000-vatican-city-st-peters-square-route-grid.png",
+    "1001-vatican-city-pinecone-courtyard-signal-cipher.png",
+    "1002-vatican-city-gardens-star-map-relay.png",
+    "1003-vatican-city-belvedere-arrival-beacon-paws.png"
+  ],
+  "renderPolicy": {
+    "parallelTarget": 4,
+    "uniqueOutfits": true,
+    "outfitRepeats": 0,
+    "minimumVisibleContacts": 3,
+    "rawOriginalsPreserved": true,
+    "shorteningPass": "pending-non-destructive"
+  },
+  "paws": {
+    "scene1003": "active",
+    "otherScenes": "inactive"
+  }
+}
