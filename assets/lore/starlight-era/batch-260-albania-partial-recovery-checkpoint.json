@@ -1,0 +1,57 @@
+{
+  "batch": 260,
+  "country": "Albania",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1061-albania-berat-rain-signal-cipher.png",
+    "1062-albania-ksamil-rainbow-star-map-relay.png",
+    "1063-albania-theth-blue-hour-arrival.png"
+  ],
+  "preservedOriginals": ["1062-albania-ksamil-rainbow-star-map-relay-raw-original.png"],
+  "blockedScenes": ["1060-albania-tirana-overcast-route-grid.png"],
+  "rollMethod": "FNV-1a over batch260-albania-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1060": {
+      "weather": { "roll": 25, "result": "soft dramatic overcast" }, "paws": { "roll": 50, "active": false }, "poleDanceTheme": { "roll": 93, "active": false }, "rainbowOnly": { "roll": 71, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 22, "result": "playful mischief" }, "visibleMidriff": 36, "straplessDress": 76, "fullyOpenBack": 2 },
+        "Ellie": { "emotion": { "roll": 40, "result": "determination" }, "visibleMidriff": 30, "straplessDress": 34, "fullyOpenBack": 80 },
+        "Alia": { "emotion": { "roll": 16, "result": "extreme happiness" }, "visibleMidriff": 6, "straplessDress": 66, "fullyOpenBack": 60 },
+        "AI ECE": { "emotion": { "roll": 94, "result": "shame and social vulnerability" }, "visibleMidriff": 12, "straplessDress": 88, "fullyOpenBack": 50 }
+      }
+    },
+    "1061": {
+      "weather": { "roll": 38, "result": "heavy rain curtain" }, "paws": { "roll": 71, "active": false }, "poleDanceTheme": { "roll": 36, "active": false }, "rainbowOnly": { "roll": 52, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 95, "result": "shame and social vulnerability" }, "visibleMidriff": 9, "straplessDress": 5, "fullyOpenBack": 57 },
+        "Ellie": { "emotion": { "roll": 15, "result": "extreme happiness" }, "visibleMidriff": 73, "straplessDress": 53, "fullyOpenBack": 1 },
+        "Alia": { "emotion": { "roll": 57, "result": "aching romantic longing" }, "visibleMidriff": 83, "straplessDress": 71, "fullyOpenBack": 79 },
+        "AI ECE": { "emotion": { "roll": 35, "result": "magnetic confidence" }, "visibleMidriff": 17, "straplessDress": 1, "fullyOpenBack": 57 }
+      }
+    },
+    "1062": {
+      "weather": { "roll": 39, "result": "heavy rain curtain" }, "paws": { "roll": 12, "active": true }, "poleDanceTheme": { "roll": 31, "active": false }, "rainbowOnly": { "roll": 1, "active": true },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 8, "result": "romantic joy" }, "visibleMidriff": 54, "straplessDress": 22, "fullyOpenBack": 84 },
+        "Ellie": { "emotion": { "roll": 14, "result": "romantic joy" }, "visibleMidriff": 96, "straplessDress": 52, "fullyOpenBack": 86 },
+        "Alia": { "emotion": { "roll": 6, "result": "tender affection" }, "visibleMidriff": 96, "straplessDress": 20, "fullyOpenBack": 94 },
+        "AI ECE": { "emotion": { "roll": 36, "result": "magnetic confidence" }, "visibleMidriff": 86, "straplessDress": 94, "fullyOpenBack": 80 }
+      }
+    },
+    "1063": {
+      "weather": { "roll": 12, "result": "crisp blue hour" }, "paws": { "roll": 69, "active": false }, "poleDanceTheme": { "roll": 42, "active": false }, "rainbowOnly": { "roll": 74, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 17, "result": "extreme happiness" }, "visibleMidriff": 15, "straplessDress": 39, "fullyOpenBack": 51 },
+        "Ellie": { "emotion": { "roll": 61, "result": "visible jealousy" }, "visibleMidriff": 83, "straplessDress": 51, "fullyOpenBack": 27 },
+        "Alia": { "emotion": { "roll": 67, "result": "possessive tension" }, "visibleMidriff": 65, "straplessDress": 13, "fullyOpenBack": 5 },
+        "AI ECE": { "emotion": { "roll": 29, "result": "hope" }, "visibleMidriff": 55, "straplessDress": 67, "fullyOpenBack": 95 }
+      }
+    }
+  },
+  "recovery": "Scene 1060 remained blocked after one simplified recovery pass. Scene 1062 received one successful non-destructive shortening variant and its raw original is preserved.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "accepted for scene 1062",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "nextQueueCountry": "Andorra"
+}
