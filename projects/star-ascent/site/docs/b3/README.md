@@ -24,9 +24,12 @@ The documents deliberately separate two systems:
 
 1. **V2/Solana** is the existing program, website, launch-control, and evidence
    system. It is the migration source and behavioral reference.
-2. **B3 Protocol** is the sovereign protocol required by the immutable Friday
-   Consensus Rule. A Solana program cannot impose a chain-wide consensus rule
-   on SOL transfers, unrelated SPL transfers, or other programs.
+2. **B3 Protocol** is the sovereign protocol required by the immutable Random
+   Friday Lockdown Law: exact `6733/10000` selection, a proof-verifiable
+   pre-lockdown decision, and a height-derived nominal Friday 00:01 through
+   Saturday 00:01 UTC+03:00 lock. A Solana program cannot impose this
+   chain-wide rule on SOL transfers, unrelated SPL transfers, or other
+   programs.
 
 No B3 implementation may replace a V2 guarantee with a weaker approximation
 to meet a size, cost, schedule, or marketing target.

@@ -1,6 +1,6 @@
 # IAT B3 architecture baseline
 
-Status: draft 0.1
+Status: draft 0.2
 
 Source baseline: `f0a794952ab822d823c8d8eba0c4c8f5d9ae4796`
 
@@ -14,11 +14,16 @@ Architecture branch: `agent/iat-b3-architecture`
 2. Every V2 feature stays unless the project owner explicitly records a cut.
 3. Correctness, security, reliability, evidence quality, and auditability take
    priority over deployment cost.
-4. The Friday Consensus Rule is a base-protocol rule, not a contract option,
-   administrator switch, governance parameter, or UI convention.
-5. The Friday rule has no privileged bypass.
-6. Public read-only access continues during the Friday pause.
-7. A cost target that cannot be achieved without weakening these constraints
+4. The Random Friday Lockdown Law is a base-protocol rule, not a contract
+   option, administrator switch, governance parameter, or UI convention.
+5. Each Friday is selected independently with exact probability `6733/10000`.
+6. A selected lockdown starts at nominal Friday 00:01 and ends at nominal
+   Saturday 00:01 under fixed UTC+03:00 protocol time.
+7. The decision is bound by the last protocol block before the opening height,
+   using a unique, proof-verifiable, consensus-native randomness output.
+8. The law has no privileged bypass, oracle, mutable clock, or reroll.
+9. Public read-only access continues during a selected lockdown.
+10. A cost target that cannot be achieved without weakening these constraints
    must be declared infeasible.
 
 ## 2. Architectural consequence of the Friday requirement
@@ -61,7 +66,7 @@ Public website / explorer / localized documents
           |                                  +-- randomness and tiebreaks
           |                                  +-- migration registry
           |
-          +-- immutable Friday pause
+          +-- immutable random-Friday lockdown
 
 V2 Solana snapshot/proofs -> audited migration manifest -> B3 genesis/import
 ```
@@ -74,12 +79,13 @@ check executes in transaction admission, proposal construction, and block
 replay. Mempool filtering alone is insufficient because a malicious proposer
 could bypass its own mempool.
 
-During the pause:
+During a selected lockdown:
 
 - blocks, votes, finality, peer synchronization, and protocol housekeeping
   continue;
 - a valid block contains no user state-changing transaction;
-- submitted user transactions receive deterministic `FRIDAY_PAUSE` rejection;
+- submitted user transactions receive deterministic `FRIDAY_LOCKDOWN`
+  rejection;
 - no fee is charged and no nonce is consumed for a rejected transaction;
 - nodes do not silently queue transactions across the boundary;
 - RPC queries, proofs, balances, history, explorer pages, and subscriptions
@@ -89,35 +95,64 @@ Read-only access is an RPC/node operation, not a special “read-only
 transaction.” Transaction simulation may remain available only when it cannot
 write state, consume a nonce, charge a fee, or be confused with acceptance.
 
-### 3.2 Normative protocol time
+### 3.2 Normative protocol schedule
 
-An immutable protocol cannot depend on a timezone database whose rules can be
-changed after Genesis. B3 therefore snapshots Turkish time as a fixed offset:
+No live wall clock, NTP server, timezone database, API, price feed, or other
+oracle participates in lockdown validity. Genesis permanently commits:
 
 ```text
-IAT_PROTOCOL_OFFSET_SECONDS = 10_800  // UTC+03:00
-local_day = floor((consensus_unix_seconds + 10_800) / 86_400)
-friday = floor_mod(local_day, 7) == 1
+IAT_PROTOCOL_OFFSET_SECONDS = 10_800       // fixed UTC+03:00 label
+LOCKDOWN_START_LOCAL_SECOND = 60           // Friday 00:01
+LOCKDOWN_DURATION_NOMINAL_SECONDS = 86_400 // through Saturday 00:01
+LOCKDOWN_CHANCE = 6733 / 10000
+GENESIS_NOMINAL_UNIX_SECONDS
+GENESIS_HEIGHT
+NOMINAL_BLOCK_SECONDS
 ```
 
-Unix day zero was Thursday; day one was Friday. The pause is the half-open UTC
-interval from Thursday 21:00:00 inclusive to Friday 21:00:00 exclusive. At the
-first valid block timestamp at or after the closing boundary, user state
-transitions resume.
+For height `H`, nominal protocol time is derived only from immutable Genesis
+constants and height:
 
-This rule represents “Turkish time at B3 Genesis,” permanently fixed at UTC+3.
-If Turkish civil-time law later changes, B3 does not silently follow it. Doing
-so would require an oracle, mutable timezone database, or hard fork and would
-contradict automatic immutability.
+```text
+nominal_time(H) = genesis_nominal_time
+                + (H - genesis_height) * nominal_block_seconds
+```
 
-The consensus engine must provide a deterministic, monotonically increasing
-block timestamp with bounded proposer drift. Every validator recomputes the
-Friday predicate from the finalized block header. Local machine clocks and RPC
-server timezone settings are never inputs to state transition validity.
+The opening height is the first height whose derived nominal time is at or
+after Friday 00:01 in fixed UTC+03:00. The closing height is calculated the
+same way for Saturday 00:01. The interval is half-open. Network latency or a
+change in real block-production rate can move the wall-clock appearance of
+these heights; that drift is accepted. Validators never consult their local
+clock to decide whether a block is locked.
 
-### 3.3 Immutability definition
+The final production chain specification must freeze the Genesis anchor and
+nominal block period. It must choose a period for which the number of locked
+heights approximates 24 hours at the intended block rate. Once Genesis exists,
+neither value is a governance parameter.
 
-The Friday rule has:
+### 3.3 Provable random decision
+
+The block at `opening_height - 1` is the decision block. Its header commits the
+unique output and proof of the network's consensus-native threshold VRF or
+equivalent bias-resistant random beacon. The production verifier and proof
+suite are part of consensus, not a replaceable adapter.
+
+The weekly draw is domain-separated by the law identifier, network identity,
+and Friday local-day number. A SHA-256 counter expansion performs rejection
+sampling into 10,000 exact-uniform buckets. Buckets `0..6732` lock the network;
+buckets `6733..9999` leave it open. Rejection removes modulo bias. The counter
+expands the one proven randomness output and is not a reroll.
+
+Every validator and outside observer can reproduce the bucket from the
+decision-block header. A proposer cannot substitute a different output, proof,
+week, counter, or result. A missing or invalid proof cannot produce a valid
+decision block. Withholding may halt consensus under the selected consensus
+engine's stated liveness assumptions, but it cannot turn a selected lockdown
+into an open Friday.
+
+### 3.4 Immutability definition
+
+The Random Friday Lockdown Law has:
 
 - no storage parameter;
 - no administrator key;
@@ -126,12 +161,26 @@ The Friday rule has:
 - no runtime feature flag;
 - no alternate transaction class for users.
 
-The rule identifier, constants, test vectors, and normative text are committed
-into the chain specification and white paper. Changing the rule requires
+The law identifier, schedule constants, probability, randomness derivation,
+test vectors, and normative text are committed into the chain specification
+and white paper. Changing the law requires
 incompatible validator software and a new protocol version: a social hard
 fork, not an in-protocol edit. No software rule can prevent people from
 creating a different network; “immutable” means the existing B3 chain rejects
 blocks that violate the rule.
+
+### 3.5 Design intent and limit of the claim
+
+The law creates a recurring incentive for operators to disconnect from digital
+systems, including Internal Agency. It also makes uninterrupted on-network
+deposit, withdrawal, transfer, and settlement service impossible during a
+selected lockdown. This deliberately conflicts with always-on centralized
+custody operations.
+
+It cannot truthfully guarantee that a centralized exchange or bank will never
+list IAT: an intermediary can maintain an off-chain internal ledger or suspend
+on-chain settlement. The protocol can make on-network execution impossible
+during the lock; it cannot control private databases or third-party claims.
 
 ## 4. Runtime modules
 
@@ -176,9 +225,9 @@ Preserve 52-week user positions, 104-week core rewards, simple annual rates,
 no automatic compounding, weekly cumulative integer arithmetic, principal
 custody, maturity, settlement bitmaps, and residual-reservation release.
 
-Wall-clock policy time continues during Friday. A reward or vesting milestone
-that occurs during the pause becomes executable after the pause; the Friday
-rule delays execution but does not erase accrual or extend a term.
+Height-derived policy time continues during a selected lockdown. A reward or
+vesting milestone that occurs during the lock becomes executable after it;
+the law delays execution but does not erase accrual or extend a term.
 
 ### 4.5 Eligibility, agency registry, and future CCC
 
@@ -240,14 +289,16 @@ approval after evidence is available.
 ### Phase 0: specification lock
 
 - source-control this feature-parity contract;
-- keep the executable Friday reference and normative boundary vectors green;
+- keep the executable random-Friday schedule, probability, draw, decision,
+  and boundary vectors green;
 - extract pure V2 transition vectors;
 - define exact migration state and invariants;
 - select and benchmark a mature consensus framework.
 
 ### Phase 1: protocol skeleton
 
-- node, consensus, deterministic time, empty-block Friday behavior;
+- node, consensus, height-derived schedule, native random beacon, and
+  selected-Friday empty-block behavior;
 - native IAT supply;
 - query RPC and explorer indexing;
 - adversarial consensus tests with malicious proposals.
@@ -277,9 +328,10 @@ approval after evidence is available.
 B3 cannot advance from a phase while any of these fail:
 
 - V2 feature-parity ledger is incomplete;
-- Friday boundary or malicious-proposer test fails;
-- any state transition is permitted during Friday;
-- any read-only surface unnecessarily stops during Friday;
+- Friday boundary, decision-proof, exact-probability, or malicious-proposer
+  test fails;
+- any user state transition is permitted during a selected lockdown;
+- any read-only surface unnecessarily stops during a selected lockdown;
 - supply, allocation, reservation, or settlement differs from canonical V2;
 - inactive DLC becomes reachable;
 - migration supply or state does not reconcile;
@@ -291,11 +343,11 @@ B3 cannot advance from a phase while any of these fail:
 The following require measured prototypes, not assumption:
 
 - consensus framework and validator set model;
-- timestamp and finality mechanism;
-- B3 fee asset and fee schedule outside Friday;
-- exact randomness source;
+- final immutable Genesis anchor, nominal block period, and finality mechanism;
+- B3 fee asset and fee schedule outside selected lockdowns;
+- threshold-VRF or equivalent consensus beacon suite and validator parameters;
 - migration custody model;
-- validator governance outside the immutable Friday rule;
+- validator governance outside the immutable Random Friday Lockdown Law;
 - relationship between Solana IAT and native B3 IAT;
 - operational cost target for a sovereign network.
 

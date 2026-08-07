@@ -1,6 +1,6 @@
 # Internal Agency B3 protocol white paper
 
-Draft 0.1 — architecture edition
+Draft 0.2 — random-Friday architecture edition
 
 No token launch, investment return, deployment, bridge, or network-activation
 claim is made by this draft.
@@ -8,11 +8,13 @@ claim is made by this draft.
 ## Abstract
 
 Internal Agency B3 is a proposed sovereign protocol that preserves the full
-IAT V2 economic and public-system contract while adding an immutable weekly
-execution pause. Every Friday under the protocol's fixed UTC+03:00 time, user
-state transitions are rejected at consensus. Block production, finality,
-syncing, balances, history, proofs, explorers, and other read-only node
-operations continue.
+IAT V2 economic and public-system contract while adding an immutable Random
+Friday Lockdown Law. Each Friday has an exact `6733/10000` chance of a
+lockdown. The final block before nominal Friday 00:01 commits a
+proof-verifiable decision. If selected, user state transitions remain invalid
+until nominal Saturday 00:01 under the protocol's fixed UTC+03:00 schedule.
+Consensus, syncing, balances, history, proofs, explorers, and other read-only
+node operations continue.
 
 B3 is not merely a new Solana smart contract. A Solana program cannot impose a
 chain-wide rule on native transfers, unrelated token transfers, or validator
@@ -31,32 +33,60 @@ state machine.
 6. **Evidence is part of the system.** Source, binaries, state, migration, and
    public claims must be independently reproducible.
 7. **Reliability before cost.** A cost target cannot weaken protocol behavior.
+8. **Time without an oracle.** Lockdown boundaries derive from height and
+   immutable Genesis constants, accepting wall-clock drift rather than trusting
+   a mutable external time source.
 
-## 2. The Friday Consensus Rule
+## 2. The Random Friday Lockdown Law
 
-### 2.1 Normative rule
+### 2.1 Immutable schedule
 
-Let `T` be the deterministic Unix timestamp in a candidate block header. Let:
+The public label is fixed UTC+03:00. A selected lockdown nominally spans Friday
+00:01 inclusive through Saturday 00:01 exclusive. This is a 24-hour nominal
+interval.
+
+The validity rule does not read a clock. Genesis permanently commits the
+network identity, Genesis height, nominal Genesis Unix second, and nominal
+seconds per block. For protocol height `H`:
 
 ```text
-D = floor((T + 10_800) / 86_400)
+nominal_time(H) = genesis_nominal_time
+                + (H - genesis_height) * nominal_block_seconds
 ```
 
-The block is inside the Friday pause exactly when:
+The opening and closing heights are the first heights whose derived nominal
+times reach the two boundaries. Real block production may run early or late,
+so the civil-time appearance can drift. The number of locked blocks is fixed
+and is selected to approximate 24 real hours at the intended block rate. NTP,
+local clocks, timezone databases, APIs, and other time oracles are never
+consensus inputs.
+
+### 2.2 Exact-probability decision
+
+Each Friday is independently selected with exact probability:
 
 ```text
-floor_mod(D, 7) = 1
+LOCKDOWN_CHANCE = 6733 / 10000 = 67.33%
 ```
 
-because Unix day zero was Thursday and Unix day one was Friday. Equivalently,
-the pause spans Thursday 21:00:00 UTC inclusive through Friday 21:00:00 UTC
-exclusive.
+The decision block is exactly `opening_height - 1`. Its header commits the
+unique output and cryptographic proof of the consensus-native threshold VRF or
+equivalent bias-resistant random beacon. Every validator verifies that proof.
 
-Inside that interval a block containing a user state-changing transaction is
-invalid. Every validating node must reject it. The rule has no administrator,
-governance parameter, oracle, emergency exception, or application override.
+The output is hashed with the immutable law identifier, network identity,
+Friday local-day number, and a counter. Rejection sampling maps it without
+modulo bias into one of 10,000 exact-uniform buckets. Buckets `0..6732` select a
+lockdown; buckets `6733..9999` keep the Friday open. Counter expansion derives
+from the same proven output and is not another roll.
 
-### 2.2 What continues
+The decision record, beacon output, proof, accepted counter, bucket, and result
+are committed to the decision block. An outside verifier can reproduce the
+result from public chain data. A forged, missing, or inconsistent record makes
+the block invalid. Randomness withholding may halt progress only within the
+published liveness assumptions of the selected consensus engine; it cannot
+force an open result or reroll a selected lockdown.
+
+### 2.3 What continues during a selected lockdown
 
 - validator consensus messages and finality;
 - production of valid empty or protocol-housekeeping blocks;
@@ -65,7 +95,7 @@ governance parameter, oracle, emergency exception, or application override.
 - balances, transaction history, explorer, and public documents;
 - transaction construction and simulation clearly labeled as non-acceptance.
 
-### 2.3 What stops
+### 2.4 What stops during a selected lockdown
 
 - IAT transfers;
 - fee-bearing user calls;
@@ -75,19 +105,37 @@ governance parameter, oracle, emergency exception, or application override.
 - contract or runtime calls submitted as user transactions;
 - governance or administrator transactions.
 
-Rejected transactions do not pay fees, consume nonces, or enter blocks. Nodes
-do not carry them silently across the pause.
+Rejected transactions do not pay fees, consume nonces, enter blocks, or queue
+silently across the lock. The first closing-height block may accept new user
+transactions.
 
-### 2.4 Time and boundary safety
+### 2.5 Immutability
 
-Protocol time is fixed at UTC+03:00 rather than read from a mutable timezone
-database. Consensus timestamps are monotonic, bounded, and validated by every
-node. Tests cover the last pre-pause block, the opening boundary, the last
-paused block, the reopening boundary, leap years, negative timestamps where
-supported, malicious proposer drift, replay, reorganization, and node restart.
+The law identifier, probability, schedule derivation, boundary constants,
+randomness proof verifier, domain separation, bucket mapping, and enforcement
+path have no administrator key, governance parameter, emergency exception,
+runtime flag, oracle, or application override.
 
-Vesting and accrual clocks continue while execution is paused. Entitlements
-that mature during Friday become executable after reopening; they are not lost.
+Changing any part requires incompatible software and a different public
+network identity. People can create a social hard fork, but the existing B3
+network cannot accept a violating block under its immutable chain law.
+
+### 2.6 Purpose and claim boundary
+
+The first purpose is to create a recurring opportunity for operators to unplug
+from digital systems, including Internal Agency. The second is to prevent
+continuous on-network transfer and settlement service, intentionally making
+the protocol incompatible with always-on centralized custody expectations.
+
+The network cannot control a bank's or exchange's private database. A third
+party could maintain an off-chain internal ledger or suspend deposits and
+withdrawals. The precise protocol claim is therefore that on-network execution
+is impossible during a selected lockdown—not that third parties are physically
+or legally incapable of listing IAT.
+
+Vesting and accrual heights continue while execution is locked. Entitlements
+that mature during a selected Friday become executable after reopening; they
+are not lost.
 
 ## 3. Native IAT economics
 
@@ -150,13 +198,16 @@ For every protocol decision with two or more exactly equal candidates:
 The counter expands one randomness event; it is not another roll. A valid
 result cannot be replaced or rerolled. A reveal unavailable for 86,400 seconds
 enters the terminal V2 neutral-expiry path rather than requesting a replacement
-value. B3's randomness transport is not selected in this draft; it must meet or
-exceed the V2 bias, liveness, withholding, and replay guarantees.
+value. The application-level transport for these V2 tiebreaks is not selected
+in this draft; it must meet or exceed the V2 bias, liveness, withholding, and
+replay guarantees. It is distinct from the immutable consensus-native beacon
+required by the Random Friday Lockdown Law.
 
 ## 7. State and execution architecture
 
 B3 separates consensus validity from application modules. `ConsensusGuard`
-enforces Friday before the runtime. Runtime modules implement the native asset,
+verifies the pre-lockdown decision and enforces a selected Friday before the
+runtime. Runtime modules implement the native asset,
 allocations, vesting, reward capacity, positions, agencies, eligibility,
 randomness, migrations, and event commitments.
 
@@ -172,13 +223,14 @@ Security requirements include:
 
 - deterministic block replay;
 - Byzantine-finality assumptions stated for the selected consensus engine;
-- bounded consensus timestamp manipulation;
-- Friday enforcement at admission, proposal, validation, and replay;
+- height-derived schedule replay from immutable Genesis constants;
+- decision-block proof verification and exact `6733/10000` draw reproduction;
+- selected-Friday enforcement at admission, proposal, validation, and replay;
 - overflow-safe fixed-point arithmetic;
 - supply and reservation reconciliation;
 - no-reroll randomness and terminal liveness;
 - replay-resistant migration proofs;
-- no privileged Friday bypass;
+- no privileged Random Friday Lockdown bypass;
 - reproducible node and runtime builds;
 - independent source, economic, and migration review.
 
@@ -187,13 +239,14 @@ validator and consensus model is selected and measured.
 
 ## 9. Governance and upgrades
 
-The Friday rule is outside mutable governance. Other B3 components may have a
-reviewed upgrade process, but an upgrade cannot produce a valid block that
-violates Friday on the existing protocol version. Any attempt to alter the
-rule is an incompatible hard fork and must use a new protocol version and
-public network identity.
+The Random Friday Lockdown Law is outside mutable governance. Other B3
+components may have a reviewed upgrade process, but an upgrade cannot produce
+a valid block that changes its schedule, probability, draw, proof verifier, or
+enforcement on the existing protocol version. Any alteration is an
+incompatible hard fork and must use a new protocol version and public network
+identity.
 
-The exact governance, validator admission, slashing, and non-Friday upgrade
+The exact governance, validator admission, slashing, and non-lockdown upgrade
 model remain open design decisions.
 
 ## 10. V2 migration
@@ -214,7 +267,7 @@ The Internal Agency website, English and Turkish domains, 50-locale route
 system, explorer, tokenomics, inactive future previews, admin inspection mode,
 hardware-signing boundary, source-bound audits, CI, and release evidence remain
 part of B3. Read-only surfaces are specifically expected to stay operational
-during Friday.
+during selected lockdowns.
 
 Unreviewed localization remains fail-closed. Inactive future features remain
 inactive. A public preview is not protocol activation.
@@ -232,9 +285,10 @@ and ongoing operations replace Solana ProgramData rent as the dominant budget.
 
 ## 13. Roadmap
 
-1. lock the V2 feature-parity and Friday specifications;
+1. lock the V2 feature-parity and Random Friday Lockdown specifications;
 2. benchmark mature consensus frameworks;
-3. implement multi-validator Friday boundary tests;
+3. implement multi-validator decision-proof, randomness-withholding, boundary,
+   and restart tests;
 4. port native IAT supply and V2 economic invariants;
 5. add positions, vesting, and reservations with differential tests;
 6. preserve inactive CCC and future-feature boundaries;
@@ -247,8 +301,8 @@ and ongoing operations replace Solana ProgramData rent as the dominant budget.
 
 - validator and consensus framework;
 - validator admission and Byzantine threshold;
-- fee market outside Friday;
-- randomness source and withholding defense;
+- fee market outside selected lockdowns;
+- concrete threshold-VRF or equivalent beacon suite and validator parameters;
 - bridge or snapshot custody model;
 - upgrade process outside the immutable rule;
 - final Solana/B3 asset relationship;

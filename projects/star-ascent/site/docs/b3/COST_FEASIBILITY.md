@@ -99,7 +99,8 @@ numbers.
 
 ### Sovereign B3 protocol
 
-The Friday Consensus Rule requires a sovereign validator protocol. Solana
+The immutable Random Friday Lockdown Law requires a sovereign validator
+protocol. Solana
 ProgramData rent then ceases to be the B3 deployment-cost model. B3 must instead
 budget validator infrastructure, RPC, indexing, monitoring, audits, Genesis,
 and migration. A `1.5 SOL` figure is not a meaningful sovereign-network budget.
