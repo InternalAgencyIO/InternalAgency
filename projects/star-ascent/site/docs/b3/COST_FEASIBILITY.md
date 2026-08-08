@@ -68,6 +68,47 @@ measurement does not establish a deployable identity or deployment authority.
 
 The safe size optimizer reduces cost, but it does not meet 3 SOL or 1.5 SOL.
 
+### Measured B3 native-law artifact
+
+On 2026-08-08 the native `iat_b3_law` adapter, including the immutable daily
+law kernel and Token-2022 transfer-hook validation, was built locally with
+`solana-cargo-build-sbf 3.1.10`.
+
+The ordinary release build measured:
+
+- binary: `175,840` bytes;
+- SHA-256: `c15d50db862a7aac6cf8d93474357db34d1579acbd5b4d1f50b9f2486d1d2428`;
+- estimated permanent lock: `1.22619192 SOL`;
+- estimated temporary buffer: `1.22499480 SOL`;
+- estimated pre-fee peak: `2.45118672 SOL`.
+
+The unchanged source was then rebuilt with `cargo build-sbf --optimize-size`:
+
+- binary: `141,824` bytes;
+- SHA-256: `50fc66ec95bc68a71e6a1288f6fb830e2a3c996bd93348f4b832de954ca6dbc4`;
+- estimated permanent lock: `0.98944056 SOL`;
+- estimated temporary buffer: `0.98824344 SOL`;
+- estimated pre-fee peak: `1.97768400 SOL`.
+
+This safely meets a `1.5 SOL` **permanent-rent** target for the incremental B3
+law program. It does not meet a `1.5 SOL` **fresh-payer peak** target. Under the
+same loader-v3 formula, that peak requires approximately `107,507` bytes, so
+the optimized artifact remains `34,317` bytes above the ceiling. The temporary
+buffer is recovered after a successful deployment; it is still real liquidity
+required during deployment.
+
+Owner decision on 2026-08-08: accept a `3 SOL` aggregate fresh-payer peak
+deployment ceiling. The optimized law artifact meets that ceiling by itself
+with `1.02231600 SOL` of headroom. Further byte cutting is not justified merely
+to chase the former 1.5 SOL peak target; reliability and retained V2 behavior
+remain higher priorities. The complete retained-feature B3 aggregate must still
+be measured against 3 SOL before Mainnet approval.
+
+These figures cover only the B3 law program. They do not include the retained
+V2 program, mint/account rent, optional Privacy Vault work, migration,
+operations, RPC/indexing, or audits. Aggregate deployment funding must report
+all artifacts that will actually remain on-chain.
+
 ## 4. Exact byte ceilings
 
 | Target interpretation | Maximum binary bytes | Reduction from recorded 597,336-byte basis |

@@ -38,7 +38,8 @@ const TEST_SCHEDULE = createImmutableSchedule({
   nominalBlockSeconds: 1n,
   networkId: "iat-b3-testnet-1",
 });
-const FRIDAY_LOCAL_DAY = protocolLocalDay(unixSeconds("2026-08-07T00:00:00Z"));
+const FRIDAY_BOUNDARY_UTC = unixSeconds("2026-08-06T21:01:00Z");
+const FRIDAY_LOCAL_DAY = protocolLocalDay(FRIDAY_BOUNDARY_UTC);
 const SATURDAY_LOCAL_DAY = FRIDAY_LOCAL_DAY + 1n;
 const FRIDAY_LOCKED_ENTROPY = `${"00".repeat(31)}01`;
 const FRIDAY_OPEN_ENTROPY = "00".repeat(32);
@@ -62,7 +63,7 @@ const NORMAL_OPEN_DECISION = createLockdownDecision({
 
 test("the daily schedule is height-derived nominal UTC+03:00 with no live clock", () => {
   assert.equal(IAT_PROTOCOL_OFFSET_SECONDS, 10_800n);
-  assert.equal(DAILY_DECISION_LOCAL_SECOND, 0n);
+  assert.equal(DAILY_DECISION_LOCAL_SECOND, 60n);
   assert.equal(LOCKDOWN_DURATION_NOMINAL_SECONDS, 86_400n);
   assert.equal(Object.isFrozen(TEST_SCHEDULE), true);
   assert.equal(
@@ -71,20 +72,27 @@ test("the daily schedule is height-derived nominal UTC+03:00 with no live clock"
   );
 });
 
-test("the first block reaching local 00:00 decides and opens the 24-hour window", () => {
+test("the first block reaching local 00:01 decides and opens the 24-hour window", () => {
   assert.deepEqual(dailyLockdownWindow(FRIDAY_LOCAL_DAY, TEST_SCHEDULE), {
     localDay: FRIDAY_LOCAL_DAY,
     isFriday: true,
-    decisionHeight: 60n,
-    opensAtHeight: 60n,
-    closesAtHeight: 86_460n,
-    decisionAtNominalUnixSeconds: unixSeconds("2026-08-06T21:00:00Z"),
-    closesAtNominalUnixSeconds: unixSeconds("2026-08-07T21:00:00Z"),
+    decisionHeight: 120n,
+    opensAtHeight: 120n,
+    closesAtHeight: 86_520n,
+    decisionAtNominalUnixSeconds: FRIDAY_BOUNDARY_UTC,
+    closesAtNominalUnixSeconds: unixSeconds("2026-08-07T21:01:00Z"),
   });
-  assert.equal(isDailyLockdown(59n, FRIDAY_LOCKED_DECISION, TEST_SCHEDULE), false);
-  assert.equal(isDailyLockdown(60n, FRIDAY_LOCKED_DECISION, TEST_SCHEDULE), true);
-  assert.equal(isDailyLockdown(86_459n, FRIDAY_LOCKED_DECISION, TEST_SCHEDULE), true);
-  assert.equal(isDailyLockdown(86_460n, FRIDAY_LOCKED_DECISION, TEST_SCHEDULE), false);
+  assert.equal(isDailyLockdown(119n, FRIDAY_LOCKED_DECISION, TEST_SCHEDULE), false);
+  assert.equal(isDailyLockdown(120n, FRIDAY_LOCKED_DECISION, TEST_SCHEDULE), true);
+  assert.equal(isDailyLockdown(86_519n, FRIDAY_LOCKED_DECISION, TEST_SCHEDULE), true);
+  assert.equal(isDailyLockdown(86_520n, FRIDAY_LOCKED_DECISION, TEST_SCHEDULE), false);
+});
+
+test("the protocol day rolls exactly at local 00:01, including before the Unix epoch", () => {
+  assert.equal(protocolLocalDay(FRIDAY_BOUNDARY_UTC - 1n), FRIDAY_LOCAL_DAY - 1n);
+  assert.equal(protocolLocalDay(FRIDAY_BOUNDARY_UTC), FRIDAY_LOCAL_DAY);
+  assert.equal(protocolLocalDay(-10_741n), -1n);
+  assert.equal(protocolLocalDay(-10_740n), 0n);
 });
 
 test("normal days use exactly 1 percent and Fridays exactly 66.67 percent", () => {
@@ -102,7 +110,7 @@ test("public Friday vectors reproduce both locked and open decisions", () => {
     lawId: DAILY_LOCKDOWN_LAW_ID,
     localDay: FRIDAY_LOCAL_DAY,
     isFriday: true,
-    decisionHeight: 60n,
+    decisionHeight: 120n,
     randomnessOutputHex: FRIDAY_LOCKED_ENTROPY,
     drawCounter: 0n,
     drawBucket: 2_128n,
@@ -132,7 +140,7 @@ test("public normal-day vectors reproduce the exact one-percent draw", () => {
     lawId: DAILY_LOCKDOWN_LAW_ID,
     localDay: SATURDAY_LOCAL_DAY,
     isFriday: false,
-    decisionHeight: 86_460n,
+    decisionHeight: 86_520n,
     randomnessOutputHex: NORMAL_LOCKED_ENTROPY,
     drawCounter: 0n,
     drawBucket: 59n,
@@ -159,7 +167,7 @@ test("public normal-day vectors reproduce the exact one-percent draw", () => {
 test("selected decision blocks reject user transactions but preserve consensus and reads", () => {
   assert.deepEqual(
     operationDisposition(
-      60n,
+      120n,
       FRIDAY_LOCKED_DECISION,
       OPERATION_KIND.USER_TRANSACTION,
       TEST_SCHEDULE,
@@ -167,7 +175,7 @@ test("selected decision blocks reject user transactions but preserve consensus a
     { accepted: false, code: DAILY_LOCKDOWN_ERROR, binding: true },
   );
   assert.throws(
-    () => validateBlockUserTransactions(60n, FRIDAY_LOCKED_DECISION, 1n, TEST_SCHEDULE),
+    () => validateBlockUserTransactions(120n, FRIDAY_LOCKED_DECISION, 1n, TEST_SCHEDULE),
     new RegExp(DAILY_LOCKDOWN_ERROR),
   );
   for (const operationKind of [
@@ -175,7 +183,7 @@ test("selected decision blocks reject user transactions but preserve consensus a
     OPERATION_KIND.QUERY,
   ]) {
     assert.deepEqual(
-      operationDisposition(60n, FRIDAY_LOCKED_DECISION, operationKind, TEST_SCHEDULE),
+      operationDisposition(120n, FRIDAY_LOCKED_DECISION, operationKind, TEST_SCHEDULE),
       { accepted: true, code: "ALLOWED", binding: true },
     );
   }
@@ -192,8 +200,8 @@ test("an unselected day stays transactional and selected days may be consecutive
     ),
     { accepted: true, code: "ALLOWED", binding: true },
   );
-  assert.equal(isDailyLockdown(86_460n, FRIDAY_LOCKED_DECISION, TEST_SCHEDULE), false);
-  assert.equal(isDailyLockdown(86_460n, NORMAL_LOCKED_DECISION, TEST_SCHEDULE), true);
+  assert.equal(isDailyLockdown(86_520n, FRIDAY_LOCKED_DECISION, TEST_SCHEDULE), false);
+  assert.equal(isDailyLockdown(86_520n, NORMAL_LOCKED_DECISION, TEST_SCHEDULE), true);
 });
 
 test("forged, missing, malformed, or bypass decisions fail closed", () => {
@@ -205,7 +213,7 @@ test("forged, missing, malformed, or bypass decisions fail closed", () => {
       ),
     /invalid lockdown decision field: chanceNumerator/u,
   );
-  assert.throws(() => isDailyLockdown(60n, null, TEST_SCHEDULE), /decision must/u);
+  assert.throws(() => isDailyLockdown(120n, null, TEST_SCHEDULE), /decision must/u);
   assert.throws(
     () =>
       createLockdownDecision({
@@ -221,7 +229,7 @@ test("forged, missing, malformed, or bypass decisions fail closed", () => {
   );
   assert.throws(
     () =>
-      operationDisposition(60n, FRIDAY_LOCKED_DECISION, "ADMIN_BYPASS", TEST_SCHEDULE),
+      operationDisposition(120n, FRIDAY_LOCKED_DECISION, "ADMIN_BYPASS", TEST_SCHEDULE),
     /unknown operation/u,
   );
 });
@@ -233,7 +241,7 @@ test("integer schedule arithmetic remains deterministic across the Unix epoch", 
   assert.throws(() => nominalUnixSecondsAtHeight(1.5, TEST_SCHEDULE), /integer/u);
   assert.throws(
     () =>
-      validateBlockUserTransactions(60n, FRIDAY_LOCKED_DECISION, -1n, TEST_SCHEDULE),
+      validateBlockUserTransactions(120n, FRIDAY_LOCKED_DECISION, -1n, TEST_SCHEDULE),
     /cannot be negative/u,
   );
 });

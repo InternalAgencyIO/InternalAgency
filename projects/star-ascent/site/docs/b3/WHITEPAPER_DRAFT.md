@@ -13,7 +13,8 @@ canonical Token-2022 IAT mint. The immutable Daily Law applies to every public
 and confidential IAT ownership transfer. Privacy is an optional confidential-
 balance mode on that same mint, not a second asset.
 
-Every fixed UTC+03:00 day has one permissionlessly finalized result. The bucket
+Every fixed UTC+03:00 protocol day, from local 00:01 through the next local
+00:01, has one permissionlessly finalized result. The bucket
 mapping is exactly 1% on non-Friday days and 66.67% on Friday for a uniform
 input. A lagged Solana ancestor slot hash supplies the low-cost public entropy.
 IAT transfers fail closed until the day is finalized. If selected, every public
@@ -111,8 +112,11 @@ costs before launch.
 ### 3.1 Schedule and scope
 
 The public timezone label is a fixed UTC+03:00 offset. The IAT hook reads
-Solana's consensus-provided `Clock` sysvar, adds exactly 10,800 seconds, and
-derives the local day and weekday without NTP, an API, or a timezone database.
+Solana's consensus-provided `Clock` sysvar and derives the protocol day exactly
+as `floor((unix_timestamp + 10_800 - 60) / 86_400)`, using mathematical floor
+division. The subtraction fixes the boundary at local 00:01: `00:00:00` through
+`00:00:59` remains part of the preceding protocol day. No NTP, API, timezone
+database, or external time oracle participates.
 
 Every public or confidential canonical IAT ownership transfer must provide the
 current day's record. An absent record rejects with `DAY_UNFINALIZED`. A
@@ -127,12 +131,12 @@ setup, or read-only queries.
 
 ### 3.2 Permissionless decision
 
-Solana programs do not run automatically at midnight. Any caller may submit a
-separate successful `finalize_day` instruction after 00:00. It reads a canonical
-lagged ancestor from the recent SlotHashes sysvar, domain-separates the hash by
-law identifier, Solana genesis identity, canonical IAT mint, local-day number, and entropy
-slot, then runs SHA-256 counter expansion and rejection sampling into 10,000
-exact-uniform buckets.
+Solana programs do not run automatically at a time boundary. Any caller may
+submit a separate successful `finalize_day` instruction at or after local 00:01.
+It reads a canonical lagged ancestor from the recent SlotHashes sysvar,
+domain-separates the hash by law identifier, Solana genesis identity, canonical
+IAT mint, local-day number, and entropy slot, then runs SHA-256 counter expansion
+and rejection sampling into 10,000 exact-uniform buckets.
 
 ```text
 non-Friday: buckets 0..99 lock; 100..9999 open
@@ -170,6 +174,11 @@ During a selected day:
 - public balances, ciphertexts, proofs, history, explorer pages, RPC reads, and
   subscriptions remain available;
 - Solana and unrelated assets continue normally.
+
+A selected Friday interval is exactly `[Friday 00:01:00, Saturday 00:01:00)` in
+fixed UTC+03:00. At the Saturday boundary the Friday record becomes stale.
+Transfers remain fail closed until Saturday is separately finalized; this
+liveness delay cannot make Friday end early or let an unfinalized day pass.
 
 Token-2022 public/confidential balance conversion and proof bookkeeping are not
 ownership transfers and are not automatically Transfer Hook calls. They must
@@ -278,11 +287,14 @@ cost, but every transfer executes the Daily Law hook. Only opt-in users incur
 confidential-account rent reserve, proof transaction fees, and local proof
 computation.
 
-The existing V2 monolith does not meet a 1.5 SOL peak deployment target without
-major restructuring. B3 will not delete V2 behavior or security checks merely
-to force that number. The smaller Daily Law hook and reuse of native Token-2022
-cryptography minimize incremental B3 bytecode, but the complete aggregate cost
-must be measured rather than inferred.
+The owner accepts a 3 SOL aggregate fresh-payer peak deployment ceiling for B3.
+The existing V2 monolith does not meet that target without major restructuring.
+B3 will not delete V2 behavior or security checks merely to force the number.
+The optimized native Daily Law artifact measures 141,824 bytes, approximately
+0.98944056 SOL permanent rent and 1.97768400 SOL pre-fee peak. This proves the
+law adapter fits the ceiling by itself; it does not yet prove that the complete
+retained-feature B3 artifact set fits. Aggregate cost must be measured rather
+than inferred.
 
 ## 11. Roadmap
 

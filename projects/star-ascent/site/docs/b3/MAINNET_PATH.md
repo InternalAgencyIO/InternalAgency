@@ -16,7 +16,8 @@ or Mainnet transactions.
 - all V2 features retained unless explicitly cut;
 - immutable Daily Law hook on all public and confidential IAT ownership transfers;
 - 1% non-Friday and 66.67% Friday bucket thresholds;
-- permissionless post-midnight finalization using a fixed-lag Solana ancestor hash;
+- permissionless finalization at or after local 00:01 using a fixed-lag Solana
+  ancestor hash;
 - fixed UTC+03:00 label from Solana `Clock`;
 - optional confidential balance on the same mint;
 - no separate privacy token, wrapper supply, mixer, or IAT validator network.
@@ -57,9 +58,13 @@ State: **OPEN**
 
 ## Gate 2 — immutable IAT Daily Law adapter
 
-State: **IN PROGRESS — HOST-TESTED NATIVE ADAPTER**
+State: **IN PROGRESS — SBF + DISPOSABLE LOCAL-VALIDATOR REHEARSED**
 
-- complete SBF and local-validator proof for the native Transfer Hook adapter;
+- retain and independently reproduce the completed SBF and disposable
+  local-validator proof for the native Transfer Hook adapter;
+- prove the exact half-open Friday 00:01 to Saturday 00:01 boundary, including
+  `00:00:59`/`00:01:00`, negative-time reference vectors, and stale-record
+  rejection;
 - validate `finalize_day` and its provisional 150-slot ancestor lag under
   realistic Solana timing;
 - freeze the ancestor lag, skipped-slot fallback, domain separation, and fixed

@@ -54,7 +54,7 @@ to remove behavior.
 | Reproducible SBF and source binding | Keep for V2; add reproducible B3 node/runtime builds | Independent reproduction |
 | Public audit/evidence chain | Keep and extend | Manifest replay |
 | Launch HOLD and ceremony gates | Keep until superseded by stricter B3 gates | Fail-closed regressions |
-| Daily Lockdown Law | New immutable IAT-wide law: exact 1%/66.67% bucket thresholds, first successful permissionless finalization after 00:00, lagged Solana slot-hash input, fail closed until finalized, no external oracle or privileged IAT bypass. Solana-wide scope, first-block decision, unbiased threshold VRF, and independent clock are explicitly relaxed. | Public/confidential canonical-IAT hook invocation, boundary, absent-day, consecutive-day, rollback, replay, malicious-finalizer, timing-influence, and external-reproduction tests |
+| Daily Lockdown Law | New immutable IAT-wide law: exact 1%/66.67% bucket thresholds, half-open fixed-UTC+03:00 protocol days from 00:01 to 00:01, first successful permissionless finalization at or after the boundary, lagged Solana slot-hash input, fail closed until finalized, no external oracle or privileged IAT bypass. Solana-wide scope, first-block decision, unbiased threshold VRF, and independent clock are explicitly relaxed. | Public/confidential canonical-IAT hook invocation, `00:00:59`/`00:01:00` boundary, negative-time, absent-day, consecutive-day, rollback, replay, malicious-finalizer, timing-influence, and external-reproduction tests |
 
 ## Change control
 

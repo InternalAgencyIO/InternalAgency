@@ -3,6 +3,8 @@
 use sha2::{Digest, Sha256};
 
 pub const IAT_PROTOCOL_OFFSET_SECONDS: i128 = 10_800;
+/// The protocol day starts at fixed-UTC+03:00 local 00:01:00.
+pub const DAILY_DECISION_LOCAL_SECOND: i128 = 60;
 pub const SECONDS_PER_DAY: i128 = 86_400;
 pub const FRIDAY_LOCAL_DAY_MODULUS: i128 = 1;
 pub const DRAW_DENOMINATOR: u16 = 10_000;
@@ -124,9 +126,12 @@ const fn floor_mod(dividend: i128, divisor: i128) -> i128 {
     }
 }
 
+/// Map every Unix second into the half-open protocol day `[00:01, next 00:01)`.
+/// The i64 input is widened before arithmetic, and `floor_div` preserves the
+/// same mapping for timestamps before the Unix epoch.
 pub const fn protocol_local_day(nominal_unix_seconds: i64) -> i64 {
     floor_div(
-        nominal_unix_seconds as i128 + IAT_PROTOCOL_OFFSET_SECONDS,
+        nominal_unix_seconds as i128 + IAT_PROTOCOL_OFFSET_SECONDS - DAILY_DECISION_LOCAL_SECOND,
         SECONDS_PER_DAY,
     ) as i64
 }
@@ -196,6 +201,7 @@ impl<'a> ImmutableSchedule<'a> {
         let decision_at_nominal_unix_seconds = i128::from(local_day)
             .checked_mul(SECONDS_PER_DAY)
             .and_then(|value| value.checked_sub(IAT_PROTOCOL_OFFSET_SECONDS))
+            .and_then(|value| value.checked_add(DAILY_DECISION_LOCAL_SECOND))
             .ok_or(LawError::ArithmeticOverflow)?;
         let closes_at_nominal_unix_seconds = decision_at_nominal_unix_seconds
             .checked_add(SECONDS_PER_DAY)
@@ -522,13 +528,26 @@ mod tests {
             Ok(DailyWindow {
                 local_day: FRIDAY_LOCAL_DAY,
                 is_friday: true,
-                decision_height: 60,
-                opens_at_height: 60,
-                closes_at_height: 86_460,
-                decision_at_nominal_unix_seconds: 1_786_050_000,
-                closes_at_nominal_unix_seconds: 1_786_136_400,
+                decision_height: 120,
+                opens_at_height: 120,
+                closes_at_height: 86_520,
+                decision_at_nominal_unix_seconds: 1_786_050_060,
+                closes_at_nominal_unix_seconds: 1_786_136_460,
             })
         );
+    }
+
+    #[test]
+    fn protocol_day_rolls_exactly_at_local_0001_across_the_unix_epoch() {
+        const FRIDAY_BOUNDARY_UTC: i64 = 1_786_050_060;
+        assert_eq!(
+            protocol_local_day(FRIDAY_BOUNDARY_UTC - 1),
+            FRIDAY_LOCAL_DAY - 1
+        );
+        assert_eq!(protocol_local_day(FRIDAY_BOUNDARY_UTC), FRIDAY_LOCAL_DAY);
+        assert_eq!(protocol_local_day(-10_741), -1);
+        assert_eq!(protocol_local_day(-10_740), 0);
+        assert!(protocol_local_day(i64::MIN) < protocol_local_day(i64::MAX));
     }
 
     #[test]
@@ -581,15 +600,20 @@ mod tests {
         randomness[31] = 1;
         let decision = create_lockdown_decision(FRIDAY_LOCAL_DAY, randomness, SCHEDULE).unwrap();
         assert_eq!(
-            validate_block_user_transactions(60, decision, 1, SCHEDULE),
+            validate_block_user_transactions(120, decision, 1, SCHEDULE),
             Err(LawError::UserTransactionsForbidden)
         );
         assert_eq!(
-            operation_disposition(60, decision, OperationKind::ConsensusHousekeeping, SCHEDULE),
+            operation_disposition(
+                120,
+                decision,
+                OperationKind::ConsensusHousekeeping,
+                SCHEDULE
+            ),
             Ok(OperationDisposition::Allowed)
         );
         assert_eq!(
-            operation_disposition(60, decision, OperationKind::Query, SCHEDULE),
+            operation_disposition(120, decision, OperationKind::Query, SCHEDULE),
             Ok(OperationDisposition::Allowed)
         );
     }
@@ -606,7 +630,7 @@ mod tests {
             Err(LawError::InvalidDecision)
         );
         assert_eq!(
-            is_daily_lockdown(60, decision, SCHEDULE),
+            is_daily_lockdown(120, decision, SCHEDULE),
             Err(LawError::InvalidDecision)
         );
     }
@@ -621,8 +645,8 @@ mod tests {
         saturday_randomness[31] = 0x9d;
         let saturday =
             create_lockdown_decision(SATURDAY_LOCAL_DAY, saturday_randomness, SCHEDULE).unwrap();
-        assert_eq!(is_daily_lockdown(86_460, friday, SCHEDULE), Ok(false));
-        assert_eq!(is_daily_lockdown(86_460, saturday, SCHEDULE), Ok(true));
+        assert_eq!(is_daily_lockdown(86_520, friday, SCHEDULE), Ok(false));
+        assert_eq!(is_daily_lockdown(86_520, saturday, SCHEDULE), Ok(true));
     }
 
     #[test]
@@ -683,9 +707,9 @@ mod tests {
 
     #[test]
     fn solana_profile_transfer_gate_fails_closed_for_missing_or_stale_day() {
-        let friday_midnight_utc = 1_786_050_000;
+        let friday_boundary_utc = 1_786_050_060;
         assert_eq!(
-            iat_transfer_disposition(friday_midnight_utc, None, SOLANA_GENESIS_HASH, IAT_MINT,),
+            iat_transfer_disposition(friday_boundary_utc, None, SOLANA_GENESIS_HASH, IAT_MINT,),
             Ok(IatTransferDisposition::DayUnfinalized)
         );
 
@@ -699,7 +723,7 @@ mod tests {
         .unwrap();
         assert_eq!(
             iat_transfer_disposition(
-                friday_midnight_utc,
+                friday_boundary_utc,
                 Some(stale),
                 SOLANA_GENESIS_HASH,
                 IAT_MINT,
@@ -710,7 +734,7 @@ mod tests {
 
     #[test]
     fn solana_profile_transfer_gate_matches_the_recorded_result() {
-        let friday_midnight_utc = 1_786_050_000;
+        let friday_boundary_utc = 1_786_050_060;
         let decision = create_solana_daily_decision(
             FRIDAY_LOCAL_DAY,
             42_424_242,
@@ -726,7 +750,7 @@ mod tests {
         };
         assert_eq!(
             iat_transfer_disposition(
-                friday_midnight_utc,
+                friday_boundary_utc,
                 Some(decision),
                 SOLANA_GENESIS_HASH,
                 IAT_MINT,

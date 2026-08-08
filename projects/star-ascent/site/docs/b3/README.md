@@ -31,7 +31,11 @@ persistent daily-decision validation, and fail-closed IAT transfer disposition.
 The first native adapter in [`programs/iat_b3_law`](../../programs/iat_b3_law)
 now implements the standard hook dispatcher, mint-bound law-state PDA,
 permissionless SlotHashes finalizer, and same-day no-reroll guard. It remains a
-host-tested prototype pending SBF and local-validator evidence.
+Devnet-held prototype with optimized SBF and disposable local-validator
+evidence.
+
+The disposable integration harness and its exact coverage boundary are defined
+in [`LOCAL_VALIDATOR_REHEARSAL.md`](LOCAL_VALIDATOR_REHEARSAL.md).
 
 The documents deliberately separate two deployment profiles:
 

@@ -108,8 +108,10 @@ Every canonical IAT public or confidential ownership transfer supplies the
 current-day record to the immutable hook. The hook:
 
 1. reads Solana's consensus-provided `Clock` sysvar;
-2. adds the fixed 10,800-second UTC+03:00 offset;
-3. derives the local day and Friday status;
+2. derives `floor((Clock.unix_timestamp + 10_800 - 60) / 86_400)` using
+   mathematical floor division;
+3. derives the fixed UTC+03:00 protocol day and Friday status, with its boundary
+   at local 00:01;
 4. rejects with `DAY_UNFINALIZED` if the exact current-day decision is absent;
 5. rejects with `DAILY_LOCKDOWN` if the day is selected;
 6. otherwise permits Token-2022 to finish the transfer.
@@ -127,8 +129,8 @@ enforcement mechanism.
 
 ## 6. Permissionless daily finalization
 
-Solana programs do not execute automatically at midnight. Any caller may submit
-`finalize_day` after local 00:00. The instruction:
+Solana programs do not execute automatically at a time boundary. Any caller may
+submit `finalize_day` at or after local 00:01. The instruction:
 
 1. requires the fixed law state not to contain a decision for the current day;
 2. reads `Clock` and the recent SlotHashes sysvar;
@@ -152,7 +154,7 @@ open. There is no operator-only finalizer, reroll call, override, or bypass.
 - all V2 features remain unless explicitly cut;
 - Daily Law applies to every canonical B3 IAT ownership transfer;
 - exact 1% non-Friday and 66.67% Friday bucket thresholds;
-- fixed UTC+03:00 label;
+- fixed UTC+03:00 label and half-open 00:01-to-00:01 protocol day;
 - no external time API, NTP input, timezone database, or randomness oracle;
 - permissionless public finalization and reproducible result;
 - no reroll after finalization and no privileged IAT transfer bypass;
@@ -168,7 +170,7 @@ These are the only selected Solana-hosting relaxations:
 1. **Network scope:** the law is IAT-wide, not Solana-wide. SOL, unrelated
    assets, and unrelated programs continue.
 2. **Decision event:** the first successful permissionless `finalize_day`
-   records the result, not the first Solana block after 00:00.
+   records the result, not the first Solana block after 00:01.
 3. **Randomness strength:** a lagged Solana ancestor hash replaces a threshold
    VRF. Leaders, schedulers, and prospective finalizers may have limited
    influence. The thresholds remain exact, but perfectly unbiased entropy and

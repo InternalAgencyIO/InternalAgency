@@ -2,15 +2,29 @@
   "schema": "iat-pending-visible-i18n-source/v1",
   "status": "DRAFT_TRANSLATION_AND_NATIVE_REVIEW_HOLD",
   "sourceBinding": {
-    "commit": "33e373d614843db21817fcac694308b9ba96e3f1",
+    "commit": "d8c11aa852cfd678ce63816125214cd0db85e54e",
     "activeCatalogSha256": "735a5035bcb914958b773e04c18134f336f60fe297aff57c26a9952117598e4f"
   },
   "capture": {
     "origin": "EPHEMERAL_LOOPBACK",
     "routeCount": 25,
-    "routesWithPendingSource": 0,
-    "pendingSourceCount": 0,
-    "byRoute": {}
+    "routesWithPendingSource": 13,
+    "pendingSourceCount": 48,
+    "byRoute": {
+      "/": 24,
+      "/dossier/read/authority-map": 2,
+      "/dossier/read/broadcast-pack": 2,
+      "/dossier/read/genesis-proof": 2,
+      "/dossier/read/genesis-run": 2,
+      "/dossier/read/incident-response": 2,
+      "/dossier/read/mint-manifest": 4,
+      "/dossier/read/readiness": 2,
+      "/dossier/read/social-kit": 2,
+      "/dossier/read/technical-spec": 7,
+      "/dossier/read/tokenomics": 7,
+      "/dossier/read/white-dossier": 2,
+      "/launch": 4
+    }
   },
   "localeWorkflow": {
     "en": "SOURCE_CAPTURED_PENDING_RUNTIME_ACTIVATION",
@@ -71,5 +85,308 @@
     "nativeReviewComplete": false
   },
   "interpretation": "Every source string below is captured in the 50-locale workflow, but is not activated at runtime. Non-English translation and accountable native review remain required.",
-  "sources": []
+  "sources": [
+    {
+      "source": "AI ECE // RAINBOW KNEE-HIGH COSTUME STUDY // INERT STUDIO PROP",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "AI ECE, a fictional adult woman age 25 or older, in fully clothed emerald-and-black couture and rainbow knee-high socks, holding an inert, non-operational RPG-shaped studio prop in a design workshop",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "B3 ARCHITECTURE · HOLD",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "B3 ARCHITECTURE / V2 FEATURES RETAINED / MAINNET HOLD",
+      "routes": [
+        "/dossier/read/tokenomics"
+      ]
+    },
+    {
+      "source": "B3 is the main architecture and retains the V2 economic feature set published at /tokenomics. The official mint, law program, optional Privacy Vault, reward router, and authority evidence are not yet published; the program is not active.",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "B3 LAW + RETAINED V2 FEATURE REHEARSAL",
+      "routes": [
+        "/launch"
+      ]
+    },
+    {
+      "source": "B3 law + retained V2 features",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "B3 PUBLIC // REVIEWABLE",
+      "routes": [
+        "/launch"
+      ]
+    },
+    {
+      "source": "B3 REFERENCE EDITION",
+      "routes": [
+        "/dossier/read/technical-spec"
+      ]
+    },
+    {
+      "source": "B3 TOKEN PROGRAM",
+      "routes": [
+        "/dossier/read/mint-manifest"
+      ]
+    },
+    {
+      "source": "CHAIN-DERIVED LAW",
+      "routes": [
+        "/dossier/read/technical-spec"
+      ]
+    },
+    {
+      "source": "Default IAT transfers remain public. The B3 Privacy Vault is an optional shielded path; its implementation, Devnet evidence, and measured user cost remain pending.",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "Does a B3 lockdown stop Solana?",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "Each protocol-local day has a 1% selection chance, except Friday at 66.67%. A selected day closes state-changing IAT actions for 24 hours, from 00:01 to 00:01 in fixed UTC+03:00. Read-only views and the Solana network continue normally; the law applies across IAT, not only the optional Privacy Vault.",
+      "routes": [
+        "/dossier/read/tokenomics"
+      ]
+    },
+    {
+      "source": "Ellie, Radiance, AI ECE, and Alia, four fictional adult women age 25 or older, wearing distinct fully clothed iridescent, gold, emerald, and red couture in a glass atrium while PAWS crosses the floor",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "ENTER THE NIGHTFLIGHT PREVIEW ↗",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "Every protocol-local day has a 1% selection chance, except Friday at 66.67%. A selected day closes state-changing IAT actions for 24 hours, from 00:01 to 00:01 in fixed UTC+03:00. The design uses Solana-provided time and a lagged ancestor slot hash, not an external oracle; the result is publicly replayable but is not a bias-resistant threshold VRF.",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "Exercise the IAT-wide law and every retained feature, then regenerate every bound release artifact; invalidate all stale approvals.",
+      "routes": [
+        "/launch"
+      ]
+    },
+    {
+      "source": "Four fictional adult women, four distinct looks, one playful Nightflight scene.",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "IAT-wide lockdown law",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "IMMUTABLE IAT LOCKDOWN LAW",
+      "routes": [
+        "/dossier/read/tokenomics"
+      ]
+    },
+    {
+      "source": "IN FULL SPECTRUM.",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "NIGHTFLIGHT // VISUAL EDITORIAL",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "No transfer tax, surprise authority, or opaque execution path belongs in the public design. The first B3 Devnet rehearsal and its evidence remain launch gates.",
+      "routes": [
+        "/dossier/read/technical-spec"
+      ]
+    },
+    {
+      "source": "No. It is an IAT-wide protocol law, not a Solana-wide pause. On a selected day, state-changing IAT actions close for 24 hours from 00:01 to 00:01 in fixed UTC+03:00; read-only IAT views and the rest of Solana continue normally.",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "Open retained IAT economic policy (V2)",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "Optional transfer privacy",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "PAWS // PRISM SCOUT",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "PAWS, a fictional golden kitten, chasing a prismatic light across a dark star floor",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "Radiance, Ellie, AI ECE, and Alia, four fictional adult women, forming a linked relay while PAWS dashes through the crew",
+      "routes": [
+        "/dossier/read/genesis-run",
+        "/dossier/read/readiness"
+      ]
+    },
+    {
+      "source": "Radiance, Ellie, AI ECE, and Alia, four fictional adult women, inside an orbital signal gallery while PAWS scouts the foreground",
+      "routes": [
+        "/dossier/read/authority-map",
+        "/dossier/read/genesis-proof",
+        "/dossier/read/incident-response",
+        "/dossier/read/mint-manifest",
+        "/dossier/read/technical-spec",
+        "/dossier/read/tokenomics"
+      ]
+    },
+    {
+      "source": "Radiance, Ellie, AI ECE, and Alia, four fictional adult women, linking hands around a launch crystal while PAWS pounces beside them",
+      "routes": [
+        "/dossier/read/white-dossier"
+      ]
+    },
+    {
+      "source": "Radiance, Ellie, AI ECE, and Alia, four fictional adult women, standing together at the arrival beacon",
+      "routes": [
+        "/dossier/read/broadcast-pack",
+        "/dossier/read/social-kit"
+      ]
+    },
+    {
+      "source": "Review the B3 law adapter, retained V2 features, configuration interlock, and validation scripts before any signing begins.",
+      "routes": [
+        "/launch"
+      ]
+    },
+    {
+      "source": "REVIEW THE OPEN-SOURCE B3 CODE ↗",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "SIGNAL FOUR // DA LAT ARRIVAL",
+      "routes": [
+        "/dossier/read/broadcast-pack",
+        "/dossier/read/social-kit"
+      ]
+    },
+    {
+      "source": "SIGNAL FOUR // HANOI ANCHOR // PAWS CRYSTAL POUNCE",
+      "routes": [
+        "/dossier/read/white-dossier"
+      ]
+    },
+    {
+      "source": "SIGNAL FOUR // NINH BINH RELAY // PAWS CREW DASH",
+      "routes": [
+        "/dossier/read/genesis-run",
+        "/dossier/read/readiness"
+      ]
+    },
+    {
+      "source": "SIGNAL FOUR // ORBITAL GALLERY // PAWS SIGNAL SCOUT",
+      "routes": [
+        "/dossier/read/authority-map",
+        "/dossier/read/genesis-proof",
+        "/dossier/read/incident-response",
+        "/dossier/read/mint-manifest",
+        "/dossier/read/technical-spec",
+        "/dossier/read/tokenomics"
+      ]
+    },
+    {
+      "source": "Simple annual rates, paid weekly without automatic compounding: core team 17%, standard user 10%, CCC Agent 28%, eligible downstream CCC associate 20%. A weekly public random draw pauses one CCC Agency and its snapshotted downstream group for that turn. Every exact protocol tie uses one final, exact-uniform, publicly verifiable roll over a precommitted candidate set. Full retained terms: /tokenomics.",
+      "routes": [
+        "/dossier/read/tokenomics"
+      ]
+    },
+    {
+      "source": "The B3 architecture retains the V2 feature set while making the IAT-wide lockdown law and adverse outcomes visible before execution.",
+      "routes": [
+        "/dossier/read/tokenomics"
+      ]
+    },
+    {
+      "source": "The B3 law adapter and every retained V2 feature must be built, deployed unfunded, initialized, funded, and exercised on Devnet before any Mainnet decision can be considered.",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "The IAT-wide daily decision uses Solana-provided time and a lagged ancestor slot hash. It uses no external oracle, does not claim to pause Solana itself, and is publicly replayable without claiming threshold-VRF bias resistance.",
+      "routes": [
+        "/dossier/read/technical-spec"
+      ]
+    },
+    {
+      "source": "The intended B3 design uses Token-2022, nine decimals, a fixed supply target, and the native IAT transfer-hook law. Default IAT transfers remain public; shielded Privacy Vault transfers are an optional path.",
+      "routes": [
+        "/dossier/read/technical-spec"
+      ]
+    },
+    {
+      "source": "The intended B3 mint uses Token-2022 with the native IAT transfer-hook law. Default transfers remain public and the Privacy Vault is optional; no hidden mint path, transfer tax, or surprise authority belongs in the launch.",
+      "routes": [
+        "/dossier/read/mint-manifest"
+      ]
+    },
+    {
+      "source": "The second frame places AI ECE's rainbow knee-high costume beside an inert, non-operational RPG-shaped studio prop. It is editorial set dressing, not equipment.",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "THE SIGNAL FOUR // RAINBOW ATRIUM // PAWS ON THE FLOOR",
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "source": "THE SIGNAL FOUR.",
+      "routes": [
+        "/"
+      ]
+    }
+  ]
 }

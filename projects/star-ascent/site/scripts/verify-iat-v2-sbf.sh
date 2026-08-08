@@ -139,7 +139,7 @@ print(matches[0])'
   echo "PASS: immutable container index, linux/amd64 descriptor, and local image platform match"
 } 2>&1 | tee "$sbf_log"
 
-anchor build --verifiable --ignore-keys --docker-image "$build_container_reference" 2>&1 | tee -a "$sbf_log"
+anchor build --verifiable --program-name iat_v2 --ignore-keys --docker-image "$build_container_reference" 2>&1 | tee -a "$sbf_log"
 
 if ! grep -Fxq "Using image \"$build_container_reference\"" "$sbf_log"; then
   echo "FAIL: Anchor did not use the reviewed immutable build-container digest" >&2

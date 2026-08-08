@@ -109,8 +109,20 @@ jobs:
           mkdir -p target/verifiable
           cargo build-sbf \
             --manifest-path programs/iat_b3_law/Cargo.toml \
-            --sbf-out-dir target/verifiable
+            --sbf-out-dir target/verifiable \
+            --optimize-size
           test -s target/verifiable/iat_b3_law.so
+          # Candidate gate only: this binds the reviewed rehearsal artifact; it
+          # does not assert complete B3/V2 feature parity or launch readiness.
+          expected_b3_law_bytes=141824
+          actual_b3_law_bytes="$(stat --format='%s' target/verifiable/iat_b3_law.so)"
+          if [[ "$actual_b3_law_bytes" != "$expected_b3_law_bytes" ]]; then
+            echo "B3 law candidate size mismatch: expected $expected_b3_law_bytes bytes, got $actual_b3_law_bytes" >&2
+            exit 1
+          fi
+          expected_b3_law_sha256="50fc66ec95bc68a71e6a1288f6fb830e2a3c996bd93348f4b832de954ca6dbc4"
+          printf '%s  %s\n' "$expected_b3_law_sha256" target/verifiable/iat_b3_law.so \
+            | sha256sum --check --strict -
           sha256sum target/verifiable/iat_b3_law.so \
             | tee target/verifiable/iat-b3-law.sha256
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

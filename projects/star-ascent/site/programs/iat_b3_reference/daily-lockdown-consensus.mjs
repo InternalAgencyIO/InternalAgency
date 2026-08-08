@@ -3,7 +3,8 @@ import { createHash } from "node:crypto";
 export const IAT_PROTOCOL_OFFSET_SECONDS = 10_800n;
 export const SECONDS_PER_DAY = 86_400n;
 export const FRIDAY_LOCAL_DAY_MODULUS = 1n;
-export const DAILY_DECISION_LOCAL_SECOND = 0n;
+// The protocol day is the half-open fixed-UTC+03:00 interval [00:01, next 00:01).
+export const DAILY_DECISION_LOCAL_SECOND = 60n;
 export const LOCKDOWN_DURATION_NOMINAL_SECONDS = SECONDS_PER_DAY;
 export const DRAW_DENOMINATOR = 10_000n;
 export const NORMAL_DAY_LOCKDOWN_NUMERATOR = 100n;
@@ -73,7 +74,10 @@ export function floorMod(dividend, divisor) {
 
 export function protocolLocalDay(nominalUnixSeconds) {
   const seconds = asInteger(nominalUnixSeconds, "nominalUnixSeconds");
-  return floorDiv(seconds + IAT_PROTOCOL_OFFSET_SECONDS, SECONDS_PER_DAY);
+  return floorDiv(
+    seconds + IAT_PROTOCOL_OFFSET_SECONDS - DAILY_DECISION_LOCAL_SECOND,
+    SECONDS_PER_DAY,
+  );
 }
 
 export function isFridayLocalDay(localDay) {

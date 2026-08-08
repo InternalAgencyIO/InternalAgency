@@ -9,7 +9,7 @@
   "scripts": {
     "generate:mint-config": "node scripts/generate-mint-ceremony-config.mjs",
     "bind:iat-v2-program-id": "node scripts/bind-iat-v2-program-id.mjs",
-    "check:iat-b3-spec": "node --test tests/iat-b3-daily-lockdown-consensus.test.mjs",
+    "check:iat-b3-spec": "node --test tests/iat-b3-daily-lockdown-consensus.test.mjs tests/iat-b3-local-rehearsal-harness.test.mjs tests/iat-b3-devnet-rehearsal-safety.test.mjs",
     "iat:v2-admin": "vite --config tools/iat-v2-admin-console/vite.config.mjs",
     "iat:v2-feature-preflight": "node scripts/iat-v2-feature-preflight.mjs",
     "build:iat-v2-admin": "vite build --config tools/iat-v2-admin-console/vite.config.mjs",
@@ -68,7 +68,7 @@
     "check:language-qa-hold-ledger": "node scripts/validate-language-qa-hold-ledger.mjs && node scripts/verify-language-qa-scorecard-replay.mjs && node scripts/test-language-qa-hold-ledger-regression.mjs && node scripts/test-language-qa-scorecard-replay-regression.mjs",
     "check:iat-v2-dependency-triage": "node scripts/validate-iat-v2-dependency-triage.mjs",
     "check:iat-v2-dependency-preconditions": "node --test tests/iat-v2-dependency-preconditions.test.mjs",
-    "check:iat-v2-architecture-work": "node scripts/validate-iat-v2-architecture-work.mjs",
+    "check:iat-v2-architecture-work": "node scripts/test-iat-architecture-source-lineage-regression.mjs && node scripts/validate-iat-v2-architecture-work.mjs",
     "check:future-dlc-audits": "node scripts/validate-future-dlc-audits.mjs",
     "check:prelaunch-audit": "node scripts/validate-iat-v2-prelaunch-audit.mjs",
     "check:remediation-audit": "node scripts/validate-iat-v2-remediation-audit.mjs",

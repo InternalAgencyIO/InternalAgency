@@ -335,11 +335,11 @@ for (const forbidden of [
   }
 }
 if (
-  !launchPageSource.includes("V2 PROGRAM REHEARSAL")
-  || !homePageSource.includes("V2 program rehearsal")
+  !launchPageSource.includes("B3 LAW + RETAINED V2 FEATURE REHEARSAL")
+  || !homePageSource.includes("B3 law + retained V2 features")
   || !tokenomicsPageSource.includes("HOST-TESTED · NOT DEPLOYED · MAINNET HOLD")
 ) {
-  fail("public launch surfaces do not state the V2 rehearsal and HOLD status");
+  fail("public launch surfaces do not state the B3 law, retained V2 rehearsal, and HOLD status");
 }
 for (const source of [launchPageSource, homePageSource]) {
   if (/Run the exact four-transaction|exact four-transaction path must complete/i.test(source)) {

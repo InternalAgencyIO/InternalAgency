@@ -1,6 +1,6 @@
 # B3 native IAT Daily Law adapter
 
-Status: **HOST-TESTED PROTOTYPE / SBF AND DEVNET HOLD**
+Status: **SBF + DISPOSABLE LOCAL-VALIDATOR REHEARSED / DEVNET HOLD**
 
 Implementation: `programs/iat_b3_law`
 
@@ -67,7 +67,9 @@ yet immutable.
 transaction's fee payer can be anyone. The program:
 
 1. reads Solana `Clock` through the sysvar syscall;
-2. derives the fixed UTC+03:00 local day;
+2. derives the fixed UTC+03:00 protocol day with the exact mapping
+   `floor((Clock.unix_timestamp + 10_800 - 60) / 86_400)`, so the boundary is
+   local 00:01;
 3. rejects a second finalization for that day;
 4. fetches `PodSlotHashes` through the sysvar syscall;
 5. selects the newest available ancestor at or before `Clock.slot - 150`;
@@ -96,12 +98,18 @@ The adapter verifies:
 - the source account's `TransferHookAccount.transferring` flag is active, which
   rejects direct calls that did not come from Token-2022;
 - the stored decision recomputes exactly from network, mint, day, slot, and hash;
-- the stored day equals the current UTC+03:00 day and is open.
+- the stored day equals the current UTC+03:00 protocol day and is open.
 
 Missing, stale, corrupt, forged, or locked state fails closed. The law-state is
 read-only during hook execution. Public and confidential transfers use the same
 standard hook entrypoint; the adapter neither receives nor attempts to inspect
 a confidential amount.
+
+The boundary is half-open: a prior-day record remains current through local
+`00:00:59`; at `00:01:00` that record is stale and all ownership transfers fail
+closed until the new day is finalized. A Friday selection therefore covers
+`[Friday 00:01:00, Saturday 00:01:00)`, subject to normal fail-closed downtime
+if Saturday's result has not yet been finalized.
 
 This adapter does not yet port or gate the V2 staking, settlement, reservation,
 vesting, or registry instructions. Each state-changing B3 port remains required
@@ -115,6 +123,13 @@ Host evidence currently covers canonical state serialization, corrupt-state
 rejection, mint/program PDA separation, standard hook instruction decoding,
 unchanged 1%/66.67% thresholds, same-day reroll rejection, future-state
 rejection, and deterministic lag selection.
+
+The 2026-08-08 disposable local-validator rehearsal additionally covers the
+optimized 141,824-byte SBF artifact, frozen local program data, exact
+Token-2022 mint shape, real public hooked transfers, permissionless Clock plus
+SlotHashes finalization, stored-record reproduction, direct-call rejection, and
+real-hook missing/stale/open/locked/forged state gates. See
+[`LOCAL_VALIDATOR_REHEARSAL.md`](LOCAL_VALIDATOR_REHEARSAL.md).
 
 Before Devnet:
 

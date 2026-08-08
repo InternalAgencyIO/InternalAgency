@@ -52,6 +52,8 @@ const requiredLaunchGateScripts = [
 ];
 const exactSignoffCommand =
   "node scripts/validate-iat-v2-independent-signoff.mjs && node scripts/validate-iat-v2-feature-signoff.mjs && node scripts/test-iat-v2-signoff-regression.mjs";
+const exactArchitectureWorkCommand =
+  "node scripts/test-iat-architecture-source-lineage-regression.mjs && node scripts/validate-iat-v2-architecture-work.mjs";
 const requiredActionPins = new Map([
   ["actions/checkout@11d5960a326750d5838078e36cf38b85af677262", 3],
   ["actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020", 2],
@@ -177,6 +179,12 @@ function validateConfiguration(workflowText, scripts) {
   if (!scripts["check:iat-v2"]?.includes("npm run check:iat-v2-ci-sbf-evidence")) {
     fail("main IAT V2 validation must retain the SBF evidence regression suite");
   }
+  if (scripts["check:iat-v2-architecture-work"] !== exactArchitectureWorkCommand) {
+    fail("architecture-work gate must run the B3 successor-lineage regression before validating retained V2 evidence");
+  }
+  if (!scripts["check:iat-v2"]?.includes("npm run check:iat-v2-architecture-work")) {
+    fail("main IAT V2 validation must retain the V2-to-B3 source-lineage gate");
+  }
   if (scripts["check:iat-v2-signoff"] !== exactSignoffCommand) {
     fail("signoff package script must retain both canonical validators in order");
   }
@@ -214,6 +222,9 @@ function validateSbfProofScript(scriptText) {
   const failures = [];
   const fail = (message) => failures.push(message);
 
+  if (!scriptText.includes('anchor build --verifiable --program-name iat_v2 --ignore-keys --docker-image "$build_container_reference"')) {
+    fail("Anchor verifiable build must be scoped to the Anchor-based iat_v2 program; native B3 programs use their dedicated cargo build-sbf step");
+  }
   if (!scriptText.includes('idl="target/idl/iat_v2.json"') || !scriptText.includes('[[ ! -s "$idl" ]]')) {
     fail("SBF proof must reject a missing or empty generated IDL");
   }
@@ -373,6 +384,14 @@ const mutationProbes = [
         .replace(" && npm run check:iat-v2-ci-sbf-evidence", ""),
     },
   },
+  {
+    name: "B3 successor-lineage regression omitted",
+    workflow,
+    scripts: {
+      ...packageJson.scripts,
+      "check:iat-v2-architecture-work": "node scripts/validate-iat-v2-architecture-work.mjs",
+    },
+  },
 ];
 
 for (const probe of mutationProbes) {
@@ -382,6 +401,10 @@ for (const probe of mutationProbes) {
 }
 
 const sbfProofMutationProbes = [
+  {
+    name: "workspace-wide Anchor build reintroduced",
+    script: sbfProofScript.replace(" --program-name iat_v2", ""),
+  },
   {
     name: "missing generated IDL size gate",
     script: sbfProofScript.replace('if [[ ! -s "$idl" ]]; then', 'if [[ -s "$idl" ]]; then'),
@@ -447,5 +470,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2/B3 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout/public-run/container-bound binary/IDL evidence, B3 build-only SBF evidence, canonical manifest validation, exact-source-head concurrency, read-only permissions, and 25 fail-closed mutation probes remain bound.`,
+  `IAT V2/B3 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, iat_v2-scoped Anchor build, exact head/checkout/public-run/container-bound binary/IDL evidence, B3 build-only SBF evidence, V2-to-B3 successor-lineage validation, canonical manifest validation, exact-source-head concurrency, read-only permissions, and 27 fail-closed mutation probes remain bound.`,
 );

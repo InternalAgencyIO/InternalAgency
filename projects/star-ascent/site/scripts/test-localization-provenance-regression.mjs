@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 
@@ -8,6 +8,7 @@ const repositoryRoot = resolve(siteRoot, "..", "..", "..");
 const relativeSiteRoot = "projects/star-ascent/site";
 const manifestRelative = `${relativeSiteRoot}/public/audits/localization-qa-20260803/translation-provenance.v1.json`;
 const messagesRelative = `${relativeSiteRoot}/app/i18n/messages.json`;
+const pendingRelative = `${relativeSiteRoot}/app/i18n/pending-visible-source.json`;
 const validatorRelative = `${relativeSiteRoot}/scripts/validate-localization-provenance.mjs`;
 const temporaryRoot = mkdtempSync(join(tmpdir(), "iat-i18n-provenance-regression-"));
 const cloneRoot = join(temporaryRoot, "repository");
@@ -51,14 +52,28 @@ try {
   const checkout = run("git", ["-c", "core.autocrlf=false", "checkout", "--detach", "HEAD"], cloneRoot);
   assert(checkout.status === 0, `temporary checkout failed: ${checkout.stderr}`);
 
+  const currentManifest = JSON.parse(readFileSync(join(repositoryRoot, manifestRelative), "utf8"));
+  const overlayPaths = new Set([
+    manifestRelative,
+    validatorRelative,
+    ...currentManifest.runs.at(-1).artifacts.map(({ path }) => `${relativeSiteRoot}/${path}`),
+  ]);
+  for (const path of overlayPaths) {
+    const destination = join(cloneRoot, path);
+    mkdirSync(resolve(destination, ".."), { recursive: true });
+    copyFileSync(join(repositoryRoot, path), destination);
+  }
+
   const baseline = runValidator();
   assert(baseline.status === 0, `baseline provenance validation failed: ${baseline.stderr}`);
 
   const manifestPath = join(cloneRoot, manifestRelative);
   const messagesPath = join(cloneRoot, messagesRelative);
+  const pendingPath = join(cloneRoot, pendingRelative);
   const originalManifestText = readFileSync(manifestPath, "utf8");
   const originalManifest = JSON.parse(originalManifestText);
   const originalMessages = readFileSync(messagesPath);
+  const originalPending = readFileSync(pendingPath);
   const restoreManifest = () => writeFileSync(manifestPath, originalManifestText, "utf8");
   const writeManifest = (mutate) => {
     const candidate = structuredClone(originalManifest);
@@ -96,6 +111,16 @@ try {
     () => writeFileSync(messagesPath, Buffer.concat([originalMessages, Buffer.from("\n")])),
     () => writeFileSync(messagesPath, originalMessages),
   );
+  expectFailure(
+    "unrecorded pending-ledger mutation",
+    () => writeFileSync(pendingPath, Buffer.concat([originalPending, Buffer.from("\n")])),
+    () => writeFileSync(pendingPath, originalPending),
+  );
+  expectFailure(
+    "active-content evidence mode mutation",
+    () => writeManifest((value) => { value.runs.at(-1).evidenceMode = "UNREVIEWED"; }),
+    restoreManifest,
+  );
 
   writeManifest((value) => { value.runs[0].outcomes.changedLocaleEntries += 1; });
   const stageRewrite = run("git", ["add", "--", manifestRelative], cloneRoot);
@@ -121,7 +146,7 @@ try {
     "committed historical rewrite failed outside the provenance gate",
   );
 
-  console.log("Localization provenance regression passed: baseline plus 7 status, license, assurance, path, worktree-history, committed-history, and artifact mutations fail closed.");
+  console.log("Localization provenance regression passed: baseline plus 9 status, license, assurance, path, worktree-history, committed-history, active-content-mode, catalog-artifact, and pending-ledger mutations fail closed.");
 } finally {
   rmSync(temporaryRoot, { recursive: true, force: true });
 }

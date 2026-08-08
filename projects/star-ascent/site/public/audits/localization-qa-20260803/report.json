@@ -12,6 +12,8 @@
     "criticalHydrationOnlyStrings": 8,
     "canonicalRoutes": 25,
     "languageQaResults": 5000,
+    "pendingVisibleSourceStrings": 48,
+    "routesWithPendingVisibleSource": 13,
     "reviewedRuntimeCells": 0,
     "canonicalFallbackCells": 48265
   },
@@ -22,7 +24,17 @@
     "reviewedExactMatchHeuristic": "ADVISORY — applies only to evidence-backed target-language cells; canonical fallback is excluded",
     "sourceBoundLanguageScorecard": "HOLD",
     "sourceBoundRenderEvidence": "PASS",
+    "pendingLocalizationActivation": "HOLD_PENDING_TRANSLATION_AND_NATIVE_REVIEW",
     "browserAccessibilityReview": "PASS_REPRESENTATIVE_RENDERED_QA"
+  },
+  "activeArtifactRefresh": {
+    "id": "2026-08-08-pending-visible-source-refresh-v1",
+    "recordedAt": "2026-08-08T09:15:18Z",
+    "sourceCommit": "d8c11aa852cfd678ce63816125214cd0db85e54e",
+    "pendingLedgerSha256": "a36577d20ee0214b4b164d0c39744edc9c68495aa01cc4397937517b4c59baa9",
+    "pendingVisibleSourceStrings": 48,
+    "routesWithPendingVisibleSource": 13,
+    "runtimeActivation": false
   },
   "historicalValidation": {
     "runDate": "2026-08-03",
@@ -53,6 +65,7 @@
     "Automated completeness proves that a static value exists; it does not prove idiomatic or culturally fluent language.",
     "Legacy editorial and critical-copy drafts are AI-assisted evidence only and are not active runtime translations.",
     "Canonical English fallback is an intentional safety state, not native-language approval.",
+    "48 newly captured English source strings remain outside the active catalog and require translation plus accountable native review before any non-English activation.",
     "Exact source-match counts inspect reviewed cells only and remain a triage heuristic, not a standalone defect count.",
     "Rendered browser checks are representative, not an exhaustive physical-device or assistive-technology certification.",
     "This package does not authorize deployment, signing, broadcasting, funding, or mainnet launch."
@@ -185,8 +198,8 @@
       "bytes": 4564
     },
     "app/i18n/pending-visible-source.json": {
-      "sha256": "af8e59e938f9807477169f8d39dd1afe2dea29ed7924c47c627d7e0c63d23c74",
-      "bytes": 3442
+      "sha256": "a36577d20ee0214b4b164d0c39744edc9c68495aa01cc4397937517b4c59baa9",
+      "bytes": 13456
     },
     "app/i18n/LocaleRuntime.tsx": {
       "sha256": "531409a871fe9893890a4217a9f5e6a00ca31b2bf3fdb7861bc048f7e69468e6",

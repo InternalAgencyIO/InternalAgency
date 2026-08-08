@@ -642,18 +642,27 @@ mod tests {
 
     #[test]
     fn serialized_adapter_state_gates_missing_stale_locked_and_open_days() {
-        const FRIDAY_MIDNIGHT_UTC: i64 = 1_786_050_000;
+        const FRIDAY_BOUNDARY_UTC: i64 = 1_786_050_060;
         let mut state = LawState::uninitialized(1, MINT, NETWORK);
         assert_eq!(
-            state.transfer_disposition_at(FRIDAY_MIDNIGHT_UTC),
+            state.transfer_disposition_at(FRIDAY_BOUNDARY_UTC),
             Ok(IatTransferDisposition::DayUnfinalized)
         );
 
-        state.decision = Some(
-            create_solana_daily_decision(20_671, 1, [0x55; 32], NETWORK, MINT.to_bytes()).unwrap(),
+        let prior_day =
+            create_solana_daily_decision(20_671, 1, [0x55; 32], NETWORK, MINT.to_bytes()).unwrap();
+        state.decision = Some(prior_day);
+        let prior_day_expected = if prior_day.locked {
+            IatTransferDisposition::RejectedDailyLockdown
+        } else {
+            IatTransferDisposition::Allowed
+        };
+        assert_eq!(
+            state.transfer_disposition_at(FRIDAY_BOUNDARY_UTC - 1),
+            Ok(prior_day_expected)
         );
         assert_eq!(
-            state.transfer_disposition_at(FRIDAY_MIDNIGHT_UTC),
+            state.transfer_disposition_at(FRIDAY_BOUNDARY_UTC),
             Ok(IatTransferDisposition::DayUnfinalized)
         );
 
@@ -671,12 +680,12 @@ mod tests {
 
         state.decision = Some(locked);
         assert_eq!(
-            state.transfer_disposition_at(FRIDAY_MIDNIGHT_UTC),
+            state.transfer_disposition_at(FRIDAY_BOUNDARY_UTC),
             Ok(IatTransferDisposition::RejectedDailyLockdown)
         );
         state.decision = Some(open);
         assert_eq!(
-            state.transfer_disposition_at(FRIDAY_MIDNIGHT_UTC),
+            state.transfer_disposition_at(FRIDAY_BOUNDARY_UTC),
             Ok(IatTransferDisposition::Allowed)
         );
     }

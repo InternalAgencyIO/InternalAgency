@@ -20,12 +20,12 @@ Architecture branch: `agent/iat-b3-architecture`
 5. The bucket mapping remains exactly `100/10000` on non-Friday days and
    `6667/10000` on Friday. Because the selected Solana slot-hash input is not a
    threshold VRF, B3 does not claim an unconditionally exact realized chance.
-6. The first successful permissionless `finalize_day` interaction after local
-   00:00 records the result. Until then all canonical IAT ownership transfers
-   fail closed.
+6. The first successful permissionless `finalize_day` interaction at or after
+   local 00:01 records the result. Until then all canonical IAT ownership
+   transfers fail closed.
 7. A selected result rejects every public and confidential canonical IAT
-   ownership transfer until the next fixed UTC+03:00 civil-day boundary and the
-   next day is finalized open.
+   ownership transfer until the next fixed UTC+03:00 protocol-day boundary at
+   00:01 and the next day is finalized open.
 8. The decision uses a canonically lagged Solana ancestor slot hash, with its
    limited leader, scheduler, and finalizer-influence risks disclosed.
 9. The IAT law has no privileged transfer bypass, external oracle, result
@@ -59,9 +59,10 @@ confidential IAT amounts and balances for opt-in users.
  Clock + lagged ancestor SlotHashes
 ```
 
-Every public or confidential IAT ownership transfer after a new local day begins
-must reference that exact day's record. Missing records fail closed. Any caller
-can create the record with a separate successful `finalize_day` transaction,
+Every public or confidential IAT ownership transfer after a new protocol day
+begins at local 00:01 must reference that exact day's record. Missing records
+fail closed. Any caller can create the record with a separate successful
+`finalize_day` transaction,
 after which all IAT ownership transfers either remain rejected for the selected
 day or proceed for the open day. The separate transaction is necessary because
 Solana rolls back the result write if a later instruction fails.
@@ -146,7 +147,7 @@ oracle participates in lockdown validity. Genesis permanently commits:
 
 ```text
 IAT_PROTOCOL_OFFSET_SECONDS = 10_800       // fixed UTC+03:00 label
-DAILY_DECISION_LOCAL_SECOND = 0            // first block reaching 00:00
+DAILY_DECISION_LOCAL_SECOND = 60           // first block reaching 00:01
 LOCKDOWN_DURATION_NOMINAL_SECONDS = 86_400
 NORMAL_DAY_LOCKDOWN_CHANCE = 100 / 10000   // 1%
 FRIDAY_LOCKDOWN_CHANCE = 6667 / 10000      // 66.67%
@@ -163,10 +164,15 @@ nominal_time(H) = genesis_nominal_time
                 + (H - genesis_height) * nominal_block_seconds
 ```
 
+The protocol-day label for Unix second `t` is defined exactly as
+`floor((t + 10_800 - 60) / 86_400)`, using mathematical floor division. Thus
+local `00:00:00` through `00:00:59` belongs to the preceding protocol day, and
+the new label begins exactly at `00:01:00`, including for negative Unix times.
+
 For every local day, the decision height is the first height whose derived
-nominal time is at or after 00:00 in fixed UTC+03:00. It is also the opening
+nominal time is at or after 00:01 in fixed UTC+03:00. It is also the opening
 height if selected. The closing height is the first height reaching the next
-local 00:00, making the interval half-open. Network latency or a change in real
+local 00:01, making the interval half-open. Network latency or a change in real
 block-production rate can move the wall-clock appearance of these heights;
 that drift is accepted. Validators never consult their local clock to decide
 whether a block is locked.
@@ -178,7 +184,7 @@ neither value is a governance parameter.
 
 ### 4.3 Provable daily decision
 
-The first block reaching each nominal local 00:00 is the decision block. Its
+The first block reaching each nominal local 00:01 is the decision block. Its
 header commits the unique output and proof of the network's consensus-native
 threshold VRF or equivalent bias-resistant random beacon. Validators derive
 the decision from the header before executing the block body. If selected, a
@@ -412,6 +418,8 @@ The following require measured prototypes, not assumption:
   acceptable;
 - legal and jurisdictional treatment of the hosted confidential-transfer UI.
 
-The Solana `1.5 SOL` target applies only to project deployment funding. User
-confidential-account rent and transaction fees are separate. No validator
-network budget is required for the selected profile.
+As of 2026-08-08, the owner accepts a `3 SOL` aggregate fresh-payer peak
+ceiling for B3 project deployment. The optimized native law alone measures
+`1.97768400 SOL` peak, but the retained-feature aggregate is not yet proven
+under the ceiling. User confidential-account rent and transaction fees are
+separate. No validator-network budget is required for the selected profile.

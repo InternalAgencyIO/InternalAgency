@@ -86,7 +86,7 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
   assert.match(component, /aria-live="polite"/);
   assert.match(component, /role="status" aria-live="polite" aria-atomic="true"/);
   assert.match(component, /const phaseStatus = phase === "settled"/);
-  assert.equal((component.match(/loading="lazy" decoding="async"/g) ?? []).length, 7);
+  assert.equal((component.match(/loading="lazy" decoding="async"/g) ?? []).length, 8);
   assert.match(component, /campaignArt\.signalFourAnchor[\s\S]{0,400}fetchPriority="high"/);
   assert.match(component, /aria-label="Ten Casino DLC demo games"/);
   assert.equal((component.match(/^    sceneLabels: \{/gmu) ?? []).length, 10);
@@ -134,24 +134,25 @@ test("Casino DLC demo includes keyboard, live-region, responsive, and reduced-mo
 });
 
 test("Nightflight Signal Four art is source-bound, deterministic, and traceable", async () => {
-  const [component, narrative, narrativeComponent, css, provenance, packageLock] = await Promise.all([
+  const [component, narrative, narrativeComponent, css, provenance, packageLock, homePage] = await Promise.all([
     read("app/future/casino/demo/CasinoDemo.tsx"),
     read("app/future/casino/demo/nightflight-narrative.mjs"),
     read("app/future/casino/demo/NightflightNarrative.tsx"),
     read("app/future/casino/demo/casino-demo.css"),
     read("public/future/casino/nightflight/asset-provenance.json").then(JSON.parse),
     read("package-lock.json").then(JSON.parse),
+    read("app/page.tsx"),
   ]);
   assert.equal(packageLock.packages["node_modules/sharp"].version, "0.35.2", "the deterministic image processor must remain lock-pinned");
   assert.equal(provenance.licenseScope.metadata, "CC0-1.0");
   assert.equal(provenance.licenseScope.generatedAssets, "CC0-1.0 dedication to the extent of the project's rights");
-  assert.equal(provenance.version, 5);
+  assert.equal(provenance.version, 7);
   assert.equal(provenance.process.mode, "source-bound-reuse-plus-project-generation");
   assert.match(provenance.process.generationPolicy, /fictional adults age 25\+/);
   assert.match(provenance.process.motionDisclosure, /does not claim.*live-action video/i);
   assert.match(provenance.process.summary, /four-member.*AI ECE/i);
-  assert.equal(provenance.assets.length, 15);
-  assert.equal(new Set(provenance.assets.map((asset) => asset.sha256)).size, 15);
+  assert.equal(provenance.assets.length, 23);
+  assert.equal(new Set(provenance.assets.map((asset) => asset.sha256)).size, 23);
   assert.equal(provenance.identityAnchor.role, "AI signal officer");
   assert.equal(provenance.identityAnchor.sourceSha256, "b22ef5cd9929d2a09f96dc0765434db41c964b0f0390589e940eb085935c2315");
   for (const asset of provenance.assets) {
@@ -194,11 +195,13 @@ test("Nightflight Signal Four art is source-bound, deterministic, and traceable"
   const generatedAssets = provenance.assets.filter((asset) => asset.status === "active-v3");
   const inactiveAssets = provenance.assets.filter((asset) => asset.status === "inactive-source-v2");
   const supportAssets = provenance.assets.filter((asset) => asset.status === "active-support-v2");
+  const editorialAssets = provenance.assets.filter((asset) => asset.status === "active-editorial-v1");
   assert.equal(legacyAssets.length, 6);
   assert.equal(activeAssets.length, 3);
   assert.equal(generatedAssets.length, 1);
   assert.equal(inactiveAssets.length, 1);
   assert.equal(supportAssets.length, 4);
+  assert.equal(editorialAssets.length, 8);
   assert.deepEqual(activeAssets.map((asset) => asset.sourceAssetNumber), [872, 874, 875]);
   for (const asset of activeAssets) {
     assert.equal(asset.sourceCommit, "084c86c01a9c65022bd9ca4dba5f4aa3e85914f7");
@@ -281,6 +284,68 @@ test("Nightflight Signal Four art is source-bound, deterministic, and traceable"
       .toBuffer();
     assert.equal(sha256(regenerated), asset.sha256, `${asset.publicPath} must reproduce from its declared crop and transform`);
   }
+  for (const asset of editorialAssets) {
+    assert.deepEqual(asset.dimensions, { width: 720, height: 1280 });
+    assert.equal(asset.generatedAt, "2026-08-08");
+    assert.equal(asset.generator, "OpenAI built-in image generation via Codex imagegen skill");
+    assert.equal(asset.generatorVersion, "not exposed by provider");
+    assert.match(asset.generationMaster.storage, /private generation-stage artifact.*host path intentionally omitted/i);
+    assert.equal(asset.generationMaster.pathDisclosed, false);
+    assert.match(asset.generationMaster.sha256, /^[a-f0-9]{64}$/);
+    assert.ok(asset.generationMaster.bytes > 0);
+    assert.deepEqual(asset.generationMaster.dimensions, asset.publicPath.includes("paws-prismatic-pounce") ? { width: 1023, height: 1537 } : { width: 941, height: 1672 });
+    assert.equal(asset.encoding.processor, "Sharp 0.35.2");
+    assert.equal(asset.encoding.resize, "720x1280 cover centre");
+    assert.equal(asset.encoding.quality, 84);
+    assert.equal(asset.encoding.smartSubsample, true);
+    assert.ok(["home", "nightflight-demo"].includes(asset.placementSurface));
+    const placementSource = asset.placementSurface === "home" ? homePage : component;
+    assert.match(placementSource, new RegExp(asset.publicPath.replaceAll("/", "\\/")));
+    for (const reference of asset.sourceReferences) {
+      assert.match(reference.sha256, /^[a-f0-9]{64}$/);
+      if (reference.scope === "repository") {
+        const referenceBytes = await readFile(new URL(reference.path, repositoryRoot));
+        assert.equal(sha256(referenceBytes), reference.sha256, `${reference.path} reference hash must match provenance`);
+      } else {
+        assert.equal(reference.scope, "private-generation-stage");
+        assert.equal(reference.pathDisclosed, false);
+        assert.equal("path" in reference, false, "private generation-stage host paths must not enter public provenance");
+      }
+    }
+  }
+  const homeEditorialAssets = editorialAssets.filter((asset) => asset.placementSurface === "home");
+  const relationshipEditorialAssets = editorialAssets.filter((asset) => asset.placementSurface === "nightflight-demo");
+  assert.equal(homeEditorialAssets.length, 3);
+  assert.equal(relationshipEditorialAssets.length, 5);
+  assert.deepEqual(relationshipEditorialAssets.map((asset) => asset.mode), Array(5).fill("reference-guided-relationship-study-generation"));
+  assert.deepEqual(relationshipEditorialAssets.map((asset) => asset.visibleSubjectsLeftToRight.length), Array(5).fill(4));
+  for (const asset of relationshipEditorialAssets) {
+    assert.equal(asset.adultPolicy, "four fictional adults age 25+, fully clothed, non-explicit");
+    assert.match(asset.accessibleDescription, /four fictional adult women age 25 or older/i);
+    assert.doesNotMatch(`${asset.accessibleDescription}\n${asset.promptFamily}`, /kiss|kissing/i);
+    assert.equal(asset.sourceReferences.filter((reference) => reference.scope === "repository").length, 2);
+  }
+  const skybridgeStudy = relationshipEditorialAssets.find((asset) => asset.publicPath.includes("skybridge-triangle"));
+  const privateSkybridgePredecessor = skybridgeStudy?.sourceReferences.find((reference) => reference.scope === "private-generation-stage");
+  assert.equal(privateSkybridgePredecessor?.pathDisclosed, false);
+  assert.equal(privateSkybridgePredecessor?.sha256, "26b430fa2bcff800b3c561cf557004a896d8d78b691498cbc4dffe263ea85abf");
+  assert.equal(privateSkybridgePredecessor?.bytes, 2726933);
+  assert.deepEqual(privateSkybridgePredecessor?.dimensions, { width: 941, height: 1672 });
+  assert.equal("path" in privateSkybridgePredecessor, false);
+  assert.match(component, /SIGNAL FOUR \/\/ FULL-SPECTRUM RELATIONSHIP STUDIES/);
+  assert.match(component, /className="relationship-studies-grid"/);
+  assert.match(component, /Four fictional adult women age 25 or older/);
+  assert.match(component, /playful AI ECE jealousy/);
+  assert.equal((component.match(/src: "\/future\/casino\/nightflight\/signal-four-[^"]+-v1\.webp"/g) ?? []).length, 5);
+  assert.match(component, /<img src=\{study\.src\} width=\{720\} height=\{1280\} loading="lazy" decoding="async" alt=\{study\.alt\} \/>/);
+  assert.doesNotMatch(component, /kiss|kissing/i);
+  assert.match(css, /\.relationship-studies-grid\{[^}]*grid-template-columns:repeat\(5,minmax\(0,1fr\)\)/);
+  assert.match(css, /@media\(max-width:540px\)[\s\S]*\.relationship-studies-grid\{grid-template-columns:1fr\}/);
+  const eceEditorial = editorialAssets.find((asset) => asset.visibleSubject === "AI ECE");
+  assert.equal(eceEditorial?.adultPolicy, "fictional adult age 25+, fully clothed, non-explicit");
+  assert.equal(eceEditorial?.editorialProp.state, "inert and non-operational");
+  assert.match(eceEditorial?.editorialProp.claimBoundary ?? "", /not represent.*functional equipment.*operational use/i);
+  assert.equal(editorialAssets.find((asset) => asset.visibleSubject === "PAWS")?.adultPolicy, "no people depicted");
   assert.match(component, /storyForGame/);
   assert.equal((narrative.match(/interaction: "/g) ?? []).length, 10);
   assert.equal((narrative.match(/affectsOutcome: false/g) ?? []).length, 10);

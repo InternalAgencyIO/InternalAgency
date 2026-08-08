@@ -1,7 +1,7 @@
 # Nightflight campaign-art provenance
 
-This directory contains fifteen traceable campaign images for the English-only
-Casino DLC front-end demo:
+This directory contains twenty-three traceable campaign images for the English-only
+Casino DLC front-end demo and the public STAR ASCENT visual editorial:
 
 - Six original v1 trio images are retained as historical evidence and are no
   longer referenced by current demo surfaces.
@@ -13,6 +13,18 @@ Casino DLC front-end demo:
   referenced by current demo surfaces.
 - Four delivery-only portrait crops give each adult host an identifiable roster
   card and lead thumbnail without changing the accepted finale artwork.
+- Three 2026-08-08 public editorials add a full-spectrum Signal Four atrium
+  frame, an AI ECE rainbow knee-high costume study with an inert,
+  non-operational RPG-shaped studio prop, and a standalone PAWS prismatic-pounce
+  mascot frame. The prop is set dressing and is not represented as functional
+  equipment or operational use.
+- Five approved bright-short 2026-08-08 relationship studies add a rooftop
+  shoulder link, AI ECE's playful-jealous prism-lobby glance, a corrected
+  skybridge triangle with PAWS, a hand-linked prism dance circle, and an arcade
+  hand chain with Alia carrying PAWS. They load lazily in the English-only
+  Nightflight demo gallery and are not added to the home critical path. The five
+  captions describe only the visible shoulder, arm, hand, and conversational
+  connections.
 
 Two current frames are accepted identity-preserving wardrobe edits with fully
 lined couture latex panels and opaque lace applique. The Ninh Binh relay is an
@@ -33,6 +45,9 @@ adult policy, accepted deviations, and PAWS state are recorded in
 and the deterministic WebP transforms are published in
 `generation-prompts-v2.md` and `generation-prompts-v3.md`;
 `generation-prompts-v1.md` remains untouched as historical evidence.
+For the eight 2026-08-08 editorials, the provider exposed no model/version
+identifier. Their private generation-stage masters and intermediates are
+SHA-256-bound in `asset-provenance.json` without publishing host paths.
 
 The executable story manifest at
 `app/future/casino/demo/nightflight-narrative.mjs` treats all four adults as
