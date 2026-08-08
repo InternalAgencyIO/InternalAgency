@@ -1,0 +1,359 @@
+{
+  "batch": 284,
+  "country": "Malta",
+  "status": "partial-accepted",
+  "rollMethod": "FNV-1a over batch284-malta-scene-field keys, reduced modulo 100. Male scene selection is reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "maleModelSelection": {
+    "key": "batch284-malta-male-model-scene",
+    "roll": 62,
+    "selectedScenePosition": 3,
+    "selectedScene": 1158,
+    "maleEmotion": {
+      "key": "batch284-malta-scene3-male-emotion",
+      "roll": 87,
+      "result": "fear and urgent vulnerability"
+    },
+    "faceAnchor": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Malta's George Cross is an official state decoration and is not copied. No literal flag appears.",
+    "fallbackMotifs": [
+      "Marsaxlokk luzzu hull curves, lampuki fish-scale geometry, limestone quay blocks, and market-awning bands",
+      "Birgu gallarija balcony grids, dghajsa boat-prow curves, Fort St Angelo stone courses, and harbor ripples",
+      "Gozo Cittadella battlements, Gozitan lace rosettes, salt-pan grids, and prickly-pear contours",
+      "Hagar Qim trilithon geometry, honey-limestone strata, Mediterranean wave lines, and festa-firework arcs"
+    ],
+    "minimumCoverage": "Every scene uses large readable secular Maltese motifs across at least two character outfits.",
+    "cultureScenes": "Scene 1156 foregrounds Marsaxlokk fishing and market design. Scene 1158 uses Gozitan lace and salt-pan geometry as large couture fields.",
+    "prohibitions": "No literal flag, George Cross, official emblem, sacred symbol, political insignia, copied ceremonial dress, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch284-malta-x-heart",
+      "roll": 67,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch284-malta-x-internalagency",
+      "roll": 51,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch284-malta-x-worldxxxseries",
+      "roll": 48,
+      "active": false
+    }
+  },
+  "scenePlans": {
+    "1156": {
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "Marsaxlokk harbor with colorful luzzu boats and limestone quays",
+      "motifs": [
+        "large luzzu hull and lampuki fish-scale fields",
+        "large market-awning, harbor-ripple, and honey-limestone geometry"
+      ],
+      "weather": { "roll": 46, "result": "rolling thunderstorm" },
+      "paws": { "roll": 55, "active": false },
+      "poleDanceTheme": { "roll": 52, "active": false },
+      "rainbowOnly": { "roll": 82, "active": false },
+      "rainbowHosiery": {
+        "roll": 69,
+        "active": false,
+        "wearerRoll": 37,
+        "paletteModeRoll": 87
+      },
+      "romanceBeat": {
+        "roll": 95,
+        "dynamicIndex": 11,
+        "result": "The quartet crosses in a tight weave with one linked pair, a protective back touch, a cheek-to-cheek pass, and a resentful counter-look."
+      },
+      "compoundLoveBeat": {
+        "roll": 15,
+        "index": 3,
+        "result": "Alia and Radiance share a shoulder embrace while Radiance reaches toward ECE and Ellie reassures ECE at close range."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 15, "result": "extreme happiness, radiant laughing delight" },
+          "visibleMidriff": { "roll": 71, "active": false },
+          "straplessDress": { "roll": 92, "active": false },
+          "fullyOpenBack": { "roll": 13, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "roll": 35, "result": "magnetic confidence" },
+          "visibleMidriff": { "roll": 59, "active": false },
+          "straplessDress": { "roll": 80, "active": false },
+          "fullyOpenBack": { "roll": 25, "active": true }
+        },
+        "Alia": {
+          "emotion": { "roll": 77, "result": "contained resentment" },
+          "visibleMidriff": { "roll": 89, "active": false },
+          "straplessDress": { "roll": 18, "active": true },
+          "fullyOpenBack": { "roll": 91, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 87, "result": "fear and urgent vulnerability" },
+          "visibleMidriff": { "roll": 67, "active": false },
+          "straplessDress": { "roll": 52, "active": false },
+          "fullyOpenBack": { "roll": 41, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance one-shoulder boat-prow peplum mini with covered waist and completely open back",
+        "Ellie low-V asymmetrical collar mini-jumpsuit with covered waist and completely open back",
+        "Alia fully strapless lantern-skirt cocktail mini with no shoulder attachments and covered waist",
+        "ECE deep-V sculpted short romper with a curved harbor-panel overskirt and covered waist"
+      ],
+      "plannedHandMap": "Radiance embraces Alia's shoulder and links ECE. Alia holds Radiance's waist and Ellie's forearm. Ellie touches Alia's forearm and ECE's cheek. ECE holds the inert prop toward an empty harbor route marker and returns Radiance's link beneath the separate route map. Exactly four adults and eight hands."
+    },
+    "1157": {
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "Birgu waterfront with Fort St Angelo and Grand Harbour",
+      "motifs": [
+        "large gallarija balcony-grid and Fort St Angelo stone fields",
+        "large dghajsa prow, harbor-ripple, and limestone-facet geometry"
+      ],
+      "weather": { "roll": 25, "result": "soft dramatic overcast" },
+      "paws": { "roll": 38, "active": false },
+      "poleDanceTheme": { "roll": 49, "active": false },
+      "rainbowOnly": { "roll": 37, "active": false },
+      "rainbowHosiery": {
+        "roll": 12,
+        "active": true,
+        "wearerRoll": 60,
+        "wearer": "AI ECE",
+        "paletteModeRoll": 4,
+        "paletteMode": "Malta-palette multicolor gradient",
+        "treatment": "opaque red-white knee socks expanded through coral, Mediterranean cyan, and warm gold transitions"
+      },
+      "romanceBeat": {
+        "roll": 40,
+        "dynamicIndex": 4,
+        "result": "Radiance reassures Alia during the route handoff while Ellie stays shoulder-close and ECE keeps Radiance's fingers."
+      },
+      "compoundLoveBeat": {
+        "roll": 38,
+        "index": 2,
+        "result": "Ellie holds Radiance close while Radiance comforts Alia and ECE steps into their joined hands."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 10, "result": "romantic joy" },
+          "visibleMidriff": { "roll": 48, "active": true },
+          "straplessDress": { "roll": 23, "active": true },
+          "fullyOpenBack": { "roll": 52, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "roll": 84, "result": "crying with visible tears" },
+          "visibleMidriff": { "roll": 50, "active": false },
+          "straplessDress": { "roll": 93, "active": false },
+          "fullyOpenBack": { "roll": 46, "active": false }
+        },
+        "Alia": {
+          "emotion": { "roll": 4, "result": "tender affection" },
+          "visibleMidriff": { "roll": 46, "active": true },
+          "straplessDress": { "roll": 73, "active": false },
+          "fullyOpenBack": { "roll": 30, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 22, "result": "playful mischief" },
+          "visibleMidriff": { "roll": 0, "active": true },
+          "straplessDress": { "roll": 91, "active": false },
+          "fullyOpenBack": { "roll": 96, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance fully strapless folded crop bodice and high-waist wrap skort with visible navel",
+        "Ellie one-shoulder draped tulip mini with covered waist",
+        "Alia cropped asymmetrical vest shell and high-waist tailored shorts with visible navel",
+        "ECE low-V cropped peplum and faceted mini-skirt with visible navel and Malta-palette opaque knee socks"
+      ],
+      "plannedHandMap": "Radiance and ECE form the affectionate center with a two-hand side embrace and delighted eye contact. Crying Ellie touches Radiance's shoulder and Alia's forearm. Alia alone handles the inert prop toward an empty harbor target with one hand and comforts Ellie's shoulder with the other. ECE controls the separate map from her embracing wrist. Exactly four adults and eight hands."
+    },
+    "1158": {
+      "theme": "undercover investigator couture",
+      "landmark": "Gozo Cittadella with limestone bastions and island terraces",
+      "motifs": [
+        "large Cittadella battlement and Gozitan lace-rosette fields",
+        "large salt-pan grid, prickly-pear contour, and limestone-course geometry"
+      ],
+      "weather": { "roll": 76, "result": "powerful windstorm with controlled fabric motion" },
+      "paws": { "roll": 97, "active": false },
+      "poleDanceTheme": { "roll": 50, "active": false },
+      "rainbowOnly": { "roll": 20, "active": false },
+      "rainbowHosiery": {
+        "roll": 75,
+        "active": false,
+        "wearerRoll": 79,
+        "paletteModeRoll": 93
+      },
+      "romanceBeat": {
+        "roll": 61,
+        "dynamicIndex": 1,
+        "result": "Ellie closes into Radiance's side while ECE holds the relationship counter-line and Alia watches with jealousy."
+      },
+      "compoundLoveBeat": {
+        "roll": 45,
+        "index": 9,
+        "result": "Radiance cradles Alia's face, Alia holds Radiance's waist, Ellie closes at Radiance's shoulder, and ECE keeps the final link."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 81, "result": "deep sadness" },
+          "visibleMidriff": { "roll": 49, "active": true },
+          "straplessDress": { "roll": 78, "active": false },
+          "fullyOpenBack": { "roll": 11, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "roll": 25, "result": "calm contentment" },
+          "visibleMidriff": { "roll": 85, "active": false },
+          "straplessDress": { "roll": 42, "active": false },
+          "fullyOpenBack": { "roll": 83, "active": false }
+        },
+        "Alia": {
+          "emotion": { "roll": 63, "result": "visible jealousy" },
+          "visibleMidriff": { "roll": 19, "active": true },
+          "straplessDress": { "roll": 24, "active": true },
+          "fullyOpenBack": { "roll": 41, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 33, "result": "overwhelming relief" },
+          "visibleMidriff": { "roll": 57, "active": false },
+          "straplessDress": { "roll": 14, "active": true },
+          "fullyOpenBack": { "roll": 67, "active": false }
+        },
+        "maleModel": {
+          "emotion": { "roll": 87, "result": "fear and urgent vulnerability" }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance cropped one-shoulder fan bodice and pleated investigator skort with visible navel and completely open back",
+        "Ellie sleeveless belted tulip mini with covered waist",
+        "Alia fully strapless cropped lace-fan bodice and asymmetric mini-skirt with visible navel",
+        "ECE fully strapless folded investigator mini with covered waist",
+        "male fitted black short-sleeve polo with a restrained Malta-red shoulder inset, black jeans, and black boots"
+      ],
+      "plannedHandMap": "ECE holds the inert prop toward an empty Cittadella route target and links the male with her free hand. The male holds ECE's hand and side-hugs Alia at the waist while looking only at ECE. Alia touches his chest and Radiance's waist. Radiance cradles Alia's cheek and touches the male's forearm. Ellie touches Radiance's shoulder and ECE's forearm. Exactly five adults and ten hands."
+    },
+    "1159": {
+      "theme": "undercover investigator couture",
+      "landmark": "Hagar Qim megaliths and Filfla sea view from the modern public viewing platform",
+      "motifs": [
+        "large trilithon and honey-limestone strata fields",
+        "large Mediterranean wave, prickly-pear, and secular firework-arc geometry"
+      ],
+      "weather": { "roll": 27, "result": "cinematic light rain with reflections" },
+      "paws": { "roll": 60, "active": false },
+      "poleDanceTheme": {
+        "roll": 3,
+        "active": true,
+        "treatment": "adult athletic route-mast choreography on a separate modern viewing platform, never touching the heritage stones"
+      },
+      "rainbowOnly": { "roll": 51, "active": false },
+      "rainbowHosiery": {
+        "roll": 34,
+        "active": false,
+        "wearerRoll": 66,
+        "paletteModeRoll": 62
+      },
+      "romanceBeat": {
+        "roll": 50,
+        "dynamicIndex": 2,
+        "result": "Alia draws Radiance through linked hands while ECE steadies the chain and Ellie reaches the route mast."
+      },
+      "compoundLoveBeat": {
+        "roll": 28,
+        "index": 4,
+        "result": "ECE closes beside Radiance while Ellie receives reassurance and Alia covers the quartet's joined hands."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 4, "result": "tender affection" },
+          "visibleMidriff": { "roll": 74, "active": false },
+          "straplessDress": { "roll": 73, "active": false },
+          "fullyOpenBack": { "roll": 30, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "roll": 74, "result": "betrayal shock" },
+          "visibleMidriff": { "roll": 0, "active": true },
+          "straplessDress": { "roll": 99, "active": false },
+          "fullyOpenBack": { "roll": 8, "active": true }
+        },
+        "Alia": {
+          "emotion": { "roll": 70, "result": "suspicion" },
+          "visibleMidriff": { "roll": 44, "active": true },
+          "straplessDress": { "roll": 39, "active": false },
+          "fullyOpenBack": { "roll": 60, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 36, "result": "magnetic confidence" },
+          "visibleMidriff": { "roll": 78, "active": false },
+          "straplessDress": { "roll": 45, "active": false },
+          "fullyOpenBack": { "roll": 58, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance low-V asymmetric mini-suit with curved limestone peplum and covered waist",
+        "Ellie cropped geometric shell and tailored shorts with visible navel and completely open back",
+        "Alia one-shoulder cropped fan top and diagonal mini-skirt with visible navel",
+        "ECE deep-sweetheart sleeveless romper with a folded trilithon overskirt and covered waist"
+      ],
+      "plannedHandMap": "Ellie performs a controlled low standing pivot at the separate route mast with one hand high on the mast and one linked to Radiance. Radiance spots Ellie's waist and links Alia. Alia returns Radiance's link and touches ECE's shoulder. ECE holds the inert prop toward a clearly empty route target and supports Ellie's shoulder with her free hand beneath the map. Exactly four adults and eight hands."
+    }
+  },
+  "anatomyAcceptanceGate": "Scene 1158 must contain exactly five adults with ten arms and ten hands. Scenes 1156, 1157, and 1159 must contain exactly four adults with eight arms and eight hands. Every visible hand must trace continuously to one owner. Reject any extra, duplicated, floating, fused, ownerless, or partially emerging limb or finger cluster.",
+  "acceptedScenes": [
+    {
+      "scene": 1156,
+      "asset": "1156-malta-marsaxlokk-thunderstorm-covert-route.png",
+      "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-dda052dd-5dfe-419b-a06d-4bb32a390c5e.png",
+      "attempt": "raw",
+      "qa": "Accepted. Four distinct anchored adults, eight plausible owned hands with natural occlusion, three clear affectionate contacts, exact covered-waist, strapless, and visible open-back outcomes, complete heels, strong Marsaxlokk boats and harbor motifs, rolling thunderstorm, and a safe outward inert-prop line."
+    }
+  ],
+  "blockedScenes": [
+    {
+      "scene": 1157,
+      "reason": "The raw image has clean anatomy, the correct cast, Fort St Angelo, visible tears, complete footwear, strong Radiance-ECE affection, and ECE's triggered Malta-palette hosiery, but Alia's prop muzzle line crosses the group and Alia's triggered navel is not clearly visible. The single recovery variant was rejected by output moderation.",
+      "rawSource": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-68d64ae6-e140-42e6-a497-b14b3b817814.png",
+      "recoveryRequestId": "f9b1db81-30f6-4188-b5c8-ad52edf9f439",
+      "recoveryPasses": 1
+    },
+    {
+      "scene": 1158,
+      "reason": "The raw request was rejected by output moderation. The single recovery has five distinct adults, clean anatomy, complete shoes, Cittadella context, and a safe prop line, but it does not visibly materialize Radiance's fully-open-back roll, powerful windstorm fabric motion, or large Maltese motif coverage across at least two outfits.",
+      "rawRequestId": "a5e5dd78-fd18-4eb7-a787-e825dbffc9ff",
+      "recoverySource": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-28479e78-c886-44e2-94f7-5a720829e64e.png",
+      "recoveryPasses": 1
+    },
+    {
+      "scene": 1159,
+      "reason": "Both the raw request and the single public athletic route-mast recovery were rejected by output moderation, so no local image passed the scene gate.",
+      "rawRequestId": "26b9341a-803f-49b6-9f7a-4e288881ed0a",
+      "recoveryRequestId": "5542ec6e-6570-47a1-a0ad-e8c0fb4f3e65",
+      "recoveryPasses": 1
+    }
+  ],
+  "shorteningPass": "Not required. The accepted scene already uses concise secure above-knee editorial proportions. All raw and recovery originals remain preserved.",
+  "xPublishingAttempt": {
+    "status": "pending"
+  },
+  "nextThemePair": [
+    "undercover investigator couture",
+    "nurse-care couture"
+  ],
+  "nextQueueCountry": "Moldova"
+}
