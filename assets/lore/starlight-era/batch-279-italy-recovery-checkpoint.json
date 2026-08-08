@@ -1,0 +1,573 @@
+{
+  "batch": 279,
+  "country": "Italy",
+  "status": "partial-accepted-recovery-exhausted",
+  "rollMethod": "FNV-1a over batch279-italy-scene-field keys, reduced modulo 100. Male scene selection is reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "nurse-care couture",
+    "doctor-clinical-command couture"
+  ],
+  "maleModelSelection": {
+    "key": "batch279-italy-male-model-scene",
+    "roll": 76,
+    "selectedScenePosition": 1,
+    "selectedScene": 1136,
+    "maleEmotion": {
+      "key": "batch279-italy-scene1-male-emotion",
+      "roll": 43,
+      "result": "determination"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Italy's green-white-red tricolor has no pictorial motif, so no literal flag graphic is copied.",
+    "fallbackMotifs": [
+      "Colosseum arches and Roman terrazzo geometry",
+      "espresso cup and civilian scooter silhouettes",
+      "Rialto arches, gondola ferro geometry, and Murano glass",
+      "Ponte Vecchio windows, marbled paper, leather craft, and cypress",
+      "Amalfi lemons, maiolica tile geometry, and Mediterranean waves"
+    ],
+    "minimumCoverage": "Every scene places large readable secular Italian motifs across at least two character looks. Motifs remain unbranded and avoid official, political, or sacred emblems."
+  },
+  "scenePlans": {
+    "1136": {
+      "theme": "nurse-care couture",
+      "landmark": "Rome Colosseum from a secure pedestrian plaza",
+      "motifs": [
+        "large Colosseum-arch and terrazzo fields",
+        "large espresso-cup and civilian scooter geometry"
+      ],
+      "weather": {
+        "roll": 94,
+        "result": "stacked lenticular clouds"
+      },
+      "paws": {
+        "roll": 43,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 84,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 70,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 29,
+        "active": false,
+        "wearerRoll": 53,
+        "paletteModeRoll": 59
+      },
+      "romanceBeat": {
+        "roll": 79,
+        "dynamicIndex": 8,
+        "result": "Alia embraces from behind while Ellie supplies a cheek touch and ECE watches from close range."
+      },
+      "compoundLoveBeat": {
+        "roll": 35,
+        "index": 12,
+        "result": "ECE leans close with Radiance, gives Alia a quick cheek peck, and Ellie adds a protective side embrace."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "roll": 99,
+            "result": "emotional exhaustion"
+          },
+          "visibleMidriff": {
+            "roll": 23,
+            "active": true
+          },
+          "straplessDress": {
+            "roll": 60,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 69,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "roll": 75,
+            "result": "contained resentment"
+          },
+          "visibleMidriff": {
+            "roll": 71,
+            "active": false
+          },
+          "straplessDress": {
+            "roll": 12,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "roll": 9,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "roll": 89,
+            "result": "anger"
+          },
+          "visibleMidriff": {
+            "roll": 53,
+            "active": false
+          },
+          "straplessDress": {
+            "roll": 74,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 3,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "roll": 95,
+            "result": "shame and social vulnerability"
+          },
+          "visibleMidriff": {
+            "roll": 83,
+            "active": false
+          },
+          "straplessDress": {
+            "roll": 96,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 37,
+            "active": false
+          }
+        },
+        "maleModel": {
+          "emotion": {
+            "roll": 43,
+            "result": "determination"
+          }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance cropped architectural bodice with asymmetric skirt",
+        "Ellie strapless folded open-back mini",
+        "Alia one-shoulder open-back cocktail mini",
+        "ECE tailored sleeveless short romper",
+        "male fitted short-sleeve polo and black jeans"
+      ],
+      "plannedHandMap": "Radiance touches ECE's shoulder and Ellie's waist. Ellie links the male model and embraces Radiance. The male model links Ellie and embraces Alia at the waist. Alia touches his chest and ECE's shoulder while ECE gives Alia a quick cheek peck. ECE handles the inert prop and separate map. Exactly five adults and ten hands; his strongest eye line returns to ECE."
+    },
+    "1137": {
+      "theme": "nurse-care couture",
+      "landmark": "Venice Grand Canal with Rialto Bridge",
+      "motifs": [
+        "large Rialto-arch and gondola-ferro panels",
+        "large Murano-glass color fields"
+      ],
+      "weather": {
+        "roll": 9,
+        "result": "clear golden-hour radiance"
+      },
+      "paws": {
+        "roll": 82,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 57,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 25,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 52,
+        "active": false,
+        "wearerRoll": 60,
+        "paletteModeRoll": 24
+      },
+      "romanceBeat": {
+        "roll": 28,
+        "dynamicIndex": 5,
+        "result": "Radiance gives Alia a quick affectionate kiss while Ellie presses shoulder-to-shoulder and ECE supplies the rival counter-beat."
+      },
+      "compoundLoveBeat": {
+        "roll": 38,
+        "index": 3,
+        "result": "Ellie holds Radiance at waist and shoulder while Radiance gives Alia a forehead kiss and ECE reclaims attention through the route signal."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "roll": 90,
+            "result": "anger"
+          },
+          "visibleMidriff": {
+            "roll": 44,
+            "active": true
+          },
+          "straplessDress": {
+            "roll": 99,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 96,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "roll": 88,
+            "result": "fear and urgent vulnerability"
+          },
+          "visibleMidriff": {
+            "roll": 26,
+            "active": true
+          },
+          "straplessDress": {
+            "roll": 85,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 30,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "roll": 64,
+            "result": "visible jealousy"
+          },
+          "visibleMidriff": {
+            "roll": 34,
+            "active": true
+          },
+          "straplessDress": {
+            "roll": 89,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 10,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "roll": 26,
+            "result": "calm contentment"
+          },
+          "visibleMidriff": {
+            "roll": 84,
+            "active": false
+          },
+          "straplessDress": {
+            "roll": 51,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 44,
+            "active": false
+          }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance corsage-inspired two-piece with asymmetric mini",
+        "Ellie sleeveless peplum micro-suit with waist cutout",
+        "Alia open-back architectural crop top and tailored shorts",
+        "ECE sculpted one-shoulder cocktail mini"
+      ],
+      "plannedHandMap": "Radiance embraces Alia's waist and cups her cheek during a forehead kiss. Ellie holds Radiance at waist and shoulder. Alia touches Radiance's forearm and ECE's shoulder. ECE handles the inert prop and controls the separate map. Exactly four adults and eight hands."
+    },
+    "1138": {
+      "theme": "doctor-clinical-command couture",
+      "landmark": "Florence Ponte Vecchio and Arno river",
+      "motifs": [
+        "large Ponte Vecchio window and marbled-paper fields",
+        "large leather-craft and cypress geometry"
+      ],
+      "weather": {
+        "roll": 84,
+        "result": "sunshower with sparkling droplets"
+      },
+      "paws": {
+        "roll": 25,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 22,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 96,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 15,
+        "active": true,
+        "wearerRoll": 27,
+        "wearer": "Radiance",
+        "paletteModeRoll": 97,
+        "paletteMode": "original independent rainbow gradient"
+      },
+      "romanceBeat": {
+        "roll": 37,
+        "dynamicIndex": 2,
+        "result": "Ellie rises into Radiance's side embrace while ECE keeps the emotional center and Alia supplies a wounded counter-beat."
+      },
+      "compoundLoveBeat": {
+        "roll": 65,
+        "index": 6,
+        "result": "Radiance holds the center while Ellie and Alia meet cheek-to-cheek and ECE catches the linked-hand chain."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "roll": 61,
+            "result": "visible jealousy"
+          },
+          "visibleMidriff": {
+            "roll": 53,
+            "active": false
+          },
+          "straplessDress": {
+            "roll": 6,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "roll": 95,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "roll": 69,
+            "result": "suspicion"
+          },
+          "visibleMidriff": {
+            "roll": 37,
+            "active": true
+          },
+          "straplessDress": {
+            "roll": 74,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 47,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "roll": 95,
+            "result": "shame and social vulnerability"
+          },
+          "visibleMidriff": {
+            "roll": 75,
+            "active": false
+          },
+          "straplessDress": {
+            "roll": 4,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "roll": 33,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "roll": 13,
+            "result": "romantic joy"
+          },
+          "visibleMidriff": {
+            "roll": 53,
+            "active": false
+          },
+          "straplessDress": {
+            "roll": 86,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 67,
+            "active": false
+          }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance strapless folded mini with opaque rainbow stockings",
+        "Ellie cutout-waist column mini",
+        "Alia strapless sculpted cocktail mini",
+        "ECE tailored sleeveless short romper"
+      ],
+      "plannedHandMap": "Radiance side-hugs ECE and links Ellie. ECE embraces Radiance's waist and controls the separate map. Ellie links Radiance and touches Alia's cheek. Alia handles the inert prop and rests her free hand on Ellie's shoulder. Exactly four adults and eight hands; Radiance and ECE are the unmistakable emotional center."
+    },
+    "1139": {
+      "theme": "doctor-clinical-command couture",
+      "landmark": "Positano and the Amalfi Coast from a secure sea terrace",
+      "motifs": [
+        "large Amalfi-lemon and maiolica-tile fields",
+        "large Mediterranean-wave and Positano-facade geometry"
+      ],
+      "weather": {
+        "roll": 99,
+        "result": "silent heat lightning on the horizon"
+      },
+      "paws": {
+        "roll": 36,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 31,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 11,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 42,
+        "active": false,
+        "wearerRoll": 74,
+        "paletteModeRoll": 50
+      },
+      "romanceBeat": {
+        "roll": 2,
+        "dynamicIndex": 3,
+        "result": "Alia and Radiance link hands through a turn while ECE steadies the route and Ellie reaches into the choice beat."
+      },
+      "compoundLoveBeat": {
+        "roll": 48,
+        "index": 1,
+        "result": "Radiance stays inside Ellie's face-to-face embrace while giving ECE a quick cheek peck and Alia keeps a jealous protective touch."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "roll": 72,
+            "result": "betrayal shock"
+          },
+          "visibleMidriff": {
+            "roll": 42,
+            "active": true
+          },
+          "straplessDress": {
+            "roll": 69,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 14,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "roll": 38,
+            "result": "magnetic confidence"
+          },
+          "visibleMidriff": {
+            "roll": 88,
+            "active": false
+          },
+          "straplessDress": {
+            "roll": 59,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 16,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "roll": 54,
+            "result": "aching romantic longing"
+          },
+          "visibleMidriff": {
+            "roll": 44,
+            "active": true
+          },
+          "straplessDress": {
+            "roll": 95,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "roll": 12,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "roll": 92,
+            "result": "guilt and remorse"
+          },
+          "visibleMidriff": {
+            "roll": 86,
+            "active": false
+          },
+          "straplessDress": {
+            "roll": 13,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "roll": 86,
+            "active": false
+          }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance open-back asymmetric crop set",
+        "Ellie open-back one-shoulder cocktail mini",
+        "Alia open-back peplum crop suit",
+        "ECE strapless folded cocktail mini"
+      ],
+      "plannedHandMap": "Radiance embraces Ellie's shoulder and links Alia while giving ECE a quick cheek peck. Ellie holds Radiance at waist and upper back. Alia links Radiance and touches ECE's shoulder. ECE handles the inert prop and controls the separate map. Exactly four adults and eight hands."
+    }
+  },
+  "acceptedScenes": [
+    {
+      "scene": 1136,
+      "asset": "1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "source": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-70c431e1-9622-4911-8d03-7e5872b3bfee.png",
+      "attempt": "single recovery pass",
+      "qa": "Accepted: five distinct adults, recognizable quartet identities, Alia braids, first stable male face, Colosseum landmark, readable Italy motifs, strong infidelity beat, male eye line returning to ECE, ten anatomically plausible hands with natural occlusion, complete footwear, and safe outward prop direction."
+    },
+    {
+      "scene": 1137,
+      "asset": "1137-italy-venice-golden-hour-care-rialto-affection.png",
+      "source": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-ee728752-4dd1-40df-af2c-e9d091e13415.png",
+      "attempt": "initial render",
+      "qa": "Accepted: four distinct adults, Rialto Bridge, golden-hour canal light, large Venetian motifs, clear kiss and jealousy beat, eight anatomically plausible hands with natural occlusion, complete shoes, and prop directed into empty canal space."
+    },
+    {
+      "scene": 1138,
+      "asset": "1138-italy-florence-sunshower-rainbow-hosiery-command.png",
+      "source": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-b493c937-fe9c-48be-86ea-74c1f732673c.png",
+      "attempt": "resumed interrupted initial dispatch",
+      "qa": "Accepted: four distinct adults, Ponte Vecchio, cinematic sunshower, Radiance's original rainbow-gradient hosiery, clear Radiance and ECE emotional center, Alia as sole prop handler, eight anatomically plausible hands with natural occlusion, complete shoes, and safe outward river sightline."
+    }
+  ],
+  "blockedScenes": [
+    {
+      "scene": 1139,
+      "attempts": 2,
+      "reason": "The raw Positano render preserved landmark, motifs, identities, footwear, and a safe prop sightline but failed the three-touch minimum and Alia's triggered visible-midriff and fully-open-back architecture. The single corrective edit was output-blocked by the safety system, request 1d7da0b3-c431-485b-8453-aa5f15d2fc1b. Recovery is exhausted and the raw image was not copied."
+    }
+  ],
+  "maleAnchorStatus": "Established from accepted Scene 1136 and written to the authoritative contract as 1136-italy-rome-lenticular-care-male-colosseum-route.png.",
+  "shorteningPass": "Not needed for accepted Scenes 1136 through 1138; all garments already read as concise above-knee editorial proportions. Generated originals remain untouched.",
+  "nextThemePair": [
+    "doctor-clinical-command couture",
+    "adult nightlife dance-performance couture"
+  ],
+  "nextQueueCountry": "Latvia"
+}
