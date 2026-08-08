@@ -1,0 +1,129 @@
+{
+  "batch": 276,
+  "country": "Hungary",
+  "status": "partial accepted",
+  "acceptedScenes": [
+    "1124-hungary-budapest-snow-cleaner-service-paprika-route-grid.png",
+    "1126-hungary-tihany-golden-hour-covert-agent-balaton-relay.png"
+  ],
+  "blockedScenes": [
+    {
+      "scene": 1125,
+      "reason": "Initial render and the single public-safe recovery pass were both blocked by output moderation. No asset was copied."
+    },
+    {
+      "scene": 1127,
+      "reason": "The raw render placed the inert prop on an unsafe sightline across another character. The single corrective edit was blocked by output moderation, so the raw render was not accepted or copied."
+    }
+  ],
+  "rollMethod": "FNV-1a over batch276-hungary-scene-field, reduced modulo 100",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "cleaner and service couture",
+    "cinematic covert-agent crew couture"
+  ],
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Hungary's national tricolor has no pictorial motif, and no official coat of arms was copied.",
+    "fallbackMotifs": [
+      "paprika peppers",
+      "Matyo-inspired flowers",
+      "Chain Bridge ironwork",
+      "Danube waves",
+      "thermal-bath mosaics",
+      "Tihany lavender",
+      "Balaton waves",
+      "Tokaji grapevines",
+      "chimney cakes"
+    ],
+    "minimumCoverage": "Every attempted scene placed large readable secular Hungarian motifs across at least two character looks."
+  },
+  "rolls": {
+    "1124": {
+      "theme": "cleaner and service couture",
+      "weather": { "roll": 57, "result": "snow flurries" },
+      "paws": { "roll": 50, "active": false },
+      "poleDanceTheme": { "roll": 25, "active": false },
+      "rainbowOnly": { "roll": 77, "active": false },
+      "rainbowHosiery": { "roll": 72, "active": false, "wearerRoll": 8, "paletteModeRoll": 12 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 58, "result": "aching romantic longing" }, "visibleMidriff": 80, "straplessDress": 79, "fullyOpenBack": 52 },
+        "Ellie": { "emotion": { "roll": 76, "result": "contained resentment" }, "visibleMidriff": 70, "straplessDress": 73, "fullyOpenBack": 18 },
+        "Alia": { "emotion": { "roll": 20, "result": "playful mischief" }, "visibleMidriff": 30, "straplessDress": 33, "fullyOpenBack": 70 },
+        "AI ECE": { "emotion": { "roll": 98, "result": "defiance" }, "visibleMidriff": 36, "straplessDress": 71, "fullyOpenBack": 60 }
+      },
+      "motifs": ["large paprika and Matyo-inspired fields", "large Chain Bridge and Danube-wave panels"],
+      "uniqueSilhouettes": ["sculpted asymmetric mini dress", "tailored short romper", "strapless folded cocktail mini", "cropped architectural top with asymmetric mini skirt"],
+      "loveBeat": "Ellie holds Radiance from behind, Alia gives Radiance a cheek kiss while holding her arm, and ECE links fingers with Radiance in a defiant four-way counter-beat.",
+      "anatomyAudit": "Accepted after tracing every visible arm to its owner; no extra or ownerless hand is visible.",
+      "recovery": "Accepted after one simplified public-safe generation recovery."
+    },
+    "1125": {
+      "theme": "cleaner and service couture",
+      "weather": { "roll": 54, "result": "hailstorm with suspended ice and hard backlight" },
+      "paws": { "roll": 23, "active": true },
+      "poleDanceTheme": { "roll": 16, "active": false },
+      "rainbowOnly": { "roll": 98, "active": false },
+      "rainbowHosiery": { "roll": 21, "active": true, "wearerRoll": 89, "wearer": "AI ECE", "paletteModeRoll": 91, "paletteMode": "original independent rainbow gradient" },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 99, "result": "emotional exhaustion" }, "visibleMidriff": 91, "straplessDress": 12, "fullyOpenBack": 21 },
+        "Ellie": { "emotion": { "roll": 99, "result": "emotional exhaustion" }, "visibleMidriff": 7, "straplessDress": 16, "fullyOpenBack": 65 },
+        "Alia": { "emotion": { "roll": 61, "result": "visible jealousy" }, "visibleMidriff": 25, "straplessDress": 38, "fullyOpenBack": 7 },
+        "AI ECE": { "emotion": { "roll": 27, "result": "hope" }, "visibleMidriff": 27, "straplessDress": 36, "fullyOpenBack": 85 }
+      },
+      "motifs": ["large Matyo-inspired flower fields", "large thermal-bath mosaic geometry"],
+      "uniqueSilhouettes": ["strapless folded cocktail mini", "strapless bubble-hem mini", "one-shoulder cropped architectural set", "cropped peplum micro-suit with wrap skirt"],
+      "recovery": "Blocked after the single allowed recovery pass; no accepted file."
+    },
+    "1126": {
+      "theme": "cinematic covert-agent crew couture",
+      "weather": { "roll": 7, "result": "clear golden-hour radiance" },
+      "paws": { "roll": 20, "active": true },
+      "poleDanceTheme": { "roll": 47, "active": false },
+      "rainbowOnly": { "roll": 99, "active": false },
+      "rainbowHosiery": { "roll": 82, "active": false, "wearerRoll": 90, "paletteModeRoll": 98 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 72, "result": "betrayal shock" }, "visibleMidriff": 34, "straplessDress": 53, "fullyOpenBack": 46 },
+        "Ellie": { "emotion": { "roll": 86, "result": "full sobbing with tear-streaked face and shaking posture" }, "visibleMidriff": 28, "straplessDress": 71, "fullyOpenBack": 24 },
+        "Alia": { "emotion": { "roll": 54, "result": "aching romantic longing" }, "visibleMidriff": 56, "straplessDress": 95, "fullyOpenBack": 76 },
+        "AI ECE": { "emotion": { "roll": 68, "result": "possessive tension" }, "visibleMidriff": 26, "straplessDress": 85, "fullyOpenBack": 14 }
+      },
+      "motifs": ["large Tihany lavender sprays", "large Balaton waves and Hungarian floral panels"],
+      "uniqueSilhouettes": ["cropped corsage bodice with asymmetric skirt", "cropped sweetheart top with tailored shorts", "one-shoulder column mini with side peplum", "cropped architectural top with peplum micro-skirt"],
+      "loveBeat": "Radiance supports sobbing Ellie, Alia presses close with PAWS safely on her shoulder, and ECE claims Radiance's free hand while holding the route line away from the group.",
+      "anatomyAudit": "Accepted after tracing every visible arm and contact to one character; no extra or ownerless hand is visible.",
+      "recovery": "Accepted from the initial render."
+    },
+    "1127": {
+      "theme": "cinematic covert-agent crew couture",
+      "weather": { "roll": 8, "result": "clear golden-hour radiance" },
+      "paws": { "roll": 65, "active": false },
+      "poleDanceTheme": { "roll": 2, "active": true },
+      "rainbowOnly": { "roll": 72, "active": false },
+      "rainbowHosiery": { "roll": 55, "active": false, "wearerRoll": 23, "paletteModeRoll": 53 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 49, "result": "startled surprise" }, "visibleMidriff": 57, "straplessDress": 34, "fullyOpenBack": 27 },
+        "Ellie": { "emotion": { "roll": 45, "result": "awe" }, "visibleMidriff": 85, "straplessDress": 34, "fullyOpenBack": 99 },
+        "Alia": { "emotion": { "roll": 91, "result": "anger" }, "visibleMidriff": 95, "straplessDress": 8, "fullyOpenBack": 61 },
+        "AI ECE": { "emotion": { "roll": 37, "result": "magnetic confidence" }, "visibleMidriff": 29, "straplessDress": 70, "fullyOpenBack": 47 }
+      },
+      "motifs": ["large Tokaji grapevine and barrel geometry", "large paprika, Matyo-inspired floral, and Eger stone-arch panels"],
+      "uniqueSilhouettes": ["strapless tulip-hem mini", "strapless folded peplum mini", "strapless architectural origami-hem mini", "cropped sweetheart bodice with tailored micro-skirt"],
+      "recovery": "Raw render rejected because the prop sightline crossed another character. The single corrective edit was blocked; no accepted file."
+    }
+  },
+  "contractUpdate": "Added a binding anatomy-integrity gate requiring exactly two arms and two hands per character, clear ownership for every contact, and rejection of any extra, duplicated, floating, fused, or ambiguous hand.",
+  "shorteningPass": "Not required for the two accepted scenes; all accepted hemlines already read as concise and above-knee.",
+  "nextThemePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "nextQueueCountry": "Iceland"
+}
