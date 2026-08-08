@@ -676,6 +676,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "iat-b3-economy"
+version = "0.1.0"
+dependencies = [
+ "iat-b3-consensus",
+ "iat-v2",
+]
+
+[[package]]
 name = "iat-b3-law"
 version = "0.1.0"
 dependencies = [

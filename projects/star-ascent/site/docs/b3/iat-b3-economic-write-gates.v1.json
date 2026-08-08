@@ -4,6 +4,16 @@
   "expectedHandlerCount": 15,
   "canonicalMintProgram": "Token-2022",
   "deploymentExposure": "DISABLED_UNTIL_ALL_15_PASS",
+  "firstSafeSlice": {
+    "crate": "programs/iat_b3_economy",
+    "crateType": "lib",
+    "hostOnly": true,
+    "solanaEntrypoint": false,
+    "publicDispatcher": false,
+    "accountLifecycle": false,
+    "tokenCpi": false,
+    "networkAccess": false
+  },
   "canonicalGate": {
     "name": "CANONICAL_DAILY_LAW_OPEN",
     "placement": "BEFORE_MUTABLE_BORROW_ACCOUNT_LIFECYCLE_OR_CPI",

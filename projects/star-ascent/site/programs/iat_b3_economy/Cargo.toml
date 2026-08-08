@@ -1,0 +1,17 @@
+[package]
+name = "iat-b3-economy"
+version = "0.1.0"
+description = "Host-only pure transition kernel for the retained IAT V2-to-B3 economic port"
+edition = "2021"
+license = "AGPL-3.0-or-later"
+publish = false
+
+[lib]
+name = "iat_b3_economy"
+crate-type = ["lib"]
+
+[dependencies]
+iat-b3-consensus = { path = "../iat_b3_consensus" }
+
+[dev-dependencies]
+iat-v2 = { path = "../iat_v2", features = ["no-entrypoint"] }

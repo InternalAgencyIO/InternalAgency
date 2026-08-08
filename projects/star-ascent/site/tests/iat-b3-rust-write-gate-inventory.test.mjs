@@ -14,6 +14,14 @@ const lawSource = readFileSync(
   new URL("../programs/iat_b3_law/src/lib.rs", import.meta.url),
   "utf8",
 );
+const economySource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/lib.rs", import.meta.url),
+  "utf8",
+);
+const economyCargo = readFileSync(
+  new URL("../programs/iat_b3_economy/Cargo.toml", import.meta.url),
+  "utf8",
+);
 const audit = readFileSync(
   new URL("../docs/b3/RUST_WRITE_GATE_AUDIT.md", import.meta.url),
   "utf8",
@@ -74,13 +82,23 @@ test("the audit inventories every retained V2 Rust write handler", () => {
 });
 
 test("the Rust workspace has no unreported faction or core-cap entrypoint", () => {
-  assert.match(
-    workspaceCargo,
-    /members = \["programs\/iat_b3_consensus", "programs\/iat_b3_law", "programs\/iat_v2"\]/u,
+  const workspaceMembers = [...workspaceCargo.matchAll(/"(programs\/[a-z0-9_]+)"/gu)]
+    .map((match) => match[1]);
+  assert.deepEqual(workspaceMembers, [
+    "programs/iat_b3_consensus",
+    "programs/iat_b3_economy",
+    "programs/iat_b3_law",
+    "programs/iat_v2",
+  ]);
+  assert.match(economyCargo, /crate-type = \["lib"\]/u);
+  assert.doesNotMatch(economyCargo, /cdylib|solana-|anchor-|spl-token/u);
+  assert.doesNotMatch(
+    economySource,
+    /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(/u,
   );
   assert.match(
     audit,
-    /faction and core-team-cap implementations currently present[\s\S]+JavaScript specifications, not\s+Solana Rust entrypoints/u,
+    /faction and core-team-cap implementations currently present[\s\S]+JavaScript specifications[\s\S]+host-only `iat_b3_economy` library[\s\S]+no Solana entrypoint or public dispatcher/u,
   );
 });
 

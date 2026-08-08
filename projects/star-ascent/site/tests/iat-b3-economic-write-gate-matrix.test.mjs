@@ -9,6 +9,22 @@ const matrixUrl = new URL(
 );
 const matrix = JSON.parse(readFileSync(matrixUrl, "utf8"));
 const v2Source = readFileSync(new URL(matrix.source, siteRoot), "utf8");
+const economyManifest = readFileSync(
+  new URL("programs/iat_b3_economy/Cargo.toml", siteRoot),
+  "utf8",
+);
+const economySource = readFileSync(
+  new URL("programs/iat_b3_economy/src/lib.rs", siteRoot),
+  "utf8",
+);
+const lawSource = readFileSync(
+  new URL("programs/iat_b3_law/src/lib.rs", siteRoot),
+  "utf8",
+);
+const economyCode = economySource
+  .replace(/\/\/.*$/gmu, "")
+  .replace(/\/\*[\s\S]*?\*\//gu, "");
+const workspaceManifest = readFileSync(new URL("Cargo.toml", siteRoot), "utf8");
 
 const sourceHandlers = [...v2Source.matchAll(/^    pub fn ([a-z0-9_]+)\(/gmu)].map(
   (match) => match[1],
@@ -82,4 +98,35 @@ test("the two V2 core payout paths remain honestly blocked on custody semantics"
     byName.get("settle_core_week").token2022Flow,
     "REWARD_LANES_TO_CANONICAL_CORE_CUSTODY",
   );
+});
+
+test("the first Rust slice is a host-only library with no Solana entrypoint or dispatcher", () => {
+  assert.deepEqual(matrix.firstSafeSlice, {
+    crate: "programs/iat_b3_economy",
+    crateType: "lib",
+    hostOnly: true,
+    solanaEntrypoint: false,
+    publicDispatcher: false,
+    accountLifecycle: false,
+    tokenCpi: false,
+    networkAccess: false,
+  });
+  assert.match(workspaceManifest, /"programs\/iat_b3_economy"/u);
+  assert.match(economyManifest, /crate-type = \["lib"\]/u);
+  assert.doesNotMatch(economyManifest, /cdylib|solana-|anchor-|spl-token/u);
+  assert.doesNotMatch(
+    economyCode,
+    /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo|TcpStream|UdpSocket/u,
+  );
+});
+
+test("the pure verifier pins the exact current Daily Law v1 codec", () => {
+  for (const declaration of [
+    'pub const LAW_STATE_MAGIC: &[u8; 8] = b"IATB3S01";',
+    "pub const LAW_STATE_VERSION: u8 = 1;",
+    "pub const LAW_STATE_LEN: usize = 160;",
+  ]) {
+    assert.ok(lawSource.includes(declaration), `law adapter drifted: ${declaration}`);
+    assert.ok(economySource.includes(declaration), `economy verifier drifted: ${declaration}`);
+  }
 });

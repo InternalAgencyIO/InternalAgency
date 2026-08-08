@@ -3,8 +3,9 @@
 Status: **EXACT SOURCE INVENTORY / MAINNET BLOCKING GAP**
 
 Scope: the executable Rust entrypoints in `programs/iat_b3_law` and
-`programs/iat_v2` as of 2026-08-08. This is a source-reachability audit, not a
-claim that an undeployed path has executed on-chain.
+`programs/iat_v2`, plus the host-only `programs/iat_b3_economy` transition
+library, as of 2026-08-08. This is a source-reachability audit, not a claim that
+an undeployed path has executed on-chain.
 
 ## Result
 
@@ -21,9 +22,13 @@ than the canonical B3 Token-2022 mint. Consequently, neither an account
 constraint nor the B3 transfer hook gates any current V2 handler.
 
 The faction and core-team-cap implementations currently present under
-`programs/iat_b3_reference` are executable JavaScript specifications, not
-Solana Rust entrypoints. They are therefore absent from the Rust write matrix
-and must not be counted as on-chain enforcement.
+`programs/iat_b3_reference` remain executable JavaScript specifications. The
+new host-only `iat_b3_economy` library contains immutable V2 constants, an
+exact read-only Daily Law codec/verifier, an opaque validated-write capability,
+and the internal pure `expire_round` transition. Its manifest is `lib`-only and
+it has no Solana entrypoint or public dispatcher, account lifecycle, token CPI,
+or network access. Neither the JavaScript specifications nor this first pure
+Rust slice may be counted as on-chain faction or core-cap enforcement.
 
 This is a hard Mainnet blocker. Adding a check to only the V2 transfer helper
 would be insufficient: several V2 handlers mutate protocol ledgers without a
@@ -39,7 +44,7 @@ and validate canonical Daily Law state before any B3 port can be accepted.
 | `finalize_day` (`IATB3LAW`, opcode `1`) | Replaces the single current-day decision in the law-state PDA | Intentionally exempt consensus housekeeping; uses only Solana `Clock` and `SlotHashes`, rejects a same-day reroll, and recomputes the fixed draw | Allowed so the next day can be decided even after a locked prior day |
 | Transfer Hook `Execute` | Read-only in the law program; authorizes or rejects the Token-2022 transfer that invoked it | **Direct canonical gate**: exact PDA/owner/mint checks, active Token-2022 transfer context, current `Clock` day, and full decision recomputation | Missing, stale, corrupt, forged, or selected state rejects; only a valid current open decision allows the transfer |
 
-The consensus crate is pure and has no account-write entrypoint.
+The consensus and economy crates are pure and have no account-write entrypoint.
 
 ## Retained V2 public write matrix
 
