@@ -26,9 +26,9 @@ The faction and core-team-cap implementations currently present under
 new host-only `iat_b3_economy` library contains immutable V2 constants, an
 exact read-only Daily Law codec/verifier, an opaque validated-write capability,
 and internal pure `expire_round`, `close_position`, `settle_round`, and
-`commit_round` transitions, plus the `initialize_config` and
-`initialize_lane_vault` validation/state constructors explicitly staged as
-`PRE_LIFECYCLE_ONLY`. Its manifest is
+`commit_round` transitions, plus the `initialize_config`,
+`initialize_lane_vault`, and `initialize_stake_vault` validation/state
+constructors explicitly staged as `PRE_LIFECYCLE_ONLY`. Its manifest is
 `lib`-only and it has no Solana entrypoint or public dispatcher, account
 lifecycle, token CPI, or network access. Neither the JavaScript specifications
 nor these pure Rust slices may be counted as on-chain faction or core-cap
@@ -78,9 +78,10 @@ gate and must not be counted as one if a future binary enables the DLC.
 
 `expire_round` remains the first pure transition, `close_position` the second,
 and `settle_round` the third. `commit_round` is the fourth and only additional
-handler-body kernel. `initialize_config` is the fifth host kernel, and
-`initialize_lane_vault` is the sixth, but only their pre-lifecycle validation
-and by-value state construction are present.
+handler-body kernel. `initialize_config` is the fifth host kernel,
+`initialize_lane_vault` is the sixth, and `initialize_stake_vault` is the
+seventh, but only their pre-lifecycle validation and by-value state construction
+are present.
 Every production wrapper requires the opaque canonical Daily Law capability.
 The three CCC wrappers then preserve the immutable CCC-disabled Genesis
 boundary before inspecting caller-supplied round, instruction-trace, or
@@ -109,6 +110,16 @@ release-policy divergence remains Mainnet-blocked. This slice does not
 authenticate the administrator or config/mint/token accounts, derive either
 PDA, allocate or fund an account, initialize Token-2022 state, serialize, or
 persist either result, and it does not make `initialize_lane_vault` complete.
+
+The `initialize_stake_vault` kernel preserves V2's two checks and mutation order:
+inactive config, uninitialized stake-vault flag, stake-token-account binding,
+then the initialized flag. Differential tests use the actual V2 `Config` type,
+pin `AlreadyActive` before `StakeVaultAlreadyInitialized`, prove an old binding
+is overwritten when the flag is false, and compare every untouched config field.
+This slice does not authenticate the administrator or config/mint/token accounts,
+derive the vault-authority or stake-token PDA, allocate or fund the account,
+initialize Token-2022 state, serialize, or persist the result, and it does not
+make `initialize_stake_vault` complete.
 
 The `commit_round` differential kernel performs no account creation. It accepts
 a decoded read-only instructions-sysvar trace, selects only the instruction
@@ -143,7 +154,12 @@ create the config account only after the gate and pure validation succeed. For
 `initialize_lane_vault`, it must authenticate the administrator and all
 canonical config/mint/token-program bindings, verify both PDA derivations and
 bumps, then manually create and initialize the lane-state and Token-2022 vault
-accounts after the gate and pure validation succeed. The complete dispatcher
+accounts after the gate and pure validation succeed. For
+`initialize_stake_vault`, it must authenticate the same canonical bindings,
+verify the vault-authority and stake-token PDA derivations, then manually create
+and initialize the Token-2022 account after the gate and pure validation succeed.
+That account remains a public-balance economic vault with no delegate or close
+authority under the frozen replacement contract. The complete dispatcher
 remains absent and disabled until all fifteen rows pass together.
 
 ## Internal V2 mutation paths

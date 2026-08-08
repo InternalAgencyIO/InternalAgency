@@ -209,15 +209,15 @@ permanently close after the committed set is exhausted.
    CPI, randomness, or network boundary. Add only the pure pre-lifecycle
    `commit_round` adjacent-instruction proof and snapshot constructor here; its
    round-account creation remains in step 5. Add only the pre-lifecycle
-   `initialize_config` and `initialize_lane_vault` validation/state-construction
-   kernels here; signer and account authentication, PDA derivation, account
-   allocation/funding, Token-2022 initialization, and persistent writes remain
-   in step 5.
+   `initialize_config`, `initialize_lane_vault`, and `initialize_stake_vault`
+   validation/state-construction kernels here; signer and account
+   authentication, PDA derivation, account allocation/funding, Token-2022
+   initialization, and persistent writes remain in step 5.
 5. Port the eight account-creating paths with manual post-gate System Program
    CPIs and prove locked/unfinalized calls perform no successful CPI or state
-   change. The existing `initialize_config` and `initialize_lane_vault`
-   `PRE_LIFECYCLE_ONLY` kernels are not completion of this step and must not be
-   exposed until that lifecycle adapter exists.
+   change. The existing `initialize_config`, `initialize_lane_vault`, and
+   `initialize_stake_vault` `PRE_LIFECYCLE_ONLY` kernels are not completion of
+   this step and must not be exposed until that lifecycle adapter exists.
 6. Port Token-2022 vault transfers and exercise the real hook for
    `open_position`, both settlement handlers, principal claim, and principal
    withdrawal on a disposable local validator.
@@ -247,9 +247,11 @@ returns pending state without creating an account. The fifth adds only the
 `initialize_config` handler-body validation and initial `Config` construction
 by value behind the opaque Daily Law capability. The sixth adds only
 `initialize_lane_vault` handler-body validation, exact retained lane-policy and
-beneficiary projection, and the by-value lane-mask result. Both initialization
-kernels are explicitly `PRE_LIFECYCLE_ONLY`: they do not authenticate signers
-or accounts, bind the canonical mint, derive or create PDAs, invoke the System
-or Token-2022 programs, or persist state. None of these kernels may be exposed
-as a write entrypoint. The first safe deployable slice is the complete
-fifteen-row dispatcher behind the frozen Token-2022 hook, not a single handler.
+beneficiary projection, and the by-value lane-mask result. The seventh adds only
+`initialize_stake_vault` handler-body validation and its by-value config binding.
+All three initialization kernels are explicitly `PRE_LIFECYCLE_ONLY`: they do
+not authenticate signers or accounts, bind the canonical mint, derive or create
+PDAs, invoke the System or Token-2022 programs, or persist state. None of these
+kernels may be exposed as a write entrypoint. The first safe deployable slice is
+the complete fifteen-row dispatcher behind the frozen Token-2022 hook, not a
+single handler.

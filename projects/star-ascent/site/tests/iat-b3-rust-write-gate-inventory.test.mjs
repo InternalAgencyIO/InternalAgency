@@ -510,3 +510,46 @@ test("the initialize_lane_vault kernel preserves V2 precedence and state constru
     /does not[\s\S]+initialize Token-2022 state[\s\S]+does not make `initialize_lane_vault` complete/u,
   );
 });
+
+test("the initialize_stake_vault kernel preserves V2 precedence and config binding", () => {
+  const v2Initialize = functionBody(
+    anchorProgramBody(v2Source),
+    "initialize_stake_vault",
+  );
+  const economyInitialize = functionBody(economySource, "initialize_stake_vault");
+  const economyTransition = functionBody(
+    economySource,
+    "initialize_stake_vault_transition",
+  );
+
+  assertTokensInOrder(
+    v2Initialize,
+    [
+      "!ctx.accounts.config.active",
+      "!ctx.accounts.config.stake_vault_initialized",
+      "ctx.accounts.config.stake_token_account = ctx.accounts.stake_token_account.key()",
+      "ctx.accounts.config.stake_vault_initialized = true",
+    ],
+    "V2 initialize_stake_vault",
+  );
+  assert.match(economyInitialize, /_gate: &ValidatedDailyLawWrite/u);
+  assert.match(economyInitialize, /initialize_stake_vault_transition\(input\)/u);
+  assertTokensInOrder(
+    economyTransition,
+    [
+      "input.config.active",
+      "input.config.stake_vault_initialized",
+      "config.stake_token_account = input.stake_token_account",
+      "config.stake_vault_initialized = true",
+    ],
+    "B3 initialize_stake_vault transition",
+  );
+  assert.match(
+    audit,
+    /`initialize_stake_vault` is the[\s\S]+seventh[\s\S]+pre-lifecycle validation/u,
+  );
+  assert.match(
+    audit,
+    /does not[\s\S]+derive the vault-authority or stake-token PDA[\s\S]+does not\s+make `initialize_stake_vault` complete/u,
+  );
+});

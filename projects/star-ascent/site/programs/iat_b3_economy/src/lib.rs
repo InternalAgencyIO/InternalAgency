@@ -212,6 +212,17 @@ pub struct InitializeLaneVaultResult {
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct InitializeStakeVaultInput {
+    pub config: ConfigState,
+    pub stake_token_account: [u8; 32],
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct InitializeStakeVaultResult {
+    pub config: ConfigState,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ExpireRoundResult {
     pub round: RoundState,
     pub recovery_timestamp: i64,
@@ -345,6 +356,7 @@ pub enum EconomyError {
     UnknownLane,
     CommunityMustUseHardwareCustody,
     LaneAlreadyInitialized,
+    StakeVaultAlreadyInitialized,
     NotActive,
     PositionClosed,
     PrincipalNotReturned,
@@ -516,6 +528,33 @@ pub fn initialize_lane_vault(
     input: InitializeLaneVaultInput,
 ) -> Result<InitializeLaneVaultResult, EconomyError> {
     initialize_lane_vault_transition(input)
+}
+
+/// Host-only pre-lifecycle `initialize_stake_vault` state construction. The
+/// opaque capability proves Daily Law was open before the retained handler
+/// logic runs. This function does not authenticate accounts, derive the stake
+/// vault PDA, allocate or initialize Token-2022 state, or persist the result.
+pub fn initialize_stake_vault(
+    _gate: &ValidatedDailyLawWrite,
+    input: InitializeStakeVaultInput,
+) -> Result<InitializeStakeVaultResult, EconomyError> {
+    initialize_stake_vault_transition(input)
+}
+
+fn initialize_stake_vault_transition(
+    input: InitializeStakeVaultInput,
+) -> Result<InitializeStakeVaultResult, EconomyError> {
+    if input.config.active {
+        return Err(EconomyError::AlreadyActive);
+    }
+    if input.config.stake_vault_initialized {
+        return Err(EconomyError::StakeVaultAlreadyInitialized);
+    }
+
+    let mut config = input.config;
+    config.stake_token_account = input.stake_token_account;
+    config.stake_vault_initialized = true;
+    Ok(InitializeStakeVaultResult { config })
 }
 
 fn initialize_lane_vault_transition(
@@ -1744,6 +1783,68 @@ mod tests {
         }
     }
 
+    #[derive(Clone, Copy)]
+    struct InitializeStakeVaultVector {
+        name: &'static str,
+        input: InitializeStakeVaultInput,
+    }
+
+    fn valid_initialize_stake_vault_vector(name: &'static str) -> InitializeStakeVaultVector {
+        let config = initialize_config_transition(
+            valid_initialize_config_vector("stake config", false).input,
+            1_000,
+        )
+        .unwrap()
+        .config;
+        InitializeStakeVaultVector {
+            name,
+            input: InitializeStakeVaultInput {
+                config,
+                stake_token_account: [0x71; 32],
+            },
+        }
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum InitializeStakeVaultObservation {
+        Error(EconomyError),
+        Success(Box<ConfigState>),
+    }
+
+    fn observe_initialize_stake_vault(
+        result: Result<InitializeStakeVaultResult, EconomyError>,
+    ) -> InitializeStakeVaultObservation {
+        match result {
+            Err(error) => InitializeStakeVaultObservation::Error(error),
+            Ok(result) => InitializeStakeVaultObservation::Success(Box::new(result.config)),
+        }
+    }
+
+    fn v2_initialize_stake_vault_reference(
+        vector: InitializeStakeVaultVector,
+    ) -> InitializeStakeVaultObservation {
+        let input = vector.input;
+        let mut config = v2_config_from_semantic(input.config);
+        let result = (|| {
+            if config.active {
+                return Err(EconomyError::AlreadyActive);
+            }
+            if config.stake_vault_initialized {
+                return Err(EconomyError::StakeVaultAlreadyInitialized);
+            }
+            config.stake_token_account = input.stake_token_account.into();
+            config.stake_vault_initialized = true;
+            Ok(config)
+        })();
+
+        match result {
+            Err(error) => InitializeStakeVaultObservation::Error(error),
+            Ok(config) => {
+                InitializeStakeVaultObservation::Success(Box::new(semantic_config_from_v2(config)))
+            }
+        }
+    }
+
     #[derive(Clone, Copy, Debug)]
     enum CommitProofCase {
         Valid,
@@ -2715,6 +2816,142 @@ mod tests {
             config = result.config;
         }
         assert_eq!(config.lane_mask, 0b1_1110);
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
+    }
+
+    #[test]
+    fn initialize_stake_vault_differential_and_error_precedence_match_retained_v2() {
+        let base = valid_initialize_stake_vault_vector("base");
+        let vectors = [
+            InitializeStakeVaultVector {
+                name: "active precedes the already-initialized check",
+                input: InitializeStakeVaultInput {
+                    config: ConfigState {
+                        active: true,
+                        stake_vault_initialized: true,
+                        stake_token_account: [0xa1; 32],
+                        ..base.input.config
+                    },
+                    stake_token_account: [0xa2; 32],
+                },
+            },
+            InitializeStakeVaultVector {
+                name: "an initialized stake vault is rejected",
+                input: InitializeStakeVaultInput {
+                    config: ConfigState {
+                        stake_vault_initialized: true,
+                        stake_token_account: [0xb1; 32],
+                        ..base.input.config
+                    },
+                    stake_token_account: [0xb2; 32],
+                },
+            },
+            valid_initialize_stake_vault_vector("canonical fresh config"),
+            InitializeStakeVaultVector {
+                name: "a stale uninitialized binding is overwritten exactly like V2",
+                input: InitializeStakeVaultInput {
+                    config: ConfigState {
+                        stake_token_account: [0xc1; 32],
+                        rehearsal_mode: true,
+                        lane_mask: u8::MAX,
+                        staked_principal: u64::MAX,
+                        ..base.input.config
+                    },
+                    stake_token_account: [0xc2; 32],
+                },
+            },
+            InitializeStakeVaultVector {
+                name: "zero target account bytes are handler-body parity",
+                input: InitializeStakeVaultInput {
+                    config: ConfigState {
+                        bump: 0,
+                        vault_authority_bump: u8::MAX,
+                        ..base.input.config
+                    },
+                    stake_token_account: [0; 32],
+                },
+            },
+            InitializeStakeVaultVector {
+                name: "maximum target account bytes are handler-body parity",
+                input: InitializeStakeVaultInput {
+                    stake_token_account: [u8::MAX; 32],
+                    ..base.input
+                },
+            },
+        ];
+
+        for vector in vectors {
+            let actual =
+                observe_initialize_stake_vault(initialize_stake_vault_transition(vector.input));
+            let expected = v2_initialize_stake_vault_reference(vector);
+            assert_eq!(actual, expected, "{}", vector.name);
+        }
+
+        for active in [false, true] {
+            for stake_vault_initialized in [false, true] {
+                let vector = InitializeStakeVaultVector {
+                    name: "boolean precedence grid",
+                    input: InitializeStakeVaultInput {
+                        config: ConfigState {
+                            active,
+                            stake_vault_initialized,
+                            ..base.input.config
+                        },
+                        ..base.input
+                    },
+                };
+                let actual =
+                    observe_initialize_stake_vault(initialize_stake_vault_transition(vector.input));
+                let expected = v2_initialize_stake_vault_reference(vector);
+                assert_eq!(
+                    actual, expected,
+                    "active={active} initialized={stake_vault_initialized}"
+                );
+            }
+        }
+
+        assert_eq!(
+            initialize_stake_vault_transition(InitializeStakeVaultInput {
+                config: ConfigState {
+                    active: true,
+                    stake_vault_initialized: true,
+                    ..base.input.config
+                },
+                ..base.input
+            }),
+            Err(EconomyError::AlreadyActive)
+        );
+        assert_eq!(
+            initialize_stake_vault_transition(InitializeStakeVaultInput {
+                config: ConfigState {
+                    stake_vault_initialized: true,
+                    ..base.input.config
+                },
+                ..base.input
+            }),
+            Err(EconomyError::StakeVaultAlreadyInitialized)
+        );
+    }
+
+    #[test]
+    fn initialize_stake_vault_changes_only_the_v2_binding_and_requires_open_law() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let vector = valid_initialize_stake_vault_vector("open wrapper");
+        let result = initialize_stake_vault(&gate, vector.input).unwrap();
+        assert_eq!(
+            result.config,
+            ConfigState {
+                stake_token_account: vector.input.stake_token_account,
+                stake_vault_initialized: true,
+                ..vector.input.config
+            }
+        );
 
         let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
         assert_eq!(
