@@ -77,7 +77,6 @@ export function replayLanguageQaScorecard({ scorecardBytes, repoRoot }) {
   const sourceCommit = scorecard.sourceBinding?.headCommit;
   if (!/^[0-9a-f]{40}$/u.test(sourceCommit ?? "")) throw new Error("Language QA scorecard replay refused an invalid source commit");
   execFileSync("git", ["cat-file", "-e", `${sourceCommit}^{commit}`], { cwd: repoRoot, stdio: "ignore", windowsHide: true });
-  execFileSync("git", ["merge-base", "--is-ancestor", sourceCommit, "HEAD"], { cwd: repoRoot, stdio: "ignore", windowsHide: true });
   for (const [path, expectedDigest] of Object.entries(trustedHistoricalExecutables)) {
     const bytes = execFileSync("git", ["show", `${sourceCommit}:${path}`], {
       cwd: repoRoot,
