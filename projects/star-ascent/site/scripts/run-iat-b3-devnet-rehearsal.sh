@@ -4,8 +4,8 @@ set -euo pipefail
 schema="iat-b3-devnet-rehearsal/v1"
 devnet_rpc="https://api.devnet.solana.com"
 expected_devnet_genesis_hash="GH7ome3EiwEr7tu9JuTh2dpYWBJK3z69Xm1ZE3MEE6JC"
-expected_artifact_sha256="7c495967e183707a92d819b3d09738c82f50d432c1c9c4af57e3ac1e1dc36923"
-expected_artifact_size="143360"
+expected_artifact_sha256="927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c"
+expected_artifact_size="154952"
 execute_confirmation="CONFIRMED_PUBLIC_DEVNET_REHEARSAL"
 
 # This check intentionally precedes mktemp, key generation, RPC contact, and

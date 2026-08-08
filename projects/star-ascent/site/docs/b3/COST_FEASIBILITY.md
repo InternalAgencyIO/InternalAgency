@@ -90,8 +90,8 @@ That source was then rebuilt with `cargo build-sbf --optimize-size`:
 - estimated temporary buffer: `0.98824344 SOL`;
 - estimated pre-fee peak: `1.97768400 SOL`.
 
-After adding the exact Token-2022 mint-extension allowlist, the current source
-was rebuilt with the same pinned optimized command:
+After adding the exact Token-2022 mint-extension allowlist, that intermediate
+source was rebuilt with the same pinned optimized command:
 
 - binary: `143,360` bytes;
 - SHA-256: `7c495967e183707a92d819b3d09738c82f50d432c1c9c4af57e3ac1e1dc36923`;
@@ -99,23 +99,36 @@ was rebuilt with the same pinned optimized command:
 - estimated temporary buffer: `0.99893400 SOL`;
 - estimated pre-fee peak: `1.99906512 SOL`.
 
+After moving both extension-authority revocations and their post-CPI checks
+inside the one-time law initializer, the atomic source produced a 188,512-byte
+ordinary SBF artifact (SHA-256
+`f7061b6c3350d833a01568b2d2b1eda668d57bd500119ebe0e849248cb735061`).
+The current candidate was then rebuilt twice with the pinned optimized command
+and exercised on a disposable loopback validator:
+
+- binary: `154,952` bytes;
+- SHA-256: `927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`;
+- estimated permanent lock: `1.08081144 SOL`;
+- estimated temporary buffer: `1.07961432 SOL`;
+- estimated pre-fee peak: `2.16042576 SOL`.
+
 This safely meets a `1.5 SOL` **permanent-rent** target for the incremental B3
 law program. It does not meet a `1.5 SOL` **fresh-payer peak** target. Under the
 same loader-v3 formula, that peak requires approximately `107,507` bytes, so
-the current optimized artifact remains `35,853` bytes above the ceiling. The
+the current optimized artifact remains `47,445` bytes above the ceiling. The
 temporary buffer is recovered after a successful deployment; it is still real
 liquidity required during deployment.
 
 Owner decision on 2026-08-08: accept a `3 SOL` aggregate fresh-payer peak
 deployment ceiling. The optimized law artifact meets that ceiling by itself
-with `1.00093488 SOL` of headroom. Further byte cutting is not justified merely
+with `0.83957424 SOL` of headroom. Further byte cutting is not justified merely
 to chase the former 1.5 SOL peak target; reliability and retained V2 behavior
 remain higher priorities. The complete retained-feature B3 aggregate must still
 be measured against 3 SOL before Mainnet approval.
 
 The new faction module and core-team cap do not fit into the existing cost claim
-for free. At the measured `1.99906512 SOL` law peak, only `1.00093488 SOL`
-remains under the aggregate ceiling, corresponding to roughly 71,906 additional
+for free. At the measured `2.16042576 SOL` law peak, only `0.83957424 SOL`
+remains under the aggregate ceiling, corresponding to roughly 60,314 additional
 loader-v3 program bytes before mint/state-account rent and retained V2 modules.
 A separate faction program, core-vault burn CPI, reward state, NFT accounts, or
 duplicated framework runtime may exceed that headroom. No feature may be gutted
@@ -142,8 +155,8 @@ loader_v4_permanent(B) = (B + 48 + 128) * 6_960 lamports
 Using the exact current optimized artifacts:
 
 - retained V2 (`524,672` bytes): `3.65294208 SOL` permanent rent;
-- B3 Daily Law (`143,360` bytes): `0.99901056 SOL` permanent rent;
-- both binaries alone: `4.65195264 SOL` permanent rent.
+- B3 Daily Law (`154,952` bytes): `1.07969088 SOL` permanent rent;
+- both binaries alone: `4.73263296 SOL` permanent rent.
 
 Therefore the accepted `3 SOL` **aggregate** target is not achievable with the
 current retained V2 binary plus the B3 law binary, even under this optimistic

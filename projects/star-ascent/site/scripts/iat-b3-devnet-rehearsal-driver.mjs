@@ -16,11 +16,9 @@ import {
   TransactionInstruction,
 } from "@solana/web3.js";
 import {
-  AuthorityType,
   ExtensionType,
   TOKEN_2022_PROGRAM_ID,
   createExecuteInstruction,
-  createSetAuthorityInstruction,
   createTransferCheckedWithTransferHookInstruction,
   getAccount,
   getAssociatedTokenAddressSync,
@@ -43,8 +41,8 @@ export const DEVNET_RPC = "https://api.devnet.solana.com";
 export const DEVNET_GENESIS_HASH = "GH7ome3EiwEr7tu9JuTh2dpYWBJK3z69Xm1ZE3MEE6JC";
 export const EXECUTE_CONFIRMATION = "CONFIRMED_PUBLIC_DEVNET_REHEARSAL";
 export const EXPECTED_ARTIFACT_SHA256 =
-  "7c495967e183707a92d819b3d09738c82f50d432c1c9c4af57e3ac1e1dc36923";
-export const EXPECTED_ARTIFACT_SIZE = 143_360;
+  "927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c";
+export const EXPECTED_ARTIFACT_SIZE = 154_952;
 
 const SCHEMA = "iat-b3-devnet-rehearsal/v1";
 const EXPLORER = "https://explorer.solana.com";
@@ -229,7 +227,7 @@ function extensionAuthorityIsNull(data) {
   return Buffer.from(data).subarray(0, 32).every((byte) => byte === 0);
 }
 
-function inspectMintShape(mintState, programId, expectedHookAuthority) {
+function inspectMintShape(mintState, programId, expectedExtensionAuthority) {
   const extensionTypes = getExtensionTypes(mintState.tlvData);
   assert.deepEqual(
     [...extensionTypes].sort((a, b) => a - b),
@@ -243,7 +241,7 @@ function inspectMintShape(mintState, programId, expectedHookAuthority) {
   const transferHook = getTransferHook(mintState);
   assert(transferHook && transferHook.programId.equals(programId), "transfer-hook program mismatch");
   assert(
-    transferHook.authority.equals(expectedHookAuthority),
+    transferHook.authority.equals(expectedExtensionAuthority),
     "transfer-hook authority does not match the expected stage",
   );
   const confidential = getExtensionData(
@@ -253,6 +251,10 @@ function inspectMintShape(mintState, programId, expectedHookAuthority) {
   assert(confidential, "confidential-transfer mint extension is absent");
   const confidentialBytes = Buffer.from(confidential);
   assert.equal(confidentialBytes.length, 65, "confidential-transfer mint layout length mismatch");
+  assert(
+    confidentialBytes.subarray(0, 32).equals(expectedExtensionAuthority.toBuffer()),
+    "confidential-transfer authority does not match the expected stage",
+  );
   assert.equal(confidentialBytes[32], 1, "confidential accounts are not auto-approved");
   assert(
     confidentialBytes.subarray(33, 65).every((byte) => byte === 0),
@@ -504,10 +506,11 @@ async function run(argv) {
     programId,
     keys: [
       { pubkey: payer.publicKey, isSigner: true, isWritable: true },
-      { pubkey: mint, isSigner: false, isWritable: false },
+      { pubkey: mint, isSigner: false, isWritable: true },
       { pubkey: lawState, isSigner: false, isWritable: true },
       { pubkey: validation, isSigner: false, isWritable: true },
       { pubkey: SystemProgram.programId, isSigner: false, isWritable: false },
+      { pubkey: TOKEN_2022_PROGRAM_ID, isSigner: false, isWritable: false },
     ],
     data: Buffer.concat([LAW_NAMESPACE, Buffer.from([0]), networkGenesisHash]),
   });
@@ -550,29 +553,7 @@ async function run(argv) {
     12,
   ));
 
-  currentPhase = "extension_authority_revocation";
-  measurements.push(await sendMeasured(connection, payer, "revoke-transfer-hook-authority", [
-    createSetAuthorityInstruction(
-      mint,
-      payer.publicKey,
-      AuthorityType.TransferHookProgramId,
-      null,
-      [],
-      TOKEN_2022_PROGRAM_ID,
-    ),
-  ]));
-  measurements.push(await sendMeasured(connection, payer, "revoke-confidential-mint-authority", [
-    createSetAuthorityInstruction(
-      mint,
-      payer.publicKey,
-      AuthorityType.ConfidentialTransferMint,
-      null,
-      [],
-      TOKEN_2022_PROGRAM_ID,
-    ),
-  ]));
-
-  currentPhase = "all_authorities_null_verification";
+  currentPhase = "atomic_extension_authority_sealing_verification";
   const frozenProgramAgain = await verifyProgramFrozen(connection, programId, artifactBytes);
   mintState = await getMint(connection, mint, "finalized", TOKEN_2022_PROGRAM_ID);
   const immutableShape = inspectMintShape(mintState, programId, PublicKey.default);

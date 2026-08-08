@@ -37,7 +37,10 @@ Initialization is a one-time mint-authority operation. It verifies that:
 - the mint contains exactly the Transfer Hook and Confidential Transfer mint
   extensions and no other Token-2022 extension;
 - the configured hook program is the running adapter;
-- the signer is the current hook-update authority;
+- the signer is the current authority for both required extensions;
+- confidential accounts are auto-approved and the global auditor key is null;
+- the mint is writable and the supplied executable program account is the
+  canonical Token-2022 program;
 - the network genesis identity is nonzero;
 - the law-state and standard `extra-account-metas` addresses are the exact PDAs.
 
@@ -51,21 +54,29 @@ authority-bearing variants, and representative other extras. A rebuilt SBF and
 local-validator/Devnet adversarial mint proof remain required before this can be
 treated as deployment evidence.
 
-It then creates only two rent-bearing accounts:
+In the same instruction, the adapter CPIs to Token-2022 to set both the Transfer
+Hook program-ID authority and Confidential Transfer mint authority to null. It
+reloads the mint and requires both authorities to be null, the confidential
+configuration to remain exact, and the hook program ID to remain this law
+program before creating the two rent-bearing accounts. Any CPI, reload, or PDA
+failure rolls the whole instruction back, so there is no initialized-law window
+with a mutable hook or confidential policy.
+
+It creates only two rent-bearing accounts:
 
 1. `law-state` PDA: 160 bytes, bound to program ID and canonical mint;
 2. standard Transfer Hook extra-account-meta PDA, containing one read-only
    mint-derived reference to the law-state PDA.
 
 There is no administrator, threshold, timezone, result, or bypass update
-instruction. Program and hook-update authorities still exist outside this code
-until the audited Mainnet ceremony revokes them; the prototype is therefore not
-yet immutable.
+instruction. The loader upgrade authority must still be finalized before this
+instruction, as required by the rehearsal sequence.
 
 ### Prototype instruction ABI
 
 - initialize: `"IATB3LAW" || 0x00 || network_genesis_hash[32]`, with ordered
-  accounts `payer`, `mint`, `law_state`, `extra_account_metas`, `system_program`;
+  accounts `payer`, writable `mint`, `law_state`, `extra_account_metas`,
+  `system_program`, executable `token_2022_program`;
 - finalize: `"IATB3LAW" || 0x01`, with ordered accounts `mint`, writable
   `law_state`;
 - transfer enforcement: standard Transfer Hook interface `Execute`, with its
@@ -135,13 +146,14 @@ rejection, mint/program PDA separation, standard hook instruction decoding,
 unchanged 1%/66.67% thresholds, same-day reroll rejection, future-state
 rejection, and deterministic lag selection.
 
-The 2026-08-08 disposable local-validator rehearsal additionally covers the
-pre-allowlist optimized 141,824-byte SBF artifact, frozen local program data,
-exact Token-2022 mint shape, real public hooked transfers, permissionless Clock
-plus SlotHashes finalization, stored-record reproduction, direct-call
-rejection, and real-hook missing/stale/open/locked/forged state gates. The
-current exact-allowlist candidate is 143,360 bytes and still requires a fresh
-validator rehearsal. See
+The historical 2026-08-08 disposable local-validator record covers the
+pre-allowlist optimized 141,824-byte SBF artifact. The current optimized
+atomic-sealing candidate is 154,952 bytes with SHA-256
+`927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`.
+A fresh disposable loopback run passed with frozen local program data, exact
+Token-2022 mint shape, in-initializer authority sealing, real hooked transfers,
+permissionless Clock plus SlotHashes finalization, direct-call rejection, and
+missing/stale/open/locked/forged state gates. No public network was written. See
 [`LOCAL_VALIDATOR_REHEARSAL.md`](LOCAL_VALIDATOR_REHEARSAL.md).
 
 Before Devnet:

@@ -53,12 +53,16 @@ transfers left both token balances unchanged. The final summary reported
 `temporaryLedgerRemoved: true`.
 
 This is immutable historical evidence for the pre-allowlist candidate. The
-current exact-extension-allowlist candidate is 143,360 bytes with SHA-256
-`7c495967e183707a92d819b3d09738c82f50d432c1c9c4af57e3ac1e1dc36923`.
-It must complete a fresh local-validator rehearsal before the earlier run can
-be treated as evidence for the current candidate.
+current optimized atomic-sealing candidate is 154,952 bytes with SHA-256
+`927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`.
+It completed a fresh disposable loopback rehearsal with the expanded authority
+and confidential-policy adversary. The older machine-readable record remains
+bound only to its historical 141,824-byte artifact and is not rewritten.
 
-The sanitized machine-readable run record is
+The sanitized current-candidate record is
+[`evidence/local-validator-atomic-sealing-rehearsal-20260808.json`](evidence/local-validator-atomic-sealing-rehearsal-20260808.json).
+
+The sanitized historical run record is
 [`evidence/local-validator-rehearsal-20260808.json`](evidence/local-validator-rehearsal-20260808.json).
 The harness itself emits more granular newline-delimited JSON on every run.
 
@@ -70,6 +74,10 @@ an error.
 
 ## Real-validator coverage
 
+Before the valid baseline, the harness constructs an otherwise exact mint with
+manual confidential-account approval. It proves initialization rejects that
+configuration and commits neither PDA creation nor either authority change.
+
 The baseline run:
 
 1. loads the exact native `.so` at Genesis under the disposable payer, revokes
@@ -80,7 +88,10 @@ The baseline run:
 3. mints exactly `1,000,000,000,000,000,000` base units at nine decimals, leaves
    no freeze authority, and revokes mint authority;
 4. derives the mint-bound law-state and validation PDAs;
-5. calls `initialize_law` and verifies the serialized empty state;
+5. calls `initialize_law`, verifies the serialized empty state, and proves that
+   the same instruction atomically set both Transfer Hook and Confidential
+   Transfer mint authorities to null while preserving the hook program,
+   auto-approval, and null auditor key;
 6. proves a real Token-2022 transfer rejects with `DayUnfinalized` before a
    result exists;
 7. proves a direct call cannot fake Token-2022's transferring flag;

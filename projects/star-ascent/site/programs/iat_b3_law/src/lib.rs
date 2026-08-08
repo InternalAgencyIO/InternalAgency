@@ -6,7 +6,7 @@ use iat_b3_consensus::{
 };
 use solana_account_info::{next_account_info, AccountInfo};
 use solana_clock::Clock;
-use solana_cpi::invoke_signed;
+use solana_cpi::{invoke, invoke_signed};
 use solana_program_entrypoint::ProgramResult;
 use solana_program_error::ProgramError;
 use solana_pubkey::Pubkey;
@@ -23,6 +23,7 @@ use spl_token_2022_interface::{
         transfer_hook::{TransferHook, TransferHookAccount},
         BaseStateWithExtensions, ExtensionType, StateWithExtensions,
     },
+    instruction::{set_authority, AuthorityType},
     state::{Account as TokenAccount, Mint},
     ID as TOKEN_2022_PROGRAM_ID,
 };
@@ -69,6 +70,9 @@ pub enum IatB3LawError {
     WrongMintAuthority = 14,
     ArithmeticFailure = 15,
     UnapprovedMintExtension = 16,
+    InvalidConfidentialTransferConfig = 17,
+    MintNotWritable = 18,
+    WrongTokenProgram = 19,
 }
 
 impl From<IatB3LawError> for ProgramError {
@@ -225,6 +229,7 @@ fn process_initialize_law(
     let law_state = next_account_info(account_iter)?;
     let validation = next_account_info(account_iter)?;
     let system = next_account_info(account_iter)?;
+    let token_2022_program = next_account_info(account_iter)?;
 
     if !payer.is_signer {
         return Err(IatB3LawError::MissingSignature.into());
@@ -232,7 +237,13 @@ fn process_initialize_law(
     if system.key != &system_program::ID {
         return Err(IatB3LawError::WrongSystemProgram.into());
     }
-    validate_mint_extensions(program_id, payer.key, mint)?;
+    if token_2022_program.key != &TOKEN_2022_PROGRAM_ID || !token_2022_program.executable {
+        return Err(IatB3LawError::WrongTokenProgram.into());
+    }
+    if !mint.is_writable {
+        return Err(IatB3LawError::MintNotWritable.into());
+    }
+    validate_mint_extensions(program_id, Some(payer.key), mint)?;
 
     let (expected_state, state_bump) = law_state_address(program_id, mint.key);
     if law_state.key != &expected_state {
@@ -245,6 +256,20 @@ fn process_initialize_law(
     if law_state.owner == program_id || validation.owner == program_id {
         return Err(IatB3LawError::AlreadyInitialized.into());
     }
+
+    revoke_mint_extension_authority(
+        payer,
+        mint,
+        token_2022_program,
+        AuthorityType::TransferHookProgramId,
+    )?;
+    revoke_mint_extension_authority(
+        payer,
+        mint,
+        token_2022_program,
+        AuthorityType::ConfidentialTransferMint,
+    )?;
+    validate_mint_extensions(program_id, None, mint)?;
 
     create_program_pda(
         payer,
@@ -371,7 +396,7 @@ fn process_execute(
 
 fn validate_mint_extensions(
     program_id: &Pubkey,
-    authority: &Pubkey,
+    expected_authority: Option<&Pubkey>,
     mint: &AccountInfo<'_>,
 ) -> ProgramResult {
     if mint.owner != &TOKEN_2022_PROGRAM_ID {
@@ -389,17 +414,59 @@ fn validate_mint_extensions(
     let transfer_hook = mint_state
         .get_extension::<TransferHook>()
         .map_err(|_| ProgramError::from(IatB3LawError::MissingRequiredMintExtension))?;
-    mint_state
+    let confidential_transfer = mint_state
         .get_extension::<ConfidentialTransferMint>()
         .map_err(|_| ProgramError::from(IatB3LawError::MissingRequiredMintExtension))?;
 
     if Option::<Pubkey>::from(transfer_hook.program_id) != Some(*program_id) {
         return Err(IatB3LawError::InvalidMint.into());
     }
-    if Option::<Pubkey>::from(transfer_hook.authority) != Some(*authority) {
+    let expected_authority = expected_authority.copied();
+    if Option::<Pubkey>::from(transfer_hook.authority) != expected_authority {
         return Err(IatB3LawError::WrongMintAuthority.into());
     }
+    validate_confidential_transfer_config(
+        Option::<Pubkey>::from(confidential_transfer.authority),
+        expected_authority,
+        bool::from(confidential_transfer.auto_approve_new_accounts),
+        confidential_transfer.auditor_elgamal_pubkey == Default::default(),
+    )?;
     Ok(())
+}
+
+fn validate_confidential_transfer_config(
+    authority: Option<Pubkey>,
+    expected_authority: Option<Pubkey>,
+    auto_approve_new_accounts: bool,
+    auditor_is_null: bool,
+) -> ProgramResult {
+    if authority != expected_authority {
+        return Err(IatB3LawError::WrongMintAuthority.into());
+    }
+    if !auto_approve_new_accounts || !auditor_is_null {
+        return Err(IatB3LawError::InvalidConfidentialTransferConfig.into());
+    }
+    Ok(())
+}
+
+fn revoke_mint_extension_authority<'a>(
+    payer: &AccountInfo<'a>,
+    mint: &AccountInfo<'a>,
+    token_2022_program: &AccountInfo<'a>,
+    authority_type: AuthorityType,
+) -> ProgramResult {
+    let instruction = set_authority(
+        &TOKEN_2022_PROGRAM_ID,
+        mint.key,
+        None,
+        authority_type,
+        payer.key,
+        &[],
+    )?;
+    invoke(
+        &instruction,
+        &[mint.clone(), payer.clone(), token_2022_program.clone()],
+    )
 }
 
 fn validate_mint_extension_allowlist(extension_types: &[ExtensionType]) -> ProgramResult {
@@ -672,6 +739,39 @@ mod tests {
                 ]),
                 Err(IatB3LawError::UnapprovedMintExtension.into()),
                 "extension {unapproved:?} must be rejected"
+            );
+        }
+    }
+
+    #[test]
+    fn confidential_transfer_config_must_be_exact_before_and_after_sealing() {
+        let authority = Pubkey::new_from_array([0x77; 32]);
+        assert_eq!(
+            validate_confidential_transfer_config(Some(authority), Some(authority), true, true,),
+            Ok(())
+        );
+        assert_eq!(
+            validate_confidential_transfer_config(None, None, true, true),
+            Ok(())
+        );
+        assert_eq!(
+            validate_confidential_transfer_config(
+                Some(Pubkey::new_from_array([0x78; 32])),
+                Some(authority),
+                true,
+                true,
+            ),
+            Err(IatB3LawError::WrongMintAuthority.into())
+        );
+        for (auto_approve, auditor_is_null) in [(false, true), (true, false)] {
+            assert_eq!(
+                validate_confidential_transfer_config(
+                    Some(authority),
+                    Some(authority),
+                    auto_approve,
+                    auditor_is_null,
+                ),
+                Err(IatB3LawError::InvalidConfidentialTransferConfig.into())
             );
         }
     }

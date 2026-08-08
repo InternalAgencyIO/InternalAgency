@@ -92,14 +92,13 @@ loudly if an observed state is partial or different:
    verifies both fields are null, verifies the extension set and total supply,
    and checks that the hook still names the immutable law program.
 7. Initialize the mint-bound law and validation PDAs while the disposable payer
-   is still the temporary Transfer Hook and Confidential Transfer mint
-   authority. Exercise the real hooked-transfer missing-day rejection and the
-   direct-hook bypass rejection.
-8. Revoke the Transfer Hook program-ID authority and Confidential Transfer mint
-   authority with Token-2022 `SetAuthority` instructions. Refetch the mint and
-   require all four mint-side authorities—mint, freeze, Transfer Hook, and
-   Confidential Transfer—to be null. The hook program ID itself must remain the
-   immutable law program. Any remaining authority is a hard failure.
+   is the temporary authority for both required extensions. The same
+   `initialize_law` instruction must revoke both authorities through Token-2022
+   CPI, reload the mint, prove both are null, and preserve the law hook program,
+   auto-approval, and null auditor configuration before committing either PDA.
+   Any remaining authority or separate later revocation is a hard failure.
+8. Exercise the real hooked-transfer missing-day rejection and the direct-hook
+   bypass rejection, then re-read the sealed mint.
 9. Finalize the current protocol day using only Solana `Clock` and `SlotHashes`,
    recompute and verify the selected lagged slot hash and draw, reject a
    same-day reroll, then exercise a real hooked transfer. It must move exactly

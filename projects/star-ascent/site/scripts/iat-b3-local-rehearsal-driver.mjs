@@ -27,6 +27,7 @@ import {
   createTransferCheckedWithTransferHookInstruction,
   getAccount,
   getAssociatedTokenAddressSync,
+  getExtensionData,
   getExtensionTypes,
   getExtraAccountMetaAddress,
   getMint,
@@ -483,6 +484,80 @@ async function prepareFixtures({
   });
 }
 
+async function invalidConfidentialConfig(args) {
+  const connection = new Connection(required(args, "rpc"), "confirmed");
+  const payer = readKeypair(required(args, "payer"));
+  const mint = new PublicKey(required(args, "mint"));
+  const programId = new PublicKey(required(args, "program-id"));
+  const [lawState] = PublicKey.findProgramAddressSync(
+    [Buffer.from("law-state", "ascii"), mint.toBuffer()],
+    programId,
+  );
+  const validation = getExtraAccountMetaAddress(mint, programId);
+
+  let mintState = await getMint(connection, mint, "confirmed", TOKEN_2022_PROGRAM_ID);
+  let transferHook = getTransferHook(mintState);
+  let confidential = Buffer.from(getExtensionData(
+    ExtensionType.ConfidentialTransferMint,
+    mintState.tlvData,
+  ));
+  assert.deepEqual(
+    [...getExtensionTypes(mintState.tlvData)].sort((a, b) => a - b),
+    [ExtensionType.ConfidentialTransferMint, ExtensionType.TransferHook].sort((a, b) => a - b),
+  );
+  assert.equal(mintState.supply, IAT_TOTAL_BASE_UNITS);
+  assert.equal(mintState.mintAuthority, null);
+  assert.equal(mintState.freezeAuthority, null);
+  assert(transferHook?.programId.equals(programId));
+  assert(transferHook?.authority.equals(payer.publicKey));
+  assert(confidential.subarray(0, 32).equals(payer.publicKey.toBuffer()));
+  assert.equal(confidential[32], 0, "adversarial mint must require manual account approval");
+  assert(confidential.subarray(33, 65).every((byte) => byte === 0));
+
+  const initialize = new TransactionInstruction({
+    programId,
+    keys: [
+      { pubkey: payer.publicKey, isSigner: true, isWritable: true },
+      { pubkey: mint, isSigner: false, isWritable: true },
+      { pubkey: lawState, isSigner: false, isWritable: true },
+      { pubkey: validation, isSigner: false, isWritable: true },
+      { pubkey: SystemProgram.programId, isSigner: false, isWritable: false },
+      { pubkey: TOKEN_2022_PROGRAM_ID, isSigner: false, isWritable: false },
+    ],
+    data: Buffer.concat([LAW_NAMESPACE, Buffer.from([0]), LOCAL_NETWORK_ID]),
+  });
+  const rejection = await expectCustomFailure(
+    connection,
+    "manual confidential-approval initialization",
+    17,
+    async () => sendInstructions(connection, payer, [initialize]),
+  );
+  assert.equal(await connection.getAccountInfo(lawState, "confirmed"), null);
+  assert.equal(await connection.getAccountInfo(validation, "confirmed"), null);
+
+  mintState = await getMint(connection, mint, "confirmed", TOKEN_2022_PROGRAM_ID);
+  transferHook = getTransferHook(mintState);
+  confidential = Buffer.from(getExtensionData(
+    ExtensionType.ConfidentialTransferMint,
+    mintState.tlvData,
+  ));
+  assert(transferHook?.authority.equals(payer.publicKey));
+  assert(confidential.subarray(0, 32).equals(payer.publicKey.toBuffer()));
+  assert.equal(confidential[32], 0);
+
+  emit({
+    schema: "iat-b3-local-validator-rehearsal/v1",
+    status: "PASS",
+    mode: "invalid-confidential-config",
+    invalidField: "autoApproveNewAccounts",
+    expected: true,
+    observed: false,
+    initialization: rejection,
+    pdaWritesCommitted: false,
+    extensionAuthoritiesChanged: false,
+  });
+}
+
 async function baseline(args) {
   const connection = new Connection(required(args, "rpc"), "confirmed");
   const payer = readKeypair(required(args, "payer"));
@@ -512,26 +587,37 @@ async function baseline(args) {
   const program = await connection.getAccountInfo(programId, "confirmed");
   assert(program?.executable, "local law program is not executable");
   const programDeployment = await inspectProgramDeployment(connection, program);
-  const mintState = await getMint(connection, mint, "confirmed", TOKEN_2022_PROGRAM_ID);
-  const transferHook = getTransferHook(mintState);
+  let mintState = await getMint(connection, mint, "confirmed", TOKEN_2022_PROGRAM_ID);
+  let transferHook = getTransferHook(mintState);
   const extensionTypes = getExtensionTypes(mintState.tlvData);
   assert.equal(mintState.decimals, 9);
   assert.equal(mintState.supply, IAT_TOTAL_BASE_UNITS);
   assert.equal(mintState.mintAuthority, null);
   assert.equal(mintState.freezeAuthority, null);
-  assert(extensionTypes.includes(ExtensionType.ConfidentialTransferMint));
-  assert(extensionTypes.includes(ExtensionType.TransferHook));
+  assert.deepEqual(
+    [...extensionTypes].sort((a, b) => a - b),
+    [ExtensionType.ConfidentialTransferMint, ExtensionType.TransferHook].sort((a, b) => a - b),
+  );
   assert(transferHook?.authority.equals(payer.publicKey));
   assert(transferHook?.programId.equals(programId));
+  let confidential = Buffer.from(getExtensionData(
+    ExtensionType.ConfidentialTransferMint,
+    mintState.tlvData,
+  ));
+  assert.equal(confidential.length, 65);
+  assert(confidential.subarray(0, 32).equals(payer.publicKey.toBuffer()));
+  assert.equal(confidential[32], 1);
+  assert(confidential.subarray(33, 65).every((byte) => byte === 0));
 
   const initialize = new TransactionInstruction({
     programId,
     keys: [
       { pubkey: payer.publicKey, isSigner: true, isWritable: true },
-      { pubkey: mint, isSigner: false, isWritable: false },
+      { pubkey: mint, isSigner: false, isWritable: true },
       { pubkey: lawState, isSigner: false, isWritable: true },
       { pubkey: validation, isSigner: false, isWritable: true },
       { pubkey: SystemProgram.programId, isSigner: false, isWritable: false },
+      { pubkey: TOKEN_2022_PROGRAM_ID, isSigner: false, isWritable: false },
     ],
     data: Buffer.concat([LAW_NAMESPACE, Buffer.from([0]), LOCAL_NETWORK_ID]),
   });
@@ -543,6 +629,17 @@ async function baseline(args) {
   assert.equal(initializedState.decision, null);
   const validationInfo = await connection.getAccountInfo(validation, "confirmed");
   assert(validationInfo?.owner.equals(programId));
+  mintState = await getMint(connection, mint, "confirmed", TOKEN_2022_PROGRAM_ID);
+  transferHook = getTransferHook(mintState);
+  confidential = Buffer.from(getExtensionData(
+    ExtensionType.ConfidentialTransferMint,
+    mintState.tlvData,
+  ));
+  assert(transferHook?.programId.equals(programId));
+  assert(transferHook?.authority.equals(PublicKey.default));
+  assert(confidential.subarray(0, 32).every((byte) => byte === 0));
+  assert.equal(confidential[32], 1);
+  assert(confidential.subarray(33, 65).every((byte) => byte === 0));
 
   const clockAtInitialization = await getClock(connection);
   const fixtureMetadata = await prepareFixtures({
@@ -692,6 +789,11 @@ async function baseline(args) {
       freezeAuthority: null,
       extensions: ["ConfidentialTransferMint", "TransferHook"],
       transferHookProgramId: transferHook.programId.toBase58(),
+      transferHookAuthority: null,
+      confidentialTransferMintAuthority: null,
+      autoApproveNewConfidentialAccounts: true,
+      confidentialTransferAuditorElGamalPubkey: null,
+      authoritiesSealedAtomicallyByInitialize: true,
     },
     accounts: {
       lawState: lawState.toBase58(),
@@ -808,6 +910,7 @@ async function variant(args) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const mode = required(args, "mode");
+  if (mode === "invalid-confidential-config") return invalidConfidentialConfig(args);
   if (mode === "baseline") return baseline(args);
   if (mode === "variant") return variant(args);
   throw new TypeError(`unknown mode: ${mode}`);

@@ -75,3 +75,32 @@ test("the wrapper is loopback-only, fail-closed, and owns disposable cleanup", a
   assert.match(wrapper, /"status":"SKIP","reason":"tooling_missing"/u);
   assert.doesNotMatch(wrapper, /api\.(?:devnet|mainnet-beta)\.solana\.com/iu);
 });
+
+test("the local harness proves extension authorities are sealed by initialize", async () => {
+  const driver = await readFile(
+    new URL("../scripts/iat-b3-local-rehearsal-driver.mjs", import.meta.url),
+    "utf8",
+  );
+  assert.match(driver, /\{ pubkey: mint, isSigner: false, isWritable: true \}/u);
+  assert.match(driver, /\{ pubkey: TOKEN_2022_PROGRAM_ID, isSigner: false, isWritable: false \}/u);
+  assert.match(driver, /transferHook\?\.authority\.equals\(PublicKey\.default\)/u);
+  assert.match(driver, /confidential\.subarray\(0, 32\)\.every\(\(byte\) => byte === 0\)/u);
+  assert.match(driver, /authoritiesSealedAtomicallyByInitialize: true/u);
+  assert.doesNotMatch(driver, /createSetAuthorityInstruction|revoke-transfer-hook-authority/u);
+});
+
+test("the local harness adversarially rejects non-auto-approved confidential policy", async () => {
+  const wrapper = await readFile(
+    new URL("../scripts/run-iat-b3-local-rehearsal.sh", import.meta.url),
+    "utf8",
+  );
+  const driver = await readFile(
+    new URL("../scripts/iat-b3-local-rehearsal-driver.mjs", import.meta.url),
+    "utf8",
+  );
+  assert.match(wrapper, /--enable-confidential-transfers manual/u);
+  assert.match(wrapper, /--mode invalid-confidential-config/u);
+  assert.match(driver, /manual confidential-approval initialization[\s\S]{0,100}\n\s*17,/u);
+  assert.match(driver, /pdaWritesCommitted: false/u);
+  assert.match(driver, /extensionAuthoritiesChanged: false/u);
+});

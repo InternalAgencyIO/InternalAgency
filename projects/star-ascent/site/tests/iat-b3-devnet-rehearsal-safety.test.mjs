@@ -197,7 +197,7 @@ test("program upgrade authority is finalized before law initialization", () => {
   assert(initializeCall > immutabilityCheck, "immutability verification must precede law init");
 });
 
-test("the Token-2022 sequence revokes every administrative authority", () => {
+test("law initialization atomically seals both Token-2022 extension authorities", () => {
   assert.match(wrapper, /--program-2022/u);
   assert.match(wrapper, /--decimals\s+9/u);
   assert.match(wrapper, /--enable-confidential-transfers/u);
@@ -206,9 +206,8 @@ test("the Token-2022 sequence revokes every administrative authority", () => {
   assert.match(wrapper, /authorize[\s\S]{0,500}freeze[\s\S]{0,120}--disable/u);
   assert.match(wrapper, /authorize[\s\S]{0,500}mint[\s\S]{0,120}--disable/u);
 
-  assert.match(driver, /AuthorityType\.TransferHookProgramId/u);
-  assert.match(driver, /AuthorityType\.ConfidentialTransferMint/u);
-  assert.match(driver, /createSetAuthorityInstruction/u);
+  assert.doesNotMatch(driver, /AuthorityType\.(?:TransferHookProgramId|ConfidentialTransferMint)/u);
+  assert.doesNotMatch(driver, /createSetAuthorityInstruction|revoke-transfer-hook-authority|revoke-confidential-mint-authority/u);
   assert.match(driver, /getTransferHook/u);
   assert.match(driver, /ExtensionType\.ConfidentialTransferMint/u);
   assert.match(driver, /mintAuthority/u);
@@ -218,11 +217,15 @@ test("the Token-2022 sequence revokes every administrative authority", () => {
   assert.match(driver, /subarray\(33, 65\)\.every/u);
   assert.match(driver, /auditorElGamalPubkey: null/u);
 
+  assert.match(driver, /\{ pubkey: mint, isSigner: false, isWritable: true \}/u);
+  assert.match(driver, /\{ pubkey: TOKEN_2022_PROGRAM_ID, isSigner: false, isWritable: false \}/u);
+  assert.match(driver, /atomic_extension_authority_sealing_verification/u);
+
   const initialize = firstIndex(driver, ["initializeLaw", "initialize_law"]);
-  const hookRevocation = driver.lastIndexOf("AuthorityType.TransferHookProgramId");
+  const sealedVerification = driver.indexOf("atomic_extension_authority_sealing_verification");
   const dayFinalization = firstIndex(driver, ["finalizeDay", "finalize_day"]);
-  assert(initialize >= 0 && hookRevocation > initialize);
-  assert(dayFinalization > hookRevocation);
+  assert(initialize >= 0 && sealedVerification > initialize);
+  assert(dayFinalization > sealedVerification);
 });
 
 test("evidence is public, measurable, explorable, and excludes obvious secret paths", () => {

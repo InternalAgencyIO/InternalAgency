@@ -148,7 +148,7 @@ freeze_local_program() {
 }
 
 phase="key_generation"
-for name in payer recipient mint; do
+for name in payer recipient mint invalid-mint; do
   solana-keygen new \
     --no-bip39-passphrase \
     --silent \
@@ -159,6 +159,7 @@ program_id=$(solana-keygen pubkey "$program_keypair")
 payer_pubkey=$(solana-keygen pubkey "$temp_dir/payer.json")
 recipient_pubkey=$(solana-keygen pubkey "$temp_dir/recipient.json")
 mint_pubkey=$(solana-keygen pubkey "$temp_dir/mint.json")
+invalid_mint_pubkey=$(solana-keygen pubkey "$temp_dir/invalid-mint.json")
 if command -v sha256sum >/dev/null 2>&1; then
   artifact_sha256=$(sha256sum "$artifact" | awk '{print $1}')
 else
@@ -170,6 +171,45 @@ start_validator baseline
 solana airdrop 100 "$payer_pubkey" --url "$rpc_url" >/dev/null
 phase="baseline_program_freeze"
 freeze_local_program
+
+phase="token_2022_create_invalid_confidential_mint"
+spl-token create-token \
+  --url "$rpc_url" \
+  --fee-payer "$temp_dir/payer.json" \
+  --mint-authority "$payer_pubkey" \
+  --program-2022 \
+  --decimals 9 \
+  --enable-confidential-transfers manual \
+  --transfer-hook "$program_id" \
+  "$temp_dir/invalid-mint.json" >/dev/null
+spl-token create-account \
+  --url "$rpc_url" \
+  --fee-payer "$temp_dir/payer.json" \
+  --program-2022 "$invalid_mint_pubkey" --owner "$payer_pubkey" >/dev/null
+invalid_source_address=$(spl-token address \
+  --url "$rpc_url" \
+  --verbose \
+  --program-2022 \
+  --token "$invalid_mint_pubkey" \
+  --owner "$payer_pubkey" | awk 'NF { value=$NF } END { print value }')
+[[ -n "$invalid_source_address" ]] || exit 1
+spl-token mint \
+  --url "$rpc_url" \
+  --fee-payer "$temp_dir/payer.json" \
+  --mint-authority "$temp_dir/payer.json" \
+  --program-2022 "$invalid_mint_pubkey" 1000000000 "$invalid_source_address" >/dev/null
+spl-token authorize \
+  --url "$rpc_url" \
+  --fee-payer "$temp_dir/payer.json" \
+  --authority "$temp_dir/payer.json" \
+  --program-2022 "$invalid_mint_pubkey" mint --disable >/dev/null
+phase="invalid_confidential_config_rejection"
+"$node_bin" "$driver_for_node" \
+  --mode invalid-confidential-config \
+  --rpc "$rpc_url" \
+  --payer "$(to_node_path "$temp_dir/payer.json")" \
+  --mint "$invalid_mint_pubkey" \
+  --program-id "$program_id"
 
 phase="token_2022_create_mint"
 spl-token create-token \
@@ -259,5 +299,5 @@ done
 
 phase="complete"
 cleanup
-printf '{"schema":"%s","status":"PASS","mode":"summary","publicNetworkWrites":false,"temporaryLedgerRemoved":true,"variants":["missing","stale","open","locked","forged"]}\n' \
+printf '{"schema":"%s","status":"PASS","mode":"summary","publicNetworkWrites":false,"temporaryLedgerRemoved":true,"initializationAdversary":"invalid-confidential-config","variants":["missing","stale","open","locked","forged"]}\n' \
   "$schema"
