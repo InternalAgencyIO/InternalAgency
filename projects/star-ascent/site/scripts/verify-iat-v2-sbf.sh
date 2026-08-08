@@ -44,6 +44,15 @@ if ! grep -Fq 'anchor_version = "1.0.2"' Anchor.toml \
   echo "FAIL: Anchor.toml toolchain pins drifted" >&2
   exit 1
 fi
+python3 - <<'PY'
+import pathlib
+import tomllib
+
+with pathlib.Path("Anchor.toml").open("rb") as source:
+    document = tomllib.load(source)
+if document.get("workspace", {}).get("members") != ["programs/iat_v2"]:
+    raise SystemExit("FAIL: Anchor workspace must contain only the reviewed iat_v2 program")
+PY
 if ! grep -Fq 'wallet = "launch/HOLD-no-signing-wallet.json"' Anchor.toml \
   || [[ -e launch/HOLD-no-signing-wallet.json ]]; then
   echo "FAIL: build-only Anchor wallet boundary drifted" >&2

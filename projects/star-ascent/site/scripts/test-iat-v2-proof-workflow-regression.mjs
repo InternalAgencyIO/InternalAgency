@@ -225,6 +225,12 @@ function validateSbfProofScript(scriptText) {
   if (!scriptText.includes('anchor build --verifiable --program-name iat_v2 --ignore-keys --docker-image "$build_container_reference"')) {
     fail("Anchor verifiable build must be scoped to the Anchor-based iat_v2 program; native B3 programs use their dedicated cargo build-sbf step");
   }
+  if (
+    !scriptText.includes('tomllib.load(source)')
+    || !scriptText.includes('document.get("workspace", {}).get("members") != ["programs/iat_v2"]')
+  ) {
+    fail("Anchor discovery must be fail-closed to the reviewed iat_v2 workspace before the verifiable build");
+  }
   if (!scriptText.includes('idl="target/idl/iat_v2.json"') || !scriptText.includes('[[ ! -s "$idl" ]]')) {
     fail("SBF proof must reject a missing or empty generated IDL");
   }
@@ -402,6 +408,10 @@ for (const probe of mutationProbes) {
 
 const sbfProofMutationProbes = [
   {
+    name: "workspace-wide Anchor discovery reintroduced",
+    script: sbfProofScript.replace('["programs/iat_v2"]', '["programs/*"]'),
+  },
+  {
     name: "workspace-wide Anchor build reintroduced",
     script: sbfProofScript.replace(" --program-name iat_v2", ""),
   },
@@ -470,5 +480,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2/B3 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, iat_v2-scoped Anchor build, exact head/checkout/public-run/container-bound binary/IDL evidence, B3 build-only SBF evidence, V2-to-B3 successor-lineage validation, canonical manifest validation, exact-source-head concurrency, read-only permissions, and 27 fail-closed mutation probes remain bound.`,
+  `IAT V2/B3 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, iat_v2-only Anchor discovery/build, exact head/checkout/public-run/container-bound binary/IDL evidence, B3 build-only SBF evidence, V2-to-B3 successor-lineage validation, canonical manifest validation, exact-source-head concurrency, read-only permissions, and 28 fail-closed mutation probes remain bound.`,
 );
