@@ -1,0 +1,87 @@
+{
+  "batch": 274,
+  "country": "Germany",
+  "status": "user-requested-motif-recovery-v2-partial",
+  "parentCheckpoint": "batch-274-germany-partial-recovery-checkpoint.json",
+  "contractUpdate": "batch-240-plus-country-glamour-romance-contract.json",
+  "acceptedScenes": [
+    "1117-germany-hamburg-blue-hour-nightlife-performance-motif-recovery-v2.png",
+    "1119-germany-munich-oktoberfest-sunshower-runway-motif-recovery-v2.png"
+  ],
+  "preservedOriginals": [
+    "1117-germany-hamburg-blue-hour-nightlife-performance-signal-cipher.png",
+    "1117-germany-hamburg-blue-hour-nightlife-performance-motif-recovery-v2-raw-original.png"
+  ],
+  "blockedScenes": [
+    {
+      "scene": 1116,
+      "reason": "The explicit user-requested motif and wardrobe recovery was blocked by output moderation. The prior blocked state is preserved."
+    },
+    {
+      "scene": 1118,
+      "reason": "The explicit user-requested motif and wardrobe recovery was blocked by output moderation. The prior blocked state is preserved."
+    }
+  ],
+  "rollMethod": "Inherited unchanged from batch-274-germany-partial-recovery-checkpoint.json",
+  "acceptedRollMaterialization": {
+    "1117": {
+      "weather": "crisp blue hour",
+      "paws": true,
+      "visibleMidriff": ["Ellie", "Alia"],
+      "coveredMidriff": ["Radiance", "AI ECE"],
+      "strapless": ["Ellie", "AI ECE"],
+      "fullyOpenBack": ["AI ECE"],
+      "rainbowOnly": false,
+      "rainbowHosiery": false,
+      "poleDanceTheme": false,
+      "motifs": [
+        "large Elbphilharmonie wave and facade construction on Radiance",
+        "large Speicherstadt brick and gable architecture on Alia",
+        "large Elbphilharmonie facade construction on AI ECE"
+      ],
+      "uniqueSilhouettes": [
+        "sleeveless velvet peplum mini-suit",
+        "strapless cropped origami bodice with tailored shorts",
+        "sleeveless wrap crop top with asymmetric sail-panel skirt",
+        "strapless sculpted column mini"
+      ],
+      "correction": "One non-destructive correction removed Radiance's unintended sleeves and clarified the indexed trigger finger. The raw motif recovery was preserved."
+    },
+    "1119": {
+      "weather": "sunshower with sparkling droplets",
+      "paws": false,
+      "visibleMidriff": ["Ellie", "AI ECE"],
+      "coveredMidriff": ["Radiance", "Alia"],
+      "strapless": ["Radiance"],
+      "fullyOpenBack": ["Radiance", "Ellie", "Alia"],
+      "rainbowOnly": false,
+      "rainbowHosiery": false,
+      "poleDanceTheme": false,
+      "motifs": [
+        "large complete pretzel-knot motif on Radiance",
+        "large complete beer-stein motif on Ellie",
+        "large hop-vine and wheat field on Alia",
+        "large beer-stein and pretzel field on AI ECE"
+      ],
+      "culturalScene": "Munich Oktoberfest terrace with clearly visible traditional amber German beer steins and baked pretzels, presented as an adult public fashion editorial with no drinking action",
+      "uniqueSilhouettes": [
+        "strapless sculpted mini dress",
+        "cropped wrap bodice with tailored shorts",
+        "one-shoulder tailored short romper",
+        "sleeveless peplum crop top with asymmetric mini skirt"
+      ]
+    }
+  },
+  "contractChanges": [
+    "four silhouette-level unique outfits are mandatory in every image",
+    "large readable country motifs are mandatory on at least two characters",
+    "flag motifs use full fashion adaptations only when secular and suitable",
+    "countries without suitable flag motifs use recognizable non-official cultural symbols"
+  ],
+  "xPublishing": "ready with two accepted Germany motif-recovery assets",
+  "nextThemePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "nextQueueCountry": "Greece"
+}

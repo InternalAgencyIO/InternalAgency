@@ -25,9 +25,22 @@
   "countryFashion": {
     "requiredEveryImage": true,
     "palette": "Derive the dominant couture palette from the current country's flag colors.",
-    "motifs": "Abstract respectful secular architecture, landscape, flora, fauna, civilian craft geometry, and local material cues into seams, jewelry, footwear, surface pattern, and beacon design.",
+    "motifs": "Abstract respectful secular architecture, landscape, flora, fauna, civilian craft geometry, food and festival culture, and local material cues into seams, jewelry, footwear, surface pattern, and beacon design.",
+    "motifCoverage": {
+      "requiredEveryImage": true,
+      "minimumCharacters": 2,
+      "flagMotifRule": "When the national flag contains a recognizable secular non-protected motif, render a large complete fashion adaptation of that motif on at least two of the four characters. Do not reduce it to a tiny pin or trim.",
+      "fallbackRule": "When the flag has no motif, or its motif is official, sacred, political, or otherwise unsuitable for fashion copying, select the country's most recognizable non-official secular cultural symbols and render at least one large readable motif across two or more character looks. Good sources include civilian festivals, food and drink vessels, flora, fauna, architecture, craft, engineering, landscape, music, and everyday design.",
+      "sceneRule": "Use different motif placements and scales across the selected outfits, such as a full bodice graphic, skirt panel, structured hip piece, metallic applique, large embroidery field, or footwear construction. Keep motifs respectful, legible, and integrated into couture rather than pasted on."
+    },
     "prohibitions": "No literal flags, official emblems, sacred symbols, political insignia, copied ceremonial dress, or generic rainbow replacement.",
     "glamour": "After-dark performance couture with dramatic heels, glossy or reflective tailoring, concise secure hemlines, and opaque lined coverage.",
+    "wardrobeUniqueness": {
+      "requiredEveryImage": true,
+      "rule": "All four characters must have unmistakably different silhouettes, garment construction, hem architecture, material treatment, and footwear design in every image. Color changes alone do not count as unique styling.",
+      "silhouetteSet": "Choose four different structures per scene from sculpted mini dress, cropped bodice with asymmetric skirt, tailored short romper, strapless folded dress, high-waist shorts with architectural top, one-shoulder cocktail mini, peplum micro-suit, cutout column mini, corsage-inspired two-piece, or another equally distinct public-safe couture form.",
+      "continuity": "Do not repeat an outfit design within a batch or carry it unchanged into the next country. Preserve every triggered per-character midriff, strapless, and open-back roll while making the four resulting looks visibly different."
+    },
     "exposureArchitecture": {
       "requiredEveryImage": true,
       "neck": "Fully unobstructed neck with no high collar, scarf, tie, or neck-covering layer.",
