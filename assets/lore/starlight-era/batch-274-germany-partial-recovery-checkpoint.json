@@ -1,0 +1,104 @@
+{
+  "batch": 274,
+  "country": "Germany",
+  "status": "partial-recovery",
+  "acceptedScenes": [
+    "1117-germany-hamburg-blue-hour-nightlife-performance-signal-cipher.png"
+  ],
+  "preservedOriginals": [],
+  "blockedScenes": [
+    {
+      "scene": 1116,
+      "reason": "The initial parallel request produced no recoverable asset and the single permitted public-safe recovery pass was blocked by output moderation."
+    },
+    {
+      "scene": 1118,
+      "reason": "The initial parallel request produced no recoverable asset and the single permitted public-safe recovery pass was blocked by output moderation."
+    },
+    {
+      "scene": 1119,
+      "reason": "The initial parallel request produced no recoverable asset and the single permitted public-safe recovery pass was blocked by output moderation."
+    }
+  ],
+  "rollMethod": "FNV-1a over batch274-germany-scene-field, reduced modulo 100",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "rolls": {
+    "1116": {
+      "theme": "adult nightlife dance-performance couture",
+      "weather": { "roll": 49, "result": "active lightning storm with distant bolts" },
+      "paws": { "roll": 86, "active": false },
+      "poleDanceTheme": { "roll": 73, "active": false },
+      "rainbowOnly": { "roll": 93, "active": false },
+      "rainbowHosiery": { "roll": 68, "active": false, "wearerRoll": 84, "paletteModeRoll": 76 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 94, "result": "shame and social vulnerability" }, "visibleMidriff": 36, "straplessDress": 55, "fullyOpenBack": 56 },
+        "Ellie": { "emotion": { "roll": 56, "result": "aching romantic longing" }, "visibleMidriff": 34, "straplessDress": 33, "fullyOpenBack": 62 },
+        "Alia": { "emotion": { "roll": 48, "result": "startled surprise" }, "visibleMidriff": 94, "straplessDress": 17, "fullyOpenBack": 50 },
+        "AI ECE": { "emotion": { "roll": 62, "result": "visible jealousy" }, "visibleMidriff": 84, "straplessDress": 35, "fullyOpenBack": 48 }
+      }
+    },
+    "1117": {
+      "theme": "adult nightlife dance-performance couture",
+      "weather": { "roll": 14, "result": "crisp blue hour" },
+      "paws": { "roll": 23, "active": true },
+      "poleDanceTheme": { "roll": 72, "active": false },
+      "rainbowOnly": { "roll": 78, "active": false },
+      "rainbowHosiery": { "roll": 61, "active": false, "wearerRoll": 29, "paletteModeRoll": 67 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 23, "result": "playful mischief" }, "visibleMidriff": 63, "straplessDress": 80, "fullyOpenBack": 33 },
+        "Ellie": { "emotion": { "roll": 47, "result": "awe" }, "visibleMidriff": 27, "straplessDress": 4, "fullyOpenBack": 69 },
+        "Alia": { "emotion": { "roll": 81, "result": "deep sadness" }, "visibleMidriff": 21, "straplessDress": 98, "fullyOpenBack": 51 },
+        "AI ECE": { "emotion": { "roll": 47, "result": "awe" }, "visibleMidriff": 95, "straplessDress": 16, "fullyOpenBack": 21 }
+      }
+    },
+    "1118": {
+      "theme": "Paris runway model couture",
+      "weather": { "roll": 3, "result": "clear golden-hour radiance" },
+      "paws": { "roll": 84, "active": false },
+      "poleDanceTheme": { "roll": 31, "active": false },
+      "rainbowOnly": { "roll": 23, "active": false },
+      "rainbowHosiery": { "roll": 98, "active": false, "wearerRoll": 10, "paletteModeRoll": 30 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 0, "result": "tender affection" }, "visibleMidriff": 34, "straplessDress": 21, "fullyOpenBack": 30 },
+        "Ellie": { "emotion": { "roll": 34, "result": "overwhelming relief" }, "visibleMidriff": 48, "straplessDress": 7, "fullyOpenBack": 56 },
+        "Alia": { "emotion": { "roll": 34, "result": "overwhelming relief" }, "visibleMidriff": 60, "straplessDress": 19, "fullyOpenBack": 96 },
+        "AI ECE": { "emotion": { "roll": 0, "result": "tender affection" }, "visibleMidriff": 18, "straplessDress": 5, "fullyOpenBack": 10 }
+      }
+    },
+    "1119": {
+      "theme": "Paris runway model couture",
+      "weather": { "roll": 84, "result": "sunshower with sparkling droplets" },
+      "paws": { "roll": 97, "active": false },
+      "poleDanceTheme": { "roll": 14, "active": false },
+      "rainbowOnly": { "roll": 76, "active": false },
+      "rainbowHosiery": { "roll": 95, "active": false, "wearerRoll": 7, "paletteModeRoll": 65 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 41, "result": "determination" }, "visibleMidriff": 73, "straplessDress": 14, "fullyOpenBack": 15 },
+        "Ellie": { "emotion": { "roll": 45, "result": "awe" }, "visibleMidriff": 13, "straplessDress": 62, "fullyOpenBack": 11 },
+        "Alia": { "emotion": { "roll": 63, "result": "visible jealousy" }, "visibleMidriff": 71, "straplessDress": 76, "fullyOpenBack": 25 },
+        "AI ECE": { "emotion": { "roll": 81, "result": "deep sadness" }, "visibleMidriff": 29, "straplessDress": 70, "fullyOpenBack": 91 }
+      }
+    }
+  },
+  "recovery": "Scene 1117 was accepted on its single calmer public-safe recovery pass. Scenes 1116, 1118, and 1119 remained blocked after their single recovery passes. No additional recovery was attempted.",
+  "rawOriginalsPreserved": false,
+  "shorteningPass": "not needed; the accepted garment silhouettes already read as concise above-knee proportions",
+  "xPublishing": "deferred because the partial batch has only one accepted Germany asset and cannot yet supply the preferred two main-country attachments",
+  "nextThemePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "nextQueueCountry": "Greece"
+}
