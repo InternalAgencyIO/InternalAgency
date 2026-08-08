@@ -21,7 +21,7 @@ use spl_token_2022_interface::{
     extension::{
         confidential_transfer::ConfidentialTransferMint,
         transfer_hook::{TransferHook, TransferHookAccount},
-        BaseStateWithExtensions, StateWithExtensions,
+        BaseStateWithExtensions, ExtensionType, StateWithExtensions,
     },
     state::{Account as TokenAccount, Mint},
     ID as TOKEN_2022_PROGRAM_ID,
@@ -68,6 +68,7 @@ pub enum IatB3LawError {
     WrongSystemProgram = 13,
     WrongMintAuthority = 14,
     ArithmeticFailure = 15,
+    UnapprovedMintExtension = 16,
 }
 
 impl From<IatB3LawError> for ProgramError {
@@ -380,6 +381,11 @@ fn validate_mint_extensions(
     let mint_state = StateWithExtensions::<Mint>::unpack(&mint_data)
         .map_err(|_| ProgramError::from(IatB3LawError::InvalidMint))?;
     validate_mint_base(&mint_state.base)?;
+    validate_mint_extension_allowlist(
+        &mint_state
+            .get_extension_types()
+            .map_err(|_| ProgramError::from(IatB3LawError::InvalidMint))?,
+    )?;
     let transfer_hook = mint_state
         .get_extension::<TransferHook>()
         .map_err(|_| ProgramError::from(IatB3LawError::MissingRequiredMintExtension))?;
@@ -392,6 +398,19 @@ fn validate_mint_extensions(
     }
     if Option::<Pubkey>::from(transfer_hook.authority) != Some(*authority) {
         return Err(IatB3LawError::WrongMintAuthority.into());
+    }
+    Ok(())
+}
+
+fn validate_mint_extension_allowlist(extension_types: &[ExtensionType]) -> ProgramResult {
+    let has_confidential_transfer =
+        extension_types.contains(&ExtensionType::ConfidentialTransferMint);
+    let has_transfer_hook = extension_types.contains(&ExtensionType::TransferHook);
+    if !has_confidential_transfer || !has_transfer_hook {
+        return Err(IatB3LawError::MissingRequiredMintExtension.into());
+    }
+    if extension_types.len() != 2 {
+        return Err(IatB3LawError::UnapprovedMintExtension.into());
     }
     Ok(())
 }
@@ -611,6 +630,50 @@ mod tests {
             validate_mint_base(&wrong_decimals),
             Err(IatB3LawError::InvalidMint.into())
         );
+    }
+
+    #[test]
+    fn mint_extension_allowlist_accepts_only_confidential_transfer_and_hook() {
+        assert_eq!(
+            validate_mint_extension_allowlist(&[
+                ExtensionType::ConfidentialTransferMint,
+                ExtensionType::TransferHook,
+            ]),
+            Ok(())
+        );
+        assert_eq!(
+            validate_mint_extension_allowlist(&[
+                ExtensionType::TransferHook,
+                ExtensionType::ConfidentialTransferMint,
+            ]),
+            Ok(())
+        );
+        assert_eq!(
+            validate_mint_extension_allowlist(&[ExtensionType::TransferHook]),
+            Err(IatB3LawError::MissingRequiredMintExtension.into())
+        );
+    }
+
+    #[test]
+    fn authority_bearing_and_other_extra_mint_extensions_fail_closed() {
+        for unapproved in [
+            ExtensionType::PermanentDelegate,
+            ExtensionType::MintCloseAuthority,
+            ExtensionType::Pausable,
+            ExtensionType::ConfidentialMintBurn,
+            ExtensionType::TransferFeeConfig,
+            ExtensionType::MetadataPointer,
+        ] {
+            assert_eq!(
+                validate_mint_extension_allowlist(&[
+                    ExtensionType::ConfidentialTransferMint,
+                    ExtensionType::TransferHook,
+                    unapproved,
+                ]),
+                Err(IatB3LawError::UnapprovedMintExtension.into()),
+                "extension {unapproved:?} must be rejected"
+            );
+        }
     }
 
     #[test]

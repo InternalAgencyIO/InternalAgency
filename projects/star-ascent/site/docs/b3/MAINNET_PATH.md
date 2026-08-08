@@ -54,10 +54,11 @@ State: **OPEN**
 - prove ordinary and confidential transfers both invoke Transfer Hook;
 - prove the hook cannot read a confidential amount;
 - prove required extensions coexist in the exact deployed version;
-- enforce the exact approved mint-extension allowlist on-chain; required-
-  extension presence alone is insufficient, and Permanent Delegate,
-  permissioned burn, mint-close, pausable, or any other unapproved
-  authority-bearing extension is a hard failure;
+- independently reproduce the source-enforced exact mint-extension allowlist
+  in the pinned SBF and public validator evidence; required-extension presence
+  alone is insufficient, and Permanent Delegate, permissioned burn, mint-close,
+  pausable, or any other unapproved authority-bearing extension is a hard
+  failure;
 - record wallet, explorer, indexer, hardware-signer, and RPC compatibility.
 
 ## Gate 2 — immutable IAT Daily Law adapter
