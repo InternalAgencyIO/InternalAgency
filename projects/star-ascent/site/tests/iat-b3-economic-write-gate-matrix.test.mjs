@@ -120,7 +120,7 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
-test("the host-only port contains exactly the first four gated pure transitions", () => {
+test("the host-only port contains exactly the first five gated kernels", () => {
   assert.deepEqual(matrix.hostOnlyPureTransitions, [
     {
       name: "expire_round",
@@ -146,7 +146,22 @@ test("the host-only port contains exactly the first four gated pure transitions"
       v2DifferentialTests: true,
       publicExposure: false,
     },
+    {
+      name: "initialize_config",
+      implementationStage: "PRE_LIFECYCLE_ONLY",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      handlerComplete: false,
+      publicExposure: false,
+    },
   ]);
+  assert.match(
+    economySource,
+    /pub fn initialize_config\(\s*gate: &ValidatedDailyLawWrite,/u,
+  );
+  assert.match(economySource, /fn initialize_config_transition\(/u);
+  assert.match(economySource, /struct InitializeConfigInput/u);
+  assert.match(economySource, /struct ConfigState/u);
   assert.match(
     economySource,
     /pub fn close_position\(\s*_gate: &ValidatedDailyLawWrite,/u,
@@ -169,8 +184,16 @@ test("the host-only port contains exactly the first four gated pure transitions"
   assert.match(economySource, /fn validate_round_commit_instruction\(/u);
   assert.doesNotMatch(
     economyCode,
-    /pub fn (?:initialize_config|initialize_lane_vault|initialize_stake_vault|activate|register_agency|set_eligibility|open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal)\s*\(/u,
+    /pub fn (?:initialize_lane_vault|initialize_stake_vault|activate|register_agency|set_eligibility|open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal)\s*\(/u,
   );
+
+  const initializeConfig = matrix.handlers.find(
+    (handler) => handler.name === "initialize_config",
+  );
+  assert.equal(initializeConfig.implementationStage, "PRE_LIFECYCLE_ONLY");
+  assert.equal(initializeConfig.handlerComplete, false);
+  assert.equal(initializeConfig.publicExposure, matrix.deploymentExposure);
+  assert(initializeConfig.cpis.includes("system_program.create_account"));
 });
 
 test("the pure verifier pins the exact current Daily Law v1 codec", () => {

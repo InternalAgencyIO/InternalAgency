@@ -354,3 +354,85 @@ test("the host-only commit_round port preserves adjacent proof and snapshot orde
     /`commit_round` is the fourth and only additional\s+handler-body kernel/u,
   );
 });
+
+test("the initialize_config kernel preserves V2 validation and initial state construction", () => {
+  const v2Initialize = functionBody(anchorProgramBody(v2Source), "initialize_config");
+  const economyInitialize = functionBody(economySource, "initialize_config");
+  const economyTransition = functionBody(
+    economySource,
+    "initialize_config_transition",
+  );
+
+  assertTokensInOrder(
+    v2Initialize,
+    [
+      "ctx.accounts.admin.key()",
+      "PROGRAM_ADMIN",
+      "ctx.accounts.mint.decimals",
+      "TOKEN_DECIMALS",
+      "let expected_randomness_program",
+      "randomness_program,",
+      "expected_randomness_program",
+      "let now = Clock::get",
+      "if rehearsal_mode",
+      "rehearsal_genesis_timestamp.ok_or",
+      "rehearsal_genesis_timestamp.is_none()",
+      "genesis_timestamp <= now",
+      "config.admin = PROGRAM_ADMIN",
+      "config.mint = ctx.accounts.mint.key()",
+      "config.token_program = ctx.accounts.token_program.key()",
+      "config.randomness_program = randomness_program",
+      "config.genesis_timestamp = genesis_timestamp",
+      "config.expected_supply = if rehearsal_mode",
+      "config.rehearsal_mode = rehearsal_mode",
+      "config.active = false",
+      "config.lane_mask = 0",
+      "config.stake_vault_initialized = false",
+      "config.stake_token_account = Pubkey::default()",
+      "config.staked_principal = 0",
+      "config.agency_registry_hash = [0; 32]",
+      "config.agency_count = 0",
+      "config.bump = ctx.bumps.config",
+      "config.vault_authority_bump = ctx.bumps.vault_authority",
+    ],
+    "V2 initialize_config",
+  );
+  assert.match(economyInitialize, /gate: &ValidatedDailyLawWrite/u);
+  assert.match(economyInitialize, /initialize_config_transition\(input, gate\.unix_timestamp\)/u);
+  assertTokensInOrder(
+    economyTransition,
+    [
+      "input.admin != PROGRAM_ADMIN",
+      "input.mint_decimals != TOKEN_DECIMALS",
+      "let expected_randomness_program",
+      "input.randomness_program != expected_randomness_program",
+      "let genesis_timestamp = if input.rehearsal_mode",
+      ".rehearsal_genesis_timestamp",
+      "ProductionTimestampOverrideForbidden",
+      "genesis_timestamp > clock_unix_timestamp",
+      "config: ConfigState",
+      "admin: PROGRAM_ADMIN",
+      "mint: input.mint",
+      "token_program: input.token_program",
+      "randomness_program: input.randomness_program",
+      "stake_token_account: [0; 32]",
+      "agency_registry_hash: [0; 32]",
+      "genesis_timestamp,",
+      "expected_supply: if input.rehearsal_mode",
+      "staked_principal: 0",
+      "agency_count: 0",
+      "rehearsal_mode: input.rehearsal_mode",
+      "active: false",
+      "lane_mask: 0",
+      "stake_vault_initialized: false",
+      "bump: input.config_bump",
+      "vault_authority_bump: input.vault_authority_bump",
+    ],
+    "B3 initialize_config transition",
+  );
+  assert.match(
+    audit,
+    /`initialize_config` is the fifth host kernel[\s\S]+pre-lifecycle validation and by-value initial-state construction/u,
+  );
+  assert.match(audit, /explicitly staged as `PRE_LIFECYCLE_ONLY`/u);
+});

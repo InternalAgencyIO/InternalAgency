@@ -208,10 +208,15 @@ permanently close after the committed set is exhausted.
    second because it is a reachable V2 business transition with no lifecycle,
    CPI, randomness, or network boundary. Add only the pure pre-lifecycle
    `commit_round` adjacent-instruction proof and snapshot constructor here; its
-   round-account creation remains in step 5.
+   round-account creation remains in step 5. Add only the pre-lifecycle
+   `initialize_config` validation/state-construction kernel here; signer and
+   canonical-mint authentication, PDA derivation, account allocation/funding,
+   and the persistent write remain in step 5.
 5. Port the eight account-creating paths with manual post-gate System Program
    CPIs and prove locked/unfinalized calls perform no successful CPI or state
-   change.
+   change. The existing `initialize_config` `PRE_LIFECYCLE_ONLY` kernel is not
+   completion of this step and must not be exposed until that lifecycle adapter
+   exists.
 6. Port Token-2022 vault transfers and exercise the real hook for
    `open_position`, both settlement handlers, principal claim, and principal
    withdrawal on a disposable local validator.
@@ -237,6 +242,11 @@ production wrapper remains CCC-disabled, while its private by-value kernel
 differential-tests the exact V2 Switchboard reveal validation and uniform
 tiebreak transition. The fourth adds only the host-side `commit_round` proof and
 snapshot kernel: it verifies the immediately preceding Switchboard commit and
-returns pending state without creating an account. None of those may be exposed
-as a write entrypoint. The first safe deployable slice is the complete
-fifteen-row dispatcher behind the frozen Token-2022 hook, not a single handler.
+returns pending state without creating an account. The fifth adds only the
+`initialize_config` handler-body validation and initial `Config` construction
+by value behind the opaque Daily Law capability. It is explicitly
+`PRE_LIFECYCLE_ONLY`: it does not authenticate a signer, bind a canonical mint,
+derive or create an account, invoke the System Program, or persist state. None
+of those kernels may be exposed as a write entrypoint. The first safe deployable
+slice is the complete fifteen-row dispatcher behind the frozen Token-2022 hook,
+not a single handler.

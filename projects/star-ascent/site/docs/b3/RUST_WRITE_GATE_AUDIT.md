@@ -26,10 +26,12 @@ The faction and core-team-cap implementations currently present under
 new host-only `iat_b3_economy` library contains immutable V2 constants, an
 exact read-only Daily Law codec/verifier, an opaque validated-write capability,
 and internal pure `expire_round`, `close_position`, `settle_round`, and
-`commit_round` transitions. Its manifest is `lib`-only and it has no Solana
-entrypoint or public dispatcher, account lifecycle, token CPI, or network
-access. Neither the JavaScript specifications nor these pure Rust slices may be
-counted as on-chain faction or core-cap enforcement.
+`commit_round` transitions, plus the `initialize_config` validation/state
+constructor explicitly staged as `PRE_LIFECYCLE_ONLY`. Its manifest is
+`lib`-only and it has no Solana entrypoint or public dispatcher, account
+lifecycle, token CPI, or network access. Neither the JavaScript specifications
+nor these pure Rust slices may be counted as on-chain faction or core-cap
+enforcement.
 
 This is a hard Mainnet blocker. Adding a check to only the V2 transfer helper
 would be insufficient: several V2 handlers mutate protocol ledgers without a
@@ -75,10 +77,23 @@ gate and must not be counted as one if a future binary enables the DLC.
 
 `expire_round` remains the first pure transition, `close_position` the second,
 and `settle_round` the third. `commit_round` is the fourth and only additional
-handler-body kernel currently present in `iat_b3_economy`. Every production
-wrapper requires the opaque canonical Daily Law capability. The three CCC
-wrappers then preserve the immutable CCC-disabled Genesis boundary before
-inspecting caller-supplied round, instruction-trace, or randomness values.
+handler-body kernel. `initialize_config` is the fifth host kernel, but only its
+pre-lifecycle validation and by-value initial-state construction are present.
+Every production wrapper requires the opaque canonical Daily Law capability.
+The three CCC wrappers then preserve the immutable CCC-disabled Genesis
+boundary before inspecting caller-supplied round, instruction-trace, or
+randomness values.
+
+The `initialize_config` kernel preserves the retained V2 handler body's exact
+validation order: hardware-admin key, mint decimals, rehearsal/production
+Switchboard program ID, timestamp-mode rule, then the future-genesis guard. On
+success it constructs the complete initial V2 `Config` data by value, including
+the cluster-specific expected supply, inactive flags, zeroed vault/registry
+fields and counts, and both supplied bumps. Differential tests use the actual
+V2 `Config` type and include stacked-error precedence plus `i64` timestamp and
+`u8` bump boundaries. This is not signer authentication, canonical-mint
+binding, PDA derivation, account allocation/funding, System Program CPI, or a
+persistent write, and it does not make `initialize_config` a complete handler.
 
 The `commit_round` differential kernel performs no account creation. It accepts
 a decoded read-only instructions-sysvar trace, selects only the instruction
@@ -106,8 +121,12 @@ must still prove account ownership, exact config/round/randomness bindings,
 PDAs, codecs, and bumps before its first mutable borrow, and must source Clock
 timestamp/slot from one Solana Clock observation. For `commit_round`, it must
 decode the canonical instructions sysvar itself and create the round PDA only
-after the Daily Law and pure proof succeed. The complete dispatcher remains
-absent and disabled until all fifteen rows pass together.
+after the Daily Law and pure proof succeed. For `initialize_config`, it must
+authenticate the hardware-admin signer, bind the canonical Token-2022 mint and
+program, derive and verify the config and vault-authority addresses/bumps, and
+create the config account only after the gate and pure validation succeed. The
+complete dispatcher remains absent and disabled until all fifteen rows pass
+together.
 
 ## Internal V2 mutation paths
 

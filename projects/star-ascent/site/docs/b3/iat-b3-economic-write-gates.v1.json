@@ -38,6 +38,14 @@
       "dailyLawCapabilityRequired": true,
       "v2DifferentialTests": true,
       "publicExposure": false
+    },
+    {
+      "name": "initialize_config",
+      "implementationStage": "PRE_LIFECYCLE_ONLY",
+      "dailyLawCapabilityRequired": true,
+      "v2DifferentialTests": true,
+      "handlerComplete": false,
+      "publicExposure": false
     }
   ],
   "canonicalGate": {
@@ -64,6 +72,8 @@
       "cpis": ["system_program.create_account"],
       "token2022Flow": "VALIDATE_CANONICAL_MINT",
       "parity": "PRESERVE",
+      "implementationStage": "PRE_LIFECYCLE_ONLY",
+      "handlerComplete": false,
       "publicExposure": "DISABLED_UNTIL_ALL_15_PASS"
     },
     {

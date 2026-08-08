@@ -27,6 +27,19 @@ pub const TIEBREAK_DOMAIN: &[u8] = b"IAT_TIEBREAK_V1";
 pub const TIEBREAK_MAX_DERIVATION_ATTEMPTS: u32 = 16;
 pub const CCC_TIEBREAK_CONTEXT_DOMAIN: &[u8] = b"IAT_CCC_WEEKLY_TIEBREAK_V1";
 
+pub const PROGRAM_ADMIN: [u8; 32] = [
+    96, 250, 143, 44, 72, 168, 188, 109, 42, 212, 118, 176, 148, 187, 47, 86, 159, 2, 2, 17, 191,
+    131, 77, 235, 20, 77, 46, 41, 88, 172, 66, 48,
+];
+pub const ON_DEMAND_MAINNET_PID: [u8; 32] = [
+    6, 115, 189, 70, 242, 228, 126, 4, 241, 43, 217, 47, 183, 49, 150, 142, 205, 157, 151, 87, 194,
+    116, 218, 135, 71, 111, 70, 92, 4, 12, 101, 115,
+];
+pub const ON_DEMAND_DEVNET_PID: [u8; 32] = [
+    144, 110, 20, 100, 197, 248, 183, 99, 60, 192, 90, 66, 76, 221, 179, 174, 205, 109, 171, 184,
+    174, 199, 71, 188, 79, 62, 17, 48, 30, 64, 99, 203,
+];
+
 pub const COMMUNITY: u8 = 0;
 pub const TREASURY: u8 = 1;
 pub const ECOSYSTEM: u8 = 2;
@@ -122,6 +135,46 @@ pub struct LaneState {
     pub reward_source: bool,
     pub bump: u8,
     pub token_bump: u8,
+}
+
+/// Native semantic representation of the retained V2 `Config` data. This is
+/// not an account codec or proof that a config PDA exists.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ConfigState {
+    pub admin: [u8; 32],
+    pub mint: [u8; 32],
+    pub token_program: [u8; 32],
+    pub randomness_program: [u8; 32],
+    pub stake_token_account: [u8; 32],
+    pub agency_registry_hash: [u8; 32],
+    pub genesis_timestamp: i64,
+    pub expected_supply: u64,
+    pub staked_principal: u64,
+    pub agency_count: u32,
+    pub rehearsal_mode: bool,
+    pub active: bool,
+    pub lane_mask: u8,
+    pub stake_vault_initialized: bool,
+    pub bump: u8,
+    pub vault_authority_bump: u8,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct InitializeConfigInput {
+    pub admin: [u8; 32],
+    pub mint: [u8; 32],
+    pub mint_decimals: u8,
+    pub token_program: [u8; 32],
+    pub rehearsal_mode: bool,
+    pub rehearsal_genesis_timestamp: Option<i64>,
+    pub randomness_program: [u8; 32],
+    pub config_bump: u8,
+    pub vault_authority_bump: u8,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct InitializeConfigResult {
+    pub config: ConfigState,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -249,6 +302,11 @@ pub enum EconomyError {
     InvalidDailyLawDecision,
     DayUnfinalized,
     DailyLockdown,
+    WrongHardwareAdministrator,
+    WrongMintDecimals,
+    RehearsalTimestampRequired,
+    ProductionTimestampOverrideForbidden,
+    GenesisTimestampInFuture,
     NotActive,
     PositionClosed,
     PrincipalNotReturned,
@@ -398,6 +456,77 @@ pub fn verify_daily_law_open(
         IatTransferDisposition::DayUnfinalized => Err(EconomyError::DayUnfinalized),
         IatTransferDisposition::RejectedDailyLockdown => Err(EconomyError::DailyLockdown),
     }
+}
+
+/// Host-only pre-lifecycle `initialize_config` validation and state
+/// construction. The opaque capability proves Daily Law was open before this
+/// retained handler-body logic runs. This function does not authenticate an
+/// account, derive a PDA, allocate data, transfer lamports, or write state.
+pub fn initialize_config(
+    gate: &ValidatedDailyLawWrite,
+    input: InitializeConfigInput,
+) -> Result<InitializeConfigResult, EconomyError> {
+    initialize_config_transition(input, gate.unix_timestamp)
+}
+
+fn initialize_config_transition(
+    input: InitializeConfigInput,
+    clock_unix_timestamp: i64,
+) -> Result<InitializeConfigResult, EconomyError> {
+    if input.admin != PROGRAM_ADMIN {
+        return Err(EconomyError::WrongHardwareAdministrator);
+    }
+    if input.mint_decimals != TOKEN_DECIMALS {
+        return Err(EconomyError::WrongMintDecimals);
+    }
+
+    let expected_randomness_program = if input.rehearsal_mode {
+        ON_DEMAND_DEVNET_PID
+    } else {
+        ON_DEMAND_MAINNET_PID
+    };
+    if input.randomness_program != expected_randomness_program {
+        return Err(EconomyError::WrongRandomnessProgram);
+    }
+
+    let genesis_timestamp = if input.rehearsal_mode {
+        input
+            .rehearsal_genesis_timestamp
+            .ok_or(EconomyError::RehearsalTimestampRequired)?
+    } else {
+        if input.rehearsal_genesis_timestamp.is_some() {
+            return Err(EconomyError::ProductionTimestampOverrideForbidden);
+        }
+        clock_unix_timestamp
+    };
+    if genesis_timestamp > clock_unix_timestamp {
+        return Err(EconomyError::GenesisTimestampInFuture);
+    }
+
+    Ok(InitializeConfigResult {
+        config: ConfigState {
+            admin: PROGRAM_ADMIN,
+            mint: input.mint,
+            token_program: input.token_program,
+            randomness_program: input.randomness_program,
+            stake_token_account: [0; 32],
+            agency_registry_hash: [0; 32],
+            genesis_timestamp,
+            expected_supply: if input.rehearsal_mode {
+                REHEARSAL_SUPPLY
+            } else {
+                MAINNET_SUPPLY
+            },
+            staked_principal: 0,
+            agency_count: 0,
+            rehearsal_mode: input.rehearsal_mode,
+            active: false,
+            lane_mask: 0,
+            stake_vault_initialized: false,
+            bump: input.config_bump,
+            vault_authority_bump: input.vault_authority_bump,
+        },
+    })
 }
 
 /// Production-facing internal transition. The retained CCC DLC is immutable
@@ -911,6 +1040,8 @@ mod tests {
     use iat_v2::policy as v2_policy;
     use iat_v2::switchboard_randomness::{
         parse_randomness as v2_parse_randomness, RevealValidationError,
+        ON_DEMAND_DEVNET_PID as V2_ON_DEMAND_DEVNET_PID,
+        ON_DEMAND_MAINNET_PID as V2_ON_DEMAND_MAINNET_PID,
         RANDOMNESS_ACCOUNT_SIZE as V2_RANDOMNESS_ACCOUNT_SIZE,
         RANDOMNESS_COMMIT_DISCRIMINATOR as V2_RANDOMNESS_COMMIT_DISCRIMINATOR,
         RANDOMNESS_DISCRIMINATOR as V2_RANDOMNESS_DISCRIMINATOR,
@@ -1179,6 +1310,139 @@ mod tests {
                 status: round.status,
                 reveal_slot,
             })),
+        }
+    }
+
+    #[derive(Clone, Copy)]
+    struct InitializeConfigVector {
+        name: &'static str,
+        input: InitializeConfigInput,
+        clock_timestamp: i64,
+    }
+
+    fn valid_initialize_config_vector(
+        name: &'static str,
+        rehearsal_mode: bool,
+    ) -> InitializeConfigVector {
+        InitializeConfigVector {
+            name,
+            input: InitializeConfigInput {
+                admin: PROGRAM_ADMIN,
+                mint: [0x31; 32],
+                mint_decimals: TOKEN_DECIMALS,
+                token_program: [0x32; 32],
+                rehearsal_mode,
+                rehearsal_genesis_timestamp: rehearsal_mode.then_some(900),
+                randomness_program: if rehearsal_mode {
+                    ON_DEMAND_DEVNET_PID
+                } else {
+                    ON_DEMAND_MAINNET_PID
+                },
+                config_bump: 248,
+                vault_authority_bump: 247,
+            },
+            clock_timestamp: 1_000,
+        }
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum InitializeConfigObservation {
+        Error(EconomyError),
+        Success(Box<ConfigState>),
+    }
+
+    fn observe_initialize_config(
+        result: Result<InitializeConfigResult, EconomyError>,
+    ) -> InitializeConfigObservation {
+        match result {
+            Err(error) => InitializeConfigObservation::Error(error),
+            Ok(result) => InitializeConfigObservation::Success(Box::new(result.config)),
+        }
+    }
+
+    fn semantic_config_from_v2(config: V2ConfigState) -> ConfigState {
+        ConfigState {
+            admin: config.admin.to_bytes(),
+            mint: config.mint.to_bytes(),
+            token_program: config.token_program.to_bytes(),
+            randomness_program: config.randomness_program.to_bytes(),
+            stake_token_account: config.stake_token_account.to_bytes(),
+            agency_registry_hash: config.agency_registry_hash,
+            genesis_timestamp: config.genesis_timestamp,
+            expected_supply: config.expected_supply,
+            staked_principal: config.staked_principal,
+            agency_count: config.agency_count,
+            rehearsal_mode: config.rehearsal_mode,
+            active: config.active,
+            lane_mask: config.lane_mask,
+            stake_vault_initialized: config.stake_vault_initialized,
+            bump: config.bump,
+            vault_authority_bump: config.vault_authority_bump,
+        }
+    }
+
+    fn v2_initialize_config_reference(
+        vector: InitializeConfigVector,
+    ) -> InitializeConfigObservation {
+        let input = vector.input;
+        let result = (|| {
+            if input.admin != iat_v2::PROGRAM_ADMIN.to_bytes() {
+                return Err(EconomyError::WrongHardwareAdministrator);
+            }
+            if input.mint_decimals != v2_policy::TOKEN_DECIMALS {
+                return Err(EconomyError::WrongMintDecimals);
+            }
+            let expected_randomness_program = if input.rehearsal_mode {
+                V2_ON_DEMAND_DEVNET_PID.to_bytes()
+            } else {
+                V2_ON_DEMAND_MAINNET_PID.to_bytes()
+            };
+            if input.randomness_program != expected_randomness_program {
+                return Err(EconomyError::WrongRandomnessProgram);
+            }
+            let genesis_timestamp = if input.rehearsal_mode {
+                input
+                    .rehearsal_genesis_timestamp
+                    .ok_or(EconomyError::RehearsalTimestampRequired)?
+            } else {
+                if input.rehearsal_genesis_timestamp.is_some() {
+                    return Err(EconomyError::ProductionTimestampOverrideForbidden);
+                }
+                vector.clock_timestamp
+            };
+            if genesis_timestamp > vector.clock_timestamp {
+                return Err(EconomyError::GenesisTimestampInFuture);
+            }
+
+            Ok(V2ConfigState {
+                admin: iat_v2::PROGRAM_ADMIN,
+                mint: input.mint.into(),
+                token_program: input.token_program.into(),
+                randomness_program: input.randomness_program.into(),
+                stake_token_account: Default::default(),
+                agency_registry_hash: [0; 32],
+                genesis_timestamp,
+                expected_supply: if input.rehearsal_mode {
+                    v2_policy::REHEARSAL_SUPPLY
+                } else {
+                    v2_policy::MAINNET_SUPPLY
+                },
+                staked_principal: 0,
+                agency_count: 0,
+                rehearsal_mode: input.rehearsal_mode,
+                active: false,
+                lane_mask: 0,
+                stake_vault_initialized: false,
+                bump: input.config_bump,
+                vault_authority_bump: input.vault_authority_bump,
+            })
+        })();
+
+        match result {
+            Err(error) => InitializeConfigObservation::Error(error),
+            Ok(config) => {
+                InitializeConfigObservation::Success(Box::new(semantic_config_from_v2(config)))
+            }
         }
     }
 
@@ -1713,6 +1977,9 @@ mod tests {
 
     #[test]
     fn immutable_constants_match_the_retained_v2_policy() {
+        assert_eq!(PROGRAM_ADMIN, iat_v2::PROGRAM_ADMIN.to_bytes());
+        assert_eq!(ON_DEMAND_MAINNET_PID, V2_ON_DEMAND_MAINNET_PID.to_bytes());
+        assert_eq!(ON_DEMAND_DEVNET_PID, V2_ON_DEMAND_DEVNET_PID.to_bytes());
         assert_eq!(TOKEN_DECIMALS, v2_policy::TOKEN_DECIMALS);
         assert_eq!(MAINNET_SUPPLY, v2_policy::MAINNET_SUPPLY);
         assert_eq!(REHEARSAL_SUPPLY, v2_policy::REHEARSAL_SUPPLY);
@@ -1758,6 +2025,182 @@ mod tests {
         assert_eq!(ROUND_PENDING, iat_v2::ROUND_PENDING);
         assert_eq!(ROUND_SETTLED, iat_v2::ROUND_SETTLED);
         assert_eq!(ROUND_EXPIRED_NEUTRAL, iat_v2::ROUND_EXPIRED_NEUTRAL);
+    }
+
+    #[test]
+    fn initialize_config_differential_and_adversarial_vectors_match_retained_v2() {
+        let vectors = [
+            InitializeConfigVector {
+                input: InitializeConfigInput {
+                    admin: [0xff; 32],
+                    mint_decimals: TOKEN_DECIMALS.wrapping_add(1),
+                    randomness_program: [0xee; 32],
+                    rehearsal_genesis_timestamp: None,
+                    ..valid_initialize_config_vector("ignored", true).input
+                },
+                ..valid_initialize_config_vector(
+                    "hardware admin precedes decimals, cluster, and timestamp validation",
+                    true,
+                )
+            },
+            InitializeConfigVector {
+                input: InitializeConfigInput {
+                    mint_decimals: TOKEN_DECIMALS.wrapping_add(1),
+                    randomness_program: [0xee; 32],
+                    rehearsal_genesis_timestamp: None,
+                    ..valid_initialize_config_vector("ignored", true).input
+                },
+                ..valid_initialize_config_vector(
+                    "mint decimals precede cluster and timestamp validation",
+                    true,
+                )
+            },
+            InitializeConfigVector {
+                input: InitializeConfigInput {
+                    randomness_program: ON_DEMAND_MAINNET_PID,
+                    rehearsal_genesis_timestamp: None,
+                    ..valid_initialize_config_vector("ignored", true).input
+                },
+                ..valid_initialize_config_vector(
+                    "rehearsal cluster validation precedes missing timestamp",
+                    true,
+                )
+            },
+            InitializeConfigVector {
+                input: InitializeConfigInput {
+                    randomness_program: ON_DEMAND_DEVNET_PID,
+                    rehearsal_genesis_timestamp: Some(i64::MAX),
+                    ..valid_initialize_config_vector("ignored", false).input
+                },
+                ..valid_initialize_config_vector(
+                    "production cluster validation precedes forbidden override",
+                    false,
+                )
+            },
+            InitializeConfigVector {
+                input: InitializeConfigInput {
+                    rehearsal_genesis_timestamp: None,
+                    ..valid_initialize_config_vector("ignored", true).input
+                },
+                ..valid_initialize_config_vector("rehearsal timestamp is required", true)
+            },
+            InitializeConfigVector {
+                input: InitializeConfigInput {
+                    rehearsal_genesis_timestamp: Some(i64::MAX),
+                    ..valid_initialize_config_vector("ignored", false).input
+                },
+                ..valid_initialize_config_vector(
+                    "production override is forbidden before any future check",
+                    false,
+                )
+            },
+            InitializeConfigVector {
+                input: InitializeConfigInput {
+                    rehearsal_genesis_timestamp: Some(1_001),
+                    ..valid_initialize_config_vector("ignored", true).input
+                },
+                ..valid_initialize_config_vector("rehearsal genesis cannot be in the future", true)
+            },
+            InitializeConfigVector {
+                input: InitializeConfigInput {
+                    rehearsal_genesis_timestamp: Some(1_000),
+                    ..valid_initialize_config_vector("ignored", true).input
+                },
+                ..valid_initialize_config_vector("rehearsal genesis may equal Clock", true)
+            },
+            valid_initialize_config_vector("rehearsal genesis may precede Clock", true),
+            InitializeConfigVector {
+                input: InitializeConfigInput {
+                    mint: [0xa1; 32],
+                    token_program: [0xa2; 32],
+                    rehearsal_genesis_timestamp: Some(i64::MIN),
+                    config_bump: 0,
+                    vault_authority_bump: u8::MAX,
+                    ..valid_initialize_config_vector("ignored", true).input
+                },
+                clock_timestamp: i64::MIN,
+                ..valid_initialize_config_vector(
+                    "minimum rehearsal timestamp and bump boundaries",
+                    true,
+                )
+            },
+            InitializeConfigVector {
+                input: InitializeConfigInput {
+                    mint: [0xb1; 32],
+                    token_program: [0xb2; 32],
+                    config_bump: u8::MAX,
+                    vault_authority_bump: 0,
+                    ..valid_initialize_config_vector("ignored", false).input
+                },
+                clock_timestamp: i64::MIN,
+                ..valid_initialize_config_vector(
+                    "production genesis is the minimum Clock timestamp",
+                    false,
+                )
+            },
+            InitializeConfigVector {
+                clock_timestamp: i64::MAX,
+                ..valid_initialize_config_vector(
+                    "production genesis is the maximum Clock timestamp",
+                    false,
+                )
+            },
+        ];
+
+        for vector in vectors {
+            let actual = observe_initialize_config(initialize_config_transition(
+                vector.input,
+                vector.clock_timestamp,
+            ));
+            let expected = v2_initialize_config_reference(vector);
+            assert_eq!(actual, expected, "{}", vector.name);
+        }
+
+        let rehearsal = initialize_config_transition(
+            valid_initialize_config_vector("rehearsal snapshot", true).input,
+            1_000,
+        )
+        .unwrap()
+        .config;
+        assert_eq!(rehearsal.expected_supply, REHEARSAL_SUPPLY);
+        assert_eq!(rehearsal.genesis_timestamp, 900);
+        assert!(rehearsal.rehearsal_mode);
+        assert!(!rehearsal.active);
+        assert!(!rehearsal.stake_vault_initialized);
+        assert_eq!(rehearsal.lane_mask, 0);
+        assert_eq!(rehearsal.stake_token_account, [0; 32]);
+        assert_eq!(rehearsal.staked_principal, 0);
+        assert_eq!(rehearsal.agency_registry_hash, [0; 32]);
+        assert_eq!(rehearsal.agency_count, 0);
+
+        let production = initialize_config_transition(
+            valid_initialize_config_vector("production snapshot", false).input,
+            i64::MAX,
+        )
+        .unwrap()
+        .config;
+        assert_eq!(production.expected_supply, MAINNET_SUPPLY);
+        assert_eq!(production.genesis_timestamp, i64::MAX);
+        assert!(!production.rehearsal_mode);
+    }
+
+    #[test]
+    fn production_initialize_config_requires_an_open_daily_law_capability() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let result = initialize_config(
+            &gate,
+            valid_initialize_config_vector("production wrapper", false).input,
+        )
+        .unwrap();
+        assert_eq!(result.config.genesis_timestamp, FRIDAY_BOUNDARY_UTC);
+        assert_eq!(result.config.expected_supply, MAINNET_SUPPLY);
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
     }
 
     #[test]
