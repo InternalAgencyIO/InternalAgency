@@ -25,10 +25,11 @@ The faction and core-team-cap implementations currently present under
 `programs/iat_b3_reference` remain executable JavaScript specifications. The
 new host-only `iat_b3_economy` library contains immutable V2 constants, an
 exact read-only Daily Law codec/verifier, an opaque validated-write capability,
-and the internal pure `expire_round` transition. Its manifest is `lib`-only and
-it has no Solana entrypoint or public dispatcher, account lifecycle, token CPI,
-or network access. Neither the JavaScript specifications nor this first pure
-Rust slice may be counted as on-chain faction or core-cap enforcement.
+and internal pure `expire_round` and `close_position` transitions. Its manifest
+is `lib`-only and it has no Solana entrypoint or public dispatcher, account
+lifecycle, token CPI, or network access. Neither the JavaScript specifications
+nor these pure Rust slices may be counted as on-chain faction or core-cap
+enforcement.
 
 This is a hard Mainnet blocker. Adding a check to only the V2 transfer helper
 would be insufficient: several V2 handlers mutate protocol ledgers without a
@@ -69,6 +70,22 @@ gate and must not be counted as one if a future binary enables the DLC.
 | `commit_round` | Creates pending round and snapshots registry/randomness commitment | None | CCC-disabled | **None** |
 | `settle_round` | Writes revealed randomness and selected agency; marks round settled | None | CCC-disabled | **None** |
 | `expire_round` | Writes neutral terminal result; marks round expired | None | CCC-disabled | **None** |
+
+## Host-only B3 port progress
+
+`expire_round` remains the first pure transition. `close_position` is the
+second and only additional handler-body transition currently present in
+`iat_b3_economy`. It was selected because it is reachable in retained V2 yet
+performs no account creation, closure CPI, token CPI, randomness read, or other
+network operation. The kernel requires the opaque canonical Daily Law
+capability before accepting by-value decoded state, preserves V2 validation and
+reservation-release order, and is differential-tested against the actual V2
+`Position` and `LaneVault` state types.
+
+This is not an account adapter or deployable handler. A future native adapter
+must still prove config activity, account ownership, exact config bindings,
+lane PDAs/order, codecs, and bumps before its first mutable borrow. The complete
+dispatcher remains absent and disabled until all fifteen rows pass together.
 
 ## Internal V2 mutation paths
 

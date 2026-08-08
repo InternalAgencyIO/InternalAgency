@@ -120,6 +120,33 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
+test("the second host-only slice ports only close_position behind the opaque law capability", () => {
+  assert.deepEqual(matrix.hostOnlyPureTransitions, [
+    {
+      name: "expire_round",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      publicExposure: false,
+    },
+    {
+      name: "close_position",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      publicExposure: false,
+    },
+  ]);
+  assert.match(
+    economySource,
+    /pub fn close_position\(\s*_gate: &ValidatedDailyLawWrite,/u,
+  );
+  assert.match(economySource, /fn close_position_transition\(/u);
+  assert.match(economySource, /fn release_reserved_lane\(/u);
+  assert.doesNotMatch(
+    economyCode,
+    /pub fn (?:initialize_config|initialize_lane_vault|initialize_stake_vault|activate|register_agency|set_eligibility|open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal|commit_round|settle_round)\s*\(/u,
+  );
+});
+
 test("the pure verifier pins the exact current Daily Law v1 codec", () => {
   for (const declaration of [
     'pub const LAW_STATE_MAGIC: &[u8; 8] = b"IATB3S01";',

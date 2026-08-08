@@ -148,3 +148,32 @@ test("ledger-only V2 writes cannot be mistaken for transfer-hook coverage", () =
     assert.doesNotMatch(body, /iat_b3|law[_ -]?state|DailyLaw|daily[_ -]?law/iu);
   }
 });
+
+test("the host-only close_position port preserves the V2 validation boundary", () => {
+  const v2Close = functionBody(anchorProgramBody(v2Source), "close_position");
+  const economyClose = functionBody(economySource, "close_position");
+  const economyTransition = functionBody(economySource, "close_position_transition");
+
+  for (const token of [
+    "config.active",
+    "position.closed",
+    "position.principal_returned",
+    "position.settled_mask",
+    "release_three_reservations",
+    "position.closed = true",
+  ]) {
+    assert.ok(v2Close.includes(token), `V2 close_position drifted: ${token}`);
+  }
+  assert.match(economyClose, /_gate: &ValidatedDailyLawWrite/u);
+  assert.match(economyClose, /close_position_transition/u);
+  assert.match(economyTransition, /EconomyError::NotActive/u);
+  assert.match(economyTransition, /EconomyError::PositionClosed/u);
+  assert.match(economyTransition, /EconomyError::PrincipalNotReturned/u);
+  assert.match(economyTransition, /EconomyError::PositionWeeksOutstanding/u);
+  assert.match(economyTransition, /EconomyError::WrongLaneOrder/u);
+  assert.match(economyTransition, /release_reserved_lane/u);
+  assert.match(
+    audit,
+    /`close_position` is the\s+second and only additional handler-body transition/u,
+  );
+});

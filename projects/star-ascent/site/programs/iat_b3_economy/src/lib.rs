@@ -68,10 +68,62 @@ pub struct RoundState {
     pub status: u8,
 }
 
+/// Native, host-only semantic representation of the retained V2 `Position`.
+/// The adapter remains responsible for account ownership, PDA, config-key,
+/// and bump validation before passing decoded values into this pure kernel.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct PositionState {
+    pub config: [u8; 32],
+    pub owner: [u8; 32],
+    pub position_id: u64,
+    pub principal: u64,
+    pub accepted_week: u64,
+    pub first_accrual_week: u64,
+    pub term_weeks: u64,
+    pub annual_rate_bps: u64,
+    pub treasury_reserved: u64,
+    pub ecosystem_reserved: u64,
+    pub liquidity_reserved: u64,
+    pub paid: u64,
+    pub settled_mask: u64,
+    pub agency_index: u32,
+    pub role: u8,
+    pub principal_returned: bool,
+    pub closed: bool,
+    pub bump: u8,
+}
+
+/// Native, host-only semantic representation of the retained V2 `LaneVault`.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct LaneState {
+    pub config: [u8; 32],
+    pub token_account: [u8; 32],
+    pub beneficiary: [u8; 32],
+    pub total: u64,
+    pub genesis_unlocked: u64,
+    pub cliff_week: u64,
+    pub linear_end_week: u64,
+    pub reserved: u64,
+    pub paid: u64,
+    pub principal_claimed: u64,
+    pub lane: u8,
+    pub reward_source: bool,
+    pub bump: u8,
+    pub token_bump: u8,
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ExpireRoundResult {
     pub round: RoundState,
     pub recovery_timestamp: i64,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ClosePositionResult {
+    pub position: PositionState,
+    pub treasury: LaneState,
+    pub ecosystem: LaneState,
+    pub liquidity: LaneState,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -81,6 +133,12 @@ pub enum EconomyError {
     InvalidDailyLawDecision,
     DayUnfinalized,
     DailyLockdown,
+    NotActive,
+    PositionClosed,
+    PrincipalNotReturned,
+    PositionWeeksOutstanding,
+    WrongLaneOrder,
+    ReservationLedgerMismatch,
     CccDlcNotActive,
     RoundAlreadySettled,
     RoundRevealTimeoutNotReached,
@@ -226,6 +284,79 @@ pub fn expire_round(
     expire_pending_round(round, gate.unix_timestamp)
 }
 
+/// Pure retained V2 `close_position` handler-body transition. The opaque gate
+/// proves the canonical Daily Law was open before any state value reached this
+/// function. A future native adapter must additionally validate the decoded
+/// config/position/lane account identities and PDAs before calling it.
+///
+/// Inputs and outputs are by value, so a failed lane reconciliation cannot
+/// expose the V2 helper's intermediate mutations outside this atomic kernel.
+pub fn close_position(
+    _gate: &ValidatedDailyLawWrite,
+    config_active: bool,
+    position: PositionState,
+    treasury: LaneState,
+    ecosystem: LaneState,
+    liquidity: LaneState,
+) -> Result<ClosePositionResult, EconomyError> {
+    close_position_transition(config_active, position, treasury, ecosystem, liquidity)
+}
+
+fn close_position_transition(
+    config_active: bool,
+    mut position: PositionState,
+    mut treasury: LaneState,
+    mut ecosystem: LaneState,
+    mut liquidity: LaneState,
+) -> Result<ClosePositionResult, EconomyError> {
+    if !config_active {
+        return Err(EconomyError::NotActive);
+    }
+    if position.closed {
+        return Err(EconomyError::PositionClosed);
+    }
+    if !position.principal_returned {
+        return Err(EconomyError::PrincipalNotReturned);
+    }
+    if position.settled_mask != full_position_settlement_mask() {
+        return Err(EconomyError::PositionWeeksOutstanding);
+    }
+    if treasury.lane != TREASURY || ecosystem.lane != ECOSYSTEM || liquidity.lane != LIQUIDITY {
+        return Err(EconomyError::WrongLaneOrder);
+    }
+
+    release_reserved_lane(&mut treasury, &mut position.treasury_reserved)?;
+    release_reserved_lane(&mut ecosystem, &mut position.ecosystem_reserved)?;
+    release_reserved_lane(&mut liquidity, &mut position.liquidity_reserved)?;
+    position.closed = true;
+
+    Ok(ClosePositionResult {
+        position,
+        treasury,
+        ecosystem,
+        liquidity,
+    })
+}
+
+const fn full_position_settlement_mask() -> u64 {
+    (1u64 << USER_TERM_WEEKS) - 1
+}
+
+fn release_reserved_lane(
+    lane: &mut LaneState,
+    position_reserved: &mut u64,
+) -> Result<(), EconomyError> {
+    if *position_reserved > lane.reserved {
+        return Err(EconomyError::ReservationLedgerMismatch);
+    }
+    lane.reserved = lane
+        .reserved
+        .checked_sub(*position_reserved)
+        .ok_or(EconomyError::ReservationLedgerMismatch)?;
+    *position_reserved = 0;
+    Ok(())
+}
+
 fn expire_pending_round(
     mut round: RoundState,
     clock_unix_timestamp: i64,
@@ -309,6 +440,7 @@ mod tests {
     use super::*;
     use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day};
     use iat_v2::policy as v2_policy;
+    use iat_v2::{LaneVault as V2LaneState, Position as V2PositionState};
 
     const LAW_PROGRAM: [u8; 32] = [0xB3; 32];
     const LAW_STATE: [u8; 32] = [0x51; 32];
@@ -381,6 +513,204 @@ mod tests {
         }
     }
 
+    fn position_state(
+        treasury_reserved: u64,
+        ecosystem_reserved: u64,
+        liquidity_reserved: u64,
+    ) -> PositionState {
+        PositionState {
+            config: [1; 32],
+            owner: [2; 32],
+            position_id: 17,
+            principal: 400,
+            accepted_week: 3,
+            first_accrual_week: 4,
+            term_weeks: USER_TERM_WEEKS,
+            annual_rate_bps: STANDARD_RATE_BPS,
+            treasury_reserved,
+            ecosystem_reserved,
+            liquidity_reserved,
+            paid: 91,
+            settled_mask: full_position_settlement_mask(),
+            agency_index: 8,
+            role: 1,
+            principal_returned: true,
+            closed: false,
+            bump: 253,
+        }
+    }
+
+    fn lane_state(lane: u8, reserved: u64, marker: u8) -> LaneState {
+        LaneState {
+            config: [1; 32],
+            token_account: [marker; 32],
+            beneficiary: [marker.wrapping_add(1); 32],
+            total: 10_000,
+            genesis_unlocked: 20,
+            cliff_week: 5,
+            linear_end_week: 100,
+            reserved,
+            paid: 700 + u64::from(marker),
+            principal_claimed: 300,
+            lane,
+            reward_source: true,
+            bump: marker,
+            token_bump: marker.wrapping_add(2),
+        }
+    }
+
+    fn v2_position(
+        treasury_reserved: u64,
+        ecosystem_reserved: u64,
+        liquidity_reserved: u64,
+    ) -> V2PositionState {
+        V2PositionState {
+            config: Default::default(),
+            owner: Default::default(),
+            position_id: 17,
+            principal: 400,
+            accepted_week: 3,
+            first_accrual_week: 4,
+            term_weeks: v2_policy::USER_TERM_WEEKS,
+            annual_rate_bps: v2_policy::STANDARD_RATE_BPS,
+            treasury_reserved,
+            ecosystem_reserved,
+            liquidity_reserved,
+            paid: 91,
+            settled_mask: (1u64 << v2_policy::USER_TERM_WEEKS) - 1,
+            agency_index: 8,
+            role: 1,
+            principal_returned: true,
+            closed: false,
+            bump: 253,
+        }
+    }
+
+    fn v2_lane(lane: u8, reserved: u64, marker: u8) -> V2LaneState {
+        V2LaneState {
+            config: Default::default(),
+            token_account: Default::default(),
+            beneficiary: Default::default(),
+            total: 10_000,
+            genesis_unlocked: 20,
+            cliff_week: 5,
+            linear_end_week: 100,
+            reserved,
+            paid: 700 + u64::from(marker),
+            principal_claimed: 300,
+            lane,
+            reward_source: true,
+            bump: marker,
+            token_bump: marker.wrapping_add(2),
+        }
+    }
+
+    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    enum CloseObservation {
+        Error(EconomyError),
+        Success {
+            position_reserved: [u64; 3],
+            lane_reserved: [u64; 3],
+            lane_paid: [u64; 3],
+            position_paid: u64,
+            position_closed: bool,
+        },
+    }
+
+    fn observe_close_result(result: Result<ClosePositionResult, EconomyError>) -> CloseObservation {
+        match result {
+            Err(error) => CloseObservation::Error(error),
+            Ok(result) => CloseObservation::Success {
+                position_reserved: [
+                    result.position.treasury_reserved,
+                    result.position.ecosystem_reserved,
+                    result.position.liquidity_reserved,
+                ],
+                lane_reserved: [
+                    result.treasury.reserved,
+                    result.ecosystem.reserved,
+                    result.liquidity.reserved,
+                ],
+                lane_paid: [
+                    result.treasury.paid,
+                    result.ecosystem.paid,
+                    result.liquidity.paid,
+                ],
+                position_paid: result.position.paid,
+                position_closed: result.position.closed,
+            },
+        }
+    }
+
+    fn v2_release_reserved_lane(
+        lane: &mut V2LaneState,
+        position_reserved: &mut u64,
+    ) -> Result<(), EconomyError> {
+        if *position_reserved > lane.reserved {
+            return Err(EconomyError::ReservationLedgerMismatch);
+        }
+        lane.reserved = lane
+            .reserved
+            .checked_sub(*position_reserved)
+            .ok_or(EconomyError::ReservationLedgerMismatch)?;
+        *position_reserved = 0;
+        Ok(())
+    }
+
+    /// Independent, line-for-line semantic oracle for the retained V2
+    /// `close_position` handler and `release_three_reservations` helper. It
+    /// operates on the actual V2 state types so field/schema drift fails the
+    /// economy crate's differential tests at compile time.
+    fn v2_close_position_reference(
+        config_active: bool,
+        mut position: V2PositionState,
+        mut treasury: V2LaneState,
+        mut ecosystem: V2LaneState,
+        mut liquidity: V2LaneState,
+    ) -> CloseObservation {
+        let result = (|| {
+            if !config_active {
+                return Err(EconomyError::NotActive);
+            }
+            if position.closed {
+                return Err(EconomyError::PositionClosed);
+            }
+            if !position.principal_returned {
+                return Err(EconomyError::PrincipalNotReturned);
+            }
+            if position.settled_mask != (1u64 << v2_policy::USER_TERM_WEEKS) - 1 {
+                return Err(EconomyError::PositionWeeksOutstanding);
+            }
+            if treasury.lane != v2_policy::TREASURY
+                || ecosystem.lane != v2_policy::ECOSYSTEM
+                || liquidity.lane != v2_policy::LIQUIDITY
+            {
+                return Err(EconomyError::WrongLaneOrder);
+            }
+
+            v2_release_reserved_lane(&mut treasury, &mut position.treasury_reserved)?;
+            v2_release_reserved_lane(&mut ecosystem, &mut position.ecosystem_reserved)?;
+            v2_release_reserved_lane(&mut liquidity, &mut position.liquidity_reserved)?;
+            position.closed = true;
+            Ok(())
+        })();
+
+        match result {
+            Err(error) => CloseObservation::Error(error),
+            Ok(()) => CloseObservation::Success {
+                position_reserved: [
+                    position.treasury_reserved,
+                    position.ecosystem_reserved,
+                    position.liquidity_reserved,
+                ],
+                lane_reserved: [treasury.reserved, ecosystem.reserved, liquidity.reserved],
+                lane_paid: [treasury.paid, ecosystem.paid, liquidity.paid],
+                position_paid: position.paid,
+                position_closed: position.closed,
+            },
+        }
+    }
+
     #[test]
     fn immutable_constants_match_the_retained_v2_policy() {
         assert_eq!(TOKEN_DECIMALS, v2_policy::TOKEN_DECIMALS);
@@ -413,6 +743,215 @@ mod tests {
         assert_eq!(ROUND_PENDING, iat_v2::ROUND_PENDING);
         assert_eq!(ROUND_SETTLED, iat_v2::ROUND_SETTLED);
         assert_eq!(ROUND_EXPIRED_NEUTRAL, iat_v2::ROUND_EXPIRED_NEUTRAL);
+    }
+
+    #[test]
+    fn close_position_differential_vectors_match_the_retained_v2_handler() {
+        #[derive(Clone, Copy)]
+        struct Vector {
+            active: bool,
+            closed: bool,
+            principal_returned: bool,
+            settled_mask: u64,
+            position_reserved: [u64; 3],
+            lane_reserved: [u64; 3],
+            lane_order: [u8; 3],
+        }
+
+        let full_mask = full_position_settlement_mask();
+        let vectors = [
+            Vector {
+                active: true,
+                closed: false,
+                principal_returned: true,
+                settled_mask: full_mask,
+                position_reserved: [0, 0, 0],
+                lane_reserved: [0, 0, 0],
+                lane_order: [TREASURY, ECOSYSTEM, LIQUIDITY],
+            },
+            Vector {
+                active: true,
+                closed: false,
+                principal_returned: true,
+                settled_mask: full_mask,
+                position_reserved: [3, 5, 8],
+                lane_reserved: [3, 9, 13],
+                lane_order: [TREASURY, ECOSYSTEM, LIQUIDITY],
+            },
+            Vector {
+                active: false,
+                closed: true,
+                principal_returned: false,
+                settled_mask: 0,
+                position_reserved: [4, 4, 4],
+                lane_reserved: [0, 0, 0],
+                lane_order: [LIQUIDITY, TREASURY, ECOSYSTEM],
+            },
+            Vector {
+                active: true,
+                closed: true,
+                principal_returned: false,
+                settled_mask: 0,
+                position_reserved: [4, 4, 4],
+                lane_reserved: [0, 0, 0],
+                lane_order: [LIQUIDITY, TREASURY, ECOSYSTEM],
+            },
+            Vector {
+                active: true,
+                closed: false,
+                principal_returned: false,
+                settled_mask: 0,
+                position_reserved: [4, 4, 4],
+                lane_reserved: [0, 0, 0],
+                lane_order: [LIQUIDITY, TREASURY, ECOSYSTEM],
+            },
+            Vector {
+                active: true,
+                closed: false,
+                principal_returned: true,
+                settled_mask: full_mask - 1,
+                position_reserved: [4, 4, 4],
+                lane_reserved: [0, 0, 0],
+                lane_order: [LIQUIDITY, TREASURY, ECOSYSTEM],
+            },
+            Vector {
+                active: true,
+                closed: false,
+                principal_returned: true,
+                settled_mask: full_mask,
+                position_reserved: [4, 4, 4],
+                lane_reserved: [0, 0, 0],
+                lane_order: [LIQUIDITY, TREASURY, ECOSYSTEM],
+            },
+            Vector {
+                active: true,
+                closed: false,
+                principal_returned: true,
+                settled_mask: full_mask,
+                position_reserved: [4, 4, 4],
+                lane_reserved: [3, 4, 4],
+                lane_order: [TREASURY, ECOSYSTEM, LIQUIDITY],
+            },
+            Vector {
+                active: true,
+                closed: false,
+                principal_returned: true,
+                settled_mask: full_mask,
+                position_reserved: [4, 4, 4],
+                lane_reserved: [4, 3, 4],
+                lane_order: [TREASURY, ECOSYSTEM, LIQUIDITY],
+            },
+            Vector {
+                active: true,
+                closed: false,
+                principal_returned: true,
+                settled_mask: full_mask,
+                position_reserved: [4, 4, 4],
+                lane_reserved: [4, 4, 3],
+                lane_order: [TREASURY, ECOSYSTEM, LIQUIDITY],
+            },
+        ];
+
+        for vector in vectors {
+            let mut position = position_state(
+                vector.position_reserved[0],
+                vector.position_reserved[1],
+                vector.position_reserved[2],
+            );
+            position.closed = vector.closed;
+            position.principal_returned = vector.principal_returned;
+            position.settled_mask = vector.settled_mask;
+            let actual = observe_close_result(close_position_transition(
+                vector.active,
+                position,
+                lane_state(vector.lane_order[0], vector.lane_reserved[0], 10),
+                lane_state(vector.lane_order[1], vector.lane_reserved[1], 20),
+                lane_state(vector.lane_order[2], vector.lane_reserved[2], 30),
+            ));
+
+            let mut reference_position = v2_position(
+                vector.position_reserved[0],
+                vector.position_reserved[1],
+                vector.position_reserved[2],
+            );
+            reference_position.closed = vector.closed;
+            reference_position.principal_returned = vector.principal_returned;
+            reference_position.settled_mask = vector.settled_mask;
+            let expected = v2_close_position_reference(
+                vector.active,
+                reference_position,
+                v2_lane(vector.lane_order[0], vector.lane_reserved[0], 10),
+                v2_lane(vector.lane_order[1], vector.lane_reserved[1], 20),
+                v2_lane(vector.lane_order[2], vector.lane_reserved[2], 30),
+            );
+
+            assert_eq!(actual, expected);
+        }
+    }
+
+    #[test]
+    fn close_position_changes_only_v2_reservations_and_terminal_flag() {
+        let position = position_state(3, 5, 8);
+        let treasury = lane_state(TREASURY, 7, 10);
+        let ecosystem = lane_state(ECOSYSTEM, 11, 20);
+        let liquidity = lane_state(LIQUIDITY, 17, 30);
+
+        let result =
+            close_position_transition(true, position, treasury, ecosystem, liquidity).unwrap();
+
+        assert_eq!(
+            result.position,
+            PositionState {
+                treasury_reserved: 0,
+                ecosystem_reserved: 0,
+                liquidity_reserved: 0,
+                closed: true,
+                ..position
+            }
+        );
+        assert_eq!(
+            result.treasury,
+            LaneState {
+                reserved: 4,
+                ..treasury
+            }
+        );
+        assert_eq!(
+            result.ecosystem,
+            LaneState {
+                reserved: 6,
+                ..ecosystem
+            }
+        );
+        assert_eq!(
+            result.liquidity,
+            LaneState {
+                reserved: 9,
+                ..liquidity
+            }
+        );
+    }
+
+    #[test]
+    fn close_position_requires_an_open_canonical_daily_law_capability() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let result = close_position(
+            &gate,
+            true,
+            position_state(1, 2, 3),
+            lane_state(TREASURY, 1, 10),
+            lane_state(ECOSYSTEM, 2, 20),
+            lane_state(LIQUIDITY, 3, 30),
+        )
+        .unwrap();
+        assert!(result.position.closed);
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
     }
 
     #[test]

@@ -14,6 +14,20 @@
     "tokenCpi": false,
     "networkAccess": false
   },
+  "hostOnlyPureTransitions": [
+    {
+      "name": "expire_round",
+      "dailyLawCapabilityRequired": true,
+      "v2DifferentialTests": true,
+      "publicExposure": false
+    },
+    {
+      "name": "close_position",
+      "dailyLawCapabilityRequired": true,
+      "v2DifferentialTests": true,
+      "publicExposure": false
+    }
+  ],
   "canonicalGate": {
     "name": "CANONICAL_DAILY_LAW_OPEN",
     "placement": "BEFORE_MUTABLE_BORROW_ACCOUNT_LIFECYCLE_OR_CPI",

@@ -203,8 +203,10 @@ permanently close after the committed set is exhausted.
 3. Implement the canonical Daily Law verifier and adversarial account fixtures;
    do not add a public economic dispatcher.
 4. Port state-only transitions as internal functions, beginning with
-   `expire_round`, `settle_round`, and `close_position`; retain the compile-time
-   inactive CCC boundary and compare exact outputs/errors.
+   `expire_round`, `close_position`, and `settle_round`; retain the compile-time
+   inactive CCC boundary and compare exact outputs/errors. `close_position` is
+   second because it is a reachable V2 business transition with no lifecycle,
+   CPI, randomness, or network boundary.
 5. Port the eight account-creating paths with manual post-gate System Program
    CPIs and prove locked/unfinalized calls perform no successful CPI or state
    change.
@@ -225,8 +227,9 @@ permanently close after the committed set is exhausted.
 11. Perform a fresh signed Devnet rehearsal and independent review before any
     Mainnet ceremony is considered.
 
-The first safe coding slice is therefore the pure transition library plus the
-read-only canonical law verifier and internal `expire_round` transition. None
-of those may be exposed as a write entrypoint. The first safe deployable slice
-is the complete fifteen-row dispatcher behind the frozen Token-2022 hook, not a
-single handler.
+The first safe coding slice is the pure transition library plus the read-only
+canonical law verifier and internal `expire_round` transition. The second adds
+only the by-value `close_position` ledger transition behind the same opaque law
+capability, with V2 differential tests. None of those may be exposed as a write
+entrypoint. The first safe deployable slice is the complete fifteen-row
+dispatcher behind the frozen Token-2022 hook, not a single handler.
