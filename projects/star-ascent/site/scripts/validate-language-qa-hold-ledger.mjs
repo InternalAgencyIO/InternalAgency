@@ -146,7 +146,8 @@ export function validateLanguageQaHoldLedgerArtifacts({ scorecardBytes, ledgerBy
   };
   const sourceCommit = scorecard.sourceBinding.headCommit;
   check(git(["cat-file", "-e", `${sourceCommit}^{commit}`]) !== null, "scorecard source commit is unavailable");
-  check(git(["merge-base", "--is-ancestor", sourceCommit, "HEAD"]) !== null, "scorecard source commit is outside the current branch history");
+  const sourceMergeBase = git(["merge-base", sourceCommit, "HEAD"]);
+  check(sourceMergeBase?.trim() === sourceCommit, "scorecard source commit is outside the current branch history");
   const sourceTree = git(["rev-parse", `${sourceCommit}^{tree}`]);
   check(sourceTree?.trim() === scorecard.sourceBinding.headTree, "scorecard source tree mismatch");
   const generatedAtMs = Date.parse(scorecard.generatedAt);
