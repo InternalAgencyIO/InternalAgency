@@ -230,6 +230,9 @@ permanently close after the committed set is exhausted.
 The first safe coding slice is the pure transition library plus the read-only
 canonical law verifier and internal `expire_round` transition. The second adds
 only the by-value `close_position` ledger transition behind the same opaque law
-capability, with V2 differential tests. None of those may be exposed as a write
-entrypoint. The first safe deployable slice is the complete fifteen-row
-dispatcher behind the frozen Token-2022 hook, not a single handler.
+capability, with V2 differential tests. The third adds only `settle_round`: its
+production wrapper remains CCC-disabled, while its private by-value kernel
+differential-tests the exact V2 Switchboard reveal validation and uniform
+tiebreak transition. None of those may be exposed as a write entrypoint. The
+first safe deployable slice is the complete fifteen-row dispatcher behind the
+frozen Token-2022 hook, not a single handler.

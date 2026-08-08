@@ -69,6 +69,16 @@ function functionBody(source, name) {
   assert.fail(`unterminated body for Rust function ${name}`);
 }
 
+function assertTokensInOrder(body, tokens, label) {
+  let cursor = -1;
+  for (const token of tokens) {
+    const next = body.indexOf(token, cursor + 1);
+    assert.notEqual(next, -1, `${label} is missing ${token}`);
+    assert.ok(next > cursor, `${label} moved ${token} out of order`);
+    cursor = next;
+  }
+}
+
 test("the audit inventories every retained V2 Rust write handler", () => {
   const handlers = [...anchorProgramBody(v2Source).matchAll(/^\s+pub fn ([a-z0-9_]+)\s*\(/gmu)]
     .map((match) => match[1]);
@@ -98,7 +108,7 @@ test("the Rust workspace has no unreported faction or core-cap entrypoint", () =
   );
   assert.match(
     audit,
-    /faction and core-team-cap implementations currently present[\s\S]+JavaScript specifications[\s\S]+host-only `iat_b3_economy` library[\s\S]+no Solana entrypoint or public dispatcher/u,
+    /faction and core-team-cap implementations currently present[\s\S]+JavaScript specifications[\s\S]+host-only `iat_b3_economy` library[\s\S]+no Solana entrypoint or\s+public dispatcher/u,
   );
 });
 
@@ -174,6 +184,67 @@ test("the host-only close_position port preserves the V2 validation boundary", (
   assert.match(economyTransition, /release_reserved_lane/u);
   assert.match(
     audit,
-    /`close_position` is the\s+second and only additional handler-body transition/u,
+    /`close_position` the\s+second\./u,
+  );
+});
+
+test("the host-only settle_round port preserves V2 validation and mutation order", () => {
+  const v2Settle = functionBody(anchorProgramBody(v2Source), "settle_round");
+  const economySettle = functionBody(economySource, "settle_round");
+  const economyTransition = functionBody(economySource, "settle_pending_round");
+
+  assertTokensInOrder(
+    v2Settle,
+    [
+      "CCC_DLC_GENESIS_ENABLED",
+      "RANDOMNESS_ADAPTER_VERIFIED",
+      "config.active",
+      "round.status",
+      "randomness_account.owner",
+      "ccc_round_recovery_available",
+      "parse_randomness",
+      "validated_reveal",
+      "uniform_tiebreak_outcome",
+      "round.randomness = revealed",
+      "round.selected_agency_index = outcome.index",
+      "round.derivation_counter = outcome.derivation_counter",
+      "round.status = ROUND_SETTLED",
+    ],
+    "V2 settle_round",
+  );
+  assert.match(economySettle, /gate: &ValidatedDailyLawWrite/u);
+  assertTokensInOrder(
+    economySettle,
+    [
+      "CCC_DLC_GENESIS_ENABLED",
+      "RANDOMNESS_ADAPTER_VERIFIED",
+      "settle_pending_round",
+    ],
+    "B3 settle_round wrapper",
+  );
+  assertTokensInOrder(
+    economyTransition,
+    [
+      "!config_active",
+      "round.status",
+      "randomness_account.owner",
+      "checked_add",
+      "clock_unix_timestamp >= recovery_timestamp",
+      "parse_round_randomness",
+      "randomness.reveal_slot != clock_slot",
+      "randomness.seed_slot != round.commit_slot",
+      "randomness.reveal_slot <= randomness.seed_slot",
+      "uniform_tiebreak_outcome",
+      "round.randomness = randomness.value",
+      "round.selected_agency_index = outcome.index",
+      "round.derivation_counter = outcome.derivation_counter",
+      "round.status = ROUND_SETTLED",
+    ],
+    "B3 settle_round transition",
+  );
+  assert.match(economyCargo, /sha2 = \{ version = "=0\.10\.9", default-features = false \}/u);
+  assert.match(
+    audit,
+    /`settle_round` is the third and only additional handler-body transition/u,
   );
 });

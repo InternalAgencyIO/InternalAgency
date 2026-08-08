@@ -12,6 +12,7 @@ crate-type = ["lib"]
 
 [dependencies]
 iat-b3-consensus = { path = "../iat_b3_consensus" }
+sha2 = { version = "=0.10.9", default-features = false }
 
 [dev-dependencies]
 iat-v2 = { path = "../iat_v2", features = ["no-entrypoint"] }

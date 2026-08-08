@@ -4,6 +4,7 @@
 use iat_b3_consensus::{
     iat_transfer_disposition, protocol_local_day, IatTransferDisposition, SolanaDailyDecision,
 };
+use sha2::{Digest, Sha256};
 
 // Exact retained V2 constants. These remain duplicated intentionally until the
 // complete V2 policy is extracted into a shared, independently reviewed crate.
@@ -22,6 +23,8 @@ pub const CORE_RATE_BPS: u64 = 1_700;
 pub const STANDARD_RATE_BPS: u64 = 1_000;
 pub const CCC_AGENT_RATE_BPS: u64 = 2_800;
 pub const CCC_ASSOCIATE_RATE_BPS: u64 = 2_000;
+pub const TIEBREAK_DOMAIN: &[u8] = b"IAT_TIEBREAK_V1";
+pub const TIEBREAK_MAX_DERIVATION_ATTEMPTS: u32 = 16;
 
 pub const COMMUNITY: u8 = 0;
 pub const TREASURY: u8 = 1;
@@ -30,6 +33,7 @@ pub const CORE_TEAM: u8 = 3;
 pub const LIQUIDITY: u8 = 4;
 
 pub const CCC_DLC_GENESIS_ENABLED: bool = false;
+pub const RANDOMNESS_ADAPTER_VERIFIED: bool = true;
 pub const ROUND_PENDING: u8 = 0;
 pub const ROUND_SETTLED: u8 = 1;
 pub const ROUND_EXPIRED_NEUTRAL: u8 = 2;
@@ -39,6 +43,12 @@ pub const NO_DERIVATION_COUNTER: u32 = u32::MAX;
 pub const LAW_STATE_MAGIC: &[u8; 8] = b"IATB3S01";
 pub const LAW_STATE_VERSION: u8 = 1;
 pub const LAW_STATE_LEN: usize = 160;
+
+pub const RANDOMNESS_DISCRIMINATOR: [u8; 8] = [10, 66, 229, 135, 220, 239, 217, 114];
+pub const RANDOMNESS_ACCOUNT_SIZE: usize = 408;
+const RANDOMNESS_SEED_SLOT_START: usize = 104;
+const RANDOMNESS_REVEAL_SLOT_START: usize = 144;
+const RANDOMNESS_VALUE_START: usize = 152;
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct LanePolicy {
@@ -127,6 +137,28 @@ pub struct ClosePositionResult {
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct SettleRoundResult {
+    pub round: RoundState,
+    pub reveal_slot: u64,
+}
+
+/// Read-only Switchboard account facts supplied by a future native adapter.
+/// The adapter must bind the key to `RoundState.randomness_account` before
+/// calling this host-only kernel; owner, codec, commit, and reveal freshness
+/// are validated again inside the transition in retained V2 order.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ReadonlyRoundRandomnessAccount<'a> {
+    owner: [u8; 32],
+    data: &'a [u8],
+}
+
+impl<'a> ReadonlyRoundRandomnessAccount<'a> {
+    pub const fn new(owner: [u8; 32], data: &'a [u8]) -> Self {
+        Self { owner, data }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum EconomyError {
     NonCanonicalDailyLawAccount,
     InvalidDailyLawCodec,
@@ -140,7 +172,15 @@ pub enum EconomyError {
     WrongLaneOrder,
     ReservationLedgerMismatch,
     CccDlcNotActive,
+    RandomnessAdapterNotVerified,
     RoundAlreadySettled,
+    WrongRandomnessProgram,
+    RoundRevealWindowExpired,
+    InvalidRandomnessAccount,
+    RandomnessNotFresh,
+    RandomnessCommitSlotMismatch,
+    RandomnessRevealNotAfterCommit,
+    TiebreakDerivationExhausted,
     RoundRevealTimeoutNotReached,
     ArithmeticOverflow,
 }
@@ -284,6 +324,90 @@ pub fn expire_round(
     expire_pending_round(round, gate.unix_timestamp)
 }
 
+/// Production-facing retained V2 `settle_round` boundary. CCC remains
+/// compile-time disabled in the Genesis candidate, so this returns before
+/// inspecting or changing round/randomness values. The private by-value kernel
+/// is exercised only for V2 differential evidence until a future candidate
+/// intentionally changes that immutable build profile.
+pub fn settle_round(
+    gate: &ValidatedDailyLawWrite,
+    config_active: bool,
+    randomness_program: [u8; 32],
+    round: RoundState,
+    randomness_account: ReadonlyRoundRandomnessAccount<'_>,
+    clock_slot: u64,
+) -> Result<SettleRoundResult, EconomyError> {
+    if !CCC_DLC_GENESIS_ENABLED {
+        return Err(EconomyError::CccDlcNotActive);
+    }
+    if !RANDOMNESS_ADAPTER_VERIFIED {
+        return Err(EconomyError::RandomnessAdapterNotVerified);
+    }
+    settle_pending_round(
+        config_active,
+        randomness_program,
+        round,
+        randomness_account,
+        gate.unix_timestamp,
+        clock_slot,
+    )
+}
+
+fn settle_pending_round(
+    config_active: bool,
+    randomness_program: [u8; 32],
+    mut round: RoundState,
+    randomness_account: ReadonlyRoundRandomnessAccount<'_>,
+    clock_unix_timestamp: i64,
+    clock_slot: u64,
+) -> Result<SettleRoundResult, EconomyError> {
+    if !config_active {
+        return Err(EconomyError::NotActive);
+    }
+    if round.status != ROUND_PENDING {
+        return Err(EconomyError::RoundAlreadySettled);
+    }
+    if randomness_account.owner != randomness_program {
+        return Err(EconomyError::WrongRandomnessProgram);
+    }
+
+    let recovery_timestamp = round
+        .commit_timestamp
+        .checked_add(CCC_REVEAL_TIMEOUT_SECONDS)
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    if clock_unix_timestamp >= recovery_timestamp {
+        return Err(EconomyError::RoundRevealWindowExpired);
+    }
+
+    let randomness = parse_round_randomness(randomness_account.data)
+        .ok_or(EconomyError::InvalidRandomnessAccount)?;
+    if randomness.reveal_slot != clock_slot {
+        return Err(EconomyError::RandomnessNotFresh);
+    }
+    if randomness.seed_slot != round.commit_slot {
+        return Err(EconomyError::RandomnessCommitSlotMismatch);
+    }
+    if randomness.reveal_slot <= randomness.seed_slot {
+        return Err(EconomyError::RandomnessRevealNotAfterCommit);
+    }
+
+    let outcome = uniform_tiebreak_outcome(
+        randomness.value,
+        round.decision_context,
+        round.agency_count_snapshot,
+    )
+    .ok_or(EconomyError::TiebreakDerivationExhausted)?;
+
+    round.randomness = randomness.value;
+    round.selected_agency_index = outcome.index;
+    round.derivation_counter = outcome.derivation_counter;
+    round.status = ROUND_SETTLED;
+    Ok(SettleRoundResult {
+        round,
+        reveal_slot: randomness.reveal_slot,
+    })
+}
+
 /// Pure retained V2 `close_position` handler-body transition. The opaque gate
 /// proves the canonical Daily Law was open before any state value reached this
 /// function. A future native adapter must additionally validate the decoded
@@ -382,6 +506,117 @@ fn expire_pending_round(
     })
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+struct ParsedRoundRandomness {
+    seed_slot: u64,
+    reveal_slot: u64,
+    value: [u8; 32],
+}
+
+fn parse_round_randomness(data: &[u8]) -> Option<ParsedRoundRandomness> {
+    if data.len() < RANDOMNESS_ACCOUNT_SIZE
+        || data.get(..RANDOMNESS_DISCRIMINATOR.len())? != RANDOMNESS_DISCRIMINATOR
+    {
+        return None;
+    }
+
+    Some(ParsedRoundRandomness {
+        seed_slot: u64::from_le_bytes(
+            data.get(RANDOMNESS_SEED_SLOT_START..RANDOMNESS_SEED_SLOT_START + 8)?
+                .try_into()
+                .ok()?,
+        ),
+        reveal_slot: u64::from_le_bytes(
+            data.get(RANDOMNESS_REVEAL_SLOT_START..RANDOMNESS_REVEAL_SLOT_START + 8)?
+                .try_into()
+                .ok()?,
+        ),
+        value: data
+            .get(RANDOMNESS_VALUE_START..RANDOMNESS_VALUE_START + 32)?
+            .try_into()
+            .ok()?,
+    })
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+struct TiebreakOutcome {
+    index: u32,
+    derivation_counter: u32,
+}
+
+fn uniform_tiebreak_outcome(
+    oracle_randomness: [u8; 32],
+    decision_context: [u8; 32],
+    candidate_count: u32,
+) -> Option<TiebreakOutcome> {
+    if candidate_count == 0 {
+        return None;
+    }
+    if candidate_count == 1 {
+        return Some(TiebreakOutcome {
+            index: 0,
+            derivation_counter: 0,
+        });
+    }
+
+    let rejection_tail = two_to_256_mod(candidate_count)?;
+    for counter in 0..TIEBREAK_MAX_DERIVATION_ATTEMPTS {
+        let counter_bytes = counter.to_be_bytes();
+        let sample = sha256v(&[
+            TIEBREAK_DOMAIN,
+            &decision_context,
+            &oracle_randomness,
+            &counter_bytes,
+        ]);
+        if !sample_is_in_rejection_tail(&sample, rejection_tail) {
+            return selected_agency(sample, candidate_count).map(|index| TiebreakOutcome {
+                index,
+                derivation_counter: counter,
+            });
+        }
+    }
+    None
+}
+
+fn two_to_256_mod(modulus: u32) -> Option<u32> {
+    if modulus == 0 {
+        return None;
+    }
+    let mut remainder = 1u64;
+    for _ in 0..256 {
+        remainder = (remainder * 2) % u64::from(modulus);
+    }
+    u32::try_from(remainder).ok()
+}
+
+fn sample_is_in_rejection_tail(sample: &[u8; 32], tail_size: u32) -> bool {
+    if tail_size == 0 || sample[..28].iter().any(|byte| *byte != 0xff) {
+        return false;
+    }
+    let low = u32::from_be_bytes([sample[28], sample[29], sample[30], sample[31]]);
+    low >= 0u32.wrapping_sub(tail_size)
+}
+
+fn selected_agency(randomness: [u8; 32], agency_count: u32) -> Option<u32> {
+    if agency_count == 0 {
+        return None;
+    }
+    let modulus = u64::from(agency_count);
+    let mut remainder = 0u64;
+    for byte in randomness {
+        remainder = ((u128::from(remainder) * 256 + u128::from(byte)) % u128::from(modulus)) as u64;
+    }
+    u32::try_from(remainder).ok()
+}
+
+fn sha256v(parts: &[&[u8]]) -> [u8; 32] {
+    let mut hasher = Sha256::new();
+    for part in parts {
+        hasher.update(part);
+    }
+    hasher.finalize().into()
+}
+
 fn decode_law_state(data: &[u8], expected_bump: u8) -> Result<DecodedLawState, EconomyError> {
     if data.len() != LAW_STATE_LEN
         || data.get(0..8) != Some(LAW_STATE_MAGIC)
@@ -440,7 +675,12 @@ mod tests {
     use super::*;
     use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day};
     use iat_v2::policy as v2_policy;
-    use iat_v2::{LaneVault as V2LaneState, Position as V2PositionState};
+    use iat_v2::switchboard_randomness::{
+        parse_randomness as v2_parse_randomness, RevealValidationError,
+        RANDOMNESS_ACCOUNT_SIZE as V2_RANDOMNESS_ACCOUNT_SIZE,
+        RANDOMNESS_DISCRIMINATOR as V2_RANDOMNESS_DISCRIMINATOR,
+    };
+    use iat_v2::{LaneVault as V2LaneState, Position as V2PositionState, Round as V2RoundState};
 
     const LAW_PROGRAM: [u8; 32] = [0xB3; 32];
     const LAW_STATE: [u8; 32] = [0x51; 32];
@@ -510,6 +750,186 @@ mod tests {
             selected_agency_index: 5,
             derivation_counter: 6,
             status: ROUND_PENDING,
+        }
+    }
+
+    fn randomness_fixture(
+        seed_slot: u64,
+        reveal_slot: u64,
+        value: [u8; 32],
+    ) -> [u8; RANDOMNESS_ACCOUNT_SIZE] {
+        let mut data = [0u8; RANDOMNESS_ACCOUNT_SIZE];
+        data[..8].copy_from_slice(&RANDOMNESS_DISCRIMINATOR);
+        data[RANDOMNESS_SEED_SLOT_START..RANDOMNESS_SEED_SLOT_START + 8]
+            .copy_from_slice(&seed_slot.to_le_bytes());
+        data[RANDOMNESS_REVEAL_SLOT_START..RANDOMNESS_REVEAL_SLOT_START + 8]
+            .copy_from_slice(&reveal_slot.to_le_bytes());
+        data[RANDOMNESS_VALUE_START..RANDOMNESS_VALUE_START + 32].copy_from_slice(&value);
+        data
+    }
+
+    fn settle_round_state(
+        commit_timestamp: i64,
+        commit_slot: u64,
+        agency_count_snapshot: u32,
+        status: u8,
+        decision_context: [u8; 32],
+    ) -> RoundState {
+        RoundState {
+            config: [1; 32],
+            randomness_account: [2; 32],
+            week: 9,
+            commit_slot,
+            commit_timestamp,
+            randomness: [0xA5; 32],
+            agency_registry_hash_snapshot: [3; 32],
+            decision_context,
+            agency_count_snapshot,
+            selected_agency_index: 7,
+            derivation_counter: 8,
+            status,
+        }
+    }
+
+    fn v2_settle_round_state(
+        commit_timestamp: i64,
+        commit_slot: u64,
+        agency_count_snapshot: u32,
+        status: u8,
+        decision_context: [u8; 32],
+    ) -> V2RoundState {
+        V2RoundState {
+            config: [1; 32].into(),
+            randomness_account: [2; 32].into(),
+            week: 9,
+            commit_slot,
+            commit_timestamp,
+            randomness: [0xA5; 32],
+            agency_registry_hash_snapshot: [3; 32],
+            decision_context,
+            agency_count_snapshot,
+            selected_agency_index: 7,
+            derivation_counter: 8,
+            status,
+            bump: 252,
+        }
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum SettleObservation {
+        Error(EconomyError),
+        Success(Box<SettleSuccess>),
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    struct SettleSuccess {
+        config: [u8; 32],
+        randomness_account: [u8; 32],
+        week: u64,
+        commit_slot: u64,
+        commit_timestamp: i64,
+        randomness: [u8; 32],
+        agency_registry_hash_snapshot: [u8; 32],
+        decision_context: [u8; 32],
+        agency_count_snapshot: u32,
+        selected_agency_index: u32,
+        derivation_counter: u32,
+        status: u8,
+        reveal_slot: u64,
+    }
+
+    fn observe_settle_result(result: Result<SettleRoundResult, EconomyError>) -> SettleObservation {
+        match result {
+            Err(error) => SettleObservation::Error(error),
+            Ok(result) => SettleObservation::Success(Box::new(SettleSuccess {
+                config: result.round.config,
+                randomness_account: result.round.randomness_account,
+                week: result.round.week,
+                commit_slot: result.round.commit_slot,
+                commit_timestamp: result.round.commit_timestamp,
+                randomness: result.round.randomness,
+                agency_registry_hash_snapshot: result.round.agency_registry_hash_snapshot,
+                decision_context: result.round.decision_context,
+                agency_count_snapshot: result.round.agency_count_snapshot,
+                selected_agency_index: result.round.selected_agency_index,
+                derivation_counter: result.round.derivation_counter,
+                status: result.round.status,
+                reveal_slot: result.reveal_slot,
+            })),
+        }
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn v2_settle_round_reference(
+        config_active: bool,
+        randomness_program: [u8; 32],
+        randomness_owner: [u8; 32],
+        mut round: V2RoundState,
+        randomness_data: &[u8],
+        clock_unix_timestamp: i64,
+        clock_slot: u64,
+    ) -> SettleObservation {
+        let transition = (|| {
+            if !config_active {
+                return Err(EconomyError::NotActive);
+            }
+            if round.status != iat_v2::ROUND_PENDING {
+                return Err(EconomyError::RoundAlreadySettled);
+            }
+            if randomness_owner != randomness_program {
+                return Err(EconomyError::WrongRandomnessProgram);
+            }
+            if v2_policy::ccc_round_recovery_available(round.commit_timestamp, clock_unix_timestamp)
+                .ok_or(EconomyError::ArithmeticOverflow)?
+            {
+                return Err(EconomyError::RoundRevealWindowExpired);
+            }
+
+            let randomness = v2_parse_randomness(randomness_data)
+                .ok_or(EconomyError::InvalidRandomnessAccount)?;
+            let revealed = match randomness.validated_reveal(clock_slot, round.commit_slot) {
+                Ok(value) => value,
+                Err(RevealValidationError::RevealNotCurrent) => {
+                    return Err(EconomyError::RandomnessNotFresh)
+                }
+                Err(RevealValidationError::CommitSlotMismatch) => {
+                    return Err(EconomyError::RandomnessCommitSlotMismatch)
+                }
+                Err(RevealValidationError::RevealNotAfterCommit) => {
+                    return Err(EconomyError::RandomnessRevealNotAfterCommit)
+                }
+            };
+            let outcome = v2_policy::uniform_tiebreak_outcome(
+                revealed,
+                round.decision_context,
+                round.agency_count_snapshot,
+            )
+            .ok_or(EconomyError::TiebreakDerivationExhausted)?;
+
+            round.randomness = revealed;
+            round.selected_agency_index = outcome.index;
+            round.derivation_counter = outcome.derivation_counter;
+            round.status = iat_v2::ROUND_SETTLED;
+            Ok(randomness.reveal_slot)
+        })();
+
+        match transition {
+            Err(error) => SettleObservation::Error(error),
+            Ok(reveal_slot) => SettleObservation::Success(Box::new(SettleSuccess {
+                config: round.config.to_bytes(),
+                randomness_account: round.randomness_account.to_bytes(),
+                week: round.week,
+                commit_slot: round.commit_slot,
+                commit_timestamp: round.commit_timestamp,
+                randomness: round.randomness,
+                agency_registry_hash_snapshot: round.agency_registry_hash_snapshot,
+                decision_context: round.decision_context,
+                agency_count_snapshot: round.agency_count_snapshot,
+                selected_agency_index: round.selected_agency_index,
+                derivation_counter: round.derivation_counter,
+                status: round.status,
+                reveal_slot,
+            })),
         }
     }
 
@@ -734,15 +1154,290 @@ mod tests {
         assert_eq!(STANDARD_RATE_BPS, v2_policy::STANDARD_RATE_BPS);
         assert_eq!(CCC_AGENT_RATE_BPS, v2_policy::CCC_AGENT_RATE_BPS);
         assert_eq!(CCC_ASSOCIATE_RATE_BPS, v2_policy::CCC_ASSOCIATE_RATE_BPS);
+        assert_eq!(TIEBREAK_DOMAIN, v2_policy::TIEBREAK_DOMAIN);
+        assert_eq!(
+            TIEBREAK_MAX_DERIVATION_ATTEMPTS,
+            v2_policy::TIEBREAK_MAX_DERIVATION_ATTEMPTS
+        );
         assert_eq!(COMMUNITY, v2_policy::COMMUNITY);
         assert_eq!(TREASURY, v2_policy::TREASURY);
         assert_eq!(ECOSYSTEM, v2_policy::ECOSYSTEM);
         assert_eq!(CORE_TEAM, v2_policy::CORE_TEAM);
         assert_eq!(LIQUIDITY, v2_policy::LIQUIDITY);
         assert_eq!(CCC_DLC_GENESIS_ENABLED, iat_v2::CCC_DLC_GENESIS_ENABLED);
+        assert_eq!(
+            RANDOMNESS_ADAPTER_VERIFIED,
+            iat_v2::RANDOMNESS_ADAPTER_VERIFIED
+        );
+        assert_eq!(RANDOMNESS_DISCRIMINATOR, V2_RANDOMNESS_DISCRIMINATOR);
+        assert_eq!(RANDOMNESS_ACCOUNT_SIZE, V2_RANDOMNESS_ACCOUNT_SIZE);
         assert_eq!(ROUND_PENDING, iat_v2::ROUND_PENDING);
         assert_eq!(ROUND_SETTLED, iat_v2::ROUND_SETTLED);
         assert_eq!(ROUND_EXPIRED_NEUTRAL, iat_v2::ROUND_EXPIRED_NEUTRAL);
+    }
+
+    #[test]
+    fn settle_round_differential_vectors_match_the_retained_v2_handler() {
+        #[derive(Clone, Copy)]
+        struct Vector {
+            name: &'static str,
+            active: bool,
+            expected_owner: [u8; 32],
+            observed_owner: [u8; 32],
+            commit_timestamp: i64,
+            commit_slot: u64,
+            agency_count: u32,
+            status: u8,
+            decision_context: [u8; 32],
+            clock_timestamp: i64,
+            clock_slot: u64,
+            data: [u8; RANDOMNESS_ACCOUNT_SIZE],
+        }
+
+        let expected_owner = [0x77; 32];
+        let valid_data = randomness_fixture(41, 42, [0x33; 32]);
+        let mut invalid_data = valid_data;
+        invalid_data[0] ^= 0xff;
+        let vectors = [
+            Vector {
+                name: "inactive precedes every round/randomness error",
+                active: false,
+                expected_owner,
+                observed_owner: [0x88; 32],
+                commit_timestamp: i64::MAX,
+                commit_slot: 41,
+                agency_count: 0,
+                status: ROUND_SETTLED,
+                decision_context: [1; 32],
+                clock_timestamp: i64::MAX,
+                clock_slot: 42,
+                data: invalid_data,
+            },
+            Vector {
+                name: "terminal status precedes owner and clock errors",
+                active: true,
+                expected_owner,
+                observed_owner: [0x88; 32],
+                commit_timestamp: i64::MAX,
+                commit_slot: 41,
+                agency_count: 0,
+                status: ROUND_EXPIRED_NEUTRAL,
+                decision_context: [2; 32],
+                clock_timestamp: i64::MAX,
+                clock_slot: 42,
+                data: invalid_data,
+            },
+            Vector {
+                name: "wrong randomness owner precedes timeout",
+                active: true,
+                expected_owner,
+                observed_owner: [0x88; 32],
+                commit_timestamp: i64::MAX,
+                commit_slot: 41,
+                agency_count: 0,
+                status: ROUND_PENDING,
+                decision_context: [3; 32],
+                clock_timestamp: i64::MAX,
+                clock_slot: 42,
+                data: invalid_data,
+            },
+            Vector {
+                name: "recovery timestamp overflow",
+                active: true,
+                expected_owner,
+                observed_owner: expected_owner,
+                commit_timestamp: i64::MAX,
+                commit_slot: 41,
+                agency_count: 11,
+                status: ROUND_PENDING,
+                decision_context: [4; 32],
+                clock_timestamp: i64::MAX,
+                clock_slot: 42,
+                data: valid_data,
+            },
+            Vector {
+                name: "exact recovery boundary is expired",
+                active: true,
+                expected_owner,
+                observed_owner: expected_owner,
+                commit_timestamp: 1_000,
+                commit_slot: 41,
+                agency_count: 11,
+                status: ROUND_PENDING,
+                decision_context: [5; 32],
+                clock_timestamp: 1_000 + CCC_REVEAL_TIMEOUT_SECONDS,
+                clock_slot: 42,
+                data: valid_data,
+            },
+            Vector {
+                name: "invalid randomness codec",
+                active: true,
+                expected_owner,
+                observed_owner: expected_owner,
+                commit_timestamp: 1_000,
+                commit_slot: 41,
+                agency_count: 11,
+                status: ROUND_PENDING,
+                decision_context: [6; 32],
+                clock_timestamp: 1_001,
+                clock_slot: 42,
+                data: invalid_data,
+            },
+            Vector {
+                name: "reveal is not current",
+                active: true,
+                expected_owner,
+                observed_owner: expected_owner,
+                commit_timestamp: 1_000,
+                commit_slot: 41,
+                agency_count: 11,
+                status: ROUND_PENDING,
+                decision_context: [7; 32],
+                clock_timestamp: 1_001,
+                clock_slot: 42,
+                data: randomness_fixture(41, 43, [0x44; 32]),
+            },
+            Vector {
+                name: "seed slot does not match committed slot",
+                active: true,
+                expected_owner,
+                observed_owner: expected_owner,
+                commit_timestamp: 1_000,
+                commit_slot: 41,
+                agency_count: 11,
+                status: ROUND_PENDING,
+                decision_context: [8; 32],
+                clock_timestamp: 1_001,
+                clock_slot: 42,
+                data: randomness_fixture(40, 42, [0x55; 32]),
+            },
+            Vector {
+                name: "reveal must follow commit",
+                active: true,
+                expected_owner,
+                observed_owner: expected_owner,
+                commit_timestamp: 1_000,
+                commit_slot: 42,
+                agency_count: 11,
+                status: ROUND_PENDING,
+                decision_context: [9; 32],
+                clock_timestamp: 1_001,
+                clock_slot: 42,
+                data: randomness_fixture(42, 42, [0x66; 32]),
+            },
+            Vector {
+                name: "zero candidate snapshot cannot settle",
+                active: true,
+                expected_owner,
+                observed_owner: expected_owner,
+                commit_timestamp: 1_000,
+                commit_slot: 41,
+                agency_count: 0,
+                status: ROUND_PENDING,
+                decision_context: [10; 32],
+                clock_timestamp: 1_001,
+                clock_slot: 42,
+                data: randomness_fixture(41, 42, [0x77; 32]),
+            },
+            Vector {
+                name: "single candidate settles deterministically",
+                active: true,
+                expected_owner,
+                observed_owner: expected_owner,
+                commit_timestamp: 1_000,
+                commit_slot: 41,
+                agency_count: 1,
+                status: ROUND_PENDING,
+                decision_context: [11; 32],
+                clock_timestamp: 1_001,
+                clock_slot: 42,
+                data: randomness_fixture(41, 42, [0x88; 32]),
+            },
+            Vector {
+                name: "multi-candidate uniform outcome settles",
+                active: true,
+                expected_owner,
+                observed_owner: expected_owner,
+                commit_timestamp: 1_000,
+                commit_slot: 41,
+                agency_count: 11,
+                status: ROUND_PENDING,
+                decision_context: [12; 32],
+                clock_timestamp: 1_001,
+                clock_slot: 42,
+                data: randomness_fixture(41, 42, [0x99; 32]),
+            },
+        ];
+
+        for vector in vectors {
+            let actual = observe_settle_result(settle_pending_round(
+                vector.active,
+                vector.expected_owner,
+                settle_round_state(
+                    vector.commit_timestamp,
+                    vector.commit_slot,
+                    vector.agency_count,
+                    vector.status,
+                    vector.decision_context,
+                ),
+                ReadonlyRoundRandomnessAccount::new(vector.observed_owner, &vector.data),
+                vector.clock_timestamp,
+                vector.clock_slot,
+            ));
+            let expected = v2_settle_round_reference(
+                vector.active,
+                vector.expected_owner,
+                vector.observed_owner,
+                v2_settle_round_state(
+                    vector.commit_timestamp,
+                    vector.commit_slot,
+                    vector.agency_count,
+                    vector.status,
+                    vector.decision_context,
+                ),
+                &vector.data,
+                vector.clock_timestamp,
+                vector.clock_slot,
+            );
+            assert_eq!(actual, expected, "{}", vector.name);
+        }
+    }
+
+    #[test]
+    fn uniform_tiebreak_matches_v2_across_counts_and_contexts() {
+        for candidate_count in [0, 1, 2, 3, 7, 257, u32::MAX] {
+            for marker in 0u8..16 {
+                let randomness = [marker; 32];
+                let context = [marker.wrapping_mul(17); 32];
+                let actual = uniform_tiebreak_outcome(randomness, context, candidate_count)
+                    .map(|outcome| (outcome.index, outcome.derivation_counter));
+                let expected =
+                    v2_policy::uniform_tiebreak_outcome(randomness, context, candidate_count)
+                        .map(|outcome| (outcome.index, outcome.derivation_counter));
+                assert_eq!(
+                    actual, expected,
+                    "candidate_count={candidate_count} marker={marker}"
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn production_settle_round_preserves_the_immutable_inactive_ccc_boundary() {
+        let bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &bytes).unwrap();
+        let invalid_randomness = [0u8; 1];
+        assert_eq!(
+            settle_round(
+                &gate,
+                false,
+                [0x77; 32],
+                settle_round_state(i64::MAX, 41, 0, ROUND_SETTLED, [0; 32]),
+                ReadonlyRoundRandomnessAccount::new([0x88; 32], &invalid_randomness),
+                0,
+            ),
+            Err(EconomyError::CccDlcNotActive)
+        );
     }
 
     #[test]
