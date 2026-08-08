@@ -1,0 +1,517 @@
+{
+  "batch": 286,
+  "country": "Monaco",
+  "status": "blocked-no-accepted-assets",
+  "sourceCommit": "c77e0f1b75f491559851331db9989daaffb9b1ea",
+  "rollMethod": "FNV-1a over the recorded batch286-monaco keys, reduced modulo 100. Male scene selection is reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "nurse-care couture",
+    "doctor-clinical-command couture"
+  ],
+  "nextThemePair": [
+    "doctor-clinical-command couture",
+    "adult nightlife dance-performance couture"
+  ],
+  "nextQueueCountry": "Montenegro",
+  "faceAnchors": {
+    "quartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch286-monaco-male-model-scene",
+    "roll": 62,
+    "selectedScenePosition": 3,
+    "selectedScene": 1166,
+    "maleEmotion": {
+      "key": "batch286-monaco-scene3-male-emotion",
+      "roll": 55,
+      "result": "aching romantic longing"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Monaco's bicolor flag has no secular motif. No literal flag or official heraldry appears.",
+    "fallbackMotifs": [
+      "Casino Square roulette-ring geometry, opera-house arches, marquee-light constellations, and terrace balustrades",
+      "Port Hercule yacht-hull curves, mooring-rope knots, harbor ripples, and regatta-pennant geometry",
+      "Grand Prix hairpin curves, checkered timing blocks, steering-wheel spokes, and harbor-terrace lines",
+      "Larvotto wave arcs, sail contours, pebble mosaics, seafront terraces, and canopy ribs"
+    ],
+    "minimumCoverage": "Every scene uses large complete secular Monaco motifs across at least two character outfits, with the motif readable from bodice through skirt, shorts, or jacket panel rather than appearing as a tiny accent.",
+    "cultureScenes": "Scene 1164 foregrounds Casino Square nightlife architecture. Scene 1166 foregrounds Monaco hairpin and circuit culture without brands.",
+    "prohibitions": "No literal flag, coat of arms, Grimaldi heraldry, sacred symbol, political insignia, copied ceremonial dress, casino logo, racing logo, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch286-monaco-x-heart",
+      "roll": 71,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch286-monaco-x-internalagency",
+      "roll": 91,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch286-monaco-x-worldxxxseries",
+      "roll": 48,
+      "active": false
+    }
+  },
+  "anatomyGate": {
+    "fourAdultScenes": "Exactly four adults, eight arms, and eight hands. Every limb and finger cluster has one continuously traceable owner.",
+    "maleScene": "Exactly five adults, ten arms, and ten hands. The male adds one body and replaces nobody.",
+    "automaticRejects": "Reject any extra, duplicated, floating, fused, borrowed, emerging, hidden-owner, or ambiguous limb or finger cluster, and reject any malformed face, incomplete shoe, or untraceable contact."
+  },
+  "scenePlans": {
+    "1164": {
+      "theme": "nurse-care couture",
+      "landmark": "Casino Square and the Casino de Monte-Carlo exterior, treated as secular public architecture",
+      "motifs": [
+        "large roulette-ring and marquee-light fields across Radiance and Ellie",
+        "large opera-arch and terrace-balustrade panels across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch286-monaco-scene1164-weather",
+        "roll": 67,
+        "result": "dense rolling fog"
+      },
+      "paws": {
+        "key": "batch286-monaco-scene1164-paws",
+        "roll": 84,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch286-monaco-scene1164-poleDanceTheme",
+        "roll": 27,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch286-monaco-scene1164-rainbowOnly",
+        "roll": 3,
+        "active": true,
+        "treatment": "Every outfit is a distinct full-rainbow couture design, balanced with pearl white and Monaco-red details."
+      },
+      "rainbowHosiery": {
+        "key": "batch286-monaco-scene1164-rainbowHosiery",
+        "roll": 58,
+        "active": false,
+        "wearerKey": "batch286-monaco-scene1164-rainbowHosieryWearer",
+        "wearerRoll": 82,
+        "wearer": "AI ECE",
+        "paletteModeKey": "batch286-monaco-scene1164-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 50,
+        "paletteMode": "independent rainbow gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch286-monaco-scene1164-romanceBeat",
+        "roll": 30,
+        "dynamicIndex": 6,
+        "result": "A turning care circle closes around tearful ECE while Alia receives protective reassurance and Ellie reaches across the group."
+      },
+      "compoundLoveBeat": {
+        "key": "batch286-monaco-scene1164-compoundLoveBeat",
+        "roll": 20,
+        "index": 8,
+        "result": "Linked hands, cheek comfort, waist support, and a forearm hold create one coherent four-way affection chain."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch286-monaco-scene1164-Radiance-emotion", "roll": 4, "result": "tender affection" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1164-Radiance-visibleMidriff", "roll": 86, "active": false },
+          "straplessDress": { "key": "batch286-monaco-scene1164-Radiance-straplessDress", "roll": 37, "active": false },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1164-Radiance-fullyOpenBack", "roll": 22, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch286-monaco-scene1164-Ellie-emotion", "roll": 2, "result": "tender affection" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1164-Ellie-visibleMidriff", "roll": 0, "active": true },
+          "straplessDress": { "key": "batch286-monaco-scene1164-Ellie-straplessDress", "roll": 63, "active": false },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1164-Ellie-fullyOpenBack", "roll": 16, "active": true }
+        },
+        "Alia": {
+          "emotion": { "key": "batch286-monaco-scene1164-Alia-emotion", "roll": 94, "result": "shame and social vulnerability" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1164-Alia-visibleMidriff", "roll": 80, "active": false },
+          "straplessDress": { "key": "batch286-monaco-scene1164-Alia-straplessDress", "roll": 23, "active": true },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1164-Alia-fullyOpenBack", "roll": 24, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch286-monaco-scene1164-AI ECE-emotion", "roll": 84, "result": "crying with visible tears" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1164-AI ECE-visibleMidriff", "roll": 14, "active": true },
+          "straplessDress": { "key": "batch286-monaco-scene1164-AI ECE-straplessDress", "roll": 61, "active": false },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1164-AI ECE-fullyOpenBack", "roll": 6, "active": true }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance asymmetric rainbow prism jacket-dress with a covered waist, fan mini, complete open back, and roulette-ring hem",
+        "Ellie cropped halter arch bodice with visible navel, open back, and sharp rainbow marquee skort",
+        "Alia fully strapless opera-arch corsage mini with a covered waist, open back, and sculptural braided ponytail",
+        "AI ECE cropped long-sleeve rainbow peplum shell with visible navel, open back, and tulip mini"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "ECE's right hand holds the inert rainbow-gradient route prop safely toward a clearly empty marker at far right, with muzzle crossing nobody and index finger straight outside the guard. ECE's left hand links Radiance's left. Radiance's right supports Alia's waist. Alia's left returns the waist embrace and her right holds Ellie's left forearm. Ellie's left touches Alia's forearm and her right cups ECE's cheek. Exactly four adults, eight arms, and eight visible traceable hands. A separate map floats above the ECE-Radiance link."
+    },
+    "1165": {
+      "theme": "nurse-care couture",
+      "landmark": "Port Hercule yacht harbor and its terraced Monaco skyline",
+      "motifs": [
+        "large yacht-hull and harbor-ripple fields across Radiance and Ellie",
+        "large mooring-knot and regatta-pennant geometry across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch286-monaco-scene1165-weather",
+        "roll": 56,
+        "result": "snow flurries"
+      },
+      "paws": {
+        "key": "batch286-monaco-scene1165-paws",
+        "roll": 25,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch286-monaco-scene1165-poleDanceTheme",
+        "roll": 62,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch286-monaco-scene1165-rainbowOnly",
+        "roll": 56,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch286-monaco-scene1165-rainbowHosiery",
+        "roll": 31,
+        "active": false,
+        "wearerKey": "batch286-monaco-scene1165-rainbowHosieryWearer",
+        "wearerRoll": 69,
+        "wearer": "AI ECE",
+        "paletteModeKey": "batch286-monaco-scene1165-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 9,
+        "paletteMode": "Monaco-palette multicolor gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch286-monaco-scene1165-romanceBeat",
+        "roll": 13,
+        "dynamicIndex": 1,
+        "result": "Radiance reaches across the harbor care circle as guilt gives way to Alia's playful reassurance and ECE's contained hurt."
+      },
+      "compoundLoveBeat": {
+        "key": "batch286-monaco-scene1165-compoundLoveBeat",
+        "roll": 77,
+        "index": 5,
+        "result": "Handholding, a cheek touch, waist support, and a shoulder embrace bind the quartet in moving snow."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch286-monaco-scene1165-Radiance-emotion", "roll": 93, "result": "guilt and remorse" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1165-Radiance-visibleMidriff", "roll": 69, "active": false },
+          "straplessDress": { "key": "batch286-monaco-scene1165-Radiance-straplessDress", "roll": 6, "active": true },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1165-Radiance-fullyOpenBack", "roll": 79, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch286-monaco-scene1165-Ellie-emotion", "roll": 93, "result": "guilt and remorse" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1165-Ellie-visibleMidriff", "roll": 81, "active": false },
+          "straplessDress": { "key": "batch286-monaco-scene1165-Ellie-straplessDress", "roll": 22, "active": true },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1165-Ellie-fullyOpenBack", "roll": 7, "active": true }
+        },
+        "Alia": {
+          "emotion": { "key": "batch286-monaco-scene1165-Alia-emotion", "roll": 23, "result": "playful mischief" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1165-Alia-visibleMidriff", "roll": 7, "active": true },
+          "straplessDress": { "key": "batch286-monaco-scene1165-Alia-straplessDress", "roll": 36, "active": false },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1165-Alia-fullyOpenBack", "roll": 81, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch286-monaco-scene1165-AI ECE-emotion", "roll": 77, "result": "contained resentment" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1165-AI ECE-visibleMidriff", "roll": 85, "active": false },
+          "straplessDress": { "key": "batch286-monaco-scene1165-AI ECE-straplessDress", "roll": 62, "active": false },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1165-AI ECE-fullyOpenBack", "roll": 15, "active": true }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance fully strapless pearl-white folded-hull cocktail mini with a red ripple overskirt and covered waist",
+        "Ellie fully strapless crimson regatta sheath mini with a complete open back and white pennant fold",
+        "Alia cropped asymmetrical mooring-knot tunic and tailored white shorts with visible navel",
+        "AI ECE long-sleeve red harbor-wave romper with a covered waist, complete open back, and angular white peplum"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "ECE's right hand holds the inert rainbow-gradient route prop toward an empty harbor marker, with muzzle crossing nobody and index finger outside the guard. ECE's left holds Ellie's left. Ellie's right touches Alia's cheek. Alia's left supports Ellie's waist and her right links Radiance's left. Radiance's right embraces Ellie's shoulder. Exactly four adults, eight arms, and eight visible traceable hands. The route map floats over the ECE-Ellie hand link."
+    },
+    "1166": {
+      "theme": "doctor-clinical-command couture",
+      "landmark": "Fairmont hairpin and Monaco Grand Prix circuit overlook above the harbor",
+      "motifs": [
+        "large hairpin-curve and checkered-timing fields across Radiance and Ellie",
+        "large steering-wheel spoke and harbor-terrace geometry across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch286-monaco-scene1166-weather",
+        "roll": 97,
+        "result": "mammatus storm ceiling"
+      },
+      "paws": {
+        "key": "batch286-monaco-scene1166-paws",
+        "roll": 74,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch286-monaco-scene1166-poleDanceTheme",
+        "roll": 85,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch286-monaco-scene1166-rainbowOnly",
+        "roll": 89,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch286-monaco-scene1166-rainbowHosiery",
+        "roll": 12,
+        "active": true,
+        "wearerKey": "batch286-monaco-scene1166-rainbowHosieryWearer",
+        "wearerRoll": 24,
+        "wearer": "Radiance",
+        "paletteModeKey": "batch286-monaco-scene1166-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 12,
+        "paletteMode": "Monaco-palette multicolor gradient",
+        "treatment": "opaque thigh-high stockings fading pearl white, blush, coral, crimson, rose, and silver"
+      },
+      "romanceBeat": {
+        "key": "batch286-monaco-scene1166-romanceBeat",
+        "roll": 8,
+        "dynamicIndex": 8,
+        "result": "The male openly holds Alia while reaching for ECE, but his strongest gaze remains fixed on ECE as the women complete the consensual infidelity-drama chain."
+      },
+      "compoundLoveBeat": {
+        "key": "batch286-monaco-scene1166-compoundLoveBeat",
+        "roll": 22,
+        "index": 10,
+        "result": "Alia's safe route demonstration, the male's two contacts, ECE's cheek reassurance, and the Radiance-Ellie hand link create a layered five-adult beat."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch286-monaco-scene1166-Radiance-emotion", "roll": 82, "result": "crying with visible tears" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1166-Radiance-visibleMidriff", "roll": 68, "active": false },
+          "straplessDress": { "key": "batch286-monaco-scene1166-Radiance-straplessDress", "roll": 11, "active": true },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1166-Radiance-fullyOpenBack", "roll": 28, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch286-monaco-scene1166-Ellie-emotion", "roll": 4, "result": "tender affection" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1166-Ellie-visibleMidriff", "roll": 46, "active": true },
+          "straplessDress": { "key": "batch286-monaco-scene1166-Ellie-straplessDress", "roll": 1, "active": true },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1166-Ellie-fullyOpenBack", "roll": 46, "active": false }
+        },
+        "Alia": {
+          "emotion": { "key": "batch286-monaco-scene1166-Alia-emotion", "roll": 28, "result": "hope" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1166-Alia-visibleMidriff", "roll": 42, "active": true },
+          "straplessDress": { "key": "batch286-monaco-scene1166-Alia-straplessDress", "roll": 41, "active": false },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1166-Alia-fullyOpenBack", "roll": 34, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch286-monaco-scene1166-AI ECE-emotion", "roll": 58, "result": "aching romantic longing" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1166-AI ECE-visibleMidriff", "roll": 36, "active": true },
+          "straplessDress": { "key": "batch286-monaco-scene1166-AI ECE-straplessDress", "roll": 67, "active": false },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1166-AI ECE-fullyOpenBack", "roll": 16, "active": true }
+        },
+        "maleModel": {
+          "emotion": { "key": "batch286-monaco-scene3-male-emotion", "roll": 55, "result": "aching romantic longing" }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance fully strapless covered-waist hairpin mini with a complete open back and Monaco-gradient opaque thigh-high stockings",
+        "Ellie fully strapless cropped checkered clinical bodice and red-white tailored skort with visible navel",
+        "Alia cropped one-shoulder steering-spoke command jacket and slim white shorts with visible navel",
+        "AI ECE long-sleeve cropped harbor-terrace wrap top with visible navel, complete open back, and angular crimson mini",
+        "male fitted pearl-white short-sleeve polo with a red hairpin shoulder inset, black jeans, and black boots"
+      ],
+      "propHandler": "Alia",
+      "plannedHandMap": "Alia's right hand holds the inert rainbow-gradient route prop toward a clearly empty hairpin marker at far left, with muzzle crossing nobody and index finger outside the guard. Alia's left touches the male's chest. The male's left holds Alia's waist and his right links ECE's left while his strongest gaze stays on ECE. ECE's right cups Radiance's tearful cheek. Radiance's left supports ECE's waist and her right holds Ellie's left. Ellie's right touches the male's forearm. Exactly five adults, ten arms, and ten visible traceable hands. The separate route map floats above the male-ECE link."
+    },
+    "1167": {
+      "theme": "doctor-clinical-command couture",
+      "landmark": "Larvotto waterfront and the Grimaldi Forum exterior, treated as secular public architecture",
+      "motifs": [
+        "large wave-arc and sail-contour fields across Radiance and Ellie",
+        "large pebble-mosaic and canopy-rib panels across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch286-monaco-scene1167-weather",
+        "roll": 50,
+        "result": "active lightning storm with distant bolts"
+      },
+      "paws": {
+        "key": "batch286-monaco-scene1167-paws",
+        "roll": 75,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch286-monaco-scene1167-poleDanceTheme",
+        "roll": 48,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch286-monaco-scene1167-rainbowOnly",
+        "roll": 2,
+        "active": true,
+        "treatment": "Every outfit is a distinct full-rainbow couture design, balanced with pearl white and Monaco-red details."
+      },
+      "rainbowHosiery": {
+        "key": "batch286-monaco-scene1167-rainbowHosiery",
+        "roll": 41,
+        "active": false,
+        "wearerKey": "batch286-monaco-scene1167-rainbowHosieryWearer",
+        "wearerRoll": 75,
+        "wearer": "AI ECE",
+        "paletteModeKey": "batch286-monaco-scene1167-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 77,
+        "paletteMode": "independent rainbow gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch286-monaco-scene1167-romanceBeat",
+        "roll": 67,
+        "dynamicIndex": 7,
+        "result": "Radiance's urgent vulnerability pulls Alia close while Ellie reaches across to deeply sad ECE beneath distant lightning."
+      },
+      "compoundLoveBeat": {
+        "key": "batch286-monaco-scene1167-compoundLoveBeat",
+        "roll": 75,
+        "index": 3,
+        "result": "Linked hands, a cheek touch, waist support, and a shoulder hold make the four-way reassurance unmistakable."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch286-monaco-scene1167-Radiance-emotion", "roll": 87, "result": "fear and urgent vulnerability" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1167-Radiance-visibleMidriff", "roll": 39, "active": true },
+          "straplessDress": { "key": "batch286-monaco-scene1167-Radiance-straplessDress", "roll": 28, "active": true },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1167-Radiance-fullyOpenBack", "roll": 13, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch286-monaco-scene1167-Ellie-emotion", "roll": 87, "result": "fear and urgent vulnerability" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1167-Ellie-visibleMidriff", "roll": 99, "active": false },
+          "straplessDress": { "key": "batch286-monaco-scene1167-Ellie-straplessDress", "roll": 48, "active": false },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1167-Ellie-fullyOpenBack", "roll": 41, "active": false }
+        },
+        "Alia": {
+          "emotion": { "key": "batch286-monaco-scene1167-Alia-emotion", "roll": 57, "result": "aching romantic longing" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1167-Alia-visibleMidriff", "roll": 13, "active": true },
+          "straplessDress": { "key": "batch286-monaco-scene1167-Alia-straplessDress", "roll": 70, "active": false },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1167-Alia-fullyOpenBack", "roll": 83, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch286-monaco-scene1167-AI ECE-emotion", "roll": 79, "result": "deep sadness" },
+          "visibleMidriff": { "key": "batch286-monaco-scene1167-AI ECE-visibleMidriff", "roll": 15, "active": true },
+          "straplessDress": { "key": "batch286-monaco-scene1167-AI ECE-straplessDress", "roll": 32, "active": true },
+          "fullyOpenBack": { "key": "batch286-monaco-scene1167-AI ECE-fullyOpenBack", "roll": 69, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance fully strapless cropped rainbow wave bodice with visible navel, complete open back, and asymmetric sail mini",
+        "Ellie high-neck rainbow canopy capelet dress with a covered waist and fitted pebble-mosaic mini",
+        "Alia cropped one-sleeve rainbow mosaic jacket and tailored sail-panel shorts with visible navel",
+        "AI ECE fully strapless cropped rainbow rib bodice with visible navel and a sculptural wave-peplum mini"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "ECE's right hand holds the inert rainbow-gradient route prop toward an empty sea marker, with muzzle crossing nobody and index finger outside the guard. ECE's left links Radiance's left. Radiance's right supports Alia's waist. Alia's left rests on Radiance's shoulder and her right holds Ellie's left. Ellie's right cups ECE's cheek. Exactly four adults, eight arms, and eight visible traceable hands. The route map floats above the ECE-Radiance link."
+    }
+  },
+  "renderResults": {
+    "1164": {
+      "rawAttempt": {
+        "status": "moderation-blocked-output",
+        "reason": "The image service rejected the generated output under its sexual-content classifier."
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-27457e8c-b8da-4a7c-9545-acf3acef4fc8.png",
+        "reasons": [
+          "The mission prop became a narrow tubular object in passive low-side carry instead of a realistic full-size sidearm posed toward the empty route marker.",
+          "The back-facing staging hides the triggered Ellie and ECE navels and makes the rolled emotions and ECE tears unreadable.",
+          "At least one hand is hidden or ownership-ambiguous, so the exact eight-visible-hand anatomy gate cannot be certified."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1165": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-6aa10e71-e891-457f-b0f3-64fad04d27cb.png",
+        "reasons": [
+          "At least one hand is hidden and the central hand cluster is not continuously traceable to eight distinct owners.",
+          "The prop grip does not reliably show the required one-hand ownership and indexed trigger finger."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "moderation-blocked-output",
+        "reason": "The image service rejected the edited output under its sexual-content classifier."
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1166": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-0bab358a-d9ba-4560-a8ea-72b2b015b9e8.png",
+        "reasons": [
+          "Multiple hands are hidden or ownership-ambiguous, so exactly ten visible hands cannot be certified.",
+          "The male's strongest eye line is toward Alia rather than ECE.",
+          "Radiance's triggered fully open back is not visible."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-a83618f7-5d6b-42c1-bc35-6e076743ae90.png",
+        "reasons": [
+          "At least one hand remains hidden or ownership-ambiguous, so the exact ten-visible-hand anatomy gate fails.",
+          "The male's strongest eye line still remains on Alia instead of ECE.",
+          "Radiance's triggered fully open back remains unseen and the prop's indexed trigger finger is not reliably readable."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1167": {
+      "rawAttempt": {
+        "status": "moderation-blocked-output",
+        "reason": "The image service rejected the generated output under its sexual-content classifier."
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-042e9b01-f72c-4621-aae8-a2bc08073209.png",
+        "reasons": [
+          "At least one hand is hidden or ownership-ambiguous, so exactly eight visible hands cannot be certified.",
+          "The mission prop is held vertically in passive side carry instead of being directed toward the empty water route marker.",
+          "Radiance's triggered fully open back is not visible and the four rolled emotions are not all distinctly readable."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    }
+  },
+  "acceptedScenes": [],
+  "blockedScenes": [
+    1164,
+    1165,
+    1166,
+    1167
+  ],
+  "shorteningPass": {
+    "status": "not-run-no-accepted-assets",
+    "policy": "Create separate non-destructive shortening variants only where a garment reads longer than the concise above-knee contract."
+  },
+  "xPublishing": {
+    "status": "deferred-insufficient-accepted-assets",
+    "minimumCurrentCountryAssets": 2,
+    "acceptedCurrentCountryAssets": 0,
+    "reason": "No Monaco scene passed the strict anatomy and roll-visibility gate after its single allowed recovery pass.",
+    "captionPlan": "Monaco red heart Malta. Casino fog and Port Hercule snow turn roulette arcs, yacht lines, and Riviera light into a close-knit route drama. #Monaco"
+  }
+}
