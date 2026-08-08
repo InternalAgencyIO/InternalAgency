@@ -100,11 +100,20 @@
     },
     "rule": "Future images only. Make ECE's rainbow hosiery visibly colorful but vary the treatment every time: crisp stripes, soft ombre transitions, prismatic fades, two-to-four-color gradients, broken-spectrum blocks, diagonal color sweeps, painterly transitions, reflective color shifts, or asymmetric rainbow placement. Keep enough contrast to read as rainbow-inspired without requiring all seven colors in every look. Avoid repeating the same pattern in consecutive images. Keep hosiery opaque enough for public-safe editorial use and preserve complete heels or boots."
   },
+  "radianceEceRainbowHosieryRoll": {
+    "activeForward": true,
+    "perImagePercent": 25,
+    "eligibleCharacters": ["Radiance", "AI ECE"],
+    "selection": "When active, use a second deterministic roll to choose exactly one wearer: 0 through 49 selects Radiance and 50 through 99 selects AI ECE.",
+    "styles": "Use varied public-safe opaque rainbow stockings or knee socks: soft ombre, prismatic fade, two-to-four-color gradient, broken-spectrum blocks, diagonal sweeps, reflective shifts, or asymmetric color placement. Avoid repeating the same treatment in consecutive images.",
+    "loveBeat": "When active, Radiance and ECE become the unmistakable emotional center through a close embrace, linked hands, cheek-to-cheek reassurance, mutual delighted eye contact, or protective touch. Keep affection consensual, adult, public-safe, and non-explicit.",
+    "propTransfer": "When active, Alia becomes the sole mission-prop handler for that image while ECE remains route strategist through the separate holographic map."
+  },
   "eceMissionProp": {
     "requiredEveryImage": true,
     "design": "Photorealistic full-size Desert Eagle-style mission sidearm with a vivid polished rainbow-gradient metal finish and realistic proportions, controls, grip, and reflections.",
-    "handling": "ECE actively poses with it in one hand: raised beside her face, angled upward, extended toward open sky, or directed toward clearly empty background space. The muzzle never crosses a person or the camera. Trigger finger stays straight along the frame outside the trigger guard.",
-    "prohibitions": "No passive low-side carry, holster, display case, transparent enclosure, toy-like proportions, aiming at a person or camera, firing, muzzle flash, ammunition, threat, injury, combat, or contact with another character.",
+    "handling": "Default handler is ECE. When the 25 percent Radiance/ECE rainbow-hosiery roll activates, Alia is the sole handler. Never use passive sky-pointing as the entire action. Build the scene around safe inert-prop choreography: sight alignment toward clearly empty water or a marked unoccupied route target, an unloaded inspection or magazine-free manipulation demonstration, a two-hand stance lesson, one woman guiding another's wrists from behind while the muzzle remains downrange, or a handoff with all trigger fingers indexed straight along the frame. The muzzle never crosses a person or the camera.",
+    "prohibitions": "No low-side carry as the main pose, holster, display case, transparent enclosure, toy-like proportions, aiming at a person or camera, live reload, ammunition, firing, muzzle flash, threat, injury, combat, or fingers inside the trigger guard.",
     "routeInterface": "Route information appears as a separate floating holographic map controlled by ECE's free hand."
   },
   "emotionRolls": {
@@ -179,8 +188,9 @@
     "straplessDressPerCharacter": "Roll independently for Radiance, Ellie, Alia, and AI ECE in every image. Results 0 through 34 of 100 use a fully strapless dress with completely bare shoulders and no straps, strings, halter, sleeves, collar, illusion mesh, or shoulder attachments. Use secure opaque sculpted, folded, asymmetric, corsage-inspired, or architectural bodice engineering. Results 35 through 99 use the normal country-adapted silhouette.",
     "fullyOpenBackPerCharacter": "Roll independently for Radiance, Ellie, Alia, and AI ECE in every image. Results 0 through 29 of 100 use a completely open-back silhouette from shoulder blades to the secure lower-back waistline, with no straps crossing the back, no fabric panel, no illusion mesh, and no cape or hair covering the design. Preserve secure opaque front and side construction. Results 30 through 99 use the normal back architecture.",
     "poleDanceTheme": "6 percent chance. Adult athletic stage-pole choreography only: controlled spins, climbs, static holds, mirrored partner poses, or supportive spotting. Integrate the pole as a beacon mast or route-marker prop while preserving country motifs, secure opaque couture, complete anatomy, and non-explicit editorial framing.",
-    "paws": "25 percent deterministic chance on PAWS-eligible scenes only",
-    "rainbowOnly": "9 percent global picture chance outside ECE's hosiery capsule"
+    "paws": "25 percent deterministic chance on PAWS-eligible scenes only. When active, integrate PAWS into humor and affection: safely held in arms, gently touched by multiple characters, perched securely on a shoulder, batting at a route ribbon, interrupting a handoff, or prompting shared laughter. Never place PAWS near the prop muzzle, trigger, moving mechanism, or unsafe footing.",
+    "rainbowHosiery": "25 percent per-image chance. Only Radiance or AI ECE may wear the rainbow stockings or knee socks, selected by a second deterministic roll. Trigger the stronger Radiance/ECE love beat and transfer the inert mission prop to Alia.",
+    "rainbowOnly": "4 percent global picture chance. Results 0 through 3 of 100 make the entire quartet's outfits rainbow themed while preserving unique silhouettes and secure public-safe construction."
   },
   "frame": "9:16 full-length cinematic editorial with complete faces, hands, heels or boots, country landmark, and readable mission action"
 }

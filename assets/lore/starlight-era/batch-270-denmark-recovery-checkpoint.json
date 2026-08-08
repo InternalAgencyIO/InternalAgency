@@ -1,0 +1,59 @@
+{
+  "batch": 270,
+  "country": "Denmark",
+  "status": "accepted",
+  "acceptedScenes": [
+    "1100-denmark-copenhagen-golden-hour-route-grid.png",
+    "1101-denmark-aarhus-overcast-signal-cipher.png",
+    "1102-denmark-kronborg-snow-star-map-relay.png",
+    "1103-denmark-mons-klint-heavy-rain-arrival.png"
+  ],
+  "preservedOriginals": ["1101-denmark-aarhus-overcast-signal-cipher-raw-original.png"],
+  "blockedScenes": [],
+  "rollMethod": "FNV-1a over batch270-denmark-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8 under the pre-update contract used to render this batch", "paws": "0-24" },
+  "rolls": {
+    "1100": {
+      "weather": { "roll": 5, "result": "clear golden-hour radiance" }, "paws": { "roll": 6, "active": true }, "poleDanceTheme": { "roll": 89, "active": false }, "rainbowOnly": { "roll": 41, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 90, "result": "anger" }, "visibleMidriff": 56, "straplessDress": 63, "fullyOpenBack": 68 },
+        "Ellie": { "emotion": { "roll": 40, "result": "determination" }, "visibleMidriff": 86, "straplessDress": 73, "fullyOpenBack": 10 },
+        "Alia": { "emotion": { "roll": 80, "result": "deep sadness" }, "visibleMidriff": 38, "straplessDress": 81, "fullyOpenBack": 18 },
+        "AI ECE": { "emotion": { "roll": 90, "result": "anger" }, "visibleMidriff": 16, "straplessDress": 19, "fullyOpenBack": 28 }
+      }
+    },
+    "1101": {
+      "weather": { "roll": 26, "result": "soft dramatic overcast" }, "paws": { "roll": 99, "active": false }, "poleDanceTheme": { "roll": 24, "active": false }, "rainbowOnly": { "roll": 86, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 71, "result": "suspicion" }, "visibleMidriff": 39, "straplessDress": 76, "fullyOpenBack": 9 },
+        "Ellie": { "emotion": { "roll": 91, "result": "anger" }, "visibleMidriff": 67, "straplessDress": 76, "fullyOpenBack": 17 },
+        "Alia": { "emotion": { "roll": 89, "result": "anger" }, "visibleMidriff": 57, "straplessDress": 98, "fullyOpenBack": 3 },
+        "AI ECE": { "emotion": { "roll": 91, "result": "anger" }, "visibleMidriff": 95, "straplessDress": 4, "fullyOpenBack": 85 }
+      }
+    },
+    "1102": {
+      "weather": { "roll": 55, "result": "snow flurries" }, "paws": { "roll": 72, "active": false }, "poleDanceTheme": { "roll": 27, "active": false }, "rainbowOnly": { "roll": 11, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 32, "result": "overwhelming relief" }, "visibleMidriff": 34, "straplessDress": 93, "fullyOpenBack": 98 },
+        "Ellie": { "emotion": { "roll": 62, "result": "visible jealousy" }, "visibleMidriff": 76, "straplessDress": 31, "fullyOpenBack": 88 },
+        "Alia": { "emotion": { "roll": 78, "result": "deep sadness" }, "visibleMidriff": 32, "straplessDress": 35, "fullyOpenBack": 0 },
+        "AI ECE": { "emotion": { "roll": 52, "result": "intense curiosity" }, "visibleMidriff": 2, "straplessDress": 89, "fullyOpenBack": 46 }
+      }
+    },
+    "1103": {
+      "weather": { "roll": 40, "result": "heavy rain curtain" }, "paws": { "roll": 73, "active": false }, "poleDanceTheme": { "roll": 82, "active": false }, "rainbowOnly": { "roll": 28, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 33, "result": "overwhelming relief" }, "visibleMidriff": 97, "straplessDress": 54, "fullyOpenBack": 3 },
+        "Ellie": { "emotion": { "roll": 41, "result": "determination" }, "visibleMidriff": 41, "straplessDress": 98, "fullyOpenBack": 27 },
+        "Alia": { "emotion": { "roll": 15, "result": "extreme happiness, radiant laughing delight" }, "visibleMidriff": 99, "straplessDress": 20, "fullyOpenBack": 1 },
+        "AI ECE": { "emotion": { "roll": 81, "result": "deep sadness" }, "visibleMidriff": 29, "straplessDress": 50, "fullyOpenBack": 95 }
+      }
+    }
+  },
+  "recovery": "Scenes 1100 and 1103 accepted after one simplified public-safe recovery pass. Scenes 1101 and 1102 were accepted initially.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "accepted for scene 1101; scene 1100 and 1103 shortening edits were blocked and were not retried",
+  "contractTransition": "The new 25 percent Radiance/ECE rainbow-hosiery roll, Alia prop transfer, expanded inert-prop love beats, PAWS humor beats, and 4 percent rainbow-only roll become binding from batch 271 forward.",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "nextQueueCountry": "Estonia"
+}
