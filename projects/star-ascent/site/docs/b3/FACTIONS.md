@@ -135,7 +135,7 @@ the retained V2-continuity runtime. That module must:
 
 Splitting the module improves audit and upgrade isolation but is not presumed
 cheaper. The optimized Daily Law program already consumes a measured
-`1.97768400 SOL` fresh-payer peak, leaving only `1.02231600 SOL` under the
+`1.99906512 SOL` fresh-payer peak, leaving only `1.00093488 SOL` under the
 accepted 3 SOL aggregate ceiling. The faction binary, state rent, mint/NFT
 accounts, and any retained V2 runtime must be measured together before claiming
 the target is met.

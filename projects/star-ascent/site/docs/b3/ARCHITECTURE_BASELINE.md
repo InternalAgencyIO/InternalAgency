@@ -454,6 +454,6 @@ The following require measured prototypes, not assumption:
 
 As of 2026-08-08, the owner accepts a `3 SOL` aggregate fresh-payer peak
 ceiling for B3 project deployment. The optimized native law alone measures
-`1.97768400 SOL` peak, but the retained-feature aggregate is not yet proven
+`1.99906512 SOL` peak, but the retained-feature aggregate is not yet proven
 under the ceiling. User confidential-account rent and transaction fees are
 separate. No validator-network budget is required for the selected profile.

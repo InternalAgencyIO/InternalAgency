@@ -328,8 +328,9 @@ computation.
 The owner accepts a 3 SOL aggregate fresh-payer peak deployment ceiling for B3.
 The existing V2 monolith does not meet that target without major restructuring.
 B3 will not delete V2 behavior or security checks merely to force the number.
-The optimized native Daily Law artifact measures 141,824 bytes, approximately
-0.98944056 SOL permanent rent and 1.97768400 SOL pre-fee peak. This proves the
+The current optimized native Daily Law artifact measures 143,360 bytes,
+approximately 1.00013112 SOL permanent rent and 1.99906512 SOL pre-fee peak.
+This proves the
 law adapter fits the ceiling by itself; it does not yet prove that the complete
 retained-feature B3 artifact set fits. Aggregate cost must be measured rather
 than inferred.

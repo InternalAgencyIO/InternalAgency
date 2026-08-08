@@ -52,6 +52,12 @@ transfers left both token balances unchanged. The final summary reported
 `publicNetworkWrites: false` and verified cleanup before reporting
 `temporaryLedgerRemoved: true`.
 
+This is immutable historical evidence for the pre-allowlist candidate. The
+current exact-extension-allowlist candidate is 143,360 bytes with SHA-256
+`7c495967e183707a92d819b3d09738c82f50d432c1c9c4af57e3ac1e1dc36923`.
+It must complete a fresh local-validator rehearsal before the earlier run can
+be treated as evidence for the current candidate.
+
 The sanitized machine-readable run record is
 [`evidence/local-validator-rehearsal-20260808.json`](evidence/local-validator-rehearsal-20260808.json).
 The harness itself emits more granular newline-delimited JSON on every run.

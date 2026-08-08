@@ -136,10 +136,12 @@ unchanged 1%/66.67% thresholds, same-day reroll rejection, future-state
 rejection, and deterministic lag selection.
 
 The 2026-08-08 disposable local-validator rehearsal additionally covers the
-optimized 141,824-byte SBF artifact, frozen local program data, exact
-Token-2022 mint shape, real public hooked transfers, permissionless Clock plus
-SlotHashes finalization, stored-record reproduction, direct-call rejection, and
-real-hook missing/stale/open/locked/forged state gates. See
+pre-allowlist optimized 141,824-byte SBF artifact, frozen local program data,
+exact Token-2022 mint shape, real public hooked transfers, permissionless Clock
+plus SlotHashes finalization, stored-record reproduction, direct-call
+rejection, and real-hook missing/stale/open/locked/forged state gates. The
+current exact-allowlist candidate is 143,360 bytes and still requires a fresh
+validator rehearsal. See
 [`LOCAL_VALIDATOR_REHEARSAL.md`](LOCAL_VALIDATOR_REHEARSAL.md).
 
 Before Devnet:

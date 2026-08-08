@@ -43,8 +43,8 @@ export const DEVNET_RPC = "https://api.devnet.solana.com";
 export const DEVNET_GENESIS_HASH = "GH7ome3EiwEr7tu9JuTh2dpYWBJK3z69Xm1ZE3MEE6JC";
 export const EXECUTE_CONFIRMATION = "CONFIRMED_PUBLIC_DEVNET_REHEARSAL";
 export const EXPECTED_ARTIFACT_SHA256 =
-  "50fc66ec95bc68a71e6a1288f6fb830e2a3c996bd93348f4b832de954ca6dbc4";
-export const EXPECTED_ARTIFACT_SIZE = 141_824;
+  "7c495967e183707a92d819b3d09738c82f50d432c1c9c4af57e3ac1e1dc36923";
+export const EXPECTED_ARTIFACT_SIZE = 143_360;
 
 const SCHEMA = "iat-b3-devnet-rehearsal/v1";
 const EXPLORER = "https://explorer.solana.com";
