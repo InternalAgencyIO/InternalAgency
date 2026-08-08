@@ -1,0 +1,403 @@
+{
+  "batch": 282,
+  "country": "Liechtenstein",
+  "status": "partial-accepted",
+  "queueCorrection": "The Lithuania handoff named Estonia, but Estonia was already accepted as loopback Batch 271. The unique-country rule selects the missed alphabetical locale Liechtenstein for Batch 282.",
+  "rollMethod": "FNV-1a over batch282-liechtenstein-scene-field keys, reduced modulo 100. Male scene selection is reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "maleModelSelection": {
+    "key": "batch282-liechtenstein-male-model-scene",
+    "roll": 88,
+    "selectedScenePosition": 1,
+    "selectedScene": 1148,
+    "maleEmotion": {
+      "key": "batch282-liechtenstein-scene1-male-emotion",
+      "roll": 63,
+      "result": "visible jealousy"
+    },
+    "faceAnchor": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Liechtenstein's flag crown is official and political, so it is not copied. No literal flag appears.",
+    "fallbackMotifs": [
+      "Vaduz Castle battlements, vineyard rows, Rhine curves, and wine-grape clusters",
+      "Gutenberg Castle geometry, postage perforations, Alpine ridgelines, and meadow flowers",
+      "Malbun ski-lift cables, Walser shingle rhythm, cowbell arcs, and mountain contour lines",
+      "Vaduz Kunstmuseum black-cube geometry, postage design grids, Rhine flow lines, and vineyard leaves"
+    ],
+    "minimumCoverage": "Every scene integrates at least one large readable secular Liechtenstein motif across two or more character outfits.",
+    "cultureScene": "Scene 1148 includes a restrained vineyard harvest still-life with local red-wine and grape cues on a separate background ledge.",
+    "prohibitions": "No literal flag, crown, official emblem, sacred symbol, political insignia, copied ceremonial dress, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch282-liechtenstein-x-heart",
+      "roll": 9,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch282-liechtenstein-x-internalagency",
+      "roll": 89,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch282-liechtenstein-x-worldxxxseries",
+      "roll": 26,
+      "active": false
+    }
+  },
+  "scenePlans": {
+    "1148": {
+      "theme": "Paris runway model couture",
+      "landmark": "Public Vaduz vineyard overlook with Vaduz Castle, Rhine valley, and Alpine slopes",
+      "motifs": [
+        "large vineyard-row and Vaduz battlement fields",
+        "large Rhine-curve, grape-cluster, and postage-perforation geometry"
+      ],
+      "weather": {
+        "roll": 63,
+        "result": "dense rolling fog"
+      },
+      "paws": {
+        "roll": 88,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 11,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 43,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 46,
+        "active": false,
+        "wearerRoll": 42,
+        "paletteModeRoll": 78
+      },
+      "romanceBeat": {
+        "roll": 50,
+        "dynamicIndex": 2,
+        "result": "Alia spins Radiance under linked hands while ECE steadies Radiance and Ellie reaches toward the route marker."
+      },
+      "compoundLoveBeat": {
+        "roll": 8,
+        "index": 8,
+        "result": "ECE and Radiance share a moving side hug while Ellie seeks ECE and Alia catches Radiance's free hand."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 88, "result": "fear and urgent vulnerability" },
+          "visibleMidriff": { "roll": 38, "active": true },
+          "straplessDress": { "roll": 57, "active": false },
+          "fullyOpenBack": { "roll": 46, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "roll": 50, "result": "startled surprise" },
+          "visibleMidriff": { "roll": 80, "active": false },
+          "straplessDress": { "roll": 23, "active": true },
+          "fullyOpenBack": { "roll": 32, "active": false }
+        },
+        "Alia": {
+          "emotion": { "roll": 82, "result": "crying with visible tears" },
+          "visibleMidriff": { "roll": 64, "active": false },
+          "straplessDress": { "roll": 3, "active": true },
+          "fullyOpenBack": { "roll": 12, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 32, "result": "overwhelming relief" },
+          "visibleMidriff": { "roll": 98, "active": false },
+          "straplessDress": { "roll": 61, "active": false },
+          "fullyOpenBack": { "roll": 66, "active": false }
+        },
+        "maleModel": {
+          "emotion": { "roll": 63, "result": "visible jealousy" }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance one-shoulder cropped lapel bodice and asymmetric pleated runway mini",
+        "Ellie strapless folded tulip mini-dress with covered waist",
+        "Alia strapless sleek architectural mini with a fully open back and covered waist",
+        "ECE sleeveless low-neck tailored mini-jumpsuit with a sculpted hip panel",
+        "male fitted blue-black short-sleeve polo, black jeans, and black boots"
+      ],
+      "plannedHandMap": "ECE uses one hand for the inert prop toward an empty vineyard route marker and one for the separate map. The male holds Alia at the waist and links Ellie while looking toward ECE. Radiance touches his forearm and wraps her other hand around ECE's upper back. Ellie returns the link and supports Alia's shoulder. Alia touches his chest and Radiance's waist. Exactly five adults and ten hands."
+    },
+    "1149": {
+      "theme": "Paris runway model couture",
+      "landmark": "Gutenberg Castle at Balzers with the Rhine valley and Drei Schwestern Alps",
+      "motifs": [
+        "large Gutenberg merlon and Alpine-ridge fields",
+        "large postage-perforation, meadow-flower, and Rhine-wave geometry"
+      ],
+      "weather": {
+        "roll": 64,
+        "result": "dense rolling fog"
+      },
+      "paws": {
+        "roll": 33,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 66,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 16,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 19,
+        "active": true,
+        "wearerRoll": 75,
+        "wearer": "AI ECE",
+        "paletteModeRoll": 33,
+        "paletteMode": "Liechtenstein-palette multicolor gradient",
+        "treatment": "opaque blue-black-white knee socks with silver and alpine-cyan transitions"
+      },
+      "romanceBeat": {
+        "roll": 13,
+        "dynamicIndex": 1,
+        "result": "Ellie rises into Radiance's side hug while ECE keeps Ellie's other hand and Alia watches with playful rivalry."
+      },
+      "compoundLoveBeat": {
+        "roll": 97,
+        "index": 1,
+        "result": "ECE reassures Alia from close range while Alia reaches toward Radiance and Ellie holds Radiance's hand."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 69, "result": "suspicion" },
+          "visibleMidriff": { "roll": 61, "active": false },
+          "straplessDress": { "roll": 38, "active": false },
+          "fullyOpenBack": { "roll": 27, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "roll": 9, "result": "romantic joy" },
+          "visibleMidriff": { "roll": 37, "active": true },
+          "straplessDress": { "roll": 86, "active": false },
+          "fullyOpenBack": { "roll": 7, "active": true }
+        },
+        "Alia": {
+          "emotion": { "roll": 23, "result": "playful mischief" },
+          "visibleMidriff": { "roll": 99, "active": false },
+          "straplessDress": { "roll": 16, "active": true },
+          "fullyOpenBack": { "roll": 97, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 1, "result": "tender affection" },
+          "visibleMidriff": { "roll": 5, "active": true },
+          "straplessDress": { "roll": 42, "active": false },
+          "fullyOpenBack": { "roll": 99, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance sleeveless sculpted shell mini with a fully open back and covered waist",
+        "Ellie narrow-shoulder cropped wing bodice and high-waist draped runway shorts with a fully open back",
+        "Alia strapless pannier-inspired architectural mini with covered waist",
+        "ECE sleeveless low-neck cropped peplum and tailored shorts with blue-black-white gradient knee socks"
+      ],
+      "plannedHandMap": "Alia uses both hands on the inert prop toward an empty Rhine marker. ECE controls the route map and links Radiance. Radiance returns the link and embraces ECE at the waist. Ellie touches Radiance's shoulder and ECE's forearm. Exactly four adults and eight hands; Radiance and ECE are the emotional center."
+    },
+    "1150": {
+      "theme": "cleaner and service couture",
+      "landmark": "Malbun alpine village with Sareis ridge, ski-lift geometry, and Walser-style shingle roofs",
+      "motifs": [
+        "large Malbun lift-cable and mountain-contour fields",
+        "large Walser-shingle, cowbell-arc, and microfiber-weave geometry"
+      ],
+      "weather": {
+        "roll": 62,
+        "result": "dense rolling fog"
+      },
+      "paws": {
+        "roll": 39,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 80,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 94,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 45,
+        "active": false,
+        "wearerRoll": 85,
+        "paletteModeRoll": 35
+      },
+      "romanceBeat": {
+        "roll": 27,
+        "dynamicIndex": 3,
+        "result": "ECE steps backward with the route while Radiance follows, Ellie wraps Radiance, and Alia blocks with suspicion."
+      },
+      "compoundLoveBeat": {
+        "roll": 99,
+        "index": 3,
+        "result": "Alia and Radiance share a close shoulder embrace while Ellie answers at ECE's cheek and all four remain linked."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 67, "result": "possessive tension" },
+          "visibleMidriff": { "roll": 31, "active": true },
+          "straplessDress": { "roll": 68, "active": false },
+          "fullyOpenBack": { "roll": 17, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "roll": 7, "result": "tender affection" },
+          "visibleMidriff": { "roll": 11, "active": true },
+          "straplessDress": { "roll": 4, "active": true },
+          "fullyOpenBack": { "roll": 29, "active": true }
+        },
+        "Alia": {
+          "emotion": { "roll": 69, "result": "suspicion" },
+          "visibleMidriff": { "roll": 29, "active": true },
+          "straplessDress": { "roll": 38, "active": false },
+          "fullyOpenBack": { "roll": 23, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 99, "result": "emotional exhaustion" },
+          "visibleMidriff": { "roll": 59, "active": false },
+          "straplessDress": { "roll": 88, "active": false },
+          "fullyOpenBack": { "roll": 41, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance low-neck apron-lapel crop bodice and scalloped service skort with a fully open back",
+        "Ellie strapless cutout bubble utility mini with visible navel and a fully open back",
+        "Alia asymmetric cropped wrap top and tailored mini cargo skirt with a fully open back",
+        "ECE sleeveless sweetheart service romper with a curved apron panel and covered waist"
+      ],
+      "plannedHandMap": "ECE uses one hand for the inert prop toward an empty chairlift maintenance marker and one for the map. Radiance touches ECE's shoulder and holds Alia's waist. Ellie embraces Radiance at the waist and shoulder. Alia touches Ellie's cheek and Radiance's forearm. Exactly four adults and eight hands."
+    },
+    "1151": {
+      "theme": "cleaner and service couture",
+      "landmark": "Vaduz Staedtle with the Kunstmuseum black cube and secular postal-design facade rhythm",
+      "motifs": [
+        "large Kunstmuseum black-cube and postage-perforation fields",
+        "large Rhine-flow, vineyard-leaf, and polished-squeegee geometry"
+      ],
+      "weather": {
+        "roll": 41,
+        "result": "rolling thunderstorm"
+      },
+      "paws": {
+        "roll": 58,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 13,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 21,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 0,
+        "active": true,
+        "wearerRoll": 84,
+        "wearer": "AI ECE",
+        "paletteModeRoll": 60,
+        "paletteMode": "original independent rainbow gradient",
+        "treatment": "opaque prismatic knee socks with diagonal independent rainbow sweeps"
+      },
+      "romanceBeat": {
+        "roll": 36,
+        "dynamicIndex": 0,
+        "result": "Radiance moves with ECE's hand while Ellie catches Radiance's forearm and Alia closes with tenderness."
+      },
+      "compoundLoveBeat": {
+        "roll": 98,
+        "index": 2,
+        "result": "Ellie holds Radiance close while Radiance reassures Alia and ECE steps into their joined hands."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 98, "result": "defiance" },
+          "visibleMidriff": { "roll": 92, "active": false },
+          "straplessDress": { "roll": 19, "active": true },
+          "fullyOpenBack": { "roll": 60, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "roll": 84, "result": "crying with visible tears" },
+          "visibleMidriff": { "roll": 30, "active": true },
+          "straplessDress": { "roll": 37, "active": false },
+          "fullyOpenBack": { "roll": 98, "active": false }
+        },
+        "Alia": {
+          "emotion": { "roll": 4, "result": "tender affection" },
+          "visibleMidriff": { "roll": 10, "active": true },
+          "straplessDress": { "roll": 65, "active": false },
+          "fullyOpenBack": { "roll": 90, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 74, "result": "betrayal shock" },
+          "visibleMidriff": { "roll": 28, "active": true },
+          "straplessDress": { "roll": 67, "active": false },
+          "fullyOpenBack": { "roll": 28, "active": true }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance strapless origami utility mini with covered waist",
+        "Ellie sleeveless cropped tabard bodice and pleated service shorts",
+        "Alia one-shoulder cropped apron-knot top and curved panel mini-skirt",
+        "ECE low-neck cropped waistcoat and high-waist mini with a fully open back and independent rainbow knee socks"
+      ],
+      "plannedHandMap": "Alia uses both hands on the inert prop toward an empty stormwater route marker. ECE controls the map and embraces Radiance's shoulder. Radiance holds ECE at the waist and cups her cheek. Ellie touches Radiance's forearm and ECE's shoulder. Exactly four adults and eight hands; Radiance and ECE are the emotional center."
+    }
+  },
+  "acceptedScenes": [
+    {
+      "scene": 1148,
+      "asset": "1148-liechtenstein-vaduz-fog-runway-male-vineyard-route.png",
+      "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-99efb1e1-ba45-47f2-a8d7-d532cfebe427.png",
+      "attempt": "raw",
+      "qa": "Accepted. Five distinct adults, complete shoes, no visible extra limbs, strong Vaduz castle and vineyard motifs, dense fog, visible tears, layered consensual contacts, and a safe outward inert-prop line."
+    },
+    {
+      "scene": 1151,
+      "asset": "1151-liechtenstein-vaduz-thunderstorm-service-rainbow-hosiery.png",
+      "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-7c1cc6d1-0e50-409d-a452-655efbaad6a0.png",
+      "attempt": "single recovery",
+      "qa": "Accepted. Four distinct adults, eight plausible owned hands, complete shoes, at least four visible contacts, ECE hosiery and Radiance-ECE center legible, Alia as sole inert-prop handler, and the Kunstmuseum thunderstorm setting clearly readable."
+    }
+  ],
+  "blockedScenes": [
+    {
+      "scene": 1149,
+      "reason": "The raw output was blocked by image moderation. The single recovery is anatomically clean but does not make Radiance and ECE the binding affectionate center and gives Alia only a one-hand prop hold.",
+      "rawRequestId": "60981417-15ae-41fd-85f3-b4f62153e364",
+      "recoverySource": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-94637a78-f0f9-4471-a87a-7fddecd89c4c.png",
+      "recoveryPasses": 1
+    },
+    {
+      "scene": 1150,
+      "reason": "Both the raw request and the single public-editorial recovery were rejected by output moderation, so no local image passed the scene gate.",
+      "rawRequestId": "9381cd33-0d70-4ddf-9f1d-bba9d86f3171",
+      "recoveryRequestId": "f64c9b0b-9f35-4b42-bdce-08655240b4fb",
+      "recoveryPasses": 1
+    }
+  ],
+  "shorteningPass": "Not required. Both accepted scenes already use concise secure editorial proportions; all generated originals and rejected recovery artifacts remain preserved.",
+  "nextThemePair": [
+    "cleaner and service couture",
+    "cinematic covert-agent crew couture"
+  ],
+  "nextQueueCountry": "Luxembourg"
+}
