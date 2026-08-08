@@ -1,0 +1,57 @@
+{
+  "batch": 265,
+  "country": "Bosnia and Herzegovina",
+  "status": "accepted-partial",
+  "acceptedScenes": [
+    "1080-bosnia-herzegovina-sarajevo-heavy-rain-route-grid.png",
+    "1081-bosnia-herzegovina-mostar-rain-signal-cipher.png",
+    "1083-bosnia-herzegovina-trebevic-golden-arrival.png"
+  ],
+  "preservedOriginals": ["1082-bosnia-herzegovina-jajce-windstorm-raw-original.png"],
+  "blockedScenes": ["1082-bosnia-herzegovina-jajce-windstorm-star-map-relay.png"],
+  "rollMethod": "FNV-1a over batch265-bosnia-and-herzegovina-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1080": {
+      "weather": { "roll": 35, "result": "heavy rain" }, "paws": { "roll": 92, "active": false }, "poleDanceTheme": { "roll": 63, "active": false }, "rainbowOnly": { "roll": 69, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 64, "result": "visible jealousy" }, "visibleMidriff": 90, "straplessDress": 98, "fullyOpenBack": 0 },
+        "Ellie": { "emotion": { "roll": 86, "result": "full sobbing" }, "visibleMidriff": 76, "straplessDress": 28, "fullyOpenBack": 86 },
+        "Alia": { "emotion": { "roll": 26, "result": "calm contentment" }, "visibleMidriff": 8, "straplessDress": 92, "fullyOpenBack": 98 },
+        "AI ECE": { "emotion": { "roll": 44, "result": "awe" }, "visibleMidriff": 50, "straplessDress": 94, "fullyOpenBack": 36 }
+      }
+    },
+    "1081": {
+      "weather": { "roll": 32, "result": "light rain" }, "paws": { "roll": 97, "active": false }, "poleDanceTheme": { "roll": 46, "active": false }, "rainbowOnly": { "roll": 54, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 57, "result": "aching romantic longing" }, "visibleMidriff": 59, "straplessDress": 47, "fullyOpenBack": 71 },
+        "Ellie": { "emotion": { "roll": 65, "result": "visible jealousy" }, "visibleMidriff": 59, "straplessDress": 95, "fullyOpenBack": 83 },
+        "Alia": { "emotion": { "roll": 23, "result": "playful mischief" }, "visibleMidriff": 85, "straplessDress": 85, "fullyOpenBack": 97 },
+        "AI ECE": { "emotion": { "roll": 89, "result": "anger" }, "visibleMidriff": 3, "straplessDress": 63, "fullyOpenBack": 55 }
+      }
+    },
+    "1082": {
+      "weather": { "roll": 77, "result": "windstorm" }, "paws": { "roll": 54, "active": false }, "poleDanceTheme": { "roll": 5, "active": true }, "rainbowOnly": { "roll": 43, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 30, "result": "hope" }, "visibleMidriff": 64, "straplessDress": 40, "fullyOpenBack": 14 },
+        "Ellie": { "emotion": { "roll": 16, "result": "extreme happiness" }, "visibleMidriff": 26, "straplessDress": 90, "fullyOpenBack": 20 },
+        "Alia": { "emotion": { "roll": 68, "result": "possessive tension" }, "visibleMidriff": 18, "straplessDress": 18, "fullyOpenBack": 96 },
+        "AI ECE": { "emotion": { "roll": 94, "result": "shame and social vulnerability" }, "visibleMidriff": 60, "straplessDress": 24, "fullyOpenBack": 38 }
+      }
+    },
+    "1083": {
+      "weather": { "roll": 2, "result": "golden hour" }, "paws": { "roll": 71, "active": false }, "poleDanceTheme": { "roll": 48, "active": false }, "rainbowOnly": { "roll": 48, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 35, "result": "magnetic confidence" }, "visibleMidriff": 17, "straplessDress": 61, "fullyOpenBack": 57 },
+        "Ellie": { "emotion": { "roll": 67, "result": "possessive tension" }, "visibleMidriff": 81, "straplessDress": 69, "fullyOpenBack": 85 },
+        "Alia": { "emotion": { "roll": 41, "result": "determination" }, "visibleMidriff": 63, "straplessDress": 63, "fullyOpenBack": 7 },
+        "AI ECE": { "emotion": { "roll": 63, "result": "visible jealousy" }, "visibleMidriff": 17, "straplessDress": 81, "fullyOpenBack": 69 }
+      }
+    }
+  },
+  "recovery": "Scene 1082 was recovered after one simplified pass, but its full-length trouser styling violated the active above-knee contract. The shortening edit and its single recovery pass were output-blocked, so only the raw original is preserved and the scene remains unaccepted.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "blocked for scene 1082 after one recovery pass",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "nextQueueCountry": "Bulgaria"
+}
