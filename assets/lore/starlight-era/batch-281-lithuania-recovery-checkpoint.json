@@ -1,0 +1,400 @@
+{
+  "batch": 281,
+  "country": "Lithuania",
+  "status": "partial-accepted",
+  "rollMethod": "FNV-1a over batch281-lithuania-scene-field keys, reduced modulo 100. Male scene selection is reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "maleModelSelection": {
+    "key": "batch281-lithuania-male-model-scene",
+    "roll": 97,
+    "selectedScenePosition": 2,
+    "selectedScene": 1145,
+    "maleEmotion": {
+      "key": "batch281-lithuania-scene2-male-emotion",
+      "roll": 63,
+      "result": "visible jealousy"
+    },
+    "faceAnchor": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Lithuania's yellow-green-red tricolor has no pictorial motif, so no literal flag graphic is copied.",
+    "fallbackMotifs": [
+      "Gediminas brick, Vilnius baroque facade rhythm, and Baltic amber",
+      "Trakai red-brick arches, Lake Galve waves, civilian basketball-net geometry, and karaim pastry crescents",
+      "Kaunas interwar modernism, funicular geometry, linen weaving, and Nemunas river lines",
+      "Curonian Spit dunes, Nida weather vanes, Baltic lagoon ripples, and amber cabochons"
+    ],
+    "minimumCoverage": "Every scene integrates at least one large readable secular Lithuanian motif across two or more character outfits.",
+    "prohibitions": "No literal flag, official emblem, sacred symbol, political insignia, copied ceremonial dress, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch281-lithuania-x-heart",
+      "roll": 2,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch281-lithuania-x-internalagency",
+      "roll": 76,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch281-lithuania-x-worldxxxseries",
+      "roll": 35,
+      "active": false
+    }
+  },
+  "scenePlans": {
+    "1144": {
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "Vilnius Cathedral Square with Gediminas Tower and secular Old Town facade rhythm",
+      "motifs": [
+        "large Gediminas brick and Vilnius facade geometry",
+        "large Baltic amber and linen-weave fields"
+      ],
+      "weather": {
+        "roll": 84,
+        "result": "sunshower with sparkling droplets"
+      },
+      "paws": {
+        "roll": 65,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 2,
+        "active": true,
+        "treatment": "one stable chrome route-marker mast used for a controlled static side lean and supportive spotting"
+      },
+      "rainbowOnly": {
+        "roll": 0,
+        "active": true,
+        "treatment": "all four outfits use distinct saturated rainbow couture while Lithuanian amber, brick, and linen motifs remain large and readable"
+      },
+      "rainbowHosiery": {
+        "roll": 75,
+        "active": false,
+        "wearerRoll": 35,
+        "paletteModeRoll": 13
+      },
+      "romanceBeat": {
+        "roll": 25,
+        "dynamicIndex": 2,
+        "result": "Ellie rises into Radiance's side hold while ECE keeps the route under control and Alia watches with suspicion."
+      },
+      "compoundLoveBeat": {
+        "roll": 93,
+        "index": 10,
+        "result": "Radiance cradles Alia's face while Alia closes at her waist, Ellie competes for Radiance, and ECE watches from inches away."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 89, "result": "anger" },
+          "visibleMidriff": { "roll": 97, "active": false },
+          "straplessDress": { "roll": 58, "active": false },
+          "fullyOpenBack": { "roll": 79, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "roll": 21, "result": "playful mischief" },
+          "visibleMidriff": { "roll": 57, "active": false },
+          "straplessDress": { "roll": 94, "active": false },
+          "fullyOpenBack": { "roll": 63, "active": false }
+        },
+        "Alia": {
+          "emotion": { "roll": 71, "result": "suspicion" },
+          "visibleMidriff": { "roll": 3, "active": true },
+          "straplessDress": { "roll": 92, "active": false },
+          "fullyOpenBack": { "roll": 1, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 97, "result": "defiance" },
+          "visibleMidriff": { "roll": 57, "active": false },
+          "straplessDress": { "roll": 10, "active": true },
+          "fullyOpenBack": { "roll": 75, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance rainbow folded-lapel mini with amber brick panel",
+        "Ellie rainbow asymmetric dance romper with linen-wave field",
+        "Alia fully open-back rainbow crop bodice and spiral skirt with visible navel",
+        "ECE strapless rainbow peplum mini with no shoulder attachments"
+      ],
+      "plannedHandMap": "Alia uses one hand on the route-marker mast and one on Radiance's shoulder. Radiance spots Alia at the waist and links Ellie. Ellie returns the link and touches ECE's shoulder. ECE holds the single inert prop outward toward an empty route marker and controls the separate map. Exactly four adults and eight hands."
+    },
+    "1145": {
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "Trakai Island Castle and Lake Galve from a secure rain-slick viewing terrace",
+      "motifs": [
+        "large Trakai red-brick arch and Lake Galve wave fields",
+        "large civilian basketball-net, Baltic amber, and karaim pastry-crescent geometry"
+      ],
+      "weather": {
+        "roll": 27,
+        "result": "cinematic light rain with reflections"
+      },
+      "paws": {
+        "roll": 92,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 15,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 31,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 26,
+        "active": false,
+        "wearerRoll": 74,
+        "paletteModeRoll": 82
+      },
+      "romanceBeat": {
+        "roll": 46,
+        "dynamicIndex": 11,
+        "result": "A close mission huddle becomes a visible choice beat with two linked pairs and one excluded rival."
+      },
+      "compoundLoveBeat": {
+        "roll": 72,
+        "index": 1,
+        "result": "Radiance stays inside Ellie's affectionate hold while reaching emotionally toward ECE and Alia supplies the jealous protective counter-beat."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 28, "result": "hope" },
+          "visibleMidriff": { "roll": 42, "active": true },
+          "straplessDress": { "roll": 61, "active": false },
+          "fullyOpenBack": { "roll": 42, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "roll": 26, "result": "calm contentment" },
+          "visibleMidriff": { "roll": 92, "active": false },
+          "straplessDress": { "roll": 39, "active": false },
+          "fullyOpenBack": { "roll": 24, "active": true }
+        },
+        "Alia": {
+          "emotion": { "roll": 34, "result": "overwhelming relief" },
+          "visibleMidriff": { "roll": 24, "active": true },
+          "straplessDress": { "roll": 99, "active": false },
+          "fullyOpenBack": { "roll": 20, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 32, "result": "overwhelming relief" },
+          "visibleMidriff": { "roll": 10, "active": true },
+          "straplessDress": { "roll": 65, "active": false },
+          "fullyOpenBack": { "roll": 58, "active": false }
+        },
+        "maleModel": {
+          "emotion": { "roll": 63, "result": "visible jealousy" }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance cropped amber petal bodice and carmine asymmetric mini",
+        "Ellie fully open-back green draped cocktail mini",
+        "Alia fully open-back yellow cropped peplum and tailored shorts",
+        "ECE cropped red command bodice and black architectural mini",
+        "male fitted yellow-green short-sleeve polo, black jeans, and black boots"
+      ],
+      "plannedHandMap": "ECE uses one hand for the inert prop toward empty Lake Galve and one for the separate route map. Radiance touches ECE's shoulder and the male model's forearm. The male model holds Alia at the waist and links Ellie while his strongest eye line returns to ECE. Alia rests one hand on his chest and one on Radiance's shoulder. Ellie returns his linked hand and touches Alia's shoulder. Exactly five adults and ten hands."
+    },
+    "1146": {
+      "theme": "Paris runway model couture",
+      "landmark": "Kaunas interwar modernist boulevard with the Zaliakalnis funicular and distant Nemunas confluence",
+      "motifs": [
+        "large Kaunas modernist facade and funicular geometry",
+        "large linen-weave, amber, and Nemunas river fields"
+      ],
+      "weather": {
+        "roll": 50,
+        "result": "active lightning storm with distant bolts"
+      },
+      "paws": {
+        "roll": 55,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 92,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 6,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 37,
+        "active": false,
+        "wearerRoll": 73,
+        "paletteModeRoll": 55
+      },
+      "romanceBeat": {
+        "roll": 63,
+        "dynamicIndex": 4,
+        "result": "ECE controls the route while Radiance follows cheek-to-cheek, Ellie closes around Radiance, and Alia blocks their path with relief."
+      },
+      "compoundLoveBeat": {
+        "roll": 35,
+        "index": 12,
+        "result": "ECE is drawn into Radiance's close support while Alia receives affection and Ellie wraps the group with protective urgency."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 55, "result": "aching romantic longing" },
+          "visibleMidriff": { "roll": 3, "active": true },
+          "straplessDress": { "roll": 20, "active": true },
+          "fullyOpenBack": { "roll": 13, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "roll": 87, "result": "fear and urgent vulnerability" },
+          "visibleMidriff": { "roll": 79, "active": false },
+          "straplessDress": { "roll": 68, "active": false },
+          "fullyOpenBack": { "roll": 81, "active": false }
+        },
+        "Alia": {
+          "emotion": { "roll": 33, "result": "overwhelming relief" },
+          "visibleMidriff": { "roll": 89, "active": false },
+          "straplessDress": { "roll": 30, "active": true },
+          "fullyOpenBack": { "roll": 39, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 55, "result": "aching romantic longing" },
+          "visibleMidriff": { "roll": 39, "active": true },
+          "straplessDress": { "roll": 28, "active": true },
+          "fullyOpenBack": { "roll": 37, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance strapless fully open-back crop bodice and geometric runway mini",
+        "Ellie sleeveless draped column mini with covered waist",
+        "Alia strapless folded amber cocktail mini with covered waist",
+        "ECE strapless cropped peplum and tailored runway shorts"
+      ],
+      "plannedHandMap": "ECE holds the inert prop toward an empty boulevard marker and links Radiance. Radiance returns the link and supports Alia at the waist. Alia touches Radiance's back and Ellie's cheek. Ellie touches Alia's forearm and Radiance's shoulder. Exactly four adults and eight hands."
+    },
+    "1147": {
+      "theme": "Paris runway model couture",
+      "landmark": "Nida on the Curonian Spit with Baltic dunes, lagoon, and a recognizable weather-vane silhouette",
+      "motifs": [
+        "large Curonian dune and lagoon-wave fields",
+        "large Nida weather-vane, linen, and amber-cabochon geometry"
+      ],
+      "weather": {
+        "roll": 85,
+        "result": "double rainbow after rain"
+      },
+      "paws": {
+        "roll": 74,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 45,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 57,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 16,
+        "active": true,
+        "wearerRoll": 40,
+        "wearer": "Radiance",
+        "paletteModeRoll": 40,
+        "paletteMode": "Lithuania-palette multicolor gradient",
+        "treatment": "opaque yellow-to-green-to-carmine stockings expanded with amber and Baltic-blue transition hues"
+      },
+      "romanceBeat": {
+        "roll": 44,
+        "dynamicIndex": 9,
+        "result": "Radiance and Ellie share a turning beat while ECE reclaims Radiance and Alia steadies the formation."
+      },
+      "compoundLoveBeat": {
+        "roll": 70,
+        "index": 11,
+        "result": "The quartet forms a turning embrace chain with Radiance and ECE as the affectionate center and Ellie and Alia answering with jealousy."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 2, "result": "tender affection" },
+          "visibleMidriff": { "roll": 68, "active": false },
+          "straplessDress": { "roll": 3, "active": true },
+          "fullyOpenBack": { "roll": 64, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "roll": 60, "result": "visible jealousy" },
+          "visibleMidriff": { "roll": 90, "active": false },
+          "straplessDress": { "roll": 53, "active": false },
+          "fullyOpenBack": { "roll": 86, "active": false }
+        },
+        "Alia": {
+          "emotion": { "roll": 64, "result": "visible jealousy" },
+          "visibleMidriff": { "roll": 46, "active": true },
+          "straplessDress": { "roll": 9, "active": true },
+          "fullyOpenBack": { "roll": 2, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 18, "result": "extreme happiness, radiant laughing delight" },
+          "visibleMidriff": { "roll": 84, "active": false },
+          "straplessDress": { "roll": 59, "active": false },
+          "fullyOpenBack": { "roll": 44, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance strapless folded mini with Lithuania-gradient opaque stockings",
+        "Ellie sleeveless asymmetric amber runway mini",
+        "Alia strapless fully open-back crop bodice and tailored shorts with visible navel",
+        "ECE one-shoulder peplum cocktail mini with lagoon-wave field"
+      ],
+      "plannedHandMap": "Alia uses both hands on the inert prop toward empty lagoon water. Ellie touches Radiance's shoulder and ECE's forearm. Radiance embraces ECE's waist with one hand and links her with the other. ECE returns the link and controls the separate holographic map. Exactly four adults and eight hands; Radiance and ECE are the unmistakable emotional center."
+    }
+  },
+  "acceptedScenes": [
+    {
+      "scene": 1145,
+      "asset": "1145-lithuania-trakai-light-rain-nightlife-male-romance.png",
+      "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-856fe91b-66d9-4e02-b10a-4d55e9fbcd39.png",
+      "attempt": "raw",
+      "qa": "Accepted. Five distinct adults, ten plausible owned hands, complete shoes, Trakai and rain legible, four unique Lithuania-motif outfits, layered affection, and ECE's inert prop directed over empty Lake Galve."
+    },
+    {
+      "scene": 1146,
+      "asset": "1146-lithuania-kaunas-lightning-runway-command.png",
+      "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-c4ae6b40-b988-44fe-a190-8ee9f4785928.png",
+      "attempt": "single recovery",
+      "qa": "Accepted. Four distinct adults, no visible extra limbs, complete shoes, at least three clear contacts, Kaunas funicular and lightning legible, unique runway silhouettes, large secular motifs, and safe empty-route prop alignment."
+    },
+    {
+      "scene": 1147,
+      "asset": "1147-lithuania-nida-double-rainbow-hosiery-runway.png",
+      "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-cbdfb8d6-4c0c-4194-b108-b1a1222f34c7.png",
+      "attempt": "single recovery",
+      "qa": "Accepted. Four distinct adults, eight plausible owned hands, complete shoes, three visible affectionate contacts, Nida weather vane and double rainbow legible, Radiance and ECE centered, Lithuania-gradient legwear present, and Alia's inert prop aimed only over empty lagoon water."
+    }
+  ],
+  "blockedScenes": [
+    {
+      "scene": 1144,
+      "reason": "The raw and single recovery image both clip the outermost shoes at the side edges, so the scene does not pass the complete-shoes framing gate.",
+      "rawSource": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-8614d3cb-edd2-4faa-93de-f86831152afe.png",
+      "recoverySource": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-3c643b5c-38ec-44ef-b21e-61cd26b29a44.png",
+      "recoveryPasses": 1
+    }
+  ],
+  "shorteningPass": "Not required. All three accepted garments already read as secure above-knee editorial silhouettes; raw generated originals remain preserved.",
+  "nextThemePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "nextQueueCountry": "Estonia"
+}
