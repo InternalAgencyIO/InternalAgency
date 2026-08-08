@@ -42,19 +42,28 @@ jobs:
           retention-days: 30
 
   standalone:
-    if: ${{ hashFiles('assets/videos/manifest.json') != '' }}
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Check for the standalone video manifest
+        id: video_manifest
+        shell: pwsh
+        run: |
+          $present = (Test-Path -LiteralPath "assets/videos/manifest.json").ToString().ToLowerInvariant()
+          "present=$present" >> $env:GITHUB_OUTPUT
       - uses: actions/setup-node@v4
+        if: steps.video_manifest.outputs.present == 'true'
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm run dist
+      - if: steps.video_manifest.outputs.present == 'true'
+        run: npm ci
+      - if: steps.video_manifest.outputs.present == 'true'
+        run: npm run dist
       - uses: actions/upload-artifact@v4
+        if: steps.video_manifest.outputs.present == 'true'
         with:
           name: radiance-windows-portable
           path: release/Radiance-*-portable.exe
