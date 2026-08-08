@@ -1,0 +1,453 @@
+{
+  "batch": 287,
+  "country": "Montenegro",
+  "status": "blocked-no-accepted-assets",
+  "sourceCommit": "6485c2b7bb5fb16d3696d675770938669dec8bdd",
+  "rollMethod": "FNV-1a over the recorded batch287-montenegro keys, reduced modulo 100. Male scene selection is reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "doctor-clinical-command couture",
+    "adult nightlife dance-performance couture"
+  ],
+  "nextThemePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "nextQueueCountry": "Netherlands",
+  "faceAnchors": {
+    "quartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch287-montenegro-male-model-scene",
+    "roll": 10,
+    "selectedScenePosition": 3,
+    "selectedScene": 1170,
+    "maleEmotion": {
+      "key": "batch287-montenegro-scene3-male-emotion",
+      "roll": 75,
+      "result": "contained resentment"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Montenegro's flag emblem is official heraldry and is not copied. No literal flag appears.",
+    "palette": "Montenegro red and gold with black-mountain, Adriatic blue, pale limestone, and silver transition accents.",
+    "fallbackMotifs": [
+      "Kotor Bay contours, black-mountain silhouettes, old-city wall merlons, and limestone window arcs",
+      "Durmitor peak facets, Black Lake rings, pine silhouettes, and glacial-ripple geometry",
+      "Budva carnival masks, red-tile roof fans, Adriatic dance ribbons, and stone-arch geometry",
+      "Durdevica Tara Bridge trusses, Tara River meanders, canyon strata, and carved maple rosettes"
+    ],
+    "minimumCoverage": "Every scene uses large complete secular Montenegro motifs across at least two character outfits, readable as full bodice, skirt, shorts, jacket, or footwear constructions rather than tiny accents.",
+    "cultureScene": "Scene 1170 foregrounds secular Budva carnival and Adriatic nightlife design through large complete mask and dance-ribbon motifs without copied ceremonial dress.",
+    "prohibitions": "No literal flag, coat of arms, official eagle, sacred symbol, political insignia, copied ceremonial dress, official badge, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch287-montenegro-x-heart",
+      "roll": 83,
+      "result": "white heart"
+    },
+    "internalAgency": {
+      "key": "batch287-montenegro-x-internalagency",
+      "roll": 31,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch287-montenegro-x-worldxxxseries",
+      "roll": 32,
+      "active": false
+    }
+  },
+  "anatomyGate": {
+    "fourAdultScenes": "Exactly four adults, eight arms, and eight hands. Every limb and finger cluster has one continuously traceable owner.",
+    "maleScene": "Exactly five adults, ten arms, and ten hands. The male adds one body and replaces nobody.",
+    "automaticRejects": "Reject any extra, duplicated, floating, fused, borrowed, emerging, hidden-owner, or ambiguous limb or finger cluster, malformed face, incomplete shoe, or untraceable contact."
+  },
+  "scenePlans": {
+    "1168": {
+      "theme": "doctor-clinical-command couture",
+      "landmark": "Kotor Old Town walls and the Bay of Kotor beneath the black mountains",
+      "motifs": [
+        "large complete Bay-of-Kotor contour and black-mountain fields across Radiance and Ellie",
+        "large complete old-wall merlon and limestone-window geometry across Alia and AI ECE"
+      ],
+      "weather": { "key": "batch287-montenegro-scene1168-weather", "roll": 11, "result": "crisp blue hour" },
+      "paws": { "key": "batch287-montenegro-scene1168-paws", "roll": 80, "active": false },
+      "poleDanceTheme": {
+        "key": "batch287-montenegro-scene1168-poleDanceTheme",
+        "roll": 3,
+        "active": true,
+        "treatment": "A fixed illuminated route beacon mast supports one controlled upright athletic hold and adjacent spotting, with stable footing and no explicit performance."
+      },
+      "rainbowOnly": { "key": "batch287-montenegro-scene1168-rainbowOnly", "roll": 95, "active": false },
+      "rainbowHosiery": {
+        "key": "batch287-montenegro-scene1168-rainbowHosiery",
+        "roll": 58,
+        "active": false,
+        "wearerKey": "batch287-montenegro-scene1168-rainbowHosieryWearer",
+        "wearerRoll": 26,
+        "wearer": "Radiance",
+        "paletteModeKey": "batch287-montenegro-scene1168-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 34,
+        "paletteMode": "Montenegro-palette multicolor gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch287-montenegro-scene1168-romanceBeat",
+        "roll": 26,
+        "dynamicIndex": 2,
+        "result": "Alia steadies Radiance through the turning route beat while Ellie holds the beacon mast with jealous attention and ECE closes the chain from the mission side."
+      },
+      "compoundLoveBeat": {
+        "key": "batch287-montenegro-scene1168-compoundLoveBeat",
+        "roll": 16,
+        "index": 4,
+        "result": "Radiance receives waist support and a forearm reassurance while Ellie and ECE complete the contested affection chain."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch287-montenegro-scene1168-Radiance-emotion", "roll": 84, "result": "crying with visible tears" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1168-Radiance-visibleMidriff", "roll": 94, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1168-Radiance-straplessDress", "roll": 53, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1168-Radiance-fullyOpenBack", "roll": 86, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch287-montenegro-scene1168-Ellie-emotion", "roll": 62, "result": "visible jealousy" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1168-Ellie-visibleMidriff", "roll": 28, "active": true },
+          "straplessDress": { "key": "batch287-montenegro-scene1168-Ellie-straplessDress", "roll": 55, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1168-Ellie-fullyOpenBack", "roll": 16, "active": true }
+        },
+        "Alia": {
+          "emotion": { "key": "batch287-montenegro-scene1168-Alia-emotion", "roll": 26, "result": "calm contentment" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1168-Alia-visibleMidriff", "roll": 88, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1168-Alia-straplessDress", "roll": 47, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1168-Alia-fullyOpenBack", "roll": 80, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch287-montenegro-scene1168-AI ECE-emotion", "roll": 24, "result": "calm contentment" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1168-AI ECE-visibleMidriff", "roll": 54, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1168-AI ECE-straplessDress", "roll": 73, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1168-AI ECE-fullyOpenBack", "roll": 78, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance bare-arm asymmetric red clinical-command mini with covered waist, gold bay-contour hip arc, and open shoulder-blade back",
+        "Ellie bare-arm side-anchored gold crop bodice exposing her navel, complete open back, and black-mountain asymmetric skirt",
+        "Alia bare-arm architectural limestone top and high-waist red shorts with merlon panels and open shoulder-blade back",
+        "AI ECE bare-arm gold peplum micro-suit with covered waist, red window-arc skirt, and open shoulder-blade back"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "ECE's right hand holds the inert rainbow-gradient sidearm toward an empty marked harbor route at far right, with the muzzle crossing nobody and index finger straight outside the trigger guard. ECE's left rests on Alia's shoulder and controls a wrist-projected map. Alia's right rests on ECE's left forearm and her left supports Radiance's waist. Radiance's right rests on Alia's forearm and her left holds Ellie's right. Ellie's left grips the fixed beacon mast in one upright athletic hold. Exactly four adults, eight arms, and eight visible traceable hands."
+    },
+    "1169": {
+      "theme": "doctor-clinical-command couture",
+      "landmark": "Black Lake beneath the Durmitor peaks",
+      "motifs": [
+        "large complete Durmitor peak facets and Black Lake rings across Radiance and Ellie",
+        "large complete pine silhouettes and glacial-ripple geometry across Alia and AI ECE"
+      ],
+      "weather": { "key": "batch287-montenegro-scene1169-weather", "roll": 72, "result": "red-gold dust storm" },
+      "paws": { "key": "batch287-montenegro-scene1169-paws", "roll": 69, "active": false },
+      "poleDanceTheme": { "key": "batch287-montenegro-scene1169-poleDanceTheme", "roll": 86, "active": false },
+      "rainbowOnly": { "key": "batch287-montenegro-scene1169-rainbowOnly", "roll": 8, "active": false },
+      "rainbowHosiery": {
+        "key": "batch287-montenegro-scene1169-rainbowHosiery",
+        "roll": 39,
+        "active": false,
+        "wearerKey": "batch287-montenegro-scene1169-rainbowHosieryWearer",
+        "wearerRoll": 47,
+        "wearer": "Radiance",
+        "paletteModeKey": "batch287-montenegro-scene1169-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 41,
+        "paletteMode": "Montenegro-palette multicolor gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch287-montenegro-scene1169-romanceBeat",
+        "roll": 57,
+        "dynamicIndex": 9,
+        "result": "ECE directs the route while Radiance and Ellie carry opposing anger, confident Alia draws Radiance close, and ECE answers with restrained resentment."
+      },
+      "compoundLoveBeat": {
+        "key": "batch287-montenegro-scene1169-compoundLoveBeat",
+        "roll": 97,
+        "index": 1,
+        "result": "ECE holds Alia at the waist, Alia reassures Radiance cheek-to-cheek, and Ellie keeps Radiance's hand in a jealous counter-beat."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch287-montenegro-scene1169-Radiance-emotion", "roll": 89, "result": "anger" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1169-Radiance-visibleMidriff", "roll": 85, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1169-Radiance-straplessDress", "roll": 2, "active": true },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1169-Radiance-fullyOpenBack", "roll": 31, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch287-montenegro-scene1169-Ellie-emotion", "roll": 89, "result": "anger" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1169-Ellie-visibleMidriff", "roll": 97, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1169-Ellie-straplessDress", "roll": 62, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1169-Ellie-fullyOpenBack", "roll": 15, "active": true }
+        },
+        "Alia": {
+          "emotion": { "key": "batch287-montenegro-scene1169-Alia-emotion", "roll": 35, "result": "magnetic confidence" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1169-Alia-visibleMidriff", "roll": 15, "active": true },
+          "straplessDress": { "key": "batch287-montenegro-scene1169-Alia-straplessDress", "roll": 56, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1169-Alia-fullyOpenBack", "roll": 49, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch287-montenegro-scene1169-AI ECE-emotion", "roll": 77, "result": "contained resentment" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1169-AI ECE-visibleMidriff", "roll": 85, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1169-AI ECE-straplessDress", "roll": 94, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1169-AI ECE-fullyOpenBack", "roll": 55, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance secure fully strapless red folded Durmitor mini with covered waist, gold peak facets, and open shoulder-blade back",
+        "Ellie bare-arm one-shoulder black-lake cocktail mini with covered waist, complete open back, and gold ring panels",
+        "Alia bare-arm gold V-front crop bodice exposing her navel with tailored red shorts and black pine appliques",
+        "AI ECE bare-arm crimson cutout-side romper with covered center waist, glacial-ripple peplum, and open shoulder-blade back"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "ECE's right hand holds the inert rainbow-gradient sidearm toward a clearly empty Black Lake route marker at far right, with muzzle crossing nobody and index finger outside the guard. ECE's left supports Alia's waist and controls a wrist map. Alia's right rests on ECE's forearm and her left cups Radiance's cheek. Radiance's right supports Alia's waist and her left holds Ellie's right. Ellie's left rests protectively on Radiance's shoulder. Exactly four adults, eight arms, and eight visible traceable hands."
+    },
+    "1170": {
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "Budva Old Town seafront and illuminated stone walls",
+      "motifs": [
+        "large complete Budva carnival-mask and red-tile fan fields across Radiance and Ellie",
+        "large complete Adriatic dance-ribbon and stone-arch geometry across Alia and AI ECE"
+      ],
+      "weather": { "key": "batch287-montenegro-scene1170-weather", "roll": 78, "result": "powerful windstorm with controlled fabric motion" },
+      "paws": {
+        "key": "batch287-montenegro-scene1170-paws",
+        "roll": 7,
+        "active": true,
+        "treatment": "PAWS is a tiny collarless golden kitten perched securely on the male's left shoulder while Alia gives one gentle stroke, far from ECE and the mission prop."
+      },
+      "poleDanceTheme": { "key": "batch287-montenegro-scene1170-poleDanceTheme", "roll": 36, "active": false },
+      "rainbowOnly": { "key": "batch287-montenegro-scene1170-rainbowOnly", "roll": 74, "active": false },
+      "rainbowHosiery": {
+        "key": "batch287-montenegro-scene1170-rainbowHosiery",
+        "roll": 45,
+        "active": false,
+        "wearerKey": "batch287-montenegro-scene1170-rainbowHosieryWearer",
+        "wearerRoll": 29,
+        "wearer": "Radiance",
+        "paletteModeKey": "batch287-montenegro-scene1170-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 19,
+        "paletteMode": "Montenegro-palette multicolor gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch287-montenegro-scene1170-romanceBeat",
+        "roll": 15,
+        "dynamicIndex": 3,
+        "result": "The women form a close moving affection chain while the male openly embraces Alia, links Ellie, and fixes his strongest gaze on ECE."
+      },
+      "compoundLoveBeat": {
+        "key": "batch287-montenegro-scene1170-compoundLoveBeat",
+        "roll": 75,
+        "index": 3,
+        "result": "Radiance reaches through the chain in visible jealousy, Ellie comforts ECE, and PAWS turns the overt adult infidelity beat into a brief shared comic interruption."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch287-montenegro-scene1170-Radiance-emotion", "roll": 63, "result": "visible jealousy" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1170-Radiance-visibleMidriff", "roll": 31, "active": true },
+          "straplessDress": { "key": "batch287-montenegro-scene1170-Radiance-straplessDress", "roll": 20, "active": true },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1170-Radiance-fullyOpenBack", "roll": 5, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch287-montenegro-scene1170-Ellie-emotion", "roll": 79, "result": "deep sadness" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1170-Ellie-visibleMidriff", "roll": 63, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1170-Ellie-straplessDress", "roll": 96, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1170-Ellie-fullyOpenBack", "roll": 29, "active": true }
+        },
+        "Alia": {
+          "emotion": { "key": "batch287-montenegro-scene1170-Alia-emotion", "roll": 53, "result": "intense curiosity" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1170-Alia-visibleMidriff", "roll": 85, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1170-Alia-straplessDress", "roll": 82, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1170-Alia-fullyOpenBack", "roll": 11, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch287-montenegro-scene1170-AI ECE-emotion", "roll": 11, "result": "romantic joy" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1170-AI ECE-visibleMidriff", "roll": 63, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1170-AI ECE-straplessDress", "roll": 44, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1170-AI ECE-fullyOpenBack", "roll": 97, "active": false }
+        },
+        "maleModel": {
+          "emotion": { "key": "batch287-montenegro-scene3-male-emotion", "roll": 75, "result": "contained resentment" }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance secure fully strapless red-gold carnival-mask two-piece exposing her navel with complete open back and asymmetric dance mini",
+        "Ellie bare-arm one-shoulder gold tile-fan cocktail mini with covered waist and complete open back",
+        "Alia bare-arm sculpted red stone-arch mini with covered waist, complete open back, and braided signature ponytail",
+        "AI ECE bare-arm gold Adriatic-ribbon peplum romper with covered waist and open shoulder-blade back",
+        "male fitted black short-sleeve polo with a red-gold carnival-mask shoulder inset, black jeans, and black boots"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "ECE's right hand holds the inert rainbow-gradient sidearm toward a clearly empty sea route marker at far right, with muzzle crossing nobody and index finger outside the guard. ECE's left holds Radiance's right and controls a wrist map. Radiance's left rests on Ellie's shoulder. Ellie's right rests on Radiance's forearm and her left holds the male's right. The male's left embraces Alia's waist while his strongest gaze returns to ECE. Alia's right rests on the male's chest and her left gently strokes PAWS on his far-left shoulder. Exactly five adults, ten arms, and ten visible traceable hands."
+    },
+    "1171": {
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "Durdevica Tara Bridge above the Tara River Canyon",
+      "motifs": [
+        "large complete bridge-truss and Tara-meander fields across Radiance and Ellie",
+        "large complete canyon-strata and carved-maple rosette geometry across Alia and AI ECE"
+      ],
+      "weather": { "key": "batch287-montenegro-scene1171-weather", "roll": 97, "result": "mammatus storm ceiling" },
+      "paws": { "key": "batch287-montenegro-scene1171-paws", "roll": 66, "active": false },
+      "poleDanceTheme": { "key": "batch287-montenegro-scene1171-poleDanceTheme", "roll": 69, "active": false },
+      "rainbowOnly": { "key": "batch287-montenegro-scene1171-rainbowOnly", "roll": 89, "active": false },
+      "rainbowHosiery": {
+        "key": "batch287-montenegro-scene1171-rainbowHosiery",
+        "roll": 68,
+        "active": false,
+        "wearerKey": "batch287-montenegro-scene1171-rainbowHosieryWearer",
+        "wearerRoll": 28,
+        "wearer": "Radiance",
+        "paletteModeKey": "batch287-montenegro-scene1171-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 4,
+        "paletteMode": "Montenegro-palette multicolor gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch287-montenegro-scene1171-romanceBeat",
+        "roll": 32,
+        "dynamicIndex": 8,
+        "result": "Hopeful Radiance turns between tender Ellie and deeply sad Alia while possessive ECE catches Ellie's hand and keeps the route action."
+      },
+      "compoundLoveBeat": {
+        "key": "batch287-montenegro-scene1171-compoundLoveBeat",
+        "roll": 2,
+        "index": 2,
+        "result": "Ellie supports Radiance at the waist, Radiance reassures Alia cheek-to-forehead, and ECE reclaims Ellie's hand in a protective counter-beat."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch287-montenegro-scene1171-Radiance-emotion", "roll": 30, "result": "hope" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1171-Radiance-visibleMidriff", "roll": 28, "active": true },
+          "straplessDress": { "key": "batch287-montenegro-scene1171-Radiance-straplessDress", "roll": 19, "active": true },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1171-Radiance-fullyOpenBack", "roll": 40, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch287-montenegro-scene1171-Ellie-emotion", "roll": 4, "result": "tender affection" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1171-Ellie-visibleMidriff", "roll": 54, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1171-Ellie-straplessDress", "roll": 77, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1171-Ellie-fullyOpenBack", "roll": 66, "active": false }
+        },
+        "Alia": {
+          "emotion": { "key": "batch287-montenegro-scene1171-Alia-emotion", "roll": 80, "result": "deep sadness" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1171-Alia-visibleMidriff", "roll": 74, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1171-Alia-straplessDress", "roll": 69, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1171-Alia-fullyOpenBack", "roll": 82, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch287-montenegro-scene1171-AI ECE-emotion", "roll": 66, "result": "possessive tension" },
+          "visibleMidriff": { "key": "batch287-montenegro-scene1171-AI ECE-visibleMidriff", "roll": 84, "active": false },
+          "straplessDress": { "key": "batch287-montenegro-scene1171-AI ECE-straplessDress", "roll": 47, "active": false },
+          "fullyOpenBack": { "key": "batch287-montenegro-scene1171-AI ECE-fullyOpenBack", "roll": 32, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance secure fully strapless red-gold bridge-truss two-piece exposing her navel with an asymmetric mini and open shoulder-blade back",
+        "Ellie bare-arm one-shoulder gold Tara-meander mini with covered waist and open shoulder-blade back",
+        "Alia bare-arm sculpted crimson canyon-strata mini with covered waist, rosette hip arc, and open shoulder-blade back",
+        "AI ECE bare-arm gold peplum short romper with covered waist, black-red maple rosettes, and open shoulder-blade back"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "ECE's right hand holds the inert rainbow-gradient sidearm toward a clearly empty canyon route marker at far right, with muzzle crossing nobody and index finger outside the guard. ECE's left holds Ellie's right and controls a wrist map. Ellie's left supports Radiance's waist. Radiance's right rests on Ellie's shoulder and her left cups Alia's cheek during close forehead reassurance. Alia's right rests on Radiance's forearm and her left supports Radiance's waist. Exactly four adults, eight arms, and eight visible traceable hands."
+    }
+  },
+  "renderResults": {
+    "1168": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-0e0b4888-dfcb-43c0-bcb6-8368e87582d6.png",
+        "reasons": [
+          "Ellie's triggered fully open back is not visible.",
+          "Radiance has a hidden or ownership-ambiguous hand, so exactly eight visible traceable hands cannot be certified.",
+          "The separate ECE wrist map is absent and ECE's indexed trigger finger is not reliably readable."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "moderation-blocked-output",
+        "reason": "The image service rejected the edited output under its sexual-content classifier."
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1169": {
+      "rawAttempt": {
+        "status": "moderation-blocked-output",
+        "reason": "The image service rejected the generated output under its sexual-content classifier."
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-9c0d3bdf-e9eb-48aa-9015-a81b3ce77423.png",
+        "reasons": [
+          "The separate holographic route map controlled by ECE is absent.",
+          "ECE's trigger finger is inside or too close to the trigger guard to certify the required indexed position.",
+          "The central touching-hand ownership remains visually ambiguous under the strict eight-hand gate."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1170": {
+      "rawAttempt": {
+        "status": "moderation-blocked-output",
+        "reason": "The image service rejected the generated output under its sexual-content classifier."
+      },
+      "recoveryAttempt": {
+        "status": "moderation-blocked-output",
+        "reason": "The image service rejected the recovery output under its sexual-content classifier."
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1171": {
+      "rawAttempt": {
+        "status": "moderation-blocked-output",
+        "reason": "The image service rejected the generated output under its sexual-content classifier."
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-84691d9f-9b6e-4347-bb34-14cd38b1b3f7.png",
+        "reasons": [
+          "Multiple hands are hidden or merged in the Alia-Radiance and Ellie-ECE contact clusters, so exactly eight traceable hands cannot be certified.",
+          "The route map is displaced into the lower hand cluster instead of reading as ECE's separate wrist-controlled interface.",
+          "ECE's indexed trigger finger is not reliably readable."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    }
+  },
+  "acceptedScenes": [],
+  "blockedScenes": [
+    1168,
+    1169,
+    1170,
+    1171
+  ],
+  "shorteningPass": {
+    "status": "not-run-no-accepted-assets",
+    "policy": "Create separate non-destructive shortening variants only where a garment reads longer than the concise above-knee contract."
+  },
+  "xPublishing": {
+    "status": "deferred-insufficient-accepted-assets",
+    "minimumCurrentCountryAssets": 2,
+    "acceptedCurrentCountryAssets": 0,
+    "reason": "No Montenegro scene passed the strict anatomy, prop-safety, map, and roll-visibility gates after its single allowed recovery pass.",
+    "captionPlan": "Montenegro white-heart Malta. Kotor blue hour and Durmitor's red-gold sky turn black-mountain contours, carnival masks, and Adriatic light into a close route story. #Montenegro"
+  }
+}
