@@ -1,0 +1,136 @@
+{
+  "batch": 277,
+  "country": "Iceland",
+  "status": "partial accepted",
+  "acceptedScenes": [
+    "1128-iceland-reykjavik-sunshower-covert-agent-harpa-route-grid.png",
+    "1130-iceland-reynisfjara-heavy-rain-rainbow-investigator-relay.png"
+  ],
+  "blockedScenes": [
+    {
+      "scene": 1129,
+      "reason": "The initial five-person render was blocked by output moderation. The single simplified public-safe recovery rendered with clean anatomy, but Alia carried the inert mission prop passively at her low side instead of making it drive the required safe love-beat choreography. The recovery was rejected and no asset was copied."
+    },
+    {
+      "scene": 1131,
+      "reason": "The raw lagoon render had ambiguous hand ownership along ECE's extended prop arm. The single corrective anatomy edit was blocked by output moderation, so the raw render was rejected and no asset was copied."
+    }
+  ],
+  "rollMethod": "FNV-1a over batch277-iceland-scene-field, reduced modulo 100",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "maleModelSelection": {
+    "key": "batch277-iceland-male-model-scene",
+    "roll": 65,
+    "selectedScenePosition": 2,
+    "selectedScene": 1129,
+    "result": "The selected scene did not pass the binding prop-action gate, so no male-model face anchor was established."
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Iceland's national flag was not copied as a literal garment graphic, and the Nordic cross was not used as a fashion motif.",
+    "fallbackMotifs": [
+      "basalt columns",
+      "lava fissures",
+      "glacier shards",
+      "Harpa glass facets",
+      "geysers",
+      "Icelandic wool geometry",
+      "lagoon waves",
+      "Reynisdrangar sea stacks"
+    ],
+    "minimumCoverage": "Every attempted scene placed large readable secular Icelandic motifs across at least two character looks."
+  },
+  "rolls": {
+    "1128": {
+      "theme": "cinematic covert-agent crew couture",
+      "weather": { "roll": 82, "result": "sunshower with sparkling droplets" },
+      "paws": { "roll": 35, "active": false },
+      "poleDanceTheme": { "roll": 12, "active": false },
+      "rainbowOnly": { "roll": 90, "active": false },
+      "rainbowHosiery": { "roll": 61, "active": false, "wearerRoll": 5, "paletteModeRoll": 39 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 91, "result": "anger" }, "visibleMidriff": 75, "straplessDress": 4, "fullyOpenBack": 45 },
+        "Ellie": { "emotion": { "roll": 15, "result": "extreme happiness, radiant laughing delight" }, "visibleMidriff": 47, "straplessDress": 24, "fullyOpenBack": 97 },
+        "Alia": { "emotion": { "roll": 77, "result": "contained resentment" }, "visibleMidriff": 29, "straplessDress": 82, "fullyOpenBack": 63 },
+        "AI ECE": { "emotion": { "roll": 67, "result": "possessive tension" }, "visibleMidriff": 59, "straplessDress": 64, "fullyOpenBack": 33 }
+      },
+      "motifs": ["large Harpa glass facets", "large basalt-column and lava-fissure panels"],
+      "uniqueSilhouettes": ["strapless sculpted basalt mini", "strapless glacier-facet cutout romper", "one-shoulder basalt mosaic crop set", "tailored Harpa-facet blazer mini"],
+      "loveBeat": "Radiance keeps a guarded hand at Ellie's waist, Ellie links hands with Alia while laughing, Alia reaches protectively across ECE's shoulder, and ECE holds Alia's free hand while directing the empty route target.",
+      "propAudit": "ECE's inert rainbow route prop points toward a clearly empty holographic marker and never crosses a person or the camera.",
+      "anatomyAudit": "Accepted after tracing all eight hands to one of the four women; no extra, duplicated, or ownerless hand is visible.",
+      "recovery": "Accepted from the initial render."
+    },
+    "1129": {
+      "theme": "cinematic covert-agent crew couture",
+      "weather": { "roll": 97, "result": "mammatus storm ceiling" },
+      "paws": { "roll": 26, "active": false },
+      "poleDanceTheme": { "roll": 9, "active": false },
+      "rainbowOnly": { "roll": 89, "active": false },
+      "rainbowHosiery": { "roll": 8, "active": true, "wearerRoll": 32, "wearer": "Radiance", "paletteModeRoll": 68, "paletteMode": "original independent rainbow gradient" },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 6, "result": "tender affection" }, "visibleMidriff": 28, "straplessDress": 87, "fullyOpenBack": 92 },
+        "Ellie": { "emotion": { "roll": 16, "result": "extreme happiness, radiant laughing delight" }, "visibleMidriff": 46, "straplessDress": 65, "fullyOpenBack": 22 },
+        "Alia": { "emotion": { "roll": 24, "result": "calm contentment" }, "visibleMidriff": 86, "straplessDress": 9, "fullyOpenBack": 46 },
+        "AI ECE": { "emotion": { "roll": 6, "result": "tender affection" }, "visibleMidriff": 4, "straplessDress": 15, "fullyOpenBack": 0 },
+        "maleModel": { "emotion": { "roll": 15, "result": "extreme happiness, radiant laughing delight" } }
+      },
+      "motifs": ["large geyser plume geometry", "large Icelandic red-white-blue wool fields"],
+      "recovery": "The initial render was blocked. The one allowed simplified recovery produced five clean adult figures and ten plausibly owned hands, but failed the required active prop choreography and was rejected."
+    },
+    "1130": {
+      "theme": "undercover investigator couture",
+      "weather": { "roll": 35, "result": "heavy rain curtain" },
+      "paws": { "roll": 92, "active": false },
+      "poleDanceTheme": { "roll": 51, "active": false },
+      "rainbowOnly": { "roll": 3, "active": true },
+      "rainbowHosiery": { "roll": 74, "active": false, "wearerRoll": 62, "paletteModeRoll": 54 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 52, "result": "intense curiosity" }, "visibleMidriff": 10, "straplessDress": 77, "fullyOpenBack": 10 },
+        "Ellie": { "emotion": { "roll": 38, "result": "magnetic confidence" }, "visibleMidriff": 72, "straplessDress": 19, "fullyOpenBack": 40 },
+        "Alia": { "emotion": { "roll": 70, "result": "suspicion" }, "visibleMidriff": 32, "straplessDress": 83, "fullyOpenBack": 56 },
+        "AI ECE": { "emotion": { "roll": 88, "result": "fear and urgent vulnerability" }, "visibleMidriff": 90, "straplessDress": 89, "fullyOpenBack": 90 }
+      },
+      "motifs": ["large Reynisdrangar sea-stack scenes", "large glowing lava-fissure and black-basalt fields"],
+      "uniqueSilhouettes": ["open-back asymmetric basalt crop set", "strapless sea-stack peplum mini", "one-shoulder lava-fissure cutout mini", "glacier-and-sea-stack tailored romper"],
+      "loveBeat": "Radiance wraps Ellie at the waist, Ellie and Alia link hands, Alia steadies ECE at the shoulder, and ECE extends the route signal toward empty sea while the quartet shares one protective chain.",
+      "propAudit": "ECE's inert rainbow route prop points toward a clearly empty holographic marker over the sea and never crosses a person or the camera.",
+      "anatomyAudit": "Accepted after tracing all eight hands and every affectionate contact to a clear owner; hidden hands use natural body occlusion and no extra limb is visible.",
+      "recovery": "Accepted from the initial render."
+    },
+    "1131": {
+      "theme": "undercover investigator couture",
+      "weather": { "roll": 68, "result": "coastal sea mist" },
+      "paws": { "roll": 85, "active": false },
+      "poleDanceTheme": { "roll": 18, "active": false },
+      "rainbowOnly": { "roll": 76, "active": false },
+      "rainbowHosiery": { "roll": 75, "active": false, "wearerRoll": 43, "paletteModeRoll": 85 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 93, "result": "guilt and remorse" }, "visibleMidriff": 17, "straplessDress": 94, "fullyOpenBack": 35 },
+        "Ellie": { "emotion": { "roll": 37, "result": "magnetic confidence" }, "visibleMidriff": 85, "straplessDress": 2, "fullyOpenBack": 87 },
+        "Alia": { "emotion": { "roll": 51, "result": "intense curiosity" }, "visibleMidriff": 35, "straplessDress": 80, "fullyOpenBack": 61 },
+        "AI ECE": { "emotion": { "roll": 97, "result": "defiance" }, "visibleMidriff": 33, "straplessDress": 42, "fullyOpenBack": 43 }
+      },
+      "motifs": ["large glacier-shard architecture", "large Jokulsarlon lagoon-wave and ice-field panels"],
+      "recovery": "Raw render rejected for ambiguous hand ownership along ECE's extended arm. The single corrective edit was blocked; no accepted file."
+    }
+  },
+  "maleAnchorStatus": "Pending. The first accepted male-model appearance must still establish the forward face anchor.",
+  "shorteningPass": "Not required for the two accepted scenes; both accepted scenes already use concise above-knee silhouettes.",
+  "nextThemePair": [
+    "undercover investigator couture",
+    "nurse-care couture"
+  ],
+  "nextQueueCountry": "Ireland"
+}
