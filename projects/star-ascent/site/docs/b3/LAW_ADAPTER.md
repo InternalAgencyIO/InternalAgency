@@ -40,6 +40,13 @@ Initialization is a one-time mint-authority operation. It verifies that:
 - the network genesis identity is nonzero;
 - the law-state and standard `extra-account-metas` addresses are the exact PDAs.
 
+The prototype checks that required extensions exist, but it does **not** yet
+enforce an exact extension allowlist. A mint carrying Permanent Delegate,
+permissioned/confidential mint-burn authority, Mint Close Authority, Pausable,
+or any other unapproved authority-bearing extension must be rejected on-chain
+before Mainnet. Documentation or ceremony inspection is not a substitute for
+that adapter check.
+
 It then creates only two rent-bearing accounts:
 
 1. `law-state` PDA: 160 bytes, bound to program ID and canonical mint;
@@ -139,6 +146,9 @@ Before Devnet:
 - measure compute units, transaction bytes, account rent, and wallet resolution;
 - add rollback, delayed-finalizer, skipped-slot, malformed TLV, wrong-owner,
   wrong-mint, and direct-call adversarial tests;
+- implement and adversarially test an exact mint-extension allowlist that
+  rejects Permanent Delegate, permissioned burn, mint-close, pausable, and any
+  other unapproved authority-bearing extension;
 - decide whether the 150-slot lag survives measurement;
 - independently review every error and authority transition.
 

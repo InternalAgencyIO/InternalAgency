@@ -212,6 +212,23 @@ Treasury, ecosystem, and liquidity remain reward sources in that exact order.
 Core-team principal is not a reward source. Vesting preserves V2 Genesis
 unlocks, cliffs, and weekly linear schedules.
 
+B3 adds an owner-directed core-team concentration target: protocol-originated
+core principal and rewards are routed through immutable program custody and
+the enforceable balance is reconciled to no more than 10% of post-burn live mint
+supply for each fixed-UTC+03:00 day beginning at 00:00. The smallest valid burn
+is `ceil(max(0, 10*C - S) / 9)`, where `S` and `C` are pre-burn mint supply and
+core-custody balance. Solana Clock is the only time input; core releases fail
+closed until the day is reconciled. There is no preliminary 00:00 write: at or
+after 00:01, one permissionless atomic transition observes the current balance,
+executes the burn, and finalizes that day's Daily Law decision, preventing an
+inbound custody change during the intervening minute from escaping the burn.
+
+The protocol cannot prove that an unrelated pseudonymous wallet is secretly
+controlled by a team member. The enforceable scope is therefore immutable
+program custody, not a claim about hidden human ownership. This boundary and
+its remaining Mainnet decisions are recorded in
+[CORE_TEAM_CAP.md](CORE_TEAM_CAP.md).
+
 ## 5. Positions and rewards
 
 User positions last 52 weeks. The core reward lasts 104 weeks. Rates remain:
@@ -238,6 +255,27 @@ commitment, domain separation, exact-uniform rejection sampling, no operator
 reroll, and the terminal 86,400-second neutral-expiry path. The final reviewed
 transport remains an open implementation decision and is distinct from the
 Daily Law's slot-hash input.
+
+### 6.1 Operator factions
+
+B3 defines five fixed factions whose public leaders are Radiance, Ellie, Alia,
+Ece, and the unnamed male character referred to only as **the boss**. These are
+narrative identities, not signers or authorities. One operator may pledge to
+one faction and may switch at the exact Solana-Clock boundary 86,400 seconds
+after the prior change.
+
+Every faction write is subordinate to the IAT-wide Daily Law. Pledges, switches,
+scoring, finalization, funding, and claims fail closed when the day is absent or
+selected; standings and history remain readable. Weekly proportional allocation
+uses whole base units and carries fractional dust forward. Equal follower
+rewards use equal whole-unit shares and carry any indivisible remainder forward.
+
+Trustless recurring rewards require a one-time, immutable, capped carve-out
+from the community lane into a faction PDA. Without that explicit V2 custody
+relaxation, every weekly reward depends on a hardware-wallet signature and is
+stoppable. Exact scoring, Sybil resistance, carve-out amount, period anchor,
+tie handling, follower snapshot, NFT authority, expiry, and funding horizon are
+not yet frozen. [FACTIONS.md](FACTIONS.md) is normative for the current boundary.
 
 ## 7. Canonical mint and migration boundary
 
@@ -303,12 +341,14 @@ than inferred.
 3. implement permissionless day finalization and fail-closed IAT vectors;
 4. measure entropy access, account rent, transaction count, proof time, and fees;
 5. port V2 economic modules with differential tests;
-6. build confidential-wallet key recovery, pending-balance, and error UX;
-7. determine and rehearse canonical mint creation or migration;
-8. obtain independent Solana, cryptographic, economic, migration, and legal
+6. freeze and implement the core-cap custody path and faction economics only
+   after their explicit Mainnet parameters are resolved;
+7. build confidential-wallet key recovery, pending-balance, and error UX;
+8. determine and rehearse canonical mint creation or migration;
+9. obtain independent Solana, cryptographic, economic, migration, and legal
    review;
-9. publish reproducible binaries, mint configuration, test vectors, and evidence;
-10. revoke authorities only after all release gates pass.
+10. publish reproducible binaries, mint configuration, test vectors, and evidence;
+11. revoke authorities only after all release gates pass.
 
 ## 12. Open decisions
 
@@ -319,6 +359,9 @@ than inferred.
 - confidential-wallet support and recovery policy;
 - selective disclosure and whether any future auditor-key proposal is acceptable;
 - application-level randomness transport for preserved V2 tiebreaks;
+- faction scoring, Sybil resistance, epoch, tie, funding, reward, NFT, and
+  expiry rules;
+- exact core-custody scope and the definition of live supply for the 10% cap;
 - legal, tax, and jurisdictional review.
 
 Until these are resolved, prototyped, measured, and independently reviewed, B3

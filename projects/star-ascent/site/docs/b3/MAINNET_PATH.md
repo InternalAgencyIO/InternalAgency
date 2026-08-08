@@ -54,6 +54,10 @@ State: **OPEN**
 - prove ordinary and confidential transfers both invoke Transfer Hook;
 - prove the hook cannot read a confidential amount;
 - prove required extensions coexist in the exact deployed version;
+- enforce the exact approved mint-extension allowlist on-chain; required-
+  extension presence alone is insufficient, and Permanent Delegate,
+  permissioned burn, mint-close, pausable, or any other unapproved
+  authority-bearing extension is a hard failure;
 - record wallet, explorer, indexer, hardware-signer, and RPC compatibility.
 
 ## Gate 2 — immutable IAT Daily Law adapter
@@ -97,6 +101,11 @@ State: **OPEN**
 - if migration is required, implement two independent exporters and importers;
 - publish a canonical manifest, Merkle root, and zero-difference reconciliation;
 - prove no duplicate canonical supply can circulate under the chosen model.
+- freeze the exact core-custody definition and prove the daily 10% post-burn
+  invariant without a permanent delegate;
+- freeze faction scoring, Sybil, epoch, tie, community-carve-out, follower
+  snapshot, NFT authority, remainder, expiry, and funding-horizon rules;
+- prove every faction write directly fails closed under the Daily Law.
 
 ## Gate 5 — adversarial Devnet program
 
@@ -109,6 +118,11 @@ State: **OPEN**
 - test rollback, replay, stale record, skipped slot, direct Token-2022 call,
   confidential direct call, transfer-hook account substitution, and RPC failure;
 - run ordinary-transfer and confidential-transfer load tests;
+- run core-cap `23:59:59`/`00:00:00`/`00:01:00`, no-excess, excess, stale-day,
+  post-burn-minimality, pre-finalization inbound-custody race,
+  lockdown-ordering, and forged-vault tests;
+- run faction first-pledge, `86,399`/`86,400` switch, no-op, missing/locked-day,
+  Sybil, tie, proportional-conservation, zero-follower, and idempotence tests;
 - publish reproducible binaries, IDLs, addresses, transaction signatures, and logs.
 
 ## Gate 6 — independent review
@@ -153,5 +167,9 @@ capture before requesting any signature.
 3. run exact-version Devnet compatibility tests only after explicit deployment authorization;
 4. benchmark ordinary-transfer overhead before adding wallet privacy UX;
 5. implement opt-in confidential-account flows;
-6. determine the live canonical-mint state and migration consequence;
-7. begin independent review only from pinned, reproducible artifacts.
+6. resolve and implement the core-cap custody boundary and sealed faction
+   economics without adding privileged token authority;
+7. measure the complete law, faction, retained-V2, mint, and state-account peak
+   against the accepted 3 SOL ceiling;
+8. determine the live canonical-mint state and migration consequence;
+9. begin independent review only from pinned, reproducible artifacts.

@@ -104,10 +104,47 @@ to chase the former 1.5 SOL peak target; reliability and retained V2 behavior
 remain higher priorities. The complete retained-feature B3 aggregate must still
 be measured against 3 SOL before Mainnet approval.
 
+The new faction module and core-team cap do not fit into the existing cost claim
+for free. At the measured `1.97768400 SOL` law peak, only `1.02231600 SOL`
+remains under the aggregate ceiling, corresponding to roughly 73,191 additional
+loader-v3 program bytes before mint/state-account rent and retained V2 modules.
+A separate faction program, core-vault burn CPI, reward state, NFT accounts, or
+duplicated framework runtime may exceed that headroom. No feature may be gutted
+to force the number; measure the complete artifact set and report infeasibility
+if it exceeds 3 SOL.
+
 These figures cover only the B3 law program. They do not include the retained
 V2 program, mint/account rent, optional Privacy Vault work, migration,
 operations, RPC/indexing, or audits. Aggregate deployment funding must report
 all artifacts that will actually remain on-chain.
+
+### Loader-v4 lower-bound sensitivity
+
+The locally pinned Solana CLI `3.1.10` exposes loader-v4, whose program account
+stores one 48-byte loader state followed directly by the ELF. The pinned Agave
+implementation funds that single account to rent exemption for exactly the
+loader-state offset plus the ELF length. This is a useful optimistic
+lower-bound check, not a Mainnet loader selection or deployment authorization:
+
+```text
+loader_v4_permanent(B) = (B + 48 + 128) * 6_960 lamports
+```
+
+Using the exact current optimized artifacts:
+
+- retained V2 (`524,672` bytes): `3.65294208 SOL` permanent rent;
+- B3 Daily Law (`141,824` bytes): `0.98832000 SOL` permanent rent;
+- both binaries alone: `4.64126208 SOL` permanent rent.
+
+Therefore the accepted `3 SOL` **aggregate** target is not achievable with the
+current retained V2 binary plus the B3 law binary, even under this optimistic
+single-account loader-v4 lower bound and before mint/state rent or fees. A
+safe native B3 successor rewrite and a new measured artifact are required. The
+code must not be gutted to force the target; if the full retained-feature
+successor remains above 3 SOL, the target must be relaxed.
+
+Primary implementation reference:
+<https://github.com/anza-xyz/agave/blob/v3.1.10/programs/loader-v4/src/lib.rs>.
 
 ## 4. Exact byte ceilings
 
@@ -177,6 +214,8 @@ is intentionally not part of the selected low-cost profile.
 5. Evaluate module boundaries for auditability and upgrade isolation.
 6. Rebuild reproducibly and rerun Rust, JavaScript, local-validator, Devnet,
    and independent review gates after every candidate change.
+7. Attribute faction and core-cap code/state separately, then report aggregate
+   peak funding rather than counting only the smallest frozen law binary.
 
 Splitting a monolith is not automatically cheaper: duplicated framework code
 can increase permanent rent, and all deployed program accounts count. Every

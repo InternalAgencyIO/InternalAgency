@@ -11,9 +11,14 @@ export const NORMAL_DAY_LOCKDOWN_NUMERATOR = 100n;
 export const FRIDAY_LOCKDOWN_NUMERATOR = 6_667n;
 export const DAILY_LOCKDOWN_ERROR = "DAILY_LOCKDOWN";
 export const DAILY_LOCKDOWN_LAW_ID = "IAT_B3_DAILY_LOCKDOWN_LAW_V1";
+export const IAT_DAY_UNFINALIZED_ERROR = "IAT_DAY_UNFINALIZED";
+export const IAT_DAY_STALE_ERROR = "IAT_DAY_STALE";
+export const IAT_DAILY_LOCKDOWN_ERROR = "IAT_DAILY_LOCKDOWN";
+export const INVALID_DAILY_LAW_STATE_ERROR = "INVALID_IAT_DAILY_LAW_STATE";
 
 const TWO_TO_256 = 1n << 256n;
 const UNBIASED_DRAW_LIMIT = TWO_TO_256 - (TWO_TO_256 % DRAW_DENOMINATOR);
+const acceptedDailyLawStates = new WeakSet();
 
 export const OPERATION_KIND = Object.freeze({
   USER_TRANSACTION: "USER_TRANSACTION",
@@ -260,6 +265,137 @@ export function validateLockdownDecision(decision, schedule) {
     }
   }
   return true;
+}
+
+function canonicalDecisionForDay(decision, expectedLocalDay, schedule, label) {
+  if (decision === null || decision === undefined) {
+    throw new Error(`${label} is required`);
+  }
+  validateLockdownDecision(decision, schedule);
+  const expectedDay = asInteger(expectedLocalDay, "expectedLocalDay");
+  if (decision.localDay !== expectedDay) {
+    throw new Error(IAT_DAY_STALE_ERROR);
+  }
+  return createLockdownDecision({
+    localDay: decision.localDay,
+    randomnessOutputHex: decision.randomnessOutputHex,
+    schedule,
+  });
+}
+
+/**
+ * Construct the reference equivalent of the Daily Law PDA loaded by an
+ * on-chain adapter. The private acceptance brand prevents downstream reference
+ * modules from treating a caller-authored object or an `ALLOWED` string as
+ * canonical state. Mainnet must provide the equivalent boundary with owner,
+ * address/seed, discriminator, and canonical SlotHashes provenance checks.
+ */
+export function createDailyLawState({
+  protocolHeight,
+  schedule,
+  currentDecision = null,
+  previousDecision = null,
+}) {
+  const spec = normalizeSchedule(schedule);
+  const height = asInteger(protocolHeight, "protocolHeight");
+  const currentLocalDay = protocolLocalDay(
+    nominalUnixSecondsAtHeight(height, spec),
+  );
+  let canonicalCurrentDecision = null;
+  let canonicalPreviousDecision = null;
+
+  if (currentDecision !== null && currentDecision !== undefined) {
+    canonicalCurrentDecision = canonicalDecisionForDay(
+      currentDecision,
+      currentLocalDay,
+      spec,
+      "currentDecision",
+    );
+    if (previousDecision !== null && previousDecision !== undefined) {
+      canonicalPreviousDecision = canonicalDecisionForDay(
+        previousDecision,
+        currentLocalDay - 1n,
+        spec,
+        "previousDecision",
+      );
+    }
+  } else {
+    canonicalPreviousDecision = canonicalDecisionForDay(
+      previousDecision,
+      currentLocalDay - 1n,
+      spec,
+      "previousDecision",
+    );
+    const currentWindow = dailyLockdownWindow(currentLocalDay, spec);
+    if (height < currentWindow.decisionHeight) {
+      throw new Error(IAT_DAY_UNFINALIZED_ERROR);
+    }
+    if (isDailyLockdown(height, canonicalPreviousDecision, spec)) {
+      throw new Error(`${INVALID_DAILY_LAW_STATE_ERROR}: previous day is still active`);
+    }
+  }
+
+  const state = Object.freeze({
+    lawId: DAILY_LOCKDOWN_LAW_ID,
+    protocolHeight: height,
+    currentLocalDay,
+    schedule: spec,
+    currentDecision: canonicalCurrentDecision,
+    previousDecision: canonicalPreviousDecision,
+  });
+  acceptedDailyLawStates.add(state);
+  return state;
+}
+
+function assertAcceptedDailyLawState(state) {
+  if (
+    state === null ||
+    typeof state !== "object" ||
+    !acceptedDailyLawStates.has(state)
+  ) {
+    throw new Error(INVALID_DAILY_LAW_STATE_ERROR);
+  }
+  return state;
+}
+
+/** Validate a canonical current-day decision before any IAT state change. */
+export function assertDailyLawWriteAllowed(state) {
+  const accepted = assertAcceptedDailyLawState(state);
+  if (accepted.currentDecision === null) {
+    throw new Error(IAT_DAY_UNFINALIZED_ERROR);
+  }
+  if (
+    isDailyLockdown(
+      accepted.protocolHeight,
+      accepted.currentDecision,
+      accepted.schedule,
+    )
+  ) {
+    throw new Error(IAT_DAILY_LOCKDOWN_ERROR);
+  }
+  return accepted;
+}
+
+/**
+ * Validate the one transition state in which the new day is not finalized and
+ * the preceding decision is canonical and closed. This is reserved for one
+ * combined core-cap-reconcile + Daily-Law-finalize instruction.
+ */
+export function assertDailyLawUnfinalizedTransition(state) {
+  const accepted = assertAcceptedDailyLawState(state);
+  if (accepted.currentDecision !== null || accepted.previousDecision === null) {
+    throw new Error("IAT_DAY_ALREADY_FINALIZED");
+  }
+  if (
+    isDailyLockdown(
+      accepted.protocolHeight,
+      accepted.previousDecision,
+      accepted.schedule,
+    )
+  ) {
+    throw new Error(IAT_DAILY_LOCKDOWN_ERROR);
+  }
+  return accepted;
 }
 
 export function isDailyLockdown(protocolHeight, decision, schedule) {

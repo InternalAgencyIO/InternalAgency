@@ -264,6 +264,14 @@ distinct. Treasury, ecosystem, core-team, and liquidity vesting semantics are
 ported exactly, including Genesis-unlocked amounts, cliffs, and linear end
 weeks.
 
+Two owner-directed B3 laws modify only release boundaries, not the original
+allocation arithmetic. A fixed, capped community carve-out must pre-fund the
+faction reward vault if recurring faction rewards are to be trustless; its
+amount is still a Mainnet blocker. Protocol-originated core-team principal and
+rewards must pass through the immutable 10%-of-live-supply custody cap described
+in [CORE_TEAM_CAP.md](CORE_TEAM_CAP.md). Neither rule introduces mint, freeze,
+or permanent-delegate authority.
+
 ### 5.3 Reward reservation ledger
 
 Preserve the V2 solvency rule:
@@ -307,7 +315,22 @@ for bias resistance, liveness, withholding incentives, public verifiability,
 and deterministic replay. No replacement is accepted merely because it makes
 the binary smaller.
 
-### 5.7 Identity and public-node activation
+### 5.7 Operator factions
+
+B3 adds five fixed factions led narratively by Radiance, Ellie, Alia, Ece, and
+the unnamed male character referred to only as **the boss**. Leaders hold no
+keys or protocol privilege. Operators may pledge once immediately and switch
+only after an exact 86,400-second Solana-Clock cooldown.
+
+Faction scoring, finalization, and rewards live outside the immutable transfer
+hook, but every faction write validates the canonical Daily Law state directly
+and every IAT payout also passes the canonical transfer hook. A missing or
+selected day rejects pledges, switches, score writes, finalization, funding, and
+claims; read-only standings remain available. The fixed identifiers, integer
+accounting, and fail-closed transitions are specified in
+[FACTIONS.md](FACTIONS.md).
+
+### 5.8 Identity and public-node activation
 
 Preserve the existing wallet/X identity binding, uniqueness, age and
 subscription checks, daily caps, replay resistance, short-lived sessions,
@@ -315,7 +338,7 @@ atomic D1 semantics, rollback behavior, and fail-closed operation. This remains
 an off-chain eligibility boundary unless a separately reviewed protocol design
 moves specific facts on-chain.
 
-### 5.8 Public website, explorer, admin, and evidence
+### 5.9 Public website, explorer, admin, and evidence
 
 The live website, both domains, the 50-locale route system, localized review
 holds, network explorer, tokenomics, inactive future previews, admin inspection
@@ -372,6 +395,10 @@ activation therefore begins with an independent live-chain check:
 ### Phase 3: V2 continuity
 
 - preserve allocations, vesting, reservations, positions, and settlement;
+- add the core-custody daily cap without altering fixed-supply or V2 accrual
+  arithmetic;
+- implement five-faction allegiance and reward accounting only after scoring,
+  Sybil, funding, tie, and prize manifests are frozen;
 - prove optional confidentiality changes no V2 economic arithmetic;
 - retain all existing V2 differential and launch-gate tests.
 
@@ -402,6 +429,9 @@ B3 cannot advance from a phase while any of these fail:
 - supply, allocation, reservation, or settlement differs from canonical V2;
 - inactive DLC becomes reachable;
 - canonical supply, migrated supply if any, or allocation state does not reconcile;
+- faction scoring, reward funding, or core-cap custody relies on a privileged
+  character, hidden wallet list, external clock, or identity oracle;
+- a faction write succeeds while the Daily Law is missing, stale, or selected;
 - a cost reduction weakens a security or audit invariant;
 - reproducible build or independent review is missing.
 
@@ -417,6 +447,10 @@ The following require measured prototypes, not assumption:
 - selective-disclosure UX and whether a future auditor-key proposal is ever
   acceptable;
 - legal and jurisdictional treatment of the hosted confidential-transfer UI.
+- faction scoring source, Sybil resistance, epoch anchor, tie handling, reward
+  amount, funding horizon, eligibility snapshot, NFT authority, and expiry;
+- whether `active tokens` for the core cap means canonical live mint supply and
+  whether the enforceable scope is limited to immutable core custody.
 
 As of 2026-08-08, the owner accepts a `3 SOL` aggregate fresh-payer peak
 ceiling for B3 project deployment. The optimized native law alone measures
