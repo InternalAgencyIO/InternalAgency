@@ -1,0 +1,58 @@
+{
+  "batch": 263,
+  "country": "Belarus",
+  "status": "accepted",
+  "acceptedScenes": [
+    "1072-belarus-minsk-lightning-route-grid.png",
+    "1073-belarus-mir-overcast-signal-cipher.png",
+    "1074-belarus-braslav-lenticular-star-map-relay.png",
+    "1075-belarus-belovezhskaya-fog-arrival.png"
+  ],
+  "preservedOriginals": ["1072-belarus-minsk-lightning-route-grid-raw-original.png"],
+  "blockedScenes": [],
+  "rollMethod": "FNV-1a over batch263-belarus-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1072": {
+      "weather": { "roll": 49, "result": "lightning storm" }, "paws": { "roll": 30, "active": false }, "poleDanceTheme": { "roll": 13, "active": false }, "rainbowOnly": { "roll": 55, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 94, "result": "shame and social vulnerability" }, "visibleMidriff": 76, "straplessDress": 56, "fullyOpenBack": 46 },
+        "Ellie": { "emotion": { "roll": 92, "result": "guilt and remorse" }, "visibleMidriff": 42, "straplessDress": 82, "fullyOpenBack": 72 },
+        "Alia": { "emotion": { "roll": 92, "result": "guilt and remorse" }, "visibleMidriff": 70, "straplessDress": 82, "fullyOpenBack": 76 },
+        "AI ECE": { "emotion": { "roll": 74, "result": "betrayal shock" }, "visibleMidriff": 4, "straplessDress": 40, "fullyOpenBack": 54 }
+      }
+    },
+    "1073": {
+      "weather": { "roll": 26, "result": "overcast" }, "paws": { "roll": 51, "active": false }, "poleDanceTheme": { "roll": 28, "active": false }, "rainbowOnly": { "roll": 12, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 75, "result": "contained resentment" }, "visibleMidriff": 57, "straplessDress": 13, "fullyOpenBack": 13 },
+        "Ellie": { "emotion": { "roll": 23, "result": "playful mischief" }, "visibleMidriff": 89, "straplessDress": 25, "fullyOpenBack": 85 },
+        "Alia": { "emotion": { "roll": 89, "result": "anger" }, "visibleMidriff": 71, "straplessDress": 19, "fullyOpenBack": 11 },
+        "AI ECE": { "emotion": { "roll": 99, "result": "emotional exhaustion" }, "visibleMidriff": 29, "straplessDress": 13, "fullyOpenBack": 89 }
+      }
+    },
+    "1074": {
+      "weather": { "roll": 95, "result": "lenticular clouds" }, "paws": { "roll": 64, "active": false }, "poleDanceTheme": { "roll": 79, "active": false }, "rainbowOnly": { "roll": 53, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 36, "result": "magnetic confidence" }, "visibleMidriff": 82, "straplessDress": 10, "fullyOpenBack": 96 },
+        "Ellie": { "emotion": { "roll": 26, "result": "calm contentment" }, "visibleMidriff": 8, "straplessDress": 8, "fullyOpenBack": 82 },
+        "Alia": { "emotion": { "roll": 38, "result": "magnetic confidence" }, "visibleMidriff": 28, "straplessDress": 12, "fullyOpenBack": 66 },
+        "AI ECE": { "emotion": { "roll": 28, "result": "hope" }, "visibleMidriff": 78, "straplessDress": 22, "fullyOpenBack": 32 }
+      }
+    },
+    "1075": {
+      "weather": { "roll": 64, "result": "fog" }, "paws": { "roll": 21, "active": true }, "poleDanceTheme": { "roll": 94, "active": false }, "rainbowOnly": { "roll": 26, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 49, "result": "startled surprise" }, "visibleMidriff": 43, "straplessDress": 23, "fullyOpenBack": 63 },
+        "Ellie": { "emotion": { "roll": 73, "result": "betrayal shock" }, "visibleMidriff": 91, "straplessDress": 7, "fullyOpenBack": 23 },
+        "Alia": { "emotion": { "roll": 99, "result": "emotional exhaustion" }, "visibleMidriff": 93, "straplessDress": 9, "fullyOpenBack": 77 },
+        "AI ECE": { "emotion": { "roll": 25, "result": "calm contentment" }, "visibleMidriff": 47, "straplessDress": 95, "fullyOpenBack": 47 }
+      }
+    }
+  },
+  "recovery": "Scene 1073 was accepted after one simplified recovery pass. Scene 1072 received one anatomy cleanup pass to remove a stray disembodied hand while preserving its raw original.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "not required; accepted garments read as concise cocktail proportions",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "nextQueueCountry": "Belgium"
+}
