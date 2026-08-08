@@ -206,7 +206,9 @@ permanently close after the committed set is exhausted.
    `expire_round`, `close_position`, and `settle_round`; retain the compile-time
    inactive CCC boundary and compare exact outputs/errors. `close_position` is
    second because it is a reachable V2 business transition with no lifecycle,
-   CPI, randomness, or network boundary.
+   CPI, randomness, or network boundary. Add only the pure pre-lifecycle
+   `commit_round` adjacent-instruction proof and snapshot constructor here; its
+   round-account creation remains in step 5.
 5. Port the eight account-creating paths with manual post-gate System Program
    CPIs and prove locked/unfinalized calls perform no successful CPI or state
    change.
@@ -233,6 +235,8 @@ only the by-value `close_position` ledger transition behind the same opaque law
 capability, with V2 differential tests. The third adds only `settle_round`: its
 production wrapper remains CCC-disabled, while its private by-value kernel
 differential-tests the exact V2 Switchboard reveal validation and uniform
-tiebreak transition. None of those may be exposed as a write entrypoint. The
-first safe deployable slice is the complete fifteen-row dispatcher behind the
-frozen Token-2022 hook, not a single handler.
+tiebreak transition. The fourth adds only the host-side `commit_round` proof and
+snapshot kernel: it verifies the immediately preceding Switchboard commit and
+returns pending state without creating an account. None of those may be exposed
+as a write entrypoint. The first safe deployable slice is the complete
+fifteen-row dispatcher behind the frozen Token-2022 hook, not a single handler.

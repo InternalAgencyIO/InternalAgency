@@ -120,7 +120,7 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
-test("the host-only port contains exactly the first three gated pure transitions", () => {
+test("the host-only port contains exactly the first four gated pure transitions", () => {
   assert.deepEqual(matrix.hostOnlyPureTransitions, [
     {
       name: "expire_round",
@@ -140,6 +140,12 @@ test("the host-only port contains exactly the first three gated pure transitions
       v2DifferentialTests: true,
       publicExposure: false,
     },
+    {
+      name: "commit_round",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      publicExposure: false,
+    },
   ]);
   assert.match(
     economySource,
@@ -153,9 +159,17 @@ test("the host-only port contains exactly the first three gated pure transitions
   );
   assert.match(economySource, /fn settle_pending_round\(/u);
   assert.match(economySource, /struct ReadonlyRoundRandomnessAccount/u);
+  assert.match(
+    economySource,
+    /pub fn commit_round\(\s*gate: &ValidatedDailyLawWrite,/u,
+  );
+  assert.match(economySource, /fn commit_round_transition\(/u);
+  assert.match(economySource, /struct ReadonlyInstructionTrace/u);
+  assert.match(economySource, /fn immediately_preceding_instruction\(/u);
+  assert.match(economySource, /fn validate_round_commit_instruction\(/u);
   assert.doesNotMatch(
     economyCode,
-    /pub fn (?:initialize_config|initialize_lane_vault|initialize_stake_vault|activate|register_agency|set_eligibility|open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal|commit_round)\s*\(/u,
+    /pub fn (?:initialize_config|initialize_lane_vault|initialize_stake_vault|activate|register_agency|set_eligibility|open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal)\s*\(/u,
   );
 });
 

@@ -25,11 +25,11 @@ The faction and core-team-cap implementations currently present under
 `programs/iat_b3_reference` remain executable JavaScript specifications. The
 new host-only `iat_b3_economy` library contains immutable V2 constants, an
 exact read-only Daily Law codec/verifier, an opaque validated-write capability,
-and internal pure `expire_round`, `close_position`, and `settle_round`
-transitions. Its manifest is `lib`-only and it has no Solana entrypoint or
-public dispatcher, account lifecycle, token CPI, or network access. Neither the
-JavaScript specifications nor these pure Rust slices may be counted as on-chain
-faction or core-cap enforcement.
+and internal pure `expire_round`, `close_position`, `settle_round`, and
+`commit_round` transitions. Its manifest is `lib`-only and it has no Solana
+entrypoint or public dispatcher, account lifecycle, token CPI, or network
+access. Neither the JavaScript specifications nor these pure Rust slices may be
+counted as on-chain faction or core-cap enforcement.
 
 This is a hard Mainnet blocker. Adding a check to only the V2 transfer helper
 would be insufficient: several V2 handlers mutate protocol ledgers without a
@@ -73,12 +73,24 @@ gate and must not be counted as one if a future binary enables the DLC.
 
 ## Host-only B3 port progress
 
-`expire_round` remains the first pure transition and `close_position` the
-second. `settle_round` is the third and only additional handler-body transition
-currently present in `iat_b3_economy`. Its production wrapper requires the
-opaque canonical Daily Law capability and then preserves the immutable
-CCC-disabled Genesis boundary before inspecting caller-supplied round or
-randomness values. Its private by-value differential kernel preserves V2's
+`expire_round` remains the first pure transition, `close_position` the second,
+and `settle_round` the third. `commit_round` is the fourth and only additional
+handler-body kernel currently present in `iat_b3_economy`. Every production
+wrapper requires the opaque canonical Daily Law capability. The three CCC
+wrappers then preserve the immutable CCC-disabled Genesis boundary before
+inspecting caller-supplied round, instruction-trace, or randomness values.
+
+The `commit_round` differential kernel performs no account creation. It accepts
+a decoded read-only instructions-sysvar trace, selects only the instruction
+immediately preceding the current index, validates the pinned Switchboard
+program/discriminator/randomness-account/payer metas, proves a fresh unrevealed
+commit, and returns the exact pending-round snapshot by value. Adversarial tests
+reject missing/zero/out-of-range indices, a valid but non-adjacent commit, every
+malformed commit meta, invalid randomness, stale seed slots, and already
+revealed state. The oracle uses the actual V2 `Config` and `Round` types plus V2
+cadence, context, and Switchboard parsing functions.
+
+The `settle_round` private by-value differential kernel preserves V2's
 config-active, pending-status, randomness-owner, reveal-window, pinned-codec,
 freshness, commit-slot, reveal-order, uniform-selection, and terminal mutation
 order. Tests use the actual V2 `Round` type, Switchboard parser, and tiebreak
@@ -92,8 +104,10 @@ actual V2 `Position` and `LaneVault` types.
 These are not account adapters or deployable handlers. A future native adapter
 must still prove account ownership, exact config/round/randomness bindings,
 PDAs, codecs, and bumps before its first mutable borrow, and must source Clock
-timestamp/slot from one Solana Clock observation. The complete dispatcher
-remains absent and disabled until all fifteen rows pass together.
+timestamp/slot from one Solana Clock observation. For `commit_round`, it must
+decode the canonical instructions sysvar itself and create the round PDA only
+after the Daily Law and pure proof succeed. The complete dispatcher remains
+absent and disabled until all fifteen rows pass together.
 
 ## Internal V2 mutation paths
 

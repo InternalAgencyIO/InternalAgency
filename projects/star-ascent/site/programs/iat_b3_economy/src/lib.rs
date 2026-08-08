@@ -25,6 +25,7 @@ pub const CCC_AGENT_RATE_BPS: u64 = 2_800;
 pub const CCC_ASSOCIATE_RATE_BPS: u64 = 2_000;
 pub const TIEBREAK_DOMAIN: &[u8] = b"IAT_TIEBREAK_V1";
 pub const TIEBREAK_MAX_DERIVATION_ATTEMPTS: u32 = 16;
+pub const CCC_TIEBREAK_CONTEXT_DOMAIN: &[u8] = b"IAT_CCC_WEEKLY_TIEBREAK_V1";
 
 pub const COMMUNITY: u8 = 0;
 pub const TREASURY: u8 = 1;
@@ -45,6 +46,7 @@ pub const LAW_STATE_VERSION: u8 = 1;
 pub const LAW_STATE_LEN: usize = 160;
 
 pub const RANDOMNESS_DISCRIMINATOR: [u8; 8] = [10, 66, 229, 135, 220, 239, 217, 114];
+pub const RANDOMNESS_COMMIT_DISCRIMINATOR: [u8; 8] = [52, 170, 152, 201, 179, 133, 242, 141];
 pub const RANDOMNESS_ACCOUNT_SIZE: usize = 408;
 const RANDOMNESS_SEED_SLOT_START: usize = 104;
 const RANDOMNESS_REVEAL_SLOT_START: usize = 144;
@@ -142,6 +144,88 @@ pub struct SettleRoundResult {
     pub reveal_slot: u64,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct CommitRoundResult {
+    pub round: RoundState,
+    pub round_bump: u8,
+}
+
+/// Exact retained V2 config projection consumed by `commit_round`. It is a
+/// semantic value only; a future native adapter must validate and decode the
+/// canonical config PDA before constructing it.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct CommitRoundConfigState {
+    pub key: [u8; 32],
+    pub randomness_program: [u8; 32],
+    pub agency_registry_hash: [u8; 32],
+    pub genesis_timestamp: i64,
+    pub agency_count: u32,
+    pub active: bool,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct InstructionAccountMeta {
+    pub key: [u8; 32],
+    pub is_signer: bool,
+    pub is_writable: bool,
+}
+
+/// Framework-neutral decoded instruction used only to prove the immediately
+/// preceding Switchboard commit. No instruction is executed by this crate.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ReadonlyInstruction<'a> {
+    program_id: [u8; 32],
+    accounts: &'a [InstructionAccountMeta],
+    data: &'a [u8],
+}
+
+impl<'a> ReadonlyInstruction<'a> {
+    pub const fn new(
+        program_id: [u8; 32],
+        accounts: &'a [InstructionAccountMeta],
+        data: &'a [u8],
+    ) -> Self {
+        Self {
+            program_id,
+            accounts,
+            data,
+        }
+    }
+}
+
+/// Decoded canonical instructions-sysvar view. `current_instruction_index`
+/// remains optional so malformed/missing sysvar decoding fails with the exact
+/// retained V2 error before any state snapshot is returned.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ReadonlyInstructionTrace<'a> {
+    current_instruction_index: Option<u16>,
+    instructions: &'a [ReadonlyInstruction<'a>],
+}
+
+impl<'a> ReadonlyInstructionTrace<'a> {
+    pub const fn new(
+        current_instruction_index: Option<u16>,
+        instructions: &'a [ReadonlyInstruction<'a>],
+    ) -> Self {
+        Self {
+            current_instruction_index,
+            instructions,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct CommitRoundInput<'a> {
+    pub config: CommitRoundConfigState,
+    pub week: u64,
+    pub payer: [u8; 32],
+    pub randomness_account_key: [u8; 32],
+    pub randomness_account: ReadonlyRoundRandomnessAccount<'a>,
+    pub instruction_trace: ReadonlyInstructionTrace<'a>,
+    pub clock_slot: u64,
+    pub round_bump: u8,
+}
+
 /// Read-only Switchboard account facts supplied by a future native adapter.
 /// The adapter must bind the key to `RoundState.randomness_account` before
 /// calling this host-only kernel; owner, codec, commit, and reveal freshness
@@ -173,6 +257,12 @@ pub enum EconomyError {
     ReservationLedgerMismatch,
     CccDlcNotActive,
     RandomnessAdapterNotVerified,
+    NoEligibleAgencies,
+    CccSelectionNotOpen,
+    WrongRoundWeek,
+    RandomnessCommitInstructionMissing,
+    InvalidRandomnessCommitInstruction,
+    RandomnessCommitNotFresh,
     RoundAlreadySettled,
     WrongRandomnessProgram,
     RoundRevealWindowExpired,
@@ -322,6 +412,150 @@ pub fn expire_round(
         return Err(EconomyError::CccDlcNotActive);
     }
     expire_pending_round(round, gate.unix_timestamp)
+}
+
+/// Production-facing retained V2 `commit_round` boundary. The Genesis build
+/// remains CCC-disabled, so this returns before validating the decoded
+/// instruction trace or constructing a round snapshot. No account is created
+/// and no instruction is invoked by this host-only library.
+pub fn commit_round(
+    gate: &ValidatedDailyLawWrite,
+    input: CommitRoundInput<'_>,
+) -> Result<CommitRoundResult, EconomyError> {
+    if !CCC_DLC_GENESIS_ENABLED {
+        return Err(EconomyError::CccDlcNotActive);
+    }
+    if !RANDOMNESS_ADAPTER_VERIFIED {
+        return Err(EconomyError::RandomnessAdapterNotVerified);
+    }
+    commit_round_transition(input, gate.unix_timestamp)
+}
+
+fn commit_round_transition(
+    input: CommitRoundInput<'_>,
+    clock_unix_timestamp: i64,
+) -> Result<CommitRoundResult, EconomyError> {
+    if !input.config.active {
+        return Err(EconomyError::NotActive);
+    }
+    if input.config.agency_count == 0 {
+        return Err(EconomyError::NoEligibleAgencies);
+    }
+
+    let expected_week = current_ccc_round(input.config.genesis_timestamp, clock_unix_timestamp)
+        .ok_or(EconomyError::CccSelectionNotOpen)?;
+    if input.week != expected_week {
+        return Err(EconomyError::WrongRoundWeek);
+    }
+    if input.randomness_account.owner != input.config.randomness_program {
+        return Err(EconomyError::WrongRandomnessProgram);
+    }
+
+    let commit_instruction = immediately_preceding_instruction(input.instruction_trace)?;
+    validate_round_commit_instruction(
+        commit_instruction,
+        input.config.randomness_program,
+        input.randomness_account_key,
+        input.payer,
+    )
+    .map_err(|()| EconomyError::InvalidRandomnessCommitInstruction)?;
+
+    let randomness = parse_round_randomness(input.randomness_account.data)
+        .ok_or(EconomyError::InvalidRandomnessAccount)?;
+    if input.clock_slot.checked_sub(1) != Some(randomness.seed_slot)
+        || randomness.reveal_slot == input.clock_slot
+    {
+        return Err(EconomyError::RandomnessCommitNotFresh);
+    }
+
+    let decision_context = ccc_tiebreak_context(
+        input.config.key,
+        input.week,
+        input.config.agency_registry_hash,
+    );
+    Ok(CommitRoundResult {
+        round: RoundState {
+            config: input.config.key,
+            randomness_account: input.randomness_account_key,
+            week: input.week,
+            commit_slot: randomness.seed_slot,
+            commit_timestamp: clock_unix_timestamp,
+            randomness: [0; 32],
+            agency_registry_hash_snapshot: input.config.agency_registry_hash,
+            decision_context,
+            agency_count_snapshot: input.config.agency_count,
+            selected_agency_index: NO_SELECTED_AGENCY,
+            derivation_counter: NO_DERIVATION_COUNTER,
+            status: ROUND_PENDING,
+        },
+        round_bump: input.round_bump,
+    })
+}
+
+fn immediately_preceding_instruction(
+    trace: ReadonlyInstructionTrace<'_>,
+) -> Result<ReadonlyInstruction<'_>, EconomyError> {
+    let current_index = usize::from(
+        trace
+            .current_instruction_index
+            .ok_or(EconomyError::RandomnessCommitInstructionMissing)?,
+    );
+    if current_index == 0 || current_index >= trace.instructions.len() {
+        return Err(EconomyError::RandomnessCommitInstructionMissing);
+    }
+    trace
+        .instructions
+        .get(current_index - 1)
+        .copied()
+        .ok_or(EconomyError::RandomnessCommitInstructionMissing)
+}
+
+fn validate_round_commit_instruction(
+    instruction: ReadonlyInstruction<'_>,
+    randomness_program: [u8; 32],
+    randomness_account: [u8; 32],
+    authority: [u8; 32],
+) -> Result<(), ()> {
+    if instruction.program_id != randomness_program
+        || instruction
+            .data
+            .get(..RANDOMNESS_COMMIT_DISCRIMINATOR.len())
+            != Some(RANDOMNESS_COMMIT_DISCRIMINATOR.as_slice())
+        || instruction.accounts.len() < 5
+    {
+        return Err(());
+    }
+    let randomness_meta = &instruction.accounts[0];
+    if randomness_meta.key != randomness_account || !randomness_meta.is_writable {
+        return Err(());
+    }
+    let authority_meta = &instruction.accounts[4];
+    if authority_meta.key != authority || !authority_meta.is_signer {
+        return Err(());
+    }
+    Ok(())
+}
+
+fn current_ccc_round(genesis_timestamp: i64, now_timestamp: i64) -> Option<u64> {
+    let first_selection = genesis_timestamp.checked_add(CCC_FIRST_SELECTION_DELAY_SECONDS)?;
+    if now_timestamp < first_selection {
+        return None;
+    }
+    u64::try_from(
+        now_timestamp
+            .checked_sub(first_selection)?
+            .checked_div(SECONDS_PER_WEEK)?,
+    )
+    .ok()
+}
+
+fn ccc_tiebreak_context(config: [u8; 32], week: u64, agency_registry_hash: [u8; 32]) -> [u8; 32] {
+    sha256v(&[
+        CCC_TIEBREAK_CONTEXT_DOMAIN,
+        &config,
+        &week.to_le_bytes(),
+        &agency_registry_hash,
+    ])
 }
 
 /// Production-facing retained V2 `settle_round` boundary. CCC remains
@@ -678,9 +912,13 @@ mod tests {
     use iat_v2::switchboard_randomness::{
         parse_randomness as v2_parse_randomness, RevealValidationError,
         RANDOMNESS_ACCOUNT_SIZE as V2_RANDOMNESS_ACCOUNT_SIZE,
+        RANDOMNESS_COMMIT_DISCRIMINATOR as V2_RANDOMNESS_COMMIT_DISCRIMINATOR,
         RANDOMNESS_DISCRIMINATOR as V2_RANDOMNESS_DISCRIMINATOR,
     };
-    use iat_v2::{LaneVault as V2LaneState, Position as V2PositionState, Round as V2RoundState};
+    use iat_v2::{
+        Config as V2ConfigState, LaneVault as V2LaneState, Position as V2PositionState,
+        Round as V2RoundState,
+    };
 
     const LAW_PROGRAM: [u8; 32] = [0xB3; 32];
     const LAW_STATE: [u8; 32] = [0x51; 32];
@@ -688,6 +926,17 @@ mod tests {
     const MINT: [u8; 32] = [0x22; 32];
     const NETWORK: [u8; 32] = [0x11; 32];
     const FRIDAY_BOUNDARY_UTC: i64 = 1_786_050_060;
+    const COMMIT_CONFIG_KEY: [u8; 32] = [0x41; 32];
+    const COMMIT_RANDOMNESS_PROGRAM: [u8; 32] = [0x42; 32];
+    const COMMIT_RANDOMNESS_ACCOUNT: [u8; 32] = [0x43; 32];
+    const COMMIT_PAYER: [u8; 32] = [0x44; 32];
+    const COMMIT_GENESIS: i64 = 1_000;
+    const COMMIT_WEEK: u64 = 3;
+    const COMMIT_CLOCK_TIMESTAMP: i64 = COMMIT_GENESIS
+        + CCC_FIRST_SELECTION_DELAY_SECONDS
+        + (COMMIT_WEEK as i64 * SECONDS_PER_WEEK)
+        + 123;
+    const COMMIT_CLOCK_SLOT: u64 = 42;
 
     fn binding() -> CanonicalDailyLawBinding {
         CanonicalDailyLawBinding::new(LAW_PROGRAM, LAW_STATE, LAW_BUMP, MINT, NETWORK)
@@ -933,6 +1182,337 @@ mod tests {
         }
     }
 
+    #[derive(Clone, Copy, Debug)]
+    enum CommitProofCase {
+        Valid,
+        MissingIndex,
+        FirstInstruction,
+        OutOfRange,
+        NonAdjacentValidCommit,
+        WrongProgram,
+        WrongDiscriminator,
+        MissingAccounts,
+        WrongRandomnessAccount,
+        RandomnessAccountReadonly,
+        WrongAuthority,
+        AuthorityNotSigner,
+    }
+
+    #[derive(Clone, Copy)]
+    struct CommitProofFixture {
+        current_index: Option<u16>,
+        instruction_count: usize,
+        non_adjacent_valid_commit: bool,
+        program_id: [u8; 32],
+        accounts: [InstructionAccountMeta; 5],
+        accounts_len: usize,
+        data: [u8; 8],
+    }
+
+    fn commit_proof_fixture(case: CommitProofCase) -> CommitProofFixture {
+        let empty_meta = InstructionAccountMeta {
+            key: [0; 32],
+            is_signer: false,
+            is_writable: false,
+        };
+        let mut accounts = [empty_meta; 5];
+        accounts[0] = InstructionAccountMeta {
+            key: COMMIT_RANDOMNESS_ACCOUNT,
+            is_signer: false,
+            is_writable: true,
+        };
+        accounts[4] = InstructionAccountMeta {
+            key: COMMIT_PAYER,
+            is_signer: true,
+            is_writable: false,
+        };
+        let mut fixture = CommitProofFixture {
+            current_index: Some(1),
+            instruction_count: 2,
+            non_adjacent_valid_commit: false,
+            program_id: COMMIT_RANDOMNESS_PROGRAM,
+            accounts,
+            accounts_len: 5,
+            data: RANDOMNESS_COMMIT_DISCRIMINATOR,
+        };
+
+        match case {
+            CommitProofCase::Valid => {}
+            CommitProofCase::MissingIndex => fixture.current_index = None,
+            CommitProofCase::FirstInstruction => fixture.current_index = Some(0),
+            CommitProofCase::OutOfRange => {
+                fixture.current_index = Some(3);
+                fixture.instruction_count = 3;
+            }
+            CommitProofCase::NonAdjacentValidCommit => {
+                fixture.current_index = Some(2);
+                fixture.instruction_count = 3;
+                fixture.non_adjacent_valid_commit = true;
+                fixture.program_id = [0x99; 32];
+            }
+            CommitProofCase::WrongProgram => fixture.program_id = [0x99; 32],
+            CommitProofCase::WrongDiscriminator => fixture.data[0] ^= 0xff,
+            CommitProofCase::MissingAccounts => fixture.accounts_len = 4,
+            CommitProofCase::WrongRandomnessAccount => fixture.accounts[0].key = [0x98; 32],
+            CommitProofCase::RandomnessAccountReadonly => {
+                fixture.accounts[0].is_writable = false;
+            }
+            CommitProofCase::WrongAuthority => fixture.accounts[4].key = [0x97; 32],
+            CommitProofCase::AuthorityNotSigner => fixture.accounts[4].is_signer = false,
+        }
+        fixture
+    }
+
+    #[derive(Clone, Copy)]
+    struct CommitVector {
+        name: &'static str,
+        active: bool,
+        agency_count: u32,
+        genesis_timestamp: i64,
+        week: u64,
+        randomness_owner: [u8; 32],
+        proof_case: CommitProofCase,
+        clock_timestamp: i64,
+        clock_slot: u64,
+        seed_slot: u64,
+        reveal_slot: u64,
+        corrupt_randomness_codec: bool,
+    }
+
+    fn commit_config(vector: CommitVector) -> CommitRoundConfigState {
+        CommitRoundConfigState {
+            key: COMMIT_CONFIG_KEY,
+            randomness_program: COMMIT_RANDOMNESS_PROGRAM,
+            agency_registry_hash: [0x45; 32],
+            genesis_timestamp: vector.genesis_timestamp,
+            agency_count: vector.agency_count,
+            active: vector.active,
+        }
+    }
+
+    fn v2_commit_config(vector: CommitVector) -> V2ConfigState {
+        V2ConfigState {
+            admin: Default::default(),
+            mint: Default::default(),
+            token_program: Default::default(),
+            randomness_program: COMMIT_RANDOMNESS_PROGRAM.into(),
+            stake_token_account: Default::default(),
+            agency_registry_hash: [0x45; 32],
+            genesis_timestamp: vector.genesis_timestamp,
+            expected_supply: MAINNET_SUPPLY,
+            staked_principal: 99,
+            agency_count: vector.agency_count,
+            rehearsal_mode: false,
+            active: vector.active,
+            lane_mask: 0x1f,
+            stake_vault_initialized: true,
+            bump: 251,
+            vault_authority_bump: 250,
+        }
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum CommitObservation {
+        Error(EconomyError),
+        Success(Box<CommitSuccess>),
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    struct CommitSuccess {
+        config: [u8; 32],
+        randomness_account: [u8; 32],
+        week: u64,
+        commit_slot: u64,
+        commit_timestamp: i64,
+        randomness: [u8; 32],
+        agency_registry_hash_snapshot: [u8; 32],
+        decision_context: [u8; 32],
+        agency_count_snapshot: u32,
+        selected_agency_index: u32,
+        derivation_counter: u32,
+        status: u8,
+        round_bump: u8,
+    }
+
+    fn observe_commit_result(result: Result<CommitRoundResult, EconomyError>) -> CommitObservation {
+        match result {
+            Err(error) => CommitObservation::Error(error),
+            Ok(result) => CommitObservation::Success(Box::new(CommitSuccess {
+                config: result.round.config,
+                randomness_account: result.round.randomness_account,
+                week: result.round.week,
+                commit_slot: result.round.commit_slot,
+                commit_timestamp: result.round.commit_timestamp,
+                randomness: result.round.randomness,
+                agency_registry_hash_snapshot: result.round.agency_registry_hash_snapshot,
+                decision_context: result.round.decision_context,
+                agency_count_snapshot: result.round.agency_count_snapshot,
+                selected_agency_index: result.round.selected_agency_index,
+                derivation_counter: result.round.derivation_counter,
+                status: result.round.status,
+                round_bump: result.round_bump,
+            })),
+        }
+    }
+
+    fn b3_commit_round_observation(
+        vector: CommitVector,
+        proof: CommitProofFixture,
+        randomness_data: &[u8],
+    ) -> CommitObservation {
+        let valid_proof = commit_proof_fixture(CommitProofCase::Valid);
+        let valid_instruction = ReadonlyInstruction::new(
+            valid_proof.program_id,
+            &valid_proof.accounts[..valid_proof.accounts_len],
+            &valid_proof.data,
+        );
+        let selected_instruction = ReadonlyInstruction::new(
+            proof.program_id,
+            &proof.accounts[..proof.accounts_len],
+            &proof.data,
+        );
+        let current_instruction = ReadonlyInstruction::new([0x46; 32], &[], &[]);
+        let instructions = if proof.non_adjacent_valid_commit {
+            [valid_instruction, selected_instruction, current_instruction]
+        } else {
+            [
+                selected_instruction,
+                current_instruction,
+                current_instruction,
+            ]
+        };
+        let trace = ReadonlyInstructionTrace::new(
+            proof.current_index,
+            &instructions[..proof.instruction_count],
+        );
+        observe_commit_result(commit_round_transition(
+            CommitRoundInput {
+                config: commit_config(vector),
+                week: vector.week,
+                payer: COMMIT_PAYER,
+                randomness_account_key: COMMIT_RANDOMNESS_ACCOUNT,
+                randomness_account: ReadonlyRoundRandomnessAccount::new(
+                    vector.randomness_owner,
+                    randomness_data,
+                ),
+                instruction_trace: trace,
+                clock_slot: vector.clock_slot,
+                round_bump: 249,
+            },
+            vector.clock_timestamp,
+        ))
+    }
+
+    fn v2_commit_proof_is_valid(proof: CommitProofFixture) -> Result<(), EconomyError> {
+        let current_index = usize::from(
+            proof
+                .current_index
+                .ok_or(EconomyError::RandomnessCommitInstructionMissing)?,
+        );
+        if current_index == 0 || current_index >= proof.instruction_count {
+            return Err(EconomyError::RandomnessCommitInstructionMissing);
+        }
+        if proof.program_id != COMMIT_RANDOMNESS_PROGRAM
+            || proof.data.get(..V2_RANDOMNESS_COMMIT_DISCRIMINATOR.len())
+                != Some(V2_RANDOMNESS_COMMIT_DISCRIMINATOR.as_slice())
+            || proof.accounts_len < 5
+            || proof.accounts[0].key != COMMIT_RANDOMNESS_ACCOUNT
+            || !proof.accounts[0].is_writable
+            || proof.accounts[4].key != COMMIT_PAYER
+            || !proof.accounts[4].is_signer
+        {
+            return Err(EconomyError::InvalidRandomnessCommitInstruction);
+        }
+        Ok(())
+    }
+
+    fn v2_commit_round_reference(
+        vector: CommitVector,
+        proof: CommitProofFixture,
+        randomness_data: &[u8],
+    ) -> CommitObservation {
+        let config = v2_commit_config(vector);
+        let transition = (|| {
+            if !config.active {
+                return Err(EconomyError::NotActive);
+            }
+            if config.agency_count == 0 {
+                return Err(EconomyError::NoEligibleAgencies);
+            }
+            let expected_week =
+                v2_policy::current_ccc_round(config.genesis_timestamp, vector.clock_timestamp)
+                    .ok_or(EconomyError::CccSelectionNotOpen)?;
+            if vector.week != expected_week {
+                return Err(EconomyError::WrongRoundWeek);
+            }
+            if vector.randomness_owner != config.randomness_program.to_bytes() {
+                return Err(EconomyError::WrongRandomnessProgram);
+            }
+            v2_commit_proof_is_valid(proof)?;
+            let randomness = v2_parse_randomness(randomness_data)
+                .ok_or(EconomyError::InvalidRandomnessAccount)?;
+            if !randomness.is_fresh_unrevealed_commit(vector.clock_slot) {
+                return Err(EconomyError::RandomnessCommitNotFresh);
+            }
+
+            Ok(V2RoundState {
+                config: COMMIT_CONFIG_KEY.into(),
+                randomness_account: COMMIT_RANDOMNESS_ACCOUNT.into(),
+                week: vector.week,
+                commit_slot: randomness.seed_slot,
+                commit_timestamp: vector.clock_timestamp,
+                randomness: [0; 32],
+                agency_registry_hash_snapshot: config.agency_registry_hash,
+                decision_context: v2_policy::ccc_tiebreak_context(
+                    &COMMIT_CONFIG_KEY,
+                    vector.week,
+                    config.agency_registry_hash,
+                ),
+                agency_count_snapshot: config.agency_count,
+                selected_agency_index: u32::MAX,
+                derivation_counter: u32::MAX,
+                status: iat_v2::ROUND_PENDING,
+                bump: 249,
+            })
+        })();
+
+        match transition {
+            Err(error) => CommitObservation::Error(error),
+            Ok(round) => CommitObservation::Success(Box::new(CommitSuccess {
+                config: round.config.to_bytes(),
+                randomness_account: round.randomness_account.to_bytes(),
+                week: round.week,
+                commit_slot: round.commit_slot,
+                commit_timestamp: round.commit_timestamp,
+                randomness: round.randomness,
+                agency_registry_hash_snapshot: round.agency_registry_hash_snapshot,
+                decision_context: round.decision_context,
+                agency_count_snapshot: round.agency_count_snapshot,
+                selected_agency_index: round.selected_agency_index,
+                derivation_counter: round.derivation_counter,
+                status: round.status,
+                round_bump: round.bump,
+            })),
+        }
+    }
+
+    fn valid_commit_vector(name: &'static str) -> CommitVector {
+        CommitVector {
+            name,
+            active: true,
+            agency_count: 11,
+            genesis_timestamp: COMMIT_GENESIS,
+            week: COMMIT_WEEK,
+            randomness_owner: COMMIT_RANDOMNESS_PROGRAM,
+            proof_case: CommitProofCase::Valid,
+            clock_timestamp: COMMIT_CLOCK_TIMESTAMP,
+            clock_slot: COMMIT_CLOCK_SLOT,
+            seed_slot: COMMIT_CLOCK_SLOT - 1,
+            reveal_slot: 0,
+            corrupt_randomness_codec: false,
+        }
+    }
+
     fn position_state(
         treasury_reserved: u64,
         ecosystem_reserved: u64,
@@ -1170,10 +1750,197 @@ mod tests {
             iat_v2::RANDOMNESS_ADAPTER_VERIFIED
         );
         assert_eq!(RANDOMNESS_DISCRIMINATOR, V2_RANDOMNESS_DISCRIMINATOR);
+        assert_eq!(
+            RANDOMNESS_COMMIT_DISCRIMINATOR,
+            V2_RANDOMNESS_COMMIT_DISCRIMINATOR
+        );
         assert_eq!(RANDOMNESS_ACCOUNT_SIZE, V2_RANDOMNESS_ACCOUNT_SIZE);
         assert_eq!(ROUND_PENDING, iat_v2::ROUND_PENDING);
         assert_eq!(ROUND_SETTLED, iat_v2::ROUND_SETTLED);
         assert_eq!(ROUND_EXPIRED_NEUTRAL, iat_v2::ROUND_EXPIRED_NEUTRAL);
+    }
+
+    #[test]
+    fn commit_round_differential_and_adversarial_vectors_match_retained_v2() {
+        let vectors = [
+            CommitVector {
+                active: false,
+                agency_count: 0,
+                genesis_timestamp: i64::MAX,
+                week: u64::MAX,
+                randomness_owner: [0x99; 32],
+                proof_case: CommitProofCase::WrongProgram,
+                corrupt_randomness_codec: true,
+                ..valid_commit_vector("inactive precedes every other validation")
+            },
+            CommitVector {
+                agency_count: 0,
+                genesis_timestamp: i64::MAX,
+                week: u64::MAX,
+                randomness_owner: [0x99; 32],
+                proof_case: CommitProofCase::WrongProgram,
+                corrupt_randomness_codec: true,
+                ..valid_commit_vector("empty registry precedes time and proof validation")
+            },
+            CommitVector {
+                clock_timestamp: COMMIT_GENESIS + CCC_FIRST_SELECTION_DELAY_SECONDS - 1,
+                ..valid_commit_vector("selection cadence has not opened")
+            },
+            CommitVector {
+                genesis_timestamp: i64::MAX,
+                clock_timestamp: i64::MAX,
+                ..valid_commit_vector("selection timestamp overflow fails closed")
+            },
+            CommitVector {
+                week: COMMIT_WEEK + 1,
+                randomness_owner: [0x99; 32],
+                proof_case: CommitProofCase::WrongProgram,
+                ..valid_commit_vector("wrong week precedes owner and proof validation")
+            },
+            CommitVector {
+                randomness_owner: [0x99; 32],
+                proof_case: CommitProofCase::WrongProgram,
+                ..valid_commit_vector("wrong owner precedes adjacent proof validation")
+            },
+            CommitVector {
+                proof_case: CommitProofCase::MissingIndex,
+                ..valid_commit_vector("missing current instruction index")
+            },
+            CommitVector {
+                proof_case: CommitProofCase::FirstInstruction,
+                ..valid_commit_vector("commit cannot precede the first instruction")
+            },
+            CommitVector {
+                proof_case: CommitProofCase::OutOfRange,
+                ..valid_commit_vector("malformed out-of-range trace")
+            },
+            CommitVector {
+                proof_case: CommitProofCase::NonAdjacentValidCommit,
+                ..valid_commit_vector("non-adjacent valid commit cannot authorize")
+            },
+            CommitVector {
+                proof_case: CommitProofCase::WrongProgram,
+                ..valid_commit_vector("preceding instruction uses wrong program")
+            },
+            CommitVector {
+                proof_case: CommitProofCase::WrongDiscriminator,
+                ..valid_commit_vector("preceding instruction uses wrong discriminator")
+            },
+            CommitVector {
+                proof_case: CommitProofCase::MissingAccounts,
+                ..valid_commit_vector("preceding instruction omits required accounts")
+            },
+            CommitVector {
+                proof_case: CommitProofCase::WrongRandomnessAccount,
+                ..valid_commit_vector("commit targets another randomness account")
+            },
+            CommitVector {
+                proof_case: CommitProofCase::RandomnessAccountReadonly,
+                ..valid_commit_vector("commit randomness account must be writable")
+            },
+            CommitVector {
+                proof_case: CommitProofCase::WrongAuthority,
+                ..valid_commit_vector("commit authority differs from payer")
+            },
+            CommitVector {
+                proof_case: CommitProofCase::AuthorityNotSigner,
+                ..valid_commit_vector("commit authority must sign")
+            },
+            CommitVector {
+                corrupt_randomness_codec: true,
+                ..valid_commit_vector("randomness account codec is invalid")
+            },
+            CommitVector {
+                seed_slot: COMMIT_CLOCK_SLOT - 2,
+                ..valid_commit_vector("randomness seed is not the adjacent prior slot")
+            },
+            CommitVector {
+                reveal_slot: COMMIT_CLOCK_SLOT,
+                ..valid_commit_vector("already revealed randomness cannot be committed")
+            },
+            CommitVector {
+                clock_slot: 0,
+                seed_slot: 0,
+                ..valid_commit_vector("slot zero checked subtraction fails closed")
+            },
+            valid_commit_vector("valid adjacent proof constructs exact pending snapshot"),
+        ];
+
+        for vector in vectors {
+            let proof = commit_proof_fixture(vector.proof_case);
+            let mut randomness_data =
+                randomness_fixture(vector.seed_slot, vector.reveal_slot, [0x47; 32]);
+            if vector.corrupt_randomness_codec {
+                randomness_data[0] ^= 0xff;
+            }
+            let actual = b3_commit_round_observation(vector, proof, &randomness_data);
+            let expected = v2_commit_round_reference(vector, proof, &randomness_data);
+            assert_eq!(actual, expected, "{}", vector.name);
+        }
+    }
+
+    #[test]
+    fn commit_round_context_and_cadence_match_v2_boundary_vectors() {
+        for timestamp in [
+            COMMIT_GENESIS,
+            COMMIT_GENESIS + CCC_FIRST_SELECTION_DELAY_SECONDS - 1,
+            COMMIT_GENESIS + CCC_FIRST_SELECTION_DELAY_SECONDS,
+            COMMIT_GENESIS + CCC_FIRST_SELECTION_DELAY_SECONDS + SECONDS_PER_WEEK - 1,
+            COMMIT_GENESIS + CCC_FIRST_SELECTION_DELAY_SECONDS + SECONDS_PER_WEEK,
+            i64::MAX,
+        ] {
+            assert_eq!(
+                current_ccc_round(COMMIT_GENESIS, timestamp),
+                v2_policy::current_ccc_round(COMMIT_GENESIS, timestamp)
+            );
+        }
+        for week in [0, 1, COMMIT_WEEK, u64::MAX] {
+            assert_eq!(
+                ccc_tiebreak_context(COMMIT_CONFIG_KEY, week, [0x45; 32]),
+                v2_policy::ccc_tiebreak_context(&COMMIT_CONFIG_KEY, week, [0x45; 32])
+            );
+        }
+    }
+
+    #[test]
+    fn production_commit_round_preserves_the_immutable_inactive_ccc_boundary() {
+        let law_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &law_bytes).unwrap();
+        let invalid_randomness = [0u8; 1];
+        let no_instructions: [ReadonlyInstruction<'_>; 0] = [];
+        let vector = CommitVector {
+            active: false,
+            agency_count: 0,
+            genesis_timestamp: i64::MAX,
+            week: u64::MAX,
+            randomness_owner: [0x99; 32],
+            proof_case: CommitProofCase::MissingIndex,
+            clock_timestamp: FRIDAY_BOUNDARY_UTC,
+            clock_slot: 0,
+            seed_slot: 0,
+            reveal_slot: 0,
+            corrupt_randomness_codec: true,
+            name: "production boundary",
+        };
+        assert_eq!(
+            commit_round(
+                &gate,
+                CommitRoundInput {
+                    config: commit_config(vector),
+                    week: vector.week,
+                    payer: COMMIT_PAYER,
+                    randomness_account_key: COMMIT_RANDOMNESS_ACCOUNT,
+                    randomness_account: ReadonlyRoundRandomnessAccount::new(
+                        vector.randomness_owner,
+                        &invalid_randomness,
+                    ),
+                    instruction_trace: ReadonlyInstructionTrace::new(None, &no_instructions),
+                    clock_slot: vector.clock_slot,
+                    round_bump: 249,
+                },
+            ),
+            Err(EconomyError::CccDlcNotActive)
+        );
     }
 
     #[test]

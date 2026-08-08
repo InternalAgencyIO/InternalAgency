@@ -108,7 +108,7 @@ test("the Rust workspace has no unreported faction or core-cap entrypoint", () =
   );
   assert.match(
     audit,
-    /faction and core-team-cap implementations currently present[\s\S]+JavaScript specifications[\s\S]+host-only `iat_b3_economy` library[\s\S]+no Solana entrypoint or\s+public dispatcher/u,
+    /faction and core-team-cap implementations currently present[\s\S]+JavaScript specifications[\s\S]+host-only `iat_b3_economy` library[\s\S]+no Solana\s+entrypoint or\s+public dispatcher/u,
   );
 });
 
@@ -184,7 +184,7 @@ test("the host-only close_position port preserves the V2 validation boundary", (
   assert.match(economyTransition, /release_reserved_lane/u);
   assert.match(
     audit,
-    /`close_position` the\s+second\./u,
+    /`close_position` the\s+second,/u,
   );
 });
 
@@ -245,6 +245,112 @@ test("the host-only settle_round port preserves V2 validation and mutation order
   assert.match(economyCargo, /sha2 = \{ version = "=0\.10\.9", default-features = false \}/u);
   assert.match(
     audit,
-    /`settle_round` is the third and only additional handler-body transition/u,
+    /and `settle_round` the third\./u,
+  );
+});
+
+test("the host-only commit_round port preserves adjacent proof and snapshot order", () => {
+  const v2Commit = functionBody(anchorProgramBody(v2Source), "commit_round");
+  const economyCommit = functionBody(economySource, "commit_round");
+  const economyTransition = functionBody(economySource, "commit_round_transition");
+  const adjacentProof = functionBody(economySource, "immediately_preceding_instruction");
+  const commitProof = functionBody(economySource, "validate_round_commit_instruction");
+
+  assertTokensInOrder(
+    v2Commit,
+    [
+      "CCC_DLC_GENESIS_ENABLED",
+      "RANDOMNESS_ADAPTER_VERIFIED",
+      "config.active",
+      "config.agency_count > 0",
+      "ccc_round_for",
+      "randomness_account.owner",
+      "load_current_index_checked",
+      "current_instruction_index > 0",
+      "load_instruction_at_checked",
+      "validate_commit_instruction",
+      "Clock::get",
+      "parse_randomness",
+      "is_fresh_unrevealed_commit",
+      "round.config =",
+      "round.week =",
+      "round.agency_count_snapshot =",
+      "round.agency_registry_hash_snapshot =",
+      "round.decision_context =",
+      "round.randomness_account =",
+      "round.commit_slot =",
+      "round.commit_timestamp =",
+      "round.randomness = [0; 32]",
+      "round.selected_agency_index = u32::MAX",
+      "round.derivation_counter = u32::MAX",
+      "round.status = ROUND_PENDING",
+    ],
+    "V2 commit_round",
+  );
+  assert.match(economyCommit, /gate: &ValidatedDailyLawWrite/u);
+  assertTokensInOrder(
+    economyCommit,
+    [
+      "CCC_DLC_GENESIS_ENABLED",
+      "RANDOMNESS_ADAPTER_VERIFIED",
+      "commit_round_transition",
+    ],
+    "B3 commit_round wrapper",
+  );
+  assertTokensInOrder(
+    economyTransition,
+    [
+      "!input.config.active",
+      "input.config.agency_count == 0",
+      "current_ccc_round",
+      "input.week != expected_week",
+      "input.randomness_account.owner",
+      "immediately_preceding_instruction",
+      "validate_round_commit_instruction",
+      "parse_round_randomness",
+      "input.clock_slot.checked_sub(1)",
+      "randomness.reveal_slot == input.clock_slot",
+      "ccc_tiebreak_context",
+      "round: RoundState",
+      "config: input.config.key",
+      "randomness_account: input.randomness_account_key",
+      "week: input.week",
+      "commit_slot: randomness.seed_slot",
+      "commit_timestamp: clock_unix_timestamp",
+      "randomness: [0; 32]",
+      "selected_agency_index: NO_SELECTED_AGENCY",
+      "derivation_counter: NO_DERIVATION_COUNTER",
+      "status: ROUND_PENDING",
+    ],
+    "B3 commit_round transition",
+  );
+  assertTokensInOrder(
+    adjacentProof,
+    [
+      "current_instruction_index",
+      "current_index == 0",
+      "current_index >= trace.instructions.len()",
+      "get(current_index - 1)",
+    ],
+    "B3 adjacent instruction proof",
+  );
+  assertTokensInOrder(
+    commitProof,
+    [
+      "instruction.program_id != randomness_program",
+      "RANDOMNESS_COMMIT_DISCRIMINATOR.len()",
+      "instruction.accounts.len() < 5",
+      "instruction.accounts[0]",
+      "randomness_meta.key != randomness_account",
+      "!randomness_meta.is_writable",
+      "instruction.accounts[4]",
+      "authority_meta.key != authority",
+      "!authority_meta.is_signer",
+    ],
+    "B3 Switchboard commit proof",
+  );
+  assert.match(
+    audit,
+    /`commit_round` is the fourth and only additional\s+handler-body kernel/u,
   );
 });
