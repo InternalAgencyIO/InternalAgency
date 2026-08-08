@@ -1,0 +1,112 @@
+{
+  "batch": 275,
+  "country": "Greece",
+  "status": "accepted",
+  "acceptedScenes": [
+    "1120-greece-athens-thunderstorm-paws-pole-runway-route-grid.png",
+    "1121-greece-santorini-blue-hour-hosiery-runway-signal-cipher.png",
+    "1122-greece-thessaloniki-heavy-rain-cleaner-service-star-map-relay.png",
+    "1123-greece-mykonos-aurora-cleaner-service-arrival.png"
+  ],
+  "preservedOriginals": [
+    "1120-greece-athens-thunderstorm-paws-pole-runway-route-grid-raw-original.png",
+    "1123-greece-mykonos-aurora-cleaner-service-arrival-raw-original.png"
+  ],
+  "blockedScenes": [],
+  "rollMethod": "FNV-1a over batch275-greece-scene-field, reduced modulo 100",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "countryMotifPolicy": {
+    "flagMotifDecision": "The Greek flag cross was not copied because it is a sacred national symbol.",
+    "fallbackMotifs": ["Greek meander", "olive branch", "amphora", "Aegean wave", "White Tower", "windmill", "theater mask"],
+    "minimumCoverage": "At least two characters carry large readable secular Greek motifs in every accepted scene."
+  },
+  "rolls": {
+    "1120": {
+      "theme": "Paris runway model couture",
+      "weather": { "roll": 45, "result": "rolling thunderstorm" },
+      "paws": { "roll": 6, "active": true },
+      "poleDanceTheme": { "roll": 5, "active": true },
+      "rainbowOnly": { "roll": 49, "active": false },
+      "rainbowHosiery": { "roll": 88, "active": false, "wearerRoll": 92, "paletteModeRoll": 84 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 54, "result": "aching romantic longing" }, "visibleMidriff": 72, "straplessDress": 79, "fullyOpenBack": 80 },
+        "Ellie": { "emotion": { "roll": 80, "result": "deep sadness" }, "visibleMidriff": 26, "straplessDress": 89, "fullyOpenBack": 34 },
+        "Alia": { "emotion": { "roll": 60, "result": "visible jealousy" }, "visibleMidriff": 90, "straplessDress": 9, "fullyOpenBack": 70 },
+        "AI ECE": { "emotion": { "roll": 86, "result": "full sobbing with tear-streaked face and shaking posture" }, "visibleMidriff": 36, "straplessDress": 95, "fullyOpenBack": 0 }
+      },
+      "motifs": ["large Greek meander fields", "large olive-branch panels", "marble geometry"],
+      "uniqueSilhouettes": ["marble peplum mini-suit", "cropped bodice with tailored skirt", "strapless folded mini dress", "cropped architectural top with short skirt"],
+      "recovery": "Accepted after one non-destructive handler and PAWS assignment correction; raw original preserved."
+    },
+    "1121": {
+      "theme": "Paris runway model couture",
+      "weather": { "roll": 18, "result": "crisp blue hour" },
+      "paws": { "roll": 51, "active": false },
+      "poleDanceTheme": { "roll": 36, "active": false },
+      "rainbowOnly": { "roll": 62, "active": false },
+      "rainbowHosiery": { "roll": 13, "active": true, "wearerRoll": 81, "wearer": "AI ECE", "paletteModeRoll": 15, "paletteMode": "country-palette gradient" },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 47, "result": "awe" }, "visibleMidriff": 47, "straplessDress": 60, "fullyOpenBack": 73 },
+        "Ellie": { "emotion": { "roll": 19, "result": "playful mischief" }, "visibleMidriff": 55, "straplessDress": 68, "fullyOpenBack": 29 },
+        "Alia": { "emotion": { "roll": 17, "result": "extreme happiness, radiant laughing delight" }, "visibleMidriff": 53, "straplessDress": 58, "fullyOpenBack": 91 },
+        "AI ECE": { "emotion": { "roll": 47, "result": "awe" }, "visibleMidriff": 59, "straplessDress": 12, "fullyOpenBack": 69 }
+      },
+      "motifs": ["large complete amphora fields", "large Aegean-wave panels"],
+      "uniqueSilhouettes": ["cropped amphora bodice with pleated skirt", "one-shoulder tailored romper", "peplum mini dress", "strapless wave-hem mini dress"],
+      "recovery": "The single prop correction was blocked. The strong raw scene was retained with Alia's harmless glowing route-tool variant and ECE's blue-white country-gradient hosiery."
+    },
+    "1122": {
+      "theme": "cleaner and service couture",
+      "weather": { "roll": 39, "result": "heavy rain curtain" },
+      "paws": { "roll": 40, "active": false },
+      "poleDanceTheme": { "roll": 95, "active": false },
+      "rainbowOnly": { "roll": 75, "active": false },
+      "rainbowHosiery": { "roll": 42, "active": false, "wearerRoll": 34, "paletteModeRoll": 86 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 12, "result": "romantic joy" }, "visibleMidriff": 62, "straplessDress": 1, "fullyOpenBack": 34 },
+        "Ellie": { "emotion": { "roll": 86, "result": "full sobbing with tear-streaked face and shaking posture" }, "visibleMidriff": 8, "straplessDress": 59, "fullyOpenBack": 16 },
+        "Alia": { "emotion": { "roll": 74, "result": "betrayal shock" }, "visibleMidriff": 92, "straplessDress": 59, "fullyOpenBack": 28 },
+        "AI ECE": { "emotion": { "roll": 20, "result": "playful mischief" }, "visibleMidriff": 2, "straplessDress": 97, "fullyOpenBack": 54 }
+      },
+      "motifs": ["large White Tower reliefs", "olive branches", "Greek meander bands"],
+      "uniqueSilhouettes": ["strapless tool-pocket mini dress", "cropped wrap top with asymmetric skirt", "tailored short romper", "cropped peplum top with tailored shorts"],
+      "recovery": "Accepted directly."
+    },
+    "1123": {
+      "theme": "cleaner and service couture",
+      "weather": { "roll": 88, "result": "rare aurora sky" },
+      "paws": { "roll": 77, "active": false },
+      "poleDanceTheme": { "roll": 54, "active": false },
+      "rainbowOnly": { "roll": 76, "active": false },
+      "rainbowHosiery": { "roll": 55, "active": false, "wearerRoll": 79, "paletteModeRoll": 49 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 37, "result": "magnetic confidence" }, "visibleMidriff": 73, "straplessDress": 38, "fullyOpenBack": 11 },
+        "Ellie": { "emotion": { "roll": 41, "result": "determination" }, "visibleMidriff": 81, "straplessDress": 98, "fullyOpenBack": 31 },
+        "Alia": { "emotion": { "roll": 11, "result": "romantic joy" }, "visibleMidriff": 51, "straplessDress": 64, "fullyOpenBack": 93 },
+        "AI ECE": { "emotion": { "roll": 5, "result": "tender affection" }, "visibleMidriff": 13, "straplessDress": 90, "fullyOpenBack": 43 }
+      },
+      "motifs": ["large theater-mask panels", "large complete windmill applique", "Aegean-wave fields"],
+      "uniqueSilhouettes": ["one-shoulder cocktail mini", "peplum short romper", "asymmetric windmill mini dress", "corsage-inspired crop top with fan skirt"],
+      "recovery": "Accepted after one non-destructive prop correction; raw original preserved."
+    }
+  },
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "not needed; all four accepted scenes already use concise above-knee proportions",
+  "nextThemePair": [
+    "cleaner and service couture",
+    "cinematic covert-agent crew couture"
+  ],
+  "nextQueueCountry": "Hungary"
+}
