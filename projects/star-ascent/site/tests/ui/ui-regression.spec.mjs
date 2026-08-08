@@ -40,8 +40,7 @@ test("public routes remain contained and clear confirmed audit rules", async ({ 
   for (const route of routes) {
     if (isMobile && desktopOnlyRoutes.has(route)) continue;
     runtimeErrors.length = 0;
-    const response = await page.goto(route, { waitUntil: "domcontentloaded" });
-    await page.waitForTimeout(250);
+    const response = await page.goto(route, { waitUntil: "networkidle" });
     const geometry = await page.evaluate(() => ({
       clientWidth: document.documentElement.clientWidth,
       scrollWidth: document.documentElement.scrollWidth,
