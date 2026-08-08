@@ -40,6 +40,24 @@ pub const ON_DEMAND_DEVNET_PID: [u8; 32] = [
     174, 199, 71, 188, 79, 62, 17, 48, 30, 64, 99, 203,
 ];
 
+pub const COMMUNITY_CUSTODY: [u8; 32] = PROGRAM_ADMIN;
+pub const TREASURY_BENEFICIARY: [u8; 32] = [
+    176, 234, 210, 80, 127, 82, 123, 19, 225, 61, 194, 50, 57, 247, 40, 109, 9, 38, 213, 31, 165,
+    236, 251, 141, 147, 125, 148, 145, 25, 227, 197, 39,
+];
+pub const ECOSYSTEM_BENEFICIARY: [u8; 32] = [
+    252, 72, 216, 255, 0, 242, 145, 139, 196, 26, 113, 42, 243, 23, 174, 180, 208, 191, 67, 37, 34,
+    38, 169, 209, 135, 22, 220, 186, 2, 253, 190, 11,
+];
+pub const CORE_BENEFICIARY: [u8; 32] = [
+    29, 63, 222, 204, 73, 139, 41, 10, 235, 128, 228, 15, 47, 185, 171, 204, 237, 167, 250, 94, 65,
+    128, 197, 208, 62, 251, 138, 246, 23, 206, 112, 130,
+];
+pub const LIQUIDITY_BENEFICIARY: [u8; 32] = [
+    24, 24, 0, 128, 110, 46, 22, 67, 50, 225, 22, 170, 229, 182, 166, 239, 134, 210, 52, 26, 159,
+    168, 204, 64, 224, 169, 227, 240, 150, 80, 123, 107,
+];
+
 pub const COMMUNITY: u8 = 0;
 pub const TREASURY: u8 = 1;
 pub const ECOSYSTEM: u8 = 2;
@@ -178,6 +196,22 @@ pub struct InitializeConfigResult {
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct InitializeLaneVaultInput {
+    pub config_key: [u8; 32],
+    pub config: ConfigState,
+    pub lane: u8,
+    pub lane_token_account: [u8; 32],
+    pub lane_state_bump: u8,
+    pub lane_token_bump: u8,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct InitializeLaneVaultResult {
+    pub config: ConfigState,
+    pub lane_state: LaneState,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ExpireRoundResult {
     pub round: RoundState,
     pub recovery_timestamp: i64,
@@ -307,6 +341,10 @@ pub enum EconomyError {
     RehearsalTimestampRequired,
     ProductionTimestampOverrideForbidden,
     GenesisTimestampInFuture,
+    AlreadyActive,
+    UnknownLane,
+    CommunityMustUseHardwareCustody,
+    LaneAlreadyInitialized,
     NotActive,
     PositionClosed,
     PrincipalNotReturned,
@@ -467,6 +505,121 @@ pub fn initialize_config(
     input: InitializeConfigInput,
 ) -> Result<InitializeConfigResult, EconomyError> {
     initialize_config_transition(input, gate.unix_timestamp)
+}
+
+/// Host-only pre-lifecycle `initialize_lane_vault` state construction. The
+/// opaque capability proves Daily Law was open before the retained handler
+/// logic runs. This function does not authenticate accounts, derive PDAs,
+/// allocate either account, initialize Token-2022 state, or persist the result.
+pub fn initialize_lane_vault(
+    _gate: &ValidatedDailyLawWrite,
+    input: InitializeLaneVaultInput,
+) -> Result<InitializeLaneVaultResult, EconomyError> {
+    initialize_lane_vault_transition(input)
+}
+
+fn initialize_lane_vault_transition(
+    input: InitializeLaneVaultInput,
+) -> Result<InitializeLaneVaultResult, EconomyError> {
+    if input.config.active {
+        return Err(EconomyError::AlreadyActive);
+    }
+    if !(TREASURY..=LIQUIDITY).contains(&input.lane) {
+        return Err(EconomyError::CommunityMustUseHardwareCustody);
+    }
+    if input.config.lane_mask & (1u8 << input.lane) != 0 {
+        return Err(EconomyError::LaneAlreadyInitialized);
+    }
+
+    let lane_terms =
+        lane_policy(input.lane, input.config.rehearsal_mode).ok_or(EconomyError::UnknownLane)?;
+    let beneficiary = beneficiary(input.lane).ok_or(EconomyError::UnknownLane)?;
+    let lane_state = LaneState {
+        config: input.config_key,
+        token_account: input.lane_token_account,
+        beneficiary,
+        total: lane_terms.total,
+        genesis_unlocked: lane_terms.genesis_unlocked,
+        cliff_week: lane_terms.cliff_week,
+        linear_end_week: lane_terms.linear_end_week,
+        reserved: 0,
+        paid: 0,
+        principal_claimed: 0,
+        lane: input.lane,
+        reward_source: lane_terms.reward_source,
+        bump: input.lane_state_bump,
+        token_bump: input.lane_token_bump,
+    };
+    let mut config = input.config;
+    config.lane_mask |= 1u8 << input.lane;
+
+    Ok(InitializeLaneVaultResult { config, lane_state })
+}
+
+fn lane_policy(lane: u8, rehearsal: bool) -> Option<LanePolicy> {
+    let mainnet = match lane {
+        COMMUNITY => LanePolicy {
+            total: 500_000_000_000_000_000,
+            genesis_unlocked: 500_000_000_000_000_000,
+            cliff_week: 0,
+            linear_end_week: 0,
+            reward_source: false,
+        },
+        TREASURY => LanePolicy {
+            total: 200_000_000_000_000_000,
+            genesis_unlocked: 50_000_000_000_000_000,
+            cliff_week: 52,
+            linear_end_week: 208,
+            reward_source: true,
+        },
+        ECOSYSTEM => LanePolicy {
+            total: 150_000_000_000_000_000,
+            genesis_unlocked: 37_500_000_000_000_000,
+            cliff_week: 26,
+            linear_end_week: 104,
+            reward_source: true,
+        },
+        CORE_TEAM => LanePolicy {
+            total: 100_000_000_000_000_000,
+            genesis_unlocked: 0,
+            cliff_week: 26,
+            linear_end_week: 104,
+            reward_source: false,
+        },
+        LIQUIDITY => LanePolicy {
+            total: 50_000_000_000_000_000,
+            genesis_unlocked: 12_500_000_000_000_000,
+            cliff_week: 26,
+            linear_end_week: 104,
+            reward_source: true,
+        },
+        _ => return None,
+    };
+
+    Some(LanePolicy {
+        total: scale_lane_amount(mainnet.total, rehearsal)?,
+        genesis_unlocked: scale_lane_amount(mainnet.genesis_unlocked, rehearsal)?,
+        ..mainnet
+    })
+}
+
+fn scale_lane_amount(mainnet_amount: u64, rehearsal: bool) -> Option<u64> {
+    if rehearsal {
+        mainnet_amount.checked_div(1_000_000)
+    } else {
+        Some(mainnet_amount)
+    }
+}
+
+fn beneficiary(lane: u8) -> Option<[u8; 32]> {
+    match lane {
+        COMMUNITY => Some(COMMUNITY_CUSTODY),
+        TREASURY => Some(TREASURY_BENEFICIARY),
+        ECOSYSTEM => Some(ECOSYSTEM_BENEFICIARY),
+        CORE_TEAM => Some(CORE_BENEFICIARY),
+        LIQUIDITY => Some(LIQUIDITY_BENEFICIARY),
+        _ => None,
+    }
 }
 
 fn initialize_config_transition(
@@ -1446,6 +1599,151 @@ mod tests {
         }
     }
 
+    #[derive(Clone, Copy)]
+    struct InitializeLaneVaultVector {
+        name: &'static str,
+        input: InitializeLaneVaultInput,
+    }
+
+    fn valid_initialize_lane_vault_vector(
+        name: &'static str,
+        lane: u8,
+        rehearsal_mode: bool,
+    ) -> InitializeLaneVaultVector {
+        let config = initialize_config_transition(
+            valid_initialize_config_vector("lane config", rehearsal_mode).input,
+            1_000,
+        )
+        .unwrap()
+        .config;
+        InitializeLaneVaultVector {
+            name,
+            input: InitializeLaneVaultInput {
+                config_key: [0x61; 32],
+                config,
+                lane,
+                lane_token_account: [0x62; 32],
+                lane_state_bump: 246,
+                lane_token_bump: 245,
+            },
+        }
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum InitializeLaneVaultObservation {
+        Error(EconomyError),
+        Success {
+            config: Box<ConfigState>,
+            lane_state: Box<LaneState>,
+        },
+    }
+
+    fn observe_initialize_lane_vault(
+        result: Result<InitializeLaneVaultResult, EconomyError>,
+    ) -> InitializeLaneVaultObservation {
+        match result {
+            Err(error) => InitializeLaneVaultObservation::Error(error),
+            Ok(result) => InitializeLaneVaultObservation::Success {
+                config: Box::new(result.config),
+                lane_state: Box::new(result.lane_state),
+            },
+        }
+    }
+
+    fn semantic_lane_from_v2(lane: V2LaneState) -> LaneState {
+        LaneState {
+            config: lane.config.to_bytes(),
+            token_account: lane.token_account.to_bytes(),
+            beneficiary: lane.beneficiary.to_bytes(),
+            total: lane.total,
+            genesis_unlocked: lane.genesis_unlocked,
+            cliff_week: lane.cliff_week,
+            linear_end_week: lane.linear_end_week,
+            reserved: lane.reserved,
+            paid: lane.paid,
+            principal_claimed: lane.principal_claimed,
+            lane: lane.lane,
+            reward_source: lane.reward_source,
+            bump: lane.bump,
+            token_bump: lane.token_bump,
+        }
+    }
+
+    fn v2_config_from_semantic(config: ConfigState) -> V2ConfigState {
+        V2ConfigState {
+            admin: config.admin.into(),
+            mint: config.mint.into(),
+            token_program: config.token_program.into(),
+            randomness_program: config.randomness_program.into(),
+            stake_token_account: config.stake_token_account.into(),
+            agency_registry_hash: config.agency_registry_hash,
+            genesis_timestamp: config.genesis_timestamp,
+            expected_supply: config.expected_supply,
+            staked_principal: config.staked_principal,
+            agency_count: config.agency_count,
+            rehearsal_mode: config.rehearsal_mode,
+            active: config.active,
+            lane_mask: config.lane_mask,
+            stake_vault_initialized: config.stake_vault_initialized,
+            bump: config.bump,
+            vault_authority_bump: config.vault_authority_bump,
+        }
+    }
+
+    fn v2_initialize_lane_vault_reference(
+        vector: InitializeLaneVaultVector,
+    ) -> InitializeLaneVaultObservation {
+        let input = vector.input;
+        let mut config = v2_config_from_semantic(input.config);
+        let result = (|| {
+            if config.active {
+                return Err(EconomyError::AlreadyActive);
+            }
+            if !(v2_policy::TREASURY..=v2_policy::LIQUIDITY).contains(&input.lane) {
+                return Err(EconomyError::CommunityMustUseHardwareCustody);
+            }
+            if config.lane_mask & (1u8 << input.lane) != 0 {
+                return Err(EconomyError::LaneAlreadyInitialized);
+            }
+            let terms = v2_policy::lane_policy(input.lane, config.rehearsal_mode)
+                .ok_or(EconomyError::UnknownLane)?;
+            let beneficiary = match input.lane {
+                v2_policy::COMMUNITY => iat_v2::COMMUNITY_CUSTODY,
+                v2_policy::TREASURY => iat_v2::TREASURY_BENEFICIARY,
+                v2_policy::ECOSYSTEM => iat_v2::ECOSYSTEM_BENEFICIARY,
+                v2_policy::CORE_TEAM => iat_v2::CORE_BENEFICIARY,
+                v2_policy::LIQUIDITY => iat_v2::LIQUIDITY_BENEFICIARY,
+                _ => return Err(EconomyError::UnknownLane),
+            };
+            let lane_state = V2LaneState {
+                config: input.config_key.into(),
+                token_account: input.lane_token_account.into(),
+                beneficiary,
+                total: terms.total,
+                genesis_unlocked: terms.genesis_unlocked,
+                cliff_week: terms.cliff_week,
+                linear_end_week: terms.linear_end_week,
+                reserved: 0,
+                paid: 0,
+                principal_claimed: 0,
+                lane: input.lane,
+                reward_source: terms.reward_source,
+                bump: input.lane_state_bump,
+                token_bump: input.lane_token_bump,
+            };
+            config.lane_mask |= 1u8 << input.lane;
+            Ok((config, lane_state))
+        })();
+
+        match result {
+            Err(error) => InitializeLaneVaultObservation::Error(error),
+            Ok((config, lane_state)) => InitializeLaneVaultObservation::Success {
+                config: Box::new(semantic_config_from_v2(config)),
+                lane_state: Box::new(semantic_lane_from_v2(lane_state)),
+            },
+        }
+    }
+
     #[derive(Clone, Copy, Debug)]
     enum CommitProofCase {
         Valid,
@@ -1978,6 +2276,20 @@ mod tests {
     #[test]
     fn immutable_constants_match_the_retained_v2_policy() {
         assert_eq!(PROGRAM_ADMIN, iat_v2::PROGRAM_ADMIN.to_bytes());
+        assert_eq!(COMMUNITY_CUSTODY, iat_v2::COMMUNITY_CUSTODY.to_bytes());
+        assert_eq!(
+            TREASURY_BENEFICIARY,
+            iat_v2::TREASURY_BENEFICIARY.to_bytes()
+        );
+        assert_eq!(
+            ECOSYSTEM_BENEFICIARY,
+            iat_v2::ECOSYSTEM_BENEFICIARY.to_bytes()
+        );
+        assert_eq!(CORE_BENEFICIARY, iat_v2::CORE_BENEFICIARY.to_bytes());
+        assert_eq!(
+            LIQUIDITY_BENEFICIARY,
+            iat_v2::LIQUIDITY_BENEFICIARY.to_bytes()
+        );
         assert_eq!(ON_DEMAND_MAINNET_PID, V2_ON_DEMAND_MAINNET_PID.to_bytes());
         assert_eq!(ON_DEMAND_DEVNET_PID, V2_ON_DEMAND_DEVNET_PID.to_bytes());
         assert_eq!(TOKEN_DECIMALS, v2_policy::TOKEN_DECIMALS);
@@ -2195,6 +2507,214 @@ mod tests {
         .unwrap();
         assert_eq!(result.config.genesis_timestamp, FRIDAY_BOUNDARY_UTC);
         assert_eq!(result.config.expected_supply, MAINNET_SUPPLY);
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
+    }
+
+    #[test]
+    fn initialize_lane_vault_differential_vectors_match_retained_v2() {
+        let active = valid_initialize_lane_vault_vector("active", COMMUNITY, true);
+        let invalid_community = valid_initialize_lane_vault_vector("community", COMMUNITY, true);
+        let invalid_high = valid_initialize_lane_vault_vector("high lane", u8::MAX, false);
+        let already_initialized =
+            valid_initialize_lane_vault_vector("already initialized", CORE_TEAM, false);
+
+        let vectors = [
+            InitializeLaneVaultVector {
+                name: "active precedes invalid lane and initialized-bit checks",
+                input: InitializeLaneVaultInput {
+                    config: ConfigState {
+                        active: true,
+                        lane_mask: u8::MAX,
+                        ..active.input.config
+                    },
+                    ..active.input
+                },
+            },
+            InitializeLaneVaultVector {
+                name: "community lane is rejected before its initialized bit",
+                input: InitializeLaneVaultInput {
+                    config: ConfigState {
+                        lane_mask: 1u8 << COMMUNITY,
+                        ..invalid_community.input.config
+                    },
+                    ..invalid_community.input
+                },
+            },
+            valid_initialize_lane_vault_vector("lane above liquidity is rejected", 5, false),
+            invalid_high,
+            InitializeLaneVaultVector {
+                name: "initialized bit is checked before policy construction",
+                input: InitializeLaneVaultInput {
+                    config: ConfigState {
+                        lane_mask: (1u8 << TREASURY) | (1u8 << CORE_TEAM),
+                        ..already_initialized.input.config
+                    },
+                    ..already_initialized.input
+                },
+            },
+            valid_initialize_lane_vault_vector("production treasury", TREASURY, false),
+            valid_initialize_lane_vault_vector("production ecosystem", ECOSYSTEM, false),
+            valid_initialize_lane_vault_vector("production core", CORE_TEAM, false),
+            valid_initialize_lane_vault_vector("production liquidity", LIQUIDITY, false),
+            valid_initialize_lane_vault_vector("rehearsal treasury", TREASURY, true),
+            valid_initialize_lane_vault_vector("rehearsal ecosystem", ECOSYSTEM, true),
+            valid_initialize_lane_vault_vector("rehearsal core", CORE_TEAM, true),
+            InitializeLaneVaultVector {
+                input: InitializeLaneVaultInput {
+                    config_key: [0xa1; 32],
+                    lane_token_account: [0xa2; 32],
+                    lane_state_bump: 0,
+                    lane_token_bump: u8::MAX,
+                    config: ConfigState {
+                        lane_mask: 1u8 << TREASURY,
+                        ..valid_initialize_lane_vault_vector("ignored", LIQUIDITY, true)
+                            .input
+                            .config
+                    },
+                    ..valid_initialize_lane_vault_vector("ignored", LIQUIDITY, true).input
+                },
+                ..valid_initialize_lane_vault_vector(
+                    "rehearsal liquidity preserves unrelated mask and bump boundaries",
+                    LIQUIDITY,
+                    true,
+                )
+            },
+        ];
+
+        for vector in vectors {
+            let actual =
+                observe_initialize_lane_vault(initialize_lane_vault_transition(vector.input));
+            let expected = v2_initialize_lane_vault_reference(vector);
+            assert_eq!(actual, expected, "{}", vector.name);
+        }
+    }
+
+    #[test]
+    fn initialize_lane_vault_exhaustive_precedence_matches_retained_v2() {
+        for active in [false, true] {
+            for rehearsal_mode in [false, true] {
+                for lane in u8::MIN..=u8::MAX {
+                    for lane_mask in u8::MIN..=u8::MAX {
+                        let base = valid_initialize_lane_vault_vector(
+                            "exhaustive lane precedence",
+                            lane,
+                            rehearsal_mode,
+                        );
+                        let vector = InitializeLaneVaultVector {
+                            input: InitializeLaneVaultInput {
+                                config: ConfigState {
+                                    active,
+                                    lane_mask,
+                                    ..base.input.config
+                                },
+                                ..base.input
+                            },
+                            ..base
+                        };
+                        let actual = observe_initialize_lane_vault(
+                            initialize_lane_vault_transition(vector.input),
+                        );
+                        let expected = v2_initialize_lane_vault_reference(vector);
+                        assert_eq!(
+                            actual, expected,
+                            "active={active} rehearsal={rehearsal_mode} lane={lane} mask={lane_mask}"
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn initialize_lane_vault_errors_and_private_policy_helpers_are_pinned() {
+        for rehearsal_mode in [false, true] {
+            for lane in u8::MIN..=u8::MAX {
+                let expected =
+                    v2_policy::lane_policy(lane, rehearsal_mode).map(|policy| LanePolicy {
+                        total: policy.total,
+                        genesis_unlocked: policy.genesis_unlocked,
+                        cliff_week: policy.cliff_week,
+                        linear_end_week: policy.linear_end_week,
+                        reward_source: policy.reward_source,
+                    });
+                assert_eq!(lane_policy(lane, rehearsal_mode), expected, "lane={lane}");
+            }
+        }
+        assert_eq!(beneficiary(COMMUNITY), Some(COMMUNITY_CUSTODY));
+        assert_eq!(beneficiary(TREASURY), Some(TREASURY_BENEFICIARY));
+        assert_eq!(beneficiary(ECOSYSTEM), Some(ECOSYSTEM_BENEFICIARY));
+        assert_eq!(beneficiary(CORE_TEAM), Some(CORE_BENEFICIARY));
+        assert_eq!(beneficiary(LIQUIDITY), Some(LIQUIDITY_BENEFICIARY));
+        assert_eq!(beneficiary(LIQUIDITY + 1), None);
+        assert_eq!(beneficiary(u8::MAX), None);
+
+        let base = valid_initialize_lane_vault_vector("fixed errors", CORE_TEAM, false).input;
+        assert_eq!(
+            initialize_lane_vault_transition(InitializeLaneVaultInput {
+                lane: u8::MAX,
+                config: ConfigState {
+                    active: true,
+                    lane_mask: u8::MAX,
+                    ..base.config
+                },
+                ..base
+            }),
+            Err(EconomyError::AlreadyActive)
+        );
+        assert_eq!(
+            initialize_lane_vault_transition(InitializeLaneVaultInput {
+                lane: COMMUNITY,
+                config: ConfigState {
+                    lane_mask: 1u8 << COMMUNITY,
+                    ..base.config
+                },
+                ..base
+            }),
+            Err(EconomyError::CommunityMustUseHardwareCustody)
+        );
+        assert_eq!(
+            initialize_lane_vault_transition(InitializeLaneVaultInput {
+                lane: CORE_TEAM,
+                config: ConfigState {
+                    lane_mask: 1u8 << CORE_TEAM,
+                    ..base.config
+                },
+                ..base
+            }),
+            Err(EconomyError::LaneAlreadyInitialized)
+        );
+    }
+
+    #[test]
+    fn initialize_lane_vault_accumulates_the_exact_v2_mask_and_requires_open_law() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let mut config = valid_initialize_lane_vault_vector("mask sequence", TREASURY, false)
+            .input
+            .config;
+
+        for lane in TREASURY..=LIQUIDITY {
+            let vector = valid_initialize_lane_vault_vector("mask sequence", lane, false);
+            let result = initialize_lane_vault(
+                &gate,
+                InitializeLaneVaultInput {
+                    config,
+                    ..vector.input
+                },
+            )
+            .unwrap();
+            assert_eq!(result.lane_state.lane, lane);
+            assert_eq!(result.lane_state.reserved, 0);
+            assert_eq!(result.lane_state.paid, 0);
+            assert_eq!(result.lane_state.principal_claimed, 0);
+            config = result.config;
+        }
+        assert_eq!(config.lane_mask, 0b1_1110);
 
         let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
         assert_eq!(

@@ -46,6 +46,14 @@
       "v2DifferentialTests": true,
       "handlerComplete": false,
       "publicExposure": false
+    },
+    {
+      "name": "initialize_lane_vault",
+      "implementationStage": "PRE_LIFECYCLE_ONLY",
+      "dailyLawCapabilityRequired": true,
+      "v2DifferentialTests": true,
+      "handlerComplete": false,
+      "publicExposure": false
     }
   ],
   "canonicalGate": {
@@ -86,6 +94,8 @@
       "cpis": ["system_program.create_account", "token_2022.initialize_account"],
       "token2022Flow": "PUBLIC_VAULT_ACCOUNT_WITH_REQUIRED_MINT_EXTENSIONS",
       "parity": "PRESERVE_EXCEPT_CORE_CUSTODY_RELEASE_BLOCKER",
+      "implementationStage": "PRE_LIFECYCLE_ONLY",
+      "handlerComplete": false,
       "publicExposure": "DISABLED_UNTIL_ALL_15_PASS"
     },
     {

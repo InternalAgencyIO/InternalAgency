@@ -432,7 +432,81 @@ test("the initialize_config kernel preserves V2 validation and initial state con
   );
   assert.match(
     audit,
-    /`initialize_config` is the fifth host kernel[\s\S]+pre-lifecycle validation and by-value initial-state construction/u,
+    /`initialize_config` is the fifth host kernel[\s\S]+pre-lifecycle validation[\s\S]+by-value state construction/u,
   );
-  assert.match(audit, /explicitly staged as `PRE_LIFECYCLE_ONLY`/u);
+  assert.match(audit, /explicitly staged as\s+`PRE_LIFECYCLE_ONLY`/u);
+});
+
+test("the initialize_lane_vault kernel preserves V2 precedence and state construction", () => {
+  const v2Initialize = functionBody(
+    anchorProgramBody(v2Source),
+    "initialize_lane_vault",
+  );
+  const economyInitialize = functionBody(economySource, "initialize_lane_vault");
+  const economyTransition = functionBody(
+    economySource,
+    "initialize_lane_vault_transition",
+  );
+
+  assertTokensInOrder(
+    v2Initialize,
+    [
+      "!ctx.accounts.config.active",
+      "(TREASURY..=LIQUIDITY).contains(&lane)",
+      "ctx.accounts.config.lane_mask & (1u8 << lane)",
+      "lane_policy(lane, ctx.accounts.config.rehearsal_mode)",
+      "state.config = ctx.accounts.config.key()",
+      "state.token_account = ctx.accounts.lane_token_account.key()",
+      "state.beneficiary = beneficiary(lane)",
+      "state.total = lane_terms.total",
+      "state.genesis_unlocked = lane_terms.genesis_unlocked",
+      "state.cliff_week = lane_terms.cliff_week",
+      "state.linear_end_week = lane_terms.linear_end_week",
+      "state.reserved = 0",
+      "state.paid = 0",
+      "state.principal_claimed = 0",
+      "state.lane = lane",
+      "state.reward_source = lane_terms.reward_source",
+      "state.bump = ctx.bumps.lane_state",
+      "state.token_bump = ctx.bumps.lane_token_account",
+      "ctx.accounts.config.lane_mask |= 1u8 << lane",
+    ],
+    "V2 initialize_lane_vault",
+  );
+  assert.match(economyInitialize, /_gate: &ValidatedDailyLawWrite/u);
+  assert.match(economyInitialize, /initialize_lane_vault_transition\(input\)/u);
+  assertTokensInOrder(
+    economyTransition,
+    [
+      "input.config.active",
+      "(TREASURY..=LIQUIDITY).contains(&input.lane)",
+      "input.config.lane_mask & (1u8 << input.lane)",
+      "lane_policy(input.lane, input.config.rehearsal_mode)",
+      "beneficiary(input.lane)",
+      "config: input.config_key",
+      "token_account: input.lane_token_account",
+      "beneficiary,",
+      "total: lane_terms.total",
+      "genesis_unlocked: lane_terms.genesis_unlocked",
+      "cliff_week: lane_terms.cliff_week",
+      "linear_end_week: lane_terms.linear_end_week",
+      "reserved: 0",
+      "paid: 0",
+      "principal_claimed: 0",
+      "lane: input.lane",
+      "reward_source: lane_terms.reward_source",
+      "bump: input.lane_state_bump",
+      "token_bump: input.lane_token_bump",
+      "config.lane_mask |= 1u8 << input.lane",
+    ],
+    "B3 initialize_lane_vault transition",
+  );
+  assert.match(
+    audit,
+    /`initialize_lane_vault` is the sixth[\s\S]+pre-lifecycle validation/u,
+  );
+  assert.match(
+    audit,
+    /does not[\s\S]+initialize Token-2022 state[\s\S]+does not make `initialize_lane_vault` complete/u,
+  );
 });

@@ -120,7 +120,7 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
-test("the host-only port contains exactly the first five gated kernels", () => {
+test("the host-only port contains exactly the first six gated kernels", () => {
   assert.deepEqual(matrix.hostOnlyPureTransitions, [
     {
       name: "expire_round",
@@ -154,6 +154,14 @@ test("the host-only port contains exactly the first five gated kernels", () => {
       handlerComplete: false,
       publicExposure: false,
     },
+    {
+      name: "initialize_lane_vault",
+      implementationStage: "PRE_LIFECYCLE_ONLY",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      handlerComplete: false,
+      publicExposure: false,
+    },
   ]);
   assert.match(
     economySource,
@@ -162,6 +170,13 @@ test("the host-only port contains exactly the first five gated kernels", () => {
   assert.match(economySource, /fn initialize_config_transition\(/u);
   assert.match(economySource, /struct InitializeConfigInput/u);
   assert.match(economySource, /struct ConfigState/u);
+  assert.match(
+    economySource,
+    /pub fn initialize_lane_vault\(\s*_gate: &ValidatedDailyLawWrite,/u,
+  );
+  assert.match(economySource, /fn initialize_lane_vault_transition\(/u);
+  assert.match(economySource, /struct InitializeLaneVaultInput/u);
+  assert.match(economySource, /struct LaneState/u);
   assert.match(
     economySource,
     /pub fn close_position\(\s*_gate: &ValidatedDailyLawWrite,/u,
@@ -184,7 +199,7 @@ test("the host-only port contains exactly the first five gated kernels", () => {
   assert.match(economySource, /fn validate_round_commit_instruction\(/u);
   assert.doesNotMatch(
     economyCode,
-    /pub fn (?:initialize_lane_vault|initialize_stake_vault|activate|register_agency|set_eligibility|open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal)\s*\(/u,
+    /pub fn (?:initialize_stake_vault|activate|register_agency|set_eligibility|open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal)\s*\(/u,
   );
 
   const initializeConfig = matrix.handlers.find(
@@ -194,6 +209,14 @@ test("the host-only port contains exactly the first five gated kernels", () => {
   assert.equal(initializeConfig.handlerComplete, false);
   assert.equal(initializeConfig.publicExposure, matrix.deploymentExposure);
   assert(initializeConfig.cpis.includes("system_program.create_account"));
+
+  const initializeLaneVault = matrix.handlers.find(
+    (handler) => handler.name === "initialize_lane_vault",
+  );
+  assert.equal(initializeLaneVault.implementationStage, "PRE_LIFECYCLE_ONLY");
+  assert.equal(initializeLaneVault.handlerComplete, false);
+  assert.equal(initializeLaneVault.publicExposure, matrix.deploymentExposure);
+  assert(initializeLaneVault.cpis.includes("token_2022.initialize_account"));
 });
 
 test("the pure verifier pins the exact current Daily Law v1 codec", () => {
