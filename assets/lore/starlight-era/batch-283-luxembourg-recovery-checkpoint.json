@@ -1,0 +1,405 @@
+{
+  "batch": 283,
+  "country": "Luxembourg",
+  "status": "partial-accepted",
+  "rollMethod": "FNV-1a over batch283-luxembourg-scene-field keys, reduced modulo 100. Male scene selection is reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "cleaner and service couture",
+    "cinematic covert-agent crew couture"
+  ],
+  "maleModelSelection": {
+    "key": "batch283-luxembourg-male-model-scene",
+    "roll": 36,
+    "selectedScenePosition": 1,
+    "selectedScene": 1152,
+    "maleEmotion": {
+      "key": "batch283-luxembourg-scene1-male-emotion",
+      "roll": 47,
+      "result": "awe"
+    },
+    "faceAnchor": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Luxembourg's tricolor contains no motif, so no literal flag appears and the fallback secular cultural rule applies.",
+    "fallbackMotifs": [
+      "Bock casemate arches, fortress-stone courses, Three Towers silhouettes, and Moselle grape geometry",
+      "Philharmonie white-column rhythm, Kirchberg tram lines, Quetsch plum rosettes, and blue pottery curves",
+      "Esch-Belval blast-furnace lattice, riveted steel geometry, and red-hot industrial light bands",
+      "Mullerthal sandstone strata, Schiessentumpel waterfall curves, grapevine spirals, and potato-rosette geometry"
+    ],
+    "minimumCoverage": "Every scene integrates at least one large readable secular Luxembourg motif across two or more character outfits.",
+    "cultureScene": "Scene 1152 includes a restrained Moselle vineyard still-life and large grape-vessel geometry. Scene 1153 adds abstract Quetsch plum and potato-rosette patterning without brands or copied national dress.",
+    "prohibitions": "No literal flag, official red-lion emblem, sacred symbol, political insignia, copied ceremonial dress, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch283-luxembourg-x-heart",
+      "roll": 25,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch283-luxembourg-x-internalagency",
+      "roll": 57,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch283-luxembourg-x-worldxxxseries",
+      "roll": 18,
+      "active": true
+    }
+  },
+  "scenePlans": {
+    "1152": {
+      "theme": "cleaner and service couture",
+      "landmark": "Bock Casemates and Three Towers above the Alzette valley",
+      "motifs": [
+        "large Bock arch and fortress-course fields",
+        "large Moselle grape-cluster, wine-vessel, and blue-pottery curves"
+      ],
+      "weather": {
+        "roll": 12,
+        "result": "crisp blue hour"
+      },
+      "paws": {
+        "roll": 33,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 98,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 84,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 51,
+        "active": false,
+        "wearerRoll": 71,
+        "paletteModeRoll": 29
+      },
+      "romanceBeat": {
+        "roll": 33,
+        "dynamicIndex": 9,
+        "result": "ECE presents the route while Radiance circles her waist, Ellie reaches across Radiance, and Alia answers with close affection."
+      },
+      "compoundLoveBeat": {
+        "roll": 21,
+        "index": 9,
+        "result": "Radiance cradles Alia's face while Alia hugs her waist, Ellie kisses Radiance's opposite cheek, and ECE remains linked to Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 13, "result": "romantic joy" },
+          "visibleMidriff": { "roll": 73, "active": false },
+          "straplessDress": { "roll": 94, "active": false },
+          "fullyOpenBack": { "roll": 67, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "roll": 5, "result": "tender affection" },
+          "visibleMidriff": { "roll": 21, "active": true },
+          "straplessDress": { "roll": 86, "active": false },
+          "fullyOpenBack": { "roll": 31, "active": false }
+        },
+        "Alia": {
+          "emotion": { "roll": 43, "result": "determination" },
+          "visibleMidriff": { "roll": 27, "active": true },
+          "straplessDress": { "roll": 68, "active": false },
+          "fullyOpenBack": { "roll": 85, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 93, "result": "guilt and remorse" },
+          "visibleMidriff": { "roll": 57, "active": false },
+          "straplessDress": { "roll": 66, "active": false },
+          "fullyOpenBack": { "roll": 79, "active": false }
+        },
+        "maleModel": {
+          "emotion": { "roll": 47, "result": "awe" }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance low-neck asymmetric sculpted mini-dress with a stepped casemate-fold skirt and covered waist",
+        "Ellie cropped sweep-line bodice with a visible navel and high-waist tailored service skort",
+        "Alia one-shoulder cropped wrap shell with a visible navel and curved panel shorts",
+        "ECE deep-V structured short romper with a polished asymmetric utility-apron wing and covered waist",
+        "male fitted black short-sleeve polo with a restrained red-white-light-blue placket, black jeans, and black boots"
+      ],
+      "plannedHandMap": "Radiance cradles Alia's cheek and links ECE. Ellie touches Radiance's shoulder and the male's chest while giving Radiance a cheek kiss. Alia holds Radiance's waist and the male's forearm. ECE holds the inert prop toward an empty illuminated casemate route marker and returns Radiance's link. The male holds Ellie's waist and touches ECE's shoulder while looking only at ECE. Exactly five adults and ten hands."
+    },
+    "1153": {
+      "theme": "cleaner and service couture",
+      "landmark": "Philharmonie Luxembourg and Kirchberg tram plaza",
+      "motifs": [
+        "large Philharmonie white-column and sound-wave fields",
+        "large Kirchberg tram-line, Quetsch plum-rosette, and blue-pottery geometry"
+      ],
+      "weather": {
+        "roll": 51,
+        "result": "active lightning storm with distant bolts"
+      },
+      "paws": {
+        "roll": 44,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 15,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 75,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 70,
+        "active": false,
+        "wearerRoll": 50,
+        "paletteModeRoll": 22
+      },
+      "romanceBeat": {
+        "roll": 2,
+        "dynamicIndex": 2,
+        "result": "Alia finishes a linked-hand turn with Radiance as ECE steadies Radiance and Ellie closes in."
+      },
+      "compoundLoveBeat": {
+        "roll": 40,
+        "index": 4,
+        "result": "ECE sits close against Radiance, gives Ellie a quick cheek peck, and Alia covers their joined hands with reassurance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 8, "result": "romantic joy" },
+          "visibleMidriff": { "roll": 86, "active": false },
+          "straplessDress": { "roll": 41, "active": false },
+          "fullyOpenBack": { "roll": 22, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "roll": 82, "result": "crying with visible tears" },
+          "visibleMidriff": { "roll": 52, "active": false },
+          "straplessDress": { "roll": 79, "active": false },
+          "fullyOpenBack": { "roll": 28, "active": true }
+        },
+        "Alia": {
+          "emotion": { "roll": 34, "result": "overwhelming relief" },
+          "visibleMidriff": { "roll": 0, "active": true },
+          "straplessDress": { "roll": 59, "active": false },
+          "fullyOpenBack": { "roll": 12, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 40, "result": "determination" },
+          "visibleMidriff": { "roll": 30, "active": true },
+          "straplessDress": { "roll": 45, "active": false },
+          "fullyOpenBack": { "roll": 2, "active": true }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance low sweetheart one-shoulder folded mini with a covered waist and completely open back",
+        "Ellie plunging winged trapeze utility mini with a covered waist and completely open back",
+        "Alia asymmetric cropped fan-shell and high-waist pleated shorts with visible navel and completely open back",
+        "ECE low-V cropped waistcoat and faceted service mini-skirt with visible navel and completely open back"
+      ],
+      "plannedHandMap": "ECE holds the inert prop toward a clearly empty illuminated tram-route target and embraces Radiance at the back with her free arm while the map floats above that wrist. Radiance returns the waist embrace and links Alia. Ellie touches Radiance's shoulder and leans into ECE's cheek reassurance. Alia covers Radiance's linked hand and steadies Ellie's forearm. Exactly four adults and eight hands."
+    },
+    "1154": {
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "Esch-Belval blast furnaces and steel walkways",
+      "motifs": [
+        "large blast-furnace lattice and riveted steel fields",
+        "large molten-light band, gantry-line, and industrial gauge geometry"
+      ],
+      "weather": {
+        "roll": 58,
+        "result": "snow flurries"
+      },
+      "paws": {
+        "roll": 35,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 72,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 74,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 45,
+        "active": false,
+        "wearerRoll": 1,
+        "paletteModeRoll": 23
+      },
+      "romanceBeat": {
+        "roll": 7,
+        "dynamicIndex": 7,
+        "result": "Alia closes behind Radiance with the route card while Ellie touches Radiance's cheek and ECE watches from inches away."
+      },
+      "compoundLoveBeat": {
+        "roll": 31,
+        "index": 7,
+        "result": "Ellie holds Radiance close on a low mission plinth while Radiance gives Alia a cheek peck and ECE protects Ellie."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 79, "result": "deep sadness" },
+          "visibleMidriff": { "roll": 59, "active": false },
+          "straplessDress": { "roll": 48, "active": false },
+          "fullyOpenBack": { "roll": 73, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "roll": 51, "result": "intense curiosity" },
+          "visibleMidriff": { "roll": 47, "active": true },
+          "straplessDress": { "roll": 96, "active": false },
+          "fullyOpenBack": { "roll": 9, "active": true }
+        },
+        "Alia": {
+          "emotion": { "roll": 9, "result": "romantic joy" },
+          "visibleMidriff": { "roll": 5, "active": true },
+          "straplessDress": { "roll": 26, "active": true },
+          "fullyOpenBack": { "roll": 11, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 27, "result": "hope" },
+          "visibleMidriff": { "roll": 71, "active": false },
+          "straplessDress": { "roll": 72, "active": false },
+          "fullyOpenBack": { "roll": 93, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance low-neck sleeveless sculpted trench-mini with asymmetric furnace-lattice panels and covered waist",
+        "Ellie cropped asymmetric lapel shell and high-waist zipper shorts with visible navel and completely open back",
+        "Alia fully strapless folded crop bodice and diagonal mini-skirt with visible navel and completely open back",
+        "ECE deep-V tailored short jumpsuit with split peplum and covered waist"
+      ],
+      "plannedHandMap": "Ellie sits on a low concrete plinth with both hands around Radiance's waist. Radiance touches Ellie's shoulder and Alia's forearm while giving Alia a quick cheek peck. Alia holds Radiance's back and carries a route card in her free hand. ECE holds the inert prop toward a clearly empty industrial route target and rests her free hand on Ellie's shoulder beneath the separate floating map. Exactly four adults and eight hands."
+    },
+    "1155": {
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "Mullerthal Schiessentumpel waterfall and sandstone forest",
+      "motifs": [
+        "large three-stream waterfall and sandstone-strata fields",
+        "large grapevine spiral, potato-rosette, and forest contour geometry"
+      ],
+      "weather": {
+        "roll": 37,
+        "result": "heavy rain curtain"
+      },
+      "paws": {
+        "roll": 26,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 61,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 1,
+        "active": true,
+        "treatment": "All four outfits use distinct full-spectrum couture treatments while Luxembourg red, white, and light blue remain structural accents."
+      },
+      "rainbowHosiery": {
+        "roll": 80,
+        "active": false,
+        "wearerRoll": 56,
+        "paletteModeRoll": 0
+      },
+      "romanceBeat": {
+        "roll": 8,
+        "dynamicIndex": 8,
+        "result": "Radiance and Ellie share a close mid-turn beat while ECE catches Ellie's hand and Alia steadies Radiance."
+      },
+      "compoundLoveBeat": {
+        "roll": 6,
+        "index": 6,
+        "result": "Alia closes around ECE, ECE links the others through a safe route action, and Ellie presses close at Radiance's shoulder."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "roll": 42, "result": "determination" },
+          "visibleMidriff": { "roll": 92, "active": false },
+          "straplessDress": { "roll": 51, "active": false },
+          "fullyOpenBack": { "roll": 96, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "roll": 72, "result": "betrayal shock" },
+          "visibleMidriff": { "roll": 46, "active": true },
+          "straplessDress": { "roll": 1, "active": true },
+          "fullyOpenBack": { "roll": 74, "active": false }
+        },
+        "Alia": {
+          "emotion": { "roll": 8, "result": "romantic joy" },
+          "visibleMidriff": { "roll": 98, "active": false },
+          "straplessDress": { "roll": 29, "active": true },
+          "fullyOpenBack": { "roll": 74, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "roll": 70, "result": "suspicion" },
+          "visibleMidriff": { "roll": 36, "active": true },
+          "straplessDress": { "roll": 67, "active": false },
+          "fullyOpenBack": { "roll": 76, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance prismatic one-shoulder faceted mini-dress with a covered waist and waterfall pleats",
+        "Ellie fully strapless rainbow folded crop bodice and high-waist asymmetric skort with visible navel",
+        "Alia fully strapless rainbow waterfall-panel cocktail mini with covered waist",
+        "ECE sleeveless low-V rainbow cropped peplum and high-waist tailored shorts with visible navel"
+      ],
+      "plannedHandMap": "Radiance touches Ellie's shoulder and Alia's waist. Ellie holds Radiance's waist and links ECE's free hand. Alia steadies Radiance and rests her other hand on ECE's shoulder. ECE holds the inert prop toward a clearly empty waterfall route marker and returns Ellie's link beneath the separate holographic map. Exactly four adults and eight hands."
+    }
+  },
+  "anatomyAcceptanceGate": "Scene 1152 must contain exactly five adults with ten arms and ten hands. Scenes 1153 through 1155 must contain exactly four adults with eight arms and eight hands. Every visible hand must trace continuously to one owner. Reject any extra, duplicated, floating, fused, ownerless, or partially emerging limb or finger cluster.",
+  "acceptedScenes": [
+    {
+      "scene": 1152,
+      "asset": "1152-luxembourg-bock-blue-hour-service-male-route.png",
+      "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-6aa5d38b-3398-4864-8d98-3005ac9493fc.png",
+      "attempt": "single recovery",
+      "qa": "Accepted. Five distinct adults, plausible ten-hand ownership with natural occlusion, complete footwear, Bock and Three Towers context, large secular fortress and grape-vessel motifs, crisp blue hour, unique outfits, a readable male relationship counter-beat, and a safe outward inert-prop line."
+    },
+    {
+      "scene": 1155,
+      "asset": "1155-luxembourg-mullerthal-rain-covert-rainbow-route.png",
+      "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-94e998c3-e15a-4ad5-a5fe-f15ba943d284.png",
+      "attempt": "raw",
+      "qa": "Accepted. Four distinct adults, eight plausible owned hands with natural occlusion, complete footwear, at least four visible affectionate contacts, exact per-character midriff and strapless outcomes, unique full-rainbow outfit treatments, heavy rain, Schiessentumpel waterfall context, and a safe outward inert-prop line."
+    }
+  ],
+  "blockedScenes": [
+    {
+      "scene": 1153,
+      "reason": "The raw image is anatomically plausible and contains the required cast, lightning, landmark, footwear, and affection, but the four triggered fully-open-back designs are not visibly readable. The single recovery variant was rejected by output moderation.",
+      "rawSource": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-bdbcfdcd-7c68-451c-acaf-d86b91eeced3.png",
+      "recoveryRequestId": "8cc7f251-385c-4cc2-9d5c-cd9a114d5a39",
+      "recoveryPasses": 1
+    },
+    {
+      "scene": 1154,
+      "reason": "The single recovery image has clean anatomy, complete shoes, snow, Belval landmark, strong motifs, and a safe prop line, but it does not visibly show Alia's triggered fully-open-back construction and provides fewer than three unambiguous interpersonal contacts.",
+      "recoverySource": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-60f0e0d6-ad32-4216-b124-dbcff0518c26.png",
+      "recoveryPasses": 1
+    }
+  ],
+  "shorteningPass": "Not required. Both accepted scenes already use concise secure above-knee editorial proportions. All raw and recovery originals remain preserved.",
+  "xPublishingAttempt": {
+    "status": "pending",
+    "plannedAttachments": [
+      "1152-luxembourg-bock-blue-hour-service-male-route.png",
+      "1155-luxembourg-mullerthal-rain-covert-rainbow-route.png",
+      "1151-liechtenstein-vaduz-thunderstorm-service-rainbow-hosiery.png"
+    ]
+  },
+  "nextThemePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "nextQueueCountry": "Malta"
+}
