@@ -114,13 +114,13 @@ jobs:
           test -s target/verifiable/iat_b3_law.so
           # Candidate gate only: this binds the reviewed rehearsal artifact; it
           # does not assert complete B3/V2 feature parity or launch readiness.
-          expected_b3_law_bytes=143360
+          expected_b3_law_bytes=154952
           actual_b3_law_bytes="$(stat --format='%s' target/verifiable/iat_b3_law.so)"
           if [[ "$actual_b3_law_bytes" != "$expected_b3_law_bytes" ]]; then
             echo "B3 law candidate size mismatch: expected $expected_b3_law_bytes bytes, got $actual_b3_law_bytes" >&2
             exit 1
           fi
-          expected_b3_law_sha256="7c495967e183707a92d819b3d09738c82f50d432c1c9c4af57e3ac1e1dc36923"
+          expected_b3_law_sha256="927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c"
           printf '%s  %s\n' "$expected_b3_law_sha256" target/verifiable/iat_b3_law.so \
             | sha256sum --check --strict -
           sha256sum target/verifiable/iat_b3_law.so \

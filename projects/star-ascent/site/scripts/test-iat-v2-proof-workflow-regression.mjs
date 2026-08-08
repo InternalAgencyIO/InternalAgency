@@ -11,6 +11,21 @@ const workflowPath = resolve(
 const workflow = readFileSync(workflowPath, "utf8").replaceAll("\r\n", "\n");
 const sbfProofScriptPath = resolve(process.cwd(), "scripts/verify-iat-v2-sbf.sh");
 const sbfProofScript = readFileSync(sbfProofScriptPath, "utf8").replaceAll("\r\n", "\n");
+const currentB3LawEvidence = JSON.parse(readFileSync(
+  resolve(
+    process.cwd(),
+    "docs/b3/evidence/local-validator-atomic-sealing-rehearsal-20260808.json",
+  ),
+  "utf8",
+));
+const b3DevnetWrapper = readFileSync(
+  resolve(process.cwd(), "scripts/run-iat-b3-devnet-rehearsal.sh"),
+  "utf8",
+).replaceAll("\r\n", "\n");
+const b3DevnetDriver = readFileSync(
+  resolve(process.cwd(), "scripts/iat-b3-devnet-rehearsal-driver.mjs"),
+  "utf8",
+).replaceAll("\r\n", "\n");
 const packageJson = JSON.parse(readFileSync(resolve(process.cwd(), "package.json"), "utf8"));
 
 const requiredOrderedCommands = [
@@ -297,9 +312,121 @@ function validateSbfProofScript(scriptText) {
   return failures;
 }
 
+function validateB3LawCandidateBindings({
+  workflowText,
+  devnetWrapperText,
+  devnetDriverText,
+  evidence,
+}) {
+  const failures = [];
+  const fail = (message) => failures.push(message);
+  const artifact = evidence?.artifact;
+
+  if (
+    evidence?.schema !== "iat-b3-local-validator-rehearsal-record/v1"
+    || evidence?.status !== "PASS"
+    || artifact?.path !== "target/deploy/iat_b3_law.so"
+  ) {
+    fail("canonical B3 law candidate evidence must remain a PASS record for target/deploy/iat_b3_law.so");
+  }
+
+  const canonicalBytes = artifact?.sizeBytes;
+  const canonicalSha256 = artifact?.sha256;
+  if (!Number.isSafeInteger(canonicalBytes) || canonicalBytes <= 0) {
+    fail("canonical B3 law candidate evidence contains an invalid artifact size");
+  }
+  if (!/^[0-9a-f]{64}$/u.test(canonicalSha256 ?? "")) {
+    fail("canonical B3 law candidate evidence contains an invalid artifact SHA-256");
+  }
+
+  const singlePin = (text, pattern, label, normalize = (value) => value) => {
+    const matches = [...text.matchAll(pattern)];
+    if (matches.length !== 1) {
+      fail(`${label} must appear exactly once; found ${matches.length}`);
+      return null;
+    }
+    return normalize(matches[0][1]);
+  };
+  const decimal = (value) => Number(value.replaceAll("_", ""));
+
+  const bindings = [
+    {
+      label: "release-proof workflow B3 law byte pin",
+      actual: singlePin(
+        workflowText,
+        /^\s*expected_b3_law_bytes=(\d+)\s*$/gmu,
+        "release-proof workflow B3 law byte pin",
+        decimal,
+      ),
+      expected: canonicalBytes,
+    },
+    {
+      label: "release-proof workflow B3 law SHA-256 pin",
+      actual: singlePin(
+        workflowText,
+        /^\s*expected_b3_law_sha256="([0-9a-f]{64})"\s*$/gmu,
+        "release-proof workflow B3 law SHA-256 pin",
+      ),
+      expected: canonicalSha256,
+    },
+    {
+      label: "Devnet wrapper B3 law byte pin",
+      actual: singlePin(
+        devnetWrapperText,
+        /^expected_artifact_size="(\d+)"\s*$/gmu,
+        "Devnet wrapper B3 law byte pin",
+        decimal,
+      ),
+      expected: canonicalBytes,
+    },
+    {
+      label: "Devnet wrapper B3 law SHA-256 pin",
+      actual: singlePin(
+        devnetWrapperText,
+        /^expected_artifact_sha256="([0-9a-f]{64})"\s*$/gmu,
+        "Devnet wrapper B3 law SHA-256 pin",
+      ),
+      expected: canonicalSha256,
+    },
+    {
+      label: "Devnet driver B3 law byte pin",
+      actual: singlePin(
+        devnetDriverText,
+        /^export const EXPECTED_ARTIFACT_SIZE = ([\d_]+);\s*$/gmu,
+        "Devnet driver B3 law byte pin",
+        decimal,
+      ),
+      expected: canonicalBytes,
+    },
+    {
+      label: "Devnet driver B3 law SHA-256 pin",
+      actual: singlePin(
+        devnetDriverText,
+        /export const EXPECTED_ARTIFACT_SHA256\s*=\s*"([0-9a-f]{64})";/gu,
+        "Devnet driver B3 law SHA-256 pin",
+      ),
+      expected: canonicalSha256,
+    },
+  ];
+
+  for (const { label, actual, expected } of bindings) {
+    if (actual !== null && expected !== undefined && actual !== expected) {
+      fail(`${label} does not match canonical candidate evidence: expected ${expected}, got ${actual}`);
+    }
+  }
+
+  return failures;
+}
+
 const failures = [
   ...validateConfiguration(workflow, packageJson.scripts ?? {}),
   ...validateSbfProofScript(sbfProofScript),
+  ...validateB3LawCandidateBindings({
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver,
+    evidence: currentB3LawEvidence,
+  }),
 ];
 const mutationProbes = [
   {
@@ -474,11 +601,93 @@ for (const probe of sbfProofMutationProbes) {
   }
 }
 
+const canonicalB3LawBytes = currentB3LawEvidence.artifact.sizeBytes;
+const canonicalB3LawSha256 = currentB3LawEvidence.artifact.sha256;
+const driftedB3LawBytes = canonicalB3LawBytes + 1;
+const driftedB3LawSha256 = `${canonicalB3LawSha256.slice(0, -1)}${canonicalB3LawSha256.endsWith("0") ? "1" : "0"}`;
+const driftedB3LawEvidenceBytes = structuredClone(currentB3LawEvidence);
+driftedB3LawEvidenceBytes.artifact.sizeBytes = driftedB3LawBytes;
+const driftedB3LawEvidenceSha256 = structuredClone(currentB3LawEvidence);
+driftedB3LawEvidenceSha256.artifact.sha256 = driftedB3LawSha256;
+const b3CandidateBindingMutationProbes = [
+  {
+    name: "drifted workflow B3 law byte pin",
+    workflowText: workflow.replace(
+      `expected_b3_law_bytes=${canonicalB3LawBytes}`,
+      `expected_b3_law_bytes=${driftedB3LawBytes}`,
+    ),
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver,
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted workflow B3 law SHA-256 pin",
+    workflowText: workflow.replace(canonicalB3LawSha256, driftedB3LawSha256),
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver,
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted Devnet wrapper B3 law byte pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper.replace(
+      `expected_artifact_size="${canonicalB3LawBytes}"`,
+      `expected_artifact_size="${driftedB3LawBytes}"`,
+    ),
+    devnetDriverText: b3DevnetDriver,
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted Devnet wrapper B3 law SHA-256 pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper.replace(canonicalB3LawSha256, driftedB3LawSha256),
+    devnetDriverText: b3DevnetDriver,
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted Devnet driver B3 law byte pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver.replace(
+      `EXPECTED_ARTIFACT_SIZE = ${canonicalB3LawBytes.toLocaleString("en-US").replaceAll(",", "_")}`,
+      `EXPECTED_ARTIFACT_SIZE = ${driftedB3LawBytes.toLocaleString("en-US").replaceAll(",", "_")}`,
+    ),
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted Devnet driver B3 law SHA-256 pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver.replace(canonicalB3LawSha256, driftedB3LawSha256),
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted canonical evidence B3 law byte pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver,
+    evidence: driftedB3LawEvidenceBytes,
+  },
+  {
+    name: "drifted canonical evidence B3 law SHA-256 pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver,
+    evidence: driftedB3LawEvidenceSha256,
+  },
+];
+
+for (const probe of b3CandidateBindingMutationProbes) {
+  if (validateB3LawCandidateBindings(probe).length === 0) {
+    failures.push(`mutation probe did not fail closed: ${probe.name}`);
+  }
+}
+
 if (failures.length) {
   failures.forEach((message) => console.error(`FAIL: ${message}`));
   process.exit(1);
 }
 
 console.log(
-  `IAT V2/B3 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, iat_v2-only Anchor discovery/build, exact head/checkout/public-run/container-bound binary/IDL evidence, B3 build-only SBF evidence, V2-to-B3 successor-lineage validation, canonical manifest validation, exact-source-head concurrency, read-only permissions, and 28 fail-closed mutation probes remain bound.`,
+  `IAT V2/B3 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, iat_v2-only Anchor discovery/build, exact head/checkout/public-run/container-bound binary/IDL evidence, canonical-evidence-bound B3 workflow and Devnet SBF pins, V2-to-B3 successor-lineage validation, canonical manifest validation, exact-source-head concurrency, read-only permissions, and ${mutationProbes.length + sbfProofMutationProbes.length + b3CandidateBindingMutationProbes.length} fail-closed mutation probes remain bound.`,
 );
