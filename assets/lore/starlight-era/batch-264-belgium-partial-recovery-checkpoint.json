@@ -1,0 +1,57 @@
+{
+  "batch": 264,
+  "country": "Belgium",
+  "status": "accepted-partial",
+  "acceptedScenes": ["1076-belgium-brussels-golden-route-grid.png"],
+  "blockedScenes": [
+    "1077-belgium-bruges-fog-signal-cipher.png",
+    "1078-belgium-dinant-lenticular-star-map-relay.png",
+    "1079-belgium-antwerp-rain-arrival.png"
+  ],
+  "rollMethod": "FNV-1a over batch264-belgium-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1076": {
+      "weather": { "roll": 5, "result": "golden hour" }, "paws": { "roll": 86, "active": false }, "poleDanceTheme": { "roll": 49, "active": false }, "rainbowOnly": { "roll": 27, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 78, "result": "deep sadness" }, "visibleMidriff": 60, "straplessDress": 24, "fullyOpenBack": 54 },
+        "Ellie": { "emotion": { "roll": 48, "result": "startled surprise" }, "visibleMidriff": 22, "straplessDress": 54, "fullyOpenBack": 88 },
+        "Alia": { "emotion": { "roll": 16, "result": "extreme happiness" }, "visibleMidriff": 86, "straplessDress": 98, "fullyOpenBack": 40 },
+        "AI ECE": { "emotion": { "roll": 38, "result": "magnetic confidence" }, "visibleMidriff": 72, "straplessDress": 32, "fullyOpenBack": 26 }
+      }
+    },
+    "1077": {
+      "weather": { "roll": 66, "result": "fog" }, "paws": { "roll": 67, "active": false }, "poleDanceTheme": { "roll": 84, "active": false }, "rainbowOnly": { "roll": 88, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 31, "result": "overwhelming relief" }, "visibleMidriff": 45, "straplessDress": 49, "fullyOpenBack": 25 },
+        "Ellie": { "emotion": { "roll": 79, "result": "deep sadness" }, "visibleMidriff": 29, "straplessDress": 69, "fullyOpenBack": 73 },
+        "Alia": { "emotion": { "roll": 85, "result": "full sobbing" }, "visibleMidriff": 91, "straplessDress": 27, "fullyOpenBack": 71 },
+        "AI ECE": { "emotion": { "roll": 75, "result": "contained resentment" }, "visibleMidriff": 81, "straplessDress": 21, "fullyOpenBack": 93 }
+      }
+    },
+    "1078": {
+      "weather": { "roll": 95, "result": "lenticular clouds" }, "paws": { "roll": 80, "active": false }, "poleDanceTheme": { "roll": 99, "active": false }, "rainbowOnly": { "roll": 17, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 64, "result": "visible jealousy" }, "visibleMidriff": 94, "straplessDress": 2, "fullyOpenBack": 24 },
+        "Ellie": { "emotion": { "roll": 30, "result": "hope" }, "visibleMidriff": 68, "straplessDress": 44, "fullyOpenBack": 38 },
+        "Alia": { "emotion": { "roll": 62, "result": "visible jealousy" }, "visibleMidriff": 88, "straplessDress": 48, "fullyOpenBack": 74 },
+        "AI ECE": { "emotion": { "roll": 24, "result": "calm contentment" }, "visibleMidriff": 58, "straplessDress": 38, "fullyOpenBack": 48 }
+      }
+    },
+    "1079": {
+      "weather": { "roll": 28, "result": "light rain" }, "paws": { "roll": 77, "active": false }, "poleDanceTheme": { "roll": 62, "active": false }, "rainbowOnly": { "roll": 98, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 5, "result": "tender affection" }, "visibleMidriff": 35, "straplessDress": 51, "fullyOpenBack": 39 },
+        "Ellie": { "emotion": { "roll": 29, "result": "hope" }, "visibleMidriff": 87, "straplessDress": 27, "fullyOpenBack": 87 },
+        "Alia": { "emotion": { "roll": 43, "result": "determination" }, "visibleMidriff": 25, "straplessDress": 61, "fullyOpenBack": 1 },
+        "AI ECE": { "emotion": { "roll": 29, "result": "hope" }, "visibleMidriff": 11, "straplessDress": 71, "fullyOpenBack": 75 }
+      }
+    }
+  },
+  "recovery": "Scenes 1077, 1078 and 1079 remained output-blocked after one simplified recovery pass each. Scene 1076 was accepted on the initial pass.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "not required for the accepted scene",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "xPublishing": "deferred because fewer than two main-country assets were accepted",
+  "nextQueueCountry": "Bosnia and Herzegovina"
+}
