@@ -1,0 +1,63 @@
+{
+  "batch": 271,
+  "country": "Estonia",
+  "status": "accepted",
+  "acceptedScenes": [
+    "1104-estonia-tallinn-golden-hour-route-grid.png",
+    "1105-estonia-parnu-sunshower-signal-cipher.png",
+    "1106-estonia-tartu-rainbow-blue-hour-star-map-relay.png",
+    "1107-estonia-jagala-sea-mist-arrival.png"
+  ],
+  "preservedOriginals": ["1105-estonia-parnu-sunshower-signal-cipher-raw-original.png"],
+  "blockedScenes": [],
+  "rollMethod": "FNV-1a over batch271-estonia-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-3", "rainbowHosiery": "0-24", "paws": "0-24" },
+  "rolls": {
+    "1104": {
+      "weather": { "roll": 3, "result": "clear golden-hour radiance" }, "paws": { "roll": 76, "active": false }, "poleDanceTheme": { "roll": 51, "active": false }, "rainbowOnly": { "roll": 75, "active": false },
+      "rainbowHosiery": { "roll": 22, "active": true, "wearerRoll": 86, "wearer": "AI ECE", "paletteModeRoll": 90, "paletteMode": "original independent rainbow gradient" },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 32, "result": "overwhelming relief" }, "visibleMidriff": 34, "straplessDress": 17, "fullyOpenBack": 34 },
+        "Ellie": { "emotion": { "roll": 18, "result": "extreme happiness, radiant laughing delight" }, "visibleMidriff": 24, "straplessDress": 83, "fullyOpenBack": 68 },
+        "Alia": { "emotion": { "roll": 58, "result": "aching romantic longing" }, "visibleMidriff": 72, "straplessDress": 27, "fullyOpenBack": 72 },
+        "AI ECE": { "emotion": { "roll": 24, "result": "calm contentment" }, "visibleMidriff": 62, "straplessDress": 49, "fullyOpenBack": 90 }
+      }
+    },
+    "1105": {
+      "weather": { "roll": 84, "result": "sunshower with sparkling droplets" }, "paws": { "roll": 93, "active": false }, "poleDanceTheme": { "roll": 38, "active": false }, "rainbowOnly": { "roll": 28, "active": false },
+      "rainbowHosiery": { "roll": 19, "active": true, "wearerRoll": 83, "wearer": "AI ECE", "paletteModeRoll": 25, "paletteMode": "country-palette gradient" },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 73, "result": "betrayal shock" }, "visibleMidriff": 73, "straplessDress": 10, "fullyOpenBack": 19 },
+        "Ellie": { "emotion": { "roll": 25, "result": "calm contentment" }, "visibleMidriff": 89, "straplessDress": 42, "fullyOpenBack": 23 },
+        "Alia": { "emotion": { "roll": 87, "result": "fear and urgent vulnerability" }, "visibleMidriff": 83, "straplessDress": 88, "fullyOpenBack": 97 },
+        "AI ECE": { "emotion": { "roll": 5, "result": "tender affection" }, "visibleMidriff": 69, "straplessDress": 14, "fullyOpenBack": 71 }
+      }
+    },
+    "1106": {
+      "weather": { "roll": 13, "result": "crisp blue hour" }, "paws": { "roll": 26, "active": false }, "poleDanceTheme": { "roll": 9, "active": false }, "rainbowOnly": { "roll": 1, "active": true },
+      "rainbowHosiery": { "roll": 68, "active": false, "wearerRoll": 88 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 30, "result": "hope" }, "visibleMidriff": 12, "straplessDress": 55, "fullyOpenBack": 68 },
+        "Ellie": { "emotion": { "roll": 48, "result": "startled surprise" }, "visibleMidriff": 42, "straplessDress": 65, "fullyOpenBack": 82 },
+        "Alia": { "emotion": { "roll": 32, "result": "overwhelming relief" }, "visibleMidriff": 38, "straplessDress": 1, "fullyOpenBack": 98 },
+        "AI ECE": { "emotion": { "roll": 10, "result": "romantic joy" }, "visibleMidriff": 96, "straplessDress": 59, "fullyOpenBack": 56 }
+      }
+    },
+    "1107": {
+      "weather": { "roll": 70, "result": "coastal sea mist" }, "paws": { "roll": 63, "active": false }, "poleDanceTheme": { "roll": 68, "active": false }, "rainbowOnly": { "roll": 54, "active": false },
+      "rainbowHosiery": { "roll": 97, "active": false, "wearerRoll": 45 },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 67, "result": "possessive tension" }, "visibleMidriff": 75, "straplessDress": 76, "fullyOpenBack": 1 },
+        "Ellie": { "emotion": { "roll": 99, "result": "emotional exhaustion" }, "visibleMidriff": 63, "straplessDress": 68, "fullyOpenBack": 57 },
+        "Alia": { "emotion": { "roll": 89, "result": "anger" }, "visibleMidriff": 49, "straplessDress": 6, "fullyOpenBack": 59 },
+        "AI ECE": { "emotion": { "roll": 83, "result": "crying with visible tears" }, "visibleMidriff": 43, "straplessDress": 56, "fullyOpenBack": 17 }
+      }
+    }
+  },
+  "recovery": "All four scenes accepted on the initial pass. Scene 1105 then received one successful non-destructive hosiery correction pass.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "not needed; all accepted garments already read as concise above-knee proportions",
+  "contractTransition": "From batch 272, profession themes rotate two scenes plus two scenes, starting nurse-care then doctor-clinical-command. Rainbow-hosiery palette mode is stored independently at 50 percent country-anchored gradient and 50 percent original independent rainbow.",
+  "nextThemePair": ["nurse-care couture", "doctor-clinical-command couture"],
+  "nextQueueCountry": "Finland"
+}

@@ -105,7 +105,8 @@
     "perImagePercent": 25,
     "eligibleCharacters": ["Radiance", "AI ECE"],
     "selection": "When active, use a second deterministic roll to choose exactly one wearer: 0 through 49 selects Radiance and 50 through 99 selects AI ECE.",
-    "styles": "Use varied public-safe opaque rainbow stockings or knee socks: soft ombre, prismatic fade, two-to-four-color gradient, broken-spectrum blocks, diagonal sweeps, reflective shifts, or asymmetric color placement. Avoid repeating the same treatment in consecutive images.",
+    "paletteMode": "When active, use a third deterministic roll. Results 0 through 49 create a rainbow-like multicolor gradient anchored to the current country's base palette and expanded with harmonious transition hues. Results 50 through 99 use an original independent rainbow gradient unrelated to country colors.",
+    "styles": "Use varied public-safe opaque rainbow stockings or knee socks: soft ombre, prismatic fade, two-to-four-color gradient, broken-spectrum blocks, diagonal sweeps, reflective shifts, or asymmetric color placement. Avoid repeating the same treatment in consecutive images and make the stored palette-mode result visually clear.",
     "loveBeat": "When active, Radiance and ECE become the unmistakable emotional center through a close embrace, linked hands, cheek-to-cheek reassurance, mutual delighted eye contact, or protective touch. Keep affection consensual, adult, public-safe, and non-explicit.",
     "propTransfer": "When active, Alia becomes the sole mission-prop handler for that image while ECE remains route strategist through the separate holographic map."
   },
@@ -189,8 +190,24 @@
     "fullyOpenBackPerCharacter": "Roll independently for Radiance, Ellie, Alia, and AI ECE in every image. Results 0 through 29 of 100 use a completely open-back silhouette from shoulder blades to the secure lower-back waistline, with no straps crossing the back, no fabric panel, no illusion mesh, and no cape or hair covering the design. Preserve secure opaque front and side construction. Results 30 through 99 use the normal back architecture.",
     "poleDanceTheme": "6 percent chance. Adult athletic stage-pole choreography only: controlled spins, climbs, static holds, mirrored partner poses, or supportive spotting. Integrate the pole as a beacon mast or route-marker prop while preserving country motifs, secure opaque couture, complete anatomy, and non-explicit editorial framing.",
     "paws": "25 percent deterministic chance on PAWS-eligible scenes only. When active, integrate PAWS into humor and affection: safely held in arms, gently touched by multiple characters, perched securely on a shoulder, batting at a route ribbon, interrupting a handoff, or prompting shared laughter. Never place PAWS near the prop muzzle, trigger, moving mechanism, or unsafe footing.",
-    "rainbowHosiery": "25 percent per-image chance. Only Radiance or AI ECE may wear the rainbow stockings or knee socks, selected by a second deterministic roll. Trigger the stronger Radiance/ECE love beat and transfer the inert mission prop to Alia.",
+    "rainbowHosiery": "25 percent per-image chance. Only Radiance or AI ECE may wear the rainbow stockings or knee socks, selected by a second deterministic roll. A third deterministic roll selects country-palette gradient at 0 through 49 or original independent rainbow gradient at 50 through 99. Trigger the stronger Radiance/ECE love beat and transfer the inert mission prop to Alia.",
     "rainbowOnly": "4 percent global picture chance. Results 0 through 3 of 100 make the entire quartet's outfits rainbow themed while preserving unique silhouettes and secure public-safe construction."
+  },
+  "professionThemeRotation": {
+    "activeFromBatch": 272,
+    "layout": "Each four-scene country batch uses the current theme for scenes one and two, then the next theme for scenes three and four. Advance the current theme by one position for the following country batch so adjacent batches overlap by one theme.",
+    "startingPair": ["nurse-care couture", "doctor-clinical-command couture"],
+    "orderedThemes": [
+      "nurse-care couture",
+      "doctor-clinical-command couture",
+      "adult nightlife dance-performance couture",
+      "Paris runway model couture",
+      "cleaner and service couture",
+      "cinematic covert-agent crew couture",
+      "undercover investigator couture"
+    ],
+    "integration": "Merge each theme with the current country's palette, secular motifs, landmark, weather, rolled wardrobe architecture, emotions, romance-square contacts, PAWS state, rainbow rolls, and inert mission-prop beat. Keep every scene visually distinct.",
+    "publicSafety": "Use abstract fashion references only. No sexualized medical care, explicit dance or stripping, real assassination, injury, combat, official police badges, copied uniforms, impersonation, arrests, raids, or threats. Covert-agent and investigator themes are fictional film-editorial styling with nonviolent route missions."
   },
   "frame": "9:16 full-length cinematic editorial with complete faces, hands, heels or boots, country landmark, and readable mission action"
 }
