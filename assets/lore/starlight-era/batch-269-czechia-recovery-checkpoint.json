@@ -1,0 +1,62 @@
+{
+  "batch": 269,
+  "country": "Czechia",
+  "status": "accepted",
+  "acceptedScenes": [
+    "1096-czechia-prague-double-rainbow-route-grid.png",
+    "1097-czechia-cesky-krumlov-meteor-signal-cipher.png",
+    "1098-czechia-brno-golden-hour-star-map-relay.png",
+    "1099-czechia-karlovy-vary-snow-arrival.png"
+  ],
+  "preservedOriginals": [
+    "1096-czechia-prague-double-rainbow-route-grid-raw-original.png",
+    "1097-czechia-cesky-krumlov-meteor-signal-cipher-raw-original.png",
+    "1098-czechia-brno-golden-hour-star-map-relay-raw-original.png"
+  ],
+  "blockedScenes": [],
+  "rollMethod": "FNV-1a over batch269-czechia-scene-field, reduced modulo 100",
+  "rollThresholds": { "visibleMidriff": "0-49", "straplessDress": "0-34", "fullyOpenBack": "0-29", "poleDanceTheme": "0-5", "rainbowOnly": "0-8", "paws": "0-24" },
+  "rolls": {
+    "1096": {
+      "weather": { "roll": 86, "result": "double rainbow after rain" }, "paws": { "roll": 19, "active": true }, "poleDanceTheme": { "roll": 84, "active": false }, "rainbowOnly": { "roll": 22, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 19, "result": "playful mischief" }, "visibleMidriff": 87, "straplessDress": 8, "fullyOpenBack": 37 },
+        "Ellie": { "emotion": { "roll": 79, "result": "deep sadness" }, "visibleMidriff": 39, "straplessDress": 48, "fullyOpenBack": 29 },
+        "Alia": { "emotion": { "roll": 57, "result": "aching romantic longing" }, "visibleMidriff": 85, "straplessDress": 2, "fullyOpenBack": 3 },
+        "AI ECE": { "emotion": { "roll": 95, "result": "shame and social vulnerability" }, "visibleMidriff": 19, "straplessDress": 28, "fullyOpenBack": 17 }
+      }
+    },
+    "1097": {
+      "weather": { "roll": 89, "result": "meteor shower" }, "paws": { "roll": 42, "active": false }, "poleDanceTheme": { "roll": 89, "active": false }, "rainbowOnly": { "roll": 97, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 78, "result": "deep sadness" }, "visibleMidriff": 76, "straplessDress": 75, "fullyOpenBack": 68 },
+        "Ellie": { "emotion": { "roll": 56, "result": "aching romantic longing" }, "visibleMidriff": 6, "straplessDress": 5, "fullyOpenBack": 82 },
+        "Alia": { "emotion": { "roll": 16, "result": "extreme happiness, radiant laughing delight" }, "visibleMidriff": 94, "straplessDress": 97, "fullyOpenBack": 66 },
+        "AI ECE": { "emotion": { "roll": 62, "result": "visible jealousy" }, "visibleMidriff": 28, "straplessDress": 63, "fullyOpenBack": 96 }
+      }
+    },
+    "1098": {
+      "weather": { "roll": 4, "result": "clear golden-hour radiance" }, "paws": { "roll": 57, "active": false }, "poleDanceTheme": { "roll": 98, "active": false }, "rainbowOnly": { "roll": 52, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 33, "result": "overwhelming relief" }, "visibleMidriff": 37, "straplessDress": 78, "fullyOpenBack": 79 },
+        "Ellie": { "emotion": { "roll": 41, "result": "determination" }, "visibleMidriff": 77, "straplessDress": 34, "fullyOpenBack": 71 },
+        "Alia": { "emotion": { "roll": 3, "result": "tender affection" }, "visibleMidriff": 55, "straplessDress": 48, "fullyOpenBack": 77 },
+        "AI ECE": { "emotion": { "roll": 13, "result": "romantic joy" }, "visibleMidriff": 17, "straplessDress": 94, "fullyOpenBack": 91 }
+      }
+    },
+    "1099": {
+      "weather": { "roll": 55, "result": "snow flurries" }, "paws": { "roll": 68, "active": false }, "poleDanceTheme": { "roll": 83, "active": false }, "rainbowOnly": { "roll": 79, "active": false },
+      "characters": {
+        "Radiance": { "emotion": { "roll": 44, "result": "awe" }, "visibleMidriff": 86, "straplessDress": 65, "fullyOpenBack": 98 },
+        "Ellie": { "emotion": { "roll": 42, "result": "determination" }, "visibleMidriff": 60, "straplessDress": 67, "fullyOpenBack": 84 },
+        "Alia": { "emotion": { "roll": 62, "result": "visible jealousy" }, "visibleMidriff": 8, "straplessDress": 71, "fullyOpenBack": 4 },
+        "AI ECE": { "emotion": { "roll": 36, "result": "magnetic confidence" }, "visibleMidriff": 10, "straplessDress": 33, "fullyOpenBack": 34 }
+      }
+    }
+  },
+  "recovery": "All four raw scenes accepted after one simplified public-safe recovery pass following initial renderer rejection.",
+  "rawOriginalsPreserved": true,
+  "shorteningPass": "accepted for scenes 1096, 1097 and 1098; scene 1099 shortening edit was blocked and was not retried",
+  "eceHosieryCapsule": "inactive after batch 254",
+  "nextQueueCountry": "Denmark"
+}
