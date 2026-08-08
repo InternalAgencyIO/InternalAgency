@@ -1,0 +1,365 @@
+{
+  "batch": 278,
+  "country": "Ireland",
+  "status": "partial-accepted-recovery-exhausted",
+  "rollMethod": "FNV-1a over batch278-ireland-scene-field, reduced modulo 100",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "undercover investigator couture",
+    "nurse-care couture"
+  ],
+  "maleModelSelection": {
+    "key": "batch278-ireland-male-model-scene",
+    "roll": 25,
+    "selectedScenePosition": 2,
+    "selectedScene": 1133,
+    "maleEmotion": {
+      "key": "batch278-ireland-scene2-male-emotion",
+      "roll": 55,
+      "result": "aching romantic longing"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Ireland's green-white-orange tricolor has no pictorial motif, so no literal flag graphic is copied.",
+    "fallbackMotifs": [
+      "shamrock geometry",
+      "Claddagh hands, heart, and crown",
+      "Celtic knot ribbons",
+      "Irish harp strings",
+      "Aran cable-knit geometry",
+      "Dublin Georgian doors",
+      "limestone cliff strata",
+      "generic dark Irish stout",
+      "fiddle and bodhran rhythm lines",
+      "Killarney lake waves and oak leaves"
+    ],
+    "minimumCoverage": "Each scene must place large readable Irish secular motifs across at least two character looks. The Galway scene must visibly include a generic dark Irish stout and traditional music motifs without brand marks."
+  },
+  "scenePlans": {
+    "1132": {
+      "theme": "undercover investigator couture",
+      "landmark": "Dublin River Liffey with Samuel Beckett Bridge and Custom House",
+      "motifs": [
+        "large harp-string and Georgian-door geometry",
+        "large shamrock and Liffey-wave fields"
+      ],
+      "weather": {
+        "roll": 93,
+        "result": "distant waterspout over open water"
+      },
+      "paws": {
+        "roll": 38,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 81,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 85,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 56,
+        "active": false,
+        "wearerRoll": 88,
+        "paletteModeRoll": 40
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "roll": 94,
+            "result": "shame and social vulnerability"
+          },
+          "visibleMidriff": 24,
+          "straplessDress": 71,
+          "fullyOpenBack": 40
+        },
+        "Ellie": {
+          "emotion": {
+            "roll": 12,
+            "result": "romantic joy"
+          },
+          "visibleMidriff": 74,
+          "straplessDress": 69,
+          "fullyOpenBack": 6
+        },
+        "Alia": {
+          "emotion": {
+            "roll": 56,
+            "result": "aching romantic longing"
+          },
+          "visibleMidriff": 22,
+          "straplessDress": 77,
+          "fullyOpenBack": 98
+        },
+        "AI ECE": {
+          "emotion": {
+            "roll": 82,
+            "result": "crying with visible tears"
+          },
+          "visibleMidriff": 40,
+          "straplessDress": 11,
+          "fullyOpenBack": 36
+        }
+      },
+      "plannedHandMap": "Radiance links Ellie and comforts ECE's cheek. Ellie links Radiance and embraces Alia at the waist. Alia rests one hand on Ellie and one on ECE's shoulder. ECE holds the inert route prop with one hand and controls the separate map with the other. Exactly eight hands."
+    },
+    "1133": {
+      "theme": "undercover investigator couture",
+      "landmark": "Cliffs of Moher on a secured inland viewing platform",
+      "motifs": [
+        "large Claddagh and Celtic-knot fields",
+        "large limestone-strata and Aran-cable panels"
+      ],
+      "weather": {
+        "roll": 30,
+        "result": "cinematic light rain with reflections"
+      },
+      "paws": {
+        "roll": 55,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 0,
+        "active": true
+      },
+      "rainbowOnly": {
+        "roll": 74,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 25,
+        "active": false,
+        "wearerRoll": 29,
+        "paletteModeRoll": 75
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "roll": 39,
+            "result": "magnetic confidence"
+          },
+          "visibleMidriff": 15,
+          "straplessDress": 24,
+          "fullyOpenBack": 69
+        },
+        "Ellie": {
+          "emotion": {
+            "roll": 67,
+            "result": "possessive tension"
+          },
+          "visibleMidriff": 3,
+          "straplessDress": 44,
+          "fullyOpenBack": 93
+        },
+        "Alia": {
+          "emotion": {
+            "roll": 41,
+            "result": "determination"
+          },
+          "visibleMidriff": 93,
+          "straplessDress": 6,
+          "fullyOpenBack": 83
+        },
+        "AI ECE": {
+          "emotion": {
+            "roll": 15,
+            "result": "extreme happiness, radiant laughing delight"
+          },
+          "visibleMidriff": 91,
+          "straplessDress": 96,
+          "fullyOpenBack": 29
+        },
+        "maleModel": {
+          "emotion": {
+            "roll": 55,
+            "result": "aching romantic longing"
+          }
+        }
+      },
+      "plannedHandMap": "Ellie uses one hand for a grounded standing route-mast lean and links the male model with the other. He embraces Alia with one arm and links Ellie with the other. Alia touches his chest and keeps her other hand visible. Radiance touches his forearm and ECE's shoulder. ECE holds the inert route prop and separate map. Exactly ten hands."
+    },
+    "1134": {
+      "theme": "nurse-care couture",
+      "landmark": "Galway Spanish Arch and the colorful Long Walk beside the Corrib",
+      "motifs": [
+        "large generic Irish stout and pub-window geometry",
+        "large fiddle, bodhran, shamrock, and Claddagh fields"
+      ],
+      "weather": {
+        "roll": 23,
+        "result": "soft dramatic overcast"
+      },
+      "paws": {
+        "roll": 8,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "roll": 95,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 23,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 86,
+        "active": false,
+        "wearerRoll": 2,
+        "paletteModeRoll": 2
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "roll": 64,
+            "result": "visible jealousy"
+          },
+          "visibleMidriff": 90,
+          "straplessDress": 53,
+          "fullyOpenBack": 26
+        },
+        "Ellie": {
+          "emotion": {
+            "roll": 42,
+            "result": "determination"
+          },
+          "visibleMidriff": 40,
+          "straplessDress": 59,
+          "fullyOpenBack": 88
+        },
+        "Alia": {
+          "emotion": {
+            "roll": 58,
+            "result": "aching romantic longing"
+          },
+          "visibleMidriff": 84,
+          "straplessDress": 31,
+          "fullyOpenBack": 12
+        },
+        "AI ECE": {
+          "emotion": {
+            "roll": 64,
+            "result": "visible jealousy"
+          },
+          "visibleMidriff": 10,
+          "straplessDress": 13,
+          "fullyOpenBack": 46
+        }
+      },
+      "plannedHandMap": "Radiance safely cradles PAWS and touches Ellie's forearm. Ellie gently pets PAWS and links Alia. Alia links Ellie and rests one hand on ECE's shoulder. ECE holds the inert route prop and controls the separate map. Exactly eight hands, with PAWS far from the prop."
+    },
+    "1135": {
+      "theme": "nurse-care couture",
+      "landmark": "Killarney Lakes and Ross Castle at golden hour",
+      "motifs": [
+        "large Killarney lake-wave and oak-leaf fields",
+        "large Claddagh, harp-string, and Aran-cable panels"
+      ],
+      "weather": {
+        "roll": 8,
+        "result": "clear golden-hour radiance"
+      },
+      "paws": {
+        "roll": 77,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "roll": 10,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 12,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "roll": 15,
+        "active": true,
+        "wearerRoll": 35,
+        "wearer": "Radiance",
+        "paletteModeRoll": 97,
+        "paletteMode": "original independent rainbow gradient"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "roll": 85,
+            "result": "full sobbing with tear-streaked face and shaking posture"
+          },
+          "visibleMidriff": 49,
+          "straplessDress": 46,
+          "fullyOpenBack": 39
+        },
+        "Ellie": {
+          "emotion": {
+            "roll": 77,
+            "result": "contained resentment"
+          },
+          "visibleMidriff": 69,
+          "straplessDress": 86,
+          "fullyOpenBack": 71
+        },
+        "Alia": {
+          "emotion": {
+            "roll": 47,
+            "result": "awe"
+          },
+          "visibleMidriff": 99,
+          "straplessDress": 88,
+          "fullyOpenBack": 45
+        },
+        "AI ECE": {
+          "emotion": {
+            "roll": 33,
+            "result": "overwhelming relief"
+          },
+          "visibleMidriff": 97,
+          "straplessDress": 6,
+          "fullyOpenBack": 51
+        }
+      },
+      "plannedHandMap": "Radiance and ECE link hands while Radiance touches ECE's forearm. Ellie comforts Radiance's shoulder and links Alia. Alia links Ellie and solely handles the inert route prop. ECE controls the separate map. Exactly eight hands."
+    }
+  },
+  "acceptedScenes": [
+    {
+      "scene": 1135,
+      "asset": "1135-ireland-killarney-golden-hour-hosiery-nurse-care-arrival.png",
+      "source": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-a685f0ac-27db-49b5-b328-8d1f1bebf9c6.png",
+      "attempt": "single recovery pass",
+      "qa": "Accepted: four distinct anchored adult women, Alia braided identity, Ross Castle and Killarney Lakes, clear golden hour, unique Irish-motif couture, Radiance rainbow hosiery, three visible affectionate contacts, no extra hands, complete footwear, and prop directed outward over empty water."
+    }
+  ],
+  "blockedScenes": [
+    {
+      "scene": 1132,
+      "attempts": 2,
+      "reason": "Initial output safety block. The single recovery render completed but failed the authoritative appearance-roll and exact hand-ownership gate; required waist and shoulder treatments were not all visible and hand ownership around ECE remained ambiguous."
+    },
+    {
+      "scene": 1133,
+      "attempts": 2,
+      "reason": "Initial output safety block. The single recovery render completed but failed the exact ten-hand ownership plan and required appearance-roll gate; several hands were obscured and the planned route-mast and contact choreography was not materialized."
+    },
+    {
+      "scene": 1134,
+      "attempts": 2,
+      "reason": "Initial output safety block and the single simplified public-safe recovery pass also returned no local asset. Recovery is exhausted."
+    }
+  ],
+  "maleAnchorStatus": "Not established. Selected male scene 1133 failed the mandatory QA gate, so no forward male face anchor was written to the creative contract.",
+  "shorteningPass": "Not needed for accepted scene 1135; all garments already read as concise above-knee editorial proportions. Originals remain untouched.",
+  "nextThemePair": [
+    "nurse-care couture",
+    "doctor-clinical-command couture"
+  ],
+  "nextQueueCountry": "Italy"
+}
