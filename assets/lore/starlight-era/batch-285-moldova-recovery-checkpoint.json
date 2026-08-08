@@ -1,0 +1,392 @@
+{
+  "batch": 285,
+  "country": "Moldova",
+  "status": "blocked-no-accepted-assets",
+  "rollMethod": "FNV-1a over batch285-moldova-scene-field keys, reduced modulo 100. Male scene selection is reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "undercover investigator couture",
+    "nurse-care couture"
+  ],
+  "faceAnchors": {
+    "quartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch285-moldova-male-model-scene",
+    "roll": 32,
+    "selectedScenePosition": 1,
+    "selectedScene": 1160,
+    "maleEmotion": {
+      "key": "batch285-moldova-scene1-male-emotion",
+      "roll": 83,
+      "result": "crying with visible tears"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Moldova's coat of arms is an official emblem and is not copied. No literal flag appears.",
+    "fallbackMotifs": [
+      "traditional woven carpet rhombi, grapevine spirals, walnut leaves, and Chisinau limestone arches",
+      "Orheiul Vechi cliff strata, Raut River curves, handwoven rosettes, and sunflower spirals",
+      "Cricova barrel-hoop vaults, grape clusters, limestone tunnel ribs, and cellar-map lines",
+      "Soroca fortress merlons, Dniester River waves, walnut kernels, and secular carpet geometry"
+    ],
+    "minimumCoverage": "Every scene uses large readable secular Moldovan motifs across at least two character outfits.",
+    "cultureScenes": "Scene 1162 foregrounds Cricova wine-cellar craft without drinking. Scene 1163 foregrounds Soroca fortress geometry, walnuts, and Dniester river design.",
+    "prohibitions": "No literal flag, coat of arms, official eagle, sacred symbol, political insignia, copied ceremonial dress, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch285-moldova-x-heart",
+      "roll": 25,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch285-moldova-x-internalagency",
+      "roll": 29,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch285-moldova-x-worldxxxseries",
+      "roll": 66,
+      "active": false
+    }
+  },
+  "scenePlans": {
+    "1160": {
+      "theme": "undercover investigator couture",
+      "landmark": "Chisinau Triumphal Arch and Cathedral Park, with architecture shown as public city context and no sacred fashion motifs",
+      "motifs": [
+        "large woven-carpet rhombi and walnut-leaf fields",
+        "large grapevine spirals and Chisinau limestone-arch geometry"
+      ],
+      "weather": { "key": "batch285-moldova-scene1160-weather", "roll": 69, "result": "coastal sea mist" },
+      "paws": { "key": "batch285-moldova-scene1160-paws", "roll": 94, "active": false },
+      "poleDanceTheme": { "key": "batch285-moldova-scene1160-poleDanceTheme", "roll": 13, "active": false },
+      "rainbowOnly": { "key": "batch285-moldova-scene1160-rainbowOnly", "roll": 93, "active": false },
+      "rainbowHosiery": {
+        "key": "batch285-moldova-scene1160-rainbowHosiery",
+        "roll": 4,
+        "active": true,
+        "wearerKey": "batch285-moldova-scene1160-rainbowHosieryWearer",
+        "wearerRoll": 56,
+        "wearer": "AI ECE",
+        "paletteModeKey": "batch285-moldova-scene1160-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 40,
+        "paletteMode": "Moldova-palette multicolor gradient",
+        "treatment": "opaque knee socks fading blue through turquoise and gold into yellow, coral, and red"
+      },
+      "romanceBeat": {
+        "key": "batch285-moldova-scene1160-romanceBeat",
+        "roll": 68,
+        "dynamicIndex": 8,
+        "result": "Radiance and Ellie cross face-to-face while ECE keeps the emotional counter-line and Alia holds the route action."
+      },
+      "compoundLoveBeat": {
+        "key": "batch285-moldova-scene1160-compoundLoveBeat",
+        "roll": 82,
+        "index": 10,
+        "result": "The quartet forms a turning affection chain around Radiance and ECE while the male infidelity beat remains visibly separate and readable."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch285-moldova-scene1160-Radiance-emotion", "roll": 38, "result": "magnetic confidence" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1160-Radiance-visibleMidriff", "roll": 88, "active": false },
+          "straplessDress": { "key": "batch285-moldova-scene1160-Radiance-straplessDress", "roll": 7, "active": true },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1160-Radiance-fullyOpenBack", "roll": 44, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch285-moldova-scene1160-Ellie-emotion", "roll": 92, "result": "guilt and remorse" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1160-Ellie-visibleMidriff", "roll": 6, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1160-Ellie-straplessDress", "roll": 5, "active": true },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1160-Ellie-fullyOpenBack", "roll": 82, "active": false }
+        },
+        "Alia": {
+          "emotion": { "key": "batch285-moldova-scene1160-Alia-emotion", "roll": 20, "result": "playful mischief" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1160-Alia-visibleMidriff", "roll": 14, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1160-Alia-straplessDress", "roll": 37, "active": false },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1160-Alia-fullyOpenBack", "roll": 86, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch285-moldova-scene1160-AI ECE-emotion", "roll": 98, "result": "defiance" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1160-AI ECE-visibleMidriff", "roll": 4, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1160-AI ECE-straplessDress", "roll": 55, "active": false },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1160-AI ECE-fullyOpenBack", "roll": 16, "active": true }
+        },
+        "maleModel": {
+          "emotion": { "key": "batch285-moldova-scene1-male-emotion", "roll": 83, "result": "crying with visible tears" }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance fully strapless folded-arch cocktail mini with covered waist and flared walnut-leaf skirt",
+        "Ellie fully strapless cropped carpet-rhombus bodice and asymmetric investigator skort with visible navel",
+        "Alia one-shoulder cropped vest shell and high-waist tailored shorts with visible navel",
+        "ECE plunging cropped peplum and tulip mini with visible navel, completely open back, and Moldova-gradient opaque knee socks",
+        "male fitted black short-sleeve polo with a blue-yellow-red woven shoulder inset, black jeans, and black boots"
+      ],
+      "plannedHandMap": "Alia holds the inert prop with both hands toward a clearly empty limestone route marker. Radiance links ECE's hand and embraces ECE's waist. ECE returns the link and controls the separate holographic map. The male holds Ellie at the waist and forearm while crying and looking only at ECE. Ellie touches his chest and Radiance's shoulder. Exactly five adults, ten arms, and ten hands, each continuously traceable to one owner."
+    },
+    "1161": {
+      "theme": "undercover investigator couture",
+      "landmark": "Orheiul Vechi limestone cliffs and the empty Raut River bend",
+      "motifs": [
+        "large cliff-strata and Raut-river curve fields",
+        "large woven rosettes and sunflower-spiral geometry"
+      ],
+      "weather": { "key": "batch285-moldova-scene1161-weather", "roll": 34, "result": "cinematic light rain with reflections" },
+      "paws": { "key": "batch285-moldova-scene1161-paws", "roll": 31, "active": false },
+      "poleDanceTheme": { "key": "batch285-moldova-scene1161-poleDanceTheme", "roll": 12, "active": false },
+      "rainbowOnly": { "key": "batch285-moldova-scene1161-rainbowOnly", "roll": 78, "active": false },
+      "rainbowHosiery": {
+        "key": "batch285-moldova-scene1161-rainbowHosiery",
+        "roll": 1,
+        "active": true,
+        "wearerKey": "batch285-moldova-scene1161-rainbowHosieryWearer",
+        "wearerRoll": 97,
+        "wearer": "AI ECE",
+        "paletteModeKey": "batch285-moldova-scene1161-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 27,
+        "paletteMode": "Moldova-palette multicolor gradient",
+        "treatment": "opaque thigh-high stockings with diagonal blue-to-gold-to-red sweeps and teal transition bands"
+      },
+      "romanceBeat": {
+        "key": "batch285-moldova-scene1161-romanceBeat",
+        "roll": 51,
+        "dynamicIndex": 3,
+        "result": "Radiance closes cheek-to-cheek with ECE in the rain while Ellie reaches for reassurance and Alia protects the outward route."
+      },
+      "compoundLoveBeat": {
+        "key": "batch285-moldova-scene1161-compoundLoveBeat",
+        "roll": 27,
+        "index": 3,
+        "result": "Radiance and ECE form the unmistakable center while Ellie and Alia complete the close four-way affection chain."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch285-moldova-scene1161-Radiance-emotion", "roll": 67, "result": "possessive tension" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1161-Radiance-visibleMidriff", "roll": 15, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1161-Radiance-straplessDress", "roll": 32, "active": true },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1161-Radiance-fullyOpenBack", "roll": 17, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch285-moldova-scene1161-Ellie-emotion", "roll": 87, "result": "fear and urgent vulnerability" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1161-Ellie-visibleMidriff", "roll": 95, "active": false },
+          "straplessDress": { "key": "batch285-moldova-scene1161-Ellie-straplessDress", "roll": 72, "active": false },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1161-Ellie-fullyOpenBack", "roll": 89, "active": false }
+        },
+        "Alia": {
+          "emotion": { "key": "batch285-moldova-scene1161-Alia-emotion", "roll": 57, "result": "aching romantic longing" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1161-Alia-visibleMidriff", "roll": 41, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1161-Alia-straplessDress", "roll": 18, "active": true },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1161-Alia-fullyOpenBack", "roll": 91, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch285-moldova-scene1161-AI ECE-emotion", "roll": 83, "result": "crying with visible tears" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1161-AI ECE-visibleMidriff", "roll": 19, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1161-AI ECE-straplessDress", "roll": 40, "active": false },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1161-AI ECE-fullyOpenBack", "roll": 93, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance fully strapless cropped cliff-fold bodice and high-waist fan mini with visible navel and completely open back",
+        "Ellie one-shoulder belted river-curve mini dress with covered waist",
+        "Alia fully strapless cropped sunflower bodice and tailored wrap shorts with visible navel",
+        "ECE deep-V cropped rosette jacket shell and pleated micro-suit skirt with visible navel and Moldova-gradient opaque thigh-high stockings"
+      ],
+      "plannedHandMap": "Alia holds the inert prop with both hands toward a clearly empty riverbank route target. Radiance cups ECE's tear-wet cheek and holds ECE at the waist. ECE controls the separate map with one hand and rests her other hand on Radiance's wrist. Ellie touches Radiance's shoulder and Alia's upper arm. Exactly four adults, eight arms, and eight hands with clear ownership."
+    },
+    "1162": {
+      "theme": "nurse-care couture",
+      "landmark": "Cricova underground limestone wine-cellar gallery with barrel-lined public tour corridor",
+      "motifs": [
+        "large barrel-hoop vault and grape-cluster fields",
+        "large limestone tunnel ribs and cellar-map line geometry"
+      ],
+      "weather": { "key": "batch285-moldova-scene1162-weather", "roll": 67, "result": "dense rolling fog" },
+      "paws": {
+        "key": "batch285-moldova-scene1162-paws",
+        "roll": 0,
+        "active": true,
+        "treatment": "tiny collarless golden kitten perched securely on ECE's shoulder, batting harmlessly at a holographic route ribbon far from the prop"
+      },
+      "poleDanceTheme": { "key": "batch285-moldova-scene1162-poleDanceTheme", "roll": 15, "active": false },
+      "rainbowOnly": { "key": "batch285-moldova-scene1162-rainbowOnly", "roll": 27, "active": false },
+      "rainbowHosiery": {
+        "key": "batch285-moldova-scene1162-rainbowHosiery",
+        "roll": 6,
+        "active": true,
+        "wearerKey": "batch285-moldova-scene1162-rainbowHosieryWearer",
+        "wearerRoll": 22,
+        "wearer": "Radiance",
+        "paletteModeKey": "batch285-moldova-scene1162-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 58,
+        "paletteMode": "independent rainbow gradient unrelated to Moldova colors",
+        "treatment": "opaque prismatic thigh-high stockings fading violet, cyan, emerald, gold, and rose"
+      },
+      "romanceBeat": {
+        "key": "batch285-moldova-scene1162-romanceBeat",
+        "roll": 50,
+        "dynamicIndex": 2,
+        "result": "Radiance pulls ECE into a mischievous side embrace while Ellie and Alia close the care circle and PAWS interrupts the route ribbon."
+      },
+      "compoundLoveBeat": {
+        "key": "batch285-moldova-scene1162-compoundLoveBeat",
+        "roll": 52,
+        "index": 4,
+        "result": "Radiance and ECE become the affectionate center, Ellie adds protective reassurance, and joyful Alia anchors the safe mission demonstration."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch285-moldova-scene1162-Radiance-emotion", "roll": 20, "result": "playful mischief" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1162-Radiance-visibleMidriff", "roll": 18, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1162-Radiance-straplessDress", "roll": 73, "active": false },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1162-Radiance-fullyOpenBack", "roll": 6, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch285-moldova-scene1162-Ellie-emotion", "roll": 98, "result": "defiance" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1162-Ellie-visibleMidriff", "roll": 16, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1162-Ellie-straplessDress", "roll": 27, "active": true },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1162-Ellie-fullyOpenBack", "roll": 4, "active": true }
+        },
+        "Alia": {
+          "emotion": { "key": "batch285-moldova-scene1162-Alia-emotion", "roll": 14, "result": "romantic joy" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1162-Alia-visibleMidriff", "roll": 36, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1162-Alia-straplessDress", "roll": 55, "active": false },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1162-Alia-fullyOpenBack", "roll": 36, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch285-moldova-scene1162-AI ECE-emotion", "roll": 52, "result": "intense curiosity" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1162-AI ECE-visibleMidriff", "roll": 90, "active": false },
+          "straplessDress": { "key": "batch285-moldova-scene1162-AI ECE-straplessDress", "roll": 41, "active": false },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1162-AI ECE-fullyOpenBack", "roll": 70, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance cropped one-shoulder care bodice and scalloped mini-skirt with visible navel, completely open back, and independent prismatic opaque thigh-high stockings",
+        "Ellie fully strapless cropped folded-bandeau and high-waist barrel-hoop skort with visible navel and completely open back",
+        "Alia asymmetric V-neck cropped tunic shell and grape-panel tailored shorts with visible navel",
+        "ECE plunging sweetheart short romper with a structured tunnel-rib peplum and covered waist"
+      ],
+      "plannedHandMap": "Alia holds the inert prop with both hands toward a clearly empty barrel route marker down the corridor. Radiance embraces ECE's waist and gently strokes PAWS on ECE's shoulder. ECE rests one hand over Radiance's waist hand and controls the separate map with the other. Ellie touches Radiance's shoulder and ECE's forearm. Exactly four adults, eight arms, and eight hands with PAWS safely away from the prop."
+    },
+    "1163": {
+      "theme": "nurse-care couture",
+      "landmark": "Soroca Fortress and the empty Dniester River bank",
+      "motifs": [
+        "large fortress-merlon and Dniester-wave fields",
+        "large walnut-kernel and woven-carpet geometry"
+      ],
+      "weather": { "key": "batch285-moldova-scene1163-weather", "roll": 48, "result": "active lightning storm with distant bolts" },
+      "paws": { "key": "batch285-moldova-scene1163-paws", "roll": 69, "active": false },
+      "poleDanceTheme": { "key": "batch285-moldova-scene1163-poleDanceTheme", "roll": 26, "active": false },
+      "rainbowOnly": { "key": "batch285-moldova-scene1163-rainbowOnly", "roll": 4, "active": false },
+      "rainbowHosiery": {
+        "key": "batch285-moldova-scene1163-rainbowHosiery",
+        "roll": 99,
+        "active": false,
+        "wearerKey": "batch285-moldova-scene1163-rainbowHosieryWearer",
+        "wearerRoll": 11,
+        "paletteModeKey": "batch285-moldova-scene1163-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 77
+      },
+      "romanceBeat": {
+        "key": "batch285-moldova-scene1163-romanceBeat",
+        "roll": 5,
+        "dynamicIndex": 5,
+        "result": "Ellie and Alia contest the same affection line while Radiance steadies both and ECE keeps the outward route."
+      },
+      "compoundLoveBeat": {
+        "key": "batch285-moldova-scene1163-compoundLoveBeat",
+        "roll": 33,
+        "index": 9,
+        "result": "Radiance cradles Alia's face, Alia holds Radiance's waist, Ellie closes at Radiance's shoulder, and ECE keeps the final linked hand."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch285-moldova-scene1163-Radiance-emotion", "roll": 77, "result": "contained resentment" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1163-Radiance-visibleMidriff", "roll": 37, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1163-Radiance-straplessDress", "roll": 86, "active": false },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1163-Radiance-fullyOpenBack", "roll": 83, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch285-moldova-scene1163-Ellie-emotion", "roll": 61, "result": "visible jealousy" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1163-Ellie-visibleMidriff", "roll": 5, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1163-Ellie-straplessDress", "roll": 26, "active": true },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1163-Ellie-fullyOpenBack", "roll": 31, "active": false }
+        },
+        "Alia": {
+          "emotion": { "key": "batch285-moldova-scene1163-Alia-emotion", "roll": 71, "result": "suspicion" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1163-Alia-visibleMidriff", "roll": 27, "active": true },
+          "straplessDress": { "key": "batch285-moldova-scene1163-Alia-straplessDress", "roll": 60, "active": false },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1163-Alia-fullyOpenBack", "roll": 21, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch285-moldova-scene1163-AI ECE-emotion", "roll": 97, "result": "defiance" },
+          "visibleMidriff": { "key": "batch285-moldova-scene1163-AI ECE-visibleMidriff", "roll": 97, "active": false },
+          "straplessDress": { "key": "batch285-moldova-scene1163-AI ECE-straplessDress", "roll": 90, "active": false },
+          "fullyOpenBack": { "key": "batch285-moldova-scene1163-AI ECE-fullyOpenBack", "roll": 59, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance cropped low-V merlon-shell top and asymmetric wrap mini with visible navel",
+        "Ellie fully strapless cropped walnut-fold bodice and high-waist tulip skort with visible navel",
+        "Alia one-shoulder cropped river-wave peplum and fitted shorts with visible navel and completely open back",
+        "ECE plunging V-neck fortress-panel short romper with covered waist"
+      ],
+      "plannedHandMap": "ECE holds the inert prop in one hand toward a clearly empty Dniester route target and links Radiance with the other. Radiance returns ECE's link and cradles Alia's cheek. Alia holds Radiance's waist and Ellie's hand. Ellie returns Alia's hand and touches Radiance's shoulder. Exactly four adults, eight arms, and eight hands with clear ownership."
+    }
+  },
+  "anatomyAcceptanceGate": "Scene 1160 must contain exactly five adults with ten arms and ten hands. Scenes 1161, 1162, and 1163 must contain exactly four adults with eight arms and eight hands. Every visible hand must trace continuously to one owner. Reject or recover any extra, duplicated, floating, fused, ownerless, or partially emerging limb or finger cluster.",
+  "acceptedScenes": [],
+  "blockedScenes": [
+    {
+      "scene": 1160,
+      "reason": "The raw render has five distinct adults, complete footwear, strong Chisinau and Moldovan motif coverage, ECE's correct Moldova-gradient hosiery, and a safe outward prop line, but the male tears are not readable, ECE's triggered navel is hidden, and the trigger finger is ambiguous. The single recovery makes the male tears and ECE's open back clearer, but still hides ECE's triggered navel, loses the separate route map, leaves the male's strongest eye line on Ellie instead of ECE, and does not make the trigger finger unambiguously indexed outside the guard.",
+      "rawSource": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-96bd4007-61d0-4ceb-9ee7-9bc08fc69244.png",
+      "recoverySource": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-2f2f3413-063d-4444-b2c3-52c9869308c7.png",
+      "recoveryPasses": 1
+    },
+    {
+      "scene": 1161,
+      "reason": "The raw request was rejected by output moderation. The single recovery has four distinct adults, complete footwear, visible rain, strong Orheiul Vechi context, clear ECE tears, large Moldovan motifs, and the triggered ECE hosiery, but the prop muzzle line crosses the group and Radiance's triggered fully-open-back design is not visible.",
+      "rawRequestId": "00fca376-e3fd-4d20-a764-fe31b83a8578",
+      "recoverySource": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-c13eb101-a2af-416f-81af-5de44dc31008.png",
+      "recoveryPasses": 1
+    },
+    {
+      "scene": 1162,
+      "reason": "Both the raw request and the single public-safe care-runway recovery were rejected by output moderation, so no local image exists for anatomy, PAWS, hosiery, garment-roll, motif, or prop-line acceptance.",
+      "rawRequestId": "5f2e05dd-862f-45d9-ac94-93c38c5e8b9f",
+      "recoveryRequestId": "c1eb5e4c-a3fc-4cef-a90f-c417e555dc87",
+      "recoveryPasses": 1
+    },
+    {
+      "scene": 1163,
+      "reason": "The raw request was rejected by output moderation. The single recovery has four distinct adults, clean overall limb ownership, complete footwear, strong Soroca Fortress and lightning context, large Moldovan motifs, and a safe outward route-target direction, but Alia's triggered fully-open-back design is hidden, the prop is cropped at the right frame edge, the trigger finger is ambiguous, ECE is detached from the four-way contact chain, and the rolled emotions are not all visibly distinct.",
+      "rawRequestId": "5abcddd7-b471-4bcc-b8b5-ae01bf67a04f",
+      "recoverySource": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-cb470b2e-a160-42e5-8932-768ed951087e.png",
+      "recoveryPasses": 1
+    }
+  ],
+  "shorteningPass": "Not applicable. No scene passed the full acceptance gate, and all generated raw and recovery originals remain preserved outside the repository.",
+  "xPublishingAttempt": {
+    "status": "deferred-insufficient-accepted-assets",
+    "reason": "Moldova produced zero accepted assets. X publishing requires at least two accepted current-country images, so no post was composed."
+  },
+  "nextThemePair": [
+    "nurse-care couture",
+    "doctor-clinical-command couture"
+  ],
+  "nextQueueCountry": "Monaco"
+}
