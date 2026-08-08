@@ -1,0 +1,451 @@
+{
+  "batch": 288,
+  "country": "Netherlands",
+  "status": "blocked-no-accepted-assets",
+  "sourceCommit": "ad9576ef035fbe2bef912ebd9b33bc6fe1766914",
+  "rollMethod": "FNV-1a over the recorded batch288-netherlands keys, reduced modulo 100. Male scene selection is reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "nextThemePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "nextQueueCountry": "North Macedonia",
+  "faceAnchors": {
+    "quartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch288-netherlands-male-model-scene",
+    "roll": 73,
+    "selectedScenePosition": 2,
+    "selectedScene": 1173,
+    "maleEmotion": {
+      "key": "batch288-netherlands-scene2-male-emotion",
+      "roll": 19,
+      "result": "playful mischief"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "The Netherlands flag has no motif. No literal flag or official emblem appears.",
+    "palette": "Dutch red, white, and cobalt blue expanded with orange, Delft blue, silver, and canal-light gold.",
+    "fallbackMotifs": [
+      "Erasmus Bridge cable fans, bicycle wheels, Rotterdam harbor arcs, and cube-house facets",
+      "Kinderdijk windmill sails, tulip fans, Delftware curls, and polder-water ripples",
+      "Hoge Veluwe heath blooms, white bicycle frames, pine cones, and sandy-path curves",
+      "Amsterdam canal-house gables, arched bridges, Delftware tulips, and canal-ring geometry"
+    ],
+    "minimumCoverage": "Every scene uses large complete secular Dutch motifs across at least two outfits as full garment fields rather than tiny trim.",
+    "cultureScene": "Scene 1173 foregrounds Kinderdijk windmills, tulips, Delftware pattern, and polder water as unmistakable secular Netherlands culture.",
+    "prohibitions": "No literal flag, royal crest, official emblem, sacred symbol, political insignia, copied folk costume, badge, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": { "key": "batch288-netherlands-x-heart", "roll": 2, "result": "red heart" },
+    "internalAgency": { "key": "batch288-netherlands-x-internalagency", "roll": 20, "active": true },
+    "worldXXXSeries": { "key": "batch288-netherlands-x-worldxxxseries", "roll": 67, "active": false }
+  },
+  "anatomyGate": {
+    "fourAdultScenes": "Exactly four adults, eight arms, and eight hands with one continuously traceable owner per limb.",
+    "maleScene": "Exactly five adults, ten arms, and ten hands. The male replaces nobody.",
+    "automaticRejects": "Reject every extra, duplicated, floating, fused, borrowed, emerging, hidden-owner, or ambiguous limb or finger cluster, malformed face, incomplete shoe, or untraceable contact."
+  },
+  "scenePlans": {
+    "1172": {
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "Rotterdam waterfront with the Erasmus Bridge",
+      "motifs": [
+        "large complete Erasmus cable fans and bicycle-wheel fields across Radiance and Ellie",
+        "large complete harbor arcs and cube-house facets across Alia and AI ECE"
+      ],
+      "weather": { "key": "batch288-netherlands-scene1172-weather", "roll": 61, "result": "heavy snow or cinematic blizzard" },
+      "paws": { "key": "batch288-netherlands-scene1172-paws", "roll": 30, "active": false },
+      "poleDanceTheme": { "key": "batch288-netherlands-scene1172-poleDanceTheme", "roll": 33, "active": false },
+      "rainbowOnly": { "key": "batch288-netherlands-scene1172-rainbowOnly", "roll": 97, "active": false },
+      "rainbowHosiery": {
+        "key": "batch288-netherlands-scene1172-rainbowHosiery",
+        "roll": 4,
+        "active": true,
+        "wearerKey": "batch288-netherlands-scene1172-rainbowHosieryWearer",
+        "wearerRoll": 32,
+        "wearer": "Radiance",
+        "paletteModeKey": "batch288-netherlands-scene1172-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 20,
+        "paletteMode": "Netherlands-palette multicolor gradient",
+        "treatment": "opaque thigh-high stockings fading Dutch red through coral, white, pale blue, cobalt, and orange transition bands"
+      },
+      "romanceBeat": {
+        "key": "batch288-netherlands-scene1172-romanceBeat",
+        "roll": 60,
+        "dynamicIndex": 0,
+        "result": "Radiance and ECE become the clear affectionate center while crying Ellie reaches for Radiance and curious Alia protects the route."
+      },
+      "compoundLoveBeat": {
+        "key": "batch288-netherlands-scene1172-compoundLoveBeat",
+        "roll": 90,
+        "index": 6,
+        "result": "A moving handhold chain keeps Radiance and ECE together, gives Ellie reassurance, and lets Alia guide the inert route action."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch288-netherlands-scene1172-Radiance-emotion", "roll": 42, "result": "determination" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1172-Radiance-visibleMidriff", "roll": 96, "active": false },
+          "straplessDress": { "key": "batch288-netherlands-scene1172-Radiance-straplessDress", "roll": 99, "active": false },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1172-Radiance-fullyOpenBack", "roll": 76, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch288-netherlands-scene1172-Ellie-emotion", "roll": 84, "result": "crying with visible tears" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1172-Ellie-visibleMidriff", "roll": 14, "active": true },
+          "straplessDress": { "key": "batch288-netherlands-scene1172-Ellie-straplessDress", "roll": 97, "active": false },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1172-Ellie-fullyOpenBack", "roll": 14, "active": true }
+        },
+        "Alia": {
+          "emotion": { "key": "batch288-netherlands-scene1172-Alia-emotion", "roll": 52, "result": "intense curiosity" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1172-Alia-visibleMidriff", "roll": 46, "active": true },
+          "straplessDress": { "key": "batch288-netherlands-scene1172-Alia-straplessDress", "roll": 89, "active": false },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1172-Alia-fullyOpenBack", "roll": 6, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch288-netherlands-scene1172-AI ECE-emotion", "roll": 34, "result": "overwhelming relief" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1172-AI ECE-visibleMidriff", "roll": 52, "active": false },
+          "straplessDress": { "key": "batch288-netherlands-scene1172-AI ECE-straplessDress", "roll": 51, "active": false },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1172-AI ECE-fullyOpenBack", "roll": 52, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance bare-arm red cable-fan mini with covered waist, open upper back, and Netherlands-gradient opaque thigh-high stockings",
+        "Ellie bare-arm cobalt two-piece exposing her navel, complete open back, and bicycle-wheel asymmetric skirt",
+        "Alia bare-arm orange-white harbor-arc crop bodice exposing her navel with tailored shorts and complete open back",
+        "AI ECE bare-arm silver-blue cube-facet peplum romper with covered waist and open upper back"
+      ],
+      "propHandler": "Alia",
+      "plannedHandMap": "Alia's right hand holds the inert rainbow-gradient sidearm toward an empty marked river route at far right with muzzle crossing nobody and index finger outside the guard. Alia's left rests on ECE's shoulder. ECE's right rests on Alia's forearm and controls a wrist map; ECE's left holds Radiance's right. Radiance's left holds Ellie's right. Ellie's left rests on Radiance's forearm. Exactly four adults, eight arms, and eight visible traceable hands."
+    },
+    "1173": {
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "Kinderdijk windmills and polder canal",
+      "motifs": [
+        "large complete windmill sails and tulip fans across Radiance and Ellie",
+        "large complete Delftware curls and polder-ripple geometry across Alia and AI ECE"
+      ],
+      "weather": { "key": "batch288-netherlands-scene1173-weather", "roll": 82, "result": "sunshower with sparkling droplets" },
+      "paws": {
+        "key": "batch288-netherlands-scene1173-paws",
+        "roll": 23,
+        "active": true,
+        "treatment": "PAWS is one tiny collarless golden kitten perched securely on the male's left shoulder while Radiance gently strokes it, far from ECE and the prop."
+      },
+      "poleDanceTheme": { "key": "batch288-netherlands-scene1173-poleDanceTheme", "roll": 64, "active": false },
+      "rainbowOnly": { "key": "batch288-netherlands-scene1173-rainbowOnly", "roll": 38, "active": false },
+      "rainbowHosiery": {
+        "key": "batch288-netherlands-scene1173-rainbowHosiery",
+        "roll": 89,
+        "active": false,
+        "wearerKey": "batch288-netherlands-scene1173-rainbowHosieryWearer",
+        "wearerRoll": 33,
+        "wearer": "Radiance",
+        "paletteModeKey": "batch288-netherlands-scene1173-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 59,
+        "paletteMode": "independent rainbow gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch288-netherlands-scene1173-romanceBeat",
+        "roll": 31,
+        "dynamicIndex": 7,
+        "result": "The five adults form a close affection chain while the male openly touches Alia and Ellie but keeps his strongest eye line on ECE."
+      },
+      "compoundLoveBeat": {
+        "key": "batch288-netherlands-scene1173-compoundLoveBeat",
+        "roll": 79,
+        "index": 7,
+        "result": "PAWS creates a comic interruption as Radiance seeks the male, confident Ellie holds him, jealous Alia closes in, and ECE controls the route."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch288-netherlands-scene1173-Radiance-emotion", "roll": 23, "result": "playful mischief" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1173-Radiance-visibleMidriff", "roll": 79, "active": false },
+          "straplessDress": { "key": "batch288-netherlands-scene1173-Radiance-straplessDress", "roll": 12, "active": true },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1173-Radiance-fullyOpenBack", "roll": 21, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch288-netherlands-scene1173-Ellie-emotion", "roll": 35, "result": "magnetic confidence" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1173-Ellie-visibleMidriff", "roll": 91, "active": false },
+          "straplessDress": { "key": "batch288-netherlands-scene1173-Ellie-straplessDress", "roll": 0, "active": true },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1173-Ellie-fullyOpenBack", "roll": 25, "active": true }
+        },
+        "Alia": {
+          "emotion": { "key": "batch288-netherlands-scene1173-Alia-emotion", "roll": 61, "result": "visible jealousy" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1173-Alia-visibleMidriff", "roll": 65, "active": false },
+          "straplessDress": { "key": "batch288-netherlands-scene1173-Alia-straplessDress", "roll": 6, "active": true },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1173-Alia-fullyOpenBack", "roll": 91, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch288-netherlands-scene1173-AI ECE-emotion", "roll": 35, "result": "magnetic confidence" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1173-AI ECE-visibleMidriff", "roll": 31, "active": true },
+          "straplessDress": { "key": "batch288-netherlands-scene1173-AI ECE-straplessDress", "roll": 40, "active": false },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1173-AI ECE-fullyOpenBack", "roll": 9, "active": true }
+        },
+        "maleModel": {
+          "emotion": { "key": "batch288-netherlands-scene2-male-emotion", "roll": 19, "result": "playful mischief" }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance secure fully strapless red-white tulip-fan mini with covered waist and complete open back",
+        "Ellie secure fully strapless cobalt windmill-sail folded dress with covered waist and complete open back",
+        "Alia secure fully strapless orange Delftware-curl cocktail mini with covered waist and open upper back",
+        "AI ECE bare-arm cobalt-white polder-ripple two-piece exposing her navel with complete open back",
+        "male fitted white short-sleeve polo with an orange windmill-sail shoulder panel, black jeans, and black boots"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "ECE's right hand holds the inert rainbow-gradient sidearm toward an empty polder-water route at far right, with muzzle crossing nobody and index finger outside the guard. ECE's left holds Radiance's right and controls a wrist map. Radiance's left holds Ellie's right. Ellie's left holds the male's right. The male's left embraces Alia's waist while his strongest gaze returns to ECE. Alia's right rests on the male's forearm and her left gently strokes PAWS on his far-left shoulder. Exactly five adults, ten arms, and ten visible traceable hands."
+    },
+    "1174": {
+      "theme": "Paris runway model couture",
+      "landmark": "Hoge Veluwe heath with the park's secular white-bicycle culture",
+      "motifs": [
+        "large complete heath-bloom and white-bicycle-frame fields across Radiance and Ellie",
+        "large complete pine-cone and sandy-path curves across Alia and AI ECE"
+      ],
+      "weather": { "key": "batch288-netherlands-scene1174-weather", "roll": 23, "result": "soft dramatic overcast" },
+      "paws": { "key": "batch288-netherlands-scene1174-paws", "roll": 36, "active": false },
+      "poleDanceTheme": { "key": "batch288-netherlands-scene1174-poleDanceTheme", "roll": 91, "active": false },
+      "rainbowOnly": { "key": "batch288-netherlands-scene1174-rainbowOnly", "roll": 43, "active": false },
+      "rainbowHosiery": {
+        "key": "batch288-netherlands-scene1174-rainbowHosiery",
+        "roll": 46,
+        "active": false,
+        "wearerKey": "batch288-netherlands-scene1174-rainbowHosieryWearer",
+        "wearerRoll": 10,
+        "wearer": "Radiance",
+        "paletteModeKey": "batch288-netherlands-scene1174-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 82,
+        "paletteMode": "independent rainbow gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch288-netherlands-scene1174-romanceBeat",
+        "roll": 34,
+        "dynamicIndex": 10,
+        "result": "Tender Radiance and joyful Ellie close the runway chain while jealous Alia reaches toward them and confident ECE owns the route edge."
+      },
+      "compoundLoveBeat": {
+        "key": "batch288-netherlands-scene1174-compoundLoveBeat",
+        "roll": 68,
+        "index": 8,
+        "result": "Linked hands, shoulder reassurance, and a contested forearm create a moving four-way runway affection beat."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch288-netherlands-scene1174-Radiance-emotion", "roll": 4, "result": "tender affection" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1174-Radiance-visibleMidriff", "roll": 70, "active": false },
+          "straplessDress": { "key": "batch288-netherlands-scene1174-Radiance-straplessDress", "roll": 49, "active": false },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1174-Radiance-fullyOpenBack", "roll": 38, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch288-netherlands-scene1174-Ellie-emotion", "roll": 10, "result": "romantic joy" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1174-Ellie-visibleMidriff", "roll": 84, "active": false },
+          "straplessDress": { "key": "batch288-netherlands-scene1174-Ellie-straplessDress", "roll": 43, "active": false },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1174-Ellie-fullyOpenBack", "roll": 36, "active": false }
+        },
+        "Alia": {
+          "emotion": { "key": "batch288-netherlands-scene1174-Alia-emotion", "roll": 62, "result": "visible jealousy" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1174-Alia-visibleMidriff", "roll": 16, "active": true },
+          "straplessDress": { "key": "batch288-netherlands-scene1174-Alia-straplessDress", "roll": 7, "active": true },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1174-Alia-fullyOpenBack", "roll": 28, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch288-netherlands-scene1174-AI ECE-emotion", "roll": 36, "result": "magnetic confidence" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1174-AI ECE-visibleMidriff", "roll": 82, "active": false },
+          "straplessDress": { "key": "batch288-netherlands-scene1174-AI ECE-straplessDress", "roll": 65, "active": false },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1174-AI ECE-fullyOpenBack", "roll": 18, "active": true }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance bare-arm cobalt heath-bloom sculpted mini with covered waist and open upper back",
+        "Ellie bare-arm white bicycle-frame one-shoulder dress with covered waist and open upper back",
+        "Alia secure fully strapless orange pine-cone two-piece exposing her navel with complete open back",
+        "AI ECE bare-arm red sandy-path peplum romper with covered waist and complete open back"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "ECE's right hand holds the inert rainbow-gradient sidearm toward an empty marked heath route at far right, with muzzle crossing nobody and index finger outside the guard. ECE's left rests on Alia's shoulder and controls a wrist map. Alia's right rests on ECE's forearm and her left holds Ellie's right. Ellie's left holds Radiance's right. Radiance's left rests on Ellie's shoulder. Exactly four adults, eight arms, and eight visible traceable hands."
+    },
+    "1175": {
+      "theme": "Paris runway model couture",
+      "landmark": "Amsterdam canal ring and illuminated skinny gable houses",
+      "motifs": [
+        "large complete canal-house gables and arched-bridge fields across Radiance and Ellie",
+        "large complete Delftware tulips and canal-ring geometry across Alia and AI ECE"
+      ],
+      "weather": { "key": "batch288-netherlands-scene1175-weather", "roll": 24, "result": "soft dramatic overcast" },
+      "paws": { "key": "batch288-netherlands-scene1175-paws", "roll": 93, "active": false },
+      "poleDanceTheme": { "key": "batch288-netherlands-scene1175-poleDanceTheme", "roll": 34, "active": false },
+      "rainbowOnly": { "key": "batch288-netherlands-scene1175-rainbowOnly", "roll": 52, "active": false },
+      "rainbowHosiery": {
+        "key": "batch288-netherlands-scene1175-rainbowHosiery",
+        "roll": 67,
+        "active": false,
+        "wearerKey": "batch288-netherlands-scene1175-rainbowHosieryWearer",
+        "wearerRoll": 55,
+        "wearer": "AI ECE",
+        "paletteModeKey": "batch288-netherlands-scene1175-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 85,
+        "paletteMode": "independent rainbow gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch288-netherlands-scene1175-romanceBeat",
+        "roll": 5,
+        "dynamicIndex": 5,
+        "result": "The quartet crosses in a canal-side runway weave as surprised Ellie links Radiance and Alia while hopeful ECE takes the route edge."
+      },
+      "compoundLoveBeat": {
+        "key": "batch288-netherlands-scene1175-compoundLoveBeat",
+        "roll": 85,
+        "index": 1,
+        "result": "ECE reclaims Alia's attention through a shoulder touch while Ellie and Radiance keep the affection chain intact."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch288-netherlands-scene1175-Radiance-emotion", "roll": 77, "result": "contained resentment" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1175-Radiance-visibleMidriff", "roll": 65, "active": false },
+          "straplessDress": { "key": "batch288-netherlands-scene1175-Radiance-straplessDress", "roll": 22, "active": true },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1175-Radiance-fullyOpenBack", "roll": 51, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch288-netherlands-scene1175-Ellie-emotion", "roll": 49, "result": "startled surprise" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1175-Ellie-visibleMidriff", "roll": 57, "active": false },
+          "straplessDress": { "key": "batch288-netherlands-scene1175-Ellie-straplessDress", "roll": 26, "active": true },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1175-Ellie-fullyOpenBack", "roll": 15, "active": true }
+        },
+        "Alia": {
+          "emotion": { "key": "batch288-netherlands-scene1175-Alia-emotion", "roll": 67, "result": "possessive tension" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1175-Alia-visibleMidriff", "roll": 99, "active": false },
+          "straplessDress": { "key": "batch288-netherlands-scene1175-Alia-straplessDress", "roll": 72, "active": false },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1175-Alia-fullyOpenBack", "roll": 9, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch288-netherlands-scene1175-AI ECE-emotion", "roll": 29, "result": "hope" },
+          "visibleMidriff": { "key": "batch288-netherlands-scene1175-AI ECE-visibleMidriff", "roll": 13, "active": true },
+          "straplessDress": { "key": "batch288-netherlands-scene1175-AI ECE-straplessDress", "roll": 2, "active": true },
+          "fullyOpenBack": { "key": "batch288-netherlands-scene1175-AI ECE-fullyOpenBack", "roll": 7, "active": true }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance secure fully strapless red canal-gable folded mini with covered waist and open upper back",
+        "Ellie secure fully strapless cobalt arched-bridge dress with covered waist and complete open back",
+        "Alia bare-arm white Delftware-tulip sculpted mini with covered waist and complete open back",
+        "AI ECE secure fully strapless orange-blue canal-ring two-piece exposing her navel with complete open back"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "ECE's right hand holds the inert rainbow-gradient sidearm toward an empty canal route at far right, with muzzle crossing nobody and index finger outside the guard. ECE's left rests on Alia's shoulder and controls a wrist map. Alia's right rests on ECE's forearm and her left holds Ellie's right. Ellie's left holds Radiance's right. Radiance's left rests on Ellie's shoulder. Exactly four adults, eight arms, and eight visible traceable hands."
+    }
+  },
+  "renderResults": {
+    "1172": {
+      "rawAttempt": {
+        "status": "moderation-blocked-output",
+        "reason": "The image service rejected the generated output under its sexual-content classifier."
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-480a7a33-c086-4123-bec9-63ddeae35e13.png",
+        "reasons": [
+          "The active rainbow-hosiery transfer requires Alia to be the sole prop handler, but AI ECE holds the inert prop.",
+          "Ellie's and Alia's triggered complete open backs are not visibly materialized.",
+          "The planned eight-hand contact map is not followed closely enough to certify every hand owner under the strict anatomy gate."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1173": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-454f40b2-6ed3-476d-9e49-4bd69d32dca8.png",
+        "reasons": [
+          "Multiple hands are hidden or ownership-ambiguous, so exactly ten visible traceable hands cannot be certified.",
+          "ECE's triggered visible navel is obscured by the rear-facing pose.",
+          "The route display is a paper map rather than ECE's separate wrist-controlled hologram, and ECE's indexed trigger finger is not reliably readable."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-042c8663-5f0f-44e2-a6c8-3628484c302d.png",
+        "reasons": [
+          "The male's second hand and ECE's free-hand ownership remain hidden or ambiguous, so exactly ten visible traceable hands cannot be certified.",
+          "The male's strongest eye line does not return unmistakably to ECE.",
+          "ECE's trigger finger is inside or too close to the trigger guard to certify the required indexed position."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1174": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-cb2a74f3-e7af-467d-8036-099c75a7e1a8.png",
+        "reasons": [
+          "Alia's triggered complete open back is not visible.",
+          "The route display is a paper map held by Alia instead of ECE's separate wrist-controlled hologram.",
+          "Several hands are hidden or ownership-ambiguous and ECE's indexed trigger finger is not reliably readable."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-cd95409a-532f-42fd-97fd-f2192072e316.png",
+        "reasons": [
+          "Alia's triggered complete open back remains hidden by her frontal pose.",
+          "Radiance's second hand remains hidden or merged into the Radiance-Ellie contact, so exactly eight visible traceable hands cannot be certified.",
+          "ECE's trigger finger is inside or too close to the trigger guard to certify the required indexed position."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1175": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-2a0ace44-a0b1-4ba0-8886-b8c810a9de86.png",
+        "reasons": [
+          "One or more hands are hidden or ownership-ambiguous, so exactly eight visible traceable hands cannot be certified.",
+          "The route display is a paper map rather than ECE's separate wrist-controlled hologram.",
+          "ECE's indexed trigger finger is not reliably readable."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-241119e0-0749-4677-a227-b37f42051e68.png",
+        "reasons": [
+          "Radiance's second hand remains hidden behind the group, so exactly eight visible traceable hands cannot be certified.",
+          "The holographic route display is attached to the prop-side arm rather than controlled by ECE's free hand.",
+          "ECE's trigger finger is inside or too close to the trigger guard to certify the required indexed position."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    }
+  },
+  "acceptedScenes": [],
+  "blockedScenes": [1172, 1173, 1174, 1175],
+  "shorteningPass": {
+    "status": "not-run-no-accepted-assets",
+    "policy": "Create separate non-destructive shortening variants only where a garment reads longer than the concise above-knee contract."
+  },
+  "xPublishing": {
+    "status": "deferred-insufficient-accepted-assets",
+    "minimumCurrentCountryAssets": 2,
+    "acceptedCurrentCountryAssets": 0,
+    "reason": "No Netherlands scene passed the strict anatomy, prop-handler, prop-safety, map, and roll-visibility gates after its single allowed recovery pass.",
+    "captionPlan": "Netherlands red-heart Malta. Rotterdam snow and Kinderdijk sunshowers turn bridge cables, windmill sails, and Delft-blue tulips into a close route story. #Netherlands #InternalAgency"
+  }
+}
