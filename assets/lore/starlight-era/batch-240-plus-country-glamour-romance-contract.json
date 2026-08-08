@@ -22,6 +22,16 @@
     "rule": "Preserve these four distinct adult faces, facial proportions, skin tones, and eye relationships. Alia alone receives the new braided signature hairstyle while her face remains unchanged. Do not clone, merge, age-shift, or substitute faces.",
     "aliaHairLock": "High sculptural braided ponytail with clean braided roots and two or three fine face-framing braids. Country color may appear only as a narrow woven accent or small metal cuff. Keep her hair unmistakably braided in every image."
   },
+  "maleModelCapsule": {
+    "activeFromBatch": 277,
+    "frequency": "Exactly one of the four images in every country batch includes the male model in addition to Radiance, Ellie, Alia, and AI ECE. The other three images retain the four-woman cast only.",
+    "sceneSelection": "Store one deterministic FNV-1a roll over batch-number, country slug, and male-model-scene, reduced modulo 4. Results 0 through 3 select scene positions one through four. Never replace or remove a woman to make room for him.",
+    "identity": "A distinct clearly adult male special-operative fashion model with an athletic muscular build, closely trimmed beard, recognizable consistent face, and calm alert posture. Establish his first accepted appearance as the forward face anchor, then preserve it without cloning, face substitution, or age shift.",
+    "wardrobe": "He wears a fitted opaque short-sleeve T-shirt or short-sleeve polo carrying a restrained country-palette accent, black jeans, and practical black shoes or boots. Keep him fully clothed and public-safe. Vary shirt construction, texture, collar, country accent, and footwear across countries without changing the core silhouette.",
+    "relationship": "He is married to AI ECE. The selected image shows adult infidelity drama in plain sight: he shares a flirtatious hug, linked hands, cheek kiss, or waist touch with Alia or Ellie, while Radiance openly seeks his attention and ECE visibly registers the betrayal, jealousy, control, hurt, or complicated affection. His strongest sustained eye line returns to ECE even while Alia or Ellie receives the overt affectionate action.",
+    "integration": "Integrate him fully into the country landmark, weather, profession theme, motif story, mission action, and love-beat choreography. Preserve every existing per-character roll for the four women. Add a stored independent male emotion roll from the existing emotion distribution without changing any other roll or threshold.",
+    "contactRule": "The selected five-person scene still requires the four-woman romance square to read clearly and must add at least two unambiguous male contacts, one with Alia or Ellie and one relationship-counter contact or eye-line with ECE or pursuing Radiance. All contact remains consensual, nonviolent, and non-explicit."
+  },
   "countryFashion": {
     "requiredEveryImage": true,
     "palette": "Derive the dominant couture palette from the current country's flag colors.",
@@ -55,7 +65,7 @@
     "requiredEveryImage": true,
     "forwardPoseAndTouchReference": "989-monaco-port-hercule-signal-cipher.png",
     "referenceDirection": "Use scene 989's close spacing, waist embrace, linked hands, shoulder touch, opposing face directions, and visible relationship split as the minimum baseline. Future scenes should add more overlapping affection, clearer eye-line conflict, and less symmetry.",
-    "rule": "The four-way love triangle-square must be readable before the mission prop.",
+    "rule": "The four-way love triangle-square must be readable before the mission prop. In the one selected male-model image per country, the five-person infidelity beat layers onto the square without replacing it.",
     "minimumSignals": 3,
     "minimumVisibleTouches": 3,
     "compoundAffectionTarget": "At least one image per four-scene batch must show a simultaneous three-person affection beat: one woman held in a full face-to-face or behind embrace while she gives another woman a quick cheek peck, forehead kiss, blown kiss at close range, or linked-hand invitation. The fourth woman supplies the rival emotional counter-beat.",
@@ -224,9 +234,9 @@
   },
   "anatomyIntegrity": {
     "requiredEveryImage": true,
-    "limbCount": "Render exactly four adult characters with exactly two arms and two hands per character, eight arms and eight hands total, plus anatomically correct legs and feet. Never create an extra, duplicated, floating, fused, borrowed, ownerless, or partially emerging hand, arm, finger cluster, leg, or foot.",
+    "limbCount": "In standard scenes render exactly four adult characters with exactly two arms and two hands per character, eight arms and eight hands total. In the selected male-model scene render exactly five adult characters with exactly two arms and two hands per character, ten arms and ten hands total. Every character also has anatomically correct legs and feet. Never create an extra, duplicated, floating, fused, borrowed, ownerless, or partially emerging hand, arm, finger cluster, leg, or foot.",
     "contactClarity": "Every affectionate contact must have an unambiguous owner. Trace each visible arm continuously from shoulder through elbow and wrist to one hand. Keep overlapping hugs readable through clean silhouettes and natural occlusion.",
-    "acceptanceGate": "Before accepting an image, audit all four characters one by one for correct arm and hand count, plausible joints, five natural fingers where visible, and clear ownership of every touching hand. Reject or use the single allowed recovery pass when any extra or ambiguous hand appears."
+    "acceptanceGate": "Before accepting an image, audit every character one by one for correct arm and hand count, plausible joints, five natural fingers where visible, and clear ownership of every touching hand. Require eight total hands in a four-person scene and ten total hands in the selected five-person scene, allowing only natural occlusion. Reject or use the single allowed recovery pass when any extra or ambiguous hand appears."
   },
   "frame": "9:16 full-length cinematic editorial with complete faces, hands, heels or boots, country landmark, and readable mission action"
 }
