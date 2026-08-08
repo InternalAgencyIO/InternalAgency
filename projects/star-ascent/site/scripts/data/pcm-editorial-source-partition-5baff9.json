@@ -1,0 +1,38 @@
+{
+  "schema": "iat-pcm-editorial-source-partition/v1",
+  "locale": "pcm",
+  "status": "FROZEN_FAIL_CLOSED_PARTITION",
+  "activationReady": false,
+  "sourceFreeze": {
+    "sourceCount": 1491,
+    "sourceKeysSha256": "5baff9a147d6390100a976e2d77b860ec0225db92f05ebb0d6361ac2c8981004",
+    "ordering": "UNIQUE_EN_LOCALE_COMPARE"
+  },
+  "counts": {
+    "sourceCount": 1491,
+    "gapSourceCount": 1312,
+    "reusableSourceCount": 179
+  },
+  "gapReportBinding": {
+    "schema": "iat-pcm-editorial-gap-report/v1",
+    "canonicalSha256": "87d2f0b91a86d1c44d696ff92ecb1ceea10eff40910664ea5e8c1742e1a9da5f",
+    "fileSha256": "6932c66e5cd7e8d9883d3a0a42fb91cf8181ca5e2883ebb76826cac0a8e8cf10",
+    "proposalArtifactCanonicalSha256": "b5958bbf0ffa0bb0d3a0ff667381d7903f51d738f916cb62d29595fc6538505a"
+  },
+  "gateBinding": {
+    "protectedIntegrityModuleSha256": "fed974cf1ef4a5c6678c87e071beeac517cff051378eb6dec5cf67430bfd27e1",
+    "pcmQualityModuleSha256": "6c19e96dc891343e968e2f20824fdd54b681f8876273bb0c7b70d9fdee6c7be3",
+    "salvageModuleSha256": "81f5406f5c796a7d09273c61fe8216a04f55ac701bcb9efb12c3202de8a777ae"
+  },
+  "partition": {
+    "encoding": "BASE64URL_BITSET_MSB_FIRST",
+    "semantics": "1=GAP,0=REUSABLE",
+    "bitLength": 1491,
+    "byteLength": 187,
+    "trailingPaddingBits": 5,
+    "bitsBase64Url": "____________z__5___r-Pv___7f_77__4Nz5__Z____H49__vL____m-9_n83IZfu___l7___f_f__m-tu8f3T9v-H_v7__9v____V9____3q37_691_8_fPvG___f____v_ueff____________7-7_99_X_8v6_______38_____2H9__2_9_1___7__3n____T_f______v_v-X__P3-__f_9_________f7_5_f__9_____N_9-4A",
+    "partitionBytesSha256": "3511fb255e30ae2d2b52c40b097b7eccb7bf84e0ce99744dc81121ce70dafcfe",
+    "gapSourceKeysSha256": "b137920d83f75d7096ef716894170b3ea6cc85b7a2cb680d365b4138113be3f8",
+    "reusableSourceKeysSha256": "d519ff5844ec9d8be78f05692508a80812146d511c5a67ea90d49f324ec74f82"
+  }
+}

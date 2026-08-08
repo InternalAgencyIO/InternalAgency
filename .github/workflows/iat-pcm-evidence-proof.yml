@@ -1,0 +1,101 @@
+name: IAT PCM evidence proof
+
+on:
+  push:
+    paths:
+      - ".github/workflows/iat-pcm-evidence-proof.yml"
+      - "projects/star-ascent/site/.gitattributes"
+      - "projects/star-ascent/site/scripts/data/pcm-source-freeze-evidence-5baff9.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-source-partition-5baff9.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-short-001.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-002.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-003.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-004.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-005.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-006.json"
+      - "projects/star-ascent/site/scripts/validate-pcm-editorial-batch.mjs"
+      - "projects/star-ascent/site/scripts/lib/i18n-protected-integrity.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-machine-draft-quality.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-editorial-gap-report.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-editorial-source-partition.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-editorial-incremental-batch.mjs"
+      - "projects/star-ascent/site/tests/i18n-protected-integrity.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-machine-draft-quality.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-editorial-gap-report.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-editorial-incremental-batch.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-source-freeze-evidence.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-editorial-workflow-contract.test.mjs"
+  pull_request:
+    paths:
+      - ".github/workflows/iat-pcm-evidence-proof.yml"
+      - "projects/star-ascent/site/.gitattributes"
+      - "projects/star-ascent/site/scripts/data/pcm-source-freeze-evidence-5baff9.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-source-partition-5baff9.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-short-001.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-002.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-003.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-004.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-005.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-006.json"
+      - "projects/star-ascent/site/scripts/validate-pcm-editorial-batch.mjs"
+      - "projects/star-ascent/site/scripts/lib/i18n-protected-integrity.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-machine-draft-quality.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-editorial-gap-report.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-editorial-source-partition.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-editorial-incremental-batch.mjs"
+      - "projects/star-ascent/site/tests/i18n-protected-integrity.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-machine-draft-quality.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-editorial-gap-report.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-editorial-incremental-batch.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-source-freeze-evidence.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-editorial-workflow-contract.test.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: iat-pcm-evidence-proof-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+    working-directory: projects/star-ascent/site
+
+jobs:
+  pcm-evidence:
+    name: Frozen non-activating PCM evidence
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the exact source tree
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: Use the reviewed Node runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+      - name: Verify the workflow contract
+        run: |
+          set -euo pipefail
+          node --test tests/pcm-editorial-workflow-contract.test.mjs
+      - name: Run the focused PCM evidence tests
+        run: |
+          set -euo pipefail
+          node --test \
+            tests/i18n-protected-integrity.test.mjs \
+            tests/pcm-machine-draft-quality.test.mjs \
+            tests/pcm-editorial-gap-report.test.mjs \
+            tests/pcm-editorial-incremental-batch.test.mjs \
+            tests/pcm-source-freeze-evidence.test.mjs
+      - name: Validate every frozen editorial batch
+        run: |
+          set -euo pipefail
+          I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-short-001.json" node scripts/validate-pcm-editorial-batch.mjs
+          I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-002.json" node scripts/validate-pcm-editorial-batch.mjs
+          I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-003.json" node scripts/validate-pcm-editorial-batch.mjs
+          I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-004.json" node scripts/validate-pcm-editorial-batch.mjs
+          I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-005.json" node scripts/validate-pcm-editorial-batch.mjs
+          I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-006.json" node scripts/validate-pcm-editorial-batch.mjs
