@@ -18,6 +18,7 @@ This directory contains the first source-controlled B3 design set:
 - [Operator factions](FACTIONS.md)
 - [Core-team concentration cap](CORE_TEAM_CAP.md)
 - [Rust write-gate audit](RUST_WRITE_GATE_AUDIT.md)
+- [Native economic-port architecture](ECONOMIC_PORT_ARCHITECTURE.md)
 - [Native confidential IAT transfers](SHIELDED_TRANSFERS.md)
 - [Native Daily Law adapter](LAW_ADAPTER.md)
 - [Gated path to Mainnet](MAINNET_PATH.md)

@@ -112,3 +112,8 @@ For every retained B3 business-write instruction, the native port must:
 The accompanying source-inventory test fails if a Rust entrypoint is added or
 removed without updating this matrix, or if the current V2/B3 dependency and
 gate boundary silently changes.
+
+The complete fifteen-handler native port order, account-lifecycle boundary,
+Token-2022 replacement contract, and fail-closed deployment rule are frozen in
+[ECONOMIC_PORT_ARCHITECTURE.md](ECONOMIC_PORT_ARCHITECTURE.md) and its
+machine-readable write-gate matrix.
