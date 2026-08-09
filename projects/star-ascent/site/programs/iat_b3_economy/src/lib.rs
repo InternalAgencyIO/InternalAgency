@@ -434,6 +434,36 @@ pub struct SettlePositionWeekPreCpiPlan {
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct PrepareClaimLanePrincipalInput {
+    pub config_key: [u8; 32],
+    pub config: ConfigState,
+    pub lane: u8,
+    pub lane_state: LaneState,
+    pub mint: [u8; 32],
+    pub vault_authority: [u8; 32],
+    pub lane_tokens: ReadonlyTokenState,
+    pub destination_tokens: ReadonlyTokenState,
+}
+
+/// Host-only output through the exact point immediately before V2 transfers
+/// vested lane principal. `lane_snapshot` is deliberately unchanged: V2 adds
+/// `claimable` to `principal_claimed` only after the transfer CPI succeeds.
+/// The production transition never returns this plan for `CORE_TEAM` while the
+/// immutable core-custody release policy remains unresolved.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ClaimLanePrincipalPreCpiPlan {
+    pub config_key: [u8; 32],
+    pub config_snapshot: ConfigState,
+    pub lane_snapshot: LaneState,
+    pub lane: u8,
+    pub current_week: u64,
+    pub unlocked: u64,
+    pub committed: u64,
+    pub claimable: u64,
+    pub transfer: TransferCheckedIntent,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ExpireRoundResult {
     pub round: RoundState,
     pub recovery_timestamp: i64,
@@ -601,6 +631,8 @@ pub enum EconomyError {
     AgencyNotInRoundSnapshot,
     RoundNotSettled,
     PaymentExceedsReservation,
+    NothingVestedToClaim,
+    CoreCustodyPolicyUnresolved,
     PrincipalAlreadyReturned,
     PositionTermNotComplete,
     PrincipalNotReturned,
@@ -1128,6 +1160,102 @@ fn prepare_settle_position_week_transition(
             transfer(input.liquidity.token_account, liquidity_paid),
         ],
     })
+}
+
+/// Prepare retained V2 `claim_lane_principal` only through the point
+/// immediately before its token transfer. All retained V2 pre-CPI validation
+/// runs before the B3-only core-custody blocker. The opaque Daily Law
+/// capability is required, but this host-only function performs no CPI,
+/// mutation, or persistence. A future native adapter must execute the returned
+/// hooked Token-2022 transfer and only then checked-add `claimable` to
+/// `principal_claimed` in the same transaction.
+pub fn prepare_claim_lane_principal(
+    gate: &ValidatedDailyLawWrite,
+    input: PrepareClaimLanePrincipalInput,
+) -> Result<ClaimLanePrincipalPreCpiPlan, EconomyError> {
+    prepare_claim_lane_principal_transition(input, gate.unix_timestamp)
+}
+
+fn prepare_claim_lane_principal_transition(
+    input: PrepareClaimLanePrincipalInput,
+    clock_unix_timestamp: i64,
+) -> Result<ClaimLanePrincipalPreCpiPlan, EconomyError> {
+    let plan = prepare_claim_lane_principal_v2_pre_cpi(input, clock_unix_timestamp)?;
+    if plan.lane == CORE_TEAM {
+        return Err(EconomyError::CoreCustodyPolicyUnresolved);
+    }
+    Ok(plan)
+}
+
+/// Exact retained V2 body through its transfer boundary. This helper is
+/// private so no caller can bypass the production core-custody blocker.
+fn prepare_claim_lane_principal_v2_pre_cpi(
+    input: PrepareClaimLanePrincipalInput,
+    clock_unix_timestamp: i64,
+) -> Result<ClaimLanePrincipalPreCpiPlan, EconomyError> {
+    if !input.config.active {
+        return Err(EconomyError::NotActive);
+    }
+    if input.lane_state.lane != input.lane {
+        return Err(EconomyError::UnknownLane);
+    }
+    if !(TREASURY..=LIQUIDITY).contains(&input.lane) {
+        return Err(EconomyError::UnknownLane);
+    }
+    verify_destination(
+        input.destination_tokens,
+        input.mint,
+        input.lane_state.beneficiary,
+    )?;
+    let terms = LanePolicy {
+        total: input.lane_state.total,
+        genesis_unlocked: input.lane_state.genesis_unlocked,
+        cliff_week: input.lane_state.cliff_week,
+        linear_end_week: input.lane_state.linear_end_week,
+        reward_source: input.lane_state.reward_source,
+    };
+    let current_week = current_week(input.config.genesis_timestamp, clock_unix_timestamp)
+        .ok_or(EconomyError::InvalidClock)?;
+    let unlocked =
+        cumulative_unlocked(terms, current_week).ok_or(EconomyError::ArithmeticOverflow)?;
+    let committed = input
+        .lane_state
+        .reserved
+        .checked_add(input.lane_state.paid)
+        .and_then(|value| value.checked_add(input.lane_state.principal_claimed))
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    let claimable = unlocked.saturating_sub(committed);
+    if claimable == 0 {
+        return Err(EconomyError::NothingVestedToClaim);
+    }
+
+    Ok(ClaimLanePrincipalPreCpiPlan {
+        config_key: input.config_key,
+        config_snapshot: input.config,
+        lane_snapshot: input.lane_state,
+        lane: input.lane,
+        current_week,
+        unlocked,
+        committed,
+        claimable,
+        transfer: TransferCheckedIntent {
+            token_program: input.config.token_program,
+            source: input.lane_tokens.key,
+            mint: input.mint,
+            destination: input.destination_tokens.key,
+            authority: input.vault_authority,
+            amount: claimable,
+            decimals: TOKEN_DECIMALS,
+        },
+    })
+}
+
+#[cfg(test)]
+fn prepare_claim_lane_principal_v2_parity_seam(
+    input: PrepareClaimLanePrincipalInput,
+    clock_unix_timestamp: i64,
+) -> Result<ClaimLanePrincipalPreCpiPlan, EconomyError> {
+    prepare_claim_lane_principal_v2_pre_cpi(input, clock_unix_timestamp)
 }
 
 fn activate_transition(input: ActivateInput) -> Result<ActivateResult, EconomyError> {
@@ -3864,6 +3992,153 @@ mod tests {
         observe_prepare_settle_position_week(result)
     }
 
+    #[derive(Clone, Copy)]
+    struct PrepareClaimLanePrincipalVector {
+        name: &'static str,
+        input: PrepareClaimLanePrincipalInput,
+        clock_timestamp: i64,
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum PrepareClaimLanePrincipalObservation {
+        Error(EconomyError),
+        Success(Box<ClaimLanePrincipalPreCpiPlan>),
+    }
+
+    fn observe_prepare_claim_lane_principal(
+        result: Result<ClaimLanePrincipalPreCpiPlan, EconomyError>,
+    ) -> PrepareClaimLanePrincipalObservation {
+        match result {
+            Err(error) => PrepareClaimLanePrincipalObservation::Error(error),
+            Ok(plan) => PrepareClaimLanePrincipalObservation::Success(Box::new(plan)),
+        }
+    }
+
+    fn valid_prepare_claim_lane_principal_vector(
+        name: &'static str,
+        lane: u8,
+    ) -> PrepareClaimLanePrincipalVector {
+        let mut config = initialize_config_transition(
+            valid_initialize_config_vector("claim-lane config", false).input,
+            1_000,
+        )
+        .unwrap()
+        .config;
+        config.active = true;
+        let config_key = [0xa1; 32];
+        let mint = config.mint;
+        let vault_authority = [0xa2; 32];
+        let lane_token_key = [0xa3u8.wrapping_add(lane); 32];
+        let lane_state = LaneState {
+            config: config_key,
+            token_account: lane_token_key,
+            beneficiary: beneficiary(lane).expect("valid lane beneficiary"),
+            total: 10_000,
+            genesis_unlocked: 1_000,
+            cliff_week: 2,
+            linear_end_week: 10,
+            reserved: 100,
+            paid: 200,
+            principal_claimed: 300,
+            lane,
+            reward_source: lane != CORE_TEAM,
+            bump: 244,
+            token_bump: 243,
+        };
+        PrepareClaimLanePrincipalVector {
+            name,
+            input: PrepareClaimLanePrincipalInput {
+                config_key,
+                config,
+                lane,
+                lane_state,
+                mint,
+                vault_authority,
+                lane_tokens: ReadonlyTokenState {
+                    key: lane_token_key,
+                    mint,
+                    owner: vault_authority,
+                    amount: lane_state.total,
+                },
+                destination_tokens: ReadonlyTokenState {
+                    key: [0xa8u8.wrapping_add(lane); 32],
+                    mint,
+                    owner: lane_state.beneficiary,
+                    amount: 0,
+                },
+            },
+            clock_timestamp: config.genesis_timestamp + 5 * SECONDS_PER_WEEK,
+        }
+    }
+
+    fn v2_prepare_claim_lane_principal_reference(
+        vector: PrepareClaimLanePrincipalVector,
+    ) -> PrepareClaimLanePrincipalObservation {
+        let _case_name = vector.name;
+        let input = vector.input;
+        let result = (|| {
+            if !input.config.active {
+                return Err(EconomyError::NotActive);
+            }
+            let lane_state = v2_lane_from_semantic(input.lane_state);
+            if lane_state.lane != input.lane {
+                return Err(EconomyError::UnknownLane);
+            }
+            if !(v2_policy::TREASURY..=v2_policy::LIQUIDITY).contains(&input.lane) {
+                return Err(EconomyError::UnknownLane);
+            }
+            if input.destination_tokens.mint != input.mint {
+                return Err(EconomyError::WrongTokenMint);
+            }
+            if input.destination_tokens.owner != lane_state.beneficiary.to_bytes() {
+                return Err(EconomyError::WrongDestinationOwner);
+            }
+            let terms = v2_policy::LanePolicy {
+                total: lane_state.total,
+                genesis_unlocked: lane_state.genesis_unlocked,
+                cliff_week: lane_state.cliff_week,
+                linear_end_week: lane_state.linear_end_week,
+                reward_source: lane_state.reward_source,
+            };
+            let current_week =
+                v2_policy::current_week(input.config.genesis_timestamp, vector.clock_timestamp)
+                    .ok_or(EconomyError::InvalidClock)?;
+            let unlocked = v2_policy::cumulative_unlocked(terms, current_week)
+                .ok_or(EconomyError::ArithmeticOverflow)?;
+            let committed = lane_state
+                .reserved
+                .checked_add(lane_state.paid)
+                .and_then(|value| value.checked_add(lane_state.principal_claimed))
+                .ok_or(EconomyError::ArithmeticOverflow)?;
+            let claimable = unlocked.saturating_sub(committed);
+            if claimable == 0 {
+                return Err(EconomyError::NothingVestedToClaim);
+            }
+
+            Ok(ClaimLanePrincipalPreCpiPlan {
+                config_key: input.config_key,
+                config_snapshot: input.config,
+                lane_snapshot: semantic_lane_from_v2(lane_state),
+                lane: input.lane,
+                current_week,
+                unlocked,
+                committed,
+                claimable,
+                transfer: TransferCheckedIntent {
+                    token_program: input.config.token_program,
+                    source: input.lane_tokens.key,
+                    mint: input.mint,
+                    destination: input.destination_tokens.key,
+                    authority: input.vault_authority,
+                    amount: claimable,
+                    decimals: v2_policy::TOKEN_DECIMALS,
+                },
+            })
+        })();
+
+        observe_prepare_claim_lane_principal(result)
+    }
+
     #[derive(Clone, Copy, Debug)]
     enum CommitProofCase {
         Valid,
@@ -6577,6 +6852,262 @@ mod tests {
         vector.input.config.genesis_timestamp = FRIDAY_BOUNDARY_UTC - 4 * SECONDS_PER_WEEK;
         let plan = prepare_settle_position_week(&gate, vector.input).unwrap();
         assert_eq!(plan.week, 4);
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
+        let missing_bytes = pack_law_state(None);
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &missing_bytes),
+            Err(EconomyError::DayUnfinalized)
+        );
+    }
+
+    #[test]
+    fn prepare_claim_lane_principal_validation_order_matches_retained_v2() {
+        let base = valid_prepare_claim_lane_principal_vector("base", TREASURY);
+        let mut cases = Vec::new();
+
+        let mut input = base.input;
+        input.config.active = false;
+        input.lane_state.lane = ECOSYSTEM;
+        cases.push((
+            "inactive precedes lane validation",
+            input,
+            base.clock_timestamp,
+            EconomyError::NotActive,
+        ));
+
+        let mut input = base.input;
+        input.lane_state.lane = ECOSYSTEM;
+        input.destination_tokens.mint = [0xb0; 32];
+        cases.push((
+            "stored lane precedes range and destination",
+            input,
+            base.clock_timestamp,
+            EconomyError::UnknownLane,
+        ));
+
+        let mut input = base.input;
+        input.lane = COMMUNITY;
+        input.lane_state.lane = COMMUNITY;
+        input.destination_tokens.mint = [0xb1; 32];
+        cases.push((
+            "lane range precedes destination",
+            input,
+            base.clock_timestamp,
+            EconomyError::UnknownLane,
+        ));
+
+        let mut input = base.input;
+        input.destination_tokens.mint = [0xb2; 32];
+        input.destination_tokens.owner = [0xb3; 32];
+        cases.push((
+            "destination mint precedes owner",
+            input,
+            base.clock_timestamp,
+            EconomyError::WrongTokenMint,
+        ));
+
+        let mut input = base.input;
+        input.destination_tokens.owner = [0xb4; 32];
+        cases.push((
+            "destination owner precedes Clock",
+            input,
+            input.config.genesis_timestamp - 1,
+            EconomyError::WrongDestinationOwner,
+        ));
+
+        cases.push((
+            "Clock before Genesis precedes vesting arithmetic",
+            base.input,
+            base.input.config.genesis_timestamp - 1,
+            EconomyError::InvalidClock,
+        ));
+
+        let mut input = base.input;
+        input.lane_state.total = 1;
+        input.lane_state.genesis_unlocked = 2;
+        cases.push((
+            "invalid vesting arithmetic precedes committed ledger",
+            input,
+            base.clock_timestamp,
+            EconomyError::ArithmeticOverflow,
+        ));
+
+        let mut input = base.input;
+        input.lane_state.reserved = u64::MAX;
+        input.lane_state.paid = 1;
+        cases.push((
+            "committed ledger overflow precedes claimable",
+            input,
+            base.clock_timestamp,
+            EconomyError::ArithmeticOverflow,
+        ));
+
+        let mut input = base.input;
+        input.lane_state.reserved = 4_375;
+        input.lane_state.paid = 0;
+        input.lane_state.principal_claimed = 0;
+        cases.push((
+            "zero claimable fails after committed arithmetic",
+            input,
+            base.clock_timestamp,
+            EconomyError::NothingVestedToClaim,
+        ));
+
+        for (name, input, clock_timestamp, expected_error) in cases {
+            let vector = PrepareClaimLanePrincipalVector {
+                name,
+                input,
+                clock_timestamp,
+            };
+            let actual = observe_prepare_claim_lane_principal(
+                prepare_claim_lane_principal_transition(input, clock_timestamp),
+            );
+            assert_eq!(
+                actual,
+                PrepareClaimLanePrincipalObservation::Error(expected_error),
+                "fixed error: {name}"
+            );
+            assert_eq!(
+                actual,
+                v2_prepare_claim_lane_principal_reference(vector),
+                "V2 differential: {name}"
+            );
+        }
+    }
+
+    #[test]
+    fn prepare_claim_lane_principal_returns_exact_non_core_pre_cpi_plan() {
+        for lane in [TREASURY, ECOSYSTEM, LIQUIDITY] {
+            let base = valid_prepare_claim_lane_principal_vector("non-core differential", lane);
+            for week in [0u64, 1, 2, 5, 9, 10] {
+                let clock_timestamp = base.input.config.genesis_timestamp
+                    + i64::try_from(week).unwrap() * SECONDS_PER_WEEK;
+                let vector = PrepareClaimLanePrincipalVector {
+                    clock_timestamp,
+                    ..base
+                };
+                let actual = observe_prepare_claim_lane_principal(
+                    prepare_claim_lane_principal_transition(vector.input, clock_timestamp),
+                );
+                assert_eq!(
+                    actual,
+                    v2_prepare_claim_lane_principal_reference(vector),
+                    "lane={lane}, week={week}"
+                );
+            }
+        }
+
+        let mut vector = valid_prepare_claim_lane_principal_vector("exact plan", TREASURY);
+        vector.input.lane_tokens.mint = [0xb5; 32];
+        vector.input.lane_tokens.owner = [0xb6; 32];
+        vector.input.lane_tokens.amount = 0;
+        vector.input.destination_tokens.amount = u64::MAX;
+        let plan =
+            prepare_claim_lane_principal_transition(vector.input, vector.clock_timestamp).unwrap();
+        assert_eq!(
+            observe_prepare_claim_lane_principal(Ok(plan)),
+            v2_prepare_claim_lane_principal_reference(vector)
+        );
+        assert_eq!(plan.config_key, vector.input.config_key);
+        assert_eq!(plan.config_snapshot, vector.input.config);
+        assert_eq!(plan.lane_snapshot, vector.input.lane_state);
+        assert_eq!(plan.current_week, 5);
+        assert_eq!(plan.unlocked, 4_375);
+        assert_eq!(plan.committed, 600);
+        assert_eq!(plan.claimable, 3_775);
+        assert_eq!(
+            plan.lane_snapshot.principal_claimed,
+            vector.input.lane_state.principal_claimed
+        );
+        assert_eq!(
+            plan.transfer,
+            TransferCheckedIntent {
+                token_program: vector.input.config.token_program,
+                source: vector.input.lane_tokens.key,
+                mint: vector.input.mint,
+                destination: vector.input.destination_tokens.key,
+                authority: vector.input.vault_authority,
+                amount: 3_775,
+                decimals: TOKEN_DECIMALS,
+            }
+        );
+    }
+
+    #[test]
+    fn prepare_claim_lane_principal_core_blocker_follows_every_v2_pre_cpi_check() {
+        let base = valid_prepare_claim_lane_principal_vector("core blocker", CORE_TEAM);
+
+        let mut wrong_destination = base.input;
+        wrong_destination.destination_tokens.owner = [0xb7; 32];
+        assert_eq!(
+            prepare_claim_lane_principal_transition(
+                wrong_destination,
+                wrong_destination.config.genesis_timestamp - 1,
+            ),
+            Err(EconomyError::WrongDestinationOwner)
+        );
+
+        assert_eq!(
+            prepare_claim_lane_principal_transition(
+                base.input,
+                base.input.config.genesis_timestamp - 1,
+            ),
+            Err(EconomyError::InvalidClock)
+        );
+
+        let mut overflow = base.input;
+        overflow.lane_state.reserved = u64::MAX;
+        overflow.lane_state.paid = 1;
+        assert_eq!(
+            prepare_claim_lane_principal_transition(overflow, base.clock_timestamp),
+            Err(EconomyError::ArithmeticOverflow)
+        );
+
+        let mut nothing_vested = base.input;
+        nothing_vested.lane_state.reserved = 4_375;
+        nothing_vested.lane_state.paid = 0;
+        nothing_vested.lane_state.principal_claimed = 0;
+        assert_eq!(
+            prepare_claim_lane_principal_transition(nothing_vested, base.clock_timestamp),
+            Err(EconomyError::NothingVestedToClaim)
+        );
+
+        assert_eq!(
+            prepare_claim_lane_principal_transition(base.input, base.clock_timestamp),
+            Err(EconomyError::CoreCustodyPolicyUnresolved)
+        );
+        assert_eq!(
+            observe_prepare_claim_lane_principal(prepare_claim_lane_principal_v2_parity_seam(
+                base.input,
+                base.clock_timestamp
+            ),),
+            v2_prepare_claim_lane_principal_reference(base)
+        );
+    }
+
+    #[test]
+    fn prepare_claim_lane_principal_requires_open_law_and_uses_gate_clock() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let mut vector = valid_prepare_claim_lane_principal_vector("claim wrapper", TREASURY);
+        vector.input.config.genesis_timestamp = FRIDAY_BOUNDARY_UTC - 5 * SECONDS_PER_WEEK;
+        let plan = prepare_claim_lane_principal(&gate, vector.input).unwrap();
+        assert_eq!(plan.current_week, 5);
+
+        let mut core = vector.input;
+        core.lane = CORE_TEAM;
+        core.lane_state.lane = CORE_TEAM;
+        core.lane_state.beneficiary = CORE_BENEFICIARY;
+        core.destination_tokens.owner = CORE_BENEFICIARY;
+        assert_eq!(
+            prepare_claim_lane_principal(&gate, core),
+            Err(EconomyError::CoreCustodyPolicyUnresolved)
+        );
 
         let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
         assert_eq!(

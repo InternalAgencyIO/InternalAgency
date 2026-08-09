@@ -120,7 +120,7 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
-test("the host-only port contains exactly the first twelve gated kernels", () => {
+test("the host-only port contains exactly the first thirteen gated kernels", () => {
   assert.deepEqual(matrix.hostOnlyPureTransitions, [
     {
       name: "expire_round",
@@ -210,6 +210,14 @@ test("the host-only port contains exactly the first twelve gated kernels", () =>
       handlerComplete: false,
       publicExposure: false,
     },
+    {
+      name: "prepare_claim_lane_principal",
+      implementationStage: "PRE_TOKEN_CPI_ONLY",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      handlerComplete: false,
+      publicExposure: false,
+    },
   ]);
   assert.match(
     economySource,
@@ -276,6 +284,61 @@ test("the host-only port contains exactly the first twelve gated kernels", () =>
   assert.match(economySource, /fn prepare_settle_position_week_transition\(/u);
   assert.match(economySource, /struct PrepareSettlePositionWeekInput/u);
   assert.match(economySource, /struct SettlePositionWeekPreCpiPlan/u);
+  assert.match(
+    economySource,
+    /pub fn prepare_claim_lane_principal\(\s*gate: &ValidatedDailyLawWrite,/u,
+  );
+  assert.match(economySource, /fn prepare_claim_lane_principal_transition\(/u);
+  assert.match(economySource, /struct PrepareClaimLanePrincipalInput/u);
+  assert.match(economySource, /struct ClaimLanePrincipalPreCpiPlan/u);
+  assert.match(
+    economySource,
+    /#\[cfg\(test\)\]\s*fn prepare_claim_lane_principal_v2_parity_seam\(/u,
+  );
+
+  const claimTransitionStart = economySource.indexOf(
+    "fn prepare_claim_lane_principal_transition(",
+  );
+  const claimPreCpiStart = economySource.indexOf(
+    "fn prepare_claim_lane_principal_v2_pre_cpi(",
+  );
+  const claimParitySeamStart = economySource.indexOf(
+    "#[cfg(test)]\nfn prepare_claim_lane_principal_v2_parity_seam(",
+  );
+  assert(claimTransitionStart >= 0);
+  assert(claimPreCpiStart > claimTransitionStart);
+  assert(claimParitySeamStart > claimPreCpiStart);
+
+  const claimTransition = economySource.slice(
+    claimTransitionStart,
+    claimPreCpiStart,
+  );
+  assert(
+    claimTransition.indexOf("prepare_claim_lane_principal_v2_pre_cpi") <
+      claimTransition.indexOf("CoreCustodyPolicyUnresolved"),
+    "the core-custody blocker must follow every retained V2 pre-CPI check",
+  );
+
+  const claimPreCpi = economySource.slice(claimPreCpiStart, claimParitySeamStart);
+  let precedingClaimCheck = -1;
+  for (const marker of [
+    "!input.config.active",
+    "input.lane_state.lane != input.lane",
+    "!(TREASURY..=LIQUIDITY).contains(&input.lane)",
+    "verify_destination(",
+    "let current_week =",
+    "let unlocked =",
+    "let committed =",
+    "let claimable =",
+    "if claimable == 0",
+    "Ok(ClaimLanePrincipalPreCpiPlan",
+  ]) {
+    const currentClaimCheck = claimPreCpi.indexOf(marker);
+    assert(currentClaimCheck > precedingClaimCheck, `claim order drifted: ${marker}`);
+    precedingClaimCheck = currentClaimCheck;
+  }
+  assert.doesNotMatch(claimPreCpi, /CoreCustodyPolicyUnresolved/u);
+  assert.doesNotMatch(claimPreCpi, /lane_tokens\.(?:mint|owner|amount)/u);
   assert.match(
     economySource,
     /pub fn close_position\(\s*_gate: &ValidatedDailyLawWrite,/u,
@@ -381,6 +444,21 @@ test("the host-only port contains exactly the first twelve gated kernels", () =>
   assert.equal(
     settlePositionWeek.token2022Flow,
     "REWARD_LANES_TO_POSITION_OWNER",
+  );
+
+  const claimLanePrincipal = matrix.handlers.find(
+    (handler) => handler.name === "claim_lane_principal",
+  );
+  assert.equal(claimLanePrincipal.implementationStage, "PRE_TOKEN_CPI_ONLY");
+  assert.equal(claimLanePrincipal.handlerComplete, false);
+  assert.equal(claimLanePrincipal.publicExposure, matrix.deploymentExposure);
+  assert.equal(
+    claimLanePrincipal.parity,
+    "BLOCKED_FOR_CORE_LANE_ONLY_PENDING_OWNER_ACCEPTANCE_OF_RELEASE_POLICY",
+  );
+  assert.equal(
+    claimLanePrincipal.token2022Flow,
+    "LANE_VAULT_TO_FIXED_BENEFICIARY_OR_CORE_CUSTODY_POLICY",
   );
 
   const closePosition = matrix.handlers.find(

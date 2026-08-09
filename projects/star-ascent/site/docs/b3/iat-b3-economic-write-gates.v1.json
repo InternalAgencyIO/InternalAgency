@@ -102,6 +102,14 @@
       "v2DifferentialTests": true,
       "handlerComplete": false,
       "publicExposure": false
+    },
+    {
+      "name": "prepare_claim_lane_principal",
+      "implementationStage": "PRE_TOKEN_CPI_ONLY",
+      "dailyLawCapabilityRequired": true,
+      "v2DifferentialTests": true,
+      "handlerComplete": false,
+      "publicExposure": false
     }
   ],
   "canonicalGate": {
@@ -250,6 +258,8 @@
       "cpis": ["token_2022.transfer_checked_with_hook_accounts"],
       "token2022Flow": "LANE_VAULT_TO_FIXED_BENEFICIARY_OR_CORE_CUSTODY_POLICY",
       "parity": "BLOCKED_FOR_CORE_LANE_ONLY_PENDING_OWNER_ACCEPTANCE_OF_RELEASE_POLICY",
+      "implementationStage": "PRE_TOKEN_CPI_ONLY",
+      "handlerComplete": false,
       "publicExposure": "DISABLED_UNTIL_ALL_15_PASS"
     },
     {

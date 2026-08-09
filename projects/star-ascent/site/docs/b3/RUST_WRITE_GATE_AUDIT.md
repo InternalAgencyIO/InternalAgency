@@ -33,7 +33,9 @@ and internal pure `expire_round`, `close_position`, `settle_round`, and
 reservation, and transfer-intent kernel and the
 `prepare_withdraw_position_principal` maturity, stake-ledger, and transfer-
 intent kernel and the `prepare_settle_position_week` reward/reservation and
-ordered-transfer-intent kernel staged as `PRE_TOKEN_CPI_ONLY`. Its
+ordered-transfer-intent kernel and the `prepare_claim_lane_principal` vesting,
+core-custody-blocker, and transfer-intent kernel staged as
+`PRE_TOKEN_CPI_ONLY`. Its
 manifest is `lib`-only and it has no Solana entrypoint or public dispatcher,
 account lifecycle, token CPI, or network access. Neither
 the JavaScript specifications nor these pure Rust slices may be counted as
@@ -93,9 +95,12 @@ and by-value eligibility construction are present. `prepare_open_position` is
 the tenth host kernel, but stops immediately before the token CPI.
 `prepare_withdraw_position_principal` is the eleventh host kernel and stops at
 the same pre-token-CPI boundary. `prepare_settle_position_week` is the twelfth
-host kernel and stops before the first reward transfer. All four
+host kernel and stops before the first reward transfer.
+`prepare_claim_lane_principal` is the thirteenth and stops before its principal
+transfer, with the unresolved core lane failing closed after retained V2
+pre-CPI validation. All four
 Genesis kernels and `set_eligibility` are `PRE_LIFECYCLE_ONLY`;
-all three prepare kernels are `PRE_TOKEN_CPI_ONLY`. All have no public exposure.
+all four prepare kernels are `PRE_TOKEN_CPI_ONLY`. All have no public exposure.
 Every production wrapper requires the opaque canonical Daily Law capability. The
 three round-related CCC wrappers then preserve the immutable CCC-disabled
 Genesis boundary before inspecting caller-supplied round, instruction-trace, or
@@ -222,6 +227,22 @@ and adversarial vectors use the actual V2 `Position`, `LaneVault`, `Round`, and
 policy functions and cover stacked errors, bit/rate/ledger arithmetic, zero-
 amount reconciliation, CCC inactivity, dormant terminal round modes, and the
 three-lane spill order.
+
+The `prepare_claim_lane_principal` kernel preserves the exact retained V2
+handler-body order through the transfer boundary: active config, stored lane
+equality, treasury-through-liquidity range, destination mint then fixed
+beneficiary, validator-Clock week, cumulative vesting arithmetic, checked
+`reserved + paid + principal_claimed`, saturating claimable subtraction, and the
+nonzero-claim requirement. The production path then fails the `CORE_TEAM` lane
+with `CoreCustodyPolicyUnresolved`, after every retained V2 pre-CPI check but
+before any transfer can be planned for public use. This keeps the unresolved
+canonical-custody release policy honest. A private `#[cfg(test)]` parity seam
+models V2's former direct payout only for differential tests. Non-core success
+returns an unchanged lane snapshot and one transfer intent. Source vault
+mint/authority/balance failures remain at the future CPI boundary, as in V2;
+the kernel does not prevalidate them, invoke a CPI, or increment
+`principal_claimed`. It is `PRE_TOKEN_CPI_ONLY`, handler-incomplete, and has no
+public exposure.
 
 Exact parity exposes a Mainnet-blocking denial: V2 requires the stake-vault
 token amount to equal tracked principal. An unsolicited 1-base-unit donation to
@@ -352,6 +373,15 @@ persist the provisional lane and position reservation values. It must not
 prevalidate a later source vault in a way that masks an earlier CPI failure, and
 a disposable local validator must prove that every hook, first/second/third
 transfer, and post-CPI overflow failure rolls back all token and ledger changes.
+For `claim_lane_principal`, the adapter must preserve V2's arbitrary-signer
+caller and fixed-beneficiary destination, bind the config, selected lane state,
+lane vault, vault-authority, mint, and Token-2022 identities before the pure
+preflight, and retain the core blocker until a frozen custody-release policy is
+accepted. For a non-core plan it must execute the hooked transfer before
+checked-adding `claimable` to `principal_claimed`; it must not prevalidate token
+source facts in a way that changes V2 CPI-error precedence. Local-validator
+rehearsal must prove atomic rollback for hook, token CPI, and post-CPI overflow
+failures.
 
 That adapter also has an unresolved non-circular bootstrap requirement. If the
 combined `finalize_day` plus core-cap reconciliation path requires an already

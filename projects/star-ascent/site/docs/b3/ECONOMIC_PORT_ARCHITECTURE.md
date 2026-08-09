@@ -286,11 +286,15 @@ permanently close after the committed set is exhausted.
     consumption and stop before its first nonzero reward transfer. It must return
     provisional lane/reservation copies and treasury, ecosystem, liquidity
     transfer intents, while leaving position paid and settlement bits unchanged.
+    Add only `prepare_claim_lane_principal` through V2's nonzero-claim check,
+    then fail closed for the core lane while custody release remains unresolved.
+    A non-core success returns an unchanged lane snapshot and one transfer intent;
+    it must not invoke Token-2022 or increment principal claimed.
 5. Port the eight account-creating paths with manual post-gate System Program
    CPIs and prove locked/unfinalized calls perform no successful CPI or state
    change. The existing `initialize_config`, `initialize_lane_vault`,
    `initialize_stake_vault`, `activate`, and `set_eligibility`
-   `PRE_LIFECYCLE_ONLY` kernels and the three `PRE_TOKEN_CPI_ONLY` prepare
+   `PRE_LIFECYCLE_ONLY` kernels and the four `PRE_TOKEN_CPI_ONLY` prepare
    kernels are not completion of this step and must not be exposed until the
    corresponding lifecycle/CPI adapters exist.
 6. Port Token-2022 vault transfers and exercise the real hook for
@@ -389,6 +393,24 @@ mint/Token-2022 identity, execute hooked transfers in treasury, ecosystem,
 liquidity order, and run a post-CPI paid/bit finalizer before persisting the
 provisional ledgers. A disposable local validator must prove atomic rollback for
 each hook/transfer failure and the post-CPI overflow case.
+
+The thirteenth adds only `prepare_claim_lane_principal` through the exact point
+before V2 transfers vested principal. It preserves active, stored-lane equality,
+claimable-lane range, destination mint then fixed beneficiary, validator-Clock
+week, cumulative-unlock arithmetic, checked `reserved + paid +
+principal_claimed`, saturating subtraction, and nonzero-claim precedence. Only
+after those retained checks does the production path reject `CORE_TEAM` with
+`CoreCustodyPolicyUnresolved`; the core release-policy conflict above therefore
+remains explicit rather than being silently resolved. A private `#[cfg(test)]`
+parity seam proves the former V2 direct-payout result but is absent from
+production behavior. Non-core success returns one hooked-transfer intent and an
+unchanged lane snapshot. It deliberately does not validate source-vault
+mint/authority/balance facts that V2 leaves to the transfer CPI, invoke a CPI, or
+checked-add `principal_claimed`. The future adapter must bind every account/PDA
+and Token-2022 identity, execute the hooked transfer, and only then apply that
+checked addition atomically; hook, token, and post-CPI overflow failures require
+local-validator rollback proof. This slice is handler-incomplete and has no
+public exposure.
 
 V2 `close_position` releases residual reservations and marks the position
 closed; it has no account-close lifecycle. The closed position PDA remains
