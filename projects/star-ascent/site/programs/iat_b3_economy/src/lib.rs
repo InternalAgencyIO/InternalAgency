@@ -222,6 +222,70 @@ pub struct InitializeStakeVaultResult {
     pub config: ConfigState,
 }
 
+/// Read-only mint facts decoded by a future native adapter. This semantic
+/// value does not prove the account key, owner, or canonical Token-2022 shape.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ReadonlyMintState {
+    pub key: [u8; 32],
+    pub supply: u64,
+    pub mint_authority: Option<[u8; 32]>,
+    pub freeze_authority: Option<[u8; 32]>,
+}
+
+/// Read-only token-account facts decoded by a future native adapter. Account
+/// ownership, canonical PDA derivation, extensions, delegate, close authority,
+/// and public-balance shape remain adapter responsibilities.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ReadonlyTokenState {
+    pub key: [u8; 32],
+    pub mint: [u8; 32],
+    pub owner: [u8; 32],
+    pub amount: u64,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct CoreRewardState {
+    pub config: [u8; 32],
+    pub principal: u64,
+    pub annual_rate_bps: u64,
+    pub term_weeks: u64,
+    pub treasury_reserved: u64,
+    pub ecosystem_reserved: u64,
+    pub liquidity_reserved: u64,
+    pub paid: u64,
+    pub settled_low: u64,
+    pub settled_high: u64,
+    pub bump: u8,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ActivateInput {
+    pub config_key: [u8; 32],
+    pub config: ConfigState,
+    pub mint: ReadonlyMintState,
+    pub vault_authority: [u8; 32],
+    pub community_tokens: ReadonlyTokenState,
+    pub stake_tokens: ReadonlyTokenState,
+    pub treasury: LaneState,
+    pub treasury_tokens: ReadonlyTokenState,
+    pub ecosystem: LaneState,
+    pub ecosystem_tokens: ReadonlyTokenState,
+    pub core_team: LaneState,
+    pub core_team_tokens: ReadonlyTokenState,
+    pub liquidity: LaneState,
+    pub liquidity_tokens: ReadonlyTokenState,
+    pub core_reward_bump: u8,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ActivateResult {
+    pub config: ConfigState,
+    pub treasury: LaneState,
+    pub ecosystem: LaneState,
+    pub liquidity: LaneState,
+    pub core_reward: CoreRewardState,
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ExpireRoundResult {
     pub round: RoundState,
@@ -357,6 +421,20 @@ pub enum EconomyError {
     CommunityMustUseHardwareCustody,
     LaneAlreadyInitialized,
     StakeVaultAlreadyInitialized,
+    MissingLaneVault,
+    MissingStakeVault,
+    WrongFixedSupply,
+    MintAuthorityNotRevoked,
+    FreezeAuthorityNotRevoked,
+    WrongVaultTokenAccount,
+    WrongTokenMint,
+    WrongVaultAuthority,
+    WrongCommunityCustody,
+    WrongCommunityFunding,
+    StakeLedgerMismatch,
+    WrongVaultFunding,
+    NotRewardLane,
+    InsufficientUnlockedRewardCapacity,
     NotActive,
     PositionClosed,
     PrincipalNotReturned,
@@ -541,6 +619,106 @@ pub fn initialize_stake_vault(
     initialize_stake_vault_transition(input)
 }
 
+/// Host-only pre-lifecycle `activate` validation and state construction. The
+/// opaque capability proves Daily Law was open before the retained handler
+/// logic runs. This function does not authenticate accounts, derive or create
+/// the core-reward PDA, deserialize Token-2022 state, or persist any result.
+pub fn activate(
+    _gate: &ValidatedDailyLawWrite,
+    input: ActivateInput,
+) -> Result<ActivateResult, EconomyError> {
+    activate_transition(input)
+}
+
+fn activate_transition(input: ActivateInput) -> Result<ActivateResult, EconomyError> {
+    if !RANDOMNESS_ADAPTER_VERIFIED {
+        return Err(EconomyError::RandomnessAdapterNotVerified);
+    }
+    if input.config.active {
+        return Err(EconomyError::AlreadyActive);
+    }
+    if input.config.lane_mask != 0b1_1110 {
+        return Err(EconomyError::MissingLaneVault);
+    }
+    if !input.config.stake_vault_initialized {
+        return Err(EconomyError::MissingStakeVault);
+    }
+    if input.mint.supply != input.config.expected_supply {
+        return Err(EconomyError::WrongFixedSupply);
+    }
+    if input.mint.mint_authority.is_some() {
+        return Err(EconomyError::MintAuthorityNotRevoked);
+    }
+    if input.mint.freeze_authority.is_some() {
+        return Err(EconomyError::FreezeAuthorityNotRevoked);
+    }
+
+    let expected_community = lane_policy(COMMUNITY, input.config.rehearsal_mode)
+        .ok_or(EconomyError::UnknownLane)?
+        .total;
+    verify_community_funding(input.community_tokens, input.mint.key, expected_community)?;
+    verify_stake_vault(input.stake_tokens, input.mint.key, input.vault_authority, 0)?;
+    verify_lane_funding(
+        input.treasury,
+        input.treasury_tokens,
+        input.mint.key,
+        input.vault_authority,
+    )?;
+    verify_lane_funding(
+        input.ecosystem,
+        input.ecosystem_tokens,
+        input.mint.key,
+        input.vault_authority,
+    )?;
+    verify_lane_funding(
+        input.core_team,
+        input.core_team_tokens,
+        input.mint.key,
+        input.vault_authority,
+    )?;
+    verify_lane_funding(
+        input.liquidity,
+        input.liquidity_tokens,
+        input.mint.key,
+        input.vault_authority,
+    )?;
+
+    let core_principal = lane_policy(CORE_TEAM, input.config.rehearsal_mode)
+        .ok_or(EconomyError::UnknownLane)?
+        .total;
+    let obligation = maximum_reward(core_principal, CORE_RATE_BPS, CORE_TERM_WEEKS)
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    let mut treasury = input.treasury;
+    let mut ecosystem = input.ecosystem;
+    let mut liquidity = input.liquidity;
+    let (treasury_reserved, ecosystem_reserved, liquidity_reserved) =
+        reserve_three_lanes(&mut treasury, &mut ecosystem, &mut liquidity, obligation, 0)?;
+
+    let core_reward = CoreRewardState {
+        config: input.config_key,
+        principal: core_principal,
+        annual_rate_bps: CORE_RATE_BPS,
+        term_weeks: CORE_TERM_WEEKS,
+        treasury_reserved,
+        ecosystem_reserved,
+        liquidity_reserved,
+        paid: 0,
+        settled_low: 0,
+        settled_high: 0,
+        bump: input.core_reward_bump,
+    };
+    let mut config = input.config;
+    config.active = true;
+
+    Ok(ActivateResult {
+        config,
+        treasury,
+        ecosystem,
+        liquidity,
+        core_reward,
+    })
+}
+
 fn initialize_stake_vault_transition(
     input: InitializeStakeVaultInput,
 ) -> Result<InitializeStakeVaultResult, EconomyError> {
@@ -659,6 +837,135 @@ fn beneficiary(lane: u8) -> Option<[u8; 32]> {
         LIQUIDITY => Some(LIQUIDITY_BENEFICIARY),
         _ => None,
     }
+}
+
+fn cumulative_unlocked(policy: LanePolicy, week: u64) -> Option<u64> {
+    if policy.linear_end_week == 0 || week >= policy.linear_end_week {
+        return Some(policy.total);
+    }
+    if week < policy.cliff_week {
+        return Some(policy.genesis_unlocked);
+    }
+    let remainder = policy.total.checked_sub(policy.genesis_unlocked)? as u128;
+    let elapsed = week.checked_sub(policy.cliff_week)? as u128;
+    let duration = policy.linear_end_week.checked_sub(policy.cliff_week)? as u128;
+    let released = remainder.checked_mul(elapsed)?.checked_div(duration)?;
+    u64::try_from((policy.genesis_unlocked as u128).checked_add(released)?).ok()
+}
+
+fn maximum_reward(principal: u64, annual_rate_bps: u64, term_weeks: u64) -> Option<u64> {
+    let numerator = (principal as u128)
+        .checked_mul(annual_rate_bps as u128)?
+        .checked_mul(term_weeks as u128)?;
+    u64::try_from(numerator.checked_div(BPS_DENOMINATOR.checked_mul(RATE_WEEKS)?)?).ok()
+}
+
+fn verify_community_funding(
+    tokens: ReadonlyTokenState,
+    mint: [u8; 32],
+    expected_amount: u64,
+) -> Result<(), EconomyError> {
+    if tokens.mint != mint {
+        return Err(EconomyError::WrongTokenMint);
+    }
+    if tokens.owner != COMMUNITY_CUSTODY {
+        return Err(EconomyError::WrongCommunityCustody);
+    }
+    if tokens.amount != expected_amount {
+        return Err(EconomyError::WrongCommunityFunding);
+    }
+    Ok(())
+}
+
+fn verify_stake_vault(
+    tokens: ReadonlyTokenState,
+    mint: [u8; 32],
+    vault_authority: [u8; 32],
+    expected_amount: u64,
+) -> Result<(), EconomyError> {
+    if tokens.mint != mint {
+        return Err(EconomyError::WrongTokenMint);
+    }
+    if tokens.owner != vault_authority {
+        return Err(EconomyError::WrongVaultAuthority);
+    }
+    if tokens.amount != expected_amount {
+        return Err(EconomyError::StakeLedgerMismatch);
+    }
+    Ok(())
+}
+
+fn verify_lane_funding(
+    lane: LaneState,
+    tokens: ReadonlyTokenState,
+    mint: [u8; 32],
+    vault_authority: [u8; 32],
+) -> Result<(), EconomyError> {
+    if lane.token_account != tokens.key {
+        return Err(EconomyError::WrongVaultTokenAccount);
+    }
+    if tokens.mint != mint {
+        return Err(EconomyError::WrongTokenMint);
+    }
+    if tokens.owner != vault_authority {
+        return Err(EconomyError::WrongVaultAuthority);
+    }
+    if lane.total != tokens.amount {
+        return Err(EconomyError::WrongVaultFunding);
+    }
+    Ok(())
+}
+
+fn reserve_lane(lane: &mut LaneState, remaining: &mut u64, week: u64) -> Result<u64, EconomyError> {
+    if *remaining == 0 {
+        return Ok(0);
+    }
+    if !lane.reward_source {
+        return Err(EconomyError::NotRewardLane);
+    }
+    let terms = LanePolicy {
+        total: lane.total,
+        genesis_unlocked: lane.genesis_unlocked,
+        cliff_week: lane.cliff_week,
+        linear_end_week: lane.linear_end_week,
+        reward_source: lane.reward_source,
+    };
+    let unlocked = cumulative_unlocked(terms, week).ok_or(EconomyError::ArithmeticOverflow)?;
+    let used = lane
+        .reserved
+        .checked_add(lane.paid)
+        .and_then(|value| value.checked_add(lane.principal_claimed))
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    let capacity = unlocked.saturating_sub(used);
+    let take = capacity.min(*remaining);
+    lane.reserved = lane
+        .reserved
+        .checked_add(take)
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    *remaining = remaining
+        .checked_sub(take)
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    Ok(take)
+}
+
+fn reserve_three_lanes(
+    treasury: &mut LaneState,
+    ecosystem: &mut LaneState,
+    liquidity: &mut LaneState,
+    amount: u64,
+    week: u64,
+) -> Result<(u64, u64, u64), EconomyError> {
+    if treasury.lane != TREASURY || ecosystem.lane != ECOSYSTEM || liquidity.lane != LIQUIDITY {
+        return Err(EconomyError::WrongLaneOrder);
+    }
+    let mut remaining = amount;
+    let treasury_reserved = reserve_lane(treasury, &mut remaining, week)?;
+    let ecosystem_reserved = reserve_lane(ecosystem, &mut remaining, week)?;
+    let liquidity_reserved = reserve_lane(liquidity, &mut remaining, week)?;
+    if remaining != 0 {
+        return Err(EconomyError::InsufficientUnlockedRewardCapacity);
+    }
+    Ok((treasury_reserved, ecosystem_reserved, liquidity_reserved))
 }
 
 fn initialize_config_transition(
@@ -1239,8 +1546,8 @@ mod tests {
         RANDOMNESS_DISCRIMINATOR as V2_RANDOMNESS_DISCRIMINATOR,
     };
     use iat_v2::{
-        Config as V2ConfigState, LaneVault as V2LaneState, Position as V2PositionState,
-        Round as V2RoundState,
+        Config as V2ConfigState, CoreReward as V2CoreRewardState, LaneVault as V2LaneState,
+        Position as V2PositionState, Round as V2RoundState,
     };
 
     const LAW_PROGRAM: [u8; 32] = [0xB3; 32];
@@ -1708,6 +2015,25 @@ mod tests {
         }
     }
 
+    fn v2_lane_from_semantic(lane: LaneState) -> V2LaneState {
+        V2LaneState {
+            config: lane.config.into(),
+            token_account: lane.token_account.into(),
+            beneficiary: lane.beneficiary.into(),
+            total: lane.total,
+            genesis_unlocked: lane.genesis_unlocked,
+            cliff_week: lane.cliff_week,
+            linear_end_week: lane.linear_end_week,
+            reserved: lane.reserved,
+            paid: lane.paid,
+            principal_claimed: lane.principal_claimed,
+            lane: lane.lane,
+            reward_source: lane.reward_source,
+            bump: lane.bump,
+            token_bump: lane.token_bump,
+        }
+    }
+
     fn v2_config_from_semantic(config: ConfigState) -> V2ConfigState {
         V2ConfigState {
             admin: config.admin.into(),
@@ -1841,6 +2167,354 @@ mod tests {
             Err(error) => InitializeStakeVaultObservation::Error(error),
             Ok(config) => {
                 InitializeStakeVaultObservation::Success(Box::new(semantic_config_from_v2(config)))
+            }
+        }
+    }
+
+    #[derive(Clone, Copy)]
+    struct ActivateVector {
+        name: &'static str,
+        input: ActivateInput,
+    }
+
+    fn activation_lane(lane: u8, rehearsal_mode: bool, marker: u8) -> LaneState {
+        let terms = lane_policy(lane, rehearsal_mode).unwrap();
+        LaneState {
+            config: [0x81; 32],
+            token_account: [marker; 32],
+            beneficiary: beneficiary(lane).unwrap(),
+            total: terms.total,
+            genesis_unlocked: terms.genesis_unlocked,
+            cliff_week: terms.cliff_week,
+            linear_end_week: terms.linear_end_week,
+            reserved: 0,
+            paid: 0,
+            principal_claimed: 0,
+            lane,
+            reward_source: terms.reward_source,
+            bump: marker.wrapping_add(1),
+            token_bump: marker.wrapping_add(2),
+        }
+    }
+
+    fn token_for_lane(lane: LaneState, mint: [u8; 32], owner: [u8; 32]) -> ReadonlyTokenState {
+        ReadonlyTokenState {
+            key: lane.token_account,
+            mint,
+            owner,
+            amount: lane.total,
+        }
+    }
+
+    fn valid_activate_vector(name: &'static str, rehearsal_mode: bool) -> ActivateVector {
+        let mut config = initialize_config_transition(
+            valid_initialize_config_vector("activate config", rehearsal_mode).input,
+            1_000,
+        )
+        .unwrap()
+        .config;
+        config.lane_mask = 0b1_1110;
+        config.stake_vault_initialized = true;
+        config.stake_token_account = [0x82; 32];
+        let mint = ReadonlyMintState {
+            key: config.mint,
+            supply: config.expected_supply,
+            mint_authority: None,
+            freeze_authority: None,
+        };
+        let vault_authority = [0x83; 32];
+        let treasury = activation_lane(TREASURY, rehearsal_mode, 0x84);
+        let ecosystem = activation_lane(ECOSYSTEM, rehearsal_mode, 0x88);
+        let core_team = activation_lane(CORE_TEAM, rehearsal_mode, 0x8c);
+        let liquidity = activation_lane(LIQUIDITY, rehearsal_mode, 0x90);
+        let community_total = lane_policy(COMMUNITY, rehearsal_mode).unwrap().total;
+
+        ActivateVector {
+            name,
+            input: ActivateInput {
+                config_key: [0x81; 32],
+                config,
+                mint,
+                vault_authority,
+                community_tokens: ReadonlyTokenState {
+                    key: [0x94; 32],
+                    mint: mint.key,
+                    owner: COMMUNITY_CUSTODY,
+                    amount: community_total,
+                },
+                stake_tokens: ReadonlyTokenState {
+                    key: config.stake_token_account,
+                    mint: mint.key,
+                    owner: vault_authority,
+                    amount: 0,
+                },
+                treasury,
+                treasury_tokens: token_for_lane(treasury, mint.key, vault_authority),
+                ecosystem,
+                ecosystem_tokens: token_for_lane(ecosystem, mint.key, vault_authority),
+                core_team,
+                core_team_tokens: token_for_lane(core_team, mint.key, vault_authority),
+                liquidity,
+                liquidity_tokens: token_for_lane(liquidity, mint.key, vault_authority),
+                core_reward_bump: 244,
+            },
+        }
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum ActivateObservation {
+        Error(EconomyError),
+        Success(Box<ActivateResult>),
+    }
+
+    fn observe_activate(result: Result<ActivateResult, EconomyError>) -> ActivateObservation {
+        match result {
+            Err(error) => ActivateObservation::Error(error),
+            Ok(result) => ActivateObservation::Success(Box::new(result)),
+        }
+    }
+
+    fn semantic_core_from_v2(core: V2CoreRewardState) -> CoreRewardState {
+        CoreRewardState {
+            config: core.config.to_bytes(),
+            principal: core.principal,
+            annual_rate_bps: core.annual_rate_bps,
+            term_weeks: core.term_weeks,
+            treasury_reserved: core.treasury_reserved,
+            ecosystem_reserved: core.ecosystem_reserved,
+            liquidity_reserved: core.liquidity_reserved,
+            paid: core.paid,
+            settled_low: core.settled_low,
+            settled_high: core.settled_high,
+            bump: core.bump,
+        }
+    }
+
+    fn v2_verify_community_funding(
+        tokens: ReadonlyTokenState,
+        mint: [u8; 32],
+        expected_amount: u64,
+    ) -> Result<(), EconomyError> {
+        if tokens.mint != mint {
+            return Err(EconomyError::WrongTokenMint);
+        }
+        if tokens.owner != iat_v2::COMMUNITY_CUSTODY.to_bytes() {
+            return Err(EconomyError::WrongCommunityCustody);
+        }
+        if tokens.amount != expected_amount {
+            return Err(EconomyError::WrongCommunityFunding);
+        }
+        Ok(())
+    }
+
+    fn v2_verify_stake_vault(
+        tokens: ReadonlyTokenState,
+        mint: [u8; 32],
+        vault_authority: [u8; 32],
+        expected_amount: u64,
+    ) -> Result<(), EconomyError> {
+        if tokens.mint != mint {
+            return Err(EconomyError::WrongTokenMint);
+        }
+        if tokens.owner != vault_authority {
+            return Err(EconomyError::WrongVaultAuthority);
+        }
+        if tokens.amount != expected_amount {
+            return Err(EconomyError::StakeLedgerMismatch);
+        }
+        Ok(())
+    }
+
+    fn v2_verify_lane_funding(
+        lane: &V2LaneState,
+        tokens: ReadonlyTokenState,
+        mint: [u8; 32],
+        vault_authority: [u8; 32],
+    ) -> Result<(), EconomyError> {
+        if lane.token_account.to_bytes() != tokens.key {
+            return Err(EconomyError::WrongVaultTokenAccount);
+        }
+        if tokens.mint != mint {
+            return Err(EconomyError::WrongTokenMint);
+        }
+        if tokens.owner != vault_authority {
+            return Err(EconomyError::WrongVaultAuthority);
+        }
+        if lane.total != tokens.amount {
+            return Err(EconomyError::WrongVaultFunding);
+        }
+        Ok(())
+    }
+
+    fn v2_reserve_lane(
+        lane: &mut V2LaneState,
+        remaining: &mut u64,
+        week: u64,
+    ) -> Result<u64, EconomyError> {
+        if *remaining == 0 {
+            return Ok(0);
+        }
+        if !lane.reward_source {
+            return Err(EconomyError::NotRewardLane);
+        }
+        let terms = v2_policy::LanePolicy {
+            total: lane.total,
+            genesis_unlocked: lane.genesis_unlocked,
+            cliff_week: lane.cliff_week,
+            linear_end_week: lane.linear_end_week,
+            reward_source: lane.reward_source,
+        };
+        let unlocked =
+            v2_policy::cumulative_unlocked(terms, week).ok_or(EconomyError::ArithmeticOverflow)?;
+        let used = lane
+            .reserved
+            .checked_add(lane.paid)
+            .and_then(|value| value.checked_add(lane.principal_claimed))
+            .ok_or(EconomyError::ArithmeticOverflow)?;
+        let capacity = unlocked.saturating_sub(used);
+        let take = capacity.min(*remaining);
+        lane.reserved = lane
+            .reserved
+            .checked_add(take)
+            .ok_or(EconomyError::ArithmeticOverflow)?;
+        *remaining = remaining
+            .checked_sub(take)
+            .ok_or(EconomyError::ArithmeticOverflow)?;
+        Ok(take)
+    }
+
+    fn v2_reserve_three_lanes(
+        treasury: &mut V2LaneState,
+        ecosystem: &mut V2LaneState,
+        liquidity: &mut V2LaneState,
+        amount: u64,
+        week: u64,
+    ) -> Result<(u64, u64, u64), EconomyError> {
+        if treasury.lane != v2_policy::TREASURY
+            || ecosystem.lane != v2_policy::ECOSYSTEM
+            || liquidity.lane != v2_policy::LIQUIDITY
+        {
+            return Err(EconomyError::WrongLaneOrder);
+        }
+        let mut remaining = amount;
+        let treasury_reserved = v2_reserve_lane(treasury, &mut remaining, week)?;
+        let ecosystem_reserved = v2_reserve_lane(ecosystem, &mut remaining, week)?;
+        let liquidity_reserved = v2_reserve_lane(liquidity, &mut remaining, week)?;
+        if remaining != 0 {
+            return Err(EconomyError::InsufficientUnlockedRewardCapacity);
+        }
+        Ok((treasury_reserved, ecosystem_reserved, liquidity_reserved))
+    }
+
+    fn v2_activate_reference(vector: ActivateVector) -> ActivateObservation {
+        let _case_name = vector.name;
+        let input = vector.input;
+        let mut config = v2_config_from_semantic(input.config);
+        let mut treasury = v2_lane_from_semantic(input.treasury);
+        let mut ecosystem = v2_lane_from_semantic(input.ecosystem);
+        let core_team = v2_lane_from_semantic(input.core_team);
+        let mut liquidity = v2_lane_from_semantic(input.liquidity);
+        let result = (|| {
+            if !iat_v2::RANDOMNESS_ADAPTER_VERIFIED {
+                return Err(EconomyError::RandomnessAdapterNotVerified);
+            }
+            if config.active {
+                return Err(EconomyError::AlreadyActive);
+            }
+            if config.lane_mask != 0b1_1110 {
+                return Err(EconomyError::MissingLaneVault);
+            }
+            if !config.stake_vault_initialized {
+                return Err(EconomyError::MissingStakeVault);
+            }
+            if input.mint.supply != config.expected_supply {
+                return Err(EconomyError::WrongFixedSupply);
+            }
+            if input.mint.mint_authority.is_some() {
+                return Err(EconomyError::MintAuthorityNotRevoked);
+            }
+            if input.mint.freeze_authority.is_some() {
+                return Err(EconomyError::FreezeAuthorityNotRevoked);
+            }
+            let expected_community =
+                v2_policy::lane_policy(v2_policy::COMMUNITY, config.rehearsal_mode)
+                    .ok_or(EconomyError::UnknownLane)?
+                    .total;
+            v2_verify_community_funding(
+                input.community_tokens,
+                input.mint.key,
+                expected_community,
+            )?;
+            v2_verify_stake_vault(input.stake_tokens, input.mint.key, input.vault_authority, 0)?;
+            v2_verify_lane_funding(
+                &treasury,
+                input.treasury_tokens,
+                input.mint.key,
+                input.vault_authority,
+            )?;
+            v2_verify_lane_funding(
+                &ecosystem,
+                input.ecosystem_tokens,
+                input.mint.key,
+                input.vault_authority,
+            )?;
+            v2_verify_lane_funding(
+                &core_team,
+                input.core_team_tokens,
+                input.mint.key,
+                input.vault_authority,
+            )?;
+            v2_verify_lane_funding(
+                &liquidity,
+                input.liquidity_tokens,
+                input.mint.key,
+                input.vault_authority,
+            )?;
+            let core_principal =
+                v2_policy::lane_policy(v2_policy::CORE_TEAM, config.rehearsal_mode)
+                    .ok_or(EconomyError::UnknownLane)?
+                    .total;
+            let obligation = v2_policy::maximum_reward(
+                core_principal,
+                v2_policy::CORE_RATE_BPS,
+                v2_policy::CORE_TERM_WEEKS,
+            )
+            .ok_or(EconomyError::ArithmeticOverflow)?;
+            let (treasury_reserved, ecosystem_reserved, liquidity_reserved) =
+                v2_reserve_three_lanes(
+                    &mut treasury,
+                    &mut ecosystem,
+                    &mut liquidity,
+                    obligation,
+                    0,
+                )?;
+            let core_reward = V2CoreRewardState {
+                config: input.config_key.into(),
+                principal: core_principal,
+                annual_rate_bps: v2_policy::CORE_RATE_BPS,
+                term_weeks: v2_policy::CORE_TERM_WEEKS,
+                treasury_reserved,
+                ecosystem_reserved,
+                liquidity_reserved,
+                paid: 0,
+                settled_low: 0,
+                settled_high: 0,
+                bump: input.core_reward_bump,
+            };
+            config.active = true;
+            Ok((config, treasury, ecosystem, liquidity, core_reward))
+        })();
+
+        match result {
+            Err(error) => ActivateObservation::Error(error),
+            Ok((config, treasury, ecosystem, liquidity, core_reward)) => {
+                ActivateObservation::Success(Box::new(ActivateResult {
+                    config: semantic_config_from_v2(config),
+                    treasury: semantic_lane_from_v2(treasury),
+                    ecosystem: semantic_lane_from_v2(ecosystem),
+                    liquidity: semantic_lane_from_v2(liquidity),
+                    core_reward: semantic_core_from_v2(core_reward),
+                }))
             }
         }
     }
@@ -2957,6 +3631,403 @@ mod tests {
         assert_eq!(
             verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
             Err(EconomyError::DailyLockdown)
+        );
+    }
+
+    #[test]
+    fn activate_policy_math_and_success_match_the_retained_v2_handler_body() {
+        for rehearsal_mode in [false, true] {
+            for lane in COMMUNITY..=LIQUIDITY {
+                let actual = lane_policy(lane, rehearsal_mode).unwrap();
+                let expected = v2_policy::lane_policy(lane, rehearsal_mode).unwrap();
+                assert_eq!(actual.total, expected.total);
+                assert_eq!(actual.genesis_unlocked, expected.genesis_unlocked);
+                assert_eq!(actual.cliff_week, expected.cliff_week);
+                assert_eq!(actual.linear_end_week, expected.linear_end_week);
+                assert_eq!(actual.reward_source, expected.reward_source);
+                for week in [
+                    0,
+                    expected.cliff_week.saturating_sub(1),
+                    expected.cliff_week,
+                    expected.cliff_week.saturating_add(1),
+                    expected.linear_end_week.saturating_sub(1),
+                    expected.linear_end_week,
+                    u64::MAX,
+                ] {
+                    assert_eq!(
+                        cumulative_unlocked(actual, week),
+                        v2_policy::cumulative_unlocked(expected, week),
+                        "rehearsal={rehearsal_mode} lane={lane} week={week}"
+                    );
+                }
+            }
+
+            let vector = valid_activate_vector("canonical activation", rehearsal_mode);
+            let actual = observe_activate(activate_transition(vector.input));
+            let expected = v2_activate_reference(vector);
+            assert_eq!(actual, expected, "rehearsal={rehearsal_mode}");
+
+            let ActivateObservation::Success(result) = actual else {
+                panic!("canonical activation must succeed")
+            };
+            let expected_principal = if rehearsal_mode {
+                100_000_000_000
+            } else {
+                100_000_000_000_000_000
+            };
+            let expected_obligation = if rehearsal_mode {
+                34_000_000_000
+            } else {
+                34_000_000_000_000_000
+            };
+            assert!(result.config.active);
+            assert_eq!(result.core_reward.principal, expected_principal);
+            assert_eq!(result.core_reward.annual_rate_bps, CORE_RATE_BPS);
+            assert_eq!(result.core_reward.term_weeks, CORE_TERM_WEEKS);
+            assert_eq!(result.core_reward.treasury_reserved, expected_obligation);
+            assert_eq!(result.core_reward.ecosystem_reserved, 0);
+            assert_eq!(result.core_reward.liquidity_reserved, 0);
+            assert_eq!(result.core_reward.paid, 0);
+            assert_eq!(result.core_reward.settled_low, 0);
+            assert_eq!(result.core_reward.settled_high, 0);
+            assert_eq!(result.treasury.reserved, expected_obligation);
+            assert_eq!(result.ecosystem, vector.input.ecosystem);
+            assert_eq!(result.liquidity, vector.input.liquidity);
+        }
+
+        for (principal, annual_rate_bps, term_weeks) in [
+            (0, 0, 0),
+            (1, 1, 1),
+            (u64::MAX, 1, 1),
+            (u64::MAX, u64::MAX, u64::MAX),
+            (MAINNET_SUPPLY, CORE_RATE_BPS, CORE_TERM_WEEKS),
+        ] {
+            assert_eq!(
+                maximum_reward(principal, annual_rate_bps, term_weeks),
+                v2_policy::maximum_reward(principal, annual_rate_bps, term_weeks)
+            );
+        }
+    }
+
+    #[test]
+    fn activate_validation_order_and_funding_errors_match_the_retained_v2_handler_body() {
+        let base = valid_activate_vector("base", false);
+        let mut vectors = Vec::new();
+
+        let mut input = base.input;
+        input.config.active = true;
+        input.config.lane_mask = 0;
+        input.config.stake_vault_initialized = false;
+        input.mint.supply = 0;
+        vectors.push((
+            "active precedes all later checks",
+            input,
+            EconomyError::AlreadyActive,
+        ));
+
+        let mut input = base.input;
+        input.config.lane_mask = 0b1_1111;
+        input.config.stake_vault_initialized = false;
+        vectors.push((
+            "exact lane mask precedes stake state",
+            input,
+            EconomyError::MissingLaneVault,
+        ));
+
+        let mut input = base.input;
+        input.config.stake_vault_initialized = false;
+        input.mint.supply = 0;
+        vectors.push((
+            "stake initialization precedes supply",
+            input,
+            EconomyError::MissingStakeVault,
+        ));
+
+        let mut input = base.input;
+        input.mint.supply = input.config.expected_supply - 1;
+        input.mint.mint_authority = Some([0xa1; 32]);
+        vectors.push((
+            "supply precedes mint authority",
+            input,
+            EconomyError::WrongFixedSupply,
+        ));
+
+        let mut input = base.input;
+        input.mint.mint_authority = Some([0xa2; 32]);
+        input.mint.freeze_authority = Some([0xa3; 32]);
+        vectors.push((
+            "mint authority precedes freeze authority",
+            input,
+            EconomyError::MintAuthorityNotRevoked,
+        ));
+
+        let mut input = base.input;
+        input.mint.freeze_authority = Some([0xa4; 32]);
+        input.community_tokens.mint = [0xa5; 32];
+        vectors.push((
+            "freeze authority precedes funding",
+            input,
+            EconomyError::FreezeAuthorityNotRevoked,
+        ));
+
+        let mut input = base.input;
+        input.community_tokens.mint = [0xb1; 32];
+        input.community_tokens.owner = [0xb2; 32];
+        input.community_tokens.amount = 0;
+        vectors.push((
+            "community mint precedes custody and amount",
+            input,
+            EconomyError::WrongTokenMint,
+        ));
+
+        let mut input = base.input;
+        input.community_tokens.owner = [0xb3; 32];
+        input.community_tokens.amount = 0;
+        vectors.push((
+            "community custody precedes amount",
+            input,
+            EconomyError::WrongCommunityCustody,
+        ));
+
+        let mut input = base.input;
+        input.community_tokens.amount -= 1;
+        input.stake_tokens.mint = [0xb4; 32];
+        vectors.push((
+            "community amount precedes stake vault",
+            input,
+            EconomyError::WrongCommunityFunding,
+        ));
+
+        let mut input = base.input;
+        input.stake_tokens.mint = [0xc1; 32];
+        input.stake_tokens.owner = [0xc2; 32];
+        input.stake_tokens.amount = 1;
+        vectors.push((
+            "stake mint precedes owner and amount",
+            input,
+            EconomyError::WrongTokenMint,
+        ));
+
+        let mut input = base.input;
+        input.stake_tokens.owner = [0xc3; 32];
+        input.stake_tokens.amount = 1;
+        vectors.push((
+            "stake owner precedes amount",
+            input,
+            EconomyError::WrongVaultAuthority,
+        ));
+
+        let mut input = base.input;
+        input.stake_tokens.amount = 1;
+        input.treasury_tokens.key = [0xc4; 32];
+        vectors.push((
+            "stake amount precedes lane funding",
+            input,
+            EconomyError::StakeLedgerMismatch,
+        ));
+
+        let mut input = base.input;
+        input.treasury_tokens.key = [0xd1; 32];
+        input.treasury_tokens.mint = [0xd2; 32];
+        vectors.push((
+            "lane account binding precedes mint",
+            input,
+            EconomyError::WrongVaultTokenAccount,
+        ));
+
+        let mut input = base.input;
+        input.treasury_tokens.mint = [0xd3; 32];
+        input.treasury_tokens.owner = [0xd4; 32];
+        vectors.push((
+            "lane mint precedes authority",
+            input,
+            EconomyError::WrongTokenMint,
+        ));
+
+        let mut input = base.input;
+        input.treasury_tokens.owner = [0xd5; 32];
+        input.treasury_tokens.amount = 0;
+        vectors.push((
+            "lane authority precedes amount",
+            input,
+            EconomyError::WrongVaultAuthority,
+        ));
+
+        let mut input = base.input;
+        input.treasury_tokens.amount -= 1;
+        input.ecosystem_tokens.key = [0xd6; 32];
+        vectors.push((
+            "treasury amount precedes ecosystem",
+            input,
+            EconomyError::WrongVaultFunding,
+        ));
+
+        let mut input = base.input;
+        input.ecosystem_tokens.key = [0xe1; 32];
+        input.core_team_tokens.key = [0xe2; 32];
+        vectors.push((
+            "ecosystem precedes core",
+            input,
+            EconomyError::WrongVaultTokenAccount,
+        ));
+
+        let mut input = base.input;
+        input.core_team_tokens.key = [0xe3; 32];
+        input.liquidity_tokens.key = [0xe4; 32];
+        vectors.push((
+            "core precedes liquidity",
+            input,
+            EconomyError::WrongVaultTokenAccount,
+        ));
+
+        let mut input = base.input;
+        input.liquidity_tokens.key = [0xe5; 32];
+        vectors.push((
+            "liquidity is checked last",
+            input,
+            EconomyError::WrongVaultTokenAccount,
+        ));
+
+        for (name, input, expected_error) in vectors {
+            let vector = ActivateVector { name, input };
+            assert_eq!(
+                observe_activate(activate_transition(input)),
+                ActivateObservation::Error(expected_error),
+                "fixed error: {name}"
+            );
+            assert_eq!(
+                observe_activate(activate_transition(input)),
+                v2_activate_reference(vector),
+                "V2 differential: {name}"
+            );
+        }
+    }
+
+    #[test]
+    fn activate_reservation_edges_match_v2_and_preserve_atomic_output_semantics() {
+        let base = valid_activate_vector("reservation base", false);
+        let obligation = 34_000_000_000_000_000;
+
+        let mut spill = base.input;
+        spill.treasury.genesis_unlocked = 1;
+        spill.ecosystem.genesis_unlocked = 2;
+        spill.liquidity.genesis_unlocked = obligation;
+        let spill_result = activate_transition(spill).unwrap();
+        assert_eq!(spill_result.core_reward.treasury_reserved, 1);
+        assert_eq!(spill_result.core_reward.ecosystem_reserved, 2);
+        assert_eq!(spill_result.core_reward.liquidity_reserved, obligation - 3);
+        assert_eq!(
+            observe_activate(Ok(spill_result)),
+            v2_activate_reference(ActivateVector {
+                name: "three-lane spill",
+                input: spill,
+            })
+        );
+
+        let mut overclaimed = base.input;
+        overclaimed.treasury.genesis_unlocked = 5;
+        overclaimed.treasury.reserved = 6;
+        let overclaimed_result = activate_transition(overclaimed).unwrap();
+        assert_eq!(overclaimed_result.core_reward.treasury_reserved, 0);
+        assert_eq!(
+            overclaimed_result.core_reward.ecosystem_reserved,
+            obligation
+        );
+        assert_eq!(
+            observe_activate(Ok(overclaimed_result)),
+            v2_activate_reference(ActivateVector {
+                name: "used above unlocked saturates capacity to zero",
+                input: overclaimed,
+            })
+        );
+
+        let mut early_return = base.input;
+        early_return.ecosystem.reward_source = false;
+        early_return.ecosystem.reserved = u64::MAX;
+        early_return.ecosystem.paid = 1;
+        early_return.liquidity.reward_source = false;
+        assert!(activate_transition(early_return).is_ok());
+        assert_eq!(
+            observe_activate(activate_transition(early_return)),
+            v2_activate_reference(ActivateVector {
+                name: "later lanes are skipped once the obligation is reserved",
+                input: early_return,
+            })
+        );
+
+        let cases = [
+            {
+                let mut input = base.input;
+                input.treasury.lane = ECOSYSTEM;
+                (
+                    "wrong stored lane order",
+                    input,
+                    EconomyError::WrongLaneOrder,
+                )
+            },
+            {
+                let mut input = base.input;
+                input.treasury.reward_source = false;
+                (
+                    "first required reward lane is disabled",
+                    input,
+                    EconomyError::NotRewardLane,
+                )
+            },
+            {
+                let mut input = base.input;
+                input.treasury.reserved = u64::MAX;
+                input.treasury.paid = 1;
+                (
+                    "used-ledger addition overflows",
+                    input,
+                    EconomyError::ArithmeticOverflow,
+                )
+            },
+            {
+                let mut input = base.input;
+                input.treasury.genesis_unlocked = 0;
+                input.ecosystem.genesis_unlocked = 0;
+                input.liquidity.genesis_unlocked = 0;
+                (
+                    "combined unlocked capacity is insufficient",
+                    input,
+                    EconomyError::InsufficientUnlockedRewardCapacity,
+                )
+            },
+        ];
+
+        for (name, input, expected_error) in cases {
+            let original = input;
+            assert_eq!(activate_transition(input), Err(expected_error), "{name}");
+            assert_eq!(
+                input, original,
+                "by-value input changed after error: {name}"
+            );
+            assert_eq!(
+                observe_activate(activate_transition(input)),
+                v2_activate_reference(ActivateVector { name, input }),
+                "{name}"
+            );
+        }
+    }
+
+    #[test]
+    fn activate_requires_an_open_canonical_daily_law_capability() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let vector = valid_activate_vector("open activation wrapper", true);
+        assert!(activate(&gate, vector.input).unwrap().config.active);
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
+        let missing_bytes = pack_law_state(None);
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &missing_bytes),
+            Err(EconomyError::DayUnfinalized)
         );
     }
 

@@ -62,6 +62,14 @@
       "v2DifferentialTests": true,
       "handlerComplete": false,
       "publicExposure": false
+    },
+    {
+      "name": "activate",
+      "implementationStage": "PRE_LIFECYCLE_ONLY",
+      "dailyLawCapabilityRequired": true,
+      "v2DifferentialTests": true,
+      "handlerComplete": false,
+      "publicExposure": false
     }
   ],
   "canonicalGate": {
@@ -130,6 +138,8 @@
       "cpis": ["system_program.create_account"],
       "token2022Flow": "VALIDATE_EXACT_VAULT_FUNDING_AND_NULL_AUTHORITIES",
       "parity": "PRESERVE",
+      "implementationStage": "PRE_LIFECYCLE_ONLY",
+      "handlerComplete": false,
       "publicExposure": "DISABLED_UNTIL_ALL_15_PASS"
     },
     {

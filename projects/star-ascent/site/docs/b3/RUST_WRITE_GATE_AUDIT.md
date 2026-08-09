@@ -27,12 +27,12 @@ new host-only `iat_b3_economy` library contains immutable V2 constants, an
 exact read-only Daily Law codec/verifier, an opaque validated-write capability,
 and internal pure `expire_round`, `close_position`, `settle_round`, and
 `commit_round` transitions, plus the `initialize_config`,
-`initialize_lane_vault`, and `initialize_stake_vault` validation/state
-constructors explicitly staged as `PRE_LIFECYCLE_ONLY`. Its manifest is
-`lib`-only and it has no Solana entrypoint or public dispatcher, account
-lifecycle, token CPI, or network access. Neither the JavaScript specifications
-nor these pure Rust slices may be counted as on-chain faction or core-cap
-enforcement.
+`initialize_lane_vault`, `initialize_stake_vault`, and `activate`
+validation/state constructors explicitly staged as `PRE_LIFECYCLE_ONLY`. Its
+manifest is `lib`-only and it has no Solana entrypoint or public dispatcher,
+account lifecycle, token CPI, or network access. Neither the JavaScript
+specifications nor these pure Rust slices may be counted as on-chain faction or
+core-cap enforcement.
 
 This is a hard Mainnet blocker. Adding a check to only the V2 transfer helper
 would be insufficient: several V2 handlers mutate protocol ledgers without a
@@ -81,7 +81,9 @@ and `settle_round` the third. `commit_round` is the fourth and only additional
 handler-body kernel. `initialize_config` is the fifth host kernel,
 `initialize_lane_vault` is the sixth, and `initialize_stake_vault` is the
 seventh, but only their pre-lifecycle validation and by-value state construction
-are present.
+are present. `activate` is the eighth host kernel, but only handler-body
+validation, reward reservation, and by-value state construction are present.
+All four Genesis kernels are `PRE_LIFECYCLE_ONLY` and have no public exposure.
 Every production wrapper requires the opaque canonical Daily Law capability.
 The three CCC wrappers then preserve the immutable CCC-disabled Genesis
 boundary before inspecting caller-supplied round, instruction-trace, or
@@ -121,6 +123,26 @@ derive the vault-authority or stake-token PDA, allocate or fund the account,
 initialize Token-2022 state, serialize, or persist the result, and it does not
 make `initialize_stake_vault` complete.
 
+The `activate` kernel preserves the retained V2 handler-body order: the frozen
+randomness-adapter flag, inactive config, exact `0b1_1110` lane mask, initialized
+stake vault, exact fixed supply, revoked mint and freeze authorities, then
+community, stake, treasury, ecosystem, core-team, and liquidity funding checks
+in that order. It computes the retained core principal and maximum reward,
+reserves week-zero capacity treasury first, then ecosystem, then liquidity,
+constructs every `CoreReward` field by value, and only then returns an active
+config. Differential tests use actual V2 types, constants, and policy helpers
+through an independent handler-body reference, while a source-order regression
+pins the actual V2 handler and reservation helpers. Coverage includes
+stacked-error precedence, lane order, reward-source and arithmetic failures,
+spill order, and insufficient capacity. This is handler-body parity only: the
+inputs are already decoded semantic values. It
+does not authenticate the administrator or any account, prove account owners or
+canonical config/mint/vault bindings, derive a PDA, create the core-reward
+account, validate Token-2022 extensions/delegate/close-authority state, invoke a
+program, serialize, or persist a result, and it does not make `activate`
+complete. Its exact V2 reservation math does not resolve the separate core
+payout-custody conflict.
+
 The `commit_round` differential kernel performs no account creation. It accepts
 a decoded read-only instructions-sysvar trace, selects only the instruction
 immediately preceding the current index, validates the pinned Switchboard
@@ -159,8 +181,22 @@ accounts after the gate and pure validation succeed. For
 verify the vault-authority and stake-token PDA derivations, then manually create
 and initialize the Token-2022 account after the gate and pure validation succeed.
 That account remains a public-balance economic vault with no delegate or close
-authority under the frozen replacement contract. The complete dispatcher
-remains absent and disabled until all fifteen rows pass together.
+authority under the frozen replacement contract. For `activate`, it must pass
+the canonical Daily Law gate first, authenticate the hardware administrator,
+decode and bind the canonical config, mint, custody, lane, and Token-2022 vault
+accounts, verify every PDA and null authority, then manually create and persist
+the core-reward account only after the pure validation succeeds.
+
+That adapter also has an unresolved non-circular bootstrap requirement. If the
+combined `finalize_day` plus core-cap reconciliation path requires an already
+active capped custody before it can finalize, `activate` can never obtain the
+current open Daily Law capability it requires. Mainnet therefore needs a frozen
+pre-activation/vacuous-cap phase and a one-way activation transition that proves
+fully funded canonical core custody and atomically enables normal cap
+enforcement, or another explicit immutable bootstrap rule. No such lifecycle
+rule exists in this host kernel. Core payout custody remains separately blocked,
+and the complete dispatcher remains absent and disabled until all fifteen rows
+pass together.
 
 ## Internal V2 mutation paths
 

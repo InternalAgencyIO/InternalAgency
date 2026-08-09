@@ -553,3 +553,147 @@ test("the initialize_stake_vault kernel preserves V2 precedence and config bindi
     /does not[\s\S]+derive the vault-authority or stake-token PDA[\s\S]+does not\s+make `initialize_stake_vault` complete/u,
   );
 });
+
+test("the activate kernel preserves V2 preflight, reservation, and terminal ordering", () => {
+  const v2Activate = functionBody(anchorProgramBody(v2Source), "activate");
+  const economyActivate = functionBody(economySource, "activate");
+  const economyTransition = functionBody(economySource, "activate_transition");
+
+  assertTokensInOrder(
+    v2Activate,
+    [
+      "RANDOMNESS_ADAPTER_VERIFIED",
+      "!ctx.accounts.config.active",
+      "ctx.accounts.config.lane_mask",
+      "ctx.accounts.config.stake_vault_initialized",
+      "ctx.accounts.mint.supply",
+      "ctx.accounts.mint.mint_authority",
+      "ctx.accounts.mint.freeze_authority",
+      "verify_community_funding(",
+      "verify_stake_vault(",
+      "&ctx.accounts.treasury,",
+      "&ctx.accounts.ecosystem,",
+      "&ctx.accounts.core_team,",
+      "&ctx.accounts.liquidity,",
+      "let core_principal = lane_policy(CORE_TEAM",
+      "maximum_reward(core_principal",
+      "reserve_three_lanes(",
+      "core_reward.config = ctx.accounts.config.key()",
+      "core_reward.principal = core_principal",
+      "core_reward.annual_rate_bps = CORE_RATE_BPS",
+      "core_reward.term_weeks = CORE_TERM_WEEKS",
+      "core_reward.treasury_reserved = treasury",
+      "core_reward.ecosystem_reserved = ecosystem",
+      "core_reward.liquidity_reserved = liquidity",
+      "core_reward.paid = 0",
+      "core_reward.settled_low = 0",
+      "core_reward.settled_high = 0",
+      "core_reward.bump = ctx.bumps.core_reward",
+      "ctx.accounts.config.active = true",
+    ],
+    "V2 activate",
+  );
+
+  assert.match(economyActivate, /_gate: &ValidatedDailyLawWrite/u);
+  assert.match(economyActivate, /activate_transition\(input\)/u);
+  assertTokensInOrder(
+    economyTransition,
+    [
+      "if !RANDOMNESS_ADAPTER_VERIFIED",
+      "if input.config.active",
+      "input.config.lane_mask != 0b1_1110",
+      "if !input.config.stake_vault_initialized",
+      "input.mint.supply != input.config.expected_supply",
+      "input.mint.mint_authority.is_some()",
+      "input.mint.freeze_authority.is_some()",
+      "verify_community_funding(",
+      "verify_stake_vault(",
+      "input.treasury,",
+      "input.ecosystem,",
+      "input.core_team,",
+      "input.liquidity,",
+      "let core_principal = lane_policy(CORE_TEAM",
+      "maximum_reward(core_principal",
+      "let mut treasury = input.treasury",
+      "let mut ecosystem = input.ecosystem",
+      "let mut liquidity = input.liquidity",
+      "reserve_three_lanes(",
+      "let core_reward = CoreRewardState",
+      "config: input.config_key",
+      "principal: core_principal",
+      "annual_rate_bps: CORE_RATE_BPS",
+      "term_weeks: CORE_TERM_WEEKS",
+      "treasury_reserved,",
+      "ecosystem_reserved,",
+      "liquidity_reserved,",
+      "paid: 0",
+      "settled_low: 0",
+      "settled_high: 0",
+      "bump: input.core_reward_bump",
+      "let mut config = input.config",
+      "config.active = true",
+    ],
+    "B3 activate transition",
+  );
+
+  for (const source of [v2Source, economySource]) {
+    assertTokensInOrder(
+      functionBody(source, "verify_community_funding"),
+      ["tokens.mint", "tokens.owner", "tokens.amount"],
+      "activate community funding helper",
+    );
+    assertTokensInOrder(
+      functionBody(source, "verify_stake_vault"),
+      ["tokens.mint", "tokens.owner", "tokens.amount"],
+      "activate stake funding helper",
+    );
+    assertTokensInOrder(
+      functionBody(source, "verify_lane_funding"),
+      ["lane.token_account", "tokens.mint", "tokens.owner", "lane.total"],
+      "activate lane funding helper",
+    );
+    assertTokensInOrder(
+      functionBody(source, "reserve_lane"),
+      [
+        "*remaining == 0",
+        "lane.reward_source",
+        "cumulative_unlocked",
+        "let used = lane",
+        ".reserved",
+        ".checked_add(lane.paid)",
+        ".and_then(|value| value.checked_add(lane.principal_claimed))",
+        "saturating_sub",
+        "capacity.min",
+        "lane.reserved =",
+        "*remaining =",
+      ],
+      "activate single-lane reservation helper",
+    );
+    assertTokensInOrder(
+      functionBody(source, "reserve_three_lanes"),
+      [
+        "treasury.lane",
+        "ecosystem.lane",
+        "liquidity.lane",
+        "reserve_lane(treasury",
+        "reserve_lane(ecosystem",
+        "reserve_lane(liquidity",
+        "remaining",
+      ],
+      "activate three-lane reservation helper",
+    );
+  }
+
+  assert.match(
+    audit,
+    /`activate` is the eighth host kernel[\s\S]+`PRE_LIFECYCLE_ONLY`[\s\S]+no public exposure/u,
+  );
+  assert.match(
+    audit,
+    /handler-body parity only[\s\S]+does not authenticate[\s\S]+does not make `activate`\s+complete/u,
+  );
+  assert.match(
+    audit,
+    /pre-activation\/vacuous-cap phase[\s\S]+atomically enables normal cap\s+enforcement[\s\S]+Core payout custody remains separately blocked/u,
+  );
+});
