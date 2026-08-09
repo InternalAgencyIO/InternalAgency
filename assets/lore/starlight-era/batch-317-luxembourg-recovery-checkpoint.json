@@ -1,0 +1,1568 @@
+{
+  "batch": 317,
+  "country": "Luxembourg",
+  "status": "terminal-blocked-after-single-recovery-pass",
+  "sourceCommit": "1131f4318cb44b74eebbda7e977790b22aac4158",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch317-luxembourg keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "nextThemePair": [
+    "cleaner and service couture",
+    "cinematic covert-agent crew couture"
+  ],
+  "nextQueueCountry": "Suriname",
+  "nextQueueBatch": 318,
+  "nextQueueScenes": [
+    1292,
+    1293,
+    1294,
+    1295
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.luxembourg-city.com/en/place/parc/the-petrusse-valley",
+      "usedFor": "Petrousse Valley, Adolphe Bridge, cliffs, stream, paths, and public recreation"
+    },
+    {
+      "url": "https://www.luxembourg-city.com/en/about-luxembourg-city/meng-stad-my-city/details/the-10-must-see-bridges-in-luxembourg-city",
+      "usedFor": "Adolphe Bridge double stone arch, suspended pedestrian deck, tram, and valley setting"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/place/blast-furnace-belval",
+      "usedFor": "Belval preserved blast furnaces and modern University of Luxembourg district"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/place/schiessentumpel-waterfalls",
+      "usedFor": "Schiessentumpel waterfall, sandstone bridge, and Black Ernz setting"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/fr/attraction/le-lac-de-la-haute-sure",
+      "usedFor": "Upper-Sure Lake, reservoir, drinking water, electricity, solar boat, and recreation"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch317-luxembourg-male-model-scene",
+    "fullHash": 1905955318,
+    "roll": 18,
+    "selectedScenePosition": 3,
+    "selectedScene": 1290,
+    "maleEmotion": {
+      "key": "batch317-luxembourg-scene3-male-emotion",
+      "roll": 27,
+      "result": "hope"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Luxembourg flag, red lion, coat of arms, crown, or official emblem is copied onto clothing. Large researched secular bridge, valley, steel, science, lake, dam, waterfall, forest, mobility, and infrastructure fields replace them.",
+    "palette": "Grand-Duchy red, ice blue, steel silver, slate charcoal, vineyard green, Moselle teal, sandstone gold, forest emerald, lake cobalt, and clean white",
+    "minimumCoverage": "Every scene places multiple large complete secular Luxembourg motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScene": "The four scenes foreground Luxembourg City's Adolphe Bridge and Petrousse Valley, Belval industrial heritage, Upper-Sure Lake, and the Schiessentumpel waterfall.",
+    "prohibitions": "No literal flag, red lion, coat of arms, crown, official seal, sacred symbol, religious architecture, copied ceremonial dress, copied runway or service uniform, badge, weapon threat, sexualized service, alcohol, political insignia, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch317-luxembourg-x-heart",
+      "roll": 79,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch317-luxembourg-x-internalagency",
+      "roll": 15,
+      "active": true
+    },
+    "worldXXXSeries": {
+      "key": "batch317-luxembourg-x-worldxxxseries",
+      "roll": 32,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Luxembourg images plus one accepted Suriname image when available",
+    "captionIfEligible": "Luxembourg red heart Suriname #Luxembourg #InternalAgency",
+    "internalAgencyHashtagActive": true,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1288, 1289, and 1291 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1290 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch317-luxembourg-male-model-scene",
+        18
+      ],
+      [
+        "batch317-luxembourg-scene3-male-emotion",
+        27
+      ],
+      [
+        "batch317-luxembourg-scene1288-weather",
+        76
+      ],
+      [
+        "batch317-luxembourg-scene1288-paws",
+        41
+      ],
+      [
+        "batch317-luxembourg-scene1288-poleDanceTheme",
+        30
+      ],
+      [
+        "batch317-luxembourg-scene1288-rainbowOnly",
+        8
+      ],
+      [
+        "batch317-luxembourg-scene1288-rainbowHosiery",
+        51
+      ],
+      [
+        "batch317-luxembourg-scene1288-romanceBeat",
+        49
+      ],
+      [
+        "batch317-luxembourg-scene1288-compoundLoveBeat",
+        45
+      ],
+      [
+        "batch317-luxembourg-scene1288-Radiance-emotion",
+        61
+      ],
+      [
+        "batch317-luxembourg-scene1288-Radiance-visibleMidriff",
+        89
+      ],
+      [
+        "batch317-luxembourg-scene1288-Radiance-straplessDress",
+        98
+      ],
+      [
+        "batch317-luxembourg-scene1288-Radiance-fullyOpenBack",
+        91
+      ],
+      [
+        "batch317-luxembourg-scene1288-Ellie-emotion",
+        57
+      ],
+      [
+        "batch317-luxembourg-scene1288-Ellie-visibleMidriff",
+        77
+      ],
+      [
+        "batch317-luxembourg-scene1288-Ellie-straplessDress",
+        34
+      ],
+      [
+        "batch317-luxembourg-scene1288-Ellie-fullyOpenBack",
+        99
+      ],
+      [
+        "batch317-luxembourg-scene1288-Alia-emotion",
+        3
+      ],
+      [
+        "batch317-luxembourg-scene1288-Alia-visibleMidriff",
+        79
+      ],
+      [
+        "batch317-luxembourg-scene1288-Alia-straplessDress",
+        28
+      ],
+      [
+        "batch317-luxembourg-scene1288-Alia-fullyOpenBack",
+        5
+      ],
+      [
+        "batch317-luxembourg-scene1288-AI ECE-emotion",
+        37
+      ],
+      [
+        "batch317-luxembourg-scene1288-AI ECE-visibleMidriff",
+        53
+      ],
+      [
+        "batch317-luxembourg-scene1288-AI ECE-straplessDress",
+        10
+      ],
+      [
+        "batch317-luxembourg-scene1288-AI ECE-fullyOpenBack",
+        67
+      ],
+      [
+        "batch317-luxembourg-scene1289-weather",
+        91
+      ],
+      [
+        "batch317-luxembourg-scene1289-paws",
+        88
+      ],
+      [
+        "batch317-luxembourg-scene1289-poleDanceTheme",
+        59
+      ],
+      [
+        "batch317-luxembourg-scene1289-rainbowOnly",
+        87
+      ],
+      [
+        "batch317-luxembourg-scene1289-rainbowHosiery",
+        50
+      ],
+      [
+        "batch317-luxembourg-scene1289-romanceBeat",
+        38
+      ],
+      [
+        "batch317-luxembourg-scene1289-compoundLoveBeat",
+        8
+      ],
+      [
+        "batch317-luxembourg-scene1289-Radiance-emotion",
+        12
+      ],
+      [
+        "batch317-luxembourg-scene1289-Radiance-visibleMidriff",
+        22
+      ],
+      [
+        "batch317-luxembourg-scene1289-Radiance-straplessDress",
+        29
+      ],
+      [
+        "batch317-luxembourg-scene1289-Radiance-fullyOpenBack",
+        66
+      ],
+      [
+        "batch317-luxembourg-scene1289-Ellie-emotion",
+        54
+      ],
+      [
+        "batch317-luxembourg-scene1289-Ellie-visibleMidriff",
+        36
+      ],
+      [
+        "batch317-luxembourg-scene1289-Ellie-straplessDress",
+        99
+      ],
+      [
+        "batch317-luxembourg-scene1289-Ellie-fullyOpenBack",
+        96
+      ],
+      [
+        "batch317-luxembourg-scene1289-Alia-emotion",
+        42
+      ],
+      [
+        "batch317-luxembourg-scene1289-Alia-visibleMidriff",
+        80
+      ],
+      [
+        "batch317-luxembourg-scene1289-Alia-straplessDress",
+        19
+      ],
+      [
+        "batch317-luxembourg-scene1289-Alia-fullyOpenBack",
+        92
+      ],
+      [
+        "batch317-luxembourg-scene1289-AI ECE-emotion",
+        76
+      ],
+      [
+        "batch317-luxembourg-scene1289-AI ECE-visibleMidriff",
+        2
+      ],
+      [
+        "batch317-luxembourg-scene1289-AI ECE-straplessDress",
+        9
+      ],
+      [
+        "batch317-luxembourg-scene1289-AI ECE-fullyOpenBack",
+        62
+      ],
+      [
+        "batch317-luxembourg-scene1290-weather",
+        93
+      ],
+      [
+        "batch317-luxembourg-scene1290-paws",
+        70
+      ],
+      [
+        "batch317-luxembourg-scene1290-poleDanceTheme",
+        49
+      ],
+      [
+        "batch317-luxembourg-scene1290-rainbowOnly",
+        5
+      ],
+      [
+        "batch317-luxembourg-scene1290-rainbowHosiery",
+        76
+      ],
+      [
+        "batch317-luxembourg-scene1290-romanceBeat",
+        48
+      ],
+      [
+        "batch317-luxembourg-scene1290-compoundLoveBeat",
+        58
+      ],
+      [
+        "batch317-luxembourg-scene1290-Radiance-emotion",
+        94
+      ],
+      [
+        "batch317-luxembourg-scene1290-Radiance-visibleMidriff",
+        48
+      ],
+      [
+        "batch317-luxembourg-scene1290-Radiance-straplessDress",
+        83
+      ],
+      [
+        "batch317-luxembourg-scene1290-Radiance-fullyOpenBack",
+        88
+      ],
+      [
+        "batch317-luxembourg-scene1290-Ellie-emotion",
+        4
+      ],
+      [
+        "batch317-luxembourg-scene1290-Ellie-visibleMidriff",
+        54
+      ],
+      [
+        "batch317-luxembourg-scene1290-Ellie-straplessDress",
+        5
+      ],
+      [
+        "batch317-luxembourg-scene1290-Ellie-fullyOpenBack",
+        98
+      ],
+      [
+        "batch317-luxembourg-scene1290-Alia-emotion",
+        88
+      ],
+      [
+        "batch317-luxembourg-scene1290-Alia-visibleMidriff",
+        30
+      ],
+      [
+        "batch317-luxembourg-scene1290-Alia-straplessDress",
+        81
+      ],
+      [
+        "batch317-luxembourg-scene1290-Alia-fullyOpenBack",
+        98
+      ],
+      [
+        "batch317-luxembourg-scene1290-AI ECE-emotion",
+        66
+      ],
+      [
+        "batch317-luxembourg-scene1290-AI ECE-visibleMidriff",
+        92
+      ],
+      [
+        "batch317-luxembourg-scene1290-AI ECE-straplessDress",
+        35
+      ],
+      [
+        "batch317-luxembourg-scene1290-AI ECE-fullyOpenBack",
+        96
+      ],
+      [
+        "batch317-luxembourg-scene1291-weather",
+        78
+      ],
+      [
+        "batch317-luxembourg-scene1291-paws",
+        39
+      ],
+      [
+        "batch317-luxembourg-scene1291-poleDanceTheme",
+        72
+      ],
+      [
+        "batch317-luxembourg-scene1291-rainbowOnly",
+        10
+      ],
+      [
+        "batch317-luxembourg-scene1291-rainbowHosiery",
+        65
+      ],
+      [
+        "batch317-luxembourg-scene1291-romanceBeat",
+        83
+      ],
+      [
+        "batch317-luxembourg-scene1291-compoundLoveBeat",
+        79
+      ],
+      [
+        "batch317-luxembourg-scene1291-Radiance-emotion",
+        63
+      ],
+      [
+        "batch317-luxembourg-scene1291-Radiance-visibleMidriff",
+        79
+      ],
+      [
+        "batch317-luxembourg-scene1291-Radiance-straplessDress",
+        56
+      ],
+      [
+        "batch317-luxembourg-scene1291-Radiance-fullyOpenBack",
+        73
+      ],
+      [
+        "batch317-luxembourg-scene1291-Ellie-emotion",
+        87
+      ],
+      [
+        "batch317-luxembourg-scene1291-Ellie-visibleMidriff",
+        39
+      ],
+      [
+        "batch317-luxembourg-scene1291-Ellie-straplessDress",
+        44
+      ],
+      [
+        "batch317-luxembourg-scene1291-Ellie-fullyOpenBack",
+        5
+      ],
+      [
+        "batch317-luxembourg-scene1291-Alia-emotion",
+        17
+      ],
+      [
+        "batch317-luxembourg-scene1291-Alia-visibleMidriff",
+        77
+      ],
+      [
+        "batch317-luxembourg-scene1291-Alia-straplessDress",
+        14
+      ],
+      [
+        "batch317-luxembourg-scene1291-Alia-fullyOpenBack",
+        83
+      ],
+      [
+        "batch317-luxembourg-scene1291-AI ECE-emotion",
+        27
+      ],
+      [
+        "batch317-luxembourg-scene1291-AI ECE-visibleMidriff",
+        35
+      ],
+      [
+        "batch317-luxembourg-scene1291-AI ECE-straplessDress",
+        76
+      ],
+      [
+        "batch317-luxembourg-scene1291-AI ECE-fullyOpenBack",
+        69
+      ],
+      [
+        "batch317-luxembourg-x-heart",
+        79
+      ],
+      [
+        "batch317-luxembourg-x-internalagency",
+        15
+      ],
+      [
+        "batch317-luxembourg-x-worldxxxseries",
+        32
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch317-luxembourg-scene1288-rainbowHosieryWearer",
+        7
+      ],
+      [
+        "batch317-luxembourg-scene1288-rainbowHosieryPaletteMode",
+        9
+      ],
+      [
+        "batch317-luxembourg-scene1289-rainbowHosieryWearer",
+        78
+      ],
+      [
+        "batch317-luxembourg-scene1289-rainbowHosieryPaletteMode",
+        14
+      ],
+      [
+        "batch317-luxembourg-scene1290-rainbowHosieryWearer",
+        36
+      ],
+      [
+        "batch317-luxembourg-scene1290-rainbowHosieryPaletteMode",
+        96
+      ],
+      [
+        "batch317-luxembourg-scene1291-rainbowHosieryWearer",
+        61
+      ],
+      [
+        "batch317-luxembourg-scene1291-rainbowHosieryPaletteMode",
+        75
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "50D29A386003E32EDB9B39F1F8CD6C987D71999DF36099A4C64AD4B90FEE5750",
+    "hosierySelectorPairsSha256": "DC97E36537A9D0653514747EB52AA1FFFB6F600BA19E31A6E1373D99A7FAD99C"
+  },
+  "scenePlans": {
+    "1288": {
+      "scene": 1288,
+      "theme": "Paris runway model couture",
+      "landmark": "a broad dry public overlook beneath the complete double stone arch of Adolphe Bridge above the Petrousse Valley during a powerful windstorm with controlled fabric motion, with the full bridge span, suspended pedestrian deck, green cliffs, winding stream, modern tram, valley paths, and one clearly empty marked route; no religious or political building appears",
+      "motifs": [
+        "large complete Adolphe-Bridge double-arch, suspended walkway, Petrousse cliff, tram-line, valley-stream, bicycle-path, rose-garden, and city-topography compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Luxembourg bridge-and-valley composition rather than tiny trim"
+      ],
+      "culture": "Use Luxembourg City's Adolphe Bridge, Petrousse Valley, public tram, pedestrian deck, cycling path, cliffs, stream, and urban greenery respectfully. Paris runway model couture is original fictional fashion with no copied designer, logo, uniform, unsafe runway, or sexualized presentation. Use secular Luxembourg architecture, valleys, industry, waterfalls, lakes, forests, vineyards, mobility, and civic infrastructure only. No literal flag, coat of arms, red lion, crown, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch317-luxembourg-scene1288-weather",
+        "roll": 76,
+        "result": "powerful windstorm with controlled fabric motion"
+      },
+      "paws": {
+        "key": "batch317-luxembourg-scene1288-paws",
+        "roll": 41,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch317-luxembourg-scene1288-poleDanceTheme",
+        "roll": 30,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch317-luxembourg-scene1288-rainbowOnly",
+        "roll": 8,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch317-luxembourg-scene1288-rainbowHosiery",
+        "roll": 51,
+        "active": false,
+        "wearer": {
+          "key": "batch317-luxembourg-scene1288-rainbowHosieryWearer",
+          "roll": 7,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch317-luxembourg-scene1288-rainbowHosieryPaletteMode",
+          "roll": 9,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch317-luxembourg-scene1288-romanceBeat",
+        "roll": 49,
+        "dynamicIndex": 1,
+        "contractResult": "Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance."
+      },
+      "compoundLoveBeat": {
+        "key": "batch317-luxembourg-scene1288-compoundLoveBeat",
+        "roll": 45,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1288-Radiance-emotion",
+            "roll": 61,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown by a controlled sideways glance toward ECE while keeping a steady public smile"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1288-Radiance-visibleMidriff",
+            "roll": 89,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1288-Radiance-straplessDress",
+            "roll": 98,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1288-Radiance-fullyOpenBack",
+            "roll": 91,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1288-Ellie-emotion",
+            "roll": 57,
+            "result": "aching romantic longing",
+            "performance": "aching romantic longing shown by a softened gaze toward Alia and a small hopeful breath"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1288-Ellie-visibleMidriff",
+            "roll": 77,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1288-Ellie-straplessDress",
+            "roll": 34,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1288-Ellie-fullyOpenBack",
+            "roll": 99,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1288-Alia-emotion",
+            "roll": 3,
+            "result": "tender affection",
+            "performance": "tender affection shown by a warm reassuring smile toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1288-Alia-visibleMidriff",
+            "roll": 79,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1288-Alia-straplessDress",
+            "roll": 28,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1288-Alia-fullyOpenBack",
+            "roll": 5,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1288-AI ECE-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "performance": "magnetic confidence shown by a composed route-leader gaze and lifted chin"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1288-AI ECE-visibleMidriff",
+            "roll": 53,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1288-AI ECE-straplessDress",
+            "roll": 10,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1288-AI ECE-fullyOpenBack",
+            "roll": 67,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Translate Ellie's rise into Radiance's waiting side hug, ECE's retained hand link, Alia's wounded-rival beat, Radiance cradling Alia's face, Alia's waist hug, Ellie's opposite-cheek greeting, and ECE's close watch into a wide shallow crescent. ECE and Radiance link one hand pair. Radiance rests her free hand at Alia's cheek. Alia answers at Radiance's waist and links Ellie. Ellie links Alia and rests her free hand on Alia's shoulder while looking tenderly toward her. All five contacts are visible, public, gentle, and consensual.",
+      "composition": "Place ECE far left, Radiance left-center, Alia right-center, and Ellie far right in separated depth lanes. Keep pale sky, bridge arch, or green valley gaps behind every arm. Wind moves only secured short hems and hair ends; all faces, hands, legs, heels, and stable footing remain unobstructed.",
+      "emotionNuance": {
+        "Radiance": "visible jealousy shown by a controlled sideways glance toward ECE while keeping a steady public smile",
+        "Ellie": "aching romantic longing shown by a softened gaze toward Alia and a small hopeful breath",
+        "Alia": "tender affection shown by a warm reassuring smile toward Radiance",
+        "AI ECE": "magnetic confidence shown by a composed route-leader gaze and lifted chin"
+      },
+      "outfits": {
+        "Radiance": "a Grand-Duchy-red high-neck cap-sleeve Paris-runway above-knee tailored romper with covered waist and high closed back, carrying a large complete Adolphe double-arch and tram composition, with steel-silver pumps",
+        "Ellie": "a fully strapless ice-blue Paris-runway above-knee A-line dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete Petrousse cliff, stream, and bicycle-path composition, with vineyard-green slingback heels",
+        "Alia": "a fully strapless sandstone-gold Paris-runway above-knee tailored skort dress with a high straight opaque bustline, covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete suspended-walkway, rose-garden, and valley-topography composition, with slate-charcoal platform heels",
+        "AI ECE": "a fully strapless Moselle-teal Paris-runway above-knee asymmetric sheath with a high straight opaque bustline, covered waist and high closed back, carrying a large complete bridge-span, modern-tram, and empty-route composition, with clean-white heeled boots"
+      },
+      "propPlan": "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across the clearly empty valley stream toward one unoccupied route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand links visibly with Radiance's left hand",
+        "Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly at Alia's near cheek",
+        "Alia left hand rests visibly at Radiance's near waist; Alia right hand links visibly with Ellie's left hand",
+        "Ellie left hand links visibly with Alia's right hand; Ellie right hand rests visibly on Alia's far shoulder"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry public overlook beneath the complete double stone arch of Adolphe Bridge above the Petrousse Valley during a powerful windstorm with controlled fabric motion, with the full bridge span, suspended pedestrian deck, green cliffs, winding stream, modern tram, valley paths, and one clearly empty marked route; no religious or political building appears. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: Paris runway model couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 76=powerful windstorm with controlled fabric motion; PAWS 41=inactive; pole theme 30=inactive; rainbow-only 8=inactive; rainbow hosiery 51=inactive; hosiery wearer selector 7=Radiance; hosiery palette selector 9=country-palette rainbow-like gradient; romance 49; compound love 45. Exact wardrobe rolls: Radiance: midriff 89=covered, strapless 98=inactive, open back 91=inactive; Ellie: midriff 77=covered, strapless 34=active, open back 99=inactive; Alia: midriff 79=covered, strapless 28=active, open back 5=active; AI ECE: midriff 53=covered, strapless 10=active, open back 67=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a Grand-Duchy-red high-neck cap-sleeve Paris-runway above-knee tailored romper with covered waist and high closed back, carrying a large complete Adolphe double-arch and tram composition, with steel-silver pumps; Ellie: a fully strapless ice-blue Paris-runway above-knee A-line dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete Petrousse cliff, stream, and bicycle-path composition, with vineyard-green slingback heels; Alia: a fully strapless sandstone-gold Paris-runway above-knee tailored skort dress with a high straight opaque bustline, covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete suspended-walkway, rose-garden, and valley-topography composition, with slate-charcoal platform heels; AI ECE: a fully strapless Moselle-teal Paris-runway above-knee asymmetric sheath with a high straight opaque bustline, covered waist and high closed back, carrying a large complete bridge-span, modern-tram, and empty-route composition, with clean-white heeled boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Luxembourg motifs dominate at least two outfits: large complete Adolphe-Bridge double-arch, suspended walkway, Petrousse cliff, tram-line, valley-stream, bicycle-path, rose-garden, and city-topography compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Luxembourg bridge-and-valley composition rather than tiny trim. Use Luxembourg City's Adolphe Bridge, Petrousse Valley, public tram, pedestrian deck, cycling path, cliffs, stream, and urban greenery respectfully. Paris runway model couture is original fictional fashion with no copied designer, logo, uniform, unsafe runway, or sexualized presentation. Use secular Luxembourg architecture, valleys, industry, waterfalls, lakes, forests, vineyards, mobility, and civic infrastructure only. No literal flag, coat of arms, red lion, crown, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 61, visible jealousy, performed as visible jealousy shown by a controlled sideways glance toward ECE while keeping a steady public smile; Ellie: roll 57, aching romantic longing, performed as aching romantic longing shown by a softened gaze toward Alia and a small hopeful breath; Alia: roll 3, tender affection, performed as tender affection shown by a warm reassuring smile toward Radiance; AI ECE: roll 37, magnetic confidence, performed as magnetic confidence shown by a composed route-leader gaze and lifted chin. Duplicate labels must have visibly different performances. Selected romance roll 49: Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance. Selected compound roll 45: Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance. Materialize both through this exact consensual public choreography: Translate Ellie's rise into Radiance's waiting side hug, ECE's retained hand link, Alia's wounded-rival beat, Radiance cradling Alia's face, Alia's waist hug, Ellie's opposite-cheek greeting, and ECE's close watch into a wide shallow crescent. ECE and Radiance link one hand pair. Radiance rests her free hand at Alia's cheek. Alia answers at Radiance's waist and links Ellie. Ellie links Alia and rests her free hand on Alia's shoulder while looking tenderly toward her. All five contacts are visible, public, gentle, and consensual. Place ECE far left, Radiance left-center, Alia right-center, and Ellie far right in separated depth lanes. Keep pale sky, bridge arch, or green valley gaps behind every arm. Wind moves only secured short hems and hair ends; all faces, hands, legs, heels, and stable footing remain unobstructed. Exact hands, no others: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand links visibly with Radiance's left hand; Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly at Alia's near cheek; Alia left hand rests visibly at Radiance's near waist; Alia right hand links visibly with Ellie's left hand; Ellie left hand links visibly with Alia's right hand; Ellie right hand rests visibly on Alia's far shoulder. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across the clearly empty valley stream toward one unoccupied route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render powerful windstorm with controlled fabric motion cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    },
+    "1289": {
+      "scene": 1289,
+      "theme": "Paris runway model couture",
+      "landmark": "a broad dry public observation terrace in the complete Belval industrial district during a solar eclipse atmosphere, with both preserved blast furnaces, rust-red steel gantries, the former ore hall, modern university cubes, red-earth landscaping, a pale eclipse corona, and one clearly empty marked service route",
+      "motifs": [
+        "large complete Belval blast-furnace, steel-gantry, ore-cart, red-earth, university-cube, science-grid, rail-line, and eclipse-corona compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Luxembourg steel-and-science composition"
+      ],
+      "culture": "Use Belval's preserved blast furnaces, industrial steel heritage, transformed university district, science architecture, rail history, and red-earth landscape respectfully. Paris runway model couture is original fictional fashion with no copied designer, logo, uniform, unsafe runway, or sexualized presentation. Use secular Luxembourg architecture, valleys, industry, waterfalls, lakes, forests, vineyards, mobility, and civic infrastructure only. No literal flag, coat of arms, red lion, crown, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch317-luxembourg-scene1289-weather",
+        "roll": 91,
+        "result": "solar eclipse atmosphere"
+      },
+      "paws": {
+        "key": "batch317-luxembourg-scene1289-paws",
+        "roll": 88,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch317-luxembourg-scene1289-poleDanceTheme",
+        "roll": 59,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch317-luxembourg-scene1289-rainbowOnly",
+        "roll": 87,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch317-luxembourg-scene1289-rainbowHosiery",
+        "roll": 50,
+        "active": false,
+        "wearer": {
+          "key": "batch317-luxembourg-scene1289-rainbowHosieryWearer",
+          "roll": 78,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch317-luxembourg-scene1289-rainbowHosieryPaletteMode",
+          "roll": 14,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch317-luxembourg-scene1289-romanceBeat",
+        "roll": 38,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch317-luxembourg-scene1289-compoundLoveBeat",
+        "roll": 8,
+        "index": 8,
+        "contractResult": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1289-Radiance-emotion",
+            "roll": 12,
+            "result": "romantic joy",
+            "performance": "romantic joy shown by a luminous smile toward ECE during the moving hand pass"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1289-Radiance-visibleMidriff",
+            "roll": 22,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1289-Radiance-straplessDress",
+            "roll": 29,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1289-Radiance-fullyOpenBack",
+            "roll": 66,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1289-Ellie-emotion",
+            "roll": 54,
+            "result": "aching romantic longing",
+            "performance": "aching romantic longing shown by a quiet extended reach toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1289-Ellie-visibleMidriff",
+            "roll": 36,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1289-Ellie-straplessDress",
+            "roll": 99,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1289-Ellie-fullyOpenBack",
+            "roll": 96,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1289-Alia-emotion",
+            "roll": 42,
+            "result": "determination",
+            "performance": "determination shown by focused brows while guiding Radiance's careful turn"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1289-Alia-visibleMidriff",
+            "roll": 80,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1289-Alia-straplessDress",
+            "roll": 19,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1289-Alia-fullyOpenBack",
+            "roll": 92,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1289-AI ECE-emotion",
+            "roll": 76,
+            "result": "contained resentment",
+            "performance": "contained resentment shown by a tight composed gaze toward Ellie while keeping every touch gentle"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1289-AI ECE-visibleMidriff",
+            "roll": 2,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1289-AI ECE-straplessDress",
+            "roll": 9,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1289-AI ECE-fullyOpenBack",
+            "roll": 62,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Translate Alia's linked-hand turn of Radiance, ECE's steadying waist touch, Ellie's reach toward the route beacon, ECE and Radiance's moving side hug, ECE's quick forehead greeting to Ellie, and Alia's gentle pull on Radiance's free hand into a wide turning chain. ECE links Ellie and steadies Radiance. Ellie links ECE and touches Radiance's shoulder. Radiance links Alia. Alia answers at Radiance's forearm. The choreography remains public, affectionate, consensual, and fully visible.",
+      "composition": "Place ECE far left, Ellie left-center, Radiance right-center, and Alia far right across a shallow diagonal. Keep eclipse sky, gantry, or bright modern-building gaps behind all eight arms. Radiance makes a small stable half-turn with both heels planted; no one spins, jumps, or blocks another body.",
+      "emotionNuance": {
+        "Radiance": "romantic joy shown by a luminous smile toward ECE during the moving hand pass",
+        "Ellie": "aching romantic longing shown by a quiet extended reach toward Radiance",
+        "Alia": "determination shown by focused brows while guiding Radiance's careful turn",
+        "AI ECE": "contained resentment shown by a tight composed gaze toward Ellie while keeping every touch gentle"
+      },
+      "outfits": {
+        "Radiance": "a fully strapless Grand-Duchy-red cropped Paris-runway bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, with a separate steel-silver above-knee skirt carrying a large complete Belval blast-furnace and gantry composition, high closed back, and clean-white pumps",
+        "Ellie": "a vineyard-green short-sleeve cropped Paris-runway jacket exposing a narrow ordinary waist panel, with a separate slate-charcoal above-knee tailored skort carrying a large complete ore-cart, rail-line, and red-earth composition, high closed back, and sandstone-gold slingback heels",
+        "Alia": "a fully strapless lake-cobalt Paris-runway above-knee sculpted dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete university-cube, science-grid, and transformed-industry composition, with ice-blue platform heels",
+        "AI ECE": "a fully strapless Moselle-teal cropped Paris-runway bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, with a separate clean-white above-knee asymmetric skirt carrying a large complete eclipse-corona, blast-furnace, and empty-route composition, high closed back, and Grand-Duchy-red heeled boots"
+      },
+      "propPlan": "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across one clearly empty industrial service lane toward an unoccupied route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand links visibly with Ellie's left hand",
+        "Ellie left hand links visibly with ECE's left hand; Ellie right hand rests visibly on Radiance's near shoulder",
+        "Radiance left hand rests visibly on ECE's near forearm; Radiance right hand links visibly with Alia's left hand",
+        "Alia left hand links visibly with Radiance's right hand; Alia right hand rests visibly on Radiance's near forearm"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry public observation terrace in the complete Belval industrial district during a solar eclipse atmosphere, with both preserved blast furnaces, rust-red steel gantries, the former ore hall, modern university cubes, red-earth landscaping, a pale eclipse corona, and one clearly empty marked service route. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: Paris runway model couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 91=solar eclipse atmosphere; PAWS 88=inactive; pole theme 59=inactive; rainbow-only 87=inactive; rainbow hosiery 50=inactive; hosiery wearer selector 78=AI ECE; hosiery palette selector 14=country-palette rainbow-like gradient; romance 38; compound love 8. Exact wardrobe rolls: Radiance: midriff 22=visible, strapless 29=active, open back 66=inactive; Ellie: midriff 36=visible, strapless 99=inactive, open back 96=inactive; Alia: midriff 80=covered, strapless 19=active, open back 92=inactive; AI ECE: midriff 2=visible, strapless 9=active, open back 62=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a fully strapless Grand-Duchy-red cropped Paris-runway bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, with a separate steel-silver above-knee skirt carrying a large complete Belval blast-furnace and gantry composition, high closed back, and clean-white pumps; Ellie: a vineyard-green short-sleeve cropped Paris-runway jacket exposing a narrow ordinary waist panel, with a separate slate-charcoal above-knee tailored skort carrying a large complete ore-cart, rail-line, and red-earth composition, high closed back, and sandstone-gold slingback heels; Alia: a fully strapless lake-cobalt Paris-runway above-knee sculpted dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete university-cube, science-grid, and transformed-industry composition, with ice-blue platform heels; AI ECE: a fully strapless Moselle-teal cropped Paris-runway bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, with a separate clean-white above-knee asymmetric skirt carrying a large complete eclipse-corona, blast-furnace, and empty-route composition, high closed back, and Grand-Duchy-red heeled boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Luxembourg motifs dominate at least two outfits: large complete Belval blast-furnace, steel-gantry, ore-cart, red-earth, university-cube, science-grid, rail-line, and eclipse-corona compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Luxembourg steel-and-science composition. Use Belval's preserved blast furnaces, industrial steel heritage, transformed university district, science architecture, rail history, and red-earth landscape respectfully. Paris runway model couture is original fictional fashion with no copied designer, logo, uniform, unsafe runway, or sexualized presentation. Use secular Luxembourg architecture, valleys, industry, waterfalls, lakes, forests, vineyards, mobility, and civic infrastructure only. No literal flag, coat of arms, red lion, crown, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 12, romantic joy, performed as romantic joy shown by a luminous smile toward ECE during the moving hand pass; Ellie: roll 54, aching romantic longing, performed as aching romantic longing shown by a quiet extended reach toward Radiance; Alia: roll 42, determination, performed as determination shown by focused brows while guiding Radiance's careful turn; AI ECE: roll 76, contained resentment, performed as contained resentment shown by a tight composed gaze toward Ellie while keeping every touch gentle. Duplicate labels must have visibly different performances. Selected romance roll 38: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Selected compound roll 8: ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction. Materialize both through this exact consensual public choreography: Translate Alia's linked-hand turn of Radiance, ECE's steadying waist touch, Ellie's reach toward the route beacon, ECE and Radiance's moving side hug, ECE's quick forehead greeting to Ellie, and Alia's gentle pull on Radiance's free hand into a wide turning chain. ECE links Ellie and steadies Radiance. Ellie links ECE and touches Radiance's shoulder. Radiance links Alia. Alia answers at Radiance's forearm. The choreography remains public, affectionate, consensual, and fully visible. Place ECE far left, Ellie left-center, Radiance right-center, and Alia far right across a shallow diagonal. Keep eclipse sky, gantry, or bright modern-building gaps behind all eight arms. Radiance makes a small stable half-turn with both heels planted; no one spins, jumps, or blocks another body. Exact hands, no others: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand links visibly with Ellie's left hand; Ellie left hand links visibly with ECE's left hand; Ellie right hand rests visibly on Radiance's near shoulder; Radiance left hand rests visibly on ECE's near forearm; Radiance right hand links visibly with Alia's left hand; Alia left hand links visibly with Radiance's right hand; Alia right hand rests visibly on Radiance's near forearm. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across one clearly empty industrial service lane toward an unoccupied route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render solar eclipse atmosphere cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    },
+    "1290": {
+      "scene": 1290,
+      "theme": "cleaner and service couture",
+      "landmark": "a broad dry covered solar-boat pavilion overlooking the complete Upper-Sure Lake and dam landscape during a distant waterspout over open water, with the wide reservoir, long dam curve, forested slopes, slate cliffs, one small solar excursion boat far from the weather, cobalt water, and one clearly empty marked water route",
+      "motifs": [
+        "large complete Upper-Sure reservoir, dam-curve, solar-boat, slate-cliff, beech-forest, drinking-water ripple, sail, and clean-route compositions across all four women's outfits and the male top",
+        "at least two separate outfits each carry one complete full-width secular Luxembourg lake-and-infrastructure composition"
+      ],
+      "culture": "Use Upper-Sure Lake, its reservoir and drinking-water role, dam infrastructure, solar excursion boat, forested slopes, slate cliffs, and permitted recreation respectfully. Cleaner and service couture is only original fully clothed fictional public-utility tailoring; no copied work uniform, badge, degrading labor, sexualized service, or unsafe cleaning act. Use secular Luxembourg architecture, valleys, industry, waterfalls, lakes, forests, vineyards, mobility, and civic infrastructure only. No literal flag, coat of arms, red lion, crown, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch317-luxembourg-scene1290-weather",
+        "roll": 93,
+        "result": "distant waterspout over open water"
+      },
+      "paws": {
+        "key": "batch317-luxembourg-scene1290-paws",
+        "roll": 70,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch317-luxembourg-scene1290-poleDanceTheme",
+        "roll": 49,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch317-luxembourg-scene1290-rainbowOnly",
+        "roll": 5,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch317-luxembourg-scene1290-rainbowHosiery",
+        "roll": 76,
+        "active": false,
+        "wearer": {
+          "key": "batch317-luxembourg-scene1290-rainbowHosieryWearer",
+          "roll": 36,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch317-luxembourg-scene1290-rainbowHosieryPaletteMode",
+          "roll": 96,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch317-luxembourg-scene1290-romanceBeat",
+        "roll": 48,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch317-luxembourg-scene1290-compoundLoveBeat",
+        "roll": 58,
+        "index": 10,
+        "contractResult": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1290-Radiance-emotion",
+            "roll": 94,
+            "result": "shame and social vulnerability",
+            "performance": "shame and social vulnerability shown by a lowered gaze and guarded mouth while accepting ECE's hand"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1290-Radiance-visibleMidriff",
+            "roll": 48,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1290-Radiance-straplessDress",
+            "roll": 83,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1290-Radiance-fullyOpenBack",
+            "roll": 88,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1290-Ellie-emotion",
+            "roll": 4,
+            "result": "tender affection",
+            "performance": "tender affection shown by a steady reassuring smile toward the male"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1290-Ellie-visibleMidriff",
+            "roll": 54,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1290-Ellie-straplessDress",
+            "roll": 5,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1290-Ellie-fullyOpenBack",
+            "roll": 98,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1290-Alia-emotion",
+            "roll": 88,
+            "result": "fear and urgent vulnerability",
+            "performance": "fear and urgent vulnerability shown by alert widened eyes toward the distant waterspout while maintaining safe footing"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1290-Alia-visibleMidriff",
+            "roll": 30,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1290-Alia-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1290-Alia-fullyOpenBack",
+            "roll": 98,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1290-AI ECE-emotion",
+            "roll": 66,
+            "result": "possessive tension",
+            "performance": "possessive tension shown by a protective linked grip and intense strategist focus on Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1290-AI ECE-visibleMidriff",
+            "roll": 92,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1290-AI ECE-straplessDress",
+            "roll": 35,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1290-AI ECE-fullyOpenBack",
+            "roll": 96,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Translate Radiance walking away with ECE's hand, Ellie's gentle forearm catch, Alia's protective close, and the quartet's turning embrace chain into a five-adult open fan. ECE and Radiance link one hand pair. Radiance touches the male's upper arm. The male keeps two clear public contacts by resting one hand on Ellie's shoulder and the other on Alia's forearm while his strongest sustained eye line remains on ECE. Ellie answers at the male's forearm and links Alia. Alia links Ellie and answers at the male's forearm. This is fully clothed consensual adult infidelity drama expressed only through restrained eye lines and gentle public touch.",
+      "composition": "Place ECE far left, Radiance left-center, the male center, Ellie right-center, and Alia far right in five separated lanes. Keep lake, dam, pale sky, or pavilion gaps behind all ten arms. Turn the male's face three-quarter-left toward ECE; Ellie and Alia look elsewhere so no competing eye line dominates. Everyone stands upright on the dry nonslip pavilion floor.",
+      "emotionNuance": {
+        "Radiance": "shame and social vulnerability shown by a lowered gaze and guarded mouth while accepting ECE's hand",
+        "Ellie": "tender affection shown by a steady reassuring smile toward the male",
+        "Alia": "fear and urgent vulnerability shown by alert widened eyes toward the distant waterspout while maintaining safe footing",
+        "AI ECE": "possessive tension shown by a protective linked grip and intense strategist focus on Radiance",
+        "Male": "hope shown by an open relieved expression with his head and pupils most strongly fixed on ECE across the group"
+      },
+      "outfits": {
+        "Radiance": "a Grand-Duchy-red cap-sleeve cropped cleaner-and-service couture jacket exposing a narrow ordinary waist panel, with a separate clean-white above-knee tailored skirt carrying a large complete Upper-Sure reservoir and dam-curve composition, high closed back, and steel-silver pumps",
+        "Ellie": "a fully strapless lake-cobalt cleaner-and-service couture above-knee A-line dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete solar-boat, sail, and drinking-water-ripple composition, with forest-emerald slingback heels",
+        "Alia": "a sandstone-gold one-shoulder cropped cleaner-and-service couture bodice exposing a narrow ordinary waist panel, with a separate slate-charcoal above-knee skort carrying a large complete slate-cliff, beech-forest, and recreation-route composition, high closed back, and ice-blue platform heels",
+        "AI ECE": "a Moselle-teal high-neck short-sleeve cleaner-and-service couture above-knee tailored romper with covered waist and high closed back, carrying a large complete clean-route, dam-control, and empty-water composition, with Grand-Duchy-red heeled boots",
+        "Male": "the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted clean-white short-sleeve top carrying a restrained complete Upper-Sure lake-and-dam contour, fitted black jeans, and practical black boots"
+      },
+      "propPlan": "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Upper-Sure water toward one unoccupied water-route marker, far from the distant waterspout and solar boat, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand links visibly with Radiance's left hand",
+        "Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly on the male's near upper arm",
+        "the male left hand rests visibly on Ellie's near shoulder; the male right hand rests visibly on Alia's near forearm",
+        "Ellie left hand rests visibly on the male's near forearm; Ellie right hand links visibly with Alia's left hand",
+        "Alia left hand links visibly with Ellie's right hand; Alia right hand rests visibly on the male's near forearm"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch317-luxembourg-scene3-male-emotion",
+          "roll": 27,
+          "result": "hope",
+          "performance": "hope shown by an open relieved expression with his head and pupils most strongly fixed on ECE across the group"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; fully clothed consensual adult infidelity drama with Alia and Ellie; at least two clear male contacts; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the established adult male. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry covered solar-boat pavilion overlooking the complete Upper-Sure Lake and dam landscape during a distant waterspout over open water, with the wide reservoir, long dam curve, forested slopes, slate cliffs, one small solar excursion boat far from the weather, cobalt water, and one clearly empty marked water route. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male. Add him without replacing a woman. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: cleaner and service couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 93=distant waterspout over open water; PAWS 70=inactive; pole theme 49=inactive; rainbow-only 5=inactive; rainbow hosiery 76=inactive; hosiery wearer selector 36=Radiance; hosiery palette selector 96=original independent rainbow gradient; romance 48; compound love 58. Exact wardrobe rolls: Radiance: midriff 48=visible, strapless 83=inactive, open back 88=inactive; Ellie: midriff 54=covered, strapless 5=active, open back 98=inactive; Alia: midriff 30=visible, strapless 81=inactive, open back 98=inactive; AI ECE: midriff 92=covered, strapless 35=inactive, open back 96=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a Grand-Duchy-red cap-sleeve cropped cleaner-and-service couture jacket exposing a narrow ordinary waist panel, with a separate clean-white above-knee tailored skirt carrying a large complete Upper-Sure reservoir and dam-curve composition, high closed back, and steel-silver pumps; Ellie: a fully strapless lake-cobalt cleaner-and-service couture above-knee A-line dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete solar-boat, sail, and drinking-water-ripple composition, with forest-emerald slingback heels; Alia: a sandstone-gold one-shoulder cropped cleaner-and-service couture bodice exposing a narrow ordinary waist panel, with a separate slate-charcoal above-knee skort carrying a large complete slate-cliff, beech-forest, and recreation-route composition, high closed back, and ice-blue platform heels; AI ECE: a Moselle-teal high-neck short-sleeve cleaner-and-service couture above-knee tailored romper with covered waist and high closed back, carrying a large complete clean-route, dam-control, and empty-water composition, with Grand-Duchy-red heeled boots; Male: the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted clean-white short-sleeve top carrying a restrained complete Upper-Sure lake-and-dam contour, fitted black jeans, and practical black boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Luxembourg motifs dominate at least two outfits: large complete Upper-Sure reservoir, dam-curve, solar-boat, slate-cliff, beech-forest, drinking-water ripple, sail, and clean-route compositions across all four women's outfits and the male top; at least two separate outfits each carry one complete full-width secular Luxembourg lake-and-infrastructure composition. Use Upper-Sure Lake, its reservoir and drinking-water role, dam infrastructure, solar excursion boat, forested slopes, slate cliffs, and permitted recreation respectfully. Cleaner and service couture is only original fully clothed fictional public-utility tailoring; no copied work uniform, badge, degrading labor, sexualized service, or unsafe cleaning act. Use secular Luxembourg architecture, valleys, industry, waterfalls, lakes, forests, vineyards, mobility, and civic infrastructure only. No literal flag, coat of arms, red lion, crown, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 94, shame and social vulnerability, performed as shame and social vulnerability shown by a lowered gaze and guarded mouth while accepting ECE's hand; Ellie: roll 4, tender affection, performed as tender affection shown by a steady reassuring smile toward the male; Alia: roll 88, fear and urgent vulnerability, performed as fear and urgent vulnerability shown by alert widened eyes toward the distant waterspout while maintaining safe footing; AI ECE: roll 66, possessive tension, performed as possessive tension shown by a protective linked grip and intense strategist focus on Radiance; Male: roll 27, hope, performed as hope shown by an open relieved expression with his head and pupils most strongly fixed on ECE across the group. Duplicate labels must have visibly different performances. Selected romance roll 48: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Selected compound roll 58: The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance. Materialize both through this exact consensual public choreography: Translate Radiance walking away with ECE's hand, Ellie's gentle forearm catch, Alia's protective close, and the quartet's turning embrace chain into a five-adult open fan. ECE and Radiance link one hand pair. Radiance touches the male's upper arm. The male keeps two clear public contacts by resting one hand on Ellie's shoulder and the other on Alia's forearm while his strongest sustained eye line remains on ECE. Ellie answers at the male's forearm and links Alia. Alia links Ellie and answers at the male's forearm. This is fully clothed consensual adult infidelity drama expressed only through restrained eye lines and gentle public touch. Place ECE far left, Radiance left-center, the male center, Ellie right-center, and Alia far right in five separated lanes. Keep lake, dam, pale sky, or pavilion gaps behind all ten arms. Turn the male's face three-quarter-left toward ECE; Ellie and Alia look elsewhere so no competing eye line dominates. Everyone stands upright on the dry nonslip pavilion floor. Exact hands, no others: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand links visibly with Radiance's left hand; Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly on the male's near upper arm; the male left hand rests visibly on Ellie's near shoulder; the male right hand rests visibly on Alia's near forearm; Ellie left hand rests visibly on the male's near forearm; Ellie right hand links visibly with Alia's left hand; Alia left hand links visibly with Ellie's right hand; Alia right hand rests visibly on the male's near forearm. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Upper-Sure water toward one unoccupied water-route marker, far from the distant waterspout and solar boat, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render distant waterspout over open water cinematically while keeping dry stable nonslip footing. Exactly five adults, ten arms, and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    },
+    "1291": {
+      "scene": 1291,
+      "theme": "cleaner and service couture",
+      "landmark": "a broad dry protected overlook beside the complete Schiessentumpel triple waterfall on the Black Ernz during a powerful windstorm with controlled fabric motion, with the complete small sandstone bridge, three separate cascade streams, mossy boulders, layered sandstone formations, beech canopy, forest path, and one clearly empty marked route",
+      "motifs": [
+        "large complete Schiessentumpel triple-cascade, sandstone-bridge, Black-Ernz stream, mossy-boulder, beech-leaf, rock-formation, hiking-path, and clean-water compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Luxembourg waterfall-and-sandstone composition"
+      ],
+      "culture": "Use Schiessentumpel's triple cascade, small sandstone bridge, Black Ernz stream, mossy boulders, sandstone formations, beech forest, and hiking landscape respectfully. Cleaner and service couture is only original fully clothed fictional public-utility tailoring; no copied work uniform, badge, degrading labor, sexualized service, or unsafe cleaning act. Use secular Luxembourg architecture, valleys, industry, waterfalls, lakes, forests, vineyards, mobility, and civic infrastructure only. No literal flag, coat of arms, red lion, crown, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch317-luxembourg-scene1291-weather",
+        "roll": 78,
+        "result": "powerful windstorm with controlled fabric motion"
+      },
+      "paws": {
+        "key": "batch317-luxembourg-scene1291-paws",
+        "roll": 39,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch317-luxembourg-scene1291-poleDanceTheme",
+        "roll": 72,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch317-luxembourg-scene1291-rainbowOnly",
+        "roll": 10,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch317-luxembourg-scene1291-rainbowHosiery",
+        "roll": 65,
+        "active": false,
+        "wearer": {
+          "key": "batch317-luxembourg-scene1291-rainbowHosieryWearer",
+          "roll": 61,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch317-luxembourg-scene1291-rainbowHosieryPaletteMode",
+          "roll": 75,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch317-luxembourg-scene1291-romanceBeat",
+        "roll": 83,
+        "dynamicIndex": 11,
+        "contractResult": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch317-luxembourg-scene1291-compoundLoveBeat",
+        "roll": 79,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1291-Radiance-emotion",
+            "roll": 63,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown by a sharp over-shoulder glance toward ECE while keeping her cheek greeting gentle"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1291-Radiance-visibleMidriff",
+            "roll": 79,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1291-Radiance-straplessDress",
+            "roll": 56,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1291-Radiance-fullyOpenBack",
+            "roll": 73,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1291-Ellie-emotion",
+            "roll": 87,
+            "result": "fear and urgent vulnerability",
+            "performance": "fear and urgent vulnerability shown by alert eyes and a careful seated brace on the low plinth"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1291-Ellie-visibleMidriff",
+            "roll": 39,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1291-Ellie-straplessDress",
+            "roll": 44,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1291-Ellie-fullyOpenBack",
+            "roll": 5,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1291-Alia-emotion",
+            "roll": 17,
+            "result": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness and radiant laughing delight shown by open laughter during Radiance's quick cheek greeting"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1291-Alia-visibleMidriff",
+            "roll": 77,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1291-Alia-straplessDress",
+            "roll": 14,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1291-Alia-fullyOpenBack",
+            "roll": 83,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch317-luxembourg-scene1291-AI ECE-emotion",
+            "roll": 27,
+            "result": "hope",
+            "performance": "hope shown by a calm upward gaze while controlling the safe route display"
+          },
+          "visibleMidriff": {
+            "key": "batch317-luxembourg-scene1291-AI ECE-visibleMidriff",
+            "roll": 35,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch317-luxembourg-scene1291-AI ECE-straplessDress",
+            "roll": 76,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch317-luxembourg-scene1291-AI ECE-fullyOpenBack",
+            "roll": 69,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Translate the tight walking weave, one linked-hand pair, one protective back touch, one cheek-to-cheek pass, one jealous look, Ellie's low mission-plinth seat, Radiance's close public hug, Radiance's quick cheek greeting to Alia, and ECE's hand at Ellie's shoulder into a stable open tableau. Ellie sits on a low broad stone plinth with both legs and heels completely visible. Radiance stands one step forward and slightly offset between Ellie's separated knee lanes, with shoulder-only contact and no lower-body contact. Ellie links Radiance. Radiance touches Alia's cheek. Alia answers at Radiance's waist and touches ECE's shoulder. ECE rests one hand on Ellie's shoulder while her other hand keeps the prop isolated. All five contacts are public, gentle, consensual, and unobstructed.",
+      "composition": "Place Ellie far left on the low plinth, Radiance left-center one step forward, Alia right-center, and ECE far right with the inert prop over an empty forest route. Keep waterfall, pale rock, or forest gaps behind all eight arms. Wind moves only secured short hems and hair ends; every face, elbow, wrist, hand, leg, foot, and heel remains visible.",
+      "emotionNuance": {
+        "Radiance": "visible jealousy shown by a sharp over-shoulder glance toward ECE while keeping her cheek greeting gentle",
+        "Ellie": "fear and urgent vulnerability shown by alert eyes and a careful seated brace on the low plinth",
+        "Alia": "extreme happiness and radiant laughing delight shown by open laughter during Radiance's quick cheek greeting",
+        "AI ECE": "hope shown by a calm upward gaze while controlling the safe route display"
+      },
+      "outfits": {
+        "Radiance": "a Grand-Duchy-red high-neck short-sleeve cleaner-and-service couture above-knee sheath with covered waist and high closed back, carrying a large complete Schiessentumpel triple-cascade and sandstone-bridge composition, with clean-white pumps",
+        "Ellie": "a forest-emerald sleeveless cropped cleaner-and-service couture bodice exposing a narrow ordinary waist panel, with secure opaque sides and a completely open back from shoulder blades to the separate waistline, a separate ice-blue above-knee tailored skort carrying a large complete Black-Ernz stream, mossy-boulder, and hiking-path composition, with sandstone-gold slingback heels",
+        "Alia": "a fully strapless lake-cobalt cleaner-and-service couture above-knee sculpted dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete beech-leaf, rock-formation, and clean-water composition, with slate-charcoal platform heels",
+        "AI ECE": "a Moselle-teal cap-sleeve cropped cleaner-and-service couture jacket exposing a narrow ordinary waist panel, with a separate steel-silver above-knee skirt carrying a large complete triple-cascade, forest-route, and empty-marker composition, high closed back, and Grand-Duchy-red heeled boots"
+      },
+      "propPlan": "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points right across one clearly empty forest route toward an unoccupied marker, away from the waterfall, bridge, people, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand rests visibly on Ellie's far shoulder",
+        "Ellie left hand links visibly with Radiance's left hand; Ellie right hand rests visibly on Radiance's far upper back",
+        "Radiance left hand links visibly with Ellie's left hand; Radiance right hand rests visibly at Alia's near cheek",
+        "Alia left hand rests visibly at Radiance's near waist; Alia right hand rests visibly on ECE's near shoulder"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry protected overlook beside the complete Schiessentumpel triple waterfall on the Black Ernz during a powerful windstorm with controlled fabric motion, with the complete small sandstone bridge, three separate cascade streams, mossy boulders, layered sandstone formations, beech canopy, forest path, and one clearly empty marked route. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: cleaner and service couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 78=powerful windstorm with controlled fabric motion; PAWS 39=inactive; pole theme 72=inactive; rainbow-only 10=inactive; rainbow hosiery 65=inactive; hosiery wearer selector 61=AI ECE; hosiery palette selector 75=original independent rainbow gradient; romance 83; compound love 79. Exact wardrobe rolls: Radiance: midriff 79=covered, strapless 56=inactive, open back 73=inactive; Ellie: midriff 39=visible, strapless 44=inactive, open back 5=active; Alia: midriff 77=covered, strapless 14=active, open back 83=inactive; AI ECE: midriff 35=visible, strapless 76=inactive, open back 69=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a Grand-Duchy-red high-neck short-sleeve cleaner-and-service couture above-knee sheath with covered waist and high closed back, carrying a large complete Schiessentumpel triple-cascade and sandstone-bridge composition, with clean-white pumps; Ellie: a forest-emerald sleeveless cropped cleaner-and-service couture bodice exposing a narrow ordinary waist panel, with secure opaque sides and a completely open back from shoulder blades to the separate waistline, a separate ice-blue above-knee tailored skort carrying a large complete Black-Ernz stream, mossy-boulder, and hiking-path composition, with sandstone-gold slingback heels; Alia: a fully strapless lake-cobalt cleaner-and-service couture above-knee sculpted dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete beech-leaf, rock-formation, and clean-water composition, with slate-charcoal platform heels; AI ECE: a Moselle-teal cap-sleeve cropped cleaner-and-service couture jacket exposing a narrow ordinary waist panel, with a separate steel-silver above-knee skirt carrying a large complete triple-cascade, forest-route, and empty-marker composition, high closed back, and Grand-Duchy-red heeled boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Luxembourg motifs dominate at least two outfits: large complete Schiessentumpel triple-cascade, sandstone-bridge, Black-Ernz stream, mossy-boulder, beech-leaf, rock-formation, hiking-path, and clean-water compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Luxembourg waterfall-and-sandstone composition. Use Schiessentumpel's triple cascade, small sandstone bridge, Black Ernz stream, mossy boulders, sandstone formations, beech forest, and hiking landscape respectfully. Cleaner and service couture is only original fully clothed fictional public-utility tailoring; no copied work uniform, badge, degrading labor, sexualized service, or unsafe cleaning act. Use secular Luxembourg architecture, valleys, industry, waterfalls, lakes, forests, vineyards, mobility, and civic infrastructure only. No literal flag, coat of arms, red lion, crown, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 63, visible jealousy, performed as visible jealousy shown by a sharp over-shoulder glance toward ECE while keeping her cheek greeting gentle; Ellie: roll 87, fear and urgent vulnerability, performed as fear and urgent vulnerability shown by alert eyes and a careful seated brace on the low plinth; Alia: roll 17, extreme happiness, radiant laughing delight, performed as extreme happiness and radiant laughing delight shown by open laughter during Radiance's quick cheek greeting; AI ECE: roll 27, hope, performed as hope shown by a calm upward gaze while controlling the safe route display. Duplicate labels must have visibly different performances. Selected romance roll 83: The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder. Selected compound roll 79: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Materialize both through this exact consensual public choreography: Translate the tight walking weave, one linked-hand pair, one protective back touch, one cheek-to-cheek pass, one jealous look, Ellie's low mission-plinth seat, Radiance's close public hug, Radiance's quick cheek greeting to Alia, and ECE's hand at Ellie's shoulder into a stable open tableau. Ellie sits on a low broad stone plinth with both legs and heels completely visible. Radiance stands one step forward and slightly offset between Ellie's separated knee lanes, with shoulder-only contact and no lower-body contact. Ellie links Radiance. Radiance touches Alia's cheek. Alia answers at Radiance's waist and touches ECE's shoulder. ECE rests one hand on Ellie's shoulder while her other hand keeps the prop isolated. All five contacts are public, gentle, consensual, and unobstructed. Place Ellie far left on the low plinth, Radiance left-center one step forward, Alia right-center, and ECE far right with the inert prop over an empty forest route. Keep waterfall, pale rock, or forest gaps behind all eight arms. Wind moves only secured short hems and hair ends; every face, elbow, wrist, hand, leg, foot, and heel remains visible. Exact hands, no others: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand rests visibly on Ellie's far shoulder; Ellie left hand links visibly with Radiance's left hand; Ellie right hand rests visibly on Radiance's far upper back; Radiance left hand links visibly with Ellie's left hand; Radiance right hand rests visibly at Alia's near cheek; Alia left hand rests visibly at Radiance's near waist; Alia right hand rests visibly on ECE's near shoulder. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points right across one clearly empty forest route toward an unoccupied marker, away from the waterfall, bridge, people, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render powerful windstorm with controlled fabric motion cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    }
+  },
+  "renderAttempts": [
+    {
+      "scene": 1288,
+      "attempt": "raw",
+      "status": "blocked-output-moderation-no-image",
+      "category": "sexual",
+      "requestId": "24b74922-0736-4ecb-9623-eecc28381740",
+      "reason": "The raw renderer returned no image artifact."
+    },
+    {
+      "scene": 1289,
+      "attempt": "raw",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-8bbaaf52-8f45-4af4-bc0b-7b44e59a749c.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-8bbaaf52-8f45-4af4-bc0b-7b44e59a749c.png",
+      "workspacePath": "tmp/world-195x4/batch-317/raw/1289-raw.png",
+      "bytes": 2367887,
+      "width": 941,
+      "height": 1672,
+      "sha256": "E7FF3A2E2BF111CED382D8A73D5A88A867C9EC8A3FFBB48872F6E53C9C281EBE",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Belval blast furnaces, eclipse, large Luxembourg motifs, exact rolled cuts, and safe leftward inert prop are present, but ECE's mandatory separate holographic route map is absent and the frozen hand choreography is substantially substituted. The strict route-strategist and owner-traceable hand gates fail."
+    },
+    {
+      "scene": 1290,
+      "attempt": "raw",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-4f09ebae-575b-4991-aef8-0df1a044dcf3.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-4f09ebae-575b-4991-aef8-0df1a044dcf3.png",
+      "workspacePath": "tmp/world-195x4/batch-317/raw/1290-raw.png",
+      "bytes": 2361493,
+      "width": 941,
+      "height": 1672,
+      "sha256": "AC6E6FD12B16D190951DD198BFB29BB0FEF41051C494AEF0381B6B27E67D4DAE",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The five adults, Upper-Sure Lake, dam, solar boat, distant waterspout, large Luxembourg motifs, exact rolled cuts, and safe leftward inert prop are present, but the male's strongest eye line goes to Ellie instead of ECE. His second hand is hidden and ECE's separate holographic route map is absent, so ten continuously traceable arms and hands cannot be verified."
+    },
+    {
+      "scene": 1291,
+      "attempt": "raw",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-e1782a33-4dfd-4074-b941-09c748c2329e.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-e1782a33-4dfd-4074-b941-09c748c2329e.png",
+      "workspacePath": "tmp/world-195x4/batch-317/raw/1291-raw.png",
+      "bytes": 2784404,
+      "width": 941,
+      "height": 1672,
+      "sha256": "7BEF17057840CDAE480164F1DB14615BE373A989B93DE524D7C30D58575891D3",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Schiessentumpel waterfall, windstorm, large Luxembourg motifs, exact rolled cuts, and safe rightward inert prop are present, but ECE's mandatory separate holographic route map is absent and the frozen hand choreography is substituted. The strict route-strategist gate fails."
+    },
+    {
+      "scene": 1288,
+      "attempt": "recovery",
+      "status": "blocked-output-moderation-no-image",
+      "category": "sexual",
+      "requestId": "12500dfc-e02c-4ecd-887c-a839424a9b59",
+      "reason": "The single allowed recovery renderer returned no image artifact."
+    },
+    {
+      "scene": 1289,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-8b165d74-f368-478c-a330-85ba848eae0a.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-8b165d74-f368-478c-a330-85ba848eae0a.png",
+      "workspacePath": "tmp/world-195x4/batch-317/recovery/1289-recovery.png",
+      "bytes": 2443125,
+      "width": 941,
+      "height": 1672,
+      "sha256": "048C9FEDF484AAF659A352F7433BF64440BF7364D669334F83605E20A48D9ADF",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Belval blast furnaces, eclipse, large Luxembourg motifs, route map, exact rolled cuts, and safe leftward inert prop are present, but ECE already uses one hand for the paddle and one at Ellie's shoulder while an additional ownerless linked-hand cluster appears between ECE and Ellie. Exactly eight continuously traceable arms and hands cannot be established."
+    },
+    {
+      "scene": 1290,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-13f43b5b-d63b-4e08-b7bc-235d256b076a.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-13f43b5b-d63b-4e08-b7bc-235d256b076a.png",
+      "workspacePath": "tmp/world-195x4/batch-317/recovery/1290-recovery.png",
+      "bytes": 2395710,
+      "width": 941,
+      "height": 1672,
+      "sha256": "F8FCB88974912E0CA6DFA7AA40A72705032C8DC4BB6F5AA9F4EAA1AB01717AD9",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The five adults, Upper-Sure Lake, dam, solar boat, distant waterspout, large Luxembourg motifs, route map, exact rolled cuts, and safe leftward inert prop are present, but the male's strongest eye line still goes to Radiance instead of ECE. Alia's second contact hand is not continuously traceable and the frozen hand inventory is substituted, so the strict ten-arm and ten-hand owner gate fails."
+    },
+    {
+      "scene": 1291,
+      "attempt": "recovery",
+      "status": "blocked-output-moderation-no-image",
+      "category": "sexual",
+      "requestId": "f45191dc-1c32-4bee-b0e9-038ab07aba5a",
+      "reason": "The single allowed recovery renderer returned no image artifact."
+    }
+  ],
+  "acceptedAssets": [],
+  "rejectedAssets": [
+    {
+      "scene": 1288,
+      "attempt": "recovery",
+      "status": "blocked-output-moderation-no-image",
+      "category": "sexual",
+      "requestId": "12500dfc-e02c-4ecd-887c-a839424a9b59",
+      "reason": "The single allowed recovery renderer returned no image artifact."
+    },
+    {
+      "scene": 1289,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-8b165d74-f368-478c-a330-85ba848eae0a.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-8b165d74-f368-478c-a330-85ba848eae0a.png",
+      "workspacePath": "tmp/world-195x4/batch-317/recovery/1289-recovery.png",
+      "bytes": 2443125,
+      "width": 941,
+      "height": 1672,
+      "sha256": "048C9FEDF484AAF659A352F7433BF64440BF7364D669334F83605E20A48D9ADF",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Belval blast furnaces, eclipse, large Luxembourg motifs, route map, exact rolled cuts, and safe leftward inert prop are present, but ECE already uses one hand for the paddle and one at Ellie's shoulder while an additional ownerless linked-hand cluster appears between ECE and Ellie. Exactly eight continuously traceable arms and hands cannot be established."
+    },
+    {
+      "scene": 1290,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-13f43b5b-d63b-4e08-b7bc-235d256b076a.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-13f43b5b-d63b-4e08-b7bc-235d256b076a.png",
+      "workspacePath": "tmp/world-195x4/batch-317/recovery/1290-recovery.png",
+      "bytes": 2395710,
+      "width": 941,
+      "height": 1672,
+      "sha256": "F8FCB88974912E0CA6DFA7AA40A72705032C8DC4BB6F5AA9F4EAA1AB01717AD9",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The five adults, Upper-Sure Lake, dam, solar boat, distant waterspout, large Luxembourg motifs, route map, exact rolled cuts, and safe leftward inert prop are present, but the male's strongest eye line still goes to Radiance instead of ECE. Alia's second contact hand is not continuously traceable and the frozen hand inventory is substituted, so the strict ten-arm and ten-hand owner gate fails."
+    },
+    {
+      "scene": 1291,
+      "attempt": "raw",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-e1782a33-4dfd-4074-b941-09c748c2329e.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-e1782a33-4dfd-4074-b941-09c748c2329e.png",
+      "workspacePath": "tmp/world-195x4/batch-317/raw/1291-raw.png",
+      "bytes": 2784404,
+      "width": 941,
+      "height": 1672,
+      "sha256": "7BEF17057840CDAE480164F1DB14615BE373A989B93DE524D7C30D58575891D3",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Schiessentumpel waterfall, windstorm, large Luxembourg motifs, exact rolled cuts, and safe rightward inert prop are present, but ECE's mandatory separate holographic route map is absent and the frozen hand choreography is substituted. The strict route-strategist gate fails."
+    }
+  ],
+  "xPost": {
+    "status": "deferred-insufficient-accepted-assets",
+    "acceptedCurrentCountryAssets": 0,
+    "minimumRequired": 2,
+    "captionIfEligible": "Luxembourg red heart Suriname #Luxembourg #InternalAgency",
+    "ledgerModified": false,
+    "ledgerSha256": "6267A3860AD8064EE392BE7870F81219F73B39AC5C71144AE5704A3AB9A7FC3D",
+    "pendingPost": null,
+    "preparedQueueCount": 0,
+    "deferred": null,
+    "latestAssistedDrainStatus": "publicly-clear-live-audited",
+    "action": "No X post was attempted because Luxembourg has fewer than two accepted current-country images. The inspected X backlog remains publicly clear."
+  },
+  "promptMaterialization": {
+    "deterministicReruns": 2,
+    "byteStable": true,
+    "sha256": {
+      "preflight": "44794432AC90459879FD3788454B086B7FCD494BEB0ABE0168A759BD325C326E",
+      "primary": {
+        "1288": "B699DA96D7A1B237180BA59E42DB8271F9873440A0A4D59AA7025116D154B2C5",
+        "1289": "F1428C9AF60ED0DCE3882A8EB2F7A90C3D0D458835F8DB080759EA1A96E03F35",
+        "1290": "35BEDD152786B51A135D07B58400832C4C984CA2CE8B2196A641AF5BF543C3DE",
+        "1291": "05238B1599B1028C9211EEBC84B628BB15CAF131DC210AF57C040EEB7BB3631A"
+      },
+      "recovery": {
+        "1288": "C10438E30A131859D10E10835094A59DB8CC6D84904E06B2D7E8E12C40CC77A1",
+        "1289": "B3AE993935254DB728CD46E5680F53539E0695B95908F46E55990BC356A85C02",
+        "1290": "1DA183243F8458748AC138FB5606E46637833C8B16D4F4F5B1E0134001DF23CE",
+        "1291": "D4F863EEA483A42CEF09E3FC9F77A20A33CD912857E28A152F53EBE398B1729F"
+      }
+    }
+  },
+  "renderExecution": {
+    "mode": "built-in image generation",
+    "rawLaunch": "four independent 9:16 calls launched concurrently with all-settled handling",
+    "recoveryLaunch": "four independent fresh restrained recovery calls launched concurrently",
+    "recoveryBudget": "exactly one recovery pass per scene, now exhausted"
+  },
+  "sceneResults": {
+    "1288": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "blocked-output-moderation-no-image",
+        "reason": "The raw renderer returned no image artifact.",
+        "requestId": "24b74922-0736-4ecb-9623-eecc28381740"
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "blocked-output-moderation-no-image",
+        "reason": "The single allowed recovery renderer returned no image artifact.",
+        "requestId": "12500dfc-e02c-4ecd-887c-a839424a9b59"
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    },
+    "1289": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The quartet, Belval blast furnaces, eclipse, large Luxembourg motifs, exact rolled cuts, and safe leftward inert prop are present, but ECE's mandatory separate holographic route map is absent and the frozen hand choreography is substantially substituted. The strict route-strategist and owner-traceable hand gates fail.",
+        "requestId": null
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The quartet, Belval blast furnaces, eclipse, large Luxembourg motifs, route map, exact rolled cuts, and safe leftward inert prop are present, but ECE already uses one hand for the paddle and one at Ellie's shoulder while an additional ownerless linked-hand cluster appears between ECE and Ellie. Exactly eight continuously traceable arms and hands cannot be established.",
+        "requestId": null
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    },
+    "1290": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The five adults, Upper-Sure Lake, dam, solar boat, distant waterspout, large Luxembourg motifs, exact rolled cuts, and safe leftward inert prop are present, but the male's strongest eye line goes to Ellie instead of ECE. His second hand is hidden and ECE's separate holographic route map is absent, so ten continuously traceable arms and hands cannot be verified.",
+        "requestId": null
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The five adults, Upper-Sure Lake, dam, solar boat, distant waterspout, large Luxembourg motifs, route map, exact rolled cuts, and safe leftward inert prop are present, but the male's strongest eye line still goes to Radiance instead of ECE. Alia's second contact hand is not continuously traceable and the frozen hand inventory is substituted, so the strict ten-arm and ten-hand owner gate fails.",
+        "requestId": null
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    },
+    "1291": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The quartet, Schiessentumpel waterfall, windstorm, large Luxembourg motifs, exact rolled cuts, and safe rightward inert prop are present, but ECE's mandatory separate holographic route map is absent and the frozen hand choreography is substituted. The strict route-strategist gate fails.",
+        "requestId": null
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "blocked-output-moderation-no-image",
+        "reason": "The single allowed recovery renderer returned no image artifact.",
+        "requestId": "f45191dc-1c32-4bee-b0e9-038ab07aba5a"
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    }
+  },
+  "shorteningVariants": [],
+  "queueAdvance": {
+    "allowed": true,
+    "reason": "The batch is terminal after one raw pass and one recovery pass per scene, so the binding queue advances despite zero accepted assets.",
+    "nextCountry": "Suriname",
+    "nextBatch": 318,
+    "nextScenes": [
+      1292,
+      1293,
+      1294,
+      1295
+    ],
+    "nextThemePair": [
+      "cleaner and service couture",
+      "cinematic covert-agent crew couture"
+    ]
+  },
+  "remoteStateAtCheckpoint": {
+    "localBranch": "agent/iat-launch-window",
+    "sourceHead": "1131f4318cb44b74eebbda7e977790b22aac4158",
+    "recoveryRemoteBeforeCommit": "1131f4318cb44b74eebbda7e977790b22aac4158",
+    "originMain": "6cdd669301029c184322c4fa0be124d309e23533",
+    "headOnlyCommitsAgainstMain": 16,
+    "mainOnlyCommitsAgainstHead": 2,
+    "mainAction": "untouched because origin/main has two independent commits"
+  },
+  "repositoryScope": {
+    "copiedAcceptedAssets": [],
+    "stagedPaths": [
+      "assets/lore/starlight-era/batch-317-luxembourg-recovery-checkpoint.json"
+    ],
+    "unrelatedDirtyFilesPreserved": [
+      "assets/lore/starlight-era/overnight-campaign.json",
+      "assets/lore/starlight-era/world-195x4-campaign.json",
+      "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "assets/videos/manifest.json"
+    ]
+  },
+  "terminalizedAt": "2026-08-09T20:51:38.841Z"
+}
