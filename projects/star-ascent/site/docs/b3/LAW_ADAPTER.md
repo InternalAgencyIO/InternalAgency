@@ -72,6 +72,70 @@ There is no administrator, threshold, timezone, result, or bypass update
 instruction. The loader upgrade authority must still be finalized before this
 instruction, as required by the rehearsal sequence.
 
+### Stake-ingress anti-donation boundary (unwired)
+
+The test-only native Rust reference at
+`programs/iat_b3_law/tests/stake_ingress_reference.rs` contains a separate
+176-byte, versioned `StakeIngressBinding` codec and pure enforcement kernel. It
+canonically derives the economic config, stake-token vault, and dedicated
+`stake-ingress` authority PDA from one economy program ID and mint. The config
+seed is the exact retained V2/B3 `PDA(economy, ["config", mint])` seed, not a new
+alias. Packing and decoding recompute every address and bump; zero identities,
+forged addresses, nonzero reserved bytes, wrong versions, and wrong lengths fail
+closed. The rule leaves ordinary destinations unchanged but permits a transfer
+into the canonical stake vault only when the Token-2022-validated transfer-
+authority key is the derived ingress-authority PDA. It accepts no caller-
+provided allow/deny disposition.
+That file is an integration-test target outside `src/lib.rs`; it is
+host/reference evidence and is not compiled into the current SBF candidate. The
+deployable law source remains byte-for-byte identical to its rehearsed version,
+so the pinned optimized artifact must also remain identical until final
+identities are deliberately wired. A fresh pinned `cargo build-sbf
+--optimize-size` rebuild reproduced exactly 154,952 bytes and SHA-256
+`927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`.
+
+The pinned `spl-transfer-hook-interface` 2.1.0 `execute` ABI deliberately marks
+the authority meta read-only and **not a signer**. The hook must not test
+`authority.is_signer`. Security instead composes two facts: Token-2022 validates
+the owner/delegate authority before invoking the hook, and the existing
+`TransferHookAccount.transferring` check rejects a forged direct hook call. A
+focused Rust test constructs the pinned interface instruction and requires its
+authority meta to remain non-signer so this privilege de-escalation cannot be
+silently misunderstood later.
+
+This boundary is deliberately **not** called by `process_execute`, is not in the
+extra-account-meta list, and has no initialization or update opcode. The
+current source has no binding-account seed or address helper: no binding account
+is created, allocated, written, or read by any instruction, and no storage
+opcode exists. The required identities are not frozen: `iat_b3_economy` is
+still a host-only library with no executable program ID, this law crate has no
+committed public program ID, and the canonical Token-2022 mint is unpublished.
+Accepting those facts from the initializer now would substitute caller choice
+for an immutable protocol binding; compiling placeholder identities would
+either authorize the wrong transfer authority or permanently reject the real
+stake flow.
+
+Before wiring, the final source must freeze the law program ID, economy program
+ID, canonical mint, and seed domains. The least-cost preference is to compile
+the resulting canonical stake-vault and ingress-authority public keys directly
+into the frozen law binary. If final SBF measurement or ceremony requirements
+instead require stored facts, they must be embedded in the existing law-state
+codec before Genesis so the existing hook account supplies them. Storage
+topology remains open until the identities and binary are frozen, but it must
+not add an account to every transfer merely for this rule. Either form exposes
+no update, sweep, recovery, administrator, or caller-disposition instruction.
+The economic adapter must temporarily approve the dedicated PDA for exactly
+the requested principal, invoke the hooked transfer with that PDA via
+`invoke_signed`, and restore the source account's prior delegate state in the
+same atomic transaction. Token CPI, hook, delegate restoration, economic state,
+and position lifecycle must all roll back together on any failure.
+
+Once that path is frozen and rehearsed, direct Token-2022 donations into the
+stake vault fail at the hook while the retained V2 invariant
+`stake_tokens.amount == config.staked_principal` stays exact. The present source
+only proves the codec, derivation, and admission semantics; it does not yet
+claim active donation protection.
+
 ### Prototype instruction ABI
 
 - initialize: `"IATB3LAW" || 0x00 || network_genesis_hash[32]`, with ordered

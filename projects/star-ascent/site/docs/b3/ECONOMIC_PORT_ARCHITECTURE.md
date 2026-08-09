@@ -124,6 +124,41 @@ deny future position operations. The parity kernel intentionally preserves this
 equality and must not silently relax it; Mainnet needs an immutable mitigation
 that retains ledger solvency and cannot create an administrator sweep path.
 
+The selected mitigation is a dedicated
+`PDA(economy, ["stake-ingress", config])` transfer authority. The law hook will
+leave ordinary destinations unchanged and reject every transfer into
+`PDA(economy, ["stake-token", config])` unless that exact PDA is the
+Token-2022-validated transfer-authority key. The economic adapter will
+atomically substitute it as an exact-amount temporary delegate for a position
+deposit, run the hooked Token-2022 transfer via `invoke_signed`, and restore the
+source account's prior delegate state. There is no donation sweep and no ledger
+relaxation.
+
+The pinned Transfer Hook 2.1.0 ABI de-escalates the authority account to a
+read-only non-signer before hook execution. The hook therefore matches the
+authority key but never checks `is_signer`; Token-2022 performs owner/delegate
+authentication before setting `TransferHookAccount.transferring`, and the hook
+already requires that transferring flag. The crate has a regression test for
+the non-signer authority meta.
+
+The law crate's test-only native reference currently implements a
+self-validating 176-byte binding codec, the three canonical economy-PDA
+derivations, and the pure fail-closed admission rule. It lives outside
+`src/lib.rs`, so the reference boundary is absent from the current SBF artifact.
+It does not wire that rule into hook execution or initialization; no binding
+account is currently created or stored, no binding address helper exists, and
+there is no binding storage opcode. The config derivation retains V2's exact
+`["config", mint]` seed. The economy program is still host-only and has no
+frozen program ID, the law program ID is not committed, and the canonical mint
+is unpublished. Until all three identities and seed domains are frozen, storing
+an initializer-selected economy identity would not be an immutable protocol
+law. The final least-cost preference is compile-time frozen stake-vault and
+ingress-authority keys. An alternative may embed compact binding facts into the
+existing law-state codec before Genesis, but no design may add a new account
+meta to every IAT transfer merely for stake ingress. Mainnet remains blocked on
+final identity binding, temporary-delegate restoration, and adversarial atomic
+rollback rehearsal.
+
 Burning is different from transferring. The sole core-cap burn path uses
 Token-2022 `BurnChecked`, signed by the economic vault-authority PDA. It is not
 a mint-authority operation and it is not a Transfer Hook call.

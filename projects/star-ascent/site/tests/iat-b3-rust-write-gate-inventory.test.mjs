@@ -14,6 +14,13 @@ const lawSource = readFileSync(
   new URL("../programs/iat_b3_law/src/lib.rs", import.meta.url),
   "utf8",
 );
+const stakeIngressReference = readFileSync(
+  new URL(
+    "../programs/iat_b3_law/tests/stake_ingress_reference.rs",
+    import.meta.url,
+  ),
+  "utf8",
+);
 const economySource = readFileSync(
   new URL("../programs/iat_b3_economy/src/lib.rs", import.meta.url),
   "utf8",
@@ -24,6 +31,10 @@ const economyCargo = readFileSync(
 );
 const audit = readFileSync(
   new URL("../docs/b3/RUST_WRITE_GATE_AUDIT.md", import.meta.url),
+  "utf8",
+);
+const lawAdapter = readFileSync(
+  new URL("../docs/b3/LAW_ADAPTER.md", import.meta.url),
   "utf8",
 );
 const workspaceCargo = readFileSync(new URL("../Cargo.toml", import.meta.url), "utf8");
@@ -158,6 +169,103 @@ test("native adapter keeps exactly two own writes and one canonical transfer gat
   assert.match(execute, /state\.transfer_disposition_at\(clock\.unix_timestamp\)/u);
   assert.match(execute, /IatTransferDisposition::DayUnfinalized/u);
   assert.match(execute, /IatTransferDisposition::RejectedDailyLockdown/u);
+});
+
+test("unfrozen identities keep stake-ingress protection fail-closed and unwired", () => {
+  const binding = structBody(stakeIngressReference, "StakeIngressBinding");
+  assertTokensInOrder(
+    binding,
+    [
+      "config_bump",
+      "stake_vault_bump",
+      "ingress_authority_bump",
+      "economy_program_id",
+      "mint",
+      "config",
+      "stake_vault",
+      "ingress_authority",
+    ],
+    "stake-ingress binding codec",
+  );
+
+  const derive = functionBody(stakeIngressReference, "derive");
+  assertTokensInOrder(
+    derive,
+    [
+      "economy_program_id == Pubkey::default()",
+      "mint == Pubkey::default()",
+      "ECONOMY_CONFIG_SEED",
+      "ECONOMY_STAKE_TOKEN_SEED",
+      "ECONOMY_STAKE_INGRESS_AUTHORITY_SEED",
+    ],
+    "stake-ingress canonical derivation",
+  );
+
+  const enforce = functionBody(stakeIngressReference, "enforce_stake_ingress");
+  assertTokensInOrder(
+    enforce,
+    [
+      "binding.validate()?",
+      "mint != &binding.mint",
+      "destination != &binding.stake_vault",
+      "authority != &binding.ingress_authority",
+      "UnauthorizedStakeIngress",
+    ],
+    "stake-ingress admission rule",
+  );
+  assert.doesNotMatch(
+    enforce,
+    /authority_is_signer|\.is_signer|Clock|oracle|admin|sweep|update|disposition/iu,
+  );
+
+  for (const body of [
+    functionBody(lawSource, "process_instruction"),
+    functionBody(lawSource, "process_initialize_law"),
+    functionBody(lawSource, "process_execute"),
+  ]) {
+    assert.doesNotMatch(body, /StakeIngressBinding|enforce_stake_ingress/u);
+  }
+  const lawState = structBody(lawSource, "LawState");
+  assert.doesNotMatch(lawState, /stake|economy|ingress/iu);
+  assert.match(lawSource, /pub const LAW_STATE_LEN: usize = 160;/u);
+  const initialize = functionBody(lawSource, "process_initialize_law");
+  assert.match(initialize, /ExtraAccountMetaList::size_of\(1\)/u);
+  assert.match(
+    initialize,
+    /ExtraAccountMetaList::init::<ExecuteInstruction>[\s\S]+&\[extra_meta\]/u,
+  );
+  assert.doesNotMatch(
+    lawSource,
+    /StakeIngressBinding|enforce_stake_ingress|STAKE_INGRESS_BINDING|stake_ingress_binding/u,
+  );
+  assert.match(
+    audit,
+    /bounded, unwired\s+anti-donation reference[\s\S]+process_execute[\s\S]+remain unchanged/u,
+  );
+  assert.match(
+    lawAdapter,
+    /not frozen[\s\S]+host-only[\s\S]+no\s+committed public[\s\S]+unpublished/u,
+  );
+  assert.match(
+    lawAdapter,
+    /does not yet\s+claim active donation protection/u,
+  );
+  assert.match(
+    lawAdapter,
+    /no binding account\s+is created, allocated, written, or read[\s\S]+no storage\s+opcode exists/u,
+  );
+  assert.match(
+    lawAdapter,
+    /2\.1\.0[\s\S]+authority meta[\s\S]+not a signer[\s\S]+must not test\s+`authority\.is_signer`/u,
+  );
+  assert.match(
+    lawAdapter,
+    /compile[\s\S]+canonical stake-vault and ingress-authority public keys[\s\S]+existing law-state[\s\S]+must\s+not add an account to every transfer/u,
+  );
+  assert.match(
+    lawAdapter,
+    /integration-test target[\s\S]+outside `src\/lib\.rs`[\s\S]+not\s+compiled into the current SBF candidate/u,
+  );
 });
 
 test("ledger-only V2 writes cannot be mistaken for transfer-hook coverage", () => {

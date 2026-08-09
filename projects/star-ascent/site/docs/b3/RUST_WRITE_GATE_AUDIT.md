@@ -200,6 +200,43 @@ also block principal withdrawal). This slice deliberately does not relax the
 equality. An immutable mitigation preserving solvency and permissionlessness
 must be frozen and rehearsed before Mainnet.
 
+The law crate's native integration-test target now contains a bounded, unwired
+anti-donation reference. A 176-byte `StakeIngressBinding` codec recomputes the
+economic config, stake-token, and dedicated `stake-ingress` authority PDAs from
+the codec's economy program ID and mint. Its pure rule rejects a canonical
+stake-vault destination unless the exact ingress PDA is the Token-2022-
+validated transfer-authority key, while ordinary destinations pass through.
+Forged fields, bumps, zero identities, reserved bytes, versions, and lengths
+fail closed, and there is no caller-provided disposition. The entire
+provisional boundary is outside `src/lib.rs`, so it cannot change the current
+deployable SBF behavior. `process_execute`, `process_initialize_law`, the two-
+opcode dispatcher, the 160-byte Daily Law codec, and its current one-entry hook
+meta list remain unchanged. The config derivation is the exact retained V2/B3
+`["config", mint]` seed. No binding account is created, stored, loaded, or
+addressed by an instruction, and no binding storage opcode exists. The pinned
+optimized SBF rebuild remains exactly 154,952 bytes with SHA-256
+`927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`.
+
+The pinned Transfer Hook 2.1.0 interface marks the hook's authority meta
+read-only and non-signer. The enforcement kernel intentionally has no
+`authority_is_signer` input or check. Token-2022 authenticates the owner/delegate
+before hook invocation, and `validate_transfer_context` separately requires the
+source account's active `TransferHookAccount.transferring` flag. A Rust
+regression test pins the de-escalated authority meta.
+
+This is not active protection. `iat_b3_economy` remains host-only without a
+program ID, `iat_b3_law` has no committed public program ID, and the canonical
+Token-2022 mint is not published. Wiring any placeholder or initializer-chosen
+identity would violate immutability. The final adapter must freeze those three
+identities and all seed domains, then either compile the two final destination/
+authority keys into the frozen binary or embed compact binding facts in the
+existing law-state codec before Genesis. It must not append a new account to
+every transfer for this rule. The economy ingress PDA is an exact-amount
+temporary delegate; the adapter must restore any prior delegate and prove
+complete rollback on every approval, transfer, hook, restoration, and post-CPI
+failure. No update, administrator, sweep, recovery, oracle, or bypass opcode is
+permitted.
+
 The `commit_round` differential kernel performs no account creation. It accepts
 a decoded read-only instructions-sysvar trace, selects only the instruction
 immediately preceding the current index, validates the pinned Switchboard
