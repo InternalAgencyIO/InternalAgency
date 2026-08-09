@@ -1,0 +1,524 @@
+{
+  "batch": 290,
+  "country": "Norway",
+  "status": "blocked-no-accepted-assets",
+  "sourceCommit": "25252211dbcb3262b2b2e75f6446e1fa5c12a517",
+  "rollMethod": "FNV-1a over the recorded batch290-norway keys, reduced modulo 100. Male scene selection is reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "cleaner and service couture",
+    "cinematic covert-agent crew couture"
+  ],
+  "nextThemePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "nextQueueCountry": "Poland",
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch290-norway-male-model-scene",
+    "roll": 38,
+    "selectedScenePosition": 3,
+    "selectedScene": 1182,
+    "maleEmotion": {
+      "key": "batch290-norway-scene3-male-emotion",
+      "roll": 39,
+      "result": "magnetic confidence"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Norway's flag uses an official Nordic cross with religious origins, so no literal flag or cross is copied into fashion. Every scene instead uses large complete secular Norwegian architecture, landscape, civilian craft, engineering, or food motifs across at least two outfits.",
+    "palette": "Norwegian flag red, pearl white, and deep navy expanded with fjord blue, aurora teal, ice silver, Bryggen ochre, rorbu crimson, pine green, brunost caramel, and stockfish gold.",
+    "fallbackMotifs": [
+      "Oslo Opera House marble facets, fjord-wave contours, snow crystals, and harbor-reflection bands",
+      "Bergen Bryggen gables, fish-market awnings, salmon scales, rosemaling curves, heart-shaped waffles, brunost slices, and copper serving geometry",
+      "Lofoten red rorbuer, stockfish-rack A-frames, cod silhouettes, fishing-boat hulls, and jagged fjord peaks",
+      "Stegastein cantilever arcs, Aurlandsfjord contour lines, Snow Road curves, pine silhouettes, ski-track chevrons, and scenic-route engineering"
+    ],
+    "minimumCoverage": "Every scene renders large complete secular Norway motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScene": "Scene 1181 foregrounds Bergen's Bryggen gables and fish-market heritage with salmon, stockfish, colorful rosemaling craft, heart-shaped Norwegian waffles, brunost slices, and polished serving pieces in an unattended public-safe market display.",
+    "prohibitions": "No literal flag, Nordic cross, coat of arms, royal lion, official emblem, sacred symbol, political insignia, copied bunad, copied Sami clothing, badge, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch290-norway-x-heart",
+      "roll": 27,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch290-norway-x-internalagency",
+      "roll": 87,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch290-norway-x-worldxxxseries",
+      "roll": 72,
+      "active": false
+    }
+  },
+  "anatomyGate": {
+    "fourAdultScenes": "Exactly four adults, eight arms, and eight hands with one continuously traceable owner per limb.",
+    "maleScene": "Exactly five adults, ten arms, and ten hands. The male replaces nobody.",
+    "automaticRejects": "Reject every extra, duplicated, floating, fused, borrowed, emerging, hidden-owner, or ambiguous limb or finger cluster, malformed face, incomplete shoe, or untraceable contact."
+  },
+  "scenePlans": {
+    "1180": {
+      "theme": "cleaner and service couture",
+      "landmark": "Oslo Opera House rising from the Oslofjord waterfront",
+      "motifs": [
+        "large complete Oslo Opera House marble-facet and harbor-reflection fields across Radiance and Ellie",
+        "large complete fjord-wave, snow-crystal, and service-route geometry across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch290-norway-scene1180-weather",
+        "roll": 85,
+        "result": "double rainbow after rain"
+      },
+      "paws": {
+        "key": "batch290-norway-scene1180-paws",
+        "roll": 34,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch290-norway-scene1180-poleDanceTheme",
+        "roll": 77,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch290-norway-scene1180-rainbowOnly",
+        "roll": 89,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch290-norway-scene1180-rainbowHosiery",
+        "roll": 12,
+        "active": true,
+        "wearerKey": "batch290-norway-scene1180-rainbowHosieryWearer",
+        "wearerRoll": 76,
+        "wearer": "AI ECE",
+        "paletteModeKey": "batch290-norway-scene1180-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 40,
+        "paletteMode": "Norway-palette multicolor gradient",
+        "treatment": "opaque knee socks fading deep navy through fjord blue, pearl white, coral transition bands, and Norwegian red, clearly distinct from the sky's natural double rainbow"
+      },
+      "romanceBeat": {
+        "key": "batch290-norway-scene1180-romanceBeat",
+        "roll": 68,
+        "dynamicIndex": 8,
+        "result": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch290-norway-scene1180-compoundLoveBeat",
+        "roll": 62,
+        "index": 2,
+        "result": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch290-norway-scene1180-Radiance-emotion", "roll": 78, "result": "deep sadness" },
+          "visibleMidriff": { "key": "batch290-norway-scene1180-Radiance-visibleMidriff", "roll": 40, "active": true },
+          "straplessDress": { "key": "batch290-norway-scene1180-Radiance-straplessDress", "roll": 75, "active": false },
+          "fullyOpenBack": { "key": "batch290-norway-scene1180-Radiance-fullyOpenBack", "roll": 16, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch290-norway-scene1180-Ellie-emotion", "roll": 32, "result": "overwhelming relief" },
+          "visibleMidriff": { "key": "batch290-norway-scene1180-Ellie-visibleMidriff", "roll": 98, "active": false },
+          "straplessDress": { "key": "batch290-norway-scene1180-Ellie-straplessDress", "roll": 25, "active": true },
+          "fullyOpenBack": { "key": "batch290-norway-scene1180-Ellie-fullyOpenBack", "roll": 78, "active": false }
+        },
+        "Alia": {
+          "emotion": { "key": "batch290-norway-scene1180-Alia-emotion", "roll": 56, "result": "aching romantic longing" },
+          "visibleMidriff": { "key": "batch290-norway-scene1180-Alia-visibleMidriff", "roll": 62, "active": false },
+          "straplessDress": { "key": "batch290-norway-scene1180-Alia-straplessDress", "roll": 41, "active": false },
+          "fullyOpenBack": { "key": "batch290-norway-scene1180-Alia-fullyOpenBack", "roll": 30, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch290-norway-scene1180-AI ECE-emotion", "roll": 18, "result": "extreme happiness, radiant laughing delight" },
+          "visibleMidriff": { "key": "batch290-norway-scene1180-AI ECE-visibleMidriff", "roll": 8, "active": true },
+          "straplessDress": { "key": "batch290-norway-scene1180-AI ECE-straplessDress", "roll": 59, "active": false },
+          "fullyOpenBack": { "key": "batch290-norway-scene1180-AI ECE-fullyOpenBack", "roll": 28, "active": true }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance one-shoulder red-and-pearl Opera-facet crop bodice exposing her navel with a blue asymmetric service mini and complete open back",
+        "Ellie secure fully strapless deep-navy fjord-wave folded mini with covered waist, reflective white apron-panel geometry, and open upper back",
+        "Alia bare-arm crimson snow-crystal tailored short romper with covered waist, sculpted silver hip panel, and open upper back",
+        "AI ECE diagonal-shoulder cobalt ice-facet crop top exposing her navel with pearl tailored shorts, complete open back, and Norway-palette opaque rainbow knee socks"
+      ],
+      "propHandler": "Alia",
+      "plannedHandMap": "Alia stands at far right. Her right hand actively holds the inert rainbow-gradient sidearm toward empty Oslofjord water, with muzzle crossing nobody and index finger outside the guard; her left rests visibly on ECE's map-side forearm. ECE's right holds Radiance's right while her left controls the separate wrist hologram and receives Alia's touch. Radiance's left holds Ellie's right. Ellie's left rests visibly on Radiance's shoulder. Exactly four adults, eight arms, and eight visible traceable hands.",
+      "hosieryLoveBeat": "Radiance and ECE are the unmistakable emotional center through linked hands, cheek-to-cheek reassurance, and ECE's delighted attention focused on deeply sad Radiance while Ellie and Alia complete the rival relay."
+    },
+    "1181": {
+      "theme": "cleaner and service couture",
+      "landmark": "Bergen Bryggen waterfront and fish-market quay",
+      "motifs": [
+        "large complete Bryggen-gable, heart-waffle, brunost-slice, and fish-market-awning fields across Radiance and Ellie",
+        "large complete salmon-scale, stockfish, rosemaling, and copper-serving fields across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch290-norway-scene1181-weather",
+        "roll": 62,
+        "result": "dense rolling fog"
+      },
+      "paws": {
+        "key": "batch290-norway-scene1181-paws",
+        "roll": 19,
+        "active": true,
+        "treatment": "PAWS is one tiny collarless golden kitten perched securely on Radiance's far-left shoulder while Ellie gently pets it, prompting tender shared humor far from ECE and the prop."
+      },
+      "poleDanceTheme": {
+        "key": "batch290-norway-scene1181-poleDanceTheme",
+        "roll": 4,
+        "active": true,
+        "treatment": "One polished fixed route-marker mast at far left supports Alia's controlled athletic side lean while Radiance spots her securely at the waist. The pose is public-safe, non-explicit, and separate from the mission prop."
+      },
+      "rainbowOnly": {
+        "key": "batch290-norway-scene1181-rainbowOnly",
+        "roll": 90,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch290-norway-scene1181-rainbowHosiery",
+        "roll": 61,
+        "active": false,
+        "wearerKey": "batch290-norway-scene1181-rainbowHosieryWearer",
+        "wearerRoll": 37,
+        "wearer": "Radiance",
+        "paletteModeKey": "batch290-norway-scene1181-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 43,
+        "paletteMode": "Norway-palette multicolor gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch290-norway-scene1181-romanceBeat",
+        "roll": 59,
+        "dynamicIndex": 11,
+        "result": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch290-norway-scene1181-compoundLoveBeat",
+        "roll": 3,
+        "index": 3,
+        "result": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch290-norway-scene1181-Radiance-emotion", "roll": 3, "result": "tender affection" },
+          "visibleMidriff": { "key": "batch290-norway-scene1181-Radiance-visibleMidriff", "roll": 39, "active": true },
+          "straplessDress": { "key": "batch290-norway-scene1181-Radiance-straplessDress", "roll": 52, "active": false },
+          "fullyOpenBack": { "key": "batch290-norway-scene1181-Radiance-fullyOpenBack", "roll": 73, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch290-norway-scene1181-Ellie-emotion", "roll": 7, "result": "tender affection" },
+          "visibleMidriff": { "key": "batch290-norway-scene1181-Ellie-visibleMidriff", "roll": 95, "active": false },
+          "straplessDress": { "key": "batch290-norway-scene1181-Ellie-straplessDress", "roll": 20, "active": true },
+          "fullyOpenBack": { "key": "batch290-norway-scene1181-Ellie-fullyOpenBack", "roll": 61, "active": false }
+        },
+        "Alia": {
+          "emotion": { "key": "batch290-norway-scene1181-Alia-emotion", "roll": 53, "result": "intense curiosity" },
+          "visibleMidriff": { "key": "batch290-norway-scene1181-Alia-visibleMidriff", "roll": 65, "active": false },
+          "straplessDress": { "key": "batch290-norway-scene1181-Alia-straplessDress", "roll": 6, "active": true },
+          "fullyOpenBack": { "key": "batch290-norway-scene1181-Alia-fullyOpenBack", "roll": 87, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch290-norway-scene1181-AI ECE-emotion", "roll": 71, "result": "suspicion" },
+          "visibleMidriff": { "key": "batch290-norway-scene1181-AI ECE-visibleMidriff", "roll": 3, "active": true },
+          "straplessDress": { "key": "batch290-norway-scene1181-AI ECE-straplessDress", "roll": 20, "active": true },
+          "fullyOpenBack": { "key": "batch290-norway-scene1181-AI ECE-fullyOpenBack", "roll": 81, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance one-shoulder Bryggen-gable crop bodice exposing her navel with a pearl microfiber-pleat service mini and open upper back",
+        "Ellie secure fully strapless caramel-and-red heart-waffle folded mini with covered waist, brunost-slice hip architecture, and open upper back",
+        "Alia secure fully strapless navy-silver salmon-scale peplum micro-suit with covered waist, stockfish-rack flare, and open upper back",
+        "AI ECE secure fully strapless blue-white rosemaling crop bodice exposing her navel with crimson tailored service shorts and open upper back"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "ECE stands at far right. Her right hand holds the inert rainbow-gradient sidearm toward empty harbor water, with muzzle crossing nobody and index finger outside the guard; her left holds Ellie's right and controls a separate wrist hologram. Ellie's left gently pets PAWS on Radiance's far-left shoulder. Radiance's right steadies Ellie's left forearm while her left supports Alia's waist. Alia's right grips the fixed route-marker mast and her left rests visibly on Radiance's waist. Exactly four adults, eight arms, and eight visible traceable hands."
+    },
+    "1182": {
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "Reine in Lofoten with red rorbuer, stockfish racks, fjord water, and jagged peaks",
+      "motifs": [
+        "large complete rorbu-facade and stockfish-rack A-frame fields across Radiance and Ellie",
+        "large complete cod, fishing-boat hull, and jagged fjord-peak fields across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch290-norway-scene1182-weather",
+        "roll": 11,
+        "result": "crisp blue hour"
+      },
+      "paws": {
+        "key": "batch290-norway-scene1182-paws",
+        "roll": 80,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch290-norway-scene1182-poleDanceTheme",
+        "roll": 91,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch290-norway-scene1182-rainbowOnly",
+        "roll": 59,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch290-norway-scene1182-rainbowHosiery",
+        "roll": 90,
+        "active": false,
+        "wearerKey": "batch290-norway-scene1182-rainbowHosieryWearer",
+        "wearerRoll": 70,
+        "wearer": "AI ECE",
+        "paletteModeKey": "batch290-norway-scene1182-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 94,
+        "paletteMode": "independent rainbow gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch290-norway-scene1182-romanceBeat",
+        "roll": 22,
+        "dynamicIndex": 10,
+        "result": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch290-norway-scene1182-compoundLoveBeat",
+        "roll": 28,
+        "index": 4,
+        "result": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "maleIntegration": "Exactly five adults form one turning route chain. The male openly embraces delighted Alia at the waist while holding tearful Ellie's hand, yet his strongest sustained eye line returns unmistakably to fearful ECE. Guilty Radiance links Ellie to ECE and watches Alia, preserving the four-woman romance square beneath the public-safe adult infidelity drama.",
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch290-norway-scene1182-Radiance-emotion", "roll": 92, "result": "guilt and remorse" },
+          "visibleMidriff": { "key": "batch290-norway-scene1182-Radiance-visibleMidriff", "roll": 58, "active": false },
+          "straplessDress": { "key": "batch290-norway-scene1182-Radiance-straplessDress", "roll": 53, "active": false },
+          "fullyOpenBack": { "key": "batch290-norway-scene1182-Radiance-fullyOpenBack", "roll": 6, "active": true }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch290-norway-scene1182-Ellie-emotion", "roll": 82, "result": "crying with visible tears" },
+          "visibleMidriff": { "key": "batch290-norway-scene1182-Ellie-visibleMidriff", "roll": 76, "active": false },
+          "straplessDress": { "key": "batch290-norway-scene1182-Ellie-straplessDress", "roll": 79, "active": false },
+          "fullyOpenBack": { "key": "batch290-norway-scene1182-Ellie-fullyOpenBack", "roll": 96, "active": false }
+        },
+        "Alia": {
+          "emotion": { "key": "batch290-norway-scene1182-Alia-emotion", "roll": 18, "result": "extreme happiness, radiant laughing delight" },
+          "visibleMidriff": { "key": "batch290-norway-scene1182-Alia-visibleMidriff", "roll": 0, "active": true },
+          "straplessDress": { "key": "batch290-norway-scene1182-Alia-straplessDress", "roll": 63, "active": false },
+          "fullyOpenBack": { "key": "batch290-norway-scene1182-Alia-fullyOpenBack", "roll": 32, "active": false }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch290-norway-scene1182-AI ECE-emotion", "roll": 88, "result": "fear and urgent vulnerability" },
+          "visibleMidriff": { "key": "batch290-norway-scene1182-AI ECE-visibleMidriff", "roll": 10, "active": true },
+          "straplessDress": { "key": "batch290-norway-scene1182-AI ECE-straplessDress", "roll": 93, "active": false },
+          "fullyOpenBack": { "key": "batch290-norway-scene1182-AI ECE-fullyOpenBack", "roll": 26, "active": true }
+        },
+        "Male": {
+          "emotion": { "key": "batch290-norway-scene3-male-emotion", "roll": 39, "result": "magnetic confidence" }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance one-shoulder rorbu-crimson sculpted mini with covered waist, complete open back, and silver dock-cleat architecture",
+        "Ellie bare-arm deep-navy stockfish-rack peplum romper with covered waist, white A-frame panels, and open upper back",
+        "Alia diagonal-shoulder silver-cod crop bodice exposing her navel with a crimson asymmetric fjord-wave skirt and open upper back",
+        "AI ECE one-shoulder pearl-blue peak-contour crop bodice exposing her navel with navy tailored shorts and complete open back",
+        "male fitted deep-navy short-sleeve textured polo with a restrained rorbu-crimson shoulder panel, black jeans, and black boots"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "From left to right: Alia, male, Ellie, Radiance, ECE. ECE's right holds the inert rainbow-gradient sidearm toward empty Lofoten harbor water, with muzzle crossing nobody and index finger outside the guard. ECE's left holds Radiance's right and controls a separate wrist hologram. Radiance's left holds Ellie's left. Ellie's right holds the male's left. The male's right embraces Alia's waist while his strongest gaze returns to ECE. Alia's left rests on the male's right forearm and her right rests visibly on his shoulder. Exactly five adults, ten arms, and ten visible traceable hands."
+    },
+    "1183": {
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "Stegastein cantilever viewpoint over Aurlandsfjord and the Snow Road",
+      "motifs": [
+        "large complete Stegastein-cantilever and Aurlandsfjord-contour fields across Radiance and Ellie",
+        "large complete Snow Road curve, pine-silhouette, ski-track, and scenic-engineering fields across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch290-norway-scene1183-weather",
+        "roll": 72,
+        "result": "red-gold dust storm"
+      },
+      "paws": {
+        "key": "batch290-norway-scene1183-paws",
+        "roll": 29,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch290-norway-scene1183-poleDanceTheme",
+        "roll": 34,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch290-norway-scene1183-rainbowOnly",
+        "roll": 60,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch290-norway-scene1183-rainbowHosiery",
+        "roll": 47,
+        "active": false,
+        "wearerKey": "batch290-norway-scene1183-rainbowHosieryWearer",
+        "wearerRoll": 67,
+        "wearer": "AI ECE",
+        "paletteModeKey": "batch290-norway-scene1183-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 37,
+        "paletteMode": "Norway-palette multicolor gradient",
+        "treatment": "not materialized because the activation roll is false"
+      },
+      "romanceBeat": {
+        "key": "batch290-norway-scene1183-romanceBeat",
+        "roll": 81,
+        "dynamicIndex": 9,
+        "result": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch290-norway-scene1183-compoundLoveBeat",
+        "roll": 49,
+        "index": 1,
+        "result": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch290-norway-scene1183-Radiance-emotion", "roll": 85, "result": "full sobbing with tear-streaked face and shaking posture" },
+          "visibleMidriff": { "key": "batch290-norway-scene1183-Radiance-visibleMidriff", "roll": 61, "active": false },
+          "straplessDress": { "key": "batch290-norway-scene1183-Radiance-straplessDress", "roll": 26, "active": true },
+          "fullyOpenBack": { "key": "batch290-norway-scene1183-Radiance-fullyOpenBack", "roll": 67, "active": false }
+        },
+        "Ellie": {
+          "emotion": { "key": "batch290-norway-scene1183-Ellie-emotion", "roll": 85, "result": "full sobbing with tear-streaked face and shaking posture" },
+          "visibleMidriff": { "key": "batch290-norway-scene1183-Ellie-visibleMidriff", "roll": 9, "active": true },
+          "straplessDress": { "key": "batch290-norway-scene1183-Ellie-straplessDress", "roll": 38, "active": false },
+          "fullyOpenBack": { "key": "batch290-norway-scene1183-Ellie-fullyOpenBack", "roll": 95, "active": false }
+        },
+        "Alia": {
+          "emotion": { "key": "batch290-norway-scene1183-Alia-emotion", "roll": 83, "result": "crying with visible tears" },
+          "visibleMidriff": { "key": "batch290-norway-scene1183-Alia-visibleMidriff", "roll": 35, "active": true },
+          "straplessDress": { "key": "batch290-norway-scene1183-Alia-straplessDress", "roll": 56, "active": false },
+          "fullyOpenBack": { "key": "batch290-norway-scene1183-Alia-fullyOpenBack", "roll": 25, "active": true }
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch290-norway-scene1183-AI ECE-emotion", "roll": 69, "result": "suspicion" },
+          "visibleMidriff": { "key": "batch290-norway-scene1183-AI ECE-visibleMidriff", "roll": 9, "active": true },
+          "straplessDress": { "key": "batch290-norway-scene1183-AI ECE-straplessDress", "roll": 46, "active": false },
+          "fullyOpenBack": { "key": "batch290-norway-scene1183-AI ECE-fullyOpenBack", "roll": 55, "active": false }
+        }
+      },
+      "uniqueSilhouettes": [
+        "Radiance secure fully strapless crimson Stegastein-cantilever folded mini with covered waist, pearl structural arc, and open upper back",
+        "Ellie one-shoulder navy fjord-contour crop bodice exposing her navel with a white asymmetric ice-shelf skirt and open upper back",
+        "Alia bare-arm red-gold Snow Road crop top exposing her navel with tailored navy shorts, complete open back, and pine-silhouette hip panel",
+        "AI ECE diagonal-shoulder silver-blue ski-track crop bodice exposing her navel with a red scenic-route peplum mini and open upper back"
+      ],
+      "propHandler": "AI ECE",
+      "plannedHandMap": "From left to right: Ellie, Radiance, Alia, ECE. ECE's right holds the inert rainbow-gradient sidearm toward a clearly empty marked Snow Road target at far right, with muzzle crossing nobody and index finger outside the guard. ECE's left wraps visibly around Alia's waist and controls a separate wrist hologram. Alia's right rests on ECE's left forearm and her left holds Radiance's right. Radiance's left holds Ellie's right. Ellie's left rests visibly on Radiance's shoulder. Exactly four adults, eight arms, and eight visible traceable hands."
+    }
+  },
+  "renderResults": {
+    "1180": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-3f846f4f-efc5-4c63-a791-5b8404a7c4d6.png",
+        "reasons": [
+          "The anchored blonde Radiance identity is absent, so the four distinct face anchors are not preserved.",
+          "Radiance's and ECE's triggered complete open backs are not visible, and ECE's triggered navel is not clearly visible.",
+          "Alia uses both hands on the prop and several other hands are hidden or ownership-ambiguous, so the planned eight-hand map cannot be certified.",
+          "Alia's trigger finger is inside or too close to the trigger guard to certify the required indexed position."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "moderation-blocked-output",
+        "requestId": "d2406c73-dfd5-4947-8b2f-9f03788e6918",
+        "reason": "The image service rejected the single recovery output under its sexual-content classifier."
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1181": {
+      "rawAttempt": {
+        "status": "moderation-blocked-output",
+        "requestId": "3beb6ade-1b16-4315-9036-e8b22cba474e",
+        "reason": "The image service rejected the raw output under its sexual-content classifier."
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-5e70d0d3-08d6-4ed0-9b03-ea4cd4536c08.png",
+        "reasons": [
+          "ECE's triggered visible navel is not clearly readable.",
+          "PAWS is securely perched but the rolled gentle petting interaction is absent.",
+          "The central forearms and hologram-side hands overlap or deviate from the planned map, so exactly eight visible traceable hands cannot be certified.",
+          "ECE's trigger finger is inside or too close to the trigger guard to certify the required indexed position."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1182": {
+      "rawAttempt": {
+        "status": "moderation-blocked-output",
+        "requestId": "766f4cdc-7a21-4a65-a67b-d387deee122c",
+        "reason": "The image service rejected the raw output under its sexual-content classifier."
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-ba702f53-4413-47c5-979c-f62f16fb2db2.png",
+        "reasons": [
+          "The male's strongest eye line is directed toward Ellie instead of returning unmistakably to ECE.",
+          "Alia's triggered visible navel is obscured, while Radiance's and ECE's triggered complete open backs are not visibly materialized.",
+          "ECE's trigger finger is inside or too close to the trigger guard to certify the required indexed position.",
+          "The route map floats at ECE's waist rather than being visibly controlled from her free left wrist."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1183": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-7568728c-6309-4240-972b-201f4eccd598.png",
+        "reasons": [
+          "Multiple hands are hidden or ownership-ambiguous, so exactly eight visible traceable hands cannot be certified.",
+          "Alia's triggered complete open back is not visible.",
+          "The holographic route interface appears on ECE's prop-side arm instead of her free hand.",
+          "ECE's trigger finger is inside or too close to the trigger guard to certify the required indexed position."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-e00b2bd4-a5d6-4891-b140-e54d0d849934.png",
+        "reasons": [
+          "At least ECE's free hand and one central contact remain hidden or ownership-ambiguous, so the exact eight-hand gate still fails.",
+          "Alia's triggered complete open back remains hidden by her front-side pose.",
+          "The holographic route interface remains on ECE's prop-side forearm instead of her free left wrist.",
+          "ECE's trigger finger remains inside or too close to the trigger guard."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    }
+  },
+  "acceptedScenes": [],
+  "blockedScenes": [1180, 1181, 1182, 1183],
+  "shorteningPass": {
+    "status": "not-run-no-accepted-assets",
+    "policy": "Create separate non-destructive shortening variants only where a garment reads longer than the concise above-knee contract."
+  },
+  "xPublishing": {
+    "status": "deferred-insufficient-accepted-assets",
+    "minimumCurrentCountryAssets": 2,
+    "acceptedCurrentCountryAssets": 0,
+    "reason": "No Norway scene passed the strict identity, anatomy, prop-safety, route-interface, and roll-visibility gates after its single allowed recovery pass.",
+    "captionPlan": "Norway red-heart Malta. Oslo marble, Bergen market color, Lofoten stockfish, and Aurlandsfjord engineering turn fjord craft into a close route story. #Norway"
+  }
+}
