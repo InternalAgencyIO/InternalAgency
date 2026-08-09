@@ -27,6 +27,9 @@ const batchFiles = Object.freeze([
   "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-007.json",
   "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-008.json",
   "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-009.json",
+  "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-010.json",
+  "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-011.json",
+  "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-012.json",
 ]);
 const closurePaths = Object.freeze([
   workflowPath,

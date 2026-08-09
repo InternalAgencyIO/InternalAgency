@@ -17,7 +17,7 @@ import { validatePcmEditorialSourcePartition } from "../scripts/lib/pcm-editoria
 const readJson = (target) => readFile(target, "utf8").then(JSON.parse);
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 
-test("the committed PCM partition proves full coverage and the 785 accepted batch sources form a disjoint gap subset", async () => {
+test("the committed PCM partition proves full coverage and the 1,085 accepted batch sources form a disjoint gap subset", async () => {
   const [
     batchOne,
     batchTwo,
@@ -28,6 +28,9 @@ test("the committed PCM partition proves full coverage and the 785 accepted batc
     batchSeven,
     batchEight,
     batchNine,
+    batchTen,
+    batchEleven,
+    batchTwelve,
     partitionManifest,
     sourceFreezeEvidenceBytes,
     protectedBytes,
@@ -43,6 +46,9 @@ test("the committed PCM partition proves full coverage and the 785 accepted batc
     readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-007.json", import.meta.url)),
     readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-008.json", import.meta.url)),
     readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-009.json", import.meta.url)),
+    readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-010.json", import.meta.url)),
+    readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-011.json", import.meta.url)),
+    readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-012.json", import.meta.url)),
     readJson(new URL("../scripts/data/pcm-editorial-source-partition-5baff9.json", import.meta.url)),
     readFile(new URL("../scripts/data/pcm-source-freeze-evidence-5baff9.json", import.meta.url)),
     readFile(new URL("../scripts/lib/i18n-protected-integrity.mjs", import.meta.url)),
@@ -83,6 +89,9 @@ test("the committed PCM partition proves full coverage and the 785 accepted batc
   assert.deepEqual(batchSeven.counts, { attempted: 100, accepted: 100, rejected: 0 });
   assert.deepEqual(batchEight.counts, { attempted: 100, accepted: 100, rejected: 0 });
   assert.deepEqual(batchNine.counts, { attempted: 100, accepted: 100, rejected: 0 });
+  assert.deepEqual(batchTen.counts, { attempted: 100, accepted: 100, rejected: 0 });
+  assert.deepEqual(batchEleven.counts, { attempted: 100, accepted: 100, rejected: 0 });
+  assert.deepEqual(batchTwelve.counts, { attempted: 100, accepted: 100, rejected: 0 });
   assert.equal(batchTwo.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
   assert.equal(batchThree.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
   assert.equal(batchFour.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
@@ -91,6 +100,9 @@ test("the committed PCM partition proves full coverage and the 785 accepted batc
   assert.equal(batchSeven.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
   assert.equal(batchEight.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
   assert.equal(batchNine.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
+  assert.equal(batchTen.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
+  assert.equal(batchEleven.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
+  assert.equal(batchTwelve.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
   const priorBatchUnion = new Set([batchOne, batchTwo, batchThree].flatMap((artifact) => Object.keys(artifact.proposals)));
   const expectedBatchFourSources = criticalSources
     .filter((source) => gapSet.has(source) && !priorBatchUnion.has(source))
@@ -102,7 +114,15 @@ test("the committed PCM partition proves full coverage and the 785 accepted batc
     .slice(0, 100);
   assert.deepEqual(Object.keys(batchFive.proposals), expectedBatchFiveSources);
   const priorArtifacts = [batchOne, batchTwo, batchThree, batchFour, batchFive];
-  const fullGapArtifacts = [batchSix, batchSeven, batchEight, batchNine];
+  const fullGapArtifacts = [
+    batchSix,
+    batchSeven,
+    batchEight,
+    batchNine,
+    batchTen,
+    batchEleven,
+    batchTwelve,
+  ];
   for (const [offset, artifact] of fullGapArtifacts.entries()) {
     const precedingArtifacts = [...priorArtifacts, ...fullGapArtifacts.slice(0, offset)];
     const precedingSourceSet = new Set(precedingArtifacts.flatMap(({ proposals }) => Object.keys(proposals)));
@@ -168,8 +188,8 @@ test("the committed PCM partition proves full coverage and the 785 accepted batc
       );
     }
   }
-  assert.equal(batchUnion.size, 785);
-  assert.equal(gapSet.size - batchUnion.size, 527);
+  assert.equal(batchUnion.size, 1_085);
+  assert.equal(gapSet.size - batchUnion.size, 227);
   assert.equal(criticalSources.filter((source) => gapSet.has(source) && !batchUnion.has(source)).length, 0);
 
   const batchSixInputs = (artifact, overrides = {}) => ({
