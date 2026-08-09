@@ -105,6 +105,9 @@ validation PDA and law-state PDA to the Token-2022 `TransferChecked` CPI. A
 plain four-account transfer instruction is incomplete for the canonical mint.
 Source, destination, mint, owner/delegate, decimals, PDA signer seeds, hook
 validation account, and law state are all revalidated before invocation.
+The native adapter must use Token-2022's exact
+`add_extra_accounts_for_execute_cpi` flow to resolve and append the frozen
+hook account list; hand-assembled or omitted hook accounts are not equivalent.
 
 Economic vault accounts remain public-balance accounts. Although the mint
 contains `ConfidentialTransferMint`, no economic vault may configure or carry a
@@ -112,6 +115,14 @@ confidential pending/available balance; otherwise the public `amount` used by
 reservation and cap arithmetic would be incomplete. Vault delegate and close
 authority fields must be absent, and the mint must reject unapproved authority-
 bearing extensions such as Permanent Delegate or Permissioned Burn.
+
+Exact V2 stake accounting also exposes a separate Mainnet blocker. Both
+`open_position` and principal withdrawal require the public stake-vault token
+balance to equal `config.staked_principal` exactly. An unsolicited transfer of
+even 1 base unit into that vault therefore causes `StakeLedgerMismatch` and can
+deny future position operations. The parity kernel intentionally preserves this
+equality and must not silently relax it; Mainnet needs an immutable mitigation
+that retains ledger solvency and cannot create an administrator sweep path.
 
 Burning is different from transferring. The sole core-cap burn path uses
 Token-2022 `BurnChecked`, signed by the economic vault-authority PDA. It is not
@@ -227,13 +238,18 @@ permanently close after the committed set is exhausted.
    initialization, and persistent writes remain in step 5. Add only the
    pre-lifecycle `set_eligibility` role-policy and by-value record constructor
    here; administrator/config authentication, wallet-PDA derivation,
-   create-or-update lifecycle, and persistence remain in step 5.
+   create-or-update lifecycle, and persistence remain in step 5. Add only the
+   `prepare_open_position` pre-token-CPI validation, provisional reward-lane
+   reservation, and transfer intent here. It must not perform the config
+   staked-principal `checked_add`, construct `PositionState`, invoke a program,
+   or persist any provisional result.
 5. Port the eight account-creating paths with manual post-gate System Program
    CPIs and prove locked/unfinalized calls perform no successful CPI or state
    change. The existing `initialize_config`, `initialize_lane_vault`,
    `initialize_stake_vault`, `activate`, and `set_eligibility`
-   `PRE_LIFECYCLE_ONLY` kernels are not completion of this step and must not be
-   exposed until that lifecycle adapter exists.
+   `PRE_LIFECYCLE_ONLY` kernels and the `prepare_open_position`
+   `PRE_TOKEN_CPI_ONLY` kernel are not completion of this step and must not be
+   exposed until the corresponding lifecycle adapters exist.
 6. Port Token-2022 vault transfers and exercise the real hook for
    `open_position`, both settlement handlers, principal claim, and principal
    withdrawal on a disposable local validator.
@@ -278,7 +294,29 @@ preserves standard-role success with the no-agency sentinel and preserves the
 compile-time-inactive CCC boundary before the otherwise unreachable missing or
 invalid agency checks. It does not authenticate the administrator or config,
 derive the wallet-bound eligibility PDA, implement V2 `init_if_needed`
-create-or-update lifecycle, invoke the System Program, or persist a record.
+create-or-update lifecycle, invoke the System Program, or persist a record. The
+tenth adds only `prepare_open_position` through the exact point before V2's
+transfer CPI. It preserves active/principal, token-destination, exact stake
+ledger, owner/eligibility, standard-versus-CCC, week, reward, and treasury-first
+reservation ordering. The returned lane copies and transfer intent are
+provisional: it does not run the config staked-principal `checked_add`, construct
+`PositionState`, invoke Token-2022, create the position PDA, or persist state.
+A future adapter must pass the Daily Law gate, authenticate and decode accounts,
+and derive and bind the canonical vault-authority PDA rather than trust the
+plan's supplied semantic value. After the pre-CPI plan succeeds, it must manually
+create the position lifecycle behind the gate, execute the hooked Token-2022
+transfer using `add_extra_accounts_for_execute_cpi`, and only then run a post-CPI
+finalizer that updates config and constructs the position. A
+disposable local validator must prove atomic rollback of the position account,
+lane reservations, transfer, and post-CPI state when the hook, token CPI, or
+finalizer fails. The unsolicited 1-base-unit stake-vault donation
+`StakeLedgerMismatch` denial remains a Mainnet blocker and is not relaxed by
+this parity slice.
+
+V2 `close_position` releases residual reservations and marks the position
+closed; it has no account-close lifecycle. The closed position PDA remains
+allocated permanently, so the same owner/config `position_id` is nonreusable.
+The B3 matrix deliberately records no `close_position_account` mutation.
 None of these kernels may be exposed as a write entrypoint. The first safe
 deployable slice is the complete fifteen-row dispatcher behind the frozen
 Token-2022 hook, not a single handler.

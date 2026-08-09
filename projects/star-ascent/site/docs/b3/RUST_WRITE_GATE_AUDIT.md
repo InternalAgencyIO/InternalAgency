@@ -29,9 +29,10 @@ and internal pure `expire_round`, `close_position`, `settle_round`, and
 `commit_round` transitions, plus the `initialize_config`,
 `initialize_lane_vault`, `initialize_stake_vault`, `activate`, and
 `set_eligibility` validation/state constructors explicitly staged as
-`PRE_LIFECYCLE_ONLY`. Its manifest is `lib`-only and it has no Solana
-entrypoint or
-public dispatcher, account lifecycle, token CPI, or network access. Neither
+`PRE_LIFECYCLE_ONLY`, plus the `prepare_open_position` validation, provisional
+reservation, and transfer-intent kernel staged as `PRE_TOKEN_CPI_ONLY`. Its
+manifest is `lib`-only and it has no Solana entrypoint or public dispatcher,
+account lifecycle, token CPI, or network access. Neither
 the JavaScript specifications nor these pure Rust slices may be counted as
 on-chain faction or core-cap enforcement.
 
@@ -85,9 +86,11 @@ seventh, but only their pre-lifecycle validation and by-value state construction
 are present. `activate` is the eighth host kernel, but only handler-body
 validation, reward reservation, and by-value state construction are present.
 `set_eligibility` is the ninth host kernel, but only its role-policy validation
-and by-value eligibility construction are present. All four Genesis kernels and
-`set_eligibility` are `PRE_LIFECYCLE_ONLY` and have no public exposure. Every
-production wrapper requires the opaque canonical Daily Law capability. The
+and by-value eligibility construction are present. `prepare_open_position` is
+the tenth host kernel, but stops immediately before the token CPI. All four
+Genesis kernels and `set_eligibility` are `PRE_LIFECYCLE_ONLY`;
+`prepare_open_position` is `PRE_TOKEN_CPI_ONLY`. All have no public exposure.
+Every production wrapper requires the opaque canonical Daily Law capability. The
 three round-related CCC wrappers then preserve the immutable CCC-disabled
 Genesis boundary before inspecting caller-supplied round, instruction-trace, or
 randomness values; `set_eligibility` preserves that same boundary inside its
@@ -162,6 +165,24 @@ codecs, derive the wallet-bound PDA, create or decode an account, implement the
 V2 `init_if_needed` create-or-update lifecycle, invoke the System Program,
 serialize, or persist a result, and it does not make `set_eligibility` complete.
 
+The `prepare_open_position` kernel preserves the exact retained V2 pre-CPI
+order: active config, positive principal, owner-token mint then owner, stake-
+vault mint then authority then exact tracked balance, eligibility owner, known
+role, standard-role no-agency rule or immutable CCC-inactive rejection, current
+week, maximum reward, and treasury/ecosystem/liquidity reservation. The CCC
+roles remain unreachable with `CccDlcNotActive`. Success returns transaction-
+local lane copies and an owner-to-stake-vault transfer intent only. It does not
+perform `config.staked_principal.checked_add`, construct `PositionState`, create
+or persist the position PDA, invoke a CPI, or mutate durable state. It is
+explicitly `PRE_TOKEN_CPI_ONLY`, handler-incomplete, and has no public exposure.
+
+Exact parity exposes a Mainnet-blocking denial: V2 requires the stake-vault
+token amount to equal tracked principal. An unsolicited 1-base-unit donation to
+that public vault makes `open_position` fail with `StakeLedgerMismatch` (and can
+also block principal withdrawal). This slice deliberately does not relax the
+equality. An immutable mitigation preserving solvency and permissionlessness
+must be frozen and rehearsed before Mainnet.
+
 The `commit_round` differential kernel performs no account creation. It accepts
 a decoded read-only instructions-sysvar trace, selects only the instruction
 immediately preceding the current index, validates the pinned Switchboard
@@ -181,7 +202,10 @@ implementation as the comparison oracle.
 `close_position` remains the only reachable V2 business transition in the
 host-only kernel. It performs no account creation, closure CPI, token CPI,
 randomness read, or other network operation; its differential tests use the
-actual V2 `Position` and `LaneVault` types.
+actual V2 `Position` and `LaneVault` types. V2 has no `close =` constraint or
+manual account close: it marks `closed = true` and retains the position PDA
+permanently, making that owner/config position ID nonreusable. The matrix must
+therefore never claim a `close_position_account` mutation.
 
 These are not account adapters or deployable handlers. A future native adapter
 must still prove account ownership, exact config/round/randomness bindings,
@@ -212,7 +236,17 @@ lifecycle. Only after the Daily Law gate and pure role-policy transition succeed
 may it manually create an absent record or mutably overwrite a valid existing
 record and persist the result. The V2 `init_if_needed` constraint is source
 evidence of the retained create-or-update semantics, not lifecycle code that can
-be copied ahead of the B3 gate.
+be copied ahead of the B3 gate. For `open_position`, the adapter must pass the
+Daily Law gate, authenticate every account, and derive and bind the canonical
+vault-authority PDA itself; the semantic value supplied to the host plan is not
+trusted adapter evidence. Only after the pre-CPI plan succeeds may it manually
+create the position account, construct Token-2022 `TransferChecked`, and use the
+exact `add_extra_accounts_for_execute_cpi` hook-account flow before invocation.
+Only after that CPI succeeds may a separate post-CPI finalizer apply the config
+staked-principal checked addition and construct/persist `PositionState`. A
+disposable local validator must prove the entire transaction rolls back the
+manual lifecycle, provisional lane reservations, token transfer, and finalizer
+state when the hook, token CPI, or post-CPI finalizer fails.
 
 That adapter also has an unresolved non-circular bootstrap requirement. If the
 combined `finalize_day` plus core-cap reconciliation path requires an already

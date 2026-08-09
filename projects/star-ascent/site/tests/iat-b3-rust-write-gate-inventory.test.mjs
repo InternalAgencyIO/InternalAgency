@@ -197,9 +197,16 @@ test("the host-only close_position port preserves the V2 validation boundary", (
   assert.match(economyTransition, /EconomyError::PositionWeeksOutstanding/u);
   assert.match(economyTransition, /EconomyError::WrongLaneOrder/u);
   assert.match(economyTransition, /release_reserved_lane/u);
+  const v2Accounts = structBody(v2Source, "ClosePosition");
+  assert.doesNotMatch(v2Accounts, /\bclose\s*=/u);
+  assert.doesNotMatch(v2Close, /close_position_account|\.close\s*\(/u);
   assert.match(
     audit,
     /`close_position` the\s+second,/u,
+  );
+  assert.match(
+    audit,
+    /retains the position PDA\s+permanently[\s\S]+position ID nonreusable[\s\S]+never claim a `close_position_account` mutation/u,
   );
 });
 
@@ -823,5 +830,150 @@ test("the set_eligibility kernel preserves V2 policy order without importing lif
   assert.match(
     audit,
     /For\s+`set_eligibility`[\s\S]+Daily Law gate and pure role-policy transition succeed[\s\S]+manually create an absent record or mutably overwrite a valid existing\s+record/u,
+  );
+});
+
+test("prepare_open_position stops at the exact V2 pre-token-CPI boundary", () => {
+  const v2Open = functionBody(anchorProgramBody(v2Source), "open_position");
+  const economyPrepare = functionBody(economySource, "prepare_open_position");
+  const economyTransition = functionBody(
+    economySource,
+    "prepare_open_position_transition",
+  );
+
+  assertTokensInOrder(
+    v2Open,
+    [
+      "ctx.accounts.config.active",
+      "principal > 0",
+      "verify_destination(",
+      "&ctx.accounts.owner_tokens",
+      "ctx.accounts.mint.key()",
+      "ctx.accounts.owner.key()",
+      "Pubkey::find_program_address(",
+      'b"vault-authority"',
+      "verify_stake_vault(",
+      "&ctx.accounts.stake_tokens",
+      "ctx.accounts.config.staked_principal",
+      "ctx.accounts.eligibility.wallet",
+      "ctx.accounts.owner.key()",
+      "role_rate(ctx.accounts.eligibility.role)",
+      "if ctx.accounts.eligibility.role == 0",
+      "ctx.accounts.eligibility.agency_index",
+      "u32::MAX",
+      "CCC_DLC_GENESIS_ENABLED",
+      "ctx.accounts.eligibility.agency_index < ctx.accounts.config.agency_count",
+      "week_for(&ctx.accounts.config)",
+      "maximum_reward(principal, rate, USER_TERM_WEEKS)",
+      "reserve_three_lanes(",
+      "&mut ctx.accounts.treasury",
+      "&mut ctx.accounts.ecosystem",
+      "&mut ctx.accounts.liquidity",
+      "token::transfer_checked(",
+      "ctx.accounts.config.staked_principal =",
+      ".checked_add(principal)",
+      "let position = &mut ctx.accounts.position",
+    ],
+    "V2 open_position",
+  );
+
+  assert.match(economyPrepare, /gate: &ValidatedDailyLawWrite/u);
+  assert.match(
+    economyPrepare,
+    /prepare_open_position_transition\(input, gate\.unix_timestamp\)/u,
+  );
+  assertTokensInOrder(
+    economyTransition,
+    [
+      "if !input.config.active",
+      "input.principal == 0",
+      "verify_destination(input.owner_tokens, input.mint, input.owner)",
+      "verify_stake_vault(",
+      "input.stake_tokens",
+      "input.mint",
+      "input.vault_authority",
+      "input.config.staked_principal",
+      "input.eligibility.wallet != input.owner",
+      "role_rate(input.eligibility.role)",
+      "if input.eligibility.role == 0",
+      "input.eligibility.agency_index != u32::MAX",
+      "if !CCC_DLC_GENESIS_ENABLED",
+      "input.eligibility.agency_index >= input.config.agency_count",
+      "current_week(input.config.genesis_timestamp, clock_unix_timestamp)",
+      "maximum_reward(input.principal, rate, USER_TERM_WEEKS)",
+      "let mut treasury = input.treasury",
+      "let mut ecosystem = input.ecosystem",
+      "let mut liquidity = input.liquidity",
+      "reserve_three_lanes(",
+      "Ok(OpenPositionPreCpiPlan",
+      "config_snapshot: input.config",
+      "treasury_reserved,",
+      "ecosystem_reserved,",
+      "liquidity_reserved,",
+      "transfer: TransferCheckedIntent",
+      "token_program: input.config.token_program",
+      "source: input.owner_tokens.key",
+      "destination: input.stake_tokens.key",
+      "amount: input.principal",
+      "decimals: TOKEN_DECIMALS",
+    ],
+    "B3 prepare_open_position transition",
+  );
+
+  for (const body of [economyPrepare, economyTransition]) {
+    assert.doesNotMatch(
+      body,
+      /config\.staked_principal\s*=|config\.staked_principal\s*\.checked_add|PositionState\s*\{|CpiContext|token::transfer_checked|\binvoke(?:_signed)?\s*\(/u,
+    );
+  }
+
+  const plan = structBody(economySource, "OpenPositionPreCpiPlan");
+  assert.match(plan, /pub treasury: LaneState/u);
+  assert.match(plan, /pub ecosystem: LaneState/u);
+  assert.match(plan, /pub liquidity: LaneState/u);
+  assert.match(plan, /pub transfer: TransferCheckedIntent/u);
+  assert.doesNotMatch(plan, /PositionState/u);
+
+  const v2Accounts = structBody(v2Source, "OpenPosition");
+  assertTokensInOrder(
+    v2Accounts,
+    [
+      "pub owner: Signer<'info>",
+      "pub config: Box<Account<'info, Config>>",
+      "pub eligibility: Box<Account<'info, Eligibility>>",
+      "pub stake_tokens: Box<Account<'info, TokenAccount>>",
+      "init,",
+      "payer = owner",
+      'b"position"',
+      "pub position: Box<Account<'info, Position>>",
+      "pub token_program: Program<'info, Token>",
+      "pub system_program: Program<'info, System>",
+    ],
+    "V2 OpenPosition lifecycle",
+  );
+
+  assert.match(
+    audit,
+    /`prepare_open_position` is\s+the tenth host kernel[\s\S]+`PRE_TOKEN_CPI_ONLY`[\s\S]+no public exposure/u,
+  );
+  assert.match(
+    audit,
+    /exact retained V2 pre-CPI\s+order[\s\S]+CCC[\s\S]+transaction-\s*local lane copies and an owner-to-stake-vault transfer intent only/u,
+  );
+  assert.match(
+    audit,
+    /does not\s+perform `config\.staked_principal\.checked_add`[\s\S]+construct `PositionState`[\s\S]+invoke a CPI/u,
+  );
+  assert.match(
+    audit,
+    /manually\s+create the position account[\s\S]+`add_extra_accounts_for_execute_cpi`[\s\S]+post-CPI finalizer[\s\S]+local validator[\s\S]+rolls back/u,
+  );
+  assert.match(
+    audit,
+    /derive and bind the canonical\s+vault-authority PDA[\s\S]+semantic value[\s\S]+not\s+trusted adapter evidence/u,
+  );
+  assert.match(
+    audit,
+    /unsolicited 1-base-unit donation[\s\S]+`StakeLedgerMismatch`[\s\S]+does not relax the\s+equality/u,
   );
 });

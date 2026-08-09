@@ -120,7 +120,7 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
-test("the host-only port contains exactly the first nine gated kernels", () => {
+test("the host-only port contains exactly the first ten gated kernels", () => {
   assert.deepEqual(matrix.hostOnlyPureTransitions, [
     {
       name: "expire_round",
@@ -186,6 +186,14 @@ test("the host-only port contains exactly the first nine gated kernels", () => {
       handlerComplete: false,
       publicExposure: false,
     },
+    {
+      name: "prepare_open_position",
+      implementationStage: "PRE_TOKEN_CPI_ONLY",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      handlerComplete: false,
+      publicExposure: false,
+    },
   ]);
   assert.match(
     economySource,
@@ -221,6 +229,14 @@ test("the host-only port contains exactly the first nine gated kernels", () => {
   assert.match(economySource, /fn set_eligibility_transition\(/u);
   assert.match(economySource, /struct SetEligibilityInput/u);
   assert.match(economySource, /struct EligibilityState/u);
+  assert.match(
+    economySource,
+    /pub fn prepare_open_position\(\s*gate: &ValidatedDailyLawWrite,/u,
+  );
+  assert.match(economySource, /fn prepare_open_position_transition\(/u);
+  assert.match(economySource, /struct PrepareOpenPositionInput/u);
+  assert.match(economySource, /struct OpenPositionPreCpiPlan/u);
+  assert.match(economySource, /struct TransferCheckedIntent/u);
   assert.match(
     economySource,
     /pub fn close_position\(\s*_gate: &ValidatedDailyLawWrite,/u,
@@ -288,6 +304,23 @@ test("the host-only port contains exactly the first nine gated kernels", () => {
     "PRESERVE_STANDARD_AND_CCC_INACTIVE_BOUNDARY",
   );
   assert(setEligibility.cpis.includes("system_program.create_account_if_absent"));
+
+  const openPosition = matrix.handlers.find(
+    (handler) => handler.name === "open_position",
+  );
+  assert.equal(openPosition.implementationStage, "PRE_TOKEN_CPI_ONLY");
+  assert.equal(openPosition.handlerComplete, false);
+  assert.equal(openPosition.publicExposure, matrix.deploymentExposure);
+  assert.equal(openPosition.parity, "PRESERVE");
+  assert.equal(openPosition.token2022Flow, "OWNER_TO_STAKE_VAULT");
+
+  const closePosition = matrix.handlers.find(
+    (handler) => handler.name === "close_position",
+  );
+  assert.deepEqual(closePosition.mutations, [
+    "release_reservations",
+    "mark_closed",
+  ]);
 });
 
 test("the pure verifier pins the exact current Daily Law v1 codec", () => {

@@ -314,6 +314,64 @@ pub struct SetEligibilityResult {
     pub eligibility: EligibilityState,
 }
 
+/// Semantic description of the exact transfer V2 performs after its
+/// open-position preflight. This value is not a CPI and does not prove that
+/// Token-2022, the Transfer Hook, or the hook's extra accounts were invoked.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct TransferCheckedIntent {
+    pub token_program: [u8; 32],
+    pub source: [u8; 32],
+    pub mint: [u8; 32],
+    pub destination: [u8; 32],
+    pub authority: [u8; 32],
+    pub amount: u64,
+    pub decimals: u8,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct PrepareOpenPositionInput {
+    pub config_key: [u8; 32],
+    pub config: ConfigState,
+    pub owner: [u8; 32],
+    pub mint: [u8; 32],
+    pub owner_tokens: ReadonlyTokenState,
+    pub vault_authority: [u8; 32],
+    pub stake_tokens: ReadonlyTokenState,
+    pub eligibility: EligibilityState,
+    pub treasury: LaneState,
+    pub ecosystem: LaneState,
+    pub liquidity: LaneState,
+    pub position_id: u64,
+    pub principal: u64,
+    pub position_bump: u8,
+}
+
+/// Host-only output through the exact point immediately before V2 invokes its
+/// token transfer. The lane values are provisional transaction-local copies.
+/// Config staked-principal and Position construction intentionally remain
+/// absent because V2 performs both only after the transfer CPI succeeds.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct OpenPositionPreCpiPlan {
+    pub config_key: [u8; 32],
+    pub config_snapshot: ConfigState,
+    pub owner: [u8; 32],
+    pub position_id: u64,
+    pub principal: u64,
+    pub accepted_week: u64,
+    pub annual_rate_bps: u64,
+    pub obligation: u64,
+    pub agency_index: u32,
+    pub role: u8,
+    pub position_bump: u8,
+    pub treasury: LaneState,
+    pub ecosystem: LaneState,
+    pub liquidity: LaneState,
+    pub treasury_reserved: u64,
+    pub ecosystem_reserved: u64,
+    pub liquidity_reserved: u64,
+    pub transfer: TransferCheckedIntent,
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ExpireRoundResult {
     pub round: RoundState,
@@ -468,6 +526,10 @@ pub enum EconomyError {
     StandardCannotLinkAgency,
     CccRoleRequiresAgency,
     InvalidAgencyIndex,
+    ZeroPrincipal,
+    WrongDestinationOwner,
+    WrongPositionOwner,
+    InvalidClock,
     PositionClosed,
     PrincipalNotReturned,
     PositionWeeksOutstanding,
@@ -709,6 +771,97 @@ fn set_eligibility_transition(
     })
 }
 
+/// Prepare retained V2 `open_position` only through the point immediately
+/// before its token transfer. The opaque Daily Law capability is required, but
+/// this host-only function performs no account lifecycle, CPI, mutation, or
+/// persistence. A future native adapter must execute the canonical hooked
+/// Token-2022 transfer and only then run the still-unimplemented post-CPI
+/// staked-principal and Position finalization inside the same transaction.
+pub fn prepare_open_position(
+    gate: &ValidatedDailyLawWrite,
+    input: PrepareOpenPositionInput,
+) -> Result<OpenPositionPreCpiPlan, EconomyError> {
+    prepare_open_position_transition(input, gate.unix_timestamp)
+}
+
+fn prepare_open_position_transition(
+    input: PrepareOpenPositionInput,
+    clock_unix_timestamp: i64,
+) -> Result<OpenPositionPreCpiPlan, EconomyError> {
+    if !input.config.active {
+        return Err(EconomyError::NotActive);
+    }
+    if input.principal == 0 {
+        return Err(EconomyError::ZeroPrincipal);
+    }
+    verify_destination(input.owner_tokens, input.mint, input.owner)?;
+    verify_stake_vault(
+        input.stake_tokens,
+        input.mint,
+        input.vault_authority,
+        input.config.staked_principal,
+    )?;
+    if input.eligibility.wallet != input.owner {
+        return Err(EconomyError::WrongPositionOwner);
+    }
+    let rate = role_rate(input.eligibility.role).ok_or(EconomyError::UnknownRole)?;
+    if input.eligibility.role == 0 {
+        if input.eligibility.agency_index != u32::MAX {
+            return Err(EconomyError::StandardCannotLinkAgency);
+        }
+    } else {
+        if !CCC_DLC_GENESIS_ENABLED {
+            return Err(EconomyError::CccDlcNotActive);
+        }
+        if input.eligibility.agency_index >= input.config.agency_count {
+            return Err(EconomyError::InvalidAgencyIndex);
+        }
+    }
+    let accepted_week = current_week(input.config.genesis_timestamp, clock_unix_timestamp)
+        .ok_or(EconomyError::InvalidClock)?;
+    let obligation = maximum_reward(input.principal, rate, USER_TERM_WEEKS)
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    let mut treasury = input.treasury;
+    let mut ecosystem = input.ecosystem;
+    let mut liquidity = input.liquidity;
+    let (treasury_reserved, ecosystem_reserved, liquidity_reserved) = reserve_three_lanes(
+        &mut treasury,
+        &mut ecosystem,
+        &mut liquidity,
+        obligation,
+        accepted_week,
+    )?;
+
+    Ok(OpenPositionPreCpiPlan {
+        config_key: input.config_key,
+        config_snapshot: input.config,
+        owner: input.owner,
+        position_id: input.position_id,
+        principal: input.principal,
+        accepted_week,
+        annual_rate_bps: rate,
+        obligation,
+        agency_index: input.eligibility.agency_index,
+        role: input.eligibility.role,
+        position_bump: input.position_bump,
+        treasury,
+        ecosystem,
+        liquidity,
+        treasury_reserved,
+        ecosystem_reserved,
+        liquidity_reserved,
+        transfer: TransferCheckedIntent {
+            token_program: input.config.token_program,
+            source: input.owner_tokens.key,
+            mint: input.mint,
+            destination: input.stake_tokens.key,
+            authority: input.owner,
+            amount: input.principal,
+            decimals: TOKEN_DECIMALS,
+        },
+    })
+}
+
 fn activate_transition(input: ActivateInput) -> Result<ActivateResult, EconomyError> {
     if !RANDOMNESS_ADAPTER_VERIFIED {
         return Err(EconomyError::RandomnessAdapterNotVerified);
@@ -941,6 +1094,18 @@ fn role_rate(role: u8) -> Option<u64> {
     }
 }
 
+fn current_week(genesis_timestamp: i64, now_timestamp: i64) -> Option<u64> {
+    if now_timestamp < genesis_timestamp {
+        return None;
+    }
+    u64::try_from(
+        now_timestamp
+            .checked_sub(genesis_timestamp)?
+            .checked_div(SECONDS_PER_WEEK)?,
+    )
+    .ok()
+}
+
 fn maximum_reward(principal: u64, annual_rate_bps: u64, term_weeks: u64) -> Option<u64> {
     let numerator = (principal as u128)
         .checked_mul(annual_rate_bps as u128)?
@@ -961,6 +1126,20 @@ fn verify_community_funding(
     }
     if tokens.amount != expected_amount {
         return Err(EconomyError::WrongCommunityFunding);
+    }
+    Ok(())
+}
+
+fn verify_destination(
+    tokens: ReadonlyTokenState,
+    mint: [u8; 32],
+    owner: [u8; 32],
+) -> Result<(), EconomyError> {
+    if tokens.mint != mint {
+        return Err(EconomyError::WrongTokenMint);
+    }
+    if tokens.owner != owner {
+        return Err(EconomyError::WrongDestinationOwner);
     }
     Ok(())
 }
@@ -2701,6 +2880,174 @@ mod tests {
         }
     }
 
+    #[derive(Clone, Copy)]
+    struct PrepareOpenPositionVector {
+        name: &'static str,
+        input: PrepareOpenPositionInput,
+        clock_timestamp: i64,
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum PrepareOpenPositionObservation {
+        Error(EconomyError),
+        Success(Box<OpenPositionPreCpiPlan>),
+    }
+
+    fn observe_prepare_open_position(
+        result: Result<OpenPositionPreCpiPlan, EconomyError>,
+    ) -> PrepareOpenPositionObservation {
+        match result {
+            Err(error) => PrepareOpenPositionObservation::Error(error),
+            Ok(plan) => PrepareOpenPositionObservation::Success(Box::new(plan)),
+        }
+    }
+
+    fn valid_prepare_open_position_vector(name: &'static str) -> PrepareOpenPositionVector {
+        let mut config = initialize_config_transition(
+            valid_initialize_config_vector("open-position config", false).input,
+            1_000,
+        )
+        .unwrap()
+        .config;
+        config.active = true;
+        config.stake_vault_initialized = true;
+        config.stake_token_account = [0xb0; 32];
+        config.staked_principal = 12_345;
+        config.agency_count = 7;
+        let config_key = [0xb1; 32];
+        let owner = [0xb2; 32];
+        let mint = config.mint;
+        let vault_authority = [0xb3; 32];
+        PrepareOpenPositionVector {
+            name,
+            input: PrepareOpenPositionInput {
+                config_key,
+                config,
+                owner,
+                mint,
+                owner_tokens: ReadonlyTokenState {
+                    key: [0xb4; 32],
+                    mint,
+                    owner,
+                    amount: 0,
+                },
+                vault_authority,
+                stake_tokens: ReadonlyTokenState {
+                    key: config.stake_token_account,
+                    mint,
+                    owner: vault_authority,
+                    amount: config.staked_principal,
+                },
+                eligibility: EligibilityState {
+                    config: config_key,
+                    wallet: owner,
+                    agency_index: u32::MAX,
+                    role: 0,
+                    bump: 247,
+                },
+                treasury: activation_lane(TREASURY, false, 0xb5),
+                ecosystem: activation_lane(ECOSYSTEM, false, 0xb6),
+                liquidity: activation_lane(LIQUIDITY, false, 0xb7),
+                position_id: 42,
+                principal: 1_000_000_000,
+                position_bump: 246,
+            },
+            clock_timestamp: 1_000,
+        }
+    }
+
+    fn v2_prepare_open_position_reference(
+        vector: PrepareOpenPositionVector,
+    ) -> PrepareOpenPositionObservation {
+        let _case_name = vector.name;
+        let input = vector.input;
+        let result = (|| {
+            if !input.config.active {
+                return Err(EconomyError::NotActive);
+            }
+            if input.principal == 0 {
+                return Err(EconomyError::ZeroPrincipal);
+            }
+            if input.owner_tokens.mint != input.mint {
+                return Err(EconomyError::WrongTokenMint);
+            }
+            if input.owner_tokens.owner != input.owner {
+                return Err(EconomyError::WrongDestinationOwner);
+            }
+            v2_verify_stake_vault(
+                input.stake_tokens,
+                input.mint,
+                input.vault_authority,
+                input.config.staked_principal,
+            )?;
+            if input.eligibility.wallet != input.owner {
+                return Err(EconomyError::WrongPositionOwner);
+            }
+            let rate =
+                v2_policy::role_rate(input.eligibility.role).ok_or(EconomyError::UnknownRole)?;
+            if input.eligibility.role == 0 {
+                if input.eligibility.agency_index != u32::MAX {
+                    return Err(EconomyError::StandardCannotLinkAgency);
+                }
+            } else {
+                if !iat_v2::CCC_DLC_GENESIS_ENABLED {
+                    return Err(EconomyError::CccDlcNotActive);
+                }
+                if input.eligibility.agency_index >= input.config.agency_count {
+                    return Err(EconomyError::InvalidAgencyIndex);
+                }
+            }
+            let accepted_week =
+                v2_policy::current_week(input.config.genesis_timestamp, vector.clock_timestamp)
+                    .ok_or(EconomyError::InvalidClock)?;
+            let obligation = v2_policy::maximum_reward(input.principal, rate, USER_TERM_WEEKS)
+                .ok_or(EconomyError::ArithmeticOverflow)?;
+            let mut treasury = v2_lane_from_semantic(input.treasury);
+            let mut ecosystem = v2_lane_from_semantic(input.ecosystem);
+            let mut liquidity = v2_lane_from_semantic(input.liquidity);
+            let (treasury_reserved, ecosystem_reserved, liquidity_reserved) =
+                v2_reserve_three_lanes(
+                    &mut treasury,
+                    &mut ecosystem,
+                    &mut liquidity,
+                    obligation,
+                    accepted_week,
+                )?;
+            Ok(OpenPositionPreCpiPlan {
+                config_key: input.config_key,
+                config_snapshot: input.config,
+                owner: input.owner,
+                position_id: input.position_id,
+                principal: input.principal,
+                accepted_week,
+                annual_rate_bps: rate,
+                obligation,
+                agency_index: input.eligibility.agency_index,
+                role: input.eligibility.role,
+                position_bump: input.position_bump,
+                treasury: semantic_lane_from_v2(treasury),
+                ecosystem: semantic_lane_from_v2(ecosystem),
+                liquidity: semantic_lane_from_v2(liquidity),
+                treasury_reserved,
+                ecosystem_reserved,
+                liquidity_reserved,
+                transfer: TransferCheckedIntent {
+                    token_program: input.config.token_program,
+                    source: input.owner_tokens.key,
+                    mint: input.mint,
+                    destination: input.stake_tokens.key,
+                    authority: input.owner,
+                    amount: input.principal,
+                    decimals: v2_policy::TOKEN_DECIMALS,
+                },
+            })
+        })();
+        match result {
+            Err(error) => PrepareOpenPositionObservation::Error(error),
+            Ok(plan) => PrepareOpenPositionObservation::Success(Box::new(plan)),
+        }
+    }
+
     #[derive(Clone, Copy, Debug)]
     enum CommitProofCase {
         Valid,
@@ -4371,6 +4718,308 @@ mod tests {
                 }
             ),
             Err(EconomyError::NotActive)
+        );
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
+        let missing_bytes = pack_law_state(None);
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &missing_bytes),
+            Err(EconomyError::DayUnfinalized)
+        );
+    }
+
+    #[test]
+    fn prepare_open_position_pre_cpi_validation_order_matches_retained_v2() {
+        let base = valid_prepare_open_position_vector("base");
+        let mut cases = Vec::new();
+
+        let mut input = base.input;
+        input.config.active = false;
+        input.principal = 0;
+        input.owner_tokens.mint = [0xc0; 32];
+        cases.push((
+            "inactive precedes every later check",
+            input,
+            EconomyError::NotActive,
+        ));
+
+        let mut input = base.input;
+        input.principal = 0;
+        input.owner_tokens.mint = [0xc1; 32];
+        cases.push((
+            "zero principal precedes token facts",
+            input,
+            EconomyError::ZeroPrincipal,
+        ));
+
+        let mut input = base.input;
+        input.owner_tokens.mint = [0xc2; 32];
+        input.owner_tokens.owner = [0xc3; 32];
+        cases.push((
+            "owner token mint precedes owner",
+            input,
+            EconomyError::WrongTokenMint,
+        ));
+
+        let mut input = base.input;
+        input.owner_tokens.owner = [0xc4; 32];
+        input.stake_tokens.mint = [0xc5; 32];
+        cases.push((
+            "owner token owner precedes stake vault",
+            input,
+            EconomyError::WrongDestinationOwner,
+        ));
+
+        let mut input = base.input;
+        input.stake_tokens.mint = [0xc6; 32];
+        input.stake_tokens.owner = [0xc7; 32];
+        cases.push((
+            "stake mint precedes authority",
+            input,
+            EconomyError::WrongTokenMint,
+        ));
+
+        let mut input = base.input;
+        input.stake_tokens.owner = [0xc8; 32];
+        input.stake_tokens.amount += 1;
+        cases.push((
+            "stake authority precedes tracked balance",
+            input,
+            EconomyError::WrongVaultAuthority,
+        ));
+
+        let mut input = base.input;
+        input.stake_tokens.amount += 1;
+        input.eligibility.wallet = [0xc9; 32];
+        cases.push((
+            "stake tracked balance precedes eligibility",
+            input,
+            EconomyError::StakeLedgerMismatch,
+        ));
+
+        let mut input = base.input;
+        input.eligibility.wallet = [0xca; 32];
+        input.eligibility.role = u8::MAX;
+        cases.push((
+            "eligibility wallet precedes role",
+            input,
+            EconomyError::WrongPositionOwner,
+        ));
+
+        let mut input = base.input;
+        input.eligibility.role = u8::MAX;
+        cases.push((
+            "unknown role precedes agency rules",
+            input,
+            EconomyError::UnknownRole,
+        ));
+
+        let mut input = base.input;
+        input.eligibility.agency_index = 0;
+        cases.push((
+            "standard role must omit agency",
+            input,
+            EconomyError::StandardCannotLinkAgency,
+        ));
+
+        for role in [1, 2] {
+            let mut input = base.input;
+            input.eligibility.role = role;
+            input.eligibility.agency_index = u32::MAX;
+            cases.push((
+                "CCC inactivity precedes agency range",
+                input,
+                EconomyError::CccDlcNotActive,
+            ));
+        }
+
+        let mut input = base.input;
+        input.config.genesis_timestamp = 1_001;
+        cases.push((
+            "Clock before Genesis fails closed",
+            input,
+            EconomyError::InvalidClock,
+        ));
+
+        let mut input = base.input;
+        input.treasury.lane = ECOSYSTEM;
+        cases.push((
+            "reward lane order is exact",
+            input,
+            EconomyError::WrongLaneOrder,
+        ));
+
+        for (name, input, expected_error) in cases {
+            let vector = PrepareOpenPositionVector {
+                name,
+                input,
+                ..base
+            };
+            assert_eq!(
+                observe_prepare_open_position(prepare_open_position_transition(
+                    input,
+                    vector.clock_timestamp,
+                )),
+                PrepareOpenPositionObservation::Error(expected_error),
+                "fixed error: {name}"
+            );
+            assert_eq!(
+                observe_prepare_open_position(prepare_open_position_transition(
+                    input,
+                    vector.clock_timestamp,
+                )),
+                v2_prepare_open_position_reference(vector),
+                "V2 differential: {name}"
+            );
+        }
+    }
+
+    #[test]
+    fn prepare_open_position_returns_only_the_exact_pre_cpi_plan() {
+        let base = valid_prepare_open_position_vector("week zero plan");
+        for offset in [
+            0,
+            SECONDS_PER_WEEK - 1,
+            SECONDS_PER_WEEK,
+            SECONDS_PER_WEEK + 1,
+        ] {
+            let vector = PrepareOpenPositionVector {
+                clock_timestamp: base.input.config.genesis_timestamp + offset,
+                ..base
+            };
+            let actual = observe_prepare_open_position(prepare_open_position_transition(
+                vector.input,
+                vector.clock_timestamp,
+            ));
+            assert_eq!(
+                actual,
+                v2_prepare_open_position_reference(vector),
+                "offset={offset}"
+            );
+        }
+
+        let plan = prepare_open_position_transition(base.input, base.clock_timestamp).unwrap();
+        assert_eq!(plan.accepted_week, 0);
+        assert_eq!(plan.annual_rate_bps, STANDARD_RATE_BPS);
+        assert_eq!(plan.obligation, 100_000_000);
+        assert_eq!(plan.treasury_reserved, plan.obligation);
+        assert_eq!(plan.ecosystem_reserved, 0);
+        assert_eq!(plan.liquidity_reserved, 0);
+        assert_eq!(plan.config_snapshot, base.input.config);
+        assert_eq!(plan.config_snapshot.staked_principal, 12_345);
+        assert_eq!(base.input.owner_tokens.amount, 0);
+        assert_eq!(
+            plan.transfer,
+            TransferCheckedIntent {
+                token_program: base.input.config.token_program,
+                source: base.input.owner_tokens.key,
+                mint: base.input.mint,
+                destination: base.input.stake_tokens.key,
+                authority: base.input.owner,
+                amount: base.input.principal,
+                decimals: TOKEN_DECIMALS,
+            }
+        );
+
+        let mut split_sentinel = base.input;
+        split_sentinel.config.staked_principal = u64::MAX;
+        split_sentinel.stake_tokens.amount = u64::MAX;
+        split_sentinel.principal = 1;
+        split_sentinel.treasury.reward_source = false;
+        split_sentinel.treasury.reserved = u64::MAX;
+        split_sentinel.ecosystem.reward_source = false;
+        split_sentinel.liquidity.reward_source = false;
+        let sentinel_plan =
+            prepare_open_position_transition(split_sentinel, base.clock_timestamp).unwrap();
+        assert_eq!(sentinel_plan.obligation, 0);
+        assert_eq!(sentinel_plan.config_snapshot.staked_principal, u64::MAX);
+        assert_eq!(sentinel_plan.transfer.amount, 1);
+        assert_eq!(sentinel_plan.treasury, split_sentinel.treasury);
+        assert_eq!(sentinel_plan.ecosystem, split_sentinel.ecosystem);
+        assert_eq!(sentinel_plan.liquidity, split_sentinel.liquidity);
+
+        let mut cpi_capable_split_sentinel = split_sentinel;
+        cpi_capable_split_sentinel.owner_tokens.amount = 1;
+        let cpi_capable_plan =
+            prepare_open_position_transition(cpi_capable_split_sentinel, base.clock_timestamp)
+                .unwrap();
+        assert_eq!(cpi_capable_plan.config_snapshot.staked_principal, u64::MAX);
+        assert_eq!(cpi_capable_plan.transfer.amount, 1);
+
+        let mut zero_obligation_wrong_order = split_sentinel;
+        zero_obligation_wrong_order.treasury.lane = ECOSYSTEM;
+        assert_eq!(
+            prepare_open_position_transition(zero_obligation_wrong_order, base.clock_timestamp),
+            Err(EconomyError::WrongLaneOrder)
+        );
+
+        let week_thirty = base.input.config.genesis_timestamp + 30 * SECONDS_PER_WEEK;
+        let mut spill = base.input;
+        spill.treasury.genesis_unlocked = 0;
+        spill.treasury.cliff_week = 52;
+        let spill_plan = prepare_open_position_transition(spill, week_thirty).unwrap();
+        assert_eq!(spill_plan.accepted_week, 30);
+        assert_eq!(spill_plan.treasury_reserved, 0);
+        assert_eq!(spill_plan.ecosystem_reserved, spill_plan.obligation);
+        assert_eq!(
+            observe_prepare_open_position(Ok(spill_plan)),
+            v2_prepare_open_position_reference(PrepareOpenPositionVector {
+                name: "week-thirty treasury-to-ecosystem spill",
+                input: spill,
+                clock_timestamp: week_thirty,
+            })
+        );
+
+        let mut insufficient = base.input;
+        for lane in [
+            &mut insufficient.treasury,
+            &mut insufficient.ecosystem,
+            &mut insufficient.liquidity,
+        ] {
+            lane.genesis_unlocked = 0;
+            lane.cliff_week = 31;
+            lane.linear_end_week = 104;
+        }
+        assert_eq!(
+            prepare_open_position_transition(insufficient, week_thirty),
+            Err(EconomyError::InsufficientUnlockedRewardCapacity)
+        );
+        assert_eq!(
+            observe_prepare_open_position(prepare_open_position_transition(
+                insufficient,
+                week_thirty,
+            )),
+            v2_prepare_open_position_reference(PrepareOpenPositionVector {
+                name: "week-thirty insufficient capacity",
+                input: insufficient,
+                clock_timestamp: week_thirty,
+            })
+        );
+
+        assert_eq!(
+            current_week(i64::MIN, i64::MAX),
+            v2_policy::current_week(i64::MIN, i64::MAX)
+        );
+        assert_eq!(current_week(i64::MIN, i64::MAX), None);
+    }
+
+    #[test]
+    fn prepare_open_position_requires_open_law_and_preserves_stake_donation_failure() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let mut vector = valid_prepare_open_position_vector("open position wrapper");
+        vector.input.config.genesis_timestamp = FRIDAY_BOUNDARY_UTC;
+        assert!(prepare_open_position(&gate, vector.input).is_ok());
+
+        let mut donated = vector.input;
+        donated.stake_tokens.amount += 1;
+        assert_eq!(
+            prepare_open_position(&gate, donated),
+            Err(EconomyError::StakeLedgerMismatch)
         );
 
         let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
