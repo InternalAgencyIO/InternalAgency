@@ -1,0 +1,456 @@
+{
+  "$schema": "./iat-b3-x-social-evidence-provider-readiness.v1.schema.json",
+  "schema": "iat-b3-x-social-evidence-provider-readiness/v1",
+  "profile": "PRODUCTION",
+  "readiness": "BLOCKED",
+  "status": "NON_ACTIVATING_X_SOCIAL_EVIDENCE_REVIEW_PACKET",
+  "scope": {
+    "contract": "X_SOCIAL_EVIDENCE_REVIEW_PACKET_INPUTS_ONLY",
+    "doesNotCertify": [
+      "PROVIDER_OPERATIONAL_TRUTH",
+      "X_ACCOUNT_EQUALS_ONE_BIOLOGICAL_HUMAN",
+      "BIOLOGICAL_SYBIL_RESISTANCE",
+      "COLLECTOR_COMPLETENESS",
+      "RUNTIME_AUTHENTICATION",
+      "EXTERNAL_MONOTONICITY_OR_ROLLBACK_PROTECTION",
+      "MAINNET_OR_RELEASE_READINESS",
+      "ACTIVATION_PAYMENT_OR_MINT_AUTHORITY"
+    ]
+  },
+  "referenceContract": {
+    "rewardPolicySchema": "star-ascent-daily-rewards-policy/v2",
+    "rewardLedgerSchemaVersion": 2,
+    "rewardCapacityPolicySchema": "iat-b3-reward-capacity-waterfall/v1",
+    "dailyLawId": "IAT_B3_DAILY_LOCKDOWN_LAW_V1",
+    "oauthScopes": [
+      "users.read"
+    ],
+    "recognizedSubscriptionTypes": [
+      "None",
+      "Basic",
+      "Premium",
+      "PremiumPlus"
+    ],
+    "tenPercentSubscriptionTypes": [
+      "None",
+      "Basic"
+    ],
+    "fullRewardSubscriptionTypes": [
+      "Premium",
+      "PremiumPlus"
+    ],
+    "verifiedBooleanPayoutRole": "INFORMATIONAL_ONLY_NEVER_ELIGIBILITY_OR_AMOUNT_KEY",
+    "minimumXAccountAgeDays": 40,
+    "subscriptionObservationMaximumAgeHours": 24,
+    "qualifyingActions": [
+      "original",
+      "reply",
+      "quote",
+      "repost",
+      "like",
+      "follow"
+    ],
+    "actionAliases": {
+      "retweet": "repost"
+    },
+    "postActions": [
+      "original",
+      "reply",
+      "quote",
+      "repost"
+    ],
+    "collectorFirstObservedActions": [
+      "like",
+      "follow"
+    ],
+    "trancheBasisPoints": {
+      "X_BASE_10": 1000,
+      "X_PREMIUM_FULL_100": 10000,
+      "X_PREMIUM_UPGRADE_90": 9000
+    },
+    "rewardSourceKinds": [
+      "X_INTERACTION",
+      "GENESIS_AIRDROP"
+    ],
+    "upgradeProofRule": "SAME_X_ID_AND_WALLET_FRESH_LATER_PREMIUM_ACCEPTED_AFTER_ORIGINAL_ROUND_BEFORE_EXPIRY",
+    "upgradeDecisionBoundary": "NEXT_UTC_00:00_STRICTLY_AFTER_PROOF_ACCEPTANCE",
+    "dailyDecisionBoundary": "EXACT_UTC_00:00_ALL_OR_NULL_NO_BACKFILL",
+    "partialPaymentsAllowed": false,
+    "providerIntegrationPresent": false
+  },
+  "subjectBinding": {
+    "status": "BLOCKED",
+    "environment": "PRODUCTION",
+    "productionIdentityFreezeManifestSha256": null,
+    "productionCheckpointProviderReviewPacketSha256": null,
+    "productionDeploymentDomainSha256": null,
+    "productionPersistenceIdentitySha256": null,
+    "rewardPolicyArtifactSha256": null,
+    "rewardLedgerSchemaArtifactSha256": null,
+    "epochEngineArtifactSha256": null,
+    "rewardCapacityPolicySha256": null,
+    "dailyLawBindingSha256": null,
+    "actionEvidenceContractSha256": null,
+    "sourceLineageContractSha256": null,
+    "evidence": null,
+    "blocker": "The production identity, checkpoint, deployment, persistence, reward policy, ledger, engine, capacity, Daily Law, action evidence, and lineage subject digests are not jointly frozen."
+  },
+  "xProviderBinding": {
+    "status": "BLOCKED",
+    "environment": "PRODUCTION",
+    "oauthScopePolicySha256": null,
+    "termsSha256": null,
+    "rateLimitPolicySha256": null,
+    "paginationPolicySha256": null,
+    "tierObservationPolicySha256": null,
+    "providerLegalEntityId": null,
+    "developerProjectId": null,
+    "applicationId": null,
+    "apiProductId": null,
+    "apiVersion": null,
+    "oauthAuthorizationEndpointId": null,
+    "oauthTokenEndpointId": null,
+    "userLookupEndpointId": null,
+    "evidence": null,
+    "blocker": "No production X provider legal entity, developer project, application, API product and version, endpoints, scopes, terms, rate limits, pagination, or tier policy is frozen."
+  },
+  "walletAndIdentityBinding": {
+    "status": "BLOCKED",
+    "environment": "PRODUCTION",
+    "walletChallengeDomainSha256": null,
+    "countryEvidencePolicySha256": null,
+    "accountAgePolicySha256": null,
+    "identityUniquenessPolicySha256": null,
+    "tombstonePolicySha256": null,
+    "walletChallengeFormatId": null,
+    "walletVerifierServiceId": null,
+    "bindingStoreResourceId": null,
+    "identityTombstoneStoreResourceId": null,
+    "sybilClaimBoundary": "ONE_X_ID_ONE_WALLET_NOT_ONE_BIOLOGICAL_HUMAN",
+    "evidence": null,
+    "blocker": "The production wallet challenge, verifier, binding and tombstone stores, country and account-age evidence, and identity uniqueness policy are not frozen."
+  },
+  "collectorAndTargetBinding": {
+    "status": "BLOCKED",
+    "environment": "PRODUCTION",
+    "activityCollectionPolicySha256": null,
+    "campaignTargetRegistrySha256": null,
+    "finalizedSlotPolicySha256": null,
+    "completenessPolicySha256": null,
+    "replayPolicySha256": null,
+    "collectorServiceId": null,
+    "collectorResourceId": null,
+    "collectorRegionPolicyId": null,
+    "campaignTargetRegistryResourceId": null,
+    "finalizedSlotProviderId": null,
+    "replayStoreResourceId": null,
+    "evidence": null,
+    "blocker": "No production collector, campaign-target registry, finalized-slot provider, completeness policy, replay store, or region and failure-domain contract is frozen."
+  },
+  "receiptTrustBinding": {
+    "status": "BLOCKED",
+    "environment": "PRODUCTION",
+    "receiptDomainSha256": null,
+    "trustRootSha256": null,
+    "rotationPolicySha256": null,
+    "revocationPolicySha256": null,
+    "compromisePolicySha256": null,
+    "antiReplayPolicySha256": null,
+    "receiptFormatId": null,
+    "signatureAlgorithmId": null,
+    "keyRegistryResourceId": null,
+    "currentKeyId": null,
+    "evidence": null,
+    "blocker": "No production signed receipt format, domain, algorithm, trust root, key registry, active key, rotation, revocation, compromise, or anti-replay policy is frozen."
+  },
+  "privacyTermsAndRetention": {
+    "status": "BLOCKED",
+    "environment": "PRODUCTION",
+    "privacyPolicySha256": null,
+    "xTermsSha256": null,
+    "dataInventorySha256": null,
+    "retentionScheduleSha256": null,
+    "deletionAndAppealPolicySha256": null,
+    "tombstonePseudonymizationPolicySha256": null,
+    "incidentResponsePolicySha256": null,
+    "privacyPolicyVersion": null,
+    "xTermsVersion": null,
+    "evidence": null,
+    "blocker": "The production privacy and X terms versions, data inventory, retention, deletion and appeal, tombstone pseudonymization, and incident policies are not frozen."
+  },
+  "failureDomainSeparation": {
+    "status": "BLOCKED",
+    "environment": "PRODUCTION",
+    "xProviderFailureDomainId": null,
+    "collectorRuntimeFailureDomainId": null,
+    "finalizedSlotFailureDomainId": null,
+    "localPersistenceFailureDomainId": null,
+    "externalCheckpointFailureDomainId": null,
+    "administrativeFailureDomainId": null,
+    "credentialCustodyFailureDomainId": null,
+    "backupFailureDomainId": null,
+    "independentObserverFailureDomainId": null,
+    "independentReviewerFailureDomainId": null,
+    "separationRule": "X_PROVIDER_COLLECTOR_FINALITY_LOCAL_DB_CHECKPOINT_ADMIN_CREDENTIAL_BACKUP_OBSERVER_AND_REVIEWER_DOMAINS_ALL_DISTINCT",
+    "evidence": null,
+    "blocker": "The ten production X provider, collector, finality source, local persistence, external checkpoint, administration, credential, backup, independent observer, and independent reviewer failure domains are unidentified."
+  },
+  "controlRequirements": [
+    {
+      "id": "OAUTH_PKCE_IMMUTABLE_X_ID_AND_ACCOUNT_AGE",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "AUTHORIZATION_CODE_PKCE_EXACT_REDIRECT_AND_LEAST_SCOPE",
+        "AUTHENTICATED_CANONICAL_NUMERIC_X_USER_ID",
+        "PROVIDER_CREATED_AT_PROVES_AT_LEAST_40_FULL_DAYS_AT_ACCEPTANCE",
+        "TOKEN_CUSTODY_AND_DISCARD_RULES_ARE_ENFORCED",
+        "MISSING_UNKNOWN_MALFORMED_OR_PROVIDER_ERROR_FAILS_CLOSED"
+      ],
+      "evidence": null,
+      "blocker": "The production X OAuth application, API contract, account-age observation, token-custody procedure, and independent evidence are not frozen."
+    },
+    {
+      "id": "WALLET_ONE_TO_ONE_AND_TOMBSTONES",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "DOMAIN_SEPARATED_WALLET_CHALLENGE_BINDS_X_ID_WALLET_NONCE_AND_EXPIRY",
+        "SIGNATURE_IS_VERIFIED_BEFORE_IDENTITY_ACCEPTANCE",
+        "ONE_IMMUTABLE_X_ID_MAPS_TO_ONE_WALLET_AND_ONE_WALLET_TO_ONE_X_ID",
+        "REBINDING_AND_REPLAY_TOMBSTONES_ARE_APPEND_ONLY",
+        "BIOLOGICAL_ONE_HUMAN_OR_STRONG_SYBIL_RESISTANCE_IS_NOT_CLAIMED"
+      ],
+      "evidence": null,
+      "blocker": "The production wallet challenge, verifier, one-to-one registry, tombstone persistence, and narrow Sybil claim have not been independently reviewed."
+    },
+    {
+      "id": "TIER_OBSERVATION_FRESHNESS_AND_ACCEPTANCE_TIMING",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "EXACT_SUBSCRIPTION_TYPE_IS_PROVIDER_OBSERVED_AND_RECEIPT_BOUND",
+        "ONLY_NONE_BASIC_PREMIUM_AND_PREMIUMPLUS_ARE_ADMITTED",
+        "OBSERVATION_IS_AT_MOST_24_HOURS_OLD_AT_EXACT_DECISION_ACCEPTANCE",
+        "VERIFIED_BOOLEAN_IS_INFORMATIONAL_ONLY",
+        "STALE_MISSING_UNKNOWN_OR_FAILED_TIER_OBSERVATION_FAILS_CLOSED"
+      ],
+      "evidence": null,
+      "blocker": "No authenticated production tier-observation receipt proves exact subscription type and freshness at the exact reward decision acceptance time."
+    },
+    {
+      "id": "EXACT_TEN_NINETY_FULL_AND_UPGRADE_RULES",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "NONE_OR_BASIC_MAPS_TO_ATOMIC_X_BASE_10_AND_UNRESERVED_X_PREMIUM_UPGRADE_90",
+        "PREMIUM_OR_PREMIUMPLUS_MAPS_TO_ATOMIC_X_PREMIUM_FULL_100_ONLY",
+        "UPGRADE_REQUIRES_SAME_X_ID_WALLET_AUTHENTICATED_BASE_ADMISSION_AND_FRESH_LATER_PREMIUM",
+        "UPGRADE_IS_ACCEPTED_AFTER_ORIGINAL_ROUND_BEFORE_EXPIRY_AND_DECIDED_NEXT_UTC_MIDNIGHT",
+        "NO_PARTIAL_PAYMENT_DEBT_RETRY_OR_BACKFILL_IS_ALLOWED"
+      ],
+      "evidence": null,
+      "blocker": "The production evidence bridge has not proved exact tier-to-tranche mapping, authenticated original admission, upgrade timing, expiry, and null semantics."
+    },
+    {
+      "id": "SIX_ACTIONS_AND_RETWEET_NORMALIZATION",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "ONLY_ORIGINAL_REPLY_QUOTE_REPOST_LIKE_AND_FOLLOW_QUALIFY",
+        "RETWEET_NORMALIZES_TO_REPOST_BEFORE_HASH_KEY_REPLAY_AND_SELECTION",
+        "ONE_NODE_HAS_AT_MOST_ONE_DAILY_REWARD_CANDIDATE",
+        "PRIVATE_OR_UNATTRIBUTABLE_ACTIONS_FAIL_CLOSED"
+      ],
+      "evidence": null,
+      "blocker": "No production collector contract proves the exact six-action taxonomy, retweet normalization, one-reward limit, and fail-closed exclusions."
+    },
+    {
+      "id": "POST_ACTION_PROVIDER_EVIDENCE",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "ORIGINAL_REPLY_QUOTE_AND_REPOST_BIND_CANONICAL_NUMERIC_POST_ID",
+        "PROVIDER_CREATED_AT_IS_INSIDE_THE_CLOSED_UTC_EPOCH",
+        "ACTOR_X_ID_EQUALS_THE_IMMUTABLY_BOUND_X_ID",
+        "DELETED_UNAVAILABLE_OR_UNATTRIBUTABLE_POST_EVIDENCE_FAILS_CLOSED"
+      ],
+      "evidence": null,
+      "blocker": "No authenticated production receipt binds post IDs, provider creation times, actors, availability, and the exact closed epoch."
+    },
+    {
+      "id": "LIKE_FOLLOW_FIRST_OBSERVED_FINALITY",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "CALLER_ACTION_ID_AND_OCCURRENCE_TIMESTAMP_ARE_FORBIDDEN",
+        "SYNTHETIC_ID_BINDS_ACTION_ACTOR_AND_CANONICAL_TARGET",
+        "FIRST_OBSERVED_TIME_IS_INSIDE_THE_CLOSED_EPOCH",
+        "ACTIVITY_SLOT_EQUALS_APPEND_ONLY_FIRST_OBSERVED_FINALIZED_SOLANA_SLOT",
+        "UNLIKE_UNFOLLOW_CURSOR_GAP_AND_OUTAGE_AMBIGUITY_FAIL_CLOSED"
+      ],
+      "evidence": null,
+      "blocker": "No append-only production observer proves like and follow first observation, finalized-slot chronology, synthetic identity, or ambiguity handling."
+    },
+    {
+      "id": "CAMPAIGN_TARGET_AUTHORITY",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "IMMUTABLE_TARGET_REGISTRY_BINDS_NUMERIC_ACCOUNT_OR_POST_ID_KIND_AND_VALIDITY_WINDOW",
+        "ACTION_BINDS_EXACT_TARGET_EVIDENCE_DIGEST_AND_REGISTRY_REVISION",
+        "UNBOUND_EXPIRED_FORKED_OR_MUTATED_TARGETS_FAIL_CLOSED"
+      ],
+      "evidence": null,
+      "blocker": "The production campaign-target registry, authority, validity windows, revision commitment, and independent evidence are not frozen."
+    },
+    {
+      "id": "COLLECTOR_COMPLETENESS_PAGINATION_AND_REPLAY",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "EVERY_ACTION_SOURCE_HAS_PINNED_API_VERSION_CURSOR_AND_PAGINATION_SEMANTICS",
+        "RATE_LIMIT_PAGE_GAP_PARTIAL_WINDOW_AND_PROVIDER_OUTAGE_FAIL_CLOSED",
+        "CANONICAL_ACTION_KEYS_ARE_GLOBALLY_APPEND_ONLY_AND_REPLAY_UNIQUE",
+        "COMPLETE_CLOSED_EPOCH_SNAPSHOT_IS_CONTENT_ADDRESSED_AND_INDEPENDENTLY_OBSERVED"
+      ],
+      "evidence": null,
+      "blocker": "No production collector proves cursor completeness, rate-limit and outage closure, global replay uniqueness, or complete closed-epoch snapshots."
+    },
+    {
+      "id": "GENESIS_FIRST_1000_COMPLETE_REGISTRY",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "GENESIS_BINDS_COMPLETE_AUTHENTICATED_FIRST_1000_REGISTRY_SNAPSHOT",
+        "RESERVATION_SEQUENCE_IS_CONTIGUOUS_IMMUTABLE_AND_NOT_ARRAY_POSITION",
+        "LEGACY_PREMIUM_ONLY_STATE_HAS_REVIEWED_MIGRATION_OR_EXPLICIT_REJECTION",
+        "OMITTED_DUPLICATE_REBOUND_OR_LATE_RESERVATION_FAILS_CLOSED"
+      ],
+      "evidence": null,
+      "blocker": "The production Genesis first-1000 registry, legacy Premium-only reconciliation, complete snapshot proof, and migration decision are unresolved."
+    },
+    {
+      "id": "AUTHENTICATED_RECEIPTS_AND_KEY_LIFECYCLE",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "VERSIONED_DOMAIN_SEPARATED_RECEIPT_BINDS_REQUEST_RESPONSE_SUBJECT_AND_ENVIRONMENT",
+        "SIGNATURE_TRUST_ROOT_KEY_ID_AND_ANTI_REPLAY_STATE_ARE_VERIFIED",
+        "RECEIPT_SEQUENCE_NEVER_DECREASES_AND_SAME_SEQUENCE_DIFFERENT_DIGEST_IS_REJECTED",
+        "ROTATION_HAS_BOUNDED_OVERLAP_AND_EXPLICIT_ACTIVATION_SEQUENCE",
+        "REVOCATION_AND_COMPROMISE_CUTOFF_FAIL_CLOSED",
+        "SIGNING_CREDENTIALS_ARE_ISOLATED_FROM_PROVIDER_RUNTIME_ADMIN_AND_BACKUP_DOMAINS",
+        "CALLER_BOOLEANS_OR_SELF_ATTESTATION_NEVER_AUTHENTICATE_EVIDENCE"
+      ],
+      "evidence": null,
+      "blocker": "No production receipt format, signature algorithm, trust root, key registry, rotation, revocation, compromise cutoff, or anti-replay evidence is frozen."
+    },
+    {
+      "id": "OUTAGE_RATE_LIMIT_AND_UNCERTAIN_RESPONSE",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "PROVIDER_OR_COLLECTOR_ERROR_NEVER_COERCES_TO_NONE_BASIC_OR_QUALIFYING_ACTION",
+        "UNCERTAIN_WRITE_RESPONSE_RECONCILES_ONLY_BY_EXACT_AUTHENTICATED_READBACK",
+        "ALTERNATE_OR_STALE_RETRY_IS_REJECTED_WITHOUT_DUPLICATION",
+        "MISSED_UTC_BOUNDARY_IS_NULL_WITH_NO_LATE_BACKFILL"
+      ],
+      "evidence": null,
+      "blocker": "No production outage, rate-limit, partial response, uncertain response, retry, and missed-boundary rehearsal evidence has been accepted."
+    },
+    {
+      "id": "PRIVACY_TERMS_RETENTION_AND_ERASURE",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "DATA_INVENTORY_AND_LEAST_SCOPE_BIND_EVERY_COLLECTED_FIELD_AND_PURPOSE",
+        "X_TERMS_PRIVACY_AND_API_POLICY_VERSIONS_ARE_PINNED_AND_REVIEWED",
+        "TOKEN_RECEIPT_ACTION_AND_AUDIT_RETENTION_WINDOWS_ARE_EXACT",
+        "DELETION_APPEAL_AND_INCIDENT_PATHS_PRESERVE_NON_REBINDING_WITHOUT_UNNECESSARY_PII",
+        "TOMBSTONE_PSEUDONYMIZATION_AND_LEGAL_BASIS_ARE_INDEPENDENTLY_REVIEWED"
+      ],
+      "evidence": null,
+      "blocker": "The production data inventory, X terms, privacy, retention, erasure, appeal, incident, and tombstone pseudonymization rules are unresolved."
+    },
+    {
+      "id": "BACKUP_RESTORE_DR_AND_ROLLBACK_DETECTION",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "CLOSED_DATABASE_COPY_RESTORE_AND_BACKUP_API_RESTORE_DRILLS_ARE_EVIDENCED",
+        "PROVIDER_OUTAGE_AND_COLLECTOR_RECOVERY_DRILLS_FAIL_CLOSED",
+        "SINK_OR_LOCAL_ROLLBACK_AND_FORK_ARE_EXTERNALLY_DETECTED",
+        "EXTERNAL_CHECKPOINT_ADVANCES_EXACTLY_ONE_RETAINED_LOCAL_COMMIT_WITH_NO_SKIP_OR_FORK",
+        "NO_EXTERNAL_CHECKPOINT_REWIND_OR_UNAUTHENTICATED_RESEED_IS_ALLOWED"
+      ],
+      "evidence": null,
+      "blocker": "No production backup, closed-copy restore, provider outage, disaster-recovery, sink rollback, fork, and external checkpoint drill evidence exists."
+    },
+    {
+      "id": "DAILY_LAW_FIRST_AND_CONSUMER_GATING",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "EVERY_EVIDENCE_WRITE_OR_PREPARATION_CHECKS_DAILY_LAW_BEFORE_PROVIDER_STORE_OR_CALLER_DATA",
+        "EVERY_ACCEPTED_EVIDENCE_RECEIPT_BINDS_THE_EXACT_LOCAL_CAS_HEAD",
+        "UNANCHORED_OR_UNAUTHENTICATED_STATE_BLOCKS_THE_NEXT_LOCAL_REWARD_WRITE",
+        "UNANCHORED_OR_UNAUTHENTICATED_STATE_BLOCKS_GENESIS_DAILY_UPGRADE_ALLOCATOR_CAS_AND_ALL_DOWNSTREAM_CONSUMERS",
+        "LOCKED_OR_UNFINALIZED_DAILY_LAW_STATE_CANNOT_ADVANCE_CURSOR_RECEIPT_TOMBSTONE_OR_REWARD_STATE"
+      ],
+      "evidence": null,
+      "blocker": "The legacy OAuth and v2 blueprint paths do not provide a reviewed production Daily-Law-first gate for every write and downstream consumer."
+    },
+    {
+      "id": "SOURCE_KIND_LINEAGE_ALLOCATOR_AND_PERSISTENCE",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "BUILDER_SCHEMA_DERIVES_GENESIS_AIRDROP_OR_X_INTERACTION_SOURCE_KIND",
+        "CALLER_CANNOT_SELECT_SOURCE_TRANCHE_AMOUNT_CLASS_PRIORITY_OR_LINEAGE",
+        "UPGRADE_BINDS_AUTHENTICATED_ORIGINAL_BASE_ADMISSION_RECEIPT_AND_EXACT_DESCENDANT_LINEAGE",
+        "COMPLETE_CROSS_CLASS_DUE_SET_ALLOCATOR_RECEIPT_AND_CAS_HEAD_ARE_ATOMICALLY_PERSISTED",
+        "SOURCE_CHRONOLOGY_FINALIZED_SLOT_AND_TARGET_EVIDENCE_SURVIVE_REOPEN_AND_REPLAY"
+      ],
+      "evidence": null,
+      "blocker": "No production adapter authenticates source kind and chronology, complete due-set lineage, original admission, allocator receipts, or persistent CAS ancestry."
+    },
+    {
+      "id": "INDEPENDENT_AUDIT_AND_PRODUCTION_REVIEW",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "EVERY_REQUIRED_CONTROL_HAS_CONTENT_ADDRESSED_SUBJECT_AND_POLICY_BOUND_EVIDENCE",
+        "OBSERVER_AND_REVIEWER_IDENTITIES_ARE_DISTINCT_FROM_PROVIDER_RUNTIME_ADMIN_CREDENTIAL_AND_BACKUP_DOMAINS",
+        "DECLARED_EVIDENCE_INTERVAL_IS_BOUNDED_AND_CONTAINS_EXPLICIT_EVALUATION_TIME",
+        "STRUCTURAL_PACKET_COMPLETENESS_DOES_NOT_CERTIFY_PROVIDER_TRUTH_AUTHENTICATION_SYBIL_RESISTANCE_OR_LAUNCH_READINESS"
+      ],
+      "evidence": null,
+      "blocker": "The production packet lacks independent content-addressed evidence, observer and reviewer identity, freshness evaluation, and final review artifacts."
+    }
+  ],
+  "terminalPredicate": {
+    "status": "BLOCKED",
+    "requiredSections": [
+      "SUBJECT_BINDING",
+      "X_PROVIDER_BINDING",
+      "WALLET_AND_IDENTITY_BINDING",
+      "COLLECTOR_AND_TARGET_BINDING",
+      "RECEIPT_TRUST_BINDING",
+      "PRIVACY_TERMS_AND_RETENTION",
+      "FAILURE_DOMAIN_SEPARATION",
+      "OAUTH_PKCE_IMMUTABLE_X_ID_AND_ACCOUNT_AGE",
+      "WALLET_ONE_TO_ONE_AND_TOMBSTONES",
+      "TIER_OBSERVATION_FRESHNESS_AND_ACCEPTANCE_TIMING",
+      "EXACT_TEN_NINETY_FULL_AND_UPGRADE_RULES",
+      "SIX_ACTIONS_AND_RETWEET_NORMALIZATION",
+      "POST_ACTION_PROVIDER_EVIDENCE",
+      "LIKE_FOLLOW_FIRST_OBSERVED_FINALITY",
+      "CAMPAIGN_TARGET_AUTHORITY",
+      "COLLECTOR_COMPLETENESS_PAGINATION_AND_REPLAY",
+      "GENESIS_FIRST_1000_COMPLETE_REGISTRY",
+      "AUTHENTICATED_RECEIPTS_AND_KEY_LIFECYCLE",
+      "OUTAGE_RATE_LIMIT_AND_UNCERTAIN_RESPONSE",
+      "PRIVACY_TERMS_RETENTION_AND_ERASURE",
+      "BACKUP_RESTORE_DR_AND_ROLLBACK_DETECTION",
+      "DAILY_LAW_FIRST_AND_CONSUMER_GATING",
+      "SOURCE_KIND_LINEAGE_ALLOCATOR_AND_PERSISTENCE",
+      "INDEPENDENT_AUDIT_AND_PRODUCTION_REVIEW"
+    ],
+    "evaluationRule": "ALL_REQUIRED_PACKETS_COMPLETE_ZERO_VIOLATIONS_ZERO_BLOCKERS",
+    "blocker": "The production subject, provider, wallet, collector, receipt trust, privacy, failure-domain, control, and independent review packets remain incomplete."
+  },
+  "providerEvidenceAuthenticationVerified": false,
+  "collectorCompletenessVerified": false,
+  "walletBindingAuthenticationVerified": false,
+  "allocatorLineageAuthenticationVerified": false,
+  "externalMonotonicityVerified": false,
+  "rollbackProtectionVerified": false,
+  "runtimeConsumerGatingVerified": false,
+  "activationReady": false,
+  "mainnetOrReleaseReady": false,
+  "mainnetStatus": "HOLD"
+}

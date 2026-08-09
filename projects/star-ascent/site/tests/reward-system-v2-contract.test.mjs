@@ -55,6 +55,11 @@ import {
   PROVIDER_READINESS_MAINNET_STATUS,
   PROVIDER_READINESS_STATUS,
 } from "../scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs";
+import {
+  X_SOCIAL_EVIDENCE_MAINNET_STATUS,
+  X_SOCIAL_EVIDENCE_READINESS_STATUS,
+  X_SOCIAL_EVIDENCE_REFERENCE_CONTRACT,
+} from "../scripts/validate-iat-b3-x-social-evidence-provider-readiness.mjs";
 import { sha256CanonicalJson } from "../scripts/iat-v2-canonical-json.mjs";
 
 const SITE = fileURLToPath(new URL("../", import.meta.url));
@@ -97,6 +102,23 @@ const PROVIDER_READINESS_VALIDATOR_PATH = join(
   "scripts",
   "validate-iat-b3-external-checkpoint-provider-readiness.mjs",
 );
+const X_SOCIAL_EVIDENCE_MANIFEST_PATH = join(
+  SITE,
+  "docs",
+  "b3",
+  "iat-b3-x-social-evidence-provider-readiness.v1.json",
+);
+const X_SOCIAL_EVIDENCE_BOUNDARY_PATH = join(
+  SITE,
+  "docs",
+  "b3",
+  "X_SOCIAL_EVIDENCE_PROVIDER_READINESS.md",
+);
+const X_SOCIAL_EVIDENCE_VALIDATOR_PATH = join(
+  SITE,
+  "scripts",
+  "validate-iat-b3-x-social-evidence-provider-readiness.mjs",
+);
 
 const offchainPolicy = JSON.parse(readFileSync(POLICY_PATH, "utf8"));
 const capacityPolicy = JSON.parse(readFileSync(CAPACITY_POLICY_PATH, "utf8"));
@@ -113,6 +135,9 @@ const casBoundarySource = readFileSync(CAS_BOUNDARY_PATH, "utf8");
 const providerReadinessManifest = JSON.parse(readFileSync(PROVIDER_READINESS_MANIFEST_PATH, "utf8"));
 const providerReadinessBoundarySource = readFileSync(PROVIDER_READINESS_BOUNDARY_PATH, "utf8");
 const providerReadinessValidatorSource = readFileSync(PROVIDER_READINESS_VALIDATOR_PATH, "utf8");
+const xSocialEvidenceManifest = JSON.parse(readFileSync(X_SOCIAL_EVIDENCE_MANIFEST_PATH, "utf8"));
+const xSocialEvidenceBoundarySource = readFileSync(X_SOCIAL_EVIDENCE_BOUNDARY_PATH, "utf8");
+const xSocialEvidenceValidatorSource = readFileSync(X_SOCIAL_EVIDENCE_VALIDATOR_PATH, "utf8");
 
 const EXACT_TRANCHE_KINDS = ["X_BASE_10", "X_PREMIUM_FULL_100", "X_PREMIUM_UPGRADE_90"];
 const EXACT_TRANCHE_BASIS_POINTS = {
@@ -740,6 +765,43 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   assert.equal(providerReadinessManifest.rollbackProtectionVerified, false);
   assert.equal(providerReadinessManifest.activationReady, false);
   assert.equal(providerReadinessManifest.mainnetStatus, "HOLD");
+  assert.equal(
+    X_SOCIAL_EVIDENCE_READINESS_STATUS,
+    "NON_ACTIVATING_X_SOCIAL_EVIDENCE_REVIEW_PACKET",
+  );
+  assert.equal(X_SOCIAL_EVIDENCE_MAINNET_STATUS, "HOLD");
+  assert.equal(xSocialEvidenceManifest.profile, "PRODUCTION");
+  assert.equal(xSocialEvidenceManifest.readiness, "BLOCKED");
+  assert.equal(xSocialEvidenceManifest.xProviderBinding.applicationId, null);
+  assert.equal(xSocialEvidenceManifest.collectorAndTargetBinding.collectorResourceId, null);
+  assert.equal(xSocialEvidenceManifest.receiptTrustBinding.trustRootSha256, null);
+  assert.equal(xSocialEvidenceManifest.providerEvidenceAuthenticationVerified, false);
+  assert.equal(xSocialEvidenceManifest.collectorCompletenessVerified, false);
+  assert.equal(xSocialEvidenceManifest.walletBindingAuthenticationVerified, false);
+  assert.equal(xSocialEvidenceManifest.allocatorLineageAuthenticationVerified, false);
+  assert.equal(xSocialEvidenceManifest.externalMonotonicityVerified, false);
+  assert.equal(xSocialEvidenceManifest.rollbackProtectionVerified, false);
+  assert.equal(xSocialEvidenceManifest.runtimeConsumerGatingVerified, false);
+  assert.equal(xSocialEvidenceManifest.activationReady, false);
+  assert.equal(xSocialEvidenceManifest.mainnetOrReleaseReady, false);
+  assert.equal(xSocialEvidenceManifest.mainnetStatus, "HOLD");
+  assert.deepEqual(
+    X_SOCIAL_EVIDENCE_REFERENCE_CONTRACT.recognizedSubscriptionTypes,
+    offchainPolicy.identityModel.recognizedSubscriptionTypes,
+  );
+  assert.deepEqual(
+    X_SOCIAL_EVIDENCE_REFERENCE_CONTRACT.qualifyingActions,
+    offchainPolicy.daily.qualifyingActions,
+  );
+  assert.deepEqual(X_SOCIAL_EVIDENCE_REFERENCE_CONTRACT.actionAliases, { retweet: "repost" });
+  assert.deepEqual(
+    X_SOCIAL_EVIDENCE_REFERENCE_CONTRACT.trancheBasisPoints,
+    offchainPolicy.payoutTiers.trancheBasisPoints,
+  );
+  assert.deepEqual(
+    X_SOCIAL_EVIDENCE_REFERENCE_CONTRACT.rewardSourceKinds,
+    offchainPolicy.payoutTiers.rewardSourceKinds,
+  );
   assert.equal(REWARD_CAS_EXTERNAL_NAMESPACE, "IAT_B3_REWARD_CAS_EXTERNAL_CHECKPOINT_REFERENCE_V1");
   assert.equal(
     REWARD_CAS_EXTERNAL_TRUST_POLICY,
@@ -780,6 +842,16 @@ test("the ledger and allocator remain static reference artifacts with no runtime
     providerReadinessValidatorSource,
     /node:http|node:https|fetch\(|AccountInfo|invoke\(|createSqliteRewardPersistenceCas/u,
   );
+  assert.match(xSocialEvidenceValidatorSource, /xSocialEvidenceReviewPacketComplete/u);
+  assert.match(xSocialEvidenceValidatorSource, /productionXSocialEvidenceReviewPacketComplete/u);
+  assert.doesNotMatch(
+    xSocialEvidenceValidatorSource,
+    /providerReadinessReady|providerVerified|productionReady|mainnetReady/u,
+  );
+  assert.doesNotMatch(
+    xSocialEvidenceValidatorSource,
+    /node:http|node:https|fetch\(|AccountInfo|invoke\(|createSqliteRewardPersistenceCas/u,
+  );
   assert.match(casBoundarySource, /rollbackProtectionVerified` remains `false`/u);
   assert.match(casBoundarySource, /provider-neutral external checkpoint protocol/iu);
   assert.match(casBoundarySource, /provides no\s+cross-system atomicity/iu);
@@ -787,6 +859,10 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   assert.match(providerReadinessBoundarySource, /not a\s+provider integration/iu);
   assert.match(providerReadinessBoundarySource, /`productionReviewPacketComplete` additionally\s+requires the `PRODUCTION` profile/iu);
   assert.match(providerReadinessBoundarySource, /mainnetOrReleaseReady: false/u);
+  assert.match(xSocialEvidenceBoundarySource, /not an X API integration/iu);
+  assert.match(xSocialEvidenceBoundarySource, /one biological human/iu);
+  assert.match(xSocialEvidenceBoundarySource, /all operational truth flags remain false/iu);
+  assert.match(xSocialEvidenceBoundarySource, /Premium-only V1 HOLD path/iu);
   assert.match(epochEngineSource, /const DAILY_HOLD = "HOLD_PENDING_GLOBAL_REWARD_WATERFALL"/u);
   assert.doesNotMatch(epochEngineSource, /reward-capacity-waterfall|reward-ledger\.v2/u);
   assert.match(capacityReferenceSource, /status: "NON_ACTIVATING_REFERENCE_RECEIPT"/u);
@@ -822,7 +898,7 @@ test("the ledger and allocator remain static reference artifacts with no runtime
     join("programs", "iat_b3_vault"),
     join("programs", "iat_v2"),
   ];
-  const forbiddenRuntimeWiring = /iat_b3_reference|reward-capacity-waterfall|reward-ledger\.v2|reward_v2_|engagement[\\/]epoch-engine|engagement[\\/]reward-policy\.v1/u;
+  const forbiddenRuntimeWiring = /iat_b3_reference|reward-capacity-waterfall|reward-ledger\.v2|reward_v2_|engagement[\\/]epoch-engine|engagement[\\/]reward-policy\.v1|x-social-evidence-provider-readiness/u;
   for (const root of runtimeRoots) {
     const runtimeRoot = join(SITE, root);
     if (!existsSync(runtimeRoot)) continue;
