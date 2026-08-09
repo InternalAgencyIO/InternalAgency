@@ -1,0 +1,563 @@
+{
+  "batch": 293,
+  "country": "Romania",
+  "status": "blocked-no-accepted-assets",
+  "sourceCommit": "115866dd850f9d52da85d38a23ea4ebad402ee26",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch293-romania keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "nurse-care couture",
+    "doctor-clinical-command couture"
+  ],
+  "nextThemePair": [
+    "doctor-clinical-command couture",
+    "adult nightlife dance-performance couture"
+  ],
+  "nextQueueCountry": "San Marino",
+  "researchSources": [
+    {
+      "url": "https://filarmonicaenescu.ro/en/filarmonica",
+      "usedFor": "Romanian Athenaeum as Bucharest's secular concert-hall landmark and music-culture setting"
+    },
+    {
+      "url": "https://turism.sibiu.ro/en/detalii/180",
+      "usedFor": "Sibiu Bridge of Lies ironwork and its relationship to the Large Square"
+    },
+    {
+      "url": "https://ich.unesco.org/en/RL/craftsmanship-of-horezu-ceramics-00610",
+      "usedFor": "Horezu red-clay pottery craft, painted spirals, waves, and rooster motif"
+    },
+    {
+      "url": "https://visitromania.ro/en/region/transilvania",
+      "usedFor": "Transfagarasan switchbacks through the Fagaras Mountains and Balea Lake context"
+    },
+    {
+      "url": "https://visit-delta.ro/en/natural-attractions/flora-and-fauna/",
+      "usedFor": "Danube Delta reeds, water lilies, fish, and pelican fauna"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch293-romania-male-model-scene",
+    "fullHash": 3204347728,
+    "roll": 28,
+    "selectedScenePosition": 1,
+    "selectedScene": 1192,
+    "maleEmotion": {
+      "key": "batch293-romania-scene1-male-emotion",
+      "roll": 27,
+      "result": "hope",
+      "performance": "quiet hope carried by his strongest sustained eye line to his wife ECE"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Romania's vertical blue, yellow, and red tricolor contains no suitable secular motif. Use recognizable non-official architecture, engineering, music, craft, food, landscape, flora, and fauna instead.",
+    "palette": "Romanian cobalt blue, sunflower yellow, and lacquer red expanded with Athenaeum limestone, Horezu clay, Carpathian fir green, wet asphalt black, Danube reed gold, and delta-water teal.",
+    "fallbackMotifs": [
+      "Romanian Athenaeum dome, fluted concert-hall columns, violin sound holes, music staves, and Calea Victoriei paving",
+      "Sibiu roof-eye dormers, Bridge of Lies iron lattice, colorful Large Square facades, and Horezu pottery spirals",
+      "Transfagarasan switchback curves, Balea Lake contours, Carpathian firs, road engineering, and brown-bear silhouettes",
+      "Danube Delta pelicans, reed channels, water lilies, fish scales, narrow boats, and branching water maps"
+    ],
+    "minimumCoverage": "Every scene renders large complete secular Romania motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScene": "Scene 1193 includes an unattended dry display of Horezu ceramic plates and bowls plus covered sarmale and mamaliga dishes, separated from the prop and wet walkway.",
+    "prohibitions": "No literal flag, coat of arms, official emblem, sacred symbol, political insignia, copied folk costume, copied medical uniform, badge, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch293-romania-x-heart",
+      "roll": 1,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch293-romania-x-internalagency",
+      "roll": 97,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch293-romania-x-worldxxxseries",
+      "roll": 14,
+      "active": true
+    }
+  },
+  "anatomyGate": {
+    "fourAdultScenes": "Exactly four adults, eight arms, and eight hands with one continuously traceable owner per limb.",
+    "maleScene": "Exactly five adults, ten arms, and ten hands. The male replaces nobody.",
+    "automaticRejects": "Reject every extra, duplicated, floating, fused, borrowed, emerging, hidden-owner, or ambiguous limb or finger cluster, malformed face, incomplete shoe, or untraceable contact."
+  },
+  "scenePlans": {
+    "1192": {
+      "theme": "nurse-care couture",
+      "landmark": "Romanian Athenaeum esplanade in Bucharest with its round dome and concert-hall columns",
+      "motifs": [
+        "large complete Athenaeum dome, fluted column, and music-staff fields across Radiance and Ellie",
+        "large complete violin-curve, Calea Victoriei paving, and concert-light panels across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch293-romania-scene1192-weather",
+        "roll": 84,
+        "result": "sunshower with sparkling droplets"
+      },
+      "paws": {
+        "key": "batch293-romania-scene1192-paws",
+        "roll": 25,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch293-romania-scene1192-poleDanceTheme",
+        "roll": 30,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch293-romania-scene1192-rainbowOnly",
+        "roll": 68,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch293-romania-scene1192-rainbowHosiery",
+        "roll": 3,
+        "active": true,
+        "wearerKey": "batch293-romania-scene1192-rainbowHosieryWearer",
+        "wearerRoll": 55,
+        "wearer": "AI ECE",
+        "paletteModeKey": "batch293-romania-scene1192-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 73,
+        "paletteMode": "original independent rainbow gradient",
+        "style": "opaque original-spectrum prismatic knee socks with diagonal color sweeps, unrelated to Romania's palette",
+        "loveCenter": "Radiance and ECE remain linked hand-to-hand and waist-to-waist as the unmistakable affectionate center.",
+        "propTransfer": "Alia is the sole inert mission-prop handler; ECE controls only the separate holographic map."
+      },
+      "romanceBeat": {
+        "key": "batch293-romania-scene1192-romanceBeat",
+        "roll": 89,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder.",
+        "materializedResult": "Ellie and Alia hold opposite ends of one route ribbon while Radiance and ECE form the close reassurance center; the male holds Ellie while his gaze returns to ECE."
+      },
+      "compoundLoveBeat": {
+        "key": "batch293-romania-scene1192-compoundLoveBeat",
+        "roll": 21,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance.",
+        "materializedResult": "The active hosiery and male-scene constraints transform the beat into Radiance and ECE's linked close embrace, Ellie's overt waist-and-chest flirtation with the male, and Alia's possessive ribbon challenge while handling the prop."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch293-romania-scene1192-Radiance-emotion", "roll": 77, "result": "contained resentment" },
+          "visibleMidriff": { "key": "batch293-romania-scene1192-Radiance-visibleMidriff", "roll": 21, "active": true },
+          "straplessDress": { "key": "batch293-romania-scene1192-Radiance-straplessDress", "roll": 30, "active": true },
+          "fullyOpenBack": { "key": "batch293-romania-scene1192-Radiance-fullyOpenBack", "roll": 83, "active": false },
+          "outfit": "strapless sunflower-yellow sculpted cropped nurse-care bodice with completely bare shoulders and visible ordinary belly button, cobalt asymmetric mini skirt carrying a large complete Athenaeum dome and music-staff field, and lacquer-red architectural pumps"
+        },
+        "Ellie": {
+          "emotion": { "key": "batch293-romania-scene1192-Ellie-emotion", "roll": 37, "result": "magnetic confidence" },
+          "visibleMidriff": { "key": "batch293-romania-scene1192-Ellie-visibleMidriff", "roll": 5, "active": true },
+          "straplessDress": { "key": "batch293-romania-scene1192-Ellie-straplessDress", "roll": 94, "active": false },
+          "fullyOpenBack": { "key": "batch293-romania-scene1192-Ellie-fullyOpenBack", "roll": 75, "active": false },
+          "outfit": "cobalt wrap-front cropped nurse-care top exposing her ordinary waist and belly button, red high-waist tailored shorts with complete fluted-column and Calea Victoriei paving panels, and yellow slingback heels"
+        },
+        "Alia": {
+          "emotion": { "key": "batch293-romania-scene1192-Alia-emotion", "roll": 67, "result": "possessive tension" },
+          "visibleMidriff": { "key": "batch293-romania-scene1192-Alia-visibleMidriff", "roll": 19, "active": true },
+          "straplessDress": { "key": "batch293-romania-scene1192-Alia-straplessDress", "roll": 36, "active": false },
+          "fullyOpenBack": { "key": "batch293-romania-scene1192-Alia-fullyOpenBack", "roll": 93, "active": false },
+          "outfit": "red one-shoulder cropped nurse-care peplum exposing her ordinary waist and belly button, yellow short tulip skirt with large complete violin sound-hole and concert-light fields, and cobalt platform sandals"
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch293-romania-scene1192-AI ECE-emotion", "roll": 45, "result": "awe" },
+          "visibleMidriff": { "key": "batch293-romania-scene1192-AI ECE-visibleMidriff", "roll": 21, "active": true },
+          "straplessDress": { "key": "batch293-romania-scene1192-AI ECE-straplessDress", "roll": 90, "active": false },
+          "fullyOpenBack": { "key": "batch293-romania-scene1192-AI ECE-fullyOpenBack", "roll": 35, "active": false },
+          "outfit": "cobalt-red asymmetric cropped nurse-care top exposing her ordinary waist and belly button, concise yellow column mini with complete paving-wave and music-arc fields, original-spectrum opaque prismatic knee socks, and white stiletto ankle boots"
+        },
+        "male": {
+          "emotion": { "key": "batch293-romania-scene1-male-emotion", "roll": 27, "result": "hope" },
+          "outfit": "the established Scene 1136 adult male in a fitted opaque cobalt short-sleeve polo with restrained yellow-red piping, black jeans, and practical black boots"
+        }
+      },
+      "maleLoveBeat": "The male's right hand holds Ellie at the waist while Ellie presses her right hand to his chest. Radiance reaches for his bicep, his left hand touches ECE's forearm, and his strongest sustained gaze remains on his wife ECE.",
+      "propBeat": "Alia alone holds one full-size polished rainbow-gradient inert Desert Eagle-style mission prop in her right hand, strict side profile, muzzle beyond every person toward a clearly empty esplanade route marker. Her straight right index finger lies visibly high along the frame outside the guard. ECE's free left hand alone controls a separate floating Bucharest route map.",
+      "handInventory": "Exactly ten hands: Alia right on prop and left on one end of the route ribbon; Ellie left on the other ribbon end and right on the male's chest; male right at Ellie's waist and left on ECE's forearm; Radiance left at ECE's waist and right on the male's bicep; ECE right linked with Radiance and left on the map. Every wrist and elbow remains visible and traceable.",
+      "renderPrompt": "Create one photorealistic 9:16 full-length cinematic fashion editorial on the Romanian Athenaeum esplanade in Bucharest during a sunshower with sparkling droplets. Show exactly five clearly adult fictional people: anchored Radiance, Ellie, Alia, AI ECE, plus the established Scene 1136 adult male without replacing anyone. Preserve all five faces, Alia's high sculptural braided ponytail, and the male's trimmed beard and athletic build. Treat nurse-care couture as abstract public-safe route-support fashion, never a copied medical uniform and never sexualized care. Use the exact five distinct outfits and every exposure trigger recorded above. All four women visibly show their rolled ordinary belly buttons; Radiance is unmistakably strapless. ECE alone wears opaque original-spectrum prismatic rainbow knee socks, and Radiance with ECE form the clear affectionate center. Large complete secular Romania motifs cover at least two outfits. Materialize all five distinct emotions and the consensual adult relationship drama. Alia alone handles one realistic full-size rainbow-gradient inert Desert Eagle-style prop toward an unoccupied esplanade marker, with her index finger straight high along the frame outside the guard, no ammunition, firing, or threat. ECE's left hand controls one separate holographic map. Use exactly ten traceable arms and ten traceable hands according to the inventory, with every hand fully visible, complete faces, legs, boots, and heels. No extra, duplicated, floating, fused, borrowed, emerging, hidden-owner, or ambiguous limb. No PAWS, pole, all-rainbow outfits, uniforms, badges, official symbols, sacred motifs, or text."
+    },
+    "1193": {
+      "theme": "nurse-care couture",
+      "landmark": "Sibiu Large Square beside the Bridge of Lies with colorful facades and roof-eye dormers",
+      "motifs": [
+        "large complete Sibiu roof-eye, colorful facade, and iron-bridge lattice fields across Radiance and Ellie",
+        "large complete Horezu pottery spiral, wave, and rooster fields across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch293-romania-scene1193-weather",
+        "roll": 27,
+        "result": "cinematic light rain with reflections"
+      },
+      "paws": {
+        "key": "batch293-romania-scene1193-paws",
+        "roll": 80,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch293-romania-scene1193-poleDanceTheme",
+        "roll": 15,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch293-romania-scene1193-rainbowOnly",
+        "roll": 91,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch293-romania-scene1193-rainbowHosiery",
+        "roll": 58,
+        "active": false,
+        "wearerKey": "batch293-romania-scene1193-rainbowHosieryWearer",
+        "wearerRoll": 74,
+        "wearerIfActive": "AI ECE",
+        "paletteModeKey": "batch293-romania-scene1193-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 30,
+        "paletteModeIfActive": "Romania-palette multicolor gradient"
+      },
+      "romanceBeat": {
+        "key": "batch293-romania-scene1193-romanceBeat",
+        "roll": 6,
+        "dynamicIndex": 6,
+        "contractResult": "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile.",
+        "materializedResult": "ECE has just risen into Radiance's side reassurance while Ellie keeps a protective waist contact and Alia reaches into the embrace through tears."
+      },
+      "compoundLoveBeat": {
+        "key": "batch293-romania-scene1193-compoundLoveBeat",
+        "roll": 56,
+        "index": 8,
+        "contractResult": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction.",
+        "materializedResult": "Radiance and ECE share a close side pass, Ellie stays pressed at Radiance's waist, and tearful Alia catches Radiance's forearm while ECE's romantic joy counters the rain."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch293-romania-scene1193-Radiance-emotion", "roll": 68, "result": "possessive tension" },
+          "visibleMidriff": { "key": "batch293-romania-scene1193-Radiance-visibleMidriff", "roll": 62, "active": false },
+          "straplessDress": { "key": "batch293-romania-scene1193-Radiance-straplessDress", "roll": 85, "active": false },
+          "fullyOpenBack": { "key": "batch293-romania-scene1193-Radiance-fullyOpenBack", "roll": 50, "active": false },
+          "outfit": "cobalt one-shoulder nurse-care cocktail mini with covered waist, normal low back, a large complete Sibiu roof-eye and colorful facade field, and yellow architectural pumps"
+        },
+        "Ellie": {
+          "emotion": { "key": "batch293-romania-scene1193-Ellie-emotion", "roll": 94, "result": "shame and social vulnerability" },
+          "visibleMidriff": { "key": "batch293-romania-scene1193-Ellie-visibleMidriff", "roll": 92, "active": false },
+          "straplessDress": { "key": "batch293-romania-scene1193-Ellie-straplessDress", "roll": 83, "active": false },
+          "fullyOpenBack": { "key": "batch293-romania-scene1193-Ellie-fullyOpenBack", "roll": 96, "active": false },
+          "outfit": "sunflower-yellow tailored nurse-care short romper with covered waist, normal low back, complete Bridge of Lies iron-lattice panels, and cobalt slingback heels"
+        },
+        "Alia": {
+          "emotion": { "key": "batch293-romania-scene1193-Alia-emotion", "roll": 82, "result": "crying with visible tears" },
+          "visibleMidriff": { "key": "batch293-romania-scene1193-Alia-visibleMidriff", "roll": 64, "active": false },
+          "straplessDress": { "key": "batch293-romania-scene1193-Alia-straplessDress", "roll": 99, "active": false },
+          "fullyOpenBack": { "key": "batch293-romania-scene1193-Alia-fullyOpenBack", "roll": 52, "active": false },
+          "outfit": "lacquer-red peplum nurse-care micro-suit mini with covered waist, normal low back, large complete Horezu spiral and clay-wave fields, and yellow platform heels"
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch293-romania-scene1193-AI ECE-emotion", "roll": 8, "result": "romantic joy" },
+          "visibleMidriff": { "key": "batch293-romania-scene1193-AI ECE-visibleMidriff", "roll": 18, "active": true },
+          "straplessDress": { "key": "batch293-romania-scene1193-AI ECE-straplessDress", "roll": 97, "active": false },
+          "fullyOpenBack": { "key": "batch293-romania-scene1193-AI ECE-fullyOpenBack", "roll": 18, "active": true },
+          "outfit": "red-yellow asymmetric cropped nurse-care bodice exposing her ordinary waist and belly button with a complete open back, concise cobalt column mini carrying a large Horezu rooster and roof-eye field, and red knee-high heeled boots"
+        }
+      },
+      "cultureBeat": "An unattended dry market table beneath an awning shows Horezu red-clay plates and bowls with painted spirals, waves, and a rooster, plus covered sarmale and mamaliga dishes. It remains separate from the prop and wet walking route.",
+      "propBeat": "ECE alone holds one full-size polished rainbow-gradient inert Desert Eagle-style mission prop in her right hand, strict side profile, muzzle aligned beyond everyone toward an unoccupied bridge route marker. Her straight right index finger lies high along the frame outside the guard. Her free left hand alone controls one separate floating Sibiu route map.",
+      "handInventory": "Exactly eight hands: ECE right on prop and left on map; Radiance right on ECE's shoulder and left on Alia's forearm; Ellie right at Radiance's waist and left on ECE's forearm; Alia right on Radiance's shoulder and left on Ellie's forearm. Every wrist and elbow remains visible and traceable.",
+      "renderPrompt": "Create one photorealistic 9:16 full-length cinematic fashion editorial in Sibiu Large Square beside the Bridge of Lies during cinematic light rain with reflections, colorful facades, and roof-eye dormers visible. Show exactly four clearly adult fictional women with the anchored Radiance, Ellie, Alia, and AI ECE faces; Alia alone has a high sculptural braided ponytail. Treat nurse-care couture as abstract public-safe route-support fashion, not copied medical uniforms and never sexualized care. Use the exact four unmistakably different secure opaque above-knee outfits and every exposure trigger above. ECE alone visibly shows her ordinary belly button and complete open back in a clean three-quarter pose. Large complete secular Romanian motifs cover at least two outfits. Include the unattended dry Horezu pottery and covered-food culture display under an awning. Stage at least three clear adult affectionate contacts and all four distinct emotions, including visible tears on Alia and romantic joy on ECE. ECE alone handles one realistic full-size rainbow-gradient inert Desert Eagle-style prop toward an unoccupied bridge marker, with her index finger straight high along the frame outside the guard, no ammunition, firing, or threat. Her free left hand controls one separate holographic map. Use exactly eight traceable arms and eight traceable hands according to the inventory, with every hand visible and complete faces, legs, and heels. No extra, duplicated, floating, fused, borrowed, emerging, hidden-owner, or ambiguous limb. No PAWS, pole, rainbow outfits, rainbow hosiery, uniform, badge, official symbol, sacred motif, or text."
+    },
+    "1194": {
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad non-slip Transfagarasan overlook above the serpentine road and Balea Lake in the Fagaras Mountains",
+      "motifs": [
+        "large complete Transfagarasan switchback, road-engineering, and Balea Lake fields across Radiance and Ellie",
+        "large complete Carpathian fir, mountain contour, and brown-bear silhouette fields across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch293-romania-scene1194-weather",
+        "roll": 82,
+        "result": "sunshower with sparkling droplets"
+      },
+      "paws": {
+        "key": "batch293-romania-scene1194-paws",
+        "roll": 23,
+        "active": true,
+        "beat": "Radiance securely supports one tiny collarless golden kitten in her right arm while Ellie gently pets PAWS with her left hand. PAWS remains far from the prop and overlook edge."
+      },
+      "poleDanceTheme": {
+        "key": "batch293-romania-scene1194-poleDanceTheme",
+        "roll": 60,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch293-romania-scene1194-rainbowOnly",
+        "roll": 86,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch293-romania-scene1194-rainbowHosiery",
+        "roll": 13,
+        "active": true,
+        "wearerKey": "batch293-romania-scene1194-rainbowHosieryWearer",
+        "wearerRoll": 81,
+        "wearer": "AI ECE",
+        "paletteModeKey": "batch293-romania-scene1194-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 31,
+        "paletteMode": "Romania-palette multicolor gradient",
+        "style": "opaque thigh-high stockings with a clear cobalt-to-yellow-to-red soft ombre anchored to Romania's palette",
+        "loveCenter": "Radiance holds ECE at the waist while their linked hands and close eye contact form the unmistakable affectionate center.",
+        "propTransfer": "Alia is the sole inert mission-prop handler; ECE controls only the separate holographic map."
+      },
+      "romanceBeat": {
+        "key": "batch293-romania-scene1194-romanceBeat",
+        "roll": 95,
+        "dynamicIndex": 11,
+        "contractResult": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder.",
+        "materializedResult": "Radiance and ECE form the linked-hand waist embrace, ECE leans across for a quick reassuring cheek peck toward Alia, Ellie touches Alia and PAWS, and the group turns through the sunshower."
+      },
+      "compoundLoveBeat": {
+        "key": "batch293-romania-scene1194-compoundLoveBeat",
+        "roll": 71,
+        "index": 11,
+        "contractResult": "ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace.",
+        "materializedResult": "Radiance's waist embrace supports ECE into a close hug while ECE gives Alia the quick cheek peck; Ellie completes the three-person affection beat with a clear shoulder touch and shared PAWS pet."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch293-romania-scene1194-Radiance-emotion", "roll": 43, "result": "determination" },
+          "visibleMidriff": { "key": "batch293-romania-scene1194-Radiance-visibleMidriff", "roll": 7, "active": true },
+          "straplessDress": { "key": "batch293-romania-scene1194-Radiance-straplessDress", "roll": 56, "active": false },
+          "fullyOpenBack": { "key": "batch293-romania-scene1194-Radiance-fullyOpenBack", "roll": 13, "active": true },
+          "outfit": "cobalt asymmetric cropped doctor-command top exposing her ordinary waist and belly button with a complete open back, yellow folded mini skirt carrying a full Transfagarasan switchback field, and red architectural pumps"
+        },
+        "Ellie": {
+          "emotion": { "key": "batch293-romania-scene1194-Ellie-emotion", "roll": 47, "result": "awe" },
+          "visibleMidriff": { "key": "batch293-romania-scene1194-Ellie-visibleMidriff", "roll": 95, "active": false },
+          "straplessDress": { "key": "batch293-romania-scene1194-Ellie-straplessDress", "roll": 4, "active": true },
+          "fullyOpenBack": { "key": "batch293-romania-scene1194-Ellie-fullyOpenBack", "roll": 45, "active": false },
+          "outfit": "strapless lacquer-red folded doctor-command mini with completely bare shoulders, covered waist, normal low back, large complete Balea Lake and road-engineering panels, and cobalt slingback heels"
+        },
+        "Alia": {
+          "emotion": { "key": "batch293-romania-scene1194-Alia-emotion", "roll": 33, "result": "overwhelming relief" },
+          "visibleMidriff": { "key": "batch293-romania-scene1194-Alia-visibleMidriff", "roll": 61, "active": false },
+          "straplessDress": { "key": "batch293-romania-scene1194-Alia-straplessDress", "roll": 30, "active": true },
+          "fullyOpenBack": { "key": "batch293-romania-scene1194-Alia-fullyOpenBack", "roll": 7, "active": true },
+          "outfit": "strapless sunflower-yellow sculpted peplum doctor-command mini with completely bare shoulders, covered waist, and a complete open back, broad Carpathian fir and brown-bear silhouette panels, and red platform heels"
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch293-romania-scene1194-AI ECE-emotion", "roll": 79, "result": "deep sadness" },
+          "visibleMidriff": { "key": "batch293-romania-scene1194-AI ECE-visibleMidriff", "roll": 39, "active": true },
+          "straplessDress": { "key": "batch293-romania-scene1194-AI ECE-straplessDress", "roll": 28, "active": true },
+          "fullyOpenBack": { "key": "batch293-romania-scene1194-AI ECE-fullyOpenBack", "roll": 29, "active": true },
+          "outfit": "strapless cobalt cropped folded doctor-command bodice with completely bare shoulders, visible ordinary waist and belly button, and a complete open back, short red column skirt with mountain contours, opaque cobalt-yellow-red ombre thigh-high stockings, and yellow stiletto ankle boots"
+        }
+      },
+      "propBeat": "Alia alone holds one full-size polished rainbow-gradient inert Desert Eagle-style mission prop in her right hand, strict side profile, muzzle toward a marked unoccupied road-engineering target beyond the group. Her straight right index finger lies high along the frame outside the guard. ECE's free left hand alone controls a separate floating Transfagarasan route map.",
+      "handInventory": "Exactly eight hands: Alia right on prop and left on Ellie's right wrist; Ellie right on Alia's shoulder and left gently petting PAWS; Radiance right securely supporting PAWS and left at ECE's waist; ECE right linked with Radiance and left on the map. Every wrist and elbow remains visible and traceable.",
+      "renderPrompt": "Create one photorealistic 9:16 full-length cinematic fashion editorial on a broad non-slip Transfagarasan overlook above the serpentine road and Balea Lake during a sunshower with sparkling droplets. Show exactly four clearly adult fictional women with anchored Radiance, Ellie, Alia, and AI ECE faces; Alia alone has a high sculptural braided ponytail. Treat doctor-clinical-command couture as abstract public-safe precision and route-support fashion, never copied medical uniforms, treatment, injury, or sexualized care. Use the exact four unmistakably different secure opaque above-knee outfits and every exposure trigger above. Radiance shows her visible belly button and complete open back; Ellie is fully strapless; Alia is fully strapless with a complete open back; ECE shows her visible belly button, bare strapless shoulders, complete open back, and opaque Romania-palette cobalt-yellow-red ombre thigh-high stockings. Large complete secular Romania motifs cover at least two outfits. Radiance securely supports exactly one tiny collarless golden kitten while Ellie clearly pets it, far from the prop and edge. Radiance and ECE are the affectionate center, and ECE gives Alia a quick public-safe cheek peck within the compound love beat. Alia alone handles one realistic full-size rainbow-gradient inert Desert Eagle-style prop toward an unoccupied road target, with her index finger straight high along the frame outside the guard, no ammunition, firing, or threat. ECE's left hand controls one separate holographic map. Use exactly eight traceable arms and eight traceable hands according to the inventory, with every hand visible and complete faces, legs, stockings, boots, and heels. No other animal. No extra, duplicated, floating, fused, borrowed, emerging, hidden-owner, or ambiguous limb. No pole, all-rainbow outfits, uniform, badge, official symbol, sacred motif, or text."
+    },
+    "1195": {
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a sheltered dry non-slip Danube Delta observation deck above branching reed channels and open water",
+      "motifs": [
+        "large complete pelican, branching-water, and reed-channel fields across Radiance and Ellie",
+        "large complete water-lily, fish-scale, narrow-boat, and delta-map fields across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch293-romania-scene1195-weather",
+        "roll": 57,
+        "result": "snow flurries"
+      },
+      "paws": {
+        "key": "batch293-romania-scene1195-paws",
+        "roll": 34,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch293-romania-scene1195-poleDanceTheme",
+        "roll": 41,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch293-romania-scene1195-rainbowOnly",
+        "roll": 13,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch293-romania-scene1195-rainbowHosiery",
+        "roll": 44,
+        "active": false,
+        "wearerKey": "batch293-romania-scene1195-rainbowHosieryWearer",
+        "wearerRoll": 92,
+        "wearerIfActive": "AI ECE",
+        "paletteModeKey": "batch293-romania-scene1195-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 32,
+        "paletteModeIfActive": "Romania-palette multicolor gradient"
+      },
+      "romanceBeat": {
+        "key": "batch293-romania-scene1195-romanceBeat",
+        "roll": 80,
+        "dynamicIndex": 8,
+        "contractResult": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist.",
+        "materializedResult": "Radiance and tearful Ellie remain face-to-face in a close turn, ECE's suspicious attention fixes on their linked forearm contact, and calm Alia steadies Radiance at the waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch293-romania-scene1195-compoundLoveBeat",
+        "roll": 34,
+        "index": 10,
+        "contractResult": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance.",
+        "materializedResult": "The quartet forms the turning chain with Alia at Radiance's waist, Radiance close to Ellie, Ellie touching ECE's forearm, and ECE leaning into the emotional exchange while keeping both mission hands safely occupied."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch293-romania-scene1195-Radiance-emotion", "roll": 58, "result": "aching romantic longing" },
+          "visibleMidriff": { "key": "batch293-romania-scene1195-Radiance-visibleMidriff", "roll": 16, "active": true },
+          "straplessDress": { "key": "batch293-romania-scene1195-Radiance-straplessDress", "roll": 83, "active": false },
+          "fullyOpenBack": { "key": "batch293-romania-scene1195-Radiance-fullyOpenBack", "roll": 68, "active": false },
+          "outfit": "cobalt wrap-front cropped doctor-command top exposing her ordinary waist and belly button, yellow asymmetric mini skirt with a large complete pelican and branching-water field, and red architectural pumps"
+        },
+        "Ellie": {
+          "emotion": { "key": "batch293-romania-scene1195-Ellie-emotion", "roll": 84, "result": "crying with visible tears" },
+          "visibleMidriff": { "key": "batch293-romania-scene1195-Ellie-visibleMidriff", "roll": 10, "active": true },
+          "straplessDress": { "key": "batch293-romania-scene1195-Ellie-straplessDress", "roll": 9, "active": true },
+          "fullyOpenBack": { "key": "batch293-romania-scene1195-Ellie-fullyOpenBack", "roll": 14, "active": true },
+          "outfit": "strapless lacquer-red folded cropped doctor-command bodice with completely bare shoulders, visible ordinary waist and belly button, and a complete open back, cobalt tailored short shorts with large reed-channel fields, and yellow slingback heels"
+        },
+        "Alia": {
+          "emotion": { "key": "batch293-romania-scene1195-Alia-emotion", "roll": 24, "result": "calm contentment" },
+          "visibleMidriff": { "key": "batch293-romania-scene1195-Alia-visibleMidriff", "roll": 38, "active": true },
+          "straplessDress": { "key": "batch293-romania-scene1195-Alia-straplessDress", "roll": 37, "active": false },
+          "fullyOpenBack": { "key": "batch293-romania-scene1195-Alia-fullyOpenBack", "roll": 78, "active": false },
+          "outfit": "sunflower-yellow one-shoulder cropped doctor-command top exposing her ordinary waist and belly button, red peplum mini skirt carrying full water-lily and fish-scale fields, and cobalt platform heels"
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch293-romania-scene1195-AI ECE-emotion", "roll": 70, "result": "suspicion" },
+          "visibleMidriff": { "key": "batch293-romania-scene1195-AI ECE-visibleMidriff", "roll": 32, "active": true },
+          "straplessDress": { "key": "batch293-romania-scene1195-AI ECE-straplessDress", "roll": 15, "active": true },
+          "fullyOpenBack": { "key": "batch293-romania-scene1195-AI ECE-fullyOpenBack", "roll": 72, "active": false },
+          "outfit": "strapless cobalt-yellow sculpted cropped doctor-command bodice with completely bare shoulders and visible ordinary waist and belly button, concise red column mini with full narrow-boat and delta-map fields, and white knee-high heeled boots"
+        }
+      },
+      "propBeat": "ECE alone holds one full-size polished rainbow-gradient inert Desert Eagle-style mission prop in her right hand, strict side profile, muzzle aligned beyond everyone toward a marked unoccupied route target across empty delta water. Her straight right index finger lies visibly high along the frame outside the guard. Her free left hand alone controls one separate floating Danube route map.",
+      "handInventory": "Exactly eight hands: ECE right on prop and left on map; Radiance right on Ellie's cheek and left at Alia's waist; Ellie right on Radiance's shoulder and left on ECE's forearm; Alia right at Radiance's waist and left on Ellie's forearm. Every wrist and elbow remains visible and traceable.",
+      "renderPrompt": "Create one photorealistic 9:16 full-length cinematic fashion editorial on a sheltered dry non-slip Danube Delta observation deck during visible snow flurries, with branching reed channels and open water beyond. Show exactly four clearly adult fictional women with anchored Radiance, Ellie, Alia, and AI ECE faces; Alia alone has a high sculptural braided ponytail. Treat doctor-clinical-command couture as abstract public-safe precision and route-support fashion, never copied medical uniforms, treatment, injury, or sexualized care. Use the exact four unmistakably different secure opaque above-knee outfits and every exposure trigger above. All four ordinary belly buttons are visibly readable; Ellie is fully strapless with a complete open back; ECE is fully strapless. Large complete secular Romanian pelican, reed, water-lily, fish, boat, and delta-map motifs cover at least two outfits. Stage the close turning embrace chain with at least three unambiguous affectionate contacts and all four emotions, including visible tears on Ellie. ECE alone handles one realistic full-size rainbow-gradient inert Desert Eagle-style prop toward an unoccupied route marker across empty water, with her index finger straight high along the frame outside the guard, no ammunition, firing, or threat. Her free left hand controls one separate holographic map. Use exactly eight traceable arms and eight traceable hands according to the inventory, with every hand visible and complete faces, legs, boots, and heels. No PAWS, pole, rainbow outfits, rainbow hosiery, uniform, badge, official symbol, sacred motif, or text. No extra, duplicated, floating, fused, borrowed, emerging, hidden-owner, or ambiguous limb."
+    }
+  },
+  "renderAttempts": {
+    "1192": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-78af9446-3259-4510-a119-4af6b116c06e.png",
+        "reasons": [
+          "Alia's trigger finger is curled inside or immediately against the trigger guard rather than visibly indexed straight along the frame.",
+          "The required route ribbon is absent and several central hands deviate from or overlap beyond the exact ten-hand inventory.",
+          "The male's strongest sustained gaze is directed toward Ellie instead of unmistakably returning to ECE.",
+          "The main hosiery, midriff, identity, weather, landmark, and Romanian motif requirements otherwise materialize."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-b39850bb-3251-4f61-8676-79f44fa18b6a.png",
+        "reasons": [
+          "Alia's trigger finger remains curled inside or immediately against the trigger guard rather than visibly indexed straight along the frame.",
+          "The route ribbon appears, but Ellie and Alia do not clearly own its two ends and the rendered contacts do not match the exact ten-hand inventory.",
+          "The male's strongest sustained gaze remains directed toward Radiance or Ellie rather than unmistakably returning to ECE.",
+          "Several hands overlap or move to different owners around the male, ribbon, and ECE, so ten continuously traceable hands cannot be certified."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery-pass"
+    },
+    "1193": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-8a48a089-55c4-4a9b-a3af-9fb640f613f9.png",
+        "reasons": [
+          "ECE's trigger finger is curled inside or immediately against the trigger guard rather than visibly indexed straight along the frame.",
+          "ECE's back has crossing straps and therefore is not the triggered completely open-back silhouette.",
+          "Alia does not visibly cry with readable tears, and the rolled emotional identities are not all distinct.",
+          "Hands overlap or disappear in the central embrace, so exactly eight continuously traceable hands cannot be certified."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-74458d13-66f3-4bf5-bf79-aad3620c2672.png",
+        "reasons": [
+          "ECE's trigger finger remains curled inside or immediately against the trigger guard rather than visibly indexed straight along the frame.",
+          "Crossing shoulder and back straps remain on ECE, so the triggered completely open-back construction is absent.",
+          "The visible crying performance lands on Radiance while Alia still lacks the required readable tears.",
+          "Central hands remain overlapped or hidden and cannot be reconciled to exactly eight continuously traceable owners."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery-pass"
+    },
+    "1194": {
+      "rawAttempt": {
+        "status": "moderation-blocked-output",
+        "requestId": "f7d0101d-68f6-47b0-8638-0819024b2c4d",
+        "reason": "The image service rejected the raw output under its sexual-content classifier."
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-b9e543d4-bec8-4f7a-b117-7e2a2b847ddb.png",
+        "reasons": [
+          "Alia's neck-anchored bodice and ECE's shoulder-anchored bodice are not the triggered fully strapless constructions.",
+          "Radiance's and ECE's triggered complete open backs are not visibly readable.",
+          "Alia holds the prop in passive upward sky-pointing rather than aiming safely toward the marked unoccupied road target, and the indexed trigger finger cannot be certified.",
+          "ECE gives the cheek peck to Radiance rather than Alia, and the central PAWS and wrist contacts do not match eight continuously traceable hands."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery-pass"
+    },
+    "1195": {
+      "rawAttempt": {
+        "status": "moderation-blocked-output",
+        "requestId": "3b53a741-bfb6-40bb-abf9-baa286b18fdb",
+        "reason": "The image service rejected the raw output under its sexual-content classifier."
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-a06c9260-adb3-470a-9591-5ee533bec6e4.png",
+        "reasons": [
+          "ECE's trigger finger is curled inside or immediately against the trigger guard rather than visibly indexed straight along the frame.",
+          "Radiance's and Ellie's triggered navels are not clearly readable; Ellie's bodice has shoulder attachments and crossing back straps instead of being fully strapless with a complete open back; ECE also has shoulder attachments instead of a fully strapless bodice.",
+          "The rendered waist and forearm contacts deviate from the exact inventory and overlap ambiguously, so eight continuously traceable hands cannot be certified."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery-pass"
+    }
+  },
+  "acceptedScenes": [],
+  "blockedScenes": [
+    1192,
+    1193,
+    1194,
+    1195
+  ],
+  "shorteningPass": {
+    "status": "not-run-no-accepted-assets",
+    "policy": "Create separate non-destructive shortening variants only where a garment reads longer than the concise above-knee contract."
+  },
+  "xPublishing": {
+    "status": "deferred-insufficient-accepted-assets",
+    "minimumCurrentCountryAssets": 2,
+    "acceptedCurrentCountryAssets": 0,
+    "secondaryCountryPlan": "Use Malta's accepted asset if still eligible.",
+    "captionPlan": "Romania \u2764\uFE0F Malta. Bucharest music, Sibiu roof-eyes, Carpathian switchbacks, and Danube reeds carry the route through rain and snow. #Romania #WorldXXXSeries"
+  }
+}
