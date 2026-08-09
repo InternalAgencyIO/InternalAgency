@@ -1,0 +1,320 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internalagency.io/schemas/iat-b3-identity-freeze.v1.schema.json",
+  "title": "IAT B3 immutable identity-freeze input manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "profile",
+    "readiness",
+    "scope",
+    "identities",
+    "clusterPolicy",
+    "networkBinding",
+    "entropy",
+    "seedTable",
+    "factionPolicy",
+    "mintConfig",
+    "genesis",
+    "sealOrder"
+  ],
+  "properties": {
+    "$schema": { "const": "./iat-b3-identity-freeze.v1.schema.json" },
+    "schema": { "const": "iat-b3-identity-freeze/v1" },
+    "profile": { "enum": ["PRODUCTION", "TEST_FIXTURE"] },
+    "readiness": { "$ref": "#/$defs/readiness" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract", "doesNotCertify"],
+      "properties": {
+        "contract": { "const": "IDENTITY_FREEZE_INPUTS_ONLY" },
+        "doesNotCertify": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "FACTION_ECONOMICS" },
+            { "const": "GENESIS_ALLOCATION_AMOUNTS_OR_CONSERVATION_EVIDENCE" },
+            { "const": "REVIEWED_BINARY_HASHES_OR_DEPLOYED_BYTES" },
+            { "const": "MAINNET_OR_RELEASE_READINESS" }
+          ],
+          "minItems": 4,
+          "maxItems": 4
+        }
+      }
+    },
+    "identities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "lawProgramId", "economyProgramId", "canonicalMint", "blocker"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "lawProgramId": { "$ref": "#/$defs/nullableString" },
+        "economyProgramId": { "$ref": "#/$defs/nullableString" },
+        "canonicalMint": { "$ref": "#/$defs/nullableString" },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "clusterPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "identityPolicy", "canonicalScope", "nonProductionIdentitiesAreCanonical", "blocker"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "identityPolicy": {
+          "type": ["string", "null"],
+          "enum": [null, "SAME_LAW_ECONOMY_AND_MINT_IDS_ACROSS_CLUSTERS", "SAME_PROGRAM_IDS_DISTINCT_MINT_PER_CLUSTER", "DISTINCT_PROGRAM_AND_MINT_IDS_PER_CLUSTER"]
+        },
+        "canonicalScope": { "const": "MAINNET_BETA_ONLY" },
+        "nonProductionIdentitiesAreCanonical": { "const": false },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "networkBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "lawDomainSeparator", "cluster", "genesisHash", "genesisHashSource", "bindMintAndEntropySlot", "blocker"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "lawDomainSeparator": { "const": "IAT_B3_SOLANA_DAILY_LAW_V1" },
+        "cluster": { "const": "mainnet-beta" },
+        "genesisHash": { "$ref": "#/$defs/nullableString" },
+        "genesisHashSource": { "const": "SOLANA_GET_GENESIS_HASH_FINALIZED" },
+        "bindMintAndEntropySlot": { "const": true },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "entropy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "lagSlots", "skippedSlotRule", "insufficientHistoryRule", "blocker"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "lagSlots": { "type": ["integer", "null"], "minimum": 1, "maximum": 512 },
+        "skippedSlotRule": { "const": "NEWEST_AVAILABLE_ANCESTOR_AT_OR_BEFORE_CURRENT_SLOT_MINUS_LAG" },
+        "insufficientHistoryRule": { "const": "FAIL_CLOSED" },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "seedTable": {
+      "type": "array",
+      "minItems": 22,
+      "maxItems": 22,
+      "items": { "$ref": "#/$defs/seedEntry" }
+    },
+    "factionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "factions", "allegianceCooldownSeconds", "sameFactionPledgeRule", "leadersHaveProtocolAuthority", "blocker"],
+      "properties": {
+        "status": { "const": "FROZEN" },
+        "factions": {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/radianceFaction" },
+            { "$ref": "#/$defs/ellieFaction" },
+            { "$ref": "#/$defs/aliaFaction" },
+            { "$ref": "#/$defs/eceFaction" },
+            { "$ref": "#/$defs/bossFaction" }
+          ],
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "allegianceCooldownSeconds": { "const": 86400 },
+        "sameFactionPledgeRule": { "const": "REJECT_NO_OP" },
+        "leadersHaveProtocolAuthority": { "const": false },
+        "blocker": { "type": "null" }
+      }
+    },
+    "mintConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "tokenProgramId",
+        "decimals",
+        "fixedSupplyBaseUnits",
+        "extensionsOrdered",
+        "allowAdditionalExtensions",
+        "mintAuthorityAtCreation",
+        "mintAuthorityAfterFunding",
+        "freezeAuthorityAtCreation",
+        "freezeAuthorityBeforeLawInitialization",
+        "permanentDelegate",
+        "mintCloseAuthority",
+        "transferHook",
+        "confidentialTransferMint",
+        "metadataPolicy",
+        "blocker"
+      ],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "tokenProgramId": { "const": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb" },
+        "decimals": { "const": 9 },
+        "fixedSupplyBaseUnits": { "const": "1000000000000000000" },
+        "extensionsOrdered": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "ConfidentialTransferMint" },
+            { "const": "TransferHook" }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "allowAdditionalExtensions": { "const": false },
+        "mintAuthorityAtCreation": { "const": "CEREMONY_SIGNER" },
+        "mintAuthorityAfterFunding": { "type": "null" },
+        "freezeAuthorityAtCreation": { "const": "CEREMONY_SIGNER" },
+        "freezeAuthorityBeforeLawInitialization": { "type": "null" },
+        "permanentDelegate": { "const": "ABSENT" },
+        "mintCloseAuthority": { "const": "ABSENT" },
+        "transferHook": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["programId", "authorityAtCreation", "authorityAfterLawInitialization"],
+          "properties": {
+            "programId": { "$ref": "#/$defs/nullableString" },
+            "authorityAtCreation": { "const": "CEREMONY_SIGNER" },
+            "authorityAfterLawInitialization": { "type": "null" }
+          }
+        },
+        "confidentialTransferMint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["autoApproveNewAccounts", "auditorElGamalPubkey", "authorityAtCreation", "authorityAfterLawInitialization"],
+          "properties": {
+            "autoApproveNewAccounts": { "const": true },
+            "auditorElGamalPubkey": { "type": "null" },
+            "authorityAtCreation": { "const": "CEREMONY_SIGNER" },
+            "authorityAfterLawInitialization": { "type": "null" }
+          }
+        },
+        "metadataPolicy": {
+          "type": ["string", "null"],
+          "enum": [null, "NO_MINT_METADATA_EXTENSION_IMMUTABLE_EXTERNAL_RECORD"]
+        },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "genesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "phaseOrder", "stagingPredicate", "activationPredicate", "blocker"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "phaseOrder": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "UNINITIALIZED" },
+            { "const": "GENESIS_STAGING" },
+            { "const": "ACTIVE" }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "stagingPredicate": { "$ref": "#/$defs/stagingPredicate" },
+        "activationPredicate": { "$ref": "#/$defs/activationPredicate" },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "sealOrder": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "steps", "blocker"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "steps": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 17,
+          "maxItems": 17
+        },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    }
+  },
+  "$defs": {
+    "readiness": { "enum": ["BLOCKED", "READY"] },
+    "status": { "enum": ["BLOCKED", "FROZEN"] },
+    "nullableString": { "type": ["string", "null"] },
+    "radianceFaction": { "$ref": "#/$defs/faction", "properties": { "id": { "const": "radiance" }, "displayLabel": { "const": "Radiance" } } },
+    "ellieFaction": { "$ref": "#/$defs/faction", "properties": { "id": { "const": "ellie" }, "displayLabel": { "const": "Ellie" } } },
+    "aliaFaction": { "$ref": "#/$defs/faction", "properties": { "id": { "const": "alia" }, "displayLabel": { "const": "Alia" } } },
+    "eceFaction": { "$ref": "#/$defs/faction", "properties": { "id": { "const": "ece" }, "displayLabel": { "const": "Ece" } } },
+    "bossFaction": { "$ref": "#/$defs/faction", "properties": { "id": { "const": "boss" }, "displayLabel": { "const": "the boss" } } },
+    "faction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayLabel"],
+      "properties": {
+        "id": { "type": "string" },
+        "displayLabel": { "type": "string" }
+      }
+    },
+    "seedEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "program", "status", "components", "purpose", "blocker"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z][A-Za-z0-9]+$" },
+        "program": { "enum": ["LAW", "ECONOMY"] },
+        "status": { "$ref": "#/$defs/status" },
+        "components": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 64 },
+          "minItems": 2,
+          "maxItems": 4
+        },
+        "purpose": { "type": "string", "minLength": 1 },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "stagingPredicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requiresPhase", "requiresProgramsImmutable", "canonicalAddressesOnly", "exactManifestAmountsOnly", "lawDecisionRequired", "allowedWrites", "forbiddenWrites"],
+      "properties": {
+        "requiresPhase": { "const": "GENESIS_STAGING" },
+        "requiresProgramsImmutable": { "const": true },
+        "canonicalAddressesOnly": { "const": true },
+        "exactManifestAmountsOnly": { "const": true },
+        "lawDecisionRequired": { "const": false },
+        "allowedWrites": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "CREATE_CANONICAL_ACCOUNT" },
+            { "const": "FUND_CANONICAL_VAULT" }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "forbiddenWrites": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 8,
+          "maxItems": 8
+        }
+      }
+    },
+    "activationPredicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["oneWay", "requiresCurrentFinalizedOpenLaw", "requiresCanonicalAccountsExact", "requiresGenesisConservation", "requiresCoreCapCompliant", "requiresStakeIngressEnforced", "requiresFactionPolicySealed", "requiresMintAuthorityNull", "requiresFreezeAuthorityNull", "requiresTransferHookAuthorityNull", "requiresConfidentialTransferMintAuthorityNull", "disablesStagingWrites"],
+      "properties": {
+        "oneWay": { "const": true },
+        "requiresCurrentFinalizedOpenLaw": { "const": true },
+        "requiresCanonicalAccountsExact": { "const": true },
+        "requiresGenesisConservation": { "const": true },
+        "requiresCoreCapCompliant": { "const": true },
+        "requiresStakeIngressEnforced": { "const": true },
+        "requiresFactionPolicySealed": { "const": true },
+        "requiresMintAuthorityNull": { "const": true },
+        "requiresFreezeAuthorityNull": { "const": true },
+        "requiresTransferHookAuthorityNull": { "const": true },
+        "requiresConfidentialTransferMintAuthorityNull": { "const": true },
+        "disablesStagingWrites": { "const": true }
+      }
+    }
+  }
+}
