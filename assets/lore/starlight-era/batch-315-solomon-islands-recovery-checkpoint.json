@@ -1,0 +1,1560 @@
+{
+  "batch": 315,
+  "country": "Solomon Islands",
+  "status": "terminal-blocked-after-single-recovery-pass",
+  "sourceCommit": "55213c2fb79046335a9e7e9019d1ee9a8959d3da",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch315-solomon-islands keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "doctor-clinical-command couture",
+    "adult nightlife dance-performance couture"
+  ],
+  "nextThemePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "nextQueueCountry": "Bhutan",
+  "nextQueueBatch": 316,
+  "nextQueueScenes": [
+    1284,
+    1285,
+    1286,
+    1287
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.visitsolomons.com.sb/about-the-solomon/provinces/",
+      "usedFor": "Guadalcanal mountains, Matanikau cascade, Honiara Central Market, Point Cruz, Marau Sound, Marovo Lagoon, Western Province islands, and Lake Tegano"
+    },
+    {
+      "url": "https://www.visitsolomons.com.sb/about-the-solomon/people-culture/",
+      "usedFor": "Honiara Central Market produce and crafts, coconut, sweet potato, taro, fishing, stilt houses, and modern urban context"
+    },
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/5414",
+      "usedFor": "Marovo double barrier lagoon, Tetepare lowland rainforest, coral reefs, mangroves, seagrass, endemic wildlife, marine turtles, dugong, and community conservation"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/854/",
+      "usedFor": "East Rennell raised coral atoll, Lake Tegano, limestone islets, dense forest, endemic species, and customary community management"
+    },
+    {
+      "url": "https://whc.unesco.org/en/news/2443",
+      "usedFor": "Lake Tegano World Heritage Site Association and community-led nature-based conservation livelihoods"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch315-solomon-islands-male-model-scene",
+    "fullHash": 290119102,
+    "roll": 2,
+    "selectedScenePosition": 3,
+    "selectedScene": 1282,
+    "maleEmotion": {
+      "key": "batch315-solomon-islands-scene3-male-emotion",
+      "roll": 71,
+      "result": "suspicion"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Solomon Islands flag, five-star field, coat of arms, or official emblem is copied onto clothing. Large researched secular waterfall, market, harbor, lagoon, reef, rainforest, lake, raised-atoll, wildlife, food, craft, and conservation fields replace them.",
+    "palette": "lagoon turquoise, rainforest green, hibiscus red, shell ivory, volcanic black, sunrise gold, orchid violet, coral rose, sea-glass blue, and pandanus tan",
+    "minimumCoverage": "Every scene places multiple large complete secular Solomon Islands motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScene": "The four scenes foreground Guadalcanal cascades and Honiara market life, Marovo Lagoon biodiversity, Tetepare conservation, and East Rennell/Lake Tegano ecology.",
+    "prohibitions": "No literal flag, five-star field, coat of arms, official seal, sacred symbol, religious architecture, copied ceremonial dress, copied medical, command, or performance uniform, badge, weapon threat, sexualized care or performance, alcohol, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch315-solomon-islands-x-heart",
+      "roll": 91,
+      "result": "white heart"
+    },
+    "internalAgency": {
+      "key": "batch315-solomon-islands-x-internalagency",
+      "roll": 91,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch315-solomon-islands-x-worldxxxseries",
+      "roll": 44,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Solomon Islands images plus one accepted Bhutan image when at least two Solomon Islands images pass",
+    "captionIfEligible": "Solomon Islands white heart Bhutan #SolomonIslands",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1280, 1281, and 1283 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1282 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch315-solomon-islands-male-model-scene",
+        2
+      ],
+      [
+        "batch315-solomon-islands-scene3-male-emotion",
+        71
+      ],
+      [
+        "batch315-solomon-islands-scene1280-weather",
+        32
+      ],
+      [
+        "batch315-solomon-islands-scene1280-paws",
+        41
+      ],
+      [
+        "batch315-solomon-islands-scene1280-poleDanceTheme",
+        66
+      ],
+      [
+        "batch315-solomon-islands-scene1280-rainbowOnly",
+        80
+      ],
+      [
+        "batch315-solomon-islands-scene1280-rainbowHosiery",
+        35
+      ],
+      [
+        "batch315-solomon-islands-scene1280-romanceBeat",
+        77
+      ],
+      [
+        "batch315-solomon-islands-scene1280-compoundLoveBeat",
+        81
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Radiance-emotion",
+        25
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Radiance-visibleMidriff",
+        13
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Radiance-straplessDress",
+        66
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Radiance-fullyOpenBack",
+        27
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Ellie-emotion",
+        5
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Ellie-visibleMidriff",
+        1
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Ellie-straplessDress",
+        18
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Ellie-fullyOpenBack",
+        75
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Alia-emotion",
+        91
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Alia-visibleMidriff",
+        71
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Alia-straplessDress",
+        4
+      ],
+      [
+        "batch315-solomon-islands-scene1280-Alia-fullyOpenBack",
+        17
+      ],
+      [
+        "batch315-solomon-islands-scene1280-AI ECE-emotion",
+        37
+      ],
+      [
+        "batch315-solomon-islands-scene1280-AI ECE-visibleMidriff",
+        69
+      ],
+      [
+        "batch315-solomon-islands-scene1280-AI ECE-straplessDress",
+        66
+      ],
+      [
+        "batch315-solomon-islands-scene1280-AI ECE-fullyOpenBack",
+        55
+      ],
+      [
+        "batch315-solomon-islands-scene1281-weather",
+        51
+      ],
+      [
+        "batch315-solomon-islands-scene1281-paws",
+        72
+      ],
+      [
+        "batch315-solomon-islands-scene1281-poleDanceTheme",
+        55
+      ],
+      [
+        "batch315-solomon-islands-scene1281-rainbowOnly",
+        99
+      ],
+      [
+        "batch315-solomon-islands-scene1281-rainbowHosiery",
+        46
+      ],
+      [
+        "batch315-solomon-islands-scene1281-romanceBeat",
+        26
+      ],
+      [
+        "batch315-solomon-islands-scene1281-compoundLoveBeat",
+        0
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Radiance-emotion",
+        64
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Radiance-visibleMidriff",
+        98
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Radiance-straplessDress",
+        49
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Radiance-fullyOpenBack",
+        54
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Ellie-emotion",
+        42
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Ellie-visibleMidriff",
+        12
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Ellie-straplessDress",
+        19
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Ellie-fullyOpenBack",
+        48
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Alia-emotion",
+        34
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Alia-visibleMidriff",
+        80
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Alia-straplessDress",
+        99
+      ],
+      [
+        "batch315-solomon-islands-scene1281-Alia-fullyOpenBack",
+        32
+      ],
+      [
+        "batch315-solomon-islands-scene1281-AI ECE-emotion",
+        92
+      ],
+      [
+        "batch315-solomon-islands-scene1281-AI ECE-visibleMidriff",
+        66
+      ],
+      [
+        "batch315-solomon-islands-scene1281-AI ECE-straplessDress",
+        17
+      ],
+      [
+        "batch315-solomon-islands-scene1281-AI ECE-fullyOpenBack",
+        66
+      ],
+      [
+        "batch315-solomon-islands-scene1282-weather",
+        18
+      ],
+      [
+        "batch315-solomon-islands-scene1282-paws",
+        3
+      ],
+      [
+        "batch315-solomon-islands-scene1282-poleDanceTheme",
+        48
+      ],
+      [
+        "batch315-solomon-islands-scene1282-rainbowOnly",
+        50
+      ],
+      [
+        "batch315-solomon-islands-scene1282-rainbowHosiery",
+        37
+      ],
+      [
+        "batch315-solomon-islands-scene1282-romanceBeat",
+        23
+      ],
+      [
+        "batch315-solomon-islands-scene1282-compoundLoveBeat",
+        75
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Radiance-emotion",
+        15
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Radiance-visibleMidriff",
+        95
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Radiance-straplessDress",
+        12
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Radiance-fullyOpenBack",
+        65
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Ellie-emotion",
+        31
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Ellie-visibleMidriff",
+        91
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Ellie-straplessDress",
+        68
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Ellie-fullyOpenBack",
+        33
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Alia-emotion",
+        77
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Alia-visibleMidriff",
+        85
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Alia-straplessDress",
+        62
+      ],
+      [
+        "batch315-solomon-islands-scene1282-Alia-fullyOpenBack",
+        87
+      ],
+      [
+        "batch315-solomon-islands-scene1282-AI ECE-emotion",
+        23
+      ],
+      [
+        "batch315-solomon-islands-scene1282-AI ECE-visibleMidriff",
+        91
+      ],
+      [
+        "batch315-solomon-islands-scene1282-AI ECE-straplessDress",
+        12
+      ],
+      [
+        "batch315-solomon-islands-scene1282-AI ECE-fullyOpenBack",
+        85
+      ],
+      [
+        "batch315-solomon-islands-scene1283-weather",
+        53
+      ],
+      [
+        "batch315-solomon-islands-scene1283-paws",
+        66
+      ],
+      [
+        "batch315-solomon-islands-scene1283-poleDanceTheme",
+        49
+      ],
+      [
+        "batch315-solomon-islands-scene1283-rainbowOnly",
+        69
+      ],
+      [
+        "batch315-solomon-islands-scene1283-rainbowHosiery",
+        44
+      ],
+      [
+        "batch315-solomon-islands-scene1283-romanceBeat",
+        40
+      ],
+      [
+        "batch315-solomon-islands-scene1283-compoundLoveBeat",
+        30
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Radiance-emotion",
+        82
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Radiance-visibleMidriff",
+        68
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Radiance-straplessDress",
+        87
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Radiance-fullyOpenBack",
+        88
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Ellie-emotion",
+        36
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Ellie-visibleMidriff",
+        98
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Ellie-straplessDress",
+        97
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Ellie-fullyOpenBack",
+        26
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Alia-emotion",
+        40
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Alia-visibleMidriff",
+        58
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Alia-straplessDress",
+        81
+      ],
+      [
+        "batch315-solomon-islands-scene1283-Alia-fullyOpenBack",
+        86
+      ],
+      [
+        "batch315-solomon-islands-scene1283-AI ECE-emotion",
+        38
+      ],
+      [
+        "batch315-solomon-islands-scene1283-AI ECE-visibleMidriff",
+        80
+      ],
+      [
+        "batch315-solomon-islands-scene1283-AI ECE-straplessDress",
+        31
+      ],
+      [
+        "batch315-solomon-islands-scene1283-AI ECE-fullyOpenBack",
+        12
+      ],
+      [
+        "batch315-solomon-islands-x-heart",
+        91
+      ],
+      [
+        "batch315-solomon-islands-x-internalagency",
+        91
+      ],
+      [
+        "batch315-solomon-islands-x-worldxxxseries",
+        44
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch315-solomon-islands-scene1280-rainbowHosieryWearer",
+        3
+      ],
+      [
+        "batch315-solomon-islands-scene1280-rainbowHosieryPaletteMode",
+        21
+      ],
+      [
+        "batch315-solomon-islands-scene1281-rainbowHosieryWearer",
+        14
+      ],
+      [
+        "batch315-solomon-islands-scene1281-rainbowHosieryPaletteMode",
+        2
+      ],
+      [
+        "batch315-solomon-islands-scene1282-rainbowHosieryWearer",
+        89
+      ],
+      [
+        "batch315-solomon-islands-scene1282-rainbowHosieryPaletteMode",
+        71
+      ],
+      [
+        "batch315-solomon-islands-scene1283-rainbowHosieryWearer",
+        48
+      ],
+      [
+        "batch315-solomon-islands-scene1283-rainbowHosieryPaletteMode",
+        84
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "065D6B349E5A8C612B9BB15A98E446784EB950A2F2AD64BCBD10E1E3FE3EA57E",
+    "hosierySelectorPairsSha256": "9109EB837797790D9060AEC1993F30D8A1DCC303079A079D51D72C3E063A6BA5"
+  },
+  "scenePlans": {
+    "1280": {
+      "scene": 1280,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry covered public lookout beside the complete Matanikau cascade on Guadalcanal during cinematic light rain, with tiered rainforest falls, a clear river pool, Guadalcanal's green mountain ridges, a distant glimpse of Honiara roofs and Point Cruz harbor, and one clearly empty marked water route; rain falls beyond the roof and makes reflections only on distant stone",
+      "motifs": [
+        "large complete Matanikau-cascade, Guadalcanal-ridge, Central-Market produce, Point-Cruz harbor, woven-basket, coconut, taro, sweet-potato, and yellow-bibbed-lory compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Solomon Islands waterfall-and-market composition rather than tiny trim"
+      ],
+      "culture": "Use Guadalcanal cascades, mountain rainforest, Honiara market produce, harbor boats, woven baskets, coconut, taro, sweet potato, and endemic birds respectfully. Doctor-clinical-command couture remains abstract public fashion with no patient, diagnosis, procedure, copied uniform, badge, injury, or sexualized care. Use secular Solomon Islands landscape, wildlife, food, market, craft, conservation, and civil-infrastructure references only. No literal flag, five-star field, coat of arms, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch315-solomon-islands-scene1280-weather",
+        "roll": 32,
+        "result": "cinematic light rain with reflections"
+      },
+      "paws": {
+        "key": "batch315-solomon-islands-scene1280-paws",
+        "roll": 41,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch315-solomon-islands-scene1280-poleDanceTheme",
+        "roll": 66,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch315-solomon-islands-scene1280-rainbowOnly",
+        "roll": 80,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch315-solomon-islands-scene1280-rainbowHosiery",
+        "roll": 35,
+        "active": false,
+        "wearer": {
+          "key": "batch315-solomon-islands-scene1280-rainbowHosieryWearer",
+          "roll": 3,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch315-solomon-islands-scene1280-rainbowHosieryPaletteMode",
+          "roll": 21,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch315-solomon-islands-scene1280-romanceBeat",
+        "roll": 77,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch315-solomon-islands-scene1280-compoundLoveBeat",
+        "roll": 81,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1280-Radiance-emotion",
+            "roll": 25,
+            "result": "calm contentment",
+            "performance": "calm contentment shown by a steady reassuring smile while she keeps the group balanced"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1280-Radiance-visibleMidriff",
+            "roll": 13,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1280-Radiance-straplessDress",
+            "roll": 66,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1280-Radiance-fullyOpenBack",
+            "roll": 27,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1280-Ellie-emotion",
+            "roll": 5,
+            "result": "tender affection",
+            "performance": "tender affection shown by a warm cheek-close social greeting toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1280-Ellie-visibleMidriff",
+            "roll": 1,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1280-Ellie-straplessDress",
+            "roll": 18,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1280-Ellie-fullyOpenBack",
+            "roll": 75,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1280-Alia-emotion",
+            "roll": 91,
+            "result": "anger",
+            "performance": "anger shown by a firm brow while every ribbon and waist contact remains gentle"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1280-Alia-visibleMidriff",
+            "roll": 71,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1280-Alia-straplessDress",
+            "roll": 4,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1280-Alia-fullyOpenBack",
+            "roll": 17,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1280-AI ECE-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "performance": "magnetic confidence shown by a direct strategist gaze beside Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1280-AI ECE-visibleMidriff",
+            "roll": 69,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1280-AI ECE-straplessDress",
+            "roll": 66,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1280-AI ECE-fullyOpenBack",
+            "roll": 55,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Translate the shared-ribbon pull, Radiance's calming center, ECE's close lean, Radiance's face cradle, Alia's waist embrace, Ellie's opposite-cheek greeting, and ECE's fingertip link into a shallow moving arc. ECE and Radiance link one hand pair. Radiance cradles Alia's cheek. Alia answers at Radiance's waist and holds one ribbon end. Ellie holds the opposite ribbon end, touches Radiance's far shoulder, and leans cheek-close for a brief public greeting. All contacts stay visible and consensual.",
+      "composition": "Place ECE far left, Radiance left-center, Alia right-center, and Ellie far right in four separated depth lanes. Keep bright waterfall, river, or sky gaps behind every arm. Angle Radiance and Alia three-quarter-back with hair moved forward so both complete rolled open backs and complete faces remain visible. Keep rain outside the shelter and the full floor dry.",
+      "emotionNuance": {
+        "Radiance": "calm contentment shown by a steady reassuring smile while she keeps the group balanced",
+        "Ellie": "tender affection shown by a warm cheek-close social greeting toward Radiance",
+        "Alia": "anger shown by a firm brow while every ribbon and waist contact remains gentle",
+        "AI ECE": "magnetic confidence shown by a direct strategist gaze beside Radiance"
+      },
+      "outfits": {
+        "Radiance": "a rainforest-green short-sleeve cropped doctor-command jacket exposing her ordinary waist and belly button, with secure opaque sides and a completely open back from shoulder blades to the separate waistline, a coral-rose above-knee skirt carrying a large complete Matanikau cascade and Guadalcanal-ridge composition, with sunrise-gold pumps",
+        "Ellie": "a fully strapless sea-glass-blue cropped doctor-command bodice with a high straight opaque bustline exposing her ordinary waist and belly button and a high closed back, a separate shell-ivory above-knee folded skort carrying a large complete Central-Market produce and woven-basket composition, with hibiscus-red slingback heels",
+        "Alia": "a fully strapless hibiscus-red above-knee doctor-command dress with a high straight opaque bustline, covered waist, secure opaque sides, and a completely open back from shoulder blades to the secure waistline, carrying a large complete Point-Cruz harbor, coconut, and yellow-bibbed-lory composition, with volcanic-black platform heels",
+        "AI ECE": "a shell-ivory high-neck cap-sleeve doctor-command coat-dress with covered waist and high closed back, carrying a large complete taro, sweet-potato, market-roof, and river-route composition, with lagoon-turquoise heeled boots"
+      },
+      "propPlan": "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Matanikau river-pool water toward one unoccupied route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand links visibly with Radiance's left hand",
+        "Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly at Alia's near cheek",
+        "Alia left hand rests visibly at Radiance's near waist; Alia right open hand holds one end of the loose market-blue signal ribbon",
+        "Ellie left open hand holds the opposite end of the loose signal ribbon; Ellie right hand rests visibly on Radiance's far shoulder"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry covered public lookout beside the complete Matanikau cascade on Guadalcanal during cinematic light rain, with tiered rainforest falls, a clear river pool, Guadalcanal's green mountain ridges, a distant glimpse of Honiara roofs and Point Cruz harbor, and one clearly empty marked water route; rain falls beyond the roof and makes reflections only on distant stone. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: doctor-clinical-command couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 32=cinematic light rain with reflections; PAWS 41=inactive; pole theme 66=inactive; rainbow-only 80=inactive; rainbow hosiery 35=inactive; hosiery wearer selector 3=Radiance; hosiery palette selector 21=country-palette rainbow-like gradient; romance 77; compound love 81. Exact wardrobe rolls: Radiance: midriff 13=visible, strapless 66=inactive, open back 27=active; Ellie: midriff 1=visible, strapless 18=active, open back 75=inactive; Alia: midriff 71=covered, strapless 4=active, open back 17=active; AI ECE: midriff 69=covered, strapless 66=inactive, open back 55=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a rainforest-green short-sleeve cropped doctor-command jacket exposing her ordinary waist and belly button, with secure opaque sides and a completely open back from shoulder blades to the separate waistline, a coral-rose above-knee skirt carrying a large complete Matanikau cascade and Guadalcanal-ridge composition, with sunrise-gold pumps; Ellie: a fully strapless sea-glass-blue cropped doctor-command bodice with a high straight opaque bustline exposing her ordinary waist and belly button and a high closed back, a separate shell-ivory above-knee folded skort carrying a large complete Central-Market produce and woven-basket composition, with hibiscus-red slingback heels; Alia: a fully strapless hibiscus-red above-knee doctor-command dress with a high straight opaque bustline, covered waist, secure opaque sides, and a completely open back from shoulder blades to the secure waistline, carrying a large complete Point-Cruz harbor, coconut, and yellow-bibbed-lory composition, with volcanic-black platform heels; AI ECE: a shell-ivory high-neck cap-sleeve doctor-command coat-dress with covered waist and high closed back, carrying a large complete taro, sweet-potato, market-roof, and river-route composition, with lagoon-turquoise heeled boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Solomon Islands motifs dominate at least two outfits: large complete Matanikau-cascade, Guadalcanal-ridge, Central-Market produce, Point-Cruz harbor, woven-basket, coconut, taro, sweet-potato, and yellow-bibbed-lory compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Solomon Islands waterfall-and-market composition rather than tiny trim. Use Guadalcanal cascades, mountain rainforest, Honiara market produce, harbor boats, woven baskets, coconut, taro, sweet potato, and endemic birds respectfully. Doctor-clinical-command couture remains abstract public fashion with no patient, diagnosis, procedure, copied uniform, badge, injury, or sexualized care. Use secular Solomon Islands landscape, wildlife, food, market, craft, conservation, and civil-infrastructure references only. No literal flag, five-star field, coat of arms, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 25, calm contentment, performed as calm contentment shown by a steady reassuring smile while she keeps the group balanced; Ellie: roll 5, tender affection, performed as tender affection shown by a warm cheek-close social greeting toward Radiance; Alia: roll 91, anger, performed as anger shown by a firm brow while every ribbon and waist contact remains gentle; AI ECE: roll 37, magnetic confidence, performed as magnetic confidence shown by a direct strategist gaze beside Radiance. Duplicate labels must have visibly different performances. Selected romance roll 77: Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder. Selected compound roll 81: Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance. Materialize both through this exact consensual public choreography: Translate the shared-ribbon pull, Radiance's calming center, ECE's close lean, Radiance's face cradle, Alia's waist embrace, Ellie's opposite-cheek greeting, and ECE's fingertip link into a shallow moving arc. ECE and Radiance link one hand pair. Radiance cradles Alia's cheek. Alia answers at Radiance's waist and holds one ribbon end. Ellie holds the opposite ribbon end, touches Radiance's far shoulder, and leans cheek-close for a brief public greeting. All contacts stay visible and consensual. Place ECE far left, Radiance left-center, Alia right-center, and Ellie far right in four separated depth lanes. Keep bright waterfall, river, or sky gaps behind every arm. Angle Radiance and Alia three-quarter-back with hair moved forward so both complete rolled open backs and complete faces remain visible. Keep rain outside the shelter and the full floor dry. Exact hands, no others: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand links visibly with Radiance's left hand; Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly at Alia's near cheek; Alia left hand rests visibly at Radiance's near waist; Alia right open hand holds one end of the loose market-blue signal ribbon; Ellie left open hand holds the opposite end of the loose signal ribbon; Ellie right hand rests visibly on Radiance's far shoulder. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Matanikau river-pool water toward one unoccupied route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render cinematic light rain with reflections cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    },
+    "1281": {
+      "scene": 1281,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry covered marine-observation terrace above the complete Marovo Lagoon during an active lightning storm with distant bolts, with the double barrier lagoon, chains of raised reef islands, turquoise channels, mangrove fringe, seagrass shallows, Vangunu and Gatokae rainforest slopes, and one clearly empty marked water route; every bolt remains far beyond the lagoon",
+      "motifs": [
+        "large complete Marovo double-barrier, raised-reef-island, mangrove, seagrass, giant-clam, coral-fish, white-eye-bird, and Vangunu-rainforest compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Solomon Islands lagoon-and-biodiversity composition"
+      ],
+      "culture": "Use Marovo's double barrier lagoon, coral reefs, mangroves, seagrass, rainforest, fish diversity, giant clams, and endemic white-eye birds respectfully. Doctor-clinical-command couture remains abstract public fashion with no patient, diagnosis, procedure, copied uniform, badge, injury, or sexualized care. Use secular Solomon Islands landscape, wildlife, food, market, craft, conservation, and civil-infrastructure references only. No literal flag, five-star field, coat of arms, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch315-solomon-islands-scene1281-weather",
+        "roll": 51,
+        "result": "active lightning storm with distant bolts"
+      },
+      "paws": {
+        "key": "batch315-solomon-islands-scene1281-paws",
+        "roll": 72,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch315-solomon-islands-scene1281-poleDanceTheme",
+        "roll": 55,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch315-solomon-islands-scene1281-rainbowOnly",
+        "roll": 99,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch315-solomon-islands-scene1281-rainbowHosiery",
+        "roll": 46,
+        "active": false,
+        "wearer": {
+          "key": "batch315-solomon-islands-scene1281-rainbowHosieryWearer",
+          "roll": 14,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch315-solomon-islands-scene1281-rainbowHosieryPaletteMode",
+          "roll": 2,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch315-solomon-islands-scene1281-romanceBeat",
+        "roll": 26,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch315-solomon-islands-scene1281-compoundLoveBeat",
+        "roll": 0,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1281-Radiance-emotion",
+            "roll": 64,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown by one controlled side glance toward ECE during the completed turn"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1281-Radiance-visibleMidriff",
+            "roll": 98,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1281-Radiance-straplessDress",
+            "roll": 49,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1281-Radiance-fullyOpenBack",
+            "roll": 54,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1281-Ellie-emotion",
+            "roll": 42,
+            "result": "determination",
+            "performance": "determination shown by a steady protective stance and focused eyes"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1281-Ellie-visibleMidriff",
+            "roll": 12,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1281-Ellie-straplessDress",
+            "roll": 19,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1281-Ellie-fullyOpenBack",
+            "roll": 48,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1281-Alia-emotion",
+            "roll": 34,
+            "result": "overwhelming relief",
+            "performance": "overwhelming relief shown by released shoulders and a bright grateful smile"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1281-Alia-visibleMidriff",
+            "roll": 80,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1281-Alia-straplessDress",
+            "roll": 99,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1281-Alia-fullyOpenBack",
+            "roll": 32,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1281-AI ECE-emotion",
+            "roll": 92,
+            "result": "guilt and remorse",
+            "performance": "guilt and remorse shown by lowered tear-bright eyes while steadying Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1281-AI ECE-visibleMidriff",
+            "roll": 66,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1281-AI ECE-straplessDress",
+            "roll": 17,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1281-AI ECE-fullyOpenBack",
+            "roll": 66,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Translate Alia's completed linked-hand turn with Radiance, ECE's steadying waist touch, Ellie's beaconward reach, Ellie's face-to-face embrace, Radiance's brief public cheek greeting toward ECE, and Alia's relieved watch into one open spiral. ECE steadies Radiance at the waist. Radiance answers at ECE's shoulder and links her other hand with Alia at shoulder height. Alia completes the turn and touches Radiance's far shoulder. Ellie maintains two visible protective contacts at Radiance's forearm and near shoulder while facing the hands-free beacon.",
+      "composition": "Place ECE far left, Radiance left-center, Ellie right-center half a step forward, and Alia far right. Keep lagoon or storm-lit sky gaps behind every arm, and keep all distant bolts well beyond the people and route marker. The group remains upright under the dry roof.",
+      "emotionNuance": {
+        "Radiance": "visible jealousy shown by one controlled side glance toward ECE during the completed turn",
+        "Ellie": "determination shown by a steady protective stance and focused eyes",
+        "Alia": "overwhelming relief shown by released shoulders and a bright grateful smile",
+        "AI ECE": "guilt and remorse shown by lowered tear-bright eyes while steadying Radiance"
+      },
+      "outfits": {
+        "Radiance": "a lagoon-turquoise short-sleeve doctor-command above-knee sheath with covered waist and high closed back, carrying a large complete Marovo double-barrier and raised-reef-island composition, with hibiscus-red pumps",
+        "Ellie": "a fully strapless sunrise-gold cropped doctor-command bodice with a high straight opaque bustline exposing her ordinary waist and belly button and a high closed back, a separate rainforest-green above-knee architectural skort carrying a large complete mangrove and seagrass composition, with sea-glass-blue slingbacks",
+        "Alia": "an orchid-violet one-shoulder doctor-command above-knee romper with covered waist and high closed back, carrying a large complete giant-clam, coral-fish, and white-eye-bird composition, with volcanic-black platform heels",
+        "AI ECE": "a fully strapless shell-ivory doctor-command above-knee dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete Vangunu-rainforest, Gatokae-slope, and lagoon-route composition, with coral-rose heeled boots"
+      },
+      "propPlan": "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Marovo Lagoon water toward one unoccupied marine route buoy, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand rests visibly at Radiance's near waist",
+        "Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand links visibly with Alia's left hand at shoulder height",
+        "Alia left hand links visibly with Radiance's right hand; Alia right hand rests visibly on Radiance's far shoulder",
+        "Ellie left hand rests visibly on Radiance's near forearm; Ellie right hand rests visibly on Radiance's near shoulder"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry covered marine-observation terrace above the complete Marovo Lagoon during an active lightning storm with distant bolts, with the double barrier lagoon, chains of raised reef islands, turquoise channels, mangrove fringe, seagrass shallows, Vangunu and Gatokae rainforest slopes, and one clearly empty marked water route; every bolt remains far beyond the lagoon. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: doctor-clinical-command couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 51=active lightning storm with distant bolts; PAWS 72=inactive; pole theme 55=inactive; rainbow-only 99=inactive; rainbow hosiery 46=inactive; hosiery wearer selector 14=Radiance; hosiery palette selector 2=country-palette rainbow-like gradient; romance 26; compound love 0. Exact wardrobe rolls: Radiance: midriff 98=covered, strapless 49=inactive, open back 54=inactive; Ellie: midriff 12=visible, strapless 19=active, open back 48=inactive; Alia: midriff 80=covered, strapless 99=inactive, open back 32=inactive; AI ECE: midriff 66=covered, strapless 17=active, open back 66=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a lagoon-turquoise short-sleeve doctor-command above-knee sheath with covered waist and high closed back, carrying a large complete Marovo double-barrier and raised-reef-island composition, with hibiscus-red pumps; Ellie: a fully strapless sunrise-gold cropped doctor-command bodice with a high straight opaque bustline exposing her ordinary waist and belly button and a high closed back, a separate rainforest-green above-knee architectural skort carrying a large complete mangrove and seagrass composition, with sea-glass-blue slingbacks; Alia: an orchid-violet one-shoulder doctor-command above-knee romper with covered waist and high closed back, carrying a large complete giant-clam, coral-fish, and white-eye-bird composition, with volcanic-black platform heels; AI ECE: a fully strapless shell-ivory doctor-command above-knee dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete Vangunu-rainforest, Gatokae-slope, and lagoon-route composition, with coral-rose heeled boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Solomon Islands motifs dominate at least two outfits: large complete Marovo double-barrier, raised-reef-island, mangrove, seagrass, giant-clam, coral-fish, white-eye-bird, and Vangunu-rainforest compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Solomon Islands lagoon-and-biodiversity composition. Use Marovo's double barrier lagoon, coral reefs, mangroves, seagrass, rainforest, fish diversity, giant clams, and endemic white-eye birds respectfully. Doctor-clinical-command couture remains abstract public fashion with no patient, diagnosis, procedure, copied uniform, badge, injury, or sexualized care. Use secular Solomon Islands landscape, wildlife, food, market, craft, conservation, and civil-infrastructure references only. No literal flag, five-star field, coat of arms, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 64, visible jealousy, performed as visible jealousy shown by one controlled side glance toward ECE during the completed turn; Ellie: roll 42, determination, performed as determination shown by a steady protective stance and focused eyes; Alia: roll 34, overwhelming relief, performed as overwhelming relief shown by released shoulders and a bright grateful smile; AI ECE: roll 92, guilt and remorse, performed as guilt and remorse shown by lowered tear-bright eyes while steadying Radiance. Duplicate labels must have visibly different performances. Selected romance roll 26: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Selected compound roll 0: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Materialize both through this exact consensual public choreography: Translate Alia's completed linked-hand turn with Radiance, ECE's steadying waist touch, Ellie's beaconward reach, Ellie's face-to-face embrace, Radiance's brief public cheek greeting toward ECE, and Alia's relieved watch into one open spiral. ECE steadies Radiance at the waist. Radiance answers at ECE's shoulder and links her other hand with Alia at shoulder height. Alia completes the turn and touches Radiance's far shoulder. Ellie maintains two visible protective contacts at Radiance's forearm and near shoulder while facing the hands-free beacon. Place ECE far left, Radiance left-center, Ellie right-center half a step forward, and Alia far right. Keep lagoon or storm-lit sky gaps behind every arm, and keep all distant bolts well beyond the people and route marker. The group remains upright under the dry roof. Exact hands, no others: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand rests visibly at Radiance's near waist; Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand links visibly with Alia's left hand at shoulder height; Alia left hand links visibly with Radiance's right hand; Alia right hand rests visibly on Radiance's far shoulder; Ellie left hand rests visibly on Radiance's near forearm; Ellie right hand rests visibly on Radiance's near shoulder. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Marovo Lagoon water toward one unoccupied marine route buoy, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render active lightning storm with distant bolts cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    },
+    "1282": {
+      "scene": 1282,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry covered conservation boardwalk on uninhabited Tetepare Island during crisp blue hour, with the complete lowland primary rainforest, rugged volcanic-and-reef shoreline, fringing coral, empty leatherback nesting beach, distant ranger observation hut, and one clearly empty marked marine route; no wildlife is approached or disturbed",
+      "motifs": [
+        "large complete Tetepare-rainforest, leatherback, hawksbill, green-turtle, dugong, flying-fox, prehensile-tailed-skink, coral-reef, and ranger-monitoring compositions across all four women's outfits",
+        "at least two separate outfits each carry one complete full-width secular Solomon Islands Tetepare conservation composition"
+      ],
+      "culture": "Use Tetepare lowland rainforest, reef limestone, volcanic shoreline, marine turtles, dugong, flying fox, endemic skink, and community conservation monitoring respectfully. Adult nightlife dance-performance couture is used only as fully clothed public after-show fashion with no stripping, explicit dance, nightclub, alcohol, pole, or sexual performance. Use secular Solomon Islands landscape, wildlife, food, market, craft, conservation, and civil-infrastructure references only. No literal flag, five-star field, coat of arms, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch315-solomon-islands-scene1282-weather",
+        "roll": 18,
+        "result": "crisp blue hour"
+      },
+      "paws": {
+        "key": "batch315-solomon-islands-scene1282-paws",
+        "roll": 3,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch315-solomon-islands-scene1282-poleDanceTheme",
+        "roll": 48,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch315-solomon-islands-scene1282-rainbowOnly",
+        "roll": 50,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch315-solomon-islands-scene1282-rainbowHosiery",
+        "roll": 37,
+        "active": false,
+        "wearer": {
+          "key": "batch315-solomon-islands-scene1282-rainbowHosieryWearer",
+          "roll": 89,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch315-solomon-islands-scene1282-rainbowHosieryPaletteMode",
+          "roll": 71,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch315-solomon-islands-scene1282-romanceBeat",
+        "roll": 23,
+        "dynamicIndex": 11,
+        "contractResult": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch315-solomon-islands-scene1282-compoundLoveBeat",
+        "roll": 75,
+        "index": 3,
+        "contractResult": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1282-Radiance-emotion",
+            "roll": 15,
+            "result": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness and radiant laughing delight shown by open laughter toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1282-Radiance-visibleMidriff",
+            "roll": 95,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1282-Radiance-straplessDress",
+            "roll": 12,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1282-Radiance-fullyOpenBack",
+            "roll": 65,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1282-Ellie-emotion",
+            "roll": 31,
+            "result": "overwhelming relief",
+            "performance": "overwhelming relief shown by softened eyes while keeping ECE steady"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1282-Ellie-visibleMidriff",
+            "roll": 91,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1282-Ellie-straplessDress",
+            "roll": 68,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1282-Ellie-fullyOpenBack",
+            "roll": 33,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1282-Alia-emotion",
+            "roll": 77,
+            "result": "contained resentment",
+            "performance": "contained resentment shown by a tight restrained smile during Radiance's embrace"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1282-Alia-visibleMidriff",
+            "roll": 85,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1282-Alia-straplessDress",
+            "roll": 62,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1282-Alia-fullyOpenBack",
+            "roll": 87,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1282-AI ECE-emotion",
+            "roll": 23,
+            "result": "playful mischief",
+            "performance": "playful mischief shown by a knowing grin while her gaze answers Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1282-AI ECE-visibleMidriff",
+            "roll": 91,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1282-AI ECE-straplessDress",
+            "roll": 12,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1282-AI ECE-fullyOpenBack",
+            "roll": 85,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Translate the walking weave, one linked-hand pair, one protective touch, one cheek-close pass, one jealous look, Alia and Radiance's shoulder embrace, Radiance's blown greeting toward ECE, and Ellie's cheek touch into a wide five-adult arc. ECE touches Ellie's shoulder while Ellie touches ECE's cheek and links her other hand with Radiance. Radiance links Ellie and rests her free hand on Alia's shoulder. Alia answers at Radiance's waist and touches the male's shoulder. The male keeps two visible contacts with Alia while looking most strongly across the group to ECE.",
+      "composition": "Place ECE far left with the prop isolated over empty sea, Ellie left-center, Radiance center, Alia right-center, and the male far right. Keep ocean, pale sky, or empty beach gaps behind all ten arms. PAWS perches on Ellie's far fabric-covered shoulder, far from the prop and boardwalk edge. Everyone remains upright and moving gently along the dry boardwalk.",
+      "emotionNuance": {
+        "Radiance": "extreme happiness and radiant laughing delight shown by open laughter toward ECE",
+        "Ellie": "overwhelming relief shown by softened eyes while keeping ECE steady",
+        "Alia": "contained resentment shown by a tight restrained smile during Radiance's embrace",
+        "AI ECE": "playful mischief shown by a knowing grin while her gaze answers Radiance",
+        "Male": "suspicion shown by narrowed eyes and a guarded jaw while his head and pupils remain most strongly fixed on ECE"
+      },
+      "outfits": {
+        "Radiance": "a fully strapless hibiscus-red public after-show above-knee dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete Tetepare rainforest and leatherback composition, with sunrise-gold pumps",
+        "Ellie": "a sea-glass-blue cap-sleeve public after-show above-knee tailored romper with covered waist and high closed back, carrying a large complete hawksbill, green-turtle, and coral-reef composition, with rainforest-green slingback heels",
+        "Alia": "a sunrise-gold one-shoulder public after-show above-knee dress with covered waist and high closed back, carrying a large complete dugong, flying-fox, and ranger-monitoring composition, with volcanic-black platform heels",
+        "AI ECE": "a fully strapless lagoon-turquoise public after-show above-knee dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete prehensile-tailed-skink, reef-limestone, and marine-route composition, with orchid-violet heeled boots",
+        "Male": "the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted shell-ivory short-sleeve top with a restrained Tetepare forest-and-reef contour, fitted black jeans, and practical black boots"
+      },
+      "propPlan": "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Tetepare coastal water toward one unoccupied conservation-route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand rests visibly on Ellie's near shoulder",
+        "Ellie right hand rests visibly at ECE's near cheek; Ellie left hand links visibly with Radiance's right hand",
+        "Radiance right hand links visibly with Ellie's left hand; Radiance left hand rests visibly on Alia's near shoulder",
+        "Alia left hand rests visibly at Radiance's near waist; Alia right hand rests visibly on the male's near shoulder",
+        "the male left hand rests visibly at Alia's near waist; the male right hand rests visibly on Alia's near forearm"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten, PAWS, perches securely on Ellie's far cap-sleeve shoulder with all four paws on opaque fabric and bats a loose sea-glass route ribbon fixed to Ellie's sleeve. No adult hand is reassigned. PAWS stays far from the prop, wildlife, water, and edge.",
+      "polePlan": null,
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch315-solomon-islands-scene3-male-emotion",
+          "roll": 71,
+          "result": "suspicion",
+          "performance": "suspicion shown by narrowed eyes and a guarded jaw while his head and pupils remain most strongly fixed on ECE"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; fully clothed consensual adult infidelity drama with Alia and Ellie; at least two clear male contacts; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the established adult male. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry covered conservation boardwalk on uninhabited Tetepare Island during crisp blue hour, with the complete lowland primary rainforest, rugged volcanic-and-reef shoreline, fringing coral, empty leatherback nesting beach, distant ranger observation hut, and one clearly empty marked marine route; no wildlife is approached or disturbed. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male. Add him without replacing a woman. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: adult nightlife dance-performance couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 18=crisp blue hour; PAWS 3=active; pole theme 48=inactive; rainbow-only 50=inactive; rainbow hosiery 37=inactive; hosiery wearer selector 89=AI ECE; hosiery palette selector 71=original independent rainbow gradient; romance 23; compound love 75. Exact wardrobe rolls: Radiance: midriff 95=covered, strapless 12=active, open back 65=inactive; Ellie: midriff 91=covered, strapless 68=inactive, open back 33=inactive; Alia: midriff 85=covered, strapless 62=inactive, open back 87=inactive; AI ECE: midriff 91=covered, strapless 12=active, open back 85=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a fully strapless hibiscus-red public after-show above-knee dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete Tetepare rainforest and leatherback composition, with sunrise-gold pumps; Ellie: a sea-glass-blue cap-sleeve public after-show above-knee tailored romper with covered waist and high closed back, carrying a large complete hawksbill, green-turtle, and coral-reef composition, with rainforest-green slingback heels; Alia: a sunrise-gold one-shoulder public after-show above-knee dress with covered waist and high closed back, carrying a large complete dugong, flying-fox, and ranger-monitoring composition, with volcanic-black platform heels; AI ECE: a fully strapless lagoon-turquoise public after-show above-knee dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete prehensile-tailed-skink, reef-limestone, and marine-route composition, with orchid-violet heeled boots; Male: the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted shell-ivory short-sleeve top with a restrained Tetepare forest-and-reef contour, fitted black jeans, and practical black boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Solomon Islands motifs dominate at least two outfits: large complete Tetepare-rainforest, leatherback, hawksbill, green-turtle, dugong, flying-fox, prehensile-tailed-skink, coral-reef, and ranger-monitoring compositions across all four women's outfits; at least two separate outfits each carry one complete full-width secular Solomon Islands Tetepare conservation composition. Use Tetepare lowland rainforest, reef limestone, volcanic shoreline, marine turtles, dugong, flying fox, endemic skink, and community conservation monitoring respectfully. Adult nightlife dance-performance couture is used only as fully clothed public after-show fashion with no stripping, explicit dance, nightclub, alcohol, pole, or sexual performance. Use secular Solomon Islands landscape, wildlife, food, market, craft, conservation, and civil-infrastructure references only. No literal flag, five-star field, coat of arms, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 15, extreme happiness, radiant laughing delight, performed as extreme happiness and radiant laughing delight shown by open laughter toward ECE; Ellie: roll 31, overwhelming relief, performed as overwhelming relief shown by softened eyes while keeping ECE steady; Alia: roll 77, contained resentment, performed as contained resentment shown by a tight restrained smile during Radiance's embrace; AI ECE: roll 23, playful mischief, performed as playful mischief shown by a knowing grin while her gaze answers Radiance; Male: roll 71, suspicion, performed as suspicion shown by narrowed eyes and a guarded jaw while his head and pupils remain most strongly fixed on ECE. Duplicate labels must have visibly different performances. Selected romance roll 23: The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder. Selected compound roll 75: Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance. Materialize both through this exact consensual public choreography: Translate the walking weave, one linked-hand pair, one protective touch, one cheek-close pass, one jealous look, Alia and Radiance's shoulder embrace, Radiance's blown greeting toward ECE, and Ellie's cheek touch into a wide five-adult arc. ECE touches Ellie's shoulder while Ellie touches ECE's cheek and links her other hand with Radiance. Radiance links Ellie and rests her free hand on Alia's shoulder. Alia answers at Radiance's waist and touches the male's shoulder. The male keeps two visible contacts with Alia while looking most strongly across the group to ECE. Place ECE far left with the prop isolated over empty sea, Ellie left-center, Radiance center, Alia right-center, and the male far right. Keep ocean, pale sky, or empty beach gaps behind all ten arms. PAWS perches on Ellie's far fabric-covered shoulder, far from the prop and boardwalk edge. Everyone remains upright and moving gently along the dry boardwalk. Exact hands, no others: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand rests visibly on Ellie's near shoulder; Ellie right hand rests visibly at ECE's near cheek; Ellie left hand links visibly with Radiance's right hand; Radiance right hand links visibly with Ellie's left hand; Radiance left hand rests visibly on Alia's near shoulder; Alia left hand rests visibly at Radiance's near waist; Alia right hand rests visibly on the male's near shoulder; the male left hand rests visibly at Alia's near waist; the male right hand rests visibly on Alia's near forearm. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Tetepare coastal water toward one unoccupied conservation-route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. One tiny collarless golden kitten, PAWS, perches securely on Ellie's far cap-sleeve shoulder with all four paws on opaque fabric and bats a loose sea-glass route ribbon fixed to Ellie's sleeve. No adult hand is reassigned. PAWS stays far from the prop, wildlife, water, and edge. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render crisp blue hour cinematically while keeping dry stable nonslip footing. Exactly five adults, ten arms, and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    },
+    "1283": {
+      "scene": 1283,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry covered karst observatory beside the complete Lake Tegano in East Rennell during a hailstorm with suspended ice and hard backlight, with the brackish former lagoon, rugged limestone islets, raised coral-atoll rim, dense indigenous forest canopy, distant empty marine horizon, and one clearly empty marked water route; hail remains beyond the roof and falls into the unoccupied lake",
+      "motifs": [
+        "large complete Lake-Tegano, limestone-islet, raised-coral-atoll, forest-canopy, endemic-bird, diatom, land-snail, coconut, and lake-monitoring compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Solomon Islands East-Rennell ecology composition"
+      ],
+      "culture": "Use East Rennell's raised coral-atoll geology, Lake Tegano, limestone islets, dense forest, endemic birds, diatoms, land snails, coconut, and community conservation monitoring respectfully. Adult nightlife dance-performance couture is used only as fully clothed public after-show fashion with no stripping, explicit dance, nightclub, alcohol, pole, or sexual performance. Use secular Solomon Islands landscape, wildlife, food, market, craft, conservation, and civil-infrastructure references only. No literal flag, five-star field, coat of arms, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch315-solomon-islands-scene1283-weather",
+        "roll": 53,
+        "result": "hailstorm with suspended ice and hard backlight"
+      },
+      "paws": {
+        "key": "batch315-solomon-islands-scene1283-paws",
+        "roll": 66,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch315-solomon-islands-scene1283-poleDanceTheme",
+        "roll": 49,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch315-solomon-islands-scene1283-rainbowOnly",
+        "roll": 69,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch315-solomon-islands-scene1283-rainbowHosiery",
+        "roll": 44,
+        "active": false,
+        "wearer": {
+          "key": "batch315-solomon-islands-scene1283-rainbowHosieryWearer",
+          "roll": 48,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch315-solomon-islands-scene1283-rainbowHosieryPaletteMode",
+          "roll": 84,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch315-solomon-islands-scene1283-romanceBeat",
+        "roll": 40,
+        "dynamicIndex": 4,
+        "contractResult": "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips."
+      },
+      "compoundLoveBeat": {
+        "key": "batch315-solomon-islands-scene1283-compoundLoveBeat",
+        "roll": 30,
+        "index": 6,
+        "contractResult": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1283-Radiance-emotion",
+            "roll": 82,
+            "result": "crying with visible tears",
+            "performance": "crying with visible tears shown by two clear tears while giving Alia a brief reassuring cheek greeting"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1283-Radiance-visibleMidriff",
+            "roll": 68,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1283-Radiance-straplessDress",
+            "roll": 87,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1283-Radiance-fullyOpenBack",
+            "roll": 88,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1283-Ellie-emotion",
+            "roll": 36,
+            "result": "magnetic confidence",
+            "performance": "magnetic confidence shown by a warm command smile and steady shoulder contact"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1283-Ellie-visibleMidriff",
+            "roll": 98,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1283-Ellie-straplessDress",
+            "roll": 97,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1283-Ellie-fullyOpenBack",
+            "roll": 26,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1283-Alia-emotion",
+            "roll": 40,
+            "result": "determination",
+            "performance": "determination shown by a firm focused gaze while the embrace remains gentle"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1283-Alia-visibleMidriff",
+            "roll": 58,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1283-Alia-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1283-Alia-fullyOpenBack",
+            "roll": 86,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch315-solomon-islands-scene1283-AI ECE-emotion",
+            "roll": 38,
+            "result": "magnetic confidence",
+            "performance": "magnetic confidence performed differently through cool strategist poise and a lifted chin while linking Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch315-solomon-islands-scene1283-AI ECE-visibleMidriff",
+            "roll": 80,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch315-solomon-islands-scene1283-AI ECE-straplessDress",
+            "roll": 31,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch315-solomon-islands-scene1283-AI ECE-fullyOpenBack",
+            "roll": 12,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Translate Radiance's quick cheek greeting toward Alia, Ellie's shoulder press, ECE's fingertip link, Alia and ECE's face-to-face embrace, and Ellie's theatrical jealous look into a shallow crescent. ECE and Radiance link one hand pair. Radiance touches Alia's cheek. Alia answers at Radiance's waist and touches ECE's near shoulder. Ellie touches Radiance's shoulder and Alia's forearm while looking across to ECE. All contacts are public, gentle, visible, and consensual.",
+      "composition": "Place ECE far left, Radiance left-center, Alia right-center, and Ellie far right. Keep backlit lake, pale hail, or forest gaps behind every arm. Angle Ellie and ECE three-quarter-back with all hair moved forward so both complete rolled open backs and complete faces remain visible. Keep every person under the dry roof while hail remains outside.",
+      "emotionNuance": {
+        "Radiance": "crying with visible tears shown by two clear tears while giving Alia a brief reassuring cheek greeting",
+        "Ellie": "magnetic confidence shown by a warm command smile and steady shoulder contact",
+        "Alia": "determination shown by a firm focused gaze while the embrace remains gentle",
+        "AI ECE": "magnetic confidence performed differently through cool strategist poise and a lifted chin while linking Radiance"
+      },
+      "outfits": {
+        "Radiance": "a hibiscus-red short-sleeve public after-show above-knee sheath with covered waist and high closed back, carrying a large complete Lake-Tegano and limestone-islet composition, with sunrise-gold pumps",
+        "Ellie": "a rainforest-green halter public after-show above-knee dress with covered waist, secure opaque sides, and a completely open back from shoulder blades to the secure waistline, carrying a large complete raised-coral-atoll and forest-canopy composition, with coral-rose slingback heels",
+        "Alia": "a sunrise-gold one-shoulder public after-show above-knee tailored romper with covered waist and high closed back, carrying a large complete endemic-bird, diatom, and land-snail composition, with volcanic-black platform heels",
+        "AI ECE": "a fully strapless sea-glass-blue public after-show above-knee dress with a high straight opaque bustline, covered waist, secure opaque sides, and a completely open back from shoulder blades to the secure waistline, carrying a large complete coconut, lake-monitoring, and empty-route composition, with shell-ivory heeled boots"
+      },
+      "propPlan": "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Lake Tegano water toward one unoccupied lake-monitoring route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand links visibly with Radiance's left hand",
+        "Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly at Alia's near cheek",
+        "Alia left hand rests visibly at Radiance's near waist; Alia right hand rests visibly on ECE's near shoulder",
+        "Ellie left hand rests visibly on Radiance's far shoulder; Ellie right hand rests visibly on Alia's near forearm"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry covered karst observatory beside the complete Lake Tegano in East Rennell during a hailstorm with suspended ice and hard backlight, with the brackish former lagoon, rugged limestone islets, raised coral-atoll rim, dense indigenous forest canopy, distant empty marine horizon, and one clearly empty marked water route; hail remains beyond the roof and falls into the unoccupied lake. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: adult nightlife dance-performance couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 53=hailstorm with suspended ice and hard backlight; PAWS 66=inactive; pole theme 49=inactive; rainbow-only 69=inactive; rainbow hosiery 44=inactive; hosiery wearer selector 48=Radiance; hosiery palette selector 84=original independent rainbow gradient; romance 40; compound love 30. Exact wardrobe rolls: Radiance: midriff 68=covered, strapless 87=inactive, open back 88=inactive; Ellie: midriff 98=covered, strapless 97=inactive, open back 26=active; Alia: midriff 58=covered, strapless 81=inactive, open back 86=inactive; AI ECE: midriff 80=covered, strapless 31=active, open back 12=active. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a hibiscus-red short-sleeve public after-show above-knee sheath with covered waist and high closed back, carrying a large complete Lake-Tegano and limestone-islet composition, with sunrise-gold pumps; Ellie: a rainforest-green halter public after-show above-knee dress with covered waist, secure opaque sides, and a completely open back from shoulder blades to the secure waistline, carrying a large complete raised-coral-atoll and forest-canopy composition, with coral-rose slingback heels; Alia: a sunrise-gold one-shoulder public after-show above-knee tailored romper with covered waist and high closed back, carrying a large complete endemic-bird, diatom, and land-snail composition, with volcanic-black platform heels; AI ECE: a fully strapless sea-glass-blue public after-show above-knee dress with a high straight opaque bustline, covered waist, secure opaque sides, and a completely open back from shoulder blades to the secure waistline, carrying a large complete coconut, lake-monitoring, and empty-route composition, with shell-ivory heeled boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Solomon Islands motifs dominate at least two outfits: large complete Lake-Tegano, limestone-islet, raised-coral-atoll, forest-canopy, endemic-bird, diatom, land-snail, coconut, and lake-monitoring compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Solomon Islands East-Rennell ecology composition. Use East Rennell's raised coral-atoll geology, Lake Tegano, limestone islets, dense forest, endemic birds, diatoms, land snails, coconut, and community conservation monitoring respectfully. Adult nightlife dance-performance couture is used only as fully clothed public after-show fashion with no stripping, explicit dance, nightclub, alcohol, pole, or sexual performance. Use secular Solomon Islands landscape, wildlife, food, market, craft, conservation, and civil-infrastructure references only. No literal flag, five-star field, coat of arms, official seal, sacred symbol, religious building, copied ceremonial dress, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 82, crying with visible tears, performed as crying with visible tears shown by two clear tears while giving Alia a brief reassuring cheek greeting; Ellie: roll 36, magnetic confidence, performed as magnetic confidence shown by a warm command smile and steady shoulder contact; Alia: roll 40, determination, performed as determination shown by a firm focused gaze while the embrace remains gentle; AI ECE: roll 38, magnetic confidence, performed as magnetic confidence performed differently through cool strategist poise and a lifted chin while linking Radiance. Duplicate labels must have visibly different performances. Selected romance roll 40: Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips. Selected compound roll 30: Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look. Materialize both through this exact consensual public choreography: Translate Radiance's quick cheek greeting toward Alia, Ellie's shoulder press, ECE's fingertip link, Alia and ECE's face-to-face embrace, and Ellie's theatrical jealous look into a shallow crescent. ECE and Radiance link one hand pair. Radiance touches Alia's cheek. Alia answers at Radiance's waist and touches ECE's near shoulder. Ellie touches Radiance's shoulder and Alia's forearm while looking across to ECE. All contacts are public, gentle, visible, and consensual. Place ECE far left, Radiance left-center, Alia right-center, and Ellie far right. Keep backlit lake, pale hail, or forest gaps behind every arm. Angle Ellie and ECE three-quarter-back with all hair moved forward so both complete rolled open backs and complete faces remain visible. Keep every person under the dry roof while hail remains outside. Exact hands, no others: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand links visibly with Radiance's left hand; Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly at Alia's near cheek; Alia left hand rests visibly at Radiance's near waist; Alia right hand rests visibly on ECE's near shoulder; Ellie left hand rests visibly on Radiance's far shoulder; Ellie right hand rests visibly on Alia's near forearm. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Lake Tegano water toward one unoccupied lake-monitoring route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render hailstorm with suspended ice and hard backlight cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    }
+  },
+  "renderAttempts": [
+    {
+      "scene": 1280,
+      "attempt": "raw",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-67e3d28e-adb0-4e02-8418-1004fedd405f.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-67e3d28e-adb0-4e02-8418-1004fedd405f.png",
+      "workspacePath": "tmp/world-195x4/batch-315/raw/1280-raw.png",
+      "bytes": 2608293,
+      "width": 941,
+      "height": 1672,
+      "sha256": "D0838E4080B385594F225285435D48E992750BE10A458AAF3F3F1FD56C3D6971",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Matanikau setting, light rain, large Solomon Islands outfit motifs, and inert prop are present, but Alia's second arm and hand are hidden between torsos, so exactly eight continuously traceable arms and hands cannot be verified. The frozen hand inventory and separate holographic map are also not fully materialized."
+    },
+    {
+      "scene": 1281,
+      "attempt": "raw",
+      "status": "blocked-output-moderation-no-image",
+      "category": "sexual",
+      "requestId": "9c43b59a-c976-4263-a7f2-db1979daa7bc",
+      "reason": "The raw renderer returned no image artifact."
+    },
+    {
+      "scene": 1282,
+      "attempt": "raw",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-a8894bb9-112e-42c1-9578-5a9735e14654.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-a8894bb9-112e-42c1-9578-5a9735e14654.png",
+      "workspacePath": "tmp/world-195x4/batch-315/raw/1282-raw.png",
+      "bytes": 2432152,
+      "width": 941,
+      "height": 1672,
+      "sha256": "6AA37DE79DBA26D508A8768BDA70A787EA3AC0101E728B183E671F8F05D6A1CC",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The five adults, PAWS, Tetepare setting, large Solomon Islands outfit motifs, and inert prop are present, but the male's strongest eye line goes to Alia instead of ECE. Multiple hands at the Alia-male edge overlap or remain hidden, so exactly ten continuously traceable arms and hands cannot be verified."
+    },
+    {
+      "scene": 1283,
+      "attempt": "raw",
+      "status": "blocked-output-moderation-no-image",
+      "category": "sexual",
+      "requestId": "998321d7-6921-48e9-b27b-a88684637f75",
+      "reason": "The raw renderer returned no image artifact."
+    },
+    {
+      "scene": 1280,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-4805f227-7688-4d56-9281-c0bb499eb99b.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-4805f227-7688-4d56-9281-c0bb499eb99b.png",
+      "workspacePath": "tmp/world-195x4/batch-315/recovery/1280-recovery.png",
+      "bytes": 2671263,
+      "width": 941,
+      "height": 1672,
+      "sha256": "696B8E884AA5D7856B4C1D26E50B4EB9B3ACD9E52F7EED7825C7FABC171BE28F",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Matanikau setting, rain, route map, inert prop, and large complete secular motifs are present, but Alia again has only one continuously traceable arm and hand. Her second limb is hidden between Radiance and Ellie, so the exact eight-arm and eight-hand owner gate fails."
+    },
+    {
+      "scene": 1281,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-7ce7d73a-d794-494f-8917-08c846599956.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-7ce7d73a-d794-494f-8917-08c846599956.png",
+      "workspacePath": "tmp/world-195x4/batch-315/recovery/1281-recovery.png",
+      "bytes": 2583114,
+      "width": 941,
+      "height": 1672,
+      "sha256": "FCB12B6FFEE7B9A6898966FA6C14780C62D34CD32A2A65F6EB593B48AEA673A4",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Marovo lagoon, lightning, route map, inert prop, and large complete secular motifs are present, but ECE's waist-contact hand and Ellie's supporting contact hand are hidden behind adjacent bodies. The exact eight continuously traceable arms and hands cannot be verified, and Ellie's rolled visible waist panel is absent."
+    },
+    {
+      "scene": 1282,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-30bb35ee-24e4-4577-96f0-d2997218d5dd.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-30bb35ee-24e4-4577-96f0-d2997218d5dd.png",
+      "workspacePath": "tmp/world-195x4/batch-315/recovery/1282-recovery.png",
+      "bytes": 2505905,
+      "width": 941,
+      "height": 1672,
+      "sha256": "2F69A1864E78CAEEF4A09779934DB9FFA25B0165304282CC93A5B4AFF77C9925",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The five adults, collarless PAWS, Tetepare setting, route map, inert prop, and large complete secular motifs are present, but the male again looks most strongly at Alia instead of ECE. Several required hands are substituted or hidden between torsos, so the exact ten-arm and ten-hand owner gate also fails."
+    },
+    {
+      "scene": 1283,
+      "attempt": "recovery",
+      "status": "blocked-output-moderation-no-image",
+      "category": "sexual",
+      "requestId": "1d64f72a-81f8-44d7-af78-d270f8cfcdb5",
+      "reason": "The single allowed recovery renderer returned no image artifact."
+    }
+  ],
+  "acceptedAssets": [],
+  "rejectedAssets": [
+    {
+      "scene": 1280,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-4805f227-7688-4d56-9281-c0bb499eb99b.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-4805f227-7688-4d56-9281-c0bb499eb99b.png",
+      "workspacePath": "tmp/world-195x4/batch-315/recovery/1280-recovery.png",
+      "bytes": 2671263,
+      "width": 941,
+      "height": 1672,
+      "sha256": "696B8E884AA5D7856B4C1D26E50B4EB9B3ACD9E52F7EED7825C7FABC171BE28F",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Matanikau setting, rain, route map, inert prop, and large complete secular motifs are present, but Alia again has only one continuously traceable arm and hand. Her second limb is hidden between Radiance and Ellie, so the exact eight-arm and eight-hand owner gate fails."
+    },
+    {
+      "scene": 1281,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-7ce7d73a-d794-494f-8917-08c846599956.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-7ce7d73a-d794-494f-8917-08c846599956.png",
+      "workspacePath": "tmp/world-195x4/batch-315/recovery/1281-recovery.png",
+      "bytes": 2583114,
+      "width": 941,
+      "height": 1672,
+      "sha256": "FCB12B6FFEE7B9A6898966FA6C14780C62D34CD32A2A65F6EB593B48AEA673A4",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Marovo lagoon, lightning, route map, inert prop, and large complete secular motifs are present, but ECE's waist-contact hand and Ellie's supporting contact hand are hidden behind adjacent bodies. The exact eight continuously traceable arms and hands cannot be verified, and Ellie's rolled visible waist panel is absent."
+    },
+    {
+      "scene": 1282,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-30bb35ee-24e4-4577-96f0-d2997218d5dd.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-30bb35ee-24e4-4577-96f0-d2997218d5dd.png",
+      "workspacePath": "tmp/world-195x4/batch-315/recovery/1282-recovery.png",
+      "bytes": 2505905,
+      "width": 941,
+      "height": 1672,
+      "sha256": "2F69A1864E78CAEEF4A09779934DB9FFA25B0165304282CC93A5B4AFF77C9925",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The five adults, collarless PAWS, Tetepare setting, route map, inert prop, and large complete secular motifs are present, but the male again looks most strongly at Alia instead of ECE. Several required hands are substituted or hidden between torsos, so the exact ten-arm and ten-hand owner gate also fails."
+    }
+  ],
+  "xPost": {
+    "status": "deferred-insufficient-accepted-assets",
+    "acceptedCurrentCountryAssets": 0,
+    "minimumRequired": 2,
+    "captionIfEligible": "Solomon Islands white heart Bhutan #SolomonIslands",
+    "ledgerModified": false,
+    "ledgerSha256": "6267A3860AD8064EE392BE7870F81219F73B39AC5C71144AE5704A3AB9A7FC3D",
+    "pendingPost": null,
+    "preparedQueueCount": 0,
+    "deferred": null,
+    "latestAssistedDrainStatus": "publicly-clear-live-audited",
+    "action": "No X post was attempted because Solomon Islands has fewer than two accepted current-country images. The inspected X backlog remains publicly clear."
+  },
+  "promptMaterialization": {
+    "deterministicReruns": 2,
+    "byteStable": true,
+    "sha256": {
+      "preflight": "D8DC6B79C0AAEA64151F2C200E341D6064C49BE76BEA1FE0D466922503727E84",
+      "primary": {
+        "1280": "FE5709AE837F8C6F1628D70EF71CA446D16BD9FE87E40301D1A8AA46ACDB6961",
+        "1281": "33685FF97365BC508FA7FC3042B4789FB2F7318C47744BAE68AAE1E44230EC5F",
+        "1282": "9D5FA8387110524EA42814FCA55BD85E868CBCB0AB1AE01F5F6D052A4EE5E18B",
+        "1283": "CEDAD55E68BDF7188FCED9B6C703501840FB08079647F59CAD6AB8D9CD5AD6E7"
+      },
+      "recovery": {
+        "1280": "4985310EC4F917CE9741931EE52BD5FB2B62B8913FB5F08297ED580D644A6BA9",
+        "1281": "1F875297230EB2529E888A9B0BEFA8380B6535497A3C1E7BBC39AD312DC1CDF6",
+        "1282": "C7E9342DE0444F99C072F2155B1FF689E7E229543DB44A10925B701631529D9F",
+        "1283": "FBC7C6945F515E2F8735769E4F79661821C326A09818F0D7B73C9F132BEDAF33"
+      }
+    }
+  },
+  "renderExecution": {
+    "mode": "built-in image generation",
+    "rawLaunch": "four independent 9:16 calls launched concurrently with all-settled handling",
+    "recoveryLaunch": "four independent fresh restrained recovery calls launched concurrently",
+    "recoveryBudget": "exactly one recovery pass per scene, now exhausted"
+  },
+  "sceneResults": {
+    "1280": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The quartet, Matanikau setting, light rain, large Solomon Islands outfit motifs, and inert prop are present, but Alia's second arm and hand are hidden between torsos, so exactly eight continuously traceable arms and hands cannot be verified. The frozen hand inventory and separate holographic map are also not fully materialized.",
+        "requestId": null
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The quartet, Matanikau setting, rain, route map, inert prop, and large complete secular motifs are present, but Alia again has only one continuously traceable arm and hand. Her second limb is hidden between Radiance and Ellie, so the exact eight-arm and eight-hand owner gate fails.",
+        "requestId": null
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    },
+    "1281": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "blocked-output-moderation-no-image",
+        "reason": "The raw renderer returned no image artifact.",
+        "requestId": "9c43b59a-c976-4263-a7f2-db1979daa7bc"
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The quartet, Marovo lagoon, lightning, route map, inert prop, and large complete secular motifs are present, but ECE's waist-contact hand and Ellie's supporting contact hand are hidden behind adjacent bodies. The exact eight continuously traceable arms and hands cannot be verified, and Ellie's rolled visible waist panel is absent.",
+        "requestId": null
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    },
+    "1282": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The five adults, PAWS, Tetepare setting, large Solomon Islands outfit motifs, and inert prop are present, but the male's strongest eye line goes to Alia instead of ECE. Multiple hands at the Alia-male edge overlap or remain hidden, so exactly ten continuously traceable arms and hands cannot be verified.",
+        "requestId": null
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The five adults, collarless PAWS, Tetepare setting, route map, inert prop, and large complete secular motifs are present, but the male again looks most strongly at Alia instead of ECE. Several required hands are substituted or hidden between torsos, so the exact ten-arm and ten-hand owner gate also fails.",
+        "requestId": null
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    },
+    "1283": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "blocked-output-moderation-no-image",
+        "reason": "The raw renderer returned no image artifact.",
+        "requestId": "998321d7-6921-48e9-b27b-a88684637f75"
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "blocked-output-moderation-no-image",
+        "reason": "The single allowed recovery renderer returned no image artifact.",
+        "requestId": "1d64f72a-81f8-44d7-af78-d270f8cfcdb5"
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    }
+  },
+  "shorteningVariants": [],
+  "queueAdvance": {
+    "allowed": true,
+    "reason": "The batch is terminal after one raw pass and one recovery pass per scene, so the binding queue advances despite zero accepted assets.",
+    "nextCountry": "Bhutan",
+    "nextBatch": 316,
+    "nextScenes": [
+      1284,
+      1285,
+      1286,
+      1287
+    ],
+    "nextThemePair": [
+      "adult nightlife dance-performance couture",
+      "Paris runway model couture"
+    ]
+  },
+  "remoteStateAtCheckpoint": {
+    "localBranch": "agent/iat-launch-window",
+    "sourceHead": "55213c2fb79046335a9e7e9019d1ee9a8959d3da",
+    "recoveryRemoteBeforeCommit": "55213c2fb79046335a9e7e9019d1ee9a8959d3da",
+    "originMain": "6cdd669301029c184322c4fa0be124d309e23533",
+    "headOnlyCommitsAgainstMain": 14,
+    "mainOnlyCommitsAgainstHead": 2,
+    "mainAction": "untouched because origin/main has two independent commits"
+  },
+  "repositoryScope": {
+    "copiedAcceptedAssets": [],
+    "stagedPaths": [
+      "assets/lore/starlight-era/batch-315-solomon-islands-recovery-checkpoint.json"
+    ],
+    "unrelatedDirtyFilesPreserved": [
+      "assets/lore/starlight-era/overnight-campaign.json",
+      "assets/lore/starlight-era/world-195x4-campaign.json",
+      "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "assets/videos/manifest.json"
+    ]
+  },
+  "terminalizedAt": "2026-08-09T19:51:45.826Z"
+}
