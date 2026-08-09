@@ -34,17 +34,52 @@ import {
 globalThis.__filename = fileURLToPath(import.meta.url);
 globalThis.__dirname = dirname(globalThis.__filename);
 
-async function render() {
+async function render(url = "http://localhost/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
+  const requestUrl = new URL(url);
 
   return worker.fetch(
-    new Request("http://localhost/", { headers: { accept: "text/html" } }),
+    new Request(url, { headers: {
+      accept: "text/html",
+      host: requestUrl.host,
+      "x-forwarded-host": requestUrl.host,
+      "x-forwarded-proto": requestUrl.protocol.replace(":", ""),
+    } }),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
     { waitUntil() {}, passThroughOnException() {} },
   );
 }
+
+test("renders reconciled future previews in both public languages", async () => {
+  const paths = ["/future", "/future/predictive-engine", "/future/casino"];
+  const [english, turkish] = await Promise.all([
+    Promise.all(paths.map(async (path) => (await render(`https://internalagency.io${path}`)).text())),
+    Promise.all(paths.map(async (path) => (await render(`https://ileriakil.com${path}`)).text())),
+  ]);
+
+  for (const html of english) {
+    assert.match(html, /<html lang="en"/i);
+    assert.match(html, /POST-GENESIS CONCEPT/);
+    assert.match(html, /INACTIVE/);
+    assert.match(html, /NO WAGER ROUTE/);
+  }
+  for (const html of turkish) {
+    assert.match(html, /<html lang="tr"/i);
+    assert.match(html, /BAŞLANGIÇ SONRASI KONSEPT/);
+    assert.match(html, /PASİF/);
+    assert.match(html, /BAHİS YOLU YOK/);
+  }
+
+  assert.match(english[1], /1% PROTOCOL EDGE/);
+  assert.match(english[1], /EXTENDED \$IAT APY RUNWAY/);
+  assert.match(english[2], /15 DAYS AFTER \$IAT GENESIS/);
+  assert.match(turkish[1], /%1 PROTOKOL PAYI/);
+  assert.match(turkish[1], /LİKİDİTE HAVUZU/);
+  assert.match(turkish[1], /\$IAT APY SÜRESİNİ UZATAN KAYNAK/);
+  assert.match(turkish[2], /\$IAT BAŞLANGICINDAN 15 GÜN SONRA/);
+});
 
 test("renders the STAR ASCENT launch page and transparent disclosure", async () => {
   const response = await render();
