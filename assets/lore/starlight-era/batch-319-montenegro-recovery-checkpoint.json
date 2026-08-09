@@ -1,0 +1,1579 @@
+{
+  "batch": 319,
+  "country": "Montenegro",
+  "status": "terminal-blocked-after-single-recovery-pass",
+  "sourceCommit": "350371679982e346e47b51d110462f6409eda9e0",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch319-montenegro keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "nextThemePair": [
+    "undercover investigator couture",
+    "nurse-care couture"
+  ],
+  "nextQueueCountry": "Malta",
+  "nextQueueBatch": 320,
+  "nextQueueScenes": [
+    1300,
+    1301,
+    1302,
+    1303
+  ],
+  "researchSources": [
+    {
+      "url": "https://whc.unesco.org/en/list/100",
+      "usedFor": "Durmitor limestone massif, glacial lakes, Black Lake, black-pine forest, and Tara River gorge"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/125",
+      "usedFor": "Boka Kotorska linked bays, steep rocky hills, coastal town planning, fortified settlements, and sea routes"
+    },
+    {
+      "url": "https://www.montenegro.travel/en/explore-montenegro/culture-and-tours/fortresses",
+      "usedFor": "Kotor's 4.5-kilometre defensive wall system rising from the sea to the mountain fortress"
+    },
+    {
+      "url": "https://www.montenegro.travel/en/unique-montenegro/canyons-of-montenegro/tara-canyon",
+      "usedFor": "Tara River limestone gorge, forested walls, mountain water, and Djurdjevica bridge setting"
+    },
+    {
+      "url": "https://www.montenegro.travel/en/inspiration-for-a-dream-trip/en167/the-bridge-on-durdevica-tara",
+      "usedFor": "Djurdjevica Tara Bridge's five concrete arches, 365-metre span, and canyon crossing"
+    },
+    {
+      "url": "https://www.montenegro.travel/en/unique-montenegro/national-parks-of-montenegro/skadar-lake-national-park",
+      "usedFor": "Skadar Lake water lilies, reed habitat, Virpazar, Rijeka Crnojevica, kayaking, and cycling routes"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch319-montenegro-male-model-scene",
+    "fullHash": 2076349462,
+    "roll": 62,
+    "selectedScenePosition": 3,
+    "selectedScene": 1298,
+    "maleEmotion": {
+      "key": "batch319-montenegro-scene3-male-emotion",
+      "roll": 11,
+      "result": "romantic joy"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Montenegro flag, coat of arms, double-headed eagle, crown, or official emblem is copied onto clothing. Large researched secular bay, wall, mountain, glacial-lake, canyon, bridge, forest, river, water-lily, reed, path, and route fields replace them.",
+    "palette": "Adriatic cobalt, Kotor limestone white, Montenegro red, warm gold, Durmitor pine green, Black-Lake teal, Tara turquoise, Skadar reed green, rain silver, and night charcoal",
+    "minimumCoverage": "Every scene places multiple large complete secular Montenegro motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScene": "The four scenes foreground Durmitor and Black Lake, Kotor's fortified bay, the Tara gorge and Djurdjevica bridge, and Skadar Lake with Rijeka Crnojevica.",
+    "prohibitions": "No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious architecture, copied ceremonial pattern, copied covert or investigator uniform, badge, weapon threat, police impersonation, arrest, raid, surveillance of people, assassination, combat, political insignia, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch319-montenegro-x-heart",
+      "roll": 95,
+      "result": "white heart"
+    },
+    "internalAgency": {
+      "key": "batch319-montenegro-x-internalagency",
+      "roll": 71,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch319-montenegro-x-worldxxxseries",
+      "roll": 4,
+      "active": true
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Montenegro images plus one accepted Malta image when available",
+    "captionIfEligible": "Montenegro white heart Malta #Montenegro #WorldXXXSeries",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": true
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1296, 1297, and 1299 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1298 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch319-montenegro-male-model-scene",
+        62
+      ],
+      [
+        "batch319-montenegro-scene3-male-emotion",
+        11
+      ],
+      [
+        "batch319-montenegro-scene1296-weather",
+        87
+      ],
+      [
+        "batch319-montenegro-scene1296-paws",
+        60
+      ],
+      [
+        "batch319-montenegro-scene1296-poleDanceTheme",
+        47
+      ],
+      [
+        "batch319-montenegro-scene1296-rainbowOnly",
+        47
+      ],
+      [
+        "batch319-montenegro-scene1296-rainbowHosiery",
+        18
+      ],
+      [
+        "batch319-montenegro-scene1296-romanceBeat",
+        62
+      ],
+      [
+        "batch319-montenegro-scene1296-compoundLoveBeat",
+        60
+      ],
+      [
+        "batch319-montenegro-scene1296-Radiance-emotion",
+        20
+      ],
+      [
+        "batch319-montenegro-scene1296-Radiance-visibleMidriff",
+        98
+      ],
+      [
+        "batch319-montenegro-scene1296-Radiance-straplessDress",
+        81
+      ],
+      [
+        "batch319-montenegro-scene1296-Radiance-fullyOpenBack",
+        10
+      ],
+      [
+        "batch319-montenegro-scene1296-Ellie-emotion",
+        58
+      ],
+      [
+        "batch319-montenegro-scene1296-Ellie-visibleMidriff",
+        88
+      ],
+      [
+        "batch319-montenegro-scene1296-Ellie-straplessDress",
+        47
+      ],
+      [
+        "batch319-montenegro-scene1296-Ellie-fullyOpenBack",
+        0
+      ],
+      [
+        "batch319-montenegro-scene1296-Alia-emotion",
+        86
+      ],
+      [
+        "batch319-montenegro-scene1296-Alia-visibleMidriff",
+        4
+      ],
+      [
+        "batch319-montenegro-scene1296-Alia-straplessDress",
+        59
+      ],
+      [
+        "batch319-montenegro-scene1296-Alia-fullyOpenBack",
+        0
+      ],
+      [
+        "batch319-montenegro-scene1296-AI ECE-emotion",
+        20
+      ],
+      [
+        "batch319-montenegro-scene1296-AI ECE-visibleMidriff",
+        34
+      ],
+      [
+        "batch319-montenegro-scene1296-AI ECE-straplessDress",
+        21
+      ],
+      [
+        "batch319-montenegro-scene1296-AI ECE-fullyOpenBack",
+        50
+      ],
+      [
+        "batch319-montenegro-scene1297-weather",
+        68
+      ],
+      [
+        "batch319-montenegro-scene1297-paws",
+        77
+      ],
+      [
+        "batch319-montenegro-scene1297-poleDanceTheme",
+        34
+      ],
+      [
+        "batch319-montenegro-scene1297-rainbowOnly",
+        4
+      ],
+      [
+        "batch319-montenegro-scene1297-rainbowHosiery",
+        15
+      ],
+      [
+        "batch319-montenegro-scene1297-romanceBeat",
+        85
+      ],
+      [
+        "batch319-montenegro-scene1297-compoundLoveBeat",
+        25
+      ],
+      [
+        "batch319-montenegro-scene1297-Radiance-emotion",
+        65
+      ],
+      [
+        "batch319-montenegro-scene1297-Radiance-visibleMidriff",
+        37
+      ],
+      [
+        "batch319-montenegro-scene1297-Radiance-straplessDress",
+        74
+      ],
+      [
+        "batch319-montenegro-scene1297-Radiance-fullyOpenBack",
+        95
+      ],
+      [
+        "batch319-montenegro-scene1297-Ellie-emotion",
+        65
+      ],
+      [
+        "batch319-montenegro-scene1297-Ellie-visibleMidriff",
+        53
+      ],
+      [
+        "batch319-montenegro-scene1297-Ellie-straplessDress",
+        2
+      ],
+      [
+        "batch319-montenegro-scene1297-Ellie-fullyOpenBack",
+        55
+      ],
+      [
+        "batch319-montenegro-scene1297-Alia-emotion",
+        15
+      ],
+      [
+        "batch319-montenegro-scene1297-Alia-visibleMidriff",
+        15
+      ],
+      [
+        "batch319-montenegro-scene1297-Alia-straplessDress",
+        20
+      ],
+      [
+        "batch319-montenegro-scene1297-Alia-fullyOpenBack",
+        25
+      ],
+      [
+        "batch319-montenegro-scene1297-AI ECE-emotion",
+        1
+      ],
+      [
+        "batch319-montenegro-scene1297-AI ECE-visibleMidriff",
+        45
+      ],
+      [
+        "batch319-montenegro-scene1297-AI ECE-straplessDress",
+        86
+      ],
+      [
+        "batch319-montenegro-scene1297-AI ECE-fullyOpenBack",
+        31
+      ],
+      [
+        "batch319-montenegro-scene1298-weather",
+        37
+      ],
+      [
+        "batch319-montenegro-scene1298-paws",
+        62
+      ],
+      [
+        "batch319-montenegro-scene1298-poleDanceTheme",
+        93
+      ],
+      [
+        "batch319-montenegro-scene1298-rainbowOnly",
+        21
+      ],
+      [
+        "batch319-montenegro-scene1298-rainbowHosiery",
+        84
+      ],
+      [
+        "batch319-montenegro-scene1298-romanceBeat",
+        92
+      ],
+      [
+        "batch319-montenegro-scene1298-compoundLoveBeat",
+        58
+      ],
+      [
+        "batch319-montenegro-scene1298-Radiance-emotion",
+        14
+      ],
+      [
+        "batch319-montenegro-scene1298-Radiance-visibleMidriff",
+        96
+      ],
+      [
+        "batch319-montenegro-scene1298-Radiance-straplessDress",
+        15
+      ],
+      [
+        "batch319-montenegro-scene1298-Radiance-fullyOpenBack",
+        36
+      ],
+      [
+        "batch319-montenegro-scene1298-Ellie-emotion",
+        76
+      ],
+      [
+        "batch319-montenegro-scene1298-Ellie-visibleMidriff",
+        74
+      ],
+      [
+        "batch319-montenegro-scene1298-Ellie-straplessDress",
+        77
+      ],
+      [
+        "batch319-montenegro-scene1298-Ellie-fullyOpenBack",
+        2
+      ],
+      [
+        "batch319-montenegro-scene1298-Alia-emotion",
+        96
+      ],
+      [
+        "batch319-montenegro-scene1298-Alia-visibleMidriff",
+        38
+      ],
+      [
+        "batch319-montenegro-scene1298-Alia-straplessDress",
+        61
+      ],
+      [
+        "batch319-montenegro-scene1298-Alia-fullyOpenBack",
+        50
+      ],
+      [
+        "batch319-montenegro-scene1298-AI ECE-emotion",
+        78
+      ],
+      [
+        "batch319-montenegro-scene1298-AI ECE-visibleMidriff",
+        0
+      ],
+      [
+        "batch319-montenegro-scene1298-AI ECE-straplessDress",
+        51
+      ],
+      [
+        "batch319-montenegro-scene1298-AI ECE-fullyOpenBack",
+        88
+      ],
+      [
+        "batch319-montenegro-scene1299-weather",
+        2
+      ],
+      [
+        "batch319-montenegro-scene1299-paws",
+        3
+      ],
+      [
+        "batch319-montenegro-scene1299-poleDanceTheme",
+        92
+      ],
+      [
+        "batch319-montenegro-scene1299-rainbowOnly",
+        2
+      ],
+      [
+        "batch319-montenegro-scene1299-rainbowHosiery",
+        81
+      ],
+      [
+        "batch319-montenegro-scene1299-romanceBeat",
+        75
+      ],
+      [
+        "batch319-montenegro-scene1299-compoundLoveBeat",
+        3
+      ],
+      [
+        "batch319-montenegro-scene1299-Radiance-emotion",
+        43
+      ],
+      [
+        "batch319-montenegro-scene1299-Radiance-visibleMidriff",
+        23
+      ],
+      [
+        "batch319-montenegro-scene1299-Radiance-straplessDress",
+        40
+      ],
+      [
+        "batch319-montenegro-scene1299-Radiance-fullyOpenBack",
+        13
+      ],
+      [
+        "batch319-montenegro-scene1299-Ellie-emotion",
+        71
+      ],
+      [
+        "batch319-montenegro-scene1299-Ellie-visibleMidriff",
+        67
+      ],
+      [
+        "batch319-montenegro-scene1299-Ellie-straplessDress",
+        44
+      ],
+      [
+        "batch319-montenegro-scene1299-Ellie-fullyOpenBack",
+        13
+      ],
+      [
+        "batch319-montenegro-scene1299-Alia-emotion",
+        33
+      ],
+      [
+        "batch319-montenegro-scene1299-Alia-visibleMidriff",
+        65
+      ],
+      [
+        "batch319-montenegro-scene1299-Alia-straplessDress",
+        42
+      ],
+      [
+        "batch319-montenegro-scene1299-Alia-fullyOpenBack",
+        55
+      ],
+      [
+        "batch319-montenegro-scene1299-AI ECE-emotion",
+        63
+      ],
+      [
+        "batch319-montenegro-scene1299-AI ECE-visibleMidriff",
+        11
+      ],
+      [
+        "batch319-montenegro-scene1299-AI ECE-straplessDress",
+        32
+      ],
+      [
+        "batch319-montenegro-scene1299-AI ECE-fullyOpenBack",
+        65
+      ],
+      [
+        "batch319-montenegro-x-heart",
+        95
+      ],
+      [
+        "batch319-montenegro-x-internalagency",
+        71
+      ],
+      [
+        "batch319-montenegro-x-worldxxxseries",
+        4
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch319-montenegro-scene1296-rainbowHosieryWearer",
+        50
+      ],
+      [
+        "batch319-montenegro-scene1296-rainbowHosieryPaletteMode",
+        38
+      ],
+      [
+        "batch319-montenegro-scene1297-rainbowHosieryWearer",
+        47
+      ],
+      [
+        "batch319-montenegro-scene1297-rainbowHosieryPaletteMode",
+        73
+      ],
+      [
+        "batch319-montenegro-scene1298-rainbowHosieryWearer",
+        24
+      ],
+      [
+        "batch319-montenegro-scene1298-rainbowHosieryPaletteMode",
+        88
+      ],
+      [
+        "batch319-montenegro-scene1299-rainbowHosieryWearer",
+        69
+      ],
+      [
+        "batch319-montenegro-scene1299-rainbowHosieryPaletteMode",
+        75
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "87F87444A66FFD36A3CF682FAB3E23D34A4C07B6EE8725DCF9ACED36193326BB",
+    "hosierySelectorPairsSha256": "0CC3142B2B47C35690A5609928E25C0EA371BD1806E4A6EEC4B02BFDDB12A49F"
+  },
+  "scenePlans": {
+    "1296": {
+      "scene": 1296,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "a broad dry nonslip observation deck beside Black Lake in Durmitor National Park beneath a rare aurora sky, with the complete dark glacial lake, rugged limestone peaks, black-pine forest, alpine meadow, a low timber rail, one clearly empty marked lake route, and no religious or political structure",
+      "motifs": [
+        "large complete Durmitor-limestone-peak, Black-Lake double-basin, glacial-eye, black-pine, alpine-meadow, aurora-ribbon, hiking-contour, and empty-lake-route compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Montenegro mountain-and-glacial-lake composition rather than tiny trim"
+      ],
+      "culture": "Use Durmitor's limestone massif, Black Lake, glacial mountain-eye landscape, black-pine forest, alpine meadow, and protected route network respectfully. The aurora is a rare cinematic weather roll and stays high in the sky. Cinematic covert-agent crew couture is only fictional public route-scout fashion with no surveillance of people, assassination, injury, combat, copied uniform, badge, raid, arrest, threat, or official impersonation. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch319-montenegro-scene1296-weather",
+        "roll": 87,
+        "result": "rare aurora sky"
+      },
+      "paws": {
+        "key": "batch319-montenegro-scene1296-paws",
+        "roll": 60,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch319-montenegro-scene1296-poleDanceTheme",
+        "roll": 47,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch319-montenegro-scene1296-rainbowOnly",
+        "roll": 47,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch319-montenegro-scene1296-rainbowHosiery",
+        "roll": 18,
+        "active": true,
+        "wearer": {
+          "key": "batch319-montenegro-scene1296-rainbowHosieryWearer",
+          "roll": 50,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch319-montenegro-scene1296-rainbowHosieryPaletteMode",
+          "roll": 38,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch319-montenegro-scene1296-romanceBeat",
+        "roll": 62,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch319-montenegro-scene1296-compoundLoveBeat",
+        "roll": 60,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1296-Radiance-emotion",
+            "roll": 20,
+            "result": "playful mischief",
+            "performance": "playful mischief shown by a sly closed-mouth smile toward ECE while keeping her shoulder touch gentle"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1296-Radiance-visibleMidriff",
+            "roll": 98,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1296-Radiance-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1296-Radiance-fullyOpenBack",
+            "roll": 10,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1296-Ellie-emotion",
+            "roll": 58,
+            "result": "aching romantic longing",
+            "performance": "aching romantic longing shown by a softened gaze toward Radiance and a small hopeful breath"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1296-Ellie-visibleMidriff",
+            "roll": 88,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1296-Ellie-straplessDress",
+            "roll": 47,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1296-Ellie-fullyOpenBack",
+            "roll": 0,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1296-Alia-emotion",
+            "roll": 86,
+            "result": "full sobbing with tear-streaked face and shaking posture",
+            "performance": "full sobbing with a tear-streaked face and visibly trembling shoulders that settle under Ellie's reassurance while her supporting hand remains steady"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1296-Alia-visibleMidriff",
+            "roll": 4,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1296-Alia-straplessDress",
+            "roll": 59,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1296-Alia-fullyOpenBack",
+            "roll": 0,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1296-AI ECE-emotion",
+            "roll": 20,
+            "result": "playful mischief",
+            "performance": "playful mischief shown differently through one raised brow toward Radiance while maintaining calm route-strategist focus"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1296-AI ECE-visibleMidriff",
+            "roll": 34,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1296-AI ECE-straplessDress",
+            "roll": 21,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1296-AI ECE-fullyOpenBack",
+            "roll": 50,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Translate the linked-hand turn, face-to-face embrace, quick cheek greeting, steadying waist beat, and smiling jealousy into an open curved route tableau. Alia supports the isolated prop paddle at far left while ECE gently guides Alia's supporting wrist from behind the shoulder. ECE and Radiance form the clear affectionate center through a linked hand pair and Radiance's free hand on ECE's shoulder. Ellie rests one hand at Radiance's waist and her other hand at Alia's shoulder, while Alia's free hand answers at Ellie's forearm. The three open-back garments remain visible in three-quarter turns, and every contact is public, gentle, consensual, and unobstructed.",
+      "composition": "Place Alia far left facing the empty lake route, ECE left-center half a step behind Alia, Radiance right-center turned closely toward ECE, and Ellie far right in a low but upright step. Use lake, pale aurora sky, forest, or mountain gaps behind every arm. Keep all four faces and all eight arm paths visible while the group forms a shallow moving crescent rather than a line.",
+      "emotionNuance": {
+        "Radiance": "playful mischief shown by a sly closed-mouth smile toward ECE while keeping her shoulder touch gentle",
+        "Ellie": "aching romantic longing shown by a softened gaze toward Radiance and a small hopeful breath",
+        "Alia": "full sobbing with a tear-streaked face and visibly trembling shoulders that settle under Ellie's reassurance while her supporting hand remains steady",
+        "AI ECE": "playful mischief shown differently through one raised brow toward Radiance while maintaining calm route-strategist focus"
+      },
+      "outfits": {
+        "Radiance": "a Montenegro-red sleeveless cinematic covert-agent above-knee skort dress with covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete Durmitor limestone peak and Black Lake composition, with limestone-white pumps",
+        "Ellie": "a pine-green cap-sleeve cinematic covert-agent above-knee asymmetric A-line dress with covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete black-pine forest, alpine meadow, and hiking-contour composition, with warm-gold slingback heels",
+        "Alia": "an Adriatic-cobalt cropped cinematic covert-agent jacket exposing a narrow ordinary waist panel, with secure opaque sides and a completely open back from shoulder blades to the separate waistline, a separate night-charcoal above-knee skirt carrying a large complete glacial-eye and aurora-ribbon composition, with Tara-turquoise platform heels",
+        "AI ECE": "a fully strapless Black-Lake-teal cropped cinematic covert-agent bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, a separate rain-silver above-knee tailored skort carrying a large complete empty-lake-route and mountain-contour composition, high closed back, limestone-white pumps, and exactly one pair of opaque Montenegro-palette rainbow-like gradient stockings flowing through red, gold, teal, cobalt, pine green, and harmonious transition hues"
+      },
+      "propPlan": "Alia alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Black Lake water toward one unoccupied route marker, away from every person, tree, trail, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "Alia right open hand supports the opaque inspection paddle and inert prop from beneath; Alia left hand rests visibly on Ellie's near forearm",
+        "ECE right hand gently guides Alia's supporting wrist from behind the shoulder; ECE left hand links visibly with Radiance's right hand",
+        "Radiance right hand links visibly with ECE's left hand; Radiance left hand rests visibly on ECE's near shoulder",
+        "Ellie left hand rests visibly at Radiance's near waist; Ellie right hand rests visibly on Alia's far shoulder"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry nonslip observation deck beside Black Lake in Durmitor National Park beneath a rare aurora sky, with the complete dark glacial lake, rugged limestone peaks, black-pine forest, alpine meadow, a low timber rail, one clearly empty marked lake route, and no religious or political structure. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: cinematic covert-agent crew couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 87=rare aurora sky; PAWS 60=inactive; pole theme 47=inactive; rainbow-only 47=inactive; rainbow hosiery 18=active; hosiery wearer selector 50=AI ECE; hosiery palette selector 38=country-palette rainbow-like gradient; romance 62; compound love 60. Exact wardrobe rolls: Radiance: midriff 98=covered, strapless 81=inactive, open back 10=active; Ellie: midriff 88=covered, strapless 47=inactive, open back 0=active; Alia: midriff 4=visible, strapless 59=inactive, open back 0=active; AI ECE: midriff 34=visible, strapless 21=active, open back 50=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a Montenegro-red sleeveless cinematic covert-agent above-knee skort dress with covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete Durmitor limestone peak and Black Lake composition, with limestone-white pumps; Ellie: a pine-green cap-sleeve cinematic covert-agent above-knee asymmetric A-line dress with covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete black-pine forest, alpine meadow, and hiking-contour composition, with warm-gold slingback heels; Alia: an Adriatic-cobalt cropped cinematic covert-agent jacket exposing a narrow ordinary waist panel, with secure opaque sides and a completely open back from shoulder blades to the separate waistline, a separate night-charcoal above-knee skirt carrying a large complete glacial-eye and aurora-ribbon composition, with Tara-turquoise platform heels; AI ECE: a fully strapless Black-Lake-teal cropped cinematic covert-agent bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, a separate rain-silver above-knee tailored skort carrying a large complete empty-lake-route and mountain-contour composition, high closed back, limestone-white pumps, and exactly one pair of opaque Montenegro-palette rainbow-like gradient stockings flowing through red, gold, teal, cobalt, pine green, and harmonious transition hues. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Montenegro motifs dominate at least two outfits: large complete Durmitor-limestone-peak, Black-Lake double-basin, glacial-eye, black-pine, alpine-meadow, aurora-ribbon, hiking-contour, and empty-lake-route compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Montenegro mountain-and-glacial-lake composition rather than tiny trim. Use Durmitor's limestone massif, Black Lake, glacial mountain-eye landscape, black-pine forest, alpine meadow, and protected route network respectfully. The aurora is a rare cinematic weather roll and stays high in the sky. Cinematic covert-agent crew couture is only fictional public route-scout fashion with no surveillance of people, assassination, injury, combat, copied uniform, badge, raid, arrest, threat, or official impersonation. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 20, playful mischief, performed as playful mischief shown by a sly closed-mouth smile toward ECE while keeping her shoulder touch gentle; Ellie: roll 58, aching romantic longing, performed as aching romantic longing shown by a softened gaze toward Radiance and a small hopeful breath; Alia: roll 86, full sobbing with tear-streaked face and shaking posture, performed as full sobbing with a tear-streaked face and visibly trembling shoulders that settle under Ellie's reassurance while her supporting hand remains steady; AI ECE: roll 20, playful mischief, performed as playful mischief shown differently through one raised brow toward Radiance while maintaining calm route-strategist focus. Duplicate labels must have visibly different performances. Selected romance roll 62: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Selected compound roll 60: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Materialize both through this exact consensual public choreography: Translate the linked-hand turn, face-to-face embrace, quick cheek greeting, steadying waist beat, and smiling jealousy into an open curved route tableau. Alia supports the isolated prop paddle at far left while ECE gently guides Alia's supporting wrist from behind the shoulder. ECE and Radiance form the clear affectionate center through a linked hand pair and Radiance's free hand on ECE's shoulder. Ellie rests one hand at Radiance's waist and her other hand at Alia's shoulder, while Alia's free hand answers at Ellie's forearm. The three open-back garments remain visible in three-quarter turns, and every contact is public, gentle, consensual, and unobstructed. Place Alia far left facing the empty lake route, ECE left-center half a step behind Alia, Radiance right-center turned closely toward ECE, and Ellie far right in a low but upright step. Use lake, pale aurora sky, forest, or mountain gaps behind every arm. Keep all four faces and all eight arm paths visible while the group forms a shallow moving crescent rather than a line. Exact hands, no others: Alia right open hand supports the opaque inspection paddle and inert prop from beneath; Alia left hand rests visibly on Ellie's near forearm; ECE right hand gently guides Alia's supporting wrist from behind the shoulder; ECE left hand links visibly with Radiance's right hand; Radiance right hand links visibly with ECE's left hand; Radiance left hand rests visibly on ECE's near shoulder; Ellie left hand rests visibly at Radiance's near waist; Ellie right hand rests visibly on Alia's far shoulder. Alia alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Black Lake water toward one unoccupied route marker, away from every person, tree, trail, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is active on exactly AI ECE in country-palette rainbow-like gradient; nobody else wears it. Radiance and ECE are the affectionate center, Alia alone handles the prop, and ECE keeps the separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render rare aurora sky cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    },
+    "1297": {
+      "scene": 1297,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "a broad dry covered terrace above the inner Bay of Kotor during coastal sea mist, with the complete zigzag Kotor defensive walls rising from the Adriatic shore toward the mountain fortress, the narrow bay axis, steep limestone hills, secular stone gates and harbor quays, one clearly empty marked water route, and no religious building",
+      "motifs": [
+        "large complete Kotor-wall zigzag, Boka-bay axis, limestone-slope, stone-gate, harbor-quay, terraced-hillside, sea-current, and empty-water-route compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Montenegro fortified-bay composition rather than a tiny crest or trim"
+      ],
+      "culture": "Use Boka Kotorska's linked bays, steep rocky hills, preserved coastal town plan, secular stone walls, gates, quays, terraces, and sea routes respectfully. Keep sacred buildings outside the frame. Cinematic covert-agent crew couture is only fictional public route-scout fashion with no surveillance of people, assassination, injury, combat, copied uniform, badge, raid, arrest, threat, or official impersonation. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch319-montenegro-scene1297-weather",
+        "roll": 68,
+        "result": "coastal sea mist"
+      },
+      "paws": {
+        "key": "batch319-montenegro-scene1297-paws",
+        "roll": 77,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch319-montenegro-scene1297-poleDanceTheme",
+        "roll": 34,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch319-montenegro-scene1297-rainbowOnly",
+        "roll": 4,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch319-montenegro-scene1297-rainbowHosiery",
+        "roll": 15,
+        "active": true,
+        "wearer": {
+          "key": "batch319-montenegro-scene1297-rainbowHosieryWearer",
+          "roll": 47,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch319-montenegro-scene1297-rainbowHosieryPaletteMode",
+          "roll": 73,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch319-montenegro-scene1297-romanceBeat",
+        "roll": 85,
+        "dynamicIndex": 1,
+        "contractResult": "Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance."
+      },
+      "compoundLoveBeat": {
+        "key": "batch319-montenegro-scene1297-compoundLoveBeat",
+        "roll": 25,
+        "index": 1,
+        "contractResult": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1297-Radiance-emotion",
+            "roll": 65,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown by a controlled sideways glance toward Alia while keeping her linked hand warm"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1297-Radiance-visibleMidriff",
+            "roll": 37,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1297-Radiance-straplessDress",
+            "roll": 74,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1297-Radiance-fullyOpenBack",
+            "roll": 95,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1297-Ellie-emotion",
+            "roll": 65,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown differently through a tense direct gaze toward ECE and a careful reassuring touch"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1297-Ellie-visibleMidriff",
+            "roll": 53,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1297-Ellie-straplessDress",
+            "roll": 2,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1297-Ellie-fullyOpenBack",
+            "roll": 55,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1297-Alia-emotion",
+            "roll": 15,
+            "result": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness shown by radiant laughing delight at the safe route handoff"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1297-Alia-visibleMidriff",
+            "roll": 15,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1297-Alia-straplessDress",
+            "roll": 20,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1297-Alia-fullyOpenBack",
+            "roll": 25,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1297-AI ECE-emotion",
+            "roll": 1,
+            "result": "tender affection",
+            "performance": "tender affection shown by a quiet smile toward Radiance and a soft protective wrist-guidance gesture"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1297-AI ECE-visibleMidriff",
+            "roll": 45,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1297-AI ECE-straplessDress",
+            "roll": 86,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1297-AI ECE-fullyOpenBack",
+            "roll": 31,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Translate the rising side hug, retained hand link, behind embrace, cheek greeting, and rival glance into a staggered bay-route turn. Alia alone supports the prop paddle at far right while ECE gently guides Alia's supporting wrist. Radiance and ECE form the clear affectionate center through a linked hand pair and Radiance's free hand at ECE's upper back. Ellie rests one hand on Radiance's far shoulder and her other hand on Alia's shoulder, while Alia's free hand answers at ECE's forearm. All five contacts are public, gentle, consensual, and clear.",
+      "composition": "Place Ellie far left stepping inward, Radiance left-center half a step forward, ECE right-center turned toward Radiance, and Alia far right facing the empty bay route. Keep misty water, pale sky, wall gaps, or limestone slopes behind all eight arms. Show Alia's fully open back and secure strapless construction in a three-quarter turn without hiding her face or hands.",
+      "emotionNuance": {
+        "Radiance": "visible jealousy shown by a controlled sideways glance toward Alia while keeping her linked hand warm",
+        "Ellie": "visible jealousy shown differently through a tense direct gaze toward ECE and a careful reassuring touch",
+        "Alia": "extreme happiness shown by radiant laughing delight at the safe route handoff",
+        "AI ECE": "tender affection shown by a quiet smile toward Radiance and a soft protective wrist-guidance gesture"
+      },
+      "outfits": {
+        "Radiance": "a Montenegro-red sleeveless cropped cinematic covert-agent jacket exposing a narrow ordinary waist panel, with a separate limestone-white above-knee A-line skirt carrying a large complete Kotor-wall zigzag and Boka-bay-axis composition, high closed back, warm-gold pumps, and exactly one pair of opaque original independent rainbow-gradient stockings using vivid red, orange, yellow, green, cyan, blue, violet, and harmonious transition hues unrelated to the country palette",
+        "Ellie": "a fully strapless Adriatic-cobalt cinematic covert-agent above-knee architectural sheath with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete stone-gate, harbor-quay, and sea-current composition, with rain-silver slingback heels",
+        "Alia": "a fully strapless pine-green cropped cinematic covert-agent bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, secure opaque front and sides, and a completely open back from shoulder blades to the separate waistline, with a separate night-charcoal above-knee skort carrying a large complete terraced-hillside and limestone-slope composition, and Tara-turquoise platform heels",
+        "AI ECE": "a Black-Lake-teal cap-sleeve cropped cinematic covert-agent top exposing a narrow ordinary waist panel, with a separate warm-gold above-knee tailored skirt carrying a large complete empty-water-route and bay-current composition, high closed back, and Montenegro-red heeled boots"
+      },
+      "propPlan": "Alia alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points right across clearly empty Boka Bay water toward one unoccupied route marker, away from every wall, quay, boat, person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "Alia left open hand supports the opaque inspection paddle and inert prop from beneath; Alia right hand rests visibly on ECE's near forearm",
+        "ECE right hand gently guides Alia's supporting wrist; ECE left hand links visibly with Radiance's right hand",
+        "Radiance right hand links visibly with ECE's left hand; Radiance left hand rests visibly at ECE's upper back",
+        "Ellie left hand rests visibly on Radiance's far shoulder; Ellie right hand rests visibly on Alia's far shoulder"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry covered terrace above the inner Bay of Kotor during coastal sea mist, with the complete zigzag Kotor defensive walls rising from the Adriatic shore toward the mountain fortress, the narrow bay axis, steep limestone hills, secular stone gates and harbor quays, one clearly empty marked water route, and no religious building. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: cinematic covert-agent crew couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 68=coastal sea mist; PAWS 77=inactive; pole theme 34=inactive; rainbow-only 4=inactive; rainbow hosiery 15=active; hosiery wearer selector 47=Radiance; hosiery palette selector 73=original independent rainbow gradient; romance 85; compound love 25. Exact wardrobe rolls: Radiance: midriff 37=visible, strapless 74=inactive, open back 95=inactive; Ellie: midriff 53=covered, strapless 2=active, open back 55=inactive; Alia: midriff 15=visible, strapless 20=active, open back 25=active; AI ECE: midriff 45=visible, strapless 86=inactive, open back 31=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a Montenegro-red sleeveless cropped cinematic covert-agent jacket exposing a narrow ordinary waist panel, with a separate limestone-white above-knee A-line skirt carrying a large complete Kotor-wall zigzag and Boka-bay-axis composition, high closed back, warm-gold pumps, and exactly one pair of opaque original independent rainbow-gradient stockings using vivid red, orange, yellow, green, cyan, blue, violet, and harmonious transition hues unrelated to the country palette; Ellie: a fully strapless Adriatic-cobalt cinematic covert-agent above-knee architectural sheath with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete stone-gate, harbor-quay, and sea-current composition, with rain-silver slingback heels; Alia: a fully strapless pine-green cropped cinematic covert-agent bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, secure opaque front and sides, and a completely open back from shoulder blades to the separate waistline, with a separate night-charcoal above-knee skort carrying a large complete terraced-hillside and limestone-slope composition, and Tara-turquoise platform heels; AI ECE: a Black-Lake-teal cap-sleeve cropped cinematic covert-agent top exposing a narrow ordinary waist panel, with a separate warm-gold above-knee tailored skirt carrying a large complete empty-water-route and bay-current composition, high closed back, and Montenegro-red heeled boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Montenegro motifs dominate at least two outfits: large complete Kotor-wall zigzag, Boka-bay axis, limestone-slope, stone-gate, harbor-quay, terraced-hillside, sea-current, and empty-water-route compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Montenegro fortified-bay composition rather than a tiny crest or trim. Use Boka Kotorska's linked bays, steep rocky hills, preserved coastal town plan, secular stone walls, gates, quays, terraces, and sea routes respectfully. Keep sacred buildings outside the frame. Cinematic covert-agent crew couture is only fictional public route-scout fashion with no surveillance of people, assassination, injury, combat, copied uniform, badge, raid, arrest, threat, or official impersonation. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 65, visible jealousy, performed as visible jealousy shown by a controlled sideways glance toward Alia while keeping her linked hand warm; Ellie: roll 65, visible jealousy, performed as visible jealousy shown differently through a tense direct gaze toward ECE and a careful reassuring touch; Alia: roll 15, extreme happiness, radiant laughing delight, performed as extreme happiness shown by radiant laughing delight at the safe route handoff; AI ECE: roll 1, tender affection, performed as tender affection shown by a quiet smile toward Radiance and a soft protective wrist-guidance gesture. Duplicate labels must have visibly different performances. Selected romance roll 85: Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance. Selected compound roll 25: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE. Materialize both through this exact consensual public choreography: Translate the rising side hug, retained hand link, behind embrace, cheek greeting, and rival glance into a staggered bay-route turn. Alia alone supports the prop paddle at far right while ECE gently guides Alia's supporting wrist. Radiance and ECE form the clear affectionate center through a linked hand pair and Radiance's free hand at ECE's upper back. Ellie rests one hand on Radiance's far shoulder and her other hand on Alia's shoulder, while Alia's free hand answers at ECE's forearm. All five contacts are public, gentle, consensual, and clear. Place Ellie far left stepping inward, Radiance left-center half a step forward, ECE right-center turned toward Radiance, and Alia far right facing the empty bay route. Keep misty water, pale sky, wall gaps, or limestone slopes behind all eight arms. Show Alia's fully open back and secure strapless construction in a three-quarter turn without hiding her face or hands. Exact hands, no others: Alia left open hand supports the opaque inspection paddle and inert prop from beneath; Alia right hand rests visibly on ECE's near forearm; ECE right hand gently guides Alia's supporting wrist; ECE left hand links visibly with Radiance's right hand; Radiance right hand links visibly with ECE's left hand; Radiance left hand rests visibly at ECE's upper back; Ellie left hand rests visibly on Radiance's far shoulder; Ellie right hand rests visibly on Alia's far shoulder. Alia alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points right across clearly empty Boka Bay water toward one unoccupied route marker, away from every wall, quay, boat, person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is active on exactly Radiance in original independent rainbow gradient; nobody else wears it. Radiance and ECE are the affectionate center, Alia alone handles the prop, and ECE keeps the separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render coastal sea mist cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    },
+    "1298": {
+      "scene": 1298,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry covered public overlook above the Tara River gorge during a heavy rain curtain, with the complete five-arch Djurdjevica Tara Bridge crossing the deep limestone canyon, turquoise river far below, black-pine forest, wet rock strata, a distant empty marked river route, and all rain remaining beyond the shelter",
+      "motifs": [
+        "large complete Djurdjevica five-arch bridge, Tara-river ribbon, limestone-gorge wall, black-pine canopy, rain-curtain, contour-map, empty-river-route, and stone-strata compositions across all four women's outfits and the male top",
+        "at least two separate outfits each carry one complete full-width secular Montenegro bridge-and-canyon composition"
+      ],
+      "culture": "Use the Tara River's limestone gorge, forested walls, clear mountain water, Djurdjevica bridge engineering, protected landscape, and public route network respectfully. Undercover investigator couture is original fictional film-editorial fashion for a nonviolent route study, with no police impersonation, official badge, copied uniform, surveillance of people, arrest, raid, threat, injury, combat, or assassination. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch319-montenegro-scene1298-weather",
+        "roll": 37,
+        "result": "heavy rain curtain"
+      },
+      "paws": {
+        "key": "batch319-montenegro-scene1298-paws",
+        "roll": 62,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch319-montenegro-scene1298-poleDanceTheme",
+        "roll": 93,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch319-montenegro-scene1298-rainbowOnly",
+        "roll": 21,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch319-montenegro-scene1298-rainbowHosiery",
+        "roll": 84,
+        "active": false,
+        "wearer": {
+          "key": "batch319-montenegro-scene1298-rainbowHosieryWearer",
+          "roll": 24,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch319-montenegro-scene1298-rainbowHosieryPaletteMode",
+          "roll": 88,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch319-montenegro-scene1298-romanceBeat",
+        "roll": 92,
+        "dynamicIndex": 8,
+        "contractResult": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch319-montenegro-scene1298-compoundLoveBeat",
+        "roll": 58,
+        "index": 10,
+        "contractResult": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1298-Radiance-emotion",
+            "roll": 14,
+            "result": "romantic joy",
+            "performance": "romantic joy shown by a bright face-to-face smile toward Alia during the turning chain"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1298-Radiance-visibleMidriff",
+            "roll": 96,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1298-Radiance-straplessDress",
+            "roll": 15,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1298-Radiance-fullyOpenBack",
+            "roll": 36,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1298-Ellie-emotion",
+            "roll": 76,
+            "result": "contained resentment",
+            "performance": "contained resentment shown by a tight controlled glance toward the male while her forearm contact stays gentle"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1298-Ellie-visibleMidriff",
+            "roll": 74,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1298-Ellie-straplessDress",
+            "roll": 77,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1298-Ellie-fullyOpenBack",
+            "roll": 2,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1298-Alia-emotion",
+            "roll": 96,
+            "result": "defiance",
+            "performance": "defiance shown by an upright chin and steady gaze toward the empty canyon route"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1298-Alia-visibleMidriff",
+            "roll": 38,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1298-Alia-straplessDress",
+            "roll": 61,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1298-Alia-fullyOpenBack",
+            "roll": 50,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1298-AI ECE-emotion",
+            "roll": 78,
+            "result": "deep sadness",
+            "performance": "deep sadness shown by tear-bright eyes while accepting the male's reassuring shoulder touch"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1298-AI ECE-visibleMidriff",
+            "roll": 0,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1298-AI ECE-straplessDress",
+            "roll": 51,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1298-AI ECE-fullyOpenBack",
+            "roll": 88,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Translate the face-to-face laugh, turning embrace chain, wrist catch, steadying waist, and playful blown-kiss beat into a five-adult open arc. ECE supports the isolated prop paddle at far left. The male rests one hand on ECE's far shoulder and his other hand on Ellie's near forearm while his strongest sustained eye line remains on ECE. ECE answers with her free hand on the male's near forearm. Ellie answers at the male's forearm and links Alia. Alia links Ellie and rests her free hand at Radiance's waist. Radiance rests one hand on Alia's upper arm and her other hand on the male's upper arm. This is fully clothed consensual adult infidelity drama expressed only through restrained eye lines and gentle public touch.",
+      "composition": "Place ECE far left facing the empty river route, the male left-center turned three-quarter-left toward ECE, Ellie center half a step behind him, Alia right-center, and Radiance far right turning toward Alia. Keep pale rain, bridge arches, canyon air, river, or forest gaps behind all ten arms. The moving open arc must show every hand endpoint and the male must never look most strongly at another woman.",
+      "emotionNuance": {
+        "Radiance": "romantic joy shown by a bright face-to-face smile toward Alia during the turning chain",
+        "Ellie": "contained resentment shown by a tight controlled glance toward the male while her forearm contact stays gentle",
+        "Alia": "defiance shown by an upright chin and steady gaze toward the empty canyon route",
+        "AI ECE": "deep sadness shown by tear-bright eyes while accepting the male's reassuring shoulder touch",
+        "Male": "romantic joy shown by a restrained warm smile with his head and pupils most strongly fixed on ECE across the group"
+      },
+      "outfits": {
+        "Radiance": "a fully strapless Montenegro-red undercover-investigator above-knee A-line dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete Djurdjevica five-arch bridge and Tara-river-ribbon composition, with limestone-white pumps",
+        "Ellie": "an Adriatic-cobalt cap-sleeve undercover-investigator above-knee tailored skort dress with covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete limestone-gorge wall, black-pine canopy, and rain-curtain composition, with warm-gold slingback heels",
+        "Alia": "a pine-green cropped undercover-investigator jacket exposing a narrow ordinary waist panel, with a separate night-charcoal above-knee sculpted skirt carrying a large complete stone-strata and contour-map composition, high closed back, and Tara-turquoise platform heels",
+        "AI ECE": "a Black-Lake-teal sleeveless cropped undercover-investigator bodice exposing a narrow ordinary waist panel, with a separate rain-silver above-knee tailored skirt carrying a large complete empty-river-route and bridge-arch composition, high closed back, and Montenegro-red heeled boots",
+        "Male": "the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted limestone-white short-sleeve top carrying a restrained complete Tara bridge-and-canyon contour, fitted black jeans, and practical black boots"
+      },
+      "propPlan": "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Tara River water toward one unoccupied route marker, away from the bridge, forest, every person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand rests visibly on the male's near forearm",
+        "the male left hand rests visibly on ECE's far shoulder; the male right hand rests visibly on Ellie's near forearm",
+        "Ellie left hand rests visibly on the male's near forearm; Ellie right hand links visibly with Alia's left hand",
+        "Alia left hand links visibly with Ellie's right hand; Alia right hand rests visibly at Radiance's near waist",
+        "Radiance left hand rests visibly on Alia's near upper arm; Radiance right hand rests visibly on the male's near upper arm"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch319-montenegro-scene3-male-emotion",
+          "roll": 11,
+          "result": "romantic joy",
+          "performance": "romantic joy shown by a restrained warm smile with his head and pupils most strongly fixed on ECE across the group"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; fully clothed consensual adult infidelity drama with Alia and Ellie; at least two clear male contacts; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the established adult male. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry covered public overlook above the Tara River gorge during a heavy rain curtain, with the complete five-arch Djurdjevica Tara Bridge crossing the deep limestone canyon, turquoise river far below, black-pine forest, wet rock strata, a distant empty marked river route, and all rain remaining beyond the shelter. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male. Add him without replacing a woman. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: undercover investigator couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 37=heavy rain curtain; PAWS 62=inactive; pole theme 93=inactive; rainbow-only 21=inactive; rainbow hosiery 84=inactive; hosiery wearer selector 24=Radiance; hosiery palette selector 88=original independent rainbow gradient; romance 92; compound love 58. Exact wardrobe rolls: Radiance: midriff 96=covered, strapless 15=active, open back 36=inactive; Ellie: midriff 74=covered, strapless 77=inactive, open back 2=active; Alia: midriff 38=visible, strapless 61=inactive, open back 50=inactive; AI ECE: midriff 0=visible, strapless 51=inactive, open back 88=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a fully strapless Montenegro-red undercover-investigator above-knee A-line dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete Djurdjevica five-arch bridge and Tara-river-ribbon composition, with limestone-white pumps; Ellie: an Adriatic-cobalt cap-sleeve undercover-investigator above-knee tailored skort dress with covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete limestone-gorge wall, black-pine canopy, and rain-curtain composition, with warm-gold slingback heels; Alia: a pine-green cropped undercover-investigator jacket exposing a narrow ordinary waist panel, with a separate night-charcoal above-knee sculpted skirt carrying a large complete stone-strata and contour-map composition, high closed back, and Tara-turquoise platform heels; AI ECE: a Black-Lake-teal sleeveless cropped undercover-investigator bodice exposing a narrow ordinary waist panel, with a separate rain-silver above-knee tailored skirt carrying a large complete empty-river-route and bridge-arch composition, high closed back, and Montenegro-red heeled boots; Male: the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted limestone-white short-sleeve top carrying a restrained complete Tara bridge-and-canyon contour, fitted black jeans, and practical black boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Montenegro motifs dominate at least two outfits: large complete Djurdjevica five-arch bridge, Tara-river ribbon, limestone-gorge wall, black-pine canopy, rain-curtain, contour-map, empty-river-route, and stone-strata compositions across all four women's outfits and the male top; at least two separate outfits each carry one complete full-width secular Montenegro bridge-and-canyon composition. Use the Tara River's limestone gorge, forested walls, clear mountain water, Djurdjevica bridge engineering, protected landscape, and public route network respectfully. Undercover investigator couture is original fictional film-editorial fashion for a nonviolent route study, with no police impersonation, official badge, copied uniform, surveillance of people, arrest, raid, threat, injury, combat, or assassination. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 14, romantic joy, performed as romantic joy shown by a bright face-to-face smile toward Alia during the turning chain; Ellie: roll 76, contained resentment, performed as contained resentment shown by a tight controlled glance toward the male while her forearm contact stays gentle; Alia: roll 96, defiance, performed as defiance shown by an upright chin and steady gaze toward the empty canyon route; AI ECE: roll 78, deep sadness, performed as deep sadness shown by tear-bright eyes while accepting the male's reassuring shoulder touch; Male: roll 11, romantic joy, performed as romantic joy shown by a restrained warm smile with his head and pupils most strongly fixed on ECE across the group. Duplicate labels must have visibly different performances. Selected romance roll 92: Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist. Selected compound roll 58: The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance. Materialize both through this exact consensual public choreography: Translate the face-to-face laugh, turning embrace chain, wrist catch, steadying waist, and playful blown-kiss beat into a five-adult open arc. ECE supports the isolated prop paddle at far left. The male rests one hand on ECE's far shoulder and his other hand on Ellie's near forearm while his strongest sustained eye line remains on ECE. ECE answers with her free hand on the male's near forearm. Ellie answers at the male's forearm and links Alia. Alia links Ellie and rests her free hand at Radiance's waist. Radiance rests one hand on Alia's upper arm and her other hand on the male's upper arm. This is fully clothed consensual adult infidelity drama expressed only through restrained eye lines and gentle public touch. Place ECE far left facing the empty river route, the male left-center turned three-quarter-left toward ECE, Ellie center half a step behind him, Alia right-center, and Radiance far right turning toward Alia. Keep pale rain, bridge arches, canyon air, river, or forest gaps behind all ten arms. The moving open arc must show every hand endpoint and the male must never look most strongly at another woman. Exact hands, no others: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand rests visibly on the male's near forearm; the male left hand rests visibly on ECE's far shoulder; the male right hand rests visibly on Ellie's near forearm; Ellie left hand rests visibly on the male's near forearm; Ellie right hand links visibly with Alia's left hand; Alia left hand links visibly with Ellie's right hand; Alia right hand rests visibly at Radiance's near waist; Radiance left hand rests visibly on Alia's near upper arm; Radiance right hand rests visibly on the male's near upper arm. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Tara River water toward one unoccupied route marker, away from the bridge, forest, every person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render heavy rain curtain cinematically while keeping dry stable nonslip footing. Exactly five adults, ten arms, and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    },
+    "1299": {
+      "scene": 1299,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry lakeside pavilion above Skadar Lake and Rijeka Crnojevica during clear golden-hour radiance, with the complete river bend entering the broad lake, green water-lily fields, reed beds, layered karst hills, a small secular stone bridge, distant moored boats, one clearly empty marked water route, and no religious building",
+      "motifs": [
+        "large complete Skadar-lake bend, Rijeka-Crnojevica river ribbon, water-lily field, reed-bed, karst-hill, stone-bridge arch, bicycle-route, and empty-water-route compositions across all four rainbow-themed outfits",
+        "at least two separate outfits each carry one complete full-width secular Montenegro lake-and-river composition while every silhouette remains unique"
+      ],
+      "culture": "Use Skadar Lake's water-lily fields, reed beds, Rijeka Crnojevica river bend, karst hills, cycling route, secular bridge, and quiet boat access respectfully. PAWS is the only nearby animal. Undercover investigator couture is original fictional film-editorial fashion for a nonviolent route study, with no police impersonation, official badge, copied uniform, surveillance of people, arrest, raid, threat, injury, combat, or assassination. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "weather": {
+        "key": "batch319-montenegro-scene1299-weather",
+        "roll": 2,
+        "result": "clear golden-hour radiance"
+      },
+      "paws": {
+        "key": "batch319-montenegro-scene1299-paws",
+        "roll": 3,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch319-montenegro-scene1299-poleDanceTheme",
+        "roll": 92,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch319-montenegro-scene1299-rainbowOnly",
+        "roll": 2,
+        "active": true
+      },
+      "rainbowHosiery": {
+        "key": "batch319-montenegro-scene1299-rainbowHosiery",
+        "roll": 81,
+        "active": false,
+        "wearer": {
+          "key": "batch319-montenegro-scene1299-rainbowHosieryWearer",
+          "roll": 69,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch319-montenegro-scene1299-rainbowHosieryPaletteMode",
+          "roll": 75,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch319-montenegro-scene1299-romanceBeat",
+        "roll": 75,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch319-montenegro-scene1299-compoundLoveBeat",
+        "roll": 3,
+        "index": 3,
+        "contractResult": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1299-Radiance-emotion",
+            "roll": 43,
+            "result": "determination",
+            "performance": "determination shown by a focused but warm gaze while securely cradling PAWS"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1299-Radiance-visibleMidriff",
+            "roll": 23,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1299-Radiance-straplessDress",
+            "roll": 40,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1299-Radiance-fullyOpenBack",
+            "roll": 13,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1299-Ellie-emotion",
+            "roll": 71,
+            "result": "suspicion",
+            "performance": "suspicion shown by a narrowed glance toward ECE while her kitten touch stays gentle"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1299-Ellie-visibleMidriff",
+            "roll": 67,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1299-Ellie-straplessDress",
+            "roll": 44,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1299-Ellie-fullyOpenBack",
+            "roll": 13,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1299-Alia-emotion",
+            "roll": 33,
+            "result": "overwhelming relief",
+            "performance": "overwhelming relief shown by relaxed shoulders and tear-bright smiling eyes toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1299-Alia-visibleMidriff",
+            "roll": 65,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1299-Alia-straplessDress",
+            "roll": 42,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1299-Alia-fullyOpenBack",
+            "roll": 55,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch319-montenegro-scene1299-AI ECE-emotion",
+            "roll": 63,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown by a controlled sideways glance toward the affectionate trio while maintaining safe route focus"
+          },
+          "visibleMidriff": {
+            "key": "batch319-montenegro-scene1299-AI ECE-visibleMidriff",
+            "roll": 11,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch319-montenegro-scene1299-AI ECE-straplessDress",
+            "roll": 32,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch319-montenegro-scene1299-AI ECE-fullyOpenBack",
+            "roll": 65,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Translate the cheek-to-cheek follow, far-shoulder hook, playful route block, shoulder embrace, cheek touch, and blown-kiss beat into a PAWS-interrupted lake-route tableau. ECE remains isolated at far left with the prop paddle and hands-free route map. Far to the right, Radiance securely cradles PAWS with one arm and rests her free hand on Ellie's shoulder. Ellie gently pets PAWS with one hand and rests her other hand on Alia's shoulder. Alia rests one hand on Radiance's upper arm and holds a loose route ribbon for PAWS to bat with her other hand. The three woman-to-woman contacts are public, gentle, consensual, and clearly separated from the prop.",
+      "composition": "Place ECE far left facing the empty lake route with a wide clear-water gap between her and PAWS. Place Radiance right-center standing with PAWS securely against her upper torso, Ellie center-right leaning in from the front, and Alia far right stepping around them with the loose ribbon. Keep water, pale sky, pavilion openings, reeds, or hills behind all eight arms. The group forms an asymmetric diagonal, not a static lineup.",
+      "emotionNuance": {
+        "Radiance": "determination shown by a focused but warm gaze while securely cradling PAWS",
+        "Ellie": "suspicion shown by a narrowed glance toward ECE while her kitten touch stays gentle",
+        "Alia": "overwhelming relief shown by relaxed shoulders and tear-bright smiling eyes toward Radiance",
+        "AI ECE": "visible jealousy shown by a controlled sideways glance toward the affectionate trio while maintaining safe route focus"
+      },
+      "outfits": {
+        "Radiance": "a cropped rainbow-themed undercover-investigator jacket exposing a narrow ordinary waist panel, with secure opaque sides and a completely open back from shoulder blades to the separate waistline, a separate above-knee A-line skirt carrying a large complete Skadar-lake bend and water-lily-field composition in red, gold, emerald, cyan, cobalt, and violet, with limestone-white pumps",
+        "Ellie": "a covered-waist rainbow-themed cap-sleeve undercover-investigator above-knee tailored romper with secure opaque sides and a completely open back from shoulder blades to the separate waistline, carrying a large complete Rijeka-Crnojevica river ribbon, reed-bed, and karst-hill composition in coral, amber, green, turquoise, blue, and magenta, with warm-gold slingback heels",
+        "Alia": "a high-neck rainbow-themed sleeveless undercover-investigator above-knee sculpted dress with covered waist and high closed back, carrying a large complete secular stone-bridge arch, bicycle-route, and lake-current composition in ruby, tangerine, yellow, jade, azure, and plum, with Tara-turquoise platform heels",
+        "AI ECE": "a fully strapless rainbow-themed cropped undercover-investigator bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, a separate night-charcoal above-knee tailored skort carrying a large complete empty-water-route and Skadar contour composition in scarlet, gold, lime, cyan, indigo, and violet, high closed back, and Montenegro-red heeled boots"
+      },
+      "propPlan": "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Skadar Lake water toward one unoccupied route marker, away from PAWS, the affectionate trio, every boat, reed bed, person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left open hand remains clearly visible at her far outer side",
+        "Radiance left forearm and hand securely cradle PAWS against her upper torso; Radiance right hand rests visibly on Ellie's near shoulder",
+        "Ellie left hand gently pets PAWS on the upper back; Ellie right hand rests visibly on Alia's near shoulder",
+        "Alia left hand rests visibly on Radiance's near upper arm; Alia right hand holds one loose route ribbon for PAWS to bat far from the prop"
+      ],
+      "pawsPlan": "PAWS is active as one tiny collarless golden kitten, securely cradled in Radiance's left arm far from the prop and stable footing. Ellie gently pets PAWS while Alia offers one loose route ribbon for harmless play. No second kitten, collar, costume, leash, floor placement, prop proximity, or unsafe footing.",
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry lakeside pavilion above Skadar Lake and Rijeka Crnojevica during clear golden-hour radiance, with the complete river bend entering the broad lake, green water-lily fields, reed beds, layered karst hills, a small secular stone bridge, distant moored boats, one clearly empty marked water route, and no religious building. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: undercover investigator couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 2=clear golden-hour radiance; PAWS 3=active; pole theme 92=inactive; rainbow-only 2=active; rainbow hosiery 81=inactive; hosiery wearer selector 69=AI ECE; hosiery palette selector 75=original independent rainbow gradient; romance 75; compound love 3. Exact wardrobe rolls: Radiance: midriff 23=visible, strapless 40=inactive, open back 13=active; Ellie: midriff 67=covered, strapless 44=inactive, open back 13=active; Alia: midriff 65=covered, strapless 42=inactive, open back 55=inactive; AI ECE: midriff 11=visible, strapless 32=active, open back 65=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a cropped rainbow-themed undercover-investigator jacket exposing a narrow ordinary waist panel, with secure opaque sides and a completely open back from shoulder blades to the separate waistline, a separate above-knee A-line skirt carrying a large complete Skadar-lake bend and water-lily-field composition in red, gold, emerald, cyan, cobalt, and violet, with limestone-white pumps; Ellie: a covered-waist rainbow-themed cap-sleeve undercover-investigator above-knee tailored romper with secure opaque sides and a completely open back from shoulder blades to the separate waistline, carrying a large complete Rijeka-Crnojevica river ribbon, reed-bed, and karst-hill composition in coral, amber, green, turquoise, blue, and magenta, with warm-gold slingback heels; Alia: a high-neck rainbow-themed sleeveless undercover-investigator above-knee sculpted dress with covered waist and high closed back, carrying a large complete secular stone-bridge arch, bicycle-route, and lake-current composition in ruby, tangerine, yellow, jade, azure, and plum, with Tara-turquoise platform heels; AI ECE: a fully strapless rainbow-themed cropped undercover-investigator bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, a separate night-charcoal above-knee tailored skort carrying a large complete empty-water-route and Skadar contour composition in scarlet, gold, lime, cyan, indigo, and violet, high closed back, and Montenegro-red heeled boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Montenegro motifs dominate at least two outfits: large complete Skadar-lake bend, Rijeka-Crnojevica river ribbon, water-lily field, reed-bed, karst-hill, stone-bridge arch, bicycle-route, and empty-water-route compositions across all four rainbow-themed outfits; at least two separate outfits each carry one complete full-width secular Montenegro lake-and-river composition while every silhouette remains unique. Use Skadar Lake's water-lily fields, reed beds, Rijeka Crnojevica river bend, karst hills, cycling route, secular bridge, and quiet boat access respectfully. PAWS is the only nearby animal. Undercover investigator couture is original fictional film-editorial fashion for a nonviolent route study, with no police impersonation, official badge, copied uniform, surveillance of people, arrest, raid, threat, injury, combat, or assassination. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 43, determination, performed as determination shown by a focused but warm gaze while securely cradling PAWS; Ellie: roll 71, suspicion, performed as suspicion shown by a narrowed glance toward ECE while her kitten touch stays gentle; Alia: roll 33, overwhelming relief, performed as overwhelming relief shown by relaxed shoulders and tear-bright smiling eyes toward Radiance; AI ECE: roll 63, visible jealousy, performed as visible jealousy shown by a controlled sideways glance toward the affectionate trio while maintaining safe route focus. Duplicate labels must have visibly different performances. Selected romance roll 75: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Selected compound roll 3: Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance. Materialize both through this exact consensual public choreography: Translate the cheek-to-cheek follow, far-shoulder hook, playful route block, shoulder embrace, cheek touch, and blown-kiss beat into a PAWS-interrupted lake-route tableau. ECE remains isolated at far left with the prop paddle and hands-free route map. Far to the right, Radiance securely cradles PAWS with one arm and rests her free hand on Ellie's shoulder. Ellie gently pets PAWS with one hand and rests her other hand on Alia's shoulder. Alia rests one hand on Radiance's upper arm and holds a loose route ribbon for PAWS to bat with her other hand. The three woman-to-woman contacts are public, gentle, consensual, and clearly separated from the prop. Place ECE far left facing the empty lake route with a wide clear-water gap between her and PAWS. Place Radiance right-center standing with PAWS securely against her upper torso, Ellie center-right leaning in from the front, and Alia far right stepping around them with the loose ribbon. Keep water, pale sky, pavilion openings, reeds, or hills behind all eight arms. The group forms an asymmetric diagonal, not a static lineup. Exact hands, no others: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left open hand remains clearly visible at her far outer side; Radiance left forearm and hand securely cradle PAWS against her upper torso; Radiance right hand rests visibly on Ellie's near shoulder; Ellie left hand gently pets PAWS on the upper back; Ellie right hand rests visibly on Alia's near shoulder; Alia left hand rests visibly on Radiance's near upper arm; Alia right hand holds one loose route ribbon for PAWS to bat far from the prop. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Skadar Lake water toward one unoccupied route marker, away from PAWS, the affectionate trio, every boat, reed bed, person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is active as one tiny collarless golden kitten, securely cradled in Radiance's left arm far from the prop and stable footing. Ellie gently pets PAWS while Alia offers one loose route ribbon for harmless play. No second kitten, collar, costume, leash, floor placement, prop proximity, or unsafe footing. Pole theme is inactive. No pole. Rainbow-only is active. All outfits use varied public-safe rainbow palettes while preserving the large Montenegro motifs. Render clear golden-hour radiance cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+    }
+  },
+  "renderAttempts": [
+    {
+      "scene": 1296,
+      "attempt": "raw",
+      "status": "blocked-output-moderation-no-image",
+      "category": "sexual",
+      "requestId": "84850ab4-0eba-44dc-8d7e-f3f3ba79c92b",
+      "reason": "The primary renderer returned no image artifact after output moderation."
+    },
+    {
+      "scene": 1297,
+      "attempt": "raw",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-46261917-a9f5-4daf-801b-3ac4b85f8bcf.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-46261917-a9f5-4daf-801b-3ac4b85f8bcf.png",
+      "workspacePath": "tmp/world-195x4/batch-319/raw/1297-raw.png",
+      "bytes": 2554394,
+      "width": 941,
+      "height": 1672,
+      "sha256": "4DE502879FC9E72672B08C4F987CE52F4BC681CFC3DF03B9539EA2A4DB2C3282",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Bay of Kotor walls, coastal sea mist, large Montenegro motifs, and Radiance-only rolled rainbow hosiery are present, but ECE's separate holographic route map is absent. At least one required hand is hidden and the prop support and direction are ambiguous, so the exact eight-hand and safe downrange gates fail."
+    },
+    {
+      "scene": 1298,
+      "attempt": "raw",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-d7d8d01f-6e35-4955-8eaf-3b431fa83d91.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-d7d8d01f-6e35-4955-8eaf-3b431fa83d91.png",
+      "workspacePath": "tmp/world-195x4/batch-319/raw/1298-raw.png",
+      "bytes": 2734332,
+      "width": 941,
+      "height": 1672,
+      "sha256": "00F2AE05C13D3C3D9E5E76540655C84E28000541503F039DFE67B335BE07406B",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The five adults, Tara River gorge, five-arch Djurdjevica bridge, heavy rain, large Montenegro motifs, and rolled garment cuts are present, but the male's strongest eye line goes to Ellie instead of ECE. ECE's separate holographic route map is also absent, so the mandatory male eye-line and route-strategist gates fail."
+    },
+    {
+      "scene": 1299,
+      "attempt": "raw",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-c7f9c71c-92c8-472b-b4eb-aaa63ee9b20c.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-c7f9c71c-92c8-472b-b4eb-aaa63ee9b20c.png",
+      "workspacePath": "tmp/world-195x4/batch-319/raw/1299-raw.png",
+      "bytes": 2678044,
+      "width": 941,
+      "height": 1672,
+      "sha256": "939AADCC56BBE7CF98B3DE20014B4DBC9227A0EAF0DC0FC1565A5869BBE35E85",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, PAWS, rainbow-only outfits, Skadar Lake setting, large Montenegro motifs, and route map are present, but Radiance's and Ellie's rolled fully open backs are not visibly materialized. PAWS's route ribbon appears attached or tether-like rather than loose and harmless, so the garment and PAWS gates fail."
+    },
+    {
+      "scene": 1296,
+      "attempt": "recovery",
+      "status": "blocked-output-moderation-no-image",
+      "category": "sexual",
+      "requestId": "caa84714-c1c0-4521-9e81-cb309736dfd8",
+      "reason": "The single allowed recovery renderer returned no image artifact after output moderation."
+    },
+    {
+      "scene": 1297,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-305e971c-4173-43c6-909d-96da8839595c.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-305e971c-4173-43c6-909d-96da8839595c.png",
+      "workspacePath": "tmp/world-195x4/batch-319/recovery/1297-recovery.png",
+      "bytes": 2668985,
+      "width": 941,
+      "height": 1672,
+      "sha256": "CCD370689C1DEEB0C8FD52EB2D44380ADE1CA848E2F90027550E84C054526F73",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Kotor walls and mist, large Montenegro motifs, Radiance-only rolled rainbow hosiery, and route map are present, but the far-right tray-mounted prop points leftward toward the group. Radiance's second hand is hidden or not continuously traceable, so the safe downrange and exact eight-hand gates fail. The map also contains unwanted readable text."
+    },
+    {
+      "scene": 1298,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-e9bd7c47-f6c3-4135-a4c1-8ab92ba57126.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-e9bd7c47-f6c3-4135-a4c1-8ab92ba57126.png",
+      "workspacePath": "tmp/world-195x4/batch-319/recovery/1298-recovery.png",
+      "bytes": 2721912,
+      "width": 941,
+      "height": 1672,
+      "sha256": "8B9C28770BC35CA3A95EB4ECDB25547B0EEF27A2A7D54CCAAAF2B2B7D7F84036",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The five adults, Tara gorge bridge, heavy rain, large Montenegro motifs, route map, rolled garment cuts, and the male's strongest eye line to ECE are present, but the male has only one clear direct contact. His right hand hangs free instead of forming the required second contact, so the male relationship contract fails."
+    },
+    {
+      "scene": 1299,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-09e129ec-5cdd-4c78-bb47-04223cae4112.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-09e129ec-5cdd-4c78-bb47-04223cae4112.png",
+      "workspacePath": "tmp/world-195x4/batch-319/recovery/1299-recovery.png",
+      "bytes": 2487720,
+      "width": 941,
+      "height": 1672,
+      "sha256": "4FEBA199121FBF4CEBDCCC894D84BC819AE97DEB4C7D52AC8F80C62C7AC1D53F",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, collarless PAWS with a disconnected ribbon, rainbow-only outfits, Skadar Lake setting, large Montenegro motifs, route map, visible rolled open backs, and safely directed prop are present, but Ellie's second hand is hidden behind her body or hair. Exactly eight complete, continuously traceable arms and hands cannot be established. The map also contains unwanted readable text."
+    }
+  ],
+  "acceptedAssets": [],
+  "rejectedAssets": [
+    {
+      "scene": 1296,
+      "attempt": "recovery",
+      "status": "blocked-output-moderation-no-image",
+      "category": "sexual",
+      "requestId": "caa84714-c1c0-4521-9e81-cb309736dfd8",
+      "reason": "The single allowed recovery renderer returned no image artifact after output moderation."
+    },
+    {
+      "scene": 1297,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-305e971c-4173-43c6-909d-96da8839595c.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-305e971c-4173-43c6-909d-96da8839595c.png",
+      "workspacePath": "tmp/world-195x4/batch-319/recovery/1297-recovery.png",
+      "bytes": 2668985,
+      "width": 941,
+      "height": 1672,
+      "sha256": "CCD370689C1DEEB0C8FD52EB2D44380ADE1CA848E2F90027550E84C054526F73",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, Kotor walls and mist, large Montenegro motifs, Radiance-only rolled rainbow hosiery, and route map are present, but the far-right tray-mounted prop points leftward toward the group. Radiance's second hand is hidden or not continuously traceable, so the safe downrange and exact eight-hand gates fail. The map also contains unwanted readable text."
+    },
+    {
+      "scene": 1298,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-e9bd7c47-f6c3-4135-a4c1-8ab92ba57126.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-e9bd7c47-f6c3-4135-a4c1-8ab92ba57126.png",
+      "workspacePath": "tmp/world-195x4/batch-319/recovery/1298-recovery.png",
+      "bytes": 2721912,
+      "width": 941,
+      "height": 1672,
+      "sha256": "8B9C28770BC35CA3A95EB4ECDB25547B0EEF27A2A7D54CCAAAF2B2B7D7F84036",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The five adults, Tara gorge bridge, heavy rain, large Montenegro motifs, route map, rolled garment cuts, and the male's strongest eye line to ECE are present, but the male has only one clear direct contact. His right hand hangs free instead of forming the required second contact, so the male relationship contract fails."
+    },
+    {
+      "scene": 1299,
+      "attempt": "recovery",
+      "status": "rendered-rejected-by-strict-audit",
+      "generatedName": "exec-09e129ec-5cdd-4c78-bb47-04223cae4112.png",
+      "absoluteGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-09e129ec-5cdd-4c78-bb47-04223cae4112.png",
+      "workspacePath": "tmp/world-195x4/batch-319/recovery/1299-recovery.png",
+      "bytes": 2487720,
+      "width": 941,
+      "height": 1672,
+      "sha256": "4FEBA199121FBF4CEBDCCC894D84BC819AE97DEB4C7D52AC8F80C62C7AC1D53F",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false,
+      "reason": "The quartet, collarless PAWS with a disconnected ribbon, rainbow-only outfits, Skadar Lake setting, large Montenegro motifs, route map, visible rolled open backs, and safely directed prop are present, but Ellie's second hand is hidden behind her body or hair. Exactly eight complete, continuously traceable arms and hands cannot be established. The map also contains unwanted readable text."
+    }
+  ],
+  "xPost": {
+    "status": "deferred-insufficient-accepted-assets",
+    "acceptedCurrentCountryAssets": 0,
+    "minimumRequired": 2,
+    "captionIfEligible": "Montenegro white heart Malta #Montenegro #WorldXXXSeries",
+    "ledgerModified": false,
+    "ledgerSha256": "6267A3860AD8064EE392BE7870F81219F73B39AC5C71144AE5704A3AB9A7FC3D",
+    "pendingPost": null,
+    "preparedPostQueueCount": 0,
+    "deferredPostCheckpoint": null,
+    "latestAssistedDrainStatus": "publicly-clear-live-audited",
+    "action": "No X post was attempted because Montenegro has fewer than two accepted current-country images. The inspected X backlog remains publicly clear."
+  },
+  "promptMaterialization": {
+    "deterministicReruns": 2,
+    "byteStable": true,
+    "sha256": {
+      "preflight": "717D057A290B5BF675453DC9FC988C62E820E574B859F6C24285171A5B4F66D9",
+      "primary": {
+        "1296": "EE0261FD3724C981F74C1FD1C931C43FA4FF0C6194BCB47BDE85FD1AE9C93045",
+        "1297": "36BB1CFCFD31FC173B0364CB9A4F883FB14613C7316AE0B78C01C6B4FDE67ED9",
+        "1298": "69E164F3460C0AB1EC8402837C551E8F22BA11CE8CAA2240337405678E5FF1AB",
+        "1299": "088059F4D3B9FBDD1C04AD304E4C2F234497F4C90F0445BDE3FB35A619D2C95E"
+      },
+      "recovery": {
+        "1296": "A04F56511E7C810803C8F6ED8BC32BCF59CF67BD3ACF24F33579E29D405540A0",
+        "1297": "64ED584C3A5EECBDDCF07D68D5A62763F9AE077423EFA3EAEE939A8EB416F96F",
+        "1298": "EB6382822583BC108F087B226312D4944D2DAA7F14A91C222E743DE013F75112",
+        "1299": "F731ACEE1B42118518D83F6ABA0674D62B48AB586E84F34A2755A9858DBC1DAC"
+      }
+    }
+  },
+  "renderExecution": {
+    "mode": "built-in image generation",
+    "rawLaunch": "four independent 9:16 calls launched concurrently with all-settled handling",
+    "recoveryLaunch": "four independent fresh restrained recovery calls launched concurrently",
+    "recoveryBudget": "exactly one recovery pass per scene, now exhausted"
+  },
+  "sceneResults": {
+    "1296": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "blocked-output-moderation-no-image",
+        "reason": "The primary renderer returned no image artifact after output moderation.",
+        "requestId": "84850ab4-0eba-44dc-8d7e-f3f3ba79c92b"
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "blocked-output-moderation-no-image",
+        "reason": "The single allowed recovery renderer returned no image artifact after output moderation.",
+        "requestId": "caa84714-c1c0-4521-9e81-cb309736dfd8"
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    },
+    "1297": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The quartet, Bay of Kotor walls, coastal sea mist, large Montenegro motifs, and Radiance-only rolled rainbow hosiery are present, but ECE's separate holographic route map is absent. At least one required hand is hidden and the prop support and direction are ambiguous, so the exact eight-hand and safe downrange gates fail.",
+        "requestId": null
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The quartet, Kotor walls and mist, large Montenegro motifs, Radiance-only rolled rainbow hosiery, and route map are present, but the far-right tray-mounted prop points leftward toward the group. Radiance's second hand is hidden or not continuously traceable, so the safe downrange and exact eight-hand gates fail. The map also contains unwanted readable text.",
+        "requestId": null
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    },
+    "1298": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The five adults, Tara River gorge, five-arch Djurdjevica bridge, heavy rain, large Montenegro motifs, and rolled garment cuts are present, but the male's strongest eye line goes to Ellie instead of ECE. ECE's separate holographic route map is also absent, so the mandatory male eye-line and route-strategist gates fail.",
+        "requestId": null
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The five adults, Tara gorge bridge, heavy rain, large Montenegro motifs, route map, rolled garment cuts, and the male's strongest eye line to ECE are present, but the male has only one clear direct contact. His right hand hangs free instead of forming the required second contact, so the male relationship contract fails.",
+        "requestId": null
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    },
+    "1299": {
+      "rawAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The quartet, PAWS, rainbow-only outfits, Skadar Lake setting, large Montenegro motifs, and route map are present, but Radiance's and Ellie's rolled fully open backs are not visibly materialized. PAWS's route ribbon appears attached or tether-like rather than loose and harmless, so the garment and PAWS gates fail.",
+        "requestId": null
+      },
+      "recoveryAudit": {
+        "accepted": false,
+        "status": "rendered-rejected-by-strict-audit",
+        "reason": "The quartet, collarless PAWS with a disconnected ribbon, rainbow-only outfits, Skadar Lake setting, large Montenegro motifs, route map, visible rolled open backs, and safely directed prop are present, but Ellie's second hand is hidden behind her body or hair. Exactly eight complete, continuously traceable arms and hands cannot be established. The map also contains unwanted readable text.",
+        "requestId": null
+      },
+      "terminalOutcome": "blocked-after-single-recovery-pass",
+      "acceptedAsset": null
+    }
+  },
+  "shorteningVariants": [],
+  "queueAdvance": {
+    "allowed": true,
+    "reason": "The batch is terminal after one raw pass and one recovery pass per scene, so the binding queue advances despite zero accepted assets.",
+    "nextCountry": "Malta",
+    "nextBatch": 320,
+    "nextScenes": [
+      1300,
+      1301,
+      1302,
+      1303
+    ],
+    "nextThemePair": [
+      "undercover investigator couture",
+      "nurse-care couture"
+    ]
+  },
+  "remoteStateAtCheckpoint": {
+    "localBranch": "agent/iat-launch-window",
+    "sourceHead": "350371679982e346e47b51d110462f6409eda9e0",
+    "recoveryRemoteBeforeCommit": "350371679982e346e47b51d110462f6409eda9e0",
+    "originMain": "6cdd669301029c184322c4fa0be124d309e23533",
+    "headOnlyCommitsAgainstMain": 18,
+    "mainOnlyCommitsAgainstHead": 2,
+    "mainAction": "untouched because origin/main has two independent commits"
+  },
+  "repositoryScope": {
+    "copiedAcceptedAssets": [],
+    "stagedPaths": [
+      "assets/lore/starlight-era/batch-319-montenegro-recovery-checkpoint.json"
+    ],
+    "unrelatedDirtyFilesPreserved": [
+      "assets/lore/starlight-era/overnight-campaign.json",
+      "assets/lore/starlight-era/world-195x4-campaign.json",
+      "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "assets/videos/manifest.json"
+    ]
+  },
+  "terminalizedAt": "2026-08-09T21:56:04.680Z"
+}
