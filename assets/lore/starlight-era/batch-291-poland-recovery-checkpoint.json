@@ -1,0 +1,547 @@
+{
+  "batch": 291,
+  "country": "Poland",
+  "status": "blocked-no-accepted-assets",
+  "sourceCommit": "18d6831e6f374c224d25210ed2b89655cb801e1b",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch291-poland keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "paws": "0-24"
+  },
+  "themePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "nextThemePair": [
+    "undercover investigator couture",
+    "nurse-care couture"
+  ],
+  "nextQueueCountry": "Portugal",
+  "researchSources": [
+    {
+      "url": "https://www.poland.travel/en/warsaw-city-break/",
+      "usedFor": "Warsaw Palace of Culture and Science, Warsaw skyline, Old Town color, Vistula context, and pierogi"
+    },
+    {
+      "url": "https://www.poland.travel/en/krakow-city-break/",
+      "usedFor": "Krakow Cloth Hall, amber craft, obwarzanek, and public market culture"
+    },
+    {
+      "url": "https://www.poland.travel/en/gdansk-city-break/",
+      "usedFor": "Gdansk Crane, Motlawa waterfront, port history, and amber"
+    },
+    {
+      "url": "https://www.poland.travel/en/a-journey-through-polish-provinces-the-malopolska-province/",
+      "usedFor": "Tatra Mountains, Zakopane wooden architecture, and oscypek cheese forms"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch291-poland-male-model-scene",
+    "fullHash": 2671465263,
+    "roll": 63,
+    "selectedScenePosition": 4,
+    "selectedScene": 1187,
+    "maleEmotion": {
+      "key": "batch291-poland-scene4-male-emotion",
+      "roll": 59,
+      "result": "aching romantic longing"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Poland's flag has no distinct motif beyond white and red fields, so every scene uses large complete non-official secular Polish architecture, civilian craft, food, engineering, or landscape motifs on at least two outfits.",
+    "palette": "Polish white and crimson expanded with Warsaw stone gray, Krakow brick, Gdansk amber gold, Baltic teal, Tatra pine, oscypek cream, and wet cobblestone charcoal.",
+    "fallbackMotifs": [
+      "Warsaw Palace of Culture stepped silhouette, Old Town townhouse blocks, Vistula wave bands, piano-key rhythm, and paper-cut floral geometry",
+      "Krakow Cloth Hall arcades, obwarzanek rings, pierogi crescents, amber cabochons, market awning stripes, and civilian paper-cut flowers",
+      "Gdansk Crane timber geometry, Motlawa rigging lines, amber sunbursts, ship-hull curves, and waterfront reflections",
+      "Tatra peak contours, Zakopane carved-wood fans, oscypek spindle forms, pine silhouettes, and mountain-roof geometry"
+    ],
+    "minimumCoverage": "Every scene renders large complete secular Polish motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScene": "Scene 1185 foregrounds Krakow's secular market identity through Cloth Hall arcades, oversized obwarzanek display rings, pierogi crescent forms, amber craft, paper-cut floral color, and unattended public-safe food displays.",
+    "prohibitions": "No literal flag, white eagle, coat of arms, official emblem, sacred motif, political insignia, copied folk costume, copied uniform, badge, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch291-poland-x-heart",
+      "roll": 16,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch291-poland-x-internalagency",
+      "roll": 98,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch291-poland-x-worldxxxseries",
+      "roll": 45,
+      "active": false
+    }
+  },
+  "anatomyGate": {
+    "fourAdultScenes": "Exactly four adults, eight arms, and eight hands with one continuously traceable owner per limb.",
+    "maleScene": "Exactly five adults, ten arms, and ten hands. The male replaces nobody.",
+    "automaticRejects": "Reject every extra, duplicated, floating, fused, borrowed, emerging, hidden-owner, or ambiguous limb or finger cluster, malformed face, incomplete shoe, or untraceable contact."
+  },
+  "scenePlans": {
+    "1184": {
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "Warsaw Palace of Culture and Science and modern skyline from a broad Vistula-side route plaza",
+      "motifs": [
+        "large complete Palace of Culture stepped silhouettes and piano-key rhythm across Radiance and Ellie",
+        "large complete Polish paper-cut floral geometry, Old Town townhouse blocks, and Vistula wave bands across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch291-poland-scene1184-weather",
+        "roll": 58,
+        "result": "snow flurries"
+      },
+      "paws": {
+        "key": "batch291-poland-scene1184-paws",
+        "roll": 67,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch291-poland-scene1184-poleDanceTheme",
+        "roll": 36,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch291-poland-scene1184-rainbowOnly",
+        "roll": 94,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch291-poland-scene1184-rainbowHosiery",
+        "roll": 45,
+        "active": false,
+        "wearerKey": "batch291-poland-scene1184-rainbowHosieryWearer",
+        "wearerRoll": 97,
+        "wearerIfActive": "AI ECE",
+        "paletteModeKey": "batch291-poland-scene1184-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 19,
+        "paletteModeIfActive": "Poland-palette multicolor gradient"
+      },
+      "romanceBeat": {
+        "key": "batch291-poland-scene1184-romanceBeat",
+        "roll": 35,
+        "dynamicIndex": 11,
+        "result": "The quartet crosses paths in a tight walking weave with a linked-waist pair, a protective shoulder touch, a cheek-to-cheek pass, and a suspicious look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch291-poland-scene1184-compoundLoveBeat",
+        "roll": 83,
+        "index": 11,
+        "result": "ECE rises into Radiance's close reassurance while ECE turns a joyful cheek toward Alia and Ellie protects Radiance's far side."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch291-poland-scene1184-Radiance-emotion", "roll": 71, "result": "suspicion" },
+          "visibleMidriff": { "key": "batch291-poland-scene1184-Radiance-visibleMidriff", "roll": 67, "active": false },
+          "straplessDress": { "key": "batch291-poland-scene1184-Radiance-straplessDress", "roll": 56, "active": false },
+          "fullyOpenBack": { "key": "batch291-poland-scene1184-Radiance-fullyOpenBack", "roll": 81, "active": false },
+          "outfit": "crimson asymmetric sculpted covert-courier mini dress with a full Warsaw tower field and white piano-key hip architecture, covered midriff, normal straps, low secure back, and charcoal stiletto ankle boots"
+        },
+        "Ellie": {
+          "emotion": { "key": "batch291-poland-scene1184-Ellie-emotion", "roll": 95, "result": "shame and social vulnerability" },
+          "visibleMidriff": { "key": "batch291-poland-scene1184-Ellie-visibleMidriff", "roll": 31, "active": true },
+          "straplessDress": { "key": "batch291-poland-scene1184-Ellie-straplessDress", "roll": 60, "active": false },
+          "fullyOpenBack": { "key": "batch291-poland-scene1184-Ellie-fullyOpenBack", "roll": 69, "active": false },
+          "outfit": "white cropped architectural top visibly exposing her ordinary waist and belly button, paired with a short crimson folded skirt carrying a complete Palace of Culture silhouette and silver slingback heels"
+        },
+        "Alia": {
+          "emotion": { "key": "batch291-poland-scene1184-Alia-emotion", "roll": 41, "result": "determination" },
+          "visibleMidriff": { "key": "batch291-poland-scene1184-Alia-visibleMidriff", "roll": 25, "active": true },
+          "straplessDress": { "key": "batch291-poland-scene1184-Alia-straplessDress", "roll": 22, "active": true },
+          "fullyOpenBack": { "key": "batch291-poland-scene1184-Alia-fullyOpenBack", "roll": 15, "active": true },
+          "outfit": "strapless crimson cropped sculpted bodice with completely bare shoulders, clearly visible navel, and a completely open back from shoulder blades to lower waist, plus a separate white asymmetric mini skirt filled with large paper-cut flowers and crimson platform heels"
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch291-poland-scene1184-AI ECE-emotion", "roll": 11, "result": "romantic joy" },
+          "visibleMidriff": { "key": "batch291-poland-scene1184-AI ECE-visibleMidriff", "roll": 51, "active": false },
+          "straplessDress": { "key": "batch291-poland-scene1184-AI ECE-straplessDress", "roll": 28, "active": true },
+          "fullyOpenBack": { "key": "batch291-poland-scene1184-AI ECE-fullyOpenBack", "roll": 65, "active": false },
+          "outfit": "strapless white folded peplum mini dress with completely bare shoulders, covered waist, broad Vistula-wave and Old Town block panels, and glossy crimson knee boots"
+        }
+      },
+      "propBeat": "ECE alone holds the full-size polished rainbow-gradient inert Desert Eagle-style mission prop in her right hand, muzzle aligned past the group toward one clearly empty route marker. Her straight right index finger lies high along the frame outside the guard. Her left hand alone controls a separate floating holographic Warsaw map. Alia's right hand guides ECE at the upper forearm without touching the prop.",
+      "handInventory": "Exactly eight hands: ECE right on prop and left on map; Alia right on ECE's upper forearm and left on Radiance's shoulder; Ellie right at Radiance's waist and left open beside her own hip; Radiance right at Ellie's waist and left on Alia's forearm. Every wrist and elbow remains visible and traceable.",
+      "renderPrompt": "Create one photorealistic 9:16 full-length cinematic fashion editorial at Warsaw's Palace of Culture and Science in snow flurries. Show exactly four clearly adult fictional women, Radiance the anchored blonde, Ellie the anchored brunette with high ponytail, Alia the anchored Black woman with a high sculptural braided ponytail, and AI ECE the anchored brunette from the dedicated ECE portrait. Preserve all four faces. Use the exact four distinct outfits and every exposure trigger recorded above, with Alia shown in a three-quarter turn so both her visible navel and complete open back read. Large complete secular Polish motifs must cover at least two outfits. Build an asymmetrical moving love-square with at least three unmistakable touches. Materialize the four distinct emotions. ECE handles one realistic full-size rainbow-gradient inert Desert Eagle-style mission prop as recorded, aimed only at an empty route marker, trigger finger straight outside the guard, no ammunition, no firing, no threat. Her free left hand controls a separate holographic map. Use exactly eight traceable arms and eight traceable hands according to the hand inventory, five natural fingers where visible, complete faces, legs, and heels. No extra, duplicated, floating, fused, borrowed, hidden-owner, or ambiguous limb. No PAWS, no pole, no rainbow outfits, no rainbow hosiery, no uniforms, badges, combat, or text."
+    },
+    "1185": {
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "Krakow Cloth Hall and Main Market Square, framed without religious buildings",
+      "motifs": [
+        "large complete Cloth Hall arcade and amber-cabochon fields across Radiance and AI ECE",
+        "large complete obwarzanek rings, pierogi crescents, market stripes, and civilian paper-cut flowers across Ellie and Alia"
+      ],
+      "weather": {
+        "key": "batch291-poland-scene1185-weather",
+        "roll": 77,
+        "result": "powerful windstorm with controlled fabric motion"
+      },
+      "paws": {
+        "key": "batch291-poland-scene1185-paws",
+        "roll": 26,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch291-poland-scene1185-poleDanceTheme",
+        "roll": 69,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch291-poland-scene1185-rainbowOnly",
+        "roll": 13,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch291-poland-scene1185-rainbowHosiery",
+        "roll": 68,
+        "active": false,
+        "wearerKey": "batch291-poland-scene1185-rainbowHosieryWearer",
+        "wearerRoll": 92,
+        "wearerIfActive": "AI ECE",
+        "paletteModeKey": "batch291-poland-scene1185-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 4,
+        "paletteModeIfActive": "Poland-palette multicolor gradient"
+      },
+      "romanceBeat": {
+        "key": "batch291-poland-scene1185-romanceBeat",
+        "roll": 52,
+        "dynamicIndex": 4,
+        "result": "Radiance gives Alia a quick cheek kiss during a route handoff while Ellie presses shoulder-to-shoulder with Radiance and ECE turns away, still holding the emotional center."
+      },
+      "compoundLoveBeat": {
+        "key": "batch291-poland-scene1185-compoundLoveBeat",
+        "roll": 10,
+        "index": 10,
+        "result": "The quartet forms a turning embrace chain with Alia behind Radiance, Radiance close to Ellie, and ECE leaning toward them with controlled possessive tension."
+      },
+      "emotionCollisionNote": "Alia roll 68 and ECE roll 66 independently land in the same possessive-tension bucket. Keep the stored results unchanged but make their visual performances distinct: Alia shows protective narrowed focus toward Radiance, while ECE shows a controlled half-smile, tightened jaw, and route-command posture.",
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch291-poland-scene1185-Radiance-emotion", "roll": 34, "result": "overwhelming relief" },
+          "visibleMidriff": { "key": "batch291-poland-scene1185-Radiance-visibleMidriff", "roll": 64, "active": false },
+          "straplessDress": { "key": "batch291-poland-scene1185-Radiance-straplessDress", "roll": 51, "active": false },
+          "fullyOpenBack": { "key": "batch291-poland-scene1185-Radiance-fullyOpenBack", "roll": 16, "active": true },
+          "outfit": "white side-anchored sculpted courier mini dress with a complete open back from shoulder blades to lower waist, complete amber Cloth Hall arcade panels, covered navel, and crimson architectural pumps"
+        },
+        "Ellie": {
+          "emotion": { "key": "batch291-poland-scene1185-Ellie-emotion", "roll": 16, "result": "extreme happiness, radiant laughing delight" },
+          "visibleMidriff": { "key": "batch291-poland-scene1185-Ellie-visibleMidriff", "roll": 22, "active": true },
+          "straplessDress": { "key": "batch291-poland-scene1185-Ellie-straplessDress", "roll": 41, "active": false },
+          "fullyOpenBack": { "key": "batch291-poland-scene1185-Ellie-fullyOpenBack", "roll": 6, "active": true },
+          "outfit": "crimson cropped side-secured architectural top exposing her waist and belly button and a complete open back, with white short tailored romper bottoms covered in large obwarzanek rings and pierogi crescents, plus amber slingback heels"
+        },
+        "Alia": {
+          "emotion": { "key": "batch291-poland-scene1185-Alia-emotion", "roll": 68, "result": "possessive tension", "performance": "protective narrowed focus toward Radiance" },
+          "visibleMidriff": { "key": "batch291-poland-scene1185-Alia-visibleMidriff", "roll": 10, "active": true },
+          "straplessDress": { "key": "batch291-poland-scene1185-Alia-straplessDress", "roll": 9, "active": true },
+          "fullyOpenBack": { "key": "batch291-poland-scene1185-Alia-fullyOpenBack", "roll": 82, "active": false },
+          "outfit": "strapless white corsage-inspired cropped bodice with completely bare shoulders and visibly exposed navel, paired with a crimson tulip mini skirt carrying full paper-cut flowers and obwarzanek rings, and white platform heels"
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch291-poland-scene1185-AI ECE-emotion", "roll": 66, "result": "possessive tension", "performance": "controlled half-smile, tightened jaw, and route-command posture" },
+          "visibleMidriff": { "key": "batch291-poland-scene1185-AI ECE-visibleMidriff", "roll": 68, "active": false },
+          "straplessDress": { "key": "batch291-poland-scene1185-AI ECE-straplessDress", "roll": 31, "active": true },
+          "fullyOpenBack": { "key": "batch291-poland-scene1185-AI ECE-fullyOpenBack", "roll": 96, "active": false },
+          "outfit": "strapless crimson folded-column mini with completely bare shoulders, covered waist, large complete Cloth Hall arcades and amber cabochons, and white knee-high heeled boots"
+        }
+      },
+      "cultureBeat": "An unattended polished market display shows oversized obwarzanek rings, neat pierogi crescents, amber craft pieces, and bright civilian paper-cut flowers, all clearly separate from the quartet and prop.",
+      "propBeat": "ECE alone holds the full-size polished rainbow-gradient inert Desert Eagle-style mission prop in her right hand during a magazine-free inspection, muzzle toward a clearly empty stone route marker beyond the group. Her right index finger is straight high on the frame outside the guard. Her free left hand controls a separate Krakow route hologram.",
+      "handInventory": "Exactly eight hands: ECE right on prop and left on map; Radiance right at Alia's shoulder and left at Ellie's waist; Ellie right on Radiance's waist and left open near her own hip; Alia right on Radiance's upper arm and left on ECE's shoulder. Every hand has a visible arm owner.",
+      "renderPrompt": "Create one photorealistic 9:16 full-length cinematic fashion editorial at Krakow Cloth Hall during a powerful windstorm with controlled fabric motion. Frame the secular Cloth Hall and market square without religious buildings. Show exactly four clearly adult fictional women with the anchored Radiance, Ellie, Alia, and AI ECE faces; Alia alone has a high sculptural braided ponytail. Use the exact four unmistakably different outfits and every exposure trigger recorded above. Turn Radiance and Ellie in clean three-quarter poses so their complete open backs remain visible while Ellie's navel also reads. Cover at least two outfits with large complete Polish secular motifs. Include the unattended obwarzanek, pierogi, amber, and paper-cut culture display. Stage a dynamic consensual love-square with at least three clear touches and distinct emotion performances, including two visually different possessive-tension performances. ECE alone handles one realistic full-size rainbow-gradient inert Desert Eagle-style prop in a safe magazine-free inspection, muzzle only toward an empty route marker, index finger straight outside the guard, no ammunition or firing. Her free left hand controls a separate map. Use exactly eight traceable arms and eight traceable hands according to the hand inventory, five natural fingers where visible, complete faces, legs, and heels. No extra, duplicated, floating, fused, borrowed, hidden-owner, or ambiguous limb. No PAWS, pole, rainbow outfits, rainbow hosiery, uniforms, badges, combat, official symbols, sacred motifs, or text."
+    },
+    "1186": {
+      "theme": "undercover investigator couture",
+      "landmark": "Gdansk Crane and Motlawa waterfront",
+      "motifs": [
+        "large complete Gdansk Crane timber and harbor-rigging fields across Radiance and Alia",
+        "large complete amber sunbursts, ship-hull curves, and wet Motlawa reflections across Ellie and AI ECE"
+      ],
+      "weather": {
+        "key": "batch291-poland-scene1186-weather",
+        "roll": 28,
+        "result": "cinematic light rain with reflections"
+      },
+      "paws": {
+        "key": "batch291-poland-scene1186-paws",
+        "roll": 17,
+        "active": true,
+        "beat": "One tiny collarless golden kitten perches securely on Radiance's left shoulder, far from the prop. Ellie gently pets the kitten with one clearly owned hand while the group shares a tender, rain-softened laugh."
+      },
+      "poleDanceTheme": {
+        "key": "batch291-poland-scene1186-poleDanceTheme",
+        "roll": 70,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch291-poland-scene1186-rainbowOnly",
+        "roll": 28,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch291-poland-scene1186-rainbowHosiery",
+        "roll": 39,
+        "active": false,
+        "wearerKey": "batch291-poland-scene1186-rainbowHosieryWearer",
+        "wearerRoll": 67,
+        "wearerIfActive": "AI ECE",
+        "paletteModeKey": "batch291-poland-scene1186-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 21,
+        "paletteModeIfActive": "Poland-palette multicolor gradient"
+      },
+      "romanceBeat": {
+        "key": "batch291-poland-scene1186-romanceBeat",
+        "roll": 61,
+        "dynamicIndex": 1,
+        "result": "Ellie rises from a low route stance into Radiance's waiting side hug while ECE keeps visual command and Alia watches with awed tenderness."
+      },
+      "compoundLoveBeat": {
+        "key": "batch291-poland-scene1186-compoundLoveBeat",
+        "roll": 77,
+        "index": 5,
+        "result": "Radiance embraces Ellie from behind while Ellie turns toward Alia and ECE answers with tearful vulnerability; PAWS interrupts the triangle from Radiance's shoulder."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch291-poland-scene1186-Radiance-emotion", "roll": 65, "result": "visible jealousy" },
+          "visibleMidriff": { "key": "batch291-poland-scene1186-Radiance-visibleMidriff", "roll": 45, "active": true },
+          "straplessDress": { "key": "batch291-poland-scene1186-Radiance-straplessDress", "roll": 66, "active": false },
+          "fullyOpenBack": { "key": "batch291-poland-scene1186-Radiance-fullyOpenBack", "roll": 39, "active": false },
+          "outfit": "white cropped asymmetric investigator bodice exposing her ordinary waist and belly button, with a crimson folded mini skirt bearing a full Gdansk Crane timber field and amber ankle-strap heels"
+        },
+        "Ellie": {
+          "emotion": { "key": "batch291-poland-scene1186-Ellie-emotion", "roll": 1, "result": "tender affection" },
+          "visibleMidriff": { "key": "batch291-poland-scene1186-Ellie-visibleMidriff", "roll": 5, "active": true },
+          "straplessDress": { "key": "batch291-poland-scene1186-Ellie-straplessDress", "roll": 14, "active": true },
+          "fullyOpenBack": { "key": "batch291-poland-scene1186-Ellie-fullyOpenBack", "roll": 63, "active": false },
+          "outfit": "strapless crimson cropped folded bodice with completely bare shoulders and a clearly visible navel, white high-waist short tailored shorts with large amber sunbursts and Motlawa reflections, and crimson platform sandals"
+        },
+        "Alia": {
+          "emotion": { "key": "batch291-poland-scene1186-Alia-emotion", "roll": 47, "result": "awe" },
+          "visibleMidriff": { "key": "batch291-poland-scene1186-Alia-visibleMidriff", "roll": 83, "active": false },
+          "straplessDress": { "key": "batch291-poland-scene1186-Alia-straplessDress", "roll": 96, "active": false },
+          "fullyOpenBack": { "key": "batch291-poland-scene1186-Alia-fullyOpenBack", "roll": 21, "active": true },
+          "outfit": "amber-red one-shoulder cocktail mini with a completely open back from shoulder blades to secure lower waist, covered midriff, a complete Crane-rigging skirt field, and white sculptural heels"
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch291-poland-scene1186-AI ECE-emotion", "roll": 85, "result": "full sobbing with tear-streaked face and shaking posture" },
+          "visibleMidriff": { "key": "batch291-poland-scene1186-AI ECE-visibleMidriff", "roll": 49, "active": true },
+          "straplessDress": { "key": "batch291-poland-scene1186-AI ECE-straplessDress", "roll": 66, "active": false },
+          "fullyOpenBack": { "key": "batch291-poland-scene1186-AI ECE-fullyOpenBack", "roll": 27, "active": true },
+          "outfit": "white cropped side-anchored peplum investigator top exposing her navel and a completely open back, crimson short column skirt with complete amber ship-hull and waterfront reflections, and amber knee boots"
+        }
+      },
+      "propBeat": "ECE alone holds the full-size polished rainbow-gradient inert Desert Eagle-style mission prop in her right hand, safely sight-aligned toward empty Motlawa water beyond the railing. Her straight right index finger lies visibly along the frame outside the guard. Her free left hand controls a separate floating Gdansk route map.",
+      "handInventory": "Exactly eight hands: ECE right on prop and left on map; Radiance right at Ellie's waist and left at Alia's waist; Ellie right on Radiance's shoulder and left gently petting PAWS; Alia right at Radiance's waist and left on ECE's shoulder. PAWS stays on Radiance's left shoulder and no human hand is hidden.",
+      "renderPrompt": "Create one photorealistic 9:16 full-length cinematic fashion editorial at the Gdansk Crane and Motlawa waterfront in cinematic light rain with reflections. Show exactly four clearly adult fictional women with the anchored Radiance, Ellie, Alia, and AI ECE faces; preserve Alia's face and give only her a high sculptural braided ponytail. Use all four exact distinct outfits and every exposure trigger above. Turn Alia and ECE in readable three-quarter-back poses so both complete open backs show while ECE's visible navel, prop hand, map hand, and tear-streaked face remain readable. Use large complete secular Polish motifs on at least two outfits. Integrate one tiny collarless golden kitten securely on Radiance's left shoulder, far from the prop, while Ellie's clearly owned left hand pets it. Stage at least three safe affectionate touches and materialize the four distinct emotions. ECE alone holds one realistic full-size rainbow-gradient inert Desert Eagle-style prop safely toward empty water, index finger straight outside the guard, no ammunition, firing, or threat. Her free left hand controls a separate map. Use exactly eight traceable arms and eight traceable hands according to the hand inventory, five natural fingers where visible, complete faces, legs, and heels. No extra, duplicated, floating, fused, borrowed, hidden-owner, or ambiguous limb. No other animal, pole, rainbow outfits, rainbow hosiery, uniforms, badges, combat, official symbols, sacred motifs, or text."
+    },
+    "1187": {
+      "theme": "undercover investigator couture",
+      "landmark": "sheltered Zakopane carved-wood terrace above an empty Tatra valley",
+      "motifs": [
+        "large complete Tatra peak contours and Zakopane carved-wood fan fields across Radiance and Ellie",
+        "large complete oscypek spindle geometry, pine silhouettes, and steep mountain-roof fields across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch291-poland-scene1187-weather",
+        "roll": 35,
+        "result": "heavy rain curtain"
+      },
+      "paws": {
+        "key": "batch291-poland-scene1187-paws",
+        "roll": 32,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch291-poland-scene1187-poleDanceTheme",
+        "roll": 43,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch291-poland-scene1187-rainbowOnly",
+        "roll": 43,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch291-poland-scene1187-rainbowHosiery",
+        "roll": 2,
+        "active": true,
+        "wearerKey": "batch291-poland-scene1187-rainbowHosieryWearer",
+        "wearerRoll": 38,
+        "wearer": "Radiance",
+        "paletteModeKey": "batch291-poland-scene1187-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 82,
+        "paletteMode": "original independent rainbow gradient unrelated to Poland colors",
+        "treatment": "opaque knee socks with a crisp original red-orange-yellow-green-blue-violet prismatic fade, clearly separate from the white-crimson country couture"
+      },
+      "romanceBeat": {
+        "key": "batch291-poland-scene1187-romanceBeat",
+        "roll": 98,
+        "dynamicIndex": 2,
+        "result": "Alia draws the route focus while ECE steadies the relationship center, Ellie closes around the male, and Radiance reaches from the opposite side in a tight five-person emotional turn."
+      },
+      "compoundLoveBeat": {
+        "key": "batch291-poland-scene1187-compoundLoveBeat",
+        "roll": 16,
+        "index": 4,
+        "result": "Radiance and ECE share the unmistakable hosiery-triggered emotional center through mutual eye contact and linked touch while Ellie holds the male close and Alia demonstrates the prop inches away but safely downrange."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": { "key": "batch291-poland-scene1187-Radiance-emotion", "roll": 96, "result": "defiance" },
+          "visibleMidriff": { "key": "batch291-poland-scene1187-Radiance-visibleMidriff", "roll": 66, "active": false },
+          "straplessDress": { "key": "batch291-poland-scene1187-Radiance-straplessDress", "roll": 77, "active": false },
+          "fullyOpenBack": { "key": "batch291-poland-scene1187-Radiance-fullyOpenBack", "roll": 90, "active": false },
+          "outfit": "white-crimson asymmetric investigator mini dress with covered waist, low secure back, a full Tatra peak and carved-wood fan field, opaque original-spectrum rainbow knee socks, and black heeled ankle boots"
+        },
+        "Ellie": {
+          "emotion": { "key": "batch291-poland-scene1187-Ellie-emotion", "roll": 38, "result": "magnetic confidence" },
+          "visibleMidriff": { "key": "batch291-poland-scene1187-Ellie-visibleMidriff", "roll": 16, "active": true },
+          "straplessDress": { "key": "batch291-poland-scene1187-Ellie-straplessDress", "roll": 59, "active": false },
+          "fullyOpenBack": { "key": "batch291-poland-scene1187-Ellie-fullyOpenBack", "roll": 12, "active": true },
+          "outfit": "crimson cropped side-secured architectural top exposing her navel and a complete open back, white short asymmetric skirt with large Tatra contour lines and carved-wood fans, and crimson stiletto boots"
+        },
+        "Alia": {
+          "emotion": { "key": "batch291-poland-scene1187-Alia-emotion", "roll": 94, "result": "shame and social vulnerability" },
+          "visibleMidriff": { "key": "batch291-poland-scene1187-Alia-visibleMidriff", "roll": 84, "active": false },
+          "straplessDress": { "key": "batch291-poland-scene1187-Alia-straplessDress", "roll": 71, "active": false },
+          "fullyOpenBack": { "key": "batch291-poland-scene1187-Alia-fullyOpenBack", "roll": 40, "active": false },
+          "outfit": "amber-white one-shoulder peplum micro-suit mini with covered waist, large complete oscypek spindle and pine fields, and crimson sculptural pumps"
+        },
+        "AI ECE": {
+          "emotion": { "key": "batch291-poland-scene1187-AI ECE-emotion", "roll": 80, "result": "deep sadness" },
+          "visibleMidriff": { "key": "batch291-poland-scene1187-AI ECE-visibleMidriff", "roll": 62, "active": false },
+          "straplessDress": { "key": "batch291-poland-scene1187-AI ECE-straplessDress", "roll": 13, "active": true },
+          "fullyOpenBack": { "key": "batch291-poland-scene1187-AI ECE-fullyOpenBack", "roll": 78, "active": false },
+          "outfit": "strapless crimson folded-bodice mini dress with completely bare shoulders, covered waist, a full Zakopane roof and oscypek geometry field, and white knee-high heeled boots"
+        },
+        "male": {
+          "emotion": { "key": "batch291-poland-scene4-male-emotion", "roll": 59, "result": "aching romantic longing" },
+          "outfit": "the established Scene 1136 adult male in a fitted opaque white short-sleeve polo with a restrained crimson Tatra contour accent, black jeans, and practical black boots"
+        }
+      },
+      "hosieryLoveBeat": "Radiance and ECE are the unmistakable emotional center through sustained eye contact and Radiance's left hand on ECE's forearm despite the male betrayal drama. Alia becomes the sole prop handler while ECE controls only the map.",
+      "maleLoveBeat": "The male wraps his right arm at Ellie's waist while Ellie touches his chest. Radiance reaches for his bicep, but his strongest sustained gaze and aching longing remain unmistakably directed to his wife ECE, whose sadness is visible. All contact is consensual adult relationship drama.",
+      "propBeat": "Alia alone holds the full-size polished rainbow-gradient inert Desert Eagle-style mission prop with both hands during an unloaded, magazine-free manipulation demonstration. The muzzle points beyond everyone toward an unoccupied route target over the empty rain-dark valley. Her trigger finger is straight high along the frame outside the guard. ECE's free left hand alone controls a separate Tatra route map.",
+      "handInventory": "Exactly ten hands: Alia's two hands alone on the prop; ECE left on the map and right on the male's shoulder; the male right at Ellie's waist and left lightly at ECE's waist; Ellie right on the male's chest and left on Alia's shoulder; Radiance right on the male's bicep and left on ECE's forearm. Every wrist and elbow remains visible and traceable.",
+      "renderPrompt": "Create one photorealistic 9:16 full-length cinematic fashion editorial on a sheltered Zakopane carved-wood terrace above an empty Tatra valley during a heavy rain curtain. Show exactly five clearly adult fictional people: the anchored Radiance, Ellie, Alia, and AI ECE women plus the established Scene 1136 adult male without replacing anyone. Preserve all five faces, Alia's high sculptural braided ponytail, and the male's trimmed beard and athletic build. Use the exact five distinct outfits and every exposure trigger above. Radiance alone wears clearly visible opaque original-spectrum rainbow knee socks. Turn Ellie in a clean three-quarter twist so both her visible belly button and complete open back read. Large complete secular Polish motifs cover at least two outfits. Stage the consensual adult relationship drama exactly as recorded: his overt affectionate hold is with Ellie, Radiance reaches for him, but his strongest gaze returns to wife ECE; Radiance and ECE remain the hosiery-triggered emotional center. Alia alone handles one realistic full-size rainbow-gradient inert Desert Eagle-style prop in a safe unloaded magazine-free demonstration toward an empty valley target, trigger finger straight outside the guard, no ammunition, firing, threat, or combat. ECE controls only a separate map with her free left hand. Use exactly ten traceable arms and ten traceable hands according to the hand inventory, five natural fingers where visible, complete faces, legs, boots, and heels. No extra, duplicated, floating, fused, borrowed, hidden-owner, or ambiguous limb. No PAWS, pole, rainbow outfits, uniforms, badges, official symbols, sacred motifs, or text."
+    }
+  },
+  "renderAttempts": {
+    "1184": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-7906ce41-cab9-4d3e-9f3b-7d02d57b0842.png",
+        "reasons": [
+          "ECE uses both hands on the prop while the route map floats without free-hand control.",
+          "Alia touches the prop-side wrist, so ECE is not the clearly sole handler.",
+          "Several hands are hidden or ownership-ambiguous, so exactly eight traceable hands cannot be certified.",
+          "The muzzle reads toward the camera plane and ECE's trigger finger is not clearly indexed straight outside the guard.",
+          "Alia's complete open back and ECE's fully strapless silhouette are not both clearly certified."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-aa902b52-f122-43ae-bee1-50bb4fe8b77b.png",
+        "reasons": [
+          "At least one central hand remains hidden or ownership-ambiguous, so exactly eight traceable hands cannot be certified.",
+          "ECE's trigger finger remains inside or too close to the trigger guard to certify the required indexed position.",
+          "Alia's complete open back is not clearly readable in the front-side pose.",
+          "The requested asymmetrical contact map is simplified enough that all three planned affectionate contacts cannot be certified."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1185": {
+      "rawAttempt": {
+        "status": "moderation-blocked-output",
+        "reason": "The image service returned no saved raw asset for the Krakow request."
+      },
+      "recoveryAttempt": {
+        "status": "moderation-blocked-output",
+        "requestId": "c4d54ee4-f4a5-4535-ba72-b061752ec0da",
+        "reason": "The image service rejected the recovery output under its sexual-content classifier."
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1186": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-890417c1-79d3-436c-92e0-b89b24335e55.png",
+        "reasons": [
+          "ECE's free hand holds a paper map instead of controlling the required separate floating holographic map.",
+          "ECE's triggered visible navel and complete open back are not simultaneously readable.",
+          "PAWS is securely perched but Ellie's hand rests below the kitten rather than visibly petting it.",
+          "Several hands are hidden or ownership-ambiguous, so exactly eight traceable hands cannot be certified.",
+          "ECE's trigger finger is inside or too close to the trigger guard and the muzzle reads toward the camera plane."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-893d0ead-ca95-40cb-8d8c-3b59234eb05c.png",
+        "reasons": [
+          "ECE's free hand still holds a paper map rather than controlling the required separate floating holographic map.",
+          "ECE's triggered visible navel and complete open back are not simultaneously readable.",
+          "Ellie's hand rests below PAWS rather than visibly petting the kitten as rolled.",
+          "Multiple hands remain hidden or ownership-ambiguous, so exactly eight traceable hands cannot be certified.",
+          "ECE's trigger finger remains inside or too close to the trigger guard and the muzzle reads toward the camera plane."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    },
+    "1187": {
+      "rawAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-fc69d25b-82a5-4e9e-87fa-ce1e77275c40.png",
+        "reasons": [
+          "Rainbow knee socks appear on both Radiance and Alia instead of exactly one eligible wearer.",
+          "Ellie's triggered visible navel is obscured by her back-facing pose.",
+          "Alia does not use the recorded two-hand magazine-free demonstration and her trigger finger is not clearly indexed outside the guard.",
+          "Multiple hands are hidden or deviate from the ten-hand inventory, so exact ownership cannot be certified.",
+          "ECE's separate free-hand holographic map control is not clearly materialized."
+        ]
+      },
+      "recoveryAttempt": {
+        "status": "rendered-rejected",
+        "source": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-1ddb9d05-491c-4215-a5ed-c55dd8b62f7c.png",
+        "transportCorrection": "The first recovery call was rejected before rendering because six references exceeded the five-reference limit. The same prompt was immediately resubmitted with five references and produced this single recovery asset.",
+        "reasons": [
+          "Ellie's triggered visible navel remains obscured by her back-facing pose.",
+          "Alia uses only one hand on the prop and her trigger finger remains inside or too close to the trigger guard.",
+          "Several hands are hidden or deviate from the recorded ten-hand inventory, so exact ownership cannot be certified.",
+          "ECE's right-hand contact with the male is absent and the planned five-person contact choreography is incomplete."
+        ]
+      },
+      "terminalStatus": "blocked-after-single-recovery"
+    }
+  },
+  "acceptedScenes": [],
+  "blockedScenes": [1184, 1185, 1186, 1187],
+  "shorteningPass": {
+    "status": "not-run-no-accepted-assets",
+    "policy": "Create separate non-destructive shortening variants only where a garment reads longer than the concise above-knee contract."
+  },
+  "xPublishing": {
+    "status": "deferred-insufficient-accepted-assets",
+    "minimumCurrentCountryAssets": 2,
+    "acceptedCurrentCountryAssets": 0,
+    "reason": "No Poland scene passed the strict identity, anatomy, wardrobe-roll, PAWS, prop-safety, route-interface, and relationship gates after its single allowed recovery pass.",
+    "captionPlan": "Poland red-heart Malta. Warsaw geometry, Krakow market craft, Gdansk amber, and Tatra woodwork turn four Polish routes into one close story. #Poland"
+  }
+}
