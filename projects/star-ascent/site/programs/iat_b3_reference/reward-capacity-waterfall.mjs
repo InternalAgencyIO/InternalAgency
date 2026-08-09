@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 
 import policy from "../../docs/b3/iat-b3-reward-capacity-waterfall.v1.json" with { type: "json" };
 import { selectUniformTiebreakOutcome } from "../../engagement/iat-v2-reference-engine.mjs";
+import { deriveAllocatorReceiptLineage } from "./reward-allocator-receipt-codec.mjs";
 import { assertDailyLawWriteAllowed } from "./daily-lockdown-consensus.mjs";
 
 export const REWARD_CAPACITY_POLICY_CANONICAL_SHA256 = "2054c881f9c7524acb965454286950445cd37c99f7485b45e2c787bcfb3617e2";
@@ -47,6 +48,8 @@ const CCC_PRECOMMIT_REGISTRY_SCHEMA = "iat-b3-ccc-precommit-registry-snapshot/v1
 const CCC_DECISION_CONTEXT_DOMAIN = "IAT_B3_CCC_CAPACITY_DECISION_CONTEXT_V1";
 const ALLOCATOR_RECEIPT_SCHEMA = "iat-b3-reward-capacity-allocator-receipt/v1";
 const ROUND_STATE_SCHEMA = "iat-b3-reward-capacity-round-state/v1";
+const X_BASE_ADMISSION_LINEAGE_SCHEMA = "iat-b3-x-base-admission-lineage/v1";
+const X_BASE_ADMISSION_LINEAGE_STATUS = "NON_ACTIVATING_UNAUTHENTICATED_REFERENCE_LINEAGE";
 const FACTION_FRAGMENT_KIND = "X_BOUND_FACTION_FRAGMENT";
 const FACTION_MANIFEST_KIND = "WEEKLY_FACTION_MANIFEST";
 
@@ -509,6 +512,7 @@ export function createXBoundReward({
     latestSubscriptionType: subscriptionType,
     latestSubscriptionObservedAtUnixSeconds: observed,
     premiumProofAcceptedSequence: premium ? originalEligibleSequence : null,
+    originalBaseAdmissionLineage: null,
     baseTranche: premium
       ? null
       : tranche(X_TRANCHE_KIND.BASE, baseAmount, epochClose, originalEligibleSequence, "PENDING_FUNDING"),
@@ -536,6 +540,78 @@ function assertOptionalTrancheShape(value, expectedKind) {
   if (value !== null) assertTrancheShape(value, expectedKind);
 }
 
+function normalizeOriginalBaseAdmissionLineage(value, expectedRewardId) {
+  if (!hasExactKeys(value, [
+    "schema",
+    "status",
+    "rewardId",
+    "fundingRoundAtUnixSeconds",
+    "allocationIndex",
+    "referenceReceiptSha256",
+    "referenceFinalizationSha256",
+    "batchCommitmentSha256",
+    "binaryReceiptSha256",
+    "authenticated",
+  ])
+    || value.schema !== X_BASE_ADMISSION_LINEAGE_SCHEMA
+    || value.status !== X_BASE_ADMISSION_LINEAGE_STATUS
+    || value.authenticated !== false) {
+    throw new Error("INVALID_X_BASE_ADMISSION_LINEAGE");
+  }
+  const normalized = {
+    schema: X_BASE_ADMISSION_LINEAGE_SCHEMA,
+    status: X_BASE_ADMISSION_LINEAGE_STATUS,
+    rewardId: asHex32(value.rewardId, "base admission lineage reward ID"),
+    fundingRoundAtUnixSeconds: assertUtcMidnight(
+      value.fundingRoundAtUnixSeconds,
+      "base admission lineage funding round",
+    ),
+    allocationIndex: value.allocationIndex,
+    referenceReceiptSha256: asHex32(
+      value.referenceReceiptSha256,
+      "base admission lineage reference receipt digest",
+    ),
+    referenceFinalizationSha256: asHex32(
+      value.referenceFinalizationSha256,
+      "base admission lineage finalization digest",
+    ),
+    batchCommitmentSha256: asHex32(
+      value.batchCommitmentSha256,
+      "base admission lineage batch commitment",
+    ),
+    binaryReceiptSha256: asHex32(
+      value.binaryReceiptSha256,
+      "base admission lineage binary receipt digest",
+    ),
+    authenticated: false,
+  };
+  if (!Number.isSafeInteger(normalized.allocationIndex)
+    || normalized.allocationIndex < 0
+    || normalized.allocationIndex > 0xffff_ffff) {
+    throw new Error("INVALID_X_BASE_ADMISSION_ALLOCATION_INDEX");
+  }
+  if (normalized.rewardId !== asHex32(expectedRewardId, "expected base admission reward ID")) {
+    throw new Error("X_BASE_ADMISSION_LINEAGE_REWARD_MISMATCH");
+  }
+  return Object.freeze(normalized);
+}
+
+function createOriginalBaseAdmissionLineage({ reward, expected, outcome, roundState, allocationIndex }) {
+  if (outcome.allocatorReceipt.disposition !== "ADMITTED_RESERVED"
+    || !expected.trancheKinds.includes(X_TRANCHE_KIND.BASE)) {
+    throw new Error("BASE_ADMISSION_LINEAGE_REQUIRES_ADMITTED_BASE_RECEIPT");
+  }
+  const derived = deriveAllocatorReceiptLineage({ roundState, outcome, allocationIndex });
+  return normalizeOriginalBaseAdmissionLineage({
+    schema: X_BASE_ADMISSION_LINEAGE_SCHEMA,
+    status: X_BASE_ADMISSION_LINEAGE_STATUS,
+    rewardId: reward.rewardId,
+    fundingRoundAtUnixSeconds: outcome.allocatorReceipt.fundingRoundAtUnixSeconds,
+    ...derived,
+    authenticated: false,
+  }, reward.rewardId);
+}
+
 function assertRewardShape(reward) {
   if (!isRecord(reward) || reward.schema !== "iat-b3-x-bound-reward/v1") throw new Error("INVALID_X_BOUND_REWARD");
   validateRewardIdentity(reward);
@@ -557,13 +633,33 @@ function assertRewardShape(reward) {
   assertOptionalTrancheShape(reward.baseTranche, X_TRANCHE_KIND.BASE);
   assertOptionalTrancheShape(reward.premiumFullTranche, X_TRANCHE_KIND.PREMIUM_FULL);
   assertOptionalTrancheShape(reward.upgradeTranche, X_TRANCHE_KIND.UPGRADE);
+  const originalBaseAdmissionLineage = reward.originalBaseAdmissionLineage === null
+    ? null
+    : normalizeOriginalBaseAdmissionLineage(reward.originalBaseAdmissionLineage, reward.rewardId);
+  if (originalBaseAdmissionLineage !== null
+    && originalBaseAdmissionLineage.fundingRoundAtUnixSeconds !== epochClose) {
+    throw new Error("X_BASE_ADMISSION_LINEAGE_ROUND_MISMATCH");
+  }
   if (PREMIUM_TYPES.has(reward.initialSubscriptionType)) {
     if (reward.baseTranche !== null || reward.upgradeTranche !== null
-      || reward.premiumFullTranche?.amount !== gross) throw new Error("INVALID_X_REWARD_PREMIUM_FULL_TRANCHE");
+      || reward.premiumFullTranche?.amount !== gross
+      || originalBaseAdmissionLineage !== null) throw new Error("INVALID_X_REWARD_PREMIUM_FULL_TRANCHE");
   } else if (KNOWN_NON_PREMIUM_TYPES.has(reward.initialSubscriptionType)) {
     if (reward.premiumFullTranche !== null
       || reward.baseTranche?.amount !== gross / 10n
       || reward.upgradeTranche?.amount !== gross - gross / 10n) throw new Error("INVALID_X_REWARD_10_90_SPLIT");
+    if (["ADMITTED_RESERVED", "CLAIMED"].includes(reward.baseTranche.status)
+      && originalBaseAdmissionLineage === null) {
+      throw new Error("X_BASE_ADMISSION_LINEAGE_REQUIRED");
+    }
+    if (originalBaseAdmissionLineage !== null
+      && !["ADMITTED_RESERVED", "CLAIMED", "NULL_CLAIM_EXPIRED"].includes(reward.baseTranche.status)) {
+      throw new Error("X_BASE_ADMISSION_LINEAGE_WITHOUT_BASE_ADMISSION");
+    }
+    if (!["LOCKED_PENDING_PREMIUM", "NULL_PARENT_UNFUNDED", "NULL_CLAIM_EXPIRED"].includes(reward.upgradeTranche.status)
+      && originalBaseAdmissionLineage === null) {
+      throw new Error("X_UPGRADE_REQUIRES_BASE_ADMISSION_LINEAGE");
+    }
   } else {
     throw new Error("INVALID_X_REWARD_INITIAL_SUBSCRIPTION_TYPE");
   }
@@ -604,6 +700,7 @@ export function recordPremiumUpgrade({
   if (reward.baseTranche === null || !["ADMITTED_RESERVED", "CLAIMED"].includes(reward.baseTranche.status)) {
     throw new Error("BASE_FUNDING_REQUIRED_BEFORE_UPGRADE");
   }
+  normalizeOriginalBaseAdmissionLineage(reward.originalBaseAdmissionLineage, reward.rewardId);
   if (reward.upgradeTranche?.status !== "LOCKED_PENDING_PREMIUM") throw new Error("PREMIUM_ALREADY_RECORDED_OR_UPGRADE_VOID");
   if (wallet !== reward.wallet || xUserId !== reward.xUserId) throw new Error("PREMIUM_UPGRADE_IDENTITY_MISMATCH");
   if (!PREMIUM_TYPES.has(subscriptionType)) throw new Error("PREMIUM_UPGRADE_REQUIRED");
@@ -668,6 +765,14 @@ export function buildXBoundFundingObligation({ reward, fundingRoundAtUnixSeconds
     fundingRoundAtUnixSeconds: fundingRound,
     fundingPool: "SHARED_REWARD_RESERVE",
     reservationStatus: "NEW_UNRESERVED",
+    ...(trancheKinds.includes(X_TRANCHE_KIND.UPGRADE)
+      ? {
+        originalBaseAdmissionLineage: normalizeOriginalBaseAdmissionLineage(
+          reward.originalBaseAdmissionLineage,
+          reward.rewardId,
+        ),
+      }
+      : {}),
   };
   if (CCC_CLASSES.has(reward.priorityClass)) {
     return Object.freeze({
@@ -702,12 +807,24 @@ function normalizeFactionFragment(fragment, index, fundingRound) {
   if (trancheKinds.length !== 1 || !Object.values(X_TRANCHE_KIND).includes(trancheKinds[0])) {
     throw new Error("FACTION_FRAGMENT_MUST_CONTAIN_ONE_ATOMIC_X_TRANCHE");
   }
+  const isUpgrade = trancheKinds[0] === X_TRANCHE_KIND.UPGRADE;
+  if (!isUpgrade && Object.hasOwn(fragment, "originalBaseAdmissionLineage")) {
+    throw new Error("BASE_ADMISSION_LINEAGE_ONLY_ALLOWED_FOR_UPGRADE");
+  }
   const normalized = {
     fragmentId: asHex32(fragment.id, `faction fragment ${index} id`),
     rewardId: asHex32(fragment.rewardId, `faction fragment ${index} reward ID`),
     amount: asU64(fragment.amount, `faction fragment ${index} amount`),
     trancheKinds,
     chronology: normalizeChronology(fragment.chronology, `faction fragment ${index}`),
+    ...(isUpgrade
+      ? {
+        originalBaseAdmissionLineage: normalizeOriginalBaseAdmissionLineage(
+          fragment.originalBaseAdmissionLineage,
+          fragment.rewardId,
+        ),
+      }
+      : {}),
   };
   if (normalized.amount === 0n) throw new Error("ZERO_FACTION_FOLLOWER_TRANCHE");
   if (assertUtcMidnight(fragment.fundingRoundAtUnixSeconds, `faction fragment ${index} funding round`) !== fundingRound) {
@@ -804,7 +921,17 @@ function validateFinalizedAllocatorOutcome({
     || canonicalStateSha256(outcome) !== canonicalStateSha256(recomputedOutcome)) {
     throw new Error("ALLOCATOR_OUTCOME_NOT_EXACT_RECOMPUTATION");
   }
-  return recomputedOutcome.allocatorReceipt;
+  const receipt = recomputedOutcome.allocatorReceipt;
+  const receiptIndexes = validatedState.finalization.receiptDigests
+    .flatMap((digest, index) => digest === receipt.receiptSha256 ? [index] : []);
+  if (receiptIndexes.length !== 1) {
+    throw new Error("ALLOCATOR_RECEIPT_MUST_OCCUR_EXACTLY_ONCE_IN_FINALIZATION");
+  }
+  return Object.freeze({
+    outcome: recomputedOutcome,
+    receipt,
+    allocationIndex: receiptIndexes[0],
+  });
 }
 
 export function applyXBoundFundingOutcome(input) {
@@ -822,7 +949,7 @@ export function applyXBoundFundingOutcome(input) {
   assertRewardShape(reward);
   const expected = buildXBoundFundingObligation({ reward, fundingRoundAtUnixSeconds });
   if (!expected) throw new Error("NO_X_TRANCHE_DUE_IN_FUNDING_ROUND");
-  const receipt = validateFinalizedAllocatorOutcome({
+  const { outcome: validatedOutcome, receipt, allocationIndex } = validateFinalizedAllocatorOutcome({
     expected,
     outcome,
     roundState,
@@ -850,7 +977,22 @@ export function applyXBoundFundingOutcome(input) {
     baseTranche = tranche(X_TRANCHE_KIND.BASE, baseTranche.amount, baseTranche.fundingRoundAtUnixSeconds, baseTranche.eligibleSequence, receipt.disposition);
     upgradeTranche = tranche(X_TRANCHE_KIND.UPGRADE, upgradeTranche.amount, upgradeTranche.fundingRoundAtUnixSeconds, upgradeTranche.eligibleSequence, "NULL_PARENT_UNFUNDED");
   }
-  return Object.freeze({ ...reward, baseTranche, premiumFullTranche, upgradeTranche });
+  const originalBaseAdmissionLineage = funded && dueKinds.has(X_TRANCHE_KIND.BASE)
+    ? createOriginalBaseAdmissionLineage({
+      reward,
+      expected,
+      outcome: validatedOutcome,
+      roundState,
+      allocationIndex,
+    })
+    : reward.originalBaseAdmissionLineage;
+  return Object.freeze({
+    ...reward,
+    originalBaseAdmissionLineage,
+    baseTranche,
+    premiumFullTranche,
+    upgradeTranche,
+  });
 }
 
 export function claimReservedXBoundTranches({ dailyLawState, reward, trancheKinds, nowUnixSeconds }) {
@@ -960,19 +1102,31 @@ function normalizeFactionManifest(obligation, index, fundingRound, normalized) {
     throw new Error("FACTION_MANIFEST_REQUIRES_COMPLETE_PAYOUT_ENTRIES");
   }
   const payoutEntries = obligation.payoutEntries.map((entry, entryIndex) => {
-    if (!hasExactKeys(entry, ["fragmentId", "rewardId", "amount", "trancheKinds", "chronology"])) {
-      throw new Error("INVALID_FACTION_MANIFEST_PAYOUT_ENTRY_KEY_SET");
-    }
     const trancheKinds = Array.isArray(entry.trancheKinds) ? [...entry.trancheKinds] : [];
     if (trancheKinds.length !== 1 || !Object.values(X_TRANCHE_KIND).includes(trancheKinds[0])) {
       throw new Error("FACTION_MANIFEST_ENTRY_MUST_BE_ONE_ATOMIC_X_TRANCHE");
     }
+    const isUpgrade = trancheKinds[0] === X_TRANCHE_KIND.UPGRADE;
+    const expectedKeys = ["fragmentId", "rewardId", "amount", "trancheKinds", "chronology"];
+    if (isUpgrade) expectedKeys.push("originalBaseAdmissionLineage");
+    if (!hasExactKeys(entry, expectedKeys)) {
+      throw new Error("INVALID_FACTION_MANIFEST_PAYOUT_ENTRY_KEY_SET");
+    }
+    const rewardId = asHex32(entry.rewardId, `faction payout ${entryIndex} reward ID`);
     return {
       fragmentId: asHex32(entry.fragmentId, `faction payout ${entryIndex} fragment ID`),
-      rewardId: asHex32(entry.rewardId, `faction payout ${entryIndex} reward ID`),
+      rewardId,
       amount: asU64(entry.amount, `faction payout ${entryIndex} amount`),
       trancheKinds,
       chronology: normalizeChronology(entry.chronology, `faction payout ${entryIndex}`),
+      ...(isUpgrade
+        ? {
+          originalBaseAdmissionLineage: normalizeOriginalBaseAdmissionLineage(
+            entry.originalBaseAdmissionLineage,
+            rewardId,
+          ),
+        }
+        : {}),
     };
   }).sort((left, right) => left.fragmentId.localeCompare(right.fragmentId));
   if (payoutEntries.some(({ amount }) => amount === 0n)
@@ -1040,6 +1194,14 @@ function normalizeObligation(obligation, index, fundingRound) {
     ].map((entry) => JSON.stringify(entry));
     if (!acceptedTrancheSets.includes(trancheSignature)) {
       throw new Error("INVALID_X_BOUND_FUNDING_TRANCHE_SET");
+    }
+    if (trancheSignature === JSON.stringify([X_TRANCHE_KIND.UPGRADE])) {
+      normalized.originalBaseAdmissionLineage = normalizeOriginalBaseAdmissionLineage(
+        obligation.originalBaseAdmissionLineage,
+        obligation.rewardId,
+      );
+    } else if (Object.hasOwn(obligation, "originalBaseAdmissionLineage")) {
+      throw new Error("BASE_ADMISSION_LINEAGE_ONLY_ALLOWED_FOR_UPGRADE");
     }
   } else if (Object.hasOwn(obligation, "rewardSourceKind")) {
     throw new Error("X_BOUND_SOURCE_KIND_REQUIRES_X_BOUND_FUNDING_KIND");

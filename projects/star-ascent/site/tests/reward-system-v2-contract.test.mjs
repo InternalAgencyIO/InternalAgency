@@ -47,12 +47,16 @@ const CAPACITY_POLICY_PATH = join(SITE, "docs", "b3", "iat-b3-reward-capacity-wa
 const LEDGER_PATH = join(SITE, "engagement", "reward-ledger.v2.schema.sql");
 const EPOCH_ENGINE_PATH = join(SITE, "engagement", "epoch-engine.mjs");
 const CAPACITY_REFERENCE_PATH = join(SITE, "programs", "iat_b3_reference", "reward-capacity-waterfall.mjs");
+const RECEIPT_CODEC_PATH = join(SITE, "programs", "iat_b3_reference", "reward-allocator-receipt-codec.mjs");
+const RECEIPT_BOUNDARY_PATH = join(SITE, "docs", "b3", "REWARD_ALLOCATOR_RECEIPT_BOUNDARY.md");
 
 const offchainPolicy = JSON.parse(readFileSync(POLICY_PATH, "utf8"));
 const capacityPolicy = JSON.parse(readFileSync(CAPACITY_POLICY_PATH, "utf8"));
 const ledgerSchema = readFileSync(LEDGER_PATH, "utf8");
 const epochEngineSource = readFileSync(EPOCH_ENGINE_PATH, "utf8");
 const capacityReferenceSource = readFileSync(CAPACITY_REFERENCE_PATH, "utf8");
+const receiptCodecSource = readFileSync(RECEIPT_CODEC_PATH, "utf8");
+const receiptBoundarySource = readFileSync(RECEIPT_BOUNDARY_PATH, "utf8");
 
 const EXACT_TRANCHE_KINDS = ["X_BASE_10", "X_PREMIUM_FULL_100", "X_PREMIUM_UPGRADE_90"];
 const EXACT_TRANCHE_BASIS_POINTS = {
@@ -658,7 +662,16 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   assert.doesNotMatch(epochEngineSource, /reward-capacity-waterfall|reward-ledger\.v2/u);
   assert.match(capacityReferenceSource, /status: "NON_ACTIVATING_REFERENCE_RECEIPT"/u);
   assert.match(capacityReferenceSource, /activationReady: false/u);
+  assert.match(capacityReferenceSource, /NON_ACTIVATING_UNAUTHENTICATED_REFERENCE_LINEAGE/u);
+  assert.match(capacityReferenceSource, /deriveAllocatorReceiptLineage/u);
   assert.doesNotMatch(capacityReferenceSource, /engagement\/epoch-engine|engagement\/reward-policy|reward-ledger\.v2/u);
+  assert.match(receiptCodecSource, /IAT_B3_DEPLOYMENT_DOMAIN_UNFROZEN_V1/u);
+  assert.match(receiptCodecSource, /ALLOCATOR_BATCH_TRANSCRIPT_LENGTH = 320/u);
+  assert.match(receiptCodecSource, /ALLOCATOR_RECEIPT_TRANSCRIPT_LENGTH = 288/u);
+  assert.doesNotMatch(receiptCodecSource, /node:fs|node:http|node:https|fetch\(|AccountInfo|invoke\(/u);
+  assert.match(receiptBoundarySource, /not an\s+authenticated allocator/u);
+  assert.match(receiptBoundarySource, /not a one-to-one persistence contract/u);
+  assert.match(receiptBoundarySource, /Mainnet remains HOLD/u);
   assert.match(ledgerSchema, /Blueprint only\. No active route, migration, allocator, signer, or transfer path/u);
   assert.doesNotMatch(ledgerSchema, /ATTACH DATABASE|load_extension|http:|https:/iu);
 

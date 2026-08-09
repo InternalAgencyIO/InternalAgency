@@ -362,7 +362,22 @@ test("Daily Law capability is checked before malformed reward, seal, allocation,
 });
 
 test("later Premium proof uses the next UTC round and cannot inherit an old queue position", () => {
-  let reward = admitRewardBase(createXBoundReward(rewardInput()), 100n).reward;
+  const originalAdmission = admitRewardBase(createXBoundReward(rewardInput()), 100n);
+  let reward = originalAdmission.reward;
+  const originalLineage = reward.originalBaseAdmissionLineage;
+  assert.equal(Object.isFrozen(originalLineage), true);
+  assert.equal(originalLineage.authenticated, false);
+  assert.equal(originalLineage.allocationIndex, 0);
+  assert.equal(
+    originalLineage.referenceReceiptSha256,
+    originalAdmission.allocation.funded[0].allocatorReceipt.receiptSha256,
+  );
+  assert.equal(
+    originalLineage.referenceFinalizationSha256,
+    stateDigest(originalAdmission.allocation.finalization),
+  );
+  assert.match(originalLineage.batchCommitmentSha256, /^[0-9a-f]{64}$/u);
+  assert.match(originalLineage.binaryReceiptSha256, /^[0-9a-f]{64}$/u);
   reward = recordPremiumUpgrade({
     dailyLawState: OPEN_LAW,
     reward,
@@ -381,6 +396,32 @@ test("later Premium proof uses the next UTC round and cannot inherit an old queu
   });
   assert.equal(topUp.amount, 900n);
   assert.equal(topUp.chronology.eligibleSequence, 50n);
+  assert.deepEqual(topUp.originalBaseAdmissionLineage, originalLineage);
+
+  const missingLineage = structuredClone(originalAdmission.reward);
+  missingLineage.originalBaseAdmissionLineage = null;
+  assert.throws(() => recordPremiumUpgrade({
+    dailyLawState: OPEN_LAW,
+    reward: missingLineage,
+    wallet: missingLineage.wallet,
+    xUserId: missingLineage.xUserId,
+    subscriptionType: "Premium",
+    subscriptionObservedAtUnixSeconds: FUNDING_ROUND + 1n,
+    premiumProofAcceptedAtUnixSeconds: FUNDING_ROUND + 1n,
+    premiumProofAcceptedSequence: 51n,
+  }), /BASE_ADMISSION_LINEAGE/u);
+  const wrongRoundLineage = structuredClone(originalAdmission.reward);
+  wrongRoundLineage.originalBaseAdmissionLineage.fundingRoundAtUnixSeconds += UTC_DAY_SECONDS;
+  assert.throws(() => recordPremiumUpgrade({
+    dailyLawState: OPEN_LAW,
+    reward: wrongRoundLineage,
+    wallet: wrongRoundLineage.wallet,
+    xUserId: wrongRoundLineage.xUserId,
+    subscriptionType: "Premium",
+    subscriptionObservedAtUnixSeconds: FUNDING_ROUND + 1n,
+    premiumProofAcceptedAtUnixSeconds: FUNDING_ROUND + 1n,
+    premiumProofAcceptedSequence: 51n,
+  }), /LINEAGE_ROUND_MISMATCH/u);
 
   const base = admitRewardBase(createXBoundReward(rewardInput({ rewardId: hex(3) })), 100n).reward;
   assert.throws(() => recordPremiumUpgrade({
@@ -689,6 +730,7 @@ test("faction follower rewards are admitted only through their sealed aggregate 
   const manifest = factionManifest({ fragments: [firstFragment, secondFragment] });
   const sealed = sealRound({ obligations: [manifest], boundaryLedger: ledger({ treasury: 200n }) });
   const allocation = allocateSealed(sealed);
+  const admittedRewards = [];
   for (const reward of [firstReward, secondReward]) {
     const admitted = applyXBoundFundingOutcome({
       dailyLawState: OPEN_LAW,
@@ -698,7 +740,35 @@ test("faction follower rewards are admitted only through their sealed aggregate 
       roundState: allocation.roundState,
     });
     assert.equal(admitted.baseTranche.status, "ADMITTED_RESERVED");
+    admittedRewards.push(admitted);
   }
+  const upgraded = recordPremiumUpgrade({
+    dailyLawState: OPEN_LAW,
+    reward: admittedRewards[0],
+    wallet: admittedRewards[0].wallet,
+    xUserId: admittedRewards[0].xUserId,
+    subscriptionType: "Premium",
+    subscriptionObservedAtUnixSeconds: FUNDING_ROUND + 1n,
+    premiumProofAcceptedAtUnixSeconds: FUNDING_ROUND + 1n,
+    premiumProofAcceptedSequence: 20n,
+  });
+  const upgradeFragment = buildXBoundFundingObligation({
+    reward: upgraded,
+    fundingRoundAtUnixSeconds: FUNDING_ROUND + UTC_DAY_SECONDS,
+  });
+  assert.deepEqual(
+    upgradeFragment.originalBaseAdmissionLineage,
+    admittedRewards[0].originalBaseAdmissionLineage,
+  );
+  const upgradeManifest = buildWeeklyFactionManifestObligation({
+    fundingRoundAtUnixSeconds: FUNDING_ROUND + UTC_DAY_SECONDS,
+    factionWeekId: "2026-W33-UPGRADE",
+    followerObligations: [upgradeFragment],
+  });
+  assert.deepEqual(
+    upgradeManifest.payoutEntries[0].originalBaseAdmissionLineage,
+    admittedRewards[0].originalBaseAdmissionLineage,
+  );
 });
 
 test("new faction manifest uses shared residual lanes after standard and before core", () => {
