@@ -286,6 +286,34 @@ pub struct ActivateResult {
     pub core_reward: CoreRewardState,
 }
 
+/// Host-only semantic representation of the retained V2 eligibility record.
+/// A future native adapter must authenticate the administrator and config,
+/// derive the wallet-bound PDA, and create or decode it only after Daily Law
+/// validation and this pure transition both succeed.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct EligibilityState {
+    pub config: [u8; 32],
+    pub wallet: [u8; 32],
+    pub agency_index: u32,
+    pub role: u8,
+    pub bump: u8,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct SetEligibilityInput {
+    pub config_key: [u8; 32],
+    pub config: ConfigState,
+    pub wallet: [u8; 32],
+    pub role: u8,
+    pub agency_index: Option<u32>,
+    pub eligibility_bump: u8,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct SetEligibilityResult {
+    pub eligibility: EligibilityState,
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ExpireRoundResult {
     pub round: RoundState,
@@ -436,6 +464,10 @@ pub enum EconomyError {
     NotRewardLane,
     InsufficientUnlockedRewardCapacity,
     NotActive,
+    UnknownRole,
+    StandardCannotLinkAgency,
+    CccRoleRequiresAgency,
+    InvalidAgencyIndex,
     PositionClosed,
     PrincipalNotReturned,
     PositionWeeksOutstanding,
@@ -628,6 +660,53 @@ pub fn activate(
     input: ActivateInput,
 ) -> Result<ActivateResult, EconomyError> {
     activate_transition(input)
+}
+
+/// Host-only pre-lifecycle `set_eligibility` transition. The opaque Daily Law
+/// capability is required before the retained V2 body runs. This function does
+/// not authenticate the administrator or config, derive the wallet PDA,
+/// allocate an account, invoke the System Program, or persist the result.
+pub fn set_eligibility(
+    _gate: &ValidatedDailyLawWrite,
+    input: SetEligibilityInput,
+) -> Result<SetEligibilityResult, EconomyError> {
+    set_eligibility_transition(input)
+}
+
+fn set_eligibility_transition(
+    input: SetEligibilityInput,
+) -> Result<SetEligibilityResult, EconomyError> {
+    if !input.config.active {
+        return Err(EconomyError::NotActive);
+    }
+    if role_rate(input.role).is_none() {
+        return Err(EconomyError::UnknownRole);
+    }
+    if input.role == 0 {
+        if input.agency_index.is_some() {
+            return Err(EconomyError::StandardCannotLinkAgency);
+        }
+    } else {
+        if !CCC_DLC_GENESIS_ENABLED {
+            return Err(EconomyError::CccDlcNotActive);
+        }
+        if input.agency_index.is_none() {
+            return Err(EconomyError::CccRoleRequiresAgency);
+        }
+        if input.agency_index.unwrap_or(u32::MAX) >= input.config.agency_count {
+            return Err(EconomyError::InvalidAgencyIndex);
+        }
+    }
+
+    Ok(SetEligibilityResult {
+        eligibility: EligibilityState {
+            config: input.config_key,
+            wallet: input.wallet,
+            agency_index: input.agency_index.unwrap_or(u32::MAX),
+            role: input.role,
+            bump: input.eligibility_bump,
+        },
+    })
 }
 
 fn activate_transition(input: ActivateInput) -> Result<ActivateResult, EconomyError> {
@@ -851,6 +930,15 @@ fn cumulative_unlocked(policy: LanePolicy, week: u64) -> Option<u64> {
     let duration = policy.linear_end_week.checked_sub(policy.cliff_week)? as u128;
     let released = remainder.checked_mul(elapsed)?.checked_div(duration)?;
     u64::try_from((policy.genesis_unlocked as u128).checked_add(released)?).ok()
+}
+
+fn role_rate(role: u8) -> Option<u64> {
+    match role {
+        0 => Some(STANDARD_RATE_BPS),
+        1 => Some(CCC_AGENT_RATE_BPS),
+        2 => Some(CCC_ASSOCIATE_RATE_BPS),
+        _ => None,
+    }
 }
 
 fn maximum_reward(principal: u64, annual_rate_bps: u64, term_weeks: u64) -> Option<u64> {
@@ -1546,8 +1634,9 @@ mod tests {
         RANDOMNESS_DISCRIMINATOR as V2_RANDOMNESS_DISCRIMINATOR,
     };
     use iat_v2::{
-        Config as V2ConfigState, CoreReward as V2CoreRewardState, LaneVault as V2LaneState,
-        Position as V2PositionState, Round as V2RoundState,
+        Config as V2ConfigState, CoreReward as V2CoreRewardState,
+        Eligibility as V2EligibilityState, LaneVault as V2LaneState, Position as V2PositionState,
+        Round as V2RoundState,
     };
 
     const LAW_PROGRAM: [u8; 32] = [0xB3; 32];
@@ -2515,6 +2604,99 @@ mod tests {
                     liquidity: semantic_lane_from_v2(liquidity),
                     core_reward: semantic_core_from_v2(core_reward),
                 }))
+            }
+        }
+    }
+
+    #[derive(Clone, Copy)]
+    struct SetEligibilityVector {
+        name: &'static str,
+        input: SetEligibilityInput,
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum SetEligibilityObservation {
+        Error(EconomyError),
+        Success(EligibilityState),
+    }
+
+    fn observe_set_eligibility(
+        result: Result<SetEligibilityResult, EconomyError>,
+    ) -> SetEligibilityObservation {
+        match result {
+            Err(error) => SetEligibilityObservation::Error(error),
+            Ok(result) => SetEligibilityObservation::Success(result.eligibility),
+        }
+    }
+
+    fn valid_set_eligibility_vector(name: &'static str) -> SetEligibilityVector {
+        let mut config = initialize_config_transition(
+            valid_initialize_config_vector("eligibility config", false).input,
+            1_000,
+        )
+        .unwrap()
+        .config;
+        config.active = true;
+        config.agency_count = 7;
+        SetEligibilityVector {
+            name,
+            input: SetEligibilityInput {
+                config_key: [0xa6; 32],
+                config,
+                wallet: [0xa7; 32],
+                role: 0,
+                agency_index: None,
+                eligibility_bump: 248,
+            },
+        }
+    }
+
+    fn semantic_eligibility_from_v2(eligibility: V2EligibilityState) -> EligibilityState {
+        EligibilityState {
+            config: eligibility.config.to_bytes(),
+            wallet: eligibility.wallet.to_bytes(),
+            agency_index: eligibility.agency_index,
+            role: eligibility.role,
+            bump: eligibility.bump,
+        }
+    }
+
+    fn v2_set_eligibility_reference(vector: SetEligibilityVector) -> SetEligibilityObservation {
+        let input = vector.input;
+        let result = (|| {
+            if !input.config.active {
+                return Err(EconomyError::NotActive);
+            }
+            if v2_policy::role_rate(input.role).is_none() {
+                return Err(EconomyError::UnknownRole);
+            }
+            if input.role == 0 {
+                if input.agency_index.is_some() {
+                    return Err(EconomyError::StandardCannotLinkAgency);
+                }
+            } else {
+                if !iat_v2::CCC_DLC_GENESIS_ENABLED {
+                    return Err(EconomyError::CccDlcNotActive);
+                }
+                if input.agency_index.is_none() {
+                    return Err(EconomyError::CccRoleRequiresAgency);
+                }
+                if input.agency_index.unwrap_or(u32::MAX) >= input.config.agency_count {
+                    return Err(EconomyError::InvalidAgencyIndex);
+                }
+            }
+            Ok(V2EligibilityState {
+                config: input.config_key.into(),
+                wallet: input.wallet.into(),
+                agency_index: input.agency_index.unwrap_or(u32::MAX),
+                role: input.role,
+                bump: input.eligibility_bump,
+            })
+        })();
+        match result {
+            Err(error) => SetEligibilityObservation::Error(error),
+            Ok(eligibility) => {
+                SetEligibilityObservation::Success(semantic_eligibility_from_v2(eligibility))
             }
         }
     }
@@ -4018,6 +4200,178 @@ mod tests {
         let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
         let vector = valid_activate_vector("open activation wrapper", true);
         assert!(activate(&gate, vector.input).unwrap().config.active);
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
+        let missing_bytes = pack_law_state(None);
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &missing_bytes),
+            Err(EconomyError::DayUnfinalized)
+        );
+    }
+
+    #[test]
+    fn set_eligibility_role_policy_and_precedence_match_the_retained_v2_body() {
+        for role in u8::MIN..=u8::MAX {
+            assert_eq!(role_rate(role), v2_policy::role_rate(role), "role={role}");
+        }
+        assert_eq!(role_rate(0), Some(STANDARD_RATE_BPS));
+        assert_eq!(role_rate(1), Some(CCC_AGENT_RATE_BPS));
+        assert_eq!(role_rate(2), Some(CCC_ASSOCIATE_RATE_BPS));
+        assert_eq!(role_rate(3), None);
+        assert_eq!(role_rate(u8::MAX), None);
+
+        let base = valid_set_eligibility_vector("base");
+        let mut cases = Vec::new();
+
+        let mut input = base.input;
+        input.config.active = false;
+        input.role = u8::MAX;
+        input.agency_index = Some(u32::MAX);
+        cases.push((
+            "inactive precedes role and agency validation",
+            input,
+            EconomyError::NotActive,
+        ));
+
+        for role in [3, u8::MAX] {
+            for agency_index in [None, Some(0), Some(u32::MAX)] {
+                let input = SetEligibilityInput {
+                    role,
+                    agency_index,
+                    ..base.input
+                };
+                cases.push((
+                    "unknown role precedes every agency rule",
+                    input,
+                    EconomyError::UnknownRole,
+                ));
+            }
+        }
+
+        for agency_index in [Some(0), Some(u32::MAX)] {
+            let input = SetEligibilityInput {
+                agency_index,
+                ..base.input
+            };
+            cases.push((
+                "standard role cannot link an agency",
+                input,
+                EconomyError::StandardCannotLinkAgency,
+            ));
+        }
+
+        for role in [1, 2] {
+            for agency_index in [None, Some(0), Some(6), Some(7), Some(u32::MAX)] {
+                let input = SetEligibilityInput {
+                    role,
+                    agency_index,
+                    ..base.input
+                };
+                cases.push((
+                    "CCC inactive precedes missing or invalid agency checks",
+                    input,
+                    EconomyError::CccDlcNotActive,
+                ));
+            }
+        }
+
+        for (name, input, expected_error) in cases {
+            let vector = SetEligibilityVector { name, input };
+            assert_eq!(
+                observe_set_eligibility(set_eligibility_transition(input)),
+                SetEligibilityObservation::Error(expected_error),
+                "fixed error: {name}"
+            );
+            assert_eq!(
+                observe_set_eligibility(set_eligibility_transition(input)),
+                v2_set_eligibility_reference(vector),
+                "V2 differential: {name}"
+            );
+        }
+    }
+
+    #[test]
+    fn set_eligibility_standard_state_construction_matches_retained_v2() {
+        for (config_key, wallet, bump) in [
+            ([0; 32], [0; 32], 0),
+            ([0xff; 32], [0x7f; 32], u8::MAX),
+            ([0xa6; 32], [0xa7; 32], 248),
+        ] {
+            let base = valid_set_eligibility_vector("standard eligibility");
+            let vector = SetEligibilityVector {
+                input: SetEligibilityInput {
+                    config_key,
+                    wallet,
+                    eligibility_bump: bump,
+                    ..base.input
+                },
+                ..base
+            };
+            let actual = observe_set_eligibility(set_eligibility_transition(vector.input));
+            assert_eq!(
+                actual,
+                v2_set_eligibility_reference(vector),
+                "{}",
+                vector.name
+            );
+            assert_eq!(
+                actual,
+                SetEligibilityObservation::Success(EligibilityState {
+                    config: config_key,
+                    wallet,
+                    agency_index: u32::MAX,
+                    role: 0,
+                    bump,
+                })
+            );
+        }
+    }
+
+    #[test]
+    fn set_eligibility_requires_an_open_canonical_daily_law_capability() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let vector = valid_set_eligibility_vector("open standard eligibility");
+        assert_eq!(
+            set_eligibility(&gate, vector.input).unwrap().eligibility,
+            EligibilityState {
+                config: vector.input.config_key,
+                wallet: vector.input.wallet,
+                agency_index: u32::MAX,
+                role: 0,
+                bump: vector.input.eligibility_bump,
+            }
+        );
+        assert_eq!(
+            set_eligibility(
+                &gate,
+                SetEligibilityInput {
+                    role: 1,
+                    agency_index: Some(0),
+                    ..vector.input
+                }
+            ),
+            Err(EconomyError::CccDlcNotActive)
+        );
+        assert_eq!(
+            set_eligibility(
+                &gate,
+                SetEligibilityInput {
+                    config: ConfigState {
+                        active: false,
+                        ..vector.input.config
+                    },
+                    role: 1,
+                    agency_index: Some(0),
+                    ..vector.input
+                }
+            ),
+            Err(EconomyError::NotActive)
+        );
 
         let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
         assert_eq!(

@@ -69,6 +69,21 @@ function functionBody(source, name) {
   assert.fail(`unterminated body for Rust function ${name}`);
 }
 
+function structBody(source, name) {
+  const signature = new RegExp(`pub struct ${name}\\b`, "u");
+  const match = signature.exec(source);
+  assert.ok(match, `missing Rust struct ${name}`);
+  const open = source.indexOf("{", match.index);
+  assert.notEqual(open, -1, `missing body for Rust struct ${name}`);
+  let depth = 0;
+  for (let index = open; index < source.length; index += 1) {
+    if (source[index] === "{") depth += 1;
+    if (source[index] === "}") depth -= 1;
+    if (depth === 0) return source.slice(match.index, index + 1);
+  }
+  assert.fail(`unterminated body for Rust struct ${name}`);
+}
+
 function assertTokensInOrder(body, tokens, label) {
   let cursor = -1;
   for (const token of tokens) {
@@ -695,5 +710,118 @@ test("the activate kernel preserves V2 preflight, reservation, and terminal orde
   assert.match(
     audit,
     /pre-activation\/vacuous-cap phase[\s\S]+atomically enables normal cap\s+enforcement[\s\S]+Core payout custody remains separately blocked/u,
+  );
+});
+
+test("the set_eligibility kernel preserves V2 policy order without importing lifecycle", () => {
+  const v2SetEligibility = functionBody(
+    anchorProgramBody(v2Source),
+    "set_eligibility",
+  );
+  const economySetEligibility = functionBody(economySource, "set_eligibility");
+  const economyTransition = functionBody(
+    economySource,
+    "set_eligibility_transition",
+  );
+
+  assertTokensInOrder(
+    v2SetEligibility,
+    [
+      "ctx.accounts.config.active",
+      "IatV2Error::NotActive",
+      "role_rate(role).is_some()",
+      "IatV2Error::UnknownRole",
+      "if role == 0",
+      "agency_index.is_none()",
+      "IatV2Error::StandardCannotLinkAgency",
+      "CCC_DLC_GENESIS_ENABLED",
+      "IatV2Error::CccDlcNotActive",
+      "agency_index.is_some()",
+      "IatV2Error::CccRoleRequiresAgency",
+      "agency_index.unwrap() < ctx.accounts.config.agency_count",
+      "IatV2Error::InvalidAgencyIndex",
+      "let eligibility = &mut ctx.accounts.eligibility",
+      "eligibility.config = ctx.accounts.config.key()",
+      "eligibility.wallet = ctx.accounts.wallet.key()",
+      "eligibility.role = role",
+      "eligibility.agency_index = agency_index.unwrap_or(u32::MAX)",
+      "eligibility.bump = ctx.bumps.eligibility",
+    ],
+    "V2 set_eligibility",
+  );
+
+  assert.match(economySetEligibility, /_gate: &ValidatedDailyLawWrite/u);
+  assert.match(
+    economySetEligibility,
+    /set_eligibility_transition\(input\)/u,
+  );
+  assertTokensInOrder(
+    economyTransition,
+    [
+      "if !input.config.active",
+      "EconomyError::NotActive",
+      "role_rate(input.role).is_none()",
+      "EconomyError::UnknownRole",
+      "if input.role == 0",
+      "input.agency_index.is_some()",
+      "EconomyError::StandardCannotLinkAgency",
+      "if !CCC_DLC_GENESIS_ENABLED",
+      "EconomyError::CccDlcNotActive",
+      "input.agency_index.is_none()",
+      "EconomyError::CccRoleRequiresAgency",
+      "input.agency_index.unwrap_or(u32::MAX) >= input.config.agency_count",
+      "EconomyError::InvalidAgencyIndex",
+      "eligibility: EligibilityState",
+      "config: input.config_key",
+      "wallet: input.wallet",
+      "agency_index: input.agency_index.unwrap_or(u32::MAX)",
+      "role: input.role",
+      "bump: input.eligibility_bump",
+    ],
+    "B3 set_eligibility transition",
+  );
+
+  const v2Accounts = structBody(v2Source, "SetEligibility");
+  assertTokensInOrder(
+    v2Accounts,
+    [
+      "#[account(mut, address = config.admin)]",
+      "pub admin: Signer<'info>",
+      "pub config: Account<'info, Config>",
+      "pub wallet: UncheckedAccount<'info>",
+      "init_if_needed",
+      "payer = admin",
+      "space = 8 + Eligibility::INIT_SPACE",
+      'seeds = [b"eligibility", config.key().as_ref(), wallet.key().as_ref()]',
+      "bump",
+      "pub eligibility: Account<'info, Eligibility>",
+      "pub system_program: Program<'info, System>",
+    ],
+    "V2 SetEligibility account lifecycle",
+  );
+  assert.doesNotMatch(
+    economySetEligibility,
+    /Signer|AccountInfo|init_if_needed|create_account|invoke|serialize|persist/u,
+  );
+  assert.doesNotMatch(
+    economyTransition,
+    /Signer|AccountInfo|init_if_needed|create_account|invoke|serialize|persist/u,
+  );
+
+  assert.match(
+    audit,
+    /`set_eligibility` is the ninth host kernel[\s\S]+`PRE_LIFECYCLE_ONLY`[\s\S]+no public exposure/u,
+  );
+  assert.match(
+    audit,
+    /Standard role[\s\S]+`u32::MAX`[\s\S]+Roles one and two[\s\S]+`CccDlcNotActive`[\s\S]+unknown roles fail before any agency rule/u,
+  );
+  assert.match(
+    audit,
+    /does not authenticate the administrator or config[\s\S]+`init_if_needed` create-or-update lifecycle[\s\S]+does not make `set_eligibility` complete/u,
+  );
+  assert.match(
+    audit,
+    /For\s+`set_eligibility`[\s\S]+Daily Law gate and pure role-policy transition succeed[\s\S]+manually create an absent record or mutably overwrite a valid existing\s+record/u,
   );
 });

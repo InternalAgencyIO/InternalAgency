@@ -27,12 +27,13 @@ new host-only `iat_b3_economy` library contains immutable V2 constants, an
 exact read-only Daily Law codec/verifier, an opaque validated-write capability,
 and internal pure `expire_round`, `close_position`, `settle_round`, and
 `commit_round` transitions, plus the `initialize_config`,
-`initialize_lane_vault`, `initialize_stake_vault`, and `activate`
-validation/state constructors explicitly staged as `PRE_LIFECYCLE_ONLY`. Its
-manifest is `lib`-only and it has no Solana entrypoint or public dispatcher,
-account lifecycle, token CPI, or network access. Neither the JavaScript
-specifications nor these pure Rust slices may be counted as on-chain faction or
-core-cap enforcement.
+`initialize_lane_vault`, `initialize_stake_vault`, `activate`, and
+`set_eligibility` validation/state constructors explicitly staged as
+`PRE_LIFECYCLE_ONLY`. Its manifest is `lib`-only and it has no Solana
+entrypoint or
+public dispatcher, account lifecycle, token CPI, or network access. Neither
+the JavaScript specifications nor these pure Rust slices may be counted as
+on-chain faction or core-cap enforcement.
 
 This is a hard Mainnet blocker. Adding a check to only the V2 transfer helper
 would be insufficient: several V2 handlers mutate protocol ledgers without a
@@ -83,11 +84,14 @@ handler-body kernel. `initialize_config` is the fifth host kernel,
 seventh, but only their pre-lifecycle validation and by-value state construction
 are present. `activate` is the eighth host kernel, but only handler-body
 validation, reward reservation, and by-value state construction are present.
-All four Genesis kernels are `PRE_LIFECYCLE_ONLY` and have no public exposure.
-Every production wrapper requires the opaque canonical Daily Law capability.
-The three CCC wrappers then preserve the immutable CCC-disabled Genesis
-boundary before inspecting caller-supplied round, instruction-trace, or
-randomness values.
+`set_eligibility` is the ninth host kernel, but only its role-policy validation
+and by-value eligibility construction are present. All four Genesis kernels and
+`set_eligibility` are `PRE_LIFECYCLE_ONLY` and have no public exposure. Every
+production wrapper requires the opaque canonical Daily Law capability. The
+three round-related CCC wrappers then preserve the immutable CCC-disabled
+Genesis boundary before inspecting caller-supplied round, instruction-trace, or
+randomness values; `set_eligibility` preserves that same boundary inside its
+non-standard-role branch.
 
 The `initialize_config` kernel preserves the retained V2 handler body's exact
 validation order: hardware-admin key, mint decimals, rehearsal/production
@@ -143,6 +147,21 @@ program, serialize, or persist a result, and it does not make `activate`
 complete. Its exact V2 reservation math does not resolve the separate core
 payout-custody conflict.
 
+The `set_eligibility` kernel preserves the retained V2 handler-body error order:
+active config, known role, then the role-specific agency rule. Standard role
+zero succeeds only without an agency and stores `u32::MAX` as the no-agency
+sentinel. Roles one and two reach the immutable compile-time-inactive CCC check
+before the otherwise unreachable missing-agency or out-of-range checks, so they
+return `CccDlcNotActive`; unknown roles fail before any agency rule. On standard
+success the kernel constructs the exact config key, wallet, sentinel, role, and
+bump by value. Differential tests use the actual V2 `Config` and `Eligibility`
+types and role-policy helper, and static source regressions pin both handlers'
+validation/construction order. This remains handler-body parity only. It does
+not authenticate the administrator or config, validate account ownership or
+codecs, derive the wallet-bound PDA, create or decode an account, implement the
+V2 `init_if_needed` create-or-update lifecycle, invoke the System Program,
+serialize, or persist a result, and it does not make `set_eligibility` complete.
+
 The `commit_round` differential kernel performs no account creation. It accepts
 a decoded read-only instructions-sysvar trace, selects only the instruction
 immediately preceding the current index, validates the pinned Switchboard
@@ -185,7 +204,15 @@ authority under the frozen replacement contract. For `activate`, it must pass
 the canonical Daily Law gate first, authenticate the hardware administrator,
 decode and bind the canonical config, mint, custody, lane, and Token-2022 vault
 accounts, verify every PDA and null authority, then manually create and persist
-the core-reward account only after the pure validation succeeds.
+the core-reward account only after the pure validation succeeds. For
+`set_eligibility`, it must authenticate the hardware administrator and config,
+derive and verify the wallet-bound eligibility PDA, and inspect the account's
+existence, owner, codec, config key, wallet key, and bump without triggering
+lifecycle. Only after the Daily Law gate and pure role-policy transition succeed
+may it manually create an absent record or mutably overwrite a valid existing
+record and persist the result. The V2 `init_if_needed` constraint is source
+evidence of the retained create-or-update semantics, not lifecycle code that can
+be copied ahead of the B3 gate.
 
 That adapter also has an unresolved non-circular bootstrap requirement. If the
 combined `finalize_day` plus core-cap reconciliation path requires an already

@@ -224,13 +224,16 @@ permanently close after the committed set is exhausted.
    `initialize_config`, `initialize_lane_vault`, `initialize_stake_vault`, and
    `activate` validation/state-construction kernels here; signer and account
    authentication, PDA derivation, account allocation/funding, Token-2022
-   initialization, and persistent writes remain in step 5.
+   initialization, and persistent writes remain in step 5. Add only the
+   pre-lifecycle `set_eligibility` role-policy and by-value record constructor
+   here; administrator/config authentication, wallet-PDA derivation,
+   create-or-update lifecycle, and persistence remain in step 5.
 5. Port the eight account-creating paths with manual post-gate System Program
    CPIs and prove locked/unfinalized calls perform no successful CPI or state
    change. The existing `initialize_config`, `initialize_lane_vault`,
-   `initialize_stake_vault`, and `activate` `PRE_LIFECYCLE_ONLY` kernels are not
-   completion of this step and must not be exposed until that lifecycle adapter
-   exists.
+   `initialize_stake_vault`, `activate`, and `set_eligibility`
+   `PRE_LIFECYCLE_ONLY` kernels are not completion of this step and must not be
+   exposed until that lifecycle adapter exists.
 6. Port Token-2022 vault transfers and exercise the real hook for
    `open_position`, both settlement handlers, principal claim, and principal
    withdrawal on a disposable local validator.
@@ -269,6 +272,13 @@ Genesis kernels are explicitly `PRE_LIFECYCLE_ONLY`: they do not authenticate
 signers or accounts, bind or deserialize the canonical mint and token accounts,
 derive or create PDAs, invoke the System or Token-2022 programs, or persist
 state. The activation slice also does not resolve core payout custody or the
-pre-activation/vacuous-cap bootstrap rule. None of these kernels may be exposed
-as a write entrypoint. The first safe deployable slice is the complete
-fifteen-row dispatcher behind the frozen Token-2022 hook, not a single handler.
+pre-activation/vacuous-cap bootstrap rule. The ninth adds only
+`set_eligibility` handler-body policy and by-value record construction. It
+preserves standard-role success with the no-agency sentinel and preserves the
+compile-time-inactive CCC boundary before the otherwise unreachable missing or
+invalid agency checks. It does not authenticate the administrator or config,
+derive the wallet-bound eligibility PDA, implement V2 `init_if_needed`
+create-or-update lifecycle, invoke the System Program, or persist a record.
+None of these kernels may be exposed as a write entrypoint. The first safe
+deployable slice is the complete fifteen-row dispatcher behind the frozen
+Token-2022 hook, not a single handler.

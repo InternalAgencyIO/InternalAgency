@@ -120,7 +120,7 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
-test("the host-only port contains exactly the first eight gated kernels", () => {
+test("the host-only port contains exactly the first nine gated kernels", () => {
   assert.deepEqual(matrix.hostOnlyPureTransitions, [
     {
       name: "expire_round",
@@ -178,6 +178,14 @@ test("the host-only port contains exactly the first eight gated kernels", () => 
       handlerComplete: false,
       publicExposure: false,
     },
+    {
+      name: "set_eligibility",
+      implementationStage: "PRE_LIFECYCLE_ONLY",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      handlerComplete: false,
+      publicExposure: false,
+    },
   ]);
   assert.match(
     economySource,
@@ -208,6 +216,13 @@ test("the host-only port contains exactly the first eight gated kernels", () => 
   assert.match(economySource, /struct CoreRewardState/u);
   assert.match(
     economySource,
+    /pub fn set_eligibility\(\s*_gate: &ValidatedDailyLawWrite,/u,
+  );
+  assert.match(economySource, /fn set_eligibility_transition\(/u);
+  assert.match(economySource, /struct SetEligibilityInput/u);
+  assert.match(economySource, /struct EligibilityState/u);
+  assert.match(
+    economySource,
     /pub fn close_position\(\s*_gate: &ValidatedDailyLawWrite,/u,
   );
   assert.match(economySource, /fn close_position_transition\(/u);
@@ -228,7 +243,7 @@ test("the host-only port contains exactly the first eight gated kernels", () => 
   assert.match(economySource, /fn validate_round_commit_instruction\(/u);
   assert.doesNotMatch(
     economyCode,
-    /pub fn (?:register_agency|set_eligibility|open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal)\s*\(/u,
+    /pub fn (?:register_agency|open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal)\s*\(/u,
   );
 
   const initializeConfig = matrix.handlers.find(
@@ -261,6 +276,18 @@ test("the host-only port contains exactly the first eight gated kernels", () => 
   assert.equal(activate.publicExposure, matrix.deploymentExposure);
   assert.equal(activate.parity, "PRESERVE");
   assert(activate.cpis.includes("system_program.create_account"));
+
+  const setEligibility = matrix.handlers.find(
+    (handler) => handler.name === "set_eligibility",
+  );
+  assert.equal(setEligibility.implementationStage, "PRE_LIFECYCLE_ONLY");
+  assert.equal(setEligibility.handlerComplete, false);
+  assert.equal(setEligibility.publicExposure, matrix.deploymentExposure);
+  assert.equal(
+    setEligibility.parity,
+    "PRESERVE_STANDARD_AND_CCC_INACTIVE_BOUNDARY",
+  );
+  assert(setEligibility.cpis.includes("system_program.create_account_if_absent"));
 });
 
 test("the pure verifier pins the exact current Daily Law v1 codec", () => {
