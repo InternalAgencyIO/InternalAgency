@@ -271,12 +271,12 @@ permanently close after the committed set is exhausted.
    `activate` validation/state-construction kernels here; signer and account
    authentication, PDA derivation, account allocation/funding, Token-2022
    initialization, and persistent writes remain in step 5. Add only the
-   production-inactive `register_agency` boundary here: after `NotActive`, it
-   must return the immutable compile-time `CccDlcNotActive` result, with the
-   dormant record/hash/count construction available only to differential tests.
-   Add only the
-   pre-lifecycle `set_eligibility` role-policy and by-value record constructor
-   here; administrator/config authentication, wallet-PDA derivation,
+   production-inactive `prepare_register_agency` host boundary for the retained
+   V2 `register_agency` body here: after `NotActive`, it must return the
+   immutable compile-time `CccDlcNotActive` result, with the dormant
+   record/hash/count construction available only to differential tests. Add
+   only the pre-lifecycle `set_eligibility` role-policy and by-value record
+   constructor here; administrator/config authentication, wallet-PDA derivation,
    create-or-update lifecycle, and persistence remain in step 5. Add only the
     `prepare_open_position` pre-token-CPI validation, provisional reward-lane
     reservation, and transfer intent here. It must not perform the config
@@ -300,10 +300,10 @@ permanently close after the committed set is exhausted.
 5. Port the eight account-creating paths with manual post-gate System Program
    CPIs and prove locked/unfinalized calls perform no successful CPI or state
    change. The existing `initialize_config`, `initialize_lane_vault`,
-   `initialize_stake_vault`, `activate`, `register_agency`, and
+   `initialize_stake_vault`, `activate`, `prepare_register_agency`, and
    `set_eligibility` `PRE_LIFECYCLE_ONLY` kernels and the five
-   `PRE_TOKEN_CPI_ONLY` prepare
-   kernels are not completion of this step and must not be exposed until the
+   `PRE_TOKEN_CPI_ONLY` prepare kernels are not completion of this step and must
+   not be exposed until the
    corresponding lifecycle/CPI adapters exist.
 6. Port Token-2022 vault transfers and exercise the real hook for
    `open_position`, both settlement handlers, principal claim, and principal
@@ -439,18 +439,30 @@ hooked transfers in order, then checked-add paid and mark the selected word in
 the same transaction. This slice is handler-incomplete and has no public
 exposure.
 
-The fifteenth adds only the production `register_agency` boundary behind the
-opaque Daily Law capability. It exactly preserves V2's observable current
-behavior: an inactive config returns `NotActive`; an active config then returns
-`CccDlcNotActive` because the immutable compile-time CCC Genesis constant is
-false. Production cannot construct either agency record, read a clock, append
-the registry hash, increment the agency count, create either PDA, invoke the
-System Program, or persist state, and merely flipping the constant does not
-expose a success path. A private `#[cfg(test)]` seam alone preserves the dormant
-enabled handler-body order for source-parity proof: active check, validator
-Clock-derived week, agency record, owner-index record, registry-hash append, and
-checked count increment. A future lifecycle adapter is intentionally not
-specified or authorized while CCC remains immutably disabled; the dormant
+The fifteenth adds only the production `prepare_register_agency` host boundary
+for the retained V2 `register_agency` handler body behind the opaque Daily Law
+capability. Its parity claim is deliberately limited to the V2 handler-body
+result and error order after the B3 Daily Law gate: an inactive config returns
+`NotActive`; an active config then returns `CccDlcNotActive` because the
+immutable compile-time CCC Genesis constant is false. This is not exact
+end-to-end V2 instruction behavior. V2's generated Anchor account validation
+authenticates the administrator/config relationship and, for a call that
+reaches the handler, has executed both `agency` and `agency-owner` init
+lifecycles. An earlier lifecycle error aborts before the handler; successful
+init CPIs are rolled back when the handler returns `NotActive`,
+`CccDlcNotActive`, or another `Err`. The B3 host boundary models none of that
+lifecycle.
+
+Production cannot construct either agency record, read a clock, append the
+registry hash, increment the agency count, create either PDA, invoke the System
+Program, or persist state, and merely flipping the constant does not expose a
+success path. A private `#[cfg(test)]` seam alone preserves the dormant enabled
+handler-body assignment order for source-parity proof: active check; agency
+config, owner, and index; validator-Clock-derived week; remaining agency fields;
+owner-index fields; registry-hash append; and checked count increment. The raw
+`register_agency` function name remains reserved for a future complete native
+adapter or dispatcher instruction. Such an adapter is not specified or
+authorized while CCC remains immutably disabled; the dormant
 administrator/config authentication and both exact V2 PDA derivations are
 documented parity facts, not a deployment path. This slice is
 `PRE_LIFECYCLE_ONLY`, handler-incomplete, and has no public exposure.

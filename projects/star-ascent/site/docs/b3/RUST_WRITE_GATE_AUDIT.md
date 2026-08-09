@@ -28,8 +28,8 @@ exact read-only Daily Law codec/verifier, an opaque validated-write capability,
 and internal pure `expire_round`, `close_position`, `settle_round`, and
 `commit_round` transitions, plus the `initialize_config`,
 `initialize_lane_vault`, `initialize_stake_vault`, `activate`, and
-the production-inactive `register_agency` boundary and `set_eligibility`
-validation/state constructors explicitly staged as
+the production-inactive `prepare_register_agency` host boundary and
+`set_eligibility` validation/state constructors explicitly staged as
 `PRE_LIFECYCLE_ONLY`, plus the `prepare_open_position` validation, provisional
 reservation, and transfer-intent kernel and the
 `prepare_withdraw_position_principal` maturity, stake-ledger, and transfer-
@@ -103,16 +103,18 @@ host kernel and stops before the first reward transfer.
 transfer, with the unresolved core lane failing closed after retained V2
 pre-CPI validation. `prepare_settle_core_week` is the fourteenth and likewise
 fails closed after retained V2 pre-CPI validation and reservation consumption.
-`register_agency` is the fifteenth host kernel and exposes only the immutable
-production CCC-inactive boundary; its dormant enabled construction exists
-under `#[cfg(test)]` solely for V2 differential proof. All four Genesis kernels,
-`register_agency`, and `set_eligibility` are `PRE_LIFECYCLE_ONLY`;
+`prepare_register_agency` is the fifteenth host kernel and exposes only the
+immutable production CCC-inactive boundary for the retained `register_agency`
+handler body; its dormant enabled construction exists under `#[cfg(test)]`
+solely for V2 differential proof. All four Genesis kernels,
+`prepare_register_agency`, and `set_eligibility` are `PRE_LIFECYCLE_ONLY`;
 all five prepare kernels are `PRE_TOKEN_CPI_ONLY`. All have no public exposure.
 Every production wrapper requires the opaque canonical Daily Law capability. The
 three round-related CCC wrappers then preserve the immutable CCC-disabled
 Genesis boundary before inspecting caller-supplied round, instruction-trace, or
-randomness values; `register_agency` preserves `NotActive` before that boundary,
-and `set_eligibility` preserves it inside its non-standard-role branch.
+randomness values; `prepare_register_agency` preserves `NotActive` before that
+boundary, and `set_eligibility` preserves it inside its non-standard-role
+branch.
 
 The `initialize_config` kernel preserves the retained V2 handler body's exact
 validation order: hardware-admin key, mint decimals, rehearsal/production
@@ -267,17 +269,29 @@ nor moves the checked paid addition ahead of the three ordered CPIs, so token-
 CPI errors retain precedence over paid overflow. The slice is
 `PRE_TOKEN_CPI_ONLY`, handler-incomplete, and has no public exposure.
 
-The `register_agency` production wrapper requires the opaque Daily Law
-capability, then preserves the exact observable V2 order: inactive config fails
-with `NotActive`, while active config fails immediately with
-`CccDlcNotActive` because `CCC_DLC_GENESIS_ENABLED` is the immutable false
-constant. There is no caller enable flag and no production Clock read, record
+The `prepare_register_agency` production host wrapper requires the opaque Daily
+Law capability, then preserves only the retained V2 `register_agency`
+handler-body result/error order: inactive config fails with `NotActive`, while
+active config fails immediately with `CccDlcNotActive` because
+`CCC_DLC_GENESIS_ENABLED` is the immutable false constant. This is not an
+end-to-end V2 instruction-parity claim. V2 Anchor first authenticates the
+administrator/config relationship and, for a call that reaches the Rust
+handler, has executed both `agency` and `agency-owner` init lifecycles during
+generated account validation. An earlier lifecycle error aborts before the
+handler; successful init CPIs roll back when it returns `NotActive`,
+`CccDlcNotActive`, or another `Err`. The host wrapper starts after the B3 Daily
+Law gate and deliberately models none of those pre-handler effects.
+
+There is no caller enable flag and no production Clock read, record
 construction, registry-hash update, count increment, lifecycle, CPI,
 persistence, dispatcher, or success path; changing the constant alone still
-cannot expose the dormant body. A private `#[cfg(test)]` seam and actual V2
-`Agency`/`AgencyOwnerIndex` comparison oracle pin the hypothetical enabled
-order: validator-Clock week, both complete record constructions, the
-`IAT_AGENCY_REGISTRY_V1` hash append, then checked `u32` count increment.
+cannot expose the dormant body. The raw `register_agency` function name remains
+reserved for a future complete native adapter or dispatcher instruction. A
+private `#[cfg(test)]` seam and actual V2 `Agency`/`AgencyOwnerIndex` comparison
+oracle pin the hypothetical enabled handler-body assignment order: agency
+config, owner, and index; validator-Clock week; remaining agency fields;
+owner-index fields; the `IAT_AGENCY_REGISTRY_V1` hash append; then checked `u32`
+count increment.
 Adversarial vectors prove `NotActive` precedes invalid Clock and overflow,
 invalid Clock precedes count overflow, and `u32::MAX - 1` remains the last
 successful increment. Administrator/config authentication and the exact

@@ -910,18 +910,20 @@ pub fn activate(
     activate_transition(input)
 }
 
-/// Host-only `register_agency` production boundary. The opaque Daily Law
-/// capability is required before the retained V2 body. Production preserves
-/// the immutable compile-time CCC-disabled result and therefore has no account
-/// lifecycle, state construction, CPI, persistence, or success path.
-pub fn register_agency(
+/// Host-only pre-lifecycle `register_agency` handler-body boundary. The opaque
+/// Daily Law capability is required before the retained V2 body. Production
+/// preserves the immutable compile-time CCC-disabled result and therefore has
+/// no account lifecycle, state construction, CPI, persistence, or success path.
+/// The raw `register_agency` name remains reserved for a future complete native
+/// adapter or dispatcher instruction.
+pub fn prepare_register_agency(
     _gate: &ValidatedDailyLawWrite,
     input: RegisterAgencyInput,
 ) -> Result<RegisterAgencyResult, EconomyError> {
-    register_agency_transition(input)
+    prepare_register_agency_transition(input)
 }
 
-fn register_agency_transition(
+fn prepare_register_agency_transition(
     input: RegisterAgencyInput,
 ) -> Result<RegisterAgencyResult, EconomyError> {
     if !input.config.active {
@@ -945,28 +947,36 @@ fn register_agency_v2_enabled_parity_seam(
         return Err(EconomyError::NotActive);
     }
 
-    let index = input.config.agency_count;
+    let mut agency = AgencyState {
+        config: [0; 32],
+        owner: [0; 32],
+        index: 0,
+        registered_week: 0,
+        bump: 0,
+    };
+    agency.config = input.config_key;
+    agency.owner = input.agency_owner;
+    agency.index = input.config.agency_count;
     let registered_week = current_week(input.config.genesis_timestamp, clock_unix_timestamp)
         .ok_or(EconomyError::InvalidClock)?;
-    let agency = AgencyState {
-        config: input.config_key,
-        owner: input.agency_owner,
-        index,
-        registered_week,
-        bump: input.agency_bump,
+    agency.registered_week = registered_week;
+    agency.bump = input.agency_bump;
+
+    let mut agency_owner_index = AgencyOwnerIndexState {
+        config: [0; 32],
+        owner: [0; 32],
+        index: 0,
+        bump: 0,
     };
-    let agency_owner_index = AgencyOwnerIndexState {
-        config: input.config_key,
-        owner: input.agency_owner,
-        index: agency.index,
-        bump: input.agency_owner_index_bump,
-    };
+    agency_owner_index.config = input.config_key;
+    agency_owner_index.owner = input.agency_owner;
+    agency_owner_index.index = agency.index;
+    agency_owner_index.bump = input.agency_owner_index_bump;
+
+    let owner_bytes = input.agency_owner;
     let mut config = input.config;
-    config.agency_registry_hash = append_agency_registry_hash(
-        config.agency_registry_hash,
-        agency.index,
-        input.agency_owner,
-    );
+    config.agency_registry_hash =
+        append_agency_registry_hash(config.agency_registry_hash, agency.index, owner_bytes);
     config.agency_count = config
         .agency_count
         .checked_add(1)
@@ -6253,7 +6263,7 @@ mod tests {
     }
 
     #[test]
-    fn register_agency_production_preserves_not_active_then_immutable_ccc_boundary() {
+    fn prepare_register_agency_preserves_not_active_then_immutable_ccc_boundary() {
         let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
         let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
         let base = valid_register_agency_vector("production CCC boundary");
@@ -6267,15 +6277,15 @@ mod tests {
             ..base.input
         };
         assert_eq!(
-            register_agency(&gate, inactive),
+            prepare_register_agency(&gate, inactive),
             Err(EconomyError::NotActive)
         );
         assert_eq!(
-            register_agency(&gate, base.input),
+            prepare_register_agency(&gate, base.input),
             Err(EconomyError::CccDlcNotActive)
         );
         assert_eq!(
-            register_agency(
+            prepare_register_agency(
                 &gate,
                 RegisterAgencyInput {
                     config: ConfigState {

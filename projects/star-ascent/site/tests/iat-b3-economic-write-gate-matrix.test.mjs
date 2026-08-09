@@ -179,7 +179,7 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
       publicExposure: false,
     },
     {
-      name: "register_agency",
+      name: "prepare_register_agency",
       productionBehavior: "CCC_INACTIVE",
       implementationStage: "PRE_LIFECYCLE_ONLY",
       dailyLawCapabilityRequired: true,
@@ -265,9 +265,10 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   assert.match(economySource, /struct CoreRewardState/u);
   assert.match(
     economySource,
-    /pub fn register_agency\(\s*_gate: &ValidatedDailyLawWrite,/u,
+    /pub fn prepare_register_agency\(\s*_gate: &ValidatedDailyLawWrite,/u,
   );
-  assert.match(economySource, /fn register_agency_transition\(/u);
+  assert.doesNotMatch(economyCode, /pub fn register_agency\s*\(/u);
+  assert.match(economySource, /fn prepare_register_agency_transition\(/u);
   assert.match(economySource, /struct RegisterAgencyInput/u);
   assert.match(economySource, /struct AgencyState/u);
   assert.match(economySource, /struct AgencyOwnerIndexState/u);
@@ -277,7 +278,7 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   );
 
   const registerTransitionStart = economySource.indexOf(
-    "fn register_agency_transition(",
+    "fn prepare_register_agency_transition(",
   );
   const registerParitySeamStart = economySource.indexOf(
     "#[cfg(test)]\nfn register_agency_v2_enabled_parity_seam(",
@@ -315,12 +316,22 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   let precedingRegisterStep = -1;
   for (const marker of [
     "!input.config.active",
-    "let index = input.config.agency_count",
+    "let mut agency = AgencyState",
+    "agency.config = input.config_key",
+    "agency.owner = input.agency_owner",
+    "agency.index = input.config.agency_count",
     "let registered_week = current_week",
-    "let agency = AgencyState",
-    "let agency_owner_index = AgencyOwnerIndexState",
+    "agency.registered_week = registered_week",
+    "agency.bump = input.agency_bump",
+    "let mut agency_owner_index = AgencyOwnerIndexState",
+    "agency_owner_index.config = input.config_key",
+    "agency_owner_index.owner = input.agency_owner",
+    "agency_owner_index.index = agency.index",
+    "agency_owner_index.bump = input.agency_owner_index_bump",
+    "let owner_bytes = input.agency_owner",
     "let mut config = input.config",
-    "config.agency_registry_hash = append_agency_registry_hash",
+    "config.agency_registry_hash =",
+    "append_agency_registry_hash(",
     "config.agency_count = config",
     ".checked_add(1)",
     "Ok(RegisterAgencyResult",
