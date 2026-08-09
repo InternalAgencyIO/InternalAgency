@@ -32,6 +32,7 @@ import {
   logicalMissedFundingOutcome,
   nextUtcMidnight,
   sealRewardCapacityRound,
+  validateXBoundRewardReferenceState,
 } from "../programs/iat_b3_reference/reward-capacity-waterfall.mjs";
 import {
   createDailyLawState,
@@ -49,6 +50,7 @@ const EPOCH_ENGINE_PATH = join(SITE, "engagement", "epoch-engine.mjs");
 const CAPACITY_REFERENCE_PATH = join(SITE, "programs", "iat_b3_reference", "reward-capacity-waterfall.mjs");
 const RECEIPT_CODEC_PATH = join(SITE, "programs", "iat_b3_reference", "reward-allocator-receipt-codec.mjs");
 const RECEIPT_BOUNDARY_PATH = join(SITE, "docs", "b3", "REWARD_ALLOCATOR_RECEIPT_BOUNDARY.md");
+const X_BOUND_STATE_INVARIANTS_PATH = join(SITE, "docs", "b3", "X_BOUND_REWARD_REFERENCE_STATE_INVARIANTS.md");
 
 const offchainPolicy = JSON.parse(readFileSync(POLICY_PATH, "utf8"));
 const capacityPolicy = JSON.parse(readFileSync(CAPACITY_POLICY_PATH, "utf8"));
@@ -57,6 +59,7 @@ const epochEngineSource = readFileSync(EPOCH_ENGINE_PATH, "utf8");
 const capacityReferenceSource = readFileSync(CAPACITY_REFERENCE_PATH, "utf8");
 const receiptCodecSource = readFileSync(RECEIPT_CODEC_PATH, "utf8");
 const receiptBoundarySource = readFileSync(RECEIPT_BOUNDARY_PATH, "utf8");
+const xBoundStateInvariantsSource = readFileSync(X_BOUND_STATE_INVARIANTS_PATH, "utf8");
 
 const EXACT_TRANCHE_KINDS = ["X_BASE_10", "X_PREMIUM_FULL_100", "X_PREMIUM_UPGRADE_90"];
 const EXACT_TRANCHE_BASIS_POINTS = {
@@ -562,11 +565,14 @@ test("real held Daily and Genesis claims are complete authenticated inputs witho
   const genesisClaim = genesis.immediateClaims[0];
   const dailyCapacityReward = testOnlyAuthenticatedProjection({ plan: daily, claim: dailyClaim, authenticatedTierLookup: tierLookup });
   const genesisCapacityReward = testOnlyAuthenticatedProjection({ plan: genesis, claim: genesisClaim, authenticatedTierLookup: tierLookup });
+  assert.equal(validateXBoundRewardReferenceState(dailyCapacityReward), dailyCapacityReward);
+  assert.equal(validateXBoundRewardReferenceState(genesisCapacityReward), genesisCapacityReward);
 
   assert.equal(dailyCapacityReward.rewardSourceKind, "X_INTERACTION");
   assert.equal(dailyCapacityReward.priorityClass, "STANDARD_10_PERCENT_AND_X_CAMPAIGN");
   assert.equal(dailyCapacityReward.grossBaseUnits, 12_000_000_000n);
   assert.equal(dailyCapacityReward.initialSubscriptionType, "Basic");
+  assert.equal(dailyCapacityReward.premiumProofAcceptedAtUnixSeconds, null);
   assert.equal(dailyCapacityReward.baseTranche.kind, "X_BASE_10");
   assert.equal(dailyCapacityReward.baseTranche.amount, 1_200_000_000n);
   assert.equal(dailyCapacityReward.upgradeTranche.kind, "X_PREMIUM_UPGRADE_90");
@@ -577,6 +583,7 @@ test("real held Daily and Genesis claims are complete authenticated inputs witho
   assert.equal(genesisCapacityReward.priorityClass, "STANDARD_10_PERCENT_AND_X_CAMPAIGN");
   assert.equal(genesisCapacityReward.grossBaseUnits, 100_000_000_000n);
   assert.equal(genesisCapacityReward.initialSubscriptionType, "PremiumPlus");
+  assert.equal(genesisCapacityReward.premiumProofAcceptedAtUnixSeconds, genesisCapacityReward.epochClosedAtUnixSeconds);
   assert.equal(genesisCapacityReward.baseTranche, null);
   assert.equal(genesisCapacityReward.premiumFullTranche.kind, "X_PREMIUM_FULL_100");
   assert.equal(genesisCapacityReward.premiumFullTranche.amount, 100_000_000_000n);
@@ -672,6 +679,12 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   assert.match(receiptBoundarySource, /not an\s+authenticated allocator/u);
   assert.match(receiptBoundarySource, /not a one-to-one persistence contract/u);
   assert.match(receiptBoundarySource, /Mainnet remains HOLD/u);
+  assert.match(xBoundStateInvariantsSource, /non-activating reference contract/u);
+  assert.match(xBoundStateInvariantsSource, /does not define an account codec/u);
+  assert.match(xBoundStateInvariantsSource, /initial-tier|Premium-at-qualification sequence model/iu);
+  assert.match(xBoundStateInvariantsSource, /authenticated X-tier and wallet-binding evidence/u);
+  assert.match(capacityReferenceSource, /premiumProofAcceptedAtUnixSeconds/u);
+  assert.match(capacityReferenceSource, /upgradeRound !== nextUtcMidnight\(acceptedAt\)/u);
   assert.match(ledgerSchema, /Blueprint only\. No active route, migration, allocator, signer, or transfer path/u);
   assert.doesNotMatch(ledgerSchema, /ATTACH DATABASE|load_extension|http:|https:/iu);
 

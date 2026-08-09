@@ -341,7 +341,6 @@ CREATE TABLE IF NOT EXISTS reward_v2_funding_rounds (
     CHECK (null_reason IS NULL OR null_reason IN (
       'daily_unfulfilled_at_utc_boundary',
       'global_allocator_absent',
-      'insufficient_full_tranche_capacity',
       'identity_or_evidence_held',
       'premium_upgrade_proof_not_fresh',
       'claim_window_expired',
@@ -359,6 +358,7 @@ CREATE TABLE IF NOT EXISTS reward_v2_funding_rounds (
     CHECK (unixepoch(created_at_utc) IS NOT NULL),
   CHECK (substr(opens_at_utc, 1, 10) = utc_day),
   CHECK (unixepoch(miss_decidable_at_utc) = unixepoch(opens_at_utc) + 1),
+  CHECK (miss_decidable_at_utc = substr(opens_at_utc, 1, 11) || '00:00:01.000Z'),
   CHECK (
     (state = 'null'
       AND null_reason IS NOT NULL
@@ -473,9 +473,15 @@ END;
 CREATE TRIGGER IF NOT EXISTS reward_v2_funding_rounds_boundary_null_guard
 BEFORE UPDATE ON reward_v2_funding_rounds
 WHEN NEW.state = 'null'
-  AND unixepoch(NEW.nullified_at_utc) < unixepoch(NEW.miss_decidable_at_utc)
+  AND (
+    (NEW.null_reason = 'daily_unfulfilled_at_utc_boundary'
+      AND NEW.nullified_at_utc <> NEW.miss_decidable_at_utc)
+    OR
+    (NEW.null_reason <> 'daily_unfulfilled_at_utc_boundary'
+      AND unixepoch(NEW.nullified_at_utc) < unixepoch(NEW.miss_decidable_at_utc))
+  )
 BEGIN
-  SELECT RAISE(ABORT, 'reward v2 null cannot be recorded before the miss-decidable instant');
+  SELECT RAISE(ABORT, 'reward v2 boundary miss must be recorded at the exact miss-decidable instant');
 END;
 
 CREATE TRIGGER IF NOT EXISTS reward_v2_funding_rounds_no_delete
@@ -1130,19 +1136,41 @@ CREATE TABLE IF NOT EXISTS reward_v2_allocator_batches (
     REFERENCES reward_v2_funding_rounds(funding_round_id)
     ON UPDATE RESTRICT ON DELETE RESTRICT,
   batch_kind TEXT NOT NULL
-    CHECK (batch_kind IN ('GLOBAL_ALLOCATOR_V1', 'UTC_BOUNDARY_NULL_V1')),
+    CHECK (batch_kind = 'GLOBAL_ALLOCATOR_V1'),
+  batch_codec_magic TEXT NOT NULL CHECK (batch_codec_magic = 'IATB3RCF'),
+  batch_codec_version INTEGER NOT NULL CHECK (batch_codec_version = 1),
+  batch_transcript_length INTEGER NOT NULL CHECK (batch_transcript_length = 320),
+  hash_suite TEXT NOT NULL CHECK (hash_suite = 'SHA256'),
   allocator_batch_digest TEXT NOT NULL UNIQUE
     CHECK (length(allocator_batch_digest) = 64)
     CHECK (allocator_batch_digest NOT GLOB '*[^0-9a-f]*'),
+  policy_digest TEXT NOT NULL
+    CHECK (policy_digest = '2054c881f9c7524acb965454286950445cd37c99f7485b45e2c787bcfb3617e2'),
+  deployment_domain_digest TEXT NOT NULL
+    CHECK (deployment_domain_digest = '4851da6cd96c8231e0d2b85b1f80b889e0e48f528b5aaa5056dcd8730e216224'),
+  round_seal_digest TEXT NOT NULL
+    CHECK (length(round_seal_digest) = 64)
+    CHECK (round_seal_digest NOT GLOB '*[^0-9a-f]*'),
   candidate_snapshot_digest TEXT NOT NULL
     CHECK (length(candidate_snapshot_digest) = 64)
     CHECK (candidate_snapshot_digest NOT GLOB '*[^0-9a-f]*'),
   lane_reservation_snapshot_digest TEXT NOT NULL
     CHECK (length(lane_reservation_snapshot_digest) = 64)
     CHECK (lane_reservation_snapshot_digest NOT GLOB '*[^0-9a-f]*'),
-  authentication_evidence_digest TEXT NOT NULL UNIQUE
-    CHECK (length(authentication_evidence_digest) = 64)
-    CHECK (authentication_evidence_digest NOT GLOB '*[^0-9a-f]*'),
+  post_lane_ledger_digest TEXT NOT NULL
+    CHECK (length(post_lane_ledger_digest) = 64)
+    CHECK (post_lane_ledger_digest NOT GLOB '*[^0-9a-f]*'),
+  reference_receipt_set_digest TEXT NOT NULL
+    CHECK (length(reference_receipt_set_digest) = 64)
+    CHECK (reference_receipt_set_digest NOT GLOB '*[^0-9a-f]*'),
+  reference_outcome_digest TEXT NOT NULL
+    CHECK (length(reference_outcome_digest) = 64)
+    CHECK (reference_outcome_digest NOT GLOB '*[^0-9a-f]*'),
+  reference_finalization_digest TEXT NOT NULL UNIQUE
+    CHECK (length(reference_finalization_digest) = 64)
+    CHECK (reference_finalization_digest NOT GLOB '*[^0-9a-f]*'),
+  reference_receipt_count INTEGER NOT NULL
+    CHECK (reference_receipt_count BETWEEN 0 AND 4294967295),
   decided_at_utc TEXT NOT NULL
     CHECK (length(decided_at_utc) = 24)
     CHECK (decided_at_utc GLOB '????-??-??T??:??:??.???Z')
@@ -1171,10 +1199,10 @@ WHEN EXISTS (
   WHERE existing.allocator_batch_id = NEW.allocator_batch_id
     OR existing.funding_round_id = NEW.funding_round_id
     OR existing.allocator_batch_digest = NEW.allocator_batch_digest
-    OR existing.authentication_evidence_digest = NEW.authentication_evidence_digest
+    OR existing.reference_finalization_digest = NEW.reference_finalization_digest
 )
 BEGIN
-  SELECT RAISE(ABORT, 'reward v2 allocator-batch identity and authentication keys cannot be replaced');
+  SELECT RAISE(ABORT, 'reward v2 allocator-batch identity and finalization keys cannot be replaced');
 END;
 
 CREATE TRIGGER IF NOT EXISTS reward_v2_allocator_batches_round_guard
@@ -1183,21 +1211,15 @@ WHEN NOT EXISTS (
   SELECT 1
   FROM reward_v2_funding_rounds AS round
   WHERE round.funding_round_id = NEW.funding_round_id
-    AND (
-      (NEW.batch_kind = 'GLOBAL_ALLOCATOR_V1'
-        AND round.state = 'global_allocator_pending'
-        AND round.sealed_at_utc = round.opens_at_utc
-        AND round.candidate_snapshot_digest = NEW.candidate_snapshot_digest
-        AND round.lane_reservation_snapshot_digest = NEW.lane_reservation_snapshot_digest
-        AND unixepoch(NEW.decided_at_utc) >= unixepoch(round.opens_at_utc))
-      OR
-      (NEW.batch_kind = 'UTC_BOUNDARY_NULL_V1'
-        AND round.state = 'null'
-        AND unixepoch(NEW.decided_at_utc) >= unixepoch(round.miss_decidable_at_utc))
-    )
+    AND NEW.batch_kind = 'GLOBAL_ALLOCATOR_V1'
+    AND round.state = 'global_allocator_pending'
+    AND round.sealed_at_utc = round.opens_at_utc
+    AND round.candidate_snapshot_digest = NEW.candidate_snapshot_digest
+    AND round.lane_reservation_snapshot_digest = NEW.lane_reservation_snapshot_digest
+    AND NEW.decided_at_utc = round.opens_at_utc
 )
 BEGIN
-  SELECT RAISE(ABORT, 'allocator batch must antecede receipts and bind the exact pending seal or terminal boundary null');
+  SELECT RAISE(ABORT, 'allocator batch must antecede receipts and bind the exact pending boundary seal');
 END;
 
 CREATE TRIGGER IF NOT EXISTS reward_v2_allocator_batches_no_update
@@ -1212,15 +1234,173 @@ BEGIN
   SELECT RAISE(ABORT, 'reward v2 allocator batches cannot be replaced, retried, or recycled');
 END;
 
+-- Generic fixed receipt transcripts cover every global priority class. The
+-- X-specific receipt table below may reference one transcript only after the
+-- complete contiguous global set has been recorded.
+CREATE TABLE IF NOT EXISTS reward_v2_allocator_receipt_transcripts (
+  allocator_transcript_id TEXT PRIMARY KEY
+    CHECK (length(allocator_transcript_id) BETWEEN 8 AND 128)
+    CHECK (allocator_transcript_id NOT GLOB '*[^A-Za-z0-9:_-]*'),
+  allocator_batch_id TEXT NOT NULL
+    REFERENCES reward_v2_allocator_batches(allocator_batch_id)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
+  funding_round_id TEXT NOT NULL
+    REFERENCES reward_v2_funding_rounds(funding_round_id)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
+  allocator_batch_digest TEXT NOT NULL
+    CHECK (length(allocator_batch_digest) = 64)
+    CHECK (allocator_batch_digest NOT GLOB '*[^0-9a-f]*'),
+  receipt_codec_magic TEXT NOT NULL CHECK (receipt_codec_magic = 'IATB3ALR'),
+  receipt_codec_version INTEGER NOT NULL CHECK (receipt_codec_version = 1),
+  receipt_transcript_length INTEGER NOT NULL CHECK (receipt_transcript_length = 288),
+  hash_suite TEXT NOT NULL CHECK (hash_suite = 'SHA256'),
+  allocation_index INTEGER NOT NULL CHECK (allocation_index BETWEEN 0 AND 4294967295),
+  round_seal_digest TEXT NOT NULL
+    CHECK (length(round_seal_digest) = 64)
+    CHECK (round_seal_digest NOT GLOB '*[^0-9a-f]*'),
+  reference_finalization_digest TEXT NOT NULL
+    CHECK (length(reference_finalization_digest) = 64)
+    CHECK (reference_finalization_digest NOT GLOB '*[^0-9a-f]*'),
+  obligation_id_digest TEXT NOT NULL
+    CHECK (length(obligation_id_digest) = 64)
+    CHECK (obligation_id_digest NOT GLOB '*[^0-9a-f]*'),
+  obligation_digest TEXT NOT NULL UNIQUE
+    CHECK (length(obligation_digest) = 64)
+    CHECK (obligation_digest NOT GLOB '*[^0-9a-f]*'),
+  amount_base_units INTEGER NOT NULL CHECK (amount_base_units > 0),
+  planned_treasury_base_units INTEGER NOT NULL CHECK (planned_treasury_base_units >= 0),
+  planned_ecosystem_base_units INTEGER NOT NULL CHECK (planned_ecosystem_base_units >= 0),
+  planned_liquidity_base_units INTEGER NOT NULL CHECK (planned_liquidity_base_units >= 0),
+  faction_payout_digest TEXT
+    CHECK (faction_payout_digest IS NULL OR (
+      length(faction_payout_digest) = 64
+      AND faction_payout_digest NOT GLOB '*[^0-9a-f]*'
+      AND faction_payout_digest <> '0000000000000000000000000000000000000000000000000000000000000000'
+    )),
+  faction_digest_present INTEGER NOT NULL CHECK (faction_digest_present IN (0, 1)),
+  allocator_decision_digest TEXT NOT NULL UNIQUE
+    CHECK (length(allocator_decision_digest) = 64)
+    CHECK (allocator_decision_digest NOT GLOB '*[^0-9a-f]*'),
+  allocator_receipt_digest TEXT NOT NULL UNIQUE
+    CHECK (length(allocator_receipt_digest) = 64)
+    CHECK (allocator_receipt_digest NOT GLOB '*[^0-9a-f]*'),
+  disposition TEXT NOT NULL CHECK (disposition IN (
+    'ADMITTED_RESERVED',
+    'NULL_UNDERFUNDED',
+    'NULL_BLOCKED'
+  )),
+  allocator_reason TEXT NOT NULL CHECK (allocator_reason IN (
+    'NONE',
+    'EXACT_AMOUNT_NOT_AVAILABLE',
+    'HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED'
+  )),
+  decided_at_utc TEXT NOT NULL
+    CHECK (length(decided_at_utc) = 24)
+    CHECK (decided_at_utc GLOB '????-??-??T??:??:??.???Z')
+    CHECK (unixepoch(decided_at_utc) IS NOT NULL),
+  CHECK (
+    (faction_digest_present = 0 AND faction_payout_digest IS NULL)
+    OR (faction_digest_present = 1 AND faction_payout_digest IS NOT NULL)
+  ),
+  CHECK (
+    (disposition = 'ADMITTED_RESERVED'
+      AND allocator_reason = 'NONE'
+      AND planned_ecosystem_base_units <= amount_base_units
+      AND planned_liquidity_base_units <= amount_base_units - planned_ecosystem_base_units
+      AND planned_treasury_base_units = amount_base_units
+        - planned_ecosystem_base_units - planned_liquidity_base_units)
+    OR (disposition = 'NULL_UNDERFUNDED'
+      AND allocator_reason = 'EXACT_AMOUNT_NOT_AVAILABLE'
+      AND planned_treasury_base_units = 0
+      AND planned_ecosystem_base_units = 0
+      AND planned_liquidity_base_units = 0)
+    OR (disposition = 'NULL_BLOCKED'
+      AND allocator_reason = 'HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED'
+      AND planned_treasury_base_units = 0
+      AND planned_ecosystem_base_units = 0
+      AND planned_liquidity_base_units = 0)
+  ),
+  UNIQUE (allocator_batch_id, allocation_index)
+) STRICT;
+
+CREATE TRIGGER IF NOT EXISTS reward_v2_allocator_receipt_transcripts_no_replace
+BEFORE INSERT ON reward_v2_allocator_receipt_transcripts
+WHEN EXISTS (
+  SELECT 1
+  FROM reward_v2_allocator_receipt_transcripts AS existing
+  WHERE existing.allocator_transcript_id = NEW.allocator_transcript_id
+    OR existing.obligation_digest = NEW.obligation_digest
+    OR existing.allocator_decision_digest = NEW.allocator_decision_digest
+    OR existing.allocator_receipt_digest = NEW.allocator_receipt_digest
+    OR (existing.allocator_batch_id = NEW.allocator_batch_id
+      AND existing.allocation_index = NEW.allocation_index)
+)
+BEGIN
+  SELECT RAISE(ABORT, 'reward v2 generic allocator transcript keys cannot be replaced');
+END;
+
+CREATE TRIGGER IF NOT EXISTS reward_v2_allocator_receipt_transcripts_batch_guard
+BEFORE INSERT ON reward_v2_allocator_receipt_transcripts
+WHEN NOT EXISTS (
+  SELECT 1
+  FROM reward_v2_allocator_batches AS batch
+  JOIN reward_v2_funding_rounds AS round
+    ON round.funding_round_id = batch.funding_round_id
+  WHERE batch.allocator_batch_id = NEW.allocator_batch_id
+    AND batch.funding_round_id = NEW.funding_round_id
+    AND batch.allocator_batch_digest = NEW.allocator_batch_digest
+    AND batch.round_seal_digest = NEW.round_seal_digest
+    AND batch.reference_finalization_digest = NEW.reference_finalization_digest
+    AND NEW.allocation_index < batch.reference_receipt_count
+    AND NEW.decided_at_utc = batch.decided_at_utc
+    AND NEW.decided_at_utc = round.opens_at_utc
+    AND round.state = 'global_allocator_pending'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'generic allocator transcript must bind one indexed receipt in the exact finalized batch');
+END;
+
+CREATE TRIGGER IF NOT EXISTS reward_v2_allocator_receipt_transcripts_no_update
+BEFORE UPDATE ON reward_v2_allocator_receipt_transcripts
+BEGIN
+  SELECT RAISE(ABORT, 'reward v2 generic allocator transcripts are append-only');
+END;
+
+CREATE TRIGGER IF NOT EXISTS reward_v2_allocator_receipt_transcripts_no_delete
+BEFORE DELETE ON reward_v2_allocator_receipt_transcripts
+BEGIN
+  SELECT RAISE(ABORT, 'reward v2 generic allocator transcripts cannot be replaced, retried, or recycled');
+END;
+
 CREATE TABLE IF NOT EXISTS reward_v2_allocator_receipts (
   allocator_receipt_id TEXT PRIMARY KEY
     CHECK (length(allocator_receipt_id) BETWEEN 8 AND 128)
     CHECK (allocator_receipt_id NOT GLOB '*[^A-Za-z0-9:_-]*'),
+  allocator_transcript_id TEXT NOT NULL UNIQUE
+    REFERENCES reward_v2_allocator_receipt_transcripts(allocator_transcript_id)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
   allocator_batch_id TEXT NOT NULL,
   funding_round_id TEXT NOT NULL,
   allocator_batch_digest TEXT NOT NULL
     CHECK (length(allocator_batch_digest) = 64)
     CHECK (allocator_batch_digest NOT GLOB '*[^0-9a-f]*'),
+  receipt_codec_magic TEXT NOT NULL CHECK (receipt_codec_magic = 'IATB3ALR'),
+  receipt_codec_version INTEGER NOT NULL CHECK (receipt_codec_version = 1),
+  receipt_transcript_length INTEGER NOT NULL CHECK (receipt_transcript_length = 288),
+  hash_suite TEXT NOT NULL CHECK (hash_suite = 'SHA256'),
+  allocation_index INTEGER NOT NULL CHECK (allocation_index BETWEEN 0 AND 4294967295),
+  round_seal_digest TEXT NOT NULL
+    CHECK (length(round_seal_digest) = 64)
+    CHECK (round_seal_digest NOT GLOB '*[^0-9a-f]*'),
+  reference_finalization_digest TEXT NOT NULL
+    CHECK (length(reference_finalization_digest) = 64)
+    CHECK (reference_finalization_digest NOT GLOB '*[^0-9a-f]*'),
+  obligation_id_digest TEXT NOT NULL
+    CHECK (length(obligation_id_digest) = 64)
+    CHECK (obligation_id_digest NOT GLOB '*[^0-9a-f]*'),
+  obligation_digest TEXT NOT NULL UNIQUE
+    CHECK (length(obligation_digest) = 64)
+    CHECK (obligation_digest NOT GLOB '*[^0-9a-f]*'),
   candidate_id TEXT NOT NULL,
   node_id TEXT NOT NULL,
   daily_selection_id TEXT,
@@ -1231,6 +1411,15 @@ CREATE TABLE IF NOT EXISTS reward_v2_allocator_receipts (
   funding_class TEXT NOT NULL
     CHECK (funding_class = 'STANDARD_10_PERCENT_AND_X_CAMPAIGN'),
   amount_base_units INTEGER NOT NULL CHECK (amount_base_units > 0),
+  planned_treasury_base_units INTEGER NOT NULL CHECK (planned_treasury_base_units >= 0),
+  planned_ecosystem_base_units INTEGER NOT NULL CHECK (planned_ecosystem_base_units >= 0),
+  planned_liquidity_base_units INTEGER NOT NULL CHECK (planned_liquidity_base_units >= 0),
+  faction_payout_digest TEXT
+    CHECK (faction_payout_digest IS NULL OR (
+      length(faction_payout_digest) = 64
+      AND faction_payout_digest NOT GLOB '*[^0-9a-f]*'
+    )),
+  faction_digest_present INTEGER NOT NULL CHECK (faction_digest_present = 0),
   premium_observation_id TEXT,
   eligibility_sequence INTEGER NOT NULL CHECK (eligibility_sequence > 0),
   candidate_snapshot_digest TEXT NOT NULL
@@ -1248,25 +1437,12 @@ CREATE TABLE IF NOT EXISTS reward_v2_allocator_receipts (
   disposition TEXT NOT NULL CHECK (disposition IN (
     'ADMITTED_RESERVED',
     'NULL_UNDERFUNDED',
-    'NULL_BLOCKED',
-    'NULL_MISSED',
-    'NULL_PARENT_UNFUNDED',
-    'NULL_CLAIM_EXPIRED',
-    'NULL_POLICY_HOLD',
-    'NULL_EVIDENCE_HELD',
-    'NULL_PREMIUM_PROOF_STALE',
-    'NULL_ALLOCATOR_ABSENT'
+    'NULL_BLOCKED'
   )),
-  null_reason TEXT CHECK (null_reason IS NULL OR null_reason IN (
-    'daily_unfulfilled_at_utc_boundary',
-    'global_allocator_absent',
-    'insufficient_full_tranche_capacity',
-    'waterfall_blocked_by_higher_priority',
-    'parent_tranche_unfunded',
-    'identity_or_evidence_held',
-    'premium_upgrade_proof_not_fresh',
-    'claim_window_expired',
-    'policy_hold'
+  allocator_reason TEXT NOT NULL CHECK (allocator_reason IN (
+    'NONE',
+    'EXACT_AMOUNT_NOT_AVAILABLE',
+    'HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED'
   )),
   decided_at_utc TEXT NOT NULL
     CHECK (length(decided_at_utc) = 24)
@@ -1281,19 +1457,27 @@ CREATE TABLE IF NOT EXISTS reward_v2_allocator_receipts (
     OR (tranche_kind = 'X_PREMIUM_UPGRADE_90' AND tranche_basis_points = 9000)
   ),
   CHECK (
-    (disposition = 'ADMITTED_RESERVED' AND null_reason IS NULL)
-    OR (disposition = 'NULL_UNDERFUNDED' AND null_reason = 'insufficient_full_tranche_capacity')
-    OR (disposition = 'NULL_BLOCKED' AND null_reason = 'waterfall_blocked_by_higher_priority')
-    OR (disposition = 'NULL_MISSED' AND null_reason = 'daily_unfulfilled_at_utc_boundary')
-    OR (disposition = 'NULL_PARENT_UNFUNDED' AND null_reason = 'parent_tranche_unfunded')
-    OR (disposition = 'NULL_CLAIM_EXPIRED' AND null_reason = 'claim_window_expired')
-    OR (disposition = 'NULL_POLICY_HOLD' AND null_reason = 'policy_hold')
-    OR (disposition = 'NULL_EVIDENCE_HELD' AND null_reason = 'identity_or_evidence_held')
-    OR (disposition = 'NULL_PREMIUM_PROOF_STALE' AND null_reason = 'premium_upgrade_proof_not_fresh')
-    OR (disposition = 'NULL_ALLOCATOR_ABSENT' AND null_reason = 'global_allocator_absent')
+    (disposition = 'ADMITTED_RESERVED'
+      AND allocator_reason = 'NONE'
+      AND planned_ecosystem_base_units <= amount_base_units
+      AND planned_liquidity_base_units <= amount_base_units - planned_ecosystem_base_units
+      AND planned_treasury_base_units = amount_base_units
+        - planned_ecosystem_base_units - planned_liquidity_base_units)
+    OR (disposition = 'NULL_UNDERFUNDED'
+      AND allocator_reason = 'EXACT_AMOUNT_NOT_AVAILABLE'
+      AND planned_treasury_base_units = 0
+      AND planned_ecosystem_base_units = 0
+      AND planned_liquidity_base_units = 0)
+    OR (disposition = 'NULL_BLOCKED'
+      AND allocator_reason = 'HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED'
+      AND planned_treasury_base_units = 0
+      AND planned_ecosystem_base_units = 0
+      AND planned_liquidity_base_units = 0)
   ),
+  CHECK (faction_payout_digest IS NULL),
   UNIQUE (candidate_id, tranche_kind),
   UNIQUE (allocator_receipt_id, candidate_id, tranche_kind),
+  UNIQUE (allocator_batch_id, allocation_index),
   FOREIGN KEY (
     allocator_batch_id,
     funding_round_id,
@@ -1327,13 +1511,68 @@ WHEN EXISTS (
   SELECT 1
   FROM reward_v2_allocator_receipts AS existing
   WHERE existing.allocator_receipt_id = NEW.allocator_receipt_id
+    OR existing.allocator_transcript_id = NEW.allocator_transcript_id
     OR existing.allocator_decision_digest = NEW.allocator_decision_digest
     OR existing.allocator_receipt_digest = NEW.allocator_receipt_digest
+    OR existing.obligation_digest = NEW.obligation_digest
+    OR (existing.allocator_batch_id = NEW.allocator_batch_id
+      AND existing.allocation_index = NEW.allocation_index)
     OR (existing.candidate_id = NEW.candidate_id
       AND existing.tranche_kind = NEW.tranche_kind)
 )
 BEGIN
   SELECT RAISE(ABORT, 'reward v2 allocator-receipt identity and tranche keys cannot be replaced');
+END;
+
+CREATE TRIGGER IF NOT EXISTS reward_v2_allocator_receipts_transcript_guard
+BEFORE INSERT ON reward_v2_allocator_receipts
+WHEN NOT EXISTS (
+  SELECT 1
+  FROM reward_v2_allocator_receipt_transcripts AS transcript
+  JOIN reward_v2_allocator_batches AS batch
+    ON batch.allocator_batch_id = transcript.allocator_batch_id
+  WHERE transcript.allocator_transcript_id = NEW.allocator_transcript_id
+    AND transcript.allocator_batch_id = NEW.allocator_batch_id
+    AND transcript.funding_round_id = NEW.funding_round_id
+    AND transcript.allocator_batch_digest = NEW.allocator_batch_digest
+    AND transcript.receipt_codec_magic = NEW.receipt_codec_magic
+    AND transcript.receipt_codec_version = NEW.receipt_codec_version
+    AND transcript.receipt_transcript_length = NEW.receipt_transcript_length
+    AND transcript.hash_suite = NEW.hash_suite
+    AND transcript.allocation_index = NEW.allocation_index
+    AND transcript.round_seal_digest = NEW.round_seal_digest
+    AND transcript.reference_finalization_digest = NEW.reference_finalization_digest
+    AND transcript.obligation_id_digest = NEW.obligation_id_digest
+    AND transcript.obligation_digest = NEW.obligation_digest
+    AND transcript.amount_base_units = NEW.amount_base_units
+    AND transcript.planned_treasury_base_units = NEW.planned_treasury_base_units
+    AND transcript.planned_ecosystem_base_units = NEW.planned_ecosystem_base_units
+    AND transcript.planned_liquidity_base_units = NEW.planned_liquidity_base_units
+    AND transcript.faction_payout_digest IS NEW.faction_payout_digest
+    AND transcript.faction_digest_present = NEW.faction_digest_present
+    AND transcript.allocator_decision_digest = NEW.allocator_decision_digest
+    AND transcript.allocator_receipt_digest = NEW.allocator_receipt_digest
+    AND transcript.disposition = NEW.disposition
+    AND transcript.allocator_reason = NEW.allocator_reason
+    AND transcript.decided_at_utc = NEW.decided_at_utc
+    AND (
+      SELECT count(*)
+      FROM reward_v2_allocator_receipt_transcripts AS member
+      WHERE member.allocator_batch_id = batch.allocator_batch_id
+    ) = batch.reference_receipt_count
+    AND (
+      SELECT min(member.allocation_index)
+      FROM reward_v2_allocator_receipt_transcripts AS member
+      WHERE member.allocator_batch_id = batch.allocator_batch_id
+    ) = 0
+    AND (
+      SELECT max(member.allocation_index)
+      FROM reward_v2_allocator_receipt_transcripts AS member
+      WHERE member.allocator_batch_id = batch.allocator_batch_id
+    ) = batch.reference_receipt_count - 1
+)
+BEGIN
+  SELECT RAISE(ABORT, 'X allocator receipt requires one exact transcript in a complete contiguous global batch');
 END;
 
 CREATE TRIGGER IF NOT EXISTS reward_v2_allocator_receipts_campaign_guard
@@ -1378,15 +1617,13 @@ WHEN NOT EXISTS (
     AND batch.allocator_batch_digest = NEW.allocator_batch_digest
     AND batch.candidate_snapshot_digest = NEW.candidate_snapshot_digest
     AND batch.lane_reservation_snapshot_digest = NEW.lane_reservation_snapshot_digest
+    AND batch.round_seal_digest = NEW.round_seal_digest
+    AND batch.reference_finalization_digest = NEW.reference_finalization_digest
+    AND NEW.allocation_index < batch.reference_receipt_count
     AND batch.decided_at_utc = NEW.decided_at_utc
-    AND (
-      (batch.batch_kind = 'GLOBAL_ALLOCATOR_V1' AND round.state = 'global_allocator_pending')
-      OR (batch.batch_kind = 'UTC_BOUNDARY_NULL_V1'
-        AND round.state = 'null'
-        AND NEW.disposition <> 'ADMITTED_RESERVED')
-    )
-    AND (NEW.disposition = 'ADMITTED_RESERVED'
-      OR unixepoch(NEW.decided_at_utc) >= unixepoch(round.miss_decidable_at_utc))
+    AND batch.batch_kind = 'GLOBAL_ALLOCATOR_V1'
+    AND round.state = 'global_allocator_pending'
+    AND NEW.decided_at_utc = round.opens_at_utc
     AND (
       (NEW.tranche_kind IN ('X_BASE_10', 'X_PREMIUM_FULL_100')
         AND round.opens_at_utc = candidate.original_funding_round_at_utc)
@@ -1396,8 +1633,7 @@ WHEN NOT EXISTS (
         AND unixepoch(round.opens_at_utc) =
           unixepoch(substr(premium_observation.accepted_at_utc, 1, 10) || 'T00:00:00.000Z') + 86400)
     )
-    AND (NEW.disposition <> 'ADMITTED_RESERVED'
-      OR unixepoch(NEW.decided_at_utc) < unixepoch(candidate.claim_expires_at_utc))
+    AND unixepoch(NEW.decided_at_utc) < unixepoch(candidate.claim_expires_at_utc)
 )
 BEGIN
   SELECT RAISE(ABORT, 'allocator receipt must bind its antecedent batch, exact round, seal, and claim window');
@@ -1565,7 +1801,7 @@ WHEN NOT EXISTS (
     AND receipt.allocator_receipt_digest = NEW.allocator_receipt_digest
     AND receipt.decided_at_utc = NEW.allocated_at_utc
     AND receipt.disposition = 'ADMITTED_RESERVED'
-    AND receipt.null_reason IS NULL
+    AND receipt.allocator_reason = 'NONE'
 )
 BEGIN
   SELECT RAISE(ABORT, 'allocator grant requires one antecedent admitted allocator receipt with exact matching fields');
@@ -1705,14 +1941,20 @@ CREATE TABLE IF NOT EXISTS reward_v2_null_receipts (
   null_receipt_id TEXT PRIMARY KEY
     CHECK (length(null_receipt_id) BETWEEN 8 AND 128)
     CHECK (null_receipt_id NOT GLOB '*[^A-Za-z0-9:_-]*'),
-  allocator_receipt_id TEXT NOT NULL UNIQUE
+  allocator_receipt_id TEXT UNIQUE
+    CHECK (allocator_receipt_id IS NULL OR (
+      length(allocator_receipt_id) BETWEEN 8 AND 128
+      AND allocator_receipt_id NOT GLOB '*[^A-Za-z0-9:_-]*'
+    ))
     REFERENCES reward_v2_allocator_receipts(allocator_receipt_id)
     ON UPDATE RESTRICT ON DELETE RESTRICT,
   funding_round_id TEXT NOT NULL REFERENCES reward_v2_funding_rounds(funding_round_id)
     ON UPDATE RESTRICT ON DELETE RESTRICT,
-  allocator_batch_digest TEXT NOT NULL
-    CHECK (length(allocator_batch_digest) = 64)
-    CHECK (allocator_batch_digest NOT GLOB '*[^0-9a-f]*'),
+  allocator_batch_digest TEXT
+    CHECK (allocator_batch_digest IS NULL OR (
+      length(allocator_batch_digest) = 64
+      AND allocator_batch_digest NOT GLOB '*[^0-9a-f]*'
+    )),
   candidate_id TEXT NOT NULL,
   node_id TEXT NOT NULL,
   tranche_kind TEXT NOT NULL CHECK (tranche_kind IN ('X_BASE_10', 'X_PREMIUM_FULL_100', 'X_PREMIUM_UPGRADE_90')),
@@ -1720,23 +1962,31 @@ CREATE TABLE IF NOT EXISTS reward_v2_null_receipts (
   funding_class TEXT NOT NULL CHECK (funding_class = 'STANDARD_10_PERCENT_AND_X_CAMPAIGN'),
   amount_base_units INTEGER NOT NULL CHECK (amount_base_units > 0),
   eligibility_sequence INTEGER NOT NULL CHECK (eligibility_sequence > 0),
-  candidate_snapshot_digest TEXT NOT NULL
-    CHECK (length(candidate_snapshot_digest) = 64)
-    CHECK (candidate_snapshot_digest NOT GLOB '*[^0-9a-f]*'),
-  lane_reservation_snapshot_digest TEXT NOT NULL
-    CHECK (length(lane_reservation_snapshot_digest) = 64)
-    CHECK (lane_reservation_snapshot_digest NOT GLOB '*[^0-9a-f]*'),
-  allocator_decision_digest TEXT NOT NULL UNIQUE
-    CHECK (length(allocator_decision_digest) = 64)
-    CHECK (allocator_decision_digest NOT GLOB '*[^0-9a-f]*'),
-  allocator_receipt_digest TEXT NOT NULL UNIQUE
-    CHECK (length(allocator_receipt_digest) = 64)
-    CHECK (allocator_receipt_digest NOT GLOB '*[^0-9a-f]*'),
+  candidate_snapshot_digest TEXT
+    CHECK (candidate_snapshot_digest IS NULL OR (
+      length(candidate_snapshot_digest) = 64
+      AND candidate_snapshot_digest NOT GLOB '*[^0-9a-f]*'
+    )),
+  lane_reservation_snapshot_digest TEXT
+    CHECK (lane_reservation_snapshot_digest IS NULL OR (
+      length(lane_reservation_snapshot_digest) = 64
+      AND lane_reservation_snapshot_digest NOT GLOB '*[^0-9a-f]*'
+    )),
+  allocator_decision_digest TEXT UNIQUE
+    CHECK (allocator_decision_digest IS NULL OR (
+      length(allocator_decision_digest) = 64
+      AND allocator_decision_digest NOT GLOB '*[^0-9a-f]*'
+    )),
+  allocator_receipt_digest TEXT UNIQUE
+    CHECK (allocator_receipt_digest IS NULL OR (
+      length(allocator_receipt_digest) = 64
+      AND allocator_receipt_digest NOT GLOB '*[^0-9a-f]*'
+    )),
   null_reason TEXT NOT NULL CHECK (null_reason IN (
     'daily_unfulfilled_at_utc_boundary',
     'global_allocator_absent',
-    'insufficient_full_tranche_capacity',
-    'waterfall_blocked_by_higher_priority',
+    'EXACT_AMOUNT_NOT_AVAILABLE',
+    'HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED',
     'parent_tranche_unfunded',
     'identity_or_evidence_held',
     'premium_upgrade_proof_not_fresh',
@@ -1756,6 +2006,29 @@ CREATE TABLE IF NOT EXISTS reward_v2_null_receipts (
     (tranche_kind = 'X_BASE_10' AND tranche_basis_points = 1000)
     OR (tranche_kind = 'X_PREMIUM_FULL_100' AND tranche_basis_points = 10000)
     OR (tranche_kind = 'X_PREMIUM_UPGRADE_90' AND tranche_basis_points = 9000)
+  ),
+  CHECK (
+    (null_reason IN (
+      'EXACT_AMOUNT_NOT_AVAILABLE',
+      'HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED'
+    )
+      AND allocator_receipt_id IS NOT NULL
+      AND allocator_batch_digest IS NOT NULL
+      AND candidate_snapshot_digest IS NOT NULL
+      AND lane_reservation_snapshot_digest IS NOT NULL
+      AND allocator_decision_digest IS NOT NULL
+      AND allocator_receipt_digest IS NOT NULL)
+    OR
+    (null_reason NOT IN (
+      'EXACT_AMOUNT_NOT_AVAILABLE',
+      'HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED'
+    )
+      AND allocator_receipt_id IS NULL
+      AND allocator_batch_digest IS NULL
+      AND candidate_snapshot_digest IS NULL
+      AND lane_reservation_snapshot_digest IS NULL
+      AND allocator_decision_digest IS NULL
+      AND allocator_receipt_digest IS NULL)
   ),
   UNIQUE (candidate_id, tranche_kind),
   FOREIGN KEY (candidate_id, node_id)
@@ -1782,7 +2055,11 @@ END;
 
 CREATE TRIGGER IF NOT EXISTS reward_v2_null_receipts_allocator_guard
 BEFORE INSERT ON reward_v2_null_receipts
-WHEN NOT EXISTS (
+WHEN NEW.null_reason IN (
+  'EXACT_AMOUNT_NOT_AVAILABLE',
+  'HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED'
+)
+AND NOT EXISTS (
   SELECT 1
   FROM reward_v2_allocator_receipts AS receipt
   WHERE receipt.allocator_receipt_id = NEW.allocator_receipt_id
@@ -1801,7 +2078,7 @@ WHEN NOT EXISTS (
     AND receipt.allocator_receipt_digest = NEW.allocator_receipt_digest
     AND receipt.decided_at_utc = NEW.nullified_at_utc
     AND receipt.disposition <> 'ADMITTED_RESERVED'
-    AND receipt.null_reason = NEW.null_reason
+    AND receipt.allocator_reason = NEW.null_reason
 )
 BEGIN
   SELECT RAISE(ABORT, 'null receipt requires one antecedent allocator receipt with exact matching fields');
@@ -1839,14 +2116,72 @@ END;
 
 CREATE TRIGGER IF NOT EXISTS reward_v2_null_receipts_boundary_guard
 BEFORE INSERT ON reward_v2_null_receipts
-WHEN NOT EXISTS (
+WHEN NEW.null_reason NOT IN (
+  'EXACT_AMOUNT_NOT_AVAILABLE',
+  'HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED'
+)
+AND NOT (
+  (NEW.null_reason = 'daily_unfulfilled_at_utc_boundary' AND EXISTS (
+    SELECT 1
+    FROM reward_v2_funding_rounds AS round
+    JOIN reward_v2_candidates AS candidate
+      ON candidate.candidate_id = NEW.candidate_id
+    WHERE round.funding_round_id = NEW.funding_round_id
+      AND candidate.node_id = NEW.node_id
+      AND NEW.nullified_at_utc = round.miss_decidable_at_utc
+      AND (
+        (round.state = 'null'
+          AND round.null_reason = 'daily_unfulfilled_at_utc_boundary'
+          AND round.nullified_at_utc = NEW.nullified_at_utc)
+        OR
+        (round.state IN ('sealed', 'global_allocator_pending', 'allocator_recorded', 'terminal')
+          AND round.sealed_at_utc = round.opens_at_utc)
+      )
+      AND NOT EXISTS (
+        SELECT 1
+        FROM reward_v2_allocator_receipts AS receipt
+        WHERE receipt.candidate_id = NEW.candidate_id
+          AND receipt.tranche_kind = NEW.tranche_kind
+      )
+  ))
+  OR (NEW.null_reason IN (
+    'global_allocator_absent',
+    'identity_or_evidence_held',
+    'premium_upgrade_proof_not_fresh',
+    'policy_hold'
+  ) AND EXISTS (
     SELECT 1
     FROM reward_v2_funding_rounds AS round
     WHERE round.funding_round_id = NEW.funding_round_id
+      AND round.state = 'null'
+      AND round.null_reason = NEW.null_reason
+      AND round.nullified_at_utc = NEW.nullified_at_utc
       AND unixepoch(NEW.nullified_at_utc) >= unixepoch(round.miss_decidable_at_utc)
-  )
+  ))
+  OR (NEW.null_reason = 'claim_window_expired' AND EXISTS (
+    SELECT 1
+    FROM reward_v2_candidates AS candidate
+    JOIN reward_v2_funding_rounds AS round
+      ON round.funding_round_id = NEW.funding_round_id
+    WHERE candidate.candidate_id = NEW.candidate_id
+      AND candidate.node_id = NEW.node_id
+      AND candidate.claim_expires_at_utc = NEW.nullified_at_utc
+      AND round.opens_at_utc = candidate.claim_expires_at_utc
+  ))
+  OR (NEW.null_reason = 'parent_tranche_unfunded'
+    AND NEW.tranche_kind = 'X_PREMIUM_UPGRADE_90'
+    AND EXISTS (
+      SELECT 1
+      FROM reward_v2_null_receipts AS base_null
+      WHERE base_null.candidate_id = NEW.candidate_id
+        AND base_null.node_id = NEW.node_id
+        AND base_null.tranche_kind = 'X_BASE_10'
+        AND base_null.funding_round_id = NEW.funding_round_id
+        AND base_null.nullified_at_utc = NEW.nullified_at_utc
+    ))
+)
 BEGIN
-  SELECT RAISE(ABORT, 'null receipt cannot precede its exact miss-decidable instant');
+  SELECT RAISE(ABORT, 'terminal null receipt requires its direct funding-round, expiry, or parent-null antecedent');
 END;
 
 CREATE TRIGGER IF NOT EXISTS reward_v2_null_receipts_no_update
@@ -1961,6 +2296,26 @@ WHEN NEW.state = 'allocator_recorded'
       AND batch.allocator_batch_digest = NEW.allocator_batch_digest
       AND batch.candidate_snapshot_digest = NEW.candidate_snapshot_digest
       AND batch.lane_reservation_snapshot_digest = NEW.lane_reservation_snapshot_digest
+      AND (
+        SELECT count(*)
+        FROM reward_v2_allocator_receipt_transcripts AS transcript
+        WHERE transcript.allocator_batch_id = batch.allocator_batch_id
+      ) = batch.reference_receipt_count
+      AND (
+        batch.reference_receipt_count = 0
+        OR (
+          (
+            SELECT min(transcript.allocation_index)
+            FROM reward_v2_allocator_receipt_transcripts AS transcript
+            WHERE transcript.allocator_batch_id = batch.allocator_batch_id
+          ) = 0
+          AND (
+            SELECT max(transcript.allocation_index)
+            FROM reward_v2_allocator_receipt_transcripts AS transcript
+            WHERE transcript.allocator_batch_id = batch.allocator_batch_id
+          ) = batch.reference_receipt_count - 1
+        )
+      )
       AND NOT EXISTS (
         SELECT 1
         FROM reward_v2_allocator_receipts AS receipt
@@ -1979,7 +2334,7 @@ WHEN NEW.state = 'allocator_recorded'
       )
   )
 BEGIN
-  SELECT RAISE(ABORT, 'allocator-recorded round requires its immutable antecedent batch and every materialized decision receipt');
+  SELECT RAISE(ABORT, 'allocator-recorded round requires its complete contiguous generic transcript set and every mapped X outcome');
 END;
 
 CREATE TRIGGER IF NOT EXISTS reward_v2_funding_rounds_terminal_guard

@@ -71,18 +71,44 @@ const required = [
   "lane_reservation_snapshot_digest TEXT",
   "miss_decidable_at_utc TEXT NOT NULL UNIQUE",
   "unixepoch(miss_decidable_at_utc) = unixepoch(opens_at_utc) + 1",
+  "miss_decidable_at_utc = substr(opens_at_utc, 1, 11) || '00:00:01.000Z'",
   "reward_v2_funding_rounds_initial_state_guard",
   "reward_v2_funding_rounds_terminal_immutable",
   "reward_v2_allocator_batches",
+  "batch_codec_magic TEXT NOT NULL CHECK (batch_codec_magic = 'IATB3RCF')",
+  "batch_transcript_length INTEGER NOT NULL CHECK (batch_transcript_length = 320)",
+  "policy_digest = '2054c881f9c7524acb965454286950445cd37c99f7485b45e2c787bcfb3617e2'",
+  "deployment_domain_digest = '4851da6cd96c8231e0d2b85b1f80b889e0e48f528b5aaa5056dcd8730e216224'",
+  "post_lane_ledger_digest TEXT NOT NULL",
+  "reference_receipt_set_digest TEXT NOT NULL",
+  "reference_outcome_digest TEXT NOT NULL",
+  "reference_finalization_digest TEXT NOT NULL UNIQUE",
+  "reference_receipt_count INTEGER NOT NULL",
+  "reward_v2_allocator_receipt_transcripts",
+  "receipt_codec_magic TEXT NOT NULL CHECK (receipt_codec_magic = 'IATB3ALR')",
+  "receipt_transcript_length INTEGER NOT NULL CHECK (receipt_transcript_length = 288)",
+  "UNIQUE (allocator_batch_id, allocation_index)",
+  "planned_treasury_base_units = amount_base_units",
+  "planned_liquidity_base_units <= amount_base_units - planned_ecosystem_base_units",
   "reward_v2_allocator_receipts",
+  "reward_v2_allocator_receipts_transcript_guard",
+  "reward_v2_funding_rounds_allocator_recorded_guard",
+  "batch.reference_receipt_count = 0",
+  "max(transcript.allocation_index)",
+  "complete contiguous generic transcript set and every mapped X outcome",
   "reward_v2_allocator_grants_receipt_guard",
   "reward_v2_null_receipts_allocator_guard",
   "antecedent admitted allocator receipt with exact matching fields",
-  "disposition = 'NULL_BLOCKED' AND null_reason = 'waterfall_blocked_by_higher_priority'",
+  "disposition = 'NULL_BLOCKED'",
+  "allocator_reason = 'HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED'",
+  "allocator_reason = 'EXACT_AMOUNT_NOT_AVAILABLE'",
+  "runtime_authentication_verified INTEGER NOT NULL",
 ];
 
 for (const snippet of required) check(sql.includes(snippet), `missing reward-ledger v2 control: ${snippet}`);
 check(!sql.includes("funding_cutoff_at_utc"), "a forbidden 24-hour funding eligibility cutoff remains in reward-ledger v2");
+check(!sql.includes("UTC_BOUNDARY_NULL_V1"), "boundary terminal events must not fabricate allocator batches");
+check(!sql.includes("authentication_evidence_digest"), "the inert codec mapping must not invent allocator authentication evidence");
 
 for (const forbiddenAction of ["bookmark", "view", "impression", "unattributable"]) {
   const enumFragment = sql.match(/action_type IN \(([^)]+)\)/u)?.[1] ?? "";
@@ -107,13 +133,38 @@ db.exec(sql);
 const foreignKeyFailures = db.prepare("PRAGMA foreign_key_check").all();
 check(foreignKeyFailures.length === 0, `fresh reward-ledger v2 schema has foreign-key failures: ${JSON.stringify(foreignKeyFailures)}`);
 
+const allocatorTableSql = [
+  "reward_v2_allocator_receipt_transcripts",
+  "reward_v2_allocator_receipts",
+].map((name) => db.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = ?").get(name)?.sql ?? "");
+for (const tableSql of allocatorTableSql) {
+  for (const disposition of ["ADMITTED_RESERVED", "NULL_UNDERFUNDED", "NULL_BLOCKED"]) {
+    check(tableSql.includes(`'${disposition}'`), `canonical allocator disposition is missing: ${disposition}`);
+  }
+  for (const forbiddenDisposition of [
+    "NULL_MISSED",
+    "NULL_PARENT_UNFUNDED",
+    "NULL_CLAIM_EXPIRED",
+    "NULL_POLICY_HOLD",
+    "NULL_EVIDENCE_HELD",
+    "NULL_PREMIUM_PROOF_STALE",
+    "NULL_ALLOCATOR_ABSENT",
+  ]) {
+    check(!tableSql.includes(`'${forbiddenDisposition}'`), `terminal event leaked into allocator dispositions: ${forbiddenDisposition}`);
+  }
+}
+check(
+  db.prepare("SELECT [notnull] AS required FROM pragma_table_info('reward_v2_null_receipts') WHERE name = 'allocator_receipt_id'").get()?.required === 0,
+  "direct boundary/expiry/parent nulls must not require a fabricated allocator receipt",
+);
+
 const guard = db.prepare("SELECT * FROM reward_v2_blueprint_guard WHERE singleton_id = 1").get();
 check(guard?.schema_version === 2, "reward-ledger v2 guard version drift");
 check(guard?.status === "BLUEPRINT_ONLY_NON_ACTIVATING", "reward-ledger v2 guard status drift");
 check(guard?.runtime_wiring_allowed === 0 && guard?.migration_path_present === 0 && guard?.global_allocator_present === 0, "reward-ledger v2 guard accidentally authorizes activation");
 
 const tables = db.prepare("SELECT name FROM pragma_table_list WHERE schema = 'main' AND name LIKE 'reward_v2_%' ORDER BY name").all();
-check(tables.length === 16, `expected exactly 16 isolated reward_v2 tables, found ${tables.length}`);
+check(tables.length === 17, `expected exactly 17 isolated reward_v2 tables, found ${tables.length}`);
 for (const { name } of tables) {
   const table = db.prepare("SELECT strict FROM pragma_table_list WHERE schema = 'main' AND name = ?").get(name);
   check(table?.strict === 1, `${name} is not a SQLite STRICT table`);
@@ -125,10 +176,11 @@ for (const { name } of tables) {
 }
 check(db.prepare("SELECT count(*) AS count FROM pragma_foreign_key_list('reward_v2_allocator_grants')").get().count >= 6, "allocator grants are missing strict receipt/identity/round/selection foreign keys");
 check(db.prepare("SELECT count(*) AS count FROM pragma_foreign_key_list('reward_v2_allocator_receipts')").get().count >= 8, "allocator receipts are missing strict batch/identity/evidence foreign keys");
+check(db.prepare("SELECT count(*) AS count FROM pragma_foreign_key_list('reward_v2_allocator_receipt_transcripts')").get().count >= 2, "generic allocator transcripts are missing batch/round foreign keys");
 check(db.prepare("SELECT count(*) AS count FROM pragma_index_list('reward_v2_daily_selections') WHERE [unique] = 1").get().count >= 5, "daily selection rank/candidate/score replay uniqueness is incomplete");
 check(db.prepare("SELECT count(*) AS count FROM pragma_index_list('reward_v2_candidates') WHERE [unique] = 1").get().count >= 3, "candidate replay/Genesis uniqueness is incomplete");
-check(db.prepare("SELECT count(*) AS count FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'reward_v2_%_no_delete'").get().count === 16, "append-only delete guards are incomplete");
-check(db.prepare("SELECT count(*) AS count FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'reward_v2_%_no_replace'").get().count === 16, "statement-level REPLACE guards are incomplete");
+check(db.prepare("SELECT count(*) AS count FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'reward_v2_%_no_delete'").get().count === 17, "append-only delete guards are incomplete");
+check(db.prepare("SELECT count(*) AS count FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'reward_v2_%_no_replace'").get().count === 17, "statement-level REPLACE guards are incomplete");
 check(db.prepare("SELECT count(*) AS count FROM sqlite_master WHERE type = 'table' AND name IN ('node_bindings', 'genesis_slots', 'reward_epochs', 'reward_claims')").get().count === 0, "active ledger tables leaked into the v2 blueprint database");
 db.close();
 

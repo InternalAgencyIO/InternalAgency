@@ -12,6 +12,8 @@ const schema = readFileSync(schemaUrl, "utf8");
 const digest = (value) => createHash("sha256").update(value).digest("hex");
 const DAILY_SELECTION_ALGORITHM = "IAT_DAILY_BUDGET_V1_ASCENDING_SHA256";
 const DAILY_SELECTION_DOMAIN = "IAT_DAILY_BUDGET_V1";
+const ALLOCATOR_POLICY_DIGEST = "2054c881f9c7524acb965454286950445cd37c99f7485b45e2c787bcfb3617e2";
+const REFERENCE_DEPLOYMENT_DOMAIN_DIGEST = "4851da6cd96c8231e0d2b85b1f80b889e0e48f528b5aaa5056dcd8730e216224";
 const base58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 const walletFor = (value) => [...createHash("sha256").update(`wallet:${value}`).digest()]
   .map((byte) => base58Alphabet[byte % base58Alphabet.length])
@@ -337,14 +339,17 @@ const addDailySelection = (db, candidate, round, epoch, {
 
 const ensureAllocatorBatch = (db, round, {
   suffix,
-  decidedAt,
-  kind = "GLOBAL_ALLOCATOR_V1",
+  decidedAt = round.opensAt,
+  referenceReceiptCount = 1,
 } = {}) => {
   const existing = db.prepare(`
     SELECT allocator_batch_id AS allocatorBatchId,
       allocator_batch_digest AS allocatorBatchDigest,
       candidate_snapshot_digest AS candidateSnapshotDigest,
       lane_reservation_snapshot_digest AS laneReservationSnapshotDigest,
+      round_seal_digest AS roundSealDigest,
+      reference_finalization_digest AS referenceFinalizationDigest,
+      reference_receipt_count AS referenceReceiptCount,
       decided_at_utc AS decidedAt
     FROM reward_v2_allocator_batches
     WHERE funding_round_id = ?
@@ -352,21 +357,34 @@ const ensureAllocatorBatch = (db, round, {
   if (existing) return existing;
   const allocatorBatchId = `allocator-batch-v2-${suffix}`;
   const allocatorBatchDigest = digest(`allocator-batch:${suffix}`);
+  const roundSealDigest = digest(`round-seal:${suffix}`);
+  const referenceFinalizationDigest = digest(`reference-finalization:${suffix}`);
   db.prepare(`
     INSERT INTO reward_v2_allocator_batches (
-      allocator_batch_id, funding_round_id, batch_kind, allocator_batch_digest,
-      candidate_snapshot_digest, lane_reservation_snapshot_digest,
-      authentication_evidence_digest, decided_at_utc, recorded_at_utc,
-      runtime_authentication_verified
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+      allocator_batch_id, funding_round_id, batch_kind,
+      batch_codec_magic, batch_codec_version, batch_transcript_length, hash_suite,
+      allocator_batch_digest, policy_digest, deployment_domain_digest,
+      round_seal_digest, candidate_snapshot_digest,
+      lane_reservation_snapshot_digest, post_lane_ledger_digest,
+      reference_receipt_set_digest, reference_outcome_digest,
+      reference_finalization_digest, reference_receipt_count,
+      decided_at_utc, recorded_at_utc, runtime_authentication_verified
+    ) VALUES (?, ?, 'GLOBAL_ALLOCATOR_V1', 'IATB3RCF', 1, 320, 'SHA256',
+      ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
   `).run(
     allocatorBatchId,
     round.roundId,
-    kind,
     allocatorBatchDigest,
+    ALLOCATOR_POLICY_DIGEST,
+    REFERENCE_DEPLOYMENT_DOMAIN_DIGEST,
+    roundSealDigest,
     round.snapshotDigest,
     round.laneSnapshotDigest,
-    digest(`allocator-authentication:${suffix}`),
+    digest(`post-lane-ledger:${suffix}`),
+    digest(`reference-receipt-set:${suffix}`),
+    digest(`reference-outcome:${suffix}`),
+    referenceFinalizationDigest,
+    referenceReceiptCount,
     decidedAt,
     decidedAt,
   );
@@ -375,8 +393,63 @@ const ensureAllocatorBatch = (db, round, {
     allocatorBatchDigest,
     candidateSnapshotDigest: round.snapshotDigest,
     laneReservationSnapshotDigest: round.laneSnapshotDigest,
+    roundSealDigest,
+    referenceFinalizationDigest,
+    referenceReceiptCount,
     decidedAt,
   };
+};
+
+const insertGenericTranscript = (db, batch, round, {
+  suffix,
+  allocationIndex,
+  amount = 1,
+  plannedTreasury = amount,
+  plannedEcosystem = 0,
+  plannedLiquidity = 0,
+  disposition = "ADMITTED_RESERVED",
+  allocatorReason = "NONE",
+} = {}) => {
+  const transcript = {
+    allocatorTranscriptId: `allocator-transcript-v2-${suffix}`,
+    obligationIdDigest: digest(`obligation-id:${suffix}`),
+    obligationDigest: digest(`obligation:${suffix}`),
+    decisionDigest: digest(`allocator-decision:${suffix}`),
+    receiptDigest: digest(`allocator-receipt:${suffix}`),
+  };
+  db.prepare(`
+    INSERT INTO reward_v2_allocator_receipt_transcripts (
+      allocator_transcript_id, allocator_batch_id, funding_round_id,
+      allocator_batch_digest, receipt_codec_magic, receipt_codec_version,
+      receipt_transcript_length, hash_suite, allocation_index,
+      round_seal_digest, reference_finalization_digest,
+      obligation_id_digest, obligation_digest, amount_base_units,
+      planned_treasury_base_units, planned_ecosystem_base_units,
+      planned_liquidity_base_units, faction_payout_digest,
+      faction_digest_present, allocator_decision_digest,
+      allocator_receipt_digest, disposition, allocator_reason, decided_at_utc
+    ) VALUES (?, ?, ?, ?, 'IATB3ALR', 1, 288, 'SHA256', ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, 0, ?, ?, ?, ?, ?)
+  `).run(
+    transcript.allocatorTranscriptId,
+    batch.allocatorBatchId,
+    round.roundId,
+    batch.allocatorBatchDigest,
+    allocationIndex,
+    batch.roundSealDigest,
+    batch.referenceFinalizationDigest,
+    transcript.obligationIdDigest,
+    transcript.obligationDigest,
+    amount,
+    plannedTreasury,
+    plannedEcosystem,
+    plannedLiquidity,
+    transcript.decisionDigest,
+    transcript.receiptDigest,
+    disposition,
+    allocatorReason,
+    batch.decidedAt,
+  );
+  return transcript;
 };
 
 const addAllocatorReceipt = (db, node, candidate, round, {
@@ -390,58 +463,128 @@ const addAllocatorReceipt = (db, node, candidate, round, {
       ? candidate.amount
       : candidate.amount - candidate.amount / 10,
   eligibilitySequence = tranche === "X_PREMIUM_UPGRADE_90" ? (premium?.sequence ?? 0) : candidate.baseSequence,
-  decidedAt = utcPlus(round.opensAt, 12 * 3_600_000),
+  decidedAt = round.opensAt,
   disposition = "ADMITTED_RESERVED",
-  nullReason = null,
-  batchKind = "GLOBAL_ALLOCATOR_V1",
+  allocatorReason = disposition === "ADMITTED_RESERVED"
+    ? "NONE"
+    : disposition === "NULL_UNDERFUNDED"
+      ? "EXACT_AMOUNT_NOT_AVAILABLE"
+      : "HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED",
+  allocationIndex = 0,
+  plannedTreasury = disposition === "ADMITTED_RESERVED" ? amount : 0,
+  plannedEcosystem = 0,
+  plannedLiquidity = 0,
 } = {}) => {
-  const batch = ensureAllocatorBatch(db, round, { suffix: `${suffix}-batch`, decidedAt, kind: batchKind });
-  const allocatorReceiptId = `allocator-receipt-v2-${suffix}`;
-  const decisionDigest = digest(`allocator-decision:${suffix}`);
-  const receiptDigest = digest(`allocator-receipt:${suffix}`);
-  db.prepare(`
-    INSERT INTO reward_v2_allocator_receipts (
-      allocator_receipt_id, allocator_batch_id, funding_round_id,
-      allocator_batch_digest, candidate_id, node_id, daily_selection_id,
-      genesis_acceptance_id, tranche_kind, tranche_basis_points, funding_class,
-      amount_base_units, premium_observation_id, eligibility_sequence,
-      candidate_snapshot_digest, lane_reservation_snapshot_digest,
-      allocator_decision_digest, allocator_receipt_digest, disposition,
-      null_reason, decided_at_utc, partial_payment_allowed, retry_allowed,
-      recycling_allowed
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-      'STANDARD_10_PERCENT_AND_X_CAMPAIGN', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0)
-  `).run(
-    allocatorReceiptId,
-    batch.allocatorBatchId,
-    round.roundId,
-    batch.allocatorBatchDigest,
-    candidate.candidateId,
-    node.nodeId,
-    selection?.dailySelectionId ?? null,
-    candidate.kind === "GENESIS" ? candidate.genesisAcceptanceId : null,
-    tranche,
-    tranche === "X_BASE_10" ? 1_000 : tranche === "X_PREMIUM_FULL_100" ? 10_000 : 9_000,
-    amount,
-    premium?.observationId ?? null,
-    eligibilitySequence,
-    batch.candidateSnapshotDigest,
-    batch.laneReservationSnapshotDigest,
-    decisionDigest,
-    receiptDigest,
-    disposition,
-    nullReason,
-    batch.decidedAt,
-  );
-  return {
-    allocatorReceiptId,
-    allocatorBatchDigest: batch.allocatorBatchDigest,
-    decisionDigest,
-    receiptDigest,
-    amount,
-    eligibilitySequence,
-    decidedAt: batch.decidedAt,
-  };
+  db.exec("SAVEPOINT add_allocator_receipt_v2");
+  try {
+    const batch = ensureAllocatorBatch(db, round, {
+      suffix: `${suffix}-batch`,
+      decidedAt,
+      referenceReceiptCount: 1,
+    });
+    const allocatorTranscriptId = `allocator-transcript-v2-${suffix}`;
+    const allocatorReceiptId = `allocator-receipt-v2-${suffix}`;
+    const decisionDigest = digest(`allocator-decision:${suffix}`);
+    const receiptDigest = digest(`allocator-receipt:${suffix}`);
+    const obligationIdDigest = digest(`obligation-id:${suffix}`);
+    const obligationDigest = digest(`obligation:${suffix}`);
+    db.prepare(`
+      INSERT INTO reward_v2_allocator_receipt_transcripts (
+        allocator_transcript_id, allocator_batch_id, funding_round_id,
+        allocator_batch_digest, receipt_codec_magic, receipt_codec_version,
+        receipt_transcript_length, hash_suite, allocation_index,
+        round_seal_digest, reference_finalization_digest,
+        obligation_id_digest, obligation_digest, amount_base_units,
+        planned_treasury_base_units, planned_ecosystem_base_units,
+        planned_liquidity_base_units, faction_payout_digest,
+        faction_digest_present, allocator_decision_digest,
+        allocator_receipt_digest, disposition, allocator_reason, decided_at_utc
+      ) VALUES (?, ?, ?, ?, 'IATB3ALR', 1, 288, 'SHA256', ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, 0, ?, ?, ?, ?, ?)
+    `).run(
+      allocatorTranscriptId,
+      batch.allocatorBatchId,
+      round.roundId,
+      batch.allocatorBatchDigest,
+      allocationIndex,
+      batch.roundSealDigest,
+      batch.referenceFinalizationDigest,
+      obligationIdDigest,
+      obligationDigest,
+      amount,
+      plannedTreasury,
+      plannedEcosystem,
+      plannedLiquidity,
+      decisionDigest,
+      receiptDigest,
+      disposition,
+      allocatorReason,
+      batch.decidedAt,
+    );
+    db.prepare(`
+      INSERT INTO reward_v2_allocator_receipts (
+        allocator_receipt_id, allocator_transcript_id, allocator_batch_id,
+        funding_round_id, allocator_batch_digest, receipt_codec_magic,
+        receipt_codec_version, receipt_transcript_length, hash_suite,
+        allocation_index, round_seal_digest, reference_finalization_digest,
+        obligation_id_digest, obligation_digest, candidate_id, node_id,
+        daily_selection_id, genesis_acceptance_id, tranche_kind,
+        tranche_basis_points, funding_class, amount_base_units,
+        planned_treasury_base_units, planned_ecosystem_base_units,
+        planned_liquidity_base_units, faction_payout_digest,
+        faction_digest_present, premium_observation_id, eligibility_sequence,
+        candidate_snapshot_digest, lane_reservation_snapshot_digest,
+        allocator_decision_digest, allocator_receipt_digest, disposition,
+        allocator_reason, decided_at_utc, partial_payment_allowed,
+        retry_allowed, recycling_allowed
+      ) VALUES (?, ?, ?, ?, ?, 'IATB3ALR', 1, 288, 'SHA256', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+        'STANDARD_10_PERCENT_AND_X_CAMPAIGN', ?, ?, ?, ?, NULL, 0, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0)
+    `).run(
+      allocatorReceiptId,
+      allocatorTranscriptId,
+      batch.allocatorBatchId,
+      round.roundId,
+      batch.allocatorBatchDigest,
+      allocationIndex,
+      batch.roundSealDigest,
+      batch.referenceFinalizationDigest,
+      obligationIdDigest,
+      obligationDigest,
+      candidate.candidateId,
+      node.nodeId,
+      selection?.dailySelectionId ?? null,
+      candidate.kind === "GENESIS" ? candidate.genesisAcceptanceId : null,
+      tranche,
+      tranche === "X_BASE_10" ? 1_000 : tranche === "X_PREMIUM_FULL_100" ? 10_000 : 9_000,
+      amount,
+      plannedTreasury,
+      plannedEcosystem,
+      plannedLiquidity,
+      premium?.observationId ?? null,
+      eligibilitySequence,
+      batch.candidateSnapshotDigest,
+      batch.laneReservationSnapshotDigest,
+      decisionDigest,
+      receiptDigest,
+      disposition,
+      allocatorReason,
+      batch.decidedAt,
+    );
+    db.exec("RELEASE add_allocator_receipt_v2");
+    return {
+      allocatorReceiptId,
+      allocatorTranscriptId,
+      allocatorBatchDigest: batch.allocatorBatchDigest,
+      decisionDigest,
+      receiptDigest,
+      amount,
+      eligibilitySequence,
+      decidedAt: batch.decidedAt,
+    };
+  } catch (error) {
+    db.exec("ROLLBACK TO add_allocator_receipt_v2");
+    db.exec("RELEASE add_allocator_receipt_v2");
+    throw error;
+  }
 };
 
 const addGrant = (db, node, candidate, round, {
@@ -455,7 +598,7 @@ const addGrant = (db, node, candidate, round, {
       ? candidate.amount
       : candidate.amount - candidate.amount / 10,
   eligibilitySequence = tranche === "X_PREMIUM_UPGRADE_90" ? (premium?.sequence ?? 0) : candidate.baseSequence,
-  allocatedAt = utcPlus(round.opensAt, 12 * 3_600_000),
+  allocatedAt = round.opensAt,
 } = {}) => {
   const receipt = addAllocatorReceipt(db, node, candidate, round, {
     suffix,
@@ -504,18 +647,34 @@ const addNullReceipt = (db, node, candidate, round, {
   premium = null,
   selection = null,
   disposition = "NULL_MISSED",
-  nullReason = "daily_unfulfilled_at_utc_boundary",
-  nullifiedAt = round.missDecidableAt,
+  nullReason = disposition === "NULL_UNDERFUNDED"
+    ? "EXACT_AMOUNT_NOT_AVAILABLE"
+    : disposition === "NULL_BLOCKED"
+      ? "HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED"
+      : "daily_unfulfilled_at_utc_boundary",
+  nullifiedAt = null,
 } = {}) => {
-  const allocatorReceipt = addAllocatorReceipt(db, node, candidate, round, {
-    suffix,
-    tranche,
-    premium,
-    selection,
-    decidedAt: nullifiedAt,
-    disposition,
-    nullReason,
-  });
+  const allocatorBacked = disposition === "NULL_UNDERFUNDED" || disposition === "NULL_BLOCKED";
+  const resolvedNullifiedAt = nullifiedAt ?? (allocatorBacked ? round.opensAt : round.missDecidableAt);
+  const amount = tranche === "X_BASE_10"
+    ? candidate.amount / 10
+    : tranche === "X_PREMIUM_FULL_100"
+      ? candidate.amount
+      : candidate.amount - candidate.amount / 10;
+  const eligibilitySequence = tranche === "X_PREMIUM_UPGRADE_90"
+    ? (premium?.sequence ?? candidate.baseSequence)
+    : candidate.baseSequence;
+  const allocatorReceipt = allocatorBacked
+    ? addAllocatorReceipt(db, node, candidate, round, {
+      suffix,
+      tranche,
+      premium,
+      selection,
+      decidedAt: resolvedNullifiedAt,
+      disposition,
+      allocatorReason: nullReason,
+    })
+    : null;
   const trancheBasisPoints = tranche === "X_BASE_10" ? 1_000 : tranche === "X_PREMIUM_FULL_100" ? 10_000 : 9_000;
   const nullReceiptId = `null-receipt-v2-${suffix}`;
   db.prepare(`
@@ -531,21 +690,21 @@ const addNullReceipt = (db, node, candidate, round, {
       'STANDARD_10_PERCENT_AND_X_CAMPAIGN', ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0)
   `).run(
     nullReceiptId,
-    allocatorReceipt.allocatorReceiptId,
+    allocatorReceipt?.allocatorReceiptId ?? null,
     round.roundId,
-    allocatorReceipt.allocatorBatchDigest,
+    allocatorReceipt?.allocatorBatchDigest ?? null,
     candidate.candidateId,
     node.nodeId,
     tranche,
     trancheBasisPoints,
-    allocatorReceipt.amount,
-    allocatorReceipt.eligibilitySequence,
-    round.snapshotDigest,
-    round.laneSnapshotDigest,
-    allocatorReceipt.decisionDigest,
-    allocatorReceipt.receiptDigest,
+    amount,
+    eligibilitySequence,
+    allocatorReceipt ? round.snapshotDigest : null,
+    allocatorReceipt ? round.laneSnapshotDigest : null,
+    allocatorReceipt?.decisionDigest ?? null,
+    allocatorReceipt?.receiptDigest ?? null,
     nullReason,
-    allocatorReceipt.decidedAt,
+    resolvedNullifiedAt,
     digest(`null-receipt:${suffix}`),
   );
   return { nullReceiptId, allocatorReceipt };
@@ -558,7 +717,7 @@ test("the schema is isolated, executable, STRICT, and permanently non-activating
   assert.equal(guard.runtime_wiring_allowed, 0);
   assert.equal(guard.migration_path_present, 0);
   assert.equal(guard.global_allocator_present, 0);
-  assert.equal(db.prepare("SELECT count(*) AS count FROM pragma_table_list WHERE name LIKE 'reward_v2_%' AND strict = 1").get().count, 16);
+  assert.equal(db.prepare("SELECT count(*) AS count FROM pragma_table_list WHERE name LIKE 'reward_v2_%' AND strict = 1").get().count, 17);
   assert.equal(db.prepare("PRAGMA recursive_triggers").get().recursive_triggers, 1);
   assert.equal(db.prepare("PRAGMA foreign_key_check").all().length, 0);
   assert.throws(() => db.prepare("UPDATE reward_v2_blueprint_guard SET runtime_wiring_allowed = 1").run(), /immutable|CHECK/);
@@ -570,7 +729,7 @@ test("INSERT OR REPLACE cannot bypass any append-only table even with recursive 
   const db = openLedger();
   assert.equal(
     db.prepare("SELECT count(*) AS count FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'reward_v2_%_no_replace'").get().count,
-    16,
+    17,
   );
   db.exec("PRAGMA recursive_triggers = OFF");
   db.prepare(`
@@ -890,6 +1049,84 @@ test("daily SHA-lottery selection attestations reject rank overflow, duplicate r
   db.close();
 });
 
+test("generic transcript completion blocks cross-class leapfrog and lane conservation is overflow-safe", () => {
+  const db = openLedger();
+  const node = addNode(db, { suffix: "481" });
+  const tier = addTier(db, node, { suffix: "481-none", tier: "None", observedAt: "2026-08-01T09:00:00.000Z" });
+  const action = addAction(db, node, { suffix: "481-action" });
+  const round = addFundingRound(db, "2026-08-02", "481-completion");
+  const candidate = addCandidate(db, node, tier, { suffix: "481-daily", action, originalRound: round });
+  sealFundingRound(db, round);
+  const epoch = addDailyEpoch(db, round, { suffix: "481-origin" });
+  const selection = addDailySelection(db, candidate, round, epoch, { suffix: "481" });
+  const batch = ensureAllocatorBatch(db, round, {
+    suffix: "481-completion",
+    referenceReceiptCount: 2,
+  });
+  assert.throws(
+    () => db.prepare(`
+      UPDATE reward_v2_funding_rounds
+      SET state = 'allocator_recorded', allocator_batch_digest = ?
+      WHERE funding_round_id = ?
+    `).run(batch.allocatorBatchDigest, round.roundId),
+    /complete contiguous generic transcript set/,
+  );
+  assert.equal(db.prepare("SELECT state FROM reward_v2_funding_rounds WHERE funding_round_id = ?").get(round.roundId).state, "global_allocator_pending");
+  assert.throws(
+    () => addAllocatorReceipt(db, node, candidate, round, {
+      suffix: "481-incomplete",
+      selection,
+      allocationIndex: 0,
+    }),
+    /complete contiguous global batch/,
+  );
+  assert.equal(db.prepare("SELECT count(*) AS count FROM reward_v2_allocator_receipt_transcripts WHERE allocator_batch_id = ?").get(batch.allocatorBatchId).count, 0);
+  insertGenericTranscript(db, batch, round, { suffix: "481-generic-prior", allocationIndex: 1 });
+  const mapped = addAllocatorReceipt(db, node, candidate, round, {
+    suffix: "481-mapped",
+    selection,
+    allocationIndex: 0,
+  });
+  assert.equal(db.prepare("SELECT count(*) AS count FROM reward_v2_allocator_receipt_transcripts WHERE allocator_batch_id = ?").get(batch.allocatorBatchId).count, 2);
+  assert.equal(db.prepare("SELECT allocator_transcript_id FROM reward_v2_allocator_receipts WHERE allocator_receipt_id = ?").get(mapped.allocatorReceiptId).allocator_transcript_id, mapped.allocatorTranscriptId);
+
+  const overflowRound = addFundingRound(db, "2026-08-03", "482-overflow");
+  sealFundingRound(db, overflowRound);
+  const overflowBatch = ensureAllocatorBatch(db, overflowRound, {
+    suffix: "482-overflow",
+    referenceReceiptCount: 1,
+  });
+  const maxI64 = 9_223_372_036_854_775_807n;
+  assert.throws(
+    () => insertGenericTranscript(db, overflowBatch, overflowRound, {
+      suffix: "482-overflow-invalid",
+      allocationIndex: 0,
+      amount: maxI64,
+      plannedTreasury: 0n,
+      plannedEcosystem: maxI64,
+      plannedLiquidity: 1n,
+    }),
+    /CHECK/,
+  );
+  assert.throws(
+    () => insertGenericTranscript(db, overflowBatch, overflowRound, {
+      suffix: "482-legacy-disposition",
+      allocationIndex: 0,
+      disposition: "NULL_MISSED",
+    }),
+    /CHECK/,
+  );
+  insertGenericTranscript(db, overflowBatch, overflowRound, {
+    suffix: "482-max-valid",
+    allocationIndex: 0,
+    amount: maxI64,
+    plannedTreasury: 0n,
+    plannedEcosystem: maxI64,
+    plannedLiquidity: 0n,
+  });
+  db.close();
+});
+
 test("base and later same-identity Premium upgrade are exact allocator-only atomic grants", () => {
   const db = openLedger();
   const node = addNode(db, { suffix: "501" });
@@ -930,7 +1167,7 @@ test("base and later same-identity Premium upgrade are exact allocator-only atom
       selection,
       allocatedAt: "2026-08-02T12:00:00.000Z",
     }),
-    /exact round|Premium-upgrade ancestry/,
+    /exact round|Premium-upgrade ancestry|generic allocator transcript keys/,
   );
 
   const bonus = addGrant(db, node, candidate, upgradeRound, {
@@ -995,6 +1232,18 @@ test("UTC boundary nulls, no-retry exclusion, full receipts, expiry, and no recy
     () => db.prepare(`
       INSERT INTO reward_v2_funding_rounds (
         funding_round_id, utc_day, opens_at_utc, miss_decidable_at_utc,
+        funding_class, state, created_at_utc
+      ) VALUES ('funding-v2-fractional-miss', '2026-07-30',
+        '2026-07-30T00:00:00.000Z', '2026-07-30T00:00:01.999Z',
+        'STANDARD_10_PERCENT_AND_X_CAMPAIGN', 'collecting',
+        '2026-07-29T00:00:00.000Z')
+    `).run(),
+    /CHECK/,
+  );
+  assert.throws(
+    () => db.prepare(`
+      INSERT INTO reward_v2_funding_rounds (
+        funding_round_id, utc_day, opens_at_utc, miss_decidable_at_utc,
         funding_class, state, sealed_at_utc, candidate_snapshot_digest,
         lane_reservation_snapshot_digest, allocator_batch_digest,
         created_at_utc
@@ -1031,19 +1280,43 @@ test("UTC boundary nulls, no-retry exclusion, full receipts, expiry, and no recy
   sealFundingRound(db, round);
   const epoch = addDailyEpoch(db, round, { suffix: "601-origin" });
   const selection = addDailySelection(db, candidate, round, epoch, { suffix: "601" });
-  db.exec("BEGIN IMMEDIATE");
   assert.throws(
-    () => addAllocatorReceipt(db, node, candidate, round, {
+    () => addNullReceipt(db, node, candidate, round, {
       suffix: "601-too-early",
       selection,
-      decidedAt: "2026-08-02T00:00:00.999Z",
-      disposition: "NULL_MISSED",
-      nullReason: "daily_unfulfilled_at_utc_boundary",
+      nullifiedAt: "2026-08-02T00:00:00.999Z",
     }),
-    /miss-decidable|exact round/,
+    /direct funding-round|miss-decidable|CHECK/,
   );
-  db.exec("ROLLBACK");
-  addNullReceipt(db, node, candidate, round, { suffix: "601-boundary", selection });
+  assert.throws(
+    () => db.prepare(`
+      INSERT INTO reward_v2_null_receipts (
+        null_receipt_id, allocator_receipt_id, funding_round_id,
+        allocator_batch_digest, candidate_id, node_id, tranche_kind,
+        tranche_basis_points, funding_class, amount_base_units,
+        eligibility_sequence, candidate_snapshot_digest,
+        lane_reservation_snapshot_digest, allocator_decision_digest,
+        allocator_receipt_digest, null_reason, nullified_at_utc,
+        null_receipt_digest, retry_allowed, recycling_allowed
+      ) VALUES ('null-receipt-v2-601-fake-allocator', NULL, ?, ?, ?, ?,
+        'X_BASE_10', 1000, 'STANDARD_10_PERCENT_AND_X_CAMPAIGN', ?, ?,
+        NULL, NULL, NULL, NULL, 'daily_unfulfilled_at_utc_boundary', ?, ?, 0, 0)
+    `).run(
+      round.roundId,
+      digest("601-fake-batch"),
+      candidate.candidateId,
+      node.nodeId,
+      candidate.amount / 10,
+      candidate.baseSequence,
+      round.missDecidableAt,
+      digest("601-fake-null"),
+    ),
+    /CHECK/,
+  );
+  const boundary = addNullReceipt(db, node, candidate, round, { suffix: "601-boundary", selection });
+  assert.equal(boundary.allocatorReceipt, null);
+  assert.equal(db.prepare("SELECT count(*) AS count FROM reward_v2_allocator_batches WHERE funding_round_id = ?").get(round.roundId).count, 0);
+  assert.equal(db.prepare("SELECT count(*) AS count FROM reward_v2_allocator_receipt_transcripts WHERE funding_round_id = ?").get(round.roundId).count, 0);
   assert.throws(
     () => addGrant(db, node, candidate, round, { suffix: "601-retry", selection }),
     /nulled tranche|cannot be replaced|tranche keys/,

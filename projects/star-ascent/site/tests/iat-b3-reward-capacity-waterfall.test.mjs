@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
+import { encodeBase58 } from "../engagement/solana-wallet-proof.mjs";
 import {
   CLAIM_EXPIRY_DAYS,
   REWARD_CAPACITY_POLICY,
@@ -28,6 +29,7 @@ import {
   orderCccCapacityCandidates,
   recordPremiumUpgrade,
   sealRewardCapacityRound,
+  validateXBoundRewardReferenceState,
 } from "../programs/iat_b3_reference/reward-capacity-waterfall.mjs";
 import {
   createDailyLawState,
@@ -66,6 +68,12 @@ const LOCKED_LAW = createDailyLawState({
   currentDecision: LOCKED_DECISION,
 });
 const hex = (value) => value.toString(16).padStart(64, "0");
+const walletFor = (value) => {
+  const bytes = Buffer.alloc(32);
+  bytes[0] = 1;
+  bytes.writeUInt32BE(value, 28);
+  return encodeBase58(bytes);
+};
 const canonicalize = (value) => Array.isArray(value)
   ? value.map(canonicalize)
   : (value && typeof value === "object"
@@ -86,7 +94,7 @@ function rewardInput(overrides = {}) {
     dailyLawState: OPEN_LAW,
     rewardId: hex(1),
     rewardSourceKind: "X_INTERACTION",
-    wallet: "wallet-one",
+    wallet: walletFor(1),
     xUserId: "9000000000000001",
     grossBaseUnits: 1_000n,
     epochClosedAtUnixSeconds: FUNDING_ROUND,
@@ -243,6 +251,15 @@ function admitRewardBase(reward, capacity = 1_000n) {
   };
 }
 
+function expectInvalidRewardState(reward, mutate, pattern = undefined) {
+  const candidate = structuredClone(reward);
+  mutate(candidate);
+  assert.throws(
+    () => validateXBoundRewardReferenceState(candidate),
+    pattern,
+  );
+}
+
 test("policy freezes non-activation, class/lane order, and the common three-kind basis-point model", () => {
   assert.deepEqual(REWARD_PRIORITY_CLASSES, [
     "CCC_AGENT",
@@ -359,6 +376,134 @@ test("Daily Law capability is checked before malformed reward, seal, allocation,
     () => applyXBoundFundingOutcome({ dailyLawState: LOCKED_LAW, reward: null, outcome: null }),
     /IAT_DAILY_LOCKDOWN/u,
   );
+  assert.throws(
+    () => recordPremiumUpgrade({ dailyLawState: LOCKED_LAW, reward: null }),
+    /IAT_DAILY_LOCKDOWN/u,
+  );
+  assert.throws(
+    () => claimReservedXBoundTranches({ dailyLawState: LOCKED_LAW, reward: null }),
+    /IAT_DAILY_LOCKDOWN/u,
+  );
+  assert.throws(
+    () => cleanupExpiredXBoundReward({ dailyLawState: LOCKED_LAW, reward: null }),
+    /IAT_DAILY_LOCKDOWN/u,
+  );
+  assert.throws(
+    () => applyXBoundMissedFundingOutcome({ dailyLawState: LOCKED_LAW, reward: null }),
+    /IAT_DAILY_LOCKDOWN/u,
+  );
+});
+
+test("strict X-bound state validation freezes exact keys and canonical immutable identities", () => {
+  const reward = createXBoundReward(rewardInput({ rewardId: hex(0xab) }));
+  const before = stateDigest(reward);
+  assert.equal(validateXBoundRewardReferenceState(reward), reward);
+  assert.equal(stateDigest(reward), before, "validation must be read-only");
+
+  expectInvalidRewardState(reward, (candidate) => { candidate.unrecognized = false; }, /KEY_SET/u);
+  expectInvalidRewardState(reward, (candidate) => { delete candidate.expiredCleanupRecorded; }, /KEY_SET/u);
+  expectInvalidRewardState(reward, (candidate) => { candidate.rewardId = candidate.rewardId.toUpperCase(); }, /CANONICAL_LOWERCASE/u);
+  expectInvalidRewardState(reward, (candidate) => { candidate.grossBaseUnits = candidate.grossBaseUnits.toString(); }, /STORED_AS_BIGINT/u);
+  expectInvalidRewardState(reward, (candidate) => { candidate.baseTranche.amount = Number(candidate.baseTranche.amount); }, /STORED_AS_BIGINT/u);
+  for (const xUserId of ["0", "01", "+1", "1.0", " 1", "1 ", "9".repeat(33)]) {
+    expectInvalidRewardState(reward, (candidate) => { candidate.xUserId = xUserId; }, /canonical positive decimal/u);
+  }
+  for (const wallet of ["wallet-one", encodeBase58(Buffer.alloc(31, 1)), encodeBase58(Buffer.alloc(33, 1))]) {
+    expectInvalidRewardState(reward, (candidate) => { candidate.wallet = wallet; }, /base58|32-byte/u);
+  }
+  expectInvalidRewardState(reward, (candidate) => { candidate.baseTranche.extra = 1; }, /TRANCHE_KEY_SET/u);
+  expectInvalidRewardState(reward, (candidate) => { delete candidate.baseTranche.status; }, /TRANCHE_KEY_SET/u);
+
+  const cccReward = createXBoundReward(rewardInput({
+    rewardId: hex(91),
+    rewardSourceKind: "CCC_AGENT",
+    qualifyingActivityStartSlot: 1n,
+    nodeActivationSlot: 2n,
+    qualificationPda: hex(91),
+  }));
+  expectInvalidRewardState(cccReward, (candidate) => { candidate.cccOrdering.extra = 1; }, /CCC_ORDERING_KEY_SET/u);
+  expectInvalidRewardState(cccReward, (candidate) => {
+    candidate.cccOrdering.qualificationPda = candidate.cccOrdering.qualificationPda.toUpperCase();
+  }, /CANONICAL_LOWERCASE/u);
+  expectInvalidRewardState(reward, (candidate) => {
+    candidate.cccOrdering = { qualifyingActivityStartSlot: 1n, nodeActivationSlot: 2n, qualificationPda: hex(1) };
+  }, /UNEXPECTED_X_REWARD_CCC_ORDERING/u);
+
+  const admitted = admitRewardBase(reward, 100n).reward;
+  expectInvalidRewardState(admitted, (candidate) => {
+    candidate.originalBaseAdmissionLineage.extra = "forbidden";
+  }, /BASE_ADMISSION_LINEAGE/u);
+  expectInvalidRewardState(admitted, (candidate) => {
+    candidate.originalBaseAdmissionLineage.referenceReceiptSha256 = "AB".repeat(32);
+  }, /CANONICAL_STORED_TYPES/u);
+});
+
+test("strict X-bound state validation enforces amount, origin, expiry, and legal tranche matrices", () => {
+  const nonPremium = createXBoundReward(rewardInput({ rewardId: hex(92) }));
+  expectInvalidRewardState(nonPremium, (candidate) => { candidate.priorityClass = "CORE"; }, /SOURCE_CLASS_BINDING/u);
+  expectInvalidRewardState(nonPremium, (candidate) => { candidate.grossBaseUnits = 1_010n; }, /10_90_SPLIT/u);
+  expectInvalidRewardState(nonPremium, (candidate) => { candidate.claimExpiresAtUnixSeconds += 1n; }, /30_DAY/u);
+  expectInvalidRewardState(nonPremium, (candidate) => { candidate.baseTranche.fundingRoundAtUnixSeconds += UTC_DAY_SECONDS; }, /10_90_SPLIT/u);
+  expectInvalidRewardState(nonPremium, (candidate) => { candidate.baseTranche.eligibleSequence += 1n; }, /10_90_SPLIT/u);
+  expectInvalidRewardState(nonPremium, (candidate) => { candidate.baseTranche.status = "LOCKED_PENDING_PREMIUM"; }, /TRANCHE_STATUS/u);
+  expectInvalidRewardState(nonPremium, (candidate) => { candidate.upgradeTranche.status = "NULL_PARENT_UNFUNDED"; }, /STATE_PAIR/u);
+  expectInvalidRewardState(nonPremium, (candidate) => { candidate.expiredCleanupRecorded = true; }, /ACTIVE_TRANCHE/u);
+  expectInvalidRewardState(nonPremium, (candidate) => {
+    candidate.baseTranche.status = "NULL_CLAIM_EXPIRED";
+    candidate.upgradeTranche.status = "NULL_CLAIM_EXPIRED";
+  }, /REQUIRES_CLEANUP_RECORD/u);
+  expectInvalidRewardState(nonPremium, (candidate) => { candidate.expiredCleanupRecorded = 1; }, /CANONICAL_BOOLEAN/u);
+
+  const failed = admitRewardBase(nonPremium, 99n).reward;
+  assert.equal(validateXBoundRewardReferenceState(failed), failed);
+  expectInvalidRewardState(failed, (candidate) => { candidate.upgradeTranche.status = "LOCKED_PENDING_PREMIUM"; }, /STATE_PAIR/u);
+
+  const cleaned = cleanupExpiredXBoundReward({
+    dailyLawState: OPEN_LAW,
+    reward: nonPremium,
+    nowUnixSeconds: nonPremium.claimExpiresAtUnixSeconds,
+  });
+  assert.equal(validateXBoundRewardReferenceState(cleaned), cleaned);
+
+  const premium = createXBoundReward(rewardInput({
+    rewardId: hex(93),
+    subscriptionType: "PremiumPlus",
+  }));
+  assert.equal(validateXBoundRewardReferenceState(premium), premium);
+  expectInvalidRewardState(premium, (candidate) => { candidate.premiumFullTranche.status = "NULL_PARENT_UNFUNDED"; }, /TRANCHE_STATUS/u);
+  expectInvalidRewardState(premium, (candidate) => { candidate.premiumProofAcceptedAtUnixSeconds += 1n; }, /ORIGIN_ACCEPTANCE/u);
+  expectInvalidRewardState(premium, (candidate) => { candidate.premiumProofAcceptedSequence += 1n; }, /ORIGIN_SEQUENCE/u);
+  expectInvalidRewardState(premium, (candidate) => { candidate.latestSubscriptionType = "Premium"; }, /REMAIN_INITIAL_TIER/u);
+  expectInvalidRewardState(premium, (candidate) => { candidate.originalBaseAdmissionLineage = {}; }, /BASE_ADMISSION_LINEAGE/u);
+});
+
+test("later Premium state binds proof time, exact next-midnight round, sequence, and base receipt lineage", () => {
+  const admitted = admitRewardBase(createXBoundReward(rewardInput({ rewardId: hex(94) })), 100n).reward;
+  const upgraded = recordPremiumUpgrade({
+    dailyLawState: OPEN_LAW,
+    reward: admitted,
+    wallet: admitted.wallet,
+    xUserId: admitted.xUserId,
+    subscriptionType: "Premium",
+    subscriptionObservedAtUnixSeconds: FUNDING_ROUND + 3_000n,
+    premiumProofAcceptedAtUnixSeconds: FUNDING_ROUND + 3_600n,
+    premiumProofAcceptedSequence: 50n,
+  });
+  assert.equal(upgraded.premiumProofAcceptedAtUnixSeconds, FUNDING_ROUND + 3_600n);
+  assert.equal(validateXBoundRewardReferenceState(upgraded), upgraded);
+
+  expectInvalidRewardState(upgraded, (candidate) => { candidate.premiumProofAcceptedAtUnixSeconds = null; });
+  expectInvalidRewardState(upgraded, (candidate) => {
+    candidate.premiumProofAcceptedAtUnixSeconds += UTC_DAY_SECONDS;
+    candidate.latestSubscriptionObservedAtUnixSeconds = candidate.premiumProofAcceptedAtUnixSeconds;
+  }, /UPGRADE_ROUND_OR_SEQUENCE/u);
+  expectInvalidRewardState(upgraded, (candidate) => { candidate.latestSubscriptionObservedAtUnixSeconds += 601n; }, /FUTURE_X_SUBSCRIPTION/u);
+  expectInvalidRewardState(upgraded, (candidate) => { candidate.premiumProofAcceptedSequence = 10n; }, /PROOF_SEQUENCE_MUST_FOLLOW/u);
+  expectInvalidRewardState(upgraded, (candidate) => { candidate.upgradeTranche.eligibleSequence = 51n; }, /UPGRADE_ROUND_OR_SEQUENCE/u);
+  expectInvalidRewardState(upgraded, (candidate) => { candidate.upgradeTranche.fundingRoundAtUnixSeconds += 1n; }, /00:00 UTC/u);
+  expectInvalidRewardState(upgraded, (candidate) => { candidate.originalBaseAdmissionLineage = null; }, /BASE_ADMISSION_LINEAGE/u);
+  expectInvalidRewardState(upgraded, (candidate) => { candidate.baseTranche.status = "PENDING_FUNDING"; }, /BASE_ADMISSION_LINEAGE_WITHOUT_BASE_ADMISSION|POST_PROOF/u);
+  expectInvalidRewardState(upgraded, (candidate) => { candidate.upgradeTranche.status = "LOCKED_PENDING_PREMIUM"; }, /POST_PROOF/u);
 });
 
 test("later Premium proof uses the next UTC round and cannot inherit an old queue position", () => {
@@ -717,13 +862,13 @@ test("faction follower rewards are admitted only through their sealed aggregate 
     rewardId: hex(61),
     rewardSourceKind: "FACTION_FOLLOWER",
     xUserId: "101",
-    wallet: "faction-wallet-1",
+    wallet: walletFor(61),
   }));
   const secondReward = createXBoundReward(rewardInput({
     rewardId: hex(62),
     rewardSourceKind: "FACTION_FOLLOWER",
     xUserId: "102",
-    wallet: "faction-wallet-2",
+    wallet: walletFor(62),
   }));
   const firstFragment = buildXBoundFundingObligation({ reward: firstReward, fundingRoundAtUnixSeconds: FUNDING_ROUND });
   const secondFragment = buildXBoundFundingObligation({ reward: secondReward, fundingRoundAtUnixSeconds: FUNDING_ROUND });

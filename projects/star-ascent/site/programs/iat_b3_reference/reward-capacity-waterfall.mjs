@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 
 import policy from "../../docs/b3/iat-b3-reward-capacity-waterfall.v1.json" with { type: "json" };
 import { selectUniformTiebreakOutcome } from "../../engagement/iat-v2-reference-engine.mjs";
+import { assertSolanaPublicKey } from "../../engagement/solana-wallet-proof.mjs";
 import { deriveAllocatorReceiptLineage } from "./reward-allocator-receipt-codec.mjs";
 import { assertDailyLawWriteAllowed } from "./daily-lockdown-consensus.mjs";
 
@@ -52,6 +53,94 @@ const X_BASE_ADMISSION_LINEAGE_SCHEMA = "iat-b3-x-base-admission-lineage/v1";
 const X_BASE_ADMISSION_LINEAGE_STATUS = "NON_ACTIVATING_UNAUTHENTICATED_REFERENCE_LINEAGE";
 const FACTION_FRAGMENT_KIND = "X_BOUND_FACTION_FRAGMENT";
 const FACTION_MANIFEST_KIND = "WEEKLY_FACTION_MANIFEST";
+const X_BOUND_REWARD_STATE_KEYS = Object.freeze([
+  "schema",
+  "rewardId",
+  "wallet",
+  "xUserId",
+  "rewardSourceKind",
+  "priorityClass",
+  "cccOrdering",
+  "grossBaseUnits",
+  "epochClosedAtUnixSeconds",
+  "claimExpiresAtUnixSeconds",
+  "activityQualificationSequence",
+  "nodeActivationSequence",
+  "initialSubscriptionType",
+  "latestSubscriptionType",
+  "latestSubscriptionObservedAtUnixSeconds",
+  "premiumProofAcceptedAtUnixSeconds",
+  "premiumProofAcceptedSequence",
+  "originalBaseAdmissionLineage",
+  "baseTranche",
+  "premiumFullTranche",
+  "upgradeTranche",
+  "expiredCleanupRecorded",
+]);
+const X_TRANCHE_KEYS = Object.freeze([
+  "kind",
+  "amount",
+  "fundingRoundAtUnixSeconds",
+  "eligibleSequence",
+  "status",
+]);
+const X_CCC_ORDERING_KEYS = Object.freeze([
+  "qualifyingActivityStartSlot",
+  "nodeActivationSlot",
+  "qualificationPda",
+]);
+const X_BASE_ADMISSION_LINEAGE_KEYS = Object.freeze([
+  "schema",
+  "status",
+  "rewardId",
+  "fundingRoundAtUnixSeconds",
+  "allocationIndex",
+  "referenceReceiptSha256",
+  "referenceFinalizationSha256",
+  "batchCommitmentSha256",
+  "binaryReceiptSha256",
+  "authenticated",
+]);
+const BASE_TRANCHE_STATUSES = new Set([
+  "PENDING_FUNDING",
+  "ADMITTED_RESERVED",
+  "CLAIMED",
+  "NULL_UNDERFUNDED",
+  "NULL_BLOCKED",
+  "NULL_MISSED",
+  "NULL_CLAIM_EXPIRED",
+]);
+const PREMIUM_FULL_TRANCHE_STATUSES = new Set(BASE_TRANCHE_STATUSES);
+const UPGRADE_TRANCHE_STATUSES = new Set([
+  "LOCKED_PENDING_PREMIUM",
+  "PENDING_FUNDING",
+  "ADMITTED_RESERVED",
+  "CLAIMED",
+  "NULL_UNDERFUNDED",
+  "NULL_BLOCKED",
+  "NULL_MISSED",
+  "NULL_PARENT_UNFUNDED",
+  "NULL_CLAIM_EXPIRED",
+]);
+const ACTIVE_AT_EXPIRY_STATUSES = new Set([
+  "LOCKED_PENDING_PREMIUM",
+  "PENDING_FUNDING",
+  "ADMITTED_RESERVED",
+]);
+const BASE_FUNDING_FAILURE_STATUSES = new Set([
+  "NULL_UNDERFUNDED",
+  "NULL_BLOCKED",
+  "NULL_MISSED",
+]);
+const UPGRADE_POST_PROOF_STATUSES = new Set([
+  "PENDING_FUNDING",
+  "ADMITTED_RESERVED",
+  "CLAIMED",
+  "NULL_UNDERFUNDED",
+  "NULL_BLOCKED",
+  "NULL_MISSED",
+  "NULL_CLAIM_EXPIRED",
+]);
 
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
@@ -445,10 +534,14 @@ function validateSubscriptionObservation({ subscriptionType, observedAt, evaluat
 }
 
 function validateRewardIdentity({ rewardId, wallet, xUserId }) {
-  if (!/^\d{1,32}$/u.test(xUserId ?? "")) throw new TypeError("xUserId must be an immutable numeric X ID");
+  if (typeof xUserId !== "string" || !/^[1-9]\d{0,31}$/u.test(xUserId)) {
+    throw new TypeError("xUserId must be a canonical positive decimal immutable X ID");
+  }
+  const normalizedWallet = asNonEmptyString(wallet, "wallet");
+  assertSolanaPublicKey(normalizedWallet);
   return {
     rewardId: asHex32(rewardId, "rewardId"),
-    wallet: asNonEmptyString(wallet, "wallet"),
+    wallet: normalizedWallet,
     xUserId,
   };
 }
@@ -511,6 +604,7 @@ export function createXBoundReward({
     initialSubscriptionType: subscriptionType,
     latestSubscriptionType: subscriptionType,
     latestSubscriptionObservedAtUnixSeconds: observed,
+    premiumProofAcceptedAtUnixSeconds: premium ? epochClose : null,
     premiumProofAcceptedSequence: premium ? originalEligibleSequence : null,
     originalBaseAdmissionLineage: null,
     baseTranche: premium
@@ -526,33 +620,34 @@ export function createXBoundReward({
   });
 }
 
-function assertTrancheShape(value, expectedKind) {
-  if (!isRecord(value) || value.kind !== expectedKind) throw new Error("INVALID_X_REWARD_TRANCHE");
-  asU64(value.amount, `${expectedKind}.amount`);
-  if (value.fundingRoundAtUnixSeconds !== null) assertUtcMidnight(value.fundingRoundAtUnixSeconds, `${expectedKind}.fundingRound`);
-  if (value.eligibleSequence !== null) asU64(value.eligibleSequence, `${expectedKind}.eligibleSequence`);
-  if (!["LOCKED_PENDING_PREMIUM", "PENDING_FUNDING", "ADMITTED_RESERVED", "CLAIMED", "NULL_UNDERFUNDED", "NULL_BLOCKED", "NULL_MISSED", "NULL_PARENT_UNFUNDED", "NULL_CLAIM_EXPIRED"].includes(value.status)) {
-    throw new Error("INVALID_X_REWARD_TRANCHE_STATUS");
+function assertTrancheShape(value, expectedKind, allowedStatuses) {
+  if (!hasExactKeys(value, X_TRANCHE_KEYS) || value.kind !== expectedKind) {
+    throw new Error("INVALID_X_REWARD_TRANCHE_KEY_SET_OR_KIND");
   }
+  if (typeof value.amount !== "bigint") throw new Error("X_REWARD_TRANCHE_AMOUNT_MUST_BE_STORED_AS_BIGINT");
+  if (asU64(value.amount, `${expectedKind}.amount`) === 0n) {
+    throw new Error("X_REWARD_TRANCHE_AMOUNT_MUST_BE_POSITIVE");
+  }
+  const roundIsNull = value.fundingRoundAtUnixSeconds === null;
+  const sequenceIsNull = value.eligibleSequence === null;
+  if (roundIsNull !== sequenceIsNull) throw new Error("X_REWARD_TRANCHE_ROUND_SEQUENCE_NULLABILITY_MISMATCH");
+  if (!roundIsNull) {
+    if (typeof value.fundingRoundAtUnixSeconds !== "bigint"
+      || typeof value.eligibleSequence !== "bigint") {
+      throw new Error("X_REWARD_TRANCHE_ROUND_AND_SEQUENCE_MUST_BE_STORED_AS_BIGINT");
+    }
+    assertUtcMidnight(value.fundingRoundAtUnixSeconds, `${expectedKind}.fundingRound`);
+    asU64(value.eligibleSequence, `${expectedKind}.eligibleSequence`);
+  }
+  if (!allowedStatuses.has(value.status)) throw new Error("INVALID_X_REWARD_TRANCHE_STATUS");
 }
 
-function assertOptionalTrancheShape(value, expectedKind) {
-  if (value !== null) assertTrancheShape(value, expectedKind);
+function assertOptionalTrancheShape(value, expectedKind, allowedStatuses) {
+  if (value !== null) assertTrancheShape(value, expectedKind, allowedStatuses);
 }
 
 function normalizeOriginalBaseAdmissionLineage(value, expectedRewardId) {
-  if (!hasExactKeys(value, [
-    "schema",
-    "status",
-    "rewardId",
-    "fundingRoundAtUnixSeconds",
-    "allocationIndex",
-    "referenceReceiptSha256",
-    "referenceFinalizationSha256",
-    "batchCommitmentSha256",
-    "binaryReceiptSha256",
-    "authenticated",
-  ])
+  if (!hasExactKeys(value, X_BASE_ADMISSION_LINEAGE_KEYS)
     || value.schema !== X_BASE_ADMISSION_LINEAGE_SCHEMA
     || value.status !== X_BASE_ADMISSION_LINEAGE_STATUS
     || value.authenticated !== false) {
@@ -585,6 +680,14 @@ function normalizeOriginalBaseAdmissionLineage(value, expectedRewardId) {
     ),
     authenticated: false,
   };
+  if (typeof value.fundingRoundAtUnixSeconds !== "bigint"
+    || normalized.rewardId !== value.rewardId
+    || normalized.referenceReceiptSha256 !== value.referenceReceiptSha256
+    || normalized.referenceFinalizationSha256 !== value.referenceFinalizationSha256
+    || normalized.batchCommitmentSha256 !== value.batchCommitmentSha256
+    || normalized.binaryReceiptSha256 !== value.binaryReceiptSha256) {
+    throw new Error("X_BASE_ADMISSION_LINEAGE_MUST_USE_CANONICAL_STORED_TYPES");
+  }
   if (!Number.isSafeInteger(normalized.allocationIndex)
     || normalized.allocationIndex < 0
     || normalized.allocationIndex > 0xffff_ffff) {
@@ -612,27 +715,67 @@ function createOriginalBaseAdmissionLineage({ reward, expected, outcome, roundSt
   }, reward.rewardId);
 }
 
-function assertRewardShape(reward) {
-  if (!isRecord(reward) || reward.schema !== "iat-b3-x-bound-reward/v1") throw new Error("INVALID_X_BOUND_REWARD");
-  validateRewardIdentity(reward);
+export function validateXBoundRewardReferenceState(reward) {
+  if (!hasExactKeys(reward, X_BOUND_REWARD_STATE_KEYS)
+    || reward.schema !== "iat-b3-x-bound-reward/v1") {
+    throw new Error("INVALID_X_BOUND_REWARD_KEY_SET_OR_SCHEMA");
+  }
+  const identity = validateRewardIdentity(reward);
+  if (identity.rewardId !== reward.rewardId) throw new Error("X_REWARD_ID_MUST_BE_CANONICAL_LOWERCASE_HEX");
   if (!X_REWARD_KINDS.has(reward.rewardSourceKind)
     || reward.priorityClass !== X_BOUND_SOURCE_PRIORITY[reward.rewardSourceKind]) {
     throw new Error("INVALID_X_REWARD_SOURCE_CLASS_BINDING");
   }
   if (CCC_CLASSES.has(reward.priorityClass)) {
-    if (!isRecord(reward.cccOrdering)) throw new Error("INVALID_X_REWARD_CCC_ORDERING");
+    if (!hasExactKeys(reward.cccOrdering, X_CCC_ORDERING_KEYS)) {
+      throw new Error("INVALID_X_REWARD_CCC_ORDERING_KEY_SET");
+    }
+    if (typeof reward.cccOrdering.qualifyingActivityStartSlot !== "bigint"
+      || typeof reward.cccOrdering.nodeActivationSlot !== "bigint") {
+      throw new Error("X_REWARD_CCC_SLOTS_MUST_BE_STORED_AS_BIGINT");
+    }
     asU64(reward.cccOrdering.qualifyingActivityStartSlot, "reward.cccOrdering.qualifyingActivityStartSlot");
     asU64(reward.cccOrdering.nodeActivationSlot, "reward.cccOrdering.nodeActivationSlot");
-    asHex32(reward.cccOrdering.qualificationPda, "reward.cccOrdering.qualificationPda");
+    if (asHex32(reward.cccOrdering.qualificationPda, "reward.cccOrdering.qualificationPda")
+      !== reward.cccOrdering.qualificationPda) {
+      throw new Error("X_REWARD_CCC_PDA_MUST_BE_CANONICAL_LOWERCASE_HEX");
+    }
   } else if (reward.cccOrdering !== null) throw new Error("UNEXPECTED_X_REWARD_CCC_ORDERING");
+  for (const [label, value] of [
+    ["grossBaseUnits", reward.grossBaseUnits],
+    ["epochClosedAtUnixSeconds", reward.epochClosedAtUnixSeconds],
+    ["claimExpiresAtUnixSeconds", reward.claimExpiresAtUnixSeconds],
+    ["activityQualificationSequence", reward.activityQualificationSequence],
+    ["nodeActivationSequence", reward.nodeActivationSequence],
+    ["latestSubscriptionObservedAtUnixSeconds", reward.latestSubscriptionObservedAtUnixSeconds],
+  ]) {
+    if (typeof value !== "bigint") throw new Error(`X_REWARD_${label.toUpperCase()}_MUST_BE_STORED_AS_BIGINT`);
+  }
+  if (reward.premiumProofAcceptedAtUnixSeconds !== null
+    && typeof reward.premiumProofAcceptedAtUnixSeconds !== "bigint") {
+    throw new Error("X_REWARD_PREMIUM_PROOF_ACCEPTED_AT_MUST_BE_STORED_AS_BIGINT_OR_NULL");
+  }
+  if (reward.premiumProofAcceptedSequence !== null
+    && typeof reward.premiumProofAcceptedSequence !== "bigint") {
+    throw new Error("X_REWARD_PREMIUM_PROOF_SEQUENCE_MUST_BE_STORED_AS_BIGINT_OR_NULL");
+  }
   const gross = asU64(reward.grossBaseUnits, "reward.grossBaseUnits");
+  if (gross === 0n || gross % 10n !== 0n) throw new Error("INVALID_X_REWARD_GROSS_AMOUNT");
   const epochClose = assertUtcMidnight(reward.epochClosedAtUnixSeconds, "reward.epochClosedAtUnixSeconds");
-  if (reward.claimExpiresAtUnixSeconds !== epochClose + CLAIM_EXPIRY_DAYS * UTC_DAY_SECONDS) throw new Error("INVALID_30_DAY_CLAIM_EXPIRY");
-  asU64(reward.activityQualificationSequence, "reward.activityQualificationSequence");
-  asU64(reward.nodeActivationSequence, "reward.nodeActivationSequence");
-  assertOptionalTrancheShape(reward.baseTranche, X_TRANCHE_KIND.BASE);
-  assertOptionalTrancheShape(reward.premiumFullTranche, X_TRANCHE_KIND.PREMIUM_FULL);
-  assertOptionalTrancheShape(reward.upgradeTranche, X_TRANCHE_KIND.UPGRADE);
+  const claimExpiry = asI64(reward.claimExpiresAtUnixSeconds, "reward.claimExpiresAtUnixSeconds");
+  if (claimExpiry !== epochClose + CLAIM_EXPIRY_DAYS * UTC_DAY_SECONDS) {
+    throw new Error("INVALID_30_DAY_CLAIM_EXPIRY");
+  }
+  const activitySequence = asU64(reward.activityQualificationSequence, "reward.activityQualificationSequence");
+  const nodeSequence = asU64(reward.nodeActivationSequence, "reward.nodeActivationSequence");
+  const originalEligibleSequence = activitySequence > nodeSequence ? activitySequence : nodeSequence;
+  assertOptionalTrancheShape(reward.baseTranche, X_TRANCHE_KIND.BASE, BASE_TRANCHE_STATUSES);
+  assertOptionalTrancheShape(
+    reward.premiumFullTranche,
+    X_TRANCHE_KIND.PREMIUM_FULL,
+    PREMIUM_FULL_TRANCHE_STATUSES,
+  );
+  assertOptionalTrancheShape(reward.upgradeTranche, X_TRANCHE_KIND.UPGRADE, UPGRADE_TRANCHE_STATUSES);
   const originalBaseAdmissionLineage = reward.originalBaseAdmissionLineage === null
     ? null
     : normalizeOriginalBaseAdmissionLineage(reward.originalBaseAdmissionLineage, reward.rewardId);
@@ -640,14 +783,50 @@ function assertRewardShape(reward) {
     && originalBaseAdmissionLineage.fundingRoundAtUnixSeconds !== epochClose) {
     throw new Error("X_BASE_ADMISSION_LINEAGE_ROUND_MISMATCH");
   }
+  if (typeof reward.expiredCleanupRecorded !== "boolean") {
+    throw new Error("X_EXPIRED_CLEANUP_RECORDED_MUST_BE_CANONICAL_BOOLEAN");
+  }
+  const storedTranches = [reward.baseTranche, reward.premiumFullTranche, reward.upgradeTranche]
+    .filter((value) => value !== null);
+  if (reward.expiredCleanupRecorded
+    && storedTranches.some(({ status }) => ACTIVE_AT_EXPIRY_STATUSES.has(status))) {
+    throw new Error("X_EXPIRED_CLEANUP_RECORDED_WITH_ACTIVE_TRANCHE");
+  }
+  if (!reward.expiredCleanupRecorded
+    && storedTranches.some(({ status }) => status === "NULL_CLAIM_EXPIRED")) {
+    throw new Error("X_CLAIM_EXPIRED_STATUS_REQUIRES_CLEANUP_RECORD");
+  }
+
   if (PREMIUM_TYPES.has(reward.initialSubscriptionType)) {
     if (reward.baseTranche !== null || reward.upgradeTranche !== null
       || reward.premiumFullTranche?.amount !== gross
-      || originalBaseAdmissionLineage !== null) throw new Error("INVALID_X_REWARD_PREMIUM_FULL_TRANCHE");
+      || reward.premiumFullTranche?.fundingRoundAtUnixSeconds !== epochClose
+      || reward.premiumFullTranche?.eligibleSequence !== originalEligibleSequence
+      || originalBaseAdmissionLineage !== null) {
+      throw new Error("INVALID_X_REWARD_PREMIUM_FULL_TRANCHE");
+    }
+    if (reward.latestSubscriptionType !== reward.initialSubscriptionType) {
+      throw new Error("PREMIUM_ORIGIN_TIER_MUST_REMAIN_INITIAL_TIER");
+    }
+    validateSubscriptionObservation({
+      subscriptionType: reward.latestSubscriptionType,
+      observedAt: reward.latestSubscriptionObservedAtUnixSeconds,
+      evaluatedAt: epochClose,
+    });
+    if (reward.premiumProofAcceptedSequence !== originalEligibleSequence) {
+      throw new Error("PREMIUM_ORIGIN_SEQUENCE_MUST_MATCH_ORIGINAL_ELIGIBILITY");
+    }
+    if (reward.premiumProofAcceptedAtUnixSeconds !== epochClose) {
+      throw new Error("PREMIUM_ORIGIN_ACCEPTANCE_MUST_EQUAL_QUALIFICATION_CLOSE");
+    }
   } else if (KNOWN_NON_PREMIUM_TYPES.has(reward.initialSubscriptionType)) {
     if (reward.premiumFullTranche !== null
       || reward.baseTranche?.amount !== gross / 10n
-      || reward.upgradeTranche?.amount !== gross - gross / 10n) throw new Error("INVALID_X_REWARD_10_90_SPLIT");
+      || reward.baseTranche?.fundingRoundAtUnixSeconds !== epochClose
+      || reward.baseTranche?.eligibleSequence !== originalEligibleSequence
+      || reward.upgradeTranche?.amount !== gross - gross / 10n) {
+      throw new Error("INVALID_X_REWARD_10_90_SPLIT");
+    }
     if (["ADMITTED_RESERVED", "CLAIMED"].includes(reward.baseTranche.status)
       && originalBaseAdmissionLineage === null) {
       throw new Error("X_BASE_ADMISSION_LINEAGE_REQUIRED");
@@ -656,9 +835,76 @@ function assertRewardShape(reward) {
       && !["ADMITTED_RESERVED", "CLAIMED", "NULL_CLAIM_EXPIRED"].includes(reward.baseTranche.status)) {
       throw new Error("X_BASE_ADMISSION_LINEAGE_WITHOUT_BASE_ADMISSION");
     }
-    if (!["LOCKED_PENDING_PREMIUM", "NULL_PARENT_UNFUNDED", "NULL_CLAIM_EXPIRED"].includes(reward.upgradeTranche.status)
-      && originalBaseAdmissionLineage === null) {
-      throw new Error("X_UPGRADE_REQUIRES_BASE_ADMISSION_LINEAGE");
+
+    if (KNOWN_NON_PREMIUM_TYPES.has(reward.latestSubscriptionType)) {
+      if (reward.latestSubscriptionType !== reward.initialSubscriptionType
+        || reward.premiumProofAcceptedAtUnixSeconds !== null
+        || reward.premiumProofAcceptedSequence !== null) {
+        throw new Error("NON_PREMIUM_STATE_HAS_NONCANONICAL_TIER_OR_PROOF_SEQUENCE");
+      }
+      validateSubscriptionObservation({
+        subscriptionType: reward.latestSubscriptionType,
+        observedAt: reward.latestSubscriptionObservedAtUnixSeconds,
+        evaluatedAt: epochClose,
+      });
+      if (reward.upgradeTranche.fundingRoundAtUnixSeconds !== null
+        || reward.upgradeTranche.eligibleSequence !== null) {
+        throw new Error("PREMIUM_LOCKED_UPGRADE_MUST_NOT_HAVE_ROUND_OR_SEQUENCE");
+      }
+      const legalProoflessPair = (
+        (["PENDING_FUNDING", "ADMITTED_RESERVED"].includes(reward.baseTranche.status)
+          && reward.upgradeTranche.status === "LOCKED_PENDING_PREMIUM")
+        || (reward.baseTranche.status === "CLAIMED"
+          && ["LOCKED_PENDING_PREMIUM", "NULL_CLAIM_EXPIRED"].includes(reward.upgradeTranche.status))
+        || (BASE_FUNDING_FAILURE_STATUSES.has(reward.baseTranche.status)
+          && reward.upgradeTranche.status === "NULL_PARENT_UNFUNDED")
+        || (reward.baseTranche.status === "NULL_CLAIM_EXPIRED"
+          && reward.upgradeTranche.status === "NULL_CLAIM_EXPIRED")
+      );
+      if (!legalProoflessPair) throw new Error("ILLEGAL_X_BASE_UPGRADE_TRANCHE_STATE_PAIR");
+    } else if (PREMIUM_TYPES.has(reward.latestSubscriptionType)) {
+      const observed = asI64(
+        reward.latestSubscriptionObservedAtUnixSeconds,
+        "reward.latestSubscriptionObservedAtUnixSeconds",
+      );
+      const acceptedAt = asI64(
+        reward.premiumProofAcceptedAtUnixSeconds,
+        "reward.premiumProofAcceptedAtUnixSeconds",
+      );
+      if (observed <= epochClose
+        || acceptedAt <= epochClose
+        || acceptedAt >= claimExpiry) {
+        throw new Error("PREMIUM_UPGRADE_OBSERVATION_OUTSIDE_ORIGINAL_CLAIM_WINDOW");
+      }
+      validateSubscriptionObservation({
+        subscriptionType: reward.latestSubscriptionType,
+        observedAt: observed,
+        evaluatedAt: acceptedAt,
+      });
+      const proofSequence = asU64(
+        reward.premiumProofAcceptedSequence,
+        "reward.premiumProofAcceptedSequence",
+      );
+      if (proofSequence <= activitySequence || proofSequence <= nodeSequence) {
+        throw new Error("PREMIUM_PROOF_SEQUENCE_MUST_FOLLOW_ORIGINAL_ELIGIBILITY");
+      }
+      if (originalBaseAdmissionLineage === null) throw new Error("X_UPGRADE_REQUIRES_BASE_ADMISSION_LINEAGE");
+      if (!["ADMITTED_RESERVED", "CLAIMED", "NULL_CLAIM_EXPIRED"].includes(reward.baseTranche.status)
+        || !UPGRADE_POST_PROOF_STATUSES.has(reward.upgradeTranche.status)) {
+        throw new Error("ILLEGAL_X_POST_PROOF_TRANCHE_STATE_PAIR");
+      }
+      const upgradeRound = assertUtcMidnight(
+        reward.upgradeTranche.fundingRoundAtUnixSeconds,
+        "reward.upgradeTranche.fundingRoundAtUnixSeconds",
+      );
+      if (upgradeRound <= epochClose
+        || upgradeRound >= claimExpiry
+        || upgradeRound !== nextUtcMidnight(acceptedAt)
+        || reward.upgradeTranche.eligibleSequence !== proofSequence) {
+        throw new Error("INVALID_X_PREMIUM_UPGRADE_ROUND_OR_SEQUENCE");
+      }
+    } else {
+      throw new Error("INVALID_X_REWARD_LATEST_SUBSCRIPTION_TYPE");
     }
   } else {
     throw new Error("INVALID_X_REWARD_INITIAL_SUBSCRIPTION_TYPE");
@@ -674,7 +920,7 @@ function effectiveTrancheStatus(reward, value, now) {
 }
 
 export function effectiveXBoundRewardStatus(reward, nowUnixSeconds) {
-  assertRewardShape(reward);
+  validateXBoundRewardReferenceState(reward);
   const now = asI64(nowUnixSeconds, "nowUnixSeconds");
   return Object.freeze({
     base: effectiveTrancheStatus(reward, reward.baseTranche, now),
@@ -694,7 +940,7 @@ export function recordPremiumUpgrade({
   premiumProofAcceptedSequence,
 }) {
   assertDailyLawWriteAllowed(dailyLawState);
-  assertRewardShape(reward);
+  validateXBoundRewardReferenceState(reward);
   const acceptedAt = asI64(premiumProofAcceptedAtUnixSeconds, "premiumProofAcceptedAtUnixSeconds");
   if (acceptedAt >= reward.claimExpiresAtUnixSeconds) throw new Error("ORIGINAL_CLAIM_EXPIRED");
   if (reward.baseTranche === null || !["ADMITTED_RESERVED", "CLAIMED"].includes(reward.baseTranche.status)) {
@@ -727,6 +973,7 @@ export function recordPremiumUpgrade({
     ...reward,
     latestSubscriptionType: subscriptionType,
     latestSubscriptionObservedAtUnixSeconds: observed,
+    premiumProofAcceptedAtUnixSeconds: acceptedAt,
     premiumProofAcceptedSequence: proofSequence,
     upgradeTranche: tranche(X_TRANCHE_KIND.UPGRADE, reward.upgradeTranche.amount, fundingRound, eligibleSequence, "PENDING_FUNDING"),
   });
@@ -746,7 +993,7 @@ function xFundingKindsForRound(reward, fundingRound) {
 }
 
 export function buildXBoundFundingObligation({ reward, fundingRoundAtUnixSeconds }) {
-  assertRewardShape(reward);
+  validateXBoundRewardReferenceState(reward);
   const fundingRound = assertUtcMidnight(fundingRoundAtUnixSeconds, "fundingRoundAtUnixSeconds");
   const due = xFundingKindsForRound(reward, fundingRound);
   if (due.length === 0) return null;
@@ -946,7 +1193,7 @@ export function applyXBoundFundingOutcome(input) {
     roundState,
     cccRandomnessReveal = null,
   } = input;
-  assertRewardShape(reward);
+  validateXBoundRewardReferenceState(reward);
   const expected = buildXBoundFundingObligation({ reward, fundingRoundAtUnixSeconds });
   if (!expected) throw new Error("NO_X_TRANCHE_DUE_IN_FUNDING_ROUND");
   const { outcome: validatedOutcome, receipt, allocationIndex } = validateFinalizedAllocatorOutcome({
@@ -997,7 +1244,7 @@ export function applyXBoundFundingOutcome(input) {
 
 export function claimReservedXBoundTranches({ dailyLawState, reward, trancheKinds, nowUnixSeconds }) {
   assertDailyLawWriteAllowed(dailyLawState);
-  assertRewardShape(reward);
+  validateXBoundRewardReferenceState(reward);
   const now = asI64(nowUnixSeconds, "nowUnixSeconds");
   if (now >= reward.claimExpiresAtUnixSeconds) throw new Error("ORIGINAL_CLAIM_EXPIRED");
   if (!Array.isArray(trancheKinds) || trancheKinds.length === 0 || new Set(trancheKinds).size !== trancheKinds.length) {
@@ -1022,7 +1269,7 @@ export function claimReservedXBoundTranches({ dailyLawState, reward, trancheKind
 
 export function cleanupExpiredXBoundReward({ dailyLawState, reward, nowUnixSeconds }) {
   assertDailyLawWriteAllowed(dailyLawState);
-  assertRewardShape(reward);
+  validateXBoundRewardReferenceState(reward);
   const now = asI64(nowUnixSeconds, "nowUnixSeconds");
   if (now < reward.claimExpiresAtUnixSeconds) throw new Error("ORIGINAL_CLAIM_NOT_EXPIRED");
   if (reward.expiredCleanupRecorded) return reward;
@@ -1666,7 +1913,7 @@ export function applyXBoundMissedFundingOutcome({
   nowUnixSeconds,
 }) {
   assertDailyLawWriteAllowed(dailyLawState);
-  assertRewardShape(reward);
+  validateXBoundRewardReferenceState(reward);
   const expected = buildXBoundFundingObligation({ reward, fundingRoundAtUnixSeconds });
   if (!expected) throw new Error("NO_X_TRANCHE_DUE_IN_FUNDING_ROUND");
   const missed = logicalMissedFundingOutcome(expected, { roundState, nowUnixSeconds });

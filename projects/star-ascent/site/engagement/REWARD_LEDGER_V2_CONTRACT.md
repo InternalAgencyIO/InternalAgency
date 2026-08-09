@@ -32,7 +32,8 @@ manufacture a later upgrade is rejected.
 `reward_v2_identity_tombstones` is permanent. Its globally unique X ID and
 wallet prevent delete/rebind/re-entry games. Node identity, tier observations,
 history, actions, candidates, Genesis acceptances, daily epochs and selections,
-allocator batches and decisions, grants, and receipts are append-only. Every
+allocator batches, generic indexed receipt transcripts, X decisions, grants,
+and receipts are append-only. Every
 table has a `BEFORE INSERT` conflict guard over its primary and unique
 identity/replay keys. These guards reject statement-level `INSERT OR REPLACE`
 deletion even if a connection turns `recursive_triggers` off; the schema also
@@ -149,8 +150,11 @@ produce a payable upgrade.
 
 All three tranches use the single class name
 `STANDARD_10_PERCENT_AND_X_CAMPAIGN`. This blueprint does not implement the
-larger CCC/faction/core waterfall, alter existing reservation priority, or make
-the class name an authorization to consume any active lane.
+larger CCC/faction/core waterfall or invent identities for those classes. It
+does persist every generic indexed transcript before mapping one standard-X
+receipt, so an X grant cannot leapfrog an absent higher-priority or
+same-class-earlier global decision. The class name never authorizes active-lane
+consumption.
 
 ## UTC funding rounds and expiry
 
@@ -169,9 +173,10 @@ global lane/reservation snapshot are immutable thereafter. Candidate insertion
 requires the round still be collecting, so no candidate or capacity may enter
 after the seal. There is no 24-hour eligibility window. An omitted or unsealed
 boundary obligation becomes decidably null at
-`00:00:01.000Z`; every null decision and receipt is rejected before that
-instant. A grant backed by a valid frozen seal may be recorded/executed later,
-but still before the candidate's claim expiry.
+`00:00:01.000Z`; a boundary-miss receipt binds that exact instant and is
+rejected earlier or later. It binds the funding round and candidate directly,
+without fabricating an allocator batch or receipt. A terminal payment may be
+recorded later, but still before the candidate's claim expiry.
 
 SQLite cannot authenticate wall-clock time supplied by an adapter. The future
 serialized writer must prove that candidate acceptance and seal persistence
@@ -189,42 +194,52 @@ expires exactly `2,592,000` seconds after its designated original funding
 round. The 30-day claim interval is half-open and payment at the exact expiry
 second is rejected.
 
-The only null reasons are:
+The only allocator decision/reason pairs are:
+
+- `ADMITTED_RESERVED / NONE`
+- `NULL_UNDERFUNDED / EXACT_AMOUNT_NOT_AVAILABLE`
+- `NULL_BLOCKED / HIGHER_PRIORITY_OR_EARLIER_OBLIGATION_UNDERFUNDED`
+
+Separate boundary or terminal null-event reasons are:
 
 - `daily_unfulfilled_at_utc_boundary`
 - `global_allocator_absent`
-- `insufficient_full_tranche_capacity`
-- `waterfall_blocked_by_higher_priority`
 - `parent_tranche_unfunded`
 - `identity_or_evidence_held`
 - `premium_upgrade_proof_not_fresh`
 - `claim_window_expired`
 - `policy_hold`
 
-Boundary-null receipts cannot be recorded before the exact miss-decidable
-instant. A null receipt and allocator grant are mutually exclusive for the
-same candidate and tranche. Allocator dispositions map one-to-one to their
+Boundary-null receipts can be recorded only at the exact miss-decidable
+instant. Expiry and parent-null events bind their direct candidate or
+parent-null antecedent and never mint allocator ancestry. A null receipt and
+allocator grant are mutually exclusive for the same candidate and tranche.
+Allocator dispositions map one-to-one to their
 reason, including first-head `NULL_UNDERFUNDED` versus later
 `NULL_BLOCKED`; callers cannot relabel a blocked tail as an independent capacity
 failure. Null is terminal: it cannot be retried or recycled.
 
 ## Atomicity, receipts, and replay
 
-Before a global allocator batch and its candidate/tranche receipt exist, a
+Before a global allocator batch and its complete generic transcript set exist, a
 candidate is nominal evidence only: it reserves no lane balance and creates no
 claim or debt. An allocator grant is valid only after an append-only
-`reward_v2_allocator_batches` row and append-only
+`reward_v2_allocator_batches` row, a contiguous `0..receipt_count-1` set in
+`reward_v2_allocator_receipt_transcripts`, and an append-only
 `reward_v2_allocator_receipts` row exist. Strict foreign keys and field-match
-triggers bind the batch, funding round, both frozen snapshots, Daily selection
-or Genesis acceptance, tranche, amount, eligibility sequence, decision digest,
-and receipt digest. A null receipt has the same antecedent and exact field
-binding. A grant or null row cannot mint its own unbound digest.
+triggers bind codec identity, binary batch digest, policy and unfrozen
+deployment domain, seal, candidate set, pre/post ledgers, ordered receipt set,
+outcome, finalization, allocation index, obligation, overflow-safe T/E/L plan,
+canonical reference-decision digest, binary receipt digest, and the X campaign
+evidence. Allocator-null receipts have the same exact antecedent. A grant or
+null row cannot mint its own unbound digest.
 Partial-payment, retry, and recycling flags are hard-coded false.
 
-The batch deliberately records `runtime_authentication_verified = 0`: this
-blueprint establishes database ancestry, not a signature-verification
-implementation. An authenticated global-allocator/boundary-monitor adapter and
-canonical batch-byte verifier remain mandatory before activation.
+The batch deliberately records `runtime_authentication_verified = 0` and has
+no caller-supplied authentication-evidence field. SQLite does not recompute
+SHA-256 over the 320-byte batch, 288-byte receipts, or canonical JSON
+decisions. An authenticated global-allocator/boundary-monitor adapter and
+canonical byte verifier remain mandatory before activation.
 
 Each funded tranche has at most one terminal receipt:
 
