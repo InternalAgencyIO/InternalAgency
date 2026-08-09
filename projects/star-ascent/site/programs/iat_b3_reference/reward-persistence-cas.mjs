@@ -457,7 +457,7 @@ export function createRewardCasCommit(input) {
   validateRewardCasHead(head);
   if (!ACCEPTED_OPERATIONS.has(operation)) throw new Error("UNKNOWN_REWARD_CAS_OPERATION");
   const sequence = head.commitSequence + 1n;
-  asStoredU64(sequence, "next CAS commit sequence");
+  asRevision(sequence, "next CAS commit sequence");
   const core = {
     schema: REWARD_CAS_COMMIT_SCHEMA,
     status: REWARD_CAS_STATUS,
@@ -648,7 +648,7 @@ export function prepareRewardRoundFinalizationCas(input) {
   });
 }
 
-function createRoundProofRecord({ prepared, commit, cccRandomnessReveal }) {
+export function createRewardCasRoundProofRecord({ prepared, commit, cccRandomnessReveal }) {
   const core = {
     schema: REWARD_ROUND_PROOF_SCHEMA,
     status: REWARD_CAS_STATUS,
@@ -669,7 +669,7 @@ function createRoundProofRecord({ prepared, commit, cccRandomnessReveal }) {
   });
 }
 
-function validateRoundProofRecord(record, roundRecord) {
+export function validateRewardCasRoundProofRecord(record, roundRecord) {
   if (!hasExactKeys(record, [
     "schema", "status", "fundingRoundAtUnixSeconds", "finalizedRoundStateSha256",
     "proofBundleSha256", "cccRandomnessReveal", "proofBundle", "commitSha256",
@@ -1048,7 +1048,7 @@ export function validateRewardCasSnapshot(snapshot) {
     if (proofsByRound.has(key)) throw new Error("DUPLICATE_REWARD_CAS_ROUND_PROOF");
     const round = entitiesByKey.get(entityKey(REWARD_CAS_ENTITY_KIND.ROUND, key));
     if (!round) throw new Error("REWARD_CAS_PROOF_ROUND_MISSING");
-    validateRoundProofRecord(proof, round);
+    validateRewardCasRoundProofRecord(proof, round);
     const consumption = consumptionsByRound.get(key);
     const batch = decodeAllocatorBatchCommitment(proof.proofBundle.batchBytes);
     if (!consumption
@@ -1192,7 +1192,7 @@ export function createInMemoryRewardPersistenceCas({ initialState, testOnlyFault
           dailyLawState,
         });
         const consumption = Object.freeze({ ...prepared.roundConsumption, commitSha256: commit.commitSha256 });
-        const proofRecord = createRoundProofRecord({
+        const proofRecord = createRewardCasRoundProofRecord({
           prepared,
           commit,
           cccRandomnessReveal: input.cccRandomnessReveal ?? null,

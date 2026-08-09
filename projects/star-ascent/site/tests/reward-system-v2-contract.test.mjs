@@ -57,6 +57,12 @@ const RECEIPT_CODEC_PATH = join(SITE, "programs", "iat_b3_reference", "reward-al
 const RECEIPT_BOUNDARY_PATH = join(SITE, "docs", "b3", "REWARD_ALLOCATOR_RECEIPT_BOUNDARY.md");
 const X_BOUND_STATE_INVARIANTS_PATH = join(SITE, "docs", "b3", "X_BOUND_REWARD_REFERENCE_STATE_INVARIANTS.md");
 const CAS_REFERENCE_PATH = join(SITE, "programs", "iat_b3_reference", "reward-persistence-cas.mjs");
+const CAS_SQLITE_REFERENCE_PATH = join(
+  SITE,
+  "programs",
+  "iat_b3_reference",
+  "reward-persistence-cas-sqlite.mjs",
+);
 const CAS_BOUNDARY_PATH = join(SITE, "docs", "b3", "REWARD_PERSISTENCE_CAS_REFERENCE.md");
 
 const offchainPolicy = JSON.parse(readFileSync(POLICY_PATH, "utf8"));
@@ -68,6 +74,7 @@ const receiptCodecSource = readFileSync(RECEIPT_CODEC_PATH, "utf8");
 const receiptBoundarySource = readFileSync(RECEIPT_BOUNDARY_PATH, "utf8");
 const xBoundStateInvariantsSource = readFileSync(X_BOUND_STATE_INVARIANTS_PATH, "utf8");
 const casReferenceSource = readFileSync(CAS_REFERENCE_PATH, "utf8");
+const casSqliteReferenceSource = readFileSync(CAS_SQLITE_REFERENCE_PATH, "utf8");
 const casBoundarySource = readFileSync(CAS_BOUNDARY_PATH, "utf8");
 
 const EXACT_TRANCHE_KINDS = ["X_BASE_10", "X_PREMIUM_FULL_100", "X_PREMIUM_UPGRADE_90"];
@@ -684,8 +691,19 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   assert.match(casReferenceSource, /validateRewardAllocatorProofBundle/u);
   assert.doesNotMatch(casReferenceSource, /node:sqlite|node:fs|fsync|AccountInfo|invoke\(/u);
   assert.match(casBoundarySource, /in-memory reference/iu);
-  assert.match(casBoundarySource, /no SQLite or\s+other file-backed adapter/iu);
+  assert.match(casBoundarySource, /accepts\s+only a file-backed database/iu);
   assert.match(casBoundarySource, /Mainnet activation remains blocked/iu);
+  assert.match(casSqliteReferenceSource, /HOST_ONLY_NON_ACTIVATING_DURABLE_REFERENCE/u);
+  assert.match(casSqliteReferenceSource, /BEGIN IMMEDIATE/u);
+  assert.match(casSqliteReferenceSource, /journal_mode = WAL/u);
+  assert.match(casSqliteReferenceSource, /synchronous = FULL/u);
+  assert.match(casSqliteReferenceSource, /trusted_schema = OFF/u);
+  assert.match(casSqliteReferenceSource, /CREATE TRIGGER/u);
+  assert.match(casSqliteReferenceSource, /FILE_BACKED_DATABASE_REQUIRED/u);
+  assert.doesNotMatch(casSqliteReferenceSource, /INSERT\s+OR\s+REPLACE|REPLACE\s+INTO|\bUPSERT\b/iu);
+  assert.doesNotMatch(casSqliteReferenceSource, /node:http|node:https|fetch\(|AccountInfo|invoke\(/u);
+  assert.match(casBoundarySource, /rollbackProtectionVerified` remains `false`/u);
+  assert.match(casBoundarySource, /No code in either reference may be treated as runtime wiring/u);
   assert.match(epochEngineSource, /const DAILY_HOLD = "HOLD_PENDING_GLOBAL_REWARD_WATERFALL"/u);
   assert.doesNotMatch(epochEngineSource, /reward-capacity-waterfall|reward-ledger\.v2/u);
   assert.match(capacityReferenceSource, /status: "NON_ACTIVATING_REFERENCE_RECEIPT"/u);

@@ -6,10 +6,12 @@ Runtime authentication verified: `false`
 Rollback protection verified: `false`
 Activation ready: `false`
 
-This document fixes the boundary of the in-memory compare-and-swap reference in
-`programs/iat_b3_reference/reward-persistence-cas.mjs`. It does not activate a
-reward path, authenticate an adapter, create an on-chain account codec, provide
-durable storage, or relax the immutable IAT-wide Daily Law.
+This document fixes the boundary of the in-memory reference implementation in
+`programs/iat_b3_reference/reward-persistence-cas.mjs` and its host-only durable
+SQLite compare-and-swap adapter in
+`programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs`.
+Neither activates a reward path, authenticates an upstream adapter, creates an
+on-chain account codec, or relaxes the immutable IAT-wide Daily Law.
 
 ## What the reference proves
 
@@ -101,16 +103,74 @@ by value. Post-commit getters recover the head, entity, commit, round-consumptio
 marker, exact proof record, and Premium attempt. Two stores with identical input
 snapshots and operations produce byte-for-byte equivalent results and heads.
 
+## Host-only SQLite durability boundary
+
+The optional SQLite store is a Node 24 `node:sqlite` reference adapter. It accepts
+only a file-backed database. It is not imported by application, worker, launch,
+Solana, migration, or production paths. A new empty database requires an explicit
+fixture state; an existing database must match the exact v1 schema and is never
+migrated in place.
+
+Every adapter connection requires and verifies foreign keys, recursive triggers,
+`trusted_schema=OFF`, WAL journal mode, and `synchronous=FULL`. Native extensions
+and double-quoted string literals are disabled, and SQLite defensive mode is
+enabled. The immutable metadata row binds the adapter/schema versions, reference
+deployment domain, schema-manifest digest, revision-zero entity-set digest, and
+the exact `false`/`HOLD` flags.
+
+The database is append-only:
+
+- `reward_cas_entity_versions` retains revision zero and every successor;
+- `reward_cas_commits` retains the complete commit chain;
+- `reward_cas_head_history` retains genesis and every subsequent head;
+- round-consumption, complete proof, and Premium-attempt tables retain one-shot
+  tombstones and evidence;
+- every table has `BEFORE UPDATE` and `BEFORE DELETE` abort triggers plus a
+  duplicate-insert trigger that prevents `REPLACE` from deleting an old row.
+
+Unsigned 64-bit revisions and commit sequences are stored as exact fixed-width
+big-endian eight-byte BLOBs, not SQLite signed integers. Their canonical decimal
+text and every indexed digest are independently compared with the decoded typed
+record during recovery.
+
+Every write validates Daily Law before inspecting the database, then uses
+`BEGIN IMMEDIATE`. Inside that transaction it revalidates the exact schema,
+metadata, SQLite integrity, foreign keys, full entity-version history, full
+commit/head chain, and bidirectional marker/proof completeness. Entity writes use
+an SQL predicate against the exact latest revision and state digest. The adapter
+then appends the marker, entity version or versions, proof where applicable,
+commit, and head; reconstructs the whole state again; and commits only if the
+complete reference validator accepts it. It never uses `UPDATE`, `DELETE`,
+UPSERT, or `REPLACE`.
+
+Reads and reopen validation run in one SQLite read transaction so a concurrent
+writer cannot create a torn entity/commit/head view. Recovery is intentionally
+strict and currently O(all entity versions + commits + retained proof bytes) in
+time and memory. Artifacts are returned as defensive decoded copies.
+
+Tests inject rollback failures after marker, first entity, proof, commit, and
+head writes; reopen always observes the exact prior snapshot. A child-process
+hard exit with an open WAL transaction also leaves no partial version. A separate
+post-commit lost-response fault proves that the durable marker/proof/commit/head
+can be recovered and an exact or alternate retry remains one-shot. Two open
+connections prove `BEGIN IMMEDIATE` contention and stale-ledger rejection.
+
+WAL and `synchronous=FULL` provide the SQLite crash-durability boundary only.
+The main database, `-wal`, and `-shm` sidecars are one live persistence unit and
+must never be copied independently while open. The adapter cannot detect an
+operator replacing that whole unit with an older, internally consistent copy.
+No value stored inside the same database can supply a monotonic external anchor.
+For that reason `rollbackProtectionVerified` remains `false`.
+
 ## Explicitly deferred production work
 
-This tranche intentionally stops at an in-memory reference. It has no SQLite or
-other file-backed adapter, transaction journal, fsync boundary, crash/reopen
-test, multi-process lock, authenticated upstream adapter, monotonic finalized
-chain source, or rollback-resistant durable head. Process termination loses the
-store. `rollbackProtectionVerified` therefore remains `false` everywhere.
+Mainnet activation remains blocked on authenticated Daily-Law ownership and
+address provenance, authenticated reward/source/tier/wallet inputs, canonical
+clock and finalized-chain provenance, deployment authority, process-level access
+control, an externally anchored monotonic head, production backup/restore policy,
+and an on-chain account/instruction contract. Runtime authentication remains
+`false`, rollback protection remains `false`, activation remains `false`, and
+Mainnet remains `HOLD` in every durable artifact.
 
-Mainnet activation remains blocked until a separately reviewed durable adapter
-proves database transaction atomicity, crash recovery, concurrency control,
-authenticated Daily-Law and reward inputs, canonical deployment identity, and
-rollback resistance. No code in this reference may be treated as runtime wiring
-or as permission to publish, reserve, pay, claim, or mint rewards.
+No code in either reference may be treated as runtime wiring or as permission to
+publish, reserve, pay, claim, transfer, or mint rewards.
