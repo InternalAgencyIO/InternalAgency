@@ -60,6 +60,11 @@ import {
   X_SOCIAL_EVIDENCE_READINESS_STATUS,
   X_SOCIAL_EVIDENCE_REFERENCE_CONTRACT,
 } from "../scripts/validate-iat-b3-x-social-evidence-provider-readiness.mjs";
+import {
+  RELEASE_DEPENDENCY_GRAPH_MAINNET_STATUS,
+  RELEASE_DEPENDENCY_GRAPH_STATUS,
+  validateReleaseDependencyGraphManifest,
+} from "../scripts/validate-iat-b3-release-dependency-graph.mjs";
 import { sha256CanonicalJson } from "../scripts/iat-v2-canonical-json.mjs";
 
 const SITE = fileURLToPath(new URL("../", import.meta.url));
@@ -119,6 +124,23 @@ const X_SOCIAL_EVIDENCE_VALIDATOR_PATH = join(
   "scripts",
   "validate-iat-b3-x-social-evidence-provider-readiness.mjs",
 );
+const RELEASE_DEPENDENCY_GRAPH_MANIFEST_PATH = join(
+  SITE,
+  "docs",
+  "b3",
+  "iat-b3-release-dependency-graph.v1.json",
+);
+const RELEASE_DEPENDENCY_GRAPH_BOUNDARY_PATH = join(
+  SITE,
+  "docs",
+  "b3",
+  "RELEASE_DEPENDENCY_GRAPH.md",
+);
+const RELEASE_DEPENDENCY_GRAPH_VALIDATOR_PATH = join(
+  SITE,
+  "scripts",
+  "validate-iat-b3-release-dependency-graph.mjs",
+);
 
 const offchainPolicy = JSON.parse(readFileSync(POLICY_PATH, "utf8"));
 const capacityPolicy = JSON.parse(readFileSync(CAPACITY_POLICY_PATH, "utf8"));
@@ -138,6 +160,17 @@ const providerReadinessValidatorSource = readFileSync(PROVIDER_READINESS_VALIDAT
 const xSocialEvidenceManifest = JSON.parse(readFileSync(X_SOCIAL_EVIDENCE_MANIFEST_PATH, "utf8"));
 const xSocialEvidenceBoundarySource = readFileSync(X_SOCIAL_EVIDENCE_BOUNDARY_PATH, "utf8");
 const xSocialEvidenceValidatorSource = readFileSync(X_SOCIAL_EVIDENCE_VALIDATOR_PATH, "utf8");
+const releaseDependencyGraphManifest = JSON.parse(
+  readFileSync(RELEASE_DEPENDENCY_GRAPH_MANIFEST_PATH, "utf8"),
+);
+const releaseDependencyGraphBoundarySource = readFileSync(
+  RELEASE_DEPENDENCY_GRAPH_BOUNDARY_PATH,
+  "utf8",
+);
+const releaseDependencyGraphValidatorSource = readFileSync(
+  RELEASE_DEPENDENCY_GRAPH_VALIDATOR_PATH,
+  "utf8",
+);
 
 const EXACT_TRANCHE_KINDS = ["X_BASE_10", "X_PREMIUM_FULL_100", "X_PREMIUM_UPGRADE_90"];
 const EXACT_TRANCHE_BASIS_POINTS = {
@@ -785,6 +818,27 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   assert.equal(xSocialEvidenceManifest.activationReady, false);
   assert.equal(xSocialEvidenceManifest.mainnetOrReleaseReady, false);
   assert.equal(xSocialEvidenceManifest.mainnetStatus, "HOLD");
+  const dependencyGraphResult = validateReleaseDependencyGraphManifest(
+    releaseDependencyGraphManifest,
+  );
+  assert.equal(
+    RELEASE_DEPENDENCY_GRAPH_STATUS,
+    "NONACTIVATING_STRUCTURAL_DEPENDENCY_REVIEW_PACKET",
+  );
+  assert.equal(RELEASE_DEPENDENCY_GRAPH_MAINNET_STATUS, "HOLD");
+  assert.equal(releaseDependencyGraphManifest.nodes.length, 28);
+  assert.equal(releaseDependencyGraphManifest.edges.length, 132);
+  assert.equal(dependencyGraphResult.valid, true);
+  assert.equal(dependencyGraphResult.dependencyGraphValid, true);
+  assert.equal(dependencyGraphResult.dependencyReviewPacketComplete, false);
+  assert.equal(dependencyGraphResult.productionDependencyReviewPacketComplete, false);
+  assert.equal(dependencyGraphResult.externalTruthVerified, false);
+  assert.equal(dependencyGraphResult.runtimeAuthenticationVerified, false);
+  assert.equal(dependencyGraphResult.rollbackProtectionVerified, false);
+  assert.equal(dependencyGraphResult.activationReady, false);
+  assert.equal(dependencyGraphResult.releaseAuthorizationVerified, false);
+  assert.equal(dependencyGraphResult.mainnetExecutionAuthorized, false);
+  assert.equal(dependencyGraphResult.mainnetStatus, "HOLD");
   assert.deepEqual(
     X_SOCIAL_EVIDENCE_REFERENCE_CONTRACT.recognizedSubscriptionTypes,
     offchainPolicy.identityModel.recognizedSubscriptionTypes,
@@ -863,6 +917,15 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   assert.match(xSocialEvidenceBoundarySource, /one biological human/iu);
   assert.match(xSocialEvidenceBoundarySource, /all operational truth flags remain false/iu);
   assert.match(xSocialEvidenceBoundarySource, /Premium-only V1 HOLD path/iu);
+  assert.match(releaseDependencyGraphBoundarySource, /28 exact ordered nodes/iu);
+  assert.match(releaseDependencyGraphBoundarySource, /132 exact ordered prerequisite edges/iu);
+  assert.match(releaseDependencyGraphBoundarySource, /not a pre-execution launch switch/iu);
+  assert.match(releaseDependencyGraphValidatorSource, /allNodesRequired: true/u);
+  assert.match(releaseDependencyGraphValidatorSource, /requiredLocaleCount: 50/u);
+  assert.doesNotMatch(
+    releaseDependencyGraphValidatorSource,
+    /node:http|node:https|fetch\(|AccountInfo|invoke\(|productionReady|mainnetReady/u,
+  );
   assert.match(epochEngineSource, /const DAILY_HOLD = "HOLD_PENDING_GLOBAL_REWARD_WATERFALL"/u);
   assert.doesNotMatch(epochEngineSource, /reward-capacity-waterfall|reward-ledger\.v2/u);
   assert.match(capacityReferenceSource, /status: "NON_ACTIVATING_REFERENCE_RECEIPT"/u);
@@ -898,7 +961,7 @@ test("the ledger and allocator remain static reference artifacts with no runtime
     join("programs", "iat_b3_vault"),
     join("programs", "iat_v2"),
   ];
-  const forbiddenRuntimeWiring = /iat_b3_reference|reward-capacity-waterfall|reward-ledger\.v2|reward_v2_|engagement[\\/]epoch-engine|engagement[\\/]reward-policy\.v1|x-social-evidence-provider-readiness/u;
+  const forbiddenRuntimeWiring = /iat_b3_reference|reward-capacity-waterfall|reward-ledger\.v2|reward_v2_|engagement[\\/]epoch-engine|engagement[\\/]reward-policy\.v1|x-social-evidence-provider-readiness|release-dependency-graph/u;
   for (const root of runtimeRoots) {
     const runtimeRoot = join(SITE, root);
     if (!existsSync(runtimeRoot)) continue;
