@@ -4,7 +4,7 @@ Status: **EXACT SOURCE INVENTORY / MAINNET BLOCKING GAP**
 
 Scope: the executable Rust entrypoints in `programs/iat_b3_law` and
 `programs/iat_v2`, plus the host-only `programs/iat_b3_economy` transition
-library, as of 2026-08-08. This is a source-reachability audit, not a claim that
+library, as of 2026-08-09. This is a source-reachability audit, not a claim that
 an undeployed path has executed on-chain.
 
 ## Result
@@ -32,7 +32,8 @@ and internal pure `expire_round`, `close_position`, `settle_round`, and
 `PRE_LIFECYCLE_ONLY`, plus the `prepare_open_position` validation, provisional
 reservation, and transfer-intent kernel and the
 `prepare_withdraw_position_principal` maturity, stake-ledger, and transfer-
-intent kernel staged as `PRE_TOKEN_CPI_ONLY`. Its
+intent kernel and the `prepare_settle_position_week` reward/reservation and
+ordered-transfer-intent kernel staged as `PRE_TOKEN_CPI_ONLY`. Its
 manifest is `lib`-only and it has no Solana entrypoint or public dispatcher,
 account lifecycle, token CPI, or network access. Neither
 the JavaScript specifications nor these pure Rust slices may be counted as
@@ -91,9 +92,10 @@ validation, reward reservation, and by-value state construction are present.
 and by-value eligibility construction are present. `prepare_open_position` is
 the tenth host kernel, but stops immediately before the token CPI.
 `prepare_withdraw_position_principal` is the eleventh host kernel and stops at
-the same pre-token-CPI boundary. All four
+the same pre-token-CPI boundary. `prepare_settle_position_week` is the twelfth
+host kernel and stops before the first reward transfer. All four
 Genesis kernels and `set_eligibility` are `PRE_LIFECYCLE_ONLY`;
-both prepare kernels are `PRE_TOKEN_CPI_ONLY`. All have no public exposure.
+all three prepare kernels are `PRE_TOKEN_CPI_ONLY`. All have no public exposure.
 Every production wrapper requires the opaque canonical Daily Law capability. The
 three round-related CCC wrappers then preserve the immutable CCC-disabled
 Genesis boundary before inspecting caller-supplied round, instruction-trace, or
@@ -192,6 +194,34 @@ permissionless caller semantics: the caller is a signer but need not be the
 position owner, while the token destination must still belong to the recorded
 owner. The slice is `PRE_TOKEN_CPI_ONLY`, handler-incomplete, and has no public
 exposure.
+
+The `prepare_settle_position_week` kernel preserves the exact retained V2 body
+through reservation consumption: active config, open position, destination mint
+then recorded owner, validator-Clock week, term subtraction/bound, settlement-bit
+construction, duplicate rejection, standard-round omission or immutable CCC-
+inactive rejection, floor-delta weekly reward, and treasury-first then ecosystem
+then liquidity reservation consumption. The production wrapper returns
+`CccDlcNotActive` for every non-standard role before the otherwise dormant round-
+required/config/week/snapshot/status checks. A private differential seam exercises
+those retained dormant branches without changing the compile-time false
+production constant: a settled selected agency is paused, a non-selected agency
+receives the full stored-rate reward, and an expired-neutral round receives
+`floor(full * (N - 1) / N)`.
+
+Success returns only transaction-local lane and position-reservation copies plus
+three transfer intents in treasury, ecosystem, liquidity order, leaving position
+paid and settlement bits unchanged. A zero split is
+an intent that the adapter must skip, matching V2's `transfer_from_vault` early
+return. The returned position deliberately keeps `paid` and `settled_mask`
+unchanged. V2 performs `position.paid.checked_add(amount)` and sets the bit only
+after every nonzero CPI succeeds; moving that overflow check into preflight would
+change CPI-error precedence. The slice performs no CPI, hook-account expansion,
+post-CPI finalization, serialization, or persistence. It is
+`PRE_TOKEN_CPI_ONLY`, handler-incomplete, and has no public exposure. Differential
+and adversarial vectors use the actual V2 `Position`, `LaneVault`, `Round`, and
+policy functions and cover stacked errors, bit/rate/ledger arithmetic, zero-
+amount reconciliation, CCC inactivity, dormant terminal round modes, and the
+three-lane spill order.
 
 Exact parity exposes a Mainnet-blocking denial: V2 requires the stake-vault
 token amount to equal tracked principal. An unsolicited 1-base-unit donation to
@@ -311,6 +341,17 @@ transfer. Only after the CPI succeeds may its post-CPI finalizer
 checked-subtract tracked principal and mark the position returned. A
 local-validator failure at the hook, token CPI, or finalizer must prove the
 transfer and both state writes roll back atomically.
+For `settle_position_week`, the adapter must preserve V2's arbitrary-signer
+caller and owner-bound destination, authenticate the config/position/optional-
+round/mint/vault-authority/lane/vault accounts, and preserve the exact account
+constraint boundary before invoking the pure preflight. It must execute only
+nonzero hooked Token-2022 transfers in treasury, ecosystem, liquidity order via
+`add_extra_accounts_for_execute_cpi`. Only after all transfers succeed may a
+post-CPI finalizer checked-add the total paid and set the settlement bit, then
+persist the provisional lane and position reservation values. It must not
+prevalidate a later source vault in a way that masks an earlier CPI failure, and
+a disposable local validator must prove that every hook, first/second/third
+transfer, and post-CPI overflow failure rolls back all token and ledger changes.
 
 That adapter also has an unresolved non-circular bootstrap requirement. If the
 combined `finalize_day` plus core-cap reconciliation path requires an already

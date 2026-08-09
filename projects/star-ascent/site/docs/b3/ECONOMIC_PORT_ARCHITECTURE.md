@@ -282,13 +282,17 @@ permanently close after the committed set is exhausted.
     ledger validation and transfer intent here. It must return unchanged config
     and position snapshots, and must not decrement tracked principal, mark the
     position returned, invoke a program, or persist state.
+    Add only `prepare_settle_position_week` through V2's ordered reservation
+    consumption and stop before its first nonzero reward transfer. It must return
+    provisional lane/reservation copies and treasury, ecosystem, liquidity
+    transfer intents, while leaving position paid and settlement bits unchanged.
 5. Port the eight account-creating paths with manual post-gate System Program
    CPIs and prove locked/unfinalized calls perform no successful CPI or state
    change. The existing `initialize_config`, `initialize_lane_vault`,
    `initialize_stake_vault`, `activate`, and `set_eligibility`
-   `PRE_LIFECYCLE_ONLY` kernels and the `prepare_open_position`
-   `PRE_TOKEN_CPI_ONLY` kernel are not completion of this step and must not be
-   exposed until the corresponding lifecycle adapters exist.
+   `PRE_LIFECYCLE_ONLY` kernels and the three `PRE_TOKEN_CPI_ONLY` prepare
+   kernels are not completion of this step and must not be exposed until the
+   corresponding lifecycle/CPI adapters exist.
 6. Port Token-2022 vault transfers and exercise the real hook for
    `open_position`, both settlement handlers, principal claim, and principal
    withdrawal on a disposable local validator.
@@ -366,6 +370,25 @@ run the hooked transfer via `add_extra_accounts_for_execute_cpi`; and only then
 run a post-CPI finalizer for both state changes. A disposable local validator
 must prove atomic rollback on hook, token, and finalizer failure. Exact
 stake-vault equality, including the donation-griefing failure, is preserved.
+
+The twelfth adds only `prepare_settle_position_week` through the exact point
+before V2 begins its reward-vault transfers. It preserves active/open,
+destination mint/recorded-owner, validator-Clock week, checked term and bit,
+duplicate, standard-round omission, immutable CCC-inactive, floor-delta reward,
+and treasury/ecosystem/liquidity reservation-consumption precedence. Its private
+differential seam can exercise the retained dormant settled and expired-neutral
+round branches, but the production wrapper always supplies the compile-time
+false CCC constant. Success returns provisional lane and position-reservation
+copies plus three ordered transfer intents. Zero amounts must be skipped exactly
+as V2 skips them. The plan deliberately does not checked-add `position.paid` or
+set the settlement bit: both occur only after all nonzero CPIs in V2, so moving
+the paid overflow into preflight would change which CPI or arithmetic error wins.
+The future adapter must authenticate the arbitrary signer and owner-bound
+destination boundary, independently bind every config/position/round/lane/vault/
+mint/Token-2022 identity, execute hooked transfers in treasury, ecosystem,
+liquidity order, and run a post-CPI paid/bit finalizer before persisting the
+provisional ledgers. A disposable local validator must prove atomic rollback for
+each hook/transfer failure and the post-CPI overflow case.
 
 V2 `close_position` releases residual reservations and marks the position
 closed; it has no account-close lifecycle. The closed position PDA remains

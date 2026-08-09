@@ -397,6 +397,43 @@ pub struct WithdrawPositionPrincipalPreCpiPlan {
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct PrepareSettlePositionWeekInput {
+    pub config_key: [u8; 32],
+    pub config: ConfigState,
+    pub position: PositionState,
+    pub round: Option<RoundState>,
+    pub mint: [u8; 32],
+    pub vault_authority: [u8; 32],
+    pub destination_tokens: ReadonlyTokenState,
+    pub treasury: LaneState,
+    pub ecosystem: LaneState,
+    pub liquidity: LaneState,
+    pub week: u64,
+}
+
+/// Host-only output through the exact point immediately before V2 begins its
+/// ordered reward-vault transfers. Lane and position reservation values are
+/// provisional transaction-local copies. `position.paid` and `settled_mask`
+/// remain unchanged because V2 updates both only after every nonzero transfer
+/// CPI succeeds.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct SettlePositionWeekPreCpiPlan {
+    pub config_key: [u8; 32],
+    pub config_snapshot: ConfigState,
+    pub position: PositionState,
+    pub treasury: LaneState,
+    pub ecosystem: LaneState,
+    pub liquidity: LaneState,
+    pub week: u64,
+    pub ordinal: u64,
+    pub amount: u64,
+    pub paused: bool,
+    pub neutral_candidate_count: Option<u32>,
+    pub settlement_bit: u64,
+    pub transfers: [TransferCheckedIntent; 3],
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ExpireRoundResult {
     pub round: RoundState,
     pub recovery_timestamp: i64,
@@ -555,6 +592,15 @@ pub enum EconomyError {
     WrongPositionOwner,
     InvalidClock,
     PositionClosed,
+    FutureSettlementForbidden,
+    RoundOutsidePositionTerm,
+    PositionWeekAlreadySettled,
+    StandardRoundMustBeOmitted,
+    CccRoundRequired,
+    WrongRoundConfig,
+    AgencyNotInRoundSnapshot,
+    RoundNotSettled,
+    PaymentExceedsReservation,
     PrincipalAlreadyReturned,
     PositionTermNotComplete,
     PrincipalNotReturned,
@@ -950,6 +996,140 @@ fn prepare_withdraw_position_principal_transition(
     })
 }
 
+/// Prepare retained V2 `settle_position_week` only through the point
+/// immediately before its first nonzero reward-vault transfer. The opaque
+/// Daily Law capability is required, but this host-only function performs no
+/// CPI or persistence. A future native adapter must execute the three returned
+/// hooked Token-2022 intents in treasury, ecosystem, liquidity order, skipping
+/// zero amounts exactly as V2 does, and only then checked-add `amount` to the
+/// position's paid total and set `settlement_bit` in one atomic transaction.
+pub fn prepare_settle_position_week(
+    gate: &ValidatedDailyLawWrite,
+    input: PrepareSettlePositionWeekInput,
+) -> Result<SettlePositionWeekPreCpiPlan, EconomyError> {
+    prepare_settle_position_week_transition(input, gate.unix_timestamp, CCC_DLC_GENESIS_ENABLED)
+}
+
+fn prepare_settle_position_week_transition(
+    input: PrepareSettlePositionWeekInput,
+    clock_unix_timestamp: i64,
+    ccc_dlc_enabled: bool,
+) -> Result<SettlePositionWeekPreCpiPlan, EconomyError> {
+    if !input.config.active {
+        return Err(EconomyError::NotActive);
+    }
+    if input.position.closed {
+        return Err(EconomyError::PositionClosed);
+    }
+    verify_destination(input.destination_tokens, input.mint, input.position.owner)?;
+    let current_policy_week = current_week(input.config.genesis_timestamp, clock_unix_timestamp)
+        .ok_or(EconomyError::InvalidClock)?;
+    if input.week > current_policy_week {
+        return Err(EconomyError::FutureSettlementForbidden);
+    }
+    let ordinal = input
+        .week
+        .checked_sub(input.position.first_accrual_week)
+        .ok_or(EconomyError::RoundOutsidePositionTerm)?;
+    if ordinal >= input.position.term_weeks {
+        return Err(EconomyError::RoundOutsidePositionTerm);
+    }
+    let shift = u32::try_from(ordinal).map_err(|_| EconomyError::ArithmeticOverflow)?;
+    let settlement_bit = 1u64
+        .checked_shl(shift)
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    if input.position.settled_mask & settlement_bit != 0 {
+        return Err(EconomyError::PositionWeekAlreadySettled);
+    }
+
+    let (paused, neutral_candidate_count) = if input.position.role == 0 {
+        if input.round.is_some() {
+            return Err(EconomyError::StandardRoundMustBeOmitted);
+        }
+        (false, None)
+    } else {
+        if !ccc_dlc_enabled {
+            return Err(EconomyError::CccDlcNotActive);
+        }
+        let round = input.round.ok_or(EconomyError::CccRoundRequired)?;
+        if round.config != input.config_key {
+            return Err(EconomyError::WrongRoundConfig);
+        }
+        if round.week != input.week {
+            return Err(EconomyError::WrongRoundWeek);
+        }
+        if input.position.agency_index >= round.agency_count_snapshot {
+            return Err(EconomyError::AgencyNotInRoundSnapshot);
+        }
+        match round.status {
+            ROUND_SETTLED => (
+                input.position.agency_index == round.selected_agency_index,
+                None,
+            ),
+            ROUND_EXPIRED_NEUTRAL => (false, Some(round.agency_count_snapshot)),
+            _ => return Err(EconomyError::RoundNotSettled),
+        }
+    };
+
+    let full_amount = reward_for_week(
+        input.position.principal,
+        input.position.annual_rate_bps,
+        ordinal,
+    )
+    .ok_or(EconomyError::ArithmeticOverflow)?;
+    let amount = if paused {
+        0
+    } else if let Some(candidate_count) = neutral_candidate_count {
+        neutral_expired_round_reward(full_amount, candidate_count)
+            .ok_or(EconomyError::ArithmeticOverflow)?
+    } else {
+        full_amount
+    };
+
+    let mut position = input.position;
+    let mut treasury = input.treasury;
+    let mut ecosystem = input.ecosystem;
+    let mut liquidity = input.liquidity;
+    let (treasury_paid, ecosystem_paid, liquidity_paid) = consume_three_reservations(
+        &mut treasury,
+        &mut ecosystem,
+        &mut liquidity,
+        &mut position.treasury_reserved,
+        &mut position.ecosystem_reserved,
+        &mut position.liquidity_reserved,
+        amount,
+    )?;
+
+    let transfer = |source, amount| TransferCheckedIntent {
+        token_program: input.config.token_program,
+        source,
+        mint: input.mint,
+        destination: input.destination_tokens.key,
+        authority: input.vault_authority,
+        amount,
+        decimals: TOKEN_DECIMALS,
+    };
+    Ok(SettlePositionWeekPreCpiPlan {
+        config_key: input.config_key,
+        config_snapshot: input.config,
+        position,
+        treasury,
+        ecosystem,
+        liquidity,
+        week: input.week,
+        ordinal,
+        amount,
+        paused,
+        neutral_candidate_count,
+        settlement_bit,
+        transfers: [
+            transfer(input.treasury.token_account, treasury_paid),
+            transfer(input.ecosystem.token_account, ecosystem_paid),
+            transfer(input.liquidity.token_account, liquidity_paid),
+        ],
+    })
+}
+
 fn activate_transition(input: ActivateInput) -> Result<ActivateResult, EconomyError> {
     if !RANDOMNESS_ADAPTER_VERIFIED {
         return Err(EconomyError::RandomnessAdapterNotVerified);
@@ -1205,6 +1385,25 @@ fn maximum_reward(principal: u64, annual_rate_bps: u64, term_weeks: u64) -> Opti
     u64::try_from(numerator.checked_div(BPS_DENOMINATOR.checked_mul(RATE_WEEKS)?)?).ok()
 }
 
+fn reward_for_week(principal: u64, annual_rate_bps: u64, ordinal: u64) -> Option<u64> {
+    let after = maximum_reward(principal, annual_rate_bps, ordinal.checked_add(1)?)?;
+    let before = maximum_reward(principal, annual_rate_bps, ordinal)?;
+    after.checked_sub(before)
+}
+
+fn neutral_expired_round_reward(full_reward: u64, candidate_count: u32) -> Option<u64> {
+    if candidate_count == 0 {
+        return None;
+    }
+    let payable_candidates = u128::from(candidate_count.checked_sub(1)?);
+    u64::try_from(
+        u128::from(full_reward)
+            .checked_mul(payable_candidates)?
+            .checked_div(u128::from(candidate_count))?,
+    )
+    .ok()
+}
+
 fn verify_community_funding(
     tokens: ReadonlyTokenState,
     mint: [u8; 32],
@@ -1325,6 +1524,58 @@ fn reserve_three_lanes(
         return Err(EconomyError::InsufficientUnlockedRewardCapacity);
     }
     Ok((treasury_reserved, ecosystem_reserved, liquidity_reserved))
+}
+
+fn consume_reserved_lane(
+    lane: &mut LaneState,
+    position_reserved: &mut u64,
+    remaining: &mut u64,
+) -> Result<u64, EconomyError> {
+    if !lane.reward_source {
+        return Err(EconomyError::NotRewardLane);
+    }
+    if *position_reserved > lane.reserved {
+        return Err(EconomyError::ReservationLedgerMismatch);
+    }
+    let take = (*position_reserved).min(*remaining);
+    *position_reserved = position_reserved
+        .checked_sub(take)
+        .ok_or(EconomyError::ReservationLedgerMismatch)?;
+    lane.reserved = lane
+        .reserved
+        .checked_sub(take)
+        .ok_or(EconomyError::ReservationLedgerMismatch)?;
+    lane.paid = lane
+        .paid
+        .checked_add(take)
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    *remaining = remaining
+        .checked_sub(take)
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    Ok(take)
+}
+
+#[allow(clippy::too_many_arguments)]
+fn consume_three_reservations(
+    treasury: &mut LaneState,
+    ecosystem: &mut LaneState,
+    liquidity: &mut LaneState,
+    treasury_reserved: &mut u64,
+    ecosystem_reserved: &mut u64,
+    liquidity_reserved: &mut u64,
+    amount: u64,
+) -> Result<(u64, u64, u64), EconomyError> {
+    if treasury.lane != TREASURY || ecosystem.lane != ECOSYSTEM || liquidity.lane != LIQUIDITY {
+        return Err(EconomyError::WrongLaneOrder);
+    }
+    let mut remaining = amount;
+    let treasury_paid = consume_reserved_lane(treasury, treasury_reserved, &mut remaining)?;
+    let ecosystem_paid = consume_reserved_lane(ecosystem, ecosystem_reserved, &mut remaining)?;
+    let liquidity_paid = consume_reserved_lane(liquidity, liquidity_reserved, &mut remaining)?;
+    if remaining != 0 {
+        return Err(EconomyError::PaymentExceedsReservation);
+    }
+    Ok((treasury_paid, ecosystem_paid, liquidity_paid))
 }
 
 fn initialize_config_transition(
@@ -3284,6 +3535,333 @@ mod tests {
         })();
 
         observe_prepare_withdraw_position_principal(result)
+    }
+
+    #[derive(Clone, Copy)]
+    struct PrepareSettlePositionWeekVector {
+        name: &'static str,
+        input: PrepareSettlePositionWeekInput,
+        clock_timestamp: i64,
+        ccc_dlc_enabled: bool,
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum PrepareSettlePositionWeekObservation {
+        Error(EconomyError),
+        Success(Box<SettlePositionWeekPreCpiPlan>),
+    }
+
+    fn observe_prepare_settle_position_week(
+        result: Result<SettlePositionWeekPreCpiPlan, EconomyError>,
+    ) -> PrepareSettlePositionWeekObservation {
+        match result {
+            Err(error) => PrepareSettlePositionWeekObservation::Error(error),
+            Ok(plan) => PrepareSettlePositionWeekObservation::Success(Box::new(plan)),
+        }
+    }
+
+    fn valid_prepare_settle_position_week_vector(
+        name: &'static str,
+    ) -> PrepareSettlePositionWeekVector {
+        let mut config = initialize_config_transition(
+            valid_initialize_config_vector("settle-position config", false).input,
+            1_000,
+        )
+        .unwrap()
+        .config;
+        config.active = true;
+        let config_key = [0xe1; 32];
+        let owner = [0xe2; 32];
+        let mint = config.mint;
+        let vault_authority = [0xe3; 32];
+        PrepareSettlePositionWeekVector {
+            name,
+            input: PrepareSettlePositionWeekInput {
+                config_key,
+                config,
+                position: PositionState {
+                    config: config_key,
+                    owner,
+                    position_id: 44,
+                    principal: 5_200_000,
+                    accepted_week: 3,
+                    first_accrual_week: 4,
+                    term_weeks: USER_TERM_WEEKS,
+                    annual_rate_bps: STANDARD_RATE_BPS,
+                    treasury_reserved: 6_000,
+                    ecosystem_reserved: 3_000,
+                    liquidity_reserved: 2_000,
+                    paid: 0,
+                    settled_mask: 0,
+                    agency_index: u32::MAX,
+                    role: 0,
+                    principal_returned: false,
+                    closed: false,
+                    bump: 244,
+                },
+                round: None,
+                mint,
+                vault_authority,
+                destination_tokens: ReadonlyTokenState {
+                    key: [0xe4; 32],
+                    mint,
+                    owner,
+                    amount: 0,
+                },
+                treasury: lane_state(TREASURY, 6_000, 0xe5),
+                ecosystem: lane_state(ECOSYSTEM, 3_000, 0xe6),
+                liquidity: lane_state(LIQUIDITY, 2_000, 0xe7),
+                week: 4,
+            },
+            clock_timestamp: config.genesis_timestamp + 4 * SECONDS_PER_WEEK,
+            ccc_dlc_enabled: false,
+        }
+    }
+
+    fn v2_position_from_semantic(position: PositionState) -> V2PositionState {
+        V2PositionState {
+            config: position.config.into(),
+            owner: position.owner.into(),
+            position_id: position.position_id,
+            principal: position.principal,
+            accepted_week: position.accepted_week,
+            first_accrual_week: position.first_accrual_week,
+            term_weeks: position.term_weeks,
+            annual_rate_bps: position.annual_rate_bps,
+            treasury_reserved: position.treasury_reserved,
+            ecosystem_reserved: position.ecosystem_reserved,
+            liquidity_reserved: position.liquidity_reserved,
+            paid: position.paid,
+            settled_mask: position.settled_mask,
+            agency_index: position.agency_index,
+            role: position.role,
+            principal_returned: position.principal_returned,
+            closed: position.closed,
+            bump: position.bump,
+        }
+    }
+
+    fn semantic_position_from_v2(position: V2PositionState) -> PositionState {
+        PositionState {
+            config: position.config.to_bytes(),
+            owner: position.owner.to_bytes(),
+            position_id: position.position_id,
+            principal: position.principal,
+            accepted_week: position.accepted_week,
+            first_accrual_week: position.first_accrual_week,
+            term_weeks: position.term_weeks,
+            annual_rate_bps: position.annual_rate_bps,
+            treasury_reserved: position.treasury_reserved,
+            ecosystem_reserved: position.ecosystem_reserved,
+            liquidity_reserved: position.liquidity_reserved,
+            paid: position.paid,
+            settled_mask: position.settled_mask,
+            agency_index: position.agency_index,
+            role: position.role,
+            principal_returned: position.principal_returned,
+            closed: position.closed,
+            bump: position.bump,
+        }
+    }
+
+    fn v2_round_from_semantic(round: RoundState) -> V2RoundState {
+        V2RoundState {
+            config: round.config.into(),
+            randomness_account: round.randomness_account.into(),
+            week: round.week,
+            commit_slot: round.commit_slot,
+            commit_timestamp: round.commit_timestamp,
+            randomness: round.randomness,
+            agency_registry_hash_snapshot: round.agency_registry_hash_snapshot,
+            decision_context: round.decision_context,
+            agency_count_snapshot: round.agency_count_snapshot,
+            selected_agency_index: round.selected_agency_index,
+            derivation_counter: round.derivation_counter,
+            status: round.status,
+            bump: 0,
+        }
+    }
+
+    fn v2_consume_reserved_lane(
+        lane: &mut V2LaneState,
+        position_reserved: &mut u64,
+        remaining: &mut u64,
+    ) -> Result<u64, EconomyError> {
+        if !lane.reward_source {
+            return Err(EconomyError::NotRewardLane);
+        }
+        if *position_reserved > lane.reserved {
+            return Err(EconomyError::ReservationLedgerMismatch);
+        }
+        let take = (*position_reserved).min(*remaining);
+        *position_reserved = position_reserved
+            .checked_sub(take)
+            .ok_or(EconomyError::ReservationLedgerMismatch)?;
+        lane.reserved = lane
+            .reserved
+            .checked_sub(take)
+            .ok_or(EconomyError::ReservationLedgerMismatch)?;
+        lane.paid = lane
+            .paid
+            .checked_add(take)
+            .ok_or(EconomyError::ArithmeticOverflow)?;
+        *remaining = remaining
+            .checked_sub(take)
+            .ok_or(EconomyError::ArithmeticOverflow)?;
+        Ok(take)
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn v2_consume_three_reservations(
+        treasury: &mut V2LaneState,
+        ecosystem: &mut V2LaneState,
+        liquidity: &mut V2LaneState,
+        treasury_reserved: &mut u64,
+        ecosystem_reserved: &mut u64,
+        liquidity_reserved: &mut u64,
+        amount: u64,
+    ) -> Result<(u64, u64, u64), EconomyError> {
+        if treasury.lane != v2_policy::TREASURY
+            || ecosystem.lane != v2_policy::ECOSYSTEM
+            || liquidity.lane != v2_policy::LIQUIDITY
+        {
+            return Err(EconomyError::WrongLaneOrder);
+        }
+        let mut remaining = amount;
+        let treasury_paid = v2_consume_reserved_lane(treasury, treasury_reserved, &mut remaining)?;
+        let ecosystem_paid =
+            v2_consume_reserved_lane(ecosystem, ecosystem_reserved, &mut remaining)?;
+        let liquidity_paid =
+            v2_consume_reserved_lane(liquidity, liquidity_reserved, &mut remaining)?;
+        if remaining != 0 {
+            return Err(EconomyError::PaymentExceedsReservation);
+        }
+        Ok((treasury_paid, ecosystem_paid, liquidity_paid))
+    }
+
+    fn v2_prepare_settle_position_week_reference(
+        vector: PrepareSettlePositionWeekVector,
+    ) -> PrepareSettlePositionWeekObservation {
+        let _case_name = vector.name;
+        let input = vector.input;
+        let result = (|| {
+            if !input.config.active {
+                return Err(EconomyError::NotActive);
+            }
+            let mut position = v2_position_from_semantic(input.position);
+            if position.closed {
+                return Err(EconomyError::PositionClosed);
+            }
+            if input.destination_tokens.mint != input.mint {
+                return Err(EconomyError::WrongTokenMint);
+            }
+            if input.destination_tokens.owner != position.owner.to_bytes() {
+                return Err(EconomyError::WrongDestinationOwner);
+            }
+            let current_week =
+                v2_policy::current_week(input.config.genesis_timestamp, vector.clock_timestamp)
+                    .ok_or(EconomyError::InvalidClock)?;
+            if input.week > current_week {
+                return Err(EconomyError::FutureSettlementForbidden);
+            }
+            let ordinal = input
+                .week
+                .checked_sub(position.first_accrual_week)
+                .ok_or(EconomyError::RoundOutsidePositionTerm)?;
+            if ordinal >= position.term_weeks {
+                return Err(EconomyError::RoundOutsidePositionTerm);
+            }
+            let settlement_bit = 1u64
+                .checked_shl(u32::try_from(ordinal).map_err(|_| EconomyError::ArithmeticOverflow)?)
+                .ok_or(EconomyError::ArithmeticOverflow)?;
+            if position.settled_mask & settlement_bit != 0 {
+                return Err(EconomyError::PositionWeekAlreadySettled);
+            }
+
+            let round = input.round.map(v2_round_from_semantic);
+            let (paused, neutral_candidate_count) = if position.role == 0 {
+                if round.is_some() {
+                    return Err(EconomyError::StandardRoundMustBeOmitted);
+                }
+                (false, None)
+            } else {
+                if !vector.ccc_dlc_enabled {
+                    return Err(EconomyError::CccDlcNotActive);
+                }
+                let round = round.ok_or(EconomyError::CccRoundRequired)?;
+                if round.config.to_bytes() != input.config_key {
+                    return Err(EconomyError::WrongRoundConfig);
+                }
+                if round.week != input.week {
+                    return Err(EconomyError::WrongRoundWeek);
+                }
+                if position.agency_index >= round.agency_count_snapshot {
+                    return Err(EconomyError::AgencyNotInRoundSnapshot);
+                }
+                match round.status {
+                    iat_v2::ROUND_SETTLED => {
+                        (position.agency_index == round.selected_agency_index, None)
+                    }
+                    iat_v2::ROUND_EXPIRED_NEUTRAL => (false, Some(round.agency_count_snapshot)),
+                    _ => return Err(EconomyError::RoundNotSettled),
+                }
+            };
+
+            let full_amount =
+                v2_policy::reward_for_week(position.principal, position.annual_rate_bps, ordinal)
+                    .ok_or(EconomyError::ArithmeticOverflow)?;
+            let amount = if paused {
+                0
+            } else if let Some(candidate_count) = neutral_candidate_count {
+                v2_policy::neutral_expired_round_reward(full_amount, candidate_count)
+                    .ok_or(EconomyError::ArithmeticOverflow)?
+            } else {
+                full_amount
+            };
+
+            let mut treasury = v2_lane_from_semantic(input.treasury);
+            let mut ecosystem = v2_lane_from_semantic(input.ecosystem);
+            let mut liquidity = v2_lane_from_semantic(input.liquidity);
+            let (treasury_paid, ecosystem_paid, liquidity_paid) = v2_consume_three_reservations(
+                &mut treasury,
+                &mut ecosystem,
+                &mut liquidity,
+                &mut position.treasury_reserved,
+                &mut position.ecosystem_reserved,
+                &mut position.liquidity_reserved,
+                amount,
+            )?;
+            let transfer = |source, amount| TransferCheckedIntent {
+                token_program: input.config.token_program,
+                source,
+                mint: input.mint,
+                destination: input.destination_tokens.key,
+                authority: input.vault_authority,
+                amount,
+                decimals: v2_policy::TOKEN_DECIMALS,
+            };
+            Ok(SettlePositionWeekPreCpiPlan {
+                config_key: input.config_key,
+                config_snapshot: input.config,
+                position: semantic_position_from_v2(position),
+                treasury: semantic_lane_from_v2(treasury),
+                ecosystem: semantic_lane_from_v2(ecosystem),
+                liquidity: semantic_lane_from_v2(liquidity),
+                week: input.week,
+                ordinal,
+                amount,
+                paused,
+                neutral_candidate_count,
+                settlement_bit,
+                transfers: [
+                    transfer(input.treasury.token_account, treasury_paid),
+                    transfer(input.ecosystem.token_account, ecosystem_paid),
+                    transfer(input.liquidity.token_account, liquidity_paid),
+                ],
+            })
+        })();
+
+        observe_prepare_settle_position_week(result)
     }
 
     #[derive(Clone, Copy, Debug)]
@@ -5504,6 +6082,501 @@ mod tests {
             prepare_withdraw_position_principal(&gate, donated),
             Err(EconomyError::StakeLedgerMismatch)
         );
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
+        let missing_bytes = pack_law_state(None);
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &missing_bytes),
+            Err(EconomyError::DayUnfinalized)
+        );
+    }
+
+    #[test]
+    fn prepare_settle_position_week_validation_order_matches_retained_v2() {
+        let base = valid_prepare_settle_position_week_vector("base");
+        let mut cases = Vec::new();
+
+        let mut input = base.input;
+        input.config.active = false;
+        input.position.closed = true;
+        cases.push((
+            "inactive precedes every later check",
+            input,
+            base.clock_timestamp,
+            EconomyError::NotActive,
+        ));
+
+        let mut input = base.input;
+        input.position.closed = true;
+        input.destination_tokens.mint = [0xf0; 32];
+        cases.push((
+            "closed precedes destination facts",
+            input,
+            base.clock_timestamp,
+            EconomyError::PositionClosed,
+        ));
+
+        let mut input = base.input;
+        input.destination_tokens.mint = [0xf1; 32];
+        input.destination_tokens.owner = [0xf2; 32];
+        cases.push((
+            "destination mint precedes owner",
+            input,
+            base.clock_timestamp,
+            EconomyError::WrongTokenMint,
+        ));
+
+        let mut input = base.input;
+        input.destination_tokens.owner = [0xf3; 32];
+        cases.push((
+            "destination owner precedes Clock",
+            input,
+            input.config.genesis_timestamp - 1,
+            EconomyError::WrongDestinationOwner,
+        ));
+
+        cases.push((
+            "Clock before Genesis fails closed",
+            base.input,
+            base.input.config.genesis_timestamp - 1,
+            EconomyError::InvalidClock,
+        ));
+
+        let mut input = base.input;
+        input.week = 5;
+        input.position.first_accrual_week = 10;
+        cases.push((
+            "future week precedes term subtraction",
+            input,
+            base.clock_timestamp,
+            EconomyError::FutureSettlementForbidden,
+        ));
+
+        let mut input = base.input;
+        input.week = 3;
+        cases.push((
+            "week before first accrual underflows",
+            input,
+            base.clock_timestamp,
+            EconomyError::RoundOutsidePositionTerm,
+        ));
+
+        let mut input = base.input;
+        input.position.term_weeks = 0;
+        cases.push((
+            "ordinal at term end is rejected",
+            input,
+            base.clock_timestamp,
+            EconomyError::RoundOutsidePositionTerm,
+        ));
+
+        let mut input = base.input;
+        input.week = 68;
+        input.position.term_weeks = 65;
+        cases.push((
+            "unrepresentable settlement bit fails before duplicate check",
+            input,
+            input.config.genesis_timestamp + 68 * SECONDS_PER_WEEK,
+            EconomyError::ArithmeticOverflow,
+        ));
+
+        let mut input = base.input;
+        input.position.settled_mask = 1;
+        input.round = Some(pending_round(0));
+        cases.push((
+            "duplicate bit precedes role and round",
+            input,
+            base.clock_timestamp,
+            EconomyError::PositionWeekAlreadySettled,
+        ));
+
+        let mut input = base.input;
+        input.round = Some(pending_round(0));
+        input.treasury.lane = ECOSYSTEM;
+        cases.push((
+            "standard round omission precedes lane checks",
+            input,
+            base.clock_timestamp,
+            EconomyError::StandardRoundMustBeOmitted,
+        ));
+
+        let mut input = base.input;
+        input.position.principal = u64::MAX;
+        input.position.annual_rate_bps = u64::MAX;
+        input.treasury.lane = ECOSYSTEM;
+        cases.push((
+            "reward arithmetic precedes lane checks",
+            input,
+            base.clock_timestamp,
+            EconomyError::ArithmeticOverflow,
+        ));
+
+        let mut input = base.input;
+        input.treasury.lane = ECOSYSTEM;
+        input.treasury.reward_source = false;
+        cases.push((
+            "lane identity precedes reward-source checks",
+            input,
+            base.clock_timestamp,
+            EconomyError::WrongLaneOrder,
+        ));
+
+        let mut input = base.input;
+        input.treasury.reward_source = false;
+        input.treasury.reserved = 0;
+        cases.push((
+            "reward-source check precedes reconciliation",
+            input,
+            base.clock_timestamp,
+            EconomyError::NotRewardLane,
+        ));
+
+        let mut input = base.input;
+        input.treasury.reserved = input.position.treasury_reserved - 1;
+        input.treasury.paid = u64::MAX;
+        cases.push((
+            "reconciliation precedes lane-paid overflow",
+            input,
+            base.clock_timestamp,
+            EconomyError::ReservationLedgerMismatch,
+        ));
+
+        let mut input = base.input;
+        input.treasury.paid = u64::MAX;
+        cases.push((
+            "lane-paid overflow is checked before later lanes",
+            input,
+            base.clock_timestamp,
+            EconomyError::ArithmeticOverflow,
+        ));
+
+        let mut input = base.input;
+        input.position.treasury_reserved = 1;
+        input.position.ecosystem_reserved = 1;
+        input.position.liquidity_reserved = 1;
+        cases.push((
+            "reward cannot exceed the position reservation",
+            input,
+            base.clock_timestamp,
+            EconomyError::PaymentExceedsReservation,
+        ));
+
+        for (name, input, clock_timestamp, expected_error) in cases {
+            let vector = PrepareSettlePositionWeekVector {
+                name,
+                input,
+                clock_timestamp,
+                ccc_dlc_enabled: false,
+            };
+            let actual = observe_prepare_settle_position_week(
+                prepare_settle_position_week_transition(input, clock_timestamp, false),
+            );
+            assert_eq!(
+                actual,
+                PrepareSettlePositionWeekObservation::Error(expected_error),
+                "fixed error: {name}"
+            );
+            assert_eq!(
+                actual,
+                v2_prepare_settle_position_week_reference(vector),
+                "V2 differential: {name}"
+            );
+        }
+    }
+
+    #[test]
+    fn prepare_settle_position_week_returns_exact_ordered_pre_cpi_plan() {
+        let base = valid_prepare_settle_position_week_vector("ordered split");
+        let plan = prepare_settle_position_week_transition(
+            base.input,
+            base.clock_timestamp,
+            base.ccc_dlc_enabled,
+        )
+        .unwrap();
+        assert_eq!(
+            observe_prepare_settle_position_week(Ok(plan)),
+            v2_prepare_settle_position_week_reference(base)
+        );
+        assert_eq!(plan.week, 4);
+        assert_eq!(plan.ordinal, 0);
+        assert_eq!(plan.amount, 10_000);
+        assert!(!plan.paused);
+        assert_eq!(plan.neutral_candidate_count, None);
+        assert_eq!(plan.settlement_bit, 1);
+        assert_eq!(
+            plan.transfers.map(|transfer| transfer.amount),
+            [6_000, 3_000, 1_000]
+        );
+        assert_eq!(
+            plan.transfers.map(|transfer| transfer.source),
+            [
+                base.input.treasury.token_account,
+                base.input.ecosystem.token_account,
+                base.input.liquidity.token_account,
+            ]
+        );
+        for transfer in plan.transfers {
+            assert_eq!(transfer.token_program, base.input.config.token_program);
+            assert_eq!(transfer.mint, base.input.mint);
+            assert_eq!(transfer.destination, base.input.destination_tokens.key);
+            assert_eq!(transfer.authority, base.input.vault_authority);
+            assert_eq!(transfer.decimals, TOKEN_DECIMALS);
+        }
+        assert_eq!(
+            [
+                plan.position.treasury_reserved,
+                plan.position.ecosystem_reserved,
+                plan.position.liquidity_reserved,
+            ],
+            [0, 0, 1_000]
+        );
+        assert_eq!(
+            [
+                plan.treasury.reserved,
+                plan.ecosystem.reserved,
+                plan.liquidity.reserved,
+            ],
+            [0, 0, 1_000]
+        );
+        assert_eq!(
+            [
+                plan.treasury.paid - base.input.treasury.paid,
+                plan.ecosystem.paid - base.input.ecosystem.paid,
+                plan.liquidity.paid - base.input.liquidity.paid,
+            ],
+            [6_000, 3_000, 1_000]
+        );
+        assert_eq!(plan.position.paid, base.input.position.paid);
+        assert_eq!(plan.position.settled_mask, base.input.position.settled_mask);
+
+        let mut paid_overflow_after_cpi = base.input;
+        paid_overflow_after_cpi.position.paid = u64::MAX;
+        let overflow_plan = prepare_settle_position_week_transition(
+            paid_overflow_after_cpi,
+            base.clock_timestamp,
+            false,
+        )
+        .unwrap();
+        assert_eq!(overflow_plan.position.paid, u64::MAX);
+        assert_eq!(
+            overflow_plan.transfers.map(|transfer| transfer.amount),
+            [6_000, 3_000, 1_000]
+        );
+    }
+
+    #[test]
+    fn prepare_settle_position_week_preserves_ccc_inactive_and_dormant_semantics() {
+        let base = valid_prepare_settle_position_week_vector("CCC boundary");
+        let mut ccc = base.input;
+        ccc.position.role = 1;
+        ccc.position.agency_index = 1;
+
+        for (name, round) in [
+            ("missing round remains behind inactive boundary", None),
+            (
+                "malformed semantic round remains behind inactive boundary",
+                Some(pending_round(0)),
+            ),
+        ] {
+            let mut input = ccc;
+            input.round = round;
+            let vector = PrepareSettlePositionWeekVector {
+                name,
+                input,
+                clock_timestamp: base.clock_timestamp,
+                ccc_dlc_enabled: false,
+            };
+            let actual = observe_prepare_settle_position_week(
+                prepare_settle_position_week_transition(input, base.clock_timestamp, false),
+            );
+            assert_eq!(
+                actual,
+                PrepareSettlePositionWeekObservation::Error(EconomyError::CccDlcNotActive),
+                "{name}"
+            );
+            assert_eq!(
+                actual,
+                v2_prepare_settle_position_week_reference(vector),
+                "V2 differential: {name}"
+            );
+        }
+
+        let dormant_round = |status, selected_agency_index, agency_count_snapshot| RoundState {
+            config: base.input.config_key,
+            randomness_account: [0xf4; 32],
+            week: base.input.week,
+            commit_slot: 9,
+            commit_timestamp: 10,
+            randomness: [0xf5; 32],
+            agency_registry_hash_snapshot: [0xf6; 32],
+            decision_context: [0xf7; 32],
+            agency_count_snapshot,
+            selected_agency_index,
+            derivation_counter: 0,
+            status,
+        };
+        let mut dormant_cases = Vec::new();
+
+        let input = ccc;
+        dormant_cases.push((
+            "enabled CCC requires a round",
+            input,
+            Some(EconomyError::CccRoundRequired),
+            None,
+        ));
+
+        let mut input = ccc;
+        let mut round = dormant_round(ROUND_SETTLED, 0, 2);
+        round.config = [0xf8; 32];
+        input.round = Some(round);
+        dormant_cases.push((
+            "round config precedes week",
+            input,
+            Some(EconomyError::WrongRoundConfig),
+            None,
+        ));
+
+        let mut input = ccc;
+        let mut round = dormant_round(ROUND_SETTLED, 0, 2);
+        round.week += 1;
+        input.round = Some(round);
+        dormant_cases.push((
+            "round week precedes snapshot",
+            input,
+            Some(EconomyError::WrongRoundWeek),
+            None,
+        ));
+
+        let mut input = ccc;
+        input.round = Some(dormant_round(ROUND_SETTLED, 0, 1));
+        dormant_cases.push((
+            "agency must exist in snapshot",
+            input,
+            Some(EconomyError::AgencyNotInRoundSnapshot),
+            None,
+        ));
+
+        let mut input = ccc;
+        input.round = Some(dormant_round(ROUND_PENDING, 0, 2));
+        dormant_cases.push((
+            "pending round cannot settle a position",
+            input,
+            Some(EconomyError::RoundNotSettled),
+            None,
+        ));
+
+        let mut input = ccc;
+        input.round = Some(dormant_round(ROUND_SETTLED, 1, 2));
+        input.liquidity.reward_source = false;
+        dormant_cases.push((
+            "zero reward still checks every reward-source lane",
+            input,
+            Some(EconomyError::NotRewardLane),
+            None,
+        ));
+
+        let mut input = ccc;
+        input.round = Some(dormant_round(ROUND_SETTLED, 1, 2));
+        input.liquidity.reserved = input.position.liquidity_reserved - 1;
+        dormant_cases.push((
+            "zero reward still reconciles every lane reservation",
+            input,
+            Some(EconomyError::ReservationLedgerMismatch),
+            None,
+        ));
+
+        let mut input = ccc;
+        input.round = Some(dormant_round(ROUND_SETTLED, 1, 2));
+        dormant_cases.push((
+            "selected agency is paused",
+            input,
+            None,
+            Some((0, true, None)),
+        ));
+
+        let mut input = ccc;
+        input.round = Some(dormant_round(ROUND_SETTLED, 0, 2));
+        dormant_cases.push((
+            "non-selected agency earns full reward",
+            input,
+            None,
+            Some((10_000, false, None)),
+        ));
+
+        let mut input = ccc;
+        input.round = Some(dormant_round(ROUND_EXPIRED_NEUTRAL, 0, 2));
+        dormant_cases.push((
+            "expired round pays neutral expected value",
+            input,
+            None,
+            Some((5_000, false, Some(2))),
+        ));
+
+        let mut input = ccc;
+        input.position.agency_index = 0;
+        input.round = Some(dormant_round(ROUND_EXPIRED_NEUTRAL, 0, 1));
+        dormant_cases.push((
+            "single-candidate neutral fallback pays zero",
+            input,
+            None,
+            Some((0, false, Some(1))),
+        ));
+
+        for (name, input, expected_error, expected_success) in dormant_cases {
+            let vector = PrepareSettlePositionWeekVector {
+                name,
+                input,
+                clock_timestamp: base.clock_timestamp,
+                ccc_dlc_enabled: true,
+            };
+            let actual = observe_prepare_settle_position_week(
+                prepare_settle_position_week_transition(input, base.clock_timestamp, true),
+            );
+            assert_eq!(
+                actual,
+                v2_prepare_settle_position_week_reference(vector),
+                "V2 differential: {name}"
+            );
+            if let Some(error) = expected_error {
+                assert_eq!(
+                    actual,
+                    PrepareSettlePositionWeekObservation::Error(error),
+                    "{name}"
+                );
+            }
+            if let Some((amount, paused, neutral_candidate_count)) = expected_success {
+                let PrepareSettlePositionWeekObservation::Success(plan) = actual else {
+                    panic!("expected success: {name}");
+                };
+                assert_eq!(plan.amount, amount, "amount: {name}");
+                assert_eq!(plan.paused, paused, "paused: {name}");
+                assert_eq!(
+                    plan.neutral_candidate_count, neutral_candidate_count,
+                    "neutral mode: {name}"
+                );
+                if amount == 0 {
+                    assert_eq!(plan.transfers.map(|transfer| transfer.amount), [0, 0, 0]);
+                    assert_eq!(plan.position, input.position);
+                    assert_eq!(plan.treasury, input.treasury);
+                    assert_eq!(plan.ecosystem, input.ecosystem);
+                    assert_eq!(plan.liquidity, input.liquidity);
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn prepare_settle_position_week_requires_open_law_and_uses_gate_clock() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let mut vector = valid_prepare_settle_position_week_vector("settlement wrapper");
+        vector.input.config.genesis_timestamp = FRIDAY_BOUNDARY_UTC - 4 * SECONDS_PER_WEEK;
+        let plan = prepare_settle_position_week(&gate, vector.input).unwrap();
+        assert_eq!(plan.week, 4);
 
         let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
         assert_eq!(

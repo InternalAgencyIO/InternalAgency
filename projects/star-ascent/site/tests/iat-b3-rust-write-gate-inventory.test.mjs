@@ -1218,3 +1218,188 @@ test("prepare_withdraw_position_principal stops at the exact V2 pre-token-CPI bo
     /For `withdraw_position_principal`[\s\S]+`add_extra_accounts_for_execute_cpi`[\s\S]+post-CPI finalizer[\s\S]+roll back/u,
   );
 });
+
+test("prepare_settle_position_week stops before V2's ordered reward CPIs", () => {
+  const v2Settle = functionBody(
+    anchorProgramBody(v2Source),
+    "settle_position_week",
+  );
+  const economyPrepare = functionBody(
+    economySource,
+    "prepare_settle_position_week",
+  );
+  const economyTransition = functionBody(
+    economySource,
+    "prepare_settle_position_week_transition",
+  );
+
+  assertTokensInOrder(
+    v2Settle,
+    [
+      "ctx.accounts.config.active",
+      "ctx.accounts.position.closed",
+      "verify_destination(",
+      "&ctx.accounts.destination_tokens",
+      "ctx.accounts.mint.key()",
+      "ctx.accounts.position.owner",
+      "week <= week_for(&ctx.accounts.config)",
+      ".checked_sub(ctx.accounts.position.first_accrual_week)",
+      "ordinal < ctx.accounts.position.term_weeks",
+      ".checked_shl",
+      "ctx.accounts.position.settled_mask & bit",
+      "if ctx.accounts.position.role == 0",
+      "ctx.accounts.round.is_none()",
+      "CCC_DLC_GENESIS_ENABLED",
+      ".ok_or(IatV2Error::CccRoundRequired)",
+      "round.config",
+      "round.week",
+      "ctx.accounts.position.agency_index < round.agency_count_snapshot",
+      "match round.status",
+      "ROUND_SETTLED",
+      "ROUND_EXPIRED_NEUTRAL",
+      "reward_for_week(",
+      "neutral_expired_round_reward",
+      "consume_three_reservations(",
+      "ctx.accounts.position.treasury_reserved = treasury_reserved",
+      "ctx.accounts.position.ecosystem_reserved = ecosystem_reserved",
+      "ctx.accounts.position.liquidity_reserved = liquidity_reserved",
+      "transfer_reward_splits(",
+      "ctx.accounts.position.paid =",
+      ".checked_add(amount)",
+      "ctx.accounts.position.settled_mask |= bit",
+    ],
+    "V2 settle_position_week",
+  );
+
+  assert.match(economyPrepare, /gate: &ValidatedDailyLawWrite/u);
+  assert.match(
+    economyPrepare,
+    /prepare_settle_position_week_transition\(input, gate\.unix_timestamp, CCC_DLC_GENESIS_ENABLED\)/u,
+  );
+  assertTokensInOrder(
+    economyTransition,
+    [
+      "if !input.config.active",
+      "if input.position.closed",
+      "verify_destination(input.destination_tokens, input.mint, input.position.owner)",
+      "current_week(input.config.genesis_timestamp, clock_unix_timestamp)",
+      "if input.week > current_policy_week",
+      ".checked_sub(input.position.first_accrual_week)",
+      "if ordinal >= input.position.term_weeks",
+      "u32::try_from(ordinal)",
+      ".checked_shl(shift)",
+      "input.position.settled_mask & settlement_bit",
+      "if input.position.role == 0",
+      "input.round.is_some()",
+      "if !ccc_dlc_enabled",
+      "input.round.ok_or(EconomyError::CccRoundRequired)",
+      "round.config != input.config_key",
+      "round.week != input.week",
+      "input.position.agency_index >= round.agency_count_snapshot",
+      "match round.status",
+      "ROUND_SETTLED",
+      "ROUND_EXPIRED_NEUTRAL",
+      "reward_for_week(",
+      "neutral_expired_round_reward",
+      "let mut position = input.position",
+      "let mut treasury = input.treasury",
+      "let mut ecosystem = input.ecosystem",
+      "let mut liquidity = input.liquidity",
+      "consume_three_reservations(",
+      "Ok(SettlePositionWeekPreCpiPlan",
+      "position,",
+      "treasury,",
+      "ecosystem,",
+      "liquidity,",
+      "settlement_bit,",
+      "transfers:",
+      "transfer(input.treasury.token_account, treasury_paid)",
+      "transfer(input.ecosystem.token_account, ecosystem_paid)",
+      "transfer(input.liquidity.token_account, liquidity_paid)",
+    ],
+    "B3 prepare_settle_position_week transition",
+  );
+
+  for (const body of [economyPrepare, economyTransition]) {
+    assert.doesNotMatch(
+      body,
+      /position\.paid\s*=|position\.settled_mask\s*\|=|CpiContext|transfer_reward_splits|token::transfer_checked|\binvoke(?:_signed)?\s*\(/u,
+    );
+  }
+
+  for (const source of [v2Source, economySource]) {
+    assertTokensInOrder(
+      functionBody(source, "consume_reserved_lane"),
+      [
+        "lane.reward_source",
+        "position_reserved",
+        "lane.reserved",
+        "min(*remaining)",
+        "position_reserved =",
+        "lane.reserved =",
+        "lane.paid =",
+        "remaining =",
+      ],
+      "settlement single-lane consumption",
+    );
+    assertTokensInOrder(
+      functionBody(source, "consume_three_reservations"),
+      [
+        "treasury.lane",
+        "ecosystem.lane",
+        "liquidity.lane",
+        "consume_reserved_lane(treasury",
+        "consume_reserved_lane(ecosystem",
+        "consume_reserved_lane(liquidity",
+        "remaining",
+      ],
+      "settlement three-lane consumption",
+    );
+  }
+
+  const plan = structBody(economySource, "SettlePositionWeekPreCpiPlan");
+  assert.match(plan, /pub position: PositionState/u);
+  assert.match(plan, /pub amount: u64/u);
+  assert.match(plan, /pub settlement_bit: u64/u);
+  assert.match(plan, /pub transfers: \[TransferCheckedIntent; 3\]/u);
+
+  const v2Accounts = structBody(v2Source, "SettlePositionWeek");
+  assertTokensInOrder(
+    v2Accounts,
+    [
+      "pub caller: Signer<'info>",
+      "pub config: Box<Account<'info, Config>>",
+      "pub position: Box<Account<'info, Position>>",
+      "pub round: Option<Account<'info, Round>>",
+      "pub mint: Box<Account<'info, Mint>>",
+      'seeds = [b"vault-authority", config.key().as_ref()]',
+      "pub vault_authority: UncheckedAccount<'info>",
+      'seeds = [b"lane", config.key().as_ref(), &[TREASURY]]',
+      "pub treasury: Box<Account<'info, LaneVault>>",
+      "pub treasury_tokens: Box<Account<'info, TokenAccount>>",
+      'seeds = [b"lane", config.key().as_ref(), &[ECOSYSTEM]]',
+      "pub ecosystem: Box<Account<'info, LaneVault>>",
+      "pub ecosystem_tokens: Box<Account<'info, TokenAccount>>",
+      'seeds = [b"lane", config.key().as_ref(), &[LIQUIDITY]]',
+      "pub liquidity: Box<Account<'info, LaneVault>>",
+      "pub liquidity_tokens: Box<Account<'info, TokenAccount>>",
+      "pub destination_tokens: Box<Account<'info, TokenAccount>>",
+      "pub token_program: Program<'info, Token>",
+    ],
+    "V2 SettlePositionWeek accounts",
+  );
+  assert.doesNotMatch(v2Accounts, /\binit\b|\bclose\s*=/u);
+
+  assert.match(
+    audit,
+    /`prepare_settle_position_week` is the twelfth[\s\S]+`PRE_TOKEN_CPI_ONLY`[\s\S]+no public exposure/u,
+  );
+  assert.match(
+    audit,
+    /leaving position\s+paid and settlement bits unchanged[\s\S]+change CPI-error precedence/u,
+  );
+  assert.match(
+    audit,
+    /For `settle_position_week`[\s\S]+treasury, ecosystem, liquidity order[\s\S]+post-CPI finalizer[\s\S]+rolls back/u,
+  );
+});

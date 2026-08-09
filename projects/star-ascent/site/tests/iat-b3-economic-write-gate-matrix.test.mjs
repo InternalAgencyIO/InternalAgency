@@ -120,7 +120,7 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
-test("the host-only port contains exactly the first eleven gated kernels", () => {
+test("the host-only port contains exactly the first twelve gated kernels", () => {
   assert.deepEqual(matrix.hostOnlyPureTransitions, [
     {
       name: "expire_round",
@@ -202,6 +202,14 @@ test("the host-only port contains exactly the first eleven gated kernels", () =>
       handlerComplete: false,
       publicExposure: false,
     },
+    {
+      name: "prepare_settle_position_week",
+      implementationStage: "PRE_TOKEN_CPI_ONLY",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      handlerComplete: false,
+      publicExposure: false,
+    },
   ]);
   assert.match(
     economySource,
@@ -261,6 +269,13 @@ test("the host-only port contains exactly the first eleven gated kernels", () =>
     economySource,
     /struct WithdrawPositionPrincipalPreCpiPlan/u,
   );
+  assert.match(
+    economySource,
+    /pub fn prepare_settle_position_week\(\s*gate: &ValidatedDailyLawWrite,/u,
+  );
+  assert.match(economySource, /fn prepare_settle_position_week_transition\(/u);
+  assert.match(economySource, /struct PrepareSettlePositionWeekInput/u);
+  assert.match(economySource, /struct SettlePositionWeekPreCpiPlan/u);
   assert.match(
     economySource,
     /pub fn close_position\(\s*_gate: &ValidatedDailyLawWrite,/u,
@@ -354,6 +369,18 @@ test("the host-only port contains exactly the first eleven gated kernels", () =>
   assert.equal(
     withdrawPositionPrincipal.token2022Flow,
     "STAKE_VAULT_TO_POSITION_OWNER",
+  );
+
+  const settlePositionWeek = matrix.handlers.find(
+    (handler) => handler.name === "settle_position_week",
+  );
+  assert.equal(settlePositionWeek.implementationStage, "PRE_TOKEN_CPI_ONLY");
+  assert.equal(settlePositionWeek.handlerComplete, false);
+  assert.equal(settlePositionWeek.publicExposure, matrix.deploymentExposure);
+  assert.equal(settlePositionWeek.parity, "PRESERVE");
+  assert.equal(
+    settlePositionWeek.token2022Flow,
+    "REWARD_LANES_TO_POSITION_OWNER",
   );
 
   const closePosition = matrix.handlers.find(
