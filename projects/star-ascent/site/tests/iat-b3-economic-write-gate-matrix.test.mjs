@@ -120,7 +120,7 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
-test("the host-only port contains exactly the first thirteen gated kernels", () => {
+test("the host-only port contains exactly the first fourteen gated kernels", () => {
   assert.deepEqual(matrix.hostOnlyPureTransitions, [
     {
       name: "expire_round",
@@ -218,6 +218,14 @@ test("the host-only port contains exactly the first thirteen gated kernels", () 
       handlerComplete: false,
       publicExposure: false,
     },
+    {
+      name: "prepare_settle_core_week",
+      implementationStage: "PRE_TOKEN_CPI_ONLY",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      handlerComplete: false,
+      publicExposure: false,
+    },
   ]);
   assert.match(
     economySource,
@@ -284,6 +292,63 @@ test("the host-only port contains exactly the first thirteen gated kernels", () 
   assert.match(economySource, /fn prepare_settle_position_week_transition\(/u);
   assert.match(economySource, /struct PrepareSettlePositionWeekInput/u);
   assert.match(economySource, /struct SettlePositionWeekPreCpiPlan/u);
+  assert.match(
+    economySource,
+    /pub fn prepare_settle_core_week\(\s*gate: &ValidatedDailyLawWrite,/u,
+  );
+  assert.match(economySource, /fn prepare_settle_core_week_transition\(/u);
+  assert.match(economySource, /struct PrepareSettleCoreWeekInput/u);
+  assert.match(economySource, /struct SettleCoreWeekPreCpiPlan/u);
+  assert.match(
+    economySource,
+    /#\[cfg\(test\)\]\s*fn prepare_settle_core_week_v2_parity_seam\(/u,
+  );
+
+  const coreTransitionStart = economySource.indexOf(
+    "fn prepare_settle_core_week_transition(",
+  );
+  const corePreCpiStart = economySource.indexOf(
+    "fn prepare_settle_core_week_v2_pre_cpi(",
+  );
+  const coreLocationStart = economySource.indexOf(
+    "fn core_week_settlement_location(",
+  );
+  const coreParitySeamStart = economySource.indexOf(
+    "#[cfg(test)]\nfn prepare_settle_core_week_v2_parity_seam(",
+  );
+  assert(coreTransitionStart >= 0);
+  assert(corePreCpiStart > coreTransitionStart);
+  assert(coreLocationStart > corePreCpiStart);
+  assert(coreParitySeamStart > coreLocationStart);
+
+  const coreTransition = economySource.slice(coreTransitionStart, corePreCpiStart);
+  assert(
+    coreTransition.indexOf("prepare_settle_core_week_v2_pre_cpi") <
+      coreTransition.indexOf("CoreCustodyPolicyUnresolved"),
+    "the core-custody blocker must follow every retained settle-core pre-CPI check",
+  );
+  const corePreCpi = economySource.slice(corePreCpiStart, coreLocationStart);
+  let precedingCoreCheck = -1;
+  for (const marker of [
+    "!input.config.active",
+    "verify_destination(",
+    "input.ordinal >= input.core_reward.term_weeks",
+    ".checked_add(1)",
+    "let current_policy_week =",
+    "if payable_week > current_policy_week",
+    "core_week_settlement_location(",
+    "if already_settled",
+    "let amount = reward_for_week(",
+    "consume_three_reservations(",
+    "Ok(SettleCoreWeekPreCpiPlan",
+  ]) {
+    const currentCoreCheck = corePreCpi.indexOf(marker);
+    assert(currentCoreCheck > precedingCoreCheck, `settle-core order drifted: ${marker}`);
+    precedingCoreCheck = currentCoreCheck;
+  }
+  assert.doesNotMatch(corePreCpi, /CoreCustodyPolicyUnresolved/u);
+  assert.doesNotMatch(corePreCpi, /CCC_DLC_GENESIS_ENABLED|CccDlcNotActive/u);
+  assert.doesNotMatch(corePreCpi, /\.paid\s*=|settled_(?:low|high)\s*\|=/u);
   assert.match(
     economySource,
     /pub fn prepare_claim_lane_principal\(\s*gate: &ValidatedDailyLawWrite,/u,
@@ -444,6 +509,21 @@ test("the host-only port contains exactly the first thirteen gated kernels", () 
   assert.equal(
     settlePositionWeek.token2022Flow,
     "REWARD_LANES_TO_POSITION_OWNER",
+  );
+
+  const settleCoreWeek = matrix.handlers.find(
+    (handler) => handler.name === "settle_core_week",
+  );
+  assert.equal(settleCoreWeek.implementationStage, "PRE_TOKEN_CPI_ONLY");
+  assert.equal(settleCoreWeek.handlerComplete, false);
+  assert.equal(settleCoreWeek.publicExposure, matrix.deploymentExposure);
+  assert.equal(
+    settleCoreWeek.parity,
+    "BLOCKED_PENDING_OWNER_ACCEPTANCE_OF_CUSTODY_SCOPE_AND_RELEASE_POLICY",
+  );
+  assert.equal(
+    settleCoreWeek.token2022Flow,
+    "REWARD_LANES_TO_CANONICAL_CORE_CUSTODY",
   );
 
   const claimLanePrincipal = matrix.handlers.find(

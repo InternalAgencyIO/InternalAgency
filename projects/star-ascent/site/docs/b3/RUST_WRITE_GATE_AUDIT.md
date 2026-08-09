@@ -34,7 +34,9 @@ reservation, and transfer-intent kernel and the
 `prepare_withdraw_position_principal` maturity, stake-ledger, and transfer-
 intent kernel and the `prepare_settle_position_week` reward/reservation and
 ordered-transfer-intent kernel and the `prepare_claim_lane_principal` vesting,
-core-custody-blocker, and transfer-intent kernel staged as
+core-custody-blocker, and transfer-intent kernel and the
+`prepare_settle_core_week` reward/reservation and core-custody-blocker kernel
+staged as
 `PRE_TOKEN_CPI_ONLY`. Its
 manifest is `lib`-only and it has no Solana entrypoint or public dispatcher,
 account lifecycle, token CPI, or network access. Neither
@@ -98,9 +100,11 @@ the same pre-token-CPI boundary. `prepare_settle_position_week` is the twelfth
 host kernel and stops before the first reward transfer.
 `prepare_claim_lane_principal` is the thirteenth and stops before its principal
 transfer, with the unresolved core lane failing closed after retained V2
-pre-CPI validation. All four
+pre-CPI validation. `prepare_settle_core_week` is the fourteenth and likewise
+fails closed after retained V2 pre-CPI validation and reservation consumption.
+All four
 Genesis kernels and `set_eligibility` are `PRE_LIFECYCLE_ONLY`;
-all four prepare kernels are `PRE_TOKEN_CPI_ONLY`. All have no public exposure.
+all five prepare kernels are `PRE_TOKEN_CPI_ONLY`. All have no public exposure.
 Every production wrapper requires the opaque canonical Daily Law capability. The
 three round-related CCC wrappers then preserve the immutable CCC-disabled
 Genesis boundary before inspecting caller-supplied round, instruction-trace, or
@@ -244,6 +248,22 @@ the kernel does not prevalidate them, invoke a CPI, or increment
 `principal_claimed`. It is `PRE_TOKEN_CPI_ONLY`, handler-incomplete, and has no
 public exposure.
 
+The `prepare_settle_core_week` kernel preserves the exact retained V2
+handler-body order through the transfer boundary: active config, destination
+mint then fixed core beneficiary, stored term, checked payable week, validator-
+Clock current week, low/high settlement-word range and duplicate check, floor-
+delta reward, then treasury, ecosystem, and liquidity reservation consumption.
+The handler has no `CCC_DLC_GENESIS_ENABLED` check in V2, so this port does not
+misclassify it as CCC-disabled. Reservation checks still traverse all three
+lanes when the weekly reward is zero. Only after this complete pre-CPI boundary
+does production return `CoreCustodyPolicyUnresolved`; a private `#[cfg(test)]`
+seam models the old fixed-beneficiary transfer plan solely for differential
+tests. Its provisional core and lane copies leave `paid`, `settled_low`, and
+`settled_high` unchanged. It neither prevalidates later source-vault CPI facts
+nor moves the checked paid addition ahead of the three ordered CPIs, so token-
+CPI errors retain precedence over paid overflow. The slice is
+`PRE_TOKEN_CPI_ONLY`, handler-incomplete, and has no public exposure.
+
 Exact parity exposes a Mainnet-blocking denial: V2 requires the stake-vault
 token amount to equal tracked principal. An unsolicited 1-base-unit donation to
 that public vault makes `open_position` fail with `StakeLedgerMismatch` (and can
@@ -382,6 +402,14 @@ checked-adding `claimable` to `principal_claimed`; it must not prevalidate token
 source facts in a way that changes V2 CPI-error precedence. Local-validator
 rehearsal must prove atomic rollback for hook, token CPI, and post-CPI overflow
 failures.
+For `settle_core_week`, no adapter may proceed until canonical core custody and
+its release policy are frozen. It must then preserve the arbitrary-signer
+caller, bind config/core-reward/lane/vault/mint/Token-2022 identities, execute
+only nonzero hooked transfers in treasury, ecosystem, liquidity order, and only
+after all succeed checked-add paid and mark the selected low/high word. It must
+not add a CCC-disabled guard or prevalidate a later source vault in a way that
+masks an earlier CPI failure. Local-validator rehearsal must prove rollback for
+each hook/CPI failure and post-CPI paid overflow.
 
 That adapter also has an unresolved non-circular bootstrap requirement. If the
 combined `finalize_day` plus core-cap reconciliation path requires an already

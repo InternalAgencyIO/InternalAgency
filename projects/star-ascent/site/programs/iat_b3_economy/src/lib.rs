@@ -434,6 +434,48 @@ pub struct SettlePositionWeekPreCpiPlan {
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum CoreSettlementWord {
+    Low,
+    High,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct PrepareSettleCoreWeekInput {
+    pub config_key: [u8; 32],
+    pub config: ConfigState,
+    pub core_reward: CoreRewardState,
+    pub mint: [u8; 32],
+    pub vault_authority: [u8; 32],
+    pub destination_tokens: ReadonlyTokenState,
+    pub treasury: LaneState,
+    pub ecosystem: LaneState,
+    pub liquidity: LaneState,
+    pub ordinal: u64,
+}
+
+/// Host-only output through the exact point immediately before V2 begins its
+/// ordered core-reward transfers. Lane and core reservation values are
+/// provisional transaction-local copies. `core_reward.paid`, `settled_low`,
+/// and `settled_high` remain unchanged because V2 updates them only after every
+/// nonzero transfer CPI succeeds. The production transition never returns this
+/// plan while the immutable core-custody release policy remains unresolved.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct SettleCoreWeekPreCpiPlan {
+    pub config_key: [u8; 32],
+    pub config_snapshot: ConfigState,
+    pub core_reward: CoreRewardState,
+    pub treasury: LaneState,
+    pub ecosystem: LaneState,
+    pub liquidity: LaneState,
+    pub ordinal: u64,
+    pub payable_week: u64,
+    pub amount: u64,
+    pub settlement_word: CoreSettlementWord,
+    pub settlement_bit: u64,
+    pub transfers: [TransferCheckedIntent; 3],
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct PrepareClaimLanePrincipalInput {
     pub config_key: [u8; 32],
     pub config: ConfigState,
@@ -631,6 +673,8 @@ pub enum EconomyError {
     AgencyNotInRoundSnapshot,
     RoundNotSettled,
     PaymentExceedsReservation,
+    CoreRewardTermComplete,
+    CoreWeekAlreadySettled,
     NothingVestedToClaim,
     CoreCustodyPolicyUnresolved,
     PrincipalAlreadyReturned,
@@ -1160,6 +1204,137 @@ fn prepare_settle_position_week_transition(
             transfer(input.liquidity.token_account, liquidity_paid),
         ],
     })
+}
+
+/// Prepare retained V2 `settle_core_week` only through the point immediately
+/// before its first nonzero reward-vault transfer. Every retained handler-body
+/// pre-CPI check and reservation update runs before the B3-only custody blocker.
+/// The opaque Daily Law capability is required, but this host-only function
+/// performs no CPI, mutation, or persistence. A future native adapter may be
+/// completed only after the immutable core-custody destination and release
+/// policy are frozen; it must then execute the three hooked transfers in order
+/// and only afterward checked-add `amount` to `paid` and mark the selected word.
+pub fn prepare_settle_core_week(
+    gate: &ValidatedDailyLawWrite,
+    input: PrepareSettleCoreWeekInput,
+) -> Result<SettleCoreWeekPreCpiPlan, EconomyError> {
+    prepare_settle_core_week_transition(input, gate.unix_timestamp)
+}
+
+fn prepare_settle_core_week_transition(
+    input: PrepareSettleCoreWeekInput,
+    clock_unix_timestamp: i64,
+) -> Result<SettleCoreWeekPreCpiPlan, EconomyError> {
+    let _plan = prepare_settle_core_week_v2_pre_cpi(input, clock_unix_timestamp)?;
+    Err(EconomyError::CoreCustodyPolicyUnresolved)
+}
+
+/// Exact retained V2 body through its transfer boundary. This helper is
+/// private so no production caller can bypass the core-custody blocker.
+fn prepare_settle_core_week_v2_pre_cpi(
+    input: PrepareSettleCoreWeekInput,
+    clock_unix_timestamp: i64,
+) -> Result<SettleCoreWeekPreCpiPlan, EconomyError> {
+    if !input.config.active {
+        return Err(EconomyError::NotActive);
+    }
+    verify_destination(input.destination_tokens, input.mint, CORE_BENEFICIARY)?;
+    if input.ordinal >= input.core_reward.term_weeks {
+        return Err(EconomyError::CoreRewardTermComplete);
+    }
+    let payable_week = input
+        .ordinal
+        .checked_add(1)
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    let current_policy_week = current_week(input.config.genesis_timestamp, clock_unix_timestamp)
+        .ok_or(EconomyError::InvalidClock)?;
+    if payable_week > current_policy_week {
+        return Err(EconomyError::FutureSettlementForbidden);
+    }
+    let (settlement_word, settlement_bit, already_settled) =
+        core_week_settlement_location(input.core_reward, input.ordinal)?;
+    if already_settled {
+        return Err(EconomyError::CoreWeekAlreadySettled);
+    }
+    let amount = reward_for_week(
+        input.core_reward.principal,
+        input.core_reward.annual_rate_bps,
+        input.ordinal,
+    )
+    .ok_or(EconomyError::ArithmeticOverflow)?;
+
+    let mut core_reward = input.core_reward;
+    let mut treasury = input.treasury;
+    let mut ecosystem = input.ecosystem;
+    let mut liquidity = input.liquidity;
+    let (treasury_paid, ecosystem_paid, liquidity_paid) = consume_three_reservations(
+        &mut treasury,
+        &mut ecosystem,
+        &mut liquidity,
+        &mut core_reward.treasury_reserved,
+        &mut core_reward.ecosystem_reserved,
+        &mut core_reward.liquidity_reserved,
+        amount,
+    )?;
+
+    let transfer = |source, amount| TransferCheckedIntent {
+        token_program: input.config.token_program,
+        source,
+        mint: input.mint,
+        destination: input.destination_tokens.key,
+        authority: input.vault_authority,
+        amount,
+        decimals: TOKEN_DECIMALS,
+    };
+    Ok(SettleCoreWeekPreCpiPlan {
+        config_key: input.config_key,
+        config_snapshot: input.config,
+        core_reward,
+        treasury,
+        ecosystem,
+        liquidity,
+        ordinal: input.ordinal,
+        payable_week,
+        amount,
+        settlement_word,
+        settlement_bit,
+        transfers: [
+            transfer(input.treasury.token_account, treasury_paid),
+            transfer(input.ecosystem.token_account, ecosystem_paid),
+            transfer(input.liquidity.token_account, liquidity_paid),
+        ],
+    })
+}
+
+fn core_week_settlement_location(
+    core_reward: CoreRewardState,
+    ordinal: u64,
+) -> Result<(CoreSettlementWord, u64, bool), EconomyError> {
+    if ordinal < 64 {
+        let bit = 1u64 << ordinal;
+        Ok((
+            CoreSettlementWord::Low,
+            bit,
+            core_reward.settled_low & bit != 0,
+        ))
+    } else if ordinal < CORE_TERM_WEEKS {
+        let bit = 1u64 << (ordinal - 64);
+        Ok((
+            CoreSettlementWord::High,
+            bit,
+            core_reward.settled_high & bit != 0,
+        ))
+    } else {
+        Err(EconomyError::CoreRewardTermComplete)
+    }
+}
+
+#[cfg(test)]
+fn prepare_settle_core_week_v2_parity_seam(
+    input: PrepareSettleCoreWeekInput,
+    clock_unix_timestamp: i64,
+) -> Result<SettleCoreWeekPreCpiPlan, EconomyError> {
+    prepare_settle_core_week_v2_pre_cpi(input, clock_unix_timestamp)
 }
 
 /// Prepare retained V2 `claim_lane_principal` only through the point
@@ -3029,6 +3204,22 @@ mod tests {
         }
     }
 
+    fn v2_core_from_semantic(core: CoreRewardState) -> V2CoreRewardState {
+        V2CoreRewardState {
+            config: core.config.into(),
+            principal: core.principal,
+            annual_rate_bps: core.annual_rate_bps,
+            term_weeks: core.term_weeks,
+            treasury_reserved: core.treasury_reserved,
+            ecosystem_reserved: core.ecosystem_reserved,
+            liquidity_reserved: core.liquidity_reserved,
+            paid: core.paid,
+            settled_low: core.settled_low,
+            settled_high: core.settled_high,
+            bump: core.bump,
+        }
+    }
+
     fn v2_verify_community_funding(
         tokens: ReadonlyTokenState,
         mint: [u8; 32],
@@ -3990,6 +4181,175 @@ mod tests {
         })();
 
         observe_prepare_settle_position_week(result)
+    }
+
+    #[derive(Clone, Copy)]
+    struct PrepareSettleCoreWeekVector {
+        name: &'static str,
+        input: PrepareSettleCoreWeekInput,
+        clock_timestamp: i64,
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum PrepareSettleCoreWeekObservation {
+        Error(EconomyError),
+        Success(Box<SettleCoreWeekPreCpiPlan>),
+    }
+
+    fn observe_prepare_settle_core_week(
+        result: Result<SettleCoreWeekPreCpiPlan, EconomyError>,
+    ) -> PrepareSettleCoreWeekObservation {
+        match result {
+            Err(error) => PrepareSettleCoreWeekObservation::Error(error),
+            Ok(plan) => PrepareSettleCoreWeekObservation::Success(Box::new(plan)),
+        }
+    }
+
+    fn valid_prepare_settle_core_week_vector(name: &'static str) -> PrepareSettleCoreWeekVector {
+        let mut config = initialize_config_transition(
+            valid_initialize_config_vector("settle-core config", false).input,
+            1_000,
+        )
+        .unwrap()
+        .config;
+        config.active = true;
+        let config_key = [0xb1; 32];
+        let mint = config.mint;
+        PrepareSettleCoreWeekVector {
+            name,
+            input: PrepareSettleCoreWeekInput {
+                config_key,
+                config,
+                core_reward: CoreRewardState {
+                    config: config_key,
+                    principal: 5_200_000,
+                    annual_rate_bps: CORE_RATE_BPS,
+                    term_weeks: CORE_TERM_WEEKS,
+                    treasury_reserved: 10_000,
+                    ecosystem_reserved: 5_000,
+                    liquidity_reserved: 3_000,
+                    paid: 123,
+                    settled_low: 0,
+                    settled_high: 0,
+                    bump: 244,
+                },
+                mint,
+                vault_authority: [0xb2; 32],
+                destination_tokens: ReadonlyTokenState {
+                    key: [0xb3; 32],
+                    mint,
+                    owner: CORE_BENEFICIARY,
+                    amount: 0,
+                },
+                treasury: lane_state(TREASURY, 10_000, 0xb4),
+                ecosystem: lane_state(ECOSYSTEM, 5_000, 0xb5),
+                liquidity: lane_state(LIQUIDITY, 3_000, 0xb6),
+                ordinal: 4,
+            },
+            clock_timestamp: config.genesis_timestamp + 5 * SECONDS_PER_WEEK,
+        }
+    }
+
+    fn v2_prepare_settle_core_week_reference(
+        vector: PrepareSettleCoreWeekVector,
+    ) -> PrepareSettleCoreWeekObservation {
+        let _case_name = vector.name;
+        let input = vector.input;
+        let result = (|| {
+            if !input.config.active {
+                return Err(EconomyError::NotActive);
+            }
+            if input.destination_tokens.mint != input.mint {
+                return Err(EconomyError::WrongTokenMint);
+            }
+            if input.destination_tokens.owner != iat_v2::CORE_BENEFICIARY.to_bytes() {
+                return Err(EconomyError::WrongDestinationOwner);
+            }
+
+            let mut core_reward = v2_core_from_semantic(input.core_reward);
+            if input.ordinal >= core_reward.term_weeks {
+                return Err(EconomyError::CoreRewardTermComplete);
+            }
+            let payable_week = input
+                .ordinal
+                .checked_add(1)
+                .ok_or(EconomyError::ArithmeticOverflow)?;
+            let current_policy_week =
+                v2_policy::current_week(input.config.genesis_timestamp, vector.clock_timestamp)
+                    .ok_or(EconomyError::InvalidClock)?;
+            if payable_week > current_policy_week {
+                return Err(EconomyError::FutureSettlementForbidden);
+            }
+
+            let (settlement_word, settlement_bit, already_settled) = if input.ordinal < 64 {
+                let bit = 1u64 << input.ordinal;
+                (
+                    CoreSettlementWord::Low,
+                    bit,
+                    core_reward.settled_low & bit != 0,
+                )
+            } else if input.ordinal < v2_policy::CORE_TERM_WEEKS {
+                let bit = 1u64 << (input.ordinal - 64);
+                (
+                    CoreSettlementWord::High,
+                    bit,
+                    core_reward.settled_high & bit != 0,
+                )
+            } else {
+                return Err(EconomyError::CoreRewardTermComplete);
+            };
+            if already_settled {
+                return Err(EconomyError::CoreWeekAlreadySettled);
+            }
+
+            let amount = v2_policy::reward_for_week(
+                core_reward.principal,
+                core_reward.annual_rate_bps,
+                input.ordinal,
+            )
+            .ok_or(EconomyError::ArithmeticOverflow)?;
+            let mut treasury = v2_lane_from_semantic(input.treasury);
+            let mut ecosystem = v2_lane_from_semantic(input.ecosystem);
+            let mut liquidity = v2_lane_from_semantic(input.liquidity);
+            let (treasury_paid, ecosystem_paid, liquidity_paid) = v2_consume_three_reservations(
+                &mut treasury,
+                &mut ecosystem,
+                &mut liquidity,
+                &mut core_reward.treasury_reserved,
+                &mut core_reward.ecosystem_reserved,
+                &mut core_reward.liquidity_reserved,
+                amount,
+            )?;
+            let transfer = |source, amount| TransferCheckedIntent {
+                token_program: input.config.token_program,
+                source,
+                mint: input.mint,
+                destination: input.destination_tokens.key,
+                authority: input.vault_authority,
+                amount,
+                decimals: v2_policy::TOKEN_DECIMALS,
+            };
+            Ok(SettleCoreWeekPreCpiPlan {
+                config_key: input.config_key,
+                config_snapshot: input.config,
+                core_reward: semantic_core_from_v2(core_reward),
+                treasury: semantic_lane_from_v2(treasury),
+                ecosystem: semantic_lane_from_v2(ecosystem),
+                liquidity: semantic_lane_from_v2(liquidity),
+                ordinal: input.ordinal,
+                payable_week,
+                amount,
+                settlement_word,
+                settlement_bit,
+                transfers: [
+                    transfer(input.treasury.token_account, treasury_paid),
+                    transfer(input.ecosystem.token_account, ecosystem_paid),
+                    transfer(input.liquidity.token_account, liquidity_paid),
+                ],
+            })
+        })();
+
+        observe_prepare_settle_core_week(result)
     }
 
     #[derive(Clone, Copy)]
@@ -6852,6 +7212,388 @@ mod tests {
         vector.input.config.genesis_timestamp = FRIDAY_BOUNDARY_UTC - 4 * SECONDS_PER_WEEK;
         let plan = prepare_settle_position_week(&gate, vector.input).unwrap();
         assert_eq!(plan.week, 4);
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
+        let missing_bytes = pack_law_state(None);
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &missing_bytes),
+            Err(EconomyError::DayUnfinalized)
+        );
+    }
+
+    #[test]
+    fn prepare_settle_core_week_validation_order_matches_retained_v2() {
+        let base = valid_prepare_settle_core_week_vector("base");
+        let mut cases = Vec::new();
+
+        let mut input = base.input;
+        input.config.active = false;
+        input.destination_tokens.mint = [0xc0; 32];
+        cases.push((
+            "inactive precedes destination",
+            input,
+            input.config.genesis_timestamp - 1,
+            EconomyError::NotActive,
+        ));
+
+        let mut input = base.input;
+        input.destination_tokens.mint = [0xc1; 32];
+        input.destination_tokens.owner = [0xc2; 32];
+        cases.push((
+            "destination mint precedes owner",
+            input,
+            base.clock_timestamp,
+            EconomyError::WrongTokenMint,
+        ));
+
+        let mut input = base.input;
+        input.destination_tokens.owner = [0xc3; 32];
+        input.ordinal = CORE_TERM_WEEKS;
+        cases.push((
+            "fixed beneficiary precedes term",
+            input,
+            base.clock_timestamp,
+            EconomyError::WrongDestinationOwner,
+        ));
+
+        let mut input = base.input;
+        input.ordinal = input.core_reward.term_weeks;
+        cases.push((
+            "stored term precedes Clock",
+            input,
+            input.config.genesis_timestamp - 1,
+            EconomyError::CoreRewardTermComplete,
+        ));
+
+        cases.push((
+            "Clock before Genesis precedes payable comparison",
+            base.input,
+            base.input.config.genesis_timestamp - 1,
+            EconomyError::InvalidClock,
+        ));
+
+        cases.push((
+            "future payable week precedes settlement bitmap",
+            base.input,
+            base.input.config.genesis_timestamp + 4 * SECONDS_PER_WEEK,
+            EconomyError::FutureSettlementForbidden,
+        ));
+
+        let mut input = base.input;
+        input.core_reward.term_weeks = CORE_TERM_WEEKS + 1;
+        input.ordinal = CORE_TERM_WEEKS;
+        cases.push((
+            "fixed bitmap range follows payable-week validation",
+            input,
+            input.config.genesis_timestamp + 105 * SECONDS_PER_WEEK,
+            EconomyError::CoreRewardTermComplete,
+        ));
+
+        let mut input = base.input;
+        input.core_reward.settled_low = 1u64 << input.ordinal;
+        input.core_reward.principal = u64::MAX;
+        input.core_reward.annual_rate_bps = u64::MAX;
+        cases.push((
+            "already-settled precedes reward arithmetic",
+            input,
+            base.clock_timestamp,
+            EconomyError::CoreWeekAlreadySettled,
+        ));
+
+        let mut input = base.input;
+        input.ordinal = 64;
+        input.core_reward.settled_high = 1;
+        cases.push((
+            "high settlement word is retained",
+            input,
+            input.config.genesis_timestamp + 65 * SECONDS_PER_WEEK,
+            EconomyError::CoreWeekAlreadySettled,
+        ));
+
+        let mut input = base.input;
+        input.core_reward.principal = u64::MAX;
+        input.core_reward.annual_rate_bps = u64::MAX;
+        cases.push((
+            "reward arithmetic precedes reservation lanes",
+            input,
+            base.clock_timestamp,
+            EconomyError::ArithmeticOverflow,
+        ));
+
+        let mut input = base.input;
+        input.treasury.lane = ECOSYSTEM;
+        input.treasury.reward_source = false;
+        cases.push((
+            "lane order precedes reward-source status",
+            input,
+            base.clock_timestamp,
+            EconomyError::WrongLaneOrder,
+        ));
+
+        let mut input = base.input;
+        input.treasury.reward_source = false;
+        input.core_reward.treasury_reserved = input.treasury.reserved + 1;
+        cases.push((
+            "reward-source status precedes reservation ledger",
+            input,
+            base.clock_timestamp,
+            EconomyError::NotRewardLane,
+        ));
+
+        let mut input = base.input;
+        input.core_reward.treasury_reserved = input.treasury.reserved + 1;
+        cases.push((
+            "reservation mismatch precedes paid arithmetic",
+            input,
+            base.clock_timestamp,
+            EconomyError::ReservationLedgerMismatch,
+        ));
+
+        let mut input = base.input;
+        input.treasury.paid = u64::MAX;
+        cases.push((
+            "lane paid overflow is pre-CPI",
+            input,
+            base.clock_timestamp,
+            EconomyError::ArithmeticOverflow,
+        ));
+
+        let mut input = base.input;
+        input.core_reward.treasury_reserved = 1;
+        input.core_reward.ecosystem_reserved = 1;
+        input.core_reward.liquidity_reserved = 1;
+        input.treasury.reserved = 1;
+        input.ecosystem.reserved = 1;
+        input.liquidity.reserved = 1;
+        cases.push((
+            "insufficient total reservations fail last in preflight",
+            input,
+            base.clock_timestamp,
+            EconomyError::PaymentExceedsReservation,
+        ));
+
+        for (name, input, clock_timestamp, expected_error) in cases {
+            let vector = PrepareSettleCoreWeekVector {
+                name,
+                input,
+                clock_timestamp,
+            };
+            let actual = observe_prepare_settle_core_week(prepare_settle_core_week_transition(
+                input,
+                clock_timestamp,
+            ));
+            assert_eq!(
+                actual,
+                PrepareSettleCoreWeekObservation::Error(expected_error),
+                "fixed error: {name}"
+            );
+            assert_eq!(
+                actual,
+                v2_prepare_settle_core_week_reference(vector),
+                "V2 differential: {name}"
+            );
+        }
+    }
+
+    #[test]
+    fn prepare_settle_core_week_private_seam_returns_exact_pre_cpi_plan() {
+        for ordinal in [0u64, 1, 4, 63, 64, 103] {
+            let mut vector = valid_prepare_settle_core_week_vector("ordinal differential");
+            vector.input.ordinal = ordinal;
+            vector.clock_timestamp = vector.input.config.genesis_timestamp
+                + i64::try_from(ordinal + 1).unwrap() * SECONDS_PER_WEEK;
+            let actual = observe_prepare_settle_core_week(prepare_settle_core_week_v2_parity_seam(
+                vector.input,
+                vector.clock_timestamp,
+            ));
+            assert_eq!(
+                actual,
+                v2_prepare_settle_core_week_reference(vector),
+                "ordinal={ordinal}"
+            );
+        }
+
+        let vector = valid_prepare_settle_core_week_vector("exact plan");
+        let plan =
+            prepare_settle_core_week_v2_parity_seam(vector.input, vector.clock_timestamp).unwrap();
+        assert_eq!(plan.config_key, vector.input.config_key);
+        assert_eq!(plan.config_snapshot, vector.input.config);
+        assert_eq!(plan.ordinal, 4);
+        assert_eq!(plan.payable_week, 5);
+        assert_eq!(plan.amount, 17_000);
+        assert_eq!(plan.settlement_word, CoreSettlementWord::Low);
+        assert_eq!(plan.settlement_bit, 1 << 4);
+        assert_eq!(
+            plan.transfers.map(|transfer| transfer.amount),
+            [10_000, 5_000, 2_000]
+        );
+        assert_eq!(
+            plan.transfers.map(|transfer| transfer.source),
+            [
+                vector.input.treasury.token_account,
+                vector.input.ecosystem.token_account,
+                vector.input.liquidity.token_account,
+            ]
+        );
+        for transfer in plan.transfers {
+            assert_eq!(transfer.token_program, vector.input.config.token_program);
+            assert_eq!(transfer.mint, vector.input.mint);
+            assert_eq!(transfer.destination, vector.input.destination_tokens.key);
+            assert_eq!(transfer.authority, vector.input.vault_authority);
+            assert_eq!(transfer.decimals, TOKEN_DECIMALS);
+        }
+        assert_eq!(
+            [
+                plan.core_reward.treasury_reserved,
+                plan.core_reward.ecosystem_reserved,
+                plan.core_reward.liquidity_reserved,
+            ],
+            [0, 0, 1_000]
+        );
+        assert_eq!(plan.core_reward.paid, vector.input.core_reward.paid);
+        assert_eq!(
+            (plan.core_reward.settled_low, plan.core_reward.settled_high),
+            (
+                vector.input.core_reward.settled_low,
+                vector.input.core_reward.settled_high,
+            )
+        );
+
+        let mut paid_overflow_after_cpi = vector;
+        paid_overflow_after_cpi.input.core_reward.paid = u64::MAX;
+        let overflow_plan = prepare_settle_core_week_v2_parity_seam(
+            paid_overflow_after_cpi.input,
+            paid_overflow_after_cpi.clock_timestamp,
+        )
+        .unwrap();
+        assert_eq!(overflow_plan.core_reward.paid, u64::MAX);
+        assert_eq!(
+            observe_prepare_settle_core_week(Ok(overflow_plan)),
+            v2_prepare_settle_core_week_reference(paid_overflow_after_cpi)
+        );
+
+        let mut zero = valid_prepare_settle_core_week_vector("zero reward");
+        zero.input.core_reward.principal = 1;
+        zero.input.core_reward.annual_rate_bps = 1;
+        let zero_plan =
+            prepare_settle_core_week_v2_parity_seam(zero.input, zero.clock_timestamp).unwrap();
+        assert_eq!(zero_plan.amount, 0);
+        assert_eq!(
+            zero_plan.transfers.map(|transfer| transfer.amount),
+            [0, 0, 0]
+        );
+        assert_eq!(zero_plan.core_reward, zero.input.core_reward);
+        assert_eq!(zero_plan.treasury, zero.input.treasury);
+        assert_eq!(zero_plan.ecosystem, zero.input.ecosystem);
+        assert_eq!(zero_plan.liquidity, zero.input.liquidity);
+
+        for lane_index in 0..3 {
+            let mut wrong_order = zero;
+            match lane_index {
+                0 => wrong_order.input.treasury.lane = ECOSYSTEM,
+                1 => wrong_order.input.ecosystem.lane = TREASURY,
+                _ => wrong_order.input.liquidity.lane = ECOSYSTEM,
+            }
+            assert_eq!(
+                observe_prepare_settle_core_week(prepare_settle_core_week_v2_parity_seam(
+                    wrong_order.input,
+                    wrong_order.clock_timestamp,
+                )),
+                v2_prepare_settle_core_week_reference(wrong_order),
+                "zero reward lane order index={lane_index}"
+            );
+            assert_eq!(
+                prepare_settle_core_week_v2_parity_seam(
+                    wrong_order.input,
+                    wrong_order.clock_timestamp,
+                ),
+                Err(EconomyError::WrongLaneOrder)
+            );
+
+            let mut non_reward = zero;
+            match lane_index {
+                0 => non_reward.input.treasury.reward_source = false,
+                1 => non_reward.input.ecosystem.reward_source = false,
+                _ => non_reward.input.liquidity.reward_source = false,
+            }
+            assert_eq!(
+                prepare_settle_core_week_v2_parity_seam(
+                    non_reward.input,
+                    non_reward.clock_timestamp,
+                ),
+                Err(EconomyError::NotRewardLane),
+                "zero reward source index={lane_index}"
+            );
+
+            let mut mismatch = zero;
+            match lane_index {
+                0 => {
+                    mismatch.input.core_reward.treasury_reserved =
+                        mismatch.input.treasury.reserved + 1;
+                }
+                1 => {
+                    mismatch.input.core_reward.ecosystem_reserved =
+                        mismatch.input.ecosystem.reserved + 1;
+                }
+                _ => {
+                    mismatch.input.core_reward.liquidity_reserved =
+                        mismatch.input.liquidity.reserved + 1;
+                }
+            }
+            assert_eq!(
+                prepare_settle_core_week_v2_parity_seam(mismatch.input, mismatch.clock_timestamp,),
+                Err(EconomyError::ReservationLedgerMismatch),
+                "zero reward reservation index={lane_index}"
+            );
+        }
+    }
+
+    #[test]
+    fn prepare_settle_core_week_core_blocker_follows_every_v2_pre_cpi_check() {
+        let base = valid_prepare_settle_core_week_vector("core blocker");
+        assert_eq!(
+            prepare_settle_core_week_transition(base.input, base.clock_timestamp),
+            Err(EconomyError::CoreCustodyPolicyUnresolved)
+        );
+        assert_eq!(
+            observe_prepare_settle_core_week(prepare_settle_core_week_v2_parity_seam(
+                base.input,
+                base.clock_timestamp,
+            )),
+            v2_prepare_settle_core_week_reference(base)
+        );
+
+        let mut bad_reservation = base.input;
+        bad_reservation.core_reward.treasury_reserved = 0;
+        bad_reservation.core_reward.ecosystem_reserved = 0;
+        bad_reservation.core_reward.liquidity_reserved = 0;
+        assert_eq!(
+            prepare_settle_core_week_transition(bad_reservation, base.clock_timestamp),
+            Err(EconomyError::PaymentExceedsReservation)
+        );
+
+        let mut paid_overflow_after_cpi = base.input;
+        paid_overflow_after_cpi.core_reward.paid = u64::MAX;
+        assert_eq!(
+            prepare_settle_core_week_transition(paid_overflow_after_cpi, base.clock_timestamp),
+            Err(EconomyError::CoreCustodyPolicyUnresolved)
+        );
+    }
+
+    #[test]
+    fn prepare_settle_core_week_requires_open_law_and_is_not_ccc_gated() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let mut vector = valid_prepare_settle_core_week_vector("core wrapper");
+        vector.input.config.genesis_timestamp = FRIDAY_BOUNDARY_UTC - 5 * SECONDS_PER_WEEK;
+        assert_eq!(
+            prepare_settle_core_week(&gate, vector.input),
+            Err(EconomyError::CoreCustodyPolicyUnresolved)
+        );
 
         let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
         assert_eq!(

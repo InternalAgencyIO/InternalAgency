@@ -110,6 +110,14 @@
       "v2DifferentialTests": true,
       "handlerComplete": false,
       "publicExposure": false
+    },
+    {
+      "name": "prepare_settle_core_week",
+      "implementationStage": "PRE_TOKEN_CPI_ONLY",
+      "dailyLawCapabilityRequired": true,
+      "v2DifferentialTests": true,
+      "handlerComplete": false,
+      "publicExposure": false
     }
   ],
   "canonicalGate": {
@@ -246,6 +254,8 @@
       "cpis": ["token_2022.transfer_checked_with_hook_accounts"],
       "token2022Flow": "REWARD_LANES_TO_CANONICAL_CORE_CUSTODY",
       "parity": "BLOCKED_PENDING_OWNER_ACCEPTANCE_OF_CUSTODY_SCOPE_AND_RELEASE_POLICY",
+      "implementationStage": "PRE_TOKEN_CPI_ONLY",
+      "handlerComplete": false,
       "publicExposure": "DISABLED_UNTIL_ALL_15_PASS"
     },
     {

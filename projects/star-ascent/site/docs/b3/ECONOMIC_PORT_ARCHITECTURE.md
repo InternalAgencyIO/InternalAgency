@@ -290,11 +290,14 @@ permanently close after the committed set is exhausted.
     then fail closed for the core lane while custody release remains unresolved.
     A non-core success returns an unchanged lane snapshot and one transfer intent;
     it must not invoke Token-2022 or increment principal claimed.
+    Add only `prepare_settle_core_week` through V2's ordered reservation
+    consumption, then always fail closed while core custody remains unresolved.
+    Its test-only parity plan leaves paid and settlement words unchanged.
 5. Port the eight account-creating paths with manual post-gate System Program
    CPIs and prove locked/unfinalized calls perform no successful CPI or state
    change. The existing `initialize_config`, `initialize_lane_vault`,
    `initialize_stake_vault`, `activate`, and `set_eligibility`
-   `PRE_LIFECYCLE_ONLY` kernels and the four `PRE_TOKEN_CPI_ONLY` prepare
+   `PRE_LIFECYCLE_ONLY` kernels and the five `PRE_TOKEN_CPI_ONLY` prepare
    kernels are not completion of this step and must not be exposed until the
    corresponding lifecycle/CPI adapters exist.
 6. Port Token-2022 vault transfers and exercise the real hook for
@@ -411,6 +414,25 @@ and Token-2022 identity, execute the hooked transfer, and only then apply that
 checked addition atomically; hook, token, and post-CPI overflow failures require
 local-validator rollback proof. This slice is handler-incomplete and has no
 public exposure.
+
+The fourteenth adds only `prepare_settle_core_week` through the exact point
+before V2 begins its treasury, ecosystem, and liquidity reward transfers. It
+preserves active, destination mint then fixed core beneficiary, stored term,
+payable-week arithmetic, validator-Clock current week, low/high settlement-word
+selection and duplicate rejection, floor-delta reward, and three-lane
+reservation-consumption precedence. V2 does not apply the compile-time CCC
+disabled guard to this handler, so the host kernel does not invent one. Only
+after every retained pre-CPI check does production return
+`CoreCustodyPolicyUnresolved`; a private `#[cfg(test)]` seam alone exposes the
+former direct-beneficiary plan for differential proof. The plan contains
+provisional reservations and ordered transfer intents but leaves `paid` and both
+settlement words unchanged. Source-vault failures remain at the future CPI
+boundary, and paid overflow remains after all successful CPIs, preserving V2
+error precedence. A future adapter must first freeze canonical custody and its
+release policy, independently bind all accounts and PDAs, execute only nonzero
+hooked transfers in order, then checked-add paid and mark the selected word in
+the same transaction. This slice is handler-incomplete and has no public
+exposure.
 
 V2 `close_position` releases residual reservations and marks the position
 closed; it has no account-close lifecycle. The closed position PDA remains
