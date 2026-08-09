@@ -220,6 +220,25 @@ permissionless Clock plus SlotHashes finalization, direct-call rejection, and
 missing/stale/open/locked/forged state gates. No public network was written. See
 [`LOCAL_VALIDATOR_REHEARSAL.md`](LOCAL_VALIDATOR_REHEARSAL.md).
 
+A 2026-08-09 disposable stake-ingress rehearsal separately passed the pinned
+Token-2022 runtime primitives: exact owner-signed approval CPI, stateless
+ingress-PDA `invoke_signed`, hooked transfer, allowance auto-clear, exact prior-
+delegate restoration, direct-donation rejection, CPI Guard fail-closed, and
+atomic rollback at hook, post-CPI, and restoration failures. The two fixture
+binaries are explicitly non-production and did not execute Daily Law in the
+same hook. Production integration therefore remains blocked on the three
+frozen identities and a repeat of both matrices against one final binary. See
+the stake-ingress section and machine record linked from
+[`LOCAL_VALIDATOR_REHEARSAL.md`](LOCAL_VALIDATOR_REHEARSAL.md).
+
+Here “stateless” is normative: neither the adapter nor hook may require the
+ingress PDA to be absent, unfunded, System-owned, program-owned, zero-data,
+non-executable, or in any other account state. The loopback runner funds the
+previously absent PDA before both successful deposits and binds the observed
+System owner, zero data length, non-executable bit, and nonzero lamports in its
+record. Canonical key derivation and valid `invoke_signed` seeds are the only
+admission facts.
+
 Before Devnet:
 
 - produce a pinned SBF binary and SHA-256 evidence in public CI;

@@ -1,0 +1,117 @@
+{
+  "schema": "iat-b3-stake-ingress-local-validator-record/v1",
+  "status": "PASS",
+  "recordedAt": "2026-08-09T02:36:38.1416388Z",
+  "scope": {
+    "rpc": "http://127.0.0.1:18999",
+    "rpcScope": "loopback-only",
+    "publicNetworkWrites": false,
+    "productionDeployments": false,
+    "productionProgramSourcesModified": false
+  },
+  "toolchain": {
+    "agaveCli": "3.1.10",
+    "solanaTestValidator": "3.1.10",
+    "cargoBuildSbf": "3.1.10",
+    "platformTools": "1.52",
+    "sbfRustc": "1.89.0",
+    "splTokenCli": "5.5.0",
+    "node": "24.14.0",
+    "splToken2022Interface": "2.1.0",
+    "splTransferHookInterface": "2.1.0"
+  },
+  "fixture": {
+    "productionCandidate": false,
+    "purpose": "Prove pinned-runtime stake-ingress primitives while production identities and adapter entrypoints remain unavailable.",
+    "economy": {
+      "programId": "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
+      "bytes": 93736,
+      "sha256": "d535745640720c116ae50b50f2bfb30c02404f2518815546c9e54d8146e25fd2",
+      "sourceSha256": "0a64e236234f1beae77f999e5648fda3145aa36932561f128f166de2d1068cf7"
+    },
+    "hook": {
+      "programId": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F",
+      "bytes": 84864,
+      "sha256": "70f2b25fb16d385f25948e625345c2b8d082270f2383de39ed72ed74b6407e55",
+      "sourceSha256": "b036c6308b23592e7a8f2b2b67f12b1fc46425e282e6c4f533e0c599292c6061"
+    },
+    "cargoLockSha256": "158eb3c7cb0af9f824c4d618312958dd0f909add1a4f6cab3385e38339a05d43",
+    "runnerSha256": "7fd853b865b365790575d25bedb5ce8d3d5842875e8443a55c439d677de49ddb",
+    "driverSha256": "b97ab7fd397e5960192d3d86018aa07ee3be587ab482bf3ce5c0fabbdd90ca2b"
+  },
+  "productionLawArtifact": {
+    "executedByThisTargetedRun": false,
+    "bytes": 154952,
+    "sha256BeforeAndAfter": "927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c",
+    "reason": "Token-2022 permits one transfer-hook program per mint. The production law hook intentionally lacks stake-ingress wiring until the law program, economy program, and mint identities are frozen. Its separate Daily Law validator evidence remains authoritative for that artifact."
+  },
+  "observed": {
+    "ownerSignedExactApproveCheckedCpi": true,
+    "statelessIngressPdaInvokeSignedTransferChecked": true,
+    "statelessIngressPdaHasNoStatePrerequisite": true,
+    "ingressPdaFundingAdversary": {
+      "absentBeforeFunding": true,
+      "fundedBeforeBothSuccessCases": true,
+      "lamports": 1000000,
+      "owner": "11111111111111111111111111111111",
+      "dataLength": 0,
+      "executable": false,
+      "bothSuccessCasesPassedAfterFunding": true,
+      "noLamportsPrerequisite": true,
+      "noOwnerPrerequisite": true,
+      "noDataPrerequisite": true,
+      "noExecutablePrerequisite": true
+    },
+    "hookTransferContextRequired": {
+      "directInvocationRejected": true,
+      "customError": 102,
+      "balancesAndDelegateUnchanged": true
+    },
+    "hookAuthorityDeescalatedToNonSigner": true,
+    "exactTemporaryDelegateAmountConsumed": true,
+    "temporaryDelegateAutoClearedAtZero": true,
+    "priorDelegateRestoredExactly": {
+      "delegatePubkeyMatched": true,
+      "delegatedAmountBefore": "41",
+      "delegatedAmountAfter": "41"
+    },
+    "directStakeVaultDonationRejected": {
+      "customError": 103,
+      "balancesAndDelegateUnchanged": true
+    },
+    "injectedHookFailure": {
+      "customError": 105,
+      "approvalBalanceAndDelegateWritesRolledBack": true
+    },
+    "injectedPostCpiFailure": {
+      "customError": 207,
+      "approvalTransferBalancesAndDelegateWritesRolledBack": true
+    },
+    "restorationCpiFailure": {
+      "token2022CustomError": 18,
+      "reason": "mint decimals mismatch",
+      "approvalTransferBalancesAndDelegateWritesRolledBack": true
+    },
+    "cpiGuard": {
+      "enabledOnSource": true,
+      "approveCheckedCpiRejected": true,
+      "token2022CustomError": 45,
+      "balancesAndDelegateUnchanged": true
+    }
+  },
+  "cleanup": {
+    "temporaryLedgerRemoved": true,
+    "generatedKeyMaterialRemoved": true,
+    "validatorStopped": true,
+    "publicNetworkWrites": false
+  },
+  "limits": {
+    "combinedDailyLawAndStakeIngressHookProven": false,
+    "productionEconomyEntrypointProven": false,
+    "productionIdentitiesFrozen": false,
+    "v2EconomicMathChanged": false,
+    "v2EconomicMathExercisedByThisFixture": false,
+    "mainnetAuthorization": false,
+    "remainingGate": "Freeze the production law ID, economy ID, and mint; wire the reviewed rule into the final hook and the retained V2 adapter; rerun this matrix plus Daily Law in the exact frozen binary."
+  }
+}

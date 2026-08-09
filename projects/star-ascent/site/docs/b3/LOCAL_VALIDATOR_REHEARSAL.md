@@ -66,11 +66,70 @@ The sanitized historical run record is
 [`evidence/local-validator-rehearsal-20260808.json`](evidence/local-validator-rehearsal-20260808.json).
 The harness itself emits more granular newline-delimited JSON on every run.
 
-Without `--require-tools`, missing validator, Token-2022 CLI, Node, checksum, or
-local artifact prerequisites emit a machine-readable `SKIP` record and exit
-successfully. This makes the rehearsal CI-optional without turning a present but
-failing validator stack into a pass. With `--require-tools`, the same absence is
-an error.
+For that Daily Law runner, without `--require-tools`, missing validator,
+Token-2022 CLI, Node, checksum, or local artifact prerequisites emit a machine-
+readable `SKIP` record and exit successfully. This makes the Daily Law
+rehearsal CI-optional without turning a present but failing validator stack
+into a pass. With `--require-tools`, the same absence is an error.
+
+## Stake-ingress primitive rehearsal — 2026-08-09
+
+A separate disposable two-program fixture now proves the proposed temporary-
+delegate ingress mechanics against Agave `3.1.10`, SPL Token CLI `5.5.0`,
+Token-2022 interface `2.1.0`, and Transfer Hook interface `2.1.0`. Run it with:
+
+```bash
+bash scripts/run-iat-b3-stake-ingress-local-rehearsal.sh
+```
+
+The real loopback run proved an owner-signed exact `ApproveChecked` CPI, a
+stateless `PDA(economy, ["stake-ingress", config])` authority used with
+`invoke_signed`, a hooked `TransferChecked`, authority de-escalation to a
+non-signer at hook execution, exact allowance consumption and automatic
+delegate clearing, and exact restoration of a pre-existing delegate and its
+allowance. It also proved that a direct owner-authorized donation into the
+canonical stake vault is rejected.
+
+Stateless means the rule binds the PDA key and signer seeds only: it has no
+account-existence, lamports, owner, data length/content, executable-bit, or
+other account-state prerequisite. Before both successful ingress cases, the
+runner sent `1,000,000` lamports to the previously absent PDA and verified the
+resulting account was System Program-owned, zero-data, and non-executable. Both
+paths still succeeded unchanged. This funded state is a concrete griefing
+adversary; the fixture source and static tests separately require the adapter
+and hook to avoid every listed state predicate.
+
+A direct hook invocation outside Token-2022 transfer context rejected with
+fixture error `102` and left both balances and delegate state unchanged. The
+successful paths separately observed Token-2022 de-escalate the authenticated
+transfer authority to a hook-visible non-signer.
+
+Four failure paths left source balance, stake-vault balance, delegate, and
+delegated allowance unchanged: an injected hook rejection after approval, an
+injected post-transfer error, an actual restoration `ApproveChecked` decimals
+mismatch, and Token-2022 CPI Guard rejecting the first in-program approval.
+The runner removed its ledger and generated keys, stopped its validator, and
+reported `publicNetworkWrites: false`.
+
+The fixture artifacts are deliberately not production candidates:
+
+```text
+economy: 93,736 bytes, d535745640720c116ae50b50f2bfb30c02404f2518815546c9e54d8146e25fd2
+hook:    84,864 bytes, 70f2b25fb16d385f25948e625345c2b8d082270f2383de39ed72ed74b6407e55
+```
+
+The machine-readable record is
+[`evidence/local-validator-stake-ingress-rehearsal-20260809.json`](evidence/local-validator-stake-ingress-rehearsal-20260809.json).
+
+This does **not** claim combined production coverage. Token-2022 permits one
+hook program per mint, while the current production law artifact intentionally
+leaves stake-ingress admission unwired until the law ID, economy ID, and mint
+are frozen. The run therefore exercises the reviewed ingress rule and the same
+Token-2022 `transferring` semantics in a disposable hook; the separate Daily
+Law rehearsal remains the evidence for the production law artifact. The final
+frozen binary must combine both rules and repeat both adversarial matrices.
+The retained V2 economic math was neither modified nor exercised by this
+fixture.
 
 ## Real-validator coverage
 
