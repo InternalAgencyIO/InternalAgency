@@ -24,6 +24,9 @@ const batchFiles = Object.freeze([
   "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-004.json",
   "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-005.json",
   "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-006.json",
+  "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-007.json",
+  "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-008.json",
+  "scripts/data/pcm-editorial-batches/pcm-public-ui-priority-009.json",
 ]);
 const closurePaths = Object.freeze([
   workflowPath,
@@ -191,9 +194,12 @@ test("PCM proof execution closure has no package, process, network, or filesyste
 });
 
 test("PCM evidence workflow contract rejects omissions, substitutions, and unsafe execution", () => {
-  const finalBatchCommand = `I18N_PCM_EDITORIAL_BATCH_PATH="${batchFiles[5]}" node scripts/validate-pcm-editorial-batch.mjs`;
+  const finalBatchFile = batchFiles.at(-1);
+  const priorBatchFile = batchFiles.at(-2);
+  const finalBatchCommand = `I18N_PCM_EDITORIAL_BATCH_PATH="${finalBatchFile}" node scripts/validate-pcm-editorial-batch.mjs`;
   const probes = [
     ["missing path", workflow.replace(`      - "${sitePrefix}scripts/data/pcm-source-freeze-evidence-5baff9.json"\n`, "")],
+    ["missing final batch path", workflow.replace(`      - "${sitePrefix}${finalBatchFile}"\n`, "")],
     ["broadened path", workflow.replace(`"${sitePrefix}scripts/lib/pcm-editorial-gap-report.mjs"`, `"${sitePrefix}scripts/**"`)],
     ["Node substitution", workflow.replace("node-version: 24", "node-version: 22")],
     ["floating checkout", workflow.replace(checkoutPin, "actions/checkout@v4")],
@@ -205,7 +211,8 @@ test("PCM evidence workflow contract rejects omissions, substitutions, and unsaf
     ["missing fail-fast", workflow.replace("set -euo pipefail\n", "")],
     ["missing contract test", workflow.replace(`          node --test ${contractTest}\n`, "")],
     ["missing focused test", workflow.replace(`            ${focusedTests[0]} \\\n`, "")],
-    ["substituted batch", workflow.replace(finalBatchCommand, finalBatchCommand.replace(batchFiles[5], batchFiles[4]))],
+    ["missing final batch", workflow.replace(`          ${finalBatchCommand}\n`, "")],
+    ["substituted batch", workflow.replace(finalBatchCommand, finalBatchCommand.replace(finalBatchFile, priorBatchFile))],
     ["duplicated batch", workflow.replace(`          ${finalBatchCommand}\n`, `          ${finalBatchCommand}\n          ${finalBatchCommand}\n`)],
     ["install command", workflow.replace(
       "          set -euo pipefail\n          node --test",

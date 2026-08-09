@@ -27,6 +27,9 @@ const priorBatchUrls = [
   "pcm-public-ui-priority-003.json",
   "pcm-public-ui-priority-004.json",
   "pcm-public-ui-priority-005.json",
+  "pcm-public-ui-priority-006.json",
+  "pcm-public-ui-priority-007.json",
+  "pcm-public-ui-priority-008.json",
 ].map((fileName) => new URL(`scripts/data/pcm-editorial-batches/${fileName}`, root));
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const readJson = async (target, label) => {
@@ -76,8 +79,18 @@ const sourcePartition = validatePcmEditorialSourcePartition({
   inventory,
   currentGateBinding,
 });
+const sequenceMatch = artifact.batchId?.match(/^pcm-full-frozen-gap-(\d{3})$/u);
+const priorBatchCount = sequenceMatch ? Number(sequenceMatch[1]) - 1 : 0;
+if (artifact.schema === "iat-pcm-editorial-incremental-batch/v3"
+  && (!sequenceMatch || priorBatchCount < 0 || priorBatchCount > priorBatchUrls.length)) {
+  throw new Error("PCM full-frozen-gap batch has no complete committed prior-chain prefix");
+}
 const priorArtifacts = artifact.schema === "iat-pcm-editorial-incremental-batch/v3"
-  ? await Promise.all(priorBatchUrls.map((target, index) => readJson(target, `PCM prior batch ${index + 1}`)))
+  ? await Promise.all(
+    priorBatchUrls
+      .slice(0, priorBatchCount)
+      .map((target, index) => readJson(target, `PCM prior batch ${index + 1}`)),
+  )
   : [];
 const result = validatePcmEditorialIncrementalBatch({
   artifact,

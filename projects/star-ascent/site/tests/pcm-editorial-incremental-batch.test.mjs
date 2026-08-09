@@ -17,7 +17,7 @@ import { validatePcmEditorialSourcePartition } from "../scripts/lib/pcm-editoria
 const readJson = (target) => readFile(target, "utf8").then(JSON.parse);
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 
-test("the committed PCM partition proves full coverage and the 485 accepted batch sources form a disjoint gap subset", async () => {
+test("the committed PCM partition proves full coverage and the 785 accepted batch sources form a disjoint gap subset", async () => {
   const [
     batchOne,
     batchTwo,
@@ -25,6 +25,9 @@ test("the committed PCM partition proves full coverage and the 485 accepted batc
     batchFour,
     batchFive,
     batchSix,
+    batchSeven,
+    batchEight,
+    batchNine,
     partitionManifest,
     sourceFreezeEvidenceBytes,
     protectedBytes,
@@ -37,6 +40,9 @@ test("the committed PCM partition proves full coverage and the 485 accepted batc
     readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-004.json", import.meta.url)),
     readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-005.json", import.meta.url)),
     readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-006.json", import.meta.url)),
+    readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-007.json", import.meta.url)),
+    readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-008.json", import.meta.url)),
+    readJson(new URL("../scripts/data/pcm-editorial-batches/pcm-public-ui-priority-009.json", import.meta.url)),
     readJson(new URL("../scripts/data/pcm-editorial-source-partition-5baff9.json", import.meta.url)),
     readFile(new URL("../scripts/data/pcm-source-freeze-evidence-5baff9.json", import.meta.url)),
     readFile(new URL("../scripts/lib/i18n-protected-integrity.mjs", import.meta.url)),
@@ -74,11 +80,17 @@ test("the committed PCM partition proves full coverage and the 485 accepted batc
   assert.deepEqual(batchFour.counts, { attempted: 100, accepted: 100, rejected: 0 });
   assert.deepEqual(batchFive.counts, { attempted: 25, accepted: 25, rejected: 0 });
   assert.deepEqual(batchSix.counts, { attempted: 100, accepted: 100, rejected: 0 });
+  assert.deepEqual(batchSeven.counts, { attempted: 100, accepted: 100, rejected: 0 });
+  assert.deepEqual(batchEight.counts, { attempted: 100, accepted: 100, rejected: 0 });
+  assert.deepEqual(batchNine.counts, { attempted: 100, accepted: 100, rejected: 0 });
   assert.equal(batchTwo.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
   assert.equal(batchThree.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
   assert.equal(batchFour.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
   assert.equal(batchFive.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
   assert.equal(batchSix.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
+  assert.equal(batchSeven.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
+  assert.equal(batchEight.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
+  assert.equal(batchNine.sourcePartitionBinding.canonicalSha256, sourcePartition.manifestCanonicalSha256);
   const priorBatchUnion = new Set([batchOne, batchTwo, batchThree].flatMap((artifact) => Object.keys(artifact.proposals)));
   const expectedBatchFourSources = criticalSources
     .filter((source) => gapSet.has(source) && !priorBatchUnion.has(source))
@@ -90,24 +102,28 @@ test("the committed PCM partition proves full coverage and the 485 accepted batc
     .slice(0, 100);
   assert.deepEqual(Object.keys(batchFive.proposals), expectedBatchFiveSources);
   const priorArtifacts = [batchOne, batchTwo, batchThree, batchFour, batchFive];
-  const priorBatchSixUnion = new Set(priorArtifacts.flatMap((artifact) => Object.keys(artifact.proposals)));
-  const expectedBatchSixSources = sourcePartition.gapSources
-    .filter((source) => !priorBatchSixUnion.has(source))
-    .slice(0, 100);
-  assert.deepEqual(Object.keys(batchSix.proposals), expectedBatchSixSources);
-  const priorSourceKeys = [...priorBatchSixUnion].sort((left, right) => left.localeCompare(right, "en"));
-  assert.deepEqual(batchSix.sequenceBinding, {
-    schema: "iat-pcm-editorial-sequence-binding/v1",
-    selection: "NEXT_FROZEN_GAP_AFTER_VALIDATED_PRIOR_BATCHES",
-    batchSize: 100,
-    priorBatchCount: 5,
-    priorAcceptedSourceCount: 385,
-    priorBatchChainSha256: canonicalJsonSha256(priorArtifacts.map(canonicalJsonSha256)),
-    priorSourceKeysSha256: canonicalJsonSha256(priorSourceKeys),
-  });
+  const fullGapArtifacts = [batchSix, batchSeven, batchEight, batchNine];
+  for (const [offset, artifact] of fullGapArtifacts.entries()) {
+    const precedingArtifacts = [...priorArtifacts, ...fullGapArtifacts.slice(0, offset)];
+    const precedingSourceSet = new Set(precedingArtifacts.flatMap(({ proposals }) => Object.keys(proposals)));
+    const expectedSources = sourcePartition.gapSources
+      .filter((source) => !precedingSourceSet.has(source))
+      .slice(0, 100);
+    assert.deepEqual(Object.keys(artifact.proposals), expectedSources);
+    const priorSourceKeys = [...precedingSourceSet].sort((left, right) => left.localeCompare(right, "en"));
+    assert.deepEqual(artifact.sequenceBinding, {
+      schema: "iat-pcm-editorial-sequence-binding/v1",
+      selection: "NEXT_FROZEN_GAP_AFTER_VALIDATED_PRIOR_BATCHES",
+      batchSize: 100,
+      priorBatchCount: precedingArtifacts.length,
+      priorAcceptedSourceCount: priorSourceKeys.length,
+      priorBatchChainSha256: canonicalJsonSha256(precedingArtifacts.map(canonicalJsonSha256)),
+      priorSourceKeysSha256: canonicalJsonSha256(priorSourceKeys),
+    });
+  }
 
   const batchUnion = new Set();
-  const artifacts = [...priorArtifacts, batchSix];
+  const artifacts = [...priorArtifacts, ...fullGapArtifacts];
   for (const [index, artifact] of artifacts.entries()) {
     assert.deepEqual(artifact.sourceFreeze, {
       sourceCount: inventory.sourceCount,
@@ -152,8 +168,8 @@ test("the committed PCM partition proves full coverage and the 485 accepted batc
       );
     }
   }
-  assert.equal(batchUnion.size, 485);
-  assert.equal(gapSet.size - batchUnion.size, 827);
+  assert.equal(batchUnion.size, 785);
+  assert.equal(gapSet.size - batchUnion.size, 527);
   assert.equal(criticalSources.filter((source) => gapSet.has(source) && !batchUnion.has(source)).length, 0);
 
   const batchSixInputs = (artifact, overrides = {}) => ({
