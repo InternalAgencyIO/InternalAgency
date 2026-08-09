@@ -118,7 +118,7 @@ const ARTIFACTS = Object.freeze({
   ),
   devnet: artifact(
     "projects/star-ascent/site/docs/b3/DEVNET_REHEARSAL.md",
-    "da6c26fafb88d87a7d45e0bf7528721ba788d0ede8235fdefe4efc7b55626998",
+    "0dc182a9bb4d861356767aeb277b7e74c3b5a394af531180d3782a935658c110",
   ),
   mainnetPath: artifact(
     "projects/star-ascent/site/docs/b3/MAINNET_PATH.md",

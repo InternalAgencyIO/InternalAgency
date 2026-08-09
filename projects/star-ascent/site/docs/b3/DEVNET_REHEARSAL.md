@@ -38,7 +38,7 @@ again before its first transaction. A failed Devnet RPC or faucet request is a
 failure; it never falls back to another cluster.
 
 The reviewed Devnet Genesis hash is pinned as
-`GH7ome3EiwEr7tu9JuTh2dpYWBJK3z69Xm1ZE3MEE6JC`. Devnet may be reset; a future
+`EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG`. Devnet may be reset; a future
 Genesis change must stop this script and require a reviewed pin update, never a
 dynamic acceptance rule.
 

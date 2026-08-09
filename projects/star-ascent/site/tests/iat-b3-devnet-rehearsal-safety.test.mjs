@@ -99,10 +99,10 @@ test("both layers hard-pin the official Devnet RPC and cannot select Mainnet", (
   const genesisPreflight = wrapper.indexOf("solana genesis-hash");
   const firstWrite = wrapper.indexOf("solana airdrop");
   assert(genesisPreflight >= 0 && genesisPreflight < firstWrite);
-  assert.match(wrapper, /GH7ome3EiwEr7tu9JuTh2dpYWBJK3z69Xm1ZE3MEE6JC/u);
+  assert.match(wrapper, /EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG/u);
   assert.equal(
     DEVNET_GENESIS_HASH,
-    "GH7ome3EiwEr7tu9JuTh2dpYWBJK3z69Xm1ZE3MEE6JC",
+    "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
   );
   assert.doesNotThrow(() => accountExplorerUrl(DEVNET_GENESIS_HASH));
 

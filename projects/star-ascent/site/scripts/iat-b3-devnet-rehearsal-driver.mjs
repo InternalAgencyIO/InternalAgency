@@ -38,7 +38,7 @@ import {
 } from "./iat-b3-local-rehearsal-driver.mjs";
 
 export const DEVNET_RPC = "https://api.devnet.solana.com";
-export const DEVNET_GENESIS_HASH = "GH7ome3EiwEr7tu9JuTh2dpYWBJK3z69Xm1ZE3MEE6JC";
+export const DEVNET_GENESIS_HASH = "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG";
 export const EXECUTE_CONFIRMATION = "CONFIRMED_PUBLIC_DEVNET_REHEARSAL";
 export const EXPECTED_ARTIFACT_SHA256 =
   "927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c";
