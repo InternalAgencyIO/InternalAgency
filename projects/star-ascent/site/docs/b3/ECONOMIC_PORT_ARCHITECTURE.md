@@ -218,13 +218,52 @@ state never modify V2 `Config`, `LaneVault`, `CoreReward`, `Position`, or `Round
 encodings. Every faction mutation runs the same canonical Daily Law gate before
 its first mutable borrow or CPI.
 
-Faction rewards require a fixed, capped, pre-funded community carve-out. The
-existing community hardware-custody lane is not silently converted into a
-permissionless reward source. Scoring inputs, week anchor, tie rule, carve-out,
-follower snapshot, remainder/expiry handling, NFT authority, and solvency remain
-Mainnet blockers. Until they are frozen, faction write opcodes remain absent
-from the public dispatcher rather than exposing an administrator-controlled
-placeholder.
+The owner-directed reward update moves only **new, previously unreserved**
+weekly faction obligations into the shared reward-lane waterfall. It does not
+raid or reclassify any already accepted community-carve-out reservation, and
+the existing community hardware-custody lane is not converted into a
+permissionless reward source. Scoring inputs, week anchor, tie rule, follower
+snapshot, remainder/expiry handling, NFT authority, and solvency remain Mainnet
+blockers. Until they are frozen, faction write opcodes remain absent from the
+public dispatcher rather than exposing an administrator-controlled placeholder.
+
+### New-obligation reward-capacity policy
+
+The owner-directed reward-capacity waterfall applies only to a sealed UTC
+round of new, previously unreserved obligations. Its machine order is CCC
+Agent, CCC Associate, standard-10%-rate and X-campaign rewards, an authorized
+weekly faction manifest, then core. The current V2 reservations, including the
+activation-time core obligation, remain senior and cannot be clawed back or
+reordered. An arrival after a round is sealed belongs to a later round; it does
+not preempt already accepted collateral.
+
+The existing V1 snapshot-bound SHA-256 rule still selects oversubscribed daily
+campaign winners. Activity/node chronology is carried only after selection for
+the new obligation allocator; the special earliest-activity/earliest-node rule
+applies to underfunded CCC cohorts.
+
+Each obligation or policy-defined X tranche is indivisible. A complete amount
+may span treasury, ecosystem, and liquidity in that preserved order, but a
+one-base-unit shortage admits nothing. The first unfundable obligation stops
+the round so a smaller peer or lower class cannot leapfrog. Every new X-bound
+recipient reward uses one of three canonical tranche kinds: `X_BASE_10` at
+exactly 1,000 bps for a known non-Premium tier, `X_PREMIUM_FULL_100` at exactly
+10,000 bps when the fresh qualification proof already reports
+Premium/PremiumPlus, or conditional `X_PREMIUM_UPGRADE_90` at exactly 9,000 bps
+after a later accepted upgrade proof. These retain their source priority:
+Genesis/social/standard, CCC Agent, CCC Associate, or faction. Core is not
+silently declared X-bound, and existing accepted V2 obligations are not
+rewritten. No conditional tranche is reward debt, and the upgrade tranche
+receives its ordering sequence only when a later fresh Premium proof is accepted. All
+identity, activity, round, reservation, payment, cleanup, and receipt writes
+remain subject to the canonical Daily Law before mutation.
+
+This is currently a non-activating reference contract. The runtime has no
+authenticated X/activity commitment account, sealed-round codec, dispatcher,
+Token-2022 CPI finalizer, or rollback proof for it. CCC is still compile-time
+inactive, new shared-lane faction obligation creation remains HOLD, and
+core custody remains unresolved. No existing handler or public opcode may
+infer deployment authority from the reference policy.
 
 ## 7. State and migration compatibility
 
