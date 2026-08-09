@@ -1,15 +1,17 @@
-use crate::{LaneState, PositionState};
+use crate::{LaneState, PositionState, RoundState};
 
 /// Version one of the strict B3 economic account byte envelope.
 pub const ACCOUNT_CODEC_VERSION: u8 = 1;
 pub const POSITION_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3POS";
 pub const LANE_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3LAN";
+pub const ROUND_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3RND";
 pub const CORE_REWARD_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3CRW";
 pub const AGENCY_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3AGN";
 pub const AGENCY_OWNER_INDEX_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3AOI";
 pub const ELIGIBILITY_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3ELG";
 pub const POSITION_ACCOUNT_LEN: usize = 176;
 pub const LANE_ACCOUNT_LEN: usize = 176;
+pub const ROUND_ACCOUNT_LEN: usize = 224;
 pub const CORE_REWARD_ACCOUNT_LEN: usize = 128;
 pub const AGENCY_ACCOUNT_LEN: usize = 96;
 pub const AGENCY_OWNER_INDEX_ACCOUNT_LEN: usize = 96;
@@ -20,6 +22,8 @@ const HEADER_RESERVED_START: usize = 9;
 const POSITION_BODY_START: usize = HEADER_LEN;
 const LANE_BODY_START: usize = HEADER_LEN;
 const LANE_RESERVED_START: usize = 172;
+const ROUND_BODY_START: usize = HEADER_LEN;
+const ROUND_RESERVED_START: usize = 214;
 const CORE_REWARD_RESERVED_START: usize = 121;
 const AGENCY_RESERVED_START: usize = 93;
 const AGENCY_OWNER_INDEX_RESERVED_START: usize = 85;
@@ -249,6 +253,97 @@ pub fn decode_lane_state(input: &[u8]) -> Result<LaneState, CodecError> {
     };
     debug_assert_eq!(offset, LANE_RESERVED_START);
     Ok(lane)
+}
+
+/// Encode a semantic Round into the fixed B3 Round byte layout.
+///
+/// The caller's output is changed only after the status and complete temporary
+/// buffer have been validated, so every error leaves it byte-for-byte unchanged.
+pub fn encode_round_state(round: &RoundState, output: &mut [u8]) -> Result<(), CodecError> {
+    if output.len() != ROUND_ACCOUNT_LEN {
+        return Err(CodecError::InvalidLength);
+    }
+    require_round_status(round.status)?;
+
+    let mut encoded = [0u8; ROUND_ACCOUNT_LEN];
+    write_header(&mut encoded, ROUND_ACCOUNT_MAGIC);
+    let mut offset = ROUND_BODY_START;
+    write_bytes(&mut encoded, &mut offset, &round.config);
+    write_bytes(&mut encoded, &mut offset, &round.randomness_account);
+    write_bytes(&mut encoded, &mut offset, &round.week.to_le_bytes());
+    write_bytes(&mut encoded, &mut offset, &round.commit_slot.to_le_bytes());
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &round.commit_timestamp.to_le_bytes(),
+    );
+    write_bytes(&mut encoded, &mut offset, &round.randomness);
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &round.agency_registry_hash_snapshot,
+    );
+    write_bytes(&mut encoded, &mut offset, &round.decision_context);
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &round.agency_count_snapshot.to_le_bytes(),
+    );
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &round.selected_agency_index.to_le_bytes(),
+    );
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &round.derivation_counter.to_le_bytes(),
+    );
+    write_byte(&mut encoded, &mut offset, round.status);
+    write_byte(&mut encoded, &mut offset, round.bump);
+    debug_assert_eq!(offset, ROUND_RESERVED_START);
+
+    output.copy_from_slice(&encoded);
+    Ok(())
+}
+
+/// Decode only the exact fixed B3 Round byte layout.
+pub fn decode_round_state(input: &[u8]) -> Result<RoundState, CodecError> {
+    require_header(input, ROUND_ACCOUNT_LEN, ROUND_ACCOUNT_MAGIC)?;
+    require_zero_reserved(&input[ROUND_RESERVED_START..])?;
+
+    let mut offset = ROUND_BODY_START;
+    let config = read_bytes(input, &mut offset);
+    let randomness_account = read_bytes(input, &mut offset);
+    let week = read_u64(input, &mut offset);
+    let commit_slot = read_u64(input, &mut offset);
+    let commit_timestamp = read_i64(input, &mut offset);
+    let randomness = read_bytes(input, &mut offset);
+    let agency_registry_hash_snapshot = read_bytes(input, &mut offset);
+    let decision_context = read_bytes(input, &mut offset);
+    let agency_count_snapshot = read_u32(input, &mut offset);
+    let selected_agency_index = read_u32(input, &mut offset);
+    let derivation_counter = read_u32(input, &mut offset);
+    let status = read_byte(input, &mut offset);
+    require_round_status(status)?;
+    let bump = read_byte(input, &mut offset);
+    let round = RoundState {
+        config,
+        randomness_account,
+        week,
+        commit_slot,
+        commit_timestamp,
+        randomness,
+        agency_registry_hash_snapshot,
+        decision_context,
+        agency_count_snapshot,
+        selected_agency_index,
+        derivation_counter,
+        status,
+        bump,
+    };
+    debug_assert_eq!(offset, ROUND_RESERVED_START);
+    Ok(round)
 }
 
 /// Encode a semantic CoreReward into its fixed B3 byte layout.
@@ -536,6 +631,10 @@ fn read_u64(input: &[u8], offset: &mut usize) -> u64 {
     u64::from_le_bytes(read_bytes(input, offset))
 }
 
+fn read_i64(input: &[u8], offset: &mut usize) -> i64 {
+    i64::from_le_bytes(read_bytes(input, offset))
+}
+
 fn read_bool(input: &[u8], offset: &mut usize) -> Result<bool, CodecError> {
     match read_byte(input, offset) {
         0 => Ok(false),
@@ -553,6 +652,13 @@ fn require_role(role: u8) -> Result<(), CodecError> {
 
 fn require_lane_discriminant(lane: u8) -> Result<(), CodecError> {
     if !(1..=4).contains(&lane) {
+        return Err(CodecError::NonCanonicalDiscriminant);
+    }
+    Ok(())
+}
+
+fn require_round_status(status: u8) -> Result<(), CodecError> {
+    if status > 2 {
         return Err(CodecError::NonCanonicalDiscriminant);
     }
     Ok(())

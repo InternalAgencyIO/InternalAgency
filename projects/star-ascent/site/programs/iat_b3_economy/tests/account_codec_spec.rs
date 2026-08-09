@@ -1,16 +1,18 @@
 use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day, SolanaDailyDecision};
 use iat_b3_economy::{
     close_position, decode_agency_owner_index_state, decode_agency_state, decode_core_reward_state,
-    decode_eligibility_state, decode_lane_state, decode_position_state,
+    decode_eligibility_state, decode_lane_state, decode_position_state, decode_round_state,
     encode_agency_owner_index_state, encode_agency_state, encode_core_reward_state,
-    encode_eligibility_state, encode_lane_state, encode_position_state, verify_daily_law_open,
-    AgencyOwnerIndexState, AgencyState, CanonicalDailyLawBinding, CodecError, ConfigState,
-    CoreRewardState, EligibilityState, LaneState, PositionState, ReadonlyDailyLawAccount,
-    ACCOUNT_CODEC_VERSION, AGENCY_ACCOUNT_LEN, AGENCY_ACCOUNT_MAGIC,
-    AGENCY_OWNER_INDEX_ACCOUNT_LEN, AGENCY_OWNER_INDEX_ACCOUNT_MAGIC, CORE_REWARD_ACCOUNT_LEN,
-    CORE_REWARD_ACCOUNT_MAGIC, ECOSYSTEM, ELIGIBILITY_ACCOUNT_LEN, ELIGIBILITY_ACCOUNT_MAGIC,
-    LANE_ACCOUNT_LEN, LANE_ACCOUNT_MAGIC, LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION,
-    LIQUIDITY, POSITION_ACCOUNT_LEN, POSITION_ACCOUNT_MAGIC, TREASURY, USER_TERM_WEEKS,
+    encode_eligibility_state, encode_lane_state, encode_position_state, encode_round_state,
+    verify_daily_law_open, AgencyOwnerIndexState, AgencyState, CanonicalDailyLawBinding,
+    CodecError, ConfigState, CoreRewardState, EligibilityState, LaneState, PositionState,
+    ReadonlyDailyLawAccount, RoundState, ACCOUNT_CODEC_VERSION, AGENCY_ACCOUNT_LEN,
+    AGENCY_ACCOUNT_MAGIC, AGENCY_OWNER_INDEX_ACCOUNT_LEN, AGENCY_OWNER_INDEX_ACCOUNT_MAGIC,
+    CORE_REWARD_ACCOUNT_LEN, CORE_REWARD_ACCOUNT_MAGIC, ECOSYSTEM, ELIGIBILITY_ACCOUNT_LEN,
+    ELIGIBILITY_ACCOUNT_MAGIC, LANE_ACCOUNT_LEN, LANE_ACCOUNT_MAGIC, LAW_STATE_LEN,
+    LAW_STATE_MAGIC, LAW_STATE_VERSION, LIQUIDITY, POSITION_ACCOUNT_LEN, POSITION_ACCOUNT_MAGIC,
+    ROUND_ACCOUNT_LEN, ROUND_ACCOUNT_MAGIC, ROUND_EXPIRED_NEUTRAL, ROUND_PENDING, ROUND_SETTLED,
+    TREASURY, USER_TERM_WEEKS,
 };
 use sha2::{Digest, Sha256};
 
@@ -30,6 +32,10 @@ const POSITION_GOLDEN_SHA256: [u8; 32] = [
 const LANE_GOLDEN_SHA256: [u8; 32] = [
     79, 52, 230, 73, 224, 203, 244, 153, 89, 190, 30, 39, 100, 142, 109, 190, 75, 181, 25, 209,
     195, 43, 11, 107, 10, 136, 188, 11, 141, 243, 191, 255,
+];
+const ROUND_GOLDEN_SHA256: [u8; 32] = [
+    42, 104, 175, 128, 47, 186, 22, 143, 130, 36, 209, 16, 29, 213, 29, 34, 11, 118, 159, 221, 176,
+    49, 88, 149, 141, 30, 193, 141, 126, 158, 232, 111,
 ];
 const CORE_REWARD_GOLDEN_SHA256: [u8; 32] = [
     188, 107, 250, 180, 122, 109, 241, 216, 157, 23, 204, 191, 192, 136, 109, 232, 4, 83, 66, 0,
@@ -90,6 +96,24 @@ fn sample_lane() -> LaneState {
     }
 }
 
+fn sample_round() -> RoundState {
+    RoundState {
+        config: [0xA0; 32],
+        randomness_account: [0xA1; 32],
+        week: 0x0102_0304_0506_0708,
+        commit_slot: 0x1112_1314_1516_1718,
+        commit_timestamp: -0x2122_2324_2526_2728,
+        randomness: [0xA2; 32],
+        agency_registry_hash_snapshot: [0xA3; 32],
+        decision_context: [0xA4; 32],
+        agency_count_snapshot: 0xB1B2_B3B4,
+        selected_agency_index: 0xC1C2_C3C4,
+        derivation_counter: 0xD1D2_D3D4,
+        status: ROUND_EXPIRED_NEUTRAL,
+        bump: 0xE1,
+    }
+}
+
 fn sample_core_reward() -> CoreRewardState {
     CoreRewardState {
         config: [0x60; 32],
@@ -147,6 +171,12 @@ fn encoded_lane(lane: &LaneState) -> [u8; LANE_ACCOUNT_LEN] {
     bytes
 }
 
+fn encoded_round(round: &RoundState) -> [u8; ROUND_ACCOUNT_LEN] {
+    let mut bytes = [0u8; ROUND_ACCOUNT_LEN];
+    encode_round_state(round, &mut bytes).unwrap();
+    bytes
+}
+
 fn encoded_core_reward(core_reward: &CoreRewardState) -> [u8; CORE_REWARD_ACCOUNT_LEN] {
     let mut bytes = [0u8; CORE_REWARD_ACCOUNT_LEN];
     encode_core_reward_state(core_reward, &mut bytes).unwrap();
@@ -181,12 +211,14 @@ fn sha256(bytes: &[u8]) -> [u8; 32] {
 fn codecs_pin_distinct_versioned_fixed_golden_vectors() {
     let position = sample_position();
     let lane = sample_lane();
+    let round = sample_round();
     let core_reward = sample_core_reward();
     let agency = sample_agency();
     let owner_index = sample_agency_owner_index();
     let eligibility = sample_eligibility();
     let position_bytes = encoded_position(&position);
     let lane_bytes = encoded_lane(&lane);
+    let round_bytes = encoded_round(&round);
     let core_reward_bytes = encoded_core_reward(&core_reward);
     let agency_bytes = encoded_agency(&agency);
     let owner_index_bytes = encoded_agency_owner_index(&owner_index);
@@ -195,6 +227,7 @@ fn codecs_pin_distinct_versioned_fixed_golden_vectors() {
     let magics = [
         POSITION_ACCOUNT_MAGIC,
         LANE_ACCOUNT_MAGIC,
+        ROUND_ACCOUNT_MAGIC,
         CORE_REWARD_ACCOUNT_MAGIC,
         AGENCY_ACCOUNT_MAGIC,
         AGENCY_OWNER_INDEX_ACCOUNT_MAGIC,
@@ -207,23 +240,27 @@ fn codecs_pin_distinct_versioned_fixed_golden_vectors() {
     }
     assert_eq!(&position_bytes[..8], &POSITION_ACCOUNT_MAGIC);
     assert_eq!(&lane_bytes[..8], &LANE_ACCOUNT_MAGIC);
+    assert_eq!(&round_bytes[..8], &ROUND_ACCOUNT_MAGIC);
     assert_eq!(&core_reward_bytes[..8], &CORE_REWARD_ACCOUNT_MAGIC);
     assert_eq!(&agency_bytes[..8], &AGENCY_ACCOUNT_MAGIC);
     assert_eq!(&owner_index_bytes[..8], &AGENCY_OWNER_INDEX_ACCOUNT_MAGIC);
     assert_eq!(&eligibility_bytes[..8], &ELIGIBILITY_ACCOUNT_MAGIC);
     assert_eq!(position_bytes[8], ACCOUNT_CODEC_VERSION);
     assert_eq!(lane_bytes[8], ACCOUNT_CODEC_VERSION);
+    assert_eq!(round_bytes[8], ACCOUNT_CODEC_VERSION);
     assert_eq!(core_reward_bytes[8], ACCOUNT_CODEC_VERSION);
     assert_eq!(agency_bytes[8], ACCOUNT_CODEC_VERSION);
     assert_eq!(owner_index_bytes[8], ACCOUNT_CODEC_VERSION);
     assert_eq!(eligibility_bytes[8], ACCOUNT_CODEC_VERSION);
     assert!(position_bytes[9..16].iter().all(|byte| *byte == 0));
     assert!(lane_bytes[9..16].iter().all(|byte| *byte == 0));
+    assert!(round_bytes[9..16].iter().all(|byte| *byte == 0));
     assert!(core_reward_bytes[9..16].iter().all(|byte| *byte == 0));
     assert!(agency_bytes[9..16].iter().all(|byte| *byte == 0));
     assert!(owner_index_bytes[9..16].iter().all(|byte| *byte == 0));
     assert!(eligibility_bytes[9..16].iter().all(|byte| *byte == 0));
     assert!(lane_bytes[172..].iter().all(|byte| *byte == 0));
+    assert!(round_bytes[214..].iter().all(|byte| *byte == 0));
     assert!(core_reward_bytes[121..].iter().all(|byte| *byte == 0));
     assert!(agency_bytes[93..].iter().all(|byte| *byte == 0));
     assert!(owner_index_bytes[85..].iter().all(|byte| *byte == 0));
@@ -238,6 +275,28 @@ fn codecs_pin_distinct_versioned_fixed_golden_vectors() {
     assert_eq!(position_bytes[174], 0);
     assert_eq!(&lane_bytes[112..120], &lane.total.to_le_bytes());
     assert_eq!(lane_bytes[169], 1);
+    assert_eq!(&round_bytes[16..48], &round.config);
+    assert_eq!(&round_bytes[48..80], &round.randomness_account);
+    assert_eq!(&round_bytes[80..88], &round.week.to_le_bytes());
+    assert_eq!(&round_bytes[88..96], &round.commit_slot.to_le_bytes());
+    assert_eq!(&round_bytes[96..104], &round.commit_timestamp.to_le_bytes());
+    assert_eq!(&round_bytes[104..136], &round.randomness);
+    assert_eq!(&round_bytes[136..168], &round.agency_registry_hash_snapshot);
+    assert_eq!(&round_bytes[168..200], &round.decision_context);
+    assert_eq!(
+        &round_bytes[200..204],
+        &round.agency_count_snapshot.to_le_bytes()
+    );
+    assert_eq!(
+        &round_bytes[204..208],
+        &round.selected_agency_index.to_le_bytes()
+    );
+    assert_eq!(
+        &round_bytes[208..212],
+        &round.derivation_counter.to_le_bytes()
+    );
+    assert_eq!(round_bytes[212], round.status);
+    assert_eq!(round_bytes[213], round.bump);
     assert_eq!(
         &core_reward_bytes[48..56],
         &core_reward.principal.to_le_bytes()
@@ -252,6 +311,7 @@ fn codecs_pin_distinct_versioned_fixed_golden_vectors() {
         [
             sha256(&position_bytes),
             sha256(&lane_bytes),
+            sha256(&round_bytes),
             sha256(&core_reward_bytes),
             sha256(&agency_bytes),
             sha256(&owner_index_bytes),
@@ -260,6 +320,7 @@ fn codecs_pin_distinct_versioned_fixed_golden_vectors() {
         [
             POSITION_GOLDEN_SHA256,
             LANE_GOLDEN_SHA256,
+            ROUND_GOLDEN_SHA256,
             CORE_REWARD_GOLDEN_SHA256,
             AGENCY_GOLDEN_SHA256,
             AGENCY_OWNER_INDEX_GOLDEN_SHA256,
@@ -268,6 +329,7 @@ fn codecs_pin_distinct_versioned_fixed_golden_vectors() {
     );
     assert_eq!(decode_position_state(&position_bytes), Ok(position));
     assert_eq!(decode_lane_state(&lane_bytes), Ok(lane));
+    assert_eq!(decode_round_state(&round_bytes), Ok(round));
     assert_eq!(
         decode_core_reward_state(&core_reward_bytes),
         Ok(core_reward)
@@ -356,6 +418,7 @@ fn strict_decoders_reject_length_type_version_reserved_and_boolean_drift() {
 
 #[test]
 fn expanded_strict_decoders_reject_envelope_role_and_cross_type_corruption() {
+    let round_bytes = encoded_round(&sample_round());
     let core_reward_bytes = encoded_core_reward(&sample_core_reward());
     let agency_bytes = encoded_agency(&sample_agency());
     let owner_index_bytes = encoded_agency_owner_index(&sample_agency_owner_index());
@@ -392,6 +455,7 @@ fn expanded_strict_decoders_reject_envelope_role_and_cross_type_corruption() {
         }};
     }
 
+    assert_envelope_corruption!(round_bytes, decode_round_state, ROUND_ACCOUNT_LEN - 1);
     assert_envelope_corruption!(
         core_reward_bytes,
         decode_core_reward_state,
@@ -430,6 +494,30 @@ fn expanded_strict_decoders_reject_envelope_role_and_cross_type_corruption() {
     assert_eq!(
         decode_core_reward_state(&agency_bytes),
         Err(CodecError::InvalidLength)
+    );
+    assert_eq!(
+        decode_round_state(&core_reward_bytes),
+        Err(CodecError::InvalidLength)
+    );
+    assert_eq!(
+        decode_core_reward_state(&round_bytes),
+        Err(CodecError::InvalidLength)
+    );
+
+    for status in [ROUND_PENDING, ROUND_SETTLED, ROUND_EXPIRED_NEUTRAL] {
+        let round = RoundState {
+            status,
+            ..sample_round()
+        };
+        let bytes = encoded_round(&round);
+        assert_eq!(decode_round_state(&bytes), Ok(round));
+    }
+
+    let mut invalid_round_status = round_bytes;
+    invalid_round_status[212] = ROUND_EXPIRED_NEUTRAL + 1;
+    assert_eq!(
+        decode_round_state(&invalid_round_status),
+        Err(CodecError::NonCanonicalDiscriminant)
     );
 
     let mut invalid_role = eligibility_bytes;
@@ -485,6 +573,28 @@ fn failed_encode_leaves_the_caller_buffer_unchanged() {
         Err(CodecError::NonCanonicalDiscriminant)
     );
     assert_eq!(invalid_lane_output, invalid_lane_before);
+
+    let mut short_round = [0xB4; ROUND_ACCOUNT_LEN - 1];
+    let short_round_before = short_round;
+    assert_eq!(
+        encode_round_state(&sample_round(), &mut short_round),
+        Err(CodecError::InvalidLength)
+    );
+    assert_eq!(short_round, short_round_before);
+
+    let mut invalid_round_output = [0x4B; ROUND_ACCOUNT_LEN];
+    let invalid_round_before = invalid_round_output;
+    assert_eq!(
+        encode_round_state(
+            &RoundState {
+                status: ROUND_EXPIRED_NEUTRAL + 1,
+                ..sample_round()
+            },
+            &mut invalid_round_output,
+        ),
+        Err(CodecError::NonCanonicalDiscriminant)
+    );
+    assert_eq!(invalid_round_output, invalid_round_before);
 
     let mut short_core_reward = [0xA6; CORE_REWARD_ACCOUNT_LEN - 1];
     let short_core_reward_before = short_core_reward;
@@ -664,6 +774,61 @@ fn every_strict_codec_semantic_field_changes_the_encoding() {
         assert_eq!(decode_lane_state(&encoded_lane(&variant)), Ok(variant));
     }
 
+    let round = sample_round();
+    let round_bytes = encoded_round(&round);
+    let round_variants = [
+        RoundState {
+            config: [6; 32],
+            ..round
+        },
+        RoundState {
+            randomness_account: [7; 32],
+            ..round
+        },
+        RoundState { week: 1, ..round },
+        RoundState {
+            commit_slot: 2,
+            ..round
+        },
+        RoundState {
+            commit_timestamp: -3,
+            ..round
+        },
+        RoundState {
+            randomness: [8; 32],
+            ..round
+        },
+        RoundState {
+            agency_registry_hash_snapshot: [9; 32],
+            ..round
+        },
+        RoundState {
+            decision_context: [10; 32],
+            ..round
+        },
+        RoundState {
+            agency_count_snapshot: 4,
+            ..round
+        },
+        RoundState {
+            selected_agency_index: 5,
+            ..round
+        },
+        RoundState {
+            derivation_counter: 6,
+            ..round
+        },
+        RoundState {
+            status: ROUND_SETTLED,
+            ..round
+        },
+        RoundState { bump: 7, ..round },
+    ];
+    for variant in round_variants {
+        assert_ne!(encoded_round(&variant), round_bytes);
+        assert_eq!(decode_round_state(&encoded_round(&variant)), Ok(variant));
+    }
+
     let core_reward = sample_core_reward();
     let core_reward_bytes = encoded_core_reward(&core_reward);
     let core_reward_variants = [
@@ -800,6 +965,24 @@ fn every_strict_codec_semantic_field_changes_the_encoding() {
         assert_eq!(
             decode_eligibility_state(&encoded_eligibility(&variant)),
             Ok(variant)
+        );
+    }
+}
+
+#[test]
+fn round_decoder_is_panic_free_across_lengths_and_single_byte_corruption() {
+    for length in 0..=(ROUND_ACCOUNT_LEN + 16) {
+        let bytes = vec![0x5A; length];
+        assert!(std::panic::catch_unwind(|| decode_round_state(&bytes)).is_ok());
+    }
+
+    let canonical = encoded_round(&sample_round());
+    for offset in 0..ROUND_ACCOUNT_LEN {
+        let mut corrupt = canonical;
+        corrupt[offset] ^= u8::MAX;
+        assert!(
+            std::panic::catch_unwind(|| decode_round_state(&corrupt)).is_ok(),
+            "decoder panicked after corruption at byte {offset}"
         );
     }
 }

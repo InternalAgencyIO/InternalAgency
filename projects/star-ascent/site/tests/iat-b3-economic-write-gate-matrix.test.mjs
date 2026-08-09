@@ -128,6 +128,7 @@ test("the native preparation has strict partial codecs only", () => {
   for (const declaration of [
     'pub const POSITION_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3POS";',
     'pub const LANE_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3LAN";',
+    'pub const ROUND_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3RND";',
     'pub const CORE_REWARD_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3CRW";',
     'pub const AGENCY_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3AGN";',
     'pub const AGENCY_OWNER_INDEX_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3AOI";',
@@ -135,6 +136,7 @@ test("the native preparation has strict partial codecs only", () => {
     "pub const ACCOUNT_CODEC_VERSION: u8 = 1;",
     "pub const POSITION_ACCOUNT_LEN: usize = 176;",
     "pub const LANE_ACCOUNT_LEN: usize = 176;",
+    "pub const ROUND_ACCOUNT_LEN: usize = 224;",
     "pub const CORE_REWARD_ACCOUNT_LEN: usize = 128;",
     "pub const AGENCY_ACCOUNT_LEN: usize = 96;",
     "pub const AGENCY_OWNER_INDEX_ACCOUNT_LEN: usize = 96;",
@@ -145,6 +147,7 @@ test("the native preparation has strict partial codecs only", () => {
   for (const type of [
     "position",
     "lane",
+    "round",
     "core_reward",
     "agency",
     "agency_owner_index",
@@ -157,7 +160,7 @@ test("the native preparation has strict partial codecs only", () => {
   assert.match(economyCodecSource, /NonCanonicalDiscriminant/u);
   assert.doesNotMatch(
     economyCodecSource,
-    /ConfigState|RoundState|encode_(?:config|round)|decode_(?:config|round)|AccountInfo|process_instruction|invoke(?:_signed)?\s*\(/u,
+    /ConfigState|encode_config|decode_config|AccountInfo|process_instruction|invoke(?:_signed)?\s*\(/u,
   );
 
   assert.deepEqual(matrix.nativeCodecPreparation, {
@@ -166,6 +169,7 @@ test("the native preparation has strict partial codecs only", () => {
     strictCodecTypes: [
       "PositionState",
       "LaneState",
+      "RoundState",
       "CoreRewardState",
       "AgencyState",
       "AgencyOwnerIndexState",
@@ -173,7 +177,7 @@ test("the native preparation has strict partial codecs only", () => {
     ],
     configCodecStatus:
       "BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE",
-    roundCodecStatus: "BLOCKED_MISSING_PERSISTED_BUMP_IN_SEMANTIC_STATE",
+    roundCodecStatus: "STRICT_V1",
   });
 });
 

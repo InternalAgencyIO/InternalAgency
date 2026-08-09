@@ -5,13 +5,14 @@ mod codec;
 
 pub use codec::{
     decode_agency_owner_index_state, decode_agency_state, decode_core_reward_state,
-    decode_eligibility_state, decode_lane_state, decode_position_state,
+    decode_eligibility_state, decode_lane_state, decode_position_state, decode_round_state,
     encode_agency_owner_index_state, encode_agency_state, encode_core_reward_state,
-    encode_eligibility_state, encode_lane_state, encode_position_state, CodecError,
-    ACCOUNT_CODEC_VERSION, AGENCY_ACCOUNT_LEN, AGENCY_ACCOUNT_MAGIC,
+    encode_eligibility_state, encode_lane_state, encode_position_state, encode_round_state,
+    CodecError, ACCOUNT_CODEC_VERSION, AGENCY_ACCOUNT_LEN, AGENCY_ACCOUNT_MAGIC,
     AGENCY_OWNER_INDEX_ACCOUNT_LEN, AGENCY_OWNER_INDEX_ACCOUNT_MAGIC, CORE_REWARD_ACCOUNT_LEN,
     CORE_REWARD_ACCOUNT_MAGIC, ELIGIBILITY_ACCOUNT_LEN, ELIGIBILITY_ACCOUNT_MAGIC,
     LANE_ACCOUNT_LEN, LANE_ACCOUNT_MAGIC, POSITION_ACCOUNT_LEN, POSITION_ACCOUNT_MAGIC,
+    ROUND_ACCOUNT_LEN, ROUND_ACCOUNT_MAGIC,
 };
 
 use iat_b3_consensus::{
@@ -105,11 +106,9 @@ pub struct LanePolicy {
     pub reward_source: bool,
 }
 
-/// Native, host-only semantic representation of the retained V2 `Round`.
-/// It has no Anchor discriminator and makes no account-layout compatibility
-/// claim; migration must decode V2 and encode B3 explicitly. A strict B3 Round
-/// account codec is blocked because this projection omits retained V2's
-/// persisted bump, which remains separate in `CommitRoundResult`.
+/// Native, host-only semantic representation of every retained V2 `Round`
+/// field. It has no Anchor discriminator and makes no account-layout
+/// compatibility claim; migration must decode V2 and encode B3 explicitly.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct RoundState {
     pub config: [u8; 32],
@@ -124,6 +123,7 @@ pub struct RoundState {
     pub selected_agency_index: u32,
     pub derivation_counter: u32,
     pub status: u8,
+    pub bump: u8,
 }
 
 /// Native, host-only semantic representation of the retained V2 `Position`.
@@ -587,7 +587,6 @@ pub struct SettleRoundResult {
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct CommitRoundResult {
     pub round: RoundState,
-    pub round_bump: u8,
 }
 
 /// Exact retained V2 config projection consumed by `commit_round`. It is a
@@ -2175,8 +2174,8 @@ fn commit_round_transition(
             selected_agency_index: NO_SELECTED_AGENCY,
             derivation_counter: NO_DERIVATION_COUNTER,
             status: ROUND_PENDING,
+            bump: input.round_bump,
         },
-        round_bump: input.round_bump,
     })
 }
 
@@ -2691,6 +2690,7 @@ mod tests {
             selected_agency_index: 5,
             derivation_counter: 6,
             status: ROUND_PENDING,
+            bump: 252,
         }
     }
 
@@ -2729,6 +2729,7 @@ mod tests {
             selected_agency_index: 7,
             derivation_counter: 8,
             status,
+            bump: 252,
         }
     }
 
@@ -2776,6 +2777,7 @@ mod tests {
         selected_agency_index: u32,
         derivation_counter: u32,
         status: u8,
+        bump: u8,
         reveal_slot: u64,
     }
 
@@ -2795,6 +2797,7 @@ mod tests {
                 selected_agency_index: result.round.selected_agency_index,
                 derivation_counter: result.round.derivation_counter,
                 status: result.round.status,
+                bump: result.round.bump,
                 reveal_slot: result.reveal_slot,
             })),
         }
@@ -2869,6 +2872,7 @@ mod tests {
                 selected_agency_index: round.selected_agency_index,
                 derivation_counter: round.derivation_counter,
                 status: round.status,
+                bump: round.bump,
                 reveal_slot,
             })),
         }
@@ -4269,7 +4273,7 @@ mod tests {
             selected_agency_index: round.selected_agency_index,
             derivation_counter: round.derivation_counter,
             status: round.status,
-            bump: 0,
+            bump: round.bump,
         }
     }
 
@@ -4920,7 +4924,7 @@ mod tests {
         selected_agency_index: u32,
         derivation_counter: u32,
         status: u8,
-        round_bump: u8,
+        bump: u8,
     }
 
     fn observe_commit_result(result: Result<CommitRoundResult, EconomyError>) -> CommitObservation {
@@ -4939,7 +4943,7 @@ mod tests {
                 selected_agency_index: result.round.selected_agency_index,
                 derivation_counter: result.round.derivation_counter,
                 status: result.round.status,
-                round_bump: result.round_bump,
+                bump: result.round.bump,
             })),
         }
     }
@@ -5080,7 +5084,7 @@ mod tests {
                 selected_agency_index: round.selected_agency_index,
                 derivation_counter: round.derivation_counter,
                 status: round.status,
-                round_bump: round.bump,
+                bump: round.bump,
             })),
         }
     }
@@ -7499,6 +7503,7 @@ mod tests {
             selected_agency_index,
             derivation_counter: 0,
             status,
+            bump: 248,
         };
         let mut dormant_cases = Vec::new();
 
@@ -8992,6 +8997,7 @@ mod tests {
         assert_eq!(result.round.agency_count_snapshot, 11);
         assert_eq!(result.round.agency_registry_hash_snapshot, [3; 32]);
         assert_eq!(result.round.decision_context, [4; 32]);
+        assert_eq!(result.round.bump, 252);
     }
 
     #[test]

@@ -400,13 +400,19 @@ outside `0..=2` fail before encode copies its temporary buffer. Codec existence
 does not make the production-inactive Agency path reachable or supply account
 ownership, signer, PDA, lifecycle, or persistence checks.
 
-`RoundState` is not encoded because it is not a complete retained account
-projection: V2 `Round` persists a final bump byte, while B3 keeps that bump only
-beside the semantic value in `CommitRoundResult`. The audit records
-`BLOCKED_MISSING_PERSISTED_BUMP_IN_SEMANTIC_STATE` rather than silently dropping
-the field or widening this codec-only scope. The Config phase blocker remains
-unchanged. Consequently these six strict codecs are preparation only, not a
-native adapter or handler completion.
+`RoundState` now includes the retained persisted bump immediately after status.
+`commit_round_transition` writes the supplied round bump into that field;
+settle and expire preserve it; and `CommitRoundResult` no longer duplicates it.
+The strict 224-byte `IATB3RND` codec pins status at offset 212, bump at 213, and
+a zero tail through 223. Both directions reject statuses outside `0..=2`; an
+audited golden hash, per-field vectors, exact-length/type/reserved corruption,
+atomic encode failures, and a panic sweep pin the layout. The matrix therefore
+records `roundCodecStatus: STRICT_V1`.
+
+Config remains the sole codec blocker at
+`BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`. Consequently these
+seven strict codecs are preparation only, not a native adapter or handler
+completion.
 
 These are not account adapters or deployable handlers. A future native adapter
 must still prove account ownership, exact config/round/randomness bindings,

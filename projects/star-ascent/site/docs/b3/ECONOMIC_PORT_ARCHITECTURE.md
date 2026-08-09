@@ -503,14 +503,21 @@ decode and encode. These byte codecs neither activate CCC nor implement the
 Agency/owner-index/eligibility account lifecycle, administrator checks, PDA
 binding, or persistence.
 
-`RoundState` is also excluded. Retained V2 persists a `bump` after `status`, but
-the current B3 semantic projection ends at `status` and carries the creation
-bump separately in `CommitRoundResult`. Encoding it would omit a persisted
-account field. The matrix therefore records
-`BLOCKED_MISSING_PERSISTED_BUMP_IN_SEMANTIC_STATE`; this codec-only batch does
-not expand `RoundState` or select a replacement layout. Config remains
-`BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`, so the aggregate stage
-remains `PARTIAL_STRICT_CODEC_ONLY` and native-adapter-incomplete.
+`RoundState` is now a field-complete retained projection: its persisted `bump`
+follows `status`, the commit transition writes `CommitRoundInput.round_bump`
+into that field, and settle/expire preserve it. The redundant bump beside the
+round in `CommitRoundResult` was removed. Its strict `IATB3RND` codec is exactly
+224 bytes: semantic bytes end with status at offset 212 and bump at 213, while
+214 through 223 remain zero. Decode and encode admit only retained statuses
+`0`, `1`, and `2`; the fixed golden vector, every semantic field, exact lengths,
+wrong types, reserved bytes, atomic failure, and panic-free corruption sweep are
+pinned in Rust tests. The matrix records `roundCodecStatus: STRICT_V1`.
+
+Config remains `BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`, so it is
+the sole codec blocker and the aggregate stage remains
+`PARTIAL_STRICT_CODEC_ONLY` and native-adapter-incomplete. The Round codec adds
+no Solana account ownership, PDA/bump derivation, lifecycle, persistence,
+dispatcher, CPI, or public exposure.
 
 None of these kernels may be exposed as a write entrypoint. The first safe
 deployable slice is the complete fifteen-row dispatcher behind the frozen

@@ -153,7 +153,7 @@
       "status": "BLOCKED",
       "components": ["utf8:round", "pubkey:economyConfig", "u64le:week"],
       "purpose": "Retained V2 weekly CCC boundary",
-      "blocker": "Retained V2 seed candidate; CCC remains compile-time inactive and the B3 codec is not frozen."
+      "blocker": "Retained V2 seed candidate with a frozen strict B3 Round codec; CCC remains compile-time inactive, while the public adapter, account lifecycle, and production identity remain unfrozen."
     },
     {
       "name": "factionConfig",

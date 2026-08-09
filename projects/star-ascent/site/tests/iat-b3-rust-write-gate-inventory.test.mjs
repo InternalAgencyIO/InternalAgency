@@ -414,6 +414,7 @@ test("the host-only commit_round port preserves adjacent proof and snapshot orde
       "round.selected_agency_index = u32::MAX",
       "round.derivation_counter = u32::MAX",
       "round.status = ROUND_PENDING",
+      "round.bump = ctx.bumps.round",
     ],
     "V2 commit_round",
   );
@@ -451,6 +452,7 @@ test("the host-only commit_round port preserves adjacent proof and snapshot orde
       "selected_agency_index: NO_SELECTED_AGENCY",
       "derivation_counter: NO_DERIVATION_COUNTER",
       "status: ROUND_PENDING",
+      "bump: input.round_bump",
     ],
     "B3 commit_round transition",
   );
@@ -483,6 +485,23 @@ test("the host-only commit_round port preserves adjacent proof and snapshot orde
     audit,
     /`commit_round` is the fourth and only additional\s+handler-body kernel/u,
   );
+});
+
+test("the retained Round bump is stored once and preserved by terminal transitions", () => {
+  const roundState = structBody(economySource, "RoundState");
+  const commitResult = structBody(economySource, "CommitRoundResult");
+  const settleTransition = functionBody(economySource, "settle_pending_round");
+  const expireTransition = functionBody(economySource, "expire_pending_round");
+
+  assertTokensInOrder(
+    roundState,
+    ["pub status: u8", "pub bump: u8"],
+    "B3 RoundState terminal fields",
+  );
+  assert.match(commitResult, /pub round: RoundState/u);
+  assert.doesNotMatch(commitResult, /round_bump/u);
+  assert.doesNotMatch(settleTransition, /round\.bump\s*=/u);
+  assert.doesNotMatch(expireTransition, /round\.bump\s*=/u);
 });
 
 test("the initialize_config kernel preserves V2 validation and initial state construction", () => {

@@ -20,13 +20,14 @@
     "strictCodecTypes": [
       "PositionState",
       "LaneState",
+      "RoundState",
       "CoreRewardState",
       "AgencyState",
       "AgencyOwnerIndexState",
       "EligibilityState"
     ],
     "configCodecStatus": "BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE",
-    "roundCodecStatus": "BLOCKED_MISSING_PERSISTED_BUMP_IN_SEMANTIC_STATE"
+    "roundCodecStatus": "STRICT_V1"
   },
   "hostOnlyPureTransitions": [
     {
