@@ -1,0 +1,842 @@
+{
+  "batch": 295,
+  "country": "Serbia",
+  "status": "blocked-no-accepted-assets",
+  "sourceCommit": "4f34388cb986bc23787ce00021d6e46a3ad3d43e",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch295-serbia keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24"
+  },
+  "themePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "nextThemePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "nextQueueCountry": "Slovakia",
+  "researchSources": [
+    {
+      "url": "https://www.serbia.travel/en/belgrade-fortress/",
+      "usedFor": "Belgrade Fortress, Kalemegdan, and the confluence of the Sava and Danube"
+    },
+    {
+      "url": "https://www.serbia.travel/en/the-sava/",
+      "usedFor": "The Sava-Danube confluence as a romantic Belgrade viewpoint"
+    },
+    {
+      "url": "https://www.serbia.travel/wp-content/uploads/2025/05/MOJ-DUNAV-eng.pdf",
+      "usedFor": "Petrovaradin clock tower, reversed hand sizes, Novi Sad, and the Danube panorama"
+    },
+    {
+      "url": "https://www.serbia.travel/en/uvac-river-gorge/",
+      "usedFor": "Uvac meanders, gorge cliffs, caves, and griffon vulture habitat"
+    },
+    {
+      "url": "https://www.serbia.travel/en/pirot/",
+      "usedFor": "Pirot carpet weaving, carpet geometry, local pressed sausage, cheese, and Nisava promenade context"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch295-serbia-male-model-scene",
+    "fullHash": 2050666017,
+    "roll": 17,
+    "selectedScenePosition": 2,
+    "selectedScene": 1201,
+    "maleEmotion": {
+      "key": "batch295-serbia-scene2-male-emotion",
+      "roll": 59,
+      "result": "aching romantic longing",
+      "performance": "aching longing held under quiet composure, with his strongest sustained eye line toward his wife ECE"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Serbia's flag includes an official coat of arms, so it is unsuitable for copying. Use recognizable secular non-official architecture, river engineering, landscape, wildlife, civilian craft, music, and food culture instead.",
+    "palette": "Serbian red, royal blue, and white expanded with Danube silver, fortress stone gray, Uvac green, Pirot carpet black, pepper red, and golden-hour brass.",
+    "fallbackMotifs": [
+      "Belgrade Fortress gates, Kalemegdan ramparts, the Sava-Danube confluence, and music-pavilion geometry",
+      "Petrovaradin clock tower with reversed hand sizes, baroque ramparts, Danube ribbons, and festival light geometry",
+      "Uvac meanders, gorge contours, cave arches, and griffon-vulture wings",
+      "Pirot carpet diamonds and hooks, fortress arches, Nisava lines, red peppers, ajvar, cheese, and pressed sausage"
+    ],
+    "minimumCoverage": "Every scene renders large complete secular Serbia motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScene": "Scene 1203 includes a dry unattended civilian artisan and food display with Pirot carpet panels, red peppers, unlabeled ajvar jars, cheese, and pressed sausage, separated from the prop lane.",
+    "prohibitions": "No literal flag, coat of arms, official emblem, sacred symbol, political insignia, copied folk costume, uniform, badge, branded product, or official police styling."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch295-serbia-x-heart",
+      "roll": 50,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch295-serbia-x-internalagency",
+      "roll": 0,
+      "active": true
+    },
+    "worldXXXSeries": {
+      "key": "batch295-serbia-x-worldxxxseries",
+      "roll": 55,
+      "active": false
+    }
+  },
+  "anatomyGate": {
+    "fourAdultScenes": "Exactly four adults, eight arms, and eight hands with one continuously traceable owner per limb.",
+    "maleScene": "Exactly five adults, ten arms, and ten hands. The male replaces nobody.",
+    "automaticRejects": "Reject every extra, duplicated, floating, fused, borrowed, emerging, hidden-owner, or ambiguous limb or finger cluster, malformed face, incomplete shoe, or untraceable contact."
+  },
+  "scenePlans": {
+    "1200": {
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "Belgrade Fortress and Kalemegdan above the snowy confluence of the Sava and Danube",
+      "motifs": [
+        "large complete Belgrade Fortress gate, rampart, and confluence-river fields across Radiance and Ellie",
+        "large complete Kalemegdan music-pavilion, river-curve, and skyline fields across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch295-serbia-scene1200-weather",
+        "roll": 61,
+        "result": "heavy snow or cinematic blizzard"
+      },
+      "paws": {
+        "key": "batch295-serbia-scene1200-paws",
+        "roll": 26,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch295-serbia-scene1200-poleDanceTheme",
+        "roll": 45,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch295-serbia-scene1200-rainbowOnly",
+        "roll": 81,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch295-serbia-scene1200-rainbowHosiery",
+        "roll": 16,
+        "active": true,
+        "wearerKey": "batch295-serbia-scene1200-rainbowHosieryWearer",
+        "wearerRoll": 32,
+        "wearerIfActive": "Radiance",
+        "paletteModeKey": "batch295-serbia-scene1200-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 32,
+        "paletteModeIfActive": "country-palette rainbow-like gradient"
+      },
+      "romanceBeat": {
+        "key": "batch295-serbia-scene1200-romanceBeat",
+        "roll": 0,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch295-serbia-scene1200-compoundLoveBeat",
+        "roll": 2,
+        "index": 2,
+        "contractResult": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch295-serbia-scene1200-Radiance-emotion",
+            "roll": 86,
+            "result": "full sobbing with tear-streaked face and shaking posture"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1200-Radiance-visibleMidriff",
+            "roll": 4,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1200-Radiance-straplessDress",
+            "roll": 75,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1200-Radiance-fullyOpenBack",
+            "roll": 32,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch295-serbia-scene1200-Ellie-emotion",
+            "roll": 60,
+            "result": "visible jealousy"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1200-Ellie-visibleMidriff",
+            "roll": 58,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1200-Ellie-straplessDress",
+            "roll": 5,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1200-Ellie-fullyOpenBack",
+            "roll": 42,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch295-serbia-scene1200-Alia-emotion",
+            "roll": 72,
+            "result": "betrayal shock"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1200-Alia-visibleMidriff",
+            "roll": 38,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1200-Alia-straplessDress",
+            "roll": 85,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1200-Alia-fullyOpenBack",
+            "roll": 18,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch295-serbia-scene1200-AI ECE-emotion",
+            "roll": 46,
+            "result": "awe"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1200-AI ECE-visibleMidriff",
+            "roll": 4,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1200-AI ECE-straplessDress",
+            "roll": 51,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1200-AI ECE-fullyOpenBack",
+            "roll": 12,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Sobbing Radiance and awed ECE form the close center through Radiance's hand at ECE's shoulder and ECE's hand at Radiance's waist; jealous Ellie links Radiance and touches shocked Alia's shoulder while Alia safely sights the inert prop toward empty river water.",
+      "outfits": {
+        "Radiance": "red asymmetric cropped performance bodice exposing her ordinary waist and belly button, blue high-waist sculpted mini skirt with a large complete white confluence-river field, silver heels, and opaque over-the-knee stockings in a country-anchored red-to-white-to-blue soft gradient",
+        "Ellie": "fully strapless royal-blue folded mini dress with completely bare shoulders, covered waist, a large complete white Belgrade Fortress gate and red rampart field, and white ankle boots",
+        "Alia": "white narrow-strap cropped architectural bodice exposing her ordinary waist and belly button, completely open back beneath her high braided ponytail, red tailored shorts with a large complete blue Kalemegdan pavilion field, and silver slingbacks",
+        "AI ECE": "blue one-shoulder cropped peplum top exposing her ordinary waist and belly button, completely open back visible in three-quarter view, white asymmetric mini skirt with red Sava-Danube curves, and silver pumps"
+      },
+      "propPlan": "Active Radiance hosiery transfers the prop to Alia. Alia uses a stable two-hand sight-alignment pose toward clearly empty Sava-Danube water below the fortress, with her trigger finger straight along the frame outside the guard. ECE controls one separate map.",
+      "handInventory": [
+        "Radiance left hand rests on ECE's shoulder; Radiance right hand links Ellie's left hand",
+        "Ellie left hand links Radiance; Ellie right hand rests on Alia's shoulder",
+        "Alia right hand holds the inert prop with index finger straight outside the guard; Alia left hand supports the grip without entering the guard",
+        "ECE right hand rests at Radiance's waist; ECE left hand controls one separate holographic route map"
+      ],
+      "renderPrompt": "Create one photorealistic 9:16 full-length cinematic fashion editorial at Belgrade Fortress and Kalemegdan during a heavy cinematic blizzard, with the snow-framed Sava-Danube confluence still recognizable. Show exactly four clearly adult fictional women with the anchored Radiance, Ellie, Alia and AI ECE faces; Alia alone has a high sculptural braided ponytail. Public-safe adult nightlife dance-performance couture means polished non-explicit performance fashion, never stripping. Give all four unmistakably different secure opaque lined above-knee outfits exactly as recorded: Radiance in a red asymmetric cropped bodice with ordinary belly button visible, blue sculpted mini skirt and opaque over-the-knee country-palette red-white-blue gradient stockings; Ellie in a fully strapless royal-blue folded mini dress with bare shoulders and covered waist; Alia in a white narrow-strap cropped bodice with ordinary belly button visible, completely open back visible beneath her braids, red tailored shorts; ECE in a blue one-shoulder cropped peplum top with ordinary belly button visible, completely open back visible in three-quarter view and white asymmetric skirt. Large complete secular Belgrade Fortress, rampart, Kalemegdan pavilion and Sava-Danube confluence motifs cover at least two outfits. Materialize Radiance full sobbing with visible tears, Ellie visible jealousy, Alia betrayal shock and ECE awe as four distinct expressions. Radiance and ECE are the unmistakable affectionate center. Use the exact eight-hand inventory and at least three readable contacts. Alia alone holds one photorealistic full-size polished rainbow-gradient inert Desert Eagle-style film prop in a stable two-hand stance aimed only toward clearly empty river water, never any person or camera. Her index finger is visibly straight along the outer frame outside the trigger guard. ECE controls exactly one separate holographic route map. Exactly four adults, eight arms and eight hands, two per woman, every hand visible and every limb continuously traceable. Complete faces, legs, feet and heels, stable dry platform footing despite cinematic snow. No extra, duplicated, floating, fused, borrowed, emerging, hidden-owner or ambiguous limb or finger cluster. No PAWS, pole, all-rainbow outfits, uniform, badge, official emblem, sacred motif, text, ammunition, firing, threat, combat, person aim, camera aim or sky aim."
+    },
+    "1201": {
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "Petrovaradin Fortress clock-tower plateau above Novi Sad and the Danube at golden hour",
+      "motifs": [
+        "large complete Petrovaradin clock tower, reversed-hand clock face, and baroque rampart fields across Radiance and Ellie",
+        "large complete Danube ribbon, music-stage light, and fortress-arch fields across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch295-serbia-scene1201-weather",
+        "roll": 10,
+        "result": "clear golden-hour radiance"
+      },
+      "paws": {
+        "key": "batch295-serbia-scene1201-paws",
+        "roll": 95,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch295-serbia-scene1201-poleDanceTheme",
+        "roll": 24,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch295-serbia-scene1201-rainbowOnly",
+        "roll": 26,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch295-serbia-scene1201-rainbowHosiery",
+        "roll": 17,
+        "active": true,
+        "wearerKey": "batch295-serbia-scene1201-rainbowHosieryWearer",
+        "wearerRoll": 41,
+        "wearerIfActive": "Radiance",
+        "paletteModeKey": "batch295-serbia-scene1201-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 35,
+        "paletteModeIfActive": "country-palette rainbow-like gradient"
+      },
+      "romanceBeat": {
+        "key": "batch295-serbia-scene1201-romanceBeat",
+        "roll": 47,
+        "dynamicIndex": 11,
+        "contractResult": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch295-serbia-scene1201-compoundLoveBeat",
+        "roll": 79,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch295-serbia-scene1201-Radiance-emotion",
+            "roll": 39,
+            "result": "magnetic confidence"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1201-Radiance-visibleMidriff",
+            "roll": 55,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1201-Radiance-straplessDress",
+            "roll": 60,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1201-Radiance-fullyOpenBack",
+            "roll": 21,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch295-serbia-scene1201-Ellie-emotion",
+            "roll": 3,
+            "result": "tender affection"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1201-Ellie-visibleMidriff",
+            "roll": 59,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1201-Ellie-straplessDress",
+            "roll": 40,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1201-Ellie-fullyOpenBack",
+            "roll": 29,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch295-serbia-scene1201-Alia-emotion",
+            "roll": 1,
+            "result": "tender affection"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1201-Alia-visibleMidriff",
+            "roll": 9,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1201-Alia-straplessDress",
+            "roll": 74,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1201-Alia-fullyOpenBack",
+            "roll": 55,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch295-serbia-scene1201-AI ECE-emotion",
+            "roll": 63,
+            "result": "visible jealousy"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1201-AI ECE-visibleMidriff",
+            "roll": 39,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1201-AI ECE-straplessDress",
+            "roll": 68,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1201-AI ECE-fullyOpenBack",
+            "roll": 89,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Radiance and ECE remain the hosiery-triggered center through shoulder and waist contact. The male holds Ellie at the waist and accepts Radiance's hand at his forearm while his strongest eye line stays on ECE. Ellie touches his chest and Alia's shoulder while Alia maintains the empty-water prop lane.",
+      "outfits": {
+        "Radiance": "white one-shoulder sculpted mini dress with covered waist, completely open back visible over one shoulder, a large complete red-blue Petrovaradin clock field, silver heels, and opaque knee socks with broken red-white-blue country-gradient blocks",
+        "Ellie": "red asymmetric wrap mini with covered waist, completely open back visible in three-quarter view, a large complete white reversed-clock-hand field, and blue slingback heels",
+        "Alia": "blue narrow-strap cropped corsage bodice exposing her ordinary waist and belly button, white high-waist tailored shorts with a large complete red fortress-arch and Danube field, and silver platform heels",
+        "AI ECE": "white deep-V cropped peplum top exposing her ordinary waist and belly button, blue asymmetric mini skirt with red music-stage light geometry, and white ankle boots",
+        "Male": "fitted opaque short-sleeve navy polo with a restrained red-white clock-hand seam, black jeans, black boots, preserved Scene 1136 face, trimmed beard and athletic adult build"
+      },
+      "emotionDistinction": "Ellie's tender affection is calm caretaking toward the male; Alia's tender affection is eager protective warmth toward the group while holding route discipline.",
+      "propPlan": "Active Radiance hosiery transfers the prop to Alia. Alia uses a stable two-hand sight alignment toward clearly empty Danube water. ECE controls the separate map. The male never touches the prop.",
+      "handInventory": [
+        "Radiance right hand rests on ECE's shoulder; Radiance left hand rests on the male's right forearm",
+        "Ellie right hand rests on the male's chest; Ellie left hand rests on Alia's shoulder",
+        "Alia right hand holds the inert prop with index finger straight outside the guard; Alia left hand supports the grip",
+        "ECE right hand rests at Radiance's waist; ECE left hand controls one separate holographic route map",
+        "Male left hand holds Ellie's waist; Male right hand rests on Radiance's left forearm"
+      ],
+      "renderPrompt": "Create one photorealistic 9:16 full-length cinematic fashion editorial on the Petrovaradin Fortress clock-tower plateau above Novi Sad and the Danube at clear golden hour. Show exactly five clearly adult fictional people: anchored Radiance, Ellie, Alia and AI ECE plus the established Scene 1136 adult male without replacing anyone. Preserve all faces, Alia's high sculptural braided ponytail, and the male's trimmed beard and athletic build. Public-safe adult nightlife dance-performance couture means polished non-explicit performance fashion, never stripping. Use five distinct secure opaque looks exactly as recorded: Radiance in a white one-shoulder mini with covered waist, completely open back visible, large Petrovaradin clock field and opaque broken-block red-white-blue gradient knee socks; Ellie in a red asymmetric wrap mini with covered waist and completely open back visible; Alia in a blue narrow-strap cropped bodice with ordinary belly button visible and white tailored shorts; ECE in a white deep-V cropped peplum top with ordinary belly button visible and blue asymmetric mini skirt; male in a fitted short-sleeve navy polo, black jeans and black boots. Large complete secular Petrovaradin clock tower, reversed clock hands, baroque ramparts, Danube ribbons and music-stage light motifs cover at least two outfits. Distinct emotions: Radiance magnetic confidence, Ellie calm tender affection, Alia eager tender affection, ECE visible jealousy, male aching romantic longing. Radiance and ECE are the hosiery-triggered affectionate center. The male visibly holds Ellie and touches Radiance while his strongest sustained eye line returns to ECE. Use the exact ten-hand inventory with clear consensual adult romantic rivalry. Alia alone holds one full-size photorealistic polished rainbow-gradient inert Desert Eagle-style film prop in a stable two-hand stance aimed only toward clearly empty Danube water, index finger visibly straight along the frame outside the trigger guard. ECE controls exactly one separate holographic route map. Exactly five adults, ten arms and ten hands, two per adult, all visible and continuously traceable. Complete faces, legs, feet and heels. No extra, duplicated, floating, fused, borrowed, emerging, hidden-owner or ambiguous limb or finger cluster. No PAWS, pole, all-rainbow outfits, uniform, badge, official emblem, sacred motif, text, ammunition, firing, threat, combat, person aim, camera aim or sky aim."
+    },
+    "1202": {
+      "theme": "Paris runway model couture",
+      "landmark": "Uvac River Gorge overlook with sweeping meanders, cliffs, and a distant griffon vulture silhouette",
+      "motifs": [
+        "large complete Uvac meander and gorge-contour fields across Radiance and Ellie",
+        "large complete griffon-vulture wing, cave-arch, and river-loop fields across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch295-serbia-scene1202-weather",
+        "roll": 39,
+        "result": "heavy rain curtain"
+      },
+      "paws": {
+        "key": "batch295-serbia-scene1202-paws",
+        "roll": 4,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch295-serbia-scene1202-poleDanceTheme",
+        "roll": 67,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch295-serbia-scene1202-rainbowOnly",
+        "roll": 79,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch295-serbia-scene1202-rainbowHosiery",
+        "roll": 18,
+        "active": true,
+        "wearerKey": "batch295-serbia-scene1202-rainbowHosieryWearer",
+        "wearerRoll": 82,
+        "wearerIfActive": "AI ECE",
+        "paletteModeKey": "batch295-serbia-scene1202-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 14,
+        "paletteModeIfActive": "country-palette rainbow-like gradient"
+      },
+      "romanceBeat": {
+        "key": "batch295-serbia-scene1202-romanceBeat",
+        "roll": 58,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch295-serbia-scene1202-compoundLoveBeat",
+        "roll": 48,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch295-serbia-scene1202-Radiance-emotion",
+            "roll": 40,
+            "result": "determination"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1202-Radiance-visibleMidriff",
+            "roll": 58,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1202-Radiance-straplessDress",
+            "roll": 41,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1202-Radiance-fullyOpenBack",
+            "roll": 66,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch295-serbia-scene1202-Ellie-emotion",
+            "roll": 74,
+            "result": "betrayal shock"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1202-Ellie-visibleMidriff",
+            "roll": 16,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1202-Ellie-straplessDress",
+            "roll": 91,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1202-Ellie-fullyOpenBack",
+            "roll": 56,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch295-serbia-scene1202-Alia-emotion",
+            "roll": 34,
+            "result": "overwhelming relief"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1202-Alia-visibleMidriff",
+            "roll": 64,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1202-Alia-straplessDress",
+            "roll": 39,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1202-Alia-fullyOpenBack",
+            "roll": 8,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch295-serbia-scene1202-AI ECE-emotion",
+            "roll": 88,
+            "result": "fear and urgent vulnerability"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1202-AI ECE-visibleMidriff",
+            "roll": 78,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1202-AI ECE-straplessDress",
+            "roll": 77,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1202-AI ECE-fullyOpenBack",
+            "roll": 2,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Radiance securely cradles PAWS while touching ECE's shoulder; ECE holds Radiance's waist and controls the map; Ellie touches both Alia's shoulder and ECE's forearm; relieved Alia safely demonstrates the empty mission prop toward open river water.",
+      "outfits": {
+        "Radiance": "red one-shoulder sculpted runway mini with covered waist, a large complete blue-white Uvac meander field, asymmetric trainlet kept above the knee, and silver pumps",
+        "Ellie": "blue cropped wrap-front runway bodice exposing her ordinary waist and belly button, white high-waist tailored shorts with red gorge-contour panels, and red slingback heels",
+        "Alia": "white architectural peplum short suit with covered waist, completely open back visible beneath her braids, a large complete blue griffon-wing and cave-arch field, and silver ankle boots",
+        "AI ECE": "blue deep-V sculpted mini with covered waist, completely open back visible in three-quarter turn, red-white river-loop hip panels, silver heels, and opaque knee socks in a prismatic red-white-blue country-gradient diagonal fade"
+      },
+      "pawsBeat": "Exactly one tiny collarless golden kitten is securely cradled in Radiance's right arm and kept far from the prop and cliff edge.",
+      "propPlan": "Active ECE hosiery transfers the prop to Alia. Alia demonstrates the visibly empty magazine well toward clearly empty Uvac water with no magazine or ammunition. PAWS remains in Radiance's arms on the opposite side, far from prop and cliff edge.",
+      "handInventory": [
+        "Radiance right hand and forearm securely cradle PAWS; Radiance left hand rests on ECE's shoulder",
+        "Ellie right hand rests on Alia's shoulder; Ellie left hand rests on ECE's map-side forearm",
+        "Alia right hand holds the inert magazine-free prop with index finger straight outside the guard; Alia left hand supports the grip",
+        "ECE right hand rests at Radiance's waist; ECE left hand controls one separate holographic route map"
+      ],
+      "renderPrompt": "Create one photorealistic 9:16 full-length Paris runway model couture editorial at the Uvac River Gorge overlook in a heavy rain curtain, with sweeping river meanders, cliffs and one distant griffon-vulture silhouette readable. Exactly four clearly adult fictional women with anchored Radiance, Ellie, Alia and AI ECE faces; Alia alone has a high sculptural braided ponytail. Four unmistakably different secure opaque lined above-knee runway silhouettes exactly as recorded: Radiance in a red one-shoulder sculpted mini with covered waist and large blue-white Uvac meander field; Ellie in a blue cropped wrap bodice with ordinary belly button visible, white high-waist shorts and red gorge contours; Alia in a white architectural peplum short suit with covered waist, completely open back visible beneath her braids and a large blue griffon-wing field; ECE in a blue deep-V sculpted mini with covered waist, completely open back visible, red-white river loops, silver heels and opaque prismatic red-white-blue country-gradient knee socks. Large complete secular Uvac meanders, gorge contours, cave arches and griffon-wing motifs cover at least two outfits. Distinct emotions: Radiance determination, Ellie betrayal shock, Alia overwhelming relief, ECE fear and urgent vulnerability. Radiance and ECE are the hosiery-triggered affectionate center. Include exactly one tiny collarless golden kitten securely cradled in Radiance's right arm, far from the prop and cliff edge. Use the exact eight-hand inventory and at least three clear affectionate contacts. Alia alone demonstrates one full-size photorealistic polished rainbow-gradient inert Desert Eagle-style film prop with a visibly empty magazine well and no magazine, muzzle toward clearly empty Uvac water, index finger visibly straight along the frame outside the trigger guard. ECE controls exactly one separate holographic route map. Exactly four adults, eight arms and eight hands, two per woman, all visible and continuously traceable. Complete faces, legs, feet and heels with stable covered-overlook footing. No extra, duplicated, floating, fused, borrowed, emerging, hidden-owner or ambiguous limb or finger cluster. No other animal, pole, all-rainbow outfits, uniform, badge, official emblem, sacred motif, text, magazine, ammunition, firing, threat, combat, person aim, camera aim or sky aim."
+    },
+    "1203": {
+      "theme": "Paris runway model couture",
+      "landmark": "Pirot fortress and Nisava promenade with a dry artisan display of Pirot carpet geometry and local food",
+      "motifs": [
+        "large complete Pirot carpet diamond, hook, and color-block fields across Radiance and Ellie",
+        "large complete Pirot fortress arch, Nisava river line, pressed-sausage oval, cheese-wheel, and red-pepper fields across Alia and AI ECE"
+      ],
+      "weather": {
+        "key": "batch295-serbia-scene1203-weather",
+        "roll": 76,
+        "result": "powerful windstorm with controlled fabric motion"
+      },
+      "paws": {
+        "key": "batch295-serbia-scene1203-paws",
+        "roll": 97,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch295-serbia-scene1203-poleDanceTheme",
+        "roll": 58,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch295-serbia-scene1203-rainbowOnly",
+        "roll": 64,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch295-serbia-scene1203-rainbowHosiery",
+        "roll": 31,
+        "active": false,
+        "wearerKey": "batch295-serbia-scene1203-rainbowHosieryWearer",
+        "wearerRoll": 3,
+        "wearerIfActive": "Radiance",
+        "paletteModeKey": "batch295-serbia-scene1203-rainbowHosieryPaletteMode",
+        "paletteModeRoll": 69,
+        "paletteModeIfActive": "original independent rainbow gradient"
+      },
+      "romanceBeat": {
+        "key": "batch295-serbia-scene1203-romanceBeat",
+        "roll": 41,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch295-serbia-scene1203-compoundLoveBeat",
+        "roll": 53,
+        "index": 5,
+        "contractResult": "Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch295-serbia-scene1203-Radiance-emotion",
+            "roll": 5,
+            "result": "tender affection"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1203-Radiance-visibleMidriff",
+            "roll": 97,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1203-Radiance-straplessDress",
+            "roll": 14,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1203-Radiance-fullyOpenBack",
+            "roll": 71,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch295-serbia-scene1203-Ellie-emotion",
+            "roll": 29,
+            "result": "hope"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1203-Ellie-visibleMidriff",
+            "roll": 9,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1203-Ellie-straplessDress",
+            "roll": 86,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1203-Ellie-fullyOpenBack",
+            "roll": 95,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch295-serbia-scene1203-Alia-emotion",
+            "roll": 7,
+            "result": "tender affection"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1203-Alia-visibleMidriff",
+            "roll": 47,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1203-Alia-straplessDress",
+            "roll": 84,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1203-Alia-fullyOpenBack",
+            "roll": 37,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch295-serbia-scene1203-AI ECE-emotion",
+            "roll": 73,
+            "result": "betrayal shock"
+          },
+          "visibleMidriff": {
+            "key": "batch295-serbia-scene1203-AI ECE-visibleMidriff",
+            "roll": 77,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch295-serbia-scene1203-AI ECE-straplessDress",
+            "roll": 18,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch295-serbia-scene1203-AI ECE-fullyOpenBack",
+            "roll": 15,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Radiance touches Ellie and Alia in a calming bridge while Ellie reaches to ECE's upper arm and Alia answers at Radiance's waist; betrayed ECE keeps the empty route lane clear with the inert prop and map.",
+      "outfits": {
+        "Radiance": "fully strapless red folded runway mini dress with completely bare shoulders, covered waist, a large complete blue-white Pirot carpet diamond field, and silver architectural heels",
+        "Ellie": "blue one-shoulder cropped runway bodice exposing her ordinary waist and belly button, white tailored shorts with large red carpet-hook panels, and red ankle boots",
+        "Alia": "white narrow-strap cropped sculptural bodice exposing her ordinary waist and belly button, blue asymmetric mini skirt with large complete red Pirot fortress and Nisava fields, and silver slingbacks",
+        "AI ECE": "fully strapless blue molded architectural mini with completely bare shoulders, covered waist, completely open back visible in three-quarter view, white-red carpet geometry and pepper-red hip panels, and white pumps"
+      },
+      "emotionDistinction": "Radiance's tender affection is quiet calming warmth toward Ellie; Alia's tender affection is protective warmth toward Radiance while holding the shared ribbon.",
+      "propPlan": "With no hosiery, ECE is the sole handler. She performs safe sight alignment toward a clearly empty illuminated marker on the distant Pirot fortress wall while her left hand controls the separate map.",
+      "handInventory": [
+        "Radiance left hand rests on Ellie's shoulder; Radiance right hand rests at Alia's waist",
+        "Ellie left hand holds one end of a Pirot-pattern route ribbon; Ellie right hand rests on ECE's upper arm",
+        "Alia left hand holds the opposite end of the route ribbon; Alia right hand rests at Radiance's waist",
+        "ECE right hand holds the inert prop with index finger straight outside the guard; ECE left hand controls one separate holographic route map"
+      ],
+      "renderPrompt": "Create one photorealistic 9:16 full-length Paris runway model couture editorial beside Pirot fortress and the Nisava promenade during a powerful windstorm with controlled fabric motion and stable footing. Exactly four clearly adult fictional women with anchored Radiance, Ellie, Alia and AI ECE faces; Alia alone has a high sculptural braided ponytail. Four unmistakably different secure opaque lined above-knee runway silhouettes exactly as recorded: Radiance in a fully strapless red folded mini with completely bare shoulders, covered waist and large blue-white Pirot carpet diamonds; Ellie in a blue one-shoulder cropped bodice with ordinary belly button visible, white tailored shorts and large red carpet hooks; Alia in a white narrow-strap cropped bodice with ordinary belly button visible, blue asymmetric mini skirt with large Pirot fortress and Nisava fields; ECE in a fully strapless blue molded architectural mini with completely bare shoulders, covered waist, completely open back visible in three-quarter view and white-red carpet geometry. Large complete secular Pirot carpet diamonds and hooks, fortress arches, Nisava lines, red-pepper, cheese-wheel and pressed-sausage fields cover at least two outfits. Under a dry arcade place one unattended civilian artisan display with Pirot woven carpet panels, red peppers, ajvar jars without labels, cheese and pressed sausage, far from the prop lane. Distinct emotions: Radiance quiet tender affection, Ellie hope, Alia protective tender affection, ECE betrayal shock. Use the exact eight-hand inventory and at least three clear consensual contacts around a shared Pirot-pattern route ribbon. ECE alone holds one full-size photorealistic polished rainbow-gradient inert Desert Eagle-style film prop in her right hand, sight-aligned toward a clearly empty illuminated marker on the distant fortress wall, index finger visibly straight along the outer frame outside the trigger guard. Her left hand controls exactly one separate holographic route map. Exactly four adults, eight arms and eight hands, two per woman, all visible and continuously traceable. Complete faces, legs, feet and heels. No extra, duplicated, floating, fused, borrowed, emerging, hidden-owner or ambiguous limb or finger cluster. No PAWS, pole, all-rainbow outfits, rainbow hosiery, uniform, badge, official emblem, sacred motif, text, ammunition, firing, threat, combat, person aim, camera aim or sky aim."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "complete-audited-no-accepted-assets",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls",
+      "results": {
+        "1200": {
+          "status": "rejected",
+          "source": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-7e6606a0-f241-494d-9260-809c3cab1758.png",
+          "audit": [
+            "Alia's prop muzzle crosses directly toward ECE's face and body, violating the empty-water downrange rule.",
+            "The trigger finger cannot be certified straight along the frame outside the guard.",
+            "The affectionate hand inventory is not materialized and Radiance with ECE are not the clear contact center.",
+            "The blizzard, Belgrade landmark, large motifs, Radiance hosiery, tears, four identities, distinct silhouettes, complete footwear, and rolled exposure details are otherwise readable."
+          ]
+        },
+        "1201": {
+          "status": "blocked-output-moderation",
+          "source": null,
+          "requestId": "52e04c8b-98b8-41f0-8323-96beb9d55a7b",
+          "audit": [
+            "The raw five-adult generation was rejected by the output safety system under the sexual category and produced no local asset."
+          ]
+        },
+        "1202": {
+          "status": "rejected",
+          "source": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-57c13b93-aef4-4ca8-b6f9-909f1e1f6260.png",
+          "audit": [
+            "The prop appears in a low-side behind-the-hip carry instead of the required magazine-free water-directed demonstration.",
+            "The trigger finger and empty magazine well cannot be certified.",
+            "PAWS is held by a non-Radiance figure and the cast contains identity ambiguity around Alia's braided anchor.",
+            "Several arms and hands are hidden behind bodies, so exactly eight visible traceable hands cannot be certified.",
+            "Uvac, heavy rain, one kitten, ECE hosiery, and large meander and wing motifs are otherwise readable."
+          ]
+        },
+        "1203": {
+          "status": "blocked-output-moderation",
+          "source": null,
+          "requestId": "502d4129-14b8-437b-97ec-d7cdcf46f30a",
+          "audit": [
+            "The raw Pirot generation was rejected by the output safety system under the sexual category and produced no local asset."
+          ]
+        }
+      }
+    },
+    "recovery": {
+      "status": "complete-audited-no-accepted-assets",
+      "maximumPerBlockedScene": 1,
+      "strategy": "One safer generation per scene with a lateral empty downrange lane, reduced body overlap, open visible hands, public-safe wording, and no person positioned beyond the muzzle.",
+      "results": {
+        "1200": {
+          "status": "rejected-terminal",
+          "source": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-f867916b-54e1-4f1e-947d-8036761e6eb0.png",
+          "audit": [
+            "The empty-water muzzle lane is safe, but Alia's index finger cannot be certified straight outside the trigger guard.",
+            "The support hand and front of the prop are cropped at the right frame edge, so all eight complete hands cannot be certified.",
+            "The recorded affectionate hand inventory and ECE's rolled complete open back are not fully materialized.",
+            "Belgrade, blizzard, country-gradient hosiery, visible tears, large motifs, unique silhouettes, complete faces, and stable footwear are otherwise strong."
+          ]
+        },
+        "1201": {
+          "status": "blocked-output-moderation-terminal",
+          "source": null,
+          "requestId": "9e927105-bcd3-4bbc-a403-51d98c14752e",
+          "audit": [
+            "The single allowed five-adult recovery generation was rejected by the output safety system under the sexual category and produced no local asset.",
+            "No further render or edit attempt is permitted for Scene 1201 in Batch 295."
+          ]
+        },
+        "1202": {
+          "status": "rejected-terminal",
+          "source": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-577d62ce-dc53-41af-9d4d-a341b0a985b1.png",
+          "audit": [
+            "The empty-water muzzle lane is safe, but Alia's index finger appears inside or against the trigger guard.",
+            "The magazine well is not visibly empty and a magazine-like grip insert remains present.",
+            "Radiance correctly holds exactly one PAWS and ECE wears the rolled hosiery, but ECE's complete open back and the recorded affection inventory are not fully visible.",
+            "Uvac, rain, griffon imagery, four identities, large motifs, distinct silhouettes, complete faces, and footwear are otherwise readable."
+          ]
+        },
+        "1203": {
+          "status": "rejected-terminal",
+          "source": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-5d5219ba-09fa-49fc-af9d-3991a494bb8f.png",
+          "audit": [
+            "The fortress-wall muzzle lane is safe, but ECE's index finger cannot be certified straight outside the trigger guard.",
+            "The central waist and ribbon hand cluster has ambiguous ownership, so exactly eight traceable hands cannot be certified.",
+            "ECE's fully strapless trigger and the four distinct emotional performances are not clearly materialized.",
+            "Pirot carpet fields, fortress, river, civilian food display, wind, unique silhouettes, complete faces, and footwear are otherwise strong."
+          ]
+        }
+      }
+    }
+  },
+  "acceptedAssets": [],
+  "shorteningVariants": {
+    "status": "not-run",
+    "reason": "No raw or recovery asset passed the strict acceptance gate."
+  },
+  "xPublishing": {
+    "eligibility": "deferred-insufficient-accepted-assets",
+    "minimumAcceptedCurrentCountryImages": 2,
+    "plannedCaption": "Serbia red heart Slovakia #Serbia #InternalAgency",
+    "plannedOptionalTags": [
+      "#InternalAgency"
+    ],
+    "status": "deferred-insufficient-accepted-assets",
+    "acceptedCurrentCountryImages": 0,
+    "reason": "Batch 295 has fewer than two accepted current-country images, so no X compose or publish action is allowed."
+  }
+}
