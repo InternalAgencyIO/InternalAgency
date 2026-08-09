@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, relative } from "node:path";
 import test from "node:test";
 import { DatabaseSync } from "node:sqlite";
@@ -676,7 +676,9 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   ];
   const forbiddenRuntimeWiring = /iat_b3_reference|reward-capacity-waterfall|reward-ledger\.v2|reward_v2_|engagement[\\/]epoch-engine|engagement[\\/]reward-policy\.v1/u;
   for (const root of runtimeRoots) {
-    for (const file of textFilesUnder(join(SITE, root))) {
+    const runtimeRoot = join(SITE, root);
+    if (!existsSync(runtimeRoot)) continue;
+    for (const file of textFilesUnder(runtimeRoot)) {
       assert.doesNotMatch(
         readFileSync(file, "utf8"),
         forbiddenRuntimeWiring,
