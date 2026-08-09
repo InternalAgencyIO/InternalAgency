@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://internalagency.io/schemas/draft/iat-promotions-dlc-positive-campaign-vector-intake-v1.json",
+  "title": "IAT Promotions DLC external positive campaign-vector intake v1",
+  "description": "DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE. Structural validity is not signature validity, review completion, deployment, or activation authority.",
+  "x-iat-status": {
+    "labels": ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "schemaApplied": false
+  },
+  "type": "object",
+  "required": ["intakeVersion", "status", "provenance", "campaignVector", "review", "authority"],
+  "additionalProperties": false,
+  "properties": {
+    "intakeVersion": { "const": 1 },
+    "status": { "$ref": "#/definitions/status" },
+    "provenance": { "$ref": "#/definitions/provenance" },
+    "campaignVector": { "$ref": "#/definitions/campaignVector" },
+    "review": { "$ref": "#/definitions/review" },
+    "authority": { "$ref": "#/definitions/authority" }
+  },
+  "definitions": {
+    "hex40": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "hex64": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "hex128": { "type": "string", "pattern": "^[0-9a-f]{128}$" },
+    "base58Wallet": { "type": "string", "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$" },
+    "status": {
+      "type": "object",
+      "required": ["labels", "network", "programId", "deployable", "intakeApplied"],
+      "additionalProperties": false,
+      "properties": {
+        "labels": { "const": ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"] },
+        "network": { "const": "NONE" },
+        "programId": { "const": null },
+        "deployable": { "const": false },
+        "intakeApplied": { "const": false }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "sourceType",
+        "sourceUri",
+        "sourceArtifactSha256",
+        "generatorName",
+        "generatorVersion",
+        "accountabilityLabel",
+        "independenceDeclaration",
+        "campaignMessageWasSignedBySource",
+        "signingMaterialIncluded"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sourceType": { "const": "EXTERNAL_PUBLIC_TEST_VECTOR" },
+        "sourceUri": { "type": "string", "pattern": "^https://", "minLength": 9, "maxLength": 512 },
+        "sourceArtifactSha256": { "$ref": "#/definitions/hex64" },
+        "generatorName": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "generatorVersion": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "accountabilityLabel": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "independenceDeclaration": { "const": true },
+        "campaignMessageWasSignedBySource": { "type": "boolean" },
+        "signingMaterialIncluded": { "const": false }
+      }
+    },
+    "campaignVector": {
+      "type": "object",
+      "required": [
+        "envelope",
+        "publicKeyHex",
+        "signatureHex",
+        "claimedCanonicalMessageHex",
+        "claimedCanonicalMessageSha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "envelope": { "$ref": "#/definitions/envelope" },
+        "publicKeyHex": { "$ref": "#/definitions/hex64" },
+        "signatureHex": { "$ref": "#/definitions/hex128" },
+        "claimedCanonicalMessageHex": { "type": "string", "pattern": "^(?:[0-9a-f]{2})+$" },
+        "claimedCanonicalMessageSha256": { "$ref": "#/definitions/hex64" }
+      }
+    },
+    "envelope": {
+      "type": "object",
+      "required": ["attestationId", "keyId", "payload", "scheme", "version", "signatureBase64"],
+      "additionalProperties": false,
+      "properties": {
+        "attestationId": { "$ref": "#/definitions/hex64" },
+        "keyId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "payload": { "$ref": "#/definitions/payload" },
+        "scheme": { "const": "ED25519_DETACHED" },
+        "version": { "const": 0 },
+        "signatureBase64": { "type": "string", "minLength": 88, "maxLength": 88 }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "campaignId",
+        "domain",
+        "expiresAt",
+        "issuedAt",
+        "nodeId",
+        "nonce",
+        "purpose",
+        "wallet",
+        "walletProofDigest",
+        "walletProofVerifiedAt",
+        "xIdentityCommitment"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "campaignId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "domain": { "const": "iat-promotions-dlc-attestation-v0" },
+        "expiresAt": { "type": "integer" },
+        "issuedAt": { "type": "integer" },
+        "nodeId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "nonce": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "purpose": { "type": "string", "enum": ["NOMINATE", "CANCEL", "SETTLE"] },
+        "wallet": { "$ref": "#/definitions/base58Wallet" },
+        "walletProofDigest": { "$ref": "#/definitions/hex64" },
+        "walletProofVerifiedAt": { "type": "integer" },
+        "xIdentityCommitment": { "$ref": "#/definitions/hex64" }
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": ["completed", "decision", "reviewerIdentityCommitmentSha256", "receiptSha256"],
+      "additionalProperties": false,
+      "properties": {
+        "completed": { "type": "boolean" },
+        "decision": { "type": "string", "enum": ["NOT_REVIEWED", "APPROVE_VECTOR_ONLY", "REQUEST_CHANGES", "REJECT"] },
+        "reviewerIdentityCommitmentSha256": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+        "receiptSha256": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": ["receiptIssued", "reviewCompletedByIntake", "activationAuthorized", "activationEffect"],
+      "additionalProperties": false,
+      "properties": {
+        "receiptIssued": { "const": false },
+        "reviewCompletedByIntake": { "const": false },
+        "activationAuthorized": { "const": false },
+        "activationEffect": { "const": "NONE" }
+      }
+    }
+  }
+}

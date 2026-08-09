@@ -1,0 +1,145 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-contention-composition-utf8-bom-position-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "vectorsApplied": false
+  },
+  "sources": {
+    "baseArtifact": {
+      "path": "settlement-contention-composition-vectors.v1.json",
+      "canonicalSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf"
+    },
+    "boundedParser": {
+      "path": "settlement-contention-composition-transport-limits.mjs",
+      "normalizedTextSha256": "19cdd540a39c535cdbd87ba28d136828d8eb246333c9fd120c96b18ffe36675c"
+    },
+    "pythonVerifier": {
+      "path": "verify-settlement-contention-transport-limits.py",
+      "normalizedTextSha256": "8d820cbc5630a3e4e29a57364536ee611e426bd85ce280673ec2f96963ba7ec2"
+    },
+    "generator": {
+      "path": "generate-settlement-contention-composition-utf8-bom-position-audit.mjs",
+      "normalizedTextSha256": "b12d4c5c161d66e0acbe8d8f49da65fda5ac960efa68e63a2940322b50572fbc"
+    }
+  },
+  "contract": {
+    "mode": "UTF8_BOM_POSITION_DELIMITER_BOUNDARY",
+    "utf8BomPositionRules": {
+      "bomUtf8Bytes": "EF BB BF",
+      "decoderPreservesBomScalar": true,
+      "leadingBomAllowed": false,
+      "postWhitespaceBomAllowed": false,
+      "trailingBomAllowed": false,
+      "bomInsideJsonStringAllowed": true,
+      "delimiterRejectionAfterSuccessfulDecode": true
+    },
+    "acceptedControlCount": 1,
+    "rejectionCount": 3,
+    "leadingBomCaseCount": 1,
+    "postWhitespaceBomCaseCount": 1,
+    "trailingBomCaseCount": 1,
+    "bomScalarInsideStringAccepted": true,
+    "bomBytesPreservedByDecoder": true,
+    "leadingBomRejectedByDelimiterRule": true,
+    "postWhitespaceBomRejectedByDelimiterRule": true,
+    "trailingBomRejectedByDelimiterRule": true,
+    "serializedByteSequencesStored": false,
+    "runtimeCandidatesStored": false,
+    "usesLocalValidator": false,
+    "usesRpc": false,
+    "usesWallet": false,
+    "preparesTransactions": false,
+    "signsTransactions": false,
+    "broadcastsTransactions": false,
+    "issuesReviewReceipts": false,
+    "completesReview": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "summary": {
+    "acceptedControlCount": "1",
+    "rejectionCount": "3",
+    "bomInsideStringAccepted": true,
+    "allDelimiterBomPositionsRejectedAfterDecode": true,
+    "controlSetCommitmentSha256": "a1386aa634e5e10509e19bea6cc9566ef6e16bcf20ac84bd4ad99421584063cd",
+    "rejectionSetCommitmentSha256": "f0f05bde08a9c3c375596cf7182c88f9d6a61b00f4574b6b35de08455d76f3da",
+    "combinedReplayCommitmentSha256": "0923900db598b39f534c91c64408dd3afb07b015303e8fb69f6fb967758d86fa",
+    "serializedByteSequencesStored": false,
+    "runtimeCandidatesStored": false,
+    "receiptIssued": false,
+    "reviewCompleted": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "controls": [
+    {
+      "caseId": "BOM_INSIDE_CANDIDATE_STRING",
+      "family": "BOM_AS_JSON_STRING_SCALAR",
+      "position": "INSIDE_CANDIDATE_STRING",
+      "representationSha256": "2c1b0dc8c0f010d0f48cc5d142d8cb485a9c36b161873851fd14d70ab8e0bf67",
+      "utf8Bytes": 68,
+      "candidateCommitmentSha256": "84d658e8074e17f612d31c27fba5c80b59231d1434d559a3fd6094095d672c48",
+      "utf8DecodingSucceeded": true,
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    }
+  ],
+  "rejections": [
+    {
+      "caseId": "BOM_LEADING_DOCUMENT",
+      "family": "BOM_AT_JSON_DELIMITER",
+      "position": "LEADING",
+      "representationSha256": "b16e1726bfa3426bf4d8d793b1cb537ea501090b7bc20d9debed2fab69b716fa",
+      "utf8Bytes": 66,
+      "injectedByteLength": 3,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "utf8DecodingSucceeded": true,
+      "jsonParsingAttempted": true,
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "BOM_AFTER_STANDARD_WHITESPACE",
+      "family": "BOM_AT_JSON_DELIMITER",
+      "position": "POST_WHITESPACE",
+      "representationSha256": "b9b67dc51c502c55b40697268ede3489e507655285e962628eea78d52bd16e5d",
+      "utf8Bytes": 70,
+      "injectedByteLength": 3,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "utf8DecodingSucceeded": true,
+      "jsonParsingAttempted": true,
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "BOM_TRAILING_DOCUMENT",
+      "family": "BOM_AT_JSON_DELIMITER",
+      "position": "TRAILING",
+      "representationSha256": "1014e5c9209ad58ba46df603582b28948ead3ccc0541aeb72c7979cbb41d7b72",
+      "utf8Bytes": 66,
+      "injectedByteLength": 3,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "utf8DecodingSucceeded": true,
+      "jsonParsingAttempted": true,
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    }
+  ]
+}

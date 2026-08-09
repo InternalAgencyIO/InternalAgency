@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://internalagency.io/schemas/draft/iat-promotions-dlc-reviewer-lint-result-v1.json",
+  "title": "IAT Promotions DLC reviewer-bundle lint result v1",
+  "description": "DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE. A lint result issues no receipt, completes no review, and authorizes no activation.",
+  "x-iat-status": {
+    "labels": ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "schemaApplied": false
+  },
+  "type": "object",
+  "required": [
+    "reportVersion",
+    "reportId",
+    "status",
+    "evaluationOnly",
+    "inputBindings",
+    "summary",
+    "gates",
+    "failures",
+    "candidateSatisfiesPolicy",
+    "decision",
+    "receiptIssued",
+    "reviewCompletedByThisLinter",
+    "activationAuthorized",
+    "activationEffect"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "reportVersion": { "const": 1 },
+    "reportId": { "const": "iat-promotions-dlc-reviewer-bundle-gate-report-v1" },
+    "status": { "$ref": "#/definitions/heldStatus" },
+    "evaluationOnly": { "const": true },
+    "inputBindings": { "$ref": "#/definitions/inputBindings" },
+    "summary": { "$ref": "#/definitions/summary" },
+    "gates": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true,
+      "items": { "$ref": "#/definitions/gate" }
+    },
+    "failures": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/failure" }
+    },
+    "candidateSatisfiesPolicy": { "type": "boolean" },
+    "decision": { "type": "string", "enum": ["NOT_ACCEPTED", "APPROVE_REVIEW_ONLY", "REQUEST_CHANGES", "REJECT"] },
+    "receiptIssued": { "const": false },
+    "reviewCompletedByThisLinter": { "const": false },
+    "activationAuthorized": { "const": false },
+    "activationEffect": { "const": "NONE" }
+  },
+  "definitions": {
+    "hex64OrNull": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "decimal": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+    "heldStatus": {
+      "type": "object",
+      "required": ["labels", "network", "programId", "deployable", "acceptancePolicyApplied"],
+      "additionalProperties": false,
+      "properties": {
+        "labels": { "const": ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"] },
+        "network": { "const": "NONE" },
+        "programId": { "const": null },
+        "deployable": { "const": false },
+        "acceptancePolicyApplied": { "const": false }
+      }
+    },
+    "inputBindings": {
+      "type": "object",
+      "required": ["candidateCanonicalSha256", "expectedTargetCanonicalSha256", "receiptTemplateCanonicalSha256"],
+      "additionalProperties": false,
+      "properties": {
+        "candidateCanonicalSha256": { "$ref": "#/definitions/hex64OrNull" },
+        "expectedTargetCanonicalSha256": { "$ref": "#/definitions/hex64OrNull" },
+        "receiptTemplateCanonicalSha256": { "$ref": "#/definitions/hex64OrNull" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["outcome", "passedGateCount", "failedGateCount", "totalGateCount"],
+      "additionalProperties": false,
+      "properties": {
+        "outcome": { "type": "string", "enum": ["CANDIDATE_PASSES_ALL_GATES", "CANDIDATE_REJECTED"] },
+        "passedGateCount": { "$ref": "#/definitions/decimal" },
+        "failedGateCount": { "$ref": "#/definitions/decimal" },
+        "totalGateCount": { "const": "6" }
+      }
+    },
+    "gate": {
+      "type": "object",
+      "required": ["id", "label", "result"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": ["EXACT_SHAPE", "TARGET_BINDING", "SCOPE_COMPLETE", "REVIEWER_INDEPENDENCE", "SEMANTIC_REVIEW", "CRYPTOGRAPHIC_ATTESTATION"]
+        },
+        "label": {
+          "type": "string",
+          "enum": ["Exact shape", "Target binding", "Complete scope", "Reviewer independence", "Semantic review", "Cryptographic attestation"]
+        },
+        "result": { "type": "string", "enum": ["PASS", "FAIL"] }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "required": ["gate", "detail"],
+      "additionalProperties": false,
+      "properties": {
+        "gate": {
+          "type": "string",
+          "enum": ["INPUT_VALIDATION", "EXACT_SHAPE", "TARGET_BINDING", "SCOPE_COMPLETE", "REVIEWER_INDEPENDENCE", "SEMANTIC_REVIEW", "CRYPTOGRAPHIC_ATTESTATION"]
+        },
+        "detail": { "type": "string", "minLength": 1, "maxLength": 512 }
+      }
+    }
+  }
+}

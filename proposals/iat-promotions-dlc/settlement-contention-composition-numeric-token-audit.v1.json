@@ -1,0 +1,352 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-contention-composition-numeric-tokens-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "vectorsApplied": false
+  },
+  "sources": {
+    "baseArtifact": {
+      "path": "settlement-contention-composition-vectors.v1.json",
+      "canonicalSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf"
+    },
+    "boundedParser": {
+      "path": "settlement-contention-composition-transport-limits.mjs",
+      "normalizedTextSha256": "19cdd540a39c535cdbd87ba28d136828d8eb246333c9fd120c96b18ffe36675c"
+    },
+    "pythonVerifier": {
+      "path": "verify-settlement-contention-transport-limits.py",
+      "normalizedTextSha256": "8d820cbc5630a3e4e29a57364536ee611e426bd85ce280673ec2f96963ba7ec2"
+    },
+    "generator": {
+      "path": "generate-settlement-contention-composition-numeric-token-audit.mjs",
+      "normalizedTextSha256": "34ba5fd3a0b8ea59a6f41afaa4dc7d0311f1daa244d84626b33f170ac6d56634"
+    }
+  },
+  "contract": {
+    "mode": "CANONICAL_SAFE_INTEGER_JSON_TRANSPORT",
+    "numericTokenRules": {
+      "representation": "CANONICAL_SAFE_INTEGER",
+      "canonicalPattern": "0|-?[1-9][0-9]*",
+      "minimumSafeInteger": "-9007199254740991",
+      "maximumSafeInteger": "9007199254740991",
+      "fractionsAllowed": false,
+      "exponentAllowed": false,
+      "negativeZeroAllowed": false,
+      "nonFiniteAllowed": false
+    },
+    "acceptedControlCount": 4,
+    "rejectionCount": 16,
+    "equivalentNoncanonicalCaseCount": 3,
+    "negativeZeroCaseCount": 3,
+    "unsafeIntegerCaseCount": 3,
+    "nonfiniteEquivalentCaseCount": 2,
+    "nonJsonNumberCaseCount": 5,
+    "equivalentSpellingsRejectedBeforeCandidate": true,
+    "negativeZeroRejectedBeforeCandidate": true,
+    "unsafeIntegersRejectedBeforeCandidate": true,
+    "nonfiniteEquivalentsRejectedBeforeCandidate": true,
+    "serializedRepresentationsStored": false,
+    "runtimeCandidatesStored": false,
+    "usesLocalValidator": false,
+    "usesRpc": false,
+    "usesWallet": false,
+    "preparesTransactions": false,
+    "signsTransactions": false,
+    "broadcastsTransactions": false,
+    "issuesReviewReceipts": false,
+    "completesReview": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "summary": {
+    "acceptedControlCount": "4",
+    "rejectionCount": "16",
+    "allCanonicalControlsAccepted": true,
+    "allNoncanonicalOrUnsafeTokensRejectedBeforeCandidate": true,
+    "controlSetCommitmentSha256": "a232afc87617e570edadf508e26ba046b2b4a7ee6c97e5992747941c001fcb13",
+    "rejectionSetCommitmentSha256": "949454ae890e8f2cf261c728a8bb4270bac5bb089c6230603e353a94a2b806cd",
+    "combinedReplayCommitmentSha256": "1d0d6fb06996456732cfd9ba0baa8c7b57ca5bea702bcc9c2dc0efb20d93eaa5",
+    "serializedRepresentationsStored": false,
+    "runtimeCandidatesStored": false,
+    "receiptIssued": false,
+    "reviewCompleted": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "controls": [
+    {
+      "caseId": "BASELINE_CANONICAL_FIELDS",
+      "family": "CANONICAL_FIELD_SET",
+      "tokens": [
+        "1",
+        "28",
+        "2"
+      ],
+      "representationSha256": "3e7a0895182aa0e94dc06ae467591adfd79a7215334fa53a024a4cde6e9325bf",
+      "utf8Bytes": 51320,
+      "candidateCommitmentSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf",
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "ZERO_CANONICAL",
+      "family": "SAFE_INTEGER_BOUNDARY",
+      "tokens": [
+        "0"
+      ],
+      "representationSha256": "43d7676fc8f09212ac548b268add83974981c3d80fea19dbea0e566b085b2448",
+      "utf8Bytes": 67,
+      "candidateCommitmentSha256": "25c3bb738b99b165b17892f76b3f53641bccf54a2f4b322d547baeb2d1a864fb",
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "MAX_SAFE_INTEGER_CANONICAL",
+      "family": "SAFE_INTEGER_BOUNDARY",
+      "tokens": [
+        "9007199254740991"
+      ],
+      "representationSha256": "4115c0e6ffe8876ce251dd88e68095ebacb6a0854b158c61afb46022f42185d4",
+      "utf8Bytes": 82,
+      "candidateCommitmentSha256": "a59279742c01d6b921af1f7b81894cb9c77d4d60c2b395c77e54610bd5cc0e75",
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "MIN_SAFE_INTEGER_CANONICAL",
+      "family": "SAFE_INTEGER_BOUNDARY",
+      "tokens": [
+        "-9007199254740991"
+      ],
+      "representationSha256": "523fa341056afa3b8cfb098f91b3dafd3864310c628ad2a9fe63776f2d7b42ee",
+      "utf8Bytes": 83,
+      "candidateCommitmentSha256": "4fa93e646d46f7fc67411b1d087e57d1a526767970a384063362f007a8964ece",
+      "acceptedAtParser": true,
+      "candidateStored": false,
+      "mutationEvaluated": false
+    }
+  ],
+  "rejections": [
+    {
+      "caseId": "VECTOR_VERSION_DECIMAL_EQUIVALENT",
+      "family": "EQUIVALENT_NONCANONICAL",
+      "token": "1.0",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "b31b7610d5c37b00b0005c88c63a6ef5477b8155b86673a41dd4826e67256d08",
+      "utf8Bytes": 51322,
+      "expectedError": "NONCANONICAL_JSON_NUMBER",
+      "observedError": "NONCANONICAL_JSON_NUMBER",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "VECTOR_VERSION_EXPONENT_LOWER",
+      "family": "EQUIVALENT_NONCANONICAL",
+      "token": "1e0",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "93f4f46ba1d891a158f679f35f2942ceaa23dd269a7747c6a3b9ab2607f9dd40",
+      "utf8Bytes": 51322,
+      "expectedError": "NONCANONICAL_JSON_NUMBER",
+      "observedError": "NONCANONICAL_JSON_NUMBER",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "VECTOR_VERSION_EXPONENT_UPPER_PLUS",
+      "family": "EQUIVALENT_NONCANONICAL",
+      "token": "1E+0",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "e45d789646834cdfd40c1440c8ff55576559cd27a5893ba185b83d7cf5259e87",
+      "utf8Bytes": 51323,
+      "expectedError": "NONCANONICAL_JSON_NUMBER",
+      "observedError": "NONCANONICAL_JSON_NUMBER",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "NEGATIVE_ZERO_INTEGER",
+      "family": "NEGATIVE_ZERO",
+      "token": "-0",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "8c9aa936a1b22d7fbf6e11ada426433c05f786a5b37040ce3cfaded8763443c4",
+      "utf8Bytes": 51321,
+      "expectedError": "NEGATIVE_ZERO_JSON_NUMBER",
+      "observedError": "NEGATIVE_ZERO_JSON_NUMBER",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "NEGATIVE_ZERO_DECIMAL",
+      "family": "NEGATIVE_ZERO",
+      "token": "-0.0",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "0bd336b86e74dacebfe12b5efe3e1ad5d62f9de24b0f723a5c71a77e4a13a2d5",
+      "utf8Bytes": 51323,
+      "expectedError": "NEGATIVE_ZERO_JSON_NUMBER",
+      "observedError": "NEGATIVE_ZERO_JSON_NUMBER",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "NEGATIVE_ZERO_EXPONENT",
+      "family": "NEGATIVE_ZERO",
+      "token": "-0e0",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "14b342b431df2f5d49d489cc86b9d21b0b87f4163af6f9f9aea00b7f1605fcbc",
+      "utf8Bytes": 51323,
+      "expectedError": "NEGATIVE_ZERO_JSON_NUMBER",
+      "observedError": "NEGATIVE_ZERO_JSON_NUMBER",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "POSITIVE_SAFE_INTEGER_PLUS_ONE",
+      "family": "UNSAFE_INTEGER",
+      "token": "9007199254740992",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "7b51386061fe6287690c0efd62b296d5e79b4fc367ee1b1c2063e3afe2252423",
+      "utf8Bytes": 51335,
+      "expectedError": "UNSAFE_JSON_INTEGER",
+      "observedError": "UNSAFE_JSON_INTEGER",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "NEGATIVE_SAFE_INTEGER_MINUS_ONE",
+      "family": "UNSAFE_INTEGER",
+      "token": "-9007199254740992",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "dbbcbe24a15fb06db3089df35791b56abf56af645c03f9998c1c9874813e09ba",
+      "utf8Bytes": 51336,
+      "expectedError": "UNSAFE_JSON_INTEGER",
+      "observedError": "UNSAFE_JSON_INTEGER",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "PRECISION_COLLISION_INTEGER",
+      "family": "UNSAFE_INTEGER",
+      "token": "9007199254740993",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "4e5f987cedcdec033c477f5c3ac4cfc9b3d2716b6a2e9ad472b56d5a390617bb",
+      "utf8Bytes": 51335,
+      "expectedError": "UNSAFE_JSON_INTEGER",
+      "observedError": "UNSAFE_JSON_INTEGER",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "POSITIVE_EXPONENT_OVERFLOW",
+      "family": "NONFINITE_EQUIVALENT",
+      "token": "1e309",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "cd21528843cca674a78fbc9bf3e2d1ad7f2e45c406b5a92e657218cfe1a5c408",
+      "utf8Bytes": 51324,
+      "expectedError": "NONFINITE_JSON_NUMBER",
+      "observedError": "NONFINITE_JSON_NUMBER",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "NEGATIVE_EXPONENT_OVERFLOW",
+      "family": "NONFINITE_EQUIVALENT",
+      "token": "-1e309",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "967baa6f7823607e176f79b6ac4d70ea305670b0217000bc79d43441c4777992",
+      "utf8Bytes": 51325,
+      "expectedError": "NONFINITE_JSON_NUMBER",
+      "observedError": "NONFINITE_JSON_NUMBER",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "NAN_CONSTANT",
+      "family": "NON_JSON_NUMBER",
+      "token": "NaN",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "fb28f40c23d33cb818be20ff6c4737267e424dc53d2915fda3a9a1e9988784d4",
+      "utf8Bytes": 51322,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "POSITIVE_INFINITY_CONSTANT",
+      "family": "NON_JSON_NUMBER",
+      "token": "Infinity",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "cfd2a68c378e6c838ebd602b31f266b50d0be59589b4763970bef61094609b22",
+      "utf8Bytes": 51327,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "NEGATIVE_INFINITY_CONSTANT",
+      "family": "NON_JSON_NUMBER",
+      "token": "-Infinity",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "38a9ee6ad272838cfc81efb506c5d21c090630a7df260ab856126721cbec0fdd",
+      "utf8Bytes": 51328,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "LEADING_PLUS_INTEGER",
+      "family": "NON_JSON_NUMBER",
+      "token": "+1",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "6e00ccc6dcd3c5195c24008a5ed84e61075d6b848edf8622c2f4110d8f10c5b8",
+      "utf8Bytes": 51321,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    },
+    {
+      "caseId": "LEADING_ZERO_INTEGER",
+      "family": "NON_JSON_NUMBER",
+      "token": "01",
+      "targetPath": "/candidate/vectorVersion",
+      "representationSha256": "415e126a9792b3fac2ee95f3e888b468b526e5665111c6dc5c312a65b7f85604",
+      "utf8Bytes": 51321,
+      "expectedError": "MALFORMED_JSON",
+      "observedError": "MALFORMED_JSON",
+      "rejectedBeforeCandidate": true,
+      "candidateProduced": false,
+      "mutationEvaluated": false
+    }
+  ]
+}

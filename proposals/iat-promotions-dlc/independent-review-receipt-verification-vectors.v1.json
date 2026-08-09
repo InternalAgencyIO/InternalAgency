@@ -1,0 +1,91 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-independent-review-verification-vectors-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "verificationAdapterApplied": false,
+    "createsKeys": false,
+    "createsSignatures": false,
+    "validReviewReceiptAttestationPublished": false
+  },
+  "sources": {
+    "rfc8032Vectors": {
+      "path": "ed25519-public-vectors.v0.json",
+      "canonicalSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e"
+    },
+    "unsignedPayloadVectors": {
+      "path": "independent-review-receipt-payload-vectors.v1.json",
+      "canonicalSha256": "ec11c6765b272b1750346dae583a1d652d7cfb950580036d59ec08d5e409a511"
+    },
+    "verificationAdapter": {
+      "path": "independent-review-receipt-verifier.mjs",
+      "normalizedTextSha256": "e57123c907de6156a65bf11161f8ca55b87542da8c935651b94f09eb65a8f5c1"
+    }
+  },
+  "contract": {
+    "algorithm": "Ed25519",
+    "mode": "VERIFY_ONLY",
+    "publicRfcSource": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+    "receiptPayloadSignatureRequiredForFutureReceipt": true,
+    "cryptographicVerificationDoesNotVerifyReviewSemantics": true,
+    "cryptographicVerificationDoesNotAuthorizeActivation": true,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "publicRfcCases": [
+    {
+      "name": "RFC8032_ED25519_TEST_1_EMPTY_MESSAGE",
+      "algorithm": "Ed25519",
+      "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+      "messageHex": "",
+      "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+      "expectedValid": true
+    },
+    {
+      "name": "RFC8032_ED25519_TEST_2_ONE_BYTE_MESSAGE",
+      "algorithm": "Ed25519",
+      "publicKeyHex": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+      "messageHex": "72",
+      "signatureHex": "92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c00",
+      "expectedValid": true
+    }
+  ],
+  "reviewPayloadNegativeCases": [
+    {
+      "name": "APPROVE_REVIEW_ONLY_WITH_UNRELATED_RFC_SIGNATURE",
+      "payloadVector": "APPROVE_REVIEW_ONLY",
+      "payloadSha256": "434896107b19d2776328e35ecdbe1b4a6dc220a8649c7c1b20cb6ed4bc360d7c",
+      "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+      "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+      "expectedCryptographicallyVerified": false,
+      "expectedReason": "INVALID_EXTERNAL_SIGNATURE"
+    },
+    {
+      "name": "REQUEST_CHANGES_WITH_UNRELATED_RFC_SIGNATURE",
+      "payloadVector": "REQUEST_CHANGES",
+      "payloadSha256": "344eddfc5e1e8354faf519ab2410ba25c18cc13ff56c2f43c1440f55683996a8",
+      "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+      "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+      "expectedCryptographicallyVerified": false,
+      "expectedReason": "INVALID_EXTERNAL_SIGNATURE"
+    },
+    {
+      "name": "REJECT_WITH_UNRELATED_RFC_SIGNATURE",
+      "payloadVector": "REJECT",
+      "payloadSha256": "7b115787ee57d1b29d17cea5786e8825f2724993273e3d358e0fcaa547a14425",
+      "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+      "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+      "expectedCryptographicallyVerified": false,
+      "expectedReason": "INVALID_EXTERNAL_SIGNATURE"
+    }
+  ]
+}

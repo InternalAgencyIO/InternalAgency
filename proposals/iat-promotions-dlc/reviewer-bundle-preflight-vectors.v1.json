@@ -1,0 +1,1633 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-reviewer-bundle-preflight-vectors-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "preflightApplied": false
+  },
+  "sources": {
+    "schemaExamples": {
+      "path": "reviewer-bundle-schema-examples.v1.json",
+      "canonicalSha256": "d716cc9af812f8d7bf4101966a6a54b4e4d74c254e75c6028e533b3adb4f87a2"
+    },
+    "candidateSchema": {
+      "path": "reviewer-candidate.schema.v1.json",
+      "canonicalSha256": "6abfd65351003c1bc6d7749f38a48db0ea24cfc244e108cad8925fa100f736cd"
+    },
+    "expectedTargetSchema": {
+      "path": "reviewer-expected-target.schema.v1.json",
+      "canonicalSha256": "11ed97dc89977015024817e4a40bb789e36e196f708c193fe434e6973650bfde"
+    },
+    "preflight": {
+      "path": "reviewer-bundle-preflight.mjs",
+      "normalizedTextSha256": "7aec65c35ce4f24309587a83867c52baeb7455e4e949fae1c31e0b054cf25747"
+    }
+  },
+  "contract": {
+    "validStructureIsNotSemanticAcceptance": true,
+    "invalidStructureStopsSemanticEvaluation": true,
+    "jsonPointerDiagnosticsRequired": true,
+    "semanticEvaluationRan": false,
+    "receiptIssued": false,
+    "reviewCompleted": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "scenarios": [
+    {
+      "name": "VALID_PUBLIC_STRUCTURE",
+      "mutationTarget": "NONE",
+      "expectedStructuralValid": true,
+      "candidate": {
+        "target": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91"
+        },
+        "scope": {
+          "reviewAreas": [
+            "PROTOCOL_AND_ECONOMICS",
+            "IDENTITY_AND_DEDUPLICATION",
+            "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+            "VAULT_AND_AUTHORITY_ISOLATION",
+            "VERIFIER_KEY_LIFECYCLE",
+            "EVENT_ACCOUNT_RECONCILIATION",
+            "CLIENT_ABI_AND_FIXED_BYTES",
+            "ADVERSARIAL_TESTS_AND_REPRODUCIBILITY"
+          ],
+          "explicitExclusions": [
+            "PRODUCTION_V2_CODE",
+            "LIVE_SITES",
+            "MAINNET_STATE",
+            "DEVNET_STATE",
+            "WALLETS_AND_KEYS",
+            "DNS_AND_HOSTING",
+            "GENESIS_RELEASE_GATES"
+          ],
+          "manifestEntryCount": "91",
+          "openSecurityDecisionDispositions": [
+            {
+              "id": "UPGRADE_AUTHORITY_POLICY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "dc9d5671250f2ad36292b70a00e4561423c3ba364c46cc1bbc7d667587dfe5f6"
+            },
+            {
+              "id": "IDENTITY_VERIFIER_KEY_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "044aadd26597a9bf55424456607198901c4bf58868067b2c9e1f82ba4b227f81"
+            },
+            {
+              "id": "INDEPENDENT_REVIEWER_THRESHOLD",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "efe02c0efcaadd629364e981576febb0da916680f13c2d07503d084e08dcef10"
+            },
+            {
+              "id": "IDENTITY_COMMITMENT_PEPPER_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "bb54df48ed07465046f29c0ea9dd7a60bb53ba934d6f90ac1eee0bbaac7dec7f"
+            },
+            {
+              "id": "X_API_TERMS_AVAILABILITY_RETENTION",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "cd293f0425e7f3a5358ac1c04b18d86adc6c143a73d7afc5bdf74fdaea88f868"
+            },
+            {
+              "id": "RELAYER_AND_RENT_FUNDING",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "9de4126062fcf5a283771221dc496f2d79ca3570b13fab4c705ee22cc4b1cb24"
+            },
+            {
+              "id": "COMMUNITY_REFUND_ACCOUNT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "ae4b8009ab96edd1cff40380c676078d4e60b82fc95598949dd399804175cc35"
+            },
+            {
+              "id": "PUBLIC_HANDLE_DISPLAY_CONSENT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "654cd3e9e4c011b2e91e70d1989ecd32f67d264e09a65c94e3eab808bb5c9133"
+            },
+            {
+              "id": "LEGAL_AND_REGIONAL_RESTRICTIONS",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "b4b7c49b37e4366bd04dc21055c21c04b6887472bc32f02a06039c4248a29b19"
+            }
+          ]
+        },
+        "reviewer": {
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "concurrentRoles": []
+        },
+        "payload": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91",
+          "scopeCanonicalSha256": "b1af1fbf42d603c7ca2a34c128ece13bdc588487727bc6b5871e5dd97473849f",
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "decision": "APPROVE_REVIEW_ONLY",
+          "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+          "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+          "reviewedAtUnixSeconds": "1800000000",
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        },
+        "attestation": {
+          "algorithm": "Ed25519",
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "payloadSha256": "c974ccb02596b8ef478bf67ff22f1c2bc2061e13d42892824767654958b4a00e"
+        }
+      },
+      "expectedTarget": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "91"
+      },
+      "result": {
+        "preflightVersion": 1,
+        "preflightId": "iat-promotions-dlc-reviewer-input-preflight-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "schemaApplied": false
+        },
+        "structuralValid": true,
+        "semanticEvaluationAllowed": true,
+        "semanticEvaluationRan": false,
+        "documents": [
+          {
+            "document": "CANDIDATE",
+            "valid": true,
+            "errors": []
+          },
+          {
+            "document": "EXPECTED_TARGET",
+            "valid": true,
+            "errors": []
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisPreflight": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_EXTRA_FIELD",
+      "mutationTarget": "CANDIDATE",
+      "expectedStructuralValid": false,
+      "expectedKeyword": "additionalProperties",
+      "candidate": {
+        "target": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91"
+        },
+        "scope": {
+          "reviewAreas": [
+            "PROTOCOL_AND_ECONOMICS",
+            "IDENTITY_AND_DEDUPLICATION",
+            "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+            "VAULT_AND_AUTHORITY_ISOLATION",
+            "VERIFIER_KEY_LIFECYCLE",
+            "EVENT_ACCOUNT_RECONCILIATION",
+            "CLIENT_ABI_AND_FIXED_BYTES",
+            "ADVERSARIAL_TESTS_AND_REPRODUCIBILITY"
+          ],
+          "explicitExclusions": [
+            "PRODUCTION_V2_CODE",
+            "LIVE_SITES",
+            "MAINNET_STATE",
+            "DEVNET_STATE",
+            "WALLETS_AND_KEYS",
+            "DNS_AND_HOSTING",
+            "GENESIS_RELEASE_GATES"
+          ],
+          "manifestEntryCount": "91",
+          "openSecurityDecisionDispositions": [
+            {
+              "id": "UPGRADE_AUTHORITY_POLICY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "dc9d5671250f2ad36292b70a00e4561423c3ba364c46cc1bbc7d667587dfe5f6"
+            },
+            {
+              "id": "IDENTITY_VERIFIER_KEY_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "044aadd26597a9bf55424456607198901c4bf58868067b2c9e1f82ba4b227f81"
+            },
+            {
+              "id": "INDEPENDENT_REVIEWER_THRESHOLD",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "efe02c0efcaadd629364e981576febb0da916680f13c2d07503d084e08dcef10"
+            },
+            {
+              "id": "IDENTITY_COMMITMENT_PEPPER_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "bb54df48ed07465046f29c0ea9dd7a60bb53ba934d6f90ac1eee0bbaac7dec7f"
+            },
+            {
+              "id": "X_API_TERMS_AVAILABILITY_RETENTION",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "cd293f0425e7f3a5358ac1c04b18d86adc6c143a73d7afc5bdf74fdaea88f868"
+            },
+            {
+              "id": "RELAYER_AND_RENT_FUNDING",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "9de4126062fcf5a283771221dc496f2d79ca3570b13fab4c705ee22cc4b1cb24"
+            },
+            {
+              "id": "COMMUNITY_REFUND_ACCOUNT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "ae4b8009ab96edd1cff40380c676078d4e60b82fc95598949dd399804175cc35"
+            },
+            {
+              "id": "PUBLIC_HANDLE_DISPLAY_CONSENT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "654cd3e9e4c011b2e91e70d1989ecd32f67d264e09a65c94e3eab808bb5c9133"
+            },
+            {
+              "id": "LEGAL_AND_REGIONAL_RESTRICTIONS",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "b4b7c49b37e4366bd04dc21055c21c04b6887472bc32f02a06039c4248a29b19"
+            }
+          ]
+        },
+        "reviewer": {
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "concurrentRoles": []
+        },
+        "payload": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91",
+          "scopeCanonicalSha256": "b1af1fbf42d603c7ca2a34c128ece13bdc588487727bc6b5871e5dd97473849f",
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "decision": "APPROVE_REVIEW_ONLY",
+          "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+          "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+          "reviewedAtUnixSeconds": "1800000000",
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        },
+        "attestation": {
+          "algorithm": "Ed25519",
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "payloadSha256": "c974ccb02596b8ef478bf67ff22f1c2bc2061e13d42892824767654958b4a00e"
+        },
+        "unexpected": true
+      },
+      "expectedTarget": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "91"
+      },
+      "result": {
+        "preflightVersion": 1,
+        "preflightId": "iat-promotions-dlc-reviewer-input-preflight-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "schemaApplied": false
+        },
+        "structuralValid": false,
+        "semanticEvaluationAllowed": false,
+        "semanticEvaluationRan": false,
+        "documents": [
+          {
+            "document": "CANDIDATE",
+            "valid": false,
+            "errors": [
+              {
+                "instancePath": "/unexpected",
+                "schemaPath": "#/additionalProperties",
+                "keyword": "additionalProperties",
+                "message": "is not allowed"
+              }
+            ]
+          },
+          {
+            "document": "EXPECTED_TARGET",
+            "valid": true,
+            "errors": []
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisPreflight": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_MISSING_TARGET",
+      "mutationTarget": "CANDIDATE",
+      "expectedStructuralValid": false,
+      "expectedKeyword": "required",
+      "candidate": {
+        "scope": {
+          "reviewAreas": [
+            "PROTOCOL_AND_ECONOMICS",
+            "IDENTITY_AND_DEDUPLICATION",
+            "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+            "VAULT_AND_AUTHORITY_ISOLATION",
+            "VERIFIER_KEY_LIFECYCLE",
+            "EVENT_ACCOUNT_RECONCILIATION",
+            "CLIENT_ABI_AND_FIXED_BYTES",
+            "ADVERSARIAL_TESTS_AND_REPRODUCIBILITY"
+          ],
+          "explicitExclusions": [
+            "PRODUCTION_V2_CODE",
+            "LIVE_SITES",
+            "MAINNET_STATE",
+            "DEVNET_STATE",
+            "WALLETS_AND_KEYS",
+            "DNS_AND_HOSTING",
+            "GENESIS_RELEASE_GATES"
+          ],
+          "manifestEntryCount": "91",
+          "openSecurityDecisionDispositions": [
+            {
+              "id": "UPGRADE_AUTHORITY_POLICY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "dc9d5671250f2ad36292b70a00e4561423c3ba364c46cc1bbc7d667587dfe5f6"
+            },
+            {
+              "id": "IDENTITY_VERIFIER_KEY_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "044aadd26597a9bf55424456607198901c4bf58868067b2c9e1f82ba4b227f81"
+            },
+            {
+              "id": "INDEPENDENT_REVIEWER_THRESHOLD",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "efe02c0efcaadd629364e981576febb0da916680f13c2d07503d084e08dcef10"
+            },
+            {
+              "id": "IDENTITY_COMMITMENT_PEPPER_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "bb54df48ed07465046f29c0ea9dd7a60bb53ba934d6f90ac1eee0bbaac7dec7f"
+            },
+            {
+              "id": "X_API_TERMS_AVAILABILITY_RETENTION",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "cd293f0425e7f3a5358ac1c04b18d86adc6c143a73d7afc5bdf74fdaea88f868"
+            },
+            {
+              "id": "RELAYER_AND_RENT_FUNDING",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "9de4126062fcf5a283771221dc496f2d79ca3570b13fab4c705ee22cc4b1cb24"
+            },
+            {
+              "id": "COMMUNITY_REFUND_ACCOUNT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "ae4b8009ab96edd1cff40380c676078d4e60b82fc95598949dd399804175cc35"
+            },
+            {
+              "id": "PUBLIC_HANDLE_DISPLAY_CONSENT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "654cd3e9e4c011b2e91e70d1989ecd32f67d264e09a65c94e3eab808bb5c9133"
+            },
+            {
+              "id": "LEGAL_AND_REGIONAL_RESTRICTIONS",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "b4b7c49b37e4366bd04dc21055c21c04b6887472bc32f02a06039c4248a29b19"
+            }
+          ]
+        },
+        "reviewer": {
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "concurrentRoles": []
+        },
+        "payload": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91",
+          "scopeCanonicalSha256": "b1af1fbf42d603c7ca2a34c128ece13bdc588487727bc6b5871e5dd97473849f",
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "decision": "APPROVE_REVIEW_ONLY",
+          "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+          "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+          "reviewedAtUnixSeconds": "1800000000",
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        },
+        "attestation": {
+          "algorithm": "Ed25519",
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "payloadSha256": "c974ccb02596b8ef478bf67ff22f1c2bc2061e13d42892824767654958b4a00e"
+        }
+      },
+      "expectedTarget": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "91"
+      },
+      "result": {
+        "preflightVersion": 1,
+        "preflightId": "iat-promotions-dlc-reviewer-input-preflight-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "schemaApplied": false
+        },
+        "structuralValid": false,
+        "semanticEvaluationAllowed": false,
+        "semanticEvaluationRan": false,
+        "documents": [
+          {
+            "document": "CANDIDATE",
+            "valid": false,
+            "errors": [
+              {
+                "instancePath": "",
+                "schemaPath": "#/required",
+                "keyword": "required",
+                "message": "missing target"
+              }
+            ]
+          },
+          {
+            "document": "EXPECTED_TARGET",
+            "valid": true,
+            "errors": []
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisPreflight": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_NUMERIC_FILE_COUNT",
+      "mutationTarget": "CANDIDATE",
+      "expectedStructuralValid": false,
+      "expectedKeyword": "type",
+      "candidate": {
+        "target": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": 91
+        },
+        "scope": {
+          "reviewAreas": [
+            "PROTOCOL_AND_ECONOMICS",
+            "IDENTITY_AND_DEDUPLICATION",
+            "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+            "VAULT_AND_AUTHORITY_ISOLATION",
+            "VERIFIER_KEY_LIFECYCLE",
+            "EVENT_ACCOUNT_RECONCILIATION",
+            "CLIENT_ABI_AND_FIXED_BYTES",
+            "ADVERSARIAL_TESTS_AND_REPRODUCIBILITY"
+          ],
+          "explicitExclusions": [
+            "PRODUCTION_V2_CODE",
+            "LIVE_SITES",
+            "MAINNET_STATE",
+            "DEVNET_STATE",
+            "WALLETS_AND_KEYS",
+            "DNS_AND_HOSTING",
+            "GENESIS_RELEASE_GATES"
+          ],
+          "manifestEntryCount": "91",
+          "openSecurityDecisionDispositions": [
+            {
+              "id": "UPGRADE_AUTHORITY_POLICY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "dc9d5671250f2ad36292b70a00e4561423c3ba364c46cc1bbc7d667587dfe5f6"
+            },
+            {
+              "id": "IDENTITY_VERIFIER_KEY_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "044aadd26597a9bf55424456607198901c4bf58868067b2c9e1f82ba4b227f81"
+            },
+            {
+              "id": "INDEPENDENT_REVIEWER_THRESHOLD",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "efe02c0efcaadd629364e981576febb0da916680f13c2d07503d084e08dcef10"
+            },
+            {
+              "id": "IDENTITY_COMMITMENT_PEPPER_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "bb54df48ed07465046f29c0ea9dd7a60bb53ba934d6f90ac1eee0bbaac7dec7f"
+            },
+            {
+              "id": "X_API_TERMS_AVAILABILITY_RETENTION",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "cd293f0425e7f3a5358ac1c04b18d86adc6c143a73d7afc5bdf74fdaea88f868"
+            },
+            {
+              "id": "RELAYER_AND_RENT_FUNDING",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "9de4126062fcf5a283771221dc496f2d79ca3570b13fab4c705ee22cc4b1cb24"
+            },
+            {
+              "id": "COMMUNITY_REFUND_ACCOUNT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "ae4b8009ab96edd1cff40380c676078d4e60b82fc95598949dd399804175cc35"
+            },
+            {
+              "id": "PUBLIC_HANDLE_DISPLAY_CONSENT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "654cd3e9e4c011b2e91e70d1989ecd32f67d264e09a65c94e3eab808bb5c9133"
+            },
+            {
+              "id": "LEGAL_AND_REGIONAL_RESTRICTIONS",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "b4b7c49b37e4366bd04dc21055c21c04b6887472bc32f02a06039c4248a29b19"
+            }
+          ]
+        },
+        "reviewer": {
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "concurrentRoles": []
+        },
+        "payload": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91",
+          "scopeCanonicalSha256": "b1af1fbf42d603c7ca2a34c128ece13bdc588487727bc6b5871e5dd97473849f",
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "decision": "APPROVE_REVIEW_ONLY",
+          "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+          "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+          "reviewedAtUnixSeconds": "1800000000",
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        },
+        "attestation": {
+          "algorithm": "Ed25519",
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "payloadSha256": "c974ccb02596b8ef478bf67ff22f1c2bc2061e13d42892824767654958b4a00e"
+        }
+      },
+      "expectedTarget": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "91"
+      },
+      "result": {
+        "preflightVersion": 1,
+        "preflightId": "iat-promotions-dlc-reviewer-input-preflight-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "schemaApplied": false
+        },
+        "structuralValid": false,
+        "semanticEvaluationAllowed": false,
+        "semanticEvaluationRan": false,
+        "documents": [
+          {
+            "document": "CANDIDATE",
+            "valid": false,
+            "errors": [
+              {
+                "instancePath": "/target/coveredFileCount",
+                "schemaPath": "#/definitions/decimal/type",
+                "keyword": "type",
+                "message": "must be string"
+              }
+            ]
+          },
+          {
+            "document": "EXPECTED_TARGET",
+            "valid": true,
+            "errors": []
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisPreflight": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_MALFORMED_SIGNATURE",
+      "mutationTarget": "CANDIDATE",
+      "expectedStructuralValid": false,
+      "expectedKeyword": "pattern",
+      "candidate": {
+        "target": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91"
+        },
+        "scope": {
+          "reviewAreas": [
+            "PROTOCOL_AND_ECONOMICS",
+            "IDENTITY_AND_DEDUPLICATION",
+            "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+            "VAULT_AND_AUTHORITY_ISOLATION",
+            "VERIFIER_KEY_LIFECYCLE",
+            "EVENT_ACCOUNT_RECONCILIATION",
+            "CLIENT_ABI_AND_FIXED_BYTES",
+            "ADVERSARIAL_TESTS_AND_REPRODUCIBILITY"
+          ],
+          "explicitExclusions": [
+            "PRODUCTION_V2_CODE",
+            "LIVE_SITES",
+            "MAINNET_STATE",
+            "DEVNET_STATE",
+            "WALLETS_AND_KEYS",
+            "DNS_AND_HOSTING",
+            "GENESIS_RELEASE_GATES"
+          ],
+          "manifestEntryCount": "91",
+          "openSecurityDecisionDispositions": [
+            {
+              "id": "UPGRADE_AUTHORITY_POLICY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "dc9d5671250f2ad36292b70a00e4561423c3ba364c46cc1bbc7d667587dfe5f6"
+            },
+            {
+              "id": "IDENTITY_VERIFIER_KEY_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "044aadd26597a9bf55424456607198901c4bf58868067b2c9e1f82ba4b227f81"
+            },
+            {
+              "id": "INDEPENDENT_REVIEWER_THRESHOLD",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "efe02c0efcaadd629364e981576febb0da916680f13c2d07503d084e08dcef10"
+            },
+            {
+              "id": "IDENTITY_COMMITMENT_PEPPER_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "bb54df48ed07465046f29c0ea9dd7a60bb53ba934d6f90ac1eee0bbaac7dec7f"
+            },
+            {
+              "id": "X_API_TERMS_AVAILABILITY_RETENTION",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "cd293f0425e7f3a5358ac1c04b18d86adc6c143a73d7afc5bdf74fdaea88f868"
+            },
+            {
+              "id": "RELAYER_AND_RENT_FUNDING",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "9de4126062fcf5a283771221dc496f2d79ca3570b13fab4c705ee22cc4b1cb24"
+            },
+            {
+              "id": "COMMUNITY_REFUND_ACCOUNT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "ae4b8009ab96edd1cff40380c676078d4e60b82fc95598949dd399804175cc35"
+            },
+            {
+              "id": "PUBLIC_HANDLE_DISPLAY_CONSENT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "654cd3e9e4c011b2e91e70d1989ecd32f67d264e09a65c94e3eab808bb5c9133"
+            },
+            {
+              "id": "LEGAL_AND_REGIONAL_RESTRICTIONS",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "b4b7c49b37e4366bd04dc21055c21c04b6887472bc32f02a06039c4248a29b19"
+            }
+          ]
+        },
+        "reviewer": {
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "concurrentRoles": []
+        },
+        "payload": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91",
+          "scopeCanonicalSha256": "b1af1fbf42d603c7ca2a34c128ece13bdc588487727bc6b5871e5dd97473849f",
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "decision": "APPROVE_REVIEW_ONLY",
+          "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+          "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+          "reviewedAtUnixSeconds": "1800000000",
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        },
+        "attestation": {
+          "algorithm": "Ed25519",
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "00",
+          "payloadSha256": "c974ccb02596b8ef478bf67ff22f1c2bc2061e13d42892824767654958b4a00e"
+        }
+      },
+      "expectedTarget": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "91"
+      },
+      "result": {
+        "preflightVersion": 1,
+        "preflightId": "iat-promotions-dlc-reviewer-input-preflight-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "schemaApplied": false
+        },
+        "structuralValid": false,
+        "semanticEvaluationAllowed": false,
+        "semanticEvaluationRan": false,
+        "documents": [
+          {
+            "document": "CANDIDATE",
+            "valid": false,
+            "errors": [
+              {
+                "instancePath": "/attestation/signatureHex",
+                "schemaPath": "#/definitions/hex128/pattern",
+                "keyword": "pattern",
+                "message": "must match the fixed pattern"
+              }
+            ]
+          },
+          {
+            "document": "EXPECTED_TARGET",
+            "valid": true,
+            "errors": []
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisPreflight": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_ACTIVATION_CLAIM",
+      "mutationTarget": "CANDIDATE",
+      "expectedStructuralValid": false,
+      "expectedKeyword": "const",
+      "candidate": {
+        "target": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91"
+        },
+        "scope": {
+          "reviewAreas": [
+            "PROTOCOL_AND_ECONOMICS",
+            "IDENTITY_AND_DEDUPLICATION",
+            "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+            "VAULT_AND_AUTHORITY_ISOLATION",
+            "VERIFIER_KEY_LIFECYCLE",
+            "EVENT_ACCOUNT_RECONCILIATION",
+            "CLIENT_ABI_AND_FIXED_BYTES",
+            "ADVERSARIAL_TESTS_AND_REPRODUCIBILITY"
+          ],
+          "explicitExclusions": [
+            "PRODUCTION_V2_CODE",
+            "LIVE_SITES",
+            "MAINNET_STATE",
+            "DEVNET_STATE",
+            "WALLETS_AND_KEYS",
+            "DNS_AND_HOSTING",
+            "GENESIS_RELEASE_GATES"
+          ],
+          "manifestEntryCount": "91",
+          "openSecurityDecisionDispositions": [
+            {
+              "id": "UPGRADE_AUTHORITY_POLICY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "dc9d5671250f2ad36292b70a00e4561423c3ba364c46cc1bbc7d667587dfe5f6"
+            },
+            {
+              "id": "IDENTITY_VERIFIER_KEY_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "044aadd26597a9bf55424456607198901c4bf58868067b2c9e1f82ba4b227f81"
+            },
+            {
+              "id": "INDEPENDENT_REVIEWER_THRESHOLD",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "efe02c0efcaadd629364e981576febb0da916680f13c2d07503d084e08dcef10"
+            },
+            {
+              "id": "IDENTITY_COMMITMENT_PEPPER_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "bb54df48ed07465046f29c0ea9dd7a60bb53ba934d6f90ac1eee0bbaac7dec7f"
+            },
+            {
+              "id": "X_API_TERMS_AVAILABILITY_RETENTION",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "cd293f0425e7f3a5358ac1c04b18d86adc6c143a73d7afc5bdf74fdaea88f868"
+            },
+            {
+              "id": "RELAYER_AND_RENT_FUNDING",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "9de4126062fcf5a283771221dc496f2d79ca3570b13fab4c705ee22cc4b1cb24"
+            },
+            {
+              "id": "COMMUNITY_REFUND_ACCOUNT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "ae4b8009ab96edd1cff40380c676078d4e60b82fc95598949dd399804175cc35"
+            },
+            {
+              "id": "PUBLIC_HANDLE_DISPLAY_CONSENT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "654cd3e9e4c011b2e91e70d1989ecd32f67d264e09a65c94e3eab808bb5c9133"
+            },
+            {
+              "id": "LEGAL_AND_REGIONAL_RESTRICTIONS",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "b4b7c49b37e4366bd04dc21055c21c04b6887472bc32f02a06039c4248a29b19"
+            }
+          ]
+        },
+        "reviewer": {
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "concurrentRoles": []
+        },
+        "payload": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91",
+          "scopeCanonicalSha256": "b1af1fbf42d603c7ca2a34c128ece13bdc588487727bc6b5871e5dd97473849f",
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "decision": "APPROVE_REVIEW_ONLY",
+          "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+          "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+          "reviewedAtUnixSeconds": "1800000000",
+          "activationAuthorized": true,
+          "activationEffect": "NONE"
+        },
+        "attestation": {
+          "algorithm": "Ed25519",
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "payloadSha256": "c974ccb02596b8ef478bf67ff22f1c2bc2061e13d42892824767654958b4a00e"
+        }
+      },
+      "expectedTarget": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "91"
+      },
+      "result": {
+        "preflightVersion": 1,
+        "preflightId": "iat-promotions-dlc-reviewer-input-preflight-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "schemaApplied": false
+        },
+        "structuralValid": false,
+        "semanticEvaluationAllowed": false,
+        "semanticEvaluationRan": false,
+        "documents": [
+          {
+            "document": "CANDIDATE",
+            "valid": false,
+            "errors": [
+              {
+                "instancePath": "/payload/activationAuthorized",
+                "schemaPath": "#/definitions/payload/properties/activationAuthorized/const",
+                "keyword": "const",
+                "message": "must equal the fixed value"
+              }
+            ]
+          },
+          {
+            "document": "EXPECTED_TARGET",
+            "valid": true,
+            "errors": []
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisPreflight": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_SCOPE_OMISSION",
+      "mutationTarget": "CANDIDATE",
+      "expectedStructuralValid": false,
+      "expectedKeyword": "const",
+      "candidate": {
+        "target": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91"
+        },
+        "scope": {
+          "reviewAreas": [
+            "PROTOCOL_AND_ECONOMICS",
+            "IDENTITY_AND_DEDUPLICATION",
+            "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+            "VAULT_AND_AUTHORITY_ISOLATION",
+            "VERIFIER_KEY_LIFECYCLE",
+            "EVENT_ACCOUNT_RECONCILIATION",
+            "CLIENT_ABI_AND_FIXED_BYTES"
+          ],
+          "explicitExclusions": [
+            "PRODUCTION_V2_CODE",
+            "LIVE_SITES",
+            "MAINNET_STATE",
+            "DEVNET_STATE",
+            "WALLETS_AND_KEYS",
+            "DNS_AND_HOSTING",
+            "GENESIS_RELEASE_GATES"
+          ],
+          "manifestEntryCount": "91",
+          "openSecurityDecisionDispositions": [
+            {
+              "id": "UPGRADE_AUTHORITY_POLICY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "dc9d5671250f2ad36292b70a00e4561423c3ba364c46cc1bbc7d667587dfe5f6"
+            },
+            {
+              "id": "IDENTITY_VERIFIER_KEY_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "044aadd26597a9bf55424456607198901c4bf58868067b2c9e1f82ba4b227f81"
+            },
+            {
+              "id": "INDEPENDENT_REVIEWER_THRESHOLD",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "efe02c0efcaadd629364e981576febb0da916680f13c2d07503d084e08dcef10"
+            },
+            {
+              "id": "IDENTITY_COMMITMENT_PEPPER_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "bb54df48ed07465046f29c0ea9dd7a60bb53ba934d6f90ac1eee0bbaac7dec7f"
+            },
+            {
+              "id": "X_API_TERMS_AVAILABILITY_RETENTION",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "cd293f0425e7f3a5358ac1c04b18d86adc6c143a73d7afc5bdf74fdaea88f868"
+            },
+            {
+              "id": "RELAYER_AND_RENT_FUNDING",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "9de4126062fcf5a283771221dc496f2d79ca3570b13fab4c705ee22cc4b1cb24"
+            },
+            {
+              "id": "COMMUNITY_REFUND_ACCOUNT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "ae4b8009ab96edd1cff40380c676078d4e60b82fc95598949dd399804175cc35"
+            },
+            {
+              "id": "PUBLIC_HANDLE_DISPLAY_CONSENT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "654cd3e9e4c011b2e91e70d1989ecd32f67d264e09a65c94e3eab808bb5c9133"
+            },
+            {
+              "id": "LEGAL_AND_REGIONAL_RESTRICTIONS",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "b4b7c49b37e4366bd04dc21055c21c04b6887472bc32f02a06039c4248a29b19"
+            }
+          ]
+        },
+        "reviewer": {
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "concurrentRoles": []
+        },
+        "payload": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91",
+          "scopeCanonicalSha256": "b1af1fbf42d603c7ca2a34c128ece13bdc588487727bc6b5871e5dd97473849f",
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "decision": "APPROVE_REVIEW_ONLY",
+          "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+          "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+          "reviewedAtUnixSeconds": "1800000000",
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        },
+        "attestation": {
+          "algorithm": "Ed25519",
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "payloadSha256": "c974ccb02596b8ef478bf67ff22f1c2bc2061e13d42892824767654958b4a00e"
+        }
+      },
+      "expectedTarget": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "91"
+      },
+      "result": {
+        "preflightVersion": 1,
+        "preflightId": "iat-promotions-dlc-reviewer-input-preflight-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "schemaApplied": false
+        },
+        "structuralValid": false,
+        "semanticEvaluationAllowed": false,
+        "semanticEvaluationRan": false,
+        "documents": [
+          {
+            "document": "CANDIDATE",
+            "valid": false,
+            "errors": [
+              {
+                "instancePath": "/scope/reviewAreas",
+                "schemaPath": "#/definitions/scope/properties/reviewAreas/const",
+                "keyword": "const",
+                "message": "must equal the fixed value"
+              }
+            ]
+          },
+          {
+            "document": "EXPECTED_TARGET",
+            "valid": true,
+            "errors": []
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisPreflight": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "EXPECTED_TARGET_EXTRA_FIELD",
+      "mutationTarget": "EXPECTED_TARGET",
+      "expectedStructuralValid": false,
+      "expectedKeyword": "additionalProperties",
+      "candidate": {
+        "target": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91"
+        },
+        "scope": {
+          "reviewAreas": [
+            "PROTOCOL_AND_ECONOMICS",
+            "IDENTITY_AND_DEDUPLICATION",
+            "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+            "VAULT_AND_AUTHORITY_ISOLATION",
+            "VERIFIER_KEY_LIFECYCLE",
+            "EVENT_ACCOUNT_RECONCILIATION",
+            "CLIENT_ABI_AND_FIXED_BYTES",
+            "ADVERSARIAL_TESTS_AND_REPRODUCIBILITY"
+          ],
+          "explicitExclusions": [
+            "PRODUCTION_V2_CODE",
+            "LIVE_SITES",
+            "MAINNET_STATE",
+            "DEVNET_STATE",
+            "WALLETS_AND_KEYS",
+            "DNS_AND_HOSTING",
+            "GENESIS_RELEASE_GATES"
+          ],
+          "manifestEntryCount": "91",
+          "openSecurityDecisionDispositions": [
+            {
+              "id": "UPGRADE_AUTHORITY_POLICY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "dc9d5671250f2ad36292b70a00e4561423c3ba364c46cc1bbc7d667587dfe5f6"
+            },
+            {
+              "id": "IDENTITY_VERIFIER_KEY_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "044aadd26597a9bf55424456607198901c4bf58868067b2c9e1f82ba4b227f81"
+            },
+            {
+              "id": "INDEPENDENT_REVIEWER_THRESHOLD",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "efe02c0efcaadd629364e981576febb0da916680f13c2d07503d084e08dcef10"
+            },
+            {
+              "id": "IDENTITY_COMMITMENT_PEPPER_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "bb54df48ed07465046f29c0ea9dd7a60bb53ba934d6f90ac1eee0bbaac7dec7f"
+            },
+            {
+              "id": "X_API_TERMS_AVAILABILITY_RETENTION",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "cd293f0425e7f3a5358ac1c04b18d86adc6c143a73d7afc5bdf74fdaea88f868"
+            },
+            {
+              "id": "RELAYER_AND_RENT_FUNDING",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "9de4126062fcf5a283771221dc496f2d79ca3570b13fab4c705ee22cc4b1cb24"
+            },
+            {
+              "id": "COMMUNITY_REFUND_ACCOUNT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "ae4b8009ab96edd1cff40380c676078d4e60b82fc95598949dd399804175cc35"
+            },
+            {
+              "id": "PUBLIC_HANDLE_DISPLAY_CONSENT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "654cd3e9e4c011b2e91e70d1989ecd32f67d264e09a65c94e3eab808bb5c9133"
+            },
+            {
+              "id": "LEGAL_AND_REGIONAL_RESTRICTIONS",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "b4b7c49b37e4366bd04dc21055c21c04b6887472bc32f02a06039c4248a29b19"
+            }
+          ]
+        },
+        "reviewer": {
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "concurrentRoles": []
+        },
+        "payload": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91",
+          "scopeCanonicalSha256": "b1af1fbf42d603c7ca2a34c128ece13bdc588487727bc6b5871e5dd97473849f",
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "decision": "APPROVE_REVIEW_ONLY",
+          "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+          "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+          "reviewedAtUnixSeconds": "1800000000",
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        },
+        "attestation": {
+          "algorithm": "Ed25519",
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "payloadSha256": "c974ccb02596b8ef478bf67ff22f1c2bc2061e13d42892824767654958b4a00e"
+        }
+      },
+      "expectedTarget": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "91",
+        "candidateSaysValid": true
+      },
+      "result": {
+        "preflightVersion": 1,
+        "preflightId": "iat-promotions-dlc-reviewer-input-preflight-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "schemaApplied": false
+        },
+        "structuralValid": false,
+        "semanticEvaluationAllowed": false,
+        "semanticEvaluationRan": false,
+        "documents": [
+          {
+            "document": "CANDIDATE",
+            "valid": true,
+            "errors": []
+          },
+          {
+            "document": "EXPECTED_TARGET",
+            "valid": false,
+            "errors": [
+              {
+                "instancePath": "/candidateSaysValid",
+                "schemaPath": "#/additionalProperties",
+                "keyword": "additionalProperties",
+                "message": "is not allowed"
+              }
+            ]
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisPreflight": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "EXPECTED_TARGET_UPPERCASE_COMMIT",
+      "mutationTarget": "EXPECTED_TARGET",
+      "expectedStructuralValid": false,
+      "expectedKeyword": "pattern",
+      "candidate": {
+        "target": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91"
+        },
+        "scope": {
+          "reviewAreas": [
+            "PROTOCOL_AND_ECONOMICS",
+            "IDENTITY_AND_DEDUPLICATION",
+            "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+            "VAULT_AND_AUTHORITY_ISOLATION",
+            "VERIFIER_KEY_LIFECYCLE",
+            "EVENT_ACCOUNT_RECONCILIATION",
+            "CLIENT_ABI_AND_FIXED_BYTES",
+            "ADVERSARIAL_TESTS_AND_REPRODUCIBILITY"
+          ],
+          "explicitExclusions": [
+            "PRODUCTION_V2_CODE",
+            "LIVE_SITES",
+            "MAINNET_STATE",
+            "DEVNET_STATE",
+            "WALLETS_AND_KEYS",
+            "DNS_AND_HOSTING",
+            "GENESIS_RELEASE_GATES"
+          ],
+          "manifestEntryCount": "91",
+          "openSecurityDecisionDispositions": [
+            {
+              "id": "UPGRADE_AUTHORITY_POLICY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "dc9d5671250f2ad36292b70a00e4561423c3ba364c46cc1bbc7d667587dfe5f6"
+            },
+            {
+              "id": "IDENTITY_VERIFIER_KEY_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "044aadd26597a9bf55424456607198901c4bf58868067b2c9e1f82ba4b227f81"
+            },
+            {
+              "id": "INDEPENDENT_REVIEWER_THRESHOLD",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "efe02c0efcaadd629364e981576febb0da916680f13c2d07503d084e08dcef10"
+            },
+            {
+              "id": "IDENTITY_COMMITMENT_PEPPER_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "bb54df48ed07465046f29c0ea9dd7a60bb53ba934d6f90ac1eee0bbaac7dec7f"
+            },
+            {
+              "id": "X_API_TERMS_AVAILABILITY_RETENTION",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "cd293f0425e7f3a5358ac1c04b18d86adc6c143a73d7afc5bdf74fdaea88f868"
+            },
+            {
+              "id": "RELAYER_AND_RENT_FUNDING",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "9de4126062fcf5a283771221dc496f2d79ca3570b13fab4c705ee22cc4b1cb24"
+            },
+            {
+              "id": "COMMUNITY_REFUND_ACCOUNT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "ae4b8009ab96edd1cff40380c676078d4e60b82fc95598949dd399804175cc35"
+            },
+            {
+              "id": "PUBLIC_HANDLE_DISPLAY_CONSENT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "654cd3e9e4c011b2e91e70d1989ecd32f67d264e09a65c94e3eab808bb5c9133"
+            },
+            {
+              "id": "LEGAL_AND_REGIONAL_RESTRICTIONS",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "b4b7c49b37e4366bd04dc21055c21c04b6887472bc32f02a06039c4248a29b19"
+            }
+          ]
+        },
+        "reviewer": {
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "concurrentRoles": []
+        },
+        "payload": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91",
+          "scopeCanonicalSha256": "b1af1fbf42d603c7ca2a34c128ece13bdc588487727bc6b5871e5dd97473849f",
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "decision": "APPROVE_REVIEW_ONLY",
+          "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+          "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+          "reviewedAtUnixSeconds": "1800000000",
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        },
+        "attestation": {
+          "algorithm": "Ed25519",
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "payloadSha256": "c974ccb02596b8ef478bf67ff22f1c2bc2061e13d42892824767654958b4a00e"
+        }
+      },
+      "expectedTarget": {
+        "gitCommitSha": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "91"
+      },
+      "result": {
+        "preflightVersion": 1,
+        "preflightId": "iat-promotions-dlc-reviewer-input-preflight-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "schemaApplied": false
+        },
+        "structuralValid": false,
+        "semanticEvaluationAllowed": false,
+        "semanticEvaluationRan": false,
+        "documents": [
+          {
+            "document": "CANDIDATE",
+            "valid": true,
+            "errors": []
+          },
+          {
+            "document": "EXPECTED_TARGET",
+            "valid": false,
+            "errors": [
+              {
+                "instancePath": "/gitCommitSha",
+                "schemaPath": "#/properties/gitCommitSha/pattern",
+                "keyword": "pattern",
+                "message": "must match the fixed pattern"
+              }
+            ]
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisPreflight": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "EXPECTED_TARGET_MISSING_ROOT",
+      "mutationTarget": "EXPECTED_TARGET",
+      "expectedStructuralValid": false,
+      "expectedKeyword": "required",
+      "candidate": {
+        "target": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91"
+        },
+        "scope": {
+          "reviewAreas": [
+            "PROTOCOL_AND_ECONOMICS",
+            "IDENTITY_AND_DEDUPLICATION",
+            "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+            "VAULT_AND_AUTHORITY_ISOLATION",
+            "VERIFIER_KEY_LIFECYCLE",
+            "EVENT_ACCOUNT_RECONCILIATION",
+            "CLIENT_ABI_AND_FIXED_BYTES",
+            "ADVERSARIAL_TESTS_AND_REPRODUCIBILITY"
+          ],
+          "explicitExclusions": [
+            "PRODUCTION_V2_CODE",
+            "LIVE_SITES",
+            "MAINNET_STATE",
+            "DEVNET_STATE",
+            "WALLETS_AND_KEYS",
+            "DNS_AND_HOSTING",
+            "GENESIS_RELEASE_GATES"
+          ],
+          "manifestEntryCount": "91",
+          "openSecurityDecisionDispositions": [
+            {
+              "id": "UPGRADE_AUTHORITY_POLICY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "dc9d5671250f2ad36292b70a00e4561423c3ba364c46cc1bbc7d667587dfe5f6"
+            },
+            {
+              "id": "IDENTITY_VERIFIER_KEY_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "044aadd26597a9bf55424456607198901c4bf58868067b2c9e1f82ba4b227f81"
+            },
+            {
+              "id": "INDEPENDENT_REVIEWER_THRESHOLD",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "efe02c0efcaadd629364e981576febb0da916680f13c2d07503d084e08dcef10"
+            },
+            {
+              "id": "IDENTITY_COMMITMENT_PEPPER_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "bb54df48ed07465046f29c0ea9dd7a60bb53ba934d6f90ac1eee0bbaac7dec7f"
+            },
+            {
+              "id": "X_API_TERMS_AVAILABILITY_RETENTION",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "cd293f0425e7f3a5358ac1c04b18d86adc6c143a73d7afc5bdf74fdaea88f868"
+            },
+            {
+              "id": "RELAYER_AND_RENT_FUNDING",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "9de4126062fcf5a283771221dc496f2d79ca3570b13fab4c705ee22cc4b1cb24"
+            },
+            {
+              "id": "COMMUNITY_REFUND_ACCOUNT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "ae4b8009ab96edd1cff40380c676078d4e60b82fc95598949dd399804175cc35"
+            },
+            {
+              "id": "PUBLIC_HANDLE_DISPLAY_CONSENT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "654cd3e9e4c011b2e91e70d1989ecd32f67d264e09a65c94e3eab808bb5c9133"
+            },
+            {
+              "id": "LEGAL_AND_REGIONAL_RESTRICTIONS",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "b4b7c49b37e4366bd04dc21055c21c04b6887472bc32f02a06039c4248a29b19"
+            }
+          ]
+        },
+        "reviewer": {
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "concurrentRoles": []
+        },
+        "payload": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91",
+          "scopeCanonicalSha256": "b1af1fbf42d603c7ca2a34c128ece13bdc588487727bc6b5871e5dd97473849f",
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "decision": "APPROVE_REVIEW_ONLY",
+          "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+          "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+          "reviewedAtUnixSeconds": "1800000000",
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        },
+        "attestation": {
+          "algorithm": "Ed25519",
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "payloadSha256": "c974ccb02596b8ef478bf67ff22f1c2bc2061e13d42892824767654958b4a00e"
+        }
+      },
+      "expectedTarget": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "coveredFileCount": "91"
+      },
+      "result": {
+        "preflightVersion": 1,
+        "preflightId": "iat-promotions-dlc-reviewer-input-preflight-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "schemaApplied": false
+        },
+        "structuralValid": false,
+        "semanticEvaluationAllowed": false,
+        "semanticEvaluationRan": false,
+        "documents": [
+          {
+            "document": "CANDIDATE",
+            "valid": true,
+            "errors": []
+          },
+          {
+            "document": "EXPECTED_TARGET",
+            "valid": false,
+            "errors": [
+              {
+                "instancePath": "",
+                "schemaPath": "#/required",
+                "keyword": "required",
+                "message": "missing reviewTreeRootSha256"
+              }
+            ]
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisPreflight": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    }
+  ]
+}

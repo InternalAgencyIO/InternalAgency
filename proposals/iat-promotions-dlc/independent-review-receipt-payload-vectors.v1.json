@@ -1,0 +1,125 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-independent-review-payload-vectors-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "payloadContractApplied": false,
+    "containsKeys": false,
+    "containsSignatures": false
+  },
+  "sources": {
+    "receiptTemplate": {
+      "path": "independent-review-receipt-template.v1.json",
+      "canonicalSha256": "c250d2b854122fae4687bc422da448eadc7c916ae36847fca5c58f6819a6f16e"
+    },
+    "payloadCodec": {
+      "path": "independent-review-receipt-payload.mjs",
+      "normalizedTextSha256": "83cd7837fc4b1a3caba7f2217765a3cb81f0d0c4807429414dddb4e808c1a4ab"
+    }
+  },
+  "contract": {
+    "domain": "iat-promotions-dlc-independent-review-receipt-v1",
+    "repository": "InternalAgencyIO/InternalAgency",
+    "pullRequestNumber": "8",
+    "payloadVersion": 1,
+    "fieldOrder": [
+      "gitCommitSha",
+      "reviewManifestContentSha256",
+      "reviewTreeRootSha256",
+      "coveredFileCount",
+      "scopeCanonicalSha256",
+      "accountabilityLabel",
+      "reviewerIdentityCommitmentSha256",
+      "independenceDeclaration",
+      "decision",
+      "rationaleCanonicalSha256",
+      "findingsCommitmentSha256",
+      "reviewedAtUnixSeconds",
+      "activationAuthorized",
+      "activationEffect"
+    ],
+    "integerEndian": "little",
+    "integerJsonRepresentation": "canonical-decimal-string",
+    "byteStringRepresentation": "lowercase-hex",
+    "activationAuthorized": false,
+    "activationEffect": "NONE",
+    "attestationIncluded": false
+  },
+  "vectors": [
+    {
+      "name": "APPROVE_REVIEW_ONLY",
+      "input": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "79",
+        "scopeCanonicalSha256": "19015e3dd3e414730f634beaebe1218df165e157b1887de3b6c09bfe71914bb6",
+        "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+        "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+        "independenceDeclaration": true,
+        "decision": "APPROVE_REVIEW_ONLY",
+        "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+        "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+        "reviewedAtUnixSeconds": "1800000000",
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      },
+      "messageLength": "356",
+      "messageHex": "49415452444c433130006961742d70726f6d6f74696f6e732d646c632d696e646570656e64656e742d7265766965772d726563656970742d7631011f00496e7465726e616c4167656e6379494f2f496e7465726e616c4167656e6379080000005140d6cf819b2497c5f254846a5efe7aa17900b915f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c84f00000019015e3dd3e414730f634beaebe1218df165e157b1887de3b6c09bfe71914bb61e0053594e54484554494320494e444550454e44454e542052455649455745528874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec601016a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a55800d2496b000000000000",
+      "messageSha256": "434896107b19d2776328e35ecdbe1b4a6dc220a8649c7c1b20cb6ed4bc360d7c"
+    },
+    {
+      "name": "REQUEST_CHANGES",
+      "input": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "79",
+        "scopeCanonicalSha256": "19015e3dd3e414730f634beaebe1218df165e157b1887de3b6c09bfe71914bb6",
+        "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+        "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+        "independenceDeclaration": true,
+        "decision": "REQUEST_CHANGES",
+        "rationaleCanonicalSha256": "8478fbbf8e05b31b3b23055276c8c9b809d3544b82a23d7451db702499f1d000",
+        "findingsCommitmentSha256": "386befb0cc78541dc9bf3ae5140a8abbcd75d1757e1396132c3efd6e63c4c248",
+        "reviewedAtUnixSeconds": "1800000000",
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      },
+      "messageLength": "356",
+      "messageHex": "49415452444c433130006961742d70726f6d6f74696f6e732d646c632d696e646570656e64656e742d7265766965772d726563656970742d7631011f00496e7465726e616c4167656e6379494f2f496e7465726e616c4167656e6379080000005140d6cf819b2497c5f254846a5efe7aa17900b915f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c84f00000019015e3dd3e414730f634beaebe1218df165e157b1887de3b6c09bfe71914bb61e0053594e54484554494320494e444550454e44454e542052455649455745528874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec601028478fbbf8e05b31b3b23055276c8c9b809d3544b82a23d7451db702499f1d000386befb0cc78541dc9bf3ae5140a8abbcd75d1757e1396132c3efd6e63c4c24800d2496b000000000000",
+      "messageSha256": "344eddfc5e1e8354faf519ab2410ba25c18cc13ff56c2f43c1440f55683996a8"
+    },
+    {
+      "name": "REJECT",
+      "input": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "79",
+        "scopeCanonicalSha256": "19015e3dd3e414730f634beaebe1218df165e157b1887de3b6c09bfe71914bb6",
+        "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+        "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+        "independenceDeclaration": true,
+        "decision": "REJECT",
+        "rationaleCanonicalSha256": "18b033b4d69496a0aa4e447d01262afc44192b6919519a1768013dafdc84c179",
+        "findingsCommitmentSha256": "d58a89791df9e9f472ae81f3ec6dd7b5c20d559855b74a774084ef9bc66d9ac5",
+        "reviewedAtUnixSeconds": "1800000000",
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      },
+      "messageLength": "356",
+      "messageHex": "49415452444c433130006961742d70726f6d6f74696f6e732d646c632d696e646570656e64656e742d7265766965772d726563656970742d7631011f00496e7465726e616c4167656e6379494f2f496e7465726e616c4167656e6379080000005140d6cf819b2497c5f254846a5efe7aa17900b915f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c84f00000019015e3dd3e414730f634beaebe1218df165e157b1887de3b6c09bfe71914bb61e0053594e54484554494320494e444550454e44454e542052455649455745528874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6010318b033b4d69496a0aa4e447d01262afc44192b6919519a1768013dafdc84c179d58a89791df9e9f472ae81f3ec6dd7b5c20d559855b74a774084ef9bc66d9ac500d2496b000000000000",
+      "messageSha256": "7b115787ee57d1b29d17cea5786e8825f2724993273e3d358e0fcaa547a14425"
+    }
+  ]
+}

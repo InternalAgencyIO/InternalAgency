@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://internalagency.io/schemas/draft/iat-promotions-dlc-event-reconciliation-result-v1.json",
+  "title": "IAT Promotions DLC held reconciliation result v1",
+  "description": "DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE. A consistency result is not chain inclusion or authority.",
+  "x-iat-status": {
+    "labels": ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "schemaApplied": false
+  },
+  "type": "object",
+  "required": [
+    "status",
+    "eventCount",
+    "campaign",
+    "verifierRegistries",
+    "accountsAndReceiptsRemainAuthoritative",
+    "eventStreamAuthorizedNoStateChange"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "status": { "$ref": "#/definitions/heldStatus" },
+    "eventCount": { "$ref": "#/definitions/decimal" },
+    "campaign": { "$ref": "#/definitions/campaignResult" },
+    "verifierRegistries": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/registryResult" }
+    },
+    "accountsAndReceiptsRemainAuthoritative": { "const": true },
+    "eventStreamAuthorizedNoStateChange": { "const": true }
+  },
+  "definitions": {
+    "decimal": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+    "hex32": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "heldStatus": {
+      "type": "object",
+      "required": ["labels", "network", "programId", "deployable", "reconciliationApplied"],
+      "additionalProperties": false,
+      "properties": {
+        "labels": {
+          "const": ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"]
+        },
+        "network": { "const": "NONE" },
+        "programId": { "const": null },
+        "deployable": { "const": false },
+        "reconciliationApplied": { "const": false }
+      }
+    },
+    "campaignResult": {
+      "type": "object",
+      "required": [
+        "status",
+        "completedPairs",
+        "heroPaidBaseUnits",
+        "proposerPaidBaseUnits",
+        "vaultBalanceBaseUnits",
+        "unattributedSurplusBaseUnits",
+        "settlementReceiptCount",
+        "pendingNominationCountAtEnd",
+        "terminalPendingNominationsAreIneligible",
+        "surplusFinalized"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["INITIALIZED", "FUNDED", "ACTIVE", "EXHAUSTED", "CANCELLED"]
+        },
+        "completedPairs": { "$ref": "#/definitions/decimal" },
+        "heroPaidBaseUnits": { "$ref": "#/definitions/decimal" },
+        "proposerPaidBaseUnits": { "$ref": "#/definitions/decimal" },
+        "vaultBalanceBaseUnits": { "$ref": "#/definitions/decimal" },
+        "unattributedSurplusBaseUnits": { "$ref": "#/definitions/decimal" },
+        "settlementReceiptCount": { "$ref": "#/definitions/decimal" },
+        "pendingNominationCountAtEnd": { "$ref": "#/definitions/decimal" },
+        "terminalPendingNominationsAreIneligible": { "type": "boolean" },
+        "surplusFinalized": { "type": "boolean" }
+      }
+    },
+    "registryResult": {
+      "type": "object",
+      "required": ["address", "status", "lastEventHash", "eventCount"],
+      "additionalProperties": false,
+      "properties": {
+        "address": { "$ref": "#/definitions/hex32" },
+        "status": { "type": "string", "enum": ["ACTIVE", "EMERGENCY_DISABLED"] },
+        "lastEventHash": { "$ref": "#/definitions/hex32" },
+        "eventCount": { "$ref": "#/definitions/decimal" }
+      }
+    }
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "baseV0Deployable": false,
+    "amendmentApplied": false
+  },
+  "proposalId": "iat-promotions-dlc-key-lifecycle-v1",
+  "amendmentVersion": 1,
+  "baseInterfaceVersion": 0,
+  "reviewGate": {
+    "separateSecurityReviewRequired": true,
+    "independentReviewerApprovalRequired": true,
+    "deterministicBuildRequired": true,
+    "newPublicArtifactHashRequired": true,
+    "devnetRehearsalRequired": true
+  },
+  "referencePolicy": {
+    "minimumRotationNoticeSeconds": 86400,
+    "maximumRotationOverlapSeconds": 3600,
+    "onePendingRotation": true,
+    "reviewIdsSingleUse": true,
+    "publicKeyReuseForbidden": true,
+    "identityDomainImmutable": true,
+    "emergencyDisableImmediate": true,
+    "emergencyDisableTerminal": true,
+    "historicalVerificationPreserved": true,
+    "reenableInstructionExists": false
+  },
+  "codec": {
+    "discriminatorDomain": "iat-promotions-dlc-key-lifecycle-v1",
+    "discriminatorBytes": 8,
+    "integerEndian": "little",
+    "variableLengthFields": false
+  },
+  "baseInterfaceChanges": {
+    "campaignFieldRemoval": {
+      "name": "verifier_ed25519_key",
+      "type": "bytes32",
+      "sizeBytes": 32
+    },
+    "campaignFieldAddition": {
+      "name": "verifier_registry",
+      "type": "pubkey",
+      "sizeBytes": 32
+    },
+    "initializerDataRemoval": {
+      "instruction": "initialize_campaign",
+      "field": {
+        "name": "verifier_ed25519_key",
+        "type": "bytes32"
+      }
+    },
+    "attestationInstructions": [
+      "nominate_hero",
+      "cancel_nomination",
+      "settle_pair"
+    ],
+    "attestationAccountInsertionBefore": "instructions_sysvar",
+    "requiredReadOnlyAccounts": [
+      "verifier_registry",
+      "verifier_key_record"
+    ],
+    "requiredAttestationGuards": [
+      "REGISTRY_NOT_EMERGENCY_DISABLED_AT_ISSUED_AT",
+      "KEY_ACTIVATION_FINALIZED_AT_OR_BEFORE_ISSUED_AT",
+      "KEY_NOT_RETIRED_AT_ISSUED_AT",
+      "KEY_NOT_CANCELLED",
+      "KEY_ID_MATCHES_SIGNED_ATTESTATION",
+      "ED25519_PREINSTRUCTION_PUBLIC_KEY_MATCHES_KEY_RECORD",
+      "IDENTITY_DOMAIN_MATCHES_REGISTRY"
+    ]
+  },
+  "accounts": [
+    {
+      "name": "VerifierRegistry",
+      "discriminatorHex": "10f4113b6b5c8d2e",
+      "sizeBytes": 224,
+      "seeds": ["verifier_registry", "campaign"],
+      "fields": [
+        { "name": "version", "type": "u8", "sizeBytes": 1 },
+        { "name": "bump", "type": "u8", "sizeBytes": 1 },
+        { "name": "status", "type": "u8", "sizeBytes": 1 },
+        { "name": "emergency_reason", "type": "u8", "sizeBytes": 1 },
+        { "name": "campaign", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "identity_domain_hash", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "current_key_record", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "pending_key_record", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "minimum_notice_seconds", "type": "u32", "sizeBytes": 4 },
+        { "name": "maximum_overlap_seconds", "type": "u32", "sizeBytes": 4 },
+        { "name": "rotation_sequence", "type": "u32", "sizeBytes": 4 },
+        { "name": "emergency_disabled_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "last_review_id", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "last_event_hash", "type": "bytes32", "sizeBytes": 32 }
+      ]
+    },
+    {
+      "name": "VerifierKeyRecord",
+      "discriminatorHex": "47c3b27493b81149",
+      "sizeBytes": 192,
+      "seeds": ["verifier_key", "verifier_registry", "key_id"],
+      "fields": [
+        { "name": "version", "type": "u8", "sizeBytes": 1 },
+        { "name": "bump", "type": "u8", "sizeBytes": 1 },
+        { "name": "status", "type": "u8", "sizeBytes": 1 },
+        { "name": "reserved0", "type": "bytes", "sizeBytes": 5 },
+        { "name": "verifier_registry", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "key_id", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "public_key", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "activation_scheduled_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "activation_finalized_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "retires_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "retirement_finalized_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "cancelled_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "introduced_by_review_id", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "sequence", "type": "u32", "sizeBytes": 4 },
+        { "name": "reserved1", "type": "bytes", "sizeBytes": 4 }
+      ]
+    },
+    {
+      "name": "VerifierReviewReceipt",
+      "discriminatorHex": "66753f3de34124f0",
+      "sizeBytes": 232,
+      "seeds": ["verifier_review", "verifier_registry", "review_id"],
+      "fields": [
+        { "name": "version", "type": "u8", "sizeBytes": 1 },
+        { "name": "bump", "type": "u8", "sizeBytes": 1 },
+        { "name": "action", "type": "u8", "sizeBytes": 1 },
+        { "name": "reason", "type": "u8", "sizeBytes": 1 },
+        { "name": "verifier_registry", "type": "pubkey", "sizeBytes": 32 },
+        { "name": "review_id", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "review_hash", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "rotation_id", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "old_key_id", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "new_key_id", "type": "bytes32", "sizeBytes": 32 },
+        { "name": "occurred_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "activate_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "retire_old_at", "type": "i64", "sizeBytes": 8 },
+        { "name": "sequence", "type": "u32", "sizeBytes": 4 }
+      ]
+    }
+  ],
+  "instructions": [
+    {
+      "name": "initialize_verifier_registry",
+      "discriminatorHex": "cb2845befe503c98",
+      "accounts": [
+        { "name": "payer", "writable": true, "signer": true },
+        { "name": "activation_authority", "writable": false, "signer": true },
+        { "name": "campaign", "writable": true, "signer": false },
+        { "name": "verifier_registry", "writable": true, "signer": false },
+        { "name": "initial_key_record", "writable": true, "signer": false },
+        { "name": "clock_sysvar", "writable": false, "signer": false },
+        { "name": "system_program", "writable": false, "signer": false }
+      ],
+      "data": [
+        { "name": "initial_public_key", "type": "bytes32" },
+        { "name": "identity_domain_hash", "type": "bytes32" }
+      ],
+      "guards": [
+        "CAMPAIGN_INITIALIZED_ONLY",
+        "CAMPAIGN_VERIFIER_REGISTRY_UNSET",
+        "REGISTRY_PDA_MATCHES_CAMPAIGN",
+        "KEY_ID_EQUALS_SHA256_PUBLIC_KEY",
+        "MINIMUM_NOTICE_EQUALS_86400",
+        "MAXIMUM_OVERLAP_EQUALS_3600",
+        "CAMPAIGN_IDENTITY_DOMAIN_MATCHES",
+        "NO_TOKEN_OR_VAULT_ACCOUNTS"
+      ]
+    },
+    {
+      "name": "schedule_verifier_key_rotation",
+      "discriminatorHex": "512360ff581e7225",
+      "accounts": [
+        { "name": "payer", "writable": true, "signer": true },
+        { "name": "review_authority", "writable": false, "signer": true },
+        { "name": "verifier_registry", "writable": true, "signer": false },
+        { "name": "current_key_record", "writable": false, "signer": false },
+        { "name": "new_key_record", "writable": true, "signer": false },
+        { "name": "review_receipt", "writable": true, "signer": false },
+        { "name": "clock_sysvar", "writable": false, "signer": false },
+        { "name": "system_program", "writable": false, "signer": false }
+      ],
+      "data": [
+        { "name": "new_public_key", "type": "bytes32" },
+        { "name": "activate_at", "type": "i64" },
+        { "name": "retire_old_at", "type": "i64" },
+        { "name": "review_id", "type": "bytes32" },
+        { "name": "review_hash", "type": "bytes32" }
+      ],
+      "guards": [
+        "REGISTRY_ACTIVE_ONLY",
+        "NO_PENDING_ROTATION",
+        "PREVIOUS_RETIREMENT_FINALIZED",
+        "SEPARATE_REVIEW_AUTHORITY_SIGNS",
+        "REVIEW_RECEIPT_MUST_NOT_EXIST",
+        "ACTIVATE_AT_AT_LEAST_NOW_PLUS_86400",
+        "RETIRE_OLD_AT_NOT_BEFORE_ACTIVATE_AT",
+        "OVERLAP_NOT_ABOVE_3600",
+        "NEW_KEY_ID_EQUALS_SHA256_PUBLIC_KEY",
+        "NEW_KEY_RECORD_MUST_NOT_EXIST",
+        "IDENTITY_DOMAIN_IMMUTABLE",
+        "NO_TOKEN_OR_VAULT_ACCOUNTS"
+      ]
+    },
+    {
+      "name": "activate_scheduled_verifier_key",
+      "discriminatorHex": "31622d84d33f2264",
+      "accounts": [
+        { "name": "payer", "writable": true, "signer": true },
+        { "name": "verifier_registry", "writable": true, "signer": false },
+        { "name": "old_key_record", "writable": true, "signer": false },
+        { "name": "new_key_record", "writable": true, "signer": false },
+        { "name": "clock_sysvar", "writable": false, "signer": false }
+      ],
+      "data": [
+        { "name": "rotation_id", "type": "bytes32" }
+      ],
+      "guards": [
+        "REGISTRY_ACTIVE_ONLY",
+        "PENDING_ROTATION_ID_MATCHES",
+        "CLOCK_AT_OR_AFTER_SCHEDULED_ACTIVATION",
+        "NEW_KEY_NOT_CANCELLED",
+        "ACTIVATION_FINALIZED_AT_WRITTEN_FROM_CLOCK",
+        "OLD_KEY_RETIREMENT_BOUNDARY_WRITTEN_ATOMICALLY",
+        "NO_TOKEN_OR_VAULT_ACCOUNTS"
+      ]
+    },
+    {
+      "name": "finalize_verifier_key_retirement",
+      "discriminatorHex": "2fba0b80950c4788",
+      "accounts": [
+        { "name": "payer", "writable": true, "signer": true },
+        { "name": "verifier_registry", "writable": true, "signer": false },
+        { "name": "retiring_key_record", "writable": true, "signer": false },
+        { "name": "clock_sysvar", "writable": false, "signer": false }
+      ],
+      "data": [
+        { "name": "key_id", "type": "bytes32" }
+      ],
+      "guards": [
+        "REGISTRY_ACTIVE_ONLY",
+        "KEY_ID_MATCHES_RECORD",
+        "RETIREMENT_BOUNDARY_EXISTS",
+        "CLOCK_AT_OR_AFTER_RETIREMENT_BOUNDARY",
+        "RETIREMENT_NOT_ALREADY_FINALIZED",
+        "NO_TOKEN_OR_VAULT_ACCOUNTS"
+      ]
+    },
+    {
+      "name": "emergency_disable_verifier_registry",
+      "discriminatorHex": "573f5e45ddd67e1b",
+      "accounts": [
+        { "name": "payer", "writable": true, "signer": true },
+        { "name": "emergency_review_authority", "writable": false, "signer": true },
+        { "name": "verifier_registry", "writable": true, "signer": false },
+        { "name": "pending_key_record", "writable": true, "signer": false, "optional": true },
+        { "name": "review_receipt", "writable": true, "signer": false },
+        { "name": "clock_sysvar", "writable": false, "signer": false },
+        { "name": "system_program", "writable": false, "signer": false }
+      ],
+      "data": [
+        { "name": "reason", "type": "u16" },
+        { "name": "review_id", "type": "bytes32" },
+        { "name": "review_hash", "type": "bytes32" }
+      ],
+      "guards": [
+        "REGISTRY_ACTIVE_ONLY",
+        "SEPARATE_EMERGENCY_REVIEW_AUTHORITY_SIGNS",
+        "REVIEW_RECEIPT_MUST_NOT_EXIST",
+        "REASON_IS_PUBLIC_ENUM",
+        "DISABLED_AT_WRITTEN_FROM_CLOCK",
+        "PENDING_UNACTIVATED_KEY_CANCELLED_IF_PRESENT",
+        "EMERGENCY_DISABLE_TERMINAL",
+        "NO_REENABLE_PATH",
+        "NO_TOKEN_OR_VAULT_ACCOUNTS"
+      ]
+    }
+  ],
+  "events": [
+    "VerifierRegistryInitialized",
+    "VerifierKeyRotationScheduled",
+    "VerifierKeyRotationActivated",
+    "VerifierKeyRetirementFinalized",
+    "VerifierRegistryEmergencyDisabled"
+  ],
+  "forbiddenCapabilities": [
+    "REENABLE_VERIFIER_REGISTRY",
+    "PRIVATE_KEY_STORAGE",
+    "SECRET_KEY_STORAGE",
+    "MINT_AUTHORITY",
+    "V2_UPGRADE_AUTHORITY",
+    "TREASURY_ACCESS",
+    "ECOSYSTEM_ACCESS",
+    "LIQUIDITY_ACCESS",
+    "CORE_TEAM_ACCESS",
+    "STAKING_RESERVE_ACCESS",
+    "PROMOTION_VAULT_WITHDRAWAL"
+  ]
+}

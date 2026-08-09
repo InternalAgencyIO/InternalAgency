@@ -1,0 +1,401 @@
+{
+  "corpusVersion": 1,
+  "corpusId": "iat-promotions-dlc-reviewer-bundle-schema-examples-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "schemaApplied": false,
+    "acceptedReceiptPublished": false,
+    "activationAuthorized": false
+  },
+  "sources": {
+    "candidateSchema": {
+      "path": "reviewer-candidate.schema.v1.json",
+      "canonicalSha256": "6abfd65351003c1bc6d7749f38a48db0ea24cfc244e108cad8925fa100f736cd"
+    },
+    "expectedTargetSchema": {
+      "path": "reviewer-expected-target.schema.v1.json",
+      "canonicalSha256": "11ed97dc89977015024817e4a40bb789e36e196f708c193fe434e6973650bfde"
+    },
+    "lintResultSchema": {
+      "path": "reviewer-lint-result.schema.v1.json",
+      "canonicalSha256": "46b43f1e7ef36aa72fdee342ece42e7113a89ca1f6a34fcc57c0f88f13984d37"
+    }
+  },
+  "contract": {
+    "structuralValidationIsNotSemanticAcceptance": true,
+    "expectedTargetAuthenticityMustBeEstablishedSeparately": true,
+    "publicExamplesAreRejectionOnly": true,
+    "receiptIssued": false,
+    "reviewCompleted": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "validExamples": [
+    {
+      "name": "PUBLIC_REJECTED_CANDIDATE",
+      "target": "CANDIDATE",
+      "value": {
+        "target": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91"
+        },
+        "scope": {
+          "reviewAreas": [
+            "PROTOCOL_AND_ECONOMICS",
+            "IDENTITY_AND_DEDUPLICATION",
+            "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+            "VAULT_AND_AUTHORITY_ISOLATION",
+            "VERIFIER_KEY_LIFECYCLE",
+            "EVENT_ACCOUNT_RECONCILIATION",
+            "CLIENT_ABI_AND_FIXED_BYTES",
+            "ADVERSARIAL_TESTS_AND_REPRODUCIBILITY"
+          ],
+          "explicitExclusions": [
+            "PRODUCTION_V2_CODE",
+            "LIVE_SITES",
+            "MAINNET_STATE",
+            "DEVNET_STATE",
+            "WALLETS_AND_KEYS",
+            "DNS_AND_HOSTING",
+            "GENESIS_RELEASE_GATES"
+          ],
+          "manifestEntryCount": "91",
+          "openSecurityDecisionDispositions": [
+            {
+              "id": "UPGRADE_AUTHORITY_POLICY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "dc9d5671250f2ad36292b70a00e4561423c3ba364c46cc1bbc7d667587dfe5f6"
+            },
+            {
+              "id": "IDENTITY_VERIFIER_KEY_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "044aadd26597a9bf55424456607198901c4bf58868067b2c9e1f82ba4b227f81"
+            },
+            {
+              "id": "INDEPENDENT_REVIEWER_THRESHOLD",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "efe02c0efcaadd629364e981576febb0da916680f13c2d07503d084e08dcef10"
+            },
+            {
+              "id": "IDENTITY_COMMITMENT_PEPPER_CUSTODY",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "bb54df48ed07465046f29c0ea9dd7a60bb53ba934d6f90ac1eee0bbaac7dec7f"
+            },
+            {
+              "id": "X_API_TERMS_AVAILABILITY_RETENTION",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "cd293f0425e7f3a5358ac1c04b18d86adc6c143a73d7afc5bdf74fdaea88f868"
+            },
+            {
+              "id": "RELAYER_AND_RENT_FUNDING",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "9de4126062fcf5a283771221dc496f2d79ca3570b13fab4c705ee22cc4b1cb24"
+            },
+            {
+              "id": "COMMUNITY_REFUND_ACCOUNT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "ae4b8009ab96edd1cff40380c676078d4e60b82fc95598949dd399804175cc35"
+            },
+            {
+              "id": "PUBLIC_HANDLE_DISPLAY_CONSENT",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "654cd3e9e4c011b2e91e70d1989ecd32f67d264e09a65c94e3eab808bb5c9133"
+            },
+            {
+              "id": "LEGAL_AND_REGIONAL_RESTRICTIONS",
+              "disposition": "RESOLVED",
+              "evidenceCommitmentSha256": "b4b7c49b37e4366bd04dc21055c21c04b6887472bc32f02a06039c4248a29b19"
+            }
+          ]
+        },
+        "reviewer": {
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "concurrentRoles": []
+        },
+        "payload": {
+          "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+          "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+          "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+          "coveredFileCount": "91",
+          "scopeCanonicalSha256": "b1af1fbf42d603c7ca2a34c128ece13bdc588487727bc6b5871e5dd97473849f",
+          "accountabilityLabel": "SYNTHETIC INDEPENDENT REVIEWER",
+          "reviewerIdentityCommitmentSha256": "8874a0ffc463ccc1fa1d14718cc0366058a6c947f53e564476bd40cd5971fec6",
+          "independenceDeclaration": true,
+          "decision": "APPROVE_REVIEW_ONLY",
+          "rationaleCanonicalSha256": "6a7209526fb3946c643c7709331dba2da6c217645f71b77ebab0d38f06eaf6fe",
+          "findingsCommitmentSha256": "95b8bf5534960dcd06c849f9598da1a60b7126fca9dc7e9ac65dd8efa5f0a558",
+          "reviewedAtUnixSeconds": "1800000000",
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        },
+        "attestation": {
+          "algorithm": "Ed25519",
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "payloadSha256": "c974ccb02596b8ef478bf67ff22f1c2bc2061e13d42892824767654958b4a00e"
+        }
+      }
+    },
+    {
+      "name": "PUBLIC_EXPECTED_TARGET",
+      "target": "EXPECTED_TARGET",
+      "value": {
+        "gitCommitSha": "5140d6cf819b2497c5f254846a5efe7aa17900b9",
+        "reviewManifestContentSha256": "15f1b239d850585a580811d25462f082550bebdd6e7655b599d650f1cfb6b919",
+        "reviewTreeRootSha256": "938796d67ba6035c53c78eabed16b30fa6291000c830254c721cd27e7151a1c8",
+        "coveredFileCount": "91"
+      }
+    },
+    {
+      "name": "PUBLIC_REJECTED_LINT_RESULT",
+      "target": "LINT_RESULT",
+      "value": {
+        "reportVersion": 1,
+        "reportId": "iat-promotions-dlc-reviewer-bundle-gate-report-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "acceptancePolicyApplied": false
+        },
+        "evaluationOnly": true,
+        "inputBindings": {
+          "candidateCanonicalSha256": "23ec8d91b33a965f516bcb0cfd0ab3417d559fdc5a3e6ed19b8fd40ab9a6a895",
+          "expectedTargetCanonicalSha256": "0156c5c929a2f9a36a2c796e432f6c05f35d97772a459605009d1f7a449f8b95",
+          "receiptTemplateCanonicalSha256": "c250d2b854122fae4687bc422da448eadc7c916ae36847fca5c58f6819a6f16e"
+        },
+        "summary": {
+          "outcome": "CANDIDATE_REJECTED",
+          "passedGateCount": "5",
+          "failedGateCount": "1",
+          "totalGateCount": "6"
+        },
+        "gates": [
+          {
+            "id": "EXACT_SHAPE",
+            "label": "Exact shape",
+            "result": "PASS"
+          },
+          {
+            "id": "TARGET_BINDING",
+            "label": "Target binding",
+            "result": "PASS"
+          },
+          {
+            "id": "SCOPE_COMPLETE",
+            "label": "Complete scope",
+            "result": "PASS"
+          },
+          {
+            "id": "REVIEWER_INDEPENDENCE",
+            "label": "Reviewer independence",
+            "result": "PASS"
+          },
+          {
+            "id": "SEMANTIC_REVIEW",
+            "label": "Semantic review",
+            "result": "PASS"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_ATTESTATION",
+            "label": "Cryptographic attestation",
+            "result": "FAIL"
+          }
+        ],
+        "failures": [
+          {
+            "gate": "CRYPTOGRAPHIC_ATTESTATION",
+            "detail": "INVALID_EXTERNAL_SIGNATURE"
+          }
+        ],
+        "candidateSatisfiesPolicy": false,
+        "decision": "NOT_ACCEPTED",
+        "receiptIssued": false,
+        "reviewCompletedByThisLinter": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    }
+  ],
+  "invalidExamples": [
+    {
+      "name": "CANDIDATE_EXTRA_FIELD",
+      "target": "CANDIDATE",
+      "base": "PUBLIC_REJECTED_CANDIDATE",
+      "mutation": {
+        "operation": "add",
+        "path": "/unexpected",
+        "value": true
+      },
+      "expectedKeyword": "additionalProperties"
+    },
+    {
+      "name": "CANDIDATE_MISSING_TARGET",
+      "target": "CANDIDATE",
+      "base": "PUBLIC_REJECTED_CANDIDATE",
+      "mutation": {
+        "operation": "remove",
+        "path": "/target"
+      },
+      "expectedKeyword": "required"
+    },
+    {
+      "name": "CANDIDATE_NUMERIC_FILE_COUNT",
+      "target": "CANDIDATE",
+      "base": "PUBLIC_REJECTED_CANDIDATE",
+      "mutation": {
+        "operation": "replace",
+        "path": "/target/coveredFileCount",
+        "value": 91
+      },
+      "expectedKeyword": "type"
+    },
+    {
+      "name": "CANDIDATE_MALFORMED_SIGNATURE",
+      "target": "CANDIDATE",
+      "base": "PUBLIC_REJECTED_CANDIDATE",
+      "mutation": {
+        "operation": "replace",
+        "path": "/attestation/signatureHex",
+        "value": "00"
+      },
+      "expectedKeyword": "pattern"
+    },
+    {
+      "name": "CANDIDATE_ACTIVATION_CLAIM",
+      "target": "CANDIDATE",
+      "base": "PUBLIC_REJECTED_CANDIDATE",
+      "mutation": {
+        "operation": "replace",
+        "path": "/payload/activationAuthorized",
+        "value": true
+      },
+      "expectedKeyword": "const"
+    },
+    {
+      "name": "CANDIDATE_SCOPE_OMISSION",
+      "target": "CANDIDATE",
+      "base": "PUBLIC_REJECTED_CANDIDATE",
+      "mutation": {
+        "operation": "replace",
+        "path": "/scope/reviewAreas",
+        "value": [
+          "PROTOCOL_AND_ECONOMICS",
+          "IDENTITY_AND_DEDUPLICATION",
+          "ATOMIC_SETTLEMENT_AND_ROLLBACK",
+          "VAULT_AND_AUTHORITY_ISOLATION",
+          "VERIFIER_KEY_LIFECYCLE",
+          "EVENT_ACCOUNT_RECONCILIATION",
+          "CLIENT_ABI_AND_FIXED_BYTES"
+        ]
+      },
+      "expectedKeyword": "const"
+    },
+    {
+      "name": "EXPECTED_TARGET_EXTRA_FIELD",
+      "target": "EXPECTED_TARGET",
+      "base": "PUBLIC_EXPECTED_TARGET",
+      "mutation": {
+        "operation": "add",
+        "path": "/candidateSaysValid",
+        "value": true
+      },
+      "expectedKeyword": "additionalProperties"
+    },
+    {
+      "name": "EXPECTED_TARGET_UPPERCASE_COMMIT",
+      "target": "EXPECTED_TARGET",
+      "base": "PUBLIC_EXPECTED_TARGET",
+      "mutation": {
+        "operation": "replace",
+        "path": "/gitCommitSha",
+        "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      },
+      "expectedKeyword": "pattern"
+    },
+    {
+      "name": "EXPECTED_TARGET_MISSING_ROOT",
+      "target": "EXPECTED_TARGET",
+      "base": "PUBLIC_EXPECTED_TARGET",
+      "mutation": {
+        "operation": "remove",
+        "path": "/reviewTreeRootSha256"
+      },
+      "expectedKeyword": "required"
+    },
+    {
+      "name": "LINT_RELEASED_NETWORK",
+      "target": "LINT_RESULT",
+      "base": "PUBLIC_REJECTED_LINT_RESULT",
+      "mutation": {
+        "operation": "replace",
+        "path": "/status/network",
+        "value": "mainnet-beta"
+      },
+      "expectedKeyword": "const"
+    },
+    {
+      "name": "LINT_RECEIPT_ISSUED",
+      "target": "LINT_RESULT",
+      "base": "PUBLIC_REJECTED_LINT_RESULT",
+      "mutation": {
+        "operation": "replace",
+        "path": "/receiptIssued",
+        "value": true
+      },
+      "expectedKeyword": "const"
+    },
+    {
+      "name": "LINT_UNKNOWN_GATE_RESULT",
+      "target": "LINT_RESULT",
+      "base": "PUBLIC_REJECTED_LINT_RESULT",
+      "mutation": {
+        "operation": "replace",
+        "path": "/gates/0/result",
+        "value": "UNKNOWN"
+      },
+      "expectedKeyword": "enum"
+    },
+    {
+      "name": "LINT_MISSING_INPUT_BINDING",
+      "target": "LINT_RESULT",
+      "base": "PUBLIC_REJECTED_LINT_RESULT",
+      "mutation": {
+        "operation": "remove",
+        "path": "/inputBindings/expectedTargetCanonicalSha256"
+      },
+      "expectedKeyword": "required"
+    },
+    {
+      "name": "LINT_EXTRA_FIELD",
+      "target": "LINT_RESULT",
+      "base": "PUBLIC_REJECTED_LINT_RESULT",
+      "mutation": {
+        "operation": "add",
+        "path": "/activationTransaction",
+        "value": "none"
+      },
+      "expectedKeyword": "additionalProperties"
+    }
+  ]
+}

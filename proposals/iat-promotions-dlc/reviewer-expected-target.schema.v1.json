@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://internalagency.io/schemas/draft/iat-promotions-dlc-reviewer-expected-target-v1.json",
+  "title": "IAT Promotions DLC independently supplied review target v1",
+  "description": "DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE. Shape validation cannot establish target authenticity.",
+  "x-iat-status": {
+    "labels": ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "schemaApplied": false
+  },
+  "type": "object",
+  "required": ["gitCommitSha", "reviewManifestContentSha256", "reviewTreeRootSha256", "coveredFileCount"],
+  "additionalProperties": false,
+  "properties": {
+    "gitCommitSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "reviewManifestContentSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "reviewTreeRootSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "coveredFileCount": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" }
+  }
+}

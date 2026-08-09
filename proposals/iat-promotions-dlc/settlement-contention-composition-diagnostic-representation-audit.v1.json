@@ -1,0 +1,882 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-contention-composition-diagnostic-representations-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "vectorsApplied": false
+  },
+  "sources": {
+    "baseArtifact": {
+      "path": "settlement-contention-composition-vectors.v1.json",
+      "canonicalSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf"
+    },
+    "closedSchema": {
+      "path": "settlement-contention-composition-vectors.schema.v1.json",
+      "canonicalSha256": "966b9822e2aa940dc8241500b4d33b53bc2a169dca1ea679a66b1cac22f5f830"
+    },
+    "mutationCatalog": {
+      "path": "settlement-contention-composition-schema-mutations.mjs",
+      "normalizedTextSha256": "6f7cd62c0a4e88ffa7691c381af8560753692f45ea94690af466475b0f18194a"
+    },
+    "nodeEvaluator": {
+      "path": "settlement-contention-composition-diagnostic-representations.mjs",
+      "normalizedTextSha256": "39cfb4bdbfb93d53612bd5530123c5ce76cdb8f3738abcaa04537cc83a4a14f7"
+    },
+    "pythonVerifier": {
+      "path": "verify-settlement-contention-vectors.py",
+      "normalizedTextSha256": "e3236cf982660bc75890de45175bdc616482c0e43331fa5d8917a77c20d2372d"
+    },
+    "generator": {
+      "path": "generate-settlement-contention-composition-diagnostic-representation-audit.mjs",
+      "normalizedTextSha256": "358e911b3e0a06e6a20981e6dd19976b1e787ad53a3d424143cafd5451fd516a"
+    }
+  },
+  "contract": {
+    "mode": "DETERMINISTIC_DIAGNOSTIC_REPRESENTATION_AUDIT",
+    "mutationCount": 12,
+    "representationCountPerMutation": 3,
+    "trialCount": 36,
+    "representationIds": [
+      "BASE_LF",
+      "REVERSED_KEYS_LF",
+      "BASE_CRLF"
+    ],
+    "exactDiagnosticsStable": true,
+    "canonicalCandidateStable": true,
+    "distinctRepresentationDigestsRequired": true,
+    "serializedRepresentationsStored": false,
+    "runtimeCandidatesStored": false,
+    "usesLocalValidator": false,
+    "usesRpc": false,
+    "usesWallet": false,
+    "preparesTransactions": false,
+    "signsTransactions": false,
+    "broadcastsTransactions": false,
+    "issuesReviewReceipts": false,
+    "completesReview": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "summary": {
+    "mutationCount": "12",
+    "trialCount": "36",
+    "allDiagnosticsStable": true,
+    "allCanonicalCandidatesStable": true,
+    "allRepresentationDigestsDistinctWithinCase": true,
+    "allRejected": true,
+    "commonReplayCommitmentSha256": "e878654551b14af9516e725230dadabdca72433890ff6c8a67cfbba111d0a68a",
+    "caseSetCommitmentSha256": "62d7f41b3b9fae286cd252900c79d301febf992df61b978c9144a43076b19f90",
+    "serializedRepresentationsStored": false,
+    "runtimeCandidatesStored": false,
+    "receiptIssued": false,
+    "reviewCompleted": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "cases": [
+    {
+      "caseId": "ROOT_CANDIDATE_FIELD",
+      "mutation": {
+        "operation": "add",
+        "path": "/candidate",
+        "value": {}
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "0f46df7cab8ecfef753c962ea04c0db82ccbb14551f93f232f05bb6ac450138c",
+          "diagnostics": [
+            {
+              "instancePath": "/candidate",
+              "schemaPath": "#/additionalProperties",
+              "keyword": "additionalProperties",
+              "message": "is not allowed"
+            }
+          ],
+          "diagnosticCommitmentSha256": "5ce298a11a49e4aaa3d080424c613a37e5e7a6d4b9b98aae150af5c1d48b348f",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "0f46df7cab8ecfef753c962ea04c0db82ccbb14551f93f232f05bb6ac450138c",
+          "diagnostics": [
+            {
+              "instancePath": "/candidate",
+              "schemaPath": "#/additionalProperties",
+              "keyword": "additionalProperties",
+              "message": "is not allowed"
+            }
+          ],
+          "diagnosticCommitmentSha256": "5ce298a11a49e4aaa3d080424c613a37e5e7a6d4b9b98aae150af5c1d48b348f",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "0f46df7cab8ecfef753c962ea04c0db82ccbb14551f93f232f05bb6ac450138c",
+          "diagnostics": [
+            {
+              "instancePath": "/candidate",
+              "schemaPath": "#/additionalProperties",
+              "keyword": "additionalProperties",
+              "message": "is not allowed"
+            }
+          ],
+          "diagnosticCommitmentSha256": "5ce298a11a49e4aaa3d080424c613a37e5e7a6d4b9b98aae150af5c1d48b348f",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "eeeba7ce0b31ebd5ffad7823789b108690ca72efcdd96d1f44d2de0a46e8827a"
+    },
+    {
+      "caseId": "CASE_EXPANDED_STATE",
+      "mutation": {
+        "operation": "add",
+        "path": "/cases/0/expandedState",
+        "value": {}
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "4a085072c37b22d36482c0a14b17029290a7795456844731e08ea742caaa2185",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/expandedState",
+              "schemaPath": "#/definitions/case/additionalProperties",
+              "keyword": "additionalProperties",
+              "message": "is not allowed"
+            }
+          ],
+          "diagnosticCommitmentSha256": "f5584b8a2fe5d66c585d1364f47b4d9be01b51c5df77e6085ace717805122111",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "4a085072c37b22d36482c0a14b17029290a7795456844731e08ea742caaa2185",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/expandedState",
+              "schemaPath": "#/definitions/case/additionalProperties",
+              "keyword": "additionalProperties",
+              "message": "is not allowed"
+            }
+          ],
+          "diagnosticCommitmentSha256": "f5584b8a2fe5d66c585d1364f47b4d9be01b51c5df77e6085ace717805122111",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "4a085072c37b22d36482c0a14b17029290a7795456844731e08ea742caaa2185",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/expandedState",
+              "schemaPath": "#/definitions/case/additionalProperties",
+              "keyword": "additionalProperties",
+              "message": "is not allowed"
+            }
+          ],
+          "diagnosticCommitmentSha256": "f5584b8a2fe5d66c585d1364f47b4d9be01b51c5df77e6085ace717805122111",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "9dbbf1a9512685624879ac7447d9c704e30edb57abd6f2838c78e6f77ea08877"
+    },
+    {
+      "caseId": "REMOVAL_TRACE_FIELD",
+      "mutation": {
+        "operation": "add",
+        "path": "/cases/0/removalChecks/0/trace",
+        "value": []
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "bffcfb2b9ca8a5e7acfd0516b1768f54dda298da8f6177fb8689438c7a387e21",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/trace",
+              "schemaPath": "#/definitions/removalCheck/additionalProperties",
+              "keyword": "additionalProperties",
+              "message": "is not allowed"
+            }
+          ],
+          "diagnosticCommitmentSha256": "791856b234619f58686d137433a1224e64436387975fefc694c072c942c2dfb9",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "bffcfb2b9ca8a5e7acfd0516b1768f54dda298da8f6177fb8689438c7a387e21",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/trace",
+              "schemaPath": "#/definitions/removalCheck/additionalProperties",
+              "keyword": "additionalProperties",
+              "message": "is not allowed"
+            }
+          ],
+          "diagnosticCommitmentSha256": "791856b234619f58686d137433a1224e64436387975fefc694c072c942c2dfb9",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "bffcfb2b9ca8a5e7acfd0516b1768f54dda298da8f6177fb8689438c7a387e21",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/trace",
+              "schemaPath": "#/definitions/removalCheck/additionalProperties",
+              "keyword": "additionalProperties",
+              "message": "is not allowed"
+            }
+          ],
+          "diagnosticCommitmentSha256": "791856b234619f58686d137433a1224e64436387975fefc694c072c942c2dfb9",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "9ad78e79d50d8b536002697feeaad29f0fbde5ef200e012c29e2ca9c2f3ffb2a"
+    },
+    {
+      "caseId": "STATUS_NETWORK_MAINNET",
+      "mutation": {
+        "operation": "replace",
+        "path": "/status/network",
+        "value": "MAINNET"
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "d7a70b5a31a349b5724d7521ebe08cbcbf73db64965ef3665304ebd378d5347a",
+          "diagnostics": [
+            {
+              "instancePath": "/status/network",
+              "schemaPath": "#/definitions/status/properties/network/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "1148c52da4dd78e05020fcf216ed6333feb32dd28a78a258c48f430a340e288a",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "d7a70b5a31a349b5724d7521ebe08cbcbf73db64965ef3665304ebd378d5347a",
+          "diagnostics": [
+            {
+              "instancePath": "/status/network",
+              "schemaPath": "#/definitions/status/properties/network/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "1148c52da4dd78e05020fcf216ed6333feb32dd28a78a258c48f430a340e288a",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "d7a70b5a31a349b5724d7521ebe08cbcbf73db64965ef3665304ebd378d5347a",
+          "diagnostics": [
+            {
+              "instancePath": "/status/network",
+              "schemaPath": "#/definitions/status/properties/network/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "1148c52da4dd78e05020fcf216ed6333feb32dd28a78a258c48f430a340e288a",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "0f8acdb183b506dd35c35b3f03e1fa1caa3d4b6494e3e2da48641291e0067844"
+    },
+    {
+      "caseId": "CONTRACT_RPC_ENABLED",
+      "mutation": {
+        "operation": "replace",
+        "path": "/contract/usesRpc",
+        "value": true
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "1050f67f3c9160c911d6fe0652bdf815f7252508f3be1d210636ef88248713c0",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/usesRpc",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "81511bb34c2513ae2e0e1d32608097838e8f7b90323bfcdc94271a0e29d7fc64",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "1050f67f3c9160c911d6fe0652bdf815f7252508f3be1d210636ef88248713c0",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/usesRpc",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "81511bb34c2513ae2e0e1d32608097838e8f7b90323bfcdc94271a0e29d7fc64",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "1050f67f3c9160c911d6fe0652bdf815f7252508f3be1d210636ef88248713c0",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/usesRpc",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "81511bb34c2513ae2e0e1d32608097838e8f7b90323bfcdc94271a0e29d7fc64",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "041ced2bc11fab329e6c7eb215282a244d44b2a58ee9748e840fe048524fb553"
+    },
+    {
+      "caseId": "CONTRACT_WALLET_ENABLED",
+      "mutation": {
+        "operation": "replace",
+        "path": "/contract/usesWallet",
+        "value": true
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "d0a51ac0f30e022eae429d0a2855d89475d35cbbb96d5965fd7fab55015b672f",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/usesWallet",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "3a43a9b544e01bdf82ad09b3c3b9ee84a556ba776dc79658d2c9df032b8b9b75",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "d0a51ac0f30e022eae429d0a2855d89475d35cbbb96d5965fd7fab55015b672f",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/usesWallet",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "3a43a9b544e01bdf82ad09b3c3b9ee84a556ba776dc79658d2c9df032b8b9b75",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "d0a51ac0f30e022eae429d0a2855d89475d35cbbb96d5965fd7fab55015b672f",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/usesWallet",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "3a43a9b544e01bdf82ad09b3c3b9ee84a556ba776dc79658d2c9df032b8b9b75",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "54a861b1d2cd8709db773571b07febb2f4d2f91ab178c5e3e98e41b28c5dbd6b"
+    },
+    {
+      "caseId": "CONTRACT_PREPARATION_ENABLED",
+      "mutation": {
+        "operation": "replace",
+        "path": "/contract/preparesTransactions",
+        "value": true
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "eb2658185a9bc8c89b1610b698516f271a712bd2a5ebddeacfbab55bb8668e60",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/preparesTransactions",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "63ea41e828e941bd6f10b34ebe568a0bdbc4fb1c9181d660797031c953963ada",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "eb2658185a9bc8c89b1610b698516f271a712bd2a5ebddeacfbab55bb8668e60",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/preparesTransactions",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "63ea41e828e941bd6f10b34ebe568a0bdbc4fb1c9181d660797031c953963ada",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "eb2658185a9bc8c89b1610b698516f271a712bd2a5ebddeacfbab55bb8668e60",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/preparesTransactions",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "63ea41e828e941bd6f10b34ebe568a0bdbc4fb1c9181d660797031c953963ada",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "80e17cb35b25d2017abd602fa82774708932a4f6570c4ca8f023281bd74ee067"
+    },
+    {
+      "caseId": "CONTRACT_ACTIVATION_AUTHORIZED",
+      "mutation": {
+        "operation": "replace",
+        "path": "/contract/activationAuthorized",
+        "value": true
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "23194d2083ce108474dbb3509e978cc50c334481f5fb3a77ba3c77c780a7f325",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/activationAuthorized",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "4b9d2353832e204e59f678f6a47dcc98f2572e367f89e2cf323c5e61a224b7f5",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "23194d2083ce108474dbb3509e978cc50c334481f5fb3a77ba3c77c780a7f325",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/activationAuthorized",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "4b9d2353832e204e59f678f6a47dcc98f2572e367f89e2cf323c5e61a224b7f5",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "23194d2083ce108474dbb3509e978cc50c334481f5fb3a77ba3c77c780a7f325",
+          "diagnostics": [
+            {
+              "instancePath": "/contract/activationAuthorized",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "4b9d2353832e204e59f678f6a47dcc98f2572e367f89e2cf323c5e61a224b7f5",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "d245cadede6e4b5389f52f547d54e7b89ee337eddcffb46e2b73e35383e0c045"
+    },
+    {
+      "caseId": "SUMMARY_REVIEW_COMPLETED",
+      "mutation": {
+        "operation": "replace",
+        "path": "/summary/reviewCompleted",
+        "value": true
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "66fb34cdf7e44e08d85350fc0f10e5408aa4ec0ae52f2f949a8bf1bfd85c2299",
+          "diagnostics": [
+            {
+              "instancePath": "/summary/reviewCompleted",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "4abfd4facbd417ee4a70dc282a8a457b0f6297da54c706ca350c645e8a218cb7",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "66fb34cdf7e44e08d85350fc0f10e5408aa4ec0ae52f2f949a8bf1bfd85c2299",
+          "diagnostics": [
+            {
+              "instancePath": "/summary/reviewCompleted",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "4abfd4facbd417ee4a70dc282a8a457b0f6297da54c706ca350c645e8a218cb7",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "66fb34cdf7e44e08d85350fc0f10e5408aa4ec0ae52f2f949a8bf1bfd85c2299",
+          "diagnostics": [
+            {
+              "instancePath": "/summary/reviewCompleted",
+              "schemaPath": "#/definitions/falseGate/const",
+              "keyword": "const",
+              "message": "must equal the fixed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "4abfd4facbd417ee4a70dc282a8a457b0f6297da54c706ca350c645e8a218cb7",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "6255384452cbd5e0b6d5a865f1112de0f103cc2cb6dd60b823ef5ffd5d2af755"
+    },
+    {
+      "caseId": "REMOVAL_OBSERVED_TWO_GATES",
+      "mutation": {
+        "operation": "replace",
+        "path": "/cases/0/removalChecks/0/observedGates",
+        "value": [
+          "STATUS",
+          "CAPABILITY"
+        ]
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "8de24068af479229383239eb77a520204053b9ccfd63afa867bb2bd69aa60871",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/observedGates",
+              "schemaPath": "#/definitions/removalCheck/properties/observedGates/maxItems",
+              "keyword": "maxItems",
+              "message": "has too many items"
+            }
+          ],
+          "diagnosticCommitmentSha256": "c5e5360239bd5f7b868f90a1a5e229b35644ff29aa164291cb1ff8cd94607f7d",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "8de24068af479229383239eb77a520204053b9ccfd63afa867bb2bd69aa60871",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/observedGates",
+              "schemaPath": "#/definitions/removalCheck/properties/observedGates/maxItems",
+              "keyword": "maxItems",
+              "message": "has too many items"
+            }
+          ],
+          "diagnosticCommitmentSha256": "c5e5360239bd5f7b868f90a1a5e229b35644ff29aa164291cb1ff8cd94607f7d",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "8de24068af479229383239eb77a520204053b9ccfd63afa867bb2bd69aa60871",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/observedGates",
+              "schemaPath": "#/definitions/removalCheck/properties/observedGates/maxItems",
+              "keyword": "maxItems",
+              "message": "has too many items"
+            }
+          ],
+          "diagnosticCommitmentSha256": "c5e5360239bd5f7b868f90a1a5e229b35644ff29aa164291cb1ff8cd94607f7d",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "c1767e3503776115e5caf239e03a9715bccc01b99dcf3e169c1404bd44a940b1"
+    },
+    {
+      "caseId": "REMOVAL_HASH_UPPERCASE",
+      "mutation": {
+        "operation": "replace",
+        "path": "/cases/0/removalChecks/0/candidateCommitmentSha256",
+        "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "166094f8885a8a497c99f85939517a4dbba8ada4e0b8bb280a5347cc9a96aaf9",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/candidateCommitmentSha256",
+              "schemaPath": "#/definitions/hex64/pattern",
+              "keyword": "pattern",
+              "message": "must match the fixed pattern"
+            }
+          ],
+          "diagnosticCommitmentSha256": "da3db804ae8b69f0989ee001270a3983078ddab1d7db09bac148e05cf1f28e39",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "166094f8885a8a497c99f85939517a4dbba8ada4e0b8bb280a5347cc9a96aaf9",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/candidateCommitmentSha256",
+              "schemaPath": "#/definitions/hex64/pattern",
+              "keyword": "pattern",
+              "message": "must match the fixed pattern"
+            }
+          ],
+          "diagnosticCommitmentSha256": "da3db804ae8b69f0989ee001270a3983078ddab1d7db09bac148e05cf1f28e39",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "166094f8885a8a497c99f85939517a4dbba8ada4e0b8bb280a5347cc9a96aaf9",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/candidateCommitmentSha256",
+              "schemaPath": "#/definitions/hex64/pattern",
+              "keyword": "pattern",
+              "message": "must match the fixed pattern"
+            }
+          ],
+          "diagnosticCommitmentSha256": "da3db804ae8b69f0989ee001270a3983078ddab1d7db09bac148e05cf1f28e39",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "d257140cb72fad99627c8fb7a2a264b5a91150f7ff07c9490106a45d3a8e7fbe"
+    },
+    {
+      "caseId": "REMOVAL_UNKNOWN_GATE",
+      "mutation": {
+        "operation": "replace",
+        "path": "/cases/0/removalChecks/0/remainingGate",
+        "value": "UNKNOWN"
+      },
+      "representations": [
+        {
+          "representationId": "BASE_LF",
+          "representationSha256": "c67ebc02fe79045631c56319cf1d4f0ba1272bed41fbbe618379310dc3fc6d0b",
+          "candidateCommitmentSha256": "442ee656153155cfef1cf56e438a7e4e0090eab17318ba86c14c059be94c28ac",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/remainingGate",
+              "schemaPath": "#/definitions/gate/enum",
+              "keyword": "enum",
+              "message": "must equal one allowed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "816894915a8d3271ebe705f52daccee2ad90ef842cb7f03035b851308a72a9ce",
+          "accepted": false
+        },
+        {
+          "representationId": "REVERSED_KEYS_LF",
+          "representationSha256": "87b2a97df7533f723b0e651177764026a1b9dcfe0ffd182ba499dad351d040d5",
+          "candidateCommitmentSha256": "442ee656153155cfef1cf56e438a7e4e0090eab17318ba86c14c059be94c28ac",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/remainingGate",
+              "schemaPath": "#/definitions/gate/enum",
+              "keyword": "enum",
+              "message": "must equal one allowed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "816894915a8d3271ebe705f52daccee2ad90ef842cb7f03035b851308a72a9ce",
+          "accepted": false
+        },
+        {
+          "representationId": "BASE_CRLF",
+          "representationSha256": "e55d96927feb2f6953420792f4140f6ea18e9df785f06284a0e6ca46a737aeb3",
+          "candidateCommitmentSha256": "442ee656153155cfef1cf56e438a7e4e0090eab17318ba86c14c059be94c28ac",
+          "diagnostics": [
+            {
+              "instancePath": "/cases/0/removalChecks/0/remainingGate",
+              "schemaPath": "#/definitions/gate/enum",
+              "keyword": "enum",
+              "message": "must equal one allowed value"
+            }
+          ],
+          "diagnosticCommitmentSha256": "816894915a8d3271ebe705f52daccee2ad90ef842cb7f03035b851308a72a9ce",
+          "accepted": false
+        }
+      ],
+      "representationSetCommitmentSha256": "88f93a75db3fad2a8a64b06f978ef001c6877cc0c9771abb71ae900fc7d5434a",
+      "diagnosticsStable": true,
+      "canonicalCandidateStable": true,
+      "allRejected": true,
+      "serializedRepresentationsStored": false,
+      "runtimeCandidatesStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "cac1aa9607305bb10bec03786e84bfda3e7b2eff6b8ed9d773a734ab4c4b7df2"
+    }
+  ]
+}

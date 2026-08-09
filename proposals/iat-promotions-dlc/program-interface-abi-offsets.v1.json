@@ -1,0 +1,2255 @@
+{
+  "manifestVersion": 1,
+  "manifestId": "iat-promotions-dlc-composed-abi-offsets-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "amendmentApplied": false,
+    "compositionApplied": false,
+    "clientBindingOnly": true
+  },
+  "sourcePreview": {
+    "path": "program-interface-composition-preview.v1.json",
+    "canonicalSha256": "eba0b92f94716b45d259fc64ada687a35a4e35f34e953389fd1aa44fd073e978"
+  },
+  "sourceVectors": {
+    "path": "program-interface-composition-vectors.v1.json",
+    "canonicalSha256": "4ee7b471629fe59b2b69609467e518d2dd2354c5ec7c918dcd8349f055921886"
+  },
+  "encoding": {
+    "discriminatorBytes": 8,
+    "integerEndian": "little",
+    "fixedWidth": true,
+    "variableLengthFields": false,
+    "integerJsonRepresentation": "decimal-string",
+    "byteStringRepresentation": "lowercase-hex"
+  },
+  "scalarFixtures": [
+    {
+      "type": "u8",
+      "value": "165",
+      "sizeBytes": 1,
+      "expectedLittleEndianHex": "a5"
+    },
+    {
+      "type": "u16",
+      "value": "4660",
+      "sizeBytes": 2,
+      "expectedLittleEndianHex": "3412"
+    },
+    {
+      "type": "u32",
+      "value": "305419896",
+      "sizeBytes": 4,
+      "expectedLittleEndianHex": "78563412"
+    },
+    {
+      "type": "u64",
+      "value": "72623859790382856",
+      "sizeBytes": 8,
+      "expectedLittleEndianHex": "0807060504030201"
+    },
+    {
+      "type": "i64",
+      "value": "-2",
+      "sizeBytes": 8,
+      "expectedLittleEndianHex": "feffffffffffffff"
+    },
+    {
+      "type": "bytes32",
+      "value": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "sizeBytes": 32,
+      "expectedLittleEndianHex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
+    },
+    {
+      "type": "pubkey",
+      "value": "fffefdfcfbfaf9f8f7f6f5f4f3f2f1f0efeeedecebeae9e8e7e6e5e4e3e2e1e0",
+      "sizeBytes": 32,
+      "expectedLittleEndianHex": "fffefdfcfbfaf9f8f7f6f5f4f3f2f1f0efeeedecebeae9e8e7e6e5e4e3e2e1e0"
+    },
+    {
+      "type": "bytes",
+      "value": "a1b2c3d4",
+      "sizeBytes": 4,
+      "expectedLittleEndianHex": "a1b2c3d4"
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Campaign",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "46fe2cdd85f9cb16",
+      "sizeBytes": 424,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "fields": [
+        {
+          "name": "version",
+          "type": "u8",
+          "offsetBytes": 8,
+          "sizeBytes": 1,
+          "endOffsetBytes": 9
+        },
+        {
+          "name": "bump",
+          "type": "u8",
+          "offsetBytes": 9,
+          "sizeBytes": 1,
+          "endOffsetBytes": 10
+        },
+        {
+          "name": "status",
+          "type": "u8",
+          "offsetBytes": 10,
+          "sizeBytes": 1,
+          "endOffsetBytes": 11
+        },
+        {
+          "name": "reserved0",
+          "type": "bytes",
+          "offsetBytes": 11,
+          "sizeBytes": 1,
+          "endOffsetBytes": 12
+        },
+        {
+          "name": "mint",
+          "type": "pubkey",
+          "offsetBytes": 12,
+          "sizeBytes": 32,
+          "endOffsetBytes": 44
+        },
+        {
+          "name": "token_program",
+          "type": "pubkey",
+          "offsetBytes": 44,
+          "sizeBytes": 32,
+          "endOffsetBytes": 76
+        },
+        {
+          "name": "promo_vault",
+          "type": "pubkey",
+          "offsetBytes": 76,
+          "sizeBytes": 32,
+          "endOffsetBytes": 108
+        },
+        {
+          "name": "community_source_token_account",
+          "type": "pubkey",
+          "offsetBytes": 108,
+          "sizeBytes": 32,
+          "endOffsetBytes": 140
+        },
+        {
+          "name": "community_refund_token_account",
+          "type": "pubkey",
+          "offsetBytes": 140,
+          "sizeBytes": 32,
+          "endOffsetBytes": 172
+        },
+        {
+          "name": "verified_genesis_config",
+          "type": "pubkey",
+          "offsetBytes": 172,
+          "sizeBytes": 32,
+          "endOffsetBytes": 204
+        },
+        {
+          "name": "activation_authority",
+          "type": "pubkey",
+          "offsetBytes": 204,
+          "sizeBytes": 32,
+          "endOffsetBytes": 236
+        },
+        {
+          "name": "review_authority",
+          "type": "pubkey",
+          "offsetBytes": 236,
+          "sizeBytes": 32,
+          "endOffsetBytes": 268
+        },
+        {
+          "name": "verifier_registry",
+          "type": "pubkey",
+          "offsetBytes": 268,
+          "sizeBytes": 32,
+          "endOffsetBytes": 300
+        },
+        {
+          "name": "genesis_timestamp",
+          "type": "i64",
+          "offsetBytes": 300,
+          "sizeBytes": 8,
+          "endOffsetBytes": 308
+        },
+        {
+          "name": "earliest_activation_timestamp",
+          "type": "i64",
+          "offsetBytes": 308,
+          "sizeBytes": 8,
+          "endOffsetBytes": 316
+        },
+        {
+          "name": "hero_reward_base_units",
+          "type": "u64",
+          "offsetBytes": 316,
+          "sizeBytes": 8,
+          "endOffsetBytes": 324
+        },
+        {
+          "name": "proposer_reward_base_units",
+          "type": "u64",
+          "offsetBytes": 324,
+          "sizeBytes": 8,
+          "endOffsetBytes": 332
+        },
+        {
+          "name": "maximum_budget_base_units",
+          "type": "u64",
+          "offsetBytes": 332,
+          "sizeBytes": 8,
+          "endOffsetBytes": 340
+        },
+        {
+          "name": "maximum_completed_pairs",
+          "type": "u16",
+          "offsetBytes": 340,
+          "sizeBytes": 2,
+          "endOffsetBytes": 342
+        },
+        {
+          "name": "completed_pairs",
+          "type": "u16",
+          "offsetBytes": 342,
+          "sizeBytes": 2,
+          "endOffsetBytes": 344
+        },
+        {
+          "name": "hero_paid_base_units",
+          "type": "u64",
+          "offsetBytes": 344,
+          "sizeBytes": 8,
+          "endOffsetBytes": 352
+        },
+        {
+          "name": "proposer_paid_base_units",
+          "type": "u64",
+          "offsetBytes": 352,
+          "sizeBytes": 8,
+          "endOffsetBytes": 360
+        },
+        {
+          "name": "policy_hash",
+          "type": "bytes32",
+          "offsetBytes": 360,
+          "sizeBytes": 32,
+          "endOffsetBytes": 392
+        },
+        {
+          "name": "identity_domain_hash",
+          "type": "bytes32",
+          "offsetBytes": 392,
+          "sizeBytes": 32,
+          "endOffsetBytes": 424
+        }
+      ],
+      "layoutCanonicalSha256": "bb42324afd6b0ff0e1cb22312644bbc4b173880b862b5098fdaf5727f49dffe7"
+    },
+    {
+      "name": "Nomination",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "3f38ed35e24edacb",
+      "sizeBytes": 202,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "fields": [
+        {
+          "name": "version",
+          "type": "u8",
+          "offsetBytes": 8,
+          "sizeBytes": 1,
+          "endOffsetBytes": 9
+        },
+        {
+          "name": "bump",
+          "type": "u8",
+          "offsetBytes": 9,
+          "sizeBytes": 1,
+          "endOffsetBytes": 10
+        },
+        {
+          "name": "status",
+          "type": "u8",
+          "offsetBytes": 10,
+          "sizeBytes": 1,
+          "endOffsetBytes": 11
+        },
+        {
+          "name": "reserved0",
+          "type": "bytes",
+          "offsetBytes": 11,
+          "sizeBytes": 1,
+          "endOffsetBytes": 12
+        },
+        {
+          "name": "campaign",
+          "type": "pubkey",
+          "offsetBytes": 12,
+          "sizeBytes": 32,
+          "endOffsetBytes": 44
+        },
+        {
+          "name": "proposer_wallet",
+          "type": "pubkey",
+          "offsetBytes": 44,
+          "sizeBytes": 32,
+          "endOffsetBytes": 76
+        },
+        {
+          "name": "proposer_node_commitment",
+          "type": "bytes32",
+          "offsetBytes": 76,
+          "sizeBytes": 32,
+          "endOffsetBytes": 108
+        },
+        {
+          "name": "proposer_x_identity_commitment",
+          "type": "bytes32",
+          "offsetBytes": 108,
+          "sizeBytes": 32,
+          "endOffsetBytes": 140
+        },
+        {
+          "name": "hero_x_identity_commitment",
+          "type": "bytes32",
+          "offsetBytes": 140,
+          "sizeBytes": 32,
+          "endOffsetBytes": 172
+        },
+        {
+          "name": "created_at",
+          "type": "i64",
+          "offsetBytes": 172,
+          "sizeBytes": 8,
+          "endOffsetBytes": 180
+        },
+        {
+          "name": "settled_at",
+          "type": "i64",
+          "offsetBytes": 180,
+          "sizeBytes": 8,
+          "endOffsetBytes": 188
+        },
+        {
+          "name": "terminal_at",
+          "type": "i64",
+          "offsetBytes": 188,
+          "sizeBytes": 8,
+          "endOffsetBytes": 196
+        },
+        {
+          "name": "terminal_reason",
+          "type": "u16",
+          "offsetBytes": 196,
+          "sizeBytes": 2,
+          "endOffsetBytes": 198
+        },
+        {
+          "name": "sequence",
+          "type": "u32",
+          "offsetBytes": 198,
+          "sizeBytes": 4,
+          "endOffsetBytes": 202
+        }
+      ],
+      "layoutCanonicalSha256": "551e8359bf0b976e4753efad8378e7b3573ecc7418ee95603b72db892046fdfc"
+    },
+    {
+      "name": "HeroReservation",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "9de616c8f61ebf74",
+      "sizeBytes": 112,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "fields": [
+        {
+          "name": "version",
+          "type": "u8",
+          "offsetBytes": 8,
+          "sizeBytes": 1,
+          "endOffsetBytes": 9
+        },
+        {
+          "name": "bump",
+          "type": "u8",
+          "offsetBytes": 9,
+          "sizeBytes": 1,
+          "endOffsetBytes": 10
+        },
+        {
+          "name": "reserved0",
+          "type": "bytes",
+          "offsetBytes": 10,
+          "sizeBytes": 6,
+          "endOffsetBytes": 16
+        },
+        {
+          "name": "campaign",
+          "type": "pubkey",
+          "offsetBytes": 16,
+          "sizeBytes": 32,
+          "endOffsetBytes": 48
+        },
+        {
+          "name": "hero_x_identity_commitment",
+          "type": "bytes32",
+          "offsetBytes": 48,
+          "sizeBytes": 32,
+          "endOffsetBytes": 80
+        },
+        {
+          "name": "nomination",
+          "type": "pubkey",
+          "offsetBytes": 80,
+          "sizeBytes": 32,
+          "endOffsetBytes": 112
+        }
+      ],
+      "layoutCanonicalSha256": "744dd8215e811aa745058786f8170cee42a132bc1253b1ad7d95c92c557153bc"
+    },
+    {
+      "name": "RoleMarker",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "18bf19fdb7b22d2a",
+      "sizeBytes": 116,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "fields": [
+        {
+          "name": "version",
+          "type": "u8",
+          "offsetBytes": 8,
+          "sizeBytes": 1,
+          "endOffsetBytes": 9
+        },
+        {
+          "name": "bump",
+          "type": "u8",
+          "offsetBytes": 9,
+          "sizeBytes": 1,
+          "endOffsetBytes": 10
+        },
+        {
+          "name": "role",
+          "type": "u8",
+          "offsetBytes": 10,
+          "sizeBytes": 1,
+          "endOffsetBytes": 11
+        },
+        {
+          "name": "identity_kind",
+          "type": "u8",
+          "offsetBytes": 11,
+          "sizeBytes": 1,
+          "endOffsetBytes": 12
+        },
+        {
+          "name": "campaign",
+          "type": "pubkey",
+          "offsetBytes": 12,
+          "sizeBytes": 32,
+          "endOffsetBytes": 44
+        },
+        {
+          "name": "identity_value",
+          "type": "bytes32",
+          "offsetBytes": 44,
+          "sizeBytes": 32,
+          "endOffsetBytes": 76
+        },
+        {
+          "name": "settlement_receipt",
+          "type": "pubkey",
+          "offsetBytes": 76,
+          "sizeBytes": 32,
+          "endOffsetBytes": 108
+        },
+        {
+          "name": "sequence",
+          "type": "u16",
+          "offsetBytes": 108,
+          "sizeBytes": 2,
+          "endOffsetBytes": 110
+        },
+        {
+          "name": "reserved0",
+          "type": "bytes",
+          "offsetBytes": 110,
+          "sizeBytes": 6,
+          "endOffsetBytes": 116
+        }
+      ],
+      "layoutCanonicalSha256": "723dd24cc07a2af7a11b1754cb70382a54e624f9e4758fbad4bcf3f798da8416"
+    },
+    {
+      "name": "SettlementReceipt",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "7c67e7ed51192222",
+      "sizeBytes": 304,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "fields": [
+        {
+          "name": "version",
+          "type": "u8",
+          "offsetBytes": 8,
+          "sizeBytes": 1,
+          "endOffsetBytes": 9
+        },
+        {
+          "name": "bump",
+          "type": "u8",
+          "offsetBytes": 9,
+          "sizeBytes": 1,
+          "endOffsetBytes": 10
+        },
+        {
+          "name": "reserved0",
+          "type": "bytes",
+          "offsetBytes": 10,
+          "sizeBytes": 6,
+          "endOffsetBytes": 16
+        },
+        {
+          "name": "campaign",
+          "type": "pubkey",
+          "offsetBytes": 16,
+          "sizeBytes": 32,
+          "endOffsetBytes": 48
+        },
+        {
+          "name": "nomination",
+          "type": "pubkey",
+          "offsetBytes": 48,
+          "sizeBytes": 32,
+          "endOffsetBytes": 80
+        },
+        {
+          "name": "hero_wallet",
+          "type": "pubkey",
+          "offsetBytes": 80,
+          "sizeBytes": 32,
+          "endOffsetBytes": 112
+        },
+        {
+          "name": "proposer_wallet",
+          "type": "pubkey",
+          "offsetBytes": 112,
+          "sizeBytes": 32,
+          "endOffsetBytes": 144
+        },
+        {
+          "name": "hero_node_commitment",
+          "type": "bytes32",
+          "offsetBytes": 144,
+          "sizeBytes": 32,
+          "endOffsetBytes": 176
+        },
+        {
+          "name": "proposer_node_commitment",
+          "type": "bytes32",
+          "offsetBytes": 176,
+          "sizeBytes": 32,
+          "endOffsetBytes": 208
+        },
+        {
+          "name": "hero_x_identity_commitment",
+          "type": "bytes32",
+          "offsetBytes": 208,
+          "sizeBytes": 32,
+          "endOffsetBytes": 240
+        },
+        {
+          "name": "proposer_x_identity_commitment",
+          "type": "bytes32",
+          "offsetBytes": 240,
+          "sizeBytes": 32,
+          "endOffsetBytes": 272
+        },
+        {
+          "name": "settled_at",
+          "type": "i64",
+          "offsetBytes": 272,
+          "sizeBytes": 8,
+          "endOffsetBytes": 280
+        },
+        {
+          "name": "sequence",
+          "type": "u16",
+          "offsetBytes": 280,
+          "sizeBytes": 2,
+          "endOffsetBytes": 282
+        },
+        {
+          "name": "reserved1",
+          "type": "bytes",
+          "offsetBytes": 282,
+          "sizeBytes": 6,
+          "endOffsetBytes": 288
+        },
+        {
+          "name": "hero_reward_base_units",
+          "type": "u64",
+          "offsetBytes": 288,
+          "sizeBytes": 8,
+          "endOffsetBytes": 296
+        },
+        {
+          "name": "proposer_reward_base_units",
+          "type": "u64",
+          "offsetBytes": 296,
+          "sizeBytes": 8,
+          "endOffsetBytes": 304
+        }
+      ],
+      "layoutCanonicalSha256": "c3b682051cfc85c77587f0595c8eac99e50336464f3081d7473e2e7dca4106b3"
+    },
+    {
+      "name": "VerifierRegistry",
+      "compositionSource": "program-interface-key-lifecycle-amendment.v1.json",
+      "codecDomain": "iat-promotions-dlc-key-lifecycle-v1",
+      "discriminatorHex": "10f4113b6b5c8d2e",
+      "sizeBytes": 224,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "fields": [
+        {
+          "name": "version",
+          "type": "u8",
+          "offsetBytes": 8,
+          "sizeBytes": 1,
+          "endOffsetBytes": 9
+        },
+        {
+          "name": "bump",
+          "type": "u8",
+          "offsetBytes": 9,
+          "sizeBytes": 1,
+          "endOffsetBytes": 10
+        },
+        {
+          "name": "status",
+          "type": "u8",
+          "offsetBytes": 10,
+          "sizeBytes": 1,
+          "endOffsetBytes": 11
+        },
+        {
+          "name": "emergency_reason",
+          "type": "u8",
+          "offsetBytes": 11,
+          "sizeBytes": 1,
+          "endOffsetBytes": 12
+        },
+        {
+          "name": "campaign",
+          "type": "pubkey",
+          "offsetBytes": 12,
+          "sizeBytes": 32,
+          "endOffsetBytes": 44
+        },
+        {
+          "name": "identity_domain_hash",
+          "type": "bytes32",
+          "offsetBytes": 44,
+          "sizeBytes": 32,
+          "endOffsetBytes": 76
+        },
+        {
+          "name": "current_key_record",
+          "type": "pubkey",
+          "offsetBytes": 76,
+          "sizeBytes": 32,
+          "endOffsetBytes": 108
+        },
+        {
+          "name": "pending_key_record",
+          "type": "pubkey",
+          "offsetBytes": 108,
+          "sizeBytes": 32,
+          "endOffsetBytes": 140
+        },
+        {
+          "name": "minimum_notice_seconds",
+          "type": "u32",
+          "offsetBytes": 140,
+          "sizeBytes": 4,
+          "endOffsetBytes": 144
+        },
+        {
+          "name": "maximum_overlap_seconds",
+          "type": "u32",
+          "offsetBytes": 144,
+          "sizeBytes": 4,
+          "endOffsetBytes": 148
+        },
+        {
+          "name": "rotation_sequence",
+          "type": "u32",
+          "offsetBytes": 148,
+          "sizeBytes": 4,
+          "endOffsetBytes": 152
+        },
+        {
+          "name": "emergency_disabled_at",
+          "type": "i64",
+          "offsetBytes": 152,
+          "sizeBytes": 8,
+          "endOffsetBytes": 160
+        },
+        {
+          "name": "last_review_id",
+          "type": "bytes32",
+          "offsetBytes": 160,
+          "sizeBytes": 32,
+          "endOffsetBytes": 192
+        },
+        {
+          "name": "last_event_hash",
+          "type": "bytes32",
+          "offsetBytes": 192,
+          "sizeBytes": 32,
+          "endOffsetBytes": 224
+        }
+      ],
+      "layoutCanonicalSha256": "18146e2d6a9eda45f0c1961884cd13fdd64bf3f72242194397f2643c4a325165"
+    },
+    {
+      "name": "VerifierKeyRecord",
+      "compositionSource": "program-interface-key-lifecycle-amendment.v1.json",
+      "codecDomain": "iat-promotions-dlc-key-lifecycle-v1",
+      "discriminatorHex": "47c3b27493b81149",
+      "sizeBytes": 192,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "fields": [
+        {
+          "name": "version",
+          "type": "u8",
+          "offsetBytes": 8,
+          "sizeBytes": 1,
+          "endOffsetBytes": 9
+        },
+        {
+          "name": "bump",
+          "type": "u8",
+          "offsetBytes": 9,
+          "sizeBytes": 1,
+          "endOffsetBytes": 10
+        },
+        {
+          "name": "status",
+          "type": "u8",
+          "offsetBytes": 10,
+          "sizeBytes": 1,
+          "endOffsetBytes": 11
+        },
+        {
+          "name": "reserved0",
+          "type": "bytes",
+          "offsetBytes": 11,
+          "sizeBytes": 5,
+          "endOffsetBytes": 16
+        },
+        {
+          "name": "verifier_registry",
+          "type": "pubkey",
+          "offsetBytes": 16,
+          "sizeBytes": 32,
+          "endOffsetBytes": 48
+        },
+        {
+          "name": "key_id",
+          "type": "bytes32",
+          "offsetBytes": 48,
+          "sizeBytes": 32,
+          "endOffsetBytes": 80
+        },
+        {
+          "name": "public_key",
+          "type": "bytes32",
+          "offsetBytes": 80,
+          "sizeBytes": 32,
+          "endOffsetBytes": 112
+        },
+        {
+          "name": "activation_scheduled_at",
+          "type": "i64",
+          "offsetBytes": 112,
+          "sizeBytes": 8,
+          "endOffsetBytes": 120
+        },
+        {
+          "name": "activation_finalized_at",
+          "type": "i64",
+          "offsetBytes": 120,
+          "sizeBytes": 8,
+          "endOffsetBytes": 128
+        },
+        {
+          "name": "retires_at",
+          "type": "i64",
+          "offsetBytes": 128,
+          "sizeBytes": 8,
+          "endOffsetBytes": 136
+        },
+        {
+          "name": "retirement_finalized_at",
+          "type": "i64",
+          "offsetBytes": 136,
+          "sizeBytes": 8,
+          "endOffsetBytes": 144
+        },
+        {
+          "name": "cancelled_at",
+          "type": "i64",
+          "offsetBytes": 144,
+          "sizeBytes": 8,
+          "endOffsetBytes": 152
+        },
+        {
+          "name": "introduced_by_review_id",
+          "type": "bytes32",
+          "offsetBytes": 152,
+          "sizeBytes": 32,
+          "endOffsetBytes": 184
+        },
+        {
+          "name": "sequence",
+          "type": "u32",
+          "offsetBytes": 184,
+          "sizeBytes": 4,
+          "endOffsetBytes": 188
+        },
+        {
+          "name": "reserved1",
+          "type": "bytes",
+          "offsetBytes": 188,
+          "sizeBytes": 4,
+          "endOffsetBytes": 192
+        }
+      ],
+      "layoutCanonicalSha256": "e6dcf7230dee2e03bc8be156dc0cc1d942de68de9607caa471fd0ff20225fbf5"
+    },
+    {
+      "name": "VerifierReviewReceipt",
+      "compositionSource": "program-interface-key-lifecycle-amendment.v1.json",
+      "codecDomain": "iat-promotions-dlc-key-lifecycle-v1",
+      "discriminatorHex": "66753f3de34124f0",
+      "sizeBytes": 232,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "fields": [
+        {
+          "name": "version",
+          "type": "u8",
+          "offsetBytes": 8,
+          "sizeBytes": 1,
+          "endOffsetBytes": 9
+        },
+        {
+          "name": "bump",
+          "type": "u8",
+          "offsetBytes": 9,
+          "sizeBytes": 1,
+          "endOffsetBytes": 10
+        },
+        {
+          "name": "action",
+          "type": "u8",
+          "offsetBytes": 10,
+          "sizeBytes": 1,
+          "endOffsetBytes": 11
+        },
+        {
+          "name": "reason",
+          "type": "u8",
+          "offsetBytes": 11,
+          "sizeBytes": 1,
+          "endOffsetBytes": 12
+        },
+        {
+          "name": "verifier_registry",
+          "type": "pubkey",
+          "offsetBytes": 12,
+          "sizeBytes": 32,
+          "endOffsetBytes": 44
+        },
+        {
+          "name": "review_id",
+          "type": "bytes32",
+          "offsetBytes": 44,
+          "sizeBytes": 32,
+          "endOffsetBytes": 76
+        },
+        {
+          "name": "review_hash",
+          "type": "bytes32",
+          "offsetBytes": 76,
+          "sizeBytes": 32,
+          "endOffsetBytes": 108
+        },
+        {
+          "name": "rotation_id",
+          "type": "bytes32",
+          "offsetBytes": 108,
+          "sizeBytes": 32,
+          "endOffsetBytes": 140
+        },
+        {
+          "name": "old_key_id",
+          "type": "bytes32",
+          "offsetBytes": 140,
+          "sizeBytes": 32,
+          "endOffsetBytes": 172
+        },
+        {
+          "name": "new_key_id",
+          "type": "bytes32",
+          "offsetBytes": 172,
+          "sizeBytes": 32,
+          "endOffsetBytes": 204
+        },
+        {
+          "name": "occurred_at",
+          "type": "i64",
+          "offsetBytes": 204,
+          "sizeBytes": 8,
+          "endOffsetBytes": 212
+        },
+        {
+          "name": "activate_at",
+          "type": "i64",
+          "offsetBytes": 212,
+          "sizeBytes": 8,
+          "endOffsetBytes": 220
+        },
+        {
+          "name": "retire_old_at",
+          "type": "i64",
+          "offsetBytes": 220,
+          "sizeBytes": 8,
+          "endOffsetBytes": 228
+        },
+        {
+          "name": "sequence",
+          "type": "u32",
+          "offsetBytes": 228,
+          "sizeBytes": 4,
+          "endOffsetBytes": 232
+        }
+      ],
+      "layoutCanonicalSha256": "5dd7503a9ba9025cd40a11dcc9e8ee9bc535a77f9f01fa9a113e1e8106833079"
+    }
+  ],
+  "instructions": [
+    {
+      "name": "initialize_campaign",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "52711a2e2d8fc522",
+      "encodedLengthBytes": 134,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [
+        {
+          "name": "campaign_id",
+          "type": "bytes32",
+          "offsetBytes": 8,
+          "sizeBytes": 32,
+          "endOffsetBytes": 40
+        },
+        {
+          "name": "activation_offset_seconds",
+          "type": "u32",
+          "offsetBytes": 40,
+          "sizeBytes": 4,
+          "endOffsetBytes": 44
+        },
+        {
+          "name": "hero_reward_base_units",
+          "type": "u64",
+          "offsetBytes": 44,
+          "sizeBytes": 8,
+          "endOffsetBytes": 52
+        },
+        {
+          "name": "proposer_reward_base_units",
+          "type": "u64",
+          "offsetBytes": 52,
+          "sizeBytes": 8,
+          "endOffsetBytes": 60
+        },
+        {
+          "name": "maximum_budget_base_units",
+          "type": "u64",
+          "offsetBytes": 60,
+          "sizeBytes": 8,
+          "endOffsetBytes": 68
+        },
+        {
+          "name": "maximum_completed_pairs",
+          "type": "u16",
+          "offsetBytes": 68,
+          "sizeBytes": 2,
+          "endOffsetBytes": 70
+        },
+        {
+          "name": "policy_hash",
+          "type": "bytes32",
+          "offsetBytes": 70,
+          "sizeBytes": 32,
+          "endOffsetBytes": 102
+        },
+        {
+          "name": "identity_domain_hash",
+          "type": "bytes32",
+          "offsetBytes": 102,
+          "sizeBytes": 32,
+          "endOffsetBytes": 134
+        }
+      ],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "payer",
+          "signer": true,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "activation_authority",
+          "signer": true,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "review_authority",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "campaign",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 4,
+          "name": "promo_vault",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 5,
+          "name": "mint",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 6,
+          "name": "community_source_token_account",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 7,
+          "name": "community_refund_token_account",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 8,
+          "name": "verified_genesis_config",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 9,
+          "name": "token_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 10,
+          "name": "system_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "0e86705acfdda53ee1f0041ae9951af60f47f3ed0ec3749e0c2e46157e37676a"
+    },
+    {
+      "name": "fund_campaign",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "d60d9630d91b83b5",
+      "encodedLengthBytes": 16,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [
+        {
+          "name": "amount_base_units",
+          "type": "u64",
+          "offsetBytes": 8,
+          "sizeBytes": 8,
+          "endOffsetBytes": 16
+        }
+      ],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "community_funder",
+          "signer": true,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "community_source_token_account",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "campaign",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "promo_vault",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 4,
+          "name": "token_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "b2233c7d8f403dbaedb40e66c6a3863d14fa0f27dfb07bd8a3aad779f7a3f8a1"
+    },
+    {
+      "name": "activate_campaign",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "bbecedf511ee0833",
+      "encodedLengthBytes": 104,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [
+        {
+          "name": "review_hash",
+          "type": "bytes32",
+          "offsetBytes": 8,
+          "sizeBytes": 32,
+          "endOffsetBytes": 40
+        },
+        {
+          "name": "artifact_hash",
+          "type": "bytes32",
+          "offsetBytes": 40,
+          "sizeBytes": 32,
+          "endOffsetBytes": 72
+        },
+        {
+          "name": "policy_hash",
+          "type": "bytes32",
+          "offsetBytes": 72,
+          "sizeBytes": 32,
+          "endOffsetBytes": 104
+        }
+      ],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "activation_authority",
+          "signer": true,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "review_authority",
+          "signer": true,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "campaign",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "promo_vault",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 4,
+          "name": "clock_sysvar",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "1f547405008754c4c9199f423e88921fa3983d1a6efe320eb0fd2852d2cabef1"
+    },
+    {
+      "name": "cancel_campaign_pre_activation",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "af6e435314b7cdfa",
+      "encodedLengthBytes": 8,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "activation_authority",
+          "signer": true,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "campaign",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "promo_vault",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "community_refund_token_account",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 4,
+          "name": "token_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "8538536321c9198fb14364f439faafe07b9b656021adb00d638ba32b09f0fe8b"
+    },
+    {
+      "name": "nominate_hero",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "e792fab4208e9d2a",
+      "encodedLengthBytes": 184,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [
+        {
+          "name": "attestation_id",
+          "type": "bytes32",
+          "offsetBytes": 8,
+          "sizeBytes": 32,
+          "endOffsetBytes": 40
+        },
+        {
+          "name": "proposer_node_commitment",
+          "type": "bytes32",
+          "offsetBytes": 40,
+          "sizeBytes": 32,
+          "endOffsetBytes": 72
+        },
+        {
+          "name": "proposer_x_identity_commitment",
+          "type": "bytes32",
+          "offsetBytes": 72,
+          "sizeBytes": 32,
+          "endOffsetBytes": 104
+        },
+        {
+          "name": "hero_x_identity_commitment",
+          "type": "bytes32",
+          "offsetBytes": 104,
+          "sizeBytes": 32,
+          "endOffsetBytes": 136
+        },
+        {
+          "name": "nonce_hash",
+          "type": "bytes32",
+          "offsetBytes": 136,
+          "sizeBytes": 32,
+          "endOffsetBytes": 168
+        },
+        {
+          "name": "issued_at",
+          "type": "i64",
+          "offsetBytes": 168,
+          "sizeBytes": 8,
+          "endOffsetBytes": 176
+        },
+        {
+          "name": "expires_at",
+          "type": "i64",
+          "offsetBytes": 176,
+          "sizeBytes": 8,
+          "endOffsetBytes": 184
+        }
+      ],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "payer",
+          "signer": true,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "proposer_wallet",
+          "signer": true,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "campaign",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "nomination",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 4,
+          "name": "hero_reservation",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 5,
+          "name": "proposer_node_role_marker",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 6,
+          "name": "proposer_wallet_role_marker",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 7,
+          "name": "proposer_x_role_marker",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 8,
+          "name": "hero_x_role_marker",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 9,
+          "name": "verifier_registry",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 10,
+          "name": "verifier_key_record",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 11,
+          "name": "instructions_sysvar",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 12,
+          "name": "ed25519_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 13,
+          "name": "system_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "69c7d8fbd6ab9d1129d5b5e0fa37034996fb17d94ffc8fa50d4806f3cb3f6cd4"
+    },
+    {
+      "name": "cancel_nomination",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "4a6869adb543bd69",
+      "encodedLengthBytes": 88,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [
+        {
+          "name": "attestation_id",
+          "type": "bytes32",
+          "offsetBytes": 8,
+          "sizeBytes": 32,
+          "endOffsetBytes": 40
+        },
+        {
+          "name": "nonce_hash",
+          "type": "bytes32",
+          "offsetBytes": 40,
+          "sizeBytes": 32,
+          "endOffsetBytes": 72
+        },
+        {
+          "name": "issued_at",
+          "type": "i64",
+          "offsetBytes": 72,
+          "sizeBytes": 8,
+          "endOffsetBytes": 80
+        },
+        {
+          "name": "expires_at",
+          "type": "i64",
+          "offsetBytes": 80,
+          "sizeBytes": 8,
+          "endOffsetBytes": 88
+        }
+      ],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "payer",
+          "signer": true,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "proposer_wallet",
+          "signer": true,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "campaign",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "nomination",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 4,
+          "name": "hero_reservation",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 5,
+          "name": "verifier_registry",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 6,
+          "name": "verifier_key_record",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 7,
+          "name": "instructions_sysvar",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 8,
+          "name": "ed25519_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "235d600178e20d35cdef583d48b3aec315958f36ef8513a46289d8a49fcc32f0"
+    },
+    {
+      "name": "settle_pair",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "ce6d604869567c2e",
+      "encodedLengthBytes": 152,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [
+        {
+          "name": "attestation_id",
+          "type": "bytes32",
+          "offsetBytes": 8,
+          "sizeBytes": 32,
+          "endOffsetBytes": 40
+        },
+        {
+          "name": "hero_node_commitment",
+          "type": "bytes32",
+          "offsetBytes": 40,
+          "sizeBytes": 32,
+          "endOffsetBytes": 72
+        },
+        {
+          "name": "hero_x_identity_commitment",
+          "type": "bytes32",
+          "offsetBytes": 72,
+          "sizeBytes": 32,
+          "endOffsetBytes": 104
+        },
+        {
+          "name": "nonce_hash",
+          "type": "bytes32",
+          "offsetBytes": 104,
+          "sizeBytes": 32,
+          "endOffsetBytes": 136
+        },
+        {
+          "name": "issued_at",
+          "type": "i64",
+          "offsetBytes": 136,
+          "sizeBytes": 8,
+          "endOffsetBytes": 144
+        },
+        {
+          "name": "expires_at",
+          "type": "i64",
+          "offsetBytes": 144,
+          "sizeBytes": 8,
+          "endOffsetBytes": 152
+        }
+      ],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "payer",
+          "signer": true,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "campaign",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "promo_vault",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "nomination",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 4,
+          "name": "hero_reservation",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 5,
+          "name": "settlement_receipt",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 6,
+          "name": "hero_token_account",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 7,
+          "name": "proposer_token_account",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 8,
+          "name": "hero_node_role_marker",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 9,
+          "name": "hero_wallet_role_marker",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 10,
+          "name": "hero_x_role_marker",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 11,
+          "name": "proposer_node_role_marker",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 12,
+          "name": "proposer_wallet_role_marker",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 13,
+          "name": "proposer_x_role_marker",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 14,
+          "name": "mint",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 15,
+          "name": "verifier_registry",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 16,
+          "name": "verifier_key_record",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 17,
+          "name": "instructions_sysvar",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 18,
+          "name": "clock_sysvar",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 19,
+          "name": "ed25519_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 20,
+          "name": "token_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 21,
+          "name": "associated_token_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 22,
+          "name": "system_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "8f42a253891fc911c7e172c0536bf364c9111fafbbfbd28c29c7b4f97e337bcb"
+    },
+    {
+      "name": "finalize_exhausted_surplus",
+      "compositionSource": "program-interface.v0.json",
+      "codecDomain": "iat-promotions-dlc-v0",
+      "discriminatorHex": "dd58b3ad24cc5495",
+      "encodedLengthBytes": 8,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "payer",
+          "signer": true,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "campaign",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "promo_vault",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "community_refund_token_account",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 4,
+          "name": "token_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "7b892547aeb01bd9b50670c26ca3051663567bdd6412b2d7035c52447fa5df4e"
+    },
+    {
+      "name": "initialize_verifier_registry",
+      "compositionSource": "program-interface-key-lifecycle-amendment.v1.json",
+      "codecDomain": "iat-promotions-dlc-key-lifecycle-v1",
+      "discriminatorHex": "cb2845befe503c98",
+      "encodedLengthBytes": 72,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [
+        {
+          "name": "initial_public_key",
+          "type": "bytes32",
+          "offsetBytes": 8,
+          "sizeBytes": 32,
+          "endOffsetBytes": 40
+        },
+        {
+          "name": "identity_domain_hash",
+          "type": "bytes32",
+          "offsetBytes": 40,
+          "sizeBytes": 32,
+          "endOffsetBytes": 72
+        }
+      ],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "payer",
+          "signer": true,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "activation_authority",
+          "signer": true,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "campaign",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "verifier_registry",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 4,
+          "name": "initial_key_record",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 5,
+          "name": "clock_sysvar",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 6,
+          "name": "system_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "1cc5f6a479e6e0c3b56666db44d303cb1d4517429f3abec8b10b6f15a1b08aac"
+    },
+    {
+      "name": "schedule_verifier_key_rotation",
+      "compositionSource": "program-interface-key-lifecycle-amendment.v1.json",
+      "codecDomain": "iat-promotions-dlc-key-lifecycle-v1",
+      "discriminatorHex": "512360ff581e7225",
+      "encodedLengthBytes": 120,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [
+        {
+          "name": "new_public_key",
+          "type": "bytes32",
+          "offsetBytes": 8,
+          "sizeBytes": 32,
+          "endOffsetBytes": 40
+        },
+        {
+          "name": "activate_at",
+          "type": "i64",
+          "offsetBytes": 40,
+          "sizeBytes": 8,
+          "endOffsetBytes": 48
+        },
+        {
+          "name": "retire_old_at",
+          "type": "i64",
+          "offsetBytes": 48,
+          "sizeBytes": 8,
+          "endOffsetBytes": 56
+        },
+        {
+          "name": "review_id",
+          "type": "bytes32",
+          "offsetBytes": 56,
+          "sizeBytes": 32,
+          "endOffsetBytes": 88
+        },
+        {
+          "name": "review_hash",
+          "type": "bytes32",
+          "offsetBytes": 88,
+          "sizeBytes": 32,
+          "endOffsetBytes": 120
+        }
+      ],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "payer",
+          "signer": true,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "review_authority",
+          "signer": true,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "verifier_registry",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "current_key_record",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 4,
+          "name": "new_key_record",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 5,
+          "name": "review_receipt",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 6,
+          "name": "clock_sysvar",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 7,
+          "name": "system_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "bb91dbdfb2df1274c8992757e861b5558c4b507733a72bb71d97e3a09494b41f"
+    },
+    {
+      "name": "activate_scheduled_verifier_key",
+      "compositionSource": "program-interface-key-lifecycle-amendment.v1.json",
+      "codecDomain": "iat-promotions-dlc-key-lifecycle-v1",
+      "discriminatorHex": "31622d84d33f2264",
+      "encodedLengthBytes": 40,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [
+        {
+          "name": "rotation_id",
+          "type": "bytes32",
+          "offsetBytes": 8,
+          "sizeBytes": 32,
+          "endOffsetBytes": 40
+        }
+      ],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "payer",
+          "signer": true,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "verifier_registry",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "old_key_record",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "new_key_record",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 4,
+          "name": "clock_sysvar",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "d29abf86b1bac04b3d4b9180911e50b0eba0b29dacfbbe80158bbad0fa5ff2fe"
+    },
+    {
+      "name": "finalize_verifier_key_retirement",
+      "compositionSource": "program-interface-key-lifecycle-amendment.v1.json",
+      "codecDomain": "iat-promotions-dlc-key-lifecycle-v1",
+      "discriminatorHex": "2fba0b80950c4788",
+      "encodedLengthBytes": 40,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [
+        {
+          "name": "key_id",
+          "type": "bytes32",
+          "offsetBytes": 8,
+          "sizeBytes": 32,
+          "endOffsetBytes": 40
+        }
+      ],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "payer",
+          "signer": true,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "verifier_registry",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "retiring_key_record",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "clock_sysvar",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "24a45a6d34b457bb6e3773e0f35f30babe8a2aa4c44e7b5eee031d3114b74b8b"
+    },
+    {
+      "name": "emergency_disable_verifier_registry",
+      "compositionSource": "program-interface-key-lifecycle-amendment.v1.json",
+      "codecDomain": "iat-promotions-dlc-key-lifecycle-v1",
+      "discriminatorHex": "573f5e45ddd67e1b",
+      "encodedLengthBytes": 74,
+      "discriminator": {
+        "offsetBytes": 0,
+        "sizeBytes": 8,
+        "endOffsetBytes": 8
+      },
+      "data": [
+        {
+          "name": "reason",
+          "type": "u16",
+          "offsetBytes": 8,
+          "sizeBytes": 2,
+          "endOffsetBytes": 10
+        },
+        {
+          "name": "review_id",
+          "type": "bytes32",
+          "offsetBytes": 10,
+          "sizeBytes": 32,
+          "endOffsetBytes": 42
+        },
+        {
+          "name": "review_hash",
+          "type": "bytes32",
+          "offsetBytes": 42,
+          "sizeBytes": 32,
+          "endOffsetBytes": 74
+        }
+      ],
+      "accountMetas": [
+        {
+          "index": 0,
+          "name": "payer",
+          "signer": true,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 1,
+          "name": "emergency_review_authority",
+          "signer": true,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 2,
+          "name": "verifier_registry",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 3,
+          "name": "pending_key_record",
+          "signer": false,
+          "writable": true,
+          "optional": true
+        },
+        {
+          "index": 4,
+          "name": "review_receipt",
+          "signer": false,
+          "writable": true,
+          "optional": false
+        },
+        {
+          "index": 5,
+          "name": "clock_sysvar",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        },
+        {
+          "index": 6,
+          "name": "system_program",
+          "signer": false,
+          "writable": false,
+          "optional": false
+        }
+      ],
+      "layoutCanonicalSha256": "027a501c81ee97ad9d55e4b7dd430e7d2bb4f5d923e4b8d578abb8897b1a0978"
+    }
+  ]
+}

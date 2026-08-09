@@ -1,0 +1,384 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-settlement-contention-composition-schema-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "vectorsApplied": false
+  },
+  "sources": {
+    "baseArtifact": {
+      "path": "settlement-contention-composition-vectors.v1.json",
+      "canonicalSha256": "fcb45fc91f025ba043cd60e0d670a8b917ffd6d32eb9995612cdee79969a4faf"
+    },
+    "closedSchema": {
+      "path": "settlement-contention-composition-vectors.schema.v1.json",
+      "canonicalSha256": "966b9822e2aa940dc8241500b4d33b53bc2a169dca1ea679a66b1cac22f5f830"
+    },
+    "nodeEvaluator": {
+      "path": "settlement-contention-composition-schema-mutations.mjs",
+      "normalizedTextSha256": "6f7cd62c0a4e88ffa7691c381af8560753692f45ea94690af466475b0f18194a"
+    },
+    "pythonVerifier": {
+      "path": "verify-settlement-contention-vectors.py",
+      "normalizedTextSha256": "e3236cf982660bc75890de45175bdc616482c0e43331fa5d8917a77c20d2372d"
+    },
+    "generator": {
+      "path": "generate-settlement-contention-composition-schema-vectors.mjs",
+      "normalizedTextSha256": "ca0d95283655fc650f82123daa7cb7ae818139c75dc1e7c7717a4a3e6b923065"
+    }
+  },
+  "contract": {
+    "mode": "DETERMINISTIC_CLOSED_SCHEMA_DIAGNOSTIC_PARITY",
+    "caseCount": 12,
+    "exactNodePythonDiagnosticsRequired": true,
+    "mutatedCandidatesRuntimeOnly": true,
+    "usesLocalValidator": false,
+    "usesRpc": false,
+    "usesWallet": false,
+    "preparesTransactions": false,
+    "signsTransactions": false,
+    "broadcastsTransactions": false,
+    "issuesReviewReceipts": false,
+    "completesReview": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "summary": {
+    "caseCount": "12",
+    "allRejected": true,
+    "exactDiagnosticsPublished": true,
+    "commonReplayCommitmentSha256": "177a1030a7606fd8370310b237ddf2cf0c25e62870741a72c709caf312ea2118",
+    "caseSetCommitmentSha256": "13b7e986bdf96ab94eeefaba6b479b8b3ed24b6228245bb726ad3744545a8442",
+    "runtimeCandidateStored": false,
+    "receiptIssued": false,
+    "reviewCompleted": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "cases": [
+    {
+      "caseId": "ROOT_CANDIDATE_FIELD",
+      "family": "CLOSED_ROOT",
+      "mutation": {
+        "operation": "add",
+        "path": "/candidate",
+        "value": {}
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "0f46df7cab8ecfef753c962ea04c0db82ccbb14551f93f232f05bb6ac450138c",
+      "diagnostics": [
+        {
+          "instancePath": "/candidate",
+          "schemaPath": "#/additionalProperties",
+          "keyword": "additionalProperties",
+          "message": "is not allowed"
+        }
+      ],
+      "diagnosticCommitmentSha256": "5ce298a11a49e4aaa3d080424c613a37e5e7a6d4b9b98aae150af5c1d48b348f",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "f4e7dddeac424f3a5c2ad7476e95248752f6a5bad75d68d41c67014f4b75a2ec"
+    },
+    {
+      "caseId": "CASE_EXPANDED_STATE",
+      "family": "CLOSED_CASE",
+      "mutation": {
+        "operation": "add",
+        "path": "/cases/0/expandedState",
+        "value": {}
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "4a085072c37b22d36482c0a14b17029290a7795456844731e08ea742caaa2185",
+      "diagnostics": [
+        {
+          "instancePath": "/cases/0/expandedState",
+          "schemaPath": "#/definitions/case/additionalProperties",
+          "keyword": "additionalProperties",
+          "message": "is not allowed"
+        }
+      ],
+      "diagnosticCommitmentSha256": "f5584b8a2fe5d66c585d1364f47b4d9be01b51c5df77e6085ace717805122111",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "532f0d10394631e5bced7b1e6cb25704347f94b08035b9ced0074bfb2436c0e8"
+    },
+    {
+      "caseId": "REMOVAL_TRACE_FIELD",
+      "family": "CLOSED_REMOVAL",
+      "mutation": {
+        "operation": "add",
+        "path": "/cases/0/removalChecks/0/trace",
+        "value": []
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "bffcfb2b9ca8a5e7acfd0516b1768f54dda298da8f6177fb8689438c7a387e21",
+      "diagnostics": [
+        {
+          "instancePath": "/cases/0/removalChecks/0/trace",
+          "schemaPath": "#/definitions/removalCheck/additionalProperties",
+          "keyword": "additionalProperties",
+          "message": "is not allowed"
+        }
+      ],
+      "diagnosticCommitmentSha256": "791856b234619f58686d137433a1224e64436387975fefc694c072c942c2dfb9",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "f1bd895c94d06376591bf76d5c46a242cadd6ed4d75ae5da9526b433fdc05000"
+    },
+    {
+      "caseId": "STATUS_NETWORK_MAINNET",
+      "family": "HOLD_STATUS",
+      "mutation": {
+        "operation": "replace",
+        "path": "/status/network",
+        "value": "MAINNET"
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "d7a70b5a31a349b5724d7521ebe08cbcbf73db64965ef3665304ebd378d5347a",
+      "diagnostics": [
+        {
+          "instancePath": "/status/network",
+          "schemaPath": "#/definitions/status/properties/network/const",
+          "keyword": "const",
+          "message": "must equal the fixed value"
+        }
+      ],
+      "diagnosticCommitmentSha256": "1148c52da4dd78e05020fcf216ed6333feb32dd28a78a258c48f430a340e288a",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "c967933eff08c2a4d93bfd0989395d64ed93c28d6e465b29d5e5ed65e6cddb07"
+    },
+    {
+      "caseId": "CONTRACT_RPC_ENABLED",
+      "family": "CAPABILITY",
+      "mutation": {
+        "operation": "replace",
+        "path": "/contract/usesRpc",
+        "value": true
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "1050f67f3c9160c911d6fe0652bdf815f7252508f3be1d210636ef88248713c0",
+      "diagnostics": [
+        {
+          "instancePath": "/contract/usesRpc",
+          "schemaPath": "#/definitions/falseGate/const",
+          "keyword": "const",
+          "message": "must equal the fixed value"
+        }
+      ],
+      "diagnosticCommitmentSha256": "81511bb34c2513ae2e0e1d32608097838e8f7b90323bfcdc94271a0e29d7fc64",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "58a9812e7baa5d39ddab486c06f0e128fee99b6a2011cb4d664e4ceeef2da5a3"
+    },
+    {
+      "caseId": "CONTRACT_WALLET_ENABLED",
+      "family": "CAPABILITY",
+      "mutation": {
+        "operation": "replace",
+        "path": "/contract/usesWallet",
+        "value": true
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "d0a51ac0f30e022eae429d0a2855d89475d35cbbb96d5965fd7fab55015b672f",
+      "diagnostics": [
+        {
+          "instancePath": "/contract/usesWallet",
+          "schemaPath": "#/definitions/falseGate/const",
+          "keyword": "const",
+          "message": "must equal the fixed value"
+        }
+      ],
+      "diagnosticCommitmentSha256": "3a43a9b544e01bdf82ad09b3c3b9ee84a556ba776dc79658d2c9df032b8b9b75",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "817bf019b2628415d3ad6305cd6e87b22636e778b9fdde26b5cf13387644d495"
+    },
+    {
+      "caseId": "CONTRACT_PREPARATION_ENABLED",
+      "family": "CAPABILITY",
+      "mutation": {
+        "operation": "replace",
+        "path": "/contract/preparesTransactions",
+        "value": true
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "eb2658185a9bc8c89b1610b698516f271a712bd2a5ebddeacfbab55bb8668e60",
+      "diagnostics": [
+        {
+          "instancePath": "/contract/preparesTransactions",
+          "schemaPath": "#/definitions/falseGate/const",
+          "keyword": "const",
+          "message": "must equal the fixed value"
+        }
+      ],
+      "diagnosticCommitmentSha256": "63ea41e828e941bd6f10b34ebe568a0bdbc4fb1c9181d660797031c953963ada",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "11c15b32e5e4d0265f8714a671bdf7822288db1e841ae741697ba2401431142e"
+    },
+    {
+      "caseId": "CONTRACT_ACTIVATION_AUTHORIZED",
+      "family": "AUTHORITY",
+      "mutation": {
+        "operation": "replace",
+        "path": "/contract/activationAuthorized",
+        "value": true
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "23194d2083ce108474dbb3509e978cc50c334481f5fb3a77ba3c77c780a7f325",
+      "diagnostics": [
+        {
+          "instancePath": "/contract/activationAuthorized",
+          "schemaPath": "#/definitions/falseGate/const",
+          "keyword": "const",
+          "message": "must equal the fixed value"
+        }
+      ],
+      "diagnosticCommitmentSha256": "4b9d2353832e204e59f678f6a47dcc98f2572e367f89e2cf323c5e61a224b7f5",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "a71ec1212fe5e6c116ce4914497561d547a494aee426af5db396fbc14710dab5"
+    },
+    {
+      "caseId": "SUMMARY_REVIEW_COMPLETED",
+      "family": "AUTHORITY",
+      "mutation": {
+        "operation": "replace",
+        "path": "/summary/reviewCompleted",
+        "value": true
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "66fb34cdf7e44e08d85350fc0f10e5408aa4ec0ae52f2f949a8bf1bfd85c2299",
+      "diagnostics": [
+        {
+          "instancePath": "/summary/reviewCompleted",
+          "schemaPath": "#/definitions/falseGate/const",
+          "keyword": "const",
+          "message": "must equal the fixed value"
+        }
+      ],
+      "diagnosticCommitmentSha256": "4abfd4facbd417ee4a70dc282a8a457b0f6297da54c706ca350c645e8a218cb7",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "af3f0692e1f35906d28390517fc21a8fb7dedbb98868d2accb757ac1be872f2d"
+    },
+    {
+      "caseId": "REMOVAL_OBSERVED_TWO_GATES",
+      "family": "CARDINALITY",
+      "mutation": {
+        "operation": "replace",
+        "path": "/cases/0/removalChecks/0/observedGates",
+        "value": [
+          "STATUS",
+          "CAPABILITY"
+        ]
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "8de24068af479229383239eb77a520204053b9ccfd63afa867bb2bd69aa60871",
+      "diagnostics": [
+        {
+          "instancePath": "/cases/0/removalChecks/0/observedGates",
+          "schemaPath": "#/definitions/removalCheck/properties/observedGates/maxItems",
+          "keyword": "maxItems",
+          "message": "has too many items"
+        }
+      ],
+      "diagnosticCommitmentSha256": "c5e5360239bd5f7b868f90a1a5e229b35644ff29aa164291cb1ff8cd94607f7d",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "239d98a6fe078561dcb8a918dc49f5195d2ebfb03b29301d0e233ff81eb0b7a9"
+    },
+    {
+      "caseId": "REMOVAL_HASH_UPPERCASE",
+      "family": "CANONICAL_HEX",
+      "mutation": {
+        "operation": "replace",
+        "path": "/cases/0/removalChecks/0/candidateCommitmentSha256",
+        "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "166094f8885a8a497c99f85939517a4dbba8ada4e0b8bb280a5347cc9a96aaf9",
+      "diagnostics": [
+        {
+          "instancePath": "/cases/0/removalChecks/0/candidateCommitmentSha256",
+          "schemaPath": "#/definitions/hex64/pattern",
+          "keyword": "pattern",
+          "message": "must match the fixed pattern"
+        }
+      ],
+      "diagnosticCommitmentSha256": "da3db804ae8b69f0989ee001270a3983078ddab1d7db09bac148e05cf1f28e39",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "303df7214ab54545c5ab0f73bec405b0e964256714768d0e6a25ac1e2892e5ca"
+    },
+    {
+      "caseId": "REMOVAL_UNKNOWN_GATE",
+      "family": "GATE_ENUM",
+      "mutation": {
+        "operation": "replace",
+        "path": "/cases/0/removalChecks/0/remainingGate",
+        "value": "UNKNOWN"
+      },
+      "expectedAccepted": false,
+      "candidateCommitmentSha256": "442ee656153155cfef1cf56e438a7e4e0090eab17318ba86c14c059be94c28ac",
+      "diagnostics": [
+        {
+          "instancePath": "/cases/0/removalChecks/0/remainingGate",
+          "schemaPath": "#/definitions/gate/enum",
+          "keyword": "enum",
+          "message": "must equal one allowed value"
+        }
+      ],
+      "diagnosticCommitmentSha256": "816894915a8d3271ebe705f52daccee2ad90ef842cb7f03035b851308a72a9ce",
+      "runtimeCandidateStored": false,
+      "receiptIssued": false,
+      "reviewCompleted": false,
+      "activationAuthorized": false,
+      "activationEffect": "NONE",
+      "caseCommitmentSha256": "dea702887a0ae99cb440e1e343789919437a7f64e2bb3978c43d80e4054abd9f"
+    }
+  ]
+}

@@ -1,0 +1,280 @@
+{
+  "eventInterfaceVersion": 1,
+  "eventInterfaceId": "iat-promotions-dlc-events-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "compositionApplied": false,
+    "eventInterfaceApplied": false
+  },
+  "sourcePreview": {
+    "path": "program-interface-composition-preview.v1.json",
+    "canonicalSha256": "eba0b92f94716b45d259fc64ada687a35a4e35f34e953389fd1aa44fd073e978"
+  },
+  "codec": {
+    "discriminatorDomain": "iat-promotions-dlc-events-v1",
+    "discriminatorBytes": 8,
+    "integerEndian": "little",
+    "variableLengthFields": false,
+    "integerJsonRepresentation": "decimal-string",
+    "byteStringRepresentation": "lowercase-hex"
+  },
+  "auditRules": {
+    "emitOnlyAfterSuccessfulInstruction": true,
+    "failedInstructionEmitsNothing": true,
+    "eventRollsBackWithTransaction": true,
+    "accountsAndReceiptsRemainAuthoritative": true,
+    "eventsCannotAuthorizeStateChange": true,
+    "rawXUserIdForbidden": true,
+    "mutableXHandleForbidden": true,
+    "identityCommitmentsOnly": true,
+    "exhaustionInvalidatesPendingWithoutBulkAccountMutation": true,
+    "verifierEventsAdvanceRegistryHashChain": true
+  },
+  "events": [
+    {
+      "name": "CampaignInitialized",
+      "discriminatorHex": "b894926649ff491b",
+      "trigger": { "instruction": "initialize_campaign", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "campaign", "type": "pubkey" },
+        { "name": "mint", "type": "pubkey" },
+        { "name": "genesis_timestamp", "type": "i64" },
+        { "name": "earliest_activation_timestamp", "type": "i64" },
+        { "name": "maximum_budget_base_units", "type": "u64" },
+        { "name": "maximum_completed_pairs", "type": "u16" },
+        { "name": "policy_hash", "type": "bytes32" },
+        { "name": "identity_domain_hash", "type": "bytes32" }
+      ]
+    },
+    {
+      "name": "CampaignFunded",
+      "discriminatorHex": "66de8f8f2a1c58c0",
+      "trigger": { "instruction": "fund_campaign", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "semanticGuards": ["AMOUNT_EQUALS_180000000000000", "VAULT_BALANCE_EQUALS_AMOUNT"],
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "campaign", "type": "pubkey" },
+        { "name": "amount_base_units", "type": "u64" },
+        { "name": "vault_balance_base_units", "type": "u64" }
+      ]
+    },
+    {
+      "name": "CampaignActivated",
+      "discriminatorHex": "9ea48f6fc472253f",
+      "trigger": { "instruction": "activate_campaign", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "campaign", "type": "pubkey" },
+        { "name": "activated_at", "type": "i64" },
+        { "name": "review_hash", "type": "bytes32" },
+        { "name": "artifact_hash", "type": "bytes32" },
+        { "name": "policy_hash", "type": "bytes32" }
+      ]
+    },
+    {
+      "name": "CampaignCancelledPreActivation",
+      "discriminatorHex": "7e52e53d3a0eeeed",
+      "trigger": { "instruction": "cancel_campaign_pre_activation", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "campaign", "type": "pubkey" },
+        { "name": "refund_destination", "type": "pubkey" },
+        { "name": "refunded_base_units", "type": "u64" },
+        { "name": "occurred_at", "type": "i64" }
+      ]
+    },
+    {
+      "name": "HeroNominated",
+      "discriminatorHex": "36351921ca551061",
+      "trigger": { "instruction": "nominate_hero", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "campaign", "type": "pubkey" },
+        { "name": "nomination", "type": "pubkey" },
+        { "name": "proposer_wallet", "type": "pubkey" },
+        { "name": "proposer_node_commitment", "type": "bytes32" },
+        { "name": "proposer_x_identity_commitment", "type": "bytes32" },
+        { "name": "hero_x_identity_commitment", "type": "bytes32" },
+        { "name": "attestation_id", "type": "bytes32" },
+        { "name": "nonce_hash", "type": "bytes32" },
+        { "name": "occurred_at", "type": "i64" }
+      ]
+    },
+    {
+      "name": "NominationCancelled",
+      "discriminatorHex": "c1f640475fb63e80",
+      "trigger": { "instruction": "cancel_nomination", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "campaign", "type": "pubkey" },
+        { "name": "nomination", "type": "pubkey" },
+        { "name": "proposer_wallet", "type": "pubkey" },
+        { "name": "attestation_id", "type": "bytes32" },
+        { "name": "occurred_at", "type": "i64" }
+      ]
+    },
+    {
+      "name": "PairSettled",
+      "discriminatorHex": "f51d40b7bc7bd9d9",
+      "trigger": { "instruction": "settle_pair", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "semanticGuards": [
+        "HERO_REWARD_EQUALS_120000000000",
+        "PROPOSER_REWARD_EQUALS_60000000000",
+        "RECEIPT_AND_COUNTER_ALREADY_COMMITTED",
+        "EVENT_EMITTED_AFTER_BOTH_TRANSFERS_SUCCEED"
+      ],
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "campaign", "type": "pubkey" },
+        { "name": "nomination", "type": "pubkey" },
+        { "name": "settlement_receipt", "type": "pubkey" },
+        { "name": "hero_wallet", "type": "pubkey" },
+        { "name": "proposer_wallet", "type": "pubkey" },
+        { "name": "hero_node_commitment", "type": "bytes32" },
+        { "name": "proposer_node_commitment", "type": "bytes32" },
+        { "name": "hero_x_identity_commitment", "type": "bytes32" },
+        { "name": "proposer_x_identity_commitment", "type": "bytes32" },
+        { "name": "hero_reward_base_units", "type": "u64" },
+        { "name": "proposer_reward_base_units", "type": "u64" },
+        { "name": "sequence", "type": "u16" },
+        { "name": "completed_pairs", "type": "u16" },
+        { "name": "vault_balance_base_units", "type": "u64" },
+        { "name": "settled_at", "type": "i64" }
+      ]
+    },
+    {
+      "name": "CampaignExhausted",
+      "discriminatorHex": "0e3eb35dd2a7864d",
+      "trigger": { "instruction": "settle_pair", "cardinality": "ONCE_WHEN_COMPLETED_PAIRS_REACH_1000" },
+      "semanticGuards": [
+        "COMPLETED_PAIRS_EQUALS_1000",
+        "TOTAL_PAID_EQUALS_180000000000000",
+        "CAMPAIGN_STATUS_IS_TERMINAL_EXHAUSTED",
+        "PENDING_NOMINATIONS_INVALIDATED_BY_CAMPAIGN_STATUS_WITHOUT_BULK_WRITES"
+      ],
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "campaign", "type": "pubkey" },
+        { "name": "triggering_settlement_receipt", "type": "pubkey" },
+        { "name": "completed_pairs", "type": "u16" },
+        { "name": "total_paid_base_units", "type": "u64" },
+        { "name": "vault_balance_base_units", "type": "u64" },
+        { "name": "occurred_at", "type": "i64" }
+      ]
+    },
+    {
+      "name": "ExhaustedSurplusFinalized",
+      "discriminatorHex": "a9add2e4c27887d8",
+      "trigger": { "instruction": "finalize_exhausted_surplus", "cardinality": "AT_MOST_ONE_ON_SUCCESS" },
+      "semanticGuards": ["REFUND_DESTINATION_EQUALS_IMMUTABLE_COMMUNITY_REFUND"],
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "campaign", "type": "pubkey" },
+        { "name": "refund_destination", "type": "pubkey" },
+        { "name": "returned_base_units", "type": "u64" },
+        { "name": "occurred_at", "type": "i64" }
+      ]
+    },
+    {
+      "name": "VerifierRegistryInitialized",
+      "discriminatorHex": "fb29c5160fe6daab",
+      "trigger": { "instruction": "initialize_verifier_registry", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "semanticGuards": ["EVENT_HASH_EQUALS_REGISTRY_LAST_EVENT_HASH"],
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "verifier_registry", "type": "pubkey" },
+        { "name": "campaign", "type": "pubkey" },
+        { "name": "initial_key_record", "type": "pubkey" },
+        { "name": "key_id", "type": "bytes32" },
+        { "name": "public_key", "type": "bytes32" },
+        { "name": "identity_domain_hash", "type": "bytes32" },
+        { "name": "occurred_at", "type": "i64" },
+        { "name": "previous_event_hash", "type": "bytes32" },
+        { "name": "event_hash", "type": "bytes32" }
+      ]
+    },
+    {
+      "name": "VerifierKeyRotationScheduled",
+      "discriminatorHex": "1e97a2a45860022c",
+      "trigger": { "instruction": "schedule_verifier_key_rotation", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "semanticGuards": ["EVENT_HASH_EQUALS_REGISTRY_LAST_EVENT_HASH"],
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "verifier_registry", "type": "pubkey" },
+        { "name": "rotation_id", "type": "bytes32" },
+        { "name": "old_key_id", "type": "bytes32" },
+        { "name": "new_key_id", "type": "bytes32" },
+        { "name": "new_public_key", "type": "bytes32" },
+        { "name": "activate_at", "type": "i64" },
+        { "name": "retire_old_at", "type": "i64" },
+        { "name": "review_id", "type": "bytes32" },
+        { "name": "review_hash", "type": "bytes32" },
+        { "name": "occurred_at", "type": "i64" },
+        { "name": "previous_event_hash", "type": "bytes32" },
+        { "name": "event_hash", "type": "bytes32" }
+      ]
+    },
+    {
+      "name": "VerifierKeyRotationActivated",
+      "discriminatorHex": "2f707f9fafec96f8",
+      "trigger": { "instruction": "activate_scheduled_verifier_key", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "semanticGuards": ["EVENT_HASH_EQUALS_REGISTRY_LAST_EVENT_HASH"],
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "verifier_registry", "type": "pubkey" },
+        { "name": "rotation_id", "type": "bytes32" },
+        { "name": "old_key_id", "type": "bytes32" },
+        { "name": "new_key_id", "type": "bytes32" },
+        { "name": "retire_old_at", "type": "i64" },
+        { "name": "occurred_at", "type": "i64" },
+        { "name": "previous_event_hash", "type": "bytes32" },
+        { "name": "event_hash", "type": "bytes32" }
+      ]
+    },
+    {
+      "name": "VerifierKeyRetirementFinalized",
+      "discriminatorHex": "b4c5003e1b3c293f",
+      "trigger": { "instruction": "finalize_verifier_key_retirement", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "semanticGuards": ["EVENT_HASH_EQUALS_REGISTRY_LAST_EVENT_HASH"],
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "verifier_registry", "type": "pubkey" },
+        { "name": "key_id", "type": "bytes32" },
+        { "name": "occurred_at", "type": "i64" },
+        { "name": "previous_event_hash", "type": "bytes32" },
+        { "name": "event_hash", "type": "bytes32" }
+      ]
+    },
+    {
+      "name": "VerifierRegistryEmergencyDisabled",
+      "discriminatorHex": "591d54081b08b9ad",
+      "trigger": { "instruction": "emergency_disable_verifier_registry", "cardinality": "EXACTLY_ONE_ON_SUCCESS" },
+      "semanticGuards": [
+        "EVENT_HASH_EQUALS_REGISTRY_LAST_EVENT_HASH",
+        "ZERO_CANCELLED_ROTATION_ID_MEANS_NONE",
+        "EMERGENCY_DISABLE_IS_TERMINAL"
+      ],
+      "fields": [
+        { "name": "version", "type": "u8" },
+        { "name": "verifier_registry", "type": "pubkey" },
+        { "name": "reason", "type": "u16" },
+        { "name": "review_id", "type": "bytes32" },
+        { "name": "review_hash", "type": "bytes32" },
+        { "name": "cancelled_rotation_id", "type": "bytes32" },
+        { "name": "occurred_at", "type": "i64" },
+        { "name": "previous_event_hash", "type": "bytes32" },
+        { "name": "event_hash", "type": "bytes32" }
+      ]
+    }
+  ]
+}

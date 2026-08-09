@@ -1,0 +1,3277 @@
+{
+  "vectorVersion": 1,
+  "vectorId": "iat-promotions-dlc-positive-campaign-vector-intake-differential-vectors-v1",
+  "status": {
+    "labels": [
+      "DRAFT",
+      "INACTIVE",
+      "NOT PART OF GENESIS",
+      "NOT DEPLOYED",
+      "NO CLAIM ROUTE"
+    ],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "differentialCorpusApplied": false,
+    "positiveVectorAvailable": false,
+    "positiveVectorReviewCompleted": false,
+    "positiveVectorIntegrationBlocked": true
+  },
+  "sources": {
+    "baseVectors": {
+      "path": "positive-campaign-vector-intake-vectors.v1.json",
+      "canonicalSha256": "d243e155506610c1c0c1fe238cac21060df4fc9fa232a32cce748cb7122e6d64"
+    },
+    "intakeSchema": {
+      "path": "positive-campaign-vector-intake.schema.v1.json",
+      "canonicalSha256": "a3cb6912cf21662e144260a015ec5ab4928d9ee04924f91a805434dd40dfd83e"
+    },
+    "nodeEvaluator": {
+      "path": "positive-campaign-vector-intake.mjs",
+      "normalizedTextSha256": "6b756a100eaa0c896cc5c70503e36eff96d90c0bf99af578c111b5ed0e3ead4e"
+    },
+    "pythonVerifier": {
+      "path": "verify-positive-campaign-vector-intake.py",
+      "normalizedTextSha256": "6435272883716425001573273b3166d759edefbcdb615691e62db84775b116de"
+    }
+  },
+  "contract": {
+    "mode": "CROSS_RUNTIME_VERIFY_ONLY_REJECTION_ONLY",
+    "gateOrder": [
+      "CLOSED_SCHEMA",
+      "EXPECTED_TARGET",
+      "PRIVATE_MATERIAL_EXCLUSION",
+      "EXTERNAL_PROVENANCE",
+      "CANONICAL_MESSAGE_BINDING",
+      "CRYPTOGRAPHIC_SIGNATURE",
+      "INDEPENDENT_VECTOR_REVIEW",
+      "NON_AUTHORITY"
+    ],
+    "mutationCount": 20,
+    "everyMutationRejected": true,
+    "nodeAndPythonMustMatchExactly": true,
+    "validPositiveCampaignVectorPublished": false,
+    "signingMaterialIncluded": false,
+    "createsKeys": false,
+    "createsSignatures": false,
+    "issuesReviewReceipts": false,
+    "completesReview": false,
+    "activationAuthorized": false,
+    "activationEffect": "NONE"
+  },
+  "evaluationTime": 1800100001,
+  "scenarios": [
+    {
+      "name": "CANDIDATE_INTAKE_VERSION_CHANGED",
+      "family": "CLOSED_SCHEMA",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace",
+        "path": "/intakeVersion",
+        "value": 2
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 2,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": false,
+        "schemaErrors": [
+          {
+            "instancePath": "/intakeVersion",
+            "schemaPath": "#/properties/intakeVersion/const",
+            "keyword": "const",
+            "message": "must equal the fixed value"
+          }
+        ],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "NOT_EVALUATED",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "FAIL",
+            "detail": "STRUCTURE_REJECTED"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "NOT_EVALUATED"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "FAIL",
+            "detail": "AUTHORITY_CLAIM_REJECTED"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_STATUS_REMOVED",
+      "family": "CLOSED_SCHEMA",
+      "document": "candidate",
+      "mutation": {
+        "operation": "remove",
+        "path": "/status"
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": false,
+        "schemaErrors": [
+          {
+            "instancePath": "",
+            "schemaPath": "#/required",
+            "keyword": "required",
+            "message": "missing status"
+          }
+        ],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "NOT_EVALUATED",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "FAIL",
+            "detail": "STRUCTURE_REJECTED"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "NOT_EVALUATED"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "FAIL",
+            "detail": "AUTHORITY_CLAIM_REJECTED"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_UNKNOWN_TOP_LEVEL_FIELD",
+      "family": "CLOSED_SCHEMA",
+      "document": "candidate",
+      "mutation": {
+        "operation": "add",
+        "path": "/unexpected",
+        "value": false
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        },
+        "unexpected": false
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": false,
+        "schemaErrors": [
+          {
+            "instancePath": "/unexpected",
+            "schemaPath": "#/additionalProperties",
+            "keyword": "additionalProperties",
+            "message": "is not allowed"
+          }
+        ],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "NOT_EVALUATED",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "FAIL",
+            "detail": "STRUCTURE_REJECTED"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "NOT_EVALUATED"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "FAIL",
+            "detail": "AUTHORITY_CLAIM_REJECTED"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_HOLD_LABELS_REORDERED",
+      "family": "CLOSED_SCHEMA",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace",
+        "path": "/status/labels",
+        "value": [
+          "NO CLAIM ROUTE",
+          "NOT DEPLOYED",
+          "NOT PART OF GENESIS",
+          "INACTIVE",
+          "DRAFT"
+        ]
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "NO CLAIM ROUTE",
+            "NOT DEPLOYED",
+            "NOT PART OF GENESIS",
+            "INACTIVE",
+            "DRAFT"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": false,
+        "schemaErrors": [
+          {
+            "instancePath": "/status/labels",
+            "schemaPath": "#/definitions/status/properties/labels/const",
+            "keyword": "const",
+            "message": "must equal the fixed value"
+          }
+        ],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "NOT_EVALUATED",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "FAIL",
+            "detail": "STRUCTURE_REJECTED"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "NOT_EVALUATED"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "FAIL",
+            "detail": "AUTHORITY_CLAIM_REJECTED"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "EXPECTED_TARGET_KEYS_REORDERED",
+      "family": "EXPECTED_TARGET",
+      "document": "expectedTarget",
+      "mutation": {
+        "operation": "reorder",
+        "path": "/",
+        "value": [
+          "positiveVectorReviewCompleted",
+          "positiveVectorAvailable",
+          "reviewReceiptSha256",
+          "sourceArtifactSha256",
+          "publicKeyHex",
+          "keyId",
+          "campaignId",
+          "targetVersion"
+        ]
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "positiveVectorReviewCompleted": false,
+        "positiveVectorAvailable": false,
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "keyId": "rfc8032-test-1-public-key",
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "targetVersion": 1
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "NOT_EVALUATED",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "FAIL",
+            "detail": "TARGET_REJECTED"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "NOT_EVALUATED"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "EXPECTED_TARGET_VERSION_CHANGED",
+      "family": "EXPECTED_TARGET",
+      "document": "expectedTarget",
+      "mutation": {
+        "operation": "replace",
+        "path": "/targetVersion",
+        "value": 2
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 2,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "NOT_EVALUATED",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "FAIL",
+            "detail": "TARGET_REJECTED"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "NOT_EVALUATED"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "EXPECTED_TARGET_PUBLIC_KEY_SUBSTITUTED",
+      "family": "TARGET_BINDING",
+      "document": "expectedTarget",
+      "mutation": {
+        "operation": "replace",
+        "path": "/publicKeyHex",
+        "value": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "INVALID_ATTESTATION_SIGNATURE",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "INVALID_ATTESTATION_SIGNATURE"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_ACCESS_TOKEN_FIELD_ADDED",
+      "family": "PRIVATE_MATERIAL_EXCLUSION",
+      "document": "candidate",
+      "mutation": {
+        "operation": "add",
+        "path": "/provenance/accessToken",
+        "value": "forbidden-placeholder-not-a-credential"
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false,
+          "accessToken": "forbidden-placeholder-not-a-credential"
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": false,
+        "schemaErrors": [
+          {
+            "instancePath": "/provenance/accessToken",
+            "schemaPath": "#/definitions/provenance/additionalProperties",
+            "keyword": "additionalProperties",
+            "message": "is not allowed"
+          }
+        ],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "NOT_EVALUATED",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "FAIL",
+            "detail": "STRUCTURE_REJECTED"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "FAIL",
+            "detail": "PRIVATE_FIELD_REJECTED"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "NOT_EVALUATED"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "FAIL",
+            "detail": "AUTHORITY_CLAIM_REJECTED"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "PROVENANCE_SOURCE_DIGEST_CHANGED",
+      "family": "EXTERNAL_PROVENANCE",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace",
+        "path": "/provenance/sourceArtifactSha256",
+        "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "INVALID_ATTESTATION_SIGNATURE",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "PASS",
+            "detail": "MESSAGE_BOUND"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "INVALID_ATTESTATION_SIGNATURE"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "PROVENANCE_SOURCE_SIGNED_ASSERTED",
+      "family": "EXTERNAL_PROVENANCE",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace",
+        "path": "/provenance/campaignMessageWasSignedBySource",
+        "value": true
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": true,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "INVALID_ATTESTATION_SIGNATURE",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "PASS",
+            "detail": "PROVENANCE_BOUND"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "PASS",
+            "detail": "MESSAGE_BOUND"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "INVALID_ATTESTATION_SIGNATURE"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CLAIMED_CANONICAL_MESSAGE_HEX_CHANGED",
+      "family": "CANONICAL_MESSAGE_BINDING",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace",
+        "path": "/campaignVector/claimedCanonicalMessageHex",
+        "value": "0061742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d"
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "0061742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "INVALID_ATTESTATION_SIGNATURE",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "INVALID_ATTESTATION_SIGNATURE"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CLAIMED_CANONICAL_MESSAGE_DIGEST_CHANGED",
+      "family": "CANONICAL_MESSAGE_BINDING",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace",
+        "path": "/campaignVector/claimedCanonicalMessageSha256",
+        "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "INVALID_ATTESTATION_SIGNATURE",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "INVALID_ATTESTATION_SIGNATURE"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_PUBLIC_KEY_SUBSTITUTED",
+      "family": "CANONICAL_MESSAGE_BINDING",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace",
+        "path": "/campaignVector/publicKeyHex",
+        "value": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "INVALID_ATTESTATION_SIGNATURE",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "INVALID_ATTESTATION_SIGNATURE"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_SIGNATURE_HEX_CHANGED",
+      "family": "CANONICAL_MESSAGE_BINDING",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace",
+        "path": "/campaignVector/signatureHex",
+        "value": "00564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b"
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "00564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "INVALID_ATTESTATION_SIGNATURE",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "INVALID_ATTESTATION_SIGNATURE"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "ENVELOPE_NONCE_CHANGED_WITH_STALE_ATTESTATION_ID",
+      "family": "CRYPTOGRAPHIC_GUARD",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace",
+        "path": "/campaignVector/envelope/payload/nonce",
+        "value": "nonce-public-envelope-fixture-mutated"
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-mutated",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "ATTESTATION_ID_MISMATCH",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "ATTESTATION_ID_MISMATCH"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "ENVELOPE_SIGNATURE_BYTE_CHANGED_WITH_MATCHING_HEX",
+      "family": "CRYPTOGRAPHIC_SIGNATURE",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace-pair",
+        "paths": [
+          "/campaignVector/envelope/signatureBase64",
+          "/campaignVector/signatureHex"
+        ]
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5FZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e4564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "INVALID_ATTESTATION_SIGNATURE",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "PASS",
+            "detail": "MESSAGE_BOUND"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "INVALID_ATTESTATION_SIGNATURE"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "CANDIDATE_REVIEW_COMPLETE_TARGET_HELD",
+      "family": "INDEPENDENT_VECTOR_REVIEW",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace-review",
+        "path": "/review"
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": true,
+          "decision": "APPROVE_VECTOR_ONLY",
+          "reviewerIdentityCommitmentSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "receiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "INVALID_ATTESTATION_SIGNATURE",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "PASS",
+            "detail": "MESSAGE_BOUND"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "INVALID_ATTESTATION_SIGNATURE"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "REVIEW_BINDING_COMPLETE_BUT_CRYPTOGRAPHY_ABSENT",
+      "family": "INDEPENDENT_VECTOR_REVIEW",
+      "document": "candidate+expectedTarget",
+      "mutation": {
+        "operation": "replace-review-and-target-flags",
+        "path": "/review"
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": true,
+          "decision": "APPROVE_VECTOR_ONLY",
+          "reviewerIdentityCommitmentSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "receiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": true,
+        "positiveVectorReviewCompleted": true
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": true,
+        "schemaErrors": [],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "INVALID_ATTESTATION_SIGNATURE",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "PASS",
+            "detail": "STRUCTURE_VALID"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "PASS",
+            "detail": "MESSAGE_BOUND"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "INVALID_ATTESTATION_SIGNATURE"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "PASS",
+            "detail": "VECTOR_REVIEW_BOUND"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "PASS",
+            "detail": "NO_AUTHORITY_EFFECT"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "AUTHORITY_RECEIPT_ISSUED",
+      "family": "NON_AUTHORITY",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace",
+        "path": "/authority/receiptIssued",
+        "value": true
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": true,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": false,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": false,
+        "schemaErrors": [
+          {
+            "instancePath": "/authority/receiptIssued",
+            "schemaPath": "#/definitions/authority/properties/receiptIssued/const",
+            "keyword": "const",
+            "message": "must equal the fixed value"
+          }
+        ],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "NOT_EVALUATED",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "FAIL",
+            "detail": "STRUCTURE_REJECTED"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "NOT_EVALUATED"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "FAIL",
+            "detail": "AUTHORITY_CLAIM_REJECTED"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    },
+    {
+      "name": "AUTHORITY_ACTIVATION_AUTHORIZED",
+      "family": "NON_AUTHORITY",
+      "document": "candidate",
+      "mutation": {
+        "operation": "replace",
+        "path": "/authority/activationAuthorized",
+        "value": true
+      },
+      "expectedAccepted": false,
+      "expectedReceiptIssued": false,
+      "expectedReviewCompleted": false,
+      "expectedActivationAuthorized": false,
+      "expectedActivationEffect": "NONE",
+      "candidate": {
+        "intakeVersion": 1,
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "provenance": {
+          "sourceType": "EXTERNAL_PUBLIC_TEST_VECTOR",
+          "sourceUri": "https://datatracker.ietf.org/doc/html/rfc8032#section-7.1",
+          "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+          "generatorName": "IETF RFC 8032 section 7.1 public test vector",
+          "generatorVersion": "RFC8032",
+          "accountabilityLabel": "IETF RFC 8032",
+          "independenceDeclaration": true,
+          "campaignMessageWasSignedBySource": false,
+          "signingMaterialIncluded": false
+        },
+        "campaignVector": {
+          "envelope": {
+            "attestationId": "fdb308da220258a676b4846d3b6e4349ac7003723f868239bbfc6fccb6dc44a3",
+            "keyId": "rfc8032-test-1-public-key",
+            "payload": {
+              "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+              "domain": "iat-promotions-dlc-attestation-v0",
+              "expiresAt": 1800100300,
+              "issuedAt": 1800100000,
+              "nodeId": "node-public-envelope-fixture",
+              "nonce": "nonce-public-envelope-fixture-0001",
+              "purpose": "NOMINATE",
+              "wallet": "77777777777777777777777777777777777777777777",
+              "walletProofDigest": "9136e811d3e30ef976011081810459c69b2d3370f5c77bb82a5d86b1cde2405e",
+              "walletProofVerifiedAt": 1800099999,
+              "xIdentityCommitment": "c4bc54d7f98bc56a423a548419138031951cbf865bb52d0fe9029b35f3cec3f9"
+            },
+            "scheme": "ED25519_DETACHED",
+            "version": 0,
+            "signatureBase64": "5VZDAMNgrHKQhuLMgG6CioSHfx645dl02HPgZSJJAVVfuIIVkKM7rMYeOXAc+bRr0lv18FlbviRlUUFDjnoQCw=="
+          },
+          "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+          "signatureHex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b",
+          "claimedCanonicalMessageHex": "6961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d76300a7b226174746573746174696f6e4964223a2266646233303864613232303235386136373662343834366433623665343334396163373030333732336638363832333962626663366663636236646334346133222c226b65794964223a22726663383033322d746573742d312d7075626c69632d6b6579222c227061796c6f6164223a7b2263616d706169676e4964223a226961742d70726f6d6f74696f6e732d646c632d76312d7075626c69632d656e76656c6f70652d66697874757265222c22646f6d61696e223a226961742d70726f6d6f74696f6e732d646c632d6174746573746174696f6e2d7630222c22657870697265734174223a313830303130303330302c226973737565644174223a313830303130303030302c226e6f64654964223a226e6f64652d7075626c69632d656e76656c6f70652d66697874757265222c226e6f6e6365223a226e6f6e63652d7075626c69632d656e76656c6f70652d666978747572652d30303031222c22707572706f7365223a224e4f4d494e415445222c2277616c6c6574223a223737373737373737373737373737373737373737373737373737373737373737373737373737373737373737222c2277616c6c657450726f6f66446967657374223a2239313336653831316433653330656639373630313130383138313034353963363962326433333730663563373762623832613564383662316364653234303565222c2277616c6c657450726f6f6656657269666965644174223a313830303039393939392c22784964656e74697479436f6d6d69746d656e74223a2263346263353464376639386263353661343233613534383431393133383033313935316362663836356262353264306665393032396233356633636563336639227d2c22736368656d65223a22454432353531395f4445544143484544222c2276657273696f6e223a307d",
+          "claimedCanonicalMessageSha256": "47b6f5c03a1b4cdcea7524bf3a8f9797b60b33e263f84c3a2ccccf9586fe3c68"
+        },
+        "review": {
+          "completed": false,
+          "decision": "NOT_REVIEWED",
+          "reviewerIdentityCommitmentSha256": null,
+          "receiptSha256": null
+        },
+        "authority": {
+          "receiptIssued": false,
+          "reviewCompletedByIntake": false,
+          "activationAuthorized": true,
+          "activationEffect": "NONE"
+        }
+      },
+      "expectedTarget": {
+        "targetVersion": 1,
+        "campaignId": "iat-promotions-dlc-v1-public-envelope-fixture",
+        "keyId": "rfc8032-test-1-public-key",
+        "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "sourceArtifactSha256": "d7d18fedc6fbcf73f2957f0b899c0b90b6e571cc518b2cf5a5d1243b73f6763e",
+        "reviewReceiptSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "positiveVectorAvailable": false,
+        "positiveVectorReviewCompleted": false
+      },
+      "expectedResult": {
+        "intakeEvaluationVersion": 1,
+        "intakeEvaluationId": "iat-promotions-dlc-positive-campaign-vector-intake-evaluation-v1",
+        "status": {
+          "labels": [
+            "DRAFT",
+            "INACTIVE",
+            "NOT PART OF GENESIS",
+            "NOT DEPLOYED",
+            "NO CLAIM ROUTE"
+          ],
+          "network": "NONE",
+          "programId": null,
+          "deployable": false,
+          "intakeApplied": false
+        },
+        "structuralValid": false,
+        "schemaErrors": [
+          {
+            "instancePath": "/authority/activationAuthorized",
+            "schemaPath": "#/definitions/authority/properties/activationAuthorized/const",
+            "keyword": "const",
+            "message": "must equal the fixed value"
+          }
+        ],
+        "candidateSatisfiesIntakePolicy": false,
+        "positiveVectorAcceptedForSeparateReview": false,
+        "verificationReason": "NOT_EVALUATED",
+        "gates": [
+          {
+            "id": "CLOSED_SCHEMA",
+            "result": "FAIL",
+            "detail": "STRUCTURE_REJECTED"
+          },
+          {
+            "id": "EXPECTED_TARGET",
+            "result": "PASS",
+            "detail": "TARGET_SHAPE_VALID"
+          },
+          {
+            "id": "PRIVATE_MATERIAL_EXCLUSION",
+            "result": "PASS",
+            "detail": "NO_PRIVATE_FIELDS"
+          },
+          {
+            "id": "EXTERNAL_PROVENANCE",
+            "result": "FAIL",
+            "detail": "PROVENANCE_NOT_ESTABLISHED"
+          },
+          {
+            "id": "CANONICAL_MESSAGE_BINDING",
+            "result": "FAIL",
+            "detail": "MESSAGE_BINDING_FAILED"
+          },
+          {
+            "id": "CRYPTOGRAPHIC_SIGNATURE",
+            "result": "FAIL",
+            "detail": "NOT_EVALUATED"
+          },
+          {
+            "id": "INDEPENDENT_VECTOR_REVIEW",
+            "result": "FAIL",
+            "detail": "POSITIVE_VECTOR_OR_REVIEW_ABSENT"
+          },
+          {
+            "id": "NON_AUTHORITY",
+            "result": "FAIL",
+            "detail": "AUTHORITY_CLAIM_REJECTED"
+          }
+        ],
+        "receiptIssued": false,
+        "reviewCompletedByThisEvaluator": false,
+        "activationAuthorized": false,
+        "activationEffect": "NONE"
+      }
+    }
+  ]
+}

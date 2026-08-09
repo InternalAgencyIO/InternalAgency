@@ -1,0 +1,127 @@
+# Composition schema mutation diagnostics
+
+> **DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE**
+
+This compact corpus proves exact Node/Python diagnostic parity for twelve
+deterministic mutations of the closed two-gate composition artifact. Each
+mutated candidate exists in memory only. The published vector stores the
+mutation descriptor, exact JSON Pointer diagnostic, and cryptographic
+commitments; it stores no candidate, state, schedule, trace, or attempt.
+
+## Fixed coverage
+
+The cases cover:
+
+- unknown root, composition-case, and removal-check fields;
+- released network status;
+- RPC, wallet, and transaction-preparation capability claims;
+- review and activation authority claims;
+- removal-gate cardinality drift;
+- noncanonical uppercase commitment hex; and
+- an unknown failure-gate label.
+
+Both runtimes independently apply each mutation and require exact equality for
+the diagnostic `instancePath`, `schemaPath`, `keyword`, and `message`. All
+twelve candidates reject. Their common candidate/diagnostic replay commitment
+is `f7698b7d87a0d5bdfe0aa5a009662cd837fd015d890c87ad1c45dead3866b7fe`.
+
+## Reproduce locally
+
+```text
+node proposals/iat-promotions-dlc/generate-settlement-contention-composition-schema-vectors.mjs --write
+node proposals/iat-promotions-dlc/validate-settlement-contention-composition-schema-vectors.mjs
+python proposals/iat-promotions-dlc/verify-settlement-contention-vectors.py --verify-composition-schema-vectors --json
+node --test proposals/iat-promotions-dlc/tests/settlement-contention-composition-schema-vectors.test.mjs
+```
+
+These commands are proposal-only and offline. They do not start a validator,
+contact Devnet or Mainnet, access a wallet, prepare, sign, or broadcast a
+transaction, move tokens, issue a receipt, complete review, deploy, or activate
+anything.
+
+The companion
+[`SETTLEMENT_CONTENTION_DIAGNOSTIC_REPRESENTATION_AUDIT.md`](./SETTLEMENT_CONTENTION_DIAGNOSTIC_REPRESENTATION_AUDIT.md)
+proves all twelve exact diagnostics remain stable across reversed key order and
+LF/CRLF serialization in both runtimes.
+
+The strict companion
+[`SETTLEMENT_CONTENTION_ESCAPE_REPRESENTATION_AUDIT.md`](./SETTLEMENT_CONTENTION_ESCAPE_REPRESENTATION_AUDIT.md)
+adds 72 escaped-Unicode, escaped-solidus, key-order, and line-ending trials,
+then rejects six malformed escape or surrogate encodings before mutation.
+
+The bounded-transport companion
+[`SETTLEMENT_CONTENTION_TRANSPORT_LIMIT_AUDIT.md`](./SETTLEMENT_CONTENTION_TRANSPORT_LIMIT_AUDIT.md)
+accepts two exact-limit controls and rejects duplicate keys at any depth plus
+UTF-8 byte, depth, object-member, array-length, and total-node overflows before
+mutation in both runtimes.
+
+The numeric-token companion
+[`SETTLEMENT_CONTENTION_NUMERIC_TOKEN_AUDIT.md`](./SETTLEMENT_CONTENTION_NUMERIC_TOKEN_AUDIT.md)
+requires canonical safe-integer JSON tokens and rejects fractional or exponent
+equivalents, negative zero, unsafe integers, non-finite equivalents, and
+non-JSON constants before a candidate is returned in both runtimes.
+
+The delimiter companion
+[`SETTLEMENT_CONTENTION_DELIMITER_WHITESPACE_AUDIT.md`](./SETTLEMENT_CONTENTION_DELIMITER_WHITESPACE_AUDIT.md)
+accepts only standard JSON whitespace and one complete document, rejecting
+BOM, other Unicode whitespace, trailing values, and concatenated documents
+before candidate production in both runtimes.
+
+The string-token companion
+[`SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md`](./SETTLEMENT_CONTENTION_STRING_TOKEN_AUDIT.md)
+requires exact decoded required-key equality, rejecting raw controls, escaped
+controls in required keys, and NFKC-equivalent lookalikes before candidate
+production in both runtimes.
+
+The key-collision companion
+[`SETTLEMENT_CONTENTION_KEY_COLLISION_AUDIT.md`](./SETTLEMENT_CONTENTION_KEY_COLLISION_AUDIT.md)
+proves escaped aliases collide after decoding while normalization lookalikes
+remain distinct but invalid unexpected keys in both runtimes.
+
+The marker-value companion
+[`SETTLEMENT_CONTENTION_MARKER_VALUE_AUDIT.md`](./SETTLEMENT_CONTENTION_MARKER_VALUE_AUDIT.md)
+accepts JSON escapes that decode exactly to `DRAFT/INACTIVE` and rejects raw
+or escaped controls, case variants, normalization equivalents, and
+cross-script confusables before candidate production in both runtimes.
+
+The fatal UTF-8 ingress companion
+[`SETTLEMENT_CONTENTION_FATAL_UTF8_INGRESS_AUDIT.md`](./SETTLEMENT_CONTENTION_FATAL_UTF8_INGRESS_AUDIT.md)
+accepts valid one- through four-byte scalar encodings and rejects truncated,
+overlong, surrogate-encoded, and invalid-continuation byte sequences before
+JSON parsing in both runtimes.
+
+The UTF-8 boundary companion
+[`SETTLEMENT_CONTENTION_UTF8_BOUNDARY_AUDIT.md`](./SETTLEMENT_CONTENTION_UTF8_BOUNDARY_AUDIT.md)
+accepts exact scalar-width upper bounds through U+10FFFF and rejects
+out-of-range encodings, obsolete five/six-byte forms, FE/FF leads, and
+redundant continuation runs before JSON in both runtimes.
+
+The UTF-8 BOM-position companion
+[`SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md`](./SETTLEMENT_CONTENTION_UTF8_BOM_POSITION_AUDIT.md)
+preserves decoded U+FEFF at document delimiters, rejects it as non-JSON
+whitespace at leading, post-whitespace, and trailing positions, and accepts
+the same scalar inside a candidate string in both runtimes.
+
+The byte-view boundary companion
+[`SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md`](./SETTLEMENT_CONTENTION_BYTE_VIEW_BOUNDARY_AUDIT.md)
+binds decoding to the visible `Uint8Array` offset/length and rejects non-byte
+views before UTF-8 or JSON processing, with independently reproduced compact
+commitments in Python.
+
+The visible-view truncation companion
+[`SETTLEMENT_CONTENTION_VISIBLE_VIEW_TRUNCATION_AUDIT.md`](./SETTLEMENT_CONTENTION_VISIBLE_VIEW_TRUNCATION_AUDIT.md)
+uses one valid backing envelope to prove the full view accepts while empty,
+prefix-only, suffix-only, and one-byte-short views decode then reject before
+candidate production. Bytes outside the visible view never complete JSON.
+
+The shared-buffer alias-mutation companion
+[`SETTLEMENT_CONTENTION_VISIBLE_VIEW_ALIAS_MUTATION_AUDIT.md`](./SETTLEMENT_CONTENTION_VISIBLE_VIEW_ALIAS_MUTATION_AUDIT.md)
+proves excluded backing-byte mutations do not alter the visible representation
+or candidate commitment, while candidate, marker, and delimiter mutations
+inside the same aliased view change a commitment or reject parsing.
+
+The immutable-input snapshot companion
+[`SETTLEMENT_CONTENTION_INPUT_SNAPSHOT_AUDIT.md`](./SETTLEMENT_CONTENTION_INPUT_SNAPSHOT_AUDIT.md)
+copies an ordinary bounded byte view before decoding and rejects every
+`SharedArrayBuffer`-backed view before snapshot creation. Mutating the live
+alias after the copy cannot change the snapshot or its candidate.

@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://internalagency.io/schemas/draft/iat-promotions-dlc-settlement-contention-compositions-v1.json",
+  "title": "IAT Promotions DLC compact settlement contention compositions v1",
+  "description": "DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE. Structural validity and offline replay are not validator, Devnet, Mainnet, review, deployment, or activation evidence.",
+  "x-iat-status": {
+    "labels": ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "schemaApplied": false
+  },
+  "type": "object",
+  "required": ["vectorVersion", "vectorId", "status", "sources", "contract", "summary", "cases"],
+  "additionalProperties": false,
+  "properties": {
+    "vectorVersion": { "const": 1 },
+    "vectorId": { "const": "iat-promotions-dlc-settlement-contention-compositions-v1" },
+    "status": { "$ref": "#/definitions/status" },
+    "sources": { "$ref": "#/definitions/sources" },
+    "contract": { "$ref": "#/definitions/contract" },
+    "summary": { "$ref": "#/definitions/summary" },
+    "cases": {
+      "type": "array",
+      "minItems": 28,
+      "maxItems": 28,
+      "items": { "$ref": "#/definitions/case" }
+    }
+  },
+  "definitions": {
+    "hex64": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "decimal": { "type": "string", "pattern": "^(?:0|[1-9][0-9]*)$" },
+    "falseGate": { "const": false },
+    "gate": {
+      "enum": ["STRUCTURE", "STATUS", "CAPABILITY", "AUTHORITY", "ECONOMICS", "SEMANTIC_REPLAY", "COMMITMENT", "SOURCE_BINDING"]
+    },
+    "status": {
+      "type": "object",
+      "required": ["labels", "network", "programId", "deployable", "vectorsApplied"],
+      "additionalProperties": false,
+      "properties": {
+        "labels": { "const": ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"] },
+        "network": { "const": "NONE" },
+        "programId": { "const": null },
+        "deployable": { "$ref": "#/definitions/falseGate" },
+        "vectorsApplied": { "$ref": "#/definitions/falseGate" }
+      }
+    },
+    "canonicalSource": {
+      "type": "object",
+      "required": ["path", "canonicalSha256"],
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "canonicalSha256": { "$ref": "#/definitions/hex64" }
+      }
+    },
+    "textSource": {
+      "type": "object",
+      "required": ["path", "normalizedTextSha256"],
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "normalizedTextSha256": { "$ref": "#/definitions/hex64" }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "required": ["baseArtifact", "closedSchema", "mutationCatalog", "nodeEvaluator", "pythonVerifier", "generator"],
+      "additionalProperties": false,
+      "properties": {
+        "baseArtifact": { "$ref": "#/definitions/canonicalSource" },
+        "closedSchema": { "$ref": "#/definitions/canonicalSource" },
+        "mutationCatalog": { "$ref": "#/definitions/textSource" },
+        "nodeEvaluator": { "$ref": "#/definitions/textSource" },
+        "pythonVerifier": { "$ref": "#/definitions/textSource" },
+        "generator": { "$ref": "#/definitions/textSource" }
+      }
+    },
+    "contract": {
+      "type": "object",
+      "required": [
+        "mode", "caseCount", "gatePrecedence", "unorderedPairsComplete",
+        "removalChecksPerPair", "removalChecksComplete", "mutatedCandidatesRuntimeOnly",
+        "storesExpandedState", "storesExpandedSchedules", "usesLocalValidator", "usesRpc",
+        "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions",
+        "issuesReviewReceipts", "completesReview", "activationAuthorized", "activationEffect"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "mode": { "const": "DETERMINISTIC_RUNTIME_ONLY_TWO_GATE_COMPOSITIONS" },
+        "caseCount": { "const": 28 },
+        "gatePrecedence": { "const": ["STRUCTURE", "STATUS", "CAPABILITY", "AUTHORITY", "ECONOMICS", "SEMANTIC_REPLAY", "COMMITMENT", "SOURCE_BINDING"] },
+        "unorderedPairsComplete": { "const": true },
+        "removalChecksPerPair": { "const": 2 },
+        "removalChecksComplete": { "const": true },
+        "mutatedCandidatesRuntimeOnly": { "const": true },
+        "storesExpandedState": { "$ref": "#/definitions/falseGate" },
+        "storesExpandedSchedules": { "$ref": "#/definitions/falseGate" },
+        "usesLocalValidator": { "$ref": "#/definitions/falseGate" },
+        "usesRpc": { "$ref": "#/definitions/falseGate" },
+        "usesWallet": { "$ref": "#/definitions/falseGate" },
+        "preparesTransactions": { "$ref": "#/definitions/falseGate" },
+        "signsTransactions": { "$ref": "#/definitions/falseGate" },
+        "broadcastsTransactions": { "$ref": "#/definitions/falseGate" },
+        "issuesReviewReceipts": { "$ref": "#/definitions/falseGate" },
+        "completesReview": { "$ref": "#/definitions/falseGate" },
+        "activationAuthorized": { "$ref": "#/definitions/falseGate" },
+        "activationEffect": { "const": "NONE" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "caseCount", "removalCheckCount", "allPairsObservedExactly", "noFailureMasked",
+        "allRemovalsMinimal", "allRejected", "commonReplayCommitmentSha256",
+        "removalReplayCommitmentSha256", "caseSetCommitmentSha256", "runtimeCandidateStored",
+        "expandedStateStored", "expandedScheduleStored", "receiptIssued", "reviewCompleted",
+        "activationAuthorized", "activationEffect"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "caseCount": { "const": "28" },
+        "removalCheckCount": { "const": "56" },
+        "allPairsObservedExactly": { "const": true },
+        "noFailureMasked": { "const": true },
+        "allRemovalsMinimal": { "const": true },
+        "allRejected": { "const": true },
+        "commonReplayCommitmentSha256": { "$ref": "#/definitions/hex64" },
+        "removalReplayCommitmentSha256": { "$ref": "#/definitions/hex64" },
+        "caseSetCommitmentSha256": { "$ref": "#/definitions/hex64" },
+        "runtimeCandidateStored": { "$ref": "#/definitions/falseGate" },
+        "expandedStateStored": { "$ref": "#/definitions/falseGate" },
+        "expandedScheduleStored": { "$ref": "#/definitions/falseGate" },
+        "receiptIssued": { "$ref": "#/definitions/falseGate" },
+        "reviewCompleted": { "$ref": "#/definitions/falseGate" },
+        "activationAuthorized": { "$ref": "#/definitions/falseGate" },
+        "activationEffect": { "const": "NONE" }
+      }
+    },
+    "removalCheck": {
+      "type": "object",
+      "required": ["removedGate", "remainingGate", "observedGates", "candidateCommitmentSha256", "expectedAccepted"],
+      "additionalProperties": false,
+      "properties": {
+        "removedGate": { "$ref": "#/definitions/gate" },
+        "remainingGate": { "$ref": "#/definitions/gate" },
+        "observedGates": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "$ref": "#/definitions/gate" }
+        },
+        "candidateCommitmentSha256": { "$ref": "#/definitions/hex64" },
+        "expectedAccepted": { "$ref": "#/definitions/falseGate" }
+      }
+    },
+    "case": {
+      "type": "object",
+      "required": [
+        "caseId", "expectedGates", "mutationCaseIds", "observedGates", "rejectionPrecedence",
+        "bothIsolationsRejected", "expectedAccepted", "candidateCommitmentSha256",
+        "nodeSemanticErrorCount", "removalChecks", "runtimeCandidateStored", "expandedStateStored",
+        "expandedScheduleStored", "receiptIssued", "reviewCompleted", "activationAuthorized",
+        "activationEffect", "caseCommitmentSha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "caseId": { "type": "string", "pattern": "^[A-Z_]+__[A-Z_]+$" },
+        "expectedGates": { "type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": { "$ref": "#/definitions/gate" } },
+        "mutationCaseIds": { "type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z0-9_]+$" } },
+        "observedGates": { "type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": { "$ref": "#/definitions/gate" } },
+        "rejectionPrecedence": { "type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": { "$ref": "#/definitions/gate" } },
+        "bothIsolationsRejected": { "const": true },
+        "expectedAccepted": { "$ref": "#/definitions/falseGate" },
+        "candidateCommitmentSha256": { "$ref": "#/definitions/hex64" },
+        "nodeSemanticErrorCount": { "$ref": "#/definitions/decimal" },
+        "removalChecks": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/definitions/removalCheck" } },
+        "runtimeCandidateStored": { "$ref": "#/definitions/falseGate" },
+        "expandedStateStored": { "$ref": "#/definitions/falseGate" },
+        "expandedScheduleStored": { "$ref": "#/definitions/falseGate" },
+        "receiptIssued": { "$ref": "#/definitions/falseGate" },
+        "reviewCompleted": { "$ref": "#/definitions/falseGate" },
+        "activationAuthorized": { "$ref": "#/definitions/falseGate" },
+        "activationEffect": { "const": "NONE" },
+        "caseCommitmentSha256": { "$ref": "#/definitions/hex64" }
+      }
+    }
+  }
+}

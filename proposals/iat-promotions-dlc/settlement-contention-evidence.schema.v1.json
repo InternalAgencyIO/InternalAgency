@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://internalagency.io/schemas/draft/iat-promotions-dlc-settlement-contention-evidence-v1.json",
+  "title": "IAT Promotions DLC compact settlement contention evidence v1",
+  "description": "DRAFT / INACTIVE / NOT PART OF GENESIS / NOT DEPLOYED / NO CLAIM ROUTE. Structural validity and offline replay are not validator, Devnet, Mainnet, review, deployment, or activation evidence.",
+  "x-iat-status": {
+    "labels": ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"],
+    "network": "NONE",
+    "programId": null,
+    "deployable": false,
+    "schemaApplied": false
+  },
+  "type": "object",
+  "required": ["vectorVersion", "vectorId", "status", "sources", "contract", "summary", "scenarios"],
+  "additionalProperties": false,
+  "properties": {
+    "vectorVersion": { "const": 1 },
+    "vectorId": { "const": "iat-promotions-dlc-settlement-contention-v1" },
+    "status": { "$ref": "#/definitions/status" },
+    "sources": { "$ref": "#/definitions/sources" },
+    "contract": { "$ref": "#/definitions/contract" },
+    "summary": { "$ref": "#/definitions/summary" },
+    "scenarios": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": { "$ref": "#/definitions/scenario" }
+    }
+  },
+  "definitions": {
+    "hex64": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "decimal": { "type": "string", "pattern": "^(?:0|[1-9][0-9]*)$" },
+    "falseGate": { "const": false },
+    "status": {
+      "type": "object",
+      "required": ["labels", "network", "programId", "deployable", "vectorsApplied"],
+      "additionalProperties": false,
+      "properties": {
+        "labels": { "const": ["DRAFT", "INACTIVE", "NOT PART OF GENESIS", "NOT DEPLOYED", "NO CLAIM ROUTE"] },
+        "network": { "const": "NONE" },
+        "programId": { "const": null },
+        "deployable": { "$ref": "#/definitions/falseGate" },
+        "vectorsApplied": { "$ref": "#/definitions/falseGate" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["path", "normalizedTextSha256"],
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "normalizedTextSha256": { "$ref": "#/definitions/hex64" }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "required": ["referenceEngine", "contentionModel", "generator"],
+      "additionalProperties": false,
+      "properties": {
+        "referenceEngine": { "$ref": "#/definitions/source" },
+        "contentionModel": { "$ref": "#/definitions/source" },
+        "generator": { "$ref": "#/definitions/source" }
+      }
+    },
+    "contract": {
+      "type": "object",
+      "required": [
+        "mode", "scenarioCount", "timelineStepsPerScenario", "finalSlotStartsAtCompletedPairs",
+        "exactWritableLockDerivation", "campaignAndVaultLocksSerializeAllSettlements", "injectedFaults",
+        "storesExpandedState", "storesExpandedTimelineOrTrace", "usesLocalValidator", "usesRpc",
+        "usesWallet", "preparesTransactions", "signsTransactions", "broadcastsTransactions",
+        "issuesReviewReceipts", "completesReview", "activationAuthorized", "activationEffect"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "mode": { "const": "DETERMINISTIC_NETWORK_FREE_SETTLEMENT_CONTENTION" },
+        "scenarioCount": { "const": 6 },
+        "timelineStepsPerScenario": { "const": 7 },
+        "finalSlotStartsAtCompletedPairs": { "const": 999 },
+        "exactWritableLockDerivation": { "const": true },
+        "campaignAndVaultLocksSerializeAllSettlements": { "const": true },
+        "injectedFaults": { "const": ["AFTER_HERO_TRANSFER", "AFTER_PROPOSER_TRANSFER"] },
+        "storesExpandedState": { "$ref": "#/definitions/falseGate" },
+        "storesExpandedTimelineOrTrace": { "$ref": "#/definitions/falseGate" },
+        "usesLocalValidator": { "$ref": "#/definitions/falseGate" },
+        "usesRpc": { "$ref": "#/definitions/falseGate" },
+        "usesWallet": { "$ref": "#/definitions/falseGate" },
+        "preparesTransactions": { "$ref": "#/definitions/falseGate" },
+        "signsTransactions": { "$ref": "#/definitions/falseGate" },
+        "broadcastsTransactions": { "$ref": "#/definitions/falseGate" },
+        "issuesReviewReceipts": { "$ref": "#/definitions/falseGate" },
+        "completesReview": { "$ref": "#/definitions/falseGate" },
+        "activationAuthorized": { "$ref": "#/definitions/falseGate" },
+        "activationEffect": { "const": "NONE" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "scenarioCount", "lockConflictCount", "rollbackCount", "committedAttemptCount",
+        "terminalRejectionCount", "exactFinalCompletedPairsCount", "zeroFinalVaultBalanceCount",
+        "allCallersUnchanged", "allLocksReleased", "allLosersUnpaid", "allWinnersPaidExactly",
+        "scenarioSetCommitmentSha256", "expandedStateStored", "expandedTimelineOrTraceStored",
+        "chainTransactionPrepared", "receiptIssued", "reviewCompleted", "activationAuthorized",
+        "activationEffect"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scenarioCount": { "const": "6" },
+        "lockConflictCount": { "const": "6" },
+        "rollbackCount": { "const": "4" },
+        "committedAttemptCount": { "const": "6" },
+        "terminalRejectionCount": { "const": "2" },
+        "exactFinalCompletedPairsCount": { "const": "6" },
+        "zeroFinalVaultBalanceCount": { "const": "6" },
+        "allCallersUnchanged": { "const": true },
+        "allLocksReleased": { "const": true },
+        "allLosersUnpaid": { "const": true },
+        "allWinnersPaidExactly": { "const": true },
+        "scenarioSetCommitmentSha256": { "$ref": "#/definitions/hex64" },
+        "expandedStateStored": { "$ref": "#/definitions/falseGate" },
+        "expandedTimelineOrTraceStored": { "$ref": "#/definitions/falseGate" },
+        "chainTransactionPrepared": { "$ref": "#/definitions/falseGate" },
+        "receiptIssued": { "$ref": "#/definitions/falseGate" },
+        "reviewCompleted": { "$ref": "#/definitions/falseGate" },
+        "activationAuthorized": { "$ref": "#/definitions/falseGate" },
+        "activationEffect": { "const": "NONE" }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "required": [
+        "name", "firstAttemptId", "secondAttemptId", "injectedFault", "winnerAttemptId", "loserAttemptId",
+        "initialStateSha256", "finalStateSha256", "timelineCommitmentSha256", "traceCommitmentSha256",
+        "attemptOutcomeSetCommitmentSha256", "lockConflictCount", "rollbackCount", "committedAttemptCount",
+        "terminalRejectionCount", "completedPairs", "vaultBalanceBaseUnits", "winnerHeroBalanceBaseUnits",
+        "winnerProposerBalanceBaseUnits", "loserHeroBalanceBaseUnits", "loserProposerBalanceBaseUnits",
+        "callerStateUnchanged", "allLocksReleased", "expandedTimelineStored", "expandedTraceStored",
+        "attemptInputsStored", "chainTransactionPrepared", "acceptedCampaignVectorPublished", "receiptIssued",
+        "reviewCompleted", "activationAuthorized", "activationEffect", "scenarioCommitmentSha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "enum": ["A_COMMITS_B_TERMINAL", "B_COMMITS_A_TERMINAL", "A_HERO_FAULT_B_RECOVERS", "A_PROPOSER_FAULT_B_RECOVERS", "B_HERO_FAULT_A_RECOVERS", "B_PROPOSER_FAULT_A_RECOVERS"] },
+        "firstAttemptId": { "type": "string", "enum": ["A", "B"] },
+        "secondAttemptId": { "type": "string", "enum": ["A", "B"] },
+        "injectedFault": { "type": ["string", "null"], "enum": [null, "AFTER_HERO_TRANSFER", "AFTER_PROPOSER_TRANSFER"] },
+        "winnerAttemptId": { "type": "string", "enum": ["A", "B"] },
+        "loserAttemptId": { "type": "string", "enum": ["A", "B"] },
+        "initialStateSha256": { "$ref": "#/definitions/hex64" },
+        "finalStateSha256": { "$ref": "#/definitions/hex64" },
+        "timelineCommitmentSha256": { "$ref": "#/definitions/hex64" },
+        "traceCommitmentSha256": { "$ref": "#/definitions/hex64" },
+        "attemptOutcomeSetCommitmentSha256": { "$ref": "#/definitions/hex64" },
+        "lockConflictCount": { "$ref": "#/definitions/decimal" },
+        "rollbackCount": { "$ref": "#/definitions/decimal" },
+        "committedAttemptCount": { "$ref": "#/definitions/decimal" },
+        "terminalRejectionCount": { "$ref": "#/definitions/decimal" },
+        "completedPairs": { "const": "1000" },
+        "vaultBalanceBaseUnits": { "const": "0" },
+        "winnerHeroBalanceBaseUnits": { "const": "120000000000" },
+        "winnerProposerBalanceBaseUnits": { "const": "60000000000" },
+        "loserHeroBalanceBaseUnits": { "const": "0" },
+        "loserProposerBalanceBaseUnits": { "const": "0" },
+        "callerStateUnchanged": { "const": true },
+        "allLocksReleased": { "const": true },
+        "expandedTimelineStored": { "$ref": "#/definitions/falseGate" },
+        "expandedTraceStored": { "$ref": "#/definitions/falseGate" },
+        "attemptInputsStored": { "$ref": "#/definitions/falseGate" },
+        "chainTransactionPrepared": { "$ref": "#/definitions/falseGate" },
+        "acceptedCampaignVectorPublished": { "$ref": "#/definitions/falseGate" },
+        "receiptIssued": { "$ref": "#/definitions/falseGate" },
+        "reviewCompleted": { "$ref": "#/definitions/falseGate" },
+        "activationAuthorized": { "$ref": "#/definitions/falseGate" },
+        "activationEffect": { "const": "NONE" },
+        "scenarioCommitmentSha256": { "$ref": "#/definitions/hex64" }
+      }
+    }
+  }
+}
