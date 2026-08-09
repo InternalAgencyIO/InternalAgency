@@ -124,26 +124,57 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
-test("the close-position native preparation has strict partial codecs only", () => {
+test("the native preparation has strict partial codecs only", () => {
   for (const declaration of [
     'pub const POSITION_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3POS";',
     'pub const LANE_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3LAN";',
+    'pub const CORE_REWARD_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3CRW";',
+    'pub const AGENCY_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3AGN";',
+    'pub const AGENCY_OWNER_INDEX_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3AOI";',
+    'pub const ELIGIBILITY_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3ELG";',
     "pub const ACCOUNT_CODEC_VERSION: u8 = 1;",
     "pub const POSITION_ACCOUNT_LEN: usize = 176;",
     "pub const LANE_ACCOUNT_LEN: usize = 176;",
+    "pub const CORE_REWARD_ACCOUNT_LEN: usize = 128;",
+    "pub const AGENCY_ACCOUNT_LEN: usize = 96;",
+    "pub const AGENCY_OWNER_INDEX_ACCOUNT_LEN: usize = 96;",
+    "pub const ELIGIBILITY_ACCOUNT_LEN: usize = 96;",
   ]) {
     assert.ok(economyCodecSource.includes(declaration), declaration);
   }
-  assert.match(economyCodecSource, /pub fn encode_position_state\(/u);
-  assert.match(economyCodecSource, /pub fn decode_position_state\(/u);
-  assert.match(economyCodecSource, /pub fn encode_lane_state\(/u);
-  assert.match(economyCodecSource, /pub fn decode_lane_state\(/u);
+  for (const type of [
+    "position",
+    "lane",
+    "core_reward",
+    "agency",
+    "agency_owner_index",
+    "eligibility",
+  ]) {
+    assert.match(economyCodecSource, new RegExp(`pub fn encode_${type}_state\\(`, "u"));
+    assert.match(economyCodecSource, new RegExp(`pub fn decode_${type}_state\\(`, "u"));
+  }
   assert.match(economyCodecSource, /NonCanonicalBoolean/u);
   assert.match(economyCodecSource, /NonCanonicalDiscriminant/u);
   assert.doesNotMatch(
     economyCodecSource,
-    /ConfigState|encode_config|decode_config|AccountInfo|process_instruction|invoke(?:_signed)?\s*\(/u,
+    /ConfigState|RoundState|encode_(?:config|round)|decode_(?:config|round)|AccountInfo|process_instruction|invoke(?:_signed)?\s*\(/u,
   );
+
+  assert.deepEqual(matrix.nativeCodecPreparation, {
+    stage: "PARTIAL_STRICT_CODEC_ONLY",
+    complete: false,
+    strictCodecTypes: [
+      "PositionState",
+      "LaneState",
+      "CoreRewardState",
+      "AgencyState",
+      "AgencyOwnerIndexState",
+      "EligibilityState",
+    ],
+    configCodecStatus:
+      "BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE",
+    roundCodecStatus: "BLOCKED_MISSING_PERSISTED_BUMP_IN_SEMANTIC_STATE",
+  });
 });
 
 test("the host-only port contains exactly all fifteen gated kernels", () => {

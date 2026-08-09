@@ -390,6 +390,24 @@ records `PARTIAL_STRICT_CODEC_ONLY` and `nativeAdapterComplete: false`; no
 Solana account access, identity binding, dispatcher, lifecycle, CPI, durable
 write, or public handler was added.
 
+Four additional field-complete projections now use the same strict B3 envelope:
+`CoreRewardState` is 128 bytes with magic `IATB3CRW`; `AgencyState` is 96 bytes
+with `IATB3AGN`; `AgencyOwnerIndexState` is 96 bytes with `IATB3AOI`; and
+`EligibilityState` is 96 bytes with `IATB3ELG`. Golden hashes and per-field
+mutation vectors cover all four, every type magic is distinct, all trailing
+reserved space must remain zero, cross-type inputs fail, and Eligibility roles
+outside `0..=2` fail before encode copies its temporary buffer. Codec existence
+does not make the production-inactive Agency path reachable or supply account
+ownership, signer, PDA, lifecycle, or persistence checks.
+
+`RoundState` is not encoded because it is not a complete retained account
+projection: V2 `Round` persists a final bump byte, while B3 keeps that bump only
+beside the semantic value in `CommitRoundResult`. The audit records
+`BLOCKED_MISSING_PERSISTED_BUMP_IN_SEMANTIC_STATE` rather than silently dropping
+the field or widening this codec-only scope. The Config phase blocker remains
+unchanged. Consequently these six strict codecs are preparation only, not a
+native adapter or handler completion.
+
 These are not account adapters or deployable handlers. A future native adapter
 must still prove account ownership, exact config/round/randomness bindings,
 PDAs, codecs, and bumps before its first mutable borrow, and must source Clock

@@ -4,14 +4,26 @@ use crate::{LaneState, PositionState};
 pub const ACCOUNT_CODEC_VERSION: u8 = 1;
 pub const POSITION_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3POS";
 pub const LANE_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3LAN";
+pub const CORE_REWARD_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3CRW";
+pub const AGENCY_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3AGN";
+pub const AGENCY_OWNER_INDEX_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3AOI";
+pub const ELIGIBILITY_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3ELG";
 pub const POSITION_ACCOUNT_LEN: usize = 176;
 pub const LANE_ACCOUNT_LEN: usize = 176;
+pub const CORE_REWARD_ACCOUNT_LEN: usize = 128;
+pub const AGENCY_ACCOUNT_LEN: usize = 96;
+pub const AGENCY_OWNER_INDEX_ACCOUNT_LEN: usize = 96;
+pub const ELIGIBILITY_ACCOUNT_LEN: usize = 96;
 
 const HEADER_LEN: usize = 16;
 const HEADER_RESERVED_START: usize = 9;
 const POSITION_BODY_START: usize = HEADER_LEN;
 const LANE_BODY_START: usize = HEADER_LEN;
 const LANE_RESERVED_START: usize = 172;
+const CORE_REWARD_RESERVED_START: usize = 121;
+const AGENCY_RESERVED_START: usize = 93;
+const AGENCY_OWNER_INDEX_RESERVED_START: usize = 85;
+const ELIGIBILITY_RESERVED_START: usize = 86;
 
 /// Strict byte-codec failures. These codecs authenticate neither Solana
 /// account ownership nor PDA identity and confer no write authorization.
@@ -36,7 +48,7 @@ pub fn encode_position_state(
     if output.len() != POSITION_ACCOUNT_LEN {
         return Err(CodecError::InvalidLength);
     }
-    require_position_role(position.role)?;
+    require_role(position.role)?;
 
     let mut encoded = [0u8; POSITION_ACCOUNT_LEN];
     write_header(&mut encoded, POSITION_ACCOUNT_MAGIC);
@@ -125,7 +137,7 @@ pub fn decode_position_state(input: &[u8]) -> Result<PositionState, CodecError> 
     let settled_mask = read_u64(input, &mut offset);
     let agency_index = read_u32(input, &mut offset);
     let role = read_byte(input, &mut offset);
-    require_position_role(role)?;
+    require_role(role)?;
     let principal_returned = read_bool(input, &mut offset)?;
     let closed = read_bool(input, &mut offset)?;
     let bump = read_byte(input, &mut offset);
@@ -239,6 +251,229 @@ pub fn decode_lane_state(input: &[u8]) -> Result<LaneState, CodecError> {
     Ok(lane)
 }
 
+/// Encode a semantic CoreReward into its fixed B3 byte layout.
+pub fn encode_core_reward_state(
+    core_reward: &crate::CoreRewardState,
+    output: &mut [u8],
+) -> Result<(), CodecError> {
+    if output.len() != CORE_REWARD_ACCOUNT_LEN {
+        return Err(CodecError::InvalidLength);
+    }
+
+    let mut encoded = [0u8; CORE_REWARD_ACCOUNT_LEN];
+    write_header(&mut encoded, CORE_REWARD_ACCOUNT_MAGIC);
+    let mut offset = HEADER_LEN;
+    write_bytes(&mut encoded, &mut offset, &core_reward.config);
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &core_reward.principal.to_le_bytes(),
+    );
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &core_reward.annual_rate_bps.to_le_bytes(),
+    );
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &core_reward.term_weeks.to_le_bytes(),
+    );
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &core_reward.treasury_reserved.to_le_bytes(),
+    );
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &core_reward.ecosystem_reserved.to_le_bytes(),
+    );
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &core_reward.liquidity_reserved.to_le_bytes(),
+    );
+    write_bytes(&mut encoded, &mut offset, &core_reward.paid.to_le_bytes());
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &core_reward.settled_low.to_le_bytes(),
+    );
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &core_reward.settled_high.to_le_bytes(),
+    );
+    write_byte(&mut encoded, &mut offset, core_reward.bump);
+    debug_assert_eq!(offset, CORE_REWARD_RESERVED_START);
+
+    output.copy_from_slice(&encoded);
+    Ok(())
+}
+
+/// Decode only the exact fixed B3 CoreReward byte layout.
+pub fn decode_core_reward_state(input: &[u8]) -> Result<crate::CoreRewardState, CodecError> {
+    require_header(input, CORE_REWARD_ACCOUNT_LEN, CORE_REWARD_ACCOUNT_MAGIC)?;
+    require_zero_reserved(&input[CORE_REWARD_RESERVED_START..])?;
+
+    let mut offset = HEADER_LEN;
+    let core_reward = crate::CoreRewardState {
+        config: read_bytes(input, &mut offset),
+        principal: read_u64(input, &mut offset),
+        annual_rate_bps: read_u64(input, &mut offset),
+        term_weeks: read_u64(input, &mut offset),
+        treasury_reserved: read_u64(input, &mut offset),
+        ecosystem_reserved: read_u64(input, &mut offset),
+        liquidity_reserved: read_u64(input, &mut offset),
+        paid: read_u64(input, &mut offset),
+        settled_low: read_u64(input, &mut offset),
+        settled_high: read_u64(input, &mut offset),
+        bump: read_byte(input, &mut offset),
+    };
+    debug_assert_eq!(offset, CORE_REWARD_RESERVED_START);
+    Ok(core_reward)
+}
+
+/// Encode a semantic Agency into its fixed B3 byte layout.
+pub fn encode_agency_state(
+    agency: &crate::AgencyState,
+    output: &mut [u8],
+) -> Result<(), CodecError> {
+    if output.len() != AGENCY_ACCOUNT_LEN {
+        return Err(CodecError::InvalidLength);
+    }
+
+    let mut encoded = [0u8; AGENCY_ACCOUNT_LEN];
+    write_header(&mut encoded, AGENCY_ACCOUNT_MAGIC);
+    let mut offset = HEADER_LEN;
+    write_bytes(&mut encoded, &mut offset, &agency.config);
+    write_bytes(&mut encoded, &mut offset, &agency.owner);
+    write_bytes(&mut encoded, &mut offset, &agency.index.to_le_bytes());
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &agency.registered_week.to_le_bytes(),
+    );
+    write_byte(&mut encoded, &mut offset, agency.bump);
+    debug_assert_eq!(offset, AGENCY_RESERVED_START);
+
+    output.copy_from_slice(&encoded);
+    Ok(())
+}
+
+/// Decode only the exact fixed B3 Agency byte layout.
+pub fn decode_agency_state(input: &[u8]) -> Result<crate::AgencyState, CodecError> {
+    require_header(input, AGENCY_ACCOUNT_LEN, AGENCY_ACCOUNT_MAGIC)?;
+    require_zero_reserved(&input[AGENCY_RESERVED_START..])?;
+
+    let mut offset = HEADER_LEN;
+    let agency = crate::AgencyState {
+        config: read_bytes(input, &mut offset),
+        owner: read_bytes(input, &mut offset),
+        index: read_u32(input, &mut offset),
+        registered_week: read_u64(input, &mut offset),
+        bump: read_byte(input, &mut offset),
+    };
+    debug_assert_eq!(offset, AGENCY_RESERVED_START);
+    Ok(agency)
+}
+
+/// Encode a semantic AgencyOwnerIndex into its fixed B3 byte layout.
+pub fn encode_agency_owner_index_state(
+    owner_index: &crate::AgencyOwnerIndexState,
+    output: &mut [u8],
+) -> Result<(), CodecError> {
+    if output.len() != AGENCY_OWNER_INDEX_ACCOUNT_LEN {
+        return Err(CodecError::InvalidLength);
+    }
+
+    let mut encoded = [0u8; AGENCY_OWNER_INDEX_ACCOUNT_LEN];
+    write_header(&mut encoded, AGENCY_OWNER_INDEX_ACCOUNT_MAGIC);
+    let mut offset = HEADER_LEN;
+    write_bytes(&mut encoded, &mut offset, &owner_index.config);
+    write_bytes(&mut encoded, &mut offset, &owner_index.owner);
+    write_bytes(&mut encoded, &mut offset, &owner_index.index.to_le_bytes());
+    write_byte(&mut encoded, &mut offset, owner_index.bump);
+    debug_assert_eq!(offset, AGENCY_OWNER_INDEX_RESERVED_START);
+
+    output.copy_from_slice(&encoded);
+    Ok(())
+}
+
+/// Decode only the exact fixed B3 AgencyOwnerIndex byte layout.
+pub fn decode_agency_owner_index_state(
+    input: &[u8],
+) -> Result<crate::AgencyOwnerIndexState, CodecError> {
+    require_header(
+        input,
+        AGENCY_OWNER_INDEX_ACCOUNT_LEN,
+        AGENCY_OWNER_INDEX_ACCOUNT_MAGIC,
+    )?;
+    require_zero_reserved(&input[AGENCY_OWNER_INDEX_RESERVED_START..])?;
+
+    let mut offset = HEADER_LEN;
+    let owner_index = crate::AgencyOwnerIndexState {
+        config: read_bytes(input, &mut offset),
+        owner: read_bytes(input, &mut offset),
+        index: read_u32(input, &mut offset),
+        bump: read_byte(input, &mut offset),
+    };
+    debug_assert_eq!(offset, AGENCY_OWNER_INDEX_RESERVED_START);
+    Ok(owner_index)
+}
+
+/// Encode a semantic Eligibility into its fixed B3 byte layout.
+pub fn encode_eligibility_state(
+    eligibility: &crate::EligibilityState,
+    output: &mut [u8],
+) -> Result<(), CodecError> {
+    if output.len() != ELIGIBILITY_ACCOUNT_LEN {
+        return Err(CodecError::InvalidLength);
+    }
+    require_role(eligibility.role)?;
+
+    let mut encoded = [0u8; ELIGIBILITY_ACCOUNT_LEN];
+    write_header(&mut encoded, ELIGIBILITY_ACCOUNT_MAGIC);
+    let mut offset = HEADER_LEN;
+    write_bytes(&mut encoded, &mut offset, &eligibility.config);
+    write_bytes(&mut encoded, &mut offset, &eligibility.wallet);
+    write_bytes(
+        &mut encoded,
+        &mut offset,
+        &eligibility.agency_index.to_le_bytes(),
+    );
+    write_byte(&mut encoded, &mut offset, eligibility.role);
+    write_byte(&mut encoded, &mut offset, eligibility.bump);
+    debug_assert_eq!(offset, ELIGIBILITY_RESERVED_START);
+
+    output.copy_from_slice(&encoded);
+    Ok(())
+}
+
+/// Decode only the exact fixed B3 Eligibility byte layout.
+pub fn decode_eligibility_state(input: &[u8]) -> Result<crate::EligibilityState, CodecError> {
+    require_header(input, ELIGIBILITY_ACCOUNT_LEN, ELIGIBILITY_ACCOUNT_MAGIC)?;
+    require_zero_reserved(&input[ELIGIBILITY_RESERVED_START..])?;
+
+    let mut offset = HEADER_LEN;
+    let config = read_bytes(input, &mut offset);
+    let wallet = read_bytes(input, &mut offset);
+    let agency_index = read_u32(input, &mut offset);
+    let role = read_byte(input, &mut offset);
+    require_role(role)?;
+    let bump = read_byte(input, &mut offset);
+    let eligibility = crate::EligibilityState {
+        config,
+        wallet,
+        agency_index,
+        role,
+        bump,
+    };
+    debug_assert_eq!(offset, ELIGIBILITY_RESERVED_START);
+    Ok(eligibility)
+}
+
 fn write_header(output: &mut [u8], magic: [u8; 8]) {
     output[..8].copy_from_slice(&magic);
     output[8] = ACCOUNT_CODEC_VERSION;
@@ -309,7 +544,7 @@ fn read_bool(input: &[u8], offset: &mut usize) -> Result<bool, CodecError> {
     }
 }
 
-fn require_position_role(role: u8) -> Result<(), CodecError> {
+fn require_role(role: u8) -> Result<(), CodecError> {
     if role > 2 {
         return Err(CodecError::NonCanonicalDiscriminant);
     }

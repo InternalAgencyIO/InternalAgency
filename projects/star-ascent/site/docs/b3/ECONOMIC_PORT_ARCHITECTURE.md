@@ -493,6 +493,25 @@ is `PARTIAL_STRICT_CODEC_ONLY` and `nativeAdapterComplete: false`: it adds no
 Solana dependency, account access, identity binding, dispatcher, lifecycle,
 CPI, persistence, or public exposure.
 
+The next strict-codec batch adds only four more field-complete retained
+projections: `CoreRewardState` (`IATB3CRW`, 128 bytes), `AgencyState`
+(`IATB3AGN`, 96 bytes), `AgencyOwnerIndexState` (`IATB3AOI`, 96 bytes), and
+`EligibilityState` (`IATB3ELG`, 96 bytes). They share the versioned exact-length,
+little-endian, zero-reserved, wrong-type, and atomic temporary-buffer rules
+above. Eligibility additionally admits only the retained roles `0..=2` on both
+decode and encode. These byte codecs neither activate CCC nor implement the
+Agency/owner-index/eligibility account lifecycle, administrator checks, PDA
+binding, or persistence.
+
+`RoundState` is also excluded. Retained V2 persists a `bump` after `status`, but
+the current B3 semantic projection ends at `status` and carries the creation
+bump separately in `CommitRoundResult`. Encoding it would omit a persisted
+account field. The matrix therefore records
+`BLOCKED_MISSING_PERSISTED_BUMP_IN_SEMANTIC_STATE`; this codec-only batch does
+not expand `RoundState` or select a replacement layout. Config remains
+`BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`, so the aggregate stage
+remains `PARTIAL_STRICT_CODEC_ONLY` and native-adapter-incomplete.
+
 None of these kernels may be exposed as a write entrypoint. The first safe
 deployable slice is the complete fifteen-row dispatcher behind the frozen
 Token-2022 hook, not a single handler.

@@ -4,9 +4,14 @@
 mod codec;
 
 pub use codec::{
-    decode_lane_state, decode_position_state, encode_lane_state, encode_position_state, CodecError,
-    ACCOUNT_CODEC_VERSION, LANE_ACCOUNT_LEN, LANE_ACCOUNT_MAGIC, POSITION_ACCOUNT_LEN,
-    POSITION_ACCOUNT_MAGIC,
+    decode_agency_owner_index_state, decode_agency_state, decode_core_reward_state,
+    decode_eligibility_state, decode_lane_state, decode_position_state,
+    encode_agency_owner_index_state, encode_agency_state, encode_core_reward_state,
+    encode_eligibility_state, encode_lane_state, encode_position_state, CodecError,
+    ACCOUNT_CODEC_VERSION, AGENCY_ACCOUNT_LEN, AGENCY_ACCOUNT_MAGIC,
+    AGENCY_OWNER_INDEX_ACCOUNT_LEN, AGENCY_OWNER_INDEX_ACCOUNT_MAGIC, CORE_REWARD_ACCOUNT_LEN,
+    CORE_REWARD_ACCOUNT_MAGIC, ELIGIBILITY_ACCOUNT_LEN, ELIGIBILITY_ACCOUNT_MAGIC,
+    LANE_ACCOUNT_LEN, LANE_ACCOUNT_MAGIC, POSITION_ACCOUNT_LEN, POSITION_ACCOUNT_MAGIC,
 };
 
 use iat_b3_consensus::{
@@ -102,7 +107,9 @@ pub struct LanePolicy {
 
 /// Native, host-only semantic representation of the retained V2 `Round`.
 /// It has no Anchor discriminator and makes no account-layout compatibility
-/// claim; migration must decode V2 and encode B3 explicitly.
+/// claim; migration must decode V2 and encode B3 explicitly. A strict B3 Round
+/// account codec is blocked because this projection omits retained V2's
+/// persisted bump, which remains separate in `CommitRoundResult`.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct RoundState {
     pub config: [u8; 32],
@@ -253,6 +260,8 @@ pub struct ReadonlyTokenState {
     pub amount: u64,
 }
 
+/// Strict B3 bytes exist for this semantic value, but account ownership, PDA,
+/// lifecycle, and persistence remain native-adapter responsibilities.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct CoreRewardState {
     pub config: [u8; 32],
@@ -296,8 +305,8 @@ pub struct ActivateResult {
     pub core_reward: CoreRewardState,
 }
 
-/// Host-only semantic representation of the retained V2 agency record. No B3
-/// account codec or lifecycle is implied by this value.
+/// Host-only semantic representation of the retained V2 agency record. Its
+/// strict B3 codec confers no account identity or lifecycle authorization.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct AgencyState {
     pub config: [u8; 32],
@@ -308,6 +317,7 @@ pub struct AgencyState {
 }
 
 /// Host-only semantic representation of the retained V2 owner-index record.
+/// Its strict B3 codec confers no account identity or lifecycle authorization.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct AgencyOwnerIndexState {
     pub config: [u8; 32],
@@ -337,7 +347,8 @@ pub struct RegisterAgencyResult {
 /// Host-only semantic representation of the retained V2 eligibility record.
 /// A future native adapter must authenticate the administrator and config,
 /// derive the wallet-bound PDA, and create or decode it only after Daily Law
-/// validation and this pure transition both succeed.
+/// validation and this pure transition both succeed. Its strict B3 codec
+/// validates the retained role discriminant but confers no authorization.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct EligibilityState {
     pub config: [u8; 32],

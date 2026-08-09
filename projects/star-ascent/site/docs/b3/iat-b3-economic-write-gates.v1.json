@@ -14,6 +14,20 @@
     "tokenCpi": false,
     "networkAccess": false
   },
+  "nativeCodecPreparation": {
+    "stage": "PARTIAL_STRICT_CODEC_ONLY",
+    "complete": false,
+    "strictCodecTypes": [
+      "PositionState",
+      "LaneState",
+      "CoreRewardState",
+      "AgencyState",
+      "AgencyOwnerIndexState",
+      "EligibilityState"
+    ],
+    "configCodecStatus": "BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE",
+    "roundCodecStatus": "BLOCKED_MISSING_PERSISTED_BUMP_IN_SEMANTIC_STATE"
+  },
   "hostOnlyPureTransitions": [
     {
       "name": "expire_round",
