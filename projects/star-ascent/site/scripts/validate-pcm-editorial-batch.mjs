@@ -33,6 +33,9 @@ const priorBatchUrls = [
   "pcm-public-ui-priority-009.json",
   "pcm-public-ui-priority-010.json",
   "pcm-public-ui-priority-011.json",
+  "pcm-public-ui-priority-012.json",
+  "pcm-public-ui-priority-013.json",
+  "pcm-public-ui-priority-014.json",
 ].map((fileName) => new URL(`scripts/data/pcm-editorial-batches/${fileName}`, root));
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const readJson = async (target, label) => {

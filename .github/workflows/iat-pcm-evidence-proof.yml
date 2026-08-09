@@ -19,6 +19,9 @@ on:
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-010.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-011.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-012.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-013.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-014.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-015.json"
       - "projects/star-ascent/site/scripts/validate-pcm-editorial-batch.mjs"
       - "projects/star-ascent/site/scripts/lib/i18n-protected-integrity.mjs"
       - "projects/star-ascent/site/scripts/lib/pcm-machine-draft-quality.mjs"
@@ -49,6 +52,9 @@ on:
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-010.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-011.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-012.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-013.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-014.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-015.json"
       - "projects/star-ascent/site/scripts/validate-pcm-editorial-batch.mjs"
       - "projects/star-ascent/site/scripts/lib/i18n-protected-integrity.mjs"
       - "projects/star-ascent/site/scripts/lib/pcm-machine-draft-quality.mjs"
@@ -117,3 +123,6 @@ jobs:
           I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-010.json" node scripts/validate-pcm-editorial-batch.mjs
           I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-011.json" node scripts/validate-pcm-editorial-batch.mjs
           I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-012.json" node scripts/validate-pcm-editorial-batch.mjs
+          I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-013.json" node scripts/validate-pcm-editorial-batch.mjs
+          I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-014.json" node scripts/validate-pcm-editorial-batch.mjs
+          I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-015.json" node scripts/validate-pcm-editorial-batch.mjs
