@@ -1,0 +1,21 @@
+CODEX GUARDIAN 1.0.0 - WINDOWS PORTABLE
+
+1. Extract the ZIP to a permanent folder.
+2. Double-click CodexGuardian.exe.
+3. Check Firefox, managed Chrome, or any custom apps you want Guardian to allow.
+4. Click ENABLE GUARDIAN.
+5. Optional: check Start Guardian at sign-in.
+
+No installer is used. Guardian keeps its settings in:
+%LOCALAPPDATA%\CodexGuardian
+
+Emergency recovery:
+- Use EMERGENCY STOP in the window or tray menu.
+- If the window is hidden, double-click the shield icon in the notification area.
+- If necessary, end CodexGuardian.exe in Task Manager.
+
+Read README.md before enabling Guardian. Save work in unapproved applications;
+Guardian will close them and may force-close them after 3.5 seconds.
+
+This public build is unsigned. Verify SHA256SUMS.txt when downloading it from
+the GitHub release page.
