@@ -3,6 +3,7 @@ import { DatabaseSync } from "node:sqlite";
 
 import { REFERENCE_DEPLOYMENT_DOMAIN_SHA256 } from "./reward-allocator-receipt-codec.mjs";
 import { assertDailyLawWriteAllowed } from "./daily-lockdown-consensus.mjs";
+import { createRewardCasPersistenceIdentity } from "./reward-persistence-checkpoint.mjs";
 import {
   REWARD_CAS_COMMIT_SCHEMA,
   REWARD_CAS_ENTITY_KIND,
@@ -740,6 +741,36 @@ function validateDatabase(database) {
   }
 }
 
+function readValidatedPersistenceIdentity(database) {
+  let transactionOpen = false;
+  try {
+    database.exec("BEGIN");
+    transactionOpen = true;
+    validateSchema(database);
+    const meta = validateMeta(database);
+    assertDatabaseIntegrity(database);
+    readAndValidateSnapshot(database);
+    const identity = createRewardCasPersistenceIdentity({
+      adapterSchema: meta.adapter_schema,
+      adapterSchemaVersion: meta.schema_version,
+      schemaManifestSha256: meta.schema_manifest_sha256,
+      genesisEntitySetSha256: meta.genesis_entity_set_sha256,
+    });
+    database.exec("COMMIT");
+    transactionOpen = false;
+    return identity;
+  } catch (error) {
+    if (transactionOpen) {
+      try {
+        database.exec("ROLLBACK");
+      } catch {
+        // Preserve the validation failure.
+      }
+    }
+    throw error;
+  }
+}
+
 function insertEntityVersionCas(database, before, after) {
   const result = database.prepare(`
     INSERT INTO reward_cas_entity_versions (
@@ -1078,6 +1109,10 @@ export function createSqliteRewardPersistenceCas({
         defensive: true,
         busyTimeoutMs: Number(pragmaScalar(database, "busy_timeout")),
       });
+    },
+    readPersistenceIdentity() {
+      ensureOpen();
+      return readValidatedPersistenceIdentity(database);
     },
     readHead() {
       return readSnapshot().head;

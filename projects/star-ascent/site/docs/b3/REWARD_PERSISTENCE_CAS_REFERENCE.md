@@ -9,8 +9,10 @@ Activation ready: `false`
 This document fixes the boundary of the in-memory reference implementation in
 `programs/iat_b3_reference/reward-persistence-cas.mjs` and its host-only durable
 SQLite compare-and-swap adapter in
-`programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs`.
-Neither activates a reward path, authenticates an upstream adapter, creates an
+`programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs`, plus the
+provider-neutral external checkpoint protocol in
+`programs/iat_b3_reference/reward-persistence-checkpoint.mjs`.
+None activates a reward path, authenticates an upstream adapter, creates an
 on-chain account codec, or relaxes the immutable IAT-wide Daily Law.
 
 ## What the reference proves
@@ -162,6 +164,72 @@ operator replacing that whole unit with an older, internally consistent copy.
 No value stored inside the same database can supply a monotonic external anchor.
 For that reason `rollbackProtectionVerified` remains `false`.
 
+## Provider-neutral external checkpoint protocol
+
+The checkpoint module defines only a non-activating protocol and verifier. It
+contains no provider, network client, credential, production identifier, or
+runtime consumer. The focused tests supply an in-memory mock sink solely to
+exercise the protocol.
+
+A persistence identity binds the explicit unfrozen reference deployment domain,
+the SQLite adapter schema and version, the immutable schema-manifest digest, the
+revision-zero entity-set digest, and fixed reference-only external namespace and
+trust-policy digests. Callers cannot select or replace the namespace or policy.
+The literal reference namespace is
+`IAT_B3_REWARD_CAS_EXTERNAL_CHECKPOINT_REFERENCE_V1`; the trust policy explicitly
+states that the reference is unauthenticated and provider-neutral. These labels
+do not identify a production deployment, authority, account, or service.
+
+Each typed-canonical checkpoint binds exactly:
+
+1. the persistence-identity digest;
+2. an unsigned 64-bit checkpoint revision;
+3. the corresponding unsigned 64-bit CAS commit sequence;
+4. that retained commit's digest (or the zero digest at Genesis);
+5. the previous checkpoint digest; and
+6. the immutable `false`/`HOLD` reference flags.
+
+Checkpoint revision is always CAS sequence plus one. An absent checkpoint may
+initialize only while the validated local CAS head is still sequence zero. A
+provider reset or late adoption after any local commit fails with
+`REWARD_CAS_UNANCHORED_HISTORY_HOLD`; the protocol never retroactively blesses
+unanchored history. After Genesis, one compare-and-swap advances exactly one
+retained CAS commit and one checkpoint revision. Skipped commits, an unrelated
+branch, a stale local restore, and a same-sequence fork all fail closed. A DB
+that is legitimately ahead after an anchor outage may reconcile only one commit
+at a time from the exact retained ancestor.
+
+The sink CAS predicate is the exact expected checkpoint revision plus digest.
+The writer validates Daily Law before reading the store or sink, validates the
+complete local snapshot and persistence identity, and then proposes one
+checkpoint. A lost sink response is recoverable only when readback equals the
+exact proposed checkpoint; an alternate or stale value is rejected. This is a
+local-commit-first protocol: DB-ahead can be a recoverable anchor outage, while
+checkpoint-ahead is a local rollback signal and remains `HOLD`.
+
+A closed-database test copies a valid sequence-one database, advances the live
+database and checkpoint to sequence two, restores the older copy, and reopens
+it. SQLite's complete internal validation accepts that self-consistent old
+snapshot, while external checkpoint verification rejects it as locally behind.
+This proves the protocol can expose whole-database rollback when an independent
+trusted monotonic sink eventually exists. It does not make the current mock sink
+trusted, cannot detect rollback of an uncheckpointed tail, and provides no
+cross-system atomicity between SQLite and any future sink. This reference does
+not gate subsequent local CAS writes or downstream consumers while the database
+is ahead of the checkpoint, and it cannot detect rollback of the sink itself.
+Any future safety claim therefore depends on an independent sink that supplies
+linearizable exact compare-and-swap and readback semantics.
+
+External records require exact own enumerable data fields with canonical types,
+lowercase 32-byte hexadecimal digests, and dense acyclic typed values. Missing,
+extra, symbol, hidden, accessor, sparse, cyclic, null-prototype, and
+custom-prototype aliases are rejected without invoking getters.
+
+Because the deployment domain and external authority are unfrozen, runtime
+authentication, external monotonicity, rollback protection, and activation all
+remain `false`; Mainnet status remains `HOLD`. No field or API in this slice is
+named or represented as verified external persistence.
+
 ## Explicitly deferred production work
 
 Mainnet activation remains blocked on authenticated Daily-Law ownership and
@@ -172,5 +240,5 @@ and an on-chain account/instruction contract. Runtime authentication remains
 `false`, rollback protection remains `false`, activation remains `false`, and
 Mainnet remains `HOLD` in every durable artifact.
 
-No code in either reference may be treated as runtime wiring or as permission to
+No code in any reference may be treated as runtime wiring or as permission to
 publish, reserve, pay, claim, transfer, or mint rewards.

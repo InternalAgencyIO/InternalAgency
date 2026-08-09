@@ -45,6 +45,12 @@ import {
   REWARD_CAS_STATUS,
   createInitialRewardCasHead,
 } from "../programs/iat_b3_reference/reward-persistence-cas.mjs";
+import {
+  REWARD_CAS_EXTERNAL_CHECKPOINT_MAINNET_STATUS,
+  REWARD_CAS_EXTERNAL_CHECKPOINT_STATUS,
+  REWARD_CAS_EXTERNAL_NAMESPACE,
+  REWARD_CAS_EXTERNAL_TRUST_POLICY,
+} from "../programs/iat_b3_reference/reward-persistence-checkpoint.mjs";
 import { sha256CanonicalJson } from "../scripts/iat-v2-canonical-json.mjs";
 
 const SITE = fileURLToPath(new URL("../", import.meta.url));
@@ -63,6 +69,12 @@ const CAS_SQLITE_REFERENCE_PATH = join(
   "iat_b3_reference",
   "reward-persistence-cas-sqlite.mjs",
 );
+const CAS_CHECKPOINT_REFERENCE_PATH = join(
+  SITE,
+  "programs",
+  "iat_b3_reference",
+  "reward-persistence-checkpoint.mjs",
+);
 const CAS_BOUNDARY_PATH = join(SITE, "docs", "b3", "REWARD_PERSISTENCE_CAS_REFERENCE.md");
 
 const offchainPolicy = JSON.parse(readFileSync(POLICY_PATH, "utf8"));
@@ -75,6 +87,7 @@ const receiptBoundarySource = readFileSync(RECEIPT_BOUNDARY_PATH, "utf8");
 const xBoundStateInvariantsSource = readFileSync(X_BOUND_STATE_INVARIANTS_PATH, "utf8");
 const casReferenceSource = readFileSync(CAS_REFERENCE_PATH, "utf8");
 const casSqliteReferenceSource = readFileSync(CAS_SQLITE_REFERENCE_PATH, "utf8");
+const casCheckpointReferenceSource = readFileSync(CAS_CHECKPOINT_REFERENCE_PATH, "utf8");
 const casBoundarySource = readFileSync(CAS_BOUNDARY_PATH, "utf8");
 
 const EXACT_TRANCHE_KINDS = ["X_BASE_10", "X_PREMIUM_FULL_100", "X_PREMIUM_UPGRADE_90"];
@@ -687,6 +700,16 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   assert.equal(casHead.runtimeAuthenticationVerified, false);
   assert.equal(casHead.rollbackProtectionVerified, false);
   assert.equal(casHead.activationReady, false);
+  assert.equal(
+    REWARD_CAS_EXTERNAL_CHECKPOINT_STATUS,
+    "NON_ACTIVATING_UNAUTHENTICATED_EXTERNAL_CHECKPOINT_REFERENCE",
+  );
+  assert.equal(REWARD_CAS_EXTERNAL_CHECKPOINT_MAINNET_STATUS, "HOLD");
+  assert.equal(REWARD_CAS_EXTERNAL_NAMESPACE, "IAT_B3_REWARD_CAS_EXTERNAL_CHECKPOINT_REFERENCE_V1");
+  assert.equal(
+    REWARD_CAS_EXTERNAL_TRUST_POLICY,
+    "IAT_B3_REWARD_CAS_EXTERNAL_CHECKPOINT_TRUST_POLICY_UNAUTHENTICATED_PROVIDER_NEUTRAL_V1",
+  );
   assert.match(casReferenceSource, /assertDailyLawWriteAllowed/u);
   assert.match(casReferenceSource, /validateRewardAllocatorProofBundle/u);
   assert.doesNotMatch(casReferenceSource, /node:sqlite|node:fs|fsync|AccountInfo|invoke\(/u);
@@ -702,8 +725,24 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   assert.match(casSqliteReferenceSource, /FILE_BACKED_DATABASE_REQUIRED/u);
   assert.doesNotMatch(casSqliteReferenceSource, /INSERT\s+OR\s+REPLACE|REPLACE\s+INTO|\bUPSERT\b/iu);
   assert.doesNotMatch(casSqliteReferenceSource, /node:http|node:https|fetch\(|AccountInfo|invoke\(/u);
+  assert.match(
+    casCheckpointReferenceSource,
+    /prepareRewardCasExternalCheckpointAdvance\(input\) \{\s*assertDailyLawWriteAllowed/u,
+  );
+  assert.match(
+    casCheckpointReferenceSource,
+    /advanceRewardCasExternalCheckpoint\(input\) \{\s*const dailyLawState = assertDailyLawWriteAllowed/u,
+  );
+  assert.match(casCheckpointReferenceSource, /REWARD_CAS_UNANCHORED_HISTORY_HOLD/u);
+  assert.match(casCheckpointReferenceSource, /externalMonotonicityVerified: false/u);
+  assert.doesNotMatch(
+    casCheckpointReferenceSource,
+    /node:sqlite|node:fs|node:http|node:https|fetch\(|AccountInfo|invoke\(/u,
+  );
   assert.match(casBoundarySource, /rollbackProtectionVerified` remains `false`/u);
-  assert.match(casBoundarySource, /No code in either reference may be treated as runtime wiring/u);
+  assert.match(casBoundarySource, /provider-neutral external checkpoint protocol/iu);
+  assert.match(casBoundarySource, /provides no\s+cross-system atomicity/iu);
+  assert.match(casBoundarySource, /No code in any reference may be treated as runtime wiring/u);
   assert.match(epochEngineSource, /const DAILY_HOLD = "HOLD_PENDING_GLOBAL_REWARD_WATERFALL"/u);
   assert.doesNotMatch(epochEngineSource, /reward-capacity-waterfall|reward-ledger\.v2/u);
   assert.match(capacityReferenceSource, /status: "NON_ACTIVATING_REFERENCE_RECEIPT"/u);
