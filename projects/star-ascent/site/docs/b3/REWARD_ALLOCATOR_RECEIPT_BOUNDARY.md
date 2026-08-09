@@ -107,21 +107,30 @@ the future adapter must authenticate persisted accounts, the finalized round,
 receipt membership, identity binding, clock, and Daily Law before relying on
 it. No X-bound account layout is frozen by this slice.
 
-## Partial SQL correspondence
+## Inert SQL correspondence
 
-The inert SQLite blueprint may eventually map:
+The inert SQLite blueprint now records the decoded correspondence. It remains
+not a one-to-one persistence contract: relational rows are not the binary
+transcripts. In
+`reward_v2_allocator_batches`, `allocator_batch_digest` is the exact binary
+batch digest; the policy and fixed nonproduction deployment digests are exact;
+and the round seal, candidate set, pre-ledger, post-ledger, ordered receipt set,
+outcome, finalization, and receipt count map to their same-named transcript
+commitments.
 
-- `allocator_batch_digest` to the binary batch digest;
-- `allocator_decision_digest` to the canonical JSON reference-receipt digest;
-- `allocator_receipt_digest` to the binary receipt digest;
-- `candidate_snapshot_digest` to the candidate-set digest;
-- `lane_reservation_snapshot_digest` to the pre-ledger digest.
+`reward_v2_allocator_receipt_transcripts` covers the complete generic global
+waterfall (CCC agents, CCC associates, standard/X, weekly faction, and core).
+It records every contiguous allocation index and the exact obligation,
+decision, binary receipt, amount, three-lane plan, optional faction digest,
+disposition, and full canonical reason. The X-specific receipt table can
+materialize only after the complete generic set has count/min/max coverage.
 
-This is not a one-to-one persistence contract. SQL currently shortens the
-blocked reason, uses a different candidate identity, omits exact lane plans,
-post-ledger, receipt-set, and finalization fields, and covers standard X
-tranches rather than the generic CCC/faction/core allocator surface. Runtime
-authentication remains explicitly false.
+The proof bundle is not a third persistence format: it transports one existing
+batch plus its complete ordered existing receipt set. A zero-outcome finalized
+round therefore has one batch with receipt count zero and no receipt rows. Its
+validator still requires the external finalized round state and any committed
+CCC reveal for full recomputation. SQL does not authenticate those inputs;
+`runtime_authentication_verified` remains fixed to `0`.
 
 ## Remaining activation blockers
 

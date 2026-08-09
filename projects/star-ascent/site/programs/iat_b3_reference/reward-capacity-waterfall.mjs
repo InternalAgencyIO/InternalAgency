@@ -1252,11 +1252,9 @@ export function buildWeeklyFactionManifestObligation({
   });
 }
 
-function validateFinalizedAllocatorOutcome({
-  expected,
-  outcome,
+function recomputeFinalizedRewardCapacityRound({
   roundState,
-  cccRandomnessReveal,
+  cccRandomnessReveal = null,
 }) {
   const validatedState = validateCapacityRoundState(roundState);
   if (validatedState.finalization === null) throw new Error("ALLOCATOR_ROUND_NOT_FINALIZED");
@@ -1267,6 +1265,36 @@ function validateFinalizedAllocatorOutcome({
   if (canonicalStateSha256(validatedState.finalization) !== canonicalStateSha256(recomputed.finalization)) {
     throw new Error("ALLOCATOR_FINALIZATION_NOT_EXACT_RECOMPUTATION");
   }
+  return { validatedState, recomputed: deepFreeze(structuredClone(recomputed)) };
+}
+
+/**
+ * Read-only verifier for a complete finalized allocator round.
+ *
+ * This performs the same full deterministic waterfall recomputation used by
+ * the mutation boundary, but grants no write authority and does not treat the
+ * result as authenticated runtime state.
+ */
+export function validateFinalizedRewardCapacityRound({
+  roundState,
+  cccRandomnessReveal = null,
+} = {}) {
+  return recomputeFinalizedRewardCapacityRound({
+    roundState,
+    cccRandomnessReveal,
+  }).recomputed;
+}
+
+function validateFinalizedAllocatorOutcome({
+  expected,
+  outcome,
+  roundState,
+  cccRandomnessReveal,
+}) {
+  const { validatedState, recomputed } = recomputeFinalizedRewardCapacityRound({
+    roundState,
+    cccRandomnessReveal,
+  });
   const validatedSeal = validatedState.validatedSeal;
   let sealedCandidate;
   if (expected.kind === FACTION_FRAGMENT_KIND) {
