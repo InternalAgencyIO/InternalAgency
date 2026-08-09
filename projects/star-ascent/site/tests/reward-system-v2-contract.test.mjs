@@ -51,6 +51,10 @@ import {
   REWARD_CAS_EXTERNAL_NAMESPACE,
   REWARD_CAS_EXTERNAL_TRUST_POLICY,
 } from "../programs/iat_b3_reference/reward-persistence-checkpoint.mjs";
+import {
+  PROVIDER_READINESS_MAINNET_STATUS,
+  PROVIDER_READINESS_STATUS,
+} from "../scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs";
 import { sha256CanonicalJson } from "../scripts/iat-v2-canonical-json.mjs";
 
 const SITE = fileURLToPath(new URL("../", import.meta.url));
@@ -76,6 +80,23 @@ const CAS_CHECKPOINT_REFERENCE_PATH = join(
   "reward-persistence-checkpoint.mjs",
 );
 const CAS_BOUNDARY_PATH = join(SITE, "docs", "b3", "REWARD_PERSISTENCE_CAS_REFERENCE.md");
+const PROVIDER_READINESS_MANIFEST_PATH = join(
+  SITE,
+  "docs",
+  "b3",
+  "iat-b3-external-checkpoint-provider-readiness.v1.json",
+);
+const PROVIDER_READINESS_BOUNDARY_PATH = join(
+  SITE,
+  "docs",
+  "b3",
+  "EXTERNAL_CHECKPOINT_PROVIDER_READINESS.md",
+);
+const PROVIDER_READINESS_VALIDATOR_PATH = join(
+  SITE,
+  "scripts",
+  "validate-iat-b3-external-checkpoint-provider-readiness.mjs",
+);
 
 const offchainPolicy = JSON.parse(readFileSync(POLICY_PATH, "utf8"));
 const capacityPolicy = JSON.parse(readFileSync(CAPACITY_POLICY_PATH, "utf8"));
@@ -89,6 +110,9 @@ const casReferenceSource = readFileSync(CAS_REFERENCE_PATH, "utf8");
 const casSqliteReferenceSource = readFileSync(CAS_SQLITE_REFERENCE_PATH, "utf8");
 const casCheckpointReferenceSource = readFileSync(CAS_CHECKPOINT_REFERENCE_PATH, "utf8");
 const casBoundarySource = readFileSync(CAS_BOUNDARY_PATH, "utf8");
+const providerReadinessManifest = JSON.parse(readFileSync(PROVIDER_READINESS_MANIFEST_PATH, "utf8"));
+const providerReadinessBoundarySource = readFileSync(PROVIDER_READINESS_BOUNDARY_PATH, "utf8");
+const providerReadinessValidatorSource = readFileSync(PROVIDER_READINESS_VALIDATOR_PATH, "utf8");
 
 const EXACT_TRANCHE_KINDS = ["X_BASE_10", "X_PREMIUM_FULL_100", "X_PREMIUM_UPGRADE_90"];
 const EXACT_TRANCHE_BASIS_POINTS = {
@@ -705,6 +729,17 @@ test("the ledger and allocator remain static reference artifacts with no runtime
     "NON_ACTIVATING_UNAUTHENTICATED_EXTERNAL_CHECKPOINT_REFERENCE",
   );
   assert.equal(REWARD_CAS_EXTERNAL_CHECKPOINT_MAINNET_STATUS, "HOLD");
+  assert.equal(PROVIDER_READINESS_STATUS, "NON_ACTIVATING_PROVIDER_READINESS_REVIEW_PACKET");
+  assert.equal(PROVIDER_READINESS_MAINNET_STATUS, "HOLD");
+  assert.equal(providerReadinessManifest.profile, "PRODUCTION");
+  assert.equal(providerReadinessManifest.readiness, "BLOCKED");
+  assert.equal(providerReadinessManifest.providerBinding.providerLegalEntityId, null);
+  assert.equal(providerReadinessManifest.providerBinding.resourceId, null);
+  assert.equal(providerReadinessManifest.runtimeAuthenticationVerified, false);
+  assert.equal(providerReadinessManifest.externalMonotonicityVerified, false);
+  assert.equal(providerReadinessManifest.rollbackProtectionVerified, false);
+  assert.equal(providerReadinessManifest.activationReady, false);
+  assert.equal(providerReadinessManifest.mainnetStatus, "HOLD");
   assert.equal(REWARD_CAS_EXTERNAL_NAMESPACE, "IAT_B3_REWARD_CAS_EXTERNAL_CHECKPOINT_REFERENCE_V1");
   assert.equal(
     REWARD_CAS_EXTERNAL_TRUST_POLICY,
@@ -739,10 +774,19 @@ test("the ledger and allocator remain static reference artifacts with no runtime
     casCheckpointReferenceSource,
     /node:sqlite|node:fs|node:http|node:https|fetch\(|AccountInfo|invoke\(/u,
   );
+  assert.match(providerReadinessValidatorSource, /productionReviewPacketComplete/u);
+  assert.doesNotMatch(providerReadinessValidatorSource, /providerReadinessReady|productionReady/u);
+  assert.doesNotMatch(
+    providerReadinessValidatorSource,
+    /node:http|node:https|fetch\(|AccountInfo|invoke\(|createSqliteRewardPersistenceCas/u,
+  );
   assert.match(casBoundarySource, /rollbackProtectionVerified` remains `false`/u);
   assert.match(casBoundarySource, /provider-neutral external checkpoint protocol/iu);
   assert.match(casBoundarySource, /provides no\s+cross-system atomicity/iu);
   assert.match(casBoundarySource, /No code in any reference may be treated as runtime wiring/u);
+  assert.match(providerReadinessBoundarySource, /not a\s+provider integration/iu);
+  assert.match(providerReadinessBoundarySource, /`productionReviewPacketComplete` additionally\s+requires the `PRODUCTION` profile/iu);
+  assert.match(providerReadinessBoundarySource, /mainnetOrReleaseReady: false/u);
   assert.match(epochEngineSource, /const DAILY_HOLD = "HOLD_PENDING_GLOBAL_REWARD_WATERFALL"/u);
   assert.doesNotMatch(epochEngineSource, /reward-capacity-waterfall|reward-ledger\.v2/u);
   assert.match(capacityReferenceSource, /status: "NON_ACTIVATING_REFERENCE_RECEIPT"/u);

@@ -1,0 +1,247 @@
+{
+  "$schema": "./iat-b3-external-checkpoint-provider-readiness.v1.schema.json",
+  "schema": "iat-b3-external-checkpoint-provider-readiness/v1",
+  "profile": "PRODUCTION",
+  "readiness": "BLOCKED",
+  "status": "NON_ACTIVATING_PROVIDER_READINESS_REVIEW_PACKET",
+  "scope": {
+    "contract": "EXTERNAL_CHECKPOINT_PROVIDER_READINESS_INPUTS_ONLY",
+    "doesNotCertify": [
+      "PROVIDER_OPERATIONAL_TRUTH",
+      "RUNTIME_AUTHENTICATION",
+      "EXTERNAL_MONOTONICITY",
+      "ROLLBACK_PROTECTION",
+      "MAINNET_OR_RELEASE_READINESS",
+      "ACTIVATION_PAYMENT_OR_MINT_AUTHORITY"
+    ]
+  },
+  "referenceContract": {
+    "checkpointSchema": "iat-b3-reward-cas-external-checkpoint/v1",
+    "persistenceIdentitySchema": "iat-b3-reward-cas-persistence-identity/v1",
+    "dailyLawId": "IAT_B3_DAILY_LOCKDOWN_LAW_V1",
+    "checkpointAdvanceRule": "GENESIS_ONLY_FIRST_ANCHOR_THEN_EXACTLY_ONE_RETAINED_CAS_COMMIT",
+    "localCommitOrdering": "LOCAL_COMMIT_FIRST_EXTERNAL_CHECKPOINT_SECOND",
+    "providerIntegrationPresent": false
+  },
+  "subjectBinding": {
+    "status": "BLOCKED",
+    "environment": "PRODUCTION",
+    "productionIdentityFreezeManifestSha256": null,
+    "productionPersistenceIdentitySha256": null,
+    "productionDeploymentDomainSha256": null,
+    "adapterSchema": null,
+    "adapterSchemaVersion": null,
+    "schemaManifestSha256": null,
+    "genesisEntitySetSha256": null,
+    "externalNamespaceSha256": null,
+    "externalTrustPolicySha256": null,
+    "evidence": null,
+    "blocker": "The production identity-freeze packet, persistence identity, deployment domain, SQLite schema manifest, Genesis entity set, and external namespace and trust policy are not frozen."
+  },
+  "providerBinding": {
+    "status": "BLOCKED",
+    "environment": "PRODUCTION",
+    "providerLegalEntityId": null,
+    "serviceProductId": null,
+    "tenantId": null,
+    "resourceId": null,
+    "serviceRegionPolicyId": null,
+    "termsVersion": null,
+    "termsSha256": null,
+    "retentionPolicySha256": null,
+    "receiptFormatId": null,
+    "receiptTrustRootSha256": null,
+    "keyRegistryResourceId": null,
+    "evidence": null,
+    "blocker": "No production provider, service, tenant, resource, region policy, terms, retention policy, authenticated receipt format, trust root, or key registry has been selected or independently reviewed."
+  },
+  "failureDomainSeparation": {
+    "status": "BLOCKED",
+    "environment": "PRODUCTION",
+    "localPersistenceFailureDomainId": null,
+    "providerWriteFailureDomainId": null,
+    "administrativeFailureDomainId": null,
+    "credentialFailureDomainId": null,
+    "backupFailureDomainId": null,
+    "separationRule": "LOCAL_DB_PROVIDER_WRITE_ADMIN_CREDENTIAL_AND_BACKUP_DOMAINS_ALL_DISTINCT",
+    "evidence": null,
+    "blocker": "The production local database, provider write path, provider administration, checkpoint credentials, and backup custody failure domains are unidentified and have no independence evidence."
+  },
+  "controlRequirements": [
+    {
+      "id": "LINEARIZABLE_CAS_READBACK",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "SINGLE_COPY_LINEARIZABLE_READBACK",
+        "EXACT_REVISION_AND_DIGEST_COMPARE_AND_SWAP",
+        "CONCURRENT_WRITERS_HAVE_EXACTLY_ONE_WINNER",
+        "STALE_COMPARE_AND_SWAP_REJECTS_WITHOUT_MUTATION"
+      ],
+      "evidence": null,
+      "blocker": "No independently observed production evidence proves single-copy linearizable reads and exact revision-plus-digest compare-and-swap under concurrency."
+    },
+    {
+      "id": "AUTHENTICATED_RECEIPTS_AND_KEY_LIFECYCLE",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "VERSIONED_DOMAIN_SEPARATED_RECEIPT_FORMAT",
+        "RECEIPT_BINDS_SUBJECT_CHECKPOINT_REQUEST_AND_RESPONSE",
+        "RECEIPT_ANTI_REPLAY_IS_ENFORCED",
+        "SIGNING_KEYS_ROTATE_WITH_BOUNDED_OVERLAP",
+        "REVOKED_OR_COMPROMISED_KEYS_FAIL_CLOSED",
+        "COMPROMISE_CUTOFF_REJECTS_RECEIPTS_AT_OR_AFTER_CUTOFF"
+      ],
+      "evidence": null,
+      "blocker": "The receipt transcript, anti-replay rule, trust root, rotation overlap, revocation registry, and key-compromise response have not been frozen or independently tested."
+    },
+    {
+      "id": "MONOTONIC_SEQUENCE_AND_FORK_PREVENTION",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "CHECKPOINT_SEQUENCE_NEVER_DECREASES",
+        "SAME_SEQUENCE_DIFFERENT_DIGEST_IS_REJECTED",
+        "UNRELATED_OR_FORKED_ANCESTRY_IS_REJECTED",
+        "MONOTONIC_STATE_SURVIVES_SERVICE_RESTART"
+      ],
+      "evidence": null,
+      "blocker": "No production service evidence proves durable sequence monotonicity, same-sequence fork rejection, ancestry rejection, and restart continuity."
+    },
+    {
+      "id": "AVAILABILITY_AND_RECOVERY",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "OUTAGE_AND_TIMEOUT_BEHAVIOR_FAILS_CLOSED",
+        "SERVICE_RECOVERY_PRESERVES_LAST_COMMITTED_CHECKPOINT",
+        "READ_AFTER_RECOVERY_IS_LINEARIZABLE",
+        "RECOVERY_TIME_AND_DATA_LOSS_OBJECTIVES_ARE_CONTRACTED"
+      ],
+      "evidence": null,
+      "blocker": "Outage, timeout, service restart, recovery consistency, retention, RTO, and RPO behavior are not contractually bound or independently exercised."
+    },
+    {
+      "id": "SINK_ROLLBACK_AND_RESTORE_DETECTION",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "OLDER_SINK_SNAPSHOT_IS_DETECTED",
+        "SINK_RESTORE_CANNOT_SILENTLY_DECREASE_SEQUENCE",
+        "CONTROL_PLANE_ROLLBACK_IS_DETECTED",
+        "ROLLBACK_DRILL_BINDS_PRE_AND_POST_STATE"
+      ],
+      "evidence": null,
+      "blocker": "No independent drill proves detection of whole-sink snapshot rollback, control-plane restore, or a decreasing monotonic checkpoint after disaster recovery."
+    },
+    {
+      "id": "DAILY_LAW_AND_LOCAL_HEAD_BINDING",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "DAILY_LAW_VALIDATED_BEFORE_STORE_OR_PROVIDER_READ",
+        "CHECKPOINT_BINDS_EXACT_PRODUCTION_PERSISTENCE_IDENTITY",
+        "CHECKPOINT_BINDS_EXACT_LOCAL_HEAD_SEQUENCE_AND_DIGEST",
+        "DENIED_DAILY_LAW_ATTEMPT_LEAVES_LOCAL_AND_EXTERNAL_STATE_UNCHANGED"
+      ],
+      "evidence": null,
+      "blocker": "No production integration design or evidence binds the immutable Daily Law decision, exact persistence identity, and exact local CAS head before every provider write."
+    },
+    {
+      "id": "SEQUENTIAL_CHECKPOINT_CONTINUITY",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "FIRST_ANCHOR_REQUIRES_LOCAL_GENESIS_HEAD",
+        "EVERY_ADVANCE_BINDS_EXACT_PREVIOUS_CHECKPOINT_DIGEST",
+        "EVERY_ADVANCE_COVERS_EXACTLY_ONE_RETAINED_CAS_COMMIT",
+        "SKIPPED_COMMIT_OR_SPLICED_PREDECESSOR_IS_REJECTED"
+      ],
+      "evidence": null,
+      "blocker": "No production service transcript proves Genesis-only onboarding and strict one-commit checkpoint continuity without skips, splices, or late backfill."
+    },
+    {
+      "id": "UNANCHORED_WRITE_AND_CONSUMER_GATING",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "DATABASE_AHEAD_BLOCKS_NEXT_AND_SUBSEQUENT_LOCAL_CAS_WRITES",
+        "DATABASE_AHEAD_BLOCKS_EVERY_DOWNSTREAM_REWARD_CONSUMER",
+        "GATING_REMAINS_CLOSED_DURING_PROVIDER_OUTAGE",
+        "GATING_REOPENS_ONLY_AFTER_EXACT_SEQUENTIAL_RECONCILIATION"
+      ],
+      "evidence": null,
+      "blocker": "The current reference does not gate later local CAS writes or downstream reward consumers while the database is ahead of the external checkpoint."
+    },
+    {
+      "id": "UNCERTAIN_RESPONSE_RECONCILIATION",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "LOST_RESPONSE_RECOVERS_ONLY_BY_EXACT_READBACK",
+        "ALTERNATE_READBACK_IS_REJECTED",
+        "STALE_RETRY_CANNOT_REPLACE_COMMITTED_CHECKPOINT",
+        "LOCAL_STATE_IS_UNCHANGED_BY_RECONCILIATION"
+      ],
+      "evidence": null,
+      "blocker": "No production provider evidence covers lost responses, exact readback, alternate state, stale retries, and immutable local-state reconciliation."
+    },
+    {
+      "id": "CREDENTIAL_ISOLATION",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "CHECKPOINT_CREDENTIALS_ARE_NOT_AVAILABLE_TO_APPLICATION_RUNTIME",
+        "WRITE_READ_ADMIN_AND_BACKUP_CREDENTIALS_ARE_SEPARATED",
+        "CREDENTIALS_ARE_HARDWARE_OR_MANAGED_KEY_BOUND",
+        "CREDENTIAL_ROTATION_AND_EMERGENCY_REVOCATION_FAIL_CLOSED"
+      ],
+      "evidence": null,
+      "blocker": "No production credential custody design separates application runtime, read, write, provider administration, and backup authority with fail-closed rotation and revocation."
+    },
+    {
+      "id": "BACKUP_INCIDENT_AND_DR",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "CLOSED_DATABASE_AND_PROVIDER_BACKUP_API_RESTORE_DRILL_PASSES",
+        "PROVIDER_OUTAGE_RECOVERY_PRESERVES_LAST_CHECKPOINT",
+        "SINK_ROLLBACK_IS_DETECTED_WITHOUT_EXTERNAL_REWIND",
+        "INCIDENT_RUNBOOK_COVERS_KEY_PROVIDER_AND_DATA_COMPROMISE",
+        "RECOVERY_EVIDENCE_BINDS_EXACT_PRODUCTION_SUBJECT"
+      ],
+      "evidence": null,
+      "blocker": "Content-addressed backup custody, restore drills, provider outage recovery, and incident runbooks for key, provider, and data compromise are absent."
+    },
+    {
+      "id": "INDEPENDENT_AUDIT_AND_REVIEW",
+      "status": "BLOCKED",
+      "requiredClaims": [
+        "SECURITY_REVIEW_IS_INDEPENDENT",
+        "LEGAL_TERMS_AND_RETENTION_ARE_REVIEWED",
+        "OPERATIONS_AND_DISASTER_RECOVERY_ARE_REVIEWED",
+        "EVIDENCE_DIGESTS_ARE_REPRODUCIBLE",
+        "REVIEWERS_ARE_NOT_PROVIDER_ADMINS_OR_CHECKPOINT_OPERATORS"
+      ],
+      "evidence": null,
+      "blocker": "No content-addressed independent security, legal, retention, operations, disaster-recovery, and separation-of-duties review packet exists."
+    }
+  ],
+  "terminalPredicate": {
+    "status": "BLOCKED",
+    "requiredSections": [
+      "SUBJECT_BINDING",
+      "PROVIDER_BINDING",
+      "FAILURE_DOMAIN_SEPARATION",
+      "LINEARIZABLE_CAS_READBACK",
+      "AUTHENTICATED_RECEIPTS_AND_KEY_LIFECYCLE",
+      "MONOTONIC_SEQUENCE_AND_FORK_PREVENTION",
+      "AVAILABILITY_AND_RECOVERY",
+      "SINK_ROLLBACK_AND_RESTORE_DETECTION",
+      "DAILY_LAW_AND_LOCAL_HEAD_BINDING",
+      "SEQUENTIAL_CHECKPOINT_CONTINUITY",
+      "UNANCHORED_WRITE_AND_CONSUMER_GATING",
+      "UNCERTAIN_RESPONSE_RECONCILIATION",
+      "CREDENTIAL_ISOLATION",
+      "BACKUP_INCIDENT_AND_DR",
+      "INDEPENDENT_AUDIT_AND_REVIEW"
+    ],
+    "evaluationRule": "ALL_REQUIRED_PACKETS_COMPLETE_ZERO_VIOLATIONS_ZERO_BLOCKERS",
+    "blocker": "The production subject, provider, independent failure domains, required control evidence, and independent review packet are incomplete; provider-readiness remains BLOCKED."
+  },
+  "runtimeAuthenticationVerified": false,
+  "externalMonotonicityVerified": false,
+  "rollbackProtectionVerified": false,
+  "activationReady": false,
+  "mainnetStatus": "HOLD"
+}
