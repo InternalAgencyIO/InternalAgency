@@ -1,0 +1,1543 @@
+{
+  "batch": 297,
+  "country": "Slovenia",
+  "status": "terminal-blocked-after-single-recovery-pass",
+  "sourceCommit": "fddb501f8d0e2c75c22e0cab7206f5b39f268c5a",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch297-slovenia keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "cleaner and service couture",
+    "cinematic covert-agent crew couture"
+  ],
+  "nextThemePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "nextQueueCountry": "Spain",
+  "researchSources": [
+    {
+      "url": "https://www.slovenia.info/en/places-to-go/regions/ljubljana-central-slovenia/ljubljana",
+      "usedFor": "Ljubljana Castle, Ljubljanica, Triple Bridge, and Dragon Bridge"
+    },
+    {
+      "url": "https://www.slovenia.info/en/places-to-go/regions/alpine-slovenia/bled",
+      "usedFor": "Lake Bled, Bled Castle, pletna boat, and Alpine setting"
+    },
+    {
+      "url": "https://www.slovenia.info/en/places-to-go/attractions/postojna-cave",
+      "usedFor": "Postojna Cave, karst formations, cave railway, olm, and Predjama Castle"
+    },
+    {
+      "url": "https://www.slovenia.info/en/places-to-go/attractions/lipica",
+      "usedFor": "Lipica Stud Farm, Lipizzaner horses, and Karst landscape"
+    },
+    {
+      "url": "https://www.slovenia.info/en/press-centre/news-of-the-tourism-press-agency/6212-beekeeping-tourism-in-slovenia-the-land-of-good-beekeepers",
+      "usedFor": "painted beehive panels and bee houses"
+    },
+    {
+      "url": "https://www.slovenia.info/en/press-centre/news-of-the-tourism-press-agency/7511-is-it-pizza-or-potica-it-s-potica-a-traditional-slovenian-cake",
+      "usedFor": "potica as a traditional Slovenian pastry"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch297-slovenia-male-model-scene",
+    "fullHash": 1023846928,
+    "roll": 28,
+    "selectedScenePosition": 1,
+    "selectedScene": 1208,
+    "maleEmotion": {
+      "key": "batch297-slovenia-scene1-male-emotion",
+      "roll": 87,
+      "result": "fear and urgent vulnerability"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Slovenia's flag contains an official coat of arms, so it is not copied. Large secular architecture, landscape, animal, craft, food, and transport motifs replace it.",
+    "palette": "white, blue, and red expanded with Ljubljana green, Ljubljanica teal, Bled turquoise, castle stone, karst cream, cave amber, Lipica white, pasture green, hive-panel colors, and honey gold",
+    "minimumCoverage": "Every scene places large complete secular Slovenia motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScene": "Scene 1211 includes painted beehive panels, sealed honey jars, and sliced potica on a dry unattended civilian table far from the prop lane.",
+    "prohibitions": "No literal flag, coat of arms, official emblem, sacred symbol, copied folk costume, copied uniform, badge, police impersonation, political insignia, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch297-slovenia-x-heart",
+      "roll": 21,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch297-slovenia-x-internalagency",
+      "roll": 69,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch297-slovenia-x-worldxxxseries",
+      "roll": 30,
+      "active": false
+    }
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1209, 1210, and 1211 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1208 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch297-slovenia-male-model-scene",
+        28
+      ],
+      [
+        "batch297-slovenia-scene1-male-emotion",
+        87
+      ],
+      [
+        "batch297-slovenia-scene1208-weather",
+        54
+      ],
+      [
+        "batch297-slovenia-scene1208-paws",
+        87
+      ],
+      [
+        "batch297-slovenia-scene1208-poleDanceTheme",
+        80
+      ],
+      [
+        "batch297-slovenia-scene1208-rainbowOnly",
+        14
+      ],
+      [
+        "batch297-slovenia-scene1208-rainbowHosiery",
+        5
+      ],
+      [
+        "batch297-slovenia-scene1208-romanceBeat",
+        99
+      ],
+      [
+        "batch297-slovenia-scene1208-compoundLoveBeat",
+        99
+      ],
+      [
+        "batch297-slovenia-scene1208-Radiance-emotion",
+        55
+      ],
+      [
+        "batch297-slovenia-scene1208-Radiance-visibleMidriff",
+        7
+      ],
+      [
+        "batch297-slovenia-scene1208-Radiance-straplessDress",
+        12
+      ],
+      [
+        "batch297-slovenia-scene1208-Radiance-fullyOpenBack",
+        41
+      ],
+      [
+        "batch297-slovenia-scene1208-Ellie-emotion",
+        35
+      ],
+      [
+        "batch297-slovenia-scene1208-Ellie-visibleMidriff",
+        71
+      ],
+      [
+        "batch297-slovenia-scene1208-Ellie-straplessDress",
+        88
+      ],
+      [
+        "batch297-slovenia-scene1208-Ellie-fullyOpenBack",
+        49
+      ],
+      [
+        "batch297-slovenia-scene1208-Alia-emotion",
+        25
+      ],
+      [
+        "batch297-slovenia-scene1208-Alia-visibleMidriff",
+        89
+      ],
+      [
+        "batch297-slovenia-scene1208-Alia-straplessDress",
+        66
+      ],
+      [
+        "batch297-slovenia-scene1208-Alia-fullyOpenBack",
+        99
+      ],
+      [
+        "batch297-slovenia-scene1208-AI ECE-emotion",
+        11
+      ],
+      [
+        "batch297-slovenia-scene1208-AI ECE-visibleMidriff",
+        23
+      ],
+      [
+        "batch297-slovenia-scene1208-AI ECE-straplessDress",
+        48
+      ],
+      [
+        "batch297-slovenia-scene1208-AI ECE-fullyOpenBack",
+        5
+      ],
+      [
+        "batch297-slovenia-scene1209-weather",
+        33
+      ],
+      [
+        "batch297-slovenia-scene1209-paws",
+        6
+      ],
+      [
+        "batch297-slovenia-scene1209-poleDanceTheme",
+        13
+      ],
+      [
+        "batch297-slovenia-scene1209-rainbowOnly",
+        49
+      ],
+      [
+        "batch297-slovenia-scene1209-rainbowHosiery",
+        32
+      ],
+      [
+        "batch297-slovenia-scene1209-romanceBeat",
+        0
+      ],
+      [
+        "batch297-slovenia-scene1209-compoundLoveBeat",
+        38
+      ],
+      [
+        "batch297-slovenia-scene1209-Radiance-emotion",
+        34
+      ],
+      [
+        "batch297-slovenia-scene1209-Radiance-visibleMidriff",
+        28
+      ],
+      [
+        "batch297-slovenia-scene1209-Radiance-straplessDress",
+        31
+      ],
+      [
+        "batch297-slovenia-scene1209-Radiance-fullyOpenBack",
+        88
+      ],
+      [
+        "batch297-slovenia-scene1209-Ellie-emotion",
+        52
+      ],
+      [
+        "batch297-slovenia-scene1209-Ellie-visibleMidriff",
+        38
+      ],
+      [
+        "batch297-slovenia-scene1209-Ellie-straplessDress",
+        93
+      ],
+      [
+        "batch297-slovenia-scene1209-Ellie-fullyOpenBack",
+        66
+      ],
+      [
+        "batch297-slovenia-scene1209-Alia-emotion",
+        68
+      ],
+      [
+        "batch297-slovenia-scene1209-Alia-visibleMidriff",
+        42
+      ],
+      [
+        "batch297-slovenia-scene1209-Alia-straplessDress",
+        1
+      ],
+      [
+        "batch297-slovenia-scene1209-Alia-fullyOpenBack",
+        42
+      ],
+      [
+        "batch297-slovenia-scene1209-AI ECE-emotion",
+        78
+      ],
+      [
+        "batch297-slovenia-scene1209-AI ECE-visibleMidriff",
+        24
+      ],
+      [
+        "batch297-slovenia-scene1209-AI ECE-straplessDress",
+        27
+      ],
+      [
+        "batch297-slovenia-scene1209-AI ECE-fullyOpenBack",
+        96
+      ],
+      [
+        "batch297-slovenia-scene1210-weather",
+        7
+      ],
+      [
+        "batch297-slovenia-scene1210-paws",
+        36
+      ],
+      [
+        "batch297-slovenia-scene1210-poleDanceTheme",
+        31
+      ],
+      [
+        "batch297-slovenia-scene1210-rainbowOnly",
+        71
+      ],
+      [
+        "batch297-slovenia-scene1210-rainbowHosiery",
+        54
+      ],
+      [
+        "batch297-slovenia-scene1210-romanceBeat",
+        10
+      ],
+      [
+        "batch297-slovenia-scene1210-compoundLoveBeat",
+        68
+      ],
+      [
+        "batch297-slovenia-scene1210-Radiance-emotion",
+        56
+      ],
+      [
+        "batch297-slovenia-scene1210-Radiance-visibleMidriff",
+        18
+      ],
+      [
+        "batch297-slovenia-scene1210-Radiance-straplessDress",
+        73
+      ],
+      [
+        "batch297-slovenia-scene1210-Radiance-fullyOpenBack",
+        82
+      ],
+      [
+        "batch297-slovenia-scene1210-Ellie-emotion",
+        90
+      ],
+      [
+        "batch297-slovenia-scene1210-Ellie-visibleMidriff",
+        52
+      ],
+      [
+        "batch297-slovenia-scene1210-Ellie-straplessDress",
+        35
+      ],
+      [
+        "batch297-slovenia-scene1210-Ellie-fullyOpenBack",
+        80
+      ],
+      [
+        "batch297-slovenia-scene1210-Alia-emotion",
+        94
+      ],
+      [
+        "batch297-slovenia-scene1210-Alia-visibleMidriff",
+        60
+      ],
+      [
+        "batch297-slovenia-scene1210-Alia-straplessDress",
+        95
+      ],
+      [
+        "batch297-slovenia-scene1210-Alia-fullyOpenBack",
+        60
+      ],
+      [
+        "batch297-slovenia-scene1210-AI ECE-emotion",
+        20
+      ],
+      [
+        "batch297-slovenia-scene1210-AI ECE-visibleMidriff",
+        26
+      ],
+      [
+        "batch297-slovenia-scene1210-AI ECE-straplessDress",
+        81
+      ],
+      [
+        "batch297-slovenia-scene1210-AI ECE-fullyOpenBack",
+        6
+      ],
+      [
+        "batch297-slovenia-scene1211-weather",
+        76
+      ],
+      [
+        "batch297-slovenia-scene1211-paws",
+        93
+      ],
+      [
+        "batch297-slovenia-scene1211-poleDanceTheme",
+        94
+      ],
+      [
+        "batch297-slovenia-scene1211-rainbowOnly",
+        32
+      ],
+      [
+        "batch297-slovenia-scene1211-rainbowHosiery",
+        63
+      ],
+      [
+        "batch297-slovenia-scene1211-romanceBeat",
+        21
+      ],
+      [
+        "batch297-slovenia-scene1211-compoundLoveBeat",
+        33
+      ],
+      [
+        "batch297-slovenia-scene1211-Radiance-emotion",
+        69
+      ],
+      [
+        "batch297-slovenia-scene1211-Radiance-visibleMidriff",
+        9
+      ],
+      [
+        "batch297-slovenia-scene1211-Radiance-straplessDress",
+        46
+      ],
+      [
+        "batch297-slovenia-scene1211-Radiance-fullyOpenBack",
+        63
+      ],
+      [
+        "batch297-slovenia-scene1211-Ellie-emotion",
+        37
+      ],
+      [
+        "batch297-slovenia-scene1211-Ellie-visibleMidriff",
+        37
+      ],
+      [
+        "batch297-slovenia-scene1211-Ellie-straplessDress",
+        26
+      ],
+      [
+        "batch297-slovenia-scene1211-Ellie-fullyOpenBack",
+        95
+      ],
+      [
+        "batch297-slovenia-scene1211-Alia-emotion",
+        55
+      ],
+      [
+        "batch297-slovenia-scene1211-Alia-visibleMidriff",
+        91
+      ],
+      [
+        "batch297-slovenia-scene1211-Alia-straplessDress",
+        28
+      ],
+      [
+        "batch297-slovenia-scene1211-Alia-fullyOpenBack",
+        33
+      ],
+      [
+        "batch297-slovenia-scene1211-AI ECE-emotion",
+        17
+      ],
+      [
+        "batch297-slovenia-scene1211-AI ECE-visibleMidriff",
+        61
+      ],
+      [
+        "batch297-slovenia-scene1211-AI ECE-straplessDress",
+        86
+      ],
+      [
+        "batch297-slovenia-scene1211-AI ECE-fullyOpenBack",
+        71
+      ],
+      [
+        "batch297-slovenia-x-heart",
+        21
+      ],
+      [
+        "batch297-slovenia-x-internalagency",
+        69
+      ],
+      [
+        "batch297-slovenia-x-worldxxxseries",
+        30
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch297-slovenia-scene1208-rainbowHosieryWearer",
+        25
+      ],
+      [
+        "batch297-slovenia-scene1208-rainbowHosieryPaletteMode",
+        7
+      ],
+      [
+        "batch297-slovenia-scene1209-rainbowHosieryWearer",
+        72
+      ],
+      [
+        "batch297-slovenia-scene1209-rainbowHosieryPaletteMode",
+        36
+      ],
+      [
+        "batch297-slovenia-scene1210-rainbowHosieryWearer",
+        94
+      ],
+      [
+        "batch297-slovenia-scene1210-rainbowHosieryPaletteMode",
+        30
+      ],
+      [
+        "batch297-slovenia-scene1211-rainbowHosieryWearer",
+        63
+      ],
+      [
+        "batch297-slovenia-scene1211-rainbowHosieryPaletteMode",
+        77
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "87EA5F51F44A87B2F2C3CB79BF279838B488425B9593C44B0620F8B8092B5FE2",
+    "hosierySelectorPairsSha256": "028F4D358A67B68FCBCD3471EB6B0751C87F12DAD44B8CFDEC846311848ADE75"
+  },
+  "scenePlans": {
+    "1208": {
+      "scene": 1208,
+      "theme": "cleaner and service couture",
+      "landmark": "a broad dry riverside terrace in Ljubljana with Ljubljana Castle, the Ljubljanica, Triple Bridge, and Dragon Bridge all legible behind the cast",
+      "motifs": [
+        "one large complete green Ljubljana dragon and a complete white Ljubljana Castle silhouette spanning Radiance's cobalt skirt panels",
+        "one large complete Triple Bridge fan geometry and teal Ljubljanica river curve spanning Ellie's red-white coat-dress",
+        "complete castle-window and dragon-scale geometry across Alia and ECE"
+      ],
+      "culture": "Secular Ljubljana city architecture only, with no literal flag, coat of arms, sacred emblem, official insignia, or copied uniform.",
+      "weather": {
+        "key": "batch297-slovenia-scene1208-weather",
+        "roll": 54,
+        "result": "hailstorm with suspended ice and hard backlight"
+      },
+      "paws": {
+        "key": "batch297-slovenia-scene1208-paws",
+        "roll": 87,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch297-slovenia-scene1208-poleDanceTheme",
+        "roll": 80,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch297-slovenia-scene1208-rainbowOnly",
+        "roll": 14,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch297-slovenia-scene1208-rainbowHosiery",
+        "roll": 5,
+        "active": true,
+        "wearer": {
+          "key": "batch297-slovenia-scene1208-rainbowHosieryWearer",
+          "roll": 25,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch297-slovenia-scene1208-rainbowHosieryPaletteMode",
+          "roll": 7,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch297-slovenia-scene1208-romanceBeat",
+        "roll": 99,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch297-slovenia-scene1208-compoundLoveBeat",
+        "roll": 99,
+        "index": 3,
+        "contractResult": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1208-Radiance-emotion",
+            "roll": 55,
+            "result": "aching romantic longing"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1208-Radiance-visibleMidriff",
+            "roll": 7,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1208-Radiance-straplessDress",
+            "roll": 12,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1208-Radiance-fullyOpenBack",
+            "roll": 41,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1208-Ellie-emotion",
+            "roll": 35,
+            "result": "magnetic confidence"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1208-Ellie-visibleMidriff",
+            "roll": 71,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1208-Ellie-straplessDress",
+            "roll": 88,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1208-Ellie-fullyOpenBack",
+            "roll": 49,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1208-Alia-emotion",
+            "roll": 25,
+            "result": "calm contentment"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1208-Alia-visibleMidriff",
+            "roll": 89,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1208-Alia-straplessDress",
+            "roll": 66,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1208-Alia-fullyOpenBack",
+            "roll": 99,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1208-AI ECE-emotion",
+            "roll": 11,
+            "result": "romantic joy"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1208-AI ECE-visibleMidriff",
+            "roll": 23,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1208-AI ECE-straplessDress",
+            "roll": 48,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1208-AI ECE-fullyOpenBack",
+            "roll": 5,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Radiance and ECE are the unmistakable affectionate center: ECE wraps Radiance at the waist while Radiance leans cheek-to-cheek into ECE with luminous longing. Radiance also reaches openly for the male's forearm. The male touches Ellie and Alia in an overt fictional adult infidelity beat, but his strongest sustained eye line crosses the group only to his wife ECE. Ellie answers with magnetic confidence, Alia stays calmly amused while safely handling the prop, and the male's fear reads as urgent vulnerability rather than danger.",
+      "outfits": {
+        "Radiance": "a fully strapless cobalt cropped service-couture bandeau with completely bare shoulders, a separate white-red asymmetric mini skirt exposing her ordinary waist and belly button, large complete green dragon and white castle panels, country-palette opaque knee socks grading cobalt to Ljubljana green to red, and silver block-heel ankle boots",
+        "Ellie": "a red-white architectural short-sleeve coat-dress with covered waist, high closed back, large complete teal river curve and cobalt Triple Bridge fan panels, and green slingback pumps",
+        "Alia": "a cobalt narrow-strap fitted utility romper with covered waist, high closed back, large complete white castle-window and green dragon-scale panels, and red platform heels",
+        "AI ECE": "a red one-shoulder cropped wrap bodice exposing her ordinary waist and belly button, a completely open back visible in three-quarter turn, separate cobalt tailored mini shorts with complete white bridge-arch panels, and white ankle boots",
+        "Male": "the established adult male face from Scene 1136, closely trimmed beard and muscular special-operative build, a fitted opaque short-sleeve white polo with restrained cobalt-red-green city seams, black jeans, and black boots"
+      },
+      "propPlan": "Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film mission prop at the far right edge. She demonstrates clean side-profile sight alignment toward one clearly empty unoccupied riverside route target. The prop is visibly magazine-free. Alia's right index finger is fully extended flat and high along the TOP OUTSIDE of the slide, well above the trigger guard; the complete trigger guard is visible and empty. The muzzle points downrange away from every person and the camera, never at the sky. ECE uses a separate small holographic route map and never touches the prop.",
+      "handInventory": [
+        "Radiance left hand rests at ECE's waist; Radiance right hand rests on the male's left forearm",
+        "Ellie left hand rests on the male's upper chest; Ellie right hand rests on Alia's left shoulder",
+        "Alia left hand rests at Ellie's waist; Alia right hand alone holds the inert prop with her index finger flat on top outside the slide",
+        "ECE left hand rests at Radiance's waist; ECE right hand controls one separate holographic route map",
+        "Male left hand rests at Alia's waist; Male right hand rests at Ellie's waist"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch297-slovenia-scene1-male-emotion",
+          "roll": 87,
+          "result": "fear and urgent vulnerability"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; overt fictional adult infidelity drama with Alia and Ellie; Radiance reaches for him; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, Image 4 ECE's face-detail anchor, and Image 5 the adult male face/build anchor. Use references only for identity; ignore reference clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry riverside terrace in Ljubljana with Ljubljana Castle, the Ljubljanica, Triple Bridge, and Dragon Bridge all legible behind the cast. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male from Image 5. The male is added without replacing any woman. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: cleaner and service couture, treated only as public-safe fictional fashion with no copied uniform, badge, impersonation, stripping, explicit dance, assassination, arrest, raid, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and consists of four unmistakably different original silhouettes: Radiance: a fully strapless cobalt cropped service-couture bandeau with completely bare shoulders, a separate white-red asymmetric mini skirt exposing her ordinary waist and belly button, large complete green dragon and white castle panels, country-palette opaque knee socks grading cobalt to Ljubljana green to red, and silver block-heel ankle boots; Ellie: a red-white architectural short-sleeve coat-dress with covered waist, high closed back, large complete teal river curve and cobalt Triple Bridge fan panels, and green slingback pumps; Alia: a cobalt narrow-strap fitted utility romper with covered waist, high closed back, large complete white castle-window and green dragon-scale panels, and red platform heels; AI ECE: a red one-shoulder cropped wrap bodice exposing her ordinary waist and belly button, a completely open back visible in three-quarter turn, separate cobalt tailored mini shorts with complete white bridge-arch panels, and white ankle boots; Male: the established adult male face from Scene 1136, closely trimmed beard and muscular special-operative build, a fitted opaque short-sleeve white polo with restrained cobalt-red-green city seams, black jeans, and black boots. Materialize every rolled cut exactly. Large complete secular Slovenia motifs must be clearly readable on at least two outfits: one large complete green Ljubljana dragon and a complete white Ljubljana Castle silhouette spanning Radiance's cobalt skirt panels; one large complete Triple Bridge fan geometry and teal Ljubljanica river curve spanning Ellie's red-white coat-dress; complete castle-window and dragon-scale geometry across Alia and ECE. Secular Ljubljana city architecture only, with no literal flag, coat of arms, sacred emblem, official insignia, or copied uniform. Distinct emotional performances: Radiance: aching romantic longing; Ellie: magnetic confidence; Alia: calm contentment; AI ECE: romantic joy; Male: fear and urgent vulnerability. Materialize the rolled romance and compound-love beats through this exact consensual choreography: Radiance and ECE are the unmistakable affectionate center: ECE wraps Radiance at the waist while Radiance leans cheek-to-cheek into ECE with luminous longing. Radiance also reaches openly for the male's forearm. The male touches Ellie and Alia in an overt fictional adult infidelity beat, but his strongest sustained eye line crosses the group only to his wife ECE. Ellie answers with magnetic confidence, Alia stays calmly amused while safely handling the prop, and the male's fear reads as urgent vulnerability rather than danger. Use this exact hand ownership inventory and no other hands: Radiance left hand rests at ECE's waist; Radiance right hand rests on the male's left forearm; Ellie left hand rests on the male's upper chest; Ellie right hand rests on Alia's left shoulder; Alia left hand rests at Ellie's waist; Alia right hand alone holds the inert prop with her index finger flat on top outside the slide; ECE left hand rests at Radiance's waist; ECE right hand controls one separate holographic route map; Male left hand rests at Alia's waist; Male right hand rests at Ellie's waist. Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film mission prop at the far right edge. She demonstrates clean side-profile sight alignment toward one clearly empty unoccupied riverside route target. The prop is visibly magazine-free. Alia's right index finger is fully extended flat and high along the TOP OUTSIDE of the slide, well above the trigger guard; the complete trigger guard is visible and empty. The muzzle points downrange away from every person and the camera, never at the sky. ECE uses a separate small holographic route map and never touches the prop. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. Exactly one hosiery wearer: Radiance. Use opaque country-palette rainbow-like gradient stockings or knee socks. Radiance and ECE become the unmistakable extra-affectionate center, and Alia alone handles the inert prop. Materialize the rolled weather as hailstorm with suspended ice and hard backlight. Keep the platform stable, dry, and readable while rendering the weather cinematically. Exactly five adults, exactly ten arms and exactly ten hands, two per person. Every elbow, wrist, hand, and finger cluster is fully visible and continuously traceable to one owner. Arrange the adults in a shallow arc with clean silhouette separation, not a static lineup. Full-length framing includes every complete face, shoulder, elbow, wrist, hand, leg, foot, heel, and boot inside the frame. Keep hands separated from garment edges and from one another except for the listed contacts. Strict anatomy gate: no extra, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, leg, foot, face, person, or kitten. Every listed hand performs exactly one listed action. The inert mission prop remains a single harmless film object. No ammunition, magazine insertion, live reload, firing, muzzle flash, holster, low-side carry, threat, injury, or combat. No text, watermark, literal flag, coat of arms, official emblem, sacred symbol, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    },
+    "1209": {
+      "scene": 1209,
+      "theme": "cleaner and service couture",
+      "landmark": "a broad covered stone pier at Lake Bled with turquoise water, the cliff-top Bled Castle, a traditional pletna boat, the island silhouette, and Alpine peaks all legible",
+      "motifs": [
+        "one large complete Bled Castle cliff silhouette and turquoise lake field across Radiance",
+        "one large complete pletna boat and Alpine ridge field across Ellie",
+        "complete castle-window, lake-ripple, and oar geometry across Alia and ECE"
+      ],
+      "culture": "The island architecture is distant and contains no copied sacred symbol. Secular lake, castle, boat, and Alpine motifs dominate every outfit.",
+      "weather": {
+        "key": "batch297-slovenia-scene1209-weather",
+        "roll": 33,
+        "result": "cinematic light rain with reflections"
+      },
+      "paws": {
+        "key": "batch297-slovenia-scene1209-paws",
+        "roll": 6,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch297-slovenia-scene1209-poleDanceTheme",
+        "roll": 13,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch297-slovenia-scene1209-rainbowOnly",
+        "roll": 49,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch297-slovenia-scene1209-rainbowHosiery",
+        "roll": 32,
+        "active": false,
+        "wearer": {
+          "key": "batch297-slovenia-scene1209-rainbowHosieryWearer",
+          "roll": 72,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch297-slovenia-scene1209-rainbowHosieryPaletteMode",
+          "roll": 36,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch297-slovenia-scene1209-romanceBeat",
+        "roll": 0,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch297-slovenia-scene1209-compoundLoveBeat",
+        "roll": 38,
+        "index": 2,
+        "contractResult": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1209-Radiance-emotion",
+            "roll": 34,
+            "result": "overwhelming relief"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1209-Radiance-visibleMidriff",
+            "roll": 28,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1209-Radiance-straplessDress",
+            "roll": 31,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1209-Radiance-fullyOpenBack",
+            "roll": 88,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1209-Ellie-emotion",
+            "roll": 52,
+            "result": "intense curiosity"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1209-Ellie-visibleMidriff",
+            "roll": 38,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1209-Ellie-straplessDress",
+            "roll": 93,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1209-Ellie-fullyOpenBack",
+            "roll": 66,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1209-Alia-emotion",
+            "roll": 68,
+            "result": "possessive tension"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1209-Alia-visibleMidriff",
+            "roll": 42,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1209-Alia-straplessDress",
+            "roll": 1,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1209-Alia-fullyOpenBack",
+            "roll": 42,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1209-AI ECE-emotion",
+            "roll": 78,
+            "result": "deep sadness"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1209-AI ECE-visibleMidriff",
+            "roll": 24,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1209-AI ECE-straplessDress",
+            "roll": 27,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1209-AI ECE-fullyOpenBack",
+            "roll": 96,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Relieved Radiance steadies curious Ellie at the shoulder while gently petting PAWS. Ellie cradles PAWS securely and keeps one warm waist contact with tense Alia. Alia's hand rests tenderly on ECE's shoulder despite her possessive expression, while sad ECE remains close and completes the safe route demonstration. The group forms a shallow affectionate arc rather than a lineup.",
+      "outfits": {
+        "Radiance": "a fully strapless turquoise cropped folded bandeau with completely bare shoulders, a separate white-blue pleated service mini skirt exposing her ordinary waist and belly button, large complete Bled Castle cliff panels, and red architectural pumps",
+        "Ellie": "a cobalt asymmetric short-sleeve cropped wrap top exposing her ordinary waist and belly button, separate white tailored mini shorts with a large complete red pletna boat and turquoise Alpine ridge field, and silver ankle boots",
+        "Alia": "a fully strapless red sculpted cropped peplum with completely bare shoulders, a separate cobalt-white petal mini skirt exposing her ordinary waist and belly button, large complete castle-window and lake-ripple panels, and turquoise platform heels",
+        "AI ECE": "a fully strapless white cropped corsage top with completely bare shoulders, a separate cobalt asymmetric mini skort exposing her ordinary waist and belly button, large complete turquoise oar and red lake-route fields, and red slingback heels"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film mission prop at the far right edge, performing clean side-profile sight alignment toward clearly empty Lake Bled water. The prop is visibly magazine-free. Her right index finger is fully extended flat and high along the TOP OUTSIDE of the slide, well above the trigger guard; the complete trigger guard is visible and empty. The muzzle points across empty water away from every person and the camera, never at the sky. A separate holographic route map floats beside her left forearm without hiding her hand.",
+      "handInventory": [
+        "Radiance left hand gently pets PAWS between the ears; Radiance right hand rests on Ellie's shoulder",
+        "Ellie left forearm and hand securely cradle PAWS; Ellie right hand rests at Alia's waist",
+        "Alia left hand rests on Ellie's forearm below PAWS; Alia right hand rests on ECE's shoulder",
+        "ECE right hand alone holds the inert prop with index finger flat on top outside the slide; ECE left hand is open and visibly controls the separate holographic route map"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. Use references only for identity; ignore reference clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad covered stone pier at Lake Bled with turquoise water, the cliff-top Bled Castle, a traditional pletna boat, the island silhouette, and Alpine peaks all legible. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: cleaner and service couture, treated only as public-safe fictional fashion with no copied uniform, badge, impersonation, stripping, explicit dance, assassination, arrest, raid, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and consists of four unmistakably different original silhouettes: Radiance: a fully strapless turquoise cropped folded bandeau with completely bare shoulders, a separate white-blue pleated service mini skirt exposing her ordinary waist and belly button, large complete Bled Castle cliff panels, and red architectural pumps; Ellie: a cobalt asymmetric short-sleeve cropped wrap top exposing her ordinary waist and belly button, separate white tailored mini shorts with a large complete red pletna boat and turquoise Alpine ridge field, and silver ankle boots; Alia: a fully strapless red sculpted cropped peplum with completely bare shoulders, a separate cobalt-white petal mini skirt exposing her ordinary waist and belly button, large complete castle-window and lake-ripple panels, and turquoise platform heels; AI ECE: a fully strapless white cropped corsage top with completely bare shoulders, a separate cobalt asymmetric mini skort exposing her ordinary waist and belly button, large complete turquoise oar and red lake-route fields, and red slingback heels. Materialize every rolled cut exactly. Large complete secular Slovenia motifs must be clearly readable on at least two outfits: one large complete Bled Castle cliff silhouette and turquoise lake field across Radiance; one large complete pletna boat and Alpine ridge field across Ellie; complete castle-window, lake-ripple, and oar geometry across Alia and ECE. The island architecture is distant and contains no copied sacred symbol. Secular lake, castle, boat, and Alpine motifs dominate every outfit. Distinct emotional performances: Radiance: overwhelming relief; Ellie: intense curiosity; Alia: possessive tension; AI ECE: deep sadness. Materialize the rolled romance and compound-love beats through this exact consensual choreography: Relieved Radiance steadies curious Ellie at the shoulder while gently petting PAWS. Ellie cradles PAWS securely and keeps one warm waist contact with tense Alia. Alia's hand rests tenderly on ECE's shoulder despite her possessive expression, while sad ECE remains close and completes the safe route demonstration. The group forms a shallow affectionate arc rather than a lineup. Use this exact hand ownership inventory and no other hands: Radiance left hand gently pets PAWS between the ears; Radiance right hand rests on Ellie's shoulder; Ellie left forearm and hand securely cradle PAWS; Ellie right hand rests at Alia's waist; Alia left hand rests on Ellie's forearm below PAWS; Alia right hand rests on ECE's shoulder; ECE right hand alone holds the inert prop with index finger flat on top outside the slide; ECE left hand is open and visibly controls the separate holographic route map. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film mission prop at the far right edge, performing clean side-profile sight alignment toward clearly empty Lake Bled water. The prop is visibly magazine-free. Her right index finger is fully extended flat and high along the TOP OUTSIDE of the slide, well above the trigger guard; the complete trigger guard is visible and empty. The muzzle points across empty water away from every person and the camera, never at the sky. A separate holographic route map floats beside her left forearm without hiding her hand. PAWS is exactly one tiny collarless golden kitten, securely cradled high in Ellie's left forearm. Radiance gently pets PAWS with one visible hand. PAWS is far from the prop lane, dry under the canopy, playful and safe, with no second kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize the rolled weather as cinematic light rain with reflections. Keep the platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every elbow, wrist, hand, and finger cluster is fully visible and continuously traceable to one owner. Arrange the adults in a shallow arc with clean silhouette separation, not a static lineup. Full-length framing includes every complete face, shoulder, elbow, wrist, hand, leg, foot, heel, and boot inside the frame. Keep hands separated from garment edges and from one another except for the listed contacts. Strict anatomy gate: no extra, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, leg, foot, face, person, or kitten. Every listed hand performs exactly one listed action. The inert mission prop remains a single harmless film object. No ammunition, magazine insertion, live reload, firing, muzzle flash, holster, low-side carry, threat, injury, or combat. No text, watermark, literal flag, coat of arms, official emblem, sacred symbol, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    },
+    "1210": {
+      "scene": 1210,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "the broad dry visitor platform inside Postojna Cave with monumental karst stalactites, a stopped empty cave train, a discreet olm interpretation display, and distant Predjama Castle visible through the sunlit entrance",
+      "motifs": [
+        "one large complete amber stalactite cathedral field and cream karst arch across Radiance",
+        "one large complete red cave-train profile and white Predjama cliff-castle silhouette across Ellie",
+        "complete olm, cave-river, and limestone-strata fields across Alia and ECE"
+      ],
+      "culture": "The olm appears only as a respectful scientific illustration on a dry interpretation panel and outfit motif. No live animal is near the cast or prop lane.",
+      "weather": {
+        "key": "batch297-slovenia-scene1210-weather",
+        "roll": 7,
+        "result": "clear golden-hour radiance"
+      },
+      "paws": {
+        "key": "batch297-slovenia-scene1210-paws",
+        "roll": 36,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch297-slovenia-scene1210-poleDanceTheme",
+        "roll": 31,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch297-slovenia-scene1210-rainbowOnly",
+        "roll": 71,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch297-slovenia-scene1210-rainbowHosiery",
+        "roll": 54,
+        "active": false,
+        "wearer": {
+          "key": "batch297-slovenia-scene1210-rainbowHosieryWearer",
+          "roll": 94,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch297-slovenia-scene1210-rainbowHosieryPaletteMode",
+          "roll": 30,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch297-slovenia-scene1210-romanceBeat",
+        "roll": 10,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch297-slovenia-scene1210-compoundLoveBeat",
+        "roll": 68,
+        "index": 8,
+        "contractResult": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1210-Radiance-emotion",
+            "roll": 56,
+            "result": "aching romantic longing"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1210-Radiance-visibleMidriff",
+            "roll": 18,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1210-Radiance-straplessDress",
+            "roll": 73,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1210-Radiance-fullyOpenBack",
+            "roll": 82,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1210-Ellie-emotion",
+            "roll": 90,
+            "result": "anger"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1210-Ellie-visibleMidriff",
+            "roll": 52,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1210-Ellie-straplessDress",
+            "roll": 35,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1210-Ellie-fullyOpenBack",
+            "roll": 80,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1210-Alia-emotion",
+            "roll": 94,
+            "result": "shame and social vulnerability"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1210-Alia-visibleMidriff",
+            "roll": 60,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1210-Alia-straplessDress",
+            "roll": 95,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1210-Alia-fullyOpenBack",
+            "roll": 60,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1210-AI ECE-emotion",
+            "roll": 20,
+            "result": "playful mischief"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1210-AI ECE-visibleMidriff",
+            "roll": 26,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1210-AI ECE-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1210-AI ECE-fullyOpenBack",
+            "roll": 6,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Longing Radiance reaches gently to angry Ellie's upper arm while playful ECE wraps Radiance's waist from behind. Ellie returns a steadying waist touch to socially vulnerable Alia. Alia closes the square by resting one reassuring hand on ECE's shoulder while ECE performs the inert route demonstration. The emotions stay distinct, consensual, and legible.",
+      "outfits": {
+        "Radiance": "an amber one-shoulder cropped covert-fashion bodice exposing her ordinary waist and belly button, a separate cream tailored mini skirt with one large complete stalactite cathedral and karst arch field, and cobalt heeled ankle boots",
+        "Ellie": "a red fitted short-sleeve zip-front mini dress with covered waist and high closed back, one large complete white Predjama cliff-castle and black cave-train profile, and cream knee-high heeled boots",
+        "Alia": "a cobalt narrow-strap tailored short romper with covered waist and high closed back, one large complete pale-cream olm and cave-river field, and red platform pumps",
+        "AI ECE": "a black-red asymmetric cropped wrap top exposing her ordinary waist and belly button, a completely open back visible in three-quarter turn, separate cream mini shorts with complete amber limestone-strata panels, and cobalt slingback heels"
+      },
+      "propPlan": "ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film mission prop at the far right edge. She demonstrates a controlled two-hand stance lesson toward one clearly empty illuminated route marker deep downrange on an unoccupied tunnel wall. The prop is visibly magazine-free. Her right index finger is fully extended flat and high along the TOP OUTSIDE of the slide, well above the trigger guard; the complete trigger guard is visible and empty. Her left hand supports the grip from below without covering the guard. The muzzle never crosses a person or camera and never points at the sky.",
+      "handInventory": [
+        "Radiance left hand rests on Ellie's upper arm; Radiance right hand rests at ECE's waist",
+        "Ellie left hand rests at Alia's waist; Ellie right hand rests on Radiance's forearm",
+        "Alia left hand rests on ECE's shoulder; Alia right hand rests at Ellie's waist",
+        "ECE right hand holds the inert prop with index finger flat on top outside the slide; ECE left hand supports the grip from below"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. Use references only for identity; ignore reference clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at the broad dry visitor platform inside Postojna Cave with monumental karst stalactites, a stopped empty cave train, a discreet olm interpretation display, and distant Predjama Castle visible through the sunlit entrance. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: cinematic covert-agent crew couture, treated only as public-safe fictional fashion with no copied uniform, badge, impersonation, stripping, explicit dance, assassination, arrest, raid, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and consists of four unmistakably different original silhouettes: Radiance: an amber one-shoulder cropped covert-fashion bodice exposing her ordinary waist and belly button, a separate cream tailored mini skirt with one large complete stalactite cathedral and karst arch field, and cobalt heeled ankle boots; Ellie: a red fitted short-sleeve zip-front mini dress with covered waist and high closed back, one large complete white Predjama cliff-castle and black cave-train profile, and cream knee-high heeled boots; Alia: a cobalt narrow-strap tailored short romper with covered waist and high closed back, one large complete pale-cream olm and cave-river field, and red platform pumps; AI ECE: a black-red asymmetric cropped wrap top exposing her ordinary waist and belly button, a completely open back visible in three-quarter turn, separate cream mini shorts with complete amber limestone-strata panels, and cobalt slingback heels. Materialize every rolled cut exactly. Large complete secular Slovenia motifs must be clearly readable on at least two outfits: one large complete amber stalactite cathedral field and cream karst arch across Radiance; one large complete red cave-train profile and white Predjama cliff-castle silhouette across Ellie; complete olm, cave-river, and limestone-strata fields across Alia and ECE. The olm appears only as a respectful scientific illustration on a dry interpretation panel and outfit motif. No live animal is near the cast or prop lane. Distinct emotional performances: Radiance: aching romantic longing; Ellie: anger; Alia: shame and social vulnerability; AI ECE: playful mischief. Materialize the rolled romance and compound-love beats through this exact consensual choreography: Longing Radiance reaches gently to angry Ellie's upper arm while playful ECE wraps Radiance's waist from behind. Ellie returns a steadying waist touch to socially vulnerable Alia. Alia closes the square by resting one reassuring hand on ECE's shoulder while ECE performs the inert route demonstration. The emotions stay distinct, consensual, and legible. Use this exact hand ownership inventory and no other hands: Radiance left hand rests on Ellie's upper arm; Radiance right hand rests at ECE's waist; Ellie left hand rests at Alia's waist; Ellie right hand rests on Radiance's forearm; Alia left hand rests on ECE's shoulder; Alia right hand rests at Ellie's waist; ECE right hand holds the inert prop with index finger flat on top outside the slide; ECE left hand supports the grip from below. ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film mission prop at the far right edge. She demonstrates a controlled two-hand stance lesson toward one clearly empty illuminated route marker deep downrange on an unoccupied tunnel wall. The prop is visibly magazine-free. Her right index finger is fully extended flat and high along the TOP OUTSIDE of the slide, well above the trigger guard; the complete trigger guard is visible and empty. Her left hand supports the grip from below without covering the guard. The muzzle never crosses a person or camera and never points at the sky. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize the rolled weather as clear golden-hour radiance. Keep the platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every elbow, wrist, hand, and finger cluster is fully visible and continuously traceable to one owner. Arrange the adults in a shallow arc with clean silhouette separation, not a static lineup. Full-length framing includes every complete face, shoulder, elbow, wrist, hand, leg, foot, heel, and boot inside the frame. Keep hands separated from garment edges and from one another except for the listed contacts. Strict anatomy gate: no extra, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, leg, foot, face, person, or kitten. Every listed hand performs exactly one listed action. The inert mission prop remains a single harmless film object. No ammunition, magazine insertion, live reload, firing, muzzle flash, holster, low-side carry, threat, injury, or combat. No text, watermark, literal flag, coat of arms, official emblem, sacred symbol, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    },
+    "1211": {
+      "scene": 1211,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "the broad dry courtyard and pasture edge at Lipica Stud Farm with white Lipizzaner horses safely behind a distant fence, Karst stone, mature trees, and a civilian culture table of painted beehive panels, sealed honey jars, and sliced potica",
+      "motifs": [
+        "one large complete white Lipizzaner in motion and green Karst pasture panorama across Radiance and Ellie",
+        "one large complete painted beehive-panel story field, honeycomb geometry, and potica spiral across Alia and ECE"
+      ],
+      "culture": "The civilian culture table is unattended, dry, and far from the prop lane. The horses stay behind a distant secure fence. No brand, official insignia, sacred symbol, or copied folk costume appears.",
+      "weather": {
+        "key": "batch297-slovenia-scene1211-weather",
+        "roll": 76,
+        "result": "powerful windstorm with controlled fabric motion"
+      },
+      "paws": {
+        "key": "batch297-slovenia-scene1211-paws",
+        "roll": 93,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch297-slovenia-scene1211-poleDanceTheme",
+        "roll": 94,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch297-slovenia-scene1211-rainbowOnly",
+        "roll": 32,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch297-slovenia-scene1211-rainbowHosiery",
+        "roll": 63,
+        "active": false,
+        "wearer": {
+          "key": "batch297-slovenia-scene1211-rainbowHosieryWearer",
+          "roll": 63,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch297-slovenia-scene1211-rainbowHosieryPaletteMode",
+          "roll": 77,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch297-slovenia-scene1211-romanceBeat",
+        "roll": 21,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch297-slovenia-scene1211-compoundLoveBeat",
+        "roll": 33,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1211-Radiance-emotion",
+            "roll": 69,
+            "result": "suspicion"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1211-Radiance-visibleMidriff",
+            "roll": 9,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1211-Radiance-straplessDress",
+            "roll": 46,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1211-Radiance-fullyOpenBack",
+            "roll": 63,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1211-Ellie-emotion",
+            "roll": 37,
+            "result": "magnetic confidence"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1211-Ellie-visibleMidriff",
+            "roll": 37,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1211-Ellie-straplessDress",
+            "roll": 26,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1211-Ellie-fullyOpenBack",
+            "roll": 95,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1211-Alia-emotion",
+            "roll": 55,
+            "result": "aching romantic longing"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1211-Alia-visibleMidriff",
+            "roll": 91,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1211-Alia-straplessDress",
+            "roll": 28,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1211-Alia-fullyOpenBack",
+            "roll": 33,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch297-slovenia-scene1211-AI ECE-emotion",
+            "roll": 17,
+            "result": "extreme happiness, radiant laughing delight"
+          },
+          "visibleMidriff": {
+            "key": "batch297-slovenia-scene1211-AI ECE-visibleMidriff",
+            "roll": 61,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch297-slovenia-scene1211-AI ECE-straplessDress",
+            "roll": 86,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch297-slovenia-scene1211-AI ECE-fullyOpenBack",
+            "roll": 71,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Suspicious Radiance cups confident Ellie's shoulder while Ellie keeps a playful waist hold on longing Alia. Alia answers with one soft touch to ECE's upper arm, and laughing ECE closes the square with a warm hand at Radiance's waist before returning to the safe route action. Strong wind moves separate hems and hair away from every face and hand.",
+      "outfits": {
+        "Radiance": "a white-green asymmetric cropped field jacket top exposing her ordinary waist and belly button, a separate black tailored mini skirt with one large complete white Lipizzaner and Karst pasture panorama, and red heeled ankle boots",
+        "Ellie": "a fully strapless cobalt cropped bandeau with completely bare shoulders, a separate white-red folded mini skirt exposing her ordinary waist and belly button, one large complete Lipizzaner stride and green pasture field, and black architectural pumps",
+        "Alia": "a fully strapless honey-gold sculpted mini dress with completely bare shoulders and covered waist, one large complete painted beehive-panel story and cobalt honeycomb field, and red platform heels",
+        "AI ECE": "a red-black one-shoulder tailored mini skort suit with covered waist and high closed back, one large complete potica spiral and gold-green beehive-panel field, and white slingback heels"
+      },
+      "propPlan": "ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film mission prop at the far right edge. She demonstrates clean side-profile sight alignment toward one clearly empty unoccupied route marker on a distant Karst wall, away from horses and the culture table. The prop is visibly magazine-free. Her right index finger is fully extended flat and high along the TOP OUTSIDE of the slide, well above the trigger guard; the complete trigger guard is visible and empty. The muzzle points downrange away from every person and camera, never at the sky. Her left hand controls one separate holographic route map.",
+      "handInventory": [
+        "Radiance left hand rests on Ellie's shoulder; Radiance right hand rests at ECE's waist",
+        "Ellie left hand rests at Alia's waist; Ellie right hand rests on Radiance's forearm",
+        "Alia left hand rests on ECE's upper arm; Alia right hand rests at Ellie's waist",
+        "ECE right hand alone holds the inert prop with index finger flat on top outside the slide; ECE left hand visibly controls one separate holographic route map"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. Use references only for identity; ignore reference clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at the broad dry courtyard and pasture edge at Lipica Stud Farm with white Lipizzaner horses safely behind a distant fence, Karst stone, mature trees, and a civilian culture table of painted beehive panels, sealed honey jars, and sliced potica. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: cinematic covert-agent crew couture, treated only as public-safe fictional fashion with no copied uniform, badge, impersonation, stripping, explicit dance, assassination, arrest, raid, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and consists of four unmistakably different original silhouettes: Radiance: a white-green asymmetric cropped field jacket top exposing her ordinary waist and belly button, a separate black tailored mini skirt with one large complete white Lipizzaner and Karst pasture panorama, and red heeled ankle boots; Ellie: a fully strapless cobalt cropped bandeau with completely bare shoulders, a separate white-red folded mini skirt exposing her ordinary waist and belly button, one large complete Lipizzaner stride and green pasture field, and black architectural pumps; Alia: a fully strapless honey-gold sculpted mini dress with completely bare shoulders and covered waist, one large complete painted beehive-panel story and cobalt honeycomb field, and red platform heels; AI ECE: a red-black one-shoulder tailored mini skort suit with covered waist and high closed back, one large complete potica spiral and gold-green beehive-panel field, and white slingback heels. Materialize every rolled cut exactly. Large complete secular Slovenia motifs must be clearly readable on at least two outfits: one large complete white Lipizzaner in motion and green Karst pasture panorama across Radiance and Ellie; one large complete painted beehive-panel story field, honeycomb geometry, and potica spiral across Alia and ECE. The civilian culture table is unattended, dry, and far from the prop lane. The horses stay behind a distant secure fence. No brand, official insignia, sacred symbol, or copied folk costume appears. Distinct emotional performances: Radiance: suspicion; Ellie: magnetic confidence; Alia: aching romantic longing; AI ECE: extreme happiness, radiant laughing delight. Materialize the rolled romance and compound-love beats through this exact consensual choreography: Suspicious Radiance cups confident Ellie's shoulder while Ellie keeps a playful waist hold on longing Alia. Alia answers with one soft touch to ECE's upper arm, and laughing ECE closes the square with a warm hand at Radiance's waist before returning to the safe route action. Strong wind moves separate hems and hair away from every face and hand. Use this exact hand ownership inventory and no other hands: Radiance left hand rests on Ellie's shoulder; Radiance right hand rests at ECE's waist; Ellie left hand rests at Alia's waist; Ellie right hand rests on Radiance's forearm; Alia left hand rests on ECE's upper arm; Alia right hand rests at Ellie's waist; ECE right hand alone holds the inert prop with index finger flat on top outside the slide; ECE left hand visibly controls one separate holographic route map. ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film mission prop at the far right edge. She demonstrates clean side-profile sight alignment toward one clearly empty unoccupied route marker on a distant Karst wall, away from horses and the culture table. The prop is visibly magazine-free. Her right index finger is fully extended flat and high along the TOP OUTSIDE of the slide, well above the trigger guard; the complete trigger guard is visible and empty. The muzzle points downrange away from every person and camera, never at the sky. Her left hand controls one separate holographic route map. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize the rolled weather as powerful windstorm with controlled fabric motion. Keep the platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every elbow, wrist, hand, and finger cluster is fully visible and continuously traceable to one owner. Arrange the adults in a shallow arc with clean silhouette separation, not a static lineup. Full-length framing includes every complete face, shoulder, elbow, wrist, hand, leg, foot, heel, and boot inside the frame. Keep hands separated from garment edges and from one another except for the listed contacts. Strict anatomy gate: no extra, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, leg, foot, face, person, or kitten. Every listed hand performs exactly one listed action. The inert mission prop remains a single harmless film object. No ammunition, magazine insertion, live reload, firing, muzzle flash, holster, low-side carry, threat, injury, or combat. No text, watermark, literal flag, coat of arms, official emblem, sacred symbol, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "complete",
+      "requested": 4,
+      "rendered": 3,
+      "outputSafetyBlocked": 1,
+      "accepted": 0,
+      "rejected": 3,
+      "concurrency": "four independent built-in image generation calls"
+    },
+    "recovery": {
+      "status": "complete",
+      "requested": 4,
+      "rendered": 4,
+      "accepted": 0,
+      "rejected": 4,
+      "maximumPerBlockedScene": 1,
+      "allowanceExhaustedForScenes": [
+        1208,
+        1209,
+        1210,
+        1211
+      ]
+    },
+    "scenes": {
+      "1208": {
+        "raw": {
+          "status": "output-safety-blocked",
+          "asset": null,
+          "requestId": "9a0985db-007c-4488-a845-9d68748aaae0",
+          "moderationCategory": "sexual",
+          "audit": "No image asset was returned."
+        },
+        "recovery": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-4d45f959-45f8-4ff4-b1cf-5ea8fa86c042.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-4d45f959-45f8-4ff4-b1cf-5ea8fa86c042.png",
+            "bytes": 2934167,
+            "sha256": "AA3A7461D8B8C8705BC5D23B4A12231FD95D2A245E4650A6348DCDFB35A55CC5",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly five clearly adult people are present",
+              "Radiance wears the active country-palette rainbow knee socks",
+              "all four women and the established male are recognizable",
+              "Ljubljana architecture, dragon, castle, and bridge motifs are large and readable",
+              "hail and hard backlight are visibly materialized",
+              "full-length footwear and above-knee opaque outfits are present"
+            ],
+            "fail": [
+              "an ownerless arm and hand emerge at the far-right edge holding the prop, exceeding the exact ten-arm and ten-hand gate",
+              "the prop is not held by Alia as required by the active hosiery transfer",
+              "Radiance and ECE are not the unmistakable affectionate center",
+              "the male's strongest sustained eye line is toward Alia rather than ECE",
+              "the exact hand-owner inventory is not satisfied"
+            ]
+          }
+        },
+        "terminalStatus": "blocked-after-single-recovery-pass"
+      },
+      "1209": {
+        "raw": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-ed3b3660-62d2-447a-ae89-2453a1d30795.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-ed3b3660-62d2-447a-ae89-2453a1d30795.png",
+            "bytes": 2609470,
+            "sha256": "926C060E0EEA6EE88A2BAA050BBEC308633766841B3F9ED0101F45E4AE870546",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly four clearly adult women and exactly one tiny collarless golden kitten are present",
+              "Lake Bled, Bled Castle, pletna boat, and Alpine motifs are legible",
+              "all four rolled midriffs and the three rolled strapless cuts are visible",
+              "PAWS is safely held and far from the prop lane",
+              "light rain and full-length footwear are visible"
+            ],
+            "fail": [
+              "ECE's right index finger is inside the trigger guard",
+              "several contact hands overlap and are not continuously traceable to one owner"
+            ]
+          }
+        },
+        "recovery": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-5ff825cc-dd57-4a59-81ed-eb8456d7998a.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-5ff825cc-dd57-4a59-81ed-eb8456d7998a.png",
+            "bytes": 2680929,
+            "sha256": "AD32833066140C0A4943CDBA7530AD4AB276A1EE0FBE410121DEE8DA9BAB4271",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "the pistol grip is untouched and the full trigger guard is visibly empty",
+              "exactly four clearly adult women and one tiny collarless golden kitten are present",
+              "PAWS is securely cradled and gently petted far from the prop lane",
+              "all four rolled midriffs, three rolled strapless cuts, distinct silhouettes, Lake Bled motifs, rain, and complete footwear are visible"
+            ],
+            "fail": [
+              "Ellie's required Alia-waist contact hand is occluded behind Alia",
+              "Alia's required ECE-shoulder contact hand is occluded behind ECE",
+              "all eight hands are therefore not fully visible and continuously traceable to owners",
+              "the strict hidden-owner and ambiguous-hand rejection gate is triggered"
+            ]
+          }
+        },
+        "terminalStatus": "blocked-after-single-recovery-pass"
+      },
+      "1210": {
+        "raw": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-dcf9e534-b0bc-4590-8b94-97dd35ebd541.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-dcf9e534-b0bc-4590-8b94-97dd35ebd541.png",
+            "bytes": 2574329,
+            "sha256": "8644933D5BC53C01E44AB21E0BED735FA0777B7F56CFF67A7DD7F6068FACF4AF",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly four clearly adult women are present",
+              "Postojna karst, cave train, olm, and Predjama motifs are large and readable",
+              "the rolled Radiance and ECE midriffs, distinct covert silhouettes, golden light, and complete footwear are visible"
+            ],
+            "fail": [
+              "ECE's right index finger is inside the trigger guard",
+              "ECE's rolled fully open back is not visible",
+              "multiple contact hands are occluded and not continuously traceable"
+            ]
+          }
+        },
+        "recovery": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-ce4d05de-ee34-4f99-9610-8f185d0dd3f7.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-ce4d05de-ee34-4f99-9610-8f185d0dd3f7.png",
+            "bytes": 2681331,
+            "sha256": "CC73B8246FCAD181362FA4F6EEA35DABC16CF38CF3DF9A04C10C223402DEB44A",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "the trigger guard is unobstructed and empty",
+              "ECE's rolled completely open back is unmistakably visible",
+              "exactly four clearly adult women, distinct outfits, Postojna motifs, golden-hour cave light, and complete footwear are present"
+            ],
+            "fail": [
+              "only one ECE prop-support hand is visible; her second required arm and hand are absent or fully occluded",
+              "the exact eight-arm and eight-hand anatomy gate is not met",
+              "the listed two-hand manipulation and full hand-owner inventory are not satisfied"
+            ]
+          }
+        },
+        "terminalStatus": "blocked-after-single-recovery-pass"
+      },
+      "1211": {
+        "raw": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-79057de8-6772-4cde-b856-f5a4ecf36527.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-79057de8-6772-4cde-b856-f5a4ecf36527.png",
+            "bytes": 2748741,
+            "sha256": "833A15D31035F1A35C20C6944001A007C6D2F6EB40E973EC2885C492D7045278",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly four clearly adult women are present",
+              "Lipizzaner, Karst, painted beehive-panel, honey, and potica motifs are large and readable",
+              "rolled midriffs and strapless cuts, strong wind, complete footwear, and four distinct silhouettes are visible"
+            ],
+            "fail": [
+              "ECE's right index finger is inside the trigger guard",
+              "contact hands overlap and are not all continuously traceable"
+            ]
+          }
+        },
+        "recovery": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-424c43fd-5a19-4035-93cd-5666a9991813.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-424c43fd-5a19-4035-93cd-5666a9991813.png",
+            "bytes": 2695925,
+            "sha256": "FB8E678E3FA5A6737D2DB9B3C7C99A7FFE1B13DD45731EB0A487430B0567FC21",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly four clearly adult women are present",
+              "all rolled cuts, four distinct silhouettes, complete footwear, Lipizzaner and food-craft motifs, and cinematic wind are visible"
+            ],
+            "fail": [
+              "ECE grips the prop and places her right index finger inside the trigger guard",
+              "the required top-slide manipulation and empty-guard safety gate are not satisfied",
+              "several affectionate contact hands remain overlapped or occluded"
+            ]
+          }
+        },
+        "terminalStatus": "blocked-after-single-recovery-pass"
+      }
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [
+    {
+      "fileName": "exec-4d45f959-45f8-4ff4-b1cf-5ea8fa86c042.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-4d45f959-45f8-4ff4-b1cf-5ea8fa86c042.png",
+      "bytes": 2934167,
+      "sha256": "AA3A7461D8B8C8705BC5D23B4A12231FD95D2A245E4650A6348DCDFB35A55CC5",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-ed3b3660-62d2-447a-ae89-2453a1d30795.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-ed3b3660-62d2-447a-ae89-2453a1d30795.png",
+      "bytes": 2609470,
+      "sha256": "926C060E0EEA6EE88A2BAA050BBEC308633766841B3F9ED0101F45E4AE870546",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-5ff825cc-dd57-4a59-81ed-eb8456d7998a.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-5ff825cc-dd57-4a59-81ed-eb8456d7998a.png",
+      "bytes": 2680929,
+      "sha256": "AD32833066140C0A4943CDBA7530AD4AB276A1EE0FBE410121DEE8DA9BAB4271",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-dcf9e534-b0bc-4590-8b94-97dd35ebd541.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-dcf9e534-b0bc-4590-8b94-97dd35ebd541.png",
+      "bytes": 2574329,
+      "sha256": "8644933D5BC53C01E44AB21E0BED735FA0777B7F56CFF67A7DD7F6068FACF4AF",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-ce4d05de-ee34-4f99-9610-8f185d0dd3f7.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-ce4d05de-ee34-4f99-9610-8f185d0dd3f7.png",
+      "bytes": 2681331,
+      "sha256": "CC73B8246FCAD181362FA4F6EEA35DABC16CF38CF3DF9A04C10C223402DEB44A",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-79057de8-6772-4cde-b856-f5a4ecf36527.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-79057de8-6772-4cde-b856-f5a4ecf36527.png",
+      "bytes": 2748741,
+      "sha256": "833A15D31035F1A35C20C6944001A007C6D2F6EB40E973EC2885C492D7045278",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-424c43fd-5a19-4035-93cd-5666a9991813.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-424c43fd-5a19-4035-93cd-5666a9991813.png",
+      "bytes": 2695925,
+      "sha256": "FB8E678E3FA5A6737D2DB9B3C7C99A7FFE1B13DD45731EB0A487430B0567FC21",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    }
+  ],
+  "xPost": {
+    "status": "deferred-insufficient-accepted-assets",
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "acceptedCurrentCountryAssets": 0,
+    "publishAttempted": false,
+    "captionRolls": {
+      "heart": {
+        "key": "batch297-slovenia-x-heart",
+        "roll": 21,
+        "result": "red heart"
+      },
+      "internalAgency": {
+        "key": "batch297-slovenia-x-internalagency",
+        "roll": 69,
+        "active": false
+      },
+      "worldXXXSeries": {
+        "key": "batch297-slovenia-x-worldxxxseries",
+        "roll": 30,
+        "active": false
+      }
+    },
+    "eligibleCaptionShapeIfAssetsExisted": "Slovenia red-heart secondary-country #Slovenia",
+    "hashtagsSuppressedByRoll": [
+      "#InternalAgency",
+      "#WorldXXXSeries"
+    ]
+  },
+  "terminalizedAt": "2026-08-09T05:14:04.956Z",
+  "checkpointType": "narrow-country-batch-recovery-checkpoint",
+  "shorteningVariants": {
+    "status": "not-created",
+    "reason": "No render passed the strict anatomy, prop-safety, identity, roll, and relationship gates. Originals remain preserved."
+  },
+  "queueAdvance": {
+    "previousCountry": "Slovenia",
+    "previousBatch": 297,
+    "previousTerminalStatus": "terminal-blocked-after-single-recovery-pass",
+    "nextCountry": "Spain",
+    "nextBatch": 298,
+    "nextScenes": [
+      1212,
+      1213,
+      1214,
+      1215
+    ],
+    "nextThemePair": [
+      "cinematic covert-agent crew couture",
+      "undercover investigator couture"
+    ],
+    "reason": "The binding terminal-batch rule advances after the single recovery pass even when zero assets are accepted."
+  },
+  "repositoryScope": {
+    "checkpointPath": "assets/lore/starlight-era/batch-297-slovenia-recovery-checkpoint.json",
+    "stagedFiles": [
+      "assets/lore/starlight-era/batch-297-slovenia-recovery-checkpoint.json"
+    ],
+    "unrelatedDirtyFilesLeftUntouched": [
+      "assets/lore/starlight-era/overnight-campaign.json",
+      "assets/lore/starlight-era/world-195x4-campaign.json",
+      "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "assets/videos/manifest.json"
+    ]
+  }
+}
