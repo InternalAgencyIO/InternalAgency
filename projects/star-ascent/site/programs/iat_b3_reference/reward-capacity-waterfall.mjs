@@ -11,6 +11,8 @@ export const REWARD_CAPACITY_POLICY_FILE_SHA256 = "423fc268c184271023af0ca0664b1
 export const UTC_DAY_SECONDS = 86_400n;
 export const CLAIM_EXPIRY_DAYS = 30n;
 export const U64_MAX = (1n << 64n) - 1n;
+const I64_MIN = -(1n << 63n);
+const I64_MAX = (1n << 63n) - 1n;
 
 export const REWARD_PRIORITY_CLASSES = Object.freeze([
   "CCC_AGENT",
@@ -53,6 +55,60 @@ const X_BASE_ADMISSION_LINEAGE_SCHEMA = "iat-b3-x-base-admission-lineage/v1";
 const X_BASE_ADMISSION_LINEAGE_STATUS = "NON_ACTIVATING_UNAUTHENTICATED_REFERENCE_LINEAGE";
 const FACTION_FRAGMENT_KIND = "X_BOUND_FACTION_FRAGMENT";
 const FACTION_MANIFEST_KIND = "WEEKLY_FACTION_MANIFEST";
+const X_FUNDING_ID_DOMAIN = "IAT_B3_X_FUNDING_V1";
+const REWARD_CAPACITY_ROUND_SEAL_KEYS = Object.freeze([
+  "schema",
+  "status",
+  "fundingRoundAtUnixSeconds",
+  "sealedAtUnixSeconds",
+  "candidateCount",
+  "candidateIds",
+  "candidateSetSha256",
+  "candidates",
+  "ledgerSnapshot",
+  "ledgerSnapshotSha256",
+  "cccPrecommitRegistrySnapshot",
+  "cccPrecommitRegistrySnapshotSha256",
+  "cccRevealCommitment",
+  "cccDecisionContextSha256",
+  "finalized",
+]);
+const OBLIGATION_COMMON_KEYS = Object.freeze([
+  "id",
+  "priorityClass",
+  "amount",
+  "fundingRoundAtUnixSeconds",
+  "fundingPool",
+  "reservationStatus",
+]);
+const OBLIGATION_CCC_ORDERING_KEYS = Object.freeze([
+  "qualifyingActivityStartSlot",
+  "nodeActivationSlot",
+  "eligibleSequence",
+  "qualificationPda",
+]);
+const OBLIGATION_CHRONOLOGY_KEYS = Object.freeze([
+  "eligibleSequence",
+  "activitySequence",
+  "nodeSequence",
+  "immutableIdentity",
+  "commitmentDigest",
+]);
+const X_FUNDING_COMMON_KEYS = Object.freeze([
+  "kind",
+  "rewardId",
+  "rewardSourceKind",
+  "trancheKinds",
+]);
+const FACTION_MANIFEST_KEYS = Object.freeze([
+  ...OBLIGATION_COMMON_KEYS,
+  "kind",
+  "factionWeekId",
+  "followerCount",
+  "payoutDigest",
+  "payoutEntries",
+  "chronology",
+]);
 const X_BOUND_REWARD_STATE_KEYS = Object.freeze([
   "schema",
   "rewardId",
@@ -200,7 +256,7 @@ function asU64(value, label) {
 
 function asI64(value, label) {
   const normalized = asInteger(value, label);
-  if (normalized < -(1n << 63n) || normalized > (1n << 63n) - 1n) {
+  if (normalized < I64_MIN || normalized > I64_MAX) {
     throw new RangeError(`${label} must fit i64`);
   }
   return normalized;
@@ -213,9 +269,31 @@ function asHex32(value, label) {
   return value.toLowerCase();
 }
 
+function asStoredU64(value, label) {
+  if (typeof value !== "bigint") throw new TypeError(`${label} must be stored as bigint`);
+  return asU64(value, label);
+}
+
+function asStoredI64(value, label) {
+  if (typeof value !== "bigint") throw new TypeError(`${label} must be stored as bigint`);
+  return asI64(value, label);
+}
+
+function asCanonicalHex32(value, label) {
+  const normalized = asHex32(value, label);
+  if (normalized !== value) throw new TypeError(`${label} must be canonical lowercase hexadecimal`);
+  return normalized;
+}
+
 function asNonEmptyString(value, label) {
   if (typeof value !== "string" || !value.trim()) throw new TypeError(`${label} is required`);
   return value;
+}
+
+function asCanonicalNonEmptyString(value, label) {
+  const normalized = asNonEmptyString(value, label);
+  if (normalized !== normalized.trim()) throw new TypeError(`${label} must not contain surrounding whitespace`);
+  return normalized;
 }
 
 function floorDiv(dividend, divisor) {
@@ -226,7 +304,10 @@ function floorDiv(dividend, divisor) {
 
 export function nextUtcMidnight(unixTimestamp) {
   const timestamp = asI64(unixTimestamp, "unixTimestamp");
-  return (floorDiv(timestamp, UTC_DAY_SECONDS) + 1n) * UTC_DAY_SECONDS;
+  return asI64(
+    (floorDiv(timestamp, UTC_DAY_SECONDS) + 1n) * UTC_DAY_SECONDS,
+    "next UTC midnight",
+  );
 }
 
 function assertUtcMidnight(value, label) {
@@ -241,7 +322,7 @@ export function createCccRevealCommitment({
   fundingRoundAtUnixSeconds,
   randomnessHex,
 }) {
-  const normalizedSourceId = asNonEmptyString(sourceId, "CCC randomness sourceId");
+  const normalizedSourceId = asCanonicalNonEmptyString(sourceId, "CCC randomness sourceId");
   const committedAt = asI64(committedAtUnixSeconds, "CCC randomness committedAtUnixSeconds");
   const fundingRound = assertUtcMidnight(fundingRoundAtUnixSeconds, "CCC randomness fundingRoundAtUnixSeconds");
   const randomness = asHex32(randomnessHex, "CCC randomness reveal");
@@ -265,9 +346,9 @@ function normalizeCccRevealCommitment(value, fundingRound) {
     || value.scheme !== CCC_REVEAL_COMMITMENT_SCHEME) throw new Error("INVALID_CCC_REVEAL_COMMITMENT");
   const normalized = {
     scheme: CCC_REVEAL_COMMITMENT_SCHEME,
-    sourceId: asNonEmptyString(value.sourceId, "CCC randomness sourceId"),
-    committedAtUnixSeconds: asI64(value.committedAtUnixSeconds, "CCC randomness committedAtUnixSeconds"),
-    commitmentSha256: asHex32(value.commitmentSha256, "CCC randomness commitment"),
+    sourceId: asCanonicalNonEmptyString(value.sourceId, "CCC randomness sourceId"),
+    committedAtUnixSeconds: asStoredI64(value.committedAtUnixSeconds, "CCC randomness committedAtUnixSeconds"),
+    commitmentSha256: asCanonicalHex32(value.commitmentSha256, "CCC randomness commitment"),
   };
   if (normalized.committedAtUnixSeconds >= fundingRound) {
     throw new Error("CCC_REVEAL_MUST_BE_COMMITTED_BEFORE_FUNDING_ROUND");
@@ -312,7 +393,7 @@ function normalizeCccPrecommitRegistrySnapshot(value, fundingRound) {
     || value.status !== "COMPLETE_UNAUTHENTICATED_REFERENCE_SNAPSHOT"
     || value.complete !== true
     || assertUtcMidnight(
-      value.fundingRoundAtUnixSeconds,
+      asStoredI64(value.fundingRoundAtUnixSeconds, "CCC precommit registry funding round"),
       "CCC precommit registry funding round",
     ) !== fundingRound
     || !Array.isArray(value.entries)
@@ -335,7 +416,7 @@ function normalizeCccPrecommitRegistrySnapshot(value, fundingRound) {
     entries,
   };
   const snapshotSha256 = canonicalStateSha256(core);
-  if (asHex32(value.snapshotSha256, "CCC precommit registry snapshot digest") !== snapshotSha256) {
+  if (asCanonicalHex32(value.snapshotSha256, "CCC precommit registry snapshot digest") !== snapshotSha256) {
     throw new Error("CCC_PRECOMMIT_REGISTRY_SNAPSHOT_COMMITMENT_MISMATCH");
   }
   return { ...core, snapshotSha256 };
@@ -583,6 +664,10 @@ export function createXBoundReward({
   const originalEligibleSequence = activitySequence > nodeSequence ? activitySequence : nodeSequence;
   const premium = PREMIUM_TYPES.has(subscriptionType);
   const baseAmount = gross / 10n;
+  const claimExpiry = asI64(
+    epochClose + CLAIM_EXPIRY_DAYS * UTC_DAY_SECONDS,
+    "claimExpiresAtUnixSeconds",
+  );
   const cccOrdering = CCC_CLASSES.has(priorityClass)
     ? Object.freeze({
       qualifyingActivityStartSlot: asU64(qualifyingActivityStartSlot, "qualifyingActivityStartSlot"),
@@ -598,7 +683,7 @@ export function createXBoundReward({
     cccOrdering,
     grossBaseUnits: gross,
     epochClosedAtUnixSeconds: epochClose,
-    claimExpiresAtUnixSeconds: epochClose + CLAIM_EXPIRY_DAYS * UTC_DAY_SECONDS,
+    claimExpiresAtUnixSeconds: claimExpiry,
     activityQualificationSequence: activitySequence,
     nodeActivationSequence: nodeSequence,
     initialSubscriptionType: subscriptionType,
@@ -763,7 +848,11 @@ export function validateXBoundRewardReferenceState(reward) {
   if (gross === 0n || gross % 10n !== 0n) throw new Error("INVALID_X_REWARD_GROSS_AMOUNT");
   const epochClose = assertUtcMidnight(reward.epochClosedAtUnixSeconds, "reward.epochClosedAtUnixSeconds");
   const claimExpiry = asI64(reward.claimExpiresAtUnixSeconds, "reward.claimExpiresAtUnixSeconds");
-  if (claimExpiry !== epochClose + CLAIM_EXPIRY_DAYS * UTC_DAY_SECONDS) {
+  const expectedClaimExpiry = asI64(
+    epochClose + CLAIM_EXPIRY_DAYS * UTC_DAY_SECONDS,
+    "expected reward.claimExpiresAtUnixSeconds",
+  );
+  if (claimExpiry !== expectedClaimExpiry) {
     throw new Error("INVALID_30_DAY_CLAIM_EXPIRY");
   }
   const activitySequence = asU64(reward.activityQualificationSequence, "reward.activityQualificationSequence");
@@ -992,6 +1081,15 @@ function xFundingKindsForRound(reward, fundingRound) {
   return due;
 }
 
+function deriveXBoundFundingObligationId({ rewardId, fundingRoundAtUnixSeconds, trancheKinds }) {
+  return sha256([
+    X_FUNDING_ID_DOMAIN,
+    rewardId,
+    fundingRoundAtUnixSeconds,
+    trancheKinds.join(","),
+  ].join("|"));
+}
+
 export function buildXBoundFundingObligation({ reward, fundingRoundAtUnixSeconds }) {
   validateXBoundRewardReferenceState(reward);
   const fundingRound = assertUtcMidnight(fundingRoundAtUnixSeconds, "fundingRoundAtUnixSeconds");
@@ -1000,9 +1098,7 @@ export function buildXBoundFundingObligation({ reward, fundingRoundAtUnixSeconds
   const amount = due.reduce((total, entry) => total + entry.amount, 0n);
   const eligibleSequence = due.reduce((maximum, entry) => entry.eligibleSequence > maximum ? entry.eligibleSequence : maximum, 0n);
   const trancheKinds = due.map(({ kind }) => kind);
-  const id = sha256(`IAT_B3_X_FUNDING_V1|${reward.rewardId}|${fundingRound}|${trancheKinds.join(",")}`);
   const base = {
-    id,
     kind: reward.rewardSourceKind === "FACTION_FOLLOWER" ? FACTION_FRAGMENT_KIND : "X_BOUND_FUNDING",
     rewardId: reward.rewardId,
     rewardSourceKind: reward.rewardSourceKind,
@@ -1021,33 +1117,35 @@ export function buildXBoundFundingObligation({ reward, fundingRoundAtUnixSeconds
       }
       : {}),
   };
+  let semantics;
   if (CCC_CLASSES.has(reward.priorityClass)) {
-    return Object.freeze({
+    semantics = {
       ...base,
       qualifyingActivityStartSlot: reward.cccOrdering.qualifyingActivityStartSlot,
       nodeActivationSlot: reward.cccOrdering.nodeActivationSlot,
       eligibleSequence,
       qualificationPda: reward.cccOrdering.qualificationPda,
-    });
+    };
+  } else {
+    semantics = {
+      ...base,
+      chronology: Object.freeze({
+        eligibleSequence,
+        activitySequence: reward.activityQualificationSequence,
+        nodeSequence: reward.nodeActivationSequence,
+        immutableIdentity: `${reward.xUserId}|${reward.wallet}`,
+        commitmentDigest: reward.rewardId,
+      }),
+    };
   }
   return Object.freeze({
-    ...base,
-    chronology: Object.freeze({
-      eligibleSequence,
-      activitySequence: reward.activityQualificationSequence,
-      nodeSequence: reward.nodeActivationSequence,
-      immutableIdentity: `${reward.xUserId}|${reward.wallet}`,
-      commitmentDigest: reward.rewardId,
-    }),
+    id: deriveXBoundFundingObligationId(semantics),
+    ...semantics,
   });
 }
 
 function normalizeFactionFragment(fragment, index, fundingRound) {
-  if (!isRecord(fragment) || fragment.kind !== FACTION_FRAGMENT_KIND
-    || fragment.rewardSourceKind !== "FACTION_FOLLOWER"
-    || fragment.priorityClass !== "WEEKLY_FACTION"
-    || fragment.fundingPool !== "SHARED_REWARD_RESERVE"
-    || fragment.reservationStatus !== "NEW_UNRESERVED") {
+  if (!isRecord(fragment)) {
     throw new Error(`INVALID_FACTION_FOLLOWER_FRAGMENT_${index}`);
   }
   const trancheKinds = Array.isArray(fragment.trancheKinds) ? [...fragment.trancheKinds] : [];
@@ -1055,26 +1153,50 @@ function normalizeFactionFragment(fragment, index, fundingRound) {
     throw new Error("FACTION_FRAGMENT_MUST_CONTAIN_ONE_ATOMIC_X_TRANCHE");
   }
   const isUpgrade = trancheKinds[0] === X_TRANCHE_KIND.UPGRADE;
-  if (!isUpgrade && Object.hasOwn(fragment, "originalBaseAdmissionLineage")) {
-    throw new Error("BASE_ADMISSION_LINEAGE_ONLY_ALLOWED_FOR_UPGRADE");
+  const expectedKeys = [
+    ...OBLIGATION_COMMON_KEYS,
+    ...X_FUNDING_COMMON_KEYS,
+    "chronology",
+    ...(isUpgrade ? ["originalBaseAdmissionLineage"] : []),
+  ];
+  if (!hasExactKeys(fragment, expectedKeys)) {
+    throw new Error("INVALID_FACTION_FOLLOWER_FRAGMENT_KEY_SET");
+  }
+  if (fragment.kind !== FACTION_FRAGMENT_KIND
+    || fragment.rewardSourceKind !== "FACTION_FOLLOWER"
+    || fragment.priorityClass !== "WEEKLY_FACTION"
+    || fragment.fundingPool !== "SHARED_REWARD_RESERVE"
+    || fragment.reservationStatus !== "NEW_UNRESERVED") {
+    throw new Error(`INVALID_FACTION_FOLLOWER_FRAGMENT_${index}`);
+  }
+  const fragmentId = asCanonicalHex32(fragment.id, `faction fragment ${index} id`);
+  const rewardId = asCanonicalHex32(fragment.rewardId, `faction fragment ${index} reward ID`);
+  const amount = asStoredU64(fragment.amount, `faction fragment ${index} amount`);
+  const normalizedFundingRound = assertUtcMidnight(
+    asStoredI64(fragment.fundingRoundAtUnixSeconds, `faction fragment ${index} funding round`),
+    `faction fragment ${index} funding round`,
+  );
+  const chronology = normalizeChronology(fragment.chronology, `faction fragment ${index}`);
+  const originalBaseAdmissionLineage = isUpgrade
+    ? normalizeOriginalBaseAdmissionLineage(fragment.originalBaseAdmissionLineage, rewardId)
+    : null;
+  if (fragmentId !== deriveXBoundFundingObligationId({
+    rewardId,
+    fundingRoundAtUnixSeconds: normalizedFundingRound,
+    trancheKinds,
+  })) {
+    throw new Error("X_BOUND_FUNDING_OBLIGATION_ID_NOT_DERIVED_FROM_CANONICAL_SEMANTICS");
   }
   const normalized = {
-    fragmentId: asHex32(fragment.id, `faction fragment ${index} id`),
-    rewardId: asHex32(fragment.rewardId, `faction fragment ${index} reward ID`),
-    amount: asU64(fragment.amount, `faction fragment ${index} amount`),
+    fragmentId,
+    rewardId,
+    amount,
     trancheKinds,
-    chronology: normalizeChronology(fragment.chronology, `faction fragment ${index}`),
-    ...(isUpgrade
-      ? {
-        originalBaseAdmissionLineage: normalizeOriginalBaseAdmissionLineage(
-          fragment.originalBaseAdmissionLineage,
-          fragment.rewardId,
-        ),
-      }
-      : {}),
+    chronology,
+    ...(isUpgrade ? { originalBaseAdmissionLineage } : {}),
   };
   if (normalized.amount === 0n) throw new Error("ZERO_FACTION_FOLLOWER_TRANCHE");
-  if (assertUtcMidnight(fragment.fundingRoundAtUnixSeconds, `faction fragment ${index} funding round`) !== fundingRound) {
+  if (normalizedFundingRound !== fundingRound) {
     throw new Error("FACTION_FRAGMENT_FUNDING_ROUND_MISMATCH");
   }
   return normalized;
@@ -1086,7 +1208,7 @@ export function buildWeeklyFactionManifestObligation({
   followerObligations,
 }) {
   const fundingRound = assertUtcMidnight(fundingRoundAtUnixSeconds, "fundingRoundAtUnixSeconds");
-  const weekId = asNonEmptyString(factionWeekId, "factionWeekId");
+  const weekId = asCanonicalNonEmptyString(factionWeekId, "factionWeekId");
   if (!Array.isArray(followerObligations) || followerObligations.length === 0) {
     throw new Error("FACTION_MANIFEST_REQUIRES_COMPLETE_FOLLOWER_SET");
   }
@@ -1297,10 +1419,10 @@ function normalizeLedger(ledger) {
         throw new Error(`INVALID_${lane.toUpperCase()}_LANE_KEY_SET`);
       }
       const normalized = {
-        unlocked: asU64(state.unlocked, `${lane}.unlocked`),
-        reserved: asU64(state.reserved, `${lane}.reserved`),
-        paid: asU64(state.paid, `${lane}.paid`),
-        withdrawn: asU64(state.withdrawn, `${lane}.withdrawn`),
+        unlocked: asStoredU64(state.unlocked, `${lane}.unlocked`),
+        reserved: asStoredU64(state.reserved, `${lane}.reserved`),
+        paid: asStoredU64(state.paid, `${lane}.paid`),
+        withdrawn: asStoredU64(state.withdrawn, `${lane}.withdrawn`),
       };
       if (normalized.reserved + normalized.paid + normalized.withdrawn > normalized.unlocked) {
         throw new Error(`${lane.toUpperCase()}_LANE_ACCOUNTING_CORRUPT`);
@@ -1333,18 +1455,20 @@ function planExactReservation(ledger, amount) {
 }
 
 function normalizeChronology(value, label) {
-  if (!isRecord(value)) throw new Error(`${label} requires precommitted chronology`);
+  if (!hasExactKeys(value, OBLIGATION_CHRONOLOGY_KEYS)) {
+    throw new Error(`${label} requires exact precommitted chronology key set`);
+  }
   return {
-    eligibleSequence: asU64(value.eligibleSequence, `${label}.eligibleSequence`),
-    activitySequence: asU64(value.activitySequence, `${label}.activitySequence`),
-    nodeSequence: asU64(value.nodeSequence, `${label}.nodeSequence`),
-    immutableIdentity: asNonEmptyString(value.immutableIdentity, `${label}.immutableIdentity`),
-    commitmentDigest: asHex32(value.commitmentDigest, `${label}.commitmentDigest`),
+    eligibleSequence: asStoredU64(value.eligibleSequence, `${label}.eligibleSequence`),
+    activitySequence: asStoredU64(value.activitySequence, `${label}.activitySequence`),
+    nodeSequence: asStoredU64(value.nodeSequence, `${label}.nodeSequence`),
+    immutableIdentity: asCanonicalNonEmptyString(value.immutableIdentity, `${label}.immutableIdentity`),
+    commitmentDigest: asCanonicalHex32(value.commitmentDigest, `${label}.commitmentDigest`),
   };
 }
 
 function normalizeFactionManifest(obligation, index, fundingRound, normalized) {
-  const weekId = asNonEmptyString(obligation.factionWeekId, `obligation ${index}.factionWeekId`);
+  const weekId = asCanonicalNonEmptyString(obligation.factionWeekId, `obligation ${index}.factionWeekId`);
   if (!Array.isArray(obligation.payoutEntries) || obligation.payoutEntries.length === 0) {
     throw new Error("FACTION_MANIFEST_REQUIRES_COMPLETE_PAYOUT_ENTRIES");
   }
@@ -1359,11 +1483,19 @@ function normalizeFactionManifest(obligation, index, fundingRound, normalized) {
     if (!hasExactKeys(entry, expectedKeys)) {
       throw new Error("INVALID_FACTION_MANIFEST_PAYOUT_ENTRY_KEY_SET");
     }
-    const rewardId = asHex32(entry.rewardId, `faction payout ${entryIndex} reward ID`);
-    return {
-      fragmentId: asHex32(entry.fragmentId, `faction payout ${entryIndex} fragment ID`),
+    const rewardId = asCanonicalHex32(entry.rewardId, `faction payout ${entryIndex} reward ID`);
+    const fragmentId = asCanonicalHex32(entry.fragmentId, `faction payout ${entryIndex} fragment ID`);
+    if (fragmentId !== deriveXBoundFundingObligationId({
       rewardId,
-      amount: asU64(entry.amount, `faction payout ${entryIndex} amount`),
+      fundingRoundAtUnixSeconds: fundingRound,
+      trancheKinds,
+    })) {
+      throw new Error("X_BOUND_FUNDING_OBLIGATION_ID_NOT_DERIVED_FROM_CANONICAL_SEMANTICS");
+    }
+    return {
+      fragmentId,
+      rewardId,
+      amount: asStoredU64(entry.amount, `faction payout ${entryIndex} amount`),
       trancheKinds,
       chronology: normalizeChronology(entry.chronology, `faction payout ${entryIndex}`),
       ...(isUpgrade
@@ -1376,6 +1508,10 @@ function normalizeFactionManifest(obligation, index, fundingRound, normalized) {
         : {}),
     };
   }).sort((left, right) => left.fragmentId.localeCompare(right.fragmentId));
+  if (JSON.stringify(obligation.payoutEntries.map(({ fragmentId }) => fragmentId))
+    !== JSON.stringify(payoutEntries.map(({ fragmentId }) => fragmentId))) {
+    throw new Error("FACTION_MANIFEST_PAYOUT_ENTRIES_MUST_BE_CANONICALLY_ORDERED");
+  }
   if (payoutEntries.some(({ amount }) => amount === 0n)
     || new Set(payoutEntries.map(({ fragmentId }) => fragmentId)).size !== payoutEntries.length
     || new Set(payoutEntries.map(({ rewardId }) => rewardId)).size !== payoutEntries.length
@@ -1385,8 +1521,9 @@ function normalizeFactionManifest(obligation, index, fundingRound, normalized) {
   const exactAmount = payoutEntries.reduce((total, entry) => total + entry.amount, 0n);
   const payoutDigest = canonicalStateSha256(payoutEntries);
   if (asU64(exactAmount, "faction manifest exact amount") !== normalized.amount
+    || !Number.isSafeInteger(obligation.followerCount)
     || obligation.followerCount !== payoutEntries.length
-    || asHex32(obligation.payoutDigest, "faction manifest payout digest") !== payoutDigest
+    || asCanonicalHex32(obligation.payoutDigest, "faction manifest payout digest") !== payoutDigest
     || normalized.id !== sha256(`IAT_B3_WEEKLY_FACTION_MANIFEST_V1|${fundingRound}|${weekId}|${payoutDigest}`)) {
     throw new Error("FACTION_MANIFEST_EXACT_TOTAL_OR_DIGEST_MISMATCH");
   }
@@ -1415,25 +1552,60 @@ function normalizeFactionManifest(obligation, index, fundingRound, normalized) {
 function normalizeObligation(obligation, index, fundingRound) {
   if (!isRecord(obligation)) throw new Error(`obligation ${index} must be an object`);
   if (!REWARD_PRIORITY_CLASSES.includes(obligation.priorityClass)) throw new Error("UNKNOWN_REWARD_PRIORITY_CLASS");
+  if (obligation.kind === FACTION_FRAGMENT_KIND) {
+    throw new Error("FACTION_FOLLOWER_REQUIRES_ONE_AGGREGATE_WEEKLY_MANIFEST");
+  }
+  const cccClass = CCC_CLASSES.has(obligation.priorityClass);
+  const xBound = obligation.kind === "X_BOUND_FUNDING";
+  const factionManifest = obligation.kind === FACTION_MANIFEST_KIND;
+  const trancheKinds = xBound && Array.isArray(obligation.trancheKinds)
+    ? [...obligation.trancheKinds]
+    : [];
+  const trancheSignature = JSON.stringify(trancheKinds);
+  const upgradeSignature = JSON.stringify([X_TRANCHE_KIND.UPGRADE]);
+  let expectedKeys;
+  if (xBound) {
+    expectedKeys = [
+      ...OBLIGATION_COMMON_KEYS,
+      ...X_FUNDING_COMMON_KEYS,
+      ...(cccClass ? OBLIGATION_CCC_ORDERING_KEYS : ["chronology"]),
+      ...(trancheSignature === upgradeSignature ? ["originalBaseAdmissionLineage"] : []),
+    ];
+  } else if (factionManifest) {
+    expectedKeys = FACTION_MANIFEST_KEYS;
+  } else {
+    if (Object.hasOwn(obligation, "kind")) throw new Error("UNKNOWN_REWARD_OBLIGATION_KIND");
+    if (Object.hasOwn(obligation, "rewardSourceKind")) {
+      throw new Error("X_BOUND_SOURCE_KIND_REQUIRES_X_BOUND_FUNDING_KIND");
+    }
+    expectedKeys = [
+      ...OBLIGATION_COMMON_KEYS,
+      ...(cccClass ? OBLIGATION_CCC_ORDERING_KEYS : ["chronology"]),
+    ];
+  }
+  if (!hasExactKeys(obligation, expectedKeys)) {
+    throw new Error("INVALID_REWARD_OBLIGATION_VARIANT_KEY_SET");
+  }
+  const normalizedFundingRound = assertUtcMidnight(
+    asStoredI64(obligation.fundingRoundAtUnixSeconds, `obligation ${index} funding round`),
+    `obligation ${index} funding round`,
+  );
   const normalized = {
-    ...obligation,
-    id: asHex32(obligation.id, `obligation ${index} id`),
-    amount: asU64(obligation.amount, `obligation ${index} amount`),
-    fundingRoundAtUnixSeconds: assertUtcMidnight(obligation.fundingRoundAtUnixSeconds, `obligation ${index} funding round`),
+    id: asCanonicalHex32(obligation.id, `obligation ${index} id`),
+    priorityClass: obligation.priorityClass,
+    amount: asStoredU64(obligation.amount, `obligation ${index} amount`),
+    fundingRoundAtUnixSeconds: normalizedFundingRound,
+    fundingPool: obligation.fundingPool,
+    reservationStatus: obligation.reservationStatus,
   };
   if (normalized.amount === 0n) throw new Error("ZERO_REWARD_OBLIGATION");
   if (normalized.fundingRoundAtUnixSeconds !== fundingRound) throw new Error("OBLIGATION_NOT_BOUND_TO_DESIGNATED_FUNDING_ROUND");
   if (obligation.reservationStatus !== "NEW_UNRESERVED") throw new Error("EXISTING_RESERVATIONS_CANNOT_ENTER_NEW_WATERFALL");
-  if (obligation.kind === FACTION_FRAGMENT_KIND) {
-    throw new Error("FACTION_FOLLOWER_REQUIRES_ONE_AGGREGATE_WEEKLY_MANIFEST");
-  }
-  if (obligation.kind === "X_BOUND_FUNDING") {
+  if (xBound) {
     if (!X_REWARD_KINDS.has(obligation.rewardSourceKind)
       || X_BOUND_SOURCE_PRIORITY[obligation.rewardSourceKind] !== obligation.priorityClass) {
       throw new Error("X_BOUND_SOURCE_PRIORITY_CLASS_MISMATCH");
     }
-    asHex32(obligation.rewardId, `obligation ${index} reward ID`);
-    const trancheSignature = JSON.stringify(obligation.trancheKinds);
     const acceptedTrancheSets = [
       [X_TRANCHE_KIND.BASE],
       [X_TRANCHE_KIND.PREMIUM_FULL],
@@ -1442,32 +1614,38 @@ function normalizeObligation(obligation, index, fundingRound) {
     if (!acceptedTrancheSets.includes(trancheSignature)) {
       throw new Error("INVALID_X_BOUND_FUNDING_TRANCHE_SET");
     }
-    if (trancheSignature === JSON.stringify([X_TRANCHE_KIND.UPGRADE])) {
+    normalized.kind = "X_BOUND_FUNDING";
+    normalized.rewardId = asCanonicalHex32(obligation.rewardId, `obligation ${index} reward ID`);
+    normalized.rewardSourceKind = obligation.rewardSourceKind;
+    normalized.trancheKinds = trancheKinds;
+    if (trancheSignature === upgradeSignature) {
       normalized.originalBaseAdmissionLineage = normalizeOriginalBaseAdmissionLineage(
         obligation.originalBaseAdmissionLineage,
-        obligation.rewardId,
+        normalized.rewardId,
       );
-    } else if (Object.hasOwn(obligation, "originalBaseAdmissionLineage")) {
-      throw new Error("BASE_ADMISSION_LINEAGE_ONLY_ALLOWED_FOR_UPGRADE");
     }
-  } else if (Object.hasOwn(obligation, "rewardSourceKind")) {
-    throw new Error("X_BOUND_SOURCE_KIND_REQUIRES_X_BOUND_FUNDING_KIND");
   }
   if (obligation.fundingPool !== "SHARED_REWARD_RESERVE") {
     throw new Error("NEW_WATERFALL_REQUIRES_SHARED_REWARD_FUNDING_POOL");
   }
   if (obligation.priorityClass === "WEEKLY_FACTION") {
-    if (obligation.kind !== FACTION_MANIFEST_KIND) throw new Error("WEEKLY_FACTION_REQUIRES_AGGREGATE_MANIFEST_KIND");
+    if (!factionManifest) throw new Error("WEEKLY_FACTION_REQUIRES_AGGREGATE_MANIFEST_KIND");
+    normalized.kind = FACTION_MANIFEST_KIND;
     normalizeFactionManifest(obligation, index, fundingRound, normalized);
-  } else if (obligation.kind === FACTION_MANIFEST_KIND) {
+  } else if (factionManifest) {
     throw new Error("FACTION_MANIFEST_PRIORITY_CLASS_MISMATCH");
-  } else if (CCC_CLASSES.has(obligation.priorityClass)) {
-    normalized.qualifyingActivityStartSlot = asU64(obligation.qualifyingActivityStartSlot, `obligation ${index} activity slot`);
-    normalized.nodeActivationSlot = asU64(obligation.nodeActivationSlot, `obligation ${index} node slot`);
-    normalized.eligibleSequence = asU64(obligation.eligibleSequence, `obligation ${index} X eligibility sequence`);
-    normalized.qualificationPda = asHex32(obligation.qualificationPda, `obligation ${index} qualification PDA`);
+  } else if (cccClass) {
+    normalized.qualifyingActivityStartSlot = asStoredU64(obligation.qualifyingActivityStartSlot, `obligation ${index} activity slot`);
+    normalized.nodeActivationSlot = asStoredU64(obligation.nodeActivationSlot, `obligation ${index} node slot`);
+    normalized.eligibleSequence = asStoredU64(obligation.eligibleSequence, `obligation ${index} X eligibility sequence`);
+    normalized.qualificationPda = asCanonicalHex32(obligation.qualificationPda, `obligation ${index} qualification PDA`);
   } else {
     normalized.chronology = normalizeChronology(obligation.chronology, `obligation ${index}`);
+  }
+  if (xBound) {
+    if (normalized.id !== deriveXBoundFundingObligationId(normalized)) {
+      throw new Error("X_BOUND_FUNDING_OBLIGATION_ID_NOT_DERIVED_FROM_CANONICAL_SEMANTICS");
+    }
   }
   return normalized;
 }
@@ -1560,6 +1738,14 @@ function canonicalPreRandomnessOrder(obligations) {
 }
 
 function validateSealedCandidateUniqueness(normalized) {
+  const xRewardIds = normalized.flatMap((entry) => {
+    if (entry.kind === "X_BOUND_FUNDING") return [entry.rewardId];
+    if (entry.kind === FACTION_MANIFEST_KIND) return entry.payoutEntries.map(({ rewardId }) => rewardId);
+    return [];
+  });
+  if (new Set(xRewardIds).size !== xRewardIds.length) {
+    throw new Error("DUPLICATE_X_BOUND_REWARD_SEMANTICS_IN_FUNDING_ROUND");
+  }
   if (new Set(normalized.map(({ id }) => id)).size !== normalized.length) {
     throw new Error("DUPLICATE_REWARD_OBLIGATION_ID");
   }
@@ -1575,17 +1761,41 @@ function validateSealedCandidateUniqueness(normalized) {
 }
 
 function validateCapacityRoundSeal(roundSeal) {
-  if (!isRecord(roundSeal)
+  if (!hasExactKeys(roundSeal, REWARD_CAPACITY_ROUND_SEAL_KEYS)
     || roundSeal.schema !== "iat-b3-reward-capacity-round-seal/v1"
     || roundSeal.status !== "SEALED_NON_ACTIVATING"
     || roundSeal.finalized !== false
-    || !Array.isArray(roundSeal.candidates)) throw new Error("INVALID_CAPACITY_ROUND_SEAL");
-  const fundingRound = assertUtcMidnight(roundSeal.fundingRoundAtUnixSeconds, "round seal funding round");
-  const sealedAt = asI64(roundSeal.sealedAtUnixSeconds, "round seal boundary timestamp");
+    || !Array.isArray(roundSeal.candidates)
+    || !Array.isArray(roundSeal.candidateIds)
+    || !Number.isSafeInteger(roundSeal.candidateCount)
+    || roundSeal.candidateCount < 0) throw new Error("INVALID_CAPACITY_ROUND_SEAL_KEY_SET_OR_TYPES");
+  const fundingRound = assertUtcMidnight(
+    asStoredI64(roundSeal.fundingRoundAtUnixSeconds, "round seal funding round"),
+    "round seal funding round",
+  );
+  const sealedAt = asStoredI64(roundSeal.sealedAtUnixSeconds, "round seal boundary timestamp");
   if (sealedAt !== fundingRound) throw new Error("CAPACITY_ROUND_MUST_SEAL_AT_DESIGNATED_UTC_BOUNDARY");
+  const candidateIds = roundSeal.candidateIds.map((id, index) => (
+    asCanonicalHex32(id, `round seal candidate ID ${index}`)
+  ));
+  const candidateSetSha256 = asCanonicalHex32(roundSeal.candidateSetSha256, "round seal candidate-set digest");
+  const storedLedgerSnapshotSha256 = asCanonicalHex32(
+    roundSeal.ledgerSnapshotSha256,
+    "round seal ledger snapshot digest",
+  );
+  const storedRegistrySnapshotSha256 = asCanonicalHex32(
+    roundSeal.cccPrecommitRegistrySnapshotSha256,
+    "round seal CCC precommit registry digest",
+  );
+  const storedDecisionContextSha256 = roundSeal.cccDecisionContextSha256 === null
+    ? null
+    : asCanonicalHex32(roundSeal.cccDecisionContextSha256, "round seal CCC decision context");
   const normalized = roundSeal.candidates.map((entry, index) => normalizeObligation(entry, index, fundingRound));
   validateSealedCandidateUniqueness(normalized);
   const canonical = canonicalPreRandomnessOrder(normalized);
+  if (JSON.stringify(normalized.map(({ id }) => id)) !== JSON.stringify(canonical.map(({ id }) => id))) {
+    throw new Error("CAPACITY_ROUND_CANDIDATES_MUST_BE_CANONICALLY_ORDERED");
+  }
   const normalizedLedger = normalizeLedger(roundSeal.ledgerSnapshot);
   const ledgerSnapshotSha256 = canonicalStateSha256(normalizedLedger);
   const precommitRegistry = normalizeCccPrecommitRegistrySnapshot(
@@ -1593,10 +1803,10 @@ function validateCapacityRoundSeal(roundSeal) {
     fundingRound,
   );
   if (roundSeal.candidateCount !== canonical.length
-    || roundSeal.candidateSetSha256 !== canonicalStateSha256(canonical)
-    || JSON.stringify(roundSeal.candidateIds) !== JSON.stringify(canonical.map(({ id }) => id))
-    || roundSeal.ledgerSnapshotSha256 !== ledgerSnapshotSha256
-    || roundSeal.cccPrecommitRegistrySnapshotSha256 !== precommitRegistry.snapshotSha256) {
+    || candidateSetSha256 !== canonicalStateSha256(canonical)
+    || JSON.stringify(candidateIds) !== JSON.stringify(canonical.map(({ id }) => id))
+    || storedLedgerSnapshotSha256 !== ledgerSnapshotSha256
+    || storedRegistrySnapshotSha256 !== precommitRegistry.snapshotSha256) {
     throw new Error("CAPACITY_ROUND_SEAL_COMMITMENT_MISMATCH");
   }
   const tiePresent = cccTierHasExactTie(canonical);
@@ -1607,22 +1817,26 @@ function validateCapacityRoundSeal(roundSeal) {
       throw new Error("CCC_EXACT_TIE_REQUIRES_ONE_CANONICAL_PRECOMMIT_REGISTRY_ENTRY");
     }
     revealCommitment = precommitRegistry.entries[0];
-    if (canonicalStateSha256(roundSeal.cccRevealCommitment) !== canonicalStateSha256(revealCommitment)) {
+    const storedRevealCommitment = normalizeCccRevealCommitment(
+      roundSeal.cccRevealCommitment,
+      fundingRound,
+    );
+    if (canonicalStateSha256(storedRevealCommitment) !== canonicalStateSha256(revealCommitment)) {
       throw new Error("CCC_REVEAL_COMMITMENT_DOES_NOT_MATCH_CANONICAL_PRECOMMIT_REGISTRY");
     }
     decisionContext = deriveCccDecisionContext({
       fundingRoundAtUnixSeconds: fundingRound,
-      candidateSetSha256: roundSeal.candidateSetSha256,
+      candidateSetSha256,
       ledgerSnapshotSha256,
       precommitRegistrySnapshotSha256: precommitRegistry.snapshotSha256,
       revealCommitment,
     });
-    if (roundSeal.cccDecisionContextSha256 !== decisionContext) {
+    if (storedDecisionContextSha256 !== decisionContext) {
       throw new Error("CCC_DECISION_CONTEXT_NOT_DERIVED_FROM_SEALED_INPUTS");
     }
   } else if (precommitRegistry.entries.length !== 0
     || roundSeal.cccRevealCommitment !== null
-    || roundSeal.cccDecisionContextSha256 !== null) {
+    || storedDecisionContextSha256 !== null) {
     throw new Error("UNEXPECTED_CCC_REVEAL_COMMITMENT_WITHOUT_EXACT_TIE");
   }
   return {
@@ -1864,7 +2078,7 @@ export function logicalMissedFundingOutcome(obligation, {
   if (!isRecord(obligation)) throw new Error("obligation is required");
   const fundingRound = assertUtcMidnight(obligation.fundingRoundAtUnixSeconds, "obligation funding round");
   const now = asI64(nowUnixSeconds, "nowUnixSeconds");
-  const missDecidableAtUnixSeconds = fundingRound + 1n;
+  const missDecidableAtUnixSeconds = asI64(fundingRound + 1n, "missDecidableAtUnixSeconds");
   if (now < missDecidableAtUnixSeconds) throw new Error("FUNDING_ROUND_NOT_YET_DECIDABLE");
   if (roundState === null) {
     return Object.freeze({

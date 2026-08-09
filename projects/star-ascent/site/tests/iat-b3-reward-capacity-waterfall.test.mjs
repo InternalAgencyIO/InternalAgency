@@ -26,6 +26,7 @@ import {
   createXBoundReward,
   effectiveXBoundRewardStatus,
   logicalMissedFundingOutcome,
+  nextUtcMidnight,
   orderCccCapacityCandidates,
   recordPremiumUpgrade,
   sealRewardCapacityRound,
@@ -170,10 +171,14 @@ function ccc({
 }
 
 function factionFragment({ id, amount, sequence = id, trancheKind = X_TRANCHE_KIND.BASE }) {
+  const rewardId = hex(1_000 + id);
+  const fragmentId = createHash("sha256")
+    .update(`IAT_B3_X_FUNDING_V1|${rewardId}|${FUNDING_ROUND}|${trancheKind}`)
+    .digest("hex");
   return {
-    id: hex(id),
+    id: fragmentId,
     kind: "X_BOUND_FACTION_FRAGMENT",
-    rewardId: hex(1_000 + id),
+    rewardId,
     rewardSourceKind: "FACTION_FOLLOWER",
     trancheKinds: [trancheKind],
     priorityClass: "WEEKLY_FACTION",
@@ -283,6 +288,7 @@ test("policy freezes non-activation, class/lane order, and the common three-kind
   assert.equal(REWARD_CAPACITY_POLICY.directApplicationPermitted, false);
   assert.equal(REWARD_CAPACITY_POLICY.scope.cccGenesisActive, false);
   assert.equal(REWARD_CAPACITY_POLICY.scope.roundSnapshotAdapterAuthenticated, false);
+  assert.equal(REWARD_CAPACITY_POLICY.scope.sourceKindAdapterAuthenticated, false);
   assert.equal(REWARD_CAPACITY_POLICY.scope.cccRandomnessProvenanceAuthenticated, false);
   assert.equal(REWARD_CAPACITY_POLICY.scope.cccPrecommitRegistryAuthenticated, false);
   assert.equal(REWARD_CAPACITY_POLICY.scope.roundStatePersistenceAuthenticated, false);
@@ -652,6 +658,106 @@ test("failed base funding voids upgrade; missed rounds and 30-day claim expiry r
   assert.equal(admitted.claimExpiresAtUnixSeconds, FUNDING_ROUND + CLAIM_EXPIRY_DAYS * UTC_DAY_SECONDS);
 });
 
+test("sealed rounds and every obligation variant reject schema, stored-type, case, and order drift", () => {
+  const expectSealFailure = (candidate, pattern) => assert.throws(
+    () => sealRound({ obligations: [candidate] }),
+    pattern,
+  );
+  const generic = obligation({ id: 0xab, priorityClass: "CORE", amount: 1 });
+  expectSealFailure({ ...generic, unknown: false }, /VARIANT_KEY_SET/u);
+  const missingChronology = { ...generic };
+  delete missingChronology.chronology;
+  expectSealFailure(missingChronology, /VARIANT_KEY_SET/u);
+  expectSealFailure({ ...generic, amount: 1 }, /stored as bigint/u);
+  expectSealFailure({ ...generic, id: generic.id.toUpperCase() }, /canonical lowercase/u);
+  expectSealFailure({
+    ...generic,
+    chronology: { ...generic.chronology, eligibleSequence: 1 },
+  }, /stored as bigint/u);
+  expectSealFailure({
+    ...generic,
+    chronology: { ...generic.chronology, unknown: 0n },
+  }, /exact precommitted chronology key set/u);
+
+  const cccCandidate = ccc({ id: 0xac, pda: 0xad });
+  expectSealFailure({ ...cccCandidate, eligibleSequence: 1 }, /stored as bigint/u);
+  expectSealFailure({
+    ...cccCandidate,
+    qualificationPda: cccCandidate.qualificationPda.toUpperCase(),
+  }, /canonical lowercase/u);
+
+  const reward = createXBoundReward(rewardInput({ rewardId: hex(0xae) }));
+  const due = buildXBoundFundingObligation({ reward, fundingRoundAtUnixSeconds: FUNDING_ROUND });
+  expectSealFailure({ ...due, id: hex(0xaf) }, /ID_NOT_DERIVED/u);
+  expectSealFailure({ ...due, unknown: false }, /VARIANT_KEY_SET/u);
+  assert.throws(() => sealRound({ obligations: [due, due] }), /DUPLICATE_X_BOUND_REWARD_SEMANTICS/u);
+  const sameRewardDifferentTranche = buildXBoundFundingObligation({
+    reward: createXBoundReward(rewardInput({
+      rewardId: reward.rewardId,
+      subscriptionType: "Premium",
+    })),
+    fundingRoundAtUnixSeconds: FUNDING_ROUND,
+  });
+  assert.notEqual(sameRewardDifferentTranche.id, due.id);
+  assert.throws(
+    () => sealRound({ obligations: [due, sameRewardDifferentTranche] }),
+    /DUPLICATE_X_BOUND_REWARD_SEMANTICS/u,
+  );
+
+  const fragments = [factionFragment({ id: 501, amount: 1 }), factionFragment({ id: 502, amount: 1 })];
+  const manifest = factionManifest({ fragments });
+  const forgedFragmentId = structuredClone(manifest);
+  forgedFragmentId.payoutEntries[0].fragmentId = hex(0xb0);
+  expectSealFailure(forgedFragmentId, /ID_NOT_DERIVED/u);
+  const reorderedPayouts = structuredClone(manifest);
+  reorderedPayouts.payoutEntries.reverse();
+  expectSealFailure(reorderedPayouts, /CANONICALLY_ORDERED/u);
+
+  const sealed = sealRound({ obligations: [
+    obligation({ id: 601, priorityClass: "CORE", amount: 1, sequence: 2 }),
+    obligation({ id: 602, priorityClass: "CORE", amount: 1, sequence: 1 }),
+  ] });
+  const unknownSealKey = structuredClone(sealed.roundState);
+  unknownSealKey.roundSeal.unknown = false;
+  assert.throws(() => allocateRewardCapacity({
+    dailyLawState: OPEN_LAW,
+    roundState: unknownSealKey,
+  }), /ROUND_SEAL_KEY_SET_OR_TYPES/u);
+  const reorderedCandidates = structuredClone(sealed.roundState);
+  reorderedCandidates.roundSeal.candidates.reverse();
+  assert.throws(() => allocateRewardCapacity({
+    dailyLawState: OPEN_LAW,
+    roundState: reorderedCandidates,
+  }), /CANDIDATES_MUST_BE_CANONICALLY_ORDERED/u);
+  const stringTimestamp = structuredClone(sealed.roundState);
+  stringTimestamp.roundSeal.fundingRoundAtUnixSeconds = FUNDING_ROUND.toString();
+  assert.throws(() => allocateRewardCapacity({
+    dailyLawState: OPEN_LAW,
+    roundState: stringTimestamp,
+  }), /stored as bigint/u);
+});
+
+test("i64 edge arithmetic rejects expiry and next-midnight overflow before returning state", () => {
+  const i64Max = (1n << 63n) - 1n;
+  const lastI64Midnight = i64Max - (i64Max % UTC_DAY_SECONDS);
+  assert.equal(nextUtcMidnight(lastI64Midnight - UTC_DAY_SECONDS), lastI64Midnight);
+  assert.throws(() => nextUtcMidnight(lastI64Midnight), /fit i64/u);
+  assert.throws(() => nextUtcMidnight(i64Max), /fit i64/u);
+
+  const lastSafeEpochClose = lastI64Midnight - CLAIM_EXPIRY_DAYS * UTC_DAY_SECONDS;
+  const edgeReward = createXBoundReward(rewardInput({
+    rewardId: hex(701),
+    epochClosedAtUnixSeconds: lastSafeEpochClose,
+    subscriptionObservedAtUnixSeconds: lastSafeEpochClose,
+  }));
+  assert.equal(edgeReward.claimExpiresAtUnixSeconds, lastI64Midnight);
+  assert.throws(() => createXBoundReward(rewardInput({
+    rewardId: hex(702),
+    epochClosedAtUnixSeconds: lastSafeEpochClose + UTC_DAY_SECONDS,
+    subscriptionObservedAtUnixSeconds: lastSafeEpochClose + UTC_DAY_SECONDS,
+  })), /fit i64/u);
+});
+
 test("boundary seal binds candidate set and capacity; late arrivals, free ledgers, and replay fail closed", () => {
   const first = obligation({ id: 11, priorityClass: "STANDARD_10_PERCENT_AND_X_CAMPAIGN", amount: 2, sequence: 2 });
   const second = obligation({ id: 12, priorityClass: "STANDARD_10_PERCENT_AND_X_CAMPAIGN", amount: 2, sequence: 1 });
@@ -815,6 +921,17 @@ test("CCC exact ties require one pre-bound reveal and internally derived decisio
     roundState: mismatchedCommitmentState,
     cccRandomnessReveal: sealed.reveal,
   }), /DOES_NOT_MATCH_CANONICAL_PRECOMMIT_REGISTRY/u);
+  const stringTypedCommitmentState = structuredClone(sealed.roundState);
+  stringTypedCommitmentState.roundSeal.cccRevealCommitment = {
+    ...stringTypedCommitmentState.roundSeal.cccRevealCommitment,
+    committedAtUnixSeconds:
+      stringTypedCommitmentState.roundSeal.cccRevealCommitment.committedAtUnixSeconds.toString(),
+  };
+  assert.throws(() => allocateRewardCapacity({
+    dailyLawState: OPEN_LAW,
+    roundState: stringTypedCommitmentState,
+    cccRandomnessReveal: sealed.reveal,
+  }), /stored as bigint/u);
   const mismatchedRegistryState = structuredClone(sealed.roundState);
   mismatchedRegistryState.roundSeal.cccPrecommitRegistrySnapshot.snapshotSha256 = "ef".repeat(32);
   assert.throws(() => allocateRewardCapacity({
@@ -828,6 +945,12 @@ test("CCC exact ties require one pre-bound reveal and internally derived decisio
     fundingRoundAtUnixSeconds: FUNDING_ROUND,
     randomnessHex: revealHex,
   }), /BEFORE_FUNDING_ROUND/u);
+  assert.throws(() => createCccRevealCommitment({
+    sourceId: " noncanonical-source ",
+    committedAtUnixSeconds: FUNDING_ROUND - 1n,
+    fundingRoundAtUnixSeconds: FUNDING_ROUND,
+    randomnessHex: revealHex,
+  }), /surrounding whitespace/u);
 
   const options = { randomnessHex: revealHex, decisionContextHex: sealed.seal.cccDecisionContextSha256 };
   const forward = orderCccCapacityCandidates([tieB, tieA], options);
