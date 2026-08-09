@@ -368,6 +368,28 @@ manual account close: it marks `closed = true` and retains the position PDA
 permanently, making that owner/config position ID nonreusable. The matrix must
 therefore never claim a `close_position_account` mutation.
 
+The adjacent strict-codec slice covers only B3 `PositionState` and `LaneState`.
+Both use distinct eight-byte magics and exact versioned 176-byte layouts;
+little-endian numerics, canonical booleans, zero reserved bytes, exact length,
+role `0..=2`, and stored lane `1..=4` are checked on decode and encode. Encoding
+constructs a temporary fixed buffer and copies only after every semantic check,
+so a rejected value or wrong-sized destination remains unchanged. Golden hashes
+and field-completeness vectors pin every semantic field, and cross-type,
+version, length, trailing-byte, reserved-byte, boolean, and discriminant
+adversaries fail closed. These are deliberate B3 corruption rules, not a claim
+that the new bytes decode V2 Anchor accounts or reproduce Anchor account-error
+precedence.
+
+There is no Config account codec in this slice. The semantic `ConfigState`
+still contains retained `active: bool`, but the one-way Genesis staging,
+activation, and cap-enforcement phase rule is unresolved; encoding it now would
+silently choose that protocol rule. The decode-to-gated-`close_position` test
+therefore uses an already-semantic Config value and proves only Position/Lane
+codec integration. It proves no Config owner/address/PDA/phase trust. The matrix
+records `PARTIAL_STRICT_CODEC_ONLY` and `nativeAdapterComplete: false`; no
+Solana account access, identity binding, dispatcher, lifecycle, CPI, durable
+write, or public handler was added.
+
 These are not account adapters or deployable handlers. A future native adapter
 must still prove account ownership, exact config/round/randomness bindings,
 PDAs, codecs, and bumps before its first mutable borrow, and must source Clock

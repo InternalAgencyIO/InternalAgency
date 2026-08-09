@@ -17,11 +17,15 @@ const economySource = readFileSync(
   new URL("programs/iat_b3_economy/src/lib.rs", siteRoot),
   "utf8",
 );
+const economyCodecSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/codec.rs", siteRoot),
+  "utf8",
+);
 const lawSource = readFileSync(
   new URL("programs/iat_b3_law/src/lib.rs", siteRoot),
   "utf8",
 );
-const economyCode = economySource
+const economyCode = `${economySource}\n${economyCodecSource}`
   .replace(/\/\/.*$/gmu, "")
   .replace(/\/\*[\s\S]*?\*\//gu, "");
 const workspaceManifest = readFileSync(new URL("Cargo.toml", siteRoot), "utf8");
@@ -117,6 +121,28 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   assert.doesNotMatch(
     economyCode,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo|TcpStream|UdpSocket/u,
+  );
+});
+
+test("the close-position native preparation has strict partial codecs only", () => {
+  for (const declaration of [
+    'pub const POSITION_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3POS";',
+    'pub const LANE_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3LAN";',
+    "pub const ACCOUNT_CODEC_VERSION: u8 = 1;",
+    "pub const POSITION_ACCOUNT_LEN: usize = 176;",
+    "pub const LANE_ACCOUNT_LEN: usize = 176;",
+  ]) {
+    assert.ok(economyCodecSource.includes(declaration), declaration);
+  }
+  assert.match(economyCodecSource, /pub fn encode_position_state\(/u);
+  assert.match(economyCodecSource, /pub fn decode_position_state\(/u);
+  assert.match(economyCodecSource, /pub fn encode_lane_state\(/u);
+  assert.match(economyCodecSource, /pub fn decode_lane_state\(/u);
+  assert.match(economyCodecSource, /NonCanonicalBoolean/u);
+  assert.match(economyCodecSource, /NonCanonicalDiscriminant/u);
+  assert.doesNotMatch(
+    economyCodecSource,
+    /ConfigState|encode_config|decode_config|AccountInfo|process_instruction|invoke(?:_signed)?\s*\(/u,
   );
 });
 
@@ -656,6 +682,16 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
     "release_reservations",
     "mark_closed",
   ]);
+  assert.equal(closePosition.nativeAdapterStage, "PARTIAL_STRICT_CODEC_ONLY");
+  assert.equal(closePosition.nativeAdapterComplete, false);
+  assert.deepEqual(closePosition.strictCodecTypes, [
+    "PositionState",
+    "LaneState",
+  ]);
+  assert.equal(
+    closePosition.configCodecStatus,
+    "BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE",
+  );
 });
 
 test("the pure verifier pins the exact current Daily Law v1 codec", () => {

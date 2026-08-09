@@ -1,6 +1,14 @@
 #![cfg_attr(not(test), no_std)]
 #![forbid(unsafe_code)]
 
+mod codec;
+
+pub use codec::{
+    decode_lane_state, decode_position_state, encode_lane_state, encode_position_state, CodecError,
+    ACCOUNT_CODEC_VERSION, LANE_ACCOUNT_LEN, LANE_ACCOUNT_MAGIC, POSITION_ACCOUNT_LEN,
+    POSITION_ACCOUNT_MAGIC,
+};
+
 use iat_b3_consensus::{
     iat_transfer_disposition, protocol_local_day, IatTransferDisposition, SolanaDailyDecision,
 };
@@ -156,7 +164,9 @@ pub struct LaneState {
 }
 
 /// Native semantic representation of the retained V2 `Config` data. This is
-/// not an account codec or proof that a config PDA exists.
+/// not an account codec or proof that a config PDA exists. Its B3 byte codec is
+/// blocked until the Genesis-staging, activation, and cap-enforcement phase
+/// rule is frozen; `active` must not be mistaken for that unresolved phase.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ConfigState {
     pub admin: [u8; 32],

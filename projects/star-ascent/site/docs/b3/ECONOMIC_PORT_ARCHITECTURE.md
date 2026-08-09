@@ -471,6 +471,28 @@ V2 `close_position` releases residual reservations and marks the position
 closed; it has no account-close lifecycle. The closed position PDA remains
 allocated permanently, so the same owner/config `position_id` is nonreusable.
 The B3 matrix deliberately records no `close_position_account` mutation.
+
+The first post-kernel codec slice freezes only the identity-independent B3 byte
+layouts for `PositionState` and `LaneState`. Each is an exact 176-byte envelope
+with a distinct eight-byte type magic, version byte, zero reserved bytes,
+little-endian numeric fields, canonical `0`/`1` booleans, and strict role/lane
+discriminants. Encode validates into a temporary fixed buffer before copying,
+so an error cannot partially change caller output. Decode rejects wrong type,
+version, length, trailing data, reserved bytes, boolean encodings, and invalid
+discriminants. This deliberately stricter B3 corruption boundary is not a claim
+of V2 Anchor byte-layout or account-validation error-order compatibility.
+
+`ConfigState` is intentionally not encoded. Its current `active: bool` is a
+host-only retained semantic projection, while the required one-way
+Genesis-staging-to-active/cap phase remains unresolved. Freezing that boolean as
+the B3 Config account phase would preempt the bootstrap decision. Codec tests
+may supply an already-semantic Config value only to exercise decoded Position
+and Lane values through the gated `close_position` kernel; they do not close
+Config account ownership, address, PDA, phase, or activation trust. This stage
+is `PARTIAL_STRICT_CODEC_ONLY` and `nativeAdapterComplete: false`: it adds no
+Solana dependency, account access, identity binding, dispatcher, lifecycle,
+CPI, persistence, or public exposure.
+
 None of these kernels may be exposed as a write entrypoint. The first safe
 deployable slice is the complete fifteen-row dispatcher behind the frozen
 Token-2022 hook, not a single handler.
