@@ -7,6 +7,9 @@ on:
       - "projects/star-ascent/site/.gitattributes"
       - "projects/star-ascent/site/scripts/data/pcm-source-freeze-evidence-5baff9.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-source-partition-5baff9.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-reusable-proposals-5baff9.json"
+      - "projects/star-ascent/site/scripts/data/pcm-machine-draft-5baff9-v2.json"
+      - "projects/star-ascent/site/scripts/data/pcm-machine-draft-assembly-proof-5baff9.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-short-001.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-002.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-003.json"
@@ -23,16 +26,22 @@ on:
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-014.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-015.json"
       - "projects/star-ascent/site/scripts/validate-pcm-editorial-batch.mjs"
+      - "projects/star-ascent/site/scripts/validate-pcm-editorial-reusable-proposals.mjs"
+      - "projects/star-ascent/site/scripts/assemble-pcm-machine-draft.mjs"
       - "projects/star-ascent/site/scripts/lib/i18n-protected-integrity.mjs"
       - "projects/star-ascent/site/scripts/lib/pcm-machine-draft-quality.mjs"
       - "projects/star-ascent/site/scripts/lib/pcm-editorial-gap-report.mjs"
       - "projects/star-ascent/site/scripts/lib/pcm-editorial-source-partition.mjs"
       - "projects/star-ascent/site/scripts/lib/pcm-editorial-incremental-batch.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-editorial-reusable-proposals.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-machine-draft-assembler.mjs"
       - "projects/star-ascent/site/tests/i18n-protected-integrity.test.mjs"
       - "projects/star-ascent/site/tests/pcm-machine-draft-quality.test.mjs"
       - "projects/star-ascent/site/tests/pcm-editorial-gap-report.test.mjs"
       - "projects/star-ascent/site/tests/pcm-editorial-incremental-batch.test.mjs"
       - "projects/star-ascent/site/tests/pcm-source-freeze-evidence.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-editorial-reusable-proposals.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-machine-draft-assembler.test.mjs"
       - "projects/star-ascent/site/tests/pcm-editorial-workflow-contract.test.mjs"
   pull_request:
     paths:
@@ -40,6 +49,9 @@ on:
       - "projects/star-ascent/site/.gitattributes"
       - "projects/star-ascent/site/scripts/data/pcm-source-freeze-evidence-5baff9.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-source-partition-5baff9.json"
+      - "projects/star-ascent/site/scripts/data/pcm-editorial-reusable-proposals-5baff9.json"
+      - "projects/star-ascent/site/scripts/data/pcm-machine-draft-5baff9-v2.json"
+      - "projects/star-ascent/site/scripts/data/pcm-machine-draft-assembly-proof-5baff9.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-short-001.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-002.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-003.json"
@@ -56,16 +68,22 @@ on:
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-014.json"
       - "projects/star-ascent/site/scripts/data/pcm-editorial-batches/pcm-public-ui-priority-015.json"
       - "projects/star-ascent/site/scripts/validate-pcm-editorial-batch.mjs"
+      - "projects/star-ascent/site/scripts/validate-pcm-editorial-reusable-proposals.mjs"
+      - "projects/star-ascent/site/scripts/assemble-pcm-machine-draft.mjs"
       - "projects/star-ascent/site/scripts/lib/i18n-protected-integrity.mjs"
       - "projects/star-ascent/site/scripts/lib/pcm-machine-draft-quality.mjs"
       - "projects/star-ascent/site/scripts/lib/pcm-editorial-gap-report.mjs"
       - "projects/star-ascent/site/scripts/lib/pcm-editorial-source-partition.mjs"
       - "projects/star-ascent/site/scripts/lib/pcm-editorial-incremental-batch.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-editorial-reusable-proposals.mjs"
+      - "projects/star-ascent/site/scripts/lib/pcm-machine-draft-assembler.mjs"
       - "projects/star-ascent/site/tests/i18n-protected-integrity.test.mjs"
       - "projects/star-ascent/site/tests/pcm-machine-draft-quality.test.mjs"
       - "projects/star-ascent/site/tests/pcm-editorial-gap-report.test.mjs"
       - "projects/star-ascent/site/tests/pcm-editorial-incremental-batch.test.mjs"
       - "projects/star-ascent/site/tests/pcm-source-freeze-evidence.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-editorial-reusable-proposals.test.mjs"
+      - "projects/star-ascent/site/tests/pcm-machine-draft-assembler.test.mjs"
       - "projects/star-ascent/site/tests/pcm-editorial-workflow-contract.test.mjs"
   workflow_dispatch:
 
@@ -85,7 +103,7 @@ jobs:
   pcm-evidence:
     name: Frozen non-activating PCM evidence
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - name: Check out the exact source tree
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -107,8 +125,10 @@ jobs:
             tests/pcm-machine-draft-quality.test.mjs \
             tests/pcm-editorial-gap-report.test.mjs \
             tests/pcm-editorial-incremental-batch.test.mjs \
-            tests/pcm-source-freeze-evidence.test.mjs
-      - name: Validate every frozen editorial batch
+            tests/pcm-source-freeze-evidence.test.mjs \
+            tests/pcm-editorial-reusable-proposals.test.mjs \
+            tests/pcm-machine-draft-assembler.test.mjs
+      - name: Validate the frozen editorial chain and assembled draft
         run: |
           set -euo pipefail
           I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-short-001.json" node scripts/validate-pcm-editorial-batch.mjs
@@ -126,3 +146,5 @@ jobs:
           I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-013.json" node scripts/validate-pcm-editorial-batch.mjs
           I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-014.json" node scripts/validate-pcm-editorial-batch.mjs
           I18N_PCM_EDITORIAL_BATCH_PATH="scripts/data/pcm-editorial-batches/pcm-public-ui-priority-015.json" node scripts/validate-pcm-editorial-batch.mjs
+          node scripts/validate-pcm-editorial-reusable-proposals.mjs
+          node scripts/assemble-pcm-machine-draft.mjs

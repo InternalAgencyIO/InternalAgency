@@ -1,0 +1,243 @@
+{
+  "schema": "iat-pcm-machine-draft-assembly-proof/v1",
+  "locale": "pcm",
+  "status": "DETERMINISTIC_CURRENT_GATES_PASS_NON_ACTIVATING_ASSEMBLY",
+  "activationReady": false,
+  "directApplicationPermitted": false,
+  "runtimeCatalogDependency": false,
+  "canonicalEnglishControls": true,
+  "reviewClaim": "AI_GENERATED_UNVERIFIED",
+  "sourceFreezeBinding": {
+    "schema": "iat-pcm-source-freeze-evidence/v1",
+    "sourceCount": 1491,
+    "sourceKeysSha256": "5baff9a147d6390100a976e2d77b860ec0225db92f05ebb0d6361ac2c8981004",
+    "evidenceCanonicalSha256": "991dbd6670f96d8e39e8ffbc0ff155e10e7790b90bc38e263253074550b46f3f",
+    "evidenceFileSha256": "ed8b33a06e77245db7497752f02db4938ded1a3e498b37fdebe0acb55ae2c5c3"
+  },
+  "sourcePartitionBinding": {
+    "schema": "iat-pcm-editorial-source-partition/v1",
+    "canonicalSha256": "e79de0eafbde98a5ac06a162e6f66ad754e39bfe9462e924ec557c3174585de8",
+    "fileSha256": "b8377c1251627529eb2a00af0978fd1a8742ef05d84e79c54356f3c133b6ef2c",
+    "partitionBytesSha256": "3511fb255e30ae2d2b52c40b097b7eccb7bf84e0ce99744dc81121ce70dafcfe",
+    "gapSourceKeysSha256": "b137920d83f75d7096ef716894170b3ea6cc85b7a2cb680d365b4138113be3f8",
+    "reusableSourceKeysSha256": "d519ff5844ec9d8be78f05692508a80812146d511c5a67ea90d49f324ec74f82"
+  },
+  "historicalGapReportBinding": {
+    "schema": "iat-pcm-editorial-gap-report/v1",
+    "canonicalSha256": "87d2f0b91a86d1c44d696ff92ecb1ceea10eff40910664ea5e8c1742e1a9da5f",
+    "fileSha256": "6932c66e5cd7e8d9883d3a0a42fb91cf8181ca5e2883ebb76826cac0a8e8cf10",
+    "gateBinding": {
+      "protectedIntegrityModuleSha256": "fed974cf1ef4a5c6678c87e071beeac517cff051378eb6dec5cf67430bfd27e1",
+      "pcmQualityModuleSha256": "578dd568376aba801dff61b345a1f464457a4a5e5a482449e4834cfaa2e68e29",
+      "salvageModuleSha256": "584fe48f553fb7dd4f079119658118b0009c0093a9b96bd0fd6ef87d994efd99"
+    }
+  },
+  "currentGapReportBinding": {
+    "schema": "iat-pcm-editorial-gap-report/v1",
+    "canonicalSha256": "3a22471238e2096b39d26aeac7fa76720110abe74cc680f1971d5c29070b05bf",
+    "serializedSha256": "9ce5bbc8aded7563eabbb1e79e02a8473d0e1755c2330765771c56fb0a9c5896",
+    "sourceCount": 1491,
+    "gapCount": 1312,
+    "reusableProposalCount": 179,
+    "rejectedExactKeyProposalCount": 617,
+    "missingExactKeyProposalCount": 695,
+    "proposalArtifactCanonicalSha256": "b5958bbf0ffa0bb0d3a0ff667381d7903f51d738f916cb62d29595fc6538505a",
+    "reusableCandidateProposalsCanonicalSha256": "8ac4388788f0e2bfb26ee67a4bdef609a30656fa9e7b691b7002749964aeb858"
+  },
+  "currentHelperBinding": {
+    "protectedIntegrityModuleSha256": "fed974cf1ef4a5c6678c87e071beeac517cff051378eb6dec5cf67430bfd27e1",
+    "pcmQualityModuleSha256": "6c19e96dc891343e968e2f20824fdd54b681f8876273bb0c7b70d9fdee6c7be3",
+    "salvageModuleSha256": "81f5406f5c796a7d09273c61fe8216a04f55ac701bcb9efb12c3202de8a777ae"
+  },
+  "reusableProposalBinding": {
+    "schema": "iat-pcm-editorial-reusable-proposals/v1",
+    "fileSha256": "28ce1764dab400bf51707380db6dc8aaf103ad439bdfc1eddccceeb7d3a89abc",
+    "canonicalSha256": "05bf48f15aa6d73ae3a619f1f86d4e32cd111114dd4c009567edfdc8f8b0b767",
+    "proposalEntriesSha256": "445964687d71d4727ad4fb314b70800ace4b2ab4096739f14118825ad0f994ab",
+    "repairSourceKeysSha256": "fcda512f35581218d0a0e9d1d1911ce4fc4622ad75db927742dab13ea82b895a",
+    "sourceCount": 179,
+    "editorialRepairCount": 31
+  },
+  "editorialBatchBindings": [
+    {
+      "sequence": 1,
+      "fileName": "pcm-public-ui-short-001.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v1",
+      "batchId": "pcm-public-ui-short-001",
+      "acceptedSourceCount": 60,
+      "acceptedSourceKeysSha256": "b3b611acc2f9bdecbd88f5f65027aec2150f902ebed4e29b6acf4eba9bdd6edc",
+      "fileSha256": "5f5d7e543dda68b7a615161dec55bc5013b6c05171dac8ca193ba1945c721778",
+      "canonicalSha256": "b971dc3ff0fdd6ab13d75cbee984b2e3c49ecf8e3e4eb38e3fb91cb88e030a01"
+    },
+    {
+      "sequence": 2,
+      "fileName": "pcm-public-ui-priority-002.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v2",
+      "batchId": "pcm-public-ui-priority-002",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "9cc13118682dfe61fb045578cb3efad50ec39b8e6f48c10cf04cf1656ddbb0c9",
+      "fileSha256": "4599f503a3d068874f2c7912c60de10c6d1b2d005bf9a5acf822c89e9c13e6a2",
+      "canonicalSha256": "5f540361fcfcf01b532c31a0dd0718ef484b6764d65d105ac9509391fd099d53"
+    },
+    {
+      "sequence": 3,
+      "fileName": "pcm-public-ui-priority-003.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v2",
+      "batchId": "pcm-public-ui-priority-003",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "2675917de0606c56385080009b02e295e20794a683c8f80d6cecfede7cf69423",
+      "fileSha256": "0000670d2d82cc2cfa2cb20e0c13d042428124903bde087ce1225ad9d35f13f8",
+      "canonicalSha256": "6048cdd8d85a79157f09b514f9364b838ac6de08a45a8c851dc3f037bb3b867c"
+    },
+    {
+      "sequence": 4,
+      "fileName": "pcm-public-ui-priority-004.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v2",
+      "batchId": "pcm-public-ui-priority-004",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "29b292555216bb414add32eb1cdc02e44d8c9d33f0d88dfb1b1efb681dbd3a93",
+      "fileSha256": "e00783b90ee189dba4d5d0ba2429a80cc25293c1bc57b90e3d89e465aa355cb5",
+      "canonicalSha256": "c99b8e217faa1dd7166891d2b1b3c422b764c3e309a2e647258f0e3b9391fc8a"
+    },
+    {
+      "sequence": 5,
+      "fileName": "pcm-public-ui-priority-005.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v2",
+      "batchId": "pcm-public-ui-priority-005",
+      "acceptedSourceCount": 25,
+      "acceptedSourceKeysSha256": "8d4ce842420b3efcb946e793184a0c1a6b0ad2b281839538500dbbebd569a68f",
+      "fileSha256": "afd94dbce172a51a2fe91feaa3fbde9df939962128fe6ffaeda6d7e523543566",
+      "canonicalSha256": "22e709ce2c39b3fcfb3a3549471653f7d68823d2f8d3a6c08b7da837bc62f1ab"
+    },
+    {
+      "sequence": 6,
+      "fileName": "pcm-public-ui-priority-006.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v3",
+      "batchId": "pcm-full-frozen-gap-006",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "b8d077ba695c2612b0949baa69324bc11ca9360ee421cd6443df719159bc59ad",
+      "fileSha256": "f105245ab29d93d40f7f73245de5cff276ed8759355a5e82385d491562aa9721",
+      "canonicalSha256": "64b79fb04536845336ed08ac9f389c8f81b123aeb59880ca7d2c1a659f1c69b4"
+    },
+    {
+      "sequence": 7,
+      "fileName": "pcm-public-ui-priority-007.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v3",
+      "batchId": "pcm-full-frozen-gap-007",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "74d9e242c1290a7ee4ff3602faecbd848eae41057c4acc3d2e54f147a0f0d6d5",
+      "fileSha256": "d47170cb3c294f74cbc580ed9430981156d8d3597c632a3d77f3a0db653cf648",
+      "canonicalSha256": "96e90bde97801689b674f82a0113ee8d5c5cbf81474bf452b63f329b47c62564"
+    },
+    {
+      "sequence": 8,
+      "fileName": "pcm-public-ui-priority-008.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v3",
+      "batchId": "pcm-full-frozen-gap-008",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "867449863cbcc928b32b6efaafe4e6d250751c36657a6deba0f3a7de05fd70cf",
+      "fileSha256": "428e64c3aa0ec2216f09d4a2655e7c1fcf89ee4fb351739c1fbf362ed4c3dd61",
+      "canonicalSha256": "b3ff01954e374b568b08922c2f17056883864ea331f96f64a6617f2e492c0fb1"
+    },
+    {
+      "sequence": 9,
+      "fileName": "pcm-public-ui-priority-009.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v3",
+      "batchId": "pcm-full-frozen-gap-009",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "cf61907abece9d75b0e45ab0232f02a2d24d5538ff9c87452d5a214b989ac18e",
+      "fileSha256": "ab86a328b8d27dea3fb8abafc875a88ab82fbe728a9bc24affd77977f17c1f81",
+      "canonicalSha256": "ddee5eb185bbe2f3fe36189770b200d99a8c7293ae0b2aeffd20b8a24140fdfd"
+    },
+    {
+      "sequence": 10,
+      "fileName": "pcm-public-ui-priority-010.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v3",
+      "batchId": "pcm-full-frozen-gap-010",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "11068f20813f3e254b3b9c9b6930a905edc4570bcdfd4b2f48d2411e6bfc3c0e",
+      "fileSha256": "ff857b2b4c1c7f1c7a84da36edde41bd732c21fbdb24ea3f5788187ce72ed2af",
+      "canonicalSha256": "1766ea7893b463d747d11d62888fefb619793c637dec66680ee5289a3331109a"
+    },
+    {
+      "sequence": 11,
+      "fileName": "pcm-public-ui-priority-011.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v3",
+      "batchId": "pcm-full-frozen-gap-011",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "290c663defd6b7e5eb004925e9cb92d76bdebaa1b2fa1189c6583d974ae5de07",
+      "fileSha256": "0ccf74ae642b6ca3d9745c26255a912cb81ad02ca655fd353f06291c851d34eb",
+      "canonicalSha256": "b057dfae759af4ee86448bea0a070a7f3bbc3fad1f11818a1b6d75892a11d3bb"
+    },
+    {
+      "sequence": 12,
+      "fileName": "pcm-public-ui-priority-012.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v3",
+      "batchId": "pcm-full-frozen-gap-012",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "07c469be2358a22eaa72ecf85d7faf3bb2c0a3356eebe3e5b1196009dc34dd22",
+      "fileSha256": "718f5d402efeadc7841618af46ad75e39b3f7b712bdc246ad2694e10c568aa8a",
+      "canonicalSha256": "4bfd5c281c8fafc7667900237bda4eed4a81256cbcbfb2478b23cd18da4e66b0"
+    },
+    {
+      "sequence": 13,
+      "fileName": "pcm-public-ui-priority-013.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v3",
+      "batchId": "pcm-full-frozen-gap-013",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "43b6e9cfe807f26649c9d7918de2f185687d6942934f0df50c657037f4bb46cf",
+      "fileSha256": "3e94ef07d5679bab2714e219c981ad3906c746975f07103a02a5d8e402d8166d",
+      "canonicalSha256": "f7a6444b6ad4b6061233aeb2a954aa55391d67b0fefa889b581bca6f8dd2221e"
+    },
+    {
+      "sequence": 14,
+      "fileName": "pcm-public-ui-priority-014.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v3",
+      "batchId": "pcm-full-frozen-gap-014",
+      "acceptedSourceCount": 100,
+      "acceptedSourceKeysSha256": "7b460776db1035559510b95435c4cd2de380c3a9a7936770748d5ac9591e4973",
+      "fileSha256": "24c8b83613e3f46545e58c8cdaa020e3a662a6ae40bed7539de53a4fcb0fbb75",
+      "canonicalSha256": "dd714faf33d95212328c0dbc1fd39826dada0ff24ef3b6d3add307ceb765e05d"
+    },
+    {
+      "sequence": 15,
+      "fileName": "pcm-public-ui-priority-015.json",
+      "schema": "iat-pcm-editorial-incremental-batch/v3",
+      "batchId": "pcm-full-frozen-gap-015",
+      "acceptedSourceCount": 27,
+      "acceptedSourceKeysSha256": "45d08dee08b0f641d5073434d3de0568284868d483997c0ad3fc088d272ae4eb",
+      "fileSha256": "cc1e0eaa5417b1fb972d664a6f15b61f4bdf3063b0785658df45144bac33ea9b",
+      "canonicalSha256": "80234567e9715a292eec4f064e5988e88f0f1f132badf72470eeff9cb81d0390"
+    }
+  ],
+  "assembly": {
+    "sourceCount": 1491,
+    "reusableSourceCount": 179,
+    "gapSourceCount": 1312,
+    "editorialBatchCount": 15,
+    "overlapSourceCount": 0,
+    "uncoveredSourceCount": 0,
+    "extraSourceCount": 0,
+    "sourceKeysSha256": "5baff9a147d6390100a976e2d77b860ec0225db92f05ebb0d6361ac2c8981004",
+    "reusableSourceKeysSha256": "d519ff5844ec9d8be78f05692508a80812146d511c5a67ea90d49f324ec74f82",
+    "gapSourceKeysSha256": "b137920d83f75d7096ef716894170b3ea6cc85b7a2cb680d365b4138113be3f8",
+    "messageEntriesSha256": "6dcf8451a2dd9bbf3f578eb470ac78775752d66aaa9f5cb94463cd78b9c6d557",
+    "counters": {
+      "protectedTokenRepairs": 0,
+      "editorialMachineDraftOverrides": 1343,
+      "sourceEquivalentLabelEditorialFallbacks": 0
+    },
+    "counterDefinitions": {
+      "protectedTokenRepairs": "ASSEMBLY_STAGE_PROTECTED_TOKEN_REPAIRS",
+      "editorialMachineDraftOverrides": "GAP_PROPOSALS_PLUS_REUSABLE_EDITORIAL_REPAIRS",
+      "sourceEquivalentLabelEditorialFallbacks": "ASSEMBLY_STAGE_SOURCE_EQUIVALENT_FALLBACKS"
+    }
+  },
+  "artifactBinding": {
+    "schema": "iat-pcm-machine-draft/v2",
+    "fileName": "pcm-machine-draft-5baff9-v2.json",
+    "fileSha256": "b8db39ae2b58314d11be382658075bd7a58b0e5b3b412896775baa73773d8fdc",
+    "canonicalSha256": "85605497b0e2f5c2cf5167858a56878ba5578d7588cabb769dddbab76ceea2f6",
+    "messageEntriesSha256": "6dcf8451a2dd9bbf3f578eb470ac78775752d66aaa9f5cb94463cd78b9c6d557"
+  }
+}
