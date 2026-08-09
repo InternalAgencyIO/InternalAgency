@@ -72,6 +72,15 @@
       "publicExposure": false
     },
     {
+      "name": "register_agency",
+      "productionBehavior": "CCC_INACTIVE",
+      "implementationStage": "PRE_LIFECYCLE_ONLY",
+      "dailyLawCapabilityRequired": true,
+      "v2DifferentialTests": true,
+      "handlerComplete": false,
+      "publicExposure": false
+    },
+    {
       "name": "set_eligibility",
       "implementationStage": "PRE_LIFECYCLE_ONLY",
       "dailyLawCapabilityRequired": true,
@@ -200,6 +209,9 @@
       "cpis": ["system_program.create_account"],
       "token2022Flow": "NONE",
       "parity": "PRESERVE_COMPILE_TIME_INACTIVE",
+      "productionBehavior": "CCC_INACTIVE",
+      "implementationStage": "PRE_LIFECYCLE_ONLY",
+      "handlerComplete": false,
       "publicExposure": "DISABLED_UNTIL_ALL_15_PASS"
     },
     {

@@ -286,6 +286,44 @@ pub struct ActivateResult {
     pub core_reward: CoreRewardState,
 }
 
+/// Host-only semantic representation of the retained V2 agency record. No B3
+/// account codec or lifecycle is implied by this value.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct AgencyState {
+    pub config: [u8; 32],
+    pub owner: [u8; 32],
+    pub index: u32,
+    pub registered_week: u64,
+    pub bump: u8,
+}
+
+/// Host-only semantic representation of the retained V2 owner-index record.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct AgencyOwnerIndexState {
+    pub config: [u8; 32],
+    pub owner: [u8; 32],
+    pub index: u32,
+    pub bump: u8,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RegisterAgencyInput {
+    pub config_key: [u8; 32],
+    pub config: ConfigState,
+    pub agency_owner: [u8; 32],
+    pub agency_bump: u8,
+    pub agency_owner_index_bump: u8,
+}
+
+/// Test-oracle output for the dormant enabled V2 body. The production wrapper
+/// has no success path while the immutable CCC Genesis constant is false.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RegisterAgencyResult {
+    pub config: ConfigState,
+    pub agency: AgencyState,
+    pub agency_owner_index: AgencyOwnerIndexState,
+}
+
 /// Host-only semantic representation of the retained V2 eligibility record.
 /// A future native adapter must authenticate the administrator and config,
 /// derive the wallet-bound PDA, and create or decode it only after Daily Law
@@ -870,6 +908,84 @@ pub fn activate(
     input: ActivateInput,
 ) -> Result<ActivateResult, EconomyError> {
     activate_transition(input)
+}
+
+/// Host-only `register_agency` production boundary. The opaque Daily Law
+/// capability is required before the retained V2 body. Production preserves
+/// the immutable compile-time CCC-disabled result and therefore has no account
+/// lifecycle, state construction, CPI, persistence, or success path.
+pub fn register_agency(
+    _gate: &ValidatedDailyLawWrite,
+    input: RegisterAgencyInput,
+) -> Result<RegisterAgencyResult, EconomyError> {
+    register_agency_transition(input)
+}
+
+fn register_agency_transition(
+    input: RegisterAgencyInput,
+) -> Result<RegisterAgencyResult, EconomyError> {
+    if !input.config.active {
+        return Err(EconomyError::NotActive);
+    }
+    if !CCC_DLC_GENESIS_ENABLED {
+        return Err(EconomyError::CccDlcNotActive);
+    }
+
+    // A source change to the immutable CCC constant cannot silently expose the
+    // dormant account-creating path. That construction exists only in tests.
+    Err(EconomyError::CccDlcNotActive)
+}
+
+#[cfg(test)]
+fn register_agency_v2_enabled_parity_seam(
+    input: RegisterAgencyInput,
+    clock_unix_timestamp: i64,
+) -> Result<RegisterAgencyResult, EconomyError> {
+    if !input.config.active {
+        return Err(EconomyError::NotActive);
+    }
+
+    let index = input.config.agency_count;
+    let registered_week = current_week(input.config.genesis_timestamp, clock_unix_timestamp)
+        .ok_or(EconomyError::InvalidClock)?;
+    let agency = AgencyState {
+        config: input.config_key,
+        owner: input.agency_owner,
+        index,
+        registered_week,
+        bump: input.agency_bump,
+    };
+    let agency_owner_index = AgencyOwnerIndexState {
+        config: input.config_key,
+        owner: input.agency_owner,
+        index: agency.index,
+        bump: input.agency_owner_index_bump,
+    };
+    let mut config = input.config;
+    config.agency_registry_hash = append_agency_registry_hash(
+        config.agency_registry_hash,
+        agency.index,
+        input.agency_owner,
+    );
+    config.agency_count = config
+        .agency_count
+        .checked_add(1)
+        .ok_or(EconomyError::ArithmeticOverflow)?;
+    Ok(RegisterAgencyResult {
+        config,
+        agency,
+        agency_owner_index,
+    })
+}
+
+#[cfg(test)]
+fn append_agency_registry_hash(current_hash: [u8; 32], index: u32, owner: [u8; 32]) -> [u8; 32] {
+    sha256v(&[
+        b"IAT_AGENCY_REGISTRY_V1",
+        &current_hash,
+        &index.to_le_bytes(),
+        &owner,
+    ])
 }
 
 /// Host-only pre-lifecycle `set_eligibility` transition. The opaque Daily Law
@@ -2459,6 +2575,7 @@ mod tests {
         RANDOMNESS_DISCRIMINATOR as V2_RANDOMNESS_DISCRIMINATOR,
     };
     use iat_v2::{
+        Agency as V2AgencyState, AgencyOwnerIndex as V2AgencyOwnerIndexState,
         Config as V2ConfigState, CoreReward as V2CoreRewardState,
         Eligibility as V2EligibilityState, LaneVault as V2LaneState, Position as V2PositionState,
         Round as V2RoundState,
@@ -3446,6 +3563,130 @@ mod tests {
                     core_reward: semantic_core_from_v2(core_reward),
                 }))
             }
+        }
+    }
+
+    #[derive(Clone, Copy)]
+    struct RegisterAgencyVector {
+        name: &'static str,
+        input: RegisterAgencyInput,
+        clock_timestamp: i64,
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum RegisterAgencyObservation {
+        Error(EconomyError),
+        Success(Box<RegisterAgencyResult>),
+    }
+
+    fn observe_register_agency(
+        result: Result<RegisterAgencyResult, EconomyError>,
+    ) -> RegisterAgencyObservation {
+        match result {
+            Err(error) => RegisterAgencyObservation::Error(error),
+            Ok(result) => RegisterAgencyObservation::Success(Box::new(result)),
+        }
+    }
+
+    fn valid_register_agency_vector(name: &'static str) -> RegisterAgencyVector {
+        let mut config = initialize_config_transition(
+            valid_initialize_config_vector("agency config", false).input,
+            1_000,
+        )
+        .unwrap()
+        .config;
+        config.active = true;
+        config.agency_count = 7;
+        config.agency_registry_hash = [0xa8; 32];
+        RegisterAgencyVector {
+            name,
+            input: RegisterAgencyInput {
+                config_key: [0xa9; 32],
+                config,
+                agency_owner: [0xaa; 32],
+                agency_bump: 247,
+                agency_owner_index_bump: 246,
+            },
+            clock_timestamp: config.genesis_timestamp + (3 * SECONDS_PER_WEEK) + 123,
+        }
+    }
+
+    fn semantic_agency_from_v2(agency: V2AgencyState) -> AgencyState {
+        AgencyState {
+            config: agency.config.to_bytes(),
+            owner: agency.owner.to_bytes(),
+            index: agency.index,
+            registered_week: agency.registered_week,
+            bump: agency.bump,
+        }
+    }
+
+    fn semantic_agency_owner_index_from_v2(
+        owner_index: V2AgencyOwnerIndexState,
+    ) -> AgencyOwnerIndexState {
+        AgencyOwnerIndexState {
+            config: owner_index.config.to_bytes(),
+            owner: owner_index.owner.to_bytes(),
+            index: owner_index.index,
+            bump: owner_index.bump,
+        }
+    }
+
+    fn v2_register_agency_enabled_reference(
+        vector: RegisterAgencyVector,
+    ) -> RegisterAgencyObservation {
+        let input = vector.input;
+        let mut config = v2_config_from_semantic(input.config);
+        let result = (|| {
+            if !config.active {
+                return Err(EconomyError::NotActive);
+            }
+
+            let mut agency = V2AgencyState {
+                config: Default::default(),
+                owner: Default::default(),
+                index: 0,
+                registered_week: 0,
+                bump: 0,
+            };
+            agency.config = input.config_key.into();
+            agency.owner = input.agency_owner.into();
+            agency.index = config.agency_count;
+            agency.registered_week =
+                v2_policy::current_week(config.genesis_timestamp, vector.clock_timestamp)
+                    .ok_or(EconomyError::InvalidClock)?;
+            agency.bump = input.agency_bump;
+
+            let mut owner_index = V2AgencyOwnerIndexState {
+                config: Default::default(),
+                owner: Default::default(),
+                index: 0,
+                bump: 0,
+            };
+            owner_index.config = input.config_key.into();
+            owner_index.owner = input.agency_owner.into();
+            owner_index.index = agency.index;
+            owner_index.bump = input.agency_owner_index_bump;
+
+            config.agency_registry_hash = v2_policy::append_agency_registry_hash(
+                config.agency_registry_hash,
+                agency.index,
+                &input.agency_owner,
+            );
+            config.agency_count = config
+                .agency_count
+                .checked_add(1)
+                .ok_or(EconomyError::ArithmeticOverflow)?;
+            Ok(RegisterAgencyResult {
+                config: semantic_config_from_v2(config),
+                agency: semantic_agency_from_v2(agency),
+                agency_owner_index: semantic_agency_owner_index_from_v2(owner_index),
+            })
+        })();
+
+        match result {
+            Err(error) => RegisterAgencyObservation::Error(error),
+            Ok(result) => RegisterAgencyObservation::Success(Box::new(result)),
         }
     }
 
@@ -6009,6 +6250,180 @@ mod tests {
             verify(FRIDAY_BOUNDARY_UTC, &missing_bytes),
             Err(EconomyError::DayUnfinalized)
         );
+    }
+
+    #[test]
+    fn register_agency_production_preserves_not_active_then_immutable_ccc_boundary() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let base = valid_register_agency_vector("production CCC boundary");
+
+        let inactive = RegisterAgencyInput {
+            config: ConfigState {
+                active: false,
+                agency_count: u32::MAX,
+                ..base.input.config
+            },
+            ..base.input
+        };
+        assert_eq!(
+            register_agency(&gate, inactive),
+            Err(EconomyError::NotActive)
+        );
+        assert_eq!(
+            register_agency(&gate, base.input),
+            Err(EconomyError::CccDlcNotActive)
+        );
+        assert_eq!(
+            register_agency(
+                &gate,
+                RegisterAgencyInput {
+                    config: ConfigState {
+                        genesis_timestamp: i64::MAX,
+                        agency_count: u32::MAX,
+                        ..base.input.config
+                    },
+                    ..base.input
+                }
+            ),
+            Err(EconomyError::CccDlcNotActive)
+        );
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
+        let missing_bytes = pack_law_state(None);
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &missing_bytes),
+            Err(EconomyError::DayUnfinalized)
+        );
+    }
+
+    #[test]
+    fn register_agency_enabled_test_seam_constructs_both_records_with_v2_parity() {
+        let base = valid_register_agency_vector("enabled construction");
+        for (index, owner, agency_bump, owner_index_bump, elapsed_weeks) in [
+            (0u32, [0u8; 32], 0u8, 1u8, 0u64),
+            (7, [0xaa; 32], 247, 246, 3),
+            (u32::MAX - 1, [0xff; 32], u8::MAX, 0, 11),
+        ] {
+            let vector = RegisterAgencyVector {
+                name: base.name,
+                input: RegisterAgencyInput {
+                    config: ConfigState {
+                        agency_count: index,
+                        agency_registry_hash: [index as u8; 32],
+                        ..base.input.config
+                    },
+                    agency_owner: owner,
+                    agency_bump,
+                    agency_owner_index_bump: owner_index_bump,
+                    ..base.input
+                },
+                clock_timestamp: base.input.config.genesis_timestamp
+                    + ((elapsed_weeks as i64) * SECONDS_PER_WEEK)
+                    + 123,
+            };
+            let actual = observe_register_agency(register_agency_v2_enabled_parity_seam(
+                vector.input,
+                vector.clock_timestamp,
+            ));
+            assert_eq!(
+                actual,
+                v2_register_agency_enabled_reference(vector),
+                "{}: index={index}",
+                vector.name
+            );
+            let RegisterAgencyObservation::Success(result) = actual else {
+                panic!("valid enabled vector must succeed")
+            };
+            assert_eq!(result.agency.config, vector.input.config_key);
+            assert_eq!(result.agency.owner, owner);
+            assert_eq!(result.agency.index, index);
+            assert_eq!(result.agency.registered_week, elapsed_weeks);
+            assert_eq!(result.agency.bump, agency_bump);
+            assert_eq!(result.agency_owner_index.config, vector.input.config_key);
+            assert_eq!(result.agency_owner_index.owner, owner);
+            assert_eq!(result.agency_owner_index.index, index);
+            assert_eq!(result.agency_owner_index.bump, owner_index_bump);
+            assert_eq!(result.config.agency_count, index + 1);
+            assert_eq!(
+                result.config.agency_registry_hash,
+                v2_policy::append_agency_registry_hash(
+                    vector.input.config.agency_registry_hash,
+                    index,
+                    &owner,
+                )
+            );
+        }
+    }
+
+    #[test]
+    fn register_agency_enabled_test_seam_preserves_v2_error_precedence() {
+        let base = valid_register_agency_vector("enabled precedence");
+        let cases = [
+            (
+                "inactive precedes invalid clock and count overflow",
+                RegisterAgencyInput {
+                    config: ConfigState {
+                        active: false,
+                        agency_count: u32::MAX,
+                        ..base.input.config
+                    },
+                    ..base.input
+                },
+                base.input.config.genesis_timestamp - 1,
+                EconomyError::NotActive,
+            ),
+            (
+                "clock precedes count overflow",
+                RegisterAgencyInput {
+                    config: ConfigState {
+                        agency_count: u32::MAX,
+                        ..base.input.config
+                    },
+                    ..base.input
+                },
+                base.input.config.genesis_timestamp - 1,
+                EconomyError::InvalidClock,
+            ),
+            (
+                "count overflow follows record and hash construction",
+                RegisterAgencyInput {
+                    config: ConfigState {
+                        agency_count: u32::MAX,
+                        ..base.input.config
+                    },
+                    ..base.input
+                },
+                base.input.config.genesis_timestamp,
+                EconomyError::ArithmeticOverflow,
+            ),
+        ];
+
+        for (name, input, clock_timestamp, expected_error) in cases {
+            let vector = RegisterAgencyVector {
+                name,
+                input,
+                clock_timestamp,
+            };
+            let actual = observe_register_agency(register_agency_v2_enabled_parity_seam(
+                input,
+                clock_timestamp,
+            ));
+            assert_eq!(
+                actual,
+                RegisterAgencyObservation::Error(expected_error),
+                "fixed error: {name}"
+            );
+            assert_eq!(
+                actual,
+                v2_register_agency_enabled_reference(vector),
+                "V2 differential: {name}"
+            );
+        }
     }
 
     #[test]

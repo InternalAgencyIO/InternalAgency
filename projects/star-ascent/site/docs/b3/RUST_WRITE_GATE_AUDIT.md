@@ -28,7 +28,8 @@ exact read-only Daily Law codec/verifier, an opaque validated-write capability,
 and internal pure `expire_round`, `close_position`, `settle_round`, and
 `commit_round` transitions, plus the `initialize_config`,
 `initialize_lane_vault`, `initialize_stake_vault`, `activate`, and
-`set_eligibility` validation/state constructors explicitly staged as
+the production-inactive `register_agency` boundary and `set_eligibility`
+validation/state constructors explicitly staged as
 `PRE_LIFECYCLE_ONLY`, plus the `prepare_open_position` validation, provisional
 reservation, and transfer-intent kernel and the
 `prepare_withdraw_position_principal` maturity, stake-ledger, and transfer-
@@ -102,14 +103,16 @@ host kernel and stops before the first reward transfer.
 transfer, with the unresolved core lane failing closed after retained V2
 pre-CPI validation. `prepare_settle_core_week` is the fourteenth and likewise
 fails closed after retained V2 pre-CPI validation and reservation consumption.
-All four
-Genesis kernels and `set_eligibility` are `PRE_LIFECYCLE_ONLY`;
+`register_agency` is the fifteenth host kernel and exposes only the immutable
+production CCC-inactive boundary; its dormant enabled construction exists
+under `#[cfg(test)]` solely for V2 differential proof. All four Genesis kernels,
+`register_agency`, and `set_eligibility` are `PRE_LIFECYCLE_ONLY`;
 all five prepare kernels are `PRE_TOKEN_CPI_ONLY`. All have no public exposure.
 Every production wrapper requires the opaque canonical Daily Law capability. The
 three round-related CCC wrappers then preserve the immutable CCC-disabled
 Genesis boundary before inspecting caller-supplied round, instruction-trace, or
-randomness values; `set_eligibility` preserves that same boundary inside its
-non-standard-role branch.
+randomness values; `register_agency` preserves `NotActive` before that boundary,
+and `set_eligibility` preserves it inside its non-standard-role branch.
 
 The `initialize_config` kernel preserves the retained V2 handler body's exact
 validation order: hardware-admin key, mint decimals, rehearsal/production
@@ -263,6 +266,25 @@ tests. Its provisional core and lane copies leave `paid`, `settled_low`, and
 nor moves the checked paid addition ahead of the three ordered CPIs, so token-
 CPI errors retain precedence over paid overflow. The slice is
 `PRE_TOKEN_CPI_ONLY`, handler-incomplete, and has no public exposure.
+
+The `register_agency` production wrapper requires the opaque Daily Law
+capability, then preserves the exact observable V2 order: inactive config fails
+with `NotActive`, while active config fails immediately with
+`CccDlcNotActive` because `CCC_DLC_GENESIS_ENABLED` is the immutable false
+constant. There is no caller enable flag and no production Clock read, record
+construction, registry-hash update, count increment, lifecycle, CPI,
+persistence, dispatcher, or success path; changing the constant alone still
+cannot expose the dormant body. A private `#[cfg(test)]` seam and actual V2
+`Agency`/`AgencyOwnerIndex` comparison oracle pin the hypothetical enabled
+order: validator-Clock week, both complete record constructions, the
+`IAT_AGENCY_REGISTRY_V1` hash append, then checked `u32` count increment.
+Adversarial vectors prove `NotActive` precedes invalid Clock and overflow,
+invalid Clock precedes count overflow, and `u32::MAX - 1` remains the last
+successful increment. Administrator/config authentication and the exact
+`agency`/`agency-owner` PDA lifecycle are deliberately absent and unauthorized
+under the immutable inactive law. This slice is
+`CCC_INACTIVE`, `PRE_LIFECYCLE_ONLY`, handler-incomplete, and has no public
+exposure.
 
 Exact parity exposes a Mainnet-blocking denial: V2 requires the stake-vault
 token amount to equal tracked principal. An unsolicited 1-base-unit donation to

@@ -120,7 +120,7 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
-test("the host-only port contains exactly the first fourteen gated kernels", () => {
+test("the host-only port contains exactly all fifteen gated kernels", () => {
   assert.deepEqual(matrix.hostOnlyPureTransitions, [
     {
       name: "expire_round",
@@ -172,6 +172,15 @@ test("the host-only port contains exactly the first fourteen gated kernels", () 
     },
     {
       name: "activate",
+      implementationStage: "PRE_LIFECYCLE_ONLY",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      handlerComplete: false,
+      publicExposure: false,
+    },
+    {
+      name: "register_agency",
+      productionBehavior: "CCC_INACTIVE",
       implementationStage: "PRE_LIFECYCLE_ONLY",
       dailyLawCapabilityRequired: true,
       v2DifferentialTests: true,
@@ -254,6 +263,84 @@ test("the host-only port contains exactly the first fourteen gated kernels", () 
   assert.match(economySource, /fn activate_transition\(/u);
   assert.match(economySource, /struct ActivateInput/u);
   assert.match(economySource, /struct CoreRewardState/u);
+  assert.match(
+    economySource,
+    /pub fn register_agency\(\s*_gate: &ValidatedDailyLawWrite,/u,
+  );
+  assert.match(economySource, /fn register_agency_transition\(/u);
+  assert.match(economySource, /struct RegisterAgencyInput/u);
+  assert.match(economySource, /struct AgencyState/u);
+  assert.match(economySource, /struct AgencyOwnerIndexState/u);
+  assert.match(
+    economySource,
+    /#\[cfg\(test\)\]\s*fn register_agency_v2_enabled_parity_seam\(/u,
+  );
+
+  const registerTransitionStart = economySource.indexOf(
+    "fn register_agency_transition(",
+  );
+  const registerParitySeamStart = economySource.indexOf(
+    "#[cfg(test)]\nfn register_agency_v2_enabled_parity_seam(",
+  );
+  const registerHashHelperStart = economySource.indexOf(
+    "#[cfg(test)]\nfn append_agency_registry_hash(",
+  );
+  assert(registerTransitionStart >= 0);
+  assert(registerParitySeamStart > registerTransitionStart);
+  assert(registerHashHelperStart > registerParitySeamStart);
+
+  const registerTransition = economySource.slice(
+    registerTransitionStart,
+    registerParitySeamStart,
+  );
+  assert(
+    registerTransition.indexOf("!input.config.active") <
+      registerTransition.indexOf("!CCC_DLC_GENESIS_ENABLED"),
+    "register-agency must preserve NotActive before immutable CCC inactivity",
+  );
+  assert(
+    registerTransition.indexOf("!CCC_DLC_GENESIS_ENABLED") <
+      registerTransition.indexOf("EconomyError::CccDlcNotActive"),
+    "register-agency must return CCC inactivity immediately after the constant",
+  );
+  assert.doesNotMatch(
+    registerTransition,
+    /current_week|AgencyState\s*\{|AgencyOwnerIndexState\s*\{|agency_registry_hash\s*=|checked_add/u,
+  );
+
+  const registerEnabledSeam = economySource.slice(
+    registerParitySeamStart,
+    registerHashHelperStart,
+  );
+  let precedingRegisterStep = -1;
+  for (const marker of [
+    "!input.config.active",
+    "let index = input.config.agency_count",
+    "let registered_week = current_week",
+    "let agency = AgencyState",
+    "let agency_owner_index = AgencyOwnerIndexState",
+    "let mut config = input.config",
+    "config.agency_registry_hash = append_agency_registry_hash",
+    "config.agency_count = config",
+    ".checked_add(1)",
+    "Ok(RegisterAgencyResult",
+  ]) {
+    const currentRegisterStep = registerEnabledSeam.indexOf(marker);
+    assert(
+      currentRegisterStep > precedingRegisterStep,
+      `register-agency enabled parity order drifted: ${marker}`,
+    );
+    precedingRegisterStep = currentRegisterStep;
+  }
+  assert.match(
+    economySource.slice(registerHashHelperStart),
+    /b"IAT_AGENCY_REGISTRY_V1"/u,
+  );
+  const registerInputMatch = economySource.match(
+    /pub struct RegisterAgencyInput\s*\{(?<body>[^}]*)\}/u,
+  );
+  assert(registerInputMatch?.groups?.body);
+  assert.doesNotMatch(registerInputMatch.groups.body, /enable|ccc|clock/u);
   assert.match(
     economySource,
     /pub fn set_eligibility\(\s*_gate: &ValidatedDailyLawWrite,/u,
@@ -426,7 +513,7 @@ test("the host-only port contains exactly the first fourteen gated kernels", () 
   assert.match(economySource, /fn validate_round_commit_instruction\(/u);
   assert.doesNotMatch(
     economyCode,
-    /pub fn (?:register_agency|open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal)\s*\(/u,
+    /pub fn (?:open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal)\s*\(/u,
   );
 
   const initializeConfig = matrix.handlers.find(
@@ -459,6 +546,16 @@ test("the host-only port contains exactly the first fourteen gated kernels", () 
   assert.equal(activate.publicExposure, matrix.deploymentExposure);
   assert.equal(activate.parity, "PRESERVE");
   assert(activate.cpis.includes("system_program.create_account"));
+
+  const registerAgency = matrix.handlers.find(
+    (handler) => handler.name === "register_agency",
+  );
+  assert.equal(registerAgency.productionBehavior, "CCC_INACTIVE");
+  assert.equal(registerAgency.implementationStage, "PRE_LIFECYCLE_ONLY");
+  assert.equal(registerAgency.handlerComplete, false);
+  assert.equal(registerAgency.publicExposure, matrix.deploymentExposure);
+  assert.equal(registerAgency.parity, "PRESERVE_COMPILE_TIME_INACTIVE");
+  assert(registerAgency.cpis.includes("system_program.create_account"));
 
   const setEligibility = matrix.handlers.find(
     (handler) => handler.name === "set_eligibility",
