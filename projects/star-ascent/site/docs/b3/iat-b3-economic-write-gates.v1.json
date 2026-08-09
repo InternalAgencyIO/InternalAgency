@@ -86,6 +86,14 @@
       "v2DifferentialTests": true,
       "handlerComplete": false,
       "publicExposure": false
+    },
+    {
+      "name": "prepare_withdraw_position_principal",
+      "implementationStage": "PRE_TOKEN_CPI_ONLY",
+      "dailyLawCapabilityRequired": true,
+      "v2DifferentialTests": true,
+      "handlerComplete": false,
+      "publicExposure": false
     }
   ],
   "canonicalGate": {
@@ -244,6 +252,8 @@
       "cpis": ["token_2022.transfer_checked_with_hook_accounts"],
       "token2022Flow": "STAKE_VAULT_TO_POSITION_OWNER",
       "parity": "PRESERVE",
+      "implementationStage": "PRE_TOKEN_CPI_ONLY",
+      "handlerComplete": false,
       "publicExposure": "DISABLED_UNTIL_ALL_15_PASS"
     },
     {

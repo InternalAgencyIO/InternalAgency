@@ -120,7 +120,7 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
 });
 
-test("the host-only port contains exactly the first ten gated kernels", () => {
+test("the host-only port contains exactly the first eleven gated kernels", () => {
   assert.deepEqual(matrix.hostOnlyPureTransitions, [
     {
       name: "expire_round",
@@ -194,6 +194,14 @@ test("the host-only port contains exactly the first ten gated kernels", () => {
       handlerComplete: false,
       publicExposure: false,
     },
+    {
+      name: "prepare_withdraw_position_principal",
+      implementationStage: "PRE_TOKEN_CPI_ONLY",
+      dailyLawCapabilityRequired: true,
+      v2DifferentialTests: true,
+      handlerComplete: false,
+      publicExposure: false,
+    },
   ]);
   assert.match(
     economySource,
@@ -237,6 +245,22 @@ test("the host-only port contains exactly the first ten gated kernels", () => {
   assert.match(economySource, /struct PrepareOpenPositionInput/u);
   assert.match(economySource, /struct OpenPositionPreCpiPlan/u);
   assert.match(economySource, /struct TransferCheckedIntent/u);
+  assert.match(
+    economySource,
+    /pub fn prepare_withdraw_position_principal\(\s*gate: &ValidatedDailyLawWrite,/u,
+  );
+  assert.match(
+    economySource,
+    /fn prepare_withdraw_position_principal_transition\(/u,
+  );
+  assert.match(
+    economySource,
+    /struct PrepareWithdrawPositionPrincipalInput/u,
+  );
+  assert.match(
+    economySource,
+    /struct WithdrawPositionPrincipalPreCpiPlan/u,
+  );
   assert.match(
     economySource,
     /pub fn close_position\(\s*_gate: &ValidatedDailyLawWrite,/u,
@@ -313,6 +337,24 @@ test("the host-only port contains exactly the first ten gated kernels", () => {
   assert.equal(openPosition.publicExposure, matrix.deploymentExposure);
   assert.equal(openPosition.parity, "PRESERVE");
   assert.equal(openPosition.token2022Flow, "OWNER_TO_STAKE_VAULT");
+
+  const withdrawPositionPrincipal = matrix.handlers.find(
+    (handler) => handler.name === "withdraw_position_principal",
+  );
+  assert.equal(
+    withdrawPositionPrincipal.implementationStage,
+    "PRE_TOKEN_CPI_ONLY",
+  );
+  assert.equal(withdrawPositionPrincipal.handlerComplete, false);
+  assert.equal(
+    withdrawPositionPrincipal.publicExposure,
+    matrix.deploymentExposure,
+  );
+  assert.equal(withdrawPositionPrincipal.parity, "PRESERVE");
+  assert.equal(
+    withdrawPositionPrincipal.token2022Flow,
+    "STAKE_VAULT_TO_POSITION_OWNER",
+  );
 
   const closePosition = matrix.handlers.find(
     (handler) => handler.name === "close_position",

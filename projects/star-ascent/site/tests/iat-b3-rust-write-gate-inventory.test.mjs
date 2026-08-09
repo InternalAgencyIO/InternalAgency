@@ -977,3 +977,136 @@ test("prepare_open_position stops at the exact V2 pre-token-CPI boundary", () =>
     /unsolicited 1-base-unit donation[\s\S]+`StakeLedgerMismatch`[\s\S]+does not relax the\s+equality/u,
   );
 });
+
+test("prepare_withdraw_position_principal stops at the exact V2 pre-token-CPI boundary", () => {
+  const v2Withdraw = functionBody(
+    anchorProgramBody(v2Source),
+    "withdraw_position_principal",
+  );
+  const economyPrepare = functionBody(
+    economySource,
+    "prepare_withdraw_position_principal",
+  );
+  const economyTransition = functionBody(
+    economySource,
+    "prepare_withdraw_position_principal_transition",
+  );
+
+  assertTokensInOrder(
+    v2Withdraw,
+    [
+      "ctx.accounts.config.active",
+      "ctx.accounts.position.closed",
+      "verify_destination(",
+      "&ctx.accounts.destination_tokens",
+      "ctx.accounts.mint.key()",
+      "ctx.accounts.position.owner",
+      "ctx.accounts.position.principal_returned",
+      "position_maturity_week(",
+      "ctx.accounts.position.accepted_week",
+      "ctx.accounts.position.term_weeks",
+      "week_for(&ctx.accounts.config)? >= maturity_week",
+      "ctx.accounts.config.staked_principal >= ctx.accounts.position.principal",
+      "verify_stake_vault(",
+      "&ctx.accounts.stake_tokens",
+      "ctx.accounts.mint.key()",
+      "ctx.accounts.vault_authority.key()",
+      "ctx.accounts.config.staked_principal",
+      "transfer_from_vault(",
+      "ctx.accounts.position.principal",
+      "ctx.accounts.config.staked_principal =",
+      ".checked_sub(ctx.accounts.position.principal)",
+      "ctx.accounts.position.principal_returned = true",
+    ],
+    "V2 withdraw_position_principal",
+  );
+
+  assert.match(economyPrepare, /gate: &ValidatedDailyLawWrite/u);
+  assert.match(
+    economyPrepare,
+    /prepare_withdraw_position_principal_transition\(input, gate\.unix_timestamp\)/u,
+  );
+  assertTokensInOrder(
+    economyTransition,
+    [
+      "if !input.config.active",
+      "if input.position.closed",
+      "verify_destination(input.destination_tokens, input.mint, input.position.owner)",
+      "if input.position.principal_returned",
+      "position_maturity_week(input.position.accepted_week, input.position.term_weeks)",
+      "current_week(input.config.genesis_timestamp, clock_unix_timestamp)",
+      "if current_week < maturity_week",
+      "if input.config.staked_principal < input.position.principal",
+      "verify_stake_vault(",
+      "input.stake_tokens",
+      "input.mint",
+      "input.vault_authority",
+      "input.config.staked_principal",
+      "Ok(WithdrawPositionPrincipalPreCpiPlan",
+      "config_snapshot: input.config",
+      "position_snapshot: input.position",
+      "maturity_week,",
+      "transfer: TransferCheckedIntent",
+      "token_program: input.config.token_program",
+      "source: input.stake_tokens.key",
+      "destination: input.destination_tokens.key",
+      "authority: input.vault_authority",
+      "amount: input.position.principal",
+      "decimals: TOKEN_DECIMALS",
+    ],
+    "B3 prepare_withdraw_position_principal transition",
+  );
+
+  for (const body of [economyPrepare, economyTransition]) {
+    assert.doesNotMatch(
+      body,
+      /\bconfig\.staked_principal\s*=|position\.principal_returned\s*=\s*true|CpiContext|transfer_from_vault|token::transfer_checked|\binvoke(?:_signed)?\s*\(/u,
+    );
+  }
+
+  const plan = structBody(
+    economySource,
+    "WithdrawPositionPrincipalPreCpiPlan",
+  );
+  assert.match(plan, /pub config_snapshot: ConfigState/u);
+  assert.match(plan, /pub position_snapshot: PositionState/u);
+  assert.match(plan, /pub maturity_week: u64/u);
+  assert.match(plan, /pub transfer: TransferCheckedIntent/u);
+
+  const v2Accounts = structBody(v2Source, "WithdrawPositionPrincipal");
+  assertTokensInOrder(
+    v2Accounts,
+    [
+      "pub caller: Signer<'info>",
+      "#[account(mut, has_one = mint, has_one = token_program)]",
+      "pub config: Account<'info, Config>",
+      "#[account(mut, has_one = config)]",
+      "pub position: Account<'info, Position>",
+      "pub mint: Account<'info, Mint>",
+      'seeds = [b"vault-authority", config.key().as_ref()]',
+      "pub vault_authority: UncheckedAccount<'info>",
+      "#[account(mut, address = config.stake_token_account)]",
+      "pub stake_tokens: Account<'info, TokenAccount>",
+      "pub destination_tokens: Account<'info, TokenAccount>",
+      "pub token_program: Program<'info, Token>",
+    ],
+    "V2 WithdrawPositionPrincipal accounts",
+  );
+
+  assert.match(
+    audit,
+    /`prepare_withdraw_position_principal` is the eleventh host kernel[\s\S]+`PRE_TOKEN_CPI_ONLY`[\s\S]+no public exposure/u,
+  );
+  assert.match(
+    audit,
+    /withdrawal kernel preserves the exact retained V2 pre-CPI order[\s\S]+maturity[\s\S]+exact tracked stake-vault balance/u,
+  );
+  assert.match(
+    audit,
+    /does not decrement[\s\S]+staked_principal[\s\S]+does not set[\s\S]+principal_returned[\s\S]+does not invoke a CPI/u,
+  );
+  assert.match(
+    audit,
+    /For `withdraw_position_principal`[\s\S]+`add_extra_accounts_for_execute_cpi`[\s\S]+post-CPI finalizer[\s\S]+roll back/u,
+  );
+});

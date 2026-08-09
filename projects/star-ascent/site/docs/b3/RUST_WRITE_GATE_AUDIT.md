@@ -30,7 +30,9 @@ and internal pure `expire_round`, `close_position`, `settle_round`, and
 `initialize_lane_vault`, `initialize_stake_vault`, `activate`, and
 `set_eligibility` validation/state constructors explicitly staged as
 `PRE_LIFECYCLE_ONLY`, plus the `prepare_open_position` validation, provisional
-reservation, and transfer-intent kernel staged as `PRE_TOKEN_CPI_ONLY`. Its
+reservation, and transfer-intent kernel and the
+`prepare_withdraw_position_principal` maturity, stake-ledger, and transfer-
+intent kernel staged as `PRE_TOKEN_CPI_ONLY`. Its
 manifest is `lib`-only and it has no Solana entrypoint or public dispatcher,
 account lifecycle, token CPI, or network access. Neither
 the JavaScript specifications nor these pure Rust slices may be counted as
@@ -87,9 +89,11 @@ are present. `activate` is the eighth host kernel, but only handler-body
 validation, reward reservation, and by-value state construction are present.
 `set_eligibility` is the ninth host kernel, but only its role-policy validation
 and by-value eligibility construction are present. `prepare_open_position` is
-the tenth host kernel, but stops immediately before the token CPI. All four
+the tenth host kernel, but stops immediately before the token CPI.
+`prepare_withdraw_position_principal` is the eleventh host kernel and stops at
+the same pre-token-CPI boundary. All four
 Genesis kernels and `set_eligibility` are `PRE_LIFECYCLE_ONLY`;
-`prepare_open_position` is `PRE_TOKEN_CPI_ONLY`. All have no public exposure.
+both prepare kernels are `PRE_TOKEN_CPI_ONLY`. All have no public exposure.
 Every production wrapper requires the opaque canonical Daily Law capability. The
 three round-related CCC wrappers then preserve the immutable CCC-disabled
 Genesis boundary before inspecting caller-supplied round, instruction-trace, or
@@ -176,6 +180,19 @@ perform `config.staked_principal.checked_add`, construct `PositionState`, create
 or persist the position PDA, invoke a CPI, or mutate durable state. It is
 explicitly `PRE_TOKEN_CPI_ONLY`, handler-incomplete, and has no public exposure.
 
+The withdrawal kernel preserves the exact retained V2 pre-CPI order: active
+config, open position, destination mint then owner, not-yet-returned flag,
+checked maturity calculation, validator-Clock-derived current week, completed
+term, tracked principal sufficient for this position, then stake-vault mint,
+authority, and exact tracked stake-vault balance. Success returns unchanged
+config and position snapshots, the maturity week, and a stake-vault-to-owner
+transfer intent. It does not decrement `config.staked_principal`, does not set
+`position.principal_returned`, and does not invoke a CPI. It also preserves V2's
+permissionless caller semantics: the caller is a signer but need not be the
+position owner, while the token destination must still belong to the recorded
+owner. The slice is `PRE_TOKEN_CPI_ONLY`, handler-incomplete, and has no public
+exposure.
+
 Exact parity exposes a Mainnet-blocking denial: V2 requires the stake-vault
 token amount to equal tracked principal. An unsolicited 1-base-unit donation to
 that public vault makes `open_position` fail with `StakeLedgerMismatch` (and can
@@ -247,6 +264,16 @@ staked-principal checked addition and construct/persist `PositionState`. A
 disposable local validator must prove the entire transaction rolls back the
 manual lifecycle, provisional lane reservations, token transfer, and finalizer
 state when the hook, token CPI, or post-CPI finalizer fails.
+For `withdraw_position_principal`, the adapter must pass the same Daily Law and
+canonical account/PDA checks before mutable borrow, derive and bind the config,
+stake-vault, vault-authority, position, mint, and Token-2022 identities itself,
+preserve the arbitrary signer caller plus owner-bound destination semantics,
+construct Token-2022 `TransferChecked`, and use
+`add_extra_accounts_for_execute_cpi` before invoking the stake-vault-to-owner
+transfer. Only after the CPI succeeds may its post-CPI finalizer
+checked-subtract tracked principal and mark the position returned. A
+local-validator failure at the hook, token CPI, or finalizer must prove the
+transfer and both state writes roll back atomically.
 
 That adapter also has an unresolved non-circular bootstrap requirement. If the
 combined `finalize_day` plus core-cap reconciliation path requires an already

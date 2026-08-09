@@ -314,8 +314,8 @@ pub struct SetEligibilityResult {
     pub eligibility: EligibilityState,
 }
 
-/// Semantic description of the exact transfer V2 performs after its
-/// open-position preflight. This value is not a CPI and does not prove that
+/// Semantic description of an exact transfer V2 performs after a retained
+/// pre-CPI position preflight. This value is not a CPI and does not prove that
 /// Token-2022, the Transfer Hook, or the hook's extra accounts were invoked.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct TransferCheckedIntent {
@@ -369,6 +369,30 @@ pub struct OpenPositionPreCpiPlan {
     pub treasury_reserved: u64,
     pub ecosystem_reserved: u64,
     pub liquidity_reserved: u64,
+    pub transfer: TransferCheckedIntent,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct PrepareWithdrawPositionPrincipalInput {
+    pub config_key: [u8; 32],
+    pub config: ConfigState,
+    pub position: PositionState,
+    pub mint: [u8; 32],
+    pub vault_authority: [u8; 32],
+    pub stake_tokens: ReadonlyTokenState,
+    pub destination_tokens: ReadonlyTokenState,
+}
+
+/// Host-only output through the exact point immediately before V2 transfers
+/// principal out of the stake vault. Both state values are unchanged snapshots:
+/// V2 decrements tracked principal and marks the position returned only after
+/// the transfer CPI succeeds.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct WithdrawPositionPrincipalPreCpiPlan {
+    pub config_key: [u8; 32],
+    pub config_snapshot: ConfigState,
+    pub position_snapshot: PositionState,
+    pub maturity_week: u64,
     pub transfer: TransferCheckedIntent,
 }
 
@@ -531,6 +555,8 @@ pub enum EconomyError {
     WrongPositionOwner,
     InvalidClock,
     PositionClosed,
+    PrincipalAlreadyReturned,
+    PositionTermNotComplete,
     PrincipalNotReturned,
     PositionWeeksOutstanding,
     WrongLaneOrder,
@@ -862,6 +888,68 @@ fn prepare_open_position_transition(
     })
 }
 
+/// Prepare retained V2 `withdraw_position_principal` only through the point
+/// immediately before its token transfer. The opaque Daily Law capability is
+/// required, but this host-only function performs no CPI or mutation. A future
+/// native adapter must execute the canonical hooked Token-2022 transfer and
+/// only then decrement tracked principal and mark the position returned in the
+/// same transaction.
+pub fn prepare_withdraw_position_principal(
+    gate: &ValidatedDailyLawWrite,
+    input: PrepareWithdrawPositionPrincipalInput,
+) -> Result<WithdrawPositionPrincipalPreCpiPlan, EconomyError> {
+    prepare_withdraw_position_principal_transition(input, gate.unix_timestamp)
+}
+
+fn prepare_withdraw_position_principal_transition(
+    input: PrepareWithdrawPositionPrincipalInput,
+    clock_unix_timestamp: i64,
+) -> Result<WithdrawPositionPrincipalPreCpiPlan, EconomyError> {
+    if !input.config.active {
+        return Err(EconomyError::NotActive);
+    }
+    if input.position.closed {
+        return Err(EconomyError::PositionClosed);
+    }
+    verify_destination(input.destination_tokens, input.mint, input.position.owner)?;
+    if input.position.principal_returned {
+        return Err(EconomyError::PrincipalAlreadyReturned);
+    }
+    let maturity_week =
+        position_maturity_week(input.position.accepted_week, input.position.term_weeks)
+            .ok_or(EconomyError::ArithmeticOverflow)?;
+    let current_week = current_week(input.config.genesis_timestamp, clock_unix_timestamp)
+        .ok_or(EconomyError::InvalidClock)?;
+    if current_week < maturity_week {
+        return Err(EconomyError::PositionTermNotComplete);
+    }
+    if input.config.staked_principal < input.position.principal {
+        return Err(EconomyError::StakeLedgerMismatch);
+    }
+    verify_stake_vault(
+        input.stake_tokens,
+        input.mint,
+        input.vault_authority,
+        input.config.staked_principal,
+    )?;
+
+    Ok(WithdrawPositionPrincipalPreCpiPlan {
+        config_key: input.config_key,
+        config_snapshot: input.config,
+        position_snapshot: input.position,
+        maturity_week,
+        transfer: TransferCheckedIntent {
+            token_program: input.config.token_program,
+            source: input.stake_tokens.key,
+            mint: input.mint,
+            destination: input.destination_tokens.key,
+            authority: input.vault_authority,
+            amount: input.position.principal,
+            decimals: TOKEN_DECIMALS,
+        },
+    })
+}
+
 fn activate_transition(input: ActivateInput) -> Result<ActivateResult, EconomyError> {
     if !RANDOMNESS_ADAPTER_VERIFIED {
         return Err(EconomyError::RandomnessAdapterNotVerified);
@@ -1104,6 +1192,10 @@ fn current_week(genesis_timestamp: i64, now_timestamp: i64) -> Option<u64> {
             .checked_div(SECONDS_PER_WEEK)?,
     )
     .ok()
+}
+
+fn position_maturity_week(accepted_week: u64, term_weeks: u64) -> Option<u64> {
+    accepted_week.checked_add(term_weeks)
 }
 
 fn maximum_reward(principal: u64, annual_rate_bps: u64, term_weeks: u64) -> Option<u64> {
@@ -3046,6 +3138,152 @@ mod tests {
             Err(error) => PrepareOpenPositionObservation::Error(error),
             Ok(plan) => PrepareOpenPositionObservation::Success(Box::new(plan)),
         }
+    }
+
+    #[derive(Clone, Copy)]
+    struct PrepareWithdrawPositionPrincipalVector {
+        name: &'static str,
+        input: PrepareWithdrawPositionPrincipalInput,
+        clock_timestamp: i64,
+    }
+
+    #[derive(Debug, Eq, PartialEq)]
+    enum PrepareWithdrawPositionPrincipalObservation {
+        Error(EconomyError),
+        Success(Box<WithdrawPositionPrincipalPreCpiPlan>),
+    }
+
+    fn observe_prepare_withdraw_position_principal(
+        result: Result<WithdrawPositionPrincipalPreCpiPlan, EconomyError>,
+    ) -> PrepareWithdrawPositionPrincipalObservation {
+        match result {
+            Err(error) => PrepareWithdrawPositionPrincipalObservation::Error(error),
+            Ok(plan) => PrepareWithdrawPositionPrincipalObservation::Success(Box::new(plan)),
+        }
+    }
+
+    fn valid_prepare_withdraw_position_principal_vector(
+        name: &'static str,
+    ) -> PrepareWithdrawPositionPrincipalVector {
+        let mut config = initialize_config_transition(
+            valid_initialize_config_vector("withdraw-position config", false).input,
+            1_000,
+        )
+        .unwrap()
+        .config;
+        config.active = true;
+        config.stake_vault_initialized = true;
+        config.stake_token_account = [0xd0; 32];
+        config.staked_principal = 500;
+        let config_key = [0xd1; 32];
+        let owner = [0xd2; 32];
+        let mint = config.mint;
+        let vault_authority = [0xd3; 32];
+        let position = PositionState {
+            config: config_key,
+            owner,
+            position_id: 43,
+            principal: 400,
+            accepted_week: 3,
+            first_accrual_week: 4,
+            term_weeks: USER_TERM_WEEKS,
+            annual_rate_bps: STANDARD_RATE_BPS,
+            treasury_reserved: 0,
+            ecosystem_reserved: 0,
+            liquidity_reserved: 0,
+            paid: 100,
+            settled_mask: 1,
+            agency_index: u32::MAX,
+            role: 0,
+            principal_returned: false,
+            closed: false,
+            bump: 245,
+        };
+        PrepareWithdrawPositionPrincipalVector {
+            name,
+            input: PrepareWithdrawPositionPrincipalInput {
+                config_key,
+                config,
+                position,
+                mint,
+                vault_authority,
+                stake_tokens: ReadonlyTokenState {
+                    key: config.stake_token_account,
+                    mint,
+                    owner: vault_authority,
+                    amount: config.staked_principal,
+                },
+                destination_tokens: ReadonlyTokenState {
+                    key: [0xd4; 32],
+                    mint,
+                    owner,
+                    amount: 0,
+                },
+            },
+            clock_timestamp: config.genesis_timestamp + 55 * SECONDS_PER_WEEK,
+        }
+    }
+
+    fn v2_prepare_withdraw_position_principal_reference(
+        vector: PrepareWithdrawPositionPrincipalVector,
+    ) -> PrepareWithdrawPositionPrincipalObservation {
+        let _case_name = vector.name;
+        let input = vector.input;
+        let result = (|| {
+            if !input.config.active {
+                return Err(EconomyError::NotActive);
+            }
+            if input.position.closed {
+                return Err(EconomyError::PositionClosed);
+            }
+            if input.destination_tokens.mint != input.mint {
+                return Err(EconomyError::WrongTokenMint);
+            }
+            if input.destination_tokens.owner != input.position.owner {
+                return Err(EconomyError::WrongDestinationOwner);
+            }
+            if input.position.principal_returned {
+                return Err(EconomyError::PrincipalAlreadyReturned);
+            }
+            let maturity_week = v2_policy::position_maturity_week(
+                input.position.accepted_week,
+                input.position.term_weeks,
+            )
+            .ok_or(EconomyError::ArithmeticOverflow)?;
+            let current_week =
+                v2_policy::current_week(input.config.genesis_timestamp, vector.clock_timestamp)
+                    .ok_or(EconomyError::InvalidClock)?;
+            if current_week < maturity_week {
+                return Err(EconomyError::PositionTermNotComplete);
+            }
+            if input.config.staked_principal < input.position.principal {
+                return Err(EconomyError::StakeLedgerMismatch);
+            }
+            v2_verify_stake_vault(
+                input.stake_tokens,
+                input.mint,
+                input.vault_authority,
+                input.config.staked_principal,
+            )?;
+
+            Ok(WithdrawPositionPrincipalPreCpiPlan {
+                config_key: input.config_key,
+                config_snapshot: input.config,
+                position_snapshot: input.position,
+                maturity_week,
+                transfer: TransferCheckedIntent {
+                    token_program: input.config.token_program,
+                    source: input.stake_tokens.key,
+                    mint: input.mint,
+                    destination: input.destination_tokens.key,
+                    authority: input.vault_authority,
+                    amount: input.position.principal,
+                    decimals: v2_policy::TOKEN_DECIMALS,
+                },
+            })
+        })();
+
+        observe_prepare_withdraw_position_principal(result)
     }
 
     #[derive(Clone, Copy, Debug)]
@@ -5019,6 +5257,251 @@ mod tests {
         donated.stake_tokens.amount += 1;
         assert_eq!(
             prepare_open_position(&gate, donated),
+            Err(EconomyError::StakeLedgerMismatch)
+        );
+
+        let locked_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, true)));
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &locked_bytes),
+            Err(EconomyError::DailyLockdown)
+        );
+        let missing_bytes = pack_law_state(None);
+        assert_eq!(
+            verify(FRIDAY_BOUNDARY_UTC, &missing_bytes),
+            Err(EconomyError::DayUnfinalized)
+        );
+    }
+
+    #[test]
+    fn prepare_withdraw_position_principal_validation_order_matches_retained_v2() {
+        let base = valid_prepare_withdraw_position_principal_vector("base");
+        let mut cases = Vec::new();
+
+        let mut input = base.input;
+        input.config.active = false;
+        input.position.closed = true;
+        cases.push((
+            "inactive precedes every later check",
+            input,
+            base.clock_timestamp,
+            EconomyError::NotActive,
+        ));
+
+        let mut input = base.input;
+        input.position.closed = true;
+        input.destination_tokens.mint = [0xe0; 32];
+        cases.push((
+            "closed precedes destination facts",
+            input,
+            base.clock_timestamp,
+            EconomyError::PositionClosed,
+        ));
+
+        let mut input = base.input;
+        input.destination_tokens.mint = [0xe1; 32];
+        input.destination_tokens.owner = [0xe2; 32];
+        cases.push((
+            "destination mint precedes owner",
+            input,
+            base.clock_timestamp,
+            EconomyError::WrongTokenMint,
+        ));
+
+        let mut input = base.input;
+        input.destination_tokens.owner = [0xe3; 32];
+        input.position.principal_returned = true;
+        cases.push((
+            "destination owner precedes returned flag",
+            input,
+            base.clock_timestamp,
+            EconomyError::WrongDestinationOwner,
+        ));
+
+        let mut input = base.input;
+        input.position.principal_returned = true;
+        input.position.accepted_week = u64::MAX;
+        cases.push((
+            "returned flag precedes maturity arithmetic",
+            input,
+            base.clock_timestamp,
+            EconomyError::PrincipalAlreadyReturned,
+        ));
+
+        let mut input = base.input;
+        input.position.accepted_week = u64::MAX;
+        cases.push((
+            "maturity overflow precedes Clock validation",
+            input,
+            input.config.genesis_timestamp - 1,
+            EconomyError::ArithmeticOverflow,
+        ));
+
+        let input = base.input;
+        cases.push((
+            "Clock before Genesis fails closed",
+            input,
+            input.config.genesis_timestamp - 1,
+            EconomyError::InvalidClock,
+        ));
+
+        let mut input = base.input;
+        input.config.staked_principal = input.position.principal - 1;
+        cases.push((
+            "term completion precedes stake ledger",
+            input,
+            input.config.genesis_timestamp + 55 * SECONDS_PER_WEEK - 1,
+            EconomyError::PositionTermNotComplete,
+        ));
+
+        let mut input = base.input;
+        input.config.staked_principal = input.position.principal - 1;
+        input.stake_tokens.mint = [0xe4; 32];
+        cases.push((
+            "tracked principal bound precedes stake token facts",
+            input,
+            base.clock_timestamp,
+            EconomyError::StakeLedgerMismatch,
+        ));
+
+        let mut input = base.input;
+        input.stake_tokens.mint = [0xe5; 32];
+        input.stake_tokens.owner = [0xe6; 32];
+        cases.push((
+            "stake mint precedes authority",
+            input,
+            base.clock_timestamp,
+            EconomyError::WrongTokenMint,
+        ));
+
+        let mut input = base.input;
+        input.stake_tokens.owner = [0xe7; 32];
+        input.stake_tokens.amount += 1;
+        cases.push((
+            "stake authority precedes exact balance",
+            input,
+            base.clock_timestamp,
+            EconomyError::WrongVaultAuthority,
+        ));
+
+        let mut input = base.input;
+        input.stake_tokens.amount += 1;
+        cases.push((
+            "stake donation fails exact balance",
+            input,
+            base.clock_timestamp,
+            EconomyError::StakeLedgerMismatch,
+        ));
+
+        for (name, input, clock_timestamp, expected_error) in cases {
+            let vector = PrepareWithdrawPositionPrincipalVector {
+                name,
+                input,
+                clock_timestamp,
+            };
+            assert_eq!(
+                observe_prepare_withdraw_position_principal(
+                    prepare_withdraw_position_principal_transition(input, clock_timestamp),
+                ),
+                PrepareWithdrawPositionPrincipalObservation::Error(expected_error),
+                "fixed error: {name}"
+            );
+            assert_eq!(
+                observe_prepare_withdraw_position_principal(
+                    prepare_withdraw_position_principal_transition(input, clock_timestamp),
+                ),
+                v2_prepare_withdraw_position_principal_reference(vector),
+                "V2 differential: {name}"
+            );
+        }
+    }
+
+    #[test]
+    fn prepare_withdraw_position_principal_returns_only_the_exact_pre_cpi_plan() {
+        let base = valid_prepare_withdraw_position_principal_vector("maturity boundary");
+        for (offset, expected) in [
+            (55 * SECONDS_PER_WEEK - 1, false),
+            (55 * SECONDS_PER_WEEK, true),
+            (55 * SECONDS_PER_WEEK + SECONDS_PER_WEEK - 1, true),
+        ] {
+            let vector = PrepareWithdrawPositionPrincipalVector {
+                clock_timestamp: base.input.config.genesis_timestamp + offset,
+                ..base
+            };
+            let actual = observe_prepare_withdraw_position_principal(
+                prepare_withdraw_position_principal_transition(
+                    vector.input,
+                    vector.clock_timestamp,
+                ),
+            );
+            assert_eq!(
+                actual,
+                v2_prepare_withdraw_position_principal_reference(vector),
+                "offset={offset}"
+            );
+            assert_eq!(
+                matches!(
+                    actual,
+                    PrepareWithdrawPositionPrincipalObservation::Success(_)
+                ),
+                expected,
+                "maturity success: offset={offset}"
+            );
+        }
+
+        let mut input = base.input;
+        input.destination_tokens.amount = u64::MAX;
+        let plan =
+            prepare_withdraw_position_principal_transition(input, base.clock_timestamp).unwrap();
+        assert_eq!(plan.config_key, input.config_key);
+        assert_eq!(plan.config_snapshot, input.config);
+        assert_eq!(plan.position_snapshot, input.position);
+        assert_eq!(plan.config_snapshot.staked_principal, 500);
+        assert!(!plan.position_snapshot.principal_returned);
+        assert_eq!(plan.maturity_week, 55);
+        assert_eq!(
+            plan.transfer,
+            TransferCheckedIntent {
+                token_program: input.config.token_program,
+                source: input.stake_tokens.key,
+                mint: input.mint,
+                destination: input.destination_tokens.key,
+                authority: input.vault_authority,
+                amount: input.position.principal,
+                decimals: TOKEN_DECIMALS,
+            }
+        );
+
+        let mut zero_principal = input;
+        zero_principal.position.principal = 0;
+        let zero_plan =
+            prepare_withdraw_position_principal_transition(zero_principal, base.clock_timestamp)
+                .unwrap();
+        assert_eq!(zero_plan.transfer.amount, 0);
+        assert_eq!(
+            observe_prepare_withdraw_position_principal(Ok(zero_plan)),
+            v2_prepare_withdraw_position_principal_reference(
+                PrepareWithdrawPositionPrincipalVector {
+                    name: "no new zero-principal rejection",
+                    input: zero_principal,
+                    clock_timestamp: base.clock_timestamp,
+                }
+            )
+        );
+    }
+
+    #[test]
+    fn prepare_withdraw_position_principal_requires_open_law_and_preserves_donation_failure() {
+        let open_bytes = pack_law_state(Some(decision_for(FRIDAY_BOUNDARY_UTC, false)));
+        let gate = verify(FRIDAY_BOUNDARY_UTC, &open_bytes).unwrap();
+        let mut vector =
+            valid_prepare_withdraw_position_principal_vector("withdraw position wrapper");
+        vector.input.config.genesis_timestamp = FRIDAY_BOUNDARY_UTC - 55 * SECONDS_PER_WEEK;
+        assert!(prepare_withdraw_position_principal(&gate, vector.input).is_ok());
+
+        let mut donated = vector.input;
+        donated.stake_tokens.amount += 1;
+        assert_eq!(
+            prepare_withdraw_position_principal(&gate, donated),
             Err(EconomyError::StakeLedgerMismatch)
         );
 

@@ -239,10 +239,14 @@ permanently close after the committed set is exhausted.
    pre-lifecycle `set_eligibility` role-policy and by-value record constructor
    here; administrator/config authentication, wallet-PDA derivation,
    create-or-update lifecycle, and persistence remain in step 5. Add only the
-   `prepare_open_position` pre-token-CPI validation, provisional reward-lane
-   reservation, and transfer intent here. It must not perform the config
-   staked-principal `checked_add`, construct `PositionState`, invoke a program,
-   or persist any provisional result.
+    `prepare_open_position` pre-token-CPI validation, provisional reward-lane
+    reservation, and transfer intent here. It must not perform the config
+    staked-principal `checked_add`, construct `PositionState`, invoke a program,
+    or persist any provisional result. Add only the
+    `prepare_withdraw_position_principal` active/open/destination/maturity/stake-
+    ledger validation and transfer intent here. It must return unchanged config
+    and position snapshots, and must not decrement tracked principal, mark the
+    position returned, invoke a program, or persist state.
 5. Port the eight account-creating paths with manual post-gate System Program
    CPIs and prove locked/unfinalized calls perform no successful CPI or state
    change. The existing `initialize_config`, `initialize_lane_vault`,
@@ -312,6 +316,21 @@ lane reservations, transfer, and post-CPI state when the hook, token CPI, or
 finalizer fails. The unsolicited 1-base-unit stake-vault donation
 `StakeLedgerMismatch` denial remains a Mainnet blocker and is not relaxed by
 this parity slice.
+
+The eleventh adds only `prepare_withdraw_position_principal` through the exact
+point before V2's transfer CPI. It preserves active config, open position,
+destination mint/owner, already-returned, checked maturity, validator-Clock week,
+term-completion, sufficient tracked principal, and stake-vault mint/authority/
+exact-balance precedence. Its unchanged config and position snapshots plus
+stake-vault-to-owner transfer intent are provisional. It does not decrement
+`config.staked_principal`, set `position.principal_returned`, invoke Token-2022,
+or persist state. The future adapter must independently derive and bind the
+canonical config, position, stake-vault, vault-authority, mint, and Token-2022
+identities; preserve V2's arbitrary-signer caller and owner-bound destination;
+run the hooked transfer via `add_extra_accounts_for_execute_cpi`; and only then
+run a post-CPI finalizer for both state changes. A disposable local validator
+must prove atomic rollback on hook, token, and finalizer failure. Exact
+stake-vault equality, including the donation-griefing failure, is preserved.
 
 V2 `close_position` releases residual reservations and marks the position
 closed; it has no account-close lifecycle. The closed position PDA remains
