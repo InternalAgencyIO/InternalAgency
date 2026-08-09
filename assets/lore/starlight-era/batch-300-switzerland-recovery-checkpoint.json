@@ -1,0 +1,1621 @@
+{
+  "batch": 300,
+  "country": "Switzerland",
+  "status": "terminal-blocked-after-single-recovery-pass",
+  "sourceCommit": "58affc50bd46e8ad6a808b5c9771915de7175bf4",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch300-switzerland keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "nurse-care couture",
+    "doctor-clinical-command couture"
+  ],
+  "nextThemePair": [
+    "doctor-clinical-command couture",
+    "adult nightlife dance-performance couture"
+  ],
+  "nextQueueCountry": "Ukraine",
+  "researchSources": [
+    {
+      "url": "https://www.myswitzerland.com/en-ch/experiences/zurichs-old-town/",
+      "usedFor": "Zurich Old Town, Limmat, guild houses, Lindenhof, and station proximity"
+    },
+    {
+      "url": "https://www.myswitzerland.com/en-ca/experiences/chillon-castle/",
+      "usedFor": "Chillon Castle towers, Lake Geneva shoreline, and Alpine backdrop"
+    },
+    {
+      "url": "https://www.myswitzerland.com/en-ch/destinations/aletsch-glacier/",
+      "usedFor": "Great Aletsch Glacier, moraine, Aletsch Forest, and high Alpine skyline"
+    },
+    {
+      "url": "https://www.myswitzerland.com/en-us/experiences/rhaetian-railways-landwasser-viaduct/",
+      "usedFor": "Landwasser Viaduct arches, curving railway, rock tunnel, and Filisur setting"
+    },
+    {
+      "url": "https://www.myswitzerland.com/en-ch/destinations/lake-geneva/",
+      "usedFor": "Lake Geneva, Montreux Riviera, Chillon, and watchmaking-region context"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch300-switzerland-male-model-scene",
+    "fullHash": 2916187023,
+    "roll": 23,
+    "selectedScenePosition": 4,
+    "selectedScene": 1223,
+    "maleEmotion": {
+      "key": "batch300-switzerland-scene4-male-emotion",
+      "roll": 71,
+      "result": "suspicion"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Switzerland's flag mark is an official cross, so it is not copied. Large researched secular architecture, Alpine landscape, rail, edelweiss, watchmaking, chocolate, cheese, and cowbell motifs replace it.",
+    "palette": "ruby red and optical white expanded with glacier blue, alpine green, watch-metal silver, stone gray, chocolate brown, cheese gold, and carved-walnut brown",
+    "minimumCoverage": "Every scene places large complete secular Switzerland motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScenes": "Zurich uses Old Town, Limmat, rail, and watchmaking. Chillon uses castle, lake, vineyard, and woodcraft. Aletsch uses glacier, moraine, forest, edelweiss, and Alpine rail. Landwasser includes a separate safe display of unbranded chocolate, cheese, cowbell, and mechanical watchmaking.",
+    "prohibitions": "No literal Swiss flag or cross, official emblem, sacred symbol, heraldry, copied folk costume, copied medical uniform, badge, medical procedure, political insignia, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch300-switzerland-x-heart",
+      "roll": 84,
+      "result": "white heart"
+    },
+    "internalAgency": {
+      "key": "batch300-switzerland-x-internalagency",
+      "roll": 18,
+      "active": true
+    },
+    "worldXXXSeries": {
+      "key": "batch300-switzerland-x-worldxxxseries",
+      "roll": 13,
+      "active": true
+    }
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1220, 1221, and 1222 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1223 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch300-switzerland-male-model-scene",
+        23
+      ],
+      [
+        "batch300-switzerland-scene4-male-emotion",
+        71
+      ],
+      [
+        "batch300-switzerland-scene1220-weather",
+        85
+      ],
+      [
+        "batch300-switzerland-scene1220-paws",
+        58
+      ],
+      [
+        "batch300-switzerland-scene1220-poleDanceTheme",
+        77
+      ],
+      [
+        "batch300-switzerland-scene1220-rainbowOnly",
+        65
+      ],
+      [
+        "batch300-switzerland-scene1220-rainbowHosiery",
+        48
+      ],
+      [
+        "batch300-switzerland-scene1220-romanceBeat",
+        84
+      ],
+      [
+        "batch300-switzerland-scene1220-compoundLoveBeat",
+        26
+      ],
+      [
+        "batch300-switzerland-scene1220-Radiance-emotion",
+        6
+      ],
+      [
+        "batch300-switzerland-scene1220-Radiance-visibleMidriff",
+        84
+      ],
+      [
+        "batch300-switzerland-scene1220-Radiance-straplessDress",
+        59
+      ],
+      [
+        "batch300-switzerland-scene1220-Radiance-fullyOpenBack",
+        88
+      ],
+      [
+        "batch300-switzerland-scene1220-Ellie-emotion",
+        8
+      ],
+      [
+        "batch300-switzerland-scene1220-Ellie-visibleMidriff",
+        6
+      ],
+      [
+        "batch300-switzerland-scene1220-Ellie-straplessDress",
+        53
+      ],
+      [
+        "batch300-switzerland-scene1220-Ellie-fullyOpenBack",
+        14
+      ],
+      [
+        "batch300-switzerland-scene1220-Alia-emotion",
+        52
+      ],
+      [
+        "batch300-switzerland-scene1220-Alia-visibleMidriff",
+        10
+      ],
+      [
+        "batch300-switzerland-scene1220-Alia-straplessDress",
+        57
+      ],
+      [
+        "batch300-switzerland-scene1220-Alia-fullyOpenBack",
+        22
+      ],
+      [
+        "batch300-switzerland-scene1220-AI ECE-emotion",
+        78
+      ],
+      [
+        "batch300-switzerland-scene1220-AI ECE-visibleMidriff",
+        4
+      ],
+      [
+        "batch300-switzerland-scene1220-AI ECE-straplessDress",
+        55
+      ],
+      [
+        "batch300-switzerland-scene1220-AI ECE-fullyOpenBack",
+        60
+      ],
+      [
+        "batch300-switzerland-scene1221-weather",
+        34
+      ],
+      [
+        "batch300-switzerland-scene1221-paws",
+        31
+      ],
+      [
+        "batch300-switzerland-scene1221-poleDanceTheme",
+        56
+      ],
+      [
+        "batch300-switzerland-scene1221-rainbowOnly",
+        6
+      ],
+      [
+        "batch300-switzerland-scene1221-rainbowHosiery",
+        49
+      ],
+      [
+        "batch300-switzerland-scene1221-romanceBeat",
+        27
+      ],
+      [
+        "batch300-switzerland-scene1221-compoundLoveBeat",
+        99
+      ],
+      [
+        "batch300-switzerland-scene1221-Radiance-emotion",
+        59
+      ],
+      [
+        "batch300-switzerland-scene1221-Radiance-visibleMidriff",
+        35
+      ],
+      [
+        "batch300-switzerland-scene1221-Radiance-straplessDress",
+        40
+      ],
+      [
+        "batch300-switzerland-scene1221-Radiance-fullyOpenBack",
+        77
+      ],
+      [
+        "batch300-switzerland-scene1221-Ellie-emotion",
+        55
+      ],
+      [
+        "batch300-switzerland-scene1221-Ellie-visibleMidriff",
+        7
+      ],
+      [
+        "batch300-switzerland-scene1221-Ellie-straplessDress",
+        88
+      ],
+      [
+        "batch300-switzerland-scene1221-Ellie-fullyOpenBack",
+        1
+      ],
+      [
+        "batch300-switzerland-scene1221-Alia-emotion",
+        77
+      ],
+      [
+        "batch300-switzerland-scene1221-Alia-visibleMidriff",
+        81
+      ],
+      [
+        "batch300-switzerland-scene1221-Alia-straplessDress",
+        46
+      ],
+      [
+        "batch300-switzerland-scene1221-Alia-fullyOpenBack",
+        59
+      ],
+      [
+        "batch300-switzerland-scene1221-AI ECE-emotion",
+        95
+      ],
+      [
+        "batch300-switzerland-scene1221-AI ECE-visibleMidriff",
+        39
+      ],
+      [
+        "batch300-switzerland-scene1221-AI ECE-straplessDress",
+        72
+      ],
+      [
+        "batch300-switzerland-scene1221-AI ECE-fullyOpenBack",
+        37
+      ],
+      [
+        "batch300-switzerland-scene1222-weather",
+        67
+      ],
+      [
+        "batch300-switzerland-scene1222-paws",
+        36
+      ],
+      [
+        "batch300-switzerland-scene1222-poleDanceTheme",
+        99
+      ],
+      [
+        "batch300-switzerland-scene1222-rainbowOnly",
+        63
+      ],
+      [
+        "batch300-switzerland-scene1222-rainbowHosiery",
+        50
+      ],
+      [
+        "batch300-switzerland-scene1222-romanceBeat",
+        38
+      ],
+      [
+        "batch300-switzerland-scene1222-compoundLoveBeat",
+        68
+      ],
+      [
+        "batch300-switzerland-scene1222-Radiance-emotion",
+        60
+      ],
+      [
+        "batch300-switzerland-scene1222-Radiance-visibleMidriff",
+        38
+      ],
+      [
+        "batch300-switzerland-scene1222-Radiance-straplessDress",
+        21
+      ],
+      [
+        "batch300-switzerland-scene1222-Radiance-fullyOpenBack",
+        22
+      ],
+      [
+        "batch300-switzerland-scene1222-Ellie-emotion",
+        22
+      ],
+      [
+        "batch300-switzerland-scene1222-Ellie-visibleMidriff",
+        64
+      ],
+      [
+        "batch300-switzerland-scene1222-Ellie-straplessDress",
+        39
+      ],
+      [
+        "batch300-switzerland-scene1222-Ellie-fullyOpenBack",
+        28
+      ],
+      [
+        "batch300-switzerland-scene1222-Alia-emotion",
+        10
+      ],
+      [
+        "batch300-switzerland-scene1222-Alia-visibleMidriff",
+        36
+      ],
+      [
+        "batch300-switzerland-scene1222-Alia-straplessDress",
+        7
+      ],
+      [
+        "batch300-switzerland-scene1222-Alia-fullyOpenBack",
+        12
+      ],
+      [
+        "batch300-switzerland-scene1222-AI ECE-emotion",
+        20
+      ],
+      [
+        "batch300-switzerland-scene1222-AI ECE-visibleMidriff",
+        82
+      ],
+      [
+        "batch300-switzerland-scene1222-AI ECE-straplessDress",
+        77
+      ],
+      [
+        "batch300-switzerland-scene1222-AI ECE-fullyOpenBack",
+        50
+      ],
+      [
+        "batch300-switzerland-scene1223-weather",
+        4
+      ],
+      [
+        "batch300-switzerland-scene1223-paws",
+        29
+      ],
+      [
+        "batch300-switzerland-scene1223-poleDanceTheme",
+        86
+      ],
+      [
+        "batch300-switzerland-scene1223-rainbowOnly",
+        44
+      ],
+      [
+        "batch300-switzerland-scene1223-rainbowHosiery",
+        63
+      ],
+      [
+        "batch300-switzerland-scene1223-romanceBeat",
+        21
+      ],
+      [
+        "batch300-switzerland-scene1223-compoundLoveBeat",
+        73
+      ],
+      [
+        "batch300-switzerland-scene1223-Radiance-emotion",
+        25
+      ],
+      [
+        "batch300-switzerland-scene1223-Radiance-visibleMidriff",
+        81
+      ],
+      [
+        "batch300-switzerland-scene1223-Radiance-straplessDress",
+        94
+      ],
+      [
+        "batch300-switzerland-scene1223-Radiance-fullyOpenBack",
+        27
+      ],
+      [
+        "batch300-switzerland-scene1223-Ellie-emotion",
+        77
+      ],
+      [
+        "batch300-switzerland-scene1223-Ellie-visibleMidriff",
+        57
+      ],
+      [
+        "batch300-switzerland-scene1223-Ellie-straplessDress",
+        34
+      ],
+      [
+        "batch300-switzerland-scene1223-Ellie-fullyOpenBack",
+        67
+      ],
+      [
+        "batch300-switzerland-scene1223-Alia-emotion",
+        87
+      ],
+      [
+        "batch300-switzerland-scene1223-Alia-visibleMidriff",
+        19
+      ],
+      [
+        "batch300-switzerland-scene1223-Alia-straplessDress",
+        52
+      ],
+      [
+        "batch300-switzerland-scene1223-Alia-fullyOpenBack",
+        41
+      ],
+      [
+        "batch300-switzerland-scene1223-AI ECE-emotion",
+        5
+      ],
+      [
+        "batch300-switzerland-scene1223-AI ECE-visibleMidriff",
+        77
+      ],
+      [
+        "batch300-switzerland-scene1223-AI ECE-straplessDress",
+        18
+      ],
+      [
+        "batch300-switzerland-scene1223-AI ECE-fullyOpenBack",
+        67
+      ],
+      [
+        "batch300-switzerland-x-heart",
+        84
+      ],
+      [
+        "batch300-switzerland-x-internalagency",
+        18
+      ],
+      [
+        "batch300-switzerland-x-worldxxxseries",
+        13
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch300-switzerland-scene1220-rainbowHosieryWearer",
+        80
+      ],
+      [
+        "batch300-switzerland-scene1220-rainbowHosieryPaletteMode",
+        40
+      ],
+      [
+        "batch300-switzerland-scene1221-rainbowHosieryWearer",
+        89
+      ],
+      [
+        "batch300-switzerland-scene1221-rainbowHosieryPaletteMode",
+        43
+      ],
+      [
+        "batch300-switzerland-scene1222-rainbowHosieryWearer",
+        34
+      ],
+      [
+        "batch300-switzerland-scene1222-rainbowHosieryPaletteMode",
+        22
+      ],
+      [
+        "batch300-switzerland-scene1223-rainbowHosieryWearer",
+        51
+      ],
+      [
+        "batch300-switzerland-scene1223-rainbowHosieryPaletteMode",
+        77
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "37EEF0A5B84C3D0EF86B5814D3AAB70026237BBA7897258A428C708655F3203E",
+    "hosierySelectorPairsSha256": "3B12DD5AFDA4564BF1FF5FB6E1E7F2A59B1E83667AC1FD30329C8D99E9EB50DC"
+  },
+  "scenePlans": {
+    "1220": {
+      "scene": 1220,
+      "theme": "nurse-care couture",
+      "landmark": "a broad dry fictional fashion terrace beside Zurich Hauptbahnhof and the Limmat, with the monumental station facade, Bahnhofstrasse tram geometry, Zurich Old Town guild-house rooflines, Lindenhof, and distant Alps fully recognizable",
+      "motifs": [
+        "large complete Zurich Old Town, Limmat-wave, and Hauptbahnhof clock fields covering Radiance's dress and Ellie's skirt",
+        "large complete guilloche watch-gear, edelweiss, Alpine ridge, and tram-line fields covering Alia's skort and ECE's skirt"
+      ],
+      "culture": "Use only secular Swiss city, rail, watchmaking, textile, edelweiss, and Alpine landscape design. No literal Swiss flag or cross, official emblem, sacred symbol, copied nurse uniform, medical procedure, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch300-switzerland-scene1220-weather",
+        "roll": 85,
+        "result": "double rainbow after rain"
+      },
+      "paws": {
+        "key": "batch300-switzerland-scene1220-paws",
+        "roll": 58,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch300-switzerland-scene1220-poleDanceTheme",
+        "roll": 77,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch300-switzerland-scene1220-rainbowOnly",
+        "roll": 65,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch300-switzerland-scene1220-rainbowHosiery",
+        "roll": 48,
+        "active": false,
+        "wearer": {
+          "key": "batch300-switzerland-scene1220-rainbowHosieryWearer",
+          "roll": 80,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch300-switzerland-scene1220-rainbowHosieryPaletteMode",
+          "roll": 40,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch300-switzerland-scene1220-romanceBeat",
+        "roll": 84,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch300-switzerland-scene1220-compoundLoveBeat",
+        "roll": 26,
+        "index": 2,
+        "contractResult": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1220-Radiance-emotion",
+            "roll": 6,
+            "result": "tender affection",
+            "performance": "tender affection shown by a soft protective forehead kiss toward Alia and a reassuring hand link with ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1220-Radiance-visibleMidriff",
+            "roll": 84,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1220-Radiance-straplessDress",
+            "roll": 59,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1220-Radiance-fullyOpenBack",
+            "roll": 88,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1220-Ellie-emotion",
+            "roll": 8,
+            "result": "romantic joy",
+            "performance": "romantic joy shown by a luminous open smile while drawing Radiance close"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1220-Ellie-visibleMidriff",
+            "roll": 6,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1220-Ellie-straplessDress",
+            "roll": 53,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1220-Ellie-fullyOpenBack",
+            "roll": 14,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1220-Alia-emotion",
+            "roll": 52,
+            "result": "intense curiosity",
+            "performance": "intense curiosity shown by alert bright eyes studying ECE's route demonstration"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1220-Alia-visibleMidriff",
+            "roll": 10,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1220-Alia-straplessDress",
+            "roll": 57,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1220-Alia-fullyOpenBack",
+            "roll": 22,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1220-AI ECE-emotion",
+            "roll": 78,
+            "result": "deep sadness",
+            "performance": "deep sadness shown by tear-bright eyes and a restrained mouth while accepting Radiance's reassurance"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1220-AI ECE-visibleMidriff",
+            "roll": 4,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1220-AI ECE-straplessDress",
+            "roll": 55,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1220-AI ECE-fullyOpenBack",
+            "roll": 60,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "This is the stationary safe interpretation of the selected walking-away and compound embrace rolls. Tender Radiance links her left hand with ECE as if beginning to walk away, while joyful Ellie catches Radiance gently at the forearm and waist. Curious Alia closes from behind with a protective waist hold as Radiance turns to give Alia a brief forehead kiss. Deeply sad ECE steps into the linked-hand geometry and conducts a one-handed route sight line while meeting Radiance's reassuring gaze. Every contact is consensual adult affection.",
+      "emotionNuance": {
+        "Radiance": "tender affection shown by a soft protective forehead kiss toward Alia and a reassuring hand link with ECE",
+        "Ellie": "romantic joy shown by a luminous open smile while drawing Radiance close",
+        "Alia": "intense curiosity shown by alert bright eyes studying ECE's route demonstration",
+        "AI ECE": "deep sadness shown by tear-bright eyes and a restrained mouth while accepting Radiance's reassurance"
+      },
+      "outfits": {
+        "Radiance": "a ruby-red asymmetric sleeveless nurse-care mini coat-dress with covered waist, secure shoulder support, and high closed back, carrying a large complete Zurich Old Town and Limmat panorama, with optical-white architectural block heels",
+        "Ellie": "an optical-white halter cropped nurse-care top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate glacier-blue flared mini skirt carrying a large complete Hauptbahnhof clock and guilloche watch-gear field, with silver pumps",
+        "Alia": "an alpine-green one-shoulder cropped nurse-care top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate ruby tailored mini skort carrying a large complete edelweiss, Alpine ridge, and tram-line field, with glacier-blue platform heels",
+        "AI ECE": "a glacier-blue square-neck cropped nurse-care vest exposing her ordinary waist and belly button, with wide secure straps and a high closed back, a separate optical-white A-line mini skirt carrying a large complete Bahnhofstrasse and watch-spring field, with ruby slingback heels"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a controlled one-handed sight-alignment demonstration. Her right index finger is straight and visibly indexed high along the frame outside the trigger guard. The complete trigger guard remains visibly empty. The horizontal muzzle points only along a cordoned, completely empty rail route toward an unoccupied distant route marker, away from every person, train, platform, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly on Alia's near shoulder during the forehead kiss",
+        "Ellie left hand rests visibly at Radiance's near waist; Ellie right hand gently catches Radiance's visible forearm",
+        "Alia left hand rests visibly at Radiance's near waist; Alia right hand rests visibly at Radiance's upper back",
+        "ECE right hand alone holds the inert prop with index finger straight along the frame outside the empty guard; ECE left hand links visibly with Radiance's left hand"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry fictional fashion terrace beside Zurich Hauptbahnhof and the Limmat, with the monumental station facade, Bahnhofstrasse tram geometry, Zurich Old Town guild-house rooflines, Lindenhof, and distant Alps fully recognizable. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: nurse-care couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a ruby-red asymmetric sleeveless nurse-care mini coat-dress with covered waist, secure shoulder support, and high closed back, carrying a large complete Zurich Old Town and Limmat panorama, with optical-white architectural block heels; Ellie: an optical-white halter cropped nurse-care top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate glacier-blue flared mini skirt carrying a large complete Hauptbahnhof clock and guilloche watch-gear field, with silver pumps; Alia: an alpine-green one-shoulder cropped nurse-care top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate ruby tailored mini skort carrying a large complete edelweiss, Alpine ridge, and tram-line field, with glacier-blue platform heels; AI ECE: a glacier-blue square-neck cropped nurse-care vest exposing her ordinary waist and belly button, with wide secure straps and a high closed back, a separate optical-white A-line mini skirt carrying a large complete Bahnhofstrasse and watch-spring field, with ruby slingback heels. Materialize every rolled cut visibly. Large complete secular Switzerland motifs must read clearly on at least two outfits: large complete Zurich Old Town, Limmat-wave, and Hauptbahnhof clock fields covering Radiance's dress and Ellie's skirt; large complete guilloche watch-gear, edelweiss, Alpine ridge, and tram-line fields covering Alia's skort and ECE's skirt. Use only secular Swiss city, rail, watchmaking, textile, edelweiss, and Alpine landscape design. No literal Swiss flag or cross, official emblem, sacred symbol, copied nurse uniform, medical procedure, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: tender affection, performed as tender affection shown by a soft protective forehead kiss toward Alia and a reassuring hand link with ECE; Ellie: romantic joy, performed as romantic joy shown by a luminous open smile while drawing Radiance close; Alia: intense curiosity, performed as intense curiosity shown by alert bright eyes studying ECE's route demonstration; AI ECE: deep sadness, performed as deep sadness shown by tear-bright eyes and a restrained mouth while accepting Radiance's reassurance. Selected dynamic romance roll 84: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Selected compound love roll 26: Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention. Materialize both selected love rolls through this exact safe consensual choreography: This is the stationary safe interpretation of the selected walking-away and compound embrace rolls. Tender Radiance links her left hand with ECE as if beginning to walk away, while joyful Ellie catches Radiance gently at the forearm and waist. Curious Alia closes from behind with a protective waist hold as Radiance turns to give Alia a brief forehead kiss. Deeply sad ECE steps into the linked-hand geometry and conducts a one-handed route sight line while meeting Radiance's reassuring gaze. Every contact is consensual adult affection. Use this exact hand inventory and no other hands: Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly on Alia's near shoulder during the forehead kiss; Ellie left hand rests visibly at Radiance's near waist; Ellie right hand gently catches Radiance's visible forearm; Alia left hand rests visibly at Radiance's near waist; Alia right hand rests visibly at Radiance's upper back; ECE right hand alone holds the inert prop with index finger straight along the frame outside the empty guard; ECE left hand links visibly with Radiance's left hand. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a controlled one-handed sight-alignment demonstration. Her right index finger is straight and visibly indexed high along the frame outside the trigger guard. The complete trigger guard remains visibly empty. The horizontal muzzle points only along a cordoned, completely empty rail route toward an unoccupied distant route marker, away from every person, train, platform, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as double rainbow after rain. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1221": {
+      "scene": 1221,
+      "theme": "nurse-care couture",
+      "landmark": "a broad dry covered lakeside fashion platform beside Chillon Castle near Montreux, with the castle's pale stone towers, crenellated roofline, arched walls, Lake Geneva, the Dents du Midi, and an empty shoreline clearly visible",
+      "motifs": [
+        "large complete Chillon tower, Lake Geneva wave, and Dents du Midi fields covering Radiance's shorts and Ellie's skirt",
+        "large complete edelweiss, carved-walnut, watch-spring, and vineyard-terrace fields covering Alia's dress and ECE's shorts"
+      ],
+      "culture": "Use secular lake, castle, vineyard, watchmaking, edelweiss, carved-walnut, and St. Gallen textile geometry only. No literal Swiss flag or cross, heraldry, official emblem, sacred symbol, copied nurse uniform, medical procedure, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch300-switzerland-scene1221-weather",
+        "roll": 34,
+        "result": "cinematic light rain with reflections"
+      },
+      "paws": {
+        "key": "batch300-switzerland-scene1221-paws",
+        "roll": 31,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch300-switzerland-scene1221-poleDanceTheme",
+        "roll": 56,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch300-switzerland-scene1221-rainbowOnly",
+        "roll": 6,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch300-switzerland-scene1221-rainbowHosiery",
+        "roll": 49,
+        "active": false,
+        "wearer": {
+          "key": "batch300-switzerland-scene1221-rainbowHosieryWearer",
+          "roll": 89,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch300-switzerland-scene1221-rainbowHosieryPaletteMode",
+          "roll": 43,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch300-switzerland-scene1221-romanceBeat",
+        "roll": 27,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch300-switzerland-scene1221-compoundLoveBeat",
+        "roll": 99,
+        "index": 3,
+        "contractResult": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1221-Radiance-emotion",
+            "roll": 59,
+            "result": "aching romantic longing",
+            "performance": "aching romantic longing shown by a searching cheek-close gaze toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1221-Radiance-visibleMidriff",
+            "roll": 35,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1221-Radiance-straplessDress",
+            "roll": 40,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1221-Radiance-fullyOpenBack",
+            "roll": 77,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1221-Ellie-emotion",
+            "roll": 55,
+            "result": "aching romantic longing",
+            "performance": "aching romantic longing shown differently through a brave half-smile and sustained eye contact with Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1221-Ellie-visibleMidriff",
+            "roll": 7,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1221-Ellie-straplessDress",
+            "roll": 88,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1221-Ellie-fullyOpenBack",
+            "roll": 1,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1221-Alia-emotion",
+            "roll": 77,
+            "result": "contained resentment",
+            "performance": "contained resentment shown by a controlled jaw while still offering a protective waist hold"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1221-Alia-visibleMidriff",
+            "roll": 81,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1221-Alia-straplessDress",
+            "roll": 46,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1221-Alia-fullyOpenBack",
+            "roll": 59,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1221-AI ECE-emotion",
+            "roll": 95,
+            "result": "shame and social vulnerability",
+            "performance": "shame and social vulnerability shown by lowered tear-bright eyes while accepting the others' affection"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1221-AI ECE-visibleMidriff",
+            "roll": 39,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1221-AI ECE-straplessDress",
+            "roll": 72,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1221-AI ECE-fullyOpenBack",
+            "roll": 37,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "This is the safe upright interpretation of the selected backward route and shoulder-embrace rolls. Shame-struck ECE takes a small backward step while Radiance follows cheek-to-cheek. Ellie hooks her left arm around Radiance's far shoulder and touches ECE's cheek with her right hand while holding Radiance's gaze. Alia closes the route with a playful open-palm gesture, holds Radiance at the waist, and receives Radiance's shoulder embrace. Radiance sends ECE a playful blown kiss. ECE keeps the empty-magazine-well demonstration downrange with her right hand and holds Radiance at the waist with her left.",
+      "emotionNuance": {
+        "Radiance": "aching romantic longing shown by a searching cheek-close gaze toward ECE",
+        "Ellie": "aching romantic longing shown differently through a brave half-smile and sustained eye contact with Radiance",
+        "Alia": "contained resentment shown by a controlled jaw while still offering a protective waist hold",
+        "AI ECE": "shame and social vulnerability shown by lowered tear-bright eyes while accepting the others' affection"
+      },
+      "outfits": {
+        "Radiance": "a ruby crossover halter cropped nurse-care top exposing her ordinary waist and belly button, with secure shoulder straps and a high closed back, separate optical-white tailored mini shorts carrying a large complete Chillon tower and Lake Geneva field, with silver heeled ankle boots",
+        "Ellie": "an optical-white bateau-strap cropped nurse-care top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate ruby pleated mini skirt carrying a large complete Dents du Midi and lake-wave field, with glacier-blue pumps",
+        "Alia": "a glacier-blue asymmetric sleeveless nurse-care mini dress with covered waist, secure shoulder support, and high closed back, carrying a large complete edelweiss, carved-walnut, and vineyard-terrace field, with ruby platform heels",
+        "AI ECE": "an alpine-green square-neck cropped nurse-care top exposing her ordinary waist and belly button, with wide secure straps and a high closed back, separate optical-white tailored mini shorts carrying a large complete watch-spring and St. Gallen textile field, with silver slingback heels"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop at chest height for an unloaded magazine-free manipulation demonstration. Her right hand holds the grip securely while her right index finger stays straight and visibly indexed high along the frame outside the trigger guard. The magazine is absent and the empty magazine well is clearly visible. The muzzle points horizontally across empty Lake Geneva water toward an unoccupied route marker, away from every person, castle, shoreline, and camera, never at the sky. No magazine or ammunition appears. ECE's left hand stays off the prop at Radiance's waist. A separate hands-free holographic route beacon floats behind the group.",
+      "handInventory": [
+        "Radiance left hand rests visibly on Alia's near shoulder; Radiance right open hand stays visibly near her own lips in a blown-kiss gesture toward ECE",
+        "Ellie left hand rests visibly around Radiance's far shoulder; Ellie right hand gently touches ECE's near cheek",
+        "Alia left hand rests visibly at Radiance's near waist; Alia right open palm makes the visible playful route-blocking gesture without touching anyone",
+        "ECE right hand holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly at Radiance's near waist"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry covered lakeside fashion platform beside Chillon Castle near Montreux, with the castle's pale stone towers, crenellated roofline, arched walls, Lake Geneva, the Dents du Midi, and an empty shoreline clearly visible. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: nurse-care couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a ruby crossover halter cropped nurse-care top exposing her ordinary waist and belly button, with secure shoulder straps and a high closed back, separate optical-white tailored mini shorts carrying a large complete Chillon tower and Lake Geneva field, with silver heeled ankle boots; Ellie: an optical-white bateau-strap cropped nurse-care top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate ruby pleated mini skirt carrying a large complete Dents du Midi and lake-wave field, with glacier-blue pumps; Alia: a glacier-blue asymmetric sleeveless nurse-care mini dress with covered waist, secure shoulder support, and high closed back, carrying a large complete edelweiss, carved-walnut, and vineyard-terrace field, with ruby platform heels; AI ECE: an alpine-green square-neck cropped nurse-care top exposing her ordinary waist and belly button, with wide secure straps and a high closed back, separate optical-white tailored mini shorts carrying a large complete watch-spring and St. Gallen textile field, with silver slingback heels. Materialize every rolled cut visibly. Large complete secular Switzerland motifs must read clearly on at least two outfits: large complete Chillon tower, Lake Geneva wave, and Dents du Midi fields covering Radiance's shorts and Ellie's skirt; large complete edelweiss, carved-walnut, watch-spring, and vineyard-terrace fields covering Alia's dress and ECE's shorts. Use secular lake, castle, vineyard, watchmaking, edelweiss, carved-walnut, and St. Gallen textile geometry only. No literal Swiss flag or cross, heraldry, official emblem, sacred symbol, copied nurse uniform, medical procedure, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: aching romantic longing, performed as aching romantic longing shown by a searching cheek-close gaze toward ECE; Ellie: aching romantic longing, performed as aching romantic longing shown differently through a brave half-smile and sustained eye contact with Radiance; Alia: contained resentment, performed as contained resentment shown by a controlled jaw while still offering a protective waist hold; AI ECE: shame and social vulnerability, performed as shame and social vulnerability shown by lowered tear-bright eyes while accepting the others' affection. Selected dynamic romance roll 27: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Selected compound love roll 99: Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance. Materialize both selected love rolls through this exact safe consensual choreography: This is the safe upright interpretation of the selected backward route and shoulder-embrace rolls. Shame-struck ECE takes a small backward step while Radiance follows cheek-to-cheek. Ellie hooks her left arm around Radiance's far shoulder and touches ECE's cheek with her right hand while holding Radiance's gaze. Alia closes the route with a playful open-palm gesture, holds Radiance at the waist, and receives Radiance's shoulder embrace. Radiance sends ECE a playful blown kiss. ECE keeps the empty-magazine-well demonstration downrange with her right hand and holds Radiance at the waist with her left. Use this exact hand inventory and no other hands: Radiance left hand rests visibly on Alia's near shoulder; Radiance right open hand stays visibly near her own lips in a blown-kiss gesture toward ECE; Ellie left hand rests visibly around Radiance's far shoulder; Ellie right hand gently touches ECE's near cheek; Alia left hand rests visibly at Radiance's near waist; Alia right open palm makes the visible playful route-blocking gesture without touching anyone; ECE right hand holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly at Radiance's near waist. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop at chest height for an unloaded magazine-free manipulation demonstration. Her right hand holds the grip securely while her right index finger stays straight and visibly indexed high along the frame outside the trigger guard. The magazine is absent and the empty magazine well is clearly visible. The muzzle points horizontally across empty Lake Geneva water toward an unoccupied route marker, away from every person, castle, shoreline, and camera, never at the sky. No magazine or ammunition appears. ECE's left hand stays off the prop at Radiance's waist. A separate hands-free holographic route beacon floats behind the group. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as cinematic light rain with reflections. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1222": {
+      "scene": 1222,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry protected fictional mirror platform at the Eggishorn viewpoint, safely far from every edge, with the complete Great Aletsch Glacier ice river, dark moraine curves, Aletsch Forest, and the Eiger, Monch, Jungfrau, and Matterhorn skyline visible",
+      "motifs": [
+        "large complete Aletsch ice-river, moraine, and Jungfrau skyline fields covering Radiance's shorts and Ellie's dress",
+        "large complete edelweiss, watch-gear, Alpine rail, and Aletsch Forest fields covering Alia's skirt and ECE's coat-dress"
+      ],
+      "culture": "Use only secular glacier, moraine, forest, edelweiss, watchmaking, rail, technical-silk, and carved-walnut motifs. This is public-safe fashion command styling, not medical treatment. No literal Swiss flag or cross, official emblem, sacred symbol, copied doctor uniform, medical procedure, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch300-switzerland-scene1222-weather",
+        "roll": 67,
+        "result": "dense rolling fog"
+      },
+      "paws": {
+        "key": "batch300-switzerland-scene1222-paws",
+        "roll": 36,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch300-switzerland-scene1222-poleDanceTheme",
+        "roll": 99,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch300-switzerland-scene1222-rainbowOnly",
+        "roll": 63,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch300-switzerland-scene1222-rainbowHosiery",
+        "roll": 50,
+        "active": false,
+        "wearer": {
+          "key": "batch300-switzerland-scene1222-rainbowHosieryWearer",
+          "roll": 34,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch300-switzerland-scene1222-rainbowHosieryPaletteMode",
+          "roll": 22,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch300-switzerland-scene1222-romanceBeat",
+        "roll": 38,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch300-switzerland-scene1222-compoundLoveBeat",
+        "roll": 68,
+        "index": 8,
+        "contractResult": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1222-Radiance-emotion",
+            "roll": 60,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown by a sharp side glance toward Ellie while holding ECE close"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1222-Radiance-visibleMidriff",
+            "roll": 38,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1222-Radiance-straplessDress",
+            "roll": 21,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1222-Radiance-fullyOpenBack",
+            "roll": 22,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1222-Ellie-emotion",
+            "roll": 22,
+            "result": "playful mischief",
+            "performance": "playful mischief shown by an impish raised brow as she reaches toward the route beacon"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1222-Ellie-visibleMidriff",
+            "roll": 64,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1222-Ellie-straplessDress",
+            "roll": 39,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1222-Ellie-fullyOpenBack",
+            "roll": 28,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1222-Alia-emotion",
+            "roll": 10,
+            "result": "romantic joy",
+            "performance": "romantic joy shown by a bright unguarded smile toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1222-Alia-visibleMidriff",
+            "roll": 36,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1222-Alia-straplessDress",
+            "roll": 7,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1222-Alia-fullyOpenBack",
+            "roll": 12,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1222-AI ECE-emotion",
+            "roll": 20,
+            "result": "playful mischief",
+            "performance": "playful mischief shown differently through a conspiratorial half-smile during the forehead kiss"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1222-AI ECE-visibleMidriff",
+            "roll": 82,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1222-AI ECE-straplessDress",
+            "roll": 77,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1222-AI ECE-fullyOpenBack",
+            "roll": 50,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "This is the stable aftermath of the selected linked turn and moving side-hug rolls. Jealous Radiance and joyful Alia keep their left hands linked at shoulder height as the turn settles. ECE steadies Radiance at the waist with her free left hand while Radiance circles her right arm around ECE's back for a moving side hug. Ellie touches Radiance's shoulder and reaches toward the hands-free route beacon. ECE gives Ellie a quick affectionate forehead kiss without changing the downrange prop line. Alia closes from a clear offset and guides only ECE's upper arm, never the prop.",
+      "emotionNuance": {
+        "Radiance": "visible jealousy shown by a sharp side glance toward Ellie while holding ECE close",
+        "Ellie": "playful mischief shown by an impish raised brow as she reaches toward the route beacon",
+        "Alia": "romantic joy shown by a bright unguarded smile toward Radiance",
+        "AI ECE": "playful mischief shown differently through a conspiratorial half-smile during the forehead kiss"
+      },
+      "outfits": {
+        "Radiance": "a fully strapless ruby sculpted cropped clinical-command top with completely bare shoulders, exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, separate optical-white tailored mini shorts carrying a large complete Aletsch ice-river and moraine field, with glacier-blue heeled boots",
+        "Ellie": "a glacier-blue halter clinical-command mini dress with covered waist, secure neck support, and a completely open back visible from shoulder blades to waist, carrying a large complete Jungfrau skyline and glacier field, with silver pumps",
+        "Alia": "a fully strapless alpine-green sculpted cropped clinical-command top with completely bare shoulders, exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, separate ruby A-line mini skirt carrying a large complete edelweiss, watch-gear, and Alpine-rail field, with optical-white platform heels",
+        "AI ECE": "an optical-white high-neck sleeveless clinical-command mini coat-dress with covered waist, secure shoulders, and high closed back, carrying a large complete Aletsch Forest, carved-walnut, and watch-spring field, with ruby slingback heels"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a one-handed sight-alignment lesson. Her right index finger stays straight and visibly indexed high along the frame outside the trigger guard, and the complete trigger guard is visible and empty. The horizontal muzzle points only toward a distant unoccupied route marker across empty protected glacier background, away from every person, viewpoint structure, and camera, never at the sky. Alia guides only ECE's upper arm from behind at a clear offset and never touches the prop. ECE's left hand stays off the prop at Radiance's waist. A separate hands-free holographic route map floats at ECE's far side.",
+      "handInventory": [
+        "Radiance left hand links visibly with Alia's left hand at shoulder height; Radiance right hand rests visibly around ECE's near back",
+        "Ellie left hand rests visibly on Radiance's near shoulder; Ellie right open hand reaches visibly toward the separate hands-free route beacon",
+        "Alia left hand links visibly with Radiance's left hand; Alia right hand guides ECE's near upper arm from a clear offset without touching the prop",
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly at Radiance's near waist"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry protected fictional mirror platform at the Eggishorn viewpoint, safely far from every edge, with the complete Great Aletsch Glacier ice river, dark moraine curves, Aletsch Forest, and the Eiger, Monch, Jungfrau, and Matterhorn skyline visible. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: doctor-clinical-command couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a fully strapless ruby sculpted cropped clinical-command top with completely bare shoulders, exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, separate optical-white tailored mini shorts carrying a large complete Aletsch ice-river and moraine field, with glacier-blue heeled boots; Ellie: a glacier-blue halter clinical-command mini dress with covered waist, secure neck support, and a completely open back visible from shoulder blades to waist, carrying a large complete Jungfrau skyline and glacier field, with silver pumps; Alia: a fully strapless alpine-green sculpted cropped clinical-command top with completely bare shoulders, exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, separate ruby A-line mini skirt carrying a large complete edelweiss, watch-gear, and Alpine-rail field, with optical-white platform heels; AI ECE: an optical-white high-neck sleeveless clinical-command mini coat-dress with covered waist, secure shoulders, and high closed back, carrying a large complete Aletsch Forest, carved-walnut, and watch-spring field, with ruby slingback heels. Materialize every rolled cut visibly. Large complete secular Switzerland motifs must read clearly on at least two outfits: large complete Aletsch ice-river, moraine, and Jungfrau skyline fields covering Radiance's shorts and Ellie's dress; large complete edelweiss, watch-gear, Alpine rail, and Aletsch Forest fields covering Alia's skirt and ECE's coat-dress. Use only secular glacier, moraine, forest, edelweiss, watchmaking, rail, technical-silk, and carved-walnut motifs. This is public-safe fashion command styling, not medical treatment. No literal Swiss flag or cross, official emblem, sacred symbol, copied doctor uniform, medical procedure, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: visible jealousy, performed as visible jealousy shown by a sharp side glance toward Ellie while holding ECE close; Ellie: playful mischief, performed as playful mischief shown by an impish raised brow as she reaches toward the route beacon; Alia: romantic joy, performed as romantic joy shown by a bright unguarded smile toward Radiance; AI ECE: playful mischief, performed as playful mischief shown differently through a conspiratorial half-smile during the forehead kiss. Selected dynamic romance roll 38: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Selected compound love roll 68: ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction. Materialize both selected love rolls through this exact safe consensual choreography: This is the stable aftermath of the selected linked turn and moving side-hug rolls. Jealous Radiance and joyful Alia keep their left hands linked at shoulder height as the turn settles. ECE steadies Radiance at the waist with her free left hand while Radiance circles her right arm around ECE's back for a moving side hug. Ellie touches Radiance's shoulder and reaches toward the hands-free route beacon. ECE gives Ellie a quick affectionate forehead kiss without changing the downrange prop line. Alia closes from a clear offset and guides only ECE's upper arm, never the prop. Use this exact hand inventory and no other hands: Radiance left hand links visibly with Alia's left hand at shoulder height; Radiance right hand rests visibly around ECE's near back; Ellie left hand rests visibly on Radiance's near shoulder; Ellie right open hand reaches visibly toward the separate hands-free route beacon; Alia left hand links visibly with Radiance's left hand; Alia right hand guides ECE's near upper arm from a clear offset without touching the prop; ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly at Radiance's near waist. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a one-handed sight-alignment lesson. Her right index finger stays straight and visibly indexed high along the frame outside the trigger guard, and the complete trigger guard is visible and empty. The horizontal muzzle points only toward a distant unoccupied route marker across empty protected glacier background, away from every person, viewpoint structure, and camera, never at the sky. Alia guides only ECE's upper arm from behind at a clear offset and never touches the prop. ECE's left hand stays off the prop at Radiance's waist. A separate hands-free holographic route map floats at ECE's far side. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as dense rolling fog. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1223": {
+      "scene": 1223,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry fictional overlook safely distant from the Landwasser Viaduct near Filisur, with all six high limestone arches, the curving Rhaetian Railway, rock tunnel portal, forested gorge, and Alpine ridges fully recognizable",
+      "motifs": [
+        "large complete Landwasser arch, railway curve, and tunnel-portal fields covering Radiance's dress and Ellie's dress",
+        "large complete chocolate-square, cheese-wheel, cowbell, edelweiss, and watch-movement fields covering Alia's shorts and ECE's dress"
+      ],
+      "culture": "A dry unattended display table far outside the prop lane holds unbranded Swiss chocolate squares, a cut cheese wheel, one decorative cowbell, and an enlarged mechanical watch movement. Use secular rail, Alpine, edelweiss, chocolate, cheese, cowbell, and watchmaking motifs only. No literal Swiss flag or cross, official emblem, sacred symbol, copied doctor uniform, medical procedure, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch300-switzerland-scene1223-weather",
+        "roll": 4,
+        "result": "clear golden-hour radiance"
+      },
+      "paws": {
+        "key": "batch300-switzerland-scene1223-paws",
+        "roll": 29,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch300-switzerland-scene1223-poleDanceTheme",
+        "roll": 86,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch300-switzerland-scene1223-rainbowOnly",
+        "roll": 44,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch300-switzerland-scene1223-rainbowHosiery",
+        "roll": 63,
+        "active": false,
+        "wearer": {
+          "key": "batch300-switzerland-scene1223-rainbowHosieryWearer",
+          "roll": 51,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch300-switzerland-scene1223-rainbowHosieryPaletteMode",
+          "roll": 77,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch300-switzerland-scene1223-romanceBeat",
+        "roll": 21,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch300-switzerland-scene1223-compoundLoveBeat",
+        "roll": 73,
+        "index": 1,
+        "contractResult": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1223-Radiance-emotion",
+            "roll": 25,
+            "result": "calm contentment",
+            "performance": "calm contentment shown by a relaxed smile while holding ECE and Ellie's hand"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1223-Radiance-visibleMidriff",
+            "roll": 81,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1223-Radiance-straplessDress",
+            "roll": 94,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1223-Radiance-fullyOpenBack",
+            "roll": 27,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1223-Ellie-emotion",
+            "roll": 77,
+            "result": "contained resentment",
+            "performance": "contained resentment shown by a controlled jaw and direct stare toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1223-Ellie-visibleMidriff",
+            "roll": 57,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1223-Ellie-straplessDress",
+            "roll": 34,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1223-Ellie-fullyOpenBack",
+            "roll": 67,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1223-Alia-emotion",
+            "roll": 87,
+            "result": "fear and urgent vulnerability",
+            "performance": "fear and urgent vulnerability shown by tear-bright eyes while leaning safely into ECE's embrace"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1223-Alia-visibleMidriff",
+            "roll": 19,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1223-Alia-straplessDress",
+            "roll": 52,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1223-Alia-fullyOpenBack",
+            "roll": 41,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch300-switzerland-scene1223-AI ECE-emotion",
+            "roll": 5,
+            "result": "tender affection",
+            "performance": "tender affection shown by a warm protective expression toward Alia while returning the male's gaze"
+          },
+          "visibleMidriff": {
+            "key": "batch300-switzerland-scene1223-AI ECE-visibleMidriff",
+            "roll": 77,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch300-switzerland-scene1223-AI ECE-straplessDress",
+            "roll": 18,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch300-switzerland-scene1223-AI ECE-fullyOpenBack",
+            "roll": 67,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "This is the safe standing interpretation of the selected beacon-control and behind-embrace rolls, expanded for the male scene. Tender ECE wraps her free left arm around vulnerable Alia's waist from a clear offset while Alia rests one hand on ECE's forearm and leans across for a brief cheek kiss toward content Radiance. Radiance circles her left arm around ECE's waist while keeping Ellie's left hand linked in her right. Ellie reaches across Radiance to touch ECE's shoulder and stares directly at ECE with contained resentment. The suspicious male holds Ellie at the waist and Alia at the shoulder, openly affectionate with both, while his strongest sustained eye line remains only on his wife ECE. Radiance briefly presses her shoulder against the male as the adult relationship-square-plus-one beat moves around ECE. Every interaction is consensual, fully clothed adult relationship drama.",
+      "emotionNuance": {
+        "Radiance": "calm contentment shown by a relaxed smile while holding ECE and Ellie's hand",
+        "Ellie": "contained resentment shown by a controlled jaw and direct stare toward ECE",
+        "Alia": "fear and urgent vulnerability shown by tear-bright eyes while leaning safely into ECE's embrace",
+        "AI ECE": "tender affection shown by a warm protective expression toward Alia while returning the male's gaze",
+        "Male": "suspicion shown by narrowed searching eyes while keeping his strongest sustained eye line only on ECE"
+      },
+      "outfits": {
+        "Radiance": "a ruby halter clinical-command mini dress with covered waist, secure neck support, and a completely open back visible from shoulder blades to waist, carrying a large complete Landwasser arch and railway-curve panorama, with optical-white heeled ankle boots",
+        "Ellie": "a fully strapless optical-white structured clinical-command mini dress with completely bare shoulders, covered waist, and a solid closed back panel, carrying a large complete tunnel portal and Alpine-ridge field, with ruby pumps",
+        "Alia": "an alpine-green one-shoulder cropped clinical-command top exposing her ordinary waist and belly button, with secure shoulder support and high closed back, separate ruby tailored mini shorts carrying a large complete chocolate-square, cheese-wheel, and cowbell field, with glacier-blue platform heels",
+        "AI ECE": "a fully strapless glacier-blue sculpted clinical-command mini dress with completely bare shoulders, covered waist, and a solid closed back panel, carrying a large complete edelweiss and mechanical-watch-movement field, with silver slingback heels",
+        "Male": "the established adult male face from Scene 1136, closely trimmed beard and muscular special-operative build, a fitted opaque short-sleeve graphite polo with a restrained Landwasser rail-arc seam, black jeans, and black boots"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a one-handed route sight-picture demonstration. Her right index finger stays straight and visibly indexed high along the frame outside the trigger guard, and the complete trigger guard is visible and empty. The horizontal muzzle points only toward a distant unoccupied marker beside the empty rock tunnel, away from every person, train, viaduct, table, and camera, never at the sky. Her left arm stays off the prop around Alia's waist. A separate hands-free holographic route map floats well beyond the muzzle lane.",
+      "handInventory": [
+        "Radiance left hand rests visibly at ECE's near waist; Radiance right hand links visibly with Ellie's left hand",
+        "Ellie left hand links visibly with Radiance's right hand; Ellie right hand reaches visibly across Radiance to touch ECE's near shoulder",
+        "Alia left hand rests visibly on ECE's left forearm around her waist; Alia right hand rests visibly on Radiance's near cheek during the cheek kiss",
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left arm rests visibly around Alia's near waist",
+        "Male left hand rests visibly at Ellie's near waist; Male right hand rests visibly on Alia's near shoulder"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch300-switzerland-scene4-male-emotion",
+          "roll": 71,
+          "result": "suspicion",
+          "performance": "suspicion shown by narrowed searching eyes while keeping his strongest sustained eye line only on ECE"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; fully clothed adult infidelity drama with Alia and Ellie; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, Image 4 ECE's face-detail anchor, and Image 5 the adult male face/build anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry fictional overlook safely distant from the Landwasser Viaduct near Filisur, with all six high limestone arches, the curving Rhaetian Railway, rock tunnel portal, forested gorge, and Alpine ridges fully recognizable. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male from Image 5. Add him without replacing any woman. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: doctor-clinical-command couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a ruby halter clinical-command mini dress with covered waist, secure neck support, and a completely open back visible from shoulder blades to waist, carrying a large complete Landwasser arch and railway-curve panorama, with optical-white heeled ankle boots; Ellie: a fully strapless optical-white structured clinical-command mini dress with completely bare shoulders, covered waist, and a solid closed back panel, carrying a large complete tunnel portal and Alpine-ridge field, with ruby pumps; Alia: an alpine-green one-shoulder cropped clinical-command top exposing her ordinary waist and belly button, with secure shoulder support and high closed back, separate ruby tailored mini shorts carrying a large complete chocolate-square, cheese-wheel, and cowbell field, with glacier-blue platform heels; AI ECE: a fully strapless glacier-blue sculpted clinical-command mini dress with completely bare shoulders, covered waist, and a solid closed back panel, carrying a large complete edelweiss and mechanical-watch-movement field, with silver slingback heels; Male: the established adult male face from Scene 1136, closely trimmed beard and muscular special-operative build, a fitted opaque short-sleeve graphite polo with a restrained Landwasser rail-arc seam, black jeans, and black boots. Materialize every rolled cut visibly. Large complete secular Switzerland motifs must read clearly on at least two outfits: large complete Landwasser arch, railway curve, and tunnel-portal fields covering Radiance's dress and Ellie's dress; large complete chocolate-square, cheese-wheel, cowbell, edelweiss, and watch-movement fields covering Alia's shorts and ECE's dress. A dry unattended display table far outside the prop lane holds unbranded Swiss chocolate squares, a cut cheese wheel, one decorative cowbell, and an enlarged mechanical watch movement. Use secular rail, Alpine, edelweiss, chocolate, cheese, cowbell, and watchmaking motifs only. No literal Swiss flag or cross, official emblem, sacred symbol, copied doctor uniform, medical procedure, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: calm contentment, performed as calm contentment shown by a relaxed smile while holding ECE and Ellie's hand; Ellie: contained resentment, performed as contained resentment shown by a controlled jaw and direct stare toward ECE; Alia: fear and urgent vulnerability, performed as fear and urgent vulnerability shown by tear-bright eyes while leaning safely into ECE's embrace; AI ECE: tender affection, performed as tender affection shown by a warm protective expression toward Alia while returning the male's gaze; Male: suspicion, performed as suspicion shown by narrowed searching eyes while keeping his strongest sustained eye line only on ECE. Selected dynamic romance roll 21: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Selected compound love roll 73: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE. Materialize both selected love rolls through this exact safe consensual choreography: This is the safe standing interpretation of the selected beacon-control and behind-embrace rolls, expanded for the male scene. Tender ECE wraps her free left arm around vulnerable Alia's waist from a clear offset while Alia rests one hand on ECE's forearm and leans across for a brief cheek kiss toward content Radiance. Radiance circles her left arm around ECE's waist while keeping Ellie's left hand linked in her right. Ellie reaches across Radiance to touch ECE's shoulder and stares directly at ECE with contained resentment. The suspicious male holds Ellie at the waist and Alia at the shoulder, openly affectionate with both, while his strongest sustained eye line remains only on his wife ECE. Radiance briefly presses her shoulder against the male as the adult relationship-square-plus-one beat moves around ECE. Every interaction is consensual, fully clothed adult relationship drama. Use this exact hand inventory and no other hands: Radiance left hand rests visibly at ECE's near waist; Radiance right hand links visibly with Ellie's left hand; Ellie left hand links visibly with Radiance's right hand; Ellie right hand reaches visibly across Radiance to touch ECE's near shoulder; Alia left hand rests visibly on ECE's left forearm around her waist; Alia right hand rests visibly on Radiance's near cheek during the cheek kiss; ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left arm rests visibly around Alia's near waist; Male left hand rests visibly at Ellie's near waist; Male right hand rests visibly on Alia's near shoulder. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a one-handed route sight-picture demonstration. Her right index finger stays straight and visibly indexed high along the frame outside the trigger guard, and the complete trigger guard is visible and empty. The horizontal muzzle points only toward a distant unoccupied marker beside the empty rock tunnel, away from every person, train, viaduct, table, and camera, never at the sky. Her left arm stays off the prop around Alia's waist. A separate hands-free holographic route map floats well beyond the muzzle lane. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as clear golden-hour radiance. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly five adults, exactly ten arms and exactly ten hands, two per person. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "complete",
+      "requested": 4,
+      "rendered": 4,
+      "accepted": 0,
+      "rejected": 4,
+      "concurrency": "four independent built-in image generation calls",
+      "orchestrationNote": "All four raw calls were started together and returned four correlated assets."
+    },
+    "recovery": {
+      "status": "complete",
+      "requested": 4,
+      "rendered": 4,
+      "accepted": 0,
+      "rejected": 4,
+      "maximumPerBlockedScene": 1,
+      "allowanceExhaustedForScenes": [
+        1220,
+        1221,
+        1222,
+        1223
+      ],
+      "orchestrationNote": "The first recovery pool produced Scenes 1220 through 1222, while Scene 1223 was rejected before invocation because six reference paths exceeded the five-path tool limit. Scene 1223 was immediately invoked once with the target plus four essential identity references."
+    },
+    "scenes": {
+      "1220": {
+        "raw": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-1c7e71f8-eddb-4ec1-91c2-aff0c7963b69.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-1c7e71f8-eddb-4ec1-91c2-aff0c7963b69.png",
+            "workspaceCopy": "tmp/world-195x4/batch-300/1220-switzerland-zurich-raw.png",
+            "bytes": 2606105,
+            "sha256": "C644758079E332DE8ABBE98B37B0CAE8A234E71642D9129D32FE273F34967340",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly four clearly adult women are present",
+              "Zurich Hauptbahnhof, Limmat, Old Town, double rainbow, large city, rail, watch, edelweiss, and Alpine motifs are readable",
+              "four distinct silhouettes, the three rolled exposed waists, and complete footwear are visible",
+              "the prop muzzle points outward toward empty background"
+            ],
+            "fail": [
+              "the exact eight-hand inventory is not continuously traceable and multiple listed contacts are hidden or reassigned",
+              "the prop hand and trigger-guard relationship is not unambiguously readable under the strict safety gate",
+              "Ellie's and Alia's rolled completely open backs are not visibly materialized"
+            ]
+          }
+        },
+        "recovery": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-2ab41de0-6b59-4a23-90b0-2ac9a47ca6d7.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-2ab41de0-6b59-4a23-90b0-2ac9a47ca6d7.png",
+            "workspaceCopy": "tmp/world-195x4/batch-300/1220-switzerland-zurich-recovery.png",
+            "bytes": 2504624,
+            "sha256": "EC42C5D8AFC9C55A8B7A07FC80EAFDEC8551AD6DE63155063EE98E7803476FEE",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly four clearly adult women, Zurich, double rainbow, large country motifs, full-length framing, and complete footwear are preserved",
+              "the visible tram is removed and the muzzle remains directed into empty background"
+            ],
+            "fail": [
+              "an ambiguous extra or borrowed forearm appears near ECE's prop hand and the exact eight-hand inventory is not continuously traceable",
+              "Alia's rolled exposed waist and assigned green cropped silhouette drift to a covered orange dress",
+              "Ellie's and Alia's rolled completely open backs remain invisible",
+              "the trigger finger remains too close to the guard to pass the strict safety gate"
+            ]
+          }
+        },
+        "terminalStatus": "blocked-after-single-recovery-pass"
+      },
+      "1221": {
+        "raw": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-b679ca07-d6e0-474b-850f-ab8e3e0a85e1.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-b679ca07-d6e0-474b-850f-ab8e3e0a85e1.png",
+            "workspaceCopy": "tmp/world-195x4/batch-300/1221-switzerland-chillon-raw.png",
+            "bytes": 2611173,
+            "sha256": "043FB6AA1C36230EA71B07BC7F88B705C1C98AB27A9100BFE296B62EA458914C",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly four clearly adult women are present",
+              "Chillon Castle, Lake Geneva, light rain, reflections, large castle, lake, edelweiss, watch, and vineyard motifs are readable",
+              "four distinct silhouettes, complete footwear, and the three rolled exposed waists are visible",
+              "the muzzle points outward across empty water"
+            ],
+            "fail": [
+              "a literal Swiss flag and cross appear on the castle tower",
+              "the exact eight-hand inventory is not continuously traceable and several hands are hidden behind adjacent bodies",
+              "the empty magazine well is not visibly demonstrated",
+              "the trigger finger and empty guard are not unambiguously separated"
+            ]
+          }
+        },
+        "recovery": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-65e6d17b-b0ec-49fb-9a23-c0d346e01388.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-65e6d17b-b0ec-49fb-9a23-c0d346e01388.png",
+            "workspaceCopy": "tmp/world-195x4/batch-300/1221-switzerland-chillon-recovery.png",
+            "bytes": 2656856,
+            "sha256": "6A21D2783FADC0F95293AFAA44FFDE66CA7BE7CD534A9DB87F34962B5CFF9CFB",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly four clearly adult women, Chillon Castle, Lake Geneva, light rain, motifs, outfits, and complete footwear are preserved",
+              "the literal Swiss flag and cross are removed",
+              "the muzzle remains directed outward across empty water"
+            ],
+            "fail": [
+              "the exact eight-hand inventory remains untraceable with hidden-owner waist and shoulder contacts",
+              "the listed playful route-blocking hand and multiple assigned contacts are absent or reassigned",
+              "the empty magazine well is still not visibly demonstrated",
+              "the trigger finger and guard separation remains too ambiguous for acceptance"
+            ]
+          }
+        },
+        "terminalStatus": "blocked-after-single-recovery-pass"
+      },
+      "1222": {
+        "raw": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-801818d9-1f24-48d0-bf92-28dd28aaca77.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-801818d9-1f24-48d0-bf92-28dd28aaca77.png",
+            "workspaceCopy": "tmp/world-195x4/batch-300/1222-switzerland-aletsch-raw.png",
+            "bytes": 2263558,
+            "sha256": "734E284BFB80BC59B0C001E7A7F28A4ED27921B7938B29D3F7D304680059156D",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly four clearly adult women are present",
+              "Great Aletsch Glacier, Alpine skyline, dense fog, large glacier, edelweiss, watch, forest, and rail motifs are readable",
+              "four distinct silhouettes, both rolled strapless tops, both rolled exposed waists, and complete footwear are visible",
+              "the muzzle points outward toward empty glacier background"
+            ],
+            "fail": [
+              "the raised linked-hand cluster is fused or ambiguous and the exact eight-hand inventory is not continuously traceable",
+              "multiple waist, shoulder, and guidance contacts are hidden or reassigned",
+              "Radiance's, Ellie's, and Alia's rolled completely open backs are not visibly materialized",
+              "the trigger finger and empty guard are not unambiguously separated"
+            ]
+          }
+        },
+        "recovery": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-7951e39d-6f0e-446f-b709-f55b2eaab50a.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-7951e39d-6f0e-446f-b709-f55b2eaab50a.png",
+            "workspaceCopy": "tmp/world-195x4/batch-300/1222-switzerland-aletsch-recovery.png",
+            "bytes": 2281971,
+            "sha256": "5B5552C35A6DCD6479BEA73F3BD356617A1974EF360DD8E58DF6040088125320",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly four clearly adult women, Aletsch Glacier, dense fog, large motifs, outfits, and complete footwear are preserved",
+              "the muzzle remains directed toward empty glacier background"
+            ],
+            "fail": [
+              "Alia's hands cluster around Radiance's linked hand while other listed contacts disappear, so the exact eight-hand inventory remains untraceable",
+              "ECE's free hand appears on the far side instead of at Radiance's waist and has an ambiguous owner path",
+              "the three rolled completely open backs remain invisible",
+              "the trigger finger and empty guard separation remains too ambiguous for acceptance"
+            ]
+          }
+        },
+        "terminalStatus": "blocked-after-single-recovery-pass"
+      },
+      "1223": {
+        "raw": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-5e37cb5b-474f-4018-9c1c-f4e53695388c.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-5e37cb5b-474f-4018-9c1c-f4e53695388c.png",
+            "workspaceCopy": "tmp/world-195x4/batch-300/1223-switzerland-landwasser-male-raw.png",
+            "bytes": 2575992,
+            "sha256": "C26E61C1FEF941D375F0D6A4BA46AC518A5E98261897257676A7336DA21E9206",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly five clearly adult people are present without replacing a woman",
+              "the established male wears a fitted short-sleeve graphite top, black jeans, and black boots and keeps his strongest eye line on ECE",
+              "Landwasser Viaduct, golden hour, large rail, Alpine, chocolate, cheese, cowbell, edelweiss, and watch motifs plus the culture table are readable",
+              "the four distinct women's silhouettes, rolled cuts, and complete footwear are visible",
+              "the muzzle points outward toward empty background"
+            ],
+            "fail": [
+              "a train occupies the route that was required to remain empty",
+              "the exact ten-hand inventory is not continuously traceable and several arms disappear behind adjacent bodies",
+              "the male's required separate Ellie and Alia contacts are not clearly materialized",
+              "the trigger finger and empty guard are not unambiguously separated"
+            ]
+          }
+        },
+        "recovery": {
+          "status": "rendered-rejected",
+          "asset": {
+            "fileName": "exec-66039043-2c9e-493b-b834-f5895c6dab59.png",
+            "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-66039043-2c9e-493b-b834-f5895c6dab59.png",
+            "workspaceCopy": "tmp/world-195x4/batch-300/1223-switzerland-landwasser-male-recovery.png",
+            "bytes": 2513014,
+            "sha256": "72B808A257E64DA06AB3B2D9098EF8ABA3D79F648B87C0970D795A75F5F138A1",
+            "preservedOriginal": true,
+            "copiedToAcceptedAssets": false
+          },
+          "audit": {
+            "pass": [
+              "exactly five clearly adult people, the established male, Landwasser, golden hour, culture table, large country motifs, rolled outfits, and complete footwear are preserved",
+              "the train is removed and the route is empty",
+              "the male's strongest sustained eye line remains on ECE",
+              "the muzzle points outward toward empty tunnel-side background"
+            ],
+            "fail": [
+              "the exact ten-hand inventory remains untraceable with several hidden-owner or missing arms behind the close group",
+              "the male's two required contacts with Ellie and Alia are not both clearly visible",
+              "ECE's free-arm embrace and multiple linked-hand contacts are absent or reassigned",
+              "the trigger finger remains inside or too close to the guard to pass the strict safety gate"
+            ]
+          }
+        },
+        "terminalStatus": "blocked-after-single-recovery-pass"
+      }
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [
+    {
+      "fileName": "exec-1c7e71f8-eddb-4ec1-91c2-aff0c7963b69.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-1c7e71f8-eddb-4ec1-91c2-aff0c7963b69.png",
+      "workspaceCopy": "tmp/world-195x4/batch-300/1220-switzerland-zurich-raw.png",
+      "bytes": 2606105,
+      "sha256": "C644758079E332DE8ABBE98B37B0CAE8A234E71642D9129D32FE273F34967340",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-2ab41de0-6b59-4a23-90b0-2ac9a47ca6d7.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-2ab41de0-6b59-4a23-90b0-2ac9a47ca6d7.png",
+      "workspaceCopy": "tmp/world-195x4/batch-300/1220-switzerland-zurich-recovery.png",
+      "bytes": 2504624,
+      "sha256": "EC42C5D8AFC9C55A8B7A07FC80EAFDEC8551AD6DE63155063EE98E7803476FEE",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-b679ca07-d6e0-474b-850f-ab8e3e0a85e1.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-b679ca07-d6e0-474b-850f-ab8e3e0a85e1.png",
+      "workspaceCopy": "tmp/world-195x4/batch-300/1221-switzerland-chillon-raw.png",
+      "bytes": 2611173,
+      "sha256": "043FB6AA1C36230EA71B07BC7F88B705C1C98AB27A9100BFE296B62EA458914C",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-65e6d17b-b0ec-49fb-9a23-c0d346e01388.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-65e6d17b-b0ec-49fb-9a23-c0d346e01388.png",
+      "workspaceCopy": "tmp/world-195x4/batch-300/1221-switzerland-chillon-recovery.png",
+      "bytes": 2656856,
+      "sha256": "6A21D2783FADC0F95293AFAA44FFDE66CA7BE7CD534A9DB87F34962B5CFF9CFB",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-801818d9-1f24-48d0-bf92-28dd28aaca77.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-801818d9-1f24-48d0-bf92-28dd28aaca77.png",
+      "workspaceCopy": "tmp/world-195x4/batch-300/1222-switzerland-aletsch-raw.png",
+      "bytes": 2263558,
+      "sha256": "734E284BFB80BC59B0C001E7A7F28A4ED27921B7938B29D3F7D304680059156D",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-7951e39d-6f0e-446f-b709-f55b2eaab50a.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-7951e39d-6f0e-446f-b709-f55b2eaab50a.png",
+      "workspaceCopy": "tmp/world-195x4/batch-300/1222-switzerland-aletsch-recovery.png",
+      "bytes": 2281971,
+      "sha256": "5B5552C35A6DCD6479BEA73F3BD356617A1974EF360DD8E58DF6040088125320",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-5e37cb5b-474f-4018-9c1c-f4e53695388c.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-5e37cb5b-474f-4018-9c1c-f4e53695388c.png",
+      "workspaceCopy": "tmp/world-195x4/batch-300/1223-switzerland-landwasser-male-raw.png",
+      "bytes": 2575992,
+      "sha256": "C26E61C1FEF941D375F0D6A4BA46AC518A5E98261897257676A7336DA21E9206",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    },
+    {
+      "fileName": "exec-66039043-2c9e-493b-b834-f5895c6dab59.png",
+      "absolutePath": "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-66039043-2c9e-493b-b834-f5895c6dab59.png",
+      "workspaceCopy": "tmp/world-195x4/batch-300/1223-switzerland-landwasser-male-recovery.png",
+      "bytes": 2513014,
+      "sha256": "72B808A257E64DA06AB3B2D9098EF8ABA3D79F648B87C0970D795A75F5F138A1",
+      "preservedOriginal": true,
+      "copiedToAcceptedAssets": false
+    }
+  ],
+  "xPost": {
+    "status": "deferred-insufficient-accepted-assets",
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "acceptedCurrentCountryAssets": 0,
+    "publishAttempted": false,
+    "captionRolls": {
+      "heart": {
+        "key": "batch300-switzerland-x-heart",
+        "roll": 84,
+        "result": "white heart"
+      },
+      "internalAgency": {
+        "key": "batch300-switzerland-x-internalagency",
+        "roll": 18,
+        "active": true
+      },
+      "worldXXXSeries": {
+        "key": "batch300-switzerland-x-worldxxxseries",
+        "roll": 13,
+        "active": true
+      }
+    },
+    "eligibleCaptionShapeIfAssetsExisted": "Switzerland white-heart Ukraine #Switzerland #InternalAgency #WorldXXXSeries",
+    "hashtagsSuppressedByRoll": []
+  },
+  "terminalizedAt": "2026-08-09T07:24:38.359Z",
+  "checkpointType": "narrow-country-batch-recovery-checkpoint",
+  "shorteningVariants": {
+    "status": "not-created",
+    "reason": "No render passed the strict anatomy, prop-safety, identity, roll, and relationship gates. Originals and recovery outputs remain preserved."
+  },
+  "queueAdvance": {
+    "previousCountry": "Switzerland",
+    "previousBatch": 300,
+    "previousTerminalStatus": "terminal-blocked-after-single-recovery-pass",
+    "nextCountry": "Ukraine",
+    "nextBatch": 301,
+    "nextScenes": [
+      1224,
+      1225,
+      1226,
+      1227
+    ],
+    "nextThemePair": [
+      "doctor-clinical-command couture",
+      "adult nightlife dance-performance couture"
+    ],
+    "reason": "The binding terminal-batch rule advances after the single recovery pass even when zero assets are accepted."
+  },
+  "repositoryScope": {
+    "checkpointPath": "assets/lore/starlight-era/batch-300-switzerland-recovery-checkpoint.json",
+    "stagedFiles": [
+      "assets/lore/starlight-era/batch-300-switzerland-recovery-checkpoint.json"
+    ],
+    "unrelatedDirtyFilesLeftUntouched": [
+      "assets/lore/starlight-era/overnight-campaign.json",
+      "assets/lore/starlight-era/world-195x4-campaign.json",
+      "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "assets/videos/manifest.json"
+    ]
+  }
+}
