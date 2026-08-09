@@ -40,6 +40,11 @@ import {
   createLockdownDecision,
   protocolLocalDay,
 } from "../programs/iat_b3_reference/daily-lockdown-consensus.mjs";
+import {
+  REWARD_CAS_MAINNET_STATUS,
+  REWARD_CAS_STATUS,
+  createInitialRewardCasHead,
+} from "../programs/iat_b3_reference/reward-persistence-cas.mjs";
 import { sha256CanonicalJson } from "../scripts/iat-v2-canonical-json.mjs";
 
 const SITE = fileURLToPath(new URL("../", import.meta.url));
@@ -51,6 +56,8 @@ const CAPACITY_REFERENCE_PATH = join(SITE, "programs", "iat_b3_reference", "rewa
 const RECEIPT_CODEC_PATH = join(SITE, "programs", "iat_b3_reference", "reward-allocator-receipt-codec.mjs");
 const RECEIPT_BOUNDARY_PATH = join(SITE, "docs", "b3", "REWARD_ALLOCATOR_RECEIPT_BOUNDARY.md");
 const X_BOUND_STATE_INVARIANTS_PATH = join(SITE, "docs", "b3", "X_BOUND_REWARD_REFERENCE_STATE_INVARIANTS.md");
+const CAS_REFERENCE_PATH = join(SITE, "programs", "iat_b3_reference", "reward-persistence-cas.mjs");
+const CAS_BOUNDARY_PATH = join(SITE, "docs", "b3", "REWARD_PERSISTENCE_CAS_REFERENCE.md");
 
 const offchainPolicy = JSON.parse(readFileSync(POLICY_PATH, "utf8"));
 const capacityPolicy = JSON.parse(readFileSync(CAPACITY_POLICY_PATH, "utf8"));
@@ -60,6 +67,8 @@ const capacityReferenceSource = readFileSync(CAPACITY_REFERENCE_PATH, "utf8");
 const receiptCodecSource = readFileSync(RECEIPT_CODEC_PATH, "utf8");
 const receiptBoundarySource = readFileSync(RECEIPT_BOUNDARY_PATH, "utf8");
 const xBoundStateInvariantsSource = readFileSync(X_BOUND_STATE_INVARIANTS_PATH, "utf8");
+const casReferenceSource = readFileSync(CAS_REFERENCE_PATH, "utf8");
+const casBoundarySource = readFileSync(CAS_BOUNDARY_PATH, "utf8");
 
 const EXACT_TRANCHE_KINDS = ["X_BASE_10", "X_PREMIUM_FULL_100", "X_PREMIUM_UPGRADE_90"];
 const EXACT_TRANCHE_BASIS_POINTS = {
@@ -665,6 +674,18 @@ test("the round contract seals only at exact 00:00 UTC and makes an absent seal 
 });
 
 test("the ledger and allocator remain static reference artifacts with no runtime import, migration, or publication wiring", () => {
+  const casHead = createInitialRewardCasHead();
+  assert.equal(REWARD_CAS_STATUS, "NON_ACTIVATING_UNAUTHENTICATED_REFERENCE");
+  assert.equal(REWARD_CAS_MAINNET_STATUS, "HOLD");
+  assert.equal(casHead.runtimeAuthenticationVerified, false);
+  assert.equal(casHead.rollbackProtectionVerified, false);
+  assert.equal(casHead.activationReady, false);
+  assert.match(casReferenceSource, /assertDailyLawWriteAllowed/u);
+  assert.match(casReferenceSource, /validateRewardAllocatorProofBundle/u);
+  assert.doesNotMatch(casReferenceSource, /node:sqlite|node:fs|fsync|AccountInfo|invoke\(/u);
+  assert.match(casBoundarySource, /in-memory reference/iu);
+  assert.match(casBoundarySource, /no SQLite or\s+other file-backed adapter/iu);
+  assert.match(casBoundarySource, /Mainnet activation remains blocked/iu);
   assert.match(epochEngineSource, /const DAILY_HOLD = "HOLD_PENDING_GLOBAL_REWARD_WATERFALL"/u);
   assert.doesNotMatch(epochEngineSource, /reward-capacity-waterfall|reward-ledger\.v2/u);
   assert.match(capacityReferenceSource, /status: "NON_ACTIVATING_REFERENCE_RECEIPT"/u);
