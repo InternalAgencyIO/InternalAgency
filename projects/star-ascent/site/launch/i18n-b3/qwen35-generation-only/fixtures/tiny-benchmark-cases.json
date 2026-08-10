@@ -1,0 +1,41 @@
+{
+  "schema": "iat-b3-qwen35-tiny-benchmark/v1",
+  "sourceLanguage": "English",
+  "syntheticPublicFixture": true,
+  "activationAllowed": false,
+  "model": {
+    "repository": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17"
+  },
+  "promptTemplateSha256": "b664f604d50bb7bc9975b4beeae513956b9173d50b7658f0b5815b55923a485a",
+  "generation": {
+    "doSample": false,
+    "numBeams": 1,
+    "temperature": null,
+    "topP": null,
+    "topK": null,
+    "seed": 0,
+    "thinking": false,
+    "maxNewTokens": 160,
+    "maxTotalSeconds": 600,
+    "responseContract": "ONE_JSON_OBJECT_ONE_STRING_TRANSLATION_KEY"
+  },
+  "source": "The cat is here. The IAT node has {count} active agents. Open https://example.invalid/status and run `iat status --node TOKEN_2022`.",
+  "protectedTokenCounts": [
+    { "token": "--node", "count": 1 },
+    { "token": "{count}", "count": 1 },
+    { "token": "`iat status --node TOKEN_2022`", "count": 1 },
+    { "token": "https://example.invalid/status", "count": 1 },
+    { "token": "IAT", "count": 1 },
+    { "token": "TOKEN_2022", "count": 1 }
+  ],
+  "cases": [
+    { "id": "tail-guarani", "locale": "gn", "class": "TAIL_LATIN", "mustPass": true },
+    { "id": "tail-ayacucho-quechua", "locale": "qu", "class": "TAIL_LATIN", "mustPass": true },
+    { "id": "tail-maltese", "locale": "mt", "class": "TAIL_LATIN", "mustPass": true },
+    { "id": "rtl-standard-arabic", "locale": "ar", "class": "RTL", "mustPass": true },
+    { "id": "cjk-simplified-chinese", "locale": "zh", "class": "CJK", "mustPass": true },
+    { "id": "cjk-japanese", "locale": "ja", "class": "CJK", "mustPass": true },
+    { "id": "latin-spanish", "locale": "es", "class": "LATIN_CONTROL", "mustPass": true }
+  ]
+}
