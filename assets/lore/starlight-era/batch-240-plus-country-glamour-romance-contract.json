@@ -52,7 +52,10 @@
       "requiredEveryImage": true,
       "rule": "All four characters must have unmistakably different silhouettes, garment construction, hem architecture, material treatment, and footwear design in every image. Color changes alone do not count as unique styling.",
       "silhouetteSet": "Choose four different structures per scene from sculpted mini dress, cropped bodice with asymmetric skirt, tailored short romper, strapless folded dress, high-waist shorts with architectural top, one-shoulder cocktail mini, peplum micro-suit, cutout column mini, corsage-inspired two-piece, or another equally distinct public-safe couture form.",
-      "continuity": "Do not repeat an outfit design within a batch or carry it unchanged into the next country. Preserve every triggered per-character midriff, strapless, and open-back roll while making the four resulting looks visibly different."
+      "continuity": "Do not repeat an outfit design within a batch or carry it unchanged into the next country. Preserve every triggered per-character midriff, strapless, and open-back roll while making the four resulting looks visibly different.",
+      "antiConvergenceGate": "Reject palette-swapped copies, a quartet built from the same mini-dress or two-piece template, repeated map-print surfaces, matching neckline and hem families, or four looks distinguished mainly by color. Before rendering, assign each woman a different structural idea, material language, motif technique, hem architecture, and footwear construction. At least two looks must use dimensional construction such as sculpted applique, pleating, beadwork, metallic framework, woven panels, corsage forms, architectural drape, or cut-panel tailoring instead of printed surface graphics.",
+      "crossSceneMemory": "Record a concise outfit fingerprint for every woman and scene. No later scene in the country may reuse the same silhouette, neckline, waist treatment, hem, primary material, motif placement, and footwear combination. The next country must also avoid the immediately preceding country's dominant silhouette family and surface treatment.",
+      "materialOriginality": "Reintroduce bold public-safe material contrast through opaque high-gloss latex-like panels, fully lined lace or lace-inspired openwork, metallic mesh over opaque lining, satin, woven fiber, translucent architectural overlays over complete opaque foundations, beadwork, and sculpted appliques. Never render lingerie, fetish styling, exposed undergarments, transparent intimate areas, restraint, bondage, or explicit framing."
     },
     "exposureArchitecture": {
       "requiredEveryImage": true,
@@ -82,6 +85,22 @@
       "ECE controlling the beacon while another character seeks her attention"
     ],
     "composition": "Use asymmetrical bodies-in-motion staging with two clearly separate physical contacts and one emotional counter-beat. Avoid static lineups, equal spacing, parallel poses, and four people merely looking at a prop.",
+    "soulGate": "Reject a scene when the romance reads as generic posing, a clustered cheek-touch tableau, four interchangeable models, or affection added only as decorative hands. Before the prop is considered, the image must communicate a specific adult relationship event such as pursuit, choice, interruption, reconciliation, invitation, jealousy answered by comfort, or one partner being pulled between two others. Eye lines, torso direction, distance, and touch must tell the same beat.",
+    "poseOriginality": "Do not reuse the immediately preceding scene's contact graph, central character, face direction, or group geometry. Rotate who initiates affection, who receives it, who interrupts, and who is emotionally excluded. Use distinct movement verbs across the four scenes, such as turning, catching, pulling, stepping away, circling, kneeling into an offered hand, leaning across a map, or pivoting through a handoff, while preserving stable footing and anatomy.",
+    "hardLoveBeatRoll": {
+      "activeFromBatch": 333,
+      "method": "Roll once per image from 0 through 99 and store the exact selected adult choreography before rendering. The selected beat is mandatory and must remain readable without relying on the prompt text.",
+      "distribution": [
+        { "range": "0-14", "beat": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line" },
+        { "range": "15-29", "beat": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention" },
+        { "range": "30-44", "beat": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation" },
+        { "range": "45-59", "beat": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand" },
+        { "range": "60-74", "beat": "a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair" },
+        { "range": "75-89", "beat": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice" },
+        { "range": "90-99", "beat": "a playful seated-to-standing lift assist with one adult rising from a stable bench into a full embrace, a second partner stealing a cheek kiss, and the fourth blocking their route with a flirtatious invitation" }
+      ],
+      "safety": "All participants are clearly adult and consenting. Lap sitting and dancing are affectionate public editorial choreography, never explicit, fetishized, coercive, unstable, or framed toward intimate body parts. Preserve complete opaque coverage, stable supports, complete heels, and exact traceable limb ownership."
+    },
     "dynamicBeatRolls": [
       "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold.",
       "Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance.",
@@ -224,31 +243,89 @@
   },
   "sceneRolls": {
     "romanceBeat": "deterministic rotation across kiss, hug, rivalry, choice, reconciliation, and beacon-control beats",
+    "hardLoveBeat": "From Batch 333 onward, roll and visibly materialize one mandatory hardLoveBeatRoll entry per image in addition to the emotion-coherent romance beat.",
     "countryMotif": "one primary and one secondary secular motif per image",
     "visibleMidriffPerCharacter": "Roll independently for Radiance, Ellie, Alia, and AI ECE in every image. Results 0 through 49 of 100 expose the ordinary waist and belly button through a secure cropped-top, cutout-waist, or two-piece couture construction; results 50 through 99 keep the midriff covered. Never apply one shared roll to the whole image.",
     "straplessDressPerCharacter": "Roll independently for Radiance, Ellie, Alia, and AI ECE in every image. Results 0 through 34 of 100 use a fully strapless dress with completely bare shoulders and no straps, strings, halter, sleeves, collar, illusion mesh, or shoulder attachments. Use secure opaque sculpted, folded, asymmetric, corsage-inspired, or architectural bodice engineering. Results 35 through 99 use the normal country-adapted silhouette.",
     "fullyOpenBackPerCharacter": "Roll independently for Radiance, Ellie, Alia, and AI ECE in every image. Results 0 through 29 of 100 use a completely open-back silhouette from shoulder blades to the secure lower-back waistline, with no straps crossing the back, no fabric panel, no illusion mesh, and no cape or hair covering the design. Preserve secure opaque front and side construction. Results 30 through 99 use the normal back architecture.",
     "poleDanceTheme": "6 percent chance. Adult athletic stage-pole choreography only: controlled spins, climbs, static holds, mirrored partner poses, or supportive spotting. Integrate the pole as a beacon mast or route-marker prop while preserving country motifs, secure opaque couture, complete anatomy, and non-explicit editorial framing.",
-    "paws": "25 percent deterministic chance on PAWS-eligible scenes only. When active, integrate PAWS into humor and affection: safely held in arms, gently touched by multiple characters, perched securely on a shoulder, batting at a route ribbon, interrupting a handoff, or prompting shared laughter. Never place PAWS near the prop muzzle, trigger, moving mechanism, or unsafe footing.",
+    "paws": "Superseded from Batch 333 by the joint mascotStateRoll distribution.",
+    "mascotState": "From Batch 333 onward, roll once per image: 0-22 both PAWS and MAX, 23-37 PAWS only, 38-52 MAX only, 53-99 neither.",
+    "interestingProp": "From Batch 333 onward, roll a 32 percent activation per image, then store a holder selector and prop-family selector. Exactly one non-mission-prop-handler from Radiance, Ellie, Alia, or AI ECE integrates the selected odd prop into the relationship action.",
     "rainbowHosiery": "25 percent per-image chance. Only Radiance or AI ECE may wear the rainbow stockings or knee socks, selected by a second deterministic roll. A third deterministic roll selects country-palette gradient at 0 through 49 or original independent rainbow gradient at 50 through 99. Trigger the stronger Radiance/ECE love beat and transfer the inert mission prop to Alia.",
     "missionPropPoseTarget": "From Batch 321 onward, roll the eceMissionProp.poseTargetRoll once per image after resolving the hosiery activation and ECE-versus-Alia handler. Store and visibly materialize the selected active stance, empty target or open-water route mark, realistic two-hand geometry, indexed trigger finger, and safe downrange muzzle line.",
     "rainbowOnly": "4 percent global picture chance. Results 0 through 3 of 100 make the entire quartet's outfits rainbow themed while preserving unique silhouettes and secure public-safe construction."
   },
-  "professionThemeRotation": {
-    "activeFromBatch": 272,
-    "layout": "Each four-scene country batch uses the current theme for scenes one and two, then the next theme for scenes three and four. Advance the current theme by one position for the following country batch so adjacent batches overlap by one theme.",
-    "startingPair": ["nurse-care couture", "doctor-clinical-command couture"],
-    "orderedThemes": [
-      "nurse-care couture",
-      "doctor-clinical-command couture",
-      "adult nightlife dance-performance couture",
-      "Paris runway model couture",
-      "cleaner and service couture",
-      "cinematic covert-agent crew couture",
-      "undercover investigator couture"
+  "mascotStateRoll": {
+    "activeFromBatch": 333,
+    "method": "One deterministic 0 through 99 state roll per image replaces the earlier independent PAWS chance.",
+    "distribution": [
+      { "range": "0-22", "percent": 23, "state": "PAWS and MAX together" },
+      { "range": "23-37", "percent": 15, "state": "PAWS only" },
+      { "range": "38-52", "percent": 15, "state": "MAX only" },
+      { "range": "53-99", "percent": 47, "state": "neither mascot" }
     ],
-    "integration": "Merge each theme with the current country's palette, secular motifs, landmark, weather, rolled wardrobe architecture, emotions, romance-square contacts, PAWS state, rainbow rolls, and inert mission-prop beat. Keep every scene visually distinct.",
-    "publicSafety": "Use abstract fashion references only. No sexualized medical care, explicit dance or stripping, real assassination, injury, combat, official police badges, copied uniforms, impersonation, arrests, raids, or threats. Covert-agent and investigator themes are fictional film-editorial styling with nonviolent route missions."
+    "pawsIdentity": "PAWS is the established tiny collarless golden kitten.",
+    "maxIdentity": "MAX is a small young golden retriever pup with soft golden fur, clearly a dog and visually distinct from PAWS.",
+    "togetherRule": "When both appear, PAWS and MAX must share one harmless playful or affectionate action such as nose-to-nose greeting, ribbon play, gentle supervised pawing, resting together in an adult's arms, or MAX watching PAWS perch securely on a low padded case.",
+    "safety": "Mascots never approach the inert mission prop, muzzle line, trigger, mechanism, odd prop hazard, moving vehicle edge, unstable ledge, wet drop, or unsafe footing. No collars, leashes, costumes, aggression, distress, duplication, or malformed animal anatomy."
+  },
+  "interestingPropRoll": {
+    "activeFromBatch": 333,
+    "activation": "Roll 0 through 99 once per image; 0 through 31 activates exactly one odd prop and 32 through 99 activates none.",
+    "holderSelection": "When active, make a second deterministic selector among the three quartet members who are not the resolved inert-mission-prop handler. Exactly one selected woman owns and integrates the odd prop using no more than her existing two hands.",
+    "propSelection": "Use a third deterministic selector across the ordered prop families.",
+    "orderedPropFamilies": [
+      "deactivated chainless cinema chainsaw sculpture with a locked blade cover",
+      "oversized transparent mechanical typewriter",
+      "chromatic brass telescope with folding legs",
+      "kinetic umbrella with rotating mirrored petals",
+      "giant tuning fork instrument",
+      "folding solar fan with articulated panels",
+      "neon acrylic cello with no loose strings",
+      "gyroscopic hard-shell suitcase",
+      "oversized magnetic compass table",
+      "clockwork flower bouquet with slow safe petals",
+      "antique-style diving helmet display shell",
+      "inflatable geometric weather balloon pack",
+      "mechanical ribbon loom",
+      "mirrored megaphone sculpture",
+      "portable miniature planetarium projector",
+      "folding wind-harp frame"
+    ],
+    "integration": "The odd prop must cause, interrupt, solve, or intensify the selected love beat or mascot humor. It may become a dance partner, seat-side obstacle, invitation device, shared curiosity, jealousy trigger, route clue, or playful handoff. Reject decorative placement with no relationship consequence.",
+    "safety": "Every odd prop is inert, unplugged, unloaded, blunt, secured, and public-safe. No live motor, exposed chain or blade, sparks, fuel, firing, threat, injury, combat, restraint, bondage, or camera/person targeting. Keep PAWS and MAX far from any tool-like or moving prop."
+  },
+  "cinematicThemeRotation": {
+    "activeFromBatch": 333,
+    "locationRule": "All four scenes remain at four different recognizable locations in the current country. Never replace a country location with a jet, helicopter, vessel, spacecraft, or planetary setting. The rolled theme is a fashion and cinematic-design language staged at that country location.",
+    "batchLayout": {
+      "scenesOneAndTwo": "Country-led hybrid. Across each image, two or three characters must wear hard, large, unmistakable country-motif couture. At least two characters must visibly carry the active thematic construction language. One or more hybrid looks may satisfy both requirements. Country motif and theme must both be foreground reads, not tiny trim or background-only cues.",
+      "scenesThreeAndFour": "Theme-led original. All four characters wear structurally distinct outfits driven by the active unrelated cinematic theme, staged at two additional original locations in the current country. Do not force map-print country outfits onto these two scenes, but keep the recognizable country landmark equally foregrounded with the thematic fashion.",
+      "themeDuration": "Hold each active cinematic theme for two complete country batches, then advance once to the next theme. Both theme-led scenes in a batch use the same active theme but must have different outfit fingerprints, contact graphs, and movement verbs."
+    },
+    "startingBatch": 333,
+    "startingTheme": "private-jet aviation couture",
+    "orderedThemes": [
+      "private-jet aviation couture",
+      "civilian helicopter flight couture",
+      "fictional coast-guard rescue-vessel couture",
+      "orbital spaceship couture",
+      "Mars-surface expedition couture",
+      "Moon-surface expedition couture",
+      "near-Sun solar-observation couture",
+      "deep-sea submersible couture",
+      "polar airship couture",
+      "orbital research-station couture"
+    ],
+    "themeLocationFusion": "Compose the active theme and country location as one authored scene. Use theme-specific silhouette engineering, materials, accessories, lighting language, route-map design, and movement while keeping the landmark large, recognizable, and unobscured. Reject generic country backdrops with pasted-on themed clothing and reject themed sets that erase the country.",
+    "themeExamples": {
+      "privateJet": "Use wing-sweep tailoring, turbine-pleat structures, oval-window geometry, cabin-light piping, polished composite panels, and runway-line footwear without copied airline branding or uniforms.",
+      "helicopter": "Use rotor-radial pleats, aerodynamic wrap structures, landing-skid heel architecture, cockpit-glass color blocking, and civilian flight-design cues without pilot impersonation or copied uniforms.",
+      "coastGuardVessel": "Use fictional civilian rescue and conservation-vessel design language, wave-cut panels, flotation-inspired sculpting, deck-line tailoring, and marine visibility accents without official insignia, badges, copied uniforms, raids, rescue emergencies, or threats.",
+      "spaceAndPlanetary": "Use fictional couture inspired by pressure-shell geometry, regolith texture, orbital arcs, solar shielding, rover joints, and mission-light systems. Keep all scenes public-safe fashion at the current country landmark. Near-Sun means a fictional shielded solar-observation design language, never a literal person standing on the Sun."
+    },
+    "publicSafety": "Use fictional public-safe fashion references only. No copied airline, military, police, coast-guard, space-agency, or emergency-service uniforms or insignia. No combat, raids, arrests, threats, injury, emergency peril, fetish framing, or explicit content."
   },
   "anatomyIntegrity": {
     "requiredEveryImage": true,
