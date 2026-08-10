@@ -507,6 +507,13 @@ historical write absence or the Config graph node. The source says
 production identities, transition authorization, writes, entrypoint,
 dispatcher, activation, and Mainnet remain false/HOLD.
 
+The runtime parser also returns a separate opaque production-ACTIVE Config
+capability only after the strict phase codec and real Config PDA pass. It rejects
+staging/uninitialized state, rehearsal mode, non-mainnet supply, incomplete Lane
+funding, and missing stake/token identities. This is the required phase guard
+primitive for later runtime write paths, not proof that those paths already
+consume it; all handler-complete and Mainnet flags therefore remain false.
+
 These are not account adapters or deployable handlers. A future native adapter
 must still prove account ownership, exact config/round/randomness bindings,
 PDAs, codecs, and bumps before its first mutable borrow, and must source Clock

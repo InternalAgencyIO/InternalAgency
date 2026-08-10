@@ -347,6 +347,7 @@ fn config_parser_truth_is_daily_law_first_read_only_and_held() {
             requires_open_daily_law_capability: true,
             immutable_account_borrow_only: true,
             binding_relative_config_identity_checked: true,
+            production_active_config_capability_present: true,
             production_identity_binding_frozen: false,
             owner_bootstrap_policy_accepted: false,
             phase_transition_predicate_frozen: false,

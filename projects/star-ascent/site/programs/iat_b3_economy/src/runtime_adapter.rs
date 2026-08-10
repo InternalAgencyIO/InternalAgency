@@ -15,8 +15,8 @@ use crate::native_adapter::{
 };
 use crate::{
     decode_config_genesis_state, verify_daily_law_open, CanonicalDailyLawBinding,
-    ConfigGenesisCodecError, ConfigGenesisState, EconomyError, ReadonlyDailyLawAccount,
-    ValidatedDailyLawWrite,
+    ConfigGenesisCodecError, ConfigGenesisState, EconomyError, GenesisPhase,
+    ReadonlyDailyLawAccount, ValidatedDailyLawWrite, MAINNET_SUPPLY,
 };
 use sha2::{Digest, Sha256};
 use solana_account_info::AccountInfo;
@@ -35,6 +35,7 @@ pub struct ConfigGenesisRuntimeTruth {
     pub requires_open_daily_law_capability: bool,
     pub immutable_account_borrow_only: bool,
     pub binding_relative_config_identity_checked: bool,
+    pub production_active_config_capability_present: bool,
     pub production_identity_binding_frozen: bool,
     pub owner_bootstrap_policy_accepted: bool,
     pub phase_transition_predicate_frozen: bool,
@@ -53,6 +54,7 @@ pub const CONFIG_GENESIS_RUNTIME_TRUTH: ConfigGenesisRuntimeTruth = ConfigGenesi
     requires_open_daily_law_capability: true,
     immutable_account_borrow_only: true,
     binding_relative_config_identity_checked: true,
+    production_active_config_capability_present: true,
     production_identity_binding_frozen: false,
     owner_bootstrap_policy_accepted: false,
     phase_transition_predicate_frozen: false,
@@ -163,6 +165,8 @@ pub enum RuntimeAdapterError {
     ConfigAccountMustBeReadOnly,
     ConfigMintMismatch,
     ConfigBumpMismatch,
+    ConfigPhaseNotActive,
+    ConfigProductionShapeMismatch,
     ClockSysvarUnavailable,
     RentSysvarUnavailable,
 }
@@ -193,6 +197,45 @@ pub struct ReadonlyConfigGenesisAccount {
     key: [u8; 32],
     state: ConfigGenesisState,
     preimage_sha256: [u8; 32],
+}
+
+/// Opaque proof that a real binding-relative Config PDA is in the exact B3
+/// ACTIVE phase and has the production funding shape. This is a runtime
+/// prerequisite only; it conveys no handler, transition, or release authority.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RuntimeProductionActiveConfig {
+    key: [u8; 32],
+    state: ConfigGenesisState,
+    preimage_sha256: [u8; 32],
+    law_account_sha256: [u8; 32],
+    program_id: [u8; 32],
+    mint: [u8; 32],
+}
+
+impl RuntimeProductionActiveConfig {
+    pub const fn key(&self) -> [u8; 32] {
+        self.key
+    }
+
+    pub const fn state(&self) -> ConfigGenesisState {
+        self.state
+    }
+
+    pub const fn preimage_sha256(&self) -> [u8; 32] {
+        self.preimage_sha256
+    }
+
+    pub const fn law_account_sha256(&self) -> [u8; 32] {
+        self.law_account_sha256
+    }
+
+    pub const fn program_id(&self) -> [u8; 32] {
+        self.program_id
+    }
+
+    pub const fn mint(&self) -> [u8; 32] {
+        self.mint
+    }
 }
 
 impl ReadonlyConfigGenesisAccount {
@@ -401,6 +444,39 @@ pub fn parse_config_genesis_account_info_with_runtime_law(
     parse_config_genesis_account_info(runtime_law.gate(), binding, account)
 }
 
+/// Authenticate the runtime Config as production ACTIVE. The strict codec has
+/// already enforced phase/legacy-active consistency; this adds production
+/// supply, funding-shape, and opaque runtime-Law binding checks.
+pub fn authenticate_runtime_production_active_config(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
+    let observed =
+        parse_config_genesis_account_info_with_runtime_law(runtime_law, binding, account)?;
+    let state = observed.state();
+    if state.phase != GenesisPhase::Active || !state.config.active {
+        return Err(RuntimeAdapterError::ConfigPhaseNotActive);
+    }
+    if state.config.rehearsal_mode
+        || state.config.expected_supply != MAINNET_SUPPLY
+        || state.config.lane_mask != 0b1_1110
+        || !state.config.stake_vault_initialized
+        || state.config.stake_token_account == [0; 32]
+        || state.config.token_program == [0; 32]
+    {
+        return Err(RuntimeAdapterError::ConfigProductionShapeMismatch);
+    }
+    Ok(RuntimeProductionActiveConfig {
+        key: observed.key(),
+        state,
+        preimage_sha256: observed.preimage_sha256(),
+        law_account_sha256: runtime_law.law_account_sha256(),
+        program_id: binding.program_id(),
+        mint: binding.mint(),
+    })
+}
+
 /// Authenticate one existing strict state account from `AccountInfo` and
 /// prepare its owned CAS postimage. This does not reborrow or write the account.
 #[inline(never)]
@@ -471,7 +547,10 @@ pub fn prepare_create_state_account_info(
 mod tests {
     use super::*;
     use crate::native_adapter::{derive_pda, CreatePdaLifecycle, StrictStateKind};
-    use crate::{EligibilityState, LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION};
+    use crate::{
+        encode_config_genesis_state, ConfigState, EligibilityState, CONFIG_GENESIS_ACCOUNT_LEN,
+        LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION,
+    };
     use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day, SolanaDailyDecision};
     use solana_sdk_ids::system_program;
 
@@ -518,6 +597,54 @@ mod tests {
         data
     }
 
+    fn runtime_gate() -> RuntimeValidatedDailyLawWrite {
+        let binding =
+            CanonicalDailyLawBinding::new(LAW_PROGRAM, LAW_STATE, LAW_BUMP, MINT, NETWORK);
+        let key = LAW_STATE.into();
+        let owner = LAW_PROGRAM.into();
+        let mut lamports = 1;
+        let mut data = law_data();
+        let account = AccountInfo::new(&key, false, false, &mut lamports, &mut data, &owner, false);
+        let clock = Clock {
+            unix_timestamp: CLOCK_TIMESTAMP,
+            ..Clock::default()
+        };
+        let gate = verify_daily_law_open_at_clock(&binding, &account, &clock).unwrap();
+        RuntimeValidatedDailyLawWrite {
+            gate,
+            law_account_key: LAW_STATE,
+            law_program_owner: LAW_PROGRAM,
+        }
+    }
+
+    fn active_config_state(
+        binding: &NativeEconomyBinding,
+        phase: GenesisPhase,
+        rehearsal_mode: bool,
+    ) -> ConfigGenesisState {
+        ConfigGenesisState {
+            phase,
+            config: ConfigState {
+                admin: OWNER,
+                mint: MINT,
+                token_program: [0x33; 32],
+                randomness_program: [0x44; 32],
+                stake_token_account: [0x55; 32],
+                agency_registry_hash: [0; 32],
+                genesis_timestamp: CLOCK_TIMESTAMP - 60,
+                expected_supply: MAINNET_SUPPLY,
+                staked_principal: 0,
+                agency_count: 0,
+                rehearsal_mode,
+                active: phase == GenesisPhase::Active,
+                lane_mask: 0b1_1110,
+                stake_vault_initialized: true,
+                bump: binding.config_bump(),
+                vault_authority_bump: 202,
+            },
+        }
+    }
+
     #[test]
     fn injected_clock_seam_proves_success_without_exposing_a_timestamp_api() {
         let binding =
@@ -534,6 +661,82 @@ mod tests {
         let gate = verify_daily_law_open_at_clock(&binding, &account, &clock).unwrap();
         assert_eq!(gate.unix_timestamp(), CLOCK_TIMESTAMP);
         assert_eq!(gate.mint(), MINT);
+    }
+
+    #[test]
+    fn production_active_config_capability_requires_exact_runtime_phase_and_shape() {
+        let runtime_law = runtime_gate();
+        let binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
+        let key = binding.config().into();
+        let owner = binding.program_id().into();
+        let mut lamports = 1;
+        let mut data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+        encode_config_genesis_state(
+            &active_config_state(&binding, GenesisPhase::Active, false),
+            &mut data,
+        )
+        .unwrap();
+        let account = AccountInfo::new(&key, false, false, &mut lamports, &mut data, &owner, false);
+        let active =
+            authenticate_runtime_production_active_config(&runtime_law, &binding, &account)
+                .unwrap();
+        assert_eq!(active.key(), binding.config());
+        assert_eq!(active.program_id(), binding.program_id());
+        assert_eq!(active.mint(), MINT);
+        assert_eq!(active.state().phase, GenesisPhase::Active);
+        assert_eq!(
+            active.law_account_sha256(),
+            runtime_law.law_account_sha256()
+        );
+    }
+
+    #[test]
+    fn staging_or_rehearsal_config_cannot_create_the_active_capability() {
+        let runtime_law = runtime_gate();
+        let binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
+        let key = binding.config().into();
+        let owner = binding.program_id().into();
+        let mut lamports = 1;
+        let mut staging_data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+        encode_config_genesis_state(
+            &active_config_state(&binding, GenesisPhase::GenesisStaging, false),
+            &mut staging_data,
+        )
+        .unwrap();
+        let staging = AccountInfo::new(
+            &key,
+            false,
+            false,
+            &mut lamports,
+            &mut staging_data,
+            &owner,
+            false,
+        );
+        assert_eq!(
+            authenticate_runtime_production_active_config(&runtime_law, &binding, &staging),
+            Err(RuntimeAdapterError::ConfigPhaseNotActive)
+        );
+        drop(staging);
+
+        let mut rehearsal_data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+        encode_config_genesis_state(
+            &active_config_state(&binding, GenesisPhase::Active, true),
+            &mut rehearsal_data,
+        )
+        .unwrap();
+        let rehearsal = AccountInfo::new(
+            &key,
+            false,
+            false,
+            &mut lamports,
+            &mut rehearsal_data,
+            &owner,
+            false,
+        );
+        assert_eq!(
+            authenticate_runtime_production_active_config(&runtime_law, &binding, &rehearsal),
+            Err(RuntimeAdapterError::ConfigProductionShapeMismatch)
+        );
     }
 
     #[test]

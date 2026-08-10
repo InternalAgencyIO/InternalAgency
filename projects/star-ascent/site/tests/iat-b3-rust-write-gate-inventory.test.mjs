@@ -321,6 +321,17 @@ test("the Config Genesis codec is a strict read-only representation, not a phase
   assert.match(economyRuntimeAdapterSource, /requires_open_daily_law_capability: true/u);
   assert.match(economyRuntimeAdapterSource, /immutable_account_borrow_only: true/u);
   assert.match(economyRuntimeAdapterSource, /binding_relative_config_identity_checked: true/u);
+  assert.match(
+    economyRuntimeAdapterSource,
+    /production_active_config_capability_present: true/u,
+  );
+  assert.match(economyRuntimeAdapterSource, /pub struct RuntimeProductionActiveConfig/u);
+  assert.match(
+    economyRuntimeAdapterSource,
+    /authenticate_runtime_production_active_config/u,
+  );
+  assert.match(economyRuntimeAdapterSource, /state\.phase != GenesisPhase::Active/u);
+  assert.match(economyRuntimeAdapterSource, /state\.config\.rehearsal_mode/u);
   assert.match(economyRuntimeAdapterSource, /production_identity_binding_frozen: false/u);
   assert.match(economyRuntimeAdapterSource, /phase_transition_predicate_frozen: false/u);
   assert.match(economyRuntimeAdapterSource, /genesis_conservation_proved: false/u);

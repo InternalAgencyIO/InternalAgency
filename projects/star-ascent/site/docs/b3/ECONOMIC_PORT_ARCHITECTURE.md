@@ -634,6 +634,15 @@ identity freeze, phase authorization, or execution. Those truth fields remain
 false, no write/ABI/entrypoint/dispatcher was added, and the graph remains
 `BLOCKED`/Mainnet `HOLD`.
 
+The same runtime boundary now exposes an opaque production-ACTIVE Config
+capability. It can only be returned after the runtime Law capability parses the
+real Config PDA and the codec reports `ACTIVE`; it additionally rejects
+rehearsal mode, non-mainnet supply, incomplete Lane mask, missing stake vault,
+zero stake token identity, and zero token-program identity. This prevents the
+retained V2 `active` boolean from being accepted alone as B3 activation. The
+capability is not yet required by every lifecycle, token-CPI, and existing-state
+write path, so handler completion and phase enforcement remain false/HOLD.
+
 The next strict-codec batch adds only four more field-complete retained
 projections: `CoreRewardState` (`IATB3CRW`, 128 bytes), `AgencyState`
 (`IATB3AGN`, 96 bytes), `AgencyOwnerIndexState` (`IATB3AOI`, 96 bytes), and
