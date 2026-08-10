@@ -86,6 +86,8 @@ jobs:
           node-version: 24
       - name: Install the pinned official Solana and Anchor toolchain
         run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends libudev-dev pkg-config
           rustup toolchain install 1.97.1 --profile minimal
           agave_install_init="$RUNNER_TEMP/agave-install-init-v3.1.10"
           curl --proto '=https' --tlsv1.2 -sSfL \
