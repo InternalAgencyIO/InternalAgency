@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { mkdtemp, readFile, realpath, rm, symlink } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -21,7 +22,7 @@ import {
 } from "../lib/integrity.mjs";
 import { validateBenchmarkRecord } from "../lib/benchmark-validation.mjs";
 import { assertReplayArtifactBindings, assertResultCellBinding, evaluateUnreviewedCandidate } from "../lib/checkpoint-bindings.mjs";
-import { DEFAULT_CACHE_ROOT, resolveSecureReportTarget, writeExclusiveAtomicReport } from "../lib/secure-report-path.mjs";
+import { resolveSecureReportTarget, writeExclusiveAtomicReport } from "../lib/secure-report-path.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..");
@@ -264,23 +265,22 @@ test("benchmark validation binds committed fixture order, prompts, model, and pe
 });
 
 test("report target is basename-only, no-overwrite, and junction escape safe", async (t) => {
-  const cacheRoot = await realpath(DEFAULT_CACHE_ROOT);
+  const cacheRoot = await realpath(await mkdtemp(path.join(tmpdir(), "iat-qwen35-cache-root-")));
+  const outsideRoot = await realpath(await mkdtemp(path.join(tmpdir(), "iat-qwen35-outside-root-")));
   const testDir = await mkdtemp(path.join(cacheRoot, "iat-qwen35-report-path-test-"));
   t.after(async () => {
-    const lexical = path.resolve(testDir);
-    const relative = path.relative(cacheRoot, lexical);
-    assert.ok(relative && !relative.startsWith("..") && !path.isAbsolute(relative));
-    await rm(lexical, { recursive: true, force: true });
+    await rm(cacheRoot, { recursive: true, force: true });
+    await rm(outsideRoot, { recursive: true, force: true });
   });
 
-  await assert.rejects(() => resolveSecureReportTarget({ outputDir: testDir, reportName: "..\\escape.json", cacheRoot }), /basename/u);
+  await assert.rejects(() => resolveSecureReportTarget({ outputDir: testDir, reportName: "../escape.json", cacheRoot }), /basename/u);
   const secured = await resolveSecureReportTarget({ outputDir: testDir, reportName: "report.json", cacheRoot });
   await writeExclusiveAtomicReport(secured, "{}\n");
   await assert.rejects(() => resolveSecureReportTarget({ outputDir: testDir, reportName: "report.json", cacheRoot }), /overwrite/u);
 
   const junction = path.join(testDir, "outside-junction");
   try {
-    await symlink(path.parse(cacheRoot).root === "E:\\" ? "C:\\Windows\\Temp" : path.parse(cacheRoot).root, junction, "junction");
+    await symlink(outsideRoot, junction, "junction");
   } catch (error) {
     if (["EPERM", "EACCES", "ENOTSUP"].includes(error?.code)) {
       t.diagnostic(`junction regression skipped by platform: ${error.code}`);
