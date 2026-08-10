@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { readFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
@@ -33,6 +35,7 @@ const {
   assertEvidenceSafe,
   assertHardPinnedDevnetUrl,
   extractCliSignatures,
+  normalizeAirdropCliEvidence,
   sanitizeFailureText,
   transactionExplorerUrl,
 } = await import(driverUrl);
@@ -118,8 +121,11 @@ test("runtime URL and evidence guards reject unsafe inputs without contacting RP
   assert.throws(() => assertHardPinnedDevnetUrl("devnet"));
   assert.throws(() => assertHardPinnedDevnetUrl("https://api.testnet.solana.com"));
 
-  const signature = "1".repeat(88);
-  assert.match(transactionExplorerUrl(signature), /\/tx\/1+\?cluster=devnet$/u);
+  const signature = "5zQKxvRdgJDA8fRGPdKfGxRLnLpwmNnMXGYxfBqFSUPqc5BTmFPrTG8vnC4HvKDVY8zQ8aQxZxcEE7WFpGhZGVAA";
+  assert.equal(
+    transactionExplorerUrl(signature),
+    `https://explorer.solana.com/tx/${signature}?cluster=devnet`,
+  );
   assert.match(
     accountExplorerUrl("11111111111111111111111111111111"),
     /\/address\/11111111111111111111111111111111\?cluster=devnet$/u,
@@ -266,9 +272,88 @@ test("evidence is public, measurable, explorable, and excludes obvious secret pa
     "https://explorer.solana.com/address/11111111111111111111111111111111?cluster=devnet",
   );
   assert.equal(
-    transactionExplorerUrl("1".repeat(88)),
-    `https://explorer.solana.com/tx/${"1".repeat(88)}?cluster=devnet`,
+    transactionExplorerUrl("5zQKxvRdgJDA8fRGPdKfGxRLnLpwmNnMXGYxfBqFSUPqc5BTmFPrTG8vnC4HvKDVY8zQ8aQxZxcEE7WFpGhZGVAA"),
+    "https://explorer.solana.com/tx/5zQKxvRdgJDA8fRGPdKfGxRLnLpwmNnMXGYxfBqFSUPqc5BTmFPrTG8vnC4HvKDVY8zQ8aQxZxcEE7WFpGhZGVAA?cluster=devnet",
   );
+  assert.throws(() => transactionExplorerUrl("1".repeat(88)), /invalid transaction signature/u);
+});
+
+test("airdrop text is normalized only from the exact public three-line CLI shape", () => {
+  const signature = "5zQKxvRdgJDA8fRGPdKfGxRLnLpwmNnMXGYxfBqFSUPqc5BTmFPrTG8vnC4HvKDVY8zQ8aQxZxcEE7WFpGhZGVAA";
+  const evidence = normalizeAirdropCliEvidence(
+    "airdrop-1",
+    `Requesting airdrop of 2 SOL\n${JSON.stringify({ signature })}\n2 SOL\n`,
+  );
+  assert.equal(evidence.status, "PUBLIC_STEP_RECORDED");
+  assert.equal(evidence.label, "airdrop-1");
+  assert.deepEqual(extractCliSignatures(evidence), [signature]);
+  for (const forged of [
+    `Requesting airdrop of 1 SOL\n${JSON.stringify({ signature })}\n1 SOL\n`,
+    `Requesting airdrop of 2 SOL\n${JSON.stringify({ signature })}\n1 SOL\n`,
+    `Requesting airdrop of 2 SOL\n${JSON.stringify({ signature })}\n2 SOL\nextra\n`,
+    "Requesting airdrop of 2 SOL\n",
+    `Requesting airdrop of 2 SOL\n${JSON.stringify({ signature: "0".repeat(88) })}\n2 SOL\n`,
+    `Requesting airdrop of 2 SOL\nSignature: ${signature}\n2 SOL\n`,
+    `Requesting airdrop of 2 SOL\n${JSON.stringify({ signature, extra: true })}\n2 SOL\n`,
+    `Requesting airdrop of 2 SOL\n{"signature":"${"2".repeat(88)}","signature":"${signature}"}\n2 SOL\n`,
+    `\nRequesting airdrop of 2 SOL\n${JSON.stringify({ signature })}\n2 SOL\n`,
+    `Requesting airdrop of 2 SOL\n\n${JSON.stringify({ signature })}\n2 SOL\n`,
+    `Requesting airdrop of 2 SOL\n${JSON.stringify({ signature })}\n2 SOL`,
+    `Requesting airdrop of 2 SOL\r\n${JSON.stringify({ signature })}\n2 SOL\r\n`,
+  ]) {
+    assert.throws(() => normalizeAirdropCliEvidence("airdrop-1", forged));
+  }
+  assert.doesNotThrow(() => normalizeAirdropCliEvidence(
+    "airdrop-2",
+    `Requesting airdrop of 1 SOL\n${JSON.stringify({ signature })}\n3 SOL\n`,
+  ));
+  assert.doesNotThrow(() => normalizeAirdropCliEvidence(
+    "airdrop-2",
+    `Requesting airdrop of 1 SOL\r\n${JSON.stringify({ signature })}\r\n3 SOL\r\n`,
+  ));
+  assert.throws(() => normalizeAirdropCliEvidence(
+    "airdrop-2",
+    `Requesting airdrop of 1 SOL\n${JSON.stringify({ signature })}\n1 SOL\n`,
+  ));
+  assert.throws(() => normalizeAirdropCliEvidence(
+    "airdrop-1",
+    `Requesting airdrop of 2 SOL\n${JSON.stringify({ signature: "1".repeat(88) })}\n2 SOL\n`,
+  ));
+});
+
+test("airdrop CLI normalization emits only bounded JSON and fails closed offline", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "iat-b3-airdrop-evidence-"));
+  const inputPath = join(directory, "airdrop.txt");
+  const driverPath = fileURLToPath(driverUrl);
+  const signature = "5zQKxvRdgJDA8fRGPdKfGxRLnLpwmNnMXGYxfBqFSUPqc5BTmFPrTG8vnC4HvKDVY8zQ8aQxZxcEE7WFpGhZGVAA";
+  try {
+    await writeFile(
+      inputPath,
+      `Requesting airdrop of 1 SOL\n${JSON.stringify({ signature })}\n3 SOL\n`,
+      "utf8",
+    );
+    const accepted = spawnSync(
+      process.execPath,
+      [driverPath, "--offline-normalize-airdrop-cli-evidence", "airdrop-2", inputPath],
+      { encoding: "utf8", windowsHide: true },
+    );
+    assert.equal(accepted.status, 0, accepted.stderr);
+    const acceptedEvidence = JSON.parse(accepted.stdout.trim());
+    assert.equal(acceptedEvidence.status, "PUBLIC_STEP_RECORDED");
+    assert.deepEqual(extractCliSignatures(acceptedEvidence), [signature]);
+
+    await writeFile(inputPath, "Requesting airdrop of 1 SOL\nC:\\Users\\operator\\payer.json\n", "utf8");
+    const rejected = spawnSync(
+      process.execPath,
+      [driverPath, "--offline-normalize-airdrop-cli-evidence", "airdrop-2", inputPath],
+      { encoding: "utf8", windowsHide: true },
+    );
+    assert.notEqual(rejected.status, 0);
+    assert.equal(JSON.parse(rejected.stdout.trim()).status, "FAIL");
+    assert.doesNotMatch(rejected.stdout, /Users|operator|payer\.json/u);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });
 
 test("partial failure is loud and local-secret cleanup is narrowly scoped", () => {
@@ -282,12 +367,18 @@ test("partial failure is loud and local-secret cleanup is narrowly scoped", () =
   assert.match(wrapper, /rehearsal_command_failed|partial/u);
   assert.match(wrapper, /PARTIAL_PUBLIC_ARTIFACT_LOCATORS/u);
   assert.match(wrapper, /--offline-sanitize-cli-evidence/u);
+  assert.match(wrapper, /--offline-normalize-airdrop-cli-evidence/u);
+  assert.match(wrapper, /run_airdrop airdrop-1 solana airdrop 2/u);
+  assert.match(wrapper, /run_airdrop airdrop-2 solana airdrop 1/u);
+  assert.doesNotMatch(wrapper, /run_json airdrop-[12]/u);
   assert.match(wrapper, /phase":"public_cli_command"/u);
   assert.match(wrapper, /cliExitCode/u);
   assert.match(wrapper, /stdoutJsonPresent/u);
   assert.match(wrapper, /cliEvidenceSanitized/u);
-  assert.match(wrapper, /\[\[ -s "\$evidence_file" \]\] \|\| continue/u);
   assert.match(wrapper, /if "\$@" >"\$evidence_file"/u);
+  assert.match(wrapper, /\[\[ -s "\$evidence_file" \]\] \|\| continue/u);
+  assert.match(wrapper, /partial-\$evidence_label-sanitizer/u);
+  assert.match(wrapper, /mv -- "\$normalized_file" "\$evidence_file"/u);
   assert.match(driver, /knownTransactions: observedPublicTransactions/u);
   assert.match(driver, /publicAddresses: partialPublicAddresses/u);
 

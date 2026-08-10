@@ -207,16 +207,56 @@ run_json() {
   return "$sanitizer_exit_code"
 }
 
+run_airdrop() {
+  local label=$1
+  local raw_file
+  local evidence_file
+  local normalized_file
+  local command_exit_code=0
+  local normalizer_exit_code=0
+  local stdout_present=false
+  shift
+  raw_file="$temp_dir/$label.stdout"
+  evidence_file="$cli_evidence_dir/$label.json"
+  normalized_file="$temp_dir/$label.normalized.json"
+  if "$@" >"$raw_file" 2>"$temp_dir/$label.stderr"; then
+    command_exit_code=0
+  else
+    command_exit_code=$?
+  fi
+  if [[ -s "$raw_file" ]]; then
+    stdout_present=true
+  fi
+  if [[ $command_exit_code -ne 0 ]]; then
+    printf '{"schema":"iat-b3-devnet-rehearsal/v1","status":"FAIL","phase":"public_cli_command","label":"%s","cliExitCode":%d,"stdoutPresent":%s,"normalizedEvidencePresent":false}\n' \
+      "$label" "$command_exit_code" "$stdout_present"
+    return "$command_exit_code"
+  fi
+  if "$node_bin" "$driver_for_node" \
+    --offline-normalize-airdrop-cli-evidence \
+    "$label" \
+    "$(to_node_path "$raw_file")" \
+    >"$normalized_file" 2>"$temp_dir/$label-normalizer.stderr"; then
+    mv -- "$normalized_file" "$evidence_file"
+    cat "$evidence_file"
+    return 0
+  else
+    normalizer_exit_code=$?
+  fi
+  [[ -s "$normalized_file" ]] && cat "$normalized_file"
+  return "$normalizer_exit_code"
+}
+
 phase="devnet_airdrop_1"
 public_writes_started=true
 permanent_artifacts_may_remain=true
-run_json airdrop-1 solana airdrop 2 "$payer_pubkey" \
+run_airdrop airdrop-1 solana airdrop 2 "$payer_pubkey" \
   --url "$devnet_rpc" \
   --keypair "$payer_key" \
   --commitment finalized \
   --output json-compact
 phase="devnet_airdrop_2"
-run_json airdrop-2 solana airdrop 1 "$payer_pubkey" \
+run_airdrop airdrop-2 solana airdrop 1 "$payer_pubkey" \
   --url "$devnet_rpc" \
   --keypair "$payer_key" \
   --commitment finalized \

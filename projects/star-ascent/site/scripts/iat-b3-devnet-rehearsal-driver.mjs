@@ -48,6 +48,10 @@ const SCHEMA = "iat-b3-devnet-rehearsal/v1";
 const EXPLORER = "https://explorer.solana.com";
 const LAW_NAMESPACE = Buffer.from("IATB3LAW", "ascii");
 const IAT_TOTAL_BASE_UNITS = 1_000_000_000_000_000_000n;
+const BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+const BASE58_INDEX = new Map(
+  [...BASE58_ALPHABET].map((character, index) => [character, BigInt(index)]),
+);
 const UPGRADEABLE_LOADER_ID = new PublicKey("BPFLoaderUpgradeab1e11111111111111111111111");
 const EXPECTED_CLI_EVIDENCE = Object.freeze([
   "airdrop-1",
@@ -116,7 +120,7 @@ export function accountExplorerUrl(address) {
 }
 
 export function transactionExplorerUrl(signature) {
-  assert(/^[1-9A-HJ-NP-Za-km-z]{80,90}$/.test(signature), "invalid transaction signature");
+  assert(signatureCandidate(signature), "invalid transaction signature");
   return EXPLORER + "/tx/" + signature + "?cluster=devnet";
 }
 
@@ -350,8 +354,29 @@ async function transferInstruction(connection, source, mint, destination, owner)
   );
 }
 
+function decodeBase58(value) {
+  if (typeof value !== "string" || value.length === 0) return null;
+  let magnitude = 0n;
+  for (const character of value) {
+    const digit = BASE58_INDEX.get(character);
+    if (digit === undefined) return null;
+    magnitude = magnitude * 58n + digit;
+  }
+  const bytes = [];
+  while (magnitude > 0n) {
+    bytes.push(Number(magnitude & 0xffn));
+    magnitude >>= 8n;
+  }
+  bytes.reverse();
+  let leadingZeroes = 0;
+  while (leadingZeroes < value.length && value[leadingZeroes] === "1") leadingZeroes += 1;
+  return Uint8Array.from([...new Array(leadingZeroes).fill(0), ...bytes]);
+}
+
 function signatureCandidate(value) {
-  return typeof value === "string" && /^[1-9A-HJ-NP-Za-km-z]{80,90}$/.test(value);
+  return typeof value === "string"
+    && /^[1-9A-HJ-NP-Za-km-z]{64,88}$/u.test(value)
+    && decodeBase58(value)?.length === 64;
 }
 
 export function extractCliSignatures(value) {
@@ -368,6 +393,44 @@ export function extractCliSignatures(value) {
   };
   visit(value);
   return [...signatures];
+}
+
+export function normalizeAirdropCliEvidence(label, rawText) {
+  const contract = label === "airdrop-1"
+    ? Object.freeze({ requested: "2", finalBalance: "2" })
+    : label === "airdrop-2"
+      ? Object.freeze({ requested: "1", finalBalance: "3" })
+      : null;
+  assert(contract, "invalid airdrop step label");
+  assert(typeof rawText === "string" && !rawText.includes("\0"), "invalid airdrop output");
+  assert(rawText.length <= 512, "airdrop output exceeds the bounded public envelope");
+  assert(/^[\x20-\x7E\r\n]*$/u.test(rawText), "airdrop output contains non-ASCII data");
+  const withoutCrLf = rawText.replaceAll("\r\n", "");
+  if (rawText.includes("\r\n")) {
+    assert(!withoutCrLf.includes("\r") && !withoutCrLf.includes("\n"), "mixed line endings");
+  } else {
+    assert(!rawText.includes("\r"), "airdrop output contains a noncanonical line ending");
+  }
+  const normalized = rawText.replaceAll("\r\n", "\n");
+  const exact = /^Requesting airdrop of ([1-9][0-9]*) SOL\n\{"signature":"([1-9A-HJ-NP-Za-km-z]{64,88})"\}\n([1-9][0-9]*) SOL\n$/u.exec(normalized);
+  assert(exact, "airdrop output must match the exact three-line public envelope");
+  assert.equal(exact[1], contract.requested, "airdrop request amount mismatch");
+  assert.equal(exact[3], contract.finalBalance, "airdrop balance amount mismatch");
+  const signatureMatch = exact[2];
+  assert(signatureCandidate(signatureMatch), "airdrop output has an invalid transaction signature");
+  const signature = signatureMatch;
+  return Object.freeze({
+    schema: SCHEMA,
+    status: "PUBLIC_STEP_RECORDED",
+    network: "solana-devnet",
+    rpc: DEVNET_RPC,
+    label,
+    signatureExposed: true,
+    transactions: Object.freeze([Object.freeze({
+      signature,
+      explorerUrl: transactionExplorerUrl(signature),
+    })]),
+  });
 }
 
 async function collectCliEvidence(connection, directory) {
@@ -765,6 +828,27 @@ async function main() {
         status: "FAIL",
         phase: "offline_cli_evidence_sanitization",
         failure: "cli_evidence_was_not_safe_or_parseable",
+        errorType: String(error?.name ?? "Error").replace(/[^A-Za-z]/gu, "").slice(0, 32),
+      });
+      process.exitCode = 1;
+    }
+    return;
+  }
+  if (
+    process.argv.length === 5
+    && process.argv[2] === "--offline-normalize-airdrop-cli-evidence"
+  ) {
+    try {
+      emit(normalizeAirdropCliEvidence(
+        process.argv[3],
+        readFileSync(process.argv[4], "utf8"),
+      ));
+    } catch (error) {
+      emit({
+        schema: SCHEMA,
+        status: "FAIL",
+        phase: "offline_airdrop_cli_evidence_normalization",
+        failure: "airdrop_cli_evidence_was_not_safe_or_canonical",
         errorType: String(error?.name ?? "Error").replace(/[^A-Za-z]/gu, "").slice(0, 32),
       });
       process.exitCode = 1;
