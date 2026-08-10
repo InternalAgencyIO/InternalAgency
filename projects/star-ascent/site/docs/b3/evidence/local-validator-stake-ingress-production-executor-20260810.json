@@ -1,7 +1,7 @@
 {
   "schema": "iat-b3-stake-ingress-production-executor-local-validator/v1",
   "status": "PASS",
-  "recordedAt": "2026-08-10T19:12:51.3784420Z",
+  "recordedAt": "2026-08-10T21:33:46.6311946Z",
   "scope": {
     "rpc": "http://127.0.0.1:18999",
     "rpcScope": "loopback-only",
@@ -20,14 +20,16 @@
   },
   "productionExecutor": {
     "source": "programs/iat_b3_economy/src/stake_ingress_runtime.rs",
-    "sourceSha256": "b742f8ca0814ce9e401d80791522ad61ce9894aabecfd3a5190f7a335d744e9f",
+    "sourceSha256": "8fb565e71264325c02f438ebc8ac31bf8c6a58a4d87f62afd9be92b62060429a",
     "pureStakeIngressSource": "programs/iat_b3_economy/src/stake_ingress.rs",
-    "pureStakeIngressSourceSha256": "ef964a3d9ddb18e0c4f688060ff33adf239fa08f430d3971c5994890a241763b",
+    "pureStakeIngressSourceSha256": "704444af0bfd46bf55c7aef2c40bc9a146c7febab562109276c06c8624b28404",
     "feature": "runtime-token-2022-stake-ingress",
     "publicEntrypoint": false,
     "instructionAbiFrozen": false,
     "productionIdentitiesFrozen": false,
     "retainedV2PostCpiPersistenceComplete": false,
+    "retainedV2PostCpiFinalizerExecuted": true,
+    "persistenceCallbackAfterRestoration": true,
     "v2EconomicMathChanged": false,
     "dailyLawCapabilityReauthenticated": true,
     "canonicalConfidentialMintPolicyReauthenticated": false,
@@ -37,8 +39,8 @@
     "productionCandidate": false,
     "economy": {
       "programId": "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
-      "bytes": 252296,
-      "sha256": "bb1cbaa3293bcfce3f7401b13882db5d81a2d3568a10eed1ecf716bebb0291c7",
+      "bytes": 259968,
+      "sha256": "28f75689f3c754bc2a3e779c29ad125a74a136ec7a766f1fb67a91d680cf3748",
       "sourceSha256": "ec1e4192cbc592d64746b628526099f97448e29d49104d1b24b0b1ffac20b06f"
     },
     "hook": {
@@ -71,7 +73,9 @@
     "directHookInvocationRejectedOutsideToken2022Context": true,
     "directStakeVaultDonationRejected": true,
     "hookFailureRolledBackApproval": true,
-    "postTransferPersistenceCallbackFailureRolledBackApprovalAndTransfer": true,
+    "retainedV2PostCpiFinalizerExecuted": true,
+    "persistenceCallbackRanAfterExactDelegateRestoration": true,
+    "postFinalizerPersistenceCallbackFailureRolledBackFullSequence": true,
     "postCompletionCpiFailureRolledBackFullExecutorSequence": true,
     "cpiGuardRejectedByRetainedPreflightBeforeMutation": true,
     "sbfStackFrameLimitSatisfied": true
@@ -89,6 +93,6 @@
     "retainedV2PostCpiPersistenceComplete": false,
     "fullFeatureDevnetRehearsalComplete": false,
     "mainnetAuthorization": false,
-    "remainingGate": "Freeze the production law/economy/mint identities and account lifecycle, apply the retained pure post-CPI finalizer through strict Config/Position/Lane codecs, seal the public handler ABI, and repeat the complete rollback matrix against the exact final binary on Devnet."
+    "remainingGate": "Freeze the production law/economy/mint identities and account lifecycle, bind the completed retained V2 Config/Position/Lane values to the phase-gated production CAS receipt, seal the public handler ABI, and repeat the complete rollback matrix against the exact final binary on Devnet."
   }
 }

@@ -796,7 +796,10 @@ test("the feature-gated stake-ingress runtime executes exact Token-2022 CPI relo
     "transfer_checked(",
     "add_extra_accounts_for_execute_cpi(",
     "invoke_signed(",
-    "persist_transaction_local_state(plan, &post_transfer)",
+    "verify_ingress_approval(",
+    "apply_transfer_and_retained_v2_finalizer(",
+    "complete_stake_ingress(",
+    "persist_transaction_local_state(plan, &completed)",
     "restore_original_delegate(plan, accounts)",
   ]) {
     assert.ok(economyStakeIngressRuntimeSource.includes(token), token);
@@ -806,6 +809,14 @@ test("the feature-gated stake-ingress runtime executes exact Token-2022 CPI relo
     /retained_v2_post_cpi_persistence_complete: false/u,
   );
   assert.match(economyStakeIngressRuntimeSource, /daily_law_capability_reauthenticated: true/u);
+  assert.match(
+    economyStakeIngressRuntimeSource,
+    /retained_v2_post_cpi_finalizer_executed: true/u,
+  );
+  assert.match(
+    economyStakeIngressRuntimeSource,
+    /persistence_callback_after_restoration: true/u,
+  );
   assert.match(
     economyStakeIngressRuntimeSource,
     /production_active_config_capability_required: true/u,

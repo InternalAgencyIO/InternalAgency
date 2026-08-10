@@ -176,9 +176,11 @@ older unphased entry remains only for the pinned structural SBF fixture. The
 runtime captures the original delegate,
 performs an owner-signed exact `ApproveChecked` CPI, verifies its reload,
 requires ingress-PDA `invoke_signed` plus hook account expansion, verifies exact
-source/vault deltas and allowance consumption, runs the transaction-local
-persistence callback, restores the prior delegate, and refuses completion until
-the restoration reload is exact. Large preflight values are heap-bounded; the
+source/vault deltas and allowance consumption, and runs the retained V2
+checked-add and Position-construction finalizer. It restores the prior delegate,
+refuses completion until the restoration reload is exact, and only then supplies
+the exact completed Config/Position/Lane values to the transaction-local
+persistence callback. Large preflight and finalizer values are heap-bounded; the
 SBF stack gate and loopback rollback matrix pass. It still has no production
 account lifecycle, strict persisted Config/Position/Lane write, entrypoint,
 dispatcher, frozen identity, or public ABI; those remain the security boundary.

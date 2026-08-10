@@ -86,7 +86,12 @@ test("disposable programs encode the reviewed runtime boundary", async () => {
   assert.match(runtime, /approve_checked\(/u);
   assert.match(runtime, /add_extra_accounts_for_execute_cpi\(/u);
   assert.match(runtime, /invoke_signed\(/u);
-  assert.match(runtime, /persist_transaction_local_state\(plan, &post_transfer\)/u);
+  assert.match(runtime, /verify_ingress_approval\(/u);
+  assert.match(runtime, /apply_transfer_and_retained_v2_finalizer\(/u);
+  assert.match(runtime, /complete_stake_ingress\(/u);
+  assert.match(runtime, /persist_transaction_local_state\(plan, &completed\)/u);
+  assert.match(runtime, /retained_v2_post_cpi_finalizer_executed: true/u);
+  assert.match(runtime, /persistence_callback_after_restoration: true/u);
   assert.match(runtime, /retained_v2_post_cpi_persistence_complete: false/u);
   assert.match(runtime, /daily_law_capability_reauthenticated: true/u);
   assert.match(runtime, /canonical_mint_policy_reauthenticated: false/u);
@@ -155,6 +160,8 @@ test("current production-executor record binds source and preserves the release 
   assert.equal(record.productionExecutor.pureStakeIngressSourceSha256, sha256(pureStakeIngress));
   assert.equal(record.productionExecutor.publicEntrypoint, false);
   assert.equal(record.productionExecutor.retainedV2PostCpiPersistenceComplete, false);
+  assert.equal(record.productionExecutor.retainedV2PostCpiFinalizerExecuted, true);
+  assert.equal(record.productionExecutor.persistenceCallbackAfterRestoration, true);
   assert.equal(record.productionExecutor.dailyLawCapabilityReauthenticated, true);
   assert.equal(record.productionExecutor.canonicalConfidentialMintPolicyReauthenticated, false);
   assert.equal(record.limits.combinedDailyLawDecisionAndStakeIngressHookProven, true);
@@ -171,7 +178,9 @@ test("current production-executor record binds source and preserves the release 
   assert.equal(record.observed.lockedDailyLawPrecededHostileTokenParsing, true);
   assert.equal(record.observed.substitutedDailyLawRejectedBeforeTokenMutation, true);
   assert.equal(record.observed.sbfStackFrameLimitSatisfied, true);
-  assert.equal(record.observed.postTransferPersistenceCallbackFailureRolledBackApprovalAndTransfer, true);
+  assert.equal(record.observed.retainedV2PostCpiFinalizerExecuted, true);
+  assert.equal(record.observed.persistenceCallbackRanAfterExactDelegateRestoration, true);
+  assert.equal(record.observed.postFinalizerPersistenceCallbackFailureRolledBackFullSequence, true);
   assert.doesNotMatch(recordText, deprecatedIngressTerm);
   assert.equal(record.fixture.economy.sourceSha256, sha256(economy));
   assert.equal(record.fixture.hook.sourceSha256, sha256(hook));

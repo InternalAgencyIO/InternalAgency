@@ -42,9 +42,12 @@ use crate::{
         verify_daily_law_open_account_info, RuntimeAdapterError, RuntimeProductionActiveConfig,
     },
     stake_ingress::{
-        prepare_open_position_stake_ingress, DelegateRestorationIntent, DelegateSnapshot,
-        IngressPdaBinding, PrepareStakeIngressInput, SourceTokenState, StakeIngressExecutionPlan,
-        StakeIngressSpecError, STAKE_INGRESS_SEED,
+        apply_transfer_and_retained_v2_finalizer, complete_stake_ingress,
+        prepare_open_position_stake_ingress, verify_ingress_approval, ApprovedStakeIngressPlan,
+        CompletedStakeIngress, DelegateRestorationIntent, DelegateSnapshot, IngressPdaBinding,
+        PrepareStakeIngressInput, SourceTokenState, StakeIngressApprovalObservation,
+        StakeIngressExecutionPlan, StakeIngressPostCpiPlan, StakeIngressRestorationObservation,
+        StakeIngressSpecError, StakeIngressTransferObservation, STAKE_INGRESS_SEED,
     },
     CanonicalDailyLawBinding, EconomyError, PrepareOpenPositionInput, ReadonlyTokenState,
     ValidatedDailyLawWrite, TOKEN_DECIMALS,
@@ -63,6 +66,8 @@ pub struct StakeIngressRuntimeTruth {
     pub canonical_ingress_pda_derived: bool,
     pub transfer_hook_extra_accounts_resolved: bool,
     pub exact_cpi_reload_sequence_executed: bool,
+    pub retained_v2_post_cpi_finalizer_executed: bool,
+    pub persistence_callback_after_restoration: bool,
     pub callback_and_restoration_failures_are_transaction_atomic: bool,
     pub retained_v2_post_cpi_persistence_complete: bool,
     pub public_entrypoint_exposed: bool,
@@ -81,6 +86,8 @@ pub const STAKE_INGRESS_RUNTIME_TRUTH: StakeIngressRuntimeTruth = StakeIngressRu
     canonical_ingress_pda_derived: true,
     transfer_hook_extra_accounts_resolved: true,
     exact_cpi_reload_sequence_executed: true,
+    retained_v2_post_cpi_finalizer_executed: true,
+    persistence_callback_after_restoration: true,
     callback_and_restoration_failures_are_transaction_atomic: true,
     retained_v2_post_cpi_persistence_complete: false,
     public_entrypoint_exposed: false,
@@ -91,17 +98,11 @@ pub const STAKE_INGRESS_RUNTIME_TRUTH: StakeIngressRuntimeTruth = StakeIngressRu
 };
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub struct StakeIngressRuntimePostTransfer {
-    pub source: SourceTokenState,
-    pub stake: ReadonlyTokenState,
-    pub original_delegate: DelegateSnapshot,
-}
-
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct StakeIngressRuntimeReceipt {
     pub source_amount: u64,
     pub stake_amount: u64,
     pub original_delegate_restored: bool,
+    pub retained_v2_post_cpi_finalizer_executed: bool,
     pub transaction_local_persistence_callback_succeeded: bool,
 }
 
@@ -428,8 +429,9 @@ fn validate_accounts(
 /// handler must first authenticate Daily Law and the canonical mint, then call
 /// the pure ingress preparation boundary; this function cannot prove plan
 /// provenance by itself. The callback must apply the pure post-CPI V2 finalizer and persist the resulting
-/// Config/Position/Lane bytes; this primitive does not claim that handler work
-/// complete. Callback failure is intentionally inside the atomic CPI sequence.
+/// exact completed Config/Position/Lane values; this primitive does not claim
+/// that the callback is a production CAS or that handler work is complete.
+/// Callback failure is intentionally inside the atomic CPI sequence.
 #[inline(never)]
 pub fn execute_prepared_stake_ingress<'info, F>(
     program_id: &Pubkey,
@@ -438,7 +440,7 @@ pub fn execute_prepared_stake_ingress<'info, F>(
     persist_transaction_local_state: F,
 ) -> Result<StakeIngressRuntimeReceipt, StakeIngressRuntimeError>
 where
-    F: FnOnce(&StakeIngressExecutionPlan, &StakeIngressRuntimePostTransfer) -> ProgramResult,
+    F: FnOnce(&StakeIngressExecutionPlan, &CompletedStakeIngress) -> ProgramResult,
 {
     let (config, ingress_bump) = validate_accounts(program_id, plan, &accounts)?;
     let source_before =
@@ -454,64 +456,45 @@ where
         observe_stake_ingress_source(accounts.source, accounts.mint.key, accounts.owner.key)?;
     let stake_after_approval =
         observe_stake_ingress_vault(accounts.stake_vault, accounts.mint.key, &config)?;
-    if source_after_approval.token.amount != source_before.token.amount
-        || stake_after_approval.amount != stake_before.amount
-        || source_after_approval.delegate.delegate
-            != Some(*accounts.ingress_authority.key).map(|key| key.to_bytes())
-        || source_after_approval.delegate.delegated_amount != plan.open_position.principal
-    {
-        return Err(StakeIngressRuntimeError::ApprovalMismatch);
-    }
+    let approved = verify_ingress_approval_heap(
+        plan,
+        StakeIngressApprovalObservation {
+            source_after_approval,
+            stake_after_approval,
+        },
+    )?;
 
     invoke_ingress_transfer(plan, accounts, &config, ingress_bump)?;
     let source_after_transfer =
         observe_stake_ingress_source(accounts.source, accounts.mint.key, accounts.owner.key)?;
     let stake_after_transfer =
         observe_stake_ingress_vault(accounts.stake_vault, accounts.mint.key, &config)?;
-    if source_after_transfer.token.amount
-        != source_before
-            .token
-            .amount
-            .checked_sub(plan.open_position.principal)
-            .ok_or(StakeIngressRuntimeError::BalanceDeltaMismatch)?
-        || stake_after_transfer.amount
-            != stake_before
-                .amount
-                .checked_add(plan.open_position.principal)
-                .ok_or(StakeIngressRuntimeError::BalanceDeltaMismatch)?
-    {
-        return Err(StakeIngressRuntimeError::BalanceDeltaMismatch);
-    }
-    if source_after_transfer.delegate
-        != (DelegateSnapshot {
-            delegate: None,
-            delegated_amount: 0,
-        })
-    {
-        return Err(StakeIngressRuntimeError::DelegateNotConsumed);
-    }
-    let post_transfer = StakeIngressRuntimePostTransfer {
-        source: source_after_transfer,
-        stake: stake_after_transfer,
-        original_delegate: source_before.delegate,
-    };
-    persist_transaction_local_state(plan, &post_transfer)?;
+    let post_cpi = apply_transfer_and_retained_v2_finalizer_heap(
+        approved,
+        StakeIngressTransferObservation {
+            source_after_transfer,
+            stake_after_transfer,
+        },
+    )?;
 
     restore_original_delegate(plan, accounts)?;
     let source_after_restoration =
         observe_stake_ingress_source(accounts.source, accounts.mint.key, accounts.owner.key)?;
     let stake_after_restoration =
         observe_stake_ingress_vault(accounts.stake_vault, accounts.mint.key, &config)?;
-    if source_after_restoration.token.amount != source_after_transfer.token.amount
-        || stake_after_restoration.amount != stake_after_transfer.amount
-        || source_after_restoration.delegate != source_before.delegate
-    {
-        return Err(StakeIngressRuntimeError::DelegateRestorationMismatch);
-    }
+    let completed = complete_stake_ingress_heap(
+        post_cpi,
+        StakeIngressRestorationObservation {
+            source_after_restoration,
+            stake_after_restoration,
+        },
+    )?;
+    persist_transaction_local_state(plan, &completed)?;
     Ok(StakeIngressRuntimeReceipt {
         source_amount: source_after_restoration.token.amount,
         stake_amount: stake_after_restoration.amount,
         original_delegate_restored: true,
+        retained_v2_post_cpi_finalizer_executed: true,
         transaction_local_persistence_callback_succeeded: true,
     })
 }
@@ -538,7 +521,7 @@ pub fn execute_daily_law_authenticated_stake_ingress<'info, F>(
     persist_transaction_local_state: F,
 ) -> Result<DailyLawAuthenticatedStakeIngressReceipt, StakeIngressRuntimeError>
 where
-    F: FnOnce(&StakeIngressExecutionPlan, &StakeIngressRuntimePostTransfer) -> ProgramResult,
+    F: FnOnce(&StakeIngressExecutionPlan, &CompletedStakeIngress) -> ProgramResult,
 {
     let gate = authenticate_daily_law(law_binding, law_state, accounts.mint.key)?;
     execute_daily_law_authenticated_stake_ingress_with_gate(
@@ -566,7 +549,7 @@ pub fn execute_production_active_daily_law_authenticated_stake_ingress<'info, F>
     persist_transaction_local_state: F,
 ) -> Result<DailyLawAuthenticatedStakeIngressReceipt, StakeIngressRuntimeError>
 where
-    F: FnOnce(&StakeIngressExecutionPlan, &StakeIngressRuntimePostTransfer) -> ProgramResult,
+    F: FnOnce(&StakeIngressExecutionPlan, &CompletedStakeIngress) -> ProgramResult,
 {
     let gate = authenticate_daily_law(law_binding, law_state, accounts.mint.key)?;
     require_production_active_context(
@@ -594,7 +577,7 @@ fn execute_daily_law_authenticated_stake_ingress_with_gate<'info, F>(
     persist_transaction_local_state: F,
 ) -> Result<DailyLawAuthenticatedStakeIngressReceipt, StakeIngressRuntimeError>
 where
-    F: FnOnce(&StakeIngressExecutionPlan, &StakeIngressRuntimePostTransfer) -> ProgramResult,
+    F: FnOnce(&StakeIngressExecutionPlan, &CompletedStakeIngress) -> ProgramResult,
 {
     let daily_law_local_day = gate.local_day();
     let daily_law_account_sha256 = gate.law_account_sha256();
@@ -633,6 +616,36 @@ fn require_production_active_context(
         return Err(StakeIngressRuntimeError::ActiveConfigCapabilityMismatch);
     }
     Ok(())
+}
+
+#[inline(never)]
+fn verify_ingress_approval_heap(
+    plan: &StakeIngressExecutionPlan,
+    observed: StakeIngressApprovalObservation,
+) -> Result<Box<ApprovedStakeIngressPlan>, StakeIngressRuntimeError> {
+    verify_ingress_approval(*plan, observed)
+        .map(Box::new)
+        .map_err(map_stake_ingress_preparation_error)
+}
+
+#[inline(never)]
+fn apply_transfer_and_retained_v2_finalizer_heap(
+    approved: Box<ApprovedStakeIngressPlan>,
+    observed: StakeIngressTransferObservation,
+) -> Result<Box<StakeIngressPostCpiPlan>, StakeIngressRuntimeError> {
+    apply_transfer_and_retained_v2_finalizer(*approved, observed)
+        .map(Box::new)
+        .map_err(map_stake_ingress_preparation_error)
+}
+
+#[inline(never)]
+fn complete_stake_ingress_heap(
+    post_cpi: Box<StakeIngressPostCpiPlan>,
+    observed: StakeIngressRestorationObservation,
+) -> Result<Box<CompletedStakeIngress>, StakeIngressRuntimeError> {
+    complete_stake_ingress(*post_cpi, observed)
+        .map(Box::new)
+        .map_err(map_stake_ingress_preparation_error)
 }
 
 #[inline(never)]

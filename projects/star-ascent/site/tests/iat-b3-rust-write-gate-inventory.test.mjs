@@ -625,6 +625,14 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
   assert.match(economyStakeIngressRuntimeSource, /daily_law_capability_reauthenticated: true/u);
   assert.match(
     economyStakeIngressRuntimeSource,
+    /retained_v2_post_cpi_finalizer_executed: true/u,
+  );
+  assert.match(
+    economyStakeIngressRuntimeSource,
+    /persistence_callback_after_restoration: true/u,
+  );
+  assert.match(
+    economyStakeIngressRuntimeSource,
     /production_active_config_capability_required: true/u,
   );
   assert.match(

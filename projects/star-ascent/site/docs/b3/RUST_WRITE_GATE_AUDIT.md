@@ -358,8 +358,11 @@ timestamp, and local day before mint or token data parsing or CPI. It derives
 and binds the AccountInfo-backed ingress facts, runs the retained V2
 open-position preflight itself, and performs the
 exact Token-2022 approval, hooked transfer, reload, delegate restoration, and
-transaction-local persistence callback sequence. The large preflight values are
-heap-bounded and its SBF build has no over-limit stack frame. A loopback
+transaction-local sequence. It invokes the exact retained V2 checked-add and
+Position-construction finalizer after the transfer reload, proves exact delegate
+restoration, and only then supplies the completed Config/Position/Lane values to
+the persistence callback. The large preflight/finalizer values are heap-bounded
+and its SBF build has no over-limit stack frame. A loopback
 validator replay proves OPEN success plus unfinalized, locked, substituted-law,
 hostile-token-ordering, hook, CPI-guard, persistence, restoration, and later-CPI
 rollback. This still exposes no production lifecycle, serialized post-CPI

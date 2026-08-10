@@ -315,6 +315,7 @@ pub fn prepare_stake_ingress(
 /// ingress PDA and exact principal allowance without changing either public
 /// token balance. A transfer cannot be attempted from this model without this
 /// phase, even if the ingress PDA happened to be the source's prior delegate.
+#[inline(never)]
 pub fn verify_ingress_approval(
     plan: StakeIngressExecutionPlan,
     observed: StakeIngressApprovalObservation,
@@ -343,6 +344,7 @@ pub fn verify_ingress_approval(
 /// apply V2's post-CPI operations: checked-add tracked principal first and
 /// construct the Position second. All returned values remain provisional until
 /// [`complete_stake_ingress`] proves delegate restoration.
+#[inline(never)]
 pub fn apply_transfer_and_retained_v2_finalizer(
     approved: ApprovedStakeIngressPlan,
     observed: StakeIngressTransferObservation,
@@ -430,6 +432,7 @@ pub fn apply_transfer_and_retained_v2_finalizer(
 /// Prove exact restoration after the optional owner-signed ApproveChecked CPI.
 /// A mismatch returns no complete result; a real Solana adapter must propagate
 /// the error so approval, transfer, V2 writes, and restoration all roll back.
+#[inline(never)]
 pub fn complete_stake_ingress(
     post_cpi: StakeIngressPostCpiPlan,
     observed: StakeIngressRestorationObservation,
