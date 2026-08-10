@@ -41,6 +41,21 @@ function fail(message) {
   throw new Error(`${SCHEMA}: ${message}`);
 }
 
+const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+
+async function readWithRetry(label, operation, attempts = 10) {
+  let lastError;
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    try {
+      return await operation();
+    } catch (error) {
+      lastError = error;
+      if (attempt + 1 < attempts) await delay(Math.min(10_000, 750 * (2 ** attempt)));
+    }
+  }
+  throw new Error(`${SCHEMA}: ${label} failed after bounded retries`, { cause: lastError });
+}
+
 function args() {
   const values = new Map();
   for (let index = 2; index < process.argv.length; index += 2) {
@@ -89,7 +104,10 @@ function instruction({ program, payer, readonlySigner, writableDummy, readonlyDu
 }
 
 async function exactTransaction(connection, context, operationIndex, hostile = false) {
-  const latest = await connection.getLatestBlockhashAndContext("processed");
+  const latest = await readWithRetry(
+    "latest blockhash read",
+    () => connection.getLatestBlockhashAndContext("processed"),
+  );
   const tx = new Transaction({
     feePayer: context.payer.publicKey,
     recentBlockhash: latest.value.blockhash,
@@ -113,46 +131,62 @@ async function rawSimulation(rpc, latest, wire) {
       minContextSlot: latest.context.slot,
     }],
   };
-  const response = await fetch(rpc, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(body),
+  return readWithRetry("raw simulation", async () => {
+    const response = await fetch(rpc, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const json = await response.json();
+    if (!response.ok || json.id !== 1 || json.error || !json.result?.value) {
+      throw new Error(`invalid simulation response: ${response.status}`);
+    }
+    return json.result;
   });
-  const json = await response.json();
-  if (!response.ok || json.id !== 1 || json.error || !json.result?.value) fail("invalid simulation response");
-  return json.result;
 }
 
 async function finalizedTransaction(connection, signature, lastValidBlockHeight) {
   const deadline = Date.now() + 60_000;
   while (Date.now() < deadline) {
-    const response = await connection.getSignatureStatuses(
-      [signature],
-      { searchTransactionHistory: true },
+    const response = await readWithRetry(
+      "signature-status read",
+      () => connection.getSignatureStatuses(
+        [signature],
+        { searchTransactionHistory: true },
+      ),
     );
     const status = response.value[0];
     if (status?.err) fail(`transaction ${signature} failed: ${JSON.stringify(status.err)}`);
     if (status?.confirmationStatus === "finalized" || status?.confirmations === null) {
-      const transaction = await connection.getTransaction(signature, {
-        commitment: "finalized",
-        maxSupportedTransactionVersion: 0,
-      });
+      const transaction = await readWithRetry(
+        "finalized transaction read",
+        () => connection.getTransaction(signature, {
+          commitment: "finalized",
+          maxSupportedTransactionVersion: 0,
+        }),
+      );
       if (transaction?.meta?.err) {
         fail(`transaction ${signature} lacks exact finalized success evidence`);
       }
       if (transaction) return transaction;
     }
-    const blockHeight = await connection.getBlockHeight("processed");
+    const blockHeight = await readWithRetry(
+      "block-height read",
+      () => connection.getBlockHeight("processed"),
+    );
     if (!status && blockHeight > lastValidBlockHeight) {
       fail(`transaction ${signature} was never observed before blockhash expiry`);
     }
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await delay(750);
   }
   fail(`transaction ${signature} did not finalize within 60 seconds`);
 }
 
 async function frozenDeployment(connection, programId, artifact) {
-  const programInfo = await connection.getAccountInfo(programId, "finalized");
+  const programInfo = await readWithRetry(
+    "Program account read",
+    () => connection.getAccountInfo(programId, "finalized"),
+  );
   if (!programInfo?.executable || !programInfo.owner.equals(UPGRADEABLE_LOADER)) {
     fail("Devnet program is absent, non-executable, or owned by the wrong loader");
   }
@@ -161,7 +195,10 @@ async function frozenDeployment(connection, programId, artifact) {
     fail("Devnet Program account has the wrong upgradeable-loader shape");
   }
   const programDataAddress = new PublicKey(programState.subarray(4, 36));
-  const programDataInfo = await connection.getAccountInfo(programDataAddress, "finalized");
+  const programDataInfo = await readWithRetry(
+    "ProgramData account read",
+    () => connection.getAccountInfo(programDataAddress, "finalized"),
+  );
   if (!programDataInfo?.owner.equals(UPGRADEABLE_LOADER)) {
     fail("Devnet ProgramData account is absent or owned by the wrong loader");
   }
@@ -207,7 +244,7 @@ if (artifact.length !== ARTIFACT_BYTES || artifactSha256 !== ARTIFACT_SHA256) {
   fail("artifact bytes or SHA-256 differ from the reviewed structural preflight");
 }
 const connection = new Connection(input.rpc, "finalized");
-const genesisHash = await connection.getGenesisHash();
+const genesisHash = await readWithRetry("Genesis hash read", () => connection.getGenesisHash());
 let deployment = null;
 if (input.network === "devnet") {
   if (genesisHash !== DEVNET_GENESIS) fail("canonical Devnet Genesis hash mismatch");
@@ -247,6 +284,7 @@ for (let operationIndex = 0; operationIndex < operations.length; operationIndex 
     simulationSlot: simulation.context.slot,
     unitsConsumed: simulation.value.unitsConsumed,
   });
+  if (input.network === "devnet") await delay(1_500);
 }
 
 // Operation 7 has a readonly signer distinct from the fee payer, so removing

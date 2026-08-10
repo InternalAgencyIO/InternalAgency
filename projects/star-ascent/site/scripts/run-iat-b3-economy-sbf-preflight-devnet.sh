@@ -10,10 +10,17 @@ expected_artifact_bytes=21120
 expected_artifact_sha256="3bdffb2bcd9ee919e012d71522c8667883efea196ce5b58a2aef354b720a1588"
 minimum_payer_lamports=300000000
 
-[[ "${1:-}" == "--execute" && $# -eq 1 ]] || {
+mode=""
+resume_program=""
+if [[ "${1:-}" == "--execute" && $# -eq 1 ]]; then
+  mode="deploy"
+elif [[ "${1:-}" == "--resume-program" && $# -eq 2 && "${2:-}" =~ ^[1-9A-HJ-NP-Za-km-z]{32,44}$ ]]; then
+  mode="resume"
+  resume_program="$2"
+else
   printf '{"schema":"%s","status":"HOLD","reason":"explicit_execute_flag_required","publicNetworkWrites":false,"mainnetStatus":"HOLD"}\n' "$schema"
   exit 2
-}
+fi
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 site_dir=$(cd -- "$script_dir/.." && pwd -P)
@@ -104,11 +111,17 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-for key_name in program readonly-signer writable-dummy readonly-dummy; do
+for key_name in readonly-signer writable-dummy readonly-dummy; do
   solana-keygen new --no-bip39-passphrase --silent --force --outfile "$temp_dir/$key_name.json" >/dev/null 2>&1
   chmod 600 "$temp_dir/$key_name.json"
 done
-program_id=$(solana-keygen pubkey "$temp_dir/program.json")
+if [[ "$mode" == "deploy" ]]; then
+  solana-keygen new --no-bip39-passphrase --silent --force --outfile "$temp_dir/program.json" >/dev/null 2>&1
+  chmod 600 "$temp_dir/program.json"
+  program_id=$(solana-keygen pubkey "$temp_dir/program.json")
+else
+  program_id="$resume_program"
+fi
 readonly_signer=$(solana-keygen pubkey "$temp_dir/readonly-signer.json")
 writable_dummy=$(solana-keygen pubkey "$temp_dir/writable-dummy.json")
 readonly_dummy=$(solana-keygen pubkey "$temp_dir/readonly-dummy.json")
@@ -129,18 +142,46 @@ artifact_sha256=$(sha256sum "$artifact" | awk '{print $1}')
 printf '{"schema":"%s","status":"READY","mode":"canonical-devnet","rpc":"%s","genesisHash":"%s","payer":"%s","programId":"%s","artifact":{"bytes":%s,"sha256":"%s"},"publicNetworkWrites":false,"mainnetStatus":"HOLD"}\n' \
   "$schema" "$rpc_url" "$genesis" "$payer_pubkey" "$program_id" "$artifact_bytes" "$artifact_sha256"
 
-deploy_result=$(solana program deploy "$artifact" \
-  --program-id "$temp_dir/program.json" \
-  --keypair "$payer_path" \
-  --fee-payer "$payer_path" \
-  --upgrade-authority "$payer_path" \
-  --final \
-  --url "$rpc_url" \
-  --commitment finalized \
-  --use-rpc \
-  --output json-compact)
-printf '{"schema":"%s","status":"WRITE_OBSERVED","phase":"immutable_program_deploy","programId":"%s","cli":%s,"publicNetworkWrites":true,"mainnetStatus":"HOLD"}\n' \
-  "$schema" "$program_id" "$deploy_result"
+if [[ "$mode" == "deploy" ]]; then
+  deploy_result=$(solana program deploy "$artifact" \
+    --program-id "$temp_dir/program.json" \
+    --keypair "$payer_path" \
+    --fee-payer "$payer_path" \
+    --upgrade-authority "$payer_path" \
+    --final \
+    --url "$rpc_url" \
+    --commitment finalized \
+    --use-rpc \
+    --output json-compact)
+  printf '{"schema":"%s","status":"WRITE_OBSERVED","phase":"immutable_program_deploy","programId":"%s","cli":%s,"publicNetworkWrites":true,"mainnetStatus":"HOLD"}\n' \
+    "$schema" "$program_id" "$deploy_result"
+else
+  show_json=$(solana program show "$program_id" \
+    --keypair "$payer_path" \
+    --url "$rpc_url" \
+    --output json-compact)
+  PROGRAM_SHOW_JSON="$show_json" EXPECTED_PROGRAM_ID="$program_id" EXPECTED_BYTES="$expected_artifact_bytes" \
+    "$node_bin" -e '
+      const value = JSON.parse(process.env.PROGRAM_SHOW_JSON);
+      if (value.programId !== process.env.EXPECTED_PROGRAM_ID
+          || value.authority !== "none"
+          || value.dataLen !== Number(process.env.EXPECTED_BYTES)) process.exit(1);
+    ' || {
+      printf '{"schema":"%s","status":"FAIL","reason":"resume_program_is_not_exact_and_immutable","publicNetworkWrites":false}\n' "$schema"
+      exit 2
+    }
+  solana program dump "$program_id" "$temp_dir/deployed.so" \
+    --keypair "$payer_path" \
+    --url "$rpc_url" >/dev/null
+  deployed_bytes=$(wc -c < "$temp_dir/deployed.so" | tr -d '[:space:]')
+  deployed_sha256=$(sha256sum "$temp_dir/deployed.so" | awk '{print $1}')
+  [[ "$deployed_bytes" == "$expected_artifact_bytes" && "$deployed_sha256" == "$expected_artifact_sha256" ]] || {
+    printf '{"schema":"%s","status":"FAIL","reason":"resume_program_bytes_mismatch","publicNetworkWrites":false}\n' "$schema"
+    exit 2
+  }
+  printf '{"schema":"%s","status":"RECONCILED","phase":"immutable_program_resume","programId":"%s","artifact":{"bytes":%s,"sha256":"%s"},"publicNetworkWrites":false,"mainnetStatus":"HOLD"}\n' \
+    "$schema" "$program_id" "$deployed_bytes" "$deployed_sha256"
+fi
 
 for key_name in readonly-signer writable-dummy readonly-dummy; do
   recipient=$(solana-keygen pubkey "$temp_dir/$key_name.json")

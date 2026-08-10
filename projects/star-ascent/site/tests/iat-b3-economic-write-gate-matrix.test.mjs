@@ -277,6 +277,9 @@ test("the all-15 SBF surface is an exact structural preflight and never an econo
   assert.doesNotMatch(economySbfPreflightRunnerSource, /api\.devnet|api\.mainnet|api\.testnet/u);
   assert.match(economySbfPreflightDevnetRunnerSource, /\[\[ "\$\{1:-\}" == "--execute" && \$# -eq 1 \]\]/u);
   assert.match(economySbfPreflightDevnetRunnerSource, /solana program deploy "\$artifact"[\s\S]+--final/u);
+  assert.match(economySbfPreflightDevnetRunnerSource, /--resume-program/u);
+  assert.match(economySbfPreflightDevnetRunnerSource, /if \[\[ "\$mode" == "deploy" \]\]; then[\s\S]+solana program deploy/u);
+  assert.match(economySbfPreflightDevnetRunnerSource, /solana program dump "\$program_id"/u);
   assert.match(economySbfPreflightDevnetRunnerSource, /--network devnet/u);
   assert.match(economySbfPreflightDevnetRunnerSource, /temporaryAccountsRemoved":true/u);
   assert.doesNotMatch(economySbfPreflightDevnetRunnerSource, /mainnet-beta|api\.mainnet|api\.testnet/u);
