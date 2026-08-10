@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "id": "nightflight-guardian-film",
+    "title": "NIGHTFLIGHT: Signal Four Reunion",
+    "releaseVersion": "1.0.0",
+    "releaseTag": "nightflight-guardian-film-v1.0.0",
+    "platform": "Windows",
+    "deliveryMode": "deterministic-cinematic-photo-film"
+  },
+  "content": {
+    "sceneCount": 6,
+    "sceneDurationSeconds": 15,
+    "totalDurationSeconds": 90,
+    "dialogue": false,
+    "audio": false,
+    "captions": false,
+    "subtitles": false,
+    "promotionalTypography": false,
+    "cast": [
+      {
+        "name": "Radiance",
+        "fictionalAdultMinimumAge": 25,
+        "wardrobe": "opaque red, white, and blue couture latex"
+      },
+      {
+        "name": "Ellie",
+        "fictionalAdultMinimumAge": 25,
+        "wardrobe": "white Paris-fashion first-officer suit with red and blue piping"
+      },
+      {
+        "name": "Ece",
+        "fictionalAdultMinimumAge": 25,
+        "wardrobe": "cobalt Paris-fashion captain suit with red and white details"
+      },
+      {
+        "name": "Alia",
+        "fictionalAdultMinimumAge": 25,
+        "wardrobe": "fully lined red, white, and blue couture lace"
+      }
+    ],
+    "safety": {
+      "fullyClothed": true,
+      "consensual": true,
+      "nonExplicit": true,
+      "realPersonFaceReferences": false
+    }
+  },
+  "sourceKeyframes": [
+    {
+      "scene": 1,
+      "path": "source/keyframes/scene-01.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "a4310ee11b4fc02e82d0a646e5a08c0a6a4a0226957510f935b17796d07abf00"
+    },
+    {
+      "scene": 2,
+      "path": "source/keyframes/scene-02.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "25e09c075030fe78749abefc9e689cffa208f3cedce928574cf52b81e9ec1be0"
+    },
+    {
+      "scene": 3,
+      "path": "source/keyframes/scene-03.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "7c44e4e09eb48c74db28e9a720d6c77ca44a31d8f5a4f4968530aeef855dce93"
+    },
+    {
+      "scene": 4,
+      "path": "source/keyframes/scene-04.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "228221a33113192591ec1fa2e7742342186b20a061f64d31a69a2592eba0a372"
+    },
+    {
+      "scene": 5,
+      "path": "source/keyframes/scene-05.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "d82b1b1d592dded6e71da28ec4e55572f5dafbaa9786e2a1d9a3d2df714322e8"
+    },
+    {
+      "scene": 6,
+      "path": "source/keyframes/scene-06.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "7fef7a625451cb6516499868f8a1343ede8d560af204d8b5fb2b23778f09e5f0"
+    }
+  ],
+  "references": [
+    {
+      "subject": "Radiance",
+      "path": "source/references/radiance-face-anchor.webp",
+      "sha256": "6ad570bc5e31c54b958f779585e5a5766149346a2ac6c63d2b02ca1e5d6db468"
+    },
+    {
+      "subject": "Ellie",
+      "path": "source/references/ellie-face-anchor.webp",
+      "sha256": "45152296b1b95acb8fa1e17b4909a2f2a4231b9f295bdcdd3d292f87ecb7f325"
+    },
+    {
+      "subject": "Ece",
+      "path": "source/references/ece-face-anchor.webp",
+      "sha256": "dd721d29a9b04d4a5ddeeb812b21e2fe417cbbe62343876fbc5a46f1f1e1ddc6"
+    },
+    {
+      "subject": "Alia",
+      "path": "source/references/alia-face-anchor.webp",
+      "sha256": "ffee39f5261e84f5cd59ce088a240e2090713ffa15bef301803b36dcb59474c1"
+    },
+    {
+      "subject": "NIGHTFLIGHT main environment",
+      "path": "source/references/nightflight-environment-main.png",
+      "sha256": "fcaa276befc7e9623aaaccad3013156dc1c297d63e5f9fcba11f6b597123b247"
+    },
+    {
+      "subject": "NIGHTFLIGHT upstairs suite",
+      "path": "source/references/nightflight-environment-suite.png",
+      "sha256": "9c66d9923dfb5316d4be0be6f3f18ec14159aaa0de34af1bfbea7340aa925858"
+    },
+    {
+      "subject": "Codex Guardian sanitized UI practical",
+      "path": "source/references/codex-guardian-ui.png",
+      "sha256": "164d37921e38e521d5635ca0638703ce47278fafce8cd6efe2b1e2eafaa83e1b"
+    },
+    {
+      "subject": "Signal Four provenance",
+      "path": "source/references/signal-four-asset-provenance.json",
+      "sha256": "4887beb9d68b031ac37e3e327f68bfe933dfb7870107907d239b2eb8d9dd6ffd"
+    }
+  ],
+  "render": {
+    "script": "scripts/render-photo-film.ps1",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "workingScaleMethod": "Lanczos",
+    "cameraMethod": "deterministic animated crop",
+    "temporalTreatment": "restrained FFmpeg temporal film noise",
+    "encoder": {
+      "codec": "libx264",
+      "preset": "fast",
+      "crf": 18,
+      "pixelFormat": "yuv420p",
+      "colorSpace": "bt709"
+    },
+    "portableFfmpeg": {
+      "distribution": "Gyan FFmpeg 9.0 essentials Windows build",
+      "archive": "ffmpeg-9.0-essentials_build.zip",
+      "archiveBytes": 111167378,
+      "archiveSha256": "e6b54767a6065919048f1a098eb27211ca4e12b4348a05d88777a5855d0b6e71",
+      "redistributedWithProject": false
+    },
+    "guardianPractical": {
+      "scene": 1,
+      "sourceX": 1488,
+      "sourceY": 205,
+      "sourceWidth": 82,
+      "firstOutputFrame": 0,
+      "lastOutputFrame": 299,
+      "frameCount": 300,
+      "durationSeconds": 10,
+      "absentFromOutputFrames": "300-2699"
+    }
+  },
+  "outputContract": {
+    "sceneFiles": 6,
+    "sceneFrames": 450,
+    "sceneDurationSeconds": 15,
+    "masterFile": "NIGHTFLIGHT-Guardian-Film-v1.0.0-2160p-H264.mp4",
+    "codec": "h264",
+    "width": 3840,
+    "height": 2160,
+    "pixelFormat": "yuv420p",
+    "framesPerSecond": 30,
+    "masterFrames": 2700,
+    "masterDurationSeconds": 90,
+    "videoStreams": 1,
+    "audioStreams": 0,
+    "subtitleStreams": 0
+  },
+  "experimentalFullMotionAttempt": {
+    "engine": "FramePack I2V",
+    "status": "failed-no-deliverable",
+    "usedInRelease": false,
+    "firstLatentSectionElapsed": "07:36:15",
+    "secondSectionElapsed": "03:42:18",
+    "thirdSectionProgressPercent": 60,
+    "reason": "Low-RAM model swapping and a GPU shared with normal desktop and virtual-machine workloads made completion impractical and interruption-prone.",
+    "details": "production/FRAMEPACK_ATTEMPT.md"
+  },
+  "verifiedMaster": {
+    "bytes": 156279934,
+    "sha256": "a0e1a8e7fd4e9cca548bda85589dc28bc732b0ab5be6d95a2b8f7ac4cfd1b549",
+    "visualQa": {
+      "sceneMidpointsReviewed": true,
+      "guardianFrame299Present": true,
+      "guardianFrame300Absent": true
+    }
+  },
+  "licensing": {
+    "code": "MIT",
+    "generatedArtworkAndFilm": "CC0 to the extent the project owns the rights"
+  }
+}

@@ -11,6 +11,7 @@
 | **Radiance** | A living high-fashion AI desktop companion. | Source, scene manifest, local production flow, tests, and releases live in this repository. | Active |
 | **STAR ASCENT** | A bilingual public culture, launch, and evidence project. | [Live source](projects/star-ascent/site), [project guide](projects/star-ascent/README.md), [English site](https://internalagency.io), [Turkish site](https://ileriakil.com). | Live build |
 | **Codex Guardian** | A configurable Windows focus guard for Codex work. | [Source and guide](projects/codex-guardian), [stable portable release](https://github.com/InternalAgencyIO/InternalAgency/releases/tag/codex-guardian-v1.0.0). | Stable v1.0.0 |
+| **NIGHTFLIGHT: Signal Four Reunion** | A six-scene, 90-second 4K cinematic photo-film and its reproducible renderer. | [Keyframes, prompts, provenance, render scripts, and release record](projects/nightflight-guardian-film). | Released |
 
 ## STAR ASCENT — live public build
 
