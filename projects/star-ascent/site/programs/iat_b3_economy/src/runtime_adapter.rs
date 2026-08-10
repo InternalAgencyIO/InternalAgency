@@ -255,6 +255,7 @@ pub fn authenticate_system_payer_account_info(
     })
 }
 
+#[inline(never)]
 pub fn authenticate_state_account_info(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,
@@ -327,6 +328,7 @@ pub fn parse_config_genesis_account_info(
 
 /// Authenticate one existing strict state account from `AccountInfo` and
 /// prepare its owned CAS postimage. This does not reborrow or write the account.
+#[inline(never)]
 pub fn prepare_existing_state_write_account_info(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,

@@ -100,7 +100,7 @@ done
 solana cluster-version --url "$rpc_url" >/dev/null
 solana airdrop 10 "$payer_pubkey" --url "$rpc_url" --commitment finalized >/dev/null
 
-for mode in zero prefunded rollback; do
+for mode in zero update update-rollback prefunded rollback; do
   "$node_bin" "$(to_node_path "$driver")" \
     --mode "$mode" \
     --rpc "$rpc_url" \
@@ -110,4 +110,4 @@ done
 
 cleanup
 trap - EXIT INT TERM
-printf '{"schema":"%s","status":"PASS","phase":"summary","realSystemCpiObserved":true,"canonicalPdaSigningObserved":true,"prefundedAllocateAssignFundObserved":true,"transactionRollbackObserved":true,"syntheticDailyLawFixture":true,"publicNetworkWrites":false,"fullFeatureDevnetRehearsalComplete":false,"activationReady":false,"mainnetStatus":"HOLD","temporaryLedgerRemoved":true,"validatorStopped":true,"generatedKeyMaterialRemoved":true}\n' "$schema"
+printf '{"schema":"%s","status":"PASS","phase":"summary","realSystemCpiObserved":true,"canonicalPdaSigningObserved":true,"prefundedAllocateAssignFundObserved":true,"existingStateCasObserved":true,"transactionRollbackObserved":true,"syntheticDailyLawFixture":true,"publicNetworkWrites":false,"fullFeatureDevnetRehearsalComplete":false,"activationReady":false,"mainnetStatus":"HOLD","temporaryLedgerRemoved":true,"validatorStopped":true,"generatedKeyMaterialRemoved":true}\n' "$schema"

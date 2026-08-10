@@ -5,8 +5,10 @@ use iat_b3_economy::native_adapter::{
 };
 use iat_b3_economy::runtime_account_lifecycle::execute_create_state_batch_account_infos;
 use iat_b3_economy::runtime_adapter::{
-    prepare_create_state_account_info, verify_daily_law_open_account_info,
+    prepare_create_state_account_info, prepare_existing_state_write_account_info,
+    verify_daily_law_open_account_info,
 };
+use iat_b3_economy::runtime_write_adapter::execute_existing_write_batch_account_infos;
 use iat_b3_economy::{CanonicalDailyLawBinding, EligibilityState};
 use solana_account_info::{next_account_info, AccountInfo};
 use solana_program_entrypoint::ProgramResult;
@@ -67,6 +69,8 @@ pub fn process_instruction(
         0 => execute_single(program_id, accounts, OPERATOR_ZERO_LAMPORT, false),
         1 => execute_single(program_id, accounts, OPERATOR_PREFUNDED, false),
         2 => execute_single(program_id, accounts, OPERATOR_ROLLBACK, true),
+        3 => execute_existing(program_id, accounts, false),
+        4 => execute_existing(program_id, accounts, true),
         _ => Err(RehearsalError::InvalidInstruction.into()),
     }
 }
@@ -160,6 +164,73 @@ fn execute_single(
         system,
     )
     .map_err(|_| RehearsalError::LifecycleFailed)?;
+    if inject_rollback {
+        Err(RehearsalError::InjectedRollback.into())
+    } else {
+        Ok(())
+    }
+}
+
+#[inline(never)]
+fn prepare_existing_batch(
+    gate: &iat_b3_economy::ValidatedDailyLawWrite,
+    native: &NativeEconomyBinding,
+    target: &AccountInfo<'_>,
+    inject_rollback: bool,
+) -> Result<iat_b3_economy::native_adapter::AtomicWriteBatch<1>, ProgramError> {
+    let identity = PdaIdentity::Eligibility {
+        config: native.config(),
+        operator: OPERATOR_ZERO_LAMPORT,
+    };
+    let derived = derive_pda(native, identity).map_err(|_| RehearsalError::InvalidTarget)?;
+    if target.key.to_bytes() != derived.key {
+        return Err(RehearsalError::InvalidTarget.into());
+    }
+    let next = StrictStateValue::Eligibility(EligibilityState {
+        config: native.config(),
+        wallet: OPERATOR_ZERO_LAMPORT,
+        agency_index: if inject_rollback { 1 } else { 0 },
+        role: if inject_rollback { 2 } else { 1 },
+        bump: derived.bump,
+    });
+    seal_atomic_write_batch(
+        gate,
+        native,
+        [
+            prepare_existing_state_write_account_info(gate, native, target, identity, next)
+                .map_err(|_| RehearsalError::InvalidTarget)?,
+        ],
+    )
+    .map_err(|_| RehearsalError::BatchSealFailed.into())
+}
+
+#[inline(never)]
+fn apply_existing_batch(
+    gate: &iat_b3_economy::ValidatedDailyLawWrite,
+    native: &NativeEconomyBinding,
+    target: &AccountInfo<'_>,
+    batch: iat_b3_economy::native_adapter::AtomicWriteBatch<1>,
+) -> ProgramResult {
+    execute_existing_write_batch_account_infos(gate, native, batch, core::slice::from_ref(target))
+        .map(|_| ())
+        .map_err(|_| RehearsalError::LifecycleFailed.into())
+}
+
+#[inline(never)]
+fn execute_existing(
+    program_id: &Pubkey,
+    accounts: &[AccountInfo<'_>],
+    inject_rollback: bool,
+) -> ProgramResult {
+    if accounts.len() != 2 {
+        return Err(RehearsalError::InvalidAccountCount.into());
+    }
+    let account_iter = &mut accounts.iter();
+    let law_state = next_account_info(account_iter)?;
+    let target = next_account_info(account_iter)?;
+    let (gate, native) = bindings(program_id, law_state)?;
+    let batch = prepare_existing_batch(&gate, &native, target, inject_rollback)?;
+    apply_existing_batch(&gate, &native, target, batch)?;
     if inject_rollback {
         Err(RehearsalError::InjectedRollback.into())
     } else {

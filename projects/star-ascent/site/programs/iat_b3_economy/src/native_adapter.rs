@@ -1025,6 +1025,8 @@ impl StateWriteIntent {
     }
 }
 
+// Preserve the fixed preimage and postimage in an isolated SBF frame.
+#[inline(never)]
 pub fn prepare_existing_state_write(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,

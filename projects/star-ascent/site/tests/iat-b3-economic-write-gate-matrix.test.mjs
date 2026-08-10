@@ -589,11 +589,13 @@ test("the local lifecycle fixture proves SBF CPI without becoming a production s
     accountLifecycleFixtureSource,
     /execute_create_state_batch_account_infos/u,
   );
+  assert.match(accountLifecycleFixtureSource, /execute_existing_write_batch_account_infos/u);
   assert.match(accountLifecycleFixtureSource, /verify_daily_law_open_account_info/u);
   assert.match(accountLifecycleFixtureSource, /prepare_create_state_account_info/u);
   assert.match(accountLifecycleFixtureSource, /InjectedRollback = 909/u);
   assert.match(accountLifecycleLocalDriverSource, /systemCpiCount/u);
   assert.match(accountLifecycleLocalDriverSource, /rollbackObserved/u);
+  assert.match(accountLifecycleLocalDriverSource, /existingStateCasObserved/u);
   assert.match(accountLifecycleLocalDriverSource, /syntheticDailyLawFixture: true/u);
   assert.match(accountLifecycleLocalDriverSource, /productionInstructionAbiFrozen: false/u);
   assert.match(accountLifecycleLocalDriverSource, /activationReady: false/u);
@@ -613,10 +615,14 @@ test("the local lifecycle fixture proves SBF CPI without becoming a production s
   for (const [source, functionName] of [
     [economySource, "verify_daily_law_open"],
     [economyNativeAdapterSource, "prepare_create_state_account"],
+    [economyNativeAdapterSource, "prepare_existing_state_write"],
     [economyNativeAdapterSource, "seal_atomic_write_batch"],
+    [economyRuntimeAdapterSource, "authenticate_state_account_info"],
+    [economyRuntimeAdapterSource, "prepare_existing_state_write_account_info"],
     [economyRuntimeAdapterSource, "verify_daily_law_open_account_info"],
     [economyRuntimeAdapterSource, "prepare_create_state_account_info"],
     [economyRuntimeAccountLifecycleSource, "execute_create_state_batch_account_infos"],
+    [economyRuntimeWriteAdapterSource, "execute_existing_write_batch_account_infos"],
   ]) {
     assert.match(
       source,

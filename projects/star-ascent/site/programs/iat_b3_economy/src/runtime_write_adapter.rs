@@ -97,6 +97,8 @@ impl<const N: usize> RuntimeWriteReceipt<N> {
 /// before the first `copy_from_slice`. A failure therefore leaves all supplied
 /// account data unchanged. The returned receipt is a deterministic local fact;
 /// it is not release, deployment, or Mainnet evidence.
+// Keep the validated batch and mutable borrow set in a distinct SBF frame.
+#[inline(never)]
 pub fn execute_existing_write_batch_account_infos<const N: usize>(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,

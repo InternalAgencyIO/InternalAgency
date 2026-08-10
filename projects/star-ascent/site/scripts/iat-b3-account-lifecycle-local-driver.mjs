@@ -146,14 +146,20 @@ function instructionData(opcode) {
 }
 
 function buildInstruction(lawState, payer, targets, opcode) {
+  const keys = opcode >= 3
+    ? [
+        { pubkey: lawState, isSigner: false, isWritable: false },
+        { pubkey: targets[0], isSigner: false, isWritable: true },
+      ]
+    : [
+        { pubkey: lawState, isSigner: false, isWritable: false },
+        { pubkey: payer, isSigner: true, isWritable: true },
+        ...targets.map((pubkey) => ({ pubkey, isSigner: false, isWritable: true })),
+        { pubkey: SystemProgram.programId, isSigner: false, isWritable: false },
+      ];
   return new TransactionInstruction({
     programId: PROGRAM_ID,
-    keys: [
-      { pubkey: lawState, isSigner: false, isWritable: false },
-      { pubkey: payer, isSigner: true, isWritable: true },
-      ...targets.map((pubkey) => ({ pubkey, isSigner: false, isWritable: true })),
-      { pubkey: SystemProgram.programId, isSigner: false, isWritable: false },
-    ],
+    keys,
     data: instructionData(opcode),
   });
 }
@@ -231,13 +237,20 @@ async function execute(values) {
   } else if (mode === "rollback") {
     targets = [addresses.rollbackOne];
     opcode = 2;
+  } else if (mode === "update") {
+    targets = [addresses.zero];
+    opcode = 3;
+  } else if (mode === "update-rollback") {
+    targets = [addresses.zero];
+    opcode = 4;
   } else {
     throw new Error(`unknown mode: ${mode}`);
   }
 
   const beforePayer = await connection.getBalance(payer.publicKey, "finalized");
   const beforeTargets = await connection.getMultipleAccountsInfo(targets, "finalized");
-  const expectedFailure = mode === "rollback";
+  const existingMode = mode === "update" || mode === "update-rollback";
+  const expectedFailure = mode === "rollback" || mode === "update-rollback";
   const result = await send(
     connection,
     payer,
@@ -249,7 +262,26 @@ async function execute(values) {
   const logs = result.transaction.meta.logMessages ?? [];
   const systemCpiCount = logs.filter((line) => line.includes(SYSTEM_CPI_LOG)).length;
 
-  if (expectedFailure) {
+  if (existingMode) {
+    assert(beforeTargets[0], "existing CAS target is missing");
+    assert(afterTargets[0], "existing CAS target disappeared");
+    assert.equal(systemCpiCount, 0, "existing CAS unexpectedly invoked the System Program");
+    assert.equal(afterPayer, beforePayer - result.transaction.meta.fee, "CAS payer fee mismatch");
+    if (expectedFailure) {
+      assert.deepEqual(result.transaction.meta.err, { InstructionError: [0, { Custom: 909 }] });
+      assert(
+        afterTargets[0].data.equals(beforeTargets[0].data),
+        "failed CAS write was not rolled back",
+      );
+    } else {
+      assert.equal(result.transaction.meta.err, null, "existing CAS transaction failed");
+      assert(!afterTargets[0].data.equals(beforeTargets[0].data), "CAS postimage did not change");
+      assert.equal(afterTargets[0].data.readUInt32LE(80), 0, "CAS agency index mismatch");
+      assert.equal(afterTargets[0].data[84], 1, "CAS role mismatch");
+      assert.equal(afterTargets[0].lamports, beforeTargets[0].lamports);
+      assert(afterTargets[0].owner.equals(PROGRAM_ID));
+    }
+  } else if (expectedFailure) {
     assert.deepEqual(result.transaction.meta.err, { InstructionError: [0, { Custom: 909 }] });
     assert(beforeTargets.every((account) => account === null));
     assert(afterTargets.every((account) => account === null), "rollback target survived");
@@ -279,7 +311,8 @@ async function execute(values) {
     phase: mode,
     signature: result.signature,
     systemCpiCount,
-    canonicalPdaSignerObserved: true,
+    canonicalPdaSignerObserved: !existingMode,
+    existingStateCasObserved: existingMode && !expectedFailure,
     sealedPostimageObserved: !expectedFailure,
     rollbackObserved: expectedFailure,
     syntheticDailyLawFixture: true,
