@@ -256,6 +256,16 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
   assert.match(economyRuntimeWriteAdapterSource, /mainnet_hold: true/u);
   assert.match(economySource, /#\[cfg\(feature = "runtime-account-lifecycle"\)\]\s+pub mod runtime_account_lifecycle;/u);
   assert.match(economyRuntimeAccountLifecycleSource, /execute_create_state_batch_account_infos/u);
+  assert.match(
+    economyRuntimeAccountLifecycleSource,
+    /execute_production_active_create_state_batch_account_infos/u,
+  );
+  assert.match(
+    economyRuntimeAccountLifecycleSource,
+    /production_active_config_capability_required: true/u,
+  );
+  assert.match(economyRuntimeAccountLifecycleSource, /RuntimeProductionActiveConfig/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /ActiveConfigCapabilityMismatch/u);
   assert.match(economyRuntimeAccountLifecycleSource, /all_preconditions_checked_before_first_cpi: true/u);
   assert.match(economyRuntimeAccountLifecycleSource, /canonical_internal_pda_signer_seeds_only: true/u);
   assert.match(economyRuntimeAccountLifecycleSource, /system_create_account_supported: true/u);

@@ -662,17 +662,20 @@ transition, and all public exposure remain blocked, so this primitive is not a
 Devnet economic handler or a Mainnet authorization.
 
 The separate `runtime-account-lifecycle` feature now executes only sealed PDA
-create batches. It validates all target and system-payer preimages before the
-first CPI, reconstructs canonical signer seeds internally, and supports the
-exact zero-lamport `CreateAccount` or prefunded
+create batches. Its production entry requires the opaque production-ACTIVE
+Config capability bound to the same exact Daily Law observation before System
+Program validation, account borrows, or CPI. It then validates all target and
+system-payer preimages before the first CPI, reconstructs canonical signer
+seeds internally, and supports the exact zero-lamport `CreateAccount` or prefunded
 `Allocate`/`Assign`/missing-rent-funding sequence. It then requires exact
 post-CPI owner, lamports, zeroed codec length, and payer debit before copying
 the sealed initial postimage. A failure after the first CPI relies on Solana's
-atomic transaction rollback. This is a real internal System Program CPI
-primitive, but it has no arbitrary seed/owner/instruction input, Token-2022
-CPI, production instruction ABI, entrypoint, dispatcher, public exposure, or
-production identity freeze. It has not executed on Devnet, completes no
-handler, and leaves Mainnet HOLD.
+atomic transaction rollback. The older unphased executor is retained only for
+the pinned local structural lifecycle fixture. This is a real internal System
+Program CPI primitive, but it has no arbitrary seed/owner/instruction input,
+Token-2022 CPI, production instruction ABI, entrypoint, dispatcher, public
+exposure, or production identity freeze. It has not executed on Devnet,
+completes no handler, and leaves Mainnet HOLD.
 
 ## Internal V2 mutation paths
 

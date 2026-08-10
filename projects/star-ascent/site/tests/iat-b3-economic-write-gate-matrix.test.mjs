@@ -573,6 +573,16 @@ test("the runtime account lifecycle executes only sealed canonical System CPI ba
     /#\[cfg\(feature = "runtime-account-lifecycle"\)\]\s+pub mod runtime_account_lifecycle;/u,
   );
   assert.match(economyRuntimeAccountLifecycleSource, /pub fn execute_create_state_batch_account_infos/u);
+  assert.match(
+    economyRuntimeAccountLifecycleSource,
+    /pub fn execute_production_active_create_state_batch_account_infos/u,
+  );
+  assert.match(
+    economyRuntimeAccountLifecycleSource,
+    /production_active_config_capability_required: true/u,
+  );
+  assert.match(economyRuntimeAccountLifecycleSource, /RuntimeProductionActiveConfig/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /ActiveConfigCapabilityMismatch/u);
   assert.match(economyRuntimeAccountLifecycleSource, /validate_atomic_write_preconditions/u);
   assert.match(economyRuntimeAccountLifecycleSource, /with_pda_signer_seeds/u);
   assert.match(economyRuntimeAccountLifecycleSource, /system_instruction::create_account/u);

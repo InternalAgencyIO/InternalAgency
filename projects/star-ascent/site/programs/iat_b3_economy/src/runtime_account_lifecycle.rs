@@ -1,7 +1,8 @@
 //! Feature-gated execution of sealed B3 PDA account-creation intents.
 //!
 //! This is an internal lifecycle primitive, not an instruction handler. It
-//! accepts only an [`AtomicWriteBatch`] sealed by the native adapter, validates
+//! Its production entry accepts only an [`AtomicWriteBatch`] sealed by the
+//! native adapter after an opaque production-ACTIVE Config capability, validates
 //! every target and payer preimage before the first CPI, reconstructs canonical
 //! PDA signer seeds inside this crate, performs only the exact System Program
 //! create/allocate/assign/fund sequence, and writes only the sealed postimages.
@@ -19,6 +20,7 @@ use crate::native_adapter::{
     CreatePdaLifecycle, NativeAccountObservation, NativeAdapterError, NativeEconomyBinding,
     StateWriteIntent,
 };
+use crate::runtime_adapter::RuntimeProductionActiveConfig;
 use crate::ValidatedDailyLawWrite;
 use solana_account_info::AccountInfo;
 use solana_cpi::{invoke, invoke_signed};
@@ -34,6 +36,7 @@ pub const RUNTIME_ACCOUNT_LIFECYCLE_STATUS: &str =
 pub struct RuntimeAccountLifecycleTruth {
     pub feature_gated: bool,
     pub daily_law_capability_required: bool,
+    pub production_active_config_capability_required: bool,
     pub sealed_create_intents_only: bool,
     pub all_preconditions_checked_before_first_cpi: bool,
     pub canonical_internal_pda_signer_seeds_only: bool,
@@ -53,6 +56,7 @@ pub const RUNTIME_ACCOUNT_LIFECYCLE_TRUTH: RuntimeAccountLifecycleTruth =
     RuntimeAccountLifecycleTruth {
         feature_gated: true,
         daily_law_capability_required: true,
+        production_active_config_capability_required: true,
         sealed_create_intents_only: true,
         all_preconditions_checked_before_first_cpi: true,
         canonical_internal_pda_signer_seeds_only: true,
@@ -87,6 +91,7 @@ pub enum RuntimeAccountLifecycleError {
     PostCpiPayerLamportMismatch,
     PostCpiDataLengthMismatch,
     PostCpiDataNotZero,
+    ActiveConfigCapabilityMismatch,
 }
 
 impl From<NativeAdapterError> for RuntimeAccountLifecycleError {
@@ -223,7 +228,9 @@ impl SystemCpiInvoker for SolanaSystemCpi {
     }
 }
 
-/// Execute a sealed batch containing only new PDA state accounts.
+/// Execute a sealed batch for the pinned structural lifecycle rehearsal.
+/// Production callers must use
+/// [`execute_production_active_create_state_batch_account_infos`].
 ///
 /// All immutable target and payer observations are held and validated before
 /// the first CPI. A CPI or post-CPI validation failure returns an error so the
@@ -249,6 +256,55 @@ pub fn execute_create_state_batch_account_infos<'a, const N: usize>(
         system,
         &mut SolanaSystemCpi,
     )
+}
+
+/// Production-shaped PDA creation path. The opaque Config capability is
+/// checked before System Program validation, account-count checks, borrows, or
+/// the first CPI, so an inactive/staging/rehearsal Config cannot reach account
+/// lifecycle execution.
+#[inline(never)]
+pub fn execute_production_active_create_state_batch_account_infos<'a, const N: usize>(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    batch: AtomicWriteBatch<N>,
+    targets: &[AccountInfo<'a>],
+    payers: &[AccountInfo<'a>],
+    system: &AccountInfo<'a>,
+) -> Result<RuntimeAccountLifecycleReceipt<N>, RuntimeAccountLifecycleError> {
+    execute_production_active_create_state_batch_with(
+        gate,
+        active_config,
+        binding,
+        batch,
+        targets,
+        payers,
+        system,
+        &mut SolanaSystemCpi,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn execute_production_active_create_state_batch_with<'a, const N: usize>(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    batch: AtomicWriteBatch<N>,
+    targets: &[AccountInfo<'a>],
+    payers: &[AccountInfo<'a>],
+    system: &AccountInfo<'a>,
+    invoker: &mut impl SystemCpiInvoker,
+) -> Result<RuntimeAccountLifecycleReceipt<N>, RuntimeAccountLifecycleError> {
+    if active_config.program_id() != binding.program_id()
+        || active_config.mint() != binding.mint()
+        || active_config.key() != binding.config()
+        || active_config.law_account_sha256() != gate.law_account_sha256()
+        || active_config.law_unix_timestamp() != gate.unix_timestamp()
+        || active_config.law_local_day() != gate.local_day()
+    {
+        return Err(RuntimeAccountLifecycleError::ActiveConfigCapabilityMismatch);
+    }
+    execute_create_state_batch_with(gate, binding, batch, targets, payers, system, invoker)
 }
 
 #[inline(never)]
@@ -487,9 +543,11 @@ mod tests {
         prepare_create_state_account, seal_atomic_write_batch, PdaIdentity, StrictStateValue,
     };
     use crate::{
-        decode_eligibility_state, verify_daily_law_open, CanonicalDailyLawBinding,
-        EligibilityState, ReadonlyDailyLawAccount, LAW_STATE_LEN, LAW_STATE_MAGIC,
-        LAW_STATE_VERSION,
+        decode_eligibility_state, encode_config_genesis_state,
+        runtime_adapter::authenticate_production_active_config_account_info, verify_daily_law_open,
+        CanonicalDailyLawBinding, ConfigGenesisState, ConfigState, EligibilityState, GenesisPhase,
+        ReadonlyDailyLawAccount, CONFIG_GENESIS_ACCOUNT_LEN, LAW_STATE_LEN, LAW_STATE_MAGIC,
+        LAW_STATE_VERSION, MAINNET_SUPPLY,
     };
     use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day, SolanaDailyDecision};
     use solana_sdk_ids::system_program;
@@ -518,6 +576,40 @@ mod tests {
             CLOCK_TIMESTAMP,
         )
         .unwrap()
+    }
+
+    fn production_active_config(
+        gate: &ValidatedDailyLawWrite,
+        binding: &NativeEconomyBinding,
+    ) -> RuntimeProductionActiveConfig {
+        let state = ConfigGenesisState {
+            phase: GenesisPhase::Active,
+            config: ConfigState {
+                admin: [0x21; 32],
+                mint: MINT,
+                token_program: [0x33; 32],
+                randomness_program: [0x44; 32],
+                stake_token_account: [0x55; 32],
+                agency_registry_hash: [0; 32],
+                genesis_timestamp: CLOCK_TIMESTAMP - 60,
+                expected_supply: MAINNET_SUPPLY,
+                staked_principal: 1_000,
+                agency_count: 0,
+                rehearsal_mode: false,
+                active: true,
+                lane_mask: 0b1_1110,
+                stake_vault_initialized: true,
+                bump: binding.config_bump(),
+                vault_authority_bump: 202,
+            },
+        };
+        let mut data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+        encode_config_genesis_state(&state, &mut data).unwrap();
+        let key = binding.config().into();
+        let owner = binding.program_id().into();
+        let mut lamports = 1;
+        let account = AccountInfo::new(&key, false, false, &mut lamports, &mut data, &owner, false);
+        authenticate_production_active_config_account_info(gate, binding, &account).unwrap()
     }
 
     fn decision_for_inputs(timestamp: i64) -> SolanaDailyDecision {
@@ -810,6 +902,7 @@ mod tests {
     fn vacant_and_prefunded_targets_execute_exact_system_sequences_and_postimages() {
         let binding = binding();
         let gate = open_gate();
+        let active_config = production_active_config(&gate, &binding);
         let payer = crate::native_adapter::authenticate_system_payer(
             &gate,
             &binding,
@@ -881,8 +974,9 @@ mod tests {
             true,
         );
         let mut invoker = MockSystemCpi::default();
-        let receipt = execute_create_state_batch_with(
+        let receipt = execute_production_active_create_state_batch_with(
             &gate,
+            &active_config,
             &binding,
             batch,
             &targets,
@@ -927,6 +1021,7 @@ mod tests {
     fn forged_system_program_or_stale_payer_fails_before_cpi() {
         let binding = binding();
         let gate = open_gate();
+        let active_config = production_active_config(&gate, &binding);
         let authenticated_payer = crate::native_adapter::authenticate_system_payer(
             &gate,
             &binding,
@@ -985,8 +1080,9 @@ mod tests {
         );
         let mut invoker = MockSystemCpi::default();
         assert_eq!(
-            execute_create_state_batch_with(
+            execute_production_active_create_state_batch_with(
                 &gate,
+                &active_config,
                 &binding,
                 batch,
                 core::slice::from_ref(&target_info),
@@ -1010,8 +1106,9 @@ mod tests {
             true,
         );
         assert_eq!(
-            execute_create_state_batch_with(
+            execute_production_active_create_state_batch_with(
                 &gate,
+                &active_config,
                 &binding,
                 batch,
                 &[target_info],
@@ -1033,6 +1130,7 @@ mod tests {
             RuntimeAccountLifecycleTruth {
                 feature_gated: true,
                 daily_law_capability_required: true,
+                production_active_config_capability_required: true,
                 sealed_create_intents_only: true,
                 all_preconditions_checked_before_first_cpi: true,
                 canonical_internal_pda_signer_seeds_only: true,
@@ -1052,6 +1150,7 @@ mod tests {
 
         let binding = binding();
         let gate = open_gate();
+        let active_config = production_active_config(&gate, &binding);
         let payer = crate::native_adapter::authenticate_system_payer(
             &gate,
             &binding,
@@ -1111,9 +1210,25 @@ mod tests {
             calls: Vec::new(),
             fail_at: Some(0),
         };
+        let wrong_binding = NativeEconomyBinding::new([0xE2; 32], MINT).unwrap();
         assert_eq!(
-            execute_create_state_batch_with(
+            execute_production_active_create_state_batch_with(
                 &gate,
+                &active_config,
+                &wrong_binding,
+                batch,
+                core::slice::from_ref(&target_info),
+                core::slice::from_ref(&payer_info),
+                &system_info,
+                &mut invoker,
+            ),
+            Err(RuntimeAccountLifecycleError::ActiveConfigCapabilityMismatch)
+        );
+        assert!(invoker.calls.is_empty());
+        assert_eq!(
+            execute_production_active_create_state_batch_with(
+                &gate,
+                &active_config,
                 &binding,
                 batch,
                 core::slice::from_ref(&target_info),
