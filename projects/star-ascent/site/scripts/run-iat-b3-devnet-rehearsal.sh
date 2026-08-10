@@ -353,14 +353,14 @@ public_writes_started=true
 permanent_artifacts_may_remain=true
 run_json_with_bounded_retries deploy-program 12 solana program deploy "$artifact" \
   --url "$devnet_rpc" \
-  --use-rpc \
+  --use-quic \
   --commitment finalized \
   --keypair "$payer_key" \
   --fee-payer "$payer_key" \
   --program-id "$program_key" \
   --buffer "$buffer_key" \
   --upgrade-authority "$payer_key" \
-  --max-sign-attempts 10 \
+  --max-sign-attempts 4 \
   --output json-compact
 
 phase="irrevocably_finalize_program_upgrade_authority"

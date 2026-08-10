@@ -248,12 +248,15 @@ test("reused funding requires only the non-airdrop public CLI evidence", () => {
 
 test("program upload retries are bounded and preserve exact public identities", () => {
   assert.match(wrapper, /run_json_with_bounded_retries deploy-program 12 solana program deploy/u);
-  assert.match(wrapper, /--max-sign-attempts 10/u);
+  assert.match(wrapper, /--use-quic/u);
+  assert.doesNotMatch(wrapper, /--use-rpc/u);
+  assert.match(wrapper, /--max-sign-attempts 4/u);
   assert.match(wrapper, /samePublicIdentities":true/u);
   assert.match(wrapper, /sameDevnetRpc":true/u);
   assert.match(wrapper, /if \(\( attempt == max_attempts \)\); then[\s\S]{0,80}return 1/u);
   assert.match(documentation, /retry at most twelve times/u);
-  assert.match(documentation, /same pinned\s+Devnet RPC, exact artifact, program identity, and deployment buffer/u);
+  assert.match(documentation, /same pinned\s+Devnet cluster and RPC discovery\/confirmation endpoint, exact artifact, program\s+identity, and deployment buffer/u);
+  assert.match(documentation, /validator QUIC transport/u);
   assert.doesNotMatch(wrapper, /api\.testnet|api\.mainnet|--url\s+\$\{?[^d]/u);
 });
 

@@ -61,10 +61,13 @@ than that boundary, so a reused payer with a long V2 history cannot hide new
 rehearsal transactions or overflow the bounded evidence query.
 
 The program upload may retry at most twelve times against the same pinned
-Devnet RPC, exact artifact, program identity, and deployment buffer. This
-resumes a public-RPC-interrupted chunk upload without creating another buffer or
-silently switching identities, bytes, cluster, or funding source. Exhausting the
-bound remains a loud partial failure.
+Devnet cluster and RPC discovery/confirmation endpoint, exact artifact, program
+identity, and deployment buffer. Upload writes use the validator QUIC transport
+instead of HTTP `sendTransaction`, preventing public-RPC write throttling while
+retaining the pinned Genesis and finalized RPC checks. This resumes an
+interrupted chunk upload without creating another buffer or silently switching
+identities, bytes, cluster, or funding source. Exhausting the bound remains a
+loud partial failure.
 
 ## Wallet and funding isolation
 
