@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
   IAT_V2_SECONDS_PER_DAY,
   IAT_V2_SECONDS_PER_WEEK,
@@ -11,6 +12,11 @@ import {
   secondsUntilIatV2RoundRecovery,
   secondsUntilIatV2Week,
 } from "../programs/iat_v2/feature-rehearsal.mjs";
+
+const featureConsoleSource = readFileSync(
+  "tools/iat-v2-admin-console/FeatureRehearsal.jsx",
+  "utf8",
+);
 
 const allocations = {
   community: { amount: 500n },
@@ -108,5 +114,20 @@ test("round recovery wait flips only at the exact 24-hour reveal timeout", () =>
   assert.throws(
     () => secondsUntilIatV2RoundRecovery(Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
     /outside the safe integer range/,
+  );
+});
+
+test("the browser never offers timestamp recovery for a deployed legacy Round", () => {
+  assert.match(
+    featureConsoleSource,
+    /currentRound\.layoutVersion === IAT_V2_ROUND_LAYOUT\.LEGACY_V1[\s\S]*id: `REVEAL_CCC_ROUND_/u,
+  );
+  assert.match(
+    featureConsoleSource,
+    /deployed 198-byte V1 round has no timestamp or neutral-expiry instruction/u,
+  );
+  assert.match(
+    featureConsoleSource,
+    /EXPIRE_CCC_ROUND_[\s\S]*layoutVersion === IAT_V2_ROUND_LAYOUT\.LEGACY_V1[\s\S]*has no neutral-expiry instruction/u,
   );
 });

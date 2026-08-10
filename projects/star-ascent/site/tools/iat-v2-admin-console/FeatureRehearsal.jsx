@@ -18,6 +18,7 @@ import {
 } from "../../programs/iat_v2/client.mjs";
 import {
   IAT_V2_ROLE,
+  IAT_V2_ROUND_LAYOUT,
   buildClaimLanePrincipalInstruction,
   buildCommitRoundInstruction,
   buildExpireRoundInstruction,
@@ -344,6 +345,15 @@ function nextFeatureAction(state) {
     };
   }
   if (state.currentRound && state.currentRound.status === 0) {
+    if (state.currentRound.layoutVersion === IAT_V2_ROUND_LAYOUT.LEGACY_V1) {
+      return {
+        id: `REVEAL_CCC_ROUND_${state.currentCccRound}`,
+        title: `Reveal and settle legacy CCC round ${state.currentCccRound}`,
+        detail: "The deployed 198-byte V1 round has no timestamp or neutral-expiry instruction. Reveal is its only reviewed terminal path.",
+        signer: IAT_V2_PROGRAM_ADMIN,
+        week: state.currentCccRound,
+      };
+    }
     const recoveryWait = secondsUntilIatV2RoundRecovery(
       Number(state.currentRound.commitTimestamp),
       state.nowTimestamp,
@@ -590,6 +600,9 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
           }),
         );
       } else if (action.id.startsWith("EXPIRE_CCC_ROUND_")) {
+        if (state.currentRound?.layoutVersion === IAT_V2_ROUND_LAYOUT.LEGACY_V1) {
+          throw new Error("The deployed 198-byte V1 round has no neutral-expiry instruction");
+        }
         transaction.add(buildExpireRoundInstruction({
           mint,
           week: action.week,
