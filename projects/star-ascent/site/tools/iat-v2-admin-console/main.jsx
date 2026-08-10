@@ -58,6 +58,7 @@ const CONSOLE_PARAMS = new URLSearchParams(window.location.search);
 const FEATURE_MODE = CONSOLE_PARAMS.get("mode") === "features";
 const UPGRADE_MODE = CONSOLE_PARAMS.get("mode") === "upgrade";
 const INSPECTION_MODE = CONSOLE_PARAMS.get("mode") === "inspect";
+const ATTENDED_WEEK9_MODE = CONSOLE_PARAMS.get("mode") === "settle-week9";
 const FEATURE_GENESIS_OVERRIDE = CONSOLE_PARAMS.get("genesis");
 const ACTIVE_MINT_SEED = FEATURE_MODE ? DEVNET_FEATURE_MINT_SEED : DEVNET_MINT_SEED;
 const STORAGE_KEY = FEATURE_MODE
@@ -69,7 +70,16 @@ const FEATURE_BOUNDARY_LEAD_SECONDS = 7_200;
 const connection = new Connection(DEVNET_RPC, "confirmed");
 const FeatureRehearsal = lazy(() => import("./FeatureRehearsal.jsx"));
 const ProgramUpgrade = lazy(() => import("./ProgramUpgrade.jsx"));
-document.documentElement.dataset.iatAdminMode = INSPECTION_MODE ? "inspection" : UPGRADE_MODE ? "upgrade" : FEATURE_MODE ? "features" : "initialization";
+const AttendedWeek9Settlement = lazy(() => import("./AttendedWeek9Settlement.jsx"));
+document.documentElement.dataset.iatAdminMode = INSPECTION_MODE
+  ? "inspection"
+  : UPGRADE_MODE
+    ? "upgrade"
+    : ATTENDED_WEEK9_MODE
+      ? "settle-week9"
+      : FEATURE_MODE
+        ? "features"
+        : "initialization";
 document.documentElement.dataset.iatTrezorConnect = "unloaded";
 let trezorConnect;
 let trezorConnectReady;
@@ -1031,6 +1041,15 @@ createRoot(document.getElementById("root")).render(
             short={short}
           />
         )
+      : ATTENDED_WEEK9_MODE
+        ? (
+            <AttendedWeek9Settlement
+              explorer={explorer}
+              getHardwareProvider={getHardwareProvider}
+              localOperator={isLocalOperatorHost(window.location.hostname)}
+              sha256Hex={sha256Hex}
+            />
+          )
       : <App />}
   </Suspense>,
 );
