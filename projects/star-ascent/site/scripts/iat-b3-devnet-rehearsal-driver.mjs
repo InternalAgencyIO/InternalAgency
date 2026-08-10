@@ -53,9 +53,7 @@ const BASE58_INDEX = new Map(
   [...BASE58_ALPHABET].map((character, index) => [character, BigInt(index)]),
 );
 const UPGRADEABLE_LOADER_ID = new PublicKey("BPFLoaderUpgradeab1e11111111111111111111111");
-const EXPECTED_CLI_EVIDENCE = Object.freeze([
-  "airdrop-1",
-  "airdrop-2",
+const MUTATING_CLI_EVIDENCE = Object.freeze([
   "deploy-program",
   "freeze-program",
   "create-mint",
@@ -65,6 +63,21 @@ const EXPECTED_CLI_EVIDENCE = Object.freeze([
   "revoke-freeze",
   "revoke-mint",
 ]);
+const FAUCET_CLI_EVIDENCE = Object.freeze([
+  "airdrop-1",
+  "airdrop-2",
+  ...MUTATING_CLI_EVIDENCE,
+]);
+
+export function expectedCliEvidenceForFundingMode(fundingMode) {
+  assert(
+    fundingMode === "DEVNET_FAUCET" || fundingMode === "REUSED_V2_DEVNET_PAYER",
+    "invalid Devnet funding mode",
+  );
+  return fundingMode === "DEVNET_FAUCET"
+    ? FAUCET_CLI_EVIDENCE
+    : MUTATING_CLI_EVIDENCE;
+}
 
 let currentPhase = "argument_gate";
 let transactionSequence = 0;
@@ -433,10 +446,11 @@ export function normalizeAirdropCliEvidence(label, rawText) {
   });
 }
 
-async function collectCliEvidence(connection, directory) {
+async function collectCliEvidence(connection, directory, fundingMode) {
+  const expectedEvidence = expectedCliEvidenceForFundingMode(fundingMode);
   const files = new Set(readdirSync(directory).map((name) => basename(name)));
   const steps = [];
-  for (const label of EXPECTED_CLI_EVIDENCE) {
+  for (const label of expectedEvidence) {
     const file = label + ".json";
     assert(files.has(file), "required CLI evidence is absent");
     const payload = JSON.parse(readFileSync(join(directory, file), "utf8"));
@@ -455,13 +469,28 @@ async function collectCliEvidence(connection, directory) {
   return steps;
 }
 
-async function collectPayerTransactionHistory(connection, payer, knownTransactions) {
+export async function collectPayerTransactionHistory(
+  connection,
+  payer,
+  knownTransactions,
+  payerHistoryBefore,
+) {
+  assert(
+    payerHistoryBefore === null || signatureCandidate(payerHistoryBefore),
+    "payer history boundary is not a canonical transaction signature",
+  );
+  const historyQuery = payerHistoryBefore === null
+    ? { limit: 1_000 }
+    : { limit: 1_000, until: payerHistoryBefore };
   const entries = await connection.getSignaturesForAddress(
     payer,
-    { limit: 1_000 },
+    historyQuery,
     "finalized",
   );
-  assert(entries.length < 1_000, "fresh payer history exceeded the bounded evidence query");
+  assert(
+    entries.length < 1_000,
+    "payer history since the pre-write boundary exceeded the bounded evidence query",
+  );
   const labels = new Map(
     knownTransactions.map((transaction) => [transaction.signature, transaction.label]),
   );
@@ -502,7 +531,7 @@ function publicAccount(address) {
 
 async function run(argv) {
   const args = parseArgs(argv);
-  assert.equal(args.size, 7, "unexpected driver arguments");
+  assert.equal(args.size, 9, "unexpected driver arguments");
   assert.equal(required(args, "execute"), EXECUTE_CONFIRMATION, "explicit execution confirmation missing");
   assertHardPinnedDevnetUrl(DEVNET_RPC);
 
@@ -517,6 +546,19 @@ async function run(argv) {
   const recipient = readKeypair(required(args, "recipient"));
   const programId = new PublicKey(required(args, "program-id"));
   const mint = new PublicKey(required(args, "mint"));
+  const fundingMode = required(args, "funding-mode");
+  assert(
+    fundingMode === "DEVNET_FAUCET" || fundingMode === "REUSED_V2_DEVNET_PAYER",
+    "invalid Devnet funding mode",
+  );
+  const payerHistoryBeforeArgument = required(args, "payer-history-before");
+  const payerHistoryBefore = payerHistoryBeforeArgument === "NONE"
+    ? null
+    : payerHistoryBeforeArgument;
+  assert(
+    payerHistoryBefore === null || signatureCandidate(payerHistoryBefore),
+    "invalid pre-write payer history boundary",
+  );
   const cliEvidenceDirectory = required(args, "cli-evidence-dir");
   assert(!payer.publicKey.equals(recipient.publicKey), "disposable identities collided");
   assert(!payer.publicKey.equals(programId), "payer and program identities collided");
@@ -707,7 +749,7 @@ async function run(argv) {
   assert.equal(finalMintState.freezeAuthority, null);
 
   currentPhase = "cli_transaction_metric_collection";
-  const cliSteps = await collectCliEvidence(connection, cliEvidenceDirectory);
+  const cliSteps = await collectCliEvidence(connection, cliEvidenceDirectory, fundingMode);
   const cliTransactions = cliSteps.flatMap((step) => step.transactions);
   currentPhase = "complete_payer_transaction_history_collection";
   await new Promise((resolve) => setTimeout(resolve, 10_500));
@@ -715,6 +757,7 @@ async function run(argv) {
     connection,
     payer.publicKey,
     [...measurements, ...cliTransactions],
+    payerHistoryBefore,
   );
   const addresses = {
     payer: publicAccount(payer.publicKey),
@@ -736,6 +779,8 @@ async function run(argv) {
     network: "solana-devnet",
     rpc: DEVNET_RPC,
     genesisHash,
+    fundingMode,
+    payerHistoryBoundary: payerHistoryBefore,
     artifact: {
       sha256: EXPECTED_ARTIFACT_SHA256,
       bytes: EXPECTED_ARTIFACT_SIZE,

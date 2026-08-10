@@ -34,6 +34,8 @@ const {
   accountExplorerUrl,
   assertEvidenceSafe,
   assertHardPinnedDevnetUrl,
+  collectPayerTransactionHistory,
+  expectedCliEvidenceForFundingMode,
   extractCliSignatures,
   normalizeAirdropCliEvidence,
   sanitizeFailureText,
@@ -51,6 +53,7 @@ function firstIndex(source, candidates) {
 test("Devnet rehearsal requires explicit opt-in before every public write", () => {
   assert.match(wrapper, /set -euo pipefail/u);
   assert.match(wrapper, /--execute/u);
+  assert.match(wrapper, /--execute-reuse-v2-devnet-payer/u);
   assert.match(wrapper, /unexpected_arguments|explicit_execute_required/u);
 
   const optIn = wrapper.indexOf("--execute");
@@ -100,7 +103,7 @@ test("both layers hard-pin the official Devnet RPC and cannot select Mainnet", (
   assert.match(documentation, /never falls back to another cluster/u);
 
   const genesisPreflight = wrapper.indexOf("solana genesis-hash");
-  const firstWrite = wrapper.indexOf("solana airdrop");
+  const firstWrite = firstIndex(wrapper, ["solana airdrop", "solana program deploy"]);
   assert(genesisPreflight >= 0 && genesisPreflight < firstWrite);
   assert.match(wrapper, /EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG/u);
   assert.equal(
@@ -144,12 +147,18 @@ test("runtime URL and evidence guards reject unsafe inputs without contacting RP
   assert.throws(() => assertEvidenceSafe({ keypair: [1, 2, 3] }));
 });
 
-test("the wrapper generates isolated identities and never reaches for a default signer", () => {
-  for (const identity of ["payer", "program", "mint", "recipient"]) {
+test("the wrapper isolates identities and narrowly pins recycled Devnet funding", () => {
+  for (const identity of ["program", "buffer", "mint", "recipient"]) {
     assert.match(wrapper, new RegExp(`(?:\\$temp_dir|\\$\\{temp_dir\\})/${identity}\\.json`, "u"));
   }
 
   assert.match(wrapper, /solana-keygen new/u);
+  assert.match(wrapper, /IAT_B3_V2_DEVNET_PAYER_KEYPAIR/u);
+  assert.match(wrapper, /DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4/u);
+  assert.match(wrapper, /REUSED_V2_DEVNET_PAYER/u);
+  assert.match(wrapper, /transaction-history/u);
+  assert.match(wrapper, /--payer-history-before/u);
+  assert.match(driver, /until: payerHistoryBefore/u);
   assert.match(wrapper, /--fee-payer/u);
   assert.match(wrapper, /--keypair/u);
   assert.match(wrapper, /--program-id/u);
@@ -159,12 +168,82 @@ test("the wrapper generates isolated identities and never reaches for a default 
   assert.match(wrapper, /--owner/u);
   assert.doesNotMatch(
     `${wrapper}\n${driver}`,
-    /\.config\/solana|solana config|ANCHOR_WALLET|getDefaultProvider/iu,
+    /solana config|ANCHOR_WALLET|getDefaultProvider/iu,
   );
 
   assert.match(wrapper, /solana airdrop/u);
   assert.doesNotMatch(wrapper, /solana transfer|spl-token transfer/u);
-  assert.match(documentation, /Only Devnet faucet airdrops may fund/u);
+  assert.match(documentation, /never substitutes\s+Mainnet SOL/u);
+  assert.match(documentation, /exact public V2 Devnet deployer/u);
+  assert.match(documentation, /newer\s+than that boundary/u);
+});
+
+test("reused payer history is bounded by the exact pre-write signature", async () => {
+  const boundary = "2uHxTJefV8iqi45WkW6uWgP2iz6bfefHAx7JXZFojMm2GdTvVQTw4hqpW56KFX7DJSZjpVZi7W7pg4p2s8bCdKAZ";
+  const newer = "5zQKxvRdgJDA8fRGPdKfGxRLnLpwmNnMXGYxfBqFSUPqc5BTmFPrTG8vnC4HvKDVY8zQ8aQxZxcEE7WFpGhZGVAA";
+  let observedQuery = null;
+  const connection = {
+    async getSignaturesForAddress(_payer, query, commitment) {
+      observedQuery = { query, commitment };
+      return [{ signature: newer, slot: 42, err: null }];
+    },
+    async getTransactions(signatures, config) {
+      assert.deepEqual(signatures, [newer]);
+      assert.equal(config.commitment, "finalized");
+      return [{ slot: 42, meta: { fee: 5_000, computeUnitsConsumed: 1_234 } }];
+    },
+  };
+  const history = await collectPayerTransactionHistory(
+    connection,
+    "payer",
+    [],
+    boundary,
+  );
+  assert.deepEqual(observedQuery, {
+    query: { limit: 1_000, until: boundary },
+    commitment: "finalized",
+  });
+  assert.equal(history.length, 1);
+  assert.equal(history[0].signature, newer);
+
+  const saturated = {
+    async getSignaturesForAddress(_payer, query) {
+      assert.equal(query.until, boundary);
+      return new Array(1_000).fill({ signature: newer, slot: 42, err: null });
+    },
+  };
+  await assert.rejects(
+    collectPayerTransactionHistory(saturated, "payer", [], boundary),
+    /since the pre-write boundary exceeded/u,
+  );
+  await assert.rejects(
+    collectPayerTransactionHistory(connection, "payer", [], "not-a-signature"),
+    /canonical transaction signature/u,
+  );
+});
+
+test("reused funding requires only the non-airdrop public CLI evidence", () => {
+  assert.deepEqual(
+    expectedCliEvidenceForFundingMode("REUSED_V2_DEVNET_PAYER"),
+    [
+      "deploy-program",
+      "freeze-program",
+      "create-mint",
+      "create-source",
+      "create-destination",
+      "mint-supply",
+      "revoke-freeze",
+      "revoke-mint",
+    ],
+  );
+  assert.deepEqual(
+    expectedCliEvidenceForFundingMode("DEVNET_FAUCET").slice(0, 2),
+    ["airdrop-1", "airdrop-2"],
+  );
+  assert.throws(
+    () => expectedCliEvidenceForFundingMode("OWNER_WALLET"),
+    /invalid Devnet funding mode/u,
+  );
 });
 
 test("program upgrade authority is finalized before law initialization", () => {
@@ -390,10 +469,11 @@ test("partial failure is loud and local-secret cleanup is narrowly scoped", () =
 });
 
 test("the review document preserves the scope boundary", () => {
-  assert.match(documentation, /inert unless its only argument is the exact opt-in flag/u);
+  assert.match(documentation, /inert unless its only argument is one of the two exact opt-in/u);
   assert.match(documentation, /program is made immutable before the law is initialized/u);
   assert.match(documentation, /Expected permanent Devnet artifacts/u);
   assert.match(documentation, /not(?:\*\*)?\s+prove retained V2 feature parity/u);
   assert.match(documentation, /not[\s\S]{0,250}Mainnet readiness/iu);
   assert.match(documentation, /bash scripts\/run-iat-b3-devnet-rehearsal\.sh --execute/u);
+  assert.match(documentation, /--execute-reuse-v2-devnet-payer/u);
 });

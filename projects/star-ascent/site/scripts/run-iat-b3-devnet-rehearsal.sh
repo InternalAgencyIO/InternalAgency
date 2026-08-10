@@ -7,13 +7,35 @@ expected_devnet_genesis_hash="EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG"
 expected_artifact_sha256="927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c"
 expected_artifact_size="154952"
 execute_confirmation="CONFIRMED_PUBLIC_DEVNET_REHEARSAL"
+expected_reused_v2_devnet_payer="DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4"
+funding_mode=""
+reuse_payer_key=""
 
 # This check intentionally precedes mktemp, key generation, RPC contact, and
-# every public write. The wrapper has exactly one executable invocation.
-if [[ $# -ne 1 || "$1" != "--execute" ]]; then
+# every public write. Both executable modes are exact, explicit Devnet-only
+# opt-ins; neither reads the default Solana signer.
+if [[ $# -ne 1 ]]; then
   printf '{"schema":"iat-b3-devnet-rehearsal/v1","status":"NOT_EXECUTED","reason":"explicit_execute_required","publicNetworkWrites":false}\n'
   exit 2
 fi
+case "$1" in
+  --execute)
+    funding_mode="DEVNET_FAUCET"
+    ;;
+  --execute-reuse-v2-devnet-payer)
+    funding_mode="REUSED_V2_DEVNET_PAYER"
+    reuse_payer_key=$(printenv IAT_B3_V2_DEVNET_PAYER_KEYPAIR 2>/dev/null || true)
+    [[ "$reuse_payer_key" == /* && -f "$reuse_payer_key" && ! -L "$reuse_payer_key" ]] || {
+      printf '{"schema":"iat-b3-devnet-rehearsal/v1","status":"FAIL","phase":"funding_preflight","reason":"explicit_v2_devnet_payer_key_required","publicNetworkWrites":false}\n'
+      exit 1
+    }
+    reuse_payer_key=$(cd -- "$(dirname -- "$reuse_payer_key")" && pwd -P)/$(basename -- "$reuse_payer_key")
+    ;;
+  *)
+    printf '{"schema":"iat-b3-devnet-rehearsal/v1","status":"NOT_EXECUTED","reason":"explicit_execute_required","publicNetworkWrites":false}\n'
+    exit 2
+    ;;
+esac
 
 for tool in solana solana-keygen spl-token sha256sum stat mktemp; do
   command -v "$tool" >/dev/null 2>&1 || {
@@ -35,6 +57,13 @@ node_bin=$(printenv IAT_B3_NODE 2>/dev/null || command -v node || true)
   printf '{"schema":"iat-b3-devnet-rehearsal/v1","status":"FAIL","phase":"artifact_preflight","reason":"reviewed_inputs_missing","publicNetworkWrites":false}\n'
   exit 1
 }
+if [[ "$funding_mode" == "REUSED_V2_DEVNET_PAYER" ]]; then
+  reused_payer_pubkey=$(solana-keygen pubkey "$reuse_payer_key" 2>/dev/null || true)
+  [[ "$reused_payer_pubkey" == "$expected_reused_v2_devnet_payer" ]] || {
+    printf '{"schema":"iat-b3-devnet-rehearsal/v1","status":"FAIL","phase":"funding_preflight","reason":"v2_devnet_payer_identity_mismatch","publicNetworkWrites":false}\n'
+    exit 1
+  }
+fi
 
 to_node_path() {
   local path=$1
@@ -134,7 +163,11 @@ finish() {
 trap finish EXIT
 trap 'exit 130' INT TERM
 
-payer_key="$temp_dir/payer.json"
+if [[ "$funding_mode" == "DEVNET_FAUCET" ]]; then
+  payer_key="$temp_dir/payer.json"
+else
+  payer_key="$reuse_payer_key"
+fi
 program_key="$temp_dir/program.json"
 buffer_key="$temp_dir/buffer.json"
 mint_key="$temp_dir/mint.json"
@@ -142,7 +175,11 @@ recipient_key="$temp_dir/recipient.json"
 cli_evidence_dir="$temp_dir/cli-evidence"
 mkdir -p -- "$cli_evidence_dir"
 
-for key_file in "$payer_key" "$program_key" "$buffer_key" "$mint_key" "$recipient_key"; do
+generated_key_files=("$program_key" "$buffer_key" "$mint_key" "$recipient_key")
+if [[ "$funding_mode" == "DEVNET_FAUCET" ]]; then
+  generated_key_files=("$payer_key" "${generated_key_files[@]}")
+fi
+for key_file in "${generated_key_files[@]}"; do
   solana-keygen new \
     --no-bip39-passphrase \
     --silent \
@@ -164,14 +201,30 @@ observed_genesis_hash=$(solana genesis-hash \
   exit 1
 }
 
-printf '{"schema":"iat-b3-devnet-rehearsal/v1","status":"READY_FOR_FIRST_PUBLIC_WRITE","network":"solana-devnet","rpc":"https://api.devnet.solana.com","genesisHash":"%s","publicNetworkWrites":false,"publicAddresses":{"payer":{"address":"%s","explorerUrl":"https://explorer.solana.com/address/%s?cluster=devnet"},"program":{"address":"%s","explorerUrl":"https://explorer.solana.com/address/%s?cluster=devnet"},"deploymentBuffer":{"address":"%s","explorerUrl":"https://explorer.solana.com/address/%s?cluster=devnet"},"mint":{"address":"%s","explorerUrl":"https://explorer.solana.com/address/%s?cluster=devnet"},"recipient":{"address":"%s","explorerUrl":"https://explorer.solana.com/address/%s?cluster=devnet"}}}\n' \
-  "$observed_genesis_hash" \
+printf '{"schema":"iat-b3-devnet-rehearsal/v1","status":"READY_FOR_FIRST_PUBLIC_WRITE","network":"solana-devnet","rpc":"https://api.devnet.solana.com","genesisHash":"%s","fundingMode":"%s","payerDisposable":%s,"publicNetworkWrites":false,"publicAddresses":{"payer":{"address":"%s","explorerUrl":"https://explorer.solana.com/address/%s?cluster=devnet"},"program":{"address":"%s","explorerUrl":"https://explorer.solana.com/address/%s?cluster=devnet"},"deploymentBuffer":{"address":"%s","explorerUrl":"https://explorer.solana.com/address/%s?cluster=devnet"},"mint":{"address":"%s","explorerUrl":"https://explorer.solana.com/address/%s?cluster=devnet"},"recipient":{"address":"%s","explorerUrl":"https://explorer.solana.com/address/%s?cluster=devnet"}}}\n' \
+  "$observed_genesis_hash" "$funding_mode" "$([[ "$funding_mode" == "DEVNET_FAUCET" ]] && printf true || printf false)" \
   "$payer_pubkey" "$payer_pubkey" \
   "$program_pubkey" "$program_pubkey" \
   "$buffer_pubkey" "$buffer_pubkey" \
   "$mint_pubkey" "$mint_pubkey" \
   "$recipient_pubkey" "$recipient_pubkey"
 identity_evidence_emitted=true
+
+phase="payer_history_boundary_preflight"
+payer_history_raw=$(solana transaction-history "$payer_pubkey" \
+  --url "$devnet_rpc" \
+  --commitment finalized \
+  --limit 1 \
+  --output json-compact 2>"$temp_dir/payer-history-boundary.stderr")
+payer_history_pattern='^\[\{"signature":"([1-9A-HJ-NP-Za-km-z]{64,88})"\}\]$'
+if [[ "$payer_history_raw" == "[]" ]]; then
+  payer_history_before="NONE"
+elif [[ "$payer_history_raw" =~ $payer_history_pattern ]]; then
+  payer_history_before="${BASH_REMATCH[1]}"
+else
+  phase="payer_history_boundary_invalid"
+  exit 1
+fi
 
 run_json() {
   local label=$1
@@ -247,30 +300,37 @@ run_airdrop() {
   return "$normalizer_exit_code"
 }
 
-phase="devnet_airdrop_1"
-public_writes_started=true
-permanent_artifacts_may_remain=true
-run_airdrop airdrop-1 solana airdrop 2 "$payer_pubkey" \
-  --url "$devnet_rpc" \
-  --keypair "$payer_key" \
-  --commitment finalized \
-  --output json-compact
-phase="devnet_airdrop_2"
-run_airdrop airdrop-2 solana airdrop 1 "$payer_pubkey" \
-  --url "$devnet_rpc" \
-  --keypair "$payer_key" \
-  --commitment finalized \
-  --output json-compact
+if [[ "$funding_mode" == "DEVNET_FAUCET" ]]; then
+  phase="devnet_airdrop_1"
+  public_writes_started=true
+  permanent_artifacts_may_remain=true
+  run_airdrop airdrop-1 solana airdrop 2 "$payer_pubkey" \
+    --url "$devnet_rpc" \
+    --keypair "$payer_key" \
+    --commitment finalized \
+    --output json-compact
+  phase="devnet_airdrop_2"
+  run_airdrop airdrop-2 solana airdrop 1 "$payer_pubkey" \
+    --url "$devnet_rpc" \
+    --keypair "$payer_key" \
+    --commitment finalized \
+    --output json-compact
+else
+  phase="reused_v2_devnet_payer_balance_preflight"
+fi
 
 funding_lamports=$(solana balance "$payer_pubkey" \
   --url "$devnet_rpc" \
+  --commitment finalized \
   --lamports 2>"$temp_dir/balance.stderr" | awk 'NR == 1 {print $1}')
 [[ "$funding_lamports" =~ ^[0-9]+$ && "$funding_lamports" -ge 3000000000 ]] || {
-  phase="devnet_airdrop_balance_insufficient"
+  phase="devnet_funding_balance_insufficient"
   exit 1
 }
 
 phase="deploy_exact_optimized_program"
+public_writes_started=true
+permanent_artifacts_may_remain=true
 run_json deploy-program solana program deploy "$artifact" \
   --url "$devnet_rpc" \
   --use-rpc \
@@ -369,6 +429,8 @@ phase="immutable_program_and_law_rehearsal_driver"
   --recipient "$(to_node_path "$recipient_key")" \
   --program-id "$program_pubkey" \
   --mint "$mint_pubkey" \
+  --funding-mode "$funding_mode" \
+  --payer-history-before "$payer_history_before" \
   --cli-evidence-dir "$(to_node_path "$cli_evidence_dir")"
 
 phase="complete"

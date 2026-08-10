@@ -14,10 +14,14 @@ Mainnet readiness.
 
 ## Deliberate execution gate
 
-The wrapper is inert unless its only argument is the exact opt-in flag:
+The wrapper is inert unless its only argument is one of the two exact opt-in
+flags:
 
 ```bash
 bash scripts/run-iat-b3-devnet-rehearsal.sh --execute
+
+IAT_B3_V2_DEVNET_PAYER_KEYPAIR=/absolute/path/to/iat-v2-devnet-deployer.json \
+  bash scripts/run-iat-b3-devnet-rehearsal.sh --execute-reuse-v2-devnet-payer
 ```
 
 Run that command only from `projects/star-ascent/site`, after reviewing the
@@ -46,19 +50,33 @@ The preflight also requires Node.js 22 or newer and imports the driver with its
 Solana dependencies before requesting an airdrop. This prevents an unsupported
 local runtime from failing only after immutable public artifacts already exist.
 
+The second mode is a bounded recovery path for public-RPC faucet rate limits.
+It accepts only the already-published V2 Devnet deployer
+`DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4`, requires its key path
+explicitly, and checks at least 3 Devnet SOL before its first write. It cannot
+select the 7XZ hardware owner, any Mainnet balance, or a default signer.
+Before either mode writes, the wrapper captures the selected payer's latest
+finalized transaction signature. Final evidence queries only transactions newer
+than that boundary, so a reused payer with a long V2 history cannot hide new
+rehearsal transactions or overflow the bounded evidence query.
+
 ## Wallet and funding isolation
 
-The wrapper creates a checked temporary directory beneath `target/` and
-generates new payer, program, deployment-buffer, mint, and recipient keypairs
-inside it. Every mutating Solana and SPL Token command names its URL, fee payer,
-authority, owner, or program identity explicitly. The default Solana signer,
-configured wallet, Anchor wallet, browser wallet, and any V2 owner key are never
-selected.
+The wrapper creates a checked temporary directory beneath `target/` and always
+generates new program, deployment-buffer, mint, and recipient keypairs inside
+it. Faucet mode also generates a new payer. The rate-limit recovery mode uses
+only the explicitly supplied, exact public V2 Devnet deployer key; it does not
+reuse the V2 program or mint and cannot select the 7XZ owner. Every mutating
+Solana and SPL Token command names its URL, fee payer, authority, owner, or
+program identity explicitly. The default Solana signer, configured wallet,
+Anchor wallet, and browser wallet are never selected.
 
-Only Devnet faucet airdrops may fund the disposable payer. The script must stop
-if those airdrops do not provide enough Devnet SOL. It must not ask for a local
-wallet top-up, transfer SOL from an owner, accept a funding key, or substitute
-Mainnet SOL.
+Normal mode uses only Devnet faucet airdrops for the disposable payer. The
+rate-limit recovery mode may reuse SOL already held by the exact file-backed V2
+Devnet deployer, after an explicit opt-in and identity check. It never transfers
+from an owner, never accepts another funding identity, and never substitutes
+Mainnet SOL. Both modes stop before deployment unless the selected payer has at
+least 3 Devnet SOL.
 
 The temporary directory is resolved and checked against the narrow
 `target/iat-b3-devnet-rehearsal.*` prefix before removal. Exit, failure,
@@ -73,8 +91,10 @@ loudly if an observed state is partial or different:
 
 1. Verify the optimized `target/deploy/iat_b3_law.so` byte length and pinned
    SHA-256 digest before generating any public artifact.
-2. Generate the isolated keypairs and obtain Devnet SOL only through faucet
-   airdrops to the disposable payer.
+2. Generate the isolated program/mint identities. Fund a disposable payer only
+   through Devnet faucet airdrops, or explicitly reuse the exact V2 Devnet
+   deployer after its finalized balance and public identity pass the recovery
+   gate.
 3. Deploy those exact `.so` bytes through RPC under the disposable program
    identity and disposable payer upgrade authority. No existing program ID or
    upgradeable V2 program is reused.
