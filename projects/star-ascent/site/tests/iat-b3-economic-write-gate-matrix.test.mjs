@@ -25,11 +25,15 @@ const economyStakeIngressSource = readFileSync(
   new URL("programs/iat_b3_economy/src/stake_ingress.rs", siteRoot),
   "utf8",
 );
+const economyNativeAdapterSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/native_adapter.rs", siteRoot),
+  "utf8",
+);
 const lawSource = readFileSync(
   new URL("programs/iat_b3_law/src/lib.rs", siteRoot),
   "utf8",
 );
-const economyCode = `${economySource}\n${economyCodecSource}\n${economyStakeIngressSource}`
+const economyCode = `${economySource}\n${economyCodecSource}\n${economyStakeIngressSource}\n${economyNativeAdapterSource}`
   .replace(/\/\/.*$/gmu, "")
   .replace(/\/\*[\s\S]*?\*\//gu, "");
 const workspaceManifest = readFileSync(new URL("Cargo.toml", siteRoot), "utf8");
@@ -121,10 +125,85 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   });
   assert.match(workspaceManifest, /"programs\/iat_b3_economy"/u);
   assert.match(economyManifest, /crate-type = \["lib"\]/u);
-  assert.doesNotMatch(economyManifest, /cdylib|solana-|anchor-|spl-token/u);
+  assert.match(
+    economyManifest,
+    /solana-pubkey = \{ version = "=3\.0\.0", features = \["curve25519"\] \}/u,
+  );
+  assert.match(economyManifest, /solana-sdk-ids = "=3\.1\.0"/u);
+  assert.doesNotMatch(
+    economyManifest,
+    /cdylib|anchor-|spl-token|solana-(?:account-info|cpi|program-entrypoint|system-interface)/u,
+  );
   assert.doesNotMatch(
     economyCode,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo|TcpStream|UdpSocket/u,
+  );
+});
+
+test("the native state adapter remains an explicit nonactivating truth surface", () => {
+  assert.match(economySource, /pub mod native_adapter;/u);
+  assert.match(
+    economyNativeAdapterSource,
+    /pub const NATIVE_ACCOUNT_ADAPTER_STATUS: &str =\s*"HOST_ONLY_NONACTIVATING_STRICT_STATE_ADAPTER";/u,
+  );
+  for (const falseFlag of [
+    "entrypoint_exposed",
+    "dispatcher_exposed",
+    "account_writes_executed",
+    "system_cpi_executed",
+    "token_cpi_executed",
+    "rent_sysvar_authenticated",
+    "config_codec_supported",
+    "runtime_authorization_complete",
+    "any_handler_complete",
+  ]) {
+    assert.match(
+      economyNativeAdapterSource,
+      new RegExp(`${falseFlag}: false`, "u"),
+      falseFlag,
+    );
+  }
+  assert.match(economyNativeAdapterSource, /mainnet_hold: true/u);
+  for (const capabilityField of [
+    "unix_timestamp",
+    "local_day",
+    "law_program_id",
+    "law_state_address",
+    "law_state_bump",
+    "mint",
+    "network_genesis_hash",
+    "law_account_sha256",
+  ]) {
+    assert.match(
+      economySource,
+      new RegExp(`\\s${capabilityField}: (?:i64|u8|\\[u8; 32\\]),`, "u"),
+      capabilityField,
+    );
+    assert.match(
+      economyNativeAdapterSource,
+      new RegExp(`\\s${capabilityField}: (?:i64|u8|\\[u8; 32\\]),`, "u"),
+      capabilityField,
+    );
+  }
+  assert.match(
+    economyNativeAdapterSource,
+    /if gate\.mint\(\) != binding\.mint[\s\S]+LawMintMismatch/u,
+  );
+  assert.match(
+    economyNativeAdapterSource,
+    /pub struct CanonicalFactionConfigPda[\s\S]+pub struct CanonicalFactionWeekPda[\s\S]+pub struct CanonicalFactionRewardManifestPda/u,
+  );
+  assert.match(
+    economyNativeAdapterSource,
+    /fn validate_batch_funding[\s\S]+InsufficientPayerBalance/u,
+  );
+  assert.match(
+    economyNativeAdapterSource,
+    /fn validate_payer_preconditions[\s\S]+PayerMustBeSystemOwned[\s\S]+PayerDataMustBeEmpty[\s\S]+PayerPreimageMismatch/u,
+  );
+  assert.doesNotMatch(
+    economyNativeAdapterSource.replace(/\/\/.*$/gmu, "").replace(/\/\*[\s\S]*?\*\//gu, ""),
+    /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo/u,
   );
 });
 

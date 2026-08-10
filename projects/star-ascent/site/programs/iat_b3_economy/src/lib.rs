@@ -2,6 +2,7 @@
 #![forbid(unsafe_code)]
 
 mod codec;
+pub mod native_adapter;
 pub mod stake_ingress;
 
 pub use codec::{
@@ -824,7 +825,12 @@ impl<'a> ReadonlyDailyLawAccount<'a> {
 pub struct ValidatedDailyLawWrite {
     unix_timestamp: i64,
     local_day: i64,
+    law_program_id: [u8; 32],
     law_state_address: [u8; 32],
+    law_state_bump: u8,
+    mint: [u8; 32],
+    network_genesis_hash: [u8; 32],
+    law_account_sha256: [u8; 32],
 }
 
 impl ValidatedDailyLawWrite {
@@ -836,8 +842,28 @@ impl ValidatedDailyLawWrite {
         self.local_day
     }
 
+    pub const fn law_program_id(&self) -> [u8; 32] {
+        self.law_program_id
+    }
+
     pub const fn law_state_address(&self) -> [u8; 32] {
         self.law_state_address
+    }
+
+    pub const fn law_state_bump(&self) -> u8 {
+        self.law_state_bump
+    }
+
+    pub const fn mint(&self) -> [u8; 32] {
+        self.mint
+    }
+
+    pub const fn network_genesis_hash(&self) -> [u8; 32] {
+        self.network_genesis_hash
+    }
+
+    pub const fn law_account_sha256(&self) -> [u8; 32] {
+        self.law_account_sha256
     }
 }
 
@@ -880,7 +906,12 @@ pub fn verify_daily_law_open(
         IatTransferDisposition::Allowed => Ok(ValidatedDailyLawWrite {
             unix_timestamp: clock_unix_timestamp,
             local_day: protocol_local_day(clock_unix_timestamp),
+            law_program_id: binding.law_program_id,
             law_state_address: observed.key,
+            law_state_bump: binding.law_state_bump,
+            mint: state.mint,
+            network_genesis_hash: state.network_genesis_hash,
+            law_account_sha256: Sha256::digest(observed.data).into(),
         }),
         IatTransferDisposition::DayUnfinalized => Err(EconomyError::DayUnfinalized),
         IatTransferDisposition::RejectedDailyLockdown => Err(EconomyError::DailyLockdown),

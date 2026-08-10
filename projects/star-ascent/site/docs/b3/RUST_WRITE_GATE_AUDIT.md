@@ -514,6 +514,50 @@ rule exists in this host kernel. Core payout custody remains separately blocked,
 and the complete dispatcher remains absent and disabled until all fifteen rows
 pass together.
 
+### Nonactivating native state adapter
+
+`iat_b3_economy::native_adapter` now provides a host-only preparation boundary
+for the frozen economy PDA seed roster and the seven already-strict B3 state
+codecs. It derives the singleton config and every PDA/bump from runtime-bound,
+non-colliding economy-program and canonical-mint identities, authenticates exact
+account key/owner/writable/non-executable/non-signer
+shape, cross-checks each decoded state's embedded seed identities and bump, and
+additionally binds a lane state's token account and token bump to the canonical
+lane-token PDA. Faction child derivations accept opaque, rederived canonical
+faction-config, faction-week, and reward-manifest parent capabilities rather
+than arbitrary nonzero parent keys.
+
+The opaque Daily Law write capability and every native authorization, intent,
+batch, seal, and precondition proof bind the exact Clock timestamp, local day,
+law program ID, law-state address and bump, canonical mint, network Genesis
+hash, and SHA-256 of the exact validated law-account bytes. The capability mint
+must equal the native economy binding's canonical mint at every public boundary;
+cross-program, cross-address, cross-bump, cross-mint, cross-network, and
+same-decision/different-account-byte capabilities fail closed.
+
+Existing-state intents carry an exact preimage SHA-256 and postimage;
+vacant-PDA intents distinguish zero-lamport `CreateAccount` from a prefunded
+System-owned `AllocateAssignAndFund` shape. A lifecycle payer has a separate
+proof type requiring a writable signature, canonical System Program ownership,
+empty data, and an exact lamport preimage. Ordered batches reject duplicate keys,
+target/payer collisions, inconsistent payer snapshots, and aggregate funding
+above any payer's observed balance. They reauthenticate each unique payer and
+validate every target and payer precondition before returning an opaque
+all-or-none batch proof. There is no partial-payment or partial-write path.
+
+This is preparation, not execution. Its checked truth surface keeps
+`entrypoint_exposed`, `dispatcher_exposed`, `account_writes_executed`,
+`system_cpi_executed`, `token_cpi_executed`, `rent_sysvar_authenticated`,
+`config_codec_supported`, `runtime_authorization_complete`, and
+`any_handler_complete` false, while `mainnet_hold` remains true. In particular,
+the caller-supplied rent minimum is not trusted runtime evidence; a future
+adapter must authenticate the canonical Rent sysvar and calculate the minimum.
+The module has no authenticated Clock or Rent sysvar account, `AccountInfo`,
+mutable borrow, invoke, System/Token CPI, dispatcher, entrypoint, or public write
+path. Runtime authorization, config serialization, and every Genesis phase
+transition remain blocked, and the PDA/intents cannot be counted as a Devnet
+binary or a completed handler.
+
 ## Internal V2 mutation paths
 
 These helpers are not independently dispatched, but their mutations inherit

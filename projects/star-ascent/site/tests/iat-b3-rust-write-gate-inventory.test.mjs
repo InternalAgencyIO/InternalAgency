@@ -22,6 +22,10 @@ const economyStakeIngressSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/stake_ingress.rs", import.meta.url),
   "utf8",
 );
+const economyNativeAdapterSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/native_adapter.rs", import.meta.url),
+  "utf8",
+);
 const economySource = readFileSync(
   new URL("../programs/iat_b3_economy/src/lib.rs", import.meta.url),
   "utf8",
@@ -129,9 +133,14 @@ test("the Rust workspace has no unreported faction or core-cap entrypoint", () =
     "programs/iat_v2",
   ]);
   assert.match(economyCargo, /crate-type = \["lib"\]/u);
-  assert.doesNotMatch(economyCargo, /cdylib|solana-|anchor-|spl-token/u);
+  assert.match(economyCargo, /solana-pubkey = \{ version = "=3\.0\.0"/u);
+  assert.match(economyCargo, /solana-sdk-ids = "=3\.1\.0"/u);
   assert.doesNotMatch(
-    economySource,
+    economyCargo,
+    /cdylib|anchor-|spl-token|solana-(?:account-info|cpi|program-entrypoint|system-interface)/u,
+  );
+  assert.doesNotMatch(
+    `${economySource}\n${economyNativeAdapterSource}`,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(/u,
   );
   assert.match(
