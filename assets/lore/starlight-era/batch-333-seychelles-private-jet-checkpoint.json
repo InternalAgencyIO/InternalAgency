@@ -1,0 +1,1618 @@
+{
+  "batch": 333,
+  "country": "Seychelles",
+  "status": "terminal-partially-accepted",
+  "sourceCommit": "d62ab52c61e62b226ba65ab995132e6244b2c730",
+  "contractSha256": "1CF0E55ADA56A1266097FD44E2907F01AAD0B1B69051B3FBB274B1620F06885E",
+  "rollMethod": "FNV-1a over the recorded batch333-seychelles keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 333 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "hardLoveBeat": "0-14 lap sitting; 15-29 partner dance; 30-44 controlled dip; 45-59 seated embrace; 60-74 three-person slow dance; 75-89 pulled-away choice; 90-99 seated-to-standing assist",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "cinematicTheme": {
+    "active": "private-jet aviation couture",
+    "batchOrdinalWithinTheme": 1,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "nextQueueCountry": "Grenada",
+  "nextQueueBatch": 334,
+  "nextQueueScenes": [
+    1356,
+    1357,
+    1358,
+    1359
+  ],
+  "nextCinematicTheme": {
+    "active": "private-jet aviation couture",
+    "batchOrdinalWithinTheme": 2
+  },
+  "researchSources": [
+    {
+      "url": "https://www.seychelles.com/en/explore/islands/mahe",
+      "usedFor": "Victoria, Mahe, Morne Seychellois, granite slopes, harbor, and reef setting"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/261/",
+      "usedFor": "Vallee de Mai, coco-de-mer palm forest, granite, and conservation context"
+    },
+    {
+      "url": "https://www.seychelles.com/en/explore/islands/la-digue",
+      "usedFor": "Anse Source d'Argent, granite boulders, shallow water, reef, sand, and takamaka setting"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/185/",
+      "usedFor": "Aldabra Atoll lagoon, raised coral rim, mangroves, reefs, wildlife, and conservation context"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch333-seychelles-male-model-scene",
+    "fullHash": 2637899713,
+    "roll": 13,
+    "selectedScenePosition": 2,
+    "selectedScene": 1353,
+    "maleEmotion": {
+      "key": "batch333-seychelles-scene2-male-emotion",
+      "roll": 47,
+      "result": "awe"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Seychelles flag, coat of arms, official emblem, sacred symbol, religious building, ceremonial pattern, or ceremonial attire is copied. Country-led scenes use large dimensional secular island-chain, granite, coco-de-mer leaf, cinnamon, ridge, reef, and current compositions instead.",
+    "palette": "granite silver, Indian Ocean turquoise, coco-de-mer green, coral rose, cinnamon brown, cloud white, deep ocean navy, sunset gold, black-parrot charcoal, and hibiscus magenta",
+    "minimumCoverage": "Scenes 1352 and 1353 each carry hard large Seychelles motifs on three women and private-jet construction language on at least two. Scenes 1354 and 1355 use four different theme-led private-jet outfits without country map prints while the Seychelles landmarks remain equally foregrounded.",
+    "cultureScene": "The scenes foreground Victoria and Morne Seychellois, Vallee de Mai, Anse Source d'Argent, and Aldabra Atoll.",
+    "prohibitions": "Use respectful secular Seychelles island-chain silhouettes, granite-boulder structures, coco-de-mer leaf fans, cinnamon-bark spirals, reef crescents, takamaka-leaf rhythms, mountain ridges, beach arcs, cloud bands, current lines, and public conservation overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, ceremonial attire, copied uniform, airline branding, badge, readable text, alcohol, military imagery, or political insignia."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch333-seychelles-x-heart",
+      "roll": 30,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch333-seychelles-x-internalagency",
+      "roll": 44,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch333-seychelles-x-worldxxxseries",
+      "roll": 19,
+      "active": true
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Seychelles images plus one accepted Saint Lucia image",
+    "captionIfEligible": "Seychelles ❤️ Saint Lucia #Seychelles #WorldXXXSeries",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": true
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1353 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1353 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch333-seychelles-male-model-scene",
+        13
+      ],
+      [
+        "batch333-seychelles-scene2-male-emotion",
+        47
+      ],
+      [
+        "batch333-seychelles-scene1352-weather",
+        73
+      ],
+      [
+        "batch333-seychelles-scene1352-mascotState",
+        49
+      ],
+      [
+        "batch333-seychelles-scene1352-poleDanceTheme",
+        13
+      ],
+      [
+        "batch333-seychelles-scene1352-rainbowOnly",
+        21
+      ],
+      [
+        "batch333-seychelles-scene1352-rainbowHosiery",
+        0
+      ],
+      [
+        "batch333-seychelles-scene1352-romanceBeat",
+        80
+      ],
+      [
+        "batch333-seychelles-scene1352-compoundLoveBeat",
+        78
+      ],
+      [
+        "batch333-seychelles-scene1352-hardLoveBeat",
+        18
+      ],
+      [
+        "batch333-seychelles-scene1352-interestingProp",
+        98
+      ],
+      [
+        "batch333-seychelles-scene1352-eceMissionProp-poseTargetRoll",
+        35
+      ],
+      [
+        "batch333-seychelles-scene1352-Radiance-emotion",
+        18
+      ],
+      [
+        "batch333-seychelles-scene1352-Radiance-visibleMidriff",
+        60
+      ],
+      [
+        "batch333-seychelles-scene1352-Radiance-straplessDress",
+        99
+      ],
+      [
+        "batch333-seychelles-scene1352-Radiance-fullyOpenBack",
+        76
+      ],
+      [
+        "batch333-seychelles-scene1352-Ellie-emotion",
+        16
+      ],
+      [
+        "batch333-seychelles-scene1352-Ellie-emotion-disambiguation",
+        63
+      ],
+      [
+        "batch333-seychelles-scene1352-Ellie-visibleMidriff",
+        10
+      ],
+      [
+        "batch333-seychelles-scene1352-Ellie-straplessDress",
+        77
+      ],
+      [
+        "batch333-seychelles-scene1352-Ellie-fullyOpenBack",
+        82
+      ],
+      [
+        "batch333-seychelles-scene1352-Alia-emotion",
+        76
+      ],
+      [
+        "batch333-seychelles-scene1352-Alia-visibleMidriff",
+        14
+      ],
+      [
+        "batch333-seychelles-scene1352-Alia-straplessDress",
+        81
+      ],
+      [
+        "batch333-seychelles-scene1352-Alia-fullyOpenBack",
+        78
+      ],
+      [
+        "batch333-seychelles-scene1352-AI ECE-emotion",
+        18
+      ],
+      [
+        "batch333-seychelles-scene1352-AI ECE-emotion-disambiguation",
+        13
+      ],
+      [
+        "batch333-seychelles-scene1352-AI ECE-visibleMidriff",
+        0
+      ],
+      [
+        "batch333-seychelles-scene1352-AI ECE-straplessDress",
+        27
+      ],
+      [
+        "batch333-seychelles-scene1352-AI ECE-fullyOpenBack",
+        72
+      ],
+      [
+        "batch333-seychelles-scene1353-weather",
+        62
+      ],
+      [
+        "batch333-seychelles-scene1353-mascotState",
+        66
+      ],
+      [
+        "batch333-seychelles-scene1353-poleDanceTheme",
+        60
+      ],
+      [
+        "batch333-seychelles-scene1353-rainbowOnly",
+        50
+      ],
+      [
+        "batch333-seychelles-scene1353-rainbowHosiery",
+        53
+      ],
+      [
+        "batch333-seychelles-scene1353-romanceBeat",
+        35
+      ],
+      [
+        "batch333-seychelles-scene1353-compoundLoveBeat",
+        67
+      ],
+      [
+        "batch333-seychelles-scene1353-hardLoveBeat",
+        19
+      ],
+      [
+        "batch333-seychelles-scene1353-interestingProp",
+        33
+      ],
+      [
+        "batch333-seychelles-scene1353-eceMissionProp-poseTargetRoll",
+        96
+      ],
+      [
+        "batch333-seychelles-scene1353-Radiance-emotion",
+        83
+      ],
+      [
+        "batch333-seychelles-scene1353-Radiance-visibleMidriff",
+        75
+      ],
+      [
+        "batch333-seychelles-scene1353-Radiance-straplessDress",
+        64
+      ],
+      [
+        "batch333-seychelles-scene1353-Radiance-fullyOpenBack",
+        81
+      ],
+      [
+        "batch333-seychelles-scene1353-Ellie-emotion",
+        71
+      ],
+      [
+        "batch333-seychelles-scene1353-Ellie-visibleMidriff",
+        43
+      ],
+      [
+        "batch333-seychelles-scene1353-Ellie-straplessDress",
+        72
+      ],
+      [
+        "batch333-seychelles-scene1353-Ellie-fullyOpenBack",
+        89
+      ],
+      [
+        "batch333-seychelles-scene1353-Alia-emotion",
+        29
+      ],
+      [
+        "batch333-seychelles-scene1353-Alia-visibleMidriff",
+        65
+      ],
+      [
+        "batch333-seychelles-scene1353-Alia-straplessDress",
+        94
+      ],
+      [
+        "batch333-seychelles-scene1353-Alia-fullyOpenBack",
+        55
+      ],
+      [
+        "batch333-seychelles-scene1353-AI ECE-emotion",
+        51
+      ],
+      [
+        "batch333-seychelles-scene1353-AI ECE-visibleMidriff",
+        55
+      ],
+      [
+        "batch333-seychelles-scene1353-AI ECE-straplessDress",
+        92
+      ],
+      [
+        "batch333-seychelles-scene1353-AI ECE-fullyOpenBack",
+        37
+      ],
+      [
+        "batch333-seychelles-scene1354-weather",
+        95
+      ],
+      [
+        "batch333-seychelles-scene1354-mascotState",
+        19
+      ],
+      [
+        "batch333-seychelles-scene1354-poleDanceTheme",
+        79
+      ],
+      [
+        "batch333-seychelles-scene1354-rainbowOnly",
+        11
+      ],
+      [
+        "batch333-seychelles-scene1354-rainbowHosiery",
+        78
+      ],
+      [
+        "batch333-seychelles-scene1354-romanceBeat",
+        58
+      ],
+      [
+        "batch333-seychelles-scene1354-compoundLoveBeat",
+        24
+      ],
+      [
+        "batch333-seychelles-scene1354-hardLoveBeat",
+        60
+      ],
+      [
+        "batch333-seychelles-scene1354-interestingProp",
+        40
+      ],
+      [
+        "batch333-seychelles-scene1354-eceMissionProp-poseTargetRoll",
+        77
+      ],
+      [
+        "batch333-seychelles-scene1354-Radiance-emotion",
+        12
+      ],
+      [
+        "batch333-seychelles-scene1354-Radiance-visibleMidriff",
+        90
+      ],
+      [
+        "batch333-seychelles-scene1354-Radiance-straplessDress",
+        45
+      ],
+      [
+        "batch333-seychelles-scene1354-Radiance-fullyOpenBack",
+        66
+      ],
+      [
+        "batch333-seychelles-scene1354-Ellie-emotion",
+        54
+      ],
+      [
+        "batch333-seychelles-scene1354-Ellie-visibleMidriff",
+        20
+      ],
+      [
+        "batch333-seychelles-scene1354-Ellie-straplessDress",
+        75
+      ],
+      [
+        "batch333-seychelles-scene1354-Ellie-fullyOpenBack",
+        80
+      ],
+      [
+        "batch333-seychelles-scene1354-Alia-emotion",
+        66
+      ],
+      [
+        "batch333-seychelles-scene1354-Alia-visibleMidriff",
+        24
+      ],
+      [
+        "batch333-seychelles-scene1354-Alia-straplessDress",
+        27
+      ],
+      [
+        "batch333-seychelles-scene1354-Alia-fullyOpenBack",
+        48
+      ],
+      [
+        "batch333-seychelles-scene1354-AI ECE-emotion",
+        8
+      ],
+      [
+        "batch333-seychelles-scene1354-AI ECE-emotion-disambiguation",
+        15
+      ],
+      [
+        "batch333-seychelles-scene1354-AI ECE-visibleMidriff",
+        98
+      ],
+      [
+        "batch333-seychelles-scene1354-AI ECE-straplessDress",
+        85
+      ],
+      [
+        "batch333-seychelles-scene1354-AI ECE-fullyOpenBack",
+        90
+      ],
+      [
+        "batch333-seychelles-scene1355-weather",
+        80
+      ],
+      [
+        "batch333-seychelles-scene1355-mascotState",
+        52
+      ],
+      [
+        "batch333-seychelles-scene1355-poleDanceTheme",
+        34
+      ],
+      [
+        "batch333-seychelles-scene1355-rainbowOnly",
+        24
+      ],
+      [
+        "batch333-seychelles-scene1355-rainbowHosiery",
+        27
+      ],
+      [
+        "batch333-seychelles-scene1355-romanceBeat",
+        85
+      ],
+      [
+        "batch333-seychelles-scene1355-compoundLoveBeat",
+        73
+      ],
+      [
+        "batch333-seychelles-scene1355-hardLoveBeat",
+        81
+      ],
+      [
+        "batch333-seychelles-scene1355-interestingProp",
+        75
+      ],
+      [
+        "batch333-seychelles-scene1355-eceMissionProp-poseTargetRoll",
+        18
+      ],
+      [
+        "batch333-seychelles-scene1355-Radiance-emotion",
+        13
+      ],
+      [
+        "batch333-seychelles-scene1355-Radiance-visibleMidriff",
+        53
+      ],
+      [
+        "batch333-seychelles-scene1355-Radiance-straplessDress",
+        10
+      ],
+      [
+        "batch333-seychelles-scene1355-Radiance-fullyOpenBack",
+        75
+      ],
+      [
+        "batch333-seychelles-scene1355-Ellie-emotion",
+        37
+      ],
+      [
+        "batch333-seychelles-scene1355-Ellie-visibleMidriff",
+        85
+      ],
+      [
+        "batch333-seychelles-scene1355-Ellie-straplessDress",
+        42
+      ],
+      [
+        "batch333-seychelles-scene1355-Ellie-fullyOpenBack",
+        19
+      ],
+      [
+        "batch333-seychelles-scene1355-Alia-emotion",
+        7
+      ],
+      [
+        "batch333-seychelles-scene1355-Alia-visibleMidriff",
+        91
+      ],
+      [
+        "batch333-seychelles-scene1355-Alia-straplessDress",
+        16
+      ],
+      [
+        "batch333-seychelles-scene1355-Alia-fullyOpenBack",
+        49
+      ],
+      [
+        "batch333-seychelles-scene1355-AI ECE-emotion",
+        33
+      ],
+      [
+        "batch333-seychelles-scene1355-AI ECE-visibleMidriff",
+        25
+      ],
+      [
+        "batch333-seychelles-scene1355-AI ECE-straplessDress",
+        46
+      ],
+      [
+        "batch333-seychelles-scene1355-AI ECE-fullyOpenBack",
+        39
+      ],
+      [
+        "batch333-seychelles-x-heart",
+        30
+      ],
+      [
+        "batch333-seychelles-x-internalagency",
+        44
+      ],
+      [
+        "batch333-seychelles-x-worldxxxseries",
+        19
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch333-seychelles-scene1352-rainbowHosieryWearer",
+        96
+      ],
+      [
+        "batch333-seychelles-scene1352-rainbowHosieryPaletteMode",
+        12
+      ],
+      [
+        "batch333-seychelles-scene1352-mascotHolder",
+        38
+      ],
+      [
+        "batch333-seychelles-scene1352-interestingPropHolder",
+        4
+      ],
+      [
+        "batch333-seychelles-scene1352-interestingPropFamily",
+        78
+      ],
+      [
+        "batch333-seychelles-scene1353-rainbowHosieryWearer",
+        73
+      ],
+      [
+        "batch333-seychelles-scene1353-rainbowHosieryPaletteMode",
+        63
+      ],
+      [
+        "batch333-seychelles-scene1353-mascotHolder",
+        67
+      ],
+      [
+        "batch333-seychelles-scene1353-interestingPropHolder",
+        43
+      ],
+      [
+        "batch333-seychelles-scene1353-interestingPropFamily",
+        1
+      ],
+      [
+        "batch333-seychelles-scene1354-rainbowHosieryWearer",
+        30
+      ],
+      [
+        "batch333-seychelles-scene1354-rainbowHosieryPaletteMode",
+        18
+      ],
+      [
+        "batch333-seychelles-scene1354-mascotHolder",
+        28
+      ],
+      [
+        "batch333-seychelles-scene1354-interestingPropHolder",
+        26
+      ],
+      [
+        "batch333-seychelles-scene1354-interestingPropFamily",
+        36
+      ],
+      [
+        "batch333-seychelles-scene1355-rainbowHosieryWearer",
+        55
+      ],
+      [
+        "batch333-seychelles-scene1355-rainbowHosieryPaletteMode",
+        29
+      ],
+      [
+        "batch333-seychelles-scene1355-mascotHolder",
+        37
+      ],
+      [
+        "batch333-seychelles-scene1355-interestingPropHolder",
+        33
+      ],
+      [
+        "batch333-seychelles-scene1355-interestingPropFamily",
+        91
+      ]
+    ],
+    "primaryPairCount": 112,
+    "selectorPairCount": 20,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "1DF87D72EAA0BD144C57F11FB11E9A10BEAA39708DF1F065FAB10668D556F739",
+    "selectorPairsSha256": "55A6EE919782CF4DA2F152A1213EDF6461C7BCD7E3596B8107AD24F6F804A4B7"
+  },
+  "scenePlans": {
+    "1352": {
+      "scene": 1352,
+      "mode": "country-led hybrid",
+      "theme": "private-jet aviation couture",
+      "landmark": "a broad dry covered civic overlook above Victoria on Mahe, with the complete small clock-tower silhouette, Morne Seychellois mountain ridge, turquoise harbor, granite slopes, tropical roofs, reef-sheltered water, and clear sunset flight paths",
+      "motifs": "Seychelles island-chain silhouette, Victoria clock-tower geometry, Morne Seychellois ridge, granite-boulder facets, coco-de-mer leaf fans, cinnamon spirals, reef crescents, and Indian Ocean current arcs",
+      "culture": "Victoria and Mahe are presented through secular civic and natural geography: the clock-tower silhouette, Morne Seychellois ridge, granite slopes, harbor, reef water, tropical vegetation, and public overlook. Private-jet aviation couture appears through original wing-sweep tailoring, turbine pleats, oval-window geometry, cabin-light piping, polished composite panels, and runway-line footwear without airline branding or copied uniforms.",
+      "weather": {
+        "key": "batch333-seychelles-scene1352-weather",
+        "roll": 73,
+        "result": "red-gold dust storm",
+        "materialized": "red-gold dust storm"
+      },
+      "mascotState": {
+        "key": "batch333-seychelles-scene1352-mascotState",
+        "roll": 49,
+        "result": "MAX only"
+      },
+      "mascotHolder": {
+        "key": "batch333-seychelles-scene1352-mascotHolder",
+        "roll": 38,
+        "result": "AI ECE"
+      },
+      "mascotPlan": "MAX only. ECE securely cradles one small young golden retriever pup high against her upper torso, far right and far from Alia, the muzzle line, target, ledge, and map. No PAWS.",
+      "interestingProp": {
+        "key": "batch333-seychelles-scene1352-interestingProp",
+        "roll": 98,
+        "active": false,
+        "holder": {
+          "key": "batch333-seychelles-scene1352-interestingPropHolder",
+          "roll": 4,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch333-seychelles-scene1352-interestingPropFamily",
+          "roll": 78,
+          "result": "portable miniature planetarium projector"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch333-seychelles-scene1352-poleDanceTheme",
+        "roll": 13,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch333-seychelles-scene1352-rainbowOnly",
+        "roll": 21,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch333-seychelles-scene1352-rainbowHosiery",
+        "roll": 0,
+        "active": true,
+        "wearer": {
+          "key": "batch333-seychelles-scene1352-rainbowHosieryWearer",
+          "roll": 96,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch333-seychelles-scene1352-rainbowHosieryPaletteMode",
+          "roll": 12,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch333-seychelles-scene1352-eceMissionProp-poseTargetRoll",
+        "roll": 35
+      },
+      "materializedPropAction": "Alia uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker in unoccupied open harbor water, with no vessel, swimmer, bird, animal, person, reef, shore, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one distant clearly empty floating navigation marker in unoccupied open harbor water, with no vessel, swimmer, bird, animal, person, reef, shore, or occupied structure anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch333-seychelles-scene1352-romanceBeat",
+        "roll": 80,
+        "dynamicIndex": 8,
+        "contractResult": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch333-seychelles-scene1352-compoundLoveBeat",
+        "roll": 78,
+        "index": 6,
+        "contractResult": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "hardLoveBeat": {
+        "key": "batch333-seychelles-scene1352-hardLoveBeat",
+        "roll": 18,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1352-Radiance-emotion",
+            "roll": 18,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1352-Radiance-visibleMidriff",
+            "roll": 60,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1352-Radiance-straplessDress",
+            "roll": 99,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1352-Radiance-fullyOpenBack",
+            "roll": 76,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1352-Ellie-emotion",
+            "roll": 16,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "visible jealousy",
+            "disambiguation": {
+              "key": "batch333-seychelles-scene1352-Ellie-emotion-disambiguation",
+              "roll": 63
+            },
+            "performance": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1352-Ellie-visibleMidriff",
+            "roll": 10,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1352-Ellie-straplessDress",
+            "roll": 77,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1352-Ellie-fullyOpenBack",
+            "roll": 82,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1352-Alia-emotion",
+            "roll": 76,
+            "result": "contained resentment",
+            "materializedResult": "contained resentment",
+            "performance": "contained resentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1352-Alia-visibleMidriff",
+            "roll": 14,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1352-Alia-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1352-Alia-fullyOpenBack",
+            "roll": 78,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1352-AI ECE-emotion",
+            "roll": 18,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "romantic joy",
+            "disambiguation": {
+              "key": "batch333-seychelles-scene1352-AI ECE-emotion-disambiguation",
+              "roll": 13
+            },
+            "performance": "romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1352-AI ECE-visibleMidriff",
+            "roll": 0,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1352-AI ECE-straplessDress",
+            "roll": 27,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1352-AI ECE-fullyOpenBack",
+            "roll": 72,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "contained resentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "country-theme hybrid wing-sweep asymmetric mini built from opaque turquoise satin and granite-silver composite ribs, with one dimensional coco-de-mer leaf hip fan, a turbine-pleated diagonal hem, and sculpted oval-window heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led tailored coral short romper with a woven cinnamon-bark spiral corsage, reef-crescent beadwork crossing one hip, a split angular overskirt, and clear granite-chip slingback heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led folded emerald sculptural dress with raised granite-boulder appliques, a complete Morne ridge relief across the bodice, a stepped reef-shelf hem, and metallic mountain-arch heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led deep-navy high-waist shorts with an architectural winglet top, opaque high-gloss latex-like composite panels, oval-window metal rings, cabin-light piping, and runway-line stiletto boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "country-theme hybrid wing-sweep asymmetric mini built from opaque turquoise satin and granite-silver composite ribs, with one dimensional coco-de-mer leaf hip fan, a turbine-pleated diagonal hem, and sculpted oval-window heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led tailored coral short romper with a woven cinnamon-bark spiral corsage, reef-crescent beadwork crossing one hip, a split angular overskirt, and clear granite-chip slingback heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led folded emerald sculptural dress with raised granite-boulder appliques, a complete Morne ridge relief across the bodice, a stepped reef-shelf hem, and metallic mountain-arch heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led deep-navy high-waist shorts with an architectural winglet top, opaque high-gloss latex-like composite panels, oval-window metal rings, cabin-light piping, and runway-line stiletto boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Alia anchors the far-left safe route line. On the right, Ellie turns Radiance under one raised linked hand while ECE catches Radiance at the waist and cradles MAX high against her opposite side. The dance makes Radiance choose between Ellie's joy and ECE's possessive pull; this is not a cheek-touch cluster.",
+      "handInventory": [
+        "Alia uses both hands on the inert mission prop grip and touches nobody else",
+        "Ellie right hand links overhead with Radiance left hand for the visible turn; Ellie left hand catches Radiance securely at the near waist",
+        "Radiance left hand remains linked with Ellie right hand; Radiance right hand rests openly at ECE's near waist",
+        "ECE left hand catches Radiance at the near shoulder while ECE right forearm and hand securely cradle MAX high against her upper torso"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered civic overlook above Victoria on Mahe, with the complete small clock-tower silhouette, Morne Seychellois mountain ridge, turquoise harbor, granite slopes, tropical roofs, reef-sheltered water, and clear sunset flight paths. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: private-jet aviation couture. The theme and Seychelles location must both be immediate foreground reads. Victoria and Mahe are presented through secular civic and natural geography: the clock-tower silhouette, Morne Seychellois ridge, granite slopes, harbor, reef water, tropical vegetation, and public overlook. Private-jet aviation couture appears through original wing-sweep tailoring, turbine pleats, oval-window geometry, cabin-light piping, polished composite panels, and runway-line footwear without airline branding or copied uniforms. Stored scene rolls: weather 73=red-gold dust storm; mascot state 49=MAX only; mascot holder selector 38=AI ECE; odd prop 98=inactive; odd holder 4=Ellie; odd family 78=portable miniature planetarium projector; pole 13=inactive; rainbow-only 21=inactive; rainbow hosiery 0=active; wearer 96=AI ECE; palette 12=country-palette rainbow-like gradient; romance 80; compound 78; hard love 18; mission-prop pose/target 35. Exact wardrobe rolls: Radiance: midriff 60=covered, strapless 99=inactive, open back 76=inactive; Ellie: midriff 10=visible, strapless 77=inactive, open back 82=inactive; Alia: midriff 14=visible, strapless 81=inactive, open back 78=inactive; AI ECE: midriff 0=visible, strapless 27=active, open back 72=inactive. Exact outfit fingerprints, no substitutions: Radiance: country-theme hybrid wing-sweep asymmetric mini built from opaque turquoise satin and granite-silver composite ribs, with one dimensional coco-de-mer leaf hip fan, a turbine-pleated diagonal hem, and sculpted oval-window heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: country-led tailored coral short romper with a woven cinnamon-bark spiral corsage, reef-crescent beadwork crossing one hip, a split angular overskirt, and clear granite-chip slingback heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: country-led folded emerald sculptural dress with raised granite-boulder appliques, a complete Morne ridge relief across the bodice, a stepped reef-shelf hem, and metallic mountain-arch heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: theme-led deep-navy high-waist shorts with an architectural winglet top, opaque high-gloss latex-like composite panels, oval-window metal rings, cabin-light piping, and runway-line stiletto boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Hard country motifs dominate Radiance, Ellie, and Alia through three different dimensional techniques. Radiance and ECE carry the private-jet construction language, so at least one look is a true country-theme hybrid and ECE remains theme-led. No repeated all-over maps or palette-swapped copies. Location design vocabulary: Seychelles island-chain silhouette, Victoria clock-tower geometry, Morne Seychellois ridge, granite-boulder facets, coco-de-mer leaf fans, cinnamon spirals, reef crescents, and Indian Ocean current arcs. Use respectful secular Seychelles island-chain silhouettes, granite-boulder structures, coco-de-mer leaf fans, cinnamon-bark spirals, reef crescents, takamaka-leaf rhythms, mountain ridges, beach arcs, cloud bands, current lines, and public conservation overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, ceremonial attire, copied uniform, airline branding, badge, readable text, alcohol, military imagery, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 18=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 16=extreme happiness, radiant laughing delight, collision resolver 63 gives distinct performance visible jealousy, performed as visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 76=contained resentment, performed as contained resentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 18=extreme happiness, radiant laughing delight, collision resolver 13 gives distinct performance romantic joy, performed as romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 80: Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist. Compound roll 78: Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look. Mandatory hard-love roll 18: a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Alia anchors the far-left safe route line. On the right, Ellie turns Radiance under one raised linked hand while ECE catches Radiance at the waist and cradles MAX high against her opposite side. The dance makes Radiance choose between Ellie's joy and ECE's possessive pull; this is not a cheek-touch cluster. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: Alia uses both hands on the inert mission prop grip and touches nobody else; Ellie right hand links overhead with Radiance left hand for the visible turn; Ellie left hand catches Radiance securely at the near waist; Radiance left hand remains linked with Ellie right hand; Radiance right hand rests openly at ECE's near waist; ECE left hand catches Radiance at the near shoulder while ECE right forearm and hand securely cradle MAX high against her upper torso. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker in unoccupied open harbor water, with no vessel, swimmer, bird, animal, person, reef, shore, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. Mascot state 49=MAX only. Mascot holder selector 38=AI ECE. MAX only. ECE securely cradles one small young golden retriever pup high against her upper torso, far right and far from Alia, the muzzle line, target, ledge, and map. No PAWS. Odd-prop roll 98 is inactive. Do not add any bizarre secondary prop; stored inactive holder 4=Ellie and family 78=portable miniature planetarium projector remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render red-gold dust storm cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1353": {
+      "scene": 1353,
+      "mode": "country-led hybrid",
+      "theme": "private-jet aviation couture",
+      "landmark": "a broad dry covered forest-conservation overlook inside Vallee de Mai on Praslin, with towering complete coco-de-mer palm crowns, immense fan leaves, cinnamon trunks, dark granite outcrops, filtered tropical light, an empty raised path, and a distant mountain opening",
+      "motifs": "Seychelles island-chain silhouette, Vallee de Mai palm-crown fans, coco-de-mer leaf ribs, cinnamon-bark spirals, granite outcrop facets, black-parrot wing arcs, mountain openings, and forest route lines",
+      "culture": "Vallee de Mai is presented through secular forest conservation, towering coco-de-mer palms, huge fan leaves, cinnamon trunks, granite outcrops, filtered light, and an empty protected path. Private-jet aviation couture appears through original wing structures, turbine pleats, oval-window forms, cabin-light piping, polished composite tailoring, and runway geometry without airline branding or copied uniforms.",
+      "weather": {
+        "key": "batch333-seychelles-scene1353-weather",
+        "roll": 62,
+        "result": "dense rolling fog",
+        "materialized": "dense rolling fog"
+      },
+      "mascotState": {
+        "key": "batch333-seychelles-scene1353-mascotState",
+        "roll": 66,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch333-seychelles-scene1353-mascotHolder",
+        "roll": 67,
+        "result": "Ellie"
+      },
+      "mascotPlan": "Neither mascot appears.",
+      "interestingProp": {
+        "key": "batch333-seychelles-scene1353-interestingProp",
+        "roll": 33,
+        "active": false,
+        "holder": {
+          "key": "batch333-seychelles-scene1353-interestingPropHolder",
+          "roll": 43,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch333-seychelles-scene1353-interestingPropFamily",
+          "roll": 1,
+          "result": "oversized transparent mechanical typewriter"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch333-seychelles-scene1353-poleDanceTheme",
+        "roll": 60,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch333-seychelles-scene1353-rainbowOnly",
+        "roll": 50,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch333-seychelles-scene1353-rainbowHosiery",
+        "roll": 53,
+        "active": false,
+        "wearer": {
+          "key": "batch333-seychelles-scene1353-rainbowHosieryWearer",
+          "roll": 73,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch333-seychelles-scene1353-rainbowHosieryPaletteMode",
+          "roll": 63,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch333-seychelles-scene1353-eceMissionProp-poseTargetRoll",
+        "roll": 96
+      },
+      "materializedPropAction": "AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly unoccupied abstract geometric paper route marker fixed to a complete thick sand-and-granite safety backstop on a closed empty forest lane, with no person, animal, palm, path user, occupied structure, or camera in or beyond the line. No ammunition, reload, firing, or trigger contact appears.",
+      "target": "one clearly unoccupied abstract geometric paper route marker fixed to a complete thick sand-and-granite safety backstop on a closed empty forest lane, with no person, animal, palm, path user, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch333-seychelles-scene1353-romanceBeat",
+        "roll": 35,
+        "dynamicIndex": 11,
+        "contractResult": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch333-seychelles-scene1353-compoundLoveBeat",
+        "roll": 67,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "hardLoveBeat": {
+        "key": "batch333-seychelles-scene1353-hardLoveBeat",
+        "roll": 19,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1353-Radiance-emotion",
+            "roll": 83,
+            "result": "crying with visible tears",
+            "materializedResult": "crying with visible tears",
+            "performance": "crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1353-Radiance-visibleMidriff",
+            "roll": 75,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1353-Radiance-straplessDress",
+            "roll": 64,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1353-Radiance-fullyOpenBack",
+            "roll": 81,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1353-Ellie-emotion",
+            "roll": 71,
+            "result": "suspicion",
+            "materializedResult": "suspicion",
+            "performance": "suspicion expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1353-Ellie-visibleMidriff",
+            "roll": 43,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1353-Ellie-straplessDress",
+            "roll": 72,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1353-Ellie-fullyOpenBack",
+            "roll": 89,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1353-Alia-emotion",
+            "roll": 29,
+            "result": "hope",
+            "materializedResult": "hope",
+            "performance": "hope expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1353-Alia-visibleMidriff",
+            "roll": 65,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1353-Alia-straplessDress",
+            "roll": 94,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1353-Alia-fullyOpenBack",
+            "roll": 55,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1353-AI ECE-emotion",
+            "roll": 51,
+            "result": "intense curiosity",
+            "materializedResult": "intense curiosity",
+            "performance": "intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1353-AI ECE-visibleMidriff",
+            "roll": 55,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1353-AI ECE-straplessDress",
+            "roll": 92,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1353-AI ECE-fullyOpenBack",
+            "roll": 37,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "suspicion expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "hope expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "country-led one-shoulder ivory corsage mini with layered coco-de-mer leaf ribs, cinnamon-lace-inspired openwork over full opaque lining, an angled granite-chip hem, and leaf-spine heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led magenta high-waist tailored shorts with a sculpted black-parrot wing top, beadworked palm-crown panels, a floating reef-crescent side drape, and faceted coral heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-theme hybrid emerald peplum micro-suit with granite-relief shoulders, turbine-radial pleats, oval-window hip frames, cinnamon piping, and landing-line metallic heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led charcoal cut-panel column mini with opaque high-gloss composite sections, cabin-light channels, a winglet side structure, a precise asymmetric flight-line hem, and turbine-ring heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Seychelles leaf-rib embroidery and subtle private-jet wing-sweep seaming, fitted black jeans, and practical black boots"
+      },
+      "outfitFingerprints": {
+        "Radiance": "country-led one-shoulder ivory corsage mini with layered coco-de-mer leaf ribs, cinnamon-lace-inspired openwork over full opaque lining, an angled granite-chip hem, and leaf-spine heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led magenta high-waist tailored shorts with a sculpted black-parrot wing top, beadworked palm-crown panels, a floating reef-crescent side drape, and faceted coral heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-theme hybrid emerald peplum micro-suit with granite-relief shoulders, turbine-radial pleats, oval-window hip frames, cinnamon piping, and landing-line metallic heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led charcoal cut-panel column mini with opaque high-gloss composite sections, cabin-light channels, a winglet side structure, a precise asymmetric flight-line hem, and turbine-ring heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Seychelles leaf-rib embroidery and subtle private-jet wing-sweep seaming, fitted black jeans, and practical black boots"
+      },
+      "composition": "ECE stands far left demonstrating the open unloaded mechanism toward the empty dry route marker. On the right, the male turns Ellie beneath their linked hands while holding Alia at the waist; his head and strongest sustained eye line return unmistakably to ECE. Radiance catches Alia's free hand and pulls her toward a competing dance, making the adult infidelity split immediately readable.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop during the unloaded open-mechanism demonstration and touches nobody else",
+        "the male left hand links overhead with Ellie right hand for the visible turn; his right hand holds Alia securely at the near waist; his strongest eye line remains on ECE",
+        "Ellie right hand stays linked with the male left hand and Ellie left hand rests on his near shoulder",
+        "Alia left hand rests on the male's near forearm and Alia right hand links with Radiance left hand",
+        "Radiance left hand stays linked with Alia right hand and Radiance right hand rests at Ellie's near waist"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch333-seychelles-scene2-male-emotion",
+          "roll": 47,
+          "result": "awe"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry covered forest-conservation overlook inside Vallee de Mai on Praslin, with towering complete coco-de-mer palm crowns, immense fan leaves, cinnamon trunks, dark granite outcrops, filtered tropical light, an empty raised path, and a distant mountain opening. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: private-jet aviation couture. The theme and Seychelles location must both be immediate foreground reads. Vallee de Mai is presented through secular forest conservation, towering coco-de-mer palms, huge fan leaves, cinnamon trunks, granite outcrops, filtered light, and an empty protected path. Private-jet aviation couture appears through original wing structures, turbine pleats, oval-window forms, cabin-light piping, polished composite tailoring, and runway geometry without airline branding or copied uniforms. Stored scene rolls: weather 62=dense rolling fog; mascot state 66=neither mascot; mascot holder selector 67=Ellie; odd prop 33=inactive; odd holder 43=Ellie; odd family 1=oversized transparent mechanical typewriter; pole 60=inactive; rainbow-only 50=inactive; rainbow hosiery 53=inactive; wearer 73=AI ECE; palette 63=original independent rainbow gradient; romance 35; compound 67; hard love 19; mission-prop pose/target 96. Exact wardrobe rolls: Radiance: midriff 75=covered, strapless 64=inactive, open back 81=inactive; Ellie: midriff 43=visible, strapless 72=inactive, open back 89=inactive; Alia: midriff 65=covered, strapless 94=inactive, open back 55=inactive; AI ECE: midriff 55=covered, strapless 92=inactive, open back 37=inactive. Exact outfit fingerprints, no substitutions: Radiance: country-led one-shoulder ivory corsage mini with layered coco-de-mer leaf ribs, cinnamon-lace-inspired openwork over full opaque lining, an angled granite-chip hem, and leaf-spine heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: country-led magenta high-waist tailored shorts with a sculpted black-parrot wing top, beadworked palm-crown panels, a floating reef-crescent side drape, and faceted coral heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: country-theme hybrid emerald peplum micro-suit with granite-relief shoulders, turbine-radial pleats, oval-window hip frames, cinnamon piping, and landing-line metallic heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: theme-led charcoal cut-panel column mini with opaque high-gloss composite sections, cabin-light channels, a winglet side structure, a precise asymmetric flight-line hem, and turbine-ring heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Seychelles leaf-rib embroidery and subtle private-jet wing-sweep seaming, fitted black jeans, and practical black boots. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Hard country motifs dominate Radiance, Ellie, and Alia through leaf architecture, cinnamon weaving, granite relief, and bird-wing abstraction. Alia and ECE carry unmistakable private-jet construction language. No repeated map-print surfaces. Location design vocabulary: Seychelles island-chain silhouette, Vallee de Mai palm-crown fans, coco-de-mer leaf ribs, cinnamon-bark spirals, granite outcrop facets, black-parrot wing arcs, mountain openings, and forest route lines. Use respectful secular Seychelles island-chain silhouettes, granite-boulder structures, coco-de-mer leaf fans, cinnamon-bark spirals, reef crescents, takamaka-leaf rhythms, mountain ridges, beach arcs, cloud bands, current lines, and public conservation overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, ceremonial attire, copied uniform, airline branding, badge, readable text, alcohol, military imagery, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 83=crying with visible tears, performed as crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 71=suspicion, performed as suspicion expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 29=hope, performed as hope expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 51=intense curiosity, performed as intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 47=awe, performed as awe expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 35: The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder. Compound roll 67: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Mandatory hard-love roll 19: a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE stands far left demonstrating the open unloaded mechanism toward the empty dry route marker. On the right, the male turns Ellie beneath their linked hands while holding Alia at the waist; his head and strongest sustained eye line return unmistakably to ECE. Radiance catches Alia's free hand and pulls her toward a competing dance, making the adult infidelity split immediately readable. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop during the unloaded open-mechanism demonstration and touches nobody else; the male left hand links overhead with Ellie right hand for the visible turn; his right hand holds Alia securely at the near waist; his strongest eye line remains on ECE; Ellie right hand stays linked with the male left hand and Ellie left hand rests on his near shoulder; Alia left hand rests on the male's near forearm and Alia right hand links with Radiance left hand; Radiance left hand stays linked with Alia right hand and Radiance right hand rests at Ellie's near waist. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly unoccupied abstract geometric paper route marker fixed to a complete thick sand-and-granite safety backstop on a closed empty forest lane, with no person, animal, palm, path user, occupied structure, or camera in or beyond the line. No ammunition, reload, firing, or trigger contact appears. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 66=neither mascot. Mascot holder selector 67=Ellie. Neither mascot appears. Odd-prop roll 33 is inactive. Do not add any bizarre secondary prop; stored inactive holder 43=Ellie and family 1=oversized transparent mechanical typewriter remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render dense rolling fog cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1354": {
+      "scene": 1354,
+      "mode": "theme-led original",
+      "theme": "private-jet aviation couture",
+      "landmark": "a broad dry covered coastal overlook above Anse Source d'Argent on La Digue, with complete pale granite boulders, shallow turquoise water, coral reef shelves, white-sand arcs, takamaka trees, distant islands, and layered lenticular clouds",
+      "motifs": "location-only granite boulders, reef shelves, beach arcs, takamaka rhythms, shallow-water bands, distant island silhouettes, and lenticular cloud layers",
+      "culture": "Anse Source d'Argent remains an equally dominant Seychelles foreground through its pale granite boulders, shallow turquoise water, reef shelves, sand arcs, takamaka trees, and distant islands. All four outfits are private-jet aviation originals with no forced country maps or matching surface prints.",
+      "weather": {
+        "key": "batch333-seychelles-scene1354-weather",
+        "roll": 95,
+        "result": "stacked lenticular clouds",
+        "materialized": "stacked lenticular clouds"
+      },
+      "mascotState": {
+        "key": "batch333-seychelles-scene1354-mascotState",
+        "roll": 19,
+        "result": "PAWS and MAX together"
+      },
+      "mascotHolder": {
+        "key": "batch333-seychelles-scene1354-mascotHolder",
+        "roll": 28,
+        "result": "Ellie"
+      },
+      "mascotPlan": "PAWS and MAX together. One tiny collarless golden kitten and one small young golden retriever pup play nose-to-nose on a low broad padded case beside Ellie, far from ECE, the inert prop, muzzle line, water edge, and route target. Ellie supervises without adding a third hand.",
+      "interestingProp": {
+        "key": "batch333-seychelles-scene1354-interestingProp",
+        "roll": 40,
+        "active": false,
+        "holder": {
+          "key": "batch333-seychelles-scene1354-interestingPropHolder",
+          "roll": 26,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch333-seychelles-scene1354-interestingPropFamily",
+          "roll": 36,
+          "result": "giant tuning fork instrument"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch333-seychelles-scene1354-poleDanceTheme",
+        "roll": 79,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch333-seychelles-scene1354-rainbowOnly",
+        "roll": 11,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch333-seychelles-scene1354-rainbowHosiery",
+        "roll": 78,
+        "active": false,
+        "wearer": {
+          "key": "batch333-seychelles-scene1354-rainbowHosieryWearer",
+          "roll": 30,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch333-seychelles-scene1354-rainbowHosieryPaletteMode",
+          "roll": 18,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch333-seychelles-scene1354-eceMissionProp-poseTargetRoll",
+        "roll": 77
+      },
+      "materializedPropAction": "A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one distant clearly empty floating navigation marker in unoccupied open turquoise water, with no vessel, swimmer, bird, animal, person, reef, boulder, shore, or occupied structure anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one distant clearly empty floating navigation marker in unoccupied open turquoise water, with no vessel, swimmer, bird, animal, person, reef, boulder, shore, or occupied structure anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch333-seychelles-scene1354-romanceBeat",
+        "roll": 58,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch333-seychelles-scene1354-compoundLoveBeat",
+        "roll": 24,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "hardLoveBeat": {
+        "key": "batch333-seychelles-scene1354-hardLoveBeat",
+        "roll": 60,
+        "result": "a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1354-Radiance-emotion",
+            "roll": 12,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1354-Radiance-visibleMidriff",
+            "roll": 90,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1354-Radiance-straplessDress",
+            "roll": 45,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1354-Radiance-fullyOpenBack",
+            "roll": 66,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1354-Ellie-emotion",
+            "roll": 54,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1354-Ellie-visibleMidriff",
+            "roll": 20,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1354-Ellie-straplessDress",
+            "roll": 75,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1354-Ellie-fullyOpenBack",
+            "roll": 80,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1354-Alia-emotion",
+            "roll": 66,
+            "result": "possessive tension",
+            "materializedResult": "possessive tension",
+            "performance": "possessive tension expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1354-Alia-visibleMidriff",
+            "roll": 24,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1354-Alia-straplessDress",
+            "roll": 27,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1354-Alia-fullyOpenBack",
+            "roll": 48,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1354-AI ECE-emotion",
+            "roll": 8,
+            "result": "romantic joy",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "disambiguation": {
+              "key": "batch333-seychelles-scene1354-AI ECE-emotion-disambiguation",
+              "roll": 15
+            },
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1354-AI ECE-visibleMidriff",
+            "roll": 98,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1354-AI ECE-straplessDress",
+            "roll": 85,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1354-AI ECE-fullyOpenBack",
+            "roll": 90,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "aching romantic longing expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "possessive tension expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "turbine-spiral sculpted mini in opaque pearl composite and turquoise satin, with radial pleats, a floating asymmetric wing hem, cabin-light bead channels, and spiral-engine heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "oval-window corsage two-piece in coral satin and fully lined lace-inspired openwork, with a sweeping wing-trail overskirt, polished ring hardware, and clear window-frame heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "tailored emerald short romper with braided cabin-lattice panels, a dramatic single winglet peplum, metallic mesh over opaque lining, and landing-skid architectural heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "deep-navy peplum micro-suit with high-waist shorts, opaque high-gloss latex-like flight panels, runway-light piping, a sharp split-tail hem, and turbine-cage stiletto boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "turbine-spiral sculpted mini in opaque pearl composite and turquoise satin, with radial pleats, a floating asymmetric wing hem, cabin-light bead channels, and spiral-engine heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "oval-window corsage two-piece in coral satin and fully lined lace-inspired openwork, with a sweeping wing-trail overskirt, polished ring hardware, and clear window-frame heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "tailored emerald short romper with braided cabin-lattice panels, a dramatic single winglet peplum, metallic mesh over opaque lining, and landing-skid architectural heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "deep-navy peplum micro-suit with high-waist shorts, opaque high-gloss latex-like flight panels, runway-light piping, a sharp split-tail hem, and turbine-cage stiletto boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE stands far left in the completed safe handoff sight picture. On the right, Radiance, Ellie, and Alia form a rotating three-person slow-dance chain: Ellie leads Radiance by one linked hand, Radiance wraps Alia at the waist, and Alia reaches back to Ellie to close the moving circle. PAWS and MAX play nose-to-nose on a low padded case beside Ellie, safely separated from ECE.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop grip in the completed handoff sight picture and touches nobody else",
+        "Ellie right hand links with Radiance left hand to lead the slow-dance turn; Ellie left hand rests visibly on Alia's near shoulder while supervising both mascots beside her",
+        "Radiance left hand stays linked with Ellie right hand and Radiance right hand wraps Alia securely at the near waist",
+        "Alia left hand rests on Radiance's near shoulder and Alia right hand reaches back to Ellie's near forearm to close the three-person dance chain"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered coastal overlook above Anse Source d'Argent on La Digue, with complete pale granite boulders, shallow turquoise water, coral reef shelves, white-sand arcs, takamaka trees, distant islands, and layered lenticular clouds. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: private-jet aviation couture. The theme and Seychelles location must both be immediate foreground reads. Anse Source d'Argent remains an equally dominant Seychelles foreground through its pale granite boulders, shallow turquoise water, reef shelves, sand arcs, takamaka trees, and distant islands. All four outfits are private-jet aviation originals with no forced country maps or matching surface prints. Stored scene rolls: weather 95=stacked lenticular clouds; mascot state 19=PAWS and MAX together; mascot holder selector 28=Ellie; odd prop 40=inactive; odd holder 26=Alia; odd family 36=giant tuning fork instrument; pole 79=inactive; rainbow-only 11=inactive; rainbow hosiery 78=inactive; wearer 30=Radiance; palette 18=country-palette rainbow-like gradient; romance 58; compound 24; hard love 60; mission-prop pose/target 77. Exact wardrobe rolls: Radiance: midriff 90=covered, strapless 45=inactive, open back 66=inactive; Ellie: midriff 20=visible, strapless 75=inactive, open back 80=inactive; Alia: midriff 24=visible, strapless 27=active, open back 48=inactive; AI ECE: midriff 98=covered, strapless 85=inactive, open back 90=inactive. Exact outfit fingerprints, no substitutions: Radiance: turbine-spiral sculpted mini in opaque pearl composite and turquoise satin, with radial pleats, a floating asymmetric wing hem, cabin-light bead channels, and spiral-engine heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: oval-window corsage two-piece in coral satin and fully lined lace-inspired openwork, with a sweeping wing-trail overskirt, polished ring hardware, and clear window-frame heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: tailored emerald short romper with braided cabin-lattice panels, a dramatic single winglet peplum, metallic mesh over opaque lining, and landing-skid architectural heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: deep-navy peplum micro-suit with high-waist shorts, opaque high-gloss latex-like flight panels, runway-light piping, a sharp split-tail hem, and turbine-cage stiletto boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Theme-led scene. All four outfits use different private-jet construction ideas and no garment uses an all-over Seychelles map print. The landmark itself carries the country read at equal visual weight. Location design vocabulary: location-only granite boulders, reef shelves, beach arcs, takamaka rhythms, shallow-water bands, distant island silhouettes, and lenticular cloud layers. Use respectful secular Seychelles island-chain silhouettes, granite-boulder structures, coco-de-mer leaf fans, cinnamon-bark spirals, reef crescents, takamaka-leaf rhythms, mountain ridges, beach arcs, cloud bands, current lines, and public conservation overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, ceremonial attire, copied uniform, airline branding, badge, readable text, alcohol, military imagery, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 12=romantic joy, performed as romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 54=aching romantic longing, performed as aching romantic longing expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 66=possessive tension, performed as possessive tension expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 8=romantic joy, collision resolver 15 gives distinct performance extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 58: Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face. Compound roll 24: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Mandatory hard-love roll 60: a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE stands far left in the completed safe handoff sight picture. On the right, Radiance, Ellie, and Alia form a rotating three-person slow-dance chain: Ellie leads Radiance by one linked hand, Radiance wraps Alia at the waist, and Alia reaches back to Ellie to close the moving circle. PAWS and MAX play nose-to-nose on a low padded case beside Ellie, safely separated from ECE. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop grip in the completed handoff sight picture and touches nobody else; Ellie right hand links with Radiance left hand to lead the slow-dance turn; Ellie left hand rests visibly on Alia's near shoulder while supervising both mascots beside her; Radiance left hand stays linked with Ellie right hand and Radiance right hand wraps Alia securely at the near waist; Alia left hand rests on Radiance's near shoulder and Alia right hand reaches back to Ellie's near forearm to close the three-person dance chain. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one distant clearly empty floating navigation marker in unoccupied open turquoise water, with no vessel, swimmer, bird, animal, person, reef, boulder, shore, or occupied structure anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 19=PAWS and MAX together. Mascot holder selector 28=Ellie. PAWS and MAX together. One tiny collarless golden kitten and one small young golden retriever pup play nose-to-nose on a low broad padded case beside Ellie, far from ECE, the inert prop, muzzle line, water edge, and route target. Ellie supervises without adding a third hand. Odd-prop roll 40 is inactive. Do not add any bizarre secondary prop; stored inactive holder 26=Alia and family 36=giant tuning fork instrument remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render stacked lenticular clouds cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1355": {
+      "scene": 1355,
+      "mode": "theme-led original",
+      "theme": "private-jet aviation couture",
+      "landmark": "a broad dry covered marine-research overlook above Aldabra Atoll, with the complete vast lagoon arc, raised coral rim, mangrove channels, pale reef flats, open Indian Ocean, distant giant tortoises outside every target line, and a dramatic windstorm cloud wall",
+      "motifs": "location-only Aldabra lagoon arc, raised coral rim, mangrove channels, reef-flat bands, ocean horizon, distant tortoise silhouettes, and windstorm cloud layers",
+      "culture": "Aldabra remains an equally dominant Seychelles foreground through its vast lagoon, raised coral rim, mangrove channels, reef flats, open ocean, distant wildlife, and conservation route. All four outfits are private-jet aviation originals with no forced country maps or matching surface prints.",
+      "weather": {
+        "key": "batch333-seychelles-scene1355-weather",
+        "roll": 80,
+        "result": "powerful windstorm with controlled fabric motion",
+        "materialized": "powerful windstorm with controlled fabric motion"
+      },
+      "mascotState": {
+        "key": "batch333-seychelles-scene1355-mascotState",
+        "roll": 52,
+        "result": "MAX only"
+      },
+      "mascotHolder": {
+        "key": "batch333-seychelles-scene1355-mascotHolder",
+        "roll": 37,
+        "result": "Ellie"
+      },
+      "mascotPlan": "MAX only. Ellie securely cradles one small young golden retriever pup high against her upper torso, far from ECE, the inert prop, paper target, wildlife, mangroves, ledge, and wet surfaces. No PAWS.",
+      "interestingProp": {
+        "key": "batch333-seychelles-scene1355-interestingProp",
+        "roll": 75,
+        "active": false,
+        "holder": {
+          "key": "batch333-seychelles-scene1355-interestingPropHolder",
+          "roll": 33,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch333-seychelles-scene1355-interestingPropFamily",
+          "roll": 91,
+          "result": "inflatable geometric weather balloon pack"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch333-seychelles-scene1355-poleDanceTheme",
+        "roll": 34,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch333-seychelles-scene1355-rainbowOnly",
+        "roll": 24,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch333-seychelles-scene1355-rainbowHosiery",
+        "roll": 27,
+        "active": false,
+        "wearer": {
+          "key": "batch333-seychelles-scene1355-rainbowHosieryWearer",
+          "roll": 55,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch333-seychelles-scene1355-rainbowHosieryPaletteMode",
+          "roll": 29,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch333-seychelles-scene1355-eceMissionProp-poseTargetRoll",
+        "roll": 18
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied abstract geometric paper route marker fixed to a complete thick coral-sand safety backstop on a closed empty research lane, with no person, animal, tortoise, mangrove, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied abstract geometric paper route marker fixed to a complete thick coral-sand safety backstop on a closed empty research lane, with no person, animal, tortoise, mangrove, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch333-seychelles-scene1355-romanceBeat",
+        "roll": 85,
+        "dynamicIndex": 1,
+        "contractResult": "Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance."
+      },
+      "compoundLoveBeat": {
+        "key": "batch333-seychelles-scene1355-compoundLoveBeat",
+        "roll": 73,
+        "index": 1,
+        "contractResult": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "hardLoveBeat": {
+        "key": "batch333-seychelles-scene1355-hardLoveBeat",
+        "roll": 81,
+        "result": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1355-Radiance-emotion",
+            "roll": 13,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1355-Radiance-visibleMidriff",
+            "roll": 53,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1355-Radiance-straplessDress",
+            "roll": 10,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1355-Radiance-fullyOpenBack",
+            "roll": 75,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1355-Ellie-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1355-Ellie-visibleMidriff",
+            "roll": 85,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1355-Ellie-straplessDress",
+            "roll": 42,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1355-Ellie-fullyOpenBack",
+            "roll": 19,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1355-Alia-emotion",
+            "roll": 7,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1355-Alia-visibleMidriff",
+            "roll": 91,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1355-Alia-straplessDress",
+            "roll": 16,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1355-Alia-fullyOpenBack",
+            "roll": 49,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch333-seychelles-scene1355-AI ECE-emotion",
+            "roll": 33,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch333-seychelles-scene1355-AI ECE-visibleMidriff",
+            "roll": 25,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch333-seychelles-scene1355-AI ECE-straplessDress",
+            "roll": 46,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch333-seychelles-scene1355-AI ECE-fullyOpenBack",
+            "roll": 39,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "overwhelming relief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "winglet-drape one-shoulder mini in sunset-gold satin with opaque pearl composite ribs, a swept aerodynamic hem, articulated cabin-light fringe, and polished wingtip heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "turbine-pleated high-waist shorts with a coral folded bodice, fully lined navy lace-inspired openwork side panels, a compact oval-window hip frame, and engine-ring platform heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "cut-panel emerald mini with a sculpted transparent architectural overlay above full opaque lining, crossed flight-path metallic ribs, a sharply stepped tail hem, and landing-strut heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "charcoal architectural romper with opaque high-gloss latex-like composite armor panels, asymmetric cabin-window cut frames, runway-light piping, a split wing-tail peplum, and illuminated route-line boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "winglet-drape one-shoulder mini in sunset-gold satin with opaque pearl composite ribs, a swept aerodynamic hem, articulated cabin-light fringe, and polished wingtip heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "turbine-pleated high-waist shorts with a coral folded bodice, fully lined navy lace-inspired openwork side panels, a compact oval-window hip frame, and engine-ring platform heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "cut-panel emerald mini with a sculpted transparent architectural overlay above full opaque lining, crossed flight-path metallic ribs, a sharply stepped tail hem, and landing-strut heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "charcoal architectural romper with opaque high-gloss latex-like composite armor panels, asymmetric cabin-window cut frames, runway-light piping, a split wing-tail peplum, and illuminated route-line boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE anchors the far-left paper-target lane. Radiance steps away to the right while Ellie catches Radiance's left hand and Alia catches her right forearm before closing into a protective behind-waist embrace. Ellie cradles MAX securely with her other arm, so Radiance's torn choice between Ellie's invitation and Alia's protective pursuit is unmistakable.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop grip at the visible paper target and touches nobody else",
+        "Ellie right hand catches Radiance left hand while Ellie left forearm and hand securely cradle MAX high against her upper torso",
+        "Radiance left hand stays linked with Ellie right hand and Radiance right hand rests visibly on Alia's near forearm",
+        "Alia left hand catches Radiance's right forearm and Alia right arm and hand close around Radiance's near waist in a protective behind embrace"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered marine-research overlook above Aldabra Atoll, with the complete vast lagoon arc, raised coral rim, mangrove channels, pale reef flats, open Indian Ocean, distant giant tortoises outside every target line, and a dramatic windstorm cloud wall. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: private-jet aviation couture. The theme and Seychelles location must both be immediate foreground reads. Aldabra remains an equally dominant Seychelles foreground through its vast lagoon, raised coral rim, mangrove channels, reef flats, open ocean, distant wildlife, and conservation route. All four outfits are private-jet aviation originals with no forced country maps or matching surface prints. Stored scene rolls: weather 80=powerful windstorm with controlled fabric motion; mascot state 52=MAX only; mascot holder selector 37=Ellie; odd prop 75=inactive; odd holder 33=Radiance; odd family 91=inflatable geometric weather balloon pack; pole 34=inactive; rainbow-only 24=inactive; rainbow hosiery 27=inactive; wearer 55=AI ECE; palette 29=country-palette rainbow-like gradient; romance 85; compound 73; hard love 81; mission-prop pose/target 18. Exact wardrobe rolls: Radiance: midriff 53=covered, strapless 10=active, open back 75=inactive; Ellie: midriff 85=covered, strapless 42=inactive, open back 19=active; Alia: midriff 91=covered, strapless 16=active, open back 49=inactive; AI ECE: midriff 25=visible, strapless 46=inactive, open back 39=inactive. Exact outfit fingerprints, no substitutions: Radiance: winglet-drape one-shoulder mini in sunset-gold satin with opaque pearl composite ribs, a swept aerodynamic hem, articulated cabin-light fringe, and polished wingtip heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: turbine-pleated high-waist shorts with a coral folded bodice, fully lined navy lace-inspired openwork side panels, a compact oval-window hip frame, and engine-ring platform heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: cut-panel emerald mini with a sculpted transparent architectural overlay above full opaque lining, crossed flight-path metallic ribs, a sharply stepped tail hem, and landing-strut heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: charcoal architectural romper with opaque high-gloss latex-like composite armor panels, asymmetric cabin-window cut frames, runway-light piping, a split wing-tail peplum, and illuminated route-line boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Theme-led scene. All four outfits use different private-jet silhouette and material systems. Country identity comes from the unmistakable Aldabra landmark, not repeated map graphics. Location design vocabulary: location-only Aldabra lagoon arc, raised coral rim, mangrove channels, reef-flat bands, ocean horizon, distant tortoise silhouettes, and windstorm cloud layers. Use respectful secular Seychelles island-chain silhouettes, granite-boulder structures, coco-de-mer leaf fans, cinnamon-bark spirals, reef crescents, takamaka-leaf rhythms, mountain ridges, beach arcs, cloud bands, current lines, and public conservation overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, ceremonial attire, copied uniform, airline branding, badge, readable text, alcohol, military imagery, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 13=romantic joy, performed as romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 37=magnetic confidence, performed as magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 7=tender affection, performed as tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 33=overwhelming relief, performed as overwhelming relief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 85: Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance. Compound roll 73: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE. Mandatory hard-love roll 81: one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE anchors the far-left paper-target lane. Radiance steps away to the right while Ellie catches Radiance's left hand and Alia catches her right forearm before closing into a protective behind-waist embrace. Ellie cradles MAX securely with her other arm, so Radiance's torn choice between Ellie's invitation and Alia's protective pursuit is unmistakable. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop grip at the visible paper target and touches nobody else; Ellie right hand catches Radiance left hand while Ellie left forearm and hand securely cradle MAX high against her upper torso; Radiance left hand stays linked with Ellie right hand and Radiance right hand rests visibly on Alia's near forearm; Alia left hand catches Radiance's right forearm and Alia right arm and hand close around Radiance's near waist in a protective behind embrace. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied abstract geometric paper route marker fixed to a complete thick coral-sand safety backstop on a closed empty research lane, with no person, animal, tortoise, mangrove, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 52=MAX only. Mascot holder selector 37=Ellie. MAX only. Ellie securely cradles one small young golden retriever pup high against her upper torso, far from ECE, the inert prop, paper target, wildlife, mangroves, ledge, and wet surfaces. No PAWS. Odd-prop roll 75 is inactive. Do not add any bizarre secondary prop; stored inactive holder 33=Radiance and family 91=inflatable geometric weather balloon pack remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render powerful windstorm with controlled fabric motion cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": [
+    {
+      "scene": 1352,
+      "raw": "tmp/world-195x4/batch-333/raw/1352-raw.png",
+      "recoveryUsed": false,
+      "result": "accepted",
+      "audit": "Four adults, eight traceable arms and hands, Alia alone owns the downrange prop, MAX is safely held by ECE, the partner turn is readable, and all four outfit constructions remain distinct."
+    },
+    {
+      "scene": 1353,
+      "raw": null,
+      "recovery": "tmp/world-195x4/batch-333/raw/1353-recovery.png",
+      "recoveryUsed": true,
+      "result": "rejected",
+      "audit": "Five adults and the male dance are present, but at least one owner hand is hidden or ambiguous and the recorded competing-dance contact graph is not fully materialized."
+    },
+    {
+      "scene": 1354,
+      "raw": "tmp/world-195x4/batch-333/raw/1354-raw.png",
+      "recovery": "tmp/world-195x4/batch-333/raw/1354-recovery.png",
+      "recoveryUsed": true,
+      "result": "accepted",
+      "audit": "Four adults, eight traceable arms and hands, ECE alone owns the downrange prop, PAWS and MAX share a safe supervised play beat, the three-person moving dance is readable, and the four theme-led constructions remain distinct."
+    },
+    {
+      "scene": 1355,
+      "raw": "tmp/world-195x4/batch-333/raw/1355-raw.png",
+      "recovery": "tmp/world-195x4/batch-333/raw/1355-recovery.png",
+      "recoveryUsed": true,
+      "result": "rejected",
+      "audit": "The pursuit and MAX beat read clearly, but Alia's second hand remains hidden or ambiguously merged after the single recovery pass."
+    }
+  ],
+  "acceptedAssets": [
+    "assets/lore/starlight-era/1352-seychelles-victoria-private-jet-dance-max.png",
+    "assets/lore/starlight-era/1354-seychelles-anse-source-dargent-private-jet-slow-dance-paws-max.png"
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1353,
+      "reason": "strict anatomy and recorded-contact-graph failure after recovery"
+    },
+    {
+      "scene": 1355,
+      "reason": "strict anatomy failure after recovery"
+    }
+  ],
+  "xPost": {
+    "status": "eligible-pending-publication",
+    "requiredAcceptedCurrentCountryAssets": 2,
+    "availableAcceptedCurrentCountryAssets": 2,
+    "caption": "Seychelles ❤️ Saint Lucia #Seychelles #WorldXXXSeries",
+    "attachments": [
+      "assets/lore/starlight-era/1352-seychelles-victoria-private-jet-dance-max.png",
+      "assets/lore/starlight-era/1354-seychelles-anse-source-dargent-private-jet-slow-dance-paws-max.png",
+      "assets/lore/starlight-era/1344-saint-lucia-soufriere-runway-paper-target-recovery.png"
+    ]
+  },
+  "terminalAt": "2026-08-10T07:58:00.524Z",
+  "acceptanceGate": {
+    "anatomy": "strict exact-owner limb and hand audit",
+    "originality": "distinct silhouette, construction, material, motif technique, hem architecture, and footwear",
+    "romance": "mandatory hard-love beat must be the first read",
+    "fusion": "country location and private-jet aviation couture must both read in the foreground"
+  },
+  "acceptanceSummary": {
+    "attemptedScenes": 4,
+    "acceptedScenes": 2,
+    "rejectedScenes": 2,
+    "originalityGatePassedByAcceptedScenes": true,
+    "hardLoveGatePassedByAcceptedScenes": true
+  }
+}
