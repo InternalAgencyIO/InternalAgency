@@ -38,7 +38,10 @@ import {
 import {
   currentIatV2CccRound,
   currentIatV2Week,
+  earliestDueIatV2PositionWeek,
   formatRehearsalWait,
+  iterateUnsetIatV2PositionWeeks,
+  selectIatV2FeatureDuePositionSettlement,
   secondsUntilIatV2CccRound,
   secondsUntilIatV2RoundRecovery,
   secondsUntilIatV2Week,
@@ -191,10 +194,23 @@ async function loadFeatureState(baseSnapshot) {
     return parsePositionAccount(info.data);
   });
 
+  const duePositionSettlements = positions.map((position) => (
+    position
+      ? earliestDueIatV2PositionWeek({
+        firstAccrualWeek: position.firstAccrualWeek,
+        settledMask: position.settledMask,
+        currentWeek,
+      })
+      : null
+  ));
   const linkedRoundWeeks = [...new Set(
-    positions
-      .filter((position) => position && position.role !== IAT_V2_ROLE.STANDARD)
-      .map((position) => Number(position.firstAccrualWeek)),
+    duePositionSettlements
+      .map((settlement, index) => (
+        settlement && positions[index].role !== IAT_V2_ROLE.STANDARD
+          ? settlement.week
+          : null
+      ))
+      .filter((week) => week !== null),
   )];
   const linkedRoundAddresses = linkedRoundWeeks.map((week) => deriveRoundAddress({
     config: plan.config,
@@ -326,6 +342,41 @@ function nextFeatureAction(state) {
       signer: IAT_V2_PROGRAM_ADMIN,
     };
   }
+  const dueSettlement = selectIatV2FeatureDuePositionSettlement({
+    positions: state.positions,
+    currentWeek: state.currentWeek,
+    linkedRounds: state.linkedRounds,
+  });
+  if (dueSettlement?.positionIndex === 0) {
+    return {
+      id: `SETTLE_STANDARD_POSITION_WEEK_${dueSettlement.week}`,
+      title: `Settle standard position week ${dueSettlement.week}`,
+      detail: "Pays one exact 10% annualized weekly slice from the reserved ordered lanes.",
+      signer: IAT_V2_PROGRAM_ADMIN,
+      positionIndex: 0,
+      ordinal: dueSettlement.ordinal,
+      week: dueSettlement.week,
+    };
+  }
+  if (dueSettlement) {
+    const position = state.positions[dueSettlement.positionIndex];
+    return {
+      id: `SETTLE_LINKED_POSITION_${dueSettlement.positionIndex + 1}_WEEK_${dueSettlement.week}`,
+      title: `Settle ${position.role === 1 ? "CCC-agent" : "CCC-associate"} week ${dueSettlement.week}`,
+      detail: dueSettlement.round.status === 1
+        ? "Applies the settled CCC result: the selected agency is paused and every other linked position is paid."
+        : "Applies terminal neutral recovery: no agency is selected and each linked position receives the floor of its fair expected reward.",
+      signer: IAT_V2_PROGRAM_ADMIN,
+      positionIndex: dueSettlement.positionIndex,
+      ordinal: dueSettlement.ordinal,
+      week: dueSettlement.week,
+      roundAddress: deriveRoundAddress({
+        config: position.config,
+        programId: IAT_V2_PROGRAM_ID,
+        week: dueSettlement.week,
+      }),
+    };
+  }
   if (!state.randomnessAddress) {
     return {
       id: "CREATE_SWITCHBOARD_RANDOMNESS",
@@ -375,52 +426,26 @@ function nextFeatureAction(state) {
       week: state.currentCccRound,
     };
   }
-  const standard = state.positions[0];
-  if (
-    standard
-    && state.currentWeek >= Number(standard.firstAccrualWeek)
-    && !bitIsSet(standard.settledMask, 0)
-  ) {
-    return {
-      id: `SETTLE_STANDARD_POSITION_WEEK_${standard.firstAccrualWeek}`,
-      title: `Settle standard position week ${standard.firstAccrualWeek}`,
-      detail: "Pays one exact 10% annualized weekly slice from the reserved ordered lanes.",
-      signer: IAT_V2_PROGRAM_ADMIN,
-      positionIndex: 0,
-      week: Number(standard.firstAccrualWeek),
-    };
-  }
-  for (const positionIndex of [1, 2]) {
-    const position = state.positions[positionIndex];
-    if (!position || bitIsSet(position.settledMask, 0)) continue;
-    const week = Number(position.firstAccrualWeek);
-    const round = state.linkedRounds[week];
-    if (state.currentWeek >= week && [1, 2].includes(round?.status)) {
-      return {
-        id: `SETTLE_LINKED_POSITION_${positionIndex + 1}_WEEK_${week}`,
-        title: `Settle ${position.role === 1 ? "CCC-agent" : "CCC-associate"} week ${week}`,
-        detail: round.status === 1
-          ? "Applies the settled CCC result: the selected agency is paused and every other linked position is paid."
-          : "Applies terminal neutral recovery: no agency is selected and each linked position receives the floor of its fair expected reward.",
-        signer: IAT_V2_PROGRAM_ADMIN,
-        positionIndex,
-        week,
-        roundAddress: deriveRoundAddress({
-          config: position.config,
-          programId: IAT_V2_PROGRAM_ID,
-          week,
-        }),
-      };
-    }
-  }
   return null;
 }
 
 function waitDescription(state) {
-  const unsettled = state.positions.find((position) => position && !bitIsSet(position.settledMask, 0));
-  if (!unsettled) return "Immediate feature path complete. Long-term maturity remains a validator time-warp proof.";
-  const week = Number(unsettled.firstAccrualWeek);
-  if (unsettled.role === IAT_V2_ROLE.STANDARD) {
+  const nextSettlement = state.positions
+    .map((position, positionIndex) => {
+      if (!position) return null;
+      const next = iterateUnsetIatV2PositionWeeks({
+        firstAccrualWeek: position.firstAccrualWeek,
+        settledMask: position.settledMask,
+      }).next();
+      return next.done ? null : { position, positionIndex, ...next.value };
+    })
+    .filter(Boolean)
+    .sort((left, right) => left.week - right.week || left.positionIndex - right.positionIndex)[0];
+  if (!nextSettlement) {
+    return "Immediate feature path complete. Long-term maturity remains a deterministic production-host time-gate proof; Devnet wall-clock time is not warped.";
+  }
+  const { position, week } = nextSettlement;
+  if (position.role === IAT_V2_ROLE.STANDARD) {
     const seconds = secondsUntilIatV2Week(state.genesisTimestamp, week, state.nowTimestamp);
     return `Standard settlement opens in ${formatRehearsalWait(seconds)} at policy week ${week}.`;
   }
@@ -856,9 +881,15 @@ export default function FeatureRehearsal({
       {action ? (
         <div className="feature-next">
           <div>
-            <small>NEXT VERIFIED ACTION</small>
+            <small>ONE VERIFIED ACTION // EXPLICIT USER STEPS ONLY</small>
             <h3>{action.title}</h3>
             <p>{action.detail}</p>
+            {Number.isSafeInteger(action.week) && (
+              <code>
+                POLICY WEEK {action.week}
+                {Number.isSafeInteger(action.ordinal) ? ` // ORDINAL ${action.ordinal}` : ""}
+              </code>
+            )}
             <code>SIGNER ROLE {signerRole(action.signer)}</code>
             <code>SIGNER {action.signer.toBase58()}</code>
             {action.createsEphemeralProtocolSigner && (
