@@ -160,13 +160,12 @@ else
     --keypair "$payer_path" \
     --url "$rpc_url" \
     --output json-compact)
-  PROGRAM_SHOW_JSON="$show_json" EXPECTED_PROGRAM_ID="$program_id" EXPECTED_BYTES="$expected_artifact_bytes" \
-    "$node_bin" -e '
-      const value = JSON.parse(process.env.PROGRAM_SHOW_JSON);
-      if (value.programId !== process.env.EXPECTED_PROGRAM_ID
+  "$node_bin" -e '
+      const value = JSON.parse(process.argv[1]);
+      if (value.programId !== process.argv[2]
           || value.authority !== "none"
-          || value.dataLen !== Number(process.env.EXPECTED_BYTES)) process.exit(1);
-    ' || {
+          || value.dataLen !== Number(process.argv[3])) process.exit(1);
+    ' "$show_json" "$program_id" "$expected_artifact_bytes" || {
       printf '{"schema":"%s","status":"FAIL","reason":"resume_program_is_not_exact_and_immutable","publicNetworkWrites":false}\n' "$schema"
       exit 2
     }
