@@ -63,7 +63,10 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-      - run: cargo test --workspace --all-targets --locked
+      - name: Test default feature isolation
+        run: cargo test --workspace --all-targets --locked
+      - name: Test feature-gated runtime bridges
+        run: cargo test --workspace --all-targets --all-features --locked
 
   verifiable-sbf:
     name: Verifiable Solana SBF build
