@@ -23,4 +23,5 @@ console.log(`remainingTranslationCells=${ledger.totals.translationCellsRemaining
 console.log(`remainingProviderDecisions=${ledger.totals.providerDecisionsRemaining}`);
 console.log(`remainingNativeReviewAcceptances=${ledger.totals.nativeReviewLocaleAcceptancesRemaining}`);
 console.log(`remainingNativeReviewChecks=${ledger.totals.nativeReviewChecksRemaining}`);
-console.log("PASS: ledger matches current inputs and preserves HOLD; this is gap evidence, not translation or launch approval.");
+console.log(`missingGeneratedPublicBundles=${ledger.runtimeSnapshot.publicPayloads.missingBundleCount}`);
+console.log("PASS: ledger matches the configured repository snapshot and preserves HOLD; generated outputs are observations, not translation or launch approval.");

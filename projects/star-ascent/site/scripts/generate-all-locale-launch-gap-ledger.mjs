@@ -16,7 +16,7 @@ if (checkOnly) {
   const current = await readFile(outputUrl, "utf8");
   if (current !== serialized) throw new Error("Committed all-locale launch-gap ledger is stale");
   console.log(
-    `PASS: immutable all-locale HOLD ledger matches current inputs; remainingCells=${ledger.totals.translationCellsRemaining}; remainingReviews=${ledger.totals.nativeReviewLocaleAcceptancesRemaining}; remainingProviders=${ledger.totals.providerDecisionsRemaining}.`,
+    `PASS: immutable all-locale HOLD ledger matches the configured repository snapshot; remainingCells=${ledger.totals.translationCellsRemaining}; remainingReviews=${ledger.totals.nativeReviewLocaleAcceptancesRemaining}; remainingProviders=${ledger.totals.providerDecisionsRemaining}; missingGeneratedBundles=${ledger.runtimeSnapshot.publicPayloads.missingBundleCount}.`,
   );
 } else {
   if (!replace) {

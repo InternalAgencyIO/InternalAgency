@@ -9,7 +9,8 @@
     "runtimeMutationPermitted": false,
     "nativeReviewClaim": "NONE",
     "providerApprovalClaim": "NONE",
-    "canonicalEnglishControls": true
+    "canonicalEnglishControls": true,
+    "generatedPublicPayloadClaim": "OBSERVED_IF_PRESENT_NOT_REQUIRED_BUILD_OUTPUT"
   },
   "sourceFreeze": {
     "sourceCount": 1491,
@@ -34,14 +35,14 @@
   "runtimeSnapshot": {
     "canonicalSourceMembership": {
       "frozenSourceCount": 1491,
-      "runtimeInputUniqueSourceCountBeforeRetirementFiltering": 1491,
+      "runtimeInputUniqueSourceCountBeforeRetirementFiltering": 1033,
       "activeCatalogSourceCount": 985,
       "pendingVisibleSourceCount": 48,
       "pendingRouteCount": 13,
-      "criticalUiEntryCount": 468
+      "criticalUiEntryCount": 8
     },
     "activeCatalog": {
-      "fileSha256": "adbc7d8991a4424cf57544f6c4b3c2f4135d7c7803e2781f5dd702dd25006e28",
+      "fileSha256": "735a5035bcb914958b773e04c18134f336f60fe297aff57c26a9952117598e4f",
       "sourceCount": 985,
       "localeCount": 50,
       "targetLocaleCount": 49,
@@ -353,41 +354,94 @@
       }
     },
     "activeMetadata": {
-      "fileSha256": "e4b8e4f195beb07498e1ecbbb9324c4f31940f5cec8c9d0c79ba6d8f234d966d",
-      "leavesPerLocale": 69,
+      "fileSha256": "429983d0fbe36c648e36de881add769b53b1c412c32e2156fb82b4ccb064e3a1",
+      "leavesPerLocale": 67,
       "targetTranslatedLeaves": 0,
-      "targetSourceEquivalentLeaves": 3381
+      "targetSourceEquivalentLeaves": 3283
     },
     "pendingVisibleSource": {
-      "fileSha256": "4bae1acbf8195dc60e00f16a67b94b61aa7cbfee20f450e33ec02eac622344b2",
-      "status": "DRAFT_AI_GENERATION_PENDING",
+      "fileSha256": "a36577d20ee0214b4b164d0c39744edc9c68495aa01cc4397937517b4c59baa9",
+      "status": "DRAFT_TRANSLATION_AND_NATIVE_REVIEW_HOLD",
       "pendingSourceCount": 48,
       "pendingRouteCount": 13,
       "translationComplete": false,
       "activeInRuntimeCatalog": false
     },
     "criticalUiSource": {
-      "fileSha256": "c257b5038a8218d04afae23bd4544890630631fa02ef0ee826a0fa6b8b617e92",
-      "entryCount": 468,
-      "uniqueValueCount": 468
+      "fileSha256": "9dc18e75204d0133784aa110575d26be7238b67abbf995c7326fb2942ca83ccc",
+      "entryCount": 8,
+      "uniqueValueCount": 8
     },
     "runtimePolicy": {
-      "fileSha256": "100ccc2f12c5ad99a7d210a09833f8e1d8770c0840baca467c11400ebe5b9ce6",
-      "mode": "PUBLIC_AI_GENERATED_UNVERIFIED",
-      "machineDraftRuntimeAllowed": true,
-      "targetLocalesMarkedAiGeneratedUnverified": 49,
+      "fileSha256": "66662977cf8867f6a7aba1dfe6e5126e6fd55b22a43aae226850bf5fbbeca358",
+      "mode": "GLOBAL_FAIL_CLOSED",
+      "machineDraftRuntimeAllowed": false,
+      "targetLocalesMarkedAiGeneratedUnverified": 0,
       "note": "A policy label is not translation, source binding, or review evidence."
     },
     "publicPayloads": {
-      "contractFileSha256": "9c0a25ecfc3e6fe2a0ee2ffe918827a88d6b657e314db6a34f88a03076317ccf",
-      "namespace": "i18n-v2/0d26a348e1d3566a",
-      "bundleCount": 50,
-      "sourceCountPerBundle": 985,
-      "targetCells": 48265,
+      "contractFileSha256": "e446e81ad48d31902f00f89c4c677f5f7582db14bd9f6c33898ab43559cb6b09",
+      "namespace": "i18n-v2/511c7c65f33b7d29",
+      "bundleCount": 0,
+      "missingBundleCount": 50,
+      "missingBundleLocales": [
+        "en",
+        "zh",
+        "es",
+        "hi",
+        "fr",
+        "ar",
+        "bn",
+        "pt",
+        "id",
+        "ur",
+        "ru",
+        "de",
+        "ja",
+        "pcm",
+        "tr",
+        "sq",
+        "ca",
+        "be",
+        "nl",
+        "bs",
+        "bg",
+        "hr",
+        "el",
+        "cs",
+        "da",
+        "et",
+        "fi",
+        "hu",
+        "is",
+        "ga",
+        "it",
+        "lv",
+        "lt",
+        "lb",
+        "mk",
+        "mt",
+        "no",
+        "pl",
+        "ro",
+        "sr",
+        "sk",
+        "sl",
+        "sv",
+        "uk",
+        "ht",
+        "gn",
+        "qu",
+        "hy",
+        "az",
+        "ka"
+      ],
+      "sourceCountPerBundle": null,
+      "targetCells": 0,
       "targetTranslatedCells": 0,
-      "targetSourceEquivalentCells": 48265,
+      "targetSourceEquivalentCells": 0,
       "targetEmptyCells": 0,
-      "bundleSetSha256": "0ed1da4a4e6acfaf5aaa5fe2b5fc5805aacca566d206ae57593513ddcc104337"
+      "bundleSetSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
     }
   },
   "totals": {
@@ -416,6 +470,7 @@
     "50 locale acceptances and 250 native-review checks remain.",
     "0 translated target cells are present in the active 985-source runtime catalog.",
     "48 visible source strings across 13 routes remain pending.",
+    "50 generated public locale bundles are absent from the repository snapshot.",
     "The PCM artifact is source-bound and deterministic but remains non-activating, AI-generated, and unverified."
   ],
   "perLocale": {
@@ -1125,5 +1180,5 @@
       "activationReady": false
     }
   },
-  "ledgerCanonicalSha256": "2ba9e2887a662c13956d2fb45b6415aa3f116e060fb247d1d29b80b0db30e658"
+  "ledgerCanonicalSha256": "4471ecbbcda122765cf4889a5aad29d60e8358e5f9713439b04f8a08e6cf3f06"
 }

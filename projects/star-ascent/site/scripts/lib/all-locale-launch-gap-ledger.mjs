@@ -1,5 +1,7 @@
 import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
+import { isAbsolute, resolve, sep } from "node:path";
+import { pathToFileURL } from "node:url";
 import { canonicalJsonSha256, validatePcmSourceFreezeEvidence } from "./pcm-editorial-gap-report.mjs";
 
 export const ALL_LOCALE_CODES = Object.freeze([
@@ -20,7 +22,13 @@ export const ALL_LOCALE_LEDGER_BINDING = Object.freeze({
   pcmMessageEntriesSha256: "6dcf8451a2dd9bbf3f578eb470ac78775752d66aaa9f5cb94463cd78b9c6d557",
 });
 
-const siteUrl = new URL("../../", import.meta.url);
+const configuredInputRoot = process.env.IAT_ALL_LOCALE_INPUT_ROOT;
+if (configuredInputRoot && !isAbsolute(configuredInputRoot)) {
+  throw new Error("IAT_ALL_LOCALE_INPUT_ROOT must be an absolute path");
+}
+const siteUrl = configuredInputRoot
+  ? pathToFileURL(`${resolve(configuredInputRoot)}${sep}`)
+  : new URL("../../", import.meta.url);
 const fileUrl = (path) => new URL(path, siteUrl);
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const serialize = (value) => `${JSON.stringify(value, null, 2)}\n`;
@@ -152,7 +160,11 @@ function runtimeSnapshot(inputs, frozen) {
   check(catalog.meta?.sourceCount === Object.keys(catalog.messages.en).length, "Runtime catalog source count drifted");
   check(Array.isArray(pending.sources), "Pending visible-source inventory is missing");
   check(isRecord(criticalUi), "Critical UI inventory is missing");
-  check(publicBundles.length === ALL_LOCALE_CODES.length, "Public bundle roster is incomplete");
+  check(
+    publicBundles.length === ALL_LOCALE_CODES.length
+      && sameJson(publicBundles.map(({ locale }) => locale), ALL_LOCALE_CODES),
+    "Public bundle observation roster is incomplete",
+  );
 
   const catalogStats = {};
   for (const locale of ALL_LOCALE_CODES) {
@@ -170,18 +182,26 @@ function runtimeSnapshot(inputs, frozen) {
   const bundleStats = {};
   const bundleBindings = {};
   const expectedNamespace = `${payloadContract.assetNamespace}/${payloadContract.payloadNamespaceSha256.slice(0, 16)}`;
-  const englishBundle = publicBundles.find(({ locale }) => locale === "en")?.artifact;
-  check(isRecord(englishBundle?.messages), "English public bundle is missing");
+  const presentBundles = publicBundles.filter(({ bytes }) => bytes !== null);
+  const englishBundle = presentBundles.find(({ locale }) => locale === "en")?.artifact ?? null;
+  check(presentBundles.length === 0 || isRecord(englishBundle?.messages), "English public bundle is required when any bundle exists");
   for (let index = 0; index < ALL_LOCALE_CODES.length; index += 1) {
     const locale = ALL_LOCALE_CODES[index];
     const bundle = publicBundles[index];
-    check(bundle.locale === locale && bundle.artifact?.locale === locale, `Public bundle order or locale drifted: ${locale}`);
+    check(bundle.locale === locale, `Public bundle observation order drifted: ${locale}`);
+    if (bundle.bytes === null) continue;
+    check(bundle.artifact?.locale === locale, `Public bundle locale drifted: ${locale}`);
     check(bundle.artifact.schema === payloadContract.schema, `Public bundle schema drifted: ${locale}`);
     check(bundle.artifact.contentSha256 === payloadContract.localeContentSha256[locale], `Public bundle content binding drifted: ${locale}`);
     bundleStats[locale] = dictionaryStats(englishBundle.messages, bundle.artifact.messages, `Public bundle ${locale}`);
     bundleBindings[locale] = sha256(bundle.bytes);
   }
-  const targetBundleStats = ALL_LOCALE_CODES.slice(1).map((locale) => bundleStats[locale]);
+  const targetBundleStats = ALL_LOCALE_CODES.slice(1)
+    .map((locale) => bundleStats[locale])
+    .filter(Boolean);
+  const missingBundleLocales = publicBundles
+    .filter(({ bytes }) => bytes === null)
+    .map(({ locale }) => locale);
 
   const pendingRoutes = new Set(pending.sources.flatMap((entry) => (
     Array.isArray(entry.routes) ? entry.routes : []
@@ -244,8 +264,10 @@ function runtimeSnapshot(inputs, frozen) {
     publicPayloads: {
       contractFileSha256: sha256(payloadContractBytes),
       namespace: expectedNamespace,
-      bundleCount: publicBundles.length,
-      sourceCountPerBundle: englishBundle.sourceCount,
+      bundleCount: presentBundles.length,
+      missingBundleCount: missingBundleLocales.length,
+      missingBundleLocales,
+      sourceCountPerBundle: englishBundle?.sourceCount ?? null,
       targetCells: targetBundleStats.reduce((sum, item) => sum + item.sourceCells, 0),
       targetTranslatedCells: targetBundleStats.reduce((sum, item) => sum + item.translatedCells, 0),
       targetSourceEquivalentCells: targetBundleStats.reduce((sum, item) => sum + item.sourceEquivalentCells, 0),
@@ -345,6 +367,7 @@ export function buildAllLocaleLaunchGapLedger(inputs) {
       nativeReviewClaim: "NONE",
       providerApprovalClaim: "NONE",
       canonicalEnglishControls: true,
+      generatedPublicPayloadClaim: "OBSERVED_IF_PRESENT_NOT_REQUIRED_BUILD_OUTPUT",
     },
     sourceFreeze: {
       sourceCount: frozen.inventory.sourceCount,
@@ -393,6 +416,7 @@ export function buildAllLocaleLaunchGapLedger(inputs) {
       `${ALL_LOCALE_CODES.length} locale acceptances and ${ALL_LOCALE_CODES.length * 5} native-review checks remain.`,
       `${runtime.activeCatalog.targetTranslatedCells} translated target cells are present in the active ${runtime.activeCatalog.sourceCount}-source runtime catalog.`,
       `${runtime.pendingVisibleSource.pendingSourceCount} visible source strings across ${runtime.pendingVisibleSource.pendingRouteCount} routes remain pending.`,
+      `${runtime.publicPayloads.missingBundleCount} generated public locale bundles are absent from the repository snapshot.`,
       "The PCM artifact is source-bound and deterministic but remains non-activating, AI-generated, and unverified.",
     ],
     perLocale,
@@ -449,8 +473,12 @@ export async function loadAllLocaleLaunchGapInputs() {
   ]);
   const namespace = `${payloadContract.value.assetNamespace}/${payloadContract.value.payloadNamespaceSha256.slice(0, 16)}`;
   const publicBundles = await Promise.all(ALL_LOCALE_CODES.map(async (locale) => {
-    const result = await readJson(`public/${namespace}/${locale}.json`);
-    return { locale, artifact: result.value, bytes: result.bytes };
+    const bytes = await readOptional(`public/${namespace}/${locale}.json`);
+    return {
+      locale,
+      artifact: bytes === null ? null : JSON.parse(bytes.toString("utf8")),
+      bytes,
+    };
   }));
   return {
     sourceFreezeEvidence: freeze.value,

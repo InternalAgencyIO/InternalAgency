@@ -45,8 +45,18 @@ test("all-locale ledger records the exact current cell, review, provider, and ru
   assert.equal(ledger.runtimeSnapshot.activeCatalog.targetSourceEquivalentCells, 48_265);
   assert.equal(ledger.runtimeSnapshot.pendingVisibleSource.pendingSourceCount, 48);
   assert.equal(ledger.runtimeSnapshot.pendingVisibleSource.pendingRouteCount, 13);
-  assert.equal(ledger.runtimeSnapshot.publicPayloads.bundleCount, 50);
+  assert.equal(ledger.claims.generatedPublicPayloadClaim, "OBSERVED_IF_PRESENT_NOT_REQUIRED_BUILD_OUTPUT");
+  assert.equal(ledger.runtimeSnapshot.publicPayloads.bundleCount, 0);
+  assert.equal(ledger.runtimeSnapshot.publicPayloads.missingBundleCount, 50);
+  assert.deepEqual(ledger.runtimeSnapshot.publicPayloads.missingBundleLocales, ALL_LOCALE_CODES);
+  assert.equal(ledger.runtimeSnapshot.publicPayloads.sourceCountPerBundle, null);
+  assert.equal(ledger.runtimeSnapshot.publicPayloads.targetCells, 0);
   assert.equal(ledger.runtimeSnapshot.publicPayloads.targetTranslatedCells, 0);
+  assert.equal(ledger.runtimeSnapshot.publicPayloads.targetSourceEquivalentCells, 0);
+  assert.equal(
+    ledger.blockers.includes("50 generated public locale bundles are absent from the repository snapshot."),
+    true,
+  );
 });
 
 test("PCM is counted once as a complete non-activating draft, never as native acceptance", async () => {
@@ -104,7 +114,7 @@ test("ledger tampering and readiness promotion fail closed", async () => {
   }
 });
 
-test("committed ledger matches all current source and output bindings", async () => {
+test("committed ledger matches the configured repository snapshot and optional output observations", async () => {
   const ledger = JSON.parse(await (await import("node:fs/promises")).readFile(
     new URL("../scripts/data/all-locale-launch-gap-ledger-5baff9.json", import.meta.url),
     "utf8",
