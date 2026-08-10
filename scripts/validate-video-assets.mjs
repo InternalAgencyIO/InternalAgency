@@ -2,40 +2,77 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const videoConfig = JSON.parse(
-  fs.readFileSync(path.join(repo, "scripts", "video", "scenes.json"), "utf8")
-);
-const manifestPath = path.join(repo, "assets", "videos", "manifest.json");
+import {
+  createPinnedFfprobeSession,
+  EXPECTED_MASTER_COUNT,
+  parsePinnedReleaseInventory,
+  validateVideoRelease
+} from "./lib/video-asset-validation.mjs";
 
-if (!fs.existsSync(manifestPath)) {
-  console.error("Missing assets/videos/manifest.json. Render the full scene set first.");
-  process.exit(1);
-}
+const repo = fs.realpathSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."));
 
-const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
-const failures = [];
-
-for (const scene of videoConfig.scenes) {
-  const file = `${scene.id}-full-30fps.mp4`;
-  const filePath = path.join(repo, "assets", "videos", file);
-  const entry = manifest.assets?.[file];
-
-  if (!fs.existsSync(filePath) || fs.statSync(filePath).size < 100_000) {
-    failures.push(`${file}: missing or empty`);
-    continue;
-  }
-  if (!entry || Math.abs(Number(entry.fps) - 30) > 0.01) {
-    failures.push(`${file}: missing verified 30 fps metadata`);
-  }
-  if (Number(entry.durationSeconds) < scene.durationSeconds - 1) {
-    failures.push(`${file}: shorter than configured scene duration`);
+function readJson(filePath, label) {
+  try {
+    return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  } catch (error) {
+    throw new Error(`${label} could not be read: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
 
-if (failures.length) {
-  console.error(`Radiance release assets are incomplete:\n- ${failures.join("\n- ")}`);
-  process.exit(1);
+function ffprobeArgument(argv) {
+  let value = null;
+  for (let index = 0; index < argv.length; index += 1) {
+    if (argv[index] !== "--ffprobe" || index + 1 >= argv.length || value !== null) {
+      throw new Error("usage: node scripts/validate-video-assets.mjs --ffprobe <absolute-pinned-ffprobe-path>");
+    }
+    value = argv[index + 1];
+    index += 1;
+  }
+  return value ?? process.env.RADIANCE_FFPROBE_PATH ?? null;
 }
 
-console.log(`Validated ${videoConfig.scenes.length} pre-rendered 30 fps Radiance scenes.`);
+try {
+  const ffprobePath = ffprobeArgument(process.argv.slice(2));
+  const pin = readJson(path.join(repo, "scripts", "video", "ffprobe-tool.json"), "ffprobe pin");
+  const releaseInventory = parsePinnedReleaseInventory(
+    fs.readFileSync(path.join(repo, "scripts", "video", "release-inventory.json"))
+  );
+  const videoConfig = readJson(path.join(repo, "scripts", "video", "scenes.json"), "scene config");
+  const manifest = readJson(path.join(repo, "assets", "videos", "manifest.json"), "video manifest");
+  const ffprobeSession = createPinnedFfprobeSession(ffprobePath, pin);
+  let result;
+  let toolEvidence;
+  try {
+    result = validateVideoRelease({
+      repo,
+      videoConfig,
+      releaseInventory,
+      manifest,
+      ffprobeSession
+    });
+    toolEvidence = ffprobeSession.evidence;
+  } finally {
+    ffprobeSession.close();
+  }
+
+  if (result.failures.length > 0) {
+    console.error(
+      `Radiance release assets are incomplete: ${result.missingMasters.length} required full masters are missing.\n` +
+        `Pinned ffprobe: ${toolEvidence.sha256} (${toolEvidence.bytes} bytes).\n` +
+        `Recomputed source evidence for ${result.checkedSources.length} unique pinned sources.\n` +
+        `Recomputed evidence for ${result.checked.length}/${EXPECTED_MASTER_COUNT} expected full masters.\n` +
+        `- ${result.failures.join("\n- ")}`
+    );
+    process.exitCode = 1;
+  } else {
+    console.log(
+        `Validated ${EXPECTED_MASTER_COUNT} pre-rendered 30 fps Radiance full masters with recomputed ` +
+        `SHA-256, byte length, decoded frame count, fps, and duration.\n` +
+        `Pinned source images: ${result.checkedSources.length}.\n` +
+        `Pinned ffprobe: ${toolEvidence.sha256} (${toolEvidence.bytes} bytes).`
+    );
+  }
+} catch (error) {
+  console.error(`Radiance video validation failed closed: ${error instanceof Error ? error.message : String(error)}`);
+  process.exitCode = 1;
+}

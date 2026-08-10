@@ -60,6 +60,39 @@ jobs:
           cache: npm
       - if: steps.video_manifest.outputs.present == 'true'
         run: npm ci
+      - name: Bootstrap exact pinned FFprobe
+        if: steps.video_manifest.outputs.present == 'true'
+        shell: pwsh
+        run: |
+          node --input-type=module -e "import fs from 'node:fs'; import { validateFfprobePinMetadata } from './scripts/lib/video-asset-validation.mjs'; validateFfprobePinMetadata(JSON.parse(fs.readFileSync('scripts/video/ffprobe-tool.json', 'utf8')));"
+          if ($LASTEXITCODE -ne 0) {
+            throw "Committed FFprobe pin failed exact frozen-metadata validation"
+          }
+          $pin = Get-Content -Raw -LiteralPath "scripts/video/ffprobe-tool.json" | ConvertFrom-Json
+          $archiveUrl = $pin.archive.url
+          $archiveBytes = [int64]$pin.archive.bytes
+          $archiveSha256 = $pin.archive.sha256
+          $archivePath = Join-Path $env:RUNNER_TEMP "ffmpeg-9.0-essentials_build.zip"
+          $extractPath = Join-Path $env:RUNNER_TEMP "radiance-ffmpeg-9.0"
+
+          Invoke-WebRequest -Uri $archiveUrl -OutFile $archivePath
+          $actualBytes = (Get-Item -LiteralPath $archivePath).Length
+          if ($actualBytes -ne $archiveBytes) {
+            throw "FFprobe archive byte length mismatch: expected $archiveBytes, got $actualBytes"
+          }
+          $actualSha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $archivePath).Hash.ToLowerInvariant()
+          if ($actualSha256 -ne $archiveSha256) {
+            throw "FFprobe archive SHA-256 mismatch: expected $archiveSha256, got $actualSha256"
+          }
+
+          New-Item -ItemType Directory -Path $extractPath -ErrorAction Stop | Out-Null
+          Expand-Archive -LiteralPath $archivePath -DestinationPath $extractPath
+          $relativeExecutable = $pin.archive.executableRelativePath.Replace('/', [System.IO.Path]::DirectorySeparatorChar)
+          $ffprobe = [System.IO.Path]::GetFullPath((Join-Path $extractPath $relativeExecutable))
+          if (-not (Test-Path -LiteralPath $ffprobe -PathType Leaf)) {
+            throw "Pinned FFprobe executable is missing after verified extraction: $ffprobe"
+          }
+          "RADIANCE_FFPROBE_PATH=$ffprobe" >> $env:GITHUB_ENV
       - if: steps.video_manifest.outputs.present == 'true'
         run: npm run dist
       - uses: actions/upload-artifact@v4
