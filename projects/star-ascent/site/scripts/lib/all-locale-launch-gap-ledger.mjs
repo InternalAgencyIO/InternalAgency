@@ -32,6 +32,15 @@ const siteUrl = configuredInputRoot
 const fileUrl = (path) => new URL(path, siteUrl);
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const serialize = (value) => `${JSON.stringify(value, null, 2)}\n`;
+const publicPayloadFields = [
+  "catalogSha256",
+  "contentSha256",
+  "locale",
+  "messages",
+  "schema",
+  "sourceCount",
+  "sourceKeysSha256",
+].sort();
 const sameJson = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 
 function check(condition, message) {
@@ -160,6 +169,19 @@ function runtimeSnapshot(inputs, frozen) {
   check(catalog.meta?.sourceCount === Object.keys(catalog.messages.en).length, "Runtime catalog source count drifted");
   check(Array.isArray(pending.sources), "Pending visible-source inventory is missing");
   check(isRecord(criticalUi), "Critical UI inventory is missing");
+  const catalogSourceKeys = Object.keys(catalog.messages.en);
+  const catalogSha256 = sha256(JSON.stringify(catalog.messages));
+  const catalogSourceKeysSha256 = sha256(JSON.stringify(catalogSourceKeys));
+  check(payloadContract.schema === "iat-locale-payload/v2", "Payload contract schema drifted");
+  check(/^i18n-v[0-9]+$/u.test(payloadContract.assetNamespace), "Payload contract namespace is unsafe");
+  check(/^[a-f0-9]{64}$/u.test(payloadContract.payloadNamespaceSha256), "Payload namespace digest is invalid");
+  check(payloadContract.catalogSha256 === catalogSha256, "Payload contract catalog digest drifted");
+  check(payloadContract.sourceCount === catalogSourceKeys.length, "Payload contract source count drifted");
+  check(payloadContract.sourceKeysSha256 === catalogSourceKeysSha256, "Payload contract source-key digest drifted");
+  check(
+    Object.values(payloadContract.localeContentSha256).every((digest) => /^[a-f0-9]{64}$/u.test(digest)),
+    "Payload contract locale content digest is invalid",
+  );
   check(
     publicBundles.length === ALL_LOCALE_CODES.length
       && sameJson(publicBundles.map(({ locale }) => locale), ALL_LOCALE_CODES),
@@ -190,9 +212,34 @@ function runtimeSnapshot(inputs, frozen) {
     const bundle = publicBundles[index];
     check(bundle.locale === locale, `Public bundle observation order drifted: ${locale}`);
     if (bundle.bytes === null) continue;
+    check(Buffer.isBuffer(bundle.bytes), `Public bundle bytes are invalid: ${locale}`);
+    check(sameJson(bundle.artifact, JSON.parse(bundle.bytes.toString("utf8"))), `Public bundle bytes drifted: ${locale}`);
     check(bundle.artifact?.locale === locale, `Public bundle locale drifted: ${locale}`);
+    check(
+      sameJson(Object.keys(bundle.artifact).sort(), publicPayloadFields),
+      `Public bundle fields drifted: ${locale}`,
+    );
     check(bundle.artifact.schema === payloadContract.schema, `Public bundle schema drifted: ${locale}`);
-    check(bundle.artifact.contentSha256 === payloadContract.localeContentSha256[locale], `Public bundle content binding drifted: ${locale}`);
+    check(bundle.artifact.catalogSha256 === catalogSha256, `Public bundle catalog digest drifted: ${locale}`);
+    check(bundle.artifact.sourceCount === catalogSourceKeys.length, `Public bundle source count drifted: ${locale}`);
+    check(bundle.artifact.sourceKeysSha256 === catalogSourceKeysSha256, `Public bundle source-key digest drifted: ${locale}`);
+    check(
+      sameJson(Object.keys(bundle.artifact.messages), catalogSourceKeys),
+      `Public bundle source keys drifted: ${locale}`,
+    );
+    const contentSha256 = sha256(JSON.stringify({
+      schema: bundle.artifact.schema,
+      catalogSha256: bundle.artifact.catalogSha256,
+      sourceCount: bundle.artifact.sourceCount,
+      locale: bundle.artifact.locale,
+      sourceKeysSha256: bundle.artifact.sourceKeysSha256,
+      messages: bundle.artifact.messages,
+    }));
+    check(
+      bundle.artifact.contentSha256 === contentSha256
+        && contentSha256 === payloadContract.localeContentSha256[locale],
+      `Public bundle content binding drifted: ${locale}`,
+    );
     bundleStats[locale] = dictionaryStats(englishBundle.messages, bundle.artifact.messages, `Public bundle ${locale}`);
     bundleBindings[locale] = sha256(bundle.bytes);
   }

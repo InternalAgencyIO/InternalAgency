@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import test from "node:test";
 import {
   ALL_LOCALE_CODES,
@@ -11,6 +12,22 @@ let cachedInputs;
 async function inputs() {
   cachedInputs ??= await loadAllLocaleLaunchGapInputs();
   return cachedInputs;
+}
+
+const sha256 = (value) => createHash("sha256").update(value).digest("hex");
+
+function compiledBundle(sourceInputs, locale) {
+  const { catalog, payloadContract } = sourceInputs;
+  const artifact = {
+    schema: payloadContract.schema,
+    catalogSha256: payloadContract.catalogSha256,
+    sourceCount: payloadContract.sourceCount,
+    locale,
+    sourceKeysSha256: payloadContract.sourceKeysSha256,
+    messages: structuredClone(catalog.messages[locale]),
+  };
+  artifact.contentSha256 = sha256(JSON.stringify(artifact));
+  return { locale, artifact, bytes: Buffer.from(JSON.stringify(artifact)) };
 }
 
 test("all-locale ledger records the exact current cell, review, provider, and runtime gaps", async () => {
@@ -112,6 +129,40 @@ test("ledger tampering and readiness promotion fail closed", async () => {
       /canonical digest mismatch|does not match current immutable inputs|weakened HOLD/u,
     );
   }
+});
+
+test("present generated bundles are recomputed from exact bytes and cannot forge translated-cell observations", async () => {
+  const sourceInputs = await inputs();
+  const english = compiledBundle(sourceInputs, "en");
+  const spanish = compiledBundle(sourceInputs, "es");
+  const partialInputs = {
+    ...sourceInputs,
+    publicBundles: sourceInputs.publicBundles.map((bundle) => {
+      if (bundle.locale === "en") return english;
+      if (bundle.locale === "es") return spanish;
+      return bundle;
+    }),
+  };
+  const partial = buildAllLocaleLaunchGapLedger(partialInputs);
+  assert.equal(partial.status, "HOLD");
+  assert.equal(partial.runtimeSnapshot.publicPayloads.bundleCount, 2);
+  assert.equal(partial.runtimeSnapshot.publicPayloads.missingBundleCount, 48);
+
+  const forgedSpanish = structuredClone(spanish.artifact);
+  const firstSource = Object.keys(forgedSpanish.messages)[0];
+  forgedSpanish.messages[firstSource] = `${forgedSpanish.messages[firstSource]} forged`;
+  const forgedInputs = {
+    ...partialInputs,
+    publicBundles: partialInputs.publicBundles.map((bundle) => (
+      bundle.locale === "es"
+        ? { locale: "es", artifact: forgedSpanish, bytes: Buffer.from(JSON.stringify(forgedSpanish)) }
+        : bundle
+    )),
+  };
+  assert.throws(
+    () => buildAllLocaleLaunchGapLedger(forgedInputs),
+    /Public bundle content binding drifted: es/u,
+  );
 });
 
 test("committed ledger matches the configured repository snapshot and optional output observations", async () => {
