@@ -1558,7 +1558,7 @@
     }
   ],
   "xPost": {
-    "status": "eligible-awaiting-browser",
+    "status": "deferred-browser-control-unavailable",
     "minimumCurrentCountryAcceptedAssets": 2,
     "currentCountryAcceptedAssets": 2,
     "caption": "South Sudan ❤️ Djibouti #SouthSudan",
@@ -1566,7 +1566,9 @@
       "1425-south-sudan-sudd-orbital-research-station-weather-balloon-romance.png",
       "1427-south-sudan-imatong-orbital-research-station-male-romance.png",
       "1422-djibouti-tadjoura-polar-airship-mascot-romance.png"
-    ]
+    ],
+    "attemptedAt": "2026-08-10T17:47:20.687Z",
+    "reason": "The signed-in in-app browser was open, but its control bridge could not initialize and reported: failed to write kernel assets: The system cannot find the path specified. No compose or publish action was attempted."
   },
   "completedAt": "2026-08-10T17:46:10.504Z",
   "throughputMode": "fast-pass per explicit user direction; minor motif, mascot, identity, choreography, garment, hand and target deviations are logged but do not block public-safe coherent images",
