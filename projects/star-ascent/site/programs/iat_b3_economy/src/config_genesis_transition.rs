@@ -25,7 +25,7 @@ pub struct ConfigGenesisTransitionCandidateTruth {
     pub staging_daily_law_not_required: bool,
     pub activation_requires_open_daily_law: bool,
     pub activation_requires_conservation_receipt: bool,
-    pub activation_requires_zero_preactivation_core_facts: bool,
+    pub activation_requires_zero_preactivation_economic_state: bool,
     pub owner_bootstrap_policy_accepted: bool,
     pub preactivation_facts_runtime_authenticated: bool,
     pub production_identity_binding_frozen: bool,
@@ -43,7 +43,7 @@ pub const CONFIG_GENESIS_TRANSITION_CANDIDATE_TRUTH: ConfigGenesisTransitionCand
         staging_daily_law_not_required: true,
         activation_requires_open_daily_law: true,
         activation_requires_conservation_receipt: true,
-        activation_requires_zero_preactivation_core_facts: true,
+        activation_requires_zero_preactivation_economic_state: true,
         owner_bootstrap_policy_accepted: false,
         preactivation_facts_runtime_authenticated: false,
         production_identity_binding_frozen: false,
@@ -63,10 +63,11 @@ pub enum ConfigGenesisTransitionEdge {
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct GenesisPreactivationCandidateFacts {
-    pub economic_write_count: u64,
-    pub attributed_core_principal: u64,
-    pub core_rewards_paid: u64,
-    pub core_tokens_released: u64,
+    pub config_staked_principal: u64,
+    pub config_agency_count: u32,
+    pub lane_reserved_total: u64,
+    pub lane_paid_total: u64,
+    pub lane_principal_claimed_total: u64,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -117,7 +118,7 @@ pub enum ConfigGenesisTransitionCandidateError {
     ConservationTokenProgramMismatch,
     ConservationSupplyMismatch,
     GenesisFundingIncomplete,
-    PreactivationCoreNotVacuous,
+    PreactivationEconomicStateNotVacuous,
     ConfigEncodingFailed,
 }
 
@@ -234,12 +235,13 @@ fn require_production_config(
 fn require_vacuous_preactivation(
     facts: GenesisPreactivationCandidateFacts,
 ) -> Result<(), ConfigGenesisTransitionCandidateError> {
-    if facts.economic_write_count != 0
-        || facts.attributed_core_principal != 0
-        || facts.core_rewards_paid != 0
-        || facts.core_tokens_released != 0
+    if facts.config_staked_principal != 0
+        || facts.config_agency_count != 0
+        || facts.lane_reserved_total != 0
+        || facts.lane_paid_total != 0
+        || facts.lane_principal_claimed_total != 0
     {
-        return Err(ConfigGenesisTransitionCandidateError::PreactivationCoreNotVacuous);
+        return Err(ConfigGenesisTransitionCandidateError::PreactivationEconomicStateNotVacuous);
     }
     Ok(())
 }
@@ -257,10 +259,11 @@ fn candidate(
         .map_err(|_| ConfigGenesisTransitionCandidateError::ConfigEncodingFailed)?;
     let mut facts_hasher = Sha256::new();
     facts_hasher.update(CONFIG_GENESIS_TRANSITION_CANDIDATE_DOMAIN);
-    facts_hasher.update(facts.economic_write_count.to_le_bytes());
-    facts_hasher.update(facts.attributed_core_principal.to_le_bytes());
-    facts_hasher.update(facts.core_rewards_paid.to_le_bytes());
-    facts_hasher.update(facts.core_tokens_released.to_le_bytes());
+    facts_hasher.update(facts.config_staked_principal.to_le_bytes());
+    facts_hasher.update(facts.config_agency_count.to_le_bytes());
+    facts_hasher.update(facts.lane_reserved_total.to_le_bytes());
+    facts_hasher.update(facts.lane_paid_total.to_le_bytes());
+    facts_hasher.update(facts.lane_principal_claimed_total.to_le_bytes());
     Ok(ConfigGenesisTransitionCandidate {
         edge,
         next_state,

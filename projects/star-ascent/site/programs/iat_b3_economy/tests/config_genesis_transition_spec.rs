@@ -23,10 +23,11 @@ const CLOCK_TIMESTAMP: i64 = 1_786_050_060;
 
 fn facts() -> GenesisPreactivationCandidateFacts {
     GenesisPreactivationCandidateFacts {
-        economic_write_count: 0,
-        attributed_core_principal: 0,
-        core_rewards_paid: 0,
-        core_tokens_released: 0,
+        config_staked_principal: 0,
+        config_agency_count: 0,
+        lane_reserved_total: 0,
+        lane_paid_total: 0,
+        lane_principal_claimed_total: 0,
     }
 }
 
@@ -152,7 +153,7 @@ fn candidate_truth_never_claims_owner_acceptance_or_authorization() {
             staging_daily_law_not_required: true,
             activation_requires_open_daily_law: true,
             activation_requires_conservation_receipt: true,
-            activation_requires_zero_preactivation_core_facts: true,
+            activation_requires_zero_preactivation_economic_state: true,
             owner_bootstrap_policy_accepted: false,
             preactivation_facts_runtime_authenticated: false,
             production_identity_binding_frozen: false,
@@ -190,10 +191,10 @@ fn staging_rejects_existing_economic_state_and_nonvacuous_core_facts() {
         Err(ConfigGenesisTransitionCandidateError::StagingStateNotEmpty)
     );
     let mut nonvacuous = facts();
-    nonvacuous.core_tokens_released = 1;
+    nonvacuous.lane_principal_claimed_total = 1;
     assert_eq!(
         prepare_enter_genesis_staging_candidate(config(GenesisPhase::Uninitialized), nonvacuous),
-        Err(ConfigGenesisTransitionCandidateError::PreactivationCoreNotVacuous)
+        Err(ConfigGenesisTransitionCandidateError::PreactivationEconomicStateNotVacuous)
     );
 }
 
@@ -238,10 +239,10 @@ fn activation_checks_law_then_conservation_then_funding_and_vacuous_cap() {
         Err(ConfigGenesisTransitionCandidateError::GenesisFundingIncomplete)
     );
     let mut nonvacuous = facts();
-    nonvacuous.economic_write_count = 1;
+    nonvacuous.config_staked_principal = 1;
     assert_eq!(
         prepare_activate_genesis_candidate(current, &good_law, &good_conservation, nonvacuous),
-        Err(ConfigGenesisTransitionCandidateError::PreactivationCoreNotVacuous)
+        Err(ConfigGenesisTransitionCandidateError::PreactivationEconomicStateNotVacuous)
     );
 }
 

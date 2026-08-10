@@ -66,6 +66,55 @@ pub const CONFIG_GENESIS_RUNTIME_TRUTH: ConfigGenesisRuntimeTruth = ConfigGenesi
     mainnet_hold: true,
 };
 
+/// Opaque capability that can only be produced by authenticating a real,
+/// read-only Daily-Law AccountInfo against the runtime Clock. It remains a
+/// permission prerequisite, never a phase-transition or write authorization.
+#[derive(Debug, Eq, PartialEq)]
+pub struct RuntimeValidatedDailyLawWrite {
+    gate: ValidatedDailyLawWrite,
+    law_account_key: [u8; 32],
+    law_program_owner: [u8; 32],
+}
+
+impl RuntimeValidatedDailyLawWrite {
+    pub const fn mint(&self) -> [u8; 32] {
+        self.gate.mint()
+    }
+
+    pub const fn unix_timestamp(&self) -> i64 {
+        self.gate.unix_timestamp()
+    }
+
+    pub const fn law_account_sha256(&self) -> [u8; 32] {
+        self.gate.law_account_sha256()
+    }
+
+    pub const fn law_account_key(&self) -> [u8; 32] {
+        self.law_account_key
+    }
+
+    pub const fn law_program_owner(&self) -> [u8; 32] {
+        self.law_program_owner
+    }
+
+    pub(crate) const fn gate(&self) -> &ValidatedDailyLawWrite {
+        &self.gate
+    }
+
+    #[cfg(test)]
+    pub(crate) const fn from_test_gate(
+        gate: ValidatedDailyLawWrite,
+        law_account_key: [u8; 32],
+        law_program_owner: [u8; 32],
+    ) -> Self {
+        Self {
+            gate,
+            law_account_key,
+            law_program_owner,
+        }
+    }
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct RuntimeAccountBridgeTruth {
     pub feature_gated: bool,
@@ -232,6 +281,21 @@ pub fn verify_daily_law_open_account_info(
     verify_daily_law_open_at_clock(binding, law_state, &clock)
 }
 
+/// Authenticate the real runtime Law account and retain its AccountInfo
+/// identity in an opaque capability for later Config/Genesis composition.
+#[inline(never)]
+pub fn verify_runtime_daily_law_open_account_info(
+    binding: &CanonicalDailyLawBinding,
+    law_state: &AccountInfo<'_>,
+) -> Result<RuntimeValidatedDailyLawWrite, RuntimeAdapterError> {
+    let gate = verify_daily_law_open_account_info(binding, law_state)?;
+    Ok(RuntimeValidatedDailyLawWrite {
+        gate,
+        law_account_key: law_state.key.to_bytes(),
+        law_program_owner: law_state.owner.to_bytes(),
+    })
+}
+
 pub fn authenticate_signer_account_info(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,
@@ -324,6 +388,17 @@ pub fn parse_config_genesis_account_info(
         state,
         preimage_sha256: Sha256::digest(&*data).into(),
     })
+}
+
+/// Parse the Config PDA using an opaque runtime-authenticated Law capability.
+/// This closes the caller-shaped Law path for Config/Genesis composition while
+/// retaining the same read-only parser and all of its fail-closed checks.
+pub fn parse_config_genesis_account_info_with_runtime_law(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<ReadonlyConfigGenesisAccount, RuntimeAdapterError> {
+    parse_config_genesis_account_info(runtime_law.gate(), binding, account)
 }
 
 /// Authenticate one existing strict state account from `AccountInfo` and

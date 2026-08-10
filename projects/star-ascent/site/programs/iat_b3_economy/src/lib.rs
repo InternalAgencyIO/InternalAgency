@@ -4,6 +4,8 @@
 mod codec;
 mod config_genesis_codec;
 mod config_genesis_transition;
+#[cfg(feature = "runtime-account-bridge")]
+pub mod config_genesis_transition_runtime;
 mod genesis_conservation;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod genesis_conservation_runtime;

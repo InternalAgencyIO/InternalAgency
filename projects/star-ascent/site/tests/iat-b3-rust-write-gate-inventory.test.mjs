@@ -50,6 +50,13 @@ const economyConfigGenesisTransitionSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/config_genesis_transition.rs", import.meta.url),
   "utf8",
 );
+const economyConfigGenesisTransitionRuntimeSource = readFileSync(
+  new URL(
+    "../programs/iat_b3_economy/src/config_genesis_transition_runtime.rs",
+    import.meta.url,
+  ),
+  "utf8",
+);
 const economyGenesisConservationSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/genesis_conservation.rs", import.meta.url),
   "utf8",
@@ -334,7 +341,7 @@ test("the Config Genesis candidate is non-circular but never self-authorizes pol
   );
   assert.match(
     economyConfigGenesisTransitionSource,
-    /activation_requires_zero_preactivation_core_facts: true/u,
+    /activation_requires_zero_preactivation_economic_state: true/u,
   );
   assert.match(economyConfigGenesisTransitionSource, /owner_bootstrap_policy_accepted: false/u);
   assert.match(
@@ -350,6 +357,65 @@ test("the Config Genesis candidate is non-circular but never self-authorizes pol
   assert.doesNotMatch(
     economyConfigGenesisTransitionSource,
     /AccountInfo|try_borrow_mut|entrypoint!|process_instruction|invoke(?:_signed)?\s*\(/u,
+  );
+});
+
+test("Config Genesis runtime composition authenticates current state without inventing history", () => {
+  assert.match(
+    economySource,
+    /#\[cfg\(feature = "runtime-account-bridge"\)\]\s+pub mod config_genesis_transition_runtime;/u,
+  );
+  assert.match(economyRuntimeAdapterSource, /pub struct RuntimeValidatedDailyLawWrite/u);
+  assert.match(
+    economyRuntimeAdapterSource,
+    /verify_runtime_daily_law_open_account_info/u,
+  );
+  assert.match(
+    economyRuntimeAdapterSource,
+    /parse_config_genesis_account_info_with_runtime_law/u,
+  );
+  assert.match(
+    economyGenesisConservationRuntimeSource,
+    /pub struct AuthenticatedGenesisConservationReceipt/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /prepare_runtime_authenticated_activate_genesis_candidate/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /runtime_daily_law_account_authenticated: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /runtime_config_pda_authenticated: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /runtime_genesis_balances_and_lanes_authenticated: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /current_preactivation_economic_state_authenticated: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /complete_preactivation_write_history_authenticated: false/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /owner_bootstrap_policy_accepted: false/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /production_identity_binding_frozen: false/u,
+  );
+  assert.match(economyConfigGenesisTransitionRuntimeSource, /transition_authorized: false/u);
+  assert.match(economyConfigGenesisTransitionRuntimeSource, /account_writes_executed: false/u);
+  assert.match(economyConfigGenesisTransitionRuntimeSource, /mainnet_hold: true/u);
+  assert.doesNotMatch(
+    economyConfigGenesisTransitionRuntimeSource,
+    /try_borrow_mut|entrypoint!|process_instruction|invoke(?:_signed)?\s*\(/u,
   );
 });
 

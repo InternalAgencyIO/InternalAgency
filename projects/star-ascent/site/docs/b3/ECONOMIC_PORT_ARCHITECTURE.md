@@ -572,16 +572,17 @@ activity; it intentionally does not require Daily Law because no economic
 write is yet permitted. The `GENESIS_STAGING -> ACTIVE` candidate first
 requires an opaque current OPEN Daily Law capability for the same mint, then a
 mint/program-bound exact conservation receipt, the complete lane/stake funding
-shape, and zero preactivation economic writes, attributed core principal, core
-rewards, and core releases. It binds the Config preimage, law account,
-conservation manifest, and numeric preactivation facts into the candidate.
+shape, and zero observable preactivation Config/Lane economic state: staked
+principal, agencies, reserved rewards, paid rewards, and claimed principal. It
+binds the Config preimage, law account, conservation manifest, and exact current
+state facts into the candidate.
 
-This candidate is not the frozen phase predicate. Its preactivation numeric
-facts are not yet sourced from authenticated runtime accounts, the owner has
-not accepted the rule, production identities and final binaries are absent,
-and no writer consumes the result. It exposes no AccountInfo, mutable borrow,
-CPI, ABI, entrypoint, or dispatcher; all authorization fields remain false and
-the Config graph node remains blocked/Mainnet HOLD.
+The pure candidate is not the frozen phase predicate. Its public input remains
+caller-shaped, the owner has not accepted the rule, production identities and
+final binaries are absent, and no writer consumes the result. It exposes no
+AccountInfo, mutable borrow, CPI, ABI, entrypoint, or dispatcher; all
+authorization fields remain false and the Config graph node remains
+blocked/Mainnet HOLD.
 
 A separate production-source pure kernel now closes the arithmetic-only part of
 Genesis conservation without crossing that boundary. It requires the exact
@@ -616,6 +617,22 @@ the manifest, production IDs are still inputs, the parser does not attest
 deployed Token-2022 or hook bytecode, and no prior-supply retirement, phase
 transition, write, activation, or Mainnet evidence is created. The module has
 no mutable borrow, CPI, ABI, entrypoint, or dispatcher and remains `HOLD`.
+
+The runtime bridge now preserves that distinction through opaque capability
+types. One wrapper can only be returned after the real Daily-Law AccountInfo and
+runtime Clock pass the open-day verifier; another can only be returned after
+the Token-2022 and four strict Lane-PDA capabilities pass the conservation
+composition. A feature-gated Config/Genesis composer then parses the real
+read-only Config PDA with the opaque runtime Law capability, requires the same
+Config/mint/token-program binding, derives the five current preactivation facts
+from authenticated Config and Lane state, and returns an opaque held activation
+candidate.
+
+This authenticates current observable preactivation state. It does not prove a
+complete historical absence of prior writes, owner acceptance, production
+identity freeze, phase authorization, or execution. Those truth fields remain
+false, no write/ABI/entrypoint/dispatcher was added, and the graph remains
+`BLOCKED`/Mainnet `HOLD`.
 
 The next strict-codec batch adds only four more field-complete retained
 projections: `CoreRewardState` (`IATB3CRW`, 128 bytes), `AgencyState`

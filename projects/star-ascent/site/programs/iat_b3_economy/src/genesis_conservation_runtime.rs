@@ -59,6 +59,81 @@ pub const GENESIS_CONSERVATION_RUNTIME_TRUTH: GenesisConservationRuntimeTruth =
         mainnet_hold: true,
     };
 
+/// Opaque proof that the pure conservation receipt was produced from the
+/// feature-gated Token-2022 and strict Lane-PDA capability path. Callers can
+/// inspect hashes and totals, but cannot manufacture this runtime binding or
+/// extract a forgeable inner receipt.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct AuthenticatedGenesisConservationReceipt {
+    receipt: GenesisConservationReceipt,
+    config: [u8; 32],
+    mint: [u8; 32],
+    token_program: [u8; 32],
+    lane_reserved_total: u64,
+    lane_paid_total: u64,
+    lane_principal_claimed_total: u64,
+}
+
+impl AuthenticatedGenesisConservationReceipt {
+    pub const fn config(&self) -> [u8; 32] {
+        self.config
+    }
+
+    pub const fn mint(&self) -> [u8; 32] {
+        self.mint
+    }
+
+    pub const fn token_program(&self) -> [u8; 32] {
+        self.token_program
+    }
+
+    pub const fn manifest_sha256(&self) -> [u8; 32] {
+        self.receipt.manifest_sha256()
+    }
+
+    pub const fn observed_supply(&self) -> u64 {
+        self.receipt.observed_supply()
+    }
+
+    pub const fn observed_allocation_total(&self) -> u64 {
+        self.receipt.observed_allocation_total()
+    }
+
+    pub const fn lane_reserved_total(&self) -> u64 {
+        self.lane_reserved_total
+    }
+
+    pub const fn lane_paid_total(&self) -> u64 {
+        self.lane_paid_total
+    }
+
+    pub const fn lane_principal_claimed_total(&self) -> u64 {
+        self.lane_principal_claimed_total
+    }
+
+    pub(crate) const fn receipt(&self) -> &GenesisConservationReceipt {
+        &self.receipt
+    }
+
+    #[cfg(test)]
+    pub(crate) const fn from_test_receipt(
+        receipt: GenesisConservationReceipt,
+        config: [u8; 32],
+        mint: [u8; 32],
+        token_program: [u8; 32],
+    ) -> Self {
+        Self {
+            receipt,
+            config,
+            mint,
+            token_program,
+            lane_reserved_total: 0,
+            lane_paid_total: 0,
+            lane_principal_claimed_total: 0,
+        }
+    }
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum GenesisConservationRuntimeError {
     Native(NativeAdapterError),
@@ -94,7 +169,7 @@ pub fn verify_authenticated_genesis_conservation(
     canonical_mint: &ReadonlyCanonicalEconomyMint,
     token_accounts: &[ReadonlyPublicTokenAccount; GENESIS_ALLOCATION_COUNT],
     lane_states: &[AuthenticatedStateAccount; GENESIS_ALLOCATION_COUNT - 1],
-) -> Result<GenesisConservationReceipt, GenesisConservationRuntimeError> {
+) -> Result<AuthenticatedGenesisConservationReceipt, GenesisConservationRuntimeError> {
     if manifest.mint != binding.mint() || canonical_mint.canonical_mint() != binding.mint() {
         return Err(GenesisConservationRuntimeError::MintBindingMismatch);
     }
@@ -186,7 +261,7 @@ pub fn verify_authenticated_genesis_conservation(
         };
     }
 
-    verify_genesis_allocation_conservation(&GenesisConservationInput {
+    let receipt = verify_genesis_allocation_conservation(&GenesisConservationInput {
         manifest,
         mint: ObservedGenesisMint {
             key: canonical_mint.canonical_mint(),
@@ -198,5 +273,17 @@ pub fn verify_authenticated_genesis_conservation(
         },
         allocations: observations,
     })
-    .map_err(GenesisConservationRuntimeError::Conservation)
+    .map_err(GenesisConservationRuntimeError::Conservation)?;
+
+    Ok(AuthenticatedGenesisConservationReceipt {
+        receipt,
+        config: binding.config(),
+        mint: canonical_mint.canonical_mint(),
+        token_program: canonical_mint.token_2022_program(),
+        // Every Lane capability above was authenticated and required to hold
+        // exact zero-valued Genesis accounting fields.
+        lane_reserved_total: 0,
+        lane_paid_total: 0,
+        lane_principal_claimed_total: 0,
+    })
 }

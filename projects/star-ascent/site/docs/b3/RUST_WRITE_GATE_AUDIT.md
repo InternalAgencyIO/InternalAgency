@@ -450,9 +450,11 @@ frozen Config edges. Staging requires an empty production-shaped economic state
 and deliberately no Daily Law capability, avoiding a circular dependency on an
 active core-custody regime. Activation checks the opaque OPEN-law capability
 first, then a same-mint/token-program conservation receipt, exact lane/stake
-funding shape, and zero preactivation write/core-principal/reward/release
-facts. Candidate receipts hash the Config preimage, law account, conservation
-manifest, and numeric facts.
+funding shape, and zero observable preactivation economic state. The current
+source names the exact facts: Config staked principal and agency count plus
+aggregate Lane reserved, paid, and principal-claimed values. Candidate receipts
+hash the Config preimage, law account, conservation manifest, and those
+current-state facts.
 
 The candidate is not accepted policy or executable evidence. Its preactivation
 facts are still caller-shaped, the owner acceptance and production identity
@@ -489,6 +491,21 @@ acceptance, production identities, deployed program-byte attestation,
 prior-supply retirement or migration, Config phase authorization, writes,
 activation, and Mainnet authority remain false. No mutable borrow, CPI,
 instruction ABI, entrypoint, or dispatcher was added, so the graph stays held.
+
+Opaque runtime wrappers now prevent the Config/Genesis composition path from
+silently accepting the pure semantic receipt or a caller-labeled Law result as
+runtime evidence. The runtime Law wrapper is produced only from the real
+read-only Law AccountInfo plus Clock; the runtime conservation wrapper is
+produced only from exact Token-2022 and strict Lane-PDA capabilities. The new
+feature-gated composer parses the binding-relative Config PDA with that Law
+wrapper, binds the same Config/mint/token program, derives the observable
+zero-state facts, and returns data only.
+
+This closes authentication of current observable preactivation state, not
+historical write absence or the Config graph node. The source says
+`complete_preactivation_write_history_authenticated: false`; owner policy,
+production identities, transition authorization, writes, entrypoint,
+dispatcher, activation, and Mainnet remain false/HOLD.
 
 These are not account adapters or deployable handlers. A future native adapter
 must still prove account ownership, exact config/round/randomness bindings,
