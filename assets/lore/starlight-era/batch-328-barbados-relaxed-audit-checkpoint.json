@@ -1,0 +1,1462 @@
+{
+  "batch": 328,
+  "country": "Barbados",
+  "status": "terminal-partially-accepted-three",
+  "sourceCommit": "e1c1217c1d8f57abd84bd1672abccdee85f0dd0e",
+  "contractSha256": "3EDBDA128DD8F8FA733B6B761ECBFC1E9F56445D091FBBF7DA1495A485BEF210",
+  "rollMethod": "FNV-1a over the recorded batch328-barbados keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "themePair": [
+    "nurse-care couture",
+    "doctor-clinical-command couture"
+  ],
+  "nextThemePair": [
+    "doctor-clinical-command couture",
+    "adult nightlife dance-performance couture"
+  ],
+  "nextQueueCountry": "São Tomé and Príncipe",
+  "nextQueueBatch": 329,
+  "nextQueueScenes": [
+    1336,
+    1337,
+    1338,
+    1339
+  ],
+  "researchSources": [
+    {
+      "url": "https://whc.unesco.org/en/list/1376/",
+      "usedFor": "Historic Bridgetown's secular Careenage waterfront, bridge, warehouses, and coral-stone urban geometry"
+    },
+    {
+      "url": "https://www.visitbarbados.org/bathsheba",
+      "usedFor": "Bathsheba, Soup Bowl surf, coral-limestone boulders, reef shelves, and east-coast hills"
+    },
+    {
+      "url": "https://www.visitbarbados.org/harrisons-cave-eco-adventure-park",
+      "usedFor": "Harrison's Cave chambers, stalactites, stalagmites, flowstone, pools, and visitor path"
+    },
+    {
+      "url": "https://www.visitbarbados.org/animal-flower-cave",
+      "usedFor": "Animal Flower Cave, North Point cliffs, natural rock pool, Atlantic shelves, and spray"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch328-barbados-male-model-scene",
+    "fullHash": 161725862,
+    "roll": 62,
+    "selectedScenePosition": 3,
+    "selectedScene": 1334,
+    "maleEmotion": {
+      "key": "batch328-barbados-scene3-male-emotion",
+      "roll": 23,
+      "result": "playful mischief"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Barbados flag, coat of arms, official emblem, sacred symbol, or religious building is copied. Large researched secular island, Careenage, bridge, boulder, surf, coral-limestone, cave, cliff, pool, sugarcane, mahogany, cloud, and route compositions replace them.",
+    "palette": "ultramarine blue, aquamarine, coral pink, golden sand, mahogany, sugarcane green, cloud white, limestone cream, sunset orange, and deep Atlantic navy",
+    "minimumCoverage": "Every image carries large complete secular Barbados compositions across at least two outfits as dominant full bodice, skirt, hip, or panel fields.",
+    "cultureScene": "The scenes foreground Bridgetown's Careenage, Bathsheba's Atlantic geology, Harrison's Cave, and Animal Flower Cave at North Point.",
+    "prohibitions": "Use respectful secular Barbados island outlines, Careenage curves, bridge arches, coral-limestone terraces, Atlantic surf arcs, Bathsheba boulders, cave chambers, stalactite and stalagmite contours, sugarcane-field bands, mahogany-leaf rhythms, reef shelves, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch328-barbados-x-heart",
+      "roll": 63,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch328-barbados-x-internalagency",
+      "roll": 3,
+      "active": true
+    },
+    "worldXXXSeries": {
+      "key": "batch328-barbados-x-worldxxxseries",
+      "roll": 92,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Barbados images plus one accepted Vanuatu image",
+    "captionIfEligible": "Barbados ❤️ Vanuatu #Barbados #InternalAgency",
+    "internalAgencyHashtagActive": true,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1334 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1334 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch328-barbados-male-model-scene",
+        62
+      ],
+      [
+        "batch328-barbados-scene3-male-emotion",
+        23
+      ],
+      [
+        "batch328-barbados-scene1332-weather",
+        42
+      ],
+      [
+        "batch328-barbados-scene1332-paws",
+        99
+      ],
+      [
+        "batch328-barbados-scene1332-poleDanceTheme",
+        92
+      ],
+      [
+        "batch328-barbados-scene1332-rainbowOnly",
+        86
+      ],
+      [
+        "batch328-barbados-scene1332-rainbowHosiery",
+        21
+      ],
+      [
+        "batch328-barbados-scene1332-romanceBeat",
+        87
+      ],
+      [
+        "batch328-barbados-scene1332-compoundLoveBeat",
+        7
+      ],
+      [
+        "batch328-barbados-scene1332-eceMissionProp-poseTargetRoll",
+        48
+      ],
+      [
+        "batch328-barbados-scene1332-Radiance-emotion",
+        63
+      ],
+      [
+        "batch328-barbados-scene1332-Radiance-visibleMidriff",
+        47
+      ],
+      [
+        "batch328-barbados-scene1332-Radiance-straplessDress",
+        52
+      ],
+      [
+        "batch328-barbados-scene1332-Radiance-fullyOpenBack",
+        57
+      ],
+      [
+        "batch328-barbados-scene1332-Ellie-emotion",
+        91
+      ],
+      [
+        "batch328-barbados-scene1332-Ellie-visibleMidriff",
+        67
+      ],
+      [
+        "batch328-barbados-scene1332-Ellie-straplessDress",
+        68
+      ],
+      [
+        "batch328-barbados-scene1332-Ellie-fullyOpenBack",
+        37
+      ],
+      [
+        "batch328-barbados-scene1332-Alia-emotion",
+        5
+      ],
+      [
+        "batch328-barbados-scene1332-Alia-visibleMidriff",
+        29
+      ],
+      [
+        "batch328-barbados-scene1332-Alia-straplessDress",
+        86
+      ],
+      [
+        "batch328-barbados-scene1332-Alia-fullyOpenBack",
+        27
+      ],
+      [
+        "batch328-barbados-scene1332-AI ECE-emotion",
+        7
+      ],
+      [
+        "batch328-barbados-scene1332-AI ECE-emotion-disambiguation",
+        58
+      ],
+      [
+        "batch328-barbados-scene1332-AI ECE-visibleMidriff",
+        27
+      ],
+      [
+        "batch328-barbados-scene1332-AI ECE-straplessDress",
+        40
+      ],
+      [
+        "batch328-barbados-scene1332-AI ECE-fullyOpenBack",
+        21
+      ],
+      [
+        "batch328-barbados-scene1333-weather",
+        85
+      ],
+      [
+        "batch328-barbados-scene1333-paws",
+        66
+      ],
+      [
+        "batch328-barbados-scene1333-poleDanceTheme",
+        33
+      ],
+      [
+        "batch328-barbados-scene1333-rainbowOnly",
+        33
+      ],
+      [
+        "batch328-barbados-scene1333-rainbowHosiery",
+        92
+      ],
+      [
+        "batch328-barbados-scene1333-romanceBeat",
+        24
+      ],
+      [
+        "batch328-barbados-scene1333-compoundLoveBeat",
+        78
+      ],
+      [
+        "batch328-barbados-scene1333-eceMissionProp-poseTargetRoll",
+        39
+      ],
+      [
+        "batch328-barbados-scene1333-Radiance-emotion",
+        30
+      ],
+      [
+        "batch328-barbados-scene1333-Radiance-visibleMidriff",
+        88
+      ],
+      [
+        "batch328-barbados-scene1333-Radiance-straplessDress",
+        27
+      ],
+      [
+        "batch328-barbados-scene1333-Radiance-fullyOpenBack",
+        24
+      ],
+      [
+        "batch328-barbados-scene1333-Ellie-emotion",
+        40
+      ],
+      [
+        "batch328-barbados-scene1333-Ellie-visibleMidriff",
+        46
+      ],
+      [
+        "batch328-barbados-scene1333-Ellie-straplessDress",
+        69
+      ],
+      [
+        "batch328-barbados-scene1333-Ellie-fullyOpenBack",
+        62
+      ],
+      [
+        "batch328-barbados-scene1333-Alia-emotion",
+        48
+      ],
+      [
+        "batch328-barbados-scene1333-Alia-visibleMidriff",
+        18
+      ],
+      [
+        "batch328-barbados-scene1333-Alia-straplessDress",
+        81
+      ],
+      [
+        "batch328-barbados-scene1333-Alia-fullyOpenBack",
+        62
+      ],
+      [
+        "batch328-barbados-scene1333-AI ECE-emotion",
+        34
+      ],
+      [
+        "batch328-barbados-scene1333-AI ECE-visibleMidriff",
+        80
+      ],
+      [
+        "batch328-barbados-scene1333-AI ECE-straplessDress",
+        43
+      ],
+      [
+        "batch328-barbados-scene1333-AI ECE-fullyOpenBack",
+        60
+      ],
+      [
+        "batch328-barbados-scene1334-weather",
+        92
+      ],
+      [
+        "batch328-barbados-scene1334-paws",
+        81
+      ],
+      [
+        "batch328-barbados-scene1334-poleDanceTheme",
+        86
+      ],
+      [
+        "batch328-barbados-scene1334-rainbowOnly",
+        20
+      ],
+      [
+        "batch328-barbados-scene1334-rainbowHosiery",
+        39
+      ],
+      [
+        "batch328-barbados-scene1334-romanceBeat",
+        69
+      ],
+      [
+        "batch328-barbados-scene1334-compoundLoveBeat",
+        33
+      ],
+      [
+        "batch328-barbados-scene1334-eceMissionProp-poseTargetRoll",
+        46
+      ],
+      [
+        "batch328-barbados-scene1334-Radiance-emotion",
+        81
+      ],
+      [
+        "batch328-barbados-scene1334-Radiance-visibleMidriff",
+        5
+      ],
+      [
+        "batch328-barbados-scene1334-Radiance-straplessDress",
+        82
+      ],
+      [
+        "batch328-barbados-scene1334-Radiance-fullyOpenBack",
+        7
+      ],
+      [
+        "batch328-barbados-scene1334-Ellie-emotion",
+        97
+      ],
+      [
+        "batch328-barbados-scene1334-Ellie-visibleMidriff",
+        29
+      ],
+      [
+        "batch328-barbados-scene1334-Ellie-straplessDress",
+        46
+      ],
+      [
+        "batch328-barbados-scene1334-Ellie-fullyOpenBack",
+        95
+      ],
+      [
+        "batch328-barbados-scene1334-Alia-emotion",
+        67
+      ],
+      [
+        "batch328-barbados-scene1334-Alia-visibleMidriff",
+        39
+      ],
+      [
+        "batch328-barbados-scene1334-Alia-straplessDress",
+        88
+      ],
+      [
+        "batch328-barbados-scene1334-Alia-fullyOpenBack",
+        25
+      ],
+      [
+        "batch328-barbados-scene1334-AI ECE-emotion",
+        61
+      ],
+      [
+        "batch328-barbados-scene1334-AI ECE-visibleMidriff",
+        45
+      ],
+      [
+        "batch328-barbados-scene1334-AI ECE-straplessDress",
+        54
+      ],
+      [
+        "batch328-barbados-scene1334-AI ECE-fullyOpenBack",
+        91
+      ],
+      [
+        "batch328-barbados-scene1335-weather",
+        59
+      ],
+      [
+        "batch328-barbados-scene1335-paws",
+        88
+      ],
+      [
+        "batch328-barbados-scene1335-poleDanceTheme",
+        15
+      ],
+      [
+        "batch328-barbados-scene1335-rainbowOnly",
+        47
+      ],
+      [
+        "batch328-barbados-scene1335-rainbowHosiery",
+        38
+      ],
+      [
+        "batch328-barbados-scene1335-romanceBeat",
+        54
+      ],
+      [
+        "batch328-barbados-scene1335-compoundLoveBeat",
+        80
+      ],
+      [
+        "batch328-barbados-scene1335-eceMissionProp-poseTargetRoll",
+        13
+      ],
+      [
+        "batch328-barbados-scene1335-Radiance-emotion",
+        36
+      ],
+      [
+        "batch328-barbados-scene1335-Radiance-visibleMidriff",
+        98
+      ],
+      [
+        "batch328-barbados-scene1335-Radiance-straplessDress",
+        65
+      ],
+      [
+        "batch328-barbados-scene1335-Radiance-fullyOpenBack",
+        78
+      ],
+      [
+        "batch328-barbados-scene1335-Ellie-emotion",
+        98
+      ],
+      [
+        "batch328-barbados-scene1335-Ellie-visibleMidriff",
+        16
+      ],
+      [
+        "batch328-barbados-scene1335-Ellie-straplessDress",
+        63
+      ],
+      [
+        "batch328-barbados-scene1335-Ellie-fullyOpenBack",
+        44
+      ],
+      [
+        "batch328-barbados-scene1335-Alia-emotion",
+        90
+      ],
+      [
+        "batch328-barbados-scene1335-Alia-visibleMidriff",
+        36
+      ],
+      [
+        "batch328-barbados-scene1335-Alia-straplessDress",
+        87
+      ],
+      [
+        "batch328-barbados-scene1335-Alia-fullyOpenBack",
+        20
+      ],
+      [
+        "batch328-barbados-scene1335-AI ECE-emotion",
+        56
+      ],
+      [
+        "batch328-barbados-scene1335-AI ECE-visibleMidriff",
+        98
+      ],
+      [
+        "batch328-barbados-scene1335-AI ECE-straplessDress",
+        1
+      ],
+      [
+        "batch328-barbados-scene1335-AI ECE-fullyOpenBack",
+        34
+      ],
+      [
+        "batch328-barbados-x-heart",
+        63
+      ],
+      [
+        "batch328-barbados-x-internalagency",
+        3
+      ],
+      [
+        "batch328-barbados-x-worldxxxseries",
+        92
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch328-barbados-scene1332-rainbowHosieryWearer",
+        49
+      ],
+      [
+        "batch328-barbados-scene1332-rainbowHosieryPaletteMode",
+        23
+      ],
+      [
+        "batch328-barbados-scene1333-rainbowHosieryWearer",
+        88
+      ],
+      [
+        "batch328-barbados-scene1333-rainbowHosieryPaletteMode",
+        48
+      ],
+      [
+        "batch328-barbados-scene1334-rainbowHosieryWearer",
+        87
+      ],
+      [
+        "batch328-barbados-scene1334-rainbowHosieryPaletteMode",
+        29
+      ],
+      [
+        "batch328-barbados-scene1335-rainbowHosieryWearer",
+        6
+      ],
+      [
+        "batch328-barbados-scene1335-rainbowHosieryPaletteMode",
+        98
+      ]
+    ],
+    "primaryPairCount": 102,
+    "selectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "C59E1B47B737903F3E48C7637F7232476397B258F4209E329A1D9B90647C0095",
+    "selectorPairsSha256": "AFADA2491EF1A60DCB9C039059BE254AF33E2E031E1DE62575A38D98B073882D"
+  },
+  "scenePlans": {
+    "1332": {
+      "scene": 1332,
+      "theme": "nurse-care couture",
+      "landmark": "a broad dry covered civic-waterfront overlook above Bridgetown's complete Careenage curve, Chamberlain Bridge arch, colorful gabled warehouse row, empty marina lines, calm Constitution River water, coral-stone quays, and distant green hills under layered tropical clouds",
+      "motifs": "complete Barbados island outline, Careenage harbor curve, Chamberlain Bridge arch, gabled-warehouse rhythm, Constitution River channel, coral-stone quay grid, mahogany-leaf band, and Atlantic route-arc compositions",
+      "culture": "Bridgetown is presented through secular civic waterfront geography, the Careenage, Chamberlain Bridge, gabled warehouses, marina geometry, coral-stone quays, and the Constitution River. Nurse-care couture is public-safe fictional fashion about mutual calm and route stewardship only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch328-barbados-scene1332-weather",
+        "roll": 42,
+        "result": "rolling thunderstorm",
+        "materialized": "rolling thunderstorm"
+      },
+      "paws": {
+        "key": "batch328-barbados-scene1332-paws",
+        "roll": 99,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch328-barbados-scene1332-poleDanceTheme",
+        "roll": 92,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch328-barbados-scene1332-rainbowOnly",
+        "roll": 86,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch328-barbados-scene1332-rainbowHosiery",
+        "roll": 21,
+        "active": true,
+        "wearer": {
+          "key": "batch328-barbados-scene1332-rainbowHosieryWearer",
+          "roll": 49,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch328-barbados-scene1332-rainbowHosieryPaletteMode",
+          "roll": 23,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch328-barbados-scene1332-eceMissionProp-poseTargetRoll",
+        "roll": 48
+      },
+      "materializedPropAction": "Alia uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker in an unoccupied Careenage reach, with no boat, swimmer, bird, animal, person, bridge, marina, quay, shore, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one distant clearly empty floating navigation marker in an unoccupied Careenage reach, with no boat, swimmer, bird, animal, person, bridge, marina, quay, shore, or occupied structure anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch328-barbados-scene1332-romanceBeat",
+        "roll": 87,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch328-barbados-scene1332-compoundLoveBeat",
+        "roll": 7,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch328-barbados-scene1332-Radiance-emotion",
+            "roll": 63,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1332-Radiance-visibleMidriff",
+            "roll": 47,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1332-Radiance-straplessDress",
+            "roll": 52,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1332-Radiance-fullyOpenBack",
+            "roll": 57,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch328-barbados-scene1332-Ellie-emotion",
+            "roll": 91,
+            "result": "anger",
+            "materializedResult": "anger",
+            "performance": "anger expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1332-Ellie-visibleMidriff",
+            "roll": 67,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1332-Ellie-straplessDress",
+            "roll": 68,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1332-Ellie-fullyOpenBack",
+            "roll": 37,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch328-barbados-scene1332-Alia-emotion",
+            "roll": 5,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1332-Alia-visibleMidriff",
+            "roll": 29,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1332-Alia-straplessDress",
+            "roll": 86,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1332-Alia-fullyOpenBack",
+            "roll": 27,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch328-barbados-scene1332-AI ECE-emotion",
+            "roll": 7,
+            "result": "tender affection",
+            "materializedResult": "aching romantic longing",
+            "disambiguation": {
+              "key": "batch328-barbados-scene1332-AI ECE-emotion-disambiguation",
+              "roll": 58
+            },
+            "performance": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1332-AI ECE-visibleMidriff",
+            "roll": 27,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1332-AI ECE-straplessDress",
+            "roll": 40,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1332-AI ECE-fullyOpenBack",
+            "roll": 21,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "visible jealousy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "anger expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise nurse-care couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Careenage harbor curve, Chamberlain Bridge arch, gabled-warehouse rhythm, Constitution River channel, coral-stone quay grid, mahogany-leaf band, and Atlantic route-arc compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta nurse-care couture tailored asymmetric romper with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Careenage harbor curve, Chamberlain Bridge arch, gabled-warehouse rhythm, Constitution River channel, coral-stone quay grid, mahogany-leaf band, and Atlantic route-arc compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald nurse-care couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Careenage harbor curve, Chamberlain Bridge arch, gabled-warehouse rhythm, Constitution River channel, coral-stone quay grid, mahogany-leaf band, and Atlantic route-arc compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy nurse-care couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Careenage harbor curve, Chamberlain Bridge arch, gabled-warehouse rhythm, Constitution River channel, coral-stone quay grid, mahogany-leaf band, and Atlantic route-arc compositions field, and secure contrasting high heels"
+      },
+      "composition": "Alia stands far left with the rolled target clearly downrange farther left. The remaining adults move through a close affectionate care arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, river, bridge, warehouse, hill, or railing gaps.",
+      "handInventory": [
+        "Alia uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+        "Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder",
+        "ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered civic-waterfront overlook above Bridgetown's complete Careenage curve, Chamberlain Bridge arch, colorful gabled warehouse row, empty marina lines, calm Constitution River water, coral-stone quays, and distant green hills under layered tropical clouds. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: nurse-care couture, only as original public-safe fictional fashion. Bridgetown is presented through secular civic waterfront geography, the Careenage, Chamberlain Bridge, gabled warehouses, marina geometry, coral-stone quays, and the Constitution River. Nurse-care couture is public-safe fictional fashion about mutual calm and route stewardship only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care. Stored scene rolls: weather 42=rolling thunderstorm; PAWS 99=inactive; pole 92=inactive; rainbow-only 86=inactive; rainbow hosiery 21=active; wearer 49=Radiance; palette 23=country-palette rainbow-like gradient; romance 87; compound 7; mission-prop pose/target 48. Exact wardrobe rolls: Radiance: midriff 47=visible, strapless 52=inactive, open back 57=inactive; Ellie: midriff 67=covered, strapless 68=inactive, open back 37=inactive; Alia: midriff 29=visible, strapless 86=inactive, open back 27=active; AI ECE: midriff 27=visible, strapless 40=inactive, open back 21=active. Exact outfits: Radiance: Pacific turquoise nurse-care couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Careenage harbor curve, Chamberlain Bridge arch, gabled-warehouse rhythm, Constitution River channel, coral-stone quay grid, mahogany-leaf band, and Atlantic route-arc compositions field, and secure contrasting high heels; Ellie: coral magenta nurse-care couture tailored asymmetric romper with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Careenage harbor curve, Chamberlain Bridge arch, gabled-warehouse rhythm, Constitution River channel, coral-stone quay grid, mahogany-leaf band, and Atlantic route-arc compositions field, and secure contrasting high heels; Alia: rainforest emerald nurse-care couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Careenage harbor curve, Chamberlain Bridge arch, gabled-warehouse rhythm, Constitution River channel, coral-stone quay grid, mahogany-leaf band, and Atlantic route-arc compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy nurse-care couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Careenage harbor curve, Chamberlain Bridge arch, gabled-warehouse rhythm, Constitution River channel, coral-stone quay grid, mahogany-leaf band, and Atlantic route-arc compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Barbados motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Barbados island outline, Careenage harbor curve, Chamberlain Bridge arch, gabled-warehouse rhythm, Constitution River channel, coral-stone quay grid, mahogany-leaf band, and Atlantic route-arc compositions. Use respectful secular Barbados island outlines, Careenage curves, bridge arches, coral-limestone terraces, Atlantic surf arcs, Bathsheba boulders, cave chambers, stalactite and stalagmite contours, sugarcane-field bands, mahogany-leaf rhythms, reef shelves, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 63=visible jealousy, performed as visible jealousy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 91=anger, performed as anger expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 5=tender affection, performed as tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 7=tender affection, collision resolver 58 gives distinct performance aching romantic longing, performed as aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 87: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Compound roll 7: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. Alia stands far left with the rolled target clearly downrange farther left. The remaining adults move through a close affectionate care arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, river, bridge, warehouse, hill, or railing gaps. Exact hand inventory, no others: Alia uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm; Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder; ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker in an unoccupied Careenage reach, with no boat, swimmer, bird, animal, person, bridge, marina, quay, shore, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly Radiance wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render rolling thunderstorm cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1333": {
+      "scene": 1333,
+      "theme": "nurse-care couture",
+      "landmark": "a broad dry covered coastal overlook above Bathsheba on Barbados's east coast, with the complete Soup Bowl surf break, giant coral-limestone boulders, rugged Atlantic shoreline, foam-laced reef shelves, coconut-palm edge, low green hills, and an empty protected observation lane",
+      "motifs": "complete Barbados island outline, Bathsheba boulder silhouettes, Soup Bowl surf arc, coral-limestone shelf, Atlantic foam band, coconut-palm rhythm, east-coast hill profile, and empty route-grid compositions",
+      "culture": "Bathsheba is presented through secular coastal geology, coral-limestone boulders, the Soup Bowl surf break, reef shelves, palms, green hills, and an empty protected overlook. Nurse-care couture is public-safe fictional fashion about mutual calm and coastal research only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch328-barbados-scene1333-weather",
+        "roll": 85,
+        "result": "double rainbow after rain",
+        "materialized": "double rainbow after rain"
+      },
+      "paws": {
+        "key": "batch328-barbados-scene1333-paws",
+        "roll": 66,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch328-barbados-scene1333-poleDanceTheme",
+        "roll": 33,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch328-barbados-scene1333-rainbowOnly",
+        "roll": 33,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch328-barbados-scene1333-rainbowHosiery",
+        "roll": 92,
+        "active": false,
+        "wearer": {
+          "key": "batch328-barbados-scene1333-rainbowHosieryWearer",
+          "roll": 88,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch328-barbados-scene1333-rainbowHosieryPaletteMode",
+          "roll": 48,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch328-barbados-scene1333-eceMissionProp-poseTargetRoll",
+        "roll": 39
+      },
+      "materializedPropAction": "AI ECE uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker in an unoccupied open-water corridor beyond the surf break, with no boat, swimmer, surfer, bird, animal, person, boulder, reef, shore, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one distant clearly empty floating navigation marker in an unoccupied open-water corridor beyond the surf break, with no boat, swimmer, surfer, bird, animal, person, boulder, reef, shore, or occupied structure anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch328-barbados-scene1333-romanceBeat",
+        "roll": 24,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch328-barbados-scene1333-compoundLoveBeat",
+        "roll": 78,
+        "index": 6,
+        "contractResult": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch328-barbados-scene1333-Radiance-emotion",
+            "roll": 30,
+            "result": "hope",
+            "materializedResult": "hope",
+            "performance": "hope expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1333-Radiance-visibleMidriff",
+            "roll": 88,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1333-Radiance-straplessDress",
+            "roll": 27,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1333-Radiance-fullyOpenBack",
+            "roll": 24,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch328-barbados-scene1333-Ellie-emotion",
+            "roll": 40,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1333-Ellie-visibleMidriff",
+            "roll": 46,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1333-Ellie-straplessDress",
+            "roll": 69,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1333-Ellie-fullyOpenBack",
+            "roll": 62,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch328-barbados-scene1333-Alia-emotion",
+            "roll": 48,
+            "result": "startled surprise",
+            "materializedResult": "startled surprise",
+            "performance": "startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1333-Alia-visibleMidriff",
+            "roll": 18,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1333-Alia-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1333-Alia-fullyOpenBack",
+            "roll": 62,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch328-barbados-scene1333-AI ECE-emotion",
+            "roll": 34,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1333-AI ECE-visibleMidriff",
+            "roll": 80,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1333-AI ECE-straplessDress",
+            "roll": 43,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1333-AI ECE-fullyOpenBack",
+            "roll": 60,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "hope expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "overwhelming relief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise nurse-care couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Bathsheba boulder silhouettes, Soup Bowl surf arc, coral-limestone shelf, Atlantic foam band, coconut-palm rhythm, east-coast hill profile, and empty route-grid compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta nurse-care couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Bathsheba boulder silhouettes, Soup Bowl surf arc, coral-limestone shelf, Atlantic foam band, coconut-palm rhythm, east-coast hill profile, and empty route-grid compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald nurse-care couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Bathsheba boulder silhouettes, Soup Bowl surf arc, coral-limestone shelf, Atlantic foam band, coconut-palm rhythm, east-coast hill profile, and empty route-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy nurse-care couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Bathsheba boulder silhouettes, Soup Bowl surf arc, coral-limestone shelf, Atlantic foam band, coconut-palm rhythm, east-coast hill profile, and empty route-grid compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning affectionate triangle to the right beneath the shelter, every arm separated by sky, surf, boulder, reef, palm, shelter, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm",
+        "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder",
+        "Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered coastal overlook above Bathsheba on Barbados's east coast, with the complete Soup Bowl surf break, giant coral-limestone boulders, rugged Atlantic shoreline, foam-laced reef shelves, coconut-palm edge, low green hills, and an empty protected observation lane. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: nurse-care couture, only as original public-safe fictional fashion. Bathsheba is presented through secular coastal geology, coral-limestone boulders, the Soup Bowl surf break, reef shelves, palms, green hills, and an empty protected overlook. Nurse-care couture is public-safe fictional fashion about mutual calm and coastal research only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care. Stored scene rolls: weather 85=double rainbow after rain; PAWS 66=inactive; pole 33=inactive; rainbow-only 33=inactive; rainbow hosiery 92=inactive; wearer 88=AI ECE; palette 48=country-palette rainbow-like gradient; romance 24; compound 78; mission-prop pose/target 39. Exact wardrobe rolls: Radiance: midriff 88=covered, strapless 27=active, open back 24=active; Ellie: midriff 46=visible, strapless 69=inactive, open back 62=inactive; Alia: midriff 18=visible, strapless 81=inactive, open back 62=inactive; AI ECE: midriff 80=covered, strapless 43=inactive, open back 60=inactive. Exact outfits: Radiance: Pacific turquoise nurse-care couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Bathsheba boulder silhouettes, Soup Bowl surf arc, coral-limestone shelf, Atlantic foam band, coconut-palm rhythm, east-coast hill profile, and empty route-grid compositions field, and secure contrasting high heels; Ellie: coral magenta nurse-care couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Bathsheba boulder silhouettes, Soup Bowl surf arc, coral-limestone shelf, Atlantic foam band, coconut-palm rhythm, east-coast hill profile, and empty route-grid compositions field, and secure contrasting high heels; Alia: rainforest emerald nurse-care couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Bathsheba boulder silhouettes, Soup Bowl surf arc, coral-limestone shelf, Atlantic foam band, coconut-palm rhythm, east-coast hill profile, and empty route-grid compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy nurse-care couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Bathsheba boulder silhouettes, Soup Bowl surf arc, coral-limestone shelf, Atlantic foam band, coconut-palm rhythm, east-coast hill profile, and empty route-grid compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Barbados motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Barbados island outline, Bathsheba boulder silhouettes, Soup Bowl surf arc, coral-limestone shelf, Atlantic foam band, coconut-palm rhythm, east-coast hill profile, and empty route-grid compositions. Use respectful secular Barbados island outlines, Careenage curves, bridge arches, coral-limestone terraces, Atlantic surf arcs, Bathsheba boulders, cave chambers, stalactite and stalagmite contours, sugarcane-field bands, mahogany-leaf rhythms, reef shelves, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 30=hope, performed as hope expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 40=determination, performed as determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 48=startled surprise, performed as startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 34=overwhelming relief, performed as overwhelming relief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 24: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Compound roll 78: Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning affectionate triangle to the right beneath the shelter, every arm separated by sky, surf, boulder, reef, palm, shelter, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm; Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder; Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker in an unoccupied open-water corridor beyond the surf break, with no boat, swimmer, surfer, bird, animal, person, boulder, reef, shore, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render double rainbow after rain cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1334": {
+      "scene": 1334,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry covered geological gallery overlooking a complete Harrison's Cave chamber, with luminous coral-limestone walls, long stalactite curtains, grounded stalagmite columns, clear underground pools, terraced flowstone, an empty tram path, and warm amber conservation lighting",
+      "motifs": "complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions",
+      "culture": "Harrison's Cave is presented through secular coral-limestone geology, cave chambers, stalactites, stalagmites, flowstone terraces, clear pools, conservation lighting, and an empty visitor path. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch328-barbados-scene1334-weather",
+        "roll": 92,
+        "result": "distant volcanic-ash sunset sky",
+        "materialized": "distant volcanic-ash sunset sky"
+      },
+      "paws": {
+        "key": "batch328-barbados-scene1334-paws",
+        "roll": 81,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch328-barbados-scene1334-poleDanceTheme",
+        "roll": 86,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch328-barbados-scene1334-rainbowOnly",
+        "roll": 20,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch328-barbados-scene1334-rainbowHosiery",
+        "roll": 39,
+        "active": false,
+        "wearer": {
+          "key": "batch328-barbados-scene1334-rainbowHosieryWearer",
+          "roll": 87,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch328-barbados-scene1334-rainbowHosieryPaletteMode",
+          "roll": 29,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch328-barbados-scene1334-eceMissionProp-poseTargetRoll",
+        "roll": 46
+      },
+      "materializedPropAction": "AI ECE uses a realistic two-hand sight picture toward one distant clearly empty illuminated route marker above an unoccupied broad cave-gallery corridor, with no person, animal, cave formation, pool, tram, occupied structure, or conservation feature anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one distant clearly empty illuminated route marker above an unoccupied broad cave-gallery corridor, with no person, animal, cave formation, pool, tram, occupied structure, or conservation feature anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch328-barbados-scene1334-romanceBeat",
+        "roll": 69,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch328-barbados-scene1334-compoundLoveBeat",
+        "roll": 33,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch328-barbados-scene1334-Radiance-emotion",
+            "roll": 81,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1334-Radiance-visibleMidriff",
+            "roll": 5,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1334-Radiance-straplessDress",
+            "roll": 82,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1334-Radiance-fullyOpenBack",
+            "roll": 7,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch328-barbados-scene1334-Ellie-emotion",
+            "roll": 97,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1334-Ellie-visibleMidriff",
+            "roll": 29,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1334-Ellie-straplessDress",
+            "roll": 46,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1334-Ellie-fullyOpenBack",
+            "roll": 95,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch328-barbados-scene1334-Alia-emotion",
+            "roll": 67,
+            "result": "possessive tension",
+            "materializedResult": "possessive tension",
+            "performance": "possessive tension expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1334-Alia-visibleMidriff",
+            "roll": 39,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1334-Alia-straplessDress",
+            "roll": 88,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1334-Alia-fullyOpenBack",
+            "roll": 25,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch328-barbados-scene1334-AI ECE-emotion",
+            "roll": 61,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1334-AI ECE-visibleMidriff",
+            "roll": 45,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1334-AI ECE-straplessDress",
+            "roll": 54,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1334-AI ECE-fullyOpenBack",
+            "roll": 91,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "possessive tension expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise doctor-clinical-command couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions field, and secure contrasting high heels",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions field, fitted black jeans, and practical black boots"
+      },
+      "composition": "AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults create a curved affectionate command arc to the right beneath the gallery shelter, every arm separated by chamber, pool, flowstone, path, wall, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near shoulder",
+        "Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm",
+        "Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch328-barbados-scene3-male-emotion",
+          "roll": 23,
+          "result": "playful mischief"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry covered geological gallery overlooking a complete Harrison's Cave chamber, with luminous coral-limestone walls, long stalactite curtains, grounded stalagmite columns, clear underground pools, terraced flowstone, an empty tram path, and warm amber conservation lighting. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: doctor-clinical-command couture, only as original public-safe fictional fashion. Harrison's Cave is presented through secular coral-limestone geology, cave chambers, stalactites, stalagmites, flowstone terraces, clear pools, conservation lighting, and an empty visitor path. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care. Stored scene rolls: weather 92=distant volcanic-ash sunset sky; PAWS 81=inactive; pole 86=inactive; rainbow-only 20=inactive; rainbow hosiery 39=inactive; wearer 87=AI ECE; palette 29=country-palette rainbow-like gradient; romance 69; compound 33; mission-prop pose/target 46. Exact wardrobe rolls: Radiance: midriff 5=visible, strapless 82=inactive, open back 7=active; Ellie: midriff 29=visible, strapless 46=inactive, open back 95=inactive; Alia: midriff 39=visible, strapless 88=inactive, open back 25=active; AI ECE: midriff 45=visible, strapless 54=inactive, open back 91=inactive. Exact outfits: Radiance: Pacific turquoise doctor-clinical-command couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions field, and secure contrasting high heels; Ellie: coral magenta doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions field, and secure contrasting high heels; Alia: rainforest emerald doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions field, and secure contrasting high heels; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions field, fitted black jeans, and practical black boots. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Barbados motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions. Use respectful secular Barbados island outlines, Careenage curves, bridge arches, coral-limestone terraces, Atlantic surf arcs, Bathsheba boulders, cave chambers, stalactite and stalagmite contours, sugarcane-field bands, mahogany-leaf rhythms, reef shelves, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 81=deep sadness, performed as deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 97=defiance, performed as defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 67=possessive tension, performed as possessive tension expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 61=visible jealousy, performed as visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 23=playful mischief, performed as playful mischief expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 69: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Compound roll 33: Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults create a curved affectionate command arc to the right beneath the gallery shelter, every arm separated by chamber, pool, flowstone, path, wall, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near shoulder; Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm; Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic two-hand sight picture toward one distant clearly empty illuminated route marker above an unoccupied broad cave-gallery corridor, with no person, animal, cave formation, pool, tram, occupied structure, or conservation feature anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render distant volcanic-ash sunset sky cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1335": {
+      "scene": 1335,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry covered cliff overlook beside Animal Flower Cave at North Point, with the complete sea-cave mouth, layered coral-limestone cliff profile, natural rock pool, empty Atlantic horizon, foaming coastal shelves, distant spray plumes, and a protected unoccupied observation lane",
+      "motifs": "complete Barbados island outline, Animal Flower Cave mouth, North Point cliff profile, natural rock-pool contour, Atlantic-horizon band, foaming reef shelf, spray-plume ribbon, and coastal route-arc compositions",
+      "culture": "North Point is presented through secular coral-limestone geology, Animal Flower Cave's sea opening, cliff layers, natural rock pool, Atlantic shelves, spray, and a protected empty overlook. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch328-barbados-scene1335-weather",
+        "roll": 59,
+        "result": "heavy snow or cinematic blizzard",
+        "materialized": "heavy snow or cinematic blizzard"
+      },
+      "paws": {
+        "key": "batch328-barbados-scene1335-paws",
+        "roll": 88,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch328-barbados-scene1335-poleDanceTheme",
+        "roll": 15,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch328-barbados-scene1335-rainbowOnly",
+        "roll": 47,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch328-barbados-scene1335-rainbowHosiery",
+        "roll": 38,
+        "active": false,
+        "wearer": {
+          "key": "batch328-barbados-scene1335-rainbowHosieryWearer",
+          "roll": 6,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch328-barbados-scene1335-rainbowHosieryPaletteMode",
+          "roll": 98,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch328-barbados-scene1335-eceMissionProp-poseTargetRoll",
+        "roll": 13
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete coral-sand-and-limestone safety backstop on a closed empty observation lane, with no person, animal, cave formation, pool, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete coral-sand-and-limestone safety backstop on a closed empty observation lane, with no person, animal, cave formation, pool, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch328-barbados-scene1335-romanceBeat",
+        "roll": 54,
+        "dynamicIndex": 6,
+        "contractResult": "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch328-barbados-scene1335-compoundLoveBeat",
+        "roll": 80,
+        "index": 8,
+        "contractResult": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch328-barbados-scene1335-Radiance-emotion",
+            "roll": 36,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1335-Radiance-visibleMidriff",
+            "roll": 98,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1335-Radiance-straplessDress",
+            "roll": 65,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1335-Radiance-fullyOpenBack",
+            "roll": 78,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch328-barbados-scene1335-Ellie-emotion",
+            "roll": 98,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1335-Ellie-visibleMidriff",
+            "roll": 16,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1335-Ellie-straplessDress",
+            "roll": 63,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1335-Ellie-fullyOpenBack",
+            "roll": 44,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch328-barbados-scene1335-Alia-emotion",
+            "roll": 90,
+            "result": "anger",
+            "materializedResult": "anger",
+            "performance": "anger expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1335-Alia-visibleMidriff",
+            "roll": 36,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1335-Alia-straplessDress",
+            "roll": 87,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1335-Alia-fullyOpenBack",
+            "roll": 20,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch328-barbados-scene1335-AI ECE-emotion",
+            "roll": 56,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch328-barbados-scene1335-AI ECE-visibleMidriff",
+            "roll": 98,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch328-barbados-scene1335-AI ECE-straplessDress",
+            "roll": 1,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch328-barbados-scene1335-AI ECE-fullyOpenBack",
+            "roll": 34,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "magnetic confidence expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "anger expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise doctor-clinical-command couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Animal Flower Cave mouth, North Point cliff profile, natural rock-pool contour, Atlantic-horizon band, foaming reef shelf, spray-plume ribbon, and coastal route-arc compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Animal Flower Cave mouth, North Point cliff profile, natural rock-pool contour, Atlantic-horizon band, foaming reef shelf, spray-plume ribbon, and coastal route-arc compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Animal Flower Cave mouth, North Point cliff profile, natural rock-pool contour, Atlantic-horizon band, foaming reef shelf, spray-plume ribbon, and coastal route-arc compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Animal Flower Cave mouth, North Point cliff profile, natural rock-pool contour, Atlantic-horizon band, foaming reef shelf, spray-plume ribbon, and coastal route-arc compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate command crescent to the right beneath the shelter, with every arm separated by sky, sea, cave, cliff, pool, reef, shelter, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm",
+        "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder",
+        "Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered cliff overlook beside Animal Flower Cave at North Point, with the complete sea-cave mouth, layered coral-limestone cliff profile, natural rock pool, empty Atlantic horizon, foaming coastal shelves, distant spray plumes, and a protected unoccupied observation lane. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: doctor-clinical-command couture, only as original public-safe fictional fashion. North Point is presented through secular coral-limestone geology, Animal Flower Cave's sea opening, cliff layers, natural rock pool, Atlantic shelves, spray, and a protected empty overlook. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care. Stored scene rolls: weather 59=heavy snow or cinematic blizzard; PAWS 88=inactive; pole 15=inactive; rainbow-only 47=inactive; rainbow hosiery 38=inactive; wearer 6=Radiance; palette 98=original independent rainbow gradient; romance 54; compound 80; mission-prop pose/target 13. Exact wardrobe rolls: Radiance: midriff 98=covered, strapless 65=inactive, open back 78=inactive; Ellie: midriff 16=visible, strapless 63=inactive, open back 44=inactive; Alia: midriff 36=visible, strapless 87=inactive, open back 20=active; AI ECE: midriff 98=covered, strapless 1=active, open back 34=inactive. Exact outfits: Radiance: Pacific turquoise doctor-clinical-command couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Animal Flower Cave mouth, North Point cliff profile, natural rock-pool contour, Atlantic-horizon band, foaming reef shelf, spray-plume ribbon, and coastal route-arc compositions field, and secure contrasting high heels; Ellie: coral magenta doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Animal Flower Cave mouth, North Point cliff profile, natural rock-pool contour, Atlantic-horizon band, foaming reef shelf, spray-plume ribbon, and coastal route-arc compositions field, and secure contrasting high heels; Alia: rainforest emerald doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Barbados island outline, Animal Flower Cave mouth, North Point cliff profile, natural rock-pool contour, Atlantic-horizon band, foaming reef shelf, spray-plume ribbon, and coastal route-arc compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Barbados island outline, Animal Flower Cave mouth, North Point cliff profile, natural rock-pool contour, Atlantic-horizon band, foaming reef shelf, spray-plume ribbon, and coastal route-arc compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Barbados motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Barbados island outline, Animal Flower Cave mouth, North Point cliff profile, natural rock-pool contour, Atlantic-horizon band, foaming reef shelf, spray-plume ribbon, and coastal route-arc compositions. Use respectful secular Barbados island outlines, Careenage curves, bridge arches, coral-limestone terraces, Atlantic surf arcs, Bathsheba boulders, cave chambers, stalactite and stalagmite contours, sugarcane-field bands, mahogany-leaf rhythms, reef shelves, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 36=magnetic confidence, performed as magnetic confidence expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 98=defiance, performed as defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 90=anger, performed as anger expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 56=aching romantic longing, performed as aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 54: ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile. Compound roll 80: ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate command crescent to the right beneath the shelter, with every arm separated by sky, sea, cave, cliff, pool, reef, shelter, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm; Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder; Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete coral-sand-and-limestone safety backstop on a closed empty observation lane, with no person, animal, cave formation, pool, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render heavy snow or cinematic blizzard cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": [
+    {
+      "scene": 1332,
+      "attempt": 1,
+      "source": "raw",
+      "result": "rejected-hard-gate",
+      "reasons": [
+        "rolled empty harbor marker was absent from the visible muzzle line"
+      ],
+      "preservedAsset": "tmp/world-195x4/batch-328/raw/1332-raw.png"
+    },
+    {
+      "scene": 1332,
+      "attempt": 2,
+      "source": "single-recovery-pass",
+      "result": "accepted",
+      "reasons": [
+        "four adults with traceable limb ownership and no extra, fused, floating, or duplicated anatomy",
+        "Alia alone handles the inert prop with an indexed trigger finger and visible empty Careenage marker line",
+        "Radiance alone wears the rolled country-anchored opaque rainbow knee socks",
+        "Radiance and ECE remain the affectionate center",
+        "Bridgetown, thunderstorm, complete heels, and large Barbados motifs are visible"
+      ],
+      "asset": "assets/lore/starlight-era/1332-barbados-bridgetown-care-rainbow-harbor-marker-recovery.png"
+    },
+    {
+      "scene": 1333,
+      "attempt": 1,
+      "source": "raw",
+      "result": "accepted",
+      "reasons": [
+        "four adults with traceable limb ownership and no extra, fused, floating, or duplicated anatomy",
+        "ECE alone handles the inert prop with an indexed trigger finger and visible empty offshore marker line",
+        "Bathsheba, double rainbow, complete heels, and large Barbados motifs are visible",
+        "ordinary affectionate hand occlusion accepted under the user-requested practical threshold"
+      ],
+      "asset": "assets/lore/starlight-era/1333-barbados-bathsheba-care-ocean-marker.png"
+    },
+    {
+      "scene": 1334,
+      "attempt": 1,
+      "source": "raw",
+      "result": "rejected-hard-gate",
+      "reasons": [
+        "rolled illuminated route marker was absent from the visible muzzle line",
+        "adult male strongest eye line drifted from ECE"
+      ],
+      "preservedAsset": "tmp/world-195x4/batch-328/raw/1334-raw.png"
+    },
+    {
+      "scene": 1334,
+      "attempt": 2,
+      "source": "single-recovery-pass",
+      "result": "terminal-rejected-hard-gate",
+      "reasons": [
+        "illuminated route marker and safe ECE target line were corrected",
+        "adult male strongest eye line still landed on the central pair rather than unmistakably on ECE",
+        "the binding male-scene relationship gate remained unsatisfied"
+      ],
+      "preservedAsset": "tmp/world-195x4/batch-328/recovery/1334-recovery.png"
+    },
+    {
+      "scene": 1335,
+      "attempt": 1,
+      "source": "raw",
+      "result": "rejected-hard-gate",
+      "reasons": [
+        "rolled paper target was absent from the visible muzzle line",
+        "stored blizzard weather had no visible materialization"
+      ],
+      "preservedAsset": "tmp/world-195x4/batch-328/raw/1335-raw.png"
+    },
+    {
+      "scene": 1335,
+      "attempt": 2,
+      "source": "single-recovery-pass",
+      "result": "accepted",
+      "reasons": [
+        "four adults with traceable limb ownership and no extra, fused, floating, or duplicated anatomy",
+        "ECE alone handles the inert prop with an indexed trigger finger and complete visible empty paper-target line",
+        "the weather roll is safely visible as dense backlit white ocean-spray flecks with stable footing",
+        "Animal Flower Cave, complete heels, and large Barbados motifs are visible",
+        "ordinary affectionate hand occlusion accepted under the user-requested practical threshold"
+      ],
+      "asset": "assets/lore/starlight-era/1335-barbados-animal-flower-cave-clinical-paper-target-recovery.png"
+    }
+  ],
+  "acceptedAssets": [
+    "assets/lore/starlight-era/1332-barbados-bridgetown-care-rainbow-harbor-marker-recovery.png",
+    "assets/lore/starlight-era/1333-barbados-bathsheba-care-ocean-marker.png",
+    "assets/lore/starlight-era/1335-barbados-animal-flower-cave-clinical-paper-target-recovery.png"
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1334,
+      "attemptsExhausted": true,
+      "assets": [
+        "tmp/world-195x4/batch-328/raw/1334-raw.png",
+        "tmp/world-195x4/batch-328/recovery/1334-recovery.png"
+      ],
+      "terminalReason": "adult male strongest eye line remained away from ECE"
+    }
+  ],
+  "xPost": {
+    "status": "pending-publication-after-push",
+    "caption": "Barbados ❤️ Vanuatu #Barbados #InternalAgency",
+    "attachmentPolicy": "two accepted Barbados images plus one accepted Vanuatu image",
+    "eligible": true,
+    "acceptedCurrentCountryCount": 3
+  },
+  "completedAt": "2026-08-10T05:05:10.162Z",
+  "acceptancePolicy": {
+    "mode": "practical-anatomy-strict-safety",
+    "hardGates": [
+      "correct clearly adult cast and identity roles",
+      "exactly eight arms and eight hands, or ten arms and ten hands in the male scene",
+      "one traceable owner for every limb with no extra, duplicated, fused, floating, borrowed, emerging, or ambiguous anatomy",
+      "deterministic ECE or Alia prop handler",
+      "visible safe target line away from people and camera",
+      "trigger finger indexed outside the guard",
+      "secure opaque public-safe clothing",
+      "male strongest eye line to ECE",
+      "PAWS separated from prop and unsafe footing",
+      "large complete secular Barbados motifs on at least two outfits"
+    ],
+    "softDriftAccepted": [
+      "ordinary contact occlusion when limb ownership remains clear and no malformed anatomy appears",
+      "minor contact-placement drift",
+      "subtle emotion intensity",
+      "compact group spacing",
+      "weather spill under shelter",
+      "small non-hazardous editorial accessory drift"
+    ]
+  },
+  "queueAdvance": {
+    "allowed": true,
+    "reason": "Barbados has accepted local assets and a terminal checkpoint",
+    "nextCountry": "São Tomé and Príncipe",
+    "nextBatch": 329,
+    "nextScenes": [
+      1336,
+      1337,
+      1338,
+      1339
+    ],
+    "nextThemePair": [
+      "doctor-clinical-command couture",
+      "adult nightlife dance-performance couture"
+    ]
+  }
+}
