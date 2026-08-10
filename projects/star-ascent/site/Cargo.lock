@@ -713,6 +713,13 @@ dependencies = [
 [[package]]
 name = "iat-b3-vault"
 version = "0.1.0"
+dependencies = [
+ "solana-account-info",
+ "solana-pubkey 3.0.0",
+ "solana-sdk-ids",
+ "solana-zk-sdk",
+ "spl-token-2022-interface",
+]
 
 [[package]]
 name = "iat-v2"

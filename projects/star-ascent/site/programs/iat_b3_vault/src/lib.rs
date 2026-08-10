@@ -9,6 +9,9 @@
 //! fail-closed boundaries deterministic before an exact-version native client
 //! adapter is implemented and independently reviewed.
 
+#[cfg(feature = "token-2022-host-compatibility")]
+pub mod token_2022_host;
+
 pub const PRIVACY_VAULT_CLIENT_SCHEMA_VERSION: u8 = 1;
 pub const PRIVACY_VAULT_CLIENT_REFERENCE_STATUS: &str =
     "DOCUMENTED_HOST_ONLY_LIFECYCLE_SHAPE_NONACTIVATING";

@@ -9,3 +9,20 @@ publish = false
 [lib]
 name = "iat_b3_vault"
 crate-type = ["lib"]
+
+[features]
+default = []
+token-2022-host-compatibility = [
+    "dep:solana-account-info",
+    "dep:solana-pubkey",
+    "dep:solana-sdk-ids",
+    "dep:solana-zk-sdk",
+    "dep:spl-token-2022-interface",
+]
+
+[dependencies]
+solana-account-info = { version = "=3.1.1", optional = true }
+solana-pubkey = { version = "=3.0.0", optional = true }
+solana-sdk-ids = { version = "=3.1.0", optional = true }
+solana-zk-sdk = { version = "=4.0.0", optional = true }
+spl-token-2022-interface = { version = "=2.1.0", optional = true }
