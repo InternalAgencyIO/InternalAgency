@@ -97,6 +97,7 @@ finish() {
     if [[ -d "$cli_evidence_dir" ]]; then
       for evidence_file in "$cli_evidence_dir"/*.json; do
         [[ -f "$evidence_file" ]] || continue
+        [[ -s "$evidence_file" ]] || continue
         evidence_label=$(basename -- "$evidence_file" .json)
         "$node_bin" "$driver_for_node" \
           --offline-sanitize-cli-evidence "$evidence_label" "$(to_node_path "$evidence_file")" \
@@ -175,12 +176,35 @@ identity_evidence_emitted=true
 run_json() {
   local label=$1
   local evidence_file
+  local command_exit_code=0
+  local sanitizer_exit_code=0
+  local stdout_json_present=false
+  local cli_evidence_sanitized=false
   shift
   evidence_file="$cli_evidence_dir/$label.json"
-  "$@" >"$evidence_file" 2>"$temp_dir/$label.stderr"
-  "$node_bin" "$driver_for_node" \
-    --offline-sanitize-cli-evidence "$label" "$(to_node_path "$evidence_file")" \
-    2>"$temp_dir/$label-sanitizer.stderr"
+  if "$@" >"$evidence_file" 2>"$temp_dir/$label.stderr"; then
+    command_exit_code=0
+  else
+    command_exit_code=$?
+  fi
+  if [[ -s "$evidence_file" ]]; then
+    stdout_json_present=true
+    if "$node_bin" "$driver_for_node" \
+      --offline-sanitize-cli-evidence "$label" "$(to_node_path "$evidence_file")" \
+      2>"$temp_dir/$label-sanitizer.stderr"; then
+      cli_evidence_sanitized=true
+    else
+      sanitizer_exit_code=$?
+    fi
+  else
+    sanitizer_exit_code=1
+  fi
+  if [[ $command_exit_code -ne 0 ]]; then
+    printf '{"schema":"iat-b3-devnet-rehearsal/v1","status":"FAIL","phase":"public_cli_command","label":"%s","cliExitCode":%d,"stdoutJsonPresent":%s,"cliEvidenceSanitized":%s}\n' \
+      "$label" "$command_exit_code" "$stdout_json_present" "$cli_evidence_sanitized"
+    return "$command_exit_code"
+  fi
+  return "$sanitizer_exit_code"
 }
 
 phase="devnet_airdrop_1"

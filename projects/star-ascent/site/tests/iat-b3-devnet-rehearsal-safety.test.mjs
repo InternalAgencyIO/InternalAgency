@@ -282,6 +282,12 @@ test("partial failure is loud and local-secret cleanup is narrowly scoped", () =
   assert.match(wrapper, /rehearsal_command_failed|partial/u);
   assert.match(wrapper, /PARTIAL_PUBLIC_ARTIFACT_LOCATORS/u);
   assert.match(wrapper, /--offline-sanitize-cli-evidence/u);
+  assert.match(wrapper, /phase":"public_cli_command"/u);
+  assert.match(wrapper, /cliExitCode/u);
+  assert.match(wrapper, /stdoutJsonPresent/u);
+  assert.match(wrapper, /cliEvidenceSanitized/u);
+  assert.match(wrapper, /\[\[ -s "\$evidence_file" \]\] \|\| continue/u);
+  assert.match(wrapper, /if "\$@" >"\$evidence_file"/u);
   assert.match(driver, /knownTransactions: observedPublicTransactions/u);
   assert.match(driver, /publicAddresses: partialPublicAddresses/u);
 
