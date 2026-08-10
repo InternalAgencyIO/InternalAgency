@@ -17,9 +17,10 @@ use crate::native_adapter::{
     NativeAdapterError, NativeEconomyBinding, StateWriteIntent,
 };
 use crate::runtime_adapter::RuntimeProductionActiveConfig;
+use crate::stake_ingress::CompletedStakeIngress;
 use crate::{
     decode_config_genesis_state, encode_config_genesis_state, GenesisPhase, ValidatedDailyLawWrite,
-    CONFIG_GENESIS_ACCOUNT_LEN,
+    CONFIG_GENESIS_ACCOUNT_LEN, ECOSYSTEM, LIQUIDITY, TREASURY,
 };
 use sha2::{Digest, Sha256};
 use solana_account_info::AccountInfo;
@@ -81,8 +82,8 @@ pub enum RuntimeWriteAdapterError {
     ConfigAccountLengthMismatch,
     ConfigPreimageMismatch,
     ConfigStateMismatch,
-    ConfigPrincipalDeltaInvalid,
     ConfigPrincipalOverflow,
+    CompletedStakeIngressMismatch,
     ConfigCodecRejected,
 }
 
@@ -167,23 +168,64 @@ fn require_active_config_capability(
     Ok(())
 }
 
-/// Apply the production stake-ingress Config delta without admitting a generic
-/// 272-byte Config writer. The next image is constructed from the authenticated
-/// state and changes only `staked_principal`. The live account is checked from
-/// an immutable borrow, then checked again after acquiring the mutable borrow;
-/// no byte is written unless both observations match the opaque preimage.
+/// Bind the narrow Config CAS to the exact retained-V2 post-CPI completion.
+/// The completed Config must equal the authenticated ACTIVE Config with only
+/// `staked_principal += position.principal`; the three reward lanes, position,
+/// and reloaded stake-vault token state must all remain binding-relative.
 #[inline(never)]
-pub fn execute_production_active_config_stake_principal_cas_account_info(
+pub fn execute_production_active_config_stake_principal_cas_for_completed_ingress(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    completed: &CompletedStakeIngress,
+    config_account: &AccountInfo<'_>,
+) -> Result<ProductionActiveConfigStakePrincipalReceipt, RuntimeWriteAdapterError> {
+    require_active_config_capability(gate, active_config, binding)?;
+    let principal_delta = completed.position.principal;
+    let next_staked_principal = active_config
+        .state()
+        .config
+        .staked_principal
+        .checked_add(principal_delta)
+        .ok_or(RuntimeWriteAdapterError::ConfigPrincipalOverflow)?;
+    let mut expected_config = active_config.state().config;
+    expected_config.staked_principal = next_staked_principal;
+    if principal_delta == 0
+        || completed.config != expected_config
+        || completed.position.config != binding.config()
+        || completed.treasury.config != binding.config()
+        || completed.ecosystem.config != binding.config()
+        || completed.liquidity.config != binding.config()
+        || completed.treasury.lane != TREASURY
+        || completed.ecosystem.lane != ECOSYSTEM
+        || completed.liquidity.lane != LIQUIDITY
+        || completed.stake.key != active_config.state().config.stake_token_account
+        || completed.stake.mint != binding.mint()
+        || completed.stake.owner != binding.config()
+        || completed.stake.amount != next_staked_principal
+    {
+        return Err(RuntimeWriteAdapterError::CompletedStakeIngressMismatch);
+    }
+    execute_production_active_config_stake_principal_cas_inner(
+        gate,
+        active_config,
+        binding,
+        principal_delta,
+        config_account,
+    )
+}
+
+/// Apply the already-bound delta without admitting a generic 272-byte Config
+/// writer. The live account is checked from an immutable borrow, then checked
+/// again after acquiring the mutable borrow; no byte is written unless both
+/// observations match the opaque preimage.
+fn execute_production_active_config_stake_principal_cas_inner(
     gate: &ValidatedDailyLawWrite,
     active_config: &RuntimeProductionActiveConfig,
     binding: &NativeEconomyBinding,
     principal_delta: u64,
     config_account: &AccountInfo<'_>,
 ) -> Result<ProductionActiveConfigStakePrincipalReceipt, RuntimeWriteAdapterError> {
-    require_active_config_capability(gate, active_config, binding)?;
-    if principal_delta == 0 {
-        return Err(RuntimeWriteAdapterError::ConfigPrincipalDeltaInvalid);
-    }
     if config_account.key.to_bytes() != active_config.key()
         || config_account.owner.to_bytes() != binding.program_id()
     {

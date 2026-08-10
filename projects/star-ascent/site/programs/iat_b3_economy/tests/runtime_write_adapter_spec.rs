@@ -13,17 +13,18 @@ use iat_b3_economy::runtime_adapter::{
     RuntimeProductionActiveConfig,
 };
 use iat_b3_economy::runtime_write_adapter::{
-    execute_production_active_config_stake_principal_cas_account_info,
+    execute_production_active_config_stake_principal_cas_for_completed_ingress,
     execute_production_active_existing_write_batch_account_infos, RuntimeWriteAdapterError,
     RuntimeWriteAdapterTruth, RUNTIME_WRITE_ADAPTER_TRUTH,
 };
+use iat_b3_economy::stake_ingress::{CompletedStakeIngress, DelegateSnapshot, SourceTokenState};
 use iat_b3_economy::{
     decode_config_genesis_state, decode_lane_state, decode_position_state,
     encode_config_genesis_state, encode_lane_state, encode_position_state, verify_daily_law_open,
     CanonicalDailyLawBinding, ConfigGenesisState, ConfigState, EligibilityState, GenesisPhase,
-    LaneState, PositionState, ReadonlyDailyLawAccount, ValidatedDailyLawWrite,
-    CONFIG_GENESIS_ACCOUNT_LEN, LANE_ACCOUNT_LEN, LAW_STATE_LEN, LAW_STATE_MAGIC,
-    LAW_STATE_VERSION, MAINNET_SUPPLY, POSITION_ACCOUNT_LEN,
+    LaneState, PositionState, ReadonlyDailyLawAccount, ReadonlyTokenState, ValidatedDailyLawWrite,
+    CONFIG_GENESIS_ACCOUNT_LEN, ECOSYSTEM, LANE_ACCOUNT_LEN, LAW_STATE_LEN, LAW_STATE_MAGIC,
+    LAW_STATE_VERSION, LIQUIDITY, MAINNET_SUPPLY, POSITION_ACCOUNT_LEN, TREASURY,
 };
 use solana_account_info::AccountInfo;
 use solana_sdk_ids::system_program;
@@ -178,6 +179,50 @@ fn states(binding: &NativeEconomyBinding) -> StatePair {
         position,
         lane_identity,
         lane,
+    }
+}
+
+fn completed_ingress(
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    principal: u64,
+) -> CompletedStakeIngress {
+    let mut config = active_config.state().config;
+    config.staked_principal = config.staked_principal.checked_add(principal).unwrap();
+    let mut position = states(binding).position;
+    position.principal = principal;
+    let mut treasury = states(binding).lane;
+    treasury.lane = TREASURY;
+    let mut ecosystem = treasury;
+    ecosystem.lane = ECOSYSTEM;
+    let mut liquidity = treasury;
+    liquidity.lane = LIQUIDITY;
+    let stake = ReadonlyTokenState {
+        key: config.stake_token_account,
+        mint: binding.mint(),
+        owner: binding.config(),
+        amount: config.staked_principal,
+    };
+    CompletedStakeIngress {
+        config,
+        position,
+        treasury,
+        ecosystem,
+        liquidity,
+        source: SourceTokenState {
+            token: ReadonlyTokenState {
+                key: [0x91; 32],
+                mint: binding.mint(),
+                owner: OWNER,
+                amount: 10_000,
+            },
+            delegate: DelegateSnapshot {
+                delegate: None,
+                delegated_amount: 0,
+            },
+            cpi_guard_locked: false,
+        },
+        stake,
     }
 }
 
@@ -432,23 +477,53 @@ fn production_active_config_cas_changes_only_staked_principal_and_revalidates_pr
         authenticate_production_active_writable_config_account_info(&gate, &binding, &account)
             .unwrap();
 
+    let empty_completed = completed_ingress(&active_config, &binding, 0);
     assert_eq!(
-        execute_production_active_config_stake_principal_cas_account_info(
+        execute_production_active_config_stake_principal_cas_for_completed_ingress(
             &gate,
             &active_config,
             &binding,
-            0,
+            &empty_completed,
             &account,
         ),
-        Err(RuntimeWriteAdapterError::ConfigPrincipalDeltaInvalid)
+        Err(RuntimeWriteAdapterError::CompletedStakeIngressMismatch)
     );
     assert_eq!(&*account.try_borrow_data().unwrap(), &original_data);
 
-    let receipt = execute_production_active_config_stake_principal_cas_account_info(
+    let completed = completed_ingress(&active_config, &binding, 250);
+    let mut hostile_completed = completed;
+    hostile_completed.config.agency_count = 1;
+    assert_eq!(
+        execute_production_active_config_stake_principal_cas_for_completed_ingress(
+            &gate,
+            &active_config,
+            &binding,
+            &hostile_completed,
+            &account,
+        ),
+        Err(RuntimeWriteAdapterError::CompletedStakeIngressMismatch)
+    );
+    assert_eq!(&*account.try_borrow_data().unwrap(), &original_data);
+
+    hostile_completed = completed;
+    hostile_completed.ecosystem.lane = TREASURY;
+    assert_eq!(
+        execute_production_active_config_stake_principal_cas_for_completed_ingress(
+            &gate,
+            &active_config,
+            &binding,
+            &hostile_completed,
+            &account,
+        ),
+        Err(RuntimeWriteAdapterError::CompletedStakeIngressMismatch)
+    );
+    assert_eq!(&*account.try_borrow_data().unwrap(), &original_data);
+
+    let receipt = execute_production_active_config_stake_principal_cas_for_completed_ingress(
         &gate,
         &active_config,
         &binding,
-        250,
+        &completed,
         &account,
     )
     .unwrap();
@@ -470,11 +545,11 @@ fn production_active_config_cas_changes_only_staked_principal_and_revalidates_pr
     );
 
     assert_eq!(
-        execute_production_active_config_stake_principal_cas_account_info(
+        execute_production_active_config_stake_principal_cas_for_completed_ingress(
             &gate,
             &active_config,
             &binding,
-            1,
+            &completed,
             &account,
         ),
         Err(RuntimeWriteAdapterError::ConfigPreimageMismatch)
@@ -510,23 +585,24 @@ fn production_active_config_cas_rejects_wrong_law_flags_and_borrow_conflicts_wit
         authenticate_production_active_writable_config_account_info(&gate, &binding, &account)
             .unwrap();
 
+    let completed = completed_ingress(&active_config, &binding, 1);
     assert_eq!(
-        execute_production_active_config_stake_principal_cas_account_info(
+        execute_production_active_config_stake_principal_cas_for_completed_ingress(
             &later_gate,
             &active_config,
             &binding,
-            1,
+            &completed,
             &account,
         ),
         Err(RuntimeWriteAdapterError::ActiveConfigCapabilityMismatch)
     );
     let held = account.try_borrow_data().unwrap();
     assert_eq!(
-        execute_production_active_config_stake_principal_cas_account_info(
+        execute_production_active_config_stake_principal_cas_for_completed_ingress(
             &gate,
             &active_config,
             &binding,
-            1,
+            &completed,
             &account,
         ),
         Err(RuntimeWriteAdapterError::AccountBorrowFailed)
@@ -550,11 +626,11 @@ fn production_active_config_cas_rejects_wrong_law_flags_and_borrow_conflicts_wit
         Err(RuntimeAdapterError::ConfigAccountMustBeWritable)
     );
     assert_eq!(
-        execute_production_active_config_stake_principal_cas_account_info(
+        execute_production_active_config_stake_principal_cas_for_completed_ingress(
             &gate,
             &active_config,
             &binding,
-            1,
+            &completed,
             &readonly,
         ),
         Err(RuntimeWriteAdapterError::ConfigAccountFlagsMismatch)

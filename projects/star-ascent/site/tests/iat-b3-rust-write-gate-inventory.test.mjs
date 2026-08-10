@@ -245,7 +245,7 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
   );
   assert.match(
     economyRuntimeWriteAdapterSource,
-    /execute_production_active_config_stake_principal_cas_account_info/u,
+    /execute_production_active_config_stake_principal_cas_for_completed_ingress/u,
   );
   assert.match(
     economyRuntimeWriteAdapterSource,
@@ -259,6 +259,7 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
     economyRuntimeWriteAdapterSource,
     /next_state\.config\.staked_principal = next_staked_principal/u,
   );
+  assert.match(economyRuntimeWriteAdapterSource, /completed\.config != expected_config/u);
   assert.match(economyRuntimeWriteAdapterSource, /ActiveConfigCapabilityMismatch/u);
   assert.match(economyRuntimeWriteAdapterSource, /all_mutable_borrows_acquired_before_write: true/u);
   assert.match(economyRuntimeWriteAdapterSource, /all_preimages_revalidated_before_write: true/u);

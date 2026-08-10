@@ -184,9 +184,13 @@ persistence callback. Large preflight and finalizer values are heap-bounded; the
 SBF stack gate and loopback rollback matrix pass. A separate production-ACTIVE
 Config CAS now revalidates the same opaque Config preimage before and after its
 mutable borrow and can increase only retained V2 `staked_principal`; every
-other Config field is copied from the authenticated state. That narrow write is
-not yet atomically composed with the ingress CPI callback and exact Position/
-Lane persistence. There is still no public lifecycle dispatcher, frozen
+other Config field is copied from the authenticated state. It now accepts no
+caller-shaped delta: the exact retained-V2 completed ingress must bind the
+Config delta, Position principal, all three lane labels/Config bindings, and
+the reloaded stake-vault amount. These lane facts are not authenticated lane
+AccountInfo identities. That narrow write is not yet atomically composed with the
+ingress CPI callback and exact Position/Lane persistence. There is still no
+public lifecycle dispatcher, frozen
 identity, entrypoint, or public ABI; those remain the security boundary.
 
 Burning is different from transferring. The sole core-cap burn path uses
