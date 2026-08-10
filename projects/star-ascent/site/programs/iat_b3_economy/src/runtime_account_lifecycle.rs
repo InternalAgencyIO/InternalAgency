@@ -228,6 +228,10 @@ impl SystemCpiInvoker for SolanaSystemCpi {
 /// All immutable target and payer observations are held and validated before
 /// the first CPI. A CPI or post-CPI validation failure returns an error so the
 /// Solana runtime rolls the entire enclosing instruction back atomically.
+// The public lifecycle boundary must remain a distinct SBF frame. LTO may
+// otherwise merge the sealed batch, verifier, and entrypoint locals past the
+// runtime's 4 KiB per-frame limit.
+#[inline(never)]
 pub fn execute_create_state_batch_account_infos<'a, const N: usize>(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,
@@ -247,6 +251,7 @@ pub fn execute_create_state_batch_account_infos<'a, const N: usize>(
     )
 }
 
+#[inline(never)]
 fn execute_create_state_batch_with<'a, const N: usize>(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,

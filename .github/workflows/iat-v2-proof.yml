@@ -128,6 +128,10 @@ jobs:
             | sha256sum --check --strict -
           sha256sum target/verifiable/iat_b3_law.so \
             | tee target/verifiable/iat-b3-law.sha256
+      - name: Rehearse B3 sealed account lifecycle on an isolated local validator
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          bash scripts/run-iat-b3-account-lifecycle-local.sh
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: iat-v2-b3-verifiable-sbf

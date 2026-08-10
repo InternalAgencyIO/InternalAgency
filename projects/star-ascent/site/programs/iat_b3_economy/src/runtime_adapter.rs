@@ -222,6 +222,7 @@ fn verify_daily_law_open_at_clock(
 
 /// Derive the opaque open-Day capability from a real read-only law account and
 /// the runtime Clock sysvar. No timestamp or disposition is caller supplied.
+#[inline(never)]
 pub fn verify_daily_law_open_account_info(
     binding: &CanonicalDailyLawBinding,
     law_state: &AccountInfo<'_>,
@@ -365,6 +366,7 @@ fn prepare_create_state_account_with_rent(
 /// codec length, and source its rent minimum from the runtime Rent sysvar. The
 /// returned value is still an inert intent; no allocation, funding, or write is
 /// executed here.
+#[inline(never)]
 pub fn prepare_create_state_account_info(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,

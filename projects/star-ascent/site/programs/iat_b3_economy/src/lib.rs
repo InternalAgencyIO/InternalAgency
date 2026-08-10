@@ -923,6 +923,10 @@ struct DecodedLawState {
 /// Validate the exact fixed Daily Law codec and derive an opaque open-day
 /// capability. This function is read-only and performs no account mutation or
 /// cross-program invocation.
+// Keep the SBF verifier in its own frame. The fixed law codec and decision
+// value otherwise combine with lifecycle intent construction under LTO and
+// can exceed Solana's 4 KiB stack-frame limit.
+#[inline(never)]
 pub fn verify_daily_law_open(
     binding: &CanonicalDailyLawBinding,
     observed: ReadonlyDailyLawAccount<'_>,

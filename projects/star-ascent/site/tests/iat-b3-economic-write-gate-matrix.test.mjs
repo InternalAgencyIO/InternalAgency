@@ -65,6 +65,26 @@ const economySbfPreflightDevnetRunnerSource = readFileSync(
   new URL("scripts/run-iat-b3-economy-sbf-preflight-devnet.sh", siteRoot),
   "utf8",
 );
+const accountLifecycleFixtureManifest = readFileSync(
+  new URL("tests/fixtures/iat-b3-account-lifecycle/Cargo.toml", siteRoot),
+  "utf8",
+);
+const accountLifecycleFixtureSource = readFileSync(
+  new URL("tests/fixtures/iat-b3-account-lifecycle/src/lib.rs", siteRoot),
+  "utf8",
+);
+const accountLifecycleLocalDriverSource = readFileSync(
+  new URL("scripts/iat-b3-account-lifecycle-local-driver.mjs", siteRoot),
+  "utf8",
+);
+const accountLifecycleLocalRunnerSource = readFileSync(
+  new URL("scripts/run-iat-b3-account-lifecycle-local.sh", siteRoot),
+  "utf8",
+);
+const releaseProofWorkflowSource = readFileSync(
+  new URL("../../../../.github/workflows/iat-v2-proof.yml", import.meta.url),
+  "utf8",
+);
 const economySbfPreflightDevnetEvidence = JSON.parse(readFileSync(
   new URL(
     "docs/b3/evidence/iat-b3-economy-sbf-structural-devnet-20260810T141607Z.json",
@@ -557,6 +577,53 @@ test("the runtime account lifecycle executes only sealed canonical System CPI ba
     economyRuntimeAccountLifecycleSource.replace(/\/\/.*$/gmu, "").replace(/\/\*[\s\S]*?\*\//gu, ""),
     /entrypoint!|process_instruction|#\[program\]|instruction_data|RpcClient|send_and_confirm|spl_token/u,
   );
+});
+
+test("the local lifecycle fixture proves SBF CPI without becoming a production surface", () => {
+  assert.match(
+    accountLifecycleFixtureManifest,
+    /iat-b3-economy = \{ path = "\.\.\/\.\.\/\.\.\/programs\/iat_b3_economy", features = \["runtime-account-lifecycle"\] \}/u,
+  );
+  assert.match(accountLifecycleFixtureManifest, /^\[workspace\]$/mu);
+  assert.match(
+    accountLifecycleFixtureSource,
+    /execute_create_state_batch_account_infos/u,
+  );
+  assert.match(accountLifecycleFixtureSource, /verify_daily_law_open_account_info/u);
+  assert.match(accountLifecycleFixtureSource, /prepare_create_state_account_info/u);
+  assert.match(accountLifecycleFixtureSource, /InjectedRollback = 909/u);
+  assert.match(accountLifecycleLocalDriverSource, /systemCpiCount/u);
+  assert.match(accountLifecycleLocalDriverSource, /rollbackObserved/u);
+  assert.match(accountLifecycleLocalDriverSource, /syntheticDailyLawFixture: true/u);
+  assert.match(accountLifecycleLocalDriverSource, /productionInstructionAbiFrozen: false/u);
+  assert.match(accountLifecycleLocalDriverSource, /activationReady: false/u);
+  assert.match(accountLifecycleLocalRunnerSource, /http:\/\/127\.0\.0\.1:/u);
+  assert.match(accountLifecycleLocalRunnerSource, /publicNetworkWrites":false/u);
+  assert.match(accountLifecycleLocalRunnerSource, /fullFeatureDevnetRehearsalComplete":false/u);
+  assert.match(accountLifecycleLocalRunnerSource, /mainnetStatus":"HOLD/u);
+  assert.match(
+    releaseProofWorkflowSource,
+    /Rehearse B3 sealed account lifecycle on an isolated local validator[\s\S]+npm ci --ignore-scripts --no-audit --no-fund[\s\S]+bash scripts\/run-iat-b3-account-lifecycle-local\.sh/u,
+  );
+  assert.doesNotMatch(
+    `${accountLifecycleFixtureSource}\n${accountLifecycleLocalDriverSource}\n${accountLifecycleLocalRunnerSource}`,
+    /https:\/\/|api\.devnet\.solana\.com|api\.mainnet-beta\.solana\.com/u,
+  );
+
+  for (const [source, functionName] of [
+    [economySource, "verify_daily_law_open"],
+    [economyNativeAdapterSource, "prepare_create_state_account"],
+    [economyNativeAdapterSource, "seal_atomic_write_batch"],
+    [economyRuntimeAdapterSource, "verify_daily_law_open_account_info"],
+    [economyRuntimeAdapterSource, "prepare_create_state_account_info"],
+    [economyRuntimeAccountLifecycleSource, "execute_create_state_batch_account_infos"],
+  ]) {
+    assert.match(
+      source,
+      new RegExp(`#\\[inline\\(never\\)\\]\\s+pub fn ${functionName}`, "u"),
+      `${functionName} must retain its SBF stack-frame boundary`,
+    );
+  }
 });
 
 test("the all-15 rehearsal preflight is exact-version read-only and cannot activate Devnet", () => {

@@ -1059,6 +1059,8 @@ pub fn prepare_existing_state_write(
     }))
 }
 
+// Preserve an SBF frame boundary around the fixed-size sealed postimage.
+#[inline(never)]
 pub fn prepare_create_state_account(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,
@@ -1152,6 +1154,9 @@ impl<const N: usize> ValidatedAtomicWriteBatch<N> {
     }
 }
 
+// Prevent LTO from merging sealed intent construction into an entrypoint
+// frame; the batch remains passed by value and its bytes stay unchanged.
+#[inline(never)]
 pub fn seal_atomic_write_batch<const N: usize>(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,
