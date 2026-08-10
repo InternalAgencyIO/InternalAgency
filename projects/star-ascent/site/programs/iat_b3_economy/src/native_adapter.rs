@@ -9,9 +9,11 @@
 //! Law first, validate every batch precondition, and execute the entire batch
 //! in one Solana instruction so a failure rolls every effect back.
 //!
-//! Config is intentionally absent: its codec and lifecycle remain blocked on
-//! the unresolved Genesis-staging/Active/cap phase rule. Nothing here changes
-//! that HOLD, authenticates owner policy, or makes a retained handler complete.
+//! Config is intentionally absent from this mutable state/intents surface. A
+//! separate strict representation and feature-gated read-only parser exist,
+//! but its lifecycle and transition predicate remain blocked on the unresolved
+//! Genesis-staging/Active/cap rule. Nothing here changes that HOLD,
+//! authenticates owner policy, or makes a retained handler complete.
 
 use crate::{
     decode_agency_owner_index_state, decode_agency_state, decode_core_reward_state,

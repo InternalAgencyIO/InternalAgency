@@ -30,6 +30,10 @@ const economyRuntimeAdapterSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/runtime_adapter.rs", import.meta.url),
   "utf8",
 );
+const economyConfigGenesisCodecSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/config_genesis_codec.rs", import.meta.url),
+  "utf8",
+);
 const economyRehearsalAdapterSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/rehearsal_adapter.rs", import.meta.url),
   "utf8",
@@ -166,7 +170,7 @@ test("the Rust workspace has no unreported faction or core-cap entrypoint", () =
     /cdylib|anchor-|solana-(?:cpi|program-entrypoint|system-interface)/u,
   );
   assert.doesNotMatch(
-    `${economySource}\n${economyNativeAdapterSource}\n${economyRuntimeAdapterSource}\n${economyRehearsalAdapterSource}\n${economyToken2022RuntimeSource}`,
+    `${economySource}\n${economyNativeAdapterSource}\n${economyRuntimeAdapterSource}\n${economyConfigGenesisCodecSource}\n${economyRehearsalAdapterSource}\n${economyToken2022RuntimeSource}`,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(/u,
   );
   assert.doesNotMatch(economyRuntimeAdapterSource, /try_borrow_mut|instruction_data/u);
@@ -180,6 +184,70 @@ test("the Rust workspace has no unreported faction or core-cap entrypoint", () =
     audit,
     /faction and core-team-cap implementations currently present[\s\S]+JavaScript specifications[\s\S]+host-only `iat_b3_economy` library[\s\S]+no Solana\s+entrypoint or\s+public dispatcher/u,
   );
+});
+
+test("the Config Genesis codec is a strict read-only representation, not a phase transition", () => {
+  assert.match(economySource, /mod config_genesis_codec;/u);
+  for (const declaration of [
+    'pub const CONFIG_GENESIS_ACCOUNT_MAGIC: [u8; 8] = *b"IATB3CFG";',
+    "pub const CONFIG_GENESIS_ACCOUNT_VERSION: u8 = 1;",
+    "pub const CONFIG_GENESIS_ACCOUNT_LEN: usize = 272;",
+    '"STRICT_V1_REPRESENTATION_ONLY_PHASE_POLICY_UNRESOLVED_MAINNET_HOLD"',
+  ]) {
+    assert.ok(economyConfigGenesisCodecSource.includes(declaration), declaration);
+  }
+  assert.match(economyConfigGenesisCodecSource, /pub enum GenesisPhase/u);
+  assert.match(economyConfigGenesisCodecSource, /pub struct ConfigGenesisState/u);
+  assert.match(economyConfigGenesisCodecSource, /pub fn encode_config_genesis_state\(/u);
+  assert.match(economyConfigGenesisCodecSource, /pub fn decode_config_genesis_state\(/u);
+  assert.match(economyConfigGenesisCodecSource, /PhaseActiveMismatch/u);
+  assert.match(economyConfigGenesisCodecSource, /NonCanonicalLaneMask/u);
+  assert.match(economyConfigGenesisCodecSource, /owner_bootstrap_policy_accepted: false/u);
+  assert.match(economyConfigGenesisCodecSource, /phase_transition_predicate_frozen: false/u);
+  assert.match(economyConfigGenesisCodecSource, /vacuous_cap_rule_proved: false/u);
+  assert.match(economyConfigGenesisCodecSource, /genesis_conservation_proved: false/u);
+  assert.match(economyConfigGenesisCodecSource, /transition_authorized: false/u);
+  assert.match(economyConfigGenesisCodecSource, /account_writes_executed: false/u);
+  assert.match(economyConfigGenesisCodecSource, /any_handler_complete: false/u);
+  assert.match(economyConfigGenesisCodecSource, /mainnet_hold: true/u);
+  assert.doesNotMatch(
+    economyConfigGenesisCodecSource,
+    /AccountInfo|entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|try_borrow_mut/u,
+  );
+
+  const parser = functionBody(economyRuntimeAdapterSource, "parse_config_genesis_account_info");
+  assertTokensInOrder(
+    parser,
+    [
+      "gate.mint() != binding.mint()",
+      "PdaIdentity::Config",
+      "derive_pda(binding, identity)",
+      "account.key.to_bytes() != derived.key",
+      "account.owner.to_bytes() != binding.program_id()",
+      "account.is_writable",
+      "account.executable",
+      "account.is_signer",
+      "try_borrow_data()",
+      "decode_config_genesis_state(&data)",
+      "state.config.mint != binding.mint()",
+      "state.config.bump != derived.bump",
+      "ReadonlyConfigGenesisAccount",
+    ],
+    "read-only Config Genesis parser",
+  );
+  assert.doesNotMatch(
+    parser,
+    /try_borrow_mut|entrypoint!|process_instruction|invoke(?:_signed)?\s*\(|StateWriteIntent/u,
+  );
+  assert.match(economyRuntimeAdapterSource, /requires_open_daily_law_capability: true/u);
+  assert.match(economyRuntimeAdapterSource, /immutable_account_borrow_only: true/u);
+  assert.match(economyRuntimeAdapterSource, /binding_relative_config_identity_checked: true/u);
+  assert.match(economyRuntimeAdapterSource, /production_identity_binding_frozen: false/u);
+  assert.match(economyRuntimeAdapterSource, /phase_transition_predicate_frozen: false/u);
+  assert.match(economyRuntimeAdapterSource, /genesis_conservation_proved: false/u);
+  assert.match(economyRuntimeAdapterSource, /transition_authorized: false/u);
+  assert.match(economyRuntimeAdapterSource, /any_handler_complete: false/u);
+  assert.match(economyRuntimeAdapterSource, /mainnet_hold: true/u);
 });
 
 test("current V2 has no hidden Daily Law dependency and still targets legacy SPL Token", () => {

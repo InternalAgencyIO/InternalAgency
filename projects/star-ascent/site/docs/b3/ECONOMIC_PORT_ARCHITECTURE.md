@@ -537,16 +537,24 @@ version, length, trailing data, reserved bytes, boolean encodings, and invalid
 discriminants. This deliberately stricter B3 corruption boundary is not a claim
 of V2 Anchor byte-layout or account-validation error-order compatibility.
 
-`ConfigState` is intentionally not encoded. Its current `active: bool` is a
-host-only retained semantic projection, while the required one-way
-Genesis-staging-to-active/cap phase remains unresolved. Freezing that boolean as
-the B3 Config account phase would preempt the bootstrap decision. Codec tests
-may supply an already-semantic Config value only to exercise decoded Position
-and Lane values through the gated `close_position` kernel; they do not close
-Config account ownership, address, PDA, phase, or activation trust. This stage
-is `PARTIAL_STRICT_CODEC_ONLY` and `nativeAdapterComplete: false`: it adds no
-Solana dependency, account access, identity binding, dispatcher, lifecycle,
-CPI, persistence, or public exposure.
+The Config byte-representation partial is now production source, but the
+Config/Genesis decision remains unresolved. `IATB3CFG` v1 is an exact 272-byte
+envelope containing every retained `ConfigState` field plus an explicit
+`UNINITIALIZED`, `GENESIS_STAGING`, or `ACTIVE` discriminant. It rejects wrong
+length/type/version, nonzero reserved bytes, noncanonical booleans, phases, and
+lane-mask bits, and disagreement between the phase and retained V2
+`active: bool`; encoding is transactional through a temporary fixed buffer.
+This prevents the legacy boolean from silently becoming the unstated B3
+bootstrap rule while preserving it byte-for-byte as retained V2 semantics.
+
+The representation deliberately has no transition function. It does not choose
+the owner-controlled preactivation predicate, vacuous-cap prevention rule,
+finalize/activate checks, conservation proof, or authorization evidence. It
+does not make an existing uninitialized Config account canonical, require that
+such an account exist, or define when either admitted phase edge is legal.
+Accordingly the matrix still records
+`BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`, the aggregate stage
+remains `PARTIAL_STRICT_CODEC_ONLY`, and `nativeAdapterComplete` remains false.
 
 The next strict-codec batch adds only four more field-complete retained
 projections: `CoreRewardState` (`IATB3CRW`, 128 bytes), `AgencyState`
@@ -568,11 +576,12 @@ round in `CommitRoundResult` was removed. Its strict `IATB3RND` codec is exactly
 wrong types, reserved bytes, atomic failure, and panic-free corruption sweep are
 pinned in Rust tests. The matrix records `roundCodecStatus: STRICT_V1`.
 
-Config remains `BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`, so it is
-the sole codec blocker and the aggregate stage remains
-`PARTIAL_STRICT_CODEC_ONLY` and native-adapter-incomplete. The Round codec adds
-no Solana account ownership, PDA/bump derivation, lifecycle, persistence,
-dispatcher, CPI, or public exposure.
+Config remains `BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`: strict
+bytes are present, but the phase predicate, lifecycle, conservation, and owner
+decision are not. The aggregate stage remains `PARTIAL_STRICT_CODEC_ONLY` and
+native-adapter-incomplete. Neither the Config representation nor the Round
+codec adds a write path, lifecycle, persistence, dispatcher, CPI, or public
+exposure.
 
 The next non-activating adapter slice is available only behind the
 `runtime-account-bridge` Cargo feature. It reads real immutable Solana
@@ -588,9 +597,13 @@ the success path on a host without weakening the public sysvar boundary.
 This stage is
 `FEATURE_GATED_READ_ONLY_ACCOUNTINFO_CLOCK_RENT_NO_DISPATCH` and remains
 incomplete. It has no instruction ABI, entrypoint, mutable account borrow,
-write, allocation, System Program CPI, Token-2022 CPI, Config codec, frozen
-production-identity binder, complete account-identity graph, or public
-exposure. It does not change any matrix row's
+write, allocation, System Program CPI, Token-2022 CPI, mutable Config adapter,
+frozen production-identity binder, complete account-identity graph, or public
+exposure. Its Config-only read path requires an already-open opaque Daily Law
+capability, then checks the binding-relative Config PDA, program owner, mint,
+bump, read-only/non-signer/non-executable flags, immutable data borrow, and the
+strict 272-byte codec. The returned private-field observation carries no phase
+edge, mutation, or transition authorization. It does not change any matrix row's
 `handlerComplete`, the aggregate `DISABLED_UNTIL_ALL_15_PASS` exposure, the
 core-custody/faction/Genesis HOLDs, or the complete-dispatcher boundary.
 
@@ -617,7 +630,7 @@ binding, and canonical-mint capabilities; reuses strict state authentication,
 public Token-2022 account authentication, and inert atomic-batch sealing; and
 can return only a structural meta-shape observation. Caller-supplied role names
 do not authenticate identities and the returned value never authorizes a
-handler or a Devnet transaction. Genesis-phase/Config-codec, immutable CCC,
+handler or a Devnet transaction. Genesis-phase/Config-lifecycle, immutable CCC,
 core custody/release, production identity, hook-CPI, and dispatcher blockers
 remain explicit. Accordingly `any_handler_complete`, Devnet execution, public
 driver wiring, instruction ABI, entrypoint, dispatcher, mutable borrows,

@@ -8,15 +8,17 @@
 //! not accepted from instruction data here.
 
 use crate::native_adapter::{
-    authenticate_signer, authenticate_state_account, authenticate_system_payer,
+    authenticate_signer, authenticate_state_account, authenticate_system_payer, derive_pda,
     prepare_create_state_account, prepare_existing_state_write, AuthenticatedSigner,
     AuthenticatedStateAccount, AuthenticatedSystemPayer, NativeAccountObservation,
     NativeAdapterError, NativeEconomyBinding, PdaIdentity, StateWriteIntent, StrictStateValue,
 };
 use crate::{
-    verify_daily_law_open, CanonicalDailyLawBinding, EconomyError, ReadonlyDailyLawAccount,
+    decode_config_genesis_state, verify_daily_law_open, CanonicalDailyLawBinding,
+    ConfigGenesisCodecError, ConfigGenesisState, EconomyError, ReadonlyDailyLawAccount,
     ValidatedDailyLawWrite,
 };
+use sha2::{Digest, Sha256};
 use solana_account_info::AccountInfo;
 use solana_clock::Clock;
 use solana_rent::Rent;
@@ -24,6 +26,45 @@ use solana_sysvar::Sysvar;
 
 pub const RUNTIME_ACCOUNT_BRIDGE_STATUS: &str =
     "FEATURE_GATED_READ_ONLY_ACCOUNTINFO_CLOCK_RENT_NO_DISPATCH";
+pub const CONFIG_GENESIS_RUNTIME_STATUS: &str =
+    "FEATURE_GATED_READ_ONLY_CONFIG_PARSER_PHASE_TRANSITIONS_UNRESOLVED_MAINNET_HOLD";
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ConfigGenesisRuntimeTruth {
+    pub feature_gated: bool,
+    pub requires_open_daily_law_capability: bool,
+    pub immutable_account_borrow_only: bool,
+    pub binding_relative_config_identity_checked: bool,
+    pub production_identity_binding_frozen: bool,
+    pub owner_bootstrap_policy_accepted: bool,
+    pub phase_transition_predicate_frozen: bool,
+    pub genesis_conservation_proved: bool,
+    pub transition_authorized: bool,
+    pub account_writes_executed: bool,
+    pub instruction_abi_frozen: bool,
+    pub entrypoint_exposed: bool,
+    pub dispatcher_exposed: bool,
+    pub any_handler_complete: bool,
+    pub mainnet_hold: bool,
+}
+
+pub const CONFIG_GENESIS_RUNTIME_TRUTH: ConfigGenesisRuntimeTruth = ConfigGenesisRuntimeTruth {
+    feature_gated: true,
+    requires_open_daily_law_capability: true,
+    immutable_account_borrow_only: true,
+    binding_relative_config_identity_checked: true,
+    production_identity_binding_frozen: false,
+    owner_bootstrap_policy_accepted: false,
+    phase_transition_predicate_frozen: false,
+    genesis_conservation_proved: false,
+    transition_authorized: false,
+    account_writes_executed: false,
+    instruction_abi_frozen: false,
+    entrypoint_exposed: false,
+    dispatcher_exposed: false,
+    any_handler_complete: false,
+    mainnet_hold: true,
+};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct RuntimeAccountBridgeTruth {
@@ -57,6 +98,8 @@ pub const RUNTIME_ACCOUNT_BRIDGE_TRUTH: RuntimeAccountBridgeTruth = RuntimeAccou
     entrypoint_exposed: false,
     dispatcher_exposed: false,
     production_identity_binding_frozen: false,
+    // Aggregate handler/write-adapter support remains blocked. The separate
+    // parser below produces only a read-only observation.
     config_codec_supported: false,
     any_handler_complete: false,
     mainnet_hold: true,
@@ -66,7 +109,11 @@ pub const RUNTIME_ACCOUNT_BRIDGE_TRUTH: RuntimeAccountBridgeTruth = RuntimeAccou
 pub enum RuntimeAdapterError {
     Economy(EconomyError),
     Native(NativeAdapterError),
+    ConfigGenesisCodec(ConfigGenesisCodecError),
     AccountBorrowFailed,
+    ConfigAccountMustBeReadOnly,
+    ConfigMintMismatch,
+    ConfigBumpMismatch,
     ClockSysvarUnavailable,
     RentSysvarUnavailable,
 }
@@ -80,6 +127,36 @@ impl From<EconomyError> for RuntimeAdapterError {
 impl From<NativeAdapterError> for RuntimeAdapterError {
     fn from(value: NativeAdapterError) -> Self {
         Self::Native(value)
+    }
+}
+
+impl From<ConfigGenesisCodecError> for RuntimeAdapterError {
+    fn from(value: ConfigGenesisCodecError) -> Self {
+        Self::ConfigGenesisCodec(value)
+    }
+}
+
+/// Opaque result of the feature-gated read-only Config parser. Private fields
+/// prevent callers from manufacturing this observation, but the value still
+/// carries no phase-transition or write authorization.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ReadonlyConfigGenesisAccount {
+    key: [u8; 32],
+    state: ConfigGenesisState,
+    preimage_sha256: [u8; 32],
+}
+
+impl ReadonlyConfigGenesisAccount {
+    pub const fn key(&self) -> [u8; 32] {
+        self.key
+    }
+
+    pub const fn state(&self) -> ConfigGenesisState {
+        self.state
+    }
+
+    pub const fn preimage_sha256(&self) -> [u8; 32] {
+        self.preimage_sha256
     }
 }
 
@@ -185,6 +262,65 @@ pub fn authenticate_state_account_info(
 ) -> Result<AuthenticatedStateAccount, RuntimeAdapterError> {
     with_account_observation(account, |observed| {
         authenticate_state_account(gate, binding, observed, expected_identity)
+    })
+}
+
+/// Parse the binding-relative economy Config PDA only after Daily Law has
+/// produced an opaque open-Day capability. The account meta must itself be
+/// read-only. This function never selects or authorizes a Genesis phase edge
+/// and never returns a mutable or executable intent.
+pub fn parse_config_genesis_account_info(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<ReadonlyConfigGenesisAccount, RuntimeAdapterError> {
+    if gate.mint() != binding.mint() {
+        return Err(RuntimeAdapterError::Native(
+            NativeAdapterError::LawMintMismatch,
+        ));
+    }
+    let identity = PdaIdentity::Config {
+        mint: binding.mint(),
+    };
+    let derived = derive_pda(binding, identity).map_err(RuntimeAdapterError::Native)?;
+    if account.key.to_bytes() != derived.key {
+        return Err(RuntimeAdapterError::Native(
+            NativeAdapterError::AccountKeyMismatch,
+        ));
+    }
+    if account.owner.to_bytes() != binding.program_id() {
+        return Err(RuntimeAdapterError::Native(
+            NativeAdapterError::AccountOwnerMismatch,
+        ));
+    }
+    if account.is_writable {
+        return Err(RuntimeAdapterError::ConfigAccountMustBeReadOnly);
+    }
+    if account.executable {
+        return Err(RuntimeAdapterError::Native(
+            NativeAdapterError::AccountMustNotBeExecutable,
+        ));
+    }
+    if account.is_signer {
+        return Err(RuntimeAdapterError::Native(
+            NativeAdapterError::PdaAccountMustNotBeSigner,
+        ));
+    }
+
+    let data = account
+        .try_borrow_data()
+        .map_err(|_| RuntimeAdapterError::AccountBorrowFailed)?;
+    let state = decode_config_genesis_state(&data)?;
+    if state.config.mint != binding.mint() {
+        return Err(RuntimeAdapterError::ConfigMintMismatch);
+    }
+    if state.config.bump != derived.bump {
+        return Err(RuntimeAdapterError::ConfigBumpMismatch);
+    }
+    Ok(ReadonlyConfigGenesisAccount {
+        key: derived.key,
+        state,
+        preimage_sha256: Sha256::digest(&*data).into(),
     })
 }
 

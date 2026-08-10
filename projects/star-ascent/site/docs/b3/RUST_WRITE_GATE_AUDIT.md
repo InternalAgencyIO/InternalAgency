@@ -390,15 +390,25 @@ adversaries fail closed. These are deliberate B3 corruption rules, not a claim
 that the new bytes decode V2 Anchor accounts or reproduce Anchor account-error
 precedence.
 
-There is no Config account codec in this slice. The semantic `ConfigState`
-still contains retained `active: bool`, but the one-way Genesis staging,
-activation, and cap-enforcement phase rule is unresolved; encoding it now would
-silently choose that protocol rule. The decode-to-gated-`close_position` test
-therefore uses an already-semantic Config value and proves only Position/Lane
-codec integration. It proves no Config owner/address/PDA/phase trust. The matrix
-records `PARTIAL_STRICT_CODEC_ONLY` and `nativeAdapterComplete: false`; no
-Solana account access, identity binding, dispatcher, lifecycle, CPI, durable
-write, or public handler was added.
+A separate production-source Config representation is now present without
+closing the Config/Genesis decision. `IATB3CFG` v1 is an exact 272-byte envelope
+over every retained `ConfigState` field plus the explicit high-level
+`UNINITIALIZED`, `GENESIS_STAGING`, or `ACTIVE` label. It rejects wrong
+length/type/version, reserved-byte drift, noncanonical booleans, phases, and
+lane-mask bits, and phase/retained-`active` disagreement. Encoding uses a
+temporary buffer. It exposes no transition function and therefore does not
+choose the unresolved one-way staging/activation predicate, vacuous-cap rule,
+finalization condition, or conservation evidence.
+
+Behind `runtime-account-bridge`, an already-open opaque Daily Law capability is
+required before an immutable `AccountInfo` parser checks the relative Config
+PDA, program owner, mint, bump, strict bytes, and read-only/non-signer/
+non-executable flags. That private-field observation supplies no production-ID
+freeze, write intent, or phase authorization. The matrix therefore still
+records `PARTIAL_STRICT_CODEC_ONLY`,
+`BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`, and
+`nativeAdapterComplete: false`; no dispatcher, lifecycle, CPI, durable write,
+or public handler was added.
 
 Four additional field-complete projections now use the same strict B3 envelope:
 `CoreRewardState` is 128 bytes with magic `IATB3CRW`; `AgencyState` is 96 bytes
@@ -419,10 +429,12 @@ audited golden hash, per-field vectors, exact-length/type/reserved corruption,
 atomic encode failures, and a panic sweep pin the layout. The matrix therefore
 records `roundCodecStatus: STRICT_V1`.
 
-Config remains the sole codec blocker at
-`BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`. Consequently these
-seven strict codecs are preparation only, not a native adapter or handler
-completion.
+Config remains blocked at
+`BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`: byte representation is
+no longer the missing piece, but the owner predicate, lifecycle, vacuous-cap
+proof, conservation evidence, and mutable adapter remain unresolved. The seven
+write-intent candidate codecs plus the separate Config read representation are
+preparation only, not a native adapter or handler completion.
 
 These are not account adapters or deployable handlers. A future native adapter
 must still prove account ownership, exact config/round/randomness bindings,
@@ -549,14 +561,17 @@ This is preparation, not execution. Its checked truth surface keeps
 `entrypoint_exposed`, `dispatcher_exposed`, `account_writes_executed`,
 `system_cpi_executed`, `token_cpi_executed`, `rent_sysvar_authenticated`,
 `config_codec_supported`, `runtime_authorization_complete`, and
-`any_handler_complete` false, while `mainnet_hold` remains true. In particular,
-the caller-supplied rent minimum is not trusted runtime evidence; a future
+`any_handler_complete` false, while `mainnet_hold` remains true. Here
+`config_codec_supported` is the aggregate mutable-handler/native-adapter flag;
+the separate read-only representation does not satisfy it. The caller-supplied
+rent minimum is not trusted runtime evidence; a future
 adapter must authenticate the canonical Rent sysvar and calculate the minimum.
 The module has no authenticated Clock or Rent sysvar account, `AccountInfo`,
 mutable borrow, invoke, System/Token CPI, dispatcher, entrypoint, or public write
 path. Runtime authorization, config serialization, and every Genesis phase
-transition remain blocked, and the PDA/intents cannot be counted as a Devnet
-binary or a completed handler.
+path. Runtime authorization, mutable Config lifecycle/serialization intents,
+and every Genesis phase transition remain blocked, and the PDA/intents cannot
+be counted as a Devnet binary or a completed handler.
 
 ## Internal V2 mutation paths
 

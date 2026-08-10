@@ -7,15 +7,17 @@ use iat_b3_economy::native_adapter::{
 };
 use iat_b3_economy::runtime_adapter::*;
 use iat_b3_economy::{
-    encode_agency_owner_index_state, encode_agency_state, encode_core_reward_state,
-    encode_eligibility_state, encode_lane_state, encode_position_state, encode_round_state,
-    verify_daily_law_open, AgencyOwnerIndexState, AgencyState, CanonicalDailyLawBinding,
-    CoreRewardState, EconomyError, EligibilityState, LaneState, PositionState,
+    encode_agency_owner_index_state, encode_agency_state, encode_config_genesis_state,
+    encode_core_reward_state, encode_eligibility_state, encode_lane_state, encode_position_state,
+    encode_round_state, verify_daily_law_open, AgencyOwnerIndexState, AgencyState,
+    CanonicalDailyLawBinding, ConfigGenesisCodecError, ConfigGenesisState, ConfigState,
+    CoreRewardState, EconomyError, EligibilityState, GenesisPhase, LaneState, PositionState,
     ReadonlyDailyLawAccount, RoundState, ValidatedDailyLawWrite, AGENCY_ACCOUNT_LEN,
-    AGENCY_OWNER_INDEX_ACCOUNT_LEN, CORE_REWARD_ACCOUNT_LEN, ELIGIBILITY_ACCOUNT_LEN,
-    LANE_ACCOUNT_LEN, LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION, POSITION_ACCOUNT_LEN,
-    ROUND_ACCOUNT_LEN, ROUND_PENDING,
+    AGENCY_OWNER_INDEX_ACCOUNT_LEN, CONFIG_GENESIS_ACCOUNT_LEN, CORE_REWARD_ACCOUNT_LEN,
+    ELIGIBILITY_ACCOUNT_LEN, LANE_ACCOUNT_LEN, LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION,
+    POSITION_ACCOUNT_LEN, ROUND_ACCOUNT_LEN, ROUND_PENDING,
 };
+use sha2::{Digest, Sha256};
 use solana_account_info::AccountInfo;
 use solana_sdk_ids::system_program;
 
@@ -259,6 +261,36 @@ fn encode_state(state: StrictStateValue) -> Vec<u8> {
     data
 }
 
+fn config_genesis_state(binding: &NativeEconomyBinding) -> ConfigGenesisState {
+    ConfigGenesisState {
+        phase: GenesisPhase::GenesisStaging,
+        config: ConfigState {
+            admin: OWNER,
+            mint: binding.mint(),
+            token_program: [0x31; 32],
+            randomness_program: [0x32; 32],
+            stake_token_account: [0x33; 32],
+            agency_registry_hash: [0x34; 32],
+            genesis_timestamp: CLOCK_TIMESTAMP - 86_400,
+            expected_supply: 1_000_000_000_000,
+            staked_principal: 55,
+            agency_count: 2,
+            rehearsal_mode: true,
+            active: false,
+            lane_mask: 0b1_1110,
+            stake_vault_initialized: true,
+            bump: binding.config_bump(),
+            vault_authority_bump: 207,
+        },
+    }
+}
+
+fn encode_config(state: &ConfigGenesisState) -> [u8; CONFIG_GENESIS_ACCOUNT_LEN] {
+    let mut data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+    encode_config_genesis_state(state, &mut data).unwrap();
+    data
+}
+
 #[test]
 fn runtime_truth_is_explicitly_read_only_and_nonactivating() {
     assert_eq!(
@@ -299,6 +331,226 @@ fn runtime_truth_is_explicitly_read_only_and_nonactivating() {
     assert_eq!(
         StrictStateKind::Eligibility.account_len(),
         ELIGIBILITY_ACCOUNT_LEN
+    );
+}
+
+#[test]
+fn config_parser_truth_is_daily_law_first_read_only_and_held() {
+    assert_eq!(
+        CONFIG_GENESIS_RUNTIME_STATUS,
+        "FEATURE_GATED_READ_ONLY_CONFIG_PARSER_PHASE_TRANSITIONS_UNRESOLVED_MAINNET_HOLD"
+    );
+    assert_eq!(
+        CONFIG_GENESIS_RUNTIME_TRUTH,
+        ConfigGenesisRuntimeTruth {
+            feature_gated: true,
+            requires_open_daily_law_capability: true,
+            immutable_account_borrow_only: true,
+            binding_relative_config_identity_checked: true,
+            production_identity_binding_frozen: false,
+            owner_bootstrap_policy_accepted: false,
+            phase_transition_predicate_frozen: false,
+            genesis_conservation_proved: false,
+            transition_authorized: false,
+            account_writes_executed: false,
+            instruction_abi_frozen: false,
+            entrypoint_exposed: false,
+            dispatcher_exposed: false,
+            any_handler_complete: false,
+            mainnet_hold: true,
+        }
+    );
+}
+
+#[test]
+fn config_account_info_parser_binds_open_law_pda_owner_mint_bump_and_bytes() {
+    let gate = open_gate();
+    let binding = economy_binding();
+    let state = config_genesis_state(&binding);
+    let mut data = encode_config(&state);
+    let parsed = with_account(
+        binding.config(),
+        binding.program_id(),
+        1_000_000,
+        &mut data,
+        false,
+        false,
+        false,
+        |account| parse_config_genesis_account_info(&gate, &binding, account),
+    )
+    .unwrap();
+    assert_eq!(parsed.key(), binding.config());
+    assert_eq!(parsed.state(), state);
+    let expected_digest: [u8; 32] = Sha256::digest(data).into();
+    assert_eq!(parsed.preimage_sha256(), expected_digest);
+}
+
+#[test]
+fn config_parser_rejects_identity_flags_corruption_and_borrow_conflicts() {
+    let gate = open_gate();
+    let binding = economy_binding();
+    let state = config_genesis_state(&binding);
+    let pristine = encode_config(&state);
+
+    let cases = [
+        (
+            [0x77; 32],
+            binding.program_id(),
+            false,
+            false,
+            false,
+            Err(RuntimeAdapterError::Native(
+                NativeAdapterError::AccountKeyMismatch,
+            )),
+        ),
+        (
+            binding.config(),
+            [0x78; 32],
+            false,
+            false,
+            false,
+            Err(RuntimeAdapterError::Native(
+                NativeAdapterError::AccountOwnerMismatch,
+            )),
+        ),
+        (
+            binding.config(),
+            binding.program_id(),
+            false,
+            true,
+            false,
+            Err(RuntimeAdapterError::ConfigAccountMustBeReadOnly),
+        ),
+        (
+            binding.config(),
+            binding.program_id(),
+            true,
+            false,
+            false,
+            Err(RuntimeAdapterError::Native(
+                NativeAdapterError::PdaAccountMustNotBeSigner,
+            )),
+        ),
+        (
+            binding.config(),
+            binding.program_id(),
+            false,
+            false,
+            true,
+            Err(RuntimeAdapterError::Native(
+                NativeAdapterError::AccountMustNotBeExecutable,
+            )),
+        ),
+    ];
+    for (key, owner, signer, writable, executable, expected) in cases {
+        let mut data = pristine;
+        let result = with_account(
+            key,
+            owner,
+            1,
+            &mut data,
+            signer,
+            writable,
+            executable,
+            |account| parse_config_genesis_account_info(&gate, &binding, account),
+        );
+        assert_eq!(result, expected);
+    }
+
+    let mut wrong_mint_state = state;
+    wrong_mint_state.config.mint[0] ^= 1;
+    let mut wrong_mint = encode_config(&wrong_mint_state);
+    assert_eq!(
+        with_account(
+            binding.config(),
+            binding.program_id(),
+            1,
+            &mut wrong_mint,
+            false,
+            false,
+            false,
+            |account| parse_config_genesis_account_info(&gate, &binding, account),
+        ),
+        Err(RuntimeAdapterError::ConfigMintMismatch)
+    );
+
+    let mut wrong_bump_state = state;
+    wrong_bump_state.config.bump ^= 1;
+    let mut wrong_bump = encode_config(&wrong_bump_state);
+    assert_eq!(
+        with_account(
+            binding.config(),
+            binding.program_id(),
+            1,
+            &mut wrong_bump,
+            false,
+            false,
+            false,
+            |account| parse_config_genesis_account_info(&gate, &binding, account),
+        ),
+        Err(RuntimeAdapterError::ConfigBumpMismatch)
+    );
+
+    let mut corrupt = pristine;
+    corrupt[0] ^= 1;
+    assert_eq!(
+        with_account(
+            binding.config(),
+            binding.program_id(),
+            1,
+            &mut corrupt,
+            false,
+            false,
+            false,
+            |account| parse_config_genesis_account_info(&gate, &binding, account),
+        ),
+        Err(RuntimeAdapterError::ConfigGenesisCodec(
+            ConfigGenesisCodecError::WrongTypeMagic
+        ))
+    );
+
+    let mut borrowed = pristine;
+    let borrow_conflict = with_account(
+        binding.config(),
+        binding.program_id(),
+        1,
+        &mut borrowed,
+        false,
+        false,
+        false,
+        |account| {
+            let _borrow = account.try_borrow_mut_data().unwrap();
+            parse_config_genesis_account_info(&gate, &binding, account)
+        },
+    );
+    assert_eq!(
+        borrow_conflict,
+        Err(RuntimeAdapterError::AccountBorrowFailed)
+    );
+}
+
+#[test]
+fn config_parser_rejects_a_daily_law_capability_for_another_mint_first() {
+    let gate = open_gate();
+    let other_binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, [0x23; 32]).unwrap();
+    let state = config_genesis_state(&other_binding);
+    let mut data = encode_config(&state);
+    data[0] ^= 0xFF;
+    let result = with_account(
+        [0x77; 32],
+        [0x78; 32],
+        1,
+        &mut data,
+        true,
+        true,
+        true,
+        |account| parse_config_genesis_account_info(&gate, &other_binding, account),
+    );
+    assert_eq!(
+        result,
+        Err(RuntimeAdapterError::Native(
+            NativeAdapterError::LawMintMismatch
+        ))
     );
 }
 

@@ -2,6 +2,7 @@
 #![forbid(unsafe_code)]
 
 mod codec;
+mod config_genesis_codec;
 pub mod native_adapter;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod rehearsal_adapter;
@@ -21,6 +22,12 @@ pub use codec::{
     CORE_REWARD_ACCOUNT_MAGIC, ELIGIBILITY_ACCOUNT_LEN, ELIGIBILITY_ACCOUNT_MAGIC,
     LANE_ACCOUNT_LEN, LANE_ACCOUNT_MAGIC, POSITION_ACCOUNT_LEN, POSITION_ACCOUNT_MAGIC,
     ROUND_ACCOUNT_LEN, ROUND_ACCOUNT_MAGIC,
+};
+pub use config_genesis_codec::{
+    decode_config_genesis_state, encode_config_genesis_state, ConfigGenesisCodecError,
+    ConfigGenesisCodecTruth, ConfigGenesisState, GenesisPhase, CONFIG_GENESIS_ACCOUNT_LEN,
+    CONFIG_GENESIS_ACCOUNT_MAGIC, CONFIG_GENESIS_ACCOUNT_VERSION, CONFIG_GENESIS_CODEC_STATUS,
+    CONFIG_GENESIS_CODEC_TRUTH,
 };
 
 use iat_b3_consensus::{
@@ -178,10 +185,11 @@ pub struct LaneState {
     pub token_bump: u8,
 }
 
-/// Native semantic representation of the retained V2 `Config` data. This is
-/// not an account codec or proof that a config PDA exists. Its B3 byte codec is
-/// blocked until the Genesis-staging, activation, and cap-enforcement phase
-/// rule is frozen; `active` must not be mistaken for that unresolved phase.
+/// Native semantic representation of the retained V2 `Config` data. A strict
+/// B3 read representation now wraps this value with an explicit Genesis phase,
+/// but that codec is not proof that a Config PDA exists and supplies no write
+/// lifecycle or phase authorization. `active` remains a retained V2 field and
+/// must not be mistaken for the unresolved B3 transition predicate.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ConfigState {
     pub admin: [u8; 32],
