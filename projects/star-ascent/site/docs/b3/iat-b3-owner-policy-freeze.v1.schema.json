@@ -1,0 +1,437 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internalagency.io/schemas/iat-b3-owner-policy-freeze.v1.schema.json",
+  "title": "IAT B3 owner policy freeze v1",
+  "description": "Non-activating owner-choice intake. Schema validity and structural choice completeness are never evidence or release authorization.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "profile",
+    "status",
+    "scope",
+    "decisionOrder",
+    "invariants",
+    "nodes",
+    "ownerAcceptance",
+    "evidenceBoundary",
+    "assurance"
+  ],
+  "properties": {
+    "$schema": { "const": "./iat-b3-owner-policy-freeze.v1.schema.json" },
+    "schema": { "const": "iat-b3-owner-policy-freeze/v1" },
+    "profile": { "const": "PRODUCTION" },
+    "status": { "const": "BLOCKED" },
+    "scope": {
+      "const": {
+        "contract": "NON_ACTIVATING_OWNER_POLICY_INTAKE_ONLY",
+        "nodeIds": [
+          "LIVE_ESTATE_CANONICAL_MINT_DECISION",
+          "CORE_CUSTODY_POLICY_ADAPTER",
+          "FACTION_ECONOMICS_FUNDING",
+          "CONFIG_GENESIS_PHASE_CODEC",
+          "GENESIS_ALLOCATIONS_CONSERVATION",
+          "PRODUCTION_IDENTITY_INPUT_FREEZE",
+          "B3_COST_CEREMONY_FUNDING"
+        ],
+        "doesNotCertify": [
+          "OWNER_IDENTITY_OR_SIGNATURE_AUTHENTICITY",
+          "CHAIN_TRUTH_OR_LIVE_ESTATE_STATE",
+          "REVIEWED_BINARY_OR_DEPLOYED_BYTES",
+          "GENESIS_CONSERVATION_OR_FUNDING",
+          "DEVNET_REHEARSAL_OR_ACTIVATION",
+          "RELEASE_OR_MAINNET_AUTHORIZATION"
+        ]
+      }
+    },
+    "decisionOrder": {
+      "const": [
+        { "stage": 1, "mode": "SERIAL", "nodeIds": ["LIVE_ESTATE_CANONICAL_MINT_DECISION"] },
+        { "stage": 2, "mode": "PARALLEL", "nodeIds": ["CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING"] },
+        { "stage": 3, "mode": "SERIAL", "nodeIds": ["CONFIG_GENESIS_PHASE_CODEC"] },
+        { "stage": 4, "mode": "SERIAL", "nodeIds": ["GENESIS_ALLOCATIONS_CONSERVATION"] },
+        { "stage": 5, "mode": "SERIAL", "nodeIds": ["PRODUCTION_IDENTITY_INPUT_FREEZE"] },
+        { "stage": 6, "mode": "SERIAL", "nodeIds": ["B3_COST_CEREMONY_FUNDING"] }
+      ]
+    },
+    "invariants": {
+      "const": {
+        "v2DefaultDisposition": "KEEP",
+        "v2FeatureCutsPermitted": false,
+        "dailyLawWeakeningPermitted": false,
+        "runtimeMutationPermitted": false,
+        "secretsPermitted": false,
+        "ownerChoicesAreExternalProof": false,
+        "ownerAcceptanceReferenceIsExternalProof": false,
+        "graphCompletionPermitted": false
+      }
+    },
+    "nodes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "LIVE_ESTATE_CANONICAL_MINT_DECISION",
+        "CORE_CUSTODY_POLICY_ADAPTER",
+        "FACTION_ECONOMICS_FUNDING",
+        "CONFIG_GENESIS_PHASE_CODEC",
+        "GENESIS_ALLOCATIONS_CONSERVATION",
+        "PRODUCTION_IDENTITY_INPUT_FREEZE",
+        "B3_COST_CEREMONY_FUNDING"
+      ],
+      "properties": {
+        "LIVE_ESTATE_CANONICAL_MINT_DECISION": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dependencies", "frozenConstraints", "ownerChoices", "evidenceRequirements"],
+          "properties": {
+            "dependencies": { "const": [] },
+            "frozenConstraints": {
+              "const": {
+                "canonicalAssetModel": "SINGLE_HOOKED_TOKEN_2022_MINT",
+                "originalSplDisposition": "MIGRATION_SOURCE_ONLY_IF_LIVE",
+                "duplicateCanonicalSupplyPermitted": false
+              }
+            },
+            "ownerChoices": { "$ref": "#/$defs/liveChoices" },
+            "evidenceRequirements": {
+              "const": {
+                "external": ["INDEPENDENT_LIVE_ESTATE_INVENTORY", "CANDIDATE_MINT_CHAIN_STATE_AND_AUTHORITY_SNAPSHOT", "CANONICAL_SUPPLY_RECONCILIATION"],
+                "engineering": ["TOKEN_PROGRAM_AND_EXTENSION_COMPATIBILITY_REPORT", "MIGRATION_OR_NEW_MINT_REHEARSAL"]
+              }
+            }
+          }
+        },
+        "CORE_CUSTODY_POLICY_ADAPTER": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dependencies", "frozenConstraints", "ownerChoices", "evidenceRequirements"],
+          "properties": {
+            "dependencies": { "const": ["LIVE_ESTATE_CANONICAL_MINT_DECISION"] },
+            "frozenConstraints": {
+              "const": {
+                "liveSupplyDefinition": "CANONICAL_TOKEN_2022_MINT_SUPPLY_AFTER_PRIOR_BURNS",
+                "custodyScope": "PROGRAM_ORIGINATED_CORE_PRINCIPAL_AND_REWARDS_ONLY",
+                "burnFormula": "CEIL_MAX_ZERO_10C_MINUS_S_OVER_9",
+                "delegatePermitted": false,
+                "releaseOrdering": "CURRENT_OPEN_DAILY_LAW_AND_SAME_DAY_RECONCILIATION_ATOMICALLY_REQUIRED"
+              }
+            },
+            "ownerChoices": { "$ref": "#/$defs/coreChoices" },
+            "evidenceRequirements": {
+              "const": {
+                "external": ["INDEPENDENT_CUSTODY_AND_RELEASE_POLICY_ACCEPTANCE", "CORE_BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATION"],
+                "engineering": ["NATIVE_CORE_CUSTODY_ADAPTER_AND_CPI_EVIDENCE", "BURN_STALE_DAY_DEPOSIT_RACE_AND_LOCKDOWN_REHEARSAL"]
+              }
+            }
+          }
+        },
+        "FACTION_ECONOMICS_FUNDING": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dependencies", "frozenConstraints", "ownerChoices", "evidenceRequirements"],
+          "properties": {
+            "dependencies": { "const": ["LIVE_ESTATE_CANONICAL_MINT_DECISION"] },
+            "frozenConstraints": {
+              "const": {
+                "factions": [
+                  { "id": "radiance", "displayLabel": "Radiance" },
+                  { "id": "ellie", "displayLabel": "Ellie" },
+                  { "id": "alia", "displayLabel": "Alia" },
+                  { "id": "ece", "displayLabel": "Ece" },
+                  { "id": "boss", "displayLabel": "the boss" }
+                ],
+                "leadersHaveProtocolAuthority": false,
+                "allegianceCooldownSeconds": 86400,
+                "allWritesRequireCurrentDailyLaw": true,
+                "rewardPriority": "AFTER_STANDARD_AND_X_BEFORE_CORE",
+                "debtLeapfrogOrPartialFundingPermitted": false
+              }
+            },
+            "ownerChoices": { "$ref": "#/$defs/factionChoices" },
+            "evidenceRequirements": {
+              "const": {
+                "external": ["AUTHENTICATED_SCORING_AND_FOLLOWER_DATA_PROVIDERS", "INDEPENDENT_SYBIL_AND_PRIZE_POLICY_REVIEW", "ACCOUNTABLE_COMMUNITY_CARVE_OUT_FUNDING_SOURCE"],
+                "engineering": ["NATIVE_FACTION_CODEC_AND_WRITE_HANDLERS", "SOLVENCY_CONSERVATION_TIE_REPLAY_AND_LOCKDOWN_REHEARSAL"]
+              }
+            }
+          }
+        },
+        "CONFIG_GENESIS_PHASE_CODEC": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dependencies", "frozenConstraints", "ownerChoices", "evidenceRequirements"],
+          "properties": {
+            "dependencies": { "const": ["CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING"] },
+            "frozenConstraints": {
+              "const": {
+                "phaseOrder": ["UNINITIALIZED", "GENESIS_STAGING", "ACTIVE"],
+                "stagingAllowedWrites": ["CREATE_CANONICAL_ACCOUNT", "FUND_CANONICAL_VAULT"],
+                "stagingForbiddenWrites": ["RELEASE", "REWARD", "FACTION", "POSITION", "ELIGIBILITY", "RESERVATION", "WITHDRAWAL", "CLAIM"],
+                "publicEconomicWritesBeforeActivationPermitted": false,
+                "activationTransition": "ONE_WAY_ATOMIC_AND_DISABLING_STAGING_WRITES"
+              }
+            },
+            "ownerChoices": { "$ref": "#/$defs/configChoices" },
+            "evidenceRequirements": {
+              "const": {
+                "external": ["INDEPENDENT_BOOTSTRAP_AND_ACTIVATION_POLICY_ACCEPTANCE"],
+                "engineering": ["CONFIG_AND_GENESIS_PHASE_CODEC_BYTES", "PREACTIVATION_REJECTION_REENTRY_ROLLBACK_AND_ATOMIC_ACTIVATION_TESTS"]
+              }
+            }
+          }
+        },
+        "GENESIS_ALLOCATIONS_CONSERVATION": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dependencies", "frozenConstraints", "ownerChoices", "evidenceRequirements"],
+          "properties": {
+            "dependencies": { "const": ["CONFIG_GENESIS_PHASE_CODEC"] },
+            "frozenConstraints": {
+              "const": {
+                "fixedSupplyBaseUnits": "1000000000000000000",
+                "allocations": [
+                  { "lane": "community", "totalBaseUnits": "500000000000000000", "genesisUnlockedBaseUnits": "500000000000000000", "cliffWeek": 0, "linearEndWeek": 0 },
+                  { "lane": "treasury", "totalBaseUnits": "200000000000000000", "genesisUnlockedBaseUnits": "50000000000000000", "cliffWeek": 52, "linearEndWeek": 208 },
+                  { "lane": "ecosystem", "totalBaseUnits": "150000000000000000", "genesisUnlockedBaseUnits": "37500000000000000", "cliffWeek": 26, "linearEndWeek": 104 },
+                  { "lane": "core", "totalBaseUnits": "100000000000000000", "genesisUnlockedBaseUnits": "0", "cliffWeek": 26, "linearEndWeek": 104 },
+                  { "lane": "liquidity", "totalBaseUnits": "50000000000000000", "genesisUnlockedBaseUnits": "12500000000000000", "cliffWeek": 26, "linearEndWeek": 104 }
+                ],
+                "rewardLaneOrder": ["treasury", "ecosystem", "liquidity"]
+              }
+            },
+            "ownerChoices": { "$ref": "#/$defs/genesisChoices" },
+            "evidenceRequirements": {
+              "const": {
+                "external": ["BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATIONS", "INDEPENDENT_GENESIS_MANIFEST_ACCEPTANCE"],
+                "engineering": ["EXACT_ALLOCATION_AND_VESTING_VECTORS", "GENESIS_CONSERVATION_AND_CANONICAL_DESTINATION_PROOF"]
+              }
+            }
+          }
+        },
+        "PRODUCTION_IDENTITY_INPUT_FREEZE": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dependencies", "frozenConstraints", "ownerChoices", "evidenceRequirements"],
+          "properties": {
+            "dependencies": { "const": ["GENESIS_ALLOCATIONS_CONSERVATION"] },
+            "frozenConstraints": {
+              "const": {
+                "lawDomainSeparator": "IAT_B3_SOLANA_DAILY_LAW_V1",
+                "canonicalClusterScope": "MAINNET_BETA_ONLY",
+                "seedRoles": ["lawState", "extraAccountMetas", "economyConfig", "vaultAuthority", "laneState", "laneToken", "stakeToken", "stakeIngress", "coreReward", "agency", "agencyOwnerIndex", "eligibility", "position", "round", "factionConfig", "factionAllegiance", "factionWeek", "factionScore", "factionRewardVault", "factionRewardManifest", "factionFollowerSnapshot", "factionClaim"],
+                "tokenProgramId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+                "decimals": 9,
+                "fixedSupplyBaseUnits": "1000000000000000000",
+                "extensionsOrdered": ["ConfidentialTransferMint", "TransferHook"],
+                "additionalExtensionsPermitted": false,
+                "terminalMintFreezeHookAndConfidentialAuthoritiesNull": true,
+                "auditorPermanentDelegateAndMintCloseAbsent": true
+              }
+            },
+            "ownerChoices": { "$ref": "#/$defs/identityChoices" },
+            "evidenceRequirements": {
+              "const": {
+                "external": ["INDEPENDENT_MAINNET_GENESIS_HASH_OBSERVATIONS", "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE"],
+                "engineering": ["REVIEWED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS", "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE"]
+              }
+            }
+          }
+        },
+        "B3_COST_CEREMONY_FUNDING": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dependencies", "frozenConstraints", "ownerChoices", "evidenceRequirements"],
+          "properties": {
+            "dependencies": { "const": ["PRODUCTION_IDENTITY_INPUT_FREEZE"] },
+            "frozenConstraints": {
+              "const": {
+                "aggregateFreshPayerPeakCeilingLamports": "3000000000",
+                "featureCutsPermittedToMeetCeiling": false,
+                "costCategories": ["PROGRAM_DEPLOYMENT", "PROGRAM_DATA_RENT", "MINT_AND_EXTENSION_STATE", "GENESIS_ACCOUNTS", "TRANSACTION_FEES"]
+              }
+            },
+            "ownerChoices": { "$ref": "#/$defs/costChoices" },
+            "evidenceRequirements": {
+              "const": {
+                "external": ["ACCOUNTABLE_NON_SECRET_FUNDING_SOURCE_APPROVAL", "INDEPENDENT_PAYER_BALANCE_OBSERVATION"],
+                "engineering": ["EXACT_FRESH_PAYER_COST_MEASUREMENT", "FEE_RENT_BUFFER_AND_RECOVERY_RECONCILIATION"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "ownerAcceptance": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["decisionArtifactSha256", "signerPublicKey", "detachedSignatureBase64", "signedAtUtc"],
+          "properties": {
+            "decisionArtifactSha256": { "$ref": "#/$defs/sha256" },
+            "signerPublicKey": { "$ref": "#/$defs/publicKey" },
+            "detachedSignatureBase64": { "type": "string", "pattern": "^[A-Za-z0-9+/]{86}==$" },
+            "signedAtUtc": { "type": "string", "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]Z$" }
+          }
+        }
+      ]
+    },
+    "evidenceBoundary": {
+      "const": {
+        "acceptsExternalEvidence": false,
+        "acceptsEngineeringEvidence": false,
+        "selfAttestationIsExternalProof": false,
+        "evidenceVerificationOutOfScope": true
+      }
+    },
+    "assurance": {
+      "const": {
+        "chainTruthVerified": false,
+        "binaryEvidenceVerified": false,
+        "genesisConservationVerified": false,
+        "ceremonyFundingVerified": false,
+        "ownerAcceptanceVerified": false,
+        "devnetAuthorized": false,
+        "devnetRehearsalComplete": false,
+        "activationReady": false,
+        "releaseAuthorized": false,
+        "mainnetExecutionAuthorized": false,
+        "mainnetStatus": "HOLD"
+      }
+    }
+  },
+  "$defs": {
+    "publicKey": {
+      "type": "string",
+      "minLength": 32,
+      "maxLength": 44,
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]+$"
+    },
+    "publicKeyOrNull": {
+      "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/publicKey" }]
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sha256OrNull": {
+      "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/sha256" }]
+    },
+    "positiveDecimalOrNull": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[1-9][0-9]*$" }
+      ]
+    },
+    "liveChoices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["liveEstateAssertion", "candidateMint", "candidateTokenProgramId", "canonicalMintDecision", "duplicateSupplyRetirementPolicy"],
+      "properties": {
+        "liveEstateAssertion": { "enum": [null, "NO_LIVE_ESTATE_MINT", "LIVE_ESTATE_MINT_IDENTIFIED"] },
+        "candidateMint": { "$ref": "#/$defs/publicKeyOrNull" },
+        "candidateTokenProgramId": { "enum": [null, "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA", "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"] },
+        "canonicalMintDecision": { "enum": [null, "NEW_TOKEN_2022_FROM_INCEPTION", "MIGRATE_ORIGINAL_SPL_TO_TOKEN_2022", "ADOPT_EXISTING_COMPATIBLE_TOKEN_2022", "REPLACE_LIVE_MINT_WITH_NEW_TOKEN_2022"] },
+        "duplicateSupplyRetirementPolicy": { "enum": [null, "NOT_APPLICABLE", "SUPPLY_RECONCILED_SOURCE_NONCANONICAL"] }
+      }
+    },
+    "coreChoices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["acceptFrozenScope", "releasePolicy"],
+      "properties": {
+        "acceptFrozenScope": { "enum": [null, true] },
+        "releasePolicy": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["authorizationModel", "fixedBeneficiary", "currentOpenDailyLawRequired", "sameDayReconciliationRequired", "ordinaryWalletEndsAttribution", "discretionaryBypassPermitted"],
+              "properties": {
+                "authorizationModel": { "const": "PROGRAM_ENFORCED_V2_SCHEDULE_TO_FIXED_BENEFICIARY" },
+                "fixedBeneficiary": { "$ref": "#/$defs/publicKey" },
+                "currentOpenDailyLawRequired": { "const": true },
+                "sameDayReconciliationRequired": { "const": true },
+                "ordinaryWalletEndsAttribution": { "const": true },
+                "discretionaryBypassPermitted": { "const": false }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "factionChoices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scoringPolicySha256", "sybilPolicy", "weeklyEpochAnchorUnixSeconds", "tieRule", "communityCarveOutBaseUnits", "weeklyEmissionBaseUnits", "fundingHorizonWeeks", "unusedBalanceDestination", "followerSnapshotPolicySha256", "prizePolicySha256", "nftPrizePolicy", "claimExpirySeconds"],
+      "properties": {
+        "scoringPolicySha256": { "$ref": "#/$defs/sha256OrNull" },
+        "sybilPolicy": { "enum": [null, "PRESERVED_WALLET_AND_IMMUTABLE_X_BINDING", "AUDITED_ONCHAIN_IDENTITY_COMMITMENT"] },
+        "weeklyEpochAnchorUnixSeconds": { "type": ["integer", "null"], "minimum": 0 },
+        "tieRule": { "enum": [null, "ONE_ROLL_NO_REROLL_EXACT_UNIFORM"] },
+        "communityCarveOutBaseUnits": { "$ref": "#/$defs/positiveDecimalOrNull" },
+        "weeklyEmissionBaseUnits": { "$ref": "#/$defs/positiveDecimalOrNull" },
+        "fundingHorizonWeeks": { "type": ["integer", "null"], "minimum": 1 },
+        "unusedBalanceDestination": { "$ref": "#/$defs/publicKeyOrNull" },
+        "followerSnapshotPolicySha256": { "$ref": "#/$defs/sha256OrNull" },
+        "prizePolicySha256": { "$ref": "#/$defs/sha256OrNull" },
+        "nftPrizePolicy": { "enum": [null, "NFT_PRIZES_DISABLED", "NFT_PRIZES_DEFINED_IN_PRIZE_POLICY"] },
+        "claimExpirySeconds": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "configChoices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["acceptExactBootstrapPolicy", "canonicalAccountSetSha256", "bootstrapReplayPolicy", "preActivationCoreCapPolicy"],
+      "properties": {
+        "acceptExactBootstrapPolicy": { "enum": [null, true] },
+        "canonicalAccountSetSha256": { "$ref": "#/$defs/sha256OrNull" },
+        "bootstrapReplayPolicy": { "enum": [null, "REJECT_REENTRY_AND_ROLLBACK"] },
+        "preActivationCoreCapPolicy": { "enum": [null, "VACUOUS_ONLY_UNTIL_ATOMIC_ACTIVATION"] }
+      }
+    },
+    "genesisChoices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["communityOwner", "treasuryBeneficiary", "ecosystemBeneficiary", "coreBeneficiary", "liquidityBeneficiary", "factionCarveOutBaseUnits", "coreDestinationPolicy", "programVaultDestinationPolicy"],
+      "properties": {
+        "communityOwner": { "$ref": "#/$defs/publicKeyOrNull" },
+        "treasuryBeneficiary": { "$ref": "#/$defs/publicKeyOrNull" },
+        "ecosystemBeneficiary": { "$ref": "#/$defs/publicKeyOrNull" },
+        "coreBeneficiary": { "$ref": "#/$defs/publicKeyOrNull" },
+        "liquidityBeneficiary": { "$ref": "#/$defs/publicKeyOrNull" },
+        "factionCarveOutBaseUnits": { "$ref": "#/$defs/positiveDecimalOrNull" },
+        "coreDestinationPolicy": { "enum": [null, "CANONICAL_CORE_CUSTODY"] },
+        "programVaultDestinationPolicy": { "enum": [null, "DERIVE_FROM_FROZEN_ECONOMY_ID_AND_MINT"] }
+      }
+    },
+    "identityChoices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lawProgramId", "economyProgramId", "canonicalMint", "clusterIdentityPolicy", "entropyLagSlots", "metadataPolicy", "acceptCanonicalSeedTable"],
+      "properties": {
+        "lawProgramId": { "$ref": "#/$defs/publicKeyOrNull" },
+        "economyProgramId": { "$ref": "#/$defs/publicKeyOrNull" },
+        "canonicalMint": { "$ref": "#/$defs/publicKeyOrNull" },
+        "clusterIdentityPolicy": { "enum": [null, "SAME_LAW_ECONOMY_AND_MINT_IDS_ACROSS_CLUSTERS", "SAME_PROGRAM_IDS_DISTINCT_MINT_PER_CLUSTER", "DISTINCT_PROGRAM_AND_MINT_IDS_PER_CLUSTER"] },
+        "entropyLagSlots": { "type": ["integer", "null"], "minimum": 1, "maximum": 512 },
+        "metadataPolicy": { "enum": [null, "NO_MINT_METADATA_EXTENSION_IMMUTABLE_EXTERNAL_RECORD"] },
+        "acceptCanonicalSeedTable": { "enum": [null, true] }
+      }
+    },
+    "costChoices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["payerPublicKey", "fundingSourcePolicySha256", "ceremonyFloorLamports", "overCeilingDisposition"],
+      "properties": {
+        "payerPublicKey": { "$ref": "#/$defs/publicKeyOrNull" },
+        "fundingSourcePolicySha256": { "$ref": "#/$defs/sha256OrNull" },
+        "ceremonyFloorLamports": { "$ref": "#/$defs/positiveDecimalOrNull" },
+        "overCeilingDisposition": { "enum": [null, "REQUIRE_NEW_EXACT_OWNER_CEILING_NEVER_CUT_FEATURES"] }
+      }
+    }
+  }
+}
