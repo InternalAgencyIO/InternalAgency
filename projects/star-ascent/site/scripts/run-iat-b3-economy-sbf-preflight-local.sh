@@ -94,6 +94,7 @@ for account in payer readonly-signer writable-dummy readonly-dummy; do
 done
 
 "$node_bin" "$(to_node_path "$script_dir/iat-b3-economy-sbf-preflight-driver.mjs")" \
+  --network local \
   --rpc "$rpc_url" \
   --program "$program_id" \
   --payer "$(to_node_path "$temp_dir/payer.json")" \

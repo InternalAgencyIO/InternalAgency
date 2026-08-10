@@ -651,6 +651,10 @@ loopback validator rehearsal finalized one signed transaction for each of the
 fifteen shapes and rejected a readonly-signer downgrade with custom error 3.
 The 21,120-byte rehearsal artifact has SHA-256
 `3bdffb2bcd9ee919e012d71522c8667883efea196ce5b58a2aef354b720a1588`.
+An explicit-`--execute` Devnet runner is wired but has not executed. It pins
+only `https://api.devnet.solana.com`, the canonical Devnet Genesis hash, the
+exact artifact, and the reviewed file-backed payer; requires an immutable
+deployment; and removes its disposable funded accounts and key files.
 This proves loader/entrypoint/meta-shape compatibility only. Account identities,
 owners, data, Daily Law, Config phase, mutation order, CPI, rollback, production
 ABI, public Devnet deployment, every handler, and every release gate remain

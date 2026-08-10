@@ -12,6 +12,12 @@ import {
 const SCHEMA = "iat-b3-economy-sbf-structural-preflight/v1";
 const NAMESPACE = Buffer.from("IATB3PF1", "ascii");
 const RPC_LOOPBACK = /^http:\/\/(?:127\.0\.0\.1|localhost):[0-9]+$/u;
+const DEVNET_RPC = "https://api.devnet.solana.com";
+const DEVNET_GENESIS = "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG";
+const DEVNET_PAYER = "DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4";
+const UPGRADEABLE_LOADER = new PublicKey("BPFLoaderUpgradeab1e11111111111111111111111");
+const ARTIFACT_BYTES = 21_120;
+const ARTIFACT_SHA256 = "3bdffb2bcd9ee919e012d71522c8667883efea196ce5b58a2aef354b720a1588";
 
 const operations = Object.freeze([
   ["initialize_config", [[1, 1, 0], [0, 0, 0], [0, 1, 0], [0, 0, 0], [0, 0, 1], [0, 0, 1]]],
@@ -43,7 +49,7 @@ function args() {
     if (!flag?.startsWith("--") || value === undefined) fail("invalid arguments");
     values.set(flag.slice(2), value);
   }
-  for (const required of ["rpc", "program", "payer", "readonly-signer", "writable-dummy", "readonly-dummy", "artifact"]) {
+  for (const required of ["network", "rpc", "program", "payer", "readonly-signer", "writable-dummy", "readonly-dummy", "artifact"]) {
     if (!values.has(required)) fail(`missing --${required}`);
   }
   return Object.fromEntries(values);
@@ -131,10 +137,10 @@ async function finalizedTransaction(connection, signature, lastValidBlockHeight)
         commitment: "finalized",
         maxSupportedTransactionVersion: 0,
       });
-      if (!transaction || transaction.meta?.err !== null) {
+      if (transaction?.meta?.err) {
         fail(`transaction ${signature} lacks exact finalized success evidence`);
       }
-      return transaction;
+      if (transaction) return transaction;
     }
     const blockHeight = await connection.getBlockHeight("processed");
     if (!status && blockHeight > lastValidBlockHeight) {
@@ -145,8 +151,48 @@ async function finalizedTransaction(connection, signature, lastValidBlockHeight)
   fail(`transaction ${signature} did not finalize within 60 seconds`);
 }
 
+async function frozenDeployment(connection, programId, artifact) {
+  const programInfo = await connection.getAccountInfo(programId, "finalized");
+  if (!programInfo?.executable || !programInfo.owner.equals(UPGRADEABLE_LOADER)) {
+    fail("Devnet program is absent, non-executable, or owned by the wrong loader");
+  }
+  const programState = Buffer.from(programInfo.data);
+  if (programState.length !== 36 || programState.readUInt32LE(0) !== 2) {
+    fail("Devnet Program account has the wrong upgradeable-loader shape");
+  }
+  const programDataAddress = new PublicKey(programState.subarray(4, 36));
+  const programDataInfo = await connection.getAccountInfo(programDataAddress, "finalized");
+  if (!programDataInfo?.owner.equals(UPGRADEABLE_LOADER)) {
+    fail("Devnet ProgramData account is absent or owned by the wrong loader");
+  }
+  const programData = Buffer.from(programDataInfo.data);
+  if (programData.length < 45 + artifact.length
+      || programData.readUInt32LE(0) !== 3
+      || programData[12] !== 0) {
+    fail("Devnet ProgramData is malformed or retains an upgrade authority");
+  }
+  const deployedArtifact = programData.subarray(45, 45 + artifact.length);
+  if (!deployedArtifact.equals(artifact)
+      || !programData.subarray(45 + artifact.length).every((byte) => byte === 0)) {
+    fail("Devnet ProgramData bytes differ from the reviewed artifact");
+  }
+  return Object.freeze({
+    programData: programDataAddress.toBase58(),
+    upgradeAuthority: null,
+    deployedArtifactBytes: deployedArtifact.length,
+    deployedArtifactSha256: createHash("sha256").update(deployedArtifact).digest("hex"),
+    loaderPaddingBytes: programData.length - 45 - artifact.length,
+  });
+}
+
 const input = args();
-if (!RPC_LOOPBACK.test(input.rpc)) fail("driver is loopback-only");
+if (input.network === "local") {
+  if (!RPC_LOOPBACK.test(input.rpc)) fail("local mode requires a loopback RPC");
+} else if (input.network === "devnet") {
+  if (input.rpc !== DEVNET_RPC) fail("Devnet mode requires the exact canonical RPC endpoint");
+} else {
+  fail("network must be exactly local or devnet");
+}
 if (operations.length !== 15) fail("operation inventory must contain exactly 15 entries");
 const context = {
   program: new PublicKey(input.program),
@@ -157,7 +203,19 @@ const context = {
 };
 const artifact = readFileSync(input.artifact);
 const artifactSha256 = createHash("sha256").update(artifact).digest("hex");
+if (artifact.length !== ARTIFACT_BYTES || artifactSha256 !== ARTIFACT_SHA256) {
+  fail("artifact bytes or SHA-256 differ from the reviewed structural preflight");
+}
 const connection = new Connection(input.rpc, "finalized");
+const genesisHash = await connection.getGenesisHash();
+let deployment = null;
+if (input.network === "devnet") {
+  if (genesisHash !== DEVNET_GENESIS) fail("canonical Devnet Genesis hash mismatch");
+  if (!context.payer.publicKey.equals(new PublicKey(DEVNET_PAYER))) {
+    fail("Devnet mode requires the exact reviewed file-backed payer");
+  }
+  deployment = await frozenDeployment(connection, context.program, artifact);
+}
 const signatures = [];
 
 for (let operationIndex = 0; operationIndex < operations.length; operationIndex += 1) {
@@ -202,10 +260,12 @@ if (hostileError !== 3) fail("hostile signer drift did not fail with SignerMisma
 console.log(JSON.stringify({
   schema: SCHEMA,
   status: "PASS",
-  mode: "loopback-local-validator",
-  publicNetworkWrites: false,
+  mode: input.network === "devnet" ? "canonical-devnet" : "loopback-local-validator",
+  publicNetworkWrites: input.network === "devnet",
+  genesisHash,
   programId: context.program.toBase58(),
   artifact: { bytes: artifact.length, sha256: artifactSha256 },
+  deployment,
   operationCount: signatures.length,
   signatures,
   hostileSignerDrift: {

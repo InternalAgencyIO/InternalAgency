@@ -53,6 +53,10 @@ const economySbfPreflightRunnerSource = readFileSync(
   new URL("scripts/run-iat-b3-economy-sbf-preflight-local.sh", siteRoot),
   "utf8",
 );
+const economySbfPreflightDevnetRunnerSource = readFileSync(
+  new URL("scripts/run-iat-b3-economy-sbf-preflight-devnet.sh", siteRoot),
+  "utf8",
+);
 const lawSource = readFileSync(
   new URL("programs/iat_b3_law/src/lib.rs", siteRoot),
   "utf8",
@@ -230,6 +234,12 @@ test("the all-15 SBF surface is an exact structural preflight and never an econo
     localValidatorHostileSignerDriftRejected: true,
     artifactBytes: 21120,
     artifactSha256: "3bdffb2bcd9ee919e012d71522c8667883efea196ce5b58a2aef354b720a1588",
+    publicDevnetDriverWired: true,
+    devnetRpc: "https://api.devnet.solana.com",
+    devnetGenesisHash: "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+    devnetPayer: "DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4",
+    immutableDeploymentRequired: true,
+    temporaryAccountCleanupRequired: true,
     publicDevnetExecuted: false,
     publicEconomicWriteExposure: false,
     anyHandlerComplete: false,
@@ -258,10 +268,18 @@ test("the all-15 SBF surface is an exact structural preflight and never an econo
     /try_borrow_(?:mut_)?data|try_borrow_mut_lamports|invoke(?:_signed)?\s*\(|RpcClient|send_and_confirm/u,
   );
   assert.match(economySbfPreflightDriverSource, /const RPC_LOOPBACK =/u);
+  assert.match(economySbfPreflightDriverSource, /const DEVNET_RPC = "https:\/\/api\.devnet\.solana\.com";/u);
+  assert.match(economySbfPreflightDriverSource, /canonical Devnet Genesis hash mismatch/u);
+  assert.match(economySbfPreflightDriverSource, /programData\[12\] !== 0/u);
   assert.match(economySbfPreflightDriverSource, /operationCount: signatures\.length/u);
   assert.match(economySbfPreflightDriverSource, /writesExecutedByEconomyProgram: false/u);
   assert.match(economySbfPreflightRunnerSource, /solana-test-validator/u);
   assert.doesNotMatch(economySbfPreflightRunnerSource, /api\.devnet|api\.mainnet|api\.testnet/u);
+  assert.match(economySbfPreflightDevnetRunnerSource, /\[\[ "\$\{1:-\}" == "--execute" && \$# -eq 1 \]\]/u);
+  assert.match(economySbfPreflightDevnetRunnerSource, /solana program deploy "\$artifact"[\s\S]+--final/u);
+  assert.match(economySbfPreflightDevnetRunnerSource, /--network devnet/u);
+  assert.match(economySbfPreflightDevnetRunnerSource, /temporaryAccountsRemoved":true/u);
+  assert.doesNotMatch(economySbfPreflightDevnetRunnerSource, /mainnet-beta|api\.mainnet|api\.testnet/u);
 });
 
 test("the native state adapter remains an explicit nonactivating truth surface", () => {
