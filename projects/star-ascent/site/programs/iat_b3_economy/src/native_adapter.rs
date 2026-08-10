@@ -529,6 +529,130 @@ pub fn derive_pda(
     })
 }
 
+/// Reconstruct the exact canonical signer seeds for one already-validated PDA.
+///
+/// This helper is crate-private so runtime adapters can never accept arbitrary
+/// caller-provided signer seeds. The bump is sealed into the write intent and
+/// is rechecked against [`derive_pda`] before any CPI is attempted.
+#[cfg(feature = "runtime-account-lifecycle")]
+pub(crate) fn with_pda_signer_seeds<T>(
+    identity: PdaIdentity,
+    bump: u8,
+    operation: impl FnOnce(&[&[u8]]) -> T,
+) -> T {
+    let bump_seed = [bump];
+    match identity {
+        PdaIdentity::Config { mint } => operation(&[CONFIG_SEED, &mint, &bump_seed]),
+        PdaIdentity::VaultAuthority { config } => {
+            operation(&[VAULT_AUTHORITY_SEED, &config, &bump_seed])
+        }
+        PdaIdentity::LaneState { config, lane } => {
+            let lane_seed = [lane];
+            operation(&[LANE_STATE_SEED, &config, &lane_seed, &bump_seed])
+        }
+        PdaIdentity::LaneToken { config, lane } => {
+            let lane_seed = [lane];
+            operation(&[LANE_TOKEN_SEED, &config, &lane_seed, &bump_seed])
+        }
+        PdaIdentity::StakeToken { config } => operation(&[STAKE_TOKEN_SEED, &config, &bump_seed]),
+        PdaIdentity::StakeIngress { config } => {
+            operation(&[STAKE_INGRESS_SEED, &config, &bump_seed])
+        }
+        PdaIdentity::CoreReward { config } => operation(&[CORE_REWARD_SEED, &config, &bump_seed]),
+        PdaIdentity::Agency { config, index } => {
+            let index_seed = index.to_le_bytes();
+            operation(&[AGENCY_SEED, &config, &index_seed, &bump_seed])
+        }
+        PdaIdentity::AgencyOwnerIndex { config, owner } => {
+            operation(&[AGENCY_OWNER_INDEX_SEED, &config, &owner, &bump_seed])
+        }
+        PdaIdentity::Eligibility { config, operator } => {
+            operation(&[ELIGIBILITY_SEED, &config, &operator, &bump_seed])
+        }
+        PdaIdentity::Position {
+            config,
+            operator,
+            position_id,
+        } => {
+            let position_seed = position_id.to_le_bytes();
+            operation(&[
+                POSITION_SEED,
+                &config,
+                &operator,
+                &position_seed,
+                &bump_seed,
+            ])
+        }
+        PdaIdentity::Round { config, week } => {
+            let week_seed = week.to_le_bytes();
+            operation(&[ROUND_SEED, &config, &week_seed, &bump_seed])
+        }
+        PdaIdentity::FactionConfig { config } => {
+            operation(&[FACTION_CONFIG_SEED, &config, &bump_seed])
+        }
+        PdaIdentity::FactionAllegiance {
+            faction_config,
+            operator,
+        } => operation(&[
+            FACTION_ALLEGIANCE_SEED,
+            &faction_config.key,
+            &operator,
+            &bump_seed,
+        ]),
+        PdaIdentity::FactionWeek {
+            faction_config,
+            week,
+        } => {
+            let week_seed = week.to_le_bytes();
+            operation(&[
+                FACTION_WEEK_SEED,
+                &faction_config.key,
+                &week_seed,
+                &bump_seed,
+            ])
+        }
+        PdaIdentity::FactionScore {
+            faction_week,
+            faction_id,
+        } => {
+            let faction_seed = [faction_id];
+            operation(&[
+                FACTION_SCORE_SEED,
+                &faction_week.key,
+                &faction_seed,
+                &bump_seed,
+            ])
+        }
+        PdaIdentity::FactionRewardVault { faction_config } => {
+            operation(&[FACTION_REWARD_VAULT_SEED, &faction_config.key, &bump_seed])
+        }
+        PdaIdentity::FactionRewardManifest { faction_week } => {
+            operation(&[FACTION_REWARD_MANIFEST_SEED, &faction_week.key, &bump_seed])
+        }
+        PdaIdentity::FactionFollowerSnapshot {
+            faction_week,
+            faction_id,
+        } => {
+            let faction_seed = [faction_id];
+            operation(&[
+                FACTION_FOLLOWER_SNAPSHOT_SEED,
+                &faction_week.key,
+                &faction_seed,
+                &bump_seed,
+            ])
+        }
+        PdaIdentity::FactionClaim {
+            reward_manifest,
+            operator,
+        } => operation(&[
+            FACTION_CLAIM_SEED,
+            &reward_manifest.key,
+            &operator,
+            &bump_seed,
+        ]),
+    }
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct NativeAccountObservation<'a> {
     pub key: [u8; 32],
@@ -830,6 +954,18 @@ impl CreateStateAccountIntent {
         self.key
     }
 
+    pub const fn owner(&self) -> [u8; 32] {
+        self.owner
+    }
+
+    pub const fn identity(&self) -> PdaIdentity {
+        self.identity
+    }
+
+    pub const fn bump(&self) -> u8 {
+        self.bump
+    }
+
     pub const fn lifecycle(&self) -> CreatePdaLifecycle {
         self.lifecycle
     }
@@ -856,6 +992,10 @@ impl CreateStateAccountIntent {
 
     pub fn postimage(&self) -> &[u8] {
         &self.postimage[..self.data_len()]
+    }
+
+    pub const fn postimage_sha256(&self) -> [u8; 32] {
+        self.postimage_sha256
     }
 
     pub const fn invoke_signed_required(&self) -> bool {

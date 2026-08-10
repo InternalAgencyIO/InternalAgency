@@ -37,6 +37,10 @@ const economyRuntimeWriteAdapterSource = readFileSync(
   new URL("programs/iat_b3_economy/src/runtime_write_adapter.rs", siteRoot),
   "utf8",
 );
+const economyRuntimeAccountLifecycleSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/runtime_account_lifecycle.rs", siteRoot),
+  "utf8",
+);
 const economyRehearsalAdapterSource = readFileSync(
   new URL("programs/iat_b3_economy/src/rehearsal_adapter.rs", siteRoot),
   "utf8",
@@ -200,10 +204,9 @@ test("the default Rust kernel stays host-only while the sole SBF entrypoint is s
     ["spl-token-2022-interface"],
   );
   assert.doesNotMatch(economyManifest, /iat-b3-vault/u);
-  assert.doesNotMatch(
-    economyManifest,
-    /anchor-|solana-(?:cpi|system-interface)/u,
-  );
+  assert.doesNotMatch(economyManifest, /anchor-/u);
+  assert.match(economyManifest, /solana-cpi = \{ version = "=3\.1\.0", optional = true \}/u);
+  assert.match(economyManifest, /solana-system-interface = \{ version = "=2\.0\.0", features = \["bincode"\], optional = true \}/u);
   assert.doesNotMatch(
     economyPureKernelCode,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo|TcpStream|UdpSocket/u,
@@ -493,6 +496,66 @@ test("the runtime write adapter executes only authenticated existing-state CAS b
   assert.doesNotMatch(
     economyRuntimeWriteAdapterSource.replace(/\/\/.*$/gmu, "").replace(/\/\*[\s\S]*?\*\//gu, ""),
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|instruction_data|RpcClient|send_and_confirm/u,
+  );
+});
+
+test("the runtime account lifecycle executes only sealed canonical System CPI batches", () => {
+  assert.deepEqual(matrix.runtimeAccountLifecyclePreparation, {
+    stage: "FEATURE_GATED_SEALED_PDA_SYSTEM_CPI_NO_ABI_NO_DISPATCH_MAINNET_HOLD",
+    feature: "runtime-account-lifecycle",
+    complete: false,
+    dailyLawCapabilityRequired: true,
+    sealedCreateIntentsOnly: true,
+    allPreconditionsCheckedBeforeFirstCpi: true,
+    canonicalInternalPdaSignerSeedsOnly: true,
+    systemCreateAccount: true,
+    systemAllocateAssignFund: true,
+    sealedPostimageWrite: true,
+    transactionRollbackRequiredAfterCpi: true,
+    accountCreation: true,
+    lamportWrites: true,
+    systemCpi: true,
+    tokenCpi: false,
+    instructionAbiFrozen: false,
+    solanaEntrypoint: false,
+    publicDispatcher: false,
+    productionIdentityBindingFrozen: false,
+    anyHandlerComplete: false,
+    publicExposure: false,
+    devnetExecuted: false,
+    mainnetHold: true,
+  });
+  assert.match(economyManifest, /runtime-account-lifecycle = \[[\s\S]+"runtime-write-adapter"[\s\S]+"dep:solana-cpi"[\s\S]+"dep:solana-program-error"[\s\S]+"dep:solana-system-interface"[\s\S]+\]/u);
+  assert.match(
+    economySource,
+    /#\[cfg\(feature = "runtime-account-lifecycle"\)\]\s+pub mod runtime_account_lifecycle;/u,
+  );
+  assert.match(economyRuntimeAccountLifecycleSource, /pub fn execute_create_state_batch_account_infos/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /validate_atomic_write_preconditions/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /with_pda_signer_seeds/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /system_instruction::create_account/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /system_instruction::allocate/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /system_instruction::assign/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /system_instruction::transfer/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /invoke_signed\(/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /transaction_rollback_required_after_cpi: true/u);
+  for (const falseFlag of [
+    "token_cpi_supported",
+    "instruction_abi_frozen",
+    "entrypoint_exposed",
+    "dispatcher_exposed",
+    "any_handler_complete",
+  ]) {
+    assert.match(
+      economyRuntimeAccountLifecycleSource,
+      new RegExp(`${falseFlag}: false`, "u"),
+      falseFlag,
+    );
+  }
+  assert.match(economyRuntimeAccountLifecycleSource, /mainnet_hold: true/u);
+  assert.doesNotMatch(
+    economyRuntimeAccountLifecycleSource.replace(/\/\/.*$/gmu, "").replace(/\/\*[\s\S]*?\*\//gu, ""),
+    /entrypoint!|process_instruction|#\[program\]|instruction_data|RpcClient|send_and_confirm|spl_token/u,
   );
 });
 

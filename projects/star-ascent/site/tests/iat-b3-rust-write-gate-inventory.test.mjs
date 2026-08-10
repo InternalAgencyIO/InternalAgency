@@ -34,6 +34,10 @@ const economyRuntimeWriteAdapterSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/runtime_write_adapter.rs", import.meta.url),
   "utf8",
 );
+const economyRuntimeAccountLifecycleSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/runtime_account_lifecycle.rs", import.meta.url),
+  "utf8",
+);
 const economyConfigGenesisCodecSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/config_genesis_codec.rs", import.meta.url),
   "utf8",
@@ -161,6 +165,7 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
   assert.match(economyCargo, /solana-sdk-ids = "=3\.1\.0"/u);
   assert.match(economyCargo, /runtime-account-bridge = \[/u);
   assert.match(economyCargo, /runtime-write-adapter = \["runtime-account-bridge"\]/u);
+  assert.match(economyCargo, /runtime-account-lifecycle = \[[\s\S]+"runtime-write-adapter"[\s\S]+"dep:solana-cpi"[\s\S]+"dep:solana-program-error"[\s\S]+"dep:solana-system-interface"[\s\S]+\]/u);
   assert.match(economyCargo, /solana-account-info = \{[^}]+optional = true/u);
   assert.match(economyCargo, /solana-zk-sdk = \{ version = "=4\.0\.0", optional = true \}/u);
   assert.match(
@@ -174,10 +179,9 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
     ["spl-token-2022-interface"],
   );
   assert.doesNotMatch(economyCargo, /iat-b3-vault/u);
-  assert.doesNotMatch(
-    economyCargo,
-    /anchor-|solana-(?:cpi|system-interface)/u,
-  );
+  assert.doesNotMatch(economyCargo, /anchor-/u);
+  assert.match(economyCargo, /solana-cpi = \{ version = "=3\.1\.0", optional = true \}/u);
+  assert.match(economyCargo, /solana-system-interface = \{ version = "=2\.0\.0", features = \["bincode"\], optional = true \}/u);
   assert.match(economyCargo, /solana-program-entrypoint = \{ version = "=3\.1\.1", optional = true \}/u);
   assert.match(economyCargo, /solana-program-error = \{ version = "=3\.0\.1", optional = true \}/u);
   assert.doesNotMatch(
@@ -218,6 +222,18 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
   assert.match(economyRuntimeWriteAdapterSource, /dispatcher_exposed: false/u);
   assert.match(economyRuntimeWriteAdapterSource, /any_handler_complete: false/u);
   assert.match(economyRuntimeWriteAdapterSource, /mainnet_hold: true/u);
+  assert.match(economySource, /#\[cfg\(feature = "runtime-account-lifecycle"\)\]\s+pub mod runtime_account_lifecycle;/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /execute_create_state_batch_account_infos/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /all_preconditions_checked_before_first_cpi: true/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /canonical_internal_pda_signer_seeds_only: true/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /system_create_account_supported: true/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /system_allocate_assign_fund_supported: true/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /invoke_signed\(/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /token_cpi_supported: false/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /entrypoint_exposed: false/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /dispatcher_exposed: false/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /any_handler_complete: false/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /mainnet_hold: true/u);
   assert.match(economyRuntimeAdapterSource, /Clock::get\(\)/u);
   assert.match(economyRuntimeAdapterSource, /Rent::get\(\)/u);
   assert.match(

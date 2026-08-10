@@ -6,6 +6,8 @@ mod config_genesis_codec;
 pub mod native_adapter;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod rehearsal_adapter;
+#[cfg(feature = "runtime-account-lifecycle")]
+pub mod runtime_account_lifecycle;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod runtime_adapter;
 #[cfg(feature = "runtime-write-adapter")]

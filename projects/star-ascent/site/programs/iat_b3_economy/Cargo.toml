@@ -1,7 +1,7 @@
 [package]
 name = "iat-b3-economy"
 version = "0.1.0"
-description = "Pure transition kernel and feature-gated read-only SBF preflight for the retained IAT V2-to-B3 economic port"
+description = "Pure transition kernel and feature-gated runtime adapters for the retained IAT V2-to-B3 economic port"
 edition = "2021"
 license = "AGPL-3.0-or-later"
 publish = false
@@ -24,6 +24,12 @@ runtime-account-bridge = [
     "dep:spl-token-2022-interface",
 ]
 runtime-write-adapter = ["runtime-account-bridge"]
+runtime-account-lifecycle = [
+    "runtime-write-adapter",
+    "dep:solana-cpi",
+    "dep:solana-program-error",
+    "dep:solana-system-interface",
+]
 sbf-preflight-entrypoint = [
     "runtime-account-bridge",
     "dep:solana-program-entrypoint",
@@ -35,12 +41,14 @@ iat-b3-consensus = { path = "../iat_b3_consensus" }
 sha2 = { version = "=0.10.9", default-features = false }
 solana-account-info = { version = "=3.1.1", optional = true }
 solana-clock = { version = "=3.2.0", features = ["sysvar"], optional = true }
+solana-cpi = { version = "=3.1.0", optional = true }
 solana-pubkey = { version = "=3.0.0", features = ["curve25519"] }
 solana-program-entrypoint = { version = "=3.1.1", optional = true }
 solana-program-error = { version = "=3.0.1", optional = true }
 solana-rent = { version = "=3.1.0", features = ["sysvar"], optional = true }
 solana-sdk-ids = "=3.1.0"
 solana-sysvar = { version = "=3.1.1", optional = true }
+solana-system-interface = { version = "=2.0.0", features = ["bincode"], optional = true }
 solana-zk-sdk = { version = "=4.0.0", optional = true }
 spl-token-2022-interface = { version = "=2.1.0", optional = true }
 

@@ -625,6 +625,20 @@ a handler: account creation, lamport mutation, System CPI, Token-2022 CPI,
 instruction decoding, entrypoint, dispatcher, production identities, and
 public exposure remain absent. No handler is complete and Mainnet remains HOLD.
 
+The next internal primitive is isolated behind
+`runtime-account-lifecycle`. It accepts only sealed create-intent batches from
+the native adapter, validates every target and exact system-owned payer
+preimage before the first CPI, and reconstructs each canonical PDA signer seed
+inside the crate. For a zero-lamport target it performs the exact System
+Program `CreateAccount` path; for a prefunded System-owned PDA it performs
+`Allocate`, `Assign`, then only the missing rent funding. After CPI it requires
+the exact owner, lamports, zero-initialized length, and payer debit before
+copying the sealed codec postimage. Any later error depends on Solana's atomic
+transaction rollback. Arbitrary seeds, owners, instructions, Token-2022 CPI,
+instruction decoding, entrypoint, dispatcher, and public exposure remain
+absent. The primitive has not been executed on Devnet, completes no handler,
+does not freeze production identities, and keeps Mainnet HOLD.
+
 The same feature now contains a second, explicitly nonactivating rehearsal
 surface at
 `FEATURE_GATED_READ_ONLY_ALL_15_ACCOUNT_GRAPH_PREFLIGHT_NO_DISPATCH`. Its local
