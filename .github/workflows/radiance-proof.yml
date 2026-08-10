@@ -93,6 +93,9 @@ jobs:
             throw "Pinned FFprobe executable is missing after verified extraction: $ffprobe"
           }
           "RADIANCE_FFPROBE_PATH=$ffprobe" >> $env:GITHUB_ENV
+      - name: Test locked pinned media evidence
+        if: steps.video_manifest.outputs.present == 'true'
+        run: npm test
       - if: steps.video_manifest.outputs.present == 'true'
         run: npm run dist
       - uses: actions/upload-artifact@v4
