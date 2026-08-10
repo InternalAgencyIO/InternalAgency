@@ -34,6 +34,7 @@ import {
   buildMintRehearsalAllocationsTransaction,
   buildRevokeV2AuthorityTransaction,
   deriveDeterministicDevnetMint,
+  inspectReviewedUpgradeableProgramArtifact,
   parseUpgradeableProgramAccounts,
   parseUpgradeableProgramData,
   parseV2ConfigAccount,
@@ -224,15 +225,20 @@ async function verifyProgramDeployment() {
   if (!parsed.upgradeAuthority.equals(IAT_V2_PROGRAM_ADMIN)) {
     throw new Error(`Upgrade authority is ${parsed.upgradeAuthority.toBase58()}, not the reviewed Model T`);
   }
-  const artifactSha256 = await sha256Hex(parsed.programBytes);
-  if (artifactSha256 !== IAT_V2_PROGRAM_ARTIFACT_SHA256) {
+  const artifact = await inspectReviewedUpgradeableProgramArtifact({
+    programBytes: parsed.programBytes,
+    sha256Hex,
+  });
+  if (!artifact.matchesReviewedArtifact) {
     throw new Error("On-chain program bytes do not match the reviewed verifiable artifact");
   }
   return {
-    artifactSha256,
+    artifactSha256: artifact.artifactSha256,
     slot: parsed.slot,
     upgradeAuthority: parsed.upgradeAuthority,
-    programBytes: parsed.programBytes.length,
+    programBytes: artifact.artifactBytes,
+    loaderRegionBytes: artifact.loaderRegionBytes,
+    loaderZeroPaddingBytes: artifact.loaderPaddingBytes,
   };
 }
 
@@ -769,6 +775,8 @@ function App() {
       programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS,
       artifactSha256: snapshot.deployment.artifactSha256,
       programBytes: snapshot.deployment.programBytes,
+      programDataRegionBytes: snapshot.deployment.loaderRegionBytes,
+      loaderZeroPaddingBytes: snapshot.deployment.loaderZeroPaddingBytes,
       deploymentSlot: snapshot.deployment.slot,
       upgradeAuthority: snapshot.deployment.upgradeAuthority,
       expectedHardwareSigner: IAT_V2_PROGRAM_ADMIN,
