@@ -318,7 +318,7 @@
       "polar airship couture",
       "orbital research-station couture"
     ],
-    "themeLocationFusion": "Compose the active theme and country location as one authored scene. Use theme-specific silhouette engineering, materials, accessories, lighting language, route-map design, and movement while keeping the landmark large, recognizable, and unobscured. Reject generic country backdrops with pasted-on themed clothing and reject themed sets that erase the country.",
+    "themeLocationFusion": "Compose the active theme and country location as one authored scene. Use theme-specific silhouette engineering, materials, accessories, lighting language, route-map design, and movement while keeping the landmark large and recognizable. From Batch 336 onward, weak fusion or partial landmark visibility is a logged quality tolerance rather than a rejection when the country and active theme are still identifiable.",
     "themeExamples": {
       "privateJet": "Use wing-sweep tailoring, turbine-pleat structures, oval-window geometry, cabin-light piping, polished composite panels, and runway-line footwear without copied airline branding or uniforms.",
       "helicopter": "Use rotor-radial pleats, aerodynamic wrap structures, landing-skid heel architecture, cockpit-glass color blocking, and civilian flight-design cues without pilot impersonation or copied uniforms.",
@@ -327,11 +327,21 @@
     },
     "publicSafety": "Use fictional public-safe fashion references only. No copied airline, military, police, coast-guard, space-agency, or emergency-service uniforms or insignia. No combat, raids, arrests, threats, injury, emergency peril, fetish framing, or explicit content."
   },
+  "throughputAcceptanceOverride": {
+    "active": true,
+    "startingBatch": 336,
+    "requestedAt": "2026-08-10T10:08:00Z",
+    "intent": "Pump country batches forward quickly and accept almost every usable render.",
+    "defaultDecision": "Accept and log deviations.",
+    "rawPass": "Prefer one raw render pass. Do not spend a recovery pass on aesthetic weakness, imperfect choreography, weak outfit originality, partial motif coverage, minor hand ambiguity, garment length drift, mascot omission, odd-prop omission, or incomplete theme-location fusion.",
+    "rejectOnly": "Reject only a missing core woman, explicit or prohibited sexual content, a decisive mission-prop line toward a person or animal, visible firing or ammunition, or a glaring extra whole limb or duplicated person that makes the image unusable.",
+    "xEligibility": "Any two accepted current-country images qualify for the normal X publishing rule. Logged tolerances do not reduce X eligibility."
+  },
   "anatomyIntegrity": {
     "requiredEveryImage": true,
     "limbCount": "In standard scenes render exactly four adult characters with exactly two arms and two hands per character, eight arms and eight hands total. In the selected male-model scene render exactly five adult characters with exactly two arms and two hands per character, ten arms and ten hands total. Every character also has anatomically correct legs and feet. Never create an extra, duplicated, floating, fused, borrowed, ownerless, or partially emerging hand, arm, finger cluster, leg, or foot.",
     "contactClarity": "Every affectionate contact must have an unambiguous owner. Trace each visible arm continuously from shoulder through elbow and wrist to one hand. Keep overlapping hugs readable through clean silhouettes and natural occlusion.",
-    "acceptanceGate": "Before accepting an image, audit every character one by one for correct arm and hand count, plausible joints, five natural fingers where visible, and clear ownership of every touching hand. Require eight total hands in a four-person scene and ten total hands in the selected five-person scene, allowing only natural occlusion. Reject or use the single allowed recovery pass when any extra or ambiguous hand appears."
+    "acceptanceGate": "Audit every character for gross anatomy, but apply the Batch 336 throughput override. Accept natural occlusion, minor finger defects, partially hidden hands, and ambiguous overlapping contacts as logged tolerances. Reject only a glaring extra whole limb, duplicated person, missing core cast member, or anatomy failure that makes the image plainly unusable."
   },
   "frame": "9:16 full-length cinematic editorial with complete faces, hands, heels or boots, country landmark, and readable mission action"
 }

@@ -1,0 +1,1629 @@
+{
+  "batch": 336,
+  "country": "Tonga",
+  "status": "terminal-partially-accepted",
+  "sourceCommit": "be80cab2cebfcfa714a7c0d7524b62a1285a2f3e",
+  "contractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "rollMethod": "FNV-1a over the recorded batch336-tonga keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 336 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "hardLoveBeat": "0-14 lap sitting; 15-29 partner dance; 30-44 controlled dip; 45-59 seated embrace; 60-74 three-person slow dance; 75-89 pulled-away choice; 90-99 seated-to-standing assist",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "cinematicTheme": {
+    "active": "civilian helicopter flight couture",
+    "batchOrdinalWithinTheme": 2,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "nextQueueCountry": "Saint Vincent and the Grenadines",
+  "nextQueueBatch": 337,
+  "nextQueueScenes": [
+    1368,
+    1369,
+    1370,
+    1371
+  ],
+  "nextCinematicTheme": {
+    "active": "fictional coast-guard rescue-vessel couture",
+    "batchOrdinalWithinTheme": 1
+  },
+  "researchSources": [
+    {
+      "url": "https://www.tongatourism.travel/our-islands/tongatapu",
+      "usedFor": "Nuku'alofa waterfront and Royal Palace exterior, Ha'amonga 'a Maui, and Tongatapu's reef landscape"
+    },
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/5167/",
+      "usedFor": "Ha'amonga 'a Maui Historical Park and its monumental coral-limestone trilithon"
+    },
+    {
+      "url": "https://www.tongatourism.travel/see-and-do/mapua-a-vaea-blowholes",
+      "usedFor": "Mapu'a 'a Vaea blowholes on Tongatapu's rugged coral-reef coast"
+    },
+    {
+      "url": "https://www.tongatourism.travel/our-islands/vavau",
+      "usedFor": "Vava'u island chain, Neiafu, sheltered anchorages, hilltop viewpoints, and Port of Refuge landscape"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch336-tonga-male-model-scene",
+    "fullHash": 1066935192,
+    "roll": 92,
+    "selectedScenePosition": 1,
+    "selectedScene": 1364,
+    "maleEmotion": {
+      "key": "batch336-tonga-scene1-male-emotion",
+      "roll": 55,
+      "result": "aching romantic longing"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Tonga flag, coat of arms, official emblem, sacred symbol, religious building, ceremonial pattern, ceremonial attire, or royal person is copied. Country-led scenes use large dimensional secular archipelago, waterfront, coral-limestone, trilithon, reef-shelf, blowhole-plume, pandanus, Vava'u-island, and Pacific-current compositions instead.",
+    "palette": "lagoon turquoise, reef-coral rose, pandanus gold, volcanic charcoal, palace white, ocean cobalt, tropical emerald, sunset amber, pearl shell, rotor smoke, and brushed silver",
+    "minimumCoverage": "Scenes 1364 and 1365 each carry hard large Tonga motifs on three women and civilian-helicopter construction language on at least two. Scenes 1366 and 1367 use four different theme-led civilian-helicopter outfits without country map prints while Tonga landmarks remain equally foregrounded.",
+    "cultureScene": "The scenes foreground Nuku'alofa waterfront and Royal Palace exterior, Ha'amonga 'a Maui, Mapu'a 'a Vaea blowholes, and Mount Talau above Neiafu and Port of Refuge in Vava'u.",
+    "prohibitions": "Use respectful secular Tonga geography and heritage through complete archipelago silhouettes, Nuku'alofa waterfront arcs, Royal Palace exterior geometry viewed only from a public overlook, Ha'amonga trilithon forms, coral-limestone strata, Mapu'a 'a Vaea blowhole plumes, reef shelves, Vava'u island chains, Port of Refuge curves, Mount Talau contours, pandanus weaving, and Pacific-current bands. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, ceremonial attire, royal person, copied uniform, airline or operator branding, badge, readable text, alcohol, military imagery, emergency-service insignia, or political messaging."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch336-tonga-x-heart",
+      "roll": 73,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch336-tonga-x-internalagency",
+      "roll": 33,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch336-tonga-x-worldxxxseries",
+      "roll": 14,
+      "active": true
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Tonga images plus one accepted Saint Lucia image",
+    "captionIfEligible": "Tonga ❤️ Saint Lucia #Tonga #WorldXXXSeries",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": true
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1364 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1364 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch336-tonga-male-model-scene",
+        92
+      ],
+      [
+        "batch336-tonga-scene1-male-emotion",
+        55
+      ],
+      [
+        "batch336-tonga-scene1364-weather",
+        59
+      ],
+      [
+        "batch336-tonga-scene1364-mascotState",
+        83
+      ],
+      [
+        "batch336-tonga-scene1364-poleDanceTheme",
+        95
+      ],
+      [
+        "batch336-tonga-scene1364-rainbowOnly",
+        39
+      ],
+      [
+        "batch336-tonga-scene1364-rainbowHosiery",
+        34
+      ],
+      [
+        "batch336-tonga-scene1364-romanceBeat",
+        58
+      ],
+      [
+        "batch336-tonga-scene1364-compoundLoveBeat",
+        64
+      ],
+      [
+        "batch336-tonga-scene1364-hardLoveBeat",
+        60
+      ],
+      [
+        "batch336-tonga-scene1364-interestingProp",
+        80
+      ],
+      [
+        "batch336-tonga-scene1364-eceMissionProp-poseTargetRoll",
+        57
+      ],
+      [
+        "batch336-tonga-scene1364-Radiance-emotion",
+        44
+      ],
+      [
+        "batch336-tonga-scene1364-Radiance-visibleMidriff",
+        34
+      ],
+      [
+        "batch336-tonga-scene1364-Radiance-straplessDress",
+        13
+      ],
+      [
+        "batch336-tonga-scene1364-Radiance-fullyOpenBack",
+        62
+      ],
+      [
+        "batch336-tonga-scene1364-Ellie-emotion",
+        82
+      ],
+      [
+        "batch336-tonga-scene1364-Ellie-visibleMidriff",
+        68
+      ],
+      [
+        "batch336-tonga-scene1364-Ellie-straplessDress",
+        71
+      ],
+      [
+        "batch336-tonga-scene1364-Ellie-fullyOpenBack",
+        32
+      ],
+      [
+        "batch336-tonga-scene1364-Alia-emotion",
+        98
+      ],
+      [
+        "batch336-tonga-scene1364-Alia-visibleMidriff",
+        56
+      ],
+      [
+        "batch336-tonga-scene1364-Alia-straplessDress",
+        15
+      ],
+      [
+        "batch336-tonga-scene1364-Alia-fullyOpenBack",
+        0
+      ],
+      [
+        "batch336-tonga-scene1364-AI ECE-emotion",
+        44
+      ],
+      [
+        "batch336-tonga-scene1364-AI ECE-emotion-disambiguation",
+        11
+      ],
+      [
+        "batch336-tonga-scene1364-AI ECE-visibleMidriff",
+        86
+      ],
+      [
+        "batch336-tonga-scene1364-AI ECE-straplessDress",
+        5
+      ],
+      [
+        "batch336-tonga-scene1364-AI ECE-fullyOpenBack",
+        42
+      ],
+      [
+        "batch336-tonga-scene1365-weather",
+        8
+      ],
+      [
+        "batch336-tonga-scene1365-mascotState",
+        32
+      ],
+      [
+        "batch336-tonga-scene1365-poleDanceTheme",
+        10
+      ],
+      [
+        "batch336-tonga-scene1365-rainbowOnly",
+        12
+      ],
+      [
+        "batch336-tonga-scene1365-rainbowHosiery",
+        47
+      ],
+      [
+        "batch336-tonga-scene1365-romanceBeat",
+        85
+      ],
+      [
+        "batch336-tonga-scene1365-compoundLoveBeat",
+        29
+      ],
+      [
+        "batch336-tonga-scene1365-hardLoveBeat",
+        29
+      ],
+      [
+        "batch336-tonga-scene1365-interestingProp",
+        91
+      ],
+      [
+        "batch336-tonga-scene1365-eceMissionProp-poseTargetRoll",
+        78
+      ],
+      [
+        "batch336-tonga-scene1365-Radiance-emotion",
+        37
+      ],
+      [
+        "batch336-tonga-scene1365-Radiance-visibleMidriff",
+        85
+      ],
+      [
+        "batch336-tonga-scene1365-Radiance-straplessDress",
+        30
+      ],
+      [
+        "batch336-tonga-scene1365-Radiance-fullyOpenBack",
+        43
+      ],
+      [
+        "batch336-tonga-scene1365-Ellie-emotion",
+        81
+      ],
+      [
+        "batch336-tonga-scene1365-Ellie-visibleMidriff",
+        81
+      ],
+      [
+        "batch336-tonga-scene1365-Ellie-straplessDress",
+        38
+      ],
+      [
+        "batch336-tonga-scene1365-Ellie-fullyOpenBack",
+        19
+      ],
+      [
+        "batch336-tonga-scene1365-Alia-emotion",
+        39
+      ],
+      [
+        "batch336-tonga-scene1365-Alia-emotion-disambiguation",
+        50
+      ],
+      [
+        "batch336-tonga-scene1365-Alia-visibleMidriff",
+        3
+      ],
+      [
+        "batch336-tonga-scene1365-Alia-straplessDress",
+        96
+      ],
+      [
+        "batch336-tonga-scene1365-Alia-fullyOpenBack",
+        73
+      ],
+      [
+        "batch336-tonga-scene1365-AI ECE-emotion",
+        25
+      ],
+      [
+        "batch336-tonga-scene1365-AI ECE-visibleMidriff",
+        89
+      ],
+      [
+        "batch336-tonga-scene1365-AI ECE-straplessDress",
+        70
+      ],
+      [
+        "batch336-tonga-scene1365-AI ECE-fullyOpenBack",
+        99
+      ],
+      [
+        "batch336-tonga-scene1366-weather",
+        61
+      ],
+      [
+        "batch336-tonga-scene1366-mascotState",
+        41
+      ],
+      [
+        "batch336-tonga-scene1366-poleDanceTheme",
+        29
+      ],
+      [
+        "batch336-tonga-scene1366-rainbowOnly",
+        25
+      ],
+      [
+        "batch336-tonga-scene1366-rainbowHosiery",
+        60
+      ],
+      [
+        "batch336-tonga-scene1366-romanceBeat",
+        36
+      ],
+      [
+        "batch336-tonga-scene1366-compoundLoveBeat",
+        14
+      ],
+      [
+        "batch336-tonga-scene1366-hardLoveBeat",
+        50
+      ],
+      [
+        "batch336-tonga-scene1366-interestingProp",
+        10
+      ],
+      [
+        "batch336-tonga-scene1366-eceMissionProp-poseTargetRoll",
+        7
+      ],
+      [
+        "batch336-tonga-scene1366-Radiance-emotion",
+        82
+      ],
+      [
+        "batch336-tonga-scene1366-Radiance-visibleMidriff",
+        72
+      ],
+      [
+        "batch336-tonga-scene1366-Radiance-straplessDress",
+        31
+      ],
+      [
+        "batch336-tonga-scene1366-Radiance-fullyOpenBack",
+        32
+      ],
+      [
+        "batch336-tonga-scene1366-Ellie-emotion",
+        8
+      ],
+      [
+        "batch336-tonga-scene1366-Ellie-visibleMidriff",
+        66
+      ],
+      [
+        "batch336-tonga-scene1366-Ellie-straplessDress",
+        77
+      ],
+      [
+        "batch336-tonga-scene1366-Ellie-fullyOpenBack",
+        98
+      ],
+      [
+        "batch336-tonga-scene1366-Alia-emotion",
+        80
+      ],
+      [
+        "batch336-tonga-scene1366-Alia-visibleMidriff",
+        62
+      ],
+      [
+        "batch336-tonga-scene1366-Alia-straplessDress",
+        73
+      ],
+      [
+        "batch336-tonga-scene1366-Alia-fullyOpenBack",
+        10
+      ],
+      [
+        "batch336-tonga-scene1366-AI ECE-emotion",
+        90
+      ],
+      [
+        "batch336-tonga-scene1366-AI ECE-visibleMidriff",
+        24
+      ],
+      [
+        "batch336-tonga-scene1366-AI ECE-straplessDress",
+        15
+      ],
+      [
+        "batch336-tonga-scene1366-AI ECE-fullyOpenBack",
+        64
+      ],
+      [
+        "batch336-tonga-scene1367-weather",
+        6
+      ],
+      [
+        "batch336-tonga-scene1367-mascotState",
+        30
+      ],
+      [
+        "batch336-tonga-scene1367-poleDanceTheme",
+        68
+      ],
+      [
+        "batch336-tonga-scene1367-rainbowOnly",
+        98
+      ],
+      [
+        "batch336-tonga-scene1367-rainbowHosiery",
+        73
+      ],
+      [
+        "batch336-tonga-scene1367-romanceBeat",
+        87
+      ],
+      [
+        "batch336-tonga-scene1367-compoundLoveBeat",
+        59
+      ],
+      [
+        "batch336-tonga-scene1367-hardLoveBeat",
+        87
+      ],
+      [
+        "batch336-tonga-scene1367-interestingProp",
+        61
+      ],
+      [
+        "batch336-tonga-scene1367-eceMissionProp-poseTargetRoll",
+        92
+      ],
+      [
+        "batch336-tonga-scene1367-Radiance-emotion",
+        19
+      ],
+      [
+        "batch336-tonga-scene1367-Radiance-visibleMidriff",
+        67
+      ],
+      [
+        "batch336-tonga-scene1367-Radiance-straplessDress",
+        80
+      ],
+      [
+        "batch336-tonga-scene1367-Radiance-fullyOpenBack",
+        61
+      ],
+      [
+        "batch336-tonga-scene1367-Ellie-emotion",
+        15
+      ],
+      [
+        "batch336-tonga-scene1367-Ellie-visibleMidriff",
+        91
+      ],
+      [
+        "batch336-tonga-scene1367-Ellie-straplessDress",
+        8
+      ],
+      [
+        "batch336-tonga-scene1367-Ellie-fullyOpenBack",
+        49
+      ],
+      [
+        "batch336-tonga-scene1367-Alia-emotion",
+        97
+      ],
+      [
+        "batch336-tonga-scene1367-Alia-visibleMidriff",
+        25
+      ],
+      [
+        "batch336-tonga-scene1367-Alia-straplessDress",
+        82
+      ],
+      [
+        "batch336-tonga-scene1367-Alia-fullyOpenBack",
+        47
+      ],
+      [
+        "batch336-tonga-scene1367-AI ECE-emotion",
+        55
+      ],
+      [
+        "batch336-tonga-scene1367-AI ECE-visibleMidriff",
+        79
+      ],
+      [
+        "batch336-tonga-scene1367-AI ECE-straplessDress",
+        52
+      ],
+      [
+        "batch336-tonga-scene1367-AI ECE-fullyOpenBack",
+        41
+      ],
+      [
+        "batch336-tonga-x-heart",
+        73
+      ],
+      [
+        "batch336-tonga-x-internalagency",
+        33
+      ],
+      [
+        "batch336-tonga-x-worldxxxseries",
+        14
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch336-tonga-scene1364-rainbowHosieryWearer",
+        94
+      ],
+      [
+        "batch336-tonga-scene1364-rainbowHosieryPaletteMode",
+        42
+      ],
+      [
+        "batch336-tonga-scene1364-mascotHolder",
+        24
+      ],
+      [
+        "batch336-tonga-scene1364-interestingPropHolder",
+        82
+      ],
+      [
+        "batch336-tonga-scene1364-interestingPropFamily",
+        80
+      ],
+      [
+        "batch336-tonga-scene1365-rainbowHosieryWearer",
+        47
+      ],
+      [
+        "batch336-tonga-scene1365-rainbowHosieryPaletteMode",
+        57
+      ],
+      [
+        "batch336-tonga-scene1365-mascotHolder",
+        85
+      ],
+      [
+        "batch336-tonga-scene1365-interestingPropHolder",
+        25
+      ],
+      [
+        "batch336-tonga-scene1365-interestingPropFamily",
+        3
+      ],
+      [
+        "batch336-tonga-scene1366-rainbowHosieryWearer",
+        40
+      ],
+      [
+        "batch336-tonga-scene1366-rainbowHosieryPaletteMode",
+        44
+      ],
+      [
+        "batch336-tonga-scene1366-mascotHolder",
+        46
+      ],
+      [
+        "batch336-tonga-scene1366-interestingPropHolder",
+        88
+      ],
+      [
+        "batch336-tonga-scene1366-interestingPropFamily",
+        46
+      ],
+      [
+        "batch336-tonga-scene1367-rainbowHosieryWearer",
+        61
+      ],
+      [
+        "batch336-tonga-scene1367-rainbowHosieryPaletteMode",
+        15
+      ],
+      [
+        "batch336-tonga-scene1367-mascotHolder",
+        75
+      ],
+      [
+        "batch336-tonga-scene1367-interestingPropHolder",
+        51
+      ],
+      [
+        "batch336-tonga-scene1367-interestingPropFamily",
+        45
+      ]
+    ],
+    "primaryPairCount": 111,
+    "selectorPairCount": 20,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "F89024477AD76F6C4BBA83DB7C8B6E5FE0E88B2FE76221FDED079FE228090D1A",
+    "selectorPairsSha256": "19B7B690DB79DBE738279E1D2DF58D8507C1252A675A9B5913C6BDF793F25094"
+  },
+  "scenePlans": {
+    "1364": {
+      "scene": 1364,
+      "mode": "country-led hybrid",
+      "theme": "civilian helicopter flight couture",
+      "landmark": "a broad dry covered public waterfront overlook in Nuku'alofa, with the complete white timber Royal Palace exterior beyond its public fence, Vuna waterfront curve, green lawns, reef-protected harbor water, low offshore islands, palms, and a cinematic curtain of harmless white sea mist and pale frangipani petals beyond the shelter",
+      "motifs": "Tonga archipelago chain, Nuku'alofa waterfront arc, Royal Palace veranda rhythm, reef-shelf bands, pandanus fans, coral-limestone blocks, frangipani forms, and Pacific-current curves",
+      "culture": "Nuku'alofa reads through the waterfront, the elegant white Royal Palace exterior seen respectfully from a public viewpoint, lawns, palms, harbor reef and low islands. A large unbranded civilian helicopter is parked in the immediate foreground with its cabin door open, rotor hub, canopy and landing gear completely readable. Original flight couture uses swashplate rings, turbine-intake folds and tail-fin structures without copied uniforms or operator marks.",
+      "weather": {
+        "key": "batch336-tonga-scene1364-weather",
+        "roll": 59,
+        "result": "heavy snow or cinematic blizzard",
+        "materialized": "the stored cinematic-blizzard roll appears as a dense curtain of harmless white sea mist, windblown pale frangipani petals, and cloud droplets beyond the waterfront shelter, with no snow accumulation and dry nonslip footing"
+      },
+      "mascotState": {
+        "key": "batch336-tonga-scene1364-mascotState",
+        "roll": 83,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch336-tonga-scene1364-mascotHolder",
+        "roll": 24,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Neither mascot appears.",
+      "interestingProp": {
+        "key": "batch336-tonga-scene1364-interestingProp",
+        "roll": 80,
+        "active": false,
+        "holder": {
+          "key": "batch336-tonga-scene1364-interestingPropHolder",
+          "roll": 82,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch336-tonga-scene1364-interestingPropFamily",
+          "roll": 80,
+          "result": "deactivated chainless cinema chainsaw sculpture with a locked blade cover"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch336-tonga-scene1364-poleDanceTheme",
+        "roll": 95,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch336-tonga-scene1364-rainbowOnly",
+        "roll": 39,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch336-tonga-scene1364-rainbowHosiery",
+        "roll": 34,
+        "active": false,
+        "wearer": {
+          "key": "batch336-tonga-scene1364-rainbowHosieryWearer",
+          "roll": 94,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch336-tonga-scene1364-rainbowHosieryPaletteMode",
+          "roll": 42,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch336-tonga-scene1364-eceMissionProp-poseTargetRoll",
+        "roll": 57
+      },
+      "materializedPropAction": "AI ECE uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker in an unoccupied outer-harbor reach, with no boat, swimmer, bird, animal, person, reef, island, palace structure, shore, helicopter, or occupied object anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one distant clearly empty floating navigation marker in an unoccupied outer-harbor reach, with no boat, swimmer, bird, animal, person, reef, island, palace structure, shore, helicopter, or occupied object anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch336-tonga-scene1364-romanceBeat",
+        "roll": 58,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch336-tonga-scene1364-compoundLoveBeat",
+        "roll": 64,
+        "index": 4,
+        "contractResult": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "hardLoveBeat": {
+        "key": "batch336-tonga-scene1364-hardLoveBeat",
+        "roll": 60,
+        "result": "a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch336-tonga-scene1364-Radiance-emotion",
+            "roll": 44,
+            "result": "awe",
+            "materializedResult": "awe",
+            "performance": "awe expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1364-Radiance-visibleMidriff",
+            "roll": 34,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1364-Radiance-straplessDress",
+            "roll": 13,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1364-Radiance-fullyOpenBack",
+            "roll": 62,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch336-tonga-scene1364-Ellie-emotion",
+            "roll": 82,
+            "result": "crying with visible tears",
+            "materializedResult": "crying with visible tears",
+            "performance": "crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1364-Ellie-visibleMidriff",
+            "roll": 68,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1364-Ellie-straplessDress",
+            "roll": 71,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1364-Ellie-fullyOpenBack",
+            "roll": 32,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch336-tonga-scene1364-Alia-emotion",
+            "roll": 98,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1364-Alia-visibleMidriff",
+            "roll": 56,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1364-Alia-straplessDress",
+            "roll": 15,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1364-Alia-fullyOpenBack",
+            "roll": 0,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch336-tonga-scene1364-AI ECE-emotion",
+            "roll": 44,
+            "result": "awe",
+            "materializedResult": "romantic joy",
+            "disambiguation": {
+              "key": "batch336-tonga-scene1364-AI ECE-emotion-disambiguation",
+              "roll": 11
+            },
+            "performance": "romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1364-AI ECE-visibleMidriff",
+            "roll": 86,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1364-AI ECE-straplessDress",
+            "roll": 5,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1364-AI ECE-fullyOpenBack",
+            "roll": 42,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "awe expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "country-theme hybrid shell-white strapless archipelago-corsage top above a reef-coral petal skirt, with a deliberate narrow midriff, raised complete Tonga island forms, a silver swashplate hip ring, a broken Pacific-current hem, and rotor-bearing slingback heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led pandanus-gold tailored culotte coat with dimensional waterfront-arc pleats, pearl veranda-rhythm beadwork, a forked reef-shelf hem, and woven crescent platform sandals; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led volcanic-charcoal strapless coral-limestone coat-dress with a complete Ha'amonga-inspired three-slab relief used as secular geometry, an asymmetric island-chain apron, a completely open back, and trilithon-arch pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led ocean-cobalt strapless turbine-intake sculpted bodice over fitted amber shorts, with concentric compressor folds, a compact tail-fin side frame, split exhaust-ribbon hem, and polished main-shaft boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve shell-white top with restrained Tonga Pacific-current embroidery and subtle civilian-helicopter swashplate-seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "outfitFingerprints": {
+        "Radiance": "country-theme hybrid shell-white strapless archipelago-corsage top above a reef-coral petal skirt, with a deliberate narrow midriff, raised complete Tonga island forms, a silver swashplate hip ring, a broken Pacific-current hem, and rotor-bearing slingback heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led pandanus-gold tailored culotte coat with dimensional waterfront-arc pleats, pearl veranda-rhythm beadwork, a forked reef-shelf hem, and woven crescent platform sandals; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led volcanic-charcoal strapless coral-limestone coat-dress with a complete Ha'amonga-inspired three-slab relief used as secular geometry, an asymmetric island-chain apron, a completely open back, and trilithon-arch pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led ocean-cobalt strapless turbine-intake sculpted bodice over fitted amber shorts, with concentric compressor folds, a compact tail-fin side frame, split exhaust-ribbon hem, and polished main-shaft boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve shell-white top with restrained Tonga Pacific-current embroidery and subtle civilian-helicopter swashplate-seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "composition": "ECE anchors a far-left unobstructed open-water route line. At right, Radiance, Ellie and Alia rotate through a three-person slow-dance chain: Radiance and Ellie link raised hands, Ellie catches Alia at the waist, and Alia links back to Radiance. The male steps through the open side with one hand gently separating Radiance and Ellie and one hand at Alia's forearm; his strongest sustained eye line is unmistakably on ECE. The large civilian helicopter and Nuku'alofa waterfront remain equally foregrounded behind the separated groups.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop grip toward the empty outer-harbor marker and touches nobody else",
+        "Radiance left hand links visibly with Ellie right hand above shoulder height and Radiance right hand links with Alia left hand",
+        "Ellie right hand stays linked with Radiance left hand and Ellie left hand catches Alia securely at the near waist",
+        "Alia left hand stays linked with Radiance right hand and Alia right hand rests on the male's near forearm",
+        "the male left hand rests openly between Radiance's and Ellie's linked forearms to split the pair and his right hand rests on Alia's near forearm; his strongest sustained eye line remains on ECE"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch336-tonga-scene1-male-emotion",
+          "roll": 55,
+          "result": "aching romantic longing"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry covered public waterfront overlook in Nuku'alofa, with the complete white timber Royal Palace exterior beyond its public fence, Vuna waterfront curve, green lawns, reef-protected harbor water, low offshore islands, palms, and a cinematic curtain of harmless white sea mist and pale frangipani petals beyond the shelter. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: civilian helicopter flight couture. The theme and Tonga location must both be immediate foreground reads. Nuku'alofa reads through the waterfront, the elegant white Royal Palace exterior seen respectfully from a public viewpoint, lawns, palms, harbor reef and low islands. A large unbranded civilian helicopter is parked in the immediate foreground with its cabin door open, rotor hub, canopy and landing gear completely readable. Original flight couture uses swashplate rings, turbine-intake folds and tail-fin structures without copied uniforms or operator marks. Stored scene rolls: weather 59=heavy snow or cinematic blizzard; mascot state 83=neither mascot; mascot holder selector 24=Radiance; odd prop 80=inactive; odd holder 82=Ellie; odd family 80=deactivated chainless cinema chainsaw sculpture with a locked blade cover; pole 95=inactive; rainbow-only 39=inactive; rainbow hosiery 34=inactive; wearer 94=AI ECE; palette 42=country-palette rainbow-like gradient; romance 58; compound 64; hard love 60; mission-prop pose/target 57. Exact wardrobe rolls: Radiance: midriff 34=visible, strapless 13=active, open back 62=inactive; Ellie: midriff 68=covered, strapless 71=inactive, open back 32=inactive; Alia: midriff 56=covered, strapless 15=active, open back 0=active; AI ECE: midriff 86=covered, strapless 5=active, open back 42=inactive. Exact outfit fingerprints, no substitutions: Radiance: country-theme hybrid shell-white strapless archipelago-corsage top above a reef-coral petal skirt, with a deliberate narrow midriff, raised complete Tonga island forms, a silver swashplate hip ring, a broken Pacific-current hem, and rotor-bearing slingback heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: country-led pandanus-gold tailored culotte coat with dimensional waterfront-arc pleats, pearl veranda-rhythm beadwork, a forked reef-shelf hem, and woven crescent platform sandals; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: country-led volcanic-charcoal strapless coral-limestone coat-dress with a complete Ha'amonga-inspired three-slab relief used as secular geometry, an asymmetric island-chain apron, a completely open back, and trilithon-arch pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: theme-led ocean-cobalt strapless turbine-intake sculpted bodice over fitted amber shorts, with concentric compressor folds, a compact tail-fin side frame, split exhaust-ribbon hem, and polished main-shaft boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve shell-white top with restrained Tonga Pacific-current embroidery and subtle civilian-helicopter swashplate-seam tailoring, fitted black jeans, and practical black boots. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry large hard Tonga motifs through dimensional archipelago corsage, woven waterfront panels and coral-limestone relief. Radiance and ECE also carry unmistakable civilian-helicopter construction. Every silhouette, hem and shoe family differs. Location design vocabulary: Tonga archipelago chain, Nuku'alofa waterfront arc, Royal Palace veranda rhythm, reef-shelf bands, pandanus fans, coral-limestone blocks, frangipani forms, and Pacific-current curves. Use respectful secular Tonga geography and heritage through complete archipelago silhouettes, Nuku'alofa waterfront arcs, Royal Palace exterior geometry viewed only from a public overlook, Ha'amonga trilithon forms, coral-limestone strata, Mapu'a 'a Vaea blowhole plumes, reef shelves, Vava'u island chains, Port of Refuge curves, Mount Talau contours, pandanus weaving, and Pacific-current bands. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, ceremonial attire, royal person, copied uniform, airline or operator branding, badge, readable text, alcohol, military imagery, emergency-service insignia, or political messaging. Four visibly distinct coherent emotions: Radiance: roll 44=awe, performed as awe expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 82=crying with visible tears, performed as crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 98=defiance, performed as defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 44=awe, collision resolver 11 gives distinct performance romantic joy, performed as romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 55=aching romantic longing, performed as aching romantic longing expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 58: Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face. Compound roll 64: ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands. Mandatory hard-love roll 60: a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE anchors a far-left unobstructed open-water route line. At right, Radiance, Ellie and Alia rotate through a three-person slow-dance chain: Radiance and Ellie link raised hands, Ellie catches Alia at the waist, and Alia links back to Radiance. The male steps through the open side with one hand gently separating Radiance and Ellie and one hand at Alia's forearm; his strongest sustained eye line is unmistakably on ECE. The large civilian helicopter and Nuku'alofa waterfront remain equally foregrounded behind the separated groups. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop grip toward the empty outer-harbor marker and touches nobody else; Radiance left hand links visibly with Ellie right hand above shoulder height and Radiance right hand links with Alia left hand; Ellie right hand stays linked with Radiance left hand and Ellie left hand catches Alia securely at the near waist; Alia left hand stays linked with Radiance right hand and Alia right hand rests on the male's near forearm; the male left hand rests openly between Radiance's and Ellie's linked forearms to split the pair and his right hand rests on Alia's near forearm; his strongest sustained eye line remains on ECE. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker in an unoccupied outer-harbor reach, with no boat, swimmer, bird, animal, person, reef, island, palace structure, shore, helicopter, or occupied object anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 83=neither mascot. Mascot holder selector 24=Radiance. Neither mascot appears. Odd-prop roll 80 is inactive. Do not add any bizarre secondary prop; stored inactive holder 82=Ellie and family 80=deactivated chainless cinema chainsaw sculpture with a locked blade cover remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render the stored cinematic-blizzard roll appears as a dense curtain of harmless white sea mist, windblown pale frangipani petals, and cloud droplets beyond the waterfront shelter, with no snow accumulation and dry nonslip footing cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1365": {
+      "scene": 1365,
+      "mode": "country-led hybrid",
+      "theme": "civilian helicopter flight couture",
+      "landmark": "a broad dry public heritage overlook beside Ha'amonga 'a Maui Historical Park on Tongatapu, with the complete monumental coral-limestone trilithon, cleared lawn, low coastal vegetation, open eastern sky, distant reef water, and clear golden-hour radiance",
+      "motifs": "Tonga archipelago chain, complete Ha'amonga trilithon, coral-limestone strata, cleared-path geometry, coastal leaf fans, reef shelves, sunrise notches, and Pacific-route arcs",
+      "culture": "Ha'amonga 'a Maui remains the dominant Tonga landmark through its complete three-slab coral-limestone form, open lawn, coastal vegetation and eastern horizon. A sleek unbranded civilian helicopter is parked prominently on a separate foreground pad with open cabin door, canopy, rotor mast and landing gear visible. Fashion translates swashplate seams, tail-fin hinges and collective-control geometry without copied uniforms or logos.",
+      "weather": {
+        "key": "batch336-tonga-scene1365-weather",
+        "roll": 8,
+        "result": "clear golden-hour radiance",
+        "materialized": "clear golden-hour radiance"
+      },
+      "mascotState": {
+        "key": "batch336-tonga-scene1365-mascotState",
+        "roll": 32,
+        "result": "PAWS only"
+      },
+      "mascotHolder": {
+        "key": "batch336-tonga-scene1365-mascotHolder",
+        "roll": 85,
+        "result": "Ellie"
+      },
+      "mascotPlan": "PAWS only. Ellie securely cradles one tiny collarless golden kitten high against her upper torso while joining the partner turn with her free hand. PAWS stays far from ECE, the inert prop, muzzle line, helicopter, trilithon, ledges and wet ground. No MAX.",
+      "interestingProp": {
+        "key": "batch336-tonga-scene1365-interestingProp",
+        "roll": 91,
+        "active": false,
+        "holder": {
+          "key": "batch336-tonga-scene1365-interestingPropHolder",
+          "roll": 25,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch336-tonga-scene1365-interestingPropFamily",
+          "roll": 3,
+          "result": "kinetic umbrella with rotating mirrored petals"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch336-tonga-scene1365-poleDanceTheme",
+        "roll": 10,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch336-tonga-scene1365-rainbowOnly",
+        "roll": 12,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch336-tonga-scene1365-rainbowHosiery",
+        "roll": 47,
+        "active": false,
+        "wearer": {
+          "key": "batch336-tonga-scene1365-rainbowHosieryWearer",
+          "roll": 47,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch336-tonga-scene1365-rainbowHosieryPaletteMode",
+          "roll": 57,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch336-tonga-scene1365-eceMissionProp-poseTargetRoll",
+        "roll": 78
+      },
+      "materializedPropAction": "A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one distant clearly empty floating navigation marker in unoccupied reef water beyond the park, with no boat, swimmer, bird, animal, person, reef user, heritage object, helicopter, shore, or occupied structure anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one distant clearly empty floating navigation marker in unoccupied reef water beyond the park, with no boat, swimmer, bird, animal, person, reef user, heritage object, helicopter, shore, or occupied structure anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch336-tonga-scene1365-romanceBeat",
+        "roll": 85,
+        "dynamicIndex": 1,
+        "contractResult": "Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance."
+      },
+      "compoundLoveBeat": {
+        "key": "batch336-tonga-scene1365-compoundLoveBeat",
+        "roll": 29,
+        "index": 5,
+        "contractResult": "Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer."
+      },
+      "hardLoveBeat": {
+        "key": "batch336-tonga-scene1365-hardLoveBeat",
+        "roll": 29,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch336-tonga-scene1365-Radiance-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1365-Radiance-visibleMidriff",
+            "roll": 85,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1365-Radiance-straplessDress",
+            "roll": 30,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1365-Radiance-fullyOpenBack",
+            "roll": 43,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch336-tonga-scene1365-Ellie-emotion",
+            "roll": 81,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1365-Ellie-visibleMidriff",
+            "roll": 81,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1365-Ellie-straplessDress",
+            "roll": 38,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1365-Ellie-fullyOpenBack",
+            "roll": 19,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch336-tonga-scene1365-Alia-emotion",
+            "roll": 39,
+            "result": "magnetic confidence",
+            "materializedResult": "intense curiosity",
+            "disambiguation": {
+              "key": "batch336-tonga-scene1365-Alia-emotion-disambiguation",
+              "roll": 50
+            },
+            "performance": "intense curiosity expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1365-Alia-visibleMidriff",
+            "roll": 3,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1365-Alia-straplessDress",
+            "roll": 96,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1365-Alia-fullyOpenBack",
+            "roll": 73,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch336-tonga-scene1365-AI ECE-emotion",
+            "roll": 25,
+            "result": "calm contentment",
+            "materializedResult": "calm contentment",
+            "performance": "calm contentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1365-AI ECE-visibleMidriff",
+            "roll": 89,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1365-AI ECE-straplessDress",
+            "roll": 70,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1365-AI ECE-fullyOpenBack",
+            "roll": 99,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "magnetic confidence expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "intense curiosity expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "calm contentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "country-theme hybrid reef-coral strapless monolith-bell short dress with layered coral-limestone corsage slabs, silver swashplate seam rings, a scalloped horizon hem, and pivot-bearing heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-theme hybrid ocean-cobalt wrapped culotte coat with hinged tail-fin shoulder panels, a complete Tonga island-chain side relief, a fully open back, a split navigation-ribbon hem, and tail-hinge platform boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led tropical-emerald asymmetric shell top above a woven pandanus sculptural short skirt, with a deliberate narrow midriff, raised trilithon gateway ribs, a stepped reef-shelf hem, and coral-arch pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led rotor-smoke collective-control peplum top over amber tailored shorts, with curved control-link seams, a compact transmission-case hip shell, an offset mechanical hem, and silver cyclic-lever boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "country-theme hybrid reef-coral strapless monolith-bell short dress with layered coral-limestone corsage slabs, silver swashplate seam rings, a scalloped horizon hem, and pivot-bearing heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-theme hybrid ocean-cobalt wrapped culotte coat with hinged tail-fin shoulder panels, a complete Tonga island-chain side relief, a fully open back, a split navigation-ribbon hem, and tail-hinge platform boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led tropical-emerald asymmetric shell top above a woven pandanus sculptural short skirt, with a deliberate narrow midriff, raised trilithon gateway ribs, a stepped reef-shelf hem, and coral-arch pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led rotor-smoke collective-control peplum top over amber tailored shorts, with curved control-link seams, a compact transmission-case hip shell, an offset mechanical hem, and silver cyclic-lever boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE anchors the far-left completed-handoff sight picture toward empty reef water. At right, Radiance turns beneath her raised linked hand with Alia while Alia catches Radiance securely at the waist. Ellie cradles PAWS high with one arm and joins the dance at Alia's shoulder with her free hand, visibly reclaiming attention. The helicopter occupies the middle foreground without crossing ECE's line, and the complete trilithon remains large behind the dance.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop grip in the completed-handoff final sight picture toward the empty water marker and touches nobody else",
+        "Radiance left hand links overhead with Alia right hand through the visible turn and Radiance right hand rests on Alia's near shoulder",
+        "Alia right hand stays linked with Radiance left hand and Alia left hand catches Radiance securely at the near waist",
+        "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand joins at Alia's near shoulder"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry public heritage overlook beside Ha'amonga 'a Maui Historical Park on Tongatapu, with the complete monumental coral-limestone trilithon, cleared lawn, low coastal vegetation, open eastern sky, distant reef water, and clear golden-hour radiance. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: civilian helicopter flight couture. The theme and Tonga location must both be immediate foreground reads. Ha'amonga 'a Maui remains the dominant Tonga landmark through its complete three-slab coral-limestone form, open lawn, coastal vegetation and eastern horizon. A sleek unbranded civilian helicopter is parked prominently on a separate foreground pad with open cabin door, canopy, rotor mast and landing gear visible. Fashion translates swashplate seams, tail-fin hinges and collective-control geometry without copied uniforms or logos. Stored scene rolls: weather 8=clear golden-hour radiance; mascot state 32=PAWS only; mascot holder selector 85=Ellie; odd prop 91=inactive; odd holder 25=Ellie; odd family 3=kinetic umbrella with rotating mirrored petals; pole 10=inactive; rainbow-only 12=inactive; rainbow hosiery 47=inactive; wearer 47=Radiance; palette 57=original independent rainbow gradient; romance 85; compound 29; hard love 29; mission-prop pose/target 78. Exact wardrobe rolls: Radiance: midriff 85=covered, strapless 30=active, open back 43=inactive; Ellie: midriff 81=covered, strapless 38=inactive, open back 19=active; Alia: midriff 3=visible, strapless 96=inactive, open back 73=inactive; AI ECE: midriff 89=covered, strapless 70=inactive, open back 99=inactive. Exact outfit fingerprints, no substitutions: Radiance: country-theme hybrid reef-coral strapless monolith-bell short dress with layered coral-limestone corsage slabs, silver swashplate seam rings, a scalloped horizon hem, and pivot-bearing heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: country-theme hybrid ocean-cobalt wrapped culotte coat with hinged tail-fin shoulder panels, a complete Tonga island-chain side relief, a fully open back, a split navigation-ribbon hem, and tail-hinge platform boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: country-led tropical-emerald asymmetric shell top above a woven pandanus sculptural short skirt, with a deliberate narrow midriff, raised trilithon gateway ribs, a stepped reef-shelf hem, and coral-arch pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: theme-led rotor-smoke collective-control peplum top over amber tailored shorts, with curved control-link seams, a compact transmission-case hip shell, an offset mechanical hem, and silver cyclic-lever boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard Tonga motifs through monolith corsage, coral-strata weaving and island-chain architecture. Radiance and Ellie visibly carry civilian-helicopter swashplate and tail-fin construction. No matching dresses, repeated maps or color-only differentiation. Location design vocabulary: Tonga archipelago chain, complete Ha'amonga trilithon, coral-limestone strata, cleared-path geometry, coastal leaf fans, reef shelves, sunrise notches, and Pacific-route arcs. Use respectful secular Tonga geography and heritage through complete archipelago silhouettes, Nuku'alofa waterfront arcs, Royal Palace exterior geometry viewed only from a public overlook, Ha'amonga trilithon forms, coral-limestone strata, Mapu'a 'a Vaea blowhole plumes, reef shelves, Vava'u island chains, Port of Refuge curves, Mount Talau contours, pandanus weaving, and Pacific-current bands. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, ceremonial attire, royal person, copied uniform, airline or operator branding, badge, readable text, alcohol, military imagery, emergency-service insignia, or political messaging. Four visibly distinct coherent emotions: Radiance: roll 37=magnetic confidence, performed as magnetic confidence expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 81=deep sadness, performed as deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 39=magnetic confidence, collision resolver 50 gives distinct performance intense curiosity, performed as intense curiosity expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 25=calm contentment, performed as calm contentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 85: Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance. Compound roll 29: Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer. Mandatory hard-love roll 29: a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE anchors the far-left completed-handoff sight picture toward empty reef water. At right, Radiance turns beneath her raised linked hand with Alia while Alia catches Radiance securely at the waist. Ellie cradles PAWS high with one arm and joins the dance at Alia's shoulder with her free hand, visibly reclaiming attention. The helicopter occupies the middle foreground without crossing ECE's line, and the complete trilithon remains large behind the dance. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop grip in the completed-handoff final sight picture toward the empty water marker and touches nobody else; Radiance left hand links overhead with Alia right hand through the visible turn and Radiance right hand rests on Alia's near shoulder; Alia right hand stays linked with Radiance left hand and Alia left hand catches Radiance securely at the near waist; Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand joins at Alia's near shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one distant clearly empty floating navigation marker in unoccupied reef water beyond the park, with no boat, swimmer, bird, animal, person, reef user, heritage object, helicopter, shore, or occupied structure anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 32=PAWS only. Mascot holder selector 85=Ellie. PAWS only. Ellie securely cradles one tiny collarless golden kitten high against her upper torso while joining the partner turn with her free hand. PAWS stays far from ECE, the inert prop, muzzle line, helicopter, trilithon, ledges and wet ground. No MAX. Odd-prop roll 91 is inactive. Do not add any bizarre secondary prop; stored inactive holder 25=Ellie and family 3=kinetic umbrella with rotating mirrored petals remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render clear golden-hour radiance cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1366": {
+      "scene": 1366,
+      "mode": "theme-led original",
+      "theme": "civilian helicopter flight couture",
+      "landmark": "a broad dry covered coastal overlook beside Mapu'a 'a Vaea on southwest Tongatapu, with the complete rugged coral-reef shelf, a long line of powerful blowhole plumes, black volcanic-rock seams, turquoise Pacific water, low palms, and a dense cinematic curtain of white spray beyond the shelter",
+      "motifs": "location-only Mapu'a 'a Vaea blowhole line, coral-reef strata, volcanic-rock seams, white spray columns, turquoise-water bands, low-palm rhythm, and open-Pacific arcs",
+      "culture": "Mapu'a 'a Vaea remains an equally dominant Tonga foreground through its extended coral-reef shelf and many spectacular white blowhole plumes. A sleek unbranded civilian helicopter is secured prominently on a dry elevated pad with its open cabin door, canopy, rotor hub and landing gear readable. All four outfits use unrelated helicopter engineering ideas and no copied service uniform.",
+      "weather": {
+        "key": "batch336-tonga-scene1366-weather",
+        "roll": 61,
+        "result": "heavy snow or cinematic blizzard",
+        "materialized": "the stored cinematic-blizzard roll appears as a dense line of natural white blowhole spray plumes beyond the covered overlook, with no snow accumulation and dry nonslip footing"
+      },
+      "mascotState": {
+        "key": "batch336-tonga-scene1366-mascotState",
+        "roll": 41,
+        "result": "MAX only"
+      },
+      "mascotHolder": {
+        "key": "batch336-tonga-scene1366-mascotHolder",
+        "roll": 46,
+        "result": "Ellie"
+      },
+      "mascotPlan": "MAX only. One small young golden retriever pup plays with a soft route ribbon on a broad padded case beside Ellie. Ellie is the rolled holder and supervises MAX through a downward glance while both of her hands remain on the miniature planetarium. MAX stays far from ECE, the inert prop, paper lane, helicopter, blowholes, reef edge and wet surfaces. No PAWS.",
+      "interestingProp": {
+        "key": "batch336-tonga-scene1366-interestingProp",
+        "roll": 10,
+        "active": true,
+        "holder": {
+          "key": "batch336-tonga-scene1366-interestingPropHolder",
+          "roll": 88,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch336-tonga-scene1366-interestingPropFamily",
+          "roll": 46,
+          "result": "portable miniature planetarium projector"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch336-tonga-scene1366-poleDanceTheme",
+        "roll": 29,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch336-tonga-scene1366-rainbowOnly",
+        "roll": 25,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch336-tonga-scene1366-rainbowHosiery",
+        "roll": 60,
+        "active": false,
+        "wearer": {
+          "key": "batch336-tonga-scene1366-rainbowHosieryWearer",
+          "roll": 40,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch336-tonga-scene1366-rainbowHosieryPaletteMode",
+          "roll": 44,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch336-tonga-scene1366-eceMissionProp-poseTargetRoll",
+        "roll": 7
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty geometric paper route target fixed to a complete thick sand-filled safety backstop on a closed dry lane at far left, oriented away from every person, mascot, helicopter, blowhole, reef, ocean, vegetation, occupied structure, and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty geometric paper route target fixed to a complete thick sand-filled safety backstop on a closed dry lane at far left, oriented away from every person, mascot, helicopter, blowhole, reef, ocean, vegetation, occupied structure, and camera",
+      "romanceBeat": {
+        "key": "batch336-tonga-scene1366-romanceBeat",
+        "roll": 36,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch336-tonga-scene1366-compoundLoveBeat",
+        "roll": 14,
+        "index": 2,
+        "contractResult": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "hardLoveBeat": {
+        "key": "batch336-tonga-scene1366-hardLoveBeat",
+        "roll": 50,
+        "result": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch336-tonga-scene1366-Radiance-emotion",
+            "roll": 82,
+            "result": "crying with visible tears",
+            "materializedResult": "crying with visible tears",
+            "performance": "crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1366-Radiance-visibleMidriff",
+            "roll": 72,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1366-Radiance-straplessDress",
+            "roll": 31,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1366-Radiance-fullyOpenBack",
+            "roll": 32,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch336-tonga-scene1366-Ellie-emotion",
+            "roll": 8,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1366-Ellie-visibleMidriff",
+            "roll": 66,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1366-Ellie-straplessDress",
+            "roll": 77,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1366-Ellie-fullyOpenBack",
+            "roll": 98,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch336-tonga-scene1366-Alia-emotion",
+            "roll": 80,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1366-Alia-visibleMidriff",
+            "roll": 62,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1366-Alia-straplessDress",
+            "roll": 73,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1366-Alia-fullyOpenBack",
+            "roll": 10,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch336-tonga-scene1366-AI ECE-emotion",
+            "roll": 90,
+            "result": "anger",
+            "materializedResult": "anger",
+            "performance": "anger expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1366-AI ECE-visibleMidriff",
+            "roll": 24,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1366-AI ECE-straplessDress",
+            "roll": 15,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1366-AI ECE-fullyOpenBack",
+            "roll": 64,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "anger expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "shell-white strapless turbine-vane tulip dress with suspended pearl compressor petals, an offset rounded kinetic hem, brushed-silver intake ribs, and vane-tip heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "ocean-cobalt hoist-spool tailored jumpsuit with a circular cable-drum peplum, articulated winch-cover panels, a square counterweight hem, and spool-bearing ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "tropical-emerald gyroscopic-gimbal coat-dress with two free-standing opaque ring frames, a completely open back, a split vertical balance hem, and gimbal-axis pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "reef-coral strapless cyclic-control crescent bodice above amber shorts, with a deliberate narrow midriff, paired curved control horns, asymmetric linkage fins, and illuminated control-pivot boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "shell-white strapless turbine-vane tulip dress with suspended pearl compressor petals, an offset rounded kinetic hem, brushed-silver intake ribs, and vane-tip heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "ocean-cobalt hoist-spool tailored jumpsuit with a circular cable-drum peplum, articulated winch-cover panels, a square counterweight hem, and spool-bearing ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "tropical-emerald gyroscopic-gimbal coat-dress with two free-standing opaque ring frames, a completely open back, a split vertical balance hem, and gimbal-axis pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "reef-coral strapless cyclic-control crescent bodice above amber shorts, with a deliberate narrow midriff, paired curved control horns, asymmetric linkage fins, and illuminated control-pivot boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE anchors the far-left isolated paper-target lane. At right, Radiance and Alia sit face-to-face on a broad stable low bench in a full two-person embrace, each using both hands in visible reciprocal support. Ellie stands beside them holding the active miniature planetarium with both hands and leans in for a quick forehead kiss toward Radiance without releasing it. MAX plays alone on a separate broad padded case beside Ellie, supervised by Ellie's downward glance. The parked helicopter and blowhole line frame the groups without entering the target lane.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop grip toward the isolated paper target and touches nobody else",
+        "Ellie uses both hands to own the portable miniature planetarium projector securely across her upper torso and touches nobody with either hand",
+        "Radiance left hand supports Alia at the near upper back and Radiance right hand rests visibly at Alia's near waist",
+        "Alia left hand supports Radiance at the near upper back and Alia right hand rests visibly at Radiance's near waist"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered coastal overlook beside Mapu'a 'a Vaea on southwest Tongatapu, with the complete rugged coral-reef shelf, a long line of powerful blowhole plumes, black volcanic-rock seams, turquoise Pacific water, low palms, and a dense cinematic curtain of white spray beyond the shelter. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: civilian helicopter flight couture. The theme and Tonga location must both be immediate foreground reads. Mapu'a 'a Vaea remains an equally dominant Tonga foreground through its extended coral-reef shelf and many spectacular white blowhole plumes. A sleek unbranded civilian helicopter is secured prominently on a dry elevated pad with its open cabin door, canopy, rotor hub and landing gear readable. All four outfits use unrelated helicopter engineering ideas and no copied service uniform. Stored scene rolls: weather 61=heavy snow or cinematic blizzard; mascot state 41=MAX only; mascot holder selector 46=Ellie; odd prop 10=active; odd holder 88=Ellie; odd family 46=portable miniature planetarium projector; pole 29=inactive; rainbow-only 25=inactive; rainbow hosiery 60=inactive; wearer 40=Radiance; palette 44=country-palette rainbow-like gradient; romance 36; compound 14; hard love 50; mission-prop pose/target 7. Exact wardrobe rolls: Radiance: midriff 72=covered, strapless 31=active, open back 32=inactive; Ellie: midriff 66=covered, strapless 77=inactive, open back 98=inactive; Alia: midriff 62=covered, strapless 73=inactive, open back 10=active; AI ECE: midriff 24=visible, strapless 15=active, open back 64=inactive. Exact outfit fingerprints, no substitutions: Radiance: shell-white strapless turbine-vane tulip dress with suspended pearl compressor petals, an offset rounded kinetic hem, brushed-silver intake ribs, and vane-tip heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: ocean-cobalt hoist-spool tailored jumpsuit with a circular cable-drum peplum, articulated winch-cover panels, a square counterweight hem, and spool-bearing ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: tropical-emerald gyroscopic-gimbal coat-dress with two free-standing opaque ring frames, a completely open back, a split vertical balance hem, and gimbal-axis pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: reef-coral strapless cyclic-control crescent bodice above amber shorts, with a deliberate narrow midriff, paired curved control horns, asymmetric linkage fins, and illuminated control-pivot boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Theme-led scene. Radiance uses turbine-vane suspension, Ellie uses hoist-spool geometry, Alia uses gyroscopic-gimbal architecture, and ECE uses cyclic-control crescents. The blowhole coastline carries Tonga identity at equal visual weight. Location design vocabulary: location-only Mapu'a 'a Vaea blowhole line, coral-reef strata, volcanic-rock seams, white spray columns, turquoise-water bands, low-palm rhythm, and open-Pacific arcs. Use respectful secular Tonga geography and heritage through complete archipelago silhouettes, Nuku'alofa waterfront arcs, Royal Palace exterior geometry viewed only from a public overlook, Ha'amonga trilithon forms, coral-limestone strata, Mapu'a 'a Vaea blowhole plumes, reef shelves, Vava'u island chains, Port of Refuge curves, Mount Talau contours, pandanus weaving, and Pacific-current bands. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, ceremonial attire, royal person, copied uniform, airline or operator branding, badge, readable text, alcohol, military imagery, emergency-service insignia, or political messaging. Four visibly distinct coherent emotions: Radiance: roll 82=crying with visible tears, performed as crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 8=romantic joy, performed as romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 80=deep sadness, performed as deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 90=anger, performed as anger expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 36: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Compound roll 14: Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention. Mandatory hard-love roll 50: a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE anchors the far-left isolated paper-target lane. At right, Radiance and Alia sit face-to-face on a broad stable low bench in a full two-person embrace, each using both hands in visible reciprocal support. Ellie stands beside them holding the active miniature planetarium with both hands and leans in for a quick forehead kiss toward Radiance without releasing it. MAX plays alone on a separate broad padded case beside Ellie, supervised by Ellie's downward glance. The parked helicopter and blowhole line frame the groups without entering the target lane. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop grip toward the isolated paper target and touches nobody else; Ellie uses both hands to own the portable miniature planetarium projector securely across her upper torso and touches nobody with either hand; Radiance left hand supports Alia at the near upper back and Radiance right hand rests visibly at Alia's near waist; Alia left hand supports Radiance at the near upper back and Alia right hand rests visibly at Radiance's near waist. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty geometric paper route target fixed to a complete thick sand-filled safety backstop on a closed dry lane at far left, oriented away from every person, mascot, helicopter, blowhole, reef, ocean, vegetation, occupied structure, and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 41=MAX only. Mascot holder selector 46=Ellie. MAX only. One small young golden retriever pup plays with a soft route ribbon on a broad padded case beside Ellie. Ellie is the rolled holder and supervises MAX through a downward glance while both of her hands remain on the miniature planetarium. MAX stays far from ECE, the inert prop, paper lane, helicopter, blowholes, reef edge and wet surfaces. No PAWS. Odd-prop roll is active. Exactly Ellie owns and creatively integrates one portable miniature planetarium projector into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render the stored cinematic-blizzard roll appears as a dense line of natural white blowhole spray plumes beyond the covered overlook, with no snow accumulation and dry nonslip footing cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1367": {
+      "scene": 1367,
+      "mode": "theme-led original",
+      "theme": "civilian helicopter flight couture",
+      "landmark": "a broad dry covered summit overlook on Mount Talau above Neiafu in Vava'u, with the complete sheltered Port of Refuge curve, many green limestone islands, hidden coves, turquoise channels, distant coral gardens, town roofs kept small below, and clear golden-hour radiance",
+      "motifs": "location-only Mount Talau contour, Port of Refuge horseshoe, Vava'u island chain, hidden-cove cuts, turquoise-channel bands, coral-garden fans, golden-hour arcs, and ocean-route curves",
+      "culture": "Vava'u remains an equally dominant Tonga foreground through Mount Talau, Neiafu, the sheltered Port of Refuge and its green island chain. A sleek unbranded civilian helicopter is parked prominently on a separate summit pad with open cabin, canopy, rotor mast and landing gear visible. The four outfits use unrelated main-shaft, avionics, tail-fin and transmission constructions without logos or copied uniforms.",
+      "weather": {
+        "key": "batch336-tonga-scene1367-weather",
+        "roll": 6,
+        "result": "clear golden-hour radiance",
+        "materialized": "clear golden-hour radiance"
+      },
+      "mascotState": {
+        "key": "batch336-tonga-scene1367-mascotState",
+        "roll": 30,
+        "result": "PAWS only"
+      },
+      "mascotHolder": {
+        "key": "batch336-tonga-scene1367-mascotHolder",
+        "roll": 75,
+        "result": "Radiance"
+      },
+      "mascotPlan": "PAWS only. Radiance securely cradles one tiny collarless golden kitten high against her upper torso during the pulled-away choice. PAWS stays far from ECE, the inert prop, paper lane, helicopter, summit edge, paths and every wet surface. No MAX.",
+      "interestingProp": {
+        "key": "batch336-tonga-scene1367-interestingProp",
+        "roll": 61,
+        "active": false,
+        "holder": {
+          "key": "batch336-tonga-scene1367-interestingPropHolder",
+          "roll": 51,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch336-tonga-scene1367-interestingPropFamily",
+          "roll": 45,
+          "result": "mirrored megaphone sculpture"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch336-tonga-scene1367-poleDanceTheme",
+        "roll": 68,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch336-tonga-scene1367-rainbowOnly",
+        "roll": 98,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch336-tonga-scene1367-rainbowHosiery",
+        "roll": 73,
+        "active": false,
+        "wearer": {
+          "key": "batch336-tonga-scene1367-rainbowHosieryWearer",
+          "roll": 61,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch336-tonga-scene1367-rainbowHosieryPaletteMode",
+          "roll": 15,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch336-tonga-scene1367-eceMissionProp-poseTargetRoll",
+        "roll": 92
+      },
+      "materializedPropAction": "AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty geometric paper route target fixed to a complete thick sand-filled safety backstop on a closed lane at far left, oriented away from every person, mascot, helicopter, mountain path, tree, town roof, occupied structure, and camera. No ammunition, reload, firing, or trigger contact appears.",
+      "target": "one clearly empty geometric paper route target fixed to a complete thick sand-filled safety backstop on a closed lane at far left, oriented away from every person, mascot, helicopter, mountain path, tree, town roof, occupied structure, and camera",
+      "romanceBeat": {
+        "key": "batch336-tonga-scene1367-romanceBeat",
+        "roll": 87,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch336-tonga-scene1367-compoundLoveBeat",
+        "roll": 59,
+        "index": 11,
+        "contractResult": "ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace."
+      },
+      "hardLoveBeat": {
+        "key": "batch336-tonga-scene1367-hardLoveBeat",
+        "roll": 87,
+        "result": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch336-tonga-scene1367-Radiance-emotion",
+            "roll": 19,
+            "result": "playful mischief",
+            "materializedResult": "playful mischief",
+            "performance": "playful mischief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1367-Radiance-visibleMidriff",
+            "roll": 67,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1367-Radiance-straplessDress",
+            "roll": 80,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1367-Radiance-fullyOpenBack",
+            "roll": 61,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch336-tonga-scene1367-Ellie-emotion",
+            "roll": 15,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1367-Ellie-visibleMidriff",
+            "roll": 91,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1367-Ellie-straplessDress",
+            "roll": 8,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1367-Ellie-fullyOpenBack",
+            "roll": 49,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch336-tonga-scene1367-Alia-emotion",
+            "roll": 97,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1367-Alia-visibleMidriff",
+            "roll": 25,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1367-Alia-straplessDress",
+            "roll": 82,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1367-Alia-fullyOpenBack",
+            "roll": 47,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch336-tonga-scene1367-AI ECE-emotion",
+            "roll": 55,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch336-tonga-scene1367-AI ECE-visibleMidriff",
+            "roll": 79,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch336-tonga-scene1367-AI ECE-straplessDress",
+            "roll": 52,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch336-tonga-scene1367-AI ECE-fullyOpenBack",
+            "roll": 41,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "playful mischief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "extreme happiness, radiant laughing delight expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "rotor-smoke main-shaft bearing column dress with a sculpted silver vertical spine, concentric waist bearings, a stepped mechanical hem, and bearing-cap slingback heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "shell-white strapless avionics-panel culotte jumpsuit with layered opaque instrument-window color blocks, a fold-out side console, a notched data-ribbon hem, and circuit-frame platform shoes; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "ocean-cobalt tail-fin double-apron ensemble with a deliberate narrow midriff, two asymmetric stabilizer panels, braided route seams, a split fin-tip hem, and stabilizer-keel pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "sunset-amber transmission-gear lattice coatlet over tailored charcoal shorts, with interlocking opaque ring ribs, a compact gearbox peplum, cascading route-light tabs, and telescoping torque-shaft boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "rotor-smoke main-shaft bearing column dress with a sculpted silver vertical spine, concentric waist bearings, a stepped mechanical hem, and bearing-cap slingback heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "shell-white strapless avionics-panel culotte jumpsuit with layered opaque instrument-window color blocks, a fold-out side console, a notched data-ribbon hem, and circuit-frame platform shoes; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "ocean-cobalt tail-fin double-apron ensemble with a deliberate narrow midriff, two asymmetric stabilizer panels, braided route seams, a split fin-tip hem, and stabilizer-keel pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "sunset-amber transmission-gear lattice coatlet over tailored charcoal shorts, with interlocking opaque ring ribs, a compact gearbox peplum, cascading route-light tabs, and telescoping torque-shaft boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE anchors the far-left paper lane while demonstrating the visibly open unloaded mechanism with both hands. At right, Radiance steps away while Ellie catches Radiance's free forearm, Alia catches Ellie's free forearm, and Alia closes a protective behind-waist embrace around Radiance with her other hand. Radiance securely cradles PAWS high with her remaining arm. The three-way choice is the first read, and the helicopter plus Port of Refuge fill separate foreground planes without crossing ECE's lane.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop with the unloaded magazine removed and action visibly open toward the isolated paper target; ECE touches nobody else",
+        "Radiance left forearm and hand securely cradle PAWS high against her upper torso and Radiance right forearm is gently caught by Ellie left hand",
+        "Ellie left hand catches Radiance's free forearm and Ellie right forearm is caught by Alia left hand",
+        "Alia left hand catches Ellie's free forearm and Alia right arm and hand close around Radiance's near waist in a protective behind embrace"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered summit overlook on Mount Talau above Neiafu in Vava'u, with the complete sheltered Port of Refuge curve, many green limestone islands, hidden coves, turquoise channels, distant coral gardens, town roofs kept small below, and clear golden-hour radiance. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: civilian helicopter flight couture. The theme and Tonga location must both be immediate foreground reads. Vava'u remains an equally dominant Tonga foreground through Mount Talau, Neiafu, the sheltered Port of Refuge and its green island chain. A sleek unbranded civilian helicopter is parked prominently on a separate summit pad with open cabin, canopy, rotor mast and landing gear visible. The four outfits use unrelated main-shaft, avionics, tail-fin and transmission constructions without logos or copied uniforms. Stored scene rolls: weather 6=clear golden-hour radiance; mascot state 30=PAWS only; mascot holder selector 75=Radiance; odd prop 61=inactive; odd holder 51=Radiance; odd family 45=mirrored megaphone sculpture; pole 68=inactive; rainbow-only 98=inactive; rainbow hosiery 73=inactive; wearer 61=AI ECE; palette 15=country-palette rainbow-like gradient; romance 87; compound 59; hard love 87; mission-prop pose/target 92. Exact wardrobe rolls: Radiance: midriff 67=covered, strapless 80=inactive, open back 61=inactive; Ellie: midriff 91=covered, strapless 8=active, open back 49=inactive; Alia: midriff 25=visible, strapless 82=inactive, open back 47=inactive; AI ECE: midriff 79=covered, strapless 52=inactive, open back 41=inactive. Exact outfit fingerprints, no substitutions: Radiance: rotor-smoke main-shaft bearing column dress with a sculpted silver vertical spine, concentric waist bearings, a stepped mechanical hem, and bearing-cap slingback heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: shell-white strapless avionics-panel culotte jumpsuit with layered opaque instrument-window color blocks, a fold-out side console, a notched data-ribbon hem, and circuit-frame platform shoes; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: ocean-cobalt tail-fin double-apron ensemble with a deliberate narrow midriff, two asymmetric stabilizer panels, braided route seams, a split fin-tip hem, and stabilizer-keel pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: sunset-amber transmission-gear lattice coatlet over tailored charcoal shorts, with interlocking opaque ring ribs, a compact gearbox peplum, cascading route-light tabs, and telescoping torque-shaft boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Theme-led scene. Radiance uses main-shaft bearing architecture, Ellie uses avionics-panel tailoring, Alia uses tail-fin double-apron construction, and ECE uses transmission-gear lattice. Port of Refuge and the Vava'u archipelago carry the country read at equal weight. Location design vocabulary: location-only Mount Talau contour, Port of Refuge horseshoe, Vava'u island chain, hidden-cove cuts, turquoise-channel bands, coral-garden fans, golden-hour arcs, and ocean-route curves. Use respectful secular Tonga geography and heritage through complete archipelago silhouettes, Nuku'alofa waterfront arcs, Royal Palace exterior geometry viewed only from a public overlook, Ha'amonga trilithon forms, coral-limestone strata, Mapu'a 'a Vaea blowhole plumes, reef shelves, Vava'u island chains, Port of Refuge curves, Mount Talau contours, pandanus weaving, and Pacific-current bands. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, ceremonial attire, royal person, copied uniform, airline or operator branding, badge, readable text, alcohol, military imagery, emergency-service insignia, or political messaging. Four visibly distinct coherent emotions: Radiance: roll 19=playful mischief, performed as playful mischief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 15=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 97=defiance, performed as defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 55=aching romantic longing, performed as aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 87: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Compound roll 59: ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace. Mandatory hard-love roll 87: one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE anchors the far-left paper lane while demonstrating the visibly open unloaded mechanism with both hands. At right, Radiance steps away while Ellie catches Radiance's free forearm, Alia catches Ellie's free forearm, and Alia closes a protective behind-waist embrace around Radiance with her other hand. Radiance securely cradles PAWS high with her remaining arm. The three-way choice is the first read, and the helicopter plus Port of Refuge fill separate foreground planes without crossing ECE's lane. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop with the unloaded magazine removed and action visibly open toward the isolated paper target; ECE touches nobody else; Radiance left forearm and hand securely cradle PAWS high against her upper torso and Radiance right forearm is gently caught by Ellie left hand; Ellie left hand catches Radiance's free forearm and Ellie right forearm is caught by Alia left hand; Alia left hand catches Ellie's free forearm and Alia right arm and hand close around Radiance's near waist in a protective behind embrace. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty geometric paper route target fixed to a complete thick sand-filled safety backstop on a closed lane at far left, oriented away from every person, mascot, helicopter, mountain path, tree, town roof, occupied structure, and camera. No ammunition, reload, firing, or trigger contact appears. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 30=PAWS only. Mascot holder selector 75=Radiance. PAWS only. Radiance securely cradles one tiny collarless golden kitten high against her upper torso during the pulled-away choice. PAWS stays far from ECE, the inert prop, paper lane, helicopter, summit edge, paths and every wet surface. No MAX. Odd-prop roll 61 is inactive. Do not add any bizarre secondary prop; stored inactive holder 51=Radiance and family 45=mirrored megaphone sculpture remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render clear golden-hour radiance cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": [
+    {
+      "scene": 1364,
+      "raw": "tmp/world-195x4/batch-336/raw/1364-tonga-nukualofa-raw.png",
+      "rawOutcome": "rendered with missing Ellie",
+      "recovery": "tmp/world-195x4/batch-336/recovery/1364-tonga-recovery.png",
+      "recoveryUsed": true,
+      "result": "accepted",
+      "acceptedAsset": "assets/lore/starlight-era/1364-tonga-nukualofa-helicopter-recovery.png",
+      "audit": "Recovery restores all four women plus the male, keeps Nuku'alofa and the civilian helicopter foregrounded, and preserves an isolated empty-water prop line. The exact slow-dance chain and male-to-ECE eye line are weaker than planned and are logged as throughput tolerances."
+    },
+    {
+      "scene": 1365,
+      "raw": null,
+      "rawOutcome": "output-stage moderation block",
+      "rawRequestId": "3cc288bc-c094-4272-a9c3-276a0e75985d",
+      "recovery": null,
+      "recoveryUsed": false,
+      "result": "rejected",
+      "audit": "No durable image was emitted. Throughput mode skipped a moderation recovery."
+    },
+    {
+      "scene": 1366,
+      "raw": null,
+      "rawOutcome": "output-stage moderation block",
+      "rawRequestId": "6fb99f37-be70-40c8-bf62-1ed75c7b159a",
+      "recovery": null,
+      "recoveryUsed": false,
+      "result": "rejected",
+      "audit": "No durable image was emitted. Throughput mode skipped a moderation recovery."
+    },
+    {
+      "scene": 1367,
+      "raw": "tmp/world-195x4/batch-336/raw/1367-tonga-vavau-raw.png",
+      "rawOutcome": "rendered with group-crossing prop direction",
+      "recovery": "tmp/world-195x4/batch-336/recovery/1367-tonga-recovery.png",
+      "recoveryUsed": true,
+      "result": "accepted",
+      "acceptedAsset": "assets/lore/starlight-era/1367-tonga-vavau-helicopter-recovery.png",
+      "audit": "Recovery turns ECE fully toward the isolated paper target and backstop, preserves all four women, PAWS, Mount Talau, Port of Refuge and the civilian helicopter. Minor pose and garment deviations are accepted under throughput mode."
+    }
+  ],
+  "acceptedAssets": [
+    {
+      "scene": 1364,
+      "file": "1364-tonga-nukualofa-helicopter-recovery.png",
+      "sha256": "5D4E6324CC84EBBCECC9A7D20691B1D8C3E322228345F020FAA2E153F041B183",
+      "source": "tmp/world-195x4/batch-336/recovery/1364-tonga-recovery.png"
+    },
+    {
+      "scene": 1367,
+      "file": "1367-tonga-vavau-helicopter-recovery.png",
+      "sha256": "207D9FE1E8E6075F8F1FEF385B48C8DE261B99027891EC0D47D0E2C6F83A334E",
+      "source": "tmp/world-195x4/batch-336/recovery/1367-tonga-recovery.png"
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1365,
+      "reason": "output-stage moderation block with no durable image"
+    },
+    {
+      "scene": 1366,
+      "reason": "output-stage moderation block with no durable image"
+    }
+  ],
+  "xPost": {
+    "status": "ready-eligible-assets",
+    "requiredAcceptedCurrentCountryAssets": 2,
+    "availableAcceptedCurrentCountryAssets": 2,
+    "caption": "Tonga ❤️ Saint Lucia #Tonga #WorldXXXSeries",
+    "primaryAssets": [
+      "1364-tonga-nukualofa-helicopter-recovery.png",
+      "1367-tonga-vavau-helicopter-recovery.png"
+    ],
+    "secondaryAsset": "1344-saint-lucia-soufriere-runway-paper-target-recovery.png"
+  },
+  "acceptanceMode": {
+    "name": "throughput-acceptance-override",
+    "startingBatch": 336,
+    "defaultDecision": "accept and log deviations",
+    "rejectOnly": "missing core cast, decisive unsafe mission-prop line, explicit content, visible firing or ammunition, or glaring unusable whole-limb duplication"
+  },
+  "terminalAt": "2026-08-10T10:50:05.777Z",
+  "acceptanceSummary": {
+    "attemptedScenes": 4,
+    "acceptedScenes": 2,
+    "rejectedScenes": 2,
+    "terminalOutcomeAllowsQueueAdvance": true,
+    "xEligible": true
+  }
+}
