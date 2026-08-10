@@ -26,6 +26,10 @@ const economyNativeAdapterSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/native_adapter.rs", import.meta.url),
   "utf8",
 );
+const economyRuntimeAdapterSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/runtime_adapter.rs", import.meta.url),
+  "utf8",
+);
 const economySource = readFileSync(
   new URL("../programs/iat_b3_economy/src/lib.rs", import.meta.url),
   "utf8",
@@ -135,14 +139,19 @@ test("the Rust workspace has no unreported faction or core-cap entrypoint", () =
   assert.match(economyCargo, /crate-type = \["lib"\]/u);
   assert.match(economyCargo, /solana-pubkey = \{ version = "=3\.0\.0"/u);
   assert.match(economyCargo, /solana-sdk-ids = "=3\.1\.0"/u);
+  assert.match(economyCargo, /runtime-account-bridge = \[/u);
+  assert.match(economyCargo, /solana-account-info = \{[^}]+optional = true/u);
   assert.doesNotMatch(
     economyCargo,
-    /cdylib|anchor-|spl-token|solana-(?:account-info|cpi|program-entrypoint|system-interface)/u,
+    /cdylib|anchor-|spl-token|solana-(?:cpi|program-entrypoint|system-interface)/u,
   );
   assert.doesNotMatch(
-    `${economySource}\n${economyNativeAdapterSource}`,
+    `${economySource}\n${economyNativeAdapterSource}\n${economyRuntimeAdapterSource}`,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(/u,
   );
+  assert.doesNotMatch(economyRuntimeAdapterSource, /try_borrow_mut|instruction_data/u);
+  assert.match(economyRuntimeAdapterSource, /Clock::get\(\)/u);
+  assert.match(economyRuntimeAdapterSource, /Rent::get\(\)/u);
   assert.match(
     audit,
     /faction and core-team-cap implementations currently present[\s\S]+JavaScript specifications[\s\S]+host-only `iat_b3_economy` library[\s\S]+no Solana\s+entrypoint or\s+public dispatcher/u,

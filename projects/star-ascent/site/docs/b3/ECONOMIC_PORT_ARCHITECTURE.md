@@ -574,6 +574,26 @@ the sole codec blocker and the aggregate stage remains
 no Solana account ownership, PDA/bump derivation, lifecycle, persistence,
 dispatcher, CPI, or public exposure.
 
+The next non-activating adapter slice is available only behind the
+`runtime-account-bridge` Cargo feature. It reads real immutable Solana
+`AccountInfo` values, sources the Daily Law timestamp from `Clock::get()`, and
+sources strict-state creation rent from `Rent::get()`. It passes those runtime
+facts into the existing opaque Daily Law verifier, signer/system-payer checks,
+seven strict PDA-state codecs, and inert existing/create write-intent builders.
+The public runtime functions do not accept a timestamp, rent minimum, transfer
+disposition, program identity, mint identity, or network identity from
+instruction bytes. Tests use private injected Clock/Rent seams only to prove
+the success path on a host without weakening the public sysvar boundary.
+
+This stage is
+`FEATURE_GATED_READ_ONLY_ACCOUNTINFO_CLOCK_RENT_NO_DISPATCH` and remains
+incomplete. It has no instruction ABI, entrypoint, mutable account borrow,
+write, allocation, System Program CPI, Token-2022 parser/CPI, batch commit,
+Config codec, frozen production-identity binder, handler-specific account
+graph, or public exposure. It does not change any matrix row's
+`handlerComplete`, the aggregate `DISABLED_UNTIL_ALL_15_PASS` exposure, the
+core-custody/faction/Genesis HOLDs, or the complete-dispatcher boundary.
+
 None of these kernels may be exposed as a write entrypoint. The first safe
 deployable slice is the complete fifteen-row dispatcher behind the frozen
 Token-2022 hook, not a single handler.

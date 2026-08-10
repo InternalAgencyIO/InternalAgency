@@ -687,6 +687,20 @@ impl StrictStateValue {
     }
 }
 
+impl StrictStateKind {
+    pub const fn account_len(self) -> usize {
+        match self {
+            Self::Position => POSITION_ACCOUNT_LEN,
+            Self::Lane => LANE_ACCOUNT_LEN,
+            Self::Round => ROUND_ACCOUNT_LEN,
+            Self::CoreReward => CORE_REWARD_ACCOUNT_LEN,
+            Self::Agency => AGENCY_ACCOUNT_LEN,
+            Self::AgencyOwnerIndex => AGENCY_OWNER_INDEX_ACCOUNT_LEN,
+            Self::Eligibility => ELIGIBILITY_ACCOUNT_LEN,
+        }
+    }
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct AuthenticatedStateAccount {
     law: LawWriteStamp,

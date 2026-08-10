@@ -3,6 +3,8 @@
 
 mod codec;
 pub mod native_adapter;
+#[cfg(feature = "runtime-account-bridge")]
+pub mod runtime_adapter;
 pub mod stake_ingress;
 
 pub use codec::{
@@ -790,6 +792,26 @@ impl CanonicalDailyLawBinding {
             mint,
             network_genesis_hash,
         }
+    }
+
+    pub const fn law_program_id(&self) -> [u8; 32] {
+        self.law_program_id
+    }
+
+    pub const fn law_state_address(&self) -> [u8; 32] {
+        self.law_state_address
+    }
+
+    pub const fn law_state_bump(&self) -> u8 {
+        self.law_state_bump
+    }
+
+    pub const fn mint(&self) -> [u8; 32] {
+        self.mint
+    }
+
+    pub const fn network_genesis_hash(&self) -> [u8; 32] {
+        self.network_genesis_hash
     }
 }
 

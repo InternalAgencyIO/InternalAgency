@@ -29,6 +29,10 @@ const economyNativeAdapterSource = readFileSync(
   new URL("programs/iat_b3_economy/src/native_adapter.rs", siteRoot),
   "utf8",
 );
+const economyRuntimeAdapterSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/runtime_adapter.rs", siteRoot),
+  "utf8",
+);
 const lawSource = readFileSync(
   new URL("programs/iat_b3_law/src/lib.rs", siteRoot),
   "utf8",
@@ -130,9 +134,17 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
     /solana-pubkey = \{ version = "=3\.0\.0", features = \["curve25519"\] \}/u,
   );
   assert.match(economyManifest, /solana-sdk-ids = "=3\.1\.0"/u);
+  assert.match(economyManifest, /runtime-account-bridge = \[/u);
+  for (const dependency of ["solana-account-info", "solana-clock", "solana-rent", "solana-sysvar"]) {
+    assert.match(
+      economyManifest,
+      new RegExp(`${dependency} = \\{[^}]+optional = true`, "u"),
+      dependency,
+    );
+  }
   assert.doesNotMatch(
     economyManifest,
-    /cdylib|anchor-|spl-token|solana-(?:account-info|cpi|program-entrypoint|system-interface)/u,
+    /cdylib|anchor-|spl-token|solana-(?:cpi|program-entrypoint|system-interface)/u,
   );
   assert.doesNotMatch(
     economyCode,
@@ -204,6 +216,57 @@ test("the native state adapter remains an explicit nonactivating truth surface",
   assert.doesNotMatch(
     economyNativeAdapterSource.replace(/\/\/.*$/gmu, "").replace(/\/\*[\s\S]*?\*\//gu, ""),
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo/u,
+  );
+});
+
+test("the feature-gated runtime bridge reads AccountInfo Clock and Rent without activating a dispatcher", () => {
+  assert.deepEqual(matrix.runtimeAccountBridgePreparation, {
+    stage: "FEATURE_GATED_READ_ONLY_ACCOUNTINFO_CLOCK_RENT_NO_DISPATCH",
+    feature: "runtime-account-bridge",
+    complete: false,
+    accountInfoReads: true,
+    clockSysvarAuthenticated: true,
+    rentSysvarAuthenticated: true,
+    mutableAccountBorrows: false,
+    accountWrites: false,
+    systemCpi: false,
+    tokenCpi: false,
+    instructionAbiFrozen: false,
+    solanaEntrypoint: false,
+    publicDispatcher: false,
+    productionIdentityBindingFrozen: false,
+    configCodecSupported: false,
+    anyHandlerComplete: false,
+    publicExposure: false,
+  });
+  assert.match(
+    economySource,
+    /#\[cfg\(feature = "runtime-account-bridge"\)\]\s+pub mod runtime_adapter;/u,
+  );
+  assert.match(economyRuntimeAdapterSource, /use solana_account_info::AccountInfo;/u);
+  assert.match(economyRuntimeAdapterSource, /Clock::get\(\)/u);
+  assert.match(economyRuntimeAdapterSource, /Rent::get\(\)/u);
+  assert.match(
+    economyRuntimeAdapterSource,
+    /RUNTIME_ACCOUNT_BRIDGE_STATUS:[\s\S]+FEATURE_GATED_READ_ONLY_ACCOUNTINFO_CLOCK_RENT_NO_DISPATCH/u,
+  );
+  for (const falseFlag of [
+    "mutable_account_borrows",
+    "account_writes_executed",
+    "system_cpi_executed",
+    "token_cpi_executed",
+    "instruction_abi_frozen",
+    "entrypoint_exposed",
+    "dispatcher_exposed",
+    "production_identity_binding_frozen",
+    "config_codec_supported",
+    "any_handler_complete",
+  ]) {
+    assert.match(economyRuntimeAdapterSource, new RegExp(`${falseFlag}: false`, "u"), falseFlag);
+  }
+  assert.doesNotMatch(
+    economyRuntimeAdapterSource.replace(/\/\/.*$/gmu, "").replace(/\/\*[\s\S]*?\*\//gu, ""),
+    /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|try_borrow_mut|instruction_data/u,
   );
 });
 

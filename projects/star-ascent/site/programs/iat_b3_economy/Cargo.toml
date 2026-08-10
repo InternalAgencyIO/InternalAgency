@@ -10,11 +10,24 @@ publish = false
 name = "iat_b3_economy"
 crate-type = ["lib"]
 
+[features]
+default = []
+runtime-account-bridge = [
+    "dep:solana-account-info",
+    "dep:solana-clock",
+    "dep:solana-rent",
+    "dep:solana-sysvar",
+]
+
 [dependencies]
 iat-b3-consensus = { path = "../iat_b3_consensus" }
 sha2 = { version = "=0.10.9", default-features = false }
+solana-account-info = { version = "=3.1.1", optional = true }
+solana-clock = { version = "=3.2.0", features = ["sysvar"], optional = true }
 solana-pubkey = { version = "=3.0.0", features = ["curve25519"] }
+solana-rent = { version = "=3.1.0", features = ["sysvar"], optional = true }
 solana-sdk-ids = "=3.1.0"
+solana-sysvar = { version = "=3.1.1", optional = true }
 
 [dev-dependencies]
 iat-v2 = { path = "../iat_v2", features = ["no-entrypoint"] }

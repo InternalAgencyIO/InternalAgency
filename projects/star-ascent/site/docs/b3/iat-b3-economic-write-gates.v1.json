@@ -29,6 +29,25 @@
     "configCodecStatus": "BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE",
     "roundCodecStatus": "STRICT_V1"
   },
+  "runtimeAccountBridgePreparation": {
+    "stage": "FEATURE_GATED_READ_ONLY_ACCOUNTINFO_CLOCK_RENT_NO_DISPATCH",
+    "feature": "runtime-account-bridge",
+    "complete": false,
+    "accountInfoReads": true,
+    "clockSysvarAuthenticated": true,
+    "rentSysvarAuthenticated": true,
+    "mutableAccountBorrows": false,
+    "accountWrites": false,
+    "systemCpi": false,
+    "tokenCpi": false,
+    "instructionAbiFrozen": false,
+    "solanaEntrypoint": false,
+    "publicDispatcher": false,
+    "productionIdentityBindingFrozen": false,
+    "configCodecSupported": false,
+    "anyHandlerComplete": false,
+    "publicExposure": false
+  },
   "hostOnlyPureTransitions": [
     {
       "name": "expire_round",
