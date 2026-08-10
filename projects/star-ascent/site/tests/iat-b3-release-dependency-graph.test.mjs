@@ -210,7 +210,7 @@ test("exact ordered node and edge inventories encode the corrected dependency DA
   assert.deepEqual(RELEASE_DEPENDENCY_EDGES, EXPECTED_EDGES);
   assert.deepEqual(DRAFT.edges, EXPECTED_EDGES);
   assert.equal(RELEASE_DEPENDENCY_EDGES.length, 132);
-  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "51effbabd2ede3d2bb08b17a8a40d6c27522634ed9b6eaf882578cf31549a890");
+  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "3479af5786dded90c9908190ff293aac5d5715d425c972bd3aced222062c340c");
   assert.equal(DRAFT.graphDefinitionSha256, RELEASE_DEPENDENCY_GRAPH_SHA256);
   assert.deepEqual(
     DRAFT.terminalPredicate.requiredNodeIds,
