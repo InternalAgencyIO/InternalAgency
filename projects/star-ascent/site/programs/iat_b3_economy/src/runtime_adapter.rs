@@ -163,6 +163,7 @@ pub enum RuntimeAdapterError {
     ConfigGenesisCodec(ConfigGenesisCodecError),
     AccountBorrowFailed,
     ConfigAccountMustBeReadOnly,
+    ConfigAccountMustBeWritable,
     ConfigMintMismatch,
     ConfigBumpMismatch,
     ConfigPhaseNotActive,
@@ -393,6 +394,15 @@ pub fn parse_config_genesis_account_info(
     binding: &NativeEconomyBinding,
     account: &AccountInfo<'_>,
 ) -> Result<ReadonlyConfigGenesisAccount, RuntimeAdapterError> {
+    parse_config_genesis_account_info_with_expected_writability(gate, binding, account, false)
+}
+
+fn parse_config_genesis_account_info_with_expected_writability(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+    expected_writable: bool,
+) -> Result<ReadonlyConfigGenesisAccount, RuntimeAdapterError> {
     if gate.mint() != binding.mint() {
         return Err(RuntimeAdapterError::Native(
             NativeAdapterError::LawMintMismatch,
@@ -412,8 +422,11 @@ pub fn parse_config_genesis_account_info(
             NativeAdapterError::AccountOwnerMismatch,
         ));
     }
-    if account.is_writable {
+    if account.is_writable && !expected_writable {
         return Err(RuntimeAdapterError::ConfigAccountMustBeReadOnly);
+    }
+    if !account.is_writable && expected_writable {
+        return Err(RuntimeAdapterError::ConfigAccountMustBeWritable);
     }
     if account.executable {
         return Err(RuntimeAdapterError::Native(
@@ -467,6 +480,23 @@ pub fn authenticate_runtime_production_active_config(
     require_production_active_config(observed, runtime_law.gate(), binding)
 }
 
+/// Authenticate the exact writable Config PDA for the production CAS path.
+/// This is intentionally separate from the read-only parser so general
+/// Config/Genesis observations cannot silently acquire mutation semantics.
+pub fn authenticate_runtime_production_active_writable_config(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
+    let observed = parse_config_genesis_account_info_with_expected_writability(
+        runtime_law.gate(),
+        binding,
+        account,
+        true,
+    )?;
+    require_production_active_config(observed, runtime_law.gate(), binding)
+}
+
 /// Host/rehearsal seam for authenticating the real Config PDA with an existing
 /// opaque Law gate. Production runtime composition uses
 /// [`authenticate_runtime_production_active_config`] so the Law AccountInfo and
@@ -477,6 +507,19 @@ pub fn authenticate_production_active_config_account_info(
     account: &AccountInfo<'_>,
 ) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
     let observed = parse_config_genesis_account_info(gate, binding, account)?;
+    require_production_active_config(observed, gate, binding)
+}
+
+/// Host/rehearsal seam for the narrow writable-Config production CAS. Runtime
+/// composition must use [`authenticate_runtime_production_active_writable_config`]
+/// so the Law AccountInfo and Clock remain opaque facts.
+pub fn authenticate_production_active_writable_config_account_info(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
+    let observed =
+        parse_config_genesis_account_info_with_expected_writability(gate, binding, account, true)?;
     require_production_active_config(observed, gate, binding)
 }
 

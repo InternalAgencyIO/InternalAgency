@@ -181,9 +181,13 @@ checked-add and Position-construction finalizer. It restores the prior delegate,
 refuses completion until the restoration reload is exact, and only then supplies
 the exact completed Config/Position/Lane values to the transaction-local
 persistence callback. Large preflight and finalizer values are heap-bounded; the
-SBF stack gate and loopback rollback matrix pass. It still has no production
-account lifecycle, strict persisted Config/Position/Lane write, entrypoint,
-dispatcher, frozen identity, or public ABI; those remain the security boundary.
+SBF stack gate and loopback rollback matrix pass. A separate production-ACTIVE
+Config CAS now revalidates the same opaque Config preimage before and after its
+mutable borrow and can increase only retained V2 `staked_principal`; every
+other Config field is copied from the authenticated state. That narrow write is
+not yet atomically composed with the ingress CPI callback and exact Position/
+Lane persistence. There is still no public lifecycle dispatcher, frozen
+identity, entrypoint, or public ABI; those remain the security boundary.
 
 Burning is different from transferring. The sole core-cap burn path uses
 Token-2022 `BurnChecked`, signed by the economic vault-authority PDA. It is not

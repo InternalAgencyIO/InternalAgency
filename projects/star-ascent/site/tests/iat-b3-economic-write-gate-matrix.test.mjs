@@ -509,9 +509,26 @@ test("the runtime write adapter executes only authenticated existing-state CAS b
   );
   assert.match(
     economyRuntimeWriteAdapterSource,
+    /pub fn execute_production_active_config_stake_principal_cas_account_info/u,
+  );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
     /production_active_config_capability_required: true/u,
   );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
+    /production_active_config_stake_principal_cas_supported: true/u,
+  );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
+    /next_state\.config\.staked_principal = next_staked_principal/u,
+  );
   assert.match(economyRuntimeWriteAdapterSource, /RuntimeProductionActiveConfig/u);
+  assert.match(
+    economyRuntimeAdapterSource,
+    /pub fn authenticate_runtime_production_active_writable_config/u,
+  );
+  assert.match(economyRuntimeAdapterSource, /ConfigAccountMustBeWritable/u);
   assert.match(economyRuntimeWriteAdapterSource, /ActiveConfigCapabilityMismatch/u);
   assert.match(economyRuntimeWriteAdapterSource, /validate_atomic_write_preconditions/u);
   assert.match(economyRuntimeWriteAdapterSource, /try_borrow_mut_data\(\)/u);
@@ -655,6 +672,10 @@ test("the local lifecycle fixture proves SBF CPI without becoming a production s
     [economyRuntimeAdapterSource, "prepare_create_state_account_info"],
     [economyRuntimeAccountLifecycleSource, "execute_create_state_batch_account_infos"],
     [economyRuntimeWriteAdapterSource, "execute_existing_write_batch_account_infos"],
+    [
+      economyRuntimeWriteAdapterSource,
+      "execute_production_active_config_stake_principal_cas_account_info",
+    ],
     [
       economyRuntimeWriteAdapterSource,
       "execute_production_active_existing_write_batch_account_infos",

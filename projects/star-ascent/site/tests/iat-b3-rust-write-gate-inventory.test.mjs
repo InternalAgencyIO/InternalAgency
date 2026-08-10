@@ -243,6 +243,22 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
     economyRuntimeWriteAdapterSource,
     /execute_production_active_existing_write_batch_account_infos/u,
   );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
+    /execute_production_active_config_stake_principal_cas_account_info/u,
+  );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
+    /production_active_config_stake_principal_cas_supported: true/u,
+  );
+  assert.match(
+    economyRuntimeAdapterSource,
+    /pub fn authenticate_runtime_production_active_writable_config/u,
+  );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
+    /next_state\.config\.staked_principal = next_staked_principal/u,
+  );
   assert.match(economyRuntimeWriteAdapterSource, /ActiveConfigCapabilityMismatch/u);
   assert.match(economyRuntimeWriteAdapterSource, /all_mutable_borrows_acquired_before_write: true/u);
   assert.match(economyRuntimeWriteAdapterSource, /all_preimages_revalidated_before_write: true/u);
@@ -313,7 +329,18 @@ test("the Config Genesis codec is a strict read-only representation, not a phase
     /AccountInfo|entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|try_borrow_mut/u,
   );
 
-  const parser = functionBody(economyRuntimeAdapterSource, "parse_config_genesis_account_info");
+  const parserEntry = functionBody(
+    economyRuntimeAdapterSource,
+    "parse_config_genesis_account_info",
+  );
+  assert.match(
+    parserEntry,
+    /parse_config_genesis_account_info_with_expected_writability\(gate, binding, account, false\)/u,
+  );
+  const parser = functionBody(
+    economyRuntimeAdapterSource,
+    "parse_config_genesis_account_info_with_expected_writability",
+  );
   assertTokensInOrder(
     parser,
     [
@@ -322,7 +349,7 @@ test("the Config Genesis codec is a strict read-only representation, not a phase
       "derive_pda(binding, identity)",
       "account.key.to_bytes() != derived.key",
       "account.owner.to_bytes() != binding.program_id()",
-      "account.is_writable",
+      "account.is_writable && !expected_writable",
       "account.executable",
       "account.is_signer",
       "try_borrow_data()",

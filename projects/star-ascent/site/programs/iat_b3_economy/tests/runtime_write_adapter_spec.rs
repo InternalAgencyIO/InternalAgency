@@ -8,18 +8,22 @@ use iat_b3_economy::native_adapter::{
     PdaIdentity, StrictStateValue,
 };
 use iat_b3_economy::runtime_adapter::{
-    authenticate_production_active_config_account_info, RuntimeProductionActiveConfig,
+    authenticate_production_active_config_account_info,
+    authenticate_production_active_writable_config_account_info, RuntimeAdapterError,
+    RuntimeProductionActiveConfig,
 };
 use iat_b3_economy::runtime_write_adapter::{
+    execute_production_active_config_stake_principal_cas_account_info,
     execute_production_active_existing_write_batch_account_infos, RuntimeWriteAdapterError,
     RuntimeWriteAdapterTruth, RUNTIME_WRITE_ADAPTER_TRUTH,
 };
 use iat_b3_economy::{
-    decode_lane_state, decode_position_state, encode_config_genesis_state, encode_lane_state,
-    encode_position_state, verify_daily_law_open, CanonicalDailyLawBinding, ConfigGenesisState,
-    ConfigState, EligibilityState, GenesisPhase, LaneState, PositionState, ReadonlyDailyLawAccount,
-    ValidatedDailyLawWrite, CONFIG_GENESIS_ACCOUNT_LEN, LANE_ACCOUNT_LEN, LAW_STATE_LEN,
-    LAW_STATE_MAGIC, LAW_STATE_VERSION, MAINNET_SUPPLY, POSITION_ACCOUNT_LEN,
+    decode_config_genesis_state, decode_lane_state, decode_position_state,
+    encode_config_genesis_state, encode_lane_state, encode_position_state, verify_daily_law_open,
+    CanonicalDailyLawBinding, ConfigGenesisState, ConfigState, EligibilityState, GenesisPhase,
+    LaneState, PositionState, ReadonlyDailyLawAccount, ValidatedDailyLawWrite,
+    CONFIG_GENESIS_ACCOUNT_LEN, LANE_ACCOUNT_LEN, LAW_STATE_LEN, LAW_STATE_MAGIC,
+    LAW_STATE_VERSION, MAINNET_SUPPLY, POSITION_ACCOUNT_LEN,
 };
 use solana_account_info::AccountInfo;
 use solana_sdk_ids::system_program;
@@ -405,6 +409,160 @@ fn stale_preimage_or_late_borrow_conflict_leaves_the_entire_batch_unchanged() {
 }
 
 #[test]
+fn production_active_config_cas_changes_only_staked_principal_and_revalidates_preimage() {
+    let binding = binding();
+    let gate = open_gate(CLOCK_TIMESTAMP);
+    let original_state = production_active_config(&gate, &binding).state();
+    let mut config_data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+    encode_config_genesis_state(&original_state, &mut config_data).unwrap();
+    let original_data = config_data;
+    let config_key = binding.config().into();
+    let owner = binding.program_id().into();
+    let mut lamports = 1;
+    let account = AccountInfo::new(
+        &config_key,
+        false,
+        true,
+        &mut lamports,
+        &mut config_data,
+        &owner,
+        false,
+    );
+    let active_config =
+        authenticate_production_active_writable_config_account_info(&gate, &binding, &account)
+            .unwrap();
+
+    assert_eq!(
+        execute_production_active_config_stake_principal_cas_account_info(
+            &gate,
+            &active_config,
+            &binding,
+            0,
+            &account,
+        ),
+        Err(RuntimeWriteAdapterError::ConfigPrincipalDeltaInvalid)
+    );
+    assert_eq!(&*account.try_borrow_data().unwrap(), &original_data);
+
+    let receipt = execute_production_active_config_stake_principal_cas_account_info(
+        &gate,
+        &active_config,
+        &binding,
+        250,
+        &account,
+    )
+    .unwrap();
+    let updated = decode_config_genesis_state(&account.try_borrow_data().unwrap()).unwrap();
+    let mut expected = original_state;
+    expected.config.staked_principal = 1_250;
+    assert_eq!(updated, expected);
+    assert_eq!(receipt.config_key(), binding.config());
+    assert_eq!(
+        receipt.expected_preimage_sha256(),
+        active_config.preimage_sha256()
+    );
+    assert_eq!(receipt.previous_staked_principal(), 1_000);
+    assert_eq!(receipt.next_staked_principal(), 1_250);
+    assert_eq!(receipt.law_account_sha256(), gate.law_account_sha256());
+    assert_ne!(
+        receipt.postimage_sha256(),
+        receipt.expected_preimage_sha256()
+    );
+
+    assert_eq!(
+        execute_production_active_config_stake_principal_cas_account_info(
+            &gate,
+            &active_config,
+            &binding,
+            1,
+            &account,
+        ),
+        Err(RuntimeWriteAdapterError::ConfigPreimageMismatch)
+    );
+    assert_eq!(
+        decode_config_genesis_state(&account.try_borrow_data().unwrap()).unwrap(),
+        expected
+    );
+}
+
+#[test]
+fn production_active_config_cas_rejects_wrong_law_flags_and_borrow_conflicts_without_writes() {
+    let binding = binding();
+    let gate = open_gate(CLOCK_TIMESTAMP);
+    let later_gate = open_gate(CLOCK_TIMESTAMP + 1);
+    let original_state = production_active_config(&gate, &binding).state();
+    let mut config_data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+    encode_config_genesis_state(&original_state, &mut config_data).unwrap();
+    let original_data = config_data;
+    let config_key = binding.config().into();
+    let owner = binding.program_id().into();
+    let mut lamports = 1;
+    let account = AccountInfo::new(
+        &config_key,
+        false,
+        true,
+        &mut lamports,
+        &mut config_data,
+        &owner,
+        false,
+    );
+    let active_config =
+        authenticate_production_active_writable_config_account_info(&gate, &binding, &account)
+            .unwrap();
+
+    assert_eq!(
+        execute_production_active_config_stake_principal_cas_account_info(
+            &later_gate,
+            &active_config,
+            &binding,
+            1,
+            &account,
+        ),
+        Err(RuntimeWriteAdapterError::ActiveConfigCapabilityMismatch)
+    );
+    let held = account.try_borrow_data().unwrap();
+    assert_eq!(
+        execute_production_active_config_stake_principal_cas_account_info(
+            &gate,
+            &active_config,
+            &binding,
+            1,
+            &account,
+        ),
+        Err(RuntimeWriteAdapterError::AccountBorrowFailed)
+    );
+    drop(held);
+    assert_eq!(&*account.try_borrow_data().unwrap(), &original_data);
+
+    let mut readonly_data = original_data;
+    let mut readonly_lamports = 1;
+    let readonly = AccountInfo::new(
+        &config_key,
+        false,
+        false,
+        &mut readonly_lamports,
+        &mut readonly_data,
+        &owner,
+        false,
+    );
+    assert_eq!(
+        authenticate_production_active_writable_config_account_info(&gate, &binding, &readonly),
+        Err(RuntimeAdapterError::ConfigAccountMustBeWritable)
+    );
+    assert_eq!(
+        execute_production_active_config_stake_principal_cas_account_info(
+            &gate,
+            &active_config,
+            &binding,
+            1,
+            &readonly,
+        ),
+        Err(RuntimeWriteAdapterError::ConfigAccountFlagsMismatch)
+    );
+    assert_eq!(&*readonly.try_borrow_data().unwrap(), &original_data);
+}
+
+#[test]
 fn public_surface_remains_narrow_and_fail_closed() {
     assert_eq!(
         RUNTIME_WRITE_ADAPTER_TRUTH,
@@ -416,6 +574,7 @@ fn public_surface_remains_narrow_and_fail_closed() {
             all_mutable_borrows_acquired_before_write: true,
             all_preimages_revalidated_before_write: true,
             account_data_writes_supported: true,
+            production_active_config_stake_principal_cas_supported: true,
             account_creation_supported: false,
             lamport_writes_supported: false,
             system_cpi_supported: false,

@@ -366,8 +366,11 @@ and its SBF build has no over-limit stack frame. A loopback
 validator replay proves OPEN success plus unfinalized, locked, substituted-law,
 hostile-token-ordering, hook, CPI-guard, persistence, restoration, and later-CPI
 rollback. This still exposes no production lifecycle, serialized post-CPI
-Config/Position/Lane write, Solana entrypoint, frozen ABI, production identity,
-or public dispatch, so no handler or release gate is complete.
+Position/Lane write, Solana entrypoint, frozen ABI, production identity, or
+public dispatch. A separate production-ACTIVE Config CAS is present, but it can
+only increase the authenticated preimage's retained V2 `staked_principal` and
+is not yet atomically composed with ingress CPI plus Position/Lane persistence.
+No handler or release gate is complete.
 The older unphased combined entry remains only for the pinned structural SBF
 fixture and is not the production route.
 

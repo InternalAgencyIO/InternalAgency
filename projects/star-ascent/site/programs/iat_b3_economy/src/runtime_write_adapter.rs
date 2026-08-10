@@ -17,7 +17,10 @@ use crate::native_adapter::{
     NativeAdapterError, NativeEconomyBinding, StateWriteIntent,
 };
 use crate::runtime_adapter::RuntimeProductionActiveConfig;
-use crate::ValidatedDailyLawWrite;
+use crate::{
+    decode_config_genesis_state, encode_config_genesis_state, GenesisPhase, ValidatedDailyLawWrite,
+    CONFIG_GENESIS_ACCOUNT_LEN,
+};
 use sha2::{Digest, Sha256};
 use solana_account_info::AccountInfo;
 
@@ -33,6 +36,7 @@ pub struct RuntimeWriteAdapterTruth {
     pub all_mutable_borrows_acquired_before_write: bool,
     pub all_preimages_revalidated_before_write: bool,
     pub account_data_writes_supported: bool,
+    pub production_active_config_stake_principal_cas_supported: bool,
     pub account_creation_supported: bool,
     pub lamport_writes_supported: bool,
     pub system_cpi_supported: bool,
@@ -52,6 +56,7 @@ pub const RUNTIME_WRITE_ADAPTER_TRUTH: RuntimeWriteAdapterTruth = RuntimeWriteAd
     all_mutable_borrows_acquired_before_write: true,
     all_preimages_revalidated_before_write: true,
     account_data_writes_supported: true,
+    production_active_config_stake_principal_cas_supported: true,
     account_creation_supported: false,
     lamport_writes_supported: false,
     system_cpi_supported: false,
@@ -71,6 +76,14 @@ pub enum RuntimeWriteAdapterError {
     AccountBorrowFailed,
     PostValidationPreimageMismatch,
     ActiveConfigCapabilityMismatch,
+    ConfigAccountIdentityMismatch,
+    ConfigAccountFlagsMismatch,
+    ConfigAccountLengthMismatch,
+    ConfigPreimageMismatch,
+    ConfigStateMismatch,
+    ConfigPrincipalDeltaInvalid,
+    ConfigPrincipalOverflow,
+    ConfigCodecRejected,
 }
 
 impl From<NativeAdapterError> for RuntimeWriteAdapterError {
@@ -93,6 +106,139 @@ impl<const N: usize> RuntimeWriteReceipt<N> {
     pub const fn postimage_sha256(&self) -> &[[u8; 32]; N] {
         &self.postimage_sha256
     }
+}
+
+/// Receipt for the only Config mutation admitted by this adapter: a checked,
+/// non-zero increase of retained V2 `staked_principal` on the exact
+/// authenticated ACTIVE Config preimage. It is not handler, CPI, deployment,
+/// release, or Mainnet evidence.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ProductionActiveConfigStakePrincipalReceipt {
+    config_key: [u8; 32],
+    expected_preimage_sha256: [u8; 32],
+    postimage_sha256: [u8; 32],
+    previous_staked_principal: u64,
+    next_staked_principal: u64,
+    law_account_sha256: [u8; 32],
+}
+
+impl ProductionActiveConfigStakePrincipalReceipt {
+    pub const fn config_key(&self) -> [u8; 32] {
+        self.config_key
+    }
+
+    pub const fn expected_preimage_sha256(&self) -> [u8; 32] {
+        self.expected_preimage_sha256
+    }
+
+    pub const fn postimage_sha256(&self) -> [u8; 32] {
+        self.postimage_sha256
+    }
+
+    pub const fn previous_staked_principal(&self) -> u64 {
+        self.previous_staked_principal
+    }
+
+    pub const fn next_staked_principal(&self) -> u64 {
+        self.next_staked_principal
+    }
+
+    pub const fn law_account_sha256(&self) -> [u8; 32] {
+        self.law_account_sha256
+    }
+}
+
+fn require_active_config_capability(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+) -> Result<(), RuntimeWriteAdapterError> {
+    if active_config.program_id() != binding.program_id()
+        || active_config.mint() != binding.mint()
+        || active_config.key() != binding.config()
+        || active_config.law_account_sha256() != gate.law_account_sha256()
+        || active_config.law_unix_timestamp() != gate.unix_timestamp()
+        || active_config.law_local_day() != gate.local_day()
+        || active_config.state().phase != GenesisPhase::Active
+        || !active_config.state().config.active
+    {
+        return Err(RuntimeWriteAdapterError::ActiveConfigCapabilityMismatch);
+    }
+    Ok(())
+}
+
+/// Apply the production stake-ingress Config delta without admitting a generic
+/// 272-byte Config writer. The next image is constructed from the authenticated
+/// state and changes only `staked_principal`. The live account is checked from
+/// an immutable borrow, then checked again after acquiring the mutable borrow;
+/// no byte is written unless both observations match the opaque preimage.
+#[inline(never)]
+pub fn execute_production_active_config_stake_principal_cas_account_info(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    principal_delta: u64,
+    config_account: &AccountInfo<'_>,
+) -> Result<ProductionActiveConfigStakePrincipalReceipt, RuntimeWriteAdapterError> {
+    require_active_config_capability(gate, active_config, binding)?;
+    if principal_delta == 0 {
+        return Err(RuntimeWriteAdapterError::ConfigPrincipalDeltaInvalid);
+    }
+    if config_account.key.to_bytes() != active_config.key()
+        || config_account.owner.to_bytes() != binding.program_id()
+    {
+        return Err(RuntimeWriteAdapterError::ConfigAccountIdentityMismatch);
+    }
+    if !config_account.is_writable || config_account.is_signer || config_account.executable {
+        return Err(RuntimeWriteAdapterError::ConfigAccountFlagsMismatch);
+    }
+
+    let data = config_account
+        .try_borrow_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    if data.len() != CONFIG_GENESIS_ACCOUNT_LEN {
+        return Err(RuntimeWriteAdapterError::ConfigAccountLengthMismatch);
+    }
+    let observed_preimage = <[u8; 32]>::from(Sha256::digest(&*data));
+    if observed_preimage != active_config.preimage_sha256() {
+        return Err(RuntimeWriteAdapterError::ConfigPreimageMismatch);
+    }
+    let observed_state = decode_config_genesis_state(&data)
+        .map_err(|_| RuntimeWriteAdapterError::ConfigCodecRejected)?;
+    if observed_state != active_config.state() {
+        return Err(RuntimeWriteAdapterError::ConfigStateMismatch);
+    }
+    drop(data);
+
+    let previous_staked_principal = active_config.state().config.staked_principal;
+    let next_staked_principal = previous_staked_principal
+        .checked_add(principal_delta)
+        .ok_or(RuntimeWriteAdapterError::ConfigPrincipalOverflow)?;
+    let mut next_state = active_config.state();
+    next_state.config.staked_principal = next_staked_principal;
+    let mut postimage = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+    encode_config_genesis_state(&next_state, &mut postimage)
+        .map_err(|_| RuntimeWriteAdapterError::ConfigCodecRejected)?;
+    let postimage_sha256 = <[u8; 32]>::from(Sha256::digest(postimage));
+
+    let mut mutable_data = config_account
+        .try_borrow_mut_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    if mutable_data.len() != CONFIG_GENESIS_ACCOUNT_LEN
+        || <[u8; 32]>::from(Sha256::digest(&**mutable_data)) != active_config.preimage_sha256()
+    {
+        return Err(RuntimeWriteAdapterError::PostValidationPreimageMismatch);
+    }
+    mutable_data.copy_from_slice(&postimage);
+
+    Ok(ProductionActiveConfigStakePrincipalReceipt {
+        config_key: active_config.key(),
+        expected_preimage_sha256: active_config.preimage_sha256(),
+        postimage_sha256,
+        previous_staked_principal,
+        next_staked_principal,
+        law_account_sha256: gate.law_account_sha256(),
+    })
 }
 
 /// Execute one sealed batch for the pinned structural lifecycle rehearsal.
@@ -125,15 +271,7 @@ pub fn execute_production_active_existing_write_batch_account_infos<const N: usi
     batch: AtomicWriteBatch<N>,
     accounts: &[AccountInfo<'_>],
 ) -> Result<RuntimeWriteReceipt<N>, RuntimeWriteAdapterError> {
-    if active_config.program_id() != binding.program_id()
-        || active_config.mint() != binding.mint()
-        || active_config.key() != binding.config()
-        || active_config.law_account_sha256() != gate.law_account_sha256()
-        || active_config.law_unix_timestamp() != gate.unix_timestamp()
-        || active_config.law_local_day() != gate.local_day()
-    {
-        return Err(RuntimeWriteAdapterError::ActiveConfigCapabilityMismatch);
-    }
+    require_active_config_capability(gate, active_config, binding)?;
     execute_existing_write_batch_inner(gate, binding, batch, accounts)
 }
 
