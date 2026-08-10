@@ -16,13 +16,18 @@ const driverUrl = new URL(
   "../scripts/iat-b3-devnet-rehearsal-driver.mjs",
   import.meta.url,
 );
+const finalizerUrl = new URL(
+  "../scripts/iat-b3-devnet-final-evidence.mjs",
+  import.meta.url,
+);
 const documentationUrl = new URL("../docs/b3/DEVNET_REHEARSAL.md", import.meta.url);
 const packageUrl = new URL("../package.json", import.meta.url);
 const workflowUrl = new URL("../../../../.github/workflows/iat-v2-proof.yml", import.meta.url);
 
-const [wrapper, driver, documentation, packageSource, workflow] = await Promise.all([
+const [wrapper, driver, finalizer, documentation, packageSource, workflow] = await Promise.all([
   readFile(wrapperUrl, "utf8"),
   readFile(driverUrl, "utf8"),
+  readFile(finalizerUrl, "utf8"),
   readFile(documentationUrl, "utf8"),
   readFile(packageUrl, "utf8"),
   readFile(workflowUrl, "utf8"),
@@ -41,6 +46,16 @@ const {
   sanitizeFailureText,
   transactionExplorerUrl,
 } = await import(driverUrl);
+
+const {
+  EXPECTED_LAW_SIGNATURES,
+  EXPECTED_PUBLIC_INPUTS,
+  READ_ONLY_FINALIZE_CONFIRMATION,
+  buildSignatureOnlyHistory,
+  closeBoundedHistoryRange,
+  parseReadOnlyInputs,
+  summarizePayerTransactionHistory,
+} = await import(finalizerUrl);
 
 function firstIndex(source, candidates) {
   return candidates.reduce((best, candidate) => {
@@ -79,6 +94,206 @@ test("the driver dependency preflight loads offline without enabling execution",
   assert.equal(evidence.status, "PREFLIGHT_PASS");
   assert.equal(evidence.publicNetworkWrites, false);
   assert.equal(evidence.rpc, DEVNET_RPC);
+});
+
+test("the recovery finalizer is an isolated read-only public-evidence boundary", () => {
+  assert.match(finalizer, /READ_ONLY_FINALIZATION/u);
+  assert.match(finalizer, /new Connection\(DEVNET_RPC, "finalized"\)/u);
+  assert.match(finalizer, /dailyLawOnlyDevnetRehearsalComplete:\s*true/u);
+  assert.match(finalizer, /fullFeatureDevnetRehearsalComplete:\s*false/u);
+  assert.match(finalizer, /activationReady:\s*false/u);
+  assert.match(finalizer, /mainnetExecutionAuthorized:\s*false/u);
+  assert.match(finalizer, /historicalSlotHashesValueUnavailableAfterRollingRetention:\s*true/u);
+  assert.match(finalizer, /storedDecisionRecomputed:\s*true/u);
+  assert.doesNotMatch(finalizer, /historicalLaggedBlockHashMatched/u);
+  assert.doesNotMatch(finalizer, /\.getBlock\s*\(/u);
+  assert.match(finalizer, /mainnetStatus:\s*"HOLD"/u);
+  assert.doesNotMatch(finalizer, /\b(?:Keypair|Transaction|TransactionInstruction|SystemProgram)\b/u);
+  assert.doesNotMatch(
+    finalizer,
+    /\.(?:sendRawTransaction|sendTransaction|requestAirdrop|confirmTransaction)\s*\(/u,
+  );
+  assert.doesNotMatch(
+    finalizer,
+    /\.getTransactions\s*\(/u,
+    "unordered batch transaction responses must not bind positional law labels",
+  );
+  assert.match(finalizer, /getTransaction\(signature,/u);
+  assert.doesNotMatch(
+    finalizer,
+    /\b(?:writeFile|writeFileSync|appendFile|appendFileSync|createWriteStream)\b/u,
+  );
+  assert.doesNotMatch(finalizer, /api\.(?:mainnet-beta|testnet)\.solana\.com/iu);
+  assert.doesNotMatch(finalizer, /required\(args,\s*["']rpc["']\)/u);
+});
+
+test("the recovery finalizer dependency preflight is offline and non-activating", () => {
+  const result = spawnSync(
+    process.execPath,
+    [fileURLToPath(finalizerUrl), "--offline-import-preflight"],
+    { encoding: "utf8", windowsHide: true },
+  );
+  assert.equal(result.status, 0, result.stderr);
+  const evidence = JSON.parse(result.stdout.trim());
+  assert.equal(evidence.status, "PREFLIGHT_PASS");
+  assert.equal(evidence.publicNetworkWrites, false);
+  assert.equal(evidence.dailyLawOnlyDevnetRehearsalComplete, false);
+  assert.equal(evidence.fullFeatureDevnetRehearsalComplete, false);
+  assert.equal(evidence.activationReady, false);
+  assert.equal(evidence.mainnetExecutionAuthorized, false);
+  assert.equal(evidence.mainnetStatus, "HOLD");
+});
+
+function exactReadOnlyFinalizerArguments() {
+  return [
+    "--read-only-finalize", READ_ONLY_FINALIZE_CONFIRMATION,
+    "--artifact", "artifact.so",
+    "--attempt-evidence", "attempt.jsonl",
+    "--payer-pubkey", EXPECTED_PUBLIC_INPUTS.payer,
+    "--recipient-pubkey", EXPECTED_PUBLIC_INPUTS.recipient,
+    "--program-id", EXPECTED_PUBLIC_INPUTS.program,
+    "--mint", EXPECTED_PUBLIC_INPUTS.mint,
+    "--payer-history-before", EXPECTED_PUBLIC_INPUTS.payerHistoryBoundary,
+    "--initialize-law-signature", EXPECTED_LAW_SIGNATURES.initializeLaw,
+    "--missing-decision-signature", EXPECTED_LAW_SIGNATURES.missingDecision,
+    "--direct-bypass-signature", EXPECTED_LAW_SIGNATURES.directBypass,
+    "--finalize-day-signature", EXPECTED_LAW_SIGNATURES.finalizeDay,
+    "--same-day-reroll-signature", EXPECTED_LAW_SIGNATURES.sameDayReroll,
+    "--selected-day-transfer-signature", EXPECTED_LAW_SIGNATURES.selectedDayTransfer,
+  ];
+}
+
+test("the read-only finalizer pins all public identities and six distinct law signatures", () => {
+  const accepted = parseReadOnlyInputs(exactReadOnlyFinalizerArguments());
+  assert.equal(accepted.payer.toBase58(), EXPECTED_PUBLIC_INPUTS.payer);
+  assert.equal(Object.keys(accepted.signatures).length, 6);
+  assert.equal(new Set(Object.values(accepted.signatures)).size, 6);
+
+  const wrongPayer = exactReadOnlyFinalizerArguments();
+  wrongPayer[wrongPayer.indexOf("--payer-pubkey") + 1] =
+    "11111111111111111111111111111111";
+  assert.throws(() => parseReadOnlyInputs(wrongPayer), /identity mismatch/u);
+
+  const wrongSignature = exactReadOnlyFinalizerArguments();
+  wrongSignature[wrongSignature.indexOf("--direct-bypass-signature") + 1] =
+    EXPECTED_LAW_SIGNATURES.initializeLaw;
+  assert.throws(() => parseReadOnlyInputs(wrongSignature), /signature mismatch/u);
+
+  const duplicateArgument = exactReadOnlyFinalizerArguments();
+  duplicateArgument.push("--mint", EXPECTED_PUBLIC_INPUTS.mint);
+  assert.throws(() => parseReadOnlyInputs(duplicateArgument), /duplicate command argument/u);
+});
+
+test("signature-only history still requires all six law transactions exactly once", () => {
+  const signatures = Object.values(EXPECTED_LAW_SIGNATURES);
+  const metrics = signatures.map((signature, index) => ({
+    label: `law-${index}`,
+    signature,
+    feeLamports: 5_000,
+    computeUnitsConsumed: 10_000 + index,
+    succeeded: index !== 1,
+  }));
+  const entries = signatures.map((signature, index) => ({
+    signature,
+    slot: 100 + index,
+    err: index === 1 ? { InstructionError: [1, { Custom: 7 }] } : null,
+    confirmationStatus: "finalized",
+  }));
+  const history = buildSignatureOnlyHistory(entries, metrics, new Map());
+  assert.equal(history.length, 6);
+  assert(history.every((entry) => entry.rpcMetadataExposed));
+
+  assert.throws(
+    () => buildSignatureOnlyHistory(entries.slice(1), metrics, new Map()),
+    /absent or duplicated/u,
+  );
+  assert.throws(
+    () => buildSignatureOnlyHistory([...entries, entries[0]], metrics, new Map()),
+    /absent or duplicated/u,
+  );
+});
+
+test("payer history has immutable lower and upper signature boundaries", () => {
+  const selected = {
+    signature: EXPECTED_LAW_SIGNATURES.selectedDayTransfer,
+    slot: 500,
+    blockTime: 1_700_000_000,
+    succeeded: true,
+    expectedCustomError: null,
+  };
+  const bounded = Array.from({ length: 168 }, (_, index) => ({
+    signature: `older-${index}`,
+    slot: 499 - index,
+    err: null,
+  }));
+  const closed = closeBoundedHistoryRange(bounded, selected);
+  assert.equal(closed.length, 169);
+  assert.equal(closed[0].signature, selected.signature);
+
+  const hostileLaterEntry = bounded.map((entry) => ({ ...entry }));
+  hostileLaterEntry[0].slot = 501;
+  assert.throws(
+    () => closeBoundedHistoryRange(hostileLaterEntry, selected),
+    /newer than its upper boundary/u,
+  );
+  const hostileIncludedBoundary = bounded.map((entry) => ({ ...entry }));
+  hostileIncludedBoundary[0].signature = selected.signature;
+  assert.throws(
+    () => closeBoundedHistoryRange(hostileIncludedBoundary, selected),
+    /includes its upper boundary/u,
+  );
+});
+
+test("validated payer history emits a compact deterministic bounded digest", () => {
+  const lawSignatures = Object.values(EXPECTED_LAW_SIGNATURES);
+  const fillerSignature =
+    "5zQKxvRdgJDA8fRGPdKfGxRLnLpwmNnMXGYxfBqFSUPqc5BTmFPrTG8vnC4HvKDVY8zQ8aQxZxcEE7WFpGhZGVAA";
+  const base58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+  const syntheticSignature = (index) =>
+    fillerSignature.slice(0, -2)
+      + base58[Math.floor(index / base58.length)]
+      + base58[index % base58.length];
+  const history = [
+    ...lawSignatures.map((signature, index) => ({
+      signature,
+      succeeded: ![1, 2, 4].includes(index),
+    })),
+    ...Array.from({ length: 163 }, (_, index) => ({
+      signature: syntheticSignature(index),
+      succeeded: true,
+    })),
+  ];
+  const lowerBoundary = EXPECTED_PUBLIC_INPUTS.payerHistoryBoundary;
+  const first = summarizePayerTransactionHistory(
+    history,
+    EXPECTED_LAW_SIGNATURES.initializeLaw,
+    lowerBoundary,
+  );
+  const second = summarizePayerTransactionHistory(
+    history,
+    EXPECTED_LAW_SIGNATURES.initializeLaw,
+    lowerBoundary,
+  );
+  assert.equal(first.count, 169);
+  assert.equal(first.succeededCount, 166);
+  assert.equal(first.failedCount, 3);
+  assert.equal(first.signaturesSha256, second.signaturesSha256);
+  assert.match(first.signaturesSha256, /^[0-9a-f]{64}$/u);
+  assert.equal(first.upperBoundaryExclusive, EXPECTED_LAW_SIGNATURES.initializeLaw);
+  assert.equal(first.lowerBoundaryExclusive, lowerBoundary);
+  assert.equal(first.allSixPinnedLawTransactionsPresent, true);
+  assert.equal(JSON.stringify(first).includes(fillerSignature), false);
+
+  const missingLaw = history.map((entry) => ({ ...entry }));
+  missingLaw[1].signature = syntheticSignature(500);
+  assert.throws(
+    () => summarizePayerTransactionHistory(
+      missingLaw,
+      EXPECTED_LAW_SIGNATURES.initializeLaw,
+      lowerBoundary,
+    ),
+    /missing a pinned law transaction/u,
+  );
 });
 
 test("normal CI runs both rehearsal safety suites but never the public wrapper", () => {
