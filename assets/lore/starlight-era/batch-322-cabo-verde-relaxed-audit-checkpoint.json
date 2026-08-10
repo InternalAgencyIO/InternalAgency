@@ -1,0 +1,1435 @@
+{
+  "batch": 322,
+  "country": "Cabo Verde",
+  "status": "terminal-partially-accepted-after-single-recovery-pass",
+  "sourceCommit": "961cc2fbf536aa396727b7ae0394496e2ae413ff",
+  "contractSha256": "3EDBDA128DD8F8FA733B6B761ECBFC1E9F56445D091FBBF7DA1495A485BEF210",
+  "rollMethod": "FNV-1a over the recorded batch322-cabo-verde keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "themePair": [
+    "doctor-clinical-command couture",
+    "adult nightlife dance-performance couture"
+  ],
+  "nextThemePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "nextQueueCountry": "Brunei",
+  "nextQueueBatch": 323,
+  "nextQueueScenes": [
+    1312,
+    1313,
+    1314,
+    1315
+  ],
+  "researchSources": [
+    {
+      "url": "https://whc.unesco.org/en/list/1310",
+      "usedFor": "Cidade Velha historic street layout, stone architecture, valley-to-sea relationship, and hilltop fortress setting"
+    },
+    {
+      "url": "https://www.visit-caboverde.com/en/islands/santo-antao-island",
+      "usedFor": "Santo Antao rocky terrain, green valleys, Paul, mountain roads, and Atlantic setting"
+    },
+    {
+      "url": "https://www.visit-caboverde.com/en/islands/fogo-island",
+      "usedFor": "Fogo volcanic terrain, Pico do Fogo cone, caldera, black lava, and highland agriculture"
+    },
+    {
+      "url": "https://www.visit-caboverde.com/en/islands/sao-vicente-island",
+      "usedFor": "Mindelo, Sao Vicente volcanic ridges, Monte Verde, colorful architecture, music culture, and harbor setting"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch322-cabo-verde-male-model-scene",
+    "fullHash": 8912270,
+    "roll": 70,
+    "selectedScenePosition": 3,
+    "selectedScene": 1310,
+    "maleEmotion": {
+      "key": "batch322-cabo-verde-scene3-male-emotion",
+      "roll": 35,
+      "result": "magnetic confidence"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Cabo Verde flag, coat of arms, official emblem, or sacred symbol is copied. Large researched secular island, Atlantic, volcanic, valley, harbor, stone-street, cloud, and route compositions replace them.",
+    "palette": "Atlantic cobalt, volcanic charcoal, basalt black, bougainvillea magenta, sugarcane green, colonial-stone ivory, harbor turquoise, sunset gold, cloud white, and deep-ocean navy",
+    "minimumCoverage": "Every image carries large complete secular Cabo Verde compositions across at least two outfits as dominant full bodice, skirt, hip, or panel fields.",
+    "cultureScene": "The scenes foreground Cidade Velha on Santiago, Paul Valley on Santo Antao, Cha das Caldeiras on Fogo, and Mindelo's Porto Grande on Sao Vicente.",
+    "prohibitions": "Use respectful secular Cabo Verde island silhouettes, Atlantic waves, volcanic calderas, basalt ridges, green valleys, harbor geometry, cobbled streets, stone walls, sail routes, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch322-cabo-verde-x-heart",
+      "roll": 39,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch322-cabo-verde-x-internalagency",
+      "roll": 43,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch322-cabo-verde-x-worldxxxseries",
+      "roll": 16,
+      "active": true
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Cabo Verde images plus one accepted Maldives image",
+    "captionIfEligible": "Cabo Verde ❤️ Maldives #CaboVerde #WorldXXXSeries",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": true
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1310 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1310 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch322-cabo-verde-male-model-scene",
+        70
+      ],
+      [
+        "batch322-cabo-verde-scene3-male-emotion",
+        35
+      ],
+      [
+        "batch322-cabo-verde-scene1308-weather",
+        79
+      ],
+      [
+        "batch322-cabo-verde-scene1308-paws",
+        36
+      ],
+      [
+        "batch322-cabo-verde-scene1308-poleDanceTheme",
+        35
+      ],
+      [
+        "batch322-cabo-verde-scene1308-rainbowOnly",
+        11
+      ],
+      [
+        "batch322-cabo-verde-scene1308-rainbowHosiery",
+        78
+      ],
+      [
+        "batch322-cabo-verde-scene1308-romanceBeat",
+        26
+      ],
+      [
+        "batch322-cabo-verde-scene1308-compoundLoveBeat",
+        16
+      ],
+      [
+        "batch322-cabo-verde-scene1308-eceMissionProp-poseTargetRoll",
+        73
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Radiance-emotion",
+        28
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Radiance-visibleMidriff",
+        78
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Radiance-straplessDress",
+        1
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Radiance-fullyOpenBack",
+        46
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Ellie-emotion",
+        94
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Ellie-visibleMidriff",
+        4
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Ellie-straplessDress",
+        95
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Ellie-fullyOpenBack",
+        92
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Alia-emotion",
+        26
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Alia-visibleMidriff",
+        60
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Alia-straplessDress",
+        91
+      ],
+      [
+        "batch322-cabo-verde-scene1308-Alia-fullyOpenBack",
+        28
+      ],
+      [
+        "batch322-cabo-verde-scene1308-AI ECE-emotion",
+        28
+      ],
+      [
+        "batch322-cabo-verde-scene1308-AI ECE-emotion-disambiguation",
+        55
+      ],
+      [
+        "batch322-cabo-verde-scene1308-AI ECE-visibleMidriff",
+        62
+      ],
+      [
+        "batch322-cabo-verde-scene1308-AI ECE-straplessDress",
+        41
+      ],
+      [
+        "batch322-cabo-verde-scene1308-AI ECE-fullyOpenBack",
+        30
+      ],
+      [
+        "batch322-cabo-verde-scene1309-weather",
+        36
+      ],
+      [
+        "batch322-cabo-verde-scene1309-paws",
+        81
+      ],
+      [
+        "batch322-cabo-verde-scene1309-poleDanceTheme",
+        50
+      ],
+      [
+        "batch322-cabo-verde-scene1309-rainbowOnly",
+        88
+      ],
+      [
+        "batch322-cabo-verde-scene1309-rainbowHosiery",
+        23
+      ],
+      [
+        "batch322-cabo-verde-scene1309-romanceBeat",
+        9
+      ],
+      [
+        "batch322-cabo-verde-scene1309-compoundLoveBeat",
+        81
+      ],
+      [
+        "batch322-cabo-verde-scene1309-eceMissionProp-poseTargetRoll",
+        14
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Radiance-emotion",
+        37
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Radiance-visibleMidriff",
+        41
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Radiance-straplessDress",
+        46
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Radiance-fullyOpenBack",
+        79
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Ellie-emotion",
+        37
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Ellie-emotion-disambiguation",
+        12
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Ellie-visibleMidriff",
+        17
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Ellie-straplessDress",
+        6
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Ellie-fullyOpenBack",
+        71
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Alia-emotion",
+        7
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Alia-visibleMidriff",
+        11
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Alia-straplessDress",
+        32
+      ],
+      [
+        "batch322-cabo-verde-scene1309-Alia-fullyOpenBack",
+        69
+      ],
+      [
+        "batch322-cabo-verde-scene1309-AI ECE-emotion",
+        65
+      ],
+      [
+        "batch322-cabo-verde-scene1309-AI ECE-visibleMidriff",
+        69
+      ],
+      [
+        "batch322-cabo-verde-scene1309-AI ECE-straplessDress",
+        34
+      ],
+      [
+        "batch322-cabo-verde-scene1309-AI ECE-fullyOpenBack",
+        47
+      ],
+      [
+        "batch322-cabo-verde-scene1310-weather",
+        58
+      ],
+      [
+        "batch322-cabo-verde-scene1310-paws",
+        83
+      ],
+      [
+        "batch322-cabo-verde-scene1310-poleDanceTheme",
+        84
+      ],
+      [
+        "batch322-cabo-verde-scene1310-rainbowOnly",
+        46
+      ],
+      [
+        "batch322-cabo-verde-scene1310-rainbowHosiery",
+        61
+      ],
+      [
+        "batch322-cabo-verde-scene1310-romanceBeat",
+        99
+      ],
+      [
+        "batch322-cabo-verde-scene1310-compoundLoveBeat",
+        95
+      ],
+      [
+        "batch322-cabo-verde-scene1310-eceMissionProp-poseTargetRoll",
+        84
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Radiance-emotion",
+        99
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Radiance-visibleMidriff",
+        95
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Radiance-straplessDress",
+        8
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Radiance-fullyOpenBack",
+        49
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Ellie-emotion",
+        35
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Ellie-visibleMidriff",
+        23
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Ellie-straplessDress",
+        36
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Ellie-fullyOpenBack",
+        1
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Alia-emotion",
+        37
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Alia-emotion-disambiguation",
+        4
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Alia-visibleMidriff",
+        25
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Alia-straplessDress",
+        34
+      ],
+      [
+        "batch322-cabo-verde-scene1310-Alia-fullyOpenBack",
+        15
+      ],
+      [
+        "batch322-cabo-verde-scene1310-AI ECE-emotion",
+        95
+      ],
+      [
+        "batch322-cabo-verde-scene1310-AI ECE-visibleMidriff",
+        31
+      ],
+      [
+        "batch322-cabo-verde-scene1310-AI ECE-straplessDress",
+        88
+      ],
+      [
+        "batch322-cabo-verde-scene1310-AI ECE-fullyOpenBack",
+        41
+      ],
+      [
+        "batch322-cabo-verde-scene1311-weather",
+        85
+      ],
+      [
+        "batch322-cabo-verde-scene1311-paws",
+        38
+      ],
+      [
+        "batch322-cabo-verde-scene1311-poleDanceTheme",
+        53
+      ],
+      [
+        "batch322-cabo-verde-scene1311-rainbowOnly",
+        33
+      ],
+      [
+        "batch322-cabo-verde-scene1311-rainbowHosiery",
+        32
+      ],
+      [
+        "batch322-cabo-verde-scene1311-romanceBeat",
+        80
+      ],
+      [
+        "batch322-cabo-verde-scene1311-compoundLoveBeat",
+        82
+      ],
+      [
+        "batch322-cabo-verde-scene1311-eceMissionProp-poseTargetRoll",
+        75
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Radiance-emotion",
+        6
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Radiance-visibleMidriff",
+        20
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Radiance-straplessDress",
+        27
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Radiance-fullyOpenBack",
+        56
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Ellie-emotion",
+        96
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Ellie-visibleMidriff",
+        94
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Ellie-straplessDress",
+        61
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Ellie-fullyOpenBack",
+        10
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Alia-emotion",
+        80
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Alia-visibleMidriff",
+        66
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Alia-straplessDress",
+        81
+      ],
+      [
+        "batch322-cabo-verde-scene1311-Alia-fullyOpenBack",
+        98
+      ],
+      [
+        "batch322-cabo-verde-scene1311-AI ECE-emotion",
+        34
+      ],
+      [
+        "batch322-cabo-verde-scene1311-AI ECE-visibleMidriff",
+        12
+      ],
+      [
+        "batch322-cabo-verde-scene1311-AI ECE-straplessDress",
+        71
+      ],
+      [
+        "batch322-cabo-verde-scene1311-AI ECE-fullyOpenBack",
+        72
+      ],
+      [
+        "batch322-cabo-verde-x-heart",
+        39
+      ],
+      [
+        "batch322-cabo-verde-x-internalagency",
+        43
+      ],
+      [
+        "batch322-cabo-verde-x-worldxxxseries",
+        16
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch322-cabo-verde-scene1308-rainbowHosieryWearer",
+        86
+      ],
+      [
+        "batch322-cabo-verde-scene1308-rainbowHosieryPaletteMode",
+        38
+      ],
+      [
+        "batch322-cabo-verde-scene1309-rainbowHosieryWearer",
+        67
+      ],
+      [
+        "batch322-cabo-verde-scene1309-rainbowHosieryPaletteMode",
+        81
+      ],
+      [
+        "batch322-cabo-verde-scene1310-rainbowHosieryWearer",
+        53
+      ],
+      [
+        "batch322-cabo-verde-scene1310-rainbowHosieryPaletteMode",
+        79
+      ],
+      [
+        "batch322-cabo-verde-scene1311-rainbowHosieryWearer",
+        64
+      ],
+      [
+        "batch322-cabo-verde-scene1311-rainbowHosieryPaletteMode",
+        48
+      ]
+    ],
+    "primaryPairCount": 104,
+    "selectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "7F45ABACD35344C1B6033B38A4DE965BBBBBA2932C1A06BD9768B5A4D3542A16",
+    "selectorPairsSha256": "7540FD5C608BDE706F082702A768647535980D39591D80FF389056D1CF42086B"
+  },
+  "scenePlans": {
+    "1308": {
+      "scene": 1308,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry public overlook above Cidade Velha on Santiago, with the historic stone street grid, low limewashed houses, the complete hilltop fortress silhouette, Ribeira Grande valley, black-rock Atlantic shore, and one unoccupied geometric paper route target fixed to a full basalt-and-sand backstop on a closed empty lane",
+      "motifs": "complete Santiago island outline, Cidade Velha street grid, hill-fort silhouette, Ribeira Grande valley contour, basalt-shore wave, Atlantic route arc, stone-wall geometry, and trade-wind cloud compositions",
+      "culture": "Cidade Velha is presented as Cabo Verde's UNESCO World Heritage historic centre through its original street layout, stone architecture, valley-to-sea relationship, maritime setting, and hilltop fortress. The fashion is original fictional command couture about route analysis, with no patient, treatment, copied uniform, badge, authority impersonation, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch322-cabo-verde-scene1308-weather",
+        "roll": 79,
+        "result": "powerful windstorm with controlled fabric motion",
+        "materialized": "powerful windstorm with controlled fabric motion"
+      },
+      "paws": {
+        "key": "batch322-cabo-verde-scene1308-paws",
+        "roll": 36,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch322-cabo-verde-scene1308-poleDanceTheme",
+        "roll": 35,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch322-cabo-verde-scene1308-rainbowOnly",
+        "roll": 11,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch322-cabo-verde-scene1308-rainbowHosiery",
+        "roll": 78,
+        "active": false,
+        "wearer": {
+          "key": "batch322-cabo-verde-scene1308-rainbowHosieryWearer",
+          "roll": 86,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch322-cabo-verde-scene1308-rainbowHosieryPaletteMode",
+          "roll": 38,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch322-cabo-verde-scene1308-eceMissionProp-poseTargetRoll",
+        "roll": 73
+      },
+      "materializedPropAction": "A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand backstop on a closed empty lane, with no person, animal, vehicle, structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand backstop on a closed empty lane, with no person, animal, vehicle, structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch322-cabo-verde-scene1308-romanceBeat",
+        "roll": 26,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch322-cabo-verde-scene1308-compoundLoveBeat",
+        "roll": 16,
+        "index": 4,
+        "contractResult": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1308-Radiance-emotion",
+            "roll": 28,
+            "result": "hope",
+            "materializedResult": "hope",
+            "performance": "hope expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1308-Radiance-visibleMidriff",
+            "roll": 78,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1308-Radiance-straplessDress",
+            "roll": 1,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1308-Radiance-fullyOpenBack",
+            "roll": 46,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1308-Ellie-emotion",
+            "roll": 94,
+            "result": "shame and social vulnerability",
+            "materializedResult": "shame and social vulnerability",
+            "performance": "shame and social vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1308-Ellie-visibleMidriff",
+            "roll": 4,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1308-Ellie-straplessDress",
+            "roll": 95,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1308-Ellie-fullyOpenBack",
+            "roll": 92,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1308-Alia-emotion",
+            "roll": 26,
+            "result": "calm contentment",
+            "materializedResult": "calm contentment",
+            "performance": "calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1308-Alia-visibleMidriff",
+            "roll": 60,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1308-Alia-straplessDress",
+            "roll": 91,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1308-Alia-fullyOpenBack",
+            "roll": 28,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1308-AI ECE-emotion",
+            "roll": 28,
+            "result": "hope",
+            "materializedResult": "aching romantic longing",
+            "disambiguation": {
+              "key": "batch322-cabo-verde-scene1308-AI ECE-emotion-disambiguation",
+              "roll": 55
+            },
+            "performance": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1308-AI ECE-visibleMidriff",
+            "roll": 62,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1308-AI ECE-straplessDress",
+            "roll": 41,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1308-AI ECE-fullyOpenBack",
+            "roll": 30,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "hope expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "shame and social vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Atlantic cobalt doctor-clinical-command couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santiago island outline, Cidade Velha street grid, hill-fort silhouette, Ribeira Grande valley contour, basalt-shore wave, Atlantic route arc, stone-wall geometry, and trade-wind cloud compositions field, and secure contrasting high heels",
+        "Ellie": "bougainvillea magenta doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santiago island outline, Cidade Velha street grid, hill-fort silhouette, Ribeira Grande valley contour, basalt-shore wave, Atlantic route arc, stone-wall geometry, and trade-wind cloud compositions field, and secure contrasting high heels",
+        "Alia": "sugarcane green doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Santiago island outline, Cidade Velha street grid, hill-fort silhouette, Ribeira Grande valley contour, basalt-shore wave, Atlantic route arc, stone-wall geometry, and trade-wind cloud compositions field, and secure contrasting high heels",
+        "AI ECE": "volcanic charcoal doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santiago island outline, Cidade Velha street grid, hill-fort silhouette, Ribeira Grande valley contour, basalt-shore wave, Atlantic route arc, stone-wall geometry, and trade-wind cloud compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE stands far left with open backstop or ocean behind both arms. The other adults move in a shallow affectionate arc to the right, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, sea, stone gaps, or open lane.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and retains sole ownership",
+        "Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Ellie's near forearm",
+        "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests at Radiance's near waist"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry public overlook above Cidade Velha on Santiago, with the historic stone street grid, low limewashed houses, the complete hilltop fortress silhouette, Ribeira Grande valley, black-rock Atlantic shore, and one unoccupied geometric paper route target fixed to a full basalt-and-sand backstop on a closed empty lane. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: doctor-clinical-command couture, only as original public-safe fictional fashion. Cidade Velha is presented as Cabo Verde's UNESCO World Heritage historic centre through its original street layout, stone architecture, valley-to-sea relationship, maritime setting, and hilltop fortress. The fashion is original fictional command couture about route analysis, with no patient, treatment, copied uniform, badge, authority impersonation, injury, emergency, or sexualized care. Stored scene rolls: weather 79=powerful windstorm with controlled fabric motion; PAWS 36=inactive; pole 35=inactive; rainbow-only 11=inactive; rainbow hosiery 78=inactive; wearer 86=AI ECE; palette 38=country-palette rainbow-like gradient; romance 26; compound 16; mission-prop pose/target 73. Exact wardrobe rolls: Radiance: midriff 78=covered, strapless 1=active, open back 46=inactive; Ellie: midriff 4=visible, strapless 95=inactive, open back 92=inactive; Alia: midriff 60=covered, strapless 91=inactive, open back 28=active; AI ECE: midriff 62=covered, strapless 41=inactive, open back 30=inactive. Exact outfits: Radiance: Atlantic cobalt doctor-clinical-command couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santiago island outline, Cidade Velha street grid, hill-fort silhouette, Ribeira Grande valley contour, basalt-shore wave, Atlantic route arc, stone-wall geometry, and trade-wind cloud compositions field, and secure contrasting high heels; Ellie: bougainvillea magenta doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santiago island outline, Cidade Velha street grid, hill-fort silhouette, Ribeira Grande valley contour, basalt-shore wave, Atlantic route arc, stone-wall geometry, and trade-wind cloud compositions field, and secure contrasting high heels; Alia: sugarcane green doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Santiago island outline, Cidade Velha street grid, hill-fort silhouette, Ribeira Grande valley contour, basalt-shore wave, Atlantic route arc, stone-wall geometry, and trade-wind cloud compositions field, and secure contrasting high heels; AI ECE: volcanic charcoal doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santiago island outline, Cidade Velha street grid, hill-fort silhouette, Ribeira Grande valley contour, basalt-shore wave, Atlantic route arc, stone-wall geometry, and trade-wind cloud compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Cabo Verde motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Santiago island outline, Cidade Velha street grid, hill-fort silhouette, Ribeira Grande valley contour, basalt-shore wave, Atlantic route arc, stone-wall geometry, and trade-wind cloud compositions. Use respectful secular Cabo Verde island silhouettes, Atlantic waves, volcanic calderas, basalt ridges, green valleys, harbor geometry, cobbled streets, stone walls, sail routes, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 28=hope, performed as hope expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 94=shame and social vulnerability, performed as shame and social vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 26=calm contentment, performed as calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 28=hope, collision resolver 55 gives distinct performance aching romantic longing, performed as aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 26: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Compound roll 16: ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with open backstop or ocean behind both arms. The other adults move in a shallow affectionate arc to the right, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, sea, stone gaps, or open lane. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and retains sole ownership; Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Ellie's near forearm; Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests at Radiance's near waist. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand backstop on a closed empty lane, with no person, animal, vehicle, structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render powerful windstorm with controlled fabric motion cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1309": {
+      "scene": 1309,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry nonslip mountain overlook above Santo Antao's Paul Valley, with complete serrated basalt ridges, deep green terraced slopes, sugarcane fields, cloud banks lifting from the Atlantic, distant Porto Novo road switchbacks, and one unoccupied geometric paper route target fixed to a complete basalt-and-sand backstop on a closed empty overlook lane",
+      "motifs": "complete Santo Antao island profile, Paul Valley terraces, basalt-ridge zigzag, sugarcane contour, switchback-road ribbon, cloud-bank band, Atlantic swell, and empty navigation-route compositions",
+      "culture": "Santo Antao is shown respectfully through its dramatic rocky terrain, green valleys, terraced agriculture, mountain roads, and Atlantic setting. The fashion is original fictional command couture about route analysis, with no patient, treatment, copied uniform, badge, authority impersonation, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch322-cabo-verde-scene1309-weather",
+        "roll": 36,
+        "result": "heavy rain curtain",
+        "materialized": "heavy rain curtain"
+      },
+      "paws": {
+        "key": "batch322-cabo-verde-scene1309-paws",
+        "roll": 81,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch322-cabo-verde-scene1309-poleDanceTheme",
+        "roll": 50,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch322-cabo-verde-scene1309-rainbowOnly",
+        "roll": 88,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch322-cabo-verde-scene1309-rainbowHosiery",
+        "roll": 23,
+        "active": true,
+        "wearer": {
+          "key": "batch322-cabo-verde-scene1309-rainbowHosieryWearer",
+          "roll": 67,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch322-cabo-verde-scene1309-rainbowHosieryPaletteMode",
+          "roll": 81,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch322-cabo-verde-scene1309-eceMissionProp-poseTargetRoll",
+        "roll": 14
+      },
+      "materializedPropAction": "Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand backstop on a closed empty overlook lane, with no person, animal, vehicle, structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand backstop on a closed empty overlook lane, with no person, animal, vehicle, structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch322-cabo-verde-scene1309-romanceBeat",
+        "roll": 9,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch322-cabo-verde-scene1309-compoundLoveBeat",
+        "roll": 81,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1309-Radiance-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1309-Radiance-visibleMidriff",
+            "roll": 41,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1309-Radiance-straplessDress",
+            "roll": 46,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1309-Radiance-fullyOpenBack",
+            "roll": 79,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1309-Ellie-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "materializedResult": "romantic joy",
+            "disambiguation": {
+              "key": "batch322-cabo-verde-scene1309-Ellie-emotion-disambiguation",
+              "roll": 12
+            },
+            "performance": "romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1309-Ellie-visibleMidriff",
+            "roll": 17,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1309-Ellie-straplessDress",
+            "roll": 6,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1309-Ellie-fullyOpenBack",
+            "roll": 71,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1309-Alia-emotion",
+            "roll": 7,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1309-Alia-visibleMidriff",
+            "roll": 11,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1309-Alia-straplessDress",
+            "roll": 32,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1309-Alia-fullyOpenBack",
+            "roll": 69,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1309-AI ECE-emotion",
+            "roll": 65,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1309-AI ECE-visibleMidriff",
+            "roll": 69,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1309-AI ECE-straplessDress",
+            "roll": 34,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1309-AI ECE-fullyOpenBack",
+            "roll": 47,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "magnetic confidence expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Atlantic cobalt doctor-clinical-command couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santo Antao island profile, Paul Valley terraces, basalt-ridge zigzag, sugarcane contour, switchback-road ribbon, cloud-bank band, Atlantic swell, and empty navigation-route compositions field, and secure contrasting high heels",
+        "Ellie": "bougainvillea magenta doctor-clinical-command couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santo Antao island profile, Paul Valley terraces, basalt-ridge zigzag, sugarcane contour, switchback-road ribbon, cloud-bank band, Atlantic swell, and empty navigation-route compositions field, and secure contrasting high heels",
+        "Alia": "sugarcane green doctor-clinical-command couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santo Antao island profile, Paul Valley terraces, basalt-ridge zigzag, sugarcane contour, switchback-road ribbon, cloud-bank band, Atlantic swell, and empty navigation-route compositions field, and secure contrasting high heels",
+        "AI ECE": "volcanic charcoal doctor-clinical-command couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santo Antao island profile, Paul Valley terraces, basalt-ridge zigzag, sugarcane contour, switchback-road ribbon, cloud-bank band, Atlantic swell, and empty navigation-route compositions field, and secure contrasting high heels"
+      },
+      "composition": "Alia stands far left in an unobstructed sight picture across open water. The remaining adults form a curved affectionate triangle to the right beneath a wind shelter, with all arms separated by sky, valley, and railing gaps.",
+      "handInventory": [
+        "Alia uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+        "Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder",
+        "ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry nonslip mountain overlook above Santo Antao's Paul Valley, with complete serrated basalt ridges, deep green terraced slopes, sugarcane fields, cloud banks lifting from the Atlantic, distant Porto Novo road switchbacks, and one unoccupied geometric paper route target fixed to a complete basalt-and-sand backstop on a closed empty overlook lane. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: doctor-clinical-command couture, only as original public-safe fictional fashion. Santo Antao is shown respectfully through its dramatic rocky terrain, green valleys, terraced agriculture, mountain roads, and Atlantic setting. The fashion is original fictional command couture about route analysis, with no patient, treatment, copied uniform, badge, authority impersonation, injury, emergency, or sexualized care. Stored scene rolls: weather 36=heavy rain curtain; PAWS 81=inactive; pole 50=inactive; rainbow-only 88=inactive; rainbow hosiery 23=active; wearer 67=AI ECE; palette 81=original independent rainbow gradient; romance 9; compound 81; mission-prop pose/target 14. Exact wardrobe rolls: Radiance: midriff 41=visible, strapless 46=inactive, open back 79=inactive; Ellie: midriff 17=visible, strapless 6=active, open back 71=inactive; Alia: midriff 11=visible, strapless 32=active, open back 69=inactive; AI ECE: midriff 69=covered, strapless 34=active, open back 47=inactive. Exact outfits: Radiance: Atlantic cobalt doctor-clinical-command couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santo Antao island profile, Paul Valley terraces, basalt-ridge zigzag, sugarcane contour, switchback-road ribbon, cloud-bank band, Atlantic swell, and empty navigation-route compositions field, and secure contrasting high heels; Ellie: bougainvillea magenta doctor-clinical-command couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santo Antao island profile, Paul Valley terraces, basalt-ridge zigzag, sugarcane contour, switchback-road ribbon, cloud-bank band, Atlantic swell, and empty navigation-route compositions field, and secure contrasting high heels; Alia: sugarcane green doctor-clinical-command couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santo Antao island profile, Paul Valley terraces, basalt-ridge zigzag, sugarcane contour, switchback-road ribbon, cloud-bank band, Atlantic swell, and empty navigation-route compositions field, and secure contrasting high heels; AI ECE: volcanic charcoal doctor-clinical-command couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Santo Antao island profile, Paul Valley terraces, basalt-ridge zigzag, sugarcane contour, switchback-road ribbon, cloud-bank band, Atlantic swell, and empty navigation-route compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Cabo Verde motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Santo Antao island profile, Paul Valley terraces, basalt-ridge zigzag, sugarcane contour, switchback-road ribbon, cloud-bank band, Atlantic swell, and empty navigation-route compositions. Use respectful secular Cabo Verde island silhouettes, Atlantic waves, volcanic calderas, basalt ridges, green valleys, harbor geometry, cobbled streets, stone walls, sail routes, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 37=magnetic confidence, performed as magnetic confidence expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 37=magnetic confidence, collision resolver 12 gives distinct performance romantic joy, performed as romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 7=tender affection, performed as tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 65=visible jealousy, performed as visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 9: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Compound roll 81: Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. Alia stands far left in an unobstructed sight picture across open water. The remaining adults form a curved affectionate triangle to the right beneath a wind shelter, with all arms separated by sky, valley, and railing gaps. Exact hand inventory, no others: Alia uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm; Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder; ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand backstop on a closed empty overlook lane, with no person, animal, vehicle, structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an original independent rainbow gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render heavy rain curtain cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1310": {
+      "scene": 1310,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry public viewing terrace at Cha das Caldeiras on Fogo, with the complete Pico do Fogo cone, black lava fields, the caldera wall, scattered vine rows, white cloud streamers, sunset light, and one empty geometric route target against a complete volcanic-sand backstop on a closed observation lane",
+      "motifs": "complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions",
+      "culture": "Fogo is presented through its volcanic caldera, Pico do Fogo cone, black lava landscape, highland agriculture, and public observation paths. Adult nightlife performance couture is fictional evening fashion for a poised pre-show route tableau, with no stripping, explicit dance, stage pole, alcohol, copied uniform, badge, threat, combat, or unsafe spectacle.",
+      "weather": {
+        "key": "batch322-cabo-verde-scene1310-weather",
+        "roll": 58,
+        "result": "snow flurries",
+        "materialized": "the stored snow-flurries weather roll appears as harmless windblown white cloud-mist flecks across the high caldera, with no accumulation and a dry terrace"
+      },
+      "paws": {
+        "key": "batch322-cabo-verde-scene1310-paws",
+        "roll": 83,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch322-cabo-verde-scene1310-poleDanceTheme",
+        "roll": 84,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch322-cabo-verde-scene1310-rainbowOnly",
+        "roll": 46,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch322-cabo-verde-scene1310-rainbowHosiery",
+        "roll": 61,
+        "active": false,
+        "wearer": {
+          "key": "batch322-cabo-verde-scene1310-rainbowHosieryWearer",
+          "roll": 53,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch322-cabo-verde-scene1310-rainbowHosieryPaletteMode",
+          "roll": 79,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch322-cabo-verde-scene1310-eceMissionProp-poseTargetRoll",
+        "roll": 84
+      },
+      "materializedPropAction": "A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly unoccupied geometric paper route target fixed to a complete volcanic-sand backstop on a closed empty observation lane, with no person, animal, vehicle, building, or camera in or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete volcanic-sand backstop on a closed empty observation lane, with no person, animal, vehicle, building, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch322-cabo-verde-scene1310-romanceBeat",
+        "roll": 99,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch322-cabo-verde-scene1310-compoundLoveBeat",
+        "roll": 95,
+        "index": 11,
+        "contractResult": "ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1310-Radiance-emotion",
+            "roll": 99,
+            "result": "emotional exhaustion",
+            "materializedResult": "emotional exhaustion",
+            "performance": "emotional exhaustion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1310-Radiance-visibleMidriff",
+            "roll": 95,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1310-Radiance-straplessDress",
+            "roll": 8,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1310-Radiance-fullyOpenBack",
+            "roll": 49,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1310-Ellie-emotion",
+            "roll": 35,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1310-Ellie-visibleMidriff",
+            "roll": 23,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1310-Ellie-straplessDress",
+            "roll": 36,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1310-Ellie-fullyOpenBack",
+            "roll": 1,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1310-Alia-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "materializedResult": "tender affection",
+            "disambiguation": {
+              "key": "batch322-cabo-verde-scene1310-Alia-emotion-disambiguation",
+              "roll": 4
+            },
+            "performance": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1310-Alia-visibleMidriff",
+            "roll": 25,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1310-Alia-straplessDress",
+            "roll": 34,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1310-Alia-fullyOpenBack",
+            "roll": 15,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1310-AI ECE-emotion",
+            "roll": 95,
+            "result": "shame and social vulnerability",
+            "materializedResult": "shame and social vulnerability",
+            "performance": "shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1310-AI ECE-visibleMidriff",
+            "roll": 31,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1310-AI ECE-straplessDress",
+            "roll": 88,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1310-AI ECE-fullyOpenBack",
+            "roll": 41,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "emotional exhaustion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Atlantic cobalt adult nightlife dance-performance couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions field, and secure contrasting high heels",
+        "Ellie": "bougainvillea magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions field, and secure contrasting high heels",
+        "Alia": "sugarcane green adult nightlife dance-performance couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions field, and secure contrasting high heels",
+        "AI ECE": "volcanic charcoal adult nightlife dance-performance couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions field, and secure contrasting high heels",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve colonial-stone ivory top carrying a large complete complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions field, fitted black jeans, and practical black boots"
+      },
+      "composition": "AI ECE occupies a stable far-left route-training stance. The other adults pivot through a dynamic affectionate crescent to the right as if pausing before an evening performance, never dancing, with each arm isolated against lava, sky, caldera, or terrace gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near shoulder",
+        "Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm",
+        "Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch322-cabo-verde-scene3-male-emotion",
+          "roll": 35,
+          "result": "magnetic confidence"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry public viewing terrace at Cha das Caldeiras on Fogo, with the complete Pico do Fogo cone, black lava fields, the caldera wall, scattered vine rows, white cloud streamers, sunset light, and one empty geometric route target against a complete volcanic-sand backstop on a closed observation lane. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: adult nightlife dance-performance couture, only as original public-safe fictional fashion. Fogo is presented through its volcanic caldera, Pico do Fogo cone, black lava landscape, highland agriculture, and public observation paths. Adult nightlife performance couture is fictional evening fashion for a poised pre-show route tableau, with no stripping, explicit dance, stage pole, alcohol, copied uniform, badge, threat, combat, or unsafe spectacle. Stored scene rolls: weather 58=snow flurries; PAWS 83=inactive; pole 84=inactive; rainbow-only 46=inactive; rainbow hosiery 61=inactive; wearer 53=AI ECE; palette 79=original independent rainbow gradient; romance 99; compound 95; mission-prop pose/target 84. Exact wardrobe rolls: Radiance: midriff 95=covered, strapless 8=active, open back 49=inactive; Ellie: midriff 23=visible, strapless 36=inactive, open back 1=active; Alia: midriff 25=visible, strapless 34=active, open back 15=active; AI ECE: midriff 31=visible, strapless 88=inactive, open back 41=inactive. Exact outfits: Radiance: Atlantic cobalt adult nightlife dance-performance couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions field, and secure contrasting high heels; Ellie: bougainvillea magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions field, and secure contrasting high heels; Alia: sugarcane green adult nightlife dance-performance couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions field, and secure contrasting high heels; AI ECE: volcanic charcoal adult nightlife dance-performance couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions field, and secure contrasting high heels; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve colonial-stone ivory top carrying a large complete complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions field, fitted black jeans, and practical black boots. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Cabo Verde motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions. Use respectful secular Cabo Verde island silhouettes, Atlantic waves, volcanic calderas, basalt ridges, green valleys, harbor geometry, cobbled streets, stone walls, sail routes, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 99=emotional exhaustion, performed as emotional exhaustion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 35=magnetic confidence, performed as magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 37=magnetic confidence, collision resolver 4 gives distinct performance tender affection, performed as tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 95=shame and social vulnerability, performed as shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 35=magnetic confidence, performed as magnetic confidence expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 99: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Compound roll 95: ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE occupies a stable far-left route-training stance. The other adults pivot through a dynamic affectionate crescent to the right as if pausing before an evening performance, never dancing, with each arm isolated against lava, sky, caldera, or terrace gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near shoulder; Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm; Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly unoccupied geometric paper route target fixed to a complete volcanic-sand backstop on a closed empty observation lane, with no person, animal, vehicle, building, or camera in or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render the stored snow-flurries weather roll appears as harmless windblown white cloud-mist flecks across the high caldera, with no accumulation and a dry terrace cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1311": {
+      "scene": 1311,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry covered harbor overlook above Mindelo's Porto Grande on Sao Vicente, with the complete crescent bay, Monte Cara profile, colorful secular waterfront facades, marina geometry, distant Monte Verde ridge, empty quays, trade-wind cloud bands, and one distant unoccupied floating navigation marker on open harbor water",
+      "motifs": "complete Sao Vicente island outline, Porto Grande crescent, Monte Cara profile, marina-grid geometry, waterfront-facade rhythm, sail-route arc, trade-wind cloud band, and empty harbor-marker compositions",
+      "culture": "Mindelo is presented through Porto Grande's crescent harbor, Monte Cara, colorful secular waterfront architecture, marina routes, and Sao Vicente's dry volcanic ridges. Adult nightlife performance couture is fictional evening fashion for a poised pre-show route tableau, with no stripping, explicit dance, stage pole, alcohol, copied uniform, badge, threat, combat, or unsafe spectacle.",
+      "weather": {
+        "key": "batch322-cabo-verde-scene1311-weather",
+        "roll": 85,
+        "result": "double rainbow after rain",
+        "materialized": "double rainbow after rain"
+      },
+      "paws": {
+        "key": "batch322-cabo-verde-scene1311-paws",
+        "roll": 38,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch322-cabo-verde-scene1311-poleDanceTheme",
+        "roll": 53,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch322-cabo-verde-scene1311-rainbowOnly",
+        "roll": 33,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch322-cabo-verde-scene1311-rainbowHosiery",
+        "roll": 32,
+        "active": false,
+        "wearer": {
+          "key": "batch322-cabo-verde-scene1311-rainbowHosieryWearer",
+          "roll": 64,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch322-cabo-verde-scene1311-rainbowHosieryPaletteMode",
+          "roll": 48,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch322-cabo-verde-scene1311-eceMissionProp-poseTargetRoll",
+        "roll": 75
+      },
+      "materializedPropAction": "A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one distant clearly empty floating navigation marker on open harbor water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one distant clearly empty floating navigation marker on open harbor water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch322-cabo-verde-scene1311-romanceBeat",
+        "roll": 80,
+        "dynamicIndex": 8,
+        "contractResult": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch322-cabo-verde-scene1311-compoundLoveBeat",
+        "roll": 82,
+        "index": 10,
+        "contractResult": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1311-Radiance-emotion",
+            "roll": 6,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1311-Radiance-visibleMidriff",
+            "roll": 20,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1311-Radiance-straplessDress",
+            "roll": 27,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1311-Radiance-fullyOpenBack",
+            "roll": 56,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1311-Ellie-emotion",
+            "roll": 96,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1311-Ellie-visibleMidriff",
+            "roll": 94,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1311-Ellie-straplessDress",
+            "roll": 61,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1311-Ellie-fullyOpenBack",
+            "roll": 10,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1311-Alia-emotion",
+            "roll": 80,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1311-Alia-visibleMidriff",
+            "roll": 66,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1311-Alia-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1311-Alia-fullyOpenBack",
+            "roll": 98,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch322-cabo-verde-scene1311-AI ECE-emotion",
+            "roll": 34,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch322-cabo-verde-scene1311-AI ECE-visibleMidriff",
+            "roll": 12,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch322-cabo-verde-scene1311-AI ECE-straplessDress",
+            "roll": 71,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch322-cabo-verde-scene1311-AI ECE-fullyOpenBack",
+            "roll": 72,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "overwhelming relief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Atlantic cobalt adult nightlife dance-performance couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Sao Vicente island outline, Porto Grande crescent, Monte Cara profile, marina-grid geometry, waterfront-facade rhythm, sail-route arc, trade-wind cloud band, and empty harbor-marker compositions field, and secure contrasting high heels",
+        "Ellie": "bougainvillea magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Sao Vicente island outline, Porto Grande crescent, Monte Cara profile, marina-grid geometry, waterfront-facade rhythm, sail-route arc, trade-wind cloud band, and empty harbor-marker compositions field, and secure contrasting high heels",
+        "Alia": "sugarcane green adult nightlife dance-performance couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Sao Vicente island outline, Porto Grande crescent, Monte Cara profile, marina-grid geometry, waterfront-facade rhythm, sail-route arc, trade-wind cloud band, and empty harbor-marker compositions field, and secure contrasting high heels",
+        "AI ECE": "volcanic charcoal adult nightlife dance-performance couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Sao Vicente island outline, Porto Grande crescent, Monte Cara profile, marina-grid geometry, waterfront-facade rhythm, sail-route arc, trade-wind cloud band, and empty harbor-marker compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE stands far left with an unobstructed open-water sight picture. The other adults move through a close affectionate crescent to the right under the shelter, with every hand visible against sky, harbor, facade, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm",
+        "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder",
+        "Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered harbor overlook above Mindelo's Porto Grande on Sao Vicente, with the complete crescent bay, Monte Cara profile, colorful secular waterfront facades, marina geometry, distant Monte Verde ridge, empty quays, trade-wind cloud bands, and one distant unoccupied floating navigation marker on open harbor water. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: adult nightlife dance-performance couture, only as original public-safe fictional fashion. Mindelo is presented through Porto Grande's crescent harbor, Monte Cara, colorful secular waterfront architecture, marina routes, and Sao Vicente's dry volcanic ridges. Adult nightlife performance couture is fictional evening fashion for a poised pre-show route tableau, with no stripping, explicit dance, stage pole, alcohol, copied uniform, badge, threat, combat, or unsafe spectacle. Stored scene rolls: weather 85=double rainbow after rain; PAWS 38=inactive; pole 53=inactive; rainbow-only 33=inactive; rainbow hosiery 32=inactive; wearer 64=AI ECE; palette 48=country-palette rainbow-like gradient; romance 80; compound 82; mission-prop pose/target 75. Exact wardrobe rolls: Radiance: midriff 20=visible, strapless 27=active, open back 56=inactive; Ellie: midriff 94=covered, strapless 61=inactive, open back 10=active; Alia: midriff 66=covered, strapless 81=inactive, open back 98=inactive; AI ECE: midriff 12=visible, strapless 71=inactive, open back 72=inactive. Exact outfits: Radiance: Atlantic cobalt adult nightlife dance-performance couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Sao Vicente island outline, Porto Grande crescent, Monte Cara profile, marina-grid geometry, waterfront-facade rhythm, sail-route arc, trade-wind cloud band, and empty harbor-marker compositions field, and secure contrasting high heels; Ellie: bougainvillea magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Sao Vicente island outline, Porto Grande crescent, Monte Cara profile, marina-grid geometry, waterfront-facade rhythm, sail-route arc, trade-wind cloud band, and empty harbor-marker compositions field, and secure contrasting high heels; Alia: sugarcane green adult nightlife dance-performance couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Sao Vicente island outline, Porto Grande crescent, Monte Cara profile, marina-grid geometry, waterfront-facade rhythm, sail-route arc, trade-wind cloud band, and empty harbor-marker compositions field, and secure contrasting high heels; AI ECE: volcanic charcoal adult nightlife dance-performance couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Sao Vicente island outline, Porto Grande crescent, Monte Cara profile, marina-grid geometry, waterfront-facade rhythm, sail-route arc, trade-wind cloud band, and empty harbor-marker compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Cabo Verde motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Sao Vicente island outline, Porto Grande crescent, Monte Cara profile, marina-grid geometry, waterfront-facade rhythm, sail-route arc, trade-wind cloud band, and empty harbor-marker compositions. Use respectful secular Cabo Verde island silhouettes, Atlantic waves, volcanic calderas, basalt ridges, green valleys, harbor geometry, cobbled streets, stone walls, sail routes, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 6=tender affection, performed as tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 96=defiance, performed as defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 80=deep sadness, performed as deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 34=overwhelming relief, performed as overwhelming relief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 80: Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist. Compound roll 82: The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with an unobstructed open-water sight picture. The other adults move through a close affectionate crescent to the right under the shelter, with every hand visible against sky, harbor, facade, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm; Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder; Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one distant clearly empty floating navigation marker on open harbor water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render double rainbow after rain cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "completed",
+      "requested": 4,
+      "fulfilled": 4,
+      "refusedBeforeAsset": [],
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "completed",
+      "attemptedScenes": [
+        1308,
+        1310
+      ],
+      "maximumPerBlockedScene": 1,
+      "furtherRecoveryAllowed": false
+    }
+  },
+  "acceptedAssets": [
+    {
+      "scene": 1308,
+      "filename": "1308-cabo-verde-cidade-velha-windstorm-wrist-guidance-recovery.png",
+      "pass": "single-recovery",
+      "hardGate": "accepted: exactly four adult women with eight attributable arms and eight hands; ECE alone owns the prop in a safe leftward line to a complete paper target and basalt backstop; Alia visibly provides two-hand behind-the-shoulder forearm and wrist guidance without touching the prop; large complete Cabo Verde motifs appear on all four outfits",
+      "relaxedSoftGate": "accepted despite the guiding contacts landing slightly higher on ECE's forearms than the exact requested wrist points; ownership, safe line, target, anatomy, identities, secure clothing, footwear, country motifs, and affectionate contact count remain clear",
+      "bytes": 2785548,
+      "sha256": "648AA86AD40F2A32C581A5BE0BDBF4D2DC7FBDED6A4043C0D7D43CEBD96A6F3B",
+      "acceptedPath": "assets/lore/starlight-era/1308-cabo-verde-cidade-velha-windstorm-wrist-guidance-recovery.png",
+      "copiedFromPreservedOriginal": true
+    },
+    {
+      "scene": 1309,
+      "filename": "1309-cabo-verde-santo-antao-paul-valley-rain-alia-rainbow-hosiery.png",
+      "pass": "raw",
+      "hardGate": "accepted: exactly four adult women with eight attributable arms and eight hands; active hosiery roll places original independent rainbow knee socks on ECE only and transfers sole two-hand prop handling to Alia; Alia sights safely at an empty paper target and basalt backstop; large complete Santo Antao motifs appear across all outfits",
+      "relaxedSoftGate": "accepted despite rain reaching the foreground floor and minor drift from the exact contact diagram; stable footing, handler, target, hosiery exclusivity, anatomy, identities, secure clothing, footwear, landmark, motifs, and at least three affectionate contacts remain readable",
+      "bytes": 2818612,
+      "sha256": "FDA263CE9128559DA3CC75CC40580AD60295AA16B58A83F905A3F1813EA174DE",
+      "acceptedPath": "assets/lore/starlight-era/1309-cabo-verde-santo-antao-paul-valley-rain-alia-rainbow-hosiery.png",
+      "copiedFromPreservedOriginal": true
+    },
+    {
+      "scene": 1311,
+      "filename": "1311-cabo-verde-mindelo-porto-grande-double-rainbow-handoff.png",
+      "pass": "raw",
+      "hardGate": "accepted: exactly four adult women with eight attributable arms and eight hands; ECE alone holds the prop in the completed-handoff final sight picture toward a clearly empty open-water marker; the group remains behind the muzzle plane; large complete Sao Vicente and Porto Grande motifs appear across at least three outfits",
+      "relaxedSoftGate": "accepted despite softer-than-requested emotional distinctions and a compact right-side embrace; all limbs remain owned, the target line is safe, and identities, secure clothing, footwear, country motifs, weather, and affectionate contacts are clear",
+      "bytes": 2482787,
+      "sha256": "203914ABEEC7441799A8077FB4123B087125C2ECF48C5159A5D142FAEA6F3820",
+      "acceptedPath": "assets/lore/starlight-era/1311-cabo-verde-mindelo-porto-grande-double-rainbow-handoff.png",
+      "copiedFromPreservedOriginal": true
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1310,
+      "raw": "tmp/world-195x4/batch-322/raw/1310-raw.png",
+      "recovery": "tmp/world-195x4/batch-322/recovery/1310-recovery.png",
+      "status": "terminal-rejected-after-single-recovery-pass",
+      "reasons": [
+        "the raw render placed the four-person group between ECE and the right-side target, creating an unsafe person-crossing line",
+        "the recovery moved the target safely to the left and placed the group behind the muzzle plane",
+        "the established male's strongest eye line still lands on Alia rather than ECE, failing the binding male-scene relationship gate",
+        "tight overlapping hands inside the four-person embrace make the exact ten-hand ownership inventory less certain than the strict male-scene anatomy gate permits"
+      ]
+    }
+  ],
+  "xPost": {
+    "status": "eligible-pending-browser-publication",
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "currentCountryAcceptedAssets": [
+      "1308-cabo-verde-cidade-velha-windstorm-wrist-guidance-recovery.png",
+      "1309-cabo-verde-santo-antao-paul-valley-rain-alia-rainbow-hosiery.png",
+      "1311-cabo-verde-mindelo-porto-grande-double-rainbow-handoff.png"
+    ],
+    "secondaryCountry": "Maldives",
+    "caption": "Cabo Verde ❤️ Maldives #CaboVerde #WorldXXXSeries",
+    "attachmentPlan": [
+      "1309-cabo-verde-santo-antao-paul-valley-rain-alia-rainbow-hosiery.png",
+      "1311-cabo-verde-mindelo-porto-grande-double-rainbow-handoff.png",
+      "1306-maldives-addu-atoll-causeway-command-route.png"
+    ]
+  },
+  "acceptancePolicy": {
+    "hardGates": "identity count, exact arm and hand ownership, resolved handler, active prop use, rolled pose and safe target line, indexed trigger finger, no ammunition or firing, secure opaque clothing, PAWS safety, rainbow-hosiery exclusivity, male eye line, and large complete country motifs",
+    "relaxedSoftGates": "minor contact-placement drift, subtle emotion drift, weather spill, and compact spacing may pass when every hard gate and the public-safe story remain readable"
+  },
+  "acceptedCount": 3,
+  "rejectedCount": 1,
+  "queueAdvance": {
+    "eligible": true,
+    "reason": "three accepted local Cabo Verde assets exist; Batch 322 is terminal after its single recovery pass",
+    "country": "Brunei",
+    "batch": 323,
+    "scenes": [
+      1312,
+      1313,
+      1314,
+      1315
+    ],
+    "themes": [
+      "adult nightlife dance-performance couture",
+      "adult nightlife dance-performance couture",
+      "Paris runway model couture",
+      "Paris runway model couture"
+    ]
+  }
+}
