@@ -371,8 +371,10 @@ public dispatch. A separate production-ACTIVE Config CAS is present, but it can
 only increase the authenticated preimage's retained V2 `staked_principal`, and
 only when the exact completed ingress binds that delta, Position principal,
 three lane labels/Config bindings, and reloaded stake-vault amount. Those lane
-facts are not yet authenticated lane AccountInfo identities. The CAS is not yet
-atomically composed with ingress CPI plus Position/Lane persistence.
+facts are not AccountInfo authentication inside the Config CAS. The CAS is not yet
+atomically composed with ingress CPI plus Position/Lane persistence. A separate
+preflight now authenticates the exact three lane AccountInfos in fixed order and
+seals their completed-ingress CAS postimages, but does not execute the writes.
 No handler or release gate is complete.
 The older unphased combined entry remains only for the pinned structural SBF
 fixture and is not the production route.

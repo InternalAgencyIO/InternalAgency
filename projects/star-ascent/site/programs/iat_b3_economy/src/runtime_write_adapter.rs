@@ -13,10 +13,13 @@ use alloc::vec::Vec;
 use core::array;
 
 use crate::native_adapter::{
-    validate_atomic_write_preconditions, AtomicWriteBatch, NativeAccountObservation,
-    NativeAdapterError, NativeEconomyBinding, StateWriteIntent,
+    seal_atomic_write_batch, validate_atomic_write_preconditions, AtomicWriteBatch,
+    NativeAccountObservation, NativeAdapterError, NativeEconomyBinding, PdaIdentity,
+    StateWriteIntent, StrictStateValue,
 };
-use crate::runtime_adapter::RuntimeProductionActiveConfig;
+use crate::runtime_adapter::{
+    prepare_existing_state_write_account_info, RuntimeAdapterError, RuntimeProductionActiveConfig,
+};
 use crate::stake_ingress::CompletedStakeIngress;
 use crate::{
     decode_config_genesis_state, encode_config_genesis_state, GenesisPhase, ValidatedDailyLawWrite,
@@ -38,6 +41,7 @@ pub struct RuntimeWriteAdapterTruth {
     pub all_preimages_revalidated_before_write: bool,
     pub account_data_writes_supported: bool,
     pub production_active_config_stake_principal_cas_supported: bool,
+    pub production_completed_ingress_lane_account_preflight_supported: bool,
     pub account_creation_supported: bool,
     pub lamport_writes_supported: bool,
     pub system_cpi_supported: bool,
@@ -58,6 +62,7 @@ pub const RUNTIME_WRITE_ADAPTER_TRUTH: RuntimeWriteAdapterTruth = RuntimeWriteAd
     all_preimages_revalidated_before_write: true,
     account_data_writes_supported: true,
     production_active_config_stake_principal_cas_supported: true,
+    production_completed_ingress_lane_account_preflight_supported: true,
     account_creation_supported: false,
     lamport_writes_supported: false,
     system_cpi_supported: false,
@@ -72,6 +77,7 @@ pub const RUNTIME_WRITE_ADAPTER_TRUTH: RuntimeWriteAdapterTruth = RuntimeWriteAd
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum RuntimeWriteAdapterError {
     Native(NativeAdapterError),
+    Runtime(RuntimeAdapterError),
     AccountCountMismatch,
     CreateIntentUnsupported,
     AccountBorrowFailed,
@@ -90,6 +96,12 @@ pub enum RuntimeWriteAdapterError {
 impl From<NativeAdapterError> for RuntimeWriteAdapterError {
     fn from(value: NativeAdapterError) -> Self {
         Self::Native(value)
+    }
+}
+
+impl From<RuntimeAdapterError> for RuntimeWriteAdapterError {
+    fn from(value: RuntimeAdapterError) -> Self {
+        Self::Runtime(value)
     }
 }
 
@@ -168,19 +180,11 @@ fn require_active_config_capability(
     Ok(())
 }
 
-/// Bind the narrow Config CAS to the exact retained-V2 post-CPI completion.
-/// The completed Config must equal the authenticated ACTIVE Config with only
-/// `staked_principal += position.principal`; the three reward lanes, position,
-/// and reloaded stake-vault token state must all remain binding-relative.
-#[inline(never)]
-pub fn execute_production_active_config_stake_principal_cas_for_completed_ingress(
-    gate: &ValidatedDailyLawWrite,
+fn require_completed_ingress_binding(
     active_config: &RuntimeProductionActiveConfig,
     binding: &NativeEconomyBinding,
     completed: &CompletedStakeIngress,
-    config_account: &AccountInfo<'_>,
-) -> Result<ProductionActiveConfigStakePrincipalReceipt, RuntimeWriteAdapterError> {
-    require_active_config_capability(gate, active_config, binding)?;
+) -> Result<u64, RuntimeWriteAdapterError> {
     let principal_delta = completed.position.principal;
     let next_staked_principal = active_config
         .state()
@@ -206,6 +210,72 @@ pub fn execute_production_active_config_stake_principal_cas_for_completed_ingres
     {
         return Err(RuntimeWriteAdapterError::CompletedStakeIngressMismatch);
     }
+    Ok(principal_delta)
+}
+
+/// Authenticate the exact treasury, ecosystem, and liquidity AccountInfos and
+/// seal their completed-ingress postimages before any persistence mutation.
+/// The fixed account order is part of this boundary. This prepares a CAS batch;
+/// it does not execute the writes or complete the stake-ingress handler.
+#[inline(never)]
+pub fn prepare_production_completed_ingress_lane_write_batch_account_infos(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    completed: &CompletedStakeIngress,
+    lane_accounts: [&AccountInfo<'_>; 3],
+) -> Result<AtomicWriteBatch<3>, RuntimeWriteAdapterError> {
+    require_active_config_capability(gate, active_config, binding)?;
+    require_completed_ingress_binding(active_config, binding, completed)?;
+    let config = binding.config();
+    let treasury = prepare_existing_state_write_account_info(
+        gate,
+        binding,
+        lane_accounts[0],
+        PdaIdentity::LaneState {
+            config,
+            lane: TREASURY,
+        },
+        StrictStateValue::Lane(completed.treasury),
+    )?;
+    let ecosystem = prepare_existing_state_write_account_info(
+        gate,
+        binding,
+        lane_accounts[1],
+        PdaIdentity::LaneState {
+            config,
+            lane: ECOSYSTEM,
+        },
+        StrictStateValue::Lane(completed.ecosystem),
+    )?;
+    let liquidity = prepare_existing_state_write_account_info(
+        gate,
+        binding,
+        lane_accounts[2],
+        PdaIdentity::LaneState {
+            config,
+            lane: LIQUIDITY,
+        },
+        StrictStateValue::Lane(completed.liquidity),
+    )?;
+    seal_atomic_write_batch(gate, binding, [treasury, ecosystem, liquidity])
+        .map_err(RuntimeWriteAdapterError::Native)
+}
+
+/// Bind the narrow Config CAS to the exact retained-V2 post-CPI completion.
+/// The completed Config must equal the authenticated ACTIVE Config with only
+/// `staked_principal += position.principal`; the three reward lanes, position,
+/// and reloaded stake-vault token state must all remain binding-relative.
+#[inline(never)]
+pub fn execute_production_active_config_stake_principal_cas_for_completed_ingress(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    completed: &CompletedStakeIngress,
+    config_account: &AccountInfo<'_>,
+) -> Result<ProductionActiveConfigStakePrincipalReceipt, RuntimeWriteAdapterError> {
+    require_active_config_capability(gate, active_config, binding)?;
+    let principal_delta = require_completed_ingress_binding(active_config, binding, completed)?;
     execute_production_active_config_stake_principal_cas_inner(
         gate,
         active_config,

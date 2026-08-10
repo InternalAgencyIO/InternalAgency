@@ -521,6 +521,14 @@ test("the runtime write adapter executes only authenticated existing-state CAS b
   );
   assert.match(
     economyRuntimeWriteAdapterSource,
+    /production_completed_ingress_lane_account_preflight_supported: true/u,
+  );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
+    /pub fn prepare_production_completed_ingress_lane_write_batch_account_infos/u,
+  );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
     /next_state\.config\.staked_principal = next_staked_principal/u,
   );
   assert.match(economyRuntimeWriteAdapterSource, /CompletedStakeIngressMismatch/u);
@@ -677,6 +685,10 @@ test("the local lifecycle fixture proves SBF CPI without becoming a production s
     [economyRuntimeAdapterSource, "prepare_create_state_account_info"],
     [economyRuntimeAccountLifecycleSource, "execute_create_state_batch_account_infos"],
     [economyRuntimeWriteAdapterSource, "execute_existing_write_batch_account_infos"],
+    [
+      economyRuntimeWriteAdapterSource,
+      "prepare_production_completed_ingress_lane_write_batch_account_infos",
+    ],
     [
       economyRuntimeWriteAdapterSource,
       "execute_production_active_config_stake_principal_cas_for_completed_ingress",

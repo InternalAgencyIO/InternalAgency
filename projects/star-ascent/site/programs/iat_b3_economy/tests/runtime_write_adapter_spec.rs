@@ -5,7 +5,7 @@ use iat_b3_economy::native_adapter::{
     authenticate_state_account, authenticate_system_payer, derive_pda,
     prepare_create_state_account, prepare_existing_state_write, seal_atomic_write_batch,
     AtomicWriteBatch, NativeAccountObservation, NativeAdapterError, NativeEconomyBinding,
-    PdaIdentity, StrictStateValue,
+    PdaIdentity, StateWriteIntent, StrictStateValue,
 };
 use iat_b3_economy::runtime_adapter::{
     authenticate_production_active_config_account_info,
@@ -14,7 +14,8 @@ use iat_b3_economy::runtime_adapter::{
 };
 use iat_b3_economy::runtime_write_adapter::{
     execute_production_active_config_stake_principal_cas_for_completed_ingress,
-    execute_production_active_existing_write_batch_account_infos, RuntimeWriteAdapterError,
+    execute_production_active_existing_write_batch_account_infos,
+    prepare_production_completed_ingress_lane_write_batch_account_infos, RuntimeWriteAdapterError,
     RuntimeWriteAdapterTruth, RUNTIME_WRITE_ADAPTER_TRUTH,
 };
 use iat_b3_economy::stake_ingress::{CompletedStakeIngress, DelegateSnapshot, SourceTokenState};
@@ -182,6 +183,28 @@ fn states(binding: &NativeEconomyBinding) -> StatePair {
     }
 }
 
+fn canonical_lane(binding: &NativeEconomyBinding, lane: u8, reserved: u64) -> LaneState {
+    let config = binding.config();
+    let identity = PdaIdentity::LaneState { config, lane };
+    let token = derive_pda(binding, PdaIdentity::LaneToken { config, lane }).unwrap();
+    LaneState {
+        config,
+        token_account: token.key,
+        beneficiary: [0xA0 | lane; 32],
+        total: 10_000,
+        genesis_unlocked: 1_000,
+        cliff_week: 0,
+        linear_end_week: 104,
+        reserved,
+        paid: 0,
+        principal_claimed: 0,
+        lane,
+        reward_source: true,
+        bump: derive_pda(binding, identity).unwrap().bump,
+        token_bump: token.bump,
+    }
+}
+
 fn completed_ingress(
     active_config: &RuntimeProductionActiveConfig,
     binding: &NativeEconomyBinding,
@@ -191,12 +214,9 @@ fn completed_ingress(
     config.staked_principal = config.staked_principal.checked_add(principal).unwrap();
     let mut position = states(binding).position;
     position.principal = principal;
-    let mut treasury = states(binding).lane;
-    treasury.lane = TREASURY;
-    let mut ecosystem = treasury;
-    ecosystem.lane = ECOSYSTEM;
-    let mut liquidity = treasury;
-    liquidity.lane = LIQUIDITY;
+    let treasury = canonical_lane(binding, TREASURY, 20);
+    let ecosystem = canonical_lane(binding, ECOSYSTEM, 30);
+    let liquidity = canonical_lane(binding, LIQUIDITY, 40);
     let stake = ReadonlyTokenState {
         key: config.stake_token_account,
         mint: binding.mint(),
@@ -639,6 +659,135 @@ fn production_active_config_cas_rejects_wrong_law_flags_and_borrow_conflicts_wit
 }
 
 #[test]
+fn completed_ingress_lane_preflight_authenticates_exact_account_order_and_seals_postimages() {
+    let binding = binding();
+    let gate = open_gate(CLOCK_TIMESTAMP);
+    let active_config = production_active_config(&gate, &binding);
+    let completed = completed_ingress(&active_config, &binding, 250);
+
+    let current = [
+        canonical_lane(&binding, TREASURY, 0),
+        canonical_lane(&binding, ECOSYSTEM, 0),
+        canonical_lane(&binding, LIQUIDITY, 0),
+    ];
+    let mut treasury_data = [0u8; LANE_ACCOUNT_LEN];
+    let mut ecosystem_data = [0u8; LANE_ACCOUNT_LEN];
+    let mut liquidity_data = [0u8; LANE_ACCOUNT_LEN];
+    encode_lane_state(&current[0], &mut treasury_data).unwrap();
+    encode_lane_state(&current[1], &mut ecosystem_data).unwrap();
+    encode_lane_state(&current[2], &mut liquidity_data).unwrap();
+    let treasury_key = derive_pda(
+        &binding,
+        PdaIdentity::LaneState {
+            config: binding.config(),
+            lane: TREASURY,
+        },
+    )
+    .unwrap()
+    .key
+    .into();
+    let ecosystem_key = derive_pda(
+        &binding,
+        PdaIdentity::LaneState {
+            config: binding.config(),
+            lane: ECOSYSTEM,
+        },
+    )
+    .unwrap()
+    .key
+    .into();
+    let liquidity_key = derive_pda(
+        &binding,
+        PdaIdentity::LaneState {
+            config: binding.config(),
+            lane: LIQUIDITY,
+        },
+    )
+    .unwrap()
+    .key
+    .into();
+    let owner = binding.program_id().into();
+    let mut treasury_lamports = 1;
+    let mut ecosystem_lamports = 1;
+    let mut liquidity_lamports = 1;
+    let treasury = AccountInfo::new(
+        &treasury_key,
+        false,
+        true,
+        &mut treasury_lamports,
+        &mut treasury_data,
+        &owner,
+        false,
+    );
+    let ecosystem = AccountInfo::new(
+        &ecosystem_key,
+        false,
+        true,
+        &mut ecosystem_lamports,
+        &mut ecosystem_data,
+        &owner,
+        false,
+    );
+    let liquidity = AccountInfo::new(
+        &liquidity_key,
+        false,
+        true,
+        &mut liquidity_lamports,
+        &mut liquidity_data,
+        &owner,
+        false,
+    );
+
+    assert_eq!(
+        prepare_production_completed_ingress_lane_write_batch_account_infos(
+            &gate,
+            &active_config,
+            &binding,
+            &completed,
+            [&ecosystem, &treasury, &liquidity],
+        ),
+        Err(RuntimeWriteAdapterError::Runtime(
+            RuntimeAdapterError::Native(NativeAdapterError::AccountKeyMismatch)
+        ))
+    );
+
+    let batch = prepare_production_completed_ingress_lane_write_batch_account_infos(
+        &gate,
+        &active_config,
+        &binding,
+        &completed,
+        [&treasury, &ecosystem, &liquidity],
+    )
+    .unwrap();
+    for (intent, expected) in
+        batch
+            .intents()
+            .iter()
+            .zip([completed.treasury, completed.ecosystem, completed.liquidity])
+    {
+        let StateWriteIntent::Existing(existing) = intent else {
+            panic!("completed lane preflight emitted a create intent");
+        };
+        assert_eq!(decode_lane_state(existing.postimage()).unwrap(), expected);
+    }
+
+    let held = ecosystem.try_borrow_mut_data().unwrap();
+    assert_eq!(
+        prepare_production_completed_ingress_lane_write_batch_account_infos(
+            &gate,
+            &active_config,
+            &binding,
+            &completed,
+            [&treasury, &ecosystem, &liquidity],
+        ),
+        Err(RuntimeWriteAdapterError::Runtime(
+            RuntimeAdapterError::AccountBorrowFailed
+        ))
+    );
+    drop(held);
+}
+
+#[test]
 fn public_surface_remains_narrow_and_fail_closed() {
     assert_eq!(
         RUNTIME_WRITE_ADAPTER_TRUTH,
@@ -651,6 +800,7 @@ fn public_surface_remains_narrow_and_fail_closed() {
             all_preimages_revalidated_before_write: true,
             account_data_writes_supported: true,
             production_active_config_stake_principal_cas_supported: true,
+            production_completed_ingress_lane_account_preflight_supported: true,
             account_creation_supported: false,
             lamport_writes_supported: false,
             system_cpi_supported: false,

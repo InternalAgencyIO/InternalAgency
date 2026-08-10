@@ -187,10 +187,12 @@ mutable borrow and can increase only retained V2 `staked_principal`; every
 other Config field is copied from the authenticated state. It now accepts no
 caller-shaped delta: the exact retained-V2 completed ingress must bind the
 Config delta, Position principal, all three lane labels/Config bindings, and
-the reloaded stake-vault amount. These lane facts are not authenticated lane
-AccountInfo identities. That narrow write is not yet atomically composed with the
-ingress CPI callback and exact Position/Lane persistence. There is still no
-public lifecycle dispatcher, frozen
+the reloaded stake-vault amount. The Config CAS itself does not authenticate
+lane AccountInfos. That narrow write is not yet atomically composed with the
+ingress CPI callback and exact Position/Lane persistence. A separate preflight
+now authenticates the exact treasury, ecosystem, and liquidity AccountInfos in
+fixed order and seals their completed-ingress CAS postimages before mutation;
+it does not execute those writes. There is still no public lifecycle dispatcher, frozen
 identity, entrypoint, or public ABI; those remain the security boundary.
 
 Burning is different from transferring. The sole core-cap burn path uses
