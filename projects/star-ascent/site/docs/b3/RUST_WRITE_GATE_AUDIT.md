@@ -445,6 +445,21 @@ proof, conservation evidence, and mutable adapter remain unresolved. The seven
 write-intent candidate codecs plus the separate Config read representation are
 preparation only, not a native adapter or handler completion.
 
+The production source now also contains a pure Genesis conservation kernel for
+the fixed five-way allocation. It checks exact role order and
+500M/200M/150M/100M/50M base-unit shares, the 1B/9-decimal mint, distinct token
+accounts and beneficiaries, exact semantic observation bindings, null base
+mint/freeze authorities, unsafe token-account state, checked addition, and an
+exact total-equals-supply invariant. The returned receipt is bound to a
+domain-separated SHA-256 of the proposed manifest.
+
+That receipt is not chain or owner evidence. The module has no `AccountInfo`,
+mutable borrow, CPI, entrypoint, dispatcher, or transition; production IDs,
+destination acceptance, runtime authentication, prior-supply/migration proof,
+Token-2022 extension seals, writes, and activation remain false/HOLD. The
+`GENESIS_ALLOCATIONS_CONSERVATION` graph node therefore remains blocked rather
+than treating arithmetic closure as end-to-end Genesis evidence.
+
 These are not account adapters or deployable handlers. A future native adapter
 must still prove account ownership, exact config/round/randomness bindings,
 PDAs, codecs, and bumps before its first mutable borrow, and must source Clock

@@ -564,6 +564,24 @@ Accordingly the matrix still records
 `BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`, the aggregate stage
 remains `PARTIAL_STRICT_CODEC_ONLY`, and `nativeAdapterComplete` remains false.
 
+A separate production-source pure kernel now closes the arithmetic-only part of
+Genesis conservation without crossing that boundary. It requires the exact
+ordered 500M/200M/150M/100M/50M allocation, 1B supply at nine decimals, five
+distinct token accounts and five distinct beneficiary bindings, exact observed
+mint/program/authority/balance matches, null base mint/freeze authorities, and
+token accounts with no delegate, delegated amount, close authority, frozen, or
+native state. Its receipt hashes the proposed destination manifest and proves
+that the five observed amounts sum exactly to the observed fixed supply.
+
+This is deliberately structural evidence only. The kernel consumes semantic
+observations, not authenticated `AccountInfo` values; the proposed destination
+manifest has no owner acceptance or production-identity authority; and it does
+not prove absence or retirement of a prior mint, Token-2022 extension authority
+seals, a migration, a phase edge, or a write. Those truth fields remain false,
+the graph node remains `BLOCKED`, and Mainnet remains `HOLD` until a signed
+destination manifest, production identity binding, runtime account adapter,
+chain observation, and migration-or-new-mint evidence are independently bound.
+
 The next strict-codec batch adds only four more field-complete retained
 projections: `CoreRewardState` (`IATB3CRW`, 128 bytes), `AgencyState`
 (`IATB3AGN`, 96 bytes), `AgencyOwnerIndexState` (`IATB3AOI`, 96 bytes), and

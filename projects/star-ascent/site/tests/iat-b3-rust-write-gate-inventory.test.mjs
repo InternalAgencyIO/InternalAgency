@@ -46,6 +46,10 @@ const economyConfigGenesisCodecSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/config_genesis_codec.rs", import.meta.url),
   "utf8",
 );
+const economyGenesisConservationSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/genesis_conservation.rs", import.meta.url),
+  "utf8",
+);
 const economyRehearsalAdapterSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/rehearsal_adapter.rs", import.meta.url),
   "utf8",
@@ -308,6 +312,30 @@ test("the Config Genesis codec is a strict read-only representation, not a phase
   assert.match(economyRuntimeAdapterSource, /transition_authorized: false/u);
   assert.match(economyRuntimeAdapterSource, /any_handler_complete: false/u);
   assert.match(economyRuntimeAdapterSource, /mainnet_hold: true/u);
+});
+
+test("the Genesis conservation kernel proves exact arithmetic without accepting owner or chain evidence", () => {
+  assert.match(economySource, /mod genesis_conservation;/u);
+  assert.match(economyGenesisConservationSource, /pub const GENESIS_ALLOCATION_COUNT: usize = 5;/u);
+  assert.match(economyGenesisConservationSource, /500_000_000_000_000_000/u);
+  assert.match(economyGenesisConservationSource, /200_000_000_000_000_000/u);
+  assert.match(economyGenesisConservationSource, /150_000_000_000_000_000/u);
+  assert.match(economyGenesisConservationSource, /100_000_000_000_000_000/u);
+  assert.match(economyGenesisConservationSource, /50_000_000_000_000_000/u);
+  assert.match(economyGenesisConservationSource, /verify_genesis_allocation_conservation/u);
+  assert.match(economyGenesisConservationSource, /DuplicateDestinationAccount/u);
+  assert.match(economyGenesisConservationSource, /DuplicateBeneficiary/u);
+  assert.match(economyGenesisConservationSource, /UnsafeTokenAccountState/u);
+  assert.match(economyGenesisConservationSource, /owner_destination_manifest_accepted: false/u);
+  assert.match(economyGenesisConservationSource, /production_identity_binding_frozen: false/u);
+  assert.match(economyGenesisConservationSource, /runtime_account_authentication_present: false/u);
+  assert.match(economyGenesisConservationSource, /migration_or_no_prior_supply_proved: false/u);
+  assert.match(economyGenesisConservationSource, /transition_authorized: false/u);
+  assert.match(economyGenesisConservationSource, /mainnet_hold: true/u);
+  assert.doesNotMatch(
+    economyGenesisConservationSource,
+    /AccountInfo|entrypoint!|process_instruction|invoke(?:_signed)?\s*\(|try_borrow_mut/u,
+  );
 });
 
 test("current V2 has no hidden Daily Law dependency and still targets legacy SPL Token", () => {

@@ -3,6 +3,7 @@
 
 mod codec;
 mod config_genesis_codec;
+mod genesis_conservation;
 pub mod native_adapter;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod rehearsal_adapter;
@@ -42,6 +43,14 @@ pub use config_genesis_codec::{
     ConfigGenesisCodecTruth, ConfigGenesisState, GenesisPhase, CONFIG_GENESIS_ACCOUNT_LEN,
     CONFIG_GENESIS_ACCOUNT_MAGIC, CONFIG_GENESIS_ACCOUNT_VERSION, CONFIG_GENESIS_CODEC_STATUS,
     CONFIG_GENESIS_CODEC_TRUTH,
+};
+pub use genesis_conservation::{
+    verify_genesis_allocation_conservation, GenesisAllocationEntry, GenesisAllocationManifest,
+    GenesisAllocationRole, GenesisConservationError, GenesisConservationInput,
+    GenesisConservationReceipt, GenesisConservationTruth, ObservedGenesisAllocation,
+    ObservedGenesisMint, GENESIS_ALLOCATION_AMOUNTS, GENESIS_ALLOCATION_COUNT,
+    GENESIS_ALLOCATION_ROLES, GENESIS_CONSERVATION_DOMAIN, GENESIS_CONSERVATION_STATUS,
+    GENESIS_CONSERVATION_TRUTH,
 };
 
 use iat_b3_consensus::{
