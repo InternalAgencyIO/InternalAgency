@@ -46,6 +46,10 @@ const economyConfigGenesisCodecSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/config_genesis_codec.rs", import.meta.url),
   "utf8",
 );
+const economyConfigGenesisTransitionSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/config_genesis_transition.rs", import.meta.url),
+  "utf8",
+);
 const economyGenesisConservationSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/genesis_conservation.rs", import.meta.url),
   "utf8",
@@ -316,6 +320,37 @@ test("the Config Genesis codec is a strict read-only representation, not a phase
   assert.match(economyRuntimeAdapterSource, /transition_authorized: false/u);
   assert.match(economyRuntimeAdapterSource, /any_handler_complete: false/u);
   assert.match(economyRuntimeAdapterSource, /mainnet_hold: true/u);
+});
+
+test("the Config Genesis candidate is non-circular but never self-authorizes policy", () => {
+  assert.match(economySource, /mod config_genesis_transition;/u);
+  assert.match(economyConfigGenesisTransitionSource, /prepare_enter_genesis_staging_candidate/u);
+  assert.match(economyConfigGenesisTransitionSource, /prepare_activate_genesis_candidate/u);
+  assert.match(economyConfigGenesisTransitionSource, /staging_daily_law_not_required: true/u);
+  assert.match(economyConfigGenesisTransitionSource, /activation_requires_open_daily_law: true/u);
+  assert.match(
+    economyConfigGenesisTransitionSource,
+    /activation_requires_conservation_receipt: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionSource,
+    /activation_requires_zero_preactivation_core_facts: true/u,
+  );
+  assert.match(economyConfigGenesisTransitionSource, /owner_bootstrap_policy_accepted: false/u);
+  assert.match(
+    economyConfigGenesisTransitionSource,
+    /preactivation_facts_runtime_authenticated: false/u,
+  );
+  assert.match(economyConfigGenesisTransitionSource, /production_identity_binding_frozen: false/u);
+  assert.match(economyConfigGenesisTransitionSource, /transition_authorized: false/u);
+  assert.match(economyConfigGenesisTransitionSource, /account_writes_executed: false/u);
+  assert.match(economyConfigGenesisTransitionSource, /entrypoint_exposed: false/u);
+  assert.match(economyConfigGenesisTransitionSource, /dispatcher_exposed: false/u);
+  assert.match(economyConfigGenesisTransitionSource, /mainnet_hold: true/u);
+  assert.doesNotMatch(
+    economyConfigGenesisTransitionSource,
+    /AccountInfo|try_borrow_mut|entrypoint!|process_instruction|invoke(?:_signed)?\s*\(/u,
+  );
 });
 
 test("the Genesis conservation kernel proves exact arithmetic without accepting owner or chain evidence", () => {

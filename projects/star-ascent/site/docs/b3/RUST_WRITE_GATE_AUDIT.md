@@ -445,6 +445,22 @@ proof, conservation evidence, and mutable adapter remain unresolved. The seven
 write-intent candidate codecs plus the separate Config read representation are
 preparation only, not a native adapter or handler completion.
 
+The production source now includes a non-executing candidate for the two
+frozen Config edges. Staging requires an empty production-shaped economic state
+and deliberately no Daily Law capability, avoiding a circular dependency on an
+active core-custody regime. Activation checks the opaque OPEN-law capability
+first, then a same-mint/token-program conservation receipt, exact lane/stake
+funding shape, and zero preactivation write/core-principal/reward/release
+facts. Candidate receipts hash the Config preimage, law account, conservation
+manifest, and numeric facts.
+
+The candidate is not accepted policy or executable evidence. Its preactivation
+facts are still caller-shaped, the owner acceptance and production identity
+flags remain false, and no write adapter consumes it. There is no AccountInfo,
+mutable borrow, CPI, ABI, entrypoint, dispatcher, or positive authorization;
+the matrix and graph therefore remain blocked rather than treating a reviewable
+predicate as a frozen transition.
+
 The production source now also contains a pure Genesis conservation kernel for
 the fixed five-way allocation. It checks exact role order and
 500M/200M/150M/100M/50M base-unit shares, the 1B/9-decimal mint, distinct token

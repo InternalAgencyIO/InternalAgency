@@ -99,6 +99,11 @@ fn exact_five_lane_allocation_conserves_the_fixed_supply() {
 
     let input = valid_input();
     let receipt = verify_genesis_allocation_conservation(&input).unwrap();
+    assert_eq!(receipt.manifest_mint(), input.manifest.mint);
+    assert_eq!(
+        receipt.manifest_token_program(),
+        input.manifest.token_program
+    );
     assert_eq!(receipt.observed_supply(), MAINNET_SUPPLY);
     assert_eq!(receipt.observed_allocation_total(), MAINNET_SUPPLY);
     assert_ne!(receipt.manifest_sha256(), [0; 32]);

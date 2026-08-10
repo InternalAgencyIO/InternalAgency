@@ -112,12 +112,22 @@ pub struct GenesisConservationInput {
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct GenesisConservationReceipt {
+    manifest_mint: [u8; 32],
+    manifest_token_program: [u8; 32],
     manifest_sha256: [u8; 32],
     observed_supply: u64,
     observed_allocation_total: u64,
 }
 
 impl GenesisConservationReceipt {
+    pub const fn manifest_mint(&self) -> [u8; 32] {
+        self.manifest_mint
+    }
+
+    pub const fn manifest_token_program(&self) -> [u8; 32] {
+        self.manifest_token_program
+    }
+
     pub const fn manifest_sha256(&self) -> [u8; 32] {
         self.manifest_sha256
     }
@@ -227,6 +237,8 @@ pub fn verify_genesis_allocation_conservation(
     }
 
     Ok(GenesisConservationReceipt {
+        manifest_mint: input.manifest.mint,
+        manifest_token_program: input.manifest.token_program,
         manifest_sha256: hash_manifest(&input.manifest),
         observed_supply: input.mint.supply,
         observed_allocation_total: total,

@@ -3,6 +3,7 @@
 
 mod codec;
 mod config_genesis_codec;
+mod config_genesis_transition;
 mod genesis_conservation;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod genesis_conservation_runtime;
@@ -45,6 +46,13 @@ pub use config_genesis_codec::{
     ConfigGenesisCodecTruth, ConfigGenesisState, GenesisPhase, CONFIG_GENESIS_ACCOUNT_LEN,
     CONFIG_GENESIS_ACCOUNT_MAGIC, CONFIG_GENESIS_ACCOUNT_VERSION, CONFIG_GENESIS_CODEC_STATUS,
     CONFIG_GENESIS_CODEC_TRUTH,
+};
+pub use config_genesis_transition::{
+    prepare_activate_genesis_candidate, prepare_enter_genesis_staging_candidate,
+    ConfigGenesisTransitionCandidate, ConfigGenesisTransitionCandidateError,
+    ConfigGenesisTransitionCandidateTruth, ConfigGenesisTransitionEdge,
+    GenesisPreactivationCandidateFacts, CONFIG_GENESIS_TRANSITION_CANDIDATE_DOMAIN,
+    CONFIG_GENESIS_TRANSITION_CANDIDATE_STATUS, CONFIG_GENESIS_TRANSITION_CANDIDATE_TRUTH,
 };
 pub use genesis_conservation::{
     verify_genesis_allocation_conservation, GenesisAllocationEntry, GenesisAllocationManifest,

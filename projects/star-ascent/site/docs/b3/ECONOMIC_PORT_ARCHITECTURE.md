@@ -564,6 +564,25 @@ Accordingly the matrix still records
 `BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE`, the aggregate stage
 remains `PARTIAL_STRICT_CODEC_ONLY`, and `nativeAdapterComplete` remains false.
 
+A production-source, non-executing candidate now makes the intended
+non-circular bootstrap rule concrete for owner and independent review. The
+`UNINITIALIZED -> GENESIS_STAGING` candidate admits only a production-shaped
+Config with zero stake account, principal, agencies, lane mask, and economic
+activity; it intentionally does not require Daily Law because no economic
+write is yet permitted. The `GENESIS_STAGING -> ACTIVE` candidate first
+requires an opaque current OPEN Daily Law capability for the same mint, then a
+mint/program-bound exact conservation receipt, the complete lane/stake funding
+shape, and zero preactivation economic writes, attributed core principal, core
+rewards, and core releases. It binds the Config preimage, law account,
+conservation manifest, and numeric preactivation facts into the candidate.
+
+This candidate is not the frozen phase predicate. Its preactivation numeric
+facts are not yet sourced from authenticated runtime accounts, the owner has
+not accepted the rule, production identities and final binaries are absent,
+and no writer consumes the result. It exposes no AccountInfo, mutable borrow,
+CPI, ABI, entrypoint, or dispatcher; all authorization fields remain false and
+the Config graph node remains blocked/Mainnet HOLD.
+
 A separate production-source pure kernel now closes the arithmetic-only part of
 Genesis conservation without crossing that boundary. It requires the exact
 ordered 500M/200M/150M/100M/50M allocation, 1B supply at nine decimals, five
