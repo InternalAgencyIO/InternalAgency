@@ -460,6 +460,20 @@ Token-2022 extension seals, writes, and activation remain false/HOLD. The
 `GENESIS_ALLOCATIONS_CONSERVATION` graph node therefore remains blocked rather
 than treating arithmetic closure as end-to-end Genesis evidence.
 
+The feature-gated runtime composition now supplies the previously absent
+authenticated observation boundary. It accepts only the opaque exact-version
+Token-2022 mint/token capabilities and four opaque strict Lane-PDA capabilities
+already produced by the existing runtime authenticators. It rechecks the
+binding-relative mint, Token-2022 program, community owner, vault-authority PDA,
+four exact Lane identities and retained policies, beneficiary/token bindings,
+and zero Genesis reservations/payments/claims before calling the pure kernel.
+
+This is still an internal read-only capability composition. Owner manifest
+acceptance, production identities, deployed program-byte attestation,
+prior-supply retirement or migration, Config phase authorization, writes,
+activation, and Mainnet authority remain false. No mutable borrow, CPI,
+instruction ABI, entrypoint, or dispatcher was added, so the graph stays held.
+
 These are not account adapters or deployable handlers. A future native adapter
 must still prove account ownership, exact config/round/randomness bindings,
 PDAs, codecs, and bumps before its first mutable borrow, and must source Clock

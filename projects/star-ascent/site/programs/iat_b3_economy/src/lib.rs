@@ -4,6 +4,8 @@
 mod codec;
 mod config_genesis_codec;
 mod genesis_conservation;
+#[cfg(feature = "runtime-account-bridge")]
+pub mod genesis_conservation_runtime;
 pub mod native_adapter;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod rehearsal_adapter;

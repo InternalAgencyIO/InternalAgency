@@ -50,6 +50,10 @@ const economyGenesisConservationSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/genesis_conservation.rs", import.meta.url),
   "utf8",
 );
+const economyGenesisConservationRuntimeSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/genesis_conservation_runtime.rs", import.meta.url),
+  "utf8",
+);
 const economyRehearsalAdapterSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/rehearsal_adapter.rs", import.meta.url),
   "utf8",
@@ -335,6 +339,34 @@ test("the Genesis conservation kernel proves exact arithmetic without accepting 
   assert.doesNotMatch(
     economyGenesisConservationSource,
     /AccountInfo|entrypoint!|process_instruction|invoke(?:_signed)?\s*\(|try_borrow_mut/u,
+  );
+});
+
+test("Genesis runtime conservation requires opaque Token-2022 and Lane capabilities without activating", () => {
+  assert.match(
+    economySource,
+    /#\[cfg\(feature = "runtime-account-bridge"\)\]\s+pub mod genesis_conservation_runtime;/u,
+  );
+  assert.match(economyGenesisConservationRuntimeSource, /ReadonlyCanonicalEconomyMint/u);
+  assert.match(economyGenesisConservationRuntimeSource, /ReadonlyPublicTokenAccount/u);
+  assert.match(economyGenesisConservationRuntimeSource, /AuthenticatedStateAccount/u);
+  assert.match(economyGenesisConservationRuntimeSource, /verify_authenticated_genesis_conservation/u);
+  assert.match(economyGenesisConservationRuntimeSource, /PdaIdentity::VaultAuthority/u);
+  assert.match(economyGenesisConservationRuntimeSource, /PdaIdentity::LaneState/u);
+  assert.match(economyGenesisConservationRuntimeSource, /lane\.reserved != 0/u);
+  assert.match(economyGenesisConservationRuntimeSource, /lane\.paid != 0/u);
+  assert.match(economyGenesisConservationRuntimeSource, /lane\.principal_claimed != 0/u);
+  assert.match(economyGenesisConservationRuntimeSource, /owner_destination_manifest_accepted: false/u);
+  assert.match(economyGenesisConservationRuntimeSource, /production_identity_binding_frozen: false/u);
+  assert.match(economyGenesisConservationRuntimeSource, /migration_or_no_prior_supply_proved: false/u);
+  assert.match(economyGenesisConservationRuntimeSource, /phase_transition_authorized: false/u);
+  assert.match(economyGenesisConservationRuntimeSource, /account_writes_executed: false/u);
+  assert.match(economyGenesisConservationRuntimeSource, /entrypoint_exposed: false/u);
+  assert.match(economyGenesisConservationRuntimeSource, /dispatcher_exposed: false/u);
+  assert.match(economyGenesisConservationRuntimeSource, /mainnet_hold: true/u);
+  assert.doesNotMatch(
+    economyGenesisConservationRuntimeSource,
+    /try_borrow_mut|entrypoint!|process_instruction|invoke(?:_signed)?\s*\(/u,
   );
 });
 

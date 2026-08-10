@@ -582,6 +582,22 @@ the graph node remains `BLOCKED`, and Mainnet remains `HOLD` until a signed
 destination manifest, production identity binding, runtime account adapter,
 chain observation, and migration-or-new-mint evidence are independently bound.
 
+Behind `runtime-account-bridge`, a second layer now removes caller-shaped
+semantic balances from this path. It accepts only opaque canonical-mint and
+public-token-account capabilities returned by the exact Token-2022 parser plus
+four opaque strict Lane-PDA capabilities returned by the Daily-Law-gated native
+account authenticator. Community custody must bind its token owner directly;
+the other four accounts must bind the canonical vault-authority PDA, exact Lane
+PDA/role/token account/beneficiary/policy, and zero reserved, paid, and claimed
+Genesis accounting before the pure conservation receipt can exist.
+
+This closes runtime authentication of the five observed public balances and
+Lane beneficiary bindings, not the graph packet. The owner has not accepted
+the manifest, production IDs are still inputs, the parser does not attest
+deployed Token-2022 or hook bytecode, and no prior-supply retirement, phase
+transition, write, activation, or Mainnet evidence is created. The module has
+no mutable borrow, CPI, ABI, entrypoint, or dispatcher and remains `HOLD`.
+
 The next strict-codec batch adds only four more field-complete retained
 projections: `CoreRewardState` (`IATB3CRW`, 128 bytes), `AgencyState`
 (`IATB3AGN`, 96 bytes), `AgencyOwnerIndexState` (`IATB3AOI`, 96 bytes), and
