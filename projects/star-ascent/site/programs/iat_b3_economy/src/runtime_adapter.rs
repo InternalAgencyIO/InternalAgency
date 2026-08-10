@@ -208,6 +208,8 @@ pub struct RuntimeProductionActiveConfig {
     state: ConfigGenesisState,
     preimage_sha256: [u8; 32],
     law_account_sha256: [u8; 32],
+    law_unix_timestamp: i64,
+    law_local_day: i64,
     program_id: [u8; 32],
     mint: [u8; 32],
 }
@@ -227,6 +229,14 @@ impl RuntimeProductionActiveConfig {
 
     pub const fn law_account_sha256(&self) -> [u8; 32] {
         self.law_account_sha256
+    }
+
+    pub const fn law_unix_timestamp(&self) -> i64 {
+        self.law_unix_timestamp
+    }
+
+    pub const fn law_local_day(&self) -> i64 {
+        self.law_local_day
     }
 
     pub const fn program_id(&self) -> [u8; 32] {
@@ -454,6 +464,27 @@ pub fn authenticate_runtime_production_active_config(
 ) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
     let observed =
         parse_config_genesis_account_info_with_runtime_law(runtime_law, binding, account)?;
+    require_production_active_config(observed, runtime_law.gate(), binding)
+}
+
+/// Host/rehearsal seam for authenticating the real Config PDA with an existing
+/// opaque Law gate. Production runtime composition uses
+/// [`authenticate_runtime_production_active_config`] so the Law AccountInfo and
+/// Clock are also opaque runtime facts.
+pub fn authenticate_production_active_config_account_info(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
+    let observed = parse_config_genesis_account_info(gate, binding, account)?;
+    require_production_active_config(observed, gate, binding)
+}
+
+fn require_production_active_config(
+    observed: ReadonlyConfigGenesisAccount,
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
     let state = observed.state();
     if state.phase != GenesisPhase::Active || !state.config.active {
         return Err(RuntimeAdapterError::ConfigPhaseNotActive);
@@ -471,7 +502,9 @@ pub fn authenticate_runtime_production_active_config(
         key: observed.key(),
         state,
         preimage_sha256: observed.preimage_sha256(),
-        law_account_sha256: runtime_law.law_account_sha256(),
+        law_account_sha256: gate.law_account_sha256(),
+        law_unix_timestamp: gate.unix_timestamp(),
+        law_local_day: gate.local_day(),
         program_id: binding.program_id(),
         mint: binding.mint(),
     })

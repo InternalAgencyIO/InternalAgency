@@ -511,8 +511,10 @@ The runtime parser also returns a separate opaque production-ACTIVE Config
 capability only after the strict phase codec and real Config PDA pass. It rejects
 staging/uninitialized state, rehearsal mode, non-mainnet supply, incomplete Lane
 funding, and missing stake/token identities. This is the required phase guard
-primitive for later runtime write paths, not proof that those paths already
-consume it; all handler-complete and Mainnet flags therefore remain false.
+primitive. The production existing-state CAS entry now consumes it and binds it
+to the exact Daily Law account hash, timestamp, and local day before any borrow
+or write. Account lifecycle and Token-2022 CPI do not yet consume it; all
+handler-complete and Mainnet flags therefore remain false.
 
 These are not account adapters or deployable handlers. A future native adapter
 must still prove account ownership, exact config/round/randomness bindings,
@@ -647,10 +649,14 @@ adapter must authenticate the canonical Rent sysvar and calculate the minimum.
 The host-only native module itself has no authenticated Clock or Rent sysvar
 account, `AccountInfo`, mutable borrow, invoke, System/Token CPI, dispatcher,
 entrypoint, or public write path. The separate `runtime-write-adapter` feature
-now executes only sealed existing-state CAS batches: all immutable validations,
-all mutable data borrows, and all second preimage checks complete before the
-first byte is copied. It rejects create intents and performs no lamport write,
-System CPI, Token-2022 CPI, instruction decode, dispatcher, or entrypoint.
+now exposes a production existing-state CAS path that requires the opaque
+production-ACTIVE Config capability and the same exact Daily Law observation
+before account-count validation, mutable borrows, or writes. All immutable
+validations, all mutable data borrows, and all second preimage checks then
+complete before the first byte is copied. The older unphased executor is kept
+only for the pinned local structural lifecycle fixture. Both reject create
+intents and perform no lamport write, System CPI, Token-2022 CPI, instruction
+decode, dispatcher, or entrypoint.
 Runtime handler authorization, mutable Config lifecycle, every Genesis phase
 transition, and all public exposure remain blocked, so this primitive is not a
 Devnet economic handler or a Mainnet authorization.

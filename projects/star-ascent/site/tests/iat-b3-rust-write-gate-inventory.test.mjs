@@ -235,6 +235,15 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
   );
   assert.match(economyRuntimeWriteAdapterSource, /try_borrow_mut_data\(\)/u);
   assert.match(economyRuntimeWriteAdapterSource, /validate_atomic_write_preconditions/u);
+  assert.match(
+    economyRuntimeWriteAdapterSource,
+    /production_active_config_capability_required: true/u,
+  );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
+    /execute_production_active_existing_write_batch_account_infos/u,
+  );
+  assert.match(economyRuntimeWriteAdapterSource, /ActiveConfigCapabilityMismatch/u);
   assert.match(economyRuntimeWriteAdapterSource, /all_mutable_borrows_acquired_before_write: true/u);
   assert.match(economyRuntimeWriteAdapterSource, /all_preimages_revalidated_before_write: true/u);
   assert.match(economyRuntimeWriteAdapterSource, /account_data_writes_supported: true/u);

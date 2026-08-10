@@ -7,15 +7,19 @@ use iat_b3_economy::native_adapter::{
     AtomicWriteBatch, NativeAccountObservation, NativeAdapterError, NativeEconomyBinding,
     PdaIdentity, StrictStateValue,
 };
+use iat_b3_economy::runtime_adapter::{
+    authenticate_production_active_config_account_info, RuntimeProductionActiveConfig,
+};
 use iat_b3_economy::runtime_write_adapter::{
-    execute_existing_write_batch_account_infos, RuntimeWriteAdapterError, RuntimeWriteAdapterTruth,
-    RUNTIME_WRITE_ADAPTER_TRUTH,
+    execute_production_active_existing_write_batch_account_infos, RuntimeWriteAdapterError,
+    RuntimeWriteAdapterTruth, RUNTIME_WRITE_ADAPTER_TRUTH,
 };
 use iat_b3_economy::{
-    decode_lane_state, decode_position_state, encode_lane_state, encode_position_state,
-    verify_daily_law_open, CanonicalDailyLawBinding, EligibilityState, LaneState, PositionState,
-    ReadonlyDailyLawAccount, ValidatedDailyLawWrite, LANE_ACCOUNT_LEN, LAW_STATE_LEN,
-    LAW_STATE_MAGIC, LAW_STATE_VERSION, POSITION_ACCOUNT_LEN,
+    decode_lane_state, decode_position_state, encode_config_genesis_state, encode_lane_state,
+    encode_position_state, verify_daily_law_open, CanonicalDailyLawBinding, ConfigGenesisState,
+    ConfigState, EligibilityState, GenesisPhase, LaneState, PositionState, ReadonlyDailyLawAccount,
+    ValidatedDailyLawWrite, CONFIG_GENESIS_ACCOUNT_LEN, LANE_ACCOUNT_LEN, LAW_STATE_LEN,
+    LAW_STATE_MAGIC, LAW_STATE_VERSION, MAINNET_SUPPLY, POSITION_ACCOUNT_LEN,
 };
 use solana_account_info::AccountInfo;
 use solana_sdk_ids::system_program;
@@ -42,6 +46,40 @@ fn open_gate(timestamp: i64) -> ValidatedDailyLawWrite {
         timestamp,
     )
     .unwrap()
+}
+
+fn production_active_config(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+) -> RuntimeProductionActiveConfig {
+    let state = ConfigGenesisState {
+        phase: GenesisPhase::Active,
+        config: ConfigState {
+            admin: [0x21; 32],
+            mint: MINT,
+            token_program: [0x33; 32],
+            randomness_program: [0x44; 32],
+            stake_token_account: [0x55; 32],
+            agency_registry_hash: [0; 32],
+            genesis_timestamp: CLOCK_TIMESTAMP - 60,
+            expected_supply: MAINNET_SUPPLY,
+            staked_principal: 1_000,
+            agency_count: 0,
+            rehearsal_mode: false,
+            active: true,
+            lane_mask: 0b1_1110,
+            stake_vault_initialized: true,
+            bump: binding.config_bump(),
+            vault_authority_bump: 202,
+        },
+    };
+    let mut data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+    encode_config_genesis_state(&state, &mut data).unwrap();
+    let key = binding.config().into();
+    let owner = binding.program_id().into();
+    let mut lamports = 1;
+    let account = AccountInfo::new(&key, false, false, &mut lamports, &mut data, &owner, false);
+    authenticate_production_active_config_account_info(gate, binding, &account).unwrap()
 }
 
 fn decision_for_inputs(timestamp: i64) -> SolanaDailyDecision {
@@ -206,6 +244,7 @@ fn prepare_batch(
 fn existing_state_batch_acquires_every_borrow_and_revalidates_before_writing() {
     let binding = binding();
     let gate = open_gate(CLOCK_TIMESTAMP);
+    let active_config = production_active_config(&gate, &binding);
     let states = states(&binding);
     let mut position_data = [0u8; POSITION_ACCOUNT_LEN];
     let mut lane_data = [0u8; LANE_ACCOUNT_LEN];
@@ -247,19 +286,35 @@ fn existing_state_batch_acquires_every_borrow_and_revalidates_before_writing() {
     ];
 
     assert_eq!(
-        execute_existing_write_batch_account_infos(&gate, &binding, batch, &[]),
+        execute_production_active_existing_write_batch_account_infos(
+            &gate,
+            &active_config,
+            &binding,
+            batch,
+            &[],
+        ),
         Err(RuntimeWriteAdapterError::AccountCountMismatch)
     );
     let later_gate = open_gate(CLOCK_TIMESTAMP + 1);
     assert_eq!(
-        execute_existing_write_batch_account_infos(&later_gate, &binding, batch, &accounts),
-        Err(RuntimeWriteAdapterError::Native(
-            NativeAdapterError::LawCapabilityMismatch
-        ))
+        execute_production_active_existing_write_batch_account_infos(
+            &later_gate,
+            &active_config,
+            &binding,
+            batch,
+            &accounts,
+        ),
+        Err(RuntimeWriteAdapterError::ActiveConfigCapabilityMismatch)
     );
 
-    let receipt =
-        execute_existing_write_batch_account_infos(&gate, &binding, batch, &accounts).unwrap();
+    let receipt = execute_production_active_existing_write_batch_account_infos(
+        &gate,
+        &active_config,
+        &binding,
+        batch,
+        &accounts,
+    )
+    .unwrap();
     assert_eq!(receipt.batch_commitment_sha256(), batch.commitment_sha256());
     assert_eq!(
         decode_position_state(&accounts[0].try_borrow_data().unwrap()).unwrap(),
@@ -276,6 +331,7 @@ fn existing_state_batch_acquires_every_borrow_and_revalidates_before_writing() {
 fn stale_preimage_or_late_borrow_conflict_leaves_the_entire_batch_unchanged() {
     let binding = binding();
     let gate = open_gate(CLOCK_TIMESTAMP);
+    let active_config = production_active_config(&gate, &binding);
     let states = states(&binding);
     let mut position_data = [0u8; POSITION_ACCOUNT_LEN];
     let mut lane_data = [0u8; LANE_ACCOUNT_LEN];
@@ -319,7 +375,13 @@ fn stale_preimage_or_late_borrow_conflict_leaves_the_entire_batch_unchanged() {
 
     let held = accounts[1].try_borrow_data().unwrap();
     assert_eq!(
-        execute_existing_write_batch_account_infos(&gate, &binding, batch, &accounts),
+        execute_production_active_existing_write_batch_account_infos(
+            &gate,
+            &active_config,
+            &binding,
+            batch,
+            &accounts,
+        ),
         Err(RuntimeWriteAdapterError::AccountBorrowFailed)
     );
     drop(held);
@@ -328,7 +390,13 @@ fn stale_preimage_or_late_borrow_conflict_leaves_the_entire_batch_unchanged() {
 
     accounts[1].try_borrow_mut_data().unwrap()[20] ^= 1;
     assert_eq!(
-        execute_existing_write_batch_account_infos(&gate, &binding, batch, &accounts),
+        execute_production_active_existing_write_batch_account_infos(
+            &gate,
+            &active_config,
+            &binding,
+            batch,
+            &accounts,
+        ),
         Err(RuntimeWriteAdapterError::Native(
             NativeAdapterError::PreimageMismatch
         ))
@@ -343,6 +411,7 @@ fn public_surface_remains_narrow_and_fail_closed() {
         RuntimeWriteAdapterTruth {
             feature_gated: true,
             daily_law_capability_required: true,
+            production_active_config_capability_required: true,
             authenticated_existing_state_only: true,
             all_mutable_borrows_acquired_before_write: true,
             all_preimages_revalidated_before_write: true,
@@ -364,6 +433,7 @@ fn public_surface_remains_narrow_and_fail_closed() {
 fn account_creation_intents_are_rejected_before_any_borrow_or_cpi() {
     let binding = binding();
     let gate = open_gate(CLOCK_TIMESTAMP);
+    let active_config = production_active_config(&gate, &binding);
     let payer_key = [0x77; 32];
     let payer = authenticate_system_payer(
         &gate,
@@ -417,7 +487,13 @@ fn account_creation_intents_are_rejected_before_any_borrow_or_cpi() {
     let mut data = [];
     let account = AccountInfo::new(&key, false, true, &mut lamports, &mut data, &owner, false);
     assert_eq!(
-        execute_existing_write_batch_account_infos(&gate, &binding, batch, &[account]),
+        execute_production_active_existing_write_batch_account_infos(
+            &gate,
+            &active_config,
+            &binding,
+            batch,
+            &[account],
+        ),
         Err(RuntimeWriteAdapterError::CreateIntentUnsupported)
     );
 }

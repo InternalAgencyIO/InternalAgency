@@ -640,8 +640,11 @@ real Config PDA and the codec reports `ACTIVE`; it additionally rejects
 rehearsal mode, non-mainnet supply, incomplete Lane mask, missing stake vault,
 zero stake token identity, and zero token-program identity. This prevents the
 retained V2 `active` boolean from being accepted alone as B3 activation. The
-capability is not yet required by every lifecycle, token-CPI, and existing-state
-write path, so handler completion and phase enforcement remain false/HOLD.
+production existing-state CAS entry now requires this capability and binds it
+to the exact Daily Law account hash, timestamp, and local day before account
+count validation, borrows, or writes. The lifecycle and Token-2022 CPI paths do
+not yet require it, so handler completion and aggregate phase enforcement remain
+false/HOLD.
 
 The next strict-codec batch adds only four more field-complete retained
 projections: `CoreRewardState` (`IATB3CRW`, 128 bytes), `AgencyState`
@@ -696,15 +699,19 @@ core-custody/faction/Genesis HOLDs, or the complete-dispatcher boundary.
 
 A narrower execution primitive is now isolated behind the separate
 `runtime-write-adapter` feature. It accepts only sealed native-adapter batches
-containing existing-state CAS intents. It validates the exact opaque Daily Law
-capability and all account headers/preimages, acquires every mutable data borrow,
-revalidates every preimage while all borrows are held, and only then copies any
-postimage. Borrow conflicts, stale bytes, capability drift, duplicate accounts,
-and create-account intents fail before the first write. This is real internal
-account-data persistence for already-authenticated fixed codecs, but it is not
-a handler: account creation, lamport mutation, System CPI, Token-2022 CPI,
-instruction decoding, entrypoint, dispatcher, production identities, and
-public exposure remain absent. No handler is complete and Mainnet remains HOLD.
+containing existing-state CAS intents. Its production entry requires the opaque
+production-ACTIVE Config capability and binds that capability to the exact
+Daily Law account hash, timestamp, and local day before account-count checks,
+borrows, or writes. It then validates all account headers/preimages, acquires
+every mutable data borrow, revalidates every preimage while all borrows are held,
+and only then copies any postimage. The older unphased entry is retained only
+for the pinned local structural lifecycle fixture. Borrow conflicts, stale
+bytes, capability drift, duplicate accounts, and create-account intents fail
+before the first write. This is real internal account-data persistence for
+already-authenticated fixed codecs, but it is not a handler: account creation,
+lamport mutation, System CPI, Token-2022 CPI, instruction decoding, entrypoint,
+dispatcher, production identities, and public exposure remain absent. No
+handler is complete and Mainnet remains HOLD.
 
 The next internal primitive is isolated behind
 `runtime-account-lifecycle`. It accepts only sealed create-intent batches from

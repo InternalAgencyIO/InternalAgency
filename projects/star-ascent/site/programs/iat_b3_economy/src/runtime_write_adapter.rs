@@ -16,6 +16,7 @@ use crate::native_adapter::{
     validate_atomic_write_preconditions, AtomicWriteBatch, NativeAccountObservation,
     NativeAdapterError, NativeEconomyBinding, StateWriteIntent,
 };
+use crate::runtime_adapter::RuntimeProductionActiveConfig;
 use crate::ValidatedDailyLawWrite;
 use sha2::{Digest, Sha256};
 use solana_account_info::AccountInfo;
@@ -27,6 +28,7 @@ pub const RUNTIME_WRITE_ADAPTER_STATUS: &str =
 pub struct RuntimeWriteAdapterTruth {
     pub feature_gated: bool,
     pub daily_law_capability_required: bool,
+    pub production_active_config_capability_required: bool,
     pub authenticated_existing_state_only: bool,
     pub all_mutable_borrows_acquired_before_write: bool,
     pub all_preimages_revalidated_before_write: bool,
@@ -45,6 +47,7 @@ pub struct RuntimeWriteAdapterTruth {
 pub const RUNTIME_WRITE_ADAPTER_TRUTH: RuntimeWriteAdapterTruth = RuntimeWriteAdapterTruth {
     feature_gated: true,
     daily_law_capability_required: true,
+    production_active_config_capability_required: true,
     authenticated_existing_state_only: true,
     all_mutable_borrows_acquired_before_write: true,
     all_preimages_revalidated_before_write: true,
@@ -67,6 +70,7 @@ pub enum RuntimeWriteAdapterError {
     CreateIntentUnsupported,
     AccountBorrowFailed,
     PostValidationPreimageMismatch,
+    ActiveConfigCapabilityMismatch,
 }
 
 impl From<NativeAdapterError> for RuntimeWriteAdapterError {
@@ -91,7 +95,9 @@ impl<const N: usize> RuntimeWriteReceipt<N> {
     }
 }
 
-/// Execute one sealed batch of existing-state writes.
+/// Execute one sealed batch for the pinned structural lifecycle rehearsal.
+/// Production callers must use
+/// [`execute_production_active_existing_write_batch_account_infos`].
 ///
 /// Every immutable validation and every mutable borrow/preimage check finishes
 /// before the first `copy_from_slice`. A failure therefore leaves all supplied
@@ -100,6 +106,38 @@ impl<const N: usize> RuntimeWriteReceipt<N> {
 // Keep the validated batch and mutable borrow set in a distinct SBF frame.
 #[inline(never)]
 pub fn execute_existing_write_batch_account_infos<const N: usize>(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    batch: AtomicWriteBatch<N>,
+    accounts: &[AccountInfo<'_>],
+) -> Result<RuntimeWriteReceipt<N>, RuntimeWriteAdapterError> {
+    execute_existing_write_batch_inner(gate, binding, batch, accounts)
+}
+
+/// Production-shaped existing-state CAS path. The opaque Config capability is
+/// checked before account count validation, immutable borrows, mutable borrows,
+/// or writes, so an inactive/staging/rehearsal Config cannot reach the executor.
+#[inline(never)]
+pub fn execute_production_active_existing_write_batch_account_infos<const N: usize>(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    batch: AtomicWriteBatch<N>,
+    accounts: &[AccountInfo<'_>],
+) -> Result<RuntimeWriteReceipt<N>, RuntimeWriteAdapterError> {
+    if active_config.program_id() != binding.program_id()
+        || active_config.mint() != binding.mint()
+        || active_config.key() != binding.config()
+        || active_config.law_account_sha256() != gate.law_account_sha256()
+        || active_config.law_unix_timestamp() != gate.unix_timestamp()
+        || active_config.law_local_day() != gate.local_day()
+    {
+        return Err(RuntimeWriteAdapterError::ActiveConfigCapabilityMismatch);
+    }
+    execute_existing_write_batch_inner(gate, binding, batch, accounts)
+}
+
+fn execute_existing_write_batch_inner<const N: usize>(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,
     batch: AtomicWriteBatch<N>,
