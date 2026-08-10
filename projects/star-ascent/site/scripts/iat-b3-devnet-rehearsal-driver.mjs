@@ -543,7 +543,16 @@ async function run(argv) {
 
   currentPhase = "disposable_identity_load";
   const payer = readKeypair(required(args, "payer"));
-  const recipient = readKeypair(required(args, "recipient"));
+  const recipientKeypairPath = args.get("recipient") ?? null;
+  const recipientPubkey = args.get("recipient-pubkey") ?? null;
+  assert.equal(
+    Number(recipientKeypairPath !== null) + Number(recipientPubkey !== null),
+    1,
+    "exactly one recipient identity form is required",
+  );
+  const recipient = recipientKeypairPath === null
+    ? Object.freeze({ publicKey: new PublicKey(recipientPubkey) })
+    : readKeypair(recipientKeypairPath);
   const programId = new PublicKey(required(args, "program-id"));
   const mint = new PublicKey(required(args, "mint"));
   const fundingMode = required(args, "funding-mode");

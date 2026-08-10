@@ -246,6 +246,13 @@ test("reused funding requires only the non-airdrop public CLI evidence", () => {
   );
 });
 
+test("a public recipient can resume after temporary key cleanup without signing authority", () => {
+  assert.match(driver, /recipient-pubkey/u);
+  assert.match(driver, /exactly one recipient identity form is required/u);
+  assert.match(driver, /Object\.freeze\(\{ publicKey: new PublicKey\(recipientPubkey\) \}\)/u);
+  assert.doesNotMatch(driver, /recipient\.secretKey|recipient[^\n]{0,80}isSigner:\s*true/u);
+});
+
 test("program upload retries are bounded and preserve exact public identities", () => {
   assert.match(wrapper, /run_json_with_bounded_retries deploy-program 12 solana program deploy/u);
   assert.match(wrapper, /--use-quic/u);
