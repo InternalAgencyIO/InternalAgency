@@ -380,7 +380,12 @@ Position lifecycle boundary now accepts only the same completed ingress, binds
 the owner payer, derives the canonical Config/owner/position-id PDA and bump,
 seals the retained-V2 Position postimage, and invokes the production-ACTIVE
 System CPI executor. It is not yet composed atomically with ingress CPI and the
-four-account ledger commit.
+four-account ledger commit in the generic callback surface. The narrower
+`runtime-production-open-position` feature now carries the exact authenticated
+Daily Law capability into the post-restoration callback, creates the canonical
+Position, then executes the Config/lane CAS. A later callback failure propagates
+inside the same instruction and requires rollback of all earlier Token-2022 and
+System CPIs.
 No handler or release gate is complete.
 The older unphased combined entry remains only for the pinned structural SBF
 fixture and is not the production route.
@@ -698,9 +703,10 @@ Program CPI primitive, but it has no arbitrary seed/owner/instruction input,
 Token-2022 CPI, production instruction ABI, entrypoint, dispatcher, public
 exposure, or production identity freeze. Its exact completed-ingress Position
 boundary proves the owner payer and canonical Position seeds/bump before
-sealing the retained-V2 postimage, but remains uncomposed with the ingress CPI
-and Config/lane persistence callback. It has not executed on Devnet, completes
-no handler, and leaves Mainnet HOLD.
+sealing the retained-V2 postimage. The combined feature composes it with the
+ingress CPI and Config/lane persistence callback in that exact order. It has no
+public dispatcher, has not executed on Devnet, completes no public handler, and
+leaves Mainnet HOLD.
 
 ## Internal V2 mutation paths
 

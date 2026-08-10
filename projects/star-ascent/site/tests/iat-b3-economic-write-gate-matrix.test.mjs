@@ -128,6 +128,16 @@ const ACCOUNT_CREATING_HANDLERS = Object.freeze([
   "commit_round",
 ]);
 
+function assertTokensInOrder(body, tokens, label) {
+  let cursor = -1;
+  for (const token of tokens) {
+    const next = body.indexOf(token, cursor + 1);
+    assert.notEqual(next, -1, `${label}: missing ${token}`);
+    assert.ok(next > cursor, `${label}: out of order ${token}`);
+    cursor = next;
+  }
+}
+
 test("the B3 port matrix covers the exact retained V2 public write inventory", () => {
   assert.equal(matrix.schema, "iat-b3-economic-write-gate-matrix/v1");
   assert.equal(matrix.expectedHandlerCount, 15);
@@ -861,6 +871,10 @@ test("the feature-gated stake-ingress runtime executes exact Token-2022 CPI relo
     /#\[cfg\(feature = "runtime-token-2022-stake-ingress"\)\]\s+pub mod stake_ingress_runtime;/u,
   );
   assert.match(economyManifest, /runtime-token-2022-stake-ingress = \[/u);
+  assert.match(
+    economyManifest,
+    /runtime-production-open-position = \[[\s\S]+"runtime-account-lifecycle"[\s\S]+"runtime-token-2022-stake-ingress"[\s\S]+\]/u,
+  );
   for (const token of [
     "approve_checked(",
     "transfer_checked(",
@@ -899,6 +913,39 @@ test("the feature-gated stake-ingress runtime executes exact Token-2022 CPI relo
     economyStakeIngressRuntimeSource,
     /pub fn execute_production_active_daily_law_authenticated_stake_ingress/u,
   );
+  assert.match(
+    economyStakeIngressRuntimeSource,
+    /pub fn execute_production_open_position_and_persist/u,
+  );
+  assertTokensInOrder(
+    economyStakeIngressRuntimeSource,
+    [
+      "execute_production_completed_ingress_position_create_account_infos(",
+      "execute_production_completed_ingress_config_and_lanes_cas_account_infos(",
+      "position_receipt = Some(position)",
+      "ledger_receipt = Some(ledger)",
+    ],
+    "combined production open-position persistence callback",
+  );
+  for (const trueFlag of [
+    "same_artifact_daily_law_and_stake_ingress",
+    "production_active_config_required",
+    "completed_ingress_position_lifecycle_executed",
+    "completed_ingress_config_and_lanes_cas_executed",
+    "callback_failure_requires_transaction_rollback",
+    "retained_v2_post_cpi_persistence_complete",
+  ]) {
+    assert.match(economyStakeIngressRuntimeSource, new RegExp(`${trueFlag}: true`, "u"));
+  }
+  for (const falseFlag of [
+    "instruction_abi_frozen",
+    "entrypoint_exposed",
+    "dispatcher_exposed",
+    "any_handler_complete",
+    "devnet_executed",
+  ]) {
+    assert.match(economyStakeIngressRuntimeSource, new RegExp(`${falseFlag}: false`, "u"));
+  }
   assert.match(economyStakeIngressRuntimeSource, /RuntimeProductionActiveConfig/u);
   assert.match(economyStakeIngressRuntimeSource, /ActiveConfigCapabilityMismatch/u);
   assert.match(economyStakeIngressRuntimeSource, /fn authenticate_daily_law/u);

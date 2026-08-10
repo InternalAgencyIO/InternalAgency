@@ -198,10 +198,14 @@ every check passes. A separate production lifecycle boundary now accepts only
 that exact completed ingress, proves the owner-signer payer, derives the
 `Position` PDA from canonical Config/owner/position-id seeds, verifies the
 retained bump, seals the exact Position postimage, and routes creation through
-the production-ACTIVE System CPI executor. It is not yet composed with the
-ingress CPI callback and four-account ledger commit as one handler. There is
-still no public lifecycle dispatcher, frozen identity, entrypoint, or public
-ABI; those remain the security boundary.
+the production-ACTIVE System CPI executor. The new
+`runtime-production-open-position` composition carries the authenticated Daily
+Law capability into the post-restoration callback, creates that exact Position,
+and then executes the four-account Config/lane CAS. Any callback error remains
+inside the same instruction and therefore requires transaction rollback of the
+earlier Token-2022 and System CPIs. There is still no public lifecycle
+dispatcher, frozen identity, entrypoint, or public ABI; those remain the
+security boundary.
 
 Burning is different from transferring. The sole core-cap burn path uses
 Token-2022 `BurnChecked`, signed by the economic vault-authority PDA. It is not
@@ -758,9 +762,11 @@ boundary: it binds the retained-V2 completed Config/lane/stake facts, requires
 the Position owner as the system payer, reconstructs canonical Position seeds
 and bump, and seals that exact Position state into the existing
 production-ACTIVE lifecycle executor. This still is not composed with ingress
-CPI plus the Config/lane commit as one handler. The primitive has not been
-executed on Devnet, completes no handler, does not freeze production identities,
-and keeps Mainnet HOLD.
+CPI plus the Config/lane commit in the generic primitive. The narrower
+`runtime-production-open-position` composition does execute all three through
+one internal post-restoration callback, while remaining feature-gated and
+dispatcherless. It has not been executed on Devnet, completes no public
+handler, does not freeze production identities, and keeps Mainnet HOLD.
 
 The same feature now contains a second, explicitly nonactivating rehearsal
 surface at

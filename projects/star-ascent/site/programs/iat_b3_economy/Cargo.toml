@@ -37,6 +37,10 @@ runtime-token-2022-stake-ingress = [
     "dep:solana-program-error",
     "dep:spl-transfer-hook-interface",
 ]
+runtime-production-open-position = [
+    "runtime-account-lifecycle",
+    "runtime-token-2022-stake-ingress",
+]
 sbf-preflight-entrypoint = [
     "runtime-account-bridge",
     "dep:solana-program-entrypoint",

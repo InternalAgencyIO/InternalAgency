@@ -669,6 +669,10 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
     economySource,
     /#\[cfg\(feature = "runtime-token-2022-stake-ingress"\)\]\s+pub mod stake_ingress_runtime;/u,
   );
+  assert.match(
+    economyCargo,
+    /runtime-production-open-position = \[[\s\S]+"runtime-account-lifecycle"[\s\S]+"runtime-token-2022-stake-ingress"[\s\S]+\]/u,
+  );
   assert.match(economyStakeIngressRuntimeSource, /pub fn execute_prepared_stake_ingress/u);
   assert.match(economyStakeIngressRuntimeSource, /add_extra_accounts_for_execute_cpi\(/u);
   assert.match(economyStakeIngressRuntimeSource, /invoke_signed\(/u);
@@ -701,6 +705,26 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
     economyStakeIngressRuntimeSource,
     /pub fn execute_production_active_daily_law_authenticated_stake_ingress/u,
   );
+  assert.match(
+    economyStakeIngressRuntimeSource,
+    /pub fn execute_production_open_position_and_persist/u,
+  );
+  assertTokensInOrder(
+    economyStakeIngressRuntimeSource,
+    [
+      "authenticate_daily_law(",
+      "require_production_active_context(",
+      "execute_daily_law_authenticated_stake_ingress_with_gate_callback(",
+      "execute_production_completed_ingress_position_create_account_infos(",
+      "execute_production_completed_ingress_config_and_lanes_cas_account_infos(",
+    ],
+    "production open-position composition",
+  );
+  assert.match(economyStakeIngressRuntimeSource, /same_artifact_daily_law_and_stake_ingress: true/u);
+  assert.match(economyStakeIngressRuntimeSource, /completed_ingress_position_lifecycle_executed: true/u);
+  assert.match(economyStakeIngressRuntimeSource, /completed_ingress_config_and_lanes_cas_executed: true/u);
+  assert.match(economyStakeIngressRuntimeSource, /callback_failure_requires_transaction_rollback: true/u);
+  assert.match(economyStakeIngressRuntimeSource, /any_handler_complete: false/u);
   assert.match(economyStakeIngressRuntimeSource, /RuntimeProductionActiveConfig/u);
   assert.match(economyStakeIngressRuntimeSource, /ActiveConfigCapabilityMismatch/u);
   assert.match(economyStakeIngressRuntimeSource, /fn authenticate_daily_law/u);

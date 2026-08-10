@@ -52,6 +52,17 @@ use crate::{
     CanonicalDailyLawBinding, EconomyError, PrepareOpenPositionInput, ReadonlyTokenState,
     ValidatedDailyLawWrite, TOKEN_DECIMALS,
 };
+#[cfg(feature = "runtime-production-open-position")]
+use crate::{
+    runtime_account_lifecycle::{
+        execute_production_completed_ingress_position_create_account_infos,
+        RuntimeAccountLifecycleReceipt,
+    },
+    runtime_write_adapter::{
+        execute_production_completed_ingress_config_and_lanes_cas_account_infos,
+        ProductionActiveIngressLedgerReceipt,
+    },
+};
 
 pub const STAKE_INGRESS_RUNTIME_STATUS: &str =
     "FEATURE_GATED_OPEN_DAILY_LAW_AUTHENTICATED_TOKEN_2022_CPI_RELOAD_NO_ABI_NO_DISPATCH_MAINNET_HOLD";
@@ -97,6 +108,44 @@ pub const STAKE_INGRESS_RUNTIME_TRUTH: StakeIngressRuntimeTruth = StakeIngressRu
     mainnet_hold: true,
 };
 
+#[cfg(feature = "runtime-production-open-position")]
+pub const PRODUCTION_OPEN_POSITION_RUNTIME_STATUS: &str =
+    "FEATURE_GATED_OPEN_LAW_TOKEN_2022_POSITION_AND_LEDGER_ATOMIC_NO_ABI_NO_DISPATCH_MAINNET_HOLD";
+
+#[cfg(feature = "runtime-production-open-position")]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ProductionOpenPositionRuntimeTruth {
+    pub same_artifact_daily_law_and_stake_ingress: bool,
+    pub production_active_config_required: bool,
+    pub completed_ingress_position_lifecycle_executed: bool,
+    pub completed_ingress_config_and_lanes_cas_executed: bool,
+    pub callback_failure_requires_transaction_rollback: bool,
+    pub retained_v2_post_cpi_persistence_complete: bool,
+    pub instruction_abi_frozen: bool,
+    pub entrypoint_exposed: bool,
+    pub dispatcher_exposed: bool,
+    pub any_handler_complete: bool,
+    pub devnet_executed: bool,
+    pub mainnet_hold: bool,
+}
+
+#[cfg(feature = "runtime-production-open-position")]
+pub const PRODUCTION_OPEN_POSITION_RUNTIME_TRUTH: ProductionOpenPositionRuntimeTruth =
+    ProductionOpenPositionRuntimeTruth {
+        same_artifact_daily_law_and_stake_ingress: true,
+        production_active_config_required: true,
+        completed_ingress_position_lifecycle_executed: true,
+        completed_ingress_config_and_lanes_cas_executed: true,
+        callback_failure_requires_transaction_rollback: true,
+        retained_v2_post_cpi_persistence_complete: true,
+        instruction_abi_frozen: false,
+        entrypoint_exposed: false,
+        dispatcher_exposed: false,
+        any_handler_complete: false,
+        devnet_executed: false,
+        mainnet_hold: true,
+    };
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct StakeIngressRuntimeReceipt {
     pub source_amount: u64,
@@ -113,6 +162,30 @@ pub struct DailyLawAuthenticatedStakeIngressReceipt {
     pub daily_law_account_sha256: [u8; 32],
     pub plan_constructed_after_daily_law_authentication: bool,
 }
+
+#[cfg(feature = "runtime-production-open-position")]
+#[derive(Clone, Copy)]
+pub struct ProductionOpenPositionPersistenceAccounts<'a, 'info> {
+    pub config: &'a AccountInfo<'info>,
+    pub treasury: &'a AccountInfo<'info>,
+    pub ecosystem: &'a AccountInfo<'info>,
+    pub liquidity: &'a AccountInfo<'info>,
+    pub position: &'a AccountInfo<'info>,
+    pub system_program: &'a AccountInfo<'info>,
+}
+
+#[cfg(feature = "runtime-production-open-position")]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ProductionOpenPositionRuntimeReceipt {
+    pub ingress: DailyLawAuthenticatedStakeIngressReceipt,
+    pub position: RuntimeAccountLifecycleReceipt<1>,
+    pub ledger: ProductionActiveIngressLedgerReceipt,
+}
+
+#[cfg(feature = "runtime-production-open-position")]
+const POSITION_LIFECYCLE_CALLBACK_ERROR: u32 = 0xB320;
+#[cfg(feature = "runtime-production-open-position")]
+const CONFIG_AND_LANES_CALLBACK_ERROR: u32 = 0xB321;
 
 struct AccountBoundStakeIngressInput {
     open_position: Box<PrepareOpenPositionInput>,
@@ -524,12 +597,12 @@ where
     F: FnOnce(&StakeIngressExecutionPlan, &CompletedStakeIngress) -> ProgramResult,
 {
     let gate = authenticate_daily_law(law_binding, law_state, accounts.mint.key)?;
-    execute_daily_law_authenticated_stake_ingress_with_gate(
+    execute_daily_law_authenticated_stake_ingress_with_gate_callback(
         program_id,
         gate,
         open_position,
         accounts,
-        persist_transaction_local_state,
+        move |_, plan, completed| persist_transaction_local_state(plan, completed),
     )
 }
 
@@ -559,17 +632,92 @@ where
         program_id,
         accounts.mint.key,
     )?;
-    execute_daily_law_authenticated_stake_ingress_with_gate(
+    execute_daily_law_authenticated_stake_ingress_with_gate_callback(
         program_id,
         gate,
         open_position,
         accounts,
-        persist_transaction_local_state,
+        move |_, plan, completed| persist_transaction_local_state(plan, completed),
     )
 }
 
+/// Production-only internal composition of the authenticated Daily Law gate,
+/// exact Token-2022 ingress, canonical Position creation, and the four-account
+/// Config/lane CAS callback. Every later error is propagated from inside the
+/// same Solana instruction so earlier token/System CPIs and local writes must
+/// roll back together. No instruction decoder, entrypoint, or dispatcher calls
+/// this function.
+#[cfg(feature = "runtime-production-open-position")]
 #[inline(never)]
-fn execute_daily_law_authenticated_stake_ingress_with_gate<'info, F>(
+#[allow(clippy::too_many_arguments)]
+pub fn execute_production_open_position_and_persist<'info>(
+    program_id: &Pubkey,
+    economy_binding: &NativeEconomyBinding,
+    active_config: &RuntimeProductionActiveConfig,
+    law_binding: &CanonicalDailyLawBinding,
+    law_state: &AccountInfo<'info>,
+    open_position: Box<PrepareOpenPositionInput>,
+    accounts: StakeIngressRuntimeAccounts<'_, 'info>,
+    persistence: ProductionOpenPositionPersistenceAccounts<'_, 'info>,
+) -> Result<ProductionOpenPositionRuntimeReceipt, StakeIngressRuntimeError> {
+    let gate = authenticate_daily_law(law_binding, law_state, accounts.mint.key)?;
+    require_production_active_context(
+        &gate,
+        active_config,
+        economy_binding,
+        program_id,
+        accounts.mint.key,
+    )?;
+    let owner = accounts.owner;
+    let mut position_receipt = None;
+    let mut ledger_receipt = None;
+    let ingress = execute_daily_law_authenticated_stake_ingress_with_gate_callback(
+        program_id,
+        gate,
+        open_position,
+        accounts,
+        |gate, _, completed| {
+            let position = execute_production_completed_ingress_position_create_account_infos(
+                gate,
+                active_config,
+                economy_binding,
+                completed,
+                owner,
+                persistence.position,
+                persistence.system_program,
+            )
+            .map_err(|_| ProgramError::Custom(POSITION_LIFECYCLE_CALLBACK_ERROR))?;
+            let ledger = execute_production_completed_ingress_config_and_lanes_cas_account_infos(
+                gate,
+                active_config,
+                economy_binding,
+                completed,
+                persistence.config,
+                [
+                    persistence.treasury,
+                    persistence.ecosystem,
+                    persistence.liquidity,
+                ],
+            )
+            .map_err(|_| ProgramError::Custom(CONFIG_AND_LANES_CALLBACK_ERROR))?;
+            position_receipt = Some(position);
+            ledger_receipt = Some(ledger);
+            Ok(())
+        },
+    )?;
+    Ok(ProductionOpenPositionRuntimeReceipt {
+        ingress,
+        position: position_receipt.ok_or(StakeIngressRuntimeError::Program(
+            ProgramError::InvalidAccountData,
+        ))?,
+        ledger: ledger_receipt.ok_or(StakeIngressRuntimeError::Program(
+            ProgramError::InvalidAccountData,
+        ))?,
+    })
+}
+
+#[inline(never)]
+fn execute_daily_law_authenticated_stake_ingress_with_gate_callback<'info, F>(
     program_id: &Pubkey,
     gate: Box<ValidatedDailyLawWrite>,
     open_position: Box<PrepareOpenPositionInput>,
@@ -577,18 +725,20 @@ fn execute_daily_law_authenticated_stake_ingress_with_gate<'info, F>(
     persist_transaction_local_state: F,
 ) -> Result<DailyLawAuthenticatedStakeIngressReceipt, StakeIngressRuntimeError>
 where
-    F: FnOnce(&StakeIngressExecutionPlan, &CompletedStakeIngress) -> ProgramResult,
+    F: FnOnce(
+        &ValidatedDailyLawWrite,
+        &StakeIngressExecutionPlan,
+        &CompletedStakeIngress,
+    ) -> ProgramResult,
 {
     let daily_law_local_day = gate.local_day();
     let daily_law_account_sha256 = gate.law_account_sha256();
     let bound = bind_stake_ingress_accounts(program_id, open_position, &accounts)?;
     let plan = prepare_authenticated_stake_ingress(&gate, bound)?;
-    let token = execute_prepared_stake_ingress(
-        program_id,
-        &plan,
-        accounts,
-        persist_transaction_local_state,
-    )?;
+    let token =
+        execute_prepared_stake_ingress(program_id, &plan, accounts, move |plan, completed| {
+            persist_transaction_local_state(&gate, plan, completed)
+        })?;
     Ok(DailyLawAuthenticatedStakeIngressReceipt {
         token,
         daily_law_local_day,
@@ -834,4 +984,31 @@ fn restore_original_delegate(
         )?;
     }
     Ok(())
+}
+
+#[cfg(all(test, feature = "runtime-production-open-position"))]
+mod production_open_position_truth_tests {
+    use super::*;
+
+    #[test]
+    fn combined_runtime_truth_is_persistent_but_nonactivating() {
+        assert_eq!(
+            PRODUCTION_OPEN_POSITION_RUNTIME_TRUTH,
+            ProductionOpenPositionRuntimeTruth {
+                same_artifact_daily_law_and_stake_ingress: true,
+                production_active_config_required: true,
+                completed_ingress_position_lifecycle_executed: true,
+                completed_ingress_config_and_lanes_cas_executed: true,
+                callback_failure_requires_transaction_rollback: true,
+                retained_v2_post_cpi_persistence_complete: true,
+                instruction_abi_frozen: false,
+                entrypoint_exposed: false,
+                dispatcher_exposed: false,
+                any_handler_complete: false,
+                devnet_executed: false,
+                mainnet_hold: true,
+            }
+        );
+        assert!(PRODUCTION_OPEN_POSITION_RUNTIME_STATUS.contains("MAINNET_HOLD"));
+    }
 }
