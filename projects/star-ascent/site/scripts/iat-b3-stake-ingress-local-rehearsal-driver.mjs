@@ -4,6 +4,7 @@ import {
   Connection,
   Keypair,
   PublicKey,
+  SYSVAR_CLOCK_PUBKEY,
   SystemProgram,
   Transaction,
   TransactionInstruction,
@@ -18,11 +19,14 @@ import {
   getCpiGuard,
   getExtraAccountMetaAddress,
 } from "@solana/spl-token";
+import {
+  deriveSolanaDraw,
+  protocolLocalDay,
+} from "./iat-b3-local-rehearsal-driver.mjs";
 
 const SCHEMA = "iat-b3-stake-ingress-local-validator/v1";
 const ECONOMY_PROGRAM_ID = new PublicKey("GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU");
 const HOOK_PROGRAM_ID = new PublicKey("DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F");
-const LAW_STATE_ADDRESS = new PublicKey(new Uint8Array(32).fill(0xa7));
 const DECIMALS = 9;
 
 function parseArgs(argv) {
@@ -117,7 +121,7 @@ async function expectFailure(connection, label, action, pattern) {
     await action();
   } catch (error) {
     const text = await failureText(connection, error);
-    assert.match(text, pattern, `${label} failed for an unexpected reason`);
+    assert.match(text, pattern, `${label} failed for an unexpected reason:\n${text}`);
     return Object.freeze({
       rejected: true,
       label,
@@ -138,6 +142,7 @@ function economyInstruction({
   ingress,
   priorDelegate,
   validation,
+  lawState,
   mode,
   amount,
 }) {
@@ -153,9 +158,46 @@ function economyInstruction({
       { pubkey: TOKEN_2022_PROGRAM_ID, isSigner: false, isWritable: false },
       { pubkey: HOOK_PROGRAM_ID, isSigner: false, isWritable: false },
       { pubkey: validation, isSigner: false, isWritable: false },
-      { pubkey: LAW_STATE_ADDRESS, isSigner: false, isWritable: false },
+      { pubkey: lawState, isSigner: false, isWritable: false },
     ],
     data: Buffer.concat([Buffer.from([1, mode]), u64le(amount)]),
+  });
+}
+
+async function validatorProtocolDay(connection) {
+  const clock = await connection.getAccountInfo(SYSVAR_CLOCK_PUBKEY, "confirmed");
+  assert(clock && clock.data.length >= 40, "validator Clock sysvar is unavailable");
+  return protocolLocalDay(clock.data.readBigInt64LE(32));
+}
+
+function findLockedAncestor(mint, localDay) {
+  for (let candidate = 0; candidate <= 0xffff_ffff; candidate += 1) {
+    const ancestorSlotHash = Buffer.alloc(32, 0x42);
+    ancestorSlotHash.writeUInt32LE(candidate, 0);
+    const decision = deriveSolanaDraw({
+      ancestorSlotHash,
+      localDay,
+      entropySlot: 42_424_242n,
+      networkGenesisHash: Buffer.alloc(32, 0x91),
+      mint,
+    });
+    if (decision.locked) return ancestorSlotHash;
+  }
+  throw new Error("unable to derive a fixture locked Daily Law ancestor");
+}
+
+function setLawStateInstruction({ owner, mint, lawState, mode, lockedAncestor = null }) {
+  assert.equal(mode === 1, lockedAncestor !== null);
+  return new TransactionInstruction({
+    programId: ECONOMY_PROGRAM_ID,
+    keys: [
+      { pubkey: owner, isSigner: true, isWritable: false },
+      { pubkey: mint, isSigner: false, isWritable: false },
+      { pubkey: lawState, isSigner: false, isWritable: true },
+    ],
+    data: lockedAncestor === null
+      ? Buffer.from([3, mode])
+      : Buffer.concat([Buffer.from([3, mode]), lockedAncestor]),
   });
 }
 
@@ -194,7 +236,24 @@ async function main() {
     [Buffer.from("stake-ingress"), config.toBuffer()],
     ECONOMY_PROGRAM_ID,
   );
+  const [lawState] = PublicKey.findProgramAddressSync(
+    [Buffer.from("law-state"), mint.toBuffer()],
+    ECONOMY_PROGRAM_ID,
+  );
   const validation = getExtraAccountMetaAddress(mint, HOOK_PROGRAM_ID);
+
+  const lawInitialization = await send(connection, owner, [
+    new TransactionInstruction({
+      programId: ECONOMY_PROGRAM_ID,
+      keys: [
+        { pubkey: owner.publicKey, isSigner: true, isWritable: true },
+        { pubkey: mint, isSigner: false, isWritable: false },
+        { pubkey: lawState, isSigner: false, isWritable: true },
+        { pubkey: SystemProgram.programId, isSigner: false, isWritable: false },
+      ],
+      data: Buffer.from([2]),
+    }),
+  ]);
 
   const hookInitialization = await send(connection, owner, [
     new TransactionInstruction({
@@ -203,6 +262,7 @@ async function main() {
         { pubkey: owner.publicKey, isSigner: true, isWritable: true },
         { pubkey: mint, isSigner: false, isWritable: false },
         { pubkey: validation, isSigner: false, isWritable: true },
+        { pubkey: lawState, isSigner: false, isWritable: false },
         { pubkey: SystemProgram.programId, isSigner: false, isWritable: false },
       ],
       data: Buffer.from([0]),
@@ -222,6 +282,7 @@ async function main() {
     }),
   ]);
   assert((await connection.getAccountInfo(validation, "confirmed"))?.owner.equals(HOOK_PROGRAM_ID));
+  assert((await connection.getAccountInfo(lawState, "confirmed"))?.owner.equals(ECONOMY_PROGRAM_ID));
   const initializedVault = await getAccount(
     connection,
     vault,
@@ -258,7 +319,7 @@ async function main() {
     1n,
   );
   directExecute.keys.push({
-    pubkey: LAW_STATE_ADDRESS,
+    pubkey: lawState,
     isSigner: false,
     isWritable: false,
   });
@@ -285,6 +346,7 @@ async function main() {
       ingress,
       priorDelegate,
       validation,
+      lawState,
       mode: 0,
       amount: 7n,
     }),
@@ -321,6 +383,7 @@ async function main() {
       ingress,
       priorDelegate,
       validation,
+      lawState,
       mode: 0,
       amount: 11n,
     }),
@@ -367,6 +430,7 @@ async function main() {
         ingress,
         priorDelegate,
         validation,
+        lawState,
         mode: 0,
         amount: 13n,
       }),
@@ -388,6 +452,7 @@ async function main() {
         ingress,
         priorDelegate,
         validation,
+        lawState,
         mode: 1,
         amount: 9n,
       }),
@@ -413,6 +478,7 @@ async function main() {
         ingress,
         priorDelegate,
         validation,
+        lawState,
         mode: 2,
         amount: 8n,
       }),
@@ -425,6 +491,116 @@ async function main() {
     "restoration failure",
   );
 
+  const setUnfinalized = await send(connection, owner, [
+    setLawStateInstruction({ owner: owner.publicKey, mint, lawState, mode: 2 }),
+  ]);
+  const beforeUnfinalized = await snapshot(connection, source, vault);
+  const unfinalizedLawFailure = await expectFailure(
+    connection,
+    "unfinalized Daily Law rejects before Token-2022 mutation",
+    async () => send(connection, owner, [
+      economyInstruction({
+        owner: owner.publicKey,
+        source,
+        mint,
+        vault,
+        ingress,
+        priorDelegate,
+        validation,
+        lawState,
+        mode: 0,
+        amount: 5n,
+      }),
+    ]),
+    /custom program error: 0xb30c\b/iu,
+  );
+  assertSnapshotEqual(
+    await snapshot(connection, source, vault),
+    beforeUnfinalized,
+    "unfinalized Daily Law",
+  );
+
+  const lockedAncestor = findLockedAncestor(mint, await validatorProtocolDay(connection));
+  const setLocked = await send(connection, owner, [
+    setLawStateInstruction({
+      owner: owner.publicKey,
+      mint,
+      lawState,
+      mode: 1,
+      lockedAncestor,
+    }),
+  ]);
+  const beforeLocked = await snapshot(connection, source, vault);
+  const lockedLawFailure = await expectFailure(
+    connection,
+    "locked Daily Law rejects before Token-2022 mutation",
+    async () => send(connection, owner, [
+      economyInstruction({
+        owner: owner.publicKey,
+        source,
+        mint,
+        vault,
+        ingress,
+        priorDelegate,
+        validation,
+        lawState,
+        mode: 0,
+        amount: 4n,
+      }),
+    ]),
+    /custom program error: 0xb30d\b/iu,
+  );
+  assertSnapshotEqual(await snapshot(connection, source, vault), beforeLocked, "locked Daily Law");
+
+  const lawFirstFailure = await expectFailure(
+    connection,
+    "locked Daily Law wins over a hostile non-token source",
+    async () => send(connection, owner, [
+      economyInstruction({
+        owner: owner.publicKey,
+        source: priorDelegate,
+        mint,
+        vault,
+        ingress,
+        priorDelegate,
+        validation,
+        lawState,
+        mode: 0,
+        amount: 3n,
+      }),
+    ]),
+    /custom program error: 0xb30d\b/iu,
+  );
+
+  const setOpen = await send(connection, owner, [
+    setLawStateInstruction({ owner: owner.publicKey, mint, lawState, mode: 0 }),
+  ]);
+  const beforeSubstitutedLaw = await snapshot(connection, source, vault);
+  const substitutedLawFailure = await expectFailure(
+    connection,
+    "substituted Daily Law account rejects before Token-2022 mutation",
+    async () => send(connection, owner, [
+      economyInstruction({
+        owner: owner.publicKey,
+        source,
+        mint,
+        vault,
+        ingress,
+        priorDelegate,
+        validation,
+        lawState: priorDelegate,
+        mode: 0,
+        amount: 6n,
+      }),
+    ]),
+    /custom program error: 0xb30b\b/iu,
+  );
+  assertSnapshotEqual(
+    await snapshot(connection, source, vault),
+    beforeSubstitutedLaw,
+    "substituted Daily Law",
+  );
+
   const guardedAccount = await getAccount(
     connection,
     guardedSource,
@@ -435,7 +611,7 @@ async function main() {
   const guardedBefore = await snapshot(connection, guardedSource, vault);
   const cpiGuardFailure = await expectFailure(
     connection,
-    "CPI Guard blocks in-program approval",
+    "CPI Guard is rejected by the retained preflight before approval",
     async () => send(connection, owner, [
       economyInstruction({
         owner: owner.publicKey,
@@ -445,11 +621,12 @@ async function main() {
         ingress,
         priorDelegate,
         validation,
+        lawState,
         mode: 0,
         amount: 5n,
       }),
     ]),
-    /CPI Guard is enabled, and a program attempted to approve a delegate|custom program error: 0x2d\b/iu,
+    /custom program error: 0xb30f\b/iu,
   );
   assertSnapshotEqual(await snapshot(connection, guardedSource, vault), guardedBefore, "CPI Guard");
 
@@ -469,9 +646,11 @@ async function main() {
       stakeVault: vault.toBase58(),
       ingressAuthority: ingress.toBase58(),
       validation: validation.toBase58(),
+      dailyLaw: lawState.toBase58(),
     },
     checks: {
       hookInitialization: hookInitialization.signature,
+      lawInitialization: lawInitialization.signature,
       vaultInitialization: vaultInitialization.signature,
       ownerSignedApproveCheckedCpi: true,
       statelessIngressPdaInvokeSignedTransferChecked: true,
@@ -495,7 +674,17 @@ async function main() {
         balancesAndDelegateUnchanged: true,
       },
       hookAuthorityObservedNonSigner: true,
-      dailyLawAccountResolvedThroughHookValidation: LAW_STATE_ADDRESS.toBase58(),
+      dailyLawAccountResolvedThroughHookValidation: lawState.toBase58(),
+      dailyLawAuthenticatedBeforeTokenParsing: true,
+      dailyLawStateTransitions: {
+        unfinalizedSetup: setUnfinalized.signature,
+        lockedSetup: setLocked.signature,
+        openRestore: setOpen.signature,
+      },
+      unfinalizedDailyLawFailsClosed: unfinalizedLawFailure,
+      lockedDailyLawFailsClosed: lockedLawFailure,
+      dailyLawFailurePrecedesHostileTokenParsing: lawFirstFailure,
+      substitutedDailyLawFailsClosed: substitutedLawFailure,
       productionSourceExecutorInvoked: true,
       exactDelegateConsumptionAndAutoClear: true,
       exactPriorDelegateRestoration: true,
@@ -511,10 +700,13 @@ async function main() {
 }
 
 main().catch((error) => {
+  const diagnostic = typeof error?.stack === "string"
+    ? error.stack
+    : JSON.stringify(error, (_key, value) => typeof value === "bigint" ? value.toString() : value);
   emit({
     schema: SCHEMA,
     status: "FAIL",
-    reason: String(error?.stack ?? error),
+    reason: diagnostic ?? String(error),
     publicNetworkWrites: false,
   });
   process.exitCode = 1;

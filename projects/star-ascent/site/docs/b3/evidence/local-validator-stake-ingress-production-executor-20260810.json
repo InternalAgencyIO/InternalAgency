@@ -1,7 +1,7 @@
 {
   "schema": "iat-b3-stake-ingress-production-executor-local-validator/v1",
   "status": "PASS",
-  "recordedAt": "2026-08-10T17:23:33.4522966Z",
+  "recordedAt": "2026-08-10T19:12:51.3784420Z",
   "scope": {
     "rpc": "http://127.0.0.1:18999",
     "rpcScope": "loopback-only",
@@ -20,14 +20,16 @@
   },
   "productionExecutor": {
     "source": "programs/iat_b3_economy/src/stake_ingress_runtime.rs",
-    "sourceSha256": "ca1f0e8be58712e1c2dc69f35c2059a60683d4ab9397e45dd2bfa10940054fe6",
+    "sourceSha256": "b742f8ca0814ce9e401d80791522ad61ce9894aabecfd3a5190f7a335d744e9f",
+    "pureStakeIngressSource": "programs/iat_b3_economy/src/stake_ingress.rs",
+    "pureStakeIngressSourceSha256": "ef964a3d9ddb18e0c4f688060ff33adf239fa08f430d3971c5994890a241763b",
     "feature": "runtime-token-2022-stake-ingress",
     "publicEntrypoint": false,
     "instructionAbiFrozen": false,
     "productionIdentitiesFrozen": false,
     "retainedV2PostCpiPersistenceComplete": false,
     "v2EconomicMathChanged": false,
-    "dailyLawCapabilityReauthenticated": false,
+    "dailyLawCapabilityReauthenticated": true,
     "canonicalConfidentialMintPolicyReauthenticated": false,
     "mainnetStatus": "HOLD"
   },
@@ -35,19 +37,19 @@
     "productionCandidate": false,
     "economy": {
       "programId": "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
-      "bytes": 155296,
-      "sha256": "2906d94b02919609ebb9200a128a9e004ecab656a27fa83a34fa1e2710cf578d",
-      "sourceSha256": "62370d55838ce64ed3b1bd4550d73e8b9cdede726ed31cf7029e51d3402ccdf9"
+      "bytes": 252296,
+      "sha256": "bb1cbaa3293bcfce3f7401b13882db5d81a2d3568a10eed1ecf716bebb0291c7",
+      "sourceSha256": "ec1e4192cbc592d64746b628526099f97448e29d49104d1b24b0b1ffac20b06f"
     },
     "hook": {
       "programId": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F",
-      "bytes": 85280,
-      "sha256": "a16defa230a7b5e525a04a660875f464df25bd9a0b5d04536e52710031c5d9d2",
-      "sourceSha256": "4a7f1e42fb5817405073e3c0b6e5354925a1f9d27e1cf6572b5c1f5b14af3d3d"
+      "bytes": 86368,
+      "sha256": "bc80940cb38e4fb6a1e3a9e2420a84b06172aa6e9982c822b1e10db9fdd2139a",
+      "sourceSha256": "230681570e7bd83a67e928082abe0441214f342b8bc926d72eecc3c48092405a"
     },
-    "cargoLockSha256": "d9786790367cbccb8360dd0c8f44bf3f4324190edb30840c5d9edf6f48d4ff67",
+    "cargoLockSha256": "54608994b8d349adf7b802794173b63648aa29ef1afb840a0c4e36eed765da1a",
     "runnerSha256": "7fd853b865b365790575d25bedb5ce8d3d5842875e8443a55c439d677de49ddb",
-    "driverSha256": "485e859f17cc2c21ba69131101e1c68d17234a6cfe9932df72f74dc275ac9913"
+    "driverSha256": "5188036700be5b421ed99d1afd298aa6dfada385ebae7a2f551564840654ed83"
   },
   "observed": {
     "productionSourceExecutorInvoked": true,
@@ -55,7 +57,12 @@
     "canonicalIngressPdaDerivedAndInvokeSigned": true,
     "transferHookExtraAccountsResolvedFromTlv": true,
     "dailyLawAddressForwardedThroughHookValidation": true,
-    "dailyLawOpenDecisionAuthenticatedByThisFixture": false,
+    "dailyLawOpenDecisionAuthenticatedByThisFixture": true,
+    "dailyLawAuthenticatedBeforeTokenAccountParsing": true,
+    "unfinalizedDailyLawRejectedBeforeTokenMutation": true,
+    "lockedDailyLawRejectedBeforeTokenMutation": true,
+    "lockedDailyLawPrecededHostileTokenParsing": true,
+    "substitutedDailyLawRejectedBeforeTokenMutation": true,
     "exactApprovalReload": true,
     "exactTransferBalanceReload": true,
     "exactTemporaryDelegateConsumption": true,
@@ -66,7 +73,8 @@
     "hookFailureRolledBackApproval": true,
     "postTransferPersistenceCallbackFailureRolledBackApprovalAndTransfer": true,
     "postCompletionCpiFailureRolledBackFullExecutorSequence": true,
-    "cpiGuardRejectedBeforeMutation": true
+    "cpiGuardRejectedByRetainedPreflightBeforeMutation": true,
+    "sbfStackFrameLimitSatisfied": true
   },
   "cleanup": {
     "temporaryLedgerRemoved": true,
@@ -75,12 +83,12 @@
     "publicNetworkWrites": false
   },
   "limits": {
-    "combinedDailyLawDecisionAndStakeIngressHookProven": false,
+    "combinedDailyLawDecisionAndStakeIngressHookProven": true,
     "productionEconomyEntrypointProven": false,
     "productionIdentitiesFrozen": false,
     "retainedV2PostCpiPersistenceComplete": false,
     "fullFeatureDevnetRehearsalComplete": false,
     "mainnetAuthorization": false,
-    "remainingGate": "Bind the exact production Daily Law decision account and frozen identities, apply the retained pure post-CPI finalizer through strict Config/Position/Lane codecs, seal the public handler ABI, and repeat the complete rollback matrix on Devnet."
+    "remainingGate": "Freeze the production law/economy/mint identities and account lifecycle, apply the retained pure post-CPI finalizer through strict Config/Position/Lane codecs, seal the public handler ABI, and repeat the complete rollback matrix against the exact final binary on Devnet."
   }
 }

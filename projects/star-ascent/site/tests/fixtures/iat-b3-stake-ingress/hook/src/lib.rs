@@ -25,7 +25,6 @@ solana_program_entrypoint::entrypoint!(process_instruction);
 // Fixture-only IDs. Neither program is a deployment candidate.
 pub const ECONOMY_PROGRAM_ID: Pubkey = Pubkey::new_from_array([0xE3; 32]);
 pub const HOOK_PROGRAM_ID: Pubkey = Pubkey::new_from_array([0xB4; 32]);
-pub const LAW_STATE_ADDRESS: Pubkey = Pubkey::new_from_array([0xA7; 32]);
 pub const INJECTED_HOOK_FAILURE_AMOUNT: u64 = 13;
 
 #[repr(u32)]
@@ -66,6 +65,7 @@ fn initialize_validation(program_id: &Pubkey, accounts: &[AccountInfo<'_>]) -> P
     let payer = next_account_info(account_iter)?;
     let mint = next_account_info(account_iter)?;
     let validation = next_account_info(account_iter)?;
+    let law_state = next_account_info(account_iter)?;
     let system = next_account_info(account_iter)?;
     if !payer.is_signer || system.key != &system_program::ID {
         return Err(RehearsalHookError::InvalidAccount.into());
@@ -74,7 +74,12 @@ fn initialize_validation(program_id: &Pubkey, accounts: &[AccountInfo<'_>]) -> P
     if validation.key != &expected || validation.owner == program_id {
         return Err(RehearsalHookError::InvalidAccount.into());
     }
-    let law_state_meta = ExtraAccountMeta::new_with_pubkey(&LAW_STATE_ADDRESS, false, false)?;
+    let (expected_law_state, _) =
+        Pubkey::find_program_address(&[b"law-state", mint.key.as_ref()], &ECONOMY_PROGRAM_ID);
+    if law_state.key != &expected_law_state || law_state.owner != &ECONOMY_PROGRAM_ID {
+        return Err(RehearsalHookError::InvalidAccount.into());
+    }
+    let law_state_meta = ExtraAccountMeta::new_with_pubkey(law_state.key, false, false)?;
     let size = ExtraAccountMetaList::size_of(1)?;
     let rent = Rent::get()?;
     let (_, bump) =
@@ -111,7 +116,13 @@ fn execute(program_id: &Pubkey, accounts: &[AccountInfo<'_>], amount: u64) -> Pr
         || destination.owner != &TOKEN_2022_PROGRAM_ID
         || validation.owner != program_id
         || validation.key != &get_extra_account_metas_address(mint.key, program_id)
-        || law_state.key != &LAW_STATE_ADDRESS
+        || law_state.key
+            != &Pubkey::find_program_address(
+                &[b"law-state", mint.key.as_ref()],
+                &ECONOMY_PROGRAM_ID,
+            )
+            .0
+        || law_state.owner != &ECONOMY_PROGRAM_ID
     {
         return Err(RehearsalHookError::InvalidAccount.into());
     }

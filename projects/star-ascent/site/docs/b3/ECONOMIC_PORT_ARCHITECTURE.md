@@ -165,17 +165,19 @@ meta to every IAT transfer merely for stake ingress. Mainnet remains blocked on
 final identity binding, temporary-delegate restoration, and adversarial atomic
 rollback rehearsal.
 
-The economy crate's production-source `stake_ingress` module now composes the
-opaque open-Day Daily Law capability with the exact retained V2
-`prepare_open_position` kernel and a ten-phase transaction-local ingress state
-machine. It captures the original delegate, requires an owner-signed exact
-`ApproveChecked` intent, verifies an exact reload, requires ingress-PDA
-`invoke_signed` plus hook account expansion, verifies exact source/vault deltas
-and allowance consumption, applies V2's checked principal addition and Position
-construction in retained order, and refuses to yield a complete result until an
-exact delegate-restoration reload succeeds. It performs no CPI, account access,
-serialization, persistence, or dispatch; the native adapter and final identities
-remain the security boundary.
+The economy crate's production-source `stake_ingress` kernel and feature-gated
+`stake_ingress_runtime` executor now authenticate the finalized OPEN Daily Law
+account from `AccountInfo` and `Clock` before any token parsing, compose the
+exact retained V2 `prepare_open_position` preflight, and execute the ten-phase
+transaction-local ingress sequence. The runtime captures the original delegate,
+performs an owner-signed exact `ApproveChecked` CPI, verifies its reload,
+requires ingress-PDA `invoke_signed` plus hook account expansion, verifies exact
+source/vault deltas and allowance consumption, runs the transaction-local
+persistence callback, restores the prior delegate, and refuses completion until
+the restoration reload is exact. Large preflight values are heap-bounded; the
+SBF stack gate and loopback rollback matrix pass. It still has no production
+account lifecycle, strict persisted Config/Position/Lane write, entrypoint,
+dispatcher, frozen identity, or public ABI; those remain the security boundary.
 
 Burning is different from transferring. The sole core-cap burn path uses
 Token-2022 `BurnChecked`, signed by the economic vault-authority PDA. It is not

@@ -349,14 +349,19 @@ complete rollback on every approval, transfer, hook, restoration, and post-CPI
 failure. No update, administrator, sweep, recovery, oracle, or bypass opcode is
 permitted.
 
-The economy crate now carries the previously test-only ten-phase stake-ingress
-kernel in production source. Its combined API requires the opaque open-Day
-Daily Law capability, runs the retained V2 open-position preflight itself, and
-then binds exact approval, hooked transfer, reload, V2 post-CPI ordering, and
-delegate restoration intents. It performs no CPI, account access, lifecycle,
-serialization, persistence, Solana entrypoint, or public dispatch. Focused
-adversarial tests retain the former executable-spec coverage and add combined-
-boundary and error-precedence coverage.
+The economy crate now carries the ten-phase stake-ingress kernel and a feature-
+gated native executor in production source. The combined executor authenticates
+the exact finalized OPEN Daily Law account from `AccountInfo` and `Clock` before
+reading any token account, derives and binds the AccountInfo-backed ingress
+facts, runs the retained V2 open-position preflight itself, and performs the
+exact Token-2022 approval, hooked transfer, reload, delegate restoration, and
+transaction-local persistence callback sequence. The large preflight values are
+heap-bounded and its SBF build has no over-limit stack frame. A loopback
+validator replay proves OPEN success plus unfinalized, locked, substituted-law,
+hostile-token-ordering, hook, CPI-guard, persistence, restoration, and later-CPI
+rollback. This still exposes no production lifecycle, serialized post-CPI
+Config/Position/Lane write, Solana entrypoint, frozen ABI, production identity,
+or public dispatch, so no handler or release gate is complete.
 
 The `commit_round` differential kernel performs no account creation. It accepts
 a decoded read-only instructions-sysvar trace, selects only the instruction

@@ -202,6 +202,7 @@ pub enum StakeIngressSpecError {
 /// still transaction-local intents: a future native adapter must authenticate
 /// accounts, derive PDAs, perform/reload every CPI, and persist only after exact
 /// delegate restoration succeeds.
+#[inline(never)]
 pub fn prepare_open_position_stake_ingress(
     gate: &ValidatedDailyLawWrite,
     open_position: PrepareOpenPositionInput,

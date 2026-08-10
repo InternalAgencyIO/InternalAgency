@@ -431,7 +431,15 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
     economyStakeIngressRuntimeSource,
     /retained_v2_post_cpi_persistence_complete: false/u,
   );
-  assert.match(economyStakeIngressRuntimeSource, /daily_law_capability_reauthenticated: false/u);
+  assert.match(economyStakeIngressRuntimeSource, /daily_law_capability_reauthenticated: true/u);
+  assert.match(
+    economyStakeIngressRuntimeSource,
+    /pub fn execute_daily_law_authenticated_stake_ingress/u,
+  );
+  assert.match(economyStakeIngressRuntimeSource, /fn authenticate_daily_law/u);
+  assert.match(economyStakeIngressRuntimeSource, /fn bind_stake_ingress_accounts/u);
+  assert.match(economyStakeIngressRuntimeSource, /Box<PrepareOpenPositionInput>/u);
+  assert.match(economyStakeIngressRuntimeSource, /Box<StakeIngressExecutionPlan>/u);
   assert.match(economyStakeIngressRuntimeSource, /canonical_mint_policy_reauthenticated: false/u);
   assert.match(economyStakeIngressRuntimeSource, /public_entrypoint_exposed: false/u);
   assert.doesNotMatch(

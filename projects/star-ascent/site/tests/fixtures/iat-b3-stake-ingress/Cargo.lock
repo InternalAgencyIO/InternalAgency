@@ -438,8 +438,10 @@ dependencies = [
 name = "iat-b3-stake-ingress-rehearsal-economy"
 version = "0.0.0"
 dependencies = [
+ "iat-b3-consensus",
  "iat-b3-economy",
  "solana-account-info",
+ "solana-clock",
  "solana-cpi",
  "solana-program-entrypoint",
  "solana-program-error",

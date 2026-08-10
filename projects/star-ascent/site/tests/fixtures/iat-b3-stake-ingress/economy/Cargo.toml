@@ -13,8 +13,10 @@ custom-panic = []
 crate-type = ["cdylib", "lib"]
 
 [dependencies]
+iat-b3-consensus = { path = "../../../../programs/iat_b3_consensus" }
 iat-b3-economy = { path = "../../../../programs/iat_b3_economy", features = ["runtime-token-2022-stake-ingress"] }
 solana-account-info.workspace = true
+solana-clock = { version = "=3.2.0", features = ["sysvar"] }
 solana-cpi.workspace = true
 solana-program-entrypoint.workspace = true
 solana-program-error.workspace = true

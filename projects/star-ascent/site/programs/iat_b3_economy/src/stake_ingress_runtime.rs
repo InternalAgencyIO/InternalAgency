@@ -1,12 +1,13 @@
 //! Feature-gated Token-2022 executor for a prepared stake-ingress plan.
 //!
-//! This closes the production-source CPI/reload gap without exposing an
+//! This closes the production-source Daily-Law-authentication/CPI/reload gap without exposing an
 //! entrypoint, dispatcher, instruction ABI, production identity, or deployment
-//! authorization. A production handler must obtain the plan from the retained
-//! Daily-Law-gated pure kernel; the plan type alone is not an authorization
-//! capability and this primitive does not reauthenticate Daily Law or the full
-//! canonical confidential-mint policy. The post-CPI V2 finalizer remains
-//! mandatory. This executor carries
+//! authorization. The combined executor below authenticates the canonical
+//! finalized OPEN Daily Law account from `AccountInfo` and `Clock`, constructs
+//! the retained V2 plan inside the same call, and only then enters Token-2022.
+//! The lower-level prepared-plan primitive remains non-authorizing. Full
+//! confidential-mint policy authentication and the post-CPI V2 persistence
+//! finalizer remain mandatory. This executor carries
 //! only bounded token observations on the SBF stack and calls a transaction-
 //! local persistence callback after the exact transfer delta is proven. Any
 //! callback or delegate-restoration failure rolls the complete transaction
@@ -14,7 +15,7 @@
 
 extern crate alloc;
 
-use alloc::{vec, vec::Vec};
+use alloc::{boxed::Box, vec, vec::Vec};
 use solana_account_info::AccountInfo;
 use solana_cpi::{invoke, invoke_signed};
 use solana_program_error::{ProgramError, ProgramResult};
@@ -34,15 +35,18 @@ use spl_transfer_hook_interface::{
 };
 
 use crate::{
+    runtime_adapter::{verify_daily_law_open_account_info, RuntimeAdapterError},
     stake_ingress::{
-        DelegateRestorationIntent, DelegateSnapshot, SourceTokenState, StakeIngressExecutionPlan,
-        STAKE_INGRESS_SEED,
+        prepare_open_position_stake_ingress, DelegateRestorationIntent, DelegateSnapshot,
+        IngressPdaBinding, PrepareStakeIngressInput, SourceTokenState, StakeIngressExecutionPlan,
+        StakeIngressSpecError, STAKE_INGRESS_SEED,
     },
-    ReadonlyTokenState, TOKEN_DECIMALS,
+    CanonicalDailyLawBinding, EconomyError, PrepareOpenPositionInput, ReadonlyTokenState,
+    ValidatedDailyLawWrite, TOKEN_DECIMALS,
 };
 
 pub const STAKE_INGRESS_RUNTIME_STATUS: &str =
-    "FEATURE_GATED_TOKEN_2022_CPI_RELOAD_PRIMITIVE_NO_ABI_NO_DISPATCH_MAINNET_HOLD";
+    "FEATURE_GATED_OPEN_DAILY_LAW_AUTHENTICATED_TOKEN_2022_CPI_RELOAD_NO_ABI_NO_DISPATCH_MAINNET_HOLD";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct StakeIngressRuntimeTruth {
@@ -65,7 +69,7 @@ pub struct StakeIngressRuntimeTruth {
 pub const STAKE_INGRESS_RUNTIME_TRUTH: StakeIngressRuntimeTruth = StakeIngressRuntimeTruth {
     feature_gated: true,
     prepared_stake_ingress_plan_required: true,
-    daily_law_capability_reauthenticated: false,
+    daily_law_capability_reauthenticated: true,
     canonical_mint_policy_reauthenticated: false,
     canonical_ingress_pda_derived: true,
     transfer_hook_extra_accounts_resolved: true,
@@ -94,6 +98,19 @@ pub struct StakeIngressRuntimeReceipt {
     pub transaction_local_persistence_callback_succeeded: bool,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct DailyLawAuthenticatedStakeIngressReceipt {
+    pub token: StakeIngressRuntimeReceipt,
+    pub daily_law_local_day: i64,
+    pub daily_law_account_sha256: [u8; 32],
+    pub plan_constructed_after_daily_law_authentication: bool,
+}
+
+struct AccountBoundStakeIngressInput {
+    open_position: Box<PrepareOpenPositionInput>,
+    ingress: Box<PrepareStakeIngressInput>,
+}
+
 #[derive(Debug)]
 pub enum StakeIngressRuntimeError {
     InvalidAccountFlags,
@@ -107,6 +124,11 @@ pub enum StakeIngressRuntimeError {
     DelegateNotConsumed,
     DelegateRestorationMismatch,
     HookLawAccountUnresolved,
+    DailyLawAccountRejected,
+    DailyLawDayUnfinalized,
+    DailyLawLocked,
+    StakeIngressPreparationRejected,
+    CpiGuardLocked,
     Program(ProgramError),
 }
 
@@ -127,7 +149,33 @@ impl StakeIngressRuntimeError {
             Self::DelegateNotConsumed => ProgramError::Custom(0xB308),
             Self::DelegateRestorationMismatch => ProgramError::Custom(0xB309),
             Self::HookLawAccountUnresolved => ProgramError::Custom(0xB30A),
+            Self::DailyLawAccountRejected => ProgramError::Custom(0xB30B),
+            Self::DailyLawDayUnfinalized => ProgramError::Custom(0xB30C),
+            Self::DailyLawLocked => ProgramError::Custom(0xB30D),
+            Self::StakeIngressPreparationRejected => ProgramError::Custom(0xB30E),
+            Self::CpiGuardLocked => ProgramError::Custom(0xB30F),
         }
+    }
+}
+
+fn map_daily_law_error(error: RuntimeAdapterError) -> StakeIngressRuntimeError {
+    match error {
+        RuntimeAdapterError::Economy(EconomyError::DayUnfinalized) => {
+            StakeIngressRuntimeError::DailyLawDayUnfinalized
+        }
+        RuntimeAdapterError::Economy(EconomyError::DailyLockdown) => {
+            StakeIngressRuntimeError::DailyLawLocked
+        }
+        _ => StakeIngressRuntimeError::DailyLawAccountRejected,
+    }
+}
+
+fn map_stake_ingress_preparation_error(error: StakeIngressSpecError) -> StakeIngressRuntimeError {
+    match error {
+        StakeIngressSpecError::CpiGuardBlocksAtomicApproval => {
+            StakeIngressRuntimeError::CpiGuardLocked
+        }
+        _ => StakeIngressRuntimeError::StakeIngressPreparationRejected,
     }
 }
 
@@ -457,6 +505,115 @@ where
         original_delegate_restored: true,
         transaction_local_persistence_callback_succeeded: true,
     })
+}
+
+/// Authenticate a real finalized OPEN Daily Law account, construct the
+/// retained V2 open-position/stake-ingress plan, and execute its Token-2022
+/// CPI/reload sequence in one production-source call. Daily Law is checked
+/// before mint, token, delegate, or hook account parsing, so a locked,
+/// unfinalized, stale, forged, or substituted law account cannot mutate token
+/// state even when later accounts are hostile.
+///
+/// This remains feature-gated and dispatcher-disabled. It does not freeze
+/// production identities, validate the complete confidential-mint policy, or
+/// replace the transaction-local Config/Position/Lane persistence callback.
+#[inline(never)]
+pub fn execute_daily_law_authenticated_stake_ingress<'info, F>(
+    program_id: &Pubkey,
+    law_binding: &CanonicalDailyLawBinding,
+    law_state: &AccountInfo<'info>,
+    open_position: Box<PrepareOpenPositionInput>,
+    accounts: StakeIngressRuntimeAccounts<'_, 'info>,
+    persist_transaction_local_state: F,
+) -> Result<DailyLawAuthenticatedStakeIngressReceipt, StakeIngressRuntimeError>
+where
+    F: FnOnce(&StakeIngressExecutionPlan, &StakeIngressRuntimePostTransfer) -> ProgramResult,
+{
+    let gate = authenticate_daily_law(law_binding, law_state, accounts.mint.key)?;
+    let daily_law_local_day = gate.local_day();
+    let daily_law_account_sha256 = gate.law_account_sha256();
+    let bound = bind_stake_ingress_accounts(program_id, open_position, &accounts)?;
+    let plan = prepare_authenticated_stake_ingress(&gate, bound)?;
+    let token = execute_prepared_stake_ingress(
+        program_id,
+        &plan,
+        accounts,
+        persist_transaction_local_state,
+    )?;
+    Ok(DailyLawAuthenticatedStakeIngressReceipt {
+        token,
+        daily_law_local_day,
+        daily_law_account_sha256,
+        plan_constructed_after_daily_law_authentication: true,
+    })
+}
+
+#[inline(never)]
+fn authenticate_daily_law(
+    law_binding: &CanonicalDailyLawBinding,
+    law_state: &AccountInfo<'_>,
+    mint: &Pubkey,
+) -> Result<Box<ValidatedDailyLawWrite>, StakeIngressRuntimeError> {
+    // This must stay first. Do not inspect mutable token accounts before the
+    // canonical law account and runtime Clock have produced the opaque gate.
+    let gate =
+        verify_daily_law_open_account_info(law_binding, law_state).map_err(map_daily_law_error)?;
+    if gate.mint() != mint.to_bytes() || gate.law_state_address() != law_state.key.to_bytes() {
+        return Err(StakeIngressRuntimeError::InvalidAccountBinding);
+    }
+    Ok(Box::new(gate))
+}
+
+#[inline(never)]
+fn bind_stake_ingress_accounts(
+    program_id: &Pubkey,
+    mut open_position: Box<PrepareOpenPositionInput>,
+    accounts: &StakeIngressRuntimeAccounts<'_, '_>,
+) -> Result<AccountBoundStakeIngressInput, StakeIngressRuntimeError> {
+    let config = Pubkey::new_from_array(open_position.config_key);
+    let (ingress, _) =
+        Pubkey::find_program_address(&[STAKE_INGRESS_SEED, config.as_ref()], program_id);
+    let source_before =
+        observe_stake_ingress_source(accounts.source, accounts.mint.key, accounts.owner.key)?;
+    let stake_before =
+        observe_stake_ingress_vault(accounts.stake_vault, accounts.mint.key, &config)?;
+    // AccountInfo-derived identities and balances replace every equivalent
+    // caller-provided field before the retained V2 preflight executes.
+    open_position.owner = accounts.owner.key.to_bytes();
+    open_position.mint = accounts.mint.key.to_bytes();
+    open_position.owner_tokens = source_before.token;
+    open_position.vault_authority = config.to_bytes();
+    open_position.stake_tokens = stake_before;
+    open_position.config.mint = accounts.mint.key.to_bytes();
+    open_position.config.token_program = TOKEN_2022_PROGRAM_ID.to_bytes();
+    open_position.config.stake_token_account = accounts.stake_vault.key.to_bytes();
+    open_position.config.staked_principal = stake_before.amount;
+    let hook_validation_address =
+        get_extra_account_metas_address(accounts.mint.key, accounts.hook_program.key);
+    Ok(AccountBoundStakeIngressInput {
+        open_position,
+        ingress: Box::new(PrepareStakeIngressInput {
+            owner_is_signer: accounts.owner.is_signer,
+            canonical_ingress_authority: ingress.to_bytes(),
+            ingress: IngressPdaBinding {
+                key: accounts.ingress_authority.key.to_bytes(),
+            },
+            hook_validation_address: hook_validation_address.to_bytes(),
+            source_before,
+            stake_before,
+        }),
+    })
+}
+
+#[inline(never)]
+fn prepare_authenticated_stake_ingress(
+    gate: &ValidatedDailyLawWrite,
+    input: AccountBoundStakeIngressInput,
+) -> Result<Box<StakeIngressExecutionPlan>, StakeIngressRuntimeError> {
+    Ok(Box::new(
+        prepare_open_position_stake_ingress(gate, *input.open_position, *input.ingress)
+            .map_err(map_stake_ingress_preparation_error)?,
+    ))
 }
 
 #[inline(never)]
