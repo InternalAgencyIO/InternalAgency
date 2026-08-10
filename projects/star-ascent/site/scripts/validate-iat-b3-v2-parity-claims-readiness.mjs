@@ -61,7 +61,7 @@ const INPUT_SPECS = Object.freeze({
   }),
   releaseDependencyGraph: Object.freeze({
     path: "projects/star-ascent/site/docs/b3/iat-b3-release-dependency-graph.v1.json",
-    sha256: "4f79257e72c28899e79a88746f1e3b4e62ada0425a970e08e22cdf719a641b99",
+    sha256: "458d2b1c371443fd3168bf1e9e1203753bdc2ed41a7f5954044175daa233ceab",
   }),
 });
 
