@@ -1,17 +1,20 @@
 [package]
 name = "iat-b3-economy"
 version = "0.1.0"
-description = "Host-only pure transition kernel for the retained IAT V2-to-B3 economic port"
+description = "Pure transition kernel and feature-gated read-only SBF preflight for the retained IAT V2-to-B3 economic port"
 edition = "2021"
 license = "AGPL-3.0-or-later"
 publish = false
 
 [lib]
 name = "iat_b3_economy"
-crate-type = ["lib"]
+crate-type = ["cdylib", "lib"]
 
 [features]
 default = []
+custom-heap = []
+custom-panic = []
+no-entrypoint = []
 runtime-account-bridge = [
     "dep:solana-account-info",
     "dep:solana-clock",
@@ -20,6 +23,11 @@ runtime-account-bridge = [
     "dep:solana-zk-sdk",
     "dep:spl-token-2022-interface",
 ]
+sbf-preflight-entrypoint = [
+    "runtime-account-bridge",
+    "dep:solana-program-entrypoint",
+    "dep:solana-program-error",
+]
 
 [dependencies]
 iat-b3-consensus = { path = "../iat_b3_consensus" }
@@ -27,6 +35,8 @@ sha2 = { version = "=0.10.9", default-features = false }
 solana-account-info = { version = "=3.1.1", optional = true }
 solana-clock = { version = "=3.2.0", features = ["sysvar"], optional = true }
 solana-pubkey = { version = "=3.0.0", features = ["curve25519"] }
+solana-program-entrypoint = { version = "=3.1.1", optional = true }
+solana-program-error = { version = "=3.0.1", optional = true }
 solana-rent = { version = "=3.1.0", features = ["sysvar"], optional = true }
 solana-sdk-ids = "=3.1.0"
 solana-sysvar = { version = "=3.1.1", optional = true }
@@ -35,3 +45,6 @@ spl-token-2022-interface = { version = "=2.1.0", optional = true }
 
 [dev-dependencies]
 iat-v2 = { path = "../iat_v2", features = ["no-entrypoint"] }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

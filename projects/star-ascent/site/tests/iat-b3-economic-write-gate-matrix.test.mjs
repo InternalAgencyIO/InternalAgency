@@ -41,11 +41,23 @@ const economyToken2022RuntimeSource = readFileSync(
   new URL("programs/iat_b3_economy/src/token_2022_runtime.rs", siteRoot),
   "utf8",
 );
+const economySbfPreflightSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/sbf_preflight.rs", siteRoot),
+  "utf8",
+);
+const economySbfPreflightDriverSource = readFileSync(
+  new URL("scripts/iat-b3-economy-sbf-preflight-driver.mjs", siteRoot),
+  "utf8",
+);
+const economySbfPreflightRunnerSource = readFileSync(
+  new URL("scripts/run-iat-b3-economy-sbf-preflight-local.sh", siteRoot),
+  "utf8",
+);
 const lawSource = readFileSync(
   new URL("programs/iat_b3_law/src/lib.rs", siteRoot),
   "utf8",
 );
-const economyCode = `${economySource}\n${economyCodecSource}\n${economyStakeIngressSource}\n${economyNativeAdapterSource}`
+const economyPureKernelCode = `${economyCodecSource}\n${economyStakeIngressSource}\n${economyNativeAdapterSource}`
   .replace(/\/\/.*$/gmu, "")
   .replace(/\/\*[\s\S]*?\*\//gu, "");
 const workspaceManifest = readFileSync(new URL("Cargo.toml", siteRoot), "utf8");
@@ -124,19 +136,21 @@ test("the two V2 core payout paths remain honestly blocked on custody semantics"
   );
 });
 
-test("the first Rust slice is a host-only library with no Solana entrypoint or dispatcher", () => {
+test("the default Rust kernel stays host-only while the sole SBF entrypoint is structural", () => {
   assert.deepEqual(matrix.firstSafeSlice, {
     crate: "programs/iat_b3_economy",
-    crateType: "lib",
-    hostOnly: true,
-    solanaEntrypoint: false,
-    publicDispatcher: false,
+    crateType: "cdylib+lib",
+    defaultFeatureHostOnly: true,
+    defaultFeatureSolanaEntrypoint: false,
+    featureGatedStructuralPreflight: true,
+    productionSolanaEntrypoint: false,
+    productionDispatcher: false,
     accountLifecycle: false,
     tokenCpi: false,
     networkAccess: false,
   });
   assert.match(workspaceManifest, /"programs\/iat_b3_economy"/u);
-  assert.match(economyManifest, /crate-type = \["lib"\]/u);
+  assert.match(economyManifest, /crate-type = \["cdylib", "lib"\]/u);
   assert.match(
     economyManifest,
     /solana-pubkey = \{ version = "=3\.0\.0", features = \["curve25519"\] \}/u,
@@ -149,6 +163,8 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
     "solana-rent",
     "solana-sysvar",
     "solana-zk-sdk",
+    "solana-program-entrypoint",
+    "solana-program-error",
     "spl-token-2022-interface",
   ]) {
     assert.match(
@@ -171,12 +187,81 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   assert.doesNotMatch(economyManifest, /iat-b3-vault/u);
   assert.doesNotMatch(
     economyManifest,
-    /cdylib|anchor-|solana-(?:cpi|program-entrypoint|system-interface)/u,
+    /anchor-|solana-(?:cpi|system-interface)/u,
   );
   assert.doesNotMatch(
-    economyCode,
+    economyPureKernelCode,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo|TcpStream|UdpSocket/u,
   );
+  assert.match(
+    economySource,
+    /#\[cfg\(all\(feature = "sbf-preflight-entrypoint", not\(feature = "no-entrypoint"\)\)\)\]\s+solana_program_entrypoint::entrypoint!\(process_instruction\);/u,
+  );
+  assert.equal((economySource.match(/entrypoint!/gu) ?? []).length, 1);
+});
+
+test("the all-15 SBF surface is an exact structural preflight and never an economic handler", () => {
+  assert.deepEqual(matrix.sbfStructuralPreflight, {
+    stage: "FEATURE_GATED_ALL_15_ACCOUNT_META_SHAPE_SBF_NO_WRITES",
+    feature: "sbf-preflight-entrypoint",
+    complete: false,
+    expectedHandlerCount: 15,
+    instructionNamespace: "IATB3PF1",
+    instructionVersion: 1,
+    accountGraphOpcode: 0,
+    instructionLengthBytes: 16,
+    operationInventoryExact: true,
+    accountMetaShapeChecksPresent: true,
+    accountKeysAuthenticated: false,
+    accountOwnersAuthenticated: false,
+    accountDataRead: false,
+    mutableAccountBorrows: false,
+    accountWrites: false,
+    systemCpi: false,
+    tokenCpi: false,
+    structuralPreflightAbiFrozen: true,
+    productionInstructionAbiFrozen: false,
+    structuralPreflightEntrypoint: true,
+    structuralPreflightDispatcher: true,
+    productionSolanaEntrypoint: false,
+    productionDispatcher: false,
+    localValidatorExecuted: true,
+    localValidatorOperationCount: 15,
+    localValidatorHostileSignerDriftRejected: true,
+    artifactBytes: 21120,
+    artifactSha256: "3bdffb2bcd9ee919e012d71522c8667883efea196ce5b58a2aef354b720a1588",
+    publicDevnetExecuted: false,
+    publicEconomicWriteExposure: false,
+    anyHandlerComplete: false,
+    mainnetHold: true,
+  });
+  assert.match(economyManifest, /sbf-preflight-entrypoint = \[/u);
+  assert.match(economySbfPreflightSource, /pub const SBF_PREFLIGHT_INSTRUCTION_NAMESPACE: &\[u8; 8\] = b"IATB3PF1";/u);
+  assert.match(economySbfPreflightSource, /structural_preflight_entrypoint_exposed: true/u);
+  for (const falseFlag of [
+    "production_instruction_abi_frozen",
+    "production_entrypoint_exposed",
+    "production_dispatcher_exposed",
+    "public_economic_write_exposure",
+    "account_keys_authenticated",
+    "account_owners_authenticated",
+    "mutable_account_borrows",
+    "account_writes_executed",
+    "system_cpi_executed",
+    "token_cpi_executed",
+    "any_handler_complete",
+  ]) {
+    assert.match(economySbfPreflightSource, new RegExp(`${falseFlag}: false`, "u"), falseFlag);
+  }
+  assert.doesNotMatch(
+    economySbfPreflightSource,
+    /try_borrow_(?:mut_)?data|try_borrow_mut_lamports|invoke(?:_signed)?\s*\(|RpcClient|send_and_confirm/u,
+  );
+  assert.match(economySbfPreflightDriverSource, /const RPC_LOOPBACK =/u);
+  assert.match(economySbfPreflightDriverSource, /operationCount: signatures\.length/u);
+  assert.match(economySbfPreflightDriverSource, /writesExecutedByEconomyProgram: false/u);
+  assert.match(economySbfPreflightRunnerSource, /solana-test-validator/u);
+  assert.doesNotMatch(economySbfPreflightRunnerSource, /api\.devnet|api\.mainnet|api\.testnet/u);
 });
 
 test("the native state adapter remains an explicit nonactivating truth surface", () => {
@@ -618,7 +703,7 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
     economySource,
     /pub fn prepare_register_agency\(\s*_gate: &ValidatedDailyLawWrite,/u,
   );
-  assert.doesNotMatch(economyCode, /pub fn register_agency\s*\(/u);
+  assert.doesNotMatch(economySource, /pub fn register_agency\s*\(/u);
   assert.match(economySource, /fn prepare_register_agency_transition\(/u);
   assert.match(economySource, /struct RegisterAgencyInput/u);
   assert.match(economySource, /struct AgencyState/u);
@@ -874,7 +959,7 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   assert.match(economySource, /fn immediately_preceding_instruction\(/u);
   assert.match(economySource, /fn validate_round_commit_instruction\(/u);
   assert.doesNotMatch(
-    economyCode,
+    economySource,
     /pub fn (?:open_position|settle_position_week|settle_core_week|claim_lane_principal|withdraw_position_principal)\s*\(/u,
   );
 

@@ -3,6 +3,11 @@
 Status: design contract and deterministic handler inventory; no B3 economic
 write entrypoint is implemented or authorized for deployment.
 
+A feature-gated SBF structural preflight now dispatches the exact all-fifteen
+account-meta shapes. It is not an economic write entrypoint: it authenticates
+no account key or owner, borrows no account data or lamports mutably, performs
+no write or CPI, and completes no handler.
+
 This document defines the minimum safe port of all fifteen public IAT V2 write
 handlers to the canonical Token-2022 B3 mint. It preserves V2 arithmetic and
 state-transition behavior except where the owner-requested core-custody burn
@@ -148,9 +153,10 @@ imports the file directly; it is absent from the deployable crate module graph
 and cannot be called by `process_execute` or any initialization path. No binding
 account is currently created or stored, and there is no binding-account seed,
 storage address, or storage opcode. The config derivation retains V2's exact
-`["config", mint]` seed. The economy program is still host-only and has no
-frozen program ID, the law program ID is not committed, and the canonical mint
-is unpublished. Until all three identities and seed domains are frozen, storing
+`["config", mint]` seed. The default economy kernel remains host-only and the
+feature-gated SBF surface is structural-only; there is no production economic
+entrypoint or frozen program ID. The law program ID is not committed, and the
+canonical mint is unpublished. Until all three identities and seed domains are frozen, storing
 an initializer-selected economy identity would not be an immutable protocol
 law. The final least-cost preference is compile-time frozen stake-vault and
 ingress-authority keys. An alternative may embed compact binding facts into the
@@ -636,6 +642,19 @@ remain explicit. Accordingly `any_handler_complete`, Devnet execution, public
 driver wiring, instruction ABI, entrypoint, dispatcher, mutable borrows,
 writes, CPI, RPC, signing, deployment, and production identity freeze all
 remain false; Mainnet remains HOLD.
+
+The separate `sbf-preflight-entrypoint` feature freezes only a 16-byte
+`IATB3PF1` structural envelope and operation index for those same fifteen
+account graphs. Its SBF dispatcher compares account count plus every
+signer/writable/executable bit, then returns without reading account data. A
+loopback validator rehearsal finalized one signed transaction for each of the
+fifteen shapes and rejected a readonly-signer downgrade with custom error 3.
+The 21,120-byte rehearsal artifact has SHA-256
+`3bdffb2bcd9ee919e012d71522c8667883efea196ce5b58a2aef354b720a1588`.
+This proves loader/entrypoint/meta-shape compatibility only. Account identities,
+owners, data, Daily Law, Config phase, mutation order, CPI, rollback, production
+ABI, public Devnet deployment, every handler, and every release gate remain
+unproven and false/HOLD.
 
 None of these kernels may be exposed as a write entrypoint. The first safe
 deployable slice is the complete fifteen-row dispatcher behind the frozen

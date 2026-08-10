@@ -42,6 +42,10 @@ const economyToken2022RuntimeSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/token_2022_runtime.rs", import.meta.url),
   "utf8",
 );
+const economySbfPreflightSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/sbf_preflight.rs", import.meta.url),
+  "utf8",
+);
 const economySource = readFileSync(
   new URL("../programs/iat_b3_economy/src/lib.rs", import.meta.url),
   "utf8",
@@ -138,7 +142,7 @@ test("the audit inventories every retained V2 Rust write handler", () => {
   assert.match(audit, /All 15 of its public\s+write handlers omit/u);
 });
 
-test("the Rust workspace has no unreported faction or core-cap entrypoint", () => {
+test("the Rust workspace reports the sole structural economy entrypoint without exposing writes", () => {
   const workspaceMembers = [...workspaceCargo.matchAll(/"(programs\/[a-z0-9_]+)"/gu)]
     .map((match) => match[1]);
   assert.deepEqual(workspaceMembers, [
@@ -148,7 +152,7 @@ test("the Rust workspace has no unreported faction or core-cap entrypoint", () =
     "programs/iat_b3_vault",
     "programs/iat_v2",
   ]);
-  assert.match(economyCargo, /crate-type = \["lib"\]/u);
+  assert.match(economyCargo, /crate-type = \["cdylib", "lib"\]/u);
   assert.match(economyCargo, /solana-pubkey = \{ version = "=3\.0\.0"/u);
   assert.match(economyCargo, /solana-sdk-ids = "=3\.1\.0"/u);
   assert.match(economyCargo, /runtime-account-bridge = \[/u);
@@ -167,12 +171,31 @@ test("the Rust workspace has no unreported faction or core-cap entrypoint", () =
   assert.doesNotMatch(economyCargo, /iat-b3-vault/u);
   assert.doesNotMatch(
     economyCargo,
-    /cdylib|anchor-|solana-(?:cpi|program-entrypoint|system-interface)/u,
+    /anchor-|solana-(?:cpi|system-interface)/u,
   );
+  assert.match(economyCargo, /solana-program-entrypoint = \{ version = "=3\.1\.1", optional = true \}/u);
+  assert.match(economyCargo, /solana-program-error = \{ version = "=3\.0\.1", optional = true \}/u);
   assert.doesNotMatch(
-    `${economySource}\n${economyNativeAdapterSource}\n${economyRuntimeAdapterSource}\n${economyConfigGenesisCodecSource}\n${economyRehearsalAdapterSource}\n${economyToken2022RuntimeSource}`,
+    `${economyNativeAdapterSource}\n${economyRuntimeAdapterSource}\n${economyConfigGenesisCodecSource}\n${economyRehearsalAdapterSource}\n${economyToken2022RuntimeSource}`,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(/u,
   );
+  assert.match(economySource, /solana_program_entrypoint::entrypoint!\(process_instruction\);/u);
+  assert.equal((economySource.match(/entrypoint!/gu) ?? []).length, 1);
+  assert.doesNotMatch(
+    economySbfPreflightSource,
+    /try_borrow_(?:mut_)?data|try_borrow_mut_lamports|invoke(?:_signed)?\s*\(/u,
+  );
+  for (const falseFlag of [
+    "production_entrypoint_exposed",
+    "production_dispatcher_exposed",
+    "public_economic_write_exposure",
+    "account_writes_executed",
+    "system_cpi_executed",
+    "token_cpi_executed",
+    "any_handler_complete",
+  ]) {
+    assert.match(economySbfPreflightSource, new RegExp(`${falseFlag}: false`, "u"), falseFlag);
+  }
   assert.doesNotMatch(economyRuntimeAdapterSource, /try_borrow_mut|instruction_data/u);
   assert.doesNotMatch(
     `${economyRehearsalAdapterSource}\n${economyToken2022RuntimeSource}`,
@@ -182,7 +205,7 @@ test("the Rust workspace has no unreported faction or core-cap entrypoint", () =
   assert.match(economyRuntimeAdapterSource, /Rent::get\(\)/u);
   assert.match(
     audit,
-    /faction and core-team-cap implementations currently present[\s\S]+JavaScript specifications[\s\S]+host-only `iat_b3_economy` library[\s\S]+no Solana\s+entrypoint or\s+public dispatcher/u,
+    /faction and core-team-cap implementations currently present[\s\S]+JavaScript specifications[\s\S]+default `iat_b3_economy` kernel remains host-only[\s\S]+structural preflight[\s\S]+no production economic entrypoint or public write dispatcher/u,
   );
 });
 

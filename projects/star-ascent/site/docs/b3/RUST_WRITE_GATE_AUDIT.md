@@ -3,8 +3,9 @@
 Status: **EXACT SOURCE INVENTORY / MAINNET BLOCKING GAP**
 
 Scope: the executable Rust entrypoints in `programs/iat_b3_law` and
-`programs/iat_v2`, plus the host-only `programs/iat_b3_economy` transition
-library, as of 2026-08-09. This is a source-reachability audit, not a claim that
+`programs/iat_v2`, plus the default host-only `programs/iat_b3_economy`
+transition kernel and its feature-gated structural SBF preflight, as of
+2026-08-10. This is a source-reachability audit, not a claim that
 an undeployed path has executed on-chain.
 
 ## Result
@@ -23,7 +24,7 @@ constraint nor the B3 transfer hook gates any current V2 handler.
 
 The faction and core-team-cap implementations currently present under
 `programs/iat_b3_reference` remain executable JavaScript specifications. The
-new host-only `iat_b3_economy` library contains immutable V2 constants, an
+default `iat_b3_economy` kernel remains host-only and contains immutable V2 constants, an
 exact read-only Daily Law codec/verifier, an opaque validated-write capability,
 and internal pure `expire_round`, `close_position`, `settle_round`, and
 `commit_round` transitions, plus the `initialize_config`,
@@ -39,8 +40,9 @@ core-custody-blocker, and transfer-intent kernel and the
 `prepare_settle_core_week` reward/reservation and core-custody-blocker kernel
 staged as
 `PRE_TOKEN_CPI_ONLY`. Its
-manifest is `lib`-only and it has no Solana entrypoint or public dispatcher,
-account lifecycle, token CPI, or network access. Neither
+manifest now also supports an exact feature-gated structural preflight, but
+there is no production economic entrypoint or public write dispatcher, account
+lifecycle, token CPI, or network access. Neither
 the JavaScript specifications nor these pure Rust slices may be counted as
 on-chain faction or core-cap enforcement.
 
@@ -58,7 +60,9 @@ and validate canonical Daily Law state before any B3 port can be accepted.
 | `finalize_day` (`IATB3LAW`, opcode `1`) | Replaces the single current-day decision in the law-state PDA | Intentionally exempt consensus housekeeping; uses only Solana `Clock` and `SlotHashes`, rejects a same-day reroll, and recomputes the fixed draw | Allowed so the next day can be decided even after a locked prior day |
 | Transfer Hook `Execute` | Read-only in the law program; authorizes or rejects the Token-2022 transfer that invoked it | **Direct canonical gate**: exact PDA/owner/mint checks, active Token-2022 transfer context, current `Clock` day, and full decision recomputation | Missing, stale, corrupt, forged, or selected state rejects; only a valid current open decision allows the transfer |
 
-The consensus and economy crates are pure and have no account-write entrypoint.
+The consensus crate and default economy kernel are pure. The only Economy SBF
+entrypoint is the all-fifteen account-meta structural preflight; it has no
+account-write path and completes no handler.
 
 ## Retained V2 public write matrix
 
@@ -618,8 +622,9 @@ For every retained B3 business-write instruction, the native port must:
    decisions in local-validator and Devnet rehearsals.
 
 The accompanying source-inventory test fails if a Rust entrypoint is added or
-removed without updating this matrix, or if the current V2/B3 dependency and
-gate boundary silently changes.
+removed without updating this matrix, if the exact structural-only exception
+gains a mutable borrow/CPI/production claim, or if the current V2/B3 dependency
+and gate boundary silently changes.
 
 The complete fifteen-handler native port order, account-lifecycle boundary,
 Token-2022 replacement contract, and fail-closed deployment rule are frozen in

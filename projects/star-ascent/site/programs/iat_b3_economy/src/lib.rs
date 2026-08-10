@@ -8,9 +8,17 @@ pub mod native_adapter;
 pub mod rehearsal_adapter;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod runtime_adapter;
+#[cfg(feature = "sbf-preflight-entrypoint")]
+pub mod sbf_preflight;
 pub mod stake_ingress;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod token_2022_runtime;
+
+#[cfg(feature = "sbf-preflight-entrypoint")]
+pub use sbf_preflight::process_instruction;
+
+#[cfg(all(feature = "sbf-preflight-entrypoint", not(feature = "no-entrypoint")))]
+solana_program_entrypoint::entrypoint!(process_instruction);
 
 pub use codec::{
     decode_agency_owner_index_state, decode_agency_state, decode_core_reward_state,
