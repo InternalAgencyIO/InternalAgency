@@ -57,6 +57,13 @@ const economySbfPreflightDevnetRunnerSource = readFileSync(
   new URL("scripts/run-iat-b3-economy-sbf-preflight-devnet.sh", siteRoot),
   "utf8",
 );
+const economySbfPreflightDevnetEvidence = JSON.parse(readFileSync(
+  new URL(
+    "docs/b3/evidence/iat-b3-economy-sbf-structural-devnet-20260810T141607Z.json",
+    siteRoot,
+  ),
+  "utf8",
+));
 const lawSource = readFileSync(
   new URL("programs/iat_b3_law/src/lib.rs", siteRoot),
   "utf8",
@@ -240,7 +247,13 @@ test("the all-15 SBF surface is an exact structural preflight and never an econo
     devnetPayer: "DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4",
     immutableDeploymentRequired: true,
     temporaryAccountCleanupRequired: true,
-    publicDevnetExecuted: false,
+    structuralPreflightPubliclyDeployed: true,
+    publicDevnetExecuted: true,
+    publicDevnetOperationCount: 15,
+    publicDevnetEvidence: {
+      path: "projects/star-ascent/site/docs/b3/evidence/iat-b3-economy-sbf-structural-devnet-20260810T141607Z.json",
+      sha256: "f0298ad92cd84bee91a3b0e6fbf6f002b7cd62b9e8905b6c353ed1974c42a607",
+    },
     publicEconomicWriteExposure: false,
     anyHandlerComplete: false,
     mainnetHold: true,
@@ -283,6 +296,21 @@ test("the all-15 SBF surface is an exact structural preflight and never an econo
   assert.match(economySbfPreflightDevnetRunnerSource, /--network devnet/u);
   assert.match(economySbfPreflightDevnetRunnerSource, /temporaryAccountsRemoved":true/u);
   assert.doesNotMatch(economySbfPreflightDevnetRunnerSource, /mainnet-beta|api\.mainnet|api\.testnet/u);
+  assert.equal(economySbfPreflightDevnetEvidence.status, "PASS");
+  assert.equal(economySbfPreflightDevnetEvidence.resume.operations.length, 15);
+  assert.equal(
+    economySbfPreflightDevnetEvidence.independentFinalizedObservation.signatureCount,
+    28,
+  );
+  assert.equal(
+    economySbfPreflightDevnetEvidence.independentFinalizedObservation.temporaryAccountsAbsent,
+    true,
+  );
+  assert.equal(economySbfPreflightDevnetEvidence.writesExecutedByEconomyProgram, false);
+  assert.equal(economySbfPreflightDevnetEvidence.fullEconomicHandlerRehearsalComplete, false);
+  assert.equal(economySbfPreflightDevnetEvidence.anyHandlerComplete, false);
+  assert.equal(economySbfPreflightDevnetEvidence.mainnetExecutionAuthorized, false);
+  assert.equal(economySbfPreflightDevnetEvidence.mainnetStatus, "HOLD");
 });
 
 test("the native state adapter remains an explicit nonactivating truth surface", () => {

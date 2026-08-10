@@ -51,7 +51,13 @@
     "devnetPayer": "DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4",
     "immutableDeploymentRequired": true,
     "temporaryAccountCleanupRequired": true,
-    "publicDevnetExecuted": false,
+    "structuralPreflightPubliclyDeployed": true,
+    "publicDevnetExecuted": true,
+    "publicDevnetOperationCount": 15,
+    "publicDevnetEvidence": {
+      "path": "projects/star-ascent/site/docs/b3/evidence/iat-b3-economy-sbf-structural-devnet-20260810T141607Z.json",
+      "sha256": "f0298ad92cd84bee91a3b0e6fbf6f002b7cd62b9e8905b6c353ed1974c42a607"
+    },
     "publicEconomicWriteExposure": false,
     "anyHandlerComplete": false,
     "mainnetHold": true
