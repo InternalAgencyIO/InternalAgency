@@ -613,6 +613,18 @@ edge, mutation, or transition authorization. It does not change any matrix row's
 `handlerComplete`, the aggregate `DISABLED_UNTIL_ALL_15_PASS` exposure, the
 core-custody/faction/Genesis HOLDs, or the complete-dispatcher boundary.
 
+A narrower execution primitive is now isolated behind the separate
+`runtime-write-adapter` feature. It accepts only sealed native-adapter batches
+containing existing-state CAS intents. It validates the exact opaque Daily Law
+capability and all account headers/preimages, acquires every mutable data borrow,
+revalidates every preimage while all borrows are held, and only then copies any
+postimage. Borrow conflicts, stale bytes, capability drift, duplicate accounts,
+and create-account intents fail before the first write. This is real internal
+account-data persistence for already-authenticated fixed codecs, but it is not
+a handler: account creation, lamport mutation, System CPI, Token-2022 CPI,
+instruction decoding, entrypoint, dispatcher, production identities, and
+public exposure remain absent. No handler is complete and Mainnet remains HOLD.
+
 The same feature now contains a second, explicitly nonactivating rehearsal
 surface at
 `FEATURE_GATED_READ_ONLY_ALL_15_ACCOUNT_GRAPH_PREFLIGHT_NO_DISPATCH`. Its local

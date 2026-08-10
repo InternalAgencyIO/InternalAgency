@@ -8,6 +8,8 @@ pub mod native_adapter;
 pub mod rehearsal_adapter;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod runtime_adapter;
+#[cfg(feature = "runtime-write-adapter")]
+pub mod runtime_write_adapter;
 #[cfg(feature = "sbf-preflight-entrypoint")]
 pub mod sbf_preflight;
 pub mod stake_ingress;

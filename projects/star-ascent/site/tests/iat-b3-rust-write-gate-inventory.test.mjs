@@ -30,6 +30,10 @@ const economyRuntimeAdapterSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/runtime_adapter.rs", import.meta.url),
   "utf8",
 );
+const economyRuntimeWriteAdapterSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/runtime_write_adapter.rs", import.meta.url),
+  "utf8",
+);
 const economyConfigGenesisCodecSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/config_genesis_codec.rs", import.meta.url),
   "utf8",
@@ -156,6 +160,7 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
   assert.match(economyCargo, /solana-pubkey = \{ version = "=3\.0\.0"/u);
   assert.match(economyCargo, /solana-sdk-ids = "=3\.1\.0"/u);
   assert.match(economyCargo, /runtime-account-bridge = \[/u);
+  assert.match(economyCargo, /runtime-write-adapter = \["runtime-account-bridge"\]/u);
   assert.match(economyCargo, /solana-account-info = \{[^}]+optional = true/u);
   assert.match(economyCargo, /solana-zk-sdk = \{ version = "=4\.0\.0", optional = true \}/u);
   assert.match(
@@ -176,7 +181,7 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
   assert.match(economyCargo, /solana-program-entrypoint = \{ version = "=3\.1\.1", optional = true \}/u);
   assert.match(economyCargo, /solana-program-error = \{ version = "=3\.0\.1", optional = true \}/u);
   assert.doesNotMatch(
-    `${economyNativeAdapterSource}\n${economyRuntimeAdapterSource}\n${economyConfigGenesisCodecSource}\n${economyRehearsalAdapterSource}\n${economyToken2022RuntimeSource}`,
+    `${economyNativeAdapterSource}\n${economyRuntimeAdapterSource}\n${economyRuntimeWriteAdapterSource}\n${economyConfigGenesisCodecSource}\n${economyRehearsalAdapterSource}\n${economyToken2022RuntimeSource}`,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(/u,
   );
   assert.match(economySource, /solana_program_entrypoint::entrypoint!\(process_instruction\);/u);
@@ -201,6 +206,18 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
     `${economyRehearsalAdapterSource}\n${economyToken2022RuntimeSource}`,
     /try_borrow_mut|instruction_data|RpcClient|send_and_confirm/u,
   );
+  assert.match(economyRuntimeWriteAdapterSource, /try_borrow_mut_data\(\)/u);
+  assert.match(economyRuntimeWriteAdapterSource, /validate_atomic_write_preconditions/u);
+  assert.match(economyRuntimeWriteAdapterSource, /all_mutable_borrows_acquired_before_write: true/u);
+  assert.match(economyRuntimeWriteAdapterSource, /all_preimages_revalidated_before_write: true/u);
+  assert.match(economyRuntimeWriteAdapterSource, /account_data_writes_supported: true/u);
+  assert.match(economyRuntimeWriteAdapterSource, /account_creation_supported: false/u);
+  assert.match(economyRuntimeWriteAdapterSource, /system_cpi_supported: false/u);
+  assert.match(economyRuntimeWriteAdapterSource, /token_cpi_supported: false/u);
+  assert.match(economyRuntimeWriteAdapterSource, /entrypoint_exposed: false/u);
+  assert.match(economyRuntimeWriteAdapterSource, /dispatcher_exposed: false/u);
+  assert.match(economyRuntimeWriteAdapterSource, /any_handler_complete: false/u);
+  assert.match(economyRuntimeWriteAdapterSource, /mainnet_hold: true/u);
   assert.match(economyRuntimeAdapterSource, /Clock::get\(\)/u);
   assert.match(economyRuntimeAdapterSource, /Rent::get\(\)/u);
   assert.match(

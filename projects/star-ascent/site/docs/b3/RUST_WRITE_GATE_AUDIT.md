@@ -570,12 +570,16 @@ This is preparation, not execution. Its checked truth surface keeps
 the separate read-only representation does not satisfy it. The caller-supplied
 rent minimum is not trusted runtime evidence; a future
 adapter must authenticate the canonical Rent sysvar and calculate the minimum.
-The module has no authenticated Clock or Rent sysvar account, `AccountInfo`,
-mutable borrow, invoke, System/Token CPI, dispatcher, entrypoint, or public write
-path. Runtime authorization, config serialization, and every Genesis phase
-path. Runtime authorization, mutable Config lifecycle/serialization intents,
-and every Genesis phase transition remain blocked, and the PDA/intents cannot
-be counted as a Devnet binary or a completed handler.
+The host-only native module itself has no authenticated Clock or Rent sysvar
+account, `AccountInfo`, mutable borrow, invoke, System/Token CPI, dispatcher,
+entrypoint, or public write path. The separate `runtime-write-adapter` feature
+now executes only sealed existing-state CAS batches: all immutable validations,
+all mutable data borrows, and all second preimage checks complete before the
+first byte is copied. It rejects create intents and performs no lamport write,
+System CPI, Token-2022 CPI, instruction decode, dispatcher, or entrypoint.
+Runtime handler authorization, mutable Config lifecycle, every Genesis phase
+transition, and all public exposure remain blocked, so this primitive is not a
+Devnet economic handler or a Mainnet authorization.
 
 ## Internal V2 mutation paths
 

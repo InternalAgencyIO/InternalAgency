@@ -23,6 +23,7 @@ runtime-account-bridge = [
     "dep:solana-zk-sdk",
     "dep:spl-token-2022-interface",
 ]
+runtime-write-adapter = ["runtime-account-bridge"]
 sbf-preflight-entrypoint = [
     "runtime-account-bridge",
     "dep:solana-program-entrypoint",

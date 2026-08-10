@@ -33,6 +33,10 @@ const economyRuntimeAdapterSource = readFileSync(
   new URL("programs/iat_b3_economy/src/runtime_adapter.rs", siteRoot),
   "utf8",
 );
+const economyRuntimeWriteAdapterSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/runtime_write_adapter.rs", siteRoot),
+  "utf8",
+);
 const economyRehearsalAdapterSource = readFileSync(
   new URL("programs/iat_b3_economy/src/rehearsal_adapter.rs", siteRoot),
   "utf8",
@@ -428,6 +432,67 @@ test("the feature-gated runtime bridge reads AccountInfo Clock and Rent without 
   assert.doesNotMatch(
     economyRuntimeAdapterSource.replace(/\/\/.*$/gmu, "").replace(/\/\*[\s\S]*?\*\//gu, ""),
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|try_borrow_mut|instruction_data/u,
+  );
+});
+
+test("the runtime write adapter executes only authenticated existing-state CAS batches", () => {
+  assert.deepEqual(matrix.runtimeWriteAdapterPreparation, {
+    stage: "FEATURE_GATED_EXISTING_STATE_CAS_BATCH_WRITES_NO_CPI_NO_DISPATCH",
+    feature: "runtime-write-adapter",
+    complete: false,
+    dailyLawCapabilityRequired: true,
+    strictStateAuthenticationRequired: true,
+    existingStateAccountsOnly: true,
+    allMutableBorrowsAcquiredBeforeWrite: true,
+    allPreimagesRevalidatedBeforeWrite: true,
+    mutableAccountBorrows: true,
+    accountDataWrites: true,
+    accountCreation: false,
+    lamportWrites: false,
+    systemCpi: false,
+    tokenCpi: false,
+    instructionAbiFrozen: false,
+    solanaEntrypoint: false,
+    publicDispatcher: false,
+    productionIdentityBindingFrozen: false,
+    anyHandlerComplete: false,
+    publicExposure: false,
+    mainnetHold: true,
+  });
+  assert.match(economyManifest, /runtime-write-adapter = \["runtime-account-bridge"\]/u);
+  assert.match(
+    economySource,
+    /#\[cfg\(feature = "runtime-write-adapter"\)\]\s+pub mod runtime_write_adapter;/u,
+  );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
+    /pub fn execute_existing_write_batch_account_infos/u,
+  );
+  assert.match(economyRuntimeWriteAdapterSource, /validate_atomic_write_preconditions/u);
+  assert.match(economyRuntimeWriteAdapterSource, /try_borrow_mut_data\(\)/u);
+  assert.match(economyRuntimeWriteAdapterSource, /PostValidationPreimageMismatch/u);
+  assert.match(economyRuntimeWriteAdapterSource, /data\.copy_from_slice\(existing\.postimage\(\)\)/u);
+  assert.match(economyRuntimeWriteAdapterSource, /account_data_writes_supported: true/u);
+  for (const falseFlag of [
+    "account_creation_supported",
+    "lamport_writes_supported",
+    "system_cpi_supported",
+    "token_cpi_supported",
+    "instruction_abi_frozen",
+    "entrypoint_exposed",
+    "dispatcher_exposed",
+    "any_handler_complete",
+  ]) {
+    assert.match(
+      economyRuntimeWriteAdapterSource,
+      new RegExp(`${falseFlag}: false`, "u"),
+      falseFlag,
+    );
+  }
+  assert.match(economyRuntimeWriteAdapterSource, /mainnet_hold: true/u);
+  assert.doesNotMatch(
+    economyRuntimeWriteAdapterSource.replace(/\/\/.*$/gmu, "").replace(/\/\*[\s\S]*?\*\//gu, ""),
+    /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|instruction_data|RpcClient|send_and_confirm/u,
   );
 });
 
