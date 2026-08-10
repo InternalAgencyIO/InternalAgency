@@ -408,15 +408,41 @@ dependencies = [
 ]
 
 [[package]]
+name = "iat-b3-consensus"
+version = "0.1.0"
+dependencies = [
+ "sha2",
+]
+
+[[package]]
+name = "iat-b3-economy"
+version = "0.1.0"
+dependencies = [
+ "iat-b3-consensus",
+ "sha2",
+ "solana-account-info",
+ "solana-clock",
+ "solana-cpi",
+ "solana-instruction",
+ "solana-program-error",
+ "solana-pubkey 3.0.0",
+ "solana-rent",
+ "solana-sdk-ids",
+ "solana-sysvar",
+ "solana-zk-sdk",
+ "spl-token-2022-interface",
+ "spl-transfer-hook-interface",
+]
+
+[[package]]
 name = "iat-b3-stake-ingress-rehearsal-economy"
 version = "0.0.0"
 dependencies = [
+ "iat-b3-economy",
  "solana-account-info",
  "solana-cpi",
- "solana-instruction",
  "solana-program-entrypoint",
  "solana-program-error",
- "solana-program-option",
  "solana-pubkey 3.0.0",
  "solana-rent",
  "solana-sdk-ids",
@@ -1046,14 +1072,13 @@ dependencies = [
 
 [[package]]
 name = "solana-instruction"
-version = "3.1.0"
+version = "3.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee1b699a2c1518028a9982e255e0eca10c44d90006542d9d7f9f40dbce3f7c78"
+checksum = "d70cf6ece1070a66d25e68274f338f29664794669c175223940a298645ef3495"
 dependencies = [
  "bincode",
- "borsh",
  "serde",
- "solana-define-syscall 4.0.1",
+ "solana-define-syscall 5.2.0",
  "solana-instruction-error",
  "solana-pubkey 4.3.0",
 ]

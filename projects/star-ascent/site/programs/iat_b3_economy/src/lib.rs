@@ -15,6 +15,8 @@ pub mod runtime_write_adapter;
 #[cfg(feature = "sbf-preflight-entrypoint")]
 pub mod sbf_preflight;
 pub mod stake_ingress;
+#[cfg(feature = "runtime-token-2022-stake-ingress")]
+pub mod stake_ingress_runtime;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod token_2022_runtime;
 

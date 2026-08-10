@@ -1,19 +1,28 @@
 #![deny(unsafe_code)]
 
+use iat_b3_economy::{
+    stake_ingress::{
+        ApproveCheckedIntent, DelegateRestorationIntent, HookedTransferCheckedIntent,
+        StakeIngressExecutionPlan,
+    },
+    stake_ingress_runtime::{
+        execute_prepared_stake_ingress, observe_stake_ingress_source,
+        observe_stake_ingress_vault, StakeIngressRuntimeAccounts,
+    },
+    ConfigState, LaneState, OpenPositionPreCpiPlan, TransferCheckedIntent,
+};
 use solana_account_info::{next_account_info, AccountInfo};
 use solana_cpi::{invoke, invoke_signed};
-use solana_instruction::AccountMeta;
 use solana_program_entrypoint::ProgramResult;
 use solana_program_error::ProgramError;
-use solana_program_option::COption;
 use solana_pubkey::Pubkey;
 use solana_rent::Rent;
 use solana_sdk_ids::system_program;
 use solana_system_interface::instruction::create_account;
 use solana_sysvar::Sysvar;
 use spl_token_2022_interface::{
-    extension::{ExtensionType, StateWithExtensions},
-    instruction::{approve_checked, initialize_account3, transfer_checked},
+    extension::ExtensionType,
+    instruction::{approve_checked, initialize_account3},
     state::Account as TokenAccount,
     ID as TOKEN_2022_PROGRAM_ID,
 };
@@ -22,17 +31,13 @@ solana_program_entrypoint::entrypoint!(process_instruction);
 
 pub const ECONOMY_PROGRAM_ID: Pubkey = Pubkey::new_from_array([0xE3; 32]);
 pub const HOOK_PROGRAM_ID: Pubkey = Pubkey::new_from_array([0xB4; 32]);
+pub const LAW_STATE_ADDRESS: Pubkey = Pubkey::new_from_array([0xA7; 32]);
 pub const TOKEN_DECIMALS: u8 = 9;
 
 #[repr(u32)]
 enum RehearsalEconomyError {
     InvalidInstruction = 200,
     InvalidAccount = 201,
-    MissingOwnerSignature = 202,
-    ApprovalMismatch = 203,
-    BalanceDeltaMismatch = 204,
-    DelegateNotConsumed = 205,
-    DelegateRestorationMismatch = 206,
     InjectedPostCpiFailure = 207,
 }
 
@@ -40,18 +45,6 @@ impl From<RehearsalEconomyError> for ProgramError {
     fn from(value: RehearsalEconomyError) -> Self {
         ProgramError::Custom(value as u32)
     }
-}
-
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
-struct DelegateSnapshot {
-    delegate: COption<Pubkey>,
-    delegated_amount: u64,
-}
-
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
-struct TokenSnapshot {
-    amount: u64,
-    delegate: DelegateSnapshot,
 }
 
 pub fn process_instruction(
@@ -140,141 +133,80 @@ fn execute_stake_ingress(
     let token_program = next_account_info(account_iter)?;
     let hook_program = next_account_info(account_iter)?;
     let validation = next_account_info(account_iter)?;
-    if !owner.is_signer {
-        return Err(RehearsalEconomyError::MissingOwnerSignature.into());
-    }
-    if source.owner != &TOKEN_2022_PROGRAM_ID
-        || mint.owner != &TOKEN_2022_PROGRAM_ID
-        || stake_vault.owner != &TOKEN_2022_PROGRAM_ID
-        || token_program.key != &TOKEN_2022_PROGRAM_ID
-        || hook_program.key != &HOOK_PROGRAM_ID
-        || !hook_program.executable
-    {
-        return Err(RehearsalEconomyError::InvalidAccount.into());
-    }
+    let law_state = next_account_info(account_iter)?;
     let (config, _) = Pubkey::find_program_address(&[b"config", mint.key.as_ref()], program_id);
     let (expected_vault, _) =
         Pubkey::find_program_address(&[b"stake-token", config.as_ref()], program_id);
-    let (expected_ingress, ingress_bump) =
+    let (expected_ingress, _) =
         Pubkey::find_program_address(&[b"stake-ingress", config.as_ref()], program_id);
     if stake_vault.key != &expected_vault || ingress_authority.key != &expected_ingress {
         return Err(RehearsalEconomyError::InvalidAccount.into());
     }
-
-    let source_before = unpack(source)?;
-    let vault_before = unpack(stake_vault)?;
+    if hook_program.key != &HOOK_PROGRAM_ID || law_state.key != &LAW_STATE_ADDRESS {
+        return Err(RehearsalEconomyError::InvalidAccount.into());
+    }
+    let source_before = observe_stake_ingress_source(source, mint.key, owner.key)
+        .map_err(|error| error.into_program_error())?;
+    let vault_before = observe_stake_ingress_vault(stake_vault, mint.key, &config)
+        .map_err(|error| error.into_program_error())?;
     if source_before.delegate.delegate.is_some()
-        && source_before.delegate.delegate != COption::Some(*prior_delegate.key)
+        && source_before.delegate.delegate != Some(prior_delegate.key.to_bytes())
     {
         return Err(RehearsalEconomyError::InvalidAccount.into());
     }
 
-    let approve_ingress = approve_checked(
-        &TOKEN_2022_PROGRAM_ID,
-        source.key,
-        mint.key,
-        ingress_authority.key,
+    let plan = rehearsal_plan(
         owner.key,
-        &[],
-        amount,
-        TOKEN_DECIMALS,
-    )?;
-    invoke(
-        &approve_ingress,
-        &[
-            source.clone(),
-            mint.clone(),
-            ingress_authority.clone(),
-            owner.clone(),
-            token_program.clone(),
-        ],
-    )?;
-    let after_approval = unpack(source)?;
-    if after_approval.amount != source_before.amount
-        || after_approval.delegate
-            != (DelegateSnapshot {
-                delegate: COption::Some(*ingress_authority.key),
-                delegated_amount: amount,
-            })
-    {
-        return Err(RehearsalEconomyError::ApprovalMismatch.into());
-    }
-
-    let mut transfer = transfer_checked(
-        &TOKEN_2022_PROGRAM_ID,
-        source.key,
         mint.key,
+        source.key,
         stake_vault.key,
         ingress_authority.key,
-        &[],
+        validation.key,
+        &config,
         amount,
-        TOKEN_DECIMALS,
-    )?;
-    transfer
-        .accounts
-        .push(AccountMeta::new_readonly(*hook_program.key, false));
-    transfer
-        .accounts
-        .push(AccountMeta::new_readonly(*validation.key, false));
-    invoke_signed(
-        &transfer,
-        &[
-            source.clone(),
-            mint.clone(),
-            stake_vault.clone(),
-            ingress_authority.clone(),
-            hook_program.clone(),
-            validation.clone(),
-            token_program.clone(),
-        ],
-        &[&[b"stake-ingress", config.as_ref(), &[ingress_bump]]],
-    )?;
+        source_before,
+        vault_before,
+    );
+    execute_prepared_stake_ingress(
+        program_id,
+        &plan,
+        StakeIngressRuntimeAccounts {
+            owner,
+            source,
+            mint,
+            stake_vault,
+            ingress_authority,
+            prior_delegate: Some(prior_delegate),
+            token_program,
+            hook_program,
+            hook_validation: validation,
+            additional_hook_accounts: core::slice::from_ref(law_state),
+        },
+        |_, _| {
+            if mode == 1 {
+                Err(RehearsalEconomyError::InjectedPostCpiFailure.into())
+            } else {
+                Ok(())
+            }
+        },
+    )
+    .map_err(|error| error.into_program_error())?;
 
-    let after_transfer = unpack(source)?;
-    let vault_after = unpack(stake_vault)?;
-    if after_transfer.amount
-        != source_before
-            .amount
-            .checked_sub(amount)
-            .ok_or(RehearsalEconomyError::BalanceDeltaMismatch)?
-        || vault_after.amount
-            != vault_before
-                .amount
-                .checked_add(amount)
-                .ok_or(RehearsalEconomyError::BalanceDeltaMismatch)?
-    {
-        return Err(RehearsalEconomyError::BalanceDeltaMismatch.into());
-    }
-    if after_transfer.delegate
-        != (DelegateSnapshot {
-            delegate: COption::None,
-            delegated_amount: 0,
-        })
-    {
-        return Err(RehearsalEconomyError::DelegateNotConsumed.into());
-    }
-    if mode == 1 {
-        return Err(RehearsalEconomyError::InjectedPostCpiFailure.into());
-    }
-
-    if let COption::Some(delegate) = source_before.delegate.delegate {
-        let restore_decimals = if mode == 2 {
-            TOKEN_DECIMALS.saturating_add(1)
-        } else {
-            TOKEN_DECIMALS
-        };
-        let restore = approve_checked(
+    // A fixture-only post-completion failure proves every production-executor
+    // CPI still rolls back when a later instruction in the same handler fails.
+    if mode == 2 {
+        let invalid = approve_checked(
             &TOKEN_2022_PROGRAM_ID,
             source.key,
             mint.key,
-            &delegate,
+            prior_delegate.key,
             owner.key,
             &[],
             source_before.delegate.delegated_amount,
-            restore_decimals,
+            TOKEN_DECIMALS.saturating_add(1),
         )?;
         invoke(
-            &restore,
+            &invalid,
             &[
                 source.clone(),
                 mint.clone(),
@@ -283,26 +215,123 @@ fn execute_stake_ingress(
                 token_program.clone(),
             ],
         )?;
-    } else if mode == 2 {
-        return Err(RehearsalEconomyError::InvalidInstruction.into());
-    }
-
-    let after_restoration = unpack(source)?;
-    if after_restoration.delegate != source_before.delegate {
-        return Err(RehearsalEconomyError::DelegateRestorationMismatch.into());
     }
     Ok(())
 }
 
-fn unpack(account: &AccountInfo<'_>) -> Result<TokenSnapshot, ProgramError> {
-    let data = account.try_borrow_data()?;
-    let token = StateWithExtensions::<TokenAccount>::unpack(&data)
-        .map_err(|_| RehearsalEconomyError::InvalidAccount)?;
-    Ok(TokenSnapshot {
-        amount: token.base.amount,
-        delegate: DelegateSnapshot {
-            delegate: token.base.delegate,
-            delegated_amount: token.base.delegated_amount,
+#[allow(clippy::too_many_arguments)]
+fn rehearsal_plan(
+    owner: &Pubkey,
+    mint: &Pubkey,
+    source: &Pubkey,
+    stake_vault: &Pubkey,
+    ingress: &Pubkey,
+    validation: &Pubkey,
+    config: &Pubkey,
+    principal: u64,
+    source_before: iat_b3_economy::stake_ingress::SourceTokenState,
+    stake_before: iat_b3_economy::ReadonlyTokenState,
+) -> StakeIngressExecutionPlan {
+    let lane = LaneState {
+        config: config.to_bytes(),
+        token_account: [3; 32],
+        beneficiary: [4; 32],
+        total: 0,
+        genesis_unlocked: 0,
+        cliff_week: 0,
+        linear_end_week: 1,
+        reserved: 0,
+        paid: 0,
+        principal_claimed: 0,
+        lane: 0,
+        reward_source: true,
+        bump: 1,
+        token_bump: 1,
+    };
+    let config_snapshot = ConfigState {
+        admin: owner.to_bytes(),
+        mint: mint.to_bytes(),
+        token_program: TOKEN_2022_PROGRAM_ID.to_bytes(),
+        randomness_program: [5; 32],
+        stake_token_account: stake_vault.to_bytes(),
+        agency_registry_hash: [0; 32],
+        genesis_timestamp: 0,
+        expected_supply: 1,
+        staked_principal: stake_before.amount,
+        agency_count: 0,
+        rehearsal_mode: true,
+        active: true,
+        lane_mask: 0,
+        stake_vault_initialized: true,
+        bump: 1,
+        vault_authority_bump: 1,
+    };
+    let transfer = TransferCheckedIntent {
+        token_program: TOKEN_2022_PROGRAM_ID.to_bytes(),
+        source: source.to_bytes(),
+        mint: mint.to_bytes(),
+        destination: stake_vault.to_bytes(),
+        authority: ingress.to_bytes(),
+        amount: principal,
+        decimals: TOKEN_DECIMALS,
+    };
+    let open_position = OpenPositionPreCpiPlan {
+        config_key: config.to_bytes(),
+        config_snapshot,
+        owner: owner.to_bytes(),
+        position_id: 1,
+        principal,
+        accepted_week: 1,
+        annual_rate_bps: 500,
+        obligation: 0,
+        agency_index: 0,
+        role: 0,
+        position_bump: 1,
+        treasury: lane,
+        ecosystem: LaneState { lane: 1, ..lane },
+        liquidity: LaneState { lane: 3, ..lane },
+        treasury_reserved: 0,
+        ecosystem_reserved: 0,
+        liquidity_reserved: 0,
+        transfer: TransferCheckedIntent { authority: owner.to_bytes(), ..transfer },
+    };
+    let approve_ingress = ApproveCheckedIntent {
+        token_program: TOKEN_2022_PROGRAM_ID.to_bytes(),
+        source: source.to_bytes(),
+        mint: mint.to_bytes(),
+        delegate: ingress.to_bytes(),
+        owner: owner.to_bytes(),
+        amount: principal,
+        decimals: TOKEN_DECIMALS,
+        owner_signature_required: true,
+    };
+    let restore_delegate = match source_before.delegate.delegate {
+        Some(delegate) => DelegateRestorationIntent::ApproveChecked(ApproveCheckedIntent {
+            token_program: TOKEN_2022_PROGRAM_ID.to_bytes(),
+            source: source.to_bytes(),
+            mint: mint.to_bytes(),
+            delegate,
+            owner: owner.to_bytes(),
+            amount: source_before.delegate.delegated_amount,
+            decimals: TOKEN_DECIMALS,
+            owner_signature_required: true,
+        }),
+        None => DelegateRestorationIntent::NoneRequired,
+    };
+    StakeIngressExecutionPlan {
+        open_position,
+        source_before,
+        stake_before,
+        original_delegate: source_before.delegate,
+        approve_ingress,
+        transfer: HookedTransferCheckedIntent {
+            transfer,
+            hook_validation_address: validation.to_bytes(),
+            law_state_address: LAW_STATE_ADDRESS.to_bytes(),
+            token_cpi_uses_ingress_invoke_signed: true,
+            hook_execute_authority_is_signer: false,
+            add_extra_accounts_for_execute_cpi_required: true,
         },
-    })
+        restore_delegate,
+    }
 }

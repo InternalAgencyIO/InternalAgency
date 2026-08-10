@@ -22,6 +22,10 @@ const economyStakeIngressSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/stake_ingress.rs", import.meta.url),
   "utf8",
 );
+const economyStakeIngressRuntimeSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/stake_ingress_runtime.rs", import.meta.url),
+  "utf8",
+);
 const economyNativeAdapterSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/native_adapter.rs", import.meta.url),
   "utf8",
@@ -411,6 +415,28 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
   assert.doesNotMatch(
     economyStakeIngressSource,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo/u,
+  );
+  assert.match(
+    economySource,
+    /#\[cfg\(feature = "runtime-token-2022-stake-ingress"\)\]\s+pub mod stake_ingress_runtime;/u,
+  );
+  assert.match(economyStakeIngressRuntimeSource, /pub fn execute_prepared_stake_ingress/u);
+  assert.match(economyStakeIngressRuntimeSource, /add_extra_accounts_for_execute_cpi\(/u);
+  assert.match(economyStakeIngressRuntimeSource, /invoke_signed\(/u);
+  assert.match(
+    economyStakeIngressRuntimeSource,
+    /transfer_infos[\s\S]+law_state_address[\s\S]+HookLawAccountUnresolved/u,
+  );
+  assert.match(
+    economyStakeIngressRuntimeSource,
+    /retained_v2_post_cpi_persistence_complete: false/u,
+  );
+  assert.match(economyStakeIngressRuntimeSource, /daily_law_capability_reauthenticated: false/u);
+  assert.match(economyStakeIngressRuntimeSource, /canonical_mint_policy_reauthenticated: false/u);
+  assert.match(economyStakeIngressRuntimeSource, /public_entrypoint_exposed: false/u);
+  assert.doesNotMatch(
+    economyStakeIngressRuntimeSource,
+    /entrypoint!|process_instruction|#\[program\]|RpcClient|send_and_confirm/u,
   );
   const lawState = structBody(lawSource, "LawState");
   assert.doesNotMatch(lawState, /stake|economy|ingress/iu);

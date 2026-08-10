@@ -14,9 +14,10 @@ function sha256(value) {
 const deprecatedIngressTerm = new RegExp(["account", "less"].join(""), "iu");
 
 test("stake-ingress rehearsal stays loopback-only and owns cleanup", async () => {
-  const [runner, packageText] = await Promise.all([
+  const [runner, packageText, workflow] = await Promise.all([
     text("../scripts/run-iat-b3-stake-ingress-local-rehearsal.sh"),
     text("../package.json"),
+    text("../../../../.github/workflows/iat-v2-proof.yml"),
   ]);
   assert.match(runner, /set -euo pipefail/u);
   assert.match(runner, /http:\/\/127\.0\.0\.1:/u);
@@ -32,17 +33,27 @@ test("stake-ingress rehearsal stays loopback-only and owns cleanup", async () =>
     packageJson.scripts["check:iat-b3-spec"],
     /tests\/iat-b3-stake-ingress-local-rehearsal\.test\.mjs/u,
   );
+  assert.match(workflow, /--version 5\.5\.0[\s\S]+spl-token-cli/u);
+  assert.match(
+    workflow,
+    /Rehearse B3 production-source Token-2022 stake ingress[\s\S]+run-iat-b3-stake-ingress-local-rehearsal\.sh/u,
+  );
 });
 
-test("fixture is isolated from production programs and freezes exact dependencies", async () => {
-  const [productionWorkspace, fixtureWorkspace, readme, ignore] = await Promise.all([
+test("fixture imports only the feature-gated production executor and freezes exact dependencies", async () => {
+  const [productionWorkspace, fixtureWorkspace, fixtureEconomy, readme, ignore] = await Promise.all([
     text("../Cargo.toml"),
     text("./fixtures/iat-b3-stake-ingress/Cargo.toml"),
+    text("./fixtures/iat-b3-stake-ingress/economy/Cargo.toml"),
     text("./fixtures/iat-b3-stake-ingress/README.md"),
     text("./fixtures/iat-b3-stake-ingress/.gitignore"),
   ]);
   assert.doesNotMatch(productionWorkspace, /iat-b3-stake-ingress/u);
   assert.match(fixtureWorkspace, /members = \["economy", "hook"\]/u);
+  assert.match(
+    fixtureEconomy,
+    /iat-b3-economy = \{ path = "\.\.\/\.\.\/\.\.\/\.\.\/programs\/iat_b3_economy", features = \["runtime-token-2022-stake-ingress"\] \}/u,
+  );
   for (const version of [
     "solana-account-info = \"=3.1.1\"",
     "solana-cpi = \"=3.1.0\"",
@@ -64,20 +75,24 @@ test("fixture is isolated from production programs and freezes exact dependencie
 });
 
 test("disposable programs encode the reviewed runtime boundary", async () => {
-  const [economy, hook] = await Promise.all([
+  const [economy, hook, runtime] = await Promise.all([
     text("./fixtures/iat-b3-stake-ingress/economy/src/lib.rs"),
     text("./fixtures/iat-b3-stake-ingress/hook/src/lib.rs"),
+    text("../programs/iat_b3_economy/src/stake_ingress_runtime.rs"),
   ]);
-  assert.match(economy, /approve_checked\(/u);
-  assert.match(economy, /invoke_signed\(/u);
+  assert.match(economy, /execute_prepared_stake_ingress\(/u);
+  assert.match(runtime, /approve_checked\(/u);
+  assert.match(runtime, /add_extra_accounts_for_execute_cpi\(/u);
+  assert.match(runtime, /invoke_signed\(/u);
+  assert.match(runtime, /persist_transaction_local_state\(plan, &post_transfer\)/u);
+  assert.match(runtime, /retained_v2_post_cpi_persistence_complete: false/u);
+  assert.match(runtime, /daily_law_capability_reauthenticated: false/u);
+  assert.match(runtime, /canonical_mint_policy_reauthenticated: false/u);
   assert.match(economy, /b"stake-ingress"/u);
-  assert.match(economy, /DelegateNotConsumed/u);
-  assert.match(economy, /DelegateRestorationMismatch/u);
+  assert.match(runtime, /DelegateNotConsumed/u);
+  assert.match(runtime, /DelegateRestorationMismatch/u);
   assert.match(economy, /TOKEN_DECIMALS\.saturating_add\(1\)/u);
-  assert.doesNotMatch(
-    economy,
-    /ingress_authority\.(?:lamports|owner|data|executable)/u,
-  );
+  assert.doesNotMatch(economy, /ingress_authority\.(?:lamports|owner|data|executable)/u);
   assert.match(hook, /TransferHookAccount/u);
   assert.match(hook, /!bool::from\(hook\.transferring\)/u);
   assert.match(hook, /authority\.is_signer/u);
@@ -107,15 +122,15 @@ test("funded stateless PDA state cannot grief either successful path", async () 
   assert.doesNotMatch(driver, deprecatedIngressTerm);
 });
 
-test("frozen record binds source and states the remaining production gap", async () => {
-  const [recordText, economy, hook, runner, driver, cargoLock, localDoc] = await Promise.all([
-    text("../docs/b3/evidence/local-validator-stake-ingress-rehearsal-20260809.json"),
+test("current production-executor record binds source and preserves the release hold", async () => {
+  const [recordText, runtime, economy, hook, runner, driver, cargoLock] = await Promise.all([
+    text("../docs/b3/evidence/local-validator-stake-ingress-production-executor-20260810.json"),
+    text("../programs/iat_b3_economy/src/stake_ingress_runtime.rs"),
     text("./fixtures/iat-b3-stake-ingress/economy/src/lib.rs"),
     text("./fixtures/iat-b3-stake-ingress/hook/src/lib.rs"),
     text("../scripts/run-iat-b3-stake-ingress-local-rehearsal.sh"),
     text("../scripts/iat-b3-stake-ingress-local-rehearsal-driver.mjs"),
     text("./fixtures/iat-b3-stake-ingress/Cargo.lock"),
-    text("../docs/b3/LOCAL_VALIDATOR_REHEARSAL.md"),
   ]);
   const record = JSON.parse(recordText);
   assert.equal(record.status, "PASS");
@@ -123,38 +138,24 @@ test("frozen record binds source and states the remaining production gap", async
   assert.equal(record.cleanup.temporaryLedgerRemoved, true);
   assert.equal(record.cleanup.validatorStopped, true);
   assert.equal(record.fixture.productionCandidate, false);
-  assert.equal(record.limits.combinedDailyLawAndStakeIngressHookProven, false);
+  assert.equal(record.productionExecutor.sourceSha256, sha256(runtime));
+  assert.equal(record.productionExecutor.publicEntrypoint, false);
+  assert.equal(record.productionExecutor.retainedV2PostCpiPersistenceComplete, false);
+  assert.equal(record.productionExecutor.dailyLawCapabilityReauthenticated, false);
+  assert.equal(record.productionExecutor.canonicalConfidentialMintPolicyReauthenticated, false);
+  assert.equal(record.limits.combinedDailyLawDecisionAndStakeIngressHookProven, false);
   assert.equal(record.limits.productionEconomyEntrypointProven, false);
   assert.equal(record.limits.productionIdentitiesFrozen, false);
-  assert.equal(record.limits.v2EconomicMathChanged, false);
-  assert.equal(record.observed.statelessIngressPdaInvokeSignedTransferChecked, true);
-  assert.equal(record.observed.statelessIngressPdaHasNoStatePrerequisite, true);
-  assert.deepEqual(record.observed.hookTransferContextRequired, {
-    directInvocationRejected: true,
-    customError: 102,
-    balancesAndDelegateUnchanged: true,
-  });
-  assert.deepEqual(record.observed.ingressPdaFundingAdversary, {
-    absentBeforeFunding: true,
-    fundedBeforeBothSuccessCases: true,
-    lamports: 1_000_000,
-    owner: "11111111111111111111111111111111",
-    dataLength: 0,
-    executable: false,
-    bothSuccessCasesPassedAfterFunding: true,
-    noLamportsPrerequisite: true,
-    noOwnerPrerequisite: true,
-    noDataPrerequisite: true,
-    noExecutablePrerequisite: true,
-  });
+  assert.equal(record.productionExecutor.v2EconomicMathChanged, false);
+  assert.equal(record.observed.productionSourceExecutorInvoked, true);
+  assert.equal(record.observed.transferHookExtraAccountsResolvedFromTlv, true);
+  assert.equal(record.observed.dailyLawAddressForwardedThroughHookValidation, true);
+  assert.equal(record.observed.dailyLawOpenDecisionAuthenticatedByThisFixture, false);
+  assert.equal(record.observed.postTransferPersistenceCallbackFailureRolledBackApprovalAndTransfer, true);
   assert.doesNotMatch(recordText, deprecatedIngressTerm);
   assert.equal(record.fixture.economy.sourceSha256, sha256(economy));
   assert.equal(record.fixture.hook.sourceSha256, sha256(hook));
   assert.equal(record.fixture.runnerSha256, sha256(runner));
   assert.equal(record.fixture.driverSha256, sha256(driver));
   assert.equal(record.fixture.cargoLockSha256, sha256(cargoLock));
-  assert(
-    localDoc.indexOf("For that Daily Law runner")
-      < localDoc.indexOf("## Stake-ingress primitive rehearsal"),
-  );
 });

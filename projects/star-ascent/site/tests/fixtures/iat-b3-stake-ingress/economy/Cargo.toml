@@ -13,12 +13,11 @@ custom-panic = []
 crate-type = ["cdylib", "lib"]
 
 [dependencies]
+iat-b3-economy = { path = "../../../../programs/iat_b3_economy", features = ["runtime-token-2022-stake-ingress"] }
 solana-account-info.workspace = true
 solana-cpi.workspace = true
-solana-instruction.workspace = true
 solana-program-entrypoint.workspace = true
 solana-program-error.workspace = true
-solana-program-option.workspace = true
 solana-pubkey.workspace = true
 solana-rent.workspace = true
 solana-sdk-ids.workspace = true

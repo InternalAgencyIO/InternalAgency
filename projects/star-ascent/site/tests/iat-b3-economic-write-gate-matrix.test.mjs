@@ -25,6 +25,10 @@ const economyStakeIngressSource = readFileSync(
   new URL("programs/iat_b3_economy/src/stake_ingress.rs", siteRoot),
   "utf8",
 );
+const economyStakeIngressRuntimeSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/stake_ingress_runtime.rs", siteRoot),
+  "utf8",
+);
 const economyNativeAdapterSource = readFileSync(
   new URL("programs/iat_b3_economy/src/native_adapter.rs", siteRoot),
   "utf8",
@@ -216,6 +220,14 @@ test("the default Rust kernel stays host-only while the sole SBF entrypoint is s
   assert.match(
     economyManifest,
     /spl-token-2022-interface = \{ version = "=2\.1\.0", optional = true \}/u,
+  );
+  assert.match(
+    economyManifest,
+    /spl-transfer-hook-interface = \{ version = "=2\.1\.0", optional = true \}/u,
+  );
+  assert.match(
+    economyManifest,
+    /solana-instruction = \{ version = "=3\.5\.0", optional = true \}/u,
   );
   assert.deepEqual(
     [...economyManifest.matchAll(/^(spl-token[a-z0-9-]*)\s*=/gmu)].map(
@@ -746,6 +758,39 @@ test("the combined stake-ingress slice is production source without public execu
   assert.doesNotMatch(
     economyStakeIngressSource,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo/u,
+  );
+});
+
+test("the feature-gated stake-ingress runtime executes exact Token-2022 CPI reloads without completing a handler", () => {
+  assert.match(
+    economySource,
+    /#\[cfg\(feature = "runtime-token-2022-stake-ingress"\)\]\s+pub mod stake_ingress_runtime;/u,
+  );
+  assert.match(economyManifest, /runtime-token-2022-stake-ingress = \[/u);
+  for (const token of [
+    "approve_checked(",
+    "transfer_checked(",
+    "add_extra_accounts_for_execute_cpi(",
+    "invoke_signed(",
+    "persist_transaction_local_state(plan, &post_transfer)",
+    "restore_original_delegate(plan, accounts)",
+  ]) {
+    assert.ok(economyStakeIngressRuntimeSource.includes(token), token);
+  }
+  assert.match(
+    economyStakeIngressRuntimeSource,
+    /retained_v2_post_cpi_persistence_complete: false/u,
+  );
+  assert.match(economyStakeIngressRuntimeSource, /daily_law_capability_reauthenticated: false/u);
+  assert.match(economyStakeIngressRuntimeSource, /canonical_mint_policy_reauthenticated: false/u);
+  assert.match(economyStakeIngressRuntimeSource, /public_entrypoint_exposed: false/u);
+  assert.match(economyStakeIngressRuntimeSource, /instruction_abi_frozen: false/u);
+  assert.match(economyStakeIngressRuntimeSource, /production_identities_frozen: false/u);
+  assert.match(economyStakeIngressRuntimeSource, /devnet_executed: false/u);
+  assert.match(economyStakeIngressRuntimeSource, /mainnet_hold: true/u);
+  assert.doesNotMatch(
+    economyStakeIngressRuntimeSource,
+    /entrypoint!|process_instruction|#\[program\]|RpcClient|send_and_confirm/u,
   );
 });
 

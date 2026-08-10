@@ -9,7 +9,7 @@ use solana_rent::Rent;
 use solana_sdk_ids::system_program;
 use solana_system_interface::instruction::create_account;
 use solana_sysvar::Sysvar;
-use spl_tlv_account_resolution::state::ExtraAccountMetaList;
+use spl_tlv_account_resolution::{account::ExtraAccountMeta, state::ExtraAccountMetaList};
 use spl_token_2022_interface::{
     extension::{transfer_hook::TransferHookAccount, BaseStateWithExtensions, StateWithExtensions},
     state::Account as TokenAccount,
@@ -25,6 +25,7 @@ solana_program_entrypoint::entrypoint!(process_instruction);
 // Fixture-only IDs. Neither program is a deployment candidate.
 pub const ECONOMY_PROGRAM_ID: Pubkey = Pubkey::new_from_array([0xE3; 32]);
 pub const HOOK_PROGRAM_ID: Pubkey = Pubkey::new_from_array([0xB4; 32]);
+pub const LAW_STATE_ADDRESS: Pubkey = Pubkey::new_from_array([0xA7; 32]);
 pub const INJECTED_HOOK_FAILURE_AMOUNT: u64 = 13;
 
 #[repr(u32)]
@@ -73,7 +74,8 @@ fn initialize_validation(program_id: &Pubkey, accounts: &[AccountInfo<'_>]) -> P
     if validation.key != &expected || validation.owner == program_id {
         return Err(RehearsalHookError::InvalidAccount.into());
     }
-    let size = ExtraAccountMetaList::size_of(0)?;
+    let law_state_meta = ExtraAccountMeta::new_with_pubkey(&LAW_STATE_ADDRESS, false, false)?;
+    let size = ExtraAccountMetaList::size_of(1)?;
     let rent = Rent::get()?;
     let (_, bump) =
         Pubkey::find_program_address(&[b"extra-account-metas", mint.key.as_ref()], program_id);
@@ -89,7 +91,10 @@ fn initialize_validation(program_id: &Pubkey, accounts: &[AccountInfo<'_>]) -> P
         &[payer.clone(), validation.clone(), system.clone()],
         &[&[b"extra-account-metas", mint.key.as_ref(), &[bump]]],
     )?;
-    ExtraAccountMetaList::init::<ExecuteInstruction>(&mut validation.try_borrow_mut_data()?, &[])?;
+    ExtraAccountMetaList::init::<ExecuteInstruction>(
+        &mut validation.try_borrow_mut_data()?,
+        &[law_state_meta],
+    )?;
     Ok(())
 }
 
@@ -100,11 +105,13 @@ fn execute(program_id: &Pubkey, accounts: &[AccountInfo<'_>], amount: u64) -> Pr
     let destination = next_account_info(account_iter)?;
     let authority = next_account_info(account_iter)?;
     let validation = next_account_info(account_iter)?;
+    let law_state = next_account_info(account_iter)?;
     if source.owner != &TOKEN_2022_PROGRAM_ID
         || mint.owner != &TOKEN_2022_PROGRAM_ID
         || destination.owner != &TOKEN_2022_PROGRAM_ID
         || validation.owner != program_id
         || validation.key != &get_extra_account_metas_address(mint.key, program_id)
+        || law_state.key != &LAW_STATE_ADDRESS
     {
         return Err(RehearsalHookError::InvalidAccount.into());
     }

@@ -101,6 +101,11 @@ jobs:
             --locked \
             --force \
             anchor-cli
+          cargo +1.97.1 install \
+            --version 5.5.0 \
+            --locked \
+            --force \
+            spl-token-cli
           {
             echo "$HOME/.local/share/solana/install/active_release/bin"
             echo "$HOME/.cargo/bin"
@@ -132,6 +137,8 @@ jobs:
         run: |
           npm ci --ignore-scripts --no-audit --no-fund
           bash scripts/run-iat-b3-account-lifecycle-local.sh
+      - name: Rehearse B3 production-source Token-2022 stake ingress on an isolated local validator
+        run: bash scripts/run-iat-b3-stake-ingress-local-rehearsal.sh
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: iat-v2-b3-verifiable-sbf

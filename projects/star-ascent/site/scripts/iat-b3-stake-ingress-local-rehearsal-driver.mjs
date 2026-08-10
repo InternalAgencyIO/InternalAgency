@@ -22,6 +22,7 @@ import {
 const SCHEMA = "iat-b3-stake-ingress-local-validator/v1";
 const ECONOMY_PROGRAM_ID = new PublicKey("GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU");
 const HOOK_PROGRAM_ID = new PublicKey("DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F");
+const LAW_STATE_ADDRESS = new PublicKey(new Uint8Array(32).fill(0xa7));
 const DECIMALS = 9;
 
 function parseArgs(argv) {
@@ -152,6 +153,7 @@ function economyInstruction({
       { pubkey: TOKEN_2022_PROGRAM_ID, isSigner: false, isWritable: false },
       { pubkey: HOOK_PROGRAM_ID, isSigner: false, isWritable: false },
       { pubkey: validation, isSigner: false, isWritable: false },
+      { pubkey: LAW_STATE_ADDRESS, isSigner: false, isWritable: false },
     ],
     data: Buffer.concat([Buffer.from([1, mode]), u64le(amount)]),
   });
@@ -255,6 +257,11 @@ async function main() {
     validation,
     1n,
   );
+  directExecute.keys.push({
+    pubkey: LAW_STATE_ADDRESS,
+    isSigner: false,
+    isWritable: false,
+  });
   const directHookFailure = await expectFailure(
     connection,
     "direct hook invocation without Token-2022 transfer context",
@@ -488,6 +495,8 @@ async function main() {
         balancesAndDelegateUnchanged: true,
       },
       hookAuthorityObservedNonSigner: true,
+      dailyLawAccountResolvedThroughHookValidation: LAW_STATE_ADDRESS.toBase58(),
+      productionSourceExecutorInvoked: true,
       exactDelegateConsumptionAndAutoClear: true,
       exactPriorDelegateRestoration: true,
       noDelegateSuccess: noDelegateSuccess.signature,

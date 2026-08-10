@@ -1,0 +1,86 @@
+{
+  "schema": "iat-b3-stake-ingress-production-executor-local-validator/v1",
+  "status": "PASS",
+  "recordedAt": "2026-08-10T17:23:33.4522966Z",
+  "scope": {
+    "rpc": "http://127.0.0.1:18999",
+    "rpcScope": "loopback-only",
+    "publicNetworkWrites": false,
+    "productionDeployments": false,
+    "fixtureProgramsAreProductionCandidates": false
+  },
+  "toolchain": {
+    "agaveCli": "3.1.10",
+    "solanaTestValidator": "3.1.10",
+    "cargoBuildSbf": "3.1.10",
+    "splTokenCli": "5.5.0",
+    "node": "24.14.0",
+    "splToken2022Interface": "2.1.0",
+    "splTransferHookInterface": "2.1.0"
+  },
+  "productionExecutor": {
+    "source": "programs/iat_b3_economy/src/stake_ingress_runtime.rs",
+    "sourceSha256": "ca1f0e8be58712e1c2dc69f35c2059a60683d4ab9397e45dd2bfa10940054fe6",
+    "feature": "runtime-token-2022-stake-ingress",
+    "publicEntrypoint": false,
+    "instructionAbiFrozen": false,
+    "productionIdentitiesFrozen": false,
+    "retainedV2PostCpiPersistenceComplete": false,
+    "v2EconomicMathChanged": false,
+    "dailyLawCapabilityReauthenticated": false,
+    "canonicalConfidentialMintPolicyReauthenticated": false,
+    "mainnetStatus": "HOLD"
+  },
+  "fixture": {
+    "productionCandidate": false,
+    "economy": {
+      "programId": "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
+      "bytes": 155296,
+      "sha256": "2906d94b02919609ebb9200a128a9e004ecab656a27fa83a34fa1e2710cf578d",
+      "sourceSha256": "62370d55838ce64ed3b1bd4550d73e8b9cdede726ed31cf7029e51d3402ccdf9"
+    },
+    "hook": {
+      "programId": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F",
+      "bytes": 85280,
+      "sha256": "a16defa230a7b5e525a04a660875f464df25bd9a0b5d04536e52710031c5d9d2",
+      "sourceSha256": "4a7f1e42fb5817405073e3c0b6e5354925a1f9d27e1cf6572b5c1f5b14af3d3d"
+    },
+    "cargoLockSha256": "d9786790367cbccb8360dd0c8f44bf3f4324190edb30840c5d9edf6f48d4ff67",
+    "runnerSha256": "7fd853b865b365790575d25bedb5ce8d3d5842875e8443a55c439d677de49ddb",
+    "driverSha256": "485e859f17cc2c21ba69131101e1c68d17234a6cfe9932df72f74dc275ac9913"
+  },
+  "observed": {
+    "productionSourceExecutorInvoked": true,
+    "ownerSignedExactApproveCheckedCpi": true,
+    "canonicalIngressPdaDerivedAndInvokeSigned": true,
+    "transferHookExtraAccountsResolvedFromTlv": true,
+    "dailyLawAddressForwardedThroughHookValidation": true,
+    "dailyLawOpenDecisionAuthenticatedByThisFixture": false,
+    "exactApprovalReload": true,
+    "exactTransferBalanceReload": true,
+    "exactTemporaryDelegateConsumption": true,
+    "exactPriorDelegateRestorationReload": true,
+    "fundedStatelessIngressPdaCouldNotGriefEitherSuccessPath": true,
+    "directHookInvocationRejectedOutsideToken2022Context": true,
+    "directStakeVaultDonationRejected": true,
+    "hookFailureRolledBackApproval": true,
+    "postTransferPersistenceCallbackFailureRolledBackApprovalAndTransfer": true,
+    "postCompletionCpiFailureRolledBackFullExecutorSequence": true,
+    "cpiGuardRejectedBeforeMutation": true
+  },
+  "cleanup": {
+    "temporaryLedgerRemoved": true,
+    "generatedKeyMaterialRemoved": true,
+    "validatorStopped": true,
+    "publicNetworkWrites": false
+  },
+  "limits": {
+    "combinedDailyLawDecisionAndStakeIngressHookProven": false,
+    "productionEconomyEntrypointProven": false,
+    "productionIdentitiesFrozen": false,
+    "retainedV2PostCpiPersistenceComplete": false,
+    "fullFeatureDevnetRehearsalComplete": false,
+    "mainnetAuthorization": false,
+    "remainingGate": "Bind the exact production Daily Law decision account and frozen identities, apply the retained pure post-CPI finalizer through strict Config/Position/Lane codecs, seal the public handler ABI, and repeat the complete rollback matrix on Devnet."
+  }
+}
