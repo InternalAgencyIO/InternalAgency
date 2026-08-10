@@ -331,7 +331,7 @@ test("finalization requires exact finalized deltas and a fresh PositionWeekAlrea
     replayTransaction: replay,
     replaySimulation: {
       contextSlot: 106,
-      err: { InstructionError: [0, { Custom: 6_041 }] },
+      err: { InstructionError: [0, { Custom: 6_040 }] },
       messageSha256: await sha256Hex(replay.serializeMessage()),
       recentBlockhash: REPLAY_BLOCKHASH,
       replaceRecentBlockhash: false,
@@ -343,7 +343,7 @@ test("finalization requires exact finalized deltas and a fresh PositionWeekAlrea
   assert.equal(result.status, "FINALIZED_AND_REPLAY_REJECTED");
   assert.equal(result.expectedRewardBaseUnits, 19_230_769n);
   assert.equal(result.resultingSettledMask, 3n);
-  assert.equal(result.replayCustomError, 6_041);
+  assert.equal(result.replayCustomError, 6_040);
   assert.equal(result.localBroadcastReceiptCount, 1);
 });
 
@@ -369,7 +369,7 @@ test("finalization fails closed on non-finality, wrong deltas, wrong chain messa
     replayTransaction: replay,
     replaySimulation: {
       contextSlot: 106,
-      err: { InstructionError: [0, { Custom: 6_041 }] },
+      err: { InstructionError: [0, { Custom: 6_040 }] },
       messageSha256: await sha256Hex(replay.serializeMessage()),
       recentBlockhash: REPLAY_BLOCKHASH,
       replaceRecentBlockhash: false,
@@ -386,7 +386,7 @@ test("finalization fails closed on non-finality, wrong deltas, wrong chain messa
     ["wrong returned signature", (value) => { value.transactionResult.signature = `${SIGNATURE.slice(0, -1)}1`; }],
     ["second local broadcast receipt", (value) => { value.localBroadcastReceipts.push({ method: "sendRawTransaction", signature: SIGNATURE }); }],
     ["wrong post-state delta", (value) => { value.postState.position.settledMask = 1n; }],
-    ["wrong replay error", (value) => { value.replaySimulation.err.InstructionError[1].Custom = 6_040; }],
+    ["wrong replay error", (value) => { value.replaySimulation.err.InstructionError[1].Custom = 6_041; }],
     ["missing replay log", (value) => { value.replaySimulation.logs = []; }],
     ["replay altered state", (value) => { value.replaySimulation.postState.tokenBalances.destination += 1n; }],
   ];

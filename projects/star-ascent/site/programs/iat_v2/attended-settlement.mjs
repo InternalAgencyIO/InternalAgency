@@ -30,7 +30,9 @@ export const IAT_V2_WEEK9_STANDARD_SETTLEMENT = Object.freeze({
   tokenProgram: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
   instructionDataHex: "f6bed573577c803f0900000000000000",
   expectedFeeLamports: 5_000n,
-  replayCustomError: 6_041,
+  // The attended path is pinned to the deployed 634d artifact, whose
+  // PositionWeekAlreadySettled Anchor error number is 6040.
+  replayCustomError: 6_040,
 });
 
 export const IAT_V2_WEEK9_STANDARD_ACCOUNT_METAS = Object.freeze([
