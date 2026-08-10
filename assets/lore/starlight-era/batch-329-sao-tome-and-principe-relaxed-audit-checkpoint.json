@@ -1,0 +1,1449 @@
+{
+  "batch": 329,
+  "country": "São Tomé and Príncipe",
+  "status": "terminal-partially-accepted-three",
+  "sourceCommit": "52342369b4652f2e4104a0dacac9e38dd8d1471f",
+  "contractSha256": "3EDBDA128DD8F8FA733B6B761ECBFC1E9F56445D091FBBF7DA1495A485BEF210",
+  "rollMethod": "FNV-1a over the recorded batch329-sao-tome-and-principe keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "themePair": [
+    "doctor-clinical-command couture",
+    "adult nightlife dance-performance couture"
+  ],
+  "nextThemePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "nextQueueCountry": "Samoa",
+  "nextQueueBatch": 330,
+  "nextQueueScenes": [
+    1340,
+    1341,
+    1342,
+    1343
+  ],
+  "researchSources": [
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/6251/",
+      "usedFor": "São Tomé and Príncipe's volcanic-island geology, Obô rainforest, and Pico Cão Grande landscape"
+    },
+    {
+      "url": "https://www.unesco.org/en/mab/island-principe",
+      "usedFor": "Príncipe's rainforest, coastal conservation, beaches, headlands, reefs, and biosphere context"
+    },
+    {
+      "url": "https://visitsaotomeprincipe.st/",
+      "usedFor": "Ana Chaves Bay, cocoa-estate agricultural heritage, and Praia Banana public landscape cues"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch329-sao-tome-and-principe-male-model-scene",
+    "fullHash": 772155319,
+    "roll": 19,
+    "selectedScenePosition": 4,
+    "selectedScene": 1339,
+    "maleEmotion": {
+      "key": "batch329-sao-tome-and-principe-scene4-male-emotion",
+      "roll": 91,
+      "result": "anger"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal São Tomé and Príncipe flag, coat of arms, official emblem, sacred symbol, or religious building is copied. Large researched secular island, volcanic needle, rainforest, cocoa-pod, bay, beach, headland, reef, cloud, and route compositions replace them.",
+    "palette": "rainforest emerald, cocoa brown, volcanic black, Atlantic blue, coral red, cacao gold, cloud white, basalt gray, orchid magenta, and seafoam turquoise",
+    "minimumCoverage": "Every image carries large complete secular São Tomé and Príncipe compositions across at least two outfits as dominant full bodice, skirt, hip, or panel fields.",
+    "cultureScene": "The scenes foreground Ana Chaves Bay, Pico Cão Grande and Obô, cocoa-estate agricultural heritage, and Praia Banana on Príncipe.",
+    "prohibitions": "Use respectful secular São Tomé and Príncipe island outlines, Pico Cão Grande needle silhouettes, volcanic ridges, rainforest bands, cocoa-pod contours, beach crescents, reef shelves, waterfall ribbons, equator lines, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch329-sao-tome-and-principe-x-heart",
+      "roll": 16,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch329-sao-tome-and-principe-x-internalagency",
+      "roll": 94,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch329-sao-tome-and-principe-x-worldxxxseries",
+      "roll": 1,
+      "active": true
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two São Tomé and Príncipe images plus one accepted Barbados image",
+    "captionIfEligible": "São Tomé and Príncipe ❤️ Barbados #SaoTomeAndPrincipe #WorldXXXSeries",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": true
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1339 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1339 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch329-sao-tome-and-principe-male-model-scene",
+        19
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene4-male-emotion",
+        91
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-weather",
+        93
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-paws",
+        98
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-poleDanceTheme",
+        17
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-rainbowOnly",
+        65
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-rainbowHosiery",
+        16
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-romanceBeat",
+        92
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-compoundLoveBeat",
+        6
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-eceMissionProp-poseTargetRoll",
+        7
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Radiance-emotion",
+        86
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Radiance-visibleMidriff",
+        60
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Radiance-straplessDress",
+        47
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Radiance-fullyOpenBack",
+        92
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Ellie-emotion",
+        32
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Ellie-visibleMidriff",
+        6
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Ellie-straplessDress",
+        53
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Ellie-fullyOpenBack",
+        46
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Alia-emotion",
+        48
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Alia-visibleMidriff",
+        14
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Alia-straplessDress",
+        61
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-Alia-fullyOpenBack",
+        66
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-AI ECE-emotion",
+        54
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-AI ECE-visibleMidriff",
+        8
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-AI ECE-straplessDress",
+        55
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-AI ECE-fullyOpenBack",
+        72
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-weather",
+        50
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-paws",
+        19
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-poleDanceTheme",
+        0
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-rainbowOnly",
+        86
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-rainbowHosiery",
+        61
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-romanceBeat",
+        19
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-compoundLoveBeat",
+        79
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-eceMissionProp-poseTargetRoll",
+        80
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Radiance-emotion",
+        3
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Radiance-visibleMidriff",
+        87
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Radiance-straplessDress",
+        68
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Radiance-fullyOpenBack",
+        37
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Ellie-emotion",
+        79
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Ellie-visibleMidriff",
+        15
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Ellie-straplessDress",
+        0
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Ellie-fullyOpenBack",
+        29
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Alia-emotion",
+        13
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Alia-visibleMidriff",
+        65
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Alia-straplessDress",
+        18
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-Alia-fullyOpenBack",
+        35
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-AI ECE-emotion",
+        35
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-AI ECE-visibleMidriff",
+        67
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-AI ECE-straplessDress",
+        88
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-AI ECE-fullyOpenBack",
+        89
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-weather",
+        35
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-paws",
+        92
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-poleDanceTheme",
+        71
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-rainbowOnly",
+        27
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-rainbowHosiery",
+        22
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-romanceBeat",
+        6
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-compoundLoveBeat",
+        96
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-eceMissionProp-poseTargetRoll",
+        17
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Radiance-emotion",
+        88
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Radiance-visibleMidriff",
+        10
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Radiance-straplessDress",
+        97
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Radiance-fullyOpenBack",
+        34
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Ellie-emotion",
+        66
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Ellie-visibleMidriff",
+        12
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Ellie-straplessDress",
+        87
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Ellie-fullyOpenBack",
+        48
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Alia-emotion",
+        94
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Alia-visibleMidriff",
+        56
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Alia-straplessDress",
+        31
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-Alia-fullyOpenBack",
+        76
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-AI ECE-emotion",
+        92
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-AI ECE-visibleMidriff",
+        98
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-AI ECE-straplessDress",
+        93
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-AI ECE-fullyOpenBack",
+        2
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-weather",
+        72
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-paws",
+        85
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-poleDanceTheme",
+        58
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-rainbowOnly",
+        12
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-rainbowHosiery",
+        35
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-romanceBeat",
+        89
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-compoundLoveBeat",
+        1
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-eceMissionProp-poseTargetRoll",
+        10
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Radiance-emotion",
+        53
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Radiance-visibleMidriff",
+        53
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Radiance-straplessDress",
+        70
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Radiance-fullyOpenBack",
+        35
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Ellie-emotion",
+        21
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Ellie-visibleMidriff",
+        9
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Ellie-straplessDress",
+        82
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Ellie-fullyOpenBack",
+        87
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Alia-emotion",
+        71
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Alia-visibleMidriff",
+        39
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Alia-straplessDress",
+        76
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-Alia-fullyOpenBack",
+        9
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-AI ECE-emotion",
+        77
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-AI ECE-visibleMidriff",
+        93
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-AI ECE-straplessDress",
+        34
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-AI ECE-fullyOpenBack",
+        15
+      ],
+      [
+        "batch329-sao-tome-and-principe-x-heart",
+        16
+      ],
+      [
+        "batch329-sao-tome-and-principe-x-internalagency",
+        94
+      ],
+      [
+        "batch329-sao-tome-and-principe-x-worldxxxseries",
+        1
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch329-sao-tome-and-principe-scene1336-rainbowHosieryWearer",
+        68
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1336-rainbowHosieryPaletteMode",
+        40
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-rainbowHosieryWearer",
+        77
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1337-rainbowHosieryPaletteMode",
+        95
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-rainbowHosieryWearer",
+        82
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1338-rainbowHosieryPaletteMode",
+        98
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-rainbowHosieryWearer",
+        99
+      ],
+      [
+        "batch329-sao-tome-and-principe-scene1339-rainbowHosieryPaletteMode",
+        57
+      ]
+    ],
+    "primaryPairCount": 101,
+    "selectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "F23F16A7FD39787F4BD986371D8B16B9A81BA64726D56AC8FDDEE1D5FE2F6BAC",
+    "selectorPairsSha256": "3BBCC1078EBF79BF07CDE125089E43201674EB5A60A508A331EFAF0701044782"
+  },
+  "scenePlans": {
+    "1336": {
+      "scene": 1336,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry covered civic-waterfront overlook above São Tomé city's Ana Chaves Bay, with the complete bay crescent, Pico de São Tomé ridgeline, palm-lined shore, coral-stone quay geometry, empty marina reach, green hills, and layered Atlantic clouds",
+      "motifs": "complete São Tomé island outline, Ana Chaves Bay crescent, Pico ridgeline, palm-shore rhythm, coral-stone quay grid, cocoa-pod contour, Atlantic current arc, and route-grid compositions",
+      "culture": "São Tomé is presented through secular civic waterfront geography, Ana Chaves Bay, volcanic ridges, palm-lined shores, coral-stone quay geometry, cocoa ecology, and an empty public overlook. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch329-sao-tome-and-principe-scene1336-weather",
+        "roll": 93,
+        "result": "distant waterspout over open water",
+        "materialized": "distant waterspout over open water"
+      },
+      "paws": {
+        "key": "batch329-sao-tome-and-principe-scene1336-paws",
+        "roll": 98,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch329-sao-tome-and-principe-scene1336-poleDanceTheme",
+        "roll": 17,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch329-sao-tome-and-principe-scene1336-rainbowOnly",
+        "roll": 65,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch329-sao-tome-and-principe-scene1336-rainbowHosiery",
+        "roll": 16,
+        "active": true,
+        "wearer": {
+          "key": "batch329-sao-tome-and-principe-scene1336-rainbowHosieryWearer",
+          "roll": 68,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch329-sao-tome-and-principe-scene1336-rainbowHosieryPaletteMode",
+          "roll": 40,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch329-sao-tome-and-principe-scene1336-eceMissionProp-poseTargetRoll",
+        "roll": 7
+      },
+      "materializedPropAction": "Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete thick basalt-and-coral-sand safety backstop on a closed empty harbor-training lane, with no person, animal, vehicle, marina, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete thick basalt-and-coral-sand safety backstop on a closed empty harbor-training lane, with no person, animal, vehicle, marina, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch329-sao-tome-and-principe-scene1336-romanceBeat",
+        "roll": 92,
+        "dynamicIndex": 8,
+        "contractResult": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch329-sao-tome-and-principe-scene1336-compoundLoveBeat",
+        "roll": 6,
+        "index": 6,
+        "contractResult": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Radiance-emotion",
+            "roll": 86,
+            "result": "full sobbing with tear-streaked face and shaking posture",
+            "materializedResult": "full sobbing with tear-streaked face and shaking posture",
+            "performance": "full sobbing with tear-streaked face and shaking posture expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Radiance-visibleMidriff",
+            "roll": 60,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Radiance-straplessDress",
+            "roll": 47,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Radiance-fullyOpenBack",
+            "roll": 92,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Ellie-emotion",
+            "roll": 32,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Ellie-visibleMidriff",
+            "roll": 6,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Ellie-straplessDress",
+            "roll": 53,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Ellie-fullyOpenBack",
+            "roll": 46,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Alia-emotion",
+            "roll": 48,
+            "result": "startled surprise",
+            "materializedResult": "startled surprise",
+            "performance": "startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Alia-visibleMidriff",
+            "roll": 14,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Alia-straplessDress",
+            "roll": 61,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1336-Alia-fullyOpenBack",
+            "roll": 66,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1336-AI ECE-emotion",
+            "roll": 54,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1336-AI ECE-visibleMidriff",
+            "roll": 8,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1336-AI ECE-straplessDress",
+            "roll": 55,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1336-AI ECE-fullyOpenBack",
+            "roll": 72,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "full sobbing with tear-streaked face and shaking posture expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise doctor-clinical-command couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Ana Chaves Bay crescent, Pico ridgeline, palm-shore rhythm, coral-stone quay grid, cocoa-pod contour, Atlantic current arc, and route-grid compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Ana Chaves Bay crescent, Pico ridgeline, palm-shore rhythm, coral-stone quay grid, cocoa-pod contour, Atlantic current arc, and route-grid compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Ana Chaves Bay crescent, Pico ridgeline, palm-shore rhythm, coral-stone quay grid, cocoa-pod contour, Atlantic current arc, and route-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Ana Chaves Bay crescent, Pico ridgeline, palm-shore rhythm, coral-stone quay grid, cocoa-pod contour, Atlantic current arc, and route-grid compositions field, and secure contrasting high heels"
+      },
+      "composition": "Alia stands far left with the rolled target clearly downrange farther left. The remaining adults move through a close affectionate command arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, bay, hill, palm, quay, shelter, or railing gaps.",
+      "handInventory": [
+        "Alia uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+        "Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder",
+        "ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered civic-waterfront overlook above São Tomé city's Ana Chaves Bay, with the complete bay crescent, Pico de São Tomé ridgeline, palm-lined shore, coral-stone quay geometry, empty marina reach, green hills, and layered Atlantic clouds. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: doctor-clinical-command couture, only as original public-safe fictional fashion. São Tomé is presented through secular civic waterfront geography, Ana Chaves Bay, volcanic ridges, palm-lined shores, coral-stone quay geometry, cocoa ecology, and an empty public overlook. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care. Stored scene rolls: weather 93=distant waterspout over open water; PAWS 98=inactive; pole 17=inactive; rainbow-only 65=inactive; rainbow hosiery 16=active; wearer 68=AI ECE; palette 40=country-palette rainbow-like gradient; romance 92; compound 6; mission-prop pose/target 7. Exact wardrobe rolls: Radiance: midriff 60=covered, strapless 47=inactive, open back 92=inactive; Ellie: midriff 6=visible, strapless 53=inactive, open back 46=inactive; Alia: midriff 14=visible, strapless 61=inactive, open back 66=inactive; AI ECE: midriff 8=visible, strapless 55=inactive, open back 72=inactive. Exact outfits: Radiance: Pacific turquoise doctor-clinical-command couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Ana Chaves Bay crescent, Pico ridgeline, palm-shore rhythm, coral-stone quay grid, cocoa-pod contour, Atlantic current arc, and route-grid compositions field, and secure contrasting high heels; Ellie: coral magenta doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Ana Chaves Bay crescent, Pico ridgeline, palm-shore rhythm, coral-stone quay grid, cocoa-pod contour, Atlantic current arc, and route-grid compositions field, and secure contrasting high heels; Alia: rainforest emerald doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Ana Chaves Bay crescent, Pico ridgeline, palm-shore rhythm, coral-stone quay grid, cocoa-pod contour, Atlantic current arc, and route-grid compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Ana Chaves Bay crescent, Pico ridgeline, palm-shore rhythm, coral-stone quay grid, cocoa-pod contour, Atlantic current arc, and route-grid compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular São Tomé and Príncipe motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete São Tomé island outline, Ana Chaves Bay crescent, Pico ridgeline, palm-shore rhythm, coral-stone quay grid, cocoa-pod contour, Atlantic current arc, and route-grid compositions. Use respectful secular São Tomé and Príncipe island outlines, Pico Cão Grande needle silhouettes, volcanic ridges, rainforest bands, cocoa-pod contours, beach crescents, reef shelves, waterfall ribbons, equator lines, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 86=full sobbing with tear-streaked face and shaking posture, performed as full sobbing with tear-streaked face and shaking posture expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 32=overwhelming relief, performed as overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 48=startled surprise, performed as startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 54=aching romantic longing, performed as aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 92: Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist. Compound roll 6: Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. Alia stands far left with the rolled target clearly downrange farther left. The remaining adults move through a close affectionate command arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, bay, hill, palm, quay, shelter, or railing gaps. Exact hand inventory, no others: Alia uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm; Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder; ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete thick basalt-and-coral-sand safety backstop on a closed empty harbor-training lane, with no person, animal, vehicle, marina, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render distant waterspout over open water cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1337": {
+      "scene": 1337,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry covered geological overlook facing Pico Cão Grande in Obô Natural Park, with the complete volcanic needle, rainforest canopy, mist layers, fern bands, basalt ridges, and an empty protected observation path",
+      "motifs": "complete São Tomé island outline, Pico Cão Grande needle, rainforest canopy, fern spiral, basalt ridge, mist veil, cocoa-pod contour, and route-grid compositions",
+      "culture": "Pico Cão Grande and Obô are presented through secular volcanic geology, rainforest conservation, fern bands, basalt ridges, cocoa ecology, mist layers, and an empty protected overlook. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch329-sao-tome-and-principe-scene1337-weather",
+        "roll": 50,
+        "result": "active lightning storm with distant bolts",
+        "materialized": "active lightning storm with distant bolts"
+      },
+      "paws": {
+        "key": "batch329-sao-tome-and-principe-scene1337-paws",
+        "roll": 19,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch329-sao-tome-and-principe-scene1337-poleDanceTheme",
+        "roll": 0,
+        "active": true
+      },
+      "rainbowOnly": {
+        "key": "batch329-sao-tome-and-principe-scene1337-rainbowOnly",
+        "roll": 86,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch329-sao-tome-and-principe-scene1337-rainbowHosiery",
+        "roll": 61,
+        "active": false,
+        "wearer": {
+          "key": "batch329-sao-tome-and-principe-scene1337-rainbowHosieryWearer",
+          "roll": 77,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch329-sao-tome-and-principe-scene1337-rainbowHosieryPaletteMode",
+          "roll": 95,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch329-sao-tome-and-principe-scene1337-eceMissionProp-poseTargetRoll",
+        "roll": 80
+      },
+      "materializedPropAction": "A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one distant clearly empty freestanding navigation marker in an unoccupied broad basalt route corridor away from the volcanic needle and forest, with no person, animal, trail user, vegetation, occupied structure, or conservation feature anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one distant clearly empty freestanding navigation marker in an unoccupied broad basalt route corridor away from the volcanic needle and forest, with no person, animal, trail user, vegetation, occupied structure, or conservation feature anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch329-sao-tome-and-principe-scene1337-romanceBeat",
+        "roll": 19,
+        "dynamicIndex": 7,
+        "contractResult": "Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy."
+      },
+      "compoundLoveBeat": {
+        "key": "batch329-sao-tome-and-principe-scene1337-compoundLoveBeat",
+        "roll": 79,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Radiance-emotion",
+            "roll": 3,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Radiance-visibleMidriff",
+            "roll": 87,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Radiance-straplessDress",
+            "roll": 68,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Radiance-fullyOpenBack",
+            "roll": 37,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Ellie-emotion",
+            "roll": 79,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Ellie-visibleMidriff",
+            "roll": 15,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Ellie-straplessDress",
+            "roll": 0,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Ellie-fullyOpenBack",
+            "roll": 29,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Alia-emotion",
+            "roll": 13,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Alia-visibleMidriff",
+            "roll": 65,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Alia-straplessDress",
+            "roll": 18,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1337-Alia-fullyOpenBack",
+            "roll": 35,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1337-AI ECE-emotion",
+            "roll": 35,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1337-AI ECE-visibleMidriff",
+            "roll": 67,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1337-AI ECE-straplessDress",
+            "roll": 88,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1337-AI ECE-fullyOpenBack",
+            "roll": 89,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "magnetic confidence expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise doctor-clinical-command couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Pico Cão Grande needle, rainforest canopy, fern spiral, basalt ridge, mist veil, cocoa-pod contour, and route-grid compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta doctor-clinical-command couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Pico Cão Grande needle, rainforest canopy, fern spiral, basalt ridge, mist veil, cocoa-pod contour, and route-grid compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald doctor-clinical-command couture sculpted panel dress with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Pico Cão Grande needle, rainforest canopy, fern spiral, basalt ridge, mist veil, cocoa-pod contour, and route-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Pico Cão Grande needle, rainforest canopy, fern spiral, basalt ridge, mist veil, cocoa-pod contour, and route-grid compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning affectionate triangle to the right beneath the shelter, every arm separated by sky, needle, mist, rainforest, basalt, shelter, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Alia's near shoulder",
+        "Radiance left hand rests on Ellie's near forearm and Radiance right hand rests on Alia's near forearm",
+        "Alia left hand rests on Radiance's near shoulder and Alia right hand rests on Ellie's near forearm"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing.",
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered geological overlook facing Pico Cão Grande in Obô Natural Park, with the complete volcanic needle, rainforest canopy, mist layers, fern bands, basalt ridges, and an empty protected observation path. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: doctor-clinical-command couture, only as original public-safe fictional fashion. Pico Cão Grande and Obô are presented through secular volcanic geology, rainforest conservation, fern bands, basalt ridges, cocoa ecology, mist layers, and an empty protected overlook. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care. Stored scene rolls: weather 50=active lightning storm with distant bolts; PAWS 19=active; pole 0=active; rainbow-only 86=inactive; rainbow hosiery 61=inactive; wearer 77=AI ECE; palette 95=original independent rainbow gradient; romance 19; compound 79; mission-prop pose/target 80. Exact wardrobe rolls: Radiance: midriff 87=covered, strapless 68=inactive, open back 37=inactive; Ellie: midriff 15=visible, strapless 0=active, open back 29=active; Alia: midriff 65=covered, strapless 18=active, open back 35=inactive; AI ECE: midriff 67=covered, strapless 88=inactive, open back 89=inactive. Exact outfits: Radiance: Pacific turquoise doctor-clinical-command couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Pico Cão Grande needle, rainforest canopy, fern spiral, basalt ridge, mist veil, cocoa-pod contour, and route-grid compositions field, and secure contrasting high heels; Ellie: coral magenta doctor-clinical-command couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Pico Cão Grande needle, rainforest canopy, fern spiral, basalt ridge, mist veil, cocoa-pod contour, and route-grid compositions field, and secure contrasting high heels; Alia: rainforest emerald doctor-clinical-command couture sculpted panel dress with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Pico Cão Grande needle, rainforest canopy, fern spiral, basalt ridge, mist veil, cocoa-pod contour, and route-grid compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, Pico Cão Grande needle, rainforest canopy, fern spiral, basalt ridge, mist veil, cocoa-pod contour, and route-grid compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular São Tomé and Príncipe motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete São Tomé island outline, Pico Cão Grande needle, rainforest canopy, fern spiral, basalt ridge, mist veil, cocoa-pod contour, and route-grid compositions. Use respectful secular São Tomé and Príncipe island outlines, Pico Cão Grande needle silhouettes, volcanic ridges, rainforest bands, cocoa-pod contours, beach crescents, reef shelves, waterfall ribbons, equator lines, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 3=tender affection, performed as tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 79=deep sadness, performed as deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 13=romantic joy, performed as romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 35=magnetic confidence, performed as magnetic confidence expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 19: Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy. Compound roll 79: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning affectionate triangle to the right beneath the shelter, every arm separated by sky, needle, mist, rainforest, basalt, shelter, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Alia's near shoulder; Radiance left hand rests on Ellie's near forearm and Radiance right hand rests on Alia's near forearm; Alia left hand rests on Radiance's near shoulder and Alia right hand rests on Ellie's near forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one distant clearly empty freestanding navigation marker in an unoccupied broad basalt route corridor away from the volcanic needle and forest, with no person, animal, trail user, vegetation, occupied structure, or conservation feature anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing. Pole theme is active only as a stationary public-safe fashion motif, with no dance, stripping, or suggestive performance. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render active lightning storm with distant bolts cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1338": {
+      "scene": 1338,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry covered cocoa-estate overlook at Roça São João dos Angolares, with a complete secular cocoa-drying courtyard, terraced tropical hills, cacao groves, an Atlantic glimpse, stone arcade geometry, empty service paths, and warm evening route lights",
+      "motifs": "complete São Tomé island outline, cocoa-pod clusters, drying-courtyard grid, cacao-leaf rhythm, hill terraces, Atlantic band, stone-arcade geometry, and evening route-light compositions",
+      "culture": "The estate is presented through secular agricultural heritage, cocoa ecology, drying-courtyard geometry, cacao groves, tropical hill terraces, stone arcades, and an empty public overlook. Adult nightlife dance-performance couture is public-safe fictional evening fashion expressed through still editorial movement only, with no stripping, explicit dance, nightclub, alcohol, copied uniform, badge, threat, or combat.",
+      "weather": {
+        "key": "batch329-sao-tome-and-principe-scene1338-weather",
+        "roll": 35,
+        "result": "heavy rain curtain",
+        "materialized": "heavy rain curtain"
+      },
+      "paws": {
+        "key": "batch329-sao-tome-and-principe-scene1338-paws",
+        "roll": 92,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch329-sao-tome-and-principe-scene1338-poleDanceTheme",
+        "roll": 71,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch329-sao-tome-and-principe-scene1338-rainbowOnly",
+        "roll": 27,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch329-sao-tome-and-principe-scene1338-rainbowHosiery",
+        "roll": 22,
+        "active": true,
+        "wearer": {
+          "key": "batch329-sao-tome-and-principe-scene1338-rainbowHosieryWearer",
+          "roll": 82,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch329-sao-tome-and-principe-scene1338-rainbowHosieryPaletteMode",
+          "roll": 98,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch329-sao-tome-and-principe-scene1338-eceMissionProp-poseTargetRoll",
+        "roll": 17
+      },
+      "materializedPropAction": "Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete thick sand-and-cocoa-husk safety backstop on a closed empty training lane, with no person, animal, tree, heritage structure, occupied path, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete thick sand-and-cocoa-husk safety backstop on a closed empty training lane, with no person, animal, tree, heritage structure, occupied path, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch329-sao-tome-and-principe-scene1338-romanceBeat",
+        "roll": 6,
+        "dynamicIndex": 6,
+        "contractResult": "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch329-sao-tome-and-principe-scene1338-compoundLoveBeat",
+        "roll": 96,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Radiance-emotion",
+            "roll": 88,
+            "result": "fear and urgent vulnerability",
+            "materializedResult": "fear and urgent vulnerability",
+            "performance": "fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Radiance-visibleMidriff",
+            "roll": 10,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Radiance-straplessDress",
+            "roll": 97,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Radiance-fullyOpenBack",
+            "roll": 34,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Ellie-emotion",
+            "roll": 66,
+            "result": "possessive tension",
+            "materializedResult": "possessive tension",
+            "performance": "possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Ellie-visibleMidriff",
+            "roll": 12,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Ellie-straplessDress",
+            "roll": 87,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Ellie-fullyOpenBack",
+            "roll": 48,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Alia-emotion",
+            "roll": 94,
+            "result": "shame and social vulnerability",
+            "materializedResult": "shame and social vulnerability",
+            "performance": "shame and social vulnerability expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Alia-visibleMidriff",
+            "roll": 56,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Alia-straplessDress",
+            "roll": 31,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1338-Alia-fullyOpenBack",
+            "roll": 76,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1338-AI ECE-emotion",
+            "roll": 92,
+            "result": "guilt and remorse",
+            "materializedResult": "guilt and remorse",
+            "performance": "guilt and remorse expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1338-AI ECE-visibleMidriff",
+            "roll": 98,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1338-AI ECE-straplessDress",
+            "roll": 93,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1338-AI ECE-fullyOpenBack",
+            "roll": 2,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "shame and social vulnerability expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "guilt and remorse expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, cocoa-pod clusters, drying-courtyard grid, cacao-leaf rhythm, hill terraces, Atlantic band, stone-arcade geometry, and evening route-light compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, cocoa-pod clusters, drying-courtyard grid, cacao-leaf rhythm, hill terraces, Atlantic band, stone-arcade geometry, and evening route-light compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald adult nightlife dance-performance couture sculpted panel dress with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, cocoa-pod clusters, drying-courtyard grid, cacao-leaf rhythm, hill terraces, Atlantic band, stone-arcade geometry, and evening route-light compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy adult nightlife dance-performance couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete São Tomé island outline, cocoa-pod clusters, drying-courtyard grid, cacao-leaf rhythm, hill terraces, Atlantic band, stone-arcade geometry, and evening route-light compositions field, and secure contrasting high heels"
+      },
+      "composition": "Alia stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate evening-performance arc to the right beneath the shelter, with every arm separated by sky, hill, grove, courtyard, arcade, shelter, or railing gaps.",
+      "handInventory": [
+        "Alia uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+        "Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder",
+        "ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered cocoa-estate overlook at Roça São João dos Angolares, with a complete secular cocoa-drying courtyard, terraced tropical hills, cacao groves, an Atlantic glimpse, stone arcade geometry, empty service paths, and warm evening route lights. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: adult nightlife dance-performance couture, only as original public-safe fictional fashion. The estate is presented through secular agricultural heritage, cocoa ecology, drying-courtyard geometry, cacao groves, tropical hill terraces, stone arcades, and an empty public overlook. Adult nightlife dance-performance couture is public-safe fictional evening fashion expressed through still editorial movement only, with no stripping, explicit dance, nightclub, alcohol, copied uniform, badge, threat, or combat. Stored scene rolls: weather 35=heavy rain curtain; PAWS 92=inactive; pole 71=inactive; rainbow-only 27=inactive; rainbow hosiery 22=active; wearer 82=AI ECE; palette 98=original independent rainbow gradient; romance 6; compound 96; mission-prop pose/target 17. Exact wardrobe rolls: Radiance: midriff 10=visible, strapless 97=inactive, open back 34=inactive; Ellie: midriff 12=visible, strapless 87=inactive, open back 48=inactive; Alia: midriff 56=covered, strapless 31=active, open back 76=inactive; AI ECE: midriff 98=covered, strapless 93=inactive, open back 2=active. Exact outfits: Radiance: Pacific turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, cocoa-pod clusters, drying-courtyard grid, cacao-leaf rhythm, hill terraces, Atlantic band, stone-arcade geometry, and evening route-light compositions field, and secure contrasting high heels; Ellie: coral magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, cocoa-pod clusters, drying-courtyard grid, cacao-leaf rhythm, hill terraces, Atlantic band, stone-arcade geometry, and evening route-light compositions field, and secure contrasting high heels; Alia: rainforest emerald adult nightlife dance-performance couture sculpted panel dress with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete São Tomé island outline, cocoa-pod clusters, drying-courtyard grid, cacao-leaf rhythm, hill terraces, Atlantic band, stone-arcade geometry, and evening route-light compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy adult nightlife dance-performance couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete São Tomé island outline, cocoa-pod clusters, drying-courtyard grid, cacao-leaf rhythm, hill terraces, Atlantic band, stone-arcade geometry, and evening route-light compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular São Tomé and Príncipe motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete São Tomé island outline, cocoa-pod clusters, drying-courtyard grid, cacao-leaf rhythm, hill terraces, Atlantic band, stone-arcade geometry, and evening route-light compositions. Use respectful secular São Tomé and Príncipe island outlines, Pico Cão Grande needle silhouettes, volcanic ridges, rainforest bands, cocoa-pod contours, beach crescents, reef shelves, waterfall ribbons, equator lines, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 88=fear and urgent vulnerability, performed as fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 66=possessive tension, performed as possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 94=shame and social vulnerability, performed as shame and social vulnerability expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 92=guilt and remorse, performed as guilt and remorse expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 6: ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile. Compound roll 96: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. Alia stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate evening-performance arc to the right beneath the shelter, with every arm separated by sky, hill, grove, courtyard, arcade, shelter, or railing gaps. Exact hand inventory, no others: Alia uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm; Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder; ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete thick sand-and-cocoa-husk safety backstop on a closed empty training lane, with no person, animal, tree, heritage structure, occupied path, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an original independent rainbow gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render heavy rain curtain cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1339": {
+      "scene": 1339,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry covered coastal overlook above Praia Banana on Príncipe, with the complete golden beach crescent, twin rocky headlands, turquoise bay, rainforest canopy, reef shelves, empty shore, and a distant tropical rain veil",
+      "motifs": "complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions",
+      "culture": "Príncipe is presented through secular coastal conservation, Praia Banana's beach crescent, rocky headlands, turquoise bay, reef shelves, rainforest canopy, tropical weather, and an empty public overlook. Adult nightlife dance-performance couture is public-safe fictional evening fashion expressed through still editorial movement only, with no stripping, explicit dance, nightclub, alcohol, copied uniform, badge, threat, or combat.",
+      "weather": {
+        "key": "batch329-sao-tome-and-principe-scene1339-weather",
+        "roll": 72,
+        "result": "red-gold dust storm",
+        "materialized": "red-gold dust storm"
+      },
+      "paws": {
+        "key": "batch329-sao-tome-and-principe-scene1339-paws",
+        "roll": 85,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch329-sao-tome-and-principe-scene1339-poleDanceTheme",
+        "roll": 58,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch329-sao-tome-and-principe-scene1339-rainbowOnly",
+        "roll": 12,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch329-sao-tome-and-principe-scene1339-rainbowHosiery",
+        "roll": 35,
+        "active": false,
+        "wearer": {
+          "key": "batch329-sao-tome-and-principe-scene1339-rainbowHosieryWearer",
+          "roll": 99,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch329-sao-tome-and-principe-scene1339-rainbowHosieryPaletteMode",
+          "roll": 57,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch329-sao-tome-and-principe-scene1339-eceMissionProp-poseTargetRoll",
+        "roll": 10
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete thick coral-sand-and-basalt safety backstop on a closed empty observation lane, with no person, animal, headland, reef, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete thick coral-sand-and-basalt safety backstop on a closed empty observation lane, with no person, animal, headland, reef, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch329-sao-tome-and-principe-scene1339-romanceBeat",
+        "roll": 89,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch329-sao-tome-and-principe-scene1339-compoundLoveBeat",
+        "roll": 1,
+        "index": 1,
+        "contractResult": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Radiance-emotion",
+            "roll": 53,
+            "result": "intense curiosity",
+            "materializedResult": "intense curiosity",
+            "performance": "intense curiosity expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Radiance-visibleMidriff",
+            "roll": 53,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Radiance-straplessDress",
+            "roll": 70,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Radiance-fullyOpenBack",
+            "roll": 35,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Ellie-emotion",
+            "roll": 21,
+            "result": "playful mischief",
+            "materializedResult": "playful mischief",
+            "performance": "playful mischief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Ellie-visibleMidriff",
+            "roll": 9,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Ellie-straplessDress",
+            "roll": 82,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Ellie-fullyOpenBack",
+            "roll": 87,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Alia-emotion",
+            "roll": 71,
+            "result": "suspicion",
+            "materializedResult": "suspicion",
+            "performance": "suspicion expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Alia-visibleMidriff",
+            "roll": 39,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Alia-straplessDress",
+            "roll": 76,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1339-Alia-fullyOpenBack",
+            "roll": 9,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch329-sao-tome-and-principe-scene1339-AI ECE-emotion",
+            "roll": 77,
+            "result": "contained resentment",
+            "materializedResult": "contained resentment",
+            "performance": "contained resentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch329-sao-tome-and-principe-scene1339-AI ECE-visibleMidriff",
+            "roll": 93,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch329-sao-tome-and-principe-scene1339-AI ECE-straplessDress",
+            "roll": 34,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch329-sao-tome-and-principe-scene1339-AI ECE-fullyOpenBack",
+            "roll": 15,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "intense curiosity expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "playful mischief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "suspicion expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "contained resentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald adult nightlife dance-performance couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy adult nightlife dance-performance couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions field, and secure contrasting high heels",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions field, fitted black jeans, and practical black boots"
+      },
+      "composition": "AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate evening-performance crescent to the right beneath the shelter, with every arm separated by sky, bay, beach, headland, reef, rainforest, shelter, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near shoulder",
+        "Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm",
+        "Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch329-sao-tome-and-principe-scene4-male-emotion",
+          "roll": 91,
+          "result": "anger"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry covered coastal overlook above Praia Banana on Príncipe, with the complete golden beach crescent, twin rocky headlands, turquoise bay, rainforest canopy, reef shelves, empty shore, and a distant tropical rain veil. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: adult nightlife dance-performance couture, only as original public-safe fictional fashion. Príncipe is presented through secular coastal conservation, Praia Banana's beach crescent, rocky headlands, turquoise bay, reef shelves, rainforest canopy, tropical weather, and an empty public overlook. Adult nightlife dance-performance couture is public-safe fictional evening fashion expressed through still editorial movement only, with no stripping, explicit dance, nightclub, alcohol, copied uniform, badge, threat, or combat. Stored scene rolls: weather 72=red-gold dust storm; PAWS 85=inactive; pole 58=inactive; rainbow-only 12=inactive; rainbow hosiery 35=inactive; wearer 99=AI ECE; palette 57=original independent rainbow gradient; romance 89; compound 1; mission-prop pose/target 10. Exact wardrobe rolls: Radiance: midriff 53=covered, strapless 70=inactive, open back 35=inactive; Ellie: midriff 9=visible, strapless 82=inactive, open back 87=inactive; Alia: midriff 39=visible, strapless 76=inactive, open back 9=active; AI ECE: midriff 93=covered, strapless 34=active, open back 15=active. Exact outfits: Radiance: Pacific turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions field, and secure contrasting high heels; Ellie: coral magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions field, and secure contrasting high heels; Alia: rainforest emerald adult nightlife dance-performance couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy adult nightlife dance-performance couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions field, and secure contrasting high heels; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions field, fitted black jeans, and practical black boots. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular São Tomé and Príncipe motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions. Use respectful secular São Tomé and Príncipe island outlines, Pico Cão Grande needle silhouettes, volcanic ridges, rainforest bands, cocoa-pod contours, beach crescents, reef shelves, waterfall ribbons, equator lines, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 53=intense curiosity, performed as intense curiosity expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 21=playful mischief, performed as playful mischief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 71=suspicion, performed as suspicion expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 77=contained resentment, performed as contained resentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 91=anger, performed as anger expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 89: Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder. Compound roll 1: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate evening-performance crescent to the right beneath the shelter, with every arm separated by sky, bay, beach, headland, reef, rainforest, shelter, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near shoulder; Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm; Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete thick coral-sand-and-basalt safety backstop on a closed empty observation lane, with no person, animal, headland, reef, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render red-gold dust storm cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": [
+    {
+      "scene": 1336,
+      "attempt": 1,
+      "source": "raw",
+      "result": "accepted",
+      "reasons": [
+        "four adults with traceable limb ownership and no extra, fused, floating, or duplicated anatomy",
+        "Alia alone handles the inert prop with an indexed trigger finger and visible empty geometric target line",
+        "ECE alone wears the rolled country-palette opaque rainbow knee socks",
+        "Radiance and ECE remain the affectionate center",
+        "Ana Chaves Bay, waterspout, complete heels, and large São Tomé motifs are visible"
+      ],
+      "asset": "assets/lore/starlight-era/1336-sao-tome-ana-chaves-bay-clinical-rainbow-target.png"
+    },
+    {
+      "scene": 1337,
+      "attempt": 1,
+      "source": "raw",
+      "result": "rejected-hard-gate",
+      "reasons": [
+        "rolled empty route marker was absent from the visible muzzle line",
+        "covered footing read wet rather than dry"
+      ],
+      "preservedAsset": "tmp/world-195x4/batch-329/raw/1337-sao-tome-pico-cao-grande-raw.png"
+    },
+    {
+      "scene": 1337,
+      "attempt": 2,
+      "source": "single-recovery-pass",
+      "result": "accepted",
+      "reasons": [
+        "four adults with traceable limb ownership and no extra, fused, floating, or duplicated anatomy",
+        "ECE alone handles the inert prop with an indexed trigger finger and a visible empty abstract route marker line",
+        "PAWS is securely held far from the prop and the stationary pole motif is harmless",
+        "Pico Cão Grande, lightning, complete heels, and large São Tomé motifs are visible"
+      ],
+      "asset": "assets/lore/starlight-era/1337-sao-tome-pico-cao-grande-clinical-marker-recovery.png"
+    },
+    {
+      "scene": 1338,
+      "attempt": 1,
+      "source": "raw",
+      "result": "rejected-hard-gate",
+      "reasons": [
+        "paper target used a person-shaped silhouette rather than an unoccupied geometric route marker",
+        "ECE's far-right shoe was cropped by the frame"
+      ],
+      "preservedAsset": "tmp/world-195x4/batch-329/raw/1338-sao-tome-cocoa-estate-raw.png"
+    },
+    {
+      "scene": 1338,
+      "attempt": 2,
+      "source": "single-recovery-pass",
+      "result": "accepted",
+      "reasons": [
+        "four adults with traceable limb ownership and no extra, fused, floating, or duplicated anatomy",
+        "Alia alone handles the inert prop with an indexed trigger finger at a visible abstract geometric route marker",
+        "ECE alone wears the rolled original-gradient opaque rainbow hosiery and both heels are fully framed",
+        "the covered stance remains stable despite minor rain sheen accepted under the practical threshold",
+        "cocoa-estate scenery and large São Tomé motifs are visible"
+      ],
+      "asset": "assets/lore/starlight-era/1338-sao-tome-cocoa-estate-nightlife-paper-target-recovery.png"
+    },
+    {
+      "scene": 1339,
+      "attempt": 1,
+      "source": "raw",
+      "result": "rejected-hard-gate",
+      "reasons": [
+        "adult male strongest eye line landed on the woman in red rather than ECE",
+        "central contact occlusion left some limb ownership too ambiguous for the male-scene gate"
+      ],
+      "preservedAsset": "tmp/world-195x4/batch-329/raw/1339-principe-praia-banana-male-raw.png"
+    },
+    {
+      "scene": 1339,
+      "attempt": 2,
+      "source": "single-recovery-pass",
+      "result": "terminal-rejected-renderer-block",
+      "reasons": [
+        "the single permitted recovery edit was attempted",
+        "the renderer blocked the output before a corrected asset was produced",
+        "the binding male eye-line and anatomy gates therefore remain unsatisfied"
+      ]
+    }
+  ],
+  "acceptedAssets": [
+    "assets/lore/starlight-era/1336-sao-tome-ana-chaves-bay-clinical-rainbow-target.png",
+    "assets/lore/starlight-era/1337-sao-tome-pico-cao-grande-clinical-marker-recovery.png",
+    "assets/lore/starlight-era/1338-sao-tome-cocoa-estate-nightlife-paper-target-recovery.png"
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1339,
+      "attemptsExhausted": true,
+      "assets": [
+        "tmp/world-195x4/batch-329/raw/1339-principe-praia-banana-male-raw.png"
+      ],
+      "terminalReason": "male strongest eye line remained away from ECE and recovery output was blocked"
+    }
+  ],
+  "xPost": {
+    "status": "pending-publication-after-push",
+    "caption": "São Tomé and Príncipe ❤️ Barbados #SaoTomeAndPrincipe #WorldXXXSeries",
+    "attachmentPolicy": "two accepted São Tomé and Príncipe images plus one accepted Barbados image",
+    "eligible": true,
+    "acceptedCurrentCountryCount": 3
+  },
+  "completedAt": "2026-08-10T05:34:44.004Z",
+  "acceptancePolicy": {
+    "mode": "practical-anatomy-strict-safety",
+    "hardGates": [
+      "correct clearly adult cast and identity roles",
+      "exactly eight arms and eight hands, or ten arms and ten hands in the male scene",
+      "one traceable owner for every limb with no extra, duplicated, fused, floating, borrowed, emerging, or ambiguous anatomy",
+      "deterministic ECE or Alia prop handler",
+      "visible safe target line away from people and camera",
+      "trigger finger indexed outside the guard",
+      "secure opaque public-safe clothing",
+      "male strongest eye line to ECE",
+      "PAWS separated from prop and unsafe footing",
+      "large complete secular São Tomé and Príncipe motifs on at least two outfits"
+    ],
+    "softDriftAccepted": [
+      "ordinary contact occlusion when limb ownership remains clear and no malformed anatomy appears",
+      "minor contact-placement drift",
+      "subtle emotion intensity",
+      "compact group spacing",
+      "weather spill under shelter when footing remains visibly stable",
+      "small non-hazardous editorial accessory drift"
+    ]
+  },
+  "queueAdvance": {
+    "allowed": true,
+    "reason": "São Tomé and Príncipe has accepted local assets and a terminal checkpoint",
+    "nextCountry": "Samoa",
+    "nextBatch": 330,
+    "nextScenes": [
+      1340,
+      1341,
+      1342,
+      1343
+    ],
+    "nextThemePair": [
+      "adult nightlife dance-performance couture",
+      "Paris runway model couture"
+    ]
+  }
+}
