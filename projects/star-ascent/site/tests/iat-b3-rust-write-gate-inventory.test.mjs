@@ -30,6 +30,14 @@ const economyRuntimeAdapterSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/runtime_adapter.rs", import.meta.url),
   "utf8",
 );
+const economyRehearsalAdapterSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/rehearsal_adapter.rs", import.meta.url),
+  "utf8",
+);
+const economyToken2022RuntimeSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/token_2022_runtime.rs", import.meta.url),
+  "utf8",
+);
 const economySource = readFileSync(
   new URL("../programs/iat_b3_economy/src/lib.rs", import.meta.url),
   "utf8",
@@ -141,15 +149,31 @@ test("the Rust workspace has no unreported faction or core-cap entrypoint", () =
   assert.match(economyCargo, /solana-sdk-ids = "=3\.1\.0"/u);
   assert.match(economyCargo, /runtime-account-bridge = \[/u);
   assert.match(economyCargo, /solana-account-info = \{[^}]+optional = true/u);
+  assert.match(economyCargo, /solana-zk-sdk = \{ version = "=4\.0\.0", optional = true \}/u);
+  assert.match(
+    economyCargo,
+    /spl-token-2022-interface = \{ version = "=2\.1\.0", optional = true \}/u,
+  );
+  assert.deepEqual(
+    [...economyCargo.matchAll(/^(spl-token[a-z0-9-]*)\s*=/gmu)].map(
+      (match) => match[1],
+    ),
+    ["spl-token-2022-interface"],
+  );
+  assert.doesNotMatch(economyCargo, /iat-b3-vault/u);
   assert.doesNotMatch(
     economyCargo,
-    /cdylib|anchor-|spl-token|solana-(?:cpi|program-entrypoint|system-interface)/u,
+    /cdylib|anchor-|solana-(?:cpi|program-entrypoint|system-interface)/u,
   );
   assert.doesNotMatch(
-    `${economySource}\n${economyNativeAdapterSource}\n${economyRuntimeAdapterSource}`,
+    `${economySource}\n${economyNativeAdapterSource}\n${economyRuntimeAdapterSource}\n${economyRehearsalAdapterSource}\n${economyToken2022RuntimeSource}`,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(/u,
   );
   assert.doesNotMatch(economyRuntimeAdapterSource, /try_borrow_mut|instruction_data/u);
+  assert.doesNotMatch(
+    `${economyRehearsalAdapterSource}\n${economyToken2022RuntimeSource}`,
+    /try_borrow_mut|instruction_data|RpcClient|send_and_confirm/u,
+  );
   assert.match(economyRuntimeAdapterSource, /Clock::get\(\)/u);
   assert.match(economyRuntimeAdapterSource, /Rent::get\(\)/u);
   assert.match(

@@ -33,6 +33,14 @@ const economyRuntimeAdapterSource = readFileSync(
   new URL("programs/iat_b3_economy/src/runtime_adapter.rs", siteRoot),
   "utf8",
 );
+const economyRehearsalAdapterSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/rehearsal_adapter.rs", siteRoot),
+  "utf8",
+);
+const economyToken2022RuntimeSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/token_2022_runtime.rs", siteRoot),
+  "utf8",
+);
 const lawSource = readFileSync(
   new URL("programs/iat_b3_law/src/lib.rs", siteRoot),
   "utf8",
@@ -135,16 +143,35 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   );
   assert.match(economyManifest, /solana-sdk-ids = "=3\.1\.0"/u);
   assert.match(economyManifest, /runtime-account-bridge = \[/u);
-  for (const dependency of ["solana-account-info", "solana-clock", "solana-rent", "solana-sysvar"]) {
+  for (const dependency of [
+    "solana-account-info",
+    "solana-clock",
+    "solana-rent",
+    "solana-sysvar",
+    "solana-zk-sdk",
+    "spl-token-2022-interface",
+  ]) {
     assert.match(
       economyManifest,
       new RegExp(`${dependency} = \\{[^}]+optional = true`, "u"),
       dependency,
     );
   }
+  assert.match(economyManifest, /solana-zk-sdk = \{ version = "=4\.0\.0", optional = true \}/u);
+  assert.match(
+    economyManifest,
+    /spl-token-2022-interface = \{ version = "=2\.1\.0", optional = true \}/u,
+  );
+  assert.deepEqual(
+    [...economyManifest.matchAll(/^(spl-token[a-z0-9-]*)\s*=/gmu)].map(
+      (match) => match[1],
+    ),
+    ["spl-token-2022-interface"],
+  );
+  assert.doesNotMatch(economyManifest, /iat-b3-vault/u);
   assert.doesNotMatch(
     economyManifest,
-    /cdylib|anchor-|spl-token|solana-(?:cpi|program-entrypoint|system-interface)/u,
+    /cdylib|anchor-|solana-(?:cpi|program-entrypoint|system-interface)/u,
   );
   assert.doesNotMatch(
     economyCode,
@@ -267,6 +294,101 @@ test("the feature-gated runtime bridge reads AccountInfo Clock and Rent without 
   assert.doesNotMatch(
     economyRuntimeAdapterSource.replace(/\/\/.*$/gmu, "").replace(/\/\*[\s\S]*?\*\//gu, ""),
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|try_borrow_mut|instruction_data/u,
+  );
+});
+
+test("the all-15 rehearsal preflight is exact-version read-only and cannot activate Devnet", () => {
+  assert.deepEqual(matrix.all15RehearsalPreflight, {
+    stage: "FEATURE_GATED_READ_ONLY_ALL_15_ACCOUNT_GRAPH_PREFLIGHT_NO_DISPATCH",
+    feature: "runtime-account-bridge",
+    complete: false,
+    expectedHandlerCount: 15,
+    operationInventoryExact: true,
+    accountRoleGraphsPresent: true,
+    accountMetaShapeChecksPresent: true,
+    accountIdentityGraphComplete: false,
+    dailyLawCapabilityRequired: true,
+    nativeBindingRequired: true,
+    canonicalToken2022MintRequired: true,
+    token2022InterfaceVersion: "=2.1.0",
+    solanaAccountInfoVersion: "=3.1.1",
+    solanaZkSdkVersion: "=4.0.0",
+    canonicalPodBooleansRequired: true,
+    publicBalanceAccountsOnly: true,
+    confidentialBalanceAccountsAccepted: false,
+    strictStateAuthenticationReused: true,
+    inertWriteBatchSealingReused: true,
+    mutableAccountBorrows: false,
+    accountWrites: false,
+    systemCpi: false,
+    tokenCpi: false,
+    rpcUsed: false,
+    transactionSigned: false,
+    deploymentExecuted: false,
+    devnetExecuted: false,
+    publicDevnetDriverWired: false,
+    instructionAbiFrozen: false,
+    solanaEntrypoint: false,
+    publicDispatcher: false,
+    productionIdentityBindingFrozen: false,
+    configCodecSupported: false,
+    ownerPolicyFrozen: false,
+    cccGenesisEnabled: false,
+    anyHandlerComplete: false,
+    mainnetHold: true,
+    publicExposure: false,
+  });
+  assert.match(
+    economySource,
+    /#\[cfg\(feature = "runtime-account-bridge"\)\]\s+pub mod rehearsal_adapter;/u,
+  );
+  assert.match(
+    economySource,
+    /#\[cfg\(feature = "runtime-account-bridge"\)\]\s+pub mod token_2022_runtime;/u,
+  );
+  assert.match(
+    economyRehearsalAdapterSource,
+    /pub const EXPECTED_REHEARSAL_HANDLER_COUNT: usize = 15;/u,
+  );
+  assert.match(
+    economyRehearsalAdapterSource,
+    /pub const ALL_REHEARSAL_OPERATIONS:[\s\S]+InitializeConfig[\s\S]+ExpireRound/u,
+  );
+  for (const falseFlag of [
+    "account_identity_graph_complete",
+    "config_codec_supported",
+    "owner_policy_frozen",
+    "ccc_genesis_enabled",
+    "instruction_abi_frozen",
+    "entrypoint_exposed",
+    "dispatcher_exposed",
+    "mutable_account_borrows",
+    "account_writes_executed",
+    "system_cpi_executed",
+    "token_cpi_executed",
+    "rpc_used",
+    "transaction_signed",
+    "deployment_executed",
+    "production_identity_binding_frozen",
+    "devnet_executed",
+    "any_handler_complete",
+  ]) {
+    assert.match(economyRehearsalAdapterSource, new RegExp(`${falseFlag}: false`, "u"), falseFlag);
+  }
+  assert.match(economyRehearsalAdapterSource, /mainnet_hold: true/u);
+  assert.match(economyToken2022RuntimeSource, /TOKEN_2022_INTERFACE_VERSION: &str = "2\.1\.0"/u);
+  assert.match(economyToken2022RuntimeSource, /SOLANA_ZK_SDK_VERSION: &str = "4\.0\.0"/u);
+  assert.match(
+    economyToken2022RuntimeSource,
+    /confidential\.auto_approve_new_accounts\.0 > 1/u,
+  );
+  assert.match(economyToken2022RuntimeSource, /transfer_hook\.transferring\.0 > 1/u);
+  assert.match(economyToken2022RuntimeSource, /get_extension::<ImmutableOwner>\(\)/u);
+  assert.doesNotMatch(
+    `${economyRehearsalAdapterSource}\n${economyToken2022RuntimeSource}`
+      .replace(/\/\/.*$/gmu, "")
+      .replace(/\/\*[\s\S]*?\*\//gu, ""),
+    /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|try_borrow_mut|RpcClient|send_and_confirm|instruction_data/u,
   );
 });
 

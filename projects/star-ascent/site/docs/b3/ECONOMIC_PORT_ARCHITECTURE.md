@@ -588,11 +588,41 @@ the success path on a host without weakening the public sysvar boundary.
 This stage is
 `FEATURE_GATED_READ_ONLY_ACCOUNTINFO_CLOCK_RENT_NO_DISPATCH` and remains
 incomplete. It has no instruction ABI, entrypoint, mutable account borrow,
-write, allocation, System Program CPI, Token-2022 parser/CPI, batch commit,
-Config codec, frozen production-identity binder, handler-specific account
-graph, or public exposure. It does not change any matrix row's
+write, allocation, System Program CPI, Token-2022 CPI, Config codec, frozen
+production-identity binder, complete account-identity graph, or public
+exposure. It does not change any matrix row's
 `handlerComplete`, the aggregate `DISABLED_UNTIL_ALL_15_PASS` exposure, the
 core-custody/faction/Genesis HOLDs, or the complete-dispatcher boundary.
+
+The same feature now contains a second, explicitly nonactivating rehearsal
+surface at
+`FEATURE_GATED_READ_ONLY_ALL_15_ACCOUNT_GRAPH_PREFLIGHT_NO_DISPATCH`. Its local
+economy Token-2022 parser pins `spl-token-2022-interface =2.1.0`,
+`solana-account-info =3.1.1`, and `solana-zk-sdk =4.0.0` without depending on the
+Privacy Vault crate. It authenticates the exact canonical mint base plus
+`ConfidentialTransferMint` and `TransferHook` TLVs, including canonical
+`PodBool` bytes, null authorities, the expected hook program, exact length,
+account type, standard executable program IDs, and immutable data borrows. The
+economic account parser accepts public-balance accounts only: exact
+`TransferHookAccount`, optionally typed `ImmutableOwner`, initialized and
+unfrozen base state, canonical non-transferring `PodBool`, no delegate, native
+balance, close authority, confidential-account extension, duplicate/unknown
+TLV, trailing byte, or cross-mint account. Standard executable IDs are not a
+claim about deployed program-data bytes or release identity.
+
+`rehearsal_adapter` inventories all 15 retained public writes and records each
+V2 account-role order, signer/writable/executable meta, optional Round slot, and
+the currently controlling HOLD. It composes only opaque Daily Law, native
+binding, and canonical-mint capabilities; reuses strict state authentication,
+public Token-2022 account authentication, and inert atomic-batch sealing; and
+can return only a structural meta-shape observation. Caller-supplied role names
+do not authenticate identities and the returned value never authorizes a
+handler or a Devnet transaction. Genesis-phase/Config-codec, immutable CCC,
+core custody/release, production identity, hook-CPI, and dispatcher blockers
+remain explicit. Accordingly `any_handler_complete`, Devnet execution, public
+driver wiring, instruction ABI, entrypoint, dispatcher, mutable borrows,
+writes, CPI, RPC, signing, deployment, and production identity freeze all
+remain false; Mainnet remains HOLD.
 
 None of these kernels may be exposed as a write entrypoint. The first safe
 deployable slice is the complete fifteen-row dispatcher behind the frozen

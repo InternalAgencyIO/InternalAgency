@@ -4,8 +4,12 @@
 mod codec;
 pub mod native_adapter;
 #[cfg(feature = "runtime-account-bridge")]
+pub mod rehearsal_adapter;
+#[cfg(feature = "runtime-account-bridge")]
 pub mod runtime_adapter;
 pub mod stake_ingress;
+#[cfg(feature = "runtime-account-bridge")]
+pub mod token_2022_runtime;
 
 pub use codec::{
     decode_agency_owner_index_state, decode_agency_state, decode_core_reward_state,
