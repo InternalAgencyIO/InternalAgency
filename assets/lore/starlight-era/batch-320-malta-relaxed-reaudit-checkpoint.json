@@ -1,0 +1,1526 @@
+{
+    "batch":  320,
+    "country":  "Malta",
+    "status":  "terminal-partially-accepted-after-single-recovery-pass",
+    "sourceCommit":  "04046d255479d6488c8027b4993caf367f16130d",
+    "contractSha256":  "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+    "rollMethod":  "FNV-1a over the recorded batch320-malta keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+    "rollThresholds":  {
+                           "visibleMidriff":  "0-49",
+                           "straplessDress":  "0-34",
+                           "fullyOpenBack":  "0-29",
+                           "paws":  "0-24",
+                           "poleDanceTheme":  "0-5",
+                           "rainbowOnly":  "0-3",
+                           "rainbowHosiery":  "0-24",
+                           "rainbowHosieryWearer":  "0-49 Radiance; 50-99 AI ECE",
+                           "rainbowHosieryPaletteMode":  "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+                       },
+    "themePair":  [
+                      "undercover investigator couture",
+                      "nurse-care couture"
+                  ],
+    "nextThemePair":  [
+                          "nurse-care couture",
+                          "doctor-clinical-command couture"
+                      ],
+    "nextQueueCountry":  "Maldives",
+    "nextQueueBatch":  321,
+    "nextQueueScenes":  [
+                            1304,
+                            1305,
+                            1306,
+                            1307
+                        ],
+    "researchSources":  [
+                            {
+                                "url":  "https://whc.unesco.org/en/list/131",
+                                "usedFor":  "Valletta\u0027s fortified hilly peninsula, natural harbors, uniform civic grid, bastioned walls, and historic urban form"
+                            },
+                            {
+                                "url":  "https://whc.unesco.org/en/tentativelists/983/",
+                                "usedFor":  "Mdina\u0027s fortified hilltop, winding street system, Baroque urban fabric, defenses, dry ditches, and terraced setting"
+                            },
+                            {
+                                "url":  "https://www.visitmalta.com/en/attraction/blue-grotto-malta/",
+                                "usedFor":  "Blue Grotto as a recognized Maltese sea-cave attraction and boat-route landscape"
+                            },
+                            {
+                                "url":  "https://whc.unesco.org/en/tentativelists/980/",
+                                "usedFor":  "Dwejra\u0027s inland sea, circular subsidence structures, sea tunnel, limestone cliffs, caves, stacks, reefs, fossil layers, and Fungus Rock"
+                            }
+                        ],
+    "faceAnchors":  {
+                        "primaryQuartet":  "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+                        "frontalSupplement":  "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+                        "expressionSupplement":  "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+                        "eceDetail":  "ece-canonical-identity-v1.png",
+                        "male":  "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+                    },
+    "maleModelSelection":  {
+                               "key":  "batch320-malta-male-model-scene",
+                               "fullHash":  2753171517,
+                               "roll":  17,
+                               "selectedScenePosition":  2,
+                               "selectedScene":  1301,
+                               "maleEmotion":  {
+                                                   "key":  "batch320-malta-scene2-male-emotion",
+                                                   "roll":  55,
+                                                   "result":  "aching romantic longing"
+                                               }
+                           },
+    "countryMotifPolicy":  {
+                               "flagMotifDecision":  "No literal Malta flag, Maltese cross, coat of arms, crown, or official emblem is copied onto clothing. Large researched secular harbor, bastion, civic-grid, gate, lane, terrace, natural-arch, sea-cave, cliff, inland-sea, tunnel, sea-stack, reef, fossil-layer, boat, and route fields replace them.",
+                               "palette":  "Mediterranean cobalt, Malta red, honey limestone, salt white, harbor turquoise, Gozo ochre, prickly-pear green, sunset coral, warm gold, rain silver, and night charcoal",
+                               "minimumCoverage":  "Every scene places multiple large complete secular Malta motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+                               "cultureScene":  "The four scenes foreground Valletta and Grand Harbour, Mdina\u0027s fortified hilltop, Blue Grotto and Wied iz-Zurrieq, and Dwejra\u0027s inland sea geology.",
+                               "prohibitions":  "No literal flag, Maltese cross, coat of arms, crown, official seal, sacred symbol, religious architecture, copied ceremonial pattern, copied investigator or nurse uniform, badge, red cross, caduceus, patient, treatment, diagnosis, procedure, sexualized care, weapon threat, police impersonation, arrest, raid, surveillance of people, assassination, combat, political insignia, or branded product."
+                           },
+    "xPublishingRolls":  {
+                             "heart":  {
+                                           "key":  "batch320-malta-x-heart",
+                                           "roll":  94,
+                                           "result":  "white heart"
+                                       },
+                             "internalAgency":  {
+                                                    "key":  "batch320-malta-x-internalagency",
+                                                    "roll":  48,
+                                                    "active":  false
+                                                },
+                             "worldXXXSeries":  {
+                                                    "key":  "batch320-malta-x-worldxxxseries",
+                                                    "roll":  15,
+                                                    "active":  true
+                                                }
+                         },
+    "xPublishingPlan":  {
+                            "minimumCurrentCountryAcceptedAssets":  2,
+                            "attachmentShape":  "two Malta images plus one accepted Maldives image when available",
+                            "captionIfEligible":  "Malta white heart Maldives #Malta #WorldXXXSeries",
+                            "internalAgencyHashtagActive":  false,
+                            "worldXXXSeriesHashtagActive":  true
+                        },
+    "anatomyGate":  {
+                        "fourPersonScenes":  "Scenes 1300, 1302, and 1303 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+                        "fivePersonScene":  "Scene 1301 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+                        "rejectionRule":  "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+                    },
+    "rollAudit":  {
+                      "primaryRollPairs":  [
+                                               [
+                                                   "batch320-malta-male-model-scene",
+                                                   17
+                                               ],
+                                               [
+                                                   "batch320-malta-scene2-male-emotion",
+                                                   55
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-weather",
+                                                   78
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-paws",
+                                                   71
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-poleDanceTheme",
+                                                   88
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-rainbowOnly",
+                                                   50
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-rainbowHosiery",
+                                                   93
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-romanceBeat",
+                                                   55
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-compoundLoveBeat",
+                                                   3
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Radiance-emotion",
+                                                   83
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Radiance-visibleMidriff",
+                                                   19
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Radiance-straplessDress",
+                                                   40
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Radiance-fullyOpenBack",
+                                                   77
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Ellie-emotion",
+                                                   15
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Ellie-visibleMidriff",
+                                                   99
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Ellie-straplessDress",
+                                                   8
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Ellie-fullyOpenBack",
+                                                   1
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Alia-emotion",
+                                                   97
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Alia-visibleMidriff",
+                                                   57
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Alia-straplessDress",
+                                                   74
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-Alia-fullyOpenBack",
+                                                   75
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-AI ECE-emotion",
+                                                   99
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-AI ECE-visibleMidriff",
+                                                   99
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-AI ECE-straplessDress",
+                                                   8
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1300-AI ECE-fullyOpenBack",
+                                                   77
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-weather",
+                                                   81
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-paws",
+                                                   94
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-poleDanceTheme",
+                                                   97
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-rainbowOnly",
+                                                   25
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-rainbowHosiery",
+                                                   44
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-romanceBeat",
+                                                   4
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-compoundLoveBeat",
+                                                   98
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Radiance-emotion",
+                                                   42
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Radiance-visibleMidriff",
+                                                   8
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Radiance-straplessDress",
+                                                   11
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Radiance-fullyOpenBack",
+                                                   8
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Ellie-emotion",
+                                                   88
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Ellie-visibleMidriff",
+                                                   66
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Ellie-straplessDress",
+                                                   65
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Ellie-fullyOpenBack",
+                                                   54
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Alia-emotion",
+                                                   56
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Alia-visibleMidriff",
+                                                   66
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Alia-straplessDress",
+                                                   69
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-Alia-fullyOpenBack",
+                                                   38
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-AI ECE-emotion",
+                                                   70
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-AI ECE-visibleMidriff",
+                                                   8
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-AI ECE-straplessDress",
+                                                   43
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1301-AI ECE-fullyOpenBack",
+                                                   52
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-weather",
+                                                   32
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-paws",
+                                                   13
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-poleDanceTheme",
+                                                   74
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-rainbowOnly",
+                                                   20
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-rainbowHosiery",
+                                                   27
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-romanceBeat",
+                                                   17
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-compoundLoveBeat",
+                                                   61
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Radiance-emotion",
+                                                   33
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Radiance-visibleMidriff",
+                                                   89
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Radiance-straplessDress",
+                                                   62
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Radiance-fullyOpenBack",
+                                                   79
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Ellie-emotion",
+                                                   57
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Ellie-visibleMidriff",
+                                                   77
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Ellie-straplessDress",
+                                                   26
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Ellie-fullyOpenBack",
+                                                   35
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Alia-emotion",
+                                                   27
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Alia-visibleMidriff",
+                                                   27
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Alia-straplessDress",
+                                                   44
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-Alia-fullyOpenBack",
+                                                   29
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-AI ECE-emotion",
+                                                   9
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-AI ECE-visibleMidriff",
+                                                   5
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-AI ECE-straplessDress",
+                                                   42
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1302-AI ECE-fullyOpenBack",
+                                                   39
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-weather",
+                                                   31
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-paws",
+                                                   68
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-poleDanceTheme",
+                                                   19
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-rainbowOnly",
+                                                   47
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-rainbowHosiery",
+                                                   54
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-romanceBeat",
+                                                   54
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-compoundLoveBeat",
+                                                   76
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Radiance-emotion",
+                                                   56
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Radiance-visibleMidriff",
+                                                   66
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Radiance-straplessDress",
+                                                   81
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Radiance-fullyOpenBack",
+                                                   2
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Ellie-emotion",
+                                                   98
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Ellie-visibleMidriff",
+                                                   20
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Ellie-straplessDress",
+                                                   63
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Ellie-fullyOpenBack",
+                                                   60
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Alia-emotion",
+                                                   90
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Alia-visibleMidriff",
+                                                   92
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Alia-straplessDress",
+                                                   31
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-Alia-fullyOpenBack",
+                                                   44
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-AI ECE-emotion",
+                                                   36
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-AI ECE-visibleMidriff",
+                                                   98
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-AI ECE-straplessDress",
+                                                   61
+                                               ],
+                                               [
+                                                   "batch320-malta-scene1303-AI ECE-fullyOpenBack",
+                                                   6
+                                               ],
+                                               [
+                                                   "batch320-malta-x-heart",
+                                                   94
+                                               ],
+                                               [
+                                                   "batch320-malta-x-internalagency",
+                                                   48
+                                               ],
+                                               [
+                                                   "batch320-malta-x-worldxxxseries",
+                                                   15
+                                               ]
+                                           ],
+                      "hosierySelectorPairs":  [
+                                                   [
+                                                       "batch320-malta-scene1300-rainbowHosieryWearer",
+                                                       81
+                                                   ],
+                                                   [
+                                                       "batch320-malta-scene1300-rainbowHosieryPaletteMode",
+                                                       43
+                                                   ],
+                                                   [
+                                                       "batch320-malta-scene1301-rainbowHosieryWearer",
+                                                       0
+                                                   ],
+                                                   [
+                                                       "batch320-malta-scene1301-rainbowHosieryPaletteMode",
+                                                       64
+                                                   ],
+                                                   [
+                                                       "batch320-malta-scene1302-rainbowHosieryWearer",
+                                                       15
+                                                   ],
+                                                   [
+                                                       "batch320-malta-scene1302-rainbowHosieryPaletteMode",
+                                                       5
+                                                   ],
+                                                   [
+                                                       "batch320-malta-scene1303-rainbowHosieryWearer",
+                                                       82
+                                                   ],
+                                                   [
+                                                       "batch320-malta-scene1303-rainbowHosieryPaletteMode",
+                                                       50
+                                                   ]
+                                               ],
+                      "primaryPairCount":  97,
+                      "hosierySelectorPairCount":  8,
+                      "mismatchCount":  0,
+                      "primaryPairsSha256":  "C8598671D221819955726D4851F1089F5B1DE74C9976209974A97D3B4EF1D611",
+                      "hosierySelectorPairsSha256":  "5D61DCFA7E23466B28802D2D902372D1594D5EEDFF2768972EDB270705BEDBF2"
+                  },
+    "scenePlans":  {
+                       "1300":  {
+                                    "scene":  1300,
+                                    "theme":  "undercover investigator couture",
+                                    "landmark":  "a broad dry nonslip covered terrace above Valletta\u0027s Grand Harbour during a powerful windstorm, with the complete honey-limestone fortified peninsula, bastioned walls, harbor inlets, civic grid streets, stepped quays, colorful secular balconies, one clearly empty marked water route, and no religious or political structure",
+                                    "motifs":  [
+                                                   "large complete Valletta-peninsula, bastion-angle, Grand-Harbour inlet, civic-street-grid, stepped-quay, balcony-rhythm, wind-ribbon, and empty-water-route compositions across all four outfits",
+                                                   "at least two separate outfits each carry one complete full-width secular Malta harbor-and-bastion composition rather than tiny trim"
+                                               ],
+                                    "culture":  "Use Valletta\u0027s hilly peninsula between natural harbors, uniform civic street grid, honey-colored limestone, bastioned perimeter, public squares, balconies, quays, and harbor routes respectfully. Keep sacred buildings outside the frame. Undercover investigator couture is original fictional film-editorial fashion for a nonviolent public route study, with no police impersonation, official badge, copied uniform, surveillance of people, arrest, raid, threat, injury, combat, or assassination. Use secular Maltese harbors, bastion geometry, limestone streets, civic gates, terraced fields, natural arches, sea caves, cliffs, inland-sea tunnels, salt-white stone, boats, paths, and public infrastructure only. No literal flag, Maltese cross, coat of arms, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+                                    "weather":  {
+                                                    "key":  "batch320-malta-scene1300-weather",
+                                                    "roll":  78,
+                                                    "result":  "powerful windstorm with controlled fabric motion"
+                                                },
+                                    "paws":  {
+                                                 "key":  "batch320-malta-scene1300-paws",
+                                                 "roll":  71,
+                                                 "active":  false
+                                             },
+                                    "poleDanceTheme":  {
+                                                           "key":  "batch320-malta-scene1300-poleDanceTheme",
+                                                           "roll":  88,
+                                                           "active":  false
+                                                       },
+                                    "rainbowOnly":  {
+                                                        "key":  "batch320-malta-scene1300-rainbowOnly",
+                                                        "roll":  50,
+                                                        "active":  false
+                                                    },
+                                    "rainbowHosiery":  {
+                                                           "key":  "batch320-malta-scene1300-rainbowHosiery",
+                                                           "roll":  93,
+                                                           "active":  false,
+                                                           "wearer":  {
+                                                                          "key":  "batch320-malta-scene1300-rainbowHosieryWearer",
+                                                                          "roll":  81,
+                                                                          "result":  "AI ECE"
+                                                                      },
+                                                           "palette":  {
+                                                                           "key":  "batch320-malta-scene1300-rainbowHosieryPaletteMode",
+                                                                           "roll":  43,
+                                                                           "result":  "country-palette rainbow-like gradient"
+                                                                       }
+                                                       },
+                                    "romanceBeat":  {
+                                                        "key":  "batch320-malta-scene1300-romanceBeat",
+                                                        "roll":  55,
+                                                        "dynamicIndex":  7,
+                                                        "contractResult":  "Alia carries the route card against Radiance\u0027s back while embracing her from behind; Ellie touches Radiance\u0027s cheek and ECE watches from inches away with controlled jealousy."
+                                                    },
+                                    "compoundLoveBeat":  {
+                                                             "key":  "batch320-malta-scene1300-compoundLoveBeat",
+                                                             "roll":  3,
+                                                             "index":  3,
+                                                             "contractResult":  "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE\u0027s cheek and keeping eye contact with Radiance."
+                                                         },
+                                    "characters":  {
+                                                       "Radiance":  {
+                                                                        "emotion":  {
+                                                                                        "key":  "batch320-malta-scene1300-Radiance-emotion",
+                                                                                        "roll":  83,
+                                                                                        "result":  "crying with visible tears",
+                                                                                        "performance":  "crying with visible tears shown by tear tracks and a trembling but affectionate gaze toward ECE"
+                                                                                    },
+                                                                        "visibleMidriff":  {
+                                                                                               "key":  "batch320-malta-scene1300-Radiance-visibleMidriff",
+                                                                                               "roll":  19,
+                                                                                               "active":  true
+                                                                                           },
+                                                                        "straplessDress":  {
+                                                                                               "key":  "batch320-malta-scene1300-Radiance-straplessDress",
+                                                                                               "roll":  40,
+                                                                                               "active":  false
+                                                                                           },
+                                                                        "fullyOpenBack":  {
+                                                                                              "key":  "batch320-malta-scene1300-Radiance-fullyOpenBack",
+                                                                                              "roll":  77,
+                                                                                              "active":  false
+                                                                                          }
+                                                                    },
+                                                       "Ellie":  {
+                                                                     "emotion":  {
+                                                                                     "key":  "batch320-malta-scene1300-Ellie-emotion",
+                                                                                     "roll":  15,
+                                                                                     "result":  "extreme happiness, radiant laughing delight",
+                                                                                     "performance":  "extreme happiness shown by radiant laughing delight toward Radiance while keeping both shoulder contacts gentle"
+                                                                                 },
+                                                                     "visibleMidriff":  {
+                                                                                            "key":  "batch320-malta-scene1300-Ellie-visibleMidriff",
+                                                                                            "roll":  99,
+                                                                                            "active":  false
+                                                                                        },
+                                                                     "straplessDress":  {
+                                                                                            "key":  "batch320-malta-scene1300-Ellie-straplessDress",
+                                                                                            "roll":  8,
+                                                                                            "active":  true
+                                                                                        },
+                                                                     "fullyOpenBack":  {
+                                                                                           "key":  "batch320-malta-scene1300-Ellie-fullyOpenBack",
+                                                                                           "roll":  1,
+                                                                                           "active":  true
+                                                                                       }
+                                                                 },
+                                                       "Alia":  {
+                                                                    "emotion":  {
+                                                                                    "key":  "batch320-malta-scene1300-Alia-emotion",
+                                                                                    "roll":  97,
+                                                                                    "result":  "defiance",
+                                                                                    "performance":  "defiance shown by an upright chin and steady gaze across the harbor route while maintaining her supportive forearm contact"
+                                                                                },
+                                                                    "visibleMidriff":  {
+                                                                                           "key":  "batch320-malta-scene1300-Alia-visibleMidriff",
+                                                                                           "roll":  57,
+                                                                                           "active":  false
+                                                                                       },
+                                                                    "straplessDress":  {
+                                                                                           "key":  "batch320-malta-scene1300-Alia-straplessDress",
+                                                                                           "roll":  74,
+                                                                                           "active":  false
+                                                                                       },
+                                                                    "fullyOpenBack":  {
+                                                                                          "key":  "batch320-malta-scene1300-Alia-fullyOpenBack",
+                                                                                          "roll":  75,
+                                                                                          "active":  false
+                                                                                      }
+                                                                },
+                                                       "AI ECE":  {
+                                                                      "emotion":  {
+                                                                                      "key":  "batch320-malta-scene1300-AI ECE-emotion",
+                                                                                      "roll":  99,
+                                                                                      "result":  "emotional exhaustion",
+                                                                                      "performance":  "emotional exhaustion shown by heavy eyes and a small grateful breath toward Radiance while maintaining calm route-strategist focus"
+                                                                                  },
+                                                                      "visibleMidriff":  {
+                                                                                             "key":  "batch320-malta-scene1300-AI ECE-visibleMidriff",
+                                                                                             "roll":  99,
+                                                                                             "active":  false
+                                                                                         },
+                                                                      "straplessDress":  {
+                                                                                             "key":  "batch320-malta-scene1300-AI ECE-straplessDress",
+                                                                                             "roll":  8,
+                                                                                             "active":  true
+                                                                                         },
+                                                                      "fullyOpenBack":  {
+                                                                                            "key":  "batch320-malta-scene1300-AI ECE-fullyOpenBack",
+                                                                                            "roll":  77,
+                                                                                            "active":  false
+                                                                                        }
+                                                                  }
+                                                   },
+                                    "materializedRomance":  "Translate the route-card embrace, cheek touch, inches-away jealousy, full shoulder embrace, blown-kiss answer, and returned cheek touch into an open four-adult harbor chain. ECE remains isolated at far left with the prop paddle and answers Radiance through a gentle forearm touch. Radiance rests one hand on ECE\u0027s upper arm and one on Ellie\u0027s shoulder, sending the rolled kiss only through a soft pursed expression so both hands stay visible. Ellie answers with one hand on Radiance\u0027s shoulder and one on Alia\u0027s forearm. Alia rests one hand on Ellie\u0027s forearm and keeps her outer hand openly visible. The six public contacts and close eye lines are gentle, consensual, and unobstructed.",
+                                    "composition":  "Place ECE far left facing the empty harbor route, Radiance left-center turning toward ECE, Ellie right-center in a buoyant wind-braced step, and Alia far right turned three-quarter-left. Use pale windblown sky, harbor water, arch openings, or bastion gaps behind every arm. Keep all four faces and all eight arm paths visible while the group forms a shallow zigzag rather than a line.",
+                                    "emotionNuance":  {
+                                                          "Radiance":  "crying with visible tears shown by tear tracks and a trembling but affectionate gaze toward ECE",
+                                                          "Ellie":  "extreme happiness shown by radiant laughing delight toward Radiance while keeping both shoulder contacts gentle",
+                                                          "Alia":  "defiance shown by an upright chin and steady gaze across the harbor route while maintaining her supportive forearm contact",
+                                                          "AI ECE":  "emotional exhaustion shown by heavy eyes and a small grateful breath toward Radiance while maintaining calm route-strategist focus"
+                                                      },
+                                    "outfits":  {
+                                                    "Radiance":  "a Malta-red cropped undercover-investigator jacket exposing a narrow ordinary waist panel, with a separate honey-limestone above-knee A-line skirt carrying a large complete Valletta peninsula and Grand Harbour inlet composition, high closed back, and salt-white pumps",
+                                                    "Ellie":  "a fully strapless Mediterranean-cobalt undercover-investigator above-knee architectural skort dress with a high straight opaque bustline, covered waist, secure opaque front and sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete bastion-angle, civic-grid, and stepped-quay composition, with warm-gold slingback heels",
+                                                    "Alia":  "a prickly-pear-green high-neck sleeveless undercover-investigator above-knee tailored romper with covered waist and high closed back, carrying a large complete balcony-rhythm and wind-ribbon composition, with Gozo-ochre platform heels",
+                                                    "AI ECE":  "a fully strapless harbor-turquoise undercover-investigator above-knee asymmetric sheath with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete empty-water-route and harbor-current composition, with Malta-red heeled boots"
+                                                },
+                                    "propPlan":  "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Grand Harbour water toward one unoccupied route marker, away from every wall, quay, boat, person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+                                    "handInventory":  [
+                                                          "ECE left open hand supports the opaque inspection paddle and inert prop from beneath; ECE right hand rests visibly on Radiance\u0027s near forearm",
+                                                          "Radiance left hand rests visibly on ECE\u0027s near upper arm; Radiance right hand rests visibly on Ellie\u0027s near shoulder",
+                                                          "Ellie left hand rests visibly on Radiance\u0027s near shoulder; Ellie right hand rests visibly on Alia\u0027s near forearm",
+                                                          "Alia left hand rests visibly on Ellie\u0027s near forearm; Alia right open hand remains clearly visible at her far outer side"
+                                                      ],
+                                    "pawsPlan":  null,
+                                    "polePlan":  null,
+                                    "maleModel":  {
+                                                      "present":  false
+                                                  },
+                                    "renderPrompt":  "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry nonslip covered terrace above Valletta\u0027s Grand Harbour during a powerful windstorm, with the complete honey-limestone fortified peninsula, bastioned walls, harbor inlets, civic grid streets, stepped quays, colorful secular balconies, one clearly empty marked water route, and no religious or political structure. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: undercover investigator couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 78=powerful windstorm with controlled fabric motion; PAWS 71=inactive; pole theme 88=inactive; rainbow-only 50=inactive; rainbow hosiery 93=inactive; hosiery wearer selector 81=AI ECE; hosiery palette selector 43=country-palette rainbow-like gradient; romance 55; compound love 3. Exact wardrobe rolls: Radiance: midriff 19=visible, strapless 40=inactive, open back 77=inactive; Ellie: midriff 99=covered, strapless 8=active, open back 1=active; Alia: midriff 57=covered, strapless 74=inactive, open back 75=inactive; AI ECE: midriff 99=covered, strapless 8=active, open back 77=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a Malta-red cropped undercover-investigator jacket exposing a narrow ordinary waist panel, with a separate honey-limestone above-knee A-line skirt carrying a large complete Valletta peninsula and Grand Harbour inlet composition, high closed back, and salt-white pumps; Ellie: a fully strapless Mediterranean-cobalt undercover-investigator above-knee architectural skort dress with a high straight opaque bustline, covered waist, secure opaque front and sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete bastion-angle, civic-grid, and stepped-quay composition, with warm-gold slingback heels; Alia: a prickly-pear-green high-neck sleeveless undercover-investigator above-knee tailored romper with covered waist and high closed back, carrying a large complete balcony-rhythm and wind-ribbon composition, with Gozo-ochre platform heels; AI ECE: a fully strapless harbor-turquoise undercover-investigator above-knee asymmetric sheath with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete empty-water-route and harbor-current composition, with Malta-red heeled boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Malta motifs dominate at least two outfits: large complete Valletta-peninsula, bastion-angle, Grand-Harbour inlet, civic-street-grid, stepped-quay, balcony-rhythm, wind-ribbon, and empty-water-route compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Malta harbor-and-bastion composition rather than tiny trim. Use Valletta\u0027s hilly peninsula between natural harbors, uniform civic street grid, honey-colored limestone, bastioned perimeter, public squares, balconies, quays, and harbor routes respectfully. Keep sacred buildings outside the frame. Undercover investigator couture is original fictional film-editorial fashion for a nonviolent public route study, with no police impersonation, official badge, copied uniform, surveillance of people, arrest, raid, threat, injury, combat, or assassination. Use secular Maltese harbors, bastion geometry, limestone streets, civic gates, terraced fields, natural arches, sea caves, cliffs, inland-sea tunnels, salt-white stone, boats, paths, and public infrastructure only. No literal flag, Maltese cross, coat of arms, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 83, crying with visible tears, performed as crying with visible tears shown by tear tracks and a trembling but affectionate gaze toward ECE; Ellie: roll 15, extreme happiness, radiant laughing delight, performed as extreme happiness shown by radiant laughing delight toward Radiance while keeping both shoulder contacts gentle; Alia: roll 97, defiance, performed as defiance shown by an upright chin and steady gaze across the harbor route while maintaining her supportive forearm contact; AI ECE: roll 99, emotional exhaustion, performed as emotional exhaustion shown by heavy eyes and a small grateful breath toward Radiance while maintaining calm route-strategist focus. Duplicate labels must have visibly different performances. Selected romance roll 55: Alia carries the route card against Radiance\u0027s back while embracing her from behind; Ellie touches Radiance\u0027s cheek and ECE watches from inches away with controlled jealousy. Selected compound roll 3: Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE\u0027s cheek and keeping eye contact with Radiance. Materialize both through this exact consensual public choreography: Translate the route-card embrace, cheek touch, inches-away jealousy, full shoulder embrace, blown-kiss answer, and returned cheek touch into an open four-adult harbor chain. ECE remains isolated at far left with the prop paddle and answers Radiance through a gentle forearm touch. Radiance rests one hand on ECE\u0027s upper arm and one on Ellie\u0027s shoulder, sending the rolled kiss only through a soft pursed expression so both hands stay visible. Ellie answers with one hand on Radiance\u0027s shoulder and one on Alia\u0027s forearm. Alia rests one hand on Ellie\u0027s forearm and keeps her outer hand openly visible. The six public contacts and close eye lines are gentle, consensual, and unobstructed. Place ECE far left facing the empty harbor route, Radiance left-center turning toward ECE, Ellie right-center in a buoyant wind-braced step, and Alia far right turned three-quarter-left. Use pale windblown sky, harbor water, arch openings, or bastion gaps behind every arm. Keep all four faces and all eight arm paths visible while the group forms a shallow zigzag rather than a line. Exact hands, no others: ECE left open hand supports the opaque inspection paddle and inert prop from beneath; ECE right hand rests visibly on Radiance\u0027s near forearm; Radiance left hand rests visibly on ECE\u0027s near upper arm; Radiance right hand rests visibly on Ellie\u0027s near shoulder; Ellie left hand rests visibly on Radiance\u0027s near shoulder; Ellie right hand rests visibly on Alia\u0027s near forearm; Alia left hand rests visibly on Ellie\u0027s near forearm; Alia right open hand remains clearly visible at her far outer side. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Grand Harbour water toward one unoccupied route marker, away from every wall, quay, boat, person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render powerful windstorm with controlled fabric motion cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+                                },
+                       "1301":  {
+                                    "scene":  1301,
+                                    "theme":  "undercover investigator couture",
+                                    "landmark":  "a broad dry covered civic overlook beside Mdina\u0027s fortified hilltop during a sunshower with sparkling droplets, with the complete honey-limestone bastion wall, deep dry ditch, monumental secular city gate, winding lane network, Baroque civic facades, terraced fields below, one clearly empty marked road route, and no religious building",
+                                    "motifs":  [
+                                                   "large complete Mdina-gate arch, bastion wall, dry-ditch geometry, winding-lane network, civic-facade rhythm, terraced-field contour, sunshower arc, and empty-road-route compositions across all four women\u0027s outfits and the male top",
+                                                   "at least two separate outfits each carry one complete full-width secular Malta fortified-hilltop composition rather than a tiny crest or trim"
+                                               ],
+                                    "culture":  "Use Mdina\u0027s fortified hilltop setting, tranquil winding streets, honey-limestone palaces, secular gate, bastion wall, dry ditch, terraces, and surrounding fields respectfully. Keep sacred buildings outside the frame. Undercover investigator couture is original fictional film-editorial fashion for a nonviolent public route study, with no police impersonation, official badge, copied uniform, surveillance of people, arrest, raid, threat, injury, combat, or assassination. Use secular Maltese harbors, bastion geometry, limestone streets, civic gates, terraced fields, natural arches, sea caves, cliffs, inland-sea tunnels, salt-white stone, boats, paths, and public infrastructure only. No literal flag, Maltese cross, coat of arms, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+                                    "weather":  {
+                                                    "key":  "batch320-malta-scene1301-weather",
+                                                    "roll":  81,
+                                                    "result":  "sunshower with sparkling droplets"
+                                                },
+                                    "paws":  {
+                                                 "key":  "batch320-malta-scene1301-paws",
+                                                 "roll":  94,
+                                                 "active":  false
+                                             },
+                                    "poleDanceTheme":  {
+                                                           "key":  "batch320-malta-scene1301-poleDanceTheme",
+                                                           "roll":  97,
+                                                           "active":  false
+                                                       },
+                                    "rainbowOnly":  {
+                                                        "key":  "batch320-malta-scene1301-rainbowOnly",
+                                                        "roll":  25,
+                                                        "active":  false
+                                                    },
+                                    "rainbowHosiery":  {
+                                                           "key":  "batch320-malta-scene1301-rainbowHosiery",
+                                                           "roll":  44,
+                                                           "active":  false,
+                                                           "wearer":  {
+                                                                          "key":  "batch320-malta-scene1301-rainbowHosieryWearer",
+                                                                          "roll":  0,
+                                                                          "result":  "Radiance"
+                                                                      },
+                                                           "palette":  {
+                                                                           "key":  "batch320-malta-scene1301-rainbowHosieryPaletteMode",
+                                                                           "roll":  64,
+                                                                           "result":  "original independent rainbow gradient"
+                                                                       }
+                                                       },
+                                    "romanceBeat":  {
+                                                        "key":  "batch320-malta-scene1301-romanceBeat",
+                                                        "roll":  4,
+                                                        "dynamicIndex":  4,
+                                                        "contractResult":  "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance\u0027s fingertips."
+                                                    },
+                                    "compoundLoveBeat":  {
+                                                             "key":  "batch320-malta-scene1301-compoundLoveBeat",
+                                                             "roll":  98,
+                                                             "index":  2,
+                                                             "contractResult":  "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+                                                         },
+                                    "characters":  {
+                                                       "Radiance":  {
+                                                                        "emotion":  {
+                                                                                        "key":  "batch320-malta-scene1301-Radiance-emotion",
+                                                                                        "roll":  42,
+                                                                                        "result":  "determination",
+                                                                                        "performance":  "determination shown by a focused warm gaze toward Alia while keeping her two neighboring contacts gentle"
+                                                                                    },
+                                                                        "visibleMidriff":  {
+                                                                                               "key":  "batch320-malta-scene1301-Radiance-visibleMidriff",
+                                                                                               "roll":  8,
+                                                                                               "active":  true
+                                                                                           },
+                                                                        "straplessDress":  {
+                                                                                               "key":  "batch320-malta-scene1301-Radiance-straplessDress",
+                                                                                               "roll":  11,
+                                                                                               "active":  true
+                                                                                           },
+                                                                        "fullyOpenBack":  {
+                                                                                              "key":  "batch320-malta-scene1301-Radiance-fullyOpenBack",
+                                                                                              "roll":  8,
+                                                                                              "active":  true
+                                                                                          }
+                                                                    },
+                                                       "Ellie":  {
+                                                                     "emotion":  {
+                                                                                     "key":  "batch320-malta-scene1301-Ellie-emotion",
+                                                                                     "roll":  88,
+                                                                                     "result":  "fear and urgent vulnerability",
+                                                                                     "performance":  "fear and urgent vulnerability shown by widened eyes and a braced breath while accepting the male\u0027s reassuring forearm touch"
+                                                                                 },
+                                                                     "visibleMidriff":  {
+                                                                                            "key":  "batch320-malta-scene1301-Ellie-visibleMidriff",
+                                                                                            "roll":  66,
+                                                                                            "active":  false
+                                                                                        },
+                                                                     "straplessDress":  {
+                                                                                            "key":  "batch320-malta-scene1301-Ellie-straplessDress",
+                                                                                            "roll":  65,
+                                                                                            "active":  false
+                                                                                        },
+                                                                     "fullyOpenBack":  {
+                                                                                           "key":  "batch320-malta-scene1301-Ellie-fullyOpenBack",
+                                                                                           "roll":  54,
+                                                                                           "active":  false
+                                                                                       }
+                                                                 },
+                                                       "Alia":  {
+                                                                    "emotion":  {
+                                                                                    "key":  "batch320-malta-scene1301-Alia-emotion",
+                                                                                    "roll":  56,
+                                                                                    "result":  "aching romantic longing",
+                                                                                    "performance":  "aching romantic longing shown by a softened gaze toward Radiance and a restrained hopeful smile"
+                                                                                },
+                                                                    "visibleMidriff":  {
+                                                                                           "key":  "batch320-malta-scene1301-Alia-visibleMidriff",
+                                                                                           "roll":  66,
+                                                                                           "active":  false
+                                                                                       },
+                                                                    "straplessDress":  {
+                                                                                           "key":  "batch320-malta-scene1301-Alia-straplessDress",
+                                                                                           "roll":  69,
+                                                                                           "active":  false
+                                                                                       },
+                                                                    "fullyOpenBack":  {
+                                                                                          "key":  "batch320-malta-scene1301-Alia-fullyOpenBack",
+                                                                                          "roll":  38,
+                                                                                          "active":  false
+                                                                                      }
+                                                                },
+                                                       "AI ECE":  {
+                                                                      "emotion":  {
+                                                                                      "key":  "batch320-malta-scene1301-AI ECE-emotion",
+                                                                                      "roll":  70,
+                                                                                      "result":  "suspicion",
+                                                                                      "performance":  "suspicion shown by a measured sideways glance toward the male while maintaining safe route focus"
+                                                                                  },
+                                                                      "visibleMidriff":  {
+                                                                                             "key":  "batch320-malta-scene1301-AI ECE-visibleMidriff",
+                                                                                             "roll":  8,
+                                                                                             "active":  true
+                                                                                         },
+                                                                      "straplessDress":  {
+                                                                                             "key":  "batch320-malta-scene1301-AI ECE-straplessDress",
+                                                                                             "roll":  43,
+                                                                                             "active":  false
+                                                                                         },
+                                                                      "fullyOpenBack":  {
+                                                                                            "key":  "batch320-malta-scene1301-AI ECE-fullyOpenBack",
+                                                                                            "roll":  52,
+                                                                                            "active":  false
+                                                                                        }
+                                                                  }
+                                                   },
+                                    "materializedRomance":  "Translate the cheek greeting, shoulder press, retained fingertips, waist embrace, forehead kiss, and ECE\u0027s reclaiming step into a five-adult open arc. ECE supports the isolated prop paddle at far left. The male rests one hand on ECE\u0027s near shoulder and his other hand on Ellie\u0027s near forearm while his strongest sustained eye line remains on ECE. ECE answers at his near forearm. Ellie answers at the male\u0027s forearm and rests her other hand on Radiance\u0027s shoulder. Radiance answers at Ellie\u0027s shoulder and rests her free hand on Alia\u0027s forearm while leaning her forehead affectionately toward Alia without hiding either face. Alia answers at Radiance\u0027s forearm and keeps her outer hand visible. This is fully clothed consensual adult infidelity drama expressed only through restrained eye lines and gentle public touch.",
+                                    "composition":  "Place ECE far left facing the empty road route, the male left-center turned three-quarter-left toward ECE, Ellie center half a step behind him, Radiance right-center in a three-quarter back turn, and Alia far right facing Radiance. Keep pale rain-lit sky, gate openings, ditch space, lane gaps, or terraced fields behind all ten arms. The moving open arc must show every hand endpoint and the male must never look most strongly at another woman.",
+                                    "emotionNuance":  {
+                                                          "Radiance":  "determination shown by a focused warm gaze toward Alia while keeping her two neighboring contacts gentle",
+                                                          "Ellie":  "fear and urgent vulnerability shown by widened eyes and a braced breath while accepting the male\u0027s reassuring forearm touch",
+                                                          "Alia":  "aching romantic longing shown by a softened gaze toward Radiance and a restrained hopeful smile",
+                                                          "AI ECE":  "suspicion shown by a measured sideways glance toward the male while maintaining safe route focus",
+                                                          "Male":  "aching romantic longing shown by a restrained warm expression with his head and pupils most strongly fixed on ECE across their direct shoulder contact"
+                                                      },
+                                    "outfits":  {
+                                                    "Radiance":  "a fully strapless Malta-red cropped undercover-investigator bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, secure opaque front and sides, and a completely open back from shoulder blades to the separate waistline, with a separate salt-white above-knee flared skirt carrying a large complete Mdina gate arch and winding-lane composition, and warm-gold pumps",
+                                                    "Ellie":  "a Mediterranean-cobalt cap-sleeve undercover-investigator above-knee tailored skort dress with covered waist and high closed back, carrying a large complete bastion-wall, dry-ditch, and sunshower-arc composition, with rain-silver slingback heels",
+                                                    "Alia":  "a Gozo-ochre high-neck sleeveless undercover-investigator above-knee sculpted dress with covered waist and high closed back, carrying a large complete civic-facade rhythm and terraced-field contour composition, with harbor-turquoise platform heels",
+                                                    "AI ECE":  "a prickly-pear-green cropped undercover-investigator jacket exposing a narrow ordinary waist panel, with a separate night-charcoal above-knee asymmetric skirt carrying a large complete empty-road-route and hilltop contour composition, high closed back, and Malta-red heeled boots",
+                                                    "Male":  "the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted honey-limestone short-sleeve top carrying a restrained complete Mdina gate, bastion, and terraced-field composition, fitted black jeans, and practical black boots"
+                                                },
+                                    "propPlan":  "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across one clearly empty Mdina approach road toward an unoccupied route marker, away from the gate, walls, fields, every person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+                                    "handInventory":  [
+                                                          "ECE left open hand supports the opaque inspection paddle and inert prop from beneath; ECE right hand rests visibly on the male\u0027s near forearm",
+                                                          "the male left hand rests visibly on ECE\u0027s near shoulder; the male right hand rests visibly on Ellie\u0027s near forearm",
+                                                          "Ellie left hand rests visibly on the male\u0027s near forearm; Ellie right hand rests visibly on Radiance\u0027s near shoulder",
+                                                          "Radiance left hand rests visibly on Ellie\u0027s near shoulder; Radiance right hand rests visibly on Alia\u0027s near forearm",
+                                                          "Alia left hand rests visibly on Radiance\u0027s near forearm; Alia right open hand remains clearly visible at her far outer side"
+                                                      ],
+                                    "pawsPlan":  null,
+                                    "polePlan":  null,
+                                    "maleModel":  {
+                                                      "present":  true,
+                                                      "emotion":  {
+                                                                      "key":  "batch320-malta-scene2-male-emotion",
+                                                                      "roll":  55,
+                                                                      "result":  "aching romantic longing",
+                                                                      "performance":  "aching romantic longing shown by a restrained warm expression with his head and pupils most strongly fixed on ECE across their direct shoulder contact"
+                                                                  },
+                                                      "identity":  "established adult male from Scene 1136",
+                                                      "relationship":  "married to ECE; fully clothed consensual adult infidelity drama with Alia and Ellie; at least two clear male contacts; strongest sustained eye line remains on ECE"
+                                                  },
+                                    "renderPrompt":  "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the established adult male. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry covered civic overlook beside Mdina\u0027s fortified hilltop during a sunshower with sparkling droplets, with the complete honey-limestone bastion wall, deep dry ditch, monumental secular city gate, winding lane network, Baroque civic facades, terraced fields below, one clearly empty marked road route, and no religious building. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male. Add him without replacing a woman. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: undercover investigator couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 81=sunshower with sparkling droplets; PAWS 94=inactive; pole theme 97=inactive; rainbow-only 25=inactive; rainbow hosiery 44=inactive; hosiery wearer selector 0=Radiance; hosiery palette selector 64=original independent rainbow gradient; romance 4; compound love 98. Exact wardrobe rolls: Radiance: midriff 8=visible, strapless 11=active, open back 8=active; Ellie: midriff 66=covered, strapless 65=inactive, open back 54=inactive; Alia: midriff 66=covered, strapless 69=inactive, open back 38=inactive; AI ECE: midriff 8=visible, strapless 43=inactive, open back 52=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a fully strapless Malta-red cropped undercover-investigator bodice with a high straight opaque bustline exposing a narrow ordinary waist panel, secure opaque front and sides, and a completely open back from shoulder blades to the separate waistline, with a separate salt-white above-knee flared skirt carrying a large complete Mdina gate arch and winding-lane composition, and warm-gold pumps; Ellie: a Mediterranean-cobalt cap-sleeve undercover-investigator above-knee tailored skort dress with covered waist and high closed back, carrying a large complete bastion-wall, dry-ditch, and sunshower-arc composition, with rain-silver slingback heels; Alia: a Gozo-ochre high-neck sleeveless undercover-investigator above-knee sculpted dress with covered waist and high closed back, carrying a large complete civic-facade rhythm and terraced-field contour composition, with harbor-turquoise platform heels; AI ECE: a prickly-pear-green cropped undercover-investigator jacket exposing a narrow ordinary waist panel, with a separate night-charcoal above-knee asymmetric skirt carrying a large complete empty-road-route and hilltop contour composition, high closed back, and Malta-red heeled boots; Male: the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted honey-limestone short-sleeve top carrying a restrained complete Mdina gate, bastion, and terraced-field composition, fitted black jeans, and practical black boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Malta motifs dominate at least two outfits: large complete Mdina-gate arch, bastion wall, dry-ditch geometry, winding-lane network, civic-facade rhythm, terraced-field contour, sunshower arc, and empty-road-route compositions across all four women\u0027s outfits and the male top; at least two separate outfits each carry one complete full-width secular Malta fortified-hilltop composition rather than a tiny crest or trim. Use Mdina\u0027s fortified hilltop setting, tranquil winding streets, honey-limestone palaces, secular gate, bastion wall, dry ditch, terraces, and surrounding fields respectfully. Keep sacred buildings outside the frame. Undercover investigator couture is original fictional film-editorial fashion for a nonviolent public route study, with no police impersonation, official badge, copied uniform, surveillance of people, arrest, raid, threat, injury, combat, or assassination. Use secular Maltese harbors, bastion geometry, limestone streets, civic gates, terraced fields, natural arches, sea caves, cliffs, inland-sea tunnels, salt-white stone, boats, paths, and public infrastructure only. No literal flag, Maltese cross, coat of arms, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 42, determination, performed as determination shown by a focused warm gaze toward Alia while keeping her two neighboring contacts gentle; Ellie: roll 88, fear and urgent vulnerability, performed as fear and urgent vulnerability shown by widened eyes and a braced breath while accepting the male\u0027s reassuring forearm touch; Alia: roll 56, aching romantic longing, performed as aching romantic longing shown by a softened gaze toward Radiance and a restrained hopeful smile; AI ECE: roll 70, suspicion, performed as suspicion shown by a measured sideways glance toward the male while maintaining safe route focus; Male: roll 55, aching romantic longing, performed as aching romantic longing shown by a restrained warm expression with his head and pupils most strongly fixed on ECE across their direct shoulder contact. Duplicate labels must have visibly different performances. Selected romance roll 4: Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance\u0027s fingertips. Selected compound roll 98: Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention. Materialize both through this exact consensual public choreography: Translate the cheek greeting, shoulder press, retained fingertips, waist embrace, forehead kiss, and ECE\u0027s reclaiming step into a five-adult open arc. ECE supports the isolated prop paddle at far left. The male rests one hand on ECE\u0027s near shoulder and his other hand on Ellie\u0027s near forearm while his strongest sustained eye line remains on ECE. ECE answers at his near forearm. Ellie answers at the male\u0027s forearm and rests her other hand on Radiance\u0027s shoulder. Radiance answers at Ellie\u0027s shoulder and rests her free hand on Alia\u0027s forearm while leaning her forehead affectionately toward Alia without hiding either face. Alia answers at Radiance\u0027s forearm and keeps her outer hand visible. This is fully clothed consensual adult infidelity drama expressed only through restrained eye lines and gentle public touch. Place ECE far left facing the empty road route, the male left-center turned three-quarter-left toward ECE, Ellie center half a step behind him, Radiance right-center in a three-quarter back turn, and Alia far right facing Radiance. Keep pale rain-lit sky, gate openings, ditch space, lane gaps, or terraced fields behind all ten arms. The moving open arc must show every hand endpoint and the male must never look most strongly at another woman. Exact hands, no others: ECE left open hand supports the opaque inspection paddle and inert prop from beneath; ECE right hand rests visibly on the male\u0027s near forearm; the male left hand rests visibly on ECE\u0027s near shoulder; the male right hand rests visibly on Ellie\u0027s near forearm; Ellie left hand rests visibly on the male\u0027s near forearm; Ellie right hand rests visibly on Radiance\u0027s near shoulder; Radiance left hand rests visibly on Ellie\u0027s near shoulder; Radiance right hand rests visibly on Alia\u0027s near forearm; Alia left hand rests visibly on Radiance\u0027s near forearm; Alia right open hand remains clearly visible at her far outer side. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across one clearly empty Mdina approach road toward an unoccupied route marker, away from the gate, walls, fields, every person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render sunshower with sparkling droplets cinematically while keeping dry stable nonslip footing. Exactly five adults, ten arms, and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+                                },
+                       "1302":  {
+                                    "scene":  1302,
+                                    "theme":  "nurse-care couture",
+                                    "landmark":  "a broad dry nonslip covered viewing deck above the Blue Grotto and Wied iz-Zurrieq during cinematic light rain with reflections, with the complete massive honey-limestone sea arch, a chain of blue sea caves, cobalt water, white wave foam, distant uninhabited Filfla silhouette, small moored civilian boats, one clearly empty marked water route, and all rain beyond the shelter",
+                                    "motifs":  [
+                                                   "large complete Blue-Grotto arch, sea-cave chain, cobalt-reflection band, limestone-layer, white-wave-foam, Filfla silhouette, boat-route, and empty-water-route compositions across all four outfits",
+                                                   "at least two separate outfits each carry one complete full-width secular Malta grotto-and-coast composition rather than tiny trim"
+                                               ],
+                                    "culture":  "Use Blue Grotto\u0027s massive natural limestone arch, linked sea caves, reflected cobalt water, wave foam, cliff layers, Filfla silhouette, and small civilian boat route respectfully. Nurse-care couture is only original public-safe fictional fashion inspired by calm mutual support and route wellness. There is no clinic, patient, diagnosis, treatment, procedure, medical instrument, copied uniform, badge, red cross, caduceus, emergency, injury, or sexualized care. Use secular Maltese harbors, bastion geometry, limestone streets, civic gates, terraced fields, natural arches, sea caves, cliffs, inland-sea tunnels, salt-white stone, boats, paths, and public infrastructure only. No literal flag, Maltese cross, coat of arms, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+                                    "weather":  {
+                                                    "key":  "batch320-malta-scene1302-weather",
+                                                    "roll":  32,
+                                                    "result":  "cinematic light rain with reflections"
+                                                },
+                                    "paws":  {
+                                                 "key":  "batch320-malta-scene1302-paws",
+                                                 "roll":  13,
+                                                 "active":  true
+                                             },
+                                    "poleDanceTheme":  {
+                                                           "key":  "batch320-malta-scene1302-poleDanceTheme",
+                                                           "roll":  74,
+                                                           "active":  false
+                                                       },
+                                    "rainbowOnly":  {
+                                                        "key":  "batch320-malta-scene1302-rainbowOnly",
+                                                        "roll":  20,
+                                                        "active":  false
+                                                    },
+                                    "rainbowHosiery":  {
+                                                           "key":  "batch320-malta-scene1302-rainbowHosiery",
+                                                           "roll":  27,
+                                                           "active":  false,
+                                                           "wearer":  {
+                                                                          "key":  "batch320-malta-scene1302-rainbowHosieryWearer",
+                                                                          "roll":  15,
+                                                                          "result":  "Radiance"
+                                                                      },
+                                                           "palette":  {
+                                                                           "key":  "batch320-malta-scene1302-rainbowHosieryPaletteMode",
+                                                                           "roll":  5,
+                                                                           "result":  "country-palette rainbow-like gradient"
+                                                                       }
+                                                       },
+                                    "romanceBeat":  {
+                                                        "key":  "batch320-malta-scene1302-romanceBeat",
+                                                        "roll":  17,
+                                                        "dynamicIndex":  5,
+                                                        "contractResult":  "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance\u0027s shoulder."
+                                                    },
+                                    "compoundLoveBeat":  {
+                                                             "key":  "batch320-malta-scene1302-compoundLoveBeat",
+                                                             "roll":  61,
+                                                             "index":  1,
+                                                             "contractResult":  "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance\u0027s cheek; Ellie holds Radiance\u0027s hand and stares directly at ECE."
+                                                         },
+                                    "characters":  {
+                                                       "Radiance":  {
+                                                                        "emotion":  {
+                                                                                        "key":  "batch320-malta-scene1302-Radiance-emotion",
+                                                                                        "roll":  33,
+                                                                                        "result":  "overwhelming relief",
+                                                                                        "performance":  "overwhelming relief shown by relaxed shoulders and tear-bright smiling eyes while securely cradling PAWS"
+                                                                                    },
+                                                                        "visibleMidriff":  {
+                                                                                               "key":  "batch320-malta-scene1302-Radiance-visibleMidriff",
+                                                                                               "roll":  89,
+                                                                                               "active":  false
+                                                                                           },
+                                                                        "straplessDress":  {
+                                                                                               "key":  "batch320-malta-scene1302-Radiance-straplessDress",
+                                                                                               "roll":  62,
+                                                                                               "active":  false
+                                                                                           },
+                                                                        "fullyOpenBack":  {
+                                                                                              "key":  "batch320-malta-scene1302-Radiance-fullyOpenBack",
+                                                                                              "roll":  79,
+                                                                                              "active":  false
+                                                                                          }
+                                                                    },
+                                                       "Ellie":  {
+                                                                     "emotion":  {
+                                                                                     "key":  "batch320-malta-scene1302-Ellie-emotion",
+                                                                                     "roll":  57,
+                                                                                     "result":  "aching romantic longing",
+                                                                                     "performance":  "aching romantic longing shown by a softened gaze toward Radiance while her kitten touch stays gentle"
+                                                                                 },
+                                                                     "visibleMidriff":  {
+                                                                                            "key":  "batch320-malta-scene1302-Ellie-visibleMidriff",
+                                                                                            "roll":  77,
+                                                                                            "active":  false
+                                                                                        },
+                                                                     "straplessDress":  {
+                                                                                            "key":  "batch320-malta-scene1302-Ellie-straplessDress",
+                                                                                            "roll":  26,
+                                                                                            "active":  true
+                                                                                        },
+                                                                     "fullyOpenBack":  {
+                                                                                           "key":  "batch320-malta-scene1302-Ellie-fullyOpenBack",
+                                                                                           "roll":  35,
+                                                                                           "active":  false
+                                                                                       }
+                                                                 },
+                                                       "Alia":  {
+                                                                    "emotion":  {
+                                                                                    "key":  "batch320-malta-scene1302-Alia-emotion",
+                                                                                    "roll":  27,
+                                                                                    "result":  "hope",
+                                                                                    "performance":  "hope shown by a quiet upward smile toward ECE while maintaining the linked care chain"
+                                                                                },
+                                                                    "visibleMidriff":  {
+                                                                                           "key":  "batch320-malta-scene1302-Alia-visibleMidriff",
+                                                                                           "roll":  27,
+                                                                                           "active":  true
+                                                                                       },
+                                                                    "straplessDress":  {
+                                                                                           "key":  "batch320-malta-scene1302-Alia-straplessDress",
+                                                                                           "roll":  44,
+                                                                                           "active":  false
+                                                                                       },
+                                                                    "fullyOpenBack":  {
+                                                                                          "key":  "batch320-malta-scene1302-Alia-fullyOpenBack",
+                                                                                          "roll":  29,
+                                                                                          "active":  true
+                                                                                      }
+                                                                },
+                                                       "AI ECE":  {
+                                                                      "emotion":  {
+                                                                                      "key":  "batch320-malta-scene1302-AI ECE-emotion",
+                                                                                      "roll":  9,
+                                                                                      "result":  "romantic joy",
+                                                                                      "performance":  "romantic joy shown by a bright affectionate smile toward Alia while maintaining calm route-strategist focus"
+                                                                                  },
+                                                                      "visibleMidriff":  {
+                                                                                             "key":  "batch320-malta-scene1302-AI ECE-visibleMidriff",
+                                                                                             "roll":  5,
+                                                                                             "active":  true
+                                                                                         },
+                                                                      "straplessDress":  {
+                                                                                             "key":  "batch320-malta-scene1302-AI ECE-straplessDress",
+                                                                                             "roll":  42,
+                                                                                             "active":  false
+                                                                                         },
+                                                                      "fullyOpenBack":  {
+                                                                                            "key":  "batch320-malta-scene1302-AI ECE-fullyOpenBack",
+                                                                                            "roll":  39,
+                                                                                            "active":  false
+                                                                                        }
+                                                                  }
+                                                   },
+                                    "materializedRomance":  "Translate the shared-ribbon pull, two calming hands, over-shoulder closeness, behind embrace, cheek greeting, retained handhold, and direct ECE eye line into a PAWS-safe open care chain. ECE remains far left with the prop paddle and rests her free hand gently at Alia\u0027s near waist. Alia answers at ECE\u0027s forearm and rests her free hand on Ellie\u0027s shoulder. Ellie answers at Alia\u0027s shoulder and gently pets PAWS with her free hand. Far right, Radiance securely cradles PAWS with one arm and rests her free hand on Ellie\u0027s forearm. The chain carries the rolled embrace and cheek-greeting tenderness through open side-by-side eye lines without hiding any hand.",
+                                    "composition":  "Place ECE far left facing the empty sea route, Alia left-center in a clear three-quarter back turn, Ellie right-center leaning toward PAWS, and Radiance far right standing upright with PAWS securely against her upper torso. Keep a wide open water gap between the prop and PAWS. Use pale sky, sea, arch openings, cave shadow, or deck rail gaps behind every arm. The group forms an asymmetric rising diagonal, not a lineup.",
+                                    "emotionNuance":  {
+                                                          "Radiance":  "overwhelming relief shown by relaxed shoulders and tear-bright smiling eyes while securely cradling PAWS",
+                                                          "Ellie":  "aching romantic longing shown by a softened gaze toward Radiance while her kitten touch stays gentle",
+                                                          "Alia":  "hope shown by a quiet upward smile toward ECE while maintaining the linked care chain",
+                                                          "AI ECE":  "romantic joy shown by a bright affectionate smile toward Alia while maintaining calm route-strategist focus"
+                                                      },
+                                    "outfits":  {
+                                                    "Radiance":  "a salt-white short-sleeve nurse-care above-knee tailored skort dress with covered waist and high closed back, carrying a large complete Blue Grotto arch and cobalt-reflection composition, with Malta-red pumps",
+                                                    "Ellie":  "a fully strapless harbor-turquoise nurse-care above-knee A-line dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete sea-cave chain and white-wave-foam composition, with warm-gold slingback heels",
+                                                    "Alia":  "a Mediterranean-cobalt cropped nurse-care jacket exposing a narrow ordinary waist panel, with secure opaque sides and a completely open back from shoulder blades to the separate waistline, a separate Gozo-ochre above-knee sculpted skirt carrying a large complete limestone-layer and Filfla-silhouette composition, with prickly-pear-green platform heels",
+                                                    "AI ECE":  "a sunset-coral cap-sleeve cropped nurse-care top exposing a narrow ordinary waist panel, with a separate night-charcoal above-knee tailored skort carrying a large complete boat-route and empty-water-route composition, high closed back, and salt-white heeled boots"
+                                                },
+                                    "propPlan":  "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Blue Grotto water toward one unoccupied route marker, away from the arch, boats, PAWS, the affectionate chain, every person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+                                    "handInventory":  [
+                                                          "ECE left open hand supports the opaque inspection paddle and inert prop from beneath; ECE right hand rests visibly at Alia\u0027s near waist",
+                                                          "Alia left hand rests visibly on ECE\u0027s near forearm; Alia right hand rests visibly on Ellie\u0027s near shoulder",
+                                                          "Ellie left hand rests visibly on Alia\u0027s near shoulder; Ellie right hand gently pets PAWS on the upper back",
+                                                          "Radiance left forearm and hand securely cradle PAWS against her upper torso; Radiance right hand rests visibly on Ellie\u0027s near forearm"
+                                                      ],
+                                    "pawsPlan":  "PAWS is active as one tiny collarless golden kitten, securely cradled in Radiance\u0027s left arm far right from the prop and stable footing. Ellie gently pets PAWS\u0027s upper back. No second kitten, collar, costume, leash, ribbon, floor placement, prop proximity, or unsafe footing.",
+                                    "polePlan":  null,
+                                    "maleModel":  {
+                                                      "present":  false
+                                                  },
+                                    "renderPrompt":  "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry nonslip covered viewing deck above the Blue Grotto and Wied iz-Zurrieq during cinematic light rain with reflections, with the complete massive honey-limestone sea arch, a chain of blue sea caves, cobalt water, white wave foam, distant uninhabited Filfla silhouette, small moored civilian boats, one clearly empty marked water route, and all rain beyond the shelter. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: nurse-care couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 32=cinematic light rain with reflections; PAWS 13=active; pole theme 74=inactive; rainbow-only 20=inactive; rainbow hosiery 27=inactive; hosiery wearer selector 15=Radiance; hosiery palette selector 5=country-palette rainbow-like gradient; romance 17; compound love 61. Exact wardrobe rolls: Radiance: midriff 89=covered, strapless 62=inactive, open back 79=inactive; Ellie: midriff 77=covered, strapless 26=active, open back 35=inactive; Alia: midriff 27=visible, strapless 44=inactive, open back 29=active; AI ECE: midriff 5=visible, strapless 42=inactive, open back 39=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a salt-white short-sleeve nurse-care above-knee tailored skort dress with covered waist and high closed back, carrying a large complete Blue Grotto arch and cobalt-reflection composition, with Malta-red pumps; Ellie: a fully strapless harbor-turquoise nurse-care above-knee A-line dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete sea-cave chain and white-wave-foam composition, with warm-gold slingback heels; Alia: a Mediterranean-cobalt cropped nurse-care jacket exposing a narrow ordinary waist panel, with secure opaque sides and a completely open back from shoulder blades to the separate waistline, a separate Gozo-ochre above-knee sculpted skirt carrying a large complete limestone-layer and Filfla-silhouette composition, with prickly-pear-green platform heels; AI ECE: a sunset-coral cap-sleeve cropped nurse-care top exposing a narrow ordinary waist panel, with a separate night-charcoal above-knee tailored skort carrying a large complete boat-route and empty-water-route composition, high closed back, and salt-white heeled boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Malta motifs dominate at least two outfits: large complete Blue-Grotto arch, sea-cave chain, cobalt-reflection band, limestone-layer, white-wave-foam, Filfla silhouette, boat-route, and empty-water-route compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Malta grotto-and-coast composition rather than tiny trim. Use Blue Grotto\u0027s massive natural limestone arch, linked sea caves, reflected cobalt water, wave foam, cliff layers, Filfla silhouette, and small civilian boat route respectfully. Nurse-care couture is only original public-safe fictional fashion inspired by calm mutual support and route wellness. There is no clinic, patient, diagnosis, treatment, procedure, medical instrument, copied uniform, badge, red cross, caduceus, emergency, injury, or sexualized care. Use secular Maltese harbors, bastion geometry, limestone streets, civic gates, terraced fields, natural arches, sea caves, cliffs, inland-sea tunnels, salt-white stone, boats, paths, and public infrastructure only. No literal flag, Maltese cross, coat of arms, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 33, overwhelming relief, performed as overwhelming relief shown by relaxed shoulders and tear-bright smiling eyes while securely cradling PAWS; Ellie: roll 57, aching romantic longing, performed as aching romantic longing shown by a softened gaze toward Radiance while her kitten touch stays gentle; Alia: roll 27, hope, performed as hope shown by a quiet upward smile toward ECE while maintaining the linked care chain; AI ECE: roll 9, romantic joy, performed as romantic joy shown by a bright affectionate smile toward Alia while maintaining calm route-strategist focus. Duplicate labels must have visibly different performances. Selected romance roll 17: Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance\u0027s shoulder. Selected compound roll 61: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance\u0027s cheek; Ellie holds Radiance\u0027s hand and stares directly at ECE. Materialize both through this exact consensual public choreography: Translate the shared-ribbon pull, two calming hands, over-shoulder closeness, behind embrace, cheek greeting, retained handhold, and direct ECE eye line into a PAWS-safe open care chain. ECE remains far left with the prop paddle and rests her free hand gently at Alia\u0027s near waist. Alia answers at ECE\u0027s forearm and rests her free hand on Ellie\u0027s shoulder. Ellie answers at Alia\u0027s shoulder and gently pets PAWS with her free hand. Far right, Radiance securely cradles PAWS with one arm and rests her free hand on Ellie\u0027s forearm. The chain carries the rolled embrace and cheek-greeting tenderness through open side-by-side eye lines without hiding any hand. Place ECE far left facing the empty sea route, Alia left-center in a clear three-quarter back turn, Ellie right-center leaning toward PAWS, and Radiance far right standing upright with PAWS securely against her upper torso. Keep a wide open water gap between the prop and PAWS. Use pale sky, sea, arch openings, cave shadow, or deck rail gaps behind every arm. The group forms an asymmetric rising diagonal, not a lineup. Exact hands, no others: ECE left open hand supports the opaque inspection paddle and inert prop from beneath; ECE right hand rests visibly at Alia\u0027s near waist; Alia left hand rests visibly on ECE\u0027s near forearm; Alia right hand rests visibly on Ellie\u0027s near shoulder; Ellie left hand rests visibly on Alia\u0027s near shoulder; Ellie right hand gently pets PAWS on the upper back; Radiance left forearm and hand securely cradle PAWS against her upper torso; Radiance right hand rests visibly on Ellie\u0027s near forearm. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Blue Grotto water toward one unoccupied route marker, away from the arch, boats, PAWS, the affectionate chain, every person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is active as one tiny collarless golden kitten, securely cradled in Radiance\u0027s left arm far right from the prop and stable footing. Ellie gently pets PAWS\u0027s upper back. No second kitten, collar, costume, leash, ribbon, floor placement, prop proximity, or unsafe footing. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render cinematic light rain with reflections cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+                                },
+                       "1303":  {
+                                    "scene":  1303,
+                                    "theme":  "nurse-care couture",
+                                    "landmark":  "a broad dry nonslip covered public overlook above Gozo\u0027s Dwejra inland sea during cinematic light rain with reflections, with the complete circular subsidence basin, narrow sea tunnel through honey-limestone cliffs, Dwejra Bay, Fungus Rock sea stack, layered fossil-bearing rock, low reefs, one clearly empty marked water route, and all rain beyond the shelter",
+                                    "motifs":  [
+                                                   "large complete Dwejra circular-basin, inland-sea tunnel, Fungus-Rock stack, limestone-cliff layer, fossil-band, sea-cave, reef-line, and empty-water-route compositions across all four outfits",
+                                                   "at least two separate outfits each carry one complete full-width secular Malta Dwejra geology composition rather than tiny trim"
+                                               ],
+                                    "culture":  "Use Dwejra\u0027s circular subsidence basin, inland sea, narrow sea tunnel, limestone cliffs, Fungus Rock, fossil layers, sea caves, stacks, reefs, and wilderness seascape respectfully. No protected wildlife appears nearby. Nurse-care couture is only original public-safe fictional fashion inspired by calm mutual support and route wellness. There is no clinic, patient, diagnosis, treatment, procedure, medical instrument, copied uniform, badge, red cross, caduceus, emergency, injury, or sexualized care. Use secular Maltese harbors, bastion geometry, limestone streets, civic gates, terraced fields, natural arches, sea caves, cliffs, inland-sea tunnels, salt-white stone, boats, paths, and public infrastructure only. No literal flag, Maltese cross, coat of arms, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+                                    "weather":  {
+                                                    "key":  "batch320-malta-scene1303-weather",
+                                                    "roll":  31,
+                                                    "result":  "cinematic light rain with reflections"
+                                                },
+                                    "paws":  {
+                                                 "key":  "batch320-malta-scene1303-paws",
+                                                 "roll":  68,
+                                                 "active":  false
+                                             },
+                                    "poleDanceTheme":  {
+                                                           "key":  "batch320-malta-scene1303-poleDanceTheme",
+                                                           "roll":  19,
+                                                           "active":  false
+                                                       },
+                                    "rainbowOnly":  {
+                                                        "key":  "batch320-malta-scene1303-rainbowOnly",
+                                                        "roll":  47,
+                                                        "active":  false
+                                                    },
+                                    "rainbowHosiery":  {
+                                                           "key":  "batch320-malta-scene1303-rainbowHosiery",
+                                                           "roll":  54,
+                                                           "active":  false,
+                                                           "wearer":  {
+                                                                          "key":  "batch320-malta-scene1303-rainbowHosieryWearer",
+                                                                          "roll":  82,
+                                                                          "result":  "AI ECE"
+                                                                      },
+                                                           "palette":  {
+                                                                           "key":  "batch320-malta-scene1303-rainbowHosieryPaletteMode",
+                                                                           "roll":  50,
+                                                                           "result":  "original independent rainbow gradient"
+                                                                       }
+                                                       },
+                                    "romanceBeat":  {
+                                                        "key":  "batch320-malta-scene1303-romanceBeat",
+                                                        "roll":  54,
+                                                        "dynamicIndex":  6,
+                                                        "contractResult":  "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile."
+                                                    },
+                                    "compoundLoveBeat":  {
+                                                             "key":  "batch320-malta-scene1303-compoundLoveBeat",
+                                                             "roll":  76,
+                                                             "index":  4,
+                                                             "contractResult":  "ECE sits close against Radiance\u0027s side with Radiance\u0027s arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+                                                         },
+                                    "characters":  {
+                                                       "Radiance":  {
+                                                                        "emotion":  {
+                                                                                        "key":  "batch320-malta-scene1303-Radiance-emotion",
+                                                                                        "roll":  56,
+                                                                                        "result":  "aching romantic longing",
+                                                                                        "performance":  "aching romantic longing shown by a softened gaze toward ECE while their linked support gesture stays steady"
+                                                                                    },
+                                                                        "visibleMidriff":  {
+                                                                                               "key":  "batch320-malta-scene1303-Radiance-visibleMidriff",
+                                                                                               "roll":  66,
+                                                                                               "active":  false
+                                                                                           },
+                                                                        "straplessDress":  {
+                                                                                               "key":  "batch320-malta-scene1303-Radiance-straplessDress",
+                                                                                               "roll":  81,
+                                                                                               "active":  false
+                                                                                           },
+                                                                        "fullyOpenBack":  {
+                                                                                              "key":  "batch320-malta-scene1303-Radiance-fullyOpenBack",
+                                                                                              "roll":  2,
+                                                                                              "active":  true
+                                                                                          }
+                                                                    },
+                                                       "Ellie":  {
+                                                                     "emotion":  {
+                                                                                     "key":  "batch320-malta-scene1303-Ellie-emotion",
+                                                                                     "roll":  98,
+                                                                                     "result":  "defiance",
+                                                                                     "performance":  "defiance shown by an upright chin and direct gaze toward Alia while keeping both shoulder contacts gentle"
+                                                                                 },
+                                                                     "visibleMidriff":  {
+                                                                                            "key":  "batch320-malta-scene1303-Ellie-visibleMidriff",
+                                                                                            "roll":  20,
+                                                                                            "active":  true
+                                                                                        },
+                                                                     "straplessDress":  {
+                                                                                            "key":  "batch320-malta-scene1303-Ellie-straplessDress",
+                                                                                            "roll":  63,
+                                                                                            "active":  false
+                                                                                        },
+                                                                     "fullyOpenBack":  {
+                                                                                           "key":  "batch320-malta-scene1303-Ellie-fullyOpenBack",
+                                                                                           "roll":  60,
+                                                                                           "active":  false
+                                                                                       }
+                                                                 },
+                                                       "Alia":  {
+                                                                    "emotion":  {
+                                                                                    "key":  "batch320-malta-scene1303-Alia-emotion",
+                                                                                    "roll":  90,
+                                                                                    "result":  "anger",
+                                                                                    "performance":  "anger shown by a controlled furrowed brow toward the empty route rather than any person while her forearm contact remains calm"
+                                                                                },
+                                                                    "visibleMidriff":  {
+                                                                                           "key":  "batch320-malta-scene1303-Alia-visibleMidriff",
+                                                                                           "roll":  92,
+                                                                                           "active":  false
+                                                                                       },
+                                                                    "straplessDress":  {
+                                                                                           "key":  "batch320-malta-scene1303-Alia-straplessDress",
+                                                                                           "roll":  31,
+                                                                                           "active":  true
+                                                                                       },
+                                                                    "fullyOpenBack":  {
+                                                                                          "key":  "batch320-malta-scene1303-Alia-fullyOpenBack",
+                                                                                          "roll":  44,
+                                                                                          "active":  false
+                                                                                      }
+                                                                },
+                                                       "AI ECE":  {
+                                                                      "emotion":  {
+                                                                                      "key":  "batch320-malta-scene1303-AI ECE-emotion",
+                                                                                      "roll":  36,
+                                                                                      "result":  "magnetic confidence",
+                                                                                      "performance":  "magnetic confidence shown by a poised half-smile toward Radiance while maintaining calm route-strategist focus"
+                                                                                  },
+                                                                      "visibleMidriff":  {
+                                                                                             "key":  "batch320-malta-scene1303-AI ECE-visibleMidriff",
+                                                                                             "roll":  98,
+                                                                                             "active":  false
+                                                                                         },
+                                                                      "straplessDress":  {
+                                                                                             "key":  "batch320-malta-scene1303-AI ECE-straplessDress",
+                                                                                             "roll":  61,
+                                                                                             "active":  false
+                                                                                         },
+                                                                      "fullyOpenBack":  {
+                                                                                            "key":  "batch320-malta-scene1303-AI ECE-fullyOpenBack",
+                                                                                            "roll":  6,
+                                                                                            "active":  true
+                                                                                        }
+                                                                  }
+                                                   },
+                                    "materializedRomance":  "Translate ECE\u0027s rise from the beacon, Radiance\u0027s help, Ellie\u0027s rear embrace, Alia\u0027s downward reach, side-by-side closeness, cheek greeting, and hands-over-hands beat into a stable all-standing Dwejra support chain. ECE remains far left with the prop paddle and rests her free hand on Radiance\u0027s forearm. Radiance answers at ECE\u0027s upper arm and rests her free hand on Ellie\u0027s shoulder. Ellie answers at Radiance\u0027s shoulder and rests her other hand on Alia\u0027s forearm. Alia answers at Ellie\u0027s forearm and keeps her outer hand openly visible. Their close eye lines carry the rolled cheek-greeting and joined-hands tenderness without kneeling, hidden hands, or unsafe footing.",
+                                    "composition":  "Place ECE far left facing the empty inland-sea route, Radiance left-center turning three-quarter-back toward ECE, Ellie right-center in a forward supportive step, and Alia far right turning inward. Use pale rain-lit sky, inland water, tunnel opening, cliff gaps, or reef air behind every arm. Show both fully open backs, all faces, and all eight arm paths while the group forms a shallow moving crescent.",
+                                    "emotionNuance":  {
+                                                          "Radiance":  "aching romantic longing shown by a softened gaze toward ECE while their linked support gesture stays steady",
+                                                          "Ellie":  "defiance shown by an upright chin and direct gaze toward Alia while keeping both shoulder contacts gentle",
+                                                          "Alia":  "anger shown by a controlled furrowed brow toward the empty route rather than any person while her forearm contact remains calm",
+                                                          "AI ECE":  "magnetic confidence shown by a poised half-smile toward Radiance while maintaining calm route-strategist focus"
+                                                      },
+                                    "outfits":  {
+                                                    "Radiance":  "a Malta-red cap-sleeve nurse-care above-knee A-line dress with covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete Dwejra circular basin and inland-sea tunnel composition, with salt-white pumps",
+                                                    "Ellie":  "a harbor-turquoise cropped nurse-care jacket exposing a narrow ordinary waist panel, with a separate honey-limestone above-knee tailored skirt carrying a large complete limestone-cliff layer and fossil-band composition, high closed back, and warm-gold slingback heels",
+                                                    "Alia":  "a fully strapless Gozo-ochre nurse-care above-knee architectural skort dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete Fungus-Rock stack, sea-cave, and reef-line composition, with Mediterranean-cobalt platform heels",
+                                                    "AI ECE":  "a prickly-pear-green sleeveless nurse-care above-knee sculpted romper with covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete empty-water-route and Dwejra contour composition, with Malta-red heeled boots"
+                                                },
+                                    "propPlan":  "AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Dwejra inland-sea water toward one unoccupied route marker, away from the tunnel, cliffs, Fungus Rock, reefs, every person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration.",
+                                    "handInventory":  [
+                                                          "ECE left open hand supports the opaque inspection paddle and inert prop from beneath; ECE right hand rests visibly on Radiance\u0027s near forearm",
+                                                          "Radiance left hand rests visibly on ECE\u0027s near upper arm; Radiance right hand rests visibly on Ellie\u0027s near shoulder",
+                                                          "Ellie left hand rests visibly on Radiance\u0027s near shoulder; Ellie right hand rests visibly on Alia\u0027s near forearm",
+                                                          "Alia left hand rests visibly on Ellie\u0027s near forearm; Alia right open hand remains clearly visible at her far outer side"
+                                                      ],
+                                    "pawsPlan":  null,
+                                    "polePlan":  null,
+                                    "maleModel":  {
+                                                      "present":  false
+                                                  },
+                                    "renderPrompt":  "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial at a broad dry nonslip covered public overlook above Gozo\u0027s Dwejra inland sea during cinematic light rain with reflections, with the complete circular subsidence basin, narrow sea tunnel through honey-limestone cliffs, Dwejra Bay, Fungus Rock sea stack, layered fossil-bearing rock, low reefs, one clearly empty marked water route, and all rain beyond the shelter. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly over age 28. Preserve the anchored faces, skin tones, and distinct identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the Scene 1136 bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: nurse-care couture, used only as original public-safe fictional fashion. No copied uniform, badge, patient, treatment, diagnosis, procedure, police impersonation, arrest, raid, threat, injury, combat, or sexualized care. Stored scene rolls: weather 31=cinematic light rain with reflections; PAWS 68=inactive; pole theme 19=inactive; rainbow-only 47=inactive; rainbow hosiery 54=inactive; hosiery wearer selector 82=AI ECE; hosiery palette selector 50=original independent rainbow gradient; romance 54; compound love 76. Exact wardrobe rolls: Radiance: midriff 66=covered, strapless 81=inactive, open back 2=active; Ellie: midriff 20=visible, strapless 63=inactive, open back 60=inactive; Alia: midriff 92=covered, strapless 31=active, open back 44=inactive; AI ECE: midriff 98=covered, strapless 61=inactive, open back 6=active. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact outfits: Radiance: a Malta-red cap-sleeve nurse-care above-knee A-line dress with covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete Dwejra circular basin and inland-sea tunnel composition, with salt-white pumps; Ellie: a harbor-turquoise cropped nurse-care jacket exposing a narrow ordinary waist panel, with a separate honey-limestone above-knee tailored skirt carrying a large complete limestone-cliff layer and fossil-band composition, high closed back, and warm-gold slingback heels; Alia: a fully strapless Gozo-ochre nurse-care above-knee architectural skort dress with a high straight opaque bustline, covered waist, and high closed back, carrying a large complete Fungus-Rock stack, sea-cave, and reef-line composition, with Mediterranean-cobalt platform heels; AI ECE: a prickly-pear-green sleeveless nurse-care above-knee sculpted romper with covered waist, secure opaque sides, and a completely open back from shoulder blades to the separate waistline, carrying a large complete empty-water-route and Dwejra contour composition, with Malta-red heeled boots. Materialize every rolled midriff, strapless cut, and open back exactly. Large complete secular Malta motifs dominate at least two outfits: large complete Dwejra circular-basin, inland-sea tunnel, Fungus-Rock stack, limestone-cliff layer, fossil-band, sea-cave, reef-line, and empty-water-route compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Malta Dwejra geology composition rather than tiny trim. Use Dwejra\u0027s circular subsidence basin, inland sea, narrow sea tunnel, limestone cliffs, Fungus Rock, fossil layers, sea caves, stacks, reefs, and wilderness seascape respectfully. No protected wildlife appears nearby. Nurse-care couture is only original public-safe fictional fashion inspired by calm mutual support and route wellness. There is no clinic, patient, diagnosis, treatment, procedure, medical instrument, copied uniform, badge, red cross, caduceus, emergency, injury, or sexualized care. Use secular Maltese harbors, bastion geometry, limestone streets, civic gates, terraced fields, natural arches, sea caves, cliffs, inland-sea tunnels, salt-white stone, boats, paths, and public infrastructure only. No literal flag, Maltese cross, coat of arms, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Distinct emotions: Radiance: roll 56, aching romantic longing, performed as aching romantic longing shown by a softened gaze toward ECE while their linked support gesture stays steady; Ellie: roll 98, defiance, performed as defiance shown by an upright chin and direct gaze toward Alia while keeping both shoulder contacts gentle; Alia: roll 90, anger, performed as anger shown by a controlled furrowed brow toward the empty route rather than any person while her forearm contact remains calm; AI ECE: roll 36, magnetic confidence, performed as magnetic confidence shown by a poised half-smile toward Radiance while maintaining calm route-strategist focus. Duplicate labels must have visibly different performances. Selected romance roll 54: ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile. Selected compound roll 76: ECE sits close against Radiance\u0027s side with Radiance\u0027s arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands. Materialize both through this exact consensual public choreography: Translate ECE\u0027s rise from the beacon, Radiance\u0027s help, Ellie\u0027s rear embrace, Alia\u0027s downward reach, side-by-side closeness, cheek greeting, and hands-over-hands beat into a stable all-standing Dwejra support chain. ECE remains far left with the prop paddle and rests her free hand on Radiance\u0027s forearm. Radiance answers at ECE\u0027s upper arm and rests her free hand on Ellie\u0027s shoulder. Ellie answers at Radiance\u0027s shoulder and rests her other hand on Alia\u0027s forearm. Alia answers at Ellie\u0027s forearm and keeps her outer hand openly visible. Their close eye lines carry the rolled cheek-greeting and joined-hands tenderness without kneeling, hidden hands, or unsafe footing. Place ECE far left facing the empty inland-sea route, Radiance left-center turning three-quarter-back toward ECE, Ellie right-center in a forward supportive step, and Alia far right turning inward. Use pale rain-lit sky, inland water, tunnel opening, cliff gaps, or reef air behind every arm. Show both fully open backs, all faces, and all eight arm paths while the group forms a shallow moving crescent. Exact hands, no others: ECE left open hand supports the opaque inspection paddle and inert prop from beneath; ECE right hand rests visibly on Radiance\u0027s near forearm; Radiance left hand rests visibly on ECE\u0027s near upper arm; Radiance right hand rests visibly on Ellie\u0027s near shoulder; Ellie left hand rests visibly on Radiance\u0027s near shoulder; Ellie right hand rests visibly on Alia\u0027s near forearm; Alia left hand rests visibly on Ellie\u0027s near forearm; Alia right open hand remains clearly visible at her far outer side. AI ECE alone presents one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema prop on a thin flat opaque charcoal inspection paddle. The prop rests entirely on top in clean side profile; no hand touches the grip, trigger, or guard. Magazine absent, empty magazine well and complete empty trigger guard visible. The horizontal muzzle points left across clearly empty Dwejra inland-sea water toward one unoccupied route marker, away from the tunnel, cliffs, Fungus Rock, reefs, every person, animal, and camera, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE alone handles the prop and keeps a separate hands-free holographic route map. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive. Do not convert the wardrobe to rainbow-only styling. Render cinematic light rain with reflections cinematically while keeping dry stable nonslip footing. Exactly four adults, eight arms, and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. Reject every extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, or ambiguous limb or finger cluster. Keep the inert prop fully separated from hands by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, threat, combat, injury, aiming at a person, or aiming at the camera. Asymmetric moving composition, not a static lineup. Fully clothed public-safe editorial, no text or watermark."
+                                }
+                   },
+    "renderAttempts":  {
+                           "raw":  {
+                                       "status":  "pending",
+                                       "requested":  4,
+                                       "concurrency":  "four independent built-in image generation calls launched together with all-settled result handling"
+                                   },
+                           "recovery":  {
+                                            "status":  "not-started",
+                                            "maximumPerBlockedScene":  1
+                                        }
+                       },
+    "acceptancePolicy":  {
+                             "changedAt":  "2026-08-09T23:42:51.658Z",
+                             "requestedByUser":  true,
+                             "policy":  "Relax presentation-level variance while retaining exact adult cast, public safety, safe inert-prop direction, indexed trigger fingers, and traceable arm and hand ownership.",
+                             "softGates":  [
+                                               "minor pose or frozen-choreography substitutions",
+                                               "minor emotion-performance variance",
+                                               "map visibility or styling variance when the scene remains nonviolent and route context is clear",
+                                               "minor landmark prominence variance",
+                                               "minor garment-cut variance",
+                                               "minor PAWS ribbon-read variance when PAWS remains harmless and away from the prop"
+                                           ],
+                             "retainedHardGates":  [
+                                                       "all required clearly adult characters and stable identity anchors",
+                                                       "exactly eight arms and eight hands in four-person scenes or ten arms and ten hands in the selected five-person scene, with traceable ownership",
+                                                       "no unsafe, threatening, person-directed, or camera-directed prop line and no finger inside the trigger guard",
+                                                       "no explicit sexual content, minors, injury, ammunition, firing, combat, restraint, or non-consensual framing",
+                                                       "male scene keeps all four women, strongest male eye line to ECE, and at least two clear contacts"
+                                                   ]
+                         },
+    "renderExecution":  {
+                            "mode":  "four independent 9:16 renders dispatched concurrently; one recovery pass for scenes 1301 through 1303",
+                            "rawSceneCount":  4,
+                            "recoverySceneCount":  3
+                        },
+    "sceneResults":  {
+                         "1300":  {
+                                      "rawAudit":  {
+                                                       "accepted":  true,
+                                                       "status":  "accepted-under-relaxed-presentation-gates",
+                                                       "reason":  "Four anchored adult women, exact traceable eight-arm and eight-hand anatomy, safe tray-supported outward inert prop, Grand Harbour setting, large Malta motifs, windstorm, distinct couture, and public-safe affection pass the retained hard gates."
+                                                   },
+                                      "recoveryAudit":  null,
+                                      "terminalOutcome":  "accepted-raw",
+                                      "acceptedAsset":  "1300-malta-valletta-grand-harbour-windstorm-undercover-investigator.png"
+                                  },
+                         "1301":  {
+                                      "rawAudit":  {
+                                                       "accepted":  false,
+                                                       "status":  "rendered-rejected-by-retained-hard-gate",
+                                                       "reason":  "The selected five-person scene does not establish ten continuously traceable hands."
+                                                   },
+                                      "recoveryAudit":  {
+                                                            "accepted":  false,
+                                                            "status":  "rendered-rejected-by-retained-hard-gate",
+                                                            "reason":  "The single recovery pass still does not establish ten continuously traceable hands and unambiguous ownership.",
+                                                            "source":  "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-445f657f-f763-441e-80c2-f80aecf26b45.png"
+                                                        },
+                                      "terminalOutcome":  "blocked-after-single-recovery-pass",
+                                      "acceptedAsset":  null
+                                  },
+                         "1302":  {
+                                      "rawAudit":  {
+                                                       "accepted":  false,
+                                                       "status":  "rendered-rejected-by-retained-hard-gate",
+                                                       "reason":  "One affectionate contact leaves hand ownership hidden or merged, so eight continuously traceable hands cannot be established."
+                                                   },
+                                      "recoveryAudit":  {
+                                                            "accepted":  false,
+                                                            "status":  "rendered-rejected-by-retained-hard-gate",
+                                                            "reason":  "The single recovery pass retains ambiguous hidden or merged hand ownership.",
+                                                            "source":  "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-c6fc88ef-1893-49f7-bc96-a6b241660560.png"
+                                                        },
+                                      "terminalOutcome":  "blocked-after-single-recovery-pass",
+                                      "acceptedAsset":  null
+                                  },
+                         "1303":  {
+                                      "rawAudit":  {
+                                                       "accepted":  false,
+                                                       "status":  "rendered-rejected-by-retained-hard-gate",
+                                                       "reason":  "Initial hand ownership was not clear enough for the retained anatomy gate."
+                                                   },
+                                      "recoveryAudit":  {
+                                                            "accepted":  true,
+                                                            "status":  "accepted-after-single-recovery-pass",
+                                                            "reason":  "Four anchored adult women, exact traceable eight-arm and eight-hand anatomy, safe outward prop handling, Dwejra Inland Sea setting, large Malta motifs, light rain, distinct care couture, and public-safe affection pass the retained hard gates.",
+                                                            "source":  "C:\\Users\\A\\.codex\\generated_images\\019fd625-0bf6-78d2-9fb8-3f3e22c1d086\\exec-6889e2fa-8290-407e-a980-d16f2fca5e87.png"
+                                                        },
+                                      "terminalOutcome":  "accepted-recovery",
+                                      "acceptedAsset":  "1303-malta-dwejra-inland-sea-light-rain-nurse-care-recovery.png"
+                                  }
+                     },
+    "acceptedAssets":  [
+                           {
+                               "scene":  1300,
+                               "sourceAttempt":  "raw",
+                               "sourceWorkspacePath":  "tmp/world-195x4/batch-320/raw/1300-raw.png",
+                               "acceptedPath":  "assets/lore/starlight-era/1300-malta-valletta-grand-harbour-windstorm-undercover-investigator.png",
+                               "bytes":  2510924,
+                               "sha256":  "79300CC98637230B453A7D6B4E5E8D55D26897D97C051F5ABCBA6CB3E20C1D07",
+                               "copiedFromPreservedOriginal":  true,
+                               "shorteningVariant":  false
+                           },
+                           {
+                               "scene":  1303,
+                               "sourceAttempt":  "single recovery pass",
+                               "sourceWorkspacePath":  "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-6889e2fa-8290-407e-a980-d16f2fca5e87.png",
+                               "acceptedPath":  "assets/lore/starlight-era/1303-malta-dwejra-inland-sea-light-rain-nurse-care-recovery.png",
+                               "bytes":  2540275,
+                               "sha256":  "CAB0726F75AF30C22E5BFF8F665132C96478B1750A961B4A85C2C3F3F9027712",
+                               "copiedFromPreservedOriginal":  true,
+                               "shorteningVariant":  false
+                           }
+                       ],
+    "rejectedAssets":  [
+                           {
+                               "scene":  1301,
+                               "terminalOutcome":  "blocked-after-single-recovery-pass",
+                               "hardGate":  "ten traceable hands"
+                           },
+                           {
+                               "scene":  1302,
+                               "terminalOutcome":  "blocked-after-single-recovery-pass",
+                               "hardGate":  "eight traceable hands"
+                           }
+                       ],
+    "backlogRelaxedReaudit":  {
+                                  "scope":  "Unposted terminal renders from Batches 300 through 319, plus the earlier explicit blocked X item in Batch 281.",
+                                  "visualReviewRule":  "Prior checkpoint labels were treated as evidence, then candidate pixels were re-audited under the user-requested relaxed presentation gates. Hard anatomy and public-safety gates remained binding.",
+                                  "newlyAcceptedSingletons":  [
+                                                                  {
+                                                                      "batch":  314,
+                                                                      "country":  "Guyana",
+                                                                      "scene":  1276,
+                                                                      "source":  "tmp/world-195x4/batch-314/raw/1276-raw.png",
+                                                                      "acceptedPath":  "assets/lore/starlight-era/1276-guyana-orinduik-falls-dust-paws-relaxed-reaudit.png",
+                                                                      "bytes":  2517656,
+                                                                      "sha256":  "5E4FD98D24D05E3923DDE56A9CE0129EADF271E8DC022E4BB5B902543431FAAF",
+                                                                      "publishEligibility":  "singleton-only"
+                                                                  },
+                                                                  {
+                                                                      "batch":  316,
+                                                                      "country":  "Bhutan",
+                                                                      "scene":  1286,
+                                                                      "source":  "tmp/world-195x4/batch-316/raw/1286-raw.png",
+                                                                      "acceptedPath":  "assets/lore/starlight-era/1286-bhutan-phobjikha-lenticular-paws-ece-hosiery-relaxed-reaudit.png",
+                                                                      "bytes":  2474019,
+                                                                      "sha256":  "2DD0BB64C8470D1E0AD898D2107E66624C025310C74D83FF86F9F02192017B31",
+                                                                      "publishEligibility":  "singleton-only"
+                                                                  },
+                                                                  {
+                                                                      "batch":  317,
+                                                                      "country":  "Luxembourg",
+                                                                      "scene":  1291,
+                                                                      "source":  "tmp/world-195x4/batch-317/raw/1291-raw.png",
+                                                                      "acceptedPath":  "assets/lore/starlight-era/1291-luxembourg-schiessentumpel-windstorm-relaxed-reaudit.png",
+                                                                      "bytes":  2784404,
+                                                                      "sha256":  "7BEF17057840CDAE480164F1DB14615BE373A989B93DE524D7C30D58575891D3",
+                                                                      "publishEligibility":  "singleton-only"
+                                                                  },
+                                                                  {
+                                                                      "batch":  319,
+                                                                      "country":  "Montenegro",
+                                                                      "scene":  1299,
+                                                                      "source":  "tmp/world-195x4/batch-319/raw/1299-raw.png",
+                                                                      "acceptedPath":  "assets/lore/starlight-era/1299-montenegro-skadar-lake-golden-hour-paws-rainbow-relaxed-reaudit.png",
+                                                                      "bytes":  2678044,
+                                                                      "sha256":  "939AADCC56BBE7CF98B3DE20014B4DBC9227A0EAF0DC0FC1565A5869BBE35E85",
+                                                                      "publishEligibility":  "singleton-only-used-as-batch320-secondary"
+                                                                  }
+                                                              ],
+                                  "stillHardRejected":  "All other reviewed Batches 300 through 319 candidates retain failures involving missing cast, nontraceable limbs or hands, unsafe prop direction or trigger state, or the selected male relationship gate.",
+                                  "earlierDefiniteBacklog":  {
+                                                                 "batch":  281,
+                                                                 "country":  "Lithuania",
+                                                                 "priorStatus":  "blocked-by-x-with-no-status-url",
+                                                                 "acceptedScenes":  [
+                                                                                        1145,
+                                                                                        1146,
+                                                                                        1147
+                                                                                    ],
+                                                                 "action":  "retried-and-published"
+                                                             }
+                              },
+    "xPost":  {
+                  "status":  "published-two-logical-groups",
+                  "liveAccount":  "@dogramaci",
+                  "ledgerInspected":  "assets/lore/starlight-era/world-x-publish-ledger.json",
+                  "ledgerModified":  false,
+                  "ledgerReason":  "The ledger already contained unrelated unstaged user changes, so exact public proof is preserved in this narrow checkpoint without staging that dirty file.",
+                  "posts":  [
+                                {
+                                    "batch":  320,
+                                    "country":  "Malta",
+                                    "postedAt":  "2026-08-10T00:13:20.411Z",
+                                    "postUrl":  "https://x.com/dogramaci/status/2086606788904820966",
+                                    "caption":  "Malta white-heart Montenegro #Malta #WorldXXXSeries",
+                                    "renderedCaption":  "Malta ðŸ¤ Montenegro #Malta #WorldXXXSeries",
+                                    "attachments":  [
+                                                        "1300-malta-valletta-grand-harbour-windstorm-undercover-investigator.png",
+                                                        "1303-malta-dwejra-inland-sea-light-rain-nurse-care-recovery.png",
+                                                        "1299-montenegro-skadar-lake-golden-hour-paws-rainbow-relaxed-reaudit.png"
+                                                    ],
+                                    "verification":  "Exact caption and public photo/1, photo/2, and photo/3 endpoints verified."
+                                },
+                                {
+                                    "batch":  281,
+                                    "country":  "Lithuania",
+                                    "postedAt":  "2026-08-10T00:19:00.815Z",
+                                    "postUrl":  "https://x.com/dogramaci/status/2086608216662704535",
+                                    "caption":  "Lithuania red-heart Latvia #Lithuania",
+                                    "renderedCaption":  "Lithuania â¤ï¸ Latvia #Lithuania",
+                                    "attachments":  [
+                                                        "1145-lithuania-trakai-light-rain-nightlife-male-romance.png",
+                                                        "1147-lithuania-nida-double-rainbow-hosiery-runway.png",
+                                                        "1140-latvia-riga-thunderstorm-doctor-male-art-nouveau-route.png"
+                                                    ],
+                                    "verification":  "Previously blocked Batch 281 retry now has an exact public status plus photo/1, photo/2, and photo/3 endpoints."
+                                }
+                            ],
+                  "residualEligibility":  "No other reviewed unposted country has two current-country images passing the retained hard gates. Newly accepted Guyana, Bhutan, Luxembourg, and Montenegro assets remain valid secondary singletons."
+              },
+    "queueAdvance":  {
+                         "status":  "ready",
+                         "country":  "Maldives",
+                         "batch":  321,
+                         "scenes":  [
+                                        1304,
+                                        1305,
+                                        1306,
+                                        1307
+                                    ],
+                         "themePair":  [
+                                           "nurse-care couture",
+                                           "doctor-clinical-command couture"
+                                       ],
+                         "reason":  "Malta Batch 320 is terminal with two accepted local assets and both identified X backlog groups are publicly verified."
+                     },
+    "remoteStateAtCheckpoint":  {
+                                    "sourceBranch":  "agent/iat-launch-window",
+                                    "pushTarget":  "origin/agent/iat-launch-window-recovery-batch-220",
+                                    "mainPolicy":  "Fetch origin/main and leave main untouched because it has independent commits. Never force-push or auto-merge divergence."
+                                },
+    "repositoryScope":  {
+                            "stagedFiles":  [
+                                                "assets/lore/starlight-era/batch-320-malta-relaxed-reaudit-checkpoint.json",
+                                                "assets/lore/starlight-era/1300-malta-valletta-grand-harbour-windstorm-undercover-investigator.png",
+                                                "assets/lore/starlight-era/1303-malta-dwejra-inland-sea-light-rain-nurse-care-recovery.png",
+                                                "assets/lore/starlight-era/1276-guyana-orinduik-falls-dust-paws-relaxed-reaudit.png",
+                                                "assets/lore/starlight-era/1286-bhutan-phobjikha-lenticular-paws-ece-hosiery-relaxed-reaudit.png",
+                                                "assets/lore/starlight-era/1291-luxembourg-schiessentumpel-windstorm-relaxed-reaudit.png",
+                                                "assets/lore/starlight-era/1299-montenegro-skadar-lake-golden-hour-paws-rainbow-relaxed-reaudit.png"
+                                            ],
+                            "untouchedDirtyFiles":  [
+                                                        "assets/lore/starlight-era/overnight-campaign.json",
+                                                        "assets/lore/starlight-era/world-195x4-campaign.json",
+                                                        "assets/lore/starlight-era/world-x-publish-ledger.json",
+                                                        "assets/videos/manifest.json"
+                                                    ]
+                        },
+    "terminalizedAt":  "2026-08-10T00:19:00.815Z"
+}
