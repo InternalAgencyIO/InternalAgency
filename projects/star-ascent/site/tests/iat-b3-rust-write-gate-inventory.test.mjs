@@ -257,7 +257,15 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
   );
   assert.match(
     economyRuntimeWriteAdapterSource,
+    /production_completed_ingress_config_and_lanes_atomic_cas_supported: true/u,
+  );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
     /prepare_production_completed_ingress_lane_write_batch_account_infos/u,
+  );
+  assert.match(
+    economyRuntimeWriteAdapterSource,
+    /execute_production_completed_ingress_config_and_lanes_cas_account_infos/u,
   );
   assert.match(
     economyRuntimeAdapterSource,

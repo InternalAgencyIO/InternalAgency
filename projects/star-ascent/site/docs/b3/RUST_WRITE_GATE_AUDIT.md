@@ -365,16 +365,18 @@ the persistence callback. The large preflight/finalizer values are heap-bounded
 and its SBF build has no over-limit stack frame. A loopback
 validator replay proves OPEN success plus unfinalized, locked, substituted-law,
 hostile-token-ordering, hook, CPI-guard, persistence, restoration, and later-CPI
-rollback. This still exposes no production lifecycle, serialized post-CPI
-Position/Lane write, Solana entrypoint, frozen ABI, production identity, or
+rollback. This still exposes no persistence path composed inside the post-CPI
+callback, no Position lifecycle, Solana entrypoint, frozen ABI, production identity, or
 public dispatch. A separate production-ACTIVE Config CAS is present, but it can
 only increase the authenticated preimage's retained V2 `staked_principal`, and
 only when the exact completed ingress binds that delta, Position principal,
 three lane labels/Config bindings, and reloaded stake-vault amount. Those lane
-facts are not AccountInfo authentication inside the Config CAS. The CAS is not yet
-atomically composed with ingress CPI plus Position/Lane persistence. A separate
+facts are not AccountInfo authentication inside the Config CAS. A separate
 preflight now authenticates the exact three lane AccountInfos in fixed order and
-seals their completed-ingress CAS postimages, but does not execute the writes.
+seals their completed-ingress CAS postimages. The production ledger executor
+then acquires all four Config/lane mutable borrows, revalidates every preimage,
+and commits all four postimages only after every check passes. It is not yet
+composed with ingress CPI or exact Position-PDA lifecycle.
 No handler or release gate is complete.
 The older unphased combined entry remains only for the pinned structural SBF
 fixture and is not the production route.

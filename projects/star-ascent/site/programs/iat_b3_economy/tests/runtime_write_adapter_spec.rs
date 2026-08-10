@@ -15,6 +15,7 @@ use iat_b3_economy::runtime_adapter::{
 use iat_b3_economy::runtime_write_adapter::{
     execute_production_active_config_stake_principal_cas_for_completed_ingress,
     execute_production_active_existing_write_batch_account_infos,
+    execute_production_completed_ingress_config_and_lanes_cas_account_infos,
     prepare_production_completed_ingress_lane_write_batch_account_infos, RuntimeWriteAdapterError,
     RuntimeWriteAdapterTruth, RUNTIME_WRITE_ADAPTER_TRUTH,
 };
@@ -662,7 +663,28 @@ fn production_active_config_cas_rejects_wrong_law_flags_and_borrow_conflicts_wit
 fn completed_ingress_lane_preflight_authenticates_exact_account_order_and_seals_postimages() {
     let binding = binding();
     let gate = open_gate(CLOCK_TIMESTAMP);
-    let active_config = production_active_config(&gate, &binding);
+    let template = production_active_config(&gate, &binding);
+    let mut config_data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+    encode_config_genesis_state(&template.state(), &mut config_data).unwrap();
+    let original_config_data = config_data;
+    let config_key = binding.config().into();
+    let owner = binding.program_id().into();
+    let mut config_lamports = 1;
+    let config_account = AccountInfo::new(
+        &config_key,
+        false,
+        true,
+        &mut config_lamports,
+        &mut config_data,
+        &owner,
+        false,
+    );
+    let active_config = authenticate_production_active_writable_config_account_info(
+        &gate,
+        &binding,
+        &config_account,
+    )
+    .unwrap();
     let completed = completed_ingress(&active_config, &binding, 250);
 
     let current = [
@@ -676,6 +698,9 @@ fn completed_ingress_lane_preflight_authenticates_exact_account_order_and_seals_
     encode_lane_state(&current[0], &mut treasury_data).unwrap();
     encode_lane_state(&current[1], &mut ecosystem_data).unwrap();
     encode_lane_state(&current[2], &mut liquidity_data).unwrap();
+    let original_treasury_data = treasury_data;
+    let original_ecosystem_data = ecosystem_data;
+    let original_liquidity_data = liquidity_data;
     let treasury_key = derive_pda(
         &binding,
         PdaIdentity::LaneState {
@@ -706,7 +731,6 @@ fn completed_ingress_lane_preflight_authenticates_exact_account_order_and_seals_
     .unwrap()
     .key
     .into();
-    let owner = binding.program_id().into();
     let mut treasury_lamports = 1;
     let mut ecosystem_lamports = 1;
     let mut liquidity_lamports = 1;
@@ -771,20 +795,66 @@ fn completed_ingress_lane_preflight_authenticates_exact_account_order_and_seals_
         assert_eq!(decode_lane_state(existing.postimage()).unwrap(), expected);
     }
 
-    let held = ecosystem.try_borrow_mut_data().unwrap();
+    let held = ecosystem.try_borrow_data().unwrap();
     assert_eq!(
-        prepare_production_completed_ingress_lane_write_batch_account_infos(
+        execute_production_completed_ingress_config_and_lanes_cas_account_infos(
             &gate,
             &active_config,
             &binding,
             &completed,
+            &config_account,
             [&treasury, &ecosystem, &liquidity],
         ),
-        Err(RuntimeWriteAdapterError::Runtime(
-            RuntimeAdapterError::AccountBorrowFailed
-        ))
+        Err(RuntimeWriteAdapterError::AccountBorrowFailed)
     );
     drop(held);
+    assert_eq!(
+        &*config_account.try_borrow_data().unwrap(),
+        &original_config_data
+    );
+    assert_eq!(
+        &*treasury.try_borrow_data().unwrap(),
+        &original_treasury_data
+    );
+    assert_eq!(
+        &*ecosystem.try_borrow_data().unwrap(),
+        &original_ecosystem_data
+    );
+    assert_eq!(
+        &*liquidity.try_borrow_data().unwrap(),
+        &original_liquidity_data
+    );
+
+    let receipt = execute_production_completed_ingress_config_and_lanes_cas_account_infos(
+        &gate,
+        &active_config,
+        &binding,
+        &completed,
+        &config_account,
+        [&treasury, &ecosystem, &liquidity],
+    )
+    .unwrap();
+    assert_eq!(receipt.config().next_staked_principal(), 1_250);
+    assert_eq!(
+        receipt.lanes().batch_commitment_sha256(),
+        batch.commitment_sha256()
+    );
+    assert_eq!(
+        decode_config_genesis_state(&config_account.try_borrow_data().unwrap())
+            .unwrap()
+            .config,
+        completed.config
+    );
+    for (account, expected) in [
+        (&treasury, completed.treasury),
+        (&ecosystem, completed.ecosystem),
+        (&liquidity, completed.liquidity),
+    ] {
+        assert_eq!(
+            decode_lane_state(&account.try_borrow_data().unwrap()).unwrap(),
+            expected
+        );
+    }
 }
 
 #[test]
@@ -801,6 +871,7 @@ fn public_surface_remains_narrow_and_fail_closed() {
             account_data_writes_supported: true,
             production_active_config_stake_principal_cas_supported: true,
             production_completed_ingress_lane_account_preflight_supported: true,
+            production_completed_ingress_config_and_lanes_atomic_cas_supported: true,
             account_creation_supported: false,
             lamport_writes_supported: false,
             system_cpi_supported: false,

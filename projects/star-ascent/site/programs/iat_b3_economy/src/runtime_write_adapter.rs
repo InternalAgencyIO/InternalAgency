@@ -42,6 +42,7 @@ pub struct RuntimeWriteAdapterTruth {
     pub account_data_writes_supported: bool,
     pub production_active_config_stake_principal_cas_supported: bool,
     pub production_completed_ingress_lane_account_preflight_supported: bool,
+    pub production_completed_ingress_config_and_lanes_atomic_cas_supported: bool,
     pub account_creation_supported: bool,
     pub lamport_writes_supported: bool,
     pub system_cpi_supported: bool,
@@ -63,6 +64,7 @@ pub const RUNTIME_WRITE_ADAPTER_TRUTH: RuntimeWriteAdapterTruth = RuntimeWriteAd
     account_data_writes_supported: true,
     production_active_config_stake_principal_cas_supported: true,
     production_completed_ingress_lane_account_preflight_supported: true,
+    production_completed_ingress_config_and_lanes_atomic_cas_supported: true,
     account_creation_supported: false,
     lamport_writes_supported: false,
     system_cpi_supported: false,
@@ -159,6 +161,27 @@ impl ProductionActiveConfigStakePrincipalReceipt {
     pub const fn law_account_sha256(&self) -> [u8; 32] {
         self.law_account_sha256
     }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ProductionActiveIngressLedgerReceipt {
+    config: ProductionActiveConfigStakePrincipalReceipt,
+    lanes: RuntimeWriteReceipt<3>,
+}
+
+impl ProductionActiveIngressLedgerReceipt {
+    pub const fn config(&self) -> &ProductionActiveConfigStakePrincipalReceipt {
+        &self.config
+    }
+
+    pub const fn lanes(&self) -> &RuntimeWriteReceipt<3> {
+        &self.lanes
+    }
+}
+
+struct PreparedConfigStakePrincipalCas {
+    postimage: [u8; CONFIG_GENESIS_ACCOUNT_LEN],
+    receipt: ProductionActiveConfigStakePrincipalReceipt,
 }
 
 fn require_active_config_capability(
@@ -276,26 +299,121 @@ pub fn execute_production_active_config_stake_principal_cas_for_completed_ingres
 ) -> Result<ProductionActiveConfigStakePrincipalReceipt, RuntimeWriteAdapterError> {
     require_active_config_capability(gate, active_config, binding)?;
     let principal_delta = require_completed_ingress_binding(active_config, binding, completed)?;
-    execute_production_active_config_stake_principal_cas_inner(
+    let prepared = prepare_production_active_config_stake_principal_cas_inner(
         gate,
         active_config,
         binding,
         principal_delta,
         config_account,
-    )
+    )?;
+    let mut mutable_data = config_account
+        .try_borrow_mut_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    require_live_preimage(
+        &mutable_data,
+        CONFIG_GENESIS_ACCOUNT_LEN,
+        active_config.preimage_sha256(),
+    )?;
+    mutable_data.copy_from_slice(&prepared.postimage);
+    Ok(prepared.receipt)
 }
 
-/// Apply the already-bound delta without admitting a generic 272-byte Config
-/// writer. The live account is checked from an immutable borrow, then checked
-/// again after acquiring the mutable borrow; no byte is written unless both
-/// observations match the opaque preimage.
-fn execute_production_active_config_stake_principal_cas_inner(
+/// Execute Config plus treasury/ecosystem/liquidity postimages as one local
+/// atomic CAS boundary. All four mutable borrows and every live preimage check
+/// complete before the first byte is copied.
+#[inline(never)]
+pub fn execute_production_completed_ingress_config_and_lanes_cas_account_infos(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    completed: &CompletedStakeIngress,
+    config_account: &AccountInfo<'_>,
+    lane_accounts: [&AccountInfo<'_>; 3],
+) -> Result<ProductionActiveIngressLedgerReceipt, RuntimeWriteAdapterError> {
+    let lane_batch = prepare_production_completed_ingress_lane_write_batch_account_infos(
+        gate,
+        active_config,
+        binding,
+        completed,
+        lane_accounts,
+    )?;
+    let principal_delta = require_completed_ingress_binding(active_config, binding, completed)?;
+    let config = prepare_production_active_config_stake_principal_cas_inner(
+        gate,
+        active_config,
+        binding,
+        principal_delta,
+        config_account,
+    )?;
+
+    let mut config_data = config_account
+        .try_borrow_mut_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let mut lane_data = Vec::with_capacity(3);
+    for account in lane_accounts {
+        lane_data.push(
+            account
+                .try_borrow_mut_data()
+                .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?,
+        );
+    }
+    require_live_preimage(
+        &config_data,
+        CONFIG_GENESIS_ACCOUNT_LEN,
+        active_config.preimage_sha256(),
+    )?;
+    for (data, intent) in lane_data.iter().zip(lane_batch.intents()) {
+        let StateWriteIntent::Existing(existing) = intent else {
+            return Err(RuntimeWriteAdapterError::CreateIntentUnsupported);
+        };
+        require_live_preimage(
+            data,
+            existing.data_len(),
+            existing.expected_preimage_sha256(),
+        )?;
+    }
+
+    config_data.copy_from_slice(&config.postimage);
+    for (data, intent) in lane_data.iter_mut().zip(lane_batch.intents()) {
+        let StateWriteIntent::Existing(existing) = intent else {
+            return Err(RuntimeWriteAdapterError::CreateIntentUnsupported);
+        };
+        data.copy_from_slice(existing.postimage());
+    }
+
+    Ok(ProductionActiveIngressLedgerReceipt {
+        config: config.receipt,
+        lanes: RuntimeWriteReceipt {
+            batch_commitment_sha256: lane_batch.commitment_sha256(),
+            postimage_sha256: array::from_fn(|index| match lane_batch.intents()[index] {
+                StateWriteIntent::Existing(existing) => existing.postimage_sha256(),
+                StateWriteIntent::Create(_) => unreachable!("lane preflight rejects creates"),
+            }),
+        },
+    })
+}
+
+fn require_live_preimage(
+    data: &[u8],
+    expected_len: usize,
+    expected_sha256: [u8; 32],
+) -> Result<(), RuntimeWriteAdapterError> {
+    if data.len() != expected_len || <[u8; 32]>::from(Sha256::digest(data)) != expected_sha256 {
+        return Err(RuntimeWriteAdapterError::PostValidationPreimageMismatch);
+    }
+    Ok(())
+}
+
+/// Prepare the already-bound Config delta without admitting a generic 272-byte
+/// Config writer. The caller must revalidate the live preimage after acquiring
+/// every mutable borrow and before copying this postimage.
+fn prepare_production_active_config_stake_principal_cas_inner(
     gate: &ValidatedDailyLawWrite,
     active_config: &RuntimeProductionActiveConfig,
     binding: &NativeEconomyBinding,
     principal_delta: u64,
     config_account: &AccountInfo<'_>,
-) -> Result<ProductionActiveConfigStakePrincipalReceipt, RuntimeWriteAdapterError> {
+) -> Result<PreparedConfigStakePrincipalCas, RuntimeWriteAdapterError> {
     if config_account.key.to_bytes() != active_config.key()
         || config_account.owner.to_bytes() != binding.program_id()
     {
@@ -333,23 +451,16 @@ fn execute_production_active_config_stake_principal_cas_inner(
         .map_err(|_| RuntimeWriteAdapterError::ConfigCodecRejected)?;
     let postimage_sha256 = <[u8; 32]>::from(Sha256::digest(postimage));
 
-    let mut mutable_data = config_account
-        .try_borrow_mut_data()
-        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
-    if mutable_data.len() != CONFIG_GENESIS_ACCOUNT_LEN
-        || <[u8; 32]>::from(Sha256::digest(&**mutable_data)) != active_config.preimage_sha256()
-    {
-        return Err(RuntimeWriteAdapterError::PostValidationPreimageMismatch);
-    }
-    mutable_data.copy_from_slice(&postimage);
-
-    Ok(ProductionActiveConfigStakePrincipalReceipt {
-        config_key: active_config.key(),
-        expected_preimage_sha256: active_config.preimage_sha256(),
-        postimage_sha256,
-        previous_staked_principal,
-        next_staked_principal,
-        law_account_sha256: gate.law_account_sha256(),
+    Ok(PreparedConfigStakePrincipalCas {
+        postimage,
+        receipt: ProductionActiveConfigStakePrincipalReceipt {
+            config_key: active_config.key(),
+            expected_preimage_sha256: active_config.preimage_sha256(),
+            postimage_sha256,
+            previous_staked_principal,
+            next_staked_principal,
+            law_account_sha256: gate.law_account_sha256(),
+        },
     })
 }
 

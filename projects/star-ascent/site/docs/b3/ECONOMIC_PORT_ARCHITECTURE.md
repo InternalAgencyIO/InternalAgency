@@ -188,12 +188,15 @@ other Config field is copied from the authenticated state. It now accepts no
 caller-shaped delta: the exact retained-V2 completed ingress must bind the
 Config delta, Position principal, all three lane labels/Config bindings, and
 the reloaded stake-vault amount. The Config CAS itself does not authenticate
-lane AccountInfos. That narrow write is not yet atomically composed with the
-ingress CPI callback and exact Position/Lane persistence. A separate preflight
+lane AccountInfos. That Config-only write is not the complete persistence path.
+A separate preflight
 now authenticates the exact treasury, ecosystem, and liquidity AccountInfos in
-fixed order and seals their completed-ingress CAS postimages before mutation;
-it does not execute those writes. There is still no public lifecycle dispatcher, frozen
-identity, entrypoint, or public ABI; those remain the security boundary.
+fixed order and seals their completed-ingress CAS postimages before mutation.
+The production ledger executor then acquires all four Config/lane mutable
+borrows, revalidates every preimage, and writes all four postimages only after
+every check passes. It is not yet composed with the ingress CPI callback or
+exact Position-PDA lifecycle. There is still no public lifecycle dispatcher,
+frozen identity, entrypoint, or public ABI; those remain the security boundary.
 
 Burning is different from transferring. The sole core-cap burn path uses
 Token-2022 `BurnChecked`, signed by the economic vault-authority PDA. It is not
