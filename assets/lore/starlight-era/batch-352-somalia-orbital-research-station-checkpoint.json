@@ -1,0 +1,1594 @@
+{
+  "batch": 352,
+  "country": "Somalia",
+  "status": "terminal-partially-accepted",
+  "sourceCommit": "84eba519bf87f87165bc324476046237fbebf378",
+  "contractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "rollMethod": "FNV-1a over the recorded batch352-south-sudan keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 351 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "hardLoveBeat": "0-14 lap sitting; 15-29 partner dance; 30-44 controlled dip; 45-59 seated embrace; 60-74 three-person slow dance; 75-89 pulled-away choice; 90-99 seated-to-standing assist",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "cinematicTheme": {
+    "active": "orbital research-station couture",
+    "batchOrdinalWithinTheme": 2,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "nextQueueCountry": "Senegal",
+  "nextQueueBatch": 353,
+  "nextQueueScenes": [
+    1432,
+    1433,
+    1434,
+    1435
+  ],
+  "nextCinematicTheme": {
+    "active": "private-jet aviation couture",
+    "batchOrdinalWithinTheme": 1
+  },
+  "researchSources": [
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/6754/",
+      "usedFor": "Mogadishu Secondo-Lido Lighthouse and maritime setting"
+    },
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/6753/",
+      "usedFor": "Hobyo white and orange dunes, grassland and shrubland"
+    },
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/6752/",
+      "usedFor": "Bushbushle National Park coastal forest setting"
+    },
+    {
+      "url": "https://www.fao.org/4/t0361e/t0361e07.htm",
+      "usedFor": "Jubba River estuary near Kismayo"
+    },
+    {
+      "url": "https://somalia.un.org/en/19768-unep-regional-seas-reports-and-studies-no-84-coastal-and-marine-problems-somalia",
+      "usedFor": "Somalia Indian Ocean coast and coral-reef context"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch352-somalia-male-model-scene",
+    "fullHash": 2599362915,
+    "roll": 15,
+    "selectedScenePosition": 4,
+    "selectedScene": 1431,
+    "maleEmotion": {
+      "key": "batch352-somalia-scene4-male-emotion",
+      "roll": 99,
+      "result": "emotional exhaustion"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Somalia flag, official seal, sacred symbol, copied ceremonial or traditional pattern, political messaging, copied military identity, or official service identity is used. Country-led scenes use large dimensional secular ocean currents, lighthouse lenses, dune waves, grassland sweeps and river-estuary contours instead.",
+    "palette": "Indian Ocean azure, coral white, Hobyo orange, grassland green, lighthouse brass, mangrove jade, river teal, orbital silver, station charcoal, viewport cyan, solar amber and research magenta",
+    "minimumCoverage": "Scenes 1428 and 1429 each carry hard large Somalia motifs on three women and orbital research-station construction language on at least two. Scenes 1430 and 1431 use four different theme-led orbital-station outfits without country map prints while Somalia landmarks remain equally foregrounded.",
+    "cultureScene": "The scenes foreground Mogadishu's Secondo-Lido Lighthouse, the Hobyo grassland and dunes, Bushbushle National Park, and the Jubba estuary near Kismayo.",
+    "prohibitions": "Use respectful secular Somalia geography through complete ocean currents, lighthouse lenses, dune waves, grassland sweeps, coastal-forest layers and river-estuary contours. No literal flag, official seal, sacred symbol, copied ceremonial pattern, political messaging, military imagery, copied official identity, logo, badge, readable text, combat, threat or weaponized station equipment."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch352-somalia-x-heart",
+      "roll": 96,
+      "result": "white heart"
+    },
+    "internalAgency": {
+      "key": "batch352-somalia-x-internalagency",
+      "roll": 78,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch352-somalia-x-worldxxxseries",
+      "roll": 81,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Somalia images plus one accepted South Sudan image",
+    "captionIfEligible": "Somalia 🤍 South Sudan #Somalia",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1431 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1431 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch352-somalia-male-model-scene",
+        15
+      ],
+      [
+        "batch352-somalia-scene4-male-emotion",
+        99
+      ],
+      [
+        "batch352-somalia-scene1428-weather",
+        15
+      ],
+      [
+        "batch352-somalia-scene1428-mascotState",
+        15
+      ],
+      [
+        "batch352-somalia-scene1428-poleDanceTheme",
+        35
+      ],
+      [
+        "batch352-somalia-scene1428-rainbowOnly",
+        55
+      ],
+      [
+        "batch352-somalia-scene1428-rainbowHosiery",
+        22
+      ],
+      [
+        "batch352-somalia-scene1428-romanceBeat",
+        50
+      ],
+      [
+        "batch352-somalia-scene1428-compoundLoveBeat",
+        8
+      ],
+      [
+        "batch352-somalia-scene1428-hardLoveBeat",
+        32
+      ],
+      [
+        "batch352-somalia-scene1428-interestingProp",
+        20
+      ],
+      [
+        "batch352-somalia-scene1428-eceMissionProp-poseTargetRoll",
+        77
+      ],
+      [
+        "batch352-somalia-scene1428-Radiance-emotion",
+        0
+      ],
+      [
+        "batch352-somalia-scene1428-Radiance-visibleMidriff",
+        50
+      ],
+      [
+        "batch352-somalia-scene1428-Radiance-straplessDress",
+        5
+      ],
+      [
+        "batch352-somalia-scene1428-Radiance-fullyOpenBack",
+        66
+      ],
+      [
+        "batch352-somalia-scene1428-Ellie-emotion",
+        94
+      ],
+      [
+        "batch352-somalia-scene1428-Ellie-visibleMidriff",
+        72
+      ],
+      [
+        "batch352-somalia-scene1428-Ellie-straplessDress",
+        7
+      ],
+      [
+        "batch352-somalia-scene1428-Ellie-fullyOpenBack",
+        60
+      ],
+      [
+        "batch352-somalia-scene1428-Alia-emotion",
+        14
+      ],
+      [
+        "batch352-somalia-scene1428-Alia-visibleMidriff",
+        48
+      ],
+      [
+        "batch352-somalia-scene1428-Alia-straplessDress",
+        75
+      ],
+      [
+        "batch352-somalia-scene1428-Alia-fullyOpenBack",
+        80
+      ],
+      [
+        "batch352-somalia-scene1428-AI ECE-emotion",
+        56
+      ],
+      [
+        "batch352-somalia-scene1428-AI ECE-visibleMidriff",
+        18
+      ],
+      [
+        "batch352-somalia-scene1428-AI ECE-straplessDress",
+        97
+      ],
+      [
+        "batch352-somalia-scene1428-AI ECE-fullyOpenBack",
+        94
+      ],
+      [
+        "batch352-somalia-scene1429-weather",
+        72
+      ],
+      [
+        "batch352-somalia-scene1429-mascotState",
+        68
+      ],
+      [
+        "batch352-somalia-scene1429-poleDanceTheme",
+        94
+      ],
+      [
+        "batch352-somalia-scene1429-rainbowOnly",
+        48
+      ],
+      [
+        "batch352-somalia-scene1429-rainbowHosiery",
+        91
+      ],
+      [
+        "batch352-somalia-scene1429-romanceBeat",
+        61
+      ],
+      [
+        "batch352-somalia-scene1429-compoundLoveBeat",
+        33
+      ],
+      [
+        "batch352-somalia-scene1429-hardLoveBeat",
+        41
+      ],
+      [
+        "batch352-somalia-scene1429-interestingProp",
+        31
+      ],
+      [
+        "batch352-somalia-scene1429-eceMissionProp-poseTargetRoll",
+        98
+      ],
+      [
+        "batch352-somalia-scene1429-Radiance-emotion",
+        17
+      ],
+      [
+        "batch352-somalia-scene1429-Radiance-visibleMidriff",
+        13
+      ],
+      [
+        "batch352-somalia-scene1429-Radiance-straplessDress",
+        54
+      ],
+      [
+        "batch352-somalia-scene1429-Radiance-fullyOpenBack",
+        95
+      ],
+      [
+        "batch352-somalia-scene1429-Ellie-emotion",
+        61
+      ],
+      [
+        "batch352-somalia-scene1429-Ellie-visibleMidriff",
+        41
+      ],
+      [
+        "batch352-somalia-scene1429-Ellie-straplessDress",
+        66
+      ],
+      [
+        "batch352-somalia-scene1429-Ellie-fullyOpenBack",
+        79
+      ],
+      [
+        "batch352-somalia-scene1429-Alia-emotion",
+        15
+      ],
+      [
+        "batch352-somalia-scene1429-Alia-emotion-disambiguation",
+        38
+      ],
+      [
+        "batch352-somalia-scene1429-Alia-visibleMidriff",
+        43
+      ],
+      [
+        "batch352-somalia-scene1429-Alia-straplessDress",
+        24
+      ],
+      [
+        "batch352-somalia-scene1429-Alia-fullyOpenBack",
+        9
+      ],
+      [
+        "batch352-somalia-scene1429-AI ECE-emotion",
+        25
+      ],
+      [
+        "batch352-somalia-scene1429-AI ECE-visibleMidriff",
+        69
+      ],
+      [
+        "batch352-somalia-scene1429-AI ECE-straplessDress",
+        62
+      ],
+      [
+        "batch352-somalia-scene1429-AI ECE-fullyOpenBack",
+        75
+      ],
+      [
+        "batch352-somalia-scene1430-weather",
+        22
+      ],
+      [
+        "batch352-somalia-scene1430-mascotState",
+        90
+      ],
+      [
+        "batch352-somalia-scene1430-poleDanceTheme",
+        92
+      ],
+      [
+        "batch352-somalia-scene1430-rainbowOnly",
+        22
+      ],
+      [
+        "batch352-somalia-scene1430-rainbowHosiery",
+        41
+      ],
+      [
+        "batch352-somalia-scene1430-romanceBeat",
+        55
+      ],
+      [
+        "batch352-somalia-scene1430-compoundLoveBeat",
+        7
+      ],
+      [
+        "batch352-somalia-scene1430-hardLoveBeat",
+        79
+      ],
+      [
+        "batch352-somalia-scene1430-interestingProp",
+        61
+      ],
+      [
+        "batch352-somalia-scene1430-eceMissionProp-poseTargetRoll",
+        64
+      ],
+      [
+        "batch352-somalia-scene1430-Radiance-emotion",
+        99
+      ],
+      [
+        "batch352-somalia-scene1430-Radiance-visibleMidriff",
+        59
+      ],
+      [
+        "batch352-somalia-scene1430-Radiance-straplessDress",
+        84
+      ],
+      [
+        "batch352-somalia-scene1430-Radiance-fullyOpenBack",
+        89
+      ],
+      [
+        "batch352-somalia-scene1430-Ellie-emotion",
+        35
+      ],
+      [
+        "batch352-somalia-scene1430-Ellie-visibleMidriff",
+        35
+      ],
+      [
+        "batch352-somalia-scene1430-Ellie-straplessDress",
+        12
+      ],
+      [
+        "batch352-somalia-scene1430-Ellie-fullyOpenBack",
+        57
+      ],
+      [
+        "batch352-somalia-scene1430-Alia-emotion",
+        89
+      ],
+      [
+        "batch352-somalia-scene1430-Alia-visibleMidriff",
+        89
+      ],
+      [
+        "batch352-somalia-scene1430-Alia-straplessDress",
+        46
+      ],
+      [
+        "batch352-somalia-scene1430-Alia-fullyOpenBack",
+        35
+      ],
+      [
+        "batch352-somalia-scene1430-AI ECE-emotion",
+        47
+      ],
+      [
+        "batch352-somalia-scene1430-AI ECE-visibleMidriff",
+        59
+      ],
+      [
+        "batch352-somalia-scene1430-AI ECE-straplessDress",
+        64
+      ],
+      [
+        "batch352-somalia-scene1430-AI ECE-fullyOpenBack",
+        25
+      ],
+      [
+        "batch352-somalia-scene1431-weather",
+        37
+      ],
+      [
+        "batch352-somalia-scene1431-mascotState",
+        73
+      ],
+      [
+        "batch352-somalia-scene1431-poleDanceTheme",
+        89
+      ],
+      [
+        "batch352-somalia-scene1431-rainbowOnly",
+        21
+      ],
+      [
+        "batch352-somalia-scene1431-rainbowHosiery",
+        88
+      ],
+      [
+        "batch352-somalia-scene1431-romanceBeat",
+        12
+      ],
+      [
+        "batch352-somalia-scene1431-compoundLoveBeat",
+        2
+      ],
+      [
+        "batch352-somalia-scene1431-hardLoveBeat",
+        26
+      ],
+      [
+        "batch352-somalia-scene1431-interestingProp",
+        94
+      ],
+      [
+        "batch352-somalia-scene1431-eceMissionProp-poseTargetRoll",
+        95
+      ],
+      [
+        "batch352-somalia-scene1431-Radiance-emotion",
+        18
+      ],
+      [
+        "batch352-somalia-scene1431-Radiance-visibleMidriff",
+        12
+      ],
+      [
+        "batch352-somalia-scene1431-Radiance-straplessDress",
+        71
+      ],
+      [
+        "batch352-somalia-scene1431-Radiance-fullyOpenBack",
+        36
+      ],
+      [
+        "batch352-somalia-scene1431-Ellie-emotion",
+        40
+      ],
+      [
+        "batch352-somalia-scene1431-Ellie-visibleMidriff",
+        34
+      ],
+      [
+        "batch352-somalia-scene1431-Ellie-straplessDress",
+        53
+      ],
+      [
+        "batch352-somalia-scene1431-Ellie-fullyOpenBack",
+        82
+      ],
+      [
+        "batch352-somalia-scene1431-Alia-emotion",
+        36
+      ],
+      [
+        "batch352-somalia-scene1431-Alia-visibleMidriff",
+        50
+      ],
+      [
+        "batch352-somalia-scene1431-Alia-straplessDress",
+        73
+      ],
+      [
+        "batch352-somalia-scene1431-Alia-fullyOpenBack",
+        18
+      ],
+      [
+        "batch352-somalia-scene1431-AI ECE-emotion",
+        86
+      ],
+      [
+        "batch352-somalia-scene1431-AI ECE-visibleMidriff",
+        8
+      ],
+      [
+        "batch352-somalia-scene1431-AI ECE-straplessDress",
+        15
+      ],
+      [
+        "batch352-somalia-scene1431-AI ECE-fullyOpenBack",
+        88
+      ],
+      [
+        "batch352-somalia-x-heart",
+        96
+      ],
+      [
+        "batch352-somalia-x-internalagency",
+        78
+      ],
+      [
+        "batch352-somalia-x-worldxxxseries",
+        81
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch352-somalia-scene1428-rainbowHosieryWearer",
+        6
+      ],
+      [
+        "batch352-somalia-scene1428-rainbowHosieryPaletteMode",
+        38
+      ],
+      [
+        "batch352-somalia-scene1428-mascotHolder",
+        96
+      ],
+      [
+        "batch352-somalia-scene1428-interestingPropHolder",
+        86
+      ],
+      [
+        "batch352-somalia-scene1428-interestingPropFamily",
+        36
+      ],
+      [
+        "batch352-somalia-scene1429-rainbowHosieryWearer",
+        43
+      ],
+      [
+        "batch352-somalia-scene1429-rainbowHosieryPaletteMode",
+        81
+      ],
+      [
+        "batch352-somalia-scene1429-mascotHolder",
+        21
+      ],
+      [
+        "batch352-somalia-scene1429-interestingPropHolder",
+        21
+      ],
+      [
+        "batch352-somalia-scene1429-interestingPropFamily",
+        27
+      ],
+      [
+        "batch352-somalia-scene1430-rainbowHosieryWearer",
+        93
+      ],
+      [
+        "batch352-somalia-scene1430-rainbowHosieryPaletteMode",
+        63
+      ],
+      [
+        "batch352-somalia-scene1430-mascotHolder",
+        11
+      ],
+      [
+        "batch352-somalia-scene1430-interestingPropHolder",
+        59
+      ],
+      [
+        "batch352-somalia-scene1430-interestingPropFamily",
+        37
+      ],
+      [
+        "batch352-somalia-scene1431-rainbowHosieryWearer",
+        24
+      ],
+      [
+        "batch352-somalia-scene1431-rainbowHosieryPaletteMode",
+        92
+      ],
+      [
+        "batch352-somalia-scene1431-mascotHolder",
+        18
+      ],
+      [
+        "batch352-somalia-scene1431-interestingPropHolder",
+        48
+      ],
+      [
+        "batch352-somalia-scene1431-interestingPropFamily",
+        90
+      ]
+    ],
+    "primaryPairCount": 110,
+    "selectorPairCount": 20,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "619C6487FC8A41E3AE8A83D4612C466290E0EDD6C0026A2F7FC65C364EEC9632",
+    "selectorPairsSha256": "C9D71ABDB72CEB66A7F42934AE1ECB511B3F4F734518251A90AD98418C634D7F"
+  },
+  "scenePlans": {
+    "1428": {
+      "scene": 1428,
+      "mode": "country-led hybrid",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry oceanfront platform beside Mogadishu's complete Secondo-Lido Lighthouse, white surf, coral-stone seawall and Indian Ocean horizon, fused in the foreground with a peaceful orbital research-station cupola, docking ring and solar laboratory",
+      "motifs": "complete lighthouse tower and lens bands, Indian Ocean current arcs, coral-stone facets, orbital docking rings and cupola windows",
+      "culture": "Mogadishu reads through its maritime lighthouse, oceanfront and coral-stone setting; every station element is fictional peaceful civilian research hardware.",
+      "weather": {
+        "key": "batch352-somalia-scene1428-weather",
+        "roll": 15,
+        "result": "crisp blue hour",
+        "materialized": "crisp blue hour"
+      },
+      "mascotState": {
+        "key": "batch352-somalia-scene1428-mascotState",
+        "roll": 15,
+        "result": "PAWS and MAX together"
+      },
+      "mascotHolder": {
+        "key": "batch352-somalia-scene1428-mascotHolder",
+        "roll": 96,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry station bench far from surf, ledges, target line and machinery.",
+      "interestingProp": {
+        "key": "batch352-somalia-scene1428-interestingProp",
+        "roll": 20,
+        "active": true,
+        "holder": {
+          "key": "batch352-somalia-scene1428-interestingPropHolder",
+          "roll": 86,
+          "result": "AI ECE"
+        },
+        "family": {
+          "key": "batch352-somalia-scene1428-interestingPropFamily",
+          "roll": 36,
+          "result": "giant tuning fork instrument"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch352-somalia-scene1428-poleDanceTheme",
+        "roll": 35,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch352-somalia-scene1428-rainbowOnly",
+        "roll": 55,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch352-somalia-scene1428-rainbowHosiery",
+        "roll": 22,
+        "active": true,
+        "wearer": {
+          "key": "batch352-somalia-scene1428-rainbowHosieryWearer",
+          "roll": 6,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch352-somalia-scene1428-rainbowHosieryPaletteMode",
+          "roll": 38,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch352-somalia-scene1428-eceMissionProp-poseTargetRoll",
+        "roll": 77
+      },
+      "materializedPropAction": "A controlled handoff has finished with Alia establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied ocean or river lane with no person, animal, vessel, building, vehicle or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one clearly empty floating route marker in a cordoned unoccupied ocean or river lane with no person, animal, vessel, building, vehicle or camera along or beyond the line",
+      "romanceBeat": {
+        "key": "batch352-somalia-scene1428-romanceBeat",
+        "roll": 50,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch352-somalia-scene1428-compoundLoveBeat",
+        "roll": 8,
+        "index": 8,
+        "contractResult": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "hardLoveBeat": {
+        "key": "batch352-somalia-scene1428-hardLoveBeat",
+        "roll": 32,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch352-somalia-scene1428-Radiance-emotion",
+            "roll": 0,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1428-Radiance-visibleMidriff",
+            "roll": 50,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1428-Radiance-straplessDress",
+            "roll": 5,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1428-Radiance-fullyOpenBack",
+            "roll": 66,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch352-somalia-scene1428-Ellie-emotion",
+            "roll": 94,
+            "result": "shame and social vulnerability",
+            "materializedResult": "shame and social vulnerability",
+            "performance": "shame and social vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1428-Ellie-visibleMidriff",
+            "roll": 72,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1428-Ellie-straplessDress",
+            "roll": 7,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1428-Ellie-fullyOpenBack",
+            "roll": 60,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch352-somalia-scene1428-Alia-emotion",
+            "roll": 14,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1428-Alia-visibleMidriff",
+            "roll": 48,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1428-Alia-straplessDress",
+            "roll": 75,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1428-Alia-fullyOpenBack",
+            "roll": 80,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch352-somalia-scene1428-AI ECE-emotion",
+            "roll": 56,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1428-AI ECE-visibleMidriff",
+            "roll": 18,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1428-AI ECE-straplessDress",
+            "roll": 97,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1428-AI ECE-fullyOpenBack",
+            "roll": 94,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "shame and social vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Indian-Ocean-azure strapless lighthouse-lens dress with dimensional wave pleats, brass orbital hoops and beacon heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "coral-white asymmetric culotte coat with lighthouse-gallery lattice shoulders, station hatch panels and solar platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Hobyo-orange open-back jumpsuit with braided ocean-current beadwork, silver docking fins and coral pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "station-charcoal cupola peplum over silver shorts with cyan viewport discs, research-magenta ribs and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Indian-Ocean-azure strapless lighthouse-lens dress with dimensional wave pleats, brass orbital hoops and beacon heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "coral-white asymmetric culotte coat with lighthouse-gallery lattice shoulders, station hatch panels and solar platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Hobyo-orange open-back jumpsuit with braided ocean-current beadwork, silver docking fins and coral pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "station-charcoal cupola peplum over silver shorts with cyan viewport discs, research-magenta ribs and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Radiance sits securely sideways across Alia's lap on a fixed low station bench while Ellie draws Radiance into a linked-hand choice and ECE interrupts with an aching forehead-to-forehead invitation.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Radiance touches Alia and links Ellie",
+        "Alia supports Radiance securely",
+        "Ellie links Radiance while ECE completes one visible affectionate touch"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry oceanfront platform beside Mogadishu's complete Secondo-Lido Lighthouse, white surf, coral-stone seawall and Indian Ocean horizon, fused in the foreground with a peaceful orbital research-station cupola, docking ring and solar laboratory. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: orbital research-station couture. The theme and Somalia location must both be immediate foreground reads. Mogadishu reads through its maritime lighthouse, oceanfront and coral-stone setting; every station element is fictional peaceful civilian research hardware. Stored scene rolls: weather 15=crisp blue hour; mascot state 15=PAWS and MAX together; mascot holder selector 96=Radiance; odd prop 20=active; odd holder 86=AI ECE; odd family 36=giant tuning fork instrument; pole 35=inactive; rainbow-only 55=inactive; rainbow hosiery 22=active; wearer 6=Radiance; palette 38=country-palette rainbow-like gradient; romance 50; compound 8; hard love 32; mission-prop pose/target 77. Exact wardrobe rolls: Radiance: midriff 50=covered, strapless 5=active, open back 66=inactive; Ellie: midriff 72=covered, strapless 7=active, open back 60=inactive; Alia: midriff 48=visible, strapless 75=inactive, open back 80=inactive; AI ECE: midriff 18=visible, strapless 97=inactive, open back 94=inactive. Exact outfit fingerprints, no substitutions: Radiance: Indian-Ocean-azure strapless lighthouse-lens dress with dimensional wave pleats, brass orbital hoops and beacon heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: coral-white asymmetric culotte coat with lighthouse-gallery lattice shoulders, station hatch panels and solar platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: Hobyo-orange open-back jumpsuit with braided ocean-current beadwork, silver docking fins and coral pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: station-charcoal cupola peplum over silver shorts with cyan viewport discs, research-magenta ribs and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large lighthouse, ocean and coral motifs; Radiance and ECE use cupola, docking-ring and solar-laboratory construction. Location design vocabulary: complete lighthouse tower and lens bands, Indian Ocean current arcs, coral-stone facets, orbital docking rings and cupola windows. Use respectful secular Somalia geography through complete ocean currents, lighthouse lenses, dune waves, grassland sweeps, coastal-forest layers and river-estuary contours. No literal flag, official seal, sacred symbol, copied ceremonial pattern, political messaging, military imagery, copied official identity, logo, badge, readable text, combat, threat or weaponized station equipment. Four visibly distinct coherent emotions: Radiance: roll 0=tender affection, performed as tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 94=shame and social vulnerability, performed as shame and social vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 14=romantic joy, performed as romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 56=aching romantic longing, performed as aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 50: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Compound roll 8: ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction. Mandatory hard-love roll 32: a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Radiance sits securely sideways across Alia's lap on a fixed low station bench while Ellie draws Radiance into a linked-hand choice and ECE interrupts with an aching forehead-to-forehead invitation. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Radiance touches Alia and links Ellie; Alia supports Radiance securely; Ellie links Radiance while ECE completes one visible affectionate touch. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with Alia establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied ocean or river lane with no person, animal, vessel, building, vehicle or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly Radiance wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. Mascot state 15=PAWS and MAX together. Mascot holder selector 96=Radiance. Only rolled mascots appear on a padded dry station bench far from surf, ledges, target line and machinery. Odd-prop roll is active. Exactly AI ECE owns and creatively integrates one giant tuning fork instrument into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render crisp blue hour cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1429": {
+      "scene": 1429,
+      "mode": "country-led hybrid",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry overlook above the complete Hobyo grassland and shrubland with immense perennial grass, white and orange coastal dunes and the Indian Ocean beyond, fused with a peaceful orbital botany laboratory and rotating station ring",
+      "motifs": "complete white-and-orange dune waves, perennial grassland sweeps, shrub rosettes, ecology-module ribs and rotating station rings",
+      "culture": "Hobyo reads through its distinctive coastal dunes, immense grassland and endemic shrubland; wildlife stays distant and outside every target line.",
+      "weather": {
+        "key": "batch352-somalia-scene1429-weather",
+        "roll": 72,
+        "result": "red-gold dust storm",
+        "materialized": "red-gold dust storm"
+      },
+      "mascotState": {
+        "key": "batch352-somalia-scene1429-mascotState",
+        "roll": 68,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch352-somalia-scene1429-mascotHolder",
+        "roll": 21,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded botany platform far from dunes, wildlife, props and rotating equipment.",
+      "interestingProp": {
+        "key": "batch352-somalia-scene1429-interestingProp",
+        "roll": 31,
+        "active": true,
+        "holder": {
+          "key": "batch352-somalia-scene1429-interestingPropHolder",
+          "roll": 21,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch352-somalia-scene1429-interestingPropFamily",
+          "roll": 27,
+          "result": "inflatable geometric weather balloon pack"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch352-somalia-scene1429-poleDanceTheme",
+        "roll": 94,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch352-somalia-scene1429-rainbowOnly",
+        "roll": 48,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch352-somalia-scene1429-rainbowHosiery",
+        "roll": 91,
+        "active": false,
+        "wearer": {
+          "key": "batch352-somalia-scene1429-rainbowHosieryWearer",
+          "roll": 43,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch352-somalia-scene1429-rainbowHosieryPaletteMode",
+          "roll": 81,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch352-somalia-scene1429-eceMissionProp-poseTargetRoll",
+        "roll": 98
+      },
+      "materializedPropAction": "AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, vehicle and camera. No ammunition, reload, firing, or trigger contact appears.",
+      "target": "one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, vehicle and camera",
+      "romanceBeat": {
+        "key": "batch352-somalia-scene1429-romanceBeat",
+        "roll": 61,
+        "dynamicIndex": 1,
+        "contractResult": "Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance."
+      },
+      "compoundLoveBeat": {
+        "key": "batch352-somalia-scene1429-compoundLoveBeat",
+        "roll": 33,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "hardLoveBeat": {
+        "key": "batch352-somalia-scene1429-hardLoveBeat",
+        "roll": 41,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch352-somalia-scene1429-Radiance-emotion",
+            "roll": 17,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1429-Radiance-visibleMidriff",
+            "roll": 13,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1429-Radiance-straplessDress",
+            "roll": 54,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1429-Radiance-fullyOpenBack",
+            "roll": 95,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch352-somalia-scene1429-Ellie-emotion",
+            "roll": 61,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1429-Ellie-visibleMidriff",
+            "roll": 41,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1429-Ellie-straplessDress",
+            "roll": 66,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1429-Ellie-fullyOpenBack",
+            "roll": 79,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch352-somalia-scene1429-Alia-emotion",
+            "roll": 15,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "magnetic confidence",
+            "disambiguation": {
+              "key": "batch352-somalia-scene1429-Alia-emotion-disambiguation",
+              "roll": 38
+            },
+            "performance": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1429-Alia-visibleMidriff",
+            "roll": 43,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1429-Alia-straplessDress",
+            "roll": 24,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1429-Alia-fullyOpenBack",
+            "roll": 9,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch352-somalia-scene1429-AI ECE-emotion",
+            "roll": 25,
+            "result": "calm contentment",
+            "materializedResult": "calm contentment",
+            "performance": "calm contentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1429-AI ECE-visibleMidriff",
+            "roll": 69,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1429-AI ECE-straplessDress",
+            "roll": 62,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1429-AI ECE-fullyOpenBack",
+            "roll": 75,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "calm contentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Hobyo-orange dune-corsage tulip dress with white ripple inlays, amber station ribs and grass-arch heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "orbital-silver rotating-ring culotte jumpsuit with green botany panels, dune-relief shoulders and pivot platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "grassland-green strapless shrub coat-dress with braided azure dune lines, dimensional leaf fans and horizon pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "station-charcoal botany-module bodice over amber shorts with cyan portholes, silver lab fins and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Hobyo-orange dune-corsage tulip dress with white ripple inlays, amber station ribs and grass-arch heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "orbital-silver rotating-ring culotte jumpsuit with green botany panels, dune-relief shoulders and pivot platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "grassland-green strapless shrub coat-dress with braided azure dune lines, dimensional leaf fans and horizon pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "station-charcoal botany-module bodice over amber shorts with cyan portholes, silver lab fins and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE and Ellie perform a stable controlled dance dip beneath the rotating ring while Radiance catches Ellie's linked hand and Alia closes the circle with protective shoulder and waist contact.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Ellie supports ECE and links Radiance",
+        "ECE supports Ellie at the waist",
+        "Radiance and Alia complete visible affectionate contacts"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry overlook above the complete Hobyo grassland and shrubland with immense perennial grass, white and orange coastal dunes and the Indian Ocean beyond, fused with a peaceful orbital botany laboratory and rotating station ring. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: orbital research-station couture. The theme and Somalia location must both be immediate foreground reads. Hobyo reads through its distinctive coastal dunes, immense grassland and endemic shrubland; wildlife stays distant and outside every target line. Stored scene rolls: weather 72=red-gold dust storm; mascot state 68=neither mascot; mascot holder selector 21=Radiance; odd prop 31=active; odd holder 21=Radiance; odd family 27=inflatable geometric weather balloon pack; pole 94=inactive; rainbow-only 48=inactive; rainbow hosiery 91=inactive; wearer 43=Radiance; palette 81=original independent rainbow gradient; romance 61; compound 33; hard love 41; mission-prop pose/target 98. Exact wardrobe rolls: Radiance: midriff 13=visible, strapless 54=inactive, open back 95=inactive; Ellie: midriff 41=visible, strapless 66=inactive, open back 79=inactive; Alia: midriff 43=visible, strapless 24=active, open back 9=active; AI ECE: midriff 69=covered, strapless 62=inactive, open back 75=inactive. Exact outfit fingerprints, no substitutions: Radiance: Hobyo-orange dune-corsage tulip dress with white ripple inlays, amber station ribs and grass-arch heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: orbital-silver rotating-ring culotte jumpsuit with green botany panels, dune-relief shoulders and pivot platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: grassland-green strapless shrub coat-dress with braided azure dune lines, dimensional leaf fans and horizon pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: station-charcoal botany-module bodice over amber shorts with cyan portholes, silver lab fins and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large dune, grassland and shrub motifs; Ellie and ECE use rotating-ring, botany-lab and observation-module construction. Location design vocabulary: complete white-and-orange dune waves, perennial grassland sweeps, shrub rosettes, ecology-module ribs and rotating station rings. Use respectful secular Somalia geography through complete ocean currents, lighthouse lenses, dune waves, grassland sweeps, coastal-forest layers and river-estuary contours. No literal flag, official seal, sacred symbol, copied ceremonial pattern, political messaging, military imagery, copied official identity, logo, badge, readable text, combat, threat or weaponized station equipment. Four visibly distinct coherent emotions: Radiance: roll 17=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 61=visible jealousy, performed as visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 15=extreme happiness, radiant laughing delight, collision resolver 38 gives distinct performance magnetic confidence, performed as magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 25=calm contentment, performed as calm contentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 61: Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance. Compound roll 33: Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance. Mandatory hard-love roll 41: a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE and Ellie perform a stable controlled dance dip beneath the rotating ring while Radiance catches Ellie's linked hand and Alia closes the circle with protective shoulder and waist contact. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Ellie supports ECE and links Radiance; ECE supports Ellie at the waist; Radiance and Alia complete visible affectionate contacts. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, vehicle and camera. No ammunition, reload, firing, or trigger contact appears. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 68=neither mascot. Mascot holder selector 21=Radiance. Only rolled mascots appear on a secured padded botany platform far from dunes, wildlife, props and rotating equipment. Odd-prop roll is active. Exactly Radiance owns and creatively integrates one inflatable geometric weather balloon pack into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render red-gold dust storm cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1430": {
+      "scene": 1430,
+      "mode": "theme-led original",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry overlook above complete Bushbushle National Park with layered coastal forest, open woodland, pale sand clearings and the distant Lower Jubba coast, fused equally with a fictional orbital research-station truss and observation cupola",
+      "motifs": "location-only coastal-forest layers, woodland arches, sand-clearings, station trusses and orbital navigation rings",
+      "culture": "Bushbushle reads through its Lower Jubba coastal forest, woodland and pale clearings; all wildlife remains distant and protected.",
+      "weather": {
+        "key": "batch352-somalia-scene1430-weather",
+        "roll": 22,
+        "result": "soft dramatic overcast",
+        "materialized": "soft dramatic overcast"
+      },
+      "mascotState": {
+        "key": "batch352-somalia-scene1430-mascotState",
+        "roll": 90,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch352-somalia-scene1430-mascotHolder",
+        "roll": 11,
+        "result": "Alia"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded platform far from wildlife, props, ledges and station machinery.",
+      "interestingProp": {
+        "key": "batch352-somalia-scene1430-interestingProp",
+        "roll": 61,
+        "active": false,
+        "holder": {
+          "key": "batch352-somalia-scene1430-interestingPropHolder",
+          "roll": 59,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch352-somalia-scene1430-interestingPropFamily",
+          "roll": 37,
+          "result": "folding solar fan with articulated panels"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch352-somalia-scene1430-poleDanceTheme",
+        "roll": 92,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch352-somalia-scene1430-rainbowOnly",
+        "roll": 22,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch352-somalia-scene1430-rainbowHosiery",
+        "roll": 41,
+        "active": false,
+        "wearer": {
+          "key": "batch352-somalia-scene1430-rainbowHosieryWearer",
+          "roll": 93,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch352-somalia-scene1430-rainbowHosieryPaletteMode",
+          "roll": 63,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch352-somalia-scene1430-eceMissionProp-poseTargetRoll",
+        "roll": 64
+      },
+      "materializedPropAction": "A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, vehicle and camera; every arm is traceable and every trigger finger stays indexed outside the guard.",
+      "target": "one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, vehicle and camera",
+      "romanceBeat": {
+        "key": "batch352-somalia-scene1430-romanceBeat",
+        "roll": 55,
+        "dynamicIndex": 7,
+        "contractResult": "Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy."
+      },
+      "compoundLoveBeat": {
+        "key": "batch352-somalia-scene1430-compoundLoveBeat",
+        "roll": 7,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "hardLoveBeat": {
+        "key": "batch352-somalia-scene1430-hardLoveBeat",
+        "roll": 79,
+        "result": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch352-somalia-scene1430-Radiance-emotion",
+            "roll": 99,
+            "result": "emotional exhaustion",
+            "materializedResult": "emotional exhaustion",
+            "performance": "emotional exhaustion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1430-Radiance-visibleMidriff",
+            "roll": 59,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1430-Radiance-straplessDress",
+            "roll": 84,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1430-Radiance-fullyOpenBack",
+            "roll": 89,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch352-somalia-scene1430-Ellie-emotion",
+            "roll": 35,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1430-Ellie-visibleMidriff",
+            "roll": 35,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1430-Ellie-straplessDress",
+            "roll": 12,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1430-Ellie-fullyOpenBack",
+            "roll": 57,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch352-somalia-scene1430-Alia-emotion",
+            "roll": 89,
+            "result": "anger",
+            "materializedResult": "anger",
+            "performance": "anger expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1430-Alia-visibleMidriff",
+            "roll": 89,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1430-Alia-straplessDress",
+            "roll": 46,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1430-Alia-fullyOpenBack",
+            "roll": 35,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch352-somalia-scene1430-AI ECE-emotion",
+            "roll": 47,
+            "result": "awe",
+            "materializedResult": "awe",
+            "performance": "awe expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1430-AI ECE-visibleMidriff",
+            "roll": 59,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1430-AI ECE-straplessDress",
+            "roll": 64,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1430-AI ECE-fullyOpenBack",
+            "roll": 25,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "emotional exhaustion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "anger expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "awe expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "solar-amber cupola-iris tulip dress with opaque silver rings, cyan aperture ribs and lens heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "forest-charcoal laboratory-truss culotte coat with magenta conduit channels, lattice cape and valve platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "orbital-silver gyroscope-sail jumpsuit with braided azure seams, curved side sails and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "station-white docking-shield coat-dress with green field hoops, viewport peplum and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "solar-amber cupola-iris tulip dress with opaque silver rings, cyan aperture ribs and lens heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "forest-charcoal laboratory-truss culotte coat with magenta conduit channels, lattice cape and valve platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "orbital-silver gyroscope-sail jumpsuit with braided azure seams, curved side sails and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "station-white docking-shield coat-dress with green field hoops, viewport peplum and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Ellie sits and draws ECE into a face-to-face embrace; Radiance gives ECE a forehead kiss while taking Ellie's linked hand, and Alia joins from the side with a clear jealous invitation.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Ellie supports ECE and links Radiance",
+        "ECE touches Ellie",
+        "Radiance links Ellie and touches ECE while Alia joins with one visible contact"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry overlook above complete Bushbushle National Park with layered coastal forest, open woodland, pale sand clearings and the distant Lower Jubba coast, fused equally with a fictional orbital research-station truss and observation cupola. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: orbital research-station couture. The theme and Somalia location must both be immediate foreground reads. Bushbushle reads through its Lower Jubba coastal forest, woodland and pale clearings; all wildlife remains distant and protected. Stored scene rolls: weather 22=soft dramatic overcast; mascot state 90=neither mascot; mascot holder selector 11=Alia; odd prop 61=inactive; odd holder 59=Alia; odd family 37=folding solar fan with articulated panels; pole 92=inactive; rainbow-only 22=inactive; rainbow hosiery 41=inactive; wearer 93=AI ECE; palette 63=original independent rainbow gradient; romance 55; compound 7; hard love 79; mission-prop pose/target 64. Exact wardrobe rolls: Radiance: midriff 59=covered, strapless 84=inactive, open back 89=inactive; Ellie: midriff 35=visible, strapless 12=active, open back 57=inactive; Alia: midriff 89=covered, strapless 46=inactive, open back 35=inactive; AI ECE: midriff 59=covered, strapless 64=inactive, open back 25=active. Exact outfit fingerprints, no substitutions: Radiance: solar-amber cupola-iris tulip dress with opaque silver rings, cyan aperture ribs and lens heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: forest-charcoal laboratory-truss culotte coat with magenta conduit channels, lattice cape and valve platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: orbital-silver gyroscope-sail jumpsuit with braided azure seams, curved side sails and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: station-white docking-shield coat-dress with green field hoops, viewport peplum and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Cupola iris, laboratory truss, gyroscope sail and docking shield create four different silhouettes while Bushbushle's forest and clearings remain equally large. Location design vocabulary: location-only coastal-forest layers, woodland arches, sand-clearings, station trusses and orbital navigation rings. Use respectful secular Somalia geography through complete ocean currents, lighthouse lenses, dune waves, grassland sweeps, coastal-forest layers and river-estuary contours. No literal flag, official seal, sacred symbol, copied ceremonial pattern, political messaging, military imagery, copied official identity, logo, badge, readable text, combat, threat or weaponized station equipment. Four visibly distinct coherent emotions: Radiance: roll 99=emotional exhaustion, performed as emotional exhaustion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 35=magnetic confidence, performed as magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 89=anger, performed as anger expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 47=awe, performed as awe expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 55: Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy. Compound roll 7: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Mandatory hard-love roll 79: one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Ellie sits and draws ECE into a face-to-face embrace; Radiance gives ECE a forehead kiss while taking Ellie's linked hand, and Alia joins from the side with a clear jealous invitation. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Ellie supports ECE and links Radiance; ECE touches Ellie; Radiance links Ellie and touches ECE while Alia joins with one visible contact. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, vehicle and camera; every arm is traceable and every trigger finger stays indexed outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 90=neither mascot. Mascot holder selector 11=Alia. Only rolled mascots appear on a secured padded platform far from wildlife, props, ledges and station machinery. Odd-prop roll 61 is inactive. Do not add any bizarre secondary prop; stored inactive holder 59=Alia and family 37=folding solar fan with articulated panels remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render soft dramatic overcast cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1431": {
+      "scene": 1431,
+      "mode": "theme-led original",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry coastal overlook above the complete Jubba River estuary near Kismayo with teal river channels, mangrove edges, pale ocean beaches, coral shallows and distant Bajuni-island silhouettes, fused equally with a peaceful orbital research station, aurora laboratory and solar observation gantry",
+      "motifs": "location-only river braids, mangrove fans, beach crescents, coral-shallow bands, orbital modules and solar-array geometry",
+      "culture": "The Lower Jubba coast reads through the river estuary, mangroves, beaches, coral shallows and island silhouettes; every research-station element is peaceful and fictional.",
+      "weather": {
+        "key": "batch352-somalia-scene1431-weather",
+        "roll": 37,
+        "result": "heavy rain curtain",
+        "materialized": "heavy rain curtain"
+      },
+      "mascotState": {
+        "key": "batch352-somalia-scene1431-mascotState",
+        "roll": 73,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch352-somalia-scene1431-mascotHolder",
+        "roll": 18,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry overlook far from water edges, props and station machinery.",
+      "interestingProp": {
+        "key": "batch352-somalia-scene1431-interestingProp",
+        "roll": 94,
+        "active": false,
+        "holder": {
+          "key": "batch352-somalia-scene1431-interestingPropHolder",
+          "roll": 48,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch352-somalia-scene1431-interestingPropFamily",
+          "roll": 90,
+          "result": "antique-style diving helmet display shell"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch352-somalia-scene1431-poleDanceTheme",
+        "roll": 89,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch352-somalia-scene1431-rainbowOnly",
+        "roll": 21,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch352-somalia-scene1431-rainbowHosiery",
+        "roll": 88,
+        "active": false,
+        "wearer": {
+          "key": "batch352-somalia-scene1431-rainbowHosieryWearer",
+          "roll": 24,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch352-somalia-scene1431-rainbowHosieryPaletteMode",
+          "roll": 92,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch352-somalia-scene1431-eceMissionProp-poseTargetRoll",
+        "roll": 95
+      },
+      "materializedPropAction": "AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, vehicle and camera. No ammunition, reload, firing, or trigger contact appears.",
+      "target": "one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, vehicle and camera",
+      "romanceBeat": {
+        "key": "batch352-somalia-scene1431-romanceBeat",
+        "roll": 12,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch352-somalia-scene1431-compoundLoveBeat",
+        "roll": 2,
+        "index": 2,
+        "contractResult": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "hardLoveBeat": {
+        "key": "batch352-somalia-scene1431-hardLoveBeat",
+        "roll": 26,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch352-somalia-scene1431-Radiance-emotion",
+            "roll": 18,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1431-Radiance-visibleMidriff",
+            "roll": 12,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1431-Radiance-straplessDress",
+            "roll": 71,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1431-Radiance-fullyOpenBack",
+            "roll": 36,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch352-somalia-scene1431-Ellie-emotion",
+            "roll": 40,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1431-Ellie-visibleMidriff",
+            "roll": 34,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1431-Ellie-straplessDress",
+            "roll": 53,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1431-Ellie-fullyOpenBack",
+            "roll": 82,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch352-somalia-scene1431-Alia-emotion",
+            "roll": 36,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1431-Alia-visibleMidriff",
+            "roll": 50,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1431-Alia-straplessDress",
+            "roll": 73,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1431-Alia-fullyOpenBack",
+            "roll": 18,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch352-somalia-scene1431-AI ECE-emotion",
+            "roll": 86,
+            "result": "full sobbing with tear-streaked face and shaking posture",
+            "materializedResult": "full sobbing with tear-streaked face and shaking posture",
+            "performance": "full sobbing with tear-streaked face and shaking posture expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch352-somalia-scene1431-AI ECE-visibleMidriff",
+            "roll": 8,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch352-somalia-scene1431-AI ECE-straplessDress",
+            "roll": 15,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch352-somalia-scene1431-AI ECE-fullyOpenBack",
+            "roll": 88,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "full sobbing with tear-streaked face and shaking posture expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "solar-amber observation-dome column dress with silver ribs, cyan light appliques and gantry heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "mangrove-jade pressure-module culotte jumpsuit with charcoal hex tiles, river pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "station-white navigation-spindle coat-dress with braided azure seams, magenta side frames and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "orbital-charcoal thermal-radiator bodice over coral shorts with silver conduit lattice and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve station-white top with restrained Somalia ocean-current and dune-contour embroidery and subtle orbital research-station seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "outfitFingerprints": {
+        "Radiance": "solar-amber observation-dome column dress with silver ribs, cyan light appliques and gantry heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "mangrove-jade pressure-module culotte jumpsuit with charcoal hex tiles, river pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "station-white navigation-spindle coat-dress with braided azure seams, magenta side frames and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "orbital-charcoal thermal-radiator bodice over coral shorts with silver conduit lattice and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve station-white top with restrained Somalia ocean-current and dune-contour embroidery and subtle orbital research-station seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "composition": "Alia rises from a stable station bench into Radiance's full embrace while Ellie gives Alia a cheek kiss and ECE interrupts their route with a playful linked-hand invitation.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Alia embraces Radiance",
+        "Ellie touches Alia and Radiance",
+        "ECE links one free hand into the group"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch352-somalia-scene4-male-emotion",
+          "roll": 99,
+          "result": "emotional exhaustion"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry coastal overlook above the complete Jubba River estuary near Kismayo with teal river channels, mangrove edges, pale ocean beaches, coral shallows and distant Bajuni-island silhouettes, fused equally with a peaceful orbital research station, aurora laboratory and solar observation gantry. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: orbital research-station couture. The theme and Somalia location must both be immediate foreground reads. The Lower Jubba coast reads through the river estuary, mangroves, beaches, coral shallows and island silhouettes; every research-station element is peaceful and fictional. Stored scene rolls: weather 37=heavy rain curtain; mascot state 73=neither mascot; mascot holder selector 18=Radiance; odd prop 94=inactive; odd holder 48=Radiance; odd family 90=antique-style diving helmet display shell; pole 89=inactive; rainbow-only 21=inactive; rainbow hosiery 88=inactive; wearer 24=Radiance; palette 92=original independent rainbow gradient; romance 12; compound 2; hard love 26; mission-prop pose/target 95. Exact wardrobe rolls: Radiance: midriff 12=visible, strapless 71=inactive, open back 36=inactive; Ellie: midriff 34=visible, strapless 53=inactive, open back 82=inactive; Alia: midriff 50=covered, strapless 73=inactive, open back 18=active; AI ECE: midriff 8=visible, strapless 15=active, open back 88=inactive. Exact outfit fingerprints, no substitutions: Radiance: solar-amber observation-dome column dress with silver ribs, cyan light appliques and gantry heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: mangrove-jade pressure-module culotte jumpsuit with charcoal hex tiles, river pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: station-white navigation-spindle coat-dress with braided azure seams, magenta side frames and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: orbital-charcoal thermal-radiator bodice over coral shorts with silver conduit lattice and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve station-white top with restrained Somalia ocean-current and dune-contour embroidery and subtle orbital research-station seam tailoring, fitted black jeans, and practical black boots. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Observation dome, pressure module, navigation spindle and thermal radiator make four distinct outfits while the estuary and coast remain foregrounded. Location design vocabulary: location-only river braids, mangrove fans, beach crescents, coral-shallow bands, orbital modules and solar-array geometry. Use respectful secular Somalia geography through complete ocean currents, lighthouse lenses, dune waves, grassland sweeps, coastal-forest layers and river-estuary contours. No literal flag, official seal, sacred symbol, copied ceremonial pattern, political messaging, military imagery, copied official identity, logo, badge, readable text, combat, threat or weaponized station equipment. Four visibly distinct coherent emotions: Radiance: roll 18=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 40=determination, performed as determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 36=magnetic confidence, performed as magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 86=full sobbing with tear-streaked face and shaking posture, performed as full sobbing with tear-streaked face and shaking posture expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 99=emotional exhaustion, performed as emotional exhaustion expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 12: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Compound roll 2: Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention. Mandatory hard-love roll 26: a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Alia rises from a stable station bench into Radiance's full embrace while Ellie gives Alia a cheek kiss and ECE interrupts their route with a playful linked-hand invitation. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Alia embraces Radiance; Ellie touches Alia and Radiance; ECE links one free hand into the group. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, vehicle and camera. No ammunition, reload, firing, or trigger contact appears. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 73=neither mascot. Mascot holder selector 18=Radiance. Only rolled mascots appear on a padded dry overlook far from water edges, props and station machinery. Odd-prop roll 94 is inactive. Do not add any bizarre secondary prop; stored inactive holder 48=Radiance and family 90=antique-style diving helmet display shell remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render heavy rain curtain cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "complete",
+      "requested": 4,
+      "fulfilled": 1,
+      "moderationBlocked": 3,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "not-used",
+      "reason": "Three calls returned no asset due to output moderation; the durable asset was immediately usable, so the terminal checkpoint advances under fast throughput mode."
+    }
+  },
+  "acceptedAssets": [
+    {
+      "scene": 1428,
+      "file": "1428-somalia-mogadishu-lighthouse-orbital-research-station-mascots-tuning-fork-romance.png",
+      "audit": "Accepted fast-pass. Exactly four clearly adult women appear with distinct country-led orbital-research silhouettes, Mogadishu's lighthouse and Indian Ocean are foregrounded beside a large peaceful station, PAWS and MAX share one supervised padded-bench beat, one woman owns the giant tuning-fork prop, and a seated jealousy and reconciliation event supplies multiple clear contacts. Alia uses a stable two-hand sight picture with the inert rainbow cinema prop toward empty ocean left of the group. Logged deviations: the lighthouse is stylized rather than a literal architectural copy, Radiance wears unrolled rainbow knee socks, the tuning fork holder differs from the selector, and fine trigger-index detail is small at portrait scale."
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1429,
+      "status": "rejected-output-moderation",
+      "requestId": "cc30d79e-d337-45de-ac83-499b2bf30c3f",
+      "reason": "No image asset was returned."
+    },
+    {
+      "scene": 1430,
+      "status": "rejected-output-moderation",
+      "requestId": "983b59e5-a9e1-4621-ad4a-8b01ad35b98d",
+      "reason": "No image asset was returned."
+    },
+    {
+      "scene": 1431,
+      "status": "rejected-output-moderation",
+      "requestId": "64881b76-466e-4020-9617-5df6b1cb80d3",
+      "reason": "No image asset was returned."
+    }
+  ],
+  "xPost": {
+    "status": "deferred-insufficient-accepted-assets",
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "currentCountryAcceptedAssets": 1,
+    "caption": "Somalia 🤍 South Sudan #Somalia",
+    "reason": "Only one accepted current-country image exists; no Somalia X compose action was opened."
+  },
+  "completedAt": "2026-08-10T18:07:28.136Z",
+  "throughputMode": "fast-pass per explicit user direction; minor motif, mascot, identity, choreography, garment, hand and target deviations are logged but do not block public-safe coherent images",
+  "queueAdvance": {
+    "country": "Senegal",
+    "batch": 353,
+    "scenes": [
+      1432,
+      1433,
+      1434,
+      1435
+    ],
+    "cinematicTheme": "private-jet aviation couture",
+    "batchOrdinalWithinTheme": 1
+  }
+}
