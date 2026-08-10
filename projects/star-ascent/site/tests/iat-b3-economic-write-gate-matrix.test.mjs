@@ -808,8 +808,18 @@ test("the feature-gated stake-ingress runtime executes exact Token-2022 CPI relo
   assert.match(economyStakeIngressRuntimeSource, /daily_law_capability_reauthenticated: true/u);
   assert.match(
     economyStakeIngressRuntimeSource,
+    /production_active_config_capability_required: true/u,
+  );
+  assert.match(
+    economyStakeIngressRuntimeSource,
     /pub fn execute_daily_law_authenticated_stake_ingress/u,
   );
+  assert.match(
+    economyStakeIngressRuntimeSource,
+    /pub fn execute_production_active_daily_law_authenticated_stake_ingress/u,
+  );
+  assert.match(economyStakeIngressRuntimeSource, /RuntimeProductionActiveConfig/u);
+  assert.match(economyStakeIngressRuntimeSource, /ActiveConfigCapabilityMismatch/u);
   assert.match(economyStakeIngressRuntimeSource, /fn authenticate_daily_law/u);
   assert.match(economyStakeIngressRuntimeSource, /fn bind_stake_ingress_accounts/u);
   assert.match(economyStakeIngressRuntimeSource, /Box<PrepareOpenPositionInput>/u);

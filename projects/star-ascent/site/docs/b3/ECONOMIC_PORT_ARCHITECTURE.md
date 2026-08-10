@@ -167,9 +167,13 @@ rollback rehearsal.
 
 The economy crate's production-source `stake_ingress` kernel and feature-gated
 `stake_ingress_runtime` executor now authenticate the finalized OPEN Daily Law
-account from `AccountInfo` and `Clock` before any token parsing, compose the
-exact retained V2 `prepare_open_position` preflight, and execute the ten-phase
-transaction-local ingress sequence. The runtime captures the original delegate,
+account from `AccountInfo` and `Clock` before any token parsing. The production
+entry then requires the same opaque production-ACTIVE Config capability bound
+to that exact Law account hash, timestamp, and local day before mint or token
+data parsing or CPI. It composes the exact retained V2 `prepare_open_position`
+preflight and executes the ten-phase transaction-local ingress sequence. The
+older unphased entry remains only for the pinned structural SBF fixture. The
+runtime captures the original delegate,
 performs an owner-signed exact `ApproveChecked` CPI, verifies its reload,
 requires ingress-PDA `invoke_signed` plus hook account expansion, verifies exact
 source/vault deltas and allowance consumption, runs the transaction-local

@@ -2,9 +2,11 @@
 //!
 //! This closes the production-source Daily-Law-authentication/CPI/reload gap without exposing an
 //! entrypoint, dispatcher, instruction ABI, production identity, or deployment
-//! authorization. The combined executor below authenticates the canonical
-//! finalized OPEN Daily Law account from `AccountInfo` and `Clock`, constructs
-//! the retained V2 plan inside the same call, and only then enters Token-2022.
+//! authorization. The production combined executor below authenticates the
+//! canonical finalized OPEN Daily Law account from `AccountInfo` and `Clock`,
+//! requires an opaque production-ACTIVE Config capability bound to that exact
+//! Law observation, constructs the retained V2 plan inside the same call, and
+//! only then enters Token-2022.
 //! The lower-level prepared-plan primitive remains non-authorizing. Full
 //! confidential-mint policy authentication and the post-CPI V2 persistence
 //! finalizer remain mandatory. This executor carries
@@ -35,7 +37,10 @@ use spl_transfer_hook_interface::{
 };
 
 use crate::{
-    runtime_adapter::{verify_daily_law_open_account_info, RuntimeAdapterError},
+    native_adapter::NativeEconomyBinding,
+    runtime_adapter::{
+        verify_daily_law_open_account_info, RuntimeAdapterError, RuntimeProductionActiveConfig,
+    },
     stake_ingress::{
         prepare_open_position_stake_ingress, DelegateRestorationIntent, DelegateSnapshot,
         IngressPdaBinding, PrepareStakeIngressInput, SourceTokenState, StakeIngressExecutionPlan,
@@ -53,6 +58,7 @@ pub struct StakeIngressRuntimeTruth {
     pub feature_gated: bool,
     pub prepared_stake_ingress_plan_required: bool,
     pub daily_law_capability_reauthenticated: bool,
+    pub production_active_config_capability_required: bool,
     pub canonical_mint_policy_reauthenticated: bool,
     pub canonical_ingress_pda_derived: bool,
     pub transfer_hook_extra_accounts_resolved: bool,
@@ -70,6 +76,7 @@ pub const STAKE_INGRESS_RUNTIME_TRUTH: StakeIngressRuntimeTruth = StakeIngressRu
     feature_gated: true,
     prepared_stake_ingress_plan_required: true,
     daily_law_capability_reauthenticated: true,
+    production_active_config_capability_required: true,
     canonical_mint_policy_reauthenticated: false,
     canonical_ingress_pda_derived: true,
     transfer_hook_extra_accounts_resolved: true,
@@ -129,6 +136,7 @@ pub enum StakeIngressRuntimeError {
     DailyLawLocked,
     StakeIngressPreparationRejected,
     CpiGuardLocked,
+    ActiveConfigCapabilityMismatch,
     Program(ProgramError),
 }
 
@@ -154,6 +162,7 @@ impl StakeIngressRuntimeError {
             Self::DailyLawLocked => ProgramError::Custom(0xB30D),
             Self::StakeIngressPreparationRejected => ProgramError::Custom(0xB30E),
             Self::CpiGuardLocked => ProgramError::Custom(0xB30F),
+            Self::ActiveConfigCapabilityMismatch => ProgramError::Custom(0xB310),
         }
     }
 }
@@ -507,9 +516,11 @@ where
     })
 }
 
-/// Authenticate a real finalized OPEN Daily Law account, construct the
-/// retained V2 open-position/stake-ingress plan, and execute its Token-2022
-/// CPI/reload sequence in one production-source call. Daily Law is checked
+/// Authenticate a real finalized OPEN Daily Law account for the pinned
+/// structural SBF fixture, construct the retained V2 open-position/stake-ingress
+/// plan, and execute its Token-2022 CPI/reload sequence. Production callers
+/// must use [`execute_production_active_daily_law_authenticated_stake_ingress`].
+/// Daily Law is checked
 /// before mint, token, delegate, or hook account parsing, so a locked,
 /// unfinalized, stale, forged, or substituted law account cannot mutate token
 /// state even when later accounts are hostile.
@@ -530,6 +541,61 @@ where
     F: FnOnce(&StakeIngressExecutionPlan, &StakeIngressRuntimePostTransfer) -> ProgramResult,
 {
     let gate = authenticate_daily_law(law_binding, law_state, accounts.mint.key)?;
+    execute_daily_law_authenticated_stake_ingress_with_gate(
+        program_id,
+        gate,
+        open_position,
+        accounts,
+        persist_transaction_local_state,
+    )
+}
+
+/// Production-shaped combined Daily Law, ACTIVE Config, and Token-2022 ingress
+/// path. The Config capability is checked against the exact runtime Law
+/// observation before mint or token data parsing and before any CPI.
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+pub fn execute_production_active_daily_law_authenticated_stake_ingress<'info, F>(
+    program_id: &Pubkey,
+    economy_binding: &NativeEconomyBinding,
+    active_config: &RuntimeProductionActiveConfig,
+    law_binding: &CanonicalDailyLawBinding,
+    law_state: &AccountInfo<'info>,
+    open_position: Box<PrepareOpenPositionInput>,
+    accounts: StakeIngressRuntimeAccounts<'_, 'info>,
+    persist_transaction_local_state: F,
+) -> Result<DailyLawAuthenticatedStakeIngressReceipt, StakeIngressRuntimeError>
+where
+    F: FnOnce(&StakeIngressExecutionPlan, &StakeIngressRuntimePostTransfer) -> ProgramResult,
+{
+    let gate = authenticate_daily_law(law_binding, law_state, accounts.mint.key)?;
+    require_production_active_context(
+        &gate,
+        active_config,
+        economy_binding,
+        program_id,
+        accounts.mint.key,
+    )?;
+    execute_daily_law_authenticated_stake_ingress_with_gate(
+        program_id,
+        gate,
+        open_position,
+        accounts,
+        persist_transaction_local_state,
+    )
+}
+
+#[inline(never)]
+fn execute_daily_law_authenticated_stake_ingress_with_gate<'info, F>(
+    program_id: &Pubkey,
+    gate: Box<ValidatedDailyLawWrite>,
+    open_position: Box<PrepareOpenPositionInput>,
+    accounts: StakeIngressRuntimeAccounts<'_, 'info>,
+    persist_transaction_local_state: F,
+) -> Result<DailyLawAuthenticatedStakeIngressReceipt, StakeIngressRuntimeError>
+where
+    F: FnOnce(&StakeIngressExecutionPlan, &StakeIngressRuntimePostTransfer) -> ProgramResult,
+{
     let daily_law_local_day = gate.local_day();
     let daily_law_account_sha256 = gate.law_account_sha256();
     let bound = bind_stake_ingress_accounts(program_id, open_position, &accounts)?;
@@ -546,6 +612,27 @@ where
         daily_law_account_sha256,
         plan_constructed_after_daily_law_authentication: true,
     })
+}
+
+fn require_production_active_context(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    economy_binding: &NativeEconomyBinding,
+    program_id: &Pubkey,
+    mint: &Pubkey,
+) -> Result<(), StakeIngressRuntimeError> {
+    if program_id.to_bytes() != economy_binding.program_id()
+        || mint.to_bytes() != economy_binding.mint()
+        || active_config.program_id() != economy_binding.program_id()
+        || active_config.mint() != economy_binding.mint()
+        || active_config.key() != economy_binding.config()
+        || active_config.law_account_sha256() != gate.law_account_sha256()
+        || active_config.law_unix_timestamp() != gate.unix_timestamp()
+        || active_config.law_local_day() != gate.local_day()
+    {
+        return Err(StakeIngressRuntimeError::ActiveConfigCapabilityMismatch);
+    }
+    Ok(())
 }
 
 #[inline(never)]

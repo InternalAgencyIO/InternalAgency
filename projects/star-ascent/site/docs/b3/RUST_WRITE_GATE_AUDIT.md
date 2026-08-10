@@ -352,8 +352,11 @@ permitted.
 The economy crate now carries the ten-phase stake-ingress kernel and a feature-
 gated native executor in production source. The combined executor authenticates
 the exact finalized OPEN Daily Law account from `AccountInfo` and `Clock` before
-reading any token account, derives and binds the AccountInfo-backed ingress
-facts, runs the retained V2 open-position preflight itself, and performs the
+reading any token account. Its production entry then requires the opaque
+production-ACTIVE Config capability bound to that exact Law account hash,
+timestamp, and local day before mint or token data parsing or CPI. It derives
+and binds the AccountInfo-backed ingress facts, runs the retained V2
+open-position preflight itself, and performs the
 exact Token-2022 approval, hooked transfer, reload, delegate restoration, and
 transaction-local persistence callback sequence. The large preflight values are
 heap-bounded and its SBF build has no over-limit stack frame. A loopback
@@ -362,6 +365,8 @@ hostile-token-ordering, hook, CPI-guard, persistence, restoration, and later-CPI
 rollback. This still exposes no production lifecycle, serialized post-CPI
 Config/Position/Lane write, Solana entrypoint, frozen ABI, production identity,
 or public dispatch, so no handler or release gate is complete.
+The older unphased combined entry remains only for the pinned structural SBF
+fixture and is not the production route.
 
 The `commit_round` differential kernel performs no account creation. It accepts
 a decoded read-only instructions-sysvar trace, selects only the instruction
