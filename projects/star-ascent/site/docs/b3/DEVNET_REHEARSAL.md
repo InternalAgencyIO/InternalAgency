@@ -60,6 +60,12 @@ finalized transaction signature. Final evidence queries only transactions newer
 than that boundary, so a reused payer with a long V2 history cannot hide new
 rehearsal transactions or overflow the bounded evidence query.
 
+The program upload may retry at most twelve times against the same pinned
+Devnet RPC, exact artifact, program identity, and deployment buffer. This
+resumes a public-RPC-interrupted chunk upload without creating another buffer or
+silently switching identities, bytes, cluster, or funding source. Exhausting the
+bound remains a loud partial failure.
+
 ## Wallet and funding isolation
 
 The wrapper creates a checked temporary directory beneath `target/` and always

@@ -260,6 +260,26 @@ run_json() {
   return "$sanitizer_exit_code"
 }
 
+run_json_with_bounded_retries() {
+  local label=$1
+  local max_attempts=$2
+  local attempt=1
+  shift 2
+  while (( attempt <= max_attempts )); do
+    if run_json "$label" "$@"; then
+      return 0
+    fi
+    if (( attempt == max_attempts )); then
+      return 1
+    fi
+    printf '{"schema":"iat-b3-devnet-rehearsal/v1","status":"RETRY","phase":"public_cli_command","label":"%s","completedAttempt":%d,"maxAttempts":%d,"samePublicIdentities":true,"sameDevnetRpc":true}\n' \
+      "$label" "$attempt" "$max_attempts"
+    attempt=$((attempt + 1))
+    sleep 2
+  done
+  return 1
+}
+
 run_airdrop() {
   local label=$1
   local raw_file
@@ -331,7 +351,7 @@ funding_lamports=$(solana balance "$payer_pubkey" \
 phase="deploy_exact_optimized_program"
 public_writes_started=true
 permanent_artifacts_may_remain=true
-run_json deploy-program solana program deploy "$artifact" \
+run_json_with_bounded_retries deploy-program 12 solana program deploy "$artifact" \
   --url "$devnet_rpc" \
   --use-rpc \
   --commitment finalized \
@@ -340,7 +360,7 @@ run_json deploy-program solana program deploy "$artifact" \
   --program-id "$program_key" \
   --buffer "$buffer_key" \
   --upgrade-authority "$payer_key" \
-  --max-sign-attempts 2 \
+  --max-sign-attempts 10 \
   --output json-compact
 
 phase="irrevocably_finalize_program_upgrade_authority"
