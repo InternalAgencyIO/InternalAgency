@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import { Buffer } from "buffer";
 import { PublicKey } from "@solana/web3.js";
 import {
   IAT_V2_WEEK9_STANDARD_ACCOUNT_METAS,
@@ -10,6 +9,8 @@ import {
 } from "../../programs/iat_v2/attended-settlement.mjs";
 import {
   awaitFinalizedIatV2Week9Transaction,
+  buildIatV2Week9StandardTransaction,
+  canonicalizeIatV2Week9SignedTransaction,
   fetchFinalizedBlockhashAndFee,
   getFinalizedBlockHeight,
   observeFinalizedIatV2Week9State,
@@ -320,19 +321,14 @@ export default function AttendedWeek9Settlement({
         throw new Error("Exact required Model T account was not returned");
       }
       // This is deliberately the only hardware signing call in this component.
-      const signed = await provider.signTransaction(unsignedTransaction);
-      if (!signed.verifySignatures() || signed.signatures.length !== 1) {
-        throw new Error("Local Ed25519 signature verification failed");
-      }
-      if (!signed.signatures[0].publicKey.equals(REQUIRED_SIGNER)) {
-        throw new Error("Signed transaction belongs to a different wallet");
-      }
-      const signedMessage = signed.serializeMessage();
-      const signedMessageSha256 = await sha256Hex(signedMessage);
-      const signedMessageHex = Buffer.from(signedMessage).toString("hex");
-      if (signedMessageSha256 !== review.messageSha256 || signedMessageHex !== review.messageHex) {
-        throw new Error("Trezor returned a different transaction message");
-      }
+      const returnedSigned = await provider.signTransaction(unsignedTransaction);
+      const signed = await canonicalizeIatV2Week9SignedTransaction({
+        reviewedUnsignedTransaction: unsignedTransaction,
+        returnedSignedTransaction: returnedSigned,
+        expectedMessageSha256: review.messageSha256,
+        expectedMessageHex: review.messageHex,
+        sha256Hex,
+      });
       setStatus("SIGNED LOCALLY // IMMEDIATE FINALIZED STATE REVALIDATION");
       const revalidated = await observeFinalizedIatV2Week9State({
         minContextSlot: review.preState.contextSlot,
@@ -513,6 +509,14 @@ export default function AttendedWeek9Settlement({
       signature: expectedSignature,
       signedWire,
     });
+    const canonicalFinalizedTransaction = await canonicalizeIatV2Week9SignedTransaction({
+      reviewedUnsignedTransaction: buildIatV2Week9StandardTransaction(activeReview.blockhash.blockhash),
+      returnedSignedTransaction: finalized.finalizedTransaction,
+      expectedMessageSha256: activeReview.messageSha256,
+      expectedMessageHex: activeReview.messageHex,
+      expectedSignedWire: finalized.finalizedWire,
+      sha256Hex,
+    });
     setStatus("FINALIZED // READING EXACT POST-STATE");
     const post = await observeFinalizedIatV2Week9State({
       minContextSlot: finalized.transactionResult.slot,
@@ -537,8 +541,8 @@ export default function AttendedWeek9Settlement({
     setLogs(replay.simulation.logs);
     const completed = await finalizeIatV2Week9StandardSettlement({
       review: activeReview,
-      signedTransaction: activeSignedTransaction ?? finalized.finalizedTransaction,
-      finalizedTransaction: finalized.finalizedTransaction,
+      signedTransaction: activeSignedTransaction ?? canonicalFinalizedTransaction,
+      finalizedTransaction: canonicalFinalizedTransaction,
       sha256Hex,
       signature: expectedSignature,
       transactionResult: finalized.transactionResult,

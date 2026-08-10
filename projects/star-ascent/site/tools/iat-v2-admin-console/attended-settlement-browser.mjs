@@ -5,6 +5,7 @@ import {
 } from "@solana/web3.js";
 import {
   buildExactIatV2Week9SimulationRpcRequest,
+  IAT_V2_WEEK9_STANDARD_ACCOUNT_METAS,
   IAT_V2_WEEK9_STANDARD_SETTLEMENT,
   IAT_V2_WEEK9_STANDARD_SIMULATION_ACCOUNTS,
 } from "../../programs/iat_v2/attended-settlement.mjs";
@@ -34,6 +35,8 @@ const RPC_TIMEOUT_MS = 20_000;
 const FINALIZATION_TIMEOUT_MS = 120_000;
 const FINALIZATION_POLL_MS = 1_000;
 const BASE58 = /^[1-9A-HJ-NP-Za-km-z]+$/u;
+const SHA256 = /^[0-9a-f]{64}$/u;
+const HEX_BYTES = /^(?:[0-9a-f]{2})+$/u;
 const BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
 const PROGRAM_ID = new PublicKey(IAT_V2_WEEK9_STANDARD_SETTLEMENT.programId);
@@ -293,6 +296,166 @@ export function buildIatV2Week9StandardTransaction(recentBlockhash) {
     week: IAT_V2_WEEK9_STANDARD_SETTLEMENT.week,
     round: null,
   }));
+}
+
+function assertPinnedWeek9Instruction(transaction, label) {
+  if (!(transaction instanceof Transaction)) hold(`${label} is not a legacy Solana transaction`);
+  if (!transaction.feePayer?.equals?.(REQUIRED_SIGNER)) hold(`${label} fee payer changed`);
+  if (typeof transaction.recentBlockhash !== "string" || !BASE58.test(transaction.recentBlockhash)) {
+    hold(`${label} recent blockhash is missing`);
+  }
+  if (transaction.instructions?.length !== 1) hold(`${label} instruction count changed`);
+  const [instruction] = transaction.instructions;
+  if (!instruction.programId?.equals?.(PROGRAM_ID)) hold(`${label} instruction program changed`);
+  if (Buffer.from(instruction.data ?? []).toString("hex") !== IAT_V2_WEEK9_STANDARD_SETTLEMENT.instructionDataHex) {
+    hold(`${label} instruction data changed`);
+  }
+  if (instruction.keys?.length !== IAT_V2_WEEK9_STANDARD_ACCOUNT_METAS.length) {
+    hold(`${label} instruction account count changed`);
+  }
+  instruction.keys.forEach((meta, index) => {
+    const expected = IAT_V2_WEEK9_STANDARD_ACCOUNT_METAS[index];
+    if (!meta.pubkey?.equals?.(new PublicKey(expected.address))) {
+      hold(`${label} instruction account ${index} changed`);
+    }
+    if (meta.isSigner !== expected.signer) hold(`${label} instruction account ${index} signer flag changed`);
+    if (meta.isWritable !== expected.writable) hold(`${label} instruction account ${index} writable flag changed`);
+  });
+}
+
+function assertOnlyFeePayerRehydrationDrift(reviewedUnsignedTransaction, returnedSignedTransaction) {
+  if (!(returnedSignedTransaction instanceof Transaction)) {
+    hold("returned signed transaction is not a legacy Solana transaction");
+  }
+  if (!returnedSignedTransaction.feePayer?.equals?.(REQUIRED_SIGNER)) {
+    hold("returned signed transaction fee payer changed");
+  }
+  if (returnedSignedTransaction.recentBlockhash !== reviewedUnsignedTransaction.recentBlockhash) {
+    hold("returned signed transaction recent blockhash changed");
+  }
+  if (returnedSignedTransaction.instructions?.length !== 1) {
+    hold("returned signed transaction instruction count changed");
+  }
+  const [expectedInstruction] = reviewedUnsignedTransaction.instructions;
+  const [returnedInstruction] = returnedSignedTransaction.instructions;
+  if (!returnedInstruction.programId?.equals?.(expectedInstruction.programId)) {
+    hold("returned signed transaction instruction program changed");
+  }
+  if (!Buffer.from(returnedInstruction.data ?? []).equals(Buffer.from(expectedInstruction.data))) {
+    hold("returned signed transaction instruction data changed");
+  }
+  if (returnedInstruction.keys?.length !== expectedInstruction.keys.length) {
+    hold("returned signed transaction instruction account count changed");
+  }
+  returnedInstruction.keys.forEach((returnedMeta, index) => {
+    const expectedMeta = expectedInstruction.keys[index];
+    if (!returnedMeta.pubkey?.equals?.(expectedMeta.pubkey)) {
+      hold(`returned signed transaction instruction account ${index} changed`);
+    }
+    if (returnedMeta.isSigner !== expectedMeta.isSigner) {
+      hold(`returned signed transaction instruction account ${index} signer flag changed`);
+    }
+    if (returnedMeta.isWritable === expectedMeta.isWritable) return;
+    const isWeb3FeePayerRehydration = index === 0
+      && expectedMeta.pubkey.equals(REQUIRED_SIGNER)
+      && expectedMeta.isSigner === true
+      && expectedMeta.isWritable === false
+      && returnedMeta.isSigner === true
+      && returnedMeta.isWritable === true
+      && returnedSignedTransaction.feePayer.equals(returnedMeta.pubkey);
+    if (!isWeb3FeePayerRehydration) {
+      hold(`returned signed transaction instruction account ${index} writable flag changed`);
+    }
+  });
+}
+
+/**
+ * web3.js Transaction.from() cannot recover instruction-level readonly status for
+ * an account that is also the globally-writable fee payer. Keep the frozen helper
+ * strict: prove that this is the sole high-level drift, then transplant only the
+ * verified signature onto a fresh exact reviewed transaction representation.
+ */
+export async function canonicalizeIatV2Week9SignedTransaction({
+  reviewedUnsignedTransaction,
+  returnedSignedTransaction,
+  expectedMessageSha256,
+  expectedMessageHex,
+  expectedSignedWire = null,
+  sha256Hex,
+} = {}) {
+  if (typeof sha256Hex !== "function") hold("message SHA-256 helper is missing");
+  if (!SHA256.test(expectedMessageSha256 ?? "")) hold("expected message SHA-256 is invalid");
+  if (!HEX_BYTES.test(expectedMessageHex ?? "")) hold("expected message hex is invalid");
+
+  const reviewedMessage = Buffer.from(reviewedUnsignedTransaction?.serializeMessage?.() ?? []);
+  assertPinnedWeek9Instruction(reviewedUnsignedTransaction, "reviewed unsigned transaction");
+  if (
+    reviewedUnsignedTransaction.signatures?.length !== 1
+    || !reviewedUnsignedTransaction.signatures[0].publicKey?.equals?.(REQUIRED_SIGNER)
+    || reviewedUnsignedTransaction.signatures[0].signature !== null
+  ) {
+    hold("reviewed transaction is not exactly unsigned for the pinned 7XZ signer");
+  }
+  const reviewedMessageHex = reviewedMessage.toString("hex");
+  const reviewedMessageSha256 = await sha256Hex(reviewedMessage);
+  if (reviewedMessageHex !== expectedMessageHex || reviewedMessageSha256 !== expectedMessageSha256) {
+    hold("reviewed unsigned transaction changed after review");
+  }
+
+  assertOnlyFeePayerRehydrationDrift(reviewedUnsignedTransaction, returnedSignedTransaction);
+  signatureBase58FromSignedIatV2Week9Transaction(returnedSignedTransaction);
+  const returnedMessage = Buffer.from(returnedSignedTransaction.serializeMessage());
+  const returnedMessageSha256 = await sha256Hex(returnedMessage);
+  if (
+    !returnedMessage.equals(reviewedMessage)
+    || returnedMessage.toString("hex") !== expectedMessageHex
+    || returnedMessageSha256 !== expectedMessageSha256
+  ) {
+    hold("returned signed transaction message changed");
+  }
+  const returnedWire = Buffer.from(returnedSignedTransaction.serialize({
+    requireAllSignatures: true,
+    verifySignatures: true,
+  }));
+  if (returnedWire.length > 1_232) hold("returned signed transaction exceeds the legacy wire limit");
+  if (expectedSignedWire !== null && !returnedWire.equals(Buffer.from(expectedSignedWire))) {
+    hold("returned signed transaction wire differs from the expected signed wire");
+  }
+
+  const canonical = buildIatV2Week9StandardTransaction(reviewedUnsignedTransaction.recentBlockhash);
+  const canonicalUnsignedMessage = Buffer.from(canonical.serializeMessage());
+  assertPinnedWeek9Instruction(canonical, "canonical transaction");
+  if (!canonicalUnsignedMessage.equals(reviewedMessage)) hold("canonical unsigned message changed");
+  const signatureBytes = Buffer.from(returnedSignedTransaction.signatures[0].signature);
+  canonical.addSignature(REQUIRED_SIGNER, signatureBytes);
+  if (canonical.verifySignatures() !== true) hold("canonical transaction signature verification failed");
+  if (
+    canonical.signatures.length !== 1
+    || !canonical.signatures[0].publicKey.equals(REQUIRED_SIGNER)
+    || !Buffer.from(canonical.signatures[0].signature ?? []).equals(signatureBytes)
+  ) {
+    hold("canonical transaction signature changed");
+  }
+  const canonicalMessage = Buffer.from(canonical.serializeMessage());
+  const canonicalMessageSha256 = await sha256Hex(canonicalMessage);
+  if (
+    !canonicalMessage.equals(returnedMessage)
+    || canonicalMessage.toString("hex") !== expectedMessageHex
+    || canonicalMessageSha256 !== expectedMessageSha256
+  ) {
+    hold("canonical signed transaction message changed");
+  }
+  const canonicalWire = Buffer.from(canonical.serialize({
+    requireAllSignatures: true,
+    verifySignatures: true,
+  }));
+  if (!canonicalWire.equals(returnedWire)) {
+    hold("canonical signed wire differs from the returned signed wire");
+  }
+  if (expectedSignedWire !== null && !canonicalWire.equals(Buffer.from(expectedSignedWire))) {
+    hold("canonical signed wire differs from the expected signed wire");
+  }
+  return canonical;
 }
 
 export async function observeFinalizedIatV2Week9State({

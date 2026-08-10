@@ -18,6 +18,7 @@ import {
   IAT_V2_WEEK9_OBSERVATION_ACCOUNTS,
   awaitFinalizedIatV2Week9Transaction,
   buildIatV2Week9StandardTransaction,
+  canonicalizeIatV2Week9SignedTransaction,
   postPinnedDevnetRpcEnvelope,
   sanitizedIatV2Week9Evidence,
   sendRawIatV2Week9TransactionOnce,
@@ -27,6 +28,7 @@ import {
 const MAIN = new URL("../tools/iat-v2-admin-console/main.jsx", import.meta.url);
 const COMPONENT = new URL("../tools/iat-v2-admin-console/AttendedWeek9Settlement.jsx", import.meta.url);
 const ADAPTER = new URL("../tools/iat-v2-admin-console/attended-settlement-browser.mjs", import.meta.url);
+const TREZOR_PROVIDER = new URL("../tools/iat-v2-admin-console/trezor-provider.mjs", import.meta.url);
 const PACKAGE = new URL("../package.json", import.meta.url);
 const BLOCKHASH = "3QhxKd9wK6xG7VikCjUUibTTrSzFzJa1PKtMsfWetSzm";
 const SIGNATURE = "3uoSVvDecrmjwg3XT7xpoVfLSKMAbTnJZfnrRZvqXzfb6wtdo1unyzpFXAv4Kj3nRHAnHahTwfD1AvgWX3vF7st9";
@@ -89,6 +91,201 @@ test("exact transaction has one unsigned legacy instruction and all 14 pinned me
     writable: meta.isWritable,
   })), IAT_V2_WEEK9_STANDARD_ACCOUNT_METAS);
   assert.ok(wire.length <= 1_232);
+});
+
+test("web3 legacy rehydration promotes only the instruction fee-payer view while preserving exact message and wire", async () => {
+  assert.match(source(TREZOR_PROVIDER), /Transaction\.from\(Buffer\.from\(result\.payload\.serializedTx, "hex"\)\)/u);
+  const reviewed = buildIatV2Week9StandardTransaction(BLOCKHASH);
+  const reviewedMessage = Buffer.from(reviewed.serializeMessage());
+  const unsignedWire = Buffer.from(reviewed.serialize({
+    requireAllSignatures: false,
+    verifySignatures: false,
+  }));
+  const rehydrated = Transaction.from(unsignedWire);
+  assert.equal(reviewed.instructions[0].keys[0].isWritable, false);
+  assert.equal(rehydrated.instructions[0].keys[0].isWritable, true);
+  assert.deepEqual(
+    rehydrated.instructions[0].keys.slice(1).map(({ isSigner, isWritable, pubkey }) => ({
+      address: pubkey.toBase58(),
+      signer: isSigner,
+      writable: isWritable,
+    })),
+    IAT_V2_WEEK9_STANDARD_ACCOUNT_METAS.slice(1),
+  );
+  assert.ok(Buffer.from(rehydrated.serializeMessage()).equals(reviewedMessage));
+  assert.ok(Buffer.from(rehydrated.serialize({
+    requireAllSignatures: false,
+    verifySignatures: false,
+  })).equals(unsignedWire));
+  await assert.rejects(
+    buildExactIatV2Week9SimulationRpcRequest({
+      transaction: rehydrated,
+      sha256Hex,
+      sigVerify: false,
+      minContextSlot: 100,
+    }),
+    /instruction account 0 writable flag changed/u,
+  );
+});
+
+function fakeTrezorRehydratedTransaction(reviewed) {
+  const wire = Buffer.from(reviewed.serialize({
+    requireAllSignatures: false,
+    verifySignatures: false,
+  }));
+  assert.equal(wire[0], 1);
+  for (let index = 0; index < 64; index += 1) wire[index + 1] = index + 1;
+  return { returned: Transaction.from(wire), wire };
+}
+
+test("localized canonicalization transplants only the bound signature and restores the exact reviewed metas", async () => {
+  const reviewed = buildIatV2Week9StandardTransaction(BLOCKHASH);
+  const message = Buffer.from(reviewed.serializeMessage());
+  const expectedMessageHex = message.toString("hex");
+  const expectedMessageSha256 = await sha256Hex(message);
+  const { returned, wire } = fakeTrezorRehydratedTransaction(reviewed);
+  assert.equal(returned.instructions[0].keys[0].isWritable, true);
+
+  // The pinned 7XZ private key is intentionally unavailable to tests. Patch only
+  // web3's cryptographic predicate while exercising its real message/wire codec.
+  const originalSignednessCheck = Transaction.prototype._getMessageSignednessErrors;
+  Transaction.prototype._getMessageSignednessErrors = () => undefined;
+  try {
+    const canonical = await canonicalizeIatV2Week9SignedTransaction({
+      reviewedUnsignedTransaction: reviewed,
+      returnedSignedTransaction: returned,
+      expectedMessageSha256,
+      expectedMessageHex,
+      expectedSignedWire: wire,
+      sha256Hex,
+    });
+    assert.equal(canonical.verifySignatures(), true);
+    assert.equal(canonical.instructions[0].keys[0].isWritable, false);
+    assert.deepEqual(canonical.instructions[0].keys.map((meta) => ({
+      address: meta.pubkey.toBase58(),
+      signer: meta.isSigner,
+      writable: meta.isWritable,
+    })), IAT_V2_WEEK9_STANDARD_ACCOUNT_METAS);
+    assert.ok(Buffer.from(canonical.serializeMessage()).equals(message));
+    assert.ok(Buffer.from(canonical.serialize({
+      requireAllSignatures: true,
+      verifySignatures: true,
+    })).equals(wire));
+    assert.ok(Buffer.from(canonical.signatures[0].signature).equals(Buffer.from(returned.signatures[0].signature)));
+  } finally {
+    Transaction.prototype._getMessageSignednessErrors = originalSignednessCheck;
+  }
+});
+
+test("localized canonicalization rejects every high-level drift except fee-payer readonly-to-writable rehydration", async (t) => {
+  const mutations = [
+    ["other writable flag", (transaction) => { transaction.instructions[0].keys[1].isWritable = true; }],
+    ["fee-payer signer flag", (transaction) => { transaction.instructions[0].keys[0].isSigner = false; }],
+    ["account order", (transaction) => {
+      [transaction.instructions[0].keys[1], transaction.instructions[0].keys[2]] = [
+        transaction.instructions[0].keys[2],
+        transaction.instructions[0].keys[1],
+      ];
+    }],
+    ["instruction data", (transaction) => { transaction.instructions[0].data[0] ^= 0xff; }],
+    ["instruction program", (transaction) => { transaction.instructions[0].programId = SystemProgram.programId; }],
+    ["extra instruction", (transaction) => { transaction.instructions.push(transaction.instructions[0]); }],
+  ];
+  for (const [label, mutate] of mutations) {
+    await t.test(label, async () => {
+      const reviewed = buildIatV2Week9StandardTransaction(BLOCKHASH);
+      const message = Buffer.from(reviewed.serializeMessage());
+      const { returned } = fakeTrezorRehydratedTransaction(reviewed);
+      mutate(returned);
+      await assert.rejects(
+        canonicalizeIatV2Week9SignedTransaction({
+          reviewedUnsignedTransaction: reviewed,
+          returnedSignedTransaction: returned,
+          expectedMessageSha256: await sha256Hex(message),
+          expectedMessageHex: message.toString("hex"),
+          sha256Hex,
+        }),
+        /returned signed transaction/u,
+      );
+    });
+  }
+});
+
+test("localized canonicalization rejects hostile signatures, wire mismatch, and reviewed-input mutation", async (t) => {
+  await t.test("cryptographically invalid signature", async () => {
+    const reviewed = buildIatV2Week9StandardTransaction(BLOCKHASH);
+    const message = Buffer.from(reviewed.serializeMessage());
+    const { returned } = fakeTrezorRehydratedTransaction(reviewed);
+    await assert.rejects(
+      canonicalizeIatV2Week9SignedTransaction({
+        reviewedUnsignedTransaction: reviewed,
+        returnedSignedTransaction: returned,
+        expectedMessageSha256: await sha256Hex(message),
+        expectedMessageHex: message.toString("hex"),
+        sha256Hex,
+      }),
+      /one valid local signature/u,
+    );
+  });
+
+  await t.test("unexpected signed wire", async () => {
+    const reviewed = buildIatV2Week9StandardTransaction(BLOCKHASH);
+    const message = Buffer.from(reviewed.serializeMessage());
+    const { returned, wire } = fakeTrezorRehydratedTransaction(reviewed);
+    const wrongWire = Buffer.from(wire);
+    wrongWire[1] ^= 0xff;
+    const originalSignednessCheck = Transaction.prototype._getMessageSignednessErrors;
+    Transaction.prototype._getMessageSignednessErrors = () => undefined;
+    try {
+      await assert.rejects(
+        canonicalizeIatV2Week9SignedTransaction({
+          reviewedUnsignedTransaction: reviewed,
+          returnedSignedTransaction: returned,
+          expectedMessageSha256: await sha256Hex(message),
+          expectedMessageHex: message.toString("hex"),
+          expectedSignedWire: wrongWire,
+          sha256Hex,
+        }),
+        /wire differs/u,
+      );
+    } finally {
+      Transaction.prototype._getMessageSignednessErrors = originalSignednessCheck;
+    }
+  });
+
+  await t.test("reviewed transaction already signed", async () => {
+    const reviewed = buildIatV2Week9StandardTransaction(BLOCKHASH);
+    const message = Buffer.from(reviewed.serializeMessage());
+    const { returned } = fakeTrezorRehydratedTransaction(reviewed);
+    reviewed.signatures[0].signature = Buffer.alloc(64, 7);
+    await assert.rejects(
+      canonicalizeIatV2Week9SignedTransaction({
+        reviewedUnsignedTransaction: reviewed,
+        returnedSignedTransaction: returned,
+        expectedMessageSha256: await sha256Hex(message),
+        expectedMessageHex: message.toString("hex"),
+        sha256Hex,
+      }),
+      /not exactly unsigned/u,
+    );
+  });
+
+  await t.test("reviewed representation changed after review", async () => {
+    const reviewed = buildIatV2Week9StandardTransaction(BLOCKHASH);
+    const message = Buffer.from(reviewed.serializeMessage());
+    const { returned } = fakeTrezorRehydratedTransaction(reviewed);
+    reviewed.instructions[0].keys[0].isWritable = true;
+    await assert.rejects(
+      canonicalizeIatV2Week9SignedTransaction({
+        reviewedUnsignedTransaction: reviewed,
+        returnedSignedTransaction: returned,
+        expectedMessageSha256: await sha256Hex(message),
+        expectedMessageHex: message.toString("hex"),
+        sha256Hex,
+      }),
+      /reviewed unsigned transaction instruction account 0 writable flag changed/u,
+    );
+  });
 });
 
 test("raw simulation POST body is the frozen helper rpcRequest byte-for-byte as JSON", async () => {
@@ -256,6 +453,8 @@ test("finalized reconstruction, exact post-state, and fresh replay are all manda
   assert.match(adapter, /getTransaction/u);
   assert.match(adapter, /Transaction\.from\(finalizedWire\)/u);
   assert.match(adapter, /finalized chain wire differs from the signed wire/u);
+  assert.match(component, /expectedSignedWire: finalized\.finalizedWire/u);
+  assert.match(component, /finalizedTransaction: canonicalFinalizedTransaction/u);
   assert.match(component, /minContextSlot: finalized\.transactionResult\.slot/u);
   assert.match(component, /replayMessage\.blockhash\.blockhash === activeReview\.blockhash\.blockhash/u);
   assert.match(component, /InstructionError\?\.\[0\] !== 0/u);
