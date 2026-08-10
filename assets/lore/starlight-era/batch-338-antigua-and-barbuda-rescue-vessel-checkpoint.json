@@ -1,0 +1,1617 @@
+{
+  "batch": 338,
+  "country": "Antigua and Barbuda",
+  "status": "terminal-partially-accepted",
+  "sourceCommit": "8dc0b1b983d04dd6496988199961832011a8e20a",
+  "contractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "rollMethod": "FNV-1a over the recorded batch338-antigua-and-barbuda keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 338 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "hardLoveBeat": "0-14 lap sitting; 15-29 partner dance; 30-44 controlled dip; 45-59 seated embrace; 60-74 three-person slow dance; 75-89 pulled-away choice; 90-99 seated-to-standing assist",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "cinematicTheme": {
+    "active": "fictional coast-guard rescue-vessel couture",
+    "batchOrdinalWithinTheme": 2,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "nextQueueCountry": "Andorra",
+  "nextQueueBatch": 339,
+  "nextQueueScenes": [
+    1376,
+    1377,
+    1378,
+    1379
+  ],
+  "nextCinematicTheme": {
+    "active": "orbital spaceship couture",
+    "batchOrdinalWithinTheme": 1
+  },
+  "researchSources": [
+    {
+      "url": "https://whc.unesco.org/en/list/1499/",
+      "usedFor": "Antigua Naval Dockyard, English Harbour, Georgian buildings, deep narrow bays and surrounding highlands"
+    },
+    {
+      "url": "https://www.visitantiguabarbuda.com/things-to-do/frigate-bird-sanctuary-3/",
+      "usedFor": "Codrington Lagoon and Barbuda's frigate-bird sanctuary"
+    },
+    {
+      "url": "https://www.visitantiguabarbuda.com/things-to-do/barbuda-must-see-attractions/",
+      "usedFor": "Barbuda's pink sand, lagoon and Two Foot Bay landscape context"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch338-antigua-and-barbuda-male-model-scene",
+    "fullHash": 476015902,
+    "roll": 2,
+    "selectedScenePosition": 3,
+    "selectedScene": 1374,
+    "maleEmotion": {
+      "key": "batch338-antigua-and-barbuda-scene3-male-emotion",
+      "roll": 91,
+      "result": "anger"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Antigua and Barbuda flag, coat of arms, official emblem, sacred symbol, religious building, ceremonial pattern, ceremonial attire, copied military identity, or official service identity is used. Country-led scenes use large dimensional secular twin-island, English-Harbour, Georgian-masonry, Shirley-Heights, limestone-arch, lagoon and Caribbean-current compositions instead.",
+    "palette": "Caribbean cobalt, Barbuda coral pink, Antigua emerald, dockyard limestone, tropical gold, deep charcoal, seafoam, pearl white, rescue orange, and brushed silver",
+    "minimumCoverage": "Scenes 1372 and 1373 each carry hard large Antigua and Barbuda motifs on three women and fictional-rescue-vessel construction language on at least two. Scenes 1374 and 1375 use four different theme-led fictional-rescue-vessel outfits without country map prints while Antigua and Barbuda landmarks remain equally foregrounded.",
+    "cultureScene": "The scenes foreground Nelson's Dockyard at English Harbour, Shirley Heights, Devil's Bridge, and Barbuda's Codrington Lagoon frigate-bird sanctuary.",
+    "prohibitions": "Use respectful secular Antigua and Barbuda geography and heritage through complete twin-island silhouettes, English Harbour curves, Georgian dockyard masonry, Shirley Heights contours, Devil's Bridge limestone arch, Atlantic spray fans, Barbuda pink-sand bands, Codrington Lagoon shapes, frigate-wing forms, reef lines, and Caribbean-current arcs. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied military or coast-guard uniform, official badge, logo, emergency-service insignia, weaponized history, readable text, alcohol, political messaging, or threat framing."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch338-antigua-and-barbuda-x-heart",
+      "roll": 7,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch338-antigua-and-barbuda-x-internalagency",
+      "roll": 51,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch338-antigua-and-barbuda-x-worldxxxseries",
+      "roll": 36,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Antigua and Barbuda images plus one accepted Saint Vincent and the Grenadines image",
+    "captionIfEligible": "Antigua and Barbuda ❤️ Saint Vincent and the Grenadines #AntiguaAndBarbuda",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1374 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1374 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch338-antigua-and-barbuda-male-model-scene",
+        2
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene3-male-emotion",
+        91
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-weather",
+        30
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-mascotState",
+        82
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-poleDanceTheme",
+        28
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-rainbowOnly",
+        90
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-rainbowHosiery",
+        85
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-romanceBeat",
+        59
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-compoundLoveBeat",
+        15
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-hardLoveBeat",
+        3
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-interestingProp",
+        17
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-eceMissionProp-poseTargetRoll",
+        0
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Radiance-emotion",
+        15
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Radiance-visibleMidriff",
+        47
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Radiance-straplessDress",
+        60
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Radiance-fullyOpenBack",
+        9
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Ellie-emotion",
+        79
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Ellie-visibleMidriff",
+        71
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Ellie-straplessDress",
+        96
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Ellie-fullyOpenBack",
+        9
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Alia-emotion",
+        9
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Alia-visibleMidriff",
+        13
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Alia-straplessDress",
+        54
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-Alia-fullyOpenBack",
+        11
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-AI ECE-emotion",
+        95
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-AI ECE-visibleMidriff",
+        59
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-AI ECE-straplessDress",
+        72
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-AI ECE-fullyOpenBack",
+        57
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-weather",
+        53
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-mascotState",
+        29
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-poleDanceTheme",
+        5
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-rainbowOnly",
+        89
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-rainbowHosiery",
+        36
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-romanceBeat",
+        72
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-compoundLoveBeat",
+        74
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-hardLoveBeat",
+        14
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-interestingProp",
+        66
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-eceMissionProp-poseTargetRoll",
+        3
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Radiance-emotion",
+        90
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Radiance-visibleMidriff",
+        48
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Radiance-straplessDress",
+        79
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Radiance-fullyOpenBack",
+        52
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Ellie-emotion",
+        4
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Ellie-visibleMidriff",
+        74
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Ellie-straplessDress",
+        1
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Ellie-fullyOpenBack",
+        26
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Alia-emotion",
+        12
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Alia-visibleMidriff",
+        10
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Alia-straplessDress",
+        89
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-Alia-fullyOpenBack",
+        54
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-AI ECE-emotion",
+        42
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-AI ECE-visibleMidriff",
+        60
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-AI ECE-straplessDress",
+        15
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-AI ECE-fullyOpenBack",
+        4
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-weather",
+        8
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-mascotState",
+        60
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-poleDanceTheme",
+        6
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-rainbowOnly",
+        0
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-rainbowHosiery",
+        91
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-romanceBeat",
+        21
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-compoundLoveBeat",
+        93
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-hardLoveBeat",
+        81
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-interestingProp",
+        75
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-eceMissionProp-poseTargetRoll",
+        18
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Radiance-emotion",
+        1
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Radiance-visibleMidriff",
+        5
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Radiance-straplessDress",
+        46
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Radiance-fullyOpenBack",
+        95
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Ellie-emotion",
+        37
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Ellie-visibleMidriff",
+        65
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Ellie-straplessDress",
+        74
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Ellie-fullyOpenBack",
+        39
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Alia-emotion",
+        15
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Alia-visibleMidriff",
+        51
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Alia-straplessDress",
+        40
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-Alia-fullyOpenBack",
+        17
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-AI ECE-emotion",
+        1
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-AI ECE-emotion-disambiguation",
+        96
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-AI ECE-visibleMidriff",
+        25
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-AI ECE-straplessDress",
+        54
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-AI ECE-fullyOpenBack",
+        11
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-weather",
+        91
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-mascotState",
+        71
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-poleDanceTheme",
+        99
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-rainbowOnly",
+        83
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-rainbowHosiery",
+        30
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-romanceBeat",
+        6
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-compoundLoveBeat",
+        24
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-hardLoveBeat",
+        52
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-interestingProp",
+        60
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-eceMissionProp-poseTargetRoll",
+        77
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Radiance-emotion",
+        64
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Radiance-visibleMidriff",
+        70
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Radiance-straplessDress",
+        17
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Radiance-fullyOpenBack",
+        70
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Ellie-emotion",
+        66
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Ellie-visibleMidriff",
+        56
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Ellie-straplessDress",
+        19
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Ellie-fullyOpenBack",
+        0
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Alia-emotion",
+        30
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Alia-visibleMidriff",
+        16
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Alia-straplessDress",
+        55
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-Alia-fullyOpenBack",
+        48
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-AI ECE-emotion",
+        40
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-AI ECE-visibleMidriff",
+        94
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-AI ECE-straplessDress",
+        13
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-AI ECE-fullyOpenBack",
+        6
+      ],
+      [
+        "batch338-antigua-and-barbuda-x-heart",
+        7
+      ],
+      [
+        "batch338-antigua-and-barbuda-x-internalagency",
+        51
+      ],
+      [
+        "batch338-antigua-and-barbuda-x-worldxxxseries",
+        36
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch338-antigua-and-barbuda-scene1372-rainbowHosieryWearer",
+        13
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-rainbowHosieryPaletteMode",
+        7
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-mascotHolder",
+        95
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-interestingPropHolder",
+        31
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1372-interestingPropFamily",
+        93
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-rainbowHosieryWearer",
+        52
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-rainbowHosieryPaletteMode",
+        0
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-mascotHolder",
+        98
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-interestingPropHolder",
+        20
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1373-interestingPropFamily",
+        86
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-rainbowHosieryWearer",
+        87
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-rainbowHosieryPaletteMode",
+        49
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-mascotHolder",
+        65
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-interestingPropHolder",
+        77
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1374-interestingPropFamily",
+        47
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-rainbowHosieryWearer",
+        94
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-rainbowHosieryPaletteMode",
+        10
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-mascotHolder",
+        72
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-interestingPropHolder",
+        22
+      ],
+      [
+        "batch338-antigua-and-barbuda-scene1375-interestingPropFamily",
+        48
+      ]
+    ],
+    "primaryPairCount": 110,
+    "selectorPairCount": 20,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "5CD057144ACCAE659748961BA5DFBD1739C0D748E272E910C0354C76685AD744",
+    "selectorPairsSha256": "48DCB64732AACE2699CFCA9B56E294AF6B0919528F4E155F8013A3D75F880B5D"
+  },
+  "scenePlans": {
+    "1372": {
+      "scene": 1372,
+      "mode": "country-led hybrid",
+      "theme": "fictional coast-guard rescue-vessel couture",
+      "landmark": "a broad dry public quay inside Nelson's Dockyard at English Harbour, with complete restored Georgian stone warehouses, colonnades, capstans used only as heritage architecture, the deep narrow harbor and green protective hills, plus a large unbranded fictional civilian rescue vessel secured prominently at the modern outer berth",
+      "motifs": "complete Antigua and Barbuda twin-island silhouettes, English Harbour crescent, Georgian masonry grids, dockyard archways, sail arcs, reef bands, and Caribbean-current ribbons",
+      "culture": "Nelson's Dockyard reads through the restored Georgian buildings, walled enclosure, deep narrow bay and surrounding highlands. The history is acknowledged without reenactment, uniforms, weapons or military action. The foreground vessel is fictional civilian rescue design.",
+      "weather": {
+        "key": "batch338-antigua-and-barbuda-scene1372-weather",
+        "roll": 30,
+        "result": "cinematic light rain with reflections",
+        "materialized": "cinematic light rain with reflections"
+      },
+      "mascotState": {
+        "key": "batch338-antigua-and-barbuda-scene1372-mascotState",
+        "roll": 82,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch338-antigua-and-barbuda-scene1372-mascotHolder",
+        "roll": 95,
+        "result": "Alia"
+      },
+      "mascotPlan": "Render only the stored mascot state and stored holder on a broad dry padded quay bench far from ECE, the mission prop, water and vessel machinery. When both appear, show one supervised harmless play beat.",
+      "interestingProp": {
+        "key": "batch338-antigua-and-barbuda-scene1372-interestingProp",
+        "roll": 17,
+        "active": true,
+        "holder": {
+          "key": "batch338-antigua-and-barbuda-scene1372-interestingPropHolder",
+          "roll": 31,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch338-antigua-and-barbuda-scene1372-interestingPropFamily",
+          "roll": 93,
+          "result": "mirrored megaphone sculpture"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch338-antigua-and-barbuda-scene1372-poleDanceTheme",
+        "roll": 28,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch338-antigua-and-barbuda-scene1372-rainbowOnly",
+        "roll": 90,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch338-antigua-and-barbuda-scene1372-rainbowHosiery",
+        "roll": 85,
+        "active": false,
+        "wearer": {
+          "key": "batch338-antigua-and-barbuda-scene1372-rainbowHosieryWearer",
+          "roll": 13,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch338-antigua-and-barbuda-scene1372-rainbowHosieryPaletteMode",
+          "roll": 7,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch338-antigua-and-barbuda-scene1372-eceMissionProp-poseTargetRoll",
+        "roll": 0
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty geometric paper route target fixed to a complete thick sand-filled backstop on a closed modern quay lane away from heritage fabric, people, animals, vessel and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty geometric paper route target fixed to a complete thick sand-filled backstop on a closed modern quay lane away from heritage fabric, people, animals, vessel and camera",
+      "romanceBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1372-romanceBeat",
+        "roll": 59,
+        "dynamicIndex": 11,
+        "contractResult": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1372-compoundLoveBeat",
+        "roll": 15,
+        "index": 3,
+        "contractResult": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "hardLoveBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1372-hardLoveBeat",
+        "roll": 3,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Radiance-emotion",
+            "roll": 15,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Radiance-visibleMidriff",
+            "roll": 47,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Radiance-straplessDress",
+            "roll": 60,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Radiance-fullyOpenBack",
+            "roll": 9,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Ellie-emotion",
+            "roll": 79,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Ellie-visibleMidriff",
+            "roll": 71,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Ellie-straplessDress",
+            "roll": 96,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Ellie-fullyOpenBack",
+            "roll": 9,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Alia-emotion",
+            "roll": 9,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Alia-visibleMidriff",
+            "roll": 13,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Alia-straplessDress",
+            "roll": 54,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1372-Alia-fullyOpenBack",
+            "roll": 11,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1372-AI ECE-emotion",
+            "roll": 95,
+            "result": "shame and social vulnerability",
+            "materializedResult": "shame and social vulnerability",
+            "performance": "shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1372-AI ECE-visibleMidriff",
+            "roll": 59,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1372-AI ECE-straplessDress",
+            "roll": 72,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1372-AI ECE-fullyOpenBack",
+            "roll": 57,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "country-led Barbuda-coral strapless twin-island corsage dress with raised complete island forms, pearl reef-bead channels, a broken crescent hem, and island-petal heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-theme hybrid Caribbean-cobalt culotte coat with silver hull-rib shoulders, English Harbour pleats, a flotation-ring waist frame, split quay hem, and deck-cleat platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led limestone open-back lattice jumpsuit with Antigua-emerald masonry appliques, a deliberate narrow midriff, asymmetrical Georgian-arch apron, and colonnade pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led rescue-orange davit peplum over charcoal tailored shorts, with articulated silver lifting arms, compact buoy side frames, offset launch hem, and polished keel boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "country-led Barbuda-coral strapless twin-island corsage dress with raised complete island forms, pearl reef-bead channels, a broken crescent hem, and island-petal heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-theme hybrid Caribbean-cobalt culotte coat with silver hull-rib shoulders, English Harbour pleats, a flotation-ring waist frame, split quay hem, and deck-cleat platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led limestone open-back lattice jumpsuit with Antigua-emerald masonry appliques, a deliberate narrow midriff, asymmetrical Georgian-arch apron, and colonnade pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led rescue-orange davit peplum over charcoal tailored shorts, with articulated silver lifting arms, compact buoy side frames, offset launch hem, and polished keel boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE anchors the isolated route lane. Ellie sits on a broad fixed quay bench and pulls Radiance securely sideways across her lap; Alia takes Radiance's free hand and invites her into a standing turn. The heritage dockyard and rescue vessel fill equally strong foreground planes.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop and touches nobody else",
+        "Radiance left hand holds Ellie's shoulder and Radiance right hand links with Alia",
+        "Ellie left hand supports Radiance at the waist and Ellie right hand supports Radiance's forearm",
+        "Alia left hand links with Radiance and Alia right hand rests on Ellie's shoulder"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry public quay inside Nelson's Dockyard at English Harbour, with complete restored Georgian stone warehouses, colonnades, capstans used only as heritage architecture, the deep narrow harbor and green protective hills, plus a large unbranded fictional civilian rescue vessel secured prominently at the modern outer berth. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: fictional coast-guard rescue-vessel couture. The theme and Antigua and Barbuda location must both be immediate foreground reads. Nelson's Dockyard reads through the restored Georgian buildings, walled enclosure, deep narrow bay and surrounding highlands. The history is acknowledged without reenactment, uniforms, weapons or military action. The foreground vessel is fictional civilian rescue design. Stored scene rolls: weather 30=cinematic light rain with reflections; mascot state 82=neither mascot; mascot holder selector 95=Alia; odd prop 17=active; odd holder 31=Ellie; odd family 93=mirrored megaphone sculpture; pole 28=inactive; rainbow-only 90=inactive; rainbow hosiery 85=inactive; wearer 13=Radiance; palette 7=country-palette rainbow-like gradient; romance 59; compound 15; hard love 3; mission-prop pose/target 0. Exact wardrobe rolls: Radiance: midriff 47=visible, strapless 60=inactive, open back 9=active; Ellie: midriff 71=covered, strapless 96=inactive, open back 9=active; Alia: midriff 13=visible, strapless 54=inactive, open back 11=active; AI ECE: midriff 59=covered, strapless 72=inactive, open back 57=inactive. Exact outfit fingerprints, no substitutions: Radiance: country-led Barbuda-coral strapless twin-island corsage dress with raised complete island forms, pearl reef-bead channels, a broken crescent hem, and island-petal heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: country-theme hybrid Caribbean-cobalt culotte coat with silver hull-rib shoulders, English Harbour pleats, a flotation-ring waist frame, split quay hem, and deck-cleat platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: country-led limestone open-back lattice jumpsuit with Antigua-emerald masonry appliques, a deliberate narrow midriff, asymmetrical Georgian-arch apron, and colonnade pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: theme-led rescue-orange davit peplum over charcoal tailored shorts, with articulated silver lifting arms, compact buoy side frames, offset launch hem, and polished keel boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry large unmistakable twin-island, harbor and masonry motifs. Ellie and ECE carry visible rescue-vessel hull, davit and flotation construction language. Location design vocabulary: complete Antigua and Barbuda twin-island silhouettes, English Harbour crescent, Georgian masonry grids, dockyard archways, sail arcs, reef bands, and Caribbean-current ribbons. Use respectful secular Antigua and Barbuda geography and heritage through complete twin-island silhouettes, English Harbour curves, Georgian dockyard masonry, Shirley Heights contours, Devil's Bridge limestone arch, Atlantic spray fans, Barbuda pink-sand bands, Codrington Lagoon shapes, frigate-wing forms, reef lines, and Caribbean-current arcs. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied military or coast-guard uniform, official badge, logo, emergency-service insignia, weaponized history, readable text, alcohol, political messaging, or threat framing. Four visibly distinct coherent emotions: Radiance: roll 15=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 79=deep sadness, performed as deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 9=romantic joy, performed as romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 95=shame and social vulnerability, performed as shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 59: The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder. Compound roll 15: Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance. Mandatory hard-love roll 3: one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE anchors the isolated route lane. Ellie sits on a broad fixed quay bench and pulls Radiance securely sideways across her lap; Alia takes Radiance's free hand and invites her into a standing turn. The heritage dockyard and rescue vessel fill equally strong foreground planes. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop and touches nobody else; Radiance left hand holds Ellie's shoulder and Radiance right hand links with Alia; Ellie left hand supports Radiance at the waist and Ellie right hand supports Radiance's forearm; Alia left hand links with Radiance and Alia right hand rests on Ellie's shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty geometric paper route target fixed to a complete thick sand-filled backstop on a closed modern quay lane away from heritage fabric, people, animals, vessel and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 82=neither mascot. Mascot holder selector 95=Alia. Render only the stored mascot state and stored holder on a broad dry padded quay bench far from ECE, the mission prop, water and vessel machinery. When both appear, show one supervised harmless play beat. Odd-prop roll is active. Exactly Ellie owns and creatively integrates one mirrored megaphone sculpture into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render cinematic light rain with reflections cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1373": {
+      "scene": 1373,
+      "mode": "country-led hybrid",
+      "theme": "fictional coast-guard rescue-vessel couture",
+      "landmark": "a broad dry covered overlook at Shirley Heights with the complete English Harbour horseshoe and Falmouth Harbour beyond, rolling green hills, jagged coastline, sunset cloud bands, and a large unbranded fictional civilian rescue vessel turning slowly in the empty harbor below",
+      "motifs": "complete Antigua outline, Shirley Heights contour, English Harbour horseshoe, Falmouth Bay arc, green-hill pleats, sunset discs, sail triangles, and Caribbean-current curves",
+      "culture": "Shirley Heights reads as a high public overlook across English Harbour and the surrounding natural deep-bay landscape. No historic military activity is reenacted. The vessel is a fictional civilian maritime-rescue design.",
+      "weather": {
+        "key": "batch338-antigua-and-barbuda-scene1373-weather",
+        "roll": 53,
+        "result": "hailstorm with suspended ice and hard backlight",
+        "materialized": "hailstorm with suspended ice and hard backlight"
+      },
+      "mascotState": {
+        "key": "batch338-antigua-and-barbuda-scene1373-mascotState",
+        "roll": 29,
+        "result": "PAWS only"
+      },
+      "mascotHolder": {
+        "key": "batch338-antigua-and-barbuda-scene1373-mascotHolder",
+        "roll": 98,
+        "result": "Alia"
+      },
+      "mascotPlan": "Render only the stored mascot state and stored holder on a secured broad padded viewing platform far from the mission prop, odd prop, overlook edge and water.",
+      "interestingProp": {
+        "key": "batch338-antigua-and-barbuda-scene1373-interestingProp",
+        "roll": 66,
+        "active": false,
+        "holder": {
+          "key": "batch338-antigua-and-barbuda-scene1373-interestingPropHolder",
+          "roll": 20,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch338-antigua-and-barbuda-scene1373-interestingPropFamily",
+          "roll": 86,
+          "result": "neon acrylic cello with no loose strings"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch338-antigua-and-barbuda-scene1373-poleDanceTheme",
+        "roll": 5,
+        "active": true
+      },
+      "rainbowOnly": {
+        "key": "batch338-antigua-and-barbuda-scene1373-rainbowOnly",
+        "roll": 89,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch338-antigua-and-barbuda-scene1373-rainbowHosiery",
+        "roll": 36,
+        "active": false,
+        "wearer": {
+          "key": "batch338-antigua-and-barbuda-scene1373-rainbowHosieryWearer",
+          "roll": 52,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch338-antigua-and-barbuda-scene1373-rainbowHosieryPaletteMode",
+          "roll": 0,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch338-antigua-and-barbuda-scene1373-eceMissionProp-poseTargetRoll",
+        "roll": 3
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one empty paper route target fixed to a complete sand backstop on a separate closed dry lane facing away from people, animals, overlook edge, hills, vessels and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one empty paper route target fixed to a complete sand backstop on a separate closed dry lane facing away from people, animals, overlook edge, hills, vessels and camera",
+      "romanceBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1373-romanceBeat",
+        "roll": 72,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1373-compoundLoveBeat",
+        "roll": 74,
+        "index": 2,
+        "contractResult": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "hardLoveBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1373-hardLoveBeat",
+        "roll": 14,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Radiance-emotion",
+            "roll": 90,
+            "result": "anger",
+            "materializedResult": "anger",
+            "performance": "anger expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Radiance-visibleMidriff",
+            "roll": 48,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Radiance-straplessDress",
+            "roll": 79,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Radiance-fullyOpenBack",
+            "roll": 52,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Ellie-emotion",
+            "roll": 4,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Ellie-visibleMidriff",
+            "roll": 74,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Ellie-straplessDress",
+            "roll": 1,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Ellie-fullyOpenBack",
+            "roll": 26,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Alia-emotion",
+            "roll": 12,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Alia-visibleMidriff",
+            "roll": 10,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Alia-straplessDress",
+            "roll": 89,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1373-Alia-fullyOpenBack",
+            "roll": 54,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1373-AI ECE-emotion",
+            "roll": 42,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1373-AI ECE-visibleMidriff",
+            "roll": 60,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1373-AI ECE-straplessDress",
+            "roll": 15,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1373-AI ECE-fullyOpenBack",
+            "roll": 4,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "anger expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "tender affection expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "country-theme hybrid emerald split-bow mini-coat over fitted gold shorts, with a silver rescue-hull spine, complete Antigua relief, wave-piercer hem, and bow-foil heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led pearl-white Shirley-Heights spiral dress with cobalt topographic pleats, coral sunset-disc corsage, scalloped overlook hem, and contour-ring platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led charcoal strapless English-Harbour fan jumpsuit with a deliberate narrow midriff, Barbuda-pink sail appliques, open braided back, forked bay hem, and mast-curve pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led cobalt navigation-console sculpted bodice over rescue-orange culottes, with articulated chart panels, silver signal-boom shoulders, notched data hem, and telescoping console boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "country-theme hybrid emerald split-bow mini-coat over fitted gold shorts, with a silver rescue-hull spine, complete Antigua relief, wave-piercer hem, and bow-foil heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led pearl-white Shirley-Heights spiral dress with cobalt topographic pleats, coral sunset-disc corsage, scalloped overlook hem, and contour-ring platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led charcoal strapless English-Harbour fan jumpsuit with a deliberate narrow midriff, Barbuda-pink sail appliques, open braided back, forked bay hem, and mast-curve pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led cobalt navigation-console sculpted bodice over rescue-orange culottes, with articulated chart panels, silver signal-boom shoulders, notched data hem, and telescoping console boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE holds the isolated route lane. Radiance and Alia rotate through a fast linked-hand partner turn while Ellie catches Alia at the waist and changes the duet into a jealous three-person dance. The two harbors and rescue vessel remain large behind them.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop and touches nobody else",
+        "Radiance left hand links overhead with Alia right hand and Radiance right hand rests on Ellie's shoulder",
+        "Alia right hand stays linked with Radiance and Alia left hand rests on Ellie's forearm",
+        "Ellie left hand catches Alia at the waist and Ellie right hand rests on Radiance's shoulder"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered overlook at Shirley Heights with the complete English Harbour horseshoe and Falmouth Harbour beyond, rolling green hills, jagged coastline, sunset cloud bands, and a large unbranded fictional civilian rescue vessel turning slowly in the empty harbor below. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: fictional coast-guard rescue-vessel couture. The theme and Antigua and Barbuda location must both be immediate foreground reads. Shirley Heights reads as a high public overlook across English Harbour and the surrounding natural deep-bay landscape. No historic military activity is reenacted. The vessel is a fictional civilian maritime-rescue design. Stored scene rolls: weather 53=hailstorm with suspended ice and hard backlight; mascot state 29=PAWS only; mascot holder selector 98=Alia; odd prop 66=inactive; odd holder 20=Alia; odd family 86=neon acrylic cello with no loose strings; pole 5=active; rainbow-only 89=inactive; rainbow hosiery 36=inactive; wearer 52=AI ECE; palette 0=country-palette rainbow-like gradient; romance 72; compound 74; hard love 14; mission-prop pose/target 3. Exact wardrobe rolls: Radiance: midriff 48=visible, strapless 79=inactive, open back 52=inactive; Ellie: midriff 74=covered, strapless 1=active, open back 26=active; Alia: midriff 10=visible, strapless 89=inactive, open back 54=inactive; AI ECE: midriff 60=covered, strapless 15=active, open back 4=active. Exact outfit fingerprints, no substitutions: Radiance: country-theme hybrid emerald split-bow mini-coat over fitted gold shorts, with a silver rescue-hull spine, complete Antigua relief, wave-piercer hem, and bow-foil heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: country-led pearl-white Shirley-Heights spiral dress with cobalt topographic pleats, coral sunset-disc corsage, scalloped overlook hem, and contour-ring platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: country-led charcoal strapless English-Harbour fan jumpsuit with a deliberate narrow midriff, Barbuda-pink sail appliques, open braided back, forked bay hem, and mast-curve pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: theme-led cobalt navigation-console sculpted bodice over rescue-orange culottes, with articulated chart panels, silver signal-boom shoulders, notched data hem, and telescoping console boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia use hard large Antigua, harbor and hill motifs. Radiance and ECE visibly use rescue-vessel bow and navigation construction language. Location design vocabulary: complete Antigua outline, Shirley Heights contour, English Harbour horseshoe, Falmouth Bay arc, green-hill pleats, sunset discs, sail triangles, and Caribbean-current curves. Use respectful secular Antigua and Barbuda geography and heritage through complete twin-island silhouettes, English Harbour curves, Georgian dockyard masonry, Shirley Heights contours, Devil's Bridge limestone arch, Atlantic spray fans, Barbuda pink-sand bands, Codrington Lagoon shapes, frigate-wing forms, reef lines, and Caribbean-current arcs. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied military or coast-guard uniform, official badge, logo, emergency-service insignia, weaponized history, readable text, alcohol, political messaging, or threat framing. Four visibly distinct coherent emotions: Radiance: roll 90=anger, performed as anger expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 4=tender affection, performed as tender affection expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 12=romantic joy, performed as romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 42=determination, performed as determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 72: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Compound roll 74: Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention. Mandatory hard-love roll 14: one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE holds the isolated route lane. Radiance and Alia rotate through a fast linked-hand partner turn while Ellie catches Alia at the waist and changes the duet into a jealous three-person dance. The two harbors and rescue vessel remain large behind them. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop and touches nobody else; Radiance left hand links overhead with Alia right hand and Radiance right hand rests on Ellie's shoulder; Alia right hand stays linked with Radiance and Alia left hand rests on Ellie's forearm; Ellie left hand catches Alia at the waist and Ellie right hand rests on Radiance's shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one empty paper route target fixed to a complete sand backstop on a separate closed dry lane facing away from people, animals, overlook edge, hills, vessels and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 29=PAWS only. Mascot holder selector 98=Alia. Render only the stored mascot state and stored holder on a secured broad padded viewing platform far from the mission prop, odd prop, overlook edge and water. Odd-prop roll 66 is inactive. Do not add any bizarre secondary prop; stored inactive holder 20=Alia and family 86=neon acrylic cello with no loose strings remain audit-only. Pole theme is active only as a stationary public-safe fashion motif, with no dance, stripping, or suggestive performance. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render hailstorm with suspended ice and hard backlight cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1374": {
+      "scene": 1374,
+      "mode": "theme-led original",
+      "theme": "fictional coast-guard rescue-vessel couture",
+      "landmark": "a broad dry protected Atlantic overlook beside Devil's Bridge on Antigua, with the complete natural limestone arch, rugged reef shelf, dramatic white spray columns, turquoise channels, low coastal scrub, and a full unbranded fictional civilian rescue vessel holding station far offshore outside every prop line",
+      "motifs": "location-only Devil's Bridge arch, limestone strata, Atlantic spray fans, reef-shelf bands, turquoise channels, scrub rhythms, and wave arcs",
+      "culture": "Devil's Bridge remains the dominant Antigua location through its complete natural limestone arch and Atlantic reef landscape. All four women's outfits are unrelated fictional rescue-vessel engineering originals.",
+      "weather": {
+        "key": "batch338-antigua-and-barbuda-scene1374-weather",
+        "roll": 8,
+        "result": "clear golden-hour radiance",
+        "materialized": "clear golden-hour radiance"
+      },
+      "mascotState": {
+        "key": "batch338-antigua-and-barbuda-scene1374-mascotState",
+        "roll": 60,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch338-antigua-and-barbuda-scene1374-mascotHolder",
+        "roll": 65,
+        "result": "Alia"
+      },
+      "mascotPlan": "Render only the stored mascot state and stored holder on a dry padded sheltered platform far from the arch, surf, odd prop and mission-prop lane.",
+      "interestingProp": {
+        "key": "batch338-antigua-and-barbuda-scene1374-interestingProp",
+        "roll": 75,
+        "active": false,
+        "holder": {
+          "key": "batch338-antigua-and-barbuda-scene1374-interestingPropHolder",
+          "roll": 77,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch338-antigua-and-barbuda-scene1374-interestingPropFamily",
+          "roll": 47,
+          "result": "folding wind-harp frame"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch338-antigua-and-barbuda-scene1374-poleDanceTheme",
+        "roll": 6,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch338-antigua-and-barbuda-scene1374-rainbowOnly",
+        "roll": 0,
+        "active": true
+      },
+      "rainbowHosiery": {
+        "key": "batch338-antigua-and-barbuda-scene1374-rainbowHosiery",
+        "roll": 91,
+        "active": false,
+        "wearer": {
+          "key": "batch338-antigua-and-barbuda-scene1374-rainbowHosieryWearer",
+          "roll": 87,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch338-antigua-and-barbuda-scene1374-rainbowHosieryPaletteMode",
+          "roll": 49,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch338-antigua-and-barbuda-scene1374-eceMissionProp-poseTargetRoll",
+        "roll": 18
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one empty geometric paper target on a complete thick sand backstop in a separate dry enclosed lane facing away from people, mascots, arch, reef, ocean, vessel and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one empty geometric paper target on a complete thick sand backstop in a separate dry enclosed lane facing away from people, mascots, arch, reef, ocean, vessel and camera",
+      "romanceBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1374-romanceBeat",
+        "roll": 21,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1374-compoundLoveBeat",
+        "roll": 93,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "hardLoveBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1374-hardLoveBeat",
+        "roll": 81,
+        "result": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Radiance-emotion",
+            "roll": 1,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Radiance-visibleMidriff",
+            "roll": 5,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Radiance-straplessDress",
+            "roll": 46,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Radiance-fullyOpenBack",
+            "roll": 95,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Ellie-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Ellie-visibleMidriff",
+            "roll": 65,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Ellie-straplessDress",
+            "roll": 74,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Ellie-fullyOpenBack",
+            "roll": 39,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Alia-emotion",
+            "roll": 15,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Alia-visibleMidriff",
+            "roll": 51,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Alia-straplessDress",
+            "roll": 40,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1374-Alia-fullyOpenBack",
+            "roll": 17,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1374-AI ECE-emotion",
+            "roll": 1,
+            "result": "tender affection",
+            "materializedResult": "defiance",
+            "disambiguation": {
+              "key": "batch338-antigua-and-barbuda-scene1374-AI ECE-emotion-disambiguation",
+              "roll": 96
+            },
+            "performance": "defiance expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1374-AI ECE-visibleMidriff",
+            "roll": 25,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1374-AI ECE-straplessDress",
+            "roll": 54,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1374-AI ECE-fullyOpenBack",
+            "roll": 11,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "extreme happiness, radiant laughing delight expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "defiance expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "brushed-silver catamaran-hull tulip dress with twin rigid side keels, pearl bridge deck, Barbuda-coral split wake hem, and hydrofoil heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "rescue-orange flotation-bladder culotte jumpsuit with opaque tubular emerald side volumes, circular pressure ribs, rounded buoy hem, and valve-cap platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "deep-charcoal open-back pump-manifold coat-dress with braided cobalt conduit seams, gold mechanical corsage, asymmetric pipework hem, and impeller pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "pearl-white radar-mast asymmetric bodysuit with fully opaque tailored coverage, silver telescoping tower framework, cobalt signal-disc peplum, stepped antenna hem, and mast-column boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve shell-white top with restrained Antigua and Barbuda Pacific-current embroidery and subtle fictional-rescue-vessel swashplate-seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "outfitFingerprints": {
+        "Radiance": "brushed-silver catamaran-hull tulip dress with twin rigid side keels, pearl bridge deck, Barbuda-coral split wake hem, and hydrofoil heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "rescue-orange flotation-bladder culotte jumpsuit with opaque tubular emerald side volumes, circular pressure ribs, rounded buoy hem, and valve-cap platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "deep-charcoal open-back pump-manifold coat-dress with braided cobalt conduit seams, gold mechanical corsage, asymmetric pipework hem, and impeller pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "pearl-white radar-mast asymmetric bodysuit with fully opaque tailored coverage, silver telescoping tower framework, cobalt signal-disc peplum, stepped antenna hem, and mast-column boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve shell-white top with restrained Antigua and Barbuda Pacific-current embroidery and subtle fictional-rescue-vessel swashplate-seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "composition": "ECE anchors the isolated route lane. Radiance performs a controlled dance dip with Ellie while Alia pulls Ellie by a linked hand and the male closes behind Alia with two gentle contacts; his strongest sustained eye line remains on ECE. Devil's Bridge and the rescue vessel fill separate planes.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop and touches nobody else",
+        "Radiance left hand supports Ellie at the upper back and Radiance right hand holds Ellie's near hand",
+        "Ellie left hand stays linked with Radiance and Ellie right hand links with Alia",
+        "Alia left hand links with Ellie and Alia right hand rests on the male's forearm",
+        "the male left hand supports Alia at the shoulder and his right hand rests on Alia's forearm while his strongest eye line stays on ECE"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch338-antigua-and-barbuda-scene3-male-emotion",
+          "roll": 91,
+          "result": "anger"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry protected Atlantic overlook beside Devil's Bridge on Antigua, with the complete natural limestone arch, rugged reef shelf, dramatic white spray columns, turquoise channels, low coastal scrub, and a full unbranded fictional civilian rescue vessel holding station far offshore outside every prop line. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: fictional coast-guard rescue-vessel couture. The theme and Antigua and Barbuda location must both be immediate foreground reads. Devil's Bridge remains the dominant Antigua location through its complete natural limestone arch and Atlantic reef landscape. All four women's outfits are unrelated fictional rescue-vessel engineering originals. Stored scene rolls: weather 8=clear golden-hour radiance; mascot state 60=neither mascot; mascot holder selector 65=Alia; odd prop 75=inactive; odd holder 77=Alia; odd family 47=folding wind-harp frame; pole 6=inactive; rainbow-only 0=active; rainbow hosiery 91=inactive; wearer 87=AI ECE; palette 49=country-palette rainbow-like gradient; romance 21; compound 93; hard love 81; mission-prop pose/target 18. Exact wardrobe rolls: Radiance: midriff 5=visible, strapless 46=inactive, open back 95=inactive; Ellie: midriff 65=covered, strapless 74=inactive, open back 39=inactive; Alia: midriff 51=covered, strapless 40=inactive, open back 17=active; AI ECE: midriff 25=visible, strapless 54=inactive, open back 11=active. Exact outfit fingerprints, no substitutions: Radiance: brushed-silver catamaran-hull tulip dress with twin rigid side keels, pearl bridge deck, Barbuda-coral split wake hem, and hydrofoil heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: rescue-orange flotation-bladder culotte jumpsuit with opaque tubular emerald side volumes, circular pressure ribs, rounded buoy hem, and valve-cap platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: deep-charcoal open-back pump-manifold coat-dress with braided cobalt conduit seams, gold mechanical corsage, asymmetric pipework hem, and impeller pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: pearl-white radar-mast asymmetric bodysuit with fully opaque tailored coverage, silver telescoping tower framework, cobalt signal-disc peplum, stepped antenna hem, and mast-column boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve shell-white top with restrained Antigua and Barbuda Pacific-current embroidery and subtle fictional-rescue-vessel swashplate-seam tailoring, fitted black jeans, and practical black boots. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Theme-led scene: catamaran hull, flotation bladder, pump manifold and radar mast create four unrelated outfit constructions while Devil's Bridge remains equally foregrounded. Location design vocabulary: location-only Devil's Bridge arch, limestone strata, Atlantic spray fans, reef-shelf bands, turquoise channels, scrub rhythms, and wave arcs. Use respectful secular Antigua and Barbuda geography and heritage through complete twin-island silhouettes, English Harbour curves, Georgian dockyard masonry, Shirley Heights contours, Devil's Bridge limestone arch, Atlantic spray fans, Barbuda pink-sand bands, Codrington Lagoon shapes, frigate-wing forms, reef lines, and Caribbean-current arcs. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied military or coast-guard uniform, official badge, logo, emergency-service insignia, weaponized history, readable text, alcohol, political messaging, or threat framing. Four visibly distinct coherent emotions: Radiance: roll 1=tender affection, performed as tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 37=magnetic confidence, performed as magnetic confidence expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 15=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 1=tender affection, collision resolver 96 gives distinct performance defiance, performed as defiance expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 91=anger, performed as anger expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 21: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Compound roll 93: Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance. Mandatory hard-love roll 81: one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE anchors the isolated route lane. Radiance performs a controlled dance dip with Ellie while Alia pulls Ellie by a linked hand and the male closes behind Alia with two gentle contacts; his strongest sustained eye line remains on ECE. Devil's Bridge and the rescue vessel fill separate planes. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop and touches nobody else; Radiance left hand supports Ellie at the upper back and Radiance right hand holds Ellie's near hand; Ellie left hand stays linked with Radiance and Ellie right hand links with Alia; Alia left hand links with Ellie and Alia right hand rests on the male's forearm; the male left hand supports Alia at the shoulder and his right hand rests on Alia's forearm while his strongest eye line stays on ECE. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one empty geometric paper target on a complete thick sand backstop in a separate dry enclosed lane facing away from people, mascots, arch, reef, ocean, vessel and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 60=neither mascot. Mascot holder selector 65=Alia. Render only the stored mascot state and stored holder on a dry padded sheltered platform far from the arch, surf, odd prop and mission-prop lane. Odd-prop roll 75 is inactive. Do not add any bizarre secondary prop; stored inactive holder 77=Alia and family 47=folding wind-harp frame remain audit-only. Pole theme is inactive. No pole. Rainbow-only is active across all four structurally distinct outfits while preserving the scene's country-led or theme-led balance. Render clear golden-hour radiance cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1375": {
+      "scene": 1375,
+      "mode": "theme-led original",
+      "theme": "fictional coast-guard rescue-vessel couture",
+      "landmark": "a broad dry floating conservation deck at Barbuda's Codrington Lagoon with the complete pale lagoon sweep, mangrove islands, distant Codrington shoreline, pink-sand band and many frigate birds high and far outside every prop line, plus a full unbranded fictional civilian rescue vessel integrated beside the deck",
+      "motifs": "location-only Codrington Lagoon crescent, Barbuda outline, pink-sand band, mangrove-island forms, distant frigate-wing arcs, reef channels, and Caribbean-current lines",
+      "culture": "Barbuda reads through Codrington Lagoon, pink sand, mangrove islands and the distant frigate-bird colony. Wildlife remains far away and undisturbed. Four structurally unrelated vessel concepts carry the theme.",
+      "weather": {
+        "key": "batch338-antigua-and-barbuda-scene1375-weather",
+        "roll": 91,
+        "result": "solar eclipse atmosphere",
+        "materialized": "solar eclipse atmosphere"
+      },
+      "mascotState": {
+        "key": "batch338-antigua-and-barbuda-scene1375-mascotState",
+        "roll": 71,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch338-antigua-and-barbuda-scene1375-mascotHolder",
+        "roll": 72,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Render only the stored mascot state and stored holder on a secured broad padded conservation deck island far from wildlife, water edge, odd prop and mission-prop lane. When both appear, show one gentle supervised play beat.",
+      "interestingProp": {
+        "key": "batch338-antigua-and-barbuda-scene1375-interestingProp",
+        "roll": 60,
+        "active": false,
+        "holder": {
+          "key": "batch338-antigua-and-barbuda-scene1375-interestingPropHolder",
+          "roll": 22,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch338-antigua-and-barbuda-scene1375-interestingPropFamily",
+          "roll": 48,
+          "result": "deactivated chainless cinema chainsaw sculpture with a locked blade cover"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch338-antigua-and-barbuda-scene1375-poleDanceTheme",
+        "roll": 99,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch338-antigua-and-barbuda-scene1375-rainbowOnly",
+        "roll": 83,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch338-antigua-and-barbuda-scene1375-rainbowHosiery",
+        "roll": 30,
+        "active": false,
+        "wearer": {
+          "key": "batch338-antigua-and-barbuda-scene1375-rainbowHosieryWearer",
+          "roll": 94,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch338-antigua-and-barbuda-scene1375-rainbowHosieryPaletteMode",
+          "roll": 10,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch338-antigua-and-barbuda-scene1375-eceMissionProp-poseTargetRoll",
+        "roll": 77
+      },
+      "materializedPropAction": "A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly empty marked water pocket enclosed by a full safety boom with no boat, swimmer, bird, animal, person, mangrove, shore or occupied object along the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one clearly empty marked water pocket enclosed by a full safety boom with no boat, swimmer, bird, animal, person, mangrove, shore or occupied object along the line",
+      "romanceBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1375-romanceBeat",
+        "roll": 6,
+        "dynamicIndex": 6,
+        "contractResult": "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1375-compoundLoveBeat",
+        "roll": 24,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "hardLoveBeat": {
+        "key": "batch338-antigua-and-barbuda-scene1375-hardLoveBeat",
+        "roll": 52,
+        "result": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Radiance-emotion",
+            "roll": 64,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Radiance-visibleMidriff",
+            "roll": 70,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Radiance-straplessDress",
+            "roll": 17,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Radiance-fullyOpenBack",
+            "roll": 70,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Ellie-emotion",
+            "roll": 66,
+            "result": "possessive tension",
+            "materializedResult": "possessive tension",
+            "performance": "possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Ellie-visibleMidriff",
+            "roll": 56,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Ellie-straplessDress",
+            "roll": 19,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Ellie-fullyOpenBack",
+            "roll": 0,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Alia-emotion",
+            "roll": 30,
+            "result": "hope",
+            "materializedResult": "hope",
+            "performance": "hope expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Alia-visibleMidriff",
+            "roll": 16,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Alia-straplessDress",
+            "roll": 55,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1375-Alia-fullyOpenBack",
+            "roll": 48,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch338-antigua-and-barbuda-scene1375-AI ECE-emotion",
+            "roll": 40,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch338-antigua-and-barbuda-scene1375-AI ECE-visibleMidriff",
+            "roll": 94,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch338-antigua-and-barbuda-scene1375-AI ECE-straplessDress",
+            "roll": 13,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch338-antigua-and-barbuda-scene1375-AI ECE-fullyOpenBack",
+            "roll": 6,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "visible jealousy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "hope expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Barbuda-coral rescue-cradle column dress with silver articulated support ribs, emerald suspension pleats, open crescent hem, and cradle-axis heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Caribbean-cobalt waterjet-intake cropped jacket over pearl high-waist sail culottes, with a deliberate narrow midriff, spiral intake fins, square thrust hem, and jet-nozzle platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Antigua-emerald open-back chart-wing coat-dress with braided gold route seams, rigid asymmetric map planes, forked lagoon hem, and compass-needle pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "deep-charcoal shock-deck lattice top over rescue-orange tailored shorts, with opaque silver spring frames, circular damper peplum, stepped deck hem, and piston-column boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Barbuda-coral rescue-cradle column dress with silver articulated support ribs, emerald suspension pleats, open crescent hem, and cradle-axis heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Caribbean-cobalt waterjet-intake cropped jacket over pearl high-waist sail culottes, with a deliberate narrow midriff, spiral intake fins, square thrust hem, and jet-nozzle platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Antigua-emerald open-back chart-wing coat-dress with braided gold route seams, rigid asymmetric map planes, forked lagoon hem, and compass-needle pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "deep-charcoal shock-deck lattice top over rescue-orange tailored shorts, with opaque silver spring frames, circular damper peplum, stepped deck hem, and piston-column boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE isolates the route lane. Alia sits securely sideways across Radiance's lap on a broad fixed bench while Ellie takes Alia's linked hand and pulls her toward a standing invitation; Radiance answers with a protective waist embrace. The lagoon, birds and vessel remain clearly separated.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop and touches nobody else",
+        "Alia left hand rests on Radiance's shoulder and Alia right hand links with Ellie",
+        "Radiance left hand supports Alia at the waist and Radiance right hand rests on Ellie's forearm",
+        "Ellie left hand links with Alia and Ellie right hand rests on Radiance's shoulder"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry floating conservation deck at Barbuda's Codrington Lagoon with the complete pale lagoon sweep, mangrove islands, distant Codrington shoreline, pink-sand band and many frigate birds high and far outside every prop line, plus a full unbranded fictional civilian rescue vessel integrated beside the deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: fictional coast-guard rescue-vessel couture. The theme and Antigua and Barbuda location must both be immediate foreground reads. Barbuda reads through Codrington Lagoon, pink sand, mangrove islands and the distant frigate-bird colony. Wildlife remains far away and undisturbed. Four structurally unrelated vessel concepts carry the theme. Stored scene rolls: weather 91=solar eclipse atmosphere; mascot state 71=neither mascot; mascot holder selector 72=Radiance; odd prop 60=inactive; odd holder 22=Ellie; odd family 48=deactivated chainless cinema chainsaw sculpture with a locked blade cover; pole 99=inactive; rainbow-only 83=inactive; rainbow hosiery 30=inactive; wearer 94=AI ECE; palette 10=country-palette rainbow-like gradient; romance 6; compound 24; hard love 52; mission-prop pose/target 77. Exact wardrobe rolls: Radiance: midriff 70=covered, strapless 17=active, open back 70=inactive; Ellie: midriff 56=covered, strapless 19=active, open back 0=active; Alia: midriff 16=visible, strapless 55=inactive, open back 48=inactive; AI ECE: midriff 94=covered, strapless 13=active, open back 6=active. Exact outfit fingerprints, no substitutions: Radiance: Barbuda-coral rescue-cradle column dress with silver articulated support ribs, emerald suspension pleats, open crescent hem, and cradle-axis heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: Caribbean-cobalt waterjet-intake cropped jacket over pearl high-waist sail culottes, with a deliberate narrow midriff, spiral intake fins, square thrust hem, and jet-nozzle platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: Antigua-emerald open-back chart-wing coat-dress with braided gold route seams, rigid asymmetric map planes, forked lagoon hem, and compass-needle pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: deep-charcoal shock-deck lattice top over rescue-orange tailored shorts, with opaque silver spring frames, circular damper peplum, stepped deck hem, and piston-column boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Theme-led scene: rescue cradle, waterjet intake, chart wing and shock-absorbing deck lattice produce four distinct silhouettes while the lagoon sanctuary remains equally large. Location design vocabulary: location-only Codrington Lagoon crescent, Barbuda outline, pink-sand band, mangrove-island forms, distant frigate-wing arcs, reef channels, and Caribbean-current lines. Use respectful secular Antigua and Barbuda geography and heritage through complete twin-island silhouettes, English Harbour curves, Georgian dockyard masonry, Shirley Heights contours, Devil's Bridge limestone arch, Atlantic spray fans, Barbuda pink-sand bands, Codrington Lagoon shapes, frigate-wing forms, reef lines, and Caribbean-current arcs. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied military or coast-guard uniform, official badge, logo, emergency-service insignia, weaponized history, readable text, alcohol, political messaging, or threat framing. Four visibly distinct coherent emotions: Radiance: roll 64=visible jealousy, performed as visible jealousy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 66=possessive tension, performed as possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 30=hope, performed as hope expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 40=determination, performed as determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 6: ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile. Compound roll 24: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Mandatory hard-love roll 52: a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE isolates the route lane. Alia sits securely sideways across Radiance's lap on a broad fixed bench while Ellie takes Alia's linked hand and pulls her toward a standing invitation; Radiance answers with a protective waist embrace. The lagoon, birds and vessel remain clearly separated. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop and touches nobody else; Alia left hand rests on Radiance's shoulder and Alia right hand links with Ellie; Radiance left hand supports Alia at the waist and Radiance right hand rests on Ellie's forearm; Ellie left hand links with Alia and Ellie right hand rests on Radiance's shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly empty marked water pocket enclosed by a full safety boom with no boat, swimmer, bird, animal, person, mangrove, shore or occupied object along the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 71=neither mascot. Mascot holder selector 72=Radiance. Render only the stored mascot state and stored holder on a secured broad padded conservation deck island far from wildlife, water edge, odd prop and mission-prop lane. When both appear, show one gentle supervised play beat. Odd-prop roll 60 is inactive. Do not add any bizarre secondary prop; stored inactive holder 22=Ellie and family 48=deactivated chainless cinema chainsaw sculpture with a locked blade cover remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render solar eclipse atmosphere cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": [
+    {
+      "scene": 1372,
+      "raw": "tmp/world-195x4/batch-338/raw/1372-antigua-nelsons-dockyard-raw.png",
+      "rawOutcome": "rendered",
+      "recovery": null,
+      "recoveryUsed": false,
+      "result": "accepted",
+      "acceptedAsset": "assets/lore/starlight-era/1372-antigua-nelsons-dockyard-rescue-vessel.png",
+      "audit": "Exactly four intended adult women, original country-led rescue-vessel couture, Nelson's Dockyard, large vessel, lap-sitting love beat and Ellie's mirrored megaphone are clear. ECE's inert prop points away from the group; the target is not fully visible and is accepted as a logged throughput tolerance."
+    },
+    {
+      "scene": 1373,
+      "raw": null,
+      "rawOutcome": "output-stage moderation block",
+      "rawRequestId": "44bea40e-8912-488d-a58d-a73ae9a45ca2",
+      "recovery": null,
+      "recoveryUsed": false,
+      "result": "rejected",
+      "audit": "No durable image was emitted. Throughput mode skipped moderation recovery."
+    },
+    {
+      "scene": 1374,
+      "raw": "tmp/world-195x4/batch-338/raw/1374-antigua-devils-bridge-raw.png",
+      "rawOutcome": "rendered",
+      "recovery": null,
+      "recoveryUsed": false,
+      "result": "accepted",
+      "acceptedAsset": "assets/lore/starlight-era/1374-antigua-devils-bridge-rescue-vessel-male.png",
+      "audit": "All four intended adult women plus the adult male are present with distinct theme-led couture, a dynamic three-person choice, complete Devil's Bridge and the offshore rescue vessel. ECE's prop line terminates at the isolated paper target. The male's strongest ECE eye line is weaker than planned and is accepted as a logged throughput tolerance."
+    },
+    {
+      "scene": 1375,
+      "raw": null,
+      "rawOutcome": "output-stage moderation block",
+      "rawRequestId": "cfc11b67-656b-4fee-8124-ab40f6b54098",
+      "recovery": null,
+      "recoveryUsed": false,
+      "result": "rejected",
+      "audit": "No durable image was emitted. Throughput mode skipped moderation recovery."
+    }
+  ],
+  "acceptedAssets": [
+    {
+      "scene": 1372,
+      "file": "1372-antigua-nelsons-dockyard-rescue-vessel.png",
+      "sha256": "E1DAE8CF791ACBAAD287F4278F659D1A23DA813FF537A35962BDFC86F64E384F",
+      "source": "tmp/world-195x4/batch-338/raw/1372-antigua-nelsons-dockyard-raw.png"
+    },
+    {
+      "scene": 1374,
+      "file": "1374-antigua-devils-bridge-rescue-vessel-male.png",
+      "sha256": "F6A901C67C380D7E4D3C6FBFF3A5F455BB4472A0E646B627E449F3ED8FCF0171",
+      "source": "tmp/world-195x4/batch-338/raw/1374-antigua-devils-bridge-raw.png"
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1373,
+      "reason": "output-stage moderation block with no durable image"
+    },
+    {
+      "scene": 1375,
+      "reason": "output-stage moderation block with no durable image"
+    }
+  ],
+  "xPost": {
+    "status": "ready-eligible-assets",
+    "requiredAcceptedCurrentCountryAssets": 2,
+    "availableAcceptedCurrentCountryAssets": 2,
+    "caption": "Antigua and Barbuda ❤️ Saint Vincent and the Grenadines #AntiguaAndBarbuda",
+    "primaryAssets": [
+      "1372-antigua-nelsons-dockyard-rescue-vessel.png",
+      "1374-antigua-devils-bridge-rescue-vessel-male.png"
+    ],
+    "secondaryAsset": "1369-saint-vincent-dark-view-rescue-vessel-recovery.png"
+  },
+  "acceptanceMode": {
+    "name": "throughput-acceptance-override",
+    "startingBatch": 336,
+    "defaultDecision": "accept and log deviations",
+    "rejectOnly": "missing core cast, decisive unsafe mission-prop line, explicit content, visible firing or ammunition, or glaring unusable whole-limb or person duplication"
+  },
+  "terminalAt": "2026-08-10T11:39:33.610Z",
+  "acceptanceSummary": {
+    "attemptedScenes": 4,
+    "acceptedScenes": 2,
+    "rejectedScenes": 2,
+    "terminalOutcomeAllowsQueueAdvance": true,
+    "xEligible": true
+  }
+}
