@@ -250,6 +250,18 @@ fn mutate_account_transfer_hook(mut mutate: impl FnMut(&mut TransferHookAccount)
     data
 }
 
+fn corrupt_immutable_owner_tlv_length() -> Vec<u8> {
+    let mut data = build_token_account_data(TokenAccountShape::default());
+    let extension_type = u16::from(ExtensionType::ImmutableOwner).to_le_bytes();
+    let header = data
+        .windows(4)
+        .rposition(|window| window[..2] == extension_type && window[2..] == [0, 0])
+        .expect("immutable-owner TLV header");
+    data[header + 2] = 1;
+    data.push(0);
+    data
+}
+
 fn authenticate_mint(
     mint_account: &mut TestAccount,
 ) -> Result<ReadonlyCanonicalMintCapability, Token2022HostError> {
@@ -275,7 +287,7 @@ fn account_binding() -> ConfidentialTokenAccountBinding {
     ConfidentialTokenAccountBinding::new(
         TOKEN_ACCOUNT,
         WALLET,
-        ConfidentialTokenAccountForm::AssociatedImmutableOwner,
+        ConfidentialTokenAccountForm::ImmutableOwner,
     )
     .unwrap()
 }
@@ -544,6 +556,20 @@ fn confidential_account_rejects_hostile_key_owner_length_extension_and_cross_min
             &wrong_wallet.info(),
         ),
         Err(Token2022HostError::TokenAccountWalletOwnerMismatch)
+    );
+
+    let mut malformed_immutable_owner = TestAccount::data(
+        TOKEN_ACCOUNT,
+        TOKEN_2022_PROGRAM_ID.to_bytes(),
+        corrupt_immutable_owner_tlv_length(),
+    );
+    assert_eq!(
+        authenticate_confidential_token_account_info(
+            &mint,
+            &account_binding(),
+            &malformed_immutable_owner.info(),
+        ),
+        Err(Token2022HostError::TokenAccountExtensionMismatch)
     );
 }
 

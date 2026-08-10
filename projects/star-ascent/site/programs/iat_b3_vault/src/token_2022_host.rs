@@ -16,6 +16,7 @@ use solana_sdk_ids::zk_elgamal_proof_program;
 use spl_token_2022_interface::{
     extension::{
         confidential_transfer::{ConfidentialTransferAccount, ConfidentialTransferMint},
+        immutable_owner::ImmutableOwner,
         transfer_hook::{TransferHook, TransferHookAccount},
         BaseStateWithExtensions, ExtensionType, StateWithExtensions,
     },
@@ -225,7 +226,7 @@ impl ReadonlyCanonicalMintCapability {
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum ConfidentialTokenAccountForm {
     Standalone,
-    AssociatedImmutableOwner,
+    ImmutableOwner,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -496,26 +497,28 @@ pub fn authenticate_confidential_token_account_info(
     let extension_types = state
         .get_extension_types()
         .map_err(|_| Token2022HostError::InvalidTokenAccountData)?;
-    let immutable_owner = matches!(
-        binding.form,
-        ConfidentialTokenAccountForm::AssociatedImmutableOwner
-    );
+    let immutable_owner = matches!(binding.form, ConfidentialTokenAccountForm::ImmutableOwner);
     let expected_standalone = [
         ExtensionType::ConfidentialTransferAccount,
         ExtensionType::TransferHookAccount,
     ];
-    let expected_associated = [
+    let expected_immutable_owner = [
         ExtensionType::ConfidentialTransferAccount,
         ExtensionType::TransferHookAccount,
         ExtensionType::ImmutableOwner,
     ];
     let expected_extensions = if immutable_owner {
-        expected_associated.as_slice()
+        expected_immutable_owner.as_slice()
     } else {
         expected_standalone.as_slice()
     };
     if !exact_extensions(&extension_types, expected_extensions) {
         return Err(Token2022HostError::TokenAccountExtensionMismatch);
+    }
+    if immutable_owner {
+        state
+            .get_extension::<ImmutableOwner>()
+            .map_err(|_| Token2022HostError::TokenAccountExtensionMismatch)?;
     }
 
     let transfer_hook = state
