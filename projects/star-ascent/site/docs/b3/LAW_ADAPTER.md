@@ -72,11 +72,11 @@ There is no administrator, threshold, timezone, result, or bypass update
 instruction. The loader upgrade authority must still be finalized before this
 instruction, as required by the rehearsal sequence.
 
-### Stake-ingress anti-donation boundary (unwired)
+### Stake-ingress anti-donation boundary (host-test reference kernel, identity-unwired)
 
-The test-only native Rust reference at
-`programs/iat_b3_law/tests/stake_ingress_reference.rs` contains a separate
-176-byte, versioned `StakeIngressBinding` codec and pure enforcement kernel. It
+The source file at
+`programs/iat_b3_law/src/stake_ingress.rs` contains a separate 176-byte,
+versioned `StakeIngressBinding` codec and pure enforcement kernel. It
 canonically derives the economic config, stake-token vault, and dedicated
 `stake-ingress` authority PDA from one economy program ID and mint. The config
 seed is the exact retained V2/B3 `PDA(economy, ["config", mint])` seed, not a new
@@ -86,13 +86,11 @@ closed. The rule leaves ordinary destinations unchanged but permits a transfer
 into the canonical stake vault only when the Token-2022-validated transfer-
 authority key is the derived ingress-authority PDA. It accepts no caller-
 provided allow/deny disposition.
-That file is an integration-test target outside `src/lib.rs`; it is
-host/reference evidence and is not compiled into the current SBF candidate. The
-deployable law source remains byte-for-byte identical to its rehearsed version,
-so the pinned optimized artifact must also remain identical until final
-identities are deliberately wired. A fresh pinned `cargo build-sbf
---optimize-size` rebuild reproduced exactly 154,952 bytes and SHA-256
-`927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`.
+The companion integration test imports this source directly instead of
+carrying a second implementation. It covers canonical round trips, zero and
+wrong identities, field and reserved-byte corruption, wrong lengths,
+transactional encode failure, wrong-authority donation attempts, ordinary
+destinations, and the pinned hook authority ABI.
 
 The pinned `spl-transfer-hook-interface` 2.1.0 `execute` ABI deliberately marks
 the authority meta read-only and **not a signer**. The hook must not test
@@ -105,9 +103,10 @@ silently misunderstood later.
 
 This boundary is deliberately **not** called by `process_execute`, is not in the
 extra-account-meta list, and has no initialization or update opcode. The
-current source has no binding-account seed or address helper: no binding account
-is created, allocated, written, or read by any instruction, and no storage
-opcode exists. The required identities are not frozen: `iat_b3_economy` is
+current source derives addresses only inside the unreachable pure kernel: no
+binding account is created, allocated, written, or read by any instruction, and
+no binding-account seed, storage address, or storage opcode exists. The required
+identities are not frozen: `iat_b3_economy` is
 still a host-only library with no executable program ID, this law crate has no
 committed public program ID, and the canonical Token-2022 mint is unpublished.
 Accepting those facts from the initializer now would substitute caller choice
@@ -133,8 +132,8 @@ and position lifecycle must all roll back together on any failure.
 Once that path is frozen and rehearsed, direct Token-2022 donations into the
 stake vault fail at the hook while the retained V2 invariant
 `stake_tokens.amount == config.staked_principal` stays exact. The present source
-only proves the codec, derivation, and admission semantics; it does not yet
-claim active donation protection.
+now makes the final codec, derivation, and admission semantics production-code
+reviewable; it does not yet claim active donation protection.
 
 ### Prototype instruction ABI
 
@@ -211,7 +210,7 @@ unchanged 1%/66.67% thresholds, same-day reroll rejection, future-state
 rejection, and deterministic lag selection.
 
 The historical 2026-08-08 disposable local-validator record covers the
-pre-allowlist optimized 141,824-byte SBF artifact. The current optimized
+pre-allowlist optimized 141,824-byte SBF artifact. The rehearsed optimized
 atomic-sealing candidate is 154,952 bytes with SHA-256
 `927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`.
 A fresh disposable loopback run passed with frozen local program data, exact
@@ -219,6 +218,18 @@ Token-2022 mint shape, in-initializer authority sealing, real hooked transfers,
 permissionless Clock plus SlotHashes finalization, direct-call rejection, and
 missing/stale/open/locked/forged state gates. No public network was written. See
 [`LOCAL_VALIDATOR_REHEARSAL.md`](LOCAL_VALIDATOR_REHEARSAL.md).
+
+The file is imported directly by the host integration test and is not exported
+from the deployable crate module graph. This preserves the reviewed default
+law-only artifact byte-for-byte. An earlier pinned
+`solana-cargo-build-sbf 3.1.10 --optimize-size` compiler-only experiment with
+the reference module exported was repeated byte-identically, remained 154,952
+bytes, and produced SHA-256
+`10e468525e491bb9b03ab4cd1b700ffde57904e7d209aa6fa0527d73bfd97613`.
+That digest is source/build evidence only: the guard is still unreachable, the
+artifact has not run either validator matrix, and the existing CI and Devnet
+pins must not be changed or used until the identity freeze and deliberate
+candidate-review step.
 
 A 2026-08-09 disposable stake-ingress rehearsal separately passed the pinned
 Token-2022 runtime primitives: exact owner-signed approval CPI, stateless

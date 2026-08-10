@@ -21,11 +21,15 @@ const economyCodecSource = readFileSync(
   new URL("programs/iat_b3_economy/src/codec.rs", siteRoot),
   "utf8",
 );
+const economyStakeIngressSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/stake_ingress.rs", siteRoot),
+  "utf8",
+);
 const lawSource = readFileSync(
   new URL("programs/iat_b3_law/src/lib.rs", siteRoot),
   "utf8",
 );
-const economyCode = `${economySource}\n${economyCodecSource}`
+const economyCode = `${economySource}\n${economyCodecSource}\n${economyStakeIngressSource}`
   .replace(/\/\/.*$/gmu, "")
   .replace(/\/\*[\s\S]*?\*\//gu, "");
 const workspaceManifest = readFileSync(new URL("Cargo.toml", siteRoot), "utf8");
@@ -121,6 +125,28 @@ test("the first Rust slice is a host-only library with no Solana entrypoint or d
   assert.doesNotMatch(
     economyCode,
     /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo|TcpStream|UdpSocket/u,
+  );
+});
+
+test("the combined stake-ingress slice is production source without public execution", () => {
+  assert.match(economySource, /pub mod stake_ingress;/u);
+  assert.match(
+    economyStakeIngressSource,
+    /pub fn prepare_open_position_stake_ingress\(/u,
+  );
+  assert.match(
+    economyStakeIngressSource,
+    /prepare_open_position\(gate, open_position\)[\s\S]+prepare_stake_ingress\(gate, open_position, ingress\)/u,
+  );
+  assert.match(economyStakeIngressSource, /pub fn verify_ingress_approval\(/u);
+  assert.match(
+    economyStakeIngressSource,
+    /pub fn apply_transfer_and_retained_v2_finalizer\(/u,
+  );
+  assert.match(economyStakeIngressSource, /pub fn complete_stake_ingress\(/u);
+  assert.doesNotMatch(
+    economyStakeIngressSource,
+    /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo/u,
   );
 });
 

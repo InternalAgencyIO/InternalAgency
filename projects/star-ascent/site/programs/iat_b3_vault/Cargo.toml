@@ -1,0 +1,11 @@
+[package]
+name = "iat-b3-vault"
+version = "0.1.0"
+description = "Host-only lifecycle planner for the optional IAT B3 Privacy Vault client"
+edition = "2021"
+license = "AGPL-3.0-or-later"
+publish = false
+
+[lib]
+name = "iat_b3_vault"
+crate-type = ["lib"]

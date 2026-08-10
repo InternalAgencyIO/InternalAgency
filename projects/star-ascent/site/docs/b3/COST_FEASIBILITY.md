@@ -103,8 +103,8 @@ After moving both extension-authority revocations and their post-CPI checks
 inside the one-time law initializer, the atomic source produced a 188,512-byte
 ordinary SBF artifact (SHA-256
 `f7061b6c3350d833a01568b2d2b1eda668d57bd500119ebe0e849248cb735061`).
-The current candidate was then rebuilt twice with the pinned optimized command
-and exercised on a disposable loopback validator:
+The atomic-sealing candidate was then rebuilt twice with the pinned optimized
+command and exercised on a disposable loopback validator:
 
 - binary: `154,952` bytes;
 - SHA-256: `927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`;
@@ -112,10 +112,20 @@ and exercised on a disposable loopback validator:
 - estimated temporary buffer: `1.07961432 SOL`;
 - estimated pre-fee peak: `2.16042576 SOL`.
 
+The later identity-unwired stake-ingress reference source is imported only by
+host integration tests, leaving the default reviewed law-only build byte-stable.
+An earlier experiment that exported the module produced two byte-identical,
+compiler-only pinned rebuilds of 154,952 bytes with SHA-256
+`10e468525e491bb9b03ab4cd1b700ffde57904e7d209aa6fa0527d73bfd97613`.
+It has no active stake-ingress guard and no combined-validator evidence, so it
+does not supersede the rehearsed atomic-sealing artifact or authorize a CI,
+Devnet, or Mainnet repin. The rent estimates remain unchanged because the byte
+length is identical.
+
 This safely meets a `1.5 SOL` **permanent-rent** target for the incremental B3
 law program. It does not meet a `1.5 SOL` **fresh-payer peak** target. Under the
 same loader-v3 formula, that peak requires approximately `107,507` bytes, so
-the current optimized artifact remains `47,445` bytes above the ceiling. The
+the current optimized byte length remains `47,445` bytes above the ceiling. The
 temporary buffer is recovered after a successful deployment; it is still real
 liquidity required during deployment.
 

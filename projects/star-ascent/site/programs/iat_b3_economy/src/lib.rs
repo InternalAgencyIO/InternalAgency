@@ -2,6 +2,7 @@
 #![forbid(unsafe_code)]
 
 mod codec;
+pub mod stake_ingress;
 
 pub use codec::{
     decode_agency_owner_index_state, decode_agency_state, decode_core_reward_state,

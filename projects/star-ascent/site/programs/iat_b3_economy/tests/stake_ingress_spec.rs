@@ -1,16 +1,13 @@
 #![allow(dead_code)]
 
-#[path = "support/stake_ingress_model.rs"]
-mod stake_ingress_model;
-
 use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day, SolanaDailyDecision};
+use iat_b3_economy::stake_ingress::*;
 use iat_b3_economy::{
     prepare_open_position, verify_daily_law_open, CanonicalDailyLawBinding, ConfigState,
     EconomyError, EligibilityState, LaneState, PrepareOpenPositionInput, ReadonlyDailyLawAccount,
     ReadonlyTokenState, ValidatedDailyLawWrite, ECOSYSTEM, LAW_STATE_LEN, LAW_STATE_MAGIC,
     LAW_STATE_VERSION, LIQUIDITY, TOKEN_DECIMALS, TREASURY,
 };
-use stake_ingress_model::*;
 
 const LAW_PROGRAM: [u8; 32] = [0xB3; 32];
 const LAW_STATE: [u8; 32] = [0x51; 32];
@@ -117,43 +114,43 @@ fn config() -> ConfigState {
     }
 }
 
-fn retained_open_plan(gate: &ValidatedDailyLawWrite) -> iat_b3_economy::OpenPositionPreCpiPlan {
-    prepare_open_position(
-        gate,
-        PrepareOpenPositionInput {
-            config_key: CONFIG,
-            config: config(),
-            owner: OWNER,
+fn retained_open_input() -> PrepareOpenPositionInput {
+    PrepareOpenPositionInput {
+        config_key: CONFIG,
+        config: config(),
+        owner: OWNER,
+        mint: MINT,
+        owner_tokens: ReadonlyTokenState {
+            key: OWNER_TOKENS,
             mint: MINT,
-            owner_tokens: ReadonlyTokenState {
-                key: OWNER_TOKENS,
-                mint: MINT,
-                owner: OWNER,
-                amount: SOURCE_BEFORE,
-            },
-            vault_authority: VAULT_AUTHORITY,
-            stake_tokens: ReadonlyTokenState {
-                key: STAKE_TOKENS,
-                mint: MINT,
-                owner: VAULT_AUTHORITY,
-                amount: STAKED_BEFORE,
-            },
-            eligibility: EligibilityState {
-                config: CONFIG,
-                wallet: OWNER,
-                agency_index: u32::MAX,
-                role: 0,
-                bump: 202,
-            },
-            treasury: lane(TREASURY, 1_000_000),
-            ecosystem: lane(ECOSYSTEM, 1_000_000),
-            liquidity: lane(LIQUIDITY, 1_000_000),
-            position_id: 77,
-            principal: PRINCIPAL,
-            position_bump: 203,
+            owner: OWNER,
+            amount: SOURCE_BEFORE,
         },
-    )
-    .unwrap()
+        vault_authority: VAULT_AUTHORITY,
+        stake_tokens: ReadonlyTokenState {
+            key: STAKE_TOKENS,
+            mint: MINT,
+            owner: VAULT_AUTHORITY,
+            amount: STAKED_BEFORE,
+        },
+        eligibility: EligibilityState {
+            config: CONFIG,
+            wallet: OWNER,
+            agency_index: u32::MAX,
+            role: 0,
+            bump: 202,
+        },
+        treasury: lane(TREASURY, 1_000_000),
+        ecosystem: lane(ECOSYSTEM, 1_000_000),
+        liquidity: lane(LIQUIDITY, 1_000_000),
+        position_id: 77,
+        principal: PRINCIPAL,
+        position_bump: 203,
+    }
+}
+
+fn retained_open_plan(gate: &ValidatedDailyLawWrite) -> iat_b3_economy::OpenPositionPreCpiPlan {
+    prepare_open_position(gate, retained_open_input()).unwrap()
 }
 
 fn source(delegate: DelegateSnapshot) -> SourceTokenState {
@@ -260,6 +257,30 @@ fn frozen_sequence_keeps_daily_law_and_v2_order_explicit() {
             CLOCK_TIMESTAMP,
         ),
         Err(EconomyError::DailyLockdown)
+    );
+}
+
+#[test]
+fn combined_boundary_runs_retained_v2_preflight_before_ingress_and_matches_the_phases() {
+    let gate = open_gate();
+    let ingress = prepare_input(DelegateSnapshot {
+        delegate: Some(ORIGINAL_DELEGATE),
+        delegated_amount: 777,
+    });
+    let combined = prepare_open_position_stake_ingress(&gate, retained_open_input(), ingress)
+        .expect("open Daily Law and exact retained inputs must compose");
+    let phased = prepare_stake_ingress(&gate, retained_open_plan(&gate), ingress).unwrap();
+    assert_eq!(combined, phased);
+
+    let mut invalid_open = retained_open_input();
+    invalid_open.principal = 0;
+    let mut invalid_ingress = ingress;
+    invalid_ingress.owner_is_signer = false;
+    assert_eq!(
+        prepare_open_position_stake_ingress(&gate, invalid_open, invalid_ingress),
+        Err(StakeIngressSpecError::RetainedV2(
+            EconomyError::ZeroPrincipal
+        ))
     );
 }
 
@@ -404,7 +425,7 @@ fn cpi_guard_and_wrong_ingress_key_fail_closed_before_any_plan() {
 
 #[test]
 fn ingress_has_no_griefable_account_state_admission_rule() {
-    let model = include_str!("support/stake_ingress_model.rs");
+    let model = include_str!("../src/stake_ingress.rs");
     assert!(!model.contains("pub lamports:"));
     assert!(!model.contains("pub data_len:"));
     assert!(!model.contains("pub executable:"));

@@ -14,11 +14,12 @@ const lawSource = readFileSync(
   new URL("../programs/iat_b3_law/src/lib.rs", import.meta.url),
   "utf8",
 );
-const stakeIngressReference = readFileSync(
-  new URL(
-    "../programs/iat_b3_law/tests/stake_ingress_reference.rs",
-    import.meta.url,
-  ),
+const stakeIngressSource = readFileSync(
+  new URL("../programs/iat_b3_law/src/stake_ingress.rs", import.meta.url),
+  "utf8",
+);
+const economyStakeIngressSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/stake_ingress.rs", import.meta.url),
   "utf8",
 );
 const economySource = readFileSync(
@@ -124,6 +125,7 @@ test("the Rust workspace has no unreported faction or core-cap entrypoint", () =
     "programs/iat_b3_consensus",
     "programs/iat_b3_economy",
     "programs/iat_b3_law",
+    "programs/iat_b3_vault",
     "programs/iat_v2",
   ]);
   assert.match(economyCargo, /crate-type = \["lib"\]/u);
@@ -171,8 +173,8 @@ test("native adapter keeps exactly two own writes and one canonical transfer gat
   assert.match(execute, /IatTransferDisposition::RejectedDailyLockdown/u);
 });
 
-test("unfrozen identities keep stake-ingress protection fail-closed and unwired", () => {
-  const binding = structBody(stakeIngressReference, "StakeIngressBinding");
+test("production stake-ingress kernels stay fail-closed and entrypoint-unwired", () => {
+  const binding = structBody(stakeIngressSource, "StakeIngressBinding");
   assertTokensInOrder(
     binding,
     [
@@ -188,7 +190,7 @@ test("unfrozen identities keep stake-ingress protection fail-closed and unwired"
     "stake-ingress binding codec",
   );
 
-  const derive = functionBody(stakeIngressReference, "derive");
+  const derive = functionBody(stakeIngressSource, "derive");
   assertTokensInOrder(
     derive,
     [
@@ -201,7 +203,7 @@ test("unfrozen identities keep stake-ingress protection fail-closed and unwired"
     "stake-ingress canonical derivation",
   );
 
-  const enforce = functionBody(stakeIngressReference, "enforce_stake_ingress");
+  const enforce = functionBody(stakeIngressSource, "enforce_stake_ingress");
   assertTokensInOrder(
     enforce,
     [
@@ -225,6 +227,25 @@ test("unfrozen identities keep stake-ingress protection fail-closed and unwired"
   ]) {
     assert.doesNotMatch(body, /StakeIngressBinding|enforce_stake_ingress/u);
   }
+  assert.doesNotMatch(lawSource, /pub mod stake_ingress;/u);
+  assert.match(economySource, /pub mod stake_ingress;/u);
+  const combined = functionBody(
+    economyStakeIngressSource,
+    "prepare_open_position_stake_ingress",
+  );
+  assertTokensInOrder(
+    combined,
+    [
+      "prepare_open_position(gate, open_position)",
+      "map_err(StakeIngressSpecError::RetainedV2)",
+      "prepare_stake_ingress(gate, open_position, ingress)",
+    ],
+    "combined Daily-Law/V2/stake-ingress boundary",
+  );
+  assert.doesNotMatch(
+    economyStakeIngressSource,
+    /entrypoint!|process_instruction|#\[program\]|invoke(?:_signed)?\s*\(|AccountInfo/u,
+  );
   const lawState = structBody(lawSource, "LawState");
   assert.doesNotMatch(lawState, /stake|economy|ingress/iu);
   assert.match(lawSource, /pub const LAW_STATE_LEN: usize = 160;/u);
@@ -234,13 +255,9 @@ test("unfrozen identities keep stake-ingress protection fail-closed and unwired"
     initialize,
     /ExtraAccountMetaList::init::<ExecuteInstruction>[\s\S]+&\[extra_meta\]/u,
   );
-  assert.doesNotMatch(
-    lawSource,
-    /StakeIngressBinding|enforce_stake_ingress|STAKE_INGRESS_BINDING|stake_ingress_binding/u,
-  );
   assert.match(
     audit,
-    /bounded, unwired\s+anti-donation reference[\s\S]+process_execute[\s\S]+remain unchanged/u,
+    /bounded,\s+identity-unwired anti-donation kernel[\s\S]+absent from `src\/lib\.rs`[\s\S]+process_execute/u,
   );
   assert.match(
     lawAdapter,
@@ -252,7 +269,7 @@ test("unfrozen identities keep stake-ingress protection fail-closed and unwired"
   );
   assert.match(
     lawAdapter,
-    /no binding account\s+is created, allocated, written, or read[\s\S]+no storage\s+opcode exists/u,
+    /no\s+binding account is created, allocated, written, or read[\s\S]+no binding-account seed, storage address, or storage opcode exists/u,
   );
   assert.match(
     lawAdapter,
@@ -264,7 +281,7 @@ test("unfrozen identities keep stake-ingress protection fail-closed and unwired"
   );
   assert.match(
     lawAdapter,
-    /integration-test target[\s\S]+outside `src\/lib\.rs`[\s\S]+not\s+compiled into the current SBF candidate/u,
+    /source file[\s\S]+src\/stake_ingress\.rs[\s\S]+not exported[\s\S]+deployable crate module graph/u,
   );
 });
 

@@ -90,11 +90,11 @@ const ARTIFACTS = Object.freeze({
   ),
   law: artifact(
     "projects/star-ascent/site/docs/b3/LAW_ADAPTER.md",
-    "e38c9eb38b14a0589474d19ede6d6e8936e0dca1044461f33336c1095f2da843",
+    "5f37529cbc12c0f171e026d08e37d465ea639bd16de9eaa3de009b8d5c081df8",
   ),
   localRehearsal: artifact(
     "projects/star-ascent/site/docs/b3/LOCAL_VALIDATOR_REHEARSAL.md",
-    "b122984bb9e81f819556f554af184f2c00e580777939e1902fb81006bf288390",
+    "463daa6afe5641087f477c755853e720a027aed73aaf3dfc2c3c9f9b506afca4",
   ),
   waterfall: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-reward-capacity-waterfall.v1.json",
@@ -114,7 +114,7 @@ const ARTIFACTS = Object.freeze({
   ),
   cost: artifact(
     "projects/star-ascent/site/docs/b3/COST_FEASIBILITY.md",
-    "df582d8e82831c9d9c37d0fb1712a455e2954cc7ac284887c6f81d208064181f",
+    "44684ef17a173e01eb36e9e7a0de3297b62c5f7b6aa1035f0d1995641ba3c289",
   ),
   devnet: artifact(
     "projects/star-ascent/site/docs/b3/DEVNET_REHEARSAL.md",

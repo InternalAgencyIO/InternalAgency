@@ -307,22 +307,23 @@ also block principal withdrawal). This slice deliberately does not relax the
 equality. An immutable mitigation preserving solvency and permissionlessness
 must be frozen and rehearsed before Mainnet.
 
-The law crate's native integration-test target now contains a bounded, unwired
-anti-donation reference. A 176-byte `StakeIngressBinding` codec recomputes the
+The law crate's host-test `stake_ingress` source contains a bounded,
+identity-unwired anti-donation kernel. A 176-byte `StakeIngressBinding` codec
+recomputes the
 economic config, stake-token, and dedicated `stake-ingress` authority PDAs from
 the codec's economy program ID and mint. Its pure rule rejects a canonical
 stake-vault destination unless the exact ingress PDA is the Token-2022-
 validated transfer-authority key, while ordinary destinations pass through.
 Forged fields, bumps, zero identities, reserved bytes, versions, and lengths
-fail closed, and there is no caller-provided disposition. The entire
-provisional boundary is outside `src/lib.rs`, so it cannot change the current
-deployable SBF behavior. `process_execute`, `process_initialize_law`, the two-
+fail closed, and there is no caller-provided disposition. The integration test
+imports the source file directly; it is absent from `src/lib.rs` and the
+deployable crate module graph. `process_execute`, `process_initialize_law`, the two-
 opcode dispatcher, the 160-byte Daily Law codec, and its current one-entry hook
 meta list remain unchanged. The config derivation is the exact retained V2/B3
 `["config", mint]` seed. No binding account is created, stored, loaded, or
-addressed by an instruction, and no binding storage opcode exists. The pinned
-optimized SBF rebuild remains exactly 154,952 bytes with SHA-256
-`927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`.
+addressed by an instruction, and no binding-account seed or storage opcode
+exists. The default optimized SBF therefore remains exactly 154,952 bytes with
+SHA-256 `927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`.
 
 The pinned Transfer Hook 2.1.0 interface marks the hook's authority meta
 read-only and non-signer. The enforcement kernel intentionally has no
@@ -343,6 +344,15 @@ temporary delegate; the adapter must restore any prior delegate and prove
 complete rollback on every approval, transfer, hook, restoration, and post-CPI
 failure. No update, administrator, sweep, recovery, oracle, or bypass opcode is
 permitted.
+
+The economy crate now carries the previously test-only ten-phase stake-ingress
+kernel in production source. Its combined API requires the opaque open-Day
+Daily Law capability, runs the retained V2 open-position preflight itself, and
+then binds exact approval, hooked transfer, reload, V2 post-CPI ordering, and
+delegate restoration intents. It performs no CPI, account access, lifecycle,
+serialization, persistence, Solana entrypoint, or public dispatch. Focused
+adversarial tests retain the former executable-spec coverage and add combined-
+boundary and error-precedence coverage.
 
 The `commit_round` differential kernel performs no account creation. It accepts
 a decoded read-only instructions-sysvar trace, selects only the instruction

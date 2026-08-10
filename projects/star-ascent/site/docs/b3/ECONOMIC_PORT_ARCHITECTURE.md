@@ -141,13 +141,13 @@ authentication before setting `TransferHookAccount.transferring`, and the hook
 already requires that transferring flag. The crate has a regression test for
 the non-signer authority meta.
 
-The law crate's test-only native reference currently implements a
+The law crate's host-test `stake_ingress` source implements a
 self-validating 176-byte binding codec, the three canonical economy-PDA
-derivations, and the pure fail-closed admission rule. It lives outside
-`src/lib.rs`, so the reference boundary is absent from the current SBF artifact.
-It does not wire that rule into hook execution or initialization; no binding
-account is currently created or stored, no binding address helper exists, and
-there is no binding storage opcode. The config derivation retains V2's exact
+derivations, and the pure fail-closed admission rule. Its integration test
+imports the file directly; it is absent from the deployable crate module graph
+and cannot be called by `process_execute` or any initialization path. No binding
+account is currently created or stored, and there is no binding-account seed,
+storage address, or storage opcode. The config derivation retains V2's exact
 `["config", mint]` seed. The economy program is still host-only and has no
 frozen program ID, the law program ID is not committed, and the canonical mint
 is unpublished. Until all three identities and seed domains are frozen, storing
@@ -158,6 +158,18 @@ existing law-state codec before Genesis, but no design may add a new account
 meta to every IAT transfer merely for stake ingress. Mainnet remains blocked on
 final identity binding, temporary-delegate restoration, and adversarial atomic
 rollback rehearsal.
+
+The economy crate's production-source `stake_ingress` module now composes the
+opaque open-Day Daily Law capability with the exact retained V2
+`prepare_open_position` kernel and a ten-phase transaction-local ingress state
+machine. It captures the original delegate, requires an owner-signed exact
+`ApproveChecked` intent, verifies an exact reload, requires ingress-PDA
+`invoke_signed` plus hook account expansion, verifies exact source/vault deltas
+and allowance consumption, applies V2's checked principal addition and Position
+construction in retained order, and refuses to yield a complete result until an
+exact delegate-restoration reload succeeds. It performs no CPI, account access,
+serialization, persistence, or dispatch; the native adapter and final identities
+remain the security boundary.
 
 Burning is different from transferring. The sole core-cap burn path uses
 Token-2022 `BurnChecked`, signed by the economic vault-authority PDA. It is not
@@ -389,8 +401,9 @@ compile-time-inactive CCC boundary before the otherwise unreachable missing or
 invalid agency checks. It does not authenticate the administrator or config,
 derive the wallet-bound eligibility PDA, implement V2 `init_if_needed`
 create-or-update lifecycle, invoke the System Program, or persist a record. The
-tenth adds only `prepare_open_position` through the exact point before V2's
-transfer CPI. It preserves active/principal, token-destination, exact stake
+tenth adds `prepare_open_position` through the exact point before V2's transfer
+CPI plus the production-source, dispatcher-disabled atomic ingress state
+machine. It preserves active/principal, token-destination, exact stake
 ledger, owner/eligibility, standard-versus-CCC, week, reward, and treasury-first
 reservation ordering. The returned lane copies and transfer intent are
 provisional: it does not run the config staked-principal `checked_add`, construct
@@ -400,12 +413,15 @@ and derive and bind the canonical vault-authority PDA rather than trust the
 plan's supplied semantic value. After the pre-CPI plan succeeds, it must manually
 create the position lifecycle behind the gate, execute the hooked Token-2022
 transfer using `add_extra_accounts_for_execute_cpi`, and only then run a post-CPI
-finalizer that updates config and constructs the position. A
+finalizer that updates config and constructs the position. The pure combined
+kernel specifies those post-CPI writes and exact delegate restoration by value,
+but does not authenticate accounts, invoke Token-2022, or persist them. A
 disposable local validator must prove atomic rollback of the position account,
 lane reservations, transfer, and post-CPI state when the hook, token CPI, or
 finalizer fails. The unsolicited 1-base-unit stake-vault donation
-`StakeLedgerMismatch` denial remains a Mainnet blocker and is not relaxed by
-this parity slice.
+`StakeLedgerMismatch` denial is addressed at the production-kernel level by the
+immutable ingress admission design, but active protection remains blocked on
+identity freeze, native CPI/lifecycle integration, and combined-binary rehearsal.
 
 The eleventh adds only `prepare_withdraw_position_principal` through the exact
 point before V2's transfer CPI. It preserves active config, open position,

@@ -128,8 +128,14 @@ are frozen. The run therefore exercises the reviewed ingress rule and the same
 Token-2022 `transferring` semantics in a disposable hook; the separate Daily
 Law rehearsal remains the evidence for the production law artifact. The final
 frozen binary must combine both rules and repeat both adversarial matrices.
-The retained V2 economic math was neither modified nor exercised by this
-fixture.
+The law admission kernel and full transaction-local ingress/V2 finalizer state
+machine now live beside the program crates as an inert reference seam. The law
+source is imported directly by its host integration test and is not exported
+from the deployable law crate; the default build remains the reviewed law-only
+artifact. There is still no combined entrypoint or dispatcher. This
+reduces implementation duplication but does not upgrade the historical fixture
+into combined-binary evidence. The retained V2 economic math was neither
+modified nor exercised by this fixture.
 
 ## Real-validator coverage
 

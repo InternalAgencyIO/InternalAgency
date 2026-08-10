@@ -1,16 +1,17 @@
-//! Host-only executable specification for the proposed B3 stake-ingress path.
+//! Production-source, dispatcher-disabled kernel for atomic B3 stake ingress.
 //!
-//! This is deliberately test-only. It performs no CPI, PDA derivation, account
-//! reload, serialization, or persistence. A future native adapter must prove
+//! This performs no CPI, PDA derivation, account reload, serialization, or
+//! persistence. A future native adapter must prove
 //! the canonical `b"stake-ingress" + config` PDA and Transfer Hook validation
 //! PDA, capture the source delegate before the first CPI, and execute every
 //! represented step in one Solana transaction. Any failure must roll the whole
-//! transaction back.
+//! transaction back. Nothing in this module is reachable from a Solana
+//! entrypoint or public dispatcher.
 
-use iat_b3_economy::{
-    ConfigState, EconomyError, LaneState, OpenPositionPreCpiPlan, PositionState,
-    ReadonlyTokenState, TransferCheckedIntent, ValidatedDailyLawWrite, TOKEN_DECIMALS,
-    USER_TERM_WEEKS,
+use crate::{
+    prepare_open_position, ConfigState, EconomyError, LaneState, OpenPositionPreCpiPlan,
+    PositionState, PrepareOpenPositionInput, ReadonlyTokenState, TransferCheckedIntent,
+    ValidatedDailyLawWrite, TOKEN_DECIMALS, USER_TERM_WEEKS,
 };
 
 pub const STAKE_INGRESS_SEED: &[u8] = b"stake-ingress";
@@ -192,10 +193,34 @@ pub enum StakeIngressSpecError {
     RetainedV2(EconomyError),
 }
 
+/// Run the canonical Daily-Law-gated retained V2 open-position preflight and
+/// bind its exact output to the atomic stake-ingress protocol in one API.
+///
+/// This is the production-source composition boundary. It cannot be called
+/// without the opaque capability returned by `verify_daily_law_open`, and it
+/// does not accept a caller-authored open-position plan. Returned values are
+/// still transaction-local intents: a future native adapter must authenticate
+/// accounts, derive PDAs, perform/reload every CPI, and persist only after exact
+/// delegate restoration succeeds.
+pub fn prepare_open_position_stake_ingress(
+    gate: &ValidatedDailyLawWrite,
+    open_position: PrepareOpenPositionInput,
+    ingress: PrepareStakeIngressInput,
+) -> Result<StakeIngressExecutionPlan, StakeIngressSpecError> {
+    let open_position =
+        prepare_open_position(gate, open_position).map_err(StakeIngressSpecError::RetainedV2)?;
+    prepare_stake_ingress(gate, open_position, ingress)
+}
+
 /// Bind a Daily-Law-gated retained V2 preflight to the anti-donation ingress
 /// flow. Capturing the delegate before approval is essential: a client-side
 /// ApproveChecked instruction would already have overwritten the only on-chain
 /// copy, making exact restoration unverifiable.
+///
+/// Native adapter code should prefer [`prepare_open_position_stake_ingress`].
+/// This lower-level phase remains public so deterministic post-CPI and rollback
+/// vectors can inject otherwise unreachable transaction-local observations; it
+/// is not an authorization boundary and is not exposed by a dispatcher.
 pub fn prepare_stake_ingress(
     gate: &ValidatedDailyLawWrite,
     open_position: OpenPositionPreCpiPlan,
