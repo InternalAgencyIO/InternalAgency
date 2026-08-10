@@ -16,11 +16,15 @@ use alloc::vec::Vec;
 use core::array;
 
 use crate::native_adapter::{
-    derive_pda, validate_atomic_write_preconditions, with_pda_signer_seeds, AtomicWriteBatch,
-    CreatePdaLifecycle, NativeAccountObservation, NativeAdapterError, NativeEconomyBinding,
-    StateWriteIntent,
+    derive_pda, seal_atomic_write_batch, validate_atomic_write_preconditions,
+    with_pda_signer_seeds, AtomicWriteBatch, CreatePdaLifecycle, NativeAccountObservation,
+    NativeAdapterError, NativeEconomyBinding, PdaIdentity, StateWriteIntent, StrictStateValue,
 };
-use crate::runtime_adapter::RuntimeProductionActiveConfig;
+use crate::runtime_adapter::{
+    prepare_create_state_account_info, RuntimeAdapterError, RuntimeProductionActiveConfig,
+};
+use crate::runtime_write_adapter::require_completed_ingress_binding;
+use crate::stake_ingress::CompletedStakeIngress;
 use crate::ValidatedDailyLawWrite;
 use solana_account_info::AccountInfo;
 use solana_cpi::{invoke, invoke_signed};
@@ -43,6 +47,7 @@ pub struct RuntimeAccountLifecycleTruth {
     pub system_create_account_supported: bool,
     pub system_allocate_assign_fund_supported: bool,
     pub sealed_postimage_write_supported: bool,
+    pub production_completed_ingress_position_lifecycle_boundary_present: bool,
     pub transaction_rollback_required_after_cpi: bool,
     pub token_cpi_supported: bool,
     pub instruction_abi_frozen: bool,
@@ -63,6 +68,7 @@ pub const RUNTIME_ACCOUNT_LIFECYCLE_TRUTH: RuntimeAccountLifecycleTruth =
         system_create_account_supported: true,
         system_allocate_assign_fund_supported: true,
         sealed_postimage_write_supported: true,
+        production_completed_ingress_position_lifecycle_boundary_present: true,
         transaction_rollback_required_after_cpi: true,
         token_cpi_supported: false,
         instruction_abi_frozen: false,
@@ -75,6 +81,7 @@ pub const RUNTIME_ACCOUNT_LIFECYCLE_TRUTH: RuntimeAccountLifecycleTruth =
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum RuntimeAccountLifecycleError {
     Native(NativeAdapterError),
+    Runtime(RuntimeAdapterError),
     AccountCountMismatch,
     ExistingIntentUnsupported,
     AccountBorrowFailed,
@@ -92,11 +99,18 @@ pub enum RuntimeAccountLifecycleError {
     PostCpiDataLengthMismatch,
     PostCpiDataNotZero,
     ActiveConfigCapabilityMismatch,
+    CompletedStakeIngressMismatch,
 }
 
 impl From<NativeAdapterError> for RuntimeAccountLifecycleError {
     fn from(value: NativeAdapterError) -> Self {
         Self::Native(value)
+    }
+}
+
+impl From<RuntimeAdapterError> for RuntimeAccountLifecycleError {
+    fn from(value: RuntimeAdapterError) -> Self {
+        Self::Runtime(value)
     }
 }
 
@@ -258,6 +272,94 @@ pub fn execute_create_state_batch_account_infos<'a, const N: usize>(
     )
 }
 
+fn require_active_config_capability(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+) -> Result<(), RuntimeAccountLifecycleError> {
+    if active_config.program_id() != binding.program_id()
+        || active_config.mint() != binding.mint()
+        || active_config.key() != binding.config()
+        || active_config.law_account_sha256() != gate.law_account_sha256()
+        || active_config.law_unix_timestamp() != gate.unix_timestamp()
+        || active_config.law_local_day() != gate.local_day()
+    {
+        return Err(RuntimeAccountLifecycleError::ActiveConfigCapabilityMismatch);
+    }
+    Ok(())
+}
+
+/// Bind a completed retained-V2 stake ingress to the one canonical Position
+/// identity that its owner payer may create. This is a structural lifecycle
+/// prerequisite only; it allocates nothing and grants no dispatch authority.
+pub fn validate_production_completed_ingress_position_lifecycle_binding(
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    completed: &CompletedStakeIngress,
+    payer_key: [u8; 32],
+) -> Result<PdaIdentity, RuntimeAccountLifecycleError> {
+    require_completed_ingress_binding(active_config, binding, completed)
+        .map_err(|_| RuntimeAccountLifecycleError::CompletedStakeIngressMismatch)?;
+    if completed.position.owner != payer_key {
+        return Err(RuntimeAccountLifecycleError::CompletedStakeIngressMismatch);
+    }
+    let identity = PdaIdentity::Position {
+        config: binding.config(),
+        operator: completed.position.owner,
+        position_id: completed.position.position_id,
+    };
+    let derived = derive_pda(binding, identity)?;
+    if completed.position.bump != derived.bump {
+        return Err(RuntimeAccountLifecycleError::CompletedStakeIngressMismatch);
+    }
+    Ok(identity)
+}
+
+/// Create exactly the Position PDA produced by a completed retained-V2 stake
+/// ingress. The opaque production-ACTIVE Config and Daily Law capability are
+/// checked before payer/target inspection. The payer must be the position
+/// owner, the PDA seeds and bump are reconstructed internally, and the sealed
+/// postimage is executed through the existing atomic System CPI lifecycle.
+/// This remains an internal executor: no instruction ABI, entrypoint, or
+/// dispatcher exposes it.
+#[inline(never)]
+pub fn execute_production_completed_ingress_position_create_account_infos<'a>(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    completed: &CompletedStakeIngress,
+    payer: &AccountInfo<'a>,
+    position: &AccountInfo<'a>,
+    system: &AccountInfo<'a>,
+) -> Result<RuntimeAccountLifecycleReceipt<1>, RuntimeAccountLifecycleError> {
+    require_active_config_capability(gate, active_config, binding)?;
+    let identity = validate_production_completed_ingress_position_lifecycle_binding(
+        active_config,
+        binding,
+        completed,
+        payer.key.to_bytes(),
+    )?;
+    let intent = prepare_create_state_account_info(
+        gate,
+        binding,
+        payer,
+        completed.position.owner,
+        position,
+        identity,
+        StrictStateValue::Position(completed.position),
+    )?;
+    let batch = seal_atomic_write_batch(gate, binding, [intent])?;
+    execute_production_active_create_state_batch_account_infos(
+        gate,
+        active_config,
+        binding,
+        batch,
+        core::slice::from_ref(position),
+        core::slice::from_ref(payer),
+        system,
+    )
+}
+
 /// Production-shaped PDA creation path. The opaque Config capability is
 /// checked before System Program validation, account-count checks, borrows, or
 /// the first CPI, so an inactive/staging/rehearsal Config cannot reach account
@@ -295,15 +397,7 @@ fn execute_production_active_create_state_batch_with<'a, const N: usize>(
     system: &AccountInfo<'a>,
     invoker: &mut impl SystemCpiInvoker,
 ) -> Result<RuntimeAccountLifecycleReceipt<N>, RuntimeAccountLifecycleError> {
-    if active_config.program_id() != binding.program_id()
-        || active_config.mint() != binding.mint()
-        || active_config.key() != binding.config()
-        || active_config.law_account_sha256() != gate.law_account_sha256()
-        || active_config.law_unix_timestamp() != gate.unix_timestamp()
-        || active_config.law_local_day() != gate.local_day()
-    {
-        return Err(RuntimeAccountLifecycleError::ActiveConfigCapabilityMismatch);
-    }
+    require_active_config_capability(gate, active_config, binding)?;
     execute_create_state_batch_with(gate, binding, batch, targets, payers, system, invoker)
 }
 
@@ -542,12 +636,14 @@ mod tests {
         derive_faction_config, derive_faction_reward_manifest, derive_faction_week,
         prepare_create_state_account, seal_atomic_write_batch, PdaIdentity, StrictStateValue,
     };
+    use crate::stake_ingress::{DelegateSnapshot, SourceTokenState};
     use crate::{
         decode_eligibility_state, encode_config_genesis_state,
         runtime_adapter::authenticate_production_active_config_account_info, verify_daily_law_open,
         CanonicalDailyLawBinding, ConfigGenesisState, ConfigState, EligibilityState, GenesisPhase,
-        ReadonlyDailyLawAccount, CONFIG_GENESIS_ACCOUNT_LEN, LAW_STATE_LEN, LAW_STATE_MAGIC,
-        LAW_STATE_VERSION, MAINNET_SUPPLY,
+        LaneState, PositionState, ReadonlyDailyLawAccount, ReadonlyTokenState,
+        CONFIG_GENESIS_ACCOUNT_LEN, ECOSYSTEM, LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION,
+        LIQUIDITY, MAINNET_SUPPLY, TREASURY,
     };
     use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day, SolanaDailyDecision};
     use solana_sdk_ids::system_program;
@@ -610,6 +706,88 @@ mod tests {
         let mut lamports = 1;
         let account = AccountInfo::new(&key, false, false, &mut lamports, &mut data, &owner, false);
         authenticate_production_active_config_account_info(gate, binding, &account).unwrap()
+    }
+
+    fn canonical_lane(binding: &NativeEconomyBinding, lane: u8, reserved: u64) -> LaneState {
+        let config = binding.config();
+        let identity = PdaIdentity::LaneState { config, lane };
+        let token = derive_pda(binding, PdaIdentity::LaneToken { config, lane }).unwrap();
+        LaneState {
+            config,
+            token_account: token.key,
+            beneficiary: [0xA0 | lane; 32],
+            total: 10_000,
+            genesis_unlocked: 1_000,
+            cliff_week: 0,
+            linear_end_week: 104,
+            reserved,
+            paid: 0,
+            principal_claimed: 0,
+            lane,
+            reward_source: true,
+            bump: derive_pda(binding, identity).unwrap().bump,
+            token_bump: token.bump,
+        }
+    }
+
+    fn completed_ingress(
+        active_config: &RuntimeProductionActiveConfig,
+        binding: &NativeEconomyBinding,
+        principal: u64,
+    ) -> CompletedStakeIngress {
+        let mut config = active_config.state().config;
+        config.staked_principal = config.staked_principal.checked_add(principal).unwrap();
+        let identity = PdaIdentity::Position {
+            config: binding.config(),
+            operator: PAYER,
+            position_id: 7,
+        };
+        let position = PositionState {
+            config: binding.config(),
+            owner: PAYER,
+            position_id: 7,
+            principal,
+            accepted_week: 4,
+            first_accrual_week: 5,
+            term_weeks: 52,
+            annual_rate_bps: 1_000,
+            treasury_reserved: 20,
+            ecosystem_reserved: 30,
+            liquidity_reserved: 40,
+            paid: 0,
+            settled_mask: 0,
+            agency_index: u32::MAX,
+            role: 0,
+            principal_returned: false,
+            closed: false,
+            bump: derive_pda(binding, identity).unwrap().bump,
+        };
+        CompletedStakeIngress {
+            config,
+            position,
+            treasury: canonical_lane(binding, TREASURY, 20),
+            ecosystem: canonical_lane(binding, ECOSYSTEM, 30),
+            liquidity: canonical_lane(binding, LIQUIDITY, 40),
+            source: SourceTokenState {
+                token: ReadonlyTokenState {
+                    key: [0x91; 32],
+                    mint: binding.mint(),
+                    owner: PAYER,
+                    amount: 10_000,
+                },
+                delegate: DelegateSnapshot {
+                    delegate: None,
+                    delegated_amount: 0,
+                },
+                cpi_guard_locked: false,
+            },
+            stake: ReadonlyTokenState {
+                key: config.stake_token_account,
+                mint: binding.mint(),
+                owner: binding.config(),
+                amount: config.staked_principal,
+            },
+        }
     }
 
     fn decision_for_inputs(timestamp: i64) -> SolanaDailyDecision {
@@ -1124,6 +1302,72 @@ mod tests {
     }
 
     #[test]
+    fn completed_ingress_position_lifecycle_binding_is_exact_and_non_authorizing() {
+        let binding = binding();
+        let gate = open_gate();
+        let active_config = production_active_config(&gate, &binding);
+        let completed = completed_ingress(&active_config, &binding, 250);
+        assert_eq!(
+            validate_production_completed_ingress_position_lifecycle_binding(
+                &active_config,
+                &binding,
+                &completed,
+                PAYER,
+            ),
+            Ok(PdaIdentity::Position {
+                config: binding.config(),
+                operator: PAYER,
+                position_id: 7,
+            })
+        );
+
+        let mut hostile = completed;
+        hostile.position.owner = OPERATOR_A;
+        assert_eq!(
+            validate_production_completed_ingress_position_lifecycle_binding(
+                &active_config,
+                &binding,
+                &hostile,
+                PAYER,
+            ),
+            Err(RuntimeAccountLifecycleError::CompletedStakeIngressMismatch)
+        );
+        hostile = completed;
+        hostile.position.bump ^= 1;
+        assert_eq!(
+            validate_production_completed_ingress_position_lifecycle_binding(
+                &active_config,
+                &binding,
+                &hostile,
+                PAYER,
+            ),
+            Err(RuntimeAccountLifecycleError::CompletedStakeIngressMismatch)
+        );
+        hostile = completed;
+        hostile.config.agency_count = 1;
+        assert_eq!(
+            validate_production_completed_ingress_position_lifecycle_binding(
+                &active_config,
+                &binding,
+                &hostile,
+                PAYER,
+            ),
+            Err(RuntimeAccountLifecycleError::CompletedStakeIngressMismatch)
+        );
+        hostile = completed;
+        hostile.stake.amount -= 1;
+        assert_eq!(
+            validate_production_completed_ingress_position_lifecycle_binding(
+                &active_config,
+                &binding,
+                &hostile,
+                PAYER,
+            ),
+            Err(RuntimeAccountLifecycleError::CompletedStakeIngressMismatch)
+        );
+    }
+
+    #[test]
     fn cpi_error_is_propagated_and_truth_stays_nonactivating() {
         assert_eq!(
             RUNTIME_ACCOUNT_LIFECYCLE_TRUTH,
@@ -1137,6 +1381,7 @@ mod tests {
                 system_create_account_supported: true,
                 system_allocate_assign_fund_supported: true,
                 sealed_postimage_write_supported: true,
+                production_completed_ingress_position_lifecycle_boundary_present: true,
                 transaction_rollback_required_after_cpi: true,
                 token_cpi_supported: false,
                 instruction_abi_frozen: false,

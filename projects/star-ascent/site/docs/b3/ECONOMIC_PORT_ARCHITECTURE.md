@@ -194,9 +194,14 @@ now authenticates the exact treasury, ecosystem, and liquidity AccountInfos in
 fixed order and seals their completed-ingress CAS postimages before mutation.
 The production ledger executor then acquires all four Config/lane mutable
 borrows, revalidates every preimage, and writes all four postimages only after
-every check passes. It is not yet composed with the ingress CPI callback or
-exact Position-PDA lifecycle. There is still no public lifecycle dispatcher,
-frozen identity, entrypoint, or public ABI; those remain the security boundary.
+every check passes. A separate production lifecycle boundary now accepts only
+that exact completed ingress, proves the owner-signer payer, derives the
+`Position` PDA from canonical Config/owner/position-id seeds, verifies the
+retained bump, seals the exact Position postimage, and routes creation through
+the production-ACTIVE System CPI executor. It is not yet composed with the
+ingress CPI callback and four-account ledger commit as one handler. There is
+still no public lifecycle dispatcher, frozen identity, entrypoint, or public
+ABI; those remain the security boundary.
 
 Burning is different from transferring. The sole core-cap burn path uses
 Token-2022 `BurnChecked`, signed by the economic vault-authority PDA. It is not
@@ -748,8 +753,14 @@ postimage. The older unphased entry is retained only for the pinned local
 structural lifecycle fixture. Any later error depends on Solana's atomic
 transaction rollback. Arbitrary seeds, owners, instructions, Token-2022 CPI,
 instruction decoding, entrypoint, dispatcher, and public exposure remain
-absent. The primitive has not been executed on Devnet, completes no handler,
-does not freeze production identities, and keeps Mainnet HOLD.
+absent. The same feature now provides one exact completed-ingress Position
+boundary: it binds the retained-V2 completed Config/lane/stake facts, requires
+the Position owner as the system payer, reconstructs canonical Position seeds
+and bump, and seals that exact Position state into the existing
+production-ACTIVE lifecycle executor. This still is not composed with ingress
+CPI plus the Config/lane commit as one handler. The primitive has not been
+executed on Devnet, completes no handler, does not freeze production identities,
+and keeps Mainnet HOLD.
 
 The same feature now contains a second, explicitly nonactivating rehearsal
 surface at

@@ -203,7 +203,7 @@ fn require_active_config_capability(
     Ok(())
 }
 
-fn require_completed_ingress_binding(
+pub(crate) fn require_completed_ingress_binding(
     active_config: &RuntimeProductionActiveConfig,
     binding: &NativeEconomyBinding,
     completed: &CompletedStakeIngress,

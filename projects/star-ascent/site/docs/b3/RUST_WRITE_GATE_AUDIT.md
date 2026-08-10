@@ -375,8 +375,12 @@ facts are not AccountInfo authentication inside the Config CAS. A separate
 preflight now authenticates the exact three lane AccountInfos in fixed order and
 seals their completed-ingress CAS postimages. The production ledger executor
 then acquires all four Config/lane mutable borrows, revalidates every preimage,
-and commits all four postimages only after every check passes. It is not yet
-composed with ingress CPI or exact Position-PDA lifecycle.
+and commits all four postimages only after every check passes. A separate exact
+Position lifecycle boundary now accepts only the same completed ingress, binds
+the owner payer, derives the canonical Config/owner/position-id PDA and bump,
+seals the retained-V2 Position postimage, and invokes the production-ACTIVE
+System CPI executor. It is not yet composed atomically with ingress CPI and the
+four-account ledger commit.
 No handler or release gate is complete.
 The older unphased combined entry remains only for the pinned structural SBF
 fixture and is not the production route.
@@ -692,8 +696,11 @@ atomic transaction rollback. The older unphased executor is retained only for
 the pinned local structural lifecycle fixture. This is a real internal System
 Program CPI primitive, but it has no arbitrary seed/owner/instruction input,
 Token-2022 CPI, production instruction ABI, entrypoint, dispatcher, public
-exposure, or production identity freeze. It has not executed on Devnet,
-completes no handler, and leaves Mainnet HOLD.
+exposure, or production identity freeze. Its exact completed-ingress Position
+boundary proves the owner payer and canonical Position seeds/bump before
+sealing the retained-V2 postimage, but remains uncomposed with the ingress CPI
+and Config/lane persistence callback. It has not executed on Devnet, completes
+no handler, and leaves Mainnet HOLD.
 
 ## Internal V2 mutation paths
 

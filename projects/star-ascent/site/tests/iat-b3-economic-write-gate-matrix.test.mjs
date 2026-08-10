@@ -617,6 +617,26 @@ test("the runtime account lifecycle executes only sealed canonical System CPI ba
   );
   assert.match(
     economyRuntimeAccountLifecycleSource,
+    /pub fn validate_production_completed_ingress_position_lifecycle_binding/u,
+  );
+  assert.match(
+    economyRuntimeAccountLifecycleSource,
+    /pub fn execute_production_completed_ingress_position_create_account_infos/u,
+  );
+  assert.match(
+    economyRuntimeAccountLifecycleSource,
+    /production_completed_ingress_position_lifecycle_boundary_present: true/u,
+  );
+  assert.match(
+    economyRuntimeAccountLifecycleSource,
+    /PdaIdentity::Position \{[\s\S]+operator: completed\.position\.owner,[\s\S]+position_id: completed\.position\.position_id/u,
+  );
+  assert.match(
+    economyRuntimeAccountLifecycleSource,
+    /prepare_create_state_account_info\([\s\S]+StrictStateValue::Position\(completed\.position\)[\s\S]+seal_atomic_write_batch/u,
+  );
+  assert.match(
+    economyRuntimeAccountLifecycleSource,
     /production_active_config_capability_required: true/u,
   );
   assert.match(economyRuntimeAccountLifecycleSource, /RuntimeProductionActiveConfig/u);
