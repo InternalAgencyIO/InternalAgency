@@ -82,7 +82,7 @@ const ARTIFACTS = Object.freeze({
   ),
   economyMatrix: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-economic-write-gates.v1.json",
-    "047ca2f9f098a6408e454534c50fc70b5d07b0476c04eb22c3b1659370b11e5b",
+    "6ce0801c03247b13b596ab0e75f1c5b9f53488bf66bc0f40051cc2b0506f7cc1",
   ),
   identity: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
