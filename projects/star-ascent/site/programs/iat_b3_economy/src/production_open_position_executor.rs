@@ -19,7 +19,7 @@ use crate::production_open_position::{
 };
 use crate::runtime_adapter::{
     authenticate_runtime_production_active_writable_config, RuntimeAdapterError,
-    RuntimeValidatedDailyLawWrite,
+    RuntimeProductionActiveConfig, RuntimeValidatedDailyLawWrite,
 };
 use crate::stake_ingress::{SourceTokenState, STAKE_INGRESS_SEED};
 use crate::stake_ingress_runtime::{
@@ -191,9 +191,40 @@ impl ProductionOpenPositionExecutionReceipt {
     }
 }
 
+#[cfg(test)]
 struct ReconstructedOpenPosition {
     input: PrepareOpenPositionInput,
     source: SourceTokenState,
+}
+
+/// Caller-owned storage for the production preparation phases. Keeping the
+/// reconstructed retained-V2 input and ACTIVE Config capability in a single
+/// non-Copy slot lets each large preparation value end its lifetime before
+/// the authenticated ingress/persistence frame begins.
+struct PreparedOpenPositionExecution {
+    input: Option<PrepareOpenPositionInput>,
+    active_config: Option<RuntimeProductionActiveConfig>,
+    owner: [u8; 32],
+    config: [u8; 32],
+    position: [u8; 32],
+    position_id: u64,
+    principal: u64,
+    prior_delegate_index: Option<usize>,
+}
+
+impl PreparedOpenPositionExecution {
+    const fn empty() -> Self {
+        Self {
+            input: None,
+            active_config: None,
+            owner: [0; 32],
+            config: [0; 32],
+            position: [0; 32],
+            position_id: 0,
+            principal: 0,
+            prior_delegate_index: None,
+        }
+    }
 }
 
 /// Execute the exact retained-V2 OpenPosition ABI through the existing
@@ -211,6 +242,36 @@ pub fn execute_runtime_production_open_position_account_infos(
     instruction_data: &[u8],
     accounts: &[AccountInfo<'_>],
 ) -> Result<ProductionOpenPositionExecutionReceipt, ProductionOpenPositionExecutorError> {
+    let mut prepared = PreparedOpenPositionExecution::empty();
+    prepare_execution_into(
+        program_id,
+        runtime_law,
+        binding,
+        instruction_data,
+        accounts,
+        &mut prepared,
+    )?;
+    let mut receipt = None;
+    execute_prepared_into(
+        program_id,
+        runtime_law,
+        binding,
+        accounts,
+        &mut prepared,
+        &mut receipt,
+    )?;
+    receipt.ok_or(ProductionOpenPositionExecutorError::PlanMismatch)
+}
+
+#[inline(never)]
+fn prepare_execution_into(
+    program_id: &Pubkey,
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    instruction_data: &[u8],
+    accounts: &[AccountInfo<'_>],
+    execution: &mut PreparedOpenPositionExecution,
+) -> Result<(), ProductionOpenPositionExecutorError> {
     require_admissible_account_count(accounts)?;
 
     // Freeze V2 error ordering across its exact base-account boundary before
@@ -231,9 +292,46 @@ pub fn execute_runtime_production_open_position_account_infos(
         return Err(ProductionOpenPositionExecutorError::ProgramIdentityMismatch);
     }
     require_supplemental_accounts(program_id, runtime_law, &prepared, accounts)?;
-    let reconstructed = reconstruct_exact_input(runtime_law, binding, &prepared, accounts)?;
-    let prior_delegate = require_exact_prior_delegate_shape(&reconstructed.source, accounts)?;
+    let source = reconstruct_exact_input_into(binding, &prepared, accounts, &mut execution.input)?;
+    require_reconstructed_plan_equivalence(runtime_law, &prepared, execution)?;
+    let prior_delegate = require_exact_prior_delegate_shape(&source, accounts)?;
     require_exact_resolved_ingress_hook_graph(prepared.plan().principal, accounts)?;
+
+    execution.owner = prepared.owner();
+    execution.config = prepared.config();
+    execution.position = prepared.position();
+    execution.position_id = prepared.plan().position_id;
+    execution.principal = prepared.plan().principal;
+    execution.prior_delegate_index = prior_delegate.map(|_| PRIOR_DELEGATE_INDEX);
+    execution.active_config = Some(active_config);
+    Ok(())
+}
+
+#[inline(never)]
+fn execute_prepared_into(
+    program_id: &Pubkey,
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    execution: &mut PreparedOpenPositionExecution,
+    receipt: &mut Option<ProductionOpenPositionExecutionReceipt>,
+) -> Result<(), ProductionOpenPositionExecutorError> {
+    let active_config = execution
+        .active_config
+        .take()
+        .ok_or(ProductionOpenPositionExecutorError::PlanMismatch)?;
+    let input = execution
+        .input
+        .take()
+        .ok_or(ProductionOpenPositionExecutorError::PlanMismatch)?;
+    let prior_delegate = match execution.prior_delegate_index {
+        None => None,
+        Some(index) => Some(
+            accounts
+                .get(index)
+                .ok_or(ProductionOpenPositionExecutorError::PlanMismatch)?,
+        ),
+    };
 
     let gate = runtime_law.gate();
     let law_binding = CanonicalDailyLawBinding::new(
@@ -278,19 +376,20 @@ pub fn execute_runtime_production_open_position_account_infos(
         &accounts[ZK_PROOF_PROGRAM_INDEX],
         &law_binding,
         &accounts[LAW_STATE_INDEX],
-        Box::new(reconstructed.input),
+        Box::new(input),
         runtime_accounts,
         persistence,
     )?;
 
-    Ok(ProductionOpenPositionExecutionReceipt {
-        owner: prepared.owner(),
-        config: prepared.config(),
-        position: prepared.position(),
-        position_id: prepared.plan().position_id,
-        principal: prepared.plan().principal,
+    *receipt = Some(ProductionOpenPositionExecutionReceipt {
+        owner: execution.owner,
+        config: execution.config,
+        position: execution.position,
+        position_id: execution.position_id,
+        principal: execution.principal,
         runtime,
-    })
+    });
+    Ok(())
 }
 
 fn require_admissible_account_count(
@@ -383,12 +482,16 @@ fn require_readonly_owned_account(
     Ok(())
 }
 
-fn reconstruct_exact_input(
-    runtime_law: &RuntimeValidatedDailyLawWrite,
+#[inline(never)]
+fn reconstruct_exact_input_into(
     binding: &NativeEconomyBinding,
     prepared: &PreparedProductionOpenPosition,
     accounts: &[AccountInfo<'_>],
-) -> Result<ReconstructedOpenPosition, ProductionOpenPositionExecutorError> {
+    input_slot: &mut Option<PrepareOpenPositionInput>,
+) -> Result<SourceTokenState, ProductionOpenPositionExecutorError> {
+    if input_slot.is_some() {
+        return Err(ProductionOpenPositionExecutorError::PlanMismatch);
+    }
     let eligibility_data = accounts[ELIGIBILITY_INDEX]
         .try_borrow_data()
         .map_err(|_| ProductionOpenPositionExecutorError::AccountBorrowFailed)?;
@@ -429,9 +532,40 @@ fn reconstruct_exact_input(
         principal: plan.principal,
         position_bump: plan.position_bump,
     };
-    if prepare_open_position(runtime_law.gate(), input)? != *plan {
+    *input_slot = Some(input);
+    Ok(source)
+}
+
+#[inline(never)]
+fn require_reconstructed_plan_equivalence(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    prepared: &PreparedProductionOpenPosition,
+    execution: &PreparedOpenPositionExecution,
+) -> Result<(), ProductionOpenPositionExecutorError> {
+    let input = execution
+        .input
+        .as_ref()
+        .ok_or(ProductionOpenPositionExecutorError::PlanMismatch)?;
+    if prepare_open_position(runtime_law.gate(), *input)? != *prepared.plan() {
         return Err(ProductionOpenPositionExecutorError::PlanMismatch);
     }
+    Ok(())
+}
+
+#[cfg(test)]
+fn reconstruct_exact_input(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    prepared: &PreparedProductionOpenPosition,
+    accounts: &[AccountInfo<'_>],
+) -> Result<ReconstructedOpenPosition, ProductionOpenPositionExecutorError> {
+    let mut execution = PreparedOpenPositionExecution::empty();
+    let source = reconstruct_exact_input_into(binding, prepared, accounts, &mut execution.input)?;
+    require_reconstructed_plan_equivalence(runtime_law, prepared, &execution)?;
+    let input = execution
+        .input
+        .take()
+        .ok_or(ProductionOpenPositionExecutorError::PlanMismatch)?;
     Ok(ReconstructedOpenPosition { input, source })
 }
 
@@ -1167,6 +1301,33 @@ mod tests {
         assert!(!truth.devnet_transaction_rollback_proven);
         assert!(truth.mainnet_hold);
         assert!(PRODUCTION_OPEN_POSITION_EXECUTOR_STATUS.contains("MAINNET_HOLD"));
+    }
+
+    #[test]
+    fn partial_private_execution_slots_fail_before_runtime_or_writes() {
+        let binding = binding();
+        let runtime_law = runtime_law();
+        let mut fixture = Fixture::new(&binding, false);
+        let before = fixture.snapshot();
+        let (result, receipt) = fixture.with_infos(|accounts| {
+            let mut execution = PreparedOpenPositionExecution::empty();
+            let mut receipt = None;
+            let result = execute_prepared_into(
+                &Pubkey::new_from_array(ECONOMY_PROGRAM),
+                &runtime_law,
+                &binding,
+                accounts,
+                &mut execution,
+                &mut receipt,
+            );
+            (result, receipt)
+        });
+        assert!(matches!(
+            result,
+            Err(ProductionOpenPositionExecutorError::PlanMismatch)
+        ));
+        assert!(receipt.is_none());
+        assert_eq!(fixture.snapshot(), before);
     }
 
     #[test]
