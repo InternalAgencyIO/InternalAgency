@@ -13,6 +13,7 @@ use crate::{
 use solana_account_info::AccountInfo;
 use solana_pubkey::Pubkey;
 use solana_sdk_ids::zk_elgamal_proof_program;
+use solana_zk_sdk::encryption::elgamal::ElGamalPubkey;
 use spl_token_2022_interface::{
     extension::{
         confidential_transfer::{ConfidentialTransferAccount, ConfidentialTransferMint},
@@ -76,7 +77,7 @@ pub const TOKEN_2022_HOST_COMPATIBILITY_TRUTH: Token2022HostCompatibilityTruth =
         token_cpi_executed: false,
         proof_generation_verified: false,
         proof_verification_verified: false,
-        elgamal_pubkey_curve_validity_verified: false,
+        elgamal_pubkey_curve_validity_verified: true,
         deployed_program_bytecode_authenticated: false,
         instruction_abi_frozen: false,
         entrypoint_exposed: false,
@@ -114,6 +115,7 @@ pub enum Token2022HostError {
     TokenAccountBaseMismatch,
     TokenAccountExtensionMismatch,
     ConfidentialAccountNotReady,
+    ElGamalPubkeyCurveInvalid,
     ConfidentialCounterInvalid,
     TransferInProgress,
 }
@@ -452,9 +454,9 @@ pub fn authenticate_canonical_mint_account_info(
 }
 
 /// Authenticate one configured, ready confidential token account against a
-/// previously authenticated mint capability. Ciphertext decryption, ElGamal
-/// curve validity, and proof validity are deliberately not represented by the
-/// returned capability.
+/// previously authenticated mint capability. The configured ElGamal public key
+/// must decode to a Ristretto point. Ciphertext decryption and proof validity
+/// are deliberately not represented by the returned capability.
 pub fn authenticate_confidential_token_account_info(
     mint_capability: &ReadonlyCanonicalMintCapability,
     binding: &ConfidentialTokenAccountBinding,
@@ -542,6 +544,8 @@ pub fn authenticate_confidential_token_account_info(
     if !bool::from(confidential.approved) || confidential.elgamal_pubkey == Default::default() {
         return Err(Token2022HostError::ConfidentialAccountNotReady);
     }
+    ElGamalPubkey::try_from(confidential.elgamal_pubkey)
+        .map_err(|_| Token2022HostError::ElGamalPubkeyCurveInvalid)?;
     let pending_balance_credit_counter = u64::from(confidential.pending_balance_credit_counter);
     let maximum_pending_balance_credit_counter =
         u64::from(confidential.maximum_pending_balance_credit_counter);

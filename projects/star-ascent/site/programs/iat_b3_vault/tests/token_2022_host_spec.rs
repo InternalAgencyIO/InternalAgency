@@ -26,6 +26,10 @@ const TOKEN_ACCOUNT: [u8; 32] = [0x51; 32];
 const WALLET: [u8; 32] = [0x52; 32];
 const OTHER_WALLET: [u8; 32] = [0x53; 32];
 const SUPPLY: u64 = 1_000_000_000_000_000_000;
+const VALID_ELGAMAL_PUBKEY: [u8; 32] = [
+    0xe2, 0xf2, 0xae, 0x0a, 0x6a, 0xbc, 0x4e, 0x71, 0xa8, 0x84, 0xa9, 0x61, 0xc5, 0x00, 0x51, 0x5f,
+    0x58, 0xe3, 0x0b, 0x6a, 0xa5, 0x82, 0xdd, 0x8d, 0xb6, 0xa6, 0x59, 0x45, 0xe0, 0x8d, 0x2d, 0x76,
+];
 
 struct TestAccount {
     key: Pubkey,
@@ -204,7 +208,7 @@ fn build_token_account_data(shape: TokenAccountShape) -> Vec<u8> {
                     .init_extension::<ConfidentialTransferAccount>(false)
                     .unwrap();
                 extension.approved = shape.approved.into();
-                extension.elgamal_pubkey = [0x71; 32].into();
+                extension.elgamal_pubkey = VALID_ELGAMAL_PUBKEY.into();
                 extension.allow_confidential_credits = true.into();
                 extension.allow_non_confidential_credits = true.into();
                 extension.pending_balance_credit_counter = shape.pending_counter.into();
@@ -309,7 +313,7 @@ fn exact_versions_and_capability_truth_remain_nonactivating() {
     assert!(!truth.token_cpi_executed);
     assert!(!truth.proof_generation_verified);
     assert!(!truth.proof_verification_verified);
-    assert!(!truth.elgamal_pubkey_curve_validity_verified);
+    assert!(truth.elgamal_pubkey_curve_validity_verified);
     assert!(!truth.deployed_program_bytecode_authenticated);
     assert!(!truth.devnet_verified);
     assert!(!truth.release_gate_complete);
@@ -600,6 +604,22 @@ fn confidential_account_rejects_borrow_readiness_counter_and_transfer_hazards() 
     assert_eq!(
         authenticate_confidential_token_account_info(&mint, &account_binding(), &unapproved.info(),),
         Err(Token2022HostError::ConfidentialAccountNotReady)
+    );
+
+    let mut invalid_curve = TestAccount::data(
+        TOKEN_ACCOUNT,
+        TOKEN_2022_PROGRAM_ID.to_bytes(),
+        mutate_account_confidential(|confidential| {
+            confidential.elgamal_pubkey = [0xff; 32].into();
+        }),
+    );
+    assert_eq!(
+        authenticate_confidential_token_account_info(
+            &mint,
+            &account_binding(),
+            &invalid_curve.info(),
+        ),
+        Err(Token2022HostError::ElGamalPubkeyCurveInvalid)
     );
 
     let invalid_counter_shape = TokenAccountShape {
