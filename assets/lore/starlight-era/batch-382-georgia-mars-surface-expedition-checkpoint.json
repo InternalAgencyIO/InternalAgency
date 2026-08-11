@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-incomplete-after-fresh-round-12",
+  "status": "active-four-scene-gate-fresh-round-13-materialized",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -2476,6 +2476,46 @@
           },
           "accepted": false
         }
+      },
+      "freshRound13": {
+        "path": "tmp/world-195x4/batch-382/scene-1551-fresh-round-13-prompt.txt",
+        "sha256": "AD77DCA287371A901649CF21225B6AC19BD6846E6FC50DE89F3E291DFB577692",
+        "chars": 14198,
+        "sourceReference": "tmp/world-195x4/batch-382/raw/fresh-round-12/scene-1551.png",
+        "sourceReferenceSha256": "C4DFA5B8236B6DB16B1E9228E8627653E7BC25039584C046907FE974495DFC9F",
+        "storedRollsChanged": false,
+        "freshRound": 13,
+        "referenceGuidedEdit": true,
+        "solePermittedChange": "replace existing paper target with a smaller coordinate-locked paper target",
+        "measuredSourceGeometry": {
+          "canvas": {
+            "width": 940,
+            "height": 1672
+          },
+          "muzzlePlugCenter": {
+            "x": 872,
+            "y": 603
+          },
+          "muzzleTipMaxX": 877,
+          "existingDiamondCenterApprox": {
+            "x": 885,
+            "y": 669
+          }
+        },
+        "replacementTargetGeometry": {
+          "center": {
+            "x": 918,
+            "y": 603
+          },
+          "bounds": {
+            "left": 898,
+            "right": 938,
+            "top": 583,
+            "bottom": 623
+          },
+          "cleanAirGapPixels": 21
+        },
+        "prompt": "Use case: precise-object-edit.\nInput image dimensions: 940 by 1672 pixels. Preserve the exact supplied Batumi image pixel-for-pixel except for the existing white paper target and its black route diamond. Preserve all four adult identities and faces, heavy rain, Batumi skyline, four distinct outfits, Radiance's sole opaque rainbow knee socks and open back, Ellie's visible midriff, Alia's strapless opaque front, visible midriff and open back, the controlled dip, sustained Radiance-ECE eye line, PAWS and MAX, separate blue route map, compass table, inert pistol, complete sand backstop, transparent safety panels, and exactly eight currently visible traceable human hands.\n\nROUND 13 FRESH EDIT: REPLACE ONLY THE PAPER TARGET\nDelete only the current too-large white paper square and its black diamond from the sand backstop. In its place mount one smaller but plainly visible white paper square exactly 40 by 40 image pixels, centered at image coordinate x=918, y=603, with one centered black non-humanoid route diamond. Keep the whole replacement inside the frame: left edge x=898, right edge x=938, top edge y=583, bottom edge y=623. The exact diamond center at y=603 must be on the exact same horizontal pixel row as the unchanged orange muzzle-plug center at y=603. The unchanged orange muzzle tip ends near x=877, so the replacement paper begins at x=898 and leaves at least 20 visible pixels of clean empty air between muzzle and paper. Do not move, tilt, rotate, resize, redraw, or alter Alia, either hand, either arm, the inert pistol, the orange muzzle plug, the backstop, the safety panels, or any other image element. Keep the pistol perfectly horizontal. No beam, line, tracer, cord, string, dashed path, glow trail, or trajectory mark.\n\nDo not change the hand map: Ellie has two support palms on Radiance; Radiance has one palm on Ellie's shoulder and one hand resting on ECE's left fist; ECE has one fist on each compass handle; Alia has exactly two mission hands. Exactly eight arms and eight hands, two per woman. Preserve Alia's straight trigger index outside the guard. The 40-pixel replacement paper target is the sole permitted change.\n\nAUTHORITATIVE STORED SCENE SPECIFICATION\nUse case: photorealistic-natural.\nAsset: fresh 9:16 full-length public-fashion editorial, Georgia Batch 382 fresh round 13.\n\nSETTING AND THEME\nReal Batumi Boulevard dominates: the Black Sea horizon, Alphabet Tower, Ferris wheel, palms, and modern Adjara skyline remain large and recognizable. Mars-surface expedition language appears only in couture construction and portable observation-court details.\nWeather roll 35 = heavy rain curtain; make it unmistakable while all footing remains dry, stable, and nonslip. Mode = theme-led original. Active unrelated theme = Mars-surface expedition couture. No copied space-agency, airline, military, police, coast-guard, emergency-service, or official uniform, logo, badge, or insignia.\n\nADULT CAST AND IDENTITY\nShow exactly 4 clearly adult fictional people, all visibly over 28: blonde Radiance; dark-haired Ellie; Black Alia with the only high sculptural braided ponytail; brunette AI ECE. Preserve four distinct anchored faces and bodies with no clone, merge, replacement, or age shift. Male selector = inactive. Show no man and no fifth adult.\n\nDETERMINISTIC CHARACTER ROLLS\nRadiance: emotion roll 56 = aching romantic longing; visible-midriff roll 98 = inactive; strapless roll 37 = inactive; fully-open-back roll 14 = ACTIVE.\nEllie: emotion roll 30 = hope; visible-midriff roll 8 = ACTIVE; strapless roll 59 = inactive; fully-open-back roll 64 = inactive.\nAlia: emotion roll 38 = magnetic confidence; visible-midriff roll 40 = ACTIVE; strapless roll 3 = ACTIVE; fully-open-back roll 16 = ACTIVE.\nAI ECE: emotion roll 92 = guilt and remorse; visible-midriff roll 58 = inactive; strapless roll 53 = inactive; fully-open-back roll 58 = inactive.\nExpress each emotion distinctly through eyes, face, torso direction, and posture without caricature.\n\nFOUR DISTINCT OUTFIT FINGERPRINTS\nRadiance: solar-gold aerobrake-halo yoke over an opaque Black-Sea-cobalt high-low sheath with Mars-copper lens pucks and halo-arch heels; the rolled neckline keeps a secure opaque sleeveless architectural bodice with a high public-fashion neckline and complete front coverage; the rolled waist stays fully covered through an opaque engineered join; the rolled back is fully open-back couture from shoulder blades to a high secure waist, shown from a respectful rear three-quarter angle, with no crossing strap, back band, fabric panel, halter, or illusion mesh and with fully opaque front and side coverage; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory.\nEllie: snow-white solar-foil fan-sleeve jumpsuit with opaque sulfur-teal side panels, basalt heat-baffle ribs and articulated wedge boots; the rolled neckline keeps a secure opaque sleeveless architectural bodice with a high public-fashion neckline and complete front coverage; the rolled waist uses a restrained three-centimeter visible midriff band between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory.\nAlia: Mars-copper dust-shield origami tabard over an opaque cobalt pleated skort with braided palm-green conduits and angular shield pumps; the rolled neckline overrides the base as a secure opaque strapless sculpted bodice with a high straight top edge, complete front coverage, completely bare shoulders, and no straps, sleeves, halter, collar, neckband, or illusion mesh; the rolled waist uses a restrained three-centimeter visible midriff band between separate opaque upper and lower constructions; the rolled back is fully open-back couture from shoulder blades to a high secure waist, shown from a respectful rear three-quarter angle, with no crossing strap, back band, fabric panel, halter, or illusion mesh and with fully opaque front and side coverage; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory.\nAI ECE: basalt rover-joint segmented peplum jacket over opaque solar-gold stirrup trousers with cobalt pressure discs and piston-platform shoes; the rolled neckline keeps a secure opaque sleeveless architectural bodice with a high public-fashion neckline and complete front coverage; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory.\nRoll-visibility lock: Ellie and Alia each show one separate restrained three-centimeter midriff band. Alia alone has a completely strapless high-cut opaque copper front with rigid opaque side-bust coverage, completely bare shoulders, and no strap, sleeve, halter, collar, neckband, exposed side breast, or cleavage. Radiance and Alia each have a fully open back from shoulder blades to a high secure waist with no crossing strap, back band, fabric panel, hair, halter, or illusion mesh; both open backs are simultaneously visible from the respectful rear three-quarter camera. ECE remains fully covered.\nAll garments are fully opaque and public-safe with complete bust, hip, and seat coverage. Rolled midriff, strapless, and open-back details are restrained runway tailoring. Each woman has a different silhouette, construction, material language, motif technique, hem architecture, and footwear. No lingerie, swimwear, transparent intimate area, exposed undergarment, fetish styling, matching mini-dress set, matching two-piece set, repeated map print, palette-swapped copy, cleavage-focused lens, erotic framing, or intimate close-up.\n\nROLLED RELATIONSHIP ACTION\nRomance roll 86: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind.\nCompound-love roll 28: ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands.\nUse those two stored beats visibly as facial, eye-line, pursuit, choice, and torso-movement influences, but resolve every physical hand through the exact hard-love inventory below so no extra hand appears.\nHard-love roll 40: a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation\nUse one wide respectful rear three-quarter view with four non-overlapping full bodies: Ellie far left, dipped Radiance left-center, ECE right-center, and braided Alia far right in right-facing side profile. The eight-hand ownership map is non-negotiable. Ellie's left open palm supports Radiance high between the shoulder blades and Ellie's right open palm supports Radiance at the near waist; both palms and both forearms are fully visible on Radiance's camera-facing fully open cobalt back. Radiance's left arm reaches backward with its complete palm on Ellie's outer shoulder. Radiance's right arm reaches forward with only two fingertips resting on top of ECE's already-visible left fist. ECE's left fist remains wrapped around the left compass handle while its outer thumb closes gently over those two Radiance fingertips; ECE's right fist grips the opposite compass handle. This is one layered hand contact, not an extra hand, and Radiance never touches the compass. Alia owns the final two hands exclusively on the mission grip. Show all eight wrists, elbows, palms, and finger clusters with open air and contrasting backgrounds. Radiance and ECE sustain the clearest affectionate eye line while the dip, caught-fingertip invitation, and Alia's jealous answer remain the first read.\nThe clearly adult consensual relationship event is fully clothed, stable, non-explicit, and the first read.\n\nMISSION PROP AND TARGET\nPose-target roll 25; resolved handler = Alia. Authoritative action: Alia uses a realistic eye-level two-hand large-frame-pistol stance at one plain non-humanoid geometric paper route symbol fixed to a complete thick earth-and-sand backstop on a closed dry earth-and-sand cinema-training lane behind complete transparent safety panels, separated from every person, mascot, landmark, public path, vehicle, Mars-expedition structure and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.\nPreserve the authoritative paper marker using exact side-on geometry. Alia is the rightmost adult in strict right-facing profile. Her orange-plugged inert pistol is perfectly horizontal at shoulder height. A tall thick sand backstop begins sixty centimeters to the right of the muzzle; one plain white paper square with one black non-humanoid route diamond is fixed high on it so Alia's eye, barrel center, muzzle center, and diamond center occupy one horizontal row with clean empty air between pistol and paper. Every person and mascot remains behind and left of Alia's muzzle plane. Both Alia hands are separated and visible on the grip; her trigger index is unmistakably straight and flat on the colored frame above and outside the guard. Alia's secure strapless copper front is visibly opaque from sternum through both side-bust panels, with no exposed breast, side breast, nipple, under-bust, cleavage, transparent area, or skin gap; the opaque side panels end before the fully open back. No beam, ray, tracer, laser, dashed or dotted path, cord, string, glow trail, or painted trajectory.\nThe prop is exactly one full-size polished rainbow-gradient Desert Eagle-style large-frame inert cinema-training pistol replica: short pistol barrel, one pistol grip, orange muzzle plug, compact stockless handgun silhouette, and no shoulder stock, long barrel, foregrip, sling, cable, rifle, shotgun, carbine, or long-gun form. It drives the safe interruption and is never decorative. ECE's separate holographic route map is hands-free. No firing, ammunition, loose magazine, reload, holster, muzzle flash, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting.\n\nMASCOT, ODD-PROP, AND GLOBAL ROLLS\nMascot roll 15 = PAWS plus MAX. On one padded dry lounge at far lower-left show exactly one tiny collarless golden kitten PAWS and one distinct small young golden retriever puppy MAX sharing a harmless nose-to-paw play beat. No adult dog, second dog, second cat, or other animal. Ellie supervises by eye line only. Both stay far from rain runoff, the sea edge, compass, and prop lane.\nOdd-prop roll 12 = ACTIVE. Exactly AI ECE owns one oversized magnetic compass table with both existing hands. It is inert, secured, nonthreatening, and integrated into the relationship action. No other person touches it.\nPole-theme roll 67 = inactive; show no pole. Rainbow-only roll 15 = inactive; do not convert wardrobe to rainbow-only styling. Rainbow-hosiery roll 14 = ACTIVE. Exactly Radiance wears opaque public-safe knee socks in original independent rainbow gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center, and Alia alone handles the inert training prop.\nPublishing audit only, not visible text: Georgia ❤️ Honduras, hashtag Georgia, hashtag InternalAgency, no WorldXXXSeries hashtag.\n\nANATOMY AND FRAME\nEye-level full-body 9:16 composition, never low-angle, with generous clear margins around every complete arm and hand. Show all faces, shoulders, elbows, wrists, separated hands, finger clusters, legs, feet, heels, and boots. Exactly 8 human arms and exactly 8 human hands, two per adult, with every limb continuously traceable to one owner. No extra, duplicate, floating, fused, borrowed, emerging, hidden-owner, missing, cropped, or ambiguous limb or finger cluster. Keep Georgia landmarks, romance action, and complete target geometry large and legible. No readable text, watermark, literal flag, sacred imagery, or official seal."
       }
     }
   },
@@ -4865,6 +4905,62 @@
         },
         "accepted": false
       }
+    },
+    "freshRound13": {
+      "status": "materialized-pending-launch",
+      "preparedAt": "2026-08-11T15:32:22.858Z",
+      "sceneNumbers": [
+        1551
+      ],
+      "preservedAcceptedSceneNumbers": [
+        1548,
+        1549,
+        1550
+      ],
+      "concurrency": "one missing-scene reference-guided built-in image edit",
+      "maximumRecoveryPassesPerBlockedScene": 1,
+      "promptAudit": {
+        "1551": {
+          "path": "tmp/world-195x4/batch-382/scene-1551-fresh-round-13-prompt.txt",
+          "sha256": "AD77DCA287371A901649CF21225B6AC19BD6846E6FC50DE89F3E291DFB577692",
+          "chars": 14198,
+          "sourceReference": "tmp/world-195x4/batch-382/raw/fresh-round-12/scene-1551.png",
+          "sourceReferenceSha256": "C4DFA5B8236B6DB16B1E9228E8627653E7BC25039584C046907FE974495DFC9F",
+          "storedRollsChanged": false,
+          "freshRound": 13,
+          "referenceGuidedEdit": true,
+          "solePermittedChange": "replace existing paper target with a smaller coordinate-locked paper target",
+          "measuredSourceGeometry": {
+            "canvas": {
+              "width": 940,
+              "height": 1672
+            },
+            "muzzlePlugCenter": {
+              "x": 872,
+              "y": 603
+            },
+            "muzzleTipMaxX": 877,
+            "existingDiamondCenterApprox": {
+              "x": 885,
+              "y": 669
+            }
+          },
+          "replacementTargetGeometry": {
+            "center": {
+              "x": 918,
+              "y": 603
+            },
+            "bounds": {
+              "left": 898,
+              "right": 938,
+              "top": 583,
+              "bottom": 623
+            },
+            "cleanAirGapPixels": 21
+          }
+        }
+      },
+      "storedRollsChanged": false
     }
   },
   "acceptedAssets": [
@@ -5930,7 +6026,7 @@
     "requiredCurrentCountryAssets": 4,
     "note": "Georgia has accepted scenes 1548, 1549, and 1550. Historical X backlog is empty. Publication remains mandatory immediately after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T15:17:49.531Z",
+  "checkpointedAt": "2026-08-11T15:32:22.858Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -6625,7 +6721,7 @@
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "fresh-round-13-missing-scene-only",
+    "action": "launch-fresh-round-13-missing-scene-only",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -6637,7 +6733,7 @@
     "laterCountryStartAllowed": false
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-11T15:17:49.531Z",
+    "checkedAt": "2026-08-11T15:32:22.858Z",
     "account": "@dogramaci",
     "signedIn": true,
     "eligibleBacklogRemaining": 0,
@@ -6688,9 +6784,10 @@
       "url": "https://x.com/dogramaci/status/2087088543499768003",
       "caption": "Honduras heart Czechia #Honduras",
       "attachments": 3,
-      "liveVerified": true
+      "liveVerified": true,
+      "viewsAtAudit": 38
     },
-    "reconciliationDecision": "No eligible unposted World Series item. Georgia has only three accepted current-country scenes, so no X upload is permitted and no later country can advance.",
+    "reconciliationDecision": "No eligible unposted World Series item. The three newer captionless single-image account posts are unrelated and remain outside the series ledger; do not duplicate Honduras.",
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
@@ -6699,6 +6796,23 @@
       "attachments": 1,
       "seriesCaptionPresent": false,
       "classification": "unrelated-account-post-not-a-World-Series-ledger-item"
-    }
+    },
+    "latestVisibleAccountStatuses": [
+      {
+        "url": "https://x.com/dogramaci/status/2087193408670412911",
+        "attachments": 1,
+        "seriesCaptionPresent": false
+      },
+      {
+        "url": "https://x.com/dogramaci/status/2087193349614649405",
+        "attachments": 1,
+        "seriesCaptionPresent": false
+      },
+      {
+        "url": "https://x.com/dogramaci/status/2087193317226266640",
+        "attachments": 1,
+        "seriesCaptionPresent": false
+      }
+    ]
   }
 }
