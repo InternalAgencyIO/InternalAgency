@@ -11,8 +11,9 @@
 //! signer to own the Position; this handler preserves that behavior exactly.
 
 use crate::native_adapter::{
-    prepare_existing_state_write, seal_atomic_write_batch, NativeAdapterError,
-    NativeEconomyBinding, PdaIdentity, StrictStateValue,
+    prepare_existing_state_write_intent, seal_existing_write_batch_borrowed,
+    ExistingStateWriteIntent, NativeAdapterError, NativeEconomyBinding, PdaIdentity,
+    StrictStateValue,
 };
 use crate::production_instruction::{
     decode_production_instruction, ProductionInstruction, ProductionInstructionError,
@@ -24,8 +25,8 @@ use crate::runtime_adapter::{
     RuntimeValidatedDailyLawWrite,
 };
 use crate::runtime_write_adapter::{
-    execute_production_active_existing_write_batch_account_infos, RuntimeWriteAdapterError,
-    RuntimeWriteReceipt,
+    execute_production_active_existing_write_batch_borrowed_4_account_infos,
+    RuntimeWriteAdapterError, RuntimeWriteReceipt,
 };
 use crate::{
     close_position, decode_position_state, CodecError, EconomyError, LaneState, PositionState,
@@ -89,6 +90,7 @@ pub enum ProductionClosePositionError {
     AccountBorrowFailed,
     PositionCodec(CodecError),
     StateTypeMismatch,
+    PreparedWriteIncomplete,
     Runtime(RuntimeAdapterError),
     Native(NativeAdapterError),
     Economy(EconomyError),
@@ -130,6 +132,24 @@ pub struct ProductionClosePositionReceipt {
     caller: [u8; 32],
     position: [u8; 32],
     writes: RuntimeWriteReceipt<PRODUCTION_CLOSE_POSITION_WRITE_COUNT>,
+}
+
+struct PreparedClosePositionWrites {
+    position: Option<ExistingStateWriteIntent>,
+    treasury: Option<ExistingStateWriteIntent>,
+    ecosystem: Option<ExistingStateWriteIntent>,
+    liquidity: Option<ExistingStateWriteIntent>,
+}
+
+impl PreparedClosePositionWrites {
+    const fn empty() -> Self {
+        Self {
+            position: None,
+            treasury: None,
+            ecosystem: None,
+            liquidity: None,
+        }
+    }
 }
 
 impl ProductionClosePositionReceipt {
@@ -214,12 +234,34 @@ fn execute_with_active_config(
     caller: [u8; 32],
     accounts: &[AccountInfo<'_>],
 ) -> Result<ProductionClosePositionReceipt, ProductionClosePositionError> {
+    let mut prepared_writes = PreparedClosePositionWrites::empty();
+    prepare_close_position_writes(gate, active_config, binding, accounts, &mut prepared_writes)?;
+    let writes =
+        execute_close_position_writes(gate, active_config, binding, &prepared_writes, accounts)?;
+
+    Ok(ProductionClosePositionReceipt {
+        caller,
+        position: accounts[2].key.to_bytes(),
+        writes,
+    })
+}
+
+// Authenticate and run the retained transition in a distinct frame, then write
+// each prepared intent directly into caller-owned slots. This avoids aggregate
+// Result return areas while retaining all pre-write authentication.
+#[inline(never)]
+fn prepare_close_position_writes(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    prepared: &mut PreparedClosePositionWrites,
+) -> Result<(), ProductionClosePositionError> {
     let position_identity = embedded_position_identity(&accounts[2], active_config.key(), binding)?;
     let position = authenticate_state(gate, binding, &accounts[2], position_identity)?;
     let treasury = authenticate_lane(gate, binding, &accounts[3], active_config.key(), TREASURY)?;
     let ecosystem = authenticate_lane(gate, binding, &accounts[4], active_config.key(), ECOSYSTEM)?;
     let liquidity = authenticate_lane(gate, binding, &accounts[5], active_config.key(), LIQUIDITY)?;
-
     let result = close_position(
         gate,
         active_config.state().config.active,
@@ -228,49 +270,80 @@ fn execute_with_active_config(
         ecosystem,
         liquidity,
     )?;
-    let intents = [
-        prepare_existing_state_write(
-            gate,
-            binding,
-            &authenticate_state_account_info(gate, binding, &accounts[2], position_identity)?,
-            StrictStateValue::Position(result.position),
-        )?,
-        prepare_lane_write(
-            gate,
-            binding,
-            &accounts[3],
-            active_config.key(),
-            result.treasury,
-        )?,
-        prepare_lane_write(
-            gate,
-            binding,
-            &accounts[4],
-            active_config.key(),
-            result.ecosystem,
-        )?,
-        prepare_lane_write(
-            gate,
-            binding,
-            &accounts[5],
-            active_config.key(),
-            result.liquidity,
-        )?,
-    ];
-    let batch = seal_atomic_write_batch(gate, binding, intents)?;
-    let writes = execute_production_active_existing_write_batch_account_infos(
+
+    prepared.position = Some(prepare_position_write(
+        gate,
+        binding,
+        &accounts[2],
+        position_identity,
+        result.position,
+    )?);
+    prepared.treasury = Some(prepare_lane_write(
+        gate,
+        binding,
+        &accounts[3],
+        active_config.key(),
+        result.treasury,
+    )?);
+    prepared.ecosystem = Some(prepare_lane_write(
+        gate,
+        binding,
+        &accounts[4],
+        active_config.key(),
+        result.ecosystem,
+    )?);
+    prepared.liquidity = Some(prepare_lane_write(
+        gate,
+        binding,
+        &accounts[5],
+        active_config.key(),
+        result.liquidity,
+    )?);
+    Ok(())
+}
+
+// Borrow-seal exactly one prepared intent set in a frame that owns neither the
+// retained transition inputs nor a second postimage array. The runtime
+// executor still validates every immutable and mutable preimage before copying
+// any byte.
+#[inline(never)]
+fn execute_close_position_writes(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    prepared: &PreparedClosePositionWrites,
+    accounts: &[AccountInfo<'_>],
+) -> Result<RuntimeWriteReceipt<PRODUCTION_CLOSE_POSITION_WRITE_COUNT>, ProductionClosePositionError>
+{
+    let position = prepared
+        .position
+        .as_ref()
+        .ok_or(ProductionClosePositionError::PreparedWriteIncomplete)?;
+    let treasury = prepared
+        .treasury
+        .as_ref()
+        .ok_or(ProductionClosePositionError::PreparedWriteIncomplete)?;
+    let ecosystem = prepared
+        .ecosystem
+        .as_ref()
+        .ok_or(ProductionClosePositionError::PreparedWriteIncomplete)?;
+    let liquidity = prepared
+        .liquidity
+        .as_ref()
+        .ok_or(ProductionClosePositionError::PreparedWriteIncomplete)?;
+    let batch = seal_existing_write_batch_borrowed(
+        gate,
+        binding,
+        [position, treasury, ecosystem, liquidity],
+    )?;
+    execute_production_active_existing_write_batch_borrowed_4_account_infos(
         gate,
         active_config,
         binding,
         batch,
         &accounts[2..],
-    )?;
-
-    Ok(ProductionClosePositionReceipt {
-        caller,
-        position: accounts[2].key.to_bytes(),
-        writes,
-    })
+    )
+    .map_err(ProductionClosePositionError::Write)
 }
 
 fn authenticate_caller(
@@ -354,18 +427,37 @@ fn authenticate_lane(
     }
 }
 
+#[inline(never)]
+fn prepare_position_write(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+    identity: PdaIdentity,
+    next: PositionState,
+) -> Result<ExistingStateWriteIntent, ProductionClosePositionError> {
+    let authenticated = authenticate_state_account_info(gate, binding, account, identity)?;
+    prepare_existing_state_write_intent(
+        gate,
+        binding,
+        &authenticated,
+        StrictStateValue::Position(next),
+    )
+    .map_err(ProductionClosePositionError::Native)
+}
+
+#[inline(never)]
 fn prepare_lane_write(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,
     account: &AccountInfo<'_>,
     config: [u8; 32],
     next: LaneState,
-) -> Result<crate::native_adapter::StateWriteIntent, ProductionClosePositionError> {
+) -> Result<ExistingStateWriteIntent, ProductionClosePositionError> {
     let identity = PdaIdentity::LaneState {
         config,
         lane: next.lane,
     };
     let authenticated = authenticate_state_account_info(gate, binding, account, identity)?;
-    prepare_existing_state_write(gate, binding, &authenticated, StrictStateValue::Lane(next))
+    prepare_existing_state_write_intent(gate, binding, &authenticated, StrictStateValue::Lane(next))
         .map_err(ProductionClosePositionError::Native)
 }

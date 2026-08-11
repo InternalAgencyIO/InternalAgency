@@ -12,13 +12,17 @@ extern crate alloc;
 use alloc::vec::Vec;
 use core::array;
 
+#[cfg(not(target_os = "solana"))]
+use crate::native_adapter::seal_atomic_write_batch;
 use crate::native_adapter::{
-    derive_pda, seal_atomic_write_batch, validate_atomic_write_preconditions, AtomicWriteBatch,
+    derive_pda, prepare_existing_state_write_intent, seal_existing_write_batch_borrowed,
+    validate_atomic_write_preconditions, validate_existing_write_preconditions_borrowed,
+    AtomicWriteBatch, BorrowedExistingWriteBatch, ExistingStateWriteIntent,
     NativeAccountObservation, NativeAdapterError, NativeEconomyBinding, PdaIdentity,
     StateWriteIntent, StrictStateValue,
 };
 use crate::runtime_adapter::{
-    prepare_existing_state_write_account_info, RuntimeAdapterError, RuntimeProductionActiveConfig,
+    authenticate_state_account_info, RuntimeAdapterError, RuntimeProductionActiveConfig,
 };
 use crate::stake_ingress::CompletedStakeIngress;
 use crate::{
@@ -93,6 +97,7 @@ pub enum RuntimeWriteAdapterError {
     ConfigPrincipalOverflow,
     CompletedStakeIngressMismatch,
     ConfigCodecRejected,
+    PreparedWriteIncomplete,
 }
 
 impl From<NativeAdapterError> for RuntimeWriteAdapterError {
@@ -184,6 +189,22 @@ struct PreparedConfigStakePrincipalCas {
     receipt: ProductionActiveConfigStakePrincipalReceipt,
 }
 
+struct PreparedCompletedIngressLaneWrites {
+    treasury: Option<ExistingStateWriteIntent>,
+    ecosystem: Option<ExistingStateWriteIntent>,
+    liquidity: Option<ExistingStateWriteIntent>,
+}
+
+impl PreparedCompletedIngressLaneWrites {
+    const fn empty() -> Self {
+        Self {
+            treasury: None,
+            ecosystem: None,
+            liquidity: None,
+        }
+    }
+}
+
 fn require_active_config_capability(
     gate: &ValidatedDailyLawWrite,
     active_config: &RuntimeProductionActiveConfig,
@@ -242,10 +263,12 @@ pub(crate) fn require_completed_ingress_binding(
     Ok(principal_delta)
 }
 
-/// Authenticate the exact treasury, ecosystem, and liquidity AccountInfos and
-/// seal their completed-ingress postimages before any persistence mutation.
-/// The fixed account order is part of this boundary. This prepares a CAS batch;
-/// it does not execute the writes or complete the stake-ingress handler.
+/// Host/rehearsal-only owning preflight for the exact treasury, ecosystem, and
+/// liquidity AccountInfos. It seals their completed-ingress postimages before
+/// any persistence mutation, and the fixed account order is part of this
+/// boundary. The SBF production executor uses the equivalent borrowed-intent
+/// path below; this helper neither executes writes nor completes the handler.
+#[cfg(not(target_os = "solana"))]
 #[inline(never)]
 pub fn prepare_production_completed_ingress_lane_write_batch_account_infos(
     gate: &ValidatedDailyLawWrite,
@@ -254,40 +277,94 @@ pub fn prepare_production_completed_ingress_lane_write_batch_account_infos(
     completed: &CompletedStakeIngress,
     lane_accounts: [&AccountInfo<'_>; 3],
 ) -> Result<AtomicWriteBatch<3>, RuntimeWriteAdapterError> {
+    let mut prepared = PreparedCompletedIngressLaneWrites::empty();
+    prepare_completed_ingress_lane_writes(
+        gate,
+        active_config,
+        binding,
+        completed,
+        lane_accounts,
+        &mut prepared,
+    )?;
+    let treasury = prepared
+        .treasury
+        .take()
+        .ok_or(RuntimeWriteAdapterError::PreparedWriteIncomplete)?;
+    let ecosystem = prepared
+        .ecosystem
+        .take()
+        .ok_or(RuntimeWriteAdapterError::PreparedWriteIncomplete)?;
+    let liquidity = prepared
+        .liquidity
+        .take()
+        .ok_or(RuntimeWriteAdapterError::PreparedWriteIncomplete)?;
+    seal_atomic_write_batch(
+        gate,
+        binding,
+        [
+            StateWriteIntent::Existing(treasury),
+            StateWriteIntent::Existing(ecosystem),
+            StateWriteIntent::Existing(liquidity),
+        ],
+    )
+    .map_err(RuntimeWriteAdapterError::Native)
+}
+
+#[inline(never)]
+fn prepare_completed_ingress_lane_writes(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    completed: &CompletedStakeIngress,
+    lane_accounts: [&AccountInfo<'_>; 3],
+    prepared: &mut PreparedCompletedIngressLaneWrites,
+) -> Result<(), RuntimeWriteAdapterError> {
     require_active_config_capability(gate, active_config, binding)?;
     require_completed_ingress_binding(active_config, binding, completed)?;
     let config = binding.config();
-    let treasury = prepare_existing_state_write_account_info(
+    prepared.treasury = Some(prepare_existing_lane_write_intent(
         gate,
         binding,
         lane_accounts[0],
-        PdaIdentity::LaneState {
-            config,
-            lane: TREASURY,
-        },
-        StrictStateValue::Lane(completed.treasury),
-    )?;
-    let ecosystem = prepare_existing_state_write_account_info(
+        config,
+        TREASURY,
+        completed.treasury,
+    )?);
+    prepared.ecosystem = Some(prepare_existing_lane_write_intent(
         gate,
         binding,
         lane_accounts[1],
-        PdaIdentity::LaneState {
-            config,
-            lane: ECOSYSTEM,
-        },
-        StrictStateValue::Lane(completed.ecosystem),
-    )?;
-    let liquidity = prepare_existing_state_write_account_info(
+        config,
+        ECOSYSTEM,
+        completed.ecosystem,
+    )?);
+    prepared.liquidity = Some(prepare_existing_lane_write_intent(
         gate,
         binding,
         lane_accounts[2],
-        PdaIdentity::LaneState {
-            config,
-            lane: LIQUIDITY,
-        },
-        StrictStateValue::Lane(completed.liquidity),
+        config,
+        LIQUIDITY,
+        completed.liquidity,
+    )?);
+    Ok(())
+}
+
+#[inline(never)]
+fn prepare_existing_lane_write_intent(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+    config: [u8; 32],
+    lane: u8,
+    next: crate::LaneState,
+) -> Result<ExistingStateWriteIntent, RuntimeWriteAdapterError> {
+    let authenticated = authenticate_state_account_info(
+        gate,
+        binding,
+        account,
+        PdaIdentity::LaneState { config, lane },
     )?;
-    seal_atomic_write_batch(gate, binding, [treasury, ecosystem, liquidity])
+    prepare_existing_state_write_intent(gate, binding, &authenticated, StrictStateValue::Lane(next))
         .map_err(RuntimeWriteAdapterError::Native)
 }
 
@@ -336,67 +413,116 @@ pub fn execute_production_completed_ingress_config_and_lanes_cas_account_infos(
     config_account: &AccountInfo<'_>,
     lane_accounts: [&AccountInfo<'_>; 3],
 ) -> Result<ProductionActiveIngressLedgerReceipt, RuntimeWriteAdapterError> {
-    let lane_batch = prepare_production_completed_ingress_lane_write_batch_account_infos(
+    let mut lanes = PreparedCompletedIngressLaneWrites::empty();
+    prepare_completed_ingress_lane_writes(
         gate,
         active_config,
         binding,
         completed,
         lane_accounts,
+        &mut lanes,
     )?;
     let principal_delta = require_completed_ingress_binding(active_config, binding, completed)?;
-    let config = prepare_production_active_config_stake_principal_cas_inner(
+    let mut config = None;
+    prepare_production_active_config_stake_principal_cas_into(
         gate,
         active_config,
         binding,
         principal_delta,
         config_account,
+        &mut config,
     )?;
+    let config = config
+        .as_ref()
+        .ok_or(RuntimeWriteAdapterError::PreparedWriteIncomplete)?;
+    let treasury = lanes
+        .treasury
+        .as_ref()
+        .ok_or(RuntimeWriteAdapterError::PreparedWriteIncomplete)?;
+    let ecosystem = lanes
+        .ecosystem
+        .as_ref()
+        .ok_or(RuntimeWriteAdapterError::PreparedWriteIncomplete)?;
+    let liquidity = lanes
+        .liquidity
+        .as_ref()
+        .ok_or(RuntimeWriteAdapterError::PreparedWriteIncomplete)?;
+    let lane_batch =
+        seal_existing_write_batch_borrowed(gate, binding, [treasury, ecosystem, liquidity])?;
+    execute_prepared_completed_ingress_config_and_lanes(
+        active_config,
+        config,
+        lane_batch,
+        config_account,
+        lane_accounts,
+    )
+}
 
+#[inline(never)]
+fn execute_prepared_completed_ingress_config_and_lanes(
+    active_config: &RuntimeProductionActiveConfig,
+    config: &PreparedConfigStakePrincipalCas,
+    lane_batch: BorrowedExistingWriteBatch<'_, 3>,
+    config_account: &AccountInfo<'_>,
+    lane_accounts: [&AccountInfo<'_>; 3],
+) -> Result<ProductionActiveIngressLedgerReceipt, RuntimeWriteAdapterError> {
     let mut config_data = config_account
         .try_borrow_mut_data()
         .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
-    let mut lane_data = Vec::with_capacity(3);
-    for account in lane_accounts {
-        lane_data.push(
-            account
-                .try_borrow_mut_data()
-                .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?,
-        );
-    }
+    let mut treasury_data = lane_accounts[0]
+        .try_borrow_mut_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let mut ecosystem_data = lane_accounts[1]
+        .try_borrow_mut_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let mut liquidity_data = lane_accounts[2]
+        .try_borrow_mut_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
     require_live_preimage(
         &config_data,
         CONFIG_GENESIS_ACCOUNT_LEN,
         active_config.preimage_sha256(),
     )?;
-    for (data, intent) in lane_data.iter().zip(lane_batch.intents()) {
-        let StateWriteIntent::Existing(existing) = intent else {
-            return Err(RuntimeWriteAdapterError::CreateIntentUnsupported);
-        };
-        require_live_preimage(
-            data,
-            existing.data_len(),
-            existing.expected_preimage_sha256(),
-        )?;
-    }
+    let intents = lane_batch.intents();
+    require_existing_live_preimage(&treasury_data, intents[0])?;
+    require_existing_live_preimage(&ecosystem_data, intents[1])?;
+    require_existing_live_preimage(&liquidity_data, intents[2])?;
 
     config_data.copy_from_slice(&config.postimage);
-    for (data, intent) in lane_data.iter_mut().zip(lane_batch.intents()) {
-        let StateWriteIntent::Existing(existing) = intent else {
-            return Err(RuntimeWriteAdapterError::CreateIntentUnsupported);
-        };
-        data.copy_from_slice(existing.postimage());
-    }
+    treasury_data.copy_from_slice(intents[0].postimage());
+    ecosystem_data.copy_from_slice(intents[1].postimage());
+    liquidity_data.copy_from_slice(intents[2].postimage());
 
     Ok(ProductionActiveIngressLedgerReceipt {
         config: config.receipt,
         lanes: RuntimeWriteReceipt {
             batch_commitment_sha256: lane_batch.commitment_sha256(),
-            postimage_sha256: array::from_fn(|index| match lane_batch.intents()[index] {
-                StateWriteIntent::Existing(existing) => existing.postimage_sha256(),
-                StateWriteIntent::Create(_) => unreachable!("lane preflight rejects creates"),
-            }),
+            postimage_sha256: [
+                intents[0].postimage_sha256(),
+                intents[1].postimage_sha256(),
+                intents[2].postimage_sha256(),
+            ],
         },
     })
+}
+
+#[inline(never)]
+fn prepare_production_active_config_stake_principal_cas_into(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    principal_delta: u64,
+    config_account: &AccountInfo<'_>,
+    prepared: &mut Option<PreparedConfigStakePrincipalCas>,
+) -> Result<(), RuntimeWriteAdapterError> {
+    *prepared = Some(prepare_production_active_config_stake_principal_cas_inner(
+        gate,
+        active_config,
+        binding,
+        principal_delta,
+        config_account,
+    )?);
+    Ok(())
 }
 
 fn require_live_preimage(
@@ -502,6 +628,129 @@ pub fn execute_production_active_existing_write_batch_account_infos<const N: usi
 ) -> Result<RuntimeWriteReceipt<N>, RuntimeWriteAdapterError> {
     require_active_config_capability(gate, active_config, binding)?;
     execute_existing_write_batch_inner(gate, binding, batch, accounts)
+}
+
+/// Fixed-arity production executor for one borrowed four-intent batch. The
+/// borrowed seal avoids a second owning copy of every fixed-size postimage;
+/// explicit borrow handles avoid heap allocation while preserving the exact
+/// all-borrows/all-preimages-before-first-write boundary.
+#[inline(never)]
+pub fn execute_production_active_existing_write_batch_borrowed_4_account_infos(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    batch: BorrowedExistingWriteBatch<'_, 4>,
+    accounts: &[AccountInfo<'_>],
+) -> Result<RuntimeWriteReceipt<4>, RuntimeWriteAdapterError> {
+    require_active_config_capability(gate, active_config, binding)?;
+    if accounts.len() != 4 {
+        return Err(RuntimeWriteAdapterError::AccountCountMismatch);
+    }
+
+    let lamports0 = accounts[0]
+        .try_borrow_lamports()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let lamports1 = accounts[1]
+        .try_borrow_lamports()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let lamports2 = accounts[2]
+        .try_borrow_lamports()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let lamports3 = accounts[3]
+        .try_borrow_lamports()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let data0 = accounts[0]
+        .try_borrow_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let data1 = accounts[1]
+        .try_borrow_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let data2 = accounts[2]
+        .try_borrow_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let data3 = accounts[3]
+        .try_borrow_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let observations = [
+        native_observation(&accounts[0], **lamports0, &data0),
+        native_observation(&accounts[1], **lamports1, &data1),
+        native_observation(&accounts[2], **lamports2, &data2),
+        native_observation(&accounts[3], **lamports3, &data3),
+    ];
+    let validated =
+        validate_existing_write_preconditions_borrowed(gate, binding, batch, &observations, &[])?;
+    drop(data3);
+    drop(data2);
+    drop(data1);
+    drop(data0);
+    drop(lamports3);
+    drop(lamports2);
+    drop(lamports1);
+    drop(lamports0);
+
+    let mut data0 = accounts[0]
+        .try_borrow_mut_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let mut data1 = accounts[1]
+        .try_borrow_mut_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let mut data2 = accounts[2]
+        .try_borrow_mut_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+    let mut data3 = accounts[3]
+        .try_borrow_mut_data()
+        .map_err(|_| RuntimeWriteAdapterError::AccountBorrowFailed)?;
+
+    let intents = validated.batch().intents();
+    let existing0 = intents[0];
+    let existing1 = intents[1];
+    let existing2 = intents[2];
+    let existing3 = intents[3];
+    require_existing_live_preimage(&data0, existing0)?;
+    require_existing_live_preimage(&data1, existing1)?;
+    require_existing_live_preimage(&data2, existing2)?;
+    require_existing_live_preimage(&data3, existing3)?;
+
+    data0.copy_from_slice(existing0.postimage());
+    data1.copy_from_slice(existing1.postimage());
+    data2.copy_from_slice(existing2.postimage());
+    data3.copy_from_slice(existing3.postimage());
+
+    Ok(RuntimeWriteReceipt {
+        batch_commitment_sha256: validated.batch().commitment_sha256(),
+        postimage_sha256: [
+            existing0.postimage_sha256(),
+            existing1.postimage_sha256(),
+            existing2.postimage_sha256(),
+            existing3.postimage_sha256(),
+        ],
+    })
+}
+
+fn native_observation<'a>(
+    account: &AccountInfo<'_>,
+    lamports: u64,
+    data: &'a [u8],
+) -> NativeAccountObservation<'a> {
+    NativeAccountObservation {
+        key: account.key.to_bytes(),
+        owner: account.owner.to_bytes(),
+        lamports,
+        data,
+        is_signer: account.is_signer,
+        is_writable: account.is_writable,
+        executable: account.executable,
+    }
+}
+
+fn require_existing_live_preimage(
+    data: &[u8],
+    existing: &ExistingStateWriteIntent,
+) -> Result<(), RuntimeWriteAdapterError> {
+    if data.len() != existing.data_len() || sha256(data) != existing.expected_preimage_sha256() {
+        return Err(RuntimeWriteAdapterError::PostValidationPreimageMismatch);
+    }
+    Ok(())
 }
 
 fn execute_existing_write_batch_inner<const N: usize>(

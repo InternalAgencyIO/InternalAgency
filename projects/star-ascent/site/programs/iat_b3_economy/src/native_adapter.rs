@@ -1033,6 +1033,20 @@ pub fn prepare_existing_state_write(
     authenticated: &AuthenticatedStateAccount,
     next: StrictStateValue,
 ) -> Result<StateWriteIntent, NativeAdapterError> {
+    Ok(StateWriteIntent::Existing(
+        prepare_existing_state_write_intent(gate, binding, authenticated, next)?,
+    ))
+}
+
+/// Existing-only counterpart used by borrowed production batches so callers
+/// do not have to materialize the larger create-capable enum for every slot.
+#[inline(never)]
+pub fn prepare_existing_state_write_intent(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    authenticated: &AuthenticatedStateAccount,
+    next: StrictStateValue,
+) -> Result<ExistingStateWriteIntent, NativeAdapterError> {
     require_gate_mint(gate, binding)?;
     let law = LawWriteStamp::from_gate(gate);
     if authenticated.law != law {
@@ -1048,7 +1062,7 @@ pub fn prepare_existing_state_write(
     validate_state_identity(binding, next, authenticated.identity, derived.bump)?;
     let (postimage, data_len) = encode_state(next)?;
     let postimage_sha256 = sha256(&postimage[..data_len]);
-    Ok(StateWriteIntent::Existing(ExistingStateWriteIntent {
+    Ok(ExistingStateWriteIntent {
         law: LawWriteStamp::from_gate(gate),
         key: authenticated.key,
         owner: authenticated.owner,
@@ -1058,7 +1072,7 @@ pub fn prepare_existing_state_write(
         expected_preimage_sha256: authenticated.preimage_sha256,
         postimage_sha256,
         postimage,
-    }))
+    })
 }
 
 // Preserve an SBF frame boundary around the fixed-size sealed postimage.
@@ -1191,6 +1205,27 @@ pub struct AtomicWriteBatch<const N: usize> {
     commitment_sha256: [u8; 32],
 }
 
+/// A sealed existing-only batch that borrows each caller-owned intent instead
+/// of copying fixed-size postimages into a second owning batch. The fields are
+/// private and the value is deliberately non-`Clone`/non-`Copy`; its lifetime
+/// prevents any intent from being changed while the seal is live.
+#[derive(Debug, Eq, PartialEq)]
+pub struct BorrowedExistingWriteBatch<'a, const N: usize> {
+    law: LawWriteStamp,
+    intents: [&'a ExistingStateWriteIntent; N],
+    commitment_sha256: [u8; 32],
+}
+
+impl<const N: usize> BorrowedExistingWriteBatch<'_, N> {
+    pub const fn intents(&self) -> &[&ExistingStateWriteIntent; N] {
+        &self.intents
+    }
+
+    pub const fn commitment_sha256(&self) -> [u8; 32] {
+        self.commitment_sha256
+    }
+}
+
 impl<const N: usize> AtomicWriteBatch<N> {
     pub const fn intents(&self) -> &[StateWriteIntent; N] {
         &self.intents
@@ -1204,6 +1239,19 @@ impl<const N: usize> AtomicWriteBatch<N> {
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ValidatedAtomicWriteBatch<const N: usize> {
     batch: AtomicWriteBatch<N>,
+}
+
+/// Consumed validation capability for a borrowed sealed batch. Like the seal,
+/// this is intentionally non-`Clone`/non-`Copy`.
+#[derive(Debug, Eq, PartialEq)]
+pub struct ValidatedBorrowedExistingWriteBatch<'a, const N: usize> {
+    batch: BorrowedExistingWriteBatch<'a, N>,
+}
+
+impl<const N: usize> ValidatedBorrowedExistingWriteBatch<'_, N> {
+    pub const fn batch(&self) -> &BorrowedExistingWriteBatch<'_, N> {
+        &self.batch
+    }
 }
 
 impl<const N: usize> ValidatedAtomicWriteBatch<N> {
@@ -1220,6 +1268,51 @@ pub fn seal_atomic_write_batch<const N: usize>(
     binding: &NativeEconomyBinding,
     intents: [StateWriteIntent; N],
 ) -> Result<AtomicWriteBatch<N>, NativeAdapterError> {
+    let (law, commitment_sha256) = seal_atomic_write_intents(gate, binding, &intents)?;
+    Ok(AtomicWriteBatch {
+        law,
+        intents,
+        commitment_sha256,
+    })
+}
+
+/// Seal existing caller-owned intents without copying their fixed-size
+/// postimages. The commitment domain and per-intent fields are byte-identical
+/// to an owning batch containing the same ordered Existing variants.
+#[inline(never)]
+pub fn seal_existing_write_batch_borrowed<'a, const N: usize>(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    intents: [&'a ExistingStateWriteIntent; N],
+) -> Result<BorrowedExistingWriteBatch<'a, N>, NativeAdapterError> {
+    require_gate_mint(gate, binding)?;
+    if N == 0 {
+        return Err(NativeAdapterError::EmptyWriteBatch);
+    }
+    let law = LawWriteStamp::from_gate(gate);
+    for left in 0..N {
+        if intents[left].law != law {
+            return Err(NativeAdapterError::LawCapabilityMismatch);
+        }
+        for right in (left + 1)..N {
+            if intents[left].key == intents[right].key {
+                return Err(NativeAdapterError::DuplicateWriteAccount);
+            }
+        }
+    }
+    let commitment_sha256 = batch_commitment_existing_refs(law, &intents);
+    Ok(BorrowedExistingWriteBatch {
+        law,
+        intents,
+        commitment_sha256,
+    })
+}
+
+fn seal_atomic_write_intents<const N: usize>(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    intents: &[StateWriteIntent; N],
+) -> Result<(LawWriteStamp, [u8; 32]), NativeAdapterError> {
     require_gate_mint(gate, binding)?;
     if N == 0 {
         return Err(NativeAdapterError::EmptyWriteBatch);
@@ -1235,13 +1328,9 @@ pub fn seal_atomic_write_batch<const N: usize>(
             }
         }
     }
-    validate_batch_funding(&intents)?;
-    let commitment_sha256 = batch_commitment(law, &intents);
-    Ok(AtomicWriteBatch {
-        law,
-        intents,
-        commitment_sha256,
-    })
+    validate_batch_funding(intents)?;
+    let commitment_sha256 = batch_commitment(law, intents);
+    Ok((law, commitment_sha256))
 }
 
 pub fn validate_atomic_write_preconditions<const N: usize>(
@@ -1251,6 +1340,25 @@ pub fn validate_atomic_write_preconditions<const N: usize>(
     observations: &[NativeAccountObservation<'_>],
     payer_observations: &[NativeAccountObservation<'_>],
 ) -> Result<ValidatedAtomicWriteBatch<N>, NativeAdapterError> {
+    validate_atomic_write_preconditions_inner(
+        gate,
+        binding,
+        batch.law,
+        &batch.intents,
+        batch.commitment_sha256,
+        observations,
+        payer_observations,
+    )?;
+    Ok(ValidatedAtomicWriteBatch { batch })
+}
+
+pub fn validate_existing_write_preconditions_borrowed<'a, const N: usize>(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    batch: BorrowedExistingWriteBatch<'a, N>,
+    observations: &[NativeAccountObservation<'_>],
+    payer_observations: &[NativeAccountObservation<'_>],
+) -> Result<ValidatedBorrowedExistingWriteBatch<'a, N>, NativeAdapterError> {
     require_gate_mint(gate, binding)?;
     if batch.law != LawWriteStamp::from_gate(gate) {
         return Err(NativeAdapterError::LawCapabilityMismatch);
@@ -1258,15 +1366,44 @@ pub fn validate_atomic_write_preconditions<const N: usize>(
     if observations.len() != N {
         return Err(NativeAdapterError::ObservationCountMismatch);
     }
-    if batch.commitment_sha256 != batch_commitment(batch.law, &batch.intents) {
+    if !payer_observations.is_empty() {
+        return Err(NativeAdapterError::PayerObservationCountMismatch);
+    }
+    if batch.commitment_sha256 != batch_commitment_existing_refs(batch.law, &batch.intents) {
         return Err(NativeAdapterError::PreimageMismatch);
     }
-    validate_batch_funding(&batch.intents)?;
     for (intent, observation) in batch.intents.iter().zip(observations) {
+        validate_existing_intent_precondition(intent, *observation)?;
+    }
+    Ok(ValidatedBorrowedExistingWriteBatch { batch })
+}
+
+#[allow(clippy::too_many_arguments)]
+fn validate_atomic_write_preconditions_inner<const N: usize>(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    law: LawWriteStamp,
+    intents: &[StateWriteIntent; N],
+    commitment_sha256: [u8; 32],
+    observations: &[NativeAccountObservation<'_>],
+    payer_observations: &[NativeAccountObservation<'_>],
+) -> Result<(), NativeAdapterError> {
+    require_gate_mint(gate, binding)?;
+    if law != LawWriteStamp::from_gate(gate) {
+        return Err(NativeAdapterError::LawCapabilityMismatch);
+    }
+    if observations.len() != N {
+        return Err(NativeAdapterError::ObservationCountMismatch);
+    }
+    if commitment_sha256 != batch_commitment(law, intents) {
+        return Err(NativeAdapterError::PreimageMismatch);
+    }
+    validate_batch_funding(intents)?;
+    for (intent, observation) in intents.iter().zip(observations) {
         validate_intent_precondition(intent, *observation)?;
     }
-    validate_payer_preconditions(&batch.intents, payer_observations)?;
-    Ok(ValidatedAtomicWriteBatch { batch })
+    validate_payer_preconditions(intents, payer_observations)?;
+    Ok(())
 }
 
 fn validate_batch_funding<const N: usize>(
@@ -1394,18 +1531,7 @@ fn validate_intent_precondition(
 ) -> Result<(), NativeAdapterError> {
     match intent {
         StateWriteIntent::Existing(existing) => {
-            if observation.key != existing.key {
-                return Err(NativeAdapterError::AccountKeyMismatch);
-            }
-            if observation.owner != existing.owner {
-                return Err(NativeAdapterError::AccountOwnerMismatch);
-            }
-            require_pda_account_flags(observation)?;
-            if observation.data.len() != existing.data_len()
-                || sha256(observation.data) != existing.expected_preimage_sha256
-            {
-                return Err(NativeAdapterError::PreimageMismatch);
-            }
+            validate_existing_intent_precondition(existing, observation)?
         }
         StateWriteIntent::Create(create) => {
             if observation.key != create.key {
@@ -1422,6 +1548,25 @@ fn validate_intent_precondition(
                 return Err(NativeAdapterError::PreimageMismatch);
             }
         }
+    }
+    Ok(())
+}
+
+fn validate_existing_intent_precondition(
+    existing: &ExistingStateWriteIntent,
+    observation: NativeAccountObservation<'_>,
+) -> Result<(), NativeAdapterError> {
+    if observation.key != existing.key {
+        return Err(NativeAdapterError::AccountKeyMismatch);
+    }
+    if observation.owner != existing.owner {
+        return Err(NativeAdapterError::AccountOwnerMismatch);
+    }
+    require_pda_account_flags(observation)?;
+    if observation.data.len() != existing.data_len()
+        || sha256(observation.data) != existing.expected_preimage_sha256
+    {
+        return Err(NativeAdapterError::PreimageMismatch);
     }
     Ok(())
 }
@@ -1726,6 +1871,30 @@ fn batch_commitment<const N: usize>(
     law: LawWriteStamp,
     intents: &[StateWriteIntent; N],
 ) -> [u8; 32] {
+    let mut hash = begin_batch_commitment(law, N);
+    for intent in intents {
+        match intent {
+            StateWriteIntent::Existing(value) => {
+                update_existing_intent_commitment(&mut hash, value)
+            }
+            StateWriteIntent::Create(value) => update_create_intent_commitment(&mut hash, value),
+        }
+    }
+    hash.finalize().into()
+}
+
+fn batch_commitment_existing_refs<const N: usize>(
+    law: LawWriteStamp,
+    intents: &[&ExistingStateWriteIntent; N],
+) -> [u8; 32] {
+    let mut hash = begin_batch_commitment(law, N);
+    for intent in intents {
+        update_existing_intent_commitment(&mut hash, intent);
+    }
+    hash.finalize().into()
+}
+
+fn begin_batch_commitment(law: LawWriteStamp, count: usize) -> Sha256 {
     let mut hash = Sha256::new();
     hash.update(WRITE_BATCH_DOMAIN);
     hash.update(law.unix_timestamp.to_le_bytes());
@@ -1736,34 +1905,32 @@ fn batch_commitment<const N: usize>(
     hash.update(law.mint);
     hash.update(law.network_genesis_hash);
     hash.update(law.law_account_sha256);
-    hash.update((N as u64).to_le_bytes());
-    for intent in intents {
-        match intent {
-            StateWriteIntent::Existing(value) => {
-                hash.update([0]);
-                hash.update(value.key);
-                hash.update(value.owner);
-                hash.update([value.kind as u8]);
-                hash.update(value.data_len.to_le_bytes());
-                hash.update(value.expected_preimage_sha256);
-                hash.update(value.postimage_sha256);
-            }
-            StateWriteIntent::Create(value) => {
-                hash.update([1]);
-                hash.update(value.payer);
-                hash.update(value.key);
-                hash.update(value.owner);
-                hash.update([value.kind as u8]);
-                hash.update([value.bump]);
-                hash.update([value.lifecycle as u8]);
-                hash.update(value.expected_payer_lamports.to_le_bytes());
-                hash.update(value.expected_lamports.to_le_bytes());
-                hash.update(value.rent_minimum_lamports.to_le_bytes());
-                hash.update(value.funding_lamports.to_le_bytes());
-                hash.update(value.data_len.to_le_bytes());
-                hash.update(value.postimage_sha256);
-            }
-        }
-    }
-    hash.finalize().into()
+    hash.update((count as u64).to_le_bytes());
+    hash
+}
+
+fn update_existing_intent_commitment(hash: &mut Sha256, value: &ExistingStateWriteIntent) {
+    hash.update([0]);
+    hash.update(value.key);
+    hash.update(value.owner);
+    hash.update([value.kind as u8]);
+    hash.update(value.data_len.to_le_bytes());
+    hash.update(value.expected_preimage_sha256);
+    hash.update(value.postimage_sha256);
+}
+
+fn update_create_intent_commitment(hash: &mut Sha256, value: &CreateStateAccountIntent) {
+    hash.update([1]);
+    hash.update(value.payer);
+    hash.update(value.key);
+    hash.update(value.owner);
+    hash.update([value.kind as u8]);
+    hash.update([value.bump]);
+    hash.update([value.lifecycle as u8]);
+    hash.update(value.expected_payer_lamports.to_le_bytes());
+    hash.update(value.expected_lamports.to_le_bytes());
+    hash.update(value.rent_minimum_lamports.to_le_bytes());
+    hash.update(value.funding_lamports.to_le_bytes());
+    hash.update(value.data_len.to_le_bytes());
+    hash.update(value.postimage_sha256);
 }

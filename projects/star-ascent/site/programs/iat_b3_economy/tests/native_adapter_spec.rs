@@ -607,6 +607,66 @@ fn existing_write_is_daily_law_stamped_cas_bound_and_batch_atomic() {
 }
 
 #[test]
+fn borrowed_existing_batch_matches_owning_commitment_and_preconditions() {
+    let binding = binding();
+    let gate = open_gate_at(CLOCK_TIMESTAMP);
+    let (identity, state, data) = strict_state_cases(&binding).remove(0);
+    let key = derive_pda(&binding, identity).unwrap().key;
+    let account = observed(key, ECONOMY_PROGRAM, &data);
+    let authenticated = authenticate_state_account(&gate, &binding, account, identity).unwrap();
+    let StrictStateValue::Position(mut next) = state else {
+        unreachable!()
+    };
+    next.paid = 12;
+    let existing = prepare_existing_state_write_intent(
+        &gate,
+        &binding,
+        &authenticated,
+        StrictStateValue::Position(next),
+    )
+    .unwrap();
+    let owning =
+        seal_atomic_write_batch(&gate, &binding, [StateWriteIntent::Existing(existing)]).unwrap();
+    let borrowed = seal_existing_write_batch_borrowed(&gate, &binding, [&existing]).unwrap();
+    assert_eq!(borrowed.commitment_sha256(), owning.commitment_sha256());
+    let validated =
+        validate_existing_write_preconditions_borrowed(&gate, &binding, borrowed, &[account], &[])
+            .unwrap();
+    assert_eq!(
+        validated.batch().commitment_sha256(),
+        owning.commitment_sha256()
+    );
+
+    assert_eq!(
+        seal_existing_write_batch_borrowed(&gate, &binding, [&existing, &existing]),
+        Err(NativeAdapterError::DuplicateWriteAccount)
+    );
+    assert_eq!(
+        seal_existing_write_batch_borrowed::<0>(&gate, &binding, []),
+        Err(NativeAdapterError::EmptyWriteBatch)
+    );
+    let later_gate = open_gate_at(CLOCK_TIMESTAMP + 1);
+    assert_eq!(
+        seal_existing_write_batch_borrowed(&later_gate, &binding, [&existing]),
+        Err(NativeAdapterError::LawCapabilityMismatch)
+    );
+
+    let mut stale = data;
+    stale[100] ^= 1;
+    let stale_batch = seal_existing_write_batch_borrowed(&gate, &binding, [&existing]).unwrap();
+    assert_eq!(
+        validate_existing_write_preconditions_borrowed(
+            &gate,
+            &binding,
+            stale_batch,
+            &[observed(key, ECONOMY_PROGRAM, &stale)],
+            &[],
+        ),
+        Err(NativeAdapterError::PreimageMismatch)
+    );
+}
+
+#[test]
 fn exact_law_capability_prevents_cross_binding_auth_create_seal_and_validation() {
     let binding = binding();
     let gate_a = open_gate_at(CLOCK_TIMESTAMP);
