@@ -24,7 +24,21 @@
     "gateSatisfied": false
   },
   "sourceCommit": "c49d3927942055238a19be43056339343ee09bea",
-  "contractSha256": "F7B247DF3BCE256C2A0BB2B51EB282EC4E6FBC5FE8E85A17970F311F26138FEC",
+  "contractSha256": "69EB6C84A2467A4234D901C3086ECECE9E583B55C41BB9382CD5ED523C482EF5",
+  "contractAmendments": {
+    "radianceRealtimeAgreementPartyRule": {
+      "recordedAt": "2026-08-11T18:49:40.151Z",
+      "activeFromBatch": 382,
+      "requestedMeaning": "Follow fictional adult Radiance as the live narrative focus; when and only when she clearly agrees to one specific invitation, activate a consensual public-safe InternalAgency party beat for that invitation.",
+      "contractSha256Before": "F7B247DF3BCE256C2A0BB2B51EB282EC4E6FBC5FE8E85A17970F311F26138FEC",
+      "contractSha256After": "69EB6C84A2467A4234D901C3086ECECE9E583B55C41BB9382CD5ED523C482EF5",
+      "storedDeterministicRollsChanged": false,
+      "acceptedAssetsChanged": false,
+      "queueAdvanceChanged": false,
+      "nextRenderRequirement": "Georgia scene 1551 clean fresh round 20 must record the offered choice, Radiance response, partyActivation boolean, willing participants, visible agreement evidence, and continuity state before generation.",
+      "consentBoundary": "Agreement is explicit, invitation-specific, and scene-specific; it never transfers to another act, participant, prop interaction, scene, country, or future image."
+    }
+  },
   "rollMethod": "FNV-1a over the recorded batch382-georgia keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 382 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
   "rollThresholds": {
     "visibleMidriff": "0-49",
