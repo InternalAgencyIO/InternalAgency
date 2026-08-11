@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-fresh-round-11-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-fresh-round-11",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -15,9 +15,8 @@
     "queueAdvanceAllowed": false,
     "queueAdvanceCondition": "All four Georgia scenes accepted, narrow checkpoint committed and pushed, and public X status URL recorded.",
     "zeroOrPartialTerminalForbidden": true,
-    "acceptedSceneCount": 2,
+    "acceptedSceneCount": 3,
     "missingSceneNumbers": [
-      1548,
       1551
     ],
     "gitCheckpointPushed": true,
@@ -4547,7 +4546,7 @@
       "completedAt": "2026-08-11T14:32:14.981Z"
     },
     "freshRound11": {
-      "status": "fresh-rejected-recovery-materialized",
+      "status": "completed-one-new-accepted-one-rejected",
       "preparedAt": "2026-08-11T14:40:16.158Z",
       "sceneNumbers": [
         1548,
@@ -4624,7 +4623,7 @@
         }
       },
       "recovery": {
-        "status": "materialized-pending-launch",
+        "status": "completed-one-new-accepted-one-rejected",
         "preparedAt": "2026-08-11T14:49:53.528Z",
         "sceneNumbers": [
           1548,
@@ -4654,11 +4653,76 @@
             "phase": "recovery",
             "referenceGuidedEdit": true
           }
-        }
-      }
+        },
+        "completedAt": "2026-08-11T14:59:49.828Z",
+        "perScene": {
+          "1548": {
+            "status": "accepted-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-11-recovery/scene-1548.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-20161aa1-d4ac-4b1a-965e-401d753b8058.png",
+            "sha256": "E134A6BF66004C33FBD862ECD8B4EF58B15C0CCAFB5011C426461DDC11747738",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "loreAsset": "1548-georgia-tbilisi-mars-surface-expedition-round-11-recovery.png",
+            "recoveryPassConsumedThisRound": true
+          },
+          "1551": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-11-recovery/scene-1551.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-ff64766a-1615-49cc-9c7f-6b1e7e93a0f6.png",
+            "sha256": "ED4C22E0795AD65A2225A65D77AD9FDDC33A7E119F6DA2AF1744BFE3BE191172",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The recovery preserves four adult identities, Batumi, heavy rain, PAWS and MAX, distinct outfits, Radiance's sole rainbow hosiery and open back, Alia's strapless opaque front and open back, Alia's now-visible restrained midriff band, the route map, compass, complete backstop, safe mission stance, and exactly eight traceable hands.",
+              "The paper diamond center remains visibly above the horizontal barrel and orange muzzle-plug centerline, so the authoritative paper-route target geometry fails."
+            ],
+            "recoveryPassConsumedThisRound": true
+          }
+        },
+        "newlyAcceptedSceneNumbers": [
+          1548
+        ],
+        "rejectedSceneNumbers": [
+          1551
+        ],
+        "acceptedSceneNumbersOverall": [
+          1548,
+          1549,
+          1550
+        ],
+        "laterWakeAction": "Start fresh round 12 for scene 1551 only; preserve accepted scenes 1548, 1549, and 1550 and do not advance to Fiji."
+      },
+      "completedAt": "2026-08-11T14:59:49.828Z"
     }
   },
   "acceptedAssets": [
+    {
+      "scene": 1548,
+      "file": "1548-georgia-tbilisi-mars-surface-expedition-round-11-recovery.png",
+      "decision": "accepted-fresh-round-11-recovery",
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-20161aa1-d4ac-4b1a-965e-401d753b8058.png",
+      "sha256": "E134A6BF66004C33FBD862ECD8B4EF58B15C0CCAFB5011C426461DDC11747738",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "acceptedAt": "2026-08-11T14:59:49.828Z",
+      "audit": {
+        "coreCast": "Exactly four clearly adult fictional women appear with distinct anchored identities; Alia alone retains the high sculptural braided ponytail.",
+        "anatomy": "Exactly eight human arms and eight human hands are owned: two ECE mission hands, one raised Radiance-Ellie clasp, one low Alia-Ellie clasp, Radiance's palm on Alia's shoulder, and Alia's dark hand and forearm wrapping Radiance's waist.",
+        "activeRolls": "Hard hail, MAX only, no odd prop, no pole, no rainbow-only styling, no hosiery, and separate restrained midriff bands on Radiance, Ellie, and Alia all resolve visibly; ECE remains waist-covered.",
+        "romance": "The raised and low linked hands, shoulder invitation, behind-waist embrace, aligned trio eye lines, and ECE's center-right interruption visibly perform the stored three-person slow-dance split with four clear contacts.",
+        "missionProp": "ECE alone holds the full-size polished rainbow-gradient inert cinema-training pistol replica with two hands and an indexed trigger finger; the short down-right sight picture ends at the orange disk in empty water before a complete transparent backstop, with no tracer or occupied object downrange.",
+        "themeLocation": "The Peace Bridge, Mtkvari, Old Town balconies, Narikala ridge, sulfur-bath forms, hail, and four distinct country-led Mars-expedition couture fingerprints read together without replacing Georgia with a theme location.",
+        "mascotsAndProps": "Exactly one small young golden retriever puppy MAX rests on a padded dry lounge far from the prop lane, river, and hazards; no kitten or odd prop appears.",
+        "decision": "Accepted with no hard-gate deviation."
+      }
+    },
     {
       "scene": 1549,
       "file": "1549-georgia-stepantsminda-mars-surface-expedition-round-2-recovery.png",
@@ -5654,24 +5718,6 @@
       "recoveryPassConsumedThisRound": true
     },
     {
-      "scene": 1548,
-      "round": 11,
-      "phase": "fresh",
-      "status": "rejected-strict-visual-audit",
-      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-11/scene-1548.png",
-      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-c954af90-f202-4c29-9a6a-4ddcfb6de0c2.png",
-      "sha256": "6CDB1CD3EDF7EF2C28C0D52D2789CF1E113E39CBD7A287DB6E2F5B1238F0A8E7",
-      "dimensions": {
-        "width": 941,
-        "height": 1672
-      },
-      "decisiveRejectionReasons": [
-        "The fresh edit preserves Tbilisi, hail, MAX, four adult identities, distinct couture, Alia and Ellie's midriff bands, clean target geometry with no tracer, route map, and safe ECE stance.",
-        "The high and low clasps are clear, but the sole middle contact reads as Radiance touching Alia while Alia's second hand and forearm to Radiance remain hidden, leaving seven unambiguous hands.",
-        "Radiance's active restrained visible-midriff band is absent because her blue jacket meets the bronze skirt."
-      ]
-    },
-    {
       "scene": 1551,
       "round": 11,
       "phase": "fresh",
@@ -5688,6 +5734,24 @@
         "Alia's active restrained bare midriff band remains absent because the copper bodice still meets the copper waistband.",
         "The paper diamond center sits about one paper-height below the horizontal orange muzzle-plug center rather than on the same row."
       ]
+    },
+    {
+      "scene": 1551,
+      "round": 11,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-11-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-ff64766a-1615-49cc-9c7f-6b1e7e93a0f6.png",
+      "sha256": "ED4C22E0795AD65A2225A65D77AD9FDDC33A7E119F6DA2AF1744BFE3BE191172",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovery preserves four adult identities, Batumi, heavy rain, PAWS and MAX, distinct outfits, Radiance's sole rainbow hosiery and open back, Alia's strapless opaque front and open back, Alia's now-visible restrained midriff band, the route map, compass, complete backstop, safe mission stance, and exactly eight traceable hands.",
+        "The paper diamond center remains visibly above the horizontal barrel and orange muzzle-plug centerline, so the authoritative paper-route target geometry fails."
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -5695,11 +5759,11 @@
     "minimumCurrentCountryAcceptedAssets": 4,
     "plannedCaption": "Georgia ❤️ Honduras #Georgia #InternalAgency",
     "url": null,
-    "acceptedCurrentCountryAssets": 2,
+    "acceptedCurrentCountryAssets": 3,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia remains active at two accepted scenes. Historical X backlog is empty. Georgia publication remains mandatory immediately after all four scenes are accepted and the completion checkpoint is pushed."
+    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Historical X backlog is empty. Publication remains mandatory immediately after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T14:49:53.528Z",
+  "checkpointedAt": "2026-08-11T14:59:49.828Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -6364,19 +6428,43 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1548,
+      "round": 11,
+      "kind": "fresh-recovery-accepted",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-11-recovery/scene-1548.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-20161aa1-d4ac-4b1a-965e-401d753b8058.png",
+      "sha256": "E134A6BF66004C33FBD862ECD8B4EF58B15C0CCAFB5011C426461DDC11747738",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "scene": 1551,
+      "round": 11,
+      "kind": "fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-11-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-ff64766a-1615-49cc-9c7f-6b1e7e93a0f6.png",
+      "sha256": "ED4C22E0795AD65A2225A65D77AD9FDDC33A7E119F6DA2AF1744BFE3BE191172",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-fresh-round-11-recovery-missing-scenes-only",
+    "action": "fresh-round-12-missing-scene-only",
     "preserveAcceptedSceneNumbers": [
+      1548,
       1549,
       1550
     ],
     "sceneNumbers": [
-      1548,
       1551
     ],
     "laterCountryStartAllowed": false
