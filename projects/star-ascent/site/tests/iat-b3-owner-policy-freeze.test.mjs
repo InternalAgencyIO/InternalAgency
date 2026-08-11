@@ -22,6 +22,7 @@ import {
 } from "../scripts/observe-iat-b3-live-estate-mainnet.mjs";
 import {
   NATIVE_LOADER_ID,
+  TOKEN_2022_LAST_UPGRADE,
   UPGRADEABLE_LOADER_ID,
   ZK_ELGAMAL_NATIVE_PROGRAM_NAME,
   ZK_ELGAMAL_PROOF_PROGRAM_ID,
@@ -57,6 +58,24 @@ function encodeBase58(bytes) {
   let leadingZeroes = 0;
   while (leadingZeroes < bytes.length && bytes[leadingZeroes] === 0) leadingZeroes += 1;
   return "1".repeat(leadingZeroes) + encoded;
+}
+
+function decodeBase58(value) {
+  const alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+  let magnitude = 0n;
+  for (const character of value) {
+    const digit = alphabet.indexOf(character);
+    if (digit < 0) throw new Error("invalid Base58 fixture");
+    magnitude = (magnitude * 58n) + BigInt(digit);
+  }
+  const bytes = [];
+  while (magnitude > 0n) {
+    bytes.unshift(Number(magnitude & 0xffn));
+    magnitude >>= 8n;
+  }
+  let leadingZeroes = 0;
+  while (leadingZeroes < value.length && value[leadingZeroes] === "1") leadingZeroes += 1;
+  return Uint8Array.from([...new Array(leadingZeroes).fill(0), ...bytes]);
 }
 
 function fixturePublicKey(seed) {
@@ -593,8 +612,8 @@ test("live-estate observation fails closed on malformed keys, wrong networks, an
 });
 
 test("standard-program observation pins finalized Token-2022 bytes and the native ZK program without authorizing release", async () => {
-  const programDataKey = Uint8Array.from({ length: 32 }, (_, index) => index + 1);
-  const upgradeAuthority = Uint8Array.from({ length: 32 }, (_, index) => 0x80 + index);
+  const programDataKey = decodeBase58(TOKEN_2022_LAST_UPGRADE.programDataAddress);
+  const upgradeAuthority = decodeBase58(TOKEN_2022_LAST_UPGRADE.authority);
   const tokenProgramState = Buffer.alloc(36);
   tokenProgramState.writeUInt32LE(2, 0);
   tokenProgramState.set(programDataKey, 4);
@@ -628,6 +647,43 @@ test("standard-program observation pins finalized Token-2022 bytes and the nativ
         value: { data: [tokenProgramData.toString("base64"), "base64"], executable: false, owner: UPGRADEABLE_LOADER_ID },
       };
     }
+    if (method === "getSignaturesForAddress") {
+      return [{
+        signature: TOKEN_2022_LAST_UPGRADE.signature,
+        slot: TOKEN_2022_LAST_UPGRADE.slot,
+        blockTime: TOKEN_2022_LAST_UPGRADE.blockTime,
+        err: null,
+        confirmationStatus: "finalized",
+      }];
+    }
+    if (method === "getTransaction") {
+      return {
+        slot: TOKEN_2022_LAST_UPGRADE.slot,
+        blockTime: TOKEN_2022_LAST_UPGRADE.blockTime,
+        meta: {
+          err: null,
+          logMessages: [`Upgraded program ${TOKEN_2022_PROGRAM_ID}`],
+          innerInstructions: [{ instructions: [
+            {
+              program: "bpf-upgradeable-loader",
+              programId: UPGRADEABLE_LOADER_ID,
+              parsed: { type: "upgrade", info: {
+                programAccount: TOKEN_2022_PROGRAM_ID,
+                programDataAccount: TOKEN_2022_LAST_UPGRADE.programDataAddress,
+                bufferAccount: TOKEN_2022_LAST_UPGRADE.bufferAccount,
+                authority: TOKEN_2022_LAST_UPGRADE.authority,
+                spillAccount: TOKEN_2022_LAST_UPGRADE.spillAccount,
+              } },
+            },
+            { programId: TOKEN_2022_LAST_UPGRADE.executionTrackerProgram },
+          ] }],
+        },
+        transaction: {
+          signatures: [TOKEN_2022_LAST_UPGRADE.signature],
+          message: { instructions: [{ programId: TOKEN_2022_LAST_UPGRADE.executorProgram }] },
+        },
+      };
+    }
     throw new Error(`unexpected method ${method}`);
   };
 
@@ -640,13 +696,18 @@ test("standard-program observation pins finalized Token-2022 bytes and the nativ
     ["getSlot", 2],
     ["getMultipleAccounts", 3],
     ["getAccountInfo", 4],
+    ["getSignaturesForAddress", 5],
+    ["getTransaction", 6],
   ]);
   assert.deepEqual(calls[2].params[0], [TOKEN_2022_PROGRAM_ID, ZK_ELGAMAL_PROOF_PROGRAM_ID]);
   assert.equal(result.token2022.deploymentSlot, 427_147_035);
   assert.equal(result.token2022.programBytes, 4);
   assert.equal(result.token2022.immutable, false);
+  assert.equal(result.token2022.lastUpgrade.finalizedProvenanceVerified, true);
   assert.equal(result.zkElgamalProof.immutable, true);
   assert.equal(result.standardProgramSnapshotComplete, true);
+  assert.equal(result.sourceReleaseBindingComplete, false);
+  assert.equal(result.exactSourceCommit, null);
   assert.equal(result.token2022ImmutableBytecodeVerified, false);
   assert.equal(result.hostCompatibilityComplete, false);
   assert.equal(result.mainnetExecutionAuthorized, false);
@@ -656,7 +717,7 @@ test("standard-program observation pins finalized Token-2022 bytes and the nativ
 test("standard-program observation rejects substituted loaders, native bytes, and stale ProgramData", async () => {
   const tokenProgramState = Buffer.alloc(36);
   tokenProgramState.writeUInt32LE(2, 0);
-  tokenProgramState.fill(7, 4);
+  tokenProgramState.set(decodeBase58(TOKEN_2022_LAST_UPGRADE.programDataAddress), 4);
   const validPrograms = {
     context: { slot: 438_000_001 },
     value: [
@@ -668,7 +729,12 @@ test("standard-program observation rejects substituted loaders, native bytes, an
       },
     ],
   };
-  const baseRpc = (mutatePrograms, programDataSlot = 438_000_002) => async (method) => {
+  const baseRpc = (
+    mutatePrograms,
+    programDataSlot = 438_000_002,
+    mutateHistory = (history) => history,
+    mutateTransaction = (transaction) => transaction,
+  ) => async (method) => {
     if (method === "getGenesisHash") return IAT_B3_MAINNET_GENESIS_HASH;
     if (method === "getSlot") return 438_000_000;
     if (method === "getMultipleAccounts") return mutatePrograms(structuredClone(validPrograms));
@@ -676,11 +742,44 @@ test("standard-program observation rejects substituted loaders, native bytes, an
       const bytes = Buffer.alloc(46);
       bytes.writeUInt32LE(3, 0);
       bytes.writeBigUInt64LE(427_147_035n, 4);
+      bytes[12] = 1;
+      bytes.set(decodeBase58(TOKEN_2022_LAST_UPGRADE.authority), 13);
       bytes[45] = 1;
       return {
         context: { slot: programDataSlot },
         value: { data: [bytes.toString("base64"), "base64"], executable: false, owner: UPGRADEABLE_LOADER_ID },
       };
+    }
+    if (method === "getSignaturesForAddress") {
+      return mutateHistory([{ ...TOKEN_2022_LAST_UPGRADE, err: null, confirmationStatus: "finalized" }]);
+    }
+    if (method === "getTransaction") {
+      return mutateTransaction({
+        slot: TOKEN_2022_LAST_UPGRADE.slot,
+        blockTime: TOKEN_2022_LAST_UPGRADE.blockTime,
+        meta: {
+          err: null,
+          logMessages: [`Upgraded program ${TOKEN_2022_PROGRAM_ID}`],
+          innerInstructions: [{ instructions: [
+            {
+              program: "bpf-upgradeable-loader",
+              programId: UPGRADEABLE_LOADER_ID,
+              parsed: { type: "upgrade", info: {
+                programAccount: TOKEN_2022_PROGRAM_ID,
+                programDataAccount: TOKEN_2022_LAST_UPGRADE.programDataAddress,
+                bufferAccount: TOKEN_2022_LAST_UPGRADE.bufferAccount,
+                authority: TOKEN_2022_LAST_UPGRADE.authority,
+                spillAccount: TOKEN_2022_LAST_UPGRADE.spillAccount,
+              } },
+            },
+            { programId: TOKEN_2022_LAST_UPGRADE.executionTrackerProgram },
+          ] }],
+        },
+        transaction: {
+          signatures: [TOKEN_2022_LAST_UPGRADE.signature],
+          message: { instructions: [{ programId: TOKEN_2022_LAST_UPGRADE.executorProgram }] },
+        },
+      });
     }
     throw new Error(`unexpected method ${method}`);
   };
@@ -700,5 +799,29 @@ test("standard-program observation rejects substituted loaders, native bytes, an
   await assert.rejects(
     observeIatB3StandardProgramsMainnet({ rpcCall: baseRpc((programs) => programs, 438_000_000) }),
     /ProgramData observation preceded/u,
+  );
+  await assert.rejects(
+    observeIatB3StandardProgramsMainnet({
+      rpcCall: baseRpc(
+        (programs) => programs,
+        438_000_002,
+        (history) => { history[0].signature = "substituted"; return history; },
+      ),
+    }),
+    /newest ProgramData history/u,
+  );
+  await assert.rejects(
+    observeIatB3StandardProgramsMainnet({
+      rpcCall: baseRpc(
+        (programs) => programs,
+        438_000_002,
+        (history) => history,
+        (transaction) => {
+          transaction.meta.innerInstructions[0].instructions[0].parsed.info.authority = "substituted";
+          return transaction;
+        },
+      ),
+    }),
+    /finalized upgrade transaction/u,
   );
 });

@@ -12,6 +12,17 @@ export const ZK_ELGAMAL_PROOF_PROGRAM_ID = "ZkE1Gama1Proof1111111111111111111111
 export const UPGRADEABLE_LOADER_ID = "BPFLoaderUpgradeab1e11111111111111111111111";
 export const NATIVE_LOADER_ID = "NativeLoader1111111111111111111111111111111";
 export const ZK_ELGAMAL_NATIVE_PROGRAM_NAME = "zk_elgamal_proof_program";
+export const TOKEN_2022_LAST_UPGRADE = Object.freeze({
+  signature: "2cM3S25AJnHyy4shW7zsoqz5W8JPXPvXiUxk545n5ANf6BET9VvBRfsnSNYi9MqogjVWNBxNfaZpE9QBJX4XCbfn",
+  slot: 427_147_035,
+  blockTime: 1_781_729_878,
+  programDataAddress: "DoU57AYuPFu2QU514RktNPG22QhApEjnKxnBcu4BHDTY",
+  bufferAccount: "BsRtj52FSoLqdtiJ6kM5Jmgc8LFbroy5yG24UE363C6s",
+  authority: "AeLmXCbPaQHGWRLr2saFsEVfmMNuKnxRAbWCT9P5twgz",
+  spillAccount: "4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn",
+  executorProgram: "SMPLecH534NA9acpos4G6x7uf3LWbCAwZQE9e8ZekMu",
+  executionTrackerProgram: "SMPLKTQhrgo22hFCVq2VGX1KAktTWjeizkhrdB1eauK",
+});
 
 const BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
@@ -114,6 +125,63 @@ export async function observeIatB3StandardProgramsMainnet({
   const upgradeAuthority = authorityOption === 1 ? encodeBase58(programData.bytes.subarray(13, 45)) : null;
   const programBytes = programData.bytes.subarray(45);
   if (programBytes.length === 0) throw new Error("Token-2022 ProgramData contained no program bytes");
+  if (programDataAddress !== TOKEN_2022_LAST_UPGRADE.programDataAddress
+      || Number(deploymentSlot) !== TOKEN_2022_LAST_UPGRADE.slot
+      || upgradeAuthority !== TOKEN_2022_LAST_UPGRADE.authority) {
+    throw new Error("Token-2022 ProgramData no longer matched the pinned last-upgrade boundary");
+  }
+
+  const signatureHistory = await call("getSignaturesForAddress", [
+    programDataAddress,
+    { limit: 1, commitment: "finalized" },
+  ]);
+  const newestSignature = Array.isArray(signatureHistory) && signatureHistory.length === 1
+    ? signatureHistory[0]
+    : null;
+  if (!newestSignature
+      || newestSignature.signature !== TOKEN_2022_LAST_UPGRADE.signature
+      || newestSignature.slot !== TOKEN_2022_LAST_UPGRADE.slot
+      || newestSignature.blockTime !== TOKEN_2022_LAST_UPGRADE.blockTime
+      || newestSignature.err !== null
+      || newestSignature.confirmationStatus !== "finalized") {
+    throw new Error("Token-2022 newest ProgramData history did not match the pinned finalized upgrade");
+  }
+  const upgradeTransaction = await call("getTransaction", [
+    TOKEN_2022_LAST_UPGRADE.signature,
+    { encoding: "jsonParsed", commitment: "finalized", maxSupportedTransactionVersion: 0 },
+  ]);
+  const transactionSignatures = upgradeTransaction?.transaction?.signatures;
+  const innerInstructions = upgradeTransaction?.meta?.innerInstructions;
+  const parsedUpgrade = Array.isArray(innerInstructions)
+    ? innerInstructions.flatMap((group) => group?.instructions ?? []).find((instruction) => (
+      instruction?.program === "bpf-upgradeable-loader"
+      && instruction?.programId === UPGRADEABLE_LOADER_ID
+      && instruction?.parsed?.type === "upgrade"
+    ))
+    : null;
+  const upgradeInfo = parsedUpgrade?.parsed?.info;
+  const outerPrograms = upgradeTransaction?.transaction?.message?.instructions?.map(({ programId }) => programId) ?? [];
+  const innerPrograms = Array.isArray(innerInstructions)
+    ? innerInstructions.flatMap((group) => group?.instructions ?? []).map(({ programId }) => programId)
+    : [];
+  const logs = upgradeTransaction?.meta?.logMessages;
+  if (upgradeTransaction?.slot !== TOKEN_2022_LAST_UPGRADE.slot
+      || upgradeTransaction?.blockTime !== TOKEN_2022_LAST_UPGRADE.blockTime
+      || upgradeTransaction?.meta?.err !== null
+      || !Array.isArray(transactionSignatures)
+      || transactionSignatures.length !== 1
+      || transactionSignatures[0] !== TOKEN_2022_LAST_UPGRADE.signature
+      || upgradeInfo?.programAccount !== TOKEN_2022_PROGRAM_ID
+      || upgradeInfo?.programDataAccount !== programDataAddress
+      || upgradeInfo?.bufferAccount !== TOKEN_2022_LAST_UPGRADE.bufferAccount
+      || upgradeInfo?.authority !== upgradeAuthority
+      || upgradeInfo?.spillAccount !== TOKEN_2022_LAST_UPGRADE.spillAccount
+      || !outerPrograms.includes(TOKEN_2022_LAST_UPGRADE.executorProgram)
+      || !innerPrograms.includes(TOKEN_2022_LAST_UPGRADE.executionTrackerProgram)
+      || !Array.isArray(logs)
+      || !logs.includes(`Upgraded program ${TOKEN_2022_PROGRAM_ID}`)) {
+    throw new Error("Token-2022 finalized upgrade transaction did not match the pinned provenance");
+  }
 
   return {
     schema: "iat-b3-standard-program-mainnet-observation/v1",
@@ -134,6 +202,16 @@ export async function observeIatB3StandardProgramsMainnet({
       immutable: upgradeAuthority === null,
       programBytes: programBytes.length,
       programSha256: createHash("sha256").update(programBytes).digest("hex"),
+      lastUpgrade: {
+        signature: TOKEN_2022_LAST_UPGRADE.signature,
+        slot: TOKEN_2022_LAST_UPGRADE.slot,
+        blockTime: TOKEN_2022_LAST_UPGRADE.blockTime,
+        bufferAccount: TOKEN_2022_LAST_UPGRADE.bufferAccount,
+        spillAccount: TOKEN_2022_LAST_UPGRADE.spillAccount,
+        executorProgram: TOKEN_2022_LAST_UPGRADE.executorProgram,
+        executionTrackerProgram: TOKEN_2022_LAST_UPGRADE.executionTrackerProgram,
+        finalizedProvenanceVerified: true,
+      },
     },
     zkElgamalProof: {
       programId: ZK_ELGAMAL_PROOF_PROGRAM_ID,
@@ -142,6 +220,10 @@ export async function observeIatB3StandardProgramsMainnet({
       immutable: true,
     },
     standardProgramSnapshotComplete: true,
+    sourceReleaseBindingComplete: false,
+    exactSourceCommit: null,
+    exactReleaseTag: null,
+    reproducibleOfficialBuildMatched: false,
     rpcObservationAuthenticated: false,
     token2022ImmutableBytecodeVerified: upgradeAuthority === null,
     hostCompatibilityComplete: false,
@@ -149,9 +231,7 @@ export async function observeIatB3StandardProgramsMainnet({
     activationReady: false,
     mainnetExecutionAuthorized: false,
     mainnetStatus: "HOLD",
-    blocker: upgradeAuthority === null
-      ? "INDEPENDENT_SOURCE_TO_BYTECODE_VERSION_BINDING_REMAINS_REQUIRED"
-      : "TOKEN_2022_PROGRAM_REMAINS_UPGRADEABLE_AND_REQUIRES_CEREMONY_TIME_REATTESTATION",
+    blocker: "TOKEN_2022_SOURCE_RELEASE_BINDING_AND_CEREMONY_TIME_REATTESTATION_REMAIN_REQUIRED",
   };
 }
 
