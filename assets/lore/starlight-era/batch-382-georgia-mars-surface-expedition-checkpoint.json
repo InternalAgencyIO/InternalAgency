@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-fresh-round-7-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-fresh-round-7",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -3454,7 +3454,7 @@
       "completedAt": "2026-08-11T11:56:07.236Z"
     },
     "freshRound7": {
-      "status": "raw-complete-zero-new-accepted-recovery-materialized",
+      "status": "completed-zero-new-accepted-three-rejected",
       "preparedAt": "2026-08-11T12:14:08.191Z",
       "sceneNumbers": [
         1548,
@@ -3577,7 +3577,7 @@
         1551
       ],
       "recovery": {
-        "status": "materialized-pending-launch",
+        "status": "completed-zero-new-accepted-three-rejected",
         "preparedAt": "2026-08-11T12:27:12.404Z",
         "sceneNumbers": [
           1548,
@@ -3625,8 +3625,69 @@
             ]
           }
         },
-        "storedRollsChanged": false
-      }
+        "storedRollsChanged": false,
+        "completedAt": "2026-08-11T12:44:24.818Z",
+        "perScene": {
+          "1548": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-7-recovery/scene-1548.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-ca3d1f92-f30f-4966-84f8-5b3e38fcd14f.png",
+            "sha256": "CE83FFA9EFBBFAF1F80CAFAD81EFE117A7D447FD3EF8B8392426B95E66E8F3B2",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The edit preserves unmistakable Tbilisi, hard hail, MAX, four adult identities, distinct couture, a separate route card, the compact pistol, and improved disk alignment with no rendered connector.",
+              "ECE's left hand is reassigned to a link with Ellie while only her right hand owns the pistol, violating the mandatory two-hand mission stance and the stored six-hand dance ownership graph.",
+              "ECE remains on the outer right edge rather than visibly crossing through the open side to split the pair, so the rolled moving interruption is still weak."
+            ],
+            "recoveryPassConsumedThisRound": true
+          },
+          "1550": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-7-recovery/scene-1550.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-ed2a4159-d3fb-4896-b447-5c80993335c9.png",
+            "sha256": "5ECDA744D88DA7CF9ED83D08BBECF1DAB12C859444D40AC698A7122BCCA416E8",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The edit preserves unmistakable Sighnaghi, aurora, five adults, exactly three balloons, Radiance's two-handle ownership, the lap seat, linked affection, ten traceable hands, male contacts and ECE eye line, the separate route card, ECE's two-hand pistol, and the empty basin disk.",
+              "The rotated muzzle still extends down-right past the basin while the orange disk remains below-left and behind the muzzle plane, so it is not the visible endpoint of the stored sight picture."
+            ],
+            "recoveryPassConsumedThisRound": true
+          },
+          "1551": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-7-recovery/scene-1551.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-3afd3b66-c94c-417a-8dd6-7fef29e03642.png",
+            "sha256": "86D7678F2DF6940FF089BCA0BD77AA045E15D3D7AA736B1834CE839389811842",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The edit preserves unmistakable Batumi, heavy rain, distinct PAWS and MAX, Radiance's sole rainbow socks and open back, four distinct silhouettes, the shallow dip with both separated Ellie support palms and eight traceable hands, ECE's two compass hands, Alia's two mission-prop hands, and excellent paper-target alignment against a complete sand backstop.",
+              "The close crop shows Alia's trigger index curled into the guard rather than straight along the frame, failing the non-negotiable handling gate.",
+              "Alia's active strapless and fully-open-back rolls are not materialized: a connected halter collar and horizontal back band remain visible."
+            ],
+            "recoveryPassConsumedThisRound": true
+          }
+        },
+        "newlyAcceptedSceneNumbers": [],
+        "rejectedSceneNumbers": [
+          1548,
+          1550,
+          1551
+        ],
+        "acceptedSceneNumbersOverall": [
+          1549
+        ],
+        "laterWakeAction": "Start fresh round 8 for scenes 1548, 1550, and 1551 only; preserve accepted scene 1549 and do not advance to Fiji."
+      },
+      "completedAt": "2026-08-11T12:44:24.818Z"
     }
   },
   "acceptedAssets": [
@@ -4315,6 +4376,62 @@
         "The clean raw preserves unmistakable Batumi, heavy rain, distinct PAWS and MAX, Radiance's sole rainbow hosiery and open back, four distinct outfits, the shallow romantic dip, ECE's two-hand compass, Alia's two-hand compact pistol with indexed trigger finger, and excellent same-height paper-target alignment against a complete sand backstop.",
         "Ellie's upper support hand is fully hidden behind Radiance while her lower waist hand is visible, so only seven human hands are unambiguous and the separated two-palm support inventory fails."
       ]
+    },
+    {
+      "scene": 1548,
+      "round": 7,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-7-recovery/scene-1548.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-ca3d1f92-f30f-4966-84f8-5b3e38fcd14f.png",
+      "sha256": "CE83FFA9EFBBFAF1F80CAFAD81EFE117A7D447FD3EF8B8392426B95E66E8F3B2",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The edit preserves unmistakable Tbilisi, hard hail, MAX, four adult identities, distinct couture, a separate route card, the compact pistol, and improved disk alignment with no rendered connector.",
+        "ECE's left hand is reassigned to a link with Ellie while only her right hand owns the pistol, violating the mandatory two-hand mission stance and the stored six-hand dance ownership graph.",
+        "ECE remains on the outer right edge rather than visibly crossing through the open side to split the pair, so the rolled moving interruption is still weak."
+      ],
+      "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1550,
+      "round": 7,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-7-recovery/scene-1550.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-ed2a4159-d3fb-4896-b447-5c80993335c9.png",
+      "sha256": "5ECDA744D88DA7CF9ED83D08BBECF1DAB12C859444D40AC698A7122BCCA416E8",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The edit preserves unmistakable Sighnaghi, aurora, five adults, exactly three balloons, Radiance's two-handle ownership, the lap seat, linked affection, ten traceable hands, male contacts and ECE eye line, the separate route card, ECE's two-hand pistol, and the empty basin disk.",
+        "The rotated muzzle still extends down-right past the basin while the orange disk remains below-left and behind the muzzle plane, so it is not the visible endpoint of the stored sight picture."
+      ],
+      "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "round": 7,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-7-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-3afd3b66-c94c-417a-8dd6-7fef29e03642.png",
+      "sha256": "86D7678F2DF6940FF089BCA0BD77AA045E15D3D7AA736B1834CE839389811842",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The edit preserves unmistakable Batumi, heavy rain, distinct PAWS and MAX, Radiance's sole rainbow socks and open back, four distinct silhouettes, the shallow dip with both separated Ellie support palms and eight traceable hands, ECE's two compass hands, Alia's two mission-prop hands, and excellent paper-target alignment against a complete sand backstop.",
+        "The close crop shows Alia's trigger index curled into the guard rather than straight along the frame, failing the non-negotiable handling gate.",
+        "Alia's active strapless and fully-open-back rolls are not materialized: a connected halter collar and horizontal back band remain visible."
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -4326,7 +4443,7 @@
     "requiredCurrentCountryAssets": 4,
     "note": "Georgia remains active with accepted scene 1549 preserved. X publication is mandatory only after scenes 1548, 1550, and 1551 are accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T12:27:12.404Z",
+  "checkpointedAt": "2026-08-11T12:44:24.818Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -4775,13 +4892,49 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1548,
+      "round": 7,
+      "kind": "fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-7-recovery/scene-1548.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-ca3d1f92-f30f-4966-84f8-5b3e38fcd14f.png",
+      "sha256": "CE83FFA9EFBBFAF1F80CAFAD81EFE117A7D447FD3EF8B8392426B95E66E8F3B2",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "scene": 1550,
+      "round": 7,
+      "kind": "fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-7-recovery/scene-1550.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-ed2a4159-d3fb-4896-b447-5c80993335c9.png",
+      "sha256": "5ECDA744D88DA7CF9ED83D08BBECF1DAB12C859444D40AC698A7122BCCA416E8",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "scene": 1551,
+      "round": 7,
+      "kind": "fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-7-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-3afd3b66-c94c-417a-8dd6-7fef29e03642.png",
+      "sha256": "86D7678F2DF6940FF089BCA0BD77AA045E15D3D7AA736B1834CE839389811842",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-fresh-round-7-recovery-missing-scenes-only",
+    "action": "fresh-round-8-missing-scenes-only",
     "preserveAcceptedSceneNumbers": [
       1549
     ],
