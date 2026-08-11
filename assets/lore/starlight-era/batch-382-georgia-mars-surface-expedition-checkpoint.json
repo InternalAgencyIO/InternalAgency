@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-fresh-round-9-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-fresh-round-9",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -4086,7 +4086,7 @@
       "completedAt": "2026-08-11T13:17:53.509Z"
     },
     "freshRound9": {
-      "status": "raw-complete-zero-new-accepted-recovery-materialized",
+      "status": "completed-zero-new-accepted-two-rejected",
       "preparedAt": "2026-08-11T13:35:42.455Z",
       "sceneNumbers": [
         1548,
@@ -4182,7 +4182,7 @@
         1551
       ],
       "recovery": {
-        "status": "materialized-pending-launch",
+        "status": "completed-zero-new-accepted-two-rejected",
         "preparedAt": "2026-08-11T13:46:56.889Z",
         "sceneNumbers": [
           1548,
@@ -4221,8 +4221,55 @@
             ]
           }
         },
-        "storedRollsChanged": false
-      }
+        "storedRollsChanged": false,
+        "completedAt": "2026-08-11T13:58:14.066Z",
+        "perScene": {
+          "1548": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-9-recovery/scene-1548.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-1484203a-265e-4216-9ce1-b7fadcf76680.png",
+            "sha256": "BCCE549700D79D828FBBC6AC662EB81E4DF76F5AD6949AF9472F00DD28880A33",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The recovery preserves unmistakable Tbilisi, hard hail, MAX, four adult identities, distinct country-led couture, all three active midriff bands, eight traceable hands, ECE's center-foreground lunge, a separate route card, the orange disk, and complete transparent backstop.",
+              "A visible pink trajectory connector runs from the muzzle to the orange disk, violating the explicit no beam, ray, tracer, laser, path, or trajectory-line gate.",
+              "The low linked clasp repeats the Radiance-Ellie pair while Alia's second hand hangs free, so the rolled three-person linked chain and required Ellie-Alia link are not performed."
+            ],
+            "recoveryPassConsumedThisRound": true
+          },
+          "1551": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-9-recovery/scene-1551.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-8e15ce28-5c2f-4d3d-923d-59e642b364b1.png",
+            "sha256": "12B6F61C04990A971E47456C01C6C2A6E1691D765EDA27C937D055E78FE6BF62",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The recovery preserves unmistakable Batumi, heavy rain, distinct PAWS and MAX, Radiance's sole rainbow hosiery and open back, Alia's strapless opaque side coverage and open back, ECE's two-hand compass ownership, and the complete paper-target backstop.",
+              "Ellie has only one unambiguous support hand and Radiance has only one unambiguous hand, so the required eight-hand ownership map and caught-hand dip graph remain incomplete.",
+              "The separate hands-free blue holographic route map is missing, so ECE's route-strategist roll is not materialized independently from the compass.",
+              "Alia has no visible restrained midriff band despite that active roll, and the paper diamond center sits visibly above rather than on the horizontal muzzle axis."
+            ],
+            "recoveryPassConsumedThisRound": true
+          }
+        },
+        "newlyAcceptedSceneNumbers": [],
+        "rejectedSceneNumbers": [
+          1548,
+          1551
+        ],
+        "acceptedSceneNumbersOverall": [
+          1549,
+          1550
+        ],
+        "laterWakeAction": "Start fresh round 10 for scenes 1548 and 1551 only; preserve accepted scenes 1549 and 1550 and do not advance to Fiji."
+      },
+      "completedAt": "2026-08-11T13:58:14.066Z"
     }
   },
   "acceptedAssets": [
@@ -5104,6 +5151,45 @@
         "Ellie does not provide the required two-palm dip support, so the stored four-adult hard-love contact graph is not performed.",
         "Alia retains shoulder straps and no restrained midriff band, so her active strapless and midriff rolls fail; her trigger index is curled into the guard."
       ]
+    },
+    {
+      "scene": 1548,
+      "round": 9,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-9-recovery/scene-1548.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-1484203a-265e-4216-9ce1-b7fadcf76680.png",
+      "sha256": "BCCE549700D79D828FBBC6AC662EB81E4DF76F5AD6949AF9472F00DD28880A33",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovery preserves unmistakable Tbilisi, hard hail, MAX, four adult identities, distinct country-led couture, all three active midriff bands, eight traceable hands, ECE's center-foreground lunge, a separate route card, the orange disk, and complete transparent backstop.",
+        "A visible pink trajectory connector runs from the muzzle to the orange disk, violating the explicit no beam, ray, tracer, laser, path, or trajectory-line gate.",
+        "The low linked clasp repeats the Radiance-Ellie pair while Alia's second hand hangs free, so the rolled three-person linked chain and required Ellie-Alia link are not performed."
+      ],
+      "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "round": 9,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-9-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-8e15ce28-5c2f-4d3d-923d-59e642b364b1.png",
+      "sha256": "12B6F61C04990A971E47456C01C6C2A6E1691D765EDA27C937D055E78FE6BF62",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovery preserves unmistakable Batumi, heavy rain, distinct PAWS and MAX, Radiance's sole rainbow hosiery and open back, Alia's strapless opaque side coverage and open back, ECE's two-hand compass ownership, and the complete paper-target backstop.",
+        "Ellie has only one unambiguous support hand and Radiance has only one unambiguous hand, so the required eight-hand ownership map and caught-hand dip graph remain incomplete.",
+        "The separate hands-free blue holographic route map is missing, so ECE's route-strategist roll is not materialized independently from the compass.",
+        "Alia has no visible restrained midriff band despite that active roll, and the paper diamond center sits visibly above rather than on the horizontal muzzle axis."
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -5115,7 +5201,7 @@
     "requiredCurrentCountryAssets": 4,
     "note": "Georgia remains active with accepted scenes 1549 and 1550 preserved. X publication is mandatory only after scenes 1548 and 1551 are accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T13:46:56.889Z",
+  "checkpointedAt": "2026-08-11T13:58:14.066Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -5684,13 +5770,37 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1548,
+      "round": 9,
+      "kind": "fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-9-recovery/scene-1548.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-1484203a-265e-4216-9ce1-b7fadcf76680.png",
+      "sha256": "BCCE549700D79D828FBBC6AC662EB81E4DF76F5AD6949AF9472F00DD28880A33",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "scene": 1551,
+      "round": 9,
+      "kind": "fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-9-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-8e15ce28-5c2f-4d3d-923d-59e642b364b1.png",
+      "sha256": "12B6F61C04990A971E47456C01C6C2A6E1691D765EDA27C937D055E78FE6BF62",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-fresh-round-9-recovery-missing-scenes-only",
+    "action": "fresh-round-10-missing-scenes-only",
     "preserveAcceptedSceneNumbers": [
       1549,
       1550
