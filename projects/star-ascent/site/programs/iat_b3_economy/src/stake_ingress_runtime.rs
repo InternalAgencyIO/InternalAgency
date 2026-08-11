@@ -38,7 +38,7 @@ use spl_transfer_hook_interface::{
 };
 
 use crate::{
-    native_adapter::NativeEconomyBinding,
+    native_adapter::{NativeEconomyBinding, STAKE_TOKEN_SEED, VAULT_AUTHORITY_SEED},
     runtime_adapter::{
         verify_daily_law_open_account_info, RuntimeAdapterError, RuntimeProductionActiveConfig,
     },
@@ -198,6 +198,75 @@ const CONFIG_AND_LANES_CALLBACK_ERROR: u32 = 0xB321;
 struct AccountBoundStakeIngressInput {
     open_position: Box<PrepareOpenPositionInput>,
     ingress: Box<PrepareStakeIngressInput>,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+struct CanonicalStakeIngressAccounts {
+    config: Pubkey,
+    vault_authority: Pubkey,
+    vault_authority_bump: u8,
+    stake_vault: Pubkey,
+    ingress_authority: Pubkey,
+    ingress_authority_bump: u8,
+}
+
+fn derive_canonical_stake_ingress_accounts(
+    program_id: &Pubkey,
+    config: Pubkey,
+) -> CanonicalStakeIngressAccounts {
+    let (vault_authority, vault_authority_bump) =
+        Pubkey::find_program_address(&[VAULT_AUTHORITY_SEED, config.as_ref()], program_id);
+    let (stake_vault, _) =
+        Pubkey::find_program_address(&[STAKE_TOKEN_SEED, config.as_ref()], program_id);
+    let (ingress_authority, ingress_authority_bump) =
+        Pubkey::find_program_address(&[STAKE_INGRESS_SEED, config.as_ref()], program_id);
+    CanonicalStakeIngressAccounts {
+        config,
+        vault_authority,
+        vault_authority_bump,
+        stake_vault,
+        ingress_authority,
+        ingress_authority_bump,
+    }
+}
+
+fn require_canonical_stake_account_keys(
+    canonical: &CanonicalStakeIngressAccounts,
+    stake_vault: &Pubkey,
+    ingress_authority: &Pubkey,
+) -> Result<(), StakeIngressRuntimeError> {
+    if stake_vault != &canonical.stake_vault || ingress_authority != &canonical.ingress_authority {
+        return Err(StakeIngressRuntimeError::InvalidAccountBinding);
+    }
+    Ok(())
+}
+
+fn require_exact_stake_ledger(
+    tracked_principal: u64,
+    observed_vault_amount: u64,
+) -> Result<(), StakeIngressRuntimeError> {
+    if tracked_principal != observed_vault_amount {
+        return Err(StakeIngressRuntimeError::StakeIngressPreparationRejected);
+    }
+    Ok(())
+}
+
+fn require_canonical_config_stake_fields(
+    config_mint: [u8; 32],
+    config_token_program: [u8; 32],
+    config_stake_vault: [u8; 32],
+    config_vault_authority_bump: u8,
+    observed_mint: &Pubkey,
+    canonical: &CanonicalStakeIngressAccounts,
+) -> Result<(), StakeIngressRuntimeError> {
+    if config_mint != observed_mint.to_bytes()
+        || config_token_program != TOKEN_2022_PROGRAM_ID.to_bytes()
+        || config_stake_vault != canonical.stake_vault.to_bytes()
+        || config_vault_authority_bump != canonical.vault_authority_bump
+    {
+        return Err(StakeIngressRuntimeError::InvalidAccountBinding);
+    }
+    Ok(())
 }
 
 #[derive(Debug)]
@@ -460,7 +529,7 @@ fn validate_accounts(
     program_id: &Pubkey,
     plan: &StakeIngressExecutionPlan,
     accounts: &StakeIngressRuntimeAccounts<'_, '_>,
-) -> Result<(Pubkey, u8), StakeIngressRuntimeError> {
+) -> Result<CanonicalStakeIngressAccounts, StakeIngressRuntimeError> {
     if !accounts.owner.is_signer
         || accounts.owner.executable
         || !accounts.source.is_writable
@@ -478,17 +547,35 @@ fn validate_accounts(
     {
         return Err(StakeIngressRuntimeError::InvalidAccountFlags);
     }
-    let config = Pubkey::new_from_array(plan.open_position.config_key);
-    let (ingress, bump) =
-        Pubkey::find_program_address(&[STAKE_INGRESS_SEED, config.as_ref()], program_id);
+    let canonical = derive_canonical_stake_ingress_accounts(
+        program_id,
+        Pubkey::new_from_array(plan.open_position.config_key),
+    );
+    require_canonical_stake_account_keys(
+        &canonical,
+        accounts.stake_vault.key,
+        accounts.ingress_authority.key,
+    )?;
+    require_canonical_config_stake_fields(
+        plan.open_position.config_snapshot.mint,
+        plan.open_position.config_snapshot.token_program,
+        plan.open_position.config_snapshot.stake_token_account,
+        plan.open_position.config_snapshot.vault_authority_bump,
+        accounts.mint.key,
+        &canonical,
+    )?;
     let validation = get_extra_account_metas_address(accounts.mint.key, accounts.hook_program.key);
     if accounts.owner.key.to_bytes() != plan.open_position.owner
         || accounts.source.key.to_bytes() != plan.approve_ingress.source
         || accounts.mint.key.to_bytes() != plan.approve_ingress.mint
         || accounts.stake_vault.key.to_bytes() != plan.transfer.transfer.destination
-        || accounts.ingress_authority.key != &ingress
-        || plan.approve_ingress.delegate != ingress.to_bytes()
-        || plan.transfer.transfer.authority != ingress.to_bytes()
+        || plan.stake_before.key != canonical.stake_vault.to_bytes()
+        || plan.stake_before.owner != canonical.vault_authority.to_bytes()
+        || plan.open_position.config_snapshot.stake_token_account
+            != canonical.stake_vault.to_bytes()
+        || plan.open_position.config_snapshot.vault_authority_bump != canonical.vault_authority_bump
+        || plan.approve_ingress.delegate != canonical.ingress_authority.to_bytes()
+        || plan.transfer.transfer.authority != canonical.ingress_authority.to_bytes()
         || plan.approve_ingress.token_program != TOKEN_2022_PROGRAM_ID.to_bytes()
         || plan.transfer.transfer.token_program != TOKEN_2022_PROGRAM_ID.to_bytes()
         || plan.approve_ingress.amount != plan.open_position.principal
@@ -505,7 +592,7 @@ fn validate_accounts(
         return Err(StakeIngressRuntimeError::InvalidAccountBinding);
     }
     parse_mint(accounts.mint, accounts.hook_program)?;
-    Ok((config, bump))
+    Ok(canonical)
 }
 
 /// Execute the Token-2022 portion of a prepared plan. The enclosing production
@@ -525,11 +612,14 @@ pub fn execute_prepared_stake_ingress<'info, F>(
 where
     F: FnOnce(&StakeIngressExecutionPlan, &CompletedStakeIngress) -> ProgramResult,
 {
-    let (config, ingress_bump) = validate_accounts(program_id, plan, &accounts)?;
+    let canonical = validate_accounts(program_id, plan, &accounts)?;
     let source_before =
         observe_stake_ingress_source(accounts.source, accounts.mint.key, accounts.owner.key)?;
-    let stake_before =
-        observe_stake_ingress_vault(accounts.stake_vault, accounts.mint.key, &config)?;
+    let stake_before = observe_stake_ingress_vault(
+        accounts.stake_vault,
+        accounts.mint.key,
+        &canonical.vault_authority,
+    )?;
     if source_before != plan.source_before || stake_before != plan.stake_before {
         return Err(StakeIngressRuntimeError::InvalidAccountBinding);
     }
@@ -537,8 +627,11 @@ where
     invoke_ingress_approval(plan, accounts)?;
     let source_after_approval =
         observe_stake_ingress_source(accounts.source, accounts.mint.key, accounts.owner.key)?;
-    let stake_after_approval =
-        observe_stake_ingress_vault(accounts.stake_vault, accounts.mint.key, &config)?;
+    let stake_after_approval = observe_stake_ingress_vault(
+        accounts.stake_vault,
+        accounts.mint.key,
+        &canonical.vault_authority,
+    )?;
     let approved = verify_ingress_approval_heap(
         plan,
         StakeIngressApprovalObservation {
@@ -547,11 +640,19 @@ where
         },
     )?;
 
-    invoke_ingress_transfer(plan, accounts, &config, ingress_bump)?;
+    invoke_ingress_transfer(
+        plan,
+        accounts,
+        &canonical.config,
+        canonical.ingress_authority_bump,
+    )?;
     let source_after_transfer =
         observe_stake_ingress_source(accounts.source, accounts.mint.key, accounts.owner.key)?;
-    let stake_after_transfer =
-        observe_stake_ingress_vault(accounts.stake_vault, accounts.mint.key, &config)?;
+    let stake_after_transfer = observe_stake_ingress_vault(
+        accounts.stake_vault,
+        accounts.mint.key,
+        &canonical.vault_authority,
+    )?;
     let post_cpi = apply_transfer_and_retained_v2_finalizer_heap(
         approved,
         StakeIngressTransferObservation {
@@ -563,8 +664,11 @@ where
     restore_original_delegate(plan, accounts)?;
     let source_after_restoration =
         observe_stake_ingress_source(accounts.source, accounts.mint.key, accounts.owner.key)?;
-    let stake_after_restoration =
-        observe_stake_ingress_vault(accounts.stake_vault, accounts.mint.key, &config)?;
+    let stake_after_restoration = observe_stake_ingress_vault(
+        accounts.stake_vault,
+        accounts.mint.key,
+        &canonical.vault_authority,
+    )?;
     let completed = complete_stake_ingress_heap(
         post_cpi,
         StakeIngressRestorationObservation {
@@ -627,7 +731,7 @@ pub fn execute_production_active_daily_law_authenticated_stake_ingress<'info, F>
     active_config: &RuntimeProductionActiveConfig,
     law_binding: &CanonicalDailyLawBinding,
     law_state: &AccountInfo<'info>,
-    open_position: Box<PrepareOpenPositionInput>,
+    mut open_position: Box<PrepareOpenPositionInput>,
     accounts: StakeIngressRuntimeAccounts<'_, 'info>,
     persist_transaction_local_state: F,
 ) -> Result<DailyLawAuthenticatedStakeIngressReceipt, StakeIngressRuntimeError>
@@ -641,7 +745,10 @@ where
         economy_binding,
         program_id,
         accounts.mint.key,
+        open_position.config_key,
     )?;
+    open_position.config_key = active_config.key();
+    open_position.config = active_config.state().config;
     execute_daily_law_authenticated_stake_ingress_with_gate_callback(
         program_id,
         gate,
@@ -668,7 +775,7 @@ pub fn execute_production_open_position_and_persist<'info>(
     zk_elgamal_proof_program: &AccountInfo<'info>,
     law_binding: &CanonicalDailyLawBinding,
     law_state: &AccountInfo<'info>,
-    open_position: Box<PrepareOpenPositionInput>,
+    mut open_position: Box<PrepareOpenPositionInput>,
     accounts: StakeIngressRuntimeAccounts<'_, 'info>,
     persistence: ProductionOpenPositionPersistenceAccounts<'_, 'info>,
 ) -> Result<ProductionOpenPositionRuntimeReceipt, StakeIngressRuntimeError> {
@@ -679,7 +786,10 @@ pub fn execute_production_open_position_and_persist<'info>(
         economy_binding,
         program_id,
         accounts.mint.key,
+        open_position.config_key,
     )?;
+    open_position.config_key = active_config.key();
+    open_position.config = active_config.state().config;
     let canonical_mint = authenticate_canonical_economy_mint_account_info(
         canonical_mint_binding,
         accounts.token_program,
@@ -775,12 +885,21 @@ fn require_production_active_context(
     economy_binding: &NativeEconomyBinding,
     program_id: &Pubkey,
     mint: &Pubkey,
+    open_position_config: [u8; 32],
 ) -> Result<(), StakeIngressRuntimeError> {
+    let canonical = derive_canonical_stake_ingress_accounts(
+        program_id,
+        Pubkey::new_from_array(economy_binding.config()),
+    );
+    let active_state = active_config.state().config;
     if program_id.to_bytes() != economy_binding.program_id()
         || mint.to_bytes() != economy_binding.mint()
         || active_config.program_id() != economy_binding.program_id()
         || active_config.mint() != economy_binding.mint()
         || active_config.key() != economy_binding.config()
+        || open_position_config != active_config.key()
+        || active_state.stake_token_account != canonical.stake_vault.to_bytes()
+        || active_state.vault_authority_bump != canonical.vault_authority_bump
         || active_config.law_account_sha256() != gate.law_account_sha256()
         || active_config.law_unix_timestamp() != gate.unix_timestamp()
         || active_config.law_local_day() != gate.local_day()
@@ -842,31 +961,37 @@ fn bind_stake_ingress_accounts(
     mut open_position: Box<PrepareOpenPositionInput>,
     accounts: &StakeIngressRuntimeAccounts<'_, '_>,
 ) -> Result<AccountBoundStakeIngressInput, StakeIngressRuntimeError> {
-    let config = Pubkey::new_from_array(open_position.config_key);
-    let (ingress, _) =
-        Pubkey::find_program_address(&[STAKE_INGRESS_SEED, config.as_ref()], program_id);
+    let canonical = derive_canonical_stake_ingress_accounts(
+        program_id,
+        Pubkey::new_from_array(open_position.config_key),
+    );
+    require_canonical_stake_account_keys(
+        &canonical,
+        accounts.stake_vault.key,
+        accounts.ingress_authority.key,
+    )?;
     let source_before =
         observe_stake_ingress_source(accounts.source, accounts.mint.key, accounts.owner.key)?;
-    let stake_before =
-        observe_stake_ingress_vault(accounts.stake_vault, accounts.mint.key, &config)?;
+    let stake_before = observe_stake_ingress_vault(
+        accounts.stake_vault,
+        accounts.mint.key,
+        &canonical.vault_authority,
+    )?;
+    require_exact_stake_ledger(open_position.config.staked_principal, stake_before.amount)?;
     // AccountInfo-derived identities and balances replace every equivalent
     // caller-provided field before the retained V2 preflight executes.
     open_position.owner = accounts.owner.key.to_bytes();
     open_position.mint = accounts.mint.key.to_bytes();
     open_position.owner_tokens = source_before.token;
-    open_position.vault_authority = config.to_bytes();
+    open_position.vault_authority = canonical.vault_authority.to_bytes();
     open_position.stake_tokens = stake_before;
-    open_position.config.mint = accounts.mint.key.to_bytes();
-    open_position.config.token_program = TOKEN_2022_PROGRAM_ID.to_bytes();
-    open_position.config.stake_token_account = accounts.stake_vault.key.to_bytes();
-    open_position.config.staked_principal = stake_before.amount;
     let hook_validation_address =
         get_extra_account_metas_address(accounts.mint.key, accounts.hook_program.key);
     Ok(AccountBoundStakeIngressInput {
         open_position,
         ingress: Box::new(PrepareStakeIngressInput {
             owner_is_signer: accounts.owner.is_signer,
-            canonical_ingress_authority: ingress.to_bytes(),
+            canonical_ingress_authority: canonical.ingress_authority.to_bytes(),
             ingress: IngressPdaBinding {
                 key: accounts.ingress_authority.key.to_bytes(),
             },
@@ -1006,6 +1131,187 @@ fn restore_original_delegate(
         )?;
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod canonical_stake_binding_tests {
+    use super::*;
+    use spl_token_2022_interface::extension::{
+        AccountType, BaseStateWithExtensionsMut, StateWithExtensionsMut,
+    };
+
+    const PROGRAM_ID: Pubkey = Pubkey::new_from_array([0xE1; 32]);
+    const CONFIG: Pubkey = Pubkey::new_from_array([0xC1; 32]);
+    const MINT: Pubkey = Pubkey::new_from_array([0x22; 32]);
+
+    fn vault_data(owner: Pubkey) -> Vec<u8> {
+        let len = ExtensionType::try_calculate_account_len::<TokenAccount>(&[
+            ExtensionType::TransferHookAccount,
+        ])
+        .unwrap();
+        let mut data = vec![0; len];
+        let mut state =
+            StateWithExtensionsMut::<TokenAccount>::unpack_uninitialized(&mut data).unwrap();
+        state.get_account_type_mut()[0] = u8::from(AccountType::Account);
+        state.base = TokenAccount {
+            mint: MINT,
+            owner,
+            amount: 17,
+            state: AccountState::Initialized,
+            ..TokenAccount::default()
+        };
+        state.init_extension::<TransferHookAccount>(false).unwrap();
+        state.pack_base();
+        data
+    }
+
+    #[test]
+    fn canonical_stake_accounts_use_three_distinct_retained_v2_seed_domains() {
+        let canonical = derive_canonical_stake_ingress_accounts(&PROGRAM_ID, CONFIG);
+        assert_eq!(canonical.config, CONFIG);
+        assert_ne!(canonical.vault_authority, CONFIG);
+        assert_ne!(canonical.stake_vault, CONFIG);
+        assert_ne!(canonical.ingress_authority, CONFIG);
+        assert_ne!(canonical.vault_authority, canonical.stake_vault);
+        assert_ne!(canonical.vault_authority, canonical.ingress_authority);
+        assert_ne!(canonical.stake_vault, canonical.ingress_authority);
+        assert_eq!(
+            Pubkey::create_program_address(
+                &[
+                    VAULT_AUTHORITY_SEED,
+                    CONFIG.as_ref(),
+                    &[canonical.vault_authority_bump],
+                ],
+                &PROGRAM_ID,
+            )
+            .unwrap(),
+            canonical.vault_authority,
+        );
+    }
+
+    #[test]
+    fn persistent_config_stake_fields_must_match_observed_and_derived_identities_exactly() {
+        let canonical = derive_canonical_stake_ingress_accounts(&PROGRAM_ID, CONFIG);
+        let canonical_result = require_canonical_config_stake_fields(
+            MINT.to_bytes(),
+            TOKEN_2022_PROGRAM_ID.to_bytes(),
+            canonical.stake_vault.to_bytes(),
+            canonical.vault_authority_bump,
+            &MINT,
+            &canonical,
+        );
+        assert!(canonical_result.is_ok());
+
+        let hostile_cases = [
+            require_canonical_config_stake_fields(
+                Pubkey::new_from_array([0x33; 32]).to_bytes(),
+                TOKEN_2022_PROGRAM_ID.to_bytes(),
+                canonical.stake_vault.to_bytes(),
+                canonical.vault_authority_bump,
+                &MINT,
+                &canonical,
+            ),
+            require_canonical_config_stake_fields(
+                MINT.to_bytes(),
+                Pubkey::new_from_array([0x44; 32]).to_bytes(),
+                canonical.stake_vault.to_bytes(),
+                canonical.vault_authority_bump,
+                &MINT,
+                &canonical,
+            ),
+            require_canonical_config_stake_fields(
+                MINT.to_bytes(),
+                TOKEN_2022_PROGRAM_ID.to_bytes(),
+                CONFIG.to_bytes(),
+                canonical.vault_authority_bump,
+                &MINT,
+                &canonical,
+            ),
+            require_canonical_config_stake_fields(
+                MINT.to_bytes(),
+                TOKEN_2022_PROGRAM_ID.to_bytes(),
+                canonical.stake_vault.to_bytes(),
+                canonical.vault_authority_bump.wrapping_add(1),
+                &MINT,
+                &canonical,
+            ),
+        ];
+        for result in hostile_cases {
+            assert!(matches!(
+                result,
+                Err(StakeIngressRuntimeError::InvalidAccountBinding),
+            ));
+        }
+    }
+
+    #[test]
+    fn config_or_arbitrary_stake_accounts_fail_before_token_parsing() {
+        let canonical = derive_canonical_stake_ingress_accounts(&PROGRAM_ID, CONFIG);
+        assert!(matches!(
+            require_canonical_stake_account_keys(&canonical, &CONFIG, &canonical.ingress_authority,),
+            Err(StakeIngressRuntimeError::InvalidAccountBinding),
+        ));
+        assert!(matches!(
+            require_canonical_stake_account_keys(
+                &canonical,
+                &canonical.stake_vault,
+                &Pubkey::new_from_array([0x44; 32]),
+            ),
+            Err(StakeIngressRuntimeError::InvalidAccountBinding),
+        ));
+    }
+
+    #[test]
+    fn observed_vault_balance_cannot_replace_or_normalize_the_tracked_v2_ledger() {
+        assert!(require_exact_stake_ledger(17, 17).is_ok());
+        assert!(matches!(
+            require_exact_stake_ledger(17, 18),
+            Err(StakeIngressRuntimeError::StakeIngressPreparationRejected),
+        ));
+        assert!(matches!(
+            require_exact_stake_ledger(18, 17),
+            Err(StakeIngressRuntimeError::StakeIngressPreparationRejected),
+        ));
+    }
+
+    #[test]
+    fn config_owned_stake_vault_is_rejected_and_vault_authority_owner_is_accepted() {
+        let canonical = derive_canonical_stake_ingress_accounts(&PROGRAM_ID, CONFIG);
+        let token_program = TOKEN_2022_PROGRAM_ID;
+
+        let mut hostile_lamports = 1;
+        let mut hostile_data = vault_data(CONFIG);
+        let hostile = AccountInfo::new(
+            &canonical.stake_vault,
+            false,
+            true,
+            &mut hostile_lamports,
+            &mut hostile_data,
+            &token_program,
+            false,
+        );
+        assert!(matches!(
+            observe_stake_ingress_vault(&hostile, &MINT, &canonical.vault_authority),
+            Err(StakeIngressRuntimeError::InvalidTokenAccount),
+        ));
+        drop(hostile);
+
+        let mut canonical_lamports = 1;
+        let mut canonical_data = vault_data(canonical.vault_authority);
+        let account = AccountInfo::new(
+            &canonical.stake_vault,
+            false,
+            true,
+            &mut canonical_lamports,
+            &mut canonical_data,
+            &token_program,
+            false,
+        );
+        let observed =
+            observe_stake_ingress_vault(&account, &MINT, &canonical.vault_authority).unwrap();
+        assert_eq!(observed.key, canonical.stake_vault.to_bytes());
+        assert_eq!(observed.owner, canonical.vault_authority.to_bytes());
+    }
 }
 
 #[cfg(all(test, feature = "runtime-production-open-position"))]

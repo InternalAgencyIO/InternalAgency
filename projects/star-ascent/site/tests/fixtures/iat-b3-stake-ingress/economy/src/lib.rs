@@ -19,7 +19,7 @@ use solana_sdk_ids::system_program;
 use solana_system_interface::instruction::create_account;
 use solana_sysvar::Sysvar;
 use spl_token_2022_interface::{
-    extension::ExtensionType,
+    extension::{ExtensionType, StateWithExtensions},
     instruction::{approve_checked, initialize_account3},
     state::Account as TokenAccount,
     ID as TOKEN_2022_PROGRAM_ID,
@@ -206,6 +206,8 @@ fn initialize_stake_vault(program_id: &Pubkey, accounts: &[AccountInfo<'_>]) -> 
         return Err(RehearsalEconomyError::InvalidAccount.into());
     }
     let (config, _) = Pubkey::find_program_address(&[b"config", mint.key.as_ref()], program_id);
+    let (vault_authority, _) =
+        Pubkey::find_program_address(&[b"vault-authority", config.as_ref()], program_id);
     let (expected_vault, bump) =
         Pubkey::find_program_address(&[b"stake-token", config.as_ref()], program_id);
     if stake_vault.key != &expected_vault || stake_vault.owner == &TOKEN_2022_PROGRAM_ID {
@@ -227,12 +229,11 @@ fn initialize_stake_vault(program_id: &Pubkey, accounts: &[AccountInfo<'_>]) -> 
         &[payer.clone(), stake_vault.clone(), system.clone()],
         &[&[b"stake-token", config.as_ref(), &[bump]]],
     )?;
-    let vault_owner = config;
     let initialize = initialize_account3(
         &TOKEN_2022_PROGRAM_ID,
         stake_vault.key,
         mint.key,
-        &vault_owner,
+        &vault_authority,
     )?;
     invoke(
         &initialize,
@@ -266,6 +267,8 @@ fn execute_stake_ingress(
     let (expected_law_state, law_bump) = law_state_address(program_id, mint.key);
     let (expected_vault, _) =
         Pubkey::find_program_address(&[b"stake-token", config.as_ref()], program_id);
+    let (vault_authority, vault_authority_bump) =
+        Pubkey::find_program_address(&[b"vault-authority", config.as_ref()], program_id);
     let (expected_ingress, _) =
         Pubkey::find_program_address(&[b"stake-ingress", config.as_ref()], program_id);
     if stake_vault.key != &expected_vault || ingress_authority.key != &expected_ingress {
@@ -274,6 +277,15 @@ fn execute_stake_ingress(
     if hook_program.key != &HOOK_PROGRAM_ID {
         return Err(RehearsalEconomyError::InvalidAccount.into());
     }
+    let tracked_staked_principal = {
+        let data = stake_vault
+            .try_borrow_data()
+            .map_err(|_| RehearsalEconomyError::InvalidAccount)?;
+        StateWithExtensions::<TokenAccount>::unpack(&data)
+            .map_err(|_| RehearsalEconomyError::InvalidAccount)?
+            .base
+            .amount
+    };
     let binding = CanonicalDailyLawBinding::new(
         program_id.to_bytes(),
         expected_law_state.to_bytes(),
@@ -287,6 +299,9 @@ fn execute_stake_ingress(
         source.key,
         stake_vault.key,
         &config,
+        &vault_authority,
+        vault_authority_bump,
+        tracked_staked_principal,
         Clock::get()?.unix_timestamp,
         amount,
     );
@@ -350,6 +365,9 @@ fn rehearsal_open_position_input(
     source: &Pubkey,
     stake_vault: &Pubkey,
     config: &Pubkey,
+    vault_authority: &Pubkey,
+    vault_authority_bump: u8,
+    staked_principal: u64,
     genesis_timestamp: i64,
     principal: u64,
 ) -> PrepareOpenPositionInput {
@@ -378,14 +396,14 @@ fn rehearsal_open_position_input(
         agency_registry_hash: [0; 32],
         genesis_timestamp,
         expected_supply: 1,
-        staked_principal: 0,
+        staked_principal,
         agency_count: 0,
         rehearsal_mode: true,
         active: true,
         lane_mask: 0,
         stake_vault_initialized: true,
         bump: 1,
-        vault_authority_bump: 1,
+        vault_authority_bump,
     };
     PrepareOpenPositionInput {
         config_key: config.to_bytes(),
@@ -398,11 +416,11 @@ fn rehearsal_open_position_input(
             owner: owner.to_bytes(),
             amount: 0,
         },
-        vault_authority: config.to_bytes(),
+        vault_authority: vault_authority.to_bytes(),
         stake_tokens: ReadonlyTokenState {
             key: stake_vault.to_bytes(),
             mint: mint.to_bytes(),
-            owner: config.to_bytes(),
+            owner: vault_authority.to_bytes(),
             amount: 0,
         },
         eligibility: EligibilityState {
