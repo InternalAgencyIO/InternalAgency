@@ -1,0 +1,1644 @@
+{
+  "batch": 368,
+  "country": "Jordan",
+  "status": "terminal-partially-accepted",
+  "sourceCommit": "5763d8e206e5621b50285a069a9a29f5b41935a5",
+  "contractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "rollMethod": "FNV-1a over the recorded batch368-jordan keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 359 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "hardLoveBeat": "0-14 lap sitting; 15-29 partner dance; 30-44 controlled dip; 45-59 seated embrace; 60-74 three-person slow dance; 75-89 pulled-away choice; 90-99 seated-to-standing assist",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "cinematicTheme": {
+    "active": "deep-sea submersible couture",
+    "batchOrdinalWithinTheme": 2,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "nextQueueCountry": "Dominican Republic",
+  "nextQueueBatch": 369,
+  "nextQueueScenes": [
+    1496,
+    1497,
+    1498,
+    1499
+  ],
+  "nextCinematicTheme": {
+    "active": "polar airship couture",
+    "batchOrdinalWithinTheme": 1
+  },
+  "researchSources": [
+    {
+      "url": "https://www.britannica.com/place/Amman",
+      "usedFor": "Amman Citadel and limestone hill-city setting"
+    },
+    {
+      "url": "https://www.britannica.com/place/Jordan",
+      "usedFor": "Jordan cities, desert geography and Aqaba coastline"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/326/",
+      "usedFor": "Petra architecture and rose-stone canyon setting"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/1377/",
+      "usedFor": "Wadi Rum desert landscape and sandstone formations"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch368-jordan-male-model-scene",
+    "fullHash": 3489506122,
+    "roll": 22,
+    "selectedScenePosition": 3,
+    "selectedScene": 1494,
+    "maleEmotion": {
+      "key": "batch368-jordan-scene3-male-emotion",
+      "roll": 71,
+      "result": "suspicion"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Jordan flag, coat of arms, official seal, sacred symbol, copied ceremonial or traditional pattern, political messaging, copied military identity, or official service identity is used. Country-led scenes use large dimensional secular limestone terraces, rose-stone facades, canyon strata, desert arches, gulf bands and mountain silhouettes instead.",
+    "palette": "Amman limestone, Petra rose, Wadi Rum copper, Aqaba cobalt, black-iris charcoal, desert pearl, submersible graphite, bathysphere silver, bioluminescent cyan and pressure-gold",
+    "minimumCoverage": "Scenes 1492 and 1493 each carry hard large Jordan motifs on three women and submersible construction language on at least two. Scenes 1494 and 1495 use four different theme-led deep-sea outfits without country map prints while Jordan landmarks remain equally foregrounded.",
+    "cultureScene": "The scenes foreground Amman Citadel, Petra, Wadi Rum, and Aqaba.",
+    "prohibitions": "Use respectful secular Jordanian geography and architecture through complete limestone terraces, rose-stone facade planes, desert escarpments, sandstone arches, Red Sea bands and mountain silhouettes. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied rescue-service identity, logo, badge, readable text, combat, threat or weaponized submersible equipment."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch368-jordan-x-heart",
+      "roll": 3,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch368-jordan-x-internalagency",
+      "roll": 79,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch368-jordan-x-worldxxxseries",
+      "roll": 40,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Jordan images plus one accepted Haiti image",
+    "captionIfEligible": "Jordan ❤️ Haiti #Jordan",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1494 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1494 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch368-jordan-male-model-scene",
+        22
+      ],
+      [
+        "batch368-jordan-scene3-male-emotion",
+        71
+      ],
+      [
+        "batch368-jordan-scene1492-weather",
+        89
+      ],
+      [
+        "batch368-jordan-scene1492-mascotState",
+        9
+      ],
+      [
+        "batch368-jordan-scene1492-poleDanceTheme",
+        85
+      ],
+      [
+        "batch368-jordan-scene1492-rainbowOnly",
+        69
+      ],
+      [
+        "batch368-jordan-scene1492-rainbowHosiery",
+        60
+      ],
+      [
+        "batch368-jordan-scene1492-romanceBeat",
+        56
+      ],
+      [
+        "batch368-jordan-scene1492-compoundLoveBeat",
+        70
+      ],
+      [
+        "batch368-jordan-scene1492-hardLoveBeat",
+        58
+      ],
+      [
+        "batch368-jordan-scene1492-interestingProp",
+        14
+      ],
+      [
+        "batch368-jordan-scene1492-eceMissionProp-poseTargetRoll",
+        51
+      ],
+      [
+        "batch368-jordan-scene1492-Radiance-emotion",
+        2
+      ],
+      [
+        "batch368-jordan-scene1492-Radiance-visibleMidriff",
+        20
+      ],
+      [
+        "batch368-jordan-scene1492-Radiance-straplessDress",
+        55
+      ],
+      [
+        "batch368-jordan-scene1492-Radiance-fullyOpenBack",
+        84
+      ],
+      [
+        "batch368-jordan-scene1492-Ellie-emotion",
+        64
+      ],
+      [
+        "batch368-jordan-scene1492-Ellie-visibleMidriff",
+        42
+      ],
+      [
+        "batch368-jordan-scene1492-Ellie-straplessDress",
+        5
+      ],
+      [
+        "batch368-jordan-scene1492-Ellie-fullyOpenBack",
+        22
+      ],
+      [
+        "batch368-jordan-scene1492-Alia-emotion",
+        36
+      ],
+      [
+        "batch368-jordan-scene1492-Alia-visibleMidriff",
+        86
+      ],
+      [
+        "batch368-jordan-scene1492-Alia-straplessDress",
+        49
+      ],
+      [
+        "batch368-jordan-scene1492-Alia-fullyOpenBack",
+        2
+      ],
+      [
+        "batch368-jordan-scene1492-AI ECE-emotion",
+        58
+      ],
+      [
+        "batch368-jordan-scene1492-AI ECE-visibleMidriff",
+        4
+      ],
+      [
+        "batch368-jordan-scene1492-AI ECE-straplessDress",
+        83
+      ],
+      [
+        "batch368-jordan-scene1492-AI ECE-fullyOpenBack",
+        96
+      ],
+      [
+        "batch368-jordan-scene1493-weather",
+        54
+      ],
+      [
+        "batch368-jordan-scene1493-mascotState",
+        62
+      ],
+      [
+        "batch368-jordan-scene1493-poleDanceTheme",
+        36
+      ],
+      [
+        "batch368-jordan-scene1493-rainbowOnly",
+        18
+      ],
+      [
+        "batch368-jordan-scene1493-rainbowHosiery",
+        81
+      ],
+      [
+        "batch368-jordan-scene1493-romanceBeat",
+        75
+      ],
+      [
+        "batch368-jordan-scene1493-compoundLoveBeat",
+        31
+      ],
+      [
+        "batch368-jordan-scene1493-hardLoveBeat",
+        31
+      ],
+      [
+        "batch368-jordan-scene1493-interestingProp",
+        41
+      ],
+      [
+        "batch368-jordan-scene1493-eceMissionProp-poseTargetRoll",
+        12
+      ],
+      [
+        "batch368-jordan-scene1493-Radiance-emotion",
+        51
+      ],
+      [
+        "batch368-jordan-scene1493-Radiance-visibleMidriff",
+        51
+      ],
+      [
+        "batch368-jordan-scene1493-Radiance-straplessDress",
+        72
+      ],
+      [
+        "batch368-jordan-scene1493-Radiance-fullyOpenBack",
+        29
+      ],
+      [
+        "batch368-jordan-scene1493-Ellie-emotion",
+        91
+      ],
+      [
+        "batch368-jordan-scene1493-Ellie-visibleMidriff",
+        31
+      ],
+      [
+        "batch368-jordan-scene1493-Ellie-straplessDress",
+        20
+      ],
+      [
+        "batch368-jordan-scene1493-Ellie-fullyOpenBack",
+        21
+      ],
+      [
+        "batch368-jordan-scene1493-Alia-emotion",
+        1
+      ],
+      [
+        "batch368-jordan-scene1493-Alia-visibleMidriff",
+        25
+      ],
+      [
+        "batch368-jordan-scene1493-Alia-straplessDress",
+        70
+      ],
+      [
+        "batch368-jordan-scene1493-Alia-fullyOpenBack",
+        35
+      ],
+      [
+        "batch368-jordan-scene1493-AI ECE-emotion",
+        95
+      ],
+      [
+        "batch368-jordan-scene1493-AI ECE-visibleMidriff",
+        63
+      ],
+      [
+        "batch368-jordan-scene1493-AI ECE-straplessDress",
+        52
+      ],
+      [
+        "batch368-jordan-scene1493-AI ECE-fullyOpenBack",
+        89
+      ],
+      [
+        "batch368-jordan-scene1494-weather",
+        47
+      ],
+      [
+        "batch368-jordan-scene1494-mascotState",
+        15
+      ],
+      [
+        "batch368-jordan-scene1494-poleDanceTheme",
+        15
+      ],
+      [
+        "batch368-jordan-scene1494-rainbowOnly",
+        7
+      ],
+      [
+        "batch368-jordan-scene1494-rainbowHosiery",
+        6
+      ],
+      [
+        "batch368-jordan-scene1494-romanceBeat",
+        30
+      ],
+      [
+        "batch368-jordan-scene1494-compoundLoveBeat",
+        88
+      ],
+      [
+        "batch368-jordan-scene1494-hardLoveBeat",
+        76
+      ],
+      [
+        "batch368-jordan-scene1494-interestingProp",
+        12
+      ],
+      [
+        "batch368-jordan-scene1494-eceMissionProp-poseTargetRoll",
+        45
+      ],
+      [
+        "batch368-jordan-scene1494-Radiance-emotion",
+        52
+      ],
+      [
+        "batch368-jordan-scene1494-Radiance-visibleMidriff",
+        6
+      ],
+      [
+        "batch368-jordan-scene1494-Radiance-straplessDress",
+        61
+      ],
+      [
+        "batch368-jordan-scene1494-Radiance-fullyOpenBack",
+        78
+      ],
+      [
+        "batch368-jordan-scene1494-Ellie-emotion",
+        82
+      ],
+      [
+        "batch368-jordan-scene1494-Ellie-visibleMidriff",
+        92
+      ],
+      [
+        "batch368-jordan-scene1494-Ellie-straplessDress",
+        99
+      ],
+      [
+        "batch368-jordan-scene1494-Ellie-fullyOpenBack",
+        16
+      ],
+      [
+        "batch368-jordan-scene1494-Alia-emotion",
+        74
+      ],
+      [
+        "batch368-jordan-scene1494-Alia-visibleMidriff",
+        48
+      ],
+      [
+        "batch368-jordan-scene1494-Alia-straplessDress",
+        67
+      ],
+      [
+        "batch368-jordan-scene1494-Alia-fullyOpenBack",
+        4
+      ],
+      [
+        "batch368-jordan-scene1494-AI ECE-emotion",
+        52
+      ],
+      [
+        "batch368-jordan-scene1494-AI ECE-emotion-disambiguation",
+        71
+      ],
+      [
+        "batch368-jordan-scene1494-AI ECE-visibleMidriff",
+        94
+      ],
+      [
+        "batch368-jordan-scene1494-AI ECE-straplessDress",
+        45
+      ],
+      [
+        "batch368-jordan-scene1494-AI ECE-fullyOpenBack",
+        46
+      ],
+      [
+        "batch368-jordan-scene1495-weather",
+        24
+      ],
+      [
+        "batch368-jordan-scene1495-mascotState",
+        84
+      ],
+      [
+        "batch368-jordan-scene1495-poleDanceTheme",
+        26
+      ],
+      [
+        "batch368-jordan-scene1495-rainbowOnly",
+        84
+      ],
+      [
+        "batch368-jordan-scene1495-rainbowHosiery",
+        99
+      ],
+      [
+        "batch368-jordan-scene1495-romanceBeat",
+        85
+      ],
+      [
+        "batch368-jordan-scene1495-compoundLoveBeat",
+        69
+      ],
+      [
+        "batch368-jordan-scene1495-hardLoveBeat",
+        17
+      ],
+      [
+        "batch368-jordan-scene1495-interestingProp",
+        99
+      ],
+      [
+        "batch368-jordan-scene1495-eceMissionProp-poseTargetRoll",
+        22
+      ],
+      [
+        "batch368-jordan-scene1495-Radiance-emotion",
+        13
+      ],
+      [
+        "batch368-jordan-scene1495-Radiance-visibleMidriff",
+        25
+      ],
+      [
+        "batch368-jordan-scene1495-Radiance-straplessDress",
+        74
+      ],
+      [
+        "batch368-jordan-scene1495-Radiance-fullyOpenBack",
+        51
+      ],
+      [
+        "batch368-jordan-scene1495-Ellie-emotion",
+        45
+      ],
+      [
+        "batch368-jordan-scene1495-Ellie-visibleMidriff",
+        81
+      ],
+      [
+        "batch368-jordan-scene1495-Ellie-straplessDress",
+        98
+      ],
+      [
+        "batch368-jordan-scene1495-Ellie-fullyOpenBack",
+        43
+      ],
+      [
+        "batch368-jordan-scene1495-Alia-emotion",
+        31
+      ],
+      [
+        "batch368-jordan-scene1495-Alia-visibleMidriff",
+        39
+      ],
+      [
+        "batch368-jordan-scene1495-Alia-straplessDress",
+        72
+      ],
+      [
+        "batch368-jordan-scene1495-Alia-fullyOpenBack",
+        93
+      ],
+      [
+        "batch368-jordan-scene1495-AI ECE-emotion",
+        97
+      ],
+      [
+        "batch368-jordan-scene1495-AI ECE-visibleMidriff",
+        97
+      ],
+      [
+        "batch368-jordan-scene1495-AI ECE-straplessDress",
+        94
+      ],
+      [
+        "batch368-jordan-scene1495-AI ECE-fullyOpenBack",
+        35
+      ],
+      [
+        "batch368-jordan-x-heart",
+        3
+      ],
+      [
+        "batch368-jordan-x-internalagency",
+        79
+      ],
+      [
+        "batch368-jordan-x-worldxxxseries",
+        40
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch368-jordan-scene1492-rainbowHosieryWearer",
+        92
+      ],
+      [
+        "batch368-jordan-scene1492-rainbowHosieryPaletteMode",
+        0
+      ],
+      [
+        "batch368-jordan-scene1492-mascotHolder",
+        90
+      ],
+      [
+        "batch368-jordan-scene1492-interestingPropHolder",
+        80
+      ],
+      [
+        "batch368-jordan-scene1492-interestingPropFamily",
+        6
+      ],
+      [
+        "batch368-jordan-scene1493-rainbowHosieryWearer",
+        25
+      ],
+      [
+        "batch368-jordan-scene1493-rainbowHosieryPaletteMode",
+        19
+      ],
+      [
+        "batch368-jordan-scene1493-mascotHolder",
+        39
+      ],
+      [
+        "batch368-jordan-scene1493-interestingPropHolder",
+        91
+      ],
+      [
+        "batch368-jordan-scene1493-interestingPropFamily",
+        49
+      ],
+      [
+        "batch368-jordan-scene1494-rainbowHosieryWearer",
+        94
+      ],
+      [
+        "batch368-jordan-scene1494-rainbowHosieryPaletteMode",
+        10
+      ],
+      [
+        "batch368-jordan-scene1494-mascotHolder",
+        32
+      ],
+      [
+        "batch368-jordan-scene1494-interestingPropHolder",
+        38
+      ],
+      [
+        "batch368-jordan-scene1494-interestingPropFamily",
+        80
+      ],
+      [
+        "batch368-jordan-scene1495-rainbowHosieryWearer",
+        83
+      ],
+      [
+        "batch368-jordan-scene1495-rainbowHosieryPaletteMode",
+        29
+      ],
+      [
+        "batch368-jordan-scene1495-mascotHolder",
+        89
+      ],
+      [
+        "batch368-jordan-scene1495-interestingPropHolder",
+        25
+      ],
+      [
+        "batch368-jordan-scene1495-interestingPropFamily",
+        95
+      ]
+    ],
+    "primaryPairCount": 110,
+    "selectorPairCount": 20,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "96273A78AD5331F9812353732A049FB21727FCFE52F9A9C4F04E453957ACFECD",
+    "selectorPairsSha256": "7F88AFD42EB5696988B62C07BE9329E9EA9D953B05FCE3D5128CA686D646FE3C"
+  },
+  "scenePlans": {
+    "1492": {
+      "scene": 1492,
+      "mode": "country-led hybrid",
+      "theme": "deep-sea submersible couture",
+      "landmark": "a broad dry Amman Citadel overlook with the complete limestone hill city, recognizable Roman Temple of Hercules columns, Umayyad Palace dome, layered white-stone neighborhoods and distant modern skyline, fused in the foreground with a peaceful fictional civilian bathysphere observatory and pressure-sampling deck",
+      "motifs": "complete limestone terrace bands, citadel column arcs, white-city steps, bathysphere rings and pressure-hull ribs",
+      "culture": "Amman reads through its layered pale limestone hills, Citadel columns, Umayyad Palace dome and modern skyline; every submersible element is peaceful civilian research hardware.",
+      "weather": {
+        "key": "batch368-jordan-scene1492-weather",
+        "roll": 89,
+        "result": "meteor shower",
+        "materialized": "meteor shower"
+      },
+      "mascotState": {
+        "key": "batch368-jordan-scene1492-mascotState",
+        "roll": 9,
+        "result": "PAWS and MAX together"
+      },
+      "mascotHolder": {
+        "key": "batch368-jordan-scene1492-mascotHolder",
+        "roll": 90,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry research lounge far from terrace edges, target line and submersible machinery.",
+      "interestingProp": {
+        "key": "batch368-jordan-scene1492-interestingProp",
+        "roll": 14,
+        "active": true,
+        "holder": {
+          "key": "batch368-jordan-scene1492-interestingPropHolder",
+          "roll": 80,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch368-jordan-scene1492-interestingPropFamily",
+          "roll": 6,
+          "result": "neon acrylic cello with no loose strings"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch368-jordan-scene1492-poleDanceTheme",
+        "roll": 85,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch368-jordan-scene1492-rainbowOnly",
+        "roll": 69,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch368-jordan-scene1492-rainbowHosiery",
+        "roll": 60,
+        "active": false,
+        "wearer": {
+          "key": "batch368-jordan-scene1492-rainbowHosieryWearer",
+          "roll": 92,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch368-jordan-scene1492-rainbowHosieryPaletteMode",
+          "roll": 0,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch368-jordan-scene1492-eceMissionProp-poseTargetRoll",
+        "roll": 51
+      },
+      "materializedPropAction": "AI ECE uses a realistic two-hand sight picture toward one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, reef, building or camera along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, reef, building or camera along or beyond the line",
+      "romanceBeat": {
+        "key": "batch368-jordan-scene1492-romanceBeat",
+        "roll": 56,
+        "dynamicIndex": 8,
+        "contractResult": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch368-jordan-scene1492-compoundLoveBeat",
+        "roll": 70,
+        "index": 10,
+        "contractResult": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "hardLoveBeat": {
+        "key": "batch368-jordan-scene1492-hardLoveBeat",
+        "roll": 58,
+        "result": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch368-jordan-scene1492-Radiance-emotion",
+            "roll": 2,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1492-Radiance-visibleMidriff",
+            "roll": 20,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1492-Radiance-straplessDress",
+            "roll": 55,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1492-Radiance-fullyOpenBack",
+            "roll": 84,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch368-jordan-scene1492-Ellie-emotion",
+            "roll": 64,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1492-Ellie-visibleMidriff",
+            "roll": 42,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1492-Ellie-straplessDress",
+            "roll": 5,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1492-Ellie-fullyOpenBack",
+            "roll": 22,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch368-jordan-scene1492-Alia-emotion",
+            "roll": 36,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1492-Alia-visibleMidriff",
+            "roll": 86,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1492-Alia-straplessDress",
+            "roll": 49,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1492-Alia-fullyOpenBack",
+            "roll": 2,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch368-jordan-scene1492-AI ECE-emotion",
+            "roll": 58,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1492-AI ECE-visibleMidriff",
+            "roll": 4,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1492-AI ECE-straplessDress",
+            "roll": 83,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1492-AI ECE-fullyOpenBack",
+            "roll": 96,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Amman-pearl bathysphere lantern tunic over opaque charcoal tailored shorts with dimensional limestone terrace plates, pressure-gold rings and spherical-heel boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "black-iris column-fold asymmetric trouser gown with silver citadel ribs, cobalt pressure seams and cantilever platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "rose-stone stepped fan skirt with a secure copper hill-city bodice, braided pearl skyline cords and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "submersible-graphite viewport gorget over opaque cyan sculpted culottes with dome-lattice fins and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Amman-pearl bathysphere lantern tunic over opaque charcoal tailored shorts with dimensional limestone terrace plates, pressure-gold rings and spherical-heel boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "black-iris column-fold asymmetric trouser gown with silver citadel ribs, cobalt pressure seams and cantilever platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "rose-stone stepped fan skirt with a secure copper hill-city bodice, braided pearl skyline cords and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "submersible-graphite viewport gorget over opaque cyan sculpted culottes with dome-lattice fins and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Ellie initiates a turning invitation toward Alia while Radiance catches Ellie's free forearm and ECE closes the open side with a decisive waist contact, creating a visible choice and rival eye line.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Ellie invites Alia",
+        "Radiance catches Ellie",
+        "ECE completes visible waist contact"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Amman Citadel overlook with the complete limestone hill city, recognizable Roman Temple of Hercules columns, Umayyad Palace dome, layered white-stone neighborhoods and distant modern skyline, fused in the foreground with a peaceful fictional civilian bathysphere observatory and pressure-sampling deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: deep-sea submersible couture. The theme and Jordan location must both be immediate foreground reads. Amman reads through its layered pale limestone hills, Citadel columns, Umayyad Palace dome and modern skyline; every submersible element is peaceful civilian research hardware. Stored scene rolls: weather 89=meteor shower; mascot state 9=PAWS and MAX together; mascot holder selector 90=Radiance; odd prop 14=active; odd holder 80=Alia; odd family 6=neon acrylic cello with no loose strings; pole 85=inactive; rainbow-only 69=inactive; rainbow hosiery 60=inactive; wearer 92=AI ECE; palette 0=country-palette rainbow-like gradient; romance 56; compound 70; hard love 58; mission-prop pose/target 51. Exact wardrobe rolls: Radiance: midriff 20=visible, strapless 55=inactive, open back 84=inactive; Ellie: midriff 42=visible, strapless 5=active, open back 22=active; Alia: midriff 86=covered, strapless 49=inactive, open back 2=active; AI ECE: midriff 4=visible, strapless 83=inactive, open back 96=inactive. Exact outfit fingerprints, no substitutions: Radiance: Amman-pearl bathysphere lantern tunic over opaque charcoal tailored shorts with dimensional limestone terrace plates, pressure-gold rings and spherical-heel boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: black-iris column-fold asymmetric trouser gown with silver citadel ribs, cobalt pressure seams and cantilever platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: rose-stone stepped fan skirt with a secure copper hill-city bodice, braided pearl skyline cords and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: submersible-graphite viewport gorget over opaque cyan sculpted culottes with dome-lattice fins and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large limestone, citadel and hill-city motifs; Radiance and ECE use bathysphere-shell, viewport-frame and pressure-seal construction. Location design vocabulary: complete limestone terrace bands, citadel column arcs, white-city steps, bathysphere rings and pressure-hull ribs. Use respectful secular Jordanian geography and architecture through complete limestone terraces, rose-stone facade planes, desert escarpments, sandstone arches, Red Sea bands and mountain silhouettes. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied rescue-service identity, logo, badge, readable text, combat, threat or weaponized submersible equipment. Four visibly distinct coherent emotions: Radiance: roll 2=tender affection, performed as tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 64=visible jealousy, performed as visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 36=magnetic confidence, performed as magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 58=aching romantic longing, performed as aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 56: Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist. Compound roll 70: The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance. Mandatory hard-love roll 58: a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Ellie initiates a turning invitation toward Alia while Radiance catches Ellie's free forearm and ECE closes the open side with a decisive waist contact, creating a visible choice and rival eye line. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Ellie invites Alia; Radiance catches Ellie; ECE completes visible waist contact. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic two-hand sight picture toward one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, reef, building or camera along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 9=PAWS and MAX together. Mascot holder selector 90=Radiance. Only rolled mascots appear on a padded dry research lounge far from terrace edges, target line and submersible machinery. Odd-prop roll is active. Exactly Alia owns and creatively integrates one neon acrylic cello with no loose strings into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render meteor shower cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1493": {
+      "scene": 1493,
+      "mode": "country-led hybrid",
+      "theme": "deep-sea submersible couture",
+      "landmark": "a broad dry Petra overlook with the complete rose-red Treasury facade, carved columns, pediment, shadowed canyon walls and Siq opening, fused equally with a peaceful civilian research submersible, pressure-lock arch and sonar geology deck",
+      "motifs": "complete Treasury facade planes, carved column rhythms, Siq strata, pressure-lock arcs and sonar-panel fans",
+      "culture": "Petra reads through the complete rose-stone Treasury facade and enclosing Siq geology, treated respectfully as historic architecture without sacred reenactment, tourism staging or military imagery.",
+      "weather": {
+        "key": "batch368-jordan-scene1493-weather",
+        "roll": 54,
+        "result": "hailstorm with suspended ice and hard backlight",
+        "materialized": "hailstorm with suspended ice and hard backlight"
+      },
+      "mascotState": {
+        "key": "batch368-jordan-scene1493-mascotState",
+        "roll": 62,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch368-jordan-scene1493-mascotHolder",
+        "roll": 39,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded terrace far from cliffs, carved stone, visitors, props and submersible equipment.",
+      "interestingProp": {
+        "key": "batch368-jordan-scene1493-interestingProp",
+        "roll": 41,
+        "active": false,
+        "holder": {
+          "key": "batch368-jordan-scene1493-interestingPropHolder",
+          "roll": 91,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch368-jordan-scene1493-interestingPropFamily",
+          "roll": 49,
+          "result": "oversized transparent mechanical typewriter"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch368-jordan-scene1493-poleDanceTheme",
+        "roll": 36,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch368-jordan-scene1493-rainbowOnly",
+        "roll": 18,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch368-jordan-scene1493-rainbowHosiery",
+        "roll": 81,
+        "active": false,
+        "wearer": {
+          "key": "batch368-jordan-scene1493-rainbowHosieryWearer",
+          "roll": 25,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch368-jordan-scene1493-rainbowHosieryPaletteMode",
+          "roll": 19,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch368-jordan-scene1493-eceMissionProp-poseTargetRoll",
+        "roll": 12
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera",
+      "romanceBeat": {
+        "key": "batch368-jordan-scene1493-romanceBeat",
+        "roll": 75,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch368-jordan-scene1493-compoundLoveBeat",
+        "roll": 31,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "hardLoveBeat": {
+        "key": "batch368-jordan-scene1493-hardLoveBeat",
+        "roll": 31,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch368-jordan-scene1493-Radiance-emotion",
+            "roll": 51,
+            "result": "intense curiosity",
+            "materializedResult": "intense curiosity",
+            "performance": "intense curiosity expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1493-Radiance-visibleMidriff",
+            "roll": 51,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1493-Radiance-straplessDress",
+            "roll": 72,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1493-Radiance-fullyOpenBack",
+            "roll": 29,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch368-jordan-scene1493-Ellie-emotion",
+            "roll": 91,
+            "result": "anger",
+            "materializedResult": "anger",
+            "performance": "anger expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1493-Ellie-visibleMidriff",
+            "roll": 31,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1493-Ellie-straplessDress",
+            "roll": 20,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1493-Ellie-fullyOpenBack",
+            "roll": 21,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch368-jordan-scene1493-Alia-emotion",
+            "roll": 1,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1493-Alia-visibleMidriff",
+            "roll": 25,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1493-Alia-straplessDress",
+            "roll": 70,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1493-Alia-fullyOpenBack",
+            "roll": 35,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch368-jordan-scene1493-AI ECE-emotion",
+            "roll": 95,
+            "result": "shame and social vulnerability",
+            "materializedResult": "shame and social vulnerability",
+            "performance": "shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1493-AI ECE-visibleMidriff",
+            "roll": 63,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1493-AI ECE-straplessDress",
+            "roll": 52,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1493-AI ECE-fullyOpenBack",
+            "roll": 89,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "intense curiosity expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "anger expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Petra-rose pediment peplum dress with dimensional Treasury cornice plates, pearl canyon pleats and pressure heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "bathysphere-silver split-keel waistcoat over opaque graphite barrel trousers with sonar pleats, rose-stone column braces and platform mules; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "copper Siq spiral skirt with secure cobalt pressure-shell top, braided gold facade relief and mirror pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "bioluminescent-cyan articulated lock-gate tabard over opaque pressure-gold shorts with viewport framework and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Petra-rose pediment peplum dress with dimensional Treasury cornice plates, pearl canyon pleats and pressure heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "bathysphere-silver split-keel waistcoat over opaque graphite barrel trousers with sonar pleats, rose-stone column braces and platform mules; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "copper Siq spiral skirt with secure cobalt pressure-shell top, braided gold facade relief and mirror pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "bioluminescent-cyan articulated lock-gate tabard over opaque pressure-gold shorts with viewport framework and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Alia steps out of Radiance's controlled dip into Ellie's waiting embrace while ECE intercepts Radiance's free hand, making the interrupted reconciliation and competing invitation unmistakable.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Radiance supports Alia's controlled rise",
+        "Ellie receives Alia",
+        "ECE intercepts Radiance's free hand"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Petra overlook with the complete rose-red Treasury facade, carved columns, pediment, shadowed canyon walls and Siq opening, fused equally with a peaceful civilian research submersible, pressure-lock arch and sonar geology deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: deep-sea submersible couture. The theme and Jordan location must both be immediate foreground reads. Petra reads through the complete rose-stone Treasury facade and enclosing Siq geology, treated respectfully as historic architecture without sacred reenactment, tourism staging or military imagery. Stored scene rolls: weather 54=hailstorm with suspended ice and hard backlight; mascot state 62=neither mascot; mascot holder selector 39=Radiance; odd prop 41=inactive; odd holder 91=Ellie; odd family 49=oversized transparent mechanical typewriter; pole 36=inactive; rainbow-only 18=inactive; rainbow hosiery 81=inactive; wearer 25=Radiance; palette 19=country-palette rainbow-like gradient; romance 75; compound 31; hard love 31; mission-prop pose/target 12. Exact wardrobe rolls: Radiance: midriff 51=covered, strapless 72=inactive, open back 29=active; Ellie: midriff 31=visible, strapless 20=active, open back 21=active; Alia: midriff 25=visible, strapless 70=inactive, open back 35=inactive; AI ECE: midriff 63=covered, strapless 52=inactive, open back 89=inactive. Exact outfit fingerprints, no substitutions: Radiance: Petra-rose pediment peplum dress with dimensional Treasury cornice plates, pearl canyon pleats and pressure heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: bathysphere-silver split-keel waistcoat over opaque graphite barrel trousers with sonar pleats, rose-stone column braces and platform mules; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: copper Siq spiral skirt with secure cobalt pressure-shell top, braided gold facade relief and mirror pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: bioluminescent-cyan articulated lock-gate tabard over opaque pressure-gold shorts with viewport framework and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large Treasury, column and canyon motifs; Ellie and ECE use pressure-lock, hull-shell and sonar-array construction. Location design vocabulary: complete Treasury facade planes, carved column rhythms, Siq strata, pressure-lock arcs and sonar-panel fans. Use respectful secular Jordanian geography and architecture through complete limestone terraces, rose-stone facade planes, desert escarpments, sandstone arches, Red Sea bands and mountain silhouettes. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied rescue-service identity, logo, badge, readable text, combat, threat or weaponized submersible equipment. Four visibly distinct coherent emotions: Radiance: roll 51=intense curiosity, performed as intense curiosity expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 91=anger, performed as anger expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 1=tender affection, performed as tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 95=shame and social vulnerability, performed as shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 75: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Compound roll 31: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Mandatory hard-love roll 31: a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Alia steps out of Radiance's controlled dip into Ellie's waiting embrace while ECE intercepts Radiance's free hand, making the interrupted reconciliation and competing invitation unmistakable. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Radiance supports Alia's controlled rise; Ellie receives Alia; ECE intercepts Radiance's free hand. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 62=neither mascot. Mascot holder selector 39=Radiance. Only rolled mascots appear on a secured padded terrace far from cliffs, carved stone, visitors, props and submersible equipment. Odd-prop roll 41 is inactive. Do not add any bizarre secondary prop; stored inactive holder 91=Ellie and family 49=oversized transparent mechanical typewriter remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render hailstorm with suspended ice and hard backlight cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1494": {
+      "scene": 1494,
+      "mode": "theme-led original",
+      "theme": "deep-sea submersible couture",
+      "landmark": "a broad dry Wadi Rum overlook with complete red sandstone massifs, Jebel Umm Fruth rock bridge, sweeping copper dunes, dark desert floor and distant escarpment layers, fused equally with a peaceful deep-sea habitat and panoramic marine-geology station",
+      "motifs": "location-only sandstone arch, dune waves, massif strata, viewport irises and pressure-ring geometry",
+      "culture": "Wadi Rum reads through its vast sandstone massifs, natural rock bridge, copper dunes and open desert basin; the cast remains on stable dry ground away from drops.",
+      "weather": {
+        "key": "batch368-jordan-scene1494-weather",
+        "roll": 47,
+        "result": "rolling thunderstorm",
+        "materialized": "rolling thunderstorm"
+      },
+      "mascotState": {
+        "key": "batch368-jordan-scene1494-mascotState",
+        "roll": 15,
+        "result": "PAWS and MAX together"
+      },
+      "mascotHolder": {
+        "key": "batch368-jordan-scene1494-mascotHolder",
+        "roll": 32,
+        "result": "AI ECE"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded platform far from rock edges, dunes, props and submersible machinery.",
+      "interestingProp": {
+        "key": "batch368-jordan-scene1494-interestingProp",
+        "roll": 12,
+        "active": true,
+        "holder": {
+          "key": "batch368-jordan-scene1494-interestingPropHolder",
+          "roll": 38,
+          "result": "AI ECE"
+        },
+        "family": {
+          "key": "batch368-jordan-scene1494-interestingPropFamily",
+          "roll": 80,
+          "result": "deactivated chainless cinema chainsaw sculpture with a locked blade cover"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch368-jordan-scene1494-poleDanceTheme",
+        "roll": 15,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch368-jordan-scene1494-rainbowOnly",
+        "roll": 7,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch368-jordan-scene1494-rainbowHosiery",
+        "roll": 6,
+        "active": true,
+        "wearer": {
+          "key": "batch368-jordan-scene1494-rainbowHosieryWearer",
+          "roll": 94,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch368-jordan-scene1494-rainbowHosieryPaletteMode",
+          "roll": 10,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch368-jordan-scene1494-eceMissionProp-poseTargetRoll",
+        "roll": 45
+      },
+      "materializedPropAction": "Alia uses a realistic two-hand sight picture toward one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, reef, building or camera along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, reef, building or camera along or beyond the line",
+      "romanceBeat": {
+        "key": "batch368-jordan-scene1494-romanceBeat",
+        "roll": 30,
+        "dynamicIndex": 6,
+        "contractResult": "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch368-jordan-scene1494-compoundLoveBeat",
+        "roll": 88,
+        "index": 4,
+        "contractResult": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "hardLoveBeat": {
+        "key": "batch368-jordan-scene1494-hardLoveBeat",
+        "roll": 76,
+        "result": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch368-jordan-scene1494-Radiance-emotion",
+            "roll": 52,
+            "result": "intense curiosity",
+            "materializedResult": "intense curiosity",
+            "performance": "intense curiosity expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1494-Radiance-visibleMidriff",
+            "roll": 6,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1494-Radiance-straplessDress",
+            "roll": 61,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1494-Radiance-fullyOpenBack",
+            "roll": 78,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch368-jordan-scene1494-Ellie-emotion",
+            "roll": 82,
+            "result": "crying with visible tears",
+            "materializedResult": "crying with visible tears",
+            "performance": "crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1494-Ellie-visibleMidriff",
+            "roll": 92,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1494-Ellie-straplessDress",
+            "roll": 99,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1494-Ellie-fullyOpenBack",
+            "roll": 16,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch368-jordan-scene1494-Alia-emotion",
+            "roll": 74,
+            "result": "betrayal shock",
+            "materializedResult": "betrayal shock",
+            "performance": "betrayal shock expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1494-Alia-visibleMidriff",
+            "roll": 48,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1494-Alia-straplessDress",
+            "roll": 67,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1494-Alia-fullyOpenBack",
+            "roll": 4,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch368-jordan-scene1494-AI ECE-emotion",
+            "roll": 52,
+            "result": "intense curiosity",
+            "materializedResult": "contained resentment",
+            "disambiguation": {
+              "key": "batch368-jordan-scene1494-AI ECE-emotion-disambiguation",
+              "roll": 71
+            },
+            "performance": "contained resentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1494-AI ECE-visibleMidriff",
+            "roll": 94,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1494-AI ECE-straplessDress",
+            "roll": 45,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1494-AI ECE-fullyOpenBack",
+            "roll": 46,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "intense curiosity expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "betrayal shock expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "contained resentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "pressure-gold iris pannier coat-dress with opaque desert-pearl hub plates, copper aperture pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "abyssal-graphite ballast-truss culotte coat with one rigid asymmetric shoulder bridge, rose sandstone panels and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "bathysphere-silver pressure-sail draped jumpsuit with braided black-iris seams, curved cobalt side vanes and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "bioluminescent-cyan abyssal-shield bodice with an opaque high-low copper skirt, silver geology hoops and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Jordan limestone-terrace and rose-stone embroidery with subtle deep-sea submersible seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "outfitFingerprints": {
+        "Radiance": "pressure-gold iris pannier coat-dress with opaque desert-pearl hub plates, copper aperture pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "abyssal-graphite ballast-truss culotte coat with one rigid asymmetric shoulder bridge, rose sandstone panels and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "bathysphere-silver pressure-sail draped jumpsuit with braided black-iris seams, curved cobalt side vanes and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "bioluminescent-cyan abyssal-shield bodice with an opaque high-low copper skirt, silver geology hoops and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Jordan limestone-terrace and rose-stone embroidery with subtle deep-sea submersible seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "composition": "Radiance rises from a stable low seat into ECE's side embrace while Alia draws Radiance's other hand toward herself and Ellie crosses between them with a protective shoulder contact and jealous backward glance.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "ECE supports Radiance's rise",
+        "Alia draws Radiance's free hand",
+        "Ellie completes a protective shoulder contact"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch368-jordan-scene3-male-emotion",
+          "roll": 71,
+          "result": "suspicion"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry Wadi Rum overlook with complete red sandstone massifs, Jebel Umm Fruth rock bridge, sweeping copper dunes, dark desert floor and distant escarpment layers, fused equally with a peaceful deep-sea habitat and panoramic marine-geology station. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: deep-sea submersible couture. The theme and Jordan location must both be immediate foreground reads. Wadi Rum reads through its vast sandstone massifs, natural rock bridge, copper dunes and open desert basin; the cast remains on stable dry ground away from drops. Stored scene rolls: weather 47=rolling thunderstorm; mascot state 15=PAWS and MAX together; mascot holder selector 32=AI ECE; odd prop 12=active; odd holder 38=AI ECE; odd family 80=deactivated chainless cinema chainsaw sculpture with a locked blade cover; pole 15=inactive; rainbow-only 7=inactive; rainbow hosiery 6=active; wearer 94=AI ECE; palette 10=country-palette rainbow-like gradient; romance 30; compound 88; hard love 76; mission-prop pose/target 45. Exact wardrobe rolls: Radiance: midriff 6=visible, strapless 61=inactive, open back 78=inactive; Ellie: midriff 92=covered, strapless 99=inactive, open back 16=active; Alia: midriff 48=visible, strapless 67=inactive, open back 4=active; AI ECE: midriff 94=covered, strapless 45=inactive, open back 46=inactive. Exact outfit fingerprints, no substitutions: Radiance: pressure-gold iris pannier coat-dress with opaque desert-pearl hub plates, copper aperture pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: abyssal-graphite ballast-truss culotte coat with one rigid asymmetric shoulder bridge, rose sandstone panels and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: bathysphere-silver pressure-sail draped jumpsuit with braided black-iris seams, curved cobalt side vanes and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: bioluminescent-cyan abyssal-shield bodice with an opaque high-low copper skirt, silver geology hoops and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Jordan limestone-terrace and rose-stone embroidery with subtle deep-sea submersible seam tailoring, fitted black jeans, and practical black boots. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Viewport iris, ballast truss, pressure sail and abyssal shield create four unrelated silhouettes while Wadi Rum remains equally large and foregrounded. Location design vocabulary: location-only sandstone arch, dune waves, massif strata, viewport irises and pressure-ring geometry. Use respectful secular Jordanian geography and architecture through complete limestone terraces, rose-stone facade planes, desert escarpments, sandstone arches, Red Sea bands and mountain silhouettes. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied rescue-service identity, logo, badge, readable text, combat, threat or weaponized submersible equipment. Four visibly distinct coherent emotions: Radiance: roll 52=intense curiosity, performed as intense curiosity expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 82=crying with visible tears, performed as crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 74=betrayal shock, performed as betrayal shock expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 52=intense curiosity, collision resolver 71 gives distinct performance contained resentment, performed as contained resentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 71=suspicion, performed as suspicion expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 30: ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile. Compound roll 88: ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands. Mandatory hard-love roll 76: one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Radiance rises from a stable low seat into ECE's side embrace while Alia draws Radiance's other hand toward herself and Ellie crosses between them with a protective shoulder contact and jealous backward glance. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; ECE supports Radiance's rise; Alia draws Radiance's free hand; Ellie completes a protective shoulder contact. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia uses a realistic two-hand sight picture toward one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, reef, building or camera along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. Mascot state 15=PAWS and MAX together. Mascot holder selector 32=AI ECE. Only rolled mascots appear on a secured padded platform far from rock edges, dunes, props and submersible machinery. Odd-prop roll is active. Exactly AI ECE owns and creatively integrates one deactivated chainless cinema chainsaw sculpture with a locked blade cover into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render rolling thunderstorm cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1495": {
+      "scene": 1495,
+      "mode": "theme-led original",
+      "theme": "deep-sea submersible couture",
+      "landmark": "a broad dry Aqaba overlook with the complete calm Red Sea gulf, palm-lined waterfront, port-free public shoreline, cobalt water, coral-toned shallows and layered desert mountains across the bay, fused equally with a peaceful civilian deep-sea research station and panoramic abyssal-imaging deck",
+      "motifs": "location-only gulf bands, palm fans, coral shallows, mountain silhouettes, habitat modules and sonar geometry",
+      "culture": "Aqaba reads through its Red Sea gulf, palm waterfront, coral-toned shallows and layered desert mountains; boats, swimmers and wildlife remain distant and outside every prop line.",
+      "weather": {
+        "key": "batch368-jordan-scene1495-weather",
+        "roll": 24,
+        "result": "soft dramatic overcast",
+        "materialized": "soft dramatic overcast"
+      },
+      "mascotState": {
+        "key": "batch368-jordan-scene1495-mascotState",
+        "roll": 84,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch368-jordan-scene1495-mascotHolder",
+        "roll": 89,
+        "result": "Alia"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry overlook far from shoreline edges, reef water, boats, props and submersible equipment.",
+      "interestingProp": {
+        "key": "batch368-jordan-scene1495-interestingProp",
+        "roll": 99,
+        "active": false,
+        "holder": {
+          "key": "batch368-jordan-scene1495-interestingPropHolder",
+          "roll": 25,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch368-jordan-scene1495-interestingPropFamily",
+          "roll": 95,
+          "result": "folding wind-harp frame"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch368-jordan-scene1495-poleDanceTheme",
+        "roll": 26,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch368-jordan-scene1495-rainbowOnly",
+        "roll": 84,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch368-jordan-scene1495-rainbowHosiery",
+        "roll": 99,
+        "active": false,
+        "wearer": {
+          "key": "batch368-jordan-scene1495-rainbowHosieryWearer",
+          "roll": 83,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch368-jordan-scene1495-rainbowHosieryPaletteMode",
+          "roll": 29,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch368-jordan-scene1495-eceMissionProp-poseTargetRoll",
+        "roll": 22
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera",
+      "romanceBeat": {
+        "key": "batch368-jordan-scene1495-romanceBeat",
+        "roll": 85,
+        "dynamicIndex": 1,
+        "contractResult": "Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance."
+      },
+      "compoundLoveBeat": {
+        "key": "batch368-jordan-scene1495-compoundLoveBeat",
+        "roll": 69,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "hardLoveBeat": {
+        "key": "batch368-jordan-scene1495-hardLoveBeat",
+        "roll": 17,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch368-jordan-scene1495-Radiance-emotion",
+            "roll": 13,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1495-Radiance-visibleMidriff",
+            "roll": 25,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1495-Radiance-straplessDress",
+            "roll": 74,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1495-Radiance-fullyOpenBack",
+            "roll": 51,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch368-jordan-scene1495-Ellie-emotion",
+            "roll": 45,
+            "result": "awe",
+            "materializedResult": "awe",
+            "performance": "awe expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1495-Ellie-visibleMidriff",
+            "roll": 81,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1495-Ellie-straplessDress",
+            "roll": 98,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1495-Ellie-fullyOpenBack",
+            "roll": 43,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch368-jordan-scene1495-Alia-emotion",
+            "roll": 31,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1495-Alia-visibleMidriff",
+            "roll": 39,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1495-Alia-straplessDress",
+            "roll": 72,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1495-Alia-fullyOpenBack",
+            "roll": 93,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch368-jordan-scene1495-AI ECE-emotion",
+            "roll": 97,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch368-jordan-scene1495-AI ECE-visibleMidriff",
+            "roll": 97,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch368-jordan-scene1495-AI ECE-straplessDress",
+            "roll": 94,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch368-jordan-scene1495-AI ECE-fullyOpenBack",
+            "roll": 35,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "awe expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "overwhelming relief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "defiance expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "desert-pearl observation-dome cape dress with pressure-gold ribs, Aqaba-cobalt lens appliques and spherical ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "coral-copper thermal-lattice tapered trouser suit with graphite hex panels, palm pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "bathysphere-silver navigation-spindle peplum over an opaque black-iris asymmetric skirt with braided cyan seams and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "abyssal-cobalt pressure-bell bodice over opaque gold petal culottes with pearl conduit arcs and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "desert-pearl observation-dome cape dress with pressure-gold ribs, Aqaba-cobalt lens appliques and spherical ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "coral-copper thermal-lattice tapered trouser suit with graphite hex panels, palm pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "bathysphere-silver navigation-spindle peplum over an opaque black-iris asymmetric skirt with braided cyan seams and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "abyssal-cobalt pressure-bell bodice over opaque gold petal culottes with pearl conduit arcs and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE leads Alia through a close partner turn while Ellie catches Alia's trailing forearm and Radiance steps into the open side to claim ECE's shoulder, creating pursuit, interruption and a clear four-way contact graph.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "ECE leads Alia's turn",
+        "Ellie catches Alia",
+        "Radiance completes visible shoulder contact"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Aqaba overlook with the complete calm Red Sea gulf, palm-lined waterfront, port-free public shoreline, cobalt water, coral-toned shallows and layered desert mountains across the bay, fused equally with a peaceful civilian deep-sea research station and panoramic abyssal-imaging deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: deep-sea submersible couture. The theme and Jordan location must both be immediate foreground reads. Aqaba reads through its Red Sea gulf, palm waterfront, coral-toned shallows and layered desert mountains; boats, swimmers and wildlife remain distant and outside every prop line. Stored scene rolls: weather 24=soft dramatic overcast; mascot state 84=neither mascot; mascot holder selector 89=Alia; odd prop 99=inactive; odd holder 25=Ellie; odd family 95=folding wind-harp frame; pole 26=inactive; rainbow-only 84=inactive; rainbow hosiery 99=inactive; wearer 83=AI ECE; palette 29=country-palette rainbow-like gradient; romance 85; compound 69; hard love 17; mission-prop pose/target 22. Exact wardrobe rolls: Radiance: midriff 25=visible, strapless 74=inactive, open back 51=inactive; Ellie: midriff 81=covered, strapless 98=inactive, open back 43=inactive; Alia: midriff 39=visible, strapless 72=inactive, open back 93=inactive; AI ECE: midriff 97=covered, strapless 94=inactive, open back 35=inactive. Exact outfit fingerprints, no substitutions: Radiance: desert-pearl observation-dome cape dress with pressure-gold ribs, Aqaba-cobalt lens appliques and spherical ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: coral-copper thermal-lattice tapered trouser suit with graphite hex panels, palm pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: bathysphere-silver navigation-spindle peplum over an opaque black-iris asymmetric skirt with braided cyan seams and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: abyssal-cobalt pressure-bell bodice over opaque gold petal culottes with pearl conduit arcs and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Observation dome, thermal lattice, navigation spindle and pressure bell create four distinct submersible outfits while Aqaba remains foregrounded. Location design vocabulary: location-only gulf bands, palm fans, coral shallows, mountain silhouettes, habitat modules and sonar geometry. Use respectful secular Jordanian geography and architecture through complete limestone terraces, rose-stone facade planes, desert escarpments, sandstone arches, Red Sea bands and mountain silhouettes. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied rescue-service identity, logo, badge, readable text, combat, threat or weaponized submersible equipment. Four visibly distinct coherent emotions: Radiance: roll 13=romantic joy, performed as romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 45=awe, performed as awe expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 31=overwhelming relief, performed as overwhelming relief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 97=defiance, performed as defiance expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 85: Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance. Compound roll 69: Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance. Mandatory hard-love roll 17: a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE leads Alia through a close partner turn while Ellie catches Alia's trailing forearm and Radiance steps into the open side to claim ECE's shoulder, creating pursuit, interruption and a clear four-way contact graph. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; ECE leads Alia's turn; Ellie catches Alia; Radiance completes visible shoulder contact. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 84=neither mascot. Mascot holder selector 89=Alia. Only rolled mascots appear on a padded dry overlook far from shoreline edges, reef water, boats, props and submersible equipment. Odd-prop roll 99 is inactive. Do not add any bizarre secondary prop; stored inactive holder 25=Ellie and family 95=folding wind-harp frame remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render soft dramatic overcast cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "complete",
+      "requested": 4,
+      "fulfilled": 3,
+      "moderationBlocked": 1,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "complete",
+      "attemptedScenes": [
+        1495
+      ],
+      "acceptedScenes": [
+        1495
+      ],
+      "maximumPerBlockedScene": 1,
+      "reason": "Scene 1495 raw output placed the muzzle line too close to the camera and omitted the rolled paper target; one side-profile target-corridor recovery passed."
+    }
+  },
+  "acceptedAssets": [
+    {
+      "scene": 1492,
+      "file": "1492-jordan-amman-citadel-deep-sea-submersible-fast-pass.png",
+      "audit": {
+        "coreCast": "Exactly four clearly adult core women are present; Alia retains the braided anchor.",
+        "anatomy": "No glaring extra whole person or limb is visible; eight owned arms and hands read plausibly.",
+        "missionProp": "ECE alone uses a two-hand grip directed away from every person and the camera toward empty water.",
+        "romance": "The three-woman contact chain has aligned eye lines and reads before the isolated mission beat.",
+        "themeLocation": "Amman Citadel columns, limestone hill city, meteor shower and pressure-shell couture are immediate reads.",
+        "deviations": [
+          "MAX reads as a larger young retriever and PAWS as a larger cat than rolled.",
+          "The seated-embrace hard beat resolves as a standing contact chain."
+        ]
+      },
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-3c3af19a-fb76-4683-8ae7-1ff013f88e6b.png",
+      "decision": "accepted-fast-pass"
+    },
+    {
+      "scene": 1494,
+      "file": "1494-jordan-wadi-rum-deep-sea-submersible-male-fast-pass.png",
+      "audit": {
+        "coreCast": "All four core adult women and the established adult male are present; Alia retains the braided anchor.",
+        "anatomy": "No glaring extra whole person or limb is visible; ten adult arms and hands read plausibly.",
+        "missionProp": "Alia alone uses a two-hand grip toward the clearly empty cordoned water marker, away from every person and the camera.",
+        "romance": "The male, Ellie and Radiance form a protected infidelity-drama cluster with multiple contacts while ECE remains visibly engaged.",
+        "themeLocation": "Wadi Rum sandstone arch, storm, research portal and deep-sea structural couture form one foreground composition.",
+        "deviations": [
+          "PAWS and MAX read as larger gray-cat and cream-dog variants.",
+          "ECE's chainless sculpture rests across her lap rather than driving the romance beat.",
+          "The selected hard-love movement resolves as a protective standing and kneeling cluster."
+        ]
+      },
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-daf6b154-85a7-4733-8424-4140260fad27.png",
+      "decision": "accepted-fast-pass"
+    },
+    {
+      "scene": 1495,
+      "file": "1495-jordan-aqaba-deep-sea-submersible-recovery.png",
+      "audit": {
+        "coreCast": "Exactly four clearly adult core women are present; Alia retains the braided anchor.",
+        "anatomy": "No glaring extra whole person or limb is visible; eight owned arms and hands read plausibly.",
+        "missionProp": "ECE is isolated at far left in full side profile with a two-hand grip toward a visible empty paper target and complete thick backstop; the other women remain fully behind the line.",
+        "romance": "The three-woman Aqaba group shows a clear affectionate choice through face, waist and hand contact.",
+        "themeLocation": "Aqaba gulf, mountain wall, peaceful research dome and pressure-module couture remain large and coherent.",
+        "deviations": [
+          "The partner-turn hard beat resolves as a stationary three-person affection event."
+        ]
+      },
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-f3da2882-8288-4df3-8e5d-a80c5c33110d.png",
+      "decision": "accepted-recovery"
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1493,
+      "status": "terminal-renderer-output-moderation-block",
+      "reason": "The image service rejected the output before an auditable asset was delivered."
+    },
+    {
+      "scene": 1495,
+      "status": "rejected-raw-replaced-by-accepted-recovery",
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-d90f0f7f-0708-4f9f-9482-746f130ae0b5.png",
+      "reason": "The raw muzzle line read too close to the camera and the rolled paper target and complete backstop were absent."
+    }
+  ],
+  "xPost": {
+    "status": "eligible-queued-behind-confirmation-gated-bolivia-composer",
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "acceptedCurrentCountryAssets": 3,
+    "caption": "Jordan red-heart Haiti #Jordan",
+    "attachmentPlan": [
+      "1492-jordan-amman-citadel-deep-sea-submersible-fast-pass.png",
+      "1494-jordan-wadi-rum-deep-sea-submersible-male-fast-pass.png",
+      "1491-haiti-ile-a-vache-deep-sea-submersible-fast-pass.png"
+    ],
+    "reason": "An earlier exact Bolivia post remains staged in the signed-in X composer behind a required final-post confirmation. The composer was not overwritten or duplicated."
+  },
+  "completedAt": "2026-08-11T01:00:55.257Z",
+  "throughputMode": {
+    "active": true,
+    "policy": "Fast-pass acceptance preserves structurally safe usable renders while recording minor visual deviations; hard safety, explicit-content, missing-core-character, and glaring extra-person or extra-limb failures remain terminal rejects."
+  },
+  "queueAdvance": {
+    "country": "Dominican Republic",
+    "batch": 369,
+    "scenes": [
+      1496,
+      1497,
+      1498,
+      1499
+    ],
+    "cinematicTheme": "polar airship couture",
+    "batchOrdinalWithinTheme": 1
+  }
+}
