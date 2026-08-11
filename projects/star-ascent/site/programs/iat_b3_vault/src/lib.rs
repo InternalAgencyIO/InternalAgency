@@ -11,6 +11,7 @@
 //! before an exact-version native client adapter is implemented and
 //! independently reviewed.
 
+pub mod journal_codec;
 #[cfg(feature = "token-2022-host-compatibility")]
 pub mod token_2022_host;
 
