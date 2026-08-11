@@ -121,22 +121,37 @@ jobs:
       - name: Produce deterministic build evidence
         run: bash scripts/verify-iat-v2-sbf.sh
       - name: Build the B3 native law adapter without deploying it
+        # These conspicuous fixture identities prove that the combined Daily
+        # Law + stake-ingress artifact builds reproducibly. They are neither
+        # production identities nor deployment authorization.
+        env:
+          IAT_B3_PRODUCTION_LAW_PROGRAM_ID: D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY
+          IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID: GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU
+          IAT_B3_PRODUCTION_CANONICAL_MINT: 3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3
         run: |
           mkdir -p target/verifiable
           cargo build-sbf \
             --manifest-path programs/iat_b3_law/Cargo.toml \
             --sbf-out-dir target/verifiable \
-            --optimize-size
+            --arch v0 \
+            --no-default-features \
+            --features production-combined-hook \
+            --optimize-size \
+            --offline \
+            --skip-tools-install \
+            --tools-version v1.52 \
+            -- \
+            --locked
           test -s target/verifiable/iat_b3_law.so
-          # Candidate gate only: this binds the reviewed rehearsal artifact; it
-          # does not assert complete B3/V2 feature parity or launch readiness.
-          expected_b3_law_bytes=154952
+          # Fixture build gate only: this proves one combined artifact shape;
+          # it does not assert production identities, Devnet parity, or launch readiness.
+          expected_b3_law_bytes=156000
           actual_b3_law_bytes="$(stat --format='%s' target/verifiable/iat_b3_law.so)"
           if [[ "$actual_b3_law_bytes" != "$expected_b3_law_bytes" ]]; then
             echo "B3 law candidate size mismatch: expected $expected_b3_law_bytes bytes, got $actual_b3_law_bytes" >&2
             exit 1
           fi
-          expected_b3_law_sha256="927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c"
+          expected_b3_law_sha256="83b34e61c4da2c7e676172a3ad158df12e9237a865c833585c71ea89dad0fca7"
           printf '%s  %s\n' "$expected_b3_law_sha256" target/verifiable/iat_b3_law.so \
             | sha256sum --check --strict -
           sha256sum target/verifiable/iat_b3_law.so \
