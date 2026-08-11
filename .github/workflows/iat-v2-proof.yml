@@ -119,6 +119,8 @@ jobs:
             echo "$HOME/.local/share/solana/install/active_release/bin"
             echo "$HOME/.cargo/bin"
           } >> "$GITHUB_PATH"
+      - name: Verify Privacy Vault journal transition CAS
+        run: node --test tests/iat-b3-privacy-vault-journal-cas-sqlite.test.mjs
       - name: Produce deterministic build evidence
         run: bash scripts/verify-iat-v2-sbf.sh
       - name: Install the pinned B3 SBF platform tools
