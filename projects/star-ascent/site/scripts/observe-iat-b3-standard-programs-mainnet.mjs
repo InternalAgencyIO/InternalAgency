@@ -29,7 +29,17 @@ export const TOKEN_2022_OFFICIAL_RELEASE = Object.freeze({
   embeddedSourceUrl: "https://github.com/solana-program/token-2022/tree/main/program",
   annotatedTagObjectSha: "b491987dc1f84cf0d296a56dcf2c13cdce66aae7",
   taggedSourceCommit: "9bc02757f600ffe754746708a8a072bcd49d1260",
+  sourceTreeSha: "6fb5dc5acbf622ce11cf1abc9b4db5bc13e0c78d",
+  cargoLockSha256: "40f03a69a019b6381d7c20b03da2cc31f38d185809eda99ae6aaeca2adf486c7",
   pinnedSolanaCliVersion: "3.1.8",
+  platformToolsVersion: "v1.52",
+  hostRustVersion: "1.93.0",
+  sbpfRustVersion: "1.89.0",
+  buildArtifactBytes: 632_560,
+  buildArtifactSha256: "9bbf90b30e06778ca0feca100b29f0eeb9be576ae024f6323cc207308f51a5d1",
+  deployedCapacityBytes: 1_382_016,
+  loaderPaddingBytes: 749_456,
+  repeatedCleanBuilds: 2,
 });
 
 const BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
@@ -79,11 +89,14 @@ async function defaultRpcCall(method, params, requestId) {
 export async function observeIatB3StandardProgramsMainnet({
   rpcCall = defaultRpcCall,
   observedAtUtc = new Date().toISOString(),
+  releaseBinding = TOKEN_2022_OFFICIAL_RELEASE,
 } = {}) {
   if (typeof rpcCall !== "function") throw new TypeError("rpcCall must be a function");
   if (typeof observedAtUtc !== "string" || Number.isNaN(Date.parse(observedAtUtc))) {
     throw new TypeError("observedAtUtc must be an ISO date-time string");
   }
+  if (!releaseBinding || typeof releaseBinding !== "object") throw new TypeError("releaseBinding must be an object");
+  const productionReleaseBinding = releaseBinding === TOKEN_2022_OFFICIAL_RELEASE;
   let requestId = 1;
   const call = (method, params = []) => rpcCall(method, params, requestId++);
   const genesisHash = await call("getGenesisHash");
@@ -133,9 +146,25 @@ export async function observeIatB3StandardProgramsMainnet({
   const upgradeAuthority = authorityOption === 1 ? encodeBase58(programData.bytes.subarray(13, 45)) : null;
   const programBytes = programData.bytes.subarray(45);
   if (programBytes.length === 0) throw new Error("Token-2022 ProgramData contained no program bytes");
-  if (!programBytes.includes(Buffer.from(TOKEN_2022_OFFICIAL_RELEASE.embeddedTag, "ascii"))
-      || !programBytes.includes(Buffer.from(TOKEN_2022_OFFICIAL_RELEASE.embeddedSourceUrl, "ascii"))) {
+  if (!Number.isSafeInteger(releaseBinding.buildArtifactBytes)
+      || !Number.isSafeInteger(releaseBinding.deployedCapacityBytes)
+      || releaseBinding.buildArtifactBytes <= 0
+      || releaseBinding.deployedCapacityBytes < releaseBinding.buildArtifactBytes
+      || releaseBinding.loaderPaddingBytes !== releaseBinding.deployedCapacityBytes - releaseBinding.buildArtifactBytes
+      || !/^[0-9a-f]{64}$/u.test(releaseBinding.buildArtifactSha256)) {
+    throw new Error("Token-2022 release binding dimensions were malformed");
+  }
+  if (!programBytes.includes(Buffer.from(releaseBinding.embeddedTag, "ascii"))
+      || !programBytes.includes(Buffer.from(releaseBinding.embeddedSourceUrl, "ascii"))) {
     throw new Error("Token-2022 ProgramData omitted the pinned official release identity markers");
+  }
+  const rebuiltPrefix = programBytes.subarray(0, releaseBinding.buildArtifactBytes);
+  const loaderPadding = programBytes.subarray(releaseBinding.buildArtifactBytes);
+  if (programBytes.length !== releaseBinding.deployedCapacityBytes
+      || createHash("sha256").update(rebuiltPrefix).digest("hex") !== releaseBinding.buildArtifactSha256
+      || loaderPadding.length !== releaseBinding.loaderPaddingBytes
+      || loaderPadding.some((byte) => byte !== 0)) {
+    throw new Error("Token-2022 deployed bytes did not match the repeated exact-toolchain build plus zero Loader padding");
   }
   if (programDataAddress !== TOKEN_2022_LAST_UPGRADE.programDataAddress
       || Number(deploymentSlot) !== TOKEN_2022_LAST_UPGRADE.slot
@@ -225,14 +254,26 @@ export async function observeIatB3StandardProgramsMainnet({
         finalizedProvenanceVerified: true,
       },
       releaseIdentity: {
-        embeddedTag: TOKEN_2022_OFFICIAL_RELEASE.embeddedTag,
-        officialRepository: TOKEN_2022_OFFICIAL_RELEASE.officialRepository,
-        embeddedSourceUrl: TOKEN_2022_OFFICIAL_RELEASE.embeddedSourceUrl,
-        annotatedTagObjectSha: TOKEN_2022_OFFICIAL_RELEASE.annotatedTagObjectSha,
-        taggedSourceCommit: TOKEN_2022_OFFICIAL_RELEASE.taggedSourceCommit,
-        pinnedSolanaCliVersion: TOKEN_2022_OFFICIAL_RELEASE.pinnedSolanaCliVersion,
+        embeddedTag: releaseBinding.embeddedTag,
+        officialRepository: releaseBinding.officialRepository,
+        embeddedSourceUrl: releaseBinding.embeddedSourceUrl,
+        annotatedTagObjectSha: releaseBinding.annotatedTagObjectSha,
+        taggedSourceCommit: releaseBinding.taggedSourceCommit,
+        sourceTreeSha: releaseBinding.sourceTreeSha,
+        cargoLockSha256: releaseBinding.cargoLockSha256,
+        pinnedSolanaCliVersion: releaseBinding.pinnedSolanaCliVersion,
+        platformToolsVersion: releaseBinding.platformToolsVersion,
+        hostRustVersion: releaseBinding.hostRustVersion,
+        sbpfRustVersion: releaseBinding.sbpfRustVersion,
+        buildArtifactBytes: releaseBinding.buildArtifactBytes,
+        buildArtifactSha256: releaseBinding.buildArtifactSha256,
+        deployedCapacityBytes: releaseBinding.deployedCapacityBytes,
+        loaderPaddingBytes: releaseBinding.loaderPaddingBytes,
+        repeatedCleanBuilds: releaseBinding.repeatedCleanBuilds,
+        productionBinding: productionReleaseBinding,
         embeddedReleaseMarkersVerified: true,
-        exactSourceBytesRebuiltAndMatched: false,
+        exactSourceBytesRebuiltAndMatched: true,
+        zeroLoaderPaddingVerified: true,
       },
     },
     zkElgamalProof: {
@@ -242,10 +283,10 @@ export async function observeIatB3StandardProgramsMainnet({
       immutable: true,
     },
     standardProgramSnapshotComplete: true,
-    sourceReleaseBindingComplete: false,
-    exactSourceCommit: null,
-    exactReleaseTag: null,
-    reproducibleOfficialBuildMatched: false,
+    sourceReleaseBindingComplete: productionReleaseBinding,
+    exactSourceCommit: productionReleaseBinding ? releaseBinding.taggedSourceCommit : null,
+    exactReleaseTag: productionReleaseBinding ? releaseBinding.embeddedTag : null,
+    reproducibleOfficialBuildMatched: productionReleaseBinding,
     rpcObservationAuthenticated: false,
     token2022ImmutableBytecodeVerified: upgradeAuthority === null,
     hostCompatibilityComplete: false,
@@ -253,7 +294,9 @@ export async function observeIatB3StandardProgramsMainnet({
     activationReady: false,
     mainnetExecutionAuthorized: false,
     mainnetStatus: "HOLD",
-    blocker: "TOKEN_2022_REPRODUCIBLE_SOURCE_BUILD_AND_CEREMONY_TIME_REATTESTATION_REMAIN_REQUIRED",
+    blocker: productionReleaseBinding
+      ? "TOKEN_2022_CEREMONY_TIME_REATTESTATION_REMAINS_REQUIRED_BECAUSE_PROGRAM_IS_UPGRADEABLE"
+      : "TEST_RELEASE_BINDING_CANNOT_COMPLETE_PRODUCTION_SOURCE_EQUIVALENCE",
   };
 }
 

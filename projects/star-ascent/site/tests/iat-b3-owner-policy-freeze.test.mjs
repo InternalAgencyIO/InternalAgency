@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -78,6 +79,18 @@ function decodeBase58(value) {
   while (leadingZeroes < value.length && value[leadingZeroes] === "1") leadingZeroes += 1;
   return Uint8Array.from([...new Array(leadingZeroes).fill(0), ...bytes]);
 }
+
+const TEST_TOKEN_RELEASE_ARTIFACT = Buffer.alloc(256, 0xa5);
+TEST_TOKEN_RELEASE_ARTIFACT.set(Buffer.from(TOKEN_2022_OFFICIAL_RELEASE.embeddedTag, "ascii"), 8);
+TEST_TOKEN_RELEASE_ARTIFACT.set(Buffer.from(TOKEN_2022_OFFICIAL_RELEASE.embeddedSourceUrl, "ascii"), 64);
+const TEST_TOKEN_RELEASE_BINDING = Object.freeze({
+  ...TOKEN_2022_OFFICIAL_RELEASE,
+  buildArtifactBytes: TEST_TOKEN_RELEASE_ARTIFACT.length,
+  buildArtifactSha256: createHash("sha256").update(TEST_TOKEN_RELEASE_ARTIFACT).digest("hex"),
+  deployedCapacityBytes: 320,
+  loaderPaddingBytes: 64,
+});
+const TEST_TOKEN_DEPLOYED_BYTES = Buffer.concat([TEST_TOKEN_RELEASE_ARTIFACT, Buffer.alloc(64)]);
 
 function fixturePublicKey(seed) {
   const bytes = Uint8Array.from({ length: 32 }, (_, index) => (seed + (index * 17)) % 256);
@@ -618,16 +631,12 @@ test("standard-program observation pins finalized Token-2022 bytes and the nativ
   const tokenProgramState = Buffer.alloc(36);
   tokenProgramState.writeUInt32LE(2, 0);
   tokenProgramState.set(programDataKey, 4);
-  const releaseMarkers = Buffer.from(
-    `${TOKEN_2022_OFFICIAL_RELEASE.embeddedTag}\0${TOKEN_2022_OFFICIAL_RELEASE.embeddedSourceUrl}`,
-    "ascii",
-  );
-  const tokenProgramData = Buffer.alloc(45 + releaseMarkers.length);
+  const tokenProgramData = Buffer.alloc(45 + TEST_TOKEN_DEPLOYED_BYTES.length);
   tokenProgramData.writeUInt32LE(3, 0);
   tokenProgramData.writeBigUInt64LE(427_147_035n, 4);
   tokenProgramData[12] = 1;
   tokenProgramData.set(upgradeAuthority, 13);
-  tokenProgramData.set(releaseMarkers, 45);
+  tokenProgramData.set(TEST_TOKEN_DEPLOYED_BYTES, 45);
   const calls = [];
   const rpcCall = async (method, params, id) => {
     calls.push({ method, params, id });
@@ -695,6 +704,7 @@ test("standard-program observation pins finalized Token-2022 bytes and the nativ
   const result = await observeIatB3StandardProgramsMainnet({
     rpcCall,
     observedAtUtc: "2026-08-11T02:00:00.000Z",
+    releaseBinding: TEST_TOKEN_RELEASE_BINDING,
   });
   assert.deepEqual(calls.map(({ method, id }) => [method, id]), [
     ["getGenesisHash", 1],
@@ -706,13 +716,15 @@ test("standard-program observation pins finalized Token-2022 bytes and the nativ
   ]);
   assert.deepEqual(calls[2].params[0], [TOKEN_2022_PROGRAM_ID, ZK_ELGAMAL_PROOF_PROGRAM_ID]);
   assert.equal(result.token2022.deploymentSlot, 427_147_035);
-  assert.equal(result.token2022.programBytes, releaseMarkers.length);
+  assert.equal(result.token2022.programBytes, TEST_TOKEN_DEPLOYED_BYTES.length);
   assert.equal(result.token2022.immutable, false);
   assert.equal(result.token2022.lastUpgrade.finalizedProvenanceVerified, true);
   assert.equal(result.token2022.releaseIdentity.embeddedTag, "program@v11.0.0");
   assert.equal(result.token2022.releaseIdentity.taggedSourceCommit, "9bc02757f600ffe754746708a8a072bcd49d1260");
   assert.equal(result.token2022.releaseIdentity.embeddedReleaseMarkersVerified, true);
-  assert.equal(result.token2022.releaseIdentity.exactSourceBytesRebuiltAndMatched, false);
+  assert.equal(result.token2022.releaseIdentity.exactSourceBytesRebuiltAndMatched, true);
+  assert.equal(result.token2022.releaseIdentity.zeroLoaderPaddingVerified, true);
+  assert.equal(result.token2022.releaseIdentity.productionBinding, false);
   assert.equal(result.zkElgamalProof.immutable, true);
   assert.equal(result.standardProgramSnapshotComplete, true);
   assert.equal(result.sourceReleaseBindingComplete, false);
@@ -749,16 +761,12 @@ test("standard-program observation rejects substituted loaders, native bytes, an
     if (method === "getSlot") return 438_000_000;
     if (method === "getMultipleAccounts") return mutatePrograms(structuredClone(validPrograms));
     if (method === "getAccountInfo") {
-      const releaseMarkers = Buffer.from(
-        `${TOKEN_2022_OFFICIAL_RELEASE.embeddedTag}\0${TOKEN_2022_OFFICIAL_RELEASE.embeddedSourceUrl}`,
-        "ascii",
-      );
-      const bytes = Buffer.alloc(45 + releaseMarkers.length);
+      const bytes = Buffer.alloc(45 + TEST_TOKEN_DEPLOYED_BYTES.length);
       bytes.writeUInt32LE(3, 0);
       bytes.writeBigUInt64LE(427_147_035n, 4);
       bytes[12] = 1;
       bytes.set(decodeBase58(TOKEN_2022_LAST_UPGRADE.authority), 13);
-      bytes.set(releaseMarkers, 45);
+      bytes.set(TEST_TOKEN_DEPLOYED_BYTES, 45);
       mutateProgramData(bytes);
       return {
         context: { slot: programDataSlot },
@@ -802,17 +810,22 @@ test("standard-program observation rejects substituted loaders, native bytes, an
   await assert.rejects(
     observeIatB3StandardProgramsMainnet({
       rpcCall: baseRpc((programs) => { programs.value[0].owner = NATIVE_LOADER_ID; return programs; }),
+      releaseBinding: TEST_TOKEN_RELEASE_BINDING,
     }),
     /Token-2022 program account/u,
   );
   await assert.rejects(
     observeIatB3StandardProgramsMainnet({
       rpcCall: baseRpc((programs) => { programs.value[1].data[0] = Buffer.from("substitute").toString("base64"); return programs; }),
+      releaseBinding: TEST_TOKEN_RELEASE_BINDING,
     }),
     /ZK ElGamal proof program/u,
   );
   await assert.rejects(
-    observeIatB3StandardProgramsMainnet({ rpcCall: baseRpc((programs) => programs, 438_000_000) }),
+    observeIatB3StandardProgramsMainnet({
+      rpcCall: baseRpc((programs) => programs, 438_000_000),
+      releaseBinding: TEST_TOKEN_RELEASE_BINDING,
+    }),
     /ProgramData observation preceded/u,
   );
   await assert.rejects(
@@ -822,6 +835,7 @@ test("standard-program observation rejects substituted loaders, native bytes, an
         438_000_002,
         (history) => { history[0].signature = "substituted"; return history; },
       ),
+      releaseBinding: TEST_TOKEN_RELEASE_BINDING,
     }),
     /newest ProgramData history/u,
   );
@@ -836,6 +850,7 @@ test("standard-program observation rejects substituted loaders, native bytes, an
           return transaction;
         },
       ),
+      releaseBinding: TEST_TOKEN_RELEASE_BINDING,
     }),
     /finalized upgrade transaction/u,
   );
@@ -846,9 +861,28 @@ test("standard-program observation rejects substituted loaders, native bytes, an
         438_000_002,
         (history) => history,
         (transaction) => transaction,
-        (bytes) => { bytes[45] ^= 0xff; return bytes; },
+        (bytes) => { bytes[53] ^= 0xff; return bytes; },
       ),
+      releaseBinding: TEST_TOKEN_RELEASE_BINDING,
     }),
     /official release identity markers/u,
   );
+  for (const mutateProgramData of [
+    (bytes) => { bytes[45 + 200] ^= 0xff; return bytes; },
+    (bytes) => { bytes[bytes.length - 1] = 1; return bytes; },
+  ]) {
+    await assert.rejects(
+      observeIatB3StandardProgramsMainnet({
+        rpcCall: baseRpc(
+          (programs) => programs,
+          438_000_002,
+          (history) => history,
+          (transaction) => transaction,
+          mutateProgramData,
+        ),
+        releaseBinding: TEST_TOKEN_RELEASE_BINDING,
+      }),
+      /exact-toolchain build plus zero Loader padding/u,
+    );
+  }
 });
