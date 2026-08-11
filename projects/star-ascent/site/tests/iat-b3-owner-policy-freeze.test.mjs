@@ -15,6 +15,11 @@ import {
   parseB3OwnerPolicyFreezeJson,
   validateB3OwnerPolicyFreezeManifest,
 } from "../scripts/validate-iat-b3-owner-policy-freeze.mjs";
+import {
+  IAT_B3_MAINNET_GENESIS_HASH,
+  TOKEN_2022_PROGRAM_ID,
+  observeIatB3LiveEstateMainnet,
+} from "../scripts/observe-iat-b3-live-estate-mainnet.mjs";
 
 const SITE_ROOT = fileURLToPath(new URL("../", import.meta.url));
 const MANIFEST_PATH = fileURLToPath(new URL("../docs/b3/iat-b3-owner-policy-freeze.v1.json", import.meta.url));
@@ -477,4 +482,105 @@ test("public-key helper accepts exact 32-byte encodings only", () => {
   assert.equal(isCanonicalOwnerPolicyPublicKey(fixturePublicKey(20)), true);
   assert.equal(isCanonicalOwnerPolicyPublicKey("1111111111111111111111111111111"), false);
   assert.equal(isCanonicalOwnerPolicyPublicKey("not-a-base58-key"), false);
+});
+
+test("live-estate observation is finalized, read-only, and cannot complete the owner decision", async () => {
+  const candidateMint = fixturePublicKey(41);
+  const calls = [];
+  const mintData = Buffer.alloc(82, 7);
+  const rpcCall = async (method, params, id) => {
+    calls.push({ method, params, id });
+    if (method === "getGenesisHash") return IAT_B3_MAINNET_GENESIS_HASH;
+    if (method === "getSlot") return 400_000_000;
+    if (method === "getAccountInfo") {
+      return {
+        context: { slot: 400_000_001 },
+        value: {
+          data: [mintData.toString("base64"), "base64"],
+          executable: false,
+          lamports: 1_461_600,
+          owner: TOKEN_2022_PROGRAM_ID,
+        },
+      };
+    }
+    if (method === "getTokenSupply") {
+      return { context: { slot: 400_000_002 }, value: { amount: "1000000000000000000", decimals: 9 } };
+    }
+    throw new Error(`unexpected method ${method}`);
+  };
+
+  const result = await observeIatB3LiveEstateMainnet({
+    candidateMint,
+    rpcCall,
+    observedAtUtc: "2026-08-11T00:00:00.000Z",
+  });
+  assert.deepEqual(calls.map(({ method, id }) => [method, id]), [
+    ["getGenesisHash", 1],
+    ["getSlot", 2],
+    ["getAccountInfo", 3],
+    ["getTokenSupply", 4],
+  ]);
+  assert.deepEqual(calls[2].params, [
+    candidateMint,
+    { encoding: "base64", commitment: "finalized", minContextSlot: 400_000_000 },
+  ]);
+  assert.deepEqual(calls[3].params, [candidateMint, { commitment: "finalized", minContextSlot: 400_000_001 }]);
+  assert.equal(result.candidateAccount.recognizedTokenProgram, "TOKEN_2022");
+  assert.equal(result.candidateAccount.dataLength, 82);
+  assert.equal(result.candidateAccount.supplyBaseUnits, "1000000000000000000");
+  assert.equal(result.candidateAccount.accountContextSlot, 400_000_001);
+  assert.equal(result.candidateAccount.tokenSupplyContextSlot, 400_000_002);
+  assert.equal(result.ownerAssertionAccepted, false);
+  assert.equal(result.liveEstateDecisionComplete, false);
+  assert.equal(result.publicNetworkWrites, false);
+  assert.equal(result.mainnetExecutionAuthorized, false);
+  assert.equal(result.mainnetStatus, "HOLD");
+});
+
+test("live-estate observation reports missing input without inferring that no estate exists", async () => {
+  const calls = [];
+  const result = await observeIatB3LiveEstateMainnet({
+    rpcCall: async (method) => {
+      calls.push(method);
+      if (method === "getGenesisHash") return IAT_B3_MAINNET_GENESIS_HASH;
+      if (method === "getSlot") return 400_000_001;
+      throw new Error(`unexpected method ${method}`);
+    },
+    observedAtUtc: "2026-08-11T00:01:00.000Z",
+  });
+  assert.deepEqual(calls, ["getGenesisHash", "getSlot"]);
+  assert.equal(result.result, "NO_CANDIDATE_SUPPLIED");
+  assert.equal(result.candidateObservationComplete, false);
+  assert.equal(result.blocker, "OWNER_MUST_SUPPLY_A_CANDIDATE_MINT_OR_SIGN_NO_LIVE_ESTATE_ASSERTION");
+  assert.equal(result.liveEstateDecisionComplete, false);
+  assert.equal(result.mainnetStatus, "HOLD");
+});
+
+test("live-estate observation fails closed on malformed keys, wrong networks, and unbound RPC slots", async () => {
+  let calls = 0;
+  await assert.rejects(
+    observeIatB3LiveEstateMainnet({ candidateMint: "not-a-key", rpcCall: async () => { calls += 1; } }),
+    /canonical 32-byte Base58 public key/u,
+  );
+  assert.equal(calls, 0);
+
+  await assert.rejects(
+    observeIatB3LiveEstateMainnet({
+      rpcCall: async (method) => method === "getGenesisHash" ? "wrong-network" : 1,
+    }),
+    /Mainnet genesis mismatch/u,
+  );
+
+  await assert.rejects(
+    observeIatB3LiveEstateMainnet({
+      candidateMint: fixturePublicKey(42),
+      rpcCall: async (method) => {
+        if (method === "getGenesisHash") return IAT_B3_MAINNET_GENESIS_HASH;
+        if (method === "getSlot") return 400_000_002;
+        if (method === "getAccountInfo") return { context: { slot: 400_000_001 }, value: null };
+        throw new Error(`unexpected method ${method}`);
+      },
+    }),
+    /preceded the finalized observation boundary/u,
+  );
 });
