@@ -30,6 +30,8 @@ const packageJson = JSON.parse(readFileSync(resolve(process.cwd(), "package.json
 
 const requiredOrderedCommands = [
   "npm run check:iat-v2-proof-workflow",
+  "npm run check:iat-b3-spec",
+  "node --test tests/iat-b3-combined-law-reproducible-build.test.mjs",
   "npm run check:release-surface",
   "npm run check:ui-regression",
   "npm run check:iat-v2",

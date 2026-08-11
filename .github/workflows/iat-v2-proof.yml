@@ -49,6 +49,7 @@ jobs:
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run check:iat-v2-proof-workflow
       - run: npm run check:iat-b3-spec
+      - run: node --test tests/iat-b3-combined-law-reproducible-build.test.mjs
       - run: npm run check:release-surface
       - run: npm run check:ui-regression
       - run: npm run check:iat-v2
