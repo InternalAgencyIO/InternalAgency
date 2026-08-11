@@ -7,9 +7,10 @@
 //! requires an opaque production-ACTIVE Config capability bound to that exact
 //! Law observation, constructs the retained V2 plan inside the same call, and
 //! only then enters Token-2022.
-//! The lower-level prepared-plan primitive remains non-authorizing. Full
-//! confidential-mint policy authentication and the post-CPI V2 persistence
-//! finalizer remain mandatory. This executor carries
+//! The lower-level prepared-plan primitive remains non-authorizing. The
+//! production open-position composition additionally requires the strict
+//! confidential-mint capability before any token CPI; generic callers do not.
+//! This executor carries
 //! only bounded token observations on the SBF stack and calls a transaction-
 //! local persistence callback after the exact transfer delta is proven. Any
 //! callback or delegate-restoration failure rolls the complete transaction
@@ -62,6 +63,11 @@ use crate::{
         execute_production_completed_ingress_config_and_lanes_cas_account_infos,
         ProductionActiveIngressLedgerReceipt,
     },
+    token_2022_runtime::{
+        authenticate_canonical_economy_mint_account_info, CanonicalEconomyMintBinding,
+        EconomyToken2022Error,
+    },
+    MAINNET_SUPPLY,
 };
 
 pub const STAKE_INGRESS_RUNTIME_STATUS: &str =
@@ -117,6 +123,7 @@ pub const PRODUCTION_OPEN_POSITION_RUNTIME_STATUS: &str =
 pub struct ProductionOpenPositionRuntimeTruth {
     pub same_artifact_daily_law_and_stake_ingress: bool,
     pub production_active_config_required: bool,
+    pub canonical_confidential_mint_policy_reauthenticated: bool,
     pub completed_ingress_position_lifecycle_executed: bool,
     pub completed_ingress_config_and_lanes_cas_executed: bool,
     pub callback_failure_requires_transaction_rollback: bool,
@@ -134,6 +141,7 @@ pub const PRODUCTION_OPEN_POSITION_RUNTIME_TRUTH: ProductionOpenPositionRuntimeT
     ProductionOpenPositionRuntimeTruth {
         same_artifact_daily_law_and_stake_ingress: true,
         production_active_config_required: true,
+        canonical_confidential_mint_policy_reauthenticated: true,
         completed_ingress_position_lifecycle_executed: true,
         completed_ingress_config_and_lanes_cas_executed: true,
         callback_failure_requires_transaction_rollback: true,
@@ -211,6 +219,7 @@ pub enum StakeIngressRuntimeError {
     StakeIngressPreparationRejected,
     CpiGuardLocked,
     ActiveConfigCapabilityMismatch,
+    CanonicalMintPolicyRejected,
     Program(ProgramError),
 }
 
@@ -237,6 +246,7 @@ impl StakeIngressRuntimeError {
             Self::StakeIngressPreparationRejected => ProgramError::Custom(0xB30E),
             Self::CpiGuardLocked => ProgramError::Custom(0xB30F),
             Self::ActiveConfigCapabilityMismatch => ProgramError::Custom(0xB310),
+            Self::CanonicalMintPolicyRejected => ProgramError::Custom(0xB311),
         }
     }
 }
@@ -654,6 +664,8 @@ pub fn execute_production_open_position_and_persist<'info>(
     program_id: &Pubkey,
     economy_binding: &NativeEconomyBinding,
     active_config: &RuntimeProductionActiveConfig,
+    canonical_mint_binding: &CanonicalEconomyMintBinding,
+    zk_elgamal_proof_program: &AccountInfo<'info>,
     law_binding: &CanonicalDailyLawBinding,
     law_state: &AccountInfo<'info>,
     open_position: Box<PrepareOpenPositionInput>,
@@ -668,6 +680,16 @@ pub fn execute_production_open_position_and_persist<'info>(
         program_id,
         accounts.mint.key,
     )?;
+    let canonical_mint = authenticate_canonical_economy_mint_account_info(
+        canonical_mint_binding,
+        accounts.token_program,
+        zk_elgamal_proof_program,
+        accounts.mint,
+    )
+    .map_err(|_: EconomyToken2022Error| StakeIngressRuntimeError::CanonicalMintPolicyRejected)?;
+    if canonical_mint.supply() != MAINNET_SUPPLY || canonical_mint.decimals() != TOKEN_DECIMALS {
+        return Err(StakeIngressRuntimeError::CanonicalMintPolicyRejected);
+    }
     let owner = accounts.owner;
     let mut position_receipt = None;
     let mut ledger_receipt = None;
@@ -997,6 +1019,7 @@ mod production_open_position_truth_tests {
             ProductionOpenPositionRuntimeTruth {
                 same_artifact_daily_law_and_stake_ingress: true,
                 production_active_config_required: true,
+                canonical_confidential_mint_policy_reauthenticated: true,
                 completed_ingress_position_lifecycle_executed: true,
                 completed_ingress_config_and_lanes_cas_executed: true,
                 callback_failure_requires_transaction_rollback: true,

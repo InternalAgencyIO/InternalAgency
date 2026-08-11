@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
+  ComputeBudgetProgram,
   Connection,
   Keypair,
   PublicKey,
@@ -28,6 +29,7 @@ const SCHEMA = "iat-b3-stake-ingress-local-validator/v1";
 const ECONOMY_PROGRAM_ID = new PublicKey("GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU");
 const HOOK_PROGRAM_ID = new PublicKey("DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F");
 const DECIMALS = 9;
+const REHEARSAL_COMPUTE_UNIT_LIMIT = 400_000;
 
 function parseArgs(argv) {
   const result = new Map();
@@ -93,9 +95,13 @@ async function transactionLogs(connection, signature) {
 }
 
 async function send(connection, payer, instructions) {
+  const transaction = new Transaction().add(
+    ComputeBudgetProgram.setComputeUnitLimit({ units: REHEARSAL_COMPUTE_UNIT_LIMIT }),
+    ...instructions,
+  );
   const signature = await sendAndConfirmTransaction(
     connection,
-    new Transaction().add(...instructions),
+    transaction,
     [payer],
     { commitment: "confirmed" },
   );

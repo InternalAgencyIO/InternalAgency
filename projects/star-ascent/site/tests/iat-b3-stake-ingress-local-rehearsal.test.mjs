@@ -40,6 +40,16 @@ test("stake-ingress rehearsal stays loopback-only and owns cleanup", async () =>
   );
 });
 
+test("stake-ingress rehearsal pins a bounded compute budget before every fixture instruction", async () => {
+  const driver = await text("../scripts/iat-b3-stake-ingress-local-rehearsal-driver.mjs");
+  assert.match(driver, /const REHEARSAL_COMPUTE_UNIT_LIMIT = 400_000;/u);
+  assert.match(
+    driver,
+    /new Transaction\(\)\.add\([\s\S]+ComputeBudgetProgram\.setComputeUnitLimit\(\{ units: REHEARSAL_COMPUTE_UNIT_LIMIT \}\)[\s\S]+\.\.\.instructions/u,
+  );
+  assert.equal((driver.match(/sendAndConfirmTransaction\(/gu) ?? []).length, 1);
+});
+
 test("fixture imports only the feature-gated production executor and freezes exact dependencies", async () => {
   const [productionWorkspace, fixtureWorkspace, fixtureEconomy, readme, ignore] = await Promise.all([
     text("../Cargo.toml"),
@@ -169,6 +179,7 @@ test("current production-executor record binds source and preserves the release 
   assert.equal(record.limits.productionIdentitiesFrozen, false);
   assert.equal(record.productionExecutor.v2EconomicMathChanged, false);
   assert.equal(record.observed.productionSourceExecutorInvoked, true);
+  assert.equal(record.observed.boundedComputeUnitLimit, 400000);
   assert.equal(record.observed.transferHookExtraAccountsResolvedFromTlv, true);
   assert.equal(record.observed.dailyLawAddressForwardedThroughHookValidation, true);
   assert.equal(record.observed.dailyLawOpenDecisionAuthenticatedByThisFixture, true);

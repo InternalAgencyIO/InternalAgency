@@ -201,7 +201,10 @@ retained bump, seals the exact Position postimage, and routes creation through
 the production-ACTIVE System CPI executor. The new
 `runtime-production-open-position` composition carries the authenticated Daily
 Law capability into the post-restoration callback, creates that exact Position,
-and then executes the four-account Config/lane CAS. Any callback error remains
+requires the strict canonical Token-2022 mint capability (exact supply and
+decimals, only `ConfidentialTransferMint` plus `TransferHook`, canonical
+auto-approve, no auditor, and null mint/freeze/hook/confidential authorities)
+before any token CPI, and then executes the four-account Config/lane CAS. Any callback error remains
 inside the same instruction and therefore requires transaction rollback of the
 earlier Token-2022 and System CPIs. There is still no public lifecycle
 dispatcher, frozen identity, entrypoint, or public ABI; those remain the
@@ -764,7 +767,8 @@ and bump, and seals that exact Position state into the existing
 production-ACTIVE lifecycle executor. This still is not composed with ingress
 CPI plus the Config/lane commit in the generic primitive. The narrower
 `runtime-production-open-position` composition does execute all three through
-one internal post-restoration callback, while remaining feature-gated and
+one internal post-restoration callback and now reauthenticates the exact
+confidential-mint policy before entering Token-2022, while remaining feature-gated and
 dispatcherless. It has not been executed on Devnet, completes no public
 handler, does not freeze production identities, and keeps Mainnet HOLD.
 

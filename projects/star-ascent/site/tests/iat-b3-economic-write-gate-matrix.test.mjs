@@ -138,6 +138,21 @@ function assertTokensInOrder(body, tokens, label) {
   }
 }
 
+function functionBody(source, name) {
+  const signature = new RegExp(`pub fn ${name}\\b`, "u");
+  const match = signature.exec(source);
+  assert.ok(match, `missing Rust function ${name}`);
+  const open = source.indexOf("{", match.index);
+  assert.notEqual(open, -1, `missing body for Rust function ${name}`);
+  let depth = 0;
+  for (let index = open; index < source.length; index += 1) {
+    if (source[index] === "{") depth += 1;
+    if (source[index] === "}") depth -= 1;
+    if (depth === 0) return source.slice(match.index, index + 1);
+  }
+  assert.fail(`unterminated body for Rust function ${name}`);
+}
+
 test("the B3 port matrix covers the exact retained V2 public write inventory", () => {
   assert.equal(matrix.schema, "iat-b3-economic-write-gate-matrix/v1");
   assert.equal(matrix.expectedHandlerCount, 15);
@@ -917,6 +932,21 @@ test("the feature-gated stake-ingress runtime executes exact Token-2022 CPI relo
     economyStakeIngressRuntimeSource,
     /pub fn execute_production_open_position_and_persist/u,
   );
+  const productionOpenPosition = functionBody(
+    economyStakeIngressRuntimeSource,
+    "execute_production_open_position_and_persist",
+  );
+  assertTokensInOrder(
+    productionOpenPosition,
+    [
+      "authenticate_daily_law(",
+      "require_production_active_context(",
+      "authenticate_canonical_economy_mint_account_info(",
+      "canonical_mint.supply() != MAINNET_SUPPLY",
+      "execute_daily_law_authenticated_stake_ingress_with_gate_callback(",
+    ],
+    "combined production law/config/confidential-mint/CPI boundary",
+  );
   assertTokensInOrder(
     economyStakeIngressRuntimeSource,
     [
@@ -930,6 +960,7 @@ test("the feature-gated stake-ingress runtime executes exact Token-2022 CPI relo
   for (const trueFlag of [
     "same_artifact_daily_law_and_stake_ingress",
     "production_active_config_required",
+    "canonical_confidential_mint_policy_reauthenticated",
     "completed_ingress_position_lifecycle_executed",
     "completed_ingress_config_and_lanes_cas_executed",
     "callback_failure_requires_transaction_rollback",

@@ -709,11 +709,17 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
     economyStakeIngressRuntimeSource,
     /pub fn execute_production_open_position_and_persist/u,
   );
-  assertTokensInOrder(
+  const productionOpenPosition = functionBody(
     economyStakeIngressRuntimeSource,
+    "execute_production_open_position_and_persist",
+  );
+  assertTokensInOrder(
+    productionOpenPosition,
     [
       "authenticate_daily_law(",
       "require_production_active_context(",
+      "authenticate_canonical_economy_mint_account_info(",
+      "canonical_mint.supply() != MAINNET_SUPPLY",
       "execute_daily_law_authenticated_stake_ingress_with_gate_callback(",
       "execute_production_completed_ingress_position_create_account_infos(",
       "execute_production_completed_ingress_config_and_lanes_cas_account_infos(",

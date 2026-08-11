@@ -383,7 +383,8 @@ System CPI executor. It is not yet composed atomically with ingress CPI and the
 four-account ledger commit in the generic callback surface. The narrower
 `runtime-production-open-position` feature now carries the exact authenticated
 Daily Law capability into the post-restoration callback, creates the canonical
-Position, then executes the Config/lane CAS. A later callback failure propagates
+Position, reauthenticates the exact canonical confidential-mint policy before
+any Token-2022 CPI, then executes the Config/lane CAS. A later callback failure propagates
 inside the same instruction and requires rollback of all earlier Token-2022 and
 System CPIs.
 No handler or release gate is complete.
