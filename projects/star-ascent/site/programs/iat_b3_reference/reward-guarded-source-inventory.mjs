@@ -65,6 +65,8 @@ const JAVASCRIPT_SOURCE_EXTENSIONS = new Set([
 const CRITICAL_SOURCE_SHA256 = Object.freeze({
   "programs/iat_b3_reference/provider-authenticated-envelope.mjs":
     "42b45111b527ecf4f570a77ad5ae977d9bf62ea8a0d6c6f9ed7f082b5bbc07b7",
+  "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs":
+    "e9c865940798d2f0b415176ce1d607abc0d16ac3c4048dea1cd53e4e61610008",
   "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs":
     "a71ce36dc45103d02361ba956a4e2567de939d11664a09db329a8834651319ee",
   "programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs":
@@ -156,6 +158,7 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-persistence-cas.mjs": 1,
   }),
   "provider-authenticated-envelope.mjs": Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs": 1,
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
     "programs/iat_b3_reference/reward-external-rollback-anchor.mjs": 1,
     "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs": 1,
@@ -216,6 +219,7 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
   }),
   verifyProviderSignedEnvelope: Object.freeze({
     "programs/iat_b3_reference/provider-authenticated-envelope.mjs": 1,
+    "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs": 2,
     "programs/iat_b3_reference/reward-external-rollback-anchor.mjs": 2,
   }),
   verifyRewardExternalRollbackAnchor: Object.freeze({

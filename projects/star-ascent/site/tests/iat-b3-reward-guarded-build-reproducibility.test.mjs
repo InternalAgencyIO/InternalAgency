@@ -27,6 +27,7 @@ import {
 const SITE_ROOT = fileURLToPath(new URL("../", import.meta.url));
 const INVENTORIED_SOURCE_PATHS = Object.freeze([
   "programs/iat_b3_reference/provider-authenticated-envelope.mjs",
+  "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs",
   "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs",
   "programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs",
   "programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs",

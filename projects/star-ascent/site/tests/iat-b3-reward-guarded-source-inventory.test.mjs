@@ -35,7 +35,10 @@ test("repository source inventory binds every current reward adapter edge and st
   assert.equal(result.deployableRewardConsumerPathsInventoried, false);
   assert.equal(result.dynamicComputedDispatchRejected, false);
   assert.equal(result.reflectiveDispatchRejected, false);
-  assert.equal(result.criticalSources.length, 11);
+  assert.equal(result.criticalSources.length, 12);
+  assert.ok(result.criticalSources.some(({ path }) => (
+    path === "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs"
+  )));
   assert.ok(result.criticalSources.some(({ path }) => (
     path === "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs"
   )));
@@ -326,6 +329,53 @@ test("critical adapter drift or omission fails before an updated inventory can a
       (source) => `${source}\n// unreviewed materialized projection drift\n`,
     )),
     /REWARD_GUARDED_SOURCE_CRITICAL_DIGEST_MISMATCH/u,
+  );
+
+  const privacyAnchorPath =
+    "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs";
+  const privacyAnchor = productionSources.find(({ path }) => path === privacyAnchorPath);
+  assert.ok(privacyAnchor);
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(replaceSource(
+      privacyAnchorPath,
+      (source) => `${source}\n// unreviewed privacy anchor drift\n`,
+    )),
+    /REWARD_GUARDED_SOURCE_CRITICAL_DIGEST_MISMATCH/u,
+  );
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(
+      productionSources.filter(({ path }) => path !== privacyAnchorPath),
+    ),
+    /REWARD_GUARDED_SOURCE_CRITICAL_PATH_MISSING/u,
+  );
+  assert.throws(
+    () => auditRewardGuardedSourceFiles([
+      ...productionSources.filter(({ path }) => path !== privacyAnchorPath),
+      {
+        path: "programs/iat_b3_reference/privacy-vault-external-anchor-alias.mjs",
+        source: privacyAnchor.source,
+      },
+    ]),
+    /REWARD_GUARDED_SOURCE_CRITICAL_PATH_MISSING/u,
+  );
+});
+
+test("the reviewed privacy anchor provider import marker cannot drift to another source", () => {
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(withSource(
+      "worker/unreviewed-privacy-anchor-provider-import.mjs",
+      `import { verifyProviderEnvelope } from
+        "../programs/iat_b3_reference/provider-authenticated-envelope.mjs";
+       export const bypass = (input) => verifyProviderEnvelope(input);`,
+    )),
+    /REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH:provider-authenticated-envelope\.mjs/u,
+  );
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(withSource(
+      "worker/unreviewed-privacy-anchor-verifier.mjs",
+      "export const bypass = (provider, input) => provider.verifyProviderSignedEnvelope(input);",
+    )),
+    /REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH:verifyProviderSignedEnvelope/u,
   );
 });
 

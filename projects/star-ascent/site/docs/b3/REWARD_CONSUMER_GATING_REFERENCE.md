@@ -147,6 +147,7 @@ forbidden markers and gate identities as data.
 The exact critical-source ledger is:
 
 - `programs/iat_b3_reference/provider-authenticated-envelope.mjs`;
+- `programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs`;
 - `programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs`;
 - `programs/iat_b3_reference/reward-persistence-cas.mjs`;
 - `programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs`;
@@ -157,6 +158,13 @@ The exact critical-source ledger is:
 - `programs/iat_b3_reference/reward-external-rollback-anchor.mjs`;
 - `programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs`;
 - `programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs`.
+
+The privacy-vault external rollback-anchor prerequisite is included only
+because it is a reviewed static consumer of the generic provider-envelope
+verifier. Its exact path, complete source digest, single provider-module import
+marker, and verifier entry-point occurrences are pinned here. This does not
+make it a reward consumer, expand the reward runtime boundary, or promote any
+provider, rollback, runtime, activation, or Mainnet truth claim.
 
 The static inventory pins the complete SHA-256 of each ledger source and exact per-path
 occurrence counts for every raw adapter symbol, mutation/factory entry point,
