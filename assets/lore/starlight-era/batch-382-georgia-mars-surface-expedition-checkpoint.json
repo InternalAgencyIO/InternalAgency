@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-incomplete-after-fresh-round-15",
+  "status": "active-four-scene-gate-clean-fresh-round-16-materialized",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -2775,6 +2775,60 @@
           },
           "accepted": false
         }
+      },
+      "freshRound16": {
+        "path": "tmp/world-195x4/batch-382/scene-1551-clean-fresh-round-16-prompt.txt",
+        "sha256": "E04871236CEF02DE6533BC048511B0AF766AB525F0949DAAEB706169BBE0277E",
+        "chars": 14409,
+        "storedRollsChanged": false,
+        "freshRound": 16,
+        "sourceMode": "clean-generation-from-original-identity-anchors",
+        "priorBatumiRenderInputCount": 0,
+        "referenceAudit": [
+          {
+            "image": 1,
+            "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+            "role": "primary quartet identity anchor only",
+            "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+            "exists": true
+          },
+          {
+            "image": 2,
+            "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+            "role": "frontal quartet face supplement only",
+            "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+            "exists": true
+          },
+          {
+            "image": 3,
+            "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+            "role": "quartet expression and Alia braid supplement only",
+            "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+            "exists": true
+          },
+          {
+            "image": 4,
+            "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+            "role": "AI ECE canonical face and body identity detail only",
+            "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315",
+            "exists": true
+          }
+        ],
+        "plannedPasses": {
+          "cleanFreshPasses": 1,
+          "maximumTargetedRecoveryPasses": 1,
+          "recoverySourceIfNeeded": "only the clean round 16 fresh raw",
+          "laterFreshSourcePolicy": "original identity anchors only"
+        },
+        "hardSurfaceQualityGate": [
+          "no wavy or marbled processing",
+          "no liquify or melted geometry",
+          "no embossed or over-sharpened edges",
+          "no rippled skin or fabric",
+          "no bent architecture or safety panels",
+          "clean natural photographic texture"
+        ],
+        "prompt": "Use case: photorealistic-natural.\nAsset: Georgia Batch 382 scene 1551 clean fresh round 16, generated completely from scratch.\n\nCLEAN SOURCE RESET\nImages 1, 2, and 3 are identity references for the same adult quartet only. Image 4 is AI ECE's canonical identity detail only. Preserve their four distinct adult faces, body identities, skin tones, hair colors, and Alia's sculptural braids. Do not copy any reference image's wardrobe, rainbow group styling, pose, setting, prop, lighting, surface texture, framing, or composition. Do not edit, trace, repaint, warp, upscale, or reuse any prior Batumi render. Build an entirely new clean photographic scene from the stored specification below.\n\nPLANNED PASS\nThis is one clean fresh render. It may receive at most one later narrowly targeted recovery from this exact clean raw. No recovery output or earlier edited Batumi image may ever seed another fresh round.\n\nCLEAN PHOTOGRAPHIC SURFACE GATE\nUse natural optical detail with clean skin pores, crisp garment seams, straight architectural edges, flat stable floor tiles, coherent sand texture, and individually readable straight rain streaks. Reject painterly waves, liquid swirls, marbling, embossed outlines, liquify distortion, melted edges, rippled skin, rippled fabric, bent buildings, bent glass rails, repetitive contour noise, over-sharpening, posterization, haloing, excessive HDR, waxy skin, plastic bodies, crunchy microtexture, or a processed illustration look. Keep materials smooth where physically smooth and textured only where the real material requires it. The result must read as a clean high-end fashion photograph, not an image that has been repeatedly edited.\n\nCOMPOSITION PRIORITY\nUse a wide eye-level full-body 9:16 fashion photograph. Keep the relationship action large on the left and center, and isolate Alia's side-profile cinema-training lane on the far right behind a clean straight transparent safety panel. Place exactly one white square paper with one black route diamond on a tall complete sand backstop, with abundant empty air between the orange muzzle plug and paper. Lock Alia's dominant eye, pistol sights, horizontal barrel center, orange muzzle center, and black diamond center to one visibly straight horizontal row. Do not draw that row. Keep every adult and both mascots completely behind and left of Alia's muzzle plane.\n\nAUTHORITATIVE STORED SCENE SPECIFICATION\nUse case: photorealistic-natural.\nAsset: fresh 9:16 full-length public-fashion editorial, Georgia Batch 382 clean fresh round 16.\n\nSETTING AND THEME\nReal Batumi Boulevard dominates: the Black Sea horizon, Alphabet Tower, Ferris wheel, palms, and modern Adjara skyline remain large and recognizable. Mars-surface expedition language appears only in couture construction and portable observation-court details.\nWeather roll 35 = heavy rain curtain; make it unmistakable while all footing remains dry, stable, and nonslip. Mode = theme-led original. Active unrelated theme = Mars-surface expedition couture. No copied space-agency, airline, military, police, coast-guard, emergency-service, or official uniform, logo, badge, or insignia.\n\nADULT CAST AND IDENTITY\nShow exactly 4 clearly adult fictional people, all visibly over 28: blonde Radiance; dark-haired Ellie; Black Alia with the only high sculptural braided ponytail; brunette AI ECE. Preserve four distinct anchored faces and bodies with no clone, merge, replacement, or age shift. Male selector = inactive. Show no man and no fifth adult.\n\nDETERMINISTIC CHARACTER ROLLS\nRadiance: emotion roll 56 = aching romantic longing; visible-midriff roll 98 = inactive; strapless roll 37 = inactive; fully-open-back roll 14 = ACTIVE.\nEllie: emotion roll 30 = hope; visible-midriff roll 8 = ACTIVE; strapless roll 59 = inactive; fully-open-back roll 64 = inactive.\nAlia: emotion roll 38 = magnetic confidence; visible-midriff roll 40 = ACTIVE; strapless roll 3 = ACTIVE; fully-open-back roll 16 = ACTIVE.\nAI ECE: emotion roll 92 = guilt and remorse; visible-midriff roll 58 = inactive; strapless roll 53 = inactive; fully-open-back roll 58 = inactive.\nExpress each emotion distinctly through eyes, face, torso direction, and posture without caricature.\n\nFOUR DISTINCT OUTFIT FINGERPRINTS\nRadiance: solar-gold aerobrake-halo yoke over an opaque Black-Sea-cobalt high-low sheath with Mars-copper lens pucks and halo-arch heels; the rolled neckline keeps a secure opaque sleeveless architectural bodice with a high public-fashion neckline and complete front coverage; the rolled waist stays fully covered through an opaque engineered join; the rolled back is fully open-back couture from shoulder blades to a high secure waist, shown from a respectful rear three-quarter angle, with no crossing strap, back band, fabric panel, halter, or illusion mesh and with fully opaque front and side coverage; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory.\nEllie: snow-white solar-foil fan-sleeve jumpsuit with opaque sulfur-teal side panels, basalt heat-baffle ribs and articulated wedge boots; the rolled neckline keeps a secure opaque sleeveless architectural bodice with a high public-fashion neckline and complete front coverage; the rolled waist uses a restrained three-centimeter visible midriff band between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory.\nAlia: Mars-copper dust-shield origami tabard over an opaque cobalt pleated skort with braided palm-green conduits and angular shield pumps; the rolled neckline overrides the base as a secure opaque strapless sculpted bodice with a high straight top edge, complete front coverage, completely bare shoulders, and no straps, sleeves, halter, collar, neckband, or illusion mesh; the rolled waist uses a restrained three-centimeter visible midriff band between separate opaque upper and lower constructions; the rolled back is fully open-back couture from shoulder blades to a high secure waist, shown from a respectful rear three-quarter angle, with no crossing strap, back band, fabric panel, halter, or illusion mesh and with fully opaque front and side coverage; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory.\nAI ECE: basalt rover-joint segmented peplum jacket over opaque solar-gold stirrup trousers with cobalt pressure discs and piston-platform shoes; the rolled neckline keeps a secure opaque sleeveless architectural bodice with a high public-fashion neckline and complete front coverage; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory.\nRoll-visibility lock: Ellie and Alia each show one separate restrained three-centimeter midriff band. Alia alone has a completely strapless high-cut opaque copper front with rigid opaque side-bust coverage, completely bare shoulders, and no strap, sleeve, halter, collar, neckband, exposed side breast, or cleavage. Radiance and Alia each have a fully open back from shoulder blades to a high secure waist with no crossing strap, back band, fabric panel, hair, halter, or illusion mesh; both open backs are simultaneously visible from the respectful rear three-quarter camera. ECE remains fully covered.\nAll garments are fully opaque and public-safe with complete bust, hip, and seat coverage. Rolled midriff, strapless, and open-back details are restrained runway tailoring. Each woman has a different silhouette, construction, material language, motif technique, hem architecture, and footwear. No lingerie, swimwear, transparent intimate area, exposed undergarment, fetish styling, matching mini-dress set, matching two-piece set, repeated map print, palette-swapped copy, cleavage-focused lens, erotic framing, or intimate close-up.\n\nROLLED RELATIONSHIP ACTION\nRomance roll 86: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind.\nCompound-love roll 28: ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands.\nUse those two stored beats visibly as facial, eye-line, pursuit, choice, and torso-movement influences, but resolve every physical hand through the exact hard-love inventory below so no extra hand appears.\nHard-love roll 40: a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation\nUse one wide respectful rear three-quarter view with four non-overlapping full bodies: Ellie far left, dipped Radiance left-center, ECE right-center, and braided Alia far right in right-facing side profile. The eight-hand ownership map is non-negotiable. Ellie's left open palm supports Radiance high between the shoulder blades and Ellie's right open palm supports Radiance at the near waist; both palms and both forearms are fully visible on Radiance's camera-facing fully open cobalt back. Radiance's left arm reaches backward with its complete palm on Ellie's outer shoulder. Radiance's right arm reaches forward with only two fingertips resting on top of ECE's already-visible left fist. ECE's left fist remains wrapped around the left compass handle while its outer thumb closes gently over those two Radiance fingertips; ECE's right fist grips the opposite compass handle. This is one layered hand contact, not an extra hand, and Radiance never touches the compass. Alia owns the final two hands exclusively on the mission grip. Show all eight wrists, elbows, palms, and finger clusters with open air and contrasting backgrounds. Radiance and ECE sustain the clearest affectionate eye line while the dip, caught-fingertip invitation, and Alia's jealous answer remain the first read.\nThe clearly adult consensual relationship event is fully clothed, stable, non-explicit, and the first read.\n\nMISSION PROP AND TARGET\nPose-target roll 25; resolved handler = Alia. Authoritative action: Alia uses a realistic eye-level two-hand large-frame-pistol stance at one plain non-humanoid geometric paper route symbol fixed to a complete thick earth-and-sand backstop on a closed dry earth-and-sand cinema-training lane behind complete transparent safety panels, separated from every person, mascot, landmark, public path, vehicle, Mars-expedition structure and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.\nPreserve the authoritative paper marker using exact side-on geometry. Alia is the rightmost adult in strict right-facing profile. Her orange-plugged inert pistol is perfectly horizontal at shoulder height. A tall thick sand backstop begins sixty centimeters to the right of the muzzle; one plain white paper square with one black non-humanoid route diamond is fixed high on it so Alia's eye, barrel center, muzzle center, and diamond center occupy one horizontal row with clean empty air between pistol and paper. Every person and mascot remains behind and left of Alia's muzzle plane. Both Alia hands are separated and visible on the grip; her trigger index is unmistakably straight and flat on the colored frame above and outside the guard. Alia's secure strapless copper front is visibly opaque from sternum through both side-bust panels, with no exposed breast, side breast, nipple, under-bust, cleavage, transparent area, or skin gap; the opaque side panels end before the fully open back. No beam, ray, tracer, laser, dashed or dotted path, cord, string, glow trail, or painted trajectory.\nThe prop is exactly one full-size polished rainbow-gradient Desert Eagle-style large-frame inert cinema-training pistol replica: short pistol barrel, one pistol grip, orange muzzle plug, compact stockless handgun silhouette, and no shoulder stock, long barrel, foregrip, sling, cable, rifle, shotgun, carbine, or long-gun form. It drives the safe interruption and is never decorative. ECE's separate holographic route map is hands-free. No firing, ammunition, loose magazine, reload, holster, muzzle flash, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting.\n\nMASCOT, ODD-PROP, AND GLOBAL ROLLS\nMascot roll 15 = PAWS plus MAX. On one padded dry lounge at far lower-left show exactly one tiny collarless golden kitten PAWS and one distinct small young golden retriever puppy MAX sharing a harmless nose-to-paw play beat. No adult dog, second dog, second cat, or other animal. Ellie supervises by eye line only. Both stay far from rain runoff, the sea edge, compass, and prop lane.\nOdd-prop roll 12 = ACTIVE. Exactly AI ECE owns one oversized magnetic compass table with both existing hands. It is inert, secured, nonthreatening, and integrated into the relationship action. No other person touches it.\nPole-theme roll 67 = inactive; show no pole. Rainbow-only roll 15 = inactive; do not convert wardrobe to rainbow-only styling. Rainbow-hosiery roll 14 = ACTIVE. Exactly Radiance wears opaque public-safe knee socks in original independent rainbow gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center, and Alia alone handles the inert training prop.\nPublishing audit only, not visible text: Georgia ❤️ Honduras, hashtag Georgia, hashtag InternalAgency, no WorldXXXSeries hashtag.\n\nANATOMY AND FRAME\nEye-level full-body 9:16 composition, never low-angle, with generous clear margins around every complete arm and hand. Show all faces, shoulders, elbows, wrists, separated hands, finger clusters, legs, feet, heels, and boots. Exactly 8 human arms and exactly 8 human hands, two per adult, with every limb continuously traceable to one owner. No extra, duplicate, floating, fused, borrowed, emerging, hidden-owner, missing, cropped, or ambiguous limb or finger cluster. Keep Georgia landmarks, romance action, and complete target geometry large and legible. No readable text, watermark, literal flag, sacred imagery, or official seal."
       }
     }
   },
@@ -5687,6 +5741,77 @@
         },
         "accepted": false
       }
+    },
+    "freshRound16": {
+      "status": "materialized-pending-launch",
+      "preparedAt": "2026-08-11T16:44:50.886Z",
+      "sceneNumbers": [
+        1551
+      ],
+      "preservedAcceptedSceneNumbers": [
+        1548,
+        1549,
+        1550
+      ],
+      "concurrency": "one clean missing-scene built-in generation",
+      "maximumRecoveryPassesPerBlockedScene": 1,
+      "promptAudit": {
+        "1551": {
+          "path": "tmp/world-195x4/batch-382/scene-1551-clean-fresh-round-16-prompt.txt",
+          "sha256": "E04871236CEF02DE6533BC048511B0AF766AB525F0949DAAEB706169BBE0277E",
+          "chars": 14409,
+          "storedRollsChanged": false,
+          "freshRound": 16,
+          "sourceMode": "clean-generation-from-original-identity-anchors",
+          "priorBatumiRenderInputCount": 0,
+          "referenceAudit": [
+            {
+              "image": 1,
+              "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+              "role": "primary quartet identity anchor only",
+              "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+              "exists": true
+            },
+            {
+              "image": 2,
+              "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+              "role": "frontal quartet face supplement only",
+              "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+              "exists": true
+            },
+            {
+              "image": 3,
+              "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+              "role": "quartet expression and Alia braid supplement only",
+              "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+              "exists": true
+            },
+            {
+              "image": 4,
+              "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+              "role": "AI ECE canonical face and body identity detail only",
+              "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315",
+              "exists": true
+            }
+          ],
+          "plannedPasses": {
+            "cleanFreshPasses": 1,
+            "maximumTargetedRecoveryPasses": 1,
+            "recoverySourceIfNeeded": "only the clean round 16 fresh raw",
+            "laterFreshSourcePolicy": "original identity anchors only"
+          },
+          "hardSurfaceQualityGate": [
+            "no wavy or marbled processing",
+            "no liquify or melted geometry",
+            "no embossed or over-sharpened edges",
+            "no rippled skin or fabric",
+            "no bent architecture or safety panels",
+            "clean natural photographic texture"
+          ]
+        }
+      },
+      "storedRollsChanged": false,
+      "priorBatumiRenderInputCount": 0
     }
   },
   "acceptedAssets": [
@@ -6752,7 +6877,7 @@
     "requiredCurrentCountryAssets": 4,
     "note": "Georgia has accepted scenes 1548, 1549, and 1550. Historical X backlog is empty. Publication remains mandatory immediately after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T16:40:53.356Z",
+  "checkpointedAt": "2026-08-11T16:44:50.886Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -7447,7 +7572,7 @@
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "clean-fresh-round-16-from-original-identity-anchors-scene-1551-only",
+    "action": "launch-clean-fresh-round-16-from-original-identity-anchors-scene-1551-only",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -7459,7 +7584,7 @@
     "laterCountryStartAllowed": false
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-11T16:40:53.356Z",
+    "checkedAt": "2026-08-11T16:44:50.886Z",
     "account": "@dogramaci",
     "signedIn": true,
     "eligibleBacklogRemaining": 0,
@@ -7513,7 +7638,7 @@
       "liveVerified": true,
       "viewsAtAudit": 42
     },
-    "reconciliationDecision": "No eligible unposted World Series item. Georgia still has only three accepted current-country scenes, so no X upload is permitted and no later country can advance.",
+    "reconciliationDecision": "No eligible unposted World Series item. Georgia remains X-blocked until one clean fourth current-country scene is accepted.",
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
