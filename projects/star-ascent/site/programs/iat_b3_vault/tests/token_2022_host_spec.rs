@@ -314,6 +314,7 @@ fn exact_versions_and_capability_truth_remain_nonactivating() {
     assert!(!truth.proof_generation_verified);
     assert!(!truth.proof_verification_verified);
     assert!(truth.elgamal_pubkey_curve_validity_verified);
+    assert!(truth.elgamal_ciphertext_curve_validity_verified);
     assert!(!truth.deployed_program_bytecode_authenticated);
     assert!(!truth.devnet_verified);
     assert!(!truth.release_gate_complete);
@@ -621,6 +622,31 @@ fn confidential_account_rejects_borrow_readiness_counter_and_transfer_hazards() 
         ),
         Err(Token2022HostError::ElGamalPubkeyCurveInvalid)
     );
+
+    for field in 0..3 {
+        let mut invalid_ciphertext = TestAccount::data(
+            TOKEN_ACCOUNT,
+            TOKEN_2022_PROGRAM_ID.to_bytes(),
+            mutate_account_confidential(|confidential| {
+                let invalid = [0xff; 64].into();
+                match field {
+                    0 => confidential.pending_balance_lo = invalid,
+                    1 => confidential.pending_balance_hi = invalid,
+                    2 => confidential.available_balance = invalid,
+                    _ => unreachable!(),
+                }
+            }),
+        );
+        assert_eq!(
+            authenticate_confidential_token_account_info(
+                &mint,
+                &account_binding(),
+                &invalid_ciphertext.info(),
+            ),
+            Err(Token2022HostError::ElGamalCiphertextCurveInvalid),
+            "ciphertext field {field}",
+        );
+    }
 
     let invalid_counter_shape = TokenAccountShape {
         pending_counter: 65,
