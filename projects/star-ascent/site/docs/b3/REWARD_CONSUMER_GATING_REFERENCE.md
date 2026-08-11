@@ -147,6 +147,7 @@ forbidden markers and gate identities as data.
 The exact critical-source ledger is:
 
 - `programs/iat_b3_reference/provider-authenticated-envelope.mjs`;
+- `programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs`;
 - `programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs`;
 - `programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs`;
 - `programs/iat_b3_reference/reward-persistence-cas.mjs`;
@@ -165,6 +166,15 @@ verifier. Its exact path, complete source digest, single provider-module import
 marker, and verifier entry-point occurrences are pinned here. This does not
 make it a reward consumer, expand the reward runtime boundary, or promote any
 provider, rollback, runtime, activation, or Mainnet truth claim.
+
+The host-only authenticated recovery runtime is also pinned by exact path and
+complete source digest. The static inventory confines its reviewed generic
+provider-state, recovery lifecycle, branded SQLite, and external-anchor imports
+and direct calls to that one source. The runtime module itself has no reviewed deployable importer, so a
+new static app, worker, or bootstrap import fails until a separate review
+updates the ledger. This composition remains host-only and does not promote the
+inventory's exhaustive-path, dynamic-dispatch, reflective-dispatch, runtime
+confinement, provider, rollback, activation, or Mainnet facts.
 
 The static inventory pins the complete SHA-256 of each ledger source and exact per-path
 occurrence counts for every raw adapter symbol, mutation/factory entry point,

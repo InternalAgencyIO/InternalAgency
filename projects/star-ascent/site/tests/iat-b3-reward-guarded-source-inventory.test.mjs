@@ -35,7 +35,10 @@ test("repository source inventory binds every current reward adapter edge and st
   assert.equal(result.deployableRewardConsumerPathsInventoried, false);
   assert.equal(result.dynamicComputedDispatchRejected, false);
   assert.equal(result.reflectiveDispatchRejected, false);
-  assert.equal(result.criticalSources.length, 12);
+  assert.equal(result.criticalSources.length, 13);
+  assert.ok(result.criticalSources.some(({ path }) => (
+    path === "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs"
+  )));
   assert.ok(result.criticalSources.some(({ path }) => (
     path === "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs"
   )));
@@ -377,6 +380,65 @@ test("the reviewed privacy anchor provider import marker cannot drift to another
     )),
     /REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH:verifyProviderSignedEnvelope/u,
   );
+});
+
+test("authenticated privacy runtime path, digest, and static composition edges fail closed", () => {
+  const runtimePath =
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs";
+  const runtimeSource = productionSources.find(({ path }) => path === runtimePath);
+  assert.ok(runtimeSource);
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(replaceSource(
+      runtimePath,
+      (source) => `${source}\n// unreviewed authenticated privacy runtime drift\n`,
+    )),
+    /REWARD_GUARDED_SOURCE_CRITICAL_DIGEST_MISMATCH/u,
+  );
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(
+      productionSources.filter(({ path }) => path !== runtimePath),
+    ),
+    /REWARD_GUARDED_SOURCE_CRITICAL_PATH_MISSING/u,
+  );
+  assert.throws(
+    () => auditRewardGuardedSourceFiles([
+      ...productionSources.filter(({ path }) => path !== runtimePath),
+      {
+        path: "worker/privacy-vault-authenticated-runtime-alias.mjs",
+        source: runtimeSource.source,
+      },
+    ]),
+    /REWARD_GUARDED_SOURCE_CRITICAL_PATH_MISSING/u,
+  );
+  for (const [path, source, marker] of [
+    [
+      "worker/unreviewed-privacy-runtime-import.mjs",
+      `export { createPrivacyVaultAuthenticatedRecoveryRuntime } from
+        "../programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs";`,
+      "privacy-vault-authenticated-recovery-runtime.mjs",
+    ],
+    [
+      "worker/unreviewed-recovery-verifier.mjs",
+      "export const bypass = (adapter, input) => adapter.verifyPrivacyVaultRecoveryBundle(input);",
+      "verifyPrivacyVaultRecoveryBundle",
+    ],
+    [
+      "worker/unreviewed-recovery-commit.mjs",
+      "export const bypass = (adapter, input) => adapter.commitVerifiedBundle(input);",
+      "commitVerifiedBundle",
+    ],
+    [
+      "worker/unreviewed-anchor-verifier.mjs",
+      "export const bypass = (adapter, input) => adapter.verifyPrivacyVaultExternalRollbackAnchor(input);",
+      "verifyPrivacyVaultExternalRollbackAnchor",
+    ],
+  ]) {
+    assert.throws(
+      () => auditRewardGuardedSourceFiles(withSource(path, source)),
+      new RegExp(`REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH:${marker}`),
+      path,
+    );
+  }
 });
 
 test("descriptor accessors are rejected without execution and unrelated source remains allowed", () => {

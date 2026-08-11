@@ -67,6 +67,8 @@ const CRITICAL_SOURCE_SHA256 = Object.freeze({
     "42b45111b527ecf4f570a77ad5ae977d9bf62ea8a0d6c6f9ed7f082b5bbc07b7",
   "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs":
     "e9c865940798d2f0b415176ce1d607abc0d16ac3c4048dea1cd53e4e61610008",
+  "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs":
+    "9140ffcf489dfd3b24a5e121214a92705c794d639934649dec8a9217a7468584",
   "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs":
     "a71ce36dc45103d02361ba956a4e2567de939d11664a09db329a8834651319ee",
   "programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs":
@@ -110,6 +112,16 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs": 1,
     "programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs": 1,
   }),
+  "commitRecoveryBundle(": Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
+  }),
+  commitVerifiedBundle: Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
+    "programs/iat_b3_reference/privacy-vault-recovery-sqlite.mjs": 1,
+  }),
+  "consumeSignedAnchor(": Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
+  }),
   consumeAnchoredLocalProjection: Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
   }),
@@ -122,6 +134,10 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
   }),
   createProviderTrustBinding: Object.freeze({
     "programs/iat_b3_reference/provider-authenticated-envelope.mjs": 2,
+  }),
+  createPrivacyVaultRollbackAnchorRequest: Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 3,
+    "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs": 1,
   }),
   createCheckpointGatedRewardPersistenceCas: Object.freeze({
     "programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs": 1,
@@ -158,10 +174,29 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-persistence-cas.mjs": 1,
   }),
   "provider-authenticated-envelope.mjs": Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
     "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs": 1,
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
     "programs/iat_b3_reference/reward-external-rollback-anchor.mjs": 1,
     "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs": 1,
+  }),
+  "prepareAnchorRequest(": Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
+  }),
+  "privacy-vault-authenticated-recovery-runtime.mjs": Object.freeze({}),
+  "privacy-vault-external-rollback-anchor.mjs": Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
+  }),
+  "privacy-vault-recovery-lifecycle.mjs": Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
+    "programs/iat_b3_reference/privacy-vault-recovery-sqlite.mjs": 1,
+  }),
+  "privacy-vault-recovery-sqlite.mjs": Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
+    "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs": 1,
+  }),
+  "reconcileCommittedRecoveryBundle(": Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
   }),
   "reward-checkpoint-gated-cas.mjs": Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
@@ -221,6 +256,14 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/provider-authenticated-envelope.mjs": 1,
     "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs": 2,
     "programs/iat_b3_reference/reward-external-rollback-anchor.mjs": 2,
+  }),
+  verifyPrivacyVaultExternalRollbackAnchor: Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 2,
+    "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs": 1,
+  }),
+  verifyPrivacyVaultRecoveryBundle: Object.freeze({
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 2,
+    "programs/iat_b3_reference/privacy-vault-recovery-lifecycle.mjs": 1,
   }),
   verifyRewardExternalRollbackAnchor: Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 3,
