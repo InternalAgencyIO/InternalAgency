@@ -23,6 +23,14 @@ export const TOKEN_2022_LAST_UPGRADE = Object.freeze({
   executorProgram: "SMPLecH534NA9acpos4G6x7uf3LWbCAwZQE9e8ZekMu",
   executionTrackerProgram: "SMPLKTQhrgo22hFCVq2VGX1KAktTWjeizkhrdB1eauK",
 });
+export const TOKEN_2022_OFFICIAL_RELEASE = Object.freeze({
+  embeddedTag: "program@v11.0.0",
+  officialRepository: "https://github.com/solana-program/token-2022",
+  embeddedSourceUrl: "https://github.com/solana-program/token-2022/tree/main/program",
+  annotatedTagObjectSha: "b491987dc1f84cf0d296a56dcf2c13cdce66aae7",
+  taggedSourceCommit: "9bc02757f600ffe754746708a8a072bcd49d1260",
+  pinnedSolanaCliVersion: "3.1.8",
+});
 
 const BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
@@ -125,6 +133,10 @@ export async function observeIatB3StandardProgramsMainnet({
   const upgradeAuthority = authorityOption === 1 ? encodeBase58(programData.bytes.subarray(13, 45)) : null;
   const programBytes = programData.bytes.subarray(45);
   if (programBytes.length === 0) throw new Error("Token-2022 ProgramData contained no program bytes");
+  if (!programBytes.includes(Buffer.from(TOKEN_2022_OFFICIAL_RELEASE.embeddedTag, "ascii"))
+      || !programBytes.includes(Buffer.from(TOKEN_2022_OFFICIAL_RELEASE.embeddedSourceUrl, "ascii"))) {
+    throw new Error("Token-2022 ProgramData omitted the pinned official release identity markers");
+  }
   if (programDataAddress !== TOKEN_2022_LAST_UPGRADE.programDataAddress
       || Number(deploymentSlot) !== TOKEN_2022_LAST_UPGRADE.slot
       || upgradeAuthority !== TOKEN_2022_LAST_UPGRADE.authority) {
@@ -212,6 +224,16 @@ export async function observeIatB3StandardProgramsMainnet({
         executionTrackerProgram: TOKEN_2022_LAST_UPGRADE.executionTrackerProgram,
         finalizedProvenanceVerified: true,
       },
+      releaseIdentity: {
+        embeddedTag: TOKEN_2022_OFFICIAL_RELEASE.embeddedTag,
+        officialRepository: TOKEN_2022_OFFICIAL_RELEASE.officialRepository,
+        embeddedSourceUrl: TOKEN_2022_OFFICIAL_RELEASE.embeddedSourceUrl,
+        annotatedTagObjectSha: TOKEN_2022_OFFICIAL_RELEASE.annotatedTagObjectSha,
+        taggedSourceCommit: TOKEN_2022_OFFICIAL_RELEASE.taggedSourceCommit,
+        pinnedSolanaCliVersion: TOKEN_2022_OFFICIAL_RELEASE.pinnedSolanaCliVersion,
+        embeddedReleaseMarkersVerified: true,
+        exactSourceBytesRebuiltAndMatched: false,
+      },
     },
     zkElgamalProof: {
       programId: ZK_ELGAMAL_PROOF_PROGRAM_ID,
@@ -231,7 +253,7 @@ export async function observeIatB3StandardProgramsMainnet({
     activationReady: false,
     mainnetExecutionAuthorized: false,
     mainnetStatus: "HOLD",
-    blocker: "TOKEN_2022_SOURCE_RELEASE_BINDING_AND_CEREMONY_TIME_REATTESTATION_REMAIN_REQUIRED",
+    blocker: "TOKEN_2022_REPRODUCIBLE_SOURCE_BUILD_AND_CEREMONY_TIME_REATTESTATION_REMAIN_REQUIRED",
   };
 }
 

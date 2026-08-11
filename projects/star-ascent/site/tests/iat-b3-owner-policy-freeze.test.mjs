@@ -23,6 +23,7 @@ import {
 import {
   NATIVE_LOADER_ID,
   TOKEN_2022_LAST_UPGRADE,
+  TOKEN_2022_OFFICIAL_RELEASE,
   UPGRADEABLE_LOADER_ID,
   ZK_ELGAMAL_NATIVE_PROGRAM_NAME,
   ZK_ELGAMAL_PROOF_PROGRAM_ID,
@@ -617,12 +618,16 @@ test("standard-program observation pins finalized Token-2022 bytes and the nativ
   const tokenProgramState = Buffer.alloc(36);
   tokenProgramState.writeUInt32LE(2, 0);
   tokenProgramState.set(programDataKey, 4);
-  const tokenProgramData = Buffer.alloc(49);
+  const releaseMarkers = Buffer.from(
+    `${TOKEN_2022_OFFICIAL_RELEASE.embeddedTag}\0${TOKEN_2022_OFFICIAL_RELEASE.embeddedSourceUrl}`,
+    "ascii",
+  );
+  const tokenProgramData = Buffer.alloc(45 + releaseMarkers.length);
   tokenProgramData.writeUInt32LE(3, 0);
   tokenProgramData.writeBigUInt64LE(427_147_035n, 4);
   tokenProgramData[12] = 1;
   tokenProgramData.set(upgradeAuthority, 13);
-  tokenProgramData.set([1, 2, 3, 4], 45);
+  tokenProgramData.set(releaseMarkers, 45);
   const calls = [];
   const rpcCall = async (method, params, id) => {
     calls.push({ method, params, id });
@@ -701,9 +706,13 @@ test("standard-program observation pins finalized Token-2022 bytes and the nativ
   ]);
   assert.deepEqual(calls[2].params[0], [TOKEN_2022_PROGRAM_ID, ZK_ELGAMAL_PROOF_PROGRAM_ID]);
   assert.equal(result.token2022.deploymentSlot, 427_147_035);
-  assert.equal(result.token2022.programBytes, 4);
+  assert.equal(result.token2022.programBytes, releaseMarkers.length);
   assert.equal(result.token2022.immutable, false);
   assert.equal(result.token2022.lastUpgrade.finalizedProvenanceVerified, true);
+  assert.equal(result.token2022.releaseIdentity.embeddedTag, "program@v11.0.0");
+  assert.equal(result.token2022.releaseIdentity.taggedSourceCommit, "9bc02757f600ffe754746708a8a072bcd49d1260");
+  assert.equal(result.token2022.releaseIdentity.embeddedReleaseMarkersVerified, true);
+  assert.equal(result.token2022.releaseIdentity.exactSourceBytesRebuiltAndMatched, false);
   assert.equal(result.zkElgamalProof.immutable, true);
   assert.equal(result.standardProgramSnapshotComplete, true);
   assert.equal(result.sourceReleaseBindingComplete, false);
@@ -734,17 +743,23 @@ test("standard-program observation rejects substituted loaders, native bytes, an
     programDataSlot = 438_000_002,
     mutateHistory = (history) => history,
     mutateTransaction = (transaction) => transaction,
+    mutateProgramData = (bytes) => bytes,
   ) => async (method) => {
     if (method === "getGenesisHash") return IAT_B3_MAINNET_GENESIS_HASH;
     if (method === "getSlot") return 438_000_000;
     if (method === "getMultipleAccounts") return mutatePrograms(structuredClone(validPrograms));
     if (method === "getAccountInfo") {
-      const bytes = Buffer.alloc(46);
+      const releaseMarkers = Buffer.from(
+        `${TOKEN_2022_OFFICIAL_RELEASE.embeddedTag}\0${TOKEN_2022_OFFICIAL_RELEASE.embeddedSourceUrl}`,
+        "ascii",
+      );
+      const bytes = Buffer.alloc(45 + releaseMarkers.length);
       bytes.writeUInt32LE(3, 0);
       bytes.writeBigUInt64LE(427_147_035n, 4);
       bytes[12] = 1;
       bytes.set(decodeBase58(TOKEN_2022_LAST_UPGRADE.authority), 13);
-      bytes[45] = 1;
+      bytes.set(releaseMarkers, 45);
+      mutateProgramData(bytes);
       return {
         context: { slot: programDataSlot },
         value: { data: [bytes.toString("base64"), "base64"], executable: false, owner: UPGRADEABLE_LOADER_ID },
@@ -823,5 +838,17 @@ test("standard-program observation rejects substituted loaders, native bytes, an
       ),
     }),
     /finalized upgrade transaction/u,
+  );
+  await assert.rejects(
+    observeIatB3StandardProgramsMainnet({
+      rpcCall: baseRpc(
+        (programs) => programs,
+        438_000_002,
+        (history) => history,
+        (transaction) => transaction,
+        (bytes) => { bytes[45] ^= 0xff; return bytes; },
+      ),
+    }),
+    /official release identity markers/u,
   );
 });
