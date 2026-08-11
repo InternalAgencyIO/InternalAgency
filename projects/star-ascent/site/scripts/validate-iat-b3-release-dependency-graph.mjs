@@ -92,7 +92,7 @@ const ARTIFACTS = Object.freeze({
   ),
   tokenHost: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-token-2022-confidential-host-compatibility.v1.json",
-    "90ee8a911cd33fc64ffe475421251539dadfc8d617508bd9302d88269c4a74c3",
+    "ccf5a60779598ef0c6ea719603f49cd6824b8a8489d83109c4d537e382e8c5f8",
   ),
   core: artifact(
     "projects/star-ascent/site/docs/b3/CORE_TEAM_CAP.md",

@@ -159,7 +159,7 @@ test("canonical production graph is valid, records the completed host root, and 
   assert.equal(node(DRAFT, "V2_FEATURE_PARITY").blocker, null);
   assert.equal(
     node(DRAFT, "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY").completionEvidence.artifactSha256,
-    "90ee8a911cd33fc64ffe475421251539dadfc8d617508bd9302d88269c4a74c3",
+    "ccf5a60779598ef0c6ea719603f49cd6824b8a8489d83109c4d537e382e8c5f8",
   );
   for (const key of [
     "externalTruthVerified",
@@ -267,7 +267,7 @@ test("exact ordered node and edge inventories encode the corrected dependency DA
   assert.deepEqual(RELEASE_DEPENDENCY_EDGES, EXPECTED_EDGES);
   assert.deepEqual(DRAFT.edges, EXPECTED_EDGES);
   assert.equal(RELEASE_DEPENDENCY_EDGES.length, 132);
-  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "2079889c8f48d33304f6f76e3d693a7a8ed157d5dc09f9664443569878e5fce1");
+  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "9c1919ed11aa48363e024a20aef164fbee87258e77e6c025f7b3da927ac5aee8");
   assert.equal(DRAFT.graphDefinitionSha256, RELEASE_DEPENDENCY_GRAPH_SHA256);
   assert.deepEqual(
     DRAFT.terminalPredicate.requiredNodeIds,
