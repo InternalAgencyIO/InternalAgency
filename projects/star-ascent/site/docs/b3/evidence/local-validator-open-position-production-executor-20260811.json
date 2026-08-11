@@ -1,0 +1,260 @@
+{
+  "schema": "iat-b3-open-position-production-executor-loopback/v1",
+  "status": "PASS",
+  "generatedAt": "2026-08-11T19:15:34.318Z",
+  "scope": {
+    "rpc": "http://127.0.0.1:19499",
+    "loopbackOnly": true,
+    "publicNetworkWrites": false,
+    "syntheticFixtureInstructionWrapper": true,
+    "syntheticProgramErrorMapping": true
+  },
+  "fixture": {
+    "productionCandidate": false,
+    "economyProgramId": "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
+    "lawHookProgramId": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F",
+    "economyArtifactSha256": "456cf034c6cfe8bf6bad83ba8d8cdb0d61bbdc44411d9985d20c9385e32c22e8",
+    "lawArtifactSha256": "86e5f3a1df79f3141a9b2cb7c2121694c9d1cd1ea470755add154fd4d9b394fb",
+    "economySourceSha256": "3c29a2f2318549ced364227c1af53a6bdb6666806ff792738d41dc20e1a22fad",
+    "lawHookSourceSha256": "ee7db3ad8cd1a64e1d77c92a664048f5e91da3aefc5933b9155d1bd9c0ebb9de",
+    "driverSha256": "f141bcdbd7758c21d35f8e779672d390a0dc7dc64ab940eb4d2a7f74e87104b7",
+    "cargoLockSha256": "d5ceb6090bef93b60268b2e9f8d30a72c45f7f50a3eab5b05b17953a8123a0a2",
+    "economyBuildLogSha256": "2dfbb0b7418d7864be3ee705e9bd1c49448cad0de2f20f05ec9361af1477ce0b",
+    "lawBuildLogSha256": "0faaec4cb07ed0fe287565ec300b1369e7a1b9437924ab9c78fd61ed21e45e1e",
+    "runnerSha256": "71121ad3b0b2831312f28f9b78d4fa4d92b1ac4f500f1f09490c0f1f6fd6f385"
+  },
+  "productionSource": {
+    "openExecutorSha256": "25bf09d4e90edddc42a74245363d20444f91926e1cb4e2ac52e35bfdb9bc3e7d",
+    "openPreflightSha256": "c10e7cc0678b420042a61934438e54e168cebe0df22e264a0ee97a485accfc69",
+    "stakeIngressRuntimeSha256": "2a719a5e7edd80711090e424fb9a3a3172678bf1b689fafa853afdd5ae0c15e8",
+    "runtimeLifecycleSha256": "69e7b6f2b79a8e9a6e5610bca8b4654361b3e66b632d98629a46f8e1beeae3cc",
+    "runtimeWriteAdapterSha256": "4c98e70708a38c1accecaf38df43119cdac6d07ac308042cd91f76e1d40367da"
+  },
+  "cluster": {
+    "genesisHash": "6GnhzP1agG8UHccE7RyWHVpnjU7yAdgR2e2cLJwMBgs6",
+    "commitment": "finalized"
+  },
+  "mint": {
+    "extensionTypes": [
+      4,
+      14
+    ],
+    "supply": "1000000000000000000",
+    "decimals": 9,
+    "mintAuthority": null,
+    "freezeAuthority": null,
+    "confidentialAuthority": null,
+    "confidentialAutoApprove": true,
+    "confidentialAuditor": null,
+    "transferHookAuthority": null,
+    "transferHookProgramId": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F"
+  },
+  "validationTlv": {
+    "owner": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F",
+    "metaCount": 1,
+    "exactLawState": "CZULiHWf1N1mwJZ5XfFfG5AD4Yx3ptjrZHxws7EJKdr7",
+    "readOnly": true,
+    "nonsigner": true
+  },
+  "observed": {
+    "realProductionOpenPositionExecutorInvoked": true,
+    "exactProductionInstructionCodecPassedThrough": true,
+    "exactSeventeenAccountVacantSuccess": true,
+    "exactEighteenAccountPrefundedDelegateSuccess": true,
+    "canonicalToken2022MintAuthenticated": true,
+    "exactHookLawGraphResolved": true,
+    "lockedLawPrecededHostileSourceParsing": true,
+    "hookFailureRolledBackApprovalAndAllState": true,
+    "lifecycleFailureRolledBackTokenDelegateAndAllState": true,
+    "lateWrapperFailureRolledBackPositionConfigThreeLanesAndTokens": true,
+    "priorDelegateAndAllowanceRestoredExactly": true,
+    "configAndAllThreeRewardLanesPersisted": true,
+    "exactLocalSbfExecutionProven": true,
+    "loopbackFinalizedTransactionRollbackProven": true,
+    "requestedComputeUnitLimit": 1400000,
+    "computeUnitsConsumed": [
+      {
+        "label": "initialize-law",
+        "computeUnitsConsumed": 30124
+      },
+      {
+        "label": "initialize-validation",
+        "computeUnitsConsumed": 35655
+      },
+      {
+        "label": "initialize-stake",
+        "computeUnitsConsumed": 28168
+      },
+      {
+        "label": "seed-state",
+        "computeUnitsConsumed": 147451
+      },
+      {
+        "label": "set-law-locked",
+        "computeUnitsConsumed": 26923
+      },
+      {
+        "label": "locked-law-first",
+        "computeUnitsConsumed": 31602
+      },
+      {
+        "label": "set-law-open",
+        "computeUnitsConsumed": 26940
+      },
+      {
+        "label": "hook-rejection",
+        "computeUnitsConsumed": 443227
+      },
+      {
+        "label": "drain-owner-for-lifecycle",
+        "computeUnitsConsumed": 300
+      },
+      {
+        "label": "lifecycle-rollback",
+        "computeUnitsConsumed": 482895
+      },
+      {
+        "label": "post-success-wrapper-rollback",
+        "computeUnitsConsumed": 1001284
+      },
+      {
+        "label": "vacant-17-success",
+        "computeUnitsConsumed": 1001591
+      },
+      {
+        "label": "prefund-position",
+        "computeUnitsConsumed": 300
+      },
+      {
+        "label": "set-prior-delegate",
+        "computeUnitsConsumed": 1570
+      },
+      {
+        "label": "prefunded-18-success",
+        "computeUnitsConsumed": 1008968
+      }
+    ],
+    "globalSbfStackDiagnosticsPresent": false
+  },
+  "transactions": [
+    {
+      "label": "initialize-law",
+      "signature": "5uAeYS8aoHEyQcqjxo8giF7cgZbgnEQXzgc8tPY3upSSbdZ5KQvLZXx7tri9AGaVjD8tmDcS3WEhYB9PVzcjT2cf",
+      "success": true,
+      "computeUnitsConsumed": 30124
+    },
+    {
+      "label": "initialize-validation",
+      "signature": "f2nfD6JKm2cyTvHzo63nHL96k6GFZMGADt6S8g4FA8eaPctSufvWfAUBruksMNfKs6FNoomHb4RffQFbvJ5Ktks",
+      "success": true,
+      "computeUnitsConsumed": 35655
+    },
+    {
+      "label": "initialize-stake",
+      "signature": "3G6LVbSooP1jJ5rHnbH1YtzLNSAkptDYgJaxBmovL6bpk36dqeWoK3RQTuxW6zWrZ1AextCDPYiXBNDoPYnoUFqz",
+      "success": true,
+      "computeUnitsConsumed": 28168
+    },
+    {
+      "label": "seed-state",
+      "signature": "6Qrtf1Fkt3ywpmi78NNhoy15QUcD6cG9pfuzzJVEyVFr643S6CQW3ofGRCN3dgjZkRyxLFjs5o6puS8uzCC9gLj",
+      "success": true,
+      "computeUnitsConsumed": 147451
+    },
+    {
+      "label": "set-law-locked",
+      "signature": "3YD3DX2zpcsvWKuWsuMPZWB2B93CaNbDkdv7egSVMC4oJx2BPHwKJoDw6ZYXYNbULxhLom1a2gKUdG1ChQ7BnyTY",
+      "success": true,
+      "computeUnitsConsumed": 26923
+    },
+    {
+      "label": "locked-law-first",
+      "signature": "2gWMcTJmsu6HAALVoNcsT7ERSf9tXSN88m6qpMdwDfbjdbzhihjUi1c8aKXWxrNRZu2gCfn63w3qnKrT3me1n9D5",
+      "success": false,
+      "computeUnitsConsumed": 31602
+    },
+    {
+      "label": "set-law-open",
+      "signature": "4Dy8ZJ8wWfmWbSo2p8UvrMwXRCvUQZwjXTtt3nfsuGrHVL4q2Xtq6FkCZghRvT8FKHGpZ5h44pAQHH537voSm7SF",
+      "success": true,
+      "computeUnitsConsumed": 26940
+    },
+    {
+      "label": "hook-rejection",
+      "signature": "44RRY8k9WRoY6BDNHG7hYpXGbaA9h5YdM3wHuXNG3Sm7kcxYfRdf186KLyTrbpnoNR8xgvwWBaBb4tSBsstCepaN",
+      "success": false,
+      "computeUnitsConsumed": 443227
+    },
+    {
+      "label": "drain-owner-for-lifecycle",
+      "signature": "ENiPeMdA4uAjqWEF34hkX1b9B68n8sWQHV8nAbR1C7JZWQWbfKAdXPsc42FMdAzZy2q19f5rKPdr77VxJy8M3Zh",
+      "success": true,
+      "computeUnitsConsumed": 300
+    },
+    {
+      "label": "lifecycle-rollback",
+      "signature": "61LSsALCy48yzoaQgS5fMnPz2xNAcB5H9PmgdasWXDCUyyT5nx8wzURUcuJ1J1AXR5CdaekeDayqnxaYNQjcxsju",
+      "success": false,
+      "computeUnitsConsumed": 482895
+    },
+    {
+      "label": "post-success-wrapper-rollback",
+      "signature": "3HqiiUXifCXmtcXUq35xe3VCLRVAJmQ5d4fxTgdpjBD4GUd8u2jpcHiNKcuUSqmLqRemCRx9wMi4Pt5GscyTPYgE",
+      "success": false,
+      "computeUnitsConsumed": 1001284
+    },
+    {
+      "label": "vacant-17-success",
+      "signature": "5Jpg22VyEjtoT2wdRtRjmpA93iJyG6Te9AgVQXmGz4PTmDqw6EVZZwhCV6KdraeqyFEy3Ge2HJddvSiypKaLstFJ",
+      "success": true,
+      "computeUnitsConsumed": 1001591
+    },
+    {
+      "label": "prefund-position",
+      "signature": "3pKvBDjcDD45rGGwRPmzyzhS8fVgNFZehspZZ9QpfAYtVTn5KrGPDA99pSa2wUAKeNTwTS2x2GW24uZk1dFzsL6Y",
+      "success": true,
+      "computeUnitsConsumed": 300
+    },
+    {
+      "label": "set-prior-delegate",
+      "signature": "24944aQAjJDe6xEH7V9S15pme9WhQ2PKbXtZEFZGt5hf1K1L1Xh3x6ezRm8eJn7LLeFuQiQunRark8gRzGL3VJTa",
+      "success": true,
+      "computeUnitsConsumed": 1570
+    },
+    {
+      "label": "prefunded-18-success",
+      "signature": "dhjNwTntZpWaPdJWHCsxUVz2X9PSBJtvraCMLrTqFxqrnBaa27ppL5N9aPT5ctFFQyFS4KLZqrPxC3e9U7BZgZn",
+      "success": true,
+      "computeUnitsConsumed": 1008968
+    }
+  ],
+  "limits": {
+    "productionComputeBudgetProven": false,
+    "productionProgramErrorAbiProven": false,
+    "productionDispatcherProven": false,
+    "productionEntrypointProven": false,
+    "productionFinalCombinedBinaryProven": false,
+    "productionIdentitiesFrozen": false,
+    "productionGenesisTokenDistributionConservationProven": false,
+    "activationLifecycleProven": false,
+    "fundingCeremonyProven": false,
+    "adversarialDevnetProven": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetHold": true
+  },
+  "cleanup": {
+    "temporaryLedgerRemoved": true,
+    "validatorStopped": true,
+    "generatedKeyMaterialRemoved": true
+  },
+  "build": {
+    "cargoBuildSbfExitCode": 0,
+    "canonicalCompilerDiagnosticsPresent": false,
+    "explicitSbfStackLimitBytes": 4096,
+    "cargoVersion": "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "rustcVersion": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "solanaVersion": "solana-cli 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)",
+    "splTokenVersion": "spl-token-cli 5.5.0",
+    "nodeVersion": "v24.14.0"
+  }
+}
