@@ -12,6 +12,164 @@ valid local CAS head that had not yet reached the external checkpoint.
 [`reward-consumer-gate.mjs`](../../programs/iat_b3_reference/reward-consumer-gate.mjs)
 adds that missing fail-closed reference boundary.
 
+[`reward-checkpoint-gated-cas.mjs`](../../programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs)
+adds the corresponding host write boundary for both supported reward-CAS
+mutations: round finalization and Premium-upgrade recording. The wrapper reads
+the current checkpoint itself; callers cannot supply a checkpoint as a write
+argument. It admits one local CAS write only while the validated local head and
+checkpoint are exactly equal. That write necessarily makes the local database
+one commit ahead, so the next write remains closed until the checkpoint is
+advanced through the existing sequential reconciliation protocol. A missing,
+stale, forked, unrelated, or locally-ahead checkpoint fails before the wrapped
+CAS adapter is called, and the denied attempt leaves the local snapshot
+unchanged.
+
+This is still a compositional host reference, not an IAT-wide bypass proof. A
+caller that retains and invokes the underlying store can bypass the wrapper;
+provider reads remain unauthenticated; and the local SQLite transaction cannot
+be atomic with an external provider read. The gate therefore fixes
+`directStoreBypassPreventionVerified`, `runtimeAuthenticationVerified`,
+`externalMonotonicityVerified`, `rollbackProtectionVerified`, and
+`activationReady` to `false` and remains `HOLD`.
+
+[`reward-consumer-cursor-sqlite.mjs`](../../programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs)
+adds a file-backed, append-only cursor for the local projection side. It accepts
+only a process-branded permit from the exact-checkpoint consumer gate and
+requires each consumer to advance through global CAS commits contiguously from
+sequence one. Replay, skip, cross-consumer substitution, copied permits,
+history update/delete, and schema drift fail closed. Cursor history uses a
+pinned strict SQLite schema, WAL, `synchronous=FULL`, defensive mode, canonical
+u64 ordering, chained record digests, and complete reopen validation. Each
+consumer has an independent chain, and a committed cursor can be reconciled by
+exact readback after a caller loses the return value.
+
+The cursor now requires one exact canonical local-projection commitment and
+appends that complete projection event plus its cursor in the same SQLite
+`BEGIN IMMEDIATE` transaction. Deferred foreign-key binding, one-to-one set
+validation on every read/reopen, append-only triggers, and injected faults
+after each insert prove that neither local record can survive without the
+other. The event can be replayed deterministically from its typed payload and
+is exactly bound to the permit, checkpoint, commit, consumer, and cursor.
+
+This proves only atomic persistence of a local event log record. It does not
+prove that a materialized projection database or external effect was updated,
+cannot prove that every runtime consumer uses this API, and has no independent
+anti-rollback anchor. Its records therefore keep
+`materializedProjectionStateVerified`, `runtimeAuthenticationVerified`,
+`rollbackProtectionVerified`, `projectionEffectAtomicityVerified`,
+`externalSideEffectsAuthorized`, and `activationReady` false. No queue,
+webhook, payment, token transfer, or other external effect is authorized.
+
+[`reward-guarded-source-inventory.mjs`](../../programs/iat_b3_reference/reward-guarded-source-inventory.mjs)
+adds a repository-source gate around those two adapters. It enumerates the
+first-party deployable/reference JavaScript, TypeScript, Rust, Python, shell,
+and command sources directly from the filesystem, rejects source symlinks,
+and excludes only dependencies, generated build/test output, tests, docs,
+archives, and vendor sources. The auditor itself is excluded to avoid a
+circular self-hash; the paired artifact, build-provenance, and dual-build
+auditors are excluded for the same reason because they necessarily contain the
+forbidden markers and gate identities as data.
+
+The exact critical-source ledger is:
+
+- `programs/iat_b3_reference/reward-persistence-cas.mjs`;
+- `programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs`;
+- `programs/iat_b3_reference/reward-persistence-checkpoint.mjs`;
+- `programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs`;
+- `programs/iat_b3_reference/reward-consumer-gate.mjs`;
+- `programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs`.
+
+The gate pins the complete SHA-256 of each ledger source and exact per-path
+occurrence counts for every raw adapter symbol, mutation/factory entry point,
+permit/cursor entry point, guarded-module import edge, and private CAS/cursor
+SQLite table-name family. The only non-adapter checkpoint imports are the two
+read-only provider-readiness validators:
+`scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs` and
+`scripts/validate-iat-b3-x-social-evidence-provider-readiness.mjs`. No current
+deployable source imports the raw SQLite CAS factory, checkpoint-gated factory,
+or cursor factory, and no deployable caller invokes the high-level reward
+mutators, permit constructor, or cursor consumer. Any new occurrence, alias,
+direct table access, critical-source change, missing critical path, or source
+symlink fails closed until the inventory and its review are explicitly
+updated.
+
+This is a source-snapshot assertion, not runtime confinement. It cannot prove
+that a built artifact matches the scanned source, that a caller did not retain
+the underlying store, or that an inventory update received independent review.
+It therefore keeps runtime bypass prevention, provider authentication,
+rollback protection, materialized projection state, built-artifact parity,
+external effects, activation, and Mainnet false or `HOLD`.
+
+[`reward-guarded-build-provenance.mjs`](../../programs/iat_b3_reference/reward-guarded-build-provenance.mjs)
+adds a process-observed fresh-build recipe and receipt boundary. Recipe
+creation freezes an enumerated source-set digest, guarded-surface digest,
+absolute executable and executable SHA-256, exact argument vector, repository-
+relative working directory, explicit secret-name-rejecting environment, Node
+version/platform/architecture, timeout, and an ordered configuration-file
+path/length/digest ledger. Recipes are process-branded; a serialized or caller-
+authored lookalike cannot be executed.
+
+Execution requires the artifact directory not to exist before the child
+process starts. It re-enumerates source and configuration before execution,
+runs the exact executable without a shell or inherited environment, requires a
+zero exit and newly created nonempty artifact directory, re-enumerates source
+and configuration after execution, and then runs the branded full artifact
+inventory. A receipt binds the recipe, artifact-set and forbidden-marker-set
+digests, file/byte counts, exit status, and stdout/stderr lengths and digests.
+Existing `dist` is deliberately stale input to this boundary and must be
+removed or replaced outside this non-destructive module before a fresh recipe
+can run.
+
+The receipt proves a process-observed stable-source-to-fresh-artifact binding
+for the exact command. It does not prove that an unreviewed command semantically
+built rather than copied bytes, that a second build reproduces the result, or
+that the packaged runtime is confined. It therefore keeps
+`artifactBuiltFromBoundSourceVerified`, reproducibility, runtime confinement,
+provider authentication, rollback protection, materialized projection state,
+independent review, external effects, activation, and Mainnet false or `HOLD`.
+
+[`reward-guarded-build-reproducibility.mjs`](../../programs/iat_b3_reference/reward-guarded-build-reproducibility.mjs)
+adds a dual-fresh-build byte-equality receipt. It accepts only two distinct
+process-branded provenance receipt objects from different observed child-
+process executions against the same source root. A serialized clone, repeated
+use of one receipt, or a valid receipt from a different recipe or source root
+is rejected.
+
+Before comparison, the gate re-enumerates the current source, configuration
+files, executable digest, and Node version/platform/architecture. Both
+receipts must bind the exact same recipe, configuration ledger, toolchain,
+guarded surface, forbidden-marker set, artifact file count, artifact byte
+count, and artifact-set digest. A successful comparison therefore proves two
+independent fresh executions produced the same complete artifact byte ledger
+under one still-current recipe.
+
+This remains a narrow two-run equality fact. It does not prove semantic build
+provenance, independently reviewed recipe correctness, cross-host or clean-room
+reproduction, runtime confinement, or future determinism. The comparison keeps
+`semanticBuildProvenanceVerified`, `artifactBuiltFromBoundSourceVerified`,
+general `reproducibleBuildVerified`, runtime confinement, provider
+authentication, rollback protection, materialized projection state,
+independent review, external effects, activation, and Mainnet false or `HOLD`.
+
+[`reward-guarded-artifact-inventory.mjs`](../../programs/iat_b3_reference/reward-guarded-artifact-inventory.mjs)
+adds the next negative-packaging prerequisite. It accepts only a process-
+branded, filesystem-enumerated source-inventory result, recursively inventories
+every artifact file without extension or media exclusions, rejects symlinks,
+and binds each exact relative path, byte length, and SHA-256 into one artifact-
+set digest. Every byte -- including opaque binaries and source maps -- is
+searched for the frozen reward adapter symbols, mutators, factories, module
+paths, private SQLite table families, schemas, and status canaries. Any hit,
+duplicate/escaping path, decorated buffer, forged source inventory, or empty
+artifact fails closed.
+
+A clean artifact result proves only that the inventoried byte set contains no
+recognized guarded-reward runtime surface. Recording the current source-set
+and guarded-surface digests beside an artifact is not evidence that the build
+was produced from that source. The artifact record therefore keeps build-
+source parity, reproducibility, runtime confinement, provider authentication,
+rollback protection, materialized projection state, independent review,
+external effects, activation, and Mainnet false or `HOLD`.
+
 ## Exact admission order
 
 The exported permit constructor performs these checks in order:
@@ -70,13 +228,58 @@ indistinguishable from an authenticated provider read to this host reference;
 it can produce the same local permit repeatedly. A retained but stale ancestor
 is rejected when the local CAS has advanced, but the module cannot prove that a
 provider response itself is fresh, authentic, monotonic outside the supplied
-chain, or protected from rollback. The repeated-permit test also demonstrates
-that no durable per-consumer cursor or exactly-once external-effect guarantee
-exists. These are limitation tests, not mock authentication.
+chain, or protected from rollback. The permit alone remains repeatable; the
+separate SQLite cursor rejects a repeated branded permit after durable commit,
+and atomically retains the local projection event that a materializer would
+consume, but deliberately does not claim an exactly-once materialized
+projection or external-effect guarantee. These are limitation tests, not mock
+authentication.
 
 Production completion still requires a reviewed provider integration, an
-authenticated read/write boundary, a durable per-consumer cursor or outbox,
-cross-system idempotency and uncertain-result recovery, complete downstream
-consumer inventory, exact production identities, and adversarial Devnet
-evidence. The reference must not be wired into the app, worker, economic
-program, Devnet runner, or release switch as if those gates were complete.
+authenticated read/write boundary, a production-integrated cursor plus
+same-transaction projection/outbox effect, cross-system idempotency and
+uncertain-result recovery, an independent cursor rollback anchor, complete
+downstream consumer inventory, exact production identities, and adversarial
+Devnet evidence. The reference must not be wired into the app, worker,
+economic program, Devnet runner, or release switch as if those gates were
+complete.
+
+Focused write-gate adversaries are in
+`tests/iat-b3-reward-checkpoint-gated-cas.test.mjs`; they cover both mutation
+paths, stale-head denial without mutation, exact reconciliation, missing and
+forked checkpoint rejection, copied-checkpoint non-authentication, and
+Daily-Law-first failure precedence.
+
+Focused durable-cursor adversaries are in
+`tests/iat-b3-reward-consumer-cursor-sqlite.test.mjs`; they cover contiguous
+multi-consumer advance, reopen, replay and skip denial, copied and substituted
+permits, append-only SQL guards for both local tables, schema tamper,
+Daily-Law-first denial without mutation, hostile payload/accessor rejection,
+and transaction rollback after each cursor/event insert boundary.
+
+Focused source-inventory adversaries are in
+`tests/iat-b3-reward-guarded-source-inventory.test.mjs`; they inject aliased
+raw mutators, raw adapter-symbol access, permit-only and cursor-only consumers,
+direct private-table writes, source omission, digest drift, and hostile source
+descriptors. Unrelated source remains allowed without changing the frozen
+guarded-surface digest.
+
+Focused artifact-inventory adversaries are in
+`tests/iat-b3-reward-guarded-artifact-inventory.test.mjs`; they inject raw
+mutators, module paths, schemas, private-table SQL, source-map sources and
+contents, opaque binary canaries, duplicate and escaping paths, forged source
+inventory records, decorated buffers, and accessors. Harmless artifact drift
+changes the exact byte ledger while every non-authorizing flag remains frozen.
+
+Focused build-provenance adversaries are in
+`tests/iat-b3-reward-guarded-build-provenance.test.mjs`; they execute a real
+child process against an isolated exact source ledger and reject pre-existing
+artifacts, source drift before or during the build, configuration and toolchain
+drift, forbidden output bytes, nonzero exit, omitted output, forged recipes,
+and receipt or truth-flag tamper.
+
+Focused dual-build adversaries are in
+`tests/iat-b3-reward-guarded-build-reproducibility.test.mjs`; they reject a
+one-byte output change, nondeterministic file cardinality, repeated receipt,
+serialized receipt substitution, different recipe, post-build source or
+configuration drift, and comparison digest or truth-flag tamper.
