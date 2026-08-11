@@ -66,11 +66,11 @@ const CRITICAL_SOURCE_SHA256 = Object.freeze({
   "programs/iat_b3_reference/provider-authenticated-envelope.mjs":
     "42b45111b527ecf4f570a77ad5ae977d9bf62ea8a0d6c6f9ed7f082b5bbc07b7",
   "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs":
-    "f601ead6cca8a7899bebb831ee771bd719c564dccf04680600a7a406dfbf9696",
+    "2f5368df00e77b94619f89587c8e026f3ba630545177369a9558fb3b42f1a2fe",
   "programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs":
-    "7c2ceb08211046cce38b119074157bf0b41bc0667ed2502bade9516654d98673",
+    "7aeca55b1821fa632444f6d4485ab6d2f6ea809cc495fe4f6a9ac54e30074dd7",
   "programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs":
-    "8252dca2ba8ffd324fc283b6f41c8d1c8634df54f3a1708bdad5f72644151c67",
+    "55ce6f4739226cb02b7ff3927bd97814f05d30578695b8bce1fd2e7ea13780ec",
   "programs/iat_b3_reference/reward-consumer-gate.mjs":
     "7139c8d2a57d630ca59306730f16a5d6f979a06280422b69eee4978310918b4f",
   "programs/iat_b3_reference/reward-external-rollback-anchor.mjs":
@@ -84,7 +84,7 @@ const CRITICAL_SOURCE_SHA256 = Object.freeze({
   "programs/iat_b3_reference/reward-persistence-checkpoint.mjs":
     "38c652179120d2d5e1bf084d8f2ae0fb169fec4b800359503270e0925e0380c4",
   "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs":
-    "dcf673f0da976da616115972639ca4748fc657d0856d5b727010290e20b3b0f4",
+    "622bf21521daca38a8272252425c18354d64b1e380bc63a84469730118acc51a",
 });
 
 // Raw substring counts are intentional. Imports renamed with `as`, comments

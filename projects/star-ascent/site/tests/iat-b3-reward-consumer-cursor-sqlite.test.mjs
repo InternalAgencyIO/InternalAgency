@@ -28,6 +28,7 @@ import {
   REWARD_CONSUMER_CURSOR_SQLITE_SCHEMA_MANIFEST_SHA256,
   REWARD_CONSUMER_CURSOR_SQLITE_TEST_FAULT,
   REWARD_CONSUMER_CURSOR_STATUS,
+  assertSqliteRewardConsumerCursorAdapter,
   createSqliteRewardConsumerCursor,
   validateRewardConsumerCursorRecord,
   validateRewardConsumerProjectionEventRecord,
@@ -209,6 +210,51 @@ function permit(context, consumerId, sequence) {
     targetCommitSha256: commit.commitSha256,
   });
 }
+
+test("cursor adapter brand rejects clones, aliases, proxies, and lookalikes without reads", (t) => {
+  const context = fixture(t);
+  const cursor = context.cursorStore();
+  assert.equal(assertSqliteRewardConsumerCursorAdapter(cursor), cursor);
+
+  const structuralClone = Object.freeze({ ...cursor });
+  const boundMethodAlias = Object.freeze({
+    ...cursor,
+    readCursor: cursor.readCursor.bind(cursor),
+    readProjectionEvent: cursor.readProjectionEvent.bind(cursor),
+    snapshot: cursor.snapshot.bind(cursor),
+    consumePermit: cursor.consumePermit.bind(cursor),
+  });
+  const prototypeLookalike = Object.create(cursor);
+  let accessorRead = false;
+  const accessorFake = {};
+  Object.defineProperty(accessorFake, "adapterSchema", {
+    enumerable: true,
+    get() {
+      accessorRead = true;
+      throw new Error("CURSOR_ADAPTER_ACCESSOR_EXECUTED");
+    },
+  });
+  const proxy = new Proxy(cursor, {
+    get() {
+      accessorRead = true;
+      throw new Error("CURSOR_ADAPTER_PROXY_EXECUTED");
+    },
+  });
+
+  for (const candidate of [
+    structuralClone,
+    boundMethodAlias,
+    prototypeLookalike,
+    accessorFake,
+    proxy,
+  ]) {
+    assert.throws(
+      () => assertSqliteRewardConsumerCursorAdapter(candidate),
+      /process-branded SQLite adapter/u,
+    );
+  }
+  assert.equal(accessorRead, false);
+});
 
 function consumeInput(permitRecord) {
   return {

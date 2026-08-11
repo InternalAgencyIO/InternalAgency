@@ -8,6 +8,7 @@ import {
   REWARD_CHECKPOINT_GATED_CAS_MAINNET_STATUS,
   REWARD_CHECKPOINT_GATED_CAS_SCHEMA,
   REWARD_CHECKPOINT_GATED_CAS_STATUS,
+  assertCheckpointGatedRewardPersistenceCasAdapter,
   assertRewardCasLocalWriteAllowed,
   createCheckpointGatedRewardPersistenceCas,
 } from "../programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs";
@@ -215,6 +216,51 @@ function admittedReward(rewardNumber) {
     roundState: allocation.roundState,
   });
 }
+
+test("checkpoint-gated adapter brand rejects clones, aliases, proxies, and lookalikes without reads", (t) => {
+  const context = roundFixture(t);
+  assert.equal(
+    assertCheckpointGatedRewardPersistenceCasAdapter(context.store),
+    context.store,
+  );
+
+  const structuralClone = Object.freeze({ ...context.store });
+  const boundMethodAlias = Object.freeze({
+    ...context.store,
+    readPersistenceIdentity: context.store.readPersistenceIdentity.bind(context.store),
+    snapshot: context.store.snapshot.bind(context.store),
+  });
+  const prototypeLookalike = Object.create(context.store);
+  let accessorRead = false;
+  const accessorFake = {};
+  Object.defineProperty(accessorFake, "checkpointGateSchema", {
+    enumerable: true,
+    get() {
+      accessorRead = true;
+      throw new Error("CHECKPOINT_GATED_ADAPTER_ACCESSOR_EXECUTED");
+    },
+  });
+  const proxy = new Proxy(context.store, {
+    get() {
+      accessorRead = true;
+      throw new Error("CHECKPOINT_GATED_ADAPTER_PROXY_EXECUTED");
+    },
+  });
+
+  for (const candidate of [
+    structuralClone,
+    boundMethodAlias,
+    prototypeLookalike,
+    accessorFake,
+    proxy,
+  ]) {
+    assert.throws(
+      () => assertCheckpointGatedRewardPersistenceCasAdapter(candidate),
+      /process-branded adapter/u,
+    );
+  }
+  assert.equal(accessorRead, false);
+});
 
 function premiumUpgradeInput(store, rewardId, evidenceByte) {
   const reward = store.readEntity(REWARD_CAS_ENTITY_KIND.X_REWARD, rewardId);

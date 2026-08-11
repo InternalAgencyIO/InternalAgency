@@ -16,6 +16,8 @@ export const REWARD_CHECKPOINT_GATED_CAS_STATUS =
   "HOST_ONLY_NON_ACTIVATING_EXACT_CHECKPOINT_WRITE_GATE";
 export const REWARD_CHECKPOINT_GATED_CAS_MAINNET_STATUS = "HOLD";
 
+const CHECKPOINT_GATED_REWARD_PERSISTENCE_CAS_ADAPTERS = new WeakSet();
+
 const READ_METHODS = Object.freeze([
   "readPragmas",
   "readPersistenceIdentity",
@@ -44,6 +46,21 @@ function requireStore(value) {
 function requireCheckpointSource(value) {
   if (!value || typeof value.readCurrent !== "function") {
     throw new TypeError("checkpoint-gated reward CAS requires a checkpoint source with readCurrent");
+  }
+  return value;
+}
+
+/**
+ * Require an adapter created by this exact loaded module instance. WeakSet
+ * membership is deliberately checked without reading any candidate property,
+ * so clones, bound-method aliases, proxies, prototype lookalikes, and hostile
+ * accessors cannot manufacture the process-private factory brand.
+ */
+export function assertCheckpointGatedRewardPersistenceCasAdapter(value) {
+  if ((typeof value !== "object" && typeof value !== "function")
+    || value === null
+    || !CHECKPOINT_GATED_REWARD_PERSISTENCE_CAS_ADAPTERS.has(value)) {
+    throw new TypeError("checkpoint-gated reward CAS requires its process-branded adapter");
   }
   return value;
 }
@@ -153,5 +170,7 @@ export function createCheckpointGatedRewardPersistenceCas({
       },
     }),
   });
-  return Object.freeze(wrapped);
+  const frozen = Object.freeze(wrapped);
+  CHECKPOINT_GATED_REWARD_PERSISTENCE_CAS_ADAPTERS.add(frozen);
+  return frozen;
 }

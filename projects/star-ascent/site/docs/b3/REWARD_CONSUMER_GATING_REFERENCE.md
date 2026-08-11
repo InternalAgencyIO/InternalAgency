@@ -24,6 +24,12 @@ stale, forked, unrelated, or locally-ahead checkpoint fails before the wrapped
 CAS adapter is called, and the denied attempt leaves the local snapshot
 unchanged.
 
+After successful construction, the frozen wrapper is recorded in a module-
+private `WeakSet`. Its exported assertion checks only that process membership,
+without reading candidate properties. This lets the authenticated reference
+runtime reject exact-property clones, bound-method aliases, proxies, prototype
+lookalikes, and accessor fakes before they can fabricate wrapper truth fields.
+
 This is still a compositional host reference, not an IAT-wide bypass proof. A
 caller that retains and invokes the underlying store can bypass the wrapper;
 provider reads remain unauthenticated; and the local SQLite transaction cannot
@@ -42,6 +48,12 @@ pinned strict SQLite schema, WAL, `synchronous=FULL`, defensive mode, canonical
 u64 ordering, chained record digests, and complete reopen validation. Each
 consumer has an independent chain, and a committed cursor can be reconciled by
 exact readback after a caller loses the return value.
+
+The cursor factory likewise brands only a successfully opened, fully validated,
+frozen adapter in a module-private `WeakSet`. Its exported assertion performs
+no candidate property reads. That blocks structural adapter substitution at
+the authenticated-runtime constructor without claiming that every deployed
+consumer is confined to that constructor.
 
 The cursor now requires one exact canonical local-projection commitment and
 appends that complete projection event plus its cursor in the same SQLite
@@ -90,6 +102,13 @@ consumer permit against that same checkpoint, and commits and reads back the
 durable cursor plus projection event. An exact retry after a lost return
 reconciles both durable records without another insert. The returned runtime
 does not expose its injected stores or permit.
+
+The constructor requires the module-private process brands of all three
+injected adapters before it inspects their public schemas, methods, or truth
+fields. Exact-property clones, bound aliases, proxies, prototypes, and accessor
+fakes cannot manufacture `durableLocalAnchorMirrorMatched` or
+`durableLocalCursorEventMatched`; only subsequent readback from the exact
+factory-created adapters can set those local facts.
 
 That composition remains host-only and nonactivating. It has no production
 provider client or credentials; does not authenticate provider identity, key
@@ -336,8 +355,10 @@ Focused signed-anchor composition adversaries are in
 exact commit and lost-return paths, changed-projection reconciliation denial,
 Daily-Law-first accessor isolation, external-effect and namespace denial,
 signature/request/nonce/checkpoint substitution, predecessor-state rollback,
-wrong trust root, runtime-binding tamper, dependency lookalikes, and hostile
-input shapes while every production truth flag remains false or `HOLD`.
+wrong trust root, runtime-binding tamper, dependency lookalikes, exact-property
+adapter clones, bound-method aliases, proxies, prototype lookalikes, accessor
+fakes, and hostile input shapes while every production truth flag remains
+false or `HOLD`.
 
 Focused artifact-inventory adversaries are in
 `tests/iat-b3-reward-guarded-artifact-inventory.test.mjs`; they inject raw

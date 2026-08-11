@@ -30,6 +30,7 @@ const U64_MAX = (1n << 64n) - 1n;
 const CONSUMER_ID = /^[a-z0-9](?:[a-z0-9._-]{0,126}[a-z0-9])?$/u;
 const PROJECTION_LABEL = /^[a-z0-9](?:[a-z0-9._:/-]{0,126}[a-z0-9])?$/u;
 const HEX_32_CHECK = "length(%s) = 64 AND %s NOT GLOB '*[^0-9a-f]*'";
+const SQLITE_REWARD_CONSUMER_CURSOR_ADAPTERS = new WeakSet();
 const ACCEPTED_FAULTS = new Set([
   null,
   ...Object.values(REWARD_CONSUMER_CURSOR_SQLITE_TEST_FAULT),
@@ -779,6 +780,19 @@ function insertProjectionEvent(database, event) {
   );
 }
 
+/**
+ * Require a cursor adapter created by this exact loaded module instance.
+ * Candidate properties are never read before WeakSet membership succeeds.
+ */
+export function assertSqliteRewardConsumerCursorAdapter(value) {
+  if ((typeof value !== "object" && typeof value !== "function")
+    || value === null
+    || !SQLITE_REWARD_CONSUMER_CURSOR_ADAPTERS.has(value)) {
+    throw new TypeError("reward consumer cursor requires its process-branded SQLite adapter");
+  }
+  return value;
+}
+
 export function createSqliteRewardConsumerCursor({
   databasePath,
   busyTimeoutMs = 0,
@@ -919,5 +933,7 @@ export function createSqliteRewardConsumerCursor({
       }
     },
   };
-  return Object.freeze(store);
+  const frozen = Object.freeze(store);
+  SQLITE_REWARD_CONSUMER_CURSOR_ADAPTERS.add(frozen);
+  return frozen;
 }
