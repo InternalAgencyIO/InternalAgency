@@ -1,7 +1,7 @@
 {
   "schema": "iat-b3-stake-ingress-production-executor-local-validator/v1",
   "status": "PASS",
-  "recordedAt": "2026-08-11T08:15:57.1009684Z",
+  "recordedAt": "2026-08-11T12:00:37.8089810Z",
   "scope": {
     "rpc": "http://127.0.0.1:18999",
     "rpcScope": "loopback-only",
@@ -14,13 +14,13 @@
     "solanaTestValidator": "3.1.10",
     "cargoBuildSbf": "3.1.10",
     "splTokenCli": "5.5.0",
-    "node": "24.19.0",
+    "node": "24.14.0",
     "splToken2022Interface": "2.1.0",
     "splTransferHookInterface": "2.1.0"
   },
   "productionExecutor": {
     "source": "programs/iat_b3_economy/src/stake_ingress_runtime.rs",
-    "sourceSha256": "92849ce2fa211c22e74f51a94b07b1f9da37638692191f5693079bc9ae7046ab",
+    "sourceSha256": "2a719a5e7edd80711090e424fb9a3a3172678bf1b689fafa853afdd5ae0c15e8",
     "pureStakeIngressSource": "programs/iat_b3_economy/src/stake_ingress.rs",
     "pureStakeIngressSourceSha256": "704444af0bfd46bf55c7aef2c40bc9a146c7febab562109276c06c8624b28404",
     "feature": "runtime-token-2022-stake-ingress",
@@ -39,8 +39,8 @@
     "productionCandidate": false,
     "economy": {
       "programId": "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
-      "bytes": 263640,
-      "sha256": "b478a7777260ed9096c669526d6c0fad88ec3e34887e4e8f7d631a24cd17dce6",
+      "bytes": 265000,
+      "sha256": "82bf2c269f04cb770a2c77bdc044f3f18a2cf452a7059ccd54e9128f75049d40",
       "sourceSha256": "2749d91dc1bec80f1af50536d6ec8938729ec7461b5bdc09dd7637f53ad32a92"
     },
     "hook": {
