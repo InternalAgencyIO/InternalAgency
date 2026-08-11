@@ -53,15 +53,57 @@ is exactly bound to the permit, checkpoint, commit, consumer, and cursor.
 
 This proves only atomic persistence of a local event log record. It does not
 prove that a materialized projection database or external effect was updated,
-cannot prove that every runtime consumer uses this API, and has no independent
-anti-rollback anchor. Its records therefore keep
+cannot prove that every deployed runtime consumer uses this API, and has no
+independent anti-rollback anchor. Its records therefore keep
 `materializedProjectionStateVerified`, `runtimeAuthenticationVerified`,
 `rollbackProtectionVerified`, `projectionEffectAtomicityVerified`,
 `externalSideEffectsAuthorized`, and `activationReady` false. No queue,
 webhook, payment, token transfer, or other external effect is authorized.
 
+[`reward-materialized-projection-sqlite.mjs`](../../programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs)
+adds the next isolated local prerequisite. It consumes the same process-branded
+local-only permit and commits a contiguous cursor, projection event, and full
+canonical materialized projection state in one file-backed SQLite transaction.
+While its exact trigger schema remains installed, the full-state history is
+DML-append-only and independently chained for each exact consumer/kind/key
+namespace. Every open and operation verifies the exact schema, integrity,
+cursor chain, state chain, and one-to-one cursor/event/state set.
+Exact retries reconcile without another write; changed replays and skips fail
+closed; injected failures after every insert roll the entire triplet back. A
+lost return after `COMMIT` is recovered by exact replay after reopen.
+
+Its `projectionEffectAtomicityVerified: true` assertion is inseparable from
+`projectionEffectScope: DURABLE_LOCAL_SQLITE_STATE_ONLY`. It does not cover an
+external system or side effect. The existing authenticated reference runtime
+does not import or accept this adapter, so runtime integration remains false.
+Provider authenticity, independent rollback protection, runtime confinement,
+external effects, activation, and Mainnet remain false or `HOLD`. The complete
+boundary is in
+[`REWARD_MATERIALIZED_PROJECTION_SQLITE_REFERENCE.md`](./REWARD_MATERIALIZED_PROJECTION_SQLITE_REFERENCE.md).
+
+[`reward-authenticated-consumer-runtime.mjs`](../../programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs)
+adds one static, inventory-visible reference composition. It checks Daily Law
+first, validates the full local reward snapshot and exact checkpoint, verifies
+the canonical provider-key-signed rollback-anchor exchange, commits and reads
+back the local durable anchor mirror, creates a process-branded local-only
+consumer permit against that same checkpoint, and commits and reads back the
+durable cursor plus projection event. An exact retry after a lost return
+reconciles both durable records without another insert. The returned runtime
+does not expose its injected stores or permit.
+
+That composition remains host-only and nonactivating. It has no production
+provider client or credentials; does not authenticate provider identity, key
+ownership, registry truth, or supplied predecessor states; does not establish
+external monotonicity or independent rollback protection; and is not atomic
+with a materialized projection or external effect. No app or worker currently
+constructs it. It therefore keeps provider authentication, external
+monotonicity, rollback protection, materialized projection, runtime
+confinement/integration, external effects, activation, and Mainnet false or
+`HOLD`. Its exact truth boundary and missing production inputs are in
+[`REWARD_AUTHENTICATED_CONSUMER_RUNTIME_REFERENCE.md`](./REWARD_AUTHENTICATED_CONSUMER_RUNTIME_REFERENCE.md).
+
 [`reward-guarded-source-inventory.mjs`](../../programs/iat_b3_reference/reward-guarded-source-inventory.mjs)
-adds a repository-source gate around those two adapters. It enumerates the
+adds a repository-source gate around the guarded reward adapters. It enumerates the
 first-party deployable/reference JavaScript, TypeScript, Rust, Python, shell,
 and command sources directly from the filesystem, rejects source symlinks,
 and excludes only dependencies, generated build/test output, tests, docs,
@@ -72,30 +114,43 @@ forbidden markers and gate identities as data.
 
 The exact critical-source ledger is:
 
+- `programs/iat_b3_reference/provider-authenticated-envelope.mjs`;
+- `programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs`;
 - `programs/iat_b3_reference/reward-persistence-cas.mjs`;
 - `programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs`;
 - `programs/iat_b3_reference/reward-persistence-checkpoint.mjs`;
 - `programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs`;
 - `programs/iat_b3_reference/reward-consumer-gate.mjs`;
-- `programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs`.
+- `programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs`;
+- `programs/iat_b3_reference/reward-external-rollback-anchor.mjs`;
+- `programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs`;
+- `programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs`.
 
 The gate pins the complete SHA-256 of each ledger source and exact per-path
 occurrence counts for every raw adapter symbol, mutation/factory entry point,
-permit/cursor entry point, guarded-module import edge, and private CAS/cursor
-SQLite table-name family. The only non-adapter checkpoint imports are the two
-read-only provider-readiness validators:
+permit/cursor/anchor/composed-runtime entry point, guarded-module import edge,
+and private CAS/cursor/materialized-state/anchor SQLite table-name family. A
+conservative JavaScript/TypeScript lexical pass decodes every static string
+literal and escaped IdentifierName/property token, and folds directly
+concatenated static string literals. A guarded path or factory name encoded by
+splitting literals or by a Unicode escape therefore fails closed instead of
+evading the raw count. The legitimate
+signed-anchor-to-consumer path is confined to the exact hashed composition
+module. The other non-adapter checkpoint imports are the two read-only
+provider-readiness validators:
 `scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs` and
-`scripts/validate-iat-b3-x-social-evidence-provider-readiness.mjs`. No current
-deployable source imports the raw SQLite CAS factory, checkpoint-gated factory,
-or cursor factory, and no deployable caller invokes the high-level reward
-mutators, permit constructor, or cursor consumer. Any new occurrence, alias,
-direct table access, critical-source change, missing critical path, or source
-symlink fails closed until the inventory and its review are explicitly
-updated.
+`scripts/validate-iat-b3-x-social-evidence-provider-readiness.mjs`. No app,
+worker, or production bootstrap imports the raw SQLite factories, constructs
+the composed runtime, or invokes its operation. A new raw occurrence, an alias
+that retains the guarded token, a direct static-literal split, direct table
+access, critical-source change, missing critical path, or source symlink fails
+closed until the inventory and its review are explicitly updated.
 
 This is a source-snapshot assertion, not runtime confinement. It cannot prove
 that a built artifact matches the scanned source, that a caller did not retain
-the underlying store, or that an inventory update received independent review.
+the underlying store, that arbitrary runtime-computed strings or reflection
+resolve to no guarded operation, or that an inventory update received
+independent review.
 It therefore keeps runtime bypass prevention, provider authentication,
 rollback protection, materialized projection state, built-artifact parity,
 external effects, activation, and Mainnet false or `HOLD`.
@@ -239,10 +294,10 @@ Production completion still requires a reviewed provider integration, an
 authenticated read/write boundary, a production-integrated cursor plus
 same-transaction projection/outbox effect, cross-system idempotency and
 uncertain-result recovery, an independent cursor rollback anchor, complete
-downstream consumer inventory, exact production identities, and adversarial
-Devnet evidence. The reference must not be wired into the app, worker,
-economic program, Devnet runner, or release switch as if those gates were
-complete.
+downstream consumer inventory, final-artifact runtime confinement, exact
+production identities, and adversarial Devnet evidence. The composition
+reference must not be wired into the app, worker, economic program, Devnet
+runner, or release switch as if those gates were complete.
 
 Focused write-gate adversaries are in
 `tests/iat-b3-reward-checkpoint-gated-cas.test.mjs`; they cover both mutation
@@ -257,12 +312,32 @@ permits, append-only SQL guards for both local tables, schema tamper,
 Daily-Law-first denial without mutation, hostile payload/accessor rejection,
 and transaction rollback after each cursor/event insert boundary.
 
+Focused materialized-projection adversaries are in
+`tests/iat-b3-reward-materialized-projection-sqlite.test.mjs`; they cover exact
+commit and reopen, nonempty byte-view clone isolation and replay, full-state
+chaining, exact replay idempotency, replay drift, copied permits, skips,
+rollback after every cursor/event/state insert boundary, post-commit lost-return
+recovery, separate-writer append-only SQL guards including `INSERT OR REPLACE`
+with recursive triggers disabled, schema drift, Daily-Law-first denial,
+locked-law denial, record tamper, and truth-flag tamper.
+
 Focused source-inventory adversaries are in
 `tests/iat-b3-reward-guarded-source-inventory.test.mjs`; they inject aliased
 raw mutators, raw adapter-symbol access, permit-only and cursor-only consumers,
-direct private-table writes, source omission, digest drift, and hostile source
-descriptors. Unrelated source remains allowed without changing the frozen
-guarded-surface digest.
+unlisted provider/anchor/mirror/composed-runtime callers, direct private-table
+writes, split or Unicode-escaped static dynamic-import paths, computed factory
+names, and escaped IdentifierNames, plus source omission, digest drift, and
+hostile source descriptors.
+Unrelated source remains allowed without changing the frozen guarded-surface
+digest.
+
+Focused signed-anchor composition adversaries are in
+`tests/iat-b3-reward-authenticated-consumer-runtime.test.mjs`; they cover the
+exact commit and lost-return paths, changed-projection reconciliation denial,
+Daily-Law-first accessor isolation, external-effect and namespace denial,
+signature/request/nonce/checkpoint substitution, predecessor-state rollback,
+wrong trust root, runtime-binding tamper, dependency lookalikes, and hostile
+input shapes while every production truth flag remains false or `HOLD`.
 
 Focused artifact-inventory adversaries are in
 `tests/iat-b3-reward-guarded-artifact-inventory.test.mjs`; they inject raw

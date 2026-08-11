@@ -26,12 +26,17 @@ import {
 
 const SITE_ROOT = fileURLToPath(new URL("../", import.meta.url));
 const INVENTORIED_SOURCE_PATHS = Object.freeze([
+  "programs/iat_b3_reference/provider-authenticated-envelope.mjs",
+  "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs",
   "programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs",
   "programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs",
   "programs/iat_b3_reference/reward-consumer-gate.mjs",
+  "programs/iat_b3_reference/reward-external-rollback-anchor.mjs",
+  "programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs",
   "programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs",
   "programs/iat_b3_reference/reward-persistence-cas.mjs",
   "programs/iat_b3_reference/reward-persistence-checkpoint.mjs",
+  "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs",
   "scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs",
   "scripts/validate-iat-b3-x-social-evidence-provider-readiness.mjs",
 ]);

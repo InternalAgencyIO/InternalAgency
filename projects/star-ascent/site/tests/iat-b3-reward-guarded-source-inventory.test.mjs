@@ -32,7 +32,16 @@ test("repository source inventory binds every current reward adapter edge and st
   assert.equal(result.exactGuardedAdapterSourceDigestsVerified, true);
   assert.equal(result.unlistedSensitiveSourceMarkerRejected, true);
   assert.equal(result.deployableRewardConsumerPathsInventoried, true);
-  assert.equal(result.criticalSources.length, 6);
+  assert.equal(result.criticalSources.length, 11);
+  assert.ok(result.criticalSources.some(({ path }) => (
+    path === "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs"
+  )));
+  assert.ok(result.criticalSources.some(({ path }) => (
+    path === "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs"
+  )));
+  assert.ok(result.criticalSources.some(({ path }) => (
+    path === "programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs"
+  )));
   assert.ok(result.scannedSourceFileCount >= 300);
   assert.match(result.sourceSetSha256, /^[0-9a-f]{64}$/u);
   assert.match(result.guardedSurfaceSha256, /^[0-9a-f]{64}$/u);
@@ -70,6 +79,74 @@ test("aliased raw reward mutators and adapter-symbol access cannot enter a new s
   );
 });
 
+test("split or escaped static paths, properties, and IdentifierNames fail closed", () => {
+  for (const [path, source, expectedError, marker] of [
+    [
+      "worker/split-materialized-import.mjs",
+      `export const load = () => import(
+        "../programs/iat_b3_reference/reward-" +
+        "materialized-projection-sqlite.mjs"
+      );`,
+      "SPLIT_MARKER",
+      "reward-materialized-projection-sqlite.mjs",
+    ],
+    [
+      "worker/grouped-split-materialized-import.mjs",
+      `export const load = () => import(
+        ("../programs/iat_b3_reference/reward-" +
+          ("materialized-" + "projection-sqlite.mjs"))
+      );`,
+      "SPLIT_MARKER",
+      "reward-materialized-projection-sqlite.mjs",
+    ],
+    [
+      "worker/split-materialized-factory.mjs",
+      `export const open = (adapter, options) => adapter[
+        "createSqliteReward" /* split marker */ + "\\u004daterializedProjection"
+      ](options);`,
+      "SPLIT_MARKER",
+      "createSqliteRewardMaterializedProjection",
+    ],
+    [
+      "worker/escaped-materialized-import.mjs",
+      `export const load = () => import(
+        "../programs/iat_b3_reference/reward-\\u006daterialized-projection-sqlite.mjs"
+      );`,
+      "ESCAPED_LITERAL_MARKER",
+      "reward-materialized-projection-sqlite.mjs",
+    ],
+    [
+      "worker/legacy-octal-materialized-import.cjs",
+      `exports.load = () => import(
+        "../programs/iat_b3_reference/reward-\\155aterialized-projection-sqlite.mjs"
+      );`,
+      "ESCAPED_LITERAL_MARKER",
+      "reward-materialized-projection-sqlite.mjs",
+    ],
+    [
+      "worker/escaped-materialized-property.mjs",
+      `export const open = (adapter, options) => adapter[
+        "createSqliteReward\\u004daterializedProjection"
+      ](options);`,
+      "ESCAPED_LITERAL_MARKER",
+      "createSqliteRewardMaterializedProjection",
+    ],
+    [
+      "worker/escaped-materialized-identifier.mjs",
+      `export const open = (adapter, options) =>
+        adapter.createSqliteReward\\u004daterializedProjection(options);`,
+      "ESCAPED_IDENTIFIER_MARKER",
+      "createSqliteRewardMaterializedProjection",
+    ],
+  ]) {
+    assert.throws(
+      () => auditRewardGuardedSourceFiles(withSource(path, source)),
+      new RegExp(`REWARD_GUARDED_SOURCE_${expectedError}_FORBIDDEN:.*:${marker}`, "u"),
+      path,
+    );
+  }
+});
+
 test("permit-only, cursor-only, and direct projection-table consumers all fail the inventory", () => {
   for (const [path, source] of [
     [
@@ -87,8 +164,43 @@ test("permit-only, cursor-only, and direct projection-table consumers all fail t
       "export const sql = 'INSERT INTO reward_consumer_projection_events VALUES (...)';",
     ],
     [
+      "scripts/direct-materialized-projection-write.mjs",
+      "export const sql = 'DELETE FROM reward_materialized_projection_state_history';",
+    ],
+    [
       "scripts/direct-reward-cas-write.mjs",
       "export const sql = 'DELETE FROM reward_cas_entity_versions';",
+    ],
+  ]) {
+    assert.throws(
+      () => auditRewardGuardedSourceFiles(withSource(path, source)),
+      /REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH/u,
+      path,
+    );
+  }
+});
+
+test("unlisted signed-anchor, mirror, and composed-runtime callers fail the inventory", () => {
+  for (const [path, source] of [
+    [
+      "worker/unlisted-anchor-verifier.mjs",
+      `import { verifyRewardExternalRollbackAnchor } from
+        "../programs/iat_b3_reference/reward-external-rollback-anchor.mjs";
+       export const verify = (input) => verifyRewardExternalRollbackAnchor(input);`,
+    ],
+    [
+      "worker/unlisted-anchor-mirror.mjs",
+      "export const persist = (mirror, receipt) => mirror.consumeSignedAnchorReceipt({ receipt });",
+    ],
+    [
+      "worker/unlisted-composed-runtime.mjs",
+      `import { createRewardAuthenticatedConsumerRuntime } from
+        "../programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs";
+       export const start = (options) => createRewardAuthenticatedConsumerRuntime(options);`,
+    ],
+    [
+      "scripts/direct-anchor-history-write.mjs",
+      "export const sql = 'DELETE FROM reward_rollback_anchor_receipts';",
     ],
   ]) {
     assert.throws(
@@ -113,6 +225,23 @@ test("critical adapter drift or omission fails before an updated inventory can a
       productionSources.filter((file) => file.path !== criticalPath),
     ),
     /REWARD_GUARDED_SOURCE_CRITICAL_PATH_MISSING/u,
+  );
+  const runtimePath = "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs";
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(replaceSource(
+      runtimePath,
+      (source) => `${source}\n// unreviewed runtime composition drift\n`,
+    )),
+    /REWARD_GUARDED_SOURCE_CRITICAL_DIGEST_MISMATCH/u,
+  );
+  const materializedPath =
+    "programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs";
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(replaceSource(
+      materializedPath,
+      (source) => `${source}\n// unreviewed materialized projection drift\n`,
+    )),
+    /REWARD_GUARDED_SOURCE_CRITICAL_DIGEST_MISMATCH/u,
   );
 });
 
