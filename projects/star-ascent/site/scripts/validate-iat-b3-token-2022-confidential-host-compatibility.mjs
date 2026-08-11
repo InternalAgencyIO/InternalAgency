@@ -61,8 +61,8 @@ export const TOKEN_2022_HOST_SOURCE_BINDINGS = Object.freeze([
   }),
   Object.freeze({
     path: "projects/star-ascent/site/programs/iat_b3_vault/src/lib.rs",
-    sha256: "aa6cbbc564332a69f25ec1dc8e6ca6910114969b5c76000fdf398e406d33ea09",
-    byteLength: 51952,
+    sha256: "af336e7b79566525f408c7fead51c03583b69740ac55bf1e1eaf08b0590429ef",
+    byteLength: 52037,
   }),
   Object.freeze({
     path: "projects/star-ascent/site/programs/iat_b3_vault/src/token_2022_host.rs",
