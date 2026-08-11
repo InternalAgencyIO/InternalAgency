@@ -28,6 +28,11 @@ import {
   parseReleaseDependencyGraphJson,
   validateReleaseDependencyGraphManifest,
 } from "../scripts/validate-iat-b3-release-dependency-graph.mjs";
+import {
+  TOKEN_2022_HOST_SOURCE_BINDINGS,
+  parseToken2022ConfidentialHostCompatibilityJson,
+  validateToken2022ConfidentialHostCompatibilityManifest,
+} from "../scripts/validate-iat-b3-token-2022-confidential-host-compatibility.mjs";
 
 const SITE = fileURLToPath(new URL("../", import.meta.url));
 const MANIFEST_PATH = join(SITE, "docs", "b3", "iat-b3-release-dependency-graph.v1.json");
@@ -36,6 +41,21 @@ const VALIDATOR_PATH = join(SITE, "scripts", "validate-iat-b3-release-dependency
 const DRAFT = JSON.parse(readFileSync(MANIFEST_PATH, "utf8"));
 const SCHEMA = JSON.parse(readFileSync(SCHEMA_PATH, "utf8"));
 const VALIDATOR_SOURCE = readFileSync(VALIDATOR_PATH, "utf8");
+const TOKEN_HOST_PACKET_PATH = join(
+  SITE,
+  "docs",
+  "b3",
+  "iat-b3-token-2022-confidential-host-compatibility.v1.json",
+);
+const TOKEN_HOST_PACKET = parseToken2022ConfidentialHostCompatibilityJson(
+  readFileSync(TOKEN_HOST_PACKET_PATH, "utf8"),
+  TOKEN_HOST_PACKET_PATH,
+);
+const REPOSITORY_ROOT = join(SITE, "..", "..", "..");
+const TOKEN_HOST_BOUND_FILES = new Map(TOKEN_2022_HOST_SOURCE_BINDINGS.map((binding) => [
+  binding.path,
+  readFileSync(join(REPOSITORY_ROOT, binding.path)),
+]));
 
 const EXPECTED_NODE_IDS = Object.freeze([
   "LIVE_ESTATE_CANONICAL_MINT_DECISION",
@@ -155,6 +175,30 @@ test("canonical production graph is valid, records the completed host root, and 
   assert.equal("GO" in result, false);
   assert.equal("productionReady" in result, false);
   assert.equal("mainnetReady" in result, false);
+});
+
+test("completed Token-2022 host root is source-bound and cannot promote privacy, Devnet, or Mainnet", () => {
+  const result = validateToken2022ConfidentialHostCompatibilityManifest(TOKEN_HOST_PACKET, {
+    boundFiles: TOKEN_HOST_BOUND_FILES,
+  });
+  assert.equal(result.valid, true);
+  assert.equal(result.hostCompatibilityComplete, true);
+  assert.equal(result.privacyVaultLifecycleComplete, false);
+  assert.equal(result.devnetVerified, false);
+  assert.equal(result.mainnetExecutionAuthorized, false);
+  for (const mutate of [
+    (value) => { value.hostChecks.nonzeroCiphertextZeroProofRejected = false; },
+    (value) => { value.standardProgramObservation.token2022Upgradeable = false; },
+    (value) => { value.standardProgramObservation.token2022CeremonyTimeReattestationRequired = false; },
+    (value) => { value.privacyVaultLifecycleComplete = true; },
+    (value) => { value.mainnetExecutionAuthorized = true; },
+  ]) {
+    const hostile = clone(TOKEN_HOST_PACKET);
+    mutate(hostile);
+    assert.equal(validateToken2022ConfidentialHostCompatibilityManifest(hostile, {
+      boundFiles: TOKEN_HOST_BOUND_FILES,
+    }).valid, false);
+  }
 });
 
 test("schema pins the exact 28-node, 132-edge structural-only surface", () => {
