@@ -25,7 +25,7 @@ done
   exit 2
 }
 
-node_major=$($node_bin -p 'Number(process.versions.node.split(".")[0])')
+node_major=$("$node_bin" -p 'Number(process.versions.node.split(".")[0])')
 [[ "$node_major" -ge 22 ]] || {
   printf '{"schema":"%s","status":"FAIL","reason":"unsupported_node","observedMajor":%s,"requiredMajor":22,"publicNetworkWrites":false}\n' "$schema" "$node_major"
   exit 2
@@ -81,8 +81,12 @@ CARGO_TARGET_DIR="${IAT_B3_ACCOUNT_LIFECYCLE_CARGO_TARGET_DIR:-$work_root/cargo-
   --sbf-out-dir "$temp_dir/deploy" \
   -- --locked 2>&1 | tee "$temp_dir/build-sbf.log" >&2
 sbf_stack_diagnostics_present=false
-if grep -Fq "Stack offset of" "$temp_dir/build-sbf.log"; then
+if grep -Eiq 'Stack offset of|stack frame of [0-9]+ bytes exceeds|max offset exceeded|overwrites values|undefined behavior' "$temp_dir/build-sbf.log"; then
   sbf_stack_diagnostics_present=true
+fi
+production_set_eligibility_live_stack_diagnostics_present=false
+if grep -Eq 'production_set_eligibility.*(execute_runtime_production_set_eligibility_account_infos|execute_with_active_config|execute_production_(pre_body|retained_body|postimage)_stage)|runtime_account_lifecycle.*(init_if_needed_pre_body|init_if_needed_postimage|system_owned_init_if_needed_post_cpi)' "$temp_dir/build-sbf.log"; then
+  production_set_eligibility_live_stack_diagnostics_present=true
 fi
 artifact="$temp_dir/deploy/iat_b3_account_lifecycle_rehearsal.so"
 [[ -s "$artifact" ]]
@@ -137,4 +141,4 @@ done
 
 cleanup
 trap - EXIT INT TERM
-printf '{"schema":"%s","status":"PASS","phase":"summary","realSystemCpiObserved":true,"canonicalPdaSigningObserved":true,"prefundedAllocateAssignFundObserved":true,"existingStateCasObserved":true,"transactionRollbackObserved":true,"setEligibilityRollbackPrerequisiteExercised":true,"setEligibilityRequestedComputeUnitLimit":1400000,"productionComputeBudgetProven":false,"productionSetEligibilityExecutorInvoked":false,"productionSetEligibilityExecutorSbfExecutionProven":false,"sbfBuildStackDiagnosticsPresent":%s,"productionFinalArtifactStackSafeProven":false,"productionSetEligibilityInstructionCodecExercised":true,"syntheticProgramErrorMapping":true,"productionProgramErrorAbiProven":false,"lawAuthenticatedBeforeProductionDecode":true,"vacantUnknownRoleRollbackObserved":true,"prefundedUnknownRoleRollbackObserved":true,"existingInvalidRoleZeroCpiNoWriteObserved":true,"lawRejectionBeforeDecodeAndCpiObserved":true,"syntheticDailyLawFixture":true,"syntheticProductionActiveConfigFixture":true,"publicNetworkWrites":false,"productionDispatcherExposed":false,"productionEntrypointProven":false,"finalBinaryDevnetRollbackProven":false,"fullFeatureDevnetRehearsalComplete":false,"activationReady":false,"mainnetStatus":"HOLD","temporaryLedgerRemoved":true,"validatorStopped":true,"generatedKeyMaterialRemoved":true}\n' "$schema" "$sbf_stack_diagnostics_present"
+printf '{"schema":"%s","status":"PASS","phase":"summary","realSystemCpiObserved":true,"canonicalPdaSigningObserved":true,"prefundedAllocateAssignFundObserved":true,"existingStateCasObserved":true,"transactionRollbackObserved":true,"setEligibilityRollbackPrerequisiteExercised":true,"setEligibilityRequestedComputeUnitLimit":1400000,"productionComputeBudgetProven":false,"productionSetEligibilityExecutorInvoked":true,"productionSetEligibilityExecutorSbfExecutionProven":true,"localProductionSetEligibilityExecutorSbfExecutionObserved":true,"realProductionSetEligibilityRollbackObserved":true,"sbfBuildStackDiagnosticsPresent":%s,"productionSetEligibilityLiveStackDiagnosticsPresent":%s,"productionFinalArtifactStackSafeProven":false,"productionSetEligibilityInstructionCodecExercised":true,"syntheticProgramErrorMapping":true,"productionProgramErrorAbiProven":false,"lawAuthenticatedBeforeProductionDecode":true,"vacantUnknownRoleRollbackObserved":true,"prefundedUnknownRoleRollbackObserved":true,"existingInvalidRoleZeroCpiNoWriteObserved":true,"lawRejectionBeforeDecodeAndCpiObserved":true,"syntheticDailyLawFixture":true,"syntheticProductionActiveConfigFixture":true,"publicNetworkWrites":false,"productionDispatcherExposed":false,"productionEntrypointProven":false,"finalBinaryDevnetRollbackProven":false,"fullFeatureDevnetRehearsalComplete":false,"activationReady":false,"mainnetStatus":"HOLD","temporaryLedgerRemoved":true,"validatorStopped":true,"generatedKeyMaterialRemoved":true}\n' "$schema" "$sbf_stack_diagnostics_present" "$production_set_eligibility_live_stack_diagnostics_present"

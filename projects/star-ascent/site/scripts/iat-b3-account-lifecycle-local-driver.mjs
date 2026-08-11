@@ -546,12 +546,15 @@ async function executeSetEligibility(values) {
     lawAuthenticatedBeforeProductionDecode: true,
     productionSetEligibilityInstructionCodecExercised: !specification.malformed,
     setEligibilityRollbackPrerequisiteExercised: !specification.wrongLaw,
-    productionSetEligibilityExecutorInvoked: false,
-    productionSetEligibilityExecutorSbfExecutionProven: false,
+    productionSetEligibilityExecutorInvoked: !specification.wrongLaw,
+    productionSetEligibilityExecutorSbfExecutionProven: !specification.wrongLaw,
+    localProductionSetEligibilityExecutorSbfExecutionObserved: !specification.wrongLaw,
     productionFinalArtifactStackSafeProven: false,
     syntheticProgramErrorMapping: true,
     productionProgramErrorAbiProven: false,
     exactTransactionRollbackObserved: specification.expectedError === UNKNOWN_ROLE_ERROR,
+    realProductionSetEligibilityRollbackObserved:
+      specification.expectedError === UNKNOWN_ROLE_ERROR,
     existingInvalidRoleZeroCpiNoWriteObserved:
       specification.existing && specification.expectedError === UNKNOWN_ROLE_ERROR,
     lawRejectionBeforeDecodeAndCpiObserved: specification.expectedError === LAW_BEFORE_DECODE_ERROR,

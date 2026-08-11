@@ -45,6 +45,10 @@ const economyRuntimeAccountLifecycleSource = readFileSync(
   new URL("programs/iat_b3_economy/src/runtime_account_lifecycle.rs", siteRoot),
   "utf8",
 );
+const economyProductionSetEligibilitySource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_set_eligibility.rs", siteRoot),
+  "utf8",
+);
 const economyRehearsalAdapterSource = readFileSync(
   new URL("programs/iat_b3_economy/src/rehearsal_adapter.rs", siteRoot),
   "utf8",
@@ -709,21 +713,30 @@ test("the local lifecycle fixture proves SBF CPI without becoming a production s
   assert.match(accountLifecycleFixtureSource, /prepare_create_state_account_info/u);
   assert.match(accountLifecycleFixtureSource, /InjectedRollback = 909/u);
   assert.match(
-    accountLifecycleFixtureSource,
-    /execute_production_active_init_if_needed_account_infos/u,
+    economyProductionSetEligibilitySource,
+    /execute_production_active_init_if_needed_pre_body_account_infos/u,
+  );
+  assert.match(
+    economyProductionSetEligibilitySource,
+    /seal_and_execute_production_active_init_if_needed_postimage_account_infos/u,
   );
   assert.match(accountLifecycleFixtureSource, /set_eligibility/u);
   assert.match(accountLifecycleFixtureSource, /verify_runtime_daily_law_open_account_info/u);
   assert.match(accountLifecycleFixtureSource, /ProductionLawRejectedBeforeDecode = 910/u);
   assert.match(accountLifecycleFixtureSource, /ProductionSetEligibilityUnknownRole = 911/u);
-  assert.doesNotMatch(
+  assert.match(
     accountLifecycleFixtureSource,
     /execute_runtime_production_set_eligibility_account_infos/u,
   );
+  assert.doesNotMatch(
+    accountLifecycleFixtureSource,
+    /execute_set_eligibility_rollback_prerequisite|retained_set_eligibility/u,
+  );
   assert.match(
     accountLifecycleFixtureSource,
-    /verify_runtime_daily_law_open_account_info[\s\S]+decode_production_instruction/u,
+    /verify_runtime_daily_law_open_account_info[\s\S]+execute_runtime_production_set_eligibility_account_infos/u,
   );
+  assert.match(economyProductionSetEligibilitySource, /require_set_eligibility_instruction/u);
   assert.match(accountLifecycleLocalDriverSource, /systemCpiCount/u);
   assert.match(
     accountLifecycleLocalDriverSource,
@@ -758,11 +771,19 @@ test("the local lifecycle fixture proves SBF CPI without becoming a production s
     /assertAccountSnapshotEqual\(afterTarget, beforeTarget/u,
   );
   assert.match(accountLifecycleLocalDriverSource, /productionDispatcherExposed: false/u);
-  assert.match(accountLifecycleLocalDriverSource, /productionSetEligibilityExecutorInvoked: false/u);
   assert.match(
     accountLifecycleLocalDriverSource,
-    /productionSetEligibilityExecutorSbfExecutionProven: false/u,
+    /productionSetEligibilityExecutorInvoked: !specification\.wrongLaw/u,
   );
+  assert.match(
+    accountLifecycleLocalDriverSource,
+    /productionSetEligibilityExecutorSbfExecutionProven: !specification\.wrongLaw/u,
+  );
+  assert.match(
+    accountLifecycleLocalDriverSource,
+    /localProductionSetEligibilityExecutorSbfExecutionObserved: !specification\.wrongLaw/u,
+  );
+  assert.match(accountLifecycleLocalDriverSource, /realProductionSetEligibilityRollbackObserved/u);
   assert.match(accountLifecycleLocalDriverSource, /productionFinalArtifactStackSafeProven: false/u);
   assert.match(accountLifecycleLocalDriverSource, /syntheticProgramErrorMapping: true/u);
   assert.match(accountLifecycleLocalDriverSource, /productionProgramErrorAbiProven: false/u);
@@ -788,12 +809,27 @@ test("the local lifecycle fixture proves SBF CPI without becoming a production s
   assert.match(accountLifecycleLocalRunnerSource, /set-existing-invalid-255/u);
   assert.match(accountLifecycleLocalRunnerSource, /set-law-rejection/u);
   assert.match(accountLifecycleLocalRunnerSource, /productionDispatcherExposed":false/u);
-  assert.match(accountLifecycleLocalRunnerSource, /productionSetEligibilityExecutorInvoked":false/u);
+  assert.match(accountLifecycleLocalRunnerSource, /productionSetEligibilityExecutorInvoked":true/u);
   assert.match(
     accountLifecycleLocalRunnerSource,
-    /productionSetEligibilityExecutorSbfExecutionProven":false/u,
+    /productionSetEligibilityExecutorSbfExecutionProven":true/u,
   );
+  assert.match(
+    accountLifecycleLocalRunnerSource,
+    /localProductionSetEligibilityExecutorSbfExecutionObserved":true/u,
+  );
+  assert.match(
+    accountLifecycleLocalRunnerSource,
+    /productionSetEligibilityLiveStackDiagnosticsPresent":%s/u,
+  );
+  assert.match(accountLifecycleLocalRunnerSource, /realProductionSetEligibilityRollbackObserved":true/u);
   assert.match(accountLifecycleLocalRunnerSource, /sbfBuildStackDiagnosticsPresent":%s/u);
+  assert.match(accountLifecycleLocalRunnerSource, /overwrites values/u);
+  assert.match(accountLifecycleLocalRunnerSource, /undefined behavior/u);
+  assert.match(
+    accountLifecycleLocalRunnerSource,
+    /init_if_needed_pre_body\|init_if_needed_postimage\|system_owned_init_if_needed_post_cpi/u,
+  );
   assert.match(
     accountLifecycleLocalRunnerSource,
     /productionFinalArtifactStackSafeProven":false/u,

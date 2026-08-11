@@ -358,6 +358,7 @@ fn require_exact_account_count(
 }
 
 #[allow(clippy::too_many_arguments)]
+#[inline(never)]
 fn prepare_with_active_config(
     gate: &ValidatedDailyLawWrite,
     active_config: &RuntimeProductionActiveConfig,
@@ -374,6 +375,17 @@ fn prepare_with_active_config(
         role,
         agency_index,
     )?;
+    prepare_nonexecuting_retained_body_stage(gate, active_config, binding, accounts, prepared)
+}
+
+#[inline(never)]
+fn prepare_nonexecuting_retained_body_stage(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    prepared: PreparedSetEligibilityPreBody,
+) -> Result<PreparedProductionSetEligibility, ProductionSetEligibilityError> {
     let kernel = prepared.kernel;
     // Anchor 1.0.2 executes its full `init_if_needed` lifecycle before entering
     // the handler body, but it does not serialize that body's next state during
@@ -386,17 +398,39 @@ fn prepare_with_active_config(
     if result.eligibility != kernel.projected_next {
         return Err(ProductionSetEligibilityError::RetainedV2PostimageMismatch);
     }
+    prepare_nonexecuting_postimage_stage(
+        gate,
+        active_config,
+        binding,
+        accounts,
+        kernel,
+        prepared.constraints,
+        result.eligibility,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+#[inline(never)]
+fn prepare_nonexecuting_postimage_stage(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    kernel: PreparedSetEligibilityKernel,
+    constraints: PreparedProductionInitIfNeededConstraints,
+    next: EligibilityState,
+) -> Result<PreparedProductionSetEligibility, ProductionSetEligibilityError> {
     let lifecycle = seal_production_active_init_if_needed_postimage(
         gate,
         binding,
-        prepared.constraints,
-        StrictStateValue::Eligibility(result.eligibility),
+        constraints,
+        StrictStateValue::Eligibility(next),
     )?;
     Ok(finish_plan(
         active_config,
         accounts,
         kernel,
-        result.eligibility,
+        next,
         lifecycle,
     ))
 }

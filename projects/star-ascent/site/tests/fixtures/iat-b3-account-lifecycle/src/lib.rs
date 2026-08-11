@@ -3,23 +3,17 @@
 use iat_b3_economy::native_adapter::{
     derive_pda, seal_atomic_write_batch, NativeEconomyBinding, PdaIdentity, StrictStateValue,
 };
-use iat_b3_economy::production_instruction::{
-    decode_production_instruction, ProductionInstruction, PRODUCTION_INSTRUCTION_NAMESPACE,
+use iat_b3_economy::production_instruction::PRODUCTION_INSTRUCTION_NAMESPACE;
+use iat_b3_economy::production_set_eligibility::{
+    execute_runtime_production_set_eligibility_account_infos, ProductionSetEligibilityError,
 };
-use iat_b3_economy::runtime_account_lifecycle::{
-    execute_create_state_batch_account_infos,
-    execute_production_active_init_if_needed_account_infos,
-    prepare_production_active_init_if_needed_account_infos, ProductionInitIfNeededPath,
-};
+use iat_b3_economy::runtime_account_lifecycle::execute_create_state_batch_account_infos;
 use iat_b3_economy::runtime_adapter::{
-    authenticate_runtime_production_active_config, prepare_create_state_account_info,
-    prepare_existing_state_write_account_info, verify_daily_law_open_account_info,
-    verify_runtime_daily_law_open_account_info,
+    prepare_create_state_account_info, prepare_existing_state_write_account_info,
+    verify_daily_law_open_account_info, verify_runtime_daily_law_open_account_info,
 };
 use iat_b3_economy::runtime_write_adapter::execute_existing_write_batch_account_infos;
-use iat_b3_economy::{
-    set_eligibility, CanonicalDailyLawBinding, EconomyError, EligibilityState, SetEligibilityInput,
-};
+use iat_b3_economy::{CanonicalDailyLawBinding, EconomyError, EligibilityState};
 use solana_account_info::{next_account_info, AccountInfo};
 use solana_program_entrypoint::ProgramResult;
 use solana_program_error::ProgramError;
@@ -108,155 +102,24 @@ fn execute_production_set_eligibility(
     let runtime_law = verify_runtime_daily_law_open_account_info(&law_binding, law_state)
         .map_err(|_| RehearsalError::ProductionLawRejectedBeforeDecode)?;
     let native = native_binding(program_id)?;
-
-    let (role, agency_index) = match decode_production_instruction(instruction_data)
-        .map_err(|_| RehearsalError::ProductionSetEligibilityFailed)?
-    {
-        ProductionInstruction::SetEligibility { role, agency_index } => (role, agency_index),
-        _ => return Err(RehearsalError::ProductionSetEligibilityFailed.into()),
-    };
-    if accounts.len() != 6 || agency_index.is_some() || !matches!(role, 0 | 3 | 255) {
-        return Err(RehearsalError::ProductionSetEligibilityFailed.into());
-    }
-    let production_accounts = &accounts[1..];
-    let gate = verify_daily_law_open_account_info(&law_binding, law_state)
-        .map_err(|_| RehearsalError::ProductionSetEligibilityFailed)?;
-    let active_config = authenticate_runtime_production_active_config(
+    execute_runtime_production_set_eligibility_account_infos(
+        program_id,
         &runtime_law,
         &native,
-        &production_accounts[1],
+        instruction_data,
+        &accounts[1..],
     )
-    .map_err(|_| RehearsalError::ProductionSetEligibilityFailed)?;
-    execute_set_eligibility_rollback_prerequisite(
-        &gate,
-        &active_config,
-        &native,
-        production_accounts,
-        role,
-        agency_index,
-    )
-}
-
-#[allow(clippy::too_many_arguments)]
-#[inline(never)]
-fn execute_set_eligibility_rollback_prerequisite(
-    gate: &iat_b3_economy::ValidatedDailyLawWrite,
-    active_config: &iat_b3_economy::runtime_adapter::RuntimeProductionActiveConfig,
-    native: &NativeEconomyBinding,
-    production_accounts: &[AccountInfo<'_>],
-    role: u8,
-    agency_index: Option<u32>,
-) -> ProgramResult {
-    let wallet = &production_accounts[2];
-    if wallet.is_signer || wallet.is_writable || wallet.executable {
-        return Err(RehearsalError::ProductionSetEligibilityFailed.into());
-    }
-    let identity = PdaIdentity::Eligibility {
-        config: active_config.key(),
-        operator: wallet.key.to_bytes(),
-    };
-    let derived =
-        derive_pda(native, identity).map_err(|_| RehearsalError::ProductionSetEligibilityFailed)?;
-    let provisional_next = EligibilityState {
-        config: active_config.key(),
-        wallet: wallet.key.to_bytes(),
-        agency_index: u32::MAX,
-        role: 0,
-        bump: derived.bump,
-    };
-    let prepared = prepare_production_active_init_if_needed_account_infos(
-        gate,
-        active_config,
-        native,
-        &production_accounts[0],
-        &production_accounts[3],
-        &production_accounts[4],
-        identity,
-        StrictStateValue::Eligibility(provisional_next),
-    )
-    .map_err(|_| RehearsalError::ProductionSetEligibilityFailed)?;
-    if prepared.path() == ProductionInitIfNeededPath::ExistingCas {
-        // Existing state must reach the retained role check with zero CPI and
-        // no account write. A successful retained body would execute its CAS.
-        retained_set_eligibility(
-            gate,
-            active_config,
-            wallet.key.to_bytes(),
-            role,
-            agency_index,
-            derived.bump,
-            provisional_next,
-        )?;
-        execute_production_active_init_if_needed_account_infos(
-            gate,
-            active_config,
-            native,
-            prepared,
-            &production_accounts[0],
-            &production_accounts[3],
-            &production_accounts[4],
-        )
-        .map_err(|_| RehearsalError::ProductionSetEligibilityFailed)?;
-    } else {
-        // This fixture-only rollback prerequisite deliberately executes the
-        // sealed System lifecycle before the invalid retained body. It proves
-        // real transaction rollback, but does not claim the combined executor
-        // or final binary is SBF-safe.
-        execute_production_active_init_if_needed_account_infos(
-            gate,
-            active_config,
-            native,
-            prepared,
-            &production_accounts[0],
-            &production_accounts[3],
-            &production_accounts[4],
-        )
-        .map_err(|_| RehearsalError::ProductionSetEligibilityFailed)?;
-        retained_set_eligibility(
-            gate,
-            active_config,
-            wallet.key.to_bytes(),
-            role,
-            agency_index,
-            derived.bump,
-            provisional_next,
-        )?;
-    }
+    .map_err(map_production_set_eligibility_error)?;
     Ok(())
 }
 
-#[allow(clippy::too_many_arguments)]
-#[inline(never)]
-fn retained_set_eligibility(
-    gate: &iat_b3_economy::ValidatedDailyLawWrite,
-    active_config: &iat_b3_economy::runtime_adapter::RuntimeProductionActiveConfig,
-    wallet: [u8; 32],
-    role: u8,
-    agency_index: Option<u32>,
-    eligibility_bump: u8,
-    expected: EligibilityState,
-) -> ProgramResult {
-    let result = set_eligibility(
-        gate,
-        SetEligibilityInput {
-            config_key: active_config.key(),
-            config: active_config.state().config,
-            wallet,
-            role,
-            agency_index,
-            eligibility_bump,
-        },
-    )
-    .map_err(|error| match error {
-        EconomyError::UnknownRole => {
+fn map_production_set_eligibility_error(error: ProductionSetEligibilityError) -> ProgramError {
+    match error {
+        ProductionSetEligibilityError::Economy(EconomyError::UnknownRole) => {
             ProgramError::from(RehearsalError::ProductionSetEligibilityUnknownRole)
         }
         _ => ProgramError::from(RehearsalError::ProductionSetEligibilityFailed),
-    })?;
-    if result.eligibility != expected {
-        return Err(RehearsalError::ProductionSetEligibilityFailed.into());
     }
-    Ok(())
 }
 
 fn canonical_law_binding() -> CanonicalDailyLawBinding {
