@@ -708,15 +708,109 @@ test("the local lifecycle fixture proves SBF CPI without becoming a production s
   assert.match(accountLifecycleFixtureSource, /verify_daily_law_open_account_info/u);
   assert.match(accountLifecycleFixtureSource, /prepare_create_state_account_info/u);
   assert.match(accountLifecycleFixtureSource, /InjectedRollback = 909/u);
+  assert.match(
+    accountLifecycleFixtureSource,
+    /execute_production_active_init_if_needed_account_infos/u,
+  );
+  assert.match(accountLifecycleFixtureSource, /set_eligibility/u);
+  assert.match(accountLifecycleFixtureSource, /verify_runtime_daily_law_open_account_info/u);
+  assert.match(accountLifecycleFixtureSource, /ProductionLawRejectedBeforeDecode = 910/u);
+  assert.match(accountLifecycleFixtureSource, /ProductionSetEligibilityUnknownRole = 911/u);
+  assert.doesNotMatch(
+    accountLifecycleFixtureSource,
+    /execute_runtime_production_set_eligibility_account_infos/u,
+  );
+  assert.match(
+    accountLifecycleFixtureSource,
+    /verify_runtime_daily_law_open_account_info[\s\S]+decode_production_instruction/u,
+  );
   assert.match(accountLifecycleLocalDriverSource, /systemCpiCount/u);
+  assert.match(
+    accountLifecycleLocalDriverSource,
+    /SET_ELIGIBILITY_COMPUTE_UNIT_LIMIT = 1_400_000/u,
+  );
   assert.match(accountLifecycleLocalDriverSource, /rollbackObserved/u);
   assert.match(accountLifecycleLocalDriverSource, /existingStateCasObserved/u);
   assert.match(accountLifecycleLocalDriverSource, /syntheticDailyLawFixture: true/u);
   assert.match(accountLifecycleLocalDriverSource, /productionInstructionAbiFrozen: false/u);
+  assert.match(
+    accountLifecycleLocalDriverSource,
+    /PRODUCTION_INSTRUCTION_NAMESPACE = Buffer\.from\("IATB3EC1"/u,
+  );
+  assert.match(
+    accountLifecycleLocalDriverSource,
+    /"set-invalid-vacant-3"[\s\S]+role: 3[\s\S]+expectedSystemCpis: 1/u,
+  );
+  assert.match(
+    accountLifecycleLocalDriverSource,
+    /"set-invalid-vacant-255"[\s\S]+role: 255[\s\S]+expectedSystemCpis: 1/u,
+  );
+  assert.match(
+    accountLifecycleLocalDriverSource,
+    /"set-invalid-prefunded-3"[\s\S]+role: 3[\s\S]+expectedSystemCpis: 3/u,
+  );
+  assert.match(
+    accountLifecycleLocalDriverSource,
+    /"set-invalid-prefunded-255"[\s\S]+role: 255[\s\S]+expectedSystemCpis: 3/u,
+  );
+  assert.match(
+    accountLifecycleLocalDriverSource,
+    /assertAccountSnapshotEqual\(afterTarget, beforeTarget/u,
+  );
+  assert.match(accountLifecycleLocalDriverSource, /productionDispatcherExposed: false/u);
+  assert.match(accountLifecycleLocalDriverSource, /productionSetEligibilityExecutorInvoked: false/u);
+  assert.match(
+    accountLifecycleLocalDriverSource,
+    /productionSetEligibilityExecutorSbfExecutionProven: false/u,
+  );
+  assert.match(accountLifecycleLocalDriverSource, /productionFinalArtifactStackSafeProven: false/u);
+  assert.match(accountLifecycleLocalDriverSource, /syntheticProgramErrorMapping: true/u);
+  assert.match(accountLifecycleLocalDriverSource, /productionProgramErrorAbiProven: false/u);
+  assert.match(accountLifecycleLocalDriverSource, /computeUnitsConsumed/u);
+  assert.match(accountLifecycleLocalDriverSource, /productionComputeBudgetProven: false/u);
+  assert.match(
+    accountLifecycleLocalDriverSource,
+    /setEligibilityRollbackPrerequisiteExercised/u,
+  );
+  assert.match(accountLifecycleLocalDriverSource, /productionEntrypointProven: false/u);
+  assert.match(accountLifecycleLocalDriverSource, /finalBinaryDevnetRollbackProven: false/u);
   assert.match(accountLifecycleLocalDriverSource, /activationReady: false/u);
   assert.match(accountLifecycleLocalRunnerSource, /http:\/\/127\.0\.0\.1:/u);
   assert.match(accountLifecycleLocalRunnerSource, /publicNetworkWrites":false/u);
   assert.match(accountLifecycleLocalRunnerSource, /fullFeatureDevnetRehearsalComplete":false/u);
+  assert.match(accountLifecycleLocalRunnerSource, /set-valid-vacant/u);
+  assert.match(accountLifecycleLocalRunnerSource, /set-valid-prefunded/u);
+  assert.match(accountLifecycleLocalRunnerSource, /set-invalid-vacant-3/u);
+  assert.match(accountLifecycleLocalRunnerSource, /set-invalid-vacant-255/u);
+  assert.match(accountLifecycleLocalRunnerSource, /set-invalid-prefunded-3/u);
+  assert.match(accountLifecycleLocalRunnerSource, /set-invalid-prefunded-255/u);
+  assert.match(accountLifecycleLocalRunnerSource, /set-existing-invalid-3/u);
+  assert.match(accountLifecycleLocalRunnerSource, /set-existing-invalid-255/u);
+  assert.match(accountLifecycleLocalRunnerSource, /set-law-rejection/u);
+  assert.match(accountLifecycleLocalRunnerSource, /productionDispatcherExposed":false/u);
+  assert.match(accountLifecycleLocalRunnerSource, /productionSetEligibilityExecutorInvoked":false/u);
+  assert.match(
+    accountLifecycleLocalRunnerSource,
+    /productionSetEligibilityExecutorSbfExecutionProven":false/u,
+  );
+  assert.match(accountLifecycleLocalRunnerSource, /sbfBuildStackDiagnosticsPresent":%s/u);
+  assert.match(
+    accountLifecycleLocalRunnerSource,
+    /productionFinalArtifactStackSafeProven":false/u,
+  );
+  assert.match(accountLifecycleLocalRunnerSource, /syntheticProgramErrorMapping":true/u);
+  assert.match(accountLifecycleLocalRunnerSource, /productionProgramErrorAbiProven":false/u);
+  assert.match(
+    accountLifecycleLocalRunnerSource,
+    /setEligibilityRequestedComputeUnitLimit":1400000/u,
+  );
+  assert.match(accountLifecycleLocalRunnerSource, /productionComputeBudgetProven":false/u);
+  assert.match(
+    accountLifecycleLocalRunnerSource,
+    /setEligibilityRollbackPrerequisiteExercised":true/u,
+  );
+  assert.match(accountLifecycleLocalRunnerSource, /productionEntrypointProven":false/u);
+  assert.match(accountLifecycleLocalRunnerSource, /finalBinaryDevnetRollbackProven":false/u);
   assert.match(accountLifecycleLocalRunnerSource, /mainnetStatus":"HOLD/u);
   assert.match(
     releaseProofWorkflowSource,

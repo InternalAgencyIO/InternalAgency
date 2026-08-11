@@ -6,6 +6,7 @@ schema="iat-b3-account-lifecycle-local-validator/v1"
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 site_dir=$(cd -- "$script_dir/.." && pwd -P)
 fixture_root="$site_dir/tests/fixtures/iat-b3-account-lifecycle"
+work_root="${IAT_B3_ACCOUNT_LIFECYCLE_WORK_ROOT:-$fixture_root/target}"
 rpc_port="${IAT_B3_ACCOUNT_LIFECYCLE_RPC_PORT:-19199}"
 rpc_url="http://127.0.0.1:${rpc_port}"
 faucet_port=$((rpc_port - 1))
@@ -30,11 +31,12 @@ node_major=$($node_bin -p 'Number(process.versions.node.split(".")[0])')
   exit 2
 }
 
-mkdir -p -- "$fixture_root/target"
-temp_dir=$(mktemp -d "$fixture_root/target/local-validator.XXXXXX")
+mkdir -p -- "$work_root"
+work_root=$(cd -- "$work_root" && pwd -P)
+temp_dir=$(mktemp -d "$work_root/local-validator.XXXXXX")
 temp_dir=$(cd -- "$temp_dir" && pwd -P)
 case "$temp_dir" in
-  "$fixture_root"/target/local-validator.*) ;;
+  "$work_root"/local-validator.*) ;;
   *) exit 1 ;;
 esac
 
@@ -46,7 +48,7 @@ cleanup() {
     validator_pid=""
   fi
   case "$temp_dir" in
-    "$fixture_root"/target/local-validator.*) rm -rf -- "$temp_dir" ;;
+    "$work_root"/local-validator.*) rm -rf -- "$temp_dir" ;;
     *) return 1 ;;
   esac
 }
@@ -61,29 +63,35 @@ to_node_path() {
 }
 
 driver="$script_dir/iat-b3-account-lifecycle-local-driver.mjs"
+solana-keygen new --no-bip39-passphrase --silent --force --outfile "$temp_dir/payer.json" >/dev/null 2>&1
+payer_pubkey=$(solana-keygen pubkey "$temp_dir/payer.json")
 "$node_bin" "$(to_node_path "$driver")" \
   --mode prepare-fixture \
   --fixture "$(to_node_path "$temp_dir/law.json")" \
+  --config-fixture "$(to_node_path "$temp_dir/config.json")" \
+  --payer-pubkey "$payer_pubkey" \
   --env "$(to_node_path "$temp_dir/accounts.env")"
 
 # Contains only fixture public addresses.
 # shellcheck disable=SC1090
 source "$temp_dir/accounts.env"
 
-cargo build-sbf \
+CARGO_TARGET_DIR="${IAT_B3_ACCOUNT_LIFECYCLE_CARGO_TARGET_DIR:-$work_root/cargo-target}" cargo build-sbf \
   --manifest-path "$fixture_root/Cargo.toml" \
   --sbf-out-dir "$temp_dir/deploy" \
-  -- --locked >/dev/null
+  -- --locked 2>&1 | tee "$temp_dir/build-sbf.log" >&2
+sbf_stack_diagnostics_present=false
+if grep -Fq "Stack offset of" "$temp_dir/build-sbf.log"; then
+  sbf_stack_diagnostics_present=true
+fi
 artifact="$temp_dir/deploy/iat_b3_account_lifecycle_rehearsal.so"
 [[ -s "$artifact" ]]
-
-solana-keygen new --no-bip39-passphrase --silent --force --outfile "$temp_dir/payer.json" >/dev/null 2>&1
-payer_pubkey=$(solana-keygen pubkey "$temp_dir/payer.json")
 
 solana-test-validator \
   --ledger "$temp_dir/ledger" \
   --bpf-program "$PROGRAM_ID" "$artifact" \
   --account "$LAW_STATE" "$temp_dir/law.json" \
+  --account "$CONFIG" "$temp_dir/config.json" \
   --rpc-port "$rpc_port" \
   --faucet-port "$faucet_port" \
   --dynamic-port-range "${dynamic_min}-${dynamic_max}" \
@@ -108,6 +116,25 @@ for mode in zero update update-rollback prefunded rollback; do
     --law-state "$LAW_STATE"
 done
 
+for mode in \
+  set-valid-vacant \
+  set-valid-prefunded \
+  set-invalid-vacant-3 \
+  set-invalid-vacant-255 \
+  set-invalid-prefunded-3 \
+  set-invalid-prefunded-255 \
+  set-existing-seed \
+  set-existing-invalid-3 \
+  set-existing-invalid-255 \
+  set-law-rejection; do
+  "$node_bin" "$(to_node_path "$driver")" \
+    --mode "$mode" \
+    --rpc "$rpc_url" \
+    --payer "$(to_node_path "$temp_dir/payer.json")" \
+    --law-state "$LAW_STATE" \
+    --config "$CONFIG"
+done
+
 cleanup
 trap - EXIT INT TERM
-printf '{"schema":"%s","status":"PASS","phase":"summary","realSystemCpiObserved":true,"canonicalPdaSigningObserved":true,"prefundedAllocateAssignFundObserved":true,"existingStateCasObserved":true,"transactionRollbackObserved":true,"syntheticDailyLawFixture":true,"publicNetworkWrites":false,"fullFeatureDevnetRehearsalComplete":false,"activationReady":false,"mainnetStatus":"HOLD","temporaryLedgerRemoved":true,"validatorStopped":true,"generatedKeyMaterialRemoved":true}\n' "$schema"
+printf '{"schema":"%s","status":"PASS","phase":"summary","realSystemCpiObserved":true,"canonicalPdaSigningObserved":true,"prefundedAllocateAssignFundObserved":true,"existingStateCasObserved":true,"transactionRollbackObserved":true,"setEligibilityRollbackPrerequisiteExercised":true,"setEligibilityRequestedComputeUnitLimit":1400000,"productionComputeBudgetProven":false,"productionSetEligibilityExecutorInvoked":false,"productionSetEligibilityExecutorSbfExecutionProven":false,"sbfBuildStackDiagnosticsPresent":%s,"productionFinalArtifactStackSafeProven":false,"productionSetEligibilityInstructionCodecExercised":true,"syntheticProgramErrorMapping":true,"productionProgramErrorAbiProven":false,"lawAuthenticatedBeforeProductionDecode":true,"vacantUnknownRoleRollbackObserved":true,"prefundedUnknownRoleRollbackObserved":true,"existingInvalidRoleZeroCpiNoWriteObserved":true,"lawRejectionBeforeDecodeAndCpiObserved":true,"syntheticDailyLawFixture":true,"syntheticProductionActiveConfigFixture":true,"publicNetworkWrites":false,"productionDispatcherExposed":false,"productionEntrypointProven":false,"finalBinaryDevnetRollbackProven":false,"fullFeatureDevnetRehearsalComplete":false,"activationReady":false,"mainnetStatus":"HOLD","temporaryLedgerRemoved":true,"validatorStopped":true,"generatedKeyMaterialRemoved":true}\n' "$schema" "$sbf_stack_diagnostics_present"
