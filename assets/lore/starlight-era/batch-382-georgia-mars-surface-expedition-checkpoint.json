@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-clean-fresh-round-30-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-clean-fresh-round-30",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -5372,6 +5372,40 @@
           "consentScope": "This decline applies only to this recorded round-30 invitation in scene 1551 and does not transfer to another act, participant, prop interaction, scene, country, or future image.",
           "recoveryDecisionContinuity": "This one technical correction remains the same round-30 event. ECE's invitation, Radiance's explicit decline, partyActivation false, empty willing-participant set, and every consent boundary remain unchanged.",
           "recoveryEvidenceRequirement": "Preserve Radiance's already-clear extended open decline palm, head angle, and warm eye line to ECE while changing only the Ellie-Radiance support geometry."
+        },
+        "visualAudit": {
+          "renderSurfaceQuality": "pass-clean-coherent-photographic-texture-with-straight-rain-and-no-wavy-or-marbled-processing",
+          "identity": "pass-four-adult-identities-with-Alia-braids",
+          "anatomy": "reject-Ellie-Radiance-support-owner-path-and-exact-contact-graph-not-fully-auditable",
+          "handOwnership": "partial-Radiance-decline-arm-ECE-compass-and-Alia-grip-pass-but-left-couple-support-graph-fails",
+          "weather": "pass-heavy-straight-rain-and-flat-wet-tiles",
+          "locationThemeFusion": "pass-recognizable-Batumi-with-four-distinct-expedition-silhouettes",
+          "outfitOriginality": "pass-four-distinct-silhouettes-constructions-hems-and-footwear",
+          "rolledWardrobe": "reject-Radiance-fully-open-back-obstructed-and-Alia-visible-midriff-band-missing",
+          "romance": "reject-upright-turn-instead-of-controlled-dip-and-fewer-than-three-clear-contacts",
+          "radianceResponse": "pass-explicit-decline-through-visible-open-palm-and-warm-ECE-eye-line",
+          "partyActivation": "pass-false-with-empty-willing-participant-set-and-no-party-objects",
+          "mascots": "pass-one-PAWS-and-one-MAX-sharing-raised-dry-bed",
+          "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+          "routeMap": "pass-separate-hands-free-holographic-map",
+          "missionHandling": "reject-indexed-trigger-finger-empty-guard-and-orange-insert-remain-ambiguous",
+          "missionTargetAxis": "pass-paper-diamond-complete-backstop-and-safe-right-facing-axis",
+          "recoveryResult": "rejected-output-moderation-no-raw",
+          "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+          "accepted": false
+        },
+        "recoveryResult": {
+          "status": "rejected-output-moderation-no-raw",
+          "rawOutput": null,
+          "moderationStage": "output",
+          "moderationCategories": [
+            "sexual"
+          ],
+          "requestId": "3f7f0af1-23dc-4a03-bb48-bb7b21c87292",
+          "recoveryPassConsumedThisRound": true,
+          "sourceRawOutput": "tmp/world-195x4/batch-382/raw/clean-fresh-round-30/scene-1551.png",
+          "sourceRawSha256": "81E0BBA9C73447ED43A59262DF9B59299941FC686EE5778DFD07C04ECE2B2AD9",
+          "note": "The single round-30 recovery request returned no image. No alternate edit, older render, or generated file was substituted."
         }
       }
     }
@@ -12085,7 +12119,7 @@
       }
     },
     "freshRound30": {
-      "status": "fresh-completed-rejected-recovery-materialized",
+      "status": "completed-rejected-after-single-recovery-output-moderation-no-raw",
       "preparedAt": "2026-08-11T23:11:18.785Z",
       "sceneNumbers": [
         1551
@@ -12260,9 +12294,12 @@
       "freshCompletedAt": "2026-08-11T23:16:38.098Z",
       "rawOutputs": {
         "1551": {
-          "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-30/scene-1551.png",
-          "sha256": "81E0BBA9C73447ED43A59262DF9B59299941FC686EE5778DFD07C04ECE2B2AD9",
-          "preserved": true
+          "fresh": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-30/scene-1551.png",
+            "sha256": "81E0BBA9C73447ED43A59262DF9B59299941FC686EE5778DFD07C04ECE2B2AD9",
+            "preserved": true
+          },
+          "recovery": null
         }
       },
       "freshStrictAudit": {
@@ -12353,6 +12390,56 @@
           "recoveryDecisionContinuity": "This one technical correction remains the same round-30 event. ECE's invitation, Radiance's explicit decline, partyActivation false, empty willing-participant set, and every consent boundary remain unchanged.",
           "recoveryEvidenceRequirement": "Preserve Radiance's already-clear extended open decline palm, head angle, and warm eye line to ECE while changing only the Ellie-Radiance support geometry."
         }
+      },
+      "completedAt": "2026-08-11T23:20:49.660Z",
+      "recoveryCompletedAt": "2026-08-11T23:20:49.660Z",
+      "acceptedSceneNumbers": [],
+      "rejectedSceneNumbers": [
+        1551
+      ],
+      "rejectionReasons": {
+        "1551": [
+          "The clean fresh raw remains an upright turn rather than the rolled shallow controlled dip.",
+          "Ellie's support contact and the required three-contact relationship graph are absent or not auditable.",
+          "Radiance's fully-open-back roll is obstructed by blue-and-gold crossing straps.",
+          "Alia's active visible-midriff roll lacks a clear continuous bare band.",
+          "The inert replica's indexed finger outside an empty guard and orange muzzle insert are not fully auditable.",
+          "The sole targeted recovery produced no image because output moderation rejected it."
+        ]
+      },
+      "strictAudit": {
+        "renderSurfaceQuality": "pass-clean-coherent-photographic-texture-with-straight-rain-and-no-wavy-or-marbled-processing",
+        "identity": "pass-four-adult-identities-with-Alia-braids",
+        "anatomy": "reject-Ellie-Radiance-support-owner-path-and-exact-contact-graph-not-fully-auditable",
+        "handOwnership": "partial-Radiance-decline-arm-ECE-compass-and-Alia-grip-pass-but-left-couple-support-graph-fails",
+        "weather": "pass-heavy-straight-rain-and-flat-wet-tiles",
+        "locationThemeFusion": "pass-recognizable-Batumi-with-four-distinct-expedition-silhouettes",
+        "outfitOriginality": "pass-four-distinct-silhouettes-constructions-hems-and-footwear",
+        "rolledWardrobe": "reject-Radiance-fully-open-back-obstructed-and-Alia-visible-midriff-band-missing",
+        "romance": "reject-upright-turn-instead-of-controlled-dip-and-fewer-than-three-clear-contacts",
+        "radianceResponse": "pass-explicit-decline-through-visible-open-palm-and-warm-ECE-eye-line",
+        "partyActivation": "pass-false-with-empty-willing-participant-set-and-no-party-objects",
+        "mascots": "pass-one-PAWS-and-one-MAX-sharing-raised-dry-bed",
+        "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+        "routeMap": "pass-separate-hands-free-holographic-map",
+        "missionHandling": "reject-indexed-trigger-finger-empty-guard-and-orange-insert-remain-ambiguous",
+        "missionTargetAxis": "pass-paper-diamond-complete-backstop-and-safe-right-facing-axis",
+        "recoveryResult": "rejected-output-moderation-no-raw",
+        "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+        "accepted": false
+      },
+      "recoveryResult": {
+        "status": "rejected-output-moderation-no-raw",
+        "rawOutput": null,
+        "moderationStage": "output",
+        "moderationCategories": [
+          "sexual"
+        ],
+        "requestId": "3f7f0af1-23dc-4a03-bb48-bb7b21c87292",
+        "recoveryPassConsumedThisRound": true,
+        "sourceRawOutput": "tmp/world-195x4/batch-382/raw/clean-fresh-round-30/scene-1551.png",
+        "sourceRawSha256": "81E0BBA9C73447ED43A59262DF9B59299941FC686EE5778DFD07C04ECE2B2AD9",
+        "note": "The single round-30 recovery request returned no image. No alternate edit, older render, or generated file was substituted."
       }
     }
   },
@@ -13617,6 +13704,30 @@
         "The metallic replica remains undersized, its orange muzzle insert is absent or unreadable, and the trigger index outside the empty guard is not auditable"
       ],
       "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "round": 30,
+      "phase": "recovery",
+      "status": "rejected-output-moderation-no-raw",
+      "rawOutput": null,
+      "moderationStage": "output",
+      "moderationCategories": [
+        "sexual"
+      ],
+      "requestId": "3f7f0af1-23dc-4a03-bb48-bb7b21c87292",
+      "recoveryPassConsumedThisRound": true,
+      "sourceRawOutput": "tmp/world-195x4/batch-382/raw/clean-fresh-round-30/scene-1551.png",
+      "sourceRawSha256": "81E0BBA9C73447ED43A59262DF9B59299941FC686EE5778DFD07C04ECE2B2AD9",
+      "note": "The single round-30 recovery request returned no image. No alternate edit, older render, or generated file was substituted.",
+      "decisiveRejectionReasons": [
+        "The clean fresh raw remains an upright turn rather than the rolled shallow controlled dip.",
+        "Ellie's support contact and the required three-contact relationship graph are absent or not auditable.",
+        "Radiance's fully-open-back roll is obstructed by blue-and-gold crossing straps.",
+        "Alia's active visible-midriff roll lacks a clear continuous bare band.",
+        "The inert replica's indexed finger outside an empty guard and orange muzzle insert are not fully auditable.",
+        "The sole targeted recovery produced no image because output moderation rejected it."
+      ]
     }
   ],
   "xPost": {
@@ -13626,9 +13737,9 @@
     "url": null,
     "acceptedCurrentCountryAssets": 3,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Clean round 30 scene 1551 is preserved but rejected; its sole bounded recovery is materialized. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
+    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Round 30 scene 1551 kept a clean surface and clear Radiance decline but failed the controlled-dip contact graph, active back and midriff rolls, and replica-safety audit; its sole recovery returned no image after output moderation. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T23:16:38.098Z",
+  "checkpointedAt": "2026-08-11T23:20:49.660Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -14549,21 +14660,23 @@
     {
       "scene": 1551,
       "round": 30,
-      "kind": "clean-fresh-recovery-pending",
+      "kind": "clean-fresh-recovery-attempt-blocked-no-output",
       "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-30/scene-1551.png",
       "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-0bcb1908-9bb9-4f0c-9168-0440dc04f3b3.png",
       "sha256": "81E0BBA9C73447ED43A59262DF9B59299941FC686EE5778DFD07C04ECE2B2AD9",
       "dimensions": {
         "width": 941,
         "height": 1672
-      }
+      },
+      "recoveryOutput": null,
+      "requestId": "3f7f0af1-23dc-4a03-bb48-bb7b21c87292"
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-single-clean-fresh-round-30-recovery-scene-1551-only",
+    "action": "clean-fresh-round-31-from-original-identity-anchors-scene-1551-only",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -14575,7 +14688,7 @@
     "laterCountryStartAllowed": false
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-11T23:11:18.785Z",
+    "checkedAt": "2026-08-11T23:20:49.660Z",
     "account": "@dogramaci",
     "signedIn": true,
     "eligibleBacklogRemaining": 0,
@@ -14629,7 +14742,7 @@
       "liveVerified": true,
       "viewsAtAudit": 42
     },
-    "reconciliationDecision": "Signed-in live profile checked. No eligible unposted World Series country pair exists. Georgia remains X-blocked until scene 1551 is accepted.",
+    "reconciliationDecision": "Signed-in live profile was checked and no eligible unposted World Series country pair exists. Georgia still has three accepted scenes, so no X upload or country advance is permitted.",
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
@@ -14659,12 +14772,12 @@
       "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
       "assets/lore/starlight-era/ece-canonical-identity-v1.png"
     ],
-    "lastCompletedCleanRound": 29,
-    "lastCleanRoundResult": "clean-standard-dip-and-wardrobe-pass-but-rejected-missing-Radiance-arm-hidden-Ellie-support-third-contact-ECE-center-and-replica-safety",
-    "nextCleanRound": 30,
-    "nextSourcePolicy": "original identity anchors only; no round 29 image input",
-    "activeCleanRound": 30,
-    "activeSourcePolicy": "single targeted recovery from clean round 30 raw only",
-    "priorBatumiRenderInputCount": 1
+    "lastCompletedCleanRound": 30,
+    "lastCleanRoundResult": "clean-surface-decline-ECE-center-Batumi-and-mascots-pass-but-fresh-rejected-dip-contact-open-back-midriff-and-replica-audit; sole-recovery-output-moderated-no-raw",
+    "nextCleanRound": 31,
+    "nextSourcePolicy": "original identity anchors only; no round 30 image input",
+    "activeCleanRound": null,
+    "activeSourcePolicy": "four original identity anchors only",
+    "priorBatumiRenderInputCount": 0
   }
 }
