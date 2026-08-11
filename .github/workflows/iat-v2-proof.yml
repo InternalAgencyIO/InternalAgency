@@ -120,6 +120,12 @@ jobs:
           } >> "$GITHUB_PATH"
       - name: Produce deterministic build evidence
         run: bash scripts/verify-iat-v2-sbf.sh
+      - name: Install the pinned B3 SBF platform tools
+        run: >-
+          cargo build-sbf
+          --install-only
+          --force-tools-install
+          --tools-version v1.52
       - name: Prefetch the locked B3 combined-law crate graph
         # Network access is confined to Cargo's checksum-verified locked input
         # fetch. The artifact build itself remains strictly offline below.

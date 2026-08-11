@@ -156,6 +156,25 @@ function validateConfiguration(workflowText, scripts) {
   ) {
     fail("B3 law SBF inputs must be checksum-prefetched from the exact locked manifest before the offline build");
   }
+  const combinedToolsStart = workflowText.indexOf(
+    "      - name: Install the pinned B3 SBF platform tools\n",
+  );
+  const combinedToolsStep = combinedToolsStart >= 0 && combinedPrefetchStart > combinedToolsStart
+    ? workflowText.slice(combinedToolsStart, combinedPrefetchStart)
+    : "";
+  const requiredCombinedToolsBindings = [
+    "run: >-",
+    "cargo build-sbf",
+    "--install-only",
+    "--force-tools-install",
+    "--tools-version v1.52",
+  ];
+  if (
+    combinedToolsStep.length === 0
+    || requiredCombinedToolsBindings.some((binding) => !combinedToolsStep.includes(binding))
+  ) {
+    fail("B3 law SBF build must force-install the exact pinned platform-tools version before offline use");
+  }
 
   if (orderedPositions.some((position) => position === -1)) {
     const missing = requiredOrderedCommands.filter((_, index) => orderedPositions[index] === -1);
@@ -536,6 +555,14 @@ const mutationProbes = [
     workflow: workflow.replace(
       "          cargo +1.97.1 fetch\n          --locked\n",
       "          cargo +1.97.1 fetch\n",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "floating combined-law platform tools",
+    workflow: workflow.replace(
+      "          --force-tools-install\n          --tools-version v1.52\n",
+      "          --force-tools-install\n",
     ),
     scripts: packageJson.scripts,
   },
