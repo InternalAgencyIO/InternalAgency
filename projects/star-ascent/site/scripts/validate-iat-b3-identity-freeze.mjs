@@ -931,7 +931,12 @@ export function assertProductionCombinedArtifactBindingReady(manifest, options =
 }
 
 export function loadIdentityFreezeManifest(path) {
-  return JSON.parse(readFileSync(resolve(path), "utf8"));
+  const resolved = resolve(path);
+  return parseIdentityFreezeJson(readFileSync(resolved, "utf8"), resolved);
+}
+
+export function parseIdentityFreezeJson(text, label = "manifest") {
+  return parseB3OwnerPolicyFreezeJson(text, label);
 }
 
 function parseCliArgs(argv) {

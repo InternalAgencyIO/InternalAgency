@@ -10,6 +10,7 @@ import {
   TEST_FIXTURE_IDENTITIES as FIXTURE_IDENTITIES,
   assertIdentityFreezeReady,
   assertProductionCombinedArtifactBindingReady,
+  parseIdentityFreezeJson,
   validateIdentityFreezeManifest,
 } from "../scripts/validate-iat-b3-identity-freeze.mjs";
 
@@ -128,6 +129,18 @@ test("the owner-selected new Token-2022 inception choice is byte-bound and never
   for (const seed of prematureSeedFreeze.seedTable) Object.assign(seed, { status: "FROZEN", blocker: null });
   const seedResult = validateIdentityFreezeManifest(prematureSeedFreeze, productionOptions);
   assert.match(seedResult.violations.join("\n"), /must exactly match the owner-policy acceptCanonicalSeedTable choice/iu);
+});
+
+test("identity source parsing rejects decoded duplicate members before semantic validation", () => {
+  const raw = readFileSync(
+    new URL("../docs/b3/iat-b3-identity-freeze.v1.json", import.meta.url),
+    "utf8",
+  );
+  const duplicate = raw.replace(
+    '  "schema": "iat-b3-identity-freeze/v1",',
+    '  "schema": "iat-b3-identity-freeze/v1",\n  "schema": "iat-b3-identity-freeze/v1",',
+  );
+  assert.throws(() => parseIdentityFreezeJson(duplicate, "identity"), /duplicate JSON member/iu);
 });
 
 test("a complete, explicitly test-only freeze fixture passes every semantic check", () => {
