@@ -200,7 +200,11 @@ test("canonical owner-policy intake is valid, incomplete, nonactivating, and ord
   assert.equal(result.ownerChoicesStructurallyComplete, false);
   assert.equal(result.safeDecisionOrderSatisfied, false);
   assert.deepEqual(Object.keys(result.nodeChoiceState), OWNER_POLICY_NODE_IDS);
-  assert.equal(result.blockers.length, 7);
+  assert.deepEqual(result.nodeChoiceState.LIVE_ESTATE_CANONICAL_MINT_DECISION, {
+    structurallyComplete: true,
+    eligibleInSafeOrder: true,
+  });
+  assert.equal(result.blockers.length, 6);
   assertTerminalHold(result);
 });
 
