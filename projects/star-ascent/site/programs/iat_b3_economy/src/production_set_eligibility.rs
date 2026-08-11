@@ -8,16 +8,18 @@
 //! executor, dispatcher, or entrypoint and claims no complete handler.
 
 use crate::native_adapter::{
-    derive_pda, NativeAdapterError, NativeEconomyBinding, PdaIdentity, StrictStateValue,
+    derive_pda, NativeAdapterError, NativeEconomyBinding, PdaIdentity, StrictStateKind,
+    StrictStateValue,
 };
 use crate::production_instruction::{
     decode_production_instruction, ProductionInstruction, ProductionInstructionError,
 };
 #[cfg(test)]
-use crate::runtime_account_lifecycle::prepare_production_active_init_if_needed_with_rent;
+use crate::runtime_account_lifecycle::prepare_production_active_init_if_needed_constraints_with_rent;
 use crate::runtime_account_lifecycle::{
-    prepare_production_active_init_if_needed_account_infos, require_system_program,
-    PreparedProductionInitIfNeeded, ProductionInitIfNeededPath, RuntimeAccountLifecycleError,
+    prepare_production_active_init_if_needed_constraints_account_infos, require_system_program,
+    seal_production_active_init_if_needed_postimage, PreparedProductionInitIfNeeded,
+    ProductionInitIfNeededPath, RuntimeAccountLifecycleError,
 };
 use crate::runtime_adapter::{
     authenticate_production_active_config_account_info,
@@ -46,7 +48,10 @@ pub struct ProductionSetEligibilityTruth {
     pub exact_five_account_order_and_flags_required: bool,
     pub public_wallet_key_bound: bool,
     pub exact_wallet_eligibility_pda_authenticated: bool,
+    pub init_if_needed_pre_cpi_facts_precede_retained_v2_body: bool,
+    pub existing_eligibility_rent_exemption_required: bool,
     pub retained_v2_transition_used: bool,
+    pub role_bearing_postimage_sealed_only_after_transition: bool,
     pub sealed_existing_or_init_lifecycle_plan_returned: bool,
     pub account_write_executed: bool,
     pub system_cpi_executed: bool,
@@ -66,7 +71,10 @@ pub const PRODUCTION_SET_ELIGIBILITY_TRUTH: ProductionSetEligibilityTruth =
         exact_five_account_order_and_flags_required: true,
         public_wallet_key_bound: true,
         exact_wallet_eligibility_pda_authenticated: true,
+        init_if_needed_pre_cpi_facts_precede_retained_v2_body: true,
+        existing_eligibility_rent_exemption_required: true,
         retained_v2_transition_used: true,
+        role_bearing_postimage_sealed_only_after_transition: true,
         sealed_existing_or_init_lifecycle_plan_returned: true,
         account_write_executed: false,
         system_cpi_executed: false,
@@ -87,6 +95,7 @@ pub enum ProductionSetEligibilityError {
     Native(NativeAdapterError),
     Economy(EconomyError),
     Lifecycle(RuntimeAccountLifecycleError),
+    RetainedV2PostimageMismatch,
 }
 
 impl From<ProductionInstructionError> for ProductionSetEligibilityError {
@@ -167,7 +176,8 @@ impl PreparedProductionSetEligibility {
 struct PreparedSetEligibilityKernel {
     wallet: [u8; 32],
     identity: PdaIdentity,
-    next: EligibilityState,
+    input: SetEligibilityInput,
+    projected_next: EligibilityState,
 }
 
 /// Runtime production composition. The opaque Law capability and live Config
@@ -239,7 +249,13 @@ fn prepare_with_active_config(
     agency_index: Option<u32>,
 ) -> Result<PreparedProductionSetEligibility, ProductionSetEligibilityError> {
     let kernel = prepare_kernel_inputs(gate, active_config, binding, accounts, role, agency_index)?;
-    let lifecycle = prepare_production_active_init_if_needed_account_infos(
+    // Anchor 1.0.2 executes its full `init_if_needed` lifecycle before entering
+    // the handler body, but it does not serialize that body's next state during
+    // constraint evaluation. This nonexecuting seam validates and plans only
+    // the pre-CPI Rent, payer-funding, target-shape, and CAS facts before the
+    // retained error ordering begins below. System CPIs and their post-CPI
+    // assertions remain executor work and are truthfully false in this module.
+    let constraints = prepare_production_active_init_if_needed_constraints_account_infos(
         gate,
         active_config,
         binding,
@@ -247,9 +263,25 @@ fn prepare_with_active_config(
         &accounts[3],
         &accounts[4],
         kernel.identity,
-        StrictStateValue::Eligibility(kernel.next),
+        StrictStateKind::Eligibility,
     )?;
-    Ok(finish_plan(active_config, accounts, kernel, lifecycle))
+    let result = set_eligibility(gate, kernel.input)?;
+    if result.eligibility != kernel.projected_next {
+        return Err(ProductionSetEligibilityError::RetainedV2PostimageMismatch);
+    }
+    let lifecycle = seal_production_active_init_if_needed_postimage(
+        gate,
+        binding,
+        constraints,
+        StrictStateValue::Eligibility(result.eligibility),
+    )?;
+    Ok(finish_plan(
+        active_config,
+        accounts,
+        kernel,
+        result.eligibility,
+        lifecycle,
+    ))
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -274,21 +306,25 @@ fn prepare_kernel_inputs(
     let derived = derive_pda(binding, identity)?;
     require_eligibility_target_shape(gate, binding, &accounts[3], identity, derived.key)?;
 
-    let result = set_eligibility(
-        gate,
-        SetEligibilityInput {
-            config_key: active_config.key(),
-            config,
-            wallet,
-            role,
-            agency_index,
-            eligibility_bump: derived.bump,
-        },
-    )?;
+    let input = SetEligibilityInput {
+        config_key: active_config.key(),
+        config,
+        wallet,
+        role,
+        agency_index,
+        eligibility_bump: derived.bump,
+    };
     Ok(PreparedSetEligibilityKernel {
         wallet,
         identity,
-        next: result.eligibility,
+        input,
+        projected_next: EligibilityState {
+            config: input.config_key,
+            wallet: input.wallet,
+            agency_index: input.agency_index.unwrap_or(u32::MAX),
+            role: input.role,
+            bump: input.eligibility_bump,
+        },
     })
 }
 
@@ -351,6 +387,7 @@ fn finish_plan(
     active_config: &RuntimeProductionActiveConfig,
     accounts: &[AccountInfo<'_>],
     kernel: PreparedSetEligibilityKernel,
+    next: EligibilityState,
     lifecycle: PreparedProductionInitIfNeeded,
 ) -> PreparedProductionSetEligibility {
     PreparedProductionSetEligibility {
@@ -358,7 +395,7 @@ fn finish_plan(
         admin: active_config.state().config.admin,
         wallet: kernel.wallet,
         eligibility: accounts[3].key.to_bytes(),
-        next: kernel.next,
+        next,
         lifecycle,
     }
 }
@@ -378,7 +415,9 @@ fn prepare_production_set_eligibility_with_rent(
         authenticate_production_active_config_account_info(gate, binding, &accounts[1])?;
     let kernel =
         prepare_kernel_inputs(gate, &active_config, binding, accounts, role, agency_index)?;
-    let lifecycle = prepare_production_active_init_if_needed_with_rent(
+    // Test-only injected Rent preserves the same pre-CPI-facts-before-handler
+    // ordering as the runtime path above.
+    let constraints = prepare_production_active_init_if_needed_constraints_with_rent(
         gate,
         &active_config,
         binding,
@@ -386,10 +425,26 @@ fn prepare_production_set_eligibility_with_rent(
         &accounts[3],
         &accounts[4],
         kernel.identity,
-        StrictStateValue::Eligibility(kernel.next),
+        StrictStateKind::Eligibility,
         rent,
     )?;
-    Ok(finish_plan(&active_config, accounts, kernel, lifecycle))
+    let result = set_eligibility(gate, kernel.input)?;
+    if result.eligibility != kernel.projected_next {
+        return Err(ProductionSetEligibilityError::RetainedV2PostimageMismatch);
+    }
+    let lifecycle = seal_production_active_init_if_needed_postimage(
+        gate,
+        binding,
+        constraints,
+        StrictStateValue::Eligibility(result.eligibility),
+    )?;
+    Ok(finish_plan(
+        &active_config,
+        accounts,
+        kernel,
+        result.eligibility,
+        lifecycle,
+    ))
 }
 
 #[cfg(test)]
@@ -500,6 +555,7 @@ mod tests {
         }
     }
 
+    #[derive(Clone, Copy)]
     enum EligibilityShape {
         Existing,
         SystemOwned { lamports: u64 },
@@ -555,7 +611,11 @@ mod tests {
                     };
                     let mut data = [0u8; ELIGIBILITY_ACCOUNT_LEN];
                     encode_eligibility_state(&current, &mut data).unwrap();
-                    (Pubkey::new_from_array(ECONOMY_PROGRAM), 1, data.to_vec())
+                    (
+                        Pubkey::new_from_array(ECONOMY_PROGRAM),
+                        Rent::default().minimum_balance(ELIGIBILITY_ACCOUNT_LEN),
+                        data.to_vec(),
+                    )
                 }
                 EligibilityShape::SystemOwned { lamports } => {
                     (system_program::ID, lamports, Vec::new())
@@ -633,11 +693,13 @@ mod tests {
         });
         let mut fixture = Fixture::new(&binding, EligibilityShape::Existing);
         fixture.with_infos(|accounts| {
-            let prepared = prepare_production_set_eligibility_account_infos(
+            let rent = Rent::default();
+            let prepared = prepare_production_set_eligibility_with_rent(
                 &gate,
                 &binding,
                 &instruction,
                 accounts,
+                Some(&rent),
             )
             .unwrap();
             assert_eq!(prepared.config(), binding.config());
@@ -648,7 +710,10 @@ mod tests {
                 prepared.lifecycle_path(),
                 ProductionInitIfNeededPath::ExistingCas
             );
-            assert_eq!(prepared.rent_minimum_lamports(), None);
+            assert_eq!(
+                prepared.rent_minimum_lamports(),
+                Some(rent.minimum_balance(ELIGIBILITY_ACCOUNT_LEN))
+            );
             assert_eq!(prepared.next().role, 0);
             assert_eq!(prepared.next().agency_index, u32::MAX);
 
@@ -806,12 +871,14 @@ mod tests {
         let mut policy = Fixture::new(&binding, EligibilityShape::Existing);
         let before = policy.eligibility.data.clone();
         policy.with_infos(|accounts| {
+            let rent = Rent::default();
             assert_eq!(
-                prepare_production_set_eligibility_account_infos(
+                prepare_production_set_eligibility_with_rent(
                     &gate,
                     &binding,
                     &disabled_ccc,
                     accounts,
+                    Some(&rent),
                 ),
                 Err(ProductionSetEligibilityError::Economy(
                     EconomyError::CccDlcNotActive
@@ -819,6 +886,133 @@ mod tests {
             );
         });
         assert_eq!(policy.eligibility.data, before);
+    }
+
+    #[test]
+    fn init_if_needed_constraints_precede_retained_role_errors_without_writes() {
+        let binding = binding();
+        let gate = open_gate();
+        let rent = Rent::default();
+        let rent_minimum = rent.minimum_balance(ELIGIBILITY_ACCOUNT_LEN);
+        let invalid_role = encoded(ProductionInstruction::SetEligibility {
+            role: u8::MAX,
+            agency_index: None,
+        });
+
+        let mut existing = Fixture::new(&binding, EligibilityShape::Existing);
+        existing.eligibility.lamports = rent_minimum - 1;
+        let existing_before = existing.eligibility.data.clone();
+        existing.with_infos(|accounts| {
+            assert_eq!(
+                prepare_production_set_eligibility_with_rent(
+                    &gate,
+                    &binding,
+                    &invalid_role,
+                    accounts,
+                    Some(&rent),
+                ),
+                Err(ProductionSetEligibilityError::Lifecycle(
+                    RuntimeAccountLifecycleError::ExistingAccountNotRentExempt
+                ))
+            );
+        });
+        assert_eq!(existing.eligibility.data, existing_before);
+
+        for shape in [
+            EligibilityShape::SystemOwned { lamports: 0 },
+            EligibilityShape::SystemOwned {
+                lamports: rent_minimum / 2,
+            },
+        ] {
+            let mut system_owned = Fixture::new(&binding, shape);
+            system_owned.admin.lamports = 0;
+            let before = (
+                system_owned.admin.lamports,
+                system_owned.eligibility.owner,
+                system_owned.eligibility.lamports,
+                system_owned.eligibility.data.clone(),
+            );
+            system_owned.with_infos(|accounts| {
+                assert_eq!(
+                    prepare_production_set_eligibility_with_rent(
+                        &gate,
+                        &binding,
+                        &invalid_role,
+                        accounts,
+                        Some(&rent),
+                    ),
+                    Err(ProductionSetEligibilityError::Lifecycle(
+                        RuntimeAccountLifecycleError::Native(
+                            NativeAdapterError::InsufficientPayerBalance
+                        )
+                    ))
+                );
+            });
+            assert_eq!(
+                (
+                    system_owned.admin.lamports,
+                    system_owned.eligibility.owner,
+                    system_owned.eligibility.lamports,
+                    system_owned.eligibility.data.clone(),
+                ),
+                before
+            );
+        }
+    }
+
+    #[test]
+    fn unknown_roles_follow_successful_constraints_on_every_init_shape_without_writes() {
+        let binding = binding();
+        let gate = open_gate();
+        let rent = Rent::default();
+        let rent_minimum = rent.minimum_balance(ELIGIBILITY_ACCOUNT_LEN);
+
+        for role in [3, u8::MAX] {
+            let instruction = encoded(ProductionInstruction::SetEligibility {
+                role,
+                agency_index: None,
+            });
+            for shape in [
+                EligibilityShape::Existing,
+                EligibilityShape::SystemOwned { lamports: 0 },
+                EligibilityShape::SystemOwned {
+                    lamports: rent_minimum / 2,
+                },
+            ] {
+                let mut fixture = Fixture::new(&binding, shape);
+                let before = (
+                    fixture.admin.lamports,
+                    fixture.eligibility.owner,
+                    fixture.eligibility.lamports,
+                    fixture.eligibility.data.clone(),
+                );
+                fixture.with_infos(|accounts| {
+                    assert_eq!(
+                        prepare_production_set_eligibility_with_rent(
+                            &gate,
+                            &binding,
+                            &instruction,
+                            accounts,
+                            Some(&rent),
+                        ),
+                        Err(ProductionSetEligibilityError::Economy(
+                            EconomyError::UnknownRole
+                        )),
+                        "role={role}"
+                    );
+                });
+                assert_eq!(
+                    (
+                        fixture.admin.lamports,
+                        fixture.eligibility.owner,
+                        fixture.eligibility.lamports,
+                        fixture.eligibility.data.clone(),
+                    ),
+                    before,
+                    "role={role}"
+                );
+            }
+        }
     }
 
     #[test]
@@ -831,11 +1025,13 @@ mod tests {
         });
         let mut fixture = Fixture::new(&binding, EligibilityShape::Existing);
         fixture.with_infos(|accounts| {
-            let prepared = prepare_production_set_eligibility_account_infos(
+            let rent = Rent::default();
+            let prepared = prepare_production_set_eligibility_with_rent(
                 &gate,
                 &binding,
                 &instruction,
                 accounts,
+                Some(&rent),
             )
             .unwrap();
             let active_config =
@@ -871,7 +1067,10 @@ mod tests {
         assert!(truth.exact_five_account_order_and_flags_required);
         assert!(truth.public_wallet_key_bound);
         assert!(truth.exact_wallet_eligibility_pda_authenticated);
+        assert!(truth.init_if_needed_pre_cpi_facts_precede_retained_v2_body);
+        assert!(truth.existing_eligibility_rent_exemption_required);
         assert!(truth.retained_v2_transition_used);
+        assert!(truth.role_bearing_postimage_sealed_only_after_transition);
         assert!(truth.sealed_existing_or_init_lifecycle_plan_returned);
         assert!(!truth.account_write_executed);
         assert!(!truth.system_cpi_executed);

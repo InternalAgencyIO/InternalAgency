@@ -332,7 +332,7 @@ test("the Rust workspace reports the sole structural economy entrypoint without 
   assert.match(economyRuntimeAccountLifecycleSource, /all_preconditions_checked_before_first_cpi: true/u);
   assert.match(economyRuntimeAccountLifecycleSource, /canonical_internal_pda_signer_seeds_only: true/u);
   assert.match(economyRuntimeAccountLifecycleSource, /system_create_account_supported: true/u);
-  assert.match(economyRuntimeAccountLifecycleSource, /system_allocate_assign_fund_supported: true/u);
+  assert.match(economyRuntimeAccountLifecycleSource, /system_fund_allocate_assign_supported: true/u);
   assert.match(economyRuntimeAccountLifecycleSource, /invoke_signed\(/u);
   assert.match(economyRuntimeAccountLifecycleSource, /token_cpi_supported: false/u);
   assert.match(economyRuntimeAccountLifecycleSource, /entrypoint_exposed: false/u);
