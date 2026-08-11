@@ -398,7 +398,7 @@ fn require_live_preimage(
     expected_len: usize,
     expected_sha256: [u8; 32],
 ) -> Result<(), RuntimeWriteAdapterError> {
-    if data.len() != expected_len || <[u8; 32]>::from(Sha256::digest(data)) != expected_sha256 {
+    if data.len() != expected_len || sha256(data) != expected_sha256 {
         return Err(RuntimeWriteAdapterError::PostValidationPreimageMismatch);
     }
     Ok(())
@@ -429,7 +429,7 @@ fn prepare_production_active_config_stake_principal_cas_inner(
     if data.len() != CONFIG_GENESIS_ACCOUNT_LEN {
         return Err(RuntimeWriteAdapterError::ConfigAccountLengthMismatch);
     }
-    let observed_preimage = <[u8; 32]>::from(Sha256::digest(&*data));
+    let observed_preimage = sha256(&data);
     if observed_preimage != active_config.preimage_sha256() {
         return Err(RuntimeWriteAdapterError::ConfigPreimageMismatch);
     }
@@ -449,7 +449,7 @@ fn prepare_production_active_config_stake_principal_cas_inner(
     let mut postimage = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
     encode_config_genesis_state(&next_state, &mut postimage)
         .map_err(|_| RuntimeWriteAdapterError::ConfigCodecRejected)?;
-    let postimage_sha256 = <[u8; 32]>::from(Sha256::digest(postimage));
+    let postimage_sha256 = sha256(&postimage);
 
     Ok(PreparedConfigStakePrincipalCas {
         postimage,
@@ -560,8 +560,7 @@ fn execute_existing_write_batch_inner<const N: usize>(
         let StateWriteIntent::Existing(existing) = intent else {
             return Err(RuntimeWriteAdapterError::CreateIntentUnsupported);
         };
-        if data.len() != existing.data_len()
-            || <[u8; 32]>::from(Sha256::digest(&***data)) != existing.expected_preimage_sha256()
+        if data.len() != existing.data_len() || sha256(data) != existing.expected_preimage_sha256()
         {
             return Err(RuntimeWriteAdapterError::PostValidationPreimageMismatch);
         }
@@ -581,4 +580,11 @@ fn execute_existing_write_batch_inner<const N: usize>(
             StateWriteIntent::Create(_) => unreachable!("create intents were rejected"),
         }),
     })
+}
+
+fn sha256(data: &[u8]) -> [u8; 32] {
+    let digest = Sha256::digest(data);
+    let mut output = [0u8; 32];
+    output.copy_from_slice(&digest);
+    output
 }

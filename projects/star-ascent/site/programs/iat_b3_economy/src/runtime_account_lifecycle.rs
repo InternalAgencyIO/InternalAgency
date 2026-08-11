@@ -16,22 +16,29 @@ use alloc::vec::Vec;
 use core::array;
 
 use crate::native_adapter::{
-    derive_pda, seal_atomic_write_batch, validate_atomic_write_preconditions,
-    with_pda_signer_seeds, AtomicWriteBatch, CreatePdaLifecycle, NativeAccountObservation,
-    NativeAdapterError, NativeEconomyBinding, PdaIdentity, StateWriteIntent, StrictStateValue,
+    derive_pda, prepare_create_state_account, seal_atomic_write_batch,
+    validate_atomic_write_preconditions, with_pda_signer_seeds, AtomicWriteBatch,
+    CreatePdaLifecycle, NativeAccountObservation, NativeAdapterError, NativeEconomyBinding,
+    PdaIdentity, StateWriteIntent, StrictStateValue,
 };
 use crate::runtime_adapter::{
-    prepare_create_state_account_info, RuntimeAdapterError, RuntimeProductionActiveConfig,
+    authenticate_system_payer_account_info, prepare_create_state_account_info,
+    prepare_existing_state_write_account_info, RuntimeAdapterError, RuntimeProductionActiveConfig,
 };
-use crate::runtime_write_adapter::require_completed_ingress_binding;
+use crate::runtime_write_adapter::{
+    execute_production_active_existing_write_batch_account_infos,
+    require_completed_ingress_binding, RuntimeWriteAdapterError, RuntimeWriteReceipt,
+};
 use crate::stake_ingress::CompletedStakeIngress;
 use crate::ValidatedDailyLawWrite;
 use solana_account_info::AccountInfo;
 use solana_cpi::{invoke, invoke_signed};
 use solana_program_error::ProgramError;
 use solana_pubkey::Pubkey;
+use solana_rent::Rent;
 use solana_sdk_ids::{native_loader, system_program};
 use solana_system_interface::instruction as system_instruction;
+use solana_sysvar::Sysvar;
 
 pub const RUNTIME_ACCOUNT_LIFECYCLE_STATUS: &str =
     "FEATURE_GATED_SEALED_PDA_SYSTEM_CPI_NO_ABI_NO_DISPATCH_MAINNET_HOLD";
@@ -100,6 +107,9 @@ pub enum RuntimeAccountLifecycleError {
     PostCpiDataNotZero,
     ActiveConfigCapabilityMismatch,
     CompletedStakeIngressMismatch,
+    InitIfNeededTargetShapeMismatch,
+    InitIfNeededPlanMismatch,
+    Write(RuntimeWriteAdapterError),
 }
 
 impl From<NativeAdapterError> for RuntimeAccountLifecycleError {
@@ -111,6 +121,12 @@ impl From<NativeAdapterError> for RuntimeAccountLifecycleError {
 impl From<RuntimeAdapterError> for RuntimeAccountLifecycleError {
     fn from(value: RuntimeAdapterError) -> Self {
         Self::Runtime(value)
+    }
+}
+
+impl From<RuntimeWriteAdapterError> for RuntimeAccountLifecycleError {
+    fn from(value: RuntimeWriteAdapterError) -> Self {
+        Self::Write(value)
     }
 }
 
@@ -128,6 +144,84 @@ impl<const N: usize> RuntimeAccountLifecycleReceipt<N> {
     pub const fn postimage_sha256(&self) -> &[[u8; 32]; N] {
         &self.postimage_sha256
     }
+}
+
+pub const PRODUCTION_INIT_IF_NEEDED_STATUS: &str =
+    "HANDLER_NEUTRAL_EXISTING_OR_VACANT_OR_PREFUNDED_RUNTIME_RENT_CPI_HARNESS_MAINNET_HOLD";
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ProductionInitIfNeededTruth {
+    pub handler_neutral: bool,
+    pub production_active_config_required: bool,
+    pub active_config_admin_payer_required: bool,
+    pub exact_system_program_required: bool,
+    pub exact_existing_program_owned_cas_path: bool,
+    pub exact_vacant_system_owned_create_path: bool,
+    pub exact_prefunded_system_owned_allocate_assign_fund_path: bool,
+    pub runtime_rent_sysvar_required_for_creation: bool,
+    pub target_shape_selected_from_account_facts: bool,
+    pub caller_path_selector_accepted: bool,
+    pub production_dispatcher_exposed: bool,
+    pub production_entrypoint_exposed: bool,
+    pub any_handler_complete: bool,
+    pub mainnet_hold: bool,
+}
+
+pub const PRODUCTION_INIT_IF_NEEDED_TRUTH: ProductionInitIfNeededTruth =
+    ProductionInitIfNeededTruth {
+        handler_neutral: true,
+        production_active_config_required: true,
+        active_config_admin_payer_required: true,
+        exact_system_program_required: true,
+        exact_existing_program_owned_cas_path: true,
+        exact_vacant_system_owned_create_path: true,
+        exact_prefunded_system_owned_allocate_assign_fund_path: true,
+        runtime_rent_sysvar_required_for_creation: true,
+        target_shape_selected_from_account_facts: true,
+        caller_path_selector_accepted: false,
+        production_dispatcher_exposed: false,
+        production_entrypoint_exposed: false,
+        any_handler_complete: false,
+        mainnet_hold: true,
+    };
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum ProductionInitIfNeededPath {
+    ExistingCas,
+    CreateAccount,
+    AllocateAssignAndFund,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct PreparedProductionInitIfNeeded {
+    path: ProductionInitIfNeededPath,
+    payer: [u8; 32],
+    rent_minimum_lamports: Option<u64>,
+    batch: AtomicWriteBatch<1>,
+}
+
+impl PreparedProductionInitIfNeeded {
+    pub const fn path(&self) -> ProductionInitIfNeededPath {
+        self.path
+    }
+
+    pub const fn payer(&self) -> [u8; 32] {
+        self.payer
+    }
+
+    pub const fn rent_minimum_lamports(&self) -> Option<u64> {
+        self.rent_minimum_lamports
+    }
+
+    pub const fn batch_commitment_sha256(&self) -> [u8; 32] {
+        self.batch.commitment_sha256()
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum ProductionInitIfNeededReceipt {
+    ExistingCas(RuntimeWriteReceipt<1>),
+    Created(RuntimeAccountLifecycleReceipt<1>),
 }
 
 trait SystemCpiInvoker {
@@ -270,6 +364,233 @@ pub fn execute_create_state_batch_account_infos<'a, const N: usize>(
         system,
         &mut SolanaSystemCpi,
     )
+}
+
+/// Prepare one handler-neutral `init_if_needed` state mutation from observed
+/// account facts. Program-owned strict state selects existing-state CAS.
+/// System-owned empty state selects canonical PDA creation, and only that path
+/// reads the runtime Rent sysvar. No caller-provided path selector is accepted.
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+pub fn prepare_production_active_init_if_needed_account_infos(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    payer: &AccountInfo<'_>,
+    target: &AccountInfo<'_>,
+    system: &AccountInfo<'_>,
+    identity: PdaIdentity,
+    next: StrictStateValue,
+) -> Result<PreparedProductionInitIfNeeded, RuntimeAccountLifecycleError> {
+    // Preserve the production prerequisite order before consulting Rent: an
+    // unrelated/forged target cannot use the sysvar read to mask a stale Law,
+    // Config, admin, or System Program failure.
+    require_active_config_capability(gate, active_config, binding)?;
+    require_system_program(system)?;
+    authenticate_system_payer_account_info(
+        gate,
+        binding,
+        payer,
+        active_config.state().config.admin,
+    )?;
+    if target.owner.to_bytes() == binding.program_id() {
+        return prepare_production_active_init_if_needed_with_rent(
+            gate,
+            active_config,
+            binding,
+            payer,
+            target,
+            system,
+            identity,
+            next,
+            None,
+        );
+    }
+    if target.owner.to_bytes() != system_program::ID.to_bytes() {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededTargetShapeMismatch);
+    }
+    let rent = Rent::get().map_err(|_| {
+        RuntimeAccountLifecycleError::Runtime(RuntimeAdapterError::RentSysvarUnavailable)
+    })?;
+    prepare_production_active_init_if_needed_with_rent(
+        gate,
+        active_config,
+        binding,
+        payer,
+        target,
+        system,
+        identity,
+        next,
+        Some(&rent),
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn prepare_production_active_init_if_needed_with_rent(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    payer: &AccountInfo<'_>,
+    target: &AccountInfo<'_>,
+    system: &AccountInfo<'_>,
+    identity: PdaIdentity,
+    next: StrictStateValue,
+    rent: Option<&Rent>,
+) -> Result<PreparedProductionInitIfNeeded, RuntimeAccountLifecycleError> {
+    require_active_config_capability(gate, active_config, binding)?;
+    require_system_program(system)?;
+    let expected_payer = active_config.state().config.admin;
+    let authenticated_payer =
+        authenticate_system_payer_account_info(gate, binding, payer, expected_payer)?;
+
+    let (path, rent_minimum_lamports, intent) = if target.owner.to_bytes() == binding.program_id() {
+        if rent.is_some() {
+            return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+        }
+        let intent =
+            prepare_existing_state_write_account_info(gate, binding, target, identity, next)?;
+        (ProductionInitIfNeededPath::ExistingCas, None, intent)
+    } else if target.owner.to_bytes() == system_program::ID.to_bytes() {
+        let rent = rent.ok_or(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch)?;
+        let rent_minimum_lamports = rent.minimum_balance(next.kind().account_len());
+        let target_lamports = target
+            .try_borrow_lamports()
+            .map_err(|_| RuntimeAccountLifecycleError::AccountBorrowFailed)?;
+        let target_data = target
+            .try_borrow_data()
+            .map_err(|_| RuntimeAccountLifecycleError::AccountBorrowFailed)?;
+        let intent = prepare_create_state_account(
+            gate,
+            binding,
+            &authenticated_payer,
+            NativeAccountObservation {
+                key: target.key.to_bytes(),
+                owner: target.owner.to_bytes(),
+                lamports: **target_lamports,
+                data: &target_data,
+                is_signer: target.is_signer,
+                is_writable: target.is_writable,
+                executable: target.executable,
+            },
+            identity,
+            next,
+            rent_minimum_lamports,
+        )?;
+        let StateWriteIntent::Create(create) = intent else {
+            return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+        };
+        let path = match create.lifecycle() {
+            CreatePdaLifecycle::CreateAccount => ProductionInitIfNeededPath::CreateAccount,
+            CreatePdaLifecycle::AllocateAssignAndFund => {
+                ProductionInitIfNeededPath::AllocateAssignAndFund
+            }
+        };
+        (path, Some(rent_minimum_lamports), intent)
+    } else {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededTargetShapeMismatch);
+    };
+
+    Ok(PreparedProductionInitIfNeeded {
+        path,
+        payer: authenticated_payer.key(),
+        rent_minimum_lamports,
+        batch: seal_atomic_write_batch(gate, binding, [intent])?,
+    })
+}
+
+/// Execute only the path selected by the sealed read-only preparation above.
+/// Existing state uses the all-preimages-before-first-write CAS executor;
+/// vacant/prefunded state uses the System CPI lifecycle and therefore relies on
+/// Solana transaction rollback after the first CPI.
+#[inline(never)]
+pub fn execute_production_active_init_if_needed_account_infos<'a>(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    prepared: PreparedProductionInitIfNeeded,
+    payer: &AccountInfo<'a>,
+    target: &AccountInfo<'a>,
+    system: &AccountInfo<'a>,
+) -> Result<ProductionInitIfNeededReceipt, RuntimeAccountLifecycleError> {
+    execute_production_active_init_if_needed_with(
+        gate,
+        active_config,
+        binding,
+        prepared,
+        payer,
+        target,
+        system,
+        &mut SolanaSystemCpi,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn execute_production_active_init_if_needed_with<'a>(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    prepared: PreparedProductionInitIfNeeded,
+    payer: &AccountInfo<'a>,
+    target: &AccountInfo<'a>,
+    system: &AccountInfo<'a>,
+    invoker: &mut impl SystemCpiInvoker,
+) -> Result<ProductionInitIfNeededReceipt, RuntimeAccountLifecycleError> {
+    require_active_config_capability(gate, active_config, binding)?;
+    require_system_program(system)?;
+    let expected_payer = active_config.state().config.admin;
+    if prepared.payer != expected_payer || payer.key.to_bytes() != expected_payer {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    }
+    authenticate_system_payer_account_info(gate, binding, payer, expected_payer)?;
+
+    match (prepared.path, prepared.batch.intents()[0]) {
+        (ProductionInitIfNeededPath::ExistingCas, StateWriteIntent::Existing(_)) => {
+            if prepared.rent_minimum_lamports.is_some() {
+                return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+            }
+            let receipt = execute_production_active_existing_write_batch_account_infos(
+                gate,
+                active_config,
+                binding,
+                prepared.batch,
+                core::slice::from_ref(target),
+            )?;
+            Ok(ProductionInitIfNeededReceipt::ExistingCas(receipt))
+        }
+        (ProductionInitIfNeededPath::CreateAccount, StateWriteIntent::Create(create))
+            if create.lifecycle() == CreatePdaLifecycle::CreateAccount
+                && prepared.rent_minimum_lamports == Some(create.rent_minimum_lamports()) =>
+        {
+            let receipt = execute_production_active_create_state_batch_with(
+                gate,
+                active_config,
+                binding,
+                prepared.batch,
+                core::slice::from_ref(target),
+                core::slice::from_ref(payer),
+                system,
+                invoker,
+            )?;
+            Ok(ProductionInitIfNeededReceipt::Created(receipt))
+        }
+        (ProductionInitIfNeededPath::AllocateAssignAndFund, StateWriteIntent::Create(create))
+            if create.lifecycle() == CreatePdaLifecycle::AllocateAssignAndFund
+                && prepared.rent_minimum_lamports == Some(create.rent_minimum_lamports()) =>
+        {
+            let receipt = execute_production_active_create_state_batch_with(
+                gate,
+                active_config,
+                binding,
+                prepared.batch,
+                core::slice::from_ref(target),
+                core::slice::from_ref(payer),
+                system,
+                invoker,
+            )?;
+            Ok(ProductionInitIfNeededReceipt::Created(receipt))
+        }
+        _ => Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch),
+    }
 }
 
 fn require_active_config_capability(
@@ -610,7 +931,9 @@ fn execute_create_state_batch_with<'a, const N: usize>(
     })
 }
 
-fn require_system_program(system: &AccountInfo<'_>) -> Result<(), RuntimeAccountLifecycleError> {
+pub(crate) fn require_system_program(
+    system: &AccountInfo<'_>,
+) -> Result<(), RuntimeAccountLifecycleError> {
     if system.key != &system_program::ID {
         return Err(RuntimeAccountLifecycleError::SystemProgramKeyMismatch);
     }
@@ -638,12 +961,12 @@ mod tests {
     };
     use crate::stake_ingress::{DelegateSnapshot, SourceTokenState};
     use crate::{
-        decode_eligibility_state, encode_config_genesis_state,
+        decode_eligibility_state, encode_config_genesis_state, encode_eligibility_state,
         runtime_adapter::authenticate_production_active_config_account_info, verify_daily_law_open,
         CanonicalDailyLawBinding, ConfigGenesisState, ConfigState, EligibilityState, GenesisPhase,
         LaneState, PositionState, ReadonlyDailyLawAccount, ReadonlyTokenState,
-        CONFIG_GENESIS_ACCOUNT_LEN, ECOSYSTEM, LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION,
-        LIQUIDITY, MAINNET_SUPPLY, TREASURY,
+        CONFIG_GENESIS_ACCOUNT_LEN, ECOSYSTEM, ELIGIBILITY_ACCOUNT_LEN, LAW_STATE_LEN,
+        LAW_STATE_MAGIC, LAW_STATE_VERSION, LIQUIDITY, MAINNET_SUPPLY, TREASURY,
     };
     use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day, SolanaDailyDecision};
     use solana_sdk_ids::system_program;
@@ -657,6 +980,7 @@ mod tests {
     const OPERATOR_A: [u8; 32] = [0xA1; 32];
     const OPERATOR_B: [u8; 32] = [0xA2; 32];
     const PAYER: [u8; 32] = [0x77; 32];
+    const ADMIN: [u8; 32] = [0x21; 32];
     const CLOCK_TIMESTAMP: i64 = 1_786_050_060;
 
     fn binding() -> NativeEconomyBinding {
@@ -681,7 +1005,7 @@ mod tests {
         let state = ConfigGenesisState {
             phase: GenesisPhase::Active,
             config: ConfigState {
-                admin: [0x21; 32],
+                admin: ADMIN,
                 mint: MINT,
                 token_program: [0x33; 32],
                 randomness_program: [0x44; 32],
@@ -989,6 +1313,362 @@ mod tests {
             **target.try_borrow_mut_lamports()? += lamports;
             Ok(())
         }
+    }
+
+    fn eligibility(
+        binding: &NativeEconomyBinding,
+        wallet: [u8; 32],
+        role: u8,
+        agency_index: u32,
+    ) -> (PdaIdentity, EligibilityState, Vec<u8>) {
+        let identity = PdaIdentity::Eligibility {
+            config: binding.config(),
+            operator: wallet,
+        };
+        let state = EligibilityState {
+            config: binding.config(),
+            wallet,
+            agency_index,
+            role,
+            bump: derive_pda(binding, identity).unwrap().bump,
+        };
+        let mut data = [0u8; ELIGIBILITY_ACCOUNT_LEN];
+        encode_eligibility_state(&state, &mut data).unwrap();
+        (identity, state, data.to_vec())
+    }
+
+    #[test]
+    fn init_if_needed_existing_state_uses_cas_without_reading_rent_or_invoking_cpi() {
+        let binding = binding();
+        let gate = open_gate();
+        let active_config = production_active_config(&gate, &binding);
+        let (identity, _, mut target_data) = eligibility(&binding, OPERATOR_A, 1, 7);
+        let (_, next, _) = eligibility(&binding, OPERATOR_A, 0, u32::MAX);
+        let target_key = Pubkey::new_from_array(derive_pda(&binding, identity).unwrap().key);
+        let target_owner = Pubkey::new_from_array(ECONOMY_PROGRAM);
+        let mut target_lamports = 100;
+        let target = AccountInfo::new(
+            &target_key,
+            false,
+            true,
+            &mut target_lamports,
+            &mut target_data,
+            &target_owner,
+            false,
+        );
+
+        let admin_key = Pubkey::new_from_array(ADMIN);
+        let admin_owner = system_program::ID;
+        let mut admin_lamports = 1_000_000;
+        let mut admin_data = [];
+        let admin = AccountInfo::new(
+            &admin_key,
+            true,
+            true,
+            &mut admin_lamports,
+            &mut admin_data,
+            &admin_owner,
+            false,
+        );
+        let native_owner = native_loader::ID;
+        let mut system_lamports = 1;
+        let mut system_data = [];
+        let system = AccountInfo::new(
+            &system_program::ID,
+            false,
+            false,
+            &mut system_lamports,
+            &mut system_data,
+            &native_owner,
+            true,
+        );
+
+        // The public preparation succeeds on a host without a Rent sysvar,
+        // proving the existing branch never consults Rent.
+        let prepared = prepare_production_active_init_if_needed_account_infos(
+            &gate,
+            &active_config,
+            &binding,
+            &admin,
+            &target,
+            &system,
+            identity,
+            StrictStateValue::Eligibility(next),
+        )
+        .unwrap();
+        assert_eq!(prepared.path(), ProductionInitIfNeededPath::ExistingCas);
+        assert_eq!(prepared.payer(), ADMIN);
+        assert_eq!(prepared.rent_minimum_lamports(), None);
+
+        let mut invoker = MockSystemCpi::default();
+        let receipt = execute_production_active_init_if_needed_with(
+            &gate,
+            &active_config,
+            &binding,
+            prepared,
+            &admin,
+            &target,
+            &system,
+            &mut invoker,
+        )
+        .unwrap();
+        assert!(matches!(
+            receipt,
+            ProductionInitIfNeededReceipt::ExistingCas(_)
+        ));
+        assert!(invoker.calls.is_empty());
+        assert_eq!(
+            decode_eligibility_state(&target.try_borrow_data().unwrap()).unwrap(),
+            next
+        );
+    }
+
+    fn assert_init_if_needed_creation_path(
+        current_lamports: u64,
+        expected_path: ProductionInitIfNeededPath,
+    ) {
+        let binding = binding();
+        let gate = open_gate();
+        let active_config = production_active_config(&gate, &binding);
+        let (identity, next, _) = eligibility(&binding, OPERATOR_B, 0, u32::MAX);
+        let target_key = Pubkey::new_from_array(derive_pda(&binding, identity).unwrap().key);
+        let target_owner = system_program::ID;
+        let mut target_lamports = current_lamports;
+        let mut target_data = [];
+        let target = AccountInfo::new(
+            &target_key,
+            false,
+            true,
+            &mut target_lamports,
+            &mut target_data,
+            &target_owner,
+            false,
+        );
+
+        let rent = Rent::default();
+        let rent_minimum = rent.minimum_balance(ELIGIBILITY_ACCOUNT_LEN);
+        let funding_lamports = rent_minimum.saturating_sub(current_lamports);
+        let admin_key = Pubkey::new_from_array(ADMIN);
+        let admin_owner = system_program::ID;
+        let mut admin_lamports = rent_minimum + 1_000_000;
+        let initial_admin_lamports = admin_lamports;
+        let mut admin_data = [];
+        let admin = AccountInfo::new(
+            &admin_key,
+            true,
+            true,
+            &mut admin_lamports,
+            &mut admin_data,
+            &admin_owner,
+            false,
+        );
+        let native_owner = native_loader::ID;
+        let mut system_lamports = 1;
+        let mut system_data = [];
+        let system = AccountInfo::new(
+            &system_program::ID,
+            false,
+            false,
+            &mut system_lamports,
+            &mut system_data,
+            &native_owner,
+            true,
+        );
+
+        let prepared = prepare_production_active_init_if_needed_with_rent(
+            &gate,
+            &active_config,
+            &binding,
+            &admin,
+            &target,
+            &system,
+            identity,
+            StrictStateValue::Eligibility(next),
+            Some(&rent),
+        )
+        .unwrap();
+        assert_eq!(prepared.path(), expected_path);
+        assert_eq!(prepared.rent_minimum_lamports(), Some(rent_minimum));
+
+        let mut invoker = MockSystemCpi::default();
+        let receipt = execute_production_active_init_if_needed_with(
+            &gate,
+            &active_config,
+            &binding,
+            prepared,
+            &admin,
+            &target,
+            &system,
+            &mut invoker,
+        )
+        .unwrap();
+        assert!(matches!(receipt, ProductionInitIfNeededReceipt::Created(_)));
+        assert_eq!(target.owner.to_bytes(), ECONOMY_PROGRAM);
+        assert_eq!(target.lamports(), current_lamports + funding_lamports);
+        assert_eq!(admin.lamports(), initial_admin_lamports - funding_lamports);
+        assert_eq!(
+            decode_eligibility_state(&target.try_borrow_data().unwrap()).unwrap(),
+            next
+        );
+        match expected_path {
+            ProductionInitIfNeededPath::CreateAccount => {
+                assert!(matches!(
+                    invoker.calls.as_slice(),
+                    [MockCall::Create { .. }]
+                ));
+            }
+            ProductionInitIfNeededPath::AllocateAssignAndFund => {
+                if funding_lamports == 0 {
+                    assert!(matches!(
+                        invoker.calls.as_slice(),
+                        [MockCall::Allocate { .. }, MockCall::Assign { .. }]
+                    ));
+                } else {
+                    assert!(matches!(
+                        invoker.calls.as_slice(),
+                        [
+                            MockCall::Allocate { .. },
+                            MockCall::Assign { .. },
+                            MockCall::Transfer { .. }
+                        ]
+                    ));
+                }
+            }
+            ProductionInitIfNeededPath::ExistingCas => unreachable!(),
+        }
+    }
+
+    #[test]
+    fn init_if_needed_vacant_and_prefunded_paths_use_exact_rent_and_cpi_sequences() {
+        let rent_minimum = Rent::default().minimum_balance(ELIGIBILITY_ACCOUNT_LEN);
+        assert_init_if_needed_creation_path(0, ProductionInitIfNeededPath::CreateAccount);
+        assert_init_if_needed_creation_path(
+            rent_minimum / 2,
+            ProductionInitIfNeededPath::AllocateAssignAndFund,
+        );
+        assert_init_if_needed_creation_path(
+            rent_minimum + 1,
+            ProductionInitIfNeededPath::AllocateAssignAndFund,
+        );
+    }
+
+    #[test]
+    fn init_if_needed_rejects_creation_without_rent_and_unrecognized_target_owners() {
+        let binding = binding();
+        let gate = open_gate();
+        let active_config = production_active_config(&gate, &binding);
+        let (identity, next, _) = eligibility(&binding, OPERATOR_A, 0, u32::MAX);
+        let target_key = Pubkey::new_from_array(derive_pda(&binding, identity).unwrap().key);
+        let mut target_lamports = 0;
+        let mut target_data = [];
+        let target_owner = system_program::ID;
+        let target = AccountInfo::new(
+            &target_key,
+            false,
+            true,
+            &mut target_lamports,
+            &mut target_data,
+            &target_owner,
+            false,
+        );
+        let admin_key = Pubkey::new_from_array(ADMIN);
+        let admin_owner = system_program::ID;
+        let mut admin_lamports = 1_000_000;
+        let mut admin_data = [];
+        let admin = AccountInfo::new(
+            &admin_key,
+            true,
+            true,
+            &mut admin_lamports,
+            &mut admin_data,
+            &admin_owner,
+            false,
+        );
+        let native_owner = native_loader::ID;
+        let mut system_lamports = 1;
+        let mut system_data = [];
+        let system = AccountInfo::new(
+            &system_program::ID,
+            false,
+            false,
+            &mut system_lamports,
+            &mut system_data,
+            &native_owner,
+            true,
+        );
+        assert_eq!(
+            prepare_production_active_init_if_needed_account_infos(
+                &gate,
+                &active_config,
+                &binding,
+                &admin,
+                &target,
+                &system,
+                identity,
+                StrictStateValue::Eligibility(next),
+            ),
+            Err(RuntimeAccountLifecycleError::Runtime(
+                RuntimeAdapterError::RentSysvarUnavailable
+            ))
+        );
+        assert_eq!(
+            prepare_production_active_init_if_needed_with_rent(
+                &gate,
+                &active_config,
+                &binding,
+                &admin,
+                &target,
+                &system,
+                identity,
+                StrictStateValue::Eligibility(next),
+                None,
+            ),
+            Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch)
+        );
+
+        let hostile_owner = Pubkey::new_from_array([0x88; 32]);
+        let hostile = AccountInfo::new(
+            &target_key,
+            false,
+            true,
+            &mut target_lamports,
+            &mut target_data,
+            &hostile_owner,
+            false,
+        );
+        assert_eq!(
+            prepare_production_active_init_if_needed_account_infos(
+                &gate,
+                &active_config,
+                &binding,
+                &admin,
+                &hostile,
+                &system,
+                identity,
+                StrictStateValue::Eligibility(next),
+            ),
+            Err(RuntimeAccountLifecycleError::InitIfNeededTargetShapeMismatch)
+        );
+    }
+
+    #[test]
+    fn init_if_needed_truth_is_handler_neutral_and_unconditionally_held() {
+        let truth = PRODUCTION_INIT_IF_NEEDED_TRUTH;
+        assert!(truth.handler_neutral);
+        assert!(truth.production_active_config_required);
+        assert!(truth.active_config_admin_payer_required);
+        assert!(truth.exact_system_program_required);
+        assert!(truth.exact_existing_program_owned_cas_path);
+        assert!(truth.exact_vacant_system_owned_create_path);
+        assert!(truth.exact_prefunded_system_owned_allocate_assign_fund_path);
+        assert!(truth.runtime_rent_sysvar_required_for_creation);
+        assert!(truth.target_shape_selected_from_account_facts);
+        assert!(!truth.caller_path_selector_accepted);
+        assert!(!truth.production_dispatcher_exposed);
+        assert!(!truth.production_entrypoint_exposed);
+        assert!(!truth.any_handler_complete);
+        assert!(truth.mainnet_hold);
+        assert!(PRODUCTION_INIT_IF_NEEDED_STATUS.contains("MAINNET_HOLD"));
     }
 
     #[test]

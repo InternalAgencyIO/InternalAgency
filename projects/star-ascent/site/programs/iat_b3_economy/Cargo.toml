@@ -37,9 +37,27 @@ runtime-token-2022-stake-ingress = [
     "dep:solana-program-error",
     "dep:spl-transfer-hook-interface",
 ]
+runtime-production-claim-lane-principal = [
+    "runtime-write-adapter",
+    "runtime-token-2022-stake-ingress",
+]
+runtime-production-claim-lane-principal-executor = [
+    "runtime-production-claim-lane-principal",
+]
 runtime-production-open-position = [
     "runtime-account-lifecycle",
     "runtime-token-2022-stake-ingress",
+]
+runtime-production-settle-position-week = [
+    "runtime-write-adapter",
+    "runtime-token-2022-stake-ingress",
+]
+runtime-production-settle-position-week-executor = [
+    "runtime-production-settle-position-week",
+]
+runtime-production-withdraw-position = ["runtime-token-2022-stake-ingress"]
+runtime-production-withdraw-position-executor = [
+    "runtime-production-withdraw-position",
 ]
 sbf-preflight-entrypoint = [
     "runtime-account-bridge",
