@@ -328,20 +328,38 @@
     "publicSafety": "Use fictional public-safe fashion references only. No copied airline, military, police, coast-guard, space-agency, or emergency-service uniforms or insignia. No combat, raids, arrests, threats, injury, emergency peril, fetish framing, or explicit content."
   },
   "throughputAcceptanceOverride": {
-    "active": true,
+    "active": false,
     "startingBatch": 336,
+    "activeThroughBatch": 381,
+    "supersededAt": "2026-08-11T07:22:46.656Z",
+    "supersededBy": "continuousFourSceneCountryGate",
     "requestedAt": "2026-08-10T10:08:00Z",
-    "intent": "Pump country batches forward quickly and accept almost every usable render.",
-    "defaultDecision": "Accept and log deviations.",
-    "rawPass": "Prefer one raw render pass. Do not spend a recovery pass on aesthetic weakness, imperfect choreography, weak outfit originality, partial motif coverage, minor hand ambiguity, garment length drift, mascot omission, odd-prop omission, or incomplete theme-location fusion.",
-    "rejectOnly": "Reject only a missing core woman, explicit or prohibited sexual content, a decisive mission-prop line toward a person or animal, visible firing or ammunition, or a glaring extra whole limb or duplicated person that makes the image unusable.",
-    "xEligibility": "Any two accepted current-country images qualify for the normal X publishing rule. Logged tolerances do not reduce X eligibility."
+    "intent": "Historical Batch 336 through Batch 381 rule that pumped country batches forward quickly and accepted almost every usable render.",
+    "defaultDecision": "Historical only through Batch 381. Do not apply this override to Batch 382 or later.",
+    "rawPass": "Historical only through Batch 381. Batch 382 onward follows continuousFourSceneCountryGate.",
+    "rejectOnly": "Historical only through Batch 381. Batch 382 onward follows the complete contract and strict acceptance gates.",
+    "xEligibility": "Historical only through Batch 381. Batch 382 onward requires four accepted current-country scenes before publication."
+  },
+  "continuousFourSceneCountryGate": {
+    "active": true,
+    "activeFromBatch": 382,
+    "requestedAt": "2026-08-11T07:22:46.656Z",
+    "startingCountry": "Georgia",
+    "intent": "Keep rendering, X publication, Git checkpoints, and country advancement synchronized with one complete four-scene country at a time.",
+    "countryCompletionDefinition": "A country is complete only when each of its four planned scene numbers has exactly one accepted current-country asset, the narrow checkpoint and directly related contract or ledger updates are committed and pushed to agent/iat-launch-window-recovery-batch-220, and the country X post is publicly verified with its status URL recorded in both checkpoint and publishing ledger.",
+    "noAdvanceRule": "Never open, roll, render, checkpoint as terminal, or advance to the next country while the active country has fewer than four accepted scenes, an unpushed country checkpoint, or an unpublished or unverified X post. Terminal zero-accepted and terminal partially-accepted outcomes are forbidden from Batch 382 onward.",
+    "renderContinuation": "Preserve every raw output and every accepted scene. Rerender only missing or rejected scenes. A scene may receive at most one recovery pass within one render round, but later guardian wakes may start a fresh round for the still-active scene. Continue the same country across wakes until all four scenes are accepted.",
+    "acceptanceRule": "Apply every active contract field and strict anatomy, identity, safety, romance, mascot, odd-prop, theme-location, and outfit-originality gates. Do not lower the gate merely to advance the queue.",
+    "xEligibility": "Exactly four accepted current-country scene assets are required before composing the country post. Keep the existing deterministic caption and attachment rules, verify the live status, record its URL, and never duplicate media already present on the signed-in account.",
+    "xBacklogRule": "At every wake reconcile the local ledger against the signed-in live X profile before posting. Drain every eligible unposted historical entry without duplication, then publish the completed active country before any country advance. An X platform or session failure keeps the active country open and must be retried; it is not permission to skip posting.",
+    "gitCadence": "Push every coherent contract repair and every narrow country progress or completion checkpoint promptly. Stage only the active batch, directly requested contract or publishing-ledger updates, and accepted assets for that batch; leave unrelated dirty files untouched.",
+    "historicalBoundary": "Do not rewrite or reopen Batch 381 or earlier solely because it ended with zero or partial acceptance. The strict four-scene completion gate begins with Georgia Batch 382."
   },
   "anatomyIntegrity": {
     "requiredEveryImage": true,
     "limbCount": "In standard scenes render exactly four adult characters with exactly two arms and two hands per character, eight arms and eight hands total. In the selected male-model scene render exactly five adult characters with exactly two arms and two hands per character, ten arms and ten hands total. Every character also has anatomically correct legs and feet. Never create an extra, duplicated, floating, fused, borrowed, ownerless, or partially emerging hand, arm, finger cluster, leg, or foot.",
     "contactClarity": "Every affectionate contact must have an unambiguous owner. Trace each visible arm continuously from shoulder through elbow and wrist to one hand. Keep overlapping hugs readable through clean silhouettes and natural occlusion.",
-    "acceptanceGate": "Audit every character for gross anatomy, but apply the Batch 336 throughput override. Accept natural occlusion, minor finger defects, partially hidden hands, and ambiguous overlapping contacts as logged tolerances. Reject only a glaring extra whole limb, duplicated person, missing core cast member, or anatomy failure that makes the image plainly unusable."
+    "acceptanceGate": "Audit every character for gross anatomy. The Batch 336 throughput override applies only through Batch 381. From Batch 382 onward require exactly eight traceable human arms and eight traceable human hands in four-person scenes and exactly ten of each in the selected male scene; reject every extra, duplicated, floating, fused, borrowed, emerging, missing, or ambiguous limb or finger cluster."
   },
   "frame": "9:16 full-length cinematic editorial with complete faces, hands, heels or boots, country landmark, and readable mission action"
 }
