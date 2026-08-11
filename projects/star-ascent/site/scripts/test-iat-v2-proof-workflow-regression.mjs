@@ -138,6 +138,24 @@ function validateConfiguration(workflowText, scripts) {
   ) {
     fail("B3 law SBF step must build the exact pinned combined-hook fixture offline and without deployment");
   }
+  const combinedPrefetchStart = workflowText.indexOf(
+    "      - name: Prefetch the locked B3 combined-law crate graph\n",
+  );
+  const combinedPrefetchStep = combinedPrefetchStart >= 0 && combinedBuildStart > combinedPrefetchStart
+    ? workflowText.slice(combinedPrefetchStart, combinedBuildStart)
+    : "";
+  const requiredCombinedPrefetchBindings = [
+    "run: >-",
+    "cargo +1.97.1 fetch",
+    "--locked",
+    "--manifest-path programs/iat_b3_law/Cargo.toml",
+  ];
+  if (
+    combinedPrefetchStep.length === 0
+    || requiredCombinedPrefetchBindings.some((binding) => !combinedPrefetchStep.includes(binding))
+  ) {
+    fail("B3 law SBF inputs must be checksum-prefetched from the exact locked manifest before the offline build");
+  }
 
   if (orderedPositions.some((position) => position === -1)) {
     const missing = requiredOrderedCommands.filter((_, index) => orderedPositions[index] === -1);
@@ -511,6 +529,14 @@ const mutationProbes = [
   {
     name: "missing combined-law SBF feature",
     workflow: workflow.replace("            --features production-combined-hook \\\n", ""),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "unlocked combined-law crate prefetch",
+    workflow: workflow.replace(
+      "          cargo +1.97.1 fetch\n          --locked\n",
+      "          cargo +1.97.1 fetch\n",
+    ),
     scripts: packageJson.scripts,
   },
   {
