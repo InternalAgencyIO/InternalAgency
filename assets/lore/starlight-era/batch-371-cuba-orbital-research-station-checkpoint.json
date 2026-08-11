@@ -1,0 +1,1650 @@
+{
+  "batch": 371,
+  "country": "Cuba",
+  "status": "terminal-partially-accepted",
+  "sourceCommit": "d682a1fb381143b489ffb96582cfe07070af41e6",
+  "contractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "rollMethod": "FNV-1a over the recorded batch371-cuba keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 359 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "hardLoveBeat": "0-14 lap sitting; 15-29 partner dance; 30-44 controlled dip; 45-59 seated embrace; 60-74 three-person slow dance; 75-89 pulled-away choice; 90-99 seated-to-standing assist",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "cinematicTheme": {
+    "active": "orbital research-station couture",
+    "batchOrdinalWithinTheme": 1,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "nextQueueCountry": "Czechia",
+  "nextQueueBatch": 372,
+  "nextQueueScenes": [
+    1508,
+    1509,
+    1510,
+    1511
+  ],
+  "nextCinematicTheme": {
+    "active": "orbital research-station couture",
+    "batchOrdinalWithinTheme": 2
+  },
+  "researchSources": [
+    {
+      "url": "https://whc.unesco.org/en/list/204/",
+      "usedFor": "Old Havana architecture and harbor setting"
+    },
+    {
+      "url": "https://www.britannica.com/place/Cuba",
+      "usedFor": "Cuba geography, cities and coasts"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/460/",
+      "usedFor": "Trinidad urban architecture and valley setting"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/840/",
+      "usedFor": "Viñales Valley mogotes and agricultural landscape"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch371-cuba-male-model-scene",
+    "fullHash": 1925890089,
+    "roll": 89,
+    "selectedScenePosition": 2,
+    "selectedScene": 1505,
+    "maleEmotion": {
+      "key": "batch371-cuba-scene2-male-emotion",
+      "roll": 87,
+      "result": "fear and urgent vulnerability"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Cuba flag, coat of arms, official seal, sacred symbol, copied ceremonial or traditional pattern, political messaging, copied military identity, or official service identity is used. Country-led scenes use large dimensional secular Malecón curves, Havana rooflines, Trinidad cobbles, colonial arcades, Viñales mogotes, bay arcs and mountain silhouettes instead.",
+    "palette": "Havana coral, Malecón cobalt, colonial limestone, Trinidad ochre, Viñales emerald, mogote graphite, Santiago turquoise, orbital pearl, station silver and aurora cyan",
+    "minimumCoverage": "Scenes 1504 and 1505 each carry hard large Cuba motifs on three women and orbital-station construction language on at least two. Scenes 1506 and 1507 use four different theme-led orbital-research outfits without country map prints while Cuba landmarks remain equally foregrounded.",
+    "cultureScene": "The scenes foreground Havana, Trinidad, Viñales Valley, and Santiago de Cuba Bay.",
+    "prohibitions": "Use respectful secular Cuban geography and architecture through complete Malecón curves, Havana rooflines, colonial arcades, Trinidad cobbles, Viñales mogotes, tobacco-field bands, Santiago bay arcs and mountain silhouettes. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency uniform, logo, badge, readable text, combat, threat or weaponized orbital equipment."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch371-cuba-x-heart",
+      "roll": 50,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch371-cuba-x-internalagency",
+      "roll": 72,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch371-cuba-x-worldxxxseries",
+      "roll": 7,
+      "active": true
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Cuba images plus one accepted United Arab Emirates image",
+    "captionIfEligible": "Cuba ❤️ United Arab Emirates #Cuba #WorldXXXSeries",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": true
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1505 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1505 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch371-cuba-male-model-scene",
+        89
+      ],
+      [
+        "batch371-cuba-scene2-male-emotion",
+        87
+      ],
+      [
+        "batch371-cuba-scene1504-weather",
+        44
+      ],
+      [
+        "batch371-cuba-scene1504-mascotState",
+        84
+      ],
+      [
+        "batch371-cuba-scene1504-poleDanceTheme",
+        94
+      ],
+      [
+        "batch371-cuba-scene1504-rainbowOnly",
+        32
+      ],
+      [
+        "batch371-cuba-scene1504-rainbowHosiery",
+        67
+      ],
+      [
+        "batch371-cuba-scene1504-romanceBeat",
+        53
+      ],
+      [
+        "batch371-cuba-scene1504-compoundLoveBeat",
+        25
+      ],
+      [
+        "batch371-cuba-scene1504-hardLoveBeat",
+        25
+      ],
+      [
+        "batch371-cuba-scene1504-interestingProp",
+        47
+      ],
+      [
+        "batch371-cuba-scene1504-eceMissionProp-poseTargetRoll",
+        22
+      ],
+      [
+        "batch371-cuba-scene1504-Radiance-emotion",
+        81
+      ],
+      [
+        "batch371-cuba-scene1504-Radiance-visibleMidriff",
+        49
+      ],
+      [
+        "batch371-cuba-scene1504-Radiance-straplessDress",
+        58
+      ],
+      [
+        "batch371-cuba-scene1504-Radiance-fullyOpenBack",
+        99
+      ],
+      [
+        "batch371-cuba-scene1504-Ellie-emotion",
+        13
+      ],
+      [
+        "batch371-cuba-scene1504-Ellie-visibleMidriff",
+        73
+      ],
+      [
+        "batch371-cuba-scene1504-Ellie-straplessDress",
+        66
+      ],
+      [
+        "batch371-cuba-scene1504-Ellie-fullyOpenBack",
+        95
+      ],
+      [
+        "batch371-cuba-scene1504-Alia-emotion",
+        71
+      ],
+      [
+        "batch371-cuba-scene1504-Alia-visibleMidriff",
+        35
+      ],
+      [
+        "batch371-cuba-scene1504-Alia-straplessDress",
+        52
+      ],
+      [
+        "batch371-cuba-scene1504-Alia-fullyOpenBack",
+        17
+      ],
+      [
+        "batch371-cuba-scene1504-AI ECE-emotion",
+        9
+      ],
+      [
+        "batch371-cuba-scene1504-AI ECE-emotion-disambiguation",
+        84
+      ],
+      [
+        "batch371-cuba-scene1504-AI ECE-visibleMidriff",
+        65
+      ],
+      [
+        "batch371-cuba-scene1504-AI ECE-straplessDress",
+        34
+      ],
+      [
+        "batch371-cuba-scene1504-AI ECE-fullyOpenBack",
+        7
+      ],
+      [
+        "batch371-cuba-scene1505-weather",
+        87
+      ],
+      [
+        "batch371-cuba-scene1505-mascotState",
+        39
+      ],
+      [
+        "batch371-cuba-scene1505-poleDanceTheme",
+        79
+      ],
+      [
+        "batch371-cuba-scene1505-rainbowOnly",
+        59
+      ],
+      [
+        "batch371-cuba-scene1505-rainbowHosiery",
+        22
+      ],
+      [
+        "batch371-cuba-scene1505-romanceBeat",
+        70
+      ],
+      [
+        "batch371-cuba-scene1505-compoundLoveBeat",
+        60
+      ],
+      [
+        "batch371-cuba-scene1505-hardLoveBeat",
+        0
+      ],
+      [
+        "batch371-cuba-scene1505-interestingProp",
+        20
+      ],
+      [
+        "batch371-cuba-scene1505-eceMissionProp-poseTargetRoll",
+        81
+      ],
+      [
+        "batch371-cuba-scene1505-Radiance-emotion",
+        72
+      ],
+      [
+        "batch371-cuba-scene1505-Radiance-visibleMidriff",
+        90
+      ],
+      [
+        "batch371-cuba-scene1505-Radiance-straplessDress",
+        13
+      ],
+      [
+        "batch371-cuba-scene1505-Radiance-fullyOpenBack",
+        66
+      ],
+      [
+        "batch371-cuba-scene1505-Ellie-emotion",
+        70
+      ],
+      [
+        "batch371-cuba-scene1505-Ellie-visibleMidriff",
+        64
+      ],
+      [
+        "batch371-cuba-scene1505-Ellie-straplessDress",
+        51
+      ],
+      [
+        "batch371-cuba-scene1505-Ellie-fullyOpenBack",
+        12
+      ],
+      [
+        "batch371-cuba-scene1505-Alia-emotion",
+        90
+      ],
+      [
+        "batch371-cuba-scene1505-Alia-visibleMidriff",
+        80
+      ],
+      [
+        "batch371-cuba-scene1505-Alia-straplessDress",
+        15
+      ],
+      [
+        "batch371-cuba-scene1505-Alia-fullyOpenBack",
+        72
+      ],
+      [
+        "batch371-cuba-scene1505-AI ECE-emotion",
+        72
+      ],
+      [
+        "batch371-cuba-scene1505-AI ECE-emotion-disambiguation",
+        63
+      ],
+      [
+        "batch371-cuba-scene1505-AI ECE-visibleMidriff",
+        58
+      ],
+      [
+        "batch371-cuba-scene1505-AI ECE-straplessDress",
+        37
+      ],
+      [
+        "batch371-cuba-scene1505-AI ECE-fullyOpenBack",
+        86
+      ],
+      [
+        "batch371-cuba-scene1506-weather",
+        78
+      ],
+      [
+        "batch371-cuba-scene1506-mascotState",
+        26
+      ],
+      [
+        "batch371-cuba-scene1506-poleDanceTheme",
+        68
+      ],
+      [
+        "batch371-cuba-scene1506-rainbowOnly",
+        2
+      ],
+      [
+        "batch371-cuba-scene1506-rainbowHosiery",
+        69
+      ],
+      [
+        "batch371-cuba-scene1506-romanceBeat",
+        11
+      ],
+      [
+        "batch371-cuba-scene1506-compoundLoveBeat",
+        19
+      ],
+      [
+        "batch371-cuba-scene1506-hardLoveBeat",
+        75
+      ],
+      [
+        "batch371-cuba-scene1506-interestingProp",
+        97
+      ],
+      [
+        "batch371-cuba-scene1506-eceMissionProp-poseTargetRoll",
+        84
+      ],
+      [
+        "batch371-cuba-scene1506-Radiance-emotion",
+        87
+      ],
+      [
+        "batch371-cuba-scene1506-Radiance-visibleMidriff",
+        35
+      ],
+      [
+        "batch371-cuba-scene1506-Radiance-straplessDress",
+        44
+      ],
+      [
+        "batch371-cuba-scene1506-Radiance-fullyOpenBack",
+        9
+      ],
+      [
+        "batch371-cuba-scene1506-Ellie-emotion",
+        59
+      ],
+      [
+        "batch371-cuba-scene1506-Ellie-visibleMidriff",
+        67
+      ],
+      [
+        "batch371-cuba-scene1506-Ellie-straplessDress",
+        4
+      ],
+      [
+        "batch371-cuba-scene1506-Ellie-fullyOpenBack",
+        37
+      ],
+      [
+        "batch371-cuba-scene1506-Alia-emotion",
+        97
+      ],
+      [
+        "batch371-cuba-scene1506-Alia-visibleMidriff",
+        97
+      ],
+      [
+        "batch371-cuba-scene1506-Alia-straplessDress",
+        78
+      ],
+      [
+        "batch371-cuba-scene1506-Alia-fullyOpenBack",
+        39
+      ],
+      [
+        "batch371-cuba-scene1506-AI ECE-emotion",
+        51
+      ],
+      [
+        "batch371-cuba-scene1506-AI ECE-visibleMidriff",
+        31
+      ],
+      [
+        "batch371-cuba-scene1506-AI ECE-straplessDress",
+        60
+      ],
+      [
+        "batch371-cuba-scene1506-AI ECE-fullyOpenBack",
+        53
+      ],
+      [
+        "batch371-cuba-scene1507-weather",
+        13
+      ],
+      [
+        "batch371-cuba-scene1507-mascotState",
+        49
+      ],
+      [
+        "batch371-cuba-scene1507-poleDanceTheme",
+        85
+      ],
+      [
+        "batch371-cuba-scene1507-rainbowOnly",
+        1
+      ],
+      [
+        "batch371-cuba-scene1507-rainbowHosiery",
+        80
+      ],
+      [
+        "batch371-cuba-scene1507-romanceBeat",
+        72
+      ],
+      [
+        "batch371-cuba-scene1507-compoundLoveBeat",
+        14
+      ],
+      [
+        "batch371-cuba-scene1507-hardLoveBeat",
+        82
+      ],
+      [
+        "batch371-cuba-scene1507-interestingProp",
+        74
+      ],
+      [
+        "batch371-cuba-scene1507-eceMissionProp-poseTargetRoll",
+        27
+      ],
+      [
+        "batch371-cuba-scene1507-Radiance-emotion",
+        74
+      ],
+      [
+        "batch371-cuba-scene1507-Radiance-visibleMidriff",
+        24
+      ],
+      [
+        "batch371-cuba-scene1507-Radiance-straplessDress",
+        19
+      ],
+      [
+        "batch371-cuba-scene1507-Radiance-fullyOpenBack",
+        0
+      ],
+      [
+        "batch371-cuba-scene1507-Ellie-emotion",
+        40
+      ],
+      [
+        "batch371-cuba-scene1507-Ellie-visibleMidriff",
+        98
+      ],
+      [
+        "batch371-cuba-scene1507-Ellie-straplessDress",
+        81
+      ],
+      [
+        "batch371-cuba-scene1507-Ellie-fullyOpenBack",
+        30
+      ],
+      [
+        "batch371-cuba-scene1507-Alia-emotion",
+        96
+      ],
+      [
+        "batch371-cuba-scene1507-Alia-visibleMidriff",
+        14
+      ],
+      [
+        "batch371-cuba-scene1507-Alia-straplessDress",
+        25
+      ],
+      [
+        "batch371-cuba-scene1507-Alia-fullyOpenBack",
+        30
+      ],
+      [
+        "batch371-cuba-scene1507-AI ECE-emotion",
+        42
+      ],
+      [
+        "batch371-cuba-scene1507-AI ECE-emotion-disambiguation",
+        93
+      ],
+      [
+        "batch371-cuba-scene1507-AI ECE-visibleMidriff",
+        12
+      ],
+      [
+        "batch371-cuba-scene1507-AI ECE-straplessDress",
+        99
+      ],
+      [
+        "batch371-cuba-scene1507-AI ECE-fullyOpenBack",
+        96
+      ],
+      [
+        "batch371-cuba-x-heart",
+        50
+      ],
+      [
+        "batch371-cuba-x-internalagency",
+        72
+      ],
+      [
+        "batch371-cuba-x-worldxxxseries",
+        7
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch371-cuba-scene1504-rainbowHosieryWearer",
+        27
+      ],
+      [
+        "batch371-cuba-scene1504-rainbowHosieryPaletteMode",
+        69
+      ],
+      [
+        "batch371-cuba-scene1504-mascotHolder",
+        37
+      ],
+      [
+        "batch371-cuba-scene1504-interestingPropHolder",
+        77
+      ],
+      [
+        "batch371-cuba-scene1504-interestingPropFamily",
+        55
+      ],
+      [
+        "batch371-cuba-scene1505-rainbowHosieryWearer",
+        42
+      ],
+      [
+        "batch371-cuba-scene1505-rainbowHosieryPaletteMode",
+        30
+      ],
+      [
+        "batch371-cuba-scene1505-mascotHolder",
+        8
+      ],
+      [
+        "batch371-cuba-scene1505-interestingPropHolder",
+        6
+      ],
+      [
+        "batch371-cuba-scene1505-interestingPropFamily",
+        76
+      ],
+      [
+        "batch371-cuba-scene1506-rainbowHosieryWearer",
+        49
+      ],
+      [
+        "batch371-cuba-scene1506-rainbowHosieryPaletteMode",
+        35
+      ],
+      [
+        "batch371-cuba-scene1506-mascotHolder",
+        71
+      ],
+      [
+        "batch371-cuba-scene1506-interestingPropHolder",
+        67
+      ],
+      [
+        "batch371-cuba-scene1506-interestingPropFamily",
+        5
+      ],
+      [
+        "batch371-cuba-scene1507-rainbowHosieryWearer",
+        20
+      ],
+      [
+        "batch371-cuba-scene1507-rainbowHosieryPaletteMode",
+        80
+      ],
+      [
+        "batch371-cuba-scene1507-mascotHolder",
+        38
+      ],
+      [
+        "batch371-cuba-scene1507-interestingPropHolder",
+        40
+      ],
+      [
+        "batch371-cuba-scene1507-interestingPropFamily",
+        2
+      ]
+    ],
+    "primaryPairCount": 112,
+    "selectorPairCount": 20,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "338D35BFC8525325D3FEB08C0E3460F904073BB2D1C2A5D42E10C83A537455C9",
+    "selectorPairsSha256": "A71327B83F26070D9EDADE9E8330DDB85E87BE9C2CFA59ADF66CC3287F1C7159"
+  },
+  "scenePlans": {
+    "1504": {
+      "scene": 1504,
+      "mode": "country-led hybrid",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry Havana Malecón overlook with the complete seawall curve, recognizable pastel Centro Habana roofline, Atlantic cobalt water, El Morro lighthouse silhouette and distant modern towers, fused in the foreground with a peaceful fictional civilian orbital-research cupola, docking tunnel and solar-array laboratory deck",
+      "motifs": "complete Malecón curves, pastel roof terraces, lighthouse arcs, cupola windows, docking rings and solar-truss bands",
+      "culture": "Havana reads through the Malecón seawall, pastel urban roofline, Atlantic water and distant lighthouse silhouette; every orbital element is peaceful civilian research hardware.",
+      "weather": {
+        "key": "batch371-cuba-scene1504-weather",
+        "roll": 44,
+        "result": "rolling thunderstorm",
+        "materialized": "rolling thunderstorm"
+      },
+      "mascotState": {
+        "key": "batch371-cuba-scene1504-mascotState",
+        "roll": 84,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch371-cuba-scene1504-mascotHolder",
+        "roll": 37,
+        "result": "Ellie"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry lounge far from seawall edges, target line, water and orbital equipment.",
+      "interestingProp": {
+        "key": "batch371-cuba-scene1504-interestingProp",
+        "roll": 47,
+        "active": false,
+        "holder": {
+          "key": "batch371-cuba-scene1504-interestingPropHolder",
+          "roll": 77,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch371-cuba-scene1504-interestingPropFamily",
+          "roll": 55,
+          "result": "gyroscopic hard-shell suitcase"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch371-cuba-scene1504-poleDanceTheme",
+        "roll": 94,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch371-cuba-scene1504-rainbowOnly",
+        "roll": 32,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch371-cuba-scene1504-rainbowHosiery",
+        "roll": 67,
+        "active": false,
+        "wearer": {
+          "key": "batch371-cuba-scene1504-rainbowHosieryWearer",
+          "roll": 27,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch371-cuba-scene1504-rainbowHosieryPaletteMode",
+          "roll": 69,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch371-cuba-scene1504-eceMissionProp-poseTargetRoll",
+        "roll": 22
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera",
+      "romanceBeat": {
+        "key": "batch371-cuba-scene1504-romanceBeat",
+        "roll": 53,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch371-cuba-scene1504-compoundLoveBeat",
+        "roll": 25,
+        "index": 1,
+        "contractResult": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "hardLoveBeat": {
+        "key": "batch371-cuba-scene1504-hardLoveBeat",
+        "roll": 25,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch371-cuba-scene1504-Radiance-emotion",
+            "roll": 81,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1504-Radiance-visibleMidriff",
+            "roll": 49,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1504-Radiance-straplessDress",
+            "roll": 58,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1504-Radiance-fullyOpenBack",
+            "roll": 99,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch371-cuba-scene1504-Ellie-emotion",
+            "roll": 13,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1504-Ellie-visibleMidriff",
+            "roll": 73,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1504-Ellie-straplessDress",
+            "roll": 66,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1504-Ellie-fullyOpenBack",
+            "roll": 95,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch371-cuba-scene1504-Alia-emotion",
+            "roll": 71,
+            "result": "suspicion",
+            "materializedResult": "suspicion",
+            "performance": "suspicion expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1504-Alia-visibleMidriff",
+            "roll": 35,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1504-Alia-straplessDress",
+            "roll": 52,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1504-Alia-fullyOpenBack",
+            "roll": 17,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch371-cuba-scene1504-AI ECE-emotion",
+            "roll": 9,
+            "result": "romantic joy",
+            "materializedResult": "full sobbing with tear-streaked face and shaking posture",
+            "disambiguation": {
+              "key": "batch371-cuba-scene1504-AI ECE-emotion-disambiguation",
+              "roll": 84
+            },
+            "performance": "full sobbing with tear-streaked face and shaking posture expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1504-AI ECE-visibleMidriff",
+            "roll": 65,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1504-AI ECE-straplessDress",
+            "roll": 34,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1504-AI ECE-fullyOpenBack",
+            "roll": 7,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "suspicion expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "full sobbing with tear-streaked face and shaking posture expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Malecón-cobalt orbital-cupola tulip tunic over opaque pearl tailored shorts with dimensional seawall arcs, station-silver hoops and gyroscope boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Havana-coral roofline-fold asymmetric trousers with limestone balcony ribs, graphite laboratory panels and cantilever platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "colonial-ochre lighthouse fan skirt with a secure turquoise stepped bodice, braided pearl wave cords and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan docking-ring cuirass over opaque graphite sculpted culottes with solar-truss fins and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Malecón-cobalt orbital-cupola tulip tunic over opaque pearl tailored shorts with dimensional seawall arcs, station-silver hoops and gyroscope boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Havana-coral roofline-fold asymmetric trousers with limestone balcony ribs, graphite laboratory panels and cantilever platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "colonial-ochre lighthouse fan skirt with a secure turquoise stepped bodice, braided pearl wave cords and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan docking-ring cuirass over opaque graphite sculpted culottes with solar-truss fins and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Radiance initiates a close turning invitation toward Alia while Ellie catches Radiance's trailing forearm and ECE steps into the open side with a firm waist contact and sustained rival eye line.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Radiance invites Alia",
+        "Ellie catches Radiance",
+        "ECE completes visible waist contact"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Havana Malecón overlook with the complete seawall curve, recognizable pastel Centro Habana roofline, Atlantic cobalt water, El Morro lighthouse silhouette and distant modern towers, fused in the foreground with a peaceful fictional civilian orbital-research cupola, docking tunnel and solar-array laboratory deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: orbital research-station couture. The theme and Cuba location must both be immediate foreground reads. Havana reads through the Malecón seawall, pastel urban roofline, Atlantic water and distant lighthouse silhouette; every orbital element is peaceful civilian research hardware. Stored scene rolls: weather 44=rolling thunderstorm; mascot state 84=neither mascot; mascot holder selector 37=Ellie; odd prop 47=inactive; odd holder 77=Alia; odd family 55=gyroscopic hard-shell suitcase; pole 94=inactive; rainbow-only 32=inactive; rainbow hosiery 67=inactive; wearer 27=Radiance; palette 69=original independent rainbow gradient; romance 53; compound 25; hard love 25; mission-prop pose/target 22. Exact wardrobe rolls: Radiance: midriff 49=visible, strapless 58=inactive, open back 99=inactive; Ellie: midriff 73=covered, strapless 66=inactive, open back 95=inactive; Alia: midriff 35=visible, strapless 52=inactive, open back 17=active; AI ECE: midriff 65=covered, strapless 34=active, open back 7=active. Exact outfit fingerprints, no substitutions: Radiance: Malecón-cobalt orbital-cupola tulip tunic over opaque pearl tailored shorts with dimensional seawall arcs, station-silver hoops and gyroscope boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: Havana-coral roofline-fold asymmetric trousers with limestone balcony ribs, graphite laboratory panels and cantilever platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: colonial-ochre lighthouse fan skirt with a secure turquoise stepped bodice, braided pearl wave cords and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: aurora-cyan docking-ring cuirass over opaque graphite sculpted culottes with solar-truss fins and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large seawall, roofline and lighthouse motifs; Radiance and ECE use cupola-window, docking-ring and solar-truss construction. Location design vocabulary: complete Malecón curves, pastel roof terraces, lighthouse arcs, cupola windows, docking rings and solar-truss bands. Use respectful secular Cuban geography and architecture through complete Malecón curves, Havana rooflines, colonial arcades, Trinidad cobbles, Viñales mogotes, tobacco-field bands, Santiago bay arcs and mountain silhouettes. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency uniform, logo, badge, readable text, combat, threat or weaponized orbital equipment. Four visibly distinct coherent emotions: Radiance: roll 81=deep sadness, performed as deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 13=romantic joy, performed as romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 71=suspicion, performed as suspicion expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 9=romantic joy, collision resolver 84 gives distinct performance full sobbing with tear-streaked face and shaking posture, performed as full sobbing with tear-streaked face and shaking posture expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 53: Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder. Compound roll 25: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE. Mandatory hard-love roll 25: a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Radiance initiates a close turning invitation toward Alia while Ellie catches Radiance's trailing forearm and ECE steps into the open side with a firm waist contact and sustained rival eye line. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Radiance invites Alia; Ellie catches Radiance; ECE completes visible waist contact. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 84=neither mascot. Mascot holder selector 37=Ellie. Only rolled mascots appear on a padded dry lounge far from seawall edges, target line, water and orbital equipment. Odd-prop roll 47 is inactive. Do not add any bizarre secondary prop; stored inactive holder 77=Alia and family 55=gyroscopic hard-shell suitcase remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render rolling thunderstorm cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1505": {
+      "scene": 1505,
+      "mode": "country-led hybrid",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry Trinidad overlook with the complete Plaza Mayor cobbled square, recognizable pastel colonial facades, arcaded windows, red tile roofs, bell-tower silhouette and distant Escambray foothills, fused equally with a peaceful civilian orbital laboratory, docking node and solar-observation truss",
+      "motifs": "complete cobble fans, pastel facade planes, tile-roof bands, bell-tower arcs, docking nodes and solar-panel lattices",
+      "culture": "Trinidad reads through Plaza Mayor, pastel colonial facades, cobbles, tile roofs, bell-tower silhouette and mountain backdrop, presented as secular civic architecture.",
+      "weather": {
+        "key": "batch371-cuba-scene1505-weather",
+        "roll": 87,
+        "result": "rare aurora sky",
+        "materialized": "rare aurora sky"
+      },
+      "mascotState": {
+        "key": "batch371-cuba-scene1505-mascotState",
+        "roll": 39,
+        "result": "MAX only"
+      },
+      "mascotHolder": {
+        "key": "batch371-cuba-scene1505-mascotHolder",
+        "roll": 8,
+        "result": "AI ECE"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded terrace far from stairs, cobbles, visitors, props and orbital equipment.",
+      "interestingProp": {
+        "key": "batch371-cuba-scene1505-interestingProp",
+        "roll": 20,
+        "active": true,
+        "holder": {
+          "key": "batch371-cuba-scene1505-interestingPropHolder",
+          "roll": 6,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch371-cuba-scene1505-interestingPropFamily",
+          "roll": 76,
+          "result": "mechanical ribbon loom"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch371-cuba-scene1505-poleDanceTheme",
+        "roll": 79,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch371-cuba-scene1505-rainbowOnly",
+        "roll": 59,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch371-cuba-scene1505-rainbowHosiery",
+        "roll": 22,
+        "active": true,
+        "wearer": {
+          "key": "batch371-cuba-scene1505-rainbowHosieryWearer",
+          "roll": 42,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch371-cuba-scene1505-rainbowHosieryPaletteMode",
+          "roll": 30,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch371-cuba-scene1505-eceMissionProp-poseTargetRoll",
+        "roll": 81
+      },
+      "materializedPropAction": "A controlled handoff has finished with Alia establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, building, research station or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, building, research station or camera along or beyond the line",
+      "romanceBeat": {
+        "key": "batch371-cuba-scene1505-romanceBeat",
+        "roll": 70,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch371-cuba-scene1505-compoundLoveBeat",
+        "roll": 60,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "hardLoveBeat": {
+        "key": "batch371-cuba-scene1505-hardLoveBeat",
+        "roll": 0,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch371-cuba-scene1505-Radiance-emotion",
+            "roll": 72,
+            "result": "betrayal shock",
+            "materializedResult": "betrayal shock",
+            "performance": "betrayal shock expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1505-Radiance-visibleMidriff",
+            "roll": 90,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1505-Radiance-straplessDress",
+            "roll": 13,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1505-Radiance-fullyOpenBack",
+            "roll": 66,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch371-cuba-scene1505-Ellie-emotion",
+            "roll": 70,
+            "result": "suspicion",
+            "materializedResult": "suspicion",
+            "performance": "suspicion expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1505-Ellie-visibleMidriff",
+            "roll": 64,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1505-Ellie-straplessDress",
+            "roll": 51,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1505-Ellie-fullyOpenBack",
+            "roll": 12,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch371-cuba-scene1505-Alia-emotion",
+            "roll": 90,
+            "result": "anger",
+            "materializedResult": "anger",
+            "performance": "anger expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1505-Alia-visibleMidriff",
+            "roll": 80,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1505-Alia-straplessDress",
+            "roll": 15,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1505-Alia-fullyOpenBack",
+            "roll": 72,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch371-cuba-scene1505-AI ECE-emotion",
+            "roll": 72,
+            "result": "betrayal shock",
+            "materializedResult": "visible jealousy",
+            "disambiguation": {
+              "key": "batch371-cuba-scene1505-AI ECE-emotion-disambiguation",
+              "roll": 63
+            },
+            "performance": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1505-AI ECE-visibleMidriff",
+            "roll": 58,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1505-AI ECE-straplessDress",
+            "roll": 37,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1505-AI ECE-fullyOpenBack",
+            "roll": 86,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "betrayal shock expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "suspicion expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "anger expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Trinidad-coral facade-facet peplum dress with dimensional ochre cobble discs, emerald roof inlays and orbital heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "station-pearl split-tail docking waistcoat over opaque graphite balloon trousers with silver solar pleats and platform mules; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "turquoise roofline spiral skirt with secure bronze laboratory-shell top, braided pearl arcade relief and mirror pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan articulated antenna tabard over opaque station-silver shorts with docking framework and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Cuba Malecón-curve and mogote embroidery with subtle orbital-research seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Trinidad-coral facade-facet peplum dress with dimensional ochre cobble discs, emerald roof inlays and orbital heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "station-pearl split-tail docking waistcoat over opaque graphite balloon trousers with silver solar pleats and platform mules; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "turquoise roofline spiral skirt with secure bronze laboratory-shell top, braided pearl arcade relief and mirror pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan articulated antenna tabard over opaque station-silver shorts with docking framework and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Cuba Malecón-curve and mogote embroidery with subtle orbital-research seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "composition": "Ellie supports Radiance through a controlled dip while Alia catches Radiance's free hand and ECE answers by reclaiming Ellie's shoulder, creating a stable three-way interruption and visible jealousy.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Ellie supports Radiance's dip",
+        "Alia catches Radiance's free hand",
+        "ECE reclaims Ellie's shoulder"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch371-cuba-scene2-male-emotion",
+          "roll": 87,
+          "result": "fear and urgent vulnerability"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry Trinidad overlook with the complete Plaza Mayor cobbled square, recognizable pastel colonial facades, arcaded windows, red tile roofs, bell-tower silhouette and distant Escambray foothills, fused equally with a peaceful civilian orbital laboratory, docking node and solar-observation truss. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: orbital research-station couture. The theme and Cuba location must both be immediate foreground reads. Trinidad reads through Plaza Mayor, pastel colonial facades, cobbles, tile roofs, bell-tower silhouette and mountain backdrop, presented as secular civic architecture. Stored scene rolls: weather 87=rare aurora sky; mascot state 39=MAX only; mascot holder selector 8=AI ECE; odd prop 20=active; odd holder 6=Radiance; odd family 76=mechanical ribbon loom; pole 79=inactive; rainbow-only 59=inactive; rainbow hosiery 22=active; wearer 42=Radiance; palette 30=country-palette rainbow-like gradient; romance 70; compound 60; hard love 0; mission-prop pose/target 81. Exact wardrobe rolls: Radiance: midriff 90=covered, strapless 13=active, open back 66=inactive; Ellie: midriff 64=covered, strapless 51=inactive, open back 12=active; Alia: midriff 80=covered, strapless 15=active, open back 72=inactive; AI ECE: midriff 58=covered, strapless 37=inactive, open back 86=inactive. Exact outfit fingerprints, no substitutions: Radiance: Trinidad-coral facade-facet peplum dress with dimensional ochre cobble discs, emerald roof inlays and orbital heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: station-pearl split-tail docking waistcoat over opaque graphite balloon trousers with silver solar pleats and platform mules; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: turquoise roofline spiral skirt with secure bronze laboratory-shell top, braided pearl arcade relief and mirror pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: aurora-cyan articulated antenna tabard over opaque station-silver shorts with docking framework and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Cuba Malecón-curve and mogote embroidery with subtle orbital-research seam tailoring, fitted black jeans, and practical black boots. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large cobble, facade and roof motifs; Ellie and ECE use docking-node, laboratory-shell and solar-array construction. Location design vocabulary: complete cobble fans, pastel facade planes, tile-roof bands, bell-tower arcs, docking nodes and solar-panel lattices. Use respectful secular Cuban geography and architecture through complete Malecón curves, Havana rooflines, colonial arcades, Trinidad cobbles, Viñales mogotes, tobacco-field bands, Santiago bay arcs and mountain silhouettes. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency uniform, logo, badge, readable text, combat, threat or weaponized orbital equipment. Four visibly distinct coherent emotions: Radiance: roll 72=betrayal shock, performed as betrayal shock expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 70=suspicion, performed as suspicion expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 90=anger, performed as anger expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 72=betrayal shock, collision resolver 63 gives distinct performance visible jealousy, performed as visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 87=fear and urgent vulnerability, performed as fear and urgent vulnerability expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 70: Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face. Compound roll 60: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Mandatory hard-love roll 0: one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Ellie supports Radiance through a controlled dip while Alia catches Radiance's free hand and ECE answers by reclaiming Ellie's shoulder, creating a stable three-way interruption and visible jealousy. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Ellie supports Radiance's dip; Alia catches Radiance's free hand; ECE reclaims Ellie's shoulder. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with Alia establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, building, research station or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly Radiance wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. Mascot state 39=MAX only. Mascot holder selector 8=AI ECE. Only rolled mascots appear on a secured padded terrace far from stairs, cobbles, visitors, props and orbital equipment. Odd-prop roll is active. Exactly Radiance owns and creatively integrates one mechanical ribbon loom into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render rare aurora sky cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1506": {
+      "scene": 1506,
+      "mode": "theme-led original",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry Viñales Valley overlook with the complete rounded limestone mogotes, emerald tobacco-field bands, red-earth paths, scattered farm roofs and layered Sierra de los Órganos horizon, fused equally with a peaceful orbital research station and panoramic Earth-science laboratory deck",
+      "motifs": "location-only mogote domes, field bands, red paths, farm-roof accents, solar lattices and station-module geometry",
+      "culture": "Viñales reads through its rounded mogotes, green agricultural fields, red earth, scattered roofs and mountain horizon; no labor reenactment or copied traditional costume appears.",
+      "weather": {
+        "key": "batch371-cuba-scene1506-weather",
+        "roll": 78,
+        "result": "powerful windstorm with controlled fabric motion",
+        "materialized": "powerful windstorm with controlled fabric motion"
+      },
+      "mascotState": {
+        "key": "batch371-cuba-scene1506-mascotState",
+        "roll": 26,
+        "result": "PAWS only"
+      },
+      "mascotHolder": {
+        "key": "batch371-cuba-scene1506-mascotHolder",
+        "roll": 71,
+        "result": "Alia"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded platform far from slopes, fields, animals, props and orbital machinery.",
+      "interestingProp": {
+        "key": "batch371-cuba-scene1506-interestingProp",
+        "roll": 97,
+        "active": false,
+        "holder": {
+          "key": "batch371-cuba-scene1506-interestingPropHolder",
+          "roll": 67,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch371-cuba-scene1506-interestingPropFamily",
+          "roll": 5,
+          "result": "folding solar fan with articulated panels"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch371-cuba-scene1506-poleDanceTheme",
+        "roll": 68,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch371-cuba-scene1506-rainbowOnly",
+        "roll": 2,
+        "active": true
+      },
+      "rainbowHosiery": {
+        "key": "batch371-cuba-scene1506-rainbowHosiery",
+        "roll": 69,
+        "active": false,
+        "wearer": {
+          "key": "batch371-cuba-scene1506-rainbowHosieryWearer",
+          "roll": 49,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch371-cuba-scene1506-rainbowHosieryPaletteMode",
+          "roll": 35,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch371-cuba-scene1506-eceMissionProp-poseTargetRoll",
+        "roll": 84
+      },
+      "materializedPropAction": "A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, building, research station or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, building, research station or camera along or beyond the line",
+      "romanceBeat": {
+        "key": "batch371-cuba-scene1506-romanceBeat",
+        "roll": 11,
+        "dynamicIndex": 11,
+        "contractResult": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch371-cuba-scene1506-compoundLoveBeat",
+        "roll": 19,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "hardLoveBeat": {
+        "key": "batch371-cuba-scene1506-hardLoveBeat",
+        "roll": 75,
+        "result": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch371-cuba-scene1506-Radiance-emotion",
+            "roll": 87,
+            "result": "fear and urgent vulnerability",
+            "materializedResult": "fear and urgent vulnerability",
+            "performance": "fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1506-Radiance-visibleMidriff",
+            "roll": 35,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1506-Radiance-straplessDress",
+            "roll": 44,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1506-Radiance-fullyOpenBack",
+            "roll": 9,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch371-cuba-scene1506-Ellie-emotion",
+            "roll": 59,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1506-Ellie-visibleMidriff",
+            "roll": 67,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1506-Ellie-straplessDress",
+            "roll": 4,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1506-Ellie-fullyOpenBack",
+            "roll": 37,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch371-cuba-scene1506-Alia-emotion",
+            "roll": 97,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1506-Alia-visibleMidriff",
+            "roll": 97,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1506-Alia-straplessDress",
+            "roll": 78,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1506-Alia-fullyOpenBack",
+            "roll": 39,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch371-cuba-scene1506-AI ECE-emotion",
+            "roll": 51,
+            "result": "intense curiosity",
+            "materializedResult": "intense curiosity",
+            "performance": "intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1506-AI ECE-visibleMidriff",
+            "roll": 31,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1506-AI ECE-straplessDress",
+            "roll": 60,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1506-AI ECE-fullyOpenBack",
+            "roll": 53,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "aching romantic longing expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "orbital-pearl solar-lattice pannier coat-dress with opaque Viñales-emerald hub plates, cyan array pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "station-graphite radiator-truss culotte coat with one rigid asymmetric shoulder bridge, red-earth panels and expedition platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "laboratory-silver pressure-sail draped jumpsuit with braided tobacco-green seams, curved mogote side vanes and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan orbital-keel bodice with an opaque high-low coral skirt, silver telemetry hoops and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "orbital-pearl solar-lattice pannier coat-dress with opaque Viñales-emerald hub plates, cyan array pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "station-graphite radiator-truss culotte coat with one rigid asymmetric shoulder bridge, red-earth panels and expedition platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "laboratory-silver pressure-sail draped jumpsuit with braided tobacco-green seams, curved mogote side vanes and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan orbital-keel bodice with an opaque high-low coral skirt, silver telemetry hoops and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Alia rises from a stable low seat into Radiance's side embrace while Ellie draws Alia's other hand toward herself and ECE crosses the open side with a protective shoulder contact and jealous backward glance.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Radiance supports Alia's rise",
+        "Ellie draws Alia's free hand",
+        "ECE completes protective shoulder contact"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Viñales Valley overlook with the complete rounded limestone mogotes, emerald tobacco-field bands, red-earth paths, scattered farm roofs and layered Sierra de los Órganos horizon, fused equally with a peaceful orbital research station and panoramic Earth-science laboratory deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: orbital research-station couture. The theme and Cuba location must both be immediate foreground reads. Viñales reads through its rounded mogotes, green agricultural fields, red earth, scattered roofs and mountain horizon; no labor reenactment or copied traditional costume appears. Stored scene rolls: weather 78=powerful windstorm with controlled fabric motion; mascot state 26=PAWS only; mascot holder selector 71=Alia; odd prop 97=inactive; odd holder 67=Ellie; odd family 5=folding solar fan with articulated panels; pole 68=inactive; rainbow-only 2=active; rainbow hosiery 69=inactive; wearer 49=Radiance; palette 35=country-palette rainbow-like gradient; romance 11; compound 19; hard love 75; mission-prop pose/target 84. Exact wardrobe rolls: Radiance: midriff 35=visible, strapless 44=inactive, open back 9=active; Ellie: midriff 67=covered, strapless 4=active, open back 37=inactive; Alia: midriff 97=covered, strapless 78=inactive, open back 39=inactive; AI ECE: midriff 31=visible, strapless 60=inactive, open back 53=inactive. Exact outfit fingerprints, no substitutions: Radiance: orbital-pearl solar-lattice pannier coat-dress with opaque Viñales-emerald hub plates, cyan array pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: station-graphite radiator-truss culotte coat with one rigid asymmetric shoulder bridge, red-earth panels and expedition platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: laboratory-silver pressure-sail draped jumpsuit with braided tobacco-green seams, curved mogote side vanes and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: aurora-cyan orbital-keel bodice with an opaque high-low coral skirt, silver telemetry hoops and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Solar lattice, radiator truss, laboratory sail and orbital keel create four unrelated station silhouettes while Viñales remains equally large and foregrounded. Location design vocabulary: location-only mogote domes, field bands, red paths, farm-roof accents, solar lattices and station-module geometry. Use respectful secular Cuban geography and architecture through complete Malecón curves, Havana rooflines, colonial arcades, Trinidad cobbles, Viñales mogotes, tobacco-field bands, Santiago bay arcs and mountain silhouettes. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency uniform, logo, badge, readable text, combat, threat or weaponized orbital equipment. Four visibly distinct coherent emotions: Radiance: roll 87=fear and urgent vulnerability, performed as fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 59=aching romantic longing, performed as aching romantic longing expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 97=defiance, performed as defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 51=intense curiosity, performed as intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 11: The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder. Compound roll 19: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Mandatory hard-love roll 75: one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Alia rises from a stable low seat into Radiance's side embrace while Ellie draws Alia's other hand toward herself and ECE crosses the open side with a protective shoulder contact and jealous backward glance. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Radiance supports Alia's rise; Ellie draws Alia's free hand; ECE completes protective shoulder contact. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, building, research station or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 26=PAWS only. Mascot holder selector 71=Alia. Only rolled mascots appear on a secured padded platform far from slopes, fields, animals, props and orbital machinery. Odd-prop roll 97 is inactive. Do not add any bizarre secondary prop; stored inactive holder 67=Ellie and family 5=folding solar fan with articulated panels remain audit-only. Pole theme is inactive. No pole. Rainbow-only is active across all four structurally distinct outfits while preserving the scene's country-led or theme-led balance. Render powerful windstorm with controlled fabric motion cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1507": {
+      "scene": 1507,
+      "mode": "theme-led original",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry Santiago de Cuba Bay overlook with the complete winding turquoise harbor, recognizable layered city slopes, Sierra Maestra silhouettes, historic stone Morro headland architecture and open Caribbean horizon, fused equally with a peaceful civilian orbital research station and panoramic climate-imaging deck",
+      "motifs": "location-only harbor arcs, city-slope bands, mountain silhouettes, headland stone planes, cupola modules and antenna-cage geometry",
+      "culture": "Santiago reads through its winding bay, layered city slopes, Sierra Maestra backdrop, historic headland architecture and Caribbean horizon, treated without military action or symbols.",
+      "weather": {
+        "key": "batch371-cuba-scene1507-weather",
+        "roll": 13,
+        "result": "crisp blue hour",
+        "materialized": "crisp blue hour"
+      },
+      "mascotState": {
+        "key": "batch371-cuba-scene1507-mascotState",
+        "roll": 49,
+        "result": "MAX only"
+      },
+      "mascotHolder": {
+        "key": "batch371-cuba-scene1507-mascotHolder",
+        "roll": 38,
+        "result": "Alia"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry overlook far from harbor edges, water, boats, props and orbital equipment.",
+      "interestingProp": {
+        "key": "batch371-cuba-scene1507-interestingProp",
+        "roll": 74,
+        "active": false,
+        "holder": {
+          "key": "batch371-cuba-scene1507-interestingPropHolder",
+          "roll": 40,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch371-cuba-scene1507-interestingPropFamily",
+          "roll": 2,
+          "result": "chromatic brass telescope with folding legs"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch371-cuba-scene1507-poleDanceTheme",
+        "roll": 85,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch371-cuba-scene1507-rainbowOnly",
+        "roll": 1,
+        "active": true
+      },
+      "rainbowHosiery": {
+        "key": "batch371-cuba-scene1507-rainbowHosiery",
+        "roll": 80,
+        "active": false,
+        "wearer": {
+          "key": "batch371-cuba-scene1507-rainbowHosieryWearer",
+          "roll": 20,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch371-cuba-scene1507-rainbowHosieryPaletteMode",
+          "roll": 80,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch371-cuba-scene1507-eceMissionProp-poseTargetRoll",
+        "roll": 27
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera",
+      "romanceBeat": {
+        "key": "batch371-cuba-scene1507-romanceBeat",
+        "roll": 72,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch371-cuba-scene1507-compoundLoveBeat",
+        "roll": 14,
+        "index": 2,
+        "contractResult": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "hardLoveBeat": {
+        "key": "batch371-cuba-scene1507-hardLoveBeat",
+        "roll": 82,
+        "result": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch371-cuba-scene1507-Radiance-emotion",
+            "roll": 74,
+            "result": "betrayal shock",
+            "materializedResult": "betrayal shock",
+            "performance": "betrayal shock expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1507-Radiance-visibleMidriff",
+            "roll": 24,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1507-Radiance-straplessDress",
+            "roll": 19,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1507-Radiance-fullyOpenBack",
+            "roll": 0,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch371-cuba-scene1507-Ellie-emotion",
+            "roll": 40,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1507-Ellie-visibleMidriff",
+            "roll": 98,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1507-Ellie-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1507-Ellie-fullyOpenBack",
+            "roll": 30,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch371-cuba-scene1507-Alia-emotion",
+            "roll": 96,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1507-Alia-visibleMidriff",
+            "roll": 14,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1507-Alia-straplessDress",
+            "roll": 25,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1507-Alia-fullyOpenBack",
+            "roll": 30,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch371-cuba-scene1507-AI ECE-emotion",
+            "roll": 42,
+            "result": "determination",
+            "materializedResult": "shame and social vulnerability",
+            "disambiguation": {
+              "key": "batch371-cuba-scene1507-AI ECE-emotion-disambiguation",
+              "roll": 93
+            },
+            "performance": "shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch371-cuba-scene1507-AI ECE-visibleMidriff",
+            "roll": 12,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch371-cuba-scene1507-AI ECE-straplessDress",
+            "roll": 99,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch371-cuba-scene1507-AI ECE-fullyOpenBack",
+            "roll": 96,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "betrayal shock expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Caribbean-pearl observation-blister cape dress with station-silver ribs, Santiago-cobalt lens appliques and spherical ankle boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "coral thermal-lattice tapered trouser suit with graphite hex panels, harbor pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "orbital-silver navigation-spindle peplum over an opaque emerald asymmetric skirt with braided cyan seams and optic pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cobalt habitat-balloon bodice over opaque gold petal culottes with pearl conduit arcs and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Caribbean-pearl observation-blister cape dress with station-silver ribs, Santiago-cobalt lens appliques and spherical ankle boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "coral thermal-lattice tapered trouser suit with graphite hex panels, harbor pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "orbital-silver navigation-spindle peplum over an opaque emerald asymmetric skirt with braided cyan seams and optic pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cobalt habitat-balloon bodice over opaque gold petal culottes with pearl conduit arcs and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE leads Ellie through a close partner turn while Radiance catches Ellie's trailing forearm and Alia steps into the open side to claim ECE's shoulder, creating pursuit, interruption and a clear four-way contact graph.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "ECE leads Ellie's turn",
+        "Radiance catches Ellie",
+        "Alia completes visible shoulder contact"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Santiago de Cuba Bay overlook with the complete winding turquoise harbor, recognizable layered city slopes, Sierra Maestra silhouettes, historic stone Morro headland architecture and open Caribbean horizon, fused equally with a peaceful civilian orbital research station and panoramic climate-imaging deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: orbital research-station couture. The theme and Cuba location must both be immediate foreground reads. Santiago reads through its winding bay, layered city slopes, Sierra Maestra backdrop, historic headland architecture and Caribbean horizon, treated without military action or symbols. Stored scene rolls: weather 13=crisp blue hour; mascot state 49=MAX only; mascot holder selector 38=Alia; odd prop 74=inactive; odd holder 40=Ellie; odd family 2=chromatic brass telescope with folding legs; pole 85=inactive; rainbow-only 1=active; rainbow hosiery 80=inactive; wearer 20=Radiance; palette 80=original independent rainbow gradient; romance 72; compound 14; hard love 82; mission-prop pose/target 27. Exact wardrobe rolls: Radiance: midriff 24=visible, strapless 19=active, open back 0=active; Ellie: midriff 98=covered, strapless 81=inactive, open back 30=inactive; Alia: midriff 14=visible, strapless 25=active, open back 30=inactive; AI ECE: midriff 12=visible, strapless 99=inactive, open back 96=inactive. Exact outfit fingerprints, no substitutions: Radiance: Caribbean-pearl observation-blister cape dress with station-silver ribs, Santiago-cobalt lens appliques and spherical ankle boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: coral thermal-lattice tapered trouser suit with graphite hex panels, harbor pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: orbital-silver navigation-spindle peplum over an opaque emerald asymmetric skirt with braided cyan seams and optic pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: aurora-cobalt habitat-balloon bodice over opaque gold petal culottes with pearl conduit arcs and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Observation blister, thermal lattice, navigation spindle and habitat balloon create four distinct orbital-station outfits while Santiago Bay remains foregrounded. Location design vocabulary: location-only harbor arcs, city-slope bands, mountain silhouettes, headland stone planes, cupola modules and antenna-cage geometry. Use respectful secular Cuban geography and architecture through complete Malecón curves, Havana rooflines, colonial arcades, Trinidad cobbles, Viñales mogotes, tobacco-field bands, Santiago bay arcs and mountain silhouettes. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency uniform, logo, badge, readable text, combat, threat or weaponized orbital equipment. Four visibly distinct coherent emotions: Radiance: roll 74=betrayal shock, performed as betrayal shock expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 40=determination, performed as determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 96=defiance, performed as defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 42=determination, collision resolver 93 gives distinct performance shame and social vulnerability, performed as shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 72: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Compound roll 14: Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention. Mandatory hard-love roll 82: one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE leads Ellie through a close partner turn while Radiance catches Ellie's trailing forearm and Alia steps into the open side to claim ECE's shoulder, creating pursuit, interruption and a clear four-way contact graph. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; ECE leads Ellie's turn; Radiance catches Ellie; Alia completes visible shoulder contact. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 49=MAX only. Mascot holder selector 38=Alia. Only rolled mascots appear on a padded dry overlook far from harbor edges, water, boats, props and orbital equipment. Odd-prop roll 74 is inactive. Do not add any bizarre secondary prop; stored inactive holder 40=Ellie and family 2=chromatic brass telescope with folding legs remain audit-only. Pole theme is inactive. No pole. Rainbow-only is active across all four structurally distinct outfits while preserving the scene's country-led or theme-led balance. Render crisp blue hour cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "complete",
+      "requested": 4,
+      "fulfilled": 2,
+      "moderationBlocked": 2,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "complete",
+      "attemptedScenes": [
+        1504
+      ],
+      "acceptedScenes": [
+        1504
+      ],
+      "maximumPerBlockedScene": 1,
+      "reason": "The raw Havana render used a one-hand prop grip; one exact two-hand side-profile recovery passed."
+    }
+  },
+  "acceptedAssets": [
+    {
+      "scene": 1504,
+      "file": "1504-cuba-havana-orbital-research-station-recovery.png",
+      "decision": "accepted-recovery",
+      "audit": {
+        "coreCast": "Exactly four clearly adult core women are present; Alia retains the braided anchor.",
+        "anatomy": "No glaring extra whole person or limb is visible; eight owned arms and hands read plausibly.",
+        "missionProp": "ECE alone uses a visible two-hand side-profile grip toward an empty paper target and complete sand backstop, away from every person and the camera.",
+        "romance": "Radiance, Ellie and Alia form a clear linked-hand, waist and shoulder contact triangle fully behind the muzzle corridor.",
+        "themeLocation": "Havana Malecón, lighthouse, storm, cupola, solar truss and orbital garments form one immediate foreground composition.",
+        "deviations": [
+          "The close partner-turn hard beat resolves as a stationary linked embrace.",
+          "Country motifs rely partly on architectural image panels rather than entirely dimensional appliques."
+        ]
+      },
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-63f58010-524e-4fc0-ad41-a48ee59303af.png"
+    },
+    {
+      "scene": 1507,
+      "file": "1507-cuba-santiago-bay-orbital-research-station-fast-pass.png",
+      "decision": "accepted-fast-pass",
+      "audit": {
+        "coreCast": "Exactly four clearly adult core women are present; Alia retains the braided anchor.",
+        "anatomy": "No glaring extra whole person or limb is visible; eight owned arms and hands read plausibly.",
+        "missionProp": "ECE alone uses a two-hand grip toward a visible empty paper target and complete earthen backstop, away from every person and the camera.",
+        "romance": "Radiance and Ellie visibly link forearms while Alia claims ECE's shoulder, creating an interrupted four-way choice.",
+        "themeLocation": "Santiago Bay, mountain-backed city, blue-hour rainbow, orbital modules and distinct research-station couture read together.",
+        "deviations": [
+          "Rolled MAX-only mascot is absent.",
+          "The pulled-away protective hard beat resolves as a standing contact chain."
+        ]
+      },
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-22e6c8ef-cbd3-44ae-a3db-7b441039f323.png"
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1505,
+      "status": "terminal-renderer-output-moderation-block",
+      "requestId": "bfe6fcf7-8b12-4e55-913d-feaf33289362",
+      "reason": "The image service rejected the output before an auditable asset was delivered."
+    },
+    {
+      "scene": 1506,
+      "status": "terminal-renderer-output-moderation-block",
+      "requestId": "ebb7c771-e611-41de-8685-8584e139a0c0",
+      "reason": "The image service rejected the output before an auditable asset was delivered."
+    },
+    {
+      "scene": 1504,
+      "status": "rejected-raw-replaced-by-accepted-recovery",
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-f4670933-75cc-43d4-81a7-e87f75302eca.png",
+      "reason": "The raw render showed ECE holding the mission prop one-handed instead of the required two-hand ownership."
+    }
+  ],
+  "xPost": {
+    "status": "eligible-queued-behind-confirmation-gated-bolivia-composer",
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "acceptedCurrentCountryAssets": 2,
+    "caption": "Cuba red-heart United Arab Emirates #Cuba #WorldXXXSeries",
+    "attachmentPlan": [
+      "1504-cuba-havana-orbital-research-station-recovery.png",
+      "1507-cuba-santiago-bay-orbital-research-station-fast-pass.png",
+      "1500-united-arab-emirates-dubai-polar-airship-fast-pass.png"
+    ],
+    "reason": "An earlier exact Bolivia post remains staged in the signed-in X composer behind a required final-post confirmation. The composer was not overwritten or duplicated."
+  },
+  "completedAt": "2026-08-11T02:15:45.851Z",
+  "throughputMode": {
+    "active": true,
+    "policy": "Fast-pass acceptance preserves structurally safe usable renders while recording minor visual deviations; hard safety, explicit-content, missing-core-character, and glaring extra-person or extra-limb failures remain terminal rejects."
+  },
+  "queueAdvance": {
+    "country": "Czechia",
+    "batch": 372,
+    "scenes": [
+      1508,
+      1509,
+      1510,
+      1511
+    ],
+    "cinematicTheme": "orbital research-station couture",
+    "batchOrdinalWithinTheme": 2
+  }
+}
