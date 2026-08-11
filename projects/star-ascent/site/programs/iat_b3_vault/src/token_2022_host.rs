@@ -2,10 +2,12 @@
 //!
 //! This feature authenticates immutable `AccountInfo` observations against the
 //! Token-2022 v2.1.0 layouts already pinned by the native Daily Law adapter. It
-//! deliberately stops before proof generation or verification, bytecode
-//! attestation, instruction construction, CPI, mutation, or dispatch. In
-//! particular, an executable program account with the expected standard ID is
-//! not proof of the deployed program-data hash or release version.
+//! includes an isolated round-trip check for the exact ZK SDK's public-key and
+//! zero-ciphertext proof primitives, and deliberately stops before proof-
+//! context instruction construction, bytecode attestation, CPI, mutation, or
+//! dispatch. In particular, an executable program account with the expected
+//! standard ID is not proof of the deployed program-data hash or release
+//! version.
 
 use crate::{
     validate_reference_runtime, Key, PrivacyRuntimeFacts, PrivacyVaultError, ReferenceRuntime,
@@ -13,7 +15,12 @@ use crate::{
 use solana_account_info::AccountInfo;
 use solana_pubkey::Pubkey;
 use solana_sdk_ids::zk_elgamal_proof_program;
-use solana_zk_sdk::encryption::elgamal::{ElGamalCiphertext, ElGamalPubkey};
+use solana_zk_sdk::{
+    encryption::elgamal::{ElGamalCiphertext, ElGamalKeypair, ElGamalPubkey},
+    zk_elgamal_proof_program::proof_data::{
+        PubkeyValidityProofData, ZeroCiphertextProofData, ZkProofData,
+    },
+};
 use spl_token_2022_interface::{
     extension::{
         confidential_transfer::{ConfidentialTransferAccount, ConfidentialTransferMint},
@@ -32,8 +39,8 @@ pub const SOLANA_ZK_SDK_LICENSE: &str = "Apache-2.0";
 pub const ZK_ELGAMAL_PUBKEY_LAYOUT_BYTES: usize =
     core::mem::size_of::<solana_zk_sdk::encryption::pod::elgamal::PodElGamalPubkey>();
 pub const TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_STATUS: &str =
-    "EXACT_VERSION_READ_ONLY_HOST_LAYOUTS_VERIFIED_GATE_INCOMPLETE_MAINNET_HOLD";
-pub const TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_COMPLETE: bool = false;
+    "EXACT_VERSION_HOST_LAYOUT_AND_PROOF_PRIMITIVES_VERIFIED_RELEASE_INCOMPLETE_MAINNET_HOLD";
+pub const TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_COMPLETE: bool = true;
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct Token2022HostCompatibilityTruth {
@@ -76,8 +83,8 @@ pub const TOKEN_2022_HOST_COMPATIBILITY_TRUTH: Token2022HostCompatibilityTruth =
         mutable_account_borrows: false,
         account_writes_executed: false,
         token_cpi_executed: false,
-        proof_generation_verified: false,
-        proof_verification_verified: false,
+        proof_generation_verified: true,
+        proof_verification_verified: true,
         elgamal_pubkey_curve_validity_verified: true,
         elgamal_ciphertext_curve_validity_verified: true,
         deployed_program_bytecode_authenticated: false,
@@ -119,8 +126,52 @@ pub enum Token2022HostError {
     ConfidentialAccountNotReady,
     ElGamalPubkeyCurveInvalid,
     ElGamalCiphertextCurveInvalid,
+    ProofGenerationFailed,
+    ProofVerificationFailed,
+    InvalidProofAccepted,
     ConfidentialCounterInvalid,
     TransferInProgress,
+}
+
+/// Exercise the exact SDK proof primitives required to configure a confidential
+/// account and prove an empty confidential balance. The key material is fresh,
+/// ephemeral host-test material and is neither returned nor persisted. This is
+/// a compatibility check only: it builds no proof-context instruction and
+/// authorizes no token operation.
+pub fn verify_confidential_proof_host_compatibility() -> Result<(), Token2022HostError> {
+    let keypair = ElGamalKeypair::new_rand();
+    let pubkey_proof = PubkeyValidityProofData::new(&keypair)
+        .map_err(|_| Token2022HostError::ProofGenerationFailed)?;
+    pubkey_proof
+        .verify_proof()
+        .map_err(|_| Token2022HostError::ProofVerificationFailed)?;
+
+    let second_keypair = ElGamalKeypair::new_rand();
+    let mismatched_pubkey_proof = PubkeyValidityProofData {
+        context: PubkeyValidityProofData::new(&second_keypair)
+            .map_err(|_| Token2022HostError::ProofGenerationFailed)?
+            .context,
+        proof: pubkey_proof.proof,
+    };
+    if mismatched_pubkey_proof.verify_proof().is_ok() {
+        return Err(Token2022HostError::InvalidProofAccepted);
+    }
+
+    let zero_ciphertext = keypair.pubkey().encrypt(0_u64);
+    let zero_proof = ZeroCiphertextProofData::new(&keypair, &zero_ciphertext)
+        .map_err(|_| Token2022HostError::ProofGenerationFailed)?;
+    zero_proof
+        .verify_proof()
+        .map_err(|_| Token2022HostError::ProofVerificationFailed)?;
+
+    let nonzero_ciphertext = keypair.pubkey().encrypt(1_u64);
+    let nonzero_zero_proof = ZeroCiphertextProofData::new(&keypair, &nonzero_ciphertext)
+        .map_err(|_| Token2022HostError::ProofGenerationFailed)?;
+    if nonzero_zero_proof.verify_proof().is_ok() {
+        return Err(Token2022HostError::InvalidProofAccepted);
+    }
+
+    Ok(())
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]

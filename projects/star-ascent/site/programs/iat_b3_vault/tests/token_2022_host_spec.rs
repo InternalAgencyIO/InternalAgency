@@ -305,20 +305,25 @@ fn exact_versions_and_capability_truth_remain_nonactivating() {
     assert_eq!(ZK_ELGAMAL_PUBKEY_LAYOUT_BYTES, 32);
     let complete = std::hint::black_box(TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_COMPLETE);
     let truth = std::hint::black_box(TOKEN_2022_HOST_COMPATIBILITY_TRUTH);
-    assert!(!complete);
+    assert!(complete);
     assert!(truth.feature_gated);
     assert!(truth.account_info_reads);
     assert!(!truth.mutable_account_borrows);
     assert!(!truth.account_writes_executed);
     assert!(!truth.token_cpi_executed);
-    assert!(!truth.proof_generation_verified);
-    assert!(!truth.proof_verification_verified);
+    assert!(truth.proof_generation_verified);
+    assert!(truth.proof_verification_verified);
     assert!(truth.elgamal_pubkey_curve_validity_verified);
     assert!(truth.elgamal_ciphertext_curve_validity_verified);
     assert!(!truth.deployed_program_bytecode_authenticated);
     assert!(!truth.devnet_verified);
     assert!(!truth.release_gate_complete);
     assert!(truth.mainnet_hold);
+}
+
+#[test]
+fn exact_sdk_proof_primitives_round_trip_and_reject_mismatched_statements() {
+    verify_confidential_proof_host_compatibility().unwrap();
 }
 
 #[test]

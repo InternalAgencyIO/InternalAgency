@@ -3,11 +3,13 @@
 
 //! Host-only lifecycle planner for the optional IAT B3 Privacy Vault client.
 //!
-//! This crate performs no RPC, proof generation, key storage, signing, account
-//! mutation, or token instruction encoding. It cannot authorize Devnet or
-//! Mainnet. Its purpose is to make the documented lifecycle shape and its
-//! fail-closed boundaries deterministic before an exact-version native client
-//! adapter is implemented and independently reviewed.
+//! This crate performs no RPC, persistent key storage, signing, account
+//! mutation, or token instruction encoding. The optional host-compatibility
+//! feature generates only fresh ephemeral proof test vectors and returns no key
+//! material. It cannot authorize Devnet or Mainnet. Its purpose is to make the
+//! documented lifecycle shape and its fail-closed boundaries deterministic
+//! before an exact-version native client adapter is implemented and
+//! independently reviewed.
 
 #[cfg(feature = "token-2022-host-compatibility")]
 pub mod token_2022_host;
