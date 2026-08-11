@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-clean-fresh-round-21-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-clean-fresh-round-21",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -3608,7 +3608,27 @@
           "accepted": false
         },
         "recoveryPrompt": "Use case: precise-object-edit.\nInput: the supplied Georgia Batch 382 scene 1551 clean fresh round 21 raw.\n\nONE RECOVERY ONLY\nThis is the single allowed recovery for clean round 21. Make only the two bounded corrections below. Preserve the clean natural photographic surface. Do not redraw, reinterpret, restyle, or globally process the image.\n\nCORRECTION 1: TRACEABLE ELLIE SUPPORT ARM\nAt the far left, keep Ellie's right hand and Radiance's left hand in their existing reciprocal clasp. Repair only Ellie's other support arm: show one continuous white-sleeved left arm leaving Ellie's left shoulder, passing in clean open air behind Radiance, and ending in Ellie's one open left palm high on Radiance's upper back. The shoulder, sleeve, elbow, forearm, wrist, and palm must be continuously traceable to Ellie. Remove the ambiguous isolated hand currently emerging at Radiance's waist. Do not add a hand. Preserve Radiance's existing right palm on ECE's high shoulder and the stable shallow dip.\n\nCORRECTION 2: SAFE ALIA MISSION LANE\nAt the far right, preserve Alia's face, braided ponytail, two arms, two hands, strapless open-back copper bodice, midriff band, skort, legs, and footwear. Keep exactly one short-barrel rainbow-gradient orange-plugged inert cinema-training pistol replica. Bend Alia's elbows modestly so the compact replica sits closer to her torso and leaves broad, obvious empty air between the orange muzzle and the white target paper. Keep the paper and complete sand backstop at the far-right edge.\nMake the grip and black trigger guard large and crisp. Alia's primary right hand wraps the grip. Her right trigger index must be fully extended, perfectly straight, and visibly flat along the colored frame above and outside the guard. The black trigger guard below it must be completely empty. Her support left palm and fingers remain a separate readable cluster below and forward of the primary hand at the grip base. Show two distinct wrists, two distinct palms, and two distinct finger clusters with clean air around the guard. Keep Alia's dominant eye, sights, horizontal barrel center, orange muzzle center, and black diamond center in one exact horizontal row. Nobody and no mascot may enter the muzzle plane.\n\nPRESERVE EVERY OTHER ELEMENT\nPreserve all four clearly adult fictional identities and all existing wardrobe rolls. Preserve Radiance's rainbow hosiery, explicit affirmative reciprocal clasp, voluntary turn and sustained affectionate eye line toward ECE, and the restrained fully clothed InternalAgency victory-dance party beat. Preserve ECE's exactly two hands on the two separate compass handles and the hands-free holographic map. Preserve Alia's confident affirmative response while both mission hands remain occupied.\nFinal anatomy must be exactly eight human arms and exactly eight human hands: Ellie two, Radiance two, ECE two, Alia two. No extra, missing, fused, floating, borrowed, emerging, or ambiguous limb or finger cluster.\nPreserve the heavy straight rain, Batumi skyline, Alphabet Tower, Ferris wheel, Black Sea, palms, wet flat tiles, transparent safety panel, complete backstop, one white paper, one black route diamond, and exactly one tiny collarless golden kitten PAWS plus one distinct small young golden retriever puppy MAX on the dry lounge.\n\nSURFACE AND SCOPE GATE\nThe only visible changes are Ellie's support-arm traceability and Alia's safe mission-lane geometry, trigger index, and hand separation. Add no person, limb, hand, animal, prop, decoration, crowd, drink, confetti, text, logo, or target. Add no wavy processing, liquify distortion, marbling, rippled skin, rippled fabric, melted edge, embossed contour, halo, excessive sharpening, bent architecture, or painterly texture. Keep one clean coherent photographic exposure.",
-        "recoveryPromptSha256": "54C0ADAF4C88FE542DE4D86781A98900FB51A7CC20CDD237D1A004168A45235E"
+        "recoveryPromptSha256": "54C0ADAF4C88FE542DE4D86781A98900FB51A7CC20CDD237D1A004168A45235E",
+        "visualAudit": {
+          "renderSurfaceQuality": "pass-clean-natural-photographic-texture-without-wavy-artifacts-after-one-recovery",
+          "identity": "pass-four-adult-identities-with-Alia-braids",
+          "anatomy": "reject-extra-or-ambiguous-center-hand-path-after-support-arm-recovery",
+          "handOwnership": "reject-white-sleeved-hand-reaches-ECE-while-another-hand-still-emerges-at-Radiance-waist",
+          "weather": "pass-heavy-straight-rain",
+          "locationThemeFusion": "pass-recognizable-Batumi-with-distinct-Mars-expedition-couture",
+          "outfitOriginality": "pass-four-distinct-silhouettes-constructions-and-footwear",
+          "rolledWardrobe": "pass-Radiance-open-back-Ellie-midriff-Alia-midriff-strapless-open-back-ECE-covered",
+          "romance": "reject-Radiance-to-ECE-shoulder-contact-is-replaced-by-an-ambiguous-white-sleeved-arm",
+          "radianceAgreement": "pass-reciprocal-Ellie-clasp-voluntary-turn-and-sustained-ECE-eye-line",
+          "partyActivation": "pass-restrained-four-adult-victory-dance-party-beat",
+          "mascots": "pass-one-PAWS-and-one-MAX-safe-play",
+          "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+          "routeMap": "pass-separate-hands-free-holographic-map",
+          "missionHandling": "reject-empty-trigger-guard-and-straight-outside-index-remain-unreadable",
+          "missionTargetAxis": "reject-rainbow-replica-remains-nearly-touching-or-overlapping-the-paper-without-broad-empty-air",
+          "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+          "accepted": false
+        }
       }
     }
   },
@@ -7645,7 +7665,7 @@
       }
     },
     "freshRound21": {
-      "status": "fresh-completed-rejected-recovery-materialized",
+      "status": "completed-rejected-after-single-recovery",
       "preparedAt": "2026-08-11T19:23:40.136Z",
       "sceneNumbers": [
         1551
@@ -7790,9 +7810,16 @@
       "freshCompletedAt": "2026-08-11T19:29:25.745Z",
       "rawOutputs": {
         "1551": {
-          "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-21/scene-1551.png",
-          "sha256": "FA4D89B194D9FBC52A743A325BFE4F55243F626B78610510C451629B4ECB75FF",
-          "preserved": true
+          "fresh": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-21/scene-1551.png",
+            "sha256": "FA4D89B194D9FBC52A743A325BFE4F55243F626B78610510C451629B4ECB75FF",
+            "preserved": true
+          },
+          "recovery": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-21-recovery/scene-1551.png",
+            "sha256": "6C0E54BEA44E261C7B55F19B10E9A6239C6708E0F93BF664144FDC5AD2CC5921",
+            "preserved": true
+          }
         }
       },
       "freshStrictAudit": {
@@ -7845,6 +7872,40 @@
           "ECE two-hand compass ownership and hands-free route map",
           "Batumi landmarks, mascots, and clean natural photographic surface"
         ]
+      },
+      "completedAt": "2026-08-11T19:33:46.551Z",
+      "recoveryCompletedAt": "2026-08-11T19:33:46.551Z",
+      "acceptedSceneNumbers": [],
+      "rejectedSceneNumbers": [
+        1551
+      ],
+      "rejectionReasons": {
+        "1551": [
+          "The recovered center contact graph contains an extra or ambiguous hand path: a white-sleeved hand reaches ECE while another hand still emerges at Radiance's waist",
+          "Radiance's required palm-to-ECE shoulder contact is no longer unambiguously hers",
+          "Alia's trigger guard and straight indexed primary finger remain unreadable",
+          "The inert replica remains nearly touching or overlapping the paper target instead of leaving broad empty air"
+        ]
+      },
+      "strictAudit": {
+        "renderSurfaceQuality": "pass-clean-natural-photographic-texture-without-wavy-artifacts-after-one-recovery",
+        "identity": "pass-four-adult-identities-with-Alia-braids",
+        "anatomy": "reject-extra-or-ambiguous-center-hand-path-after-support-arm-recovery",
+        "handOwnership": "reject-white-sleeved-hand-reaches-ECE-while-another-hand-still-emerges-at-Radiance-waist",
+        "weather": "pass-heavy-straight-rain",
+        "locationThemeFusion": "pass-recognizable-Batumi-with-distinct-Mars-expedition-couture",
+        "outfitOriginality": "pass-four-distinct-silhouettes-constructions-and-footwear",
+        "rolledWardrobe": "pass-Radiance-open-back-Ellie-midriff-Alia-midriff-strapless-open-back-ECE-covered",
+        "romance": "reject-Radiance-to-ECE-shoulder-contact-is-replaced-by-an-ambiguous-white-sleeved-arm",
+        "radianceAgreement": "pass-reciprocal-Ellie-clasp-voluntary-turn-and-sustained-ECE-eye-line",
+        "partyActivation": "pass-restrained-four-adult-victory-dance-party-beat",
+        "mascots": "pass-one-PAWS-and-one-MAX-safe-play",
+        "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+        "routeMap": "pass-separate-hands-free-holographic-map",
+        "missionHandling": "reject-empty-trigger-guard-and-straight-outside-index-remain-unreadable",
+        "missionTargetAxis": "reject-rainbow-replica-remains-nearly-touching-or-overlapping-the-paper-without-broad-empty-air",
+        "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+        "accepted": false
       }
     }
   },
@@ -8918,6 +8979,26 @@
         "Alia's primary trigger index remains visibly curled inside the trigger guard instead of lying straight along the frame outside it"
       ],
       "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "round": 21,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/clean-fresh-round-21-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-3b8cc837-ffd9-41f2-8a34-a57ec9ce9e87.png",
+      "sha256": "6C0E54BEA44E261C7B55F19B10E9A6239C6708E0F93BF664144FDC5AD2CC5921",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovered center contact graph contains an extra or ambiguous hand path: a white-sleeved hand reaches ECE while another hand still emerges at Radiance's waist",
+        "Radiance's required palm-to-ECE shoulder contact is no longer unambiguously hers",
+        "Alia's trigger guard and straight indexed primary finger remain unreadable",
+        "The inert replica remains nearly touching or overlapping the paper target instead of leaving broad empty air"
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -8929,7 +9010,7 @@
     "requiredCurrentCountryAssets": 4,
     "note": "Georgia has accepted scenes 1548, 1549, and 1550. Historical X backlog is empty. Publication remains mandatory immediately after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T19:29:25.745Z",
+  "checkpointedAt": "2026-08-11T19:33:46.551Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -9654,13 +9735,25 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1551,
+      "round": 21,
+      "kind": "clean-fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-21-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-3b8cc837-ffd9-41f2-8a34-a57ec9ce9e87.png",
+      "sha256": "6C0E54BEA44E261C7B55F19B10E9A6239C6708E0F93BF664144FDC5AD2CC5921",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-single-clean-fresh-round-21-recovery-scene-1551-only",
+    "action": "clean-fresh-round-22-from-original-identity-anchors-scene-1551-only",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -9672,7 +9765,7 @@
     "laterCountryStartAllowed": false
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-11T19:23:40.136Z",
+    "checkedAt": "2026-08-11T19:33:46.551Z",
     "account": "@dogramaci",
     "signedIn": true,
     "eligibleBacklogRemaining": 0,
@@ -9726,7 +9819,7 @@
       "liveVerified": true,
       "viewsAtAudit": 42
     },
-    "reconciliationDecision": "Signed-in profile checked. No eligible unposted World Series country pair. Georgia remains X-blocked until scene 1551 is accepted.",
+    "reconciliationDecision": "Signed-in profile checked and no eligible unposted World Series country pair remains. Georgia still has three accepted scenes, so no X upload or country advance is permitted.",
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
@@ -9764,12 +9857,12 @@
       "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
       "assets/lore/starlight-era/ece-canonical-identity-v1.png"
     ],
-    "lastCompletedCleanRound": 20,
-    "lastCleanRoundResult": "clean-surface-recovery-wardrobe-pass-mission-hand-safety-reject",
-    "nextCleanRound": 21,
-    "nextSourcePolicy": "original identity anchors only; no round 20 image input",
-    "activeCleanRound": 21,
-    "activeSourcePolicy": "single targeted recovery from clean round 21 raw only",
-    "priorBatumiRenderInputCount": 1
+    "lastCompletedCleanRound": 21,
+    "lastCleanRoundResult": "clean-surface-recovery-anatomy-contact-and-mission-safety-reject",
+    "nextCleanRound": 22,
+    "nextSourcePolicy": "original identity anchors only; no round 21 image input",
+    "activeCleanRound": null,
+    "activeSourcePolicy": "four original identity anchors only",
+    "priorBatumiRenderInputCount": 0
   }
 }
